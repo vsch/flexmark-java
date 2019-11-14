@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +14,7 @@ public class PositionListTest {
     @Test
     public void getList() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         assertSame(list, positions.getList());
     }
 
@@ -23,7 +22,7 @@ public class PositionListTest {
     public void iterator() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         Iterator<Position<Integer>> iterator = positions.iterator();
@@ -38,7 +37,7 @@ public class PositionListTest {
     public void iterator2() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         for (Position<Integer> position : positions) {
@@ -51,7 +50,7 @@ public class PositionListTest {
     public void iterator_AddBefore() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         int i = 1;
@@ -68,7 +67,7 @@ public class PositionListTest {
     public void iterator_AddAfter() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         int i = 1;
@@ -86,7 +85,7 @@ public class PositionListTest {
     public void iterator_Remove() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         int i = 1;
@@ -106,7 +105,7 @@ public class PositionListTest {
     public void iterator_RemoveBeforeNext() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         thrown.expect(IllegalStateException.class);
@@ -130,7 +129,7 @@ public class PositionListTest {
     public void iterator_UseThenRemove() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         int i = 1;
@@ -148,7 +147,7 @@ public class PositionListTest {
     public void iterator_UseThenRemove2() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         int i = 1;
@@ -166,7 +165,7 @@ public class PositionListTest {
     public void iterator_RemoveThenUse() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         thrown.expect(IllegalStateException.class);
@@ -185,7 +184,7 @@ public class PositionListTest {
     @Test
     public void get_outOfRange1() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IndexOutOfBoundsException.class);
 
@@ -195,7 +194,7 @@ public class PositionListTest {
     @Test
     public void get_outOfRange2() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IndexOutOfBoundsException.class);
 
@@ -205,7 +204,7 @@ public class PositionListTest {
     @Test
     public void get_valid() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         int iMax = list.size();
         for (int i = 0; i <= iMax; i++) {
             Position<Integer> position = positions.get(i);
@@ -223,7 +222,7 @@ public class PositionListTest {
     @Test
     public void get_invalid() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         int iMax = list.size();
         for (int i = 0; i <= iMax; i++) {
             Position<Integer> position = positions.getPosition(i, false);
@@ -243,7 +242,7 @@ public class PositionListTest {
     @Test
     public void clear() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
         int iMax = list.size();
@@ -265,7 +264,7 @@ public class PositionListTest {
     @Test
     public void posClear() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
         int iMax = list.size();
@@ -292,7 +291,7 @@ public class PositionListTest {
 
         for (int j = 0; j < jMax; j++) {
             ArrayList<Integer> list = new ArrayList<>(input);
-            PositionList<Integer> positions = new PositionList<>(list);
+            PositionListBase<Integer> positions = new PositionListBase<>(list);
             ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
             int iMax = list.size();
@@ -330,7 +329,7 @@ public class PositionListTest {
 
         for (int j = 0; j < jMax; j++) {
             ArrayList<Integer> list = new ArrayList<>(input);
-            PositionList<Integer> positions = new PositionList<>(list);
+            PositionListBase<Integer> positions = new PositionListBase<>(list);
             ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
             int iMax = list.size();
@@ -368,7 +367,7 @@ public class PositionListTest {
 
         for (int j = 0; j <= jMax; j++) {
             ArrayList<Integer> list = new ArrayList<>(input);
-            PositionList<Integer> positions = new PositionList<>(list);
+            PositionListBase<Integer> positions = new PositionListBase<>(list);
             ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
             int iMax = list.size();
@@ -404,7 +403,7 @@ public class PositionListTest {
         int j = jMax;
 
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
         int iMax = list.size();
@@ -440,7 +439,7 @@ public class PositionListTest {
 
         for (int j = 0; j <= jMax; j++) {
             ArrayList<Integer> list = new ArrayList<>(input);
-            PositionList<Integer> positions = new PositionList<>(list);
+            PositionListBase<Integer> positions = new PositionListBase<>(list);
             ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
             int iMax = list.size();
@@ -476,7 +475,7 @@ public class PositionListTest {
 
         for (int j = 0; j < jMax; j++) {
             ArrayList<Integer> list = new ArrayList<>(input);
-            PositionList<Integer> positions = new PositionList<>(list);
+            PositionListBase<Integer> positions = new PositionListBase<>(list);
             ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
             int iMax = list.size();
@@ -513,7 +512,7 @@ public class PositionListTest {
 
         for (int j = 0; j < jMax; j++) {
             ArrayList<Integer> list = new ArrayList<>(input);
-            PositionList<Integer> positions = new PositionList<>(list);
+            PositionListBase<Integer> positions = new PositionListBase<>(list);
             ArrayList<Position<Integer>> listPositions = new ArrayList<>();
 
             int iMax = list.size();
@@ -545,7 +544,7 @@ public class PositionListTest {
     @Test
     public void test_posValidation1() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IndexOutOfBoundsException.class);
         Position<Integer> position = positions.get(-1);
@@ -554,7 +553,7 @@ public class PositionListTest {
     @Test
     public void test_posValidation2() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IndexOutOfBoundsException.class);
         Position<Integer> position = positions.get(11);
@@ -563,7 +562,7 @@ public class PositionListTest {
     @Test
     public void test_posValidation3() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IndexOutOfBoundsException.class);
         Position<Integer> position = positions.get(0);
@@ -573,7 +572,7 @@ public class PositionListTest {
     @Test
     public void test_posValidation4() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IndexOutOfBoundsException.class);
         Position<Integer> position = positions.get(0);
@@ -583,7 +582,7 @@ public class PositionListTest {
     @Test
     public void test_posValidation5() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IndexOutOfBoundsException.class);
         Position<Integer> position = positions.get(0);
@@ -593,7 +592,7 @@ public class PositionListTest {
     @Test
     public void test_posValidation6() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IllegalStateException.class);
         Position<Integer> position0 = positions.get(0);
@@ -605,7 +604,7 @@ public class PositionListTest {
     @Test
     public void test_posValidation7() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IndexOutOfBoundsException.class);
         Position<Integer> position = positions.get(0);
@@ -615,7 +614,7 @@ public class PositionListTest {
     @Test
     public void test_posValidation8() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         thrown.expect(IllegalArgumentException.class);
         Position<Integer> position = positions.get(0);
@@ -625,7 +624,7 @@ public class PositionListTest {
     @Test
     public void posGetPosition() {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         Position<Integer> position0 = positions.get(1);
         assertTrue(position0.isPreviousValid());
@@ -638,7 +637,7 @@ public class PositionListTest {
     public void posSet() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         int i = -1;
@@ -656,7 +655,7 @@ public class PositionListTest {
     public void posSet1() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
         int i = -1;
@@ -675,7 +674,7 @@ public class PositionListTest {
     public void test_getFirst() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         Position<Integer> position = positions.getFirst();
 
         assertEquals(0, position.getIndex());
@@ -686,7 +685,7 @@ public class PositionListTest {
     public void test_getFirstEmpty() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(Collections.emptyList());
+        PositionListBase<Integer> positions = new PositionListBase<>(Collections.emptyList());
         Position<Integer> position = positions.getFirst();
 
         assertEquals(0, position.getIndex());
@@ -697,7 +696,7 @@ public class PositionListTest {
     public void test_getLast() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         Position<Integer> position = positions.getLast();
 
         assertEquals(list.size() - 1, position.getIndex());
@@ -708,7 +707,7 @@ public class PositionListTest {
     public void test_getLastEmpty() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(Collections.emptyList());
+        PositionListBase<Integer> positions = new PositionListBase<>(Collections.emptyList());
         Position<Integer> position = positions.getLast();
 
         assertEquals(0, position.getIndex());
@@ -719,7 +718,7 @@ public class PositionListTest {
     public void test_getEnd() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
         Position<Integer> position = positions.getEnd();
 
         assertEquals(list.size(), position.getIndex());
@@ -731,7 +730,7 @@ public class PositionListTest {
     public void test_getEndEmpty() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(Collections.emptyList());
+        PositionListBase<Integer> positions = new PositionListBase<>(Collections.emptyList());
         Position<Integer> position = positions.getEnd();
 
         assertEquals(0, position.getIndex());
@@ -742,7 +741,7 @@ public class PositionListTest {
     public void posSetEnd() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         Position<Integer> position = positions.getLast().getNext();
         assertEquals(list.size(), position.getIndex());
@@ -757,7 +756,7 @@ public class PositionListTest {
     public void posGetOrNull() {
         List<Object> input = Arrays.asList(9, "8", 7, "6", 5, "4", 3, "2", 1, "0");
         ArrayList<Object> list = new ArrayList<>(input);
-        PositionList<Object> positions = new PositionList<>(list);
+        PositionListBase<Object> positions = new PositionListBase<>(list);
 
         Position<Object> position = positions.get(0);
         Integer i = position.getOrNull(Integer.class);
@@ -777,7 +776,7 @@ public class PositionListTest {
     public void posAddAll() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         Position<Integer> position = positions.get(5);
         Position<Integer> position1 = position.getPosition(3);
@@ -800,7 +799,7 @@ public class PositionListTest {
     public void posAppend() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         Position<Integer> position = positions.get(5);
         Position<Integer> position1 = positions.getEnd();
@@ -820,7 +819,7 @@ public class PositionListTest {
     public void posSize() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         Position<Integer> position = positions.get(5);
         Position<Integer> position1 = position.getPosition(3);
@@ -834,7 +833,7 @@ public class PositionListTest {
     public void posIsEmpty() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(list);
+        PositionListBase<Integer> positions = new PositionListBase<>(list);
 
         Position<Integer> position = positions.get(5);
         Position<Integer> position1 = position.getPosition(3);
@@ -852,7 +851,7 @@ public class PositionListTest {
     public void posIndexOf1() {
         List<Object> input = Arrays.asList(0, "1", 2, "3", 4, "5", 6, "7", 8, "9", 0, "1", 2, "3", 4, "5", 6, "7", 8, "9");
         ArrayList<Object> list = new ArrayList<>(input);
-        PositionList<Object> positions = new PositionList<>(list);
+        PositionListBase<Object> positions = new PositionListBase<>(list);
 
         Position<Object> position = positions.get(0);
         Position<Object> index = position.indexOf("5");
@@ -894,7 +893,7 @@ public class PositionListTest {
     public void posLastIndexOf1() {
         List<Object> input = Arrays.asList(0, "1", 2, "3", 4, "5", 6, "7", 8, "9", 0, "1", 2, "3", 4, "5", 6, "7", 8, "9");
         ArrayList<Object> list = new ArrayList<>(input);
-        PositionList<Object> positions = new PositionList<>(list);
+        PositionListBase<Object> positions = new PositionListBase<>(list);
 
         Position<Object> position = positions.get(20);
         Position<Object> index = position.lastIndexOf(6);

@@ -6,11 +6,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-class PositionIterator<V> implements Iterator<Position<V>> {
-    private @Nullable Position<V> myIndex;
-    private @Nullable Position<V> myNext;
+class PositionIterator<T, P extends Position<T, P>> implements Iterator<P> {
+    private @Nullable P myIndex;
+    private @Nullable P myNext;
 
-    public PositionIterator(@NotNull Position<V> index) {
+    public PositionIterator(@NotNull P index) {
         myIndex = null;
         myNext = index;
     }
@@ -26,7 +26,7 @@ class PositionIterator<V> implements Iterator<Position<V>> {
     }
 
     @Override
-    public Position<V> next() {
+    public P next() {
 //            if (myNext != null && !myNext.isValid() && myNext.isNextValid()) {
 //                // refresh to valid next position
 //                myNext = myNext.getNext();
@@ -45,5 +45,4 @@ class PositionIterator<V> implements Iterator<Position<V>> {
         }
         myIndex.remove();
     }
-
 }

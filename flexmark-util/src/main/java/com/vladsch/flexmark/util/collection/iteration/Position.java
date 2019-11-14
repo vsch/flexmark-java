@@ -19,11 +19,18 @@ import java.util.function.Predicate;
  *
  * @param <T> type of element held in the list
  */
-public interface Position<T> {
+public interface Position<T, P extends Position<T, P>> {
     /**
      * @return absolute index in list, even if this position is not valid, the index will always be [0, size()]
      */
     int getIndex();
+
+    /**
+     * Internal for changing indices and invalidating positions
+     * @param index new index
+     * @param isValid false if should be invalidated, if already invalid should ignore true
+     */
+    void setIndex(int index, boolean isValid);
 
     /**
      * @param index index relative to current position
@@ -31,7 +38,7 @@ public interface Position<T> {
      *         throws {@link IllegalStateException} if current position is not valid
      *         throws {@link IndexOutOfBoundsException} if requested index results in absolute index &lt;0 or &gt;size() of the list
      */
-    Position<T> getPosition(int index);
+    P getPosition(int index);
 
     /**
      * Get previous index position relative to current,
@@ -40,7 +47,7 @@ public interface Position<T> {
      * @return previous valid position relative to this position,
      *         throws {@link IndexOutOfBoundsException} if there is no elements before current position
      */
-    Position<T> getPrevious();
+    P getPrevious();
     /**
      * Get next index position relative to current,
      * returns previous index if it exists even when this position is not valid
@@ -48,7 +55,7 @@ public interface Position<T> {
      * @return previous valid position relative to this position,
      *         throws {@link IndexOutOfBoundsException} if there is no elements before current position
      */
-    Position<T> getNext();
+    P getNext();
 
     /**
      * @return true if this position was not invalidated by deleting the element at index
@@ -81,8 +88,9 @@ public interface Position<T> {
 
     /**
      * Get the requested class or null if element at position cannot be cast to this class
+     *
      * @param elementClass class of element desired
-     * @param <S> type of element
+     * @param <S>          type of element
      * @return element of type or null
      */
     <S extends T> S getOrNull(Class<S> elementClass);
@@ -125,9 +133,10 @@ public interface Position<T> {
 
     /**
      * Get the requested class or null if element at position cannot be cast to this class
-     * @param index relative to this position, absolute index [0, size()], if absolute index == size() then element is added at the end of the list. The latter is also considered an insert at size() index.
+     *
+     * @param index        relative to this position, absolute index [0, size()], if absolute index == size() then element is added at the end of the list. The latter is also considered an insert at size() index.
      * @param elementClass class of element desired
-     * @param <S> type of element
+     * @param <S>          type of element
      * @return element of type or null
      */
     <S extends T> S getOrNull(int index, Class<S> elementClass);
@@ -148,16 +157,16 @@ public interface Position<T> {
     // these return index relative to current index and operate on elements at or after the current index
     // if not found returned position will point to index after the last element. ie. getIndex() == size()
     // test isValidPosition() to see if actual element was found
-    Position<T> indexOf(T o);
-    Position<T> indexOf(int index, T o);
-    Position<T> indexOf(@NotNull Predicate<Position<T>> predicate);
-    Position<T> indexOf(int index, @NotNull Predicate<Position<T>> predicate);
+    P indexOf(T o);
+    P indexOf(int index, T o);
+    P indexOf(@NotNull Predicate<P> predicate);
+    P indexOf(int index, @NotNull Predicate<P> predicate);
 
     // these return position relative to current index and operate on elements before the current index
     // if not found returned position will point to index after the last element. ie. getIndex() == size()
     // test isValidPosition() to see if actual element was found
-    Position<T> lastIndexOf(T o);
-    Position<T> lastIndexOf(@NotNull Predicate<Position<T>> predicate);
-    Position<T> lastIndexOf(int index, T o);
-    Position<T> lastIndexOf(int index, @NotNull Predicate<Position<T>> predicate);
+    P lastIndexOf(T o);
+    P lastIndexOf(@NotNull Predicate<P> predicate);
+    P lastIndexOf(int index, T o);
+    P lastIndexOf(int index, @NotNull Predicate<P> predicate);
 }

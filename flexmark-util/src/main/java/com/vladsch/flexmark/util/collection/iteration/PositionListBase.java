@@ -14,17 +14,26 @@ import java.util.WeakHashMap;
  *
  * @param <T>
  */
-public class PositionList<T> implements Iterable<Position<T>> {
+public abstract class PositionListBase<T, P extends Position<T, P>> implements Iterable<P> {
     final private @NotNull List<T> myList;
-    final private @NotNull WeakHashMap<ListPosition<T>, Boolean> myIndices = new WeakHashMap<>();
+    final private @NotNull WeakHashMap<P, Boolean> myIndices = new WeakHashMap<>();
+    final private @NotNull ListPositionFactory<T, P> myFactory;
 
-    public PositionList(@NotNull List<T> list) {
+    public PositionListBase(@NotNull List<T> list) {
+        this(list, (parent, index, isValid) -> {
+            //noinspection unchecked
+            return (P) new ListPosition<T, P>(parent, index, isValid);
+        });
+    }
+
+    public PositionListBase(@NotNull List<T> list, @NotNull ListPositionFactory<T, P> factory) {
         myList = list;
+        myFactory = factory;
     }
 
     @NotNull
-    public Iterator<Position<T>> iterator() {
-        return new PositionIterator<>(get(0));
+    public Iterator<P> iterator() {
+        return new PositionIterator<T, P>(get(0));
     }
 
     @NotNull
@@ -32,33 +41,33 @@ public class PositionList<T> implements Iterable<Position<T>> {
         return myList;
     }
 
-    public Position<T> get(int index) {
+    public P get(int index) {
         return getPosition(index, true);
     }
 
-    public Position<T> getPosition(int index, boolean isValid) {
+    public P getPosition(int index, boolean isValid) {
         if (index < 0 || index > myList.size())
             throw new IndexOutOfBoundsException("ListPosition.get(" + index + ", " + isValid + "), index out valid range [0, " + myList.size() + "]");
 
-        ListPosition<T> listPosition = new ListPosition<>(this, index, isValid);
+        P listPosition = myFactory.create(this, index, isValid);
         myIndices.put(listPosition, true);
         return listPosition;
     }
 
-    public Position<T> getFirst() {
+    public P getFirst() {
         return get(0);
     }
 
-    public Position<T> getLast() {
+    public P getLast() {
         return myList.isEmpty() ? get(0) : get(myList.size() - 1);
     }
 
-    public Position<T> getEnd() {
+    public P getEnd() {
         return get(myList.size());
     }
 
     public void clear() {
-        for (ListPosition<T> position : myIndices.keySet()) {
+        for (P position : myIndices.keySet()) {
             if (position != null) {
                 position.setIndex(0, false);
             }
@@ -72,7 +81,7 @@ public class PositionList<T> implements Iterable<Position<T>> {
         assert count >= 0;
         assert index >= 0 && index <= myList.size() - count;
 
-        for (ListPosition<T> position : myIndices.keySet()) {
+        for (P position : myIndices.keySet()) {
             if (position != null) {
                 int positionIndex = position.getIndex();
                 if (positionIndex >= index) {
@@ -87,7 +96,7 @@ public class PositionList<T> implements Iterable<Position<T>> {
         assert count >= 0;
         assert index >= 0 && index + count <= myList.size() + count;
 
-        for (ListPosition<T> position : myIndices.keySet()) {
+        for (P position : myIndices.keySet()) {
             if (position != null) {
                 int positionIndex = position.getIndex();
                 if (positionIndex >= index) {
@@ -110,6 +119,7 @@ public class PositionList<T> implements Iterable<Position<T>> {
         return true;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     boolean addItem(int index, T value) {
         assert index >= 0 && index <= myList.size();
         myList.add(index, value);
@@ -287,9 +297,9 @@ public class PositionList<T> implements Iterable<Position<T>> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PositionList)) return false;
+        if (!(o instanceof PositionListBase)) return false;
 
-        PositionList<?> list = (PositionList<?>) o;
+        PositionListBase<?, ?> list = (PositionListBase<?, ?>) o;
 
         return myList.equals(list.myList);
     }

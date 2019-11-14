@@ -6,13 +6,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
-class ListPosition<T> implements Position<T> {
-    final private @NotNull PositionList<T> myParent;
+class ListPosition<T, P extends Position<T, P>> implements Position<T, P> {
+    final private @NotNull PositionListBase<T, P> myParent;
     final private @NotNull List<T> myList;
     private int myIndex;
     private boolean myIsValid;
 
-    public ListPosition(@NotNull PositionList<T> parent, int index, boolean isValid) {
+    public ListPosition(@NotNull PositionListBase<T, P> parent, int index, boolean isValid) {
         myParent = parent;
         myList = parent.getList();
         myIndex = index;
@@ -62,19 +62,19 @@ class ListPosition<T> implements Position<T> {
             throw new IndexOutOfBoundsException("ListIndex at " + myIndex + " index: " + index + " is out of range [-" + myIndex + ", " + (myParent.getList().size() - myIndex) + ")");
     }
 
-    public Position<T> getPosition(int index) {
+    public P getPosition(int index) {
         validateWithIndex(index);
         return myParent.get(myIndex + index);
     }
 
     @Override
-    public Position<T> getPrevious() {
+    public P getPrevious() {
         validateIndex(-1);
         return myParent.get(myIndex - 1);
     }
 
     @Override
-    public Position<T> getNext() {
+    public P getNext() {
         if (myIsValid) {
             validateIndex(1);
             return myParent.get(myIndex + 1);
@@ -213,12 +213,12 @@ class ListPosition<T> implements Position<T> {
     }
 
     @Override
-    public Position<T> indexOf(T o) {
+    public P indexOf(T o) {
         return indexOf(0, o);
     }
 
     @Override
-    public Position<T> indexOf(int index, T o) {
+    public P indexOf(int index, T o) {
         validateWithIndex(index);
         //noinspection SuspiciousMethodCalls
         int itemIndex = myList.subList(myIndex + index, myList.size()).indexOf(o);
@@ -226,16 +226,16 @@ class ListPosition<T> implements Position<T> {
     }
 
     @Override
-    public Position<T> indexOf(@NotNull Predicate<Position<T>> predicate) {
+    public P indexOf(@NotNull Predicate<P> predicate) {
         return indexOf(0, predicate);
     }
 
     @Override
-    public Position<T> indexOf(int index, @NotNull Predicate<Position<T>> predicate) {
+    public P indexOf(int index, @NotNull Predicate<P> predicate) {
         validateWithIndex(index);
         int iMax = myList.size();
         for (int i = myIndex + index; i < iMax; i++) {
-            Position<T> pos = myParent.get(i);
+            P pos = myParent.get(i);
             if (predicate.test(pos)) {
                 return pos;
             }
@@ -244,12 +244,12 @@ class ListPosition<T> implements Position<T> {
     }
 
     @Override
-    public Position<T> lastIndexOf(T o) {
+    public P lastIndexOf(T o) {
         return lastIndexOf(0, o);
     }
 
     @Override
-    public Position<T> lastIndexOf(int index, T o) {
+    public P lastIndexOf(int index, T o) {
         validateWithIndex(index);
         //noinspection SuspiciousMethodCalls
         int itemIndex = myList.subList(0, myIndex + index).lastIndexOf(o);
@@ -257,16 +257,16 @@ class ListPosition<T> implements Position<T> {
     }
 
     @Override
-    public Position<T> lastIndexOf(@NotNull Predicate<Position<T>> predicate) {
+    public P lastIndexOf(@NotNull Predicate<P> predicate) {
         return lastIndexOf(0, predicate);
     }
 
     @Override
-    public Position<T> lastIndexOf(int index, @NotNull Predicate<Position<T>> predicate) {
+    public P lastIndexOf(int index, @NotNull Predicate<P> predicate) {
         validateWithIndex(index);
         int iMax = myIndex + index;
         for (int i = iMax; i-- > 0; ) {
-            Position<T> pos = myParent.get(i);
+            P pos = myParent.get(i);
             if (predicate.test(pos)) {
                 return pos;
             }
