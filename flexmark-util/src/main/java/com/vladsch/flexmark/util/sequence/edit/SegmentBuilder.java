@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.collection.iteration.PositionList;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +40,7 @@ public class SegmentBuilder {
         return new SegmentBuilder(other);
     }
 
-    private ArrayList<Object> myParts = new ArrayList<>();      // contains either Range of original sequence kept, or String inserted at position after the last Range
+    private SegmentList myParts = new SegmentList();      // contains either Range of original sequence kept, or String inserted at position after the last Range
     private int myEndOffset;
 
     private SegmentBuilder(@NotNull Range range) {
@@ -78,7 +79,7 @@ public class SegmentBuilder {
 
         // should not have to look further than last 2 entries to find a range
         for (int i = iMax; i-- > iLast; ) {
-            Object part = myParts.get(i);
+            Object part = myParts.get(i).getOrNull();
             if (part instanceof Range) return i;
         }
         return -1;
@@ -86,13 +87,13 @@ public class SegmentBuilder {
 
     @Nullable
     public Range getLastPartIfRange() {
-        Object part = myParts.size() > 0 ? myParts.get(myParts.size() - 1) : null;
+        Object part = myParts.getLast().getOrNull();
         return part instanceof Range ? (Range) part : null;
     }
 
     @Nullable
     public String getLastPartIfString() {
-        Object part = myParts.size() > 0 ? myParts.get(myParts.size() - 1) : null;
+        Object part = myParts.getLast().getOrNull();
         return part instanceof String ? (String) part : null;
     }
 
@@ -114,9 +115,9 @@ public class SegmentBuilder {
             // have overlap, remove overlap from range and add
             int lastRangeIndex = getLastRangeIndex();
             if (lastRangeIndex != -1) {
-                Range lastRange = (Range) myParts.get(lastRangeIndex);
+                Range lastRange = myParts.get(lastRangeIndex).getOrNull(Range.class);
                 // NOTE: one after the last range should be String or nothing, if it was a Range then it would be the last one
-                String text = lastRangeIndex + 1 < myParts.size() ? (String) myParts.get(lastRangeIndex + 1) : null;
+                String text = lastRangeIndex + 1 < myParts.size() ? myParts.get(lastRangeIndex + 1).getOrNull(String.class) : null;
 
                 // can handle this
                 SegmentParams params = SegmentParams.of(lastRange, text == null ? "" : text, range);
@@ -239,7 +240,7 @@ public class SegmentBuilder {
         int iMax = myParts.size();
 
         while (i < iMax) {
-            Object part = myParts.get(i);
+            Object part = myParts.get(i).get();
 
             Range asRange = part instanceof Range ? (Range) part : null;
             String asString = part instanceof String ? (String) part : null;
@@ -317,7 +318,7 @@ public class SegmentBuilder {
 
     private void updateEndOffset() {
         int lastRangeIndex = getLastRangeIndex();
-        myEndOffset = lastRangeIndex == -1 ? 0 : ((Range) myParts.get(lastRangeIndex)).getEnd();
+        myEndOffset = lastRangeIndex == -1 ? 0 : myParts.get(lastRangeIndex).getRange().getEnd();
     }
 
     private void addPart(int index, Object part) {
@@ -332,8 +333,8 @@ public class SegmentBuilder {
         if (startIndex < endIndex) {
             if (startIndex > 0 && endIndex < myParts.size()) {
                 // check if there is overlap in spliced region
-                Object part1 = myParts.get(startIndex - 1);
-                Object part2 = myParts.get(endIndex);
+                Object part1 = myParts.get(startIndex - 1).get();
+                Object part2 = myParts.get(endIndex).get();
                 if (part1 instanceof Range && part2 instanceof Range) {
                     if (((Range) part1).getEnd() == ((Range) part2).getStart()) {
                         endIndex++;
@@ -346,7 +347,7 @@ public class SegmentBuilder {
             }
 
             if (startIndex < endIndex) {
-                myParts.subList(startIndex, endIndex).clear();
+                myParts.remove(startIndex, endIndex);
                 return endIndex - startIndex;
             }
         }
@@ -365,7 +366,7 @@ public class SegmentBuilder {
 
         int iMax = myParts.size();
         for (int i = 0; i < iMax; i++) {
-            Object part = myParts.get(i);
+            Object part = myParts.get(i).get();
             Range partRange = part instanceof Range ? Range.of(startOffset, startOffset + ((Range) part).length()) : Range.of(startOffset, startOffset + ((String) part).length());
 
             if (partRange.isValidIndex(atIndex)) {
@@ -421,7 +422,7 @@ public class SegmentBuilder {
 
     @NotNull
     public List<Object> getParts() {
-        return myParts;
+        return myParts.getList();
     }
 
     public <T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> void buildSequence(@NotNull S baseSequence, @NotNull T builder) {
@@ -429,7 +430,7 @@ public class SegmentBuilder {
             throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + baseSequence.length());
         }
 
-        for (Object part : myParts) {
+        for (Object part : myParts.getList()) {
             if (part instanceof String) {
                 builder.add((String) part);
             } else {
@@ -455,12 +456,12 @@ public class SegmentBuilder {
         int iMax = myParts.size();
         int i = 0;
         while (i < iMax) {
-            Object part = myParts.get(i);
+            Object part = myParts.get(i).get();
 
             if (part instanceof String) {
                 String asString = (String) part;
-                Range asPrev = i > 0 ? (Range) myParts.get(i - 1) : null;
-                Range asNext = i + 1 < iMax ? (Range) myParts.get(i + 1) : null;
+                Range asPrev = i > 0 ? myParts.get(i - 1).getRange() : null;
+                Range asNext = i + 1 < iMax ? myParts.get(i + 1).getRange() : null;
 
                 if (asPrev != null && asNext != null) {
                     Range newPrevRange = null;
@@ -486,7 +487,7 @@ public class SegmentBuilder {
                             if (newPrevRange.isAdjacentBefore(newNextRange)) {
                                 // this one is not possible, if they are adjacent after remainder matched then the full string would extend the previous range
                                 myParts.set(i - 1, newPrevRange.expandToInclude(newNextRange));
-                                myParts.subList(i, i + 2).clear();
+                                myParts.remove(i, i + 2);
                                 iMax -= 2;
                                 continue;
                             }
@@ -501,7 +502,7 @@ public class SegmentBuilder {
                             // remove the string and next range
                             if (newPrevRange.isAdjacentBefore(asNext)) {
                                 myParts.set(i - 1, newPrevRange.expandToInclude(asNext));
-                                myParts.subList(i, i + 2).clear();
+                                myParts.remove(i, i + 2);
                                 iMax -= 2;
                                 continue;
                             }
@@ -515,7 +516,7 @@ public class SegmentBuilder {
                             // remove the string and next range
                             if (newNextRange.isAdjacentBefore(asPrev)) {
                                 myParts.set(i + 1, newNextRange.expandToInclude(asPrev));
-                                myParts.subList(i - 1, i + 1).clear();
+                                myParts.remove(i - 1, i + 1);
                                 iMax -= 2;
                                 continue;
                             }
@@ -569,12 +570,12 @@ public class SegmentBuilder {
         int iMax = myParts.size();
         int i = 0;
         while (i < iMax) {
-            Object part = myParts.get(i);
+            Object part = myParts.get(i).get();
 
             if (part instanceof String) {
                 String asString = (String) part;
-                Range asPrev = i > 0 ? (Range) myParts.get(i - 1) : null;
-                Range asNext = i + 1 < iMax ? (Range) myParts.get(i + 1) : null;
+                Range asPrev = i > 0 ? myParts.get(i - 1).getRange() : null;
+                Range asNext = i + 1 < iMax ? myParts.get(i + 1).getRange() : null;
 
                 SegmentParams params = SegmentParams.of(asPrev, asString, asNext);
                 SegmentParams optParams = optimizer.apply(chars, params);
@@ -592,7 +593,7 @@ public class SegmentBuilder {
 
                             // delete string and next range
                             myParts.set(i - 1, newPrevRange);
-                            myParts.subList(i, i + 2).clear();
+                            myParts.remove(i, i + 2);
                             iMax -= 2;
                             continue;
                         } else if (params.prevRange != null && optParams.prevRange == null) {
@@ -600,7 +601,7 @@ public class SegmentBuilder {
 
                             // delete previous and string
                             myParts.set(i + 1, newNextRange);
-                            myParts.subList(i - 1, i + 1).clear();
+                            myParts.remove(i - 1, i + 1);
                             iMax -= 2;
                             continue;
                         }
@@ -609,7 +610,7 @@ public class SegmentBuilder {
                             // delete next range
                             myParts.set(i - 1, newPrevRange);
                             myParts.set(i, newString);
-                            myParts.subList(i + 1, i + 2).clear();
+                            myParts.remove(i + 1, i + 2);
                             iMax -= 1;
                             i++;
                             continue;
@@ -617,7 +618,7 @@ public class SegmentBuilder {
                             // delete previous range
                             myParts.set(i + 1, newNextRange);
                             myParts.set(i, newString);
-                            myParts.subList(i - 1, i).clear();
+                            myParts.remove(i - 1, i);
                             iMax -= 1;
                             i++;
                             continue;
@@ -652,7 +653,7 @@ public class SegmentBuilder {
     public String toString() {
         DelimitedBuilder sb = new DelimitedBuilder(", ");
         sb.append("SegmentBuilder{end=").append(myEndOffset).append(", parts=");
-        for (Object part : myParts) {
+        for (Object part : myParts.getList()) {
             if (part instanceof Range) {
                 sb.append(part).mark();
             } else {

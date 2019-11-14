@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -87,6 +88,11 @@ public interface IPosition<T, P extends IPosition<T, P>> {
     T get();
 
     /**
+     * @return get element at this position or null if no such thing
+     */
+    T getOrNull();
+
+    /**
      * Get the requested class or null if element at position cannot be cast to this class
      *
      * @param elementClass class of element desired
@@ -130,6 +136,15 @@ public interface IPosition<T, P extends IPosition<T, P>> {
      * @return element
      */
     T get(int index);
+
+    /**
+     * Insert element at index
+     *
+     * @param index relative to this position, absolute index [0, size()], if absolute index == size() then element is added at the end of the list. The latter is also considered an insert at size() index.
+     * @return element or null if for some reason the index or position are not valid
+     */
+    @Nullable
+    T getOrNull(int index);
 
     /**
      * Get the requested class or null if element at position cannot be cast to this class

@@ -38,6 +38,10 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
         return getPosition(index, true);
     }
 
+    public void set(int index, T value) {
+        getPosition(index, true).set(value);
+    }
+
     public P getPosition(int index, boolean isValid) {
         if (index < 0 || index > myList.size())
             throw new IndexOutOfBoundsException("ListPosition.get(" + index + ", " + isValid + "), index out valid range [0, " + myList.size() + "]");
@@ -105,7 +109,7 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
         }
     }
 
-    boolean addItem(T value) {
+    public boolean add(T value) {
         int index = myList.size();
         myList.add(value);
         inserted(index, 1);
@@ -113,28 +117,40 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    boolean addItem(int index, T value) {
+    public boolean add(int index, T value) {
         assert index >= 0 && index <= myList.size();
         myList.add(index, value);
         inserted(index, 1);
         return true;
     }
 
-    boolean addAllItems(int index, Collection<? extends T> values) {
+    public boolean addAll(@NotNull PositionListBase<T, P> other) {
+        return addAll(myList.size(), other.myList);
+    }
+
+    public boolean addAll(int index, @NotNull PositionListBase<T, P> other) {
+        return addAll(index, other.myList);
+    }
+
+    public boolean addAll(@NotNull Collection<? extends T> values) {
+        return addAll(myList.size(), values);
+    }
+
+    public boolean addAll(int index, @NotNull Collection<? extends T> values) {
         assert index >= 0 && index <= myList.size();
         myList.addAll(index, values);
         inserted(index, values.size());
         return true;
     }
 
-    T removeItem(int index) {
+    public T remove(int index) {
         assert index >= 0 && index < myList.size();
         T value = myList.remove(index);
         deleted(index, 1);
         return value;
     }
 
-    void removeItems(int startIndex, int endIndex) {
+    public void remove(int startIndex, int endIndex) {
         if (startIndex < endIndex) {
             assert startIndex >= 0 && endIndex <= myList.size();
             myList.subList(startIndex, endIndex).clear();

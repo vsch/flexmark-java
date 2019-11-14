@@ -377,7 +377,7 @@ public class PositionListTest {
                 listPositions.add(position);
             }
 
-            positions.addItem(j, -1);
+            positions.add(j, -1);
             assertEquals(input.size() + 1, list.size());
 
             for (int i = 0; i <= iMax; i++) {
@@ -413,7 +413,7 @@ public class PositionListTest {
             listPositions.add(position);
         }
 
-        positions.addItem(-1);
+        positions.add(-1);
 
         assertEquals(input.size() + 1, list.size());
 
@@ -449,7 +449,7 @@ public class PositionListTest {
                 listPositions.add(position);
             }
 
-            positions.addAllItems(j, Arrays.asList(-2, -1));
+            positions.addAll(j, Arrays.asList(-2, -1));
             assertEquals(input.size() + 2, list.size());
 
             for (int i = 0; i <= iMax; i++) {
@@ -485,7 +485,7 @@ public class PositionListTest {
                 listPositions.add(position);
             }
 
-            positions.removeItem(j);
+            positions.remove(j);
 
             assertEquals(input.size() - 1, list.size());
 
@@ -522,7 +522,7 @@ public class PositionListTest {
                 listPositions.add(position);
             }
 
-            positions.removeItems(j, j + 1);
+            positions.remove(j, j + 1);
 
             assertEquals(input.size() - 1, list.size());
 

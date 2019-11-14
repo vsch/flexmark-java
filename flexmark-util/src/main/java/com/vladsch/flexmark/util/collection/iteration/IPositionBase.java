@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
-class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
+public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
     final private @NotNull PositionListBase<T, P> myParent;
     final private @NotNull List<T> myList;
     private int myIndex;
@@ -116,6 +116,11 @@ class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
     }
 
     @Override
+    public T getOrNull() {
+        return getOrNull(0);
+    }
+
+    @Override
     public <S extends T> S getOrNull(Class<S> elementClass) {
         return getOrNull(0, elementClass);
     }
@@ -143,7 +148,7 @@ class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
     @Override
     public boolean addAll(int index, @NotNull Collection<T> elements) {
         validateWithIndex(index);
-        return myParent.addAllItems(myIndex + index, elements);
+        return myParent.addAll(myIndex + index, elements);
     }
 
     @Override
@@ -158,7 +163,7 @@ class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
 
     @Override
     public boolean append(T element) {
-        return myParent.addItem(element);
+        return myParent.add(element);
     }
 
     @Override
@@ -173,9 +178,14 @@ class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
     }
 
     @Override
+    public T getOrNull(int index) {
+        int i = myIndex + index;
+        return i >= 0 && i < myList.size() ? myList.get(i) : null;
+    }
+
+    @Override
     public <S extends T> S getOrNull(int index, Class<S> elementClass) {
-        validateWithIndex(index);
-        T element = myList.get(myIndex + index);
+        T element = getOrNull(index);
         //noinspection unchecked
         return elementClass.isInstance(element) ? (S) element : null;
     }
@@ -184,7 +194,7 @@ class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
     public T set(int index, T element) {
         validateWithIndex(index);
         if (myIndex + index == myList.size()) {
-            myParent.addItem(element);
+            myParent.add(element);
             return null;
         } else {
             return myList.set(myIndex + index, element);
@@ -194,14 +204,14 @@ class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
     @Override
     public boolean add(int index, T element) {
         validateWithIndex(index);
-        myParent.addItem(myIndex + index, element);
+        myParent.add(myIndex + index, element);
         return true;
     }
 
     @Override
     public T remove(int index) {
         validateWithElementIndex(index);
-        return myParent.removeItem(myIndex + index);
+        return myParent.remove(myIndex + index);
     }
 
     @Override
@@ -210,7 +220,7 @@ class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
         validateWithIndex(endIndex);
         if (startIndex > endIndex)
             throw new IllegalArgumentException("startIndex: " + startIndex + " must be less than endIndex: " + endIndex);
-        myParent.removeItems(myIndex + startIndex, myIndex + endIndex);
+        myParent.remove(myIndex + startIndex, myIndex + endIndex);
     }
 
     @Override
