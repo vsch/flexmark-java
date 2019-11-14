@@ -140,7 +140,7 @@ public class SegmentBuilderTest {
         segments.deleteByIndices(6, 10);
         String expected = input.substring(0, 6);
 
-        assertEquals("SegmentBuilder{endOffset=10, parts=[0, 6) }", segments.toString());
+        assertEquals("SegmentBuilder{endOffset=6, parts=[0, 6) }", segments.toString());
 
         segments.buildSequence(sequence, builder);
         assertEquals(expected, builder.toSequence().toString());
@@ -620,7 +620,7 @@ public class SegmentBuilderTest {
 
         String expected = "";
         segments.deleteByIndices(0, 15);
-        assertEquals("SegmentBuilder{endOffset=10, parts= }", segments.toString());
+        assertEquals("SegmentBuilder{endOffset=0, parts= }", segments.toString());
 
         segments.buildSequence(sequence, builder);
         assertEquals(expected, builder.toSequence().toString());
@@ -641,7 +641,7 @@ public class SegmentBuilderTest {
 
         String expected = "";
         segments.deleteByIndices(0, 15);
-        assertEquals("SegmentBuilder{endOffset=10, parts= }", segments.toString());
+        assertEquals("SegmentBuilder{endOffset=0, parts= }", segments.toString());
 
         segments.buildSequence(sequence, builder);
         assertEquals(expected, builder.toSequence().toString());

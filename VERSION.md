@@ -182,6 +182,8 @@ Next
 Next 0.59.50
 ------------
 
+* [ ] Fix: `SegmentBuilder` change `append...()` to plain `append()`
+  * [ ] Fix: cleanup naming conventions in new classes.
 * [ ] Fix: change `BasedSequenceBuilder` to use `SegmentBuilder` for segment accumulation
       instead of its own implementation.
   * [ ] Add: construction with optional `SegmentOptimizer` list and apply optimizers to segment

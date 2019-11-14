@@ -69,16 +69,37 @@ public class SegmentBuilder {
         return appendRange(Range.of(startOffset, endOffset));
     }
 
+    /**
+     * @return index of last range or -1
+     */
+    private int getLastRangeIndex() {
+        int iMax = myParts.size();
+        int iLast = Math.max(0, iMax - 2);
+
+        // should not have to look further than last 2 entries to find a range
+        for (int i = iMax; i-- > iLast; ) {
+            Object part = myParts.get(i);
+            if (part instanceof Range) return i;
+        }
+        return -1;
+    }
+
     @Nullable
-    public Range getLastRange() {
+    public Range getLastPartIfRange() {
         Object part = myParts.size() > 0 ? myParts.get(myParts.size() - 1) : null;
         return part instanceof Range ? (Range) part : null;
     }
 
     @Nullable
-    public String getLastString() {
+    public String getLastPartIfString() {
         Object part = myParts.size() > 0 ? myParts.get(myParts.size() - 1) : null;
         return part instanceof String ? (String) part : null;
+    }
+
+    @NotNull
+    public SegmentParams handleOverlap(@NotNull SegmentParams overlap) {
+        // default chops off overlapped range
+        return overlap;
     }
 
     /**
@@ -91,24 +112,73 @@ public class SegmentBuilder {
     public SegmentBuilder appendRange(@NotNull Range range) {
         if (myEndOffset >= range.getStart()) {
             // have overlap, remove overlap from range and add
-            Range lastRange = getLastRange();
+            int lastRangeIndex = getLastRangeIndex();
+            if (lastRangeIndex != -1) {
+                Range lastRange = (Range) myParts.get(lastRangeIndex);
+                // NOTE: one after the last range should be String or nothing, if it was a Range then it would be the last one
+                String text = lastRangeIndex + 1 < myParts.size() ? (String) myParts.get(lastRangeIndex + 1) : null;
 
-            if (lastRange != null) {
-                // can combine
-                if (lastRange.getEnd() >= range.getStart()) {
-                    if (lastRange.getEnd() < range.getEnd()) {
-                        myParts.set(myParts.size() - 1, range.withStart(lastRange.getStart()));
-                        myEndOffset = range.getEnd();
+                // can handle this
+                SegmentParams params = SegmentParams.of(lastRange, text == null ? "" : text, range);
+                SegmentParams fixedOverlap = handleOverlap(params);
+
+                Range fixedLastRange = fixedOverlap.prevRange;
+                String fixedText = fixedOverlap.text;
+                Range fixedRange = fixedOverlap.nextRange;
+
+                // if not fixed then we fix it by chopping it off here
+                if (fixedLastRange != null && fixedRange != null) {
+                    //noinspection StatementWithEmptyBody
+                    if (fixedLastRange.overlapsOrAdjacent(fixedRange)) {
+                        //noinspection StatementWithEmptyBody
+                        if (!fixedLastRange.doesContain(fixedRange)) {
+                            // merge if no text in between
+                            if (text == null || text.isEmpty()) {
+                                Range expanded = fixedLastRange.expandToInclude(fixedRange);
+                                myParts.set(lastRangeIndex, expanded);
+                                if (text != null) myParts.remove(lastRangeIndex + 1);
+                                myEndOffset = expanded.getEnd();
+                            } else {
+                                // chop off overlap and append
+                                Range chopped = fixedRange.withStart(fixedLastRange.getEnd());
+                                if (chopped.isNotEmpty()) {
+                                    myParts.add(chopped);
+                                    myEndOffset = chopped.getEnd();
+                                }
+                            }
+                        } else {
+                            // fully contains added range, ignore
+                        }
+                        return this;
+                    } else {
+                        // fixed
                     }
-                    return this;
                 }
-            }
 
-            // chop off overlap and append
-            Range chopped = range.withStart(myEndOffset);
-            if (chopped.isNotEmpty()) {
-                myParts.add(chopped);
-                myEndOffset = chopped.getEnd();
+                // at least one range should remain otherwise handler attempted to change history, not resolve overlap
+                assert fixedLastRange != null || fixedRange != null : "One of the fixed overlap ranges should not be null";
+
+                // NOTE: first set and add, then remove in reverse index order
+                // replace previous range
+                if (fixedLastRange != null) myParts.set(lastRangeIndex, fixedLastRange);
+
+                // insert text if it did not exist and is not empty
+                if (text == null && !fixedText.isEmpty()) myParts.add(fixedText);
+
+                // append fixed range if it is not null
+                if (fixedRange != null) myParts.add(fixedRange);
+
+                // remove text if became empty
+                if (text != null && fixedText.isEmpty()) myParts.remove(lastRangeIndex + 1);
+
+                // remove last range if it became null
+                if (fixedLastRange == null) myParts.remove(lastRangeIndex);
+
+                myEndOffset = fixedRange != null ? fixedRange.getEnd() : fixedLastRange.getEnd();
+            } else {
+                // WTF, if no last range then no overlap but an error in myEndOffset caching
+                myParts.add(range);
+                myEndOffset = range.getEndOffset();
             }
         } else {
             // just append
@@ -121,7 +191,7 @@ public class SegmentBuilder {
     @NotNull
     public SegmentBuilder appendString(@Nullable String text) {
         if (text != null && !text.isEmpty()) {
-            String lastString = getLastString();
+            String lastString = getLastPartIfString();
             if (lastString != null) {
                 myParts.set(myParts.size() - 1, lastString + text);
             } else {
@@ -240,7 +310,14 @@ public class SegmentBuilder {
             if (remaining.getEnd() <= startOffset) break;
         }
 
+        updateEndOffset();
+
         return this;
+    }
+
+    private void updateEndOffset() {
+        int lastRangeIndex = getLastRangeIndex();
+        myEndOffset = lastRangeIndex == -1 ? 0 : ((Range) myParts.get(lastRangeIndex)).getEnd();
     }
 
     private void addPart(int index, Object part) {
@@ -555,9 +632,9 @@ public class SegmentBuilder {
                     if (newNextRange != null) myParts.set(i + 1, newNextRange);
 
                     if (newString.isEmpty()) {
-                       myParts.remove(i);
-                       iMax--;
-                       continue;
+                        myParts.remove(i);
+                        iMax--;
+                        continue;
                     } else {
                         myParts.set(i, newString);
                     }
