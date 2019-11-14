@@ -9,6 +9,9 @@ import com.vladsch.flexmark.util.options.AttributeTest;
 import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.edit.CharMatchingSegmentOptimizer;
+import com.vladsch.flexmark.util.sequence.edit.CharMatchingSegmentOptimizerTest;
+import com.vladsch.flexmark.util.sequence.edit.SegmentBuilderTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -41,6 +44,8 @@ import org.junit.runners.Suite;
         MappedRichSequenceTest.class,
         BaseSequenceEntryTest.class,
         BaseSequenceManagerTest.class,
+        SegmentBuilderTest.class,
+        CharMatchingSegmentOptimizerTest.class,
 })
 public class UtilsTestSuite {
 }

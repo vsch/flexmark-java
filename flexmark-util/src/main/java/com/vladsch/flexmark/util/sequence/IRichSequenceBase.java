@@ -1257,6 +1257,8 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     // @formatter:off
     @Override final public boolean isEmpty() {return length() == 0;}
     @Override final public boolean isBlank() {return isEmpty() || countLeading(WHITESPACE_CHARS, 0, length()) == length();}
+    @Override final public boolean isNotEmpty() {return length() != 0;}
+    @Override final public boolean isNotBlank() {return !isBlank();}
     @Override final public boolean isNull() {return this == nullSequence();}
     @Override final public boolean isNotNull() {return this != nullSequence();}
     @Override final public boolean endsWith(@NotNull CharSequence suffix) {return length() > 0 && matchCharsReversed(suffix, length() - 1, false);}
@@ -1349,27 +1351,46 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return toMapped(SpaceMapper.fromNonBreakSpace);
     }
 
+    // TEST:
     // @formatter:off
+    @Override final public boolean matches(@NotNull CharSequence chars, boolean ignoreCase) {return chars.length() == length() && matchChars(chars, 0, ignoreCase);}
     @Override final public boolean matches(@NotNull CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, false);}
     @Override final public boolean matchesIgnoreCase(@NotNull CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, true);}
-    @Override final public boolean matches(@NotNull CharSequence chars, boolean ignoreCase) {return chars.length() == length() && matchChars(chars, 0, ignoreCase);}
 
+    @Override final public boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase) { return matchedCharCount(chars, startIndex, length(), true, ignoreCase) == chars.length(); }
+    @Override final public boolean matchChars(@NotNull CharSequence chars, int startIndex) {return matchChars(chars, startIndex, false);}
+    @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars, int startIndex) {return matchChars(chars, startIndex, true);}
+
+    @Override final public boolean matchChars(@NotNull CharSequence chars, boolean ignoreCase) {return matchChars(chars, 0, ignoreCase);}
     @Override final public boolean matchChars(@NotNull CharSequence chars) {return matchChars(chars, 0, false);}
     @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars) {return matchChars(chars, 0, true);}
-    @Override final public boolean matchChars(@NotNull CharSequence chars, boolean ignoreCase) {return matchChars(chars, 0, ignoreCase);}
-    @Override final public boolean matchChars(@NotNull CharSequence chars, int startIndex) {return matchChars(chars, startIndex, false);}
-    @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars, int startIndex) {return matchChars(chars, startIndex, false);}
 
+    @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), ignoreCase);}
     @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), false);}
     @Override final public boolean matchCharsReversedIgnoreCase(@NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), true);}
-    @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), ignoreCase);}
+
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex, boolean ignoreCase) { return matchedCharCount(chars, startIndex, length(), false, ignoreCase); }
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, boolean ignoreCase) { return matchedCharCount(chars, startIndex, length(), false, ignoreCase); }
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex) { return matchedCharCount(chars, startIndex, length(), false, false); }
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex) { return matchedCharCount(chars, startIndex, length(), false, false); }
+    @Override final public int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex, int endIndex) { return matchedCharCount(chars, startIndex, length(), false, true); }
+    @Override final public int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex) { return matchedCharCount(chars, startIndex, length(), false, true); }
+
+    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex) { return matchedCharCountReversed(chars, startIndex, fromIndex, false); }
+    @Override final public int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int startIndex, int fromIndex) { return matchedCharCountReversed(chars, startIndex, fromIndex, true); }
+
+    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex, boolean ignoreCase) { return matchedCharCountReversed(chars, 0, fromIndex, ignoreCase); }
+    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex) { return matchedCharCountReversed(chars, 0, fromIndex, false); }
+    @Override final public int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int fromIndex) { return matchedCharCountReversed(chars, 0, fromIndex, true); }
     // @formatter:on
 
-    @Override
     // TEST:
-    final public boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase) {
-        int iMax = chars.length();
-        if (iMax > length() - startIndex) return false;
+    @Override
+    final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex, boolean fullMatchOnly, boolean ignoreCase) {
+        int length = chars.length();
+        endIndex = Math.min(length(), endIndex);
+        int iMax = Math.min(endIndex - startIndex, length);
+        if (fullMatchOnly && iMax < length) return 0;
 
         if (ignoreCase) {
             for (int i = 0; i < iMax; i++) {
@@ -1384,20 +1405,57 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
                     // Unfortunately, conversion to uppercase does not work properly
                     // for the Georgian alphabet, which has strange rules about case
-                    // conversion.  So we need to make one last check before
-                    // exiting.
+                    // conversion. So we need to make one last check before exiting.
                     if (Character.toLowerCase(u1) == Character.toLowerCase(u2)) {
                         continue;
                     }
-                    return false;
+                    return i;
                 }
             }
         } else {
             for (int i = 0; i < iMax; i++) {
-                if (chars.charAt(i) != charAt(i + startIndex)) return false;
+                if (chars.charAt(i) != charAt(i + startIndex)) return i;
             }
         }
-        return true;
+        return iMax;
+    }
+
+    @Override
+    // TEST:
+    final public int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase) {
+        startIndex = Math.max(0, startIndex);
+        fromIndex = Math.max(0, Math.min(length(), fromIndex));
+
+        int length = chars.length();
+        int iMax = Math.min(fromIndex - startIndex, length);
+
+        int offset = fromIndex - iMax;
+        if (ignoreCase) {
+            for (int i = iMax; i-- > 0; ) {
+                char c1 = chars.charAt(i);
+                char c2 = charAt(offset + i);
+                if (c1 != c2) {
+                    char u1 = Character.toUpperCase(c1);
+                    char u2 = Character.toUpperCase(c2);
+                    if (u1 == u2) {
+                        continue;
+                    }
+
+                    // Unfortunately, conversion to uppercase does not work properly
+                    // for the Georgian alphabet, which has strange rules about case
+                    // conversion.  So we need to make one last check before exiting.
+                    if (Character.toLowerCase(u1) == Character.toLowerCase(u2)) {
+                        continue;
+                    }
+                    return iMax - i - 1;
+                }
+            }
+        } else {
+            for (int i = iMax; i-- > 0; ) {
+                if (chars.charAt(i) != charAt(offset + i)) return iMax - i - 1;
+            }
+        }
+        return iMax;
     }
 
     @NotNull

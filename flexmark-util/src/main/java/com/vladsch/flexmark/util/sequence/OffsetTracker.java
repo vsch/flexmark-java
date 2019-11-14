@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.sequence.edit.TrackerDirection;
 import org.jetbrains.annotations.NotNull;
 
 /**

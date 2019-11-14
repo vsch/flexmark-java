@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
@@ -11,30 +12,50 @@ import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilder {
+    @NotNull
     public static SegmentBuilder emptyBuilder() {
-        return new SegmentBuilder(Range.EMPTY);
+        return new SegmentBuilder(Range.NULL);
     }
 
+    @NotNull
     public static SegmentBuilder rangeBuilder(@NotNull Range range) {
         return new SegmentBuilder(range);
     }
 
+    @NotNull
     public static SegmentBuilder rangeBuilder(int startOffset, int endOffset) {
         startOffset = Math.max(0, startOffset);
         endOffset = Math.max(startOffset, endOffset);
         return new SegmentBuilder(Range.of(startOffset, endOffset));
     }
 
-    public static SegmentBuilder fullBuilder(@NotNull CharSequence sequence) {
+    @NotNull
+    public static SegmentBuilder sequenceBuilder(@NotNull CharSequence sequence) {
         return new SegmentBuilder(Range.of(0, sequence.length()));
+    }
+
+    @NotNull
+    public static SegmentBuilder copyBuilder(@NotNull SegmentBuilder other) {
+        return new SegmentBuilder(other);
     }
 
     private ArrayList<Object> myParts = new ArrayList<>();      // contains either Range of original sequence kept, or String inserted at position after the last Range
     private int myEndOffset;
 
     private SegmentBuilder(@NotNull Range range) {
-        myParts.add(range);
-        myEndOffset = range.getEndOffset();
+        if (range.isNotNull()) {
+            myParts.add(range);
+            myEndOffset = range.getEndOffset();
+        }
+    }
+
+    private SegmentBuilder(@NotNull SegmentBuilder other) {
+        myParts.addAll(other.myParts);
+        myEndOffset = other.myEndOffset;
+    }
+
+    public int getEndOffset() {
+        return myEndOffset;
     }
 
     /**
@@ -162,7 +183,8 @@ public class SegmentBuilder {
                 firstRangeStart = asRange.getStart();
             }
 
-            if (remaining.doesOverlap(partRange)) {
+            Range intersect = partRange.intersect(remaining);
+            if (intersect.isNotEmpty()) {
                 if (remaining.doesContain(partRange)) {
                     // fully deleted
                     iMax -= deleteParts(i, i + 1);
@@ -175,13 +197,10 @@ public class SegmentBuilder {
                             myParts.set(i, asRange.withEnd(asRange.getStart() + (partRange.getEnd() - remaining.getEnd())));
                             addPart(i + 1, asRange.withStart(asRange.getEnd() - (partRange.getEnd() - remaining.getEnd())));
                         } else {
-                            myParts.set(i, asString.substring(0, remaining.getStart()));
-                            addPart(i + 1, asString.substring(remaining.getEnd()));
+                            myParts.set(i, asString.substring(0, intersect.getStart() - startOffset) + asString.substring(intersect.getEnd() - startOffset));
                         }
                         break;
                     } else {
-                        Range intersect = partRange.intersect(remaining);
-
                         if (partRange.getStart() == intersect.getStart()) {
                             // head part removed
                             if (asRange != null) {
@@ -201,7 +220,7 @@ public class SegmentBuilder {
                                 myParts.set(i, newRange);
                                 startOffset += newRange.length();
                             } else {
-                                String newString = asString.substring(0, intersect.getStart());
+                                String newString = asString.substring(0, asString.length() - intersect.getSpan());
                                 myParts.set(i, newString);
                                 startOffset += newString.length();
                             }
@@ -221,11 +240,6 @@ public class SegmentBuilder {
             if (remaining.getEnd() <= startOffset) break;
         }
 
-        if (myParts.isEmpty()) {
-            // add empty range of the end offset
-            startOffset = Math.max(0, firstRangeStart);
-            myParts.add(Range.of(startOffset, startOffset));
-        }
         return this;
     }
 
@@ -348,14 +362,213 @@ public class SegmentBuilder {
         }
     }
 
-    public <T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> S toSequence(@NotNull S baseSequence, @NotNull T builder) {
-        buildSequence(baseSequence, builder);
-        return builder.toSequence();
+    /**
+     * Extend ranges to include sequence chars which match adjacent inserted characters, effectively removing redundant inserts
+     *
+     * @param chars sequence for which to optimize the ranges
+     * @param <S>   type of rich sequence
+     * @deprecated do not use, old code only for testing, will be deleted before release 0.60.0
+     */
+    @Deprecated
+    public <S extends IRichSequence<S>> void optimizeFor(@NotNull S chars) {
+        if (myEndOffset > chars.length()) {
+            throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + chars.length());
+        }
+
+        int iMax = myParts.size();
+        int i = 0;
+        while (i < iMax) {
+            Object part = myParts.get(i);
+
+            if (part instanceof String) {
+                String asString = (String) part;
+                Range asPrev = i > 0 ? (Range) myParts.get(i - 1) : null;
+                Range asNext = i + 1 < iMax ? (Range) myParts.get(i + 1) : null;
+
+                if (asPrev != null && asNext != null) {
+                    Range newPrevRange = null;
+                    Range newNextRange = null;
+                    String newString = asString;
+
+                    int matched = chars.matchedCharCount(asString, asPrev.getEnd(), false);
+                    if (matched > 0) {
+                        newPrevRange = asPrev.withEnd(asPrev.getEnd() + matched);
+                        newString = asString.substring(matched);
+                    }
+
+                    int matchNext = chars.matchedCharCountReversed(newString, asNext.getStart(), false);
+                    if (matchNext > 0) {
+                        // chop string and extend range
+                        newNextRange = asNext.withStart(asNext.getStart() - matchNext);
+                        newString = newString.substring(0, newString.length() - matchNext);
+                    }
+
+                    if (newPrevRange != null && newNextRange != null) {
+                        if (newString.isEmpty()) {
+                            // remove the string and next range
+                            if (newPrevRange.isAdjacentBefore(newNextRange)) {
+                                // this one is not possible, if they are adjacent after remainder matched then the full string would extend the previous range
+                                myParts.set(i - 1, newPrevRange.expandToInclude(newNextRange));
+                                myParts.subList(i, i + 2).clear();
+                                iMax -= 2;
+                                continue;
+                            }
+                        }
+
+                        // add remainder of string and two ranges
+                        myParts.set(i - 1, newPrevRange);
+                        myParts.set(i, newString);
+                        myParts.set(i + 1, newNextRange);
+                    } else if (newPrevRange != null) {
+                        if (newString.isEmpty()) {
+                            // remove the string and next range
+                            if (newPrevRange.isAdjacentBefore(asNext)) {
+                                myParts.set(i - 1, newPrevRange.expandToInclude(asNext));
+                                myParts.subList(i, i + 2).clear();
+                                iMax -= 2;
+                                continue;
+                            }
+                        }
+
+                        // add remainder of string
+                        myParts.set(i - 1, newPrevRange);
+                        myParts.set(i, newString);
+                    } else if (newNextRange != null) {
+                        if (newString.isEmpty()) {
+                            // remove the string and next range
+                            if (newNextRange.isAdjacentBefore(asPrev)) {
+                                myParts.set(i + 1, newNextRange.expandToInclude(asPrev));
+                                myParts.subList(i - 1, i + 1).clear();
+                                iMax -= 2;
+                                continue;
+                            }
+                        }
+
+                        // add remainder of string
+                        myParts.set(i, newString);
+                        myParts.set(i + 1, newNextRange);
+                    }
+                } else if (asPrev != null) {
+                    // see if start of string matches adjacent chars after range
+                    int matched = chars.matchedCharCount(asString, asPrev.getEnd(), false);
+                    if (matched > 0) {
+                        // chop string and extend range
+                        Range newRange = asPrev.withEnd(asPrev.getEnd() + matched);
+                        String newString = asString.substring(matched);
+                        myParts.set(i, newString);
+                        myParts.set(i - 1, newRange);
+                    }
+                } else if (asNext != null) {
+                    // see if start of string matches adjacent chars after range
+                    int matched = chars.matchedCharCountReversed(asString, asNext.getStart(), false);
+                    if (matched > 0) {
+                        // chop string and extend range
+                        Range newRange = asNext.withStart(asNext.getStart() - matched);
+                        String newString = asString.substring(0, asString.length() - matched);
+                        myParts.set(i, newString);
+                        myParts.set(i + 1, newRange);
+                    }
+                }
+
+                // skip next range
+                i += 2;
+            } else {
+                i++;
+            }
+        }
     }
 
-    public <T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> String toString(@NotNull S baseSequence, @NotNull T builder) {
-        buildSequence(baseSequence, builder);
-        return builder.toString();
+    /**
+     * Extend ranges to include sequence chars which match adjacent inserted characters, effectively removing redundant inserts
+     *
+     * @param chars sequence for which to optimize the ranges
+     * @param <S>   type of rich sequence
+     */
+    public <S extends IRichSequence<S>> void optimizeFor(@NotNull S chars, SegmentOptimizer<S> optimizer) {
+        if (myEndOffset > chars.length()) {
+            throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + chars.length());
+        }
+
+        int iMax = myParts.size();
+        int i = 0;
+        while (i < iMax) {
+            Object part = myParts.get(i);
+
+            if (part instanceof String) {
+                String asString = (String) part;
+                Range asPrev = i > 0 ? (Range) myParts.get(i - 1) : null;
+                Range asNext = i + 1 < iMax ? (Range) myParts.get(i + 1) : null;
+
+                SegmentParams params = SegmentParams.of(asPrev, asString, asNext);
+                SegmentParams optParams = optimizer.apply(chars, params);
+
+                if (!params.equals(optParams)) {
+                    // have changes
+                    Range newPrevRange = optParams.prevRange;
+                    Range newNextRange = optParams.nextRange;
+                    String newString = optParams.text;
+
+                    if (newString.isEmpty()) {
+                        // see if string and params need deletion
+                        if (params.nextRange != null && optParams.nextRange == null) {
+                            assert optParams.prevRange != null;
+
+                            // delete string and next range
+                            myParts.set(i - 1, newPrevRange);
+                            myParts.subList(i, i + 2).clear();
+                            iMax -= 2;
+                            continue;
+                        } else if (params.prevRange != null && optParams.prevRange == null) {
+                            assert optParams.nextRange != null;
+
+                            // delete previous and string
+                            myParts.set(i + 1, newNextRange);
+                            myParts.subList(i - 1, i + 1).clear();
+                            iMax -= 2;
+                            continue;
+                        }
+                    } else {
+                        if (params.nextRange != null && optParams.nextRange == null) {
+                            // delete next range
+                            myParts.set(i - 1, newPrevRange);
+                            myParts.set(i, newString);
+                            myParts.subList(i + 1, i + 2).clear();
+                            iMax -= 1;
+                            i++;
+                            continue;
+                        } else if (params.prevRange != null && optParams.prevRange == null) {
+                            // delete previous range
+                            myParts.set(i + 1, newNextRange);
+                            myParts.set(i, newString);
+                            myParts.subList(i - 1, i).clear();
+                            iMax -= 1;
+                            i++;
+                            continue;
+                        }
+                    }
+
+                    assert (params.nextRange != null) == (optParams.nextRange != null);
+                    assert (params.prevRange != null) == (optParams.prevRange != null);
+
+                    // add remainder of string and two ranges
+                    if (newPrevRange != null) myParts.set(i - 1, newPrevRange);
+                    if (newNextRange != null) myParts.set(i + 1, newNextRange);
+
+                    if (newString.isEmpty()) {
+                       myParts.remove(i);
+                       iMax--;
+                       continue;
+                    } else {
+                        myParts.set(i, newString);
+                    }
+                }
+
+                // OPTIMIZE: if next range is not null skip it automatically
+                i += 1;
+            } else {
+                i++;
+            }
+        }
     }
 
     @Override
@@ -366,7 +579,7 @@ public class SegmentBuilder {
             if (part instanceof Range) {
                 sb.append(part).mark();
             } else {
-                sb.append("'").append(part).append("'").mark();
+                sb.append("'").append(Utils.escapeJavaString((String) part)).append("'").mark();
             }
         }
         sb.unmark().append(" }");

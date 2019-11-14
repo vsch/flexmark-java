@@ -71,15 +71,6 @@ class BaseSequenceEntry {
         return result;
     }
 
-    public int getHashCode(@NotNull BasedSequence baseSeq) {
-        int h = hash;
-        if (h == 0 && baseSeq.length() > 0) {
-            h = baseSeq.hashCode();
-            hash = h;
-        }
-        return h;
-    }
-
     @Override
     public boolean equals(Object o) {
         throw new IllegalStateException("Not Supported, use testEquals()");

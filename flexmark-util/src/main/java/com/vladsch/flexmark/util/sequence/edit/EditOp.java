@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.vladsch.flexmark.util.Utils.escapeString;
-import static com.vladsch.flexmark.util.Utils.quoteString;
+import static com.vladsch.flexmark.util.Utils.escapeJavaString;
+import static com.vladsch.flexmark.util.Utils.quoteJavaString;
 
 /**
  * Representation of an edit operation on an abstract char sequence
@@ -84,10 +83,10 @@ public class EditOp {
                 return "EditOp{DELETE: " + myRange + "}";
 
             case INSERT:
-                return "EditOp{INSERT: " + myRange.getStart() + ", " + quoteString(myParam) + "}";
+                return "EditOp{INSERT: " + myRange.getStart() + ", " + quoteJavaString(myParam) + "}";
 
             case REPLACE:
-                return "EditOp{REPLACE: " + myRange + ", " + quoteString(myParam) + "}";
+                return "EditOp{REPLACE: " + myRange + ", " + quoteJavaString(myParam) + "}";
         }
 
         // FIX: when stable change to throw IllegalStateException

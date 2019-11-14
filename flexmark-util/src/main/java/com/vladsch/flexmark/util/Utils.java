@@ -656,12 +656,57 @@ public class Utils {
     }
 
     @NotNull
-    public static String escapeString(@Nullable CharSequence param) {
-        return param == null ? "null" : param.toString().replace("\\", "\\\\").replace("\\\"", "\\\\\"");
+    public static String escapeJavaString(@Nullable CharSequence param) {
+        if (param == null) return "null";
+        StringBuilder out = new StringBuilder();
+        escapeJavaString(out, param);
+        return out.toString();
     }
 
     @NotNull
-    public static String quoteString(@Nullable CharSequence param) {
-        return param == null ? "null" : "\"" + param.toString().replace("\\", "\\\\").replace("\\\"", "\\\\\"") + "\"";
+    public static String quoteJavaString(@Nullable CharSequence param) {
+        if (param == null) return "null";
+        StringBuilder out = new StringBuilder();
+        out.append("\"");
+        escapeJavaString(out, param);
+        out.append("\"");
+        return out.toString();
+    }
+
+    public static void escapeJavaString(@NotNull StringBuilder out, @NotNull CharSequence chars) {
+        int iMax = chars.length();
+        for (int i = 0; i < iMax; i++) {
+            char c = chars.charAt(i);
+            switch (c) {
+                case '"':
+                    out.append("\\\"");
+                    break;
+                case '\n':
+                    out.append("\\n");
+                    break;
+                case '\r':
+                    out.append("\\r");
+                    break;
+                case '\t':
+                    out.append("\\t");
+                    break;
+                case '\b':
+                    out.append("\\b");
+                    break;
+                case '\f':
+                    out.append("\\f");
+                    break;
+                case '\0':
+                    out.append("\\0");
+                    break;
+                default:
+                    if (c < ' ') {
+                        out.append('%').append(String.format("%02x", (int) c));
+                    } else {
+                        out.append(c);
+                    }
+                    break;
+            }
+        }
     }
 }

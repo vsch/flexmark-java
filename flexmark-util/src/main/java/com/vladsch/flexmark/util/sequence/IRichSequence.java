@@ -52,7 +52,6 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     String WHITESPACE_CHARS = " \t\r\n";
     String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
 
-
     /**
      * Comparison to another CharSequence should result in a match if their contents are equal
      * regardless of the implementation. Should not resort to content comparison unless
@@ -65,6 +64,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     /**
      * Should return hashCode of the underlying character sequence which is equal to the String value of that sequence
+     *
      * @return hash code as if it was a string of the sequence content
      */
     int hashCode();
@@ -542,6 +542,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     boolean isEmpty();
     boolean isBlank();
+    boolean isNotEmpty();
+    boolean isNotBlank();
     boolean isNull();
     boolean isNotNull();
 
@@ -954,22 +956,59 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *
      * @param chars      characters to match against
      * @param startIndex index from which to start the match
+     * @param ignoreCase if true match ignoring case differences
      * @return true if characters at the start index of this sequence match
      */
+    boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase);
     boolean matchChars(@NotNull CharSequence chars, int startIndex);
     boolean matchCharsIgnoreCase(@NotNull CharSequence chars, int startIndex);
-    boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase);
+
+    /**
+     * Test the sequence portion for a match to another CharSequence
+     *
+     * @param chars         characters to match against
+     * @param startIndex    index from which to start the match
+     * @param endIndex      index at which to end the matching
+     * @param fullMatchOnly if true will do quick fail if length of chars is longer than characters after startIndex in this sequence
+     * @param ignoreCase    if true match ignoring case differences
+     * @return count of characters at the start index of this sequence matching corresponding characters in chars
+     */
+    int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex, boolean fullMatchOnly, boolean ignoreCase);
+    int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex, boolean ignoreCase);
+    int matchedCharCount(@NotNull CharSequence chars, int startIndex, boolean ignoreCase);
+    int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex);
+    int matchedCharCount(@NotNull CharSequence chars, int startIndex);
+    int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex, int endIndex);
+    int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex);
 
     /**
      * Test the sequence portion for a match to another CharSequence, reverse order
      *
-     * @param chars    characters to match against
-     * @param endIndex index from which to start the match and proceed to 0
+     * @param chars      characters to match against
+     * @param endIndex   index from which to start the match and proceed to 0
+     * @param ignoreCase if true match ignoring case differences
      * @return true if characters at the start index of this sequence match
      */
+    boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase);
     boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex);
     boolean matchCharsReversedIgnoreCase(@NotNull CharSequence chars, int endIndex);
-    boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase);
+
+    /**
+     * Test the sequence portion for a match to another CharSequence,
+     * equivalent to taking this.subSequence(startIndex, fromIndex) and then count matching chars going from end of both sequences
+     *
+     * @param chars      characters to match against
+     * @param startIndex index at which to stop the match
+     * @param fromIndex  index from which to start the match, not inclusive, matching starts at fromIndex-1 and proceeds towards 0
+     * @param ignoreCase if true match ignoring case differences
+     * @return count of characters at the from index of this sequence matching corresponding characters in chars in reverse order
+     */
+    int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase);
+    int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex);
+    int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int startIndex, int fromIndex);
+    int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex, boolean ignoreCase);
+    int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex);
+    int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int fromIndex);
 
     /**
      * test if this sequence ends with given characters
@@ -1143,7 +1182,6 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     @NotNull T insert(int index, @NotNull CharSequence chars);
 
     /**
-     *
      * @param chars chars
      * @param index index of insertion
      * @return resulting sequence

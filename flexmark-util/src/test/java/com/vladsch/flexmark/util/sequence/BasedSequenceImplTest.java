@@ -1522,4 +1522,66 @@ public class BasedSequenceImplTest {
         assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
         assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 14).getSourceRange());
     }
+
+    @Test
+    public void test_matchedCharCount() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        assertEquals(0, sequence.matchedCharCount("6789", 0, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 1, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 2, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 3, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 4, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 5, false));
+        assertEquals(4, sequence.matchedCharCount("6789", 6, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 7, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 8, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 9, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 10, false));
+
+        assertEquals(4, sequence.matchedCharCount("6789A", 6, false));
+        assertEquals(3, sequence.matchedCharCount("678AB", 6, false));
+        assertEquals(2, sequence.matchedCharCount("67ABC", 6, false));
+        assertEquals(1, sequence.matchedCharCount("6ABCD", 6, false));
+        assertEquals(0, sequence.matchedCharCount("ABCDE", 6, false));
+
+        assertEquals(4, sequence.matchedCharCount("6789AB", 6, false));
+        assertEquals(3, sequence.matchedCharCount("678ABC", 6, false));
+        assertEquals(2, sequence.matchedCharCount("67ABCD", 6, false));
+        assertEquals(1, sequence.matchedCharCount("6ABCDE", 6, false));
+        assertEquals(0, sequence.matchedCharCount("ABCDEF", 6, false));
+        assertEquals(0, sequence.matchedCharCount("ABCDEF", 6, false));
+    }
+
+    @Test
+    public void test_matchedCharCountReversed() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 0, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 1, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 2, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 3, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 4, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 5, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 6, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 7, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 8, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 9, false));
+        assertEquals(4, sequence.matchedCharCountReversed("6789", 0, 10, false));
+
+        assertEquals(4, sequence.matchedCharCountReversed("A6789", 0, 10, false));
+        assertEquals(3, sequence.matchedCharCountReversed("AB789", 0, 10, false));
+        assertEquals(2, sequence.matchedCharCountReversed("ABC89", 0, 10, false));
+        assertEquals(1, sequence.matchedCharCountReversed("ABCD9", 0, 10, false));
+        assertEquals(0, sequence.matchedCharCountReversed("ABCDE", 0, 10, false));
+
+        assertEquals(4, sequence.matchedCharCountReversed("AB6789", 0, 10, false));
+        assertEquals(3, sequence.matchedCharCountReversed("ABC789", 0, 10, false));
+        assertEquals(2, sequence.matchedCharCountReversed("ABCD89", 0, 10, false));
+        assertEquals(1, sequence.matchedCharCountReversed("ABCDE9", 0, 10, false));
+        assertEquals(0, sequence.matchedCharCountReversed("ABCDEF", 0, 10, false));
+        assertEquals(0, sequence.matchedCharCountReversed("ABCDEF", 0, 10, false));
+    }
 }

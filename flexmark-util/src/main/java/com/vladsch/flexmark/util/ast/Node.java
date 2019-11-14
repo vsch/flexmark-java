@@ -621,49 +621,12 @@ public abstract class Node {
         out.append("[").append(startOffset).append(", ").append(endOffset);
         if (!chars1.isEmpty() || !chars2.isEmpty()) {
             out.append(", \"");
-            escapeJavaString(out, chars1);
+            Utils.escapeJavaString(out, chars1);
             out.append(splice);
-            escapeJavaString(out, chars2);
+            Utils.escapeJavaString(out, chars2);
             out.append("\"");
         }
         out.append("]");
-    }
-
-    private static void escapeJavaString(@NotNull StringBuilder out, @NotNull String chars) {
-        int iMax = chars.length();
-        for (int i = 0; i < iMax; i++) {
-            char c = chars.charAt(i);
-            switch (c) {
-                case '"':
-                    out.append("\\\"");
-                    break;
-                case '\n':
-                    out.append("\\n");
-                    break;
-                case '\r':
-                    out.append("\\r");
-                    break;
-                case '\t':
-                    out.append("\\t");
-                    break;
-                case '\b':
-                    out.append("\\b");
-                    break;
-                case '\f':
-                    out.append("\\f");
-                    break;
-                case '\0':
-                    out.append("\\0");
-                    break;
-                default:
-                    if (c < ' ') {
-                        out.append('%').append(String.format("%02x", (int) c));
-                    } else {
-                        out.append(c);
-                    }
-                    break;
-            }
-        }
     }
 
     public static void segmentSpan(@NotNull StringBuilder out, @NotNull BasedSequence sequence, @Nullable String name) {

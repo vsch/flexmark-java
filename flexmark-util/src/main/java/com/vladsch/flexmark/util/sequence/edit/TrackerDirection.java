@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.sequence;
+package com.vladsch.flexmark.util.sequence.edit;
 
 public enum TrackerDirection {
     NONE,  // not moving, pad around it

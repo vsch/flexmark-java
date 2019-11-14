@@ -29,9 +29,10 @@ public class Range {
 
     /**
      * Create range
-     * @param start  start
-     * @param end    end
-     * @deprecated  use {@link Range#of(int, int)}
+     *
+     * @param start start
+     * @param end   end
+     * @deprecated use {@link Range#of(int, int)}
      */
     @Deprecated
     public Range(int start, int end) {
@@ -50,6 +51,22 @@ public class Range {
 
     public Range withEnd(int end) {
         return end == myEnd ? this : Range.of(myStart, end);
+    }
+
+    public Range endMinus(int delta) {
+        return delta == 0 ? this : Range.of(myStart, myEnd - delta);
+    }
+
+    public Range endPlus(int delta) {
+        return delta == 0 ? this : Range.of(myStart, myEnd + delta);
+    }
+
+    public Range startMinus(int delta) {
+        return delta == 0 ? this : Range.of(myStart - delta, myEnd);
+    }
+
+    public Range startPlus(int delta) {
+        return delta == 0 ? this : Range.of(myStart + delta, myEnd);
     }
 
     public Range withRange(int start, int end) {

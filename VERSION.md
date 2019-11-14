@@ -193,6 +193,10 @@ Next 0.59.50
 0.59.48
 -------
 
+* Fix: `SegmentBuilder` to not add empty text.
+* Add: `SegmentOptimizer` for `SegmentBuilder` segment optimization
+* Add: `CharMatchingSegmentOptimizer` to change replaced text to range in sequence when the
+  replacement text matches sequence characters. Eliminates out of base unnecessary characters.
 * Fix: add quick fail/success test for equality of base object. base strings through delete
   range/insert string operations.
 * Fix: make all based sequence test for same base use `getBase()` instead of
