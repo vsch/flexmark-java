@@ -38,6 +38,6 @@
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-escaped-character" scope="TEST" />
-    <orderEntry type="library" name="org.jetbrains:annotations:15.0" level="project" />
+    <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
   </component>
 </module>

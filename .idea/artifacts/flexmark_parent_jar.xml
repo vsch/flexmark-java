@@ -49,7 +49,7 @@
       <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
       <element id="module-output" name="flexmark-util" />
       <element id="module-output" name="flexmark-test-util" />
-      <element id="library" level="project" name="org.jetbrains:annotations:15.0" />
+      <element id="library" level="project" name="org.jetbrains:annotations" />
     </root>
   </artifact>
 </component>

@@ -44,7 +44,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.openjdk.jmh:jmh-generator-annprocess:1.13" level="project" />
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-toc" scope="TEST" />
-    <orderEntry type="library" name="org.jetbrains:annotations:15.0" level="project" />
+    <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
   </component>
 </module>
