@@ -48,7 +48,7 @@
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" scope="TEST" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="org.jetbrains:annotations:15.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="org.jetbrains:annotations" level="project" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
   </component>
 </module>

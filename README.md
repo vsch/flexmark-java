@@ -20,7 +20,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### master [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
 
-### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.50.42)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
+### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.50.44)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
 
 <!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
 [![GitQ](https://gitq.com/badge.svg)](https://gitq.com/vsch/flexmark-java)
@@ -35,7 +35,7 @@ drill down to packages and classes, updated from the repository sources. :thumbs
 * Java 8 or above, Java 9+ compatible
 * Android compatibility to be added
 * The project is on Maven: `com.vladsch.flexmark`
-* The core has no dependencies other than `org.jetbrains:annotations:15.0`. For extensions, see
+* The core has no dependencies other than `org.jetbrains:annotations:18.0`. For extensions, see
   extension description below.
 
   The API is still evolving to accommodate new extensions and functionality.
@@ -49,7 +49,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.50.42</version>
+    <version>0.50.44</version>
 </dependency>
 ```
 
@@ -88,7 +88,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.50.42'
+compile 'com.vladsch.flexmark:flexmark-all:0.50.44'
 ```
 
 #### Building with Android Studio
