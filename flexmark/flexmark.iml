@@ -26,6 +26,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-math3:3.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.openjdk.jmh:jmh-generator-annprocess:1.13" level="project" />
     <orderEntry type="library" name="log4j:log4j:1.2.17" level="project" />
-    <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
+    <orderEntry type="library" name="org.jetbrains:annotations:15.0" level="project" />
   </component>
 </module>
