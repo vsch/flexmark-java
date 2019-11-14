@@ -14,17 +14,10 @@ import java.util.WeakHashMap;
  *
  * @param <T>
  */
-public abstract class PositionListBase<T, P extends Position<T, P>> implements Iterable<P> {
+public abstract class PositionListBase<T, P extends IPosition<T, P>> implements Iterable<P> {
     final private @NotNull List<T> myList;
     final private @NotNull WeakHashMap<P, Boolean> myIndices = new WeakHashMap<>();
     final private @NotNull ListPositionFactory<T, P> myFactory;
-
-    public PositionListBase(@NotNull List<T> list) {
-        this(list, (parent, index, isValid) -> {
-            //noinspection unchecked
-            return (P) new ListPosition<T, P>(parent, index, isValid);
-        });
-    }
 
     public PositionListBase(@NotNull List<T> list, @NotNull ListPositionFactory<T, P> factory) {
         myList = list;

@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-class PositionIterator<T, P extends Position<T, P>> implements Iterator<P> {
+class PositionIterator<T, P extends IPosition<T, P>> implements Iterator<P> {
     private @Nullable P myIndex;
     private @Nullable P myNext;
 

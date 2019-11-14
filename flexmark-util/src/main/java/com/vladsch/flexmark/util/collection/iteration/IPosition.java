@@ -19,7 +19,7 @@ import java.util.function.Predicate;
  *
  * @param <T> type of element held in the list
  */
-public interface Position<T, P extends Position<T, P>> {
+public interface IPosition<T, P extends IPosition<T, P>> {
     /**
      * @return absolute index in list, even if this position is not valid, the index will always be [0, size()]
      */
