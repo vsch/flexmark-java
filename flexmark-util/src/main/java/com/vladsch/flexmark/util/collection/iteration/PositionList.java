@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PositionList<T> extends PositionListBase<T, ListPosition<T>> {
+public class PositionList<T> extends PositionListBase<T, Position<T>> {
     public PositionList(@NotNull List<T> list) {
-        super(list, ListPosition::new);
+        super(list, Position::new);
     }
 }

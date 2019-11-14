@@ -17,9 +17,9 @@ import java.util.WeakHashMap;
 public abstract class PositionListBase<T, P extends IPosition<T, P>> implements Iterable<P> {
     final private @NotNull List<T> myList;
     final private @NotNull WeakHashMap<P, Boolean> myIndices = new WeakHashMap<>();
-    final private @NotNull ListPositionFactory<T, P> myFactory;
+    final private @NotNull PositionFactory<T, P> myFactory;
 
-    public PositionListBase(@NotNull List<T> list, @NotNull ListPositionFactory<T, P> factory) {
+    public PositionListBase(@NotNull List<T> list, @NotNull PositionFactory<T, P> factory) {
         myList = list;
         myFactory = factory;
     }

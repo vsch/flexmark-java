@@ -6,13 +6,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
-class ListPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
+class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
     final private @NotNull PositionListBase<T, P> myParent;
     final private @NotNull List<T> myList;
     private int myIndex;
     private boolean myIsValid;
 
-    public ListPositionBase(@NotNull PositionListBase<T, P> parent, int index, boolean isValid) {
+    public IPositionBase(@NotNull PositionListBase<T, P> parent, int index, boolean isValid) {
         myParent = parent;
         myList = parent.getList();
         myIndex = index;
