@@ -11,17 +11,25 @@ public class SegmentPosition extends IPositionBase<Object, SegmentPosition> {
         super(parent, index, isValid);
     }
 
-    @NotNull
-    public String getString() {
+    @Nullable
+    public String getStringOrNull() {
         return getOrNull(String.class);
-//        String string = getOrNull(String.class);
-//        return string == null ? "" : string;
     }
 
     @Nullable
-    public Range getRange() {
+    public Range getRangeOrNull() {
         return getOrNull(Range.class);
-//        Range range = getOrNull(Range.class);
-//        return range == null ? Range.NULL : range;
+    }
+
+    @NotNull
+    public String getString() {
+        String string = getOrNull(String.class);
+        return string == null ? "" : string;
+    }
+
+    @NotNull
+    public Range getRange() {
+        Range range = getOrNull(Range.class);
+        return range == null ? Range.NULL : range;
     }
 }

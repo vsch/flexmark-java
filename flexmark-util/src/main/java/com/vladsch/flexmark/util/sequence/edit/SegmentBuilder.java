@@ -77,22 +77,20 @@ public class SegmentBuilder {
 
         // should not have to look further than last 2 entries to find a range
         for (int i = iMax; i-- > iLast; ) {
-            Object part = myParts.getOrNull(i);
-            if (part instanceof Range) return i;
+            Range part = myParts.getRangeOrNull(i);
+            if (part != null) return i;
         }
         return -1;
     }
 
     @Nullable
     public Range getLastPartIfRange() {
-        Object part = myParts.getLast().getOrNull();
-        return part instanceof Range ? (Range) part : null;
+        return myParts.getRangeOrNull(myParts.size() - 1);
     }
 
     @Nullable
     public String getLastPartIfString() {
-        Object part = myParts.getLast().getOrNull();
-        return part instanceof String ? (String) part : null;
+        return myParts.getStringOrNull(myParts.size() - 1);
     }
 
     @NotNull
@@ -113,9 +111,10 @@ public class SegmentBuilder {
             // have overlap, remove overlap from range and add
             int lastRangeIndex = getLastRangeIndex();
             if (lastRangeIndex != -1) {
-                Range lastRange = myParts.getOrNull(lastRangeIndex, Range.class);
+                Range lastRange = myParts.getRangeOrNull(lastRangeIndex);
+
                 // NOTE: one after the last range should be String or nothing, if it was a Range then it would be the last one
-                String text = lastRangeIndex + 1 < myParts.size() ? myParts.getPosition(lastRangeIndex + 1).getOrNull(String.class) : null;
+                String text = myParts.getStringOrNull(lastRangeIndex + 1);
 
                 // can handle this
                 SegmentParams params = SegmentParams.of(lastRange, text == null ? "" : text, range);
@@ -238,7 +237,7 @@ public class SegmentBuilder {
         int iMax = myParts.size();
 
         while (i < iMax) {
-            Object part = myParts.getPosition(i).get();
+            Object part = myParts.get(i);
 
             Range asRange = part instanceof Range ? (Range) part : null;
             String asString = part instanceof String ? (String) part : null;
@@ -316,7 +315,7 @@ public class SegmentBuilder {
 
     private void updateEndOffset() {
         int lastRangeIndex = getLastRangeIndex();
-        myEndOffset = lastRangeIndex == -1 ? 0 : myParts.getPosition(lastRangeIndex).getRange().getEnd();
+        myEndOffset = lastRangeIndex == -1 ? 0 : myParts.getRange(lastRangeIndex).getEnd();
     }
 
     private void addPart(int index, Object part) {
@@ -331,8 +330,8 @@ public class SegmentBuilder {
         if (startIndex < endIndex) {
             if (startIndex > 0 && endIndex < myParts.size()) {
                 // check if there is overlap in spliced region
-                Object part1 = myParts.getPosition(startIndex - 1).get();
-                Object part2 = myParts.getPosition(endIndex).get();
+                Object part1 = myParts.get(startIndex - 1);
+                Object part2 = myParts.get(endIndex);
                 if (part1 instanceof Range && part2 instanceof Range) {
                     if (((Range) part1).getEnd() == ((Range) part2).getStart()) {
                         endIndex++;
@@ -364,7 +363,7 @@ public class SegmentBuilder {
 
         int iMax = myParts.size();
         for (int i = 0; i < iMax; i++) {
-            Object part = myParts.getPosition(i).get();
+            Object part = myParts.get(i);
             Range partRange = part instanceof Range ? Range.of(startOffset, startOffset + ((Range) part).length()) : Range.of(startOffset, startOffset + ((String) part).length());
 
             if (partRange.isValidIndex(atIndex)) {
@@ -454,12 +453,12 @@ public class SegmentBuilder {
         int iMax = myParts.size();
         int i = 0;
         while (i < iMax) {
-            Object part = myParts.getPosition(i).get();
+            Object part = myParts.get(i);
 
             if (part instanceof String) {
                 String asString = (String) part;
-                Range asPrev = i > 0 ? myParts.getPosition(i - 1).getRange() : null;
-                Range asNext = i + 1 < iMax ? myParts.getPosition(i + 1).getRange() : null;
+                Range asPrev = i > 0 ? myParts.getRangeOrNull(i - 1) : null;
+                Range asNext = i + 1 < iMax ? myParts.getRangeOrNull(i + 1) : null;
 
                 if (asPrev != null && asNext != null) {
                     Range newPrevRange = null;
@@ -568,12 +567,12 @@ public class SegmentBuilder {
         int iMax = myParts.size();
         int i = 0;
         while (i < iMax) {
-            Object part = myParts.getPosition(i).get();
+            Object part = myParts.get(i);
 
             if (part instanceof String) {
                 String asString = (String) part;
-                Range asPrev = i > 0 ? myParts.getPosition(i - 1).getRange() : null;
-                Range asNext = i + 1 < iMax ? myParts.getPosition(i + 1).getRange() : null;
+                Range asPrev = i > 0 ? myParts.getRangeOrNull(i - 1) : null;
+                Range asNext = i + 1 < iMax ? myParts.getRangeOrNull(i + 1) : null;
 
                 SegmentParams params = SegmentParams.of(asPrev, asString, asNext);
                 SegmentParams optParams = optimizer.apply(chars, params);
