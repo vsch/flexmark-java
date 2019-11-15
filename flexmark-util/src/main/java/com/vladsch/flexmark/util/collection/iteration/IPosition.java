@@ -9,20 +9,46 @@ import java.util.function.Predicate;
 /**
  * Represents an index position in a list and behaves similar to the list.
  * <p>
- * All indexed operations on the list are relative to this index position, so may be -ve as long as absolute index is &gt;>0
+ * All indexed operations on the position are operations on the list at index relative to this position's index,
+ *  so indices may be -ve as long as absolute index is &gt;>0
  * <p>
- * Any insertions/deletions before current index will adjust the current to reflect the same element. If element at current index
- * is removed then the current index will be invalidated and trying to get the element will throw IllegalStateException.
+ * Any insertions/deletions before current position will adjust the current position to reflect the same element.
+ * If element at current index is removed then the current index will be invalidated and trying to
+ * get the element will throw IllegalStateException.  However, operations relative to the current position are still
+ * maintained so access to next/previous elements is available.
+ *
+ * This makes insert/delete operations around the position easier since you can delete the current element then insert/delete
+ * around its position or do it the other way around without concern for adjusting index for the previous operations.
+ * Try that with your list or list iterator.
+ *
+ * Additionally, the PositionList class iterator will iterate over list elements while elements
+ * are added or deleted in the list. As long as elements are added right after the current position.
+ * This limit is not limited to 1 insertion. Each insert after the current position moves the
+ * next element position further down the list. The first insertion is limited to relative position 1
+ * from current index. The following can insert anywhere in the previously inserted range.
+ * Deletions have no limitations. They can never cause new elements to be inserted after
+ * the next element position of the iterator.
+ *
+ * All this makes list manipulation while traversing it easier to write, debug and understand because
+ * all operations are relative to current position instead of a numeric index. In the code you
+ * see -1, 0, +1, for previous, current and next access.
  * <p>
- * This means that you can get instances to the list at different indices before making modifications and then modify the list
- * by adding/removing elements and all instances will be invalidated if their element was removed
- * or shifted to point to the same index if the operation was performed before their current index.
+ * Since the PositionList adjusts all outstanding positions into its instance,
+ * this means that you can get positions in the list at different indices before any
+ * modifications are made. If the list is modified by adding/removing elements, all position
+ * instances will be invalidated if their element was removed or shifted to point to
+ * the the element's new index in the list.
+ *
+ * Index computations can be a real bug generator, throw inserting, deleting and traversing a list at the
+ * same time and you have a beast to debug and maintenance nightmare to look forward to.
+ * PositionList and Position instances make all that go away. That's why I wrote these classes
+ * so I don't have to write and debug the same error prone code for manipulating lists.
  *
  * @param <T> type of element held in the list
  */
 public interface IPosition<T, P extends IPosition<T, P>> {
     /**
-     * @return absolute index in list, even if this position is not valid, the index will always be [0, size()]
+     * @return absolute index in list, even if this position is not valid, it will always be [0, list.size()]
      */
     int getIndex();
 
@@ -35,9 +61,11 @@ public interface IPosition<T, P extends IPosition<T, P>> {
 
     /**
      * @param index index relative to current position
-     * @return ListIndex representing the index relative to current position,
-     *         throws {@link IllegalStateException} if current position is not valid
+     * @return Position representing the index relative to current position,
+     *         throws {@link IllegalStateException} if current position is not valid and given index == 0
      *         throws {@link IndexOutOfBoundsException} if requested index results in absolute index &lt;0 or &gt;size() of the list
+     *
+     *         NOTE: to avoid exceptions test if position has a valid index with isValidIndex()
      */
     P getPosition(int index);
 

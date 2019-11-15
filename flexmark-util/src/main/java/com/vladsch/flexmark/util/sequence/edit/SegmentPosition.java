@@ -13,23 +13,43 @@ public class SegmentPosition extends IPositionBase<Object, SegmentPosition> {
 
     @Nullable
     public String getStringOrNull() {
-        return getOrNull(String.class);
+        return getStringOrNull(0);
     }
 
     @Nullable
     public Range getRangeOrNull() {
-        return getOrNull(Range.class);
+        return getRangeOrNull(0);
     }
 
     @NotNull
     public String getString() {
-        String string = getOrNull(String.class);
-        return string == null ? "" : string;
+        return getString(0);
     }
 
     @NotNull
     public Range getRange() {
-        Range range = getOrNull(Range.class);
-        return range == null ? Range.NULL : range;
+        return getRange(0);
+    }
+
+    @Nullable
+    public String getStringOrNull(int index) {
+        return getOrNull(index, String.class);
+    }
+
+    @Nullable
+    public Range getRangeOrNull(int index) {
+        return getOrNull(index, Range.class);
+    }
+
+    @NotNull
+    public String getString(int index) {
+        String string = getOrNull(index, String.class);
+        return string == null ? "" : string;
+    }
+
+    @NotNull
+    public Range getRange(int index) {
+        Range range = getOrNull(index, Range.class);
+        return range == null ? Range.EMPTY : range;
     }
 }

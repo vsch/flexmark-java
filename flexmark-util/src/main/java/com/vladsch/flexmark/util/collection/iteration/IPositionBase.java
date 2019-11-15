@@ -42,15 +42,16 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
      * throw if index is out list index range
      */
     private void validateIndex(int index) {
-        if (myIndex + index < 0 || myIndex + index > myParent.getList().size())
-            throw new IndexOutOfBoundsException("ListPosition at " + myIndex + " index: " + index + " is out of range [-" + myIndex + ", " + (myParent.getList().size() - myIndex) + "]");
+        int offset = getIndexOffset(index);
+        if (offset < 0 || offset > myParent.getList().size())
+            throw new IndexOutOfBoundsException("ListPosition at " + myIndex + " index: " + index + " is out of range [" + (-myIndex) + ", " + (myParent.getList().size() - myIndex) + "]");
     }
 
     /**
      * throw if not valid or index is out list index range
      */
     private void validateWithIndex(int index) {
-        validate();
+        if (!myIsValid && index == 0) validate();
         validateIndex(index);
     }
 
@@ -58,14 +59,16 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
      * throw if not valid or index is out list index range of element indices
      */
     private void validateWithElementIndex(int index) {
-        validate();
-        if (myIndex + index < 0 || myIndex + index >= myParent.getList().size())
-            throw new IndexOutOfBoundsException("ListIndex at " + myIndex + " index: " + index + " is out of range [-" + myIndex + ", " + (myParent.getList().size() - myIndex) + ")");
+        if (!myIsValid && index == 0) validate();
+        int offset = getIndexOffset(index);
+
+        if (offset < 0 || offset >= myParent.getList().size())
+            throw new IndexOutOfBoundsException("ListIndex at " + myIndex + " index: " + index + " is out of range [" + (-myIndex) + ", " + (myParent.getList().size() - myIndex) + ")");
     }
 
     public P getPosition(int index) {
         validateWithIndex(index);
-        return myParent.getPosition(myIndex + index);
+        return myParent.getPosition(getIndexOffset(index));
     }
 
     @Override
@@ -105,9 +108,18 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         return myIndex > 0;
     }
 
+    private int getIndexOffset(int index) {
+        if (myIsValid) {
+            return myIndex + index;
+        } else {
+            // our index is already next, because position at 0 was invalidated
+            return index > 0 ? myIndex + index - 1 : myIndex + index;
+        }
+    }
+
     @Override
     public boolean isNextValid() {
-        return myIndex + (myIsValid ? 1 : 0) < myList.size();
+        return getIndexOffset(1) < myList.size();
     }
 
     @Override
@@ -148,7 +160,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public boolean addAll(int index, @NotNull Collection<T> elements) {
         validateWithIndex(index);
-        return myParent.addAll(myIndex + index, elements);
+        return myParent.addAll(getIndexOffset(index), elements);
     }
 
     @Override
@@ -174,36 +186,36 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public T get(int index) {
         validateWithElementIndex(index);
-        return myList.get(myIndex + index);
+        return myList.get(getIndexOffset(index));
     }
 
     @Override
     public T getOrNull(int index) {
-        return myParent.getOrNull(myIndex + index);
+        return myParent.getOrNull(getIndexOffset(index));
     }
 
     @Override
     public <S extends T> S getOrNull(int index, Class<S> elementClass) {
-        return myParent.getOrNull(myIndex + index, elementClass);
+        return myParent.getOrNull(getIndexOffset(index), elementClass);
     }
 
     @Override
     public T set(int index, T element) {
         validateWithIndex(index);
-        return myParent.set(myIndex + index, element);
+        return myParent.set(getIndexOffset(index), element);
     }
 
     @Override
     public boolean add(int index, T element) {
         validateWithIndex(index);
-        myParent.add(myIndex + index, element);
+        myParent.add(getIndexOffset(index), element);
         return true;
     }
 
     @Override
     public T remove(int index) {
         validateWithElementIndex(index);
-        return myParent.remove(myIndex + index);
+        return myParent.remove(getIndexOffset(index));
     }
 
     @Override
@@ -223,8 +235,8 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public P indexOf(int index, T o) {
         validateWithIndex(index);
-        int itemIndex = myList.subList(myIndex + index, myList.size()).indexOf(o);
-        return itemIndex == -1 ? myParent.getPosition(myList.size(), false) : myParent.getPosition(itemIndex + myIndex + index);
+        int itemIndex = myList.subList(getIndexOffset(index), myList.size()).indexOf(o);
+        return itemIndex == -1 ? myParent.getPosition(myList.size(), false) : myParent.getPosition(itemIndex + getIndexOffset(index));
     }
 
     @Override
@@ -236,7 +248,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     public P indexOf(int index, @NotNull Predicate<P> predicate) {
         validateWithIndex(index);
         int iMax = myList.size();
-        for (int i = myIndex + index; i < iMax; i++) {
+        for (int i = getIndexOffset(index); i < iMax; i++) {
             P pos = myParent.getPosition(i);
             if (predicate.test(pos)) {
                 return pos;
@@ -253,7 +265,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public P lastIndexOf(int index, T o) {
         validateWithIndex(index);
-        int itemIndex = myList.subList(0, myIndex + index).lastIndexOf(o);
+        int itemIndex = myList.subList(0, getIndexOffset(index)).lastIndexOf(o);
         return itemIndex == -1 ? myParent.getPosition(myList.size(), false) : myParent.getPosition(itemIndex);
     }
 
@@ -265,7 +277,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public P lastIndexOf(int index, @NotNull Predicate<P> predicate) {
         validateWithIndex(index);
-        int iMax = myIndex + index;
+        int iMax = getIndexOffset(index);
         for (int i = iMax; i-- > 0; ) {
             P pos = myParent.getPosition(i);
             if (predicate.test(pos)) {

@@ -11,48 +11,40 @@ public class CharMatchingSegmentOptimizer<S extends IRichSequence<S>> implements
         this.direction = direction;
     }
 
-    @NotNull
     @Override
-    public SegmentParams apply(@NotNull S chars, @NotNull SegmentParams params) {
-        String text = params.text;
-        if (text.isEmpty()) return params;  // already processed by previous optimizer
+    public void accept(@NotNull S chars, @NotNull SegmentPosition position) {
+        String text = position.getString();
+        if (text.isEmpty()) return;  // already processed by previous optimizer
 
-        Range prevRange = params.prevRange;
-        Range nextRange = params.nextRange;
-        String newString = text;
+        Range originalPrev = position.getRangeOrNull(-1);
+        Range originalNext = position.getRangeOrNull(1);
+        Range prevRange = originalPrev;
+        Range nextRange = originalNext;
 
         int matchedPrev = 0;
         int matchedNext = 0;
 
         if (prevRange != null) {
             matchedPrev = chars.matchedCharCount(text, prevRange.getEnd(), false);
+            prevRange = prevRange.endPlus(matchedPrev);
         }
 
         if (nextRange != null) {
             matchedNext = chars.matchedCharCountReversed(text, nextRange.getStart(), false);
-        }
-
-        if (matchedNext == 0 && matchedPrev == 0) return params;
-
-        if (matchedPrev > 0) {
-            prevRange = prevRange.endPlus(matchedPrev);
-        }
-
-        if (matchedNext > 0) {
             nextRange = nextRange.startMinus(matchedNext);
         }
+
+        if (matchedNext == 0 && matchedPrev == 0) return;
 
         Range overlapRange = prevRange != null && nextRange != null ? prevRange.intersect(nextRange) : null;
 
         if (overlapRange != null && overlapRange.isNotEmpty()) {
             // need to allocate matches between next/prev based on direction
-            assert matchedNext > 0 && matchedPrev > 0;
-
             int overlap = overlapRange.getSpan();
 
             int eolPos;
             // if eol was added to prev, then all after EOL goes to next
-            String leftExtension = chars.subSequence(params.prevRange.getEnd(), overlapRange.getStart()).toString();
+            String leftExtension = chars.subSequence(position.getRange(-1).getEnd(), overlapRange.getStart()).toString();
             eolPos = leftExtension.indexOf("\n");
             if (eolPos != -1) {
                 // give all after eol to next
@@ -65,7 +57,7 @@ public class CharMatchingSegmentOptimizer<S extends IRichSequence<S>> implements
 
             if (eolPos == -1) {
                 // if eol is in overlapped section, all after EOL goes to next
-                String overlapped = text.substring(overlapRange.getStart() - params.prevRange.getEnd(), overlapRange.getEnd() - params.prevRange.getEnd());
+                String overlapped = text.substring(overlapRange.getStart() - position.getRange(-1).getEnd(), overlapRange.getEnd() - position.getRange(-1).getEnd());
                 eolPos = overlapped.indexOf("\n");
                 if (eolPos != -1) {
                     // this determines the split, not direction
@@ -105,20 +97,22 @@ public class CharMatchingSegmentOptimizer<S extends IRichSequence<S>> implements
             }
         }
 
-        if (matchedPrev > 0 && matchedNext > 0) {
-            newString = text.substring(matchedPrev, text.length() - matchedNext);
-        } else if (matchedPrev > 0) {
-            newString = text.substring(matchedPrev);
-        } else if (matchedNext > 0) {
-            newString = text.substring(0, text.length() - matchedNext);
-        }
+        text = text.substring(matchedPrev, text.length() - matchedNext);
 
-        if (prevRange != null && nextRange != null && newString.isEmpty() && prevRange.isAdjacentBefore(nextRange)) {
+        if (prevRange != null && nextRange != null && text.isEmpty() && prevRange.isAdjacentBefore(nextRange)) {
             // remove the string and next range
             prevRange = prevRange.expandToInclude(nextRange);
-            nextRange = null;
-        }
+            position.set(-1, prevRange);
+            position.remove(0, 2);
+        } else {
+            if (text.isEmpty()) position.remove();
+            else position.set(text);
 
-        return params.with(prevRange, newString, nextRange);
+            if (prevRange != null) position.set(-1, prevRange);
+            else if (originalPrev != null) position.remove(-1);
+
+            if (nextRange != null) position.set(1, nextRange);
+            else if (originalNext != null) position.remove(1);
+        }
     }
 }

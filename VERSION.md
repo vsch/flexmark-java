@@ -182,23 +182,29 @@ Next
 Next 0.59.50
 ------------
 
-* [ ] Fix: `SegmentBuilder` change `append...()` to plain `append()`
-  * [ ] Fix: cleanup naming conventions in new classes.
-* [ ] Fix: change `BasedSequenceBuilder` to use `SegmentBuilder` for segment accumulation
-      instead of its own implementation.
-  * [ ] Add: construction with optional `SegmentOptimizer` list and apply optimizers to segment
-        list before generating sequence or string.
-  * [ ] Fix: if there is an overlap in appended sequence with previous segments, add the overlap
-        as out of base text instead of throwing an exception.
-* [ ] Add: `Formatter` Paragraph wrapping options and code.
-* [ ] Add: `LS` awareness to segment optimization
-* [ ] Add: `EOL` recovery optimizer which will convert `\n` in out of base text to range for EOL
-      in original sequence in the replaced region of out of base text, splitting text if needed
-      to allow for the EOL.
-* [ ] Add: position tracking resolver based on original sequence tracked and final result.
-* [x] Add: `MarkdownParagraph` to utils to wrap paragraph text.
-  * [ ] Fix; `MarkdownParagraph` to use `SegmentBuilder` for accumulating wrapped text.
-  * [ ] Test: position marker preservation with direction type
+* [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
+  * [ ] Add: `Formatter` Paragraph wrapping options and code.
+  * [ ] Add: `LS` awareness to segment optimization
+  * [ ] Add: `EOL` recovery optimizer which will convert `\n` in out of base text to range for
+        EOL in original sequence in the replaced region of out of base text, splitting text if
+        needed to allow for the EOL.
+  * [ ] Fix: change `BasedSequenceBuilder` to use `SegmentBuilder` for segment accumulation
+        instead of its own implementation.
+    * [ ] Add: construction with optional `SegmentOptimizer` list and apply optimizers to
+          segment list before generating sequence or string.
+    * [ ] Fix: if there is an overlap in appended sequence with previous segments, add the
+          overlap as out of base text instead of throwing an exception.
+  * [ ] Add: position tracking resolver based on original sequence tracked and final result.
+  * [x] Add: `MarkdownParagraph` to utils to wrap paragraph text.
+    * [ ] Fix; `MarkdownParagraph` to use `SegmentBuilder` for accumulating wrapped text.
+    * [ ] Test: position marker preservation with direction type
+  * [x] Add: `PositionList` and `Position` classes to represent list and position in that list
+        which allow modification, deletion, insertions while iterating over the list. Multiple
+        position instances to different indexed elements can be created and all will be updated
+        to reflect changes in their element's position.
+  * [x] Fix: cleanup naming conventions in new classes.
+  * [x] Fix: rewrite implementation and optimizer using `PositionList` and `Position` instead of
+        hand rolled code.
 * [ ] Fix: remove skeleton code for offset tracking through base sequence manipulations. No
       longer needed. This will be done by analysis of original vs. resulting based sequence
       offsets.

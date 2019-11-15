@@ -649,118 +649,6 @@ public class SegmentBuilderTest {
 
 
     /*
-           Optimization tests, old code
-     */
-
-    @Test
-    public void test_optimizeExtendPrev1() {
-        String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-
-        segments.append(0, 3);
-        segments.append("345");
-        segments.append(6, 10);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), '345', [6, 10) }", segments.toString());
-
-        segments.optimizeFor(sequence);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 10) }", segments.toString());
-    }
-
-    @Test
-    public void test_optimizeExtendPrev2() {
-        String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-
-        segments.append(0, 3);
-        segments.append("34 ");
-        segments.append(6, 10);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), '34 ', [6, 10) }", segments.toString());
-
-        segments.optimizeFor(sequence);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 5), ' ', [6, 10) }", segments.toString());
-    }
-
-    @Test
-    public void test_optimizeExtendPrevNext() {
-        String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-
-        segments.append(0, 3);
-        segments.append("34 5");
-        segments.append(6, 10);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), '34 5', [6, 10) }", segments.toString());
-
-        segments.optimizeFor(sequence);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 5), ' ', [5, 10) }", segments.toString());
-    }
-
-    @Test
-    public void test_optimizeExtendPrevNextCollapse() {
-        String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
-
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
-
-        segments.append(0, 3);
-        segments.append("34 56");
-        segments.append(7, 10);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), '34 56', [7, 10) }", segments.toString());
-
-        segments.optimizeFor(sequence);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 5), ' ', [5, 10) }", segments.toString());
-    }
-
-    @Test
-    public void test_optimizeExtendNext() {
-        String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-
-        segments.append(0, 3);
-        segments.append(" 3456");
-        segments.append(7, 10);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), ' 3456', [7, 10) }", segments.toString());
-
-        segments.optimizeFor(sequence);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), ' ', [3, 10) }", segments.toString());
-    }
-
-    @Test
-    public void test_optimizeExtendNext1() {
-        String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-
-        segments.append(0, 3);
-        segments.append(" 345");
-        segments.append(6, 10);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), ' 345', [6, 10) }", segments.toString());
-
-        segments.optimizeFor(sequence);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), ' ', [3, 10) }", segments.toString());
-    }
-
-    @Test
-    public void test_optimizeIndent1() {
-        String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-
-        segments.append(0, 3);
-        segments.append(" 345");
-        segments.append(6, 10);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), ' 345', [6, 10) }", segments.toString());
-
-        segments.optimizeFor(sequence);
-        assertEquals("SegmentBuilder{end=10, parts=[0, 3), ' ', [3, 10) }", segments.toString());
-    }
-
-
-    /*
        Optimization tests, optimizer for backward compatibility
      */
 
@@ -1094,7 +982,7 @@ public class SegmentBuilderTest {
         assertEquals(escapeJavaString("SegmentBuilder{end=29, parts='    ', [2, 8), '\n    ', [12, 18), '\n', [20, 20), '\n    ', [23, 29), '\n' }"), segments.toString());
 
         segments.optimizeFor(sequence, optimizer);
-        assertEquals(escapeJavaString("SegmentBuilder{end=29, parts='  ', [0, 8), '\n  ', [10, 18), [19, 21), '  ', [21, 30) }"), segments.toString());
+        assertEquals(escapeJavaString("SegmentBuilder{end=30, parts='  ', [0, 8), '\n  ', [10, 18), [19, 21), '  ', [21, 30) }"), segments.toString());
 
         segments.buildSequence(sequence, builder);
         assertEquals("" +
