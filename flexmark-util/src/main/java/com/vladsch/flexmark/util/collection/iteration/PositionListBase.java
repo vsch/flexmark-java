@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -24,9 +25,23 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
         myFactory = factory;
     }
 
+    @TestOnly
+    public int trackedPositions() {
+        int count = 0;
+        for (P position : myIndices.keySet()) {
+            if (position != null) {
+                count++;
+            }
+        }
+        if (count != myIndices.size()) {
+            int tmp = 0;
+        }
+        return count;
+    }
+
     @NotNull
     public Iterator<P> iterator() {
-        return new PositionIterator<T, P>(get(0));
+        return new PositionIterator<T, P>(getPosition(0));
     }
 
     @NotNull
@@ -34,8 +49,12 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
         return myList;
     }
 
-    public P get(int index) {
+    public P getPosition(int index) {
         return getPosition(index, true);
+    }
+
+    public T get(int index) {
+        return myList.get(index);
     }
 
     public T getOrNull(int index) {
@@ -45,12 +64,22 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
         return null;
     }
 
-    public void set(int index, T value) {
+    public <S extends T> S getOrNull(int index, Class<S> elementClass) {
+        if (index >= 0 && index < myList.size()) {
+            T value = myList.get(index);
+            //noinspection unchecked
+            return elementClass.isInstance(value) ? (S) value : null;
+        }
+        return null;
+    }
+
+    public T set(int index, T value) {
         if (index == myList.size()) {
+            // set does not affect indices
             myList.add(value);
-            inserted(index, 1);
+            return null;
         } else {
-            myList.set(index, value);
+            return myList.set(index, value);
         }
     }
 
@@ -64,22 +93,21 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
     }
 
     public P getFirst() {
-        return get(0);
+        return getPosition(0);
     }
 
     public P getLast() {
-        return myList.isEmpty() ? get(0) : get(myList.size() - 1);
+        return myList.isEmpty() ? getPosition(0) : getPosition(myList.size() - 1);
     }
 
     public P getEnd() {
-        return get(myList.size());
+        return getPosition(myList.size());
     }
 
     public void clear() {
         for (P position : myIndices.keySet()) {
-            if (position != null) {
-                position.setIndex(0, false);
-            }
+            if (position == null) continue;
+            position.setIndex(0, false);
         }
 
         myList.clear();

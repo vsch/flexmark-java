@@ -65,23 +65,23 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
     public P getPosition(int index) {
         validateWithIndex(index);
-        return myParent.get(myIndex + index);
+        return myParent.getPosition(myIndex + index);
     }
 
     @Override
     public P getPrevious() {
         validateIndex(-1);
-        return myParent.get(myIndex - 1);
+        return myParent.getPosition(myIndex - 1);
     }
 
     @Override
     public P getNext() {
         if (myIsValid) {
             validateIndex(1);
-            return myParent.get(myIndex + 1);
+            return myParent.getPosition(myIndex + 1);
         } else {
             validateIndex(0);
-            return myParent.get(myIndex);
+            return myParent.getPosition(myIndex);
         }
     }
 
@@ -179,26 +179,18 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
     @Override
     public T getOrNull(int index) {
-        int i = myIndex + index;
-        return i >= 0 && i < myList.size() ? myList.get(i) : null;
+        return myParent.getOrNull(myIndex + index);
     }
 
     @Override
     public <S extends T> S getOrNull(int index, Class<S> elementClass) {
-        T element = getOrNull(index);
-        //noinspection unchecked
-        return elementClass.isInstance(element) ? (S) element : null;
+        return myParent.getOrNull(myIndex + index, elementClass);
     }
 
     @Override
     public T set(int index, T element) {
         validateWithIndex(index);
-        if (myIndex + index == myList.size()) {
-            myParent.add(element);
-            return null;
-        } else {
-            return myList.set(myIndex + index, element);
-        }
+        return myParent.set(myIndex + index, element);
     }
 
     @Override
@@ -231,9 +223,8 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public P indexOf(int index, T o) {
         validateWithIndex(index);
-        //noinspection SuspiciousMethodCalls
         int itemIndex = myList.subList(myIndex + index, myList.size()).indexOf(o);
-        return itemIndex == -1 ? myParent.getPosition(myList.size(), false) : myParent.get(itemIndex + myIndex + index);
+        return itemIndex == -1 ? myParent.getPosition(myList.size(), false) : myParent.getPosition(itemIndex + myIndex + index);
     }
 
     @Override
@@ -246,7 +237,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         validateWithIndex(index);
         int iMax = myList.size();
         for (int i = myIndex + index; i < iMax; i++) {
-            P pos = myParent.get(i);
+            P pos = myParent.getPosition(i);
             if (predicate.test(pos)) {
                 return pos;
             }
@@ -262,9 +253,8 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public P lastIndexOf(int index, T o) {
         validateWithIndex(index);
-        //noinspection SuspiciousMethodCalls
         int itemIndex = myList.subList(0, myIndex + index).lastIndexOf(o);
-        return itemIndex == -1 ? myParent.getPosition(myList.size(), false) : myParent.get(itemIndex);
+        return itemIndex == -1 ? myParent.getPosition(myList.size(), false) : myParent.getPosition(itemIndex);
     }
 
     @Override
@@ -277,7 +267,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         validateWithIndex(index);
         int iMax = myIndex + index;
         for (int i = iMax; i-- > 0; ) {
-            P pos = myParent.get(i);
+            P pos = myParent.getPosition(i);
             if (predicate.test(pos)) {
                 return pos;
             }
