@@ -1388,7 +1388,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     @NotNull String getCurrentTime(String useFormat) {
-        Date date = options.runningTests ? Date.from(Instant.ofEpochSecond(1000259200L)) : new Date();
+        Date date = options.runningTests ? Date.from(Instant.ofEpochSecond(1000230400L)) : new Date();
 
         // change to fixed date so test results do not change
         String currentTime = "";
@@ -1401,7 +1401,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     @NotNull String getCurrentDate(String useFormat) {
-        Date date = options.runningTests ? Date.from(Instant.ofEpochSecond(1000259200L)) : new Date();
+        Date date = options.runningTests ? Date.from(Instant.ofEpochSecond(1000230400L)) : new Date();
         String currentDate = "";
         {
             try {

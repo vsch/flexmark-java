@@ -195,7 +195,8 @@ Next 0.59.50
     * [ ] Fix: if there is an overlap in appended sequence with previous segments, add the
           overlap as out of base text instead of throwing an exception.
   * [ ] Fix: `SegmentedSequence` to construct from `SegmentList` of segment builder instead of
-        an array of `BasedSequences`
+        an array of `BasedSequences`. This will allow optimization to recover lost based spaces
+        and EOLs.
   * [ ] Fix: consider adding to based sequences method to get `SegmentList` which represents
         their contents, based and modified. This can make tracking content changes easier.
   * [ ] Add: position tracking resolver based on original sequence tracked and final result.

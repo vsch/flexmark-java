@@ -24,7 +24,8 @@ attributes:
 * `max-length` - number or leave out for unlimited
 * `type`
   * `regular` - default, regular text
-    * `format` - "UPPERCASE", "LOWERCASE", "FIRST CAPITAL", "TITLE CASE", case not sensitive, space between words can be eliminated or replaced by `-`
+    * `format` - "UPPERCASE", "LOWERCASE", "FIRST CAPITAL", "TITLE CASE", case not sensitive,
+      space between words can be eliminated or replaced by `-`
   * `date` - date
     * `format` - word date format
   * `number` - number
@@ -220,7 +221,7 @@ Number: [input]{.text type=number format=#,##0}
 
 #### Date
 
-```````````````````````````````` example(Form Controls - Text - Date: 1) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Text - Date: 1) options(form-controls-input, IGNORED)
 Date No Default: [input]{.text type=date format=yyyy/M/d}
 .
 <w:body>
@@ -265,7 +266,7 @@ Date No Default: [input]{.text type=date format=yyyy/M/d}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Text - Date: 2) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Text - Date: 2) options(form-controls-input, IGNORED)
 Date: [input]{.text type=date default=2019/11/11 format=yyyy/M/d}
 .
 <w:body>
@@ -312,7 +313,7 @@ Date: [input]{.text type=date default=2019/11/11 format=yyyy/M/d}
 
 #### Current Date
 
-```````````````````````````````` example(Form Controls - Text - Current Date: 1) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Text - Current Date: 1) options(form-controls-input, IGNORED)
 Current Date: [input]{.text type=current-date format=yyyy/M/d}
 .
 <w:body>
@@ -377,7 +378,7 @@ Current Date: [input]{.text type=current-date format=yyyy/M/d}
 
 #### Current Time
 
-```````````````````````````````` example(Form Controls - Text - Current Time: 1) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Text - Current Time: 1) options(form-controls-input, IGNORED)
 Current Time: [input]{.text type=current-time format=hh:mm:ss}
 .
 <w:body>
@@ -523,9 +524,12 @@ Checked: [input]{.checkbox checked}
 class name `.dropdown`
 
 * `name` - name for the form field
-* `default` - default selection first item if no default provided. Can be option text (case sensitive tried first, if no match then case insensitive is tried), if text match fails then attempted to parse as an integer index 1..number of options
+* `default` - default selection first item if no default provided. Can be option text (case
+  sensitive tried first, if no match then case insensitive is tried), if text match fails then
+  attempted to parse as an integer index 1..number of options
 * `help` - text to show in status bar and on hitting F1
-* `options` - list of options separated by `|`, individual options will be trimmed but otherwise left as is
+* `options` - list of options separated by `|`, individual options will be trimmed but otherwise
+  left as is
 
 ```````````````````````````````` example(Form Controls - Dropdown: 1) options(form-controls-input)
 No Default: [input]{.dropdown options="Item 1 | Item 2 | Item 3"}
