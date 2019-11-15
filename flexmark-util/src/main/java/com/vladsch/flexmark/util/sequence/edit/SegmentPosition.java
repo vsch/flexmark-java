@@ -1,14 +1,15 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.collection.iteration.IPositionBase;
-import com.vladsch.flexmark.util.collection.iteration.PositionListBase;
+import com.vladsch.flexmark.util.collection.iteration.IPositionUpdater;
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SegmentPosition extends IPositionBase<Object, SegmentPosition> {
-    public SegmentPosition(@NotNull PositionListBase<Object, SegmentPosition> parent, int index, boolean isValid) {
-        super(parent, index, isValid);
+    public SegmentPosition(@NotNull IPositionUpdater<Object, SegmentPosition> parent, int index, @NotNull PositionAnchor anchor) {
+        super(parent, index, anchor);
     }
 
     @Nullable

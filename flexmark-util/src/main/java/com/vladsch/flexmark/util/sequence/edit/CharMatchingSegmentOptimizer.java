@@ -1,13 +1,14 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
 public class CharMatchingSegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
-    private final TrackerDirection direction;
+    private final PositionAnchor direction;
 
-    public CharMatchingSegmentOptimizer(TrackerDirection direction) {
+    public CharMatchingSegmentOptimizer(PositionAnchor direction) {
         this.direction = direction;
     }
 
@@ -72,13 +73,13 @@ public class CharMatchingSegmentOptimizer<S extends IRichSequence<S>> implements
 
             if (eolPos == -1) {
                 switch (direction) {
-                    case LEFT:
+                    case PREVIOUS:
                         // give it all to next
                         matchedPrev -= overlap;
                         prevRange = prevRange.endMinus(overlap);
                         break;
 
-                    case RIGHT:
+                    case NEXT:
                         // give it all to prev
                         matchedNext -= overlap;
                         nextRange = nextRange.startPlus(overlap);

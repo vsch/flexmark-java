@@ -207,9 +207,14 @@ Next 0.59.50
         which allow modification, deletion, insertions while iterating over the list. Multiple
         position instances to different indexed elements can be created and all will be updated
         to reflect changes in their element's position.
-  * [x] Fix: cleanup naming conventions in new classes.
-  * [x] Fix: rewrite implementation and optimizer using `PositionList` and `Position` instead of
-        hand rolled code.
+    * [x] Fix: cleanup naming conventions in new classes.
+    * [x] Fix: rewrite implementation and optimizer using `PositionList` and `Position` instead
+          of hand rolled code.
+    * [x] Fix: make `Position` handle insert/delete index change invalidation instead of
+          `PositionList`
+    * [x] Add: add anchor for position to allow next/prev anchoring
+    * [x] Add: positions are now have iterable from position to end/start of list, or from next
+          to end/previous to start.
 * [ ] Fix: remove skeleton code for offset tracking through base sequence manipulations. No
       longer needed. This will be done by analysis of original vs. resulting based sequence
       offsets.

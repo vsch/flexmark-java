@@ -76,7 +76,7 @@ public class SegmentBuilder {
         // should not have to look further than last 2 entries to find a range
         SegmentPosition position = myParts.getLast();
         if (position.getRangeOrNull() != null) return position;
-        if (position.getRangeOrNull(-1) != null) return position.getPrevious();
+        if (position.getRangeOrNull(-1) != null) return position.previous();
         return myParts.getEnd();
     }
 

@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.TrackerDirection;
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -374,8 +374,8 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     // @formatter:on
 
     @Override
-    public @NotNull BasedSequence trackIndex(int index, @NotNull TrackerDirection trackerDirection) {
-        return BasedTrackedSequence.trackOffset(this, index, trackerDirection);
+    public @NotNull BasedSequence trackIndex(int index, @NotNull PositionAnchor positionAnchor) {
+        return BasedTrackedSequence.trackOffset(this, index, positionAnchor);
     }
 
     @Override

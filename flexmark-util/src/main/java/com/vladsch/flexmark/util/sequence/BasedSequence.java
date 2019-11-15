@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.sequence.edit.TrackerDirection;
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -396,14 +396,14 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @param index            offset within this sequence to track
      *                         ie. between its start and end offsets
-     * @param trackerDirection direction of interest, specifically if this sequence is the
-     *                         result of typing the direction is {@link TrackerDirection#RIGHT},
-     *                         result of backspacing direction is {@link TrackerDirection#LEFT},
-     *                         otherwise it is {@link TrackerDirection#NONE}
+     * @param positionAnchor direction of interest, specifically if this sequence is the
+     *                         result of typing the direction is {@link PositionAnchor#NEXT},
+     *                         result of backspacing direction is {@link PositionAnchor#PREVIOUS},
+     *                         otherwise it is {@link PositionAnchor#NONE}
      * @return based sequence which tracks offset through editing modifications
      */
     @NotNull
-    BasedSequence trackIndex(int index, @NotNull TrackerDirection trackerDirection);
+    BasedSequence trackIndex(int index, @NotNull PositionAnchor positionAnchor);
 
     /**
      * Get the tracked index after editing and chopping manipulation of an offset tracking sequence

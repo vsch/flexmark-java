@@ -709,4 +709,29 @@ public class Utils {
             }
         }
     }
+
+    public static <T> T getOrNull(@NotNull List<T> list, int index) {
+        if (index >= 0 && index < list.size()) {
+            return list.get(index);
+        }
+        return null;
+    }
+
+    public static <T, S extends T> S getOrNull(@NotNull List<T> list, int index, Class<S> elementClass) {
+        if (index >= 0 && index < list.size()) {
+            T value = list.get(index);
+            //noinspection unchecked
+            return elementClass.isInstance(value) ? (S) value : null;
+        }
+        return null;
+    }
+
+    public static <T> T setOrAdd(@NotNull List<T> list, int index, T value) {
+        if (index == list.size()) {
+            list.add(value);
+            return null;
+        } else {
+            return list.set(index, value);
+        }
+    }
 }

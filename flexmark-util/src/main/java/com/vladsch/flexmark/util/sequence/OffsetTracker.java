@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.sequence.edit.TrackerDirection;
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -9,10 +9,10 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class OffsetTracker {
     private final int index;
-    private final TrackerDirection direction;
+    private final PositionAnchor direction;
 
-    private OffsetTracker(BasedSequence baseSeq, int index, TrackerDirection trackerDirection) {
-        this.direction = trackerDirection;
+    private OffsetTracker(BasedSequence baseSeq, int index, PositionAnchor positionAnchor) {
+        this.direction = positionAnchor;
         this.index = index;
 
         if (this.index < 0 || this.index > baseSeq.length()) {
@@ -24,7 +24,7 @@ public final class OffsetTracker {
         return index;
     }
 
-    public TrackerDirection getDirection() {
+    public PositionAnchor getDirection() {
         return direction;
     }
 
@@ -34,7 +34,7 @@ public final class OffsetTracker {
     }
 
     @NotNull
-    public static OffsetTracker create(@NotNull BasedSequence baseSeq, int index, @NotNull TrackerDirection direction) {
+    public static OffsetTracker create(@NotNull BasedSequence baseSeq, int index, @NotNull PositionAnchor direction) {
         return new OffsetTracker(baseSeq, index, direction);
     }
 }

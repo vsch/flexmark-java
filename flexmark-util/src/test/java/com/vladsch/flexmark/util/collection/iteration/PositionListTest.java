@@ -6,6 +6,8 @@ import org.junit.rules.ExpectedException;
 
 import java.util.*;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.junit.Assert.*;
 
 public class PositionListTest {
@@ -19,11 +21,103 @@ public class PositionListTest {
     }
 
     @Test
+    public void testPosPreviousDelete1() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(3, PositionAnchor.PREVIOUS);
+        positions.remove(1, 3);
+        assertEquals(1, position.getIndex());
+        assertTrue(position.isValid());
+    }
+
+    @Test
+    public void testPosPreviousDelete2() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(3, PositionAnchor.PREVIOUS);
+        positions.remove(1, 4);
+        assertEquals(0, position.getIndex());
+        assertTrue(position.isValid());
+    }
+
+    @Test
+    public void testPosPreviousDelete3() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(3, PositionAnchor.PREVIOUS);
+        positions.remove(3, 4);
+        assertEquals(2, position.getIndex());
+        assertTrue(position.isValid());
+    }
+
+    @Test
+    public void testPosPreviousDelete4() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(3, PositionAnchor.PREVIOUS);
+        positions.remove(4, 5);
+        assertEquals(3, position.getIndex());
+        assertTrue(position.isValid());
+    }
+
+    @Test
+    public void testPosPreviousInsert1() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(3, PositionAnchor.PREVIOUS);
+        positions.addAll(3, Arrays.asList(-1, -2));
+        assertEquals(3, position.getIndex());
+        assertTrue(position.isValid());
+    }
+
+    @Test
+    public void testPosPreviousInsert2() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(3, PositionAnchor.PREVIOUS);
+        positions.addAll(2, Arrays.asList(-1, -2));
+        assertEquals(2, position.getIndex());
+        assertTrue(position.isValid());
+    }
+
+    @Test
+    public void testPosPreviousInsert3() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(3, PositionAnchor.PREVIOUS);
+        positions.addAll(1, Arrays.asList(-1, -2));
+        assertEquals(5, position.getIndex());
+        assertTrue(position.isValid());
+    }
+
+    @Test
+    public void testPosPreviousInsert4() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(3, PositionAnchor.PREVIOUS);
+        positions.addAll(0, Arrays.asList(-1, -2));
+        assertEquals(5, position.getIndex());
+        assertTrue(position.isValid());
+    }
+
+    @Test
+    public void testMaxOffset() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+        PositionList<Integer> positions = new PositionList<>(list);
+
+        int iMax = list.size();
+        for (int i = 0; i < iMax; i++) {
+            Position<Integer> position = positions.getPosition(i, PositionAnchor.PREVIOUS);
+            assertEquals(iMax - i, position.maxOffset());
+        }
+    }
+
+    @Test
     public void testRelease() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
         PositionList<Integer> positions = new PositionList<>(list);
-        Position<Integer> position1 = positions.getPosition(8);
+        Position<Integer> position1 = positions.getPosition(8, PositionAnchor.NONE);
         Position<Integer> position2 = position1.getPosition(2);
 
         assertEquals(2, positions.trackedPositions());
@@ -31,6 +125,56 @@ public class PositionListTest {
         System.gc();
         assertEquals(1, positions.trackedPositions());
         position2 = null;
+        System.gc();
+        assertEquals(0, positions.trackedPositions());
+    }
+
+    @Test
+    public void testListenerAdd() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(5, PositionAnchor.NONE);
+        StringBuilder message = new StringBuilder();
+
+        IPositionListener listener = new IPositionListener() {
+            @Override
+            public void inserted(int index, int count) {
+                message.append("Inserted: [").append(index).append(", ").append(index + count).append(")");
+            }
+
+            @Override
+            public void deleted(int index, int count) {
+                message.append("Deleted: [").append(index).append(", ").append(index + count).append(")");
+            }
+        };
+
+        assertEquals(1, positions.trackedPositions());
+        positions.addPositionListener(listener);
+
+        assertEquals(2, positions.trackedPositions());
+        position.set(-1);
+        assertEquals("", message.toString());
+
+        message.delete(0, message.length());
+        position.remove(-1);
+        assertEquals("Deleted: [4, 5)", message.toString());
+
+        message.delete(0, message.length());
+        position.add(1, -2);
+        assertEquals("Inserted: [5, 6)", message.toString());
+
+        positions.removePositionListener(listener);
+        assertEquals(1, positions.trackedPositions());
+
+        positions.addPositionListener(listener);
+        assertEquals(2, positions.trackedPositions());
+
+        listener = null;
+        System.gc();
+        assertEquals(1, positions.trackedPositions());
+
+        position = null;
         System.gc();
         assertEquals(0, positions.trackedPositions());
     }
@@ -52,6 +196,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
 
         assertEquals((Integer) 9, positions.getOrNull(0));
+        assertEquals((Integer) 9, positions.getPosition(0).getOrNull());
         assertNull(positions.getOrNull(-1));
         assertNull(positions.getOrNull(10));
         assertNull(positions.getOrNull(11));
@@ -96,6 +241,30 @@ public class PositionListTest {
     }
 
     @Test
+    public void testPosEquals() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> positions1 = positions.getPosition(0);
+        Position<Integer> positions2 = positions.getPosition(0);
+
+        assertNotEquals(positions1, positions2);
+        assertNotEquals(positions2, positions1);
+    }
+
+    @Test
+    public void tesPostHashCode() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> positions1 = positions.getPosition(0);
+        Position<Integer> positions2 = positions.getPosition(0);
+
+        assertNotEquals(positions1.hashCode(), positions2.hashCode());
+        assertNotEquals(positions2.hashCode(), positions1.hashCode());
+    }
+
+    @Test
     public void set() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
@@ -133,6 +302,302 @@ public class PositionListTest {
     }
 
     @Test
+    public void iteratorForwards() {
+        List<Integer> input = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Iterator<Position<Integer>> iterator = positions.getPosition(0).forwards().iterator();
+        while (iterator.hasNext()) {
+            Position<Integer> position = iterator.next();
+            list2.add(position.get());
+        }
+        List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorForwards3() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> position = positions.getPosition(4);
+        Iterator<Position<Integer>> iterator = position.forwards().iterator();
+        int nextIndex = position.getIndex();
+
+        while (iterator.hasNext()) {
+            position = iterator.next();
+
+            assertEquals(nextIndex, position.getIndex());
+
+            nextIndex = position.nextIndex();
+
+            list2.add(position.get());
+        }
+
+        assertEquals(list.size(), position.nextIndex());
+
+        List<Integer> expected = Arrays.asList(5, 4, 3, 2, 1, 0);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorForwards3a() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> position = positions.getPosition(4);
+        Iterator<Position<Integer>> iterator = position.nextForwards().iterator();
+        int nextIndex = position.nextIndex();
+
+        while (iterator.hasNext()) {
+            position = iterator.next();
+
+            assertEquals(nextIndex, position.getIndex());
+
+            nextIndex = position.nextIndex();
+
+            list2.add(position.get());
+        }
+
+        assertEquals(list.size(), position.nextIndex());
+
+        List<Integer> expected = Arrays.asList(4, 3, 2, 1, 0);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorForwards4() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> position = positions.getPosition(9);
+        Iterator<Position<Integer>> iterator = position.nextForwards().iterator();
+        int nextIndex = position.getIndex();
+
+        while (iterator.hasNext()) {
+            position = iterator.next();
+
+            assertEquals(nextIndex, position.getIndex());
+
+            nextIndex = position.nextIndex();
+
+            list2.add(position.get());
+        }
+
+        assertEquals(list.size(), position.nextIndex());
+
+        assertEquals(emptyList(), list2);
+    }
+
+    @Test
+    public void iteratorForwards4a() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> position = positions.getPosition(9);
+        Iterator<Position<Integer>> iterator = position.nextForwards().iterator();
+        int nextIndex = position.nextIndex();
+
+        while (iterator.hasNext()) {
+            position = iterator.next();
+
+            assertEquals(nextIndex, position.getIndex());
+
+            nextIndex = position.nextIndex();
+
+            list2.add(position.get());
+        }
+
+        assertEquals(list.size(), position.nextIndex());
+
+        assertEquals(emptyList(), list2);
+    }
+
+    @Test
+    public void iteratorNext1() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> fakeIterator = positions.getPosition(0, PositionAnchor.NEXT);
+
+        while (fakeIterator.isValidPosition()) {
+            Position<Integer> position = fakeIterator.withAnchor(PositionAnchor.NONE);
+            assertSame(position, position.withAnchor(PositionAnchor.NONE));
+            list2.add(position.get());
+
+            boolean hadNext = fakeIterator.hasNext();
+            fakeIterator = fakeIterator.next();
+
+            assertEquals(hadNext, fakeIterator.isValidPosition());
+        }
+
+        List<Integer> expected = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorBackwards() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Iterator<Position<Integer>> iterator = positions.getPosition(10).backwards().iterator();
+        while (iterator.hasNext()) {
+            Position<Integer> position = iterator.next();
+            list2.add(position.get());
+        }
+        List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorBackwards2() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Iterator<Position<Integer>> iterator = positions.getPosition(9).backwards().iterator();
+        while (iterator.hasNext()) {
+            Position<Integer> position = iterator.next();
+            list2.add(position.get());
+        }
+        List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorBackwards3() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> position = positions.getPosition(4);
+        Iterator<Position<Integer>> iterator = position.backwards().iterator();
+        int index = position.getIndex();
+        while (iterator.hasNext()) {
+            position = iterator.next();
+
+            assertEquals(index, position.getIndex());
+            index = position.previousIndex();
+
+            list2.add(position.get());
+        }
+
+        assertEquals(-1, position.previousIndex());
+
+        List<Integer> expected = Arrays.asList(5, 6, 7, 8, 9);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorBackwards3a() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> position = positions.getPosition(4);
+        Iterator<Position<Integer>> iterator = position.previousBackwards().iterator();
+        int index = position.previousIndex();
+        while (iterator.hasNext()) {
+            position = iterator.next();
+
+            assertEquals(index, position.getIndex());
+            index = position.previousIndex();
+
+            list2.add(position.get());
+        }
+
+        assertEquals(-1, position.previousIndex());
+
+        List<Integer> expected = Arrays.asList(6, 7, 8, 9);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorBackwards4() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> position = positions.getPosition(0);
+        Iterator<Position<Integer>> iterator = position.backwards().iterator();
+        int index = position.getIndex();
+        while (iterator.hasNext()) {
+            position = iterator.next();
+
+            assertEquals(index, position.getIndex());
+            index = position.previousIndex();
+
+            list2.add(position.get());
+        }
+
+        assertEquals(-1, position.previousIndex());
+
+        List<Integer> expected = singletonList(9);
+        assertEquals(expected, list2);
+    }
+
+    @Test
+    public void iteratorBackwards5() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> position = positions.getPosition(0);
+        Iterator<Position<Integer>> iterator = position.previousBackwards().iterator();
+        int index = position.previousIndex();
+        while (iterator.hasNext()) {
+            position = iterator.next();
+
+            assertEquals(index, position.getIndex());
+            index = position.previousIndex();
+
+            list2.add(position.get());
+        }
+
+        assertEquals(-1, position.previousIndex());
+
+        assertEquals(emptyList(), list2);
+    }
+
+    @Test
+    public void iteratorPrev1() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        Position<Integer> iterator = positions.getPosition(10, PositionAnchor.PREVIOUS);
+
+        while (iterator.hasPrevious()) {
+            iterator = iterator.previous();
+
+            Position<Integer> position = iterator.withAnchor(PositionAnchor.NONE);
+            list2.add(position.get());
+        }
+        List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        assertEquals(expected, list2);
+    }
+
+    @Test
     public void iterator2() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
@@ -163,7 +628,44 @@ public class PositionListTest {
     }
 
     @Test
+    public void iterator_AddBeforeReversed() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        int i = 1;
+        for (Position<Integer> position : positions.reversed()) {
+            position.add(Math.max(position.minOffset(), -1), -(i++));
+            list2.add(position.get());
+        }
+
+        List<Integer> expected = Arrays.asList(0, -1, -2, -3, -4, -5, -6, -7, -8, -9);
+        assertEquals(expected, list2);
+        List<Integer> expected2 = Arrays.asList(-10, -9, 9, -8, 8, -7, 7, -6, 6, -5, 5, -4, 4, -3, 3, -2, 2, -1, 1, 0);
+        assertEquals(expected2, list);
+    }
+
+    @Test
     public void iterator_AddAfter() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        int i = 1;
+        for (Position<Integer> position : positions) {
+            position.add(1, -(i++));
+            list2.add(position.get());
+        }
+
+        List<Integer> expected = Arrays.asList(9, -1, 8, -2, 7, -3, 6, -4, 5, -5, 4, -6, 3, -7, 2, -8, 1, -9, 0, -10);
+        assertEquals(input, list2);
+        assertEquals(expected, list);
+    }
+
+    @Test
+    public void iterator_AddAfterReversed() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
         PositionList<Integer> positions = new PositionList<>(list);
@@ -197,7 +699,7 @@ public class PositionListTest {
 
         List<Integer> expected = Arrays.asList(9, -1, 8, -2, 7, -3, 6, -4, 5, -5, 4, -6, 3, -7, 2, -8, 1, -9, 0, -10);
         assertEquals(input, list2);
-        assertEquals(Collections.emptyList(), list);
+        assertEquals(emptyList(), list);
     }
 
     @Test
@@ -215,6 +717,46 @@ public class PositionListTest {
     }
 
     @Test
+    public void detached() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        thrown.expect(IllegalStateException.class);
+
+        Position<Integer> position = positions.getPosition(0);
+        position.detachListener();
+
+        boolean i = position.hasNext();
+    }
+
+    @Test
+    public void testToString() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+
+        Position<Integer> position = positions.getPosition(0);
+        assertEquals("Position{anchor=NONE, index=0, valid=true}", position.toString());
+        assertEquals("Position{anchor=NEXT, index=0, valid=true}", position.withAnchor(PositionAnchor.NEXT).toString());
+        assertEquals("Position{anchor=PREVIOUS, index=0, valid=true}", position.withAnchor(PositionAnchor.PREVIOUS).toString());
+    }
+
+    @Test
+    public void invalidRemoveRange() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        thrown.expect(IllegalArgumentException.class);
+
+        Position<Integer> position = positions.getPosition(0);
+        position.remove(5, 4);
+    }
+
+    @Test
     public void iterator_UseThenRemove() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
@@ -229,7 +771,25 @@ public class PositionListTest {
 
         List<Integer> expected = Arrays.asList(9, -1, 8, -2, 7, -3, 6, -4, 5, -5, 4, -6, 3, -7, 2, -8, 1, -9, 0, -10);
         assertEquals(input, list2);
-        assertEquals(Collections.emptyList(), list);
+        assertEquals(emptyList(), list);
+    }
+
+    @Test
+    public void iterator_UseThenRemoveReverse() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        int i = 1;
+        for (Position<Integer> position : positions.reversed()) {
+            list2.add(position.get());
+            position.remove();
+        }
+
+        List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        assertEquals(expected, list2);
+        assertEquals(emptyList(), list);
     }
 
     @Test
@@ -247,7 +807,26 @@ public class PositionListTest {
 
         List<Integer> expected = Arrays.asList(9, 7, 5, 3, 1);
         assertEquals(expected, list2);
-        assertEquals(Collections.emptyList(), list);
+        assertEquals(emptyList(), list);
+    }
+
+    @Test
+    public void iterator_UseThenRemove2Reverse() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Integer> list2 = new ArrayList<>();
+
+        int i = 1;
+        for (Position<Integer> position : positions.reversed()) {
+            list2.add(position.get());
+            assertEquals(-position.getIndex(), position.minOffset());
+            position.remove(Math.max(position.minOffset(), -1), 1);
+        }
+
+        List<Integer> expected = Arrays.asList(0, 2, 4, 6, 8);
+        assertEquals(expected, list2);
+        assertEquals(emptyList(), list);
     }
 
     @Test
@@ -310,12 +889,13 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         int iMax = list.size();
         for (int i = 0; i <= iMax; i++) {
-            Position<Integer> position = positions.getPosition(i, false);
+            Position<Integer> position = positions.getPosition(i);
+            position.invalidate();
             assertEquals("" + i, i, position.getIndex());
             assertTrue("" + i, position.isValidIndex());
             assertFalse("" + i, position.isValid());
 
-            position = position.getNext();
+            position = position.next();
             assertEquals("" + i, i < iMax, position.isValidPosition());
             if (i < iMax) {
                 assertEquals("" + i, 9 - i, (int) position.get());
@@ -338,28 +918,6 @@ public class PositionListTest {
         }
 
         positions.clear();
-        assertEquals(0, list.size());
-
-        for (int i = 0; i <= iMax; i++) {
-            Position<Integer> position = listPositions.get(i);
-            assertFalse("" + i, position.isValid());
-        }
-    }
-
-    @Test
-    public void posClear() {
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-        PositionList<Integer> positions = new PositionList<>(list);
-        ArrayList<Position<Integer>> listPositions = new ArrayList<>();
-
-        int iMax = list.size();
-        for (int i = 0; i <= iMax; i++) {
-            Position<Integer> position = positions.getPosition(i);
-            assertTrue("" + i, position.isValid());
-            listPositions.add(position);
-        }
-
-        positions.getEnd().clear();
         assertEquals(0, list.size());
 
         for (int i = 0; i <= iMax; i++) {
@@ -716,7 +1274,7 @@ public class PositionListTest {
 
         thrown.expect(IndexOutOfBoundsException.class);
         Position<Integer> position = positions.getPosition(0);
-        position.getPrevious();
+        position.previous();
     }
 
     @Test
@@ -746,7 +1304,7 @@ public class PositionListTest {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
         PositionList<Integer> positions = new PositionList<>(list);
 
-        thrown.expect(IllegalArgumentException.class);
+        thrown.expect(IndexOutOfBoundsException.class);
         Position<Integer> position = positions.getPosition(0);
         position.remove(10, 0);
     }
@@ -757,10 +1315,10 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
 
         Position<Integer> position0 = positions.getPosition(1);
-        assertTrue(position0.isPreviousValid());
-        Position<Integer> position1 = position0.getPrevious();
+        assertTrue(position0.hasPrevious());
+        Position<Integer> position1 = position0.previous();
         assertEquals(9, (int) position1.get());
-        assertFalse(position1.isPreviousValid());
+        assertFalse(position1.hasPrevious());
     }
 
     @Test
@@ -815,7 +1373,7 @@ public class PositionListTest {
     public void test_getFirstEmpty() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(Collections.emptyList());
+        PositionList<Integer> positions = new PositionList<>(emptyList());
         Position<Integer> position = positions.getFirst();
 
         assertEquals(0, position.getIndex());
@@ -837,7 +1395,7 @@ public class PositionListTest {
     public void test_getLastEmpty() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(Collections.emptyList());
+        PositionList<Integer> positions = new PositionList<>(emptyList());
         Position<Integer> position = positions.getLast();
 
         assertEquals(0, position.getIndex());
@@ -860,7 +1418,7 @@ public class PositionListTest {
     public void test_getEndEmpty() {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
-        PositionList<Integer> positions = new PositionList<>(Collections.emptyList());
+        PositionList<Integer> positions = new PositionList<>(emptyList());
         Position<Integer> position = positions.getEnd();
 
         assertEquals(0, position.getIndex());
@@ -873,7 +1431,7 @@ public class PositionListTest {
         ArrayList<Integer> list = new ArrayList<>(input);
         PositionList<Integer> positions = new PositionList<>(list);
 
-        Position<Integer> position = positions.getLast().getNext();
+        Position<Integer> position = positions.getLast().next();
         assertEquals(list.size(), position.getIndex());
 
         position.set(-1);

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
+import com.vladsch.flexmark.util.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.TestOnly;
 
@@ -15,9 +16,9 @@ import java.util.WeakHashMap;
  *
  * @param <T>
  */
-public abstract class PositionListBase<T, P extends IPosition<T, P>> implements Iterable<P> {
+public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> implements Iterable<P>, IPositionUpdater<T, P> {
     final private @NotNull List<T> myList;
-    final private @NotNull WeakHashMap<P, Boolean> myIndices = new WeakHashMap<>();
+    final private @NotNull WeakHashMap<IPositionListener, Boolean> myListeners = new WeakHashMap<>(); // true if listener is P, false otherwise
     final private @NotNull PositionFactory<T, P> myFactory;
 
     public PositionListBase(@NotNull List<T> list, @NotNull PositionFactory<T, P> factory) {
@@ -28,20 +29,59 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
     @TestOnly
     public int trackedPositions() {
         int count = 0;
-        for (P position : myIndices.keySet()) {
+        for (IPositionListener position : myListeners.keySet()) {
             if (position != null) {
                 count++;
             }
         }
-        if (count != myIndices.size()) {
+
+        if (count != myListeners.size()) {
             int tmp = 0;
         }
         return count;
     }
 
+    /**
+     * Add list edit listener for notifications of mods to the list
+     *
+     * @param listener listener
+     */
+    @Override
+    public void addPositionListener(@NotNull IPositionListener listener) {
+        myListeners.put(listener, false);
+    }
+
+    /**
+     * Remove list edit listener
+     * <p>
+     * NOTE: removal is optional. Only weak refs are kept for the listener
+     *
+     * @param listener listener
+     */
+    @Override
+    public void removePositionListener(@NotNull IPositionListener listener) {
+        myListeners.remove(listener);
+    }
+
     @NotNull
     public Iterator<P> iterator() {
-        return new PositionIterator<T, P>(getPosition(0));
+        return iterator(getPosition(0, PositionAnchor.NEXT));
+    }
+
+    @NotNull
+    public Iterator<P> reversedIterator() {
+        return iterator(getPosition(Math.max(0, myList.size() - 1), PositionAnchor.PREVIOUS));
+    }
+
+    @NotNull
+    public Iterable<P> reversed() {
+        return this::reversedIterator;
+    }
+
+    @NotNull
+    public Iterator<P> iterator(@NotNull P position) {
+        assert position.getAnchor() != PositionAnchor.NONE;
+        return new PositionIterator<T, P>(position);
     }
 
     @NotNull
@@ -49,117 +89,89 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
         return myList;
     }
 
-    public P getPosition(int index) {
-        return getPosition(index, true);
-    }
-
     public T get(int index) {
         return myList.get(index);
     }
 
     public T getOrNull(int index) {
-        if (index >= 0 && index < myList.size()) {
-            return myList.get(index);
-        }
-        return null;
+        return Utils.getOrNull(myList, index);
     }
 
     public <S extends T> S getOrNull(int index, Class<S> elementClass) {
-        if (index >= 0 && index < myList.size()) {
-            T value = myList.get(index);
-            //noinspection unchecked
-            return elementClass.isInstance(value) ? (S) value : null;
-        }
-        return null;
+        return Utils.getOrNull(myList, index, elementClass);
     }
 
     public T set(int index, T value) {
-        if (index == myList.size()) {
-            // set does not affect indices
-            myList.add(value);
-            return null;
-        } else {
-            return myList.set(index, value);
-        }
+        return Utils.setOrAdd(myList, index, value);
     }
 
-    public P getPosition(int index, boolean isValid) {
+    @Override
+    public P getPosition(int index, @NotNull PositionAnchor anchor) {
         if (index < 0 || index > myList.size())
-            throw new IndexOutOfBoundsException("ListPosition.get(" + index + ", " + isValid + "), index out valid range [0, " + myList.size() + "]");
+            throw new IndexOutOfBoundsException("ListPosition.get(" + index + "), index out valid range [0, " + myList.size() + "]");
 
-        P listPosition = myFactory.create(this, index, isValid);
-        myIndices.put(listPosition, true);
+        P listPosition = myFactory.create(this, index, anchor);
+        myListeners.put(listPosition, true);
         return listPosition;
     }
 
     public P getFirst() {
-        return getPosition(0);
+        return getPosition(0, PositionAnchor.NONE);
     }
 
     public P getLast() {
-        return myList.isEmpty() ? getPosition(0) : getPosition(myList.size() - 1);
+        return myList.isEmpty() ? getPosition(0, PositionAnchor.NONE) : getPosition(myList.size() - 1, PositionAnchor.NONE);
     }
 
     public P getEnd() {
-        return getPosition(myList.size());
+        return getPosition(myList.size(), PositionAnchor.NONE);
     }
 
+    @Override
     public void clear() {
-        for (P position : myIndices.keySet()) {
-            if (position == null) continue;
-            position.setIndex(0, false);
-        }
+        if (!myList.isEmpty()) {
+            myList.clear();
+            deleted(0, Integer.MAX_VALUE);
 
-        myList.clear();
-        myIndices.clear();
+            myListeners.clear();
+        }
     }
 
-    void inserted(int index, int count) {
+    @Override
+    public void inserted(int index, int count) {
         assert count >= 0;
         assert index >= 0 && index <= myList.size() - count;
 
-        for (P position : myIndices.keySet()) {
+        for (IPositionListener position : myListeners.keySet()) {
             if (position != null) {
-                int positionIndex = position.getIndex();
-                if (positionIndex >= index) {
-                    assert positionIndex + count <= myList.size();
-                    position.setIndex(positionIndex + count, true);
-                }
+                position.inserted(index, count);
             }
         }
     }
 
-    void deleted(int index, int count) {
+    @Override
+    public void deleted(int index, int count) {
         assert count >= 0;
         assert index >= 0 && index + count <= myList.size() + count;
 
-        for (P position : myIndices.keySet()) {
+        for (IPositionListener position : myListeners.keySet()) {
             if (position != null) {
-                int positionIndex = position.getIndex();
-                if (positionIndex >= index) {
-                    if (positionIndex >= index + count) {
-                        // still valid
-                        position.setIndex(positionIndex - count, true);
-                    } else {
-                        // invalidated
-                        position.setIndex(index, false);
-                    }
-                }
+                position.deleted(index, count);
             }
         }
     }
 
-    public boolean add(T value) {
+    public boolean add(T element) {
         int index = myList.size();
-        myList.add(value);
+        myList.add(element);
         inserted(index, 1);
         return true;
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public boolean add(int index, T value) {
+    public boolean add(int index, T element) {
         assert index >= 0 && index <= myList.size();
-        myList.add(index, value);
+        myList.add(index, element);
         inserted(index, 1);
         return true;
     }
@@ -172,14 +184,14 @@ public abstract class PositionListBase<T, P extends IPosition<T, P>> implements 
         return addAll(index, other.myList);
     }
 
-    public boolean addAll(@NotNull Collection<? extends T> values) {
-        return addAll(myList.size(), values);
+    public boolean addAll(@NotNull Collection<? extends T> elements) {
+        return addAll(myList.size(), elements);
     }
 
-    public boolean addAll(int index, @NotNull Collection<? extends T> values) {
+    public boolean addAll(int index, @NotNull Collection<? extends T> elements) {
         assert index >= 0 && index <= myList.size();
-        myList.addAll(index, values);
-        inserted(index, values.size());
+        myList.addAll(index, elements);
+        inserted(index, elements.size());
         return true;
     }
 

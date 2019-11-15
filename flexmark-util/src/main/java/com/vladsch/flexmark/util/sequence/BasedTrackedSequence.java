@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.TrackerDirection;
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -115,7 +115,7 @@ public final class BasedTrackedSequence extends BasedSequenceImpl implements Rep
     }
 
     @NotNull
-    public static BasedSequence trackOffset(@NotNull BasedSequence baseSeq, int markerIndex, @NotNull TrackerDirection trackerDirection) {
+    public static BasedSequence trackOffset(@NotNull BasedSequence baseSeq, int markerIndex, @NotNull PositionAnchor positionAnchor) {
         // FIX: for editing
 //        OffsetTracker tracker = OffsetTracker.create(baseSeq, markerIndex, trackerDirection);
 //        return tracker != null ? new BasedTrackedSequence(baseSeq, tracker) : baseSeq;

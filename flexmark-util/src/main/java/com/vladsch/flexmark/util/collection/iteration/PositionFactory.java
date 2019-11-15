@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.collection.iteration;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface PositionFactory<T, P extends IPosition<T, P>> {
+public interface PositionFactory<T, P extends IPositionHolder<T, P>> {
     @NotNull
-    P create(@NotNull PositionListBase<T, P> parent, int index, boolean isValid);
+    P create(@NotNull IPositionUpdater<T, P> parent, int index, @NotNull PositionAnchor anchor);
 }

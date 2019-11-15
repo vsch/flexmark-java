@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.TrackerDirection;
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +26,7 @@ public class MarkdownParagraph {
     private @NotNull TextAlignment myAlignment = LEFT;
     boolean myKeepHardBreaks = true;
     boolean myKeepLineBreaks = false;
-    private @NotNull TrackerDirection myTrackerDirection = TrackerDirection.NONE;
+    private @NotNull PositionAnchor myPositionAnchor = PositionAnchor.NONE;
     private int myMarkerOffset = -1;
 
     public MarkdownParagraph(CharSequence chars) {
@@ -43,12 +43,12 @@ public class MarkdownParagraph {
     }
 
     @NotNull
-    public TrackerDirection getTrackerDirection() {
-        return myTrackerDirection;
+    public PositionAnchor getPositionAnchor() {
+        return myPositionAnchor;
     }
 
-    public void setTrackerDirection(@NotNull TrackerDirection trackerDirection) {
-        myTrackerDirection = trackerDirection;
+    public void setPositionAnchor(@NotNull PositionAnchor positionAnchor) {
+        myPositionAnchor = positionAnchor;
     }
 
     public int getMarkerOffset() {
@@ -370,7 +370,7 @@ public class MarkdownParagraph {
                 } else {
                     int spcSize = (remSpaces > 0) ? 1 : 0;
                     int spcCount = addSpaces + 1 + spcSize;
-                    replaceSpaces(result, lastSpace.subSequence(charSequence), spcCount, myTrackerDirection, myMarkerOffset);
+                    replaceSpaces(result, lastSpace.subSequence(charSequence), spcCount, myPositionAnchor, myMarkerOffset);
                     remSpaces -= spcSize;
                 }
                 result.add(word.subSequence(charSequence));
@@ -403,7 +403,7 @@ public class MarkdownParagraph {
      * @param chars sequence of spaces
      * @param count number of desired spaces
      */
-    public void replaceSpaces(@NotNull BasedSequenceBuilder result, @NotNull BasedSequence chars, int count, @NotNull TrackerDirection trackerDirection, int markerIndex) {
+    public void replaceSpaces(@NotNull BasedSequenceBuilder result, @NotNull BasedSequence chars, int count, @NotNull PositionAnchor positionAnchor, int markerIndex) {
         assert count >= 0;
 
         if (chars.length() == 0) {
@@ -413,14 +413,14 @@ public class MarkdownParagraph {
 
         int spaces = 0;
         int iMax = chars.length();
-        TrackerDirection direction = null;
+        PositionAnchor direction = null;
         int markerPosition = -1;
 
         for (int i = 0; i < iMax; i++) {
             char c = chars.charAt(i);
             if (c == ' ') spaces++;
             else if (chars.getStartOffset() + i == markerIndex) {
-                direction = trackerDirection;
+                direction = positionAnchor;
                 markerPosition = i;
             } else {
                 throw new IllegalStateException("Not space or marker " + c);
@@ -451,11 +451,11 @@ public class MarkdownParagraph {
             if (spaces < count) {
                 int leftSpaces;
                 switch (direction) {
-                    case LEFT:
+                    case PREVIOUS:
                         //   if leaning left then keep marker on left pad between it and right part
                         leftSpaces = markerIndex + 1;
                         break;
-                    case RIGHT:
+                    case NEXT:
                         //   if leaning right then keep marker on right and pad between it and left part
                         leftSpaces = markerIndex;
                         break;
@@ -477,7 +477,7 @@ public class MarkdownParagraph {
                 int rightEnd;
                 int usedSpaces;
                 switch (direction) {
-                    case LEFT:
+                    case PREVIOUS:
                         //   if leaning left then keep marker on left, keeping as many leading spaces as possible before the marker
                         leftEnd = markerIndex + 1;
                         leftStart = Math.max(0, markerIndex - count);
@@ -486,7 +486,7 @@ public class MarkdownParagraph {
                         rightStart = Math.max(leftEnd, rightEnd - (count - usedSpaces));
                         break;
 
-                    case RIGHT:
+                    case NEXT:
                         //   if leaning right then keep marker on right and keep as many right spaces as possible after the marker
                         rightStart = markerIndex;
                         rightEnd = Math.min(chars.length(), markerIndex + 1 + count);
