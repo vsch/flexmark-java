@@ -200,7 +200,7 @@ public class SegmentBuilder {
 
             assert asRange != null || asString != null;
 
-            Range partRange = asRange != null ? Range.of(startOffset, startOffset + asRange.length()) : Range.of(startOffset, startOffset + asString.length());
+            Range partRange = asRange != null ? Range.ofLength(startOffset, asRange.length()) : Range.ofLength(startOffset, asString.length());
 
             Range intersect = partRange.intersect(remaining);
             if (intersect.isNotEmpty()) {
@@ -212,17 +212,19 @@ public class SegmentBuilder {
                     if (partRange.doesProperlyContain(remaining)) {
                         // middle chopped out leaving two pieces
                         if (asRange != null) {
-                            position.set(asRange.withEnd(asRange.getStart() + (partRange.getEnd() - remaining.getEnd())));
-                            position.add(1, asRange.withStart(asRange.getEnd() - (partRange.getEnd() - remaining.getEnd())));
+                            int delta = partRange.getEnd() - remaining.getEnd();
+                            position.set(asRange.withEnd(asRange.getStart() + delta));
+                            position.add(1, asRange.withStart(asRange.getEnd() - delta));
                         } else {
-                            position.set(asString.substring(0, intersect.getStart() - startOffset) + asString.substring(intersect.getEnd() - startOffset));
+                            Range removedString = intersect.shiftLeft(startOffset);
+                            position.set(asString.substring(0, removedString.getStart()) + asString.substring(removedString.getEnd()));
                         }
                         break;
                     } else {
                         if (partRange.getStart() == intersect.getStart()) {
                             // head part removed
                             if (asRange != null) {
-                                Range newRange = asRange.withStart(asRange.getStart() + intersect.getSpan());
+                                Range newRange = asRange.startPlus(intersect.getSpan());
                                 position.set(newRange);
                                 startOffset += newRange.length();
                             } else {
@@ -234,7 +236,7 @@ public class SegmentBuilder {
                             // tail part removed
                             assert partRange.getEnd() == intersect.getEnd();
                             if (asRange != null) {
-                                Range newRange = asRange.withEnd(asRange.getEnd() - intersect.getSpan());
+                                Range newRange = asRange.endMinus(intersect.getSpan());
                                 position.set(newRange);
                                 startOffset += newRange.length();
                             } else {
@@ -263,14 +265,6 @@ public class SegmentBuilder {
     private void updateEndOffset() {
         SegmentPosition position = getLastRangeIndex();
         myEndOffset = position.getRange().getEnd();
-    }
-
-    private void addPart(int index, Object part) {
-        if (index == myParts.size()) {
-            myParts.add(part);
-        } else {
-            myParts.add(index, part);
-        }
     }
 
     private void deleteParts(SegmentPosition position) {

@@ -11,22 +11,13 @@ public class Range {
         return new Range(start, end);
     }
 
+    @NotNull
+    public static Range ofLength(int start, int length) {
+        return new Range(start, start + length);
+    }
+
     private final int myStart;
     private final int myEnd;
-
-    public int getStart() { return myStart; }
-
-    public int getEnd() { return myEnd; }
-
-    // Kotlin compatibility getters
-    public int component1() { return myStart; }
-
-    public int component2() { return myEnd; }
-
-    // compatibility getters with JetBrains API TextRange
-    public int getStartOffset() { return myStart; }
-
-    public int getEndOffset() { return myEnd; }
 
     /**
      * Create range
@@ -47,6 +38,18 @@ public class Range {
         myEnd = other.myEnd;
     }
 
+    // @formatter:off
+    public int getStart() { return myStart; }
+    public int getEnd() { return myEnd; }
+
+    // Kotlin compatibility getters
+    public int component1() { return myStart; }
+    public int component2() { return myEnd; }
+    // compatibility getters with JetBrains API TextRange
+    public int getStartOffset() { return myStart; }
+    public int getEndOffset() { return myEnd; }
+    // @formatter:on
+
     // TEST:
     // @formatter:off
     public Range withStart(int start) { return start == myStart ? this : Range.of(start, myEnd);}
@@ -56,6 +59,8 @@ public class Range {
     public Range startMinus(int delta) { return delta == 0 ? this : Range.of(myStart - delta, myEnd);}
     public Range startPlus(int delta) { return delta == 0 ? this : Range.of(myStart + delta, myEnd);}
     public Range withRange(int start, int end) { return start == myStart && end == myEnd ? this : Range.of(start, end);}
+    public Range shiftLeft(int delta) { return delta == 0 ? this: Range.of(myStart - delta, myEnd - delta);}
+    public Range shiftRight(int delta) { return delta == 0 ? this: Range.of(myStart + delta, myEnd + delta);}
     // @formatter:on
 
     // TEST:
