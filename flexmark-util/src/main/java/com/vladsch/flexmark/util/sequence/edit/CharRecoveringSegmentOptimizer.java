@@ -5,10 +5,10 @@ import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
-public class CharMatchingSegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
+public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
     private final PositionAnchor direction;
 
-    public CharMatchingSegmentOptimizer(PositionAnchor direction) {
+    public CharRecoveringSegmentOptimizer(PositionAnchor direction) {
         this.direction = direction;
     }
 

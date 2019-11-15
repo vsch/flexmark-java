@@ -215,6 +215,7 @@ Next 0.59.50
     * [x] Add: add anchor for position to allow next/prev anchoring
     * [x] Add: positions are now have iterable from position to end/start of list, or from next
           to end/previous to start.
+    * [x] Fix: replace flags and position anchor field with byte flags.
 * [ ] Fix: remove skeleton code for offset tracking through base sequence manipulations. No
       longer needed. This will be done by analysis of original vs. resulting based sequence
       offsets.

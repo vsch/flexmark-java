@@ -45,6 +45,7 @@ public interface IPositionHolder<T, P extends IPositionHolder<T, P>> extends /*L
      * having the position updated when list is modified.
      */
     void detachListener();
+    boolean isDetached();
 
     /**
      * Position Anchor for this position

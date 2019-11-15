@@ -10,20 +10,22 @@ import java.util.function.Predicate;
 import static com.vladsch.flexmark.util.collection.iteration.PositionAnchor.*;
 
 public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
+    private static final int F_NONE = 0;
+    private static final int F_NEXT = 1;
+    private static final int F_PREVIOUS = 2;
+    private static final int F_VALID = 4;
+    private static final int F_DETACHED = 8;
+
     final private @NotNull IPositionUpdater<T, P> myParent;
     final private @NotNull List<T> myList;
-    final private @NotNull PositionAnchor myAnchor;
     private int myIndex;
-    private boolean myIsValid;
-    private boolean myIsDetached;
+    private byte myFlags;
 
     public IPositionBase(@NotNull IPositionUpdater<T, P> parent, int index, @NotNull PositionAnchor anchor) {
         myParent = parent;
-        myList = parent.getList();
+        myList = myParent.getList();
         myIndex = index;
-        myAnchor = anchor;
-        myIsValid = true;
-        myIsDetached = false;
+        myFlags = (byte) (F_VALID | (anchor == PREVIOUS ? F_PREVIOUS : anchor == NEXT ? F_NEXT : F_NONE));
     }
 
     /**
@@ -47,7 +49,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         int positionIndex = myIndex;
         assert positionIndex + count <= myList.size();
 
-        if (myAnchor == PREVIOUS) {
+        if ((myFlags & F_PREVIOUS) != 0) {
             if (index <= positionIndex) {
                 if (index == positionIndex - 1) {
                     // inserted at our position, move to start of inserted region
@@ -68,7 +70,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public void deleted(int index, int count) {
         int positionIndex = myIndex;
-        if (myAnchor == PREVIOUS) {
+        if ((myFlags & F_PREVIOUS) != 0) {
             if (index <= positionIndex) {
                 if (index + count <= positionIndex) {
                     // deleting before position index, still valid
@@ -89,11 +91,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
                     setIndex(positionIndex - count, true);
                 } else {
                     // deleted element, position on next element and invalidate
-                    if (myAnchor == NONE) {
-                        setIndex(index, false);
-                    } else {
-                        setIndex(index, true);
-                    }
+                    setIndex(index, (myFlags & F_NEXT) != 0);
                 }
             }
         }
@@ -101,35 +99,40 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
     private void setIndex(int i, boolean isValid) {
         // can only invalidate this position
-        if (myIsValid) myIsValid = isValid;
+        if (isValid() && !isValid) myFlags &= ~F_VALID;
         myIndex = i;
     }
 
     @Override
     public boolean isValid() {
-        return myIsValid || myAnchor == NEXT; // Next is always valid
+        return ((myFlags & (F_VALID | F_NEXT)) != 0); // Next is always valid
+    }
+
+    @Override
+    public boolean isDetached() {
+        return (myFlags & F_DETACHED) != 0;
     }
 
     @Override
     public void invalidate() {
-        myIsValid = false;
+        myFlags &= ~F_VALID;
     }
 
     @Override
     public void detachListener() {
-        myIsDetached = true;
+        myFlags |= F_DETACHED;
         myParent.removePositionListener(this);
     }
 
     @Override
     public @NotNull PositionAnchor getAnchor() {
-        return myAnchor;
+        return ((myFlags & F_NEXT) != 0) ? NEXT : ((myFlags & F_PREVIOUS) != 0) ? PREVIOUS : NONE;
     }
 
     @NotNull
     @Override
     public P withAnchor(@NotNull PositionAnchor anchor) {
-        if (myAnchor != anchor) {
+        if (getAnchor() != anchor) {
             return myParent.getPosition(myIndex, anchor);
         } else {
             //noinspection unchecked
@@ -144,7 +147,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
     @Override
     public int getIndex(int offset) {
-        if (myIsValid) {
+        if (isValid()) {
             return myIndex + offset;
         } else {
             // our index is already next, because position at 0 was invalidated
@@ -153,12 +156,12 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     }
 
     private void validateDetached() {
-        if (myIsDetached)
+        if (isDetached())
             throw new IllegalStateException("Position is detached from list");
     }
 
     private void validateOffset(int offset) {
-        if (!myIsValid && offset == 0)
+        if (!isValid() && offset == 0)
             throw new IllegalStateException("Position is not valid");
     }
 
@@ -197,7 +200,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     public P getPosition(int offset) {
         int index = getIndex(offset);
         validateWithIndex(index, offset);
-        return myParent.getPosition(index, myAnchor);
+        return myParent.getPosition(index, getAnchor());
     }
 
     @Override
@@ -205,13 +208,13 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         int index = getIndex(-1);
         validateIndex(index, -1);
 
-        return myParent.getPosition(index, myAnchor);
+        return myParent.getPosition(index, getAnchor());
     }
 
     @Override
     public P previousOrNull() {
         int index = getIndex(-1);
-        return (index < 0 || index > myList.size()) ? null : myParent.getPosition(index, myAnchor);
+        return (index < 0 || index > myList.size()) ? null : myParent.getPosition(index, getAnchor());
     }
 
     @Override
@@ -219,7 +222,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         int index = getIndex(1);
         validateIndex(index, 1);
 
-        return myParent.getPosition(index, myAnchor);
+        return myParent.getPosition(index, getAnchor());
     }
 
     @Override
@@ -245,7 +248,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         validateDetached();
 
         int index = getIndex(1);
-        return (index < 0 || index > myList.size()) ? null : myParent.getPosition(index, myAnchor);
+        return (index < 0 || index > myList.size()) ? null : myParent.getPosition(index, getAnchor());
     }
 
     @Override
@@ -291,7 +294,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     public boolean isValidPosition() {
         validateDetached();
 
-        return myIsValid && myIndex < myList.size();
+        return isValid() && myIndex < myList.size();
     }
 
     @Override
@@ -465,7 +468,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         validateWithIndex(index, offset);
 
         int itemIndex = myList.subList(index, myList.size()).indexOf(o);
-        return itemIndex == -1 ? myParent.getPosition(myList.size(), myAnchor) : myParent.getPosition(itemIndex + index, myAnchor);
+        return itemIndex == -1 ? myParent.getPosition(myList.size(), getAnchor()) : myParent.getPosition(itemIndex + index, getAnchor());
     }
 
     @Override
@@ -479,13 +482,15 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         validateWithIndex(index, offset);
 
         int iMax = myList.size();
+        PositionAnchor anchor = getAnchor();
+
         for (int i = index; i < iMax; i++) {
-            P pos = myParent.getPosition(i, myAnchor);
+            P pos = myParent.getPosition(i, anchor);
             if (predicate.test(pos)) {
                 return pos;
             }
         }
-        return myParent.getPosition(myList.size(), myAnchor);
+        return myParent.getPosition(myList.size(), anchor);
     }
 
     @Override
@@ -499,7 +504,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         validateWithIndex(index, offset);
 
         int itemIndex = myList.subList(0, index).lastIndexOf(o);
-        return itemIndex == -1 ? myParent.getPosition(myList.size(), myAnchor) : myParent.getPosition(itemIndex, myAnchor);
+        return itemIndex == -1 ? myParent.getPosition(myList.size(), getAnchor()) : myParent.getPosition(itemIndex, getAnchor());
     }
 
     @Override
@@ -514,13 +519,15 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
         //noinspection UnnecessaryLocalVariable
         int iMax = index;
+        PositionAnchor anchor = getAnchor();
+
         for (int i = iMax; i-- > 0; ) {
-            P pos = myParent.getPosition(i, myAnchor);
+            P pos = myParent.getPosition(i, anchor);
             if (predicate.test(pos)) {
                 return pos;
             }
         }
-        return myParent.getPosition(myList.size(), myAnchor);
+        return myParent.getPosition(myList.size(), anchor);
     }
 
     @Override
@@ -535,6 +542,6 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
     @Override
     public String toString() {
-        return "Position{anchor=" + myAnchor + ", index=" + myIndex + ", valid=" + myIsValid + '}';
+        return "Position{anchor=" + getAnchor() + ", index=" + myIndex + ", valid=" + isValid() + '}';
     }
 }
