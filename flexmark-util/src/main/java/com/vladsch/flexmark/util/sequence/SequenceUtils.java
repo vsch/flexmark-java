@@ -382,11 +382,11 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
-    static int countOfSpaceTab(@NotNull CharSequence thizz)                                                                     { return countOfAny(thizz, SequenceUtils.SPACE_TAB_SET, 0, thizz.length()); }
-    static int countOfNotSpaceTab(@NotNull CharSequence thizz)                                                                  { return countOfAny(thizz, SequenceUtils.SPACE_TAB_SET.negate(), 0, thizz.length()); }
+    static int countOfSpaceTab(@NotNull CharSequence thizz)                                                                     { return countOfAny(thizz, SPACE_TAB_SET, 0, thizz.length()); }
+    static int countOfNotSpaceTab(@NotNull CharSequence thizz)                                                                  { return countOfAny(thizz, SPACE_TAB_SET.negate(), 0, thizz.length()); }
 
-    static int countOfWhitespace(@NotNull CharSequence thizz)                                                                   { return countOfAny(thizz, SequenceUtils.WHITESPACE_SET, thizz.length()); }
-    static int countOfNotWhitespace(@NotNull CharSequence thizz)                                                                { return countOfAny(thizz, SequenceUtils.WHITESPACE_SET.negate(), 0, thizz.length()); }
+    static int countOfWhitespace(@NotNull CharSequence thizz)                                                                   { return countOfAny(thizz, WHITESPACE_SET, thizz.length()); }
+    static int countOfNotWhitespace(@NotNull CharSequence thizz)                                                                { return countOfAny(thizz, WHITESPACE_SET.negate(), 0, thizz.length()); }
 
     static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                             { return countOfAny(thizz, chars, fromIndex, thizz.length()); }
     static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                            { return countOfAny(thizz, chars, 0, thizz.length()); }
@@ -409,15 +409,15 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
-    static int countLeadingSpaceTab(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, SequenceUtils.SPACE_TAB_SET, 0, thizz.length()); }
-    static int countTrailingSpaceTab(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, SequenceUtils.SPACE_TAB_SET, 0, thizz.length()); }
-    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz)                                                         { return countLeading(thizz, SequenceUtils.SPACE_TAB_SET.negate(), 0, thizz.length()); }
-    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz)                                                        { return countTrailing(thizz, SequenceUtils.SPACE_TAB_SET.negate(), 0, thizz.length()); }
+    static int countLeadingSpaceTab(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, SPACE_TAB_SET, 0, thizz.length()); }
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, SPACE_TAB_SET, 0, thizz.length()); }
+    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz)                                                         { return countLeading(thizz, SPACE_TAB_SET.negate(), 0, thizz.length()); }
+    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz)                                                        { return countTrailing(thizz, SPACE_TAB_SET.negate(), 0, thizz.length()); }
 
-    static int countLeadingWhitespace(@NotNull CharSequence thizz)                                                          { return countLeading(thizz, SequenceUtils.WHITESPACE_SET, 0, thizz.length()); }
-    static int countTrailingWhitespace(@NotNull CharSequence thizz)                                                         { return countTrailing(thizz, SequenceUtils.WHITESPACE_SET, 0, thizz.length()); }
-    static int countLeadingNotWhitespace(@NotNull CharSequence thizz)                                                       { return countLeading(thizz, SequenceUtils.WHITESPACE_SET.negate(), 0, thizz.length()); }
-    static int countTrailingNotWhitespace(@NotNull CharSequence thizz)                                                      { return countTrailing(thizz, SequenceUtils.WHITESPACE_SET.negate(), 0, thizz.length()); }
+    static int countLeadingWhitespace(@NotNull CharSequence thizz)                                                          { return countLeading(thizz, WHITESPACE_SET, 0, thizz.length()); }
+    static int countTrailingWhitespace(@NotNull CharSequence thizz)                                                         { return countTrailing(thizz, WHITESPACE_SET, 0, thizz.length()); }
+    static int countLeadingNotWhitespace(@NotNull CharSequence thizz)                                                       { return countLeading(thizz, WHITESPACE_SET.negate(), 0, thizz.length()); }
+    static int countTrailingNotWhitespace(@NotNull CharSequence thizz)                                                      { return countTrailing(thizz, WHITESPACE_SET.negate(), 0, thizz.length()); }
 
     static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                      { return countLeading(thizz, chars, 0, thizz.length()); }
     static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                       { return countLeading(thizz, chars, fromIndex, thizz.length()); }
@@ -453,7 +453,7 @@ public interface SequenceUtils {
         if (tab != -1) {
             int delta = startColumn;
             do {
-                delta += tab + SequenceUtils.columnsToNextTabStop(tab + delta);
+                delta += tab + columnsToNextTabStop(tab + delta);
                 tab = indexOf(thizz, '\t', tab + 1);
             } while (tab >= 0 && tab < endIndex);
             columns += delta;
@@ -467,5 +467,43 @@ public interface SequenceUtils {
 
         int index = lastIndexOfAnyNot(thizz, chars, startIndex, fromIndex);
         return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
+    }
+
+    // @formatter:off
+    static Range trimStartRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)  { return trimStartRange(thizz, 0, chars);}
+    static Range trimEndRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)    { return trimEndRange(thizz, 0, chars);}
+    static Range trimRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)       { return trimRange(thizz, 0, chars);}
+    static Range trimStartRange(@NotNull CharSequence thizz, int keep)                      { return trimStartRange(thizz, keep, WHITESPACE_SET);}
+    static Range trimEndRange(@NotNull CharSequence thizz, int keep)                        { return trimEndRange(thizz, keep, WHITESPACE_SET);}
+    static Range trimRange(@NotNull CharSequence thizz, int keep)                           { return trimRange(thizz, keep, WHITESPACE_SET);}
+    static Range trimStartRange(@NotNull CharSequence thizz)                                { return trimStartRange(thizz, 0, WHITESPACE_SET);}
+    static Range trimEndRange(@NotNull CharSequence thizz)                                  { return trimEndRange(thizz, 0, WHITESPACE_SET);}
+    static Range trimRange(@NotNull CharSequence thizz)                                     { return trimRange(thizz, 0, WHITESPACE_SET);}
+    // @formatter:on
+
+    @NotNull
+    static Range trimStartRange(@NotNull CharSequence thizz, int keep, @NotNull CharPredicate chars) {
+        int trim = countLeading(thizz, chars, 0, thizz.length());
+        return trim > keep ? Range.of(trim - keep, thizz.length()) : Range.NULL;
+    }
+
+    @NotNull
+    static Range trimEndRange(@NotNull CharSequence thizz, int keep, @NotNull CharPredicate chars) {
+        int trim = countTrailing(thizz, chars, 0, thizz.length());
+        return trim > keep ? Range.of(0, thizz.length() - trim + keep) : Range.NULL;
+    }
+
+    @NotNull
+    static Range trimRange(@NotNull CharSequence thizz, int keep, @NotNull CharPredicate chars) {
+        if (keep >= thizz.length()) return Range.NULL;
+
+        int trimStart = countLeading(thizz, chars, 0, thizz.length());
+        if (trimStart > keep) {
+            int trimEnd = countTrailing(thizz, chars, trimStart - keep, thizz.length());
+            return trimEnd > keep ? Range.of(trimStart - keep, thizz.length() - trimEnd + keep) : Range.of(trimStart - keep, thizz.length());
+        } else {
+            int trimEnd = countTrailing(thizz, chars, trimStart, thizz.length());
+            return trimEnd > keep ? Range.of(0, thizz.length() - trimEnd + keep) : Range.NULL;
+        }
     }
 }

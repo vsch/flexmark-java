@@ -301,37 +301,10 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex)  { return SequenceUtils.countLeadingNot(this, chars, startIndex, endIndex); }
     @Override final public int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex) { return SequenceUtils.countTrailingNot(this, chars, startIndex, endIndex); }
     @Override final public int countLeading(@NotNull CharPredicate chars, int fromIndex, int endIndex)      { return SequenceUtils.countLeading(this, chars, fromIndex, endIndex);}
+
+    @Override final public int countLeadingColumns(int startColumn, @NotNull CharPredicate chars)           { return SequenceUtils.countLeadingColumns(this, startColumn, chars); }
+    @Override final public int countTrailing(@NotNull CharPredicate chars, int startIndex, int fromIndex)   { return SequenceUtils.countTrailing(this, chars, startIndex, fromIndex); }
     // @formatter:on
-
-    @Override
-    final public int countLeadingColumns(int startColumn, @NotNull CharPredicate chars) {
-        int fromIndex = 0;
-        int endIndex = length();
-        int index = indexOfAnyNot(chars, fromIndex, endIndex);
-
-        // expand tabs
-        int end = index == -1 ? endIndex : index;
-        int columns = index == -1 ? endIndex - fromIndex : index - fromIndex;
-        int tab = indexOf('\t', fromIndex, end);
-        if (tab != -1) {
-            int delta = startColumn;
-            do {
-                delta += tab + SequenceUtils.columnsToNextTabStop(tab + delta);
-                tab = indexOf('\t', tab + 1);
-            } while (tab >= 0 && tab < endIndex);
-            columns += delta;
-        }
-        return columns;
-    }
-
-    @Override
-    final public int countTrailing(@NotNull CharPredicate chars, int startIndex, int fromIndex) {
-        fromIndex = Math.min(fromIndex, length());
-        startIndex = rangeLimit(startIndex, 0, fromIndex);
-
-        int index = lastIndexOfAnyNot(chars, startIndex, fromIndex);
-        return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
-    }
 
     // @formatter:off
     @NotNull @Override final public T trimStart(@NotNull CharPredicate chars) {  return subSequence(trimStartRange(0, chars));}
@@ -358,46 +331,23 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public T trimmedEnd(int keep, @NotNull CharPredicate chars) { return subSequenceAfter(trimEndRange(keep, chars));}
     @NotNull @Override final public T trim(int keep, @NotNull CharPredicate chars) { return subSequence(trimRange(keep, chars));}
     @NotNull @Override final public Pair<T, T> trimmed(int keep, @NotNull CharPredicate chars) { return subSequenceBeforeAfter(trimRange(keep, chars));}
-
-    @NotNull @Override final public Range trimStartRange(@NotNull CharPredicate chars) { return trimStartRange(0, chars);}
-    @NotNull @Override final public Range trimEndRange(@NotNull CharPredicate chars) { return trimEndRange(0, chars);}
-    @NotNull @Override final public Range trimRange(@NotNull CharPredicate chars) { return trimRange(0, chars);}
-    @NotNull @Override final public Range trimStartRange(int keep) { return trimStartRange(keep, SequenceUtils.WHITESPACE_SET);}
-    @NotNull @Override final public Range trimEndRange(int keep) { return trimEndRange(keep, SequenceUtils.WHITESPACE_SET);}
-    @NotNull @Override final public Range trimRange(int keep) { return trimRange(keep, SequenceUtils.WHITESPACE_SET);}
-    @NotNull @Override final public Range trimStartRange() { return trimStartRange(0, SequenceUtils.WHITESPACE_SET);}
-    @NotNull @Override final public Range trimEndRange() { return trimEndRange(0, SequenceUtils.WHITESPACE_SET);}
-    @NotNull @Override final public Range trimRange() { return trimRange(0, SequenceUtils.WHITESPACE_SET);}
     // @formatter:on
 
-    @NotNull
-    @Override
-    final public Range trimStartRange(int keep, @NotNull CharPredicate chars) {
-        int trim = countLeading(chars, 0, length());
-        return trim > keep ? Range.of(trim - keep, length()) : Range.NULL;
-    }
+    // @formatter:off
+    @NotNull @Override final public Range trimStartRange(int keep, @NotNull CharPredicate chars)    { return SequenceUtils.trimStartRange(this, keep, chars); }
+    @NotNull @Override final public Range trimEndRange(int keep, @NotNull CharPredicate chars)      { return SequenceUtils.trimEndRange(this, keep, chars); }
+    @NotNull @Override final public Range trimRange(int keep, @NotNull CharPredicate chars)         { return SequenceUtils.trimRange(this, keep, chars); }
+    @NotNull @Override final public Range trimStartRange(@NotNull CharPredicate chars)              { return SequenceUtils.trimStartRange(this, chars); }
+    @NotNull @Override final public Range trimEndRange(@NotNull CharPredicate chars)                { return SequenceUtils.trimEndRange(this, chars); }
+    @NotNull @Override final public Range trimRange(@NotNull CharPredicate chars)                   { return SequenceUtils.trimRange(this, chars); }
+    @NotNull @Override final public Range trimStartRange(int keep)                                  { return SequenceUtils.trimStartRange(this, keep); }
+    @NotNull @Override final public Range trimEndRange(int keep)                                    { return SequenceUtils.trimEndRange(this, keep); }
+    @NotNull @Override final public Range trimRange(int keep)                                       { return SequenceUtils.trimRange(this, keep); }
+    @NotNull @Override final public Range trimStartRange()                                          { return SequenceUtils.trimStartRange(this); }
+    @NotNull @Override final public Range trimEndRange()                                            { return SequenceUtils.trimEndRange(this); }
+    @NotNull @Override final public Range trimRange()                                               { return SequenceUtils.trimRange(this); }
+    // @formatter:on
 
-    @NotNull
-    @Override
-    final public Range trimEndRange(int keep, @NotNull CharPredicate chars) {
-        int trim = countTrailing(chars, 0, length());
-        return trim > keep ? Range.of(0, length() - trim + keep) : Range.NULL;
-    }
-
-    @NotNull
-    @Override
-    final public Range trimRange(int keep, @NotNull CharPredicate chars) {
-        if (keep >= length()) return Range.NULL;
-
-        int trimStart = countLeading(chars, 0, length());
-        if (trimStart > keep) {
-            int trimEnd = countTrailing(chars, trimStart - keep, length());
-            return trimEnd > keep ? Range.of(trimStart - keep, length() - trimEnd + keep) : Range.of(trimStart - keep, length());
-        } else {
-            int trimEnd = countTrailing(chars, trimStart, length());
-            return trimEnd > keep ? Range.of(0, length() - trimEnd + keep) : Range.NULL;
-        }
-    }
 
     @NotNull
     @Override
