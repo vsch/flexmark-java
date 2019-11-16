@@ -534,4 +534,179 @@ public interface SequenceUtils {
     static String padEnd(@NotNull CharSequence thizz, int length) {
         return padEnd(thizz, length, ' ');
     }
+
+    @NotNull
+    static String toVisibleWhitespaceString(@NotNull CharSequence thizz) {
+        StringBuilder sb = new StringBuilder();
+        int iMax = thizz.length();
+        for (int i = 0; i < iMax; i++) {
+            char c = thizz.charAt(i);
+            String s = SequenceUtils.visibleSpacesMap.get(c);
+
+            if (s != null) {
+                sb.append(s);
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    // *****************************************************************
+    // EOL Helpers
+    // *****************************************************************
+
+    static char lastChar(@NotNull CharSequence thizz) {
+        return thizz.length() == 0 ? SequenceUtils.NUL : thizz.charAt(thizz.length() - 1);
+    }
+
+    static char firstChar(@NotNull CharSequence thizz) {
+        return thizz.length() == 0 ? SequenceUtils.NUL : thizz.charAt(0);
+    }
+
+    static char safeCharAt(@NotNull CharSequence thizz, int index) {
+        return index < 0 || index >= thizz.length() ? SequenceUtils.NUL : thizz.charAt(index);
+    }
+
+    static int eolEndLength(@NotNull CharSequence thizz) {
+        return eolEndLength(thizz, thizz.length());
+    }
+
+    static int eolEndLength(@NotNull CharSequence thizz, int eolEnd) {
+        int pos = Math.min(eolEnd - 1, thizz.length() - 1);
+        if (pos < 0) return 0;
+
+        int len = 0;
+        char c = thizz.charAt(pos);
+        if (c == '\r') {
+            if (safeCharAt(thizz, pos + 1) != '\n') {
+                len = 1;
+            }
+        } else if (c == '\n') {
+            if (safeCharAt(thizz, pos - 1) == '\r') {
+                len = 2;
+            } else {
+                len = 1;
+            }
+        }
+        return len;
+    }
+
+    static int eolStartLength(@NotNull CharSequence thizz, int eolStart) {
+        int length = thizz.length();
+        int pos = Math.min(eolStart, length);
+
+        int len = 0;
+
+        if (pos >= 0 && pos < length) {
+            char c = thizz.charAt(pos);
+            if (c == '\r') {
+                if (safeCharAt(thizz, pos + 1) == '\n') {
+                    len = 2;
+                } else {
+                    len = 1;
+                }
+            } else if (c == '\n') {
+                if (safeCharAt(thizz, pos - 1) != '\r') {
+                    len = 1;
+                }
+            }
+        }
+
+        return len;
+    }
+
+    // @formatter:off
+    static int endOfLine(@NotNull CharSequence thizz, int index)                                            { return endOfDelimitedBy(thizz, SequenceUtils.EOL, index); }
+    static int endOfLineAnyEOL(@NotNull CharSequence thizz, int index)                                      { return endOfDelimitedByAny(thizz, SequenceUtils.ANY_EOL_SET, index); }
+    static int startOfLine(@NotNull CharSequence thizz, int index)                                          { return startOfDelimitedBy(thizz, SequenceUtils.EOL, index); }
+    static int startOfLineAnyEOL(@NotNull CharSequence thizz, int index)                                    { return startOfDelimitedByAny(thizz, SequenceUtils.ANY_EOL_SET, index); }
+
+    static int startOfDelimitedByAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index)   { return startOfDelimitedByAny(thizz, s.negate(),index); }
+    static int endOfDelimitedByAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index)     { return endOfDelimitedByAny(thizz, s.negate(),index); }
+    // @formatter:on
+
+    static int startOfDelimitedBy(@NotNull CharSequence thizz, @NotNull CharSequence s, int index) {
+        index = rangeLimit(index, 0, thizz.length());
+        int offset = lastIndexOf(thizz, s, index - 1);
+        return offset == -1 ? 0 : offset + 1;
+    }
+
+    static int startOfDelimitedByAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index) {
+        index = rangeLimit(index, 0, thizz.length());
+        int offset = lastIndexOfAny(thizz, s, index - 1);
+        return offset == -1 ? 0 : offset + 1;
+    }
+
+    static int endOfDelimitedBy(@NotNull CharSequence thizz, @NotNull CharSequence s, int index) {
+        int length = thizz.length();
+        index = rangeLimit(index, 0, length);
+        int offset = indexOf(thizz, s, index);
+        return offset == -1 ? length : offset;
+    }
+
+    static int endOfDelimitedByAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index) {
+        int length = thizz.length();
+        index = rangeLimit(index, 0, length);
+        int offset = indexOfAny(thizz, s, index);
+        return offset == -1 ? length : offset;
+    }
+
+    @NotNull
+    static Range lineRangeAt(@NotNull CharSequence thizz, int index) {
+        return Range.of(startOfLine(thizz, index), endOfLine(thizz, index));
+    }
+
+    @NotNull
+    static Range lineRangeAtAnyEOL(@NotNull CharSequence thizz, int index) {
+        return Range.of(startOfLineAnyEOL(thizz, index), endOfLineAnyEOL(thizz, index));
+    }
+
+//    @NotNull
+//    static <T extends CharSequence> List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
+//        if (trimChars == null) trimChars = WHITESPACE_SET;
+//        else flags |= SPLIT_TRIM_PARTS;
+//
+//        if (limit < 1) limit = Integer.MAX_VALUE;
+//
+//        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
+//        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
+//        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
+//        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
+//        ArrayList<T> items = new ArrayList<>();
+//
+//        int lastPos = 0;
+//        int length = thizz.length();
+//        if (limit > 1) {
+//            while (lastPos < length) {
+//                int pos = indexOf(thizz, delimiter, lastPos);
+//                if (pos < 0) break;
+//
+//                if (lastPos < pos || !skipEmpty) {
+//                    T item = thizz.subSequence(lastPos, pos + includeDelimiter);
+//                    if (trimParts) item = trim(item, trimChars);
+//                    if (!item.isEmpty() || !skipEmpty) {
+//                        items.add(item);
+//                        if (includeDelimiterParts) {
+//                            items.add(thizz.subSequence(pos, pos + delimiter.length()));
+//                        }
+//                        if (items.size() >= limit - 1) {
+//                            lastPos = pos + 1;
+//                            break;
+//                        }
+//                    }
+//                }
+//                lastPos = pos + 1;
+//            }
+//        }
+//
+//        if (lastPos < length) {
+//            T item = thizz.subSequence(lastPos, length);
+//            if (trimParts) item = item.trim(trimChars);
+//            if (!item.isEmpty() || !skipEmpty) {
+//                items.add(item);
+//            }
+//        }
+//        return items;
+//    }
 }

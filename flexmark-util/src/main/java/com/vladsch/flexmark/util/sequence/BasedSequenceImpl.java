@@ -339,16 +339,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         else return this.baseSubSequence(other.getEndOffset(), getEndOffset());
     }
 
-    @Override
-    public @NotNull Range lineRangeAt(int index) {
-        return super.lineRangeAt(index);
-    }
-
-    @Override
-    public @NotNull Range lineRangeAtAnyEOL(int index) {
-        return super.lineRangeAtAnyEOL(index);
-    }
-
     // @formatter:off
     // TEST: all these need tests
     @Override public @NotNull Range baseLineRangeAtIndex(int index) { return getBaseSequence().lineRangeAt(index); }

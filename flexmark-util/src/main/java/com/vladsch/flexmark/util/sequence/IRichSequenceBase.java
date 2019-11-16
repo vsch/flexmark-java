@@ -348,7 +348,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public Range trimRange()                                               { return SequenceUtils.trimRange(this); }
     // @formatter:on
 
-
     @NotNull
     @Override
     final public T padStart(int length, char pad) {
@@ -377,112 +376,29 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     // EOL Helpers
     // *****************************************************************
 
-    @Override
-    final public int eolEndLength() {
-        return eolEndLength(length());
-    }
-
-    @Override
-    final public int eolEndLength(int eolEnd) {
-        int pos = Math.min(eolEnd - 1, length() - 1);
-        if (pos < 0) return 0;
-
-        int len = 0;
-        char c = charAt(pos);
-        if (c == '\r') {
-            if (safeCharAt(pos + 1) != '\n') {
-                len = 1;
-            }
-        } else if (c == '\n') {
-            if (safeCharAt(pos - 1) == '\r') {
-                len = 2;
-            } else {
-                len = 1;
-            }
-        }
-        return len;
-    }
-
-    @Override
-    final public int eolStartLength(int eolStart) {
-        int length = length();
-        int pos = Math.min(eolStart, length);
-
-        int len = 0;
-
-        if (pos >= 0 && pos < length) {
-            char c = charAt(pos);
-            if (c == '\r') {
-                if (safeCharAt(pos + 1) == '\n') {
-                    len = 2;
-                } else {
-                    len = 1;
-                }
-            } else if (c == '\n') {
-                if (safeCharAt(pos - 1) != '\r') {
-                    len = 1;
-                }
-            }
-        }
-
-        return len;
-    }
-
     // @formatter:off
-    @Override final public int endOfLine(int index) {return endOfDelimitedBy(SequenceUtils.EOL, index);}
-    @Override final public int endOfLineAnyEOL(int index) {return endOfDelimitedByAny(SequenceUtils.ANY_EOL_SET, index);}
-    @Override final public int startOfLine(int index) {return startOfDelimitedBy(SequenceUtils.EOL, index);}
-    @Override final public int startOfLineAnyEOL(int index) {return startOfDelimitedByAny(SequenceUtils.ANY_EOL_SET, index);}
+    @Override final public int eolEndLength()                                                           { return SequenceUtils.eolEndLength(this); }
+    @Override final public int eolEndLength(int eolEnd)                                                 { return SequenceUtils.eolEndLength(this, eolEnd); }
+    @Override final public int eolStartLength(int eolStart)                                             { return SequenceUtils.eolStartLength(this, eolStart); }
 
-    @Override final public int startOfDelimitedByAnyNot(@NotNull CharPredicate s, int index) { return startOfDelimitedByAny(s.negate(),index);}
-    @Override final public int endOfDelimitedByAnyNot(@NotNull CharPredicate s, int index) { return endOfDelimitedByAny(s.negate(),index);}
-    // @formatter:on
+    @Override final public int endOfLine(int index)                                                     { return SequenceUtils.endOfLine(this, index); }
+    @Override final public int endOfLineAnyEOL(int index)                                               { return SequenceUtils.endOfLineAnyEOL(this, index); }
+    @Override final public int startOfLine(int index)                                                   { return SequenceUtils.startOfLine(this, index); }
+    @Override final public int startOfLineAnyEOL(int index)                                             { return SequenceUtils.startOfLineAnyEOL(this, index); }
 
-    @Override
-    final public int startOfDelimitedBy(@NotNull CharSequence s, int index) {
-        index = rangeLimit(index, 0, length());
-        int offset = lastIndexOf(s, index - 1);
-        return offset == -1 ? 0 : offset + 1;
-    }
+    @Override final public int startOfDelimitedByAnyNot(@NotNull CharPredicate s, int index)            { return startOfDelimitedByAny(s.negate(),index); }
+    @Override final public int endOfDelimitedByAnyNot(@NotNull CharPredicate s, int index)              { return endOfDelimitedByAny(s.negate(),index); }
 
-    @Override
-    final public int startOfDelimitedByAny(@NotNull CharPredicate s, int index) {
-        index = rangeLimit(index, 0, length());
-        int offset = lastIndexOfAny(s, index - 1);
-        return offset == -1 ? 0 : offset + 1;
-    }
+    @Override final public int startOfDelimitedBy(@NotNull CharSequence s, int index)                   { return SequenceUtils.startOfDelimitedBy(this, s, index); }
+    @Override final public int startOfDelimitedByAny(@NotNull CharPredicate s, int index)               { return SequenceUtils.startOfDelimitedByAny(this, s, index); }
+    @Override final public int endOfDelimitedBy(@NotNull CharSequence s, int index)                     { return SequenceUtils.endOfDelimitedBy(this, s, index); }
+    @Override final public int endOfDelimitedByAny(@NotNull CharPredicate s, int index)                 { return SequenceUtils.endOfDelimitedByAny(this, s, index); }
 
-    @Override
-    final public int endOfDelimitedBy(@NotNull CharSequence s, int index) {
-        int length = length();
-        index = rangeLimit(index, 0, length);
-        int offset = indexOf(s, index);
-        return offset == -1 ? length : offset;
-    }
+    @Override @NotNull final public Range lineRangeAt(int index)                                        { return SequenceUtils.lineRangeAt(this, index); }
+    @Override @NotNull final public Range lineRangeAtAnyEOL(int index)                                  { return SequenceUtils.lineRangeAtAnyEOL(this, index); }
 
-    @Override
-    final public int endOfDelimitedByAny(@NotNull CharPredicate s, int index) {
-        int length = length();
-        index = rangeLimit(index, 0, length);
-        int offset = indexOfAny(s, index);
-        return offset == -1 ? length : offset;
-    }
-
-    @NotNull
-    @Override
-    public Range lineRangeAt(int index) {
-        return Range.of(startOfLine(index), endOfLine(index));
-    }
-
-    @NotNull
-    @Override
-    public Range lineRangeAtAnyEOL(int index) {
-        return Range.of(startOfLineAnyEOL(index), endOfLineAnyEOL(index));
-    }
-
-    // @formatter:off
-    @NotNull @Override final public T lineAt(int index) {return subSequence(lineRangeAt(index));}
-    @NotNull @Override final public T lineAtAnyEOL(int index) {return subSequence(lineRangeAtAnyEOL(index));}
+    @NotNull @Override final public T lineAt(int index)                                                 { return subSequence(lineRangeAt(index)); }
+    @NotNull @Override final public T lineAtAnyEOL(int index)                                           { return subSequence(lineRangeAtAnyEOL(index)); }
     // @formatter:on
 
     @NotNull
@@ -814,35 +730,11 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return sb.toString();
     }
 
-    @NotNull
-    @Override
-    final public String normalizeEOL() {
-        return Escaping.normalizeEOL(toString());
-    }
-
-    @NotNull
-    @Override
-    final public String normalizeEndWithEOL() {
-        return Escaping.normalizeEndWithEOL(toString());
-    }
-
-    @NotNull
-    @Override
-    final public String toVisibleWhitespaceString() {
-        StringBuilder sb = new StringBuilder();
-        int iMax = length();
-        for (int i = 0; i < iMax; i++) {
-            char c = charAt(i);
-            String s = SequenceUtils.visibleSpacesMap.get(c);
-
-            if (s != null) {
-                sb.append(s);
-            } else {
-                sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
+    // @formatter:off
+    @NotNull @Override final public String normalizeEOL() { return Escaping.normalizeEOL(toString());}
+    @NotNull @Override final public String normalizeEndWithEOL() { return Escaping.normalizeEndWithEOL(toString());}
+    @NotNull @Override final public String toVisibleWhitespaceString() { return SequenceUtils.toVisibleWhitespaceString(this);}
+    // @formatter:on
 
     // @formatter:off
     @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter)                                                                          { return splitList(delimiter, 0, 0, null); }
@@ -871,15 +763,15 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
-        if (trimChars == null) trimChars = SequenceUtils.WHITESPACE_SET;
-        else flags |= SequenceUtils.SPLIT_TRIM_PARTS;
+        if (trimChars == null) trimChars = WHITESPACE_SET;
+        else flags |= SPLIT_TRIM_PARTS;
 
         if (limit < 1) limit = Integer.MAX_VALUE;
 
-        boolean includeDelimiterParts = (flags & SequenceUtils.SPLIT_INCLUDE_DELIM_PARTS) != 0;
-        int includeDelimiter = !includeDelimiterParts && (flags & SequenceUtils.SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
-        boolean trimParts = (flags & SequenceUtils.SPLIT_TRIM_PARTS) != 0;
-        boolean skipEmpty = (flags & SequenceUtils.SPLIT_SKIP_EMPTY) != 0;
+        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
+        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
+        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
+        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
         ArrayList<T> items = new ArrayList<>();
 
         int lastPos = 0;
