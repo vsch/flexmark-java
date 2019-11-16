@@ -245,7 +245,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int indexOfNot(char c)                                                           { return SequenceUtils.indexOfNot(this, c); }
     @Override final public int indexOfNot(char c, int fromIndex)                                            { return SequenceUtils.indexOfNot(this, c, fromIndex); }
     @Override final public int lastIndexOf(char c)                                                          { return SequenceUtils.lastIndexOf(this, c); }
-    @Override final public int lastIndexOf(char c, int fromIndex)                                { return SequenceUtils.lastIndexOf(this, c, fromIndex); }
+    @Override final public int lastIndexOf(char c, int fromIndex)                                           { return SequenceUtils.lastIndexOf(this, c, fromIndex); }
     @Override final public int lastIndexOfNot(char c)                                                       { return SequenceUtils.lastIndexOfNot(this, c); }
     @Override final public int lastIndexOfNot(char c, int fromIndex)                                        { return SequenceUtils.lastIndexOfNot(this, c, fromIndex); }
     @Override final public int lastIndexOf(@NotNull CharSequence s)                                         { return SequenceUtils.lastIndexOf(this, s); }
@@ -264,7 +264,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int lastIndexOfAny(@NotNull CharPredicate s, int startIndex, int fromIndex)      { return SequenceUtils.lastIndexOfAny(this, s, startIndex, fromIndex); }
     // @formatter:on
 
-
     // @formatter:off
     @Override final public int countOfSpaceTab()                                                            { return SequenceUtils.countOfSpaceTab(this); }
     @Override final public int countOfNotSpaceTab()                                                         { return SequenceUtils.countOfNotSpaceTab(this); }
@@ -278,40 +277,31 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int countOfAnyNot(@NotNull CharPredicate chars, int startIndex, int endIndex)    { return SequenceUtils.countOfAnyNot(this, chars, startIndex, endIndex); }
     // @formatter:on
 
-
     // @formatter:off
-    @Override final public int countLeadingSpaceTab()                                                       { return this.countLeading(SequenceUtils.SPACE_TAB_SET, 0, length()); }
-    @Override final public int countTrailingSpaceTab()                                                      { return this.countTrailing(SequenceUtils.SPACE_TAB_SET, 0, length()); }
-    @Override final public int countLeadingNotSpaceTab()                                                    { return this.countLeading(SequenceUtils.SPACE_TAB_SET.negate(), 0, length()); }
-    @Override final public int countTrailingNotSpaceTab()                                                   { return this.countTrailing(SequenceUtils.SPACE_TAB_SET.negate(), 0, length()); }
+    @Override final public int countLeadingSpaceTab()                                                       { return SequenceUtils.countLeadingSpaceTab(this); }
+    @Override final public int countTrailingSpaceTab()                                                      { return SequenceUtils.countTrailingSpaceTab(this); }
+    @Override final public int countLeadingNotSpaceTab()                                                    { return SequenceUtils.countLeadingNotSpaceTab(this); }
+    @Override final public int countTrailingNotSpaceTab()                                                   { return SequenceUtils.countTrailingNotSpaceTab(this); }
 
-    @Override final public int countLeadingWhitespace()                                                     { return this.countLeading(SequenceUtils.WHITESPACE_SET, 0, length()); }
-    @Override final public int countTrailingWhitespace()                                                    { return this.countTrailing(SequenceUtils.WHITESPACE_SET, 0, length()); }
-    @Override final public int countLeadingNotWhitespace()                                                  { return this.countLeading(SequenceUtils.WHITESPACE_SET.negate(), 0, length()); }
-    @Override final public int countTrailingNotWhitespace()                                                 { return this.countTrailing(SequenceUtils.WHITESPACE_SET.negate(), 0, length()); }
+    @Override final public int countLeadingWhitespace()                                                     { return SequenceUtils.countLeadingWhitespace(this); }
+    @Override final public int countTrailingWhitespace()                                                    { return SequenceUtils.countTrailingWhitespace(this); }
+    @Override final public int countLeadingNotWhitespace()                                                  { return SequenceUtils.countLeadingNotWhitespace(this); }
+    @Override final public int countTrailingNotWhitespace()                                                 { return SequenceUtils.countTrailingNotWhitespace(this); }
 
-    @Override final public int countLeading(@NotNull CharPredicate chars)                                   { return countLeading(chars, 0, length()); }
-    @Override final public int countLeading(@NotNull CharPredicate chars, int fromIndex)                    { return countLeading(chars, fromIndex, length()); }
-    @Override final public int countLeadingNot(@NotNull CharPredicate chars)                                { return countLeading(chars.negate(), 0, length()); }
-    @Override final public int countLeadingNot(@NotNull CharPredicate chars, int fromIndex)                 { return countLeading(chars.negate(), fromIndex, length()); }
+    @Override final public int countLeading(@NotNull CharPredicate chars)                                   { return SequenceUtils.countLeading(this, chars); }
+    @Override final public int countLeading(@NotNull CharPredicate chars, int fromIndex)                    { return SequenceUtils.countLeading(this, chars, fromIndex); }
+    @Override final public int countLeadingNot(@NotNull CharPredicate chars)                                { return SequenceUtils.countLeadingNot(this, chars); }
+    @Override final public int countLeadingNot(@NotNull CharPredicate chars, int fromIndex)                 { return SequenceUtils.countLeadingNot(this, chars, fromIndex); }
 
-    @Override final public int countTrailing(@NotNull CharPredicate chars)                                  { return countTrailing(chars, 0, length()); }
-    @Override final public int countTrailing(@NotNull CharPredicate chars, int fromIndex)                   { return countTrailing(chars, 0, fromIndex); }
-    @Override final public int countTrailingNot(@NotNull CharPredicate chars)                               { return countTrailing(chars.negate(), 0, length()); }
-    @Override final public int countTrailingNot(@NotNull CharPredicate chars, int fromIndex)                { return countTrailing(chars.negate(), 0, fromIndex); }
+    @Override final public int countTrailing(@NotNull CharPredicate chars)                                  { return SequenceUtils.countTrailing(this, chars); }
+    @Override final public int countTrailing(@NotNull CharPredicate chars, int fromIndex)                   { return SequenceUtils.countTrailing(this, chars, fromIndex); }
+    @Override final public int countTrailingNot(@NotNull CharPredicate chars)                               { return SequenceUtils.countTrailingNot(this, chars); }
+    @Override final public int countTrailingNot(@NotNull CharPredicate chars, int fromIndex)                { return SequenceUtils.countTrailingNot(this, chars, fromIndex); }
 
-    @Override final public int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex)  { return countLeading(chars.negate(), startIndex, endIndex); }
-    @Override final public int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex) { return countTrailing(chars.negate(), startIndex, endIndex); }
+    @Override final public int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex)  { return SequenceUtils.countLeadingNot(this, chars, startIndex, endIndex); }
+    @Override final public int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex) { return SequenceUtils.countTrailingNot(this, chars, startIndex, endIndex); }
+    @Override final public int countLeading(@NotNull CharPredicate chars, int fromIndex, int endIndex)      { return SequenceUtils.countLeading(this, chars, fromIndex, endIndex);}
     // @formatter:on
-
-    @Override
-    final public int countLeading(@NotNull CharPredicate chars, int fromIndex, int endIndex) {
-        endIndex = Math.min(endIndex, length());
-        fromIndex = rangeLimit(fromIndex, 0, endIndex);
-
-        int index = indexOfAnyNot(chars, fromIndex, endIndex);
-        return index == -1 ? endIndex - fromIndex : index - fromIndex;
-    }
 
     @Override
     final public int countLeadingColumns(int startColumn, @NotNull CharPredicate chars) {

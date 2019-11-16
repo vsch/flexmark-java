@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.vladsch.flexmark.util.Utils.rangeLimit;
+
 public interface SequenceUtils {
     String EOL = "\n";
     String SPACE = " ";
@@ -394,7 +396,7 @@ public interface SequenceUtils {
     static int countOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                         { return countOfAny(thizz, chars.negate(), 0, thizz.length()); }
     // @formatter:on
 
-    static int countOfAny(CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
+    static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, thizz.length());
 
@@ -404,5 +406,66 @@ public interface SequenceUtils {
             if (s.test(c)) count++;
         }
         return count;
+    }
+
+    // @formatter:off
+    static int countLeadingSpaceTab(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, SequenceUtils.SPACE_TAB_SET, 0, thizz.length()); }
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, SequenceUtils.SPACE_TAB_SET, 0, thizz.length()); }
+    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz)                                                         { return countLeading(thizz, SequenceUtils.SPACE_TAB_SET.negate(), 0, thizz.length()); }
+    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz)                                                        { return countTrailing(thizz, SequenceUtils.SPACE_TAB_SET.negate(), 0, thizz.length()); }
+
+    static int countLeadingWhitespace(@NotNull CharSequence thizz)                                                          { return countLeading(thizz, SequenceUtils.WHITESPACE_SET, 0, thizz.length()); }
+    static int countTrailingWhitespace(@NotNull CharSequence thizz)                                                         { return countTrailing(thizz, SequenceUtils.WHITESPACE_SET, 0, thizz.length()); }
+    static int countLeadingNotWhitespace(@NotNull CharSequence thizz)                                                       { return countLeading(thizz, SequenceUtils.WHITESPACE_SET.negate(), 0, thizz.length()); }
+    static int countTrailingNotWhitespace(@NotNull CharSequence thizz)                                                      { return countTrailing(thizz, SequenceUtils.WHITESPACE_SET.negate(), 0, thizz.length()); }
+
+    static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                      { return countLeading(thizz, chars, 0, thizz.length()); }
+    static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                       { return countLeading(thizz, chars, fromIndex, thizz.length()); }
+    static int countLeadingNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                   { return countLeading(thizz, chars.negate(), 0, thizz.length()); }
+    static int countLeadingNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                    { return countLeading(thizz, chars.negate(), fromIndex, thizz.length()); }
+
+    static int countTrailing(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                     { return countTrailing(thizz, chars, 0, thizz.length()); }
+    static int countTrailing(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                      { return countTrailing(thizz, chars, 0, fromIndex); }
+    static int countTrailingNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                  { return countTrailing(thizz, chars.negate(), 0, thizz.length()); }
+    static int countTrailingNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                   { return countTrailing(thizz, chars.negate(), 0, fromIndex); }
+
+    static int countLeadingNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int startIndex, int endIndex)     { return countLeading(thizz, chars.negate(), startIndex, endIndex); }
+    static int countTrailingNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int startIndex, int endIndex)    { return countTrailing(thizz, chars.negate(), startIndex, endIndex); }
+    // @formatter:on
+
+    static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex, int endIndex) {
+        endIndex = Math.min(endIndex, thizz.length());
+        fromIndex = rangeLimit(fromIndex, 0, endIndex);
+
+        int index = indexOfAnyNot(thizz, chars, fromIndex, endIndex);
+        return index == -1 ? endIndex - fromIndex : index - fromIndex;
+    }
+
+    static int countLeadingColumns(@NotNull CharSequence thizz, int startColumn, @NotNull CharPredicate chars) {
+        int fromIndex = 0;
+        int endIndex = thizz.length();
+        int index = indexOfAnyNot(thizz, chars, fromIndex, endIndex);
+
+        // expand tabs
+        int end = index == -1 ? endIndex : index;
+        int columns = index == -1 ? endIndex - fromIndex : index - fromIndex;
+        int tab = indexOf(thizz, '\t', fromIndex, end);
+        if (tab != -1) {
+            int delta = startColumn;
+            do {
+                delta += tab + SequenceUtils.columnsToNextTabStop(tab + delta);
+                tab = indexOf(thizz, '\t', tab + 1);
+            } while (tab >= 0 && tab < endIndex);
+            columns += delta;
+        }
+        return columns;
+    }
+
+    static int countTrailing(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int startIndex, int fromIndex) {
+        fromIndex = Math.min(fromIndex, thizz.length());
+        startIndex = rangeLimit(startIndex, 0, fromIndex);
+
+        int index = lastIndexOfAnyNot(thizz, chars, startIndex, fromIndex);
+        return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
     }
 }
