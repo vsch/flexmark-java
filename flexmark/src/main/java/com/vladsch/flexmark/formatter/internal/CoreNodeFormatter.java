@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,8 +31,6 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.*;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
-import static com.vladsch.flexmark.util.sequence.IRichSequence.NUL;
-import static com.vladsch.flexmark.util.sequence.IRichSequence.SPACE_TAB_SET;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
@@ -417,7 +416,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         CharSequence openingMarker = node.getOpeningMarker();
         CharSequence closingMarker = node.getClosingMarker();
         char openingMarkerChar = openingMarker.charAt(0);
-        char closingMarkerChar = closingMarker.length() > 0 ? closingMarker.charAt(0) : NUL;
+        char closingMarkerChar = closingMarker.length() > 0 ? closingMarker.charAt(0) : SequenceUtils.NUL;
         int openingMarkerLen = openingMarker.length();
         int closingMarkerLen = closingMarker.length();
 
@@ -438,7 +437,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (closingMarkerLen < formatterOptions.fencedCodeMarkerLength) closingMarkerLen = formatterOptions.fencedCodeMarkerLength;
 
         openingMarker = RepeatedSequence.repeatOf(String.valueOf(openingMarkerChar), openingMarkerLen);
-        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == NUL) { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.repeatOf(String.valueOf(closingMarkerChar), closingMarkerLen);
+        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == SequenceUtils.NUL) { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.repeatOf(String.valueOf(closingMarkerChar), closingMarkerLen);
 
         markdown.append(openingMarker);
         if (formatterOptions.fencedCodeSpaceBeforeInfo) markdown.append(' ');
@@ -455,7 +454,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 int minSpaces = Integer.MAX_VALUE;
                 int i = 0;
                 for (BasedSequence line : lines) {
-                    leadColumns[i] = line.countLeadingColumns(0, SPACE_TAB_SET);
+                    leadColumns[i] = line.countLeadingColumns(0, SequenceUtils.SPACE_TAB_SET);
                     minSpaces = Utils.min(minSpaces, leadColumns[i]);
                     i++;
                 }
@@ -521,7 +520,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 int minSpaces = Integer.MAX_VALUE;
                 int i = 0;
                 for (BasedSequence line : lines) {
-                    leadColumns[i] = line.countLeadingColumns(0, SPACE_TAB_SET);
+                    leadColumns[i] = line.countLeadingColumns(0, SequenceUtils.SPACE_TAB_SET);
                     minSpaces = Utils.min(minSpaces, leadColumns[i]);
                     i++;
                 }

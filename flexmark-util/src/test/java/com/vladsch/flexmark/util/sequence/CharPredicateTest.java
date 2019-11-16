@@ -332,7 +332,7 @@ public class CharPredicateTest {
     @Test
     public void testMisc() {
         assertTrue(allIn(" \t\r\n\u00A0", WHITESPACE_NBSP));
-        assertTrue(allIn(IRichSequence.WHITESPACE_NBSP, WHITESPACE_NBSP));
-        assertTrue(allIn(IRichSequence.WHITESPACE, WHITESPACE_NBSP));
+        assertTrue(allIn(SequenceUtils.WHITESPACE_NBSP, WHITESPACE_NBSP));
+        assertTrue(allIn(SequenceUtils.WHITESPACE, WHITESPACE_NBSP));
     }
 }

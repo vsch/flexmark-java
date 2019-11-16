@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.mappers;
 
-import com.vladsch.flexmark.util.sequence.IRichSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 
 public class SpaceMapper {
     public static final CharMapper toNonBreakSpace = new ToNonBreakSpace();
@@ -11,7 +11,7 @@ public class SpaceMapper {
 
         @Override
         public char map(char c) {
-            return c == IRichSequence.NBSP ? IRichSequence.SPC : c;
+            return c == SequenceUtils.NBSP ? SequenceUtils.SPC : c;
         }
     }
 
@@ -20,7 +20,7 @@ public class SpaceMapper {
 
         @Override
         public char map(char c) {
-            return c == IRichSequence.SPC ? IRichSequence.NBSP : c;
+            return c == SequenceUtils.SPC ? SequenceUtils.NBSP : c;
         }
     }
 }

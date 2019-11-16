@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.IRichSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 
 public class AttributeImpl implements Attribute {
     private final String myName;
@@ -50,7 +50,7 @@ public class AttributeImpl implements Attribute {
     public static int indexOfValue(CharSequence value, CharSequence valueName, char valueListDelimiter, char valueNameDelimiter) {
         if (valueName.length() == 0 || value.length() == 0) return -1;
 
-        if (valueListDelimiter == IRichSequence.NUL) {
+        if (valueListDelimiter == SequenceUtils.NUL) {
             return value.equals(valueName) ? 0 : -1;
         } else {
             int lastPos = 0;
@@ -62,10 +62,10 @@ public class AttributeImpl implements Attribute {
                 int endPos = pos + valueName.length();
                 if (pos == 0
                         || value.charAt(pos - 1) == valueListDelimiter
-                        || valueNameDelimiter != IRichSequence.NUL && value.charAt(pos - 1) == valueNameDelimiter) {
+                        || valueNameDelimiter != SequenceUtils.NUL && value.charAt(pos - 1) == valueNameDelimiter) {
                     if (endPos >= value.length()
                             || value.charAt(endPos) == valueListDelimiter
-                            || valueNameDelimiter != IRichSequence.NUL && value.charAt(endPos) == valueNameDelimiter) {
+                            || valueNameDelimiter != SequenceUtils.NUL && value.charAt(endPos) == valueNameDelimiter) {
                         return pos;
                     }
                 }
@@ -129,20 +129,20 @@ public class AttributeImpl implements Attribute {
     }
 
     public static AttributeImpl of(CharSequence attrName) {
-        return of(attrName, attrName, IRichSequence.NUL, IRichSequence.NUL);
+        return of(attrName, attrName, SequenceUtils.NUL, SequenceUtils.NUL);
     }
 
     public static AttributeImpl of(CharSequence attrName, CharSequence value) {
-        return of(attrName, value, IRichSequence.NUL, IRichSequence.NUL);
+        return of(attrName, value, SequenceUtils.NUL, SequenceUtils.NUL);
     }
 
     public static AttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter) {
-        return of(attrName, value, valueListDelimiter, IRichSequence.NUL);
+        return of(attrName, value, valueListDelimiter, SequenceUtils.NUL);
     }
 
     public static AttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
         if (attrName.equals(CLASS_ATTR)) {
-            return new AttributeImpl(attrName, value, ' ', IRichSequence.NUL);
+            return new AttributeImpl(attrName, value, ' ', SequenceUtils.NUL);
         } else if (attrName.equals(STYLE_ATTR)) {
             return new AttributeImpl(attrName, value, ';', ':');
         }

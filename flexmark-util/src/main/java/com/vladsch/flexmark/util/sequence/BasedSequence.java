@@ -23,12 +23,12 @@ import java.util.List;
 public interface BasedSequence extends IRichSequence<BasedSequence> {
     BasedSequence NULL = new EmptyBasedSequence();
     BasedSequence EMPTY = new EmptyBasedSequence();
-    BasedSequence EOL = CharSubSequence.of(IRichSequence.EOL);
-    BasedSequence SPACE = CharSubSequence.of(IRichSequence.SPACE);
+    BasedSequence EOL = CharSubSequence.of(SequenceUtils.EOL);
+    BasedSequence SPACE = CharSubSequence.of(SequenceUtils.SPACE);
     List<BasedSequence> EMPTY_LIST = new ArrayList<>();
     BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
     BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
-    BasedSequence LINE_SEP = CharSubSequence.of(IRichSequence.LINE_SEP);
+    BasedSequence LINE_SEP = CharSubSequence.of(SequenceUtils.LINE_SEP);
 
     @NotNull
     static BasedSequence of(@Nullable CharSequence charSequence) {

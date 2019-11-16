@@ -6,46 +6,104 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SequenceUtils {
-    static final Map<Character, String> visibleSpacesMap;
-    static {
+public interface SequenceUtils {
+    String EOL = "\n";
+    String SPACE = " ";
+    String ANY_EOL = "\r\n";
+
+    @Deprecated
+    String EOL_CHARS = ANY_EOL;
+    char EOL_CHAR = ANY_EOL.charAt(1);
+    char EOL_CHAR1 = ANY_EOL.charAt(0);
+    char EOL_CHAR2 = ANY_EOL.charAt(1);
+    char SPC = ' ';
+    char NUL = '\0';
+    char ENC_NUL = '\uFFFD';
+    char NBSP = '\u00A0';
+    char LS = '\u2028'; // line separator
+    char US = '\u001f';  // US or USEP - Unit Separator, also used as IntelliJDummyIdentifier in Parsings, used as a tracked offset marker in the sequence
+    char MRK = US;       // same as US but use in code signals it being related to offset marker handling
+    String LINE_SEP = Character.toString(LS);
+    String SPACE_TAB = " \t";
+
+    @Deprecated
+    String WHITESPACE_NO_EOL_CHARS = SPACE_TAB;
+    String US_CHARS = Character.toString(US);
+    String MARKER_CHARS = US_CHARS;  // same as US_CHARS but use in code signals it being related to offset marker handling
+    String WHITESPACE = " \t\r\n";
+
+    @Deprecated
+    String WHITESPACE_CHARS = WHITESPACE;
+    String WHITESPACE_NBSP = " \t\r\n\u00A0";
+
+    @Deprecated
+    String WHITESPACE_NBSP_CHARS = WHITESPACE_NBSP;
+    CharPredicate SPACE_SET = CharPredicate.SPACE;
+    CharPredicate TAB_SET = CharPredicate.TAB;
+    CharPredicate EOL_SET = CharPredicate.EOL;
+    CharPredicate SPACE_TAB_SET = CharPredicate.SPACE_TAB;
+    CharPredicate SPACE_TAB_NBSP_SET = CharPredicate.SPACE_TAB_NBSP;
+    CharPredicate ANY_EOL_SET = CharPredicate.ANY_EOL;
+    CharPredicate WHITESPACE_SET = CharPredicate.WHITESPACE;
+    CharPredicate WHITESPACE_NBSP_SET = CharPredicate.WHITESPACE_NBSP;
+    CharPredicate BACKSLASH_SET = CharPredicate.BACKSLASH;
+    CharPredicate US_SET = value -> value == US;
+    @NotNull CharPredicate HASH_SET = CharPredicate.HASH;
+
+    /**
+     * Line Separator, used in paragraph wrapping to force start of new line
+     *
+     * @deprecated use {@link #LS} instead as it is named in Unicode
+     */
+    @Deprecated
+    char LSEP = LS;
+
+    int SPLIT_INCLUDE_DELIMS = 1;
+    int SPLIT_TRIM_PARTS = 2;
+    int SPLIT_SKIP_EMPTY = 4;
+    int SPLIT_INCLUDE_DELIM_PARTS = 8;
+    int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY;
+
+    static Map<Character, String> getVisibleSpacesMap() {
         HashMap<Character, String> charMap = new HashMap<>();
-        visibleSpacesMap = charMap;
         charMap.put('\n', "\\n");
         charMap.put('\r', "\\r");
         charMap.put('\f', "\\f");
         charMap.put('\t', "\\u2192");
+        return charMap;
     }
 
-    public static int[] EMPTY_INDICES = { };
+    Map<Character, String> visibleSpacesMap = getVisibleSpacesMap();
+
+    int[] EMPTY_INDICES = { };
 
     // @formatter:off
-    public static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s)                                                 { return indexOf(thizz, s, 0, thizz.length()); }
-    public static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex)                                  { return indexOf(thizz, s, fromIndex, thizz.length()); }
-    public static int indexOf(@NotNull CharSequence thizz, char c)                                                                  { return indexOf(thizz, c, 0, thizz.length()); }
-    public static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex)                                                   { return indexOf(thizz, c, fromIndex, thizz.length()); }
-    public static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                             { return indexOfAny(thizz, s, 0, thizz.length()); }
-    public static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index)                                  { return indexOfAny(thizz, s, index, thizz.length()); }
-    public static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                          { return indexOfAny(thizz, s.negate(), 0, thizz.length()); }
-    public static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                           { return indexOfAny(thizz, s.negate(), fromIndex, thizz.length()); }
-    public static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex)             { return indexOfAny(thizz, s.negate(), fromIndex, endIndex);}
-    public static int indexOfNot(@NotNull CharSequence thizz,  char c)                                                              { return indexOfNot(thizz, c, 0, thizz.length()); }
-    public static int indexOfNot(@NotNull CharSequence thizz,  char c, int fromIndex)                                               { return indexOfNot(thizz, c, fromIndex, thizz.length()); }
+    static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s)                                                 { return indexOf(thizz, s, 0, thizz.length()); }
+    static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex)                                  { return indexOf(thizz, s, fromIndex, thizz.length()); }
+    static int indexOf(@NotNull CharSequence thizz, char c)                                                                  { return indexOf(thizz, c, 0, thizz.length()); }
+    static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex)                                                   { return indexOf(thizz, c, fromIndex, thizz.length()); }
+    static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                             { return indexOfAny(thizz, s, 0, thizz.length()); }
+    static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index)                                  { return indexOfAny(thizz, s, index, thizz.length()); }
+    static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                          { return indexOfAny(thizz, s.negate(), 0, thizz.length()); }
+    static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                           { return indexOfAny(thizz, s.negate(), fromIndex, thizz.length()); }
+    static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex)             { return indexOfAny(thizz, s.negate(), fromIndex, endIndex);}
+    static int indexOfNot(@NotNull CharSequence thizz,  char c)                                                              { return indexOfNot(thizz, c, 0, thizz.length()); }
+    static int indexOfNot(@NotNull CharSequence thizz,  char c, int fromIndex)                                               { return indexOfNot(thizz, c, fromIndex, thizz.length()); }
 
-    public static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s)                                             { return lastIndexOf(thizz, s, 0, thizz.length()); }
-    public static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex)                              { return lastIndexOf(thizz, s, 0, fromIndex); }
-    public static int lastIndexOf(@NotNull CharSequence thizz, char c)                                                              { return lastIndexOf(thizz, c, 0, thizz.length());}
-    public static int lastIndexOf(@NotNull CharSequence thizz, char c, int fromIndex)                                    { return lastIndexOf(thizz, c, 0, fromIndex);}
-    public static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                         { return lastIndexOfAny(thizz, s, 0, thizz.length()); }
-    public static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                          { return lastIndexOfAny(thizz, s, 0, fromIndex); }
-    public static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                      { return lastIndexOfAny(thizz, s.negate(), 0, thizz.length()); }
-    public static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                       { return lastIndexOfAny(thizz, s.negate(), 0, fromIndex); }
-    public static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int startIndex, int fromIndex)       { return lastIndexOfAny(thizz, s.negate(), startIndex, fromIndex);}
-    public static int lastIndexOfNot(@NotNull CharSequence thizz,  char c)                                                          { return lastIndexOfNot(thizz, c, 0, thizz.length()); }
-    public static int lastIndexOfNot(@NotNull CharSequence thizz,  char c, int fromIndex)                                           { return lastIndexOfNot(thizz, c, 0, fromIndex); }
+    static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s)                                             { return lastIndexOf(thizz, s, 0, thizz.length()); }
+    static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex)                              { return lastIndexOf(thizz, s, 0, fromIndex); }
+    static int lastIndexOf(@NotNull CharSequence thizz, char c)                                                              { return lastIndexOf(thizz, c, 0, thizz.length());}
+    static int lastIndexOf(@NotNull CharSequence thizz, char c, int fromIndex)                                               { return lastIndexOf(thizz, c, 0, fromIndex);}
+    static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                         { return lastIndexOfAny(thizz, s, 0, thizz.length()); }
+    static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                          { return lastIndexOfAny(thizz, s, 0, fromIndex); }
+    static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                      { return lastIndexOfAny(thizz, s.negate(), 0, thizz.length()); }
+    static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                       { return lastIndexOfAny(thizz, s.negate(), 0, fromIndex); }
+    static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int startIndex, int fromIndex)       { return lastIndexOfAny(thizz, s.negate(), startIndex, fromIndex);}
+    static int lastIndexOfNot(@NotNull CharSequence thizz,  char c)                                                          { return lastIndexOfNot(thizz, c, 0, thizz.length()); }
+    static int lastIndexOfNot(@NotNull CharSequence thizz,  char c, int fromIndex)                                           { return lastIndexOfNot(thizz, c, 0, fromIndex); }
     // @formatter:on
 
-    public static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
+    static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, thizz.length());
 
@@ -56,7 +114,7 @@ public class SequenceUtils {
     }
 
     // TEST:
-    public static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex, int endIndex) {
+    static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
 
         int sMax = s.length();
@@ -78,7 +136,7 @@ public class SequenceUtils {
         return -1;
     }
 
-    public static int lastIndexOf(@NotNull CharSequence thizz, char c, int startIndex, int fromIndex) {
+    static int lastIndexOf(@NotNull CharSequence thizz, char c, int startIndex, int fromIndex) {
         fromIndex++;
         startIndex = Math.max(startIndex, 0);
         fromIndex = Math.min(fromIndex, thizz.length());
@@ -89,7 +147,7 @@ public class SequenceUtils {
         return -1;
     }
 
-    public static int indexOfNot(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
+    static int indexOfNot(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, thizz.length());
 
@@ -99,7 +157,7 @@ public class SequenceUtils {
         return -1;
     }
 
-    public static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
+    static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, thizz.length());
 
@@ -111,7 +169,7 @@ public class SequenceUtils {
     }
 
     // TEST:
-    public static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int startIndex, int fromIndex) {
+    static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int startIndex, int fromIndex) {
         startIndex = Math.max(startIndex, 0);
 
         int sMax = s.length();
@@ -134,7 +192,7 @@ public class SequenceUtils {
         return -1;
     }
 
-    public static int lastIndexOfNot(@NotNull CharSequence thizz, char c, int startIndex, int fromIndex) {
+    static int lastIndexOfNot(@NotNull CharSequence thizz, char c, int startIndex, int fromIndex) {
         fromIndex++;
         startIndex = Math.max(startIndex, 0);
         fromIndex = Math.min(fromIndex, thizz.length());
@@ -145,7 +203,7 @@ public class SequenceUtils {
         return -1;
     }
 
-    public static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int startIndex, int fromIndex) {
+    static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int startIndex, int fromIndex) {
         fromIndex++;
         startIndex = Math.max(startIndex, 0);
         fromIndex = Math.min(fromIndex, thizz.length());
@@ -157,11 +215,11 @@ public class SequenceUtils {
         return -1;
     }
 
-    public static int compareReversed(@Nullable CharSequence o1, @Nullable CharSequence o2) {
+    static int compareReversed(@Nullable CharSequence o1, @Nullable CharSequence o2) {
         return compare(o2, o1);
     }
 
-    public static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2) {
+    static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2) {
         if (o1 == null || o2 == null) return o1 == null && o2 == null ? 0 : o1 == null ? -1 : 1;
 
         int len1 = o1.length();
@@ -178,7 +236,7 @@ public class SequenceUtils {
     }
 
     @NotNull
-    public static String[] toStringArray(CharSequence... sequences) {
+    static String[] toStringArray(CharSequence... sequences) {
         String[] result = new String[sequences.length];
         int i = 0;
         for (CharSequence sequence : sequences) {
@@ -192,12 +250,12 @@ public class SequenceUtils {
         return visibleSpacesMap.containsKey(c);
     }
 
-    public static int columnsToNextTabStop(int column) {
+    static int columnsToNextTabStop(int column) {
         // Tab stop is 4
         return 4 - (column % 4);
     }
 
-    public static int[] expandTo(int[] indices, int length, int step) {
+    static int[] expandTo(int[] indices, int length, int step) {
         int remainder = length & step;
         int next = length + (remainder != 0 ? step : 0);
         if (indices.length < next) {
@@ -208,7 +266,7 @@ public class SequenceUtils {
         return indices;
     }
 
-    public static int[] truncateTo(int[] indices, int length) {
+    static int[] truncateTo(int[] indices, int length) {
         if (indices.length > length) {
             int[] replace = new int[length];
             System.arraycopy(indices, 0, replace, 0, length);
@@ -219,38 +277,38 @@ public class SequenceUtils {
 
     // TEST:
     // @formatter:off
-    public static boolean matches(@NotNull CharSequence thizz, @NotNull CharSequence chars, boolean ignoreCase) {return chars.length() == thizz.length() && matchChars(thizz, chars, 0, ignoreCase);}
-    public static boolean matches(@NotNull CharSequence thizz, @NotNull CharSequence chars) {return chars.length() == thizz.length() && matchChars(thizz, chars, 0, false);}
-    public static boolean matchesIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars) {return chars.length() == thizz.length() && matchChars(thizz, chars, 0, true);}
+    static boolean matches(@NotNull CharSequence thizz, @NotNull CharSequence chars, boolean ignoreCase) {return chars.length() == thizz.length() && matchChars(thizz, chars, 0, ignoreCase);}
+    static boolean matches(@NotNull CharSequence thizz, @NotNull CharSequence chars) {return chars.length() == thizz.length() && matchChars(thizz, chars, 0, false);}
+    static boolean matchesIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars) {return chars.length() == thizz.length() && matchChars(thizz, chars, 0, true);}
 
-    public static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, boolean ignoreCase) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), true, ignoreCase) == chars.length(); }
-    public static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) {return matchChars(thizz, chars, startIndex, false);}
-    public static boolean matchCharsIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) {return matchChars(thizz, chars, startIndex, true);}
+    static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, boolean ignoreCase) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), true, ignoreCase) == chars.length(); }
+    static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) {return matchChars(thizz, chars, startIndex, false);}
+    static boolean matchCharsIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) {return matchChars(thizz, chars, startIndex, true);}
 
-    public static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars, boolean ignoreCase) {return matchChars(thizz, chars, 0, ignoreCase);}
-    public static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars) {return matchChars(thizz, chars, 0, false);}
-    public static boolean matchCharsIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars) {return matchChars(thizz, chars, 0, true);}
+    static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars, boolean ignoreCase) {return matchChars(thizz, chars, 0, ignoreCase);}
+    static boolean matchChars(@NotNull CharSequence thizz, @NotNull CharSequence chars) {return matchChars(thizz, chars, 0, false);}
+    static boolean matchCharsIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars) {return matchChars(thizz, chars, 0, true);}
 
-    public static boolean matchCharsReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex, boolean ignoreCase) {return endIndex + 1 >= chars.length() && matchChars(thizz, chars, endIndex + 1 - chars.length(), ignoreCase);}
-    public static boolean matchCharsReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(thizz, chars, endIndex + 1 - chars.length(), false);}
-    public static boolean matchCharsReversedIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(thizz, chars, endIndex + 1 - chars.length(), true);}
+    static boolean matchCharsReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex, boolean ignoreCase) {return endIndex + 1 >= chars.length() && matchChars(thizz, chars, endIndex + 1 - chars.length(), ignoreCase);}
+    static boolean matchCharsReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(thizz, chars, endIndex + 1 - chars.length(), false);}
+    static boolean matchCharsReversedIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(thizz, chars, endIndex + 1 - chars.length(), true);}
 
-    public static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex, boolean ignoreCase) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, ignoreCase); }
-    public static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, boolean ignoreCase) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, ignoreCase); }
-    public static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, false); }
-    public static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, false); }
-    public static int matchedCharCountIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, true); }
-    public static int matchedCharCountIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, true); }
+    static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex, boolean ignoreCase) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, ignoreCase); }
+    static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, boolean ignoreCase) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, ignoreCase); }
+    static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, false); }
+    static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, false); }
+    static int matchedCharCountIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, true); }
+    static int matchedCharCountIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex) { return matchedCharCount(thizz, chars, startIndex, thizz.length(), false, true); }
 
-    public static int matchedCharCountReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int fromIndex) { return matchedCharCountReversed(thizz, chars, startIndex, fromIndex, false); }
-    public static int matchedCharCountReversedIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int fromIndex) { return matchedCharCountReversed(thizz, chars, startIndex, fromIndex, true); }
+    static int matchedCharCountReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int fromIndex) { return matchedCharCountReversed(thizz, chars, startIndex, fromIndex, false); }
+    static int matchedCharCountReversedIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int fromIndex) { return matchedCharCountReversed(thizz, chars, startIndex, fromIndex, true); }
 
-    public static int matchedCharCountReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex, boolean ignoreCase) { return matchedCharCountReversed(thizz, chars, 0, fromIndex, ignoreCase); }
-    public static int matchedCharCountReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex) { return matchedCharCountReversed(thizz, chars, 0, fromIndex, false); }
-    public static int matchedCharCountReversedIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex) { return matchedCharCountReversed(thizz, chars, 0, fromIndex, true); }
+    static int matchedCharCountReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex, boolean ignoreCase) { return matchedCharCountReversed(thizz, chars, 0, fromIndex, ignoreCase); }
+    static int matchedCharCountReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex) { return matchedCharCountReversed(thizz, chars, 0, fromIndex, false); }
+    static int matchedCharCountReversedIgnoreCase(@NotNull CharSequence thizz, @NotNull CharSequence chars, int fromIndex) { return matchedCharCountReversed(thizz, chars, 0, fromIndex, true); }
     // @formatter:on
 
-    public static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex, boolean fullMatchOnly, boolean ignoreCase) {
+    static int matchedCharCount(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int endIndex, boolean fullMatchOnly, boolean ignoreCase) {
         int length = chars.length();
         endIndex = Math.min(thizz.length(), endIndex);
         int iMax = Math.min(endIndex - startIndex, length);
@@ -285,7 +343,7 @@ public class SequenceUtils {
     }
 
     // TEST:
-    public static int matchedCharCountReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase) {
+    static int matchedCharCountReversed(@NotNull CharSequence thizz, @NotNull CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase) {
         startIndex = Math.max(0, startIndex);
         fromIndex = Math.max(0, Math.min(thizz.length(), fromIndex));
 

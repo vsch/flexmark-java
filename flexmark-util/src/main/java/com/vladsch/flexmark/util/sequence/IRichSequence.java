@@ -18,63 +18,7 @@ import java.util.function.Predicate;
  * safe access methods return '\0' for no char response.
  */
 @SuppressWarnings("SameParameterValue")
-public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence, Comparable<CharSequence> {
-    String EOL = "\n";
-    String SPACE = " ";
-    String ANY_EOL = "\r\n";
-
-    @Deprecated
-    String EOL_CHARS = ANY_EOL;
-
-    char EOL_CHAR = ANY_EOL.charAt(1);
-    char EOL_CHAR1 = ANY_EOL.charAt(0);
-    char EOL_CHAR2 = ANY_EOL.charAt(1);
-
-    char SPC = ' ';
-    char NUL = '\0';
-    char ENC_NUL = '\uFFFD';
-    char NBSP = '\u00A0';
-    char LS = '\u2028'; // line separator
-    char US = '\u001f';  // US or USEP - Unit Separator, also used as IntelliJDummyIdentifier in Parsings, used as a tracked offset marker in the sequence
-    char MRK = US;       // same as US but use in code signals it being related to offset marker handling
-    String LINE_SEP = Character.toString(LS);
-    String SPACE_TAB = " \t";
-
-    @Deprecated
-    String WHITESPACE_NO_EOL_CHARS = SPACE_TAB;
-
-    String US_CHARS = Character.toString(US);
-    String MARKER_CHARS = US_CHARS;  // same as US_CHARS but use in code signals it being related to offset marker handling
-
-    String WHITESPACE = " \t\r\n";
-    @Deprecated
-    String WHITESPACE_CHARS = WHITESPACE;
-
-    String WHITESPACE_NBSP = " \t\r\n\u00A0";
-
-    @Deprecated
-    String WHITESPACE_NBSP_CHARS = WHITESPACE_NBSP;
-
-    CharPredicate SPACE_SET = CharPredicate.SPACE;
-    CharPredicate TAB_SET = CharPredicate.TAB;
-    CharPredicate EOL_SET = CharPredicate.EOL;
-    CharPredicate SPACE_TAB_SET = CharPredicate.SPACE_TAB;
-    CharPredicate SPACE_TAB_NBSP_SET = CharPredicate.SPACE_TAB_NBSP;
-    CharPredicate ANY_EOL_SET = CharPredicate.ANY_EOL;
-    CharPredicate WHITESPACE_SET = CharPredicate.WHITESPACE;
-    CharPredicate WHITESPACE_NBSP_SET = CharPredicate.WHITESPACE_NBSP;
-    CharPredicate BACKSLASH_SET = CharPredicate.BACKSLASH;
-    CharPredicate US_SET = value -> value == US;
-    @NotNull CharPredicate HASH_SET = CharPredicate.HASH;
-
-    /**
-     * Line Separator, used in paragraph wrapping to force start of new line
-     *
-     * @deprecated use {@link #LS} instead as it is named in Unicode
-     */
-    @Deprecated
-    char LSEP = LS;
-
+public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence, Comparable<CharSequence>, SequenceUtils {
     /**
      * Comparison to another CharSequence should result in a match if their contents are equal
      * regardless of the implementation. Should not resort to content comparison unless
@@ -1178,12 +1122,6 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     @NotNull T toSpc();
 
     @NotNull String toVisibleWhitespaceString();
-
-    int SPLIT_INCLUDE_DELIMS = 1;
-    int SPLIT_TRIM_PARTS = 2;
-    int SPLIT_SKIP_EMPTY = 4;
-    int SPLIT_INCLUDE_DELIM_PARTS = 8;
-    int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY;
 
     /**
      * Split helpers based on delimiter character sets contained in CharSequence

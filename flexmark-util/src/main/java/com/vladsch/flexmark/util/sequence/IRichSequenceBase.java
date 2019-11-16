@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -188,7 +187,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override
     final public char endCharAt(int index) {
         int length = length();
-        if (index < 0 || index >= length) return NUL;
+        if (index < 0 || index >= length) return SequenceUtils.NUL;
         return charAt(length - index);
     }
 
@@ -213,23 +212,23 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override
     final public char midCharAt(int index) {
         int length = length();
-        if (index < -length || index >= length) return NUL;
+        if (index < -length || index >= length) return SequenceUtils.NUL;
         return charAt(index < 0 ? length + index : index);
     }
 
     @Override
     final public char lastChar() {
-        return isEmpty() ? NUL : charAt(length() - 1);
+        return isEmpty() ? SequenceUtils.NUL : charAt(length() - 1);
     }
 
     @Override
     final public char firstChar() {
-        return isEmpty() ? NUL : charAt(0);
+        return isEmpty() ? SequenceUtils.NUL : charAt(0);
     }
 
     @Override
     public char safeCharAt(int index) {
-        return index < 0 || index >= length() ? NUL : charAt(index);
+        return index < 0 || index >= length() ? SequenceUtils.NUL : charAt(index);
     }
 
     // @formatter:off
@@ -267,11 +266,11 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
 
     // @formatter:off
-    @Override final public int countOfSpaceTab()                                                { return countOfAny(SPACE_TAB_SET, 0, length()); }
-    @Override final public int countOfNotSpaceTab()                                             { return countOfAny(SPACE_TAB_SET.negate(), 0, length()); }
+    @Override final public int countOfSpaceTab()                                                { return countOfAny(SequenceUtils.SPACE_TAB_SET, 0, length()); }
+    @Override final public int countOfNotSpaceTab()                                             { return countOfAny(SequenceUtils.SPACE_TAB_SET.negate(), 0, length()); }
 
-    @Override final public int countOfWhitespace()                                              { return countOfAny(WHITESPACE_SET, length()); }
-    @Override final public int countOfNotWhitespace()                                           { return countOfAny(WHITESPACE_SET.negate(), 0, length()); }
+    @Override final public int countOfWhitespace()                                              { return countOfAny(SequenceUtils.WHITESPACE_SET, length()); }
+    @Override final public int countOfNotWhitespace()                                           { return countOfAny(SequenceUtils.WHITESPACE_SET.negate(), 0, length()); }
 
     @Override final public int countOfAny(@NotNull CharPredicate chars, int fromIndex)          { return countOfAny(chars, fromIndex, length()); }
     @Override final public int countOfAny(@NotNull CharPredicate chars)                         { return countOfAny(chars, 0, length()); }
@@ -294,15 +293,15 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @Override final public int countLeadingSpaceTab()                                                       { return this.countLeading(SPACE_TAB_SET, 0, length()); }
-    @Override final public int countTrailingSpaceTab()                                                      { return this.countTrailing(SPACE_TAB_SET, 0, length()); }
-    @Override final public int countLeadingNotSpaceTab()                                                    { return this.countLeading(SPACE_TAB_SET.negate(), 0, length()); }
-    @Override final public int countTrailingNotSpaceTab()                                                   { return this.countTrailing(SPACE_TAB_SET.negate(), 0, length()); }
+    @Override final public int countLeadingSpaceTab()                                                       { return this.countLeading(SequenceUtils.SPACE_TAB_SET, 0, length()); }
+    @Override final public int countTrailingSpaceTab()                                                      { return this.countTrailing(SequenceUtils.SPACE_TAB_SET, 0, length()); }
+    @Override final public int countLeadingNotSpaceTab()                                                    { return this.countLeading(SequenceUtils.SPACE_TAB_SET.negate(), 0, length()); }
+    @Override final public int countTrailingNotSpaceTab()                                                   { return this.countTrailing(SequenceUtils.SPACE_TAB_SET.negate(), 0, length()); }
 
-    @Override final public int countLeadingWhitespace()                                                     { return this.countLeading(WHITESPACE_SET, 0, length()); }
-    @Override final public int countTrailingWhitespace()                                                    { return this.countTrailing(WHITESPACE_SET, 0, length()); }
-    @Override final public int countLeadingNotWhitespace()                                                  { return this.countLeading(WHITESPACE_SET.negate(), 0, length()); }
-    @Override final public int countTrailingNotWhitespace()                                                 { return this.countTrailing(WHITESPACE_SET.negate(), 0, length()); }
+    @Override final public int countLeadingWhitespace()                                                     { return this.countLeading(SequenceUtils.WHITESPACE_SET, 0, length()); }
+    @Override final public int countTrailingWhitespace()                                                    { return this.countTrailing(SequenceUtils.WHITESPACE_SET, 0, length()); }
+    @Override final public int countLeadingNotWhitespace()                                                  { return this.countLeading(SequenceUtils.WHITESPACE_SET.negate(), 0, length()); }
+    @Override final public int countTrailingNotWhitespace()                                                 { return this.countTrailing(SequenceUtils.WHITESPACE_SET.negate(), 0, length()); }
 
     @Override final public int countLeading(@NotNull CharPredicate chars)                                   { return countLeading(chars, 0, length()); }
     @Override final public int countLeading(@NotNull CharPredicate chars, int fromIndex)                    { return countLeading(chars, fromIndex, length()); }
@@ -365,18 +364,18 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public T trimmedEnd(@NotNull CharPredicate chars) { return trimmedEnd(0, chars);}
     @NotNull @Override final public T trim(@NotNull CharPredicate chars) { return trim(0, chars);}
     @NotNull @Override final public Pair<T, T> trimmed(@NotNull CharPredicate chars) { return trimmed(0, chars);}
-    @NotNull @Override final public T trimStart(int keep) { return trimStart(keep, WHITESPACE_SET);}
-    @NotNull @Override final public T trimmedStart(int keep) { return trimmedStart(keep, WHITESPACE_SET);}
-    @NotNull @Override final public T trimEnd(int keep) { return trimEnd(keep, WHITESPACE_SET);}
-    @NotNull @Override final public T trimmedEnd(int keep) { return trimmedEnd(keep, WHITESPACE_SET);}
-    @NotNull @Override final public T trim(int keep) { return trim(keep, WHITESPACE_SET);}
-    @NotNull @Override final public Pair<T, T> trimmed(int keep) { return trimmed(keep, WHITESPACE_SET);}
-    @NotNull @Override final public T trimStart() { return trimStart(0, WHITESPACE_SET);}
-    @NotNull @Override final public T trimmedStart() { return trimmedStart(0, WHITESPACE_SET);}
-    @NotNull @Override final public T trimEnd() { return trimEnd(0, WHITESPACE_SET);}
-    @NotNull @Override final public T trimmedEnd() { return trimmedEnd(0, WHITESPACE_SET);}
-    @NotNull @Override final public T trim() { return trim(0, WHITESPACE_SET);}
-    @NotNull @Override final public Pair<T, T> trimmed() { return trimmed(0, WHITESPACE_SET);}
+    @NotNull @Override final public T trimStart(int keep) { return trimStart(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trimmedStart(int keep) { return trimmedStart(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trimEnd(int keep) { return trimEnd(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trimmedEnd(int keep) { return trimmedEnd(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trim(int keep) { return trim(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public Pair<T, T> trimmed(int keep) { return trimmed(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trimStart() { return trimStart(0, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trimmedStart() { return trimmedStart(0, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trimEnd() { return trimEnd(0, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trimmedEnd() { return trimmedEnd(0, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public T trim() { return trim(0, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public Pair<T, T> trimmed() { return trimmed(0, SequenceUtils.WHITESPACE_SET);}
     @NotNull @Override final public T trimStart(int keep, @NotNull CharPredicate chars) { return subSequence(trimStartRange(keep, chars));}
     @NotNull @Override final public T trimmedStart(int keep, @NotNull CharPredicate chars) { return subSequenceBefore(trimStartRange(keep, chars));}
     @NotNull @Override final public T trimEnd(int keep, @NotNull CharPredicate chars) { return subSequence(trimEndRange(keep, chars));}
@@ -387,12 +386,12 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public Range trimStartRange(@NotNull CharPredicate chars) { return trimStartRange(0, chars);}
     @NotNull @Override final public Range trimEndRange(@NotNull CharPredicate chars) { return trimEndRange(0, chars);}
     @NotNull @Override final public Range trimRange(@NotNull CharPredicate chars) { return trimRange(0, chars);}
-    @NotNull @Override final public Range trimStartRange(int keep) { return trimStartRange(keep, WHITESPACE_SET);}
-    @NotNull @Override final public Range trimEndRange(int keep) { return trimEndRange(keep, WHITESPACE_SET);}
-    @NotNull @Override final public Range trimRange(int keep) { return trimRange(keep, WHITESPACE_SET);}
-    @NotNull @Override final public Range trimStartRange() { return trimStartRange(0, WHITESPACE_SET);}
-    @NotNull @Override final public Range trimEndRange() { return trimEndRange(0, WHITESPACE_SET);}
-    @NotNull @Override final public Range trimRange() { return trimRange(0, WHITESPACE_SET);}
+    @NotNull @Override final public Range trimStartRange(int keep) { return trimStartRange(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public Range trimEndRange(int keep) { return trimEndRange(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public Range trimRange(int keep) { return trimRange(keep, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public Range trimStartRange() { return trimStartRange(0, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public Range trimEndRange() { return trimEndRange(0, SequenceUtils.WHITESPACE_SET);}
+    @NotNull @Override final public Range trimRange() { return trimRange(0, SequenceUtils.WHITESPACE_SET);}
     // @formatter:on
 
     @NotNull
@@ -504,10 +503,10 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @Override final public int endOfLine(int index) {return endOfDelimitedBy(EOL, index);}
-    @Override final public int endOfLineAnyEOL(int index) {return endOfDelimitedByAny(ANY_EOL_SET, index);}
-    @Override final public int startOfLine(int index) {return startOfDelimitedBy(EOL, index);}
-    @Override final public int startOfLineAnyEOL(int index) {return startOfDelimitedByAny(ANY_EOL_SET, index);}
+    @Override final public int endOfLine(int index) {return endOfDelimitedBy(SequenceUtils.EOL, index);}
+    @Override final public int endOfLineAnyEOL(int index) {return endOfDelimitedByAny(SequenceUtils.ANY_EOL_SET, index);}
+    @Override final public int startOfLine(int index) {return startOfDelimitedBy(SequenceUtils.EOL, index);}
+    @Override final public int startOfLineAnyEOL(int index) {return startOfDelimitedByAny(SequenceUtils.ANY_EOL_SET, index);}
 
     @Override final public int startOfDelimitedByAnyNot(@NotNull CharPredicate s, int index) { return startOfDelimitedByAny(s.negate(),index);}
     @Override final public int endOfDelimitedByAnyNot(@NotNull CharPredicate s, int index) { return endOfDelimitedByAny(s.negate(),index);}
@@ -591,12 +590,12 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     // @formatter:off
     @NotNull @Override final public T trimTailBlankLines() {Range range = trailingBlankLinesRange();return range.isNull() ?  (T) this : subSequenceBefore(range);}
     @NotNull @Override final public T trimLeadBlankLines() {Range range = leadingBlankLinesRange();return range.isNull() ?  (T) this : subSequenceAfter(range);}
-    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(EOL_SET, 0, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(EOL_SET, startIndex, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(EOL_SET, fromIndex, endIndex);}
-    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(EOL_SET, 0, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(EOL_SET, fromIndex, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(EOL_SET,startIndex,fromIndex);}
+    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(SequenceUtils.EOL_SET, 0, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(SequenceUtils.EOL_SET, startIndex, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(SequenceUtils.EOL_SET, fromIndex, endIndex);}
+    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(SequenceUtils.EOL_SET, 0, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(SequenceUtils.EOL_SET, fromIndex, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(SequenceUtils.EOL_SET,startIndex,fromIndex);}
     // @formatter:on
 
     @NotNull
@@ -642,9 +641,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(EOL_SET, 0, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(EOL_SET, fromIndex, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(EOL_SET, fromIndex, endIndex);}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(SequenceUtils.EOL_SET, 0, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(SequenceUtils.EOL_SET, fromIndex, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(SequenceUtils.EOL_SET, fromIndex, endIndex);}
     // @formatter:on
 
     @NotNull
@@ -670,15 +669,15 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol)                 { return trimToEndOfLine(EOL_SET, includeEol, 0); }
-    @NotNull @Override public T trimToEndOfLine(int index)                          { return trimToEndOfLine(EOL_SET, false, 0); }
-    @NotNull @Override public T trimToEndOfLine()                                   { return trimToEndOfLine(EOL_SET, false, 0); }
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index)      { return trimToEndOfLine(EOL_SET, includeEol, index); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol)                 { return trimToEndOfLine(SequenceUtils.EOL_SET, includeEol, 0); }
+    @NotNull @Override public T trimToEndOfLine(int index)                          { return trimToEndOfLine(SequenceUtils.EOL_SET, false, 0); }
+    @NotNull @Override public T trimToEndOfLine()                                   { return trimToEndOfLine(SequenceUtils.EOL_SET, false, 0); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index)      { return trimToEndOfLine(SequenceUtils.EOL_SET, includeEol, index); }
 
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol)               { return trimToStartOfLine(EOL_SET, includeEol, 0); }
-    @NotNull @Override public T trimToStartOfLine(int index)                        { return trimToStartOfLine(EOL_SET, false, 0); }
-    @NotNull @Override public T trimToStartOfLine()                                 { return trimToStartOfLine(EOL_SET, false, 0); }
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index)    { return trimToStartOfLine(EOL_SET, includeEol, index); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol)               { return trimToStartOfLine(SequenceUtils.EOL_SET, includeEol, 0); }
+    @NotNull @Override public T trimToStartOfLine(int index)                        { return trimToStartOfLine(SequenceUtils.EOL_SET, false, 0); }
+    @NotNull @Override public T trimToStartOfLine()                                 { return trimToStartOfLine(SequenceUtils.EOL_SET, false, 0); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index)    { return trimToStartOfLine(SequenceUtils.EOL_SET, includeEol, index); }
     // @formatter:on
 
     @NotNull
@@ -740,7 +739,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // @formatter:off
     @Override final public boolean isEmpty() {return length() == 0;}
-    @Override final public boolean isBlank() {return isEmpty() || countLeading(WHITESPACE_SET, 0, length()) == length();}
+    @Override final public boolean isBlank() {return isEmpty() || countLeading(SequenceUtils.WHITESPACE_SET, 0, length()) == length();}
     @Override final public boolean isNotEmpty() {return length() != 0;}
     @Override final public boolean isNotBlank() {return !isBlank();}
     @Override final public boolean isNull() {return this == nullSequence();}
@@ -754,17 +753,17 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public boolean endsWith(@NotNull CharPredicate chars) {return countTrailing(chars) > 0;}
     @Override final public boolean startsWith(@NotNull CharPredicate chars) {return countLeading(chars) > 0;}
 
-    @Override final public boolean endsWithEOL() { return endsWith(EOL_SET); }
-    @Override final public boolean endsWithAnyEOL() { return endsWith(ANY_EOL_SET); }
-    @Override final public boolean endsWithSpace() { return endsWith(SPACE_SET); }
-    @Override final public boolean endsWithSpaceTab() { return endsWith(SPACE_TAB_SET); }
-    @Override final public boolean endsWithWhitespace() { return endsWith(WHITESPACE_SET); }
+    @Override final public boolean endsWithEOL() { return endsWith(SequenceUtils.EOL_SET); }
+    @Override final public boolean endsWithAnyEOL() { return endsWith(SequenceUtils.ANY_EOL_SET); }
+    @Override final public boolean endsWithSpace() { return endsWith(SequenceUtils.SPACE_SET); }
+    @Override final public boolean endsWithSpaceTab() { return endsWith(SequenceUtils.SPACE_TAB_SET); }
+    @Override final public boolean endsWithWhitespace() { return endsWith(SequenceUtils.WHITESPACE_SET); }
 
-    @Override final public boolean startsWithEOL() { return startsWith(EOL_SET); }
-    @Override final public boolean startsWithAnyEOL() { return startsWith(ANY_EOL_SET); }
-    @Override final public boolean startsWithSpace() { return startsWith(SPACE_SET); }
-    @Override final public boolean startsWithSpaceTab() { return startsWith(SPACE_TAB_SET); }
-    @Override final public boolean startsWithWhitespace() { return startsWith(WHITESPACE_SET); }
+    @Override final public boolean startsWithEOL() { return startsWith(SequenceUtils.EOL_SET); }
+    @Override final public boolean startsWithAnyEOL() { return startsWith(SequenceUtils.ANY_EOL_SET); }
+    @Override final public boolean startsWithSpace() { return startsWith(SequenceUtils.SPACE_SET); }
+    @Override final public boolean startsWithSpaceTab() { return startsWith(SequenceUtils.SPACE_TAB_SET); }
+    @Override final public boolean startsWithWhitespace() { return startsWith(SequenceUtils.WHITESPACE_SET); }
     // @formatter:on
 
     // @formatter:off
@@ -921,20 +920,20 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // @formatter:off
     @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter)                                                                          { return splitList(delimiter, 0, 0, null); }
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)     { return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)     { return splitList(delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
     @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags)                                                    { return splitList(delimiter, limit, flags, null); }
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                { return splitList(delimiter, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                { return splitList(delimiter, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
 
     // NOTE: these default to including delimiters as part of split item
-    @NotNull @Override final public List<T> splitListEOL()                                                                                                      { return splitList(EOL, 0, SPLIT_INCLUDE_DELIMS, null); }
-    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims)                                                                                 { return splitList(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null); }
-    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims, @Nullable CharPredicate trimChars)                                              { return splitList(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public List<T> splitListEOL()                                                                                                      { return splitList(SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS, null); }
+    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims)                                                                                 { return splitList(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
+    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims, @Nullable CharPredicate trimChars)                                              { return splitList(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
 
-    @NotNull @Override final public T[] splitEOL()                                                                                                              { return split(EOL, 0, SPLIT_INCLUDE_DELIMS,null); }
-    @NotNull @Override final public T[] splitEOL(boolean includeDelims)                                                                                         { return split(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null); }
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                        { return split(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public T[] splitEOL()                                                                                                              { return split(SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS,null); }
+    @NotNull @Override final public T[] splitEOL(boolean includeDelims)                                                                                         { return split(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                        { return split(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter)                                                                                  { return split(delimiter, 0, 0, null); }
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)             { return split(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)             { return split(delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags)                                                            { return split(delimiter, limit, flags, null); }
     // @formatter:on
 
@@ -946,15 +945,15 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
-        if (trimChars == null) trimChars = WHITESPACE_SET;
-        else flags |= SPLIT_TRIM_PARTS;
+        if (trimChars == null) trimChars = SequenceUtils.WHITESPACE_SET;
+        else flags |= SequenceUtils.SPLIT_TRIM_PARTS;
 
         if (limit < 1) limit = Integer.MAX_VALUE;
 
-        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
-        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
-        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
-        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
+        boolean includeDelimiterParts = (flags & SequenceUtils.SPLIT_INCLUDE_DELIM_PARTS) != 0;
+        int includeDelimiter = !includeDelimiterParts && (flags & SequenceUtils.SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
+        boolean trimParts = (flags & SequenceUtils.SPLIT_TRIM_PARTS) != 0;
+        boolean skipEmpty = (flags & SequenceUtils.SPLIT_SKIP_EMPTY) != 0;
         ArrayList<T> items = new ArrayList<>();
 
         int lastPos = 0;
@@ -1047,20 +1046,20 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @Override @NotNull final public T appendEOL() { return suffixWith(EOL); }
-    @Override @NotNull final public T suffixWithEOL() { return suffixWith(EOL); }
-    @Override @NotNull final public T prefixWithEOL() { return prefixWith(EOL); }
-    @Override @NotNull final public T prefixOnceWithEOL() { return prefixOnceWith(EOL); }
-    @Override @NotNull final public T suffixOnceWithEOL() { return suffixOnceWith(EOL); }
+    @Override @NotNull final public T appendEOL() { return suffixWith(SequenceUtils.EOL); }
+    @Override @NotNull final public T suffixWithEOL() { return suffixWith(SequenceUtils.EOL); }
+    @Override @NotNull final public T prefixWithEOL() { return prefixWith(SequenceUtils.EOL); }
+    @Override @NotNull final public T prefixOnceWithEOL() { return prefixOnceWith(SequenceUtils.EOL); }
+    @Override @NotNull final public T suffixOnceWithEOL() { return suffixOnceWith(SequenceUtils.EOL); }
 
-    @Override @NotNull final public T appendSpace() { return suffixWith(SPACE); }
-    @Override @NotNull final public T suffixWithSpace() { return suffixWith(SPACE); }
-    @Override @NotNull final public T prefixWithSpace() { return prefixWith(SPACE); }
+    @Override @NotNull final public T appendSpace() { return suffixWith(SequenceUtils.SPACE); }
+    @Override @NotNull final public T suffixWithSpace() { return suffixWith(SequenceUtils.SPACE); }
+    @Override @NotNull final public T prefixWithSpace() { return prefixWith(SequenceUtils.SPACE); }
     @Override @NotNull final public T appendSpaces(int count) { return suffixWith(RepeatedSequence.ofSpaces(count)); }
     @Override @NotNull final public T suffixWithSpaces(int count) { return suffixWith(RepeatedSequence.ofSpaces(count)); }
     @Override @NotNull final public T prefixWithSpaces(int count) { return prefixWith(RepeatedSequence.ofSpaces(count)); }
-    @Override @NotNull final public T prefixOnceWithSpace() { return prefixOnceWith(SPACE); }
-    @Override @NotNull final public T suffixOnceWithSpace() { return suffixOnceWith(SPACE); }
+    @Override @NotNull final public T prefixOnceWithSpace() { return prefixOnceWith(SequenceUtils.SPACE); }
+    @Override @NotNull final public T suffixOnceWithSpace() { return suffixOnceWith(SequenceUtils.SPACE); }
     // @formatter:on
 
     @NotNull
@@ -1160,7 +1159,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @Override
     final public int columnAtIndex(int index) {
-        int lineStart = lastIndexOfAny(ANY_EOL_SET, index);
+        int lineStart = lastIndexOfAny(SequenceUtils.ANY_EOL_SET, index);
         return index - (lineStart == -1 ? 0 : lineStart + eolStartLength(lineStart));
     }
 

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.mappers;
 
-import com.vladsch.flexmark.util.sequence.IRichSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 
 public class NullEncoder {
     public static final CharMapper encodeNull = new EncodeNull();
@@ -11,7 +11,7 @@ public class NullEncoder {
 
         @Override
         public char map(char c) {
-            return c == IRichSequence.ENC_NUL ? IRichSequence.NUL : c;
+            return c == SequenceUtils.ENC_NUL ? SequenceUtils.NUL : c;
         }
     }
 
@@ -20,7 +20,7 @@ public class NullEncoder {
 
         @Override
         public char map(char c) {
-            return c == IRichSequence.NUL ? IRichSequence.ENC_NUL : c;
+            return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
         }
     }
 }

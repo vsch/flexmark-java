@@ -174,7 +174,7 @@ public class BasedSequenceLines implements List<CharSequence> {
                 lastLine = lastLine.suffixOnceWithEOL();
                 break;
             case REMOVE:
-                lastLine = lastLine.removeSuffix(IRichSequence.EOL);
+                lastLine = lastLine.removeSuffix(SequenceUtils.EOL);
                 break;
         }
         return lastLine;

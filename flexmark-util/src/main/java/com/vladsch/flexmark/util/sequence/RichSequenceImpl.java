@@ -59,7 +59,7 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
     @Override
     public char charAt(int index) {
         char c = charSequence.charAt(index);
-        return c == NUL ? ENC_NUL : c;
+        return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
     }
 
     @NotNull

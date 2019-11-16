@@ -21,7 +21,6 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.vladsch.flexmark.util.Utils.*;
-import static com.vladsch.flexmark.util.sequence.IRichSequence.HASH_SET;
 
 public class TestUtils {
     static {
@@ -143,7 +142,7 @@ public class TestUtils {
     @NotNull
     public static Pair<String, Integer> addSpecSection(@NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
         assert sectionHeadings.length == 7;
-        int lastSectionLevel = RichSequenceImpl.of(headingLine).countLeading(HASH_SET);
+        int lastSectionLevel = RichSequenceImpl.of(headingLine).countLeading(SequenceUtils.HASH_SET);
         sectionHeadings[lastSectionLevel] = headingText;
         int iMax = 7;
         for (int i = lastSectionLevel + 1; i < iMax; i++) {

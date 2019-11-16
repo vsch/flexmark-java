@@ -3,9 +3,8 @@ package com.vladsch.flexmark.ext.wikilink;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
-
-import static com.vladsch.flexmark.util.sequence.IRichSequence.BACKSLASH_SET;
 
 public class WikiNode extends Node implements DoNotDecorate {
     protected BasedSequence openingMarker = BasedSequence.NULL;
@@ -153,7 +152,7 @@ public class WikiNode extends Node implements DoNotDecorate {
             int pos = -1;
             do {
                 pos = linkChars.indexOf('#', pos + 1);
-            } while (pos != -1 && canEscapeAnchor && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing(BACKSLASH_SET) & 1) == 1));
+            } while (pos != -1 && canEscapeAnchor && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing(SequenceUtils.BACKSLASH_SET) & 1) == 1));
 
             if (pos < 0) {
                 this.pageRef = linkChars;
@@ -176,12 +175,12 @@ public class WikiNode extends Node implements DoNotDecorate {
             pos = linkChars.length() - 2;
             do {
                 pos = linkChars.lastIndexOf('|', pos - 1);
-            } while (pos != -1 && canEscapePipe && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing(BACKSLASH_SET) & 1) == 1));
+            } while (pos != -1 && canEscapePipe && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing(SequenceUtils.BACKSLASH_SET) & 1) == 1));
         } else {
             pos = -1;
             do {
                 pos = linkChars.indexOf('|', pos + 1);
-            } while (pos != -1 && canEscapePipe && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing(BACKSLASH_SET) & 1) == 1));
+            } while (pos != -1 && canEscapePipe && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing(SequenceUtils.BACKSLASH_SET) & 1) == 1));
         }
 
         BasedSequence link;

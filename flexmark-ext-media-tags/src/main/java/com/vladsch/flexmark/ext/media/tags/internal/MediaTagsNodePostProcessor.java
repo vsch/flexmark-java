@@ -13,7 +13,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.IRichSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class MediaTagsNodePostProcessor extends NodePostProcessor {
@@ -57,7 +57,7 @@ public class MediaTagsNodePostProcessor extends NodePostProcessor {
     }
 
     private boolean isEscaped(BasedSequence chars, String prefix) {
-        int backslashCount = chars.subSequence(0, chars.length() - prefix.length()).countTrailing(IRichSequence.BACKSLASH_SET);
+        int backslashCount = chars.subSequence(0, chars.length() - prefix.length()).countTrailing(SequenceUtils.BACKSLASH_SET);
         return (backslashCount & 1) != 0;
     }
 

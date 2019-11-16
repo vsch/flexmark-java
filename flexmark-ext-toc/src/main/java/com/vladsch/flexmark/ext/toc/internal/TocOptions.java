@@ -7,10 +7,9 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import static com.vladsch.flexmark.util.sequence.IRichSequence.HASH_SET;
 
 @SuppressWarnings("WeakerAccess")
 public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, MutableDataSetter {
@@ -157,7 +156,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         this.rawTitleLevel = titleLevel;
         if (!rawTitle.isEmpty()) {
             CharSequence charSequence = rawTitle.trim();
-            int markers = BasedSequence.of(charSequence, 0, charSequence.length()).countLeading(HASH_SET);
+            int markers = BasedSequence.of(charSequence, 0, charSequence.length()).countLeading(SequenceUtils.HASH_SET);
             if (markers >= 1 && markers <= 6) titleLevel = markers;
             this.title = rawTitle.substring(markers).trim();
         } else {

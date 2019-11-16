@@ -3,9 +3,8 @@ package com.vladsch.flexmark.util.sequence.edit;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
-
-import static com.vladsch.flexmark.util.sequence.IRichSequence.EOL_CHAR;
 
 public class BasedCharsRecoverySegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
     private final PositionAnchor myAnchor;
@@ -25,7 +24,7 @@ public class BasedCharsRecoverySegmentOptimizer<S extends IRichSequence<S>> impl
             char c = base.charAt(i + startIndex);
             char c1 = chars.charAt(i);
 
-            if (c == EOL_CHAR) prevEolPos = i + 1;
+            if (c == SequenceUtils.EOL_CHAR) prevEolPos = i + 1;
             if (c1 != c) return i;
         }
         return iMax;

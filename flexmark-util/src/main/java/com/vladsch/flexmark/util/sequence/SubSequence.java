@@ -79,7 +79,7 @@ public final class SubSequence extends BasedSequenceImpl {
     public char charAt(int index) {
         if (index >= 0 && index < endOffset - startOffset) {
             char c = baseSeq.charAt(index + startOffset);
-            return c == NUL ? ENC_NUL : c;
+            return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
         }
         throw new StringIndexOutOfBoundsException("SubSequence index: " + index + " out of range: 0, " + length());
     }

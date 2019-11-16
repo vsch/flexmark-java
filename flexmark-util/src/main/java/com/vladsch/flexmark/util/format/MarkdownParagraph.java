@@ -13,7 +13,7 @@ import java.util.List;
 import static com.vladsch.flexmark.util.format.TextAlignment.LEFT;
 
 public class MarkdownParagraph {
-    final private static char MARKDOWN_START_LINE_CHAR = IRichSequence.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
+    final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
     final private static BasedSequence MARKDOWN_START_LINE = BasedSequence.LINE_SEP;   // this one is not preserved but will cause a line break if not already at beginning of line
 
     final @NotNull BasedSequence myChars;
@@ -571,7 +571,7 @@ public class MarkdownParagraph {
     }
 
     class LeftAlignedWrapping {
-        final String lineBreak = IRichSequence.EOL;
+        final String lineBreak = SequenceUtils.EOL;
         int col = 0;
         int lineCount = 0;
         final BasedSequenceBuilder result = new BasedSequenceBuilder(myChars);

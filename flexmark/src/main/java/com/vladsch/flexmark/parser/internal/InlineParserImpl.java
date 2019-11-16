@@ -22,13 +22,12 @@ import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.regex.Matcher;
-
-import static com.vladsch.flexmark.util.sequence.IRichSequence.*;
 
 public class InlineParserImpl extends LightInlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected final BitSet originalSpecialCharacters;
@@ -244,7 +243,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         BasedSequence contentChars = block.getChars();
 
         // try parsing the beginning as link reference definitions:
-        int leadingSpaces = contentChars.countLeading(SPACE_TAB_SET);
+        int leadingSpaces = contentChars.countLeading(SequenceUtils.SPACE_TAB_SET);
         int length = contentChars.length();
 
         while (leadingSpaces <= 3 && length > 3 + leadingSpaces && contentChars.charAt(leadingSpaces) == '[') {
@@ -257,7 +256,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             if (pos == 0) break;
             contentChars = contentChars.subSequence(pos, length);
             length = contentChars.length();
-            leadingSpaces = contentChars.countLeading(SPACE_TAB_SET);
+            leadingSpaces = contentChars.countLeading(SequenceUtils.SPACE_TAB_SET);
         }
 
         return contentChars.getStartOffset() - block.getStartOffset();
@@ -360,7 +359,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         boolean res = false;
 
         char c = peek();
-        if (c == NUL) {
+        if (c == SequenceUtils.NUL) {
             return false;
         }
 
@@ -483,7 +482,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             index++;
             c = peek();
         }
-        while (c != NUL && factory.skipNext(c));
+        while (c != SequenceUtils.NUL && factory.skipNext(c));
 
         if (pos < index && factory.wantSkippedWhitespace()) {
             block.appendChild(new WhiteSpace(input.subSequence(pos, index)));
@@ -578,7 +577,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                     int length = codeText.length();
                     int lastPos = 0;
                     while (lastPos < length) {
-                        int softBreak = codeText.indexOfAny(ANY_EOL_SET, lastPos);
+                        int softBreak = codeText.indexOfAny(SequenceUtils.ANY_EOL_SET, lastPos);
                         int pos = softBreak == -1 ? length : softBreak;
                         int lineBreak = pos;
 
@@ -1202,7 +1201,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                             }
                         }
 
-                        return spaceInUrls ? matched.trimEnd(SPACE_SET) : matched;
+                        return spaceInUrls ? matched.trimEnd(SequenceUtils.SPACE_SET) : matched;
                     }
                 }
 
@@ -1210,7 +1209,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             } else {
                 // spec 0.27 compatibility
                 BasedSequence matched = match(myParsing.LINK_DESTINATION);
-                return matched != null && spaceInUrls ? matched.trimEnd(SPACE_SET) : matched;
+                return matched != null && spaceInUrls ? matched.trimEnd(SequenceUtils.SPACE_SET) : matched;
             }
         }
     }
@@ -1356,10 +1355,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             return null;
         }
 
-        String before = startIndex == 0 ? EOL : String.valueOf(input.charAt(startIndex - 1));
+        String before = startIndex == 0 ? SequenceUtils.EOL : String.valueOf(input.charAt(startIndex - 1));
 
         char charAfter = peek();
-        String after = charAfter == NUL ? EOL : String.valueOf(charAfter);
+        String after = charAfter == SequenceUtils.NUL ? SequenceUtils.EOL : String.valueOf(charAfter);
 
         // We could be more lazy here, in most cases we don't need to do every match case.
         boolean beforeIsPunctuation;

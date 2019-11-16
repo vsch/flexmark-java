@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,8 +15,6 @@ import java.util.ArrayList;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.util.sequence.IRichSequence.NUL;
 
 public class LightInlineParserImpl implements LightInlineParser {
 
@@ -234,7 +233,7 @@ public class LightInlineParserImpl implements LightInlineParser {
         if (index < input.length()) {
             return input.charAt(index);
         } else {
-            return NUL;
+            return SequenceUtils.NUL;
         }
     }
 
@@ -243,7 +242,7 @@ public class LightInlineParserImpl implements LightInlineParser {
         if (index + ahead < input.length()) {
             return input.charAt(index + ahead);
         } else {
-            return NUL;
+            return SequenceUtils.NUL;
         }
     }
 
