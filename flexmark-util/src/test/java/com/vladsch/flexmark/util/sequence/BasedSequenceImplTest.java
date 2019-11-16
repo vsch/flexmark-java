@@ -366,7 +366,7 @@ public class BasedSequenceImplTest {
     @Test
     public void testSplitBasic() throws Exception {
         BasedSequence sequence = BasedSequence.of(" 1,2 , 3 ,4,5,   ", 0, ((CharSequence) " 1,2 , 3 ,4,5,   ").length());
-        BasedSequence[] list = sequence.split(",", 0, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_SKIP_EMPTY,null);
+        BasedSequence[] list = sequence.split(",", 0, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_SKIP_EMPTY, null);
         ArrayList<String> sl = new ArrayList<>(list.length);
         for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
@@ -425,12 +425,12 @@ public class BasedSequenceImplTest {
     @Test
     public void test_getLineColumnAtIndex() {
         String[] lines = new String[] {
-            "1: line 1\n",
-            "2: line 2\n",
-            "3: line 3\r",
-            "4: line 4\r\n",
-            "5: line 5\r",
-            "6: line 6"
+                "1: line 1\n",
+                "2: line 2\n",
+                "3: line 3\r",
+                "4: line 4\r\n",
+                "5: line 5\r",
+                "6: line 6"
         };
 
         int iMax = lines.length;
@@ -811,14 +811,14 @@ public class BasedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges1() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "";
+                "\t    test\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -827,16 +827,16 @@ public class BasedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges2() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "    t\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "    t\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "    t\n" +
-            "";
+                "\t    test\n" +
+                "    t\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -845,27 +845,27 @@ public class BasedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges3() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "    t1\n" +
-            "\n" +
-            "    t2\n" +
-            "\n" +
-            "\n" +
-            "\n" +
-            "    t3\n" +
-            "\n" +
-            "    t4\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "    t1\n" +
+                "\n" +
+                "    t2\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "    t3\n" +
+                "\n" +
+                "    t4\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "    t1\n" +
-            "    t2\n" +
-            "    t3\n" +
-            "    t4\n" +
-            "";
+                "\t    test\n" +
+                "    t1\n" +
+                "    t2\n" +
+                "    t3\n" +
+                "    t4\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -874,9 +874,9 @@ public class BasedSequenceImplTest {
     @Test
     public void test_extendToEndOfLine() {
         String input = "" +
-            "0123456789\n" +
-            "abcdefghij\n" +
-            "\n";
+                "0123456789\n" +
+                "abcdefghij\n" +
+                "\n";
 
         BasedSequence sequence = BasedSequence.of(input);
 
@@ -896,9 +896,9 @@ public class BasedSequenceImplTest {
     @Test
     public void test_extendToStartOfLine() {
         String input = "" +
-            "0123456789\n" +
-            "abcdefghij\n" +
-            "\n";
+                "0123456789\n" +
+                "abcdefghij\n" +
+                "\n";
 
         BasedSequence sequence = BasedSequence.of(input);
 

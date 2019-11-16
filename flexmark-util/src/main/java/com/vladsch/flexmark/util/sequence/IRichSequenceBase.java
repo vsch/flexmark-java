@@ -233,158 +233,38 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @Override final public int indexOf(@NotNull CharSequence s) { return indexOf(s, 0, length()); }
-    @Override final public int indexOf(@NotNull CharSequence s, int fromIndex) { return indexOf(s, fromIndex, length()); }
+    @Override final public int indexOf(@NotNull CharSequence s)                                             { return SequenceUtils.indexOf(this, s); }
+    @Override final public int indexOf(@NotNull CharSequence s, int fromIndex)                              { return SequenceUtils.indexOf(this, s, fromIndex); }
+    @Override final public int indexOf(@NotNull CharSequence s, int fromIndex, int endIndex)                { return SequenceUtils.indexOf(this, s, fromIndex, endIndex);}
+    @Override final public int indexOf(char c)                                                              { return SequenceUtils.indexOf(this, c); }
+    @Override final public int indexOf(char c, int fromIndex)                                               { return SequenceUtils.indexOf(this, c, fromIndex); }
+    @Override final public int indexOfAny(@NotNull CharPredicate s)                                         { return SequenceUtils.indexOfAny(this, s); }
+    @Override final public int indexOfAny(@NotNull CharPredicate s, int index)                              { return SequenceUtils.indexOfAny(this, s, index); }
+    @Override final public int indexOfAnyNot(@NotNull CharPredicate s)                                      { return SequenceUtils.indexOfAnyNot(this, s); }
+    @Override final public int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex)                       { return SequenceUtils.indexOfAnyNot(this, s, fromIndex); }
+    @Override final public int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex, int endIndex)         { return SequenceUtils.indexOfAnyNot(this, s,fromIndex, endIndex);}
+    @Override final public int indexOfNot(char c)                                                           { return SequenceUtils.indexOfNot(this, c); }
+    @Override final public int indexOfNot(char c, int fromIndex)                                            { return SequenceUtils.indexOfNot(this, c, fromIndex); }
+    @Override final public int lastIndexOf(char c)                                                          { return SequenceUtils.lastIndexOf(this, c); }
+    @Override final public int lastIndexOf(char c, int fromIndex)                                { return SequenceUtils.lastIndexOf(this, c, fromIndex); }
+    @Override final public int lastIndexOfNot(char c)                                                       { return SequenceUtils.lastIndexOfNot(this, c); }
+    @Override final public int lastIndexOfNot(char c, int fromIndex)                                        { return SequenceUtils.lastIndexOfNot(this, c, fromIndex); }
+    @Override final public int lastIndexOf(@NotNull CharSequence s)                                         { return SequenceUtils.lastIndexOf(this, s); }
+    @Override final public int lastIndexOf(@NotNull CharSequence s, int fromIndex)                          { return SequenceUtils.lastIndexOf(this, s, fromIndex); }
+    @Override final public int lastIndexOfAny(@NotNull CharPredicate s, int fromIndex)                      { return SequenceUtils.lastIndexOfAny(this, s, fromIndex); }
+    @Override final public int lastIndexOfAny(@NotNull CharPredicate s)                                     { return SequenceUtils.lastIndexOfAny(this, s); }
+    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s)                                  { return SequenceUtils.lastIndexOfAnyNot(this, s); }
+    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s, int fromIndex)                   { return SequenceUtils.lastIndexOfAnyNot(this, s, fromIndex); }
+    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s, int startIndex, int fromIndex)   { return SequenceUtils.lastIndexOfAnyNot(this, s, startIndex, fromIndex); }
+    @Override final public int indexOf(char c, int fromIndex, int endIndex)                                 { return SequenceUtils.indexOf(this, c, fromIndex, endIndex); }
+    @Override final public int indexOfNot(char c, int fromIndex, int endIndex)                              { return SequenceUtils.indexOfNot(this, c, fromIndex, endIndex); }
+    @Override final public int indexOfAny(@NotNull CharPredicate s, int fromIndex, int endIndex)            { return SequenceUtils.indexOfAny(this, s, fromIndex, endIndex); }
+    @Override final public int lastIndexOf(@NotNull CharSequence s, int startIndex, int fromIndex)          { return SequenceUtils.lastIndexOf(this, s, startIndex, fromIndex); }
+    @Override final public int lastIndexOf(char c, int startIndex, int fromIndex)                           { return SequenceUtils.lastIndexOf(this, c, startIndex, fromIndex); }
+    @Override final public int lastIndexOfNot(char c, int startIndex, int fromIndex)                        { return SequenceUtils.lastIndexOfNot(this, c, startIndex, fromIndex); }
+    @Override final public int lastIndexOfAny(@NotNull CharPredicate s, int startIndex, int fromIndex)      { return SequenceUtils.lastIndexOfAny(this, s, startIndex, fromIndex); }
     // @formatter:on
 
-    @Override
-    final public int indexOf(@NotNull CharSequence s, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-
-        int sMax = s.length();
-        if (sMax == 0) return fromIndex;
-        endIndex = Math.min(endIndex, length());
-
-        if (fromIndex < endIndex) {
-            char firstChar = s.charAt(0);
-            int pos = fromIndex;
-
-            do {
-                pos = indexOf(firstChar, pos);
-                if (pos < 0 || pos + sMax > endIndex) break;
-                if (matchChars(s, pos)) return pos;
-                pos++;
-            } while (pos + sMax < endIndex);
-        }
-
-        return -1;
-    }
-
-    // @formatter:off
-    @Override final public int indexOf(char c)                                                              { return indexOf(c, 0, length()); }
-    @Override final public int indexOf(char c, int fromIndex)                                               { return indexOf(c, fromIndex, length()); }
-
-    @Override final public int indexOfAny(@NotNull CharPredicate s)                                         { return indexOfAny(s, 0, length()); }
-    @Override final public int indexOfAny(@NotNull CharPredicate s, int index)                              { return indexOfAny(s, index, length()); }
-
-    @Override final public int indexOfAnyNot(@NotNull CharPredicate s)                                      { return indexOfAnyNot(s.negate(), 0, length()); }
-    @Override final public int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex)                       { return indexOfAnyNot(s.negate(), fromIndex, length()); }
-    @Override final public int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex, int endIndex)         { return indexOfAny(s.negate(),fromIndex, endIndex);}
-
-    @Override final public int indexOfNot(char c)                                                           { return indexOfNot(c, 0, length()); }
-    @Override final public int indexOfNot(char c, int fromIndex)                                            { return indexOfNot(c, fromIndex, length()); }
-
-    @Override final public int lastIndexOf(char c)                                                          { return lastIndexOf(c, 0, length()); }
-    @Override final public int lastIndexOf(char c, int fromIndex)                                           { return lastIndexOf(c, 0, fromIndex); }
-    @Override final public int lastIndexOfNot(char c)                                                       { return lastIndexOfNot(c, 0, length()); }
-    @Override final public int lastIndexOfNot(char c, int fromIndex)                                        { return lastIndexOfNot(c, 0, fromIndex); }
-
-    @Override final public int lastIndexOf(@NotNull CharSequence s)                                         { return lastIndexOf(s, 0, length()); }
-    @Override final public int lastIndexOf(@NotNull CharSequence s, int fromIndex)                          { return lastIndexOf(s, 0, fromIndex); }
-
-    @Override final public int lastIndexOfAny(@NotNull CharPredicate s, int fromIndex)                      { return lastIndexOfAny(s, 0, fromIndex); }
-    @Override final public int lastIndexOfAny(@NotNull CharPredicate s)                                     { return lastIndexOfAny(s, 0, length()); }
-
-    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s)                                  { return lastIndexOfAny(s.negate(), 0, length()); }
-    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s, int fromIndex)                   { return lastIndexOfAny(s.negate(), 0, fromIndex); }
-
-    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s, int startIndex, int fromIndex)   { return lastIndexOfAny(s.negate(), startIndex, fromIndex);}
-    // @formatter:on
-
-    @Override
-    final public int indexOf(char c, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        for (int i = fromIndex; i < endIndex; i++) {
-            if (charAt(i) == c) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    final public int indexOfNot(char c, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        for (int i = fromIndex; i < endIndex; i++) {
-            if (charAt(i) != c) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    final public int indexOfAny(@NotNull CharPredicate s, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        for (int i = fromIndex; i < endIndex; i++) {
-            char c = charAt(i);
-            if (s.test(c)) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    final public int lastIndexOf(@NotNull CharSequence s, int startIndex, int fromIndex) {
-        startIndex = Math.max(startIndex, 0);
-
-        int sMax = s.length();
-        if (sMax == 0) return startIndex;
-
-        fromIndex = Math.min(fromIndex, length());
-
-        if (startIndex < fromIndex) {
-            int pos = fromIndex;
-            char lastChar = s.charAt(sMax - 1);
-
-            do {
-                pos = lastIndexOf(lastChar, pos);
-                if (pos + 1 < startIndex + sMax) break;
-                if (matchCharsReversed(s, pos)) return pos + 1 - sMax;
-                pos--;
-            } while (pos + 1 >= startIndex + sMax);
-        }
-
-        return -1;
-    }
-
-    @Override
-    final public int lastIndexOf(char c, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            if (charAt(i) == c) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    final public int lastIndexOfNot(char c, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            if (charAt(i) != c) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    final public int lastIndexOfAny(@NotNull CharPredicate s, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            char c = charAt(i);
-            if (s.test(c)) return i;
-        }
-        return -1;
-    }
 
     // @formatter:off
     @Override final public int countOfSpaceTab()                                                { return countOfAny(SPACE_TAB_SET, 0, length()); }

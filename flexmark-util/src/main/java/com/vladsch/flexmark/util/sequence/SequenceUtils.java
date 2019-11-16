@@ -20,32 +20,42 @@ public class SequenceUtils {
     public static int[] EMPTY_INDICES = { };
 
     // @formatter:off
-    public static int indexOf(@NotNull CharSequence s, char c) { return indexOf(s, c, 0, s.length());}
-    public static int indexOf(@NotNull CharSequence s, char c,   int fromIndex) { return indexOf(s, c, fromIndex, s.length());}
-    public static int lastIndexOf(@NotNull CharSequence s, char c) { return lastIndexOf(s, c, 0,s.length());}
-    public static int lastIndexOf(@NotNull CharSequence s, char c,   int startIndex) { return lastIndexOf(s, c, startIndex,s.length());}
+    public static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s)                                                 { return indexOf(thizz, s, 0, thizz.length()); }
+    public static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex)                                  { return indexOf(thizz, s, fromIndex, thizz.length()); }
+    public static int indexOf(@NotNull CharSequence thizz, char c)                                                                  { return indexOf(thizz, c, 0, thizz.length()); }
+    public static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex)                                                   { return indexOf(thizz, c, fromIndex, thizz.length()); }
+    public static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                             { return indexOfAny(thizz, s, 0, thizz.length()); }
+    public static int indexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index)                                  { return indexOfAny(thizz, s, index, thizz.length()); }
+    public static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                          { return indexOfAny(thizz, s.negate(), 0, thizz.length()); }
+    public static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                           { return indexOfAny(thizz, s.negate(), fromIndex, thizz.length()); }
+    public static int indexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex)             { return indexOfAny(thizz, s.negate(), fromIndex, endIndex);}
+    public static int indexOfNot(@NotNull CharSequence thizz,  char c)                                                              { return indexOfNot(thizz, c, 0, thizz.length()); }
+    public static int indexOfNot(@NotNull CharSequence thizz,  char c, int fromIndex)                                               { return indexOfNot(thizz, c, fromIndex, thizz.length()); }
+
+    public static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s)                                             { return lastIndexOf(thizz, s, 0, thizz.length()); }
+    public static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex)                              { return lastIndexOf(thizz, s, 0, fromIndex); }
+    public static int lastIndexOf(@NotNull CharSequence thizz, char c)                                                              { return lastIndexOf(thizz, c, 0, thizz.length());}
+    public static int lastIndexOf(@NotNull CharSequence thizz, char c, int fromIndex)                                    { return lastIndexOf(thizz, c, 0, fromIndex);}
+    public static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                         { return lastIndexOfAny(thizz, s, 0, thizz.length()); }
+    public static int lastIndexOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                          { return lastIndexOfAny(thizz, s, 0, fromIndex); }
+    public static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                      { return lastIndexOfAny(thizz, s.negate(), 0, thizz.length()); }
+    public static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                       { return lastIndexOfAny(thizz, s.negate(), 0, fromIndex); }
+    public static int lastIndexOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int startIndex, int fromIndex)       { return lastIndexOfAny(thizz, s.negate(), startIndex, fromIndex);}
+    public static int lastIndexOfNot(@NotNull CharSequence thizz,  char c)                                                          { return lastIndexOfNot(thizz, c, 0, thizz.length()); }
+    public static int lastIndexOfNot(@NotNull CharSequence thizz,  char c, int fromIndex)                                           { return lastIndexOfNot(thizz, c, 0, fromIndex); }
     // @formatter:on
 
-    public static int indexOf(@NotNull CharSequence s, char c, int fromIndex, int endIndex) {
-        fromIndex = Math.min(fromIndex, 0);
-        endIndex = Math.max(endIndex, s.length());
+    public static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
+        fromIndex = Math.max(fromIndex, 0);
+        endIndex = Math.min(endIndex, thizz.length());
 
         for (int i = fromIndex; i < endIndex; i++) {
-            if (c == s.charAt(i)) return i;
+            if (c == thizz.charAt(i)) return i;
         }
         return -1;
     }
 
-    public static int lastIndexOf(@NotNull CharSequence s, char c, int startIndex, int fromIndex) {
-        startIndex = Math.min(fromIndex, 0);
-        fromIndex = Math.max(fromIndex, s.length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            if (c == s.charAt(i)) return i;
-        }
-        return -1;
-    }
-
+    // TEST:
     public static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
 
@@ -58,13 +68,24 @@ public class SequenceUtils {
             int pos = fromIndex;
 
             do {
-                pos = SequenceUtils.indexOf(thizz, firstChar, pos);
+                pos = indexOf(thizz, firstChar, pos);
                 if (pos < 0 || pos + sMax > endIndex) break;
                 if (matchChars(thizz, s, pos)) return pos;
                 pos++;
             } while (pos + sMax < endIndex);
         }
 
+        return -1;
+    }
+
+    public static int lastIndexOf(@NotNull CharSequence thizz, char c, int startIndex, int fromIndex) {
+        fromIndex++;
+        startIndex = Math.max(startIndex, 0);
+        fromIndex = Math.min(fromIndex, thizz.length());
+
+        for (int i = fromIndex; i-- > startIndex; ) {
+            if (c == thizz.charAt(i)) return i;
+        }
         return -1;
     }
 
@@ -89,6 +110,7 @@ public class SequenceUtils {
         return -1;
     }
 
+    // TEST:
     public static int lastIndexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int startIndex, int fromIndex) {
         startIndex = Math.max(startIndex, 0);
 
