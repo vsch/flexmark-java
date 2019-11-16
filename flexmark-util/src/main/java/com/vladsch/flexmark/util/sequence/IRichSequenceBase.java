@@ -399,6 +399,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull @Override final public T lineAt(int index)                                                 { return subSequence(lineRangeAt(index)); }
     @NotNull @Override final public T lineAtAnyEOL(int index)                                           { return subSequence(lineRangeAtAnyEOL(index)); }
+
+    @NotNull @Override final public Range eolEndRange(int eolEnd)                                       { return SequenceUtils.eolEndRange(this, eolEnd); }
+    @NotNull @Override public Range eolStartRange(int eolStart)                                         { return SequenceUtils.eolStartRange(this, eolStart); }
     // @formatter:on
 
     @NotNull
@@ -417,109 +420,47 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    final public Range eolEndRange(int eolEnd) {
-        int eolLength = eolEndLength(eolEnd);
-        return eolLength == 0 ? Range.NULL : Range.of(eolEnd - eolLength, eolEnd);
+    final public T trimTailBlankLines() {
+        Range range = trailingBlankLinesRange();
+        return range.isNull() ? (T) this : subSequenceBefore(range);
     }
 
     @NotNull
     @Override
-    public Range eolStartRange(int eolStart) {
-        int eolLength = eolStartLength(eolStart);
-        return eolLength == 0 ? Range.NULL : Range.of(eolStart, eolStart + eolLength);
+    final public T trimLeadBlankLines() {
+        Range range = leadingBlankLinesRange();
+        return range.isNull() ? (T) this : subSequenceAfter(range);
     }
 
     // @formatter:off
-    @NotNull @Override final public T trimTailBlankLines() {Range range = trailingBlankLinesRange();return range.isNull() ?  (T) this : subSequenceBefore(range);}
-    @NotNull @Override final public T trimLeadBlankLines() {Range range = leadingBlankLinesRange();return range.isNull() ?  (T) this : subSequenceAfter(range);}
-    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(SequenceUtils.EOL_SET, 0, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(SequenceUtils.EOL_SET, startIndex, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(SequenceUtils.EOL_SET, fromIndex, endIndex);}
-    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(SequenceUtils.EOL_SET, 0, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(SequenceUtils.EOL_SET, fromIndex, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(SequenceUtils.EOL_SET,startIndex,fromIndex);}
+    @NotNull @Override final public Range leadingBlankLinesRange()                                                                      { return SequenceUtils.leadingBlankLinesRange(this); }
+    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex)                                                        { return SequenceUtils.leadingBlankLinesRange(this, startIndex); }
+    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex)                                           { return SequenceUtils.leadingBlankLinesRange(this, fromIndex, endIndex); }
+    @NotNull @Override final public Range trailingBlankLinesRange()                                                                     { return SequenceUtils.trailingBlankLinesRange(this); }
+    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex)                                                        { return SequenceUtils.trailingBlankLinesRange(this, fromIndex); }
+    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex)                                        { return SequenceUtils.trailingBlankLinesRange(this, startIndex,fromIndex); }
+
+    @NotNull @Override final public Range trailingBlankLinesRange(CharPredicate eolChars, int startIndex, int fromIndex)                { return SequenceUtils.trailingBlankLinesRange(this, eolChars, startIndex, fromIndex);}
+    @NotNull @Override final public Range leadingBlankLinesRange(@NotNull CharPredicate eolChars, int fromIndex, int endIndex)          { return SequenceUtils.leadingBlankLinesRange(this, eolChars, fromIndex, endIndex);}
     // @formatter:on
 
-    @NotNull
-    @Override
-    final public Range trailingBlankLinesRange(CharPredicate eolChars, int startIndex, int fromIndex) {
-        fromIndex = Math.min(fromIndex, length());
-        startIndex = rangeLimit(startIndex, 0, fromIndex);
-
-        int iMax = fromIndex;
-        int lastEOL = iMax;
-        int i;
-
-        for (i = iMax; i-- > startIndex; ) {
-            char c = charAt(i);
-            if (eolChars.test(c)) lastEOL = Math.min(i + Math.min(eolStartLength(i), 1), fromIndex);
-            else if (c != ' ' && c != '\t') break;
-        }
-
-        if (i < startIndex) return Range.of(startIndex, fromIndex);
-        else if (lastEOL != iMax) return Range.of(lastEOL, fromIndex);
-        else return Range.NULL;
-    }
-
-    @NotNull
-    @Override
-    final public Range leadingBlankLinesRange(@NotNull CharPredicate eolChars, int fromIndex, int endIndex) {
-        endIndex = Math.min(endIndex, length());
-        fromIndex = rangeLimit(fromIndex, 0, endIndex);
-
-        int iMax = endIndex;
-        int lastEOL = -1;
-        int i;
-
-        for (i = fromIndex; i < iMax; i++) {
-            char c = charAt(i);
-            if (eolChars.test(c)) lastEOL = i;
-            else if (c != ' ' && c != '\t') break;
-        }
-
-        if (i == iMax) return Range.of(fromIndex, endIndex);
-        else if (lastEOL >= 0) return Range.of(fromIndex, Math.min(lastEOL + Math.min(eolStartLength(lastEOL), 1), endIndex));
-        else return Range.NULL;
-    }
-
     // @formatter:off
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(SequenceUtils.EOL_SET, 0, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(SequenceUtils.EOL_SET, fromIndex, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(SequenceUtils.EOL_SET, fromIndex, endIndex);}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges()                                                               { return SequenceUtils.blankLinesRemovedRanges(this); }
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex)                                                  { return SequenceUtils.blankLinesRemovedRanges(this, fromIndex); }
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex)                                    { return SequenceUtils.blankLinesRemovedRanges(this, fromIndex, endIndex); }
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(@NotNull CharPredicate eolChars, int fromIndex, int endIndex)   { return SequenceUtils.blankLinesRemovedRanges(this, eolChars, fromIndex, endIndex); }
     // @formatter:on
 
-    @NotNull
-    @Override
-    final public List<Range> blankLinesRemovedRanges(@NotNull CharPredicate eolChars, int fromIndex, int endIndex) {
-        endIndex = Math.min(endIndex, length());
-        fromIndex = rangeLimit(fromIndex, 0, endIndex);
-        int lastPos = fromIndex;
-        ArrayList<Range> ranges = new ArrayList<>();
-
-        while (lastPos < endIndex) {
-            Range blankLines = leadingBlankLinesRange(eolChars, lastPos, endIndex);
-            if (blankLines.isNull()) {
-                int endOfLine = Math.min(endOfLine(lastPos) + 1, endIndex);
-                if (lastPos < endOfLine) ranges.add(Range.of(lastPos, endOfLine));
-                lastPos = endOfLine;
-            } else {
-                if (lastPos < blankLines.getStart()) ranges.add(Range.of(lastPos, blankLines.getStart()));
-                lastPos = blankLines.getEnd();
-            }
-        }
-        return ranges;
-    }
-
     // @formatter:off
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol)                 { return trimToEndOfLine(SequenceUtils.EOL_SET, includeEol, 0); }
-    @NotNull @Override public T trimToEndOfLine(int index)                          { return trimToEndOfLine(SequenceUtils.EOL_SET, false, 0); }
-    @NotNull @Override public T trimToEndOfLine()                                   { return trimToEndOfLine(SequenceUtils.EOL_SET, false, 0); }
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index)      { return trimToEndOfLine(SequenceUtils.EOL_SET, includeEol, index); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol)                                                                     { return trimToEndOfLine(SequenceUtils.EOL_SET, includeEol, 0); }
+    @NotNull @Override public T trimToEndOfLine(int index)                                                                              { return trimToEndOfLine(SequenceUtils.EOL_SET, false, 0); }
+    @NotNull @Override public T trimToEndOfLine()                                                                                       { return trimToEndOfLine(SequenceUtils.EOL_SET, false, 0); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index)                                                          { return trimToEndOfLine(SequenceUtils.EOL_SET, includeEol, index); }
 
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol)               { return trimToStartOfLine(SequenceUtils.EOL_SET, includeEol, 0); }
-    @NotNull @Override public T trimToStartOfLine(int index)                        { return trimToStartOfLine(SequenceUtils.EOL_SET, false, 0); }
-    @NotNull @Override public T trimToStartOfLine()                                 { return trimToStartOfLine(SequenceUtils.EOL_SET, false, 0); }
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index)    { return trimToStartOfLine(SequenceUtils.EOL_SET, includeEol, index); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol)                                                                   { return trimToStartOfLine(SequenceUtils.EOL_SET, includeEol, 0); }
+    @NotNull @Override public T trimToStartOfLine(int index)                                                                            { return trimToStartOfLine(SequenceUtils.EOL_SET, false, 0); }
+    @NotNull @Override public T trimToStartOfLine()                                                                                     { return trimToStartOfLine(SequenceUtils.EOL_SET, false, 0); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index)                                                        { return trimToStartOfLine(SequenceUtils.EOL_SET, includeEol, index); }
     // @formatter:on
 
     @NotNull
@@ -545,29 +486,29 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @NotNull @Override final public T ifNull(@NotNull T other) {return isNull() ? other : (T) this;}
-    @NotNull @Override final public T ifNullEmptyAfter(@NotNull T other) {return isNull() ? other.subSequence(other.length(), other.length()) : (T) this;}
-    @NotNull @Override final public T ifNullEmptyBefore(@NotNull T other) {return isNull() ? other.subSequence(0, 0) : (T) this;}
-    @NotNull @Override final public T nullIfEmpty() {return isEmpty() ? nullSequence() : (T) this;}
-    @NotNull @Override final public T nullIfBlank() {return isBlank() ? nullSequence() : (T) this;}
-    @NotNull @Override final public T nullIf(boolean condition) {return condition ? nullSequence() : (T) this;}
-    @NotNull @Override final public T nullIfNot(@NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches) {return nullIf(predicate.negate(),matches);}
-    @NotNull @Override final public T nullIf(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches) {return nullIf((o1, o2) -> predicate.test(o2), matches);}
-    @NotNull @Override final public T nullIfNot(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches) {return nullIfNot((o1, o2) -> predicate.test(o2), matches);}
-    @NotNull @Override final public T nullIf(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::matches,matches);}
-    @NotNull @Override final public T nullIfNot(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::matches,matches);}
-    @NotNull @Override final public T nullIfStartsWith(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::startsWith,matches);}
-    @NotNull @Override final public T nullIfNotStartsWith(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::startsWith,matches);}
-    @NotNull @Override final public T nullIfEndsWith(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::endsWith,matches);}
-    @NotNull @Override final public T nullIfNotEndsWith(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::endsWith,matches);}
-    @NotNull @Override final public T nullIfStartsWithIgnoreCase(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::startsWithIgnoreCase,matches);}
-    @NotNull @Override final public T nullIfNotStartsWithIgnoreCase(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::startsWithIgnoreCase,matches);}
-    @NotNull @Override final public T nullIfEndsWithIgnoreCase(CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) this::endsWithIgnoreCase,matches);}
-    @NotNull @Override final public T nullIfNotEndsWithIgnoreCase(CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) this::endsWithIgnoreCase,matches);}
-    @NotNull @Override final public T nullIfStartsWith(boolean ignoreCase, CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) prefix -> startsWith(prefix, ignoreCase),matches);}
-    @NotNull @Override final public T nullIfNotStartsWith(boolean ignoreCase, CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) prefix -> startsWith(prefix, ignoreCase),matches);}
-    @NotNull @Override final public T nullIfEndsWith(boolean ignoreCase, CharSequence... matches) {return nullIf((Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase),matches);}
-    @NotNull @Override final public T nullIfNotEndsWith(boolean ignoreCase, CharSequence... matches) {return nullIfNot((Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase),matches);}
+    @NotNull @Override final public T ifNull(@NotNull T other)                                                                              { return isNull() ? other : (T) this; }
+    @NotNull @Override final public T ifNullEmptyAfter(@NotNull T other)                                                                    { return isNull() ? other.subSequence(other.length(), other.length()) : (T) this; }
+    @NotNull @Override final public T ifNullEmptyBefore(@NotNull T other)                                                                   { return isNull() ? other.subSequence(0, 0) : (T) this; }
+    @NotNull @Override final public T nullIfEmpty()                                                                                         { return isEmpty() ? nullSequence() : (T) this; }
+    @NotNull @Override final public T nullIfBlank()                                                                                         { return isBlank() ? nullSequence() : (T) this; }
+    @NotNull @Override final public T nullIf(boolean condition)                                                                             { return condition ? nullSequence() : (T) this; }
+    @NotNull @Override final public T nullIfNot(@NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches)   { return nullIf(predicate.negate(),matches); }
+    @NotNull @Override final public T nullIf(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches)                   { return nullIf((o1, o2) -> predicate.test(o2), matches); }
+    @NotNull @Override final public T nullIfNot(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches)                { return nullIfNot((o1, o2) -> predicate.test(o2), matches); }
+    @NotNull @Override final public T nullIf(CharSequence... matches)                                                                       { return nullIf((Predicate<? super CharSequence>) this::matches,matches); }
+    @NotNull @Override final public T nullIfNot(CharSequence... matches)                                                                    { return nullIfNot((Predicate<? super CharSequence>) this::matches,matches); }
+    @NotNull @Override final public T nullIfStartsWith(CharSequence... matches)                                                             { return nullIf((Predicate<? super CharSequence>) this::startsWith,matches); }
+    @NotNull @Override final public T nullIfNotStartsWith(CharSequence... matches)                                                          { return nullIfNot((Predicate<? super CharSequence>) this::startsWith,matches); }
+    @NotNull @Override final public T nullIfEndsWith(CharSequence... matches)                                                               { return nullIf((Predicate<? super CharSequence>) this::endsWith,matches); }
+    @NotNull @Override final public T nullIfNotEndsWith(CharSequence... matches)                                                            { return nullIfNot((Predicate<? super CharSequence>) this::endsWith,matches); }
+    @NotNull @Override final public T nullIfStartsWithIgnoreCase(CharSequence... matches)                                                   { return nullIf((Predicate<? super CharSequence>) this::startsWithIgnoreCase,matches); }
+    @NotNull @Override final public T nullIfNotStartsWithIgnoreCase(CharSequence... matches)                                                { return nullIfNot((Predicate<? super CharSequence>) this::startsWithIgnoreCase,matches); }
+    @NotNull @Override final public T nullIfEndsWithIgnoreCase(CharSequence... matches)                                                     { return nullIf((Predicate<? super CharSequence>) this::endsWithIgnoreCase,matches); }
+    @NotNull @Override final public T nullIfNotEndsWithIgnoreCase(CharSequence... matches)                                                  { return nullIfNot((Predicate<? super CharSequence>) this::endsWithIgnoreCase,matches); }
+    @NotNull @Override final public T nullIfStartsWith(boolean ignoreCase, CharSequence... matches)                                         { return nullIf((Predicate<? super CharSequence>) prefix -> startsWith(prefix, ignoreCase),matches); }
+    @NotNull @Override final public T nullIfNotStartsWith(boolean ignoreCase, CharSequence... matches)                                      { return nullIfNot((Predicate<? super CharSequence>) prefix -> startsWith(prefix, ignoreCase),matches); }
+    @NotNull @Override final public T nullIfEndsWith(boolean ignoreCase, CharSequence... matches)                                           { return nullIf((Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase),matches); }
+    @NotNull @Override final public T nullIfNotEndsWith(boolean ignoreCase, CharSequence... matches)                                        { return nullIfNot((Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase),matches); }
     // @formatter:on
 
     @NotNull
@@ -580,49 +521,48 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @Override final public boolean isEmpty() {return length() == 0;}
-    @Override final public boolean isBlank() {return isEmpty() || countLeading(SequenceUtils.WHITESPACE_SET, 0, length()) == length();}
-    @Override final public boolean isNotEmpty() {return length() != 0;}
-    @Override final public boolean isNotBlank() {return !isBlank();}
-    @Override final public boolean isNull() {return this == nullSequence();}
-    @Override final public boolean isNotNull() {return this != nullSequence();}
+    @Override final public boolean isNull()                                                                 { return this == nullSequence(); }
+    @Override final public boolean isNotNull()                                                              { return this != nullSequence(); }
 
-    @Override final public boolean endsWith(@NotNull CharSequence suffix) {return length() > 0 && matchCharsReversed(suffix, length() - 1, false);}
-    @Override final public boolean endsWith(@NotNull CharSequence suffix, boolean ignoreCase) {return length() > 0 && matchCharsReversed(suffix, length() - 1, ignoreCase);}
-    @Override final public boolean startsWith(@NotNull CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, false);}
-    @Override final public boolean startsWith(@NotNull CharSequence prefix, boolean ignoreCase) {return length() > 0 && matchChars(prefix, 0, ignoreCase);}
+    @Override final public boolean isEmpty()                                                                { return SequenceUtils.isEmpty(this); }
+    @Override final public boolean isBlank()                                                                { return SequenceUtils.isBlank(this); }
+    @Override final public boolean isNotEmpty()                                                             { return SequenceUtils.isNotEmpty(this); }
+    @Override final public boolean isNotBlank()                                                             { return SequenceUtils.isNotBlank(this); }
 
-    @Override final public boolean endsWith(@NotNull CharPredicate chars) {return countTrailing(chars) > 0;}
-    @Override final public boolean startsWith(@NotNull CharPredicate chars) {return countLeading(chars) > 0;}
+    @Override final public boolean endsWith(@NotNull CharSequence suffix)                                   { return SequenceUtils.endsWith(this, suffix); }
+    @Override final public boolean endsWith(@NotNull CharSequence suffix, boolean ignoreCase)               { return SequenceUtils.endsWith(this, suffix, ignoreCase); }
+    @Override final public boolean startsWith(@NotNull CharSequence prefix)                                 { return SequenceUtils.startsWith(this, prefix); }
+    @Override final public boolean startsWith(@NotNull CharSequence prefix, boolean ignoreCase)             { return SequenceUtils.startsWith(this, prefix, ignoreCase); }
 
-    @Override final public boolean endsWithEOL() { return endsWith(SequenceUtils.EOL_SET); }
-    @Override final public boolean endsWithAnyEOL() { return endsWith(SequenceUtils.ANY_EOL_SET); }
-    @Override final public boolean endsWithSpace() { return endsWith(SequenceUtils.SPACE_SET); }
-    @Override final public boolean endsWithSpaceTab() { return endsWith(SequenceUtils.SPACE_TAB_SET); }
-    @Override final public boolean endsWithWhitespace() { return endsWith(SequenceUtils.WHITESPACE_SET); }
+    @Override final public boolean endsWith(@NotNull CharPredicate chars)                                   { return SequenceUtils.endsWith(this, chars); }
+    @Override final public boolean startsWith(@NotNull CharPredicate chars)                                 { return SequenceUtils.startsWith(this, chars); }
 
-    @Override final public boolean startsWithEOL() { return startsWith(SequenceUtils.EOL_SET); }
-    @Override final public boolean startsWithAnyEOL() { return startsWith(SequenceUtils.ANY_EOL_SET); }
-    @Override final public boolean startsWithSpace() { return startsWith(SequenceUtils.SPACE_SET); }
-    @Override final public boolean startsWithSpaceTab() { return startsWith(SequenceUtils.SPACE_TAB_SET); }
-    @Override final public boolean startsWithWhitespace() { return startsWith(SequenceUtils.WHITESPACE_SET); }
-    // @formatter:on
+    @Override final public boolean endsWithEOL()                                                            { return SequenceUtils.endsWithEOL(this);  }
+    @Override final public boolean endsWithAnyEOL()                                                         { return SequenceUtils.endsWithAnyEOL(this);  }
+    @Override final public boolean endsWithSpace()                                                          { return SequenceUtils.endsWithSpace(this);  }
+    @Override final public boolean endsWithSpaceTab()                                                       { return SequenceUtils.endsWithSpaceTab(this);  }
+    @Override final public boolean endsWithWhitespace()                                                     { return SequenceUtils.endsWithWhitespace(this);  }
 
-    // @formatter:off
-    @NotNull @Override final public T removeSuffix(@NotNull CharSequence suffix) {return !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
-    @NotNull @Override final public T removePrefix(@NotNull CharSequence prefix) {return !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length());}
-    @NotNull @Override final public T removeProperSuffix(@NotNull CharSequence suffix) {return length() <= suffix.length() || !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
-    @NotNull @Override final public T removeProperPrefix(@NotNull CharSequence prefix) {return length() <= prefix.length() || !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length());}
-    @Override final public boolean endsWithIgnoreCase(@NotNull CharSequence suffix) {return length() > 0 && matchCharsReversed(suffix, length() - 1, true);}
-    @Override final public boolean startsWithIgnoreCase(@NotNull CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, true);}
-    @NotNull @Override final public T removeSuffixIgnoreCase(@NotNull CharSequence suffix) {return !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
-    @NotNull @Override final public T removePrefixIgnoreCase(@NotNull CharSequence prefix) {return !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length());}
-    @NotNull @Override final public T removeProperSuffixIgnoreCase(@NotNull CharSequence suffix) {return length() <= suffix.length() || !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length());}
-    @NotNull @Override final public T removeProperPrefixIgnoreCase(@NotNull CharSequence prefix) {return length() <= prefix.length() || !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length());}
-    @NotNull @Override final public T removeSuffix(@NotNull CharSequence suffix, boolean ignoreCase) {return !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());}
-    @NotNull @Override final public T removePrefix(@NotNull CharSequence prefix, boolean ignoreCase) {return !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());}
-    @NotNull @Override final public T removeProperSuffix(@NotNull CharSequence suffix, boolean ignoreCase) {return length() <= suffix.length() || !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length());}
-    @NotNull @Override final public T removeProperPrefix(@NotNull CharSequence prefix, boolean ignoreCase) {return length() <= prefix.length() || !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length());}
+    @Override final public boolean startsWithEOL()                                                          { return SequenceUtils.startsWithEOL(this);  }
+    @Override final public boolean startsWithAnyEOL()                                                       { return SequenceUtils.startsWithAnyEOL(this);  }
+    @Override final public boolean startsWithSpace()                                                        { return SequenceUtils.startsWithSpace(this);  }
+    @Override final public boolean startsWithSpaceTab()                                                     { return SequenceUtils.startsWithSpaceTab(this);  }
+    @Override final public boolean startsWithWhitespace()                                                   { return SequenceUtils.startsWithWhitespace(this);  }
+
+    @NotNull @Override final public T removeSuffix(@NotNull CharSequence suffix)                            { return !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length()); }
+    @NotNull @Override final public T removePrefix(@NotNull CharSequence prefix)                            { return !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length()); }
+    @NotNull @Override final public T removeProperSuffix(@NotNull CharSequence suffix)                      { return length() <= suffix.length() || !endsWith(suffix) ? (T) this : subSequence(0, length() - suffix.length()); }
+    @NotNull @Override final public T removeProperPrefix(@NotNull CharSequence prefix)                      { return length() <= prefix.length() || !startsWith(prefix) ? (T) this : subSequence(prefix.length(), length()); }
+    @Override final public boolean endsWithIgnoreCase(@NotNull CharSequence suffix)                         { return length() > 0 && matchCharsReversed(suffix, length() - 1, true); }
+    @Override final public boolean startsWithIgnoreCase(@NotNull CharSequence prefix)                       { return length() > 0 && matchChars(prefix, 0, true); }
+    @NotNull @Override final public T removeSuffixIgnoreCase(@NotNull CharSequence suffix)                  { return !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length()); }
+    @NotNull @Override final public T removePrefixIgnoreCase(@NotNull CharSequence prefix)                  { return !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length()); }
+    @NotNull @Override final public T removeProperSuffixIgnoreCase(@NotNull CharSequence suffix)            { return length() <= suffix.length() || !endsWithIgnoreCase(suffix) ? (T) this : subSequence(0, length() - suffix.length()); }
+    @NotNull @Override final public T removeProperPrefixIgnoreCase(@NotNull CharSequence prefix)            { return length() <= prefix.length() || !startsWithIgnoreCase(prefix) ? (T) this : subSequence(prefix.length(), length()); }
+    @NotNull @Override final public T removeSuffix(@NotNull CharSequence suffix, boolean ignoreCase)        { return !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length()); }
+    @NotNull @Override final public T removePrefix(@NotNull CharSequence prefix, boolean ignoreCase)        { return !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length()); }
+    @NotNull @Override final public T removeProperSuffix(@NotNull CharSequence suffix, boolean ignoreCase)  { return length() <= suffix.length() || !endsWith(suffix, ignoreCase) ? (T) this : subSequence(0, length() - suffix.length()); }
+    @NotNull @Override final public T removeProperPrefix(@NotNull CharSequence prefix, boolean ignoreCase)  { return length() <= prefix.length() || !startsWith(prefix, ignoreCase) ? (T) this : subSequence(prefix.length(), length()); }
     // @formatter:on
 
     @NotNull
@@ -658,31 +598,13 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         }
     }
 
-    @NotNull
-    @Override
-    final public T toLowerCase() {
-        return toMapped(ChangeCase.toLowerCase);
-    }
+    // @formatter:off
+    @NotNull @Override final public T toLowerCase()     { return toMapped(ChangeCase.toLowerCase); }
+    @NotNull @Override final public T toUpperCase()     { return toMapped(ChangeCase.toUpperCase); }
+    @NotNull @Override final public T toNbSp()          { return toMapped(SpaceMapper.toNonBreakSpace); }
+    @NotNull @Override final public T toSpc()           { return toMapped(SpaceMapper.fromNonBreakSpace); }
+    // @formatter:on
 
-    @NotNull
-    @Override
-    final public T toUpperCase() {
-        return toMapped(ChangeCase.toUpperCase);
-    }
-
-    @NotNull
-    @Override
-    final public T toNbSp() {
-        return toMapped(SpaceMapper.toNonBreakSpace);
-    }
-
-    @NotNull
-    @Override
-    final public T toSpc() {
-        return toMapped(SpaceMapper.fromNonBreakSpace);
-    }
-
-    // TEST:
     // @formatter:off
     @Override final public boolean matches(@NotNull CharSequence chars, boolean ignoreCase)                                     { return SequenceUtils.matches(this, chars, ignoreCase);}
     @Override final public boolean matches(@NotNull CharSequence chars)                                                         { return SequenceUtils.matches(this, chars);}

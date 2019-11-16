@@ -3,7 +3,9 @@ package com.vladsch.flexmark.util.sequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.vladsch.flexmark.util.Utils.rangeLimit;
@@ -661,6 +663,121 @@ public interface SequenceUtils {
     static Range lineRangeAtAnyEOL(@NotNull CharSequence thizz, int index) {
         return Range.of(startOfLineAnyEOL(thizz, index), endOfLineAnyEOL(thizz, index));
     }
+
+    @NotNull
+    static Range eolEndRange(@NotNull CharSequence thizz, int eolEnd) {
+        int eolLength = eolEndLength(thizz, eolEnd);
+        return eolLength == 0 ? Range.NULL : Range.of(eolEnd - eolLength, eolEnd);
+    }
+
+    @NotNull
+    static Range eolStartRange(@NotNull CharSequence thizz, int eolStart) {
+        int eolLength = eolStartLength(thizz, eolStart);
+        return eolLength == 0 ? Range.NULL : Range.of(eolStart, eolStart + eolLength);
+    }
+
+    // @formatter:off
+    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz)                                   { return leadingBlankLinesRange(thizz, SequenceUtils.EOL_SET, 0, Integer.MAX_VALUE); }
+    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int startIndex)                   { return leadingBlankLinesRange(thizz, SequenceUtils.EOL_SET, startIndex, Integer.MAX_VALUE); }
+    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int fromIndex, int endIndex)      { return leadingBlankLinesRange(thizz, SequenceUtils.EOL_SET, fromIndex, endIndex); }
+    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz)                                  { return trailingBlankLinesRange(thizz, SequenceUtils.EOL_SET, 0, Integer.MAX_VALUE); }
+    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int fromIndex)                   { return trailingBlankLinesRange(thizz, SequenceUtils.EOL_SET, fromIndex, Integer.MAX_VALUE); }
+    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int startIndex, int fromIndex)   { return trailingBlankLinesRange(thizz, SequenceUtils.EOL_SET, startIndex,fromIndex); }
+    // @formatter:on
+
+    @NotNull
+    static Range trailingBlankLinesRange(@NotNull CharSequence thizz, @NotNull CharPredicate eolChars, int startIndex, int fromIndex) {
+        fromIndex = Math.min(fromIndex, thizz.length());
+        startIndex = rangeLimit(startIndex, 0, fromIndex);
+
+        int iMax = fromIndex;
+        int lastEOL = iMax;
+        int i;
+
+        for (i = iMax; i-- > startIndex; ) {
+            char c = thizz.charAt(i);
+            if (eolChars.test(c)) lastEOL = Math.min(i + Math.min(eolStartLength(thizz, i), 1), fromIndex);
+            else if (c != ' ' && c != '\t') break;
+        }
+
+        if (i < startIndex) return Range.of(startIndex, fromIndex);
+        else if (lastEOL != iMax) return Range.of(lastEOL, fromIndex);
+        else return Range.NULL;
+    }
+
+    @NotNull
+    static Range leadingBlankLinesRange(@NotNull CharSequence thizz, @NotNull CharPredicate eolChars, int fromIndex, int endIndex) {
+        endIndex = Math.min(endIndex, thizz.length());
+        fromIndex = rangeLimit(fromIndex, 0, endIndex);
+
+        int iMax = endIndex;
+        int lastEOL = -1;
+        int i;
+
+        for (i = fromIndex; i < iMax; i++) {
+            char c = thizz.charAt(i);
+            if (eolChars.test(c)) lastEOL = i;
+            else if (c != ' ' && c != '\t') break;
+        }
+
+        if (i == iMax) return Range.of(fromIndex, endIndex);
+        else if (lastEOL >= 0) return Range.of(fromIndex, Math.min(lastEOL + Math.min(eolStartLength(thizz, lastEOL), 1), endIndex));
+        else return Range.NULL;
+    }
+
+    // @formatter:off
+    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz)                                { return blankLinesRemovedRanges(thizz, SequenceUtils.EOL_SET, 0, Integer.MAX_VALUE); }
+    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz, int fromIndex)                 { return blankLinesRemovedRanges(thizz, SequenceUtils.EOL_SET, fromIndex, Integer.MAX_VALUE); }
+    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz, int fromIndex, int endIndex)   { return blankLinesRemovedRanges(thizz, SequenceUtils.EOL_SET, fromIndex, endIndex); }
+    // @formatter:on
+
+    @NotNull
+    static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz, @NotNull CharPredicate eolChars, int fromIndex, int endIndex) {
+        endIndex = Math.min(endIndex, thizz.length());
+        fromIndex = rangeLimit(fromIndex, 0, endIndex);
+        int lastPos = fromIndex;
+        ArrayList<Range> ranges = new ArrayList<>();
+
+        while (lastPos < endIndex) {
+            Range blankLines = leadingBlankLinesRange(thizz, eolChars, lastPos, endIndex);
+            if (blankLines.isNull()) {
+                int endOfLine = Math.min(endOfLine(thizz, lastPos) + 1, endIndex);
+                if (lastPos < endOfLine) ranges.add(Range.of(lastPos, endOfLine));
+                lastPos = endOfLine;
+            } else {
+                if (lastPos < blankLines.getStart()) ranges.add(Range.of(lastPos, blankLines.getStart()));
+                lastPos = blankLines.getEnd();
+            }
+        }
+        return ranges;
+    }
+
+    // @formatter:off
+    static boolean isEmpty(@NotNull CharSequence thizz)                                                         { return thizz.length() == 0; }
+    static boolean isBlank(@NotNull CharSequence thizz)                                                         { return isEmpty(thizz) || countLeading(thizz, SequenceUtils.WHITESPACE_SET, 0, Integer.MAX_VALUE) == thizz.length(); }
+    static boolean isNotEmpty(@NotNull CharSequence thizz)                                                      { return thizz.length() != 0; }
+    static boolean isNotBlank(@NotNull CharSequence thizz)                                                      { return !isBlank(thizz); }
+
+    static boolean endsWith(@NotNull CharSequence thizz, @NotNull CharSequence suffix)                          { return thizz.length() > 0 && matchCharsReversed(thizz, suffix, thizz.length() - 1, false); }
+    static boolean endsWith(@NotNull CharSequence thizz, @NotNull CharSequence suffix, boolean ignoreCase)      { return thizz.length() > 0 && matchCharsReversed(thizz, suffix, thizz.length() - 1, ignoreCase); }
+    static boolean startsWith(@NotNull CharSequence thizz, @NotNull CharSequence prefix)                        { return thizz.length() > 0 && matchChars(thizz, prefix, 0, false); }
+    static boolean startsWith(@NotNull CharSequence thizz, @NotNull CharSequence prefix, boolean ignoreCase)    { return thizz.length() > 0 && matchChars(thizz, prefix, 0, ignoreCase); }
+
+    static boolean endsWith(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                          { return countTrailing(thizz, chars) > 0; }
+    static boolean startsWith(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                        { return countLeading(thizz, chars) > 0; }
+
+    static boolean endsWithEOL(@NotNull CharSequence thizz)                                                     { return endsWith(thizz, SequenceUtils.EOL_SET); }
+    static boolean endsWithAnyEOL(@NotNull CharSequence thizz)                                                  { return endsWith(thizz, SequenceUtils.ANY_EOL_SET); }
+    static boolean endsWithSpace(@NotNull CharSequence thizz)                                                   { return endsWith(thizz, SequenceUtils.SPACE_SET); }
+    static boolean endsWithSpaceTab(@NotNull CharSequence thizz)                                                { return endsWith(thizz, SequenceUtils.SPACE_TAB_SET); }
+    static boolean endsWithWhitespace(@NotNull CharSequence thizz)                                              { return endsWith(thizz, SequenceUtils.WHITESPACE_SET); }
+
+    static boolean startsWithEOL(@NotNull CharSequence thizz)                                                   { return startsWith(thizz, SequenceUtils.EOL_SET); }
+    static boolean startsWithAnyEOL(@NotNull CharSequence thizz)                                                { return startsWith(thizz, SequenceUtils.ANY_EOL_SET); }
+    static boolean startsWithSpace(@NotNull CharSequence thizz)                                                 { return startsWith(thizz, SequenceUtils.SPACE_SET); }
+    static boolean startsWithSpaceTab(@NotNull CharSequence thizz)                                              { return startsWith(thizz, SequenceUtils.SPACE_TAB_SET); }
+    static boolean startsWithWhitespace(@NotNull CharSequence thizz)                                            { return startsWith(thizz, SequenceUtils.WHITESPACE_SET); }
+    // @formatter:on
 
 //    @NotNull
 //    static <T extends CharSequence> List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
