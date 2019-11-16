@@ -185,9 +185,6 @@ Next 0.59.50
 * [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
   * [ ] Add: `Formatter` Paragraph wrapping options and code.
   * [ ] Add: `LS` awareness to segment optimization
-  * [ ] Add: `EOL` recovery optimizer which will convert `\n` in out of base text to range for
-        EOL in original sequence in the replaced region of out of base text, splitting text if
-        needed to allow for the EOL.
   * [ ] Fix: change `BasedSequenceBuilder` to use `SegmentBuilder` for segment accumulation
         instead of its own implementation.
     * [ ] Add: construction with optional `SegmentOptimizer` list and apply optimizers to
@@ -198,7 +195,7 @@ Next 0.59.50
         an array of `BasedSequences`. This will allow optimization to recover lost based spaces
         and EOLs.
     * [ ] Fix: factor out EOL recovery from `BasedCharsRecoverySegmentOptimizer`, easier to do
-          EOL recovery after based char recovery.
+          EOL recovery after based char recovery has done its job.
     * [ ] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
     * [ ] Add: EOL recovery `BasedEolRecoveryOptimizer`:
       * recover EOLs from text when preceded by range and only blanks between end of range and
