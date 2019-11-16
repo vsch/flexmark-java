@@ -266,31 +266,18 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
 
     // @formatter:off
-    @Override final public int countOfSpaceTab()                                                { return countOfAny(SequenceUtils.SPACE_TAB_SET, 0, length()); }
-    @Override final public int countOfNotSpaceTab()                                             { return countOfAny(SequenceUtils.SPACE_TAB_SET.negate(), 0, length()); }
-
-    @Override final public int countOfWhitespace()                                              { return countOfAny(SequenceUtils.WHITESPACE_SET, length()); }
-    @Override final public int countOfNotWhitespace()                                           { return countOfAny(SequenceUtils.WHITESPACE_SET.negate(), 0, length()); }
-
-    @Override final public int countOfAny(@NotNull CharPredicate chars, int fromIndex)          { return countOfAny(chars, fromIndex, length()); }
-    @Override final public int countOfAny(@NotNull CharPredicate chars)                         { return countOfAny(chars, 0, length()); }
-
-    @Override final public int countOfAnyNot(@NotNull CharPredicate chars, int fromIndex)       { return countOfAny(chars.negate(), fromIndex, length()); }
-    @Override final public int countOfAnyNot(@NotNull CharPredicate chars)                      { return countOfAny(chars.negate(), 0, length()); }
+    @Override final public int countOfSpaceTab()                                                            { return SequenceUtils.countOfSpaceTab(this); }
+    @Override final public int countOfNotSpaceTab()                                                         { return SequenceUtils.countOfNotSpaceTab(this); }
+    @Override final public int countOfWhitespace()                                                          { return SequenceUtils.countOfWhitespace(this); }
+    @Override final public int countOfNotWhitespace()                                                       { return SequenceUtils.countOfNotWhitespace(this); }
+    @Override final public int countOfAny(@NotNull CharPredicate chars, int fromIndex)                      { return SequenceUtils.countOfAny(this, chars, fromIndex); }
+    @Override final public int countOfAny(@NotNull CharPredicate chars)                                     { return SequenceUtils.countOfAny(this, chars); }
+    @Override final public int countOfAnyNot(@NotNull CharPredicate chars, int fromIndex)                   { return SequenceUtils.countOfAnyNot(this, chars, fromIndex); }
+    @Override final public int countOfAnyNot(@NotNull CharPredicate chars)                                  { return SequenceUtils.countOfAnyNot(this, chars); }
+    @Override final public int countOfAny(@NotNull CharPredicate s, int fromIndex, int endIndex)            { return SequenceUtils.countOfAny(this, s, fromIndex, endIndex);}
+    @Override final public int countOfAnyNot(@NotNull CharPredicate chars, int startIndex, int endIndex)    { return SequenceUtils.countOfAnyNot(this, chars, startIndex, endIndex); }
     // @formatter:on
 
-    @Override
-    final public int countOfAny(@NotNull CharPredicate s, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        int count = 0;
-        for (int i = fromIndex; i < endIndex; i++) {
-            char c = charAt(i);
-            if (s.test(c)) count++;
-        }
-        return count;
-    }
 
     // @formatter:off
     @Override final public int countLeadingSpaceTab()                                                       { return this.countLeading(SequenceUtils.SPACE_TAB_SET, 0, length()); }
@@ -315,7 +302,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @Override final public int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex)  { return countLeading(chars.negate(), startIndex, endIndex); }
     @Override final public int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex) { return countTrailing(chars.negate(), startIndex, endIndex); }
-    @Override final public int countOfAnyNot(@NotNull CharPredicate chars, int startIndex, int endIndex)    { return countOfAny(chars.negate(), startIndex, endIndex); }
     // @formatter:on
 
     @Override

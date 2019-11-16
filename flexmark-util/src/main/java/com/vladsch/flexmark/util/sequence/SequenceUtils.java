@@ -378,4 +378,31 @@ public interface SequenceUtils {
         }
         return iMax;
     }
+
+    // @formatter:off
+    static int countOfSpaceTab(@NotNull CharSequence thizz)                                                                     { return countOfAny(thizz, SequenceUtils.SPACE_TAB_SET, 0, thizz.length()); }
+    static int countOfNotSpaceTab(@NotNull CharSequence thizz)                                                                  { return countOfAny(thizz, SequenceUtils.SPACE_TAB_SET.negate(), 0, thizz.length()); }
+
+    static int countOfWhitespace(@NotNull CharSequence thizz)                                                                   { return countOfAny(thizz, SequenceUtils.WHITESPACE_SET, thizz.length()); }
+    static int countOfNotWhitespace(@NotNull CharSequence thizz)                                                                { return countOfAny(thizz, SequenceUtils.WHITESPACE_SET.negate(), 0, thizz.length()); }
+
+    static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                             { return countOfAny(thizz, chars, fromIndex, thizz.length()); }
+    static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                            { return countOfAny(thizz, chars, 0, thizz.length()); }
+
+    static int countOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex, int endIndex)            { return countOfAny(thizz, chars.negate(), fromIndex, endIndex); }
+    static int countOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                          { return countOfAny(thizz, chars.negate(), fromIndex, thizz.length()); }
+    static int countOfAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                         { return countOfAny(thizz, chars.negate(), 0, thizz.length()); }
+    // @formatter:on
+
+    static int countOfAny(CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
+        fromIndex = Math.max(fromIndex, 0);
+        endIndex = Math.min(endIndex, thizz.length());
+
+        int count = 0;
+        for (int i = fromIndex; i < endIndex; i++) {
+            char c = thizz.charAt(i);
+            if (s.test(c)) count++;
+        }
+        return count;
+    }
 }
