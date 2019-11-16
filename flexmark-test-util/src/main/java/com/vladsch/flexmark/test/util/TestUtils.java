@@ -54,13 +54,11 @@ public class TestUtils {
     public static final DataKey<String> SOURCE_INDENT = new DataKey<>("SOURCE_INDENT", "");
 
     public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
-    public static final String DEFAULT_SPEC_RESOURCE = "/spec.txt";
     public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.UNLOAD_EXTENSIONS;
     public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.LOAD_EXTENSIONS;
     final private static DataHolder EMPTY_OPTIONS = new DataSet();
     final public static DataKey<BiFunction<String, String, DataHolder>> CUSTOM_OPTION = new DataKey<>("CUSTOM_OPTION", (option, params) -> EMPTY_OPTIONS);
     public static final String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
-    public static final @NotNull ResourceLocation DEFAULT_RESOURCE_LOCATION = ResourceLocation.of(TestUtils.class, TestUtils.DEFAULT_SPEC_RESOURCE);
 
     public static DataHolder processOption(@NotNull Map<String, ? extends DataHolder> optionsMap, @NotNull String option) {
         DataHolder dataHolder = null;

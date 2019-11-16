@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class ComboTypographicSpecTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/ext_typographic_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(ComboTypographicSpecTest.class, SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(TypographicExtension.create()))
             .toImmutable();

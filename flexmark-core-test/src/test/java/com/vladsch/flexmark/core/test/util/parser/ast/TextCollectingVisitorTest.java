@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.ast.util;
+package com.vladsch.flexmark.core.test.util.parser.ast;
 
+import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.html;
+package com.vladsch.flexmark.core.test.util.html;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

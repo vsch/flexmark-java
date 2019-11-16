@@ -1,9 +1,10 @@
-package com.vladsch.flexmark.parser;
+package com.vladsch.flexmark.core.test.util.parser;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
-import com.vladsch.flexmark.test.util.TestUtils;
+import com.vladsch.flexmark.test.specs.TestSpecLocator;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Document;
@@ -41,12 +42,12 @@ final public class ParserTest {
     public void ioReaderTest() throws IOException {
         Parser parser = Parser.builder().build();
 
-        InputStream input1 = SpecReader.getSpecInputStream(TestUtils.DEFAULT_RESOURCE_LOCATION);
+        InputStream input1 = SpecReader.getSpecInputStream(TestSpecLocator.DEFAULT_RESOURCE_LOCATION);
         Node document1;
         InputStreamReader reader = new InputStreamReader(input1, StandardCharsets.UTF_8);
         document1 = parser.parseReader(reader);
 
-        String spec = SpecReader.readSpec(TestUtils.DEFAULT_RESOURCE_LOCATION);
+        String spec = SpecReader.readSpec(TestSpecLocator.DEFAULT_RESOURCE_LOCATION);
         Node document2 = parser.parse(spec);
 
         HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();

@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.parser.internal;
+package com.vladsch.flexmark.core.test.util.parser;
 
+import com.vladsch.flexmark.parser.internal.HtmlDeepParser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

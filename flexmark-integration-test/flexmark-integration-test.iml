@@ -46,5 +46,6 @@
     <orderEntry type="module" module-name="flexmark-ext-toc" scope="TEST" />
     <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-test-specs" scope="TEST" />
   </component>
 </module>

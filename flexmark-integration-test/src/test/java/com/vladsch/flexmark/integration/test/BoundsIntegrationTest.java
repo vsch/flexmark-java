@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.integration.test;
 
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.test.util.TestUtils;
+import com.vladsch.flexmark.test.specs.TestSpecLocator;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Node;
@@ -30,7 +30,7 @@ public class BoundsIntegrationTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        SpecReader specReader = SpecReader.createAndReadExamples(TestUtils.DEFAULT_RESOURCE_LOCATION, false);
+        SpecReader specReader = SpecReader.createAndReadExamples(TestSpecLocator.DEFAULT_RESOURCE_LOCATION, false);
         List<SpecExample> examples = specReader.getExamples();
         List<Object[]> data = new ArrayList<>();
         for (SpecExample example : examples) {

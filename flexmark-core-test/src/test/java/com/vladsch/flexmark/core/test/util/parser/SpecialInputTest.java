@@ -1,6 +1,7 @@
-package com.vladsch.flexmark.parser;
+package com.vladsch.flexmark.core.test.util.parser;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.*;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;

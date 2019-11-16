@@ -7,23 +7,14 @@
         <version>0.59.48</version>
     </parent>
 
-    <artifactId>flexmark-test-util</artifactId>
-    <name>flexmark-java test utilities</name>
-    <description>flexmark-java classes for tests</description>
+    <artifactId>flexmark-test-specs</artifactId>
+    <name>flexmark-java test spec files</name>
+    <description>flexmark-java CommonMark specs for tests</description>
 
     <dependencies>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-util</artifactId>
+            <artifactId>flexmark-test-util</artifactId>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>18.0.0</version>
-        </dependency>
-</dependencies>
+    </dependencies>
 </project>

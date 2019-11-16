@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.test.specs.TestSpecLocator;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 @RunWith(Parameterized.class)
 public class SpecIntegrationTest extends RendererSpecTest {
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(TestUtils.DEFAULT_SPEC_RESOURCE);
+    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(TestSpecLocator.DEFAULT_SPEC_RESOURCE);
     private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AutolinkExtension.create(),

@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.parser.internal;
+package com.vladsch.flexmark.core.test.util.parser;
 
+import com.vladsch.flexmark.parser.internal.LinkDestinationParser;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import org.junit.Before;
 import org.junit.Test;

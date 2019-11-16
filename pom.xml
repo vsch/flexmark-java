@@ -63,6 +63,7 @@
         <module>flexmark-jira-converter</module>
         <module>flexmark-pdf-converter</module>
         <module>flexmark-profile-pegdown</module>
+        <module>flexmark-test-specs</module>
         <module>flexmark-test-util</module>
         <module>flexmark-tree-iteration</module>
         <module>flexmark-util</module>
@@ -402,6 +403,11 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-profile-pegdown</artifactId>
+                <version>0.59.48</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-test-specs</artifactId>
                 <version>0.59.48</version>
             </dependency>
             <dependency>

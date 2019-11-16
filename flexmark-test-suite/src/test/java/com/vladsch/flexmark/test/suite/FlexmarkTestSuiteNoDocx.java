@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.test.suite;
 
-import com.vladsch.flexmark.CoreTestSuite;
+import com.vladsch.flexmark.core.test.util.CoreTestSuite;
 import com.vladsch.flexmark.core.test.util.formatter.CoreFormatterTestSuite;
 import com.vladsch.flexmark.core.test.util.renderer.CoreRendererTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
@@ -43,8 +43,6 @@ import com.vladsch.flexmark.profile.pegdown.PegdownProfileTestSuite;
 import com.vladsch.flexmark.test.util.TestUtilsTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
 import com.vladsch.flexmark.youtrack.converter.YouTrackConverterTestSuite;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

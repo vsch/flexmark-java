@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.html;
+package com.vladsch.flexmark.core.test.util.html;
 
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;

@@ -1,5 +1,7 @@
-package com.vladsch.flexmark.parser.delimiter;
+package com.vladsch.flexmark.core.test.util.parser;
 
+import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.util.ast.DelimitedNode;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.html.HtmlRenderer;

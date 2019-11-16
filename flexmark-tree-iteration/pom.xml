@@ -15,9 +15,9 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>15.0</version>
+            <version>18.0.0</version>
         </dependency>
-        <dependency>
+<dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-util</artifactId>
         </dependency>
