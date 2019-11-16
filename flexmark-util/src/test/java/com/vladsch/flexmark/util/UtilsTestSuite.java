@@ -45,6 +45,7 @@ import org.junit.runners.Suite;
         BaseSequenceManagerTest.class,
         SegmentBuilderTest.class,
         PositionListTest.class,
+        CharPredicateTest.class,
 })
 public class UtilsTestSuite {
 }

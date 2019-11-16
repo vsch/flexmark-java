@@ -230,6 +230,13 @@ Next 0.59.50
       offsets.
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
+* [ ] Fix: move spec resource files to `flexmark-core-test` test resources.
+* [ ] Break: reduce footprint of `IRichSequence` and `IRichSequenceBase` by making some methods
+      private part of the implementation.
+* Fix: make `BaseSequence.of` use plain based sequences and not managed for now. Issues when
+  mutable sequences are passed as parameters make it unstable. Have to use char backed sequence
+  for managed and that will create too much overhead if used for all cases.
+
 
 0.59.48
 -------

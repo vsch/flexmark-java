@@ -390,7 +390,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return -1;
     }
 
-    static BasedSequence createAsIs(@Nullable CharSequence charSequence) {
+    static BasedSequence create(@Nullable CharSequence charSequence) {
         if (charSequence == null) return BasedSequence.NULL;
 
         else if (charSequence instanceof BasedSequence) {
@@ -407,7 +407,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         }
     }
 
-    static BasedSequence create(@Nullable CharSequence charSequence) {
+    static BasedSequence managedCreate(@Nullable CharSequence charSequence) {
         if (charSequence == null) return BasedSequence.NULL;
 
         else if (charSequence instanceof BasedSequence) {

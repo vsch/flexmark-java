@@ -341,8 +341,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int indexOfAny(char c1, char c2, char c3) { return indexOfAny(c1, c2, c3, 0, length()); }
     @Override final public int indexOfAny(@NotNull CharSequence s) { return indexOfAny(s, 0, length()); }
     @Override final public int indexOf(char c, int fromIndex) { return indexOf(c, fromIndex, length()); }
-    @Override final public int indexOfAny(char c1, char c2, int fromIndex) { return indexOfAny(c1, c2, fromIndex, length()); }
-    @Override final public int indexOfAny(char c1, char c2, char c3, int fromIndex) { return indexOfAny(c1, c2, c3, fromIndex, length()); }
     @Override final public int indexOfAny(@NotNull CharSequence s, int index) { return indexOfAny(s, index, length()); }
     // @formatter:on
 
@@ -357,7 +355,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    @Override
     final public int indexOfAny(char c1, char c2, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
@@ -369,7 +366,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    @Override
     final public int indexOfAny(char c1, char c2, char c3, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
@@ -407,12 +403,8 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // @formatter:off
     @Override final public int indexOfNot(char c) { return indexOfNot(c, 0, length()); }
-    @Override final public int indexOfAnyNot(char c1, char c2) { return indexOfAnyNot(c1, c2, 0, length()); }
-    @Override final public int indexOfAnyNot(char c1, char c2, char c3) { return indexOfAnyNot(c1, c2, c3, 0, length()); }
     @Override final public int indexOfAnyNot(@NotNull CharSequence s) { return indexOfAnyNot(s, 0, length()); }
     @Override final public int indexOfNot(char c, int fromIndex) { return indexOfNot(c, fromIndex, length()); }
-    @Override final public int indexOfAnyNot(char c1, char c2, int fromIndex) { return indexOfAnyNot(c1, c2, fromIndex, length()); }
-    @Override final public int indexOfAnyNot(char c1, char c2, char c3, int fromIndex) { return indexOfAnyNot(c1, c2, c3, fromIndex, length()); }
     @Override final public int indexOfAnyNot(@NotNull CharSequence s, int fromIndex) { return indexOfAnyNot(s, fromIndex, length()); }
     // @formatter:on
 
@@ -427,7 +419,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    @Override
     final public int indexOfAnyNot(char c1, char c2, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
@@ -439,7 +430,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    @Override
     final public int indexOfAnyNot(char c1, char c2, char c3, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
@@ -508,12 +498,8 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // @formatter:off
     @Override final public int lastIndexOf(char c)                                          { return lastIndexOf(c, 0, length()); }
-    @Override final public int lastIndexOfAny(char c1, char c2)                             { return lastIndexOfAny(c1, c2, 0, length()); }
-    @Override final public int lastIndexOfAny(char c1, char c2, char c3)                    { return lastIndexOfAny(c1, c2, c3, 0, length()); }
     @Override final public int lastIndexOfAny(@NotNull CharSequence s)                      { return lastIndexOfAny(s, 0, length()); }
     @Override final public int lastIndexOf(char c, int fromIndex)                           { return lastIndexOf(c, 0, fromIndex); }
-    @Override final public int lastIndexOfAny(char c1, char c2, int fromIndex)              { return lastIndexOfAny(c1, c2, 0, fromIndex); }
-    @Override final public int lastIndexOfAny(char c1, char c2, char c3, int fromIndex)     { return lastIndexOfAny(c1, c2, c3, 0, fromIndex); }
     @Override final public int lastIndexOfAny(@NotNull CharSequence s, int fromIndex)       { return lastIndexOfAny(s, 0, fromIndex); }
     // @formatter:on
 
@@ -529,7 +515,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    @Override
     final public int lastIndexOfAny(char c1, char c2, int startIndex, int fromIndex) {
         fromIndex++;
         startIndex = Math.max(startIndex, 0);
@@ -542,7 +527,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    @Override
     final public int lastIndexOfAny(char c1, char c2, char c3, int startIndex, int fromIndex) {
         fromIndex++;
         startIndex = Math.max(startIndex, 0);
@@ -582,12 +566,8 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // @formatter:off
     @Override final public int lastIndexOfNot(char c)                                                   { return lastIndexOfNot(c, 0, length()); }
-    @Override final public int lastIndexOfAnyNot(char c1, char c2)                                      { return lastIndexOfAnyNot(c1, c2, 0, length()); }
-    @Override final public int lastIndexOfAnyNot(char c1, char c2, char c3)                             { return lastIndexOfAnyNot(c1, c2, c3, 0, length()); }
     @Override final public int lastIndexOfAnyNot(@NotNull CharSequence s)                               { return lastIndexOfAnyNot(s, 0, length()); }
     @Override final public int lastIndexOfNot(char c, int fromIndex)                                    { return lastIndexOfNot(c, 0, fromIndex); }
-    @Override final public int lastIndexOfAnyNot(char c1, char c2, int fromIndex)                       { return lastIndexOfAnyNot(c1, c2, 0, fromIndex); }
-    @Override final public int lastIndexOfAnyNot(char c1, char c2, char c3, int fromIndex)              { return lastIndexOfAnyNot(c1, c2, c3, 0, fromIndex); }
     @Override final public int lastIndexOfAnyNot(@NotNull CharSequence s, int fromIndex)                { return lastIndexOfAnyNot(s, 0, fromIndex); }
     // @formatter:on
 
@@ -603,7 +583,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    @Override
     final public int lastIndexOfAnyNot(char c1, char c2, int startIndex, int fromIndex) {
         fromIndex++;
         startIndex = Math.max(startIndex, 0);
@@ -616,7 +595,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    @Override
     final public int lastIndexOfAnyNot(char c1, char c2, char c3, int startIndex, int fromIndex) {
         fromIndex++;
         startIndex = Math.max(startIndex, 0);

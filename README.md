@@ -600,7 +600,7 @@ Contributing
 Pull requests, issues and comments welcome :smile:. For pull requests:
 
 * Add tests for new features and bug fixes, preferably in the
-  [ast_spec.md](flexmark-test-util/src/main/resources/ast_spec.md) format
+  [ast_spec.md](flexmark-core-test/src/test/resources/ast_spec.md) format
 * Follow the existing style to make merging easier, as much as possible: 4 space indent,
   trailing spaces trimmed.
 

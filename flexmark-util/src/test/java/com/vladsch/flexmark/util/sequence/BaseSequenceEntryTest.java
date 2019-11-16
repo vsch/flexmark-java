@@ -14,11 +14,11 @@ public class BaseSequenceEntryTest {
         String input5 = "1234567890";
 
         // NOTE: must use crate() directly so as not to get cached bases from BasedSequence.of() use through BasedSequenceImpl
-        BasedSequence sequence1 = BasedSequenceImpl.createAsIs(input1);
-        BasedSequence sequence2 = BasedSequenceImpl.createAsIs(input2);
-        BasedSequence sequence3 = BasedSequenceImpl.createAsIs(input3);
-        BasedSequence sequence4 = BasedSequenceImpl.createAsIs(input4);
-        BasedSequence sequence5 = BasedSequenceImpl.createAsIs(input5);
+        BasedSequence sequence1 = BasedSequenceImpl.create(input1);
+        BasedSequence sequence2 = BasedSequenceImpl.create(input2);
+        BasedSequence sequence3 = BasedSequenceImpl.create(input3);
+        BasedSequence sequence4 = BasedSequenceImpl.create(input4);
+        BasedSequence sequence5 = BasedSequenceImpl.create(input5);
 
         BaseSequenceEntry entry = new BaseSequenceEntry();
 
@@ -49,7 +49,7 @@ public class BaseSequenceEntryTest {
         // should release weak hash map ref to sequence2
         System.gc();
 
-        sequence2 = BasedSequenceImpl.createAsIs(input2);
+        sequence2 = BasedSequenceImpl.create(input2);
 
         // first time around expensive content comparison, second time hash map lookup i
         assertTrue(entry.testEquals(sequence1, sequence2, equalsCall));

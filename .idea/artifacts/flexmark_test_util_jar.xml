@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts</output-path>
     <root id="archive" name="flexmark-test-util.jar">
       <element id="module-output" name="flexmark-test-util" />
-      <element id="module-output" name="flexmark" />
     </root>
   </artifact>
 </component>

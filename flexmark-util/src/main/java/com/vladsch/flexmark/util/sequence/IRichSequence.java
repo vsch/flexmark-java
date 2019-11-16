@@ -34,15 +34,6 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     char LS = '\u2028'; // line separator
     char US = '\u001f';  // US or USEP - Unit Separator, also used as IntelliJDummyIdentifier in Parsings, used as a tracked offset marker in the sequence
     char MRK = US;       // same as US but use in code signals it being related to offset marker handling
-
-    /**
-     * Line Separator, used in paragraph wrapping to force start of new line
-     *
-     * @deprecated use {@link #LS} instead as it is named in Unicode
-     */
-    @Deprecated
-    char LSEP = LS;
-
     String LINE_SEP = Character.toString(LS);
     String WHITESPACE_NO_EOL_CHARS = " \t";
     String SPACE_TAB = WHITESPACE_NO_EOL_CHARS;
@@ -51,6 +42,22 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     String WHITESPACE_CHARS = " \t\r\n";
     String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
+
+    CharPredicate SPACE_SET = CharPredicate.SPACE;
+    CharPredicate TAB_SET = CharPredicate.TAB;
+    CharPredicate EOL_SET = CharPredicate.EOL;
+    CharPredicate SPACE_TAB_SET = CharPredicate.SPACE_TAB;
+    CharPredicate ANY_EOL_SET = CharPredicate.ANY_EOL;
+    CharPredicate WHITE_SPACE_SET = CharPredicate.WHITE_SPACE;
+    CharPredicate WHITE_SPACE_NBSP_SET = CharPredicate.WHITE_SPACE_NBSP;
+
+    /**
+     * Line Separator, used in paragraph wrapping to force start of new line
+     *
+     * @deprecated use {@link #LS} instead as it is named in Unicode
+     */
+    @Deprecated
+    char LSEP = LS;
 
     /**
      * Comparison to another CharSequence should result in a match if their contents are equal
@@ -254,26 +261,14 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * indexOf(CharSequence): returns the index of the next occurrence of given text in this sequence
      * <p>
      * indexOfAny(CharSequence): returns the index of the next occurrence of any of the characters in this sequence
-     * indexOfAny(char): returns the index of the next occurrence of any of the characters in this sequence
-     * indexOfAny(char,char): returns the index of the next occurrence of any of the characters in this sequence
-     * indexOfAny(char,char,char): returns the index of the next occurrence of any of the characters in this sequence
      * <p>
      * indexOfAnyNot(CharSequence): returns the index of the next occurrence of any of the characters not in this sequence
-     * indexOfAnyNot(char): returns the index of the next occurrence of any of the characters not in this sequence
-     * indexOfAnyNot(char,char): returns the index of the next occurrence of any of the characters not in this sequence
-     * indexOfAnyNot(char,char,char): returns the index of the next occurrence of any of the characters not in this sequence
      * <p>
      * lastIndexOf(CharSequence): returns the index of the previous occurrence of given text in this sequence, reversed search
      * <p>
      * lastIndexOfAny(CharSequence): returns the index of the previous occurrence of any of the characters in this sequence, reversed search
-     * lastIndexOfAny(char): returns the index of the previous occurrence of any of the characters in this sequence, reversed search
-     * lastIndexOfAny(char,char): returns the index of the previous occurrence of any of the characters in this sequence, reversed search
-     * lastIndexOfAny(char,char,char): returns the index of the previous occurrence of any of the characters in this sequence, reversed search
      * <p>
      * lastIndexOfAnyNot(CharSequence): returns the index of the previous occurrence of any of the characters not in this sequence, reversed search
-     * lastIndexOfAnyNot(Char): returns the index of the previous occurrence of any of the characters not in this sequence, reversed search
-     * lastIndexOfAnyNot(char,char): returns the index of the previous occurrence of any of the characters not in this sequence, reversed search
-     * lastIndexOfAnyNot(char,char,char): returns the index of the previous occurrence of any of the characters not in this sequence, reversed search
      *
      * @param s character sequence whose occurrence to find
      * @return index where found or -1
@@ -288,8 +283,6 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int indexOfAny(@NotNull CharSequence s);
 
     int indexOf(char c, int fromIndex);
-    int indexOfAny(char c1, char c2, int fromIndex);
-    int indexOfAny(char c1, char c2, char c3, int fromIndex);
     int indexOfAny(@NotNull CharSequence s, int fromIndex);
 
     int indexOf(char c, int fromIndex, int endIndex);
@@ -298,18 +291,12 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int indexOfAny(@NotNull CharSequence s, int fromIndex, int endIndex);
 
     int indexOfNot(char c);
-    int indexOfAnyNot(char c1, char c2);
-    int indexOfAnyNot(char c1, char c2, char c3);
     int indexOfAnyNot(@NotNull CharSequence s);
 
     int indexOfNot(char c, int fromIndex);
-    int indexOfAnyNot(char c1, char c2, int fromIndex);
-    int indexOfAnyNot(char c1, char c2, char c3, int fromIndex);
     int indexOfAnyNot(@NotNull CharSequence s, int fromIndex);
 
     int indexOfNot(char c, int fromIndex, int endIndex);
-    int indexOfAnyNot(char c1, char c2, int fromIndex, int endIndex);
-    int indexOfAnyNot(char c1, char c2, char c3, int fromIndex, int endIndex);
     int indexOfAnyNot(@NotNull CharSequence s, int fromIndex, int endIndex);
 
     int lastIndexOf(@NotNull CharSequence s);
@@ -317,33 +304,21 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int lastIndexOf(@NotNull CharSequence s, int startIndex, int fromIndex);
 
     int lastIndexOf(char c);
-    int lastIndexOfAny(char c1, char c2);
-    int lastIndexOfAny(char c1, char c2, char c3);
     int lastIndexOfAny(@NotNull CharSequence s);
 
     int lastIndexOf(char c, int fromIndex);
-    int lastIndexOfAny(char c1, char c2, int fromIndex);
-    int lastIndexOfAny(char c1, char c2, char c3, int fromIndex);
     int lastIndexOfAny(@NotNull CharSequence s, int fromIndex);
 
     int lastIndexOf(char c, int startIndex, int fromIndex);
-    int lastIndexOfAny(char c1, char c2, int startIndex, int fromIndex);
-    int lastIndexOfAny(char c1, char c2, char c3, int startIndex, int fromIndex);
     int lastIndexOfAny(@NotNull CharSequence s, int startIndex, int fromIndex);
 
     int lastIndexOfNot(char c);
-    int lastIndexOfAnyNot(char c1, char c2);
-    int lastIndexOfAnyNot(char c1, char c2, char c3);
     int lastIndexOfAnyNot(@NotNull CharSequence s);
 
     int lastIndexOfNot(char c, int fromIndex);
-    int lastIndexOfAnyNot(char c1, char c2, int fromIndex);
-    int lastIndexOfAnyNot(char c1, char c2, char c3, int fromIndex);
     int lastIndexOfAnyNot(@NotNull CharSequence s, int fromIndex);
 
     int lastIndexOfNot(char c, int startIndex, int fromIndex);
-    int lastIndexOfAnyNot(char c1, char c2, int startIndex, int fromIndex);
-    int lastIndexOfAnyNot(char c1, char c2, char c3, int startIndex, int fromIndex);
     int lastIndexOfAnyNot(@NotNull CharSequence s, int startIndex, int fromIndex);
 
     /**
