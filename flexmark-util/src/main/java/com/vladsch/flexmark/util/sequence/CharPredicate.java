@@ -6,7 +6,7 @@ import java.util.BitSet;
 import java.util.Objects;
 import java.util.function.IntPredicate;
 
-import static com.vladsch.flexmark.util.sequence.IRichSequenceBase.indexOf;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.indexOf;
 
 /**
  * Interface for set of characters to use for inclusion exclusion tests
@@ -18,10 +18,13 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate SPACE = value -> value == ' ';
     CharPredicate TAB = value -> value == '\t';
     CharPredicate EOL = value -> value == '\n';
+    CharPredicate BACKSLASH = value -> value == '\\';
+    CharPredicate HASH = value -> value == '#';
     CharPredicate SPACE_TAB = value -> value == ' ' || value == '\t';
+    CharPredicate SPACE_TAB_NBSP = value -> value == ' ' || value == '\t' || value == '\u00A0';
     CharPredicate ANY_EOL = value -> value == '\n' || value == '\r';
-    CharPredicate WHITE_SPACE = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r';
-    CharPredicate WHITE_SPACE_NBSP = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\u00A0';
+    CharPredicate WHITESPACE = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r';
+    CharPredicate WHITESPACE_NBSP = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\u00A0';
 
     @Override
     boolean test(int value);
@@ -112,7 +115,7 @@ public interface CharPredicate extends IntPredicate {
                 : c1 == c2 || c1 == c3 || c1 == c4 ? standardOrAnyOf(c2, c3, c4)
                 : c2 == c3 || c2 == c4 ? standardOrAnyOf(c1, c3, c4)
                 : c3 == c4 ? standardOrAnyOf(c1, c2, c3)
-                : WHITE_SPACE.test(c1) && WHITE_SPACE.test(c2) && WHITE_SPACE.test(c3) && WHITE_SPACE.test(c4) ? WHITE_SPACE
+                : WHITESPACE.test(c1) && WHITESPACE.test(c2) && WHITESPACE.test(c3) && WHITESPACE.test(c4) ? WHITESPACE
                 : value -> value == (int) c1 || value == (int) c2 || value == (int) c3 || value == (int) c4;
     }
 

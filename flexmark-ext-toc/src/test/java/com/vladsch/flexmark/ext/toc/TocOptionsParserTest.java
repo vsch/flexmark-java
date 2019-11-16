@@ -144,7 +144,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         @Override
         public @NotNull Node parse(@NotNull BasedSequence input) {
             // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
-            BasedSequence[] lines = input.split('\n');
+            BasedSequence[] lines = input.split("\n");
             ParserNode example = new ParserNode("Example", input, null, null);
             for (BasedSequence line : lines) {
                 Pair<TocOptions, List<ParsedOption<TocOptions>>> pair = myParser.parseOption(line, TOC_OPTIONS.get(getOptions()), null);

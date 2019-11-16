@@ -291,7 +291,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
             FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
 
             BasedSequence info = fencedCodeBlock.getInfo();
-            BasedSequence language = fencedCodeBlock.getInfoDelimitedByAny(" \t");
+            BasedSequence language = fencedCodeBlock.getInfoDelimitedByAny(BasedSequence.SPACE_TAB_SET);
             BasedSequence infoTail = info.subSequence(language.length()).trimStart();
 
             int pos = infoTail.indexOf('{');

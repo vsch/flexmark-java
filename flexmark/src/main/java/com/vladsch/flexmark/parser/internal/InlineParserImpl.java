@@ -28,8 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.regex.Matcher;
 
-import static com.vladsch.flexmark.util.sequence.IRichSequence.EOL;
-import static com.vladsch.flexmark.util.sequence.IRichSequence.NUL;
+import static com.vladsch.flexmark.util.sequence.IRichSequence.*;
 
 public class InlineParserImpl extends LightInlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected final BitSet originalSpecialCharacters;
@@ -245,7 +244,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         BasedSequence contentChars = block.getChars();
 
         // try parsing the beginning as link reference definitions:
-        int leadingSpaces = contentChars.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+        int leadingSpaces = contentChars.countLeading(SPACE_TAB_SET);
         int length = contentChars.length();
 
         while (leadingSpaces <= 3 && length > 3 + leadingSpaces && contentChars.charAt(leadingSpaces) == '[') {
@@ -258,7 +257,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             if (pos == 0) break;
             contentChars = contentChars.subSequence(pos, length);
             length = contentChars.length();
-            leadingSpaces = contentChars.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+            leadingSpaces = contentChars.countLeading(SPACE_TAB_SET);
         }
 
         return contentChars.getStartOffset() - block.getStartOffset();
@@ -579,7 +578,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                     int length = codeText.length();
                     int lastPos = 0;
                     while (lastPos < length) {
-                        int softBreak = codeText.indexOfAny("\n\r", lastPos);
+                        int softBreak = codeText.indexOfAny(ANY_EOL_SET, lastPos);
                         int pos = softBreak == -1 ? length : softBreak;
                         int lineBreak = pos;
 
@@ -1203,7 +1202,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                             }
                         }
 
-                        return spaceInUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+                        return spaceInUrls ? matched.trimEnd(SPACE_SET) : matched;
                     }
                 }
 
@@ -1211,7 +1210,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             } else {
                 // spec 0.27 compatibility
                 BasedSequence matched = match(myParsing.LINK_DESTINATION);
-                return matched != null && spaceInUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+                return matched != null && spaceInUrls ? matched.trimEnd(SPACE_SET) : matched;
             }
         }
     }

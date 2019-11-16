@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import org.jetbrains.annotations.NotNull;
@@ -194,6 +195,7 @@ public class Escaping {
             }
         }
     };
+    public static final @NotNull CharPredicate AMP_BACKSLASH_SET = CharPredicate.anyOf('\\', '&');
 
     public static String escapeHtml(@NotNull CharSequence s, boolean preserveEntities) {
         Pattern p = preserveEntities ? XML_SPECIAL_OR_ENTITY : XML_SPECIAL_RE;
@@ -254,7 +256,7 @@ public class Escaping {
      */
     @NotNull
     public static BasedSequence unescape(@NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper) {
-        int indexOfAny = s.indexOfAny('\\', '&');
+        int indexOfAny = s.indexOfAny(AMP_BACKSLASH_SET);
         if (indexOfAny != -1) {
             return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER, textMapper);
         } else {

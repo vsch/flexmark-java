@@ -313,13 +313,13 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @return sequence which
      */
     @NotNull
-    BasedSequence extendByAny(@NotNull CharSequence charSet, int maxCount);
+    BasedSequence extendByAny(@NotNull CharPredicate charSet, int maxCount);
 
     @NotNull
-    BasedSequence extendByAny(@NotNull CharSequence charSet);
+    BasedSequence extendByAny(@NotNull CharPredicate charSet);
 
     @NotNull
-    BasedSequence extendByOneOfAny(@NotNull CharSequence charSet);
+    BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet);
 
     /**
      * Extend this based sequence to include up to the next character from underlying based sequence
@@ -329,9 +329,9 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @return sequence which
      */
     @NotNull
-    BasedSequence extendToAny(@NotNull CharSequence charSet, int maxCount);
+    BasedSequence extendToAny(@NotNull CharPredicate charSet, int maxCount);
     @NotNull
-    BasedSequence extendToAny(@NotNull CharSequence charSet);
+    BasedSequence extendToAny(@NotNull CharPredicate charSet);
 
     /**
      * Extend in contained based sequence
@@ -341,8 +341,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
      *         if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
      */
-    @NotNull BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol);
-    @NotNull BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars);
+    @NotNull BasedSequence extendToEndOfLine(@NotNull CharPredicate eolChars, boolean includeEol);
+    @NotNull BasedSequence extendToEndOfLine(@NotNull CharPredicate eolChars);
     @NotNull BasedSequence extendToEndOfLine(boolean includeEol);
     @NotNull BasedSequence extendToEndOfLine();
 
@@ -354,8 +354,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
      *         if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
      */
-    @NotNull BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol);
-    @NotNull BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars);
+    @NotNull BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars, boolean includeEol);
+    @NotNull BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars);
     @NotNull BasedSequence extendToStartOfLine(boolean includeEol);
     @NotNull BasedSequence extendToStartOfLine();
 

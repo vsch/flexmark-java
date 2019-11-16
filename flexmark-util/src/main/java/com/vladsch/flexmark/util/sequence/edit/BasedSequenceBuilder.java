@@ -227,7 +227,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
         for (BasedSequence s : segments) {
             if (s.isEmpty()) continue;
 
-            if (last != null && last.getEndOffset() < s.getStartOffset() && (BasedSequence.WHITESPACE_CHARS.indexOf(last.charAt(last.length() - 1)) == -1) && BasedSequence.WHITESPACE_CHARS.indexOf(s.charAt(0)) == -1) {
+            if (last != null && last.getEndOffset() < s.getStartOffset() && (BasedSequence.WHITESPACE.indexOf(last.charAt(last.length() - 1)) == -1) && BasedSequence.WHITESPACE.indexOf(s.charAt(0)) == -1) {
                 total++;
             }
 
@@ -253,8 +253,8 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
             if (s.isEmpty()) continue;
 
             if (last != null && last.getEndOffset() < s.getStartOffset()
-                    && (BasedSequence.WHITESPACE_CHARS.indexOf(last.charAt(last.length() - 1)) == -1)
-                    && BasedSequence.WHITESPACE_CHARS.indexOf(s.charAt(0)) == -1
+                    && (BasedSequence.WHITESPACE.indexOf(last.charAt(last.length() - 1)) == -1)
+                    && BasedSequence.WHITESPACE.indexOf(s.charAt(0)) == -1
                     && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
             ) {
                 sb.append(' ');

@@ -119,32 +119,32 @@ public class BasedTrackedSequenceImplTest {
 
     @Test
     public void test_countLeading() throws Exception {
-        assertEquals(0, BasedSequence.of("       ", 0, ((CharSequence) "       ").length()).countLeading(""));
-        assertEquals("       ".length(), BasedSequence.of("       ", 0, ((CharSequence) "       ").length()).countLeading(" "));
-        assertEquals("    ".length(), BasedSequence.of("    abcdef   ", 0, ((CharSequence) "    abcdef   ").length()).countLeading(" "));
-        assertEquals("    ".length(), BasedSequence.of("    abcdef ", 0, ((CharSequence) "    abcdef ").length()).countLeading(" "));
-        assertEquals("    ".length(), BasedSequence.of("    abcdef", 0, ((CharSequence) "    abcdef").length()).countLeading(" "));
-        assertEquals(" ".length(), BasedSequence.of(" abcdef   ", 0, ((CharSequence) " abcdef   ").length()).countLeading(" "));
-        assertEquals(" ".length(), BasedSequence.of(" abcdef ", 0, ((CharSequence) " abcdef ").length()).countLeading(" "));
-        assertEquals(" ".length(), BasedSequence.of(" abcdef", 0, ((CharSequence) " abcdef").length()).countLeading(" "));
-        assertEquals("".length(), BasedSequence.of("abcdef   ", 0, ((CharSequence) "abcdef   ").length()).countLeading(" "));
-        assertEquals("".length(), BasedSequence.of("abcdef ", 0, ((CharSequence) "abcdef ").length()).countLeading(" "));
-        assertEquals("".length(), BasedSequence.of("abcdef", 0, ((CharSequence) "abcdef").length()).countLeading(" "));
+        assertEquals(0, BasedSequence.of("       ", 0, ((CharSequence) "       ").length()).countLeading(CharPredicate.anyOf("")));
+        assertEquals("       ".length(), BasedSequence.of("       ", 0, ((CharSequence) "       ").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals("    ".length(), BasedSequence.of("    abcdef   ", 0, ((CharSequence) "    abcdef   ").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals("    ".length(), BasedSequence.of("    abcdef ", 0, ((CharSequence) "    abcdef ").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals("    ".length(), BasedSequence.of("    abcdef", 0, ((CharSequence) "    abcdef").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals(" ".length(), BasedSequence.of(" abcdef   ", 0, ((CharSequence) " abcdef   ").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals(" ".length(), BasedSequence.of(" abcdef ", 0, ((CharSequence) " abcdef ").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals(" ".length(), BasedSequence.of(" abcdef", 0, ((CharSequence) " abcdef").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals("".length(), BasedSequence.of("abcdef   ", 0, ((CharSequence) "abcdef   ").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals("".length(), BasedSequence.of("abcdef ", 0, ((CharSequence) "abcdef ").length()).countLeading(CharPredicate.anyOf(" ")));
+        assertEquals("".length(), BasedSequence.of("abcdef", 0, ((CharSequence) "abcdef").length()).countLeading(CharPredicate.anyOf(" ")));
     }
 
     @Test
     public void test_countTrailing() throws Exception {
-        assertEquals(0, BasedSequence.of("       ", 0, ((CharSequence) "       ").length()).countTrailing(""));
-        assertEquals("       ".length(), BasedSequence.of("       ", 0, ((CharSequence) "       ").length()).countTrailing(" "));
-        assertEquals("   ".length(), BasedSequence.of("    abcdef   ", 0, ((CharSequence) "    abcdef   ").length()).countTrailing(" "));
-        assertEquals(" ".length(), BasedSequence.of("    abcdef ", 0, ((CharSequence) "    abcdef ").length()).countTrailing(" "));
-        assertEquals("".length(), BasedSequence.of("    abcdef", 0, ((CharSequence) "    abcdef").length()).countTrailing(" "));
-        assertEquals("   ".length(), BasedSequence.of(" abcdef   ", 0, ((CharSequence) " abcdef   ").length()).countTrailing(" "));
-        assertEquals(" ".length(), BasedSequence.of(" abcdef ", 0, ((CharSequence) " abcdef ").length()).countTrailing(" "));
-        assertEquals("".length(), BasedSequence.of(" abcdef", 0, ((CharSequence) " abcdef").length()).countTrailing(" "));
-        assertEquals("   ".length(), BasedSequence.of("abcdef   ", 0, ((CharSequence) "abcdef   ").length()).countTrailing(" "));
-        assertEquals(" ".length(), BasedSequence.of("abcdef ", 0, ((CharSequence) "abcdef ").length()).countTrailing(" "));
-        assertEquals("".length(), BasedSequence.of("abcdef", 0, ((CharSequence) "abcdef").length()).countTrailing(" "));
+        assertEquals(0, BasedSequence.of("       ", 0, ((CharSequence) "       ").length()).countTrailing(CharPredicate.anyOf("")));
+        assertEquals("       ".length(), BasedSequence.of("       ", 0, ((CharSequence) "       ").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals("   ".length(), BasedSequence.of("    abcdef   ", 0, ((CharSequence) "    abcdef   ").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals(" ".length(), BasedSequence.of("    abcdef ", 0, ((CharSequence) "    abcdef ").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals("".length(), BasedSequence.of("    abcdef", 0, ((CharSequence) "    abcdef").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals("   ".length(), BasedSequence.of(" abcdef   ", 0, ((CharSequence) " abcdef   ").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals(" ".length(), BasedSequence.of(" abcdef ", 0, ((CharSequence) " abcdef ").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals("".length(), BasedSequence.of(" abcdef", 0, ((CharSequence) " abcdef").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals("   ".length(), BasedSequence.of("abcdef   ", 0, ((CharSequence) "abcdef   ").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals(" ".length(), BasedSequence.of("abcdef ", 0, ((CharSequence) "abcdef ").length()).countTrailing(CharPredicate.anyOf(" ")));
+        assertEquals("".length(), BasedSequence.of("abcdef", 0, ((CharSequence) "abcdef").length()).countTrailing(CharPredicate.anyOf(" ")));
     }
 
     @Test
@@ -308,21 +308,21 @@ public class BasedTrackedSequenceImplTest {
 
     @Test
     public void test_startOfDelimitedByAny() throws Exception {
-        assertEquals(0, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 0));
-        assertEquals(0, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 1));
-        assertEquals(2, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 2));
-        assertEquals(2, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 3));
-        assertEquals(2, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 4));
-        assertEquals(5, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 5));
-        assertEquals(5, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 6));
-        assertEquals(5, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 7));
-        assertEquals(5, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 8));
-        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 9));
-        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 10));
-        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 11));
-        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 12));
-        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 13));
-        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(",", 14));
+        assertEquals(0, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 0));
+        assertEquals(0, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 1));
+        assertEquals(2, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 2));
+        assertEquals(2, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 3));
+        assertEquals(2, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 4));
+        assertEquals(5, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 5));
+        assertEquals(5, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 6));
+        assertEquals(5, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 7));
+        assertEquals(5, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 8));
+        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 9));
+        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 10));
+        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 11));
+        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 12));
+        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 13));
+        assertEquals(9, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).startOfDelimitedByAny(CharPredicate.anyOf(","), 14));
     }
 
     @Test
@@ -346,27 +346,27 @@ public class BasedTrackedSequenceImplTest {
 
     @Test
     public void test_endOfDelimitedByAny() throws Exception {
-        assertEquals(1, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 0));
-        assertEquals(1, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 1));
-        assertEquals(4, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 2));
-        assertEquals(4, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 3));
-        assertEquals(4, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 4));
-        assertEquals(8, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 5));
-        assertEquals(8, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 6));
-        assertEquals(8, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 7));
-        assertEquals(8, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 8));
-        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 9));
-        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 10));
-        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 11));
-        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 12));
-        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 13));
-        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(",", 14));
+        assertEquals(1, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 0));
+        assertEquals(1, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 1));
+        assertEquals(4, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 2));
+        assertEquals(4, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 3));
+        assertEquals(4, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 4));
+        assertEquals(8, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 5));
+        assertEquals(8, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 6));
+        assertEquals(8, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 7));
+        assertEquals(8, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 8));
+        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 9));
+        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 10));
+        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 11));
+        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 12));
+        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 13));
+        assertEquals(13, BasedSequence.of("0,23,567,9012", 0, ((CharSequence) "0,23,567,9012").length()).endOfDelimitedByAny(CharPredicate.anyOf(","), 14));
     }
 
     @Test
     public void testSplitBasic() throws Exception {
         BasedSequence sequence = BasedSequence.of(" 1,2 , 3 ,4,5,   ", 0, ((CharSequence) " 1,2 , 3 ,4,5,   ").length());
-        BasedSequence[] list = sequence.split(',', 0, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_SKIP_EMPTY);
+        BasedSequence[] list = sequence.split(",", 0, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_SKIP_EMPTY,null);
         ArrayList<String> sl = new ArrayList<>(list.length);
         for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
@@ -376,7 +376,7 @@ public class BasedTrackedSequenceImplTest {
     @Test
     public void testSplitEol() throws Exception {
         BasedSequence sequence = BasedSequence.of("   line1 \nline2 \n line3 \n", 0, ((CharSequence) "   line1 \nline2 \n line3 \n").length());
-        BasedSequence[] list = sequence.split('\n', 0, BasedSequence.SPLIT_INCLUDE_DELIMS);
+        BasedSequence[] list = sequence.split("\n", 0, BasedSequence.SPLIT_INCLUDE_DELIMS, null);
         ArrayList<String> sl = new ArrayList<>(list.length);
         for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
@@ -484,44 +484,44 @@ public class BasedTrackedSequenceImplTest {
 
     @Test
     public void test_trimEndTo() {
-        assertEquals("", BasedSequence.of("", 0, ((CharSequence) "").length()).trimEnd(0, ".\t").toString());
-        assertEquals("", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimEnd(0, ".\t").toString());
-        assertEquals("", BasedSequence.of("..", 0, ((CharSequence) "..").length()).trimEnd(0, ".\t").toString());
-        assertEquals(".", BasedSequence.of("..", 0, ((CharSequence) "..").length()).trimEnd(1, ".\t").toString());
-        assertEquals(".", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimEnd(1, ".\t").toString());
-        assertEquals(".", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimEnd(2, ".\t").toString());
-        assertEquals("abc", BasedSequence.of("abc", 0, ((CharSequence) "abc").length()).trimEnd(0, ".\t").toString());
-        assertEquals(".abc", BasedSequence.of(".abc", 0, ((CharSequence) ".abc").length()).trimEnd(0, ".\t").toString());
-        assertEquals("..abc", BasedSequence.of("..abc", 0, ((CharSequence) "..abc").length()).trimEnd(0, ".\t").toString());
-        assertEquals("..abc", BasedSequence.of("..abc.", 0, ((CharSequence) "..abc.").length()).trimEnd(0, ".\t").toString());
-        assertEquals("..abc", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimEnd(0, ".\t").toString());
-        assertEquals("..abc..", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimEnd(2, ".\t").toString());
-        assertEquals("..abc..", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimEnd(3, ".\t").toString());
-        assertEquals("..abc..", BasedSequence.of("..abc....", 0, ((CharSequence) "..abc....").length()).trimEnd(2, ".\t").toString());
-        assertEquals("..abc.", BasedSequence.of("..abc....", 0, ((CharSequence) "..abc....").length()).trimEnd(1, ".\t").toString());
-        assertEquals("..abc...", BasedSequence.of("..abc....", 0, ((CharSequence) "..abc....").length()).trimEnd(3, ".\t").toString());
+        assertEquals("", BasedSequence.of("", 0, ((CharSequence) "").length()).trimEnd(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimEnd(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("", BasedSequence.of("..", 0, ((CharSequence) "..").length()).trimEnd(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals(".", BasedSequence.of("..", 0, ((CharSequence) "..").length()).trimEnd(1, CharPredicate.anyOf(".\t")).toString());
+        assertEquals(".", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimEnd(1, CharPredicate.anyOf(".\t")).toString());
+        assertEquals(".", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimEnd(2, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("abc", BasedSequence.of("abc", 0, ((CharSequence) "abc").length()).trimEnd(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals(".abc", BasedSequence.of(".abc", 0, ((CharSequence) ".abc").length()).trimEnd(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc", BasedSequence.of("..abc", 0, ((CharSequence) "..abc").length()).trimEnd(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc", BasedSequence.of("..abc.", 0, ((CharSequence) "..abc.").length()).trimEnd(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimEnd(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc..", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimEnd(2, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc..", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimEnd(3, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc..", BasedSequence.of("..abc....", 0, ((CharSequence) "..abc....").length()).trimEnd(2, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc.", BasedSequence.of("..abc....", 0, ((CharSequence) "..abc....").length()).trimEnd(1, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc...", BasedSequence.of("..abc....", 0, ((CharSequence) "..abc....").length()).trimEnd(3, CharPredicate.anyOf(".\t")).toString());
     }
 
     @Test
     public void test_trimStartTo() {
-        assertEquals("", BasedSequence.of("", 0, ((CharSequence) "").length()).trimStart(0, ".\t").toString());
-        assertEquals("", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimStart(0, ".\t").toString());
-        assertEquals("", BasedSequence.of("..", 0, ((CharSequence) "..").length()).trimStart(0, ".\t").toString());
-        assertEquals(".", BasedSequence.of("..", 0, ((CharSequence) "..").length()).trimStart(1, ".\t").toString());
-        assertEquals(".", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimStart(1, ".\t").toString());
-        assertEquals(".", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimStart(2, ".\t").toString());
-        assertEquals("..", BasedSequence.of("...", 0, ((CharSequence) "...").length()).trimStart(2, ".\t").toString());
-        assertEquals("..", BasedSequence.of("....", 0, ((CharSequence) "....").length()).trimStart(2, ".\t").toString());
-        assertEquals("abc", BasedSequence.of("abc", 0, ((CharSequence) "abc").length()).trimStart(0, ".\t").toString());
-        assertEquals("abc.", BasedSequence.of("abc.", 0, ((CharSequence) "abc.").length()).trimStart(0, ".\t").toString());
-        assertEquals("abc..", BasedSequence.of(".abc..", 0, ((CharSequence) ".abc..").length()).trimStart(0, ".\t").toString());
-        assertEquals("abc..", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimStart(0, ".\t").toString());
-        assertEquals("abc..", BasedSequence.of(".abc..", 0, ((CharSequence) ".abc..").length()).trimStart(0, ".\t").toString());
-        assertEquals("abc..", BasedSequence.of(".abc..", 0, ((CharSequence) ".abc..").length()).trimStart(0, ".\t").toString());
-        assertEquals("abc..", BasedSequence.of(".abc..", 0, ((CharSequence) ".abc..").length()).trimStart(0, ".\t").toString());
-        assertEquals(".abc..", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimStart(1, ".\t").toString());
-        assertEquals("..abc..", BasedSequence.of("...abc..", 0, ((CharSequence) "...abc..").length()).trimStart(2, ".\t").toString());
-        assertEquals("...abc..", BasedSequence.of("...abc..", 0, ((CharSequence) "...abc..").length()).trimStart(3, ".\t").toString());
+        assertEquals("", BasedSequence.of("", 0, ((CharSequence) "").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("", BasedSequence.of("..", 0, ((CharSequence) "..").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals(".", BasedSequence.of("..", 0, ((CharSequence) "..").length()).trimStart(1, CharPredicate.anyOf(".\t")).toString());
+        assertEquals(".", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimStart(1, CharPredicate.anyOf(".\t")).toString());
+        assertEquals(".", BasedSequence.of(".", 0, ((CharSequence) ".").length()).trimStart(2, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..", BasedSequence.of("...", 0, ((CharSequence) "...").length()).trimStart(2, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..", BasedSequence.of("....", 0, ((CharSequence) "....").length()).trimStart(2, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("abc", BasedSequence.of("abc", 0, ((CharSequence) "abc").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("abc.", BasedSequence.of("abc.", 0, ((CharSequence) "abc.").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("abc..", BasedSequence.of(".abc..", 0, ((CharSequence) ".abc..").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("abc..", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("abc..", BasedSequence.of(".abc..", 0, ((CharSequence) ".abc..").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("abc..", BasedSequence.of(".abc..", 0, ((CharSequence) ".abc..").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("abc..", BasedSequence.of(".abc..", 0, ((CharSequence) ".abc..").length()).trimStart(0, CharPredicate.anyOf(".\t")).toString());
+        assertEquals(".abc..", BasedSequence.of("..abc..", 0, ((CharSequence) "..abc..").length()).trimStart(1, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("..abc..", BasedSequence.of("...abc..", 0, ((CharSequence) "...abc..").length()).trimStart(2, CharPredicate.anyOf(".\t")).toString());
+        assertEquals("...abc..", BasedSequence.of("...abc..", 0, ((CharSequence) "...abc..").length()).trimStart(3, CharPredicate.anyOf(".\t")).toString());
     }
 
     @Test
@@ -557,12 +557,12 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence b = BasedSequence.of("this;.,\n", 0, ((CharSequence) "this;.,\n").length());
         BasedSequence s = b.subSequence(0, 4);
 
-        assertEquals("this", s.extendByOneOfAny("").toString());
-        assertEquals("this", s.extendByOneOfAny("-*").toString());
-        assertEquals("this;", s.extendByOneOfAny(";").toString());
-        assertEquals("this;", s.extendByOneOfAny(".;").toString());
-        assertEquals("this;", s.extendByOneOfAny(",.;").toString());
-        assertEquals("this;", s.extendByOneOfAny("\n,.;").toString());
+        assertEquals("this", s.extendByOneOfAny(CharPredicate.anyOf("")).toString());
+        assertEquals("this", s.extendByOneOfAny(CharPredicate.anyOf("-*")).toString());
+        assertEquals("this;", s.extendByOneOfAny(CharPredicate.anyOf(";")).toString());
+        assertEquals("this;", s.extendByOneOfAny(CharPredicate.anyOf(".;")).toString());
+        assertEquals("this;", s.extendByOneOfAny(CharPredicate.anyOf(",.;")).toString());
+        assertEquals("this;", s.extendByOneOfAny(CharPredicate.anyOf("\n,.;")).toString());
     }
 
     @Test
@@ -570,12 +570,12 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence b = BasedSequence.of("this;.,\n", 0, ((CharSequence) "this;.,\n").length());
         BasedSequence s = b.subSequence(0, 4);
 
-        assertEquals("this", s.extendByAny("").toString());
-        assertEquals("this", s.extendByAny("-*").toString());
-        assertEquals("this;", s.extendByAny(";").toString());
-        assertEquals("this;.", s.extendByAny(".;").toString());
-        assertEquals("this;.,", s.extendByAny(",.;").toString());
-        assertEquals("this;.,\n", s.extendByAny("\n,.;").toString());
+        assertEquals("this", s.extendByAny(CharPredicate.anyOf("")).toString());
+        assertEquals("this", s.extendByAny(CharPredicate.anyOf("-*")).toString());
+        assertEquals("this;", s.extendByAny(CharPredicate.anyOf(";")).toString());
+        assertEquals("this;.", s.extendByAny(CharPredicate.anyOf(".;")).toString());
+        assertEquals("this;.,", s.extendByAny(CharPredicate.anyOf(",.;")).toString());
+        assertEquals("this;.,\n", s.extendByAny(CharPredicate.anyOf("\n,.;")).toString());
     }
 
     @Test
@@ -583,12 +583,12 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence b = BasedSequence.of("this;.,\n", 0, ((CharSequence) "this;.,\n").length());
         BasedSequence s = b.subSequence(0, 4);
 
-        assertEquals("this", s.extendByAny("", 2).toString());
-        assertEquals("this", s.extendByAny("-*", 2).toString());
-        assertEquals("this;", s.extendByAny(";", 2).toString());
-        assertEquals("this;.", s.extendByAny(".;", 2).toString());
-        assertEquals("this;.", s.extendByAny(",.;", 2).toString());
-        assertEquals("this;.", s.extendByAny("\n,.;", 2).toString());
+        assertEquals("this", s.extendByAny(CharPredicate.anyOf(""), 2).toString());
+        assertEquals("this", s.extendByAny(CharPredicate.anyOf("-*"), 2).toString());
+        assertEquals("this;", s.extendByAny(CharPredicate.anyOf(";"), 2).toString());
+        assertEquals("this;.", s.extendByAny(CharPredicate.anyOf(".;"), 2).toString());
+        assertEquals("this;.", s.extendByAny(CharPredicate.anyOf(",.;"), 2).toString());
+        assertEquals("this;.", s.extendByAny(CharPredicate.anyOf("\n,.;"), 2).toString());
     }
 
     @Test
@@ -596,109 +596,109 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence b = BasedSequence.of("this;.,\n", 0, ((CharSequence) "this;.,\n").length());
         BasedSequence s = b.subSequence(0, 4);
 
-        assertEquals("this", s.extendToAny("").toString());
-        assertEquals("this", s.extendToAny("-*").toString());
-        assertEquals("this;", s.extendToAny(";").toString());
-        assertEquals("this;", s.extendToAny(".;").toString());
-        assertEquals("this;.", s.extendToAny(".").toString());
-        assertEquals("this;.", s.extendToAny(".,").toString());
-        assertEquals("this;.", s.extendToAny(",.").toString());
-        assertEquals("this;.", s.extendToAny(",.").toString());
-        assertEquals("this;.,", s.extendToAny(",").toString());
-        assertEquals("this;", s.extendToAny("\n,.;").toString());
-        assertEquals("this;.", s.extendToAny("\n,.").toString());
-        assertEquals("this;.,", s.extendToAny("\n,").toString());
+        assertEquals("this", s.extendToAny(CharPredicate.anyOf("")).toString());
+        assertEquals("this", s.extendToAny(CharPredicate.anyOf("-*")).toString());
+        assertEquals("this;", s.extendToAny(CharPredicate.anyOf(";")).toString());
+        assertEquals("this;", s.extendToAny(CharPredicate.anyOf(".;")).toString());
+        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf(".")).toString());
+        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf(".,")).toString());
+        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf(",.")).toString());
+        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf(",.")).toString());
+        assertEquals("this;.,", s.extendToAny(CharPredicate.anyOf(",")).toString());
+        assertEquals("this;", s.extendToAny(CharPredicate.anyOf("\n,.;")).toString());
+        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf("\n,.")).toString());
+        assertEquals("this;.,", s.extendToAny(CharPredicate.anyOf("\n,")).toString());
     }
 
     @Test
     public void test_prefixWithIndent() {
-        assertEquals("test\n", BasedSequence.of("\ntest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals(" test\n", BasedSequence.of("\n test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("  test\n", BasedSequence.of("\n  test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("   test\n", BasedSequence.of("\n   test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("    test\n", BasedSequence.of("\n    test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("     test\n", BasedSequence.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("      test\n", BasedSequence.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
+        assertEquals("test\n", BasedSequence.of("\ntest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals(" test\n", BasedSequence.of("\n test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("  test\n", BasedSequence.of("\n  test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("   test\n", BasedSequence.of("\n   test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("    test\n", BasedSequence.of("\n    test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("     test\n", BasedSequence.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("      test\n", BasedSequence.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
     }
 
     @Test
     public void test_prefixWithIndent0() {
-        assertEquals("test\n", BasedSequence.of("\ntest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n  test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n   test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n    test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\ntest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n  test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n   test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n    test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
     }
 
     @Test
     public void test_prefixWithIndent4() {
-        assertEquals("test\n", BasedSequence.of("\ntest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
-        assertEquals(" test\n", BasedSequence.of("\n test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
-        assertEquals("  test\n", BasedSequence.of("\n  test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
-        assertEquals("   test\n", BasedSequence.of("\n   test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
-        assertEquals("    test\n", BasedSequence.of("\n    test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
-        assertEquals("    test\n", BasedSequence.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
-        assertEquals("    test\n", BasedSequence.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
+        assertEquals("test\n", BasedSequence.of("\ntest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
+        assertEquals(" test\n", BasedSequence.of("\n test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
+        assertEquals("  test\n", BasedSequence.of("\n  test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
+        assertEquals("   test\n", BasedSequence.of("\n   test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
+        assertEquals("    test\n", BasedSequence.of("\n    test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
+        assertEquals("    test\n", BasedSequence.of("\n     test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
+        assertEquals("    test\n", BasedSequence.of("\n      test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
     }
 
     @Test
     public void test_prefixWithIndentTabs() {
-        assertEquals("\ttest\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals(" \ttest\n", BasedSequence.of("\n \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("  \ttest\n", BasedSequence.of("\n  \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("   \ttest\n", BasedSequence.of("\n   \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("    \ttest\n", BasedSequence.of("\n    \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("     \ttest\n", BasedSequence.of("\n     \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("      \ttest\n", BasedSequence.of("\n      \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("\ttest\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("\t test\n", BasedSequence.of("\n\t test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("\t  test\n", BasedSequence.of("\n\t  test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("\t   test\n", BasedSequence.of("\n\t   test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("\t    test\n", BasedSequence.of("\n\t    test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("\t     test\n", BasedSequence.of("\n\t     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
-        assertEquals("\t      test\n", BasedSequence.of("\n\t      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent().toString());
+        assertEquals("\ttest\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals(" \ttest\n", BasedSequence.of("\n \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("  \ttest\n", BasedSequence.of("\n  \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("   \ttest\n", BasedSequence.of("\n   \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("    \ttest\n", BasedSequence.of("\n    \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("     \ttest\n", BasedSequence.of("\n     \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("      \ttest\n", BasedSequence.of("\n      \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("\ttest\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("\t test\n", BasedSequence.of("\n\t test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("\t  test\n", BasedSequence.of("\n\t  test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("\t   test\n", BasedSequence.of("\n\t   test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("\t    test\n", BasedSequence.of("\n\t    test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("\t     test\n", BasedSequence.of("\n\t     test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
+        assertEquals("\t      test\n", BasedSequence.of("\n\t      test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent().toString());
     }
 
     @Test
     public void test_prefixWithIndentTabs0() {
-        assertEquals("test\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n  \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n   \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n    \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n     \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n      \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n\t test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n\t  test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n\t   test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n\t    test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n\t     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
-        assertEquals("test\n", BasedSequence.of("\n\t      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n  \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n   \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n    \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n     \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n      \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n\t test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n\t  test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n\t   test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n\t    test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n\t     test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
+        assertEquals("test\n", BasedSequence.of("\n\t      test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(0).toString());
     }
 
     @Test
     public void test_prefixWithIndentTabs1to8() {
-        assertEquals("test\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(1).toString());
-        assertEquals("test\n", BasedSequence.of("\n \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(2).toString());
-        assertEquals(" \ttest\n", BasedSequence.of("\n  \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(3).toString());
-        assertEquals("   \ttest\n", BasedSequence.of("\n   \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
-        assertEquals(" \ttest\n", BasedSequence.of("\n    \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(5).toString());
-        assertEquals("   \ttest\n", BasedSequence.of("\n     \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(6).toString());
-        assertEquals("     \ttest\n", BasedSequence.of("\n      \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(7).toString());
-        assertEquals("       \ttest\n", BasedSequence.of("\n       \ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(8).toString());
+        assertEquals("test\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(1).toString());
+        assertEquals("test\n", BasedSequence.of("\n \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(2).toString());
+        assertEquals(" \ttest\n", BasedSequence.of("\n  \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(3).toString());
+        assertEquals("   \ttest\n", BasedSequence.of("\n   \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
+        assertEquals(" \ttest\n", BasedSequence.of("\n    \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(5).toString());
+        assertEquals("   \ttest\n", BasedSequence.of("\n     \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(6).toString());
+        assertEquals("     \ttest\n", BasedSequence.of("\n      \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(7).toString());
+        assertEquals("       \ttest\n", BasedSequence.of("\n       \ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(8).toString());
 
-        assertEquals("test\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(1).toString());
-        assertEquals(" test\n", BasedSequence.of("\n\t test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(2).toString());
-        assertEquals("  test\n", BasedSequence.of("\n\t  test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(3).toString());
-        assertEquals("   test\n", BasedSequence.of("\n\t   test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(4).toString());
-        assertEquals("    test\n", BasedSequence.of("\n\t    test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(5).toString());
-        assertEquals("     test\n", BasedSequence.of("\n\t     test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(6).toString());
-        assertEquals("      test\n", BasedSequence.of("\n\t      test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(7).toString());
-        assertEquals("       test\n", BasedSequence.of("\n\t       test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(8).toString());
-        assertEquals("\t    test\n", BasedSequence.of("\n\t    test\n").trimStart(BasedSequence.WHITESPACE_CHARS).prefixWithIndent(8).toString());
+        assertEquals("test\n", BasedSequence.of("\n\ttest\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(1).toString());
+        assertEquals(" test\n", BasedSequence.of("\n\t test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(2).toString());
+        assertEquals("  test\n", BasedSequence.of("\n\t  test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(3).toString());
+        assertEquals("   test\n", BasedSequence.of("\n\t   test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(4).toString());
+        assertEquals("    test\n", BasedSequence.of("\n\t    test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(5).toString());
+        assertEquals("     test\n", BasedSequence.of("\n\t     test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(6).toString());
+        assertEquals("      test\n", BasedSequence.of("\n\t      test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(7).toString());
+        assertEquals("       test\n", BasedSequence.of("\n\t       test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(8).toString());
+        assertEquals("\t    test\n", BasedSequence.of("\n\t    test\n").trimStart(BasedSequence.WHITESPACE_SET).prefixWithIndent(8).toString());
     }
 
     @Test
@@ -1453,20 +1453,20 @@ public class BasedTrackedSequenceImplTest {
         String input = "\n234\n789\n";
 
         BasedSequence sequence = BasedSequence.of(input);
-        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
-        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
-        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
-        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
-        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
-        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
-        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
-        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
-        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
+        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 0).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 1).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 2).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 3).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 4).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 5).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 6).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 7).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 8).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 9).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 10).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 11).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 12).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 13).getSourceRange());
     }
 
     @Test
@@ -1474,20 +1474,20 @@ public class BasedTrackedSequenceImplTest {
         String input = "\r234\r789\r";
 
         BasedSequence sequence = BasedSequence.of(input);
-        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
-        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
-        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
-        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
-        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
-        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
-        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
-        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
-        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
-        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
+        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 0).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 1).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 2).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 3).getSourceRange());
+        assertEquals(Range.of(0, 4), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 4).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 5).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 6).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 7).getSourceRange());
+        assertEquals(Range.of(0, 8), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 8).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 9).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 10).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 11).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 12).getSourceRange());
+        assertEquals(Range.of(0, 9), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 13).getSourceRange());
     }
 
     @Test
@@ -1495,20 +1495,20 @@ public class BasedTrackedSequenceImplTest {
         String input = "\r\n234\r\n789\r\n";
 
         BasedSequence sequence = BasedSequence.of(input);
-        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 0).getSourceRange());
-        assertEquals(Range.of(0, 1), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 1).getSourceRange());
-        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 2).getSourceRange());
-        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 3).getSourceRange());
-        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 4).getSourceRange());
-        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 5).getSourceRange());
-        assertEquals(Range.of(0, 6), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 6).getSourceRange());
-        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 7).getSourceRange());
-        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 8).getSourceRange());
-        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 9).getSourceRange());
-        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 10).getSourceRange());
-        assertEquals(Range.of(0, 11), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 11).getSourceRange());
-        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 12).getSourceRange());
-        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 13).getSourceRange());
-        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.EOL_CHARS, false, 14).getSourceRange());
+        assertEquals(Range.of(0, 0), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 0).getSourceRange());
+        assertEquals(Range.of(0, 1), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 1).getSourceRange());
+        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 2).getSourceRange());
+        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 3).getSourceRange());
+        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 4).getSourceRange());
+        assertEquals(Range.of(0, 5), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 5).getSourceRange());
+        assertEquals(Range.of(0, 6), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 6).getSourceRange());
+        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 7).getSourceRange());
+        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 8).getSourceRange());
+        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 9).getSourceRange());
+        assertEquals(Range.of(0, 10), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 10).getSourceRange());
+        assertEquals(Range.of(0, 11), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 11).getSourceRange());
+        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 12).getSourceRange());
+        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 13).getSourceRange());
+        assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 14).getSourceRange());
     }
 }

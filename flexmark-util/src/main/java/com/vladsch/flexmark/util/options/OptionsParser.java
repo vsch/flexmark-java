@@ -15,14 +15,14 @@ public class OptionsParser<T> implements OptionParser<T> {
 
     private final String myOptionName;
     private final OptionParser<T>[] myParsableOptions;
-    private final char myOptionDelimiter;
-    private final char myOptionValueDelimiter;
+    private final String myOptionDelimiter;
+    private final String myOptionValueDelimiter;
 
     public OptionsParser(String optionName, OptionParser<T>[] parsableOptions, char optionDelimiter, char optionValueDelimiter) {
         myOptionName = optionName;
         myParsableOptions = parsableOptions;
-        myOptionDelimiter = optionDelimiter;
-        myOptionValueDelimiter = optionValueDelimiter;
+        myOptionDelimiter = Character.toString(optionDelimiter);
+        myOptionValueDelimiter = Character.toString(optionValueDelimiter);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class OptionsParser<T> implements OptionParser<T> {
     @Override
     public Pair<T, List<ParsedOption<T>>> parseOption(BasedSequence optionsText, T options, MessageProvider provider) {
         ArrayList<ParserMessage> messages = null;
-        BasedSequence[] optionsList = optionsText.split(myOptionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
+        BasedSequence[] optionsList = optionsText.split(myOptionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY, null);
         T result = options;
         if (provider == null) provider = MessageProvider.DEFAULT;
         List<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.length);
@@ -42,7 +42,7 @@ public class OptionsParser<T> implements OptionParser<T> {
             OptionParser<T> matched = null;
             DelimitedBuilder message = null;
 
-            BasedSequence[] optionList = optionText.split(myOptionValueDelimiter, 2, BasedSequence.SPLIT_SKIP_EMPTY);
+            BasedSequence[] optionList = optionText.split(myOptionValueDelimiter, 2, BasedSequence.SPLIT_SKIP_EMPTY, null);
             if (optionList.length == 0) continue;
             BasedSequence optionName = optionList[0];
             BasedSequence optionValue = optionList.length > 1 ? optionList[1] : optionName.subSequence(optionName.length(), optionName.length());

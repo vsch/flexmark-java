@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.IRichSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -264,7 +265,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
                     lastChildAnyNot.setCharsFromContent();
                     CharSequence charSequence = state.getLine().baseSubSequence(lastChildAnyNot.getEndOffset(), state.getLine().getStartOffset()).normalizeEOL();
                     final BasedSequence interSpace = BasedSequence.of(charSequence, 0, charSequence.length());
-                    if (interSpace.countLeading('\n') >= 2) {
+                    if (interSpace.countLeading(BasedSequence.EOL_SET) >= 2) {
                         return BlockStart.none();
                     }
                 }

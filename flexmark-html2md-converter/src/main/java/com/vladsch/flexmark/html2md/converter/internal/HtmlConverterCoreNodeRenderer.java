@@ -206,7 +206,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         while (lastPos < chars.length()) {
             int pos = chars.indexOf(c, lastPos);
             if (pos < 0) break;
-            int count = chars.countLeading(c, pos);
+            int count = chars.countLeading(value -> value == c, pos);
             if (minCount <= count) minCount = count + 1;
             lastPos = pos + count;
         }
@@ -429,7 +429,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     int lineCount = out.getLineCount();
                     if (lineCount > 0) {
                         CharSequence lineContent = out.getLineContent(lineCount - 1);
-                        int pendingSpace = BasedSequence.of(lineContent, 0, lineContent.length()).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+                        int pendingSpace = BasedSequence.of(lineContent, 0, lineContent.length()).countTrailing(BasedSequence.SPACE_TAB_SET);
                         if (pendingSpace < 2) {
                             // replace last line
                             out.removeLines(lineCount - 1, lineCount);

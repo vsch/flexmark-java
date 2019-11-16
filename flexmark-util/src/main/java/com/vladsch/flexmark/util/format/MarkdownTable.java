@@ -11,11 +11,13 @@ import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.Predicate;
 
 import static com.vladsch.flexmark.util.Utils.*;
 import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
@@ -45,6 +47,7 @@ public class MarkdownTable {
     private final TableSection[] ALL_CONTENT_ROWS;  // header, body
     private final TableSection[] ALL_HEADER_ROWS;   // header
     private final TableSection[] ALL_BODY_ROWS;     // body
+    public static final CharPredicate COLON_TRIM_CHARS = CharPredicate.anyOf(':');
 
     public MarkdownTable(DataHolder options) {
         this(new TableFormatOptions(options));
@@ -571,8 +574,6 @@ public class MarkdownTable {
 
     public void finalizeTable() {
         // remove null cells
-        String colonTrimChars = ":";
-
         normalize();
 
         if (options.fillMissingColumns) {
@@ -678,7 +679,7 @@ public class MarkdownTable {
             for (TableCell cell : separator.rows.get(0).cells) {
                 CellAlignment alignment = adjustCellAlignment(cell.alignment);
                 int colonCount = alignment == CellAlignment.LEFT || alignment == CellAlignment.RIGHT ? 1 : alignment == CellAlignment.CENTER ? 2 : 0;
-                BasedSequence trim = cell.text.trim(colonTrimChars);
+                BasedSequence trim = cell.text.trim(COLON_TRIM_CHARS);
                 int dashCount = trim.length();
                 int dashesOnly = Utils.minLimit(dashCount, options.minSeparatorColumnWidth - colonCount, options.minSeparatorDashes);
                 if (dashCount < dashesOnly) dashCount = dashesOnly;

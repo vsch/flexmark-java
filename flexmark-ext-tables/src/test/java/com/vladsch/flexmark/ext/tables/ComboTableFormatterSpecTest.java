@@ -80,7 +80,7 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
 
                 @Override
                 public int charWidth(@NotNull CharSequence s) {
-                    return BasedSequence.of(s, 0, s.length()).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR);
+                    return BasedSequence.of(s, 0, s.length()).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_SET);
                 }
             })
         );

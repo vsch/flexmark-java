@@ -9,9 +9,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.RichSequenceImpl;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
@@ -23,6 +21,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.vladsch.flexmark.util.Utils.*;
+import static com.vladsch.flexmark.util.sequence.IRichSequence.HASH_SET;
 
 public class TestUtils {
     static {
@@ -144,7 +143,7 @@ public class TestUtils {
     @NotNull
     public static Pair<String, Integer> addSpecSection(@NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
         assert sectionHeadings.length == 7;
-        int lastSectionLevel = RichSequenceImpl.of(headingLine).countLeading('#');
+        int lastSectionLevel = RichSequenceImpl.of(headingLine).countLeading(HASH_SET);
         sectionHeadings[lastSectionLevel] = headingText;
         int iMax = 7;
         for (int i = lastSectionLevel + 1; i < iMax; i++) {

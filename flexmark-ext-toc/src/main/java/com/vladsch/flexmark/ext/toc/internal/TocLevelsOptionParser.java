@@ -51,7 +51,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
     public Pair<TocOptions, List<ParsedOption<TocOptions>>> parseOption(BasedSequence optionText, TocOptions options, MessageProvider provider) {
         // may have levels
         TocOptions result = options;
-        BasedSequence[] levelsOptionValue = optionText.split(',');
+        BasedSequence[] levelsOptionValue = optionText.split(",");
         final ParserParams parserParams = new ParserParams();
 
         if (provider == null) provider = MessageProvider.DEFAULT;
@@ -71,7 +71,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
         };
 
         for (BasedSequence option : levelsOptionValue) {
-            BasedSequence[] optionRange = option.split('-', 2, BasedSequence.SPLIT_TRIM_PARTS);
+            BasedSequence[] optionRange = option.split("-", 2, BasedSequence.SPLIT_TRIM_PARTS);
 
             Integer rangeStart;
             Integer rangeEnd;
@@ -120,7 +120,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
 
         if (newLevels != 0) result = result.withLevels(newLevels);
 
-        return new Pair<>(result, (List<ParsedOption<TocOptions>>) Collections.<ParsedOption<TocOptions>>singletonList(new ParsedOption(optionText, this, parserParams.status, parserParams.messages)));
+        return new Pair<>(result, (List<ParsedOption<TocOptions>>) Collections.<ParsedOption<TocOptions>>singletonList(new ParsedOption<>(optionText, this, parserParams.status, parserParams.messages)));
     }
 
     @Override

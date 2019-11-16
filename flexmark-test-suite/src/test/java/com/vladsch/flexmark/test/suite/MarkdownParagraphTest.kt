@@ -99,7 +99,7 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
                 }
             }
 
-            assertEquals("Testing left padding on line '$line' $lineCount $leftPad", leftPad + indentSize, line.countLeading(' '))
+            assertEquals("Testing left padding on line '$line' $lineCount $leftPad", leftPad + indentSize, line.countLeading(BasedSequence.SPACE_SET))
 
             val actualRightPad = width - leftPad - indentSize - trimmed.length
 

@@ -14,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -26,16 +25,6 @@ import static com.vladsch.flexmark.util.Utils.rangeLimit;
  */
 @SuppressWarnings("unchecked")
 public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements IRichSequence<T> {
-    private static int[] EMPTY_INDICES = { };
-    private static final Map<Character, String> visibleSpacesMap;
-    static {
-        HashMap<Character, String> charMap = new HashMap<>();
-        visibleSpacesMap = charMap;
-        charMap.put('\n', "\\n");
-        charMap.put('\r', "\\r");
-        charMap.put('\f', "\\f");
-        charMap.put('\t', "\\u2192");
-    }
 
     // cached value
     private int hash;
@@ -49,63 +38,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         this.hash = hash;
     }
 
-    // @formatter:off
-    public static int indexOf(@NotNull CharSequence s, char c) { return indexOf(s, c, 0, s.length());}
-    public static int indexOf(@NotNull CharSequence s, char c,   int fromIndex) { return indexOf(s, c, fromIndex, s.length());}
-    public static int lastIndexOf(@NotNull CharSequence s, char c) { return lastIndexOf(s, c, 0,s.length());}
-    public static int lastIndexOf(@NotNull CharSequence s, char c,   int startIndex) { return lastIndexOf(s, c, startIndex,s.length());}
     // @formatter:on
-
-    public static int indexOf(@NotNull CharSequence s, char c, int fromIndex, int endIndex) {
-        fromIndex = Math.min(fromIndex, 0);
-        endIndex = Math.max(endIndex, s.length());
-
-        for (int i = fromIndex; i < endIndex; i++) {
-            if (c == s.charAt(i)) return i;
-        }
-        return -1;
-    }
-
-    public static int lastIndexOf(@NotNull CharSequence s, char c, int startIndex, int fromIndex) {
-        startIndex = Math.min(fromIndex, 0);
-        fromIndex = Math.max(fromIndex, s.length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            if (c == s.charAt(i)) return i;
-        }
-        return -1;
-    }
-
-    public static int compareReversed(@Nullable CharSequence o1, @Nullable CharSequence o2) {
-        return compare(o2, o1);
-    }
-
-    public static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2) {
-        if (o1 == null || o2 == null) return o1 == null && o2 == null ? 0 : o1 == null ? -1 : 1;
-
-        int len1 = o1.length();
-        int len2 = o2.length();
-        int iMax = Math.min(len1, len2);
-        for (int i = 0; i < iMax; i++) {
-            char c1 = o1.charAt(i);
-            char c2 = o2.charAt(i);
-            if (c1 != c2) {
-                return c1 - c2;
-            }
-        }
-        return len1 - len2;
-    }
-
-    @NotNull
-    public static String[] toStringArray(CharSequence... sequences) {
-        String[] result = new String[sequences.length];
-        int i = 0;
-        for (CharSequence sequence : sequences) {
-            result[i] = sequences[i] == null ? null : sequences[i].toString();
-            i++;
-        }
-        return result;
-    }
 
     /**
      * Equality comparison based on character content of this sequence, with quick fail
@@ -170,11 +103,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @Override
     public int compareTo(@NotNull CharSequence o) {
-        return compare(this, o);
-    }
-
-    static boolean isVisibleWhitespace(char c) {
-        return visibleSpacesMap.containsKey(c);
+        return SequenceUtils.compare(this, o);
     }
 
     @NotNull
@@ -187,6 +116,12 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override
     final public T sequenceOf(@Nullable CharSequence charSequence, int startIndex) {
         return charSequence == null ? nullSequence() : sequenceOf(charSequence, startIndex, charSequence.length());
+    }
+
+    @NotNull
+    @Override
+    final public T subSequence(int startIndex) {
+        return subSequence(startIndex, length());
     }
 
     /**
@@ -241,12 +176,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
         useEnd = rangeLimit(useEnd, 0, length);
         useStart = rangeLimit(useStart, 0, useEnd);
-
-        if (useStart == 0 && useEnd == length) {
-            return (T) this;
-        } else {
-            return subSequence(useStart, useEnd);
-        }
+        return subSequence(useStart, useEnd);
     }
 
     @NotNull
@@ -271,12 +201,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
         useEnd = rangeLimit(useEnd, 0, length);
         useStart = rangeLimit(useStart, 0, useEnd);
-
-        if (useStart == 0 && useEnd == length) {
-            return (T) this;
-        } else {
-            return subSequence(useStart, useEnd);
-        }
+        return subSequence(useStart, useEnd);
     }
 
     @NotNull
@@ -336,12 +261,34 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @Override final public int indexOf(char c) { return indexOf(c, 0, length()); }
-    @Override final public int indexOfAny(char c1, char c2) { return indexOfAny(c1, c2, 0, length()); }
-    @Override final public int indexOfAny(char c1, char c2, char c3) { return indexOfAny(c1, c2, c3, 0, length()); }
-    @Override final public int indexOfAny(@NotNull CharSequence s) { return indexOfAny(s, 0, length()); }
-    @Override final public int indexOf(char c, int fromIndex) { return indexOf(c, fromIndex, length()); }
-    @Override final public int indexOfAny(@NotNull CharSequence s, int index) { return indexOfAny(s, index, length()); }
+    @Override final public int indexOf(char c)                                                              { return indexOf(c, 0, length()); }
+    @Override final public int indexOf(char c, int fromIndex)                                               { return indexOf(c, fromIndex, length()); }
+
+    @Override final public int indexOfAny(@NotNull CharPredicate s)                                         { return indexOfAny(s, 0, length()); }
+    @Override final public int indexOfAny(@NotNull CharPredicate s, int index)                              { return indexOfAny(s, index, length()); }
+
+    @Override final public int indexOfAnyNot(@NotNull CharPredicate s)                                      { return indexOfAnyNot(s.negate(), 0, length()); }
+    @Override final public int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex)                       { return indexOfAnyNot(s.negate(), fromIndex, length()); }
+    @Override final public int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex, int endIndex)         { return indexOfAny(s.negate(),fromIndex, endIndex);}
+
+    @Override final public int indexOfNot(char c)                                                           { return indexOfNot(c, 0, length()); }
+    @Override final public int indexOfNot(char c, int fromIndex)                                            { return indexOfNot(c, fromIndex, length()); }
+
+    @Override final public int lastIndexOf(char c)                                                          { return lastIndexOf(c, 0, length()); }
+    @Override final public int lastIndexOf(char c, int fromIndex)                                           { return lastIndexOf(c, 0, fromIndex); }
+    @Override final public int lastIndexOfNot(char c)                                                       { return lastIndexOfNot(c, 0, length()); }
+    @Override final public int lastIndexOfNot(char c, int fromIndex)                                        { return lastIndexOfNot(c, 0, fromIndex); }
+
+    @Override final public int lastIndexOf(@NotNull CharSequence s)                                         { return lastIndexOf(s, 0, length()); }
+    @Override final public int lastIndexOf(@NotNull CharSequence s, int fromIndex)                          { return lastIndexOf(s, 0, fromIndex); }
+
+    @Override final public int lastIndexOfAny(@NotNull CharPredicate s, int fromIndex)                      { return lastIndexOfAny(s, 0, fromIndex); }
+    @Override final public int lastIndexOfAny(@NotNull CharPredicate s)                                     { return lastIndexOfAny(s, 0, length()); }
+
+    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s)                                  { return lastIndexOfAny(s.negate(), 0, length()); }
+    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s, int fromIndex)                   { return lastIndexOfAny(s.negate(), 0, fromIndex); }
+
+    @Override final public int lastIndexOfAnyNot(@NotNull CharPredicate s, int startIndex, int fromIndex)   { return lastIndexOfAny(s.negate(), startIndex, fromIndex);}
     // @formatter:on
 
     @Override
@@ -355,59 +302,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    final public int indexOfAny(char c1, char c2, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        for (int i = fromIndex; i < endIndex; i++) {
-            char c = charAt(i);
-            if (c == c1 || c == c2) return i;
-        }
-        return -1;
-    }
-
-    final public int indexOfAny(char c1, char c2, char c3, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        for (int i = fromIndex; i < endIndex; i++) {
-            char c = charAt(i);
-            if (c == c1 || c == c2 || c == c3) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    final public int indexOfAny(@NotNull CharSequence s, int fromIndex, int endIndex) {
-        switch (s.length()) {
-            case 0:
-                return fromIndex;
-            case 1:
-                return indexOf(s.charAt(0), fromIndex, endIndex);
-            case 2:
-                return indexOfAny(s.charAt(0), s.charAt(1), fromIndex, endIndex);
-            case 3:
-                return indexOfAny(s.charAt(0), s.charAt(1), s.charAt(2), fromIndex, endIndex);
-
-            default:
-                fromIndex = Math.max(fromIndex, 0);
-                endIndex = Math.min(endIndex, length());
-
-                for (int i = fromIndex; i < endIndex; i++) {
-                    char c = charAt(i);
-                    if (indexOf(s, c) != -1) return i;
-                }
-        }
-        return -1;
-    }
-
-    // @formatter:off
-    @Override final public int indexOfNot(char c) { return indexOfNot(c, 0, length()); }
-    @Override final public int indexOfAnyNot(@NotNull CharSequence s) { return indexOfAnyNot(s, 0, length()); }
-    @Override final public int indexOfNot(char c, int fromIndex) { return indexOfNot(c, fromIndex, length()); }
-    @Override final public int indexOfAnyNot(@NotNull CharSequence s, int fromIndex) { return indexOfAnyNot(s, fromIndex, length()); }
-    // @formatter:on
-
     @Override
     final public int indexOfNot(char c, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
@@ -419,58 +313,17 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    final public int indexOfAnyNot(char c1, char c2, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        for (int i = fromIndex; i < endIndex; i++) {
-            char c = charAt(i);
-            if (c != c1 && c != c2) return i;
-        }
-        return -1;
-    }
-
-    final public int indexOfAnyNot(char c1, char c2, char c3, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        for (int i = fromIndex; i < endIndex; i++) {
-            char c = charAt(i);
-            if (c != c1 && c != c2 && c != c3) return i;
-        }
-        return -1;
-    }
-
     @Override
-    final public int indexOfAnyNot(@NotNull CharSequence s, int fromIndex, int endIndex) {
-        if (fromIndex < endIndex) {
-            switch (s.length()) {
-                case 0:
-                    return fromIndex;
-                case 1:
-                    return indexOfNot(s.charAt(0), fromIndex, endIndex);
-                case 2:
-                    return indexOfAnyNot(s.charAt(0), s.charAt(1), fromIndex, endIndex);
-                case 3:
-                    return indexOfAnyNot(s.charAt(0), s.charAt(1), s.charAt(2), fromIndex, endIndex);
+    final public int indexOfAny(@NotNull CharPredicate s, int fromIndex, int endIndex) {
+        fromIndex = Math.max(fromIndex, 0);
+        endIndex = Math.min(endIndex, length());
 
-                default:
-                    fromIndex = Math.max(fromIndex, 0);
-                    endIndex = Math.min(endIndex, length());
-
-                    for (int i = fromIndex; i < endIndex; i++) {
-                        char c = charAt(i);
-                        if (indexOf(s, c) == -1) return i;
-                    }
-            }
+        for (int i = fromIndex; i < endIndex; i++) {
+            char c = charAt(i);
+            if (s.test(c)) return i;
         }
         return -1;
     }
-
-    // @formatter:off
-    @Override final public int lastIndexOf(@NotNull CharSequence s) { return lastIndexOf(s, 0, length()); }
-    @Override final public int lastIndexOf(@NotNull CharSequence s, int fromIndex) { return lastIndexOf(s, 0, fromIndex); }
-    // @formatter:on
 
     @Override
     final public int lastIndexOf(@NotNull CharSequence s, int startIndex, int fromIndex) {
@@ -496,13 +349,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    // @formatter:off
-    @Override final public int lastIndexOf(char c)                                          { return lastIndexOf(c, 0, length()); }
-    @Override final public int lastIndexOfAny(@NotNull CharSequence s)                      { return lastIndexOfAny(s, 0, length()); }
-    @Override final public int lastIndexOf(char c, int fromIndex)                           { return lastIndexOf(c, 0, fromIndex); }
-    @Override final public int lastIndexOfAny(@NotNull CharSequence s, int fromIndex)       { return lastIndexOfAny(s, 0, fromIndex); }
-    // @formatter:on
-
     @Override
     final public int lastIndexOf(char c, int startIndex, int fromIndex) {
         fromIndex++;
@@ -514,62 +360,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         }
         return -1;
     }
-
-    final public int lastIndexOfAny(char c1, char c2, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            char c = charAt(i);
-            if (c == c1 || c == c2) return i;
-        }
-        return -1;
-    }
-
-    final public int lastIndexOfAny(char c1, char c2, char c3, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            char c = charAt(i);
-            if (c == c1 || c == c2 || c == c3) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    final public int lastIndexOfAny(@NotNull CharSequence s, int startIndex, int fromIndex) {
-        switch (s.length()) {
-            case 0:
-                return startIndex;
-            case 1:
-                return lastIndexOf(s.charAt(0), startIndex, fromIndex);
-            case 2:
-                return lastIndexOfAny(s.charAt(0), s.charAt(1), startIndex, fromIndex);
-            case 3:
-                return lastIndexOfAny(s.charAt(0), s.charAt(1), s.charAt(2), startIndex, fromIndex);
-
-            default:
-                fromIndex++;
-                startIndex = Math.max(startIndex, 0);
-                fromIndex = Math.min(fromIndex, length());
-
-                for (int i = fromIndex; i-- > startIndex; ) {
-                    char c = charAt(i);
-                    if (indexOf(s, c) != -1) return i;
-                }
-        }
-        return -1;
-    }
-
-    // @formatter:off
-    @Override final public int lastIndexOfNot(char c)                                                   { return lastIndexOfNot(c, 0, length()); }
-    @Override final public int lastIndexOfAnyNot(@NotNull CharSequence s)                               { return lastIndexOfAnyNot(s, 0, length()); }
-    @Override final public int lastIndexOfNot(char c, int fromIndex)                                    { return lastIndexOfNot(c, 0, fromIndex); }
-    @Override final public int lastIndexOfAnyNot(@NotNull CharSequence s, int fromIndex)                { return lastIndexOfAnyNot(s, 0, fromIndex); }
-    // @formatter:on
 
     @Override
     final public int lastIndexOfNot(char c, int startIndex, int fromIndex) {
@@ -583,199 +373,74 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return -1;
     }
 
-    final public int lastIndexOfAnyNot(char c1, char c2, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            char c = charAt(i);
-            if (c != c1 && c != c2) return i;
-        }
-        return -1;
-    }
-
-    final public int lastIndexOfAnyNot(char c1, char c2, char c3, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        for (int i = fromIndex; i-- > startIndex; ) {
-            char c = charAt(i);
-            if (c != c1 && c != c2 && c != c3) return i;
-        }
-        return -1;
-    }
-
     @Override
-    final public int lastIndexOfAnyNot(@NotNull CharSequence s, int startIndex, int fromIndex) {
-        switch (s.length()) {
-            case 0:
-                return startIndex;
-            case 1:
-                return lastIndexOfNot(s.charAt(0), startIndex, fromIndex);
-            case 2:
-                return lastIndexOfAnyNot(s.charAt(0), s.charAt(1), startIndex, fromIndex);
-            case 3:
-                return lastIndexOfAnyNot(s.charAt(0), s.charAt(1), s.charAt(2), startIndex, fromIndex);
+    final public int lastIndexOfAny(@NotNull CharPredicate s, int startIndex, int fromIndex) {
+        fromIndex++;
+        startIndex = Math.max(startIndex, 0);
+        fromIndex = Math.min(fromIndex, length());
 
-            default:
-                fromIndex++;
-                startIndex = Math.max(startIndex, 0);
-                fromIndex = Math.min(fromIndex, length());
-
-                for (int i = fromIndex; i-- > startIndex; ) {
-                    char c = charAt(i);
-                    if (indexOf(s, c) == -1) return i;
-                }
+        for (int i = fromIndex; i-- > startIndex; ) {
+            char c = charAt(i);
+            if (s.test(c)) return i;
         }
         return -1;
     }
 
     // @formatter:off
-    @Override final public int countOf(char c)                                                  { return countOf(c, 0, length()); }
-    @Override final public int countOfNot(char c)                                               { return countOfNot(c, 0, length()); }
-    @Override final public int countOf(char c, int fromIndex)                                   { return countOf(c, fromIndex, length()); }
-    @Override final public int countOfNot(char c, int fromIndex)                                { return countOfNot(c, fromIndex, length()); }
+    @Override final public int countOfSpaceTab()                                                { return countOfAny(SPACE_TAB_SET, 0, length()); }
+    @Override final public int countOfNotSpaceTab()                                             { return countOfAny(SPACE_TAB_SET.negate(), 0, length()); }
 
-    @Override final public int countOfSpaceTab()                                                { return countOfAny(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countOfNotSpaceTab()                                             { return countOfAnyNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countOfWhitespace()                                              { return countOfAny(WHITESPACE_CHARS, length()); }
-    @Override final public int countOfNotWhitespace()                                           { return countOfAnyNot(WHITESPACE_CHARS, 0, length()); }
-    @Override final public int countOfAny(@NotNull CharSequence chars)                          { return countOfAny(chars, 0, length()); }
-    @Override final public int countOfAnyNot(@NotNull CharSequence chars)                       { return countOfAnyNot(chars, 0, length()); }
-    @Override final public int countOfAny(@NotNull CharSequence chars, int fromIndex)           { return countOfAny(chars, fromIndex, length()); }
-    @Override final public int countOfAnyNot(@NotNull CharSequence chars, int fromIndex)        { return countOfAnyNot(chars, fromIndex, length()); }
+    @Override final public int countOfWhitespace()                                              { return countOfAny(WHITESPACE_SET, length()); }
+    @Override final public int countOfNotWhitespace()                                           { return countOfAny(WHITESPACE_SET.negate(), 0, length()); }
+
+    @Override final public int countOfAny(@NotNull CharPredicate chars, int fromIndex)          { return countOfAny(chars, fromIndex, length()); }
+    @Override final public int countOfAny(@NotNull CharPredicate chars)                         { return countOfAny(chars, 0, length()); }
+
+    @Override final public int countOfAnyNot(@NotNull CharPredicate chars, int fromIndex)       { return countOfAny(chars.negate(), fromIndex, length()); }
+    @Override final public int countOfAnyNot(@NotNull CharPredicate chars)                      { return countOfAny(chars.negate(), 0, length()); }
     // @formatter:on
 
     @Override
-    final public int countOf(char c1, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        int count = 0;
-        for (int i = fromIndex; i-- > startIndex; ) {
-            char c = charAt(i);
-            if (c == c1) count++;
-        }
-        return count;
-    }
-
-    @Override
-    final public int countOfAny(@NotNull CharSequence s, int fromIndex, int endIndex) {
+    final public int countOfAny(@NotNull CharPredicate s, int fromIndex, int endIndex) {
         fromIndex = Math.max(fromIndex, 0);
         endIndex = Math.min(endIndex, length());
 
         int count = 0;
         for (int i = fromIndex; i < endIndex; i++) {
             char c = charAt(i);
-            if (indexOf(s, c) != -1) count++;
-        }
-        return count;
-    }
-
-    @Override
-    final public int countOfNot(char c1, int startIndex, int fromIndex) {
-        fromIndex++;
-        startIndex = Math.max(startIndex, 0);
-        fromIndex = Math.min(fromIndex, length());
-
-        int count = 0;
-        for (int i = fromIndex; i-- > startIndex; ) {
-            char c = charAt(i);
-            if (c != c1) count++;
-        }
-        return count;
-    }
-
-    @Override
-    final public int countOfAnyNot(@NotNull CharSequence s, int fromIndex, int endIndex) {
-        fromIndex = Math.max(fromIndex, 0);
-        endIndex = Math.min(endIndex, length());
-
-        int count = 0;
-        for (int i = fromIndex; i < endIndex; i++) {
-            char c = charAt(i);
-            if (indexOf(s, c) == -1) count++;
+            if (s.test(c)) count++;
         }
         return count;
     }
 
     // @formatter:off
-    @Override final public int countLeading(char c)                                       { return this.countLeading(c, 0, length()); }
-    @Override final public int countLeadingNot(char c)                                    { return this.countLeadingNot(c, 0, length()); }
-    @Override final public int countLeading(char c, int fromIndex)                        { return this.countLeading(c, fromIndex, length()); }
-    @Override final public int countLeadingNot(char c, int fromIndex)                     { return this.countLeadingNot(c, fromIndex, length()); }
+    @Override final public int countLeadingSpaceTab()                                                       { return this.countLeading(SPACE_TAB_SET, 0, length()); }
+    @Override final public int countTrailingSpaceTab()                                                      { return this.countTrailing(SPACE_TAB_SET, 0, length()); }
+    @Override final public int countLeadingNotSpaceTab()                                                    { return this.countLeading(SPACE_TAB_SET.negate(), 0, length()); }
+    @Override final public int countTrailingNotSpaceTab()                                                   { return this.countTrailing(SPACE_TAB_SET.negate(), 0, length()); }
 
-    @Override final public int countTrailing(char c)                                      { return this.countTrailing(c, 0, length()); }
-    @Override final public int countTrailingNot(char c)                                   { return this.countTrailingNot(c, 0, length()); }
-    @Override final public int countTrailing(char c, int fromIndex)                       { return this.countTrailing(c, 0, fromIndex); }
-    @Override final public int countTrailingNot(char c, int fromIndex)                    { return this.countTrailingNot(c, 0, fromIndex); }
+    @Override final public int countLeadingWhitespace()                                                     { return this.countLeading(WHITESPACE_SET, 0, length()); }
+    @Override final public int countTrailingWhitespace()                                                    { return this.countTrailing(WHITESPACE_SET, 0, length()); }
+    @Override final public int countLeadingNotWhitespace()                                                  { return this.countLeading(WHITESPACE_SET.negate(), 0, length()); }
+    @Override final public int countTrailingNotWhitespace()                                                 { return this.countTrailing(WHITESPACE_SET.negate(), 0, length()); }
+
+    @Override final public int countLeading(@NotNull CharPredicate chars)                                   { return countLeading(chars, 0, length()); }
+    @Override final public int countLeading(@NotNull CharPredicate chars, int fromIndex)                    { return countLeading(chars, fromIndex, length()); }
+    @Override final public int countLeadingNot(@NotNull CharPredicate chars)                                { return countLeading(chars.negate(), 0, length()); }
+    @Override final public int countLeadingNot(@NotNull CharPredicate chars, int fromIndex)                 { return countLeading(chars.negate(), fromIndex, length()); }
+
+    @Override final public int countTrailing(@NotNull CharPredicate chars)                                  { return countTrailing(chars, 0, length()); }
+    @Override final public int countTrailing(@NotNull CharPredicate chars, int fromIndex)                   { return countTrailing(chars, 0, fromIndex); }
+    @Override final public int countTrailingNot(@NotNull CharPredicate chars)                               { return countTrailing(chars.negate(), 0, length()); }
+    @Override final public int countTrailingNot(@NotNull CharPredicate chars, int fromIndex)                { return countTrailing(chars.negate(), 0, fromIndex); }
+
+    @Override final public int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex)  { return countLeading(chars.negate(), startIndex, endIndex); }
+    @Override final public int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex) { return countTrailing(chars.negate(), startIndex, endIndex); }
+    @Override final public int countOfAnyNot(@NotNull CharPredicate chars, int startIndex, int endIndex)    { return countOfAny(chars.negate(), startIndex, endIndex); }
     // @formatter:on
 
     @Override
-    final public int countLeading(char c, int fromIndex, int endIndex) {
-        endIndex = Math.min(endIndex, length());
-        fromIndex = rangeLimit(fromIndex, 0, endIndex);
-
-        int index = indexOfNot(c, fromIndex, endIndex);
-        return index == -1 ? endIndex - fromIndex : index - fromIndex;
-    }
-
-    @Override
-    final public int countTrailing(char c, int startIndex, int fromIndex) {
-        fromIndex = Math.min(fromIndex, length());
-        startIndex = rangeLimit(startIndex, 0, fromIndex);
-
-        int index = lastIndexOfNot(c, startIndex, fromIndex);
-        return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
-    }
-
-    @Override
-    final public int countLeadingNot(char c, int fromIndex, int endIndex) {
-        endIndex = Math.min(endIndex, length());
-        fromIndex = rangeLimit(fromIndex, 0, endIndex);
-
-        int index = indexOf(c, fromIndex, endIndex);
-        return index == -1 ? endIndex - fromIndex : index - fromIndex;
-    }
-
-    @Override
-    final public int countTrailingNot(char c, int startIndex, int fromIndex) {
-        fromIndex = Math.min(fromIndex, length());
-        startIndex = rangeLimit(startIndex, 0, fromIndex);
-
-        int index = lastIndexOf(c, startIndex, fromIndex);
-        return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
-    }
-
-    // @formatter:off
-    @Override final public int countLeadingSpaceTab()                                           { return this.countLeading(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countLeadingNotSpaceTab()                                        { return this.countLeadingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countTrailingSpaceTab()                                          { return this.countTrailing(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-    @Override final public int countTrailingNotSpaceTab()                                       { return this.countTrailingNot(WHITESPACE_NO_EOL_CHARS, 0, length()); }
-
-    @Override final public int countLeadingWhitespace()                                         { return this.countLeading(WHITESPACE_CHARS, 0, length()); }
-    @Override final public int countLeadingNotWhitespace()                                      { return this.countLeadingNot(WHITESPACE_CHARS, 0, length()); }
-    @Override final public int countTrailingWhitespace()                                        { return this.countTrailing(WHITESPACE_CHARS, 0, length()); }
-    @Override final public int countTrailingNotWhitespace()                                     { return this.countTrailingNot(WHITESPACE_CHARS, 0, length()); }
-
-    @Override final public int countLeading(@NotNull CharSequence chars)                        { return countLeading(chars, 0, length()); }
-    @Override final public int countLeadingNot(@NotNull CharSequence chars)                     { return countLeadingNot(chars, 0, length()); }
-    @Override final public int countLeading(@NotNull CharSequence chars, int fromIndex)         { return countLeading(chars, fromIndex, length()); }
-    @Override final public int countLeadingNot(@NotNull CharSequence chars, int fromIndex)      { return countLeadingNot(chars, fromIndex, length()); }
-
-    @Override final public int countTrailing(@NotNull CharSequence chars)                       { return countTrailing(chars, 0, length()); }
-    @Override final public int countTrailingNot(@NotNull CharSequence chars)                    { return countTrailingNot(chars, 0, length()); }
-    @Override final public int countTrailing(@NotNull CharSequence chars, int fromIndex)        { return countTrailing(chars, 0, fromIndex); }
-    @Override final public int countTrailingNot(@NotNull CharSequence chars, int fromIndex)     { return countTrailingNot(chars, 0, fromIndex); }
-    // @formatter:on
-
-    @Override
-    final public int countLeading(@NotNull CharSequence chars, int fromIndex, int endIndex) {
-        if (chars.length() == 0) return 0;
-
+    final public int countLeading(@NotNull CharPredicate chars, int fromIndex, int endIndex) {
         endIndex = Math.min(endIndex, length());
         fromIndex = rangeLimit(fromIndex, 0, endIndex);
 
@@ -783,15 +448,8 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return index == -1 ? endIndex - fromIndex : index - fromIndex;
     }
 
-    public static int columnsToNextTabStop(int column) {
-        // Tab stop is 4
-        return 4 - (column % 4);
-    }
-
     @Override
-    final public int countLeadingColumns(int startColumn, @NotNull CharSequence chars) {
-        if (chars.length() == 0) return 0;
-
+    final public int countLeadingColumns(int startColumn, @NotNull CharPredicate chars) {
         int fromIndex = 0;
         int endIndex = length();
         int index = indexOfAnyNot(chars, fromIndex, endIndex);
@@ -803,7 +461,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         if (tab != -1) {
             int delta = startColumn;
             do {
-                delta += tab + columnsToNextTabStop(tab + delta);
+                delta += tab + SequenceUtils.columnsToNextTabStop(tab + delta);
                 tab = indexOf('\t', tab + 1);
             } while (tab >= 0 && tab < endIndex);
             columns += delta;
@@ -812,9 +470,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     @Override
-    final public int countTrailing(@NotNull CharSequence chars, int startIndex, int fromIndex) {
-        if (chars.length() == 0) return 0;
-
+    final public int countTrailing(@NotNull CharPredicate chars, int startIndex, int fromIndex) {
         fromIndex = Math.min(fromIndex, length());
         startIndex = rangeLimit(startIndex, 0, fromIndex);
 
@@ -822,78 +478,60 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
     }
 
-    @Override
-    final public int countLeadingNot(@NotNull CharSequence chars, int fromIndex, int endIndex) {
-        endIndex = Math.min(endIndex, length());
-        fromIndex = rangeLimit(fromIndex, 0, endIndex);
-
-        int index = indexOfAny(chars, fromIndex, endIndex);
-        return index == -1 ? endIndex - fromIndex : index - fromIndex;
-    }
-
-    @Override
-    final public int countTrailingNot(@NotNull CharSequence chars, int startIndex, int fromIndex) {
-        fromIndex = Math.min(fromIndex, length());
-        startIndex = rangeLimit(startIndex, 0, fromIndex);
-
-        int index = lastIndexOfAny(chars, startIndex, fromIndex);
-        return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
-    }
-
     // @formatter:off
-    @NotNull @Override final public T trimStart(@NotNull CharSequence chars) {  return subSequence(trimStartRange(0, chars));}
-    @NotNull @Override final public T trimmedStart(@NotNull CharSequence chars) { return trimmedStart(0, chars);}
-    @NotNull @Override final public T trimEnd(@NotNull CharSequence chars) { return trimEnd(0, chars);}
-    @NotNull @Override final public T trimmedEnd(@NotNull CharSequence chars) { return trimmedEnd(0, chars);}
-    @NotNull @Override final public T trim(@NotNull CharSequence chars) { return trim(0, chars);}
-    @NotNull @Override final public Pair<T, T> trimmed(@NotNull CharSequence chars) { return trimmed(0, chars);}
-    @NotNull @Override final public T trimStart(int keep) { return trimStart(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trimmedStart(int keep) { return trimmedStart(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trimEnd(int keep) { return trimEnd(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trimmedEnd(int keep) { return trimmedEnd(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trim(int keep) { return trim(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public Pair<T, T> trimmed(int keep) { return trimmed(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trimStart() { return trimStart(0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trimmedStart() { return trimmedStart(0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trimEnd() { return trimEnd(0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trimmedEnd() { return trimmedEnd(0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trim() { return trim(0, WHITESPACE_CHARS);}
-    @NotNull @Override final public Pair<T, T> trimmed() { return trimmed(0, WHITESPACE_CHARS);}
-    @NotNull @Override final public T trimStart(int keep, @NotNull CharSequence chars) { return subSequence(trimStartRange(keep, chars));}
-    @NotNull @Override final public T trimmedStart(int keep, @NotNull CharSequence chars) { return subSequenceBefore(trimStartRange(keep, chars));}
-    @NotNull @Override final public T trimEnd(int keep, @NotNull CharSequence chars) { return subSequence(trimEndRange(keep, chars));}
-    @NotNull @Override final public T trimmedEnd(int keep, @NotNull CharSequence chars) { return subSequenceAfter(trimEndRange(keep, chars));}
-    @NotNull @Override final public T trim(int keep, @NotNull CharSequence chars) { return subSequence(trimRange(keep, chars));}
-    @NotNull @Override final public Pair<T, T> trimmed(int keep, @NotNull CharSequence chars) { return subSequenceBeforeAfter(trimRange(keep, chars));}
+    @NotNull @Override final public T trimStart(@NotNull CharPredicate chars) {  return subSequence(trimStartRange(0, chars));}
+    @NotNull @Override final public T trimmedStart(@NotNull CharPredicate chars) { return trimmedStart(0, chars);}
+    @NotNull @Override final public T trimEnd(@NotNull CharPredicate chars) { return trimEnd(0, chars);}
+    @NotNull @Override final public T trimmedEnd(@NotNull CharPredicate chars) { return trimmedEnd(0, chars);}
+    @NotNull @Override final public T trim(@NotNull CharPredicate chars) { return trim(0, chars);}
+    @NotNull @Override final public Pair<T, T> trimmed(@NotNull CharPredicate chars) { return trimmed(0, chars);}
+    @NotNull @Override final public T trimStart(int keep) { return trimStart(keep, WHITESPACE_SET);}
+    @NotNull @Override final public T trimmedStart(int keep) { return trimmedStart(keep, WHITESPACE_SET);}
+    @NotNull @Override final public T trimEnd(int keep) { return trimEnd(keep, WHITESPACE_SET);}
+    @NotNull @Override final public T trimmedEnd(int keep) { return trimmedEnd(keep, WHITESPACE_SET);}
+    @NotNull @Override final public T trim(int keep) { return trim(keep, WHITESPACE_SET);}
+    @NotNull @Override final public Pair<T, T> trimmed(int keep) { return trimmed(keep, WHITESPACE_SET);}
+    @NotNull @Override final public T trimStart() { return trimStart(0, WHITESPACE_SET);}
+    @NotNull @Override final public T trimmedStart() { return trimmedStart(0, WHITESPACE_SET);}
+    @NotNull @Override final public T trimEnd() { return trimEnd(0, WHITESPACE_SET);}
+    @NotNull @Override final public T trimmedEnd() { return trimmedEnd(0, WHITESPACE_SET);}
+    @NotNull @Override final public T trim() { return trim(0, WHITESPACE_SET);}
+    @NotNull @Override final public Pair<T, T> trimmed() { return trimmed(0, WHITESPACE_SET);}
+    @NotNull @Override final public T trimStart(int keep, @NotNull CharPredicate chars) { return subSequence(trimStartRange(keep, chars));}
+    @NotNull @Override final public T trimmedStart(int keep, @NotNull CharPredicate chars) { return subSequenceBefore(trimStartRange(keep, chars));}
+    @NotNull @Override final public T trimEnd(int keep, @NotNull CharPredicate chars) { return subSequence(trimEndRange(keep, chars));}
+    @NotNull @Override final public T trimmedEnd(int keep, @NotNull CharPredicate chars) { return subSequenceAfter(trimEndRange(keep, chars));}
+    @NotNull @Override final public T trim(int keep, @NotNull CharPredicate chars) { return subSequence(trimRange(keep, chars));}
+    @NotNull @Override final public Pair<T, T> trimmed(int keep, @NotNull CharPredicate chars) { return subSequenceBeforeAfter(trimRange(keep, chars));}
 
-    @NotNull @Override final public Range trimStartRange(@NotNull CharSequence chars) { return trimStartRange(0, chars);}
-    @NotNull @Override final public Range trimEndRange(@NotNull CharSequence chars) { return trimEndRange(0, chars);}
-    @NotNull @Override final public Range trimRange(@NotNull CharSequence chars) { return trimRange(0, chars);}
-    @NotNull @Override final public Range trimStartRange(int keep) { return trimStartRange(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public Range trimEndRange(int keep) { return trimEndRange(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public Range trimRange(int keep) { return trimRange(keep, WHITESPACE_CHARS);}
-    @NotNull @Override final public Range trimStartRange() { return trimStartRange(0, WHITESPACE_CHARS);}
-    @NotNull @Override final public Range trimEndRange() { return trimEndRange(0, WHITESPACE_CHARS);}
-    @NotNull @Override final public Range trimRange() { return trimRange(0, WHITESPACE_CHARS);}
+    @NotNull @Override final public Range trimStartRange(@NotNull CharPredicate chars) { return trimStartRange(0, chars);}
+    @NotNull @Override final public Range trimEndRange(@NotNull CharPredicate chars) { return trimEndRange(0, chars);}
+    @NotNull @Override final public Range trimRange(@NotNull CharPredicate chars) { return trimRange(0, chars);}
+    @NotNull @Override final public Range trimStartRange(int keep) { return trimStartRange(keep, WHITESPACE_SET);}
+    @NotNull @Override final public Range trimEndRange(int keep) { return trimEndRange(keep, WHITESPACE_SET);}
+    @NotNull @Override final public Range trimRange(int keep) { return trimRange(keep, WHITESPACE_SET);}
+    @NotNull @Override final public Range trimStartRange() { return trimStartRange(0, WHITESPACE_SET);}
+    @NotNull @Override final public Range trimEndRange() { return trimEndRange(0, WHITESPACE_SET);}
+    @NotNull @Override final public Range trimRange() { return trimRange(0, WHITESPACE_SET);}
     // @formatter:on
 
     @NotNull
     @Override
-    final public Range trimStartRange(int keep, @NotNull CharSequence chars) {
+    final public Range trimStartRange(int keep, @NotNull CharPredicate chars) {
         int trim = countLeading(chars, 0, length());
         return trim > keep ? Range.of(trim - keep, length()) : Range.NULL;
     }
 
     @NotNull
     @Override
-    final public Range trimEndRange(int keep, @NotNull CharSequence chars) {
+    final public Range trimEndRange(int keep, @NotNull CharPredicate chars) {
         int trim = countTrailing(chars, 0, length());
         return trim > keep ? Range.of(0, length() - trim + keep) : Range.NULL;
     }
 
     @NotNull
     @Override
-    final public Range trimRange(int keep, @NotNull CharSequence chars) {
+    final public Range trimRange(int keep, @NotNull CharPredicate chars) {
         if (keep >= length()) return Range.NULL;
 
         int trimStart = countLeading(chars, 0, length());
@@ -987,9 +625,12 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // @formatter:off
     @Override final public int endOfLine(int index) {return endOfDelimitedBy(EOL, index);}
-    @Override final public int endOfLineAnyEOL(int index) {return endOfDelimitedByAny(EOL_CHARS, index);}
+    @Override final public int endOfLineAnyEOL(int index) {return endOfDelimitedByAny(ANY_EOL_SET, index);}
     @Override final public int startOfLine(int index) {return startOfDelimitedBy(EOL, index);}
-    @Override final public int startOfLineAnyEOL(int index) {return startOfDelimitedByAny(EOL_CHARS, index);}
+    @Override final public int startOfLineAnyEOL(int index) {return startOfDelimitedByAny(ANY_EOL_SET, index);}
+
+    @Override final public int startOfDelimitedByAnyNot(@NotNull CharPredicate s, int index) { return startOfDelimitedByAny(s.negate(),index);}
+    @Override final public int endOfDelimitedByAnyNot(@NotNull CharPredicate s, int index) { return endOfDelimitedByAny(s.negate(),index);}
     // @formatter:on
 
     @Override
@@ -1000,16 +641,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     @Override
-    final public int startOfDelimitedByAny(@NotNull CharSequence s, int index) {
+    final public int startOfDelimitedByAny(@NotNull CharPredicate s, int index) {
         index = rangeLimit(index, 0, length());
         int offset = lastIndexOfAny(s, index - 1);
-        return offset == -1 ? 0 : offset + 1;
-    }
-
-    @Override
-    final public int startOfDelimitedByAnyNot(@NotNull CharSequence s, int index) {
-        index = rangeLimit(index, 0, length());
-        int offset = lastIndexOfAnyNot(s, index - 1);
         return offset == -1 ? 0 : offset + 1;
     }
 
@@ -1022,18 +656,10 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     @Override
-    final public int endOfDelimitedByAny(@NotNull CharSequence s, int index) {
+    final public int endOfDelimitedByAny(@NotNull CharPredicate s, int index) {
         int length = length();
         index = rangeLimit(index, 0, length);
         int offset = indexOfAny(s, index);
-        return offset == -1 ? length : offset;
-    }
-
-    @Override
-    final public int endOfDelimitedByAnyNot(@NotNull CharSequence s, int index) {
-        int length = length();
-        index = rangeLimit(index, 0, length);
-        int offset = indexOfAnyNot(s, index);
         return offset == -1 ? length : offset;
     }
 
@@ -1085,17 +711,17 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     // @formatter:off
     @NotNull @Override final public T trimTailBlankLines() {Range range = trailingBlankLinesRange();return range.isNull() ?  (T) this : subSequenceBefore(range);}
     @NotNull @Override final public T trimLeadBlankLines() {Range range = leadingBlankLinesRange();return range.isNull() ?  (T) this : subSequenceAfter(range);}
-    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(IRichSequence.EOL, 0, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(IRichSequence.EOL, startIndex, length());}
-    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(IRichSequence.EOL, fromIndex, endIndex);}
-    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(IRichSequence.EOL, 0, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(IRichSequence.EOL, fromIndex, length());}
-    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(IRichSequence.EOL,startIndex,fromIndex);}
+    @NotNull @Override final public Range leadingBlankLinesRange() {return leadingBlankLinesRange(EOL_SET, 0, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int startIndex) {return leadingBlankLinesRange(EOL_SET, startIndex, length());}
+    @NotNull @Override final public Range leadingBlankLinesRange(int fromIndex, int endIndex) { return leadingBlankLinesRange(EOL_SET, fromIndex, endIndex);}
+    @NotNull @Override final public Range trailingBlankLinesRange() {return trailingBlankLinesRange(EOL_SET, 0, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int fromIndex) {return trailingBlankLinesRange(EOL_SET, fromIndex, length());}
+    @NotNull @Override final public Range trailingBlankLinesRange(int startIndex, int fromIndex) { return trailingBlankLinesRange(EOL_SET,startIndex,fromIndex);}
     // @formatter:on
 
     @NotNull
     @Override
-    final public Range trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex) {
+    final public Range trailingBlankLinesRange(CharPredicate eolChars, int startIndex, int fromIndex) {
         fromIndex = Math.min(fromIndex, length());
         startIndex = rangeLimit(startIndex, 0, fromIndex);
 
@@ -1105,7 +731,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
         for (i = iMax; i-- > startIndex; ) {
             char c = charAt(i);
-            if (indexOf(eolChars, c) != -1) lastEOL = Math.min(i + Math.min(eolStartLength(i), 1), fromIndex);
+            if (eolChars.test(c)) lastEOL = Math.min(i + Math.min(eolStartLength(i), 1), fromIndex);
             else if (c != ' ' && c != '\t') break;
         }
 
@@ -1116,7 +742,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    final public Range leadingBlankLinesRange(@NotNull CharSequence eolChars, int fromIndex, int endIndex) {
+    final public Range leadingBlankLinesRange(@NotNull CharPredicate eolChars, int fromIndex, int endIndex) {
         endIndex = Math.min(endIndex, length());
         fromIndex = rangeLimit(fromIndex, 0, endIndex);
 
@@ -1126,7 +752,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
         for (i = fromIndex; i < iMax; i++) {
             char c = charAt(i);
-            if (indexOf(eolChars, c) != -1) lastEOL = i;
+            if (eolChars.test(c)) lastEOL = i;
             else if (c != ' ' && c != '\t') break;
         }
 
@@ -1136,14 +762,14 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(IRichSequence.EOL, 0, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(IRichSequence.EOL, fromIndex, length());}
-    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(IRichSequence.EOL, fromIndex, endIndex);}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges() { return blankLinesRemovedRanges(EOL_SET, 0, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex) { return blankLinesRemovedRanges(EOL_SET, fromIndex, length());}
+    @NotNull @Override final public List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex) { return blankLinesRemovedRanges(EOL_SET, fromIndex, endIndex);}
     // @formatter:on
 
     @NotNull
     @Override
-    final public List<Range> blankLinesRemovedRanges(@NotNull CharSequence eolChars, int fromIndex, int endIndex) {
+    final public List<Range> blankLinesRemovedRanges(@NotNull CharPredicate eolChars, int fromIndex, int endIndex) {
         endIndex = Math.min(endIndex, length());
         fromIndex = rangeLimit(fromIndex, 0, endIndex);
         int lastPos = fromIndex;
@@ -1164,20 +790,20 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol) { return trimToEndOfLine(IRichSequence.EOL,includeEol, 0);  }
-    @NotNull @Override public T trimToEndOfLine(int index) { return trimToEndOfLine(IRichSequence.EOL,false, 0);  }
-    @NotNull @Override public T trimToEndOfLine() { return trimToEndOfLine(IRichSequence.EOL,false, 0);   }
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index) { return trimToEndOfLine(IRichSequence.EOL,includeEol, index); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol)                 { return trimToEndOfLine(EOL_SET, includeEol, 0); }
+    @NotNull @Override public T trimToEndOfLine(int index)                          { return trimToEndOfLine(EOL_SET, false, 0); }
+    @NotNull @Override public T trimToEndOfLine()                                   { return trimToEndOfLine(EOL_SET, false, 0); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index)      { return trimToEndOfLine(EOL_SET, includeEol, index); }
 
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol) { return trimToStartOfLine(IRichSequence.EOL,includeEol, 0);  }
-    @NotNull @Override public T trimToStartOfLine(int index) { return trimToStartOfLine(IRichSequence.EOL,false, 0);  }
-    @NotNull @Override public T trimToStartOfLine() { return trimToStartOfLine(IRichSequence.EOL,false, 0);   }
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index) { return trimToStartOfLine(IRichSequence.EOL,includeEol, index); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol)               { return trimToStartOfLine(EOL_SET, includeEol, 0); }
+    @NotNull @Override public T trimToStartOfLine(int index)                        { return trimToStartOfLine(EOL_SET, false, 0); }
+    @NotNull @Override public T trimToStartOfLine()                                 { return trimToStartOfLine(EOL_SET, false, 0); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index)    { return trimToStartOfLine(EOL_SET, includeEol, index); }
     // @formatter:on
 
     @NotNull
     @Override
-    public T trimToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index) {
+    public T trimToEndOfLine(@NotNull CharPredicate eolChars, boolean includeEol, int index) {
         int eolPos = endOfDelimitedByAny(eolChars, index);
         if (eolPos < length()) {
             int endIndex = includeEol ? eolPos + eolStartLength(eolPos) : eolPos;
@@ -1188,7 +814,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    public T trimToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index) {
+    public T trimToStartOfLine(@NotNull CharPredicate eolChars, boolean includeEol, int index) {
         int eolPos = startOfDelimitedByAny(eolChars, index);
         if (eolPos > 0) {
             int startIndex = includeEol ? eolPos - eolEndLength(eolPos - 1) : eolPos;
@@ -1234,25 +860,31 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // @formatter:off
     @Override final public boolean isEmpty() {return length() == 0;}
-    @Override final public boolean isBlank() {return isEmpty() || countLeading(WHITESPACE_CHARS, 0, length()) == length();}
+    @Override final public boolean isBlank() {return isEmpty() || countLeading(WHITESPACE_SET, 0, length()) == length();}
     @Override final public boolean isNotEmpty() {return length() != 0;}
     @Override final public boolean isNotBlank() {return !isBlank();}
     @Override final public boolean isNull() {return this == nullSequence();}
     @Override final public boolean isNotNull() {return this != nullSequence();}
+
     @Override final public boolean endsWith(@NotNull CharSequence suffix) {return length() > 0 && matchCharsReversed(suffix, length() - 1, false);}
-    @Override final public boolean startsWith(@NotNull CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, false);}
     @Override final public boolean endsWith(@NotNull CharSequence suffix, boolean ignoreCase) {return length() > 0 && matchCharsReversed(suffix, length() - 1, ignoreCase);}
+    @Override final public boolean startsWith(@NotNull CharSequence prefix) {return length() > 0 && matchChars(prefix, 0, false);}
     @Override final public boolean startsWith(@NotNull CharSequence prefix, boolean ignoreCase) {return length() > 0 && matchChars(prefix, 0, ignoreCase);}
-    @Override final public boolean endsWithEOL() { return endsWith(EOL); }
-    @Override final public boolean endsWithAnyEOL() { return endsWith(EOL_CHARS); }
-    @Override final public boolean endsWithSpace() { return endsWith(SPACE); }
-    @Override final public boolean endsWithSpaceTab() { return endsWith(SPACE_TAB); }
-    @Override final public boolean endsWithWhitespace() { return endsWith(WHITESPACE_CHARS); }
-    @Override final public boolean startsWithEOL() { return startsWith(EOL); }
-    @Override final public boolean startsWithAnyEOL() { return startsWith(EOL_CHARS); }
-    @Override final public boolean startsWithSpace() { return startsWith(SPACE); }
-    @Override final public boolean startsWithSpaceTab() { return startsWith(SPACE_TAB); }
-    @Override final public boolean startsWithWhitespace() { return startsWith(WHITESPACE_CHARS); }
+
+    @Override final public boolean endsWith(@NotNull CharPredicate chars) {return countTrailing(chars) > 0;}
+    @Override final public boolean startsWith(@NotNull CharPredicate chars) {return countLeading(chars) > 0;}
+
+    @Override final public boolean endsWithEOL() { return endsWith(EOL_SET); }
+    @Override final public boolean endsWithAnyEOL() { return endsWith(ANY_EOL_SET); }
+    @Override final public boolean endsWithSpace() { return endsWith(SPACE_SET); }
+    @Override final public boolean endsWithSpaceTab() { return endsWith(SPACE_TAB_SET); }
+    @Override final public boolean endsWithWhitespace() { return endsWith(WHITESPACE_SET); }
+
+    @Override final public boolean startsWithEOL() { return startsWith(EOL_SET); }
+    @Override final public boolean startsWithAnyEOL() { return startsWith(ANY_EOL_SET); }
+    @Override final public boolean startsWithSpace() { return startsWith(SPACE_SET); }
+    @Override final public boolean startsWithSpaceTab() { return startsWith(SPACE_TAB_SET); }
+    @Override final public boolean startsWithWhitespace() { return startsWith(WHITESPACE_SET); }
     // @formatter:on
 
     // @formatter:off
@@ -1331,116 +963,38 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // TEST:
     // @formatter:off
-    @Override final public boolean matches(@NotNull CharSequence chars, boolean ignoreCase) {return chars.length() == length() && matchChars(chars, 0, ignoreCase);}
-    @Override final public boolean matches(@NotNull CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, false);}
-    @Override final public boolean matchesIgnoreCase(@NotNull CharSequence chars) {return chars.length() == length() && matchChars(chars, 0, true);}
+    @Override final public boolean matches(@NotNull CharSequence chars, boolean ignoreCase)                                     { return SequenceUtils.matches(this, chars, ignoreCase);}
+    @Override final public boolean matches(@NotNull CharSequence chars)                                                         { return SequenceUtils.matches(this, chars);}
+    @Override final public boolean matchesIgnoreCase(@NotNull CharSequence chars)                                               { return SequenceUtils.matchesIgnoreCase(this, chars); }
 
-    @Override final public boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase) { return matchedCharCount(chars, startIndex, length(), true, ignoreCase) == chars.length(); }
-    @Override final public boolean matchChars(@NotNull CharSequence chars, int startIndex) {return matchChars(chars, startIndex, false);}
-    @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars, int startIndex) {return matchChars(chars, startIndex, true);}
+    @Override final public boolean matchChars(@NotNull CharSequence chars, int startIndex, boolean ignoreCase)                  { return SequenceUtils.matchChars(this, chars, startIndex, ignoreCase); }
+    @Override final public boolean matchChars(@NotNull CharSequence chars, int startIndex)                                      { return SequenceUtils.matchChars(this, chars, startIndex);}
+    @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars, int startIndex)                            { return SequenceUtils.matchCharsIgnoreCase(this, chars, startIndex); }
 
-    @Override final public boolean matchChars(@NotNull CharSequence chars, boolean ignoreCase) {return matchChars(chars, 0, ignoreCase);}
-    @Override final public boolean matchChars(@NotNull CharSequence chars) {return matchChars(chars, 0, false);}
-    @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars) {return matchChars(chars, 0, true);}
+    @Override final public boolean matchChars(@NotNull CharSequence chars, boolean ignoreCase)                                  { return SequenceUtils.matchChars(this, chars, ignoreCase); }
+    @Override final public boolean matchChars(@NotNull CharSequence chars)                                                      { return SequenceUtils.matchChars(this, chars); }
+    @Override final public boolean matchCharsIgnoreCase(@NotNull CharSequence chars)                                            { return SequenceUtils.matchCharsIgnoreCase(this, chars); }
 
-    @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), ignoreCase);}
-    @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), false);}
-    @Override final public boolean matchCharsReversedIgnoreCase(@NotNull CharSequence chars, int endIndex) {return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), true);}
+    @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex, boolean ignoreCase)            { return SequenceUtils.matchCharsReversed(this, chars, endIndex, ignoreCase); }
+    @Override final public boolean matchCharsReversed(@NotNull CharSequence chars, int endIndex)                                { return SequenceUtils.matchCharsReversed(this, chars, endIndex); }
+    @Override final public boolean matchCharsReversedIgnoreCase(@NotNull CharSequence chars, int endIndex)                      { return SequenceUtils.matchCharsReversedIgnoreCase(this, chars, endIndex); }
 
-    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex, boolean ignoreCase) { return matchedCharCount(chars, startIndex, length(), false, ignoreCase); }
-    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, boolean ignoreCase) { return matchedCharCount(chars, startIndex, length(), false, ignoreCase); }
-    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex) { return matchedCharCount(chars, startIndex, length(), false, false); }
-    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex) { return matchedCharCount(chars, startIndex, length(), false, false); }
-    @Override final public int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex, int endIndex) { return matchedCharCount(chars, startIndex, length(), false, true); }
-    @Override final public int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex) { return matchedCharCount(chars, startIndex, length(), false, true); }
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex, boolean ignoreCase)  { return SequenceUtils.matchedCharCount(this, chars, startIndex, endIndex, ignoreCase); }
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, boolean ignoreCase)                { return SequenceUtils.matchedCharCount(this, chars, startIndex, ignoreCase); }
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex)                      { return SequenceUtils.matchedCharCount(this, chars, startIndex, endIndex); }
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex)                                    { return SequenceUtils.matchedCharCount(this, chars, startIndex); }
+    @Override final public int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex)                          { return SequenceUtils.matchedCharCountIgnoreCase(this, chars, startIndex); }
+    @Override final public int matchedCharCountIgnoreCase(@NotNull CharSequence chars, int startIndex, int endIndex)            { return SequenceUtils.matchedCharCountIgnoreCase(this, chars, startIndex, endIndex); }
 
-    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex) { return matchedCharCountReversed(chars, startIndex, fromIndex, false); }
-    @Override final public int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int startIndex, int fromIndex) { return matchedCharCountReversed(chars, startIndex, fromIndex, true); }
+    @Override final public int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int startIndex, int fromIndex)   { return SequenceUtils.matchedCharCountReversedIgnoreCase(this, chars, startIndex, fromIndex); }
+    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex)             { return SequenceUtils.matchedCharCountReversed(this, chars, startIndex, fromIndex); }
 
-    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex, boolean ignoreCase) { return matchedCharCountReversed(chars, 0, fromIndex, ignoreCase); }
-    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex) { return matchedCharCountReversed(chars, 0, fromIndex, false); }
-    @Override final public int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int fromIndex) { return matchedCharCountReversed(chars, 0, fromIndex, true); }
+    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex, boolean ignoreCase)         { return SequenceUtils.matchedCharCountReversed(this, chars, fromIndex, ignoreCase); }
+    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int fromIndex)                             { return SequenceUtils.matchedCharCountReversed(this, chars, fromIndex); }
+    @Override final public int matchedCharCountReversedIgnoreCase(@NotNull CharSequence chars, int fromIndex)                   { return SequenceUtils.matchedCharCountReversedIgnoreCase(this, chars, fromIndex); }
+    @Override final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex, boolean fullMatchOnly, boolean ignoreCase) { return SequenceUtils.matchedCharCount(this, chars, startIndex, endIndex, fullMatchOnly, ignoreCase); }
+    @Override final public int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase) { return SequenceUtils.matchedCharCountReversed(this, chars, startIndex, fromIndex, ignoreCase);}
     // @formatter:on
-
-    // TEST:
-    @Override
-    final public int matchedCharCount(@NotNull CharSequence chars, int startIndex, int endIndex, boolean fullMatchOnly, boolean ignoreCase) {
-        int length = chars.length();
-        endIndex = Math.min(length(), endIndex);
-        int iMax = Math.min(endIndex - startIndex, length);
-        if (fullMatchOnly && iMax < length) return 0;
-
-        if (ignoreCase) {
-            for (int i = 0; i < iMax; i++) {
-                char c1 = chars.charAt(i);
-                char c2 = charAt(i + startIndex);
-                if (c1 != c2) {
-                    char u1 = Character.toUpperCase(c1);
-                    char u2 = Character.toUpperCase(c2);
-                    if (u1 == u2) {
-                        continue;
-                    }
-
-                    // Unfortunately, conversion to uppercase does not work properly
-                    // for the Georgian alphabet, which has strange rules about case
-                    // conversion. So we need to make one last check before exiting.
-                    if (Character.toLowerCase(u1) == Character.toLowerCase(u2)) {
-                        continue;
-                    }
-                    return i;
-                }
-            }
-        } else {
-            for (int i = 0; i < iMax; i++) {
-                if (chars.charAt(i) != charAt(i + startIndex)) return i;
-            }
-        }
-        return iMax;
-    }
-
-    @Override
-    // TEST:
-    final public int matchedCharCountReversed(@NotNull CharSequence chars, int startIndex, int fromIndex, boolean ignoreCase) {
-        startIndex = Math.max(0, startIndex);
-        fromIndex = Math.max(0, Math.min(length(), fromIndex));
-
-        int length = chars.length();
-        int iMax = Math.min(fromIndex - startIndex, length);
-
-        int offset = fromIndex - iMax;
-        if (ignoreCase) {
-            for (int i = iMax; i-- > 0; ) {
-                char c1 = chars.charAt(i);
-                char c2 = charAt(offset + i);
-                if (c1 != c2) {
-                    char u1 = Character.toUpperCase(c1);
-                    char u2 = Character.toUpperCase(c2);
-                    if (u1 == u2) {
-                        continue;
-                    }
-
-                    // Unfortunately, conversion to uppercase does not work properly
-                    // for the Georgian alphabet, which has strange rules about case
-                    // conversion.  So we need to make one last check before exiting.
-                    if (Character.toLowerCase(u1) == Character.toLowerCase(u2)) {
-                        continue;
-                    }
-                    return iMax - i - 1;
-                }
-            }
-        } else {
-            for (int i = iMax; i-- > 0; ) {
-                if (chars.charAt(i) != charAt(offset + i)) return iMax - i - 1;
-            }
-        }
-        return iMax;
-    }
-
-    @NotNull
-    @Override
-    final public T subSequence(int startIndex) {
-        return subSequence(startIndex, length());
-    }
 
     @NotNull
     @Override
@@ -1474,7 +1028,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         int iMax = length();
         for (int i = 0; i < iMax; i++) {
             char c = charAt(i);
-            String s = visibleSpacesMap.get(c);
+            String s = SequenceUtils.visibleSpacesMap.get(c);
 
             if (s != null) {
                 sb.append(s);
@@ -1486,56 +1040,34 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
 
     // @formatter:off
-    @NotNull @Override final public List<T> splitList(char delimiter) {                                                                                 return splitList(String.valueOf(delimiter), 0, 0, null);}
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit) {                                                                      return splitList(String.valueOf(delimiter), limit, 0, null);}
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit, int flags) {                                                           return splitList(String.valueOf(delimiter), limit, flags, null);}
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit, int flags, String trimChars) {                                         return splitList(String.valueOf(delimiter), limit, flags, trimChars);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter) {                                                                return splitList(delimiter, 0, 0, null);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit) {                                                     return splitList(delimiter, limit, 0, null);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags) {                                          return splitList(delimiter, limit, flags, null);}
-
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit, boolean includeDelims) {                                               return splitList(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
-    @NotNull @Override final public List<T> splitList(char delimiter, int limit, boolean includeDelims, String trimChars) {                             return splitList(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims) {                              return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars) {  return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
-
-    @NotNull @Override final public T[] split(char delimiter) {                                                                                         return split(String.valueOf(delimiter), 0, 0, null);}
-    @NotNull @Override final public T[] split(char delimiter, int limit) {                                                                              return split(String.valueOf(delimiter), limit, 0, null);}
-    @NotNull @Override final public T[] split(char delimiter, int limit, int flags) {                                                                   return split(String.valueOf(delimiter), limit, flags, null);}
-    @NotNull @Override final public T[] split(char delimiter, int limit, int flags, String trimChars) {                                                 return split(String.valueOf(delimiter), limit, flags, trimChars);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter) {                                                                        return split(delimiter, 0, 0, null);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit) {                                                             return split(delimiter, limit, 0, null);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags) {                                                  return split(delimiter, limit, flags, null);}
-
-    @NotNull @Override final public T[] split(char delimiter, int limit, boolean includeDelims) {                                                       return split(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
-    @NotNull @Override final public T[] split(char delimiter, int limit, boolean includeDelims, String trimChars) {                                     return split(String.valueOf(delimiter), limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims) {                                      return split(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars) {          return split(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter)                                                                          { return splitList(delimiter, 0, 0, null); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)     { return splitList(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags)                                                    { return splitList(delimiter, limit, flags, null); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                { return splitList(delimiter, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
 
     // NOTE: these default to including delimiters as part of split item
-    @NotNull @Override final public List<T> splitListEOL() {                                                                                            return splitList(EOL, 0, SPLIT_INCLUDE_DELIMS, null);}
-    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims) {                                                                       return splitList(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
-    @NotNull @Override final public List<T> splitListEOL(int limit) {                                                                                   return splitList(EOL, limit,SPLIT_INCLUDE_DELIMS, null);}
-    @NotNull @Override final public List<T> splitListEOL(int limit, boolean includeDelims) {                                                            return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0,null);}
-    @NotNull @Override final public List<T> splitListEOL(int limit, boolean includeDelims, @Nullable String trimChars) {                                return splitList(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public List<T> splitListEOL()                                                                                                      { return splitList(EOL, 0, SPLIT_INCLUDE_DELIMS, null); }
+    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims)                                                                                 { return splitList(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null); }
+    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims, @Nullable CharPredicate trimChars)                                              { return splitList(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
 
-    @NotNull @Override final public T[] splitEOL() {                                                                                                    return split(EOL, 0, SPLIT_INCLUDE_DELIMS,null);}
-    @NotNull @Override final public T[] splitEOL(boolean includeDelims) {                                                                               return split(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
-    @NotNull @Override final public T[] splitEOL(int limit) {                                                                                           return split(EOL, limit, SPLIT_INCLUDE_DELIMS, null);}
-    @NotNull @Override final public T[] splitEOL(int limit, boolean includeDelims) {                                                                    return split(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null);}
-    @NotNull @Override final public T[] splitEOL(int limit, boolean includeDelims, @Nullable String trimChars) {                                        return split(EOL, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars);}
+    @NotNull @Override final public T[] splitEOL()                                                                                                              { return split(EOL, 0, SPLIT_INCLUDE_DELIMS,null); }
+    @NotNull @Override final public T[] splitEOL(boolean includeDelims)                                                                                         { return split(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, null); }
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                        { return split(EOL, 0, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter)                                                                                  { return split(delimiter, 0, 0, null); }
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)             { return split(delimiter, limit, includeDelims ? SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags)                                                            { return split(delimiter, limit, flags, null); }
     // @formatter:on
 
     @NotNull
     @Override
-    final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) {
+    final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
         return splitList(delimiter, limit, flags, trimChars).toArray(emptyArray());
     }
 
     @NotNull
-    final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars) {
-        if (trimChars == null) trimChars = WHITESPACE_CHARS;
-        else if (!trimChars.isEmpty()) flags |= SPLIT_TRIM_PARTS;
+    final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
+        if (trimChars == null) trimChars = WHITESPACE_SET;
+        else flags |= SPLIT_TRIM_PARTS;
 
         if (limit < 1) limit = Integer.MAX_VALUE;
 
@@ -1613,33 +1145,13 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return (T) this;
     }
 
-    public static int[] expandTo(int[] indices, int length, int step) {
-        int remainder = length & step;
-        int next = length + (remainder != 0 ? step : 0);
-        if (indices.length < next) {
-            int[] replace = new int[next];
-            System.arraycopy(indices, 0, replace, 0, indices.length);
-            return replace;
-        }
-        return indices;
-    }
-
-    public static int[] truncateTo(int[] indices, int length) {
-        if (indices.length > length) {
-            int[] replace = new int[length];
-            System.arraycopy(indices, 0, replace, 0, length);
-            return replace;
-        }
-        return indices;
-    }
-
     @NotNull
     @Override
     final public int[] indexOfAll(@NotNull CharSequence s) {
         int length = s.length();
-        if (length == 0) return EMPTY_INDICES;
+        if (length == 0) return SequenceUtils.EMPTY_INDICES;
         int pos = indexOf(s);
-        if (pos == -1) return EMPTY_INDICES;
+        if (pos == -1) return SequenceUtils.EMPTY_INDICES;
 
         int iMax = 0;
         int[] indices = new int[32];
@@ -1648,10 +1160,10 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         while (true) {
             pos = indexOf(s, pos + length);
             if (pos == -1) break;
-            if (indices.length <= iMax) indices = expandTo(indices, iMax + 1, 32);
+            if (indices.length <= iMax) indices = SequenceUtils.expandTo(indices, iMax + 1, 32);
             indices[iMax++] = pos;
         }
-        return truncateTo(indices, iMax);
+        return SequenceUtils.truncateTo(indices, iMax);
     }
 
     // @formatter:off
@@ -1768,7 +1280,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @Override
     final public int columnAtIndex(int index) {
-        int lineStart = lastIndexOfAny(EOL_CHARS, index);
+        int lineStart = lastIndexOfAny(ANY_EOL_SET, index);
         return index - (lineStart == -1 ? 0 : lineStart + eolStartLength(lineStart));
     }
 

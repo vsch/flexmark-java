@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.sequence.IRichSequenceBase;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +19,7 @@ public interface CharWidthProvider {
 
         for (int i = 0; i < iMax; i++) {
             char c = chars.charAt(i);
-            if (zeroWidth == null || IRichSequenceBase.indexOf(zeroWidth, c) == -1) {
+            if (zeroWidth == null || SequenceUtils.indexOf(zeroWidth, c) == -1) {
                 width += charWidth(c);
             }
         }

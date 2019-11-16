@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.vladsch.flexmark.util.format.TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
+import static com.vladsch.flexmark.util.format.TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_SET;
 import static org.junit.Assert.assertEquals;
 
 public class MarkdownTableTestBase {
@@ -105,7 +106,7 @@ public class MarkdownTableTestBase {
 
                 @Override
                 public int charWidth(@NotNull CharSequence s) {
-                    return BasedSequence.of(s, 0, s.length()).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_CHAR);
+                    return BasedSequence.of(s, 0, s.length()).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_SET);
                 }
             });
         return useOptions;

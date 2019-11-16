@@ -233,6 +233,8 @@ Next 0.59.50
 * [ ] Fix: move spec resource files to `flexmark-core-test` test resources.
 * [ ] Break: reduce footprint of `IRichSequence` and `IRichSequenceBase` by making some methods
       private part of the implementation.
+  * [ ] Fix: change all character inclusion based functions to use character sets
+* Add: `CharPredicate` to consolidate all character inclusion testing via predicates.
 * Fix: make `BaseSequence.of` use plain based sequences and not managed for now. Issues when
   mutable sequences are passed as parameters make it unstable. Have to use char backed sequence
   for managed and that will create too much overhead if used for all cases.

@@ -140,9 +140,9 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 }
                 if (node.getOptionsKeyword().isNotNull() || node.getOptionsOpeningMarker().isNotNull() || node.getOptions().isNotNull() || node.getOptionsClosingMarker().isNotNull()) {
                     String optionsText = "";
-                    BasedSequence trimmed = node.getOptions().trim(BasedSequence.WHITESPACE_NBSP_CHARS);
+                    BasedSequence trimmed = node.getOptions().trim(BasedSequence.WHITESPACE_NBSP_SET);
                     if (!trimmed.isEmpty()) {
-                        BasedSequence[] optionsList = trimmed.split(',', 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
+                        BasedSequence[] optionsList = trimmed.split(",", 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
                         DelimitedBuilder out = new DelimitedBuilder(", ");
                         optionsText = out.appendAll(optionsList).getAndClear();
                     }

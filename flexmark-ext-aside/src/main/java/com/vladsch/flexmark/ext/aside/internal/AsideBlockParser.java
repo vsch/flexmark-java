@@ -118,7 +118,7 @@ public class AsideBlockParser extends AbstractBlockParser {
     }
 
     static boolean endsWithMarker(BasedSequence line) {
-        int tailBlanks = line.countTrailing(BasedSequence.WHITESPACE_NBSP_CHARS);
+        int tailBlanks = line.countTrailing(BasedSequence.WHITESPACE_NBSP_SET);
         return tailBlanks + 1 < line.length() && line.charAt(line.length() - tailBlanks - 1) == MARKER_CHAR;
     }
 

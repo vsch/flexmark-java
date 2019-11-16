@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -22,6 +23,7 @@ public class GitLabOptions implements MutableDataSetter {
     public final String blockMathClass;
     public final String blockMermaidClass;
     public final String blockInfoDelimiters;
+    public final CharPredicate blockInfoDelimiterSet;
     public final String videoImageClass;
     public final String videoImageLinkTextFormat;
     public final String videoImageExtensions;
@@ -41,6 +43,7 @@ public class GitLabOptions implements MutableDataSetter {
         blockMathClass = GitLabExtension.BLOCK_MATH_CLASS.get(options);
         blockMermaidClass = GitLabExtension.BLOCK_MERMAID_CLASS.get(options);
         blockInfoDelimiters = GitLabExtension.BLOCK_INFO_DELIMITERS.get(options);
+        blockInfoDelimiterSet = CharPredicate.anyOf(blockInfoDelimiters);
         videoImageClass = GitLabExtension.VIDEO_IMAGE_CLASS.get(options);
         videoImageLinkTextFormat = GitLabExtension.VIDEO_IMAGE_LINK_TEXT_FORMAT.get(options);
         videoImageExtensions = GitLabExtension.VIDEO_IMAGE_EXTENSIONS.get(options);

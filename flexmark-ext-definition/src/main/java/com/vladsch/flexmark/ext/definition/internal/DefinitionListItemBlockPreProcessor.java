@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.IRichSequence;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -63,7 +64,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                     // intervening characters between previous paragraph and definition terms
                     final BasedSequence interSpace = paragraphPrevNonBlank == null ? BasedSequence.NULL :
                             BasedSequence.of(paragraphPrevNonBlank.baseSubSequence(paragraphPrevNonBlank.getEndOffset(), paragraph.getStartOffset()).normalizeEOL());
-                    hadPreviousList = paragraphPrevNonBlank instanceof DefinitionList && interSpace.countLeading('\n') < 2;
+                    hadPreviousList = paragraphPrevNonBlank instanceof DefinitionList && interSpace.countLeading(BasedSequence.EOL_SET) < 2;
                 } else {
                     hadPreviousList = paragraphPrevNonBlank instanceof DefinitionList;
                 }

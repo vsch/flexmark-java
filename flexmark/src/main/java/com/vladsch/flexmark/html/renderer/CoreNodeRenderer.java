@@ -28,7 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
-import static com.vladsch.flexmark.util.sequence.BasedSequence.EOL_CHARS;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.*;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.ANY_EOL;
+import static com.vladsch.flexmark.util.sequence.IRichSequence.SPACE_TAB_SET;
 
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
@@ -144,7 +146,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
-            BasedSequence language = node.getInfoDelimitedByAny(" \t");
+            BasedSequence language = node.getInfoDelimitedByAny(SPACE_TAB_SET);
             html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
         } else {
             String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();
@@ -239,7 +241,9 @@ public class CoreNodeRenderer implements NodeRenderer {
                 myEOLs = breakCollectingVisitor.getEOLs();
                 myNextLine = 0;
 
-                outputSourceLineSpan(node, node.getFirstChild(), node, html);
+                if (node.getFirstChild() != null) {
+                    outputSourceLineSpan(node, node.getFirstChild(), node, html);
+                }
                 context.renderChildren(node);
                 html.tag("/span");
                 return;
@@ -263,10 +267,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (range.getEnd() <= endOffset) {
             endOffset = range.getEnd();
             endOffset -= eolLength;
-            endOffset -= parentNode.baseSubSequence(startOffset, endOffset).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+            endOffset -= parentNode.baseSubSequence(startOffset, endOffset).countTrailing(SPACE_TAB_SET);
             myNextLine++;
             nextLineStartOffset = range.getEnd();
-            nextLineStartOffset += parentNode.baseSubSequence(nextLineStartOffset, parentNode.getEndOffset()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+            nextLineStartOffset += parentNode.baseSubSequence(nextLineStartOffset, parentNode.getEndOffset()).countLeading(SPACE_TAB_SET);
         }
 
         if (range.getStart() > startOffset) {
@@ -282,7 +286,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         myNextLine++;
 
         // remove trailing spaces from text
-        int countTrailing = node.baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(" \t");
+        int countTrailing = node.baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(SPACE_TAB_SET);
         if (!outputBreakText && countTrailing > 0) {
             countTrailing--;
         }
@@ -292,7 +296,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         nextLineStartOffset = range.getEnd();
 
         // remove leading spaces
-        nextLineStartOffset += node.baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+        nextLineStartOffset += node.baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(SPACE_TAB_SET);
     }
 
     private void renderLooseParagraph(Paragraph node, NodeRendererContext context, HtmlWriter html) {
@@ -666,7 +670,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             HtmlWriter html
     ) {
         // if have SOFT BREAK or HARD BREAK as child then we open our own span
-        if (context.getHtmlOptions().sourcePositionParagraphLines && nodeChildText.indexOfAny(EOL_CHARS) >= 0) {
+        if (context.getHtmlOptions().sourcePositionParagraphLines && nodeChildText.indexOfAny(ANY_EOL_SET) >= 0) {
             if (myNextLine > 0) {
                 myNextLine--;
             }

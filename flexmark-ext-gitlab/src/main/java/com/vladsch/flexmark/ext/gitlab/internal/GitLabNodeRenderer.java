@@ -80,7 +80,7 @@ public class GitLabNodeRenderer implements NodeRenderer
     }
 
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
-        BasedSequence info = node.getInfoDelimitedByAny(options.blockInfoDelimiters);
+        BasedSequence info = node.getInfoDelimitedByAny(options.blockInfoDelimiterSet);
 
         if (options.renderBlockMath && info.equals("math")) {
             html.line();

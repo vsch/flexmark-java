@@ -177,53 +177,52 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
     @NotNull
     @Override
-    public BasedSequence extendByAny(@NotNull CharSequence charSet, int maxCount) {
+    public BasedSequence extendByAny(@NotNull CharPredicate charSet, int maxCount) {
         int count = getBaseSequence().countLeading(charSet, getEndOffset(), getEndOffset() + maxCount);
         return count == 0 ? this : baseSubSequence(getStartOffset(), getEndOffset() + count);
     }
 
     @NotNull
     @Override
-    public BasedSequence extendToAny(@NotNull CharSequence charSet) {
+    public BasedSequence extendToAny(@NotNull CharPredicate charSet) {
         return extendToAny(charSet, Integer.MAX_VALUE - getEndOffset());
     }
 
     @NotNull
     @Override
-    public BasedSequence extendByAny(@NotNull CharSequence charSet) {
+    public BasedSequence extendByAny(@NotNull CharPredicate charSet) {
         return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset());
     }
 
     @NotNull
     @Override
-    public BasedSequence extendByOneOfAny(@NotNull CharSequence charSet) {
+    public BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet) {
         return extendByAny(charSet, 1);
     }
 
     @NotNull
     @Override
-    public BasedSequence extendToAny(@NotNull CharSequence charSet, int maxCount) {
-        if (charSet.length() == 0) return this;
+    public BasedSequence extendToAny(@NotNull CharPredicate charSet, int maxCount) {
         int count = getBaseSequence().countLeadingNot(charSet, getEndOffset(), getEndOffset() + maxCount);
         return count == getBaseSequence().length() - getEndOffset() ? this : baseSubSequence(getStartOffset(), getEndOffset() + count + 1);
     }
 
     // @formatter:off
-    @NotNull@Override final public BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars) { return extendToEndOfLine(eolChars, false);}
-    @NotNull@Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(IRichSequence.EOL, includeEol);}
-    @NotNull@Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(IRichSequence.EOL, false);}
-    @NotNull@Override final public BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars) { return extendToStartOfLine(eolChars, false);}
-    @NotNull@Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(IRichSequence.EOL, includeEol);}
-    @NotNull@Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(IRichSequence.EOL, false);}
+    @NotNull@Override final public BasedSequence extendToEndOfLine(@NotNull CharPredicate eolChars) { return extendToEndOfLine(eolChars, false);}
+    @NotNull@Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(EOL_SET, includeEol);}
+    @NotNull@Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(EOL_SET, false);}
+    @NotNull@Override final public BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars) { return extendToStartOfLine(eolChars, false);}
+    @NotNull@Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(EOL_SET, includeEol);}
+    @NotNull@Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(EOL_SET, false);}
     // @formatter:on
 
     @NotNull
     @Override
-    final public BasedSequence extendToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol) {
+    final public BasedSequence extendToEndOfLine(@NotNull CharPredicate eolChars, boolean includeEol) {
         int endOffset = getEndOffset();
 
         // if already have eol then no need to check
-        if (indexOf(eolChars, lastChar()) != -1) return this;
+        if (eolChars.test(lastChar())) return this;
 
         BasedSequence baseSequence = getBaseSequence();
         int endOfLine = baseSequence.endOfLine(endOffset);
@@ -240,11 +239,11 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
     @NotNull
     @Override
-    public BasedSequence extendToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol) {
+    public BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars, boolean includeEol) {
         int startOffset = getStartOffset();
 
         // if already have eol then no need to check
-        if (indexOf(eolChars, firstChar()) != -1) return this;
+        if (eolChars.test(firstChar())) return this;
 
         BasedSequence baseSequence = getBaseSequence();
         int startOfLine = baseSequence.startOfLine(startOffset);

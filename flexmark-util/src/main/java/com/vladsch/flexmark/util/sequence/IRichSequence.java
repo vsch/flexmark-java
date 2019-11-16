@@ -21,11 +21,14 @@ import java.util.function.Predicate;
 public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence, Comparable<CharSequence> {
     String EOL = "\n";
     String SPACE = " ";
-    String EOL_CHARS = "\r\n";
+    String ANY_EOL = "\r\n";
 
-    char EOL_CHAR = EOL_CHARS.charAt(1);
-    char EOL_CHAR1 = EOL_CHARS.charAt(0);
-    char EOL_CHAR2 = EOL_CHARS.charAt(1);
+    @Deprecated
+    String EOL_CHARS = ANY_EOL;
+
+    char EOL_CHAR = ANY_EOL.charAt(1);
+    char EOL_CHAR1 = ANY_EOL.charAt(0);
+    char EOL_CHAR2 = ANY_EOL.charAt(1);
 
     char SPC = ' ';
     char NUL = '\0';
@@ -35,21 +38,34 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     char US = '\u001f';  // US or USEP - Unit Separator, also used as IntelliJDummyIdentifier in Parsings, used as a tracked offset marker in the sequence
     char MRK = US;       // same as US but use in code signals it being related to offset marker handling
     String LINE_SEP = Character.toString(LS);
-    String WHITESPACE_NO_EOL_CHARS = " \t";
-    String SPACE_TAB = WHITESPACE_NO_EOL_CHARS;
+    String SPACE_TAB = " \t";
+
+    @Deprecated
+    String WHITESPACE_NO_EOL_CHARS = SPACE_TAB;
+
     String US_CHARS = Character.toString(US);
     String MARKER_CHARS = US_CHARS;  // same as US_CHARS but use in code signals it being related to offset marker handling
 
-    String WHITESPACE_CHARS = " \t\r\n";
-    String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
+    String WHITESPACE = " \t\r\n";
+    @Deprecated
+    String WHITESPACE_CHARS = WHITESPACE;
+
+    String WHITESPACE_NBSP = " \t\r\n\u00A0";
+
+    @Deprecated
+    String WHITESPACE_NBSP_CHARS = WHITESPACE_NBSP;
 
     CharPredicate SPACE_SET = CharPredicate.SPACE;
     CharPredicate TAB_SET = CharPredicate.TAB;
     CharPredicate EOL_SET = CharPredicate.EOL;
     CharPredicate SPACE_TAB_SET = CharPredicate.SPACE_TAB;
+    CharPredicate SPACE_TAB_NBSP_SET = CharPredicate.SPACE_TAB_NBSP;
     CharPredicate ANY_EOL_SET = CharPredicate.ANY_EOL;
-    CharPredicate WHITE_SPACE_SET = CharPredicate.WHITE_SPACE;
-    CharPredicate WHITE_SPACE_NBSP_SET = CharPredicate.WHITE_SPACE_NBSP;
+    CharPredicate WHITESPACE_SET = CharPredicate.WHITESPACE;
+    CharPredicate WHITESPACE_NBSP_SET = CharPredicate.WHITESPACE_NBSP;
+    CharPredicate BACKSLASH_SET = CharPredicate.BACKSLASH;
+    CharPredicate US_SET = value -> value == US;
+    @NotNull CharPredicate HASH_SET = CharPredicate.HASH;
 
     /**
      * Line Separator, used in paragraph wrapping to force start of new line
@@ -254,141 +270,88 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * For reverse searching methods fromIndex is the maximum start position for search and startIndex
      * is the minimum end position, if not given then 0 is assumed.
      * <p>
-     * Variations of arguments are for convenience and speed when 1, 2 or 3 characters are needed to be tested.
-     * Methods that take a character set in the form of CharSequence will route their call to character based
-     * methods if the CharSequence is only 1, 2 or 3 characters long.
-     * <p>
-     * indexOf(CharSequence): returns the index of the next occurrence of given text in this sequence
-     * <p>
-     * indexOfAny(CharSequence): returns the index of the next occurrence of any of the characters in this sequence
-     * <p>
-     * indexOfAnyNot(CharSequence): returns the index of the next occurrence of any of the characters not in this sequence
-     * <p>
-     * lastIndexOf(CharSequence): returns the index of the previous occurrence of given text in this sequence, reversed search
-     * <p>
-     * lastIndexOfAny(CharSequence): returns the index of the previous occurrence of any of the characters in this sequence, reversed search
-     * <p>
-     * lastIndexOfAnyNot(CharSequence): returns the index of the previous occurrence of any of the characters not in this sequence, reversed search
      *
-     * @param s character sequence whose occurrence to find
+     * @param s character pre whose occurrence to find
      * @return index where found or -1
      */
     int indexOf(@NotNull CharSequence s);
     int indexOf(@NotNull CharSequence s, int fromIndex);
     int indexOf(@NotNull CharSequence s, int fromIndex, int endIndex);
 
-    int indexOf(char c);
-    int indexOfAny(char c1, char c2);
-    int indexOfAny(char c1, char c2, char c3);
-    int indexOfAny(@NotNull CharSequence s);
-
-    int indexOf(char c, int fromIndex);
-    int indexOfAny(@NotNull CharSequence s, int fromIndex);
-
     int indexOf(char c, int fromIndex, int endIndex);
-    int indexOfAny(char c1, char c2, int fromIndex, int endIndex);
-    int indexOfAny(char c1, char c2, char c3, int fromIndex, int endIndex);
-    int indexOfAny(@NotNull CharSequence s, int fromIndex, int endIndex);
-
-    int indexOfNot(char c);
-    int indexOfAnyNot(@NotNull CharSequence s);
-
-    int indexOfNot(char c, int fromIndex);
-    int indexOfAnyNot(@NotNull CharSequence s, int fromIndex);
+    int indexOf(char c, int fromIndex);
+    int indexOf(char c);
+    int indexOfAny(@NotNull CharPredicate s, int fromIndex, int endIndex);
+    int indexOfAny(@NotNull CharPredicate s, int fromIndex);
+    int indexOfAny(@NotNull CharPredicate s);
 
     int indexOfNot(char c, int fromIndex, int endIndex);
-    int indexOfAnyNot(@NotNull CharSequence s, int fromIndex, int endIndex);
+    int indexOfNot(char c, int fromIndex);
+    int indexOfNot(char c);
+
+    int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex, int endIndex);
+    int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex);
+    int indexOfAnyNot(@NotNull CharPredicate s);
 
     int lastIndexOf(@NotNull CharSequence s);
     int lastIndexOf(@NotNull CharSequence s, int fromIndex);
     int lastIndexOf(@NotNull CharSequence s, int startIndex, int fromIndex);
 
-    int lastIndexOf(char c);
-    int lastIndexOfAny(@NotNull CharSequence s);
-
-    int lastIndexOf(char c, int fromIndex);
-    int lastIndexOfAny(@NotNull CharSequence s, int fromIndex);
-
     int lastIndexOf(char c, int startIndex, int fromIndex);
-    int lastIndexOfAny(@NotNull CharSequence s, int startIndex, int fromIndex);
+    int lastIndexOf(char c, int fromIndex);
+    int lastIndexOf(char c);
+    int lastIndexOfAny(@NotNull CharPredicate s, int startIndex, int fromIndex);
+    int lastIndexOfAny(@NotNull CharPredicate s, int fromIndex);
+    int lastIndexOfAny(@NotNull CharPredicate s);
 
     int lastIndexOfNot(char c);
-    int lastIndexOfAnyNot(@NotNull CharSequence s);
-
     int lastIndexOfNot(char c, int fromIndex);
-    int lastIndexOfAnyNot(@NotNull CharSequence s, int fromIndex);
-
     int lastIndexOfNot(char c, int startIndex, int fromIndex);
-    int lastIndexOfAnyNot(@NotNull CharSequence s, int startIndex, int fromIndex);
+
+    int lastIndexOfAnyNot(@NotNull CharPredicate s, int startIndex, int fromIndex);
+    int lastIndexOfAnyNot(@NotNull CharPredicate s, int fromIndex);
+    int lastIndexOfAnyNot(@NotNull CharPredicate s);
 
     /**
      * Count leading/trailing characters of this sequence
      * <p>
-     * Parameters can be: 1, 2 or 3 characters or CharSequence. For character arguments counts any contiguous
-     * leading/trailing characters in the sequence.
-     * <p>
-     * For CharSequence counts counts any contiguous
-     * leading/trailing characters in the sequence which are contained in the given char sequence.
+     * Parameters can be CharPredicate, counts any contiguous leading/trailing characters in the sequence which are contained in the given char set.
      * <p>
      * All functions have overloads:
      * with no fromIndex then 0 is taken for leading and length() for trailing methods
      * with fromIndex then this is taken as the start for leading and end for trailing methods
      * with fromIndex and endIndex, counting will start at fromIndex and stop at endIndex
      * <p>
-     * countLeading(): count contiguous leading space/tab characters in this sequence
-     * countLeading(CharSequence): count contiguous leading characters from set in this sequence
-     * countLeading(char): count contiguous leading characters from set in this sequence
-     * countLeading(char,char): count contiguous leading characters from set in this sequence
-     * countLeading(char,char,char): count contiguous leading characters from set in this sequence
-     * <p>
-     * countLeadingNot(): count contiguous leading not space/tabs in this sequence
-     * countLeadingNot(CharSequence): count contiguous leading characters not from set in this sequence
-     * countLeadingNot(char): count contiguous leading characters not from set in this sequence
-     * countLeadingNot(char,char): count contiguous leading characters not from set in this sequence
-     * countLeadingNot(char,char,char): count contiguous leading characters not from set in this sequence
-     * <p>
-     * countTrailing(): count contiguous leading space/tab in this sequence
-     * countTrailing(CharSequence): count contiguous leading characters from set in this sequence
-     * countTrailing(char): count contiguous leading characters from set in this sequence
-     * countTrailing(char,char): count contiguous leading characters from set in this sequence
-     * countTrailing(char,char,char): count contiguous leading characters from set in this sequence
-     * <p>
-     * countTrailingNot(): count contiguous leading not space/tabs in this sequence
-     * countTrailingNot(CharSequence): count contiguous leading characters not from set in this sequence
-     * countTrailingNot(char): count contiguous leading characters not from set in this sequence
-     * countTrailingNot(char,char): count contiguous leading characters not from set in this sequence
-     * countTrailingNot(char,char,char): count contiguous leading characters not from set in this sequence
+     * countLeading(CharPredicate): count contiguous leading characters from set in this sequence
+     * countLeadingNot(CharPredicate): count contiguous leading characters not from set in this sequence
+     * countTrailing(CharPredicate): count contiguous leading characters from set in this sequence
+     * countTrailingNot(CharPredicate): count contiguous leading characters not from set in this sequence
      *
-     * @param chars set of contiguous characters which should be counted at start of sequence
+     * @param chars predicate for set of contiguous characters which should be counted
      * @return number of chars in contiguous span at start of sequence
      */
-    int countLeading(@NotNull CharSequence chars);
-    int countLeadingNot(@NotNull CharSequence chars);
-    int countLeading(@NotNull CharSequence chars, int startIndex);
-    int countLeadingNot(@NotNull CharSequence chars, int startIndex);
-    int countLeading(@NotNull CharSequence chars, int startIndex, int endIndex);
-    int countLeadingNot(@NotNull CharSequence chars, int startIndex, int endIndex);
+    int countLeading(@NotNull CharPredicate chars);
+    int countLeadingNot(@NotNull CharPredicate chars);
+    int countLeading(@NotNull CharPredicate chars, int startIndex);
+    int countLeadingNot(@NotNull CharPredicate chars, int startIndex);
+    int countLeading(@NotNull CharPredicate chars, int startIndex, int endIndex);
+    int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
 
-    int countTrailing(@NotNull CharSequence chars);
-    int countTrailingNot(@NotNull CharSequence chars);
-    int countTrailing(@NotNull CharSequence chars, int startIndex);
-    int countTrailingNot(@NotNull CharSequence chars, int startIndex);
-    int countTrailing(@NotNull CharSequence chars, int startIndex, int endIndex);
-    int countTrailingNot(@NotNull CharSequence chars, int startIndex, int endIndex);
+    /**
+     * @ param c char
+     * @ return leading count
+     * @ \deprecated consider using built-in sets of characters, ..._SET, or Use CharPredicate.anyOf(...)
+     */
+//    @ \Deprecated
+//     RELEASE: uncomment for release
+//    default int countLeading(char c) { return countLeading(CharPredicate.anyOf(c)); }
 
-    int countLeading(char c);
-    int countLeadingNot(char c);
-    int countLeading(char c, int startIndex);
-    int countLeadingNot(char c, int startIndex);
-    int countLeading(char c, int startIndex, int endIndex);
-    int countLeadingNot(char c, int startIndex, int endIndex);
-
-    int countTrailing(char c);
-    int countTrailingNot(char c);
-    int countTrailing(char c, int startIndex);
-    int countTrailingNot(char c, int startIndex);
-    int countTrailing(char c, int startIndex, int endIndex);
-    int countTrailingNot(char c, int startIndex, int endIndex);
+    int countTrailing(@NotNull CharPredicate chars);
+    int countTrailingNot(@NotNull CharPredicate chars);
+    int countTrailing(@NotNull CharPredicate chars, int startIndex);
+    int countTrailingNot(@NotNull CharPredicate chars, int startIndex);
+    int countTrailing(@NotNull CharPredicate chars, int startIndex, int endIndex);
+    int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
 
     int countLeadingSpaceTab();
     int countLeadingNotSpaceTab();
@@ -404,49 +367,40 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int countOfWhitespace();
     int countOfNotWhitespace();
 
-    // @formatter:off
-    @Deprecated default int countLeading() { return countLeadingSpaceTab(); }
-    @Deprecated default int countLeadingNot() { return countLeadingNotSpaceTab(); }
-    @Deprecated default int countTrailing() { return countTrailingSpaceTab(); }
-    @Deprecated default int countTrailingNot() { return countTrailingNotSpaceTab(); }
-    @Deprecated default int countOf() { return countOfSpaceTab(); }
-    @Deprecated default int countOfNot() { return countOfNotSpaceTab(); }
-    // @formatter:on
+    int countOfAny(@NotNull CharPredicate chars);
+    int countOfAnyNot(@NotNull CharPredicate chars);
+    int countOfAny(@NotNull CharPredicate chars, int startIndex);
+    int countOfAnyNot(@NotNull CharPredicate chars, int startIndex);
+    int countOfAny(@NotNull CharPredicate chars, int startIndex, int endIndex);
+    int countOfAnyNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
 
-    int countOf(char c);
-    int countOfNot(char c);
-    int countOf(char c, int startIndex);
-    int countOfNot(char c, int startIndex);
-    int countOf(char c, int startIndex, int endIndex);
-    int countOfNot(char c, int startIndex, int endIndex);
-
-    int countOfAny(@NotNull CharSequence chars);
-    int countOfAnyNot(@NotNull CharSequence chars);
-    int countOfAny(@NotNull CharSequence chars, int startIndex);
-    int countOfAnyNot(@NotNull CharSequence chars, int startIndex);
-    int countOfAny(@NotNull CharSequence chars, int startIndex, int endIndex);
-    int countOfAnyNot(@NotNull CharSequence chars, int startIndex, int endIndex);
-
-    int countLeadingColumns(int startColumn, @NotNull CharSequence chars);
+    /**
+     * Count column of indent given by chars in the set in this sequence, expanding tabs to 4th column
+     *
+     * @param startColumn column of where this sequence starts
+     * @param chars       whitespace characters
+     * @return column of first non-whitespace as given by chars
+     */
+    int countLeadingColumns(int startColumn, @NotNull CharPredicate chars);
 
     /**
      * Range of kept sequence when  trim start/end of this sequence is performed, characters to trim are passed in the sequence argument
      * <p>
      * returns range of kept sequence or if nothing matched then Range.NULL is returned, meaning keep all
      * <p>
-     * If character set  in the form of character sequence is not passed in the {@link #WHITESPACE_CHARS} are assumed.
+     * If character set  in the form of character sequence is not passed in the {@link #WHITESPACE} are assumed.
      *
-     * @param keep  minimum length of string to keep
+     * @param keep  minimum length of would be trimmed characters to keep. ie. keep 4, will leave 0..4 as is but remove any &gt;4
      * @param chars set of characters to trim from start of line
      * @return range in this sequence to keep or Range.NULL if to keep all
      */
-    @NotNull Range trimStartRange(int keep, @NotNull CharSequence chars);
-    @NotNull Range trimEndRange(int keep, @NotNull CharSequence chars);
-    @NotNull Range trimRange(int keep, @NotNull CharSequence chars);
+    @NotNull Range trimStartRange(int keep, @NotNull CharPredicate chars);
+    @NotNull Range trimEndRange(int keep, @NotNull CharPredicate chars);
+    @NotNull Range trimRange(int keep, @NotNull CharPredicate chars);
 
-    @NotNull Range trimStartRange(@NotNull CharSequence chars);
-    @NotNull Range trimEndRange(@NotNull CharSequence chars);
-    @NotNull Range trimRange(@NotNull CharSequence chars);
+    @NotNull Range trimStartRange(@NotNull CharPredicate chars);
+    @NotNull Range trimEndRange(@NotNull CharPredicate chars);
+    @NotNull Range trimRange(@NotNull CharPredicate chars);
 
     @NotNull Range trimStartRange(int keep);
     @NotNull Range trimEndRange(int keep);
@@ -461,23 +415,23 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * <p>
      * returns trimmed sequence or if nothing matched the original sequence
      * <p>
-     * If character set  in the form of character sequence is not passed in the {@link #WHITESPACE_CHARS} are assumed.
+     * If character set  in the form of character sequence is not passed in the {@link #WHITESPACE} are assumed.
      *
-     * @param keep  minimum length of string to keep
+     * @param keep  minimum length of would be trimmed characters to keep. ie. keep 4, will leave 0..4 as is but remove any &gt;4
      * @param chars set of characters to trim from start of line
      * @return sequence after it is trimmed
      */
-    @NotNull T trimStart(int keep, @NotNull CharSequence chars);
-    @NotNull T trimEnd(int keep, @NotNull CharSequence chars);
-    @NotNull T trim(int keep, @NotNull CharSequence chars);
+    @NotNull T trimStart(int keep, @NotNull CharPredicate chars);
+    @NotNull T trimEnd(int keep, @NotNull CharPredicate chars);
+    @NotNull T trim(int keep, @NotNull CharPredicate chars);
 
     @NotNull T trimStart(int keep);
     @NotNull T trimEnd(int keep);
     @NotNull T trim(int keep);
 
-    @NotNull T trimStart(@NotNull CharSequence chars);
-    @NotNull T trimEnd(@NotNull CharSequence chars);
-    @NotNull T trim(@NotNull CharSequence chars);
+    @NotNull T trimStart(@NotNull CharPredicate chars);
+    @NotNull T trimEnd(@NotNull CharPredicate chars);
+    @NotNull T trim(@NotNull CharPredicate chars);
 
     @NotNull T trimStart();
     @NotNull T trimEnd();
@@ -490,21 +444,21 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * <p>
      * The pair returning functions return before and after sequence
      *
-     * @param keep  minimum length of trimmed characters to keep. ie. leave this many
+     * @param keep  minimum length of would be trimmed characters to keep. ie. keep 4, will leave 0..4 as is but remove any &gt;4
      * @param chars set of characters to trim from start of line
      * @return part of the sequence that was trimmed from the start
      */
-    @NotNull T trimmedStart(int keep, @NotNull CharSequence chars);
-    @NotNull T trimmedEnd(int keep, @NotNull CharSequence chars);
-    @NotNull Pair<T, T> trimmed(int keep, @NotNull CharSequence chars);
+    @NotNull T trimmedStart(int keep, @NotNull CharPredicate chars);
+    @NotNull T trimmedEnd(int keep, @NotNull CharPredicate chars);
+    @NotNull Pair<T, T> trimmed(int keep, @NotNull CharPredicate chars);
 
     @NotNull T trimmedStart(int keep);
     @NotNull T trimmedEnd(int keep);
     @NotNull Pair<T, T> trimmed(int keep);
 
-    @NotNull T trimmedStart(@NotNull CharSequence chars);
-    @NotNull T trimmedEnd(@NotNull CharSequence chars);
-    @NotNull Pair<T, T> trimmed(@NotNull CharSequence chars);
+    @NotNull T trimmedStart(@NotNull CharPredicate chars);
+    @NotNull T trimmedEnd(@NotNull CharPredicate chars);
+    @NotNull Pair<T, T> trimmed(@NotNull CharPredicate chars);
 
     @NotNull T trimmedStart();
     @NotNull T trimmedEnd();
@@ -720,12 +674,12 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * @return index of end of region delimited by s
      */
     int endOfDelimitedBy(@NotNull CharSequence s, int index);
-    int endOfDelimitedByAny(@NotNull CharSequence s, int index);
-    int endOfDelimitedByAnyNot(@NotNull CharSequence s, int index);
+    int endOfDelimitedByAny(@NotNull CharPredicate s, int index);
+    int endOfDelimitedByAnyNot(@NotNull CharPredicate s, int index);
 
     int startOfDelimitedBy(@NotNull CharSequence s, int index);
-    int startOfDelimitedByAny(@NotNull CharSequence s, int index);
-    int startOfDelimitedByAnyNot(@NotNull CharSequence s, int index);
+    int startOfDelimitedByAny(@NotNull CharPredicate s, int index);
+    int startOfDelimitedByAnyNot(@NotNull CharPredicate s, int index);
 
     /**
      * Get the offset of the end of line at given index, end of line delimited by \n
@@ -812,7 +766,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *         if the range in sequence contains only whitespace characters then the whole range will be returned
      *         even if contains no EOL characters
      */
-    @NotNull Range leadingBlankLinesRange(@NotNull CharSequence eolChars, int fromIndex, int endIndex);
+    @NotNull Range leadingBlankLinesRange(@NotNull CharPredicate eolChars, int fromIndex, int endIndex);
     /**
      * Get Range of trailing blank lines at given index offsets in sequence
      *
@@ -827,7 +781,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *         if the range in sequence contains only whitespace characters then the whole range will be returned
      *         even if contains no EOL characters
      */
-    @NotNull Range trailingBlankLinesRange(CharSequence eolChars, int startIndex, int fromIndex);
+    @NotNull Range trailingBlankLinesRange(CharPredicate eolChars, int startIndex, int fromIndex);
 
     @NotNull Range leadingBlankLinesRange();
     @NotNull Range leadingBlankLinesRange(int startIndex);
@@ -839,7 +793,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     @NotNull List<Range> blankLinesRemovedRanges();
     @NotNull List<Range> blankLinesRemovedRanges(int fromIndex);
     @NotNull List<Range> blankLinesRemovedRanges(int fromIndex, int endIndex);
-    @NotNull List<Range> blankLinesRemovedRanges(@NotNull CharSequence eolChars, int fromIndex, int endIndex);
+    @NotNull List<Range> blankLinesRemovedRanges(@NotNull CharPredicate eolChars, int fromIndex, int endIndex);
 
     /**
      * Trim end to end of line containing index
@@ -850,7 +804,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *                 if greater than length() it is the same as length()
      * @return trimmed version of the sequence to given EOL or the original sequence
      */
-    @NotNull T trimToEndOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index);
+    @NotNull T trimToEndOfLine(@NotNull CharPredicate eolChars, boolean includeEol, int index);
     @NotNull T trimToEndOfLine(boolean includeEol, int index);
     @NotNull T trimToEndOfLine(boolean includeEol);
     @NotNull T trimToEndOfLine(int index);
@@ -865,7 +819,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *                 if greater than length() it is the same as length()
      * @return trimmed version of the sequence to given EOL or the original sequence
      */
-    @NotNull T trimToStartOfLine(@NotNull CharSequence eolChars, boolean includeEol, int index);
+    @NotNull T trimToStartOfLine(@NotNull CharPredicate eolChars, boolean includeEol, int index);
     @NotNull T trimToStartOfLine(boolean includeEol, int index);
     @NotNull T trimToStartOfLine(boolean includeEol);
     @NotNull T trimToStartOfLine(int index);
@@ -992,6 +946,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * @return true if ends with suffix
      */
     boolean endsWith(@NotNull CharSequence suffix);
+
+    boolean endsWith(@NotNull CharPredicate chars);
     boolean endsWithEOL();              // EOL "\n"
     boolean endsWithAnyEOL();           // EOL_CHARS "\r\n"
     boolean endsWithSpace();            // SPACE " "
@@ -1022,6 +978,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * @return true if starts with prefix
      */
     boolean startsWith(@NotNull CharSequence prefix);
+
+    boolean startsWith(@NotNull CharPredicate chars);
     boolean startsWithEOL();            // EOL "\n"
     boolean startsWithAnyEOL();         // EOL_CHARS "\r\n"
     boolean startsWithSpace();          // SPACE " "
@@ -1230,7 +1188,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     /**
      * Split helpers based on delimiter character sets contained in CharSequence
      *
-     * @param delimiter delimiter char or set of chars in CharSequence to split this sequence on
+     * @param delimiter delimiter char sequence to use for splitting
      * @param limit     max number of segments to split
      * @param flags     flags for desired options:
      *                  SPLIT_INCLUDE_DELIMS: include delimiters as part of split item
@@ -1241,52 +1199,39 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * @param trimChars set of characters that should be used for trimming individual split results
      * @return List of split results
      */
-    @NotNull T[] split(char delimiter, int limit, int flags, String trimChars);
-    @NotNull T[] split(char delimiter);
-    @NotNull T[] split(char delimiter, int limit);
-    @NotNull T[] split(char delimiter, int limit, int flags);
-    @NotNull T[] split(@NotNull CharSequence delimiter);
-    @NotNull T[] split(@NotNull CharSequence delimiter, int limit);
-    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, int flags);
-    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars);
-    @NotNull List<T> splitList(char delimiter, int limit, int flags, String trimChars);
-    @NotNull List<T> splitList(char delimiter);
-    @NotNull List<T> splitList(char delimiter, int limit);
-    @NotNull List<T> splitList(char delimiter, int limit, int flags);
-    @NotNull List<T> splitList(@NotNull CharSequence delimiter);
-    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars);
     @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags);
-    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable String trimChars);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter);
+    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars);
+    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, int flags);
+    @NotNull T[] split(@NotNull CharSequence delimiter);
+
+    // @formatter:off
+    @Deprecated default @NotNull T[] split(char delimiter, int limit, int flags)    { return split(Character.toString(delimiter), limit, flags, null);}
+    @Deprecated default @NotNull T[] split(char delimiter, int limit)               { return split(Character.toString(delimiter), limit, 0, null);}
+    @Deprecated default @NotNull T[] split(char delimiter)                          { return split(Character.toString(delimiter), 0, 0, null);}
+    // @formatter:on
 
     /**
-     * Split helpers based on delimiter character sets contained in CharSequence
+     * Split helpers based on delimiter character sets contained in CharPredicate
      *
-     * @param delimiter     delimiter char or set of chars in CharSequence to split this sequence on
+     * @param delimiter     sequence of chars on which to split this sequence
      * @param limit         max number of segments to split
      * @param includeDelims if true include delimiters as part of split item
      * @param trimChars     set of characters that should be used for trimming individual split results
      * @return List of split results
      */
-    @NotNull T[] split(char delimiter, int limit, boolean includeDelims, String trimChars);
-    @NotNull T[] split(char delimiter, int limit, boolean includeDelims);
-    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims);
-    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars);
-    @NotNull List<T> splitList(char delimiter, int limit, boolean includeDelims, String trimChars);
-    @NotNull List<T> splitList(char delimiter, int limit, boolean includeDelims);
-    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims);
-    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable String trimChars);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars);
+    @NotNull List<T> splitList(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars);
+    @NotNull T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars);
+    @NotNull T[] split(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars);
 
     // NOTE: these default to including delimiters as part of split item
     @NotNull T[] splitEOL();
     @NotNull T[] splitEOL(boolean includeDelims);
-    @NotNull T[] splitEOL(int limit);
-    @NotNull T[] splitEOL(int limit, boolean includeDelims);
-    @NotNull T[] splitEOL(int limit, boolean includeDelims, @Nullable String trimChars);
     @NotNull List<T> splitListEOL();
     @NotNull List<T> splitListEOL(boolean includeDelims);
-    @NotNull List<T> splitListEOL(int limit);
-    @NotNull List<T> splitListEOL(int limit, boolean includeDelims);
-    @NotNull List<T> splitListEOL(int limit, boolean includeDelims, @Nullable String trimChars);
+    @NotNull List<T> splitListEOL(boolean includeDelims, @Nullable CharPredicate trimChars);
 
     /**
      * Get indices of all occurrences of a sequence

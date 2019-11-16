@@ -31,6 +31,7 @@ import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 import static com.vladsch.flexmark.util.sequence.IRichSequence.NUL;
+import static com.vladsch.flexmark.util.sequence.IRichSequence.SPACE_TAB_SET;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
@@ -454,7 +455,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 int minSpaces = Integer.MAX_VALUE;
                 int i = 0;
                 for (BasedSequence line : lines) {
-                    leadColumns[i] = line.countLeadingColumns(0, " \t");
+                    leadColumns[i] = line.countLeadingColumns(0, SPACE_TAB_SET);
                     minSpaces = Utils.min(minSpaces, leadColumns[i]);
                     i++;
                 }
@@ -520,7 +521,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 int minSpaces = Integer.MAX_VALUE;
                 int i = 0;
                 for (BasedSequence line : lines) {
-                    leadColumns[i] = line.countLeadingColumns(0, " \t");
+                    leadColumns[i] = line.countLeadingColumns(0, SPACE_TAB_SET);
                     minSpaces = Utils.min(minSpaces, leadColumns[i]);
                     i++;
                 }
@@ -1110,7 +1111,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 BasedSequence sequence = prev.baseSubSequence(prev.getEndOffset(), next.getStartOffset());
                 if (!sequence.isEmpty() && sequence.isBlank()) {
                     if (!preserve) {
-                        if (collapseToEOL && sequence.indexOfAny(BasedSequence.EOL_CHARS) != -1) {
+                        if (collapseToEOL && sequence.indexOfAny(BasedSequence.ANY_EOL_SET) != -1) {
                             markdown.append('\n');
                         } else {
                             markdown.append(' ');

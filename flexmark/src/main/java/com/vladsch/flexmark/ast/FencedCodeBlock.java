@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -86,7 +87,7 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
         this.attributes = attributes;
     }
 
-    public BasedSequence getInfoDelimitedByAny(CharSequence delimiters) {
+    public BasedSequence getInfoDelimitedByAny(CharPredicate delimiters) {
         BasedSequence language = BasedSequence.NULL;
         if (info.isNotNull() && !info.isBlank()) {
             int space = info.indexOfAny(delimiters);

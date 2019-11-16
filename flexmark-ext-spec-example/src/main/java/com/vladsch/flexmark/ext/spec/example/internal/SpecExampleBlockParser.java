@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.test.util.spec.SpecReader.EXAMPLE_KEYWORD;
 import static com.vladsch.flexmark.test.util.spec.SpecReader.OPTIONS_KEYWORD;
-import static com.vladsch.flexmark.util.sequence.BasedSequence.SPLIT_INCLUDE_DELIM_PARTS;
-import static com.vladsch.flexmark.util.sequence.BasedSequence.WHITESPACE_NBSP_CHARS;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.*;
+import static com.vladsch.flexmark.util.sequence.IRichSequence.*;
 
 public class SpecExampleBlockParser extends AbstractBlockParser {
     private static final Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:()]*)(?:(:)\\s*([^\\s()]+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^()\\n\\r]*)(\\))?)?\\s*$".replace("options", OPTIONS_KEYWORD));
@@ -85,29 +85,29 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
             block.setExampleKeyword(exampleKeyword);
 
             if (options.matches()) {
-                BasedSequence coordOpeningMarker = BasedSequence.NULL;
-                BasedSequence section = BasedSequence.NULL;
-                BasedSequence numberSeparator = BasedSequence.NULL;
-                BasedSequence number = BasedSequence.NULL;
-                BasedSequence coordClosingMarker = BasedSequence.NULL;
-                BasedSequence optionsKeyword = BasedSequence.NULL;
-                BasedSequence optionsOpeningMarker = BasedSequence.NULL;
-                BasedSequence optionsText = BasedSequence.NULL;
-                BasedSequence optionsClosingMarker = BasedSequence.NULL;
+                BasedSequence coordOpeningMarker = NULL;
+                BasedSequence section = NULL;
+                BasedSequence numberSeparator = NULL;
+                BasedSequence number = NULL;
+                BasedSequence coordClosingMarker = NULL;
+                BasedSequence optionsKeyword = NULL;
+                BasedSequence optionsOpeningMarker = NULL;
+                BasedSequence optionsText = NULL;
+                BasedSequence optionsClosingMarker = NULL;
                 // @formatter:off
-                if (options.group(GROUP_COORD_OPEN) != null && !options.group(GROUP_COORD_OPEN).trim().isEmpty()){coordOpeningMarker = optionsChars.subSequence(options.start(GROUP_COORD_OPEN), options.end(GROUP_COORD_OPEN)).trim(WHITESPACE_NBSP_CHARS);}
-                if (options.group(GROUP_SECTION) != null && !options.group(GROUP_SECTION).trim().isEmpty()){section = optionsChars.subSequence(options.start(GROUP_SECTION), options.end(GROUP_SECTION)).trim(WHITESPACE_NBSP_CHARS);}
-                if (options.group(GROUP_NUMBER_SEPARATOR) != null && !options.group(GROUP_NUMBER_SEPARATOR).trim().isEmpty()){numberSeparator = optionsChars.subSequence(options.start(GROUP_NUMBER_SEPARATOR), options.end(GROUP_NUMBER_SEPARATOR)).trim(WHITESPACE_NBSP_CHARS);}
-                if (options.group(GROUP_NUMBER) != null && !options.group(GROUP_NUMBER).trim().isEmpty()){number = optionsChars.subSequence(options.start(GROUP_NUMBER), options.end(GROUP_NUMBER)).trim(WHITESPACE_NBSP_CHARS);}
-                if (options.group(GROUP_COORD_CLOSE) != null && !options.group(GROUP_COORD_CLOSE).trim().isEmpty()){coordClosingMarker = optionsChars.subSequence(options.start(GROUP_COORD_CLOSE), options.end(GROUP_COORD_CLOSE)).trim(WHITESPACE_NBSP_CHARS);}
-                if (options.group(GROUP_OPTION_KEYWORD) != null && !options.group(GROUP_OPTION_KEYWORD).trim().isEmpty()){optionsKeyword = optionsChars.subSequence(options.start(GROUP_OPTION_KEYWORD), options.end(GROUP_OPTION_KEYWORD)).trim(WHITESPACE_NBSP_CHARS);}
-                if (options.group(GROUP_OPTIONS_OPEN) != null && !options.group(GROUP_OPTIONS_OPEN).trim().isEmpty()){optionsOpeningMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_OPEN), options.end(GROUP_OPTIONS_OPEN)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_COORD_OPEN) != null && !options.group(GROUP_COORD_OPEN).trim().isEmpty()){coordOpeningMarker = optionsChars.subSequence(options.start(GROUP_COORD_OPEN), options.end(GROUP_COORD_OPEN)).trim(WHITESPACE_NBSP_SET);}
+                if (options.group(GROUP_SECTION) != null && !options.group(GROUP_SECTION).trim().isEmpty()){section = optionsChars.subSequence(options.start(GROUP_SECTION), options.end(GROUP_SECTION)).trim(WHITESPACE_NBSP_SET);}
+                if (options.group(GROUP_NUMBER_SEPARATOR) != null && !options.group(GROUP_NUMBER_SEPARATOR).trim().isEmpty()){numberSeparator = optionsChars.subSequence(options.start(GROUP_NUMBER_SEPARATOR), options.end(GROUP_NUMBER_SEPARATOR)).trim(WHITESPACE_NBSP_SET);}
+                if (options.group(GROUP_NUMBER) != null && !options.group(GROUP_NUMBER).trim().isEmpty()){number = optionsChars.subSequence(options.start(GROUP_NUMBER), options.end(GROUP_NUMBER)).trim(WHITESPACE_NBSP_SET);}
+                if (options.group(GROUP_COORD_CLOSE) != null && !options.group(GROUP_COORD_CLOSE).trim().isEmpty()){coordClosingMarker = optionsChars.subSequence(options.start(GROUP_COORD_CLOSE), options.end(GROUP_COORD_CLOSE)).trim(WHITESPACE_NBSP_SET);}
+                if (options.group(GROUP_OPTION_KEYWORD) != null && !options.group(GROUP_OPTION_KEYWORD).trim().isEmpty()){optionsKeyword = optionsChars.subSequence(options.start(GROUP_OPTION_KEYWORD), options.end(GROUP_OPTION_KEYWORD)).trim(WHITESPACE_NBSP_SET);}
+                if (options.group(GROUP_OPTIONS_OPEN) != null && !options.group(GROUP_OPTIONS_OPEN).trim().isEmpty()){optionsOpeningMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_OPEN), options.end(GROUP_OPTIONS_OPEN)).trim(WHITESPACE_NBSP_SET);}
                 if (options.group(GROUP_OPTIONS) != null){optionsText = optionsChars.subSequence(options.start(GROUP_OPTIONS), options.end(GROUP_OPTIONS));}
-                if (options.group(GROUP_OPTIONS_CLOSE) != null && !options.group(GROUP_OPTIONS_CLOSE).trim().isEmpty()){optionsClosingMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_CLOSE), options.end(GROUP_OPTIONS_CLOSE)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_OPTIONS_CLOSE) != null && !options.group(GROUP_OPTIONS_CLOSE).trim().isEmpty()){optionsClosingMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_CLOSE), options.end(GROUP_OPTIONS_CLOSE)).trim(WHITESPACE_NBSP_SET);}
                 // @formatter:on
                 if (section.isNotNull() && optionsKeyword.isNull() && numberSeparator.isNull() && coordOpeningMarker.isNull() && section.matchChars("options")) {
                     // move all from section to options
-                    int pos = section.indexOfAny(' ', '\t', '\u00A0');
+                    int pos = section.indexOfAny(SPACE_TAB_NBSP_SET);
                     if (pos < 0) {
                         optionsKeyword = section;
                     } else {
@@ -115,8 +115,8 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                         optionsText = section.subSequence(pos + 1);
                     }
                     optionsClosingMarker = coordClosingMarker;
-                    section = BasedSequence.NULL;
-                    coordClosingMarker = BasedSequence.NULL;
+                    section = NULL;
+                    coordClosingMarker = NULL;
                 }
 
                 if (optionsText.isNull()) {
@@ -144,11 +144,11 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
             if (myOptions.optionNodes && block.getOptionsKeyword().isNotNull()) {
                 Node optionsList = new SpecExampleOptionsList(block.getOptions());
                 block.appendChild(optionsList);
-                BasedSequence trimmedOptionsList = block.getOptions().trim(WHITESPACE_NBSP_CHARS);
+                BasedSequence trimmedOptionsList = block.getOptions().trim(WHITESPACE_NBSP_SET);
                 if (!trimmedOptionsList.isEmpty()) {
-                    BasedSequence[] list = trimmedOptionsList.split(',', 0, SPLIT_INCLUDE_DELIM_PARTS);
+                    BasedSequence[] list = trimmedOptionsList.split(",", 0, SPLIT_INCLUDE_DELIM_PARTS);
                     for (BasedSequence item : list) {
-                        BasedSequence option = item.trim(WHITESPACE_NBSP_CHARS);
+                        BasedSequence option = item.trim(WHITESPACE_NBSP_SET);
                         if (!option.isEmpty()) {
                             if (option.matches(",")) {
                                 Node optionNode = new SpecExampleOptionSeparator(option);
@@ -174,17 +174,17 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                 boolean inHtml = false;
                 boolean inAst = false;
                 int sectionStart = -1;
-                BasedSequence prevLine = BasedSequence.NULL;
+                BasedSequence prevLine = NULL;
                 BasedSequence lastLine = lines.get(lines.size() - 1);
                 String typeBreak = myOptions.typeBreak;
                 int typeBreakLength = typeBreak.length();
 
                 for (BasedSequence line : lines.subList(1, lines.size())) {
-                    if (line.length() == typeBreakLength + line.countTrailing(BasedSequence.EOL_CHARS) && line.matchChars(typeBreak)) {
+                    if (line.length() == typeBreakLength + line.countTrailing(ANY_EOL_SET) && line.matchChars(typeBreak)) {
                         if (inSource) {
                             inSource = false;
                             if (sectionStart != -1) {
-                                block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequence.EOL_CHARS)));
+                                block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(ANY_EOL_SET)));
                             } else {
                                 block.setSource(line.subSequence(0, 0));
                             }
@@ -194,7 +194,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                         } else if (inHtml) {
                             inHtml = false;
                             if (sectionStart != -1) {
-                                block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequence.EOL_CHARS)));
+                                block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(ANY_EOL_SET)));
                             } else {
                                 block.setHtml(line.subSequence(0, 0));
                             }
@@ -218,19 +218,19 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                         // done
                         if (inSource) {
                             if (sectionStart != -1) {
-                                block.setSource(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(BasedSequence.EOL_CHARS)));
+                                block.setSource(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(ANY_EOL_SET)));
                             } else {
                                 block.setSource(line.subSequence(line.length(), line.length()));
                             }
                         } else if (inHtml) {
                             if (sectionStart != -1) {
-                                block.setHtml(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(BasedSequence.EOL_CHARS)));
+                                block.setHtml(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(ANY_EOL_SET)));
                             } else {
                                 block.setHtml(line.subSequence(line.length(), line.length()));
                             }
                         } else if (inAst) {
                             if (sectionStart != -1) {
-                                block.setAst(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(BasedSequence.EOL_CHARS)));
+                                block.setAst(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(ANY_EOL_SET)));
                             } else {
                                 block.setAst(line.subSequence(line.length(), line.length()));
                             }

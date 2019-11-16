@@ -70,7 +70,7 @@ public class FencedCodeCustomRenderingSample {
                     html.srcPosWithTrailingEOL(node.getChars()).withAttr().tag("pre").openPre();
 
                     if (info.isNotNull() && !info.isBlank()) {
-                        BasedSequence language = node.getInfoDelimitedByAny(" \t");
+                        BasedSequence language = node.getInfoDelimitedByAny(BasedSequence.SPACE_TAB_SET);
                         // CUSTOMIZATION: uppercase the code tag class string
                         html.attr("class", (context.getHtmlOptions().languageClassPrefix + language.unescape()).toUpperCase());
                     } else {
