@@ -197,6 +197,18 @@ Next 0.59.50
   * [ ] Fix: `SegmentedSequence` to construct from `SegmentList` of segment builder instead of
         an array of `BasedSequences`. This will allow optimization to recover lost based spaces
         and EOLs.
+    * [ ] Fix: factor out EOL recovery from `BasedCharsRecoverySegmentOptimizer`, easier to do
+          EOL recovery after based char recovery.
+    * [ ] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
+    * [ ] Add: EOL recovery `BasedEolRecoveryOptimizer`:
+      * recover EOLs from text when preceded by range and only blanks between end of range and
+        EOL. Regardless of whether the blanks are skipped in base sequence or part of the text.
+        * If part of text split text into before and after and insert EOL.
+        * If part of base then just insert before text, trimming EOL out of text.
+        * Keep recovering EOLs from text until there are none that meet the criteria of having
+          nothing but blanks between them and end of previous range.
+        * After recovering the EOL range, see if it can be expanded left/right to encompass more
+          based chars from text on either side.
   * [ ] Fix: consider adding to based sequences method to get `SegmentList` which represents
         their contents, based and modified. This can make tracking content changes easier.
   * [ ] Add: position tracking resolver based on original sequence tracked and final result.

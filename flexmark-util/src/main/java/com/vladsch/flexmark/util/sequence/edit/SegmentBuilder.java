@@ -135,6 +135,8 @@ public class SegmentBuilder {
      */
     @NotNull
     public SegmentBuilder append(@NotNull Range range) {
+        // NOTE: if an empty range is not inserted then there is no range to attach recovered characters.
+        //    empty ranges can be removed during optimization
         if (myEndOffset > 0 && myEndOffset >= range.getStart()) {
             // have overlap, remove overlap from range and add
             SegmentPosition position = getLastRangeIndex();
@@ -381,7 +383,7 @@ public class SegmentBuilder {
 
         for (Object part : myParts.getList()) {
             if (part instanceof String) {
-                out.append((String) part);
+                out.append(BasedSequence.of((String) part).toVisibleWhitespaceString());
             } else {
                 assert part instanceof Range;
                 out.append("⟦").append(baseSequence.subSequence(((Range) part).getStart(), ((Range) part).getEnd()).toVisibleWhitespaceString()).append("⟧");

@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.sequence.IRichSequence.EOL_CHAR;
 
-public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
+public class BasedCharsRecoverySegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
     private final PositionAnchor myAnchor;
 
-    public CharRecoveringSegmentOptimizer(PositionAnchor anchor) {
+    public BasedCharsRecoverySegmentOptimizer(PositionAnchor anchor) {
         this.myAnchor = anchor;
     }
 
@@ -76,15 +76,36 @@ public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implemen
         int prevPos = prevRange == null ? 0 : prevMatchPos(chars, text, prevRange.getEnd(), nextRange != null ? nextRange.getStart() : charsLength);
         int nextPos = nextRange == null ? textLength : nextMatchPos(chars, text, prevRange != null ? prevRange.getEnd() : 0, nextRange.getStart());
 
-        if (prevPos == 0 && nextPos == textLength) return;
+        // FIX: factor out EOL recovery to separate optimizer and recover EOL in middle of text
+        if (prevPos == 0 && nextPos == textLength) {
+            // check for EOL recovery
+            if (prevRange != null && !chars.subSequence(prevRange).endsWithEOL() && text.startsWith("\n")) {
+                // see if there is an EOL between prevRange end and nextRange start with only spaces between them
+                int eol = chars.endOfLine(prevRange.getEnd());
+                if (eol < charsLength && chars.subSequence(prevRange.getEnd(), eol).isBlank()) {
+                    // we have an EOL
+                    Range eolRange = Range.ofLength(eol, 1);
+                    text = text.substring(1);
+
+                    // need to insert EOL range between prevRange and text
+                    if (text.isEmpty()) {
+                        position.set(eolRange);
+                    } else {
+                        position.set(text);
+                        position.add(eolRange);
+                    }
+                }
+            }
+            return;
+        }
 
         // these pos are in text coordinates we find the breakdown for the text if there is overlap
         // if there is prevEol it goes to prev, and all after goes to next
-        boolean hadEol = false;
+//        boolean hadEol = false;
 
         if (prevEolPos != -1 && prevEolPos < prevPos) {
             prevPos = prevEolPos;
-            hadEol = true;
+//            hadEol = true;
 
             // had eol, split is determined by EOL so if nextPos overlaps with prevPos, it can only take after EOL chars.
             if (nextPos < prevPos) {
@@ -101,68 +122,68 @@ public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implemen
 
         if (excess > 0) {
             // have overlap, put back excess chars taken
-            if (matchedNext == 0) {
-                matchedPrev -= excess;
-            } else if (matchedPrev == 0) {
-                matchedNext -= excess;
-            } else /*if (matchedNext != 0 && matchedPrev != 0)*/ {
-                // the two positions may not overlap but the matches may exceed the span between ranges
-                if (hadEol) {
-                    // had EOL next gets to loose max chars since any taken from prev mean eol loss
+            // this cannot happen with one range match only. It would mean we matched more chars than are available between ranges without both ranges matching these from each end
+            // overlaps can only occur when string contains sequence that can be matched by both ranges. Otherwise match ends at least one char before other range begins because there is no match
+            // otherwise the range would match from the other end.
+            assert matchedNext > 0 && matchedPrev > 0;
+
+            // the two positions may not overlap but the matches together may exceed the span between ranges
+//            if (hadEol) {
+//                // This too cannot happen. If there was an eol then it split the range so there is no overlap.
+//                // had EOL next gets to loose max chars since any taken from prev mean eol loss
+//                int nextDelta = Math.min(matchedNext, excess);
+//                matchedNext -= nextDelta;
+//                matchedPrev -= excess - nextDelta;
+//            } else {
+            switch (myAnchor) {
+                case PREVIOUS:
+                    // give it all to next
+                    int prevDelta = Math.min(matchedPrev, excess);
+                    matchedPrev -= prevDelta;
+                    matchedNext -= excess - prevDelta;
+                    break;
+
+                case NEXT:
+                    // give it all to prev
                     int nextDelta = Math.min(matchedNext, excess);
                     matchedNext -= nextDelta;
                     matchedPrev -= excess - nextDelta;
-                } else {
-                    switch (myAnchor) {
-                        case PREVIOUS:
-                            // give it all to next
-                            int prevDelta = Math.min(matchedPrev, excess);
-                            matchedPrev -= prevDelta;
-                            matchedNext -= excess - prevDelta;
-                            break;
+                    break;
 
-                        case NEXT:
-                            // give it all to prev
-                            int nextDelta = Math.min(matchedNext, excess);
-                            matchedNext -= nextDelta;
-                            matchedPrev -= excess - nextDelta;
-                            break;
-
-                        default:
-                        case NONE:
-                            // divide between the two with remainder to right??
-                            int prevHalf = Math.min(matchedPrev, excess >> 1);
-                            matchedPrev -= prevHalf;
-                            matchedNext -= excess - prevHalf;
-                            break;
-                    }
-                }
+                default:
+                case NONE:
+                    // divide between the two with remainder to right??
+                    int prevHalf = Math.min(matchedPrev, excess >> 1);
+                    matchedPrev -= prevHalf;
+                    matchedNext -= excess - prevHalf;
+                    break;
             }
+//            }
         }
 
         // now we can compute match pos and ranges
         if (matchedPrev > 0) {
-            prevRange = prevRange == null ? null : prevRange.endPlus(matchedPrev);
+            prevRange = prevRange.endPlus(matchedPrev);
         }
 
         if (matchedNext > 0) {
             nextRange = nextRange.startMinus(matchedNext);
         }
 
-        if (!(prevRange == null || nextRange == null || !prevRange.overlaps(nextRange))) {
-            int tmp = 0;
-        }
-
-        // RELEASE: remove assert when tested and stable
-        assert prevRange == null || nextRange == null || !prevRange.overlaps(nextRange);
-
-        if (matchedPrev < 0 || matchedPrev > textLength) {
-            int tmp = 0;
-        }
-
-        if (matchedNext < 0 || matchedNext > textLength) {
-            int tmp = 0;
-        }
+//        if (!(prevRange == null || nextRange == null || !prevRange.overlaps(nextRange))) {
+//            int tmp = 0;
+//        }
+//
+//        // RELEASE : remove assert when tested and stable
+//        assert prevRange == null || nextRange == null || !prevRange.overlaps(nextRange);
+//
+//        if (matchedPrev < 0 || matchedPrev > textLength) {
+//            int tmp = 0;
+//        }
+//
+//        if (matchedNext < 0 || matchedNext > textLength) {
+//            int tmp = 0;
+//        }
 
         text = text.substring(matchedPrev, textLength - matchedNext);
 
@@ -185,9 +206,6 @@ public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implemen
             prevRange = prevRange.expandToInclude(nextRange);
             position.set(-1, prevRange);
             position.remove(0, 2);
-            if (eolRange != null) {
-                position.add(1, eolRange);
-            }
         } else {
             if (text.isEmpty()) {
                 if (eolRange != null) {
@@ -205,8 +223,9 @@ public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implemen
                 if (eolRange != null) {
                     position.add(eolRange);
                 }
-            } else if (originalPrev != null) {
-                position.remove(-1);
+//            } else if (originalPrev != null) {
+//                // NOTE: cannot happen, prevRange is never set to null if it exists, only next range
+//                position.remove(-1);
             }
 
             if (nextRange != null) position.set(1, nextRange);
