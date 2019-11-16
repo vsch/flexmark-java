@@ -5,100 +5,166 @@ import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
-public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
-    private final PositionAnchor direction;
+import static com.vladsch.flexmark.util.sequence.IRichSequence.EOL_CHAR;
 
-    public CharRecoveringSegmentOptimizer(PositionAnchor direction) {
-        this.direction = direction;
+public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
+    private final PositionAnchor myAnchor;
+
+    public CharRecoveringSegmentOptimizer(PositionAnchor anchor) {
+        this.myAnchor = anchor;
+    }
+
+    private int prevEolPos;
+
+    int prevMatchPos(@NotNull CharSequence base, CharSequence chars, int startIndex, int endIndex) {
+        int length = chars.length();
+        endIndex = Math.min(base.length(), endIndex);
+        int iMax = Math.min(endIndex - startIndex, length);
+
+        for (int i = 0; i < iMax; i++) {
+            char c = base.charAt(i + startIndex);
+            char c1 = chars.charAt(i);
+
+            if (c == EOL_CHAR) prevEolPos = i + 1;
+            if (c1 != c) return i;
+        }
+        return iMax;
+    }
+
+    int nextMatchPos(@NotNull CharSequence base, CharSequence chars, int startIndex, int fromIndex) {
+        startIndex = Math.max(0, startIndex);
+        fromIndex = Math.min(base.length(), fromIndex);
+
+        int length = chars.length();
+        int iMax = Math.min(fromIndex - startIndex, length);
+
+        int baseOffset = fromIndex - iMax;
+        int charsOffset = length - iMax;
+
+        for (int i = iMax; i-- > 0; ) {
+            char c = base.charAt(baseOffset + i);
+            char c1 = chars.charAt(charsOffset + i);
+
+            if (c1 != c) return i + charsOffset + 1;
+        }
+        return charsOffset;
     }
 
     @Override
     public void accept(@NotNull S chars, @NotNull SegmentPosition position) {
         String text = position.getString();
-        if (text.isEmpty()) return;  // already processed by previous optimizer
+        int textLength = text.length();
+        int charsLength = chars.length();
+
+        if (textLength == 0 || charsLength == 0) return;  // already processed by previous optimizer
 
         Range originalPrev = position.getRangeOrNull(-1);
         Range originalNext = position.getRangeOrNull(1);
+
+        if (originalNext == null && originalPrev == null) return;
+
         Range prevRange = originalPrev;
         Range nextRange = originalNext;
 
-        int matchedPrev = 0;
-        int matchedNext = 0;
+//        CharSequence prevText = prevRange == null ? null : chars.subSequence(prevRange);
+//        CharSequence afterPrevText = prevRange == null ? null : chars.subSequence(prevRange.getEnd());
+//        CharSequence nextText = nextRange == null ? null : chars.subSequence(nextRange);
+//        CharSequence beforeNextText = nextRange == null ? null : chars.subSequence(0, nextRange.getStart());
 
-        if (prevRange != null) {
-            matchedPrev = chars.matchedCharCount(text, prevRange.getEnd(), false);
-            prevRange = prevRange.endPlus(matchedPrev);
+        prevEolPos = -1;
+
+        int prevPos = prevRange == null ? 0 : prevMatchPos(chars, text, prevRange.getEnd(), nextRange != null ? nextRange.getStart() : charsLength);
+        int nextPos = nextRange == null ? textLength : nextMatchPos(chars, text, prevRange != null ? prevRange.getEnd() : 0, nextRange.getStart());
+
+        if (prevPos == 0 && nextPos == textLength) return;
+
+        // these pos are in text coordinates we find the breakdown for the text if there is overlap
+        // if there is prevEol it goes to prev, and all after goes to next
+        boolean hadEol = false;
+
+        if (prevEolPos != -1 && prevEolPos < prevPos) {
+            prevPos = prevEolPos;
+            hadEol = true;
+
+            // had eol, split is determined by EOL so if nextPos overlaps with prevPos, it can only take after EOL chars.
+            if (nextPos < prevPos) {
+                nextPos = prevPos;
+            }
         }
 
-        if (nextRange != null) {
-            matchedNext = chars.matchedCharCountReversed(text, nextRange.getStart(), false);
+        assert nextPos <= textLength;
+
+        int matchedPrev = prevPos;
+        int matchedNext = textLength - nextPos;
+        int maxSpan = (nextRange != null ? nextRange.getStart() : charsLength) - (prevRange != null ? prevRange.getEnd() : 0);
+        int excess = matchedPrev + matchedNext - maxSpan;
+
+        if (excess > 0) {
+            // have overlap, put back excess chars taken
+            if (matchedNext == 0) {
+                matchedPrev -= excess;
+            } else if (matchedPrev == 0) {
+                matchedNext -= excess;
+            } else /*if (matchedNext != 0 && matchedPrev != 0)*/ {
+                // the two positions may not overlap but the matches may exceed the span between ranges
+                if (hadEol) {
+                    // had EOL next gets to loose max chars since any taken from prev mean eol loss
+                    int nextDelta = Math.min(matchedNext, excess);
+                    matchedNext -= nextDelta;
+                    matchedPrev -= excess - nextDelta;
+                } else {
+                    switch (myAnchor) {
+                        case PREVIOUS:
+                            // give it all to next
+                            int prevDelta = Math.min(matchedPrev, excess);
+                            matchedPrev -= prevDelta;
+                            matchedNext -= excess - prevDelta;
+                            break;
+
+                        case NEXT:
+                            // give it all to prev
+                            int nextDelta = Math.min(matchedNext, excess);
+                            matchedNext -= nextDelta;
+                            matchedPrev -= excess - nextDelta;
+                            break;
+
+                        default:
+                        case NONE:
+                            // divide between the two with remainder to right??
+                            int prevHalf = Math.min(matchedPrev, excess >> 1);
+                            matchedPrev -= prevHalf;
+                            matchedNext -= excess - prevHalf;
+                            break;
+                    }
+                }
+            }
+        }
+
+        // now we can compute match pos and ranges
+        if (matchedPrev > 0) {
+            prevRange = prevRange == null ? null : prevRange.endPlus(matchedPrev);
+        }
+
+        if (matchedNext > 0) {
             nextRange = nextRange.startMinus(matchedNext);
         }
 
-        if (matchedNext == 0 && matchedPrev == 0) return;
-
-        Range overlapRange = prevRange != null && nextRange != null ? prevRange.intersect(nextRange) : null;
-
-        if (overlapRange != null && overlapRange.isNotEmpty()) {
-            // need to allocate matches between next/prev based on direction
-            int overlap = overlapRange.getSpan();
-
-            int eolPos;
-            // if eol was added to prev, then all after EOL goes to next
-            String leftExtension = chars.subSequence(position.getRange(-1).getEnd(), overlapRange.getStart()).toString();
-            eolPos = leftExtension.indexOf("\n");
-            if (eolPos != -1) {
-                // give all after eol to next
-                matchedPrev -= overlap - eolPos;
-                prevRange = prevRange.endMinus(overlap - eolPos);
-
-                matchedNext += eolPos;
-                nextRange = nextRange.startPlus(eolPos);
-            }
-
-            if (eolPos == -1) {
-                // if eol is in overlapped section, all after EOL goes to next
-                String overlapped = text.substring(overlapRange.getStart() - position.getRange(-1).getEnd(), overlapRange.getEnd() - position.getRange(-1).getEnd());
-                eolPos = overlapped.indexOf("\n");
-                if (eolPos != -1) {
-                    // this determines the split, not direction
-                    eolPos++;
-                    matchedPrev -= overlap - eolPos;
-                    prevRange = prevRange.endMinus(overlap - eolPos);
-
-                    matchedNext -= eolPos;
-                    nextRange = nextRange.startPlus(eolPos);
-                }
-            }
-
-            if (eolPos == -1) {
-                switch (direction) {
-                    case PREVIOUS:
-                        // give it all to next
-                        matchedPrev -= overlap;
-                        prevRange = prevRange.endMinus(overlap);
-                        break;
-
-                    case NEXT:
-                        // give it all to prev
-                        matchedNext -= overlap;
-                        nextRange = nextRange.startPlus(overlap);
-                        break;
-
-                    default:
-                    case NONE:
-                        // divide between the two with remainder to right??
-                        int half = overlap >> 1;
-                        matchedPrev -= overlap - half;
-                        prevRange = prevRange.endMinus(overlap - half);
-                        matchedNext -= half;
-                        nextRange = nextRange.startPlus(half);
-                        break;
-                }
-            }
+        if (!(prevRange == null || nextRange == null || !prevRange.overlaps(nextRange))) {
+            int tmp = 0;
         }
 
-        text = text.substring(matchedPrev, text.length() - matchedNext);
+        // RELEASE: remove assert when tested and stable
+        assert prevRange == null || nextRange == null || !prevRange.overlaps(nextRange);
+
+        if (matchedPrev < 0 || matchedPrev > textLength) {
+            int tmp = 0;
+        }
+
+        if (matchedNext < 0 || matchedNext > textLength) {
+            int tmp = 0;
+        }
+
+        text = text.substring(matchedPrev, textLength - matchedNext);
 
         if (prevRange != null && nextRange != null && text.isEmpty() && prevRange.isAdjacentBefore(nextRange)) {
             // remove the string and next range

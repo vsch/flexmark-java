@@ -961,6 +961,54 @@ public class SegmentBuilderTest {
     }
 
     @Test
+    public void test_optimizersEOL3None() {
+        String input = "01234\n  56789";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveringSegmentOptimizer<BasedSequence> optimizer = new CharRecoveringSegmentOptimizer<>(PositionAnchor.NONE);
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+
+        segments.append(0, 3);
+        segments.append("34\n    ");
+        segments.append(8, 12);
+        assertEquals(escapeJavaString("SegmentBuilder{end=12, parts=[0, 3), '34\n    ', [8, 12) }"), segments.toString());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals("SegmentBuilder{end=12, parts=[0, 6), '  ', [6, 12) }", segments.toString());
+    }
+
+    @Test
+    public void test_optimizersEOL3Left() {
+        String input = "01234\n  56789";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveringSegmentOptimizer<BasedSequence> optimizer = new CharRecoveringSegmentOptimizer<>(PositionAnchor.PREVIOUS);
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+
+        segments.append(0, 3);
+        segments.append("34\n    ");
+        segments.append(8, 12);
+        assertEquals(escapeJavaString("SegmentBuilder{end=12, parts=[0, 3), '34\n    ', [8, 12) }"), segments.toString());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals("SegmentBuilder{end=12, parts=[0, 6), '  ', [6, 12) }", segments.toString());
+    }
+
+    @Test
+    public void test_optimizersEOL3Right() {
+        String input = "01234\n  56789";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveringSegmentOptimizer<BasedSequence> optimizer = new CharRecoveringSegmentOptimizer<>(PositionAnchor.NEXT);
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+
+        segments.append(0, 3);
+        segments.append("34\n    ");
+        segments.append(8, 12);
+        assertEquals(escapeJavaString("SegmentBuilder{end=12, parts=[0, 3), '34\n    ', [8, 12) }"), segments.toString());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals("SegmentBuilder{end=12, parts=[0, 6), '  ', [6, 12) }", segments.toString());
+    }
+
+    @Test
     public void test_optimizersCompound() {
         String input = "" +
                 "  line 1 \n" +
