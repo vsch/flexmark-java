@@ -1009,7 +1009,7 @@ public class SegmentBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound() {
+    public void test_optimizersCompound1() {
         String input = "" +
                 "  line 1 \n" +
                 "  line 2 \n" +
@@ -1031,7 +1031,9 @@ public class SegmentBuilderTest {
         assertEquals(escapeJavaString("SegmentBuilder{end=29, parts='    ', [2, 8), '\n    ', [12, 18), '\n', [20, 20), '\n    ', [23, 29), '\n' }"), segments.toString());
 
         segments.optimizeFor(sequence, optimizer);
-        assertEquals(escapeJavaString("SegmentBuilder{end=30, parts='  ', [0, 8), '\n  ', [10, 18), [19, 21), '  ', [21, 30) }"), segments.toString());
+//        assertEquals(escapeJavaString("SegmentBuilder{end=30, parts='  ', [0, 8), '\n  ', [10, 18), [19, 21), '  ', [21, 30) }"), segments.toString());
+
+        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", segments.toStringWithRanges(input));
 
         segments.buildSequence(sequence, builder);
         assertEquals("" +
@@ -1040,6 +1042,46 @@ public class SegmentBuilderTest {
                 "\n" +
                 "    line 3\n" +
                 "", builder.toString());
+
+        assertEquals(escapeJavaString("SegmentBuilder{end=30, parts='  ', [0, 8), [9, 10), '  ', [10, 18), [19, 21), '  ', [21, 30) }"), segments.toString());
+    }
+
+    @Test
+    public void test_optimizersCompound2() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveringSegmentOptimizer<BasedSequence> optimizer = new CharRecoveringSegmentOptimizer<>(PositionAnchor.NONE);
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) segments.append("  ");
+            segments.append(trim.getSourceRange());
+            segments.append("\n");
+        }
+        assertEquals(escapeJavaString("SegmentBuilder{end=29, parts='  ', [2, 8), '\n  ', [12, 18), '\n', [20, 20), '\n  ', [23, 29), '\n' }"), segments.toString());
+
+        segments.optimizeFor(sequence, optimizer);
+//        assertEquals(escapeJavaString("SegmentBuilder{end=30, parts='  ', [0, 8), '\n  ', [10, 18), [19, 21), '  ', [21, 30) }"), segments.toString());
+
+        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRanges(input));
+
+        segments.buildSequence(sequence, builder);
+        assertEquals("" +
+                "  line 1\n" +
+                "  line 2\n" +
+                "\n" +
+                "  line 3\n" +
+                "", builder.toString());
+
+        assertEquals(escapeJavaString("SegmentBuilder{end=30, parts=[0, 8), [9, 18), [19, 30) }"), segments.toString());
     }
 
     @Test

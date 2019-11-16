@@ -45,7 +45,7 @@ public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implemen
             char c = base.charAt(baseOffset + i);
             char c1 = chars.charAt(charsOffset + i);
 
-            if (c1 != c) return i + charsOffset + 1;
+            if (c1 != c) return charsOffset + i + 1;
         }
         return charsOffset;
     }
@@ -166,17 +166,48 @@ public class CharRecoveringSegmentOptimizer<S extends IRichSequence<S>> implemen
 
         text = text.substring(matchedPrev, textLength - matchedNext);
 
+        Range eolRange = null;
+
+        if (prevRange != null && !chars.subSequence(prevRange).endsWithEOL() && text.startsWith("\n")) {
+            // see if there is an EOL between prevRange end and nextRange start with only spaces between them
+            int eol = chars.endOfLine(prevRange.getEnd());
+            if (eol < charsLength && chars.subSequence(prevRange.getEnd(), eol).isBlank()) {
+                // we have an EOL
+                eolRange = Range.ofLength(eol, 1);
+                text = text.substring(1);
+
+                // need to insert EOL range between prevRange and text
+            }
+        }
+
         if (prevRange != null && nextRange != null && text.isEmpty() && prevRange.isAdjacentBefore(nextRange)) {
             // remove the string and next range
             prevRange = prevRange.expandToInclude(nextRange);
             position.set(-1, prevRange);
             position.remove(0, 2);
+            if (eolRange != null) {
+                position.add(1, eolRange);
+            }
         } else {
-            if (text.isEmpty()) position.remove();
-            else position.set(text);
+            if (text.isEmpty()) {
+                if (eolRange != null) {
+                    position.set(eolRange);
+                    eolRange = null;
+                } else {
+                    position.remove();
+                }
+            } else {
+                position.set(text);
+            }
 
-            if (prevRange != null) position.set(-1, prevRange);
-            else if (originalPrev != null) position.remove(-1);
+            if (prevRange != null) {
+                position.set(-1, prevRange);
+                if (eolRange != null) {
+                    position.add(eolRange);
+                }
+            } else if (originalPrev != null) {
+                position.remove(-1);
+            }
 
             if (nextRange != null) position.set(1, nextRange);
             else if (originalNext != null) position.remove(1);

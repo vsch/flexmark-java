@@ -2,11 +2,13 @@ package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.rmi.CORBA.Util;
 import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
@@ -365,6 +367,28 @@ public class SegmentBuilder {
                 builder.add(baseSequence.subSequence(((Range) part).getStart(), ((Range) part).getEnd()));
             }
         }
+    }
+
+    @NotNull
+    public String toStringWithRanges(@NotNull CharSequence chars) {
+        BasedSequence baseSequence = BasedSequence.of(chars);
+
+        if (myEndOffset > baseSequence.length()) {
+            throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + baseSequence.length());
+        }
+
+        StringBuilder out = new StringBuilder();
+
+        for (Object part : myParts.getList()) {
+            if (part instanceof String) {
+                out.append((String) part);
+            } else {
+                assert part instanceof Range;
+                out.append("⟦").append(baseSequence.subSequence(((Range) part).getStart(), ((Range) part).getEnd()).toVisibleWhitespaceString()).append("⟧");
+            }
+        }
+
+        return out.toString();
     }
 
     /**
