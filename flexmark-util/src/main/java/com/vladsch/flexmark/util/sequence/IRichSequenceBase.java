@@ -11,7 +11,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -659,15 +658,16 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     // @formatter:on
 
     // @formatter:off
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter)                                                                          { return splitList(delimiter, 0, 0, null); }
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)     { return splitList(delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags)                                                    { return splitList(delimiter, limit, flags, null); }
-    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                { return splitList(delimiter, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter)                                                                          { return SequenceUtils.splitList((T)this, delimiter, 0, 0, null); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)     { return SequenceUtils.splitList((T)this, delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags)                                                    { return SequenceUtils.splitList((T)this, delimiter, limit, flags, null); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                { return SequenceUtils.splitList((T)this, delimiter, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
 
     // NOTE: these default to including delimiters as part of split item
-    @NotNull @Override final public List<T> splitListEOL()                                                                                                      { return splitList(SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS, null); }
-    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims)                                                                                 { return splitList(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
-    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims, @Nullable CharPredicate trimChars)                                              { return splitList(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public List<T> splitListEOL()                                                                                                      { return SequenceUtils.splitList((T)this, SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS, null); }
+    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims)                                                                                 { return SequenceUtils.splitList((T)this, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
+    @NotNull @Override final public List<T> splitListEOL(boolean includeDelims, @Nullable CharPredicate trimChars)                                              { return SequenceUtils.splitList((T)this, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars)                 { return SequenceUtils.splitList((T) this, delimiter, limit, flags, trimChars); }
 
     @NotNull @Override final public T[] splitEOL()                                                                                                              { return split(SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS,null); }
     @NotNull @Override final public T[] splitEOL(boolean includeDelims)                                                                                         { return split(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
@@ -675,61 +675,8 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter)                                                                                  { return split(delimiter, 0, 0, null); }
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)             { return split(delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags)                                                            { return split(delimiter, limit, flags, null); }
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars)                         { return SequenceUtils.splitList((T)this, delimiter, limit, flags, trimChars).toArray(emptyArray()); }
     // @formatter:on
-
-    @NotNull
-    @Override
-    final public T[] split(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
-        return splitList(delimiter, limit, flags, trimChars).toArray(emptyArray());
-    }
-
-    @NotNull
-    final public List<T> splitList(@NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
-        if (trimChars == null) trimChars = WHITESPACE_SET;
-        else flags |= SPLIT_TRIM_PARTS;
-
-        if (limit < 1) limit = Integer.MAX_VALUE;
-
-        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
-        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
-        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
-        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
-        ArrayList<T> items = new ArrayList<>();
-
-        int lastPos = 0;
-        int length = length();
-        if (limit > 1) {
-            while (lastPos < length) {
-                int pos = indexOf(delimiter, lastPos);
-                if (pos < 0) break;
-
-                if (lastPos < pos || !skipEmpty) {
-                    T item = subSequence(lastPos, pos + includeDelimiter);
-                    if (trimParts) item = item.trim(trimChars);
-                    if (!item.isEmpty() || !skipEmpty) {
-                        items.add(item);
-                        if (includeDelimiterParts) {
-                            items.add(subSequence(pos, pos + delimiter.length()));
-                        }
-                        if (items.size() >= limit - 1) {
-                            lastPos = pos + 1;
-                            break;
-                        }
-                    }
-                }
-                lastPos = pos + 1;
-            }
-        }
-
-        if (lastPos < length) {
-            T item = subSequence(lastPos, length);
-            if (trimParts) item = item.trim(trimChars);
-            if (!item.isEmpty() || !skipEmpty) {
-                items.add(item);
-            }
-        }
-        return items;
-    }
 
     // @formatter:off
     @NotNull @Override final public T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper) {return appendTo(out, charMapper, 0, length());}
@@ -764,28 +711,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return (T) this;
     }
 
-    @NotNull
-    @Override
-    final public int[] indexOfAll(@NotNull CharSequence s) {
-        int length = s.length();
-        if (length == 0) return SequenceUtils.EMPTY_INDICES;
-        int pos = indexOf(s);
-        if (pos == -1) return SequenceUtils.EMPTY_INDICES;
-
-        int iMax = 0;
-        int[] indices = new int[32];
-        indices[iMax++] = pos;
-
-        while (true) {
-            pos = indexOf(s, pos + length);
-            if (pos == -1) break;
-            if (indices.length <= iMax) indices = SequenceUtils.expandTo(indices, iMax + 1, 32);
-            indices[iMax++] = pos;
-        }
-        return SequenceUtils.truncateTo(indices, iMax);
-    }
-
     // @formatter:off
+    @NotNull @Override final public int[] indexOfAll(@NotNull CharSequence s) { return SequenceUtils.indexOfAll(this, s);}
+
     @Override @NotNull final public T appendEOL() { return suffixWith(SequenceUtils.EOL); }
     @Override @NotNull final public T suffixWithEOL() { return suffixWith(SequenceUtils.EOL); }
     @Override @NotNull final public T prefixWithEOL() { return prefixWith(SequenceUtils.EOL); }
@@ -897,40 +825,8 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return segments.toSequence();
     }
 
-    @Override
-    final public int columnAtIndex(int index) {
-        int lineStart = lastIndexOfAny(SequenceUtils.ANY_EOL_SET, index);
-        return index - (lineStart == -1 ? 0 : lineStart + eolStartLength(lineStart));
-    }
-
-    @NotNull
-    @Override
-    final public Pair<Integer, Integer> lineColumnAtIndex(int index) {
-        int iMax = length();
-        if (index < 0 || index > iMax) {
-            throw new IllegalArgumentException("Index: " + index + " out of range [0, " + iMax + "]");
-        }
-
-        boolean hadCr = false;
-        int line = 0;
-        int col = 0;
-        for (int i = 0; i < index; i++) {
-            char c1 = charAt(i);
-            if (c1 == '\r') {
-                col = 0;
-                line++;
-                hadCr = true;
-            } else if (c1 == '\n') {
-                if (!hadCr) {
-                    line++;
-                }
-                col = 0;
-                hadCr = false;
-            } else {
-                col++;
-            }
-        }
-
-        return new Pair<>(line, col);
-    }
+    // @formatter:off
+    @Override final public int columnAtIndex(int index) { return SequenceUtils.columnAtIndex(this, index);}
+    @NotNull @Override final public Pair<Integer, Integer> lineColumnAtIndex(int index) {return SequenceUtils.lineColumnAtIndex(this, index);}
+    // @formatter:on
 }

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import static com.vladsch.flexmark.util.Utils.rangeLimit;
 
+@SuppressWarnings("unchecked")
 public interface SequenceUtils {
     String EOL = "\n";
     String SPACE = " ";
@@ -80,6 +82,55 @@ public interface SequenceUtils {
     Map<Character, String> visibleSpacesMap = getVisibleSpacesMap();
 
     int[] EMPTY_INDICES = { };
+
+    @NotNull
+    static <T extends CharSequence> T subSequence(@NotNull T thizz, int startIndex) {
+        return (T) thizz.subSequence(startIndex, thizz.length());
+    }
+
+    /**
+     * Get a portion of this sequence selected by range
+     *
+     * @param range range to get, coordinates offset form start of this sequence
+     * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
+     */
+    @NotNull
+    static <T extends CharSequence> T subSequence(@NotNull T thizz, @NotNull Range range) {
+        return range.isNull() ? (T) thizz : (T) thizz.subSequence(range.getStart(), range.getEnd());
+    }
+
+    /**
+     * Get a portion of this sequence before one selected by range
+     *
+     * @param range range to get, coordinates offset form start of this sequence
+     * @return sequence whose contents come before the selected range, if range.isNull() then null
+     */
+    @Nullable
+    static <T extends CharSequence> T subSequenceBefore(@NotNull T thizz, @NotNull Range range) {
+        return range.isNull() ? null : (T) thizz.subSequence(0, range.getStart());
+    }
+
+    /**
+     * Get a portion of this sequence after one selected by range
+     *
+     * @param range range to get, coordinates offset form start of this sequence
+     * @return sequence whose contents come after the selected range, if range.isNull() then null
+     */
+    @Nullable
+    static <T extends CharSequence> T subSequenceAfter(@NotNull T thizz, @NotNull Range range) {
+        return range.isNull() ? null : (T) thizz.subSequence(range.getEnd(), thizz.length());
+    }
+
+    /**
+     * Get a portions of this sequence before and after one selected by range
+     *
+     * @param range range to get, coordinates offset form start of this sequence
+     * @return sequence whose contents come before and after the selected range, if range.isNull() then pair of nulls
+     */
+    @NotNull
+    static <T extends CharSequence> Pair<T, T> subSequenceBeforeAfter(@NotNull T thizz, Range range) {
+        return Pair.of(subSequenceBefore(thizz, range), subSequenceAfter(thizz, range));
+    }
 
     // @formatter:off
     static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s)                                                 { return indexOf(thizz, s, 0, Integer.MAX_VALUE); }
@@ -264,7 +315,8 @@ public interface SequenceUtils {
         return 4 - (column % 4);
     }
 
-    static int[] expandTo(int[] indices, int length, int step) {
+    @NotNull
+    static int[] expandTo(@NotNull int[] indices, int length, int step) {
         int remainder = length & step;
         int next = length + (remainder != 0 ? step : 0);
         if (indices.length < next) {
@@ -275,13 +327,34 @@ public interface SequenceUtils {
         return indices;
     }
 
-    static int[] truncateTo(int[] indices, int length) {
+    @NotNull
+    static int[] truncateTo(@NotNull int[] indices, int length) {
         if (indices.length > length) {
             int[] replace = new int[length];
             System.arraycopy(indices, 0, replace, 0, length);
             return replace;
         }
         return indices;
+    }
+
+    @NotNull
+    static int[] indexOfAll(@NotNull CharSequence thizz, @NotNull CharSequence s) {
+        int length = s.length();
+        if (length == 0) return SequenceUtils.EMPTY_INDICES;
+        int pos = indexOf(thizz, s);
+        if (pos == -1) return SequenceUtils.EMPTY_INDICES;
+
+        int iMax = 0;
+        int[] indices = new int[32];
+        indices[iMax++] = pos;
+
+        while (true) {
+            pos = indexOf(thizz, s, pos + length);
+            if (pos == -1) break;
+            if (indices.length <= iMax) indices = expandTo(indices, iMax + 1, 32);
+            indices[iMax++] = pos;
+        }
+        return truncateTo(indices, iMax);
     }
 
     // TEST:
@@ -475,6 +548,33 @@ public interface SequenceUtils {
         int index = lastIndexOfAnyNot(thizz, chars, startIndex, fromIndex);
         return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
     }
+
+    // @formatter:off
+    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, @NotNull CharPredicate chars)                         { return subSequence(thizz, trimStartRange(thizz, 0, chars)); }
+    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, @NotNull CharPredicate chars)                     { return trimmedStart(thizz, 0, chars); }
+    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, @NotNull CharPredicate chars)                           { return trimEnd(thizz, 0, chars); }
+    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, @NotNull CharPredicate chars)                       { return trimmedEnd(thizz, 0, chars); }
+    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, @NotNull CharPredicate chars)                              { return trim(thizz, 0, chars); }
+    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, @NotNull CharPredicate chars)                  { return trimmed(thizz, 0, chars); }
+    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, int keep)                                             { return trimStart(thizz, keep, WHITESPACE_SET); }
+    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, int keep)                                         { return trimmedStart(thizz, keep, WHITESPACE_SET); }
+    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, int keep)                                               { return trimEnd(thizz, keep, WHITESPACE_SET); }
+    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, int keep)                                           { return trimmedEnd(thizz, keep, WHITESPACE_SET); }
+    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, int keep)                                                  { return trim(thizz, keep, WHITESPACE_SET); }
+    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, int keep)                                      { return trimmed(thizz, keep, WHITESPACE_SET); }
+    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz)                                                       { return trimStart(thizz, 0, WHITESPACE_SET); }
+    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz)                                                   { return trimmedStart(thizz, 0, WHITESPACE_SET); }
+    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz)                                                         { return trimEnd(thizz, 0, WHITESPACE_SET); }
+    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz)                                                     { return trimmedEnd(thizz, 0, WHITESPACE_SET); }
+    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz)                                                            { return trim(thizz, 0, WHITESPACE_SET); }
+    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz)                                                { return trimmed(thizz, 0, WHITESPACE_SET); }
+    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, int keep, @NotNull CharPredicate chars)               { return subSequence(thizz, trimStartRange(thizz, keep, chars)); }
+    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, int keep, @NotNull CharPredicate chars)           { return subSequenceBefore(thizz, trimStartRange(thizz, keep, chars)); }
+    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, int keep, @NotNull CharPredicate chars)                 { return subSequence(thizz, trimEndRange(thizz, keep, chars)); }
+    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, int keep, @NotNull CharPredicate chars)             { return subSequenceAfter(thizz, trimEndRange(thizz, keep, chars)); }
+    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, int keep, @NotNull CharPredicate chars)                    { return subSequence(thizz, trimRange(thizz, keep, chars)); }
+    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, int keep, @NotNull CharPredicate chars)        { return subSequenceBeforeAfter(thizz, trimRange(thizz, keep, chars)); }
+    // @formatter:on
 
     // @formatter:off
     static Range trimStartRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)  { return trimStartRange(thizz, 0, chars);}
@@ -676,6 +776,30 @@ public interface SequenceUtils {
         return eolLength == 0 ? Range.NULL : Range.of(eolStart, eolStart + eolLength);
     }
 
+    @NotNull
+    static <T extends CharSequence> T trimEOL(@NotNull T thizz) {
+        int eolLength = eolEndLength(thizz);
+        return eolLength > 0 ? (T) thizz.subSequence(0, thizz.length() - eolLength) : (T) thizz;
+    }
+
+    @Nullable
+    static <T extends CharSequence> T trimmedEOL(@NotNull T thizz) {
+        int eolLength = eolEndLength(thizz);
+        return eolLength > 0 ? (T) thizz.subSequence(thizz.length() - eolLength, thizz.length()) : null;
+    }
+
+    @Nullable
+    static <T extends CharSequence> T trimTailBlankLines(@NotNull T thizz) {
+        Range range = trailingBlankLinesRange(thizz);
+        return range.isNull() ? (T) thizz : (T) subSequenceBefore(thizz, range);
+    }
+
+    @Nullable
+    static <T extends CharSequence> T trimLeadBlankLines(@NotNull T thizz) {
+        Range range = leadingBlankLinesRange(thizz);
+        return range.isNull() ? (T) thizz : subSequenceAfter(thizz, range);
+    }
+
     // @formatter:off
     @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz)                                   { return leadingBlankLinesRange(thizz, SequenceUtils.EOL_SET, 0, Integer.MAX_VALUE); }
     @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int startIndex)                   { return leadingBlankLinesRange(thizz, SequenceUtils.EOL_SET, startIndex, Integer.MAX_VALUE); }
@@ -779,51 +903,107 @@ public interface SequenceUtils {
     static boolean startsWithWhitespace(@NotNull CharSequence thizz)                                            { return startsWith(thizz, SequenceUtils.WHITESPACE_SET); }
     // @formatter:on
 
-//    @NotNull
-//    static <T extends CharSequence> List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
-//        if (trimChars == null) trimChars = WHITESPACE_SET;
-//        else flags |= SPLIT_TRIM_PARTS;
-//
-//        if (limit < 1) limit = Integer.MAX_VALUE;
-//
-//        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
-//        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
-//        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
-//        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
-//        ArrayList<T> items = new ArrayList<>();
-//
-//        int lastPos = 0;
-//        int length = thizz.length();
-//        if (limit > 1) {
-//            while (lastPos < length) {
-//                int pos = indexOf(thizz, delimiter, lastPos);
-//                if (pos < 0) break;
-//
-//                if (lastPos < pos || !skipEmpty) {
-//                    T item = thizz.subSequence(lastPos, pos + includeDelimiter);
-//                    if (trimParts) item = trim(item, trimChars);
-//                    if (!item.isEmpty() || !skipEmpty) {
-//                        items.add(item);
-//                        if (includeDelimiterParts) {
-//                            items.add(thizz.subSequence(pos, pos + delimiter.length()));
-//                        }
-//                        if (items.size() >= limit - 1) {
-//                            lastPos = pos + 1;
-//                            break;
-//                        }
-//                    }
-//                }
-//                lastPos = pos + 1;
-//            }
-//        }
-//
-//        if (lastPos < length) {
-//            T item = thizz.subSequence(lastPos, length);
-//            if (trimParts) item = item.trim(trimChars);
-//            if (!item.isEmpty() || !skipEmpty) {
-//                items.add(item);
-//            }
-//        }
-//        return items;
-//    }
+    // @formatter:off
+    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter)                                                                       { return splitList(thizz, delimiter, 0, 0, null); }
+    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)  { return splitList(thizz, delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags)                                                 { return splitList(thizz, delimiter, limit, flags, null); }
+    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)             { return splitList(thizz, delimiter, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+
+    // NOTE: these default to including delimiters as part of split item
+    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz)                                                                                                     { return splitList(thizz, SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS, null); }
+    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz, boolean includeDelims)                                                                              { return splitList(thizz, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
+    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz, boolean includeDelims, @Nullable CharPredicate trimChars)                                           { return splitList(thizz, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+
+    static <T extends CharSequence> @NotNull T[] splitEOL(@NotNull T thizz, T[] emptyArray)                                                                                                           { return split(thizz, emptyArray, SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS,null); }
+    static <T extends CharSequence> @NotNull T[] splitEOL(@NotNull T thizz, T[] emptyArray, boolean includeDelims)                                                                                    { return split(thizz, emptyArray, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                   { return split(thizz, emptyArray, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter)                                                                             { return split(thizz, emptyArray, delimiter, 0, 0, null); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)        { return split(thizz, emptyArray, delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, int flags)                                                       { return split(thizz, emptyArray, delimiter, limit, flags, null); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars)                    { return splitList((T)thizz, delimiter, limit, flags, trimChars).toArray(emptyArray);}
+    // @formatter:on
+
+    @SuppressWarnings("unchecked")
+    @NotNull
+    static <T extends CharSequence> List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
+        if (trimChars == null) trimChars = WHITESPACE_SET;
+        else flags |= SPLIT_TRIM_PARTS;
+
+        if (limit < 1) limit = Integer.MAX_VALUE;
+
+        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
+        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
+        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
+        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
+        ArrayList<T> items = new ArrayList<>();
+
+        int lastPos = 0;
+        int length = thizz.length();
+        if (limit > 1) {
+            while (lastPos < length) {
+                int pos = indexOf(thizz, delimiter, lastPos);
+                if (pos < 0) break;
+
+                if (lastPos < pos || !skipEmpty) {
+                    T item = (T) thizz.subSequence(lastPos, pos + includeDelimiter);
+                    if (trimParts) item = trim(item, trimChars);
+                    if (!isEmpty(item) || !skipEmpty) {
+                        items.add(item);
+                        if (includeDelimiterParts) {
+                            items.add((T) thizz.subSequence(pos, pos + delimiter.length()));
+                        }
+                        if (items.size() >= limit - 1) {
+                            lastPos = pos + 1;
+                            break;
+                        }
+                    }
+                }
+                lastPos = pos + 1;
+            }
+        }
+
+        if (lastPos < length) {
+            T item = (T) thizz.subSequence(lastPos, length);
+            if (trimParts) item = trim(item, trimChars);
+            if (!isEmpty(item) || !skipEmpty) {
+                items.add(item);
+            }
+        }
+        return items;
+    }
+
+    static int columnAtIndex(@NotNull CharSequence thizz, int index) {
+        int lineStart = lastIndexOfAny(thizz, SequenceUtils.ANY_EOL_SET, index);
+        return index - (lineStart == -1 ? 0 : lineStart + eolStartLength(thizz, lineStart));
+    }
+
+    @NotNull
+    static Pair<Integer, Integer> lineColumnAtIndex(@NotNull CharSequence thizz, int index) {
+        int iMax = thizz.length();
+        if (index < 0 || index > iMax) {
+            throw new IllegalArgumentException("Index: " + index + " out of range [0, " + iMax + "]");
+        }
+
+        boolean hadCr = false;
+        int line = 0;
+        int col = 0;
+        for (int i = 0; i < index; i++) {
+            char c1 = thizz.charAt(i);
+            if (c1 == '\r') {
+                col = 0;
+                line++;
+                hadCr = true;
+            } else if (c1 == '\n') {
+                if (!hadCr) {
+                    line++;
+                }
+                col = 0;
+                hadCr = false;
+            } else {
+                col++;
+            }
+        }
+
+        return new Pair<>(line, col);
+    }
 }
