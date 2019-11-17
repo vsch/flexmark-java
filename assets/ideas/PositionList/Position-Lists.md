@@ -108,22 +108,24 @@ element. The span can only become 1 if `set(0)` is used on this position.
 Anchor of the position affects the computation of absolute list index for operations through the
 position and how list modifications affect the position's internal index.
 
-For `PREVIOUS` anchored position, `previousIndex()` will always return the same index,
-regardless of span. `getIndex()` delta is always 0 regardless of span. `nextIndex()` delta is 0
-if span is 0 and +1 if span is 1.
+For `PREVIOUS` anchored position, `getPreviousIndex()` will always return the same index,
+regardless of span. `getIndex()` delta is always 0 regardless of span. `getNextIndex()` delta is
+0 if span is 0 and +1 if span is 1.
 
-For `NEXT` anchored position, `nextIndex()` will always return the same index, regardless of
-span. `getIndex()` will have delta of -1 for span 1 and 0 for span 0. `previousIndex()` delta is
-always -1.
+For `NEXT` anchored position, `getNextIndex()` will always return the same index, regardless of
+span. `getIndex()` will have delta of -1 for span 1 and 0 for span 0. `getPreviousIndex()` delta
+is always -1.
 
 For `CURRENT` anchored positions, `getIndex()` will always return the same index, regardless of
-span. `previousIndex()` will always return a delta of 0 while `nextIndex()` will have a delta of
-+1 for span of 1 and 0 when span is 0.
+span. `getPreviousIndex()` will always return a delta of 0 while `getNextIndex()` will have a
+delta of +1 for span of 1 and 0 when span is 0.
 
 ####  `PositionAnchor.CURRENT`
 
 Tracks a specific element at an index. It is anchored to an element or the index in the list
 where the element would be if it existed.
+
+For list size N, `getIndex()` will be in the range [0, N) regardless of span.
 
 Adding elements at or before the position will shift the position down in the list.
 
@@ -138,9 +140,10 @@ if no previous element existed when it was instantiated (ie. at position 0) or w
 later.
 
 The index of this position reflects the position in the list previous to the position from which
-it was instantiated and the index is valid if span is 1 or index is >0. Relative offset <0 will
-be increased by 1 if span is 0 to reflect non-existence of current element since 0 and -1 refer
-to the same index in the list.
+it was instantiated.
+
+For list size N, `getIndex()` will be in the range [-1, N) when span is 0 and [0, N) when span
+is 1.
 
 This anchor position type is used for iterating positions in reverse since it ignores insertions
 into the list immediately before the position from which it was instantiated.
@@ -150,9 +153,8 @@ into the list immediately before the position from which it was instantiated.
 Tracks the next element to the position from which it was instantiated. The span will be 0 if no
 next element existed when it was instantiated (ie. at end of the list) or was removed later.
 
-The index of this position reflects the position in the list next after the position from which
-it was instantiated. Its index is valid if span is 1 or index is <list.size(). Relative offset
-\>0 will be reduced by 1 if span is 0 to reflect removal of next element.
+For list size N, `getIndex()` will be in the range \[0, N] when span is 0 and \[0, N) when span
+is 1.
 
 This anchor position type is used for iterating positions since it ignores insertions into the
 list immediately after the current position.
@@ -182,8 +184,8 @@ iteration.
 One note of caution. Repeated add operations after the current position will cause the elements
 to be inserted in reverse order.
 
-If the list is `{ 1, 2, 3, 4, 5 }` and current position is at index 2, then `add(-1)`, `add(-2)`
-and `add(-3)` will result in the list being `{ 1, 2, 3, -3, -2, -1, 4, 5 }`
+If the list is `{ 1, 2, 3, 4, 5 }` and current position `getIndex()` is 2, then `add(-1)`,
+`add(-2)` and `add(-3)` will result in the list being `{ 1, 2, 3, -3, -2, -1, 4, 5 }`
 
 To avoid this use `nextPosition()` from current position and insert multiple times at offset -1
 relative to that position. Since `NEXT` anchored position will always reflect the next element
@@ -191,9 +193,11 @@ at the time of its instantiation, it will always perform the insertion at the ta
 elements' range. The following will result in `{ 1, 2, 3, -1, -2, -3, 4, 5 }`.
 
 ```java
+package com.vladsch.flexmark.java.samples;
+
 class Sample {
    void sample(Position<Integer> current) {
-        Position<Integer> next = current.getNextPosition();
+        Position<Integer> next = current.nextPosition();
         next.add(-1, -1);
         next.add(-1, -2);
         next.add(-1, -3);
@@ -201,16 +205,16 @@ class Sample {
 }
 ```
 
-Similarly, `Position.previousIndex()` can be used to always insert elements at the head of the
-inserted range by using the returned previous position to add elements after its current
+Similarly, `Position.getPreviousIndex()` can be used to always insert elements at the head of
+the inserted range by using the returned previous position to add elements after its current
 position.
 
-#### add() - Insert After Current Position
+#### add() - Insert After current element
 
 To mimic the behavior of Java list's `add()`, position's add operation will always add an
-element at `nextIndex()`, effectively inserting an element after the current position.
+element at `getNextIndex()`, effectively inserting an element after the current position.
 
-#### add(offset, value) - Insert Before/After Current Position
+#### add(offset, value) - Insert Before/After current element
 
 For offsets <0 will add the element before the current position, with -1 being immediately
 before the current element, with each decrease in offset moving further towards index 0 in the
@@ -222,7 +226,7 @@ the current element, with each increase in offset moving further towards the end
 Offset of 0 is special. If the position has a span of 1 then the operation will fail because an
 element already exists and it makes no sense to add to an existing element. If span is 0 then
 this will add the element in the list at index `getIndex()` of the position and set the position
-span to 1.
+span to 1, while keeping its position in the list unchanged.
 
 #### set(value) - Set current element value
 
@@ -237,7 +241,7 @@ corresponding effects on positions into the list. The position which is has perf
 modification will not change its index since it still reflects the next/previous/current
 position of the element at its instantiation.
 
-#### set(offset, value) - Set Previous/Next Element Value
+#### set(offset, value) - Set Previous/Next element value
 
 For offsets <0 will set the element before the current position, with -1 being immediately
 before the current element, with each decrease in offset moving further towards index 0 in the
@@ -250,12 +254,12 @@ Offset of 0 is special and behaves the same as `set(value)`. If the span is 1 th
 the value of the element in the list. If span is 0, will insert the element in the list and set
 the position's span to 1, while keeping its position in the list unchanged.
 
-#### remove() - Remove current element from list
+#### remove() - Remove current element
 
 If the span is 0 then this operation has no effect on the list because there is no element to
 remove. If the span is 1 then the element is removed from the list and span is set to 0.
 
-#### remove(offset) - Remove Previous/Next Element
+#### remove(offset) - Remove Previous/Next element
 
 For offsets <0 will remove the element before the current position, with -1 being immediately
 before the current element, with each decrease in offset moving further towards index 0 in the
@@ -285,14 +289,14 @@ The index of the position making the changes will reflect whether the index of i
 element changes its anchor position. In all cases `remove(0, 1)` have the same effect as
 `remove()` and `remove(0)`.
 
-#### get() - Get current element value from list
+#### get() - Get current element value
 
 If span is 0 will throw an exception since there is no current element for the position.
 
 If span is 1 will return the value of the element in the list at index `getIndex()` of this
 position.
 
-#### get(offset) - Get Previous/Next element value from list
+#### get(offset) - Get Previous/Next element value
 
 For offsets <0 will get the element before the current position, with -1 being immediately
 before the current element, with each decrease in offset moving further towards index 0 in the
@@ -306,3 +310,42 @@ since there is no current element for the position.
 
 If span is 1 will return the value of the element in the list at index `getIndex()` of this
 position.
+
+#### getPreviousIndex(), getIndex(), getNextIndex() - get indices
+
+For `PREVIOUS` anchored position, `getPreviousIndex()` will always return the same index,
+regardless of span. `getIndex()` delta is always 0 regardless of span. `getNextIndex()` delta is
+0 if span is 0 and +1 if span is 1.
+
+For `NEXT` anchored position, `getNextIndex()` will always return the same index, regardless of
+span. `getIndex()` will have delta of -1 for span 1 and 0 for span 0. `getPreviousIndex()` delta
+is always -1.
+
+For `CURRENT` anchored positions, `getIndex()` will always return the same index, regardless of
+span. `getPreviousIndex()` will always return a delta of 0 while `getNextIndex()` will have a
+delta of +1 for span of 1 and 0 when span is 0.
+
+#### getPrevious(), getNext() - get previous/next positions
+
+Use these to get previous/next positions to this position with corresponding index and anchor
+types, `getPreviousIndex()` index with `PREVIOUS` anchor and `getNextIndex()` index and `NEXT`
+anchor respectively.
+
+In all cases the methods succeed if it is possible to return such a position at lease with a
+span of 0. Use `hasNextPosition()` and `hasPreviousPosition()` to make sure or use the `OrNull`
+versions which return null if no such position is possible.
+
+* `CURRENT` anchored position always has next and previous positions
+  * at index 0 of an empty list then next index will be 0 and span 0, while previous index will
+    be -1 and span of 0
+  * at index 0 and span 1, next index is 1 (which may be same as size()) and span of 1 if next
+    index is less than size() and 0 otherwise. Previous index will be -1 and span of 0.
+  * at index of size() with span of 0, next index will be size() and span of 0, while previous
+    will be size()-1 and span of 1 if size()>0.
+  * at index of size()-1 with span of 1, next will have index size() and span of 0, while
+    previous will have index size()-2 and span of 1 if list size is >1 or 0 otherwise.
+
+* `PREVIOUS` always has a next position since it may be span 0 and index of size() of the list
+
+* `NEXT` always has a previous position since it may be span 0 and index of -1.
+
