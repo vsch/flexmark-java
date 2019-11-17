@@ -9,7 +9,8 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
-- [Next 0.59.50](#next-05950)
+- [Next 0.59.52](#next-05952)
+- [0.59.50](#05950)
 - [0.59.48](#05948)
 - [0.59.46](#05946)
 - [0.59.44](#05944)
@@ -179,7 +180,7 @@ Next
       be visited.
 * [ ] Fix: change `BasedSequenceImpl` to use `Range` instead of `startOffset` and `endOffset`
 
-Next 0.59.50
+Next 0.59.52
 ------------
 
 * [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
@@ -212,34 +213,40 @@ Next 0.59.50
   * [x] Add: `MarkdownParagraph` to utils to wrap paragraph text.
     * [ ] Fix; `MarkdownParagraph` to use `SegmentBuilder` for accumulating wrapped text.
     * [ ] Test: position marker preservation with direction type
-  * [x] Add: `PositionList` and `Position` classes to represent list and position in that list
-        which allow modification, deletion, insertions while iterating over the list. Multiple
-        position instances to different indexed elements can be created and all will be updated
-        to reflect changes in their element's position.
-    * [x] Fix: cleanup naming conventions in new classes.
-    * [x] Fix: rewrite implementation and optimizer using `PositionList` and `Position` instead
-          of hand rolled code.
-    * [x] Fix: make `Position` handle insert/delete index change invalidation instead of
-          `PositionList`
-    * [x] Add: add anchor for position to allow next/prev anchoring
-    * [x] Add: positions are now have iterable from position to end/start of list, or from next
-          to end/previous to start.
-    * [x] Fix: replace flags and position anchor field with byte flags.
 * [ ] Fix: remove skeleton code for offset tracking through base sequence manipulations. No
       longer needed. This will be done by analysis of original vs. resulting based sequence
       offsets.
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
-* [x] Fix: move spec resource files to `flexmark-test-specs` resources. Any modules needing the spec have to add a test dependency on this module.
-* [x] Break: try to reduce footprint of `IRichSequence` and `IRichSequenceBase` by making getting
+
+0.59.50
+-------
+
+* Fix: move spec resource files to `flexmark-test-specs` resources. Any modules needing the spec
+  have to add a test dependency on this module.
+* Break: try to reduce footprint of `IRichSequence` and `IRichSequenceBase` by making getting
   rid off some overloads with default params.
   * Add: factor out bulk of `IRichSequenceBase` to `SequenceUtils` so functionality could be
     used on any `CharSequence`.
   * Fix: change all character inclusion based functions to use `CharPredicate`
-* [x] Add: `CharPredicate` to consolidate all character inclusion testing via predicates.
+* Add: `CharPredicate` to consolidate all character inclusion testing via predicates.
 * Fix: make `BaseSequence.of` use plain based sequences and not managed for now. Issues when
-  mutable sequences are passed as parameters make it unstable. Have to use char backed sequence
-  for managed and that will create too much overhead if used for all cases.
+  mutable sequences are passed as parameters make it unstable. Have to use or immutable char
+  sequence or char backed sequence for managed and that will create too much overhead if used
+  for all cases.
+* Add: `PositionList` and `Position` classes to represent list and position in that list which
+  allow modification, deletion, insertions while iterating over the list. Multiple position
+  instances to different indexed elements can be created and all will be updated to reflect
+  changes in their element's position.
+  * Fix: cleanup naming conventions in new classes.
+  * Fix: rewrite implementation and optimizer using `PositionList` and `Position` instead of
+    hand rolled code.
+  * Fix: make `Position` handle insert/delete index change invalidation instead of
+    `PositionList`
+  * Add: add anchor for position to allow next/prev anchoring
+  * Add: positions are now have iterable from position to end/start of list, or from next to
+    end/previous to start.
+  * Fix: replace flags and position anchor field with byte flags.
 
 0.59.48
 -------
