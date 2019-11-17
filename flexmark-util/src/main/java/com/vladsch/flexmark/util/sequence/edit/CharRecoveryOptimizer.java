@@ -6,10 +6,10 @@ import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class BasedCharsRecoverySegmentOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
+public class CharRecoveryOptimizer<S extends IRichSequence<S>> implements SegmentOptimizer<S> {
     private final PositionAnchor myAnchor;
 
-    public BasedCharsRecoverySegmentOptimizer(PositionAnchor anchor) {
+    public CharRecoveryOptimizer(PositionAnchor anchor) {
         this.myAnchor = anchor;
     }
 
