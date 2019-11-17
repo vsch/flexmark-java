@@ -21,7 +21,9 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate BACKSLASH = value -> value == '\\';
     CharPredicate HASH = value -> value == '#';
     CharPredicate SPACE_TAB = value -> value == ' ' || value == '\t';
+    CharPredicate SPACE_EOL = value -> value == ' ' || value == '\n';
     CharPredicate SPACE_TAB_NBSP = value -> value == ' ' || value == '\t' || value == '\u00A0';
+    CharPredicate SPACE_TAB_EOL = value -> value == ' ' || value == '\t' || value == '\n';
     CharPredicate ANY_EOL = value -> value == '\n' || value == '\r';
     CharPredicate WHITESPACE = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r';
     CharPredicate WHITESPACE_NBSP = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\u00A0';

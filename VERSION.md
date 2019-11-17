@@ -218,6 +218,10 @@ Next 0.59.52
       offsets.
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
+* [ ] Add: Common char sets:
+  * DECIMAL_DIGITS
+  * HEXADECIMAL_DIGITS
+  * OCTAL_DIGITS
 
 0.59.50
 -------

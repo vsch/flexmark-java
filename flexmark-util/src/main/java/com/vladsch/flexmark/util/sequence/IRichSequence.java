@@ -298,8 +298,20 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
 
     int countLeadingSpaceTab();
+
+    @Deprecated
+    default int countLeading() {
+        return countLeadingSpaceTab();
+    }
+
     int countLeadingNotSpaceTab();
     int countTrailingSpaceTab();
+
+    @Deprecated
+    default int countTrailing() {
+        return countLeadingSpaceTab();
+    }
+
     int countTrailingNotSpaceTab();
     int countOfSpaceTab();
     int countOfNotSpaceTab();
@@ -310,6 +322,11 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int countTrailingNotWhitespace();
     int countOfWhitespace();
     int countOfNotWhitespace();
+
+    @Deprecated
+    default int countOf(char c) {
+        return countOfAny(CharPredicate.anyOf(c));
+    }
 
     int countOfAny(@NotNull CharPredicate chars);
     int countOfAnyNot(@NotNull CharPredicate chars);

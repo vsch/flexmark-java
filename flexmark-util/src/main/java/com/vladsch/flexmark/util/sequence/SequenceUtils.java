@@ -31,6 +31,7 @@ public interface SequenceUtils {
     char MRK = US;       // same as US but use in code signals it being related to offset marker handling
     String LINE_SEP = Character.toString(LS);
     String SPACE_TAB = " \t";
+    String SPACE_EOL = " \n";
 
     @Deprecated
     String WHITESPACE_NO_EOL_CHARS = SPACE_TAB;
@@ -49,6 +50,8 @@ public interface SequenceUtils {
     CharPredicate EOL_SET = CharPredicate.EOL;
     CharPredicate SPACE_TAB_SET = CharPredicate.SPACE_TAB;
     CharPredicate SPACE_TAB_NBSP_SET = CharPredicate.SPACE_TAB_NBSP;
+    CharPredicate SPACE_TAB_EOL_SET = CharPredicate.SPACE_TAB_EOL;
+    CharPredicate SPACE_EOL_SET = CharPredicate.WHITESPACE;
     CharPredicate ANY_EOL_SET = CharPredicate.ANY_EOL;
     CharPredicate WHITESPACE_SET = CharPredicate.WHITESPACE;
     CharPredicate WHITESPACE_NBSP_SET = CharPredicate.WHITESPACE_NBSP;
