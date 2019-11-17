@@ -399,7 +399,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @param positionAnchor direction of interest, specifically if this sequence is the
      *                         result of typing the direction is {@link PositionAnchor#NEXT},
      *                         result of backspacing direction is {@link PositionAnchor#PREVIOUS},
-     *                         otherwise it is {@link PositionAnchor#NONE}
+     *                         otherwise it is {@link PositionAnchor#CURRENT}
      * @return based sequence which tracks offset through editing modifications
      */
     @NotNull

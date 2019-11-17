@@ -26,7 +26,7 @@ public class MarkdownParagraph {
     private @NotNull TextAlignment myAlignment = LEFT;
     boolean myKeepHardBreaks = true;
     boolean myKeepLineBreaks = false;
-    private @NotNull PositionAnchor myPositionAnchor = PositionAnchor.NONE;
+    private @NotNull PositionAnchor myPositionAnchor = PositionAnchor.CURRENT;
     private int myMarkerOffset = -1;
 
     public MarkdownParagraph(CharSequence chars) {
@@ -461,7 +461,7 @@ public class MarkdownParagraph {
                         break;
 
                     default:
-                    case NONE:
+                    case CURRENT:
                         //   if not leaning then divide around marker keeping marker in middle of padding
                         leftSpaces = markerIndex + 1;
                         break;
@@ -496,7 +496,7 @@ public class MarkdownParagraph {
                         break;
 
                     default:
-                    case NONE:
+                    case CURRENT:
                         //   if not leaning then divide around marker keeping marker in middle of kept spaces
                         leftEnd = markerIndex + 1;
                         leftStart = Math.max(0, markerIndex - count);

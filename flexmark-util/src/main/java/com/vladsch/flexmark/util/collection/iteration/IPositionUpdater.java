@@ -13,7 +13,7 @@ public interface IPositionUpdater<T, P extends IPositionHolder<T, P>> extends IP
     List<T> getList();
 
     default P getPosition(int index) {
-        return getPosition(index, PositionAnchor.NONE);
+        return getPosition(index, PositionAnchor.CURRENT);
     }
 
     P getPosition(int index, @NotNull PositionAnchor anchor);

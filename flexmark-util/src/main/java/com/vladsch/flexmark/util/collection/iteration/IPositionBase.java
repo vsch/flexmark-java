@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 import static com.vladsch.flexmark.util.collection.iteration.PositionAnchor.*;
 
 public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
-    private static final int F_NONE = 0;
+    private static final int F_CURRENT = 0;
     private static final int F_NEXT = 1;
     private static final int F_PREVIOUS = 2;
     private static final int F_VALID = 4;
@@ -25,24 +25,43 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         myParent = parent;
         myList = myParent.getList();
         myIndex = index;
-        myFlags = (byte) (F_VALID | (anchor == PREVIOUS ? F_PREVIOUS : anchor == NEXT ? F_NEXT : F_NONE));
+        myFlags = (byte) (F_VALID | (anchor == PREVIOUS ? F_PREVIOUS : anchor == NEXT ? F_NEXT : F_CURRENT));
     }
 
     /**
-     * Anchor position effect on insert/delete and isValid()
+     * Anchor position effect on insert/delete, {@link IPosition#isValid()},
+     * {@link IPosition#isValidIndex()} and {@link IPosition#isValidElement()}
      * <p>
-     * NONE - position represents the element and if deleted will be invalidated,
-     * if inserting at or before index then will advance to keep position of element
+     * {@link PositionAnchor#CURRENT} - tracks a specific element at index when the position is instantiated.
+     * Adding elements before the position will shift the range down in the list.
+     * Removing elements before the position will shift the range up in the list.
+     * Removing elements which include the position's index will set its span to 0.
+     * The position is always available for adding/removing next/previous elements. The
+     * current element is only available when span is 1.
      * <p>
-     * NEXT - position represents the next element
-     * if inserting at or before index then will advance to keep position of element
-     * when deleted will move the index to the next element after deleted region or end of list and remain valid
+     * {@link PositionAnchor#PREVIOUS} - tracks the previous element to the position from which it was instantiated.
+     * The span will be 0 if no previous element existed when it was instantiated (ie. at position 0)
+     * or was removed later. The index reflects the position in the list previous to the position at time it was instantiated.
+     * Adding elements before this position does not affect the position or span.
+     * Adding elements before the previous position shifts the range down in the list.
+     * Removing elements before the position shifts the range up in the list.
+     * If the element previous to this position is removed, then the span is set to 0.
      * <p>
-     * PREVIOUS - position represents the previous element
-     * when deleted will keep index at the start of the deleted region and remain valid
-     * when inserting at the index the position index does not change,
-     * when inserting at position index-1 then will move index to start of insert region so previous element remains unchanged
-     * when inserting before position index-1 then will advance position so previous element remains unchanged
+     * This anchor position type is used for iterating positions in reverse since it ignores
+     * insertions into the list immediately before the current position.
+     * <p>
+     * {@link PositionAnchor#NEXT} - tracks the next element to the position from which it was instantiated.
+     * The span will be 0 if no next element existed when it was instantiated (ie. at end of the list)
+     * or was removed later.
+     * Adding elements before this position will shift the range down in the list.
+     * Removing elements before this position will shift the range up in the list.
+     * Removing element which include the next element of this position will set its span to 0.
+     * <p>
+     * This anchor position type is used for iterating positions since it ignores
+     * insertions into the list immediately after the current position.
+     *
+     * @param index position of insert
+     * @param count number of elements inserted
      */
     @Override
     public void inserted(int index, int count) {
@@ -76,6 +95,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
                     // deleting before position index, still valid
                     setIndex(positionIndex - count, true);
                 } else {
+                    // FIX: should invalidate if previous element was removed, not only if at index 0
                     // deleted element, position on previous element
                     if (index > 0) {
                         setIndex(index - 1, true);
@@ -105,6 +125,10 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
     @Override
     public boolean isValid() {
+        // FIX: previous is valid if index > 0 or isValid, not
+        // NOTE: PREVIOUS is valid if index > 0 or F_VALID
+        //  CURRENT is valid if F_VALID
+        //  NEXT is valid if index < size() or F_VALID
         return ((myFlags & (F_VALID | F_NEXT)) != 0); // Next is always valid
     }
 
@@ -120,13 +144,14 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
     @Override
     public void detachListener() {
+        //myDetachedTrace = Thread.currentThread().getStackTrace();
         myFlags |= F_DETACHED;
         myParent.removePositionListener(this);
     }
 
     @Override
     public @NotNull PositionAnchor getAnchor() {
-        return ((myFlags & F_NEXT) != 0) ? NEXT : ((myFlags & F_PREVIOUS) != 0) ? PREVIOUS : NONE;
+        return ((myFlags & F_NEXT) != 0) ? NEXT : ((myFlags & F_PREVIOUS) != 0) ? PREVIOUS : CURRENT;
     }
 
     @NotNull
@@ -157,7 +182,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
 
     private void validateDetached() {
         if (isDetached())
-            throw new IllegalStateException("Position is detached from list");
+            throw new IllegalStateException("Position is detached from its list");
     }
 
     private void validateOffset(int offset) {
@@ -266,7 +291,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public Iterable<P> backwards() {
         validateDetached();
-        int index = !isValidPosition() ? getIndex(-1) : getIndex();
+        int index = !isValidElement() ? getIndex(-1) : getIndex();
         int useIndex = Math.max(0, index);
         P position = myParent.getPosition(useIndex, PREVIOUS);
         if (useIndex > index) position.invalidate(); // nothing in the iterator
@@ -276,7 +301,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     @Override
     public Iterable<P> previousBackwards() {
         validateDetached();
-        int index = !isValidPosition() ? getIndex(-2) : getIndex(-1);
+        int index = !isValidElement() ? getIndex(-2) : getIndex(-1);
         int useIndex = Math.max(0, index);
         P position = myParent.getPosition(useIndex, PREVIOUS);
         if (useIndex > index) position.invalidate(); // nothing in the iterator
@@ -291,7 +316,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     }
 
     @Override
-    public boolean isValidPosition() {
+    public boolean isValidElement() {
         validateDetached();
 
         return isValid() && myIndex < myList.size();

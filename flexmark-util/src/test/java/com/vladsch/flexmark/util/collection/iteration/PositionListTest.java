@@ -117,7 +117,7 @@ public class PositionListTest {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
         PositionList<Integer> positions = new PositionList<>(list);
-        Position<Integer> position1 = positions.getPosition(8, PositionAnchor.NONE);
+        Position<Integer> position1 = positions.getPosition(8, PositionAnchor.CURRENT);
         Position<Integer> position2 = position1.getPosition(2);
 
         assertEquals(2, positions.trackedPositions());
@@ -134,7 +134,7 @@ public class PositionListTest {
         List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
         ArrayList<Integer> list = new ArrayList<>(input);
         PositionList<Integer> positions = new PositionList<>(list);
-        Position<Integer> position = positions.getPosition(5, PositionAnchor.NONE);
+        Position<Integer> position = positions.getPosition(5, PositionAnchor.CURRENT);
         StringBuilder message = new StringBuilder();
 
         IPositionListener listener = new IPositionListener() {
@@ -283,7 +283,7 @@ public class PositionListTest {
 
         // set past last element does not affect positions
         assertEquals(10, position.getIndex());
-        assertTrue(position.isValidPosition());
+        assertTrue(position.isValidElement());
     }
 
     @Test
@@ -432,15 +432,15 @@ public class PositionListTest {
 
         Position<Integer> fakeIterator = positions.getPosition(0, PositionAnchor.NEXT);
 
-        while (fakeIterator.isValidPosition()) {
-            Position<Integer> position = fakeIterator.withAnchor(PositionAnchor.NONE);
-            assertSame(position, position.withAnchor(PositionAnchor.NONE));
+        while (fakeIterator.isValidElement()) {
+            Position<Integer> position = fakeIterator.withAnchor(PositionAnchor.CURRENT);
+            assertSame(position, position.withAnchor(PositionAnchor.CURRENT));
             list2.add(position.get());
 
             boolean hadNext = fakeIterator.hasNext();
             fakeIterator = fakeIterator.next();
 
-            assertEquals(hadNext, fakeIterator.isValidPosition());
+            assertEquals(hadNext, fakeIterator.isValidElement());
         }
 
         List<Integer> expected = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
@@ -590,7 +590,7 @@ public class PositionListTest {
         while (iterator.hasPrevious()) {
             iterator = iterator.previous();
 
-            Position<Integer> position = iterator.withAnchor(PositionAnchor.NONE);
+            Position<Integer> position = iterator.withAnchor(PositionAnchor.CURRENT);
             list2.add(position.get());
         }
         List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -738,7 +738,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
 
         Position<Integer> position = positions.getPosition(0);
-        assertEquals("Position{anchor=NONE, index=0, valid=true}", position.toString());
+        assertEquals("Position{anchor=CURRENT, index=0, valid=true}", position.toString());
         assertEquals("Position{anchor=NEXT, index=0, valid=true}", position.withAnchor(PositionAnchor.NEXT).toString());
         assertEquals("Position{anchor=PREVIOUS, index=0, valid=true}", position.withAnchor(PositionAnchor.PREVIOUS).toString());
     }
@@ -875,7 +875,7 @@ public class PositionListTest {
             assertEquals("" + i, i, position.getIndex());
             assertTrue("" + i, position.isValidIndex());
 
-            assertEquals(i < iMax, position.isValidPosition());
+            assertEquals(i < iMax, position.isValidElement());
             if (i < iMax) {
                 assertEquals("" + i, 9 - i, (int) position.get());
                 assertEquals("" + i, 9 - i, (int) position.get(0));
@@ -896,7 +896,7 @@ public class PositionListTest {
             assertFalse("" + i, position.isValid());
 
             position = position.next();
-            assertEquals("" + i, i < iMax, position.isValidPosition());
+            assertEquals("" + i, i < iMax, position.isValidElement());
             if (i < iMax) {
                 assertEquals("" + i, 9 - i, (int) position.get());
                 assertEquals("" + i, 9 - i, (int) position.get(0));
@@ -955,7 +955,7 @@ public class PositionListTest {
                 assertTrue("" + i, position.isValidIndex());
                 assertTrue("" + i, position.isValid());
 
-                assertEquals("" + i, i < iMax, position.isValidPosition());
+                assertEquals("" + i, i < iMax, position.isValidElement());
                 if (i < iMax) {
                     assertEquals("" + i, list.get(i < j ? i : i + 1), position.get());
                     assertEquals("" + i, list.get(i < j ? i : i + 1), position.get(0));
@@ -993,7 +993,7 @@ public class PositionListTest {
                 assertTrue("" + i, position.isValidIndex());
                 assertEquals("" + i, i != j, position.isValid());
 
-                assertEquals("" + i, i != j && i < iMax, position.isValidPosition());
+                assertEquals("" + i, i != j && i < iMax, position.isValidElement());
                 if (i != j && i < iMax) {
                     assertEquals("" + i, list.get(i < j ? i : i - 1), position.get());
                     assertEquals("" + i, list.get(i < j ? i : i - 1), position.get(0));
@@ -1029,7 +1029,7 @@ public class PositionListTest {
                 assertTrue("" + i, position.isValidIndex());
                 assertTrue("" + i, position.isValid());
 
-                assertEquals("" + i, i < iMax, position.isValidPosition());
+                assertEquals("" + i, i < iMax, position.isValidElement());
                 if (i < iMax) {
                     assertEquals("" + i, list.get(i < j ? i : i + 1), position.get());
                     assertEquals("" + i, list.get(i < j ? i : i + 1), position.get(0));
@@ -1066,7 +1066,7 @@ public class PositionListTest {
             assertTrue("" + i, position.isValidIndex());
             assertTrue("" + i, position.isValid());
 
-            assertEquals("" + i, i < iMax, position.isValidPosition());
+            assertEquals("" + i, i < iMax, position.isValidElement());
             if (i < iMax) {
                 assertEquals("" + i, list.get(i < j ? i : i + 1), position.get());
                 assertEquals("" + i, list.get(i < j ? i : i + 1), position.get(0));
@@ -1106,7 +1106,7 @@ public class PositionListTest {
                 assertTrue("" + i, position.isValidIndex());
                 assertTrue("" + i, position.isValid());
 
-                assertEquals("" + i, i < iMax, position.isValidPosition());
+                assertEquals("" + i, i < iMax, position.isValidElement());
                 if (i < iMax) {
                     assertEquals("" + i, list.get(i < j ? i : i + 2), position.get());
                     assertEquals("" + i, list.get(i < j ? i : i + 2), position.get(0));
@@ -1146,7 +1146,7 @@ public class PositionListTest {
                 assertTrue("" + i, position.isValidIndex());
                 assertTrue("" + i, position.isValid());
 
-                assertEquals("" + i, i < iMax, position.isValidPosition());
+                assertEquals("" + i, i < iMax, position.isValidElement());
                 if (i < iMax) {
                     assertEquals("" + i, list.get(i < j ? i : i + 2), position.get());
                     assertEquals("" + i, list.get(i < j ? i : i + 2), position.get(0));
@@ -1183,7 +1183,7 @@ public class PositionListTest {
                 assertTrue("" + i, position.isValidIndex());
                 assertEquals("" + i, i != j, position.isValid());
 
-                assertEquals("" + i, i != j && i < iMax, position.isValidPosition());
+                assertEquals("" + i, i != j && i < iMax, position.isValidElement());
                 if (i != j && i < iMax) {
                     assertEquals("" + i, list.get(i < j ? i : i - 1), position.get());
                     assertEquals("" + i, list.get(i < j ? i : i - 1), position.get(0));
@@ -1220,7 +1220,7 @@ public class PositionListTest {
                 assertTrue("" + i, position.isValidIndex());
                 assertEquals("" + i, i != j, position.isValid());
 
-                assertEquals("" + i, i != j && i < iMax, position.isValidPosition());
+                assertEquals("" + i, i != j && i < iMax, position.isValidElement());
                 if (i != j && i < iMax) {
                     assertEquals("" + i, list.get(i < j ? i : i - 1), position.get());
                     assertEquals("" + i, list.get(i < j ? i : i - 1), position.get(0));
@@ -1366,7 +1366,7 @@ public class PositionListTest {
         Position<Integer> position = positions.getFirst();
 
         assertEquals(0, position.getIndex());
-        assertTrue(position.isValidPosition());
+        assertTrue(position.isValidElement());
     }
 
     @Test
@@ -1377,7 +1377,7 @@ public class PositionListTest {
         Position<Integer> position = positions.getFirst();
 
         assertEquals(0, position.getIndex());
-        assertFalse(position.isValidPosition());
+        assertFalse(position.isValidElement());
     }
 
     @Test
@@ -1388,7 +1388,7 @@ public class PositionListTest {
         Position<Integer> position = positions.getLast();
 
         assertEquals(list.size() - 1, position.getIndex());
-        assertTrue(position.isValidPosition());
+        assertTrue(position.isValidElement());
     }
 
     @Test
@@ -1399,7 +1399,7 @@ public class PositionListTest {
         Position<Integer> position = positions.getLast();
 
         assertEquals(0, position.getIndex());
-        assertFalse(position.isValidPosition());
+        assertFalse(position.isValidElement());
     }
 
     @Test
@@ -1411,7 +1411,7 @@ public class PositionListTest {
 
         assertEquals(list.size(), position.getIndex());
         assertTrue(position.isValidIndex());
-        assertFalse(position.isValidPosition());
+        assertFalse(position.isValidElement());
     }
 
     @Test
@@ -1422,7 +1422,7 @@ public class PositionListTest {
         Position<Integer> position = positions.getEnd();
 
         assertEquals(0, position.getIndex());
-        assertFalse(position.isValidPosition());
+        assertFalse(position.isValidElement());
     }
 
     @Test
@@ -1495,7 +1495,7 @@ public class PositionListTest {
         position.append(-1);
 
         assertEquals(input.size() + 1, position1.getIndex());
-        assertFalse(position1.isValidPosition());
+        assertFalse(position1.isValidElement());
 
         assertEquals(input.size() + 1, positions.size());
 
@@ -1543,38 +1543,38 @@ public class PositionListTest {
 
         Position<Object> position = positions.getPosition(0);
         Position<Object> index = position.indexOf("5");
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(5, index.getIndex());
         assertEquals("5", index.getOrNull(String.class));
 
         index = position.indexOf(6, "5");
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(15, index.getIndex());
         assertEquals("5", index.getOrNull(String.class));
 
         index = position.indexOf(6);
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(6, index.getIndex());
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
         index = position.indexOf(7, 6);
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(16, index.getIndex());
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
         // predicate search
         index = position.indexOf(p -> p.get() == (Integer) 6);
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(6, index.getIndex());
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
         index = position.indexOf(7, p -> p.get() == (Integer) 6);
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(16, index.getIndex());
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
         index = position.indexOf(17, p -> p.get() == (Integer) 6);
-        assertFalse(index.isValidPosition());
+        assertFalse(index.isValidElement());
     }
 
     @Test
@@ -1585,37 +1585,37 @@ public class PositionListTest {
 
         Position<Object> position = positions.getPosition(20);
         Position<Object> index = position.lastIndexOf(6);
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(16, index.getIndex());
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
         index = position.lastIndexOf(-4, 6);
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(6, index.getIndex());
         assertEquals((Integer) 6, index.getOrNull(Integer.class));
 
         index = position.lastIndexOf("5");
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(15, index.getIndex());
         assertEquals("5", index.getOrNull(String.class));
 
         index = position.lastIndexOf(-5, "5");
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(5, index.getIndex());
         assertEquals("5", index.getOrNull(String.class));
 
         // predicate search
         index = position.lastIndexOf(p -> p.get() == "7");
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(17, index.getIndex());
         assertEquals("7", index.getOrNull(String.class));
 
         index = position.lastIndexOf(-3, p -> p.get() == "7");
-        assertTrue(index.isValidPosition());
+        assertTrue(index.isValidElement());
         assertEquals(7, index.getIndex());
         assertEquals("7", index.getOrNull(String.class));
 
         index = position.lastIndexOf(-13, p -> p.get() == "7");
-        assertFalse(index.isValidPosition());
+        assertFalse(index.isValidElement());
     }
 }

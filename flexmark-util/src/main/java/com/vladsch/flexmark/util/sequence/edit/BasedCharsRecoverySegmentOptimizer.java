@@ -150,7 +150,7 @@ public class BasedCharsRecoverySegmentOptimizer<S extends IRichSequence<S>> impl
                     break;
 
                 default:
-                case NONE:
+                case CURRENT:
                     // divide between the two with remainder to right??
                     int prevHalf = Math.min(matchedPrev, excess >> 1);
                     matchedPrev -= prevHalf;

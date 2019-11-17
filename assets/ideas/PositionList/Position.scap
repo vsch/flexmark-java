@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScappleDocument Version="1.1" ID="2F39C672-B263-43BA-B924-591BC606FB6A">
+    <Notes>
+        <Note ID="0" FontSize="12.0" Position="106.0,119.0" Width="58.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>Item First</String>
+        </Note>
+        <Note ID="1" FontSize="12.0" Position="276.0,119.0" Width="75.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>Item N-1</String>
+            <ConnectedNoteIDs>34</ConnectedNoteIDs>
+        </Note>
+        <Note ID="2" FontSize="12.0" Position="393.0,119.0" Width="75.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>Item N</String>
+            <ConnectedNoteIDs>19</ConnectedNoteIDs>
+        </Note>
+        <Note ID="3" FontSize="12.0" Position="521.0,119.0" Width="75.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>Item N+1</String>
+            <ConnectedNoteIDs>40</ConnectedNoteIDs>
+        </Note>
+        <Note ID="4" FontSize="12.0" Position="740.0,119.0" Width="58.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>Item Last</String>
+        </Note>
+        <Note ID="8" FontSize="12.0" Position="75.0,118.847656" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>0</String>
+        </Note>
+        <Note ID="9" FontSize="12.0" Position="237.0,119.0" Width="28.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>N-1</String>
+            <ConnectedNoteIDs>33</ConnectedNoteIDs>
+        </Note>
+        <Note ID="10" FontSize="12.0" Position="175.0,119.0" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>1</String>
+        </Note>
+        <Note ID="11" FontSize="12.0" Position="362.0,119.0" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>N</String>
+            <ConnectedNoteIDs>18, 36</ConnectedNoteIDs>
+        </Note>
+        <Note ID="12" FontSize="12.0" Position="479.0,119.0" Width="31.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>N+1</String>
+            <ConnectedNoteIDs>30, 39</ConnectedNoteIDs>
+        </Note>
+        <Note ID="13" FontSize="12.0" Position="607.0,119.0" Width="31.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>N+2</String>
+            <ConnectedNoteIDs>42</ConnectedNoteIDs>
+        </Note>
+        <Note ID="14" FontSize="12.0" Position="680.0,119.0" Width="49.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>size()-1</String>
+        </Note>
+        <Note ID="15" FontSize="12.0" Position="809.0,119.0" Width="38.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>size()</String>
+        </Note>
+        <Note ID="16" FontSize="12.0" Position="206.0,119.0" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>…</String>
+        </Note>
+        <Note ID="17" FontSize="12.0" Position="649.0,119.0" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>…</String>
+        </Note>
+        <Note ID="18" FontSize="12.0" Position="392.761719,241.574219" Width="20.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.331867 0.609932 0.356197</Border>
+                <Fill>0.790123 0.882327 0.80198</Fill>
+            </Appearance>
+            <String>-1</String>
+            <ConnectedNoteIDs>11, 31</ConnectedNoteIDs>
+        </Note>
+        <Note ID="19" FontSize="12.0" Position="425.871094,241.707031" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="3"></Border>
+            </Appearance>
+            <String>0</String>
+            <ConnectedNoteIDs>2</ConnectedNoteIDs>
+            <PointsToNoteIDs>2</PointsToNoteIDs>
+        </Note>
+        <Note ID="21" FontSize="12.0" Position="402.5,313.300781" Width="67.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.747881 0.366532 0.542813</Border>
+                <Fill>0.918452 0.807302 0.863467</Fill>
+            </Appearance>
+            <String>CURRENT</String>
+        </Note>
+        <Note ID="30" FontSize="12.0" Position="459.175781,241.640625" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>1</String>
+            <ConnectedNoteIDs>12, 31</ConnectedNoteIDs>
+        </Note>
+        <Note ID="31" FontSize="12.0" Position="418.5,278.011719" Width="35.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>span</String>
+            <ConnectedNoteIDs>18, 30</ConnectedNoteIDs>
+        </Note>
+        <Note ID="33" FontSize="12.0" Position="258.660156,241.757812" Width="20.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="3">0.0 0.0 0.0</Border>
+                <Fill>0.790123 0.882327 0.80198</Fill>
+            </Appearance>
+            <String>-1</String>
+            <ConnectedNoteIDs>9, 37</ConnectedNoteIDs>
+        </Note>
+        <Note ID="34" FontSize="12.0" Position="291.769531,242.0" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>0</String>
+            <ConnectedNoteIDs>1, 37</ConnectedNoteIDs>
+            <PointsToNoteIDs>1</PointsToNoteIDs>
+        </Note>
+        <Note ID="35" FontSize="12.0" Position="266.5,313.0" Width="71.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.747881 0.366532 0.542813</Border>
+                <Fill>0.918452 0.807302 0.863467</Fill>
+            </Appearance>
+            <String>PREVIOUS</String>
+        </Note>
+        <Note ID="36" FontSize="12.0" Position="325.074219,242.0" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>1</String>
+            <ConnectedNoteIDs>11</ConnectedNoteIDs>
+        </Note>
+        <Note ID="37" FontSize="12.0" Position="284.5,278.195312" Width="35.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>span</String>
+            <ConnectedNoteIDs>33-34</ConnectedNoteIDs>
+        </Note>
+        <Note ID="39" FontSize="12.0" Position="526.582031,241.574219" Width="20.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.331867 0.609932 0.356197</Border>
+                <Fill>0.790123 0.882327 0.80198</Fill>
+            </Appearance>
+            <String>-1</String>
+            <ConnectedNoteIDs>12</ConnectedNoteIDs>
+        </Note>
+        <Note ID="40" FontSize="12.0" Position="560.0,241.707031" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>0</String>
+            <ConnectedNoteIDs>3, 43</ConnectedNoteIDs>
+            <PointsToNoteIDs>3</PointsToNoteIDs>
+        </Note>
+        <Note ID="41" FontSize="12.0" Position="549.5,313.0" Width="41.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.747881 0.366532 0.542813</Border>
+                <Fill>0.918452 0.807302 0.863467</Fill>
+            </Appearance>
+            <String>NEXT</String>
+        </Note>
+        <Note ID="42" FontSize="12.0" Position="592.996094,241.640625" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="3"></Border>
+            </Appearance>
+            <String>1</String>
+            <ConnectedNoteIDs>13, 43</ConnectedNoteIDs>
+        </Note>
+        <Note ID="43" FontSize="12.0" Position="552.5,278.011719" Width="35.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>span</String>
+            <ConnectedNoteIDs>40, 42</ConnectedNoteIDs>
+        </Note>
+        <Note ID="44" FontSize="12.0" Position="676.253906,276.523438" Width="92.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="3"></Border>
+            </Appearance>
+            <String>Position Anchor</String>
+        </Note>
+        <Note ID="45" FontSize="12.0" Position="677.84375,210.363281" Width="76.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.747881 0.366532 0.542813</Border>
+                <Fill>0.918452 0.807302 0.863467</Fill>
+            </Appearance>
+            <String>Anchor Type</String>
+        </Note>
+        <Note ID="46" FontSize="12.0" Position="676.339844,243.179688" Width="123.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1">0.331867 0.609932 0.356197</Border>
+                <Fill>0.790123 0.882327 0.80198</Fill>
+            </Appearance>
+            <String>Position Stored Index</String>
+        </Note>
+        <Note ID="49" FontSize="12.0" Position="835.453125,225.78125" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>-1</String>
+        </Note>
+        <Note ID="50" FontSize="12.0" Position="861.046875,225.78125" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>0</String>
+        </Note>
+        <Note ID="51" FontSize="12.0" Position="888.046875,225.28125" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>1</String>
+        </Note>
+        <Note ID="53" FontSize="12.0" Position="819.046875,259.460938" Width="105.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>Offsets in Position</String>
+        </Note>
+        <Note ID="54" FontSize="12.0" Position="40.855469,119.0" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>-1</String>
+        </Note>
+        <Note ID="55" FontSize="12.0" Position="673.675781,313.304688" Width="60.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1" Style="Square"></Border>
+            </Appearance>
+            <String>List Index</String>
+        </Note>
+        <Note ID="56" FontSize="12.0" Position="740.894531,312.449219" Width="54.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>List Item</String>
+        </Note>
+        <Note ID="58" FontSize="13.766991" Position="876.207031,318.230469" Width="57.0">
+            <Appearance></Appearance>
+            <String>Legend</String>
+            <Formatting>
+                <FormatRange Bold="Yes">0,6</FormatRange>
+            </Formatting>
+        </Note>
+    </Notes>
+    <BackgroundShapes>
+        <Shape ID="20" Sticky="Yes" Position="383.0,227.0" Width="106.0" Height="125.0">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+        </Shape>
+        <Shape ID="32" Sticky="Yes" Position="249.0,227.0" Width="106.0" Height="125.0">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+        </Shape>
+        <Shape ID="38" Sticky="Yes" Position="517.0,227.0" Width="106.0" Height="125.0">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+        </Shape>
+        <Shape ID="57" Sticky="Yes" Position="664.0,195.0" Width="277.0" Height="157.0">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+        </Shape>
+        <Shape ID="52" Sticky="Yes" Position="812.046875,210.0" Width="119.0" Height="83.300781">
+            <Appearance>
+                <Border Weight="1"></Border>
+            </Appearance>
+        </Shape>
+    </BackgroundShapes>
+    <AutoFit>0, 4, 8-19, 21, 30-31, 33-37, 39-46, 49-51, 53-56, 58</AutoFit>
+    <NoteStyles>
+        <Style Name="Title Text" ID="26CD7242-6012-4B10-A0C3-3F37A221CF16" AffectFontStyle="Yes" AffectAlignment="Yes" AffectTextColor="No" AffectNoteBody="No" AffectFade="No">
+            <FontSize>28.0</FontSize>
+            <IsBold>Yes</IsBold>
+        </Style>
+        <Style Name="Red Text" ID="6BC43031-D690-4624-BEF3-76DB36EF9E62" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="Yes" AffectNoteBody="No" AffectFade="No">
+            <TextColor>1.0 0.0 0.0</TextColor>
+        </Style>
+        <Style Name="Brown Bubble" ID="61681A2F-EBF9-450B-9814-34A71ADA8EBC" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.290055 0.1523 0.182215</BorderColor>
+            <FillColor>0.940019 0.892907 0.779716</FillColor>
+        </Style>
+        <Style Name="Yellow Bubble" ID="D5C3FEE7-76D4-421E-A190-458690909109" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.756763 0.785592 0.373258</BorderColor>
+            <FillColor>0.906773 0.910625 0.634363</FillColor>
+        </Style>
+        <Style Name="Green Bubble" ID="DB845A25-26FC-45E6-BA80-08E1F5C66FA3" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.331867 0.609932 0.356197</BorderColor>
+            <FillColor>0.790123 0.882327 0.80198</FillColor>
+        </Style>
+        <Style Name="Blue Bubble" ID="4B1C6936-5C1E-4B2E-8A8D-8D0C63B3C5DC" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.477193 0.557066 0.76433</BorderColor>
+            <FillColor>0.840969 0.866828 0.925903</FillColor>
+        </Style>
+        <Style Name="Pink Bubble" ID="541392A8-4383-4B83-8186-D8D309185EF4" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.747881 0.366532 0.542813</BorderColor>
+            <FillColor>0.918452 0.807302 0.863467</FillColor>
+        </Style>
+    </NoteStyles>
+    <UISettings>
+        <BackgroundColor>0.999737 0.986332 0.931298</BackgroundColor>
+        <DefaultFont>Helvetica</DefaultFont>
+        <DefaultTextColor>0.0 0.0 0.0</DefaultTextColor>
+    </UISettings>
+    <PrintSettings PaperSize="612.0,792.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="8 1/2x11" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+</ScappleDocument>

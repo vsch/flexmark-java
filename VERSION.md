@@ -216,12 +216,14 @@ Next 0.59.52
 * [ ] Fix: remove skeleton code for offset tracking through base sequence manipulations. No
       longer needed. This will be done by analysis of original vs. resulting based sequence
       offsets.
+* [ ] Fix: rework `PositionList` and `Position` according to
+      [Position-Lists](assets/ideas/PositionList/Position-Lists.md)
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 * [ ] Add: Common char sets:
-  * DECIMAL_DIGITS
-  * HEXADECIMAL_DIGITS
-  * OCTAL_DIGITS
+  * `DECIMAL_DIGITS`
+  * `HEXADECIMAL_DIGITS`
+  * `OCTAL_DIGITS`
 
 0.59.50
 -------

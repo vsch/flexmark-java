@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.rmi.CORBA.Util;
 import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
@@ -140,7 +139,7 @@ public class SegmentBuilder {
         if (myEndOffset > 0 && myEndOffset >= range.getStart()) {
             // have overlap, remove overlap from range and add
             SegmentPosition position = getLastRangeIndex();
-            if (position.isValidPosition()) {
+            if (position.isValidElement()) {
                 handleOverlap(position, range);
             }
         } else {

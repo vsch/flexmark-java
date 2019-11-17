@@ -80,7 +80,7 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
 
     @NotNull
     public Iterator<P> iterator(@NotNull P position) {
-        assert position.getAnchor() != PositionAnchor.NONE;
+        assert position.getAnchor() != PositionAnchor.CURRENT;
         return new PositionIterator<T, P>(position);
     }
 
@@ -116,15 +116,15 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
     }
 
     public P getFirst() {
-        return getPosition(0, PositionAnchor.NONE);
+        return getPosition(0, PositionAnchor.CURRENT);
     }
 
     public P getLast() {
-        return myList.isEmpty() ? getPosition(0, PositionAnchor.NONE) : getPosition(myList.size() - 1, PositionAnchor.NONE);
+        return myList.isEmpty() ? getPosition(0, PositionAnchor.CURRENT) : getPosition(myList.size() - 1, PositionAnchor.CURRENT);
     }
 
     public P getEnd() {
-        return getPosition(myList.size(), PositionAnchor.NONE);
+        return getPosition(myList.size(), PositionAnchor.CURRENT);
     }
 
     @Override
