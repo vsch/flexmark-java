@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence.edit;
 
 public enum EditType {
     NULL(false),
+    BASE(false),
     INSERT(true),
     DELETE(false),
     REPLACE(true);
@@ -18,6 +19,10 @@ public enum EditType {
 
     public boolean isInsert() {
         return this == INSERT;
+    }
+
+    public boolean isBase() {
+        return this == BASE;
     }
 
     public boolean isDelete() {

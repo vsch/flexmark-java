@@ -8,33 +8,33 @@ import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilder {
-    private SegmentList myParts = new SegmentList();      // contains either Range of original sequence kept, or String inserted at position after the last Range
-    private int myEndOffset;
-    private long myModificationTimestamp;
+    private ArrayList<Object> myParts = new ArrayList<>();      // contains either Range of original sequence kept, or String inserted at position after the last Range
+    private int myStartOffset = 0;
+    private int myEndOffset = 0;
+    private int myLastRangeIndex = 0;
 
-    protected SegmentBuilder(@NotNull Range range) {
-        if (range.isNotNull()) {
-            myParts.add(range);
-            myEndOffset = range.getEndOffset();
-        }
+    protected SegmentBuilder() {
+
     }
 
     protected SegmentBuilder(@NotNull SegmentBuilder other) {
         myParts.addAll(other.myParts);
+        myStartOffset = other.myStartOffset;
         myEndOffset = other.myEndOffset;
-        myModificationTimestamp = other.myModificationTimestamp;
+        myLastRangeIndex = other.myLastRangeIndex;
+    }
+
+    public int getStartOffset() {
+        return myEndOffset;
     }
 
     public int getEndOffset() {
         return myEndOffset;
-    }
-
-    public long getModificationTimestamp() {
-        return myModificationTimestamp;
     }
 
     public boolean isEmpty() {
@@ -42,12 +42,12 @@ public class SegmentBuilder {
     }
 
     public boolean isNotEmpty() {
-        return myParts.isNotEmpty();
+        return !myParts.isEmpty();
     }
 
     public int length() {
         int length = 0;
-        for (Object part : myParts.getList()) {
+        for (Object part : myParts) {
             if (part instanceof String) {
                 length += ((String) part).length();
             } else {
@@ -69,22 +69,62 @@ public class SegmentBuilder {
     }
 
     /**
+     * @param updateEndOffset if true update end offset
+     * @return position of last range or end of list position
+     */
+    private int getLastRangeIndex(boolean updateEndOffset) {
+        // should not have to look further than last 2 entries to find a range
+        int iMax = myParts.size();
+        for (int i = iMax; i-- > myLastRangeIndex; ) {
+            Object part = myParts.get(i);
+            if (part instanceof Range) {
+                myLastRangeIndex = i;
+                if (updateEndOffset) {
+                    int endOffset = ((Range) part).getEnd();
+                    assert endOffset >= myEndOffset;
+
+                    myEndOffset = endOffset;
+                }
+                if (((Range) part).getEnd() != myEndOffset) {
+                    int tmp = 0;
+                }
+                assert ((Range) part).getEnd() == myEndOffset : "Expected end: " + ((Range) part).getEnd() + " got: " + myEndOffset;
+                return i;
+            }
+        }
+        return myLastRangeIndex;
+    }
+
+    /**
      * @return position of last range or end of list position
      */
     @NotNull
-    private SegmentPosition getLastRangeIndex() {
+    private SegmentPosition getLastRangePosition(@NotNull SegmentList segmentList) {
         // should not have to look further than last 2 entries to find a range
-        SegmentPosition position = myParts.getLast();
+        SegmentPosition position = segmentList.getLast();
         if (position.getRangeOrNull() != null) return position;
         if (position.getRangeOrNull(-1) != null) return position.previous();
-        return myParts.getEnd();
+        return segmentList.getEnd();
     }
 
     @NotNull
     public Range getOffsetRange() {
-        @NotNull List<Object> list = myParts.getList();
+        Range range = myParts.size() == 0 ? Range.NULL : Range.of(myStartOffset, myEndOffset);
+        // RELEASE: remove assert
+        assert range.equals(updateOffsets());
+        return range;
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    @NotNull
+    private Range updateOffsets() {
+        @NotNull List<Object> list = myParts;
         Object o1 = null;
         Object o2 = null;
+
+        myStartOffset = 0;
+        myEndOffset = 0;
+        myLastRangeIndex = 0;
 
         int iMax = list.size();
         switch (iMax) {
@@ -93,38 +133,76 @@ public class SegmentBuilder {
 
             case 1:
                 o1 = list.get(0);
-                return o1 instanceof Range ? (Range) o1 : Range.NULL;
+                if (o1 instanceof Range) {
+                    myStartOffset = ((Range) o1).getStart();
+                    myEndOffset = ((Range) o1).getEnd();
+                    return (Range) o1;
+                }
+                return Range.NULL;
 
             case 2:
                 o1 = list.get(0);
                 o2 = list.get(1);
-                return o1 instanceof Range && o2 instanceof Range ? Range.of(((Range) o1).getStart(), ((Range) o2).getEnd()) : o1 instanceof Range ? (Range) o1 : o2 instanceof Range ? (Range) o2 : Range.NULL;
+                if (o1 instanceof Range && o2 instanceof Range) {
+                    myStartOffset = ((Range) o1).getStart();
+                    myEndOffset = ((Range) o2).getEnd();
+                    myLastRangeIndex = 1;
+                    return Range.of(myStartOffset, myEndOffset);
+                }
+                if (o1 instanceof Range) {
+                    myStartOffset = ((Range) o1).getStart();
+                    myEndOffset = ((Range) o1).getEnd();
+                    myLastRangeIndex = 0;
+                    return (Range) o1;
+                }
+                if (o2 instanceof Range) {
+                    myStartOffset = ((Range) o2).getStart();
+                    myEndOffset = ((Range) o2).getEnd();
+                    myLastRangeIndex = 1;
+                    return (Range) o2;
+                }
+                return Range.NULL;
 
             default:
-                //noinspection ForLoopReplaceableByForEach
+                int firstRange = 0;
                 for (int i = 0; i < iMax; i++) {
                     o1 = list.get(i);
-                    if (o1 instanceof Range) break;
+                    if (o1 instanceof Range) {
+                        firstRange = i;
+                        break;
+                    }
                 }
 
-                for (int i = iMax; i-- > 0; ) {
+                for (int i = iMax; i-- > firstRange; ) {
                     o2 = list.get(i);
-                    if (o2 instanceof Range) break;
+                    if (o2 instanceof Range) {
+                        myLastRangeIndex = i;
+                        break;
+                    }
                 }
 
-                //noinspection ConstantConditions
-                return o1 != null && o2 != null ? Range.of(((Range) o1).getStart(), ((Range) o2).getEnd()) : o1 != null ? (Range) o1 : o2 != null ? (Range) o2 : Range.NULL;
+                if (o2 == null) o2 = o1;
+
+                if (o1 != null) {
+                    myStartOffset = ((Range) o1).getStart();
+                    myEndOffset = ((Range) o2).getEnd();
+                    return Range.of(myStartOffset, myEndOffset);
+                }
+
+                return Range.NULL;
         }
     }
 
     @Nullable
     public Range getLastPartIfRange() {
-        return myParts.getRangeOrNull(myParts.size() - 1);
+        Object part = myParts.isEmpty() ? null : myParts.get(myParts.size() - 1);
+        return part instanceof Range ? (Range) part : null;
     }
 
     @Nullable
     public String getLastPartIfString() {
-        return myParts.getStringOrNull(myParts.size() - 1);
+        Object part = myParts.isEmpty() ? null : myParts.get(myParts.size() - 1);
+        return part instanceof String ? (String) part : null;
     }
 
     public void handleOverlap(@NotNull SegmentPosition position, @NotNull Range range) {
@@ -159,29 +237,36 @@ public class SegmentBuilder {
      */
     @NotNull
     public SegmentBuilder append(@Nullable Range range) {
-        if (range == null) return this;
+        if (range == null || range.isNull()) return this;
+        if (myParts.isEmpty()) myStartOffset = range.getStart();
 
         // NOTE: if an empty range is not inserted then there is no range to attach recovered characters.
         //    empty ranges can be removed during optimization
         if (myEndOffset > 0 && myEndOffset >= range.getStart()) {
             // have overlap, remove overlap from range and add
-            SegmentPosition position = getLastRangeIndex();
+            SegmentList segmentList = new SegmentList(myParts);
+            SegmentPosition position = getLastRangePosition(segmentList);
+
             if (position.isValidElement()) {
                 Range prevRange = position.getRangeOrNull();
                 if (prevRange != null) {
                     if (prevRange.overlaps(range)) {
                         handleOverlap(position, range);
+                        myLastRangeIndex = getLastRangeIndex(true);
                     } else if (prevRange.isAdjacentBefore(range)) {
                         // if no text in between merge them, else append
                         String text = position.getStringOrNull(1);
 
                         if (text == null || text.isEmpty()) {
                             Range expanded = prevRange.expandToInclude(range);
+                            myEndOffset = expanded.getEnd();
                             position.set(expanded);
                             if (text != null) position.remove(1);
                         } else {
                             // just append
                             myParts.add(range);
+                            myEndOffset = range.getEnd();
+                            myLastRangeIndex = myParts.size() - 1;
                         }
                     }
                 }
@@ -189,10 +274,12 @@ public class SegmentBuilder {
         } else {
             // just append
             myParts.add(range);
+            myEndOffset = range.getEnd();
+            myLastRangeIndex = myParts.size() - 1;
         }
 
-        updateEndOffset();
-        myModificationTimestamp++;
+        int lastRangeIndex = getLastRangeIndex(false);
+        assert myLastRangeIndex == lastRangeIndex;
         return this;
     }
 
@@ -205,7 +292,6 @@ public class SegmentBuilder {
             } else {
                 myParts.add(text);
             }
-            myModificationTimestamp++;
         }
         return this;
     }
@@ -220,196 +306,9 @@ public class SegmentBuilder {
         return this;
     }
 
-    /**
-     * Delete range in edited coordinate system but delete segments in accumulated parts
-     *
-     * @param startIndex start index in current range
-     * @param endIndex   end index in current range
-     */
-    @NotNull
-    public SegmentBuilder deleteByIndices(int startIndex, int endIndex) {
-        return delete(Range.of(startIndex, endIndex));
-    }
-
-    /**
-     * Delete range in edited coordinate system but delete segments in accumulated parts
-     *
-     * @param startIndex start index in current range
-     * @param count      end index in current range
-     */
-    @NotNull
-    public SegmentBuilder deleteByLength(int startIndex, int count) {
-        return delete(Range.of(startIndex, startIndex + count));
-    }
-
-    /**
-     * Delete range in edited coordinate system but delete segments in accumulated parts
-     *
-     * @param range range to delete in current range coordinates
-     */
-    @NotNull
-    public SegmentBuilder delete(@NotNull Range range) {
-        int startOffset = 0;
-        Range remaining = range;
-
-        for (SegmentPosition position : myParts) {
-            Range asRange = position.getRangeOrNull();
-            String asString = position.getStringOrNull();
-
-            assert asRange != null || asString != null;
-
-            Range partRange = asRange != null ? Range.ofLength(startOffset, asRange.length()) : Range.ofLength(startOffset, asString.length());
-
-            Range intersect = partRange.intersect(remaining);
-            if (intersect.isNotEmpty()) {
-                if (remaining.doesContain(partRange)) {
-                    // fully deleted
-                    deleteParts(position);
-                    remaining = Range.of(startOffset, remaining.getEnd() - partRange.getSpan());
-                } else {
-                    if (partRange.doesProperlyContain(remaining)) {
-                        // middle chopped out leaving two pieces
-                        if (asRange != null) {
-                            int delta = partRange.getEnd() - remaining.getEnd();
-                            position.set(asRange.withEnd(asRange.getStart() + delta));
-                            position.add(1, asRange.withStart(asRange.getEnd() - delta));
-                        } else {
-                            Range removedString = intersect.shiftLeft(startOffset);
-                            position.set(asString.substring(0, removedString.getStart()) + asString.substring(removedString.getEnd()));
-                        }
-                        break;
-                    } else {
-                        if (partRange.getStart() == intersect.getStart()) {
-                            // head part removed
-                            if (asRange != null) {
-                                Range newRange = asRange.startPlus(intersect.getSpan());
-                                position.set(newRange);
-                                startOffset += newRange.length();
-                            } else {
-                                String newString = asString.substring(intersect.getSpan());
-                                position.set(newString);
-                                startOffset += newString.length();
-                            }
-                        } else {
-                            // tail part removed
-                            assert partRange.getEnd() == intersect.getEnd();
-                            if (asRange != null) {
-                                Range newRange = asRange.endMinus(intersect.getSpan());
-                                position.set(newRange);
-                                startOffset += newRange.length();
-                            } else {
-                                String newString = asString.substring(0, asString.length() - intersect.getSpan());
-                                position.set(newString);
-                                startOffset += newString.length();
-                            }
-                        }
-
-                        // adjust remaining end by amount which was deleted since now the coordinates have changed by that amount
-                        remaining = Range.of(startOffset, remaining.getEnd() - intersect.getSpan());
-                    }
-                }
-            } else {
-                startOffset += partRange.getSpan();
-            }
-
-            if (remaining.getEnd() <= startOffset) break;
-        }
-
-        updateEndOffset();
-        myModificationTimestamp++;
-
-        return this;
-    }
-
-    protected void updateEndOffset() {
-        SegmentPosition position = getLastRangeIndex();
-        myEndOffset = position.getRange().getEnd();
-    }
-
-    private void deleteParts(SegmentPosition position) {
-        // check if there is overlap in spliced region
-        int count = 1;
-        Object part1 = position.getOrNull(-1);
-        Object part2 = position.getOrNull(count);
-        if (part1 instanceof Range && part2 instanceof Range) {
-            if (((Range) part1).getEnd() == ((Range) part2).getStart()) {
-                count++;
-                position.set(-1, ((Range) part1).withEnd(((Range) part2).getEnd()));
-            }
-        } else if (part1 instanceof String && part2 instanceof String) {
-            count++;
-            position.set(-1, part1.toString() + part2);
-        }
-
-        position.remove(0, count);
-    }
-
-    /**
-     * Insert string at given coordinates
-     *
-     * @param atIndex index in the current range where to insert
-     * @param text    string to insert
-     * @return this
-     */
-    public SegmentBuilder insert(int atIndex, @NotNull String text) {
-        int startOffset = 0;
-
-        for (SegmentPosition position : myParts) {
-            Object part = position.get();
-            Range partRange = part instanceof Range ? Range.of(startOffset, startOffset + ((Range) part).length()) : Range.of(startOffset, startOffset + ((String) part).length());
-
-            if (partRange.isValidIndex(atIndex)) {
-                // inside the part
-                if (partRange.getStart() == atIndex) {
-                    if (part instanceof String) {
-                        // combine and replace
-                        position.set(text + part);
-                    } else {
-                        // insert before
-                        position.add(text);
-                    }
-                } else if (partRange.getEnd() == atIndex) {
-                    if (part instanceof String) {
-                        // combine and replace
-                        position.set(part + text);
-                    } else {
-                        // insert after
-                        position.add(1, text);
-                    }
-                } else {
-                    // insert in the middle
-                    if (part instanceof String) {
-                        // combine by inserting in middle and replace
-                        position.set(((String) part).substring(0, atIndex) + text + ((String) part).substring(atIndex));
-                    } else {
-                        Range range = (Range) part;
-                        // split range into two and insert text between them
-                        position.set(range.withEnd(range.getEnd() - (partRange.getEnd() - atIndex)));
-                        position.add(1, text);
-
-                        Range tail = range.withStart(range.getStart() + (partRange.getEnd() - atIndex));
-                        position.add(2, tail);
-                    }
-                }
-                // KLUDGE: to mark as having been inserted
-                startOffset = -1;
-                break;
-            } else {
-                startOffset += partRange.getSpan();
-            }
-        }
-
-        if (startOffset != -1) {
-            // append to the end
-            myParts.add(text);
-        }
-        myModificationTimestamp++;
-        return this;
-    }
-
     @NotNull
     public List<Object> getParts() {
-        return myParts.getList();
+        return myParts;
     }
 
     public <T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> void buildSequence(@NotNull S baseSequence, @NotNull T builder) {
@@ -437,7 +336,7 @@ public class SegmentBuilder {
 
         StringBuilder out = new StringBuilder();
 
-        for (Object part : myParts.getList()) {
+        for (Object part : myParts) {
             if (part instanceof String) {
                 out.append(BasedSequence.of((String) part).toVisibleWhitespaceString());
             } else {
@@ -460,22 +359,20 @@ public class SegmentBuilder {
             throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + chars.length());
         }
 
-        for (SegmentPosition position : myParts) {
-            if (position.getStringOrNull() == null) continue;
+        SegmentList segmentList = new SegmentList(myParts);
 
+        for (SegmentPosition position : segmentList) {
+            if (position.getStringOrNull() == null) continue;
             optimizer.accept(chars, position);
         }
-
-        Range range = myParts.getLast().getRangeOrNull();
-        myEndOffset = range == null ? 0 : range.getEnd();
-        myModificationTimestamp++;
+        updateOffsets();
     }
 
     @Override
     public String toString() {
         DelimitedBuilder sb = new DelimitedBuilder(", ");
         sb.append("SegmentBuilder{end=").append(myEndOffset).append(", parts=");
-        for (Object part : myParts.getList()) {
+        for (Object part : myParts) {
             if (part instanceof Range) {
                 sb.append(part).mark();
             } else {
@@ -488,28 +385,6 @@ public class SegmentBuilder {
 
     @NotNull
     public static SegmentBuilder emptyBuilder() {
-        return new SegmentBuilder(Range.NULL);
-    }
-
-    @NotNull
-    public static SegmentBuilder rangeBuilder(@NotNull Range range) {
-        return new SegmentBuilder(range);
-    }
-
-    @NotNull
-    public static SegmentBuilder rangeBuilder(int startOffset, int endOffset) {
-        startOffset = Math.max(0, startOffset);
-        endOffset = Math.max(startOffset, endOffset);
-        return new SegmentBuilder(Range.of(startOffset, endOffset));
-    }
-
-    @NotNull
-    public static SegmentBuilder sequenceBuilder(@NotNull CharSequence sequence) {
-        return new SegmentBuilder(Range.of(0, sequence.length()));
-    }
-
-    @NotNull
-    public static SegmentBuilder copyBuilder(@NotNull SegmentBuilder other) {
-        return new SegmentBuilder(other);
+        return new SegmentBuilder();
     }
 }

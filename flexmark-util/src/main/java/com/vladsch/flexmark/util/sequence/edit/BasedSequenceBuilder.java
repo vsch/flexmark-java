@@ -22,7 +22,6 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     private final @NotNull BasedSequence myBase;
     private final @Nullable List<BasedSegmentOptimizer> myOptimizers;
     private @Nullable List<BasedSequence> myBasedSequences;
-    private long myBasedSequencesTimestamp;
 
     /**
      * Construct a base sequence builder for given base sequence.
@@ -186,14 +185,12 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     public List<BasedSequence> getSequences() {
-        if (myBasedSequences == null || myBasedSequencesTimestamp != mySegments.getModificationTimestamp()) {
+        if (myBasedSequences == null) {
             if (myOptimizers != null) {
                 for (BasedSegmentOptimizer optimizer : myOptimizers) {
                     mySegments.optimizeFor(myBase, optimizer);
                 }
             }
-
-            myBasedSequencesTimestamp = mySegments.getModificationTimestamp();
 
             ArrayList<BasedSequence> sequences = new ArrayList<>();
             BasedSequence lastSequence = null;

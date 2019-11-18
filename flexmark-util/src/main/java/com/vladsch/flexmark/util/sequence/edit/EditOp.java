@@ -4,92 +4,95 @@ import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.vladsch.flexmark.util.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.Utils.quoteJavaString;
 
 /**
  * Representation of an edit operation on an abstract char sequence
  */
-public class EditOp {
-    final public static EditOp NULL = new EditOp(Range.NULL, null);
+public class EditOp extends Range {
+    final public static EditOp NULL_OP = new EditOp(Range.NULL, null);
 
-    final private @NotNull Range myRange;
-    final private @Nullable CharSequence myParam;
+    final private @Nullable String myText;
 
-    private EditOp(@NotNull Range range, @Nullable CharSequence param) {
-        myRange = range;
-        myParam = param;
+    private EditOp(int start, int end, @Nullable String text) {
+        super(start, end);
+        myText = text;
     }
 
-    @NotNull
-    public Range getRange() {
-        return myRange;
+    private EditOp(@NotNull Range other, @Nullable String text) {
+        super(other);
+        myText = text;
     }
 
     @Nullable
-    public CharSequence getParam() {
-        return myParam;
+    public String getText() {
+        return myText;
     }
 
-    @NotNull
-    public CharSequence getOpParam() {
-        assert myParam != null;
-        return myParam;
+    public boolean isNullOp() {
+        return this == NULL_OP;
     }
 
-    public boolean isNull() {
-        return this == NULL;
+    public boolean isNotNullOp() {
+        return this != NULL_OP;
     }
 
-    public boolean isNotNull() {
-        return this != NULL;
+    public boolean isBase() {
+        return myText == null;
+    }
+
+    public boolean isText() {
+        return myText != null;
     }
 
     @NotNull
     public EditType getEditType() {
-        if (this == NULL) {
+        if (this == NULL_OP) {
             return EditType.NULL;
+        } else if (myText == null) {
+            return EditType.BASE;
         } else {
-            if (myParam == null || myParam.length() == 0) {
+            if (myText.length() == 0) {
                 return EditType.DELETE;
             } else {
-                return myRange.getSpan() == 0 ? EditType.INSERT : EditType.REPLACE;
+                return getSpan() == 0 ? EditType.INSERT : EditType.REPLACE;
             }
         }
     }
 
     @NotNull
-    static EditOp insertOp(int index, @NotNull CharSequence param) {
-        return param.length() == 0 ? EditOp.NULL : new EditOp(Range.of(index, index), param);
+    static EditOp baseOp(int startOffset, int endOffset) {
+        return new EditOp(startOffset, endOffset, null);
     }
 
     @NotNull
-    static EditOp deleteOp(@NotNull Range range) {
-        return range.isEmpty() ? EditOp.NULL : new EditOp(range, null);
+    static EditOp textOp(int startOffset, int endOffset, @Nullable String text) {
+        return startOffset >= endOffset && (text == null || text.isEmpty()) ? NULL_OP : new EditOp(startOffset, endOffset, text);
     }
 
     @NotNull
-    static EditOp replaceOp(@NotNull Range range, @NotNull CharSequence param) {
-        return range.isEmpty() && param.length() == 0 ? EditOp.NULL : new EditOp(range, param);
+    static EditOp replaceOp(int startOffset, int endOffset, @NotNull String text) {
+        return startOffset >= endOffset && text.isEmpty() ? NULL_OP : new EditOp(startOffset, endOffset, text);
+    }
+
+    @NotNull
+    static EditOp deleteOp(int startOffset, int endOffset) {
+        return startOffset >= endOffset ? NULL_OP : new EditOp(startOffset, endOffset, "");
+    }
+
+    @NotNull
+    static EditOp insertOp(int startOffset, @NotNull String text) {
+        return text.isEmpty() ? NULL_OP : new EditOp(startOffset, startOffset, text);
     }
 
     @Override
     public String toString() {
-        switch (getEditType()) {
-            case NULL:
-                return "EditOp.NULL";
-
-            case DELETE:
-                return "EditOp{DELETE: " + myRange + "}";
-
-            case INSERT:
-                return "EditOp{INSERT: " + myRange.getStart() + ", " + quoteJavaString(myParam) + "}";
-
-            case REPLACE:
-                return "EditOp{REPLACE: " + myRange + ", " + quoteJavaString(myParam) + "}";
+        if (this == NULL_OP) {
+            return "NULL_OP";
+        } else if (myText == null) {
+            return "[" + getStart() + ", " + getEnd() + ")";
+        } else {
+            return "[" + getStart() + ", " + getEnd() + ", " + quoteJavaString(myText) + ")";
         }
-
-        // FIX: when stable change to throw IllegalStateException
-        return "EditOp{UNKNOWN}";
     }
 }

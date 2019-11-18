@@ -8,7 +8,7 @@ public class BasedSegmentBuilder extends SegmentBuilder {
     private final @NotNull BasedSequence myBase;
 
     protected BasedSegmentBuilder(@NotNull BasedSequence base) {
-        super(Range.NULL);
+        super();
         myBase = base;
     }
 
@@ -54,10 +54,5 @@ public class BasedSegmentBuilder extends SegmentBuilder {
     @NotNull
     public static BasedSegmentBuilder sequenceBuilder(@NotNull BasedSequence sequence) {
         return new BasedSegmentBuilder(sequence);
-    }
-
-    @NotNull
-    public static BasedSegmentBuilder copyBuilder(@NotNull BasedSegmentBuilder other) {
-        return new BasedSegmentBuilder(other);
     }
 }

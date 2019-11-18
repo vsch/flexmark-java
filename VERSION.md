@@ -212,12 +212,21 @@ Next 0.59.52
 * [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
-* [ ] Add: `ReplacedBasedSequence.addSegments(BasedSegmentBuilder)` so each replaced sequence
-      adds its own optimized segment list without requiring by character scanning of
+* [x] Add: `BasedSequence.addSegments(BasedSegmentBuilder)` so each sequence adds its own
+      optimized segment list without requiring by character scanning of
       `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
-  * [ ] Fix: `BasedSequenceBuilder` to use `ReplacedBasedSequence.addSegments`
+  * Fix: `BasedSequenceBuilder` to use `BasedSequence.addSegments`
+    * `ReplacedBasedSequence` it has no use other than to test if sequence replaces base
+  * [ ] Fix: Change segment parts to `EditOp` which extends range and holds an nullable string.
+        This will allow keeping track of replaced parts of base sequence.
+    * if string is null then it is a range from base
+    * range is empty then string is not null and is an insert at position in base
+    * range not empty and string not empty then it is a replacement of base segment.
+  * [ ] Add: optimized segment part extraction based on start/end offsets into full list
 * [x] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
 * [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
+* [ ] Fix: `SegmentBuilder` to keep track of start and end range in the list based on first/last
+      range added.
 * [x] Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
 * [x] Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
       instead of its own implementation.

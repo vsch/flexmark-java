@@ -12,6 +12,10 @@ public class SegmentList extends PositionListBase<Object, SegmentPosition> {
         super(new ArrayList<>(), SegmentPosition::new);
     }
 
+    public SegmentList(ArrayList<Object> parts) {
+        super(parts, SegmentPosition::new);
+    }
+
     @Nullable
     public String getStringOrNull(int index) {
         return getOrNull(index, String.class);
