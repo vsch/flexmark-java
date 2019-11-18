@@ -64,7 +64,7 @@ public class GitLabInlineParser implements InlineParserExtension {
             // possible closed, if matches open
             BasedSequence input = inlineParser.getInput().subSequence(inlineParser.getIndex());
             CharSequence charSequence = secondChar == ']' ? (firstChar == '+' ? "[+" : "[-") : (firstChar == '+' ? "{+" : "{-");
-            BasedSequence matchOpen = BasedSequence.of(charSequence, 0, charSequence.length());
+            BasedSequence matchOpen = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
 
             for (int i = openInlines.size(); i-- > 0; ) {
                 GitLabInline open = openInlines.get(i);

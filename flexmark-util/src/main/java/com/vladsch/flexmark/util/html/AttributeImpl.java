@@ -54,7 +54,7 @@ public class AttributeImpl implements Attribute {
             return value.equals(valueName) ? 0 : -1;
         } else {
             int lastPos = 0;
-            BasedSequence subSeq = BasedSequence.of(value, 0, value.length());
+            BasedSequence subSeq = BasedSequence.of(value).subSequence(0, value.length());
             while (lastPos < value.length()) {
                 int pos = subSeq.indexOf(valueName, lastPos);
                 if (pos == -1) break;

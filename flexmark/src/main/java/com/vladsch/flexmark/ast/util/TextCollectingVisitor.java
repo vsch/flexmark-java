@@ -12,9 +12,9 @@ import java.util.function.BiConsumer;
 
 @SuppressWarnings("WeakerAccess")
 public class TextCollectingVisitor {
-    private BasedSequenceBuilder out;
+    BasedSequenceBuilder out;
     private final NodeVisitor myVisitor;
-    private final HashSet<Class<?>> myLineBreakNodes;
+    final HashSet<Class<?>> myLineBreakNodes;
 
     protected static Class<?>[] concatArrays(Class<?>[]... classes) {
         int total = 0;

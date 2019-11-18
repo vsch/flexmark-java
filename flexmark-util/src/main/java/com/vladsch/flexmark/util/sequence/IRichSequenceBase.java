@@ -740,7 +740,8 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override
     public T suffixWith(@Nullable CharSequence suffix) {
         // convoluted to allow BasedCharSequence to use PrefixedCharSequence so all fits into SegmentedCharSequence
-        return suffix == null || suffix.length() == 0 ? (T) this : getBuilder().add(this).add(suffix).toSequence();
+        if (suffix == null || suffix.length() == 0) return (T) this;
+        return getBuilder().add(this).add(suffix).toSequence();
     }
 
     @NotNull

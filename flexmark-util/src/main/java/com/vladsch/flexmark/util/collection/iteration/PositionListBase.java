@@ -89,6 +89,14 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
         return myList;
     }
 
+    public boolean isEmpty() {
+        return myList.isEmpty();
+    }
+
+    public boolean isNotEmpty() {
+        return !myList.isEmpty();
+    }
+
     public T get(int index) {
         return myList.get(index);
     }

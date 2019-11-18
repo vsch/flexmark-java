@@ -300,7 +300,7 @@ public class Utils {
     }
 
     public static BasedSequence asBased(CharSequence sequence) {
-        return BasedSequence.of(sequence, 0, sequence.length());
+        return BasedSequence.of(sequence).subSequence(0, sequence.length());
     }
 
     public static String removeSuffix(String receiver, char suffix) {

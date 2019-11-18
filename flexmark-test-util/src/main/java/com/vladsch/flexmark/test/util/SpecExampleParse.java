@@ -68,9 +68,9 @@ public class SpecExampleParse {
 
         if (!sourcePrefix.isEmpty() || !sourceSuffix.isEmpty()) {
             String combinedSource = sourcePrefix + suffixWith(mySource, "\n") + sourceSuffix;
-            input = BasedSequence.of(combinedSource, 0, ((CharSequence) combinedSource).length()).subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
+            input = BasedSequence.of(combinedSource).subSequence(0, ((CharSequence) combinedSource).length()).subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
         } else {
-            input = BasedSequence.of(mySource, 0, ((CharSequence) mySource).length());
+            input = BasedSequence.of(mySource).subSequence(0, ((CharSequence) mySource).length());
         }
 
         input = TestUtils.stripIndent(input, sourceIndent);

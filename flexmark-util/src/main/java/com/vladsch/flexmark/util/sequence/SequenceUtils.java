@@ -57,7 +57,10 @@ public interface SequenceUtils {
     CharPredicate WHITESPACE_NBSP_SET = CharPredicate.WHITESPACE_NBSP;
     CharPredicate BACKSLASH_SET = CharPredicate.BACKSLASH;
     CharPredicate US_SET = value -> value == US;
-    @NotNull CharPredicate HASH_SET = CharPredicate.HASH;
+    CharPredicate HASH_SET = CharPredicate.HASH;
+    CharPredicate DECIMAL_DIGITS = CharPredicate.HASH;
+    CharPredicate HEXADECIMAL_DIGITS = CharPredicate.HASH;
+    CharPredicate OCTAL_DIGITS = CharPredicate.HASH;
 
     /**
      * Line Separator, used in paragraph wrapping to force start of new line

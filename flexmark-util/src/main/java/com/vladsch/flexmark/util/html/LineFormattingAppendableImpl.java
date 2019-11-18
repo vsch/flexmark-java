@@ -107,7 +107,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public LineFormattingAppendable setIndentPrefix(CharSequence prefix) {
-        myIndentPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix, 0, prefix.length());
+        myIndentPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix).subSequence(0, prefix.length());
         return this;
     }
 
@@ -133,9 +133,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     public LineFormattingAppendable setPrefix(CharSequence prefix, boolean afterEol) {
         if (!myPassThrough) {
             if (afterEol) {
-                myPrefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix, 0, prefix.length());
+                myPrefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix).subSequence(0, prefix.length());
             } else {
-                myPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix, 0, prefix.length());
+                myPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix).subSequence(0, prefix.length());
                 myPrefixAfterEol = myPrefix;
             }
         }
@@ -492,11 +492,11 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             StringBuilder sb = new StringBuilder();
             sb.append(prefix).append(suffix);
             CharSequence charSequence = sb.toString();
-            return BasedSequence.of(charSequence, 0, charSequence.length());
+            return BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         } else if (prefix != null && prefix.length() > 0) {
-            return BasedSequence.of(prefix, 0, prefix.length());
+            return BasedSequence.of(prefix).subSequence(0, prefix.length());
         } else if (suffix != null && suffix.length() > 0) {
-            return BasedSequence.of(suffix, 0, suffix.length());
+            return BasedSequence.of(suffix).subSequence(0, suffix.length());
         } else {
             return BasedSequence.NULL;
         }

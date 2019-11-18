@@ -460,7 +460,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -505,7 +505,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -548,7 +548,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -584,7 +584,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -620,7 +620,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -658,7 +658,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -696,7 +696,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -734,7 +734,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -772,7 +772,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -810,7 +810,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -848,7 +848,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -885,7 +885,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, false, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -920,7 +920,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, false, true));
 
@@ -961,7 +961,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, true, true));
 
@@ -1002,7 +1002,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, false, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1038,7 +1038,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1076,7 +1076,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1114,7 +1114,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1152,7 +1152,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1190,7 +1190,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1228,7 +1228,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1266,7 +1266,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1304,7 +1304,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1343,7 +1343,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1382,7 +1382,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1420,7 +1420,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1458,7 +1458,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1496,7 +1496,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1534,7 +1534,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1572,7 +1572,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1610,7 +1610,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1648,7 +1648,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1686,7 +1686,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1725,7 +1725,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1764,7 +1764,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1803,7 +1803,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1842,7 +1842,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1881,7 +1881,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1919,7 +1919,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1957,7 +1957,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -1995,7 +1995,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2034,7 +2034,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2073,7 +2073,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2112,7 +2112,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2152,7 +2152,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, false));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2193,7 +2193,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2234,7 +2234,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2275,7 +2275,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, false));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2316,7 +2316,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2357,7 +2357,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2398,7 +2398,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2439,7 +2439,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2480,7 +2480,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2521,7 +2521,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos, true, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2561,7 +2561,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
         table.fillMissingColumns();
 
@@ -2601,7 +2601,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false).set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "    "));
         table.fillMissingColumns();
 
@@ -2639,7 +2639,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, null, false));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2671,7 +2671,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, null, false));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2703,7 +2703,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, null, false));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
@@ -2735,7 +2735,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
         int pos = markdown.indexOf("^");
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
-        BasedSequence source = BasedSequence.of(charSequence, 0, charSequence.length());
+        BasedSequence source = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         assertTrue(table.addTrackedOffset(pos, null, false));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);

@@ -123,12 +123,10 @@ public class Range {
 
     @NotNull
     public Range intersect(@NotNull Range other) {
-        int thisStart = myStart;
-        if (thisStart < other.myStart) thisStart = other.myStart;
-        int thisEnd = myEnd;
-        if (thisEnd > other.myEnd) thisEnd = other.myEnd;
+        int thisStart = Math.max(myStart, other.myStart);
+        int thisEnd = Math.min(myEnd, other.myEnd);
 
-        if (thisStart >= thisEnd) thisStart = thisEnd = 0;
+        if (thisStart >= thisEnd) thisStart = thisEnd;
         return withRange(thisStart, thisEnd);
     }
 
@@ -197,13 +195,13 @@ public class Range {
 
     @NotNull
     public BasedSequence basedSubSequence(@NotNull CharSequence charSequence) {
-        return BasedSequence.of(charSequence, myStart, myEnd);
+        return BasedSequence.of(charSequence).subSequence(myStart, myEnd);
     }
 
     @NotNull
     public BasedSequence basedSafeSubSequence(@NotNull CharSequence charSequence) {
         int end = Math.min(charSequence.length(), myEnd);
-        return isNull() ? BasedSequence.NULL : BasedSequence.of(charSequence, Math.min(end, Math.max(0, myStart)), end);
+        return isNull() ? BasedSequence.NULL : BasedSequence.of(charSequence).subSequence(Math.min(end, Math.max(0, myStart)), end);
     }
 
     @NotNull

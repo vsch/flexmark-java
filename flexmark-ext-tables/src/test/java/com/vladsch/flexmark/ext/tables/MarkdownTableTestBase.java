@@ -38,7 +38,7 @@ public class MarkdownTableTestBase {
         }
 
         Parser parser = Parser.builder(options).build();
-        Node document = parser.parse(BasedSequence.of(markdown, 0, markdown.length()));
+        Node document = parser.parse(BasedSequence.of(markdown).subSequence(0, markdown.length()));
         TableExtractingVisitor tableVisitor = new TableExtractingVisitor(options);
         return tableVisitor.getTables(document);
     }
@@ -106,7 +106,7 @@ public class MarkdownTableTestBase {
 
                 @Override
                 public int charWidth(@NotNull CharSequence s) {
-                    return BasedSequence.of(s, 0, s.length()).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_SET);
+                    return BasedSequence.of(s).subSequence(0, s.length()).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_SET);
                 }
             });
         return useOptions;

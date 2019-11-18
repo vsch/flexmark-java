@@ -27,6 +27,9 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate ANY_EOL = value -> value == '\n' || value == '\r';
     CharPredicate WHITESPACE = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r';
     CharPredicate WHITESPACE_NBSP = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\u00A0';
+    CharPredicate DECIMAL_DIGITS = value -> value >= '0' && value <= '9';
+    CharPredicate HEXADECIMAL_DIGITS = value -> value >= '0' && value <= '9'|| value >= 'a' && value <= 'f' || value >= 'A' && value <= 'F';
+    CharPredicate OCTAL_DIGITS = value -> value >= '0' && value <= '7';
 
     @Override
     boolean test(int value);

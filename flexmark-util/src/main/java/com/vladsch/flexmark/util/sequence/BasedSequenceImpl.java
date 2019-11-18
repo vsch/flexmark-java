@@ -41,13 +41,13 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @NotNull
     @Override
     public BasedSequence sequenceOf(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        return BasedSequence.of(charSequence, startIndex, endIndex);
+        return of(charSequence).subSequence(startIndex, endIndex);
     }
 
     @Override
     public <B extends SequenceBuilder<B, BasedSequence>> @NotNull B getBuilder() {
         //noinspection unchecked
-        return (B) new BasedSequenceBuilder(getBaseSequence());
+        return (B) new BasedSequenceBuilder(this);
     }
 
     @NotNull
@@ -419,7 +419,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     /**
-     * @deprecated use {@link BasedSequence#of} instead
+     * @deprecated use {@link BasedSequence#of(CharSequence)} instead
      */
     @Deprecated
     public static BasedSequence of(@Nullable CharSequence charSequence) {
@@ -427,18 +427,18 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     /**
-     * @deprecated use {@link BasedSequence#of} instead
+     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
      */
     @Deprecated
     public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
-        return BasedSequence.of(charSequence, startIndex);
+        return of(charSequence).subSequence(startIndex);
     }
 
     /**
-     * @deprecated use {@link BasedSequence#of} instead
+     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
      */
     @Deprecated
     public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        return BasedSequence.of(charSequence, startIndex, endIndex);
+        return of(charSequence).subSequence(startIndex, endIndex);
     }
 }

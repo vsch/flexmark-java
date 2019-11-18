@@ -78,10 +78,10 @@ public class TableCell {
             boolean afterDelete
 
     ) {
-        BasedSequence chars = BasedSequence.of(text, 0, text.length());
+        BasedSequence chars = BasedSequence.of(text).subSequence(0, text.length());
         this.tableCellNode = tableCellNode;
-        this.openMarker = BasedSequence.of(openMarker, 0, openMarker.length());
-        this.closeMarker = BasedSequence.of(closeMarker, 0, closeMarker.length());
+        this.openMarker = BasedSequence.of(openMarker).subSequence(0, openMarker.length());
+        this.closeMarker = BasedSequence.of(closeMarker).subSequence(0, closeMarker.length());
         BasedSequence useMarker = this.openMarker.isEmpty() ? this.closeMarker.subSequence(0, 0) : this.openMarker.subSequence(this.openMarker.length());
         this.text = chars.isEmpty() && chars != BasedSequence.NULL ? PrefixedSubSequence.prefixOf(" ", useMarker) : chars;
         this.rowSpan = rowSpan;

@@ -59,17 +59,17 @@ public class DefinitionNodeFormatter implements NodeFormatter {
 
         if (options.markerSpaces >= 1 && openMarkerSpaces.length() != options.markerSpaces) {
             CharSequence charSequence = RepeatedSequence.repeatOf(' ', options.markerSpaces);
-            openMarkerSpaces = BasedSequence.of(charSequence, 0, charSequence.length());
+            openMarkerSpaces = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
         }
 
         switch (options.markerType) {
             case ANY:
                 break;
             case COLON:
-                openMarker = BasedSequence.of(":", 0, ((CharSequence) ":").length());
+                openMarker = BasedSequence.of(":").subSequence(0, ((CharSequence) ":").length());
                 break;
             case TILDE:
-                openMarker = BasedSequence.of("~", 0, ((CharSequence) "~").length());
+                openMarker = BasedSequence.of("~").subSequence(0, ((CharSequence) "~").length());
                 break;
         }
 

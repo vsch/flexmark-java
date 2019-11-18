@@ -156,7 +156,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         this.rawTitleLevel = titleLevel;
         if (!rawTitle.isEmpty()) {
             CharSequence charSequence = rawTitle.trim();
-            int markers = BasedSequence.of(charSequence, 0, charSequence.length()).countLeading(SequenceUtils.HASH_SET);
+            int markers = BasedSequence.of(charSequence).subSequence(0, charSequence.length()).countLeading(SequenceUtils.HASH_SET);
             if (markers >= 1 && markers <= 6) titleLevel = markers;
             this.title = rawTitle.substring(markers).trim();
         } else {

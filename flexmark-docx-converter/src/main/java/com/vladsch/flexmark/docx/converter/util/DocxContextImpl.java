@@ -702,7 +702,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
             int minSpaces = Integer.MAX_VALUE;
             int i = 0;
             for (CharSequence line : lines) {
-                leadColumns[i] = BasedSequence.of(line, 0, line.length()).countLeadingColumns(0, BasedSequence.SPACE_TAB_SET);
+                leadColumns[i] = BasedSequence.of(line).subSequence(0, line.length()).countLeadingColumns(0, BasedSequence.SPACE_TAB_SET);
                 minSpaces = Utils.min(minSpaces, leadColumns[i]);
                 i++;
             }
@@ -714,7 +714,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
 
                 int spaces = leadColumns[i] - minSpaces;
                 while (spaces-- > 0) sb.append(' ');
-                sb.append(BasedSequence.of(line, 0, line.length()).trim());
+                sb.append(BasedSequence.of(line).subSequence(0, line.length()).trim());
 
                 // Create object for p
                 addTextCreateR(sb.toString());

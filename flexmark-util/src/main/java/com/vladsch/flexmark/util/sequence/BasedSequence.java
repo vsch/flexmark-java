@@ -35,14 +35,22 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
         return BasedSequenceImpl.create(charSequence);
     }
 
+    /**
+     * @deprecated  use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
+     */
     @NotNull
+    @Deprecated
     static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
-        return BasedSequenceImpl.create(charSequence).subSequence(startIndex);
+        return of(charSequence).subSequence(startIndex);
     }
 
+    /**
+     * @deprecated  use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
+     */
     @NotNull
+    @Deprecated
     static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        return BasedSequenceImpl.create(charSequence).subSequence(startIndex, endIndex);
+        return of(charSequence).subSequence(startIndex, endIndex);
     }
 
     @NotNull

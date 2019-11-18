@@ -184,35 +184,36 @@ Next 0.59.52
 ------------
 
 * [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
+* [x] Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
+* [x] Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
+      instead of its own implementation.
+  * [x] Add: construction with optional `BasedSegmentOptimizer` list and apply optimizers to
+        segment list before generating sequence or string.
+  * [x] Fix: if there is an overlap in appended sequence with previous segments, add the overlap
+        as out of base text instead of throwing an exception.
+* [ ] Fix: factor out EOL recovery from `BasedCharsRecoverySegmentOptimizer`, easier to do EOL
+      recovery after based char recovery has done its job.
+* [x] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
+* [ ] Add: EOL recovery `BasedEolRecoveryOptimizer`:
+  * recover EOLs from text when preceded by range and only blanks between end of range and EOL.
+    Regardless of whether the blanks are skipped in base sequence or part of the text.
+    * If part of text split text into before and after and insert EOL.
+    * If part of base then just insert before text, trimming EOL out of text.
+    * Keep recovering EOLs from text until there are none that meet the criteria of having
+      nothing but blanks between them and end of previous range.
+    * After recovering the EOL range, see if it can be expanded left/right to encompass more
+      based chars from text on either side.
+* [ ] Fix: `SegmentedSequence` to construct from `SegmentList` of segment builder instead of an
+      array of `BasedSequences`. This will allow optimization to recover lost based spaces and
+      EOLs.
+* [ ] Fix: consider adding to based sequences method to get `SegmentList` which represents their
+      contents, based and modified. This can make tracking content changes easier.
+* [ ] Add: position tracking resolver based on original sequence tracked and final result.
+* [x] Add: `MarkdownParagraph` to utils to wrap paragraph text.
+  * [ ] Fix; `MarkdownParagraph` to use `SegmentBuilder` for accumulating wrapped text.
+  * [ ] Test: position marker preservation with direction type
   * [ ] Add: `Formatter` Paragraph wrapping options and code.
   * [ ] Add: `LS` awareness to segment optimization
-  * [ ] Fix: change `BasedSequenceBuilder` to use `SegmentBuilder` for segment accumulation
-        instead of its own implementation.
-    * [ ] Add: construction with optional `SegmentOptimizer` list and apply optimizers to
-          segment list before generating sequence or string.
-    * [ ] Fix: if there is an overlap in appended sequence with previous segments, add the
-          overlap as out of base text instead of throwing an exception.
-  * [ ] Fix: `SegmentedSequence` to construct from `SegmentList` of segment builder instead of
-        an array of `BasedSequences`. This will allow optimization to recover lost based spaces
-        and EOLs.
-    * [ ] Fix: factor out EOL recovery from `BasedCharsRecoverySegmentOptimizer`, easier to do
-          EOL recovery after based char recovery has done its job.
-    * [ ] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
-    * [ ] Add: EOL recovery `BasedEolRecoveryOptimizer`:
-      * recover EOLs from text when preceded by range and only blanks between end of range and
-        EOL. Regardless of whether the blanks are skipped in base sequence or part of the text.
-        * If part of text split text into before and after and insert EOL.
-        * If part of base then just insert before text, trimming EOL out of text.
-        * Keep recovering EOLs from text until there are none that meet the criteria of having
-          nothing but blanks between them and end of previous range.
-        * After recovering the EOL range, see if it can be expanded left/right to encompass more
-          based chars from text on either side.
-  * [ ] Fix: consider adding to based sequences method to get `SegmentList` which represents
-        their contents, based and modified. This can make tracking content changes easier.
-  * [ ] Add: position tracking resolver based on original sequence tracked and final result.
-  * [x] Add: `MarkdownParagraph` to utils to wrap paragraph text.
-    * [ ] Fix; `MarkdownParagraph` to use `SegmentBuilder` for accumulating wrapped text.
-    * [ ] Test: position marker preservation with direction type
 * [ ] Fix: remove skeleton code for offset tracking through base sequence manipulations. No
       longer needed. This will be done by analysis of original vs. resulting based sequence
       offsets.

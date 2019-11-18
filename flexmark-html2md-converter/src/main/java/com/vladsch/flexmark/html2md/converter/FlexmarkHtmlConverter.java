@@ -696,7 +696,7 @@ public class FlexmarkHtmlConverter {
                 if (title != null && !title.trim().isEmpty()) {
                     if (reference.getTitle().isBlank()) {
                         // just add it to the existing reference
-                        reference.setTitle(BasedSequence.of(title, 0, ((CharSequence) title).length()));
+                        reference.setTitle(BasedSequence.of(title).subSequence(0, ((CharSequence) title).length()));
                         return reference;
                     } else if (reference.getTitle().equals(title.trim())) {
                         return reference;
