@@ -203,11 +203,10 @@ Next 0.59.52
       nothing but blanks between them and end of previous range.
     * After recovering the EOL range, see if it can be expanded left/right to encompass more
       based chars from text on either side.
-* [ ] Fix: `SegmentedSequence` to construct from `SegmentList` of segment builder instead of an
-      array of `BasedSequences`. This will allow optimization to recover lost based spaces and
-      EOLs.
-* [ ] Fix: consider adding to based sequences method to get `SegmentList` which represents their
-      contents, based and modified. This can make tracking content changes easier.
+* [ ] Add: `ReplacedBasedSequence.addSegments(BasedSegmentBuilder)` so each replaced sequence
+      adds its own optimized segment list without requiring by character scanning of
+      `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
+  * [ ] Fix: `BasedSequenceBuilder` to use `ReplacedBasedSequence.addSegments`
 * [ ] Add: position tracking resolver based on original sequence tracked and final result.
 * [x] Add: `MarkdownParagraph` to utils to wrap paragraph text.
   * [ ] Fix; `MarkdownParagraph` to use `SegmentBuilder` for accumulating wrapped text.
@@ -221,7 +220,7 @@ Next 0.59.52
       [Position-Lists](assets/ideas/PositionList/Position-Lists.md)
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
-* [ ] Add: Common char sets:
+* [x] Add: Common char sets:
   * `DECIMAL_DIGITS`
   * `HEXADECIMAL_DIGITS`
   * `OCTAL_DIGITS`
