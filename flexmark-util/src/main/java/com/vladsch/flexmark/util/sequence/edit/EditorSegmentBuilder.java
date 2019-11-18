@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
+// NOT USED: can be deleted
 public class EditorSegmentBuilder {
     private SegmentList myParts = new SegmentList();      // contains either Range of original sequence kept, or String inserted at position after the last Range
     private int myStartOffset = 0;
