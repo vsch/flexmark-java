@@ -57,6 +57,11 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     }
 
     @NotNull
+    public BasedSegmentBuilder getSegmentBuilder() {
+        return mySegments;
+    }
+
+    @NotNull
     @Override
     public BasedSequenceBuilder subContext() {
         return myOptimizers == null ? new BasedSequenceBuilder(myBase) : new BasedSequenceBuilder(myBase, myOptimizers);
@@ -121,71 +126,20 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     private BasedSequenceBuilder addBased(@NotNull BasedSequence chars) {
         if (chars.isNotNull()) {
-            int startOffset = chars.getStartOffset() - myBase.getStartOffset();
-            int endOffset = chars.getEndOffset() - myBase.getStartOffset();
-            if (!(chars instanceof ReplacedBasedSequence)) {
-                mySegments.append(startOffset, endOffset);
-            } else {
-                if (myOptimizers == null) {
-                    mySegments.append(startOffset, startOffset);
-                    mySegments.append(chars.toString());
-                    mySegments.append(endOffset, endOffset);
-                } else {
-                    // find contiguous ranges of base chars and replaced chars, slower but only when optimizers are available
-                    int baseStart = -1;
-                    int baseEnd = -1;
-                    int stringStart = -1;
-                    boolean hadSequence = false;
-
-                    int iMax = chars.length();
-                    for (int i = 0; i < iMax; i++) {
-                        int offset = chars.getIndexOffset(i);
-
-                        if (offset != -1) {
-                            if (baseStart == -1) {
-                                if (stringStart != -1) {
-                                    if (!hadSequence) {
-                                        mySegments.append(startOffset, startOffset);
-                                        hadSequence = true;
-                                    }
-                                    mySegments.append(chars.subSequence(stringStart, i).toString());
-                                    stringStart = -1;
-                                }
-
-                                baseStart = offset;
-                            } else {
-                                if (offset > baseEnd + 1) {
-                                    // not contiguous base, append accumulated so far and start a new range
-                                    mySegments.append(baseStart, baseEnd + 1);
-                                    baseStart = i;
-                                }
-                            }
-
-                            baseEnd = offset;
-                        } else {
-                            if (baseStart != -1) {
-                                mySegments.append(baseStart, baseEnd + 1);
-                                baseEnd = baseStart = -1;
-                                hadSequence = true;
-                            }
-
-                            if (stringStart == -1) stringStart = i;
-                        }
-                    }
-
-                    if (baseStart != -1) {
-                        mySegments.append(baseStart, baseEnd + 1);
-                    }
-
-                    if (stringStart != -1) {
-                        if (!hadSequence) {
-                            mySegments.append(startOffset, startOffset);
-                        }
-                        mySegments.append(chars.subSequence(stringStart, iMax).toString());
-                        mySegments.append(endOffset, endOffset);
-                    }
-                }
-            }
+            BasedUtils.generateSegments(mySegments, myBase, chars);
+//            if (!(chars instanceof ReplacedBasedSequence)) {
+//                mySegments.append(chars.getSourceRange());
+//            } else {
+//                if (myOptimizers == null) {
+//                    int startOffset = chars.getStartOffset() - myBase.getStartOffset();
+//                    int endOffset = chars.getEndOffset() - myBase.getStartOffset();
+//                    mySegments.append(startOffset, startOffset);
+//                    mySegments.append(chars.toString());
+//                    mySegments.append(endOffset, endOffset);
+//                } else {
+//                }
+//                ((ReplacedBasedSequence) chars).addSegments(mySegments);
+//            }
             myBasedSequences = null;
         }
         return this;

@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,6 +78,43 @@ public class SegmentBuilder {
         if (position.getRangeOrNull() != null) return position;
         if (position.getRangeOrNull(-1) != null) return position.previous();
         return myParts.getEnd();
+    }
+
+    @NotNull
+    public Range getOffsetRange() {
+        @NotNull List<Object> list = myParts.getList();
+        Object o1 = null;
+        Object o2 = null;
+
+        int iMax = list.size();
+        switch (iMax) {
+            case 0:
+                return Range.NULL;
+
+            case 1:
+                o1 = list.get(0);
+                return o1 instanceof Range ? (Range) o1 : Range.NULL;
+
+            case 2:
+                o1 = list.get(0);
+                o2 = list.get(1);
+                return o1 instanceof Range && o2 instanceof Range ? Range.of(((Range) o1).getStart(), ((Range) o2).getEnd()) : o1 instanceof Range ? (Range) o1 : o2 instanceof Range ? (Range) o2 : Range.NULL;
+
+            default:
+                //noinspection ForLoopReplaceableByForEach
+                for (int i = 0; i < iMax; i++) {
+                    o1 = list.get(i);
+                    if (o1 instanceof Range) break;
+                }
+
+                for (int i = iMax; i-- > 0; ) {
+                    o2 = list.get(i);
+                    if (o2 instanceof Range) break;
+                }
+
+                //noinspection ConstantConditions
+                return o1 != null && o2 != null ? Range.of(((Range) o1).getStart(), ((Range) o2).getEnd()) : o1 != null ? (Range) o1 : o2 != null ? (Range) o2 : Range.NULL;
+        }
     }
 
     @Nullable
@@ -179,7 +215,7 @@ public class SegmentBuilder {
         if (part != null) {
             assert part instanceof Range || part instanceof String;
             if (part instanceof Range) append((Range) part);
-            else append((String)part);
+            else append((String) part);
         }
         return this;
     }

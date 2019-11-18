@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
@@ -67,6 +68,11 @@ public final class BasedTrackedSequence extends BasedSequenceImpl implements Rep
     @Override
     public int getIndexOffset(int index) {
         return base.getIndexOffset(index);
+    }
+
+    @Override
+    public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
+        return ((BasedSequence) this).addSegments(builder);
     }
 
     @Override

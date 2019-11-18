@@ -2,11 +2,12 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
+import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
-import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,6 +60,12 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
             throw new IllegalArgumentException("getIndexRange(" + startOffset + ", " + endOffset + ") not in range [" + baseOffset + ", " + getEndOffset() + "]");
         }
         return Range.of(startOffset - baseOffset, endOffset - baseOffset);
+    }
+
+    @Override
+    public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
+        builder.append(getStartOffset(), getEndOffset());
+        return false;
     }
 
     @NotNull

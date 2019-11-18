@@ -183,17 +183,8 @@ Next
 Next 0.59.52
 ------------
 
-* [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
-* [x] Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
-* [x] Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
-      instead of its own implementation.
-  * [x] Add: construction with optional `BasedSegmentOptimizer` list and apply optimizers to
-        segment list before generating sequence or string.
-  * [x] Fix: if there is an overlap in appended sequence with previous segments, add the overlap
-        as out of base text instead of throwing an exception.
 * [ ] Fix: factor out EOL recovery from `BasedCharsRecoverySegmentOptimizer`, easier to do EOL
       recovery after based char recovery has done its job.
-* [x] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
 * [ ] Add: EOL recovery `BasedEolRecoveryOptimizer`:
   * recover EOLs from text when preceded by range and only blanks between end of range and EOL.
     Regardless of whether the blanks are skipped in base sequence or part of the text.
@@ -203,10 +194,6 @@ Next 0.59.52
       nothing but blanks between them and end of previous range.
     * After recovering the EOL range, see if it can be expanded left/right to encompass more
       based chars from text on either side.
-* [ ] Add: `ReplacedBasedSequence.addSegments(BasedSegmentBuilder)` so each replaced sequence
-      adds its own optimized segment list without requiring by character scanning of
-      `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
-  * [ ] Fix: `BasedSequenceBuilder` to use `ReplacedBasedSequence.addSegments`
 * [ ] Add: position tracking resolver based on original sequence tracked and final result.
 * [x] Add: `MarkdownParagraph` to utils to wrap paragraph text.
   * [ ] Fix; `MarkdownParagraph` to use `SegmentBuilder` for accumulating wrapped text.
@@ -220,6 +207,24 @@ Next 0.59.52
       [Position-Lists](assets/ideas/PositionList/Position-Lists.md)
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
+
+<!-- -->
+* [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
+      list of based sequences. The parts are already resolved by builder, based sequences
+      duplicates useless work on both ends.
+* [ ] Add: `ReplacedBasedSequence.addSegments(BasedSegmentBuilder)` so each replaced sequence
+      adds its own optimized segment list without requiring by character scanning of
+      `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
+  * [ ] Fix: `BasedSequenceBuilder` to use `ReplacedBasedSequence.addSegments`
+* [x] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
+* [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
+* [x] Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
+* [x] Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
+      instead of its own implementation.
+  * [x] Add: construction with optional `BasedSegmentOptimizer` list and apply optimizers to
+        segment list before generating sequence or string.
+  * [x] Fix: if there is an overlap in appended sequence with previous segments, add the overlap
+        as out of base text instead of throwing an exception.
 * [x] Add: Common char sets:
   * `DECIMAL_DIGITS`
   * `HEXADECIMAL_DIGITS`

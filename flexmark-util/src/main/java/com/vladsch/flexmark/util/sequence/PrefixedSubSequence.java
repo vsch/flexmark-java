@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -64,6 +65,16 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
             return -1;
         }
         return base.getIndexOffset(index - prefix.length());
+    }
+
+    @Override
+    public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
+        boolean hadOutOfBase = prefix.length() != 0;
+        if (hadOutOfBase) {
+            builder.append(base.getStartOffset(), base.getStartOffset());
+            builder.append(prefix.toString());
+        }
+        return base.addSegments(builder) || hadOutOfBase;
     }
 
     @Override

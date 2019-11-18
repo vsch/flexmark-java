@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
+import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -100,6 +102,26 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         return offset < 0 ? -1 : offset;
     }
 
+    @Override
+    public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
+        if (length > 0) {
+            return BasedUtils.generateSegments(builder, baseSeq, getStartOffset(), getEndOffset(), length, i -> baseOffsets[i + baseStartOffset], (startIndex, endIndex) -> getString(baseOffsets[startIndex], baseOffsets[endIndex]));
+        }
+        return false;
+    }
+
+    /**
+     * Get string between start/end offsets, note these are -ve
+     *
+     * @param startIndex start offset
+     * @param endOffset  end offset
+     * @return string from chars
+     */
+    @NotNull
+    private String getString(int startIndex, int endOffset) {
+        return String.valueOf(nonBaseChars, -startIndex + 1, -endOffset + 1);
+    }
+
     /**
      * removed empty and return BasedSequence.NULL when no segments which is the logical result however,
      * this will mean empty node text in FencedCodeBlock will now return NULL sequence instead of an empty
@@ -111,7 +133,9 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
      * @return based sequence of segments. Result is a sequence which looks like
      *         all the segments were concatenated, while still maintaining
      *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
+     * @deprecated use {@link BasedSequence#getBuilder()} or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder} to construct segments directly.
      */
+    @Deprecated
     public static BasedSequence of(@NotNull Iterable<? extends BasedSequence> segments) {
         BasedSequence lastSegment = null;
         BasedSequence firstSegment = null;

@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
+import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,6 +112,14 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @return offset of index of this sequence in original text
      */
     int getIndexOffset(int index);
+
+    /**
+     * Add segments for this sequence, replacing out of base characters with strings
+     *
+     * @param builder builder
+     * @return true if had out of base chars
+     */
+    boolean addSegments(@NotNull BasedSegmentBuilder builder);
 
     /**
      * Get the range of indices that map into {@link #getBaseSequence()} with startOffset and endOffset

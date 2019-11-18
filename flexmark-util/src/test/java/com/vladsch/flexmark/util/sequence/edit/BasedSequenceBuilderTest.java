@@ -777,8 +777,8 @@ public class BasedSequenceBuilderTest {
         BasedSequence text = PrefixedSubSequence.repeatOf(" ", 5, sequence).append(PrefixedSubSequence.repeatOf(" ", 5, sequence.getEmptySuffix()));
         builder.append(text);
 
-        assertEquals("⟦⟧     0123456789     ⟦⟧", builder.toStringWithRanges());
-        assertEquals("⟦⟧     0123456789     ⟦⟧", builder.toStringWithRangesOptimized());
+        assertEquals("⟦⟧     ⟦0123456789⟧     ⟦⟧", builder.toStringWithRanges());
+        assertEquals("⟦⟧     ⟦0123456789⟧     ⟦⟧", builder.toStringWithRangesOptimized());
         assertEquals("     0123456789     ", builder.toSequence().toVisibleWhitespaceString());
     }
 }

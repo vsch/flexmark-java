@@ -127,7 +127,7 @@ public final class CharSubSequence extends BasedSequenceImpl {
      */
     @Deprecated
     public static CharSubSequence of(char[] chars, int startIndex, int endIndex) {
-        assert startIndex >= 0 && startIndex >= endIndex && endIndex <= chars.length;
+        assert startIndex >= 0 && startIndex <= endIndex && endIndex <= chars.length;
 
         char[] useChars = new char[chars.length];
         System.arraycopy(chars, 0, useChars, 0, chars.length);
