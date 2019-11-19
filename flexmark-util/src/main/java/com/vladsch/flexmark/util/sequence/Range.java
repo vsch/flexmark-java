@@ -63,12 +63,20 @@ public class Range {
     public Range shiftRight(int delta) { return delta == 0 ? this: Range.of(myStart + delta, myEnd + delta);}
     // @formatter:on
 
+//    /**
+//     * @return span of this range: end-start,
+//     * @deprecated  use {@link #getSpan()}
+//     */
+//    @Deprecated
+//    public int length() { return getSpan();}
+
     // TEST:
     // @formatter:off
     public int getSpan() { return myEnd - myStart;}
-    public int length() { return myEnd - myStart;}
-    public boolean isNull() { return this == NULL;}
-    public boolean isNotNull() { return this != NULL;}
+
+    // NOTE: change to equal NULL instead of instance otherwise inheriting makes null equality impossible
+    public boolean isNull() { return this.myStart == NULL.myStart && this.myEnd == NULL.myEnd;}
+    public boolean isNotNull() { return !isNull();}
     public boolean isEmpty() { return myStart >= myEnd; }
     public boolean isNotEmpty() { return myStart < myEnd; }
     // @formatter:on

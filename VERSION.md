@@ -205,6 +205,11 @@ Next 0.59.52
       offsets.
 * [ ] Fix: rework `PositionList` and `Position` according to
       [Position-Lists](assets/ideas/PositionList/Position-Lists.md)
+  * [ ] Add: concept of framing to invalidate all position created in the frame and not taken
+        out via `Position.unFrame()`, to allow optimized removal of positions from
+        notifications. Otherwise the update list grows fast and with every iteration. Syntax
+        should be: `try { startFrame() ... } finally { endFrame(); }` with all positions created
+        in the frame detached. This should be done by any functions creating positions.
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 
@@ -217,7 +222,7 @@ Next 0.59.52
       `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
   * Fix: `BasedSequenceBuilder` to use `BasedSequence.addSegments`
     * `ReplacedBasedSequence` it has no use other than to test if sequence replaces base
-  * [ ] Fix: Change segment parts to `EditOp` which extends range and holds an nullable string.
+  * [x] Fix: Change segment parts to `EditOp` which extends range and holds an nullable string.
         This will allow keeping track of replaced parts of base sequence.
     * if string is null then it is a range from base
     * range is empty then string is not null and is an insert at position in base
@@ -225,8 +230,9 @@ Next 0.59.52
   * [ ] Add: optimized segment part extraction based on start/end offsets into full list
 * [x] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
 * [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
-* [ ] Fix: `SegmentBuilder` to keep track of start and end range in the list based on first/last
+* [x] Fix: `SegmentBuilder` to keep track of start and end range in the list based on first/last
       range added.
+  * [ ] Test: need to test this more thoroughly
 * [x] Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
 * [x] Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
       instead of its own implementation.

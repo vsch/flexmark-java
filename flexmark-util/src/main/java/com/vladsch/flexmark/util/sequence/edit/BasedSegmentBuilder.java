@@ -21,32 +21,33 @@ public class BasedSegmentBuilder extends SegmentBuilder {
     public void handleOverlap(@NotNull SegmentPosition position, @NotNull Range range) {
         // convert overlap to text from our base
         // NOTE: one after the last range should be String or nothing, if it was a Range then it would be the last one
-        String text = position.getStringOrNull(1);
-        Range prevRange = position.getRangeOrNull();
-        assert prevRange != null && prevRange.overlaps(range);
-
+        EditOp textOp = position.getStringOrNullOp(1);
+        Range prevRange = position.getRangeOrNullOp();
+        assert prevRange.isNotNull() && prevRange.overlaps(range);
+        String text = textOp.isPlainText() ? textOp.getText() : null;
 
         if (!prevRange.doesContain(range)) {
             // add overlapping part as range followed by text
             Range overlap = prevRange.intersect(range);
 
+            // FIX: can be replace op with range
             if (text != null) {
-                position.set(1, text + myBase.subSequence(overlap).toString());
+                position.set(1, EditOp.plainText(text + myBase.subSequence(overlap).toString()));
             } else {
-                position.append(myBase.subSequence(overlap).toString());
+                position.append(EditOp.plainText(myBase.subSequence(overlap).toString()));
             }
 
             overlap = range.withStart(overlap.getEnd());
 
             if (overlap.isNotEmpty()) {
-                position.append(overlap);
+                position.append(EditOp.baseOp(overlap));
             }
         } else {
             // fully contains added range, add whole thing as text appended to previous text
             if (text != null) {
-                position.set(1, text + myBase.subSequence(range));
+                position.set(1, EditOp.plainText(text + myBase.subSequence(range)));
             } else {
-                position.add(1, myBase.subSequence(range).toString());
+                position.add(1, EditOp.plainText(myBase.subSequence(range).toString()));
             }
         }
     }

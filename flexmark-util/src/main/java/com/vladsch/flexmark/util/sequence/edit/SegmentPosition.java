@@ -3,54 +3,53 @@ package com.vladsch.flexmark.util.sequence.edit;
 import com.vladsch.flexmark.util.collection.iteration.IPositionBase;
 import com.vladsch.flexmark.util.collection.iteration.IPositionUpdater;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
-import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class SegmentPosition extends IPositionBase<Object, SegmentPosition> {
-    public SegmentPosition(@NotNull IPositionUpdater<Object, SegmentPosition> parent, int index, @NotNull PositionAnchor anchor) {
+public class SegmentPosition extends IPositionBase<EditOp, SegmentPosition> {
+    public SegmentPosition(@NotNull IPositionUpdater<EditOp, SegmentPosition> parent, int index, @NotNull PositionAnchor anchor) {
         super(parent, index, anchor);
     }
 
-    @Nullable
-    public String getStringOrNull() {
-        return getStringOrNull(0);
-    }
-
-    @Nullable
-    public Range getRangeOrNull() {
-        return getRangeOrNull(0);
-    }
-
+    /**
+     * @return unattached text op or NULL_OP
+     */
     @NotNull
-    public String getString() {
-        return getString(0);
+    public EditOp getStringOrNullOp() {
+        return getStringOrNullOp(0);
     }
 
+    /**
+     * @return op with range or NULL_OP
+     */
     @NotNull
-    public Range getRange() {
-        return getRange(0);
+    public EditOp getRangeOrNullOp() {
+        return getRangeOrNullOp(0);
     }
 
-    @Nullable
-    public String getStringOrNull(int index) {
-        return getOrNull(index, String.class);
-    }
-
-    @Nullable
-    public Range getRangeOrNull(int index) {
-        return getOrNull(index, Range.class);
-    }
-
+    /**
+     * @return unattached text op or NULL_OP
+     */
     @NotNull
-    public String getString(int index) {
-        String string = getOrNull(index, String.class);
-        return string == null ? "" : string;
+    public EditOp getStringOrNullOp(int index) {
+        EditOp op = getOrNull(index);
+        return op == null || !op.isPlainText() ? EditOp.NULL_OP : op;
     }
 
+    /**
+     * @return op with range or NULL_OP
+     */
     @NotNull
-    public Range getRange(int index) {
-        Range range = getOrNull(index, Range.class);
-        return range == null ? Range.EMPTY : range;
+    public EditOp getRangeOrNullOp(int index) {
+        EditOp op = getOrNull(index);
+        return op == null || op.isNull() ? EditOp.NULL_OP : op;
+    }
+
+    /**
+     * @return op or NULL_OP
+     */
+    @NotNull
+    public EditOp getOrNullOp(int index) {
+        EditOp op = getOrNull(index);
+        return op == null ? EditOp.NULL_OP : op;
     }
 }

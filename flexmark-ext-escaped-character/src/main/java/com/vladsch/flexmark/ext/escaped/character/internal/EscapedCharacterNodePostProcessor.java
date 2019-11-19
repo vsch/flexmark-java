@@ -37,7 +37,7 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
             int startOffset = region.getOriginalRange().getStart();
             int endOffset = region.getOriginalRange().getEnd();
 
-            if (original.charAt(startOffset) == '\\' && region.getReplacedRange().length() == 1
+            if (original.charAt(startOffset) == '\\' && region.getReplacedRange().getSpan() == 1
                     // fix for #19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block
                     && startOffset + 1 < original.length()) {
                 if (wrapInTextBase) {

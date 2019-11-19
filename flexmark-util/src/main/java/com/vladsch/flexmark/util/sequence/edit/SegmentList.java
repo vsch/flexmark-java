@@ -1,40 +1,43 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.collection.iteration.PositionListBase;
-import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-public class SegmentList extends PositionListBase<Object, SegmentPosition> {
+public class SegmentList extends PositionListBase<EditOp, SegmentPosition> {
     public SegmentList() {
         super(new ArrayList<>(), SegmentPosition::new);
     }
 
-    public SegmentList(ArrayList<Object> parts) {
+    public SegmentList(ArrayList<EditOp> parts) {
         super(parts, SegmentPosition::new);
     }
 
-    @Nullable
-    public String getStringOrNull(int index) {
-        return getOrNull(index, String.class);
-    }
-
-    @Nullable
-    public Range getRangeOrNull(int index) {
-        return getOrNull(index, Range.class);
-    }
-
+    /**
+     * @return unattached text op or NULL_OP
+     */
     @NotNull
-    public String getString(int index) {
-        String value = getOrNull(index, String.class);
-        return value != null ? value : "";
+    public EditOp getStringOrNullOp(int index) {
+        EditOp op = getOrNull(index);
+        return op == null || !op.isPlainText() ? EditOp.NULL_OP : op;
     }
 
+    /**
+     * @return op with range or NULL_OP
+     */
     @NotNull
-    public Range getRange(int index) {
-        Range value = getOrNull(index, Range.class);
-        return value != null ? value : Range.NULL;
+    public EditOp getRangeOrNullOp(int index) {
+        EditOp op = getOrNull(index);
+        return op == null || op.isNull() ? EditOp.NULL_OP : op;
+    }
+
+    /**
+     * @return op or NULL_OP
+     */
+    @NotNull
+    public EditOp getOrNullOp(int index) {
+        EditOp op = getOrNull(index);
+        return op == null ? EditOp.NULL_OP : op;
     }
 }

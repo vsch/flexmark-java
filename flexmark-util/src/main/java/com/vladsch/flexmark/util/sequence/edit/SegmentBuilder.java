@@ -260,12 +260,12 @@ public class SegmentBuilder {
                     myLastRangeIndex = getLastRangeIndex(true);
                 } else if (prevRange.isAdjacentBefore(range)) {
                     // if no text in between merge them, else append
-                    EditOp text = position.getStringOrNullOp(1);
+                    EditOp textOp = position.getStringOrNullOp(1);
 
-                    if (text.isNullOp() || text.isEmpty()) {
+                    if (textOp.isNullOp() || textOp.getText().isEmpty()) {
                         Range expanded = prevRange.expandToInclude(range);
                         position.set(EditOp.baseOp(expanded));
-                        if (text.isNotNullOp()) position.remove(1);
+                        if (textOp.isNotNullOp()) position.remove(1);
 
                         myEndOffset = expanded.getEnd();
                         myLength += expanded.getSpan() - prevRange.getSpan();

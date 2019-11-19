@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -105,21 +104,10 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
     @Override
     public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
         if (length > 0) {
-            return BasedUtils.generateSegments(builder, baseSeq, getStartOffset(), getEndOffset(), length, i -> baseOffsets[i + baseStartOffset], (startIndex, endIndex) -> getString(baseOffsets[startIndex], baseOffsets[endIndex]));
+            // FIX: clean up and optimize the structure. it is error prone and inefficient
+            return BasedUtils.generateSegments(builder, baseSeq, getStartOffset(), getEndOffset(), length, this::getIndexOffset, (startIndex, endIndex) -> subSequence(startIndex, endIndex).toString());
         }
         return false;
-    }
-
-    /**
-     * Get string between start/end offsets, note these are -ve
-     *
-     * @param startIndex start offset
-     * @param endOffset  end offset
-     * @return string from chars
-     */
-    @NotNull
-    private String getString(int startIndex, int endOffset) {
-        return String.valueOf(nonBaseChars, -startIndex + 1, -endOffset + 1);
     }
 
     /**
