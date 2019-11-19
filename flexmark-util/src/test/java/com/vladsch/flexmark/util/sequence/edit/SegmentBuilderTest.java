@@ -29,16 +29,14 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         String expected = "";
 
         assertEquals("SegmentBuilder{end=0, parts= }", segments.toString());
         assertEquals(expected.length(), segments.length());
 
-        segments.buildSequence(sequence, builder);
-        assertEquals(expected, builder.toSequence().toString());
-        assertEquals(expected, builder.toString());
+        assertEquals(expected, segments.toStringWithRanges(sequence));
+        assertEquals(expected, segments.toString(sequence));
     }
 
     @Test
@@ -47,7 +45,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         segments.append(0, 4);
         String expected = input.substring(0, 4);
@@ -55,9 +52,8 @@ public class SegmentBuilderTest {
         assertEquals("SegmentBuilder{end=4, parts=[0, 4) }", segments.toString());
         assertEquals(expected.length(), segments.length());
 
-        segments.buildSequence(sequence, builder);
-        assertEquals(expected, builder.toSequence().toString());
-        assertEquals(expected, builder.toString());
+        assertEquals("⟦0123⟧", segments.toStringWithRanges(sequence));
+        assertEquals(expected, segments.toString(sequence));
     }
 
     @Test
@@ -66,7 +62,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         segments.append(0, 4);
         segments.append(6, 7);
@@ -75,9 +70,8 @@ public class SegmentBuilderTest {
         assertEquals("SegmentBuilder{end=7, parts=[0, 4), [6, 7) }", segments.toString());
         assertEquals(expected.length(), segments.length());
 
-        segments.buildSequence(sequence, builder);
-        assertEquals(expected, builder.toSequence().toString());
-        assertEquals(expected, builder.toString());
+        assertEquals("⟦0123⟧⟦6⟧", segments.toStringWithRanges(sequence));
+        assertEquals(expected, segments.toString(sequence));
     }
 
     @Test
@@ -86,7 +80,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         segments.append(0, 5);
         segments.append(5, 7);
@@ -95,9 +88,8 @@ public class SegmentBuilderTest {
         assertEquals("SegmentBuilder{end=7, parts=[0, 7) }", segments.toString());
         assertEquals(expected.length(), segments.length());
 
-        segments.buildSequence(sequence, builder);
-        assertEquals(expected, builder.toSequence().toString());
-        assertEquals(expected, builder.toString());
+        assertEquals("⟦0123456⟧", segments.toStringWithRanges(sequence));
+        assertEquals(expected, segments.toString(sequence));
     }
 
     @Test
@@ -106,7 +98,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         segments.append(0, 5);
         segments.append(3, 7);
@@ -115,9 +106,8 @@ public class SegmentBuilderTest {
         assertEquals("SegmentBuilder{end=7, parts=[0, 7) }", segments.toString());
         assertEquals(expected.length(), segments.length());
 
-        segments.buildSequence(sequence, builder);
-        assertEquals(expected, builder.toSequence().toString());
-        assertEquals(expected, builder.toString());
+        assertEquals("⟦0123456⟧", segments.toStringWithRanges(sequence));
+        assertEquals(expected, segments.toString(sequence));
     }
 
     @Test
@@ -126,8 +116,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
-
         segments.append(0, 5);
         segments.append("abc");
         segments.append(3, 7);
@@ -136,9 +124,8 @@ public class SegmentBuilderTest {
         assertEquals("SegmentBuilder{end=7, parts=[0, 5), 'abc', [5, 7) }", segments.toString());
         assertEquals(expected.length(), segments.length());
 
-        segments.buildSequence(sequence, builder);
-        assertEquals(expected, builder.toSequence().toString());
-        assertEquals(expected, builder.toString());
+        assertEquals("⟦01234⟧abc⟦56⟧", segments.toStringWithRanges(sequence));
+        assertEquals(expected, segments.toString(sequence));
     }
 
     @Test
@@ -147,7 +134,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         segments.append(0, 5);
         segments.append("abc");
@@ -157,9 +143,8 @@ public class SegmentBuilderTest {
         assertEquals("SegmentBuilder{end=5, parts=[0, 5), 'abcdef' }", segments.toString());
         assertEquals(expected.length(), segments.length());
 
-        segments.buildSequence(sequence, builder);
-        assertEquals(expected, builder.toSequence().toString());
-        assertEquals(expected, builder.toString());
+        assertEquals("⟦01234⟧abcdef", segments.toStringWithRanges(sequence));
+        assertEquals(expected, segments.toString(sequence));
     }
 
 
@@ -612,7 +597,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -628,13 +612,12 @@ public class SegmentBuilderTest {
 
         assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", segments.toStringWithRanges(input));
 
-        segments.buildSequence(sequence, builder);
         assertEquals("" +
                 "    line 1\n" +
                 "    line 2\n" +
                 "\n" +
                 "    line 3\n" +
-                "", builder.toString());
+                "", segments.toString(sequence));
 
         assertEquals(escapeJavaString("SegmentBuilder{end=30, parts='  ', [0, 8), [9, 10), '  ', [10, 18), [19, 21), '  ', [21, 30) }"), segments.toString());
     }
@@ -650,7 +633,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -666,13 +648,12 @@ public class SegmentBuilderTest {
 
         assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRanges(input));
 
-        segments.buildSequence(sequence, builder);
         assertEquals("" +
                 "  line 1\n" +
                 "  line 2\n" +
                 "\n" +
                 "  line 3\n" +
-                "", builder.toString());
+                "", segments.toString(sequence));
 
         assertEquals(escapeJavaString("SegmentBuilder{end=30, parts=[0, 8), [9, 18), [19, 30) }"), segments.toString());
     }
@@ -688,7 +669,6 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -704,13 +684,12 @@ public class SegmentBuilderTest {
 
         assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRanges(input));
 
-        segments.buildSequence(sequence, builder);
         assertEquals("" +
                 "line 1\n" +
                 "line 2\n" +
                 "\n" +
                 "line 3\n" +
-                "", builder.toString());
+                "", segments.toString(sequence));
 
         assertEquals(escapeJavaString("SegmentBuilder{end=23, parts=[0, 13), [14, 23) }"), segments.toString());
     }

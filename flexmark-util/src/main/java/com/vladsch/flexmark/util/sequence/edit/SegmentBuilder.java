@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
@@ -13,10 +12,11 @@ import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilder {
-    private ArrayList<Object> myParts = new ArrayList<>();      // contains either Range of original sequence kept, or String inserted at position after the last Range
+    private ArrayList<EditOp> myParts = new ArrayList<>();      // contains either Range of original sequence kept, or String inserted at position after the last Range
     private int myStartOffset = 0;
     private int myEndOffset = 0;
     private int myLastRangeIndex = 0;
+    private int myLength = 0;
 
     protected SegmentBuilder() {
 
@@ -27,6 +27,7 @@ public class SegmentBuilder {
         myStartOffset = other.myStartOffset;
         myEndOffset = other.myEndOffset;
         myLastRangeIndex = other.myLastRangeIndex;
+        myLength = other.myLength;
     }
 
     public int getStartOffset() {
@@ -46,13 +47,14 @@ public class SegmentBuilder {
     }
 
     public int length() {
+        assert myLength == computeLength();
+        return myLength;
+    }
+
+    private int computeLength() {
         int length = 0;
-        for (Object part : myParts) {
-            if (part instanceof String) {
-                length += ((String) part).length();
-            } else {
-                length += ((Range) part).length();
-            }
+        for (EditOp part : myParts) {
+            length += part.length();
         }
         return length;
     }
@@ -65,7 +67,7 @@ public class SegmentBuilder {
      */
     @NotNull
     public SegmentBuilder append(int startOffset, int endOffset) {
-        return append(Range.of(startOffset, endOffset));
+        return append(EditOp.baseOp(startOffset, endOffset));
     }
 
     /**
@@ -76,19 +78,18 @@ public class SegmentBuilder {
         // should not have to look further than last 2 entries to find a range
         int iMax = myParts.size();
         for (int i = iMax; i-- > myLastRangeIndex; ) {
-            Object part = myParts.get(i);
-            if (part instanceof Range) {
+            EditOp part = myParts.get(i);
+            if (part.isRange()) {
                 myLastRangeIndex = i;
                 if (updateEndOffset) {
-                    int endOffset = ((Range) part).getEnd();
+                    int endOffset = part.getEnd();
                     assert endOffset >= myEndOffset;
-
                     myEndOffset = endOffset;
                 }
-                if (((Range) part).getEnd() != myEndOffset) {
+                if (part.getEnd() != myEndOffset) {
                     int tmp = 0;
                 }
-                assert ((Range) part).getEnd() == myEndOffset : "Expected end: " + ((Range) part).getEnd() + " got: " + myEndOffset;
+                assert part.getEnd() == myEndOffset : "Expected end: " + part.getEnd() + " got: " + myEndOffset;
                 return i;
             }
         }
@@ -100,11 +101,7 @@ public class SegmentBuilder {
      */
     @NotNull
     private SegmentPosition getLastRangePosition(@NotNull SegmentList segmentList) {
-        // should not have to look further than last 2 entries to find a range
-        SegmentPosition position = segmentList.getLast();
-        if (position.getRangeOrNull() != null) return position;
-        if (position.getRangeOrNull(-1) != null) return position.previous();
-        return segmentList.getEnd();
+        return segmentList.getPosition(myLastRangeIndex);
     }
 
     @NotNull
@@ -118,64 +115,63 @@ public class SegmentBuilder {
     @SuppressWarnings("ConstantConditions")
     @NotNull
     private Range updateOffsets() {
-        @NotNull List<Object> list = myParts;
-        Object o1 = null;
-        Object o2 = null;
+        EditOp o1 = EditOp.NULL_OP;
+        EditOp o2 = EditOp.NULL_OP;
 
         myStartOffset = 0;
         myEndOffset = 0;
         myLastRangeIndex = 0;
 
-        int iMax = list.size();
+        int iMax = myParts.size();
         switch (iMax) {
             case 0:
                 return Range.NULL;
 
             case 1:
-                o1 = list.get(0);
-                if (o1 instanceof Range) {
-                    myStartOffset = ((Range) o1).getStart();
-                    myEndOffset = ((Range) o1).getEnd();
-                    return (Range) o1;
+                o1 = myParts.get(0);
+                if (o1.isRange()) {
+                    myStartOffset = o1.getStart();
+                    myEndOffset = o1.getEnd();
+                    return o1;
                 }
                 return Range.NULL;
 
             case 2:
-                o1 = list.get(0);
-                o2 = list.get(1);
-                if (o1 instanceof Range && o2 instanceof Range) {
-                    myStartOffset = ((Range) o1).getStart();
-                    myEndOffset = ((Range) o2).getEnd();
+                o1 = myParts.get(0);
+                o2 = myParts.get(1);
+                if (o1.isRange() && o2.isRange()) {
+                    myStartOffset = o1.getStart();
+                    myEndOffset = o2.getEnd();
                     myLastRangeIndex = 1;
                     return Range.of(myStartOffset, myEndOffset);
                 }
-                if (o1 instanceof Range) {
-                    myStartOffset = ((Range) o1).getStart();
-                    myEndOffset = ((Range) o1).getEnd();
+                if (o1.isRange()) {
+                    myStartOffset = o1.getStart();
+                    myEndOffset = o1.getEnd();
                     myLastRangeIndex = 0;
-                    return (Range) o1;
+                    return o1;
                 }
-                if (o2 instanceof Range) {
-                    myStartOffset = ((Range) o2).getStart();
-                    myEndOffset = ((Range) o2).getEnd();
+                if (o2.isRange()) {
+                    myStartOffset = o2.getStart();
+                    myEndOffset = o2.getEnd();
                     myLastRangeIndex = 1;
-                    return (Range) o2;
+                    return o2;
                 }
                 return Range.NULL;
 
             default:
                 int firstRange = 0;
                 for (int i = 0; i < iMax; i++) {
-                    o1 = list.get(i);
-                    if (o1 instanceof Range) {
+                    o1 = myParts.get(i);
+                    if (o1.isRange()) {
                         firstRange = i;
                         break;
                     }
                 }
 
                 for (int i = iMax; i-- > firstRange; ) {
-                    o2 = list.get(i);
-                    if (o2 instanceof Range) {
+                    o2 = myParts.get(i);
+                    if (o2.isRange()) {
                         myLastRangeIndex = i;
                         break;
                     }
@@ -184,8 +180,8 @@ public class SegmentBuilder {
                 if (o2 == null) o2 = o1;
 
                 if (o1 != null) {
-                    myStartOffset = ((Range) o1).getStart();
-                    myEndOffset = ((Range) o2).getEnd();
+                    myStartOffset = o1.getStart();
+                    myEndOffset = o2.getEnd();
                     return Range.of(myStartOffset, myEndOffset);
                 }
 
@@ -193,35 +189,44 @@ public class SegmentBuilder {
         }
     }
 
-    @Nullable
-    public Range getLastPartIfRange() {
-        Object part = myParts.isEmpty() ? null : myParts.get(myParts.size() - 1);
-        return part instanceof Range ? (Range) part : null;
+    @NotNull
+    public EditOp getLastPartIfRange() {
+        EditOp part = myParts.isEmpty() ? EditOp.NULL_OP : myParts.get(myParts.size() - 1);
+        return part.isRange() ? part : EditOp.NULL_OP;
     }
 
-    @Nullable
-    public String getLastPartIfString() {
-        Object part = myParts.isEmpty() ? null : myParts.get(myParts.size() - 1);
-        return part instanceof String ? (String) part : null;
+    /**
+     * Get last part if un-ranged text
+     *
+     * @return op or NULL_OP
+     */
+    @NotNull
+    public EditOp getLastPartIfString() {
+        EditOp part = myParts.isEmpty() ? EditOp.NULL_OP : myParts.get(myParts.size() - 1);
+        return !part.isPlainText() ? EditOp.NULL_OP : part;
     }
 
     public void handleOverlap(@NotNull SegmentPosition position, @NotNull Range range) {
         // NOTE: one after the last range should be String or nothing, if it was a Range then it would be the last one
-        String text = position.getStringOrNull(1);
-        Range prevRange = position.getRangeOrNull();
-        assert prevRange != null && prevRange.overlaps(range);
+        EditOp text = position.getOrNullOp(1);
+        EditOp prevRange = position.getRangeOrNullOp();
+        assert prevRange.isNotNull() && prevRange.overlaps(range);
 
         if (!prevRange.doesContain(range)) {
             // merge if no text in between, else chop and append
-            if (text == null || text.isEmpty()) {
+            assert text.isNullOp() || text.getText() != null;
+
+            if (text.isNullOp() || text.getText() != null && text.getText().isEmpty()) {
                 Range expanded = prevRange.expandToInclude(range);
-                position.set(expanded);
-                if (text != null) position.remove(1);
+                position.set(EditOp.baseOp(expanded));
+                myLength += expanded.getSpan() - prevRange.getSpan();
+                if (text.isNotNullOp()) position.remove(1);
             } else {
                 // chop off overlap and append
                 Range chopped = range.withStart(prevRange.getEnd());
                 if (chopped.isNotEmpty()) {
-                    position.append(chopped);
+                    position.append(EditOp.baseOp(chopped));
+                    myLength += chopped.getSpan();
                 }
             }
 //        } else {
@@ -243,37 +248,46 @@ public class SegmentBuilder {
         // NOTE: if an empty range is not inserted then there is no range to attach recovered characters.
         //    empty ranges can be removed during optimization
         if (myEndOffset > 0 && myEndOffset >= range.getStart()) {
-            // have overlap, remove overlap from range and add
+            // have overlap, remove overlap or adjacent from range and add
             SegmentList segmentList = new SegmentList(myParts);
             SegmentPosition position = getLastRangePosition(segmentList);
 
-            if (position.isValidElement()) {
-                Range prevRange = position.getRangeOrNull();
-                if (prevRange != null) {
-                    if (prevRange.overlaps(range)) {
-                        handleOverlap(position, range);
-                        myLastRangeIndex = getLastRangeIndex(true);
-                    } else if (prevRange.isAdjacentBefore(range)) {
-                        // if no text in between merge them, else append
-                        String text = position.getStringOrNull(1);
+            if (position.isValidElement() && position.getRangeOrNullOp().isNotNull()) {
+                EditOp prevRange = position.getRangeOrNullOp();
 
-                        if (text == null || text.isEmpty()) {
-                            Range expanded = prevRange.expandToInclude(range);
-                            myEndOffset = expanded.getEnd();
-                            position.set(expanded);
-                            if (text != null) position.remove(1);
-                        } else {
-                            // just append
-                            myParts.add(range);
-                            myEndOffset = range.getEnd();
-                            myLastRangeIndex = myParts.size() - 1;
-                        }
+                if (prevRange.overlaps(range)) {
+                    handleOverlap(position, range);
+                    myLastRangeIndex = getLastRangeIndex(true);
+                } else if (prevRange.isAdjacentBefore(range)) {
+                    // if no text in between merge them, else append
+                    EditOp text = position.getStringOrNullOp(1);
+
+                    if (text.isNullOp() || text.isEmpty()) {
+                        Range expanded = prevRange.expandToInclude(range);
+                        position.set(EditOp.baseOp(expanded));
+                        if (text.isNotNullOp()) position.remove(1);
+
+                        myEndOffset = expanded.getEnd();
+                        myLength += expanded.getSpan() - prevRange.getSpan();
+                    } else {
+                        // just append
+                        myParts.add(EditOp.baseOp(range));
+                        myLength += range.getSpan();
+                        myEndOffset = range.getEnd();
+                        myLastRangeIndex = myParts.size() - 1;
                     }
+                } else {
+                    // just append
+                    myParts.add(EditOp.baseOp(range));
+                    myLength += range.getSpan();
+                    myEndOffset = range.getEnd();
+                    myLastRangeIndex = myParts.size() - 1;
                 }
             }
         } else {
             // just append
-            myParts.add(range);
+            myParts.add(EditOp.baseOp(range));
+            myLength += range.getSpan();
             myEndOffset = range.getEnd();
             myLastRangeIndex = myParts.size() - 1;
         }
@@ -286,44 +300,31 @@ public class SegmentBuilder {
     @NotNull
     public SegmentBuilder append(@Nullable String text) {
         if (text != null && !text.isEmpty()) {
-            String lastString = getLastPartIfString();
-            if (lastString != null) {
-                myParts.set(myParts.size() - 1, lastString + text);
+            EditOp lastString = getLastPartIfString();
+            if (lastString.isNotNullOp()) {
+                myParts.set(myParts.size() - 1, lastString.withSuffix(text));
             } else {
-                myParts.add(text);
+                myParts.add(EditOp.plainText(text));
             }
+            myLength += text.length();
         }
         return this;
     }
 
     @NotNull
-    public SegmentBuilder append(@Nullable Object part) {
+    public SegmentBuilder append(@Nullable EditOp part) {
         if (part != null) {
-            assert part instanceof Range || part instanceof String;
-            if (part instanceof Range) append((Range) part);
-            else append((String) part);
+            assert part.isBase() || part.isPlainText();
+
+            if (part.isBase()) append((Range) part);
+            else append(part.getText());
         }
         return this;
     }
 
     @NotNull
-    public List<Object> getParts() {
+    public List<EditOp> getParts() {
         return myParts;
-    }
-
-    public <T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> void buildSequence(@NotNull S baseSequence, @NotNull T builder) {
-        if (myEndOffset > baseSequence.length()) {
-            throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + baseSequence.length());
-        }
-
-        for (Object part : getParts()) {
-            if (part instanceof String) {
-                builder.add((String) part);
-            } else {
-                assert part instanceof Range;
-                builder.add(baseSequence.subSequence(((Range) part).getStart(), ((Range) part).getEnd()));
-            }
-        }
     }
 
     @NotNull
@@ -336,12 +337,32 @@ public class SegmentBuilder {
 
         StringBuilder out = new StringBuilder();
 
-        for (Object part : myParts) {
-            if (part instanceof String) {
-                out.append(BasedSequence.of((String) part).toVisibleWhitespaceString());
+        for (EditOp part : myParts) {
+            if (part.isPlainText()) {
+                out.append(BasedSequence.of(part.getText()).toVisibleWhitespaceString());
             } else {
-                assert part instanceof Range;
-                out.append("⟦").append(baseSequence.subSequence(((Range) part).getStart(), ((Range) part).getEnd()).toVisibleWhitespaceString()).append("⟧");
+                out.append("⟦").append(baseSequence.subSequence(part.getStart(), part.getEnd()).toVisibleWhitespaceString()).append("⟧");
+            }
+        }
+
+        return out.toString();
+    }
+
+    @NotNull
+    public String toString(@NotNull CharSequence chars) {
+        BasedSequence baseSequence = BasedSequence.of(chars);
+
+        if (myEndOffset > baseSequence.length()) {
+            throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + baseSequence.length());
+        }
+
+        StringBuilder out = new StringBuilder();
+
+        for (EditOp part : myParts) {
+            if (part.isPlainText()) {
+                out.append(BasedSequence.of(part.getText()).toVisibleWhitespaceString());
+            } else {
+                out.append(baseSequence.subSequence(part.getStart(), part.getEnd()));
             }
         }
 
@@ -359,12 +380,18 @@ public class SegmentBuilder {
             throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + chars.length());
         }
 
+        int length = computeLength();
+        assert myLength == length;
         SegmentList segmentList = new SegmentList(myParts);
 
         for (SegmentPosition position : segmentList) {
-            if (position.getStringOrNull() == null) continue;
             optimizer.accept(chars, position);
         }
+
+        int length2 = computeLength();
+        assert length == length2 : "Optimization should not change length";
+        assert myLength == length2;
+
         updateOffsets();
     }
 
@@ -372,12 +399,8 @@ public class SegmentBuilder {
     public String toString() {
         DelimitedBuilder sb = new DelimitedBuilder(", ");
         sb.append("SegmentBuilder{end=").append(myEndOffset).append(", parts=");
-        for (Object part : myParts) {
-            if (part instanceof Range) {
-                sb.append(part).mark();
-            } else {
-                sb.append("'").append(Utils.escapeJavaString((String) part)).append("'").mark();
-            }
+        for (EditOp part : myParts) {
+            sb.append(part).mark();
         }
         sb.unmark().append(" }");
         return sb.toString();
