@@ -438,7 +438,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
      */
     @Deprecated
     public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
-        return of(charSequence).subSequence(startIndex);
+        return BasedSequence.of(charSequence).subSequence(startIndex);
     }
 
     /**
@@ -446,6 +446,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
      */
     @Deprecated
     public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        return of(charSequence).subSequence(startIndex, endIndex);
+        return BasedSequence.of(charSequence).subSequence(startIndex, endIndex);
     }
 }

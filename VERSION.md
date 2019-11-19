@@ -238,6 +238,7 @@ Next 0.59.52
   * `DECIMAL_DIGITS`
   * `HEXADECIMAL_DIGITS`
   * `OCTAL_DIGITS`
+* Fix: infinite recursion in deprecated `SubSequence.of`
 
 0.59.50
 -------

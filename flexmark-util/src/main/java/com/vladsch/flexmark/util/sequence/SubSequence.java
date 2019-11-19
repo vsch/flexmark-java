@@ -119,7 +119,7 @@ public final class SubSequence extends BasedSequenceImpl {
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence) {
-        return of(charSequence).subSequence(0, charSequence.length());
+        return BasedSequence.of(charSequence).subSequence(0, charSequence.length());
     }
 
     /**
@@ -127,7 +127,7 @@ public final class SubSequence extends BasedSequenceImpl {
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence, int startIndex) {
-        return of(charSequence).subSequence(startIndex, charSequence.length());
+        return BasedSequence.of(charSequence).subSequence(startIndex, charSequence.length());
     }
 
     /**
@@ -135,6 +135,6 @@ public final class SubSequence extends BasedSequenceImpl {
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {
-        return of(charSequence).subSequence(startIndex, endIndex);
+        return BasedSequence.of(charSequence).subSequence(startIndex, endIndex);
     }
 }
