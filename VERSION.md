@@ -233,6 +233,12 @@ Next 0.59.52
 * [x] Fix: `SegmentBuilder` to keep track of start and end range in the list based on first/last
       range added.
   * [ ] Test: need to test this more thoroughly
+  * [ ] Fix: simplify overlap by passing index to last range in list and the range overlapping
+        it. No position.
+  * [ ] Fix: simplify optimization by passing the full list to optimizer. No position list.
+  * [ ] Fix: eliminate multiple methods for the same functionality, append: `EditOp`, start/end
+        offsets or `String`. The rest are history.
+  * [ ] Test: cached start/end/length/last range index.
 * [x] Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
 * [x] Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
       instead of its own implementation.
@@ -240,10 +246,14 @@ Next 0.59.52
         segment list before generating sequence or string.
   * [x] Fix: if there is an overlap in appended sequence with previous segments, add the overlap
         as out of base text instead of throwing an exception.
+  * [ ] Fix: optimize and simplify for speed, too many methods. Keep only add/append of
+        `CharSequence` and add/append for start/end offsets. The rest are gone.
 * [x] Add: Common char sets:
   * `DECIMAL_DIGITS`
   * `HEXADECIMAL_DIGITS`
   * `OCTAL_DIGITS`
+* [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
+      stuff.
 * [ ] Fix: move EditOp optimization between two consecutive elements into `EditOp` or
       `BasedUtils` not optimizers. The logic should be reusable.
 * Fix: infinite recursion in deprecated `SubSequence.of`
