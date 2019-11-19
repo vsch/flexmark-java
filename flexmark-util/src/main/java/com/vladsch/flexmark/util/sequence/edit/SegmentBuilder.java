@@ -8,15 +8,20 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Supplier;
 
 @SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilder {
-    private ArrayList<EditOp> myParts = new ArrayList<>();      // contains either Range of original sequence kept, or String inserted at position after the last Range
-    private int myStartOffset = 0;
-    private int myEndOffset = 0;
-    private int myLastRangeIndex = 0;
-    private int myLength = 0;
+    public static final String[] EMPTY_STRINGS = new String[0];
+    protected ArrayList<Seg> myParts = new ArrayList<>();
+    protected int myStartOffset = Range.NULL.getStart();
+    protected int myEndOffset = Range.NULL.getEnd();
+    protected int myLength = 0;
+    protected int myTextLength = 0;
+    protected int myTextUnique = 0;
+    protected int myTextSpaceLength = 0;
+    protected int myTextUniqueLength = 0;
+    protected final int[] myFirst256 = new int[256];
 
     protected SegmentBuilder() {
 
@@ -26,24 +31,24 @@ public class SegmentBuilder {
         myParts.addAll(other.myParts);
         myStartOffset = other.myStartOffset;
         myEndOffset = other.myEndOffset;
-        myLastRangeIndex = other.myLastRangeIndex;
         myLength = other.myLength;
+        myTextLength = other.myTextLength;
+        myTextUnique = other.myTextUnique;
+        myTextSpaceLength = other.myTextSpaceLength;
+        myTextUniqueLength = other.myTextUniqueLength;
+        System.arraycopy(other.myFirst256, 0, myFirst256, 0, other.myFirst256.length);
     }
 
     public int getStartOffset() {
-        return myEndOffset;
+        return myStartOffset >= 0 ? myStartOffset : -1;
     }
 
     public int getEndOffset() {
-        return myEndOffset;
+        return myEndOffset >= 0 ? myEndOffset : -1;
     }
 
     public boolean isEmpty() {
         return myParts.isEmpty();
-    }
-
-    public boolean isNotEmpty() {
-        return !myParts.isEmpty();
     }
 
     public int length() {
@@ -51,186 +56,236 @@ public class SegmentBuilder {
         return myLength;
     }
 
+    public int getLength() {
+        return myLength;
+    }
+
+    public int getTextLength() {
+        return myTextLength;
+    }
+
+    public int getTextSpaces() {
+        return myFirst256[' '];
+    }
+
+    public int getTextSpaceLength() {
+        return myTextSpaceLength;
+    }
+
+    public int getTextUnique() {
+        return myTextUnique;
+    }
+
+    public int getTextUniqueLength() {
+        return myTextUniqueLength;
+    }
+
+    public int[] getFirst256() {
+        return myFirst256;
+    }
+
+    @NotNull
+    public ArrayList<Seg> getParts() {
+        return myParts;
+    }
+
+    /**
+     * Span for offsets of this list
+     *
+     * @return -ve if no information in the list, or span of offsets
+     */
+    public int getSpan() {
+        return myStartOffset > myEndOffset ? -1 : myEndOffset - myStartOffset;
+    }
+
+    public boolean hasOffsets() {
+        return myStartOffset <= myEndOffset;
+    }
+
+    @NotNull
+    public Seg firstSeg() {
+        return myParts.isEmpty() ? Seg.NULL : myParts.get(0);
+    }
+
+    @Nullable
+    public Seg firstSegOrNull() {
+        return myParts.isEmpty() ? null : myParts.get(0);
+    }
+
+    @NotNull
+    public Seg lastSeg() {
+        return myParts.isEmpty() ? Seg.NULL : myParts.get(myParts.size() - 1);
+    }
+
+    @Nullable
+    public Seg lastSegOrNull() {
+        return myParts.isEmpty() ? null : myParts.get(myParts.size() - 1);
+    }
+
+    @NotNull
+    public Seg lastSeg(int offsetFromLast) {
+        assert offsetFromLast >= 0;
+        return myParts.size() <= offsetFromLast ? Seg.NULL : myParts.get(myParts.size() - 1 - offsetFromLast);
+    }
+
+    @Nullable
+    public Seg lastSegOrNull(int offsetFromLast) {
+        assert offsetFromLast >= 0;
+        return myParts.size() <= offsetFromLast ? null : myParts.get(myParts.size() - 1 - offsetFromLast);
+    }
+
     private int computeLength() {
         int length = 0;
-        for (EditOp part : myParts) {
+
+        for (Seg part : myParts) {
             length += part.length();
         }
         return length;
     }
 
-    /**
-     * append range in original range coordinates, no checking is done other than overlap with tail range
-     *
-     * @param startOffset start offset
-     * @param endOffset   end offset
-     */
-    @NotNull
-    public SegmentBuilder append(int startOffset, int endOffset) {
-        return append(EditOp.baseOp(startOffset, endOffset));
-    }
+    private int computeTextLength() {
+        int length = 0;
 
-    /**
-     * @param updateEndOffset if true update end offset
-     * @return position of last range or end of list position
-     */
-    private int getLastRangeIndex(boolean updateEndOffset) {
-        // should not have to look further than last 2 entries to find a range
-        int iMax = myParts.size();
-        for (int i = iMax; i-- > myLastRangeIndex; ) {
-            EditOp part = myParts.get(i);
-            if (part.isRange()) {
-                myLastRangeIndex = i;
-                if (updateEndOffset) {
-                    int endOffset = part.getEnd();
-                    assert endOffset >= myEndOffset;
-                    myEndOffset = endOffset;
-                }
-                if (part.getEnd() != myEndOffset) {
-                    int tmp = 0;
-                }
-                assert part.getEnd() == myEndOffset : "Expected end: " + part.getEnd() + " got: " + myEndOffset;
-                return i;
+        for (Seg part : myParts) {
+            if (part.isText()) {
+                length += part.length();
             }
         }
-        return myLastRangeIndex;
+        return length;
     }
 
-    /**
-     * @return position of last range or end of list position
-     */
-    @NotNull
-    private SegmentPosition getLastRangePosition(@NotNull SegmentList segmentList) {
-        return segmentList.getPosition(myLastRangeIndex);
-    }
-
-    @NotNull
-    public Range getOffsetRange() {
-        Range range = myParts.size() == 0 ? Range.NULL : Range.of(myStartOffset, myEndOffset);
-        // RELEASE: remove assert
-        assert range.equals(updateOffsets());
-        return range;
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @NotNull
-    private Range updateOffsets() {
-        EditOp o1 = EditOp.NULL_OP;
-        EditOp o2 = EditOp.NULL_OP;
-
-        myStartOffset = 0;
-        myEndOffset = 0;
-        myLastRangeIndex = 0;
-
-        int iMax = myParts.size();
-        switch (iMax) {
-            case 0:
-                return Range.NULL;
-
-            case 1:
-                o1 = myParts.get(0);
-                if (o1.isRange()) {
-                    myStartOffset = o1.getStart();
-                    myEndOffset = o1.getEnd();
-                    return o1;
-                }
-                return Range.NULL;
-
-            case 2:
-                o1 = myParts.get(0);
-                o2 = myParts.get(1);
-                if (o1.isRange() && o2.isRange()) {
-                    myStartOffset = o1.getStart();
-                    myEndOffset = o2.getEnd();
-                    myLastRangeIndex = 1;
-                    return Range.of(myStartOffset, myEndOffset);
-                }
-                if (o1.isRange()) {
-                    myStartOffset = o1.getStart();
-                    myEndOffset = o1.getEnd();
-                    myLastRangeIndex = 0;
-                    return o1;
-                }
-                if (o2.isRange()) {
-                    myStartOffset = o2.getStart();
-                    myEndOffset = o2.getEnd();
-                    myLastRangeIndex = 1;
-                    return o2;
-                }
-                return Range.NULL;
-
-            default:
-                int firstRange = 0;
-                for (int i = 0; i < iMax; i++) {
-                    o1 = myParts.get(i);
-                    if (o1.isRange()) {
-                        firstRange = i;
-                        break;
-                    }
-                }
-
-                for (int i = iMax; i-- > firstRange; ) {
-                    o2 = myParts.get(i);
-                    if (o2.isRange()) {
-                        myLastRangeIndex = i;
-                        break;
-                    }
-                }
-
-                if (o2 == null) o2 = o1;
-
-                if (o1 != null) {
-                    myStartOffset = o1.getStart();
-                    myEndOffset = o2.getEnd();
-                    return Range.of(myStartOffset, myEndOffset);
-                }
-
-                return Range.NULL;
+    protected String assertionError(String message, @Nullable Supplier<String[]> partSupplier) {
+        String[] parts = partSupplier == null ? EMPTY_STRINGS : partSupplier.get();
+        if (parts.length > 0) {
+            // must be optimizer screw up
+            StringBuilder sb = new StringBuilder();
+            sb.append(message);
+            if (!message.endsWith("\n")) sb.append("\n");
+            for (String part : parts) sb.append(part).append("\n");
+            return sb.toString();
+        } else {
+            return "Invariants violated: " + message + toString();
         }
     }
 
-    @NotNull
-    public EditOp getLastPartIfRange() {
-        EditOp part = myParts.isEmpty() ? EditOp.NULL_OP : myParts.get(myParts.size() - 1);
-        return part.isRange() ? part : EditOp.NULL_OP;
-    }
-
-    /**
-     * Get last part if un-ranged text
-     *
-     * @return op or NULL_OP
-     */
-    @NotNull
-    public EditOp getLastPartIfString() {
-        EditOp part = myParts.isEmpty() ? EditOp.NULL_OP : myParts.get(myParts.size() - 1);
-        return !part.isPlainText() ? EditOp.NULL_OP : part;
-    }
-
-    public void handleOverlap(@NotNull SegmentPosition position, @NotNull Range range) {
-        // NOTE: one after the last range should be String or nothing, if it was a Range then it would be the last one
-        EditOp text = position.getOrNullOp(1);
-        EditOp prevRange = position.getRangeOrNullOp();
-        assert prevRange.isNotNull() && prevRange.overlaps(range);
-
-        if (!prevRange.doesContain(range)) {
-            // merge if no text in between, else chop and append
-            assert text.isNullOp() || text.getText() != null;
-
-            if (text.isNullOp() || text.getText() != null && text.getText().isEmpty()) {
-                Range expanded = prevRange.expandToInclude(range);
-                position.set(EditOp.baseOp(expanded));
-                myLength += expanded.getSpan() - prevRange.getSpan();
-                if (text.isNotNullOp()) position.remove(1);
+    private void validateInvariants(@Nullable Supplier<String[]> parts) {
+        if (myParts.isEmpty()) {
+            assert myStartOffset == myEndOffset || myStartOffset == Range.NULL.getStart() && myEndOffset == Range.NULL.getEnd() : assertionError("empty, no offsets, ", parts);
+            assert myLength == 0 && myTextLength == 0 && myTextUniqueLength == 0 && myTextUnique == 0 : assertionError("empty, all lengths = 0", parts);
+        } else {
+            Seg lastSeg = lastSeg();
+            if (lastSeg.isString()) {
+                assert myStartOffset == Range.NULL.getStart() && myEndOffset == Range.NULL.getEnd() : assertionError("last seg string, no offsets ", parts);
             } else {
-                // chop off overlap and append
-                Range chopped = range.withStart(prevRange.getEnd());
-                if (chopped.isNotEmpty()) {
-                    position.append(EditOp.baseOp(chopped));
-                    myLength += chopped.getSpan();
-                }
+                assert myStartOffset == firstSeg().getStart() && myEndOffset == lastSeg().getEnd()
+                        : assertionError(String.format("start:%d==first.start:%d, end:%d==last.end:%d ", myStartOffset, firstSeg().getStart(), myEndOffset, lastSeg().getEnd()), parts);
             }
-//        } else {
-//            // fully contains added range, ignore
+            assert myLength >= myTextLength && myTextLength >= myTextUniqueLength && myTextLength >= myTextUnique : assertionError("l >= t >= ul", parts);
+        }
+    }
+
+    protected void setLastSeg(@NotNull Seg seg) {
+        assert !myParts.isEmpty();
+
+        if (!seg.isNullRange()) updateOffsets(seg);
+        myParts.set(myParts.size() - 1, seg);
+    }
+
+    protected void updateOffsets(@NotNull Seg seg) {
+        if (!seg.isNullRange()) {
+            myStartOffset = Math.min(myStartOffset, seg.getStart());
+            myEndOffset = Math.max(myEndOffset, seg.getEnd());
+        }
+    }
+
+    protected void updateLastTextSeg(@NotNull Seg seg) {
+        assert !seg.isNullRange();
+
+        updateOffsets(seg);
+
+        Seg lastSeg = lastSeg();
+        if (lastSeg.isTextOrString()) {
+            assert !seg.isText();
+
+            if (lastSeg.isString()) {
+                setLastSeg(lastSeg.withRange(seg.getStart(), seg.getEnd()));
+            } else {
+                setLastSeg(lastSeg.withEnd(seg.getStart()));
+            }
+        }
+    }
+
+    protected void addBaseSeg(@NotNull Seg seg) {
+        assert !seg.isNull() && !seg.isText();
+
+        if (!seg.isNullRange()) {
+            updateLastTextSeg(seg);
+        }
+
+        myParts.add(seg);
+        myLength += seg.length();
+    }
+
+    protected void changeLength(int delta, boolean withTextLength) {
+        myLength += delta;
+        if (withTextLength) myTextLength += delta;
+    }
+
+    protected void changeTextLength(int delta) {
+        myTextLength += delta;
+    }
+
+    protected void addedText(String text) {
+        // need to count spaces in it
+        int iMax = text.length();
+        for (int i = 0; i < iMax; i++) {
+            char c = text.charAt(i);
+            if (c < 256) {
+                if (myFirst256[c] == 0) myTextUnique++;
+                myFirst256[c]++;
+                if (c == ' ') myTextSpaceLength++;
+                myTextUniqueLength++;
+            }
+        }
+    }
+
+    protected void removedText(String text) {
+        // need to count spaces in it
+        int iMax = text.length();
+        for (int i = 0; i < iMax; i++) {
+            char c = text.charAt(i);
+            if (c < 256) {
+                assert myFirst256[c] > 0;
+                myFirst256[c]--;
+
+                if (myFirst256[c] == 0) myTextUnique--;
+
+                if (c == ' ') {
+                    assert myTextSpaceLength > 0;
+                    myTextSpaceLength--;
+                }
+
+                assert myTextUniqueLength > 0;
+                myTextUniqueLength--;
+            }
+        }
+    }
+
+    public void handleOverlap(@NotNull Range range) {
+        // range overlaps with last segment in the list
+        Seg lastSeg = lastSeg();
+        assert !lastSeg.isNullRange() && lastSeg.getEnd() > range.getStart();
+
+        if (lastSeg.getEnd() < range.getEnd()) {
+            // there is a part of the overlap outside the last seg range
+            if (lastSeg.isText()) {
+                // append the chopped off base part
+                addBaseSeg(Seg.baseSeg(lastSeg.getEnd(), range.getEnd()));
+            } else {
+                // extend the last base seg to include this range
+                setLastSeg(lastSeg.withEnd(range.getEnd()));
+                changeLength(range.getEnd() - lastSeg.getEnd(), false);
+            }
         }
     }
 
@@ -238,93 +293,72 @@ public class SegmentBuilder {
      * append range in original sequence coordinates, no checking is done other than overlap with tail range
      * fast
      *
-     * @param range in offsets of original range
+     * @param startOffset start offset in original sequence
+     * @param endOffset   end offset in original sequence
+     * @return this
      */
     @NotNull
-    public SegmentBuilder append(@Nullable Range range) {
-        if (range == null || range.isNull()) return this;
-        if (myParts.isEmpty()) myStartOffset = range.getStart();
+    public SegmentBuilder append(int startOffset, int endOffset) {
+        @NotNull Range range = Range.of(startOffset, endOffset);
+        return append(range);
+    }
 
-        // NOTE: if an empty range is not inserted then there is no range to attach recovered characters.
-        //    empty ranges can be removed during optimization
-        if (myEndOffset > 0 && myEndOffset >= range.getStart()) {
-            // have overlap, remove overlap or adjacent from range and add
-            SegmentList segmentList = new SegmentList(myParts);
-            SegmentPosition position = getLastRangePosition(segmentList);
+    /**
+     * append range in original sequence coordinates, no checking is done other than overlap with tail range
+     * fast
+     *
+     * @param range range in original sequence
+     * @return this
+     */
+    @NotNull
+    public SegmentBuilder append(@NotNull Range range) {
+        if (range.isNull()) return this;
+        if (range.getSpan() <= 0) {
+            if (range.getSpan() == 0) updateLastTextSeg(Seg.anchorSeg(range.getEnd()));
+            return this;
+        }
 
-            if (position.isValidElement() && position.getRangeOrNullOp().isNotNull()) {
-                EditOp prevRange = position.getRangeOrNullOp();
-
-                if (prevRange.overlaps(range)) {
-                    handleOverlap(position, range);
-                    myLastRangeIndex = getLastRangeIndex(true);
-                } else if (prevRange.isAdjacentBefore(range)) {
-                    // if no text in between merge them, else append
-                    EditOp textOp = position.getStringOrNullOp(1);
-
-                    if (textOp.isNullOp() || textOp.getText().isEmpty()) {
-                        Range expanded = prevRange.expandToInclude(range);
-                        position.set(EditOp.baseOp(expanded));
-                        if (textOp.isNotNullOp()) position.remove(1);
-
-                        myEndOffset = expanded.getEnd();
-                        myLength += expanded.getSpan() - prevRange.getSpan();
-                    } else {
-                        // just append
-                        myParts.add(EditOp.baseOp(range));
-                        myLength += range.getSpan();
-                        myEndOffset = range.getEnd();
-                        myLastRangeIndex = myParts.size() - 1;
-                    }
-                } else {
-                    // just append
-                    myParts.add(EditOp.baseOp(range));
-                    myLength += range.getSpan();
-                    myEndOffset = range.getEnd();
-                    myLastRangeIndex = myParts.size() - 1;
-                }
+        if (myEndOffset > range.getStart()) {
+            // overlap
+            handleOverlap(range);
+            validateInvariants(() -> new String[] { "After " + toString() });
+        } else if (myEndOffset == range.getStart()) {
+            // adjacent, merge the two
+            Seg lastSeg = lastSeg();
+            if (lastSeg.isBase()) {
+                setLastSeg(lastSeg.withEnd(range.getEnd()));
+                changeLength(range.getEnd() - lastSeg.getEnd(), false);
+            } else {
+                addBaseSeg(Seg.baseSeg(range.withStart(lastSeg.getEnd())));
             }
         } else {
-            // just append
-            myParts.add(EditOp.baseOp(range));
-            myLength += range.getSpan();
-            myEndOffset = range.getEnd();
-            myLastRangeIndex = myParts.size() - 1;
+            // disjoint
+            addBaseSeg(Seg.baseSeg(range));
         }
-
-        int lastRangeIndex = getLastRangeIndex(false);
-        assert myLastRangeIndex == lastRangeIndex;
         return this;
     }
 
     @NotNull
-    public SegmentBuilder append(@Nullable String text) {
-        if (text != null && !text.isEmpty()) {
-            EditOp lastString = getLastPartIfString();
-            if (lastString.isNotNullOp()) {
-                myParts.set(myParts.size() - 1, lastString.withSuffix(text));
+    public SegmentBuilder append(@NotNull String text) {
+        int length = text.length();
+        if (length != 0) {
+            changeLength(length, true);
+
+            Seg lastSeg = lastSeg();
+            if (lastSeg.isNull()) {
+                myParts.add(Seg.stringSeg(text));
+                addedText(text);
+            } else if (lastSeg.isText()) {
+                // append to it
+                setLastSeg(lastSeg.withTextSuffix(text));
+                addedText(text);
             } else {
-                myParts.add(EditOp.plainText(text));
+                // add after last seg as text
+                myParts.add(Seg.textSeg(lastSeg.getEnd(), text));
+                addedText(text);
             }
-            myLength += text.length();
         }
         return this;
-    }
-
-    @NotNull
-    public SegmentBuilder append(@Nullable EditOp part) {
-        if (part != null) {
-            assert part.isBase() || part.isPlainText();
-
-            if (part.isBase()) append((Range) part);
-            else append(part.getText());
-        }
-        return this;
-    }
-
-    @NotNull
-    public List<EditOp> getParts() {
-        return myParts;
     }
 
     @NotNull
@@ -337,8 +371,8 @@ public class SegmentBuilder {
 
         StringBuilder out = new StringBuilder();
 
-        for (EditOp part : myParts) {
-            if (part.isPlainText()) {
+        for (Seg part : myParts) {
+            if (!part.isBase()) {
                 out.append(BasedSequence.of(part.getText()).toVisibleWhitespaceString());
             } else {
                 out.append("⟦").append(baseSequence.subSequence(part.getStart(), part.getEnd()).toVisibleWhitespaceString()).append("⟧");
@@ -358,9 +392,9 @@ public class SegmentBuilder {
 
         StringBuilder out = new StringBuilder();
 
-        for (EditOp part : myParts) {
-            if (part.isPlainText()) {
-                out.append(BasedSequence.of(part.getText()).toVisibleWhitespaceString());
+        for (Seg part : myParts) {
+            if (!part.isBase()) {
+                out.append(BasedSequence.of(part.getText()));
             } else {
                 out.append(baseSequence.subSequence(part.getStart(), part.getEnd()));
             }
@@ -384,22 +418,41 @@ public class SegmentBuilder {
         assert myLength == length;
         SegmentList segmentList = new SegmentList(myParts);
 
+        // RELEASE: remove debug code
+        String before = toString();
+
         for (SegmentPosition position : segmentList) {
-            optimizer.accept(chars, position);
+            optimizer.accept(this, chars, position);
         }
 
+        // RELEASE: remove debug code
+        String after = toString();
         int length2 = computeLength();
-        assert length == length2 : "Optimization should not change length";
-        assert myLength == length2;
-
-        updateOffsets();
+        Supplier<String[]> supplier = () -> new String[] { "Before: " + before, " After: " + after };
+        assert length == length2 : assertionError("Optimization should not change length.", supplier);
+        assert myLength == length2 : assertionError("Optimization should not change length.", supplier);
+        validateInvariants(supplier);
     }
 
     @Override
     public String toString() {
         DelimitedBuilder sb = new DelimitedBuilder(", ");
-        sb.append("SegmentBuilder{end=").append(myEndOffset).append(", parts=");
-        for (EditOp part : myParts) {
+        sb.append("SegmentBuilder{");
+
+        if (hasOffsets()) {
+            sb.append("[").append(myStartOffset).mark()
+                    .append(myEndOffset).unmark()
+                    .append(")").mark();
+        } else {
+            sb.append("NULL").mark();
+        }
+
+        sb.append("s=").append(getTextSpaces()).append(":").append(myTextSpaceLength).mark()
+                .append("u=").append(myTextUnique).append(":").append(myTextUniqueLength).mark()
+                .append("t=").append(myTextLength).mark()
+                .append("l=").append(myLength).mark();
+
+        for (Seg part : myParts) {
             sb.append(part).mark();
         }
         sb.unmark().append(" }");

@@ -50,26 +50,24 @@ public class CharRecoveryOptimizer<S extends IRichSequence<S>> implements Segmen
     }
 
     @Override
-    public void accept(@NotNull S chars, @NotNull SegmentPosition position) {
-        @NotNull EditOp textOp = position.getStringOrNullOp();
-        if (!textOp.isPlainText()) return;
+    public void accept(@NotNull SegmentBuilder builder, @NotNull S chars, @NotNull SegmentPosition position) {
+        @NotNull Seg textOp = position.getSeg();
+        if (!textOp.isText()) return;
 
-        //noinspection ConstantConditions
         @NotNull String text = textOp.getText();
 
-        //noinspection ConstantConditions
-        int textLength = text.length();
-        int charsLength = chars.length();
+        final int textLength = text.length();
+        final int charsLength = chars.length();
 
         if (textLength == 0 || charsLength == 0) return;  // already processed by previous optimizer
 
-        final @NotNull EditOp originalPrev = position.getRangeOrNullOp(-1);
-        final @NotNull EditOp originalNext = position.getRangeOrNullOp(1);
+        final @NotNull Seg originalPrev = position.getSeg(-1);
+        final @NotNull Seg originalNext = position.getSeg(1);
 
-        if (originalNext.isNull() && originalPrev.isNull()) return;
+        if (originalNext.isNullRange() && originalPrev.isNullRange()) return;
 
-        @NotNull Range prevRange = originalPrev;
-        @NotNull Range nextRange = originalNext;
+        @NotNull Range prevRange = originalPrev.getRange();
+        @NotNull Range nextRange = originalNext.getRange();
 
 //        CharSequence prevText = prevRange == null ? null : chars.subSequence(prevRange);
 //        CharSequence afterPrevText = prevRange == null ? null : chars.subSequence(prevRange.getEnd());
@@ -90,15 +88,18 @@ public class CharRecoveryOptimizer<S extends IRichSequence<S>> implements Segmen
                 if (eol < charsLength && chars.subSequence(prevRange.getEnd(), eol).isBlank()) {
                     // we have an EOL
                     Range eolRange = Range.ofLength(eol, 1);
+                    builder.removedText(text.substring(0, 1));
                     text = text.substring(1);
 
                     // need to insert EOL range between prevRange and text
                     if (text.isEmpty()) {
-                        position.set(EditOp.baseOp(eolRange));
+                        position.set(Seg.baseSeg(eolRange));
                     } else {
-                        position.set(EditOp.plainText(text));
-                        position.add(EditOp.baseOp(eolRange));
+                        position.set(Seg.textSeg(eolRange.getEnd(), Math.max(eolRange.getEnd(), textOp.getStart()), text));
+                        position.add(Seg.baseSeg(eolRange));
                     }
+                    builder.changeTextLength(-1);
+                    builder.updateOffsets(builder.lastSeg());
                 }
             }
             return;
@@ -190,9 +191,14 @@ public class CharRecoveryOptimizer<S extends IRichSequence<S>> implements Segmen
 //            int tmp = 0;
 //        }
 
+        // NOTE: need to adjust char stats
+        builder.removedText(text.substring(0, matchedPrev));
+        builder.removedText(text.substring(textLength - matchedNext));
+
         text = text.substring(matchedPrev, textLength - matchedNext);
 
         Range eolRange = Range.NULL;
+        int eolOffset = -1;
 
         if (prevRange.isNotNull() && !chars.subSequence(prevRange).endsWithEOL() && text.startsWith("\n")) {
             // see if there is an EOL between prevRange end and nextRange start with only spaces between them
@@ -200,8 +206,9 @@ public class CharRecoveryOptimizer<S extends IRichSequence<S>> implements Segmen
             if (eol < charsLength && chars.subSequence(prevRange.getEnd(), eol).isBlank()) {
                 // we have an EOL
                 eolRange = Range.ofLength(eol, 1);
+                eolOffset = eolRange.getEnd();
+                builder.removedText(text.substring(0, 1));
                 text = text.substring(1);
-
                 // need to insert EOL range between prevRange and text
             }
         }
@@ -209,32 +216,41 @@ public class CharRecoveryOptimizer<S extends IRichSequence<S>> implements Segmen
         if (prevRange.isNotNull() && nextRange.isNotNull() && text.isEmpty() && prevRange.isAdjacentBefore(nextRange)) {
             // remove the string and next range
             prevRange = prevRange.expandToInclude(nextRange);
-            position.set(-1, EditOp.baseOp(prevRange));
+            position.set(-1, Seg.baseSeg(prevRange));
             position.remove(0, 2);
         } else {
             if (text.isEmpty()) {
                 if (eolRange.isNotNull()) {
-                    position.set(EditOp.baseOp(eolRange));
+                    position.set(Seg.baseSeg(eolRange));
                     eolRange = Range.NULL;
                 } else {
                     position.remove();
                 }
             } else {
-                position.set(EditOp.plainText(text));
+                int start = Math.max(eolOffset, prevRange.isNotNull() ? prevRange.getEnd() : nextRange.getStart());
+                int end = Math.max(start, nextRange.isNotNull() ? nextRange.getStart() : prevRange.getEnd());
+
+                position.set(Seg.textSeg(start, end, text));
             }
 
             if (prevRange.isNotNull()) {
-                position.set(-1, EditOp.baseOp(prevRange));
+                position.set(-1, Seg.baseSeg(prevRange));
                 if (eolRange.isNotNull()) {
-                    position.add(EditOp.baseOp(eolRange));
+                    position.add(Seg.baseSeg(eolRange));
                 }
 //            } else if (originalPrev.isNotNull()) {
 //                // NOTE: cannot happen, prevRange is never set to null if it exists, only next range
 //                position.remove(-1);
             }
 
-            if (nextRange.isNotNull()) position.set(1, EditOp.baseOp(nextRange));
-            else if (originalNext.isNotNull()) position.remove(1);
+            if (nextRange.isNotNull()) {
+                Seg seg = Seg.baseSeg(nextRange);
+                position.set(1, seg);
+                builder.updateOffsets(seg);
+            } else if (!originalNext.isNullRange()) position.remove(1);
         }
+
+        builder.changeTextLength(text.length() - textLength);
+        builder.updateOffsets(builder.lastSeg());
     }
 }

@@ -3,12 +3,17 @@ package com.vladsch.flexmark.util.sequence;
 import org.jetbrains.annotations.NotNull;
 
 public class Range {
-    public static final Range NULL = Range.of(Integer.MAX_VALUE, Integer.MIN_VALUE);
-    public static final Range EMPTY = Range.of(0, 0);
+    public static final Range NULL = new Range(Integer.MAX_VALUE, Integer.MIN_VALUE);
+    public static final Range EMPTY = new Range(0, 0);
 
     @NotNull
     public static Range of(int start, int end) {
-        return new Range(start, end);
+        return start == NULL.myStart && end == NULL.myEnd ? NULL : new Range(start, end);
+    }
+
+    @NotNull
+    public static Range emptyOf(int position) {
+        return new Range(position, position);
     }
 
     @NotNull
@@ -72,7 +77,7 @@ public class Range {
 
     // TEST:
     // @formatter:off
-    public int getSpan() { return myEnd - myStart;}
+    public int getSpan() { return myEnd - myStart; }
 
     // NOTE: change to equal NULL instead of instance otherwise inheriting makes null equality impossible
     public boolean isNull() { return this.myStart == NULL.myStart && this.myEnd == NULL.myEnd;}
