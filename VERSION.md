@@ -244,7 +244,13 @@ Next 0.59.52
   * `DECIMAL_DIGITS`
   * `HEXADECIMAL_DIGITS`
   * `OCTAL_DIGITS`
+* [ ] Fix: move EditOp optimization between two consecutive elements into `EditOp` or
+      `BasedUtils` not optimizers. The logic should be reusable.
 * Fix: infinite recursion in deprecated `SubSequence.of`
+* Break: delete  `BasedSequence.getIndexRange(int, int)` does not do the intended job and is
+  complicated and useless at the same time for its purpose.
+* Deprecate: to be delete  `BasedSequence.getIndexOffset(int)` as soon as `SegmentedSequence` is
+  migrated to segment builder sequence part list.
 
 0.59.50
 -------

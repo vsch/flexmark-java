@@ -7,8 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Integer.MIN_VALUE;
-
 /**
  * A BasedSequence which consists of segments of other BasedSequences
  */
@@ -51,27 +49,6 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         return endOffset;
     }
 
-    @NotNull
-    @Override
-    public Range getIndexRange(int startOffset, int endOffset) {
-        // we assume that start/end is within our range
-        int start = MIN_VALUE;
-        int end = MIN_VALUE;
-        for (int i = 0; i < baseOffsets.length; i++) {
-            if (baseOffsets[i] == startOffset) {
-                start = i;
-            }
-            if (baseOffsets[i] == endOffset) {
-                end = i;
-            }
-            if (start != MIN_VALUE && end != MIN_VALUE) break;
-        }
-
-        if (start < 0) start = 0;
-        if (end < start) end = start;
-        return Range.of(start, end);
-    }
-
     public int[] getBaseOffsets() {
         return baseOffsets;
     }
@@ -86,16 +63,8 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
             throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
         }
 
-        if (index == length) {
-            if (length == 0) {
-                throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
-            }
-            int offset = baseOffsets[baseStartOffset + index - 1];
-            if (offset < 0) {
-                return -1;
-            } else {
-                return offset + 1;
-            }
+        if (index == length && index == 0) {
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
         }
         int offset = baseOffsets[baseStartOffset + index];
         return offset < 0 ? -1 : offset;
@@ -202,7 +171,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
 
         this.baseStartOffset = 0;
         this.length = length;
-        this.baseOffsets = new int[length];
+        this.baseOffsets = new int[length + 1];
         int len = 0;
         StringBuilder sb = null;
 
@@ -224,6 +193,9 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
             len += ciMax;
         }
 
+        int end = baseOffsets[length - 1];
+        baseOffsets[length] = end < 0 ? end - 1 : end + 1;
+
         if (sb != null) {
             this.nonBaseChars = sb.toString().toCharArray();
         } else {
@@ -234,7 +206,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
     private SegmentedSequence(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final char[] nonBaseChars, final int length) {
         super(0);
 
-        int iMax = baseOffsets.length;
+        int iMax = baseOffsets.length - 1;
         assert baseStartOffset + length <= iMax : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
 
         int startOffset = 0;

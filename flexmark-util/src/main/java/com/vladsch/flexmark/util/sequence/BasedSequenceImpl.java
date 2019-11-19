@@ -51,17 +51,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return (B) new BasedSequenceBuilder(this);
     }
 
-    @NotNull
-    @Override
-    public Range getIndexRange(int startOffset, int endOffset) {
-        // we assume that start/end is within our range
-        int baseOffset = getStartOffset();
-        if (startOffset > getEndOffset() || endOffset < baseOffset) {
-            throw new IllegalArgumentException("getIndexRange(" + startOffset + ", " + endOffset + ") not in range [" + baseOffset + ", " + getEndOffset() + "]");
-        }
-        return Range.of(startOffset - baseOffset, endOffset - baseOffset);
-    }
-
     @Override
     public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
         builder.append(getStartOffset(), getEndOffset());

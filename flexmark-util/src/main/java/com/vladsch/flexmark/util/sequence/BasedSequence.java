@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * A CharSequence that references original char sequence with offsets into original preserved.
  * <p>
  * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
- *
+ * <p>
  * Since equals is used for comparison of sequences and strings by base sequence manager, a base sequence with NUL may not compare equal to
  * an equivalent unwrapped sequence because NUL chars are not converted. For Strings this is handled by using String.equals() for comparison. For
  * other CharacterSequence types the match will fail if original has NUL in it.
@@ -37,7 +38,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     }
 
     /**
-     * @deprecated  use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
+     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
      */
     @NotNull
     @Deprecated
@@ -46,7 +47,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     }
 
     /**
-     * @deprecated  use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
+     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
      */
     @NotNull
     @Deprecated
@@ -110,7 +111,9 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      *
      * @param index index for which to get the offset in original source
      * @return offset of index of this sequence in original text
+     * @deprecated being phased out since it is quite inefficient and useless to find source range of changes sequences
      */
+    @TestOnly
     int getIndexOffset(int index);
 
     /**
@@ -120,17 +123,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
      * @return true if had out of base chars
      */
     boolean addSegments(@NotNull BasedSegmentBuilder builder);
-
-    /**
-     * Get the range of indices that map into {@link #getBaseSequence()} with startOffset and endOffset
-     *
-     *
-     * @param startOffset start offset into base sequence
-     * @param endOffset   end offset into base sequence
-     * @return range into this sequence that spans start and end offset.
-     */
-    @NotNull
-    Range getIndexRange(int startOffset, int endOffset);
 
     /**
      * Get the range of this sequence in original {@link #getBaseSequence()} and {@link #getBase()} original text source.
@@ -152,9 +144,9 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     BasedSequence subSequence(int startIndex, int endIndex);
     /**
      * Get a portion of this sequence's base sequence
-     *
+     * <p>
      * NOTE: this means that if this sequence applies modifications to the original sequence then these modifications are NOT be applied to the returned sequence.
-     *
+     * <p>
      * NOTE: It should only be implemented in classes which provide base sequences such as {@link CharSubSequence} and {@link SubSequence} others use inherited implementation of {@link BasedSequenceImpl}
      *
      * @param startIndex offset from 0 of original sequence
@@ -411,12 +403,12 @@ public interface BasedSequence extends IRichSequence<BasedSequence> {
     /**
      * Track given index in this sequence with respect to base offset
      *
-     * @param index            offset within this sequence to track
-     *                         ie. between its start and end offsets
+     * @param index          offset within this sequence to track
+     *                       ie. between its start and end offsets
      * @param positionAnchor direction of interest, specifically if this sequence is the
-     *                         result of typing the direction is {@link PositionAnchor#NEXT},
-     *                         result of backspacing direction is {@link PositionAnchor#PREVIOUS},
-     *                         otherwise it is {@link PositionAnchor#CURRENT}
+     *                       result of typing the direction is {@link PositionAnchor#NEXT},
+     *                       result of backspacing direction is {@link PositionAnchor#PREVIOUS},
+     *                       otherwise it is {@link PositionAnchor#CURRENT}
      * @return based sequence which tracks offset through editing modifications
      */
     @NotNull
