@@ -8,7 +8,6 @@ import java.util.Collection;
 
 public interface SequenceBuilder<T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> {
     @NotNull T subContext();
-    @NotNull T addFrom(@NotNull T other);
     @NotNull T addAll(@NotNull Collection<? extends CharSequence> sequences);
     @NotNull T add(@Nullable CharSequence chars);
     @NotNull S toSequence();

@@ -16,13 +16,13 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        BaseSequenceEntryTest.class,
-        PositionListTest.class,
-        EditOpTest.class,
+        SegTest.class,
         SegmentBuilderTest.class,
         BasedSegmentBuilderTest.class,
         BasedSequenceBuilderTest.class,
         BasedSequenceImplTest.class,
+        BaseSequenceEntryTest.class,
+        PositionListTest.class,
         BaseSequenceManagerTest.class,
         TemplateUtilTest.class,
         OrderedMapTest.class,
