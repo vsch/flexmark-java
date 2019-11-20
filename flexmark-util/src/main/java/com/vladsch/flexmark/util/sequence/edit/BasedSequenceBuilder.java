@@ -83,9 +83,16 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     @Override
     public BasedSequenceBuilder add(@Nullable CharSequence chars) {
-        if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == myBase.getBase()) return addBased((BasedSequence) chars);
-        else if (chars != null && chars.length() > 0) return addString(chars.toString());
-        else return this;
+        if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == myBase.getBase()) {
+            if (((BasedSequence) chars).isNotNull()) {
+                ((BasedSequence) chars).addSegments(mySegments);
+                myBasedSequences = null;
+            }
+        } else if (chars != null && chars.length() > 0) {
+            mySegments.append(chars.toString());
+            myBasedSequences = null;
+        }
+        return this;
     }
 
     @NotNull
@@ -101,15 +108,6 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     public BasedSequenceBuilder append(@NotNull Range chars) {
         return addRange(chars);
-    }
-
-    @NotNull
-    private BasedSequenceBuilder addBased(@NotNull BasedSequence chars) {
-        if (chars.isNotNull()) {
-            chars.addSegments(mySegments);
-            myBasedSequences = null;
-        }
-        return this;
     }
 
     @NotNull
@@ -135,20 +133,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     }
 
     @NotNull
-    private BasedSequenceBuilder addString(@Nullable String chars) {
-        if (chars != null && !chars.isEmpty()) {
-            mySegments.append(chars);
-            myBasedSequences = null;
-        }
-        return this;
-    }
-
-    @NotNull
     @Override
     public BasedSequence toSequence() {
-        List<BasedSequence> sequences = getSequences();
-        BasedSequence modifiedSeq = SegmentedSequence.of(sequences);
-        return modifiedSeq;
+        return SegmentedSequence.of(getSequences());
     }
 
     @NotNull
