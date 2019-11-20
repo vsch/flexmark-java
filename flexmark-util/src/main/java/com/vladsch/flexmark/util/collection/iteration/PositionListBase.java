@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.WeakHashMap;
+import java.util.*;
 
 /**
  * Iterator for list positions allowing to iterate over current elements while inserting and deleting elements relative to current position
@@ -17,9 +16,42 @@ import java.util.WeakHashMap;
  * @param <T>
  */
 public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> implements Iterable<P>, IPositionUpdater<T, P> {
+
     final private @NotNull List<T> myList;
-    final private @NotNull WeakHashMap<IPositionListener, Boolean> myListeners = new WeakHashMap<>(); // true if listener is P, false otherwise
+    final private @NotNull WeakHashMap<IPositionListener, Integer> myListeners = new WeakHashMap<>(); // != -1 if listener is P and framed, -1 otherwise
+    private @Nullable WeakHashMap<IPreviewPositionListener, Boolean> myPreviewListeners = null;        // used only for optimized setting notifications since most positions do nothing for this
     final private @NotNull PositionFactory<T, P> myFactory;
+    final private @NotNull Stack<FrameLevel> myFrames = new Stack<>(); // open frames
+    private int myLastFrameId; // starts at 0 and increments forever
+    private int myMaxListeners;
+
+    private static class FrameLevel {
+        final @NotNull String parentList;
+        final @Nullable FrameLevel parentFrame;
+        final int frameLevel;
+        final int frameId;
+        final StackTraceElement[] openStackTrace;
+
+        public FrameLevel(@NotNull String parentList, @Nullable FrameLevel parentFrame, int frameId, StackTraceElement[] openStackTrace) {
+            this.parentList = parentList;
+            this.parentFrame = parentFrame;
+            this.frameLevel = parentFrame == null ? 0 : parentFrame.frameLevel + 1;
+            this.frameId = frameId;
+            this.openStackTrace = openStackTrace;
+        }
+
+        boolean isDescendantOf(@NotNull FrameLevel parentFrame) {
+            return parentFrame == this.parentFrame || this.parentFrame != null && this.parentFrame.isDescendantOf(parentFrame);
+        }
+
+        void appendStackTrace(@NotNull StringBuilder out, @NotNull CharSequence indent, int stackOffset) {
+            int iMax = openStackTrace.length;
+            for (int i = stackOffset; i < iMax; i++) {
+                StackTraceElement element = openStackTrace[i];
+                out.append(indent).append(element.toString()).append("\n");
+            }
+        }
+    }
 
     public PositionListBase(@NotNull List<T> list, @NotNull PositionFactory<T, P> factory) {
         myList = list;
@@ -27,7 +59,7 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
     }
 
     @TestOnly
-    public int trackedPositions() {
+    public int getListeners() {
         int count = 0;
         for (IPositionListener position : myListeners.keySet()) {
             if (position != null) {
@@ -41,6 +73,34 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
         return count;
     }
 
+    @TestOnly
+    public int getMaxListeners() {
+        return myMaxListeners;
+    }
+
+    @TestOnly
+    public int getPreviewListeners() {
+        if (myPreviewListeners != null) {
+            int count = 0;
+            for (IPreviewPositionListener position : myPreviewListeners.keySet()) {
+                if (position != null) {
+                    count++;
+                }
+            }
+
+            if (count != myPreviewListeners.size()) {
+                int tmp = 0;
+            }
+
+            if (count == 0) {
+                myPreviewListeners = null;
+            }
+
+            return count;
+        }
+        return -1;
+    }
+
     /**
      * Add list edit listener for notifications of mods to the list
      *
@@ -48,7 +108,12 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
      */
     @Override
     public void addPositionListener(@NotNull IPositionListener listener) {
-        myListeners.put(listener, false);
+        int frameId = myFrames.isEmpty() ? -1 : myFrames.peek().frameId;
+        myListeners.put(listener, frameId);
+        if (listener instanceof IPreviewPositionListener) {
+            if (myPreviewListeners == null) myPreviewListeners = new WeakHashMap<>();
+            myPreviewListeners.put((IPreviewPositionListener) listener, true);
+        }
     }
 
     /**
@@ -61,6 +126,12 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
     @Override
     public void removePositionListener(@NotNull IPositionListener listener) {
         myListeners.remove(listener);
+        if (myPreviewListeners != null && listener instanceof IPreviewPositionListener) {
+            myPreviewListeners.remove(listener);
+            if (myPreviewListeners.isEmpty()) {
+                myPreviewListeners = null;
+            }
+        }
     }
 
     @NotNull
@@ -109,8 +180,84 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
         return Utils.getOrNull(myList, index, elementClass);
     }
 
-    public T set(int index, T value) {
-        return Utils.setOrAdd(myList, index, value);
+    public Object openFrame() {
+        int frameId = ++myLastFrameId;
+        FrameLevel frameLevel;
+        if (myFrames.isEmpty()) {
+            frameLevel = new FrameLevel(getListParentId(), null, frameId, Thread.currentThread().getStackTrace());
+        } else {
+            FrameLevel parentFrame = myFrames.peek();
+            frameLevel = new FrameLevel(getListParentId(), parentFrame, frameId, Thread.currentThread().getStackTrace());
+        }
+        myFrames.push(frameLevel);
+        return frameLevel;
+    }
+
+    @NotNull
+    public String getListParentId() {
+        return getClass().getSimpleName() + "@" + Integer.toString(super.hashCode(), 16);
+    }
+
+    public void closeFrame(Object frameId) {
+        if (!(frameId instanceof FrameLevel)) throw new IllegalStateException("Invalid frame id: " + frameId);
+        FrameLevel frameLevel = (FrameLevel) frameId;
+        if (!frameLevel.parentList.equals(getListParentId())) throw new IllegalStateException("FrameId created by: " + frameLevel.parentList + ", not by this list: " + getListParentId());
+
+        if (myFrames.isEmpty()) {
+            throw new IllegalStateException("No frames open");
+        }
+
+        FrameLevel openFrame = myFrames.peek();
+        int openFrameId = openFrame.frameId;
+        if (openFrameId != frameLevel.frameId) {
+            StringBuilder out = new StringBuilder();
+            out.append("closeFrame(")
+                    //.append(openFrame.getClass().getSimpleName()).append("@").append(Integer.toString(openFrame.hashCode(), 16))
+                    .append(") open nested frames, "); //.append(openFrameId).append(" ");
+            throwIllegalStateWithOpenFrameTrace(out, frameLevel);
+        }
+
+        myFrames.pop();
+
+        int[] listenerCount = { 0 };
+        myListeners.entrySet().removeIf(entry -> {
+            listenerCount[0]++;
+            if (entry.getKey() != null) {
+                if (entry.getValue() != openFrameId) return false;
+
+                if (entry.getKey() instanceof IPositionHolder<?, ?>) {
+                    ((IPositionHolder<?, ?>) entry.getKey()).setDetached();
+                }
+
+                if (myPreviewListeners != null && entry.getKey() instanceof IPreviewPositionListener) {
+                    myPreviewListeners.remove(entry.getKey());
+                }
+            }
+            return true;
+        });
+
+        myMaxListeners = Math.max(myMaxListeners, listenerCount[0]);
+
+        if (myPreviewListeners != null && myPreviewListeners.isEmpty()) {
+            myPreviewListeners = null;
+        }
+    }
+
+    private void throwIllegalStateWithOpenFrameTrace(@Nullable StringBuilder out, FrameLevel frame) {
+        if (!myFrames.isEmpty()) {
+            if (out == null) out = new StringBuilder();
+
+            out.append("openFrame trace:\n");
+
+            int indent = 4;
+            for (FrameLevel openFrame : myFrames) {
+                if (openFrame.isDescendantOf(frame)) {
+                    openFrame.appendStackTrace(out, RepeatedSequence.ofSpaces(indent + 2 * (openFrame.frameLevel - frame.frameLevel)), 2);
+                }
+            }
+
+            throw new IllegalStateException(out.toString());
+        }
     }
 
     @Override
@@ -119,8 +266,15 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
             throw new IndexOutOfBoundsException("ListPosition.get(" + index + "), index out valid range [0, " + myList.size() + "]");
 
         P listPosition = myFactory.create(this, index, anchor);
-        myListeners.put(listPosition, true);
+        addPositionListener(listPosition);
         return listPosition;
+    }
+
+    @Override
+    public void unframe(P position) {
+        if (myListeners.containsKey(position)) {
+            myListeners.put(position, -1);
+        }
     }
 
     public P getFirst() {
@@ -141,7 +295,23 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
             myList.clear();
             deleted(0, Integer.MAX_VALUE);
 
+            int[] listenerCount = { 0 };
+            myListeners.entrySet().removeIf(entry -> {
+                listenerCount[0]++;
+                if (entry.getKey() instanceof IPositionHolder<?, ?>) {
+                    ((IPositionHolder<?, ?>) entry.getKey()).setDetached();
+                }
+
+                if (myPreviewListeners != null && entry.getKey() instanceof IPreviewPositionListener) {
+                    myPreviewListeners.remove(entry.getKey());
+                }
+                return true;
+            });
+
+            myMaxListeners = Math.max(myMaxListeners, listenerCount[0]);
+
             myListeners.clear();
+            myPreviewListeners = null;
         }
     }
 
@@ -150,22 +320,103 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
         assert count >= 0;
         assert index >= 0 && index <= myList.size() - count;
 
-        for (IPositionListener position : myListeners.keySet()) {
-            if (position != null) {
-                position.inserted(index, count);
-            }
-        }
+        int[] listenerCount = { 0 };
+        myListeners.entrySet().removeIf(entry -> {
+            listenerCount[0]++;
+            if (entry.getKey() == null) return true;
+            entry.getKey().inserted(index, count);
+            return false;
+        });
+        myMaxListeners = Math.max(myMaxListeners, listenerCount[0]);
     }
 
     @Override
     public void deleted(int index, int count) {
         assert count >= 0;
         assert index >= 0 && index + count <= myList.size() + count;
+        int[] listenerCount = { 0 };
+        myListeners.entrySet().removeIf(entry -> {
+            listenerCount[0]++;
+            if (entry.getKey() == null) return true;
+            entry.getKey().deleted(index, count);
+            return false;
+        });
+        myMaxListeners = Math.max(myMaxListeners, listenerCount[0]);
+    }
 
-        for (IPositionListener position : myListeners.keySet()) {
-            if (position != null) {
-                position.deleted(index, count);
+    @Override
+    public void deleting(int index, int count) {
+        if (myPreviewListeners != null) {
+            myPreviewListeners.entrySet().removeIf(entry -> {
+                if (entry.getKey() == null) return true;
+                entry.getKey().deleting(index, count);
+                return false;
+            });
+        }
+    }
+
+    @Override
+    public Object changing(int index, Object value) {
+        //noinspection unchecked
+        return set(index, (T) value);
+    }
+
+    @Override
+    public void changed(int index, Object oldValue, Object newValue) {
+        throw new IllegalStateException("Should not be called. Use set() or changing(index, value) to change list value");
+    }
+
+    public T set(int index, T value) {
+        if (index == myList.size()) {
+            add(value);
+            return null;
+        } else {
+            if (myPreviewListeners != null) {
+                Object[] useValue = { value };
+
+                myPreviewListeners.entrySet().removeIf(entry -> {
+                    if (entry.getKey() == null) return true;
+                    Object wasValue = useValue[0];
+                    useValue[0] = entry.getKey().changing(index, wasValue);
+
+                    // make sure replacement is compatible
+                    assert useValue[0] == wasValue || value.getClass().isInstance(useValue[0]);
+                    return false;
+                });
+
+                T oldValue = myList.get(index);
+                //noinspection unchecked
+                T newValue = (T) useValue[0];
+
+                T result = myList.set(index, newValue);
+
+                myPreviewListeners.entrySet().removeIf(entry -> {
+                    if (entry.getKey() == null) return true;
+                    entry.getKey().changed(index, oldValue, newValue);
+                    return false;
+                });
+
+                return result;
+            } else {
+                return myList.set(index, value);
             }
+        }
+    }
+
+    public T remove(int index) {
+        assert index >= 0 && index < myList.size();
+        deleting(index, 1);
+        T value = myList.remove(index);
+        deleted(index, 1);
+        return value;
+    }
+
+    public void remove(int startIndex, int endIndex) {
+        if (startIndex < endIndex) {
+            assert startIndex >= 0 && endIndex <= myList.size();
+            deleting(startIndex, endIndex - startIndex);
+            myList.subList(startIndex, endIndex).clear();
+            deleted(startIndex, endIndex - startIndex);
         }
     }
 
@@ -201,21 +452,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
         myList.addAll(index, elements);
         inserted(index, elements.size());
         return true;
-    }
-
-    public T remove(int index) {
-        assert index >= 0 && index < myList.size();
-        T value = myList.remove(index);
-        deleted(index, 1);
-        return value;
-    }
-
-    public void remove(int startIndex, int endIndex) {
-        if (startIndex < endIndex) {
-            assert startIndex >= 0 && endIndex <= myList.size();
-            myList.subList(startIndex, endIndex).clear();
-            deleted(startIndex, endIndex - startIndex);
-        }
     }
 
     public int size() {

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Iterator;
 import java.util.List;
 
-public interface IPositionUpdater<T, P extends IPositionHolder<T, P>> extends IPositionListener {
+public interface IPositionUpdater<T, P extends IPositionHolder<T, P>> extends IPreviewPositionListener {
     void addPositionListener(@NotNull IPositionListener listener);
     void removePositionListener(@NotNull IPositionListener listener);
 
@@ -15,6 +15,8 @@ public interface IPositionUpdater<T, P extends IPositionHolder<T, P>> extends IP
     default P getPosition(int index) {
         return getPosition(index, PositionAnchor.CURRENT);
     }
+
+    void unframe(P position);
 
     P getPosition(int index, @NotNull PositionAnchor anchor);
 

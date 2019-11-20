@@ -37,7 +37,7 @@ public class EnumRefTextCollectingVisitor {
     }
 
     public void collect(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
-        out = new BasedSequenceBuilder(basedSequence);
+        out = BasedSequenceBuilder.emptyBuilder(basedSequence);
         EnumeratedReferences.renderReferenceOrdinals(renderings, new OrdinalRenderer(this));
     }
 

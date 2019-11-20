@@ -25,20 +25,20 @@ public class SegmentBuilder {
     protected int myTextSpaceLength = 0;
     protected int myTextUniqueLength = 0;
     protected final @Nullable int[] myFirst256;
-    final protected int myFlags;
+    final protected int myOptions;
 
     protected SegmentBuilder() {
         this(F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
     }
 
-    protected SegmentBuilder(int flags) {
-        myFlags = flags & (F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
-        myFirst256 = (flags & F_TRACK_UNIQUE) != 0 ? new int[256] : null;
+    protected SegmentBuilder(int options) {
+        myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
+        myFirst256 = (options & F_TRACK_UNIQUE) != 0 ? new int[256] : null;
     }
 
     @SuppressWarnings("CopyConstructorMissesField")
     protected SegmentBuilder(@NotNull SegmentBuilder other) {
-        this(other.myFlags);
+        this(other.myOptions);
 
         myParts.addAll(other.myParts);
         myStartOffset = other.myStartOffset;
@@ -80,7 +80,7 @@ public class SegmentBuilder {
     }
 
     public int getTextSpaces() {
-        return myFirst256 == null ? 0: myFirst256[' '];
+        return myFirst256 == null ? 0 : myFirst256[' '];
     }
 
     public int getTextSpaceLength() {
@@ -100,16 +100,16 @@ public class SegmentBuilder {
         return myFirst256;
     }
 
-    public int getFlags() {
-        return myFlags;
+    public int getOptions() {
+        return myOptions;
     }
 
     public boolean isIncludeAnchors() {
-        return (myFlags & F_INCLUDE_ANCHORS) != 0;
+        return (myOptions & F_INCLUDE_ANCHORS) != 0;
     }
 
     public boolean isTrackTextUnique() {
-        return (myFlags & F_TRACK_UNIQUE) != 0;
+        return (myOptions & F_TRACK_UNIQUE) != 0;
     }
 
     @NotNull
@@ -457,7 +457,12 @@ public class SegmentBuilder {
         String before = toString();
 
         for (SegmentPosition position : segmentList) {
-            optimizer.accept(this, chars, position);
+            Object frameId = segmentList.openFrame();
+            try {
+                optimizer.accept(this, chars, position);
+            } finally {
+                segmentList.closeFrame(frameId);
+            }
         }
 
         // RELEASE: remove debug code
@@ -500,7 +505,7 @@ public class SegmentBuilder {
     }
 
     @NotNull
-    public static SegmentBuilder emptyBuilder(int flags) {
-        return new SegmentBuilder(flags);
+    public static SegmentBuilder emptyBuilder(int options) {
+        return new SegmentBuilder(options);
     }
 }

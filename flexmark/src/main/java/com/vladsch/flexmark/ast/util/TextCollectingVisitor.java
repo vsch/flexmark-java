@@ -65,7 +65,7 @@ public class TextCollectingVisitor {
     }
 
     public void collect(Node node) {
-        out = new BasedSequenceBuilder(node.getChars());
+        out = BasedSequenceBuilder.emptyBuilder(node.getChars());
         myVisitor.visit(node);
     }
 

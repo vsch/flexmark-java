@@ -15,6 +15,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     private static final int F_PREVIOUS = 2;
     private static final int F_VALID = 4;
     private static final int F_DETACHED = 8;
+    private static final int F_SETTING = 16;  // setting element, index will not be updated
 
     final private @NotNull IPositionUpdater<T, P> myParent;
     final private @NotNull List<T> myList;
@@ -65,53 +66,66 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
      */
     @Override
     public void inserted(int index, int count) {
+        if ((myFlags & F_DETACHED) != 0) {
+            throw new IllegalStateException("Position is detached but still receiving notifications");
+        }
+
         int positionIndex = myIndex;
         assert positionIndex + count <= myList.size();
 
-        if ((myFlags & F_PREVIOUS) != 0) {
-            if (index <= positionIndex) {
-                if (index == positionIndex - 1) {
-                    // inserted at our position, move to start of inserted region
-                    setIndex(index, true);
-                } else if (index != positionIndex) {
-                    // inserting before our previous
+        if ((myFlags & F_SETTING) == 0) {
+            if ((myFlags & F_PREVIOUS) != 0) {
+                if (index <= positionIndex) {
+                    if (index == positionIndex - 1) {
+                        // inserted at our position, move to start of inserted region
+                        setIndex(index, true);
+                    } else if (index != positionIndex) {
+                        // inserting before our previous
+                        setIndex(positionIndex + count, true);
+                    }
+                }
+            } else {
+                if (index <= positionIndex) {
+                    assert positionIndex + count <= myList.size();
                     setIndex(positionIndex + count, true);
                 }
-            }
-        } else {
-            if (index <= positionIndex) {
-                assert positionIndex + count <= myList.size();
-                setIndex(positionIndex + count, true);
             }
         }
     }
 
     @Override
     public void deleted(int index, int count) {
-        int positionIndex = myIndex;
-        if ((myFlags & F_PREVIOUS) != 0) {
-            if (index <= positionIndex) {
-                if (index + count <= positionIndex) {
-                    // deleting before position index, still valid
-                    setIndex(positionIndex - count, true);
-                } else {
-                    // FIX: should invalidate if previous element was removed, not only if at index 0
-                    // deleted element, position on previous element
-                    if (index > 0) {
-                        setIndex(index - 1, true);
+        if ((myFlags & F_DETACHED) != 0) {
+            throw new IllegalStateException("Position is detached but still receiving notifications");
+        }
+
+        if ((myFlags & F_SETTING) == 0) {
+            int positionIndex = myIndex;
+
+            if ((myFlags & F_PREVIOUS) != 0) {
+                if (index <= positionIndex) {
+                    if (index + count <= positionIndex) {
+                        // deleting before position index, still valid
+                        setIndex(positionIndex - count, true);
                     } else {
-                        setIndex(index, false);
+                        // FIX: should invalidate if previous element was removed, not only if at index 0
+                        // deleted element, position on previous element
+                        if (index > 0) {
+                            setIndex(index - 1, true);
+                        } else {
+                            setIndex(index, false);
+                        }
                     }
                 }
-            }
-        } else {
-            if (index <= positionIndex) {
-                if (index + count <= positionIndex) {
-                    // deleting before position index, still valid
-                    setIndex(positionIndex - count, true);
-                } else {
-                    // deleted element, position on next element and invalidate
-                    setIndex(index, (myFlags & F_NEXT) != 0);
+            } else {
+                if (index <= positionIndex) {
+                    if (index + count <= positionIndex) {
+                        // deleting before position index, still valid
+                        setIndex(positionIndex - count, true);
+                    } else {
+                        // deleted element, position on next element and invalidate
+                        setIndex(index, (myFlags & F_NEXT) != 0);
+                    }
                 }
             }
         }
@@ -129,12 +143,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         // NOTE: PREVIOUS is valid if index > 0 or F_VALID
         //  CURRENT is valid if F_VALID
         //  NEXT is valid if index < size() or F_VALID
-        return ((myFlags & (F_VALID | F_NEXT)) != 0); // Next is always valid
-    }
-
-    @Override
-    public boolean isDetached() {
-        return (myFlags & F_DETACHED) != 0;
+        return (myFlags & F_DETACHED) == 0 && ((myFlags & (F_VALID | F_NEXT)) != 0); // Next is always valid
     }
 
     @Override
@@ -143,10 +152,28 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     }
 
     @Override
+    public boolean isDetached() {
+        return (myFlags & F_DETACHED) != 0;
+    }
+
+    @Override
     public void detachListener() {
         //myDetachedTrace = Thread.currentThread().getStackTrace();
         myFlags |= F_DETACHED;
         myParent.removePositionListener(this);
+    }
+
+    @Override
+    public void setDetached() {
+        //myDetachedTrace = Thread.currentThread().getStackTrace();
+        myFlags |= F_DETACHED;
+    }
+
+    @Override
+    public void unframed() {
+        validateDetached();
+        //noinspection unchecked
+        myParent.unframe((P) this);
     }
 
     @Override
@@ -381,14 +408,11 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
     public T set(int offset, T element) {
         int index = getIndex(offset);
         validateWithIndex(index, offset);
-        if (index == myList.size()) {
-            // set will do an insert, need to inform position holders otherwise infinite loops occur
-            T value = Utils.setOrAdd(myList, index, element);
-            myParent.inserted(index, 1);
-            return value;
-        } else {
-            return Utils.setOrAdd(myList, index, element);
-        }
+        myFlags |= F_SETTING;
+        //noinspection unchecked
+        T result = (T) myParent.changing(index, element);
+        myFlags &= ~F_SETTING;
+        return result;
     }
 
     @Override
@@ -431,6 +455,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         int index = getIndex(offset);
         validateWithElementIndex(index, offset);
 
+        myParent.deleting(index, 1);
         T value = myList.remove(index);
         myParent.deleted(index, 1);
         return value;
@@ -447,6 +472,7 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
             throw new IllegalArgumentException("startOffset: " + startOffset + " must be less than endOffset: " + endOffset);
 
         if (startIndex < endIndex) {
+            myParent.deleting(startIndex, endIndex - startIndex);
             myList.subList(startIndex, endIndex).clear();
             myParent.deleted(startIndex, endIndex - startIndex);
         }

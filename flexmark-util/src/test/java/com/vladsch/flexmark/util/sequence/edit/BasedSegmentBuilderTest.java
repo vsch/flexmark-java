@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.vladsch.flexmark.util.Utils.escapeJavaString;
@@ -31,15 +30,44 @@ public class BasedSegmentBuilderTest {
     }
 
     @Test
-    public void test_basicEmpty() {
+    public void test_basicEmptyDefaults() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+        segments.append(0, 0);
         segments.append(sequence.length(), sequence.length());
 
         assertEquals(0, segments.length());
-        assertEquals("BasedSegmentBuilder{[10, 10), s=0:0, u=0:0, t=0, l=0 }", segments.toString());
+        assertEquals("BasedSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=0, [0), [10) }", segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_basicEmptyNoAnchors() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, SegmentBuilder.F_TRACK_UNIQUE);
+        segments.append(0, 0);
+        segments.append(sequence.length(), sequence.length());
+
+        assertEquals(0, segments.length());
+        assertEquals("BasedSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=0 }", segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_basicEmptyAnchors() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        segments.append(0, 0);
+        segments.append(sequence.length(), sequence.length());
+
+        assertEquals(0, segments.length());
+        assertEquals("BasedSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=0, [0), [10) }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
     }
 
@@ -384,7 +412,6 @@ public class BasedSegmentBuilderTest {
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
 
         segments.append(0, 3);
         segments.append("34 56");
@@ -733,7 +760,6 @@ public class BasedSegmentBuilderTest {
         assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 12), s=2:2, u=2:3, t=3, l=13, [0, 5), [5, 7, '\n  '), [7, 12) }"), segments.toString());
         assertEquals(escapeJavaString("01234\n  56789"), toVisibleWhitespaceString(segments.toString(sequence)));
         String string = segments.toString(sequence);
-        int length = string.length();
         assertEquals(string.length(), segments.length());
 
         segments.optimizeFor(sequence, optimizer);
@@ -812,7 +838,7 @@ public class BasedSegmentBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound1() {
+    public void test_optimizersCompoundNoAnchors1() {
         String input = "" +
                 "  line 1 \n" +
                 "  line 2 \n" +
@@ -821,7 +847,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, BasedSegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -834,8 +860,6 @@ public class BasedSegmentBuilderTest {
         assertEquals(segments.toString(sequence).length(), segments.length());
 
         segments.optimizeFor(sequence, optimizer);
-//        assertEquals(escapeJavaString("BasedSegmentBuilder{end=30, parts='  ', [0, 8), '\n  ', [10, 18), [19, 21), '  ', [21, 30) }"), segments.toString());
-
         assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n⟧\\n  ⟦  line 3\\n⟧", segments.toStringWithRanges(input));
 
         assertEquals("" +
@@ -847,7 +871,7 @@ public class BasedSegmentBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound2() {
+    public void test_optimizersCompoundNoAnchors2() {
         String input = "" +
                 "  line 1 \n" +
                 "  line 2 \n" +
@@ -856,7 +880,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, BasedSegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -883,7 +907,7 @@ public class BasedSegmentBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound3() {
+    public void test_optimizersCompoundNoAnchors3() {
         String input = "" +
                 "line 1\n" +
                 "line 2 \n" +
@@ -892,7 +916,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, BasedSegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -919,13 +943,124 @@ public class BasedSegmentBuilderTest {
     }
 
     @Test
-    public void test_extractRanges() {
+    public void test_optimizersCompoundAnchors1() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, BasedSegmentBuilder.F_TRACK_UNIQUE | BasedSegmentBuilder.F_INCLUDE_ANCHORS);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) segments.append("    ");
+            segments.append(trim.getSourceRange());
+            segments.append("\n");
+        }
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[2, 29), s=12:12, u=2:16, t=16, l=34, [2, '    '), [2, 8), [8, 12, '\n    '), [12, 18), [18, 20, '\n'), [20), [20, 23, '\n    '), [23, 29), [29, '\n') }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", segments.toStringWithRanges(input));
+
+        assertEquals("" +
+                "    line 1\n" +
+                "    line 2\n" +
+                "\n" +
+                "    line 3\n" +
+                "", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_optimizersCompoundAnchors2() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, BasedSegmentBuilder.F_TRACK_UNIQUE | BasedSegmentBuilder.F_INCLUDE_ANCHORS);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) segments.append("  ");
+            segments.append(trim.getSourceRange());
+            segments.append("\n");
+        }
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[2, 29), s=6:6, u=2:10, t=10, l=28, [2, '  '), [2, 8), [8, 12, '\n  '), [12, 18), [18, 20, '\n'), [20), [20, 23, '\n  '), [23, 29), [29, '\n') }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 30), s=0:0, u=0:0, t=0, l=28, [0, 8), [9, 18), [19, 30) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRanges(input));
+
+        assertEquals("" +
+                "  line 1\n" +
+                "  line 2\n" +
+                "\n" +
+                "  line 3\n" +
+                "", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_optimizersCompound3Anchors() {
+        String input = "" +
+                "line 1\n" +
+                "line 2 \n" +
+                "\n" +
+                "line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, BasedSegmentBuilder.F_TRACK_UNIQUE | BasedSegmentBuilder.F_INCLUDE_ANCHORS);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+//            if (!trim.isEmpty()) segments.append("  ");
+            segments.append(trim.getSourceRange());
+            segments.append("\n");
+        }
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 22), s=0:0, u=1:4, t=4, l=22, [0, 6), [6, 7, '\n'), [7, 13), [13, 15, '\n'), [15), [15, 16, '\n'), [16, 22), [22, '\n') }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 23), s=0:0, u=0:0, t=0, l=22, [0, 13), [14, 23) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRanges(input));
+
+        assertEquals("" +
+                "line 1\n" +
+                "line 2\n" +
+                "\n" +
+                "line 3\n" +
+                "", segments.toString(sequence));
+    }
+
+    // ************************************************************************
+    // CAUTION: BasedSegmentBuilder Unique Test, Not in Segment Builder Tests
+    //   Do NOT blow away if synchronizing the two test files
+    // ************************************************************************
+
+    @Test
+    public void test_extractRangesDefault() {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
 
-//        BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3, 6), Range.of(8, 12));
+        // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
+        // BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3, 6), Range.of(8, 12));
         segments.append(Range.of(0, 0));
         segments.append(Range.of(0, 1));
         segments.append(Range.of(3, 6));
@@ -935,17 +1070,90 @@ public class BasedSegmentBuilderTest {
         assertEquals("034589", segments.toString(sequence));
     }
 
+    @Test
+    public void test_extractRangesAnchors() {
+        String input = "0123456789";
 
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+
+        // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
+        // BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3, 6), Range.of(8, 12));
+        segments.append(Range.of(0, 0));
+        segments.append(Range.of(0, 1));
+        segments.append(Range.of(3, 6));
+        segments.append(Range.of(8, 10));
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=6, [0, 1), [3, 6), [8, 10) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("034589", segments.toString(sequence));
+    }
 
     @Test
-    public void test_replacePrefix() {
+    public void test_extractRangesNoAnchors() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, SegmentBuilder.F_TRACK_UNIQUE);
+
+        // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
+        // BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3, 6), Range.of(8, 12));
+        segments.append(Range.of(0, 0));
+        segments.append(Range.of(0, 1));
+        segments.append(Range.of(3, 6));
+        segments.append(Range.of(8, 10));
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=6, [0, 1), [3, 6), [8, 10) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("034589", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_replacePrefixDefault() {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
         BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
 
-//        BasedSequence replaced = sequence.replace(0, 1, "^");
-//        assertEquals("^123456789", replaced.toString());
+        // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
+        // BasedSequence replaced = sequence.replace(0, 1, "^");
+        // assertEquals("^123456789", replaced.toString());
+
+        segments.append(Range.of(0, 0));
+        segments.append("^");
+        segments.append(Range.of(1, 10));
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=1:1, t=1, l=10, [0), [0, 1, '^'), [1, 10) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("^123456789", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_replacePrefixAnchors() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+
+        // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
+        // BasedSequence replaced = sequence.replace(0, 1, "^");
+        // assertEquals("^123456789", replaced.toString());
+
+        segments.append(Range.of(0, 0));
+        segments.append("^");
+        segments.append(Range.of(1, 10));
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=1:1, t=1, l=10, [0), [0, 1, '^'), [1, 10) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("^123456789", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_replacePrefixNoAnchors() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, SegmentBuilder.F_TRACK_UNIQUE);
+
+        // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
+        // BasedSequence replaced = sequence.replace(0, 1, "^");
+        // assertEquals("^123456789", replaced.toString());
 
         segments.append(Range.of(0, 0));
         segments.append("^");
@@ -953,9 +1161,6 @@ public class BasedSegmentBuilderTest {
         assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=1:1, t=1, l=10, [1, '^'), [1, 10) }"), segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
         assertEquals("^123456789", segments.toString(sequence));
-
     }
-
-
 }
 

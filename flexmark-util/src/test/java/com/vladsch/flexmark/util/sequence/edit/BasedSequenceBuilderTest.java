@@ -13,10 +13,106 @@ import static org.junit.Assert.assertEquals;
 
 public class BasedSequenceBuilderTest {
     @Test
+    public void test_appendRangeDefault() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
+
+        builder.append(Range.of(0, 0));
+        builder.append(Range.of(0, 4));
+        builder.append(Range.of(10, 10));
+        String expected = input.substring(0, 4);
+
+        assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRanges());
+        assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRangesOptimized());
+        assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
+    }
+
+    @Test
+    public void test_appendRangeAnchors() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_INCLUDE_ANCHORS | BasedSequenceBuilder.F_TRACK_UNIQUE);
+
+        builder.append(Range.of(0, 0));
+        builder.append(Range.of(0, 4));
+        builder.append(Range.of(10, 10));
+        String expected = input.substring(0, 4);
+
+        assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRanges());
+        assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRangesOptimized());
+        assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
+    }
+
+    @Test
+    public void test_appendRangeNoAnchors() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_TRACK_UNIQUE);
+
+        builder.append(Range.of(0, 0));
+        builder.append(Range.of(0, 4));
+        builder.append(Range.of(10, 10));
+        String expected = input.substring(0, 4);
+
+        assertEquals("⟦0123⟧", builder.toStringWithRanges());
+        assertEquals("⟦0123⟧", builder.toStringWithRangesOptimized());
+        assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
+    }
+
+    @Test
+    public void test_appendSubSequenceDefault() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
+
+        builder.append(sequence.subSequence(0, 0));
+        builder.append(sequence.subSequence(0, 4));
+        builder.append(sequence.subSequence(10, 10));
+        String expected = input.substring(0, 4);
+
+        assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRanges());
+        assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRangesOptimized());
+        assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
+    }
+
+    @Test
+    public void test_appendSubSequenceAnchors() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_INCLUDE_ANCHORS | BasedSequenceBuilder.F_TRACK_UNIQUE);
+
+        builder.append(sequence.subSequence(0, 0));
+        builder.append(sequence.subSequence(0, 4));
+        builder.append(sequence.subSequence(10, 10));
+        String expected = input.substring(0, 4);
+
+        assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRanges());
+        assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRangesOptimized());
+        assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
+    }
+
+    @Test
+    public void test_appendSubSequenceNoAnchors() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_TRACK_UNIQUE);
+
+        builder.append(sequence.subSequence(0, 0));
+        builder.append(sequence.subSequence(0, 4));
+        builder.append(sequence.subSequence(10, 10));
+        String expected = input.substring(0, 4);
+
+        assertEquals("⟦0123⟧", builder.toStringWithRanges());
+        assertEquals("⟦0123⟧", builder.toStringWithRangesOptimized());
+        assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
+    }
+
+    @Test
     public void test_appendRange1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         builder.append(Range.of(0, 4));
         String expected = input.substring(0, 4);
@@ -31,7 +127,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         builder.append(0, 4);
         builder.append(6, 7);
@@ -46,7 +142,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         builder.append(Range.of(0, 5));
         builder.append(Range.of(5, 7));
@@ -60,7 +156,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         builder.append(0, 5);
         builder.append(3, 7);
@@ -74,7 +170,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         builder.append(0, 5);
         builder.append("abc");
@@ -89,7 +185,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         builder.append(0, 5);
         builder.append("abc");
@@ -108,7 +204,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append("345");
@@ -123,7 +219,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append("34 ");
@@ -138,7 +234,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append("34 5");
@@ -153,7 +249,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append("34 56");
@@ -168,7 +264,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append(" 3456");
@@ -183,7 +279,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append(" 345");
@@ -198,7 +294,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append(" 345");
@@ -217,7 +313,7 @@ public class BasedSequenceBuilderTest {
         String input = "  0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append("    ");
         builder.append(2, 12);
@@ -231,7 +327,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("    ");
@@ -246,7 +342,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.PREVIOUS);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("    ");
@@ -261,7 +357,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("    ");
@@ -276,7 +372,7 @@ public class BasedSequenceBuilderTest {
         String input = "  0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.PREVIOUS);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append("    ");
         builder.append(2, 12);
@@ -290,7 +386,7 @@ public class BasedSequenceBuilderTest {
         String input = "  0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append("    ");
         builder.append(2, 12);
@@ -304,7 +400,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n    ");
@@ -319,7 +415,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.PREVIOUS);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n    ");
@@ -334,7 +430,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n    ");
@@ -349,7 +445,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n\n 56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n\n   ");
@@ -364,7 +460,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n\n 56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.PREVIOUS);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n\n   ");
@@ -379,7 +475,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n\n 56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n\n   ");
@@ -394,7 +490,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append("34\n    ");
@@ -409,7 +505,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.PREVIOUS);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append("34\n    ");
@@ -424,7 +520,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 3);
         builder.append("34\n    ");
@@ -439,7 +535,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234 \n56789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n  ");
@@ -454,7 +550,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234 \n";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n");
@@ -469,7 +565,7 @@ public class BasedSequenceBuilderTest {
         String input = "01234  \n";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append(" \n");
@@ -483,7 +579,7 @@ public class BasedSequenceBuilderTest {
         String input = "012340123401234";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("01234");
@@ -497,7 +593,7 @@ public class BasedSequenceBuilderTest {
         String input = "0123  \n  5678";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 5);
         builder.append("\n");
@@ -508,7 +604,7 @@ public class BasedSequenceBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound1() {
+    public void test_optimizersCompoundDefault1() {
         String input = "" +
                 "  line 1 \n" +
                 "  line 2 \n" +
@@ -517,7 +613,95 @@ public class BasedSequenceBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) builder.append("    ");
+            builder.append(trim.getSourceRange());
+            builder.append("\n");
+        }
+
+        assertEquals("    ⟦line 1⟧\\n    ⟦line 2⟧\\n⟦⟧\\n    ⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", builder.toStringWithRangesOptimized());
+        assertEquals("" +
+                "    line 1\n" +
+                "    line 2\n" +
+                "\n" +
+                "    line 3\n" +
+                "", builder.toString());
+    }
+
+    @Test
+    public void test_optimizersCompoundDefault2() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) builder.append("  ");
+            builder.append(trim.getSourceRange());
+            builder.append("\n");
+        }
+        assertEquals("  ⟦line 1⟧\\n  ⟦line 2⟧\\n⟦⟧\\n  ⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", builder.toStringWithRangesOptimized());
+        assertEquals("" +
+                "  line 1\n" +
+                "  line 2\n" +
+                "\n" +
+                "  line 3\n" +
+                "", builder.toString());
+    }
+
+    @Test
+    public void test_optimizersCompoundDefault3() {
+        String input = "" +
+                "line 1\n" +
+                "line 2 \n" +
+                "\n" +
+                "line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+//            if (!trim.isEmpty()) segments.append("  ");
+            builder.append(trim.getSourceRange());
+            builder.append("\n");
+        }
+        assertEquals("⟦line 1⟧\\n⟦line 2⟧\\n⟦⟧\\n⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", builder.toStringWithRangesOptimized());
+        assertEquals("" +
+                "line 1\n" +
+                "line 2\n" +
+                "\n" +
+                "line 3\n" +
+                "", builder.toString());
+    }
+
+    @Test
+    public void test_optimizersCompoundNoAnchors1() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_TRACK_UNIQUE, optimizer);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -538,7 +722,7 @@ public class BasedSequenceBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound2() {
+    public void test_optimizersCompoundNoAnchors2() {
         String input = "" +
                 "  line 1 \n" +
                 "  line 2 \n" +
@@ -547,7 +731,7 @@ public class BasedSequenceBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_TRACK_UNIQUE, optimizer);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -567,7 +751,7 @@ public class BasedSequenceBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound3() {
+    public void test_optimizersCompoundNoAnchors3() {
         String input = "" +
                 "line 1\n" +
                 "line 2 \n" +
@@ -576,7 +760,7 @@ public class BasedSequenceBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_TRACK_UNIQUE, optimizer);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -596,6 +780,94 @@ public class BasedSequenceBuilderTest {
     }
 
     @Test
+    public void test_optimizersCompoundAnchors1() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_INCLUDE_ANCHORS | BasedSequenceBuilder.F_TRACK_UNIQUE, optimizer);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) builder.append("    ");
+            builder.append(trim.getSourceRange());
+            builder.append("\n");
+        }
+
+        assertEquals("    ⟦line 1⟧\\n    ⟦line 2⟧\\n⟦⟧\\n    ⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", builder.toStringWithRangesOptimized());
+        assertEquals("" +
+                "    line 1\n" +
+                "    line 2\n" +
+                "\n" +
+                "    line 3\n" +
+                "", builder.toString());
+    }
+
+    @Test
+    public void test_optimizersCompoundAnchors2() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_INCLUDE_ANCHORS | BasedSequenceBuilder.F_TRACK_UNIQUE, optimizer);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) builder.append("  ");
+            builder.append(trim.getSourceRange());
+            builder.append("\n");
+        }
+        assertEquals("  ⟦line 1⟧\\n  ⟦line 2⟧\\n⟦⟧\\n  ⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", builder.toStringWithRangesOptimized());
+        assertEquals("" +
+                "  line 1\n" +
+                "  line 2\n" +
+                "\n" +
+                "  line 3\n" +
+                "", builder.toString());
+    }
+
+    @Test
+    public void test_optimizersCompoundAnchors3() {
+        String input = "" +
+                "line 1\n" +
+                "line 2 \n" +
+                "\n" +
+                "line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, BasedSequenceBuilder.F_INCLUDE_ANCHORS | BasedSequenceBuilder.F_TRACK_UNIQUE, optimizer);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+//            if (!trim.isEmpty()) segments.append("  ");
+            builder.append(trim.getSourceRange());
+            builder.append("\n");
+        }
+        assertEquals("⟦line 1⟧\\n⟦line 2⟧\\n⟦⟧\\n⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", builder.toStringWithRangesOptimized());
+        assertEquals("" +
+                "line 1\n" +
+                "line 2\n" +
+                "\n" +
+                "line 3\n" +
+                "", builder.toString());
+    }
+
+    @Test
     public void test_addSuffix2() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = "0123456789";
@@ -603,7 +875,7 @@ public class BasedSequenceBuilderTest {
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
         BasedSequence sequence = base.subSequence(1, 9);
 
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(sequence.subSequence(0, 8));
         builder.append(">");
@@ -625,11 +897,11 @@ public class BasedSequenceBuilderTest {
         BasedSequence replaced3 = base.suffixWith(">").suffixWith(">");
         assertEquals("0123456789>>", replaced3.toString());
 
-        BasedSequenceBuilder builder2 = new BasedSequenceBuilder(replaced1, optimizer);
+        BasedSequenceBuilder builder2 = BasedSequenceBuilder.emptyBuilder(replaced1, optimizer);
         builder2.append(replaced1);
         builder2.append(">");
-        assertEquals("⟦0123456789⟧>>", builder2.toStringWithRanges());
-        assertEquals("⟦0123456789⟧>>", builder2.toStringWithRangesOptimized());
+        assertEquals("⟦0123456789⟧>⟦⟧>", builder2.toStringWithRanges());
+        assertEquals("⟦0123456789⟧>⟦⟧>", builder2.toStringWithRangesOptimized());
         assertEquals("0123456789>>", builder2.toSequence().toVisibleWhitespaceString());
         assertEquals(Range.of(0, 10), builder2.toSequence().getSourceRange());
     }
@@ -641,13 +913,13 @@ public class BasedSequenceBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
 
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 0);
         builder.append("^");
         builder.append(1, 10);
-        assertEquals("^⟦123456789⟧", builder.toStringWithRanges());
-        assertEquals("^⟦123456789⟧", builder.toStringWithRangesOptimized());
+        assertEquals("⟦⟧^⟦123456789⟧", builder.toStringWithRanges());
+        assertEquals("⟦⟧^⟦123456789⟧", builder.toStringWithRangesOptimized());
         assertEquals("^123456789", builder.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence1 = builder.toSequence();
         assertEquals(Range.of(0, 10), sequence1.getSourceRange());
@@ -664,15 +936,15 @@ public class BasedSequenceBuilderTest {
         String input = "01234567890123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 0);
         builder.append("abcd");
         builder.append(3, 10);
         builder.append("abcd");
         builder.append(13, 20);
-        assertEquals("abcd⟦3456789⟧abcd⟦3456789⟧", builder.toStringWithRanges());
-        assertEquals("abcd⟦3456789⟧abcd⟦3456789⟧", builder.toStringWithRangesOptimized());
+        assertEquals("⟦⟧abcd⟦3456789⟧abcd⟦3456789⟧", builder.toStringWithRanges());
+        assertEquals("⟦⟧abcd⟦3456789⟧abcd⟦3456789⟧", builder.toStringWithRangesOptimized());
         assertEquals("abcd3456789abcd3456789", builder.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence1 = builder.toSequence();
         assertEquals(Range.of(0, 20), sequence1.getSourceRange());
@@ -681,14 +953,14 @@ public class BasedSequenceBuilderTest {
         assertEquals("abcd3456789abcd3456789", replaced.toString());
         assertEquals(Range.of(3, 20), replaced.getSourceRange());
 
-        BasedSequenceBuilder builder2 = new BasedSequenceBuilder(replaced, optimizer);
+        BasedSequenceBuilder builder2 = BasedSequenceBuilder.emptyBuilder(replaced, optimizer);
         builder2.append("  ");
         builder2.append(replaced.subSequence(0, 11));
         builder2.append("\n  ");
         builder2.append(replaced.subSequence(11, 22));
         builder2.append("\n");
-        assertEquals("  abcd⟦3456789⟧\\n  abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
-        assertEquals("  abcd⟦3456789⟧\\n  abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
+        assertEquals("  ⟦⟧abcd⟦3456789⟧\\n  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
+        assertEquals("  ⟦⟧abcd⟦3456789⟧\\n  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
         assertEquals("  abcd3456789\\n  abcd3456789\\n", builder2.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence2 = builder2.toSequence();
         assertEquals(Range.of(3, 20), sequence2.getSourceRange());
@@ -700,7 +972,7 @@ public class BasedSequenceBuilderTest {
         String input = " 0123456789\n 0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         builder.append(0, 1);
         builder.append("abcd");
@@ -717,14 +989,14 @@ public class BasedSequenceBuilderTest {
         assertEquals(" abcd3456789\n abcd3456789", replaced.toString());
         assertEquals(Range.of(0, 23), replaced.getSourceRange());
 
-        BasedSequenceBuilder builder2 = new BasedSequenceBuilder(replaced, optimizer);
+        BasedSequenceBuilder builder2 = BasedSequenceBuilder.emptyBuilder(replaced, optimizer);
         builder2.append("  ");
         builder2.append(replaced.subSequence(1, 12));
         builder2.append("\n  ");
         builder2.append(replaced.subSequence(14, 25));
         builder2.append("\n");
-        assertEquals("  abcd⟦3456789⟧\\n  abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
-        assertEquals("  abcd⟦3456789\\n⟧  abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
+        assertEquals("  ⟦⟧abcd⟦3456789⟧\\n  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
+        assertEquals("  ⟦⟧abcd⟦3456789\\n⟧  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
         assertEquals("  abcd3456789\\n  abcd3456789\\n", builder2.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence2 = builder2.toSequence();
         assertEquals(Range.of(4, 23), sequence2.getSourceRange());
@@ -735,7 +1007,7 @@ public class BasedSequenceBuilderTest {
         // this one causes text to be replaced with recovered EOL in the code
         String input = " 0123456789\n 0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         builder.append(0, 1);
         builder.append("abcd");
@@ -753,14 +1025,14 @@ public class BasedSequenceBuilderTest {
         assertEquals(Range.of(0, 23), replaced.getSourceRange());
 
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.NEXT);
-        BasedSequenceBuilder builder2 = new BasedSequenceBuilder(replaced, optimizer);
+        BasedSequenceBuilder builder2 = BasedSequenceBuilder.emptyBuilder(replaced, optimizer);
         builder2.append("  ");
         builder2.append(replaced.subSequence(1, 12));
         builder2.append("\n  ");
         builder2.append(replaced.subSequence(14, 25));
         builder2.append("\n");
-        assertEquals("  abcd⟦3456789⟧\\n  abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
-        assertEquals("  abcd⟦3456789\\n⟧  abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
+        assertEquals("  ⟦⟧abcd⟦3456789⟧\\n  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
+        assertEquals("  ⟦⟧abcd⟦3456789\\n⟧  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
         assertEquals("  abcd3456789\\n  abcd3456789\\n", builder2.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence2 = builder2.toSequence();
         assertEquals(Range.of(4, 23), sequence2.getSourceRange());
@@ -772,13 +1044,13 @@ public class BasedSequenceBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         BasedCharRecoveryOptimizer optimizer = new BasedCharRecoveryOptimizer(PositionAnchor.CURRENT);
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence, optimizer);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
         BasedSequence text = PrefixedSubSequence.repeatOf(" ", 5, sequence).append(PrefixedSubSequence.repeatOf(" ", 5, sequence.getEmptySuffix()));
         builder.append(text);
 
-        assertEquals("     ⟦0123456789⟧     ", builder.toStringWithRanges());
-        assertEquals("     ⟦0123456789⟧     ", builder.toStringWithRangesOptimized());
+        assertEquals("⟦⟧     ⟦0123456789⟧     ⟦⟧", builder.toStringWithRanges());
+        assertEquals("⟦⟧     ⟦0123456789⟧     ⟦⟧", builder.toStringWithRangesOptimized());
         assertEquals("     0123456789     ", builder.toSequence().toVisibleWhitespaceString());
     }
 }

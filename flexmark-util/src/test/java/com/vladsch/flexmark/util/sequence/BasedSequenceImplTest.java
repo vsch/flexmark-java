@@ -1064,7 +1064,6 @@ public class BasedSequenceImplTest {
         segments.append(Range.of(0, 0));
         segments.append("^");
         segments.append(Range.of(1, 10));
-        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=1:1, t=1, l=10, [1, '^'), [1, 10) }"), segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
         assertEquals("^123456789", segments.toString(sequence));
 

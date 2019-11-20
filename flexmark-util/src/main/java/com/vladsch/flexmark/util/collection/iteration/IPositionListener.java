@@ -2,17 +2,18 @@ package com.vladsch.flexmark.util.collection.iteration;
 
 public interface IPositionListener {
     /**
-     * Insert Notification
+     * insert Notification
      *
      * @param index at which insert was performed, list contents and size at this point are already updated
      * @param count of elements inserted
      */
     void inserted(int index, int count);
+
     /**
-     * Delete Notification
+     * delete Notification
      *
      * @param index at which delete was performed, list contents and size at this point are already updated
-     * @param count of elements inserted
+     * @param count of elements deleted
      */
     void deleted(int index, int count);
 }

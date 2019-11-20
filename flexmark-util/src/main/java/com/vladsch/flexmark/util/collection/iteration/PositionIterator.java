@@ -50,7 +50,7 @@ class PositionIterator<T, P extends IPositionHolder<T, P>> implements Iterator<P
     @Override
     public void remove() {
         if (myIndex == null)
-            throw new IllegalStateException("next() has not been called yet.");
+            throw new IllegalStateException("next() has not been called");
 
         myIndex.remove();
     }

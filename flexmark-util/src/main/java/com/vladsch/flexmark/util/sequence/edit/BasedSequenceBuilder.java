@@ -21,35 +21,50 @@ import java.util.List;
  * make add non-based sequence as prefixed sequence
  */
 public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilder, BasedSequence> {
+    public static final int F_INCLUDE_ANCHORS = SegmentBuilder.F_INCLUDE_ANCHORS;
+    public static final int F_TRACK_UNIQUE = SegmentBuilder.F_TRACK_UNIQUE;
+
     private final BasedSegmentBuilder mySegments;
     private final @NotNull BasedSequence myBase;
     private final @Nullable List<BasedSegmentOptimizer> myOptimizers;
     private @Nullable List<BasedSequence> myBasedSequences;
 
     /**
-     * Construct a base sequence builder for given base sequence.
+     * Construct a base sequence builder for given base sequence with default options.
      * <p>
      * NOTE: the builder is always constructed for the base sequence of the base.
      * ie. for the based sequence returned by {@link BasedSequence#getBaseSequence()},
      * so any subsequence from a base can be used as argument for the constructor
+     * <p>
+     * CAUTION: optimizer list is used as is, not copied for performance reasons.
+     * Do not modify optimizer list after constructing a builder with it. Results are not tested.
      *
-     * @param base base sequence for which to create a builder
+     * @param base       base sequence for which to create a builder
+     * @param optimizers list of optimizers to apply to segments before generating sequence
      */
-    public BasedSequenceBuilder(@NotNull BasedSequence base) {
+    private BasedSequenceBuilder(@NotNull BasedSequence base, @Nullable List<BasedSegmentOptimizer> optimizers) {
         myBase = base.getBaseSequence();
         mySegments = BasedSegmentBuilder.emptyBuilder(myBase);
-        myOptimizers = null;
+        myOptimizers = optimizers;
     }
 
-    public BasedSequenceBuilder(@NotNull BasedSequence base, @NotNull BasedSegmentOptimizer optimizer) {
+    /**
+     * Construct a base sequence builder for given base sequence with specific options.
+     * <p>
+     * NOTE: the builder is always constructed for the base sequence of the base.
+     * ie. for the based sequence returned by {@link BasedSequence#getBaseSequence()},
+     * so any subsequence from a base can be used as argument for the constructor
+     * <p>
+     * CAUTION: optimizer list is used as is, not copied for performance reasons.
+     * Do not modify optimizer list after constructing a builder with it. Results are not tested.
+     *
+     * @param base       base sequence for which to create a builder
+     * @param options    builder options
+     * @param optimizers list of optimizers to apply to segments before generating sequence
+     */
+    private BasedSequenceBuilder(@NotNull BasedSequence base, int options, @Nullable List<BasedSegmentOptimizer> optimizers) {
         myBase = base.getBaseSequence();
-        mySegments = BasedSegmentBuilder.emptyBuilder(myBase);
-        myOptimizers = Collections.singletonList(optimizer);
-    }
-
-    private BasedSequenceBuilder(@NotNull BasedSequence base, @NotNull List<BasedSegmentOptimizer> optimizers) {
-        myBase = base.getBaseSequence();
-        mySegments = BasedSegmentBuilder.emptyBuilder(myBase);
+        mySegments = BasedSegmentBuilder.emptyBuilder(myBase, options);
         myOptimizers = optimizers;
     }
 
@@ -66,7 +81,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     @Override
     public BasedSequenceBuilder subContext() {
-        return myOptimizers == null ? new BasedSequenceBuilder(myBase) : new BasedSequenceBuilder(myBase, myOptimizers);
+        return myOptimizers == null ? new BasedSequenceBuilder(myBase, mySegments.myOptions, null) : new BasedSequenceBuilder(myBase, mySegments.myOptions, myOptimizers);
     }
 
     @NotNull
@@ -270,5 +285,29 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
             }
         }
         return sb.toString();
+    }
+
+    public static BasedSequenceBuilder emptyBuilder(@NotNull BasedSequence base) {
+        return new BasedSequenceBuilder(base, null);
+    }
+
+    public static BasedSequenceBuilder emptyBuilder(@NotNull BasedSequence base, @NotNull BasedSegmentOptimizer optimizer) {
+        return new BasedSequenceBuilder(base, Collections.singletonList(optimizer));
+    }
+
+    public static BasedSequenceBuilder emptyBuilder(@NotNull BasedSequence base, @NotNull List<BasedSegmentOptimizer> optimizers) {
+        return new BasedSequenceBuilder(base, optimizers);
+    }
+
+    public static BasedSequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options) {
+        return new BasedSequenceBuilder(base, options, null);
+    }
+
+    public static BasedSequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options, @NotNull BasedSegmentOptimizer optimizer) {
+        return new BasedSequenceBuilder(base, options, Collections.singletonList(optimizer));
+    }
+
+    public static BasedSequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options, @NotNull List<BasedSegmentOptimizer> optimizers) {
+        return new BasedSequenceBuilder(base, options, optimizers);
     }
 }

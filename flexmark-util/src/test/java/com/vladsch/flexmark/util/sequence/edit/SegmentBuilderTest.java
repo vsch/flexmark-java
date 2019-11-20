@@ -411,7 +411,7 @@ public class SegmentBuilderTest {
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
-        BasedSequenceBuilder builder = new BasedSequenceBuilder(sequence);
+        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         segments.append(0, 3);
         segments.append("34 56");

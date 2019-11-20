@@ -12,6 +12,11 @@ public class BasedSegmentBuilder extends SegmentBuilder {
         myBase = base;
     }
 
+    protected BasedSegmentBuilder(@NotNull BasedSequence base, int options) {
+        super(options);
+        myBase = base;
+    }
+
     public BasedSegmentBuilder(@NotNull BasedSegmentBuilder other) {
         super(other);
         myBase = other.myBase;
@@ -46,5 +51,10 @@ public class BasedSegmentBuilder extends SegmentBuilder {
     @NotNull
     public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence) {
         return new BasedSegmentBuilder(sequence);
+    }
+
+    @NotNull
+    public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, int options) {
+        return new BasedSegmentBuilder(sequence, options);
     }
 }

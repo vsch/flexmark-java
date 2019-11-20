@@ -48,7 +48,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @Override
     public <B extends SequenceBuilder<B, BasedSequence>> @NotNull B getBuilder() {
         //noinspection unchecked
-        return (B) new BasedSequenceBuilder(this);
+        return (B) BasedSequenceBuilder.emptyBuilder(this);
     }
 
     @Override

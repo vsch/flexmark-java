@@ -9,7 +9,8 @@
     - [API Changes](#api-changes)
 - [Next](#next)
 - [Next 0.59.56](#next-05956)
-- [Next 0.59.54](#next-05954)
+- [Next 0.59.56](#next-05956)
+- [0.59.54](#05954)
 - [0.59.52](#05952)
 - [0.59.50](#05950)
 - [0.59.48](#05948)
@@ -193,21 +194,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * After recovering the EOL range, see if it can be expanded left/right to encompass more
       based chars from text on either side.
 * [ ] Add: position tracking resolver based on original sequence tracked and final result.
-* [x] Add: `MarkdownParagraph` to utils to wrap paragraph text.
-  * [ ] Fix; `MarkdownParagraph` to use `SegmentBuilder` for accumulating wrapped text.
-  * [ ] Test: position marker preservation with direction type
-  * [ ] Add: `Formatter` Paragraph wrapping options and code.
-  * [ ] Add: `LS` awareness to segment optimization
+* [ ] Add: `Formatter` Paragraph wrapping options and code.
 * [ ] Fix: remove skeleton code for offset tracking through base sequence manipulations. No
       longer needed. This will be done by analysis of original vs. resulting based sequence
       offsets.
 * [ ] Fix: rework `PositionList` and `Position` according to
       [Position-Lists](assets/ideas/PositionList/Position-Lists.md)
-  * [ ] Add: concept of framing to invalidate all position created in the frame and not taken
-        out via `Position.unFrame()`, to allow optimized removal of positions from
-        notifications. Otherwise the update list grows fast and with every iteration. Syntax
-        should be: `try { startFrame() ... } finally { endFrame(); }` with all positions created
-        in the frame detached. This should be done by any functions creating positions.
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 
@@ -217,10 +209,15 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: `SegmentBuilder` simplify optimization by passing the full list to optimizer. No
       position list.
 
-## Next 0.59.54
+## Next 0.59.56
 
-* Add: `SegmentBuilder` option flags for tracking unique non-based characters and including
-  anchors (0 span ranges) in the segment list.
+* [ ] Fix: `MarkdownParagraph`
+  * [ ] Add: `LS` awareness to segment optimization
+  * [ ] use `SegmentBuilder` for accumulating wrapped text.
+  * [ ] remove any indents from lines being wrapped.
+  * [ ] Test: position marker preservation with direction type
+  * [ ] Add: preview listener to position list so optimizer changes are fixed up for consistency
+        and stats updates.
 * [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
@@ -235,6 +232,28 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         overhead for offset storage. Most of the time non based chars will require little
         storage, since most of the time out of base chars are spaces. Save the type of offset
         used 1, 2, 4 bytes with the segmented data. 0.59.52
+
+## 0.59.54
+
+* Fix: rework `PositionList` and `Position`
+  * Add: concept of scope framing to invalidate all position created in the frame and not taken
+    out via `Position.unframed()`, will also take out listeners and preview listeners added in
+    the frame. This optimizes removal of positions from notifications. Otherwise the update list
+    grows fast and with every iteration, until gc is run, which may be a while. Problem becomes
+    worse if the position list is long lived and accumulates positions which were not detached
+    over its lifetime, between gc runs. Every iteration should be scoped. Iterating 10x over a
+    10 item list without scoping has max 110 listener updates, scoping inner loop only 10 max
+    listeners, scoping inner loop 1.
+
+    Usage is: `Object frame = openFrame(); try { ... } finally { closeFrame(frame); }` with all
+    positions created between open/close frame being detached. Frames can be nested and are
+    validated for double closing, unclosed nested, and other common errors. Positions will throw
+    an exception if used after frame is closed.
+  * Add: `IPreviewPositionListener` to `PositionList` so changes can be previewed and changed.
+    Useful for `SegmentBuilder` to keep invariants and tracked counts updated when these are
+    changed by optimizers so optimizers do not need to concern themselves about these.
+* Add: `SegmentBuilder` option flags for tracking unique non-based characters and including
+  anchors (0 span ranges) in the segment list.
 
 ## 0.59.52
 

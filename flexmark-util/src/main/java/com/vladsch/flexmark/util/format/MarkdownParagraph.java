@@ -228,7 +228,7 @@ public class MarkdownParagraph {
         final int[] pos = { 0 };
         final int[] lineCount = { 0 };
         ArrayList<Token> lineWords = new ArrayList<>();
-        BasedSequenceBuilder result = new BasedSequenceBuilder(myChars);
+        BasedSequenceBuilder result = BasedSequenceBuilder.emptyBuilder(myChars);
         int spaceWidth = myCharWidthProvider.spaceWidth();
         final int[] lineIndent = { spaceWidth * getFirstIndent() };
         int nextIndent = spaceWidth * getIndent();
@@ -574,7 +574,7 @@ public class MarkdownParagraph {
         final String lineBreak = SequenceUtils.EOL;
         int col = 0;
         int lineCount = 0;
-        final BasedSequenceBuilder result = new BasedSequenceBuilder(myChars);
+        final BasedSequenceBuilder result = BasedSequenceBuilder.emptyBuilder(myChars);
         final int spaceWidth = myCharWidthProvider.spaceWidth();
         int lineIndent = spaceWidth * getFirstIndent();
         final int nextIndent = spaceWidth * getIndent();

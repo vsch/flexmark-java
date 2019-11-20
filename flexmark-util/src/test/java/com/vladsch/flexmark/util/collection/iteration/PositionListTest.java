@@ -1,11 +1,16 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
+import static com.vladsch.flexmark.util.ExceptionMatcher.*;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.*;
@@ -18,6 +23,21 @@ public class PositionListTest {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
         PositionList<Integer> positions = new PositionList<>(list);
         assertSame(list, positions.getList());
+    }
+
+    @Test
+    public void positionSetDetached() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(5);
+        assertFalse(position.isDetached());
+
+        position.setDetached();
+        assertTrue(position.isDetached());
+
+        // should throw
+        thrown.expect(match(IllegalStateException.class, "Position is detached but still receiving notifications"));
+        positions.add(5);
     }
 
     @Test
@@ -120,13 +140,13 @@ public class PositionListTest {
         Position<Integer> position1 = positions.getPosition(8, PositionAnchor.CURRENT);
         Position<Integer> position2 = position1.getPosition(2);
 
-        assertEquals(2, positions.trackedPositions());
+        assertEquals(2, positions.getListeners());
         position1 = null;
         System.gc();
-        assertEquals(1, positions.trackedPositions());
+        assertEquals(1, positions.getListeners());
         position2 = null;
         System.gc();
-        assertEquals(0, positions.trackedPositions());
+        assertEquals(0, positions.getListeners());
     }
 
     @Test
@@ -149,10 +169,10 @@ public class PositionListTest {
             }
         };
 
-        assertEquals(1, positions.trackedPositions());
+        assertEquals(1, positions.getListeners());
         positions.addPositionListener(listener);
 
-        assertEquals(2, positions.trackedPositions());
+        assertEquals(2, positions.getListeners());
         position.set(-1);
         assertEquals("", message.toString());
 
@@ -165,18 +185,18 @@ public class PositionListTest {
         assertEquals("Inserted: [5, 6)", message.toString());
 
         positions.removePositionListener(listener);
-        assertEquals(1, positions.trackedPositions());
+        assertEquals(1, positions.getListeners());
 
         positions.addPositionListener(listener);
-        assertEquals(2, positions.trackedPositions());
+        assertEquals(2, positions.getListeners());
 
         listener = null;
         System.gc();
-        assertEquals(1, positions.trackedPositions());
+        assertEquals(1, positions.getListeners());
 
         position = null;
         System.gc();
-        assertEquals(0, positions.trackedPositions());
+        assertEquals(0, positions.getListeners());
     }
 
     @Test
@@ -281,8 +301,16 @@ public class PositionListTest {
         List<Integer> expected2 = Arrays.asList(-1, 8, 7, 6, 5, 4, 3, 2, 1, 0, -2);
         assertEquals(expected2, list);
 
-        // set past last element does not affect positions
-        assertEquals(10, position.getIndex());
+        // set past last element does affect positions, only when done through the position itself it does not affect that position
+        assertEquals(11, position.getIndex());
+        assertFalse(position.isValidElement());
+
+        position.set(-3);
+        List<Integer> expected3 = Arrays.asList(-1, 8, 7, 6, 5, 4, 3, 2, 1, 0, -2, -3);
+        assertEquals(expected3, list);
+
+        // set past last element does affect positions, only when done through the position itself it does not affect that position
+        assertEquals(11, position.getIndex());
         assertTrue(position.isValidElement());
     }
 
@@ -709,7 +737,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
-        thrown.expect(IllegalStateException.class);
+        thrown.expect(match(IllegalStateException.class, "next() has not been called"));
 
         int i = 1;
         Iterator<Position<Integer>> iterator = positions.iterator();
@@ -723,7 +751,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
-        thrown.expect(IllegalStateException.class);
+        thrown.expect(match(IllegalStateException.class, "Position is detached from its list"));
 
         Position<Integer> position = positions.getPosition(0);
         position.detachListener();
@@ -750,7 +778,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
-        thrown.expect(IllegalArgumentException.class);
+        thrown.expect(match(IllegalArgumentException.class, "startOffset: 5 must be less than endOffset: 4"));
 
         Position<Integer> position = positions.getPosition(0);
         position.remove(5, 4);
@@ -836,7 +864,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
-        thrown.expect(IllegalStateException.class);
+        thrown.expect(match(IllegalStateException.class, "Position is not valid"));
 
         int i = 1;
         for (Position<Integer> position : positions) {
@@ -1282,7 +1310,7 @@ public class PositionListTest {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
         PositionList<Integer> positions = new PositionList<>(list);
 
-        thrown.expect(IllegalStateException.class);
+        thrown.expect(match(IllegalStateException.class, "Position is not valid"));
         Position<Integer> position0 = positions.getPosition(0);
         Position<Integer> position1 = position0.getPosition(1);
         position0.remove(1);
@@ -1617,5 +1645,528 @@ public class PositionListTest {
 
         index = position.lastIndexOf(-13, p -> p.get() == "7");
         assertFalse(index.isValidElement());
+    }
+
+    static class PreviewTracker implements IPreviewPositionListener {
+        final @NotNull StringBuilder out;
+        final @NotNull List<?> list;
+
+        public PreviewTracker(@NotNull StringBuilder out, @NotNull List<?> list) {
+            this.out = out;
+            this.list = list;
+        }
+
+        @Override
+        public void deleting(int index, int count) {
+            out.append("deleting(").append(index).append(", ").append(count).append(") listSize: ").append(list.size()).append("\n");
+        }
+
+        @Override
+        public Object changing(int index, Object value) {
+            out.append("changing(").append(index).append(", ").append(value).append(") currentValue: ").append(list.get(index)).append(" listSize: ").append(list.size()).append("\n");
+            return value;
+        }
+
+        @Override
+        public void changed(int index, Object oldValue, Object newValue) {
+            out.append("changed(").append(index).append(", ").append(oldValue).append(", ").append(newValue).append(") currentValue: ").append(list.get(index)).append(" listSize: ").append(list.size()).append("\n");
+        }
+
+        @Override
+        public void inserted(int index, int count) {
+            out.append("inserted(").append(index).append(", ").append(count).append(") listSize: ").append(list.size()).append("\n");
+        }
+
+        @Override
+        public void deleted(int index, int count) {
+            out.append("deleted(").append(index).append(", ").append(count).append(") listSize: ").append(list.size()).append("\n");
+        }
+    }
+
+    @Test
+    public void testReleasePreview() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position1 = positions.getPosition(8, PositionAnchor.CURRENT);
+        Position<Integer> position2 = position1.getPosition(2);
+        StringBuilder out = new StringBuilder();
+        IPreviewPositionListener previewPositionListener = new PreviewTracker(out, list);
+        positions.addPositionListener(previewPositionListener);
+
+        positions.set(0, -1);
+        assertEquals(Arrays.asList(-1, 8, 7, 6, 5, 4, 3, 2, 1, 0), list);
+        positions.add(-2);
+        assertEquals(Arrays.asList(-1, 8, 7, 6, 5, 4, 3, 2, 1, 0, -2), list);
+        positions.addAll(4, Arrays.asList(-3, -4, -5));
+        assertEquals(Arrays.asList(-1, 8, 7, 6, -3, -4, -5, 5, 4, 3, 2, 1, 0, -2), list);
+        positions.remove(7);
+        assertEquals(Arrays.asList(-1, 8, 7, 6, -3, -4, -5, 4, 3, 2, 1, 0, -2), list);
+        positions.remove(9, 12);
+        assertEquals(Arrays.asList(-1, 8, 7, 6, -3, -4, -5, 4, 3, -2), list);
+
+        assertEquals(3, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+        position1 = null;
+        System.gc();
+        assertEquals(2, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+        position2 = null;
+        System.gc();
+        assertEquals(1, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        assertEquals("" +
+                "changing(0, -1) currentValue: 9 listSize: 10\n" +
+                "changed(0, 9, -1) currentValue: -1 listSize: 10\n" +
+                "inserted(10, 1) listSize: 11\n" +
+                "inserted(4, 3) listSize: 14\n" +
+                "deleting(7, 1) listSize: 14\n" +
+                "deleted(7, 1) listSize: 13\n" +
+                "deleting(9, 3) listSize: 13\n" +
+                "deleted(9, 3) listSize: 10\n" +
+                "", out.toString());
+
+        previewPositionListener = null;
+        System.gc();
+        assertEquals(0, positions.getListeners());
+        assertEquals(0, positions.getPreviewListeners());
+        assertEquals(-1, positions.getPreviewListeners());
+    }
+
+    @Test
+    public void testListenerAddPreview() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(5, PositionAnchor.CURRENT);
+        StringBuilder message = new StringBuilder();
+        StringBuilder out = new StringBuilder();
+        IPreviewPositionListener previewPositionListener = new PreviewTracker(out, list);
+        positions.addPositionListener(previewPositionListener);
+
+        IPositionListener listener = new IPositionListener() {
+            @Override
+            public void inserted(int index, int count) {
+                message.append("Inserted: [").append(index).append(", ").append(index + count).append(")");
+            }
+
+            @Override
+            public void deleted(int index, int count) {
+                message.append("Deleted: [").append(index).append(", ").append(index + count).append(")");
+            }
+        };
+
+        assertEquals(2, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+        positions.addPositionListener(listener);
+
+        assertEquals(3, positions.getListeners());
+        position.set(-1);
+        assertEquals("", message.toString());
+
+        message.delete(0, message.length());
+        position.remove(-1);
+        assertEquals("Deleted: [4, 5)", message.toString());
+
+        message.delete(0, message.length());
+        position.add(1, -2);
+        assertEquals("Inserted: [5, 6)", message.toString());
+
+        positions.removePositionListener(listener);
+        assertEquals(2, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        positions.addPositionListener(listener);
+        assertEquals(3, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        listener = null;
+        System.gc();
+        assertEquals(2, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        position = null;
+        System.gc();
+        assertEquals(1, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        assertEquals("" +
+                "changing(5, -1) currentValue: 4 listSize: 10\n" +
+                "changed(5, 4, -1) currentValue: -1 listSize: 10\n" +
+                "deleting(4, 1) listSize: 10\n" +
+                "deleted(4, 1) listSize: 9\n" +
+                "inserted(5, 1) listSize: 10\n" +
+                "", out.toString());
+
+        positions.removePositionListener(previewPositionListener);
+        assertEquals(0, positions.getListeners());
+        assertEquals(-1, positions.getPreviewListeners());
+
+        positions.addPositionListener(previewPositionListener);
+        System.gc();
+        assertEquals(1, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        previewPositionListener = null;
+        System.gc();
+        assertEquals(0, positions.getListeners());
+
+        // first time the hash is still not 0 because no remove listener was issued
+        assertEquals(0, positions.getPreviewListeners());
+
+        // previous call set it to null so count is now -1
+        assertEquals(-1, positions.getPreviewListeners());
+    }
+
+    @Test
+    public void clearPreview() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Position<Integer>> listPositions = new ArrayList<>();
+        StringBuilder out = new StringBuilder();
+        IPreviewPositionListener previewPositionListener = new PreviewTracker(out, list);
+        positions.addPositionListener(previewPositionListener);
+
+        int iMax = list.size();
+        for (int i = 0; i <= iMax; i++) {
+            Position<Integer> position = positions.getPosition(i);
+            assertTrue("" + i, position.isValid());
+            listPositions.add(position);
+        }
+
+        positions.clear();
+        assertEquals(0, list.size());
+
+        for (int i = 0; i <= iMax; i++) {
+            Position<Integer> position = listPositions.get(i);
+            assertFalse("" + i, position.isValid());
+        }
+
+        assertEquals("" +
+                "deleted(0, 2147483647) listSize: 0\n" +
+                "", out.toString());
+
+        assertEquals(-1, positions.getPreviewListeners());
+    }
+
+    @Test
+    public void framesInvalid() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        StringBuilder out = new StringBuilder();
+
+        Object frameId = positions.openFrame();
+        thrown.expect(match(IllegalStateException.class, "Invalid frame id: 1"));
+        positions.closeFrame(1);
+        positions.closeFrame(frameId);
+    }
+
+    @Test
+    public void framesNotOpen() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        PositionList<Integer> positions2 = new PositionList<>(list);
+        StringBuilder out = new StringBuilder();
+
+        Object frameId = positions.openFrame();
+        positions.closeFrame(frameId);
+        thrown.expect(match(IllegalStateException.class, "No frames open"));
+        positions.closeFrame(frameId);
+    }
+
+    @Test
+    public void framesDifferentList() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        PositionList<Integer> positions2 = new PositionList<>(list);
+        StringBuilder out = new StringBuilder();
+
+        Object frameId = positions.openFrame();
+        Object frameId2 = positions2.openFrame();
+        thrown.expect(matchRegEx(IllegalStateException.class, "FrameId created by: PositionList@[\\dabcdef]+, not by this list: PositionList@[\\dabcdef]+"));
+        positions.closeFrame(frameId2);
+        positions.closeFrame(frameId);
+    }
+
+    @Test
+    public void framesNotClosed() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        PositionList<Integer> positions2 = new PositionList<>(list);
+        StringBuilder out = new StringBuilder();
+
+        Object frameId = positions.openFrame();
+        Object frameId2 = positions.openFrame();
+        thrown.expect(matchPrefix(IllegalStateException.class, "" +
+                "closeFrame() open nested frames, openFrame trace:\n" +
+                "      com.vladsch.flexmark.util.collection.iteration.PositionListTest.framesNotClosed(PositionListTest.java:" +
+                ""));
+        positions.closeFrame(frameId);
+    }
+
+    @Test
+    public void framesNotClosed2() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        PositionList<Integer> positions2 = new PositionList<>(list);
+        StringBuilder out = new StringBuilder();
+
+        Object frameId = positions.openFrame();
+        Object frameId2 = positions.openFrame();
+        Object frameId3 = positions.openFrame();
+        thrown.expect(matchRegEx(IllegalStateException.class, "" +
+                "\\QcloseFrame() open nested frames, openFrame trace:\n\\E" +
+                "\\Q      com.vladsch.flexmark.util.collection.iteration.PositionListTest.framesNotClosed2(PositionListTest.java:\\E(?s:.*?)" +
+                "\\Q        com.vladsch.flexmark.util.collection.iteration.PositionListTest.framesNotClosed2(PositionListTest.java:\\E(?s:.*)" +
+                ""));
+        positions.closeFrame(frameId);
+    }
+
+    @Test
+    public void framesNotClosed3() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        PositionList<Integer> positions2 = new PositionList<>(list);
+        StringBuilder out = new StringBuilder();
+
+        Object frameId = positions.openFrame();
+        Object frameId2 = positions.openFrame();
+        Object frameId3 = positions.openFrame();
+        positions.closeFrame(frameId3);
+        thrown.expect(matchRegEx(IllegalStateException.class, "" +
+                "\\QcloseFrame() open nested frames, openFrame trace:\n\\E" +
+                "\\Q      com.vladsch.flexmark.util.collection.iteration.PositionListTest.framesNotClosed3(PositionListTest.java:\\E(?s:.*?)" +
+                ""));
+        positions.closeFrame(frameId);
+    }
+
+    @Test
+    public void frames1() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Position<Integer>> listPositions = new ArrayList<>();
+        StringBuilder out = new StringBuilder();
+        IPreviewPositionListener previewPositionListener = new PreviewTracker(out, list);
+        positions.addPositionListener(previewPositionListener);
+
+        int iMax = list.size();
+
+        Object frameId = positions.openFrame();
+        try {
+            for (int i = 0; i <= iMax; i++) {
+                Position<Integer> position = null;
+                position = positions.getPosition(i);
+                if (i == 5) {
+                    position.unframed();
+                }
+                assertTrue("" + i, position.isValid());
+                listPositions.add(position);
+            }
+        } finally {
+            positions.closeFrame(frameId);
+        }
+
+        assertEquals(2, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        for (int i = 0; i <= iMax; i++) {
+            Position<Integer> position = listPositions.get(i);
+            assertEquals("" + i, i == 5, position.isValid());
+        }
+
+        positions.add(5, -1);
+        assertEquals(6, listPositions.get(5).getIndex());
+
+        assertEquals("" +
+                "inserted(5, 1) listSize: 11\n" +
+                "", out.toString());
+
+        positions.clear();
+        assertEquals(0, positions.getListeners());
+        assertEquals(-1, positions.getPreviewListeners());
+    }
+
+    @Test
+    public void framesNested() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Position<Integer>> listPositions = new ArrayList<>();
+        StringBuilder out = new StringBuilder();
+        IPreviewPositionListener previewPositionListener = new PreviewTracker(out, list);
+        positions.addPositionListener(previewPositionListener);
+
+        int iMax = list.size();
+
+        Object frameId = positions.openFrame();
+        try {
+            for (int i = 0; i <= iMax; i++) {
+                Position<Integer> position = null;
+                position = positions.getPosition(i);
+                assertTrue("" + i, position.isValid());
+                listPositions.add(position);
+            }
+        } finally {
+            positions.closeFrame(frameId);
+        }
+
+        assertEquals(1, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        for (int i = 0; i <= iMax; i++) {
+            Position<Integer> position = listPositions.get(i);
+            assertFalse("" + i, position.isValid());
+        }
+
+        assertEquals("" +
+                "", out.toString());
+
+        positions.clear();
+        assertEquals(-1, positions.getPreviewListeners());
+    }
+
+    @Test
+    public void testFramedListenerAddPreview() {
+        List<Integer> input = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+        ArrayList<Integer> list = new ArrayList<>(input);
+        PositionList<Integer> positions = new PositionList<>(list);
+        Position<Integer> position = positions.getPosition(5, PositionAnchor.CURRENT);
+        StringBuilder message = new StringBuilder();
+        StringBuilder out = new StringBuilder();
+        IPreviewPositionListener previewPositionListener = new PreviewTracker(out, list);
+
+        IPositionListener listener = new IPositionListener() {
+            @Override
+            public void inserted(int index, int count) {
+                message.append("Inserted: [").append(index).append(", ").append(index + count).append(")");
+            }
+
+            @Override
+            public void deleted(int index, int count) {
+                message.append("Deleted: [").append(index).append(", ").append(index + count).append(")");
+            }
+        };
+
+        assertEquals(1, positions.getListeners());
+        assertEquals(-1, positions.getPreviewListeners());
+
+        Object frameId = positions.openFrame();
+
+        positions.addPositionListener(listener);
+        positions.addPositionListener(previewPositionListener);
+
+        assertEquals(3, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        position.set(-1);
+        assertEquals("", message.toString());
+
+        message.delete(0, message.length());
+        position.remove(-1);
+        assertEquals("Deleted: [4, 5)", message.toString());
+
+        positions.closeFrame(frameId);
+
+        message.delete(0, message.length());
+        position.add(1, -2);
+        assertEquals("", message.toString());
+
+        assertEquals(1, positions.getListeners());
+        assertEquals(-1, positions.getPreviewListeners());
+
+        position = null;
+        System.gc();
+        assertEquals(0, positions.getListeners());
+        assertEquals(-1, positions.getPreviewListeners());
+
+        assertEquals("" +
+                "changing(5, -1) currentValue: 4 listSize: 10\n" +
+                "changed(5, 4, -1) currentValue: -1 listSize: 10\n" +
+                "deleting(4, 1) listSize: 10\n" +
+                "deleted(4, 1) listSize: 9\n" +
+                "", out.toString());
+
+        assertEquals(0, positions.getListeners());
+        assertEquals(-1, positions.getPreviewListeners());
+    }
+
+    @Test
+    public void framesFramedListener() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        ArrayList<Position<Integer>> listPositions = new ArrayList<>();
+        StringBuilder out = new StringBuilder();
+        IPreviewPositionListener previewPositionListener = new PreviewTracker(out, list);
+        positions.addPositionListener(previewPositionListener);
+
+        int iMax = list.size();
+
+        Object frameId = positions.openFrame();
+        try {
+            for (int i = 0; i <= iMax; i++) {
+                Position<Integer> position = null;
+                position = positions.getPosition(i);
+                if (i == 5) {
+                    position.unframed();
+                }
+                assertTrue("" + i, position.isValid());
+                listPositions.add(position);
+            }
+        } finally {
+            positions.closeFrame(frameId);
+        }
+
+        assertEquals(2, positions.getListeners());
+        assertEquals(1, positions.getPreviewListeners());
+
+        for (int i = 0; i <= iMax; i++) {
+            Position<Integer> position = listPositions.get(i);
+            assertEquals("" + i, i == 5, position.isValid());
+        }
+
+        positions.add(5, -1);
+        assertEquals(6, listPositions.get(5).getIndex());
+
+        assertEquals("" +
+                "inserted(5, 1) listSize: 11\n" +
+                "", out.toString());
+
+        positions.clear();
+        assertEquals(0, positions.getListeners());
+        assertEquals(-1, positions.getPreviewListeners());
+    }
+
+    @Test
+    public void framesStats() {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+        PositionList<Integer> positions = new PositionList<>(list);
+        PositionList<Integer> positionsFramed = new PositionList<>(list);
+        PositionList<Integer> positionsScoped = new PositionList<>(list);
+
+        int iMax = list.size();
+
+        for (int j = 0; j < 10; j++) {
+            Object frameId = positionsFramed.openFrame();
+            try {
+                for (int i = 0; i <= iMax; i++) {
+                    Object frameId2 = positionsScoped.openFrame();
+                    try {
+                        positions.getPosition(i);
+                        positionsFramed.getPosition(i);
+                        positionsScoped.getPosition(i);
+                    } finally {
+                        positionsScoped.closeFrame(frameId2);
+                    }
+                }
+                positions.add(-j - 1);
+                positionsFramed.add(-j - 1);
+            } finally {
+                positionsFramed.closeFrame(frameId);
+            }
+        }
+
+        assertEquals(110, positions.getMaxListeners());
+        assertEquals(11, positionsFramed.getMaxListeners());
+        assertEquals(1, positionsScoped.getMaxListeners());
     }
 }

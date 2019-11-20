@@ -51,6 +51,17 @@ public interface IPositionHolder<T, P extends IPositionHolder<T, P>> extends /*L
     boolean isDetached();
 
     /**
+     * Tells the listener it has been detached by its parent list
+     * NOTE: used as optimization in position list frames to detach any positions which have not been unframed()
+     */
+    void setDetached();
+
+    /**
+     * Mark this position as used outside the iteration frame in which it was created. It allows positions to not be detached when the frame is closed.
+     */
+    void unframed();
+
+    /**
      * Position Anchor for this position
      * @return position anchor
      */
