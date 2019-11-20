@@ -142,7 +142,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
 
             if (lastSegment != null) mergedSequences.add(lastSegment);
 
-            if (mergedSequences.size() == 1) {
+            if (mergedSequences.size() == 1 && mergedSequences.get(0).getStartOffset() == startOffset && mergedSequences.get(0).getEndOffset() == endOffset) {
                 return mergedSequences.get(0);
             } else if (mergedSequences.size() != 0) {
                 return new SegmentedSequence(mergedSequences, startOffset, endOffset);

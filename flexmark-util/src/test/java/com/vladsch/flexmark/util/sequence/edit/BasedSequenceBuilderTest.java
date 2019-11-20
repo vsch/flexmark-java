@@ -527,8 +527,8 @@ public class BasedSequenceBuilderTest {
             builder.append("\n");
         }
 
-        assertEquals("    ⟦line 1⟧\\n    ⟦line 2⟧\\n⟦⟧\\n    ⟦line 3⟧\\n", builder.toStringWithRanges());
-        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", builder.toStringWithRangesOptimized());
+        assertEquals("    ⟦line 1⟧\\n    ⟦line 2⟧\\n\\n    ⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n⟧\\n  ⟦  line 3\\n⟧", builder.toStringWithRangesOptimized());
         assertEquals("" +
                 "    line 1\n" +
                 "    line 2\n" +
@@ -556,7 +556,7 @@ public class BasedSequenceBuilderTest {
             builder.append(trim.getSourceRange());
             builder.append("\n");
         }
-        assertEquals("  ⟦line 1⟧\\n  ⟦line 2⟧\\n⟦⟧\\n  ⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("  ⟦line 1⟧\\n  ⟦line 2⟧\\n\\n  ⟦line 3⟧\\n", builder.toStringWithRanges());
         assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", builder.toStringWithRangesOptimized());
         assertEquals("" +
                 "  line 1\n" +
@@ -585,7 +585,7 @@ public class BasedSequenceBuilderTest {
             builder.append(trim.getSourceRange());
             builder.append("\n");
         }
-        assertEquals("⟦line 1⟧\\n⟦line 2⟧\\n⟦⟧\\n⟦line 3⟧\\n", builder.toStringWithRanges());
+        assertEquals("⟦line 1⟧\\n⟦line 2⟧\\n\\n⟦line 3⟧\\n", builder.toStringWithRanges());
         assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", builder.toStringWithRangesOptimized());
         assertEquals("" +
                 "line 1\n" +
@@ -628,8 +628,8 @@ public class BasedSequenceBuilderTest {
         BasedSequenceBuilder builder2 = new BasedSequenceBuilder(replaced1, optimizer);
         builder2.append(replaced1);
         builder2.append(">");
-        assertEquals("⟦0123456789⟧>⟦⟧>", builder2.toStringWithRanges());
-        assertEquals("⟦0123456789⟧>⟦⟧>", builder2.toStringWithRangesOptimized());
+        assertEquals("⟦0123456789⟧>>", builder2.toStringWithRanges());
+        assertEquals("⟦0123456789⟧>>", builder2.toStringWithRangesOptimized());
         assertEquals("0123456789>>", builder2.toSequence().toVisibleWhitespaceString());
         assertEquals(Range.of(0, 10), builder2.toSequence().getSourceRange());
     }
@@ -646,8 +646,8 @@ public class BasedSequenceBuilderTest {
         builder.append(0, 0);
         builder.append("^");
         builder.append(1, 10);
-        assertEquals("⟦⟧^⟦123456789⟧", builder.toStringWithRanges());
-        assertEquals("⟦⟧^⟦123456789⟧", builder.toStringWithRangesOptimized());
+        assertEquals("^⟦123456789⟧", builder.toStringWithRanges());
+        assertEquals("^⟦123456789⟧", builder.toStringWithRangesOptimized());
         assertEquals("^123456789", builder.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence1 = builder.toSequence();
         assertEquals(Range.of(0, 10), sequence1.getSourceRange());
@@ -671,8 +671,8 @@ public class BasedSequenceBuilderTest {
         builder.append(3, 10);
         builder.append("abcd");
         builder.append(13, 20);
-        assertEquals("⟦⟧abcd⟦3456789⟧abcd⟦3456789⟧", builder.toStringWithRanges());
-        assertEquals("⟦⟧abcd⟦3456789⟧abcd⟦3456789⟧", builder.toStringWithRangesOptimized());
+        assertEquals("abcd⟦3456789⟧abcd⟦3456789⟧", builder.toStringWithRanges());
+        assertEquals("abcd⟦3456789⟧abcd⟦3456789⟧", builder.toStringWithRangesOptimized());
         assertEquals("abcd3456789abcd3456789", builder.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence1 = builder.toSequence();
         assertEquals(Range.of(0, 20), sequence1.getSourceRange());
@@ -687,8 +687,8 @@ public class BasedSequenceBuilderTest {
         builder2.append("\n  ");
         builder2.append(replaced.subSequence(11, 22));
         builder2.append("\n");
-        assertEquals("  ⟦⟧abcd⟦3456789⟧\\n  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
-        assertEquals("  ⟦⟧abcd⟦3456789⟧\\n  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
+        assertEquals("  abcd⟦3456789⟧\\n  abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
+        assertEquals("  abcd⟦3456789⟧\\n  abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
         assertEquals("  abcd3456789\\n  abcd3456789\\n", builder2.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence2 = builder2.toSequence();
         assertEquals(Range.of(3, 20), sequence2.getSourceRange());
@@ -723,8 +723,8 @@ public class BasedSequenceBuilderTest {
         builder2.append("\n  ");
         builder2.append(replaced.subSequence(14, 25));
         builder2.append("\n");
-        assertEquals("  ⟦⟧abcd⟦3456789⟧\\n  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
-        assertEquals("  ⟦⟧abcd⟦3456789\\n⟧  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
+        assertEquals("  abcd⟦3456789⟧\\n  abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
+        assertEquals("  abcd⟦3456789\\n⟧  abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
         assertEquals("  abcd3456789\\n  abcd3456789\\n", builder2.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence2 = builder2.toSequence();
         assertEquals(Range.of(4, 23), sequence2.getSourceRange());
@@ -759,8 +759,8 @@ public class BasedSequenceBuilderTest {
         builder2.append("\n  ");
         builder2.append(replaced.subSequence(14, 25));
         builder2.append("\n");
-        assertEquals("  ⟦⟧abcd⟦3456789⟧\\n  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
-        assertEquals("  ⟦⟧abcd⟦3456789\\n⟧  ⟦⟧abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
+        assertEquals("  abcd⟦3456789⟧\\n  abcd⟦3456789⟧\\n", builder2.toStringWithRanges());
+        assertEquals("  abcd⟦3456789\\n⟧  abcd⟦3456789⟧\\n", builder2.toStringWithRangesOptimized());
         assertEquals("  abcd3456789\\n  abcd3456789\\n", builder2.toSequence().toVisibleWhitespaceString());
         BasedSequence sequence2 = builder2.toSequence();
         assertEquals(Range.of(4, 23), sequence2.getSourceRange());
@@ -777,8 +777,8 @@ public class BasedSequenceBuilderTest {
         BasedSequence text = PrefixedSubSequence.repeatOf(" ", 5, sequence).append(PrefixedSubSequence.repeatOf(" ", 5, sequence.getEmptySuffix()));
         builder.append(text);
 
-        assertEquals("⟦⟧     ⟦0123456789⟧     ⟦⟧", builder.toStringWithRanges());
-        assertEquals("⟦⟧     ⟦0123456789⟧     ⟦⟧", builder.toStringWithRangesOptimized());
+        assertEquals("     ⟦0123456789⟧     ", builder.toStringWithRanges());
+        assertEquals("     ⟦0123456789⟧     ", builder.toStringWithRangesOptimized());
         assertEquals("     0123456789     ", builder.toSequence().toVisibleWhitespaceString());
     }
 }

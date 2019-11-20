@@ -166,6 +166,12 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
             for (Seg part : mySegments.getParts()) {
                 if (part.isBase()) {
                     lastSequence = myBase.subSequence(part.getStart(), part.getEnd());
+
+                    if (lastSequence.getStartOffset() > mySegments.getStartOffset()) {
+                        // add an empty prefix
+                        sequences.add(myBase.subSequence(mySegments.getStartOffset(), mySegments.getStartOffset()));
+                    }
+
                     if (prefix != null) {
                         lastSequence = PrefixedSubSequence.prefixOf(prefix, lastSequence);
                         sequences.add(lastSequence);
@@ -182,6 +188,10 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
                         prefix = null;
                     }
                 }
+            }
+
+            if (lastSequence != null && lastSequence.getEndOffset() < mySegments.getEndOffset()) {
+                sequences.add(myBase.subSequence(mySegments.getEndOffset(), mySegments.getEndOffset()));
             }
 
             if (prefix != null) {

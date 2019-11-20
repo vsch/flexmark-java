@@ -177,7 +177,7 @@ public class SegmentBuilder {
             if (lastSeg.isString()) {
                 assert myStartOffset == Range.NULL.getStart() && myEndOffset == Range.NULL.getEnd() : assertionError("last seg string, no offsets ", parts);
             } else {
-                assert myStartOffset == firstSeg().getStart() && myEndOffset == lastSeg().getEnd()
+                assert myStartOffset <= firstSeg().getStart() && myEndOffset >= lastSeg().getEnd()
                         : assertionError(String.format("start:%d==first.start:%d, end:%d==last.end:%d ", myStartOffset, firstSeg().getStart(), myEndOffset, lastSeg().getEnd()), parts);
             }
             assert myLength >= myTextLength && myTextLength >= myTextUniqueLength && myTextLength >= myTextUnique : assertionError("l >= t >= ul", parts);
@@ -328,8 +328,10 @@ public class SegmentBuilder {
             if (lastSeg.isBase()) {
                 setLastSeg(lastSeg.withEnd(range.getEnd()));
                 changeLength(range.getEnd() - lastSeg.getEnd(), false);
-            } else {
+            } else if (!lastSeg.isNullRange()) {
                 addBaseSeg(Seg.baseSeg(range.withStart(lastSeg.getEnd())));
+            } else {
+                addBaseSeg(Seg.baseSeg(range));
             }
         } else {
             // disjoint

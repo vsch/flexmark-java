@@ -2,9 +2,11 @@ package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.vladsch.flexmark.util.Utils.escapeJavaString;
@@ -915,5 +917,45 @@ public class BasedSegmentBuilderTest {
                 "line 3\n" +
                 "", segments.toString(sequence));
     }
+
+    @Test
+    public void test_extractRanges() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+//        BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3, 6), Range.of(8, 12));
+        segments.append(Range.of(0, 0));
+        segments.append(Range.of(0, 1));
+        segments.append(Range.of(3, 6));
+        segments.append(Range.of(8, 10));
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=6, [0, 1), [3, 6), [8, 10) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("034589", segments.toString(sequence));
+    }
+
+
+
+    @Test
+    public void test_replacePrefix() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+//        BasedSequence replaced = sequence.replace(0, 1, "^");
+//        assertEquals("^123456789", replaced.toString());
+
+        segments.append(Range.of(0, 0));
+        segments.append("^");
+        segments.append(Range.of(1, 10));
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=1:1, t=1, l=10, [1, '^'), [1, 10) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("^123456789", segments.toString(sequence));
+
+    }
+
+
 }
 

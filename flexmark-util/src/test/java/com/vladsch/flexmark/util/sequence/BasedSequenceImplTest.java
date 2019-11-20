@@ -1,11 +1,15 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.vladsch.flexmark.util.Utils.escapeJavaString;
 import static org.junit.Assert.*;
 
 public class BasedSequenceImplTest {
@@ -1045,6 +1049,36 @@ public class BasedSequenceImplTest {
         assertEquals(9, replaced.getIndexOffset(9));
         assertEquals(10, replaced.getIndexOffset(10));
     }
+
+    @Test
+    public void test_replacePrefix11() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequenceBuilder builder = sequence.getBuilder();
+        BasedSegmentBuilder segments = builder.getSegmentBuilder();
+
+//        BasedSequence replaced = sequence.replace(0, 1, "^");
+//        assertEquals("^123456789", replaced.toString());
+
+        segments.append(Range.of(0, 0));
+        segments.append("^");
+        segments.append(Range.of(1, 10));
+        assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 10), s=0:0, u=1:1, t=1, l=10, [1, '^'), [1, 10) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("^123456789", segments.toString(sequence));
+
+        @NotNull List<BasedSequence> segs = builder.getSegments();
+        BasedSequence replaced = builder.toSequence();
+        assertEquals("^123456789", replaced.toString());
+        assertEquals(Range.of(0, 10), replaced.getSourceRange());
+        assertEquals(-1, replaced.getIndexOffset(0));
+        assertEquals(1, replaced.getIndexOffset(1));
+        assertEquals(2, replaced.getIndexOffset(2));
+        assertEquals(9, replaced.getIndexOffset(9));
+        assertEquals(10, replaced.getIndexOffset(10));
+    }
+
 
     @Test
     public void test_replaceSuffix() {
