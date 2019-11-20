@@ -231,42 +231,43 @@ Next 0.59.52
         used 1, 2, 4 bytes with the segmented data.
 * [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
       stuff.
-* [ ] Fix: `SegmentBuilder` simplify optimization by passing the full list to optimizer. No position list.
+* [ ] Fix: `SegmentBuilder` simplify optimization by passing the full list to optimizer. No
+      position list.
 
 0.59.52
 -------
 
-* [x] Add: `BasedSequence.addSegments(BasedSegmentBuilder)` so each sequence adds its own
-      optimized segment list without requiring by character scanning of
-      `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
+* Add: `BasedSequence.addSegments(BasedSegmentBuilder)` so each sequence adds its own optimized
+  segment list without requiring by character scanning ofg of
+  `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
   * Fix: `BasedSequenceBuilder` to use `BasedSequence.addSegments`
     * `ReplacedBasedSequence` it has no use other than to test if sequence replaces base
-  * [x] Fix: Change segment parts to `EditOp` which extends range and holds an nullable string.
-        This will allow keeping track of replaced parts of base sequence.
+  * Fix: Change segment parts to `EditOp` which extends range and holds an nullable string. This
+    will allow keeping track of replaced parts of base sequence.
     * if string is null then it is a range from base
     * range is empty then string is not null and is an insert at position in base
     * range not empty and string not empty then it is a replacement of base segment.
-* [x] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
-* [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
-* [x] Fix: `SegmentBuilder` to keep track of start and end range in the list based on first/last
-      range added.
-  * [x] Test: need to test this more thoroughly
-  * [x] Fix: simplify overlap by passing index to last range in list and the range overlapping
-        it. No position.
-  * [x] Fix: simplify optimization by passing the full list to optimizer. No position list.
-  * [x] Fix: eliminate multiple methods for the same functionality, append: `EditOp`, start/end
-        offsets or `String`. The rest are history.
-  * [x] Test: cached start/end/length/last range index.
-* [x] Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
-* [x] Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
-      instead of its own implementation.
-  * [x] Add: construction with optional `BasedSegmentOptimizer` list and apply optimizers to
-        segment list before generating sequence or string.
-  * [x] Fix: if there is an overlap in appended sequence with previous segments, add the overlap
-        as out of base text instead of throwing an exception.
-  * [x] Fix: optimize and simplify for speed, too many methods. Keep only add/append of
-        `CharSequence` and add/append for start/end offsets. The rest are gone.
-* [x] Add: Common char sets:
+* Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
+* Fix: `SegmentBuilder` change `append...()` to plain `append()`
+* Fix: `SegmentBuilder` to keep track of start and end range in the list based on first/last
+  range added.
+  * Test: need to test this more thoroughly
+  * Fix: simplify overlap by passing index to last range in list and the range overlapping it.
+    No position.
+  * Fix: simplify optimization by passing the full list to optimizer. No position list.
+  * Fix: eliminate multiple methods for the same functionality, append: `EditOp`, start/end
+    offsets or `String`. The rest are history.
+  * Test: cached start/end/length/last range index.
+* Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
+* Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
+  instead of its own implementation.
+  * Add: construction with optional `BasedSegmentOptimizer` list and apply optimizers to segment
+    list before generating sequence or string.
+  * Fix: if there is an overlap in appended sequence with previous segments, add the overlap as
+    out of base text instead of throwing an exception.
+  * Fix: optimize and simplify for speed, too many methods. Keep only add/append of
+    `CharSequence` and add/append for start/end offsets. The rest are gone.
+* Add: Common char sets:
   * `DECIMAL_DIGITS`
   * `HEXADECIMAL_DIGITS`
   * `OCTAL_DIGITS`
