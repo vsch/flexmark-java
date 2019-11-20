@@ -217,6 +217,17 @@ Next 0.59.52
 * [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
+  * [ ] Fix: optimize non base characters to only store 1 of each char in the out of char
+        sequence. Especially for the first 256 chars which will take care of ASCII and latin
+        chars and can be computed with a 256 byte array, keeping count of how many are actually
+        present. The rest can be in a hash with index. Final index for hashed chars is offset by
+        number of chars in first 256 are allocated.
+  * [ ] Fix: optimize offset type size by storing `delta` = `realOffset` - `startOffset` +
+        `nonBaseChars.length` where `startOffset` is the start offset of the segmented
+        sub-sequence. As the parent segmented sub-sequence gets shorter, it will have less
+        overhead for offset storage. Most of the time non based chars will require little
+        storage, since most of the time out of base chars are spaces. Save the type of offset
+        used 1, 2, 4 bytes with the segmented data.
 * [x] Add: `BasedSequence.addSegments(BasedSegmentBuilder)` so each sequence adds its own
       optimized segment list without requiring by character scanning of
       `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
