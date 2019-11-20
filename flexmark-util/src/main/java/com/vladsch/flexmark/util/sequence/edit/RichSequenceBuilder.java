@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 
 /**
- * A Builder for Segmented BasedSequences
+ * A Builder for non based strings. Just a string builder wrapped in a sequence builder interface
  */
 public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBuilder, RichSequence> {
     private final StringBuilder segments;
@@ -23,13 +23,6 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
     @NotNull
     public RichSequenceBuilder subContext() {
         return new RichSequenceBuilder();
-    }
-
-    @NotNull
-    @Override
-    public RichSequenceBuilder addFrom(@NotNull RichSequenceBuilder other) {
-        segments.append(other.segments);
-        return this;
     }
 
     @NotNull

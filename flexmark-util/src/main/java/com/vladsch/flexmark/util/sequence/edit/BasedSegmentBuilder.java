@@ -18,42 +18,33 @@ public class BasedSegmentBuilder extends SegmentBuilder {
     }
 
     @Override
-    public void handleOverlap(@NotNull SegmentPosition position, @NotNull Range range) {
+    public void handleOverlap(@NotNull Range range) {
         // convert overlap to text from our base
-        // NOTE: one after the last range should be String or nothing, if it was a Range then it would be the last one
-        EditOp textOp = position.getStringOrNullOp(1);
-        Range prevRange = position.getRangeOrNullOp();
-        assert prevRange.isNotNull() && prevRange.overlaps(range);
-        String text = textOp.isPlainText() ? textOp.getText() : null;
+        // range overlaps with last segment in the list
+        Seg lastSeg = lastSeg();
+        assert !lastSeg.isNullRange() && lastSeg.getEnd() > range.getStart();
 
-        if (!prevRange.doesContain(range)) {
-            // add overlapping part as range followed by text
-            Range overlap = prevRange.intersect(range);
+        int length = lastSeg.getEnd() - range.getStart();
+        myLength += length;
+        myTextLength += length;
 
-            // FIX: can be replace op with range
-            if (text != null) {
-                position.set(1, EditOp.plainText(text + myBase.subSequence(overlap).toString()));
-            } else {
-                position.append(EditOp.plainText(myBase.subSequence(overlap).toString()));
-            }
-
-            overlap = range.withStart(overlap.getEnd());
-
-            if (overlap.isNotEmpty()) {
-                position.append(EditOp.baseOp(overlap));
-            }
+        if (lastSeg.isText()) {
+            // can append to it
+            setLastSeg(lastSeg.withTextSuffix(myBase.subSequence(range.getStart(), lastSeg.getEnd()).toString()));
         } else {
-            // fully contains added range, add whole thing as text appended to previous text
-            if (text != null) {
-                position.set(1, EditOp.plainText(text + myBase.subSequence(range)));
-            } else {
-                position.add(1, EditOp.plainText(myBase.subSequence(range).toString()));
-            }
+            // will append overlap text, followed by non-overlapping range if any
+            myParts.add(Seg.textSeg(lastSeg.getEnd(), myBase.subSequence(range.getStart(), lastSeg.getEnd()).toString()));
+        }
+
+        if (lastSeg.getEnd() < range.getEnd()) {
+            // there is a part of the overlap outside the last seg range
+            // append the chopped off base part
+            addBaseSeg(Seg.baseSeg(lastSeg.getEnd(), range.getEnd()));
         }
     }
 
     @NotNull
-    public static BasedSegmentBuilder sequenceBuilder(@NotNull BasedSequence sequence) {
+    public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence) {
         return new BasedSegmentBuilder(sequence);
     }
 }

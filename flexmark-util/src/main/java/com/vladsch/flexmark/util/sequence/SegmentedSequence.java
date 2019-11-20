@@ -12,7 +12,10 @@ import java.util.List;
  */
 public final class SegmentedSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
     private final BasedSequence baseSeq;  // base sequence
-    private final char[] nonBaseChars;    // all non-base characters, offset by baseStartOffset. When baseOffsets[] < 0, take -ve - 1 to get index into this array
+    // NOTE: reducing the size of type for baseOffsets and adding only unique nonBasedChars will give greater memory saving than encoding out of base chars as -ve offsets
+    // on the other hand if the baseOffset type is int then non base chars as -ve offset should be used
+    //    private final char[] nonBaseChars;    // all non-base characters, offset by baseStartOffset. When baseOffsets[] < 0, take -ve - 1 to get index into this array
+    private final boolean nonBaseChars;    // all non-base characters, offset by baseStartOffset. When baseOffsets[] < 0, take -ve - 1 to get index into this array
     private final int[] baseOffsets;      // list of base offsets, offset by baseStartOffset
     private final int baseStartOffset;    // start offset for baseOffsets of this sequence, offset from baseSeq for all chars, including non-base chars
     private final int length;             // length of this sequence
@@ -172,8 +175,9 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         this.baseStartOffset = 0;
         this.length = length;
         this.baseOffsets = new int[length + 1];
+        boolean hadNonBasedChars = false;
         int len = 0;
-        StringBuilder sb = null;
+//        StringBuilder sb = null;
 
         for (BasedSequence basedSequence : segments) {
             int ciMax = basedSequence.length();
@@ -181,9 +185,11 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
             for (int ci = 0; ci < ciMax; ci++) {
                 int offset = basedSequence.getIndexOffset(ci);
                 if (offset < 0) {
-                    if (sb == null) sb = new StringBuilder();
-                    sb.append(basedSequence.charAt(ci));
-                    offset = -sb.length();
+//                    if (sb == null) sb = new StringBuilder();
+//                    sb.append(basedSequence.charAt(ci));
+//                    offset = -sb.length();
+                    offset = -(int) basedSequence.charAt(ci) - 1;
+                    hadNonBasedChars = true;
                 }
 
                 assert ci + len < this.baseOffsets.length : "Incorrect array size calculation: length: " + length + " ci + len: " + (ci + len);
@@ -195,15 +201,16 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
 
         int end = baseOffsets[length - 1];
         baseOffsets[length] = end < 0 ? end - 1 : end + 1;
+        this.nonBaseChars = hadNonBasedChars;
 
-        if (sb != null) {
-            this.nonBaseChars = sb.toString().toCharArray();
-        } else {
-            this.nonBaseChars = null;
-        }
+//        if (sb != null) {
+//            this.nonBaseChars = sb.toString().toCharArray();
+//        } else {
+//            this.nonBaseChars = null;
+//        }
     }
 
-    private SegmentedSequence(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final char[] nonBaseChars, final int length) {
+    private SegmentedSequence(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final boolean nonBaseChars, final int length) {
         super(0);
 
         int iMax = baseOffsets.length - 1;
@@ -212,7 +219,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         int startOffset = 0;
         int endOffset = 0;
 
-        if (nonBaseChars == null) {
+        if (!nonBaseChars) {
             if (baseStartOffset < iMax) {
                 // start is the offset at our start, even when length = 0
                 startOffset = baseOffsets[baseStartOffset];
@@ -296,7 +303,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
                        which is a small price to pay for having the flexibility of adding out of
                        context text to the based sequence.
              */
-            return nonBaseChars[-offset - 1];
+            return (char) (-offset - 1);
         }
         return baseSeq.charAt(offset);
     }

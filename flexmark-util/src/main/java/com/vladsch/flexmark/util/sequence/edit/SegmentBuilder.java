@@ -437,7 +437,7 @@ public class SegmentBuilder {
     @Override
     public String toString() {
         DelimitedBuilder sb = new DelimitedBuilder(", ");
-        sb.append("SegmentBuilder{");
+        sb.append(this.getClass().getSimpleName()).append("{");
 
         if (hasOffsets()) {
             sb.append("[").append(myStartOffset).mark()

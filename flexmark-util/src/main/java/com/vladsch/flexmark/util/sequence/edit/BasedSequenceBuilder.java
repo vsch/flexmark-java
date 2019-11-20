@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,19 +37,19 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
      */
     public BasedSequenceBuilder(@NotNull BasedSequence base) {
         myBase = base.getBaseSequence();
-        mySegments = BasedSegmentBuilder.sequenceBuilder(myBase);
+        mySegments = BasedSegmentBuilder.emptyBuilder(myBase);
         myOptimizers = null;
     }
 
     public BasedSequenceBuilder(@NotNull BasedSequence base, @NotNull BasedSegmentOptimizer optimizer) {
         myBase = base.getBaseSequence();
-        mySegments = BasedSegmentBuilder.sequenceBuilder(myBase);
+        mySegments = BasedSegmentBuilder.emptyBuilder(myBase);
         myOptimizers = Collections.singletonList(optimizer);
     }
 
     private BasedSequenceBuilder(@NotNull BasedSequence base, @NotNull List<BasedSegmentOptimizer> optimizers) {
         myBase = base.getBaseSequence();
-        mySegments = BasedSegmentBuilder.sequenceBuilder(myBase);
+        mySegments = BasedSegmentBuilder.emptyBuilder(myBase);
         myOptimizers = optimizers;
     }
 
@@ -64,28 +67,6 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @Override
     public BasedSequenceBuilder subContext() {
         return myOptimizers == null ? new BasedSequenceBuilder(myBase) : new BasedSequenceBuilder(myBase, myOptimizers);
-    }
-
-    @NotNull
-    @Override
-    public BasedSequenceBuilder addFrom(@NotNull BasedSequenceBuilder other) {
-        if (!other.isEmpty()) {
-            if (myBase != other.myBase) {
-//            throw new IllegalArgumentException("add BasedSequenceBuilder called with other having different base: " + myBase.hashCode() + " got: " + other.myBase.hashCode());
-                for (EditOp part : other.mySegments.getParts()) {
-                    if (part.isBase()) {
-                        mySegments.append(other.myBase.subSequence(part).toString());
-                    } else {
-                        mySegments.append(part.getText());
-                    }
-                }
-            } else {
-                for (EditOp part : other.mySegments.getParts()) {
-                    mySegments.append(part);
-                }
-            }
-        }
-        return this;
     }
 
     @NotNull
@@ -182,9 +163,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
             ArrayList<BasedSequence> sequences = new ArrayList<>();
             BasedSequence lastSequence = null;
             String prefix = null;
-            for (EditOp part : mySegments.getParts()) {
+            for (Seg part : mySegments.getParts()) {
                 if (part.isBase()) {
-                    lastSequence = myBase.subSequence(part);
+                    lastSequence = myBase.subSequence(part.getStart(), part.getEnd());
                     if (prefix != null) {
                         lastSequence = PrefixedSubSequence.prefixOf(prefix, lastSequence);
                         sequences.add(lastSequence);
@@ -193,7 +174,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
                         sequences.add(lastSequence);
                     }
                 } else {
-                    assert prefix == null && part.isPlainText();
+                    assert prefix == null && part.isText();
                     prefix = part.getText();
 
                     if (lastSequence != null) {
@@ -260,11 +241,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     public String toString() {
         StringBuilder sb = new StringBuilder();
         BasedSequence last = null;
-        for (EditOp part : mySegments.getParts()) {
+        for (Seg part : mySegments.getParts()) {
             if (part.isBase()) {
-                if (part.isEmpty()) continue;
-
-                BasedSequence s = myBase.subSequence(part);
+                BasedSequence s = myBase.subSequence(part.getStart(), part.getEnd());
 
                 if (last != null && last.getEndOffset() < s.getStartOffset()
                         && (BasedSequence.WHITESPACE.indexOf(last.charAt(last.length() - 1)) == -1)
@@ -286,9 +265,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     public String toStringNoAddedSpaces() {
         StringBuilder sb = new StringBuilder();
-        for (EditOp part : mySegments.getParts()) {
+        for (Seg part : mySegments.getParts()) {
             if (part.isBase()) {
-                sb.append(myBase.subSequence(part));
+                sb.append(myBase.subSequence(part.getStart(), part.getEnd()));
             } else {
                 sb.append(part.getText());
             }
