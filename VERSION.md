@@ -1,5 +1,4 @@
-flexmark-java
-=============
+# flexmark-java
 
 &nbsp;<details id="version-history"><summary>**Version History**</summary>
 
@@ -9,7 +8,8 @@ flexmark-java
 - [Next 0.60.0](#next-0600)
     - [API Changes](#api-changes)
 - [Next](#next)
-- [Next 0.59.52](#next-05952)
+- [Next 0.59.56](#next-05956)
+- [Next 0.59.54](#next-05954)
 - [0.59.52](#05952)
 - [0.59.50](#05950)
 - [0.59.48](#05948)
@@ -89,8 +89,7 @@ flexmark-java
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
 
-Next 0.60.0
------------
+## Next 0.60.0
 
 ### API Changes
 
@@ -163,8 +162,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-Next
-----
+## Next
 
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See:
@@ -181,8 +179,7 @@ Next
       be visited.
 * [ ] Fix: change `BasedSequenceImpl` to use `Range` instead of `startOffset` and `endOffset`
 
-Next 0.59.52
-------------
+## Next 0.59.56
 
 * [ ] Fix: factor out EOL recovery from `BasedCharsRecoverySegmentOptimizer`, easier to do EOL
       recovery after based char recovery has done its job.
@@ -215,6 +212,15 @@ Next 0.59.52
 * [ ] Fix: spec files no longer render HTML when option selected.
 
 <!-- -->
+* [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
+      stuff.
+* [ ] Fix: `SegmentBuilder` simplify optimization by passing the full list to optimizer. No
+      position list.
+
+## Next 0.59.54
+
+* Add: `SegmentBuilder` option flags for tracking unique non-based characters and including
+  anchors (0 span ranges) in the segment list.
 * [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
@@ -228,14 +234,9 @@ Next 0.59.52
         sub-sequence. As the parent segmented sub-sequence gets shorter, it will have less
         overhead for offset storage. Most of the time non based chars will require little
         storage, since most of the time out of base chars are spaces. Save the type of offset
-        used 1, 2, 4 bytes with the segmented data.
-* [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
-      stuff.
-* [ ] Fix: `SegmentBuilder` simplify optimization by passing the full list to optimizer. No
-      position list.
+        used 1, 2, 4 bytes with the segmented data. 0.59.52
 
-0.59.52
--------
+## 0.59.52
 
 * Add: `BasedSequence.addSegments(BasedSegmentBuilder)` so each sequence adds its own optimized
   segment list without requiring by character scanning ofg of
@@ -277,8 +278,7 @@ Next 0.59.52
 * Deprecate: to be delete  `BasedSequence.getIndexOffset(int)` as soon as `SegmentedSequence` is
   migrated to segment builder sequence part list.
 
-0.59.50
--------
+## 0.59.50
 
 * Fix: move spec resource files to `flexmark-test-specs` resources. Any modules needing the spec
   have to add a test dependency on this module.
@@ -306,8 +306,7 @@ Next 0.59.52
     end/previous to start.
   * Fix: replace flags and position anchor field with byte flags.
 
-0.59.48
--------
+## 0.59.48
 
 * Fix: `SegmentBuilder` to not add empty text.
 * Add: `SegmentOptimizer` for `SegmentBuilder` segment optimization
@@ -348,8 +347,7 @@ Next 0.59.52
   only in real base sequences like `CharSubSequence` and `SubSequence` the rest should rely on
   `BasedSequenceImpl`.
 
-0.59.46
--------
+## 0.59.46
 
 * Fix: merge formatter always adding `<>` around autolinks even when original did not have them.
 * Fix: docx conversion renders mail link text with `mailto:` prefix
@@ -375,8 +373,7 @@ Next 0.59.52
 * Fix: `MarkdownParagraph` wrapping to use simplified left aligned wrapping with no trailing
   spaces
 
-0.59.44
--------
+## 0.59.44
 
 * Add: docx renderer form fields via `[name]{.class attributes}` where name is given by
   `DocxRenderer.FORM_CONTROLS` and if not empty or blank then an unresolved reference link with
@@ -412,8 +409,7 @@ Next 0.59.52
       * `current-time` - current time
         * `format` - word time format
 
-0.59.42
--------
+## 0.59.42
 
 * Break: `BasedSequence.append(CharSequence[])` now constructs as segmented sequence so proper
   ordering of segments is enforced. This means `IllegalArgumentException` will be thrown when
@@ -521,8 +517,7 @@ Next 0.59.52
 * Add: `Range.charSubSequence()`
 * Add: `Range.safeCharBasedSubSequence()` which limit the subsequence within 0 to length
 
-0.59.40
--------
+## 0.59.40
 
 * Break: remove example option parsing related `TestUtils` methods.
 * Add: spec example language per section options and rendering in HTML.
@@ -533,30 +528,26 @@ Next 0.59.52
 * Fix: remove all file url prefix for tests. Either provide the file url for the spec or default
   resolution will be used.
 
-0.59.38
--------
+## 0.59.38
 
 * Fix: remove unnecessary type param from `MutableDataHolder.remove(DataKeyBase<?>)`
 * Fix: `Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE` had wrong regex. Did not allow non-empty
   headings without space either.
 
-0.59.36
--------
+## 0.59.36
 
 * Fix: remove synchronization. The issue was with using `HashMap.computeIfAbsent()` and passing
   the factory, which could and would access and create other keys. This caused concurrent
   modification, not threading. Now computing value with factory then adding it to the dataSet.
 
-0.59.34
--------
+## 0.59.34
 
 * Add: synchronized around `HashMap` modification to ensure thread safety. Elimination of
   nullable keys would allow using `ConcurrentHashMap` in `DataSet` but access and modification
   to options is done at start of parse as extensions and core load their options, afterwards the
   data set is mostly not modified or accessed.
 
-0.59.32
--------
+## 0.59.32
 
 * Fix: add nullable annotations to `DataSet` and `DataKey` classes
 * Break: `DataKey` now represents not null data values, use `NullableDataKey` if using nullable
@@ -583,21 +574,18 @@ Next 0.59.52
 * Add: `DataKey.set(@NotNull MutableDataHolder, @NotNull T)` and `NullableDataKey.set(@NotNull
   MutableDataHolder, @Nullable T)` to allow setting data values via keys, if needed.
 
-0.59.30
--------
+## 0.59.30
 
 * Fix: change all test case construction param from `Map<String, DataHolder>` to `Map<String, ?
   extends DataHolder>` to allow for any type implementing the right map.
 
-0.59.28
--------
+## 0.59.28
 
 * Fix: pass through opening line of spec example to `DumpSpecReader` so it can construct an
   accurate full spec version of expected text.
 * Fix: add `ResourceResolverManager` to handle `ResourceUrlResolver` registration.
 
-0.59.27
--------
+## 0.59.27
 
 * Add: parameterized test case options, ones that have option name followed by `[` and
   terminated by `]`. Used for custom handling variations of option. These should set
@@ -635,21 +623,18 @@ Next 0.59.52
 * Add: HTML comment handling to `SpecReader`, start/end comment tags must be the first non-blank
   on the line and outside of spec example.
 
-0.59.25
--------
+## 0.59.25
 
 * Fix: remove moved test class from core to utils module.
 
-0.59.23
--------
+## 0.59.23
 
 * Fix: change all tests to use static const `ResourceLocation` instead of creating a new
   instance.
 * Fix: make `ComboSpecTestCase.getSpecResourceLocation()` final and remove it from all
   subclasses.
 
-0.59.21
--------
+## 0.59.21
 
 * Fix: move flexmark modules test classes out of `test.util` package which is for
   `flexmark-test-util` module's test classes
@@ -659,8 +644,7 @@ Next 0.59.52
   * `DataSet.aggregate(DataHolder, DataHolder)`
   * `DataSet.aggregateActions(DataHolder, DataHolder)`
 
-0.59.19
--------
+## 0.59.19
 
 * Fix: convert all resource info to `ResourceLocation`
 * Add: class location resolution via file under test `resources` named for the root package of
@@ -725,23 +709,20 @@ Next 0.59.52
 * Fix: convert typographic smarts inline parser to match strings instead of using regex which
   sometimes takes long to execute for no apparent reason.
 
-0.59.17
--------
+## 0.59.17
 
 * Fix: make `SpecExampleRendererBase` reusable by moving any references to flexmark parsing
   rendering specifics to `FlexmarkSpecExampleRenderer` and moving up not related to flexmark
   parsing, like caching of generated HTML and AST.
 * Fix: consolidate full spec and individual example test case in to one method.
 
-0.59.15
--------
+## 0.59.15
 
 * Fix: delete deprecated methods, classes, fields.
 * Fix: delete deprecated flexmark-ext-gfm-tables
 * Fix: format code
 
-0.59.13
--------
+## 0.59.13
 
 * Break: move formatter tests and html renderer to `flexmark-core-test` module to allow sharing
   of test base classes in extensions without causing dependency cycles in formatter module.
@@ -831,13 +812,11 @@ Lines | 124,192 | 118,755 | | Source Lines | 96,669 | 92,145 | | Comment Lines |
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
 
-Next 0.50.44
-------------
+## Next 0.50.44
 
 * Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
 
-0.50.42
--------
+## 0.50.42
 
 * Fix: regression bug
   [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
@@ -865,8 +844,7 @@ Next 0.50.44
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
 
-0.50.40
--------
+## 0.50.40
 
 * Add: `BasedSequence.emptyPrefix()` and `BasedSequence.emptySuffix()` to return empty sequence
   at start or end of the current sequence. Useful for `PrefixedSubSequence.of(String,
@@ -875,8 +853,7 @@ Next 0.50.44
 * Fix: link URL parser not handling char escaping, nested parenthesis tracking and other edge
   cases in jekyll URL macro parsing.
 
-0.50.38
--------
+## 0.50.38
 
 * Fix: real fix for Stack Overflow when parsing long URLs, by hand rolling parsing of link
   destination.
@@ -887,31 +864,27 @@ Next 0.50.44
 * Add: `BasedSequence.safeBaseCharAt(int)` will return character from the base sequence if index
   out of range for sequence or `\0` if out of base sequence range.
 
-0.50.36
--------
+## 0.50.36
 
 * Fix: `SegmentedSequence` would return sequence with start > end if ending with
   `PrefixedSubSequence` whose position was > end of real sequences before.
 * Add: `BitIntegerSet.toArray(int[], int)` for easy `int[]` creation from bit set.
 * Add: `BitIntegerSet.addAll(int[], int, int)` for setting from `int[]`
 
-0.50.34
--------
+## 0.50.34
 
 * Add: source `Node` to `com.vladsch.flexmark.util.format.TableCell`
 * Fix: Stack overflow when parsing large embedded images with space in URL enabled. Now link
   urls starting with `data:image/png;base64,` do not allow spaces in the link.
 
-0.50.32
--------
+## 0.50.32
 
 * Add: `DocxRenderer` image max-width tests
 * Add: `DocxRenderer` image max-height attribute processing and tests
 * Fix: refactor `DocxRenderer` tests to extract common code to base class
 * Fix: heading rendering to work with styles using numbering
 
-0.50.30
--------
+## 0.50.30
 
 * Fix: `DocxRenderer`
   * Add: page break via empty paragraph with only `{.pagebreak}` attributes
@@ -944,8 +917,7 @@ Next 0.50.44
     Does not affect result but reduces xml noise.
 * Fix: `Formatter` translation and merge rendering
 
-0.50.28
--------
+## 0.50.28
 
 * Fix: [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]
 * Add: `DocxRenderer.BULLET_LIST_STYLE` default `"BulletList"`, numbering style to use for
@@ -986,27 +958,23 @@ Next 0.50.44
 * Fix: `Formatter` attributes would eliminate separator space before or after following text
   possibly changing the applicable node for the attribute.
 
-0.50.26
--------
+## 0.50.26
 
 * Fix: docx converter to use `BulletList` and `NumberedList` numbering list styles for list
   conversions to allow easy list item styling for multi-level lists
   * Add: `DocxConverterEmpty` to samples for generating `flexmark-empty-template.docx` from
     `empty.md` and `empty.xml`
 
-0.50.24
--------
+## 0.50.24
 
 * Fix: update docx4j to version 8.1.2
 * Fix: update jsoup to version 1.11.3
 
-0.50.22
--------
+## 0.50.22
 
 * Fix: Attributes with spaces after `{` generated wrong previous text offsets
 
-0.50.20
--------
+## 0.50.20
 
 * Fix: [#357, HTML to markdown and removed nested list]
 * Remove: `FlexmarkHtmlConverter.EXT_TABLES` unused conversion option.
@@ -1015,8 +983,7 @@ Next 0.50.44
   * Add: `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` default `true`, if false will not
     parse attributes after the fenced code info string
 
-0.50.18
--------
+## 0.50.18
 
 * Add: `flexmark-html2md-converter` module which implements HTML to Markdown conversion with an
   extension API to allow customizing the conversion process. Sample:
@@ -1024,8 +991,7 @@ Next 0.50.44
   * Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
 * Fix: deprecate the old `flexmark-html-parser` classes
 
-0.50.16
--------
+## 0.50.16
 
 * Fix: GitLab block quotes should have `>>>` as termination, not `<<<`, macros are still
   terminated by `>>>` to allow nested block quotes in macros. Affects:
@@ -1121,26 +1087,22 @@ Next 0.50.44
   abstract implementation in `RichCharSequenceBase` and implementation in
   `RichCharSequenceImpl`.
 
-0.42.14
--------
+## 0.42.14
 
 * Fix: [#351, Is there any special format requirement for processing html data to markdown]
 * Fix: HTML parser converts `a` tags in preformatted text to links, should convert to URL only
 
-0.42.12
--------
+## 0.42.12
 
 * Fix: [#349, Translation Helper bugs], mix-up between anchors and other non-translating
   elements after translation.
 
-0.42.10
--------
+## 0.42.10
 
 * Fix: [#349, Translation Helper bugs]
 * Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
 
-0.42.8
-------
+## 0.42.8
 
 * Add: PDF converter landscape sample [PdfLandscapeConverter.java]
 * Fix: revert to OpenHtmlToPDF version 0.0.1-RC15 which is the last Java 7 byte code version
@@ -1149,25 +1111,21 @@ Next 0.50.44
 * Fix: add explicit `Locale.US` to `String.format()` when using `%d` for integers to prevent
   conversion to arabic on Java 11.
 
-0.42.6
-------
+## 0.42.6
 
 * Fix: [#338, getLineNumber incorrect with Windows end of line separators]
   * merge: [#339, PR: Fix to line number when using Windows EOL characters.] thanks to
 
-0.42.4
-------
+## 0.42.4
 
 * Fix: Trailing URI prefix only auto-links do not get parsed
 
-0.42.2
-------
+## 0.42.2
 
 * Fix: [#334, CR line separators don't produce line break nodes],
   * merge: [#335, PR: Fix CR-only line separator handling] thanks to **[Kijimuna]**
 
-0.42.0
-------
+## 0.42.0
 
 * Fix: [#332, withOptions forgets about old link resolvers]
   * Break: move `com.vladsch.flexmark.Extension` to
@@ -1200,8 +1158,7 @@ Next 0.50.44
     list will be removed. Used only when using `withOptions()` and providing new options with
     this key set. Used during testing to remove default extensions.
 
-0.40.34
--------
+## 0.40.34
 
 * Fix: [#328, Html2mark - missing newline when paragraph followed by div]
 * Fix: [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]
@@ -1209,37 +1166,32 @@ Next 0.50.44
 * Fix: `AutolinkNodePostProcessor` processing links out of order causing sequence end/start
   reversal.
 
-0.40.32
--------
+## 0.40.32
 
 * Fix: compound enumerated references in attributes ids and outside of headings to output with
   last enumerated reference ordinal.
 
-0.40.30
--------
+## 0.40.30
 
 * Fix: limit `EnumeratedReferenceBlock` to single line of text without processing other block
   elements.
 * Fix: change `Abbreviations` to custom block parser from paragraph pre-processor. Allows
   abbreviation definitions without preceding blank line.
 
-0.40.28
--------
+## 0.40.28
 
 * Add: enumerated reference text in heading to be used with only a format reference, the id is
   taken from the heading attributes.
 * Add: compound enumerated references for creating legal numbering for enumerated references.
 
-0.40.26
--------
+## 0.40.26
 
 * Fix: upgrade dependencies
   * OpenHtmlToPdf -> 0.0.1-RC19
   * docx4j -> 6.1.2
 * Add: parse int or default to `Utils.java`
 
-0.40.24
--------
+## 0.40.24
 
 * Break: test case related classes changed to allow providing URL string for the file resource
   used in the text instead of relying on heuristic conversion of resource URL to file path.
@@ -1282,14 +1234,12 @@ Next 0.50.44
 * Deprecate: `IParse.transferReferences(Document, Document)`, in favour of
   `IParse.transferReferences(Document, Document, Boolean)`
 
-0.40.22
--------
+## 0.40.22
 
 * Fix: merge util tests from [@James-Adam](https://github.com/James-Adam) and fix bugs
 * Fix: change to `MutableDataSet.set(DataKey<? extends T>, T)`
 
-0.40.20
--------
+## 0.40.20
 
 * Fix: [#316, Github user extension incorrectly formats some text]
   * Add: test to make sure previous character to `@` is not `isUnicodeIdentifierPart()`, `-` nor
@@ -1323,8 +1273,7 @@ Next 0.50.44
 * This will print the source location of the test in the console. Clicking the link goes right
   to the spec source file and line of the failed test if [Awesome Console] plugin is installed.
 
-0.40.18
--------
+## 0.40.18
 
 * Add: `EmbeddedAttributeProvider` documentation and add it to the provider's list by default
   unless `HtmlRenderer.EMBEDDED_NODE_PROVIDER` is set to false. Add attributes to nodes in the
@@ -1393,8 +1342,7 @@ Next 0.50.44
   tag processing. For now only `MARKDOWN` does nothing useful. Later it will be used to convert
   math ml to GitLab math inline element.
 
-0.40.16
--------
+## 0.40.16
 
 * Fix: `EnumeratedReferenceExtension` would process GitHub issue link text as enumerated
   reference. Now enumerated `reference` must start with a non-digit character to be interpreted
@@ -1410,16 +1358,14 @@ Next 0.50.44
     [#305, PR: add new youtube link style support to flexmark-ext-youtube-embedded for youtu.be/xyz(?t=123)],
     send appreciations to **[jjYBdx4IL](https://github.com/jjYBdx4IL)**
 
-0.40.14
--------
+## 0.40.14
 
 * Fix: `AutolinkExtension` removing leading `Typographic` nodes when the first link occurs in
   text following the typographic node.
 * Add: PDF converter sample with non-latin character set rendering information.
 * Fix: missing `simple_smile` emoji cheat sheet shortcut
 
-0.40.12
--------
+## 0.40.12
 
 * Fix: [#300, Typography extension breaks some auto links]
 * Add: `TypographicText` interface to mark nodes which hold text which is replaced with
@@ -1427,24 +1373,21 @@ Next 0.50.44
   `AutolinkExtension` is the only one making use of it to prevent typographic smarts from
   breaking up a link and causing part of it to be left out of the URL.
 
-0.40.10
--------
+## 0.40.10
 
 * Fix: GitLab inline math parser to allow multi-line inline math elements
 * Fix: [#295, CoreNodeFormatter does not descend into children on Link nodes] , more like
   kludge, `Formatter.OPTIMIZED_INLINE_RENDERING` when `false` and not translating to always
   render children of link text.
 
-0.40.8
-------
+## 0.40.8
 
 * Fix: change `AttributeProviderFactory` extensions to eliminate duplicate registrations of
   factories.
 * Fix: `AttributesExtension` to assign attributes to explicit/refs links/images
 * Fix: [#299, FlexmarkHtmlParser produces extra empty list item for eclosing \</p\> element]
 
-0.40.6
-------
+## 0.40.6
 
 * Fix: `MarkdownTable.appendTable(FormattingAppendable)` to set
   `FormattingAppendable.ALLOW_LEADING_WHITESPACE` so indentation prefix is not eliminated.
@@ -1468,8 +1411,7 @@ Next 0.50.44
   to mark start of attribute assignment to text between `{.}` or `{#}` and the matching
   attributes element.
 
-0.40.4
-------
+## 0.40.4
 
 * Fix: [#295, CoreNodeFormatter does not descend into children on Link nodes]
   * `Link`, `LinkRef`, `Image` and `ImageRef` node formatter renderer now descends into child
@@ -1478,8 +1420,7 @@ Next 0.50.44
   previous rendering for links and images which appends the node characters without descending
   into child nodes.
 
-0.40.2
-------
+## 0.40.2
 
 * Fix: [#294, BlankLine nodes within BlockQuote change in behaviour]
   * remove blank lines from AST for `BlockQuote` and `AsideBlock` nodes if
@@ -1495,8 +1436,7 @@ Next 0.50.44
   * Add: code to return `List<String>` from child nodes of `YamlFrontMatterNode`
   * Fix: resolve offsets in `YamlFrontMatterNode` and `YamlFrontMatterValue` nodes.
 
-0.40.0
-------
+## 0.40.0
 
 * Fix: Java9+ Compatibility, IntelliJ Migration contained in [migrate 0_35_x to 0_40_0.xml], to
   use:

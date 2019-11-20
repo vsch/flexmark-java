@@ -13,6 +13,9 @@ import java.util.function.Supplier;
 @SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilder {
     public static final String[] EMPTY_STRINGS = new String[0];
+    public static final int F_INCLUDE_ANCHORS = 0x01;
+    public static final int F_TRACK_UNIQUE = 0x02;
+
     protected ArrayList<Seg> myParts = new ArrayList<>();
     protected int myStartOffset = Range.NULL.getStart();
     protected int myEndOffset = Range.NULL.getEnd();
@@ -21,13 +24,22 @@ public class SegmentBuilder {
     protected int myTextUnique = 0;
     protected int myTextSpaceLength = 0;
     protected int myTextUniqueLength = 0;
-    protected final int[] myFirst256 = new int[256];
+    protected final @Nullable int[] myFirst256;
+    final protected int myFlags;
 
     protected SegmentBuilder() {
-
+        this(F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
     }
 
+    protected SegmentBuilder(int flags) {
+        myFlags = flags & (F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
+        myFirst256 = (flags & F_TRACK_UNIQUE) != 0 ? new int[256] : null;
+    }
+
+    @SuppressWarnings("CopyConstructorMissesField")
     protected SegmentBuilder(@NotNull SegmentBuilder other) {
+        this(other.myFlags);
+
         myParts.addAll(other.myParts);
         myStartOffset = other.myStartOffset;
         myEndOffset = other.myEndOffset;
@@ -36,7 +48,10 @@ public class SegmentBuilder {
         myTextUnique = other.myTextUnique;
         myTextSpaceLength = other.myTextSpaceLength;
         myTextUniqueLength = other.myTextUniqueLength;
-        System.arraycopy(other.myFirst256, 0, myFirst256, 0, other.myFirst256.length);
+
+        if (myFirst256 != null && other.myFirst256 != null) {
+            System.arraycopy(other.myFirst256, 0, myFirst256, 0, other.myFirst256.length);
+        }
     }
 
     public int getStartOffset() {
@@ -65,7 +80,7 @@ public class SegmentBuilder {
     }
 
     public int getTextSpaces() {
-        return myFirst256[' '];
+        return myFirst256 == null ? 0: myFirst256[' '];
     }
 
     public int getTextSpaceLength() {
@@ -80,8 +95,21 @@ public class SegmentBuilder {
         return myTextUniqueLength;
     }
 
+    @Nullable
     public int[] getFirst256() {
         return myFirst256;
+    }
+
+    public int getFlags() {
+        return myFlags;
+    }
+
+    public boolean isIncludeAnchors() {
+        return (myFlags & F_INCLUDE_ANCHORS) != 0;
+    }
+
+    public boolean isTrackTextUnique() {
+        return (myFlags & F_TRACK_UNIQUE) != 0;
     }
 
     @NotNull
@@ -237,36 +265,40 @@ public class SegmentBuilder {
 
     protected void addedText(String text) {
         // need to count spaces in it
-        int iMax = text.length();
-        for (int i = 0; i < iMax; i++) {
-            char c = text.charAt(i);
-            if (c < 256) {
-                if (myFirst256[c] == 0) myTextUnique++;
-                myFirst256[c]++;
-                if (c == ' ') myTextSpaceLength++;
-                myTextUniqueLength++;
+        if (myFirst256 != null) {
+            int iMax = text.length();
+            for (int i = 0; i < iMax; i++) {
+                char c = text.charAt(i);
+                if (c < 256) {
+                    if (myFirst256[c] == 0) myTextUnique++;
+                    myFirst256[c]++;
+                    if (c == ' ') myTextSpaceLength++;
+                    myTextUniqueLength++;
+                }
             }
         }
     }
 
     protected void removedText(String text) {
         // need to count spaces in it
-        int iMax = text.length();
-        for (int i = 0; i < iMax; i++) {
-            char c = text.charAt(i);
-            if (c < 256) {
-                assert myFirst256[c] > 0;
-                myFirst256[c]--;
+        if (myFirst256 != null) {
+            int iMax = text.length();
+            for (int i = 0; i < iMax; i++) {
+                char c = text.charAt(i);
+                if (c < 256) {
+                    assert myFirst256[c] > 0;
+                    myFirst256[c]--;
 
-                if (myFirst256[c] == 0) myTextUnique--;
+                    if (myFirst256[c] == 0) myTextUnique--;
 
-                if (c == ' ') {
-                    assert myTextSpaceLength > 0;
-                    myTextSpaceLength--;
+                    if (c == ' ') {
+                        assert myTextSpaceLength > 0;
+                        myTextSpaceLength--;
+                    }
+
+                    assert myTextUniqueLength > 0;
+                    myTextUniqueLength--;
                 }
-
-                assert myTextUniqueLength > 0;
-                myTextUniqueLength--;
             }
         }
     }
@@ -313,8 +345,9 @@ public class SegmentBuilder {
     @NotNull
     public SegmentBuilder append(@NotNull Range range) {
         if (range.isNull()) return this;
-        if (range.getSpan() <= 0) {
-            if (range.getSpan() == 0) updateLastTextSeg(Seg.anchorSeg(range.getEnd()));
+        int rangeSpan = range.getSpan();
+        if (rangeSpan < 0 || rangeSpan == 0 && !isIncludeAnchors()) {
+            if (rangeSpan == 0) updateLastTextSeg(Seg.anchorSeg(range.getEnd()));
             return this;
         }
 
@@ -464,5 +497,10 @@ public class SegmentBuilder {
     @NotNull
     public static SegmentBuilder emptyBuilder() {
         return new SegmentBuilder();
+    }
+
+    @NotNull
+    public static SegmentBuilder emptyBuilder(int flags) {
+        return new SegmentBuilder(flags);
     }
 }

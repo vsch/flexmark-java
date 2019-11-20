@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -30,18 +29,46 @@ public class SegmentBuilderTest {
     }
 
     @Test
-    public void test_basicEmpty() {
+    public void test_basicEmptyDefaults() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
         SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        segments.append(0, 0);
         segments.append(sequence.length(), sequence.length());
 
         assertEquals(0, segments.length());
-        assertEquals("SegmentBuilder{[10, 10), s=0:0, u=0:0, t=0, l=0 }", segments.toString());
+        assertEquals("SegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=0, [0), [10) }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
     }
 
+    @Test
+    public void test_basicEmptyNoAnchors() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE);
+        segments.append(0, 0);
+        segments.append(sequence.length(), sequence.length());
+
+        assertEquals(0, segments.length());
+        assertEquals("SegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=0 }", segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_basicEmptyAnchors() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        segments.append(0, 0);
+        segments.append(sequence.length(), sequence.length());
+
+        assertEquals(0, segments.length());
+        assertEquals("SegmentBuilder{[0, 10), s=0:0, u=0:0, t=0, l=0, [0), [10) }", segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
 
     @Test
     public void test_basicPrefix() {
@@ -812,7 +839,7 @@ public class SegmentBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound1() {
+    public void test_optimizersCompoundNoAnchors1() {
         String input = "" +
                 "  line 1 \n" +
                 "  line 2 \n" +
@@ -821,7 +848,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -847,7 +874,7 @@ public class SegmentBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound2() {
+    public void test_optimizersCompoundNoAnchors2() {
         String input = "" +
                 "  line 1 \n" +
                 "  line 2 \n" +
@@ -856,7 +883,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -883,7 +910,7 @@ public class SegmentBuilderTest {
     }
 
     @Test
-    public void test_optimizersCompound3() {
+    public void test_optimizersCompoundNoAnchors3() {
         String input = "" +
                 "line 1\n" +
                 "line 2 \n" +
@@ -892,7 +919,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -902,6 +929,111 @@ public class SegmentBuilderTest {
             segments.append("\n");
         }
         assertEquals(escapeJavaString("SegmentBuilder{[0, 22), s=0:0, u=1:4, t=4, l=22, [0, 6), [6, 7, '\n'), [7, 13), [13, 16, '\n\n'), [16, 22), [22, '\n') }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals(escapeJavaString("SegmentBuilder{[0, 23), s=0:0, u=0:0, t=0, l=22, [0, 13), [14, 23) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRanges(input));
+
+        assertEquals("" +
+                "line 1\n" +
+                "line 2\n" +
+                "\n" +
+                "line 3\n" +
+                "", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_optimizersCompoundAnchors1() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) segments.append("    ");
+            segments.append(trim.getSourceRange());
+            segments.append("\n");
+        }
+        assertEquals(escapeJavaString("SegmentBuilder{[2, 29), s=12:12, u=2:16, t=16, l=34, [2, '    '), [2, 8), [8, 12, '\n    '), [12, 18), [18, 20, '\n'), [20), [20, 23, '\n    '), [23, 29), [29, '\n') }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", segments.toStringWithRanges(input));
+
+        assertEquals("" +
+                "    line 1\n" +
+                "    line 2\n" +
+                "\n" +
+                "    line 3\n" +
+                "", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_optimizersCompoundAnchors2() {
+        String input = "" +
+                "  line 1 \n" +
+                "  line 2 \n" +
+                "\n" +
+                "  line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+            if (!trim.isEmpty()) segments.append("  ");
+            segments.append(trim.getSourceRange());
+            segments.append("\n");
+        }
+        assertEquals(escapeJavaString("SegmentBuilder{[2, 29), s=6:6, u=2:10, t=10, l=28, [2, '  '), [2, 8), [8, 12, '\n  '), [12, 18), [18, 20, '\n'), [20), [20, 23, '\n  '), [23, 29), [29, '\n') }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        segments.optimizeFor(sequence, optimizer);
+        assertEquals(escapeJavaString("SegmentBuilder{[0, 30), s=0:0, u=0:0, t=0, l=28, [0, 8), [9, 18), [19, 30) }"), segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRanges(input));
+
+        assertEquals("" +
+                "  line 1\n" +
+                "  line 2\n" +
+                "\n" +
+                "  line 3\n" +
+                "", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_optimizersCompound3Anchors() {
+        String input = "" +
+                "line 1\n" +
+                "line 2 \n" +
+                "\n" +
+                "line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
+//            if (!trim.isEmpty()) segments.append("  ");
+            segments.append(trim.getSourceRange());
+            segments.append("\n");
+        }
+        assertEquals(escapeJavaString("SegmentBuilder{[0, 22), s=0:0, u=1:4, t=4, l=22, [0, 6), [6, 7, '\n'), [7, 13), [13, 15, '\n'), [15), [15, 16, '\n'), [16, 22), [22, '\n') }"), segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
         segments.optimizeFor(sequence, optimizer);
