@@ -10,6 +10,7 @@ flexmark-java
     - [API Changes](#api-changes)
 - [Next](#next)
 - [Next 0.59.52](#next-05952)
+- [0.59.52](#05952)
 - [0.59.50](#05950)
 - [0.59.48](#05948)
 - [0.59.46](#05946)
@@ -228,6 +229,13 @@ Next 0.59.52
         overhead for offset storage. Most of the time non based chars will require little
         storage, since most of the time out of base chars are spaces. Save the type of offset
         used 1, 2, 4 bytes with the segmented data.
+* [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
+      stuff.
+* [ ] Fix: `SegmentBuilder` simplify optimization by passing the full list to optimizer. No position list.
+
+0.59.52
+-------
+
 * [x] Add: `BasedSequence.addSegments(BasedSegmentBuilder)` so each sequence adds its own
       optimized segment list without requiring by character scanning of
       `BasedSequence.getIndexOffset(int)` and building the segments the hard way.
@@ -238,18 +246,17 @@ Next 0.59.52
     * if string is null then it is a range from base
     * range is empty then string is not null and is an insert at position in base
     * range not empty and string not empty then it is a replacement of base segment.
-  * [ ] Add: optimized segment part extraction based on start/end offsets into full list
 * [x] Fix: rename `BasedCharsRecoverySegmentOptimizer` to `CharRecoveryOptimizer`
 * [x] Fix: `SegmentBuilder` change `append...()` to plain `append()`
 * [x] Fix: `SegmentBuilder` to keep track of start and end range in the list based on first/last
       range added.
-  * [ ] Test: need to test this more thoroughly
-  * [ ] Fix: simplify overlap by passing index to last range in list and the range overlapping
+  * [x] Test: need to test this more thoroughly
+  * [x] Fix: simplify overlap by passing index to last range in list and the range overlapping
         it. No position.
-  * [ ] Fix: simplify optimization by passing the full list to optimizer. No position list.
-  * [ ] Fix: eliminate multiple methods for the same functionality, append: `EditOp`, start/end
+  * [x] Fix: simplify optimization by passing the full list to optimizer. No position list.
+  * [x] Fix: eliminate multiple methods for the same functionality, append: `EditOp`, start/end
         offsets or `String`. The rest are history.
-  * [ ] Test: cached start/end/length/last range index.
+  * [x] Test: cached start/end/length/last range index.
 * [x] Add: `BasedSegmentBuilder` to convert overlap in added ranges to out of base text
 * [x] Fix: change `BasedSequenceBuilder` to use `BasedSegmentBuilder` for segment accumulation
       instead of its own implementation.
@@ -257,16 +264,12 @@ Next 0.59.52
         segment list before generating sequence or string.
   * [x] Fix: if there is an overlap in appended sequence with previous segments, add the overlap
         as out of base text instead of throwing an exception.
-  * [ ] Fix: optimize and simplify for speed, too many methods. Keep only add/append of
+  * [x] Fix: optimize and simplify for speed, too many methods. Keep only add/append of
         `CharSequence` and add/append for start/end offsets. The rest are gone.
 * [x] Add: Common char sets:
   * `DECIMAL_DIGITS`
   * `HEXADECIMAL_DIGITS`
   * `OCTAL_DIGITS`
-* [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
-      stuff.
-* [ ] Fix: move EditOp optimization between two consecutive elements into `EditOp` or
-      `BasedUtils` not optimizers. The logic should be reusable.
 * Fix: infinite recursion in deprecated `SubSequence.of`
 * Break: delete  `BasedSequence.getIndexRange(int, int)` does not do the intended job and is
   complicated and useless at the same time for its purpose.
