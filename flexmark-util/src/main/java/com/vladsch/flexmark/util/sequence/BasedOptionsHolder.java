@@ -13,9 +13,11 @@ import org.jetbrains.annotations.Nullable;
  * Only works with SubSequence base not CharArraySequence
  */
 public interface BasedOptionsHolder {
-    int O_COLLECT_SEGMENTED_STATS = 0x0001;
+    int O_COLLECT_SEGMENTED_STATS = 0x0001;     // set if segmented stats collector key is set to non-null value
+    int O_RESERVED = 0x0000ffff;                // reserved for library use, extensions must use data keys since there is no way to manage bit allocations
+    int O_APPLICATION = 0xffff0000;             // open for user application defined use, extensions must use data keys since there is no way to manage bit allocations
 
-    static NullableDataKey<SegmentedSequenceStats> SEGMENTED_STATS = new NullableDataKey<>("SEGMENTED_STATS", (SegmentedSequenceStats) null);
+    NullableDataKey<SegmentedSequenceStats> SEGMENTED_STATS = new NullableDataKey<>("SEGMENTED_STATS", (SegmentedSequenceStats) null);
 
     /**
      * Options test for options for this sequence

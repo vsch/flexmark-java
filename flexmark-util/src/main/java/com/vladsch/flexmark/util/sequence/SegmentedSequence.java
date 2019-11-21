@@ -226,7 +226,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         if (base.isOption(O_COLLECT_SEGMENTED_STATS)) {
             SegmentedSequenceStats stats = base.getOption(SEGMENTED_STATS);
             if (stats != null) {
-                stats.addStats(startOffset, endOffset, length, nonBasedChars, segments.size());
+                stats.addStats(segments.size(), nonBasedChars, length, startOffset, endOffset);
             }
         }
 

@@ -23,7 +23,7 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
 
     public BasedOptionsSequence(@NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
         this.chars = chars;
-        this.optionFlags = optionFlags;
+        this.optionFlags = optionFlags & ~(options == null || SEGMENTED_STATS.get(options) == null ? O_COLLECT_SEGMENTED_STATS : 0);
         this.options = options;
     }
 
