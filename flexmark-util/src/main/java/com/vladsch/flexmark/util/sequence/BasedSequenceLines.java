@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -19,21 +18,18 @@ import java.util.*;
  * This is a list of based sequences but to allow plain {@link CharSequence} to be added as elements it is
  * a List&lt;CharSequence&gt;. To get contained based sequence of lines use getLines()
  */
+// FIX: this to use for implementation LineFormattingAppendable
+// FIX: update for latest segment and sequence builders
 public class BasedSequenceLines implements List<CharSequence> {
     private final @NotNull BasedSequence base;
-    private @Nullable ArrayList<OffsetTracker> offsetTrackers;
     private final ArrayList<CharSequence> lines = new ArrayList<>();
 
     private final ArrayList<CharSequence> updateLines = new ArrayList<>();  // used to take a snapshot of lines at time of segments update so no mod tracking during updates is needed
+    // FIX: use BasedSegmentBuilder or BasedSequenceBuilder for segments
     private final ArrayList<BasedSequence> segments = new ArrayList<>();
 
     private BasedSequenceLines(@NotNull BasedSequence base) {
         this.base = base.getBaseSequence();
-    }
-
-    private void addOffsetTracker(@Nullable OffsetTracker tracker) {
-        if (offsetTrackers == null) offsetTrackers = new ArrayList<>();
-        offsetTrackers.add(tracker);
     }
 
     @NotNull
@@ -60,8 +56,7 @@ public class BasedSequenceLines implements List<CharSequence> {
             // convert non-based and out of sequence based to string suffix to previous based or prefix to next based
             sequences.clear();
 
-            if (forSequence) offsetTrackers = null;
-            else updateLines.clear();
+            if (!forSequence) updateLines.clear();
 
             if (!lines.isEmpty()) {
                 int[] basedIndices = new int[lines.size()];
@@ -85,11 +80,6 @@ public class BasedSequenceLines implements List<CharSequence> {
                                     Arrays.fill(basedIndices, lastBasedIndex + 1, i, i);
                                     lastBasedIndex = i;
                                 }
-                            }
-
-                            if (forSequence && sequence instanceof BasedTrackedSequence) {
-                                // FIX: for editing
-//                                addOffsetTracker(((BasedTrackedSequence) sequence).getOffsetTrackers());
                             }
                         }
                     }
@@ -219,20 +209,7 @@ public class BasedSequenceLines implements List<CharSequence> {
         ArrayList<BasedSequence> sequences = new ArrayList<>(lines.size());
         updateSegments(sequences);
         adjustLastLineEOL(sequences, lastLineEOL);
-
-        BasedSequence modifiedSeq = SegmentedSequence.of(segments);
-        // FIX: for editing
-//        if (offsetTrackers != null) {
-//            OffsetTracker modifiedTracker = null;
-//            for (OffsetTracker offsetTracker : offsetTrackers) {
-//                modifiedTracker = offsetTracker.modifiedTracker(modifiedSeq, modifiedTracker);
-//            }
-//
-//            if (modifiedTracker != null) {
-//                return BasedTrackedSequence.create(modifiedSeq, modifiedTracker);
-//            }
-//        }
-        return modifiedSeq;
+        return SegmentedSequence.of(segments);
     }
 
     @Override
@@ -283,7 +260,7 @@ public class BasedSequenceLines implements List<CharSequence> {
 
     @NotNull
     @Override
-    public <T> T[] toArray(T[] a) {return lines.toArray(a);}
+    public <T> T[] toArray(@NotNull T[] a) {return lines.toArray(a);}
 
     @Override
     public CharSequence get(int index) {return lines.get(index);}
@@ -307,16 +284,16 @@ public class BasedSequenceLines implements List<CharSequence> {
     public void clear() {lines.clear();}
 
     @Override
-    public boolean addAll(Collection<? extends CharSequence> c) {return lines.addAll(c);}
+    public boolean addAll(@NotNull Collection<? extends CharSequence> c) {return lines.addAll(c);}
 
     @Override
-    public boolean addAll(int index, Collection<? extends CharSequence> c) {return lines.addAll(index, c);}
+    public boolean addAll(int index, @NotNull Collection<? extends CharSequence> c) {return lines.addAll(index, c);}
 
     @Override
-    public boolean removeAll(Collection<?> c) {return lines.removeAll(c);}
+    public boolean removeAll(@NotNull Collection<?> c) {return lines.removeAll(c);}
 
     @Override
-    public boolean retainAll(Collection<?> c) {return lines.retainAll(c);}
+    public boolean retainAll(@NotNull Collection<?> c) {return lines.retainAll(c);}
 
     @NotNull
     @Override
@@ -335,5 +312,5 @@ public class BasedSequenceLines implements List<CharSequence> {
     public List<CharSequence> subList(int fromIndex, int toIndex) {return lines.subList(fromIndex, toIndex);}
 
     @Override
-    public boolean containsAll(Collection<?> c) {return lines.containsAll(c);}
+    public boolean containsAll(@NotNull Collection<?> c) {return lines.containsAll(c);}
 }

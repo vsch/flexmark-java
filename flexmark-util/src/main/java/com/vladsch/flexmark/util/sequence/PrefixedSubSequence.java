@@ -1,7 +1,10 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A BasedSequence with an out of scope of original char sequence prefix
@@ -11,6 +14,13 @@ import org.jetbrains.annotations.NotNull;
 public final class PrefixedSubSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
     private final CharSequence prefix;
     private final BasedSequence base;
+
+    private PrefixedSubSequence(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
+        super(0);
+
+        this.prefix = prefix;
+        this.base = baseSeq.subSequence(startIndex, endIndex);
+    }
 
     @NotNull
     @Override
@@ -46,11 +56,19 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
         return base.baseSubSequence(startIndex, endIndex);
     }
 
-    private PrefixedSubSequence(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
-        super(0);
+    @Override
+    public boolean isOption(int option) {
+        return getBaseSequence().isOption(option);
+    }
 
-        this.prefix = prefix;
-        this.base = baseSeq.subSequence(startIndex, endIndex);
+    @Override
+    public <T> T getOption(DataKeyBase<T> dataKey) {
+        return getBaseSequence().getOption(dataKey);
+    }
+
+    @Override
+    public @Nullable DataHolder getOptions() {
+        return getBaseSequence().getOptions();
     }
 
     @Override

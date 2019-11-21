@@ -215,13 +215,22 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   `BasedSequence.of` is first wrapped in `BasedOptionsSequence`. Then all sequences created from
   this base will have int bit options testable with `BasedSequence.isOption(int)` and get
   arbitrary options with `BasedSequence.getOption(DataKeyBase<T>)` or just get the whole
-  `DataHolder` options via `BasedSequence.getOptions()` for more sophisticated needs. If the `DataHolder` passed to `BasedOptionsSequence` is mutable then
+  `DataHolder` options via `BasedSequence.getOptions()` for more sophisticated needs. If the
+  `DataHolder` passed to `BasedOptionsSequence` is mutable then
 
   Makes adding customized behavior and features easy and transparent to implementation with no
   overhead since `SubSequence` delegates to its `baseSeq` if it is a `BasedOptionsHolder` for
   these methods but otherwise does no checking. The overhead is one level of delegation of
   `CharSequence` methods for sequences with options with no impact on the rest.
-
+* [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
+  * [ ] optimize by not processing one char at a time. Split the sequence into regions of
+        interest and process the regions as one piece which the `BasedSequenceBuilder` can
+        optimize to base sequence.
+  * [ ] do not construct temporary `StringBuilder` but only keep the last line under
+        construction temporary, with all previously constructed lines used for prior content.
+  * [ ] use an instance of sequence builder for the line under construction, and keep parallel
+        string builder for the content tests, but only if needed to avoid construction of
+        segmented sequence.
 * [ ] Fix: `MarkdownParagraph`
   * [ ] Add: `LS` awareness to segment optimization
   * [ ] use `SegmentBuilder` for accumulating wrapped text.

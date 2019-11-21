@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -439,6 +440,21 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     class EmptyBasedSequence extends BasedSequenceImpl {
         public EmptyBasedSequence() {
             super(0);
+        }
+
+        @Override
+        public boolean isOption(int option) {
+            return false;
+        }
+
+        @Override
+        public <T> T getOption(DataKeyBase<T> dataKey) {
+            return dataKey.get(null);
+        }
+
+        @Override
+        public @Nullable DataHolder getOptions() {
+            return null;
         }
 
         @Override

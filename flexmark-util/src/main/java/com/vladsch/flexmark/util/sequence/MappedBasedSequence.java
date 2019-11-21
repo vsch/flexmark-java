@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +46,21 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
     @Override
     public @NotNull BasedSequence toMapped(CharMapper mapper) {
         return mapper == CharMapper.IDENTITY ? this : new MappedBasedSequence(baseSeq, this.mapper.andThen(mapper));
+    }
+
+    @Override
+    public boolean isOption(int option) {
+        return getBaseSequence().isOption(option);
+    }
+
+    @Override
+    public <T> T getOption(DataKeyBase<T> dataKey) {
+        return getBaseSequence().getOption(dataKey);
+    }
+
+    @Override
+    public @Nullable DataHolder getOptions() {
+        return getBaseSequence().getOptions();
     }
 
     @NotNull
@@ -92,14 +109,7 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
 
     @Override
     public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
-        return BasedUtils.generateSegments(builder, baseSeq.getBaseSequence(), getStartOffset(), getEndOffset(), length(), this::getIndexOffset, (startIndex, endIndex) -> {
-            int iMax = endIndex - startIndex;
-            char[] chars = new char[iMax];
-            for (int i = 0; i < iMax; i++) {
-                chars[i] = mapper.map(baseSeq.charAt(i + startIndex));
-            }
-            return String.valueOf(chars);
-        });
+        return BasedUtils.generateSegments(builder, this);
     }
 
     @NotNull

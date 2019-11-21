@@ -31,7 +31,7 @@ public final class SubSequence extends BasedSequenceImpl {
 
     @Override
     public <T> T getOption(DataKeyBase<T> dataKey) {
-        return baseSeq instanceof BasedOptionsHolder ? ((BasedOptionsHolder) baseSeq).getOption(dataKey) : null;
+        return baseSeq instanceof BasedOptionsHolder ? ((BasedOptionsHolder) baseSeq).getOption(dataKey) : dataKey.get(null);
     }
 
     @Override

@@ -22,6 +22,10 @@ public class BasedSegmentBuilder extends SegmentBuilder {
         myBase = other.myBase;
     }
 
+    public String toStringWithRanges() {
+        return super.toStringWithRanges(myBase);
+    }
+
     @Override
     public void handleOverlap(@NotNull Range range) {
         // convert overlap to text from our base

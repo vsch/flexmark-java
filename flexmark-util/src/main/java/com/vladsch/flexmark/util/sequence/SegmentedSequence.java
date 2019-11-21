@@ -2,8 +2,11 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.SegmentedSequenceStats;
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +65,21 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
     }
 
     @Override
+    public boolean isOption(int option) {
+        return getBaseSequence().isOption(option);
+    }
+
+    @Override
+    public <T> T getOption(DataKeyBase<T> dataKey) {
+        return getBaseSequence().getOption(dataKey);
+    }
+
+    @Override
+    public @Nullable DataHolder getOptions() {
+        return getBaseSequence().getOptions();
+    }
+
+    @Override
     public int getIndexOffset(int index) {
         if (index < 0 || index > length) {
             throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
@@ -78,7 +96,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
     public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
         if (length > 0) {
             // FIX: clean up and optimize the structure. it is error prone and inefficient
-            return BasedUtils.generateSegments(builder, baseSeq, getStartOffset(), getEndOffset(), length, this::getIndexOffset, (startIndex, endIndex) -> subSequence(startIndex, endIndex).toString());
+            return BasedUtils.generateSegments(builder, this);
         }
         return false;
     }

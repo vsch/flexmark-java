@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,9 +95,7 @@ public class SegmentedSequenceStats {
     }
 
     @NotNull
-    public String getStatsText() {
-        List<StatsEntry> entries = getStats();
-
+    public String getStatsText(List<StatsEntry> entries) {
         StringBuilder out = new StringBuilder();
         int iMax = entries.size();
 
@@ -135,6 +134,58 @@ public class SegmentedSequenceStats {
             ).append("\n");
         }
         return out.toString();
+    }
+
+    private int findLastLess(int[] multiples, int value) {
+        int lastMultiple = 1;
+        for (int m : multiples) {
+            if (m > value) return lastMultiple;
+        }
+        return multiples[multiples.length - 1];
+    }
+
+    public List<StatsEntry> getAggregatedStats() {
+        List<StatsEntry> entries = getStats();
+        ArrayList<StatsEntry> aggr = new ArrayList<>();
+        int[] multiples = {
+                1,
+                16,
+                256,
+                1024,
+                4096,
+        };
+
+        ArrayList<Range> ranges = new ArrayList<>();
+
+        int iMax = entries.get(entries.size() - 1).segments;
+
+        ArrayList<Integer> steps = new ArrayList<>();
+
+        int step = 1;
+        int start = 1;
+        int nextStep = 16;
+
+        // @formatter:off
+        for (int i = start; i < nextStep; i += step) steps.add(i);
+        start = 16; step = 16; nextStep = 256;
+        for (int i = start; i < nextStep; i += step) steps.add(i);
+        start = 256; step = 256; nextStep = 1024;
+        for (int i = start; i < nextStep; i += step) steps.add(i);
+        start = 1024; step = 1024; nextStep = 4096;
+        for (int i = start; i < nextStep; i += step) steps.add(i);
+        start = 4096; step = 4096; nextStep = 65536;
+        for (int i = start; i < nextStep; i += step) steps.add(i);
+        start = 65536; step = 65536; nextStep = 65536*4;
+        for (int i = start; i < nextStep; i += step) steps.add(i);
+        // @formatter:on
+
+        return entries;
+    }
+
+    @NotNull
+    public String getStatsText() {
+        List<StatsEntry> entries = getStats();
+        return getStatsText(entries);
     }
 
     public void clear() {

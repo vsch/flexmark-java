@@ -25,21 +25,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return NULL;
     }
 
-    @Override
-    public boolean isOption(int option) {
-        return getBaseSequence().isOption(option);
-    }
-
-    @Override
-    public <T> T getOption(DataKeyBase<T> dataKey) {
-        return getBaseSequence().getOption(dataKey);
-    }
-
-    @Override
-    public @Nullable DataHolder getOptions() {
-        return getBaseSequence().getOptions();
-    }
-
     public BasedSequenceImpl(int hash) {
         super(hash);
     }
@@ -377,7 +362,8 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
     @Override
     public @NotNull BasedSequence trackIndex(int index, @NotNull PositionAnchor positionAnchor) {
-        return BasedTrackedSequence.trackOffset(this, index, positionAnchor);
+        throw new IllegalStateException("Not implemented");
+//        return BasedTrackedSequence.trackOffset(this, index, positionAnchor);
     }
 
     @Override

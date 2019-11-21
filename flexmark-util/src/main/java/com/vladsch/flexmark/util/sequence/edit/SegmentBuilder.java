@@ -336,6 +336,19 @@ public class SegmentBuilder {
     }
 
     /**
+     * append anchor in original sequence coordinates, no checking is done other than overlap with tail range
+     * fast
+     *
+     * @param offset offset in original sequence
+     * @return this
+     */
+    @NotNull
+    public SegmentBuilder appendAnchor(int offset) {
+        @NotNull Range range = Range.of(offset, offset);
+        return append(range);
+    }
+
+    /**
      * append range in original sequence coordinates, no checking is done other than overlap with tail range
      * fast
      *

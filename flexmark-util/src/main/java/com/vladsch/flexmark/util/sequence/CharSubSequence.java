@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A CharSequence that references original char[]
@@ -13,26 +16,6 @@ public final class CharSubSequence extends BasedSequenceImpl {
     private final CharSubSequence base;
     private final int startOffset;
     private final int endOffset;
-
-    @NotNull
-    @Override
-    public CharSubSequence getBaseSequence() {
-        return base;
-    }
-
-    @NotNull
-    @Override
-    public char[] getBase() {
-        return baseChars;
-    }
-
-    public int getStartOffset() {
-        return startOffset;
-    }
-
-    public int getEndOffset() {
-        return endOffset;
-    }
 
     private CharSubSequence(char[] chars, int hash) {
         super(hash);
@@ -54,6 +37,41 @@ public final class CharSubSequence extends BasedSequenceImpl {
         baseChars = baseSeq.baseChars;
         startOffset = base.startOffset + startIndex;
         endOffset = base.startOffset + endIndex;
+    }
+
+    @Override
+    public boolean isOption(int option) {
+        return false;
+    }
+
+    @Override
+    public <T> T getOption(DataKeyBase<T> dataKey) {
+        return dataKey.get(null);
+    }
+
+    @Override
+    public @Nullable DataHolder getOptions() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public CharSubSequence getBaseSequence() {
+        return base;
+    }
+
+    @NotNull
+    @Override
+    public char[] getBase() {
+        return baseChars;
+    }
+
+    public int getStartOffset() {
+        return startOffset;
+    }
+
+    public int getEndOffset() {
+        return endOffset;
     }
 
     @Override

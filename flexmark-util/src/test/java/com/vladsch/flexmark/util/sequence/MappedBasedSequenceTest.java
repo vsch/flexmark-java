@@ -1,8 +1,12 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.format.CharWidthProvider;
+import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.NullEncoder;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
+import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -128,5 +132,52 @@ public class MappedBasedSequenceTest {
 
         assertEquals(input, sequence.toString());
         assertEquals(encodedInput, mapEncoded.toString());
+    }
+
+    // preserve segmented sequence segments
+    @Test
+    public void test_segmented3() {
+        String input = "Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only task\n    item prefix or adding to only list items. Test is done.";
+        String expected = "Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only\n" +
+                "task item prefix or adding to only list items. Test is done.";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence wrapped = sequence.subSequence(0, 89).append(SequenceUtils.EOL).append(sequence.subSequence(90, 94)).append(SequenceUtils.SPACE).append(sequence.subSequence(99, 154));
+        BasedSequence mapEncoded = wrapped.toMapped(SpaceMapper.fromNonBreakSpace);
+        BasedSequence eolAdded = mapEncoded.appendEOL();
+
+        assertEquals(expected, mapEncoded.toString());
+        assertEquals(expected+"\n", eolAdded.toString());
+    }
+
+    // preserve segmented sequence segments
+    @Test
+    public void test_segmented4() {
+        String input = "Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only task\n    item prefix or adding to only list items. Test is done.";
+        String expected = "Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only\n" +
+                "task item prefix or adding to only list items. Test is done.";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
+        formatter.setFirstIndent(0);
+        formatter.setWidth(90);
+        formatter.setFirstWidthOffset(0);
+        formatter.setKeepLineBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepHardBreaks(true);
+        BasedSequence wrapped = formatter.computeResultSequence();
+        assertEquals(expected, wrapped.toString());
+
+        BasedSegmentBuilder builder = BasedSegmentBuilder.emptyBuilder(sequence);
+        wrapped.addSegments(builder);
+        assertEquals("⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\\n⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧", builder.toStringWithRanges());
+
+        BasedSequence mapEncoded = wrapped.toMapped(SpaceMapper.fromNonBreakSpace);
+        BasedSequence eolAdded = mapEncoded.appendEOL();
+        BasedSegmentBuilder builder2 = BasedSegmentBuilder.emptyBuilder(sequence);
+        mapEncoded.addSegments(builder2);
+        assertEquals("⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\\n⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧", builder2.toStringWithRanges());
+
+        assertEquals(expected, mapEncoded.toString());
+        assertEquals(expected+"\n", eolAdded.toString());
     }
 }
