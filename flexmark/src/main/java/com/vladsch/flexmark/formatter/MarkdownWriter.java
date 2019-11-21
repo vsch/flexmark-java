@@ -3,6 +3,7 @@ package com.vladsch.flexmark.formatter;
 import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +17,10 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
 
     public MarkdownWriter(int formatOptions) {
         super(formatOptions);
+    }
+
+    public MarkdownWriter(int formatOptions, @Nullable BasedSequenceBuilder builder) {
+        super(formatOptions, builder);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.html;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,6 +28,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     public HtmlFormattingAppendableBase(LineFormattingAppendable other, boolean inheritIndent) {
         this.out = new LineFormattingAppendableImpl(other.getOptions());
         this.out.setIndentPrefix(other.getIndentPrefix());
+    }
+
+    @Override
+    public void toBuilder(@NotNull BasedSequenceBuilder builder, int maxBlankLines) {
+        throw new IllegalStateException("Not Implemented");
     }
 
     public HtmlFormattingAppendableBase(int indentSize, int formatOptions) {
@@ -463,4 +469,6 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override public T unIndent()                                                                                                       { out.unIndent(); return (T)this; }
     @Override public T unIndentNoEol()                                                                                                  { out.unIndentNoEol();  return (T)this; }
     // @formatter:on
+
+
 }

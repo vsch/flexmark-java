@@ -3,6 +3,8 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
@@ -21,6 +23,21 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         }
 
         return NULL;
+    }
+
+    @Override
+    public boolean isOption(int option) {
+        return getBaseSequence().isOption(option);
+    }
+
+    @Override
+    public <T> T getOption(DataKeyBase<T> dataKey) {
+        return getBaseSequence().getOption(dataKey);
+    }
+
+    @Override
+    public @Nullable DataHolder getOptions() {
+        return getBaseSequence().getOptions();
     }
 
     public BasedSequenceImpl(int hash) {
@@ -381,14 +398,14 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         else if (charSequence instanceof BasedSequence) {
             return (BasedSequence) charSequence;
         } else {
-            if (charSequence instanceof String) {
-                return SubSequence.create(charSequence);
-            } else if (charSequence instanceof Appendable) {
-                return SubSequence.create(charSequence.toString());
-            } else {
-                // this one should not be mutable
-                return SubSequence.create(charSequence);
-            }
+//            if (charSequence instanceof String) {
+//                return SubSequence.create(charSequence);
+//            } else if (charSequence instanceof Appendable) {
+//                return SubSequence.create(charSequence.toString());
+//            } else {
+//            }
+            // this one should not be mutable
+            return SubSequence.create(charSequence);
         }
     }
 

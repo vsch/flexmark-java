@@ -4,6 +4,11 @@ import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +31,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private int myPreFormattedLastLineOffset;   // first line end of preformatted offset
 
     // accumulated text and line information
-    private StringBuilder myAppendable;
+    final private StringBuilder myAppendable;
     final private ArrayList<BasedSequence> myLines;     // line contents
     final private ArrayList<BasedSequence> myPrefixes;  // line prefixes
     private int myTextLength;                           // accumulated length of all offsets
@@ -38,6 +43,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private BasedSequence myIndentPrefix;
     final private Stack<BasedSequence> myPrefixStack;
     final private Stack<Boolean> myIndentPrefixStack;
+    final private BasedSequenceBuilder myBuilder;
 
     // current line being accumulated
     private int myLineStart;            // start of line
@@ -47,6 +53,11 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private ArrayList<Runnable> myIndentsOnFirstEol;    // issue indents on first eol
 
     public LineFormattingAppendableImpl(int formatOptions) {
+        this(formatOptions, null);
+    }
+
+    public LineFormattingAppendableImpl(int formatOptions, @Nullable BasedSequenceBuilder builder) {
+        myBuilder = builder;
         myOptions = formatOptions;
         myPassThrough = haveOptions(PASS_THROUGH);
         myPreFormattedNesting = 0;
@@ -247,7 +258,12 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         //}
         assert range.getStart() <= range.getEnd();
 
-        myLines.add(range.isNull() ? BasedSequence.NULL : range.basedSubSequence(myAppendable));
+        if (myBuilder != null) {
+            myLines.add(range.isNull() ? BasedSequence.NULL : myBuilder.toSequence().subSequence(range.getStart(), range.getEnd()));
+        } else {
+            myLines.add(range.isNull() ? BasedSequence.NULL : range.basedSubSequence(myAppendable));
+        }
+
         if (range.isEmpty() && !prefix.isEmpty()) {
             prefix = prefix.trimEnd();
             myPrefixes.add(prefix);
@@ -261,6 +277,8 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     private void appendEol() {
         myAppendable.append(EOL);
+        appendBuilder(SequenceUtils.EOL);
+
         int startOffset = myLineStart;
         myLineStart = myAppendable.length();
         int endOffset = myLineStart;
@@ -370,7 +388,38 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         }
     }
 
-    private void appendImpl(char c) {
+    private void appendBuilder(CharSequence s) {
+        appendBuilder(s, 0, s.length());
+    }
+
+    private void appendBuilder(CharSequence s, int start, int end) {
+        if (myBuilder != null) {
+            if (s.equals("_.template")) {
+                int tmp=0;
+            }
+            if (myBuilder.length() + end - start != myAppendable.length()) {
+                int tmp = 0;
+            }
+
+            if (start == 0 && end == s.length()) {
+                myBuilder.append(s);
+            } else {
+                myBuilder.append(s.subSequence(start, end));
+            }
+
+            if (myBuilder.length() != myAppendable.length()) {
+                int tmp = 0;
+            }
+
+            if (myBuilder.length() > 2 * myAppendable.length()) {
+                throw new RuntimeException("Builder length() > 2* appendable.length() ");
+            }
+        }
+    }
+
+    private void appendImpl(CharSequence s, int index) {
+        char c = s.charAt(index);
+
         if (myPassThrough) {
             if (c == EOL) {
                 appendEol();
@@ -382,6 +431,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
                 if (c != '\t' && c != ' ') myAllWhitespace = false;
                 myAppendable.append(c);
+                appendBuilder(s, index, index + 1);
             }
         } else {
             if (c == EOL) {
@@ -390,6 +440,8 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                     // nothing, add EOL and don't add line
                     // add the EOL so as not to mess up the text but do not add the line
                     myAppendable.append(c);
+                    appendBuilder(s, index, index + 1);
+
                     myLineStart = myAppendable.length();
                     myAllWhitespace = true;
                     myWasWhitespace = false;
@@ -397,6 +449,8 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                 } else {
                     // add EOL and line
                     myAppendable.append(c);
+                    appendBuilder(s, index, index + 1);
+
                     myLineStart = myAppendable.length();
                     addLineRange(rangePrefixAfterEol.getFirst(), rangePrefixAfterEol.getSecond());
                     myAllWhitespace = true;
@@ -413,6 +467,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                     if (myPreFormattedNesting == 0 && haveOptions(COLLAPSE_WHITESPACE)) {
                         if (!myWasWhitespace) {
                             myAppendable.append(' ');
+                            appendBuilder(SequenceUtils.SPACE);
                             myWasWhitespace = true;
                         }
                     } else {
@@ -420,8 +475,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                             int column = myAppendable.length() - myLineStart;
                             int spaces = 4 - (column % 4);
                             myAppendable.append("    ", 0, spaces);
+                            appendBuilder("    ", 0, spaces);
                         } else {
                             myAppendable.append(c);
+                            appendBuilder(s, index, index + 1);
                         }
                     }
                 } else {
@@ -429,15 +486,18 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                         if (myPreFormattedNesting == 0 && haveOptions(COLLAPSE_WHITESPACE)) {
                             if (!myWasWhitespace) {
                                 myAppendable.append(' ');
+                                appendBuilder(SequenceUtils.SPACE);
                             }
                         } else {
                             myAppendable.append(' ');
+                            appendBuilder(SequenceUtils.SPACE);
                         }
                         myWasWhitespace = true;
                     } else {
                         myAllWhitespace = false;
                         myWasWhitespace = false;
                         myAppendable.append(c);
+                        appendBuilder(s, index, index + 1);
                     }
                 }
             }
@@ -447,7 +507,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private void appendImpl(CharSequence csq, int start, int end) {
         int i = start;
         while (i < end) {
-            appendImpl(csq.charAt(i++));
+            appendImpl(csq, i++);
         }
     }
 
@@ -465,25 +525,29 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public LineFormattingAppendable append(char c) {
-        appendImpl(c);
+        appendImpl(Character.toString(c), 0);
         return this;
     }
 
     public LineFormattingAppendable repeat(char c, int count) {
-        int i = count;
-        while (i-- > 0) append(c);
+        append(RepeatedSequence.repeatOf(c, count));
+//        int i = count;
+//        String s = Character.toString(c);
+//        while (i-- > 0) appendImpl(s, 0);
         return this;
     }
 
     public LineFormattingAppendable repeat(CharSequence csq, int count) {
-        int i = count;
-        while (i-- > 0) append(csq);
+        append(RepeatedSequence.repeatOf(csq, count));
+//        int i = count;
+//        while (i-- > 0) append(csq);
         return this;
     }
 
     public LineFormattingAppendable repeat(CharSequence csq, int start, int end, int count) {
-        int i = count;
-        while (i-- > 0) append(csq, start, end);
+        append(RepeatedSequence.repeatOf(csq.subSequence(start, end), count));
+//        int i = count;
+//        while (i-- > 0) append(csq, start, end);
         return this;
     }
 
@@ -520,7 +584,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             int startOffset = myAppendable.length();
 
             myAppendable.append(line);
+            appendBuilder(line);
+
             myAppendable.append(EOL);
+            appendBuilder(SequenceUtils.EOL);
 
             int endOffset = myAppendable.length();
 
@@ -619,22 +686,36 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @Override
     public List<CharSequence> getLines(int startOffset, int endOffset) {
         line();
-        StringBuilder sb = new StringBuilder();
 
         ArrayList<CharSequence> result = new ArrayList<>();
-
         int iMax = Utils.maxLimit(endOffset, myLines.size());
 
-        for (int i = startOffset; i < iMax; i++) {
-            BasedSequence line = myLines.get(i);
-            BasedSequence linePrefix = myPrefixes.get(i);
+        if (myBuilder != null) {
+            for (int i = startOffset; i < iMax; i++) {
+                BasedSequence line = myLines.get(i);
+                BasedSequence linePrefix = myPrefixes.get(i);
 
-            int lineStart = sb.length();
-            if (!linePrefix.isEmpty()) sb.append(linePrefix);
-            sb.append(line);
+                if (!linePrefix.isEmpty()) {
+                    BasedSequence basedSequence = myBuilder.subContext().append(linePrefix).append(line).toSequence();
+                    result.add(basedSequence);
+                } else {
+                    result.add(line);
+                }
+            }
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (int i = startOffset; i < iMax; i++) {
+                BasedSequence line = myLines.get(i);
+                BasedSequence linePrefix = myPrefixes.get(i);
 
-            result.add(sb.subSequence(lineStart, sb.length()));
+                int lineStart = sb.length();
+                if (!linePrefix.isEmpty()) sb.append(linePrefix);
+                sb.append(line);
+
+                result.add(sb.subSequence(lineStart, sb.length()));
+            }
         }
+
         return result;
     }
 
@@ -676,7 +757,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             //if (!pendingText.isEmpty()) {
             //    appendImpl(EOL);
             //}
-            appendImpl(EOL);
+            appendImpl(SequenceUtils.EOL, 0);
         } else {
             rawIndentsOnFirstEol();
         }
@@ -689,7 +770,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             int options = myOptions;
             myOptions &= ~(SUPPRESS_TRAILING_WHITESPACE | COLLAPSE_WHITESPACE);
             if (count > 0) repeat(' ', count);
-            appendImpl(EOL);
+            appendImpl(SequenceUtils.EOL, 0);
             myOptions = options;
         }
         return this;
@@ -697,7 +778,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public LineFormattingAppendable addLine() {
-        appendImpl(EOL);
+        appendImpl(SequenceUtils.EOL, 0);
         return this;
     }
 
@@ -820,6 +901,26 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @Override
     public String toString() {
         return myAppendable.toString();
+    }
+
+    @Override
+    public void toBuilder(@NotNull BasedSequenceBuilder builder, int maxBlankLines) {
+        if (myBuilder == null) return;
+
+        line();
+        int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
+
+        int iMax = myLines.size() - removeBlankLines;
+        for (int i = 0; i < iMax; i++) {
+            BasedSequence prefix = myPrefixes.get(i);
+            BasedSequence line = myLines.get(i);
+            builder.append(prefix);
+            builder.append(line);
+
+            if (maxBlankLines != -1 || i + 1 != iMax) {
+                builder.append(SequenceUtils.EOL);
+            }
+        }
     }
 
     @Override

@@ -3,6 +3,9 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +24,11 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     }
 
     public MarkdownWriterBase(int formatOptions) {
-        myAppendable = new LineFormattingAppendableImpl(formatOptions);
+        this(formatOptions,null);
+    }
+
+    public MarkdownWriterBase(int formatOptions, @Nullable BasedSequenceBuilder builder) {
+        myAppendable = new LineFormattingAppendableImpl(formatOptions, builder);
         myAppendable.setOptions(myAppendable.getOptions() | LineFormattingAppendable.PREFIX_PRE_FORMATTED);
     }
 
@@ -92,7 +99,8 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @Override public M setPrefix(CharSequence prefix, boolean afterEol)                                                                { myAppendable.setPrefix(prefix, afterEol); return (M)this; }
     @Override public M unIndent()                                                                                                      { myAppendable.unIndent(); return (M)this; }
     @Override public M unIndentNoEol()                                                                                                 { myAppendable.unIndentNoEol(); return (M)this; }
-    @Override public String toString(int maxBlankLines)                                                                                             { return myAppendable.toString(maxBlankLines); }
+    @Override public String toString(int maxBlankLines)                                                                                { return myAppendable.toString(maxBlankLines); }
+    @Override public void toBuilder(@NotNull BasedSequenceBuilder builder, int maxBlankLines)                                          { myAppendable.toBuilder(builder,maxBlankLines);}
     // @formatter:on
 }
 

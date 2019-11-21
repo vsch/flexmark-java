@@ -77,7 +77,7 @@ public class Range {
 
     // TEST:
     // @formatter:off
-    public int getSpan() { return myEnd - myStart; }
+    public int getSpan() { return isNull() ? 0 : myEnd - myStart; }
 
     // NOTE: change to equal NULL instead of instance otherwise inheriting makes null equality impossible
     public boolean isNull() { return this.myStart == NULL.myStart && this.myEnd == NULL.myEnd;}

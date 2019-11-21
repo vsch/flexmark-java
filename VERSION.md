@@ -211,6 +211,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.56
 
+* Add: options to based sequences which are not used unless a sequence passed to
+  `BasedSequence.of` is first wrapped in `BasedOptionsSequence`. Then all sequences created from
+  this base will have int bit options testable with `BasedSequence.isOption(int)` and get
+  arbitrary options with `BasedSequence.getOption(DataKeyBase<T>)` or just get the whole
+  `DataHolder` options via `BasedSequence.getOptions()` for more sophisticated needs. If the `DataHolder` passed to `BasedOptionsSequence` is mutable then
+
+  Makes adding customized behavior and features easy and transparent to implementation with no
+  overhead since `SubSequence` delegates to its `baseSeq` if it is a `BasedOptionsHolder` for
+  these methods but otherwise does no checking. The overhead is one level of delegation of
+  `CharSequence` methods for sequences with options with no impact on the rest.
+
 * [ ] Fix: `MarkdownParagraph`
   * [ ] Add: `LS` awareness to segment optimization
   * [ ] use `SegmentBuilder` for accumulating wrapped text.
@@ -221,17 +232,19 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
-  * [ ] Fix: optimize non base characters to only store 1 of each char in the out of char
-        sequence. Especially for the first 256 chars which will take care of ASCII and latin
-        chars and can be computed with a 256 byte array, keeping count of how many are actually
-        present. The rest can be in a hash with index. Final index for hashed chars is offset by
-        number of chars in first 256 are allocated.
-  * [ ] Fix: optimize offset type size by storing `delta` = `realOffset` - `startOffset` +
-        `nonBaseChars.length` where `startOffset` is the start offset of the segmented
-        sub-sequence. As the parent segmented sub-sequence gets shorter, it will have less
-        overhead for offset storage. Most of the time non based chars will require little
-        storage, since most of the time out of base chars are spaces. Save the type of offset
-        used 1, 2, 4 bytes with the segmented data. 0.59.52
+  * [x] Fix: optimize non base characters when `baseOffsets` are `int` by storing -ve char value
+        -1, this eliminates `nonBasedChars` completely.
+  * [ ] Fix: optimize change storage of segments by storing segment number in  `baseOffsets`,
+        which defines the segment `startOffset`, `endOffset` and `startIndex` in the original
+        sequence. All chars from the same sequence have the same value in `segmentOffsets[]`.
+        The final offset is `index` - `segment.startIndex` + `segment.startOffset`. The total
+        number of segments determines if need to use `byte`, `short`, 3x`byte` or `int` for
+        `segmentOffsets[]` type. NonBased chars will always be stored in segment 0 and this will
+        have different computation because there is no start/end offsets only char value that
+        needs to be accessed. Can create a segmented sequence for only non-based chars which
+        stores their segments. Then it can optimize its content the same way. This will slightly
+        increase `charAt` computation but greatly reduce the memory usage for segmented
+        sequences.
 
 ## 0.59.54
 

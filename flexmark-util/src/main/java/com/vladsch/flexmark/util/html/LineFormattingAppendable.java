@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.List;
@@ -621,6 +623,7 @@ public interface LineFormattingAppendable extends Appendable {
         return lineOnFirstText(false);
     }
 
+    void toBuilder(@NotNull BasedSequenceBuilder builder, int maxBlankLines);
     LineFormattingAppendable lineOnFirstText(boolean value);
 
     LineFormattingAppendable addIndentOnFirstEOL(Runnable runnable);

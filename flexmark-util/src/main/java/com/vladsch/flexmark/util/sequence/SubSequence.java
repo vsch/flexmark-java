@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKeyBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
  * <p>
  */
 public final class SubSequence extends BasedSequenceImpl {
-    private final CharSequence baseSeq;
+    private final @NotNull CharSequence baseSeq;
     private final SubSequence base;
     private final int startOffset;
     private final int endOffset;
@@ -20,6 +22,21 @@ public final class SubSequence extends BasedSequenceImpl {
     @Override
     public SubSequence getBaseSequence() {
         return base;
+    }
+
+    @Override
+    public boolean isOption(int option) {
+        return baseSeq instanceof BasedOptionsHolder && ((BasedOptionsHolder) baseSeq).isOption(option);
+    }
+
+    @Override
+    public <T> T getOption(DataKeyBase<T> dataKey) {
+        return baseSeq instanceof BasedOptionsHolder ? ((BasedOptionsHolder) baseSeq).getOption(dataKey) : null;
+    }
+
+    @Override
+    public @Nullable DataHolder getOptions() {
+        return baseSeq instanceof BasedOptionsHolder ? ((BasedOptionsHolder) baseSeq).getOptions() : null;
     }
 
     @NotNull
@@ -72,7 +89,7 @@ public final class SubSequence extends BasedSequenceImpl {
         if (index >= 0 && index <= endOffset - startOffset) {
             return startOffset + index;
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + index + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("subSequence index: " + index + " out of range: 0, " + length());
     }
 
     @Override
@@ -91,9 +108,9 @@ public final class SubSequence extends BasedSequenceImpl {
             return baseSubSequence(startOffset + startIndex, startOffset + endIndex);
         }
         if (startIndex < 0 || startOffset + startIndex > endOffset) {
-            throw new StringIndexOutOfBoundsException("SubCharSequence index: " + startIndex + " out of range: 0, " + length());
+            throw new StringIndexOutOfBoundsException("subSequence index: " + startIndex + " out of range: 0, " + length());
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("subSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
     @NotNull
@@ -103,9 +120,9 @@ public final class SubSequence extends BasedSequenceImpl {
             return startIndex == startOffset && endIndex == endOffset ? this : base != this ? base.baseSubSequence(startIndex, endIndex) : new SubSequence(this, startIndex, endIndex);
         }
         if (startIndex < 0 || startIndex > base.length()) {
-            throw new StringIndexOutOfBoundsException("SubCharSequence index: " + startIndex + " out of range: 0, " + length());
+            throw new StringIndexOutOfBoundsException("subSequence index: " + startIndex + " out of range: 0, " + length());
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("subSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
     static BasedSequence create(@Nullable CharSequence charSequence) {
@@ -115,7 +132,7 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     /**
-     * @deprecated  use {@link BasedSequence#of(CharSequence)} instead
+     * @deprecated use {@link BasedSequence#of(CharSequence)} instead
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence) {
@@ -123,7 +140,7 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     /**
-     * @deprecated  use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
+     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence, int startIndex) {
@@ -131,7 +148,7 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     /**
-     * @deprecated  use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
+     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {

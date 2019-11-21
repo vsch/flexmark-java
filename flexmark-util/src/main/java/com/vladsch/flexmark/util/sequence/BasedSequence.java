@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +23,7 @@ import java.util.List;
  * a subSequence() returns a sub-sequence from the original base sequence with corresponding offsets
  */
 @SuppressWarnings("SameParameterValue")
-public interface BasedSequence extends IRichSequence<BasedSequence> {
+public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOptionsHolder {
     BasedSequence NULL = new EmptyBasedSequence();
     BasedSequence EMPTY = new EmptyBasedSequence();
     BasedSequence EOL = CharSubSequence.of(SequenceUtils.EOL);

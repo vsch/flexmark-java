@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.SegmentedSequenceStats;
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -164,6 +165,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
 
         int index = 0;
         int lastEnd = base.getStartOffset();
+
         for (BasedSequence segment : segments) {
             assert base.getBase() == segment.getBase() : "all segments must come from the same base sequence, segments[" + index + "], length so far: " + length;
             assert segment.getStartOffset() >= lastEnd : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + " lastEnd:" + lastEnd + ", length=" + length + " at index: " + index;
@@ -175,7 +177,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         this.baseStartOffset = 0;
         this.length = length;
         this.baseOffsets = new int[length + 1];
-        boolean hadNonBasedChars = false;
+        int nonBasedChars = 0;
         int len = 0;
 //        StringBuilder sb = null;
 
@@ -189,7 +191,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
 //                    sb.append(basedSequence.charAt(ci));
 //                    offset = -sb.length();
                     offset = -(int) basedSequence.charAt(ci) - 1;
-                    hadNonBasedChars = true;
+                    nonBasedChars++;
                 }
 
                 assert ci + len < this.baseOffsets.length : "Incorrect array size calculation: length: " + length + " ci + len: " + (ci + len);
@@ -201,7 +203,14 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
 
         int end = baseOffsets[length - 1];
         baseOffsets[length] = end < 0 ? end - 1 : end + 1;
-        this.nonBaseChars = hadNonBasedChars;
+        this.nonBaseChars = nonBasedChars > 0;
+
+        if (base.isOption(O_COLLECT_SEGMENTED_STATS)) {
+            SegmentedSequenceStats stats = base.getOption(SEGMENTED_STATS);
+            if (stats != null) {
+                stats.addStats(startOffset, endOffset, length, nonBasedChars, segments.size());
+            }
+        }
 
 //        if (sb != null) {
 //            this.nonBaseChars = sb.toString().toCharArray();

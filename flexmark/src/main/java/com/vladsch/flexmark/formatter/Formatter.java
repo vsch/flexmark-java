@@ -19,14 +19,16 @@ import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
-import com.vladsch.flexmark.util.format.CharWidthProvider;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -228,6 +230,29 @@ public class Formatter implements IRender {
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), document.getDocument(), null);
         renderer.render(document);
         renderer.flushTo(output, formatterOptions.maxTrailingBlankLines);
+    }
+
+    /**
+     * Render a node to the appendable
+     *
+     * @param document node to render
+     * @param builder  sequence builder
+     */
+    public String render(@NotNull Node document, @NotNull BasedSequenceBuilder builder) {
+        BasedSequenceBuilder subBuilder = builder.subContext();
+
+        MarkdownWriter out = new MarkdownWriter(formatterOptions.formatFlags, subBuilder);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, out, document.getDocument(), null);
+        renderer.render(document);
+        out.toBuilder(builder, 1);
+
+        StringBuilder sb = new StringBuilder();
+        try {
+            out.appendTo(sb, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 
     /**

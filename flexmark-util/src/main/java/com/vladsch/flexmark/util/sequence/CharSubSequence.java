@@ -72,7 +72,7 @@ public final class CharSubSequence extends BasedSequenceImpl {
         if (index >= 0 && index <= endOffset - startOffset) {
             return startOffset + index;
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + index + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("subSequence index: " + index + " out of range: 0, " + length());
     }
 
     @Override
@@ -91,9 +91,9 @@ public final class CharSubSequence extends BasedSequenceImpl {
             return base.baseSubSequence(startOffset + startIndex, startOffset + endIndex);
         }
         if (startIndex < 0 || startOffset + startIndex > endOffset) {
-            throw new StringIndexOutOfBoundsException("SubCharSequence index: " + startIndex + " out of range: 0, " + length());
+            throw new StringIndexOutOfBoundsException("subSequence index: " + startIndex + " out of range: 0, " + length());
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("subSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
     @NotNull
@@ -103,9 +103,9 @@ public final class CharSubSequence extends BasedSequenceImpl {
             return startIndex == startOffset && endIndex == endOffset ? this : base != this ? base.baseSubSequence(startIndex, endIndex) : new CharSubSequence(base, startIndex, endIndex);
         }
         if (startIndex < 0 || startIndex > base.length()) {
-            throw new StringIndexOutOfBoundsException("SubCharSequence index: " + startIndex + " out of range: 0, " + length());
+            throw new StringIndexOutOfBoundsException("subSequence index: " + startIndex + " out of range: 0, " + length());
         }
-        throw new StringIndexOutOfBoundsException("SubCharSequence index: " + endIndex + " out of range: 0, " + length());
+        throw new StringIndexOutOfBoundsException("subSequence index: " + endIndex + " out of range: 0, " + length());
     }
 
     public static CharSubSequence of(CharSequence charSequence) {

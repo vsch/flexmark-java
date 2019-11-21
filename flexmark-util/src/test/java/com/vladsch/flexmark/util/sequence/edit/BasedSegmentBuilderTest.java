@@ -245,7 +245,7 @@ public class BasedSegmentBuilderTest {
         segments.append(2, 5);
         segments.append("-");
         segments.append(2, 4);
-        assertEquals("BasedSegmentBuilder{[2, 5), s=0:0, u=1:1, t=4, l=7, [2, 5), [5, '-234') }", segments.toString());
+        assertEquals("BasedSegmentBuilder{[2, 5), s=0:0, u=1:1, t=3, l=6, [2, 5), [5, '-23') }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
     }
 
@@ -271,8 +271,144 @@ public class BasedSegmentBuilderTest {
         segments.append(2, 5);
         segments.append("-");
         segments.append(3, 4);
-        assertEquals("BasedSegmentBuilder{[2, 5), s=0:0, u=1:1, t=3, l=6, [2, 5), [5, '-34') }", segments.toString());
+        assertEquals("BasedSegmentBuilder{[2, 5), s=0:0, u=1:1, t=2, l=5, [2, 5), [5, '-3') }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultFromBefore() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(0, 1);
+        assertEquals("BasedSegmentBuilder{[2, 6), s=0:0, u=0:0, t=1, l=5, [2, 6), [6, '0') }", segments.toString());
+        assertEquals("23450", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultFromBefore0() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(0, 2);
+        assertEquals("BasedSegmentBuilder{[2, 6), s=0:0, u=0:0, t=2, l=6, [2, 6), [6, '01') }", segments.toString());
+        assertEquals("234501", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultFromBeforeIn() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(0, 3);
+        assertEquals("BasedSegmentBuilder{[2, 6), s=0:0, u=0:0, t=3, l=7, [2, 6), [6, '012') }", segments.toString());
+        assertEquals("2345012", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultFromBeforeInLess1() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(0, 5);
+        assertEquals("BasedSegmentBuilder{[2, 6), s=0:0, u=0:0, t=5, l=9, [2, 6), [6, '01234') }", segments.toString());
+        assertEquals("234501234", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultFromBeforeInLess0() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(0, 6);
+        assertEquals("BasedSegmentBuilder{[2, 6), s=0:0, u=0:0, t=6, l=10, [2, 6), [6, '012345') }", segments.toString());
+        assertEquals("2345012345", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultFromBeforeInOver1() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(0, 7);
+        assertEquals("BasedSegmentBuilder{[2, 7), s=0:0, u=0:0, t=6, l=11, [2, 6), [6, '012345'), [6, 7) }", segments.toString());
+        assertEquals("23450123456", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultFromBeforeInOver2() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(0, 8);
+        assertEquals("BasedSegmentBuilder{[2, 8), s=0:0, u=0:0, t=6, l=12, [2, 6), [6, '012345'), [6, 8) }", segments.toString());
+        assertEquals("234501234567", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultIn0By1() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(2, 3);
+        assertEquals("BasedSegmentBuilder{[2, 6), s=0:0, u=0:0, t=1, l=5, [2, 6), [6, '2') }", segments.toString());
+        assertEquals("23452", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapDefaultIn0By2() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+
+        segments.append(2, 6);
+        segments.append(2, 4);
+        assertEquals("BasedSegmentBuilder{[2, 6), s=0:0, u=0:0, t=2, l=6, [2, 6), [6, '23') }", segments.toString());
+        assertEquals("234523", segments.toStringChars());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+    }
+
+    @Test
+    public void test_handleOverlapLoop() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+
+        for (int s = 0; s < input.length(); s++) {
+            for (int e = s; e < input.length(); e++) {
+                BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence);
+                segments.append(2, 6);
+
+                segments.append(s, e);
+                String expected = input.substring(2, 6) + input.substring(s, e);
+
+                assertEquals("" + s + "," + e, expected, segments.toStringChars());
+                assertEquals(expected.length(), segments.length());
+            }
+        }
     }
 
     @Test
@@ -319,7 +455,7 @@ public class BasedSegmentBuilderTest {
 
         segments.append(2, 5);
         segments.append(2, 4);
-        assertEquals("BasedSegmentBuilder{[2, 5), s=0:0, u=0:0, t=3, l=6, [2, 5), [5, '234') }", segments.toString());
+        assertEquals("BasedSegmentBuilder{[2, 5), s=0:0, u=0:0, t=2, l=5, [2, 5), [5, '23') }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
     }
 
@@ -343,7 +479,7 @@ public class BasedSegmentBuilderTest {
 
         segments.append(2, 5);
         segments.append(3, 4);
-        assertEquals("BasedSegmentBuilder{[2, 5), s=0:0, u=0:0, t=2, l=5, [2, 5), [5, '34') }", segments.toString());
+        assertEquals("BasedSegmentBuilder{[2, 5), s=0:0, u=0:0, t=1, l=4, [2, 5), [5, '3') }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
     }
 

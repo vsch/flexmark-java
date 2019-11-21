@@ -29,23 +29,51 @@ public class BasedSegmentBuilder extends SegmentBuilder {
         Seg lastSeg = lastSeg();
         assert !lastSeg.isNullRange() && lastSeg.getEnd() > range.getStart();
 
-        int length = lastSeg.getEnd() - range.getStart();
-        myLength += length;
-        myTextLength += length;
+        Range overlap;
+        Range after = Range.NULL;
+
+        if (range.getEnd() <= lastSeg.getStart()) {
+            // the whole thing is before
+            overlap = range;
+        } else if (range.getStart() <= lastSeg.getStart()) {
+            // part before, maybe some after
+            overlap = Range.of(range.getStart(), Math.min(range.getEnd(), lastSeg.getEnd()));
+            if (lastSeg.getEnd() < range.getEnd()) {
+                after = Range.of(lastSeg.getEnd(), range.getEnd());
+            }
+        } else if (range.getEnd() <= lastSeg.getEnd()) {
+            // all contained within
+            overlap = range;
+        } else  {
+            assert range.getStart() < lastSeg.getEnd();
+            overlap = range.withEnd(lastSeg.getEnd());
+            after = range.withStart(lastSeg.getEnd());
+        }
+
+        int overlapSpan = overlap.getSpan();
+        assert overlapSpan + after.getSpan() == range.getSpan();
+
+        // NOTE: addBaseSeg adds length
+        myLength += overlapSpan;
+        myTextLength += overlapSpan;
 
         if (lastSeg.isText()) {
             // can append to it
-            setLastSeg(lastSeg.withTextSuffix(myBase.subSequence(range.getStart(), lastSeg.getEnd()).toString()));
+            setLastSeg(lastSeg.withTextSuffix(myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString()));
         } else {
             // will append overlap text, followed by non-overlapping range if any
-            myParts.add(Seg.textSeg(lastSeg.getEnd(), myBase.subSequence(range.getStart(), lastSeg.getEnd()).toString()));
+            myParts.add(Seg.textSeg(lastSeg.getEnd(), myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString()));
         }
 
-        if (lastSeg.getEnd() < range.getEnd()) {
+        if (after.isNotEmpty()) {
             // there is a part of the overlap outside the last seg range
             // append the chopped off base part
-            addBaseSeg(Seg.baseSeg(lastSeg.getEnd(), range.getEnd()));
+            addBaseSeg(Seg.baseSeg(after.getStart(), after.getEnd()));
         }
+    }
+
+    public String toStringChars() {
+        return super.toString(myBase);
     }
 
     @NotNull
