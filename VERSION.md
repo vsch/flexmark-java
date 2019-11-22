@@ -10,6 +10,7 @@
 - [Next](#next)
 - [Next 0.59.56](#next-05956)
 - [Next 0.59.56](#next-05956)
+- [0.59.56](#05956)
 - [0.59.54](#05954)
 - [0.59.52](#05952)
 - [0.59.50](#05950)
@@ -211,17 +212,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.56
 
-* Add: options to based sequences which are not used unless a sequence passed to
-  `BasedSequence.of` is first wrapped in `BasedOptionsSequence`. Then all sequences created from
-  this base will have int bit options testable with `BasedSequence.isOption(int)` and get
-  arbitrary options with `BasedSequence.getOption(DataKeyBase<T>)` or just get the whole
-  `DataHolder` options via `BasedSequence.getOptions()` for more sophisticated needs. If the
-  `DataHolder` passed to `BasedOptionsSequence` is mutable then
-
-  Makes adding customized behavior and features easy and transparent to implementation with no
-  overhead since `SubSequence` delegates to its `baseSeq` if it is a `BasedOptionsHolder` for
-  these methods but otherwise does no checking. The overhead is one level of delegation of
-  `CharSequence` methods for sequences with options with no impact on the rest.
 * [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
   * [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `BasedSequenceBuilder` can
@@ -241,8 +231,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
-  * [x] Fix: optimize non base characters when `baseOffsets` are `int` by storing -ve char value
-        -1, this eliminates `nonBasedChars` completely.
   * [ ] Fix: optimize change storage of segments by storing segment number in  `baseOffsets`,
         which defines the segment `startOffset`, `endOffset` and `startIndex` in the original
         sequence. All chars from the same sequence have the same value in `segmentOffsets[]`.
@@ -254,6 +242,24 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         stores their segments. Then it can optimize its content the same way. This will slightly
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
+
+## 0.59.56
+
+* Fix: bug causing duplicated text in segmented sequences
+* Fix: optimize `SegmentedSequence`, non base characters are now stored in base offsets as
+  `-(char+1)`, this eliminates `nonBasedChars` completely.
+* Add: segmented sequence stats collection
+* Add: options to based sequences which are not used unless a sequence passed to
+  `BasedSequence.of` is first wrapped in `BasedOptionsSequence`. Then all sequences created from
+  this base will have int bit options testable with `BasedSequence.isOption(int)` and get
+  arbitrary options with `BasedSequence.getOption(DataKeyBase<T>)` or just get the whole
+  `DataHolder` options via `BasedSequence.getOptions()` for more sophisticated needs. If the
+  `DataHolder` passed to `BasedOptionsSequence` is mutable then
+
+  Makes adding customized behavior and features easy and transparent to implementation with no
+  overhead since `SubSequence` delegates to its `baseSeq` if it is a `BasedOptionsHolder` for
+  these methods but otherwise does no checking. The overhead is one level of delegation of
+  `CharSequence` methods for sequences with options with no impact on the rest.
 
 ## 0.59.54
 
