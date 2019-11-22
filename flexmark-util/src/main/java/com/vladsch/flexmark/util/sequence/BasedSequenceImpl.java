@@ -47,10 +47,11 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return of(charSequence).subSequence(startIndex, endIndex);
     }
 
+    @SuppressWarnings("unchecked")
+    @NotNull
     @Override
-    public <B extends SequenceBuilder<B, BasedSequence>> @NotNull B getBuilder() {
-        //noinspection unchecked
-        return (B) BasedSequenceBuilder.emptyBuilder(this);
+    public BasedSequenceBuilder getBuilder() {
+        return BasedSequenceBuilder.emptyBuilder(this);
     }
 
     @Override

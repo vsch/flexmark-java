@@ -5,6 +5,8 @@ import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
@@ -76,6 +78,11 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     static BasedSequence repeatOf(@NotNull CharSequence chars, int startIndex, int endIndex) {
         return of(RepeatedSequence.repeatOf(chars, startIndex, endIndex));
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    @NotNull
+    BasedSequenceBuilder getBuilder();
 
     /**
      * Get the underlying object on which this sequence contents are based
