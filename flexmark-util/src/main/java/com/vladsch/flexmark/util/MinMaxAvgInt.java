@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util;
 
 public class MinMaxAvgInt {
-    private int min;
-    private int max;
-    private int total;
+    private int min = Integer.MAX_VALUE;
+    private int max = Integer.MIN_VALUE;
+    private int total = 0;
 
     public MinMaxAvgInt() {
     }

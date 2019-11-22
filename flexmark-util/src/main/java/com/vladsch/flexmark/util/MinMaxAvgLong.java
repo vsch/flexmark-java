@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util;
 
 public class MinMaxAvgLong {
-    private long min;
-    private long max;
-    private long total;
+    private long min = Long.MAX_VALUE;
+    private long max = Long.MIN_VALUE;
+    private long total = 0;
 
     public MinMaxAvgLong() {
     }

@@ -10,41 +10,48 @@ import java.util.Objects;
 
 public class SegmentedSequenceStats {
     public static class StatsEntry implements Comparable<StatsEntry> {
-        final int segments;
+        int segments;
         int count;
-        final MinMaxAvgInt nonBased = new MinMaxAvgInt();
-        final MinMaxAvgInt length = new MinMaxAvgInt();
-        final MinMaxAvgInt start = new MinMaxAvgInt();
-        final MinMaxAvgInt end = new MinMaxAvgInt();
-        final MinMaxAvgInt span = new MinMaxAvgInt();
-        final MinMaxAvgInt overhead = new MinMaxAvgInt();
-        final MinMaxAvgFloat pct = new MinMaxAvgFloat();
+        final MinMaxAvgLong segStats = new MinMaxAvgLong();
+        final MinMaxAvgLong nonBased = new MinMaxAvgLong();
+        final MinMaxAvgLong nonBasedSeg = new MinMaxAvgLong();
+        final MinMaxAvgLong length = new MinMaxAvgLong();
+        final MinMaxAvgLong start = new MinMaxAvgLong();
+        final MinMaxAvgLong end = new MinMaxAvgLong();
+        final MinMaxAvgLong span = new MinMaxAvgLong();
 
         public StatsEntry(int segments) {
+            assert segments >= 1 : "segments: " + segments + " < 1";
             this.segments = segments;
         }
 
-        public void add(int nonBased, int length, int start, int end) {
+        public void add(int segments, int nonBased, int nonBasedSeg, int length, int start, int end) {
+            assert segments >= 1 : "segments: " + segments + " < 1";
+            assert nonBased >= 0 : "nonBased: " + nonBased + " < 0";
+            assert nonBasedSeg >= (nonBased > 0 ? 1 : 0) && nonBasedSeg <= nonBased : "nonBasedSeg: " + nonBasedSeg + " not in [" + (nonBased > 0 ? 1 : 0) + ", " + nonBased + "]";
+            assert length >= 0 : "length: " + length + " < 0";
+            assert end >= 0 : " end:" + end + " < 0 ";
+            assert start >= 0 && start <= end : " start:" + start + " not in [" + 0 + ", " + end + "]";
+
             count++;
+            this.segStats.add(segments);
             this.nonBased.add(nonBased);
+            this.nonBasedSeg.add(nonBasedSeg);
             this.length.add(length);
             this.start.add(start);
             this.end.add(end);
-            this.span.add(end - start);
-            int overhead = 4 * (length + 1) + 4 * nonBased;
-            this.overhead.add(overhead);
-            this.pct.add(length == 0 ? 0f : 100.0f * overhead / (4 * length));
+            this.span.add(Math.max(0, end - start));
         }
 
         public void add(@NotNull StatsEntry other) {
             count += other.count;
+            this.segStats.add(other.segStats);
             this.nonBased.add(other.nonBased);
+            this.nonBasedSeg.add(other.nonBasedSeg);
             this.length.add(other.length);
             this.start.add(other.start);
             this.end.add(other.end);
             this.span.add(other.span);
-            this.overhead.add(other.overhead);
-            this.pct.add(other.pct);
         }
 
         @Override
@@ -73,13 +80,13 @@ public class SegmentedSequenceStats {
 
     }
 
-    public void addStats(int segments, int nonBasedChars, int length, int startOffset, int endOffset) {
+    public void addStats(int segments, int nonBasedChars, int nonBaseSegs, int length, int startOffset, int endOffset) {
         StatsEntry entry = new StatsEntry(segments);
         entry = myStats.computeIfAbsent(entry, k -> k);
-        entry.add(nonBasedChars, length, startOffset, endOffset);
+        entry.add(segments, nonBasedChars, nonBaseSegs, length, startOffset, endOffset);
     }
 
-    public int getCount(int segments, int nonBasedChars, int length, int startOffset, int endOffset) {
+    public int getCount(int segments) {
         StatsEntry entry = new StatsEntry(segments);
         if (myStats.containsKey(entry)) {
             return myStats.get(entry).count;
@@ -93,57 +100,46 @@ public class SegmentedSequenceStats {
         int iMax = entries.size();
 
         out.append(
-                String.format("%10s,%10s,%5s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s",
+                String.format("%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s,%10s",
                         "count",
-                        "seg",
-                        "pct",
-                        "min-ovr",
-                        "avg-ovr",
-                        "max-ovr",
+                        "min-seg",
+                        "avg-seg",
+                        "max-seg",
                         "min-non",
                         "avg-non",
                         "max-non",
+                        "min-nseg",
+                        "avg-nseg",
+                        "max-nseg",
                         "min-len",
                         "avg-len",
                         "max-len",
                         "min-span",
                         "avg-span",
-                        "max-span",
-                        "min-start",
-                        "avg-start",
-                        "max-start",
-                        "min-end",
-                        "avg-end",
-                        "max-end"
+                        "max-span"
                 )
         ).append("\n");
-
 
         for (int i = iMax; i-- > 0; ) {
             StatsEntry entry = entries.get(i);
             out.append(
-                    String.format("%10d,%10d,%5.0f,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d",
+                    String.format("%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d,%10d",
                             entry.count,
-                            entry.segments,
-                            entry.pct.getAvg(entry.count),
-                            entry.overhead.getMin(),
-                            entry.overhead.getAvg(entry.count),
-                            entry.overhead.getMax(),
+                            entry.count == 1 ? entry.segments : entry.segStats.getMin(),
+                            entry.count == 1 ? entry.segments : entry.segStats.getAvg(entry.count),
+                            entry.count == 1 ? entry.segments : entry.segStats.getMax(),
                             entry.nonBased.getMin(),
                             entry.nonBased.getAvg(entry.count),
                             entry.nonBased.getMax(),
+                            entry.nonBasedSeg.getMin(),
+                            entry.nonBasedSeg.getAvg(entry.count),
+                            entry.nonBasedSeg.getMax(),
                             entry.length.getMin(),
                             entry.length.getAvg(entry.count),
                             entry.length.getMax(),
                             entry.span.getMin(),
                             entry.span.getAvg(entry.count),
-                            entry.span.getMax(),
-                            entry.start.getMin(),
-                            entry.start.getAvg(entry.count),
-                            entry.start.getMax(),
-                            entry.end.getMin(),
-                            entry.end.getAvg(entry.count),
-                            entry.end.getMax()
+                            entry.span.getMax()
                     )
             ).append("\n");
         }
@@ -171,7 +167,6 @@ public class SegmentedSequenceStats {
 
         ArrayList<Integer> steps = new ArrayList<>();
 
-
         // @formatter:off
         int step = 1; int start = 1; int nextStep = 16;
 //        for (int i = start; i < nextStep; i += step) steps.add(i);
@@ -185,6 +180,7 @@ public class SegmentedSequenceStats {
         steps.add(6);
         steps.add(7);
         steps.add(8);
+        steps.add(15);
         steps.add(16);
         steps.add(256);
         start = 65536; step = 65536; nextStep = 65536*16;

@@ -197,7 +197,10 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         this.baseOffsets = new int[length + 1];
         int nonBasedChars = 0;
         int len = 0;
-//        StringBuilder sb = null;
+        int nonBaseSeg = 0;
+        int baseSeg = 0;
+        boolean wasNonBase = false;
+        int lastOffset = -1;
 
         for (BasedSequence basedSequence : segments) {
             int ciMax = basedSequence.length();
@@ -205,11 +208,17 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
             for (int ci = 0; ci < ciMax; ci++) {
                 int offset = basedSequence.getIndexOffset(ci);
                 if (offset < 0) {
-//                    if (sb == null) sb = new StringBuilder();
-//                    sb.append(basedSequence.charAt(ci));
-//                    offset = -sb.length();
+                    if (!wasNonBase) {
+                        nonBaseSeg++;
+                        wasNonBase = true;
+                        lastOffset = -1;
+                    }
                     offset = -(int) basedSequence.charAt(ci) - 1;
                     nonBasedChars++;
+                } else {
+                    wasNonBase = false;
+                    if (offset != lastOffset + 1) baseSeg++;
+                    lastOffset = offset;
                 }
 
                 assert ci + len < this.baseOffsets.length : "Incorrect array size calculation: length: " + length + " ci + len: " + (ci + len);
@@ -226,15 +235,9 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         if (base.isOption(O_COLLECT_SEGMENTED_STATS)) {
             SegmentedSequenceStats stats = base.getOption(SEGMENTED_STATS);
             if (stats != null) {
-                stats.addStats(segments.size(), nonBasedChars, length, startOffset, endOffset);
+                stats.addStats(baseSeg + nonBaseSeg, nonBasedChars, nonBaseSeg, length, startOffset, endOffset);
             }
         }
-
-//        if (sb != null) {
-//            this.nonBaseChars = sb.toString().toCharArray();
-//        } else {
-//            this.nonBaseChars = null;
-//        }
     }
 
     private SegmentedSequence(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final boolean nonBaseChars, final int length) {

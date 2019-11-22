@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util;
 
 public class MinMaxAvgFloat {
-    private float min;
-    private float max;
-    private float total;
+    private float min = Float.MAX_VALUE;
+    private float max = Float.MIN_VALUE;
+    private float total = 0.0f;
 
     public MinMaxAvgFloat() {
     }

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util;
 
 public class MinMaxAvgDouble {
-    private double min;
-    private double max;
-    private double total;
+    private double min = Double.MAX_VALUE;
+    private double max = Double.MIN_VALUE;
+    private double total = 0.0;
 
     public MinMaxAvgDouble() {
     }
