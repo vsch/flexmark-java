@@ -232,7 +232,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     public String toStringWithRanges() {
-        return mySegments.toStringWithRanges(myBase);
+        return mySegments.toStringWithRangesVisibleWhitespace(myBase);
     }
 
     @NotNull
@@ -242,7 +242,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
                 mySegments.optimizeFor(myBase, optimizer);
             }
         }
-        return mySegments.toStringWithRanges(myBase);
+        return mySegments.toStringWithRangesVisibleWhitespace(myBase);
     }
 
     public String toString() {

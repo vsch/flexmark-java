@@ -410,7 +410,7 @@ public class SegmentBuilder {
     }
 
     @NotNull
-    public String toStringWithRanges(@NotNull CharSequence chars) {
+    public String toStringWithRangesVisibleWhitespace(@NotNull CharSequence chars) {
         BasedSequence baseSequence = BasedSequence.of(chars);
 
         if (myEndOffset > baseSequence.length()) {
@@ -424,6 +424,27 @@ public class SegmentBuilder {
                 out.append(BasedSequence.of(part.getText()).toVisibleWhitespaceString());
             } else {
                 out.append("⟦").append(baseSequence.subSequence(part.getStart(), part.getEnd()).toVisibleWhitespaceString()).append("⟧");
+            }
+        }
+
+        return out.toString();
+    }
+
+    @NotNull
+    public String toStringWithRanges(@NotNull CharSequence chars) {
+        BasedSequence baseSequence = BasedSequence.of(chars);
+
+        if (myEndOffset > baseSequence.length()) {
+            throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + baseSequence.length());
+        }
+
+        StringBuilder out = new StringBuilder();
+
+        for (Seg part : myParts) {
+            if (!part.isBase()) {
+                out.append(BasedSequence.of(part.getText()));
+            } else {
+                out.append("⟦").append(baseSequence.subSequence(part.getStart(), part.getEnd())).append("⟧");
             }
         }
 

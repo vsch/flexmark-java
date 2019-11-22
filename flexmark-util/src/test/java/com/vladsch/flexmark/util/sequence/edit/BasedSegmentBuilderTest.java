@@ -25,7 +25,7 @@ public class BasedSegmentBuilderTest {
         assertEquals("BasedSegmentBuilder{NULL, s=0:0, u=0:0, t=0, l=0 }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals(expected, segments.toStringWithRanges(sequence));
+        assertEquals(expected, segments.toStringWithRangesVisibleWhitespace(sequence));
         assertEquals(expected, segments.toString(sequence));
     }
 
@@ -84,7 +84,7 @@ public class BasedSegmentBuilderTest {
         assertEquals("BasedSegmentBuilder{[0, 4), s=2:2, u=1:2, t=2, l=6, [0, '  '), [0, 4) }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("  ⟦0123⟧", segments.toStringWithRanges(sequence));
+        assertEquals("  ⟦0123⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
         assertEquals("  0123", segments.toString(sequence));
     }
 
@@ -101,7 +101,7 @@ public class BasedSegmentBuilderTest {
         assertEquals("BasedSegmentBuilder{[0, 4), s=0:0, u=0:0, t=0, l=4, [0, 4) }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦0123⟧", segments.toStringWithRanges(sequence));
+        assertEquals("⟦0123⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
         assertEquals(expected, segments.toString(sequence));
     }
 
@@ -119,7 +119,7 @@ public class BasedSegmentBuilderTest {
         assertEquals("BasedSegmentBuilder{[0, 7), s=0:0, u=0:0, t=0, l=5, [0, 4), [6, 7) }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦0123⟧⟦6⟧", segments.toStringWithRanges(sequence));
+        assertEquals("⟦0123⟧⟦6⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
         assertEquals(expected, segments.toString(sequence));
     }
 
@@ -137,7 +137,7 @@ public class BasedSegmentBuilderTest {
         assertEquals("BasedSegmentBuilder{[0, 7), s=0:0, u=0:0, t=2, l=9, [0, 5), [5, '34'), [5, 7) }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦01234⟧34⟦56⟧", segments.toStringWithRanges(sequence));
+        assertEquals("⟦01234⟧34⟦56⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
         assertEquals(expected, segments.toString(sequence));
     }
 
@@ -155,7 +155,7 @@ public class BasedSegmentBuilderTest {
         assertEquals("BasedSegmentBuilder{[0, 7), s=0:0, u=3:3, t=5, l=12, [0, 5), [5, 'abc34'), [5, 7) }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦01234⟧abc34⟦56⟧", segments.toStringWithRanges(sequence));
+        assertEquals("⟦01234⟧abc34⟦56⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
         assertEquals(expected, segments.toString(sequence));
     }
 
@@ -174,7 +174,7 @@ public class BasedSegmentBuilderTest {
         assertEquals("BasedSegmentBuilder{[0, 5), s=0:0, u=6:6, t=6, l=11, [0, 5), [5, 'abcdef') }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦01234⟧abcdef", segments.toStringWithRanges(sequence));
+        assertEquals("⟦01234⟧abcdef", segments.toStringWithRangesVisibleWhitespace(sequence));
         assertEquals(expected, segments.toString(sequence));
     }
 
@@ -192,7 +192,7 @@ public class BasedSegmentBuilderTest {
         assertEquals("BasedSegmentBuilder{[0, 7), s=0:0, u=0:0, t=0, l=7, [0, 7) }", segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦0123456⟧", segments.toStringWithRanges(sequence));
+        assertEquals("⟦0123456⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
         assertEquals(expected, segments.toString(sequence));
     }
 
@@ -996,7 +996,7 @@ public class BasedSegmentBuilderTest {
         assertEquals(segments.toString(sequence).length(), segments.length());
 
         segments.optimizeFor(sequence, optimizer);
-        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n⟧\\n  ⟦  line 3\\n⟧", segments.toStringWithRanges(input));
+        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n⟧\\n  ⟦  line 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
 
         assertEquals("" +
                 "    line 1\n" +
@@ -1032,7 +1032,7 @@ public class BasedSegmentBuilderTest {
         assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 30), s=0:0, u=0:0, t=0, l=28, [0, 8), [9, 18), [19, 30) }"), segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRanges(input));
+        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
 
         assertEquals("" +
                 "  line 1\n" +
@@ -1068,7 +1068,7 @@ public class BasedSegmentBuilderTest {
         assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 23), s=0:0, u=0:0, t=0, l=22, [0, 13), [14, 23) }"), segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRanges(input));
+        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
 
         assertEquals("" +
                 "line 1\n" +
@@ -1101,7 +1101,7 @@ public class BasedSegmentBuilderTest {
         assertEquals(segments.toString(sequence).length(), segments.length());
 
         segments.optimizeFor(sequence, optimizer);
-        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", segments.toStringWithRanges(input));
+        assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
 
         assertEquals("" +
                 "    line 1\n" +
@@ -1137,7 +1137,7 @@ public class BasedSegmentBuilderTest {
         assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 30), s=0:0, u=0:0, t=0, l=28, [0, 8), [9, 18), [19, 30) }"), segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRanges(input));
+        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
 
         assertEquals("" +
                 "  line 1\n" +
@@ -1173,7 +1173,7 @@ public class BasedSegmentBuilderTest {
         assertEquals(escapeJavaString("BasedSegmentBuilder{[0, 23), s=0:0, u=0:0, t=0, l=22, [0, 13), [14, 23) }"), segments.toString());
         assertEquals(segments.toString(sequence).length(), segments.length());
 
-        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRanges(input));
+        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
 
         assertEquals("" +
                 "line 1\n" +

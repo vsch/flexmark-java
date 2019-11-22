@@ -22,6 +22,10 @@ public class BasedSegmentBuilder extends SegmentBuilder {
         myBase = other.myBase;
     }
 
+    public String toStringWithRangesVisibleWhitespace() {
+        return super.toStringWithRangesVisibleWhitespace(myBase);
+    }
+
     public String toStringWithRanges() {
         return super.toStringWithRanges(myBase);
     }

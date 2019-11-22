@@ -69,13 +69,14 @@ public class SegmentedSequenceStatsTest {
     public void aggregatedStatsBuckets() {
         SegmentedSequenceStats stats = SegmentedSequenceStats.getInstance();
 
-        int iMax = 65536;
+        int iMax = 65540;
         for (int i = 1; i < iMax; i++) {
             stats.addStats(i, i, i, i, i, i);
         }
 
         assertEquals("" +
                 "     count,   min-seg,   avg-seg,   max-seg,   min-non,   avg-non,   max-non,  min-nseg,  avg-nseg,  max-nseg,   min-len,   avg-len,   max-len,  min-span,  avg-span,  max-span\n" +
+                "         4,     65536,     65537,     65539,     65536,     65537,     65539,     65536,     65537,     65539,     65536,     65537,     65539,         0,         0,         0\n" +
                 "     65280,       256,     32895,     65535,       256,     32895,     65535,       256,     32895,     65535,       256,     32895,     65535,         0,         0,         0\n" +
                 "       240,        16,       135,       255,        16,       135,       255,        16,       135,       255,        16,       135,       255,         0,         0,         0\n" +
                 "         1,        15,        15,        15,        15,        15,        15,        15,        15,        15,        15,        15,        15,         0,         0,         0\n" +

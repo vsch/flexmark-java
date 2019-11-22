@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.NullEncoder;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -169,13 +168,13 @@ public class MappedBasedSequenceTest {
 
         BasedSegmentBuilder builder = BasedSegmentBuilder.emptyBuilder(sequence);
         wrapped.addSegments(builder);
-        assertEquals("⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\\n⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧", builder.toStringWithRanges());
+        assertEquals("⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\\n⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧", builder.toStringWithRangesVisibleWhitespace());
 
         BasedSequence mapEncoded = wrapped.toMapped(SpaceMapper.fromNonBreakSpace);
         BasedSequence eolAdded = mapEncoded.appendEOL();
         BasedSegmentBuilder builder2 = BasedSegmentBuilder.emptyBuilder(sequence);
         mapEncoded.addSegments(builder2);
-        assertEquals("⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\\n⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧", builder2.toStringWithRanges());
+        assertEquals("⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\\n⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧", builder2.toStringWithRangesVisibleWhitespace());
 
         assertEquals(expected, mapEncoded.toString());
         assertEquals(expected+"\n", eolAdded.toString());
