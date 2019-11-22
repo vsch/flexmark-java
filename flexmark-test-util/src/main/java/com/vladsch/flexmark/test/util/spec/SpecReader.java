@@ -222,7 +222,7 @@ public class SpecReader {
                     state = State.HTML;
                 } else {
                     // examples use "rightwards arrow" to show tab
-                    String processedLine = TestUtils.unShowTabs(line);
+                    String processedLine = TestUtils.fromVisibleSpecText(line);
                     source.append(processedLine).append('\n');
                 }
                 lineAbsorbed = true;
@@ -237,7 +237,7 @@ public class SpecReader {
                     state = State.AST;
                     lineAbsorbed = true;
                 } else {
-                    String processedLine = TestUtils.unShowTabs(line);
+                    String processedLine = TestUtils.fromVisibleSpecText(line);
                     html.append(processedLine).append('\n');
                     lineAbsorbed = true;
                 }

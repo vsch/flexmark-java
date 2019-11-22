@@ -231,7 +231,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
-  * [ ] Fix: optimize change storage of segments by storing segment number in  `baseOffsets`,
+  * [ ] Fix: optimize change storage of segments by storing segment number in `baseOffsets`,
         which defines the segment `startOffset`, `endOffset` and `startIndex` in the original
         sequence. All chars from the same sequence have the same value in `segmentOffsets[]`.
         The final offset is `index` - `segment.startIndex` + `segment.startOffset`. The total
@@ -242,6 +242,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         stores their segments. Then it can optimize its content the same way. This will slightly
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
+* [ ] Fix: `SegmentedBuilder` if anchor position is less than current `endOffset` then ignore
+      anchor.
+* Deprecate: `TestUtils.showTabs(String)` and `TestUtils.unShowTabs(String)` in favour of
+      `TestUtils.toVisibleSpecText(String)` and `TestUtils.fromVisibleSpecText(String)` because
+      these convert more than tabs.
 
 ## 0.59.56
 
@@ -320,9 +325,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * `HEXADECIMAL_DIGITS`
   * `OCTAL_DIGITS`
 * Fix: infinite recursion in deprecated `SubSequence.of`
-* Break: delete  `BasedSequence.getIndexRange(int, int)` does not do the intended job and is
+* Break: delete `BasedSequence.getIndexRange(int, int)` does not do the intended job and is
   complicated and useless at the same time for its purpose.
-* Deprecate: to be delete  `BasedSequence.getIndexOffset(int)` as soon as `SegmentedSequence` is
+* Deprecate: to be delete `BasedSequence.getIndexOffset(int)` as soon as `SegmentedSequence` is
   migrated to segment builder sequence part list.
 
 ## 0.59.50

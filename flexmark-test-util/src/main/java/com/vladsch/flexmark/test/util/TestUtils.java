@@ -9,7 +9,10 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.RichSequenceImpl;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
@@ -299,22 +302,50 @@ public class TestUtils {
         if (includeExampleCoords) { sb.append(header.toString().replace(' ', '\u00A0')); } else sb.append(header.toString());
 
         if (ast != null) {
-            sb.append(showTabs(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
+            sb.append(toVisibleSpecText(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
                     .append(SpecReader.TYPE_BREAK).append("\n")
                     .append(ast).append(SpecReader.EXAMPLE_BREAK).append("\n");
         } else {
-            sb.append(showTabs(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
+            sb.append(toVisibleSpecText(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
                     .append(SpecReader.EXAMPLE_BREAK).append("\n");
         }
     }
 
+    /**
+     * @param s text to convert to visible chars
+     * @return spec test special chars converted to visible
+     * @deprecated use {@link #toVisibleSpecText(String)}
+     */
+    @Deprecated
     public static String showTabs(String s) {
+        return toVisibleSpecText(s);
+    }
+
+    /**
+     * @param s text to convert to visible chars
+     * @return spec test special chars converted to visible
+     */
+    public static String toVisibleSpecText(String s) {
         if (s == null) return "";
         // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as ⎮23ae, CR ⏎ 23ce
         return s.replace("\u2192", "&#2192;").replace("\t", "\u2192").replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae").replace("\u23ce", "&#23ce").replace("\r", "\u23ce");
     }
 
+    /**
+     * @param s text to convert to from visible chars to normal
+     * @return spec test special visible chars converted to normal
+     * @deprecated use {@link #fromVisibleSpecText(String)}
+     */
+    @Deprecated
     public static String unShowTabs(String s) {
+        return fromVisibleSpecText(s);
+    }
+
+    /**
+     * @param s text to convert to from visible chars to normal
+     * @return spec test special visible chars converted to normal
+     */
+    public static String fromVisibleSpecText(String s) {
         if (s == null) return "";
         // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⎮
         return s.replace("\u23ce", "\r").replace("&#23ce", "\u23ce").replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae").replace('\u2192', '\t').replace("&#2192;", "\u2192");
