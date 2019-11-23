@@ -88,6 +88,60 @@ public class SegmentBuilderTest {
     }
 
     @Test
+    public void test_basicAnchorBeforeEnd() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+
+        segments.append("  ");
+        segments.append(0, 4);
+        segments.appendAnchor(3);
+
+        assertEquals("SegmentBuilder{[0, 4), s=2:2, u=1:2, t=2, l=6, [0, '  '), [0, 4) }", segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        assertEquals("  ⟦0123⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
+        assertEquals("  0123", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_basicAnchorAtEnd() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+
+        segments.append("  ");
+        segments.append(0, 4);
+        segments.appendAnchor(4);
+
+        assertEquals("SegmentBuilder{[0, 4), s=2:2, u=1:2, t=2, l=6, [0, '  '), [0, 4) }", segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        assertEquals("  ⟦0123⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
+        assertEquals("  0123", segments.toString(sequence));
+    }
+
+    @Test
+    public void test_basicAnchorAfterEnd() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+
+        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+
+        segments.append("  ");
+        segments.append(0, 4);
+        segments.appendAnchor(5);
+
+        assertEquals("SegmentBuilder{[0, 5), s=2:2, u=1:2, t=2, l=6, [0, '  '), [0, 4), [5) }", segments.toString());
+        assertEquals(segments.toString(sequence).length(), segments.length());
+
+        assertEquals("  ⟦0123⟧⟦⟧", segments.toStringWithRangesVisibleWhitespace(sequence));
+        assertEquals("  0123", segments.toString(sequence));
+    }
+
+    @Test
     public void test_appendRange1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);

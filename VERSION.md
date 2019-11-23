@@ -242,11 +242,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         stores their segments. Then it can optimize its content the same way. This will slightly
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
-* [ ] Fix: `SegmentedBuilder` if anchor position is less than current `endOffset` then ignore
-      anchor.
+* Fix: `SegmentedBuilder` if anchor position is less than current `endOffset` then ignore
+  anchor.
 * Deprecate: `TestUtils.showTabs(String)` and `TestUtils.unShowTabs(String)` in favour of
-      `TestUtils.toVisibleSpecText(String)` and `TestUtils.fromVisibleSpecText(String)` because
-      these convert more than tabs.
+  `TestUtils.toVisibleSpecText(String)` and `TestUtils.fromVisibleSpecText(String)` because
+  these convert more than tabs.
 
 ## 0.59.56
 

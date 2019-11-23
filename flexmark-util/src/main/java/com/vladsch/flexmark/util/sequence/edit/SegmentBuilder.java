@@ -359,8 +359,8 @@ public class SegmentBuilder {
     public SegmentBuilder append(@NotNull Range range) {
         if (range.isNull()) return this;
         int rangeSpan = range.getSpan();
-        if (rangeSpan < 0 || rangeSpan == 0 && !isIncludeAnchors()) {
-            if (rangeSpan == 0) updateLastTextSeg(Seg.anchorSeg(range.getEnd()));
+        if (rangeSpan < 0 || rangeSpan == 0 && (!isIncludeAnchors() || range.getStart() <= myEndOffset)) {
+            if (rangeSpan == 0 && range.getStart() > myEndOffset) updateLastTextSeg(Seg.anchorSeg(range.getEnd()));
             return this;
         }
 
