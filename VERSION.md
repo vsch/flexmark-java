@@ -9,7 +9,8 @@
     - [API Changes](#api-changes)
 - [Next](#next)
 - [Next 0.59.56](#next-05956)
-- [Next 0.59.56](#next-05956)
+- [Next 0.59.60](#next-05960)
+- [0.59.58](#05958)
 - [0.59.56](#05956)
 - [0.59.54](#05954)
 - [0.59.52](#05952)
@@ -210,7 +211,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: `SegmentBuilder` simplify optimization by passing the full list to optimizer. No
       position list.
 
-## Next 0.59.56
+## Next 0.59.60
 
 * [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
   * [ ] optimize by not processing one char at a time. Split the sequence into regions of
@@ -242,6 +243,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         stores their segments. Then it can optimize its content the same way. This will slightly
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
+
+## 0.59.58
+
+* Add: `SequenceUtils.equals(CharSequence, Object)` to consolidate char sequence equals
 * Fix: `SegmentedBuilder` if anchor position is less than current `endOffset` then ignore
   anchor.
 * Deprecate: `TestUtils.showTabs(String)` and `TestUtils.unShowTabs(String)` in favour of

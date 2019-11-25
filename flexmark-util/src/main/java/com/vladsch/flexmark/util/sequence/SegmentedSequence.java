@@ -94,11 +94,8 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
 
     @Override
     public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
-        if (length > 0) {
-            // FIX: clean up and optimize the structure. it is error prone and inefficient
-            return BasedUtils.generateSegments(builder, this);
-        }
-        return false;
+        // FIX: clean up and optimize the structure. it is error prone and inefficient
+        return BasedUtils.generateSegments(builder, this);
     }
 
     /**

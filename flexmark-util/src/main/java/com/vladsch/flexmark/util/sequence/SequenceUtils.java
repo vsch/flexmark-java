@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -279,6 +280,37 @@ public interface SequenceUtils {
             if (s.test(c)) return i;
         }
         return -1;
+    }
+
+    /**
+     * Equality comparison based on character content of this sequence, with quick fail
+     * resorting to content comparison only if length and hashCodes are equal
+     *
+     * @param o any char sequence
+     * @return true if character contents are equal
+     */
+    @Contract(pure = true, value = "_, null -> false")
+    static boolean equals(@NotNull CharSequence thizz,  Object o) {
+        // do quick failure of equality
+        if (o == thizz) return true;
+        if (!(o instanceof CharSequence)) return false;
+
+        CharSequence chars = (CharSequence) o;
+        if (chars.length() != thizz.length()) return false;
+
+        if (o instanceof String) {
+            String other = (String) o;
+            if (other.hashCode() != thizz.hashCode()) return false;
+
+            // fall through to slow content comparison
+        } else if (o instanceof IRichSequence) {
+            IRichSequence<?> other = (IRichSequence<?>) o;
+            if (other.hashCode() != thizz.hashCode()) return false;
+
+            // fall through to slow content comparison
+        }
+
+        return matchChars(thizz, chars, 0, false);
     }
 
     static int compareReversed(@Nullable CharSequence o1, @Nullable CharSequence o2) {

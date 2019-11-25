@@ -45,28 +45,11 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * @param o any char sequence
      * @return true if character contents are equal
      */
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     @Contract(pure = true, value = "null -> false")
     final public boolean equals(Object o) {
-        // do quick failure of equality
-        if (o == this) return true;
-        if (!(o instanceof CharSequence)) return false;
-
-        CharSequence chars = (CharSequence) o;
-        if (chars.length() != length()) return false;
-
-        if (o instanceof String) {
-            String other = (String) o;
-            if (other.hashCode() != hashCode()) return false;
-
-            // fall through to slow content comparison
-        } else if (o instanceof IRichSequence) {
-            IRichSequence<?> other = (IRichSequence<?>) o;
-            if (other.hashCode() != hashCode()) return false;
-
-            // fall through to slow content comparison
-        }
-        return matchChars(chars, 0, false);
+        return SequenceUtils.equals(this, o);
     }
 
     /**

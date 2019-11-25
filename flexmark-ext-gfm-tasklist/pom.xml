@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.59.56</version>
+        <version>0.59.58</version>
     </parent>
 
     <artifactId>flexmark-ext-gfm-tasklist</artifactId>

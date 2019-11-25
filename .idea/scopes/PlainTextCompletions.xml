@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="PlainTextCompletions" pattern="file[flexmark-java]:VERSION.md||file[flexmark-java]:README.md||file[flexmark-java]:assets/ideas//*.md||file[flexmark-java]:assets/comms//*.md||file[FlexmarkJavaAssets]:doc/comms//*.md||file:*/overview.md" />
+</component>

@@ -57,25 +57,15 @@
     </otherFiles>
   </component>
   <component name="MarkdownNavigatorHistory">
-    <PasteImageHistory filename="Issue315_AsideExtension.png" directory="$PROJECT_DIR$/FlexmarkJavaAssets/doc/images" onPasteImageTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="17" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="true" cropped="false" hideInapplicableOperations="true" preserveLinkFormat="false" scale="30" scalingInterpolation="1" transparentTolerance="0" saveAsDefaultOnOK="true" linkFormat="0" addHighlights="false" showHighlightCoordinates="false" showHighlights="false" mouseSelectionAddsHighlight="true" outerFilled="true" outerFillColor="-16777216" outerFillTransparent="true" outerFillAlpha="30">
+    <PasteImageHistory filename="Issue1111_Snapshot_1" directory="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues" onPasteImageTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="17" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="false" cropped="false" hideInapplicableOperations="true" preserveLinkFormat="false" scale="30" scalingInterpolation="1" transparentTolerance="0" saveAsDefaultOnOK="true" linkFormat="0" addHighlights="false" showHighlightCoordinates="false" showHighlights="false" mouseSelectionAddsHighlight="true" outerFilled="true" outerFillColor="-16777216" outerFillTransparent="true" outerFillAlpha="30">
       <highlightList>
         <ImageHighlight top="81" left="26" right="258" bottom="109" roundCorners="true" cornerRadius="10" bordered="true" borderColor="-3341249" borderWidth="2" innerFilled="false" innerFillColor="-256" innerFillTransparent="true" innerFillAlpha="30" shape="1" />
         <ImageHighlight top="183" left="258" right="714" bottom="232" roundCorners="true" cornerRadius="10" bordered="true" borderColor="-3341249" borderWidth="2" innerFilled="false" innerFillColor="-256" innerFillTransparent="true" innerFillAlpha="30" shape="1" />
       </highlightList>
       <directories>
-        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/youtrack/images" />
-        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues/images" />
-        <option name="$PROJECT_DIR$/flexmark-docx-converter/src/main/resources/emoji" />
-        <option name="$PROJECT_DIR$/flexmark-ext-tables/src/main/javadoc" />
-        <option name="$PROJECT_DIR$/flexmark-ext-admonition/src/main/resources/images" />
-        <option name="$PROJECT_DIR$/flexmark-docx-converter/src/test/resources/05-SW-Software-Development/media" />
         <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/issues" />
-        <option name="$PROJECT_DIR$/assets/images" />
-        <option name="$PROJECT_DIR$/flexmark-ext-xwiki-macros/src/main/javadoc" />
-        <option name="$PROJECT_DIR$/flexmark-java.wiki/resources" />
-        <option name="$PROJECT_DIR$/flexmark-ext-admonition/src/main/javadoc" />
-        <option name="$PROJECT_DIR$/flexmark-ext-enumerated-reference/src/main/javadoc" />
-        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/images" />
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/doc/comms/images" />
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/assets" />
       </directories>
       <filenames />
     </PasteImageHistory>

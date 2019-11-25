@@ -8,11 +8,13 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## Extra tests
+# Extra tests
+
+## Flexmark Spec
 
 Should be ignored
 
-```````````````````````````````` example(Extra tests: 1) options(IGNORE)
+```````````````````````````````` example(Flexmark Spec: 1) options(IGNORE)
 ```markdown
 ---
 ```
@@ -27,7 +29,7 @@ Document[0, 20]
 
 Should fail
 
-```````````````````````````````` example(Extra tests: 2) options(FAIL)
+```````````````````````````````` example(Flexmark Spec: 2) options(FAIL)
 ```markdown
 abc
 ```
@@ -42,7 +44,7 @@ Document[0, 20]
 
 Code fence starting with setext header marker
 
-```````````````````````````````` example Extra tests: 3
+```````````````````````````````` example Flexmark Spec: 3
 ```markdown
 ---
 ```
@@ -56,7 +58,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Extra tests: 4
+```````````````````````````````` example Flexmark Spec: 4
 ```markdown
 ===
 ```
@@ -70,9 +72,11 @@ Document[0, 19]
 ````````````````````````````````
 
 
+## Indent
+
 Make sure indentation is properly implemented
 
-```````````````````````````````` example Extra tests: 5
+```````````````````````````````` example Indent: 1
 > - item 1
 > - item 2
 >     1. item 1
@@ -111,7 +115,7 @@ Document[0, 53]
 
 Make sure indentation is properly implemented
 
-```````````````````````````````` example Extra tests: 6
+```````````````````````````````` example Indent: 2
 > - item 1
 >
 > - item 2
@@ -158,7 +162,7 @@ Document[0, 59]
 ````````````````````````````````
 
 
-```````````````````````````````` example Extra tests: 7
+```````````````````````````````` example Indent: 3
 - item 
   - sub item  
 with lazy continuation
@@ -186,7 +190,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example Extra tests: 8
+```````````````````````````````` example Indent: 4
 - item 
   - sub item  
             with lazy continuation
@@ -214,9 +218,11 @@ Document[0, 57]
 ````````````````````````````````
 
 
+## Heading
+
 headings should contain inlines
 
-```````````````````````````````` example Extra tests: 9
+```````````````````````````````` example Heading: 1
 # Atx Heading with **bold** and _italic_ and `code`
 
 Setext Heading with **bold** and _italic_ and `code`
@@ -246,6 +252,21 @@ Document[0, 158]
     Text[94, 99] chars:[94, 99, " and "]
     Code[99, 105] textOpen:[99, 100, "`"] text:[100, 104, "code"] textClose:[104, 105, "`"]
       Text[100, 104] chars:[100, 104, "code"]
+````````````````````````````````
+
+
+headings should not contain trailing spaces or markers
+
+```````````````````````````````` example(Heading: 2) options(keep-blank-lines)
+# Atx Heading Text ####
+
+.
+<h1>Atx Heading Text</h1>
+.
+Document[0, 25]
+  Heading[0, 23] textOpen:[0, 1, "#"] text:[2, 18, "Atx Heading Text"] textClose:[19, 23, "####"]
+    Text[2, 18] chars:[2, 18, "Atx H …  Text"]
+  BlankLine[24, 25]
 ````````````````````````````````
 
 
