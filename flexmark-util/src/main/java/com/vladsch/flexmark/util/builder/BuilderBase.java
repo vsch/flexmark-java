@@ -1,10 +1,7 @@
 package com.vladsch.flexmark.util.builder;
 
 import com.vladsch.flexmark.util.SharedDataKeys;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.data.NullableDataKey;
+import com.vladsch.flexmark.util.data.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+
+import static com.vladsch.flexmark.util.SharedDataKeys.EXTENSIONS;
 
 public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
 
@@ -49,7 +48,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
      * @return {@code this}
      */
     final public @NotNull T extensions(@NotNull Collection<? extends Extension> extensions) {
-        ArrayList<Extension> addedExtensions = new ArrayList<>(SharedDataKeys.EXTENSIONS.get(this).size() + extensions.size());
+        ArrayList<Extension> addedExtensions = new ArrayList<>(EXTENSIONS.get(this).size() + extensions.size());
 
         // first give extensions a chance to modify parser options
         for (Extension extension : extensions) {
@@ -75,8 +74,8 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
 
         if (!addedExtensions.isEmpty()) {
             // need to set extensions to options to make it all consistent
-            addedExtensions.addAll(0, SharedDataKeys.EXTENSIONS.get(this));
-            set(SharedDataKeys.EXTENSIONS, addedExtensions);
+            addedExtensions.addAll(0, EXTENSIONS.get(this));
+            set(EXTENSIONS, addedExtensions);
         }
 
         //noinspection unchecked
@@ -125,6 +124,15 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
         return super.set(key, value);
     }
 
+    /**
+     * Get the given key, if it does not exist then use the key's factory to create a new value and put it into the collection
+     * so that the following get of the same key will find a value
+     *
+     * @param key data key
+     * @return return stored value or newly created value
+     * @deprecated use key.get(dataHolder) instead, which will do the same thing an carries nullable information for the data
+     */
+    @Deprecated
     @Override
     public <V> V get(@NotNull DataKey<V> key) {
         return key.get(this);
@@ -135,12 +143,33 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
     }
 
     protected void loadExtensions() {
-        if (contains(SharedDataKeys.EXTENSIONS)) {
-            extensions(SharedDataKeys.EXTENSIONS.get(this));
+        if (contains(EXTENSIONS)) {
+            extensions(EXTENSIONS.get(this));
         }
     }
 
     protected BuilderBase() {
         super();
+    }
+
+    /**
+     * Remove given extensions from options[EXTENSIONS] data key.
+     * @param options   options where EXTENSIONS key is set
+     * @param excludeExtensions collection of extension classes to remove from extensions
+     * @return modified options if removed and options were immutable or the same options if nothing to remove or options were mutable.
+     */
+    public static DataHolder removeExtensions(@NotNull DataHolder options, @NotNull Collection<Class<? extends Extension>> excludeExtensions) {
+        if (options.contains(EXTENSIONS)) {
+            ArrayList<Extension> extensions = new ArrayList<>(EXTENSIONS.get(options));
+            boolean removed = extensions.removeIf(it->excludeExtensions.contains(it.getClass()));
+            if (removed) {
+                if (options instanceof MutableDataHolder) {
+                    return ((MutableDataHolder) options).set(EXTENSIONS, extensions);
+                } else {
+                    return options.toMutable().set(EXTENSIONS, extensions).toImmutable();
+                }
+            }
+        }
+        return options;
     }
 }

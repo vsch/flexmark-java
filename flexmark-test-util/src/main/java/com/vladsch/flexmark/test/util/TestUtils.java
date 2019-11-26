@@ -395,6 +395,7 @@ public class TestUtils {
         } else {
             String resolvedResourcePath = getResolvedSpecResourcePath(resourceClass.getName(), resourcePath);
             URL url = resourceClass.getResource(resolvedResourcePath);
+            assert url != null : "Resource path: '" + resolvedResourcePath + "' not found.";
             return adjustedFileUrl(url);
         }
     }
@@ -417,7 +418,7 @@ public class TestUtils {
         return (lineNumber > 0) ? fileUrl + ":" + (lineNumber + 1) : fileUrl;
     }
 
-    public static String adjustedFileUrl(URL url) {
+    public static String adjustedFileUrl(@NotNull URL url) {
         return ResourceResolverManager.adjustedFileUrl(url);
     }
 

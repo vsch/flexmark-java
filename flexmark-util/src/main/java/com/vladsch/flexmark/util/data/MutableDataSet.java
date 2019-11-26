@@ -24,7 +24,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         return set((DataKeyBase<T>) key, value);
     }
 
-    private <T> MutableDataSet set(DataKeyBase<T> key, T value) {
+    private <T> MutableDataSet set(@NotNull DataKeyBase<T> key, T value) {
         dataSet.put(key, value);
         return this;
     }

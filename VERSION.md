@@ -11,6 +11,7 @@
 - [Next 0.59.56](#next-05956)
 - [Next 0.59.60](#next-05960)
 - [0.59.58](#05958)
+- [0.59.58](#05958)
 - [0.59.56](#05956)
 - [0.59.54](#05954)
 - [0.59.52](#05952)
@@ -243,6 +244,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         stores their segments. Then it can optimize its content the same way. This will slightly
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
+
+## 0.59.58
+
+* Add: static `BuilderBase.removeExtensions(DataHolder, Collection<Class<? extends Extension>>)` for
+  removing extension classes from `SharedDataKeys.EXTENSIONS`.
 
 ## 0.59.58
 
