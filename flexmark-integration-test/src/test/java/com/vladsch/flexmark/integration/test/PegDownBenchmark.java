@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.integration.test;
 
 import com.vladsch.flexmark.test.specs.TestSpecLocator;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @State(Scope.Benchmark)
 public class PegDownBenchmark {
-    private static final String SPEC = SpecReader.readSpec(TestSpecLocator.DEFAULT_RESOURCE_LOCATION);
+    private static final String SPEC = TestSpecLocator.DEFAULT_RESOURCE_LOCATION.getResourceText();
     private static final List<String> SPEC_EXAMPLES = SpecReader.createAndReadExamples(TestSpecLocator.DEFAULT_RESOURCE_LOCATION, false).getExamplesSourceAsString();
     private static final PegDownProcessor PROCESSOR = new PegDownProcessor(Extensions.FENCED_CODE_BLOCKS);
 

@@ -3,6 +3,7 @@ package com.vladsch.flexmark.core.test.util.parser;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.specs.TestSpecLocator;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @State(Scope.Benchmark)
 public class SpecBenchmark {
-    private static final String SPEC = SpecReader.readSpec(TestSpecLocator.DEFAULT_RESOURCE_LOCATION);
+    private static final String SPEC = TestSpecLocator.DEFAULT_RESOURCE_LOCATION.getResourceText();
     private static final List<String> SPEC_EXAMPLES =
             SpecReader.createAndReadExamples(TestSpecLocator.DEFAULT_RESOURCE_LOCATION, false)
                     .getExamplesSourceAsString();

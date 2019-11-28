@@ -244,11 +244,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         stores their segments. Then it can optimize its content the same way. This will slightly
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
+* Break: move `SpecReader.getSpecInputStream(ResourceLocation)` and
+      `SpecReader.getReadSpec(ResourceLocation)` to
+      `ResourceLocation.getResourceInputStream(ResourceLocation)` and
+      `ResourceLocation.getResourceText(ResourceLocation)`
+* Add: `ResourceLocation.getResourceInputStream()` and `ResourceLocation.getResourceText()`
 
 ## 0.59.58
 
-* Add: static `BuilderBase.removeExtensions(DataHolder, Collection<Class<? extends Extension>>)` for
-  removing extension classes from `SharedDataKeys.EXTENSIONS`.
+* Add: static `BuilderBase.removeExtensions(DataHolder, Collection<Class<? extends Extension>>)`
+  for removing extension classes from `SharedDataKeys.EXTENSIONS`.
 
 ## 0.59.58
 
@@ -1064,7 +1069,7 @@ Lines | 124,192 | 118,755 | | Source Lines | 96,669 | 92,145 | | Comment Lines |
 * Fix: [#349, Translation Helper bugs], mix-up between anchors and other non-translating
   elements after translation.
 * Fix: [#349, Translation Helper bugs]
-* Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
+* Fix: [#348, WRAP_AUTO_LINKS defaults to false, Markdown loses a potential useful link]
 * Break: change `FlexmarkHtmlParser.WRAP_AUTO_LINKS` default to true
 * Fix: add `SpecReader.readExamples(String, String)` which takes resource name and file URL to
   allow for non-standard resource file locations.
@@ -1163,7 +1168,7 @@ Lines | 124,192 | 118,755 | | Source Lines | 96,669 | 92,145 | | Comment Lines |
 ## 0.42.10
 
 * Fix: [#349, Translation Helper bugs]
-* Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
+* Fix: [#348, WRAP_AUTO_LINKS defaults to false, Markdown loses a potential useful link]
 
 ## 0.42.8
 
@@ -1639,7 +1644,7 @@ Lines | 124,192 | 118,755 | | Source Lines | 96,669 | 92,145 | | Comment Lines |
 [#335, PR: Fix CR-only line separator handling]: https://github.com/vsch/flexmark-java/pull/335
 [#338, getLineNumber incorrect with Windows end of line separators]: https://github.com/vsch/flexmark-java/issues/338
 [#339, PR: Fix to line number when using Windows EOL characters.]: https://github.com/vsch/flexmark-java/pull/339
-[#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]: https://github.com/vsch/flexmark-java/issues/348
+[#348, WRAP_AUTO_LINKS defaults to false, Markdown loses a potential useful link]: https://github.com/vsch/flexmark-java/issues/348
 [#349, Translation Helper bugs]: https://github.com/vsch/flexmark-java/issues/349
 [#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
 [#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357

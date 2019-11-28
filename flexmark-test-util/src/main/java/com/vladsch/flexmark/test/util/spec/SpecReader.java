@@ -85,7 +85,7 @@ public class SpecReader {
     }
 
     public static @NotNull <S extends SpecReader> S create(@NotNull ResourceLocation location, @NotNull SpecReaderFactory<S> readerFactory) {
-        InputStream stream = getSpecInputStream(location);
+        InputStream stream = location.getResourceInputStream();
         return readerFactory.create(stream, location);
     }
 
@@ -97,36 +97,6 @@ public class SpecReader {
         S reader = create(location, readerFactory);
         reader.readExamples();
         return reader;
-    }
-
-    public static @NotNull String readSpec(@NotNull ResourceLocation location) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            String line;
-            InputStream inputStream = getSpecInputStream(location);
-            InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-            BufferedReader reader = new BufferedReader(streamReader);
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append("\n");
-            }
-            reader.close();
-            streamReader.close();
-            inputStream.close();
-            return sb.toString();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static @NotNull InputStream getSpecInputStream(@NotNull ResourceLocation location) {
-        String useSpecResource = location.getResolvedResourcePath();
-        InputStream stream = location.getResourceClass().getResourceAsStream(useSpecResource);
-        if (stream == null) {
-            throw new IllegalStateException("Could not load " + location);
-        }
-
-        return stream;
     }
 
     public void readExamples() {
