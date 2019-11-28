@@ -4,6 +4,12 @@ import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.TestUtils;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 public class ResourceLocation {
     public static final ResourceLocation NULL = of(Object.class, "", "");
 
@@ -50,6 +56,16 @@ public class ResourceLocation {
 
     public boolean isNull() {
         return this == NULL;
+    }
+
+    @NotNull
+    public InputStream getResourceInputStream() {
+        return getResourceInputStream(this);
+    }
+
+    @NotNull
+    public String getResourceText() {
+        return getResourceText(this);
     }
 
     @Override
@@ -105,5 +121,37 @@ public class ResourceLocation {
 
     public static @NotNull ResourceLocation of(@NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String fileUrl) {
         return new ResourceLocation(resourceClass, resourcePath, fileUrl);
+    }
+
+    @NotNull
+    public static String getResourceText(@NotNull ResourceLocation location) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            String line;
+            InputStream inputStream = getResourceInputStream(location);
+            InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+            BufferedReader reader = new BufferedReader(streamReader);
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
+            }
+            reader.close();
+            streamReader.close();
+            inputStream.close();
+            return sb.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @NotNull
+    public static InputStream getResourceInputStream(@NotNull ResourceLocation location) {
+        String useSpecResource = location.getResolvedResourcePath();
+        InputStream stream = location.getResourceClass().getResourceAsStream(useSpecResource);
+        if (stream == null) {
+            throw new IllegalStateException("Could not load " + location);
+        }
+
+        return stream;
     }
 }
