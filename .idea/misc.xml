@@ -54,6 +54,7 @@
         <option value="$PROJECT_DIR$/flexmark-osgi/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-pdf-converter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-profile-pegdown/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-test-specs/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-test-util/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-tree-iteration/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-util/pom.xml" />
