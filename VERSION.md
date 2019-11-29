@@ -10,7 +10,7 @@
 - [Next](#next)
 - [Next 0.59.56](#next-05956)
 - [Next 0.59.60](#next-05960)
-- [0.59.58](#05958)
+- [0.59.60](#05960)
 - [0.59.58](#05958)
 - [0.59.56](#05956)
 - [0.59.54](#05954)
@@ -244,14 +244,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         stores their segments. Then it can optimize its content the same way. This will slightly
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
+
+## 0.59.60
+
+* Add: `SettableInstance` and `SettableExtractedInstance` classes to facilitate implementation
+  of settings which can be changed through spec example options.
 * Break: move `SpecReader.getSpecInputStream(ResourceLocation)` and
-      `SpecReader.getReadSpec(ResourceLocation)` to
-      `ResourceLocation.getResourceInputStream(ResourceLocation)` and
-      `ResourceLocation.getResourceText(ResourceLocation)`
+  `SpecReader.getReadSpec(ResourceLocation)` to
+  `ResourceLocation.getResourceInputStream(ResourceLocation)` and
+  `ResourceLocation.getResourceText(ResourceLocation)`
 * Add: `ResourceLocation.getResourceInputStream()` and `ResourceLocation.getResourceText()`
-
-## 0.59.58
-
 * Add: static `BuilderBase.removeExtensions(DataHolder, Collection<Class<? extends Extension>>)`
   for removing extension classes from `SharedDataKeys.EXTENSIONS`.
 

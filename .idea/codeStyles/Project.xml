@@ -1,5 +1,6 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
+    <option name="LINE_SEPARATOR" value="&#10;" />
     <option name="FIELD_NAME_PREFIX" value="my" />
     <option name="STATIC_FIELD_NAME_PREFIX" value="our" />
     <option name="PREFER_LONGER_NAMES" value="false" />
