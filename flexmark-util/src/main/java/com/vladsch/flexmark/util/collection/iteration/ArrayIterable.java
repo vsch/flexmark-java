@@ -18,6 +18,10 @@ package com.vladsch.flexmark.util.collection.iteration;
 import org.jetbrains.annotations.NotNull;
 
 public class ArrayIterable<T> implements ReversibleIterable<T> {
+    public static <T> ArrayIterable<T> of(T[] items) {
+        return new ArrayIterable<>(items);
+    }
+
     private final T[] myArray;
     private final int myStartIndex;
     private final int myEndIndex;
