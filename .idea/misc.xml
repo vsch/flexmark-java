@@ -63,6 +63,11 @@
         <option value="$PROJECT_DIR$/pom.xml" />
       </set>
     </option>
+    <option name="ignoredPathMasks">
+      <list>
+        <option value="*" />
+      </list>
+    </option>
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />

@@ -475,4 +475,33 @@ public class TestUtils {
         fileUrl = fileUrl.substring(FILE_PROTOCOL.length());
         return fileUrl;
     }
+
+    // handle custom string options
+    public static DataHolder customStringOption(@NotNull String option, @Nullable String params, @NotNull Function<String, DataHolder> resolver) {
+        if (params != null) {
+            // allow escape
+            String text = params
+                    .replace("\\\\", "\\")
+                    .replace("\\]", "]")
+                    .replace("\\t", "\t")
+                    .replace("\\n", "\n")
+                    .replace("\\r", "\r")
+                    .replace("\\b", "\b");
+            return resolver.apply(text);
+        }
+        return resolver.apply(null);
+    }
+
+    public static DataHolder customIntOption(@NotNull String option, @Nullable String params, @NotNull Function<Integer, DataHolder> resolver) {
+        int value = -1;
+        if (params != null) {
+            if (!params.matches("\\d*")) {
+                throw new IllegalStateException("'" + option + "' option requires a numeric or empty (for default) argument");
+            }
+
+            value = Integer.parseInt(params);
+        }
+
+        return resolver.apply(value);
+    }
 }

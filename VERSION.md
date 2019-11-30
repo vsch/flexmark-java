@@ -10,6 +10,7 @@
 - [Next](#next)
 - [Next 0.59.56](#next-05956)
 - [Next 0.59.60](#next-05960)
+- [Next 0.59.62](#next-05962)
 - [0.59.60](#05960)
 - [0.59.58](#05958)
 - [0.59.56](#05956)
@@ -244,6 +245,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         stores their segments. Then it can optimize its content the same way. This will slightly
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
+
+## Next 0.59.62
+
+* Add: `TestUtils.customIntOption(String, String, Function<Integer, DataHolder>)` and
+  `TestUtils.customStringOption(String, String, Function<String, DataHolder>)` to ease creating
+  `CUSTOM_OPTION` option types.
 
 ## 0.59.60
 
