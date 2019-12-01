@@ -10,7 +10,7 @@
 - [Next](#next)
 - [Next 0.59.56](#next-05956)
 - [Next 0.59.60](#next-05960)
-- [Next 0.59.62](#next-05962)
+- [0.59.62](#05962)
 - [0.59.60](#05960)
 - [0.59.58](#05958)
 - [0.59.56](#05956)
@@ -246,11 +246,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         increase `charAt` computation but greatly reduce the memory usage for segmented
         sequences.
 
-## Next 0.59.62
+## 0.59.62
 
 * Fix: remove space to `&nbsp;` conversion of spec example first line. Was done to allow GitHub
   to display spec examples as fenced code. No longer needed since GitHub switched to CommonMark
   parser.
+* Fix: update all spec files to have no nb-sp in example opener.
 * Add: `TestUtils.customIntOption(String, String, Function<Integer, DataHolder>)` and
   `TestUtils.customStringOption(String, String, Function<String, DataHolder>)` to ease creating
   `CUSTOM_OPTION` option types.
