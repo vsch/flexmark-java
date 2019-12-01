@@ -14,7 +14,7 @@ Converts spec example text to SpecExample nodes.
 
 Empty
 
-```````````````````````````````` example SpecExample: 1
+```````````````````````````````` example SpecExample: 1
 ```````````````` example
 ````````````````
 .
@@ -28,7 +28,7 @@ Document[0, 41]
 
 Empty with nbsp for space on first line
 
-```````````````````````````````` example SpecExample: 2
+```````````````````````````````` example SpecExample: 2
 ```````````````` example
 ````````````````
 .
@@ -42,7 +42,7 @@ Document[0, 41]
 
 Single spacer
 
-```````````````````````````````` example SpecExample: 3
+```````````````````````````````` example SpecExample: 3
 ```````````````` example
 …
 ````````````````
@@ -59,7 +59,7 @@ Document[0, 43]
 
 Two spacers
 
-```````````````````````````````` example SpecExample: 4
+```````````````````````````````` example SpecExample: 4
 ```````````````` example
 …
 …
@@ -79,7 +79,7 @@ Document[0, 45]
 
 Extra spacer
 
-```````````````````````````````` example SpecExample: 5
+```````````````````````````````` example SpecExample: 5
 ```````````````` example
 …
 …
@@ -102,7 +102,7 @@ Document[0, 47]
 
 Source Only
 
-```````````````````````````````` example SpecExample: 6
+```````````````````````````````` example SpecExample: 6
 ```````````````` example
 Markdown only
 ````````````````
@@ -119,7 +119,7 @@ Document[0, 55]
 
 Source Only, empty HTML
 
-```````````````````````````````` example SpecExample: 7
+```````````````````````````````` example SpecExample: 7
 ```````````````` example
 Markdown only
 …
@@ -139,7 +139,7 @@ Document[0, 57]
 
 Source Only, empty HTML and AST
 
-```````````````````````````````` example SpecExample: 8
+```````````````````````````````` example SpecExample: 8
 ```````````````` example
 Markdown only
 …
@@ -162,7 +162,7 @@ Document[0, 59]
 
 Html Only, no AST
 
-```````````````````````````````` example SpecExample: 9
+```````````````````````````````` example SpecExample: 9
 ```````````````` example
 …
 <pre><code class="language-markdown">Markdown only</code></pre>
@@ -193,7 +193,7 @@ Document[0, 139]
 
 Html Only, empty AST
 
-```````````````````````````````` example SpecExample: 10
+```````````````````````````````` example SpecExample: 10
 ```````````````` example
 …
 <pre><code class="language-markdown">Markdown only</code></pre>
@@ -227,7 +227,7 @@ Document[0, 141]
 
 Ast Only
 
-```````````````````````````````` example SpecExample: 11
+```````````````````````````````` example SpecExample: 11
 ```````````````` example
 …
 …
@@ -254,7 +254,7 @@ Document[0, 236]
 
 Source and HTML, no AST
 
-```````````````````````````````` example SpecExample: 12
+```````````````````````````````` example SpecExample: 12
 ```````````````` example
 Markdown only
 …
@@ -288,7 +288,7 @@ Document[0, 153]
 
 Source and HTML, empty AST
 
-```````````````````````````````` example SpecExample: 13
+```````````````````````````````` example SpecExample: 13
 ```````````````` example
 Markdown only
 …
@@ -325,7 +325,7 @@ Document[0, 155]
 
 Source, HTML and AST
 
-```````````````````````````````` example SpecExample: 14
+```````````````````````````````` example SpecExample: 14
 ```````````````` example
 Markdown only
 …
@@ -369,7 +369,7 @@ Document[0, 346]
 
 Fenced code option no language prefix
 
-```````````````````````````````` example(SpecExample: 15) options(no-language-prefix)
+```````````````````````````````` example(SpecExample: 15) options(no-language-prefix)
 ```````````````` example
 Markdown only
 …
@@ -413,7 +413,7 @@ Document[0, 346]
 
 Plain Coordinates, section
 
-```````````````````````````````` example SpecExample: 16
+```````````````````````````````` example SpecExample: 16
 ```````````````` example Section
 ````````````````
 .
@@ -428,7 +428,7 @@ Document[0, 49]
 
 Plain Coordinates, number
 
-```````````````````````````````` example SpecExample: 17
+```````````````````````````````` example SpecExample: 17
 ```````````````` example :number
 ````````````````
 .
@@ -443,7 +443,7 @@ Document[0, 49]
 
 Plain Coordinates, section and number
 
-```````````````````````````````` example SpecExample: 18
+```````````````````````````````` example SpecExample: 18
 ```````````````` example Section:number
 …
 …
@@ -464,7 +464,7 @@ Document[0, 60]
 
 Wrapped Coordinates, section
 
-```````````````````````````````` example SpecExample: 19
+```````````````````````````````` example SpecExample: 19
 ```````````````` example(Section)
 ````````````````
 .
@@ -479,7 +479,7 @@ Document[0, 50]
 
 Wrapped Coordinates, number
 
-```````````````````````````````` example SpecExample: 20
+```````````````````````````````` example SpecExample: 20
 ```````````````` example(:number)
 ````````````````
 .
@@ -494,7 +494,7 @@ Document[0, 50]
 
 Wrapped Coordinates, section and number
 
-```````````````````````````````` example SpecExample: 21
+```````````````````````````````` example SpecExample: 21
 ```````````````` example(Section:number)
 …
 …
@@ -515,7 +515,7 @@ Document[0, 61]
 
 Wrapped Coordinates, section
 
-```````````````````````````````` example SpecExample: 22
+```````````````````````````````` example SpecExample: 22
 ```````````````` example(Section
 ````````````````
 .
@@ -530,7 +530,7 @@ Document[0, 49]
 
 Wrapped Coordinates, number
 
-```````````````````````````````` example SpecExample: 23
+```````````````````````````````` example SpecExample: 23
 ```````````````` example(:number
 ````````````````
 .
@@ -545,7 +545,7 @@ Document[0, 49]
 
 Wrapped Coordinates, section and number
 
-```````````````````````````````` example SpecExample: 24
+```````````````````````````````` example SpecExample: 24
 ```````````````` example(Section:number
 …
 …
@@ -566,7 +566,7 @@ Document[0, 60]
 
 Wrapped Coordinates, section
 
-```````````````````````````````` example SpecExample: 25
+```````````````````````````````` example SpecExample: 25
 ```````````````` example Section)
 ````````````````
 .
@@ -581,7 +581,7 @@ Document[0, 50]
 
 Wrapped Coordinates, number
 
-```````````````````````````````` example SpecExample: 26
+```````````````````````````````` example SpecExample: 26
 ```````````````` example :number)
 ````````````````
 .
@@ -596,7 +596,7 @@ Document[0, 50]
 
 Wrapped Coordinates, section and number
 
-```````````````````````````````` example SpecExample: 27
+```````````````````````````````` example SpecExample: 27
 ```````````````` example Section:number)
 …
 …
@@ -617,7 +617,7 @@ Document[0, 61]
 
 Plain options
 
-```````````````````````````````` example SpecExample: 28
+```````````````````````````````` example SpecExample: 28
 ```````````````` example options
 ````````````````
 .
@@ -632,7 +632,7 @@ Document[0, 49]
 
 Wrapped options
 
-```````````````````````````````` example SpecExample: 29
+```````````````````````````````` example SpecExample: 29
 ```````````````` example options()
 ````````````````
 .
@@ -647,7 +647,7 @@ Document[0, 51]
 
 Wrapped options
 
-```````````````````````````````` example SpecExample: 30
+```````````````````````````````` example SpecExample: 30
 ```````````````` example options(
 …
 …
@@ -668,7 +668,7 @@ Document[0, 54]
 
 Unwrapped options as section
 
-```````````````````````````````` example SpecExample: 31
+```````````````````````````````` example SpecExample: 31
 ```````````````` example options)
 …
 …
@@ -689,7 +689,7 @@ Document[0, 54]
 
 Plain options
 
-```````````````````````````````` example SpecExample: 32
+```````````````````````````````` example SpecExample: 32
 ```````````````` example options option
 ````````````````
 .
@@ -705,7 +705,7 @@ Document[0, 56]
 
 Wrapped options
 
-```````````````````````````````` example SpecExample: 33
+```````````````````````````````` example SpecExample: 33
 ```````````````` example options(option)
 ````````````````
 .
@@ -721,7 +721,7 @@ Document[0, 57]
 
 Wrapped options
 
-```````````````````````````````` example SpecExample: 34
+```````````````````````````````` example SpecExample: 34
 ```````````````` example options(option
 …
 …
@@ -743,7 +743,7 @@ Document[0, 60]
 
 Unwrapped options as section
 
-```````````````````````````````` example SpecExample: 35
+```````````````````````````````` example SpecExample: 35
 ```````````````` example options option)
 …
 …
@@ -765,7 +765,7 @@ Document[0, 61]
 
 Wrapped options
 
-```````````````````````````````` example SpecExample: 36
+```````````````````````````````` example SpecExample: 36
 ```````````````` example options(1, 2,, ,  ,3 , 4 )
 ````````````````
 .
@@ -790,7 +790,7 @@ Document[0, 68]
 
 Unwrapped coords Wrapped options
 
-```````````````````````````````` example SpecExample: 37
+```````````````````````````````` example SpecExample: 37
 ```````````````` example section:number options(1, 2,3 , 4 )
 ````````````````
 .
@@ -813,7 +813,7 @@ Document[0, 77]
 
 Wrapped coords Wrapped options
 
-```````````````````````````````` example SpecExample: 38
+```````````````````````````````` example SpecExample: 38
 ```````````````` example(section:number) options(1, 2,3 , 4 )
 ````````````````
 .
@@ -836,7 +836,7 @@ Document[0, 78]
 
 Source, HTML and AST and options
 
-```````````````````````````````` example(SpecExample: 39) options(as-def-list)
+```````````````````````````````` example(SpecExample: 39) options(as-def-list)
 ```````````````` example(Section: Number) options(option)
 Markdown only
 
@@ -896,7 +896,7 @@ Document[0, 349]
 
 Source, HTML and AST and options
 
-```````````````````````````````` example(SpecExample: 40) options(as-fenced-code)
+```````````````````````````````` example(SpecExample: 40) options(as-fenced-code)
 ```````````````` example(Section: Number) options(option)
 Markdown only
 
@@ -940,7 +940,7 @@ Document[0, 349]
 
 No option nodes
 
-```````````````````````````````` example(SpecExample: 41) options(no-option-nodes)
+```````````````````````````````` example(SpecExample: 41) options(no-option-nodes)
 ```````````````` example options(1, 2,, ,  ,3 , 4 )
 ````````````````
 .
@@ -956,7 +956,7 @@ Document[0, 68]
 
 Render sections
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 ```````````````` example(Section: Number) options(option)
 Markdown only
 
@@ -1007,7 +1007,7 @@ Document[0, 349]
 
 Fenced code rendering
 
-```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, as-fenced-code)
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, as-fenced-code)
 ```````````````` example(Section: Number) options(option)
 Markdown only
 
@@ -1051,7 +1051,7 @@ Document[0, 349]
 
 Definition list rendering
 
-```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, as-def-list)
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, as-def-list)
 ```````````````` example(Section: Number) options(option)
 Markdown only
 

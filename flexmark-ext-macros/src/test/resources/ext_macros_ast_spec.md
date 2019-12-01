@@ -30,13 +30,13 @@ an inline text.
 If a macro reference contains an undefined `macroName` then the node will be rendered as plain
 text consisting of `<<<macroName>>>`
 
-Recursive macro references are resolved by stopping macro expansion on the first macro reference which
-refers to a macro definition which is currently being expanded. The first recursive macro
+Recursive macro references are resolved by stopping macro expansion on the first macro reference
+which refers to a macro definition which is currently being expanded. The first recursive macro
 reference will result in no expansion.
 
 invalid macro names are ignored
 
-```````````````````````````````` example Macros: 1
+```````````````````````````````` example Macros: 1
 >>>macro name
 <<<
 
@@ -63,7 +63,7 @@ Document[0, 19]
 
 cannot be indented
 
-```````````````````````````````` example Macros: 2
+```````````````````````````````` example Macros: 2
  >>>macro
 <<<
 
@@ -90,7 +90,7 @@ Document[0, 15]
 
 cannot be in other elements
 
-```````````````````````````````` example Macros: 3
+```````````````````````````````` example Macros: 3
 1. list item
 
    >>>macro
@@ -128,7 +128,7 @@ Document[0, 34]
 
 takes valid characters
 
-```````````````````````````````` example Macros: 4
+```````````````````````````````` example Macros: 4
 >>>abc-xyzABC_XYZ09
 <<<
 
@@ -141,7 +141,7 @@ Document[0, 25]
 
 empty macro content is allowed
 
-```````````````````````````````` example Macros: 5
+```````````````````````````````` example Macros: 5
 >>>macro
 <<<
 
@@ -159,7 +159,7 @@ Document[0, 36]
 
 simple text
 
-```````````````````````````````` example Macros: 6
+```````````````````````````````` example Macros: 6
 >>>macro
 simple text
 <<<
@@ -180,7 +180,7 @@ Document[0, 48]
 
 complex content
 
-```````````````````````````````` example Macros: 7
+```````````````````````````````` example Macros: 7
 >>>macro
 * list item 1
 * list item 2
@@ -238,7 +238,7 @@ Document[0, 114]
 
 macro tables
 
-```````````````````````````````` example Macros: 8
+```````````````````````````````` example Macros: 8
 >>>macro
 | heading     |
 |:------------|
@@ -291,7 +291,7 @@ Document[0, 97]
 
 complex content for tables
 
-```````````````````````````````` example Macros: 9
+```````````````````````````````` example Macros: 9
 >>>macro
 | heading     |
 |:------------|
@@ -371,7 +371,7 @@ Document[0, 184]
 
 GitLab multi-line block quotes
 
-```````````````````````````````` example Macros: 10
+```````````````````````````````` example Macros: 10
 >>>macro
 >>>
 Block Quote
@@ -399,7 +399,7 @@ Document[0, 56]
 
 Nested GitLab multi-line block quotes
 
-```````````````````````````````` example Macros: 11
+```````````````````````````````` example Macros: 11
 >>>macro
 >>>
 Block Quote
@@ -438,7 +438,7 @@ Document[0, 83]
 
 Recursion cut short
 
-```````````````````````````````` example Recursive: 1
+```````````````````````````````` example Recursive: 1
 >>>macro1
 Macro 1
 <<<macro2>>>
@@ -482,7 +482,7 @@ Document[0, 120]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 >>>macro
 >>>
 Block Quote

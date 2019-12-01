@@ -116,7 +116,7 @@ Will result in the following HTML:
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 1
+```````````````````````````````` example Definition List Extension: 1
 : definition item 
 .
 <p>: definition item</p>
@@ -129,7 +129,7 @@ Document[0, 18]
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 2
+```````````````````````````````` example Definition List Extension: 2
 - bullet item
 : definition item 
 .
@@ -150,7 +150,7 @@ Document[0, 32]
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 3
+```````````````````````````````` example Definition List Extension: 3
 1. numbered item
 : definition item 
 .
@@ -171,7 +171,7 @@ Document[0, 35]
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 4
+```````````````````````````````` example Definition List Extension: 4
 ## Header
 : definition item 
 .
@@ -188,7 +188,7 @@ Document[0, 28]
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 5
+```````````````````````````````` example Definition List Extension: 5
 ```markdown
 some stuff
 ```
@@ -209,7 +209,7 @@ Document[0, 46]
 
 not a definition in a lazy block quote
 
-```````````````````````````````` example Definition List Extension: 6
+```````````````````````````````` example Definition List Extension: 6
 > definition
 : definition item 
 .
@@ -229,7 +229,7 @@ Document[0, 31]
 
 a definition in a block quote
 
-```````````````````````````````` example Definition List Extension: 7
+```````````````````````````````` example Definition List Extension: 7
 > Definition Term
 > : definition item 
 .
@@ -254,7 +254,7 @@ Document[0, 38]
 
 simple list
 
-```````````````````````````````` example Definition List Extension: 8
+```````````````````````````````` example Definition List Extension: 8
 Definition Term
 : definition item 
 .
@@ -276,7 +276,7 @@ Document[0, 34]
 
 simple list with a tab
 
-```````````````````````````````` example Definition List Extension: 9
+```````````````````````````````` example Definition List Extension: 9
 Definition Term
 :→definition item 
 .
@@ -298,7 +298,7 @@ Document[0, 34]
 
 A simple definition list:
 
-```````````````````````````````` example Definition List Extension: 10
+```````````````````````````````` example Definition List Extension: 10
 Term 1
 :   Definition 1
 
@@ -332,7 +332,7 @@ Document[0, 50]
 
 With multiple terms:
 
-```````````````````````````````` example Definition List Extension: 11
+```````````````````````````````` example Definition List Extension: 11
 Term 1
 Term 2
 :   Definition 1
@@ -376,7 +376,7 @@ Document[0, 64]
 
 With multiple terms, broken into two lists:
 
-```````````````````````````````` example(Definition List Extension: 12) options(break-list)
+```````````````````````````````` example(Definition List Extension: 12) options(break-list)
 Term 1
 Term 2
 :   Definition 1
@@ -423,7 +423,7 @@ Document[0, 65]
 
 With multiple terms, broken into two lists:
 
-```````````````````````````````` example(Definition List Extension: 13) options(break-list)
+```````````````````````````````` example(Definition List Extension: 13) options(break-list)
 Term 1
 Term 2
 :   Definition 1
@@ -457,7 +457,7 @@ Document[0, 51]
 
 With multiple terms, not broken into two lists:
 
-```````````````````````````````` example Definition List Extension: 14
+```````````````````````````````` example Definition List Extension: 14
 Term 1
 Term 2
 :   Definition 1
@@ -502,7 +502,7 @@ Document[0, 65]
 
 With multiple terms, not broken into two lists:
 
-```````````````````````````````` example Definition List Extension: 15
+```````````````````````````````` example Definition List Extension: 15
 Term 1
 Term 2
 :   Definition 1
@@ -541,7 +541,7 @@ Document[0, 51]
 
 With multiple terms, broken into two lists:
 
-```````````````````````````````` example(Definition List Extension: 16) options(break-list)
+```````````````````````````````` example(Definition List Extension: 16) options(break-list)
 Term 1
 :   Definition 1 (paragraph)
 
@@ -569,7 +569,7 @@ Document[0, 76]
 
 With multiple terms, not broken into two lists:
 
-```````````````````````````````` example Definition List Extension: 17
+```````````````````````````````` example Definition List Extension: 17
 Term 1
 :   Definition 1 (paragraph)
 
@@ -602,7 +602,7 @@ Document[0, 76]
 
 With multiple definitions:
 
-```````````````````````````````` example Definition List Extension: 18
+```````````````````````````````` example Definition List Extension: 18
 Term 1
 :   Definition 1
 :   Definition 2
@@ -646,7 +646,7 @@ Document[0, 84]
 
 With multiple lines per definition:
 
-```````````````````````````````` example Definition List Extension: 19
+```````````````````````````````` example Definition List Extension: 19
 Term 1
 :   Definition 1 line 1 ...
 Definition 1 line 2
@@ -706,7 +706,7 @@ Document[0, 216]
 
 With paragraphs:
 
-```````````````````````````````` example Definition List Extension: 20
+```````````````````````````````` example Definition List Extension: 20
 Term 1
 
 :   Definition 1 (paragraph)
@@ -746,7 +746,7 @@ Document[0, 76]
 
 With multiple paragraphs:
 
-```````````````````````````````` example Definition List Extension: 21
+```````````````````````````````` example Definition List Extension: 21
 Term 1
 
 :   Definition 1 paragraph 1 line 1 ...
@@ -812,7 +812,7 @@ Document[0, 327]
 
 A mix:
 
-```````````````````````````````` example Definition List Extension: 22
+```````````````````````````````` example Definition List Extension: 22
 Term 1
 Term 2
 
@@ -962,7 +962,7 @@ Document[0, 815]
 
 inlines allowed
 
-```````````````````````````````` example Definition List Extension: 23
+```````````````````````````````` example Definition List Extension: 23
 Definition **Term**
 : definition `item` 
 .
@@ -988,7 +988,7 @@ Document[0, 40]
 
 inlines will be split
 
-```````````````````````````````` example Definition List Extension: 24
+```````````````````````````````` example Definition List Extension: 24
 Definition **Term 
 Another** Definition Term 
 : definition `item`
@@ -1017,7 +1017,7 @@ Document[0, 65]
 
 don't include preceding blank lines
 
-```````````````````````````````` example Definition List Extension: 25
+```````````````````````````````` example Definition List Extension: 25
 - bullet item
 
 
@@ -1049,7 +1049,7 @@ Document[0, 50]
 
 nested elements allowed
 
-```````````````````````````````` example Definition List Extension: 26
+```````````````````````````````` example Definition List Extension: 26
 Definition **Term**
 : definition `item` 
     
@@ -1108,7 +1108,7 @@ Document[0, 124]
 
 With disparate looseness with auto-loose
 
-```````````````````````````````` example Definition List Extension: 27
+```````````````````````````````` example Definition List Extension: 27
 Term 1
 
 :   Definition 1 (paragraph)
@@ -1147,7 +1147,7 @@ Document[0, 75]
 
 With disparate looseness without auto-loose
 
-```````````````````````````````` example(Definition List Extension: 28) options(no-auto-loose)
+```````````````````````````````` example(Definition List Extension: 28) options(no-auto-loose)
 Term 1
 
 :   Definition 1 (paragraph)
@@ -1182,7 +1182,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 29
+```````````````````````````````` example Definition List Extension: 29
 Definition Term
 : Definition of above term
 : Another definition of above term
@@ -1207,7 +1207,7 @@ Document[0, 77]
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 30
+```````````````````````````````` example Definition List Extension: 30
 Definition Term
 : Definition of above term
 : Another definition of above term
@@ -1235,7 +1235,7 @@ Document[0, 79]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 Definition Term
 : definition item 
 .
@@ -1257,7 +1257,7 @@ Document[0, 34]
 
 ## Blank Lines
 
-```````````````````````````````` example(Blank Lines: 1) options(blank-lines-in-ast)
+```````````````````````````````` example(Blank Lines: 1) options(blank-lines-in-ast)
 Term 1
 Term 2
 
@@ -1290,7 +1290,7 @@ Document[0, 93]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Blank Lines: 2) options(blank-lines-in-ast)
+```````````````````````````````` example(Blank Lines: 2) options(blank-lines-in-ast)
 Term 1
 Term 2
 
@@ -1335,7 +1335,7 @@ Document[0, 176]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Blank Lines: 3) options(blank-lines-in-ast)
+```````````````````````````````` example(Blank Lines: 3) options(blank-lines-in-ast)
 Term 1
 Term 2
 
@@ -1493,7 +1493,7 @@ Document[0, 815]
 
 Check indentation, there is a bug, this should parse as nested list items. it was not.
 
-```````````````````````````````` example Blank Lines: 4
+```````````````````````````````` example Blank Lines: 4
 Definition
 : 1. dd asdlfalsdfj asldfj las;dfj l;asfdj als fjdl;asj fd;lajs
        fdl;ajsdf l;ajsfdl;ajsf dl;asjfd l;ajsdf l;asdjfl;asdfj l;asfdj
@@ -1535,7 +1535,7 @@ Document[0, 182]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Blank Lines: 5) options(blank-lines-in-ast)
+```````````````````````````````` example(Blank Lines: 5) options(blank-lines-in-ast)
 Definition
 : 1. dd asdlfalsdfj asldfj las;dfj l;asfdj als fjdl;asj fd;lajs
        fdl;ajsdf l;ajsfdl;ajsf dl;asjfd l;ajsdf l;asdjfl;asdfj l;asfdj
@@ -1581,7 +1581,7 @@ Document[0, 182]
 
 ## Suppress HTML block tag EOL
 
-```````````````````````````````` example(Suppress HTML block tag EOL: 1) options(suppress-format-eol)
+```````````````````````````````` example(Suppress HTML block tag EOL: 1) options(suppress-format-eol)
 Term 1
 Term 2
 
@@ -1717,7 +1717,7 @@ Document[0, 815]
 
 Issue #172, Markdown parser cutting words out
 
-```````````````````````````````` example Issue: 1
+```````````````````````````````` example Issue: 1
 Commit Message Length Configuration 
 ===================================
                                                                                                                                           

@@ -280,6 +280,10 @@ public class TestUtils {
     }
 
     public static void addSpecExample(boolean includeExampleStart, StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
+        addSpecExample(includeExampleStart, true, sb, source, html, ast, optionsSet, includeExampleCoords, section, number);
+    }
+
+    public static void addSpecExample(boolean includeExampleStart, boolean toVisibleSpecText, StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
         // include source so that diff can be used to update spec
         StringBuilder header = new StringBuilder();
 
@@ -298,17 +302,19 @@ public class TestUtils {
             header.append("\n");
         }
 
-        // replace spaces so GitHub can display example as code fence, but not for original spec which has no coords
-        if (includeExampleCoords) { sb.append(header.toString().replace(' ', '\u00A0')); } else sb.append(header.toString());
+        // NOTE: replacing spaces so GitHub can display example as code fence, but not for original spec which has no coords
+        //   is no longer an issue since GitHub switched to CommonMark parser a while back
+//        if (includeExampleCoords) { sb.append(header.toString().replace(' ', '\u00A0')); } else sb.append(header.toString());
+        sb.append(header);
 
+        // FIX: When multi-sections are implemented need a way to specify per section visibleSpecText
+        String sourceAndHtml = suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html);
+        sb.append(toVisibleSpecText ? toVisibleSpecText(sourceAndHtml) : sourceAndHtml);
         if (ast != null) {
-            sb.append(toVisibleSpecText(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
-                    .append(SpecReader.TYPE_BREAK).append("\n")
-                    .append(ast).append(SpecReader.EXAMPLE_BREAK).append("\n");
-        } else {
-            sb.append(toVisibleSpecText(suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html)))
-                    .append(SpecReader.EXAMPLE_BREAK).append("\n");
+            sb.append(SpecReader.TYPE_BREAK).append("\n");
+            sb.append(ast);
         }
+        sb.append(SpecReader.EXAMPLE_BREAK).append("\n");
     }
 
     /**

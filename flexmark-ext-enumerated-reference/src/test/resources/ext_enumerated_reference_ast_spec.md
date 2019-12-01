@@ -23,7 +23,7 @@ type. Outside of a enumerated reference definition it will render `0`
 
 no spaces between brackets
 
-```````````````````````````````` example Enumerated Reference: 1
+```````````````````````````````` example Enumerated Reference: 1
 ![Fig](http://example.com/test.png){#fig:test}  
 [#fig:test]
 
@@ -129,7 +129,7 @@ Document[0, 285]
 
 missing enum ref definition
 
-```````````````````````````````` example Enumerated Reference: 2
+```````````````````````````````` example Enumerated Reference: 2
 abc{#fig:test}
 
 [#fig:test]
@@ -158,7 +158,7 @@ Document[0, 42]
 
 starting with digit is not a reference
 
-```````````````````````````````` example Enumerated Reference: 3
+```````````````````````````````` example Enumerated Reference: 3
 [#123, GitHub Issue]
 
 [#123, GitHub Issue]: https://github.com/vsch/flexmark-java/issues/123
@@ -178,7 +178,7 @@ Document[0, 94]
 
 Allow using empty format ref in heading
 
-```````````````````````````````` example Heading: 1
+```````````````````````````````` example Heading: 1
 # [#hdr] Numbered Heading
     
 [@hdr]: [#].
@@ -198,7 +198,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 2
+```````````````````````````````` example Heading: 2
 # [#hdr] Numbered Heading
     
 # [#hdr] Numbered Heading
@@ -227,7 +227,7 @@ Document[0, 76]
 
 Compound numbering
 
-```````````````````````````````` example Heading: 3
+```````````````````````````````` example Heading: 3
 ## [#hdr1:hdr2:] Numbered Heading 0.1
     
 # [#hdr1] Numbered Heading 1
@@ -283,7 +283,7 @@ Document[0, 231]
 
 `.` appended by default if last element for format is empty Enumerated Reference Text or Link
 
-```````````````````````````````` example Heading: 4
+```````````````````````````````` example Heading: 4
 # [#hdr1] Numbered Heading 1
     
 ## [#hdr1:hdr2:] Numbered Heading 1.1
@@ -328,7 +328,7 @@ Document[0, 186]
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 5
+```````````````````````````````` example Heading: 5
 # [#hd1] Heading 1
 
 # [#hd1] Heading 2
@@ -361,7 +361,7 @@ Document[0, 72]
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 6
+```````````````````````````````` example Heading: 6
 # [#hd1] Heading 1
 
 ## [#hd1:hd2:] Heading 1.1
@@ -462,7 +462,7 @@ Document[0, 372]
 
 No block elements, only text parsing so the following is not a list item
 
-```````````````````````````````` example Heading: 7
+```````````````````````````````` example Heading: 7
 # [#hd1] Heading 1
 
 [@hd1]: * list [#]
@@ -481,7 +481,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 8
+```````````````````````````````` example Heading: 8
 # [#hd1] Heading 1
 
 [@hd1]: *list* [#]
@@ -502,7 +502,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 9
+```````````````````````````````` example Heading: 9
 # [#hd1] Heading 1
 
 [hd1]: https://example.com
@@ -525,7 +525,7 @@ Document[0, 65]
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 10
+```````````````````````````````` example Heading: 10
 # [#hd1] Heading 1
 
 [hd1]: https://example.com
@@ -554,7 +554,7 @@ Document[0, 90]
 
 ## Compound
 
-```````````````````````````````` example Compound: 1
+```````````````````````````````` example Compound: 1
 # [#hd1] Heading 1
 
 ![image-base64.png](https://github.com/vsch/MarkdownTest/raw/master/image-base64.png) {#hd1:fig:img1} 

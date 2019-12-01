@@ -14,7 +14,7 @@ Automatically generates anchor links for heading nodes.
 
 Basic, anchor links wrap header text
 
-```````````````````````````````` example AnchorLinks: 1
+```````````````````````````````` example AnchorLinks: 1
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" class="anchor">Enhanced Edition</a></h1>
@@ -28,7 +28,7 @@ Document[0, 18]
 
 Basic, duplicates
 
-```````````````````````````````` example AnchorLinks: 2
+```````````````````````````````` example AnchorLinks: 2
 # Enhanced Edition
 # Enhanced Edition
 .
@@ -47,7 +47,7 @@ Document[0, 37]
 
 Basic, duplicates, no look-ahead
 
-```````````````````````````````` example AnchorLinks: 3
+```````````````````````````````` example AnchorLinks: 3
 # Enhanced Edition
 # Enhanced Edition
 # Enhanced Edition-1
@@ -71,7 +71,7 @@ Document[0, 58]
 
 Basic, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 4) options(no-wrap)
+```````````````````````````````` example(AnchorLinks: 4) options(no-wrap)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" class="anchor"></a>Enhanced Edition</h1>
@@ -85,7 +85,7 @@ Document[0, 18]
 
 With prefix/suffix, anchor links wrap header text
 
-```````````````````````````````` example(AnchorLinks: 5) options(prefix-suffix)
+```````````````````````````````` example(AnchorLinks: 5) options(prefix-suffix)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" class="anchor"><span class="anchor">Enhanced Edition</span></a></h1>
@@ -99,7 +99,7 @@ Document[0, 18]
 
 With prefix/suffix, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 6) options(no-wrap, prefix-suffix)
+```````````````````````````````` example(AnchorLinks: 6) options(no-wrap, prefix-suffix)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" class="anchor"><span class="anchor"></span></a>Enhanced Edition</h1>
@@ -113,7 +113,7 @@ Document[0, 18]
 
 With prefix/suffix, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 7) options(no-wrap, prefix-suffix, no-class)
+```````````````````````````````` example(AnchorLinks: 7) options(no-wrap, prefix-suffix, no-class)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition"><span class="anchor"></span></a>Enhanced Edition</h1>
@@ -127,7 +127,7 @@ Document[0, 18]
 
 Set name, with prefix/suffix, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 8) options(no-wrap, prefix-suffix, no-class, set-name)
+```````````````````````````````` example(AnchorLinks: 8) options(no-wrap, prefix-suffix, no-class, set-name)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" id="enhanced-edition" name="enhanced-edition"><span class="anchor"></span></a>Enhanced Edition</h1>
@@ -141,7 +141,7 @@ Document[0, 18]
 
 Set name, no id, with prefix/suffix, anchor links do not wrap header text
 
-```````````````````````````````` example(AnchorLinks: 9) options(no-wrap, prefix-suffix, no-class, set-name, no-id)
+```````````````````````````````` example(AnchorLinks: 9) options(no-wrap, prefix-suffix, no-class, set-name, no-id)
 # Enhanced Edition
 .
 <h1><a href="#enhanced-edition" name="enhanced-edition"><span class="anchor"></span></a>Enhanced Edition</h1>
@@ -155,7 +155,7 @@ Document[0, 18]
 
 Just to test postProcessor exclusions
 
-```````````````````````````````` example(AnchorLinks: 10) options(no-wrap, prefix-suffix, no-class, set-name, no-id)
+```````````````````````````````` example(AnchorLinks: 10) options(no-wrap, prefix-suffix, no-class, set-name, no-id)
 > # Enhanced Edition
 .
 <blockquote>
@@ -171,7 +171,7 @@ Document[0, 20]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 # Header
 .
 <h1 md-pos="2-8"><a href="#header" id="header" class="anchor">Header</a></h1>

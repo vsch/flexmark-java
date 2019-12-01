@@ -10,7 +10,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Issue performance
 
-```````````````````````````````` example(Issue performance: 1) options(TIMED)
+```````````````````````````````` example(Issue performance: 1) options(TIMED)
 ## Markdown Navigator
 
 [TOC levels=3,4]: # "Version History"
@@ -2042,7 +2042,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue performance: 2) options(TIMED, fast-render)
+```````````````````````````````` example(Issue performance: 2) options(TIMED, fast-render)
 ## Markdown Navigator
 
 [TOC levels=3,4]: # "Version History"
@@ -4078,7 +4078,7 @@ exporting the full document.</li>
 
 Caused segments out of order exception in Markdown Navigator, but cannot duplicate
 
-```````````````````````````````` example(Issue xxx-02: 1) options(dummy-identifier)
+```````````````````````````````` example(Issue xxx-02: 1) options(dummy-identifier)
 # Next Minor Release
 
  - **Bugs**
@@ -4259,7 +4259,7 @@ Caused segments out of order exception in Markdown Navigator, but cannot duplica
 
 ## Issue xxx.3
 
-```````````````````````````````` example Issue xxx.3: 1
+```````````````````````````````` example Issue xxx.3: 1
 Supported Capabilities
 ======================
 

@@ -14,7 +14,7 @@ Converts markdown to docx
 
 ## Footnotes
 
-```````````````````````````````` example Footnotes: 1
+```````````````````````````````` example Footnotes: 1
 Paragraph text[^1]
 
 [^1]: Footnote text
@@ -87,7 +87,7 @@ Paragraph text[^1]
 ````````````````````````````````
 
 
-```````````````````````````````` example Footnotes: 2
+```````````````````````````````` example Footnotes: 2
 Paragraph text[^1]
 
 [^1]: Footnote text that will be wrapped and should have a hanging indent to align the overflow
@@ -259,7 +259,7 @@ Paragraph text[^1]
 ````````````````````````````````
 
 
-```````````````````````````````` example Footnotes: 3
+```````````````````````````````` example Footnotes: 3
 Paragraph text[^1]
 
 Paragraph text, repeated footnote[^1]
@@ -380,7 +380,7 @@ Paragraph text, repeated footnote[^1]
 ````````````````````````````````
 
 
-```````````````````````````````` example Footnotes: 4
+```````````````````````````````` example Footnotes: 4
 Paragraph text[^1]
 
 Paragraph text, repeated footnote[^1]
@@ -517,7 +517,7 @@ Paragraph text, repeated footnote[^1]
 ````````````````````````````````
 
 
-```````````````````````````````` example Footnotes: 5
+```````````````````````````````` example Footnotes: 5
 |ID|
 |:--:|
 |Der Hersteller[^C1-04]|
@@ -653,7 +653,7 @@ Paragraph text, repeated footnote[^1]
 ````````````````````````````````
 
 
-```````````````````````````````` example Footnotes: 6
+```````````````````````````````` example Footnotes: 6
 |ID|
 |:--:|
 |Der Hersteller|
@@ -799,7 +799,7 @@ Der Hersteller[^C1-04]
 ````````````````````````````````
 
 
-```````````````````````````````` example Footnotes: 7
+```````````````````````````````` example Footnotes: 7
 |ID|
 |:--:|
 |Der Hersteller[^C1-04]|
@@ -929,7 +929,7 @@ Der Hersteller[^C1-04]
 
 with same links in different parts
 
-```````````````````````````````` example Footnotes: 8
+```````````````````````````````` example Footnotes: 8
 Text [^id] with link [link](http://example.com)
 
 [^id]: [link](http://example.com)
@@ -1019,7 +1019,7 @@ Text [^id] with link [link](http://example.com)
 
 with diff links in different parts
 
-```````````````````````````````` example Footnotes: 9
+```````````````````````````````` example Footnotes: 9
 Text [^id] with link [link](http://example.com)
 
 [^id]: [link](http://example.com/another)
@@ -1109,7 +1109,7 @@ Text [^id] with link [link](http://example.com)
 
 ## TOC
 
-```````````````````````````````` example(TOC: 1) options(IGNORED)
+```````````````````````````````` example(TOC: 1) options(IGNORED)
 [TOC] 
 
 # Heading **some bold** 1
@@ -2254,7 +2254,7 @@ Proin maximus ante ac justo rutrum consectetur. Praesent ultrices in lacus id fa
 
 sim toc
 
-```````````````````````````````` example(TOC: 2) options(IGNORED)
+```````````````````````````````` example(TOC: 2) options(IGNORED)
 [TOC]: # 
 
 
@@ -3400,7 +3400,7 @@ Proin maximus ante ac justo rutrum consectetur. Praesent ultrices in lacus id fa
 
 sim toc
 
-```````````````````````````````` example(TOC: 3) options(IGNORED)
+```````````````````````````````` example(TOC: 3) options(IGNORED)
 [TOC]: #
 
 
@@ -4546,7 +4546,7 @@ Proin maximus ante ac justo rutrum consectetur. Praesent ultrices in lacus id fa
 
 ## Enumerated References
 
-```````````````````````````````` example(Enumerated References: 1) options(IGNORED)
+```````````````````````````````` example(Enumerated References: 1) options(IGNORED)
 ![flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo"){#fig:test}  
 [#fig:test]
 
@@ -4915,7 +4915,7 @@ See [@tbl:test]
 ````````````````````````````````
 
 
-```````````````````````````````` example Enumerated References: 2
+```````````````````````````````` example Enumerated References: 2
 
 {#abc}
 
@@ -4959,7 +4959,7 @@ See [@tbl:test]
 
 test with suffix
 
-```````````````````````````````` example(Enumerated References: 3) options(hyperlink-suffix)
+```````````````````````````````` example(Enumerated References: 3) options(hyperlink-suffix)
 
 test{#fig:abc}
 
@@ -5053,7 +5053,7 @@ See [@fig:abc]
 ````````````````````````````````
 
 
-```````````````````````````````` example Enumerated References: 4
+```````````````````````````````` example Enumerated References: 4
 
 | table |
 |-------|
@@ -5179,7 +5179,7 @@ See [@fig:abc]
 
 missing definition
 
-```````````````````````````````` example Enumerated References: 5
+```````````````````````````````` example Enumerated References: 5
 abc{#fig:test}
 
 [#fig:test]
@@ -5277,7 +5277,7 @@ abc{#fig:test}
 
 Suffix links
 
-```````````````````````````````` example(Heading and Link Ids: 1) options(hyperlink-suffix)
+```````````````````````````````` example(Heading and Link Ids: 1) options(hyperlink-suffix)
 # Heading 1
 
 ## Heading 2
@@ -5367,7 +5367,7 @@ Suffix links
 
 Allow using empty format ref in heading
 
-```````````````````````````````` example Heading: 1
+```````````````````````````````` example Heading: 1
 # [#hdr] Numbered Heading
     
 [@hdr]: [#].
@@ -5423,7 +5423,7 @@ Allow using empty format ref in heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 2
+```````````````````````````````` example Heading: 2
 # [#hdr] Numbered Heading
     
 # [#hdr] Numbered Heading
@@ -5499,7 +5499,7 @@ Allow using empty format ref in heading
 
 Compound numbering
 
-```````````````````````````````` example Heading: 3
+```````````````````````````````` example Heading: 3
 # [#hdr1] Numbered Heading 1
     
 ## [#hdr1:hdr2:] Numbered Heading 1.1
@@ -5625,7 +5625,7 @@ Compound numbering
 
 `.` appended by default if last element for format is empty Enumerated Reference Text or Link
 
-```````````````````````````````` example Heading: 4
+```````````````````````````````` example Heading: 4
 # [#hdr1] Numbered Heading 1
     
 ## [#hdr1:hdr2:] Numbered Heading 1.1
@@ -5731,7 +5731,7 @@ Compound numbering
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 5
+```````````````````````````````` example Heading: 5
 # [#hd1] Heading 1
 
 # [#hd1] Heading 2
@@ -5822,7 +5822,7 @@ Compound numbering
 ````````````````````````````````
 
 
-```````````````````````````````` example Heading: 6
+```````````````````````````````` example Heading: 6
 # [#hd1] Heading 1
 
 ## [#hd1:hd2:] Heading 1.1
@@ -6153,7 +6153,7 @@ Compound numbering
 
 lazy continuation
 
-```````````````````````````````` example Aside: 1
+```````````````````````````````` example Aside: 1
 * list item
     | aside block
     lazy continuation
@@ -6234,7 +6234,7 @@ lazy continuation
 
 with hyperlink
 
-```````````````````````````````` example Aside: 2
+```````````````````````````````` example Aside: 2
 | [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 .
 <w:body>
@@ -6310,7 +6310,7 @@ with hyperlink
 
 with hard break
 
-```````````````````````````````` example Aside: 3
+```````````````````````````````` example Aside: 3
 | aside block 1  
 | with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 .
@@ -6396,7 +6396,7 @@ with hard break
 
 with child paragraphs
 
-```````````````````````````````` example Aside: 4
+```````````````````````````````` example Aside: 4
 | aside block 1  
 |
 | with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
@@ -6485,7 +6485,7 @@ with child paragraphs
 
 with child aside blocks
 
-```````````````````````````````` example Aside: 5
+```````````````````````````````` example Aside: 5
 | aside block 1  
 |
 || another aside block
@@ -6567,7 +6567,7 @@ with child aside blocks
 
 with child block quote
 
-```````````````````````````````` example Aside: 6
+```````````````````````````````` example Aside: 6
 | aside block 1
 |
 |> block quote
@@ -6649,7 +6649,7 @@ with child block quote
 
 as child of block quote
 
-```````````````````````````````` example Aside: 7
+```````````````````````````````` example Aside: 7
 > block quote 1  
 >
 >| aside block
@@ -6731,7 +6731,7 @@ as child of block quote
 
 with child paragraphs
 
-```````````````````````````````` example Aside: 8
+```````````````````````````````` example Aside: 8
 | aside block 1  
 |
 | with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
@@ -6842,7 +6842,7 @@ with child paragraphs
 
 ## Macros
 
-```````````````````````````````` example Macros: 1
+```````````````````````````````` example Macros: 1
 >>>macro
 Simple Text
 <<<
@@ -6894,7 +6894,7 @@ Plain Text <<<macro>>>
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 2
+```````````````````````````````` example Macros: 2
 >>>macro
 1. Item 1
 1. Item 2
@@ -6970,7 +6970,7 @@ Plain Text <<<macro>>>
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 3
+```````````````````````````````` example Macros: 3
 >>>macro
 | Heading |
 |:-------|
@@ -7082,7 +7082,7 @@ Plain Text <<<macro>>>
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 4
+```````````````````````````````` example Macros: 4
 >>>macro
 > Block Quote
 <<<
@@ -7236,7 +7236,7 @@ Plain Text <<<macro>>>
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 5
+```````````````````````````````` example Macros: 5
 >>>macro
 1. Item 1
 1. Item 2
@@ -7409,7 +7409,7 @@ Plain Text <<<macro>>>
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 6
+```````````````````````````````` example Macros: 6
 >>>macro
 | heading     |
 |:------------|
@@ -7647,7 +7647,7 @@ Plain Text <<<macro>>>
 
 Recursion cut short
 
-```````````````````````````````` example Macros: 7
+```````````````````````````````` example Macros: 7
 >>>macro1
 Macro 1
 <<<macro2>>>
@@ -7736,7 +7736,7 @@ Plain text <<<macro2>>>
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 8
+```````````````````````````````` example Macros: 8
 >>>macro
 - item 1
 - item 2
@@ -7981,7 +7981,7 @@ Plain text <<<macro2>>>
 
 ## Compound
 
-```````````````````````````````` example Compound: 1
+```````````````````````````````` example Compound: 1
 # [#hd1] Heading 1
 
 ![image-base64.png](https://github.com/vsch/MarkdownTest/raw/master/image-base64.pngh/MarkdownTest/raw/master/image-base64.png) {#hd1:fig:img1} 
@@ -8122,7 +8122,7 @@ Plain text <<<macro2>>>
 
 Set Address style
 
-```````````````````````````````` example Attributes: 1
+```````````````````````````````` example Attributes: 1
 Some text
 
 {.Adresse}Address Line  

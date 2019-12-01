@@ -30,13 +30,13 @@ an inline text.
 If a macro reference contains an undefined `macroName` then the node will be rendered as plain
 text consisting of `<<<macroName>>>`
 
-Recursive macro references are resolved by stopping macro expansion on the first macro reference which
-refers to a macro definition which is currently being expanded. The first recursive macro
+Recursive macro references are resolved by stopping macro expansion on the first macro reference
+which refers to a macro definition which is currently being expanded. The first recursive macro
 reference will result in no expansion.
 
 takes valid characters
 
-```````````````````````````````` example Macros: 1
+```````````````````````````````` example Macros: 1
 >>>abc-xyzABC_XYZ09
 <<<
 
@@ -48,7 +48,7 @@ takes valid characters
 
 empty macro content is allowed
 
-```````````````````````````````` example Macros: 2
+```````````````````````````````` example Macros: 2
 >>>macro
 <<<
 
@@ -63,7 +63,7 @@ pLaAiIN teEXt <<<macro>>>
 
 simple text
 
-```````````````````````````````` example Macros: 3
+```````````````````````````````` example Macros: 3
 >>>macro
 simple text
 <<<
@@ -80,7 +80,7 @@ pLaAiIN teEXt <<<macro>>>
 
 complex content
 
-```````````````````````````````` example Macros: 4
+```````````````````````````````` example Macros: 4
 >>>macro
 * list item 1
 * list item 2
@@ -108,7 +108,7 @@ pLaAiIN teEXt <<<macro>>>
 
 macro tables
 
-```````````````````````````````` example Macros: 5
+```````````````````````````````` example Macros: 5
 >>>macro
 | heading     |
 |:------------|
@@ -133,7 +133,7 @@ macro tables
 
 complex content for tables
 
-```````````````````````````````` example Macros: 6
+```````````````````````````````` example Macros: 6
 >>>macro
 | heading     |
 |:------------|
@@ -162,7 +162,7 @@ complex content for tables
 
 GitLab multi-line block quotes
 
-```````````````````````````````` example Macros: 7
+```````````````````````````````` example Macros: 7
 >>>macro
 >>>
 Block Quote
@@ -193,7 +193,7 @@ Document[0, 56]
 
 Nested GitLab multi-line block quotes
 
-```````````````````````````````` example Macros: 8
+```````````````````````````````` example Macros: 8
 >>>macro
 >>>
 Block Quote

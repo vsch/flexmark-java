@@ -15,7 +15,7 @@ found.
 
 Test to see if bullet mismatch starts a new list
 
-```````````````````````````````` example Bullet Mismatch Starts a New List: 1
+```````````````````````````````` example Bullet Mismatch Starts a New List: 1
 - item
 + item
 * item
@@ -35,7 +35,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test to see if ordered list item will set list start if not one
 
-```````````````````````````````` example Ordered List Item Sets List Start: 1
+```````````````````````````````` example Ordered List Item Sets List Start: 1
 2. Non One Start Item
 .
 <ol>
@@ -50,7 +50,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test how mismatches in item types are handled
 
-```````````````````````````````` example Mismatched List Item Type Handling: 1
+```````````````````````````````` example Mismatched List Item Type Handling: 1
 - Bullet List
 1. With Ordered Item
 .
@@ -65,7 +65,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Mismatched List Item Type Handling: 2
+```````````````````````````````` example Mismatched List Item Type Handling: 2
 1. Ordered Item
 - With Bullet List
 .
@@ -84,7 +84,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Tests how all tight items are generated
 
-```````````````````````````````` example Loose Item Handling: 1
+```````````````````````````````` example Loose Item Handling: 1
 - item 1
 - item 2 
 - item 3 
@@ -103,7 +103,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test to see how trailing blank after item determines looseness
 
-```````````````````````````````` example Loose Item Handling: 2
+```````````````````````````````` example Loose Item Handling: 2
 - item 1
 
 - item 2 
@@ -123,7 +123,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 3
+```````````````````````````````` example Loose Item Handling: 3
 - item 1
 - item 2 
 
@@ -142,7 +142,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 4
+```````````````````````````````` example Loose Item Handling: 4
 - item 1
 - item 2 
 - item 3 
@@ -163,7 +163,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test looseness with child items
 
-```````````````````````````````` example Loose Item Handling: 5
+```````````````````````````````` example Loose Item Handling: 5
 - item 1
     - item 1.1
 - item 2 
@@ -200,7 +200,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 6
+```````````````````````````````` example Loose Item Handling: 6
 - item 1
 
     - item 1.1
@@ -239,7 +239,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 7
+```````````````````````````````` example Loose Item Handling: 7
 - item 1
     - item 1.1
 
@@ -279,7 +279,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 8
+```````````````````````````````` example Loose Item Handling: 8
 - item 1
     - item 1.1
 - item 2 
@@ -318,7 +318,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 9
+```````````````````````````````` example Loose Item Handling: 9
 - item 1
     - item 1.1
 - item 2 
@@ -357,7 +357,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 10
+```````````````````````````````` example Loose Item Handling: 10
 - item 1
     - item 1.1
 - item 2 
@@ -396,7 +396,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 11
+```````````````````````````````` example Loose Item Handling: 11
 - item 1
     - item 1.1
 - item 2 
@@ -435,7 +435,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 12
+```````````````````````````````` example Loose Item Handling: 12
 - item 1
     - item 1.1
 - item 2 
@@ -478,7 +478,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test to see which list items can interrupt paragraphs.
 
-```````````````````````````````` example List Item Interrupts Paragraph: 1
+```````````````````````````````` example List Item Interrupts Paragraph: 1
 Bullet item can interrupt paragraph
 * item
 
@@ -523,7 +523,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test to see which list items can interrupt another bullet list item's paragraphs
 
-```````````````````````````````` example List Item Interrupts Paragraph: 2
+```````````````````````````````` example List Item Interrupts Paragraph: 2
 * Bullet item can interrupt paragraph of a bullet list item
 * item
 
@@ -624,7 +624,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test to see which list items can interrupt another numbered list item's paragraphs
 
-```````````````````````````````` example List Item Interrupts Paragraph: 3
+```````````````````````````````` example List Item Interrupts Paragraph: 3
 1. Bullet item can interrupt paragraph of a numbered list item
 * item
 
@@ -723,7 +723,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test if list item indent handling for edge cases
 
-```````````````````````````````` example List Item Indent Handling: 1
+```````````````````````````````` example List Item Indent Handling: 1
 * item 1
  * item 2
   * item 3
@@ -756,7 +756,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 2
+```````````````````````````````` example List Item Indent Handling: 2
 * item 1
 
  * item 2
@@ -806,7 +806,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 3
+```````````````````````````````` example List Item Indent Handling: 3
 *  item 1
  *  item 2
   *  item 3
@@ -842,7 +842,7 @@ PegdownParser$PegdownRootNode[0, 0]
 Test shows where the boundary switch to indented code occurs. Sub-items first paragraph is a
 paragraph, the second is indented code
 
-```````````````````````````````` example List Item Indent Handling: 4
+```````````````````````````````` example List Item Indent Handling: 4
 -   test
     - sub item
 
@@ -892,7 +892,7 @@ paragraph, the second is indented code
 More extensive test to show where the boundary switch to indented code occurs. Sub-items first
 paragraph is a paragraph, the second is indented code
 
-```````````````````````````````` example List Item Indent Handling: 5
+```````````````````````````````` example List Item Indent Handling: 5
 * item 1
     
   item para 1
@@ -1059,7 +1059,7 @@ the previous list item. There was one that did it that way, GitHub comments if I
 right, but now they switched to commonmark list handling with mods. Guess it is now GFC--GitHub
 Flavoured Commonmark.
 
-```````````````````````````````` example List Item Indent Handling: 6
+```````````````````````````````` example List Item Indent Handling: 6
 *  item 1
    * item 2
   * item 3
@@ -1076,7 +1076,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test how headings in list items are handled, leading space allowed or not
 
-```````````````````````````````` example List Item Indent Handling: 7
+```````````````````````````````` example List Item Indent Handling: 7
 * item 1
 
     # Heading 1
@@ -1139,7 +1139,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether blank lines are required to start a block quote
 
-```````````````````````````````` example Block quote parsing: 1
+```````````````````````````````` example Block quote parsing: 1
 paragraph text
 > block quoted text
 .
@@ -1154,7 +1154,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether blank lines are required to start a block quote
 
-```````````````````````````````` example Block quote parsing: 2
+```````````````````````````````` example Block quote parsing: 2
 paragraph text
 
 > block quoted text
@@ -1170,7 +1170,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether blank lines are ignored and treated as if prefixed with block quote
 
-```````````````````````````````` example Block quote parsing: 3
+```````````````````````````````` example Block quote parsing: 3
 > block quoted text
 
 > more block quoted text
@@ -1186,7 +1186,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether block quotes continue to a blank line
 
-```````````````````````````````` example Block quote parsing: 4
+```````````````````````````````` example Block quote parsing: 4
 > block quoted text
 lazy continuation
 
@@ -1203,7 +1203,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether leading spaces are allowed before block quote marker
 
-```````````````````````````````` example Block quote parsing: 5
+```````````````````````````````` example Block quote parsing: 5
  > block quote paragraph text
 .
 <p>&gt; block quote paragraph text</p>
@@ -1214,7 +1214,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether trailing spaces are required after block quote marker
 
-```````````````````````````````` example Block quote parsing: 6
+```````````````````````````````` example Block quote parsing: 6
 >block quote paragraph text
 .
 <blockquote>
@@ -1227,7 +1227,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether block quotes can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 7
+```````````````````````````````` example Block quote parsing: 7
 * item 1
     > block quoted text
 
@@ -1259,7 +1259,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether block quotes can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 8
+```````````````````````````````` example Block quote parsing: 8
 * item 1
 
     > block quoted text
@@ -1293,7 +1293,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether block quotes with leading space can interrupt item paragraphs
 
-```````````````````````````````` example Block quote parsing: 9
+```````````````````````````````` example Block quote parsing: 9
 * item 1
      > block quoted text
 
@@ -1317,7 +1317,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether block quotes with leading space can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 10
+```````````````````````````````` example Block quote parsing: 10
 * item 1
 
      > block quoted text
@@ -1347,7 +1347,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether block quotes without trailing space can interrupt item paragraphs
 
-```````````````````````````````` example Block quote parsing: 11
+```````````````````````````````` example Block quote parsing: 11
 * item 1
     >block quoted text
 
@@ -1379,7 +1379,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Whether block quotes without trailing space can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 12
+```````````````````````````````` example Block quote parsing: 12
 * item 1
 
     >block quoted text
@@ -1413,7 +1413,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Test to make sure content indented deeply nested lists process correctly
 
-```````````````````````````````` example Block quote parsing: 13
+```````````````````````````````` example Block quote parsing: 13
 - item 1
     - item 2
         - item 3
@@ -1465,7 +1465,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quote parsing: 14
+```````````````````````````````` example Block quote parsing: 14
 1. item 1
     1. item 2
         1. item 3
@@ -1517,11 +1517,11 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-## Table 
+## Table
 
 Multi-line code span
 
-```````````````````````````````` example Table: 1
+```````````````````````````````` example Table: 1
 |header1|header2|header3|
 |-------|----|------|
 | line | ```{
@@ -1553,7 +1553,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Multi-line code span in paragraph
 
-```````````````````````````````` example Table: 2
+```````````````````````````````` example Table: 2
 line ```{
 "key1": "xxx",
 "key2": [

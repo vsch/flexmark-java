@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts jekyll_front_matter text to JekyllFrontMatter node.
 
-```````````````````````````````` example JekyllFrontMatter: 1
+```````````````````````````````` example JekyllFrontMatter: 1
 ---
 title: JekyllFrontMatter Extension Spec
 author: 
@@ -31,7 +31,7 @@ Document[0, 159]
 
 Converts jekyll front matter text to JekyllFrontMatter node.
 
-```````````````````````````````` example FlexmarkFrontMatter: 1
+```````````````````````````````` example FlexmarkFrontMatter: 1
 ---
 title: JekyllFrontMatter Extension Spec
 author: 
@@ -48,7 +48,7 @@ Document[0, 159]
 
 preserve whitespaces in block
 
-```````````````````````````````` example FlexmarkFrontMatter: 2
+```````````````````````````````` example FlexmarkFrontMatter: 2
 ---
 linters:
   - name: linter
@@ -65,7 +65,7 @@ Document[0, 189]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 ---
 title: JekyllFrontMatter Extension Spec
 author:

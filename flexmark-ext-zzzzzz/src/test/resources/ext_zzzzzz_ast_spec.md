@@ -14,7 +14,7 @@ Converts zzzzzz text to Zzzzzz nodes.
 
 no spaces between brackets
 
-```````````````````````````````` example(Zzzzzz: 1) options(option1, IGNORE)
+```````````````````````````````` example(Zzzzzz: 1) options(option1, IGNORE)
 Sample  text
 .
 <p>Expected rendered HTML</p>
@@ -22,7 +22,7 @@ Sample  text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Zzzzzz: 2) options(FAIL)
+```````````````````````````````` example(Zzzzzz: 2) options(FAIL)
 &#X01; &#X234564; fail
 .
 <p> �</p>
@@ -30,7 +30,7 @@ Sample  text
 ````````````````````````````````
 
 
-```````````````````````````````` example Zzzzzz: 3
+```````````````````````````````` example Zzzzzz: 3
 > I said *Hello* to him.
 .
 <blockquote>
@@ -50,7 +50,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Zzzzzz: 4
+```````````````````````````````` example Zzzzzz: 4
 (<ul><li>item1</li><li>item2</li></ul>)
 .
 <p>(<ul><li>item1</li><li>item2</li></ul>)</p>
@@ -74,7 +74,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example Zzzzzz: 5
+```````````````````````````````` example Zzzzzz: 5
 | col 1 | col 2 | col 3 |
 | ----- | ----- | ----- |
 | <ul><li>ul item</li></ul> is *different* than <ol><li>ol item</li></ol> | row 1 col 2 | row 1 col 3 |
@@ -142,7 +142,7 @@ Document[0, 155]
 ````````````````````````````````
 
 
-```````````````````````````````` example Zzzzzz: 6
+```````````````````````````````` example Zzzzzz: 6
 | col 1 | col 2 | col 3 |
 | ----- | ----- | ----- |
 | <ul><li>item1</li><li>item2</li></ul> | See the list | from the first column |
@@ -203,7 +203,7 @@ Document[0, 132]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos, IGNORE)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos, IGNORE)
 .
 .
 ````````````````````````````````

@@ -36,7 +36,7 @@ Parses and renders GitLab Flavoured Markdown.
 
 ## Block Quotes
 
-```````````````````````````````` example Block Quotes: 1
+```````````````````````````````` example Block Quotes: 1
 >>>
 Block Quote Contents
 
@@ -57,7 +57,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 2
+```````````````````````````````` example Block Quotes: 2
 >>>
 Block Quote Contents
 >>>
@@ -73,7 +73,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 3) options(no-quotes)
+```````````````````````````````` example(Block Quotes: 3) options(no-quotes)
 >>>
 Block Quote Contents
 >>>
@@ -106,7 +106,7 @@ Document[0, 28]
 
 nested quotes
 
-```````````````````````````````` example Block Quotes: 4
+```````````````````````````````` example Block Quotes: 4
 >>>
 Block Quote Contents
 >>>
@@ -131,7 +131,7 @@ Document[0, 64]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 5) options(no-nested-quotes)
+```````````````````````````````` example(Block Quotes: 5) options(no-nested-quotes)
 >>>
 Block Quote Contents
 >>>
@@ -156,7 +156,7 @@ Document[0, 64]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 6
+```````````````````````````````` example Block Quotes: 6
 >>>
 Block Quote Contents
 >>>
@@ -198,7 +198,7 @@ Document[0, 123]
 
 unmatched
 
-```````````````````````````````` example Inline: 1
+```````````````````````````````` example Inline: 1
 {+inserted-}
 .
 <p>{+inserted-}</p>
@@ -209,7 +209,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 2
+```````````````````````````````` example Inline: 2
 [+inserted-]
 .
 <p>[+inserted-]</p>
@@ -220,7 +220,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 3
+```````````````````````````````` example Inline: 3
 {+inserted+]
 .
 <p>{+inserted+]</p>
@@ -231,7 +231,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 4
+```````````````````````````````` example Inline: 4
 [+inserted+}
 .
 <p>[+inserted+}</p>
@@ -242,7 +242,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 5
+```````````````````````````````` example Inline: 5
 {-deleted+}
 .
 <p>{-deleted+}</p>
@@ -253,7 +253,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 6
+```````````````````````````````` example Inline: 6
 [-deleted+]
 .
 <p>[-deleted+]</p>
@@ -264,7 +264,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 7
+```````````````````````````````` example Inline: 7
 {-deleted-]
 .
 <p>{-deleted-]</p>
@@ -275,7 +275,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 8
+```````````````````````````````` example Inline: 8
 [-deleted-}
 .
 <p>[-deleted-}</p>
@@ -288,7 +288,7 @@ Document[0, 11]
 
 matched
 
-```````````````````````````````` example Inline: 9
+```````````````````````````````` example Inline: 9
 {+inserted+}
 .
 <p><ins>inserted</ins></p>
@@ -300,7 +300,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 10
+```````````````````````````````` example Inline: 10
 [+inserted+]
 .
 <p><ins>inserted</ins></p>
@@ -312,7 +312,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 11
+```````````````````````````````` example Inline: 11
 {-deleted-}
 .
 <p><del>deleted</del></p>
@@ -324,7 +324,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 12
+```````````````````````````````` example Inline: 12
 [-deleted-]
 .
 <p><del>deleted</del></p>
@@ -338,7 +338,7 @@ Document[0, 11]
 
 disabled
 
-```````````````````````````````` example(Inline: 13) options(no-ins)
+```````````````````````````````` example(Inline: 13) options(no-ins)
 {+inserted+}
 [+inserted+]
 {-deleted-}
@@ -364,7 +364,7 @@ Document[0, 49]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Inline: 14) options(no-del)
+```````````````````````````````` example(Inline: 14) options(no-del)
 {+inserted+}
 [+inserted+]
 {-deleted-}
@@ -390,7 +390,7 @@ Document[0, 49]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Inline: 15) options(no-ins, no-del)
+```````````````````````````````` example(Inline: 15) options(no-ins, no-del)
 {+inserted+}
 [+inserted+]
 {-deleted-}
@@ -417,7 +417,7 @@ Document[0, 49]
 
 nested
 
-```````````````````````````````` example Inline: 16
+```````````````````````````````` example Inline: 16
 [+inserted [-deleted-]+]
 .
 <p><ins>inserted <del>deleted</del></ins></p>
@@ -431,7 +431,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 17
+```````````````````````````````` example Inline: 17
 *[+**inserted** [-deleted-]+]*
 .
 <p><em><ins><strong>inserted</strong> <del>deleted</del></ins></em></p>
@@ -450,7 +450,7 @@ Document[0, 30]
 
 ## Inline Math
 
-```````````````````````````````` example Inline Math: 1
+```````````````````````````````` example Inline Math: 1
 $`a^2+b^2=c^2`$
 .
 <p><span class="katex">a^2+b^2=c^2</span></p>
@@ -461,7 +461,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline Math: 2
+```````````````````````````````` example Inline Math: 2
 Prefix $`a^2+b^2=c^2`$ suffix
 .
 <p>Prefix <span class="katex">a^2+b^2=c^2</span> suffix</p>
@@ -474,7 +474,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline Math: 3
+```````````````````````````````` example Inline Math: 3
 prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
 .
 <p>prefix <span class="katex">\Pr\left[\sum_{i=1}^k X_i &gt; c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1</span></p>
@@ -488,7 +488,7 @@ Document[0, 112]
 
 allow split lines
 
-```````````````````````````````` example Inline Math: 4
+```````````````````````````````` example Inline Math: 4
 prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ 
 $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
 .
@@ -504,7 +504,7 @@ Document[0, 113]
 
 ## Fenced Code Math
 
-```````````````````````````````` example Fenced Code Math: 1
+```````````````````````````````` example Fenced Code Math: 1
 ```math
 a^2+b^2=c^2
 ```
@@ -519,7 +519,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Math: 2) options(no-math)
+```````````````````````````````` example(Fenced Code Math: 2) options(no-math)
 ```math
 a^2+b^2=c^2
 ```
@@ -533,7 +533,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Math: 3) options(math-class)
+```````````````````````````````` example(Fenced Code Math: 3) options(math-class)
 ```math
 a^2+b^2=c^2
 ```
@@ -548,7 +548,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Math: 4) options(block-delimiters)
+```````````````````````````````` example(Fenced Code Math: 4) options(block-delimiters)
 ```math-here
 a^2+b^2=c^2
 ```
@@ -563,7 +563,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Math: 5) options(code-content-block)
+```````````````````````````````` example(Fenced Code Math: 5) options(code-content-block)
 ```math
 a^2+b^2=c^2
 ```
@@ -580,7 +580,7 @@ Document[0, 23]
 
 ## Fenced Code Mermaid
 
-```````````````````````````````` example Fenced Code Mermaid: 1
+```````````````````````````````` example Fenced Code Mermaid: 1
 ```mermaid
 graph TD;
   A-->B;
@@ -603,7 +603,7 @@ Document[0, 60]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Mermaid: 2) options(no-mermaid)
+```````````````````````````````` example(Fenced Code Mermaid: 2) options(no-mermaid)
 ```mermaid
 graph TD;
   A-->B;
@@ -625,7 +625,7 @@ Document[0, 60]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Mermaid: 3) options(mermaid-class)
+```````````````````````````````` example(Fenced Code Mermaid: 3) options(mermaid-class)
 ```mermaid
 graph TD;
   A-->B;
@@ -648,7 +648,7 @@ Document[0, 60]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Mermaid: 4) options(block-delimiters)
+```````````````````````````````` example(Fenced Code Mermaid: 4) options(block-delimiters)
 ```mermaid-here
 graph TD;
   A-->B;
@@ -671,7 +671,7 @@ Document[0, 65]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Mermaid: 5) options(code-content-block)
+```````````````````````````````` example(Fenced Code Mermaid: 5) options(code-content-block)
 ```mermaid
 graph TD;
   A-->B;
@@ -696,7 +696,7 @@ Document[0, 60]
 
 ## Video Images
 
-```````````````````````````````` example Video Images: 1
+```````````````````````````````` example Video Images: 1
 ![Video](video.mp4)
 .
 <p>
@@ -715,7 +715,7 @@ Document[0, 19]
 
 no video rendering
 
-```````````````````````````````` example(Video Images: 2) options(no-video)
+```````````````````````````````` example(Video Images: 2) options(no-video)
 ![Video](video.mp4)
 .
 <p><img src="video.mp4" alt="Video" /></p>
@@ -729,7 +729,7 @@ Document[0, 19]
 
 no video link
 
-```````````````````````````````` example(Video Images: 3) options(no-video-link)
+```````````````````````````````` example(Video Images: 3) options(no-video-link)
 ![Video](video.mp4)
 .
 <p>
@@ -747,7 +747,7 @@ Document[0, 19]
 
 custom class
 
-```````````````````````````````` example(Video Images: 4) options(video-class)
+```````````````````````````````` example(Video Images: 4) options(video-class)
 ![Video](video.mp4)
 .
 <p>
@@ -766,7 +766,7 @@ Document[0, 19]
 
 custom extensions
 
-```````````````````````````````` example(Video Images: 5) options(video-extensions)
+```````````````````````````````` example(Video Images: 5) options(video-extensions)
 ![Video](video.tst)
 .
 <p>
@@ -783,7 +783,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Video Images: 6) options(video-extensions)
+```````````````````````````````` example(Video Images: 6) options(video-extensions)
 ![Video](video.mp4)
 .
 <p><img src="video.mp4" alt="Video" /></p>
@@ -797,7 +797,7 @@ Document[0, 19]
 
 custom link text
 
-```````````````````````````````` example(Video Images: 7) options(video-link-format)
+```````````````````````````````` example(Video Images: 7) options(video-link-format)
 ![Video](video.mp4)
 .
 <p>
@@ -816,7 +816,7 @@ Document[0, 19]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 >>>
 Block Quote Contents
 >>>
@@ -845,7 +845,7 @@ Document[0, 64]
 
 GitHub does not convert non-ascii heading text to lowercase while GitLab does
 
-```````````````````````````````` example Issue MN-xxx: 1
+```````````````````````````````` example Issue MN-xxx: 1
 ## Тест Заголовок
 .
 <h2 id="тест-заголовок">Тест Заголовок</h2>
@@ -858,7 +858,7 @@ Document[0, 17]
 
 GitHub does not convert non-ascii heading text to lowercase while GitLab does
 
-```````````````````````````````` example Issue MN-xxx: 2
+```````````````````````````````` example Issue MN-xxx: 2
 ## Test Heading
 .
 <h2 id="test-heading">Test Heading</h2>

@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts ++ins++ text to Ins nodes.
 
-```````````````````````````````` example Ins: 1
+```````````````````````````````` example Ins: 1
 +foo+                                                             
 .
 <p>+foo+</p>
@@ -23,7 +23,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 2
+```````````````````````````````` example Ins: 2
 ++foo++                                                           
 .
 <p><ins>foo</ins></p>
@@ -35,7 +35,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 3
+```````````````````````````````` example Ins: 3
 foo ++++                                                          
 .
 <p>foo ++++</p>
@@ -46,7 +46,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 4
+```````````````````````````````` example Ins: 4
 ++foo                                                             
 .
 <p>++foo</p>
@@ -57,7 +57,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 5
+```````````````````````````````` example Ins: 5
 foo++                                                             
 .
 <p>foo++</p>
@@ -68,7 +68,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 6
+```````````````````````````````` example Ins: 6
 +++foo+++                                                         
 .
 <p>+<ins>foo</ins>+</p>
@@ -82,7 +82,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 7
+```````````````````````````````` example Ins: 7
 ++foo+++                                                          
 .
 <p><ins>foo</ins>+</p>
@@ -95,7 +95,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 8
+```````````````````````````````` example Ins: 8
 ++foo+bar++                                                       
 .
 <p><ins>foo+bar</ins></p>
@@ -107,7 +107,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 9
+```````````````````````````````` example Ins: 9
 ++foo++bar++                                                      
 .
 <p><ins>foo</ins>bar++</p>
@@ -120,7 +120,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 10
+```````````````````````````````` example Ins: 10
 ++foo+++bar++                                                     
 .
 <p><ins>foo</ins>+bar++</p>
@@ -133,7 +133,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 11
+```````````````````````````````` example Ins: 11
 ++foo++++bar++                                                    
 .
 <p><ins>foo</ins><ins>bar</ins></p>
@@ -147,7 +147,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 12
+```````````````````````````````` example Ins: 12
 ++foo+++++bar++                                                   
 .
 <p><ins>foo</ins>+<ins>bar</ins></p>
@@ -162,7 +162,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 13
+```````````````````````````````` example Ins: 13
 ++foo++++++bar++                                                  
 .
 <p><ins>foo</ins>++<ins>bar</ins></p>
@@ -177,7 +177,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 14
+```````````````````````````````` example Ins: 14
 ++foo+++++++bar++                                                 
 .
 <p><ins>foo</ins>+++<ins>bar</ins></p>
@@ -192,7 +192,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 15
+```````````````````````````````` example Ins: 15
 ++Paragraph with *emphasis* and __strong emphasis__++                                                             
 .
 <p><ins>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></ins></p>
@@ -209,7 +209,7 @@ Document[0, 114]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins: 16
+```````````````````````````````` example Ins: 16
 > underline ++that++                                                           
 .
 <blockquote>
@@ -227,7 +227,7 @@ Document[0, 79]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 > underline ++that++                                                           
 .
 <blockquote>
@@ -245,7 +245,7 @@ Document[0, 79]
 
 ## Custom Style HTML
 
-```````````````````````````````` example(Custom Style HTML: 1) options(style-ins)
+```````````````````````````````` example(Custom Style HTML: 1) options(style-ins)
 ++inserted++
 
 .

@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 default
 
-```````````````````````````````` example Task List Items: 1
+```````````````````````````````` example Task List Items: 1
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -181,7 +181,7 @@ Document[0, 627]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Task List Items: 2) options(format-fixed-indent)
+```````````````````````````````` example(Task List Items: 2) options(format-fixed-indent)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -247,7 +247,7 @@ Document[0, 627]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Task List Items: 3) options(task-case-lowercase)
+```````````````````````````````` example(Task List Items: 3) options(task-case-lowercase)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -313,7 +313,7 @@ Document[0, 627]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Task List Items: 4) options(task-case-uppercase)
+```````````````````````````````` example(Task List Items: 4) options(task-case-uppercase)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -381,7 +381,7 @@ Document[0, 627]
 
 sort undone first
 
-```````````````````````````````` example(Task List Items: 5) options(task-placement-incomplete-first)
+```````````````````````````````` example(Task List Items: 5) options(task-placement-incomplete-first)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -449,7 +449,7 @@ sort undone first
 
 sort undone first, complete to non-tasks
 
-```````````````````````````````` example(Task List Items: 6) options(task-placement-complete-to-non-task)
+```````````````````````````````` example(Task List Items: 6) options(task-placement-complete-to-non-task)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -517,7 +517,7 @@ sort undone first, complete to non-tasks
 
 sort undone or has undone first
 
-```````````````````````````````` example(Task List Items: 7) options(task-placement-incomplete-nested-first)
+```````````````````````````````` example(Task List Items: 7) options(task-placement-incomplete-nested-first)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -585,7 +585,7 @@ sort undone or has undone first
 
 sort undone or has undone first, complete to non-tasks
 
-```````````````````````````````` example(Task List Items: 8) options(task-placement-complete-nested-to-non-task)
+```````````````````````````````` example(Task List Items: 8) options(task-placement-complete-nested-to-non-task)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -653,7 +653,7 @@ sort undone or has undone first, complete to non-tasks
 
 sort undone or has undone first, complete to non-tasks
 
-```````````````````````````````` example(Task List Items: 9) options(task-placement-incomplete-nested-first)
+```````````````````````````````` example(Task List Items: 9) options(task-placement-incomplete-nested-first)
 * list item 2
   * list item 2.1
   * [x] list item 2.2
@@ -728,7 +728,7 @@ Document[0, 247]
 
 ## No Suffix Content
 
-```````````````````````````````` example(No Suffix Content: 1) options(no-suffix-content)
+```````````````````````````````` example(No Suffix Content: 1) options(no-suffix-content)
 * [ ] task
         * item 2
 .
@@ -748,7 +748,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example No Suffix Content: 2
+```````````````````````````````` example No Suffix Content: 2
 * [ ] task
     * item 2
 .
@@ -768,7 +768,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example No Suffix Content: 3
+```````````````````````````````` example No Suffix Content: 3
 * [ ] task
     * item 2
     
@@ -804,7 +804,7 @@ Document[0, 50]
 
 ## Empty List Items
 
-```````````````````````````````` example Empty List Items: 1
+```````````````````````````````` example Empty List Items: 1
 * [ ] list item 1
 * [ ] 
 
@@ -838,7 +838,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Empty List Items: 2
+```````````````````````````````` example Empty List Items: 2
 * [ ] list item 1
 * [ ] 
 * [ ] list item 2
@@ -869,7 +869,7 @@ Document[0, 65]
 
 With removal of empty list items
 
-```````````````````````````````` example(Empty List Items: 3) options(remove-empty-items)
+```````````````````````````````` example(Empty List Items: 3) options(remove-empty-items)
 * [ ] list item 1
 * [ ] 
 
@@ -899,7 +899,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Empty List Items: 4) options(remove-empty-items)
+```````````````````````````````` example(Empty List Items: 4) options(remove-empty-items)
 * [ ] list item 1
 * [ ] 
 * [ ] list item 2

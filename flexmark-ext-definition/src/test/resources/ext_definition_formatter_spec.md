@@ -116,7 +116,7 @@ Will result in the following HTML:
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 1
+```````````````````````````````` example Definition List Extension: 1
 : definition item 
 .
 : definition item
@@ -125,7 +125,7 @@ not a definition
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 2
+```````````````````````````````` example Definition List Extension: 2
 - bullet item
 : definition item 
 .
@@ -137,7 +137,7 @@ not a definition
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 3
+```````````````````````````````` example Definition List Extension: 3
 1. numbered item
 : definition item 
 .
@@ -149,7 +149,7 @@ not a definition
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 4
+```````````````````````````````` example Definition List Extension: 4
 ## Header
 : definition item 
 .
@@ -161,7 +161,7 @@ not a definition
 
 not a definition
 
-```````````````````````````````` example Definition List Extension: 5
+```````````````````````````````` example Definition List Extension: 5
 ```markdown
 some stuff
 ```
@@ -178,7 +178,7 @@ some stuff
 
 not a definition in a lazy block quote
 
-```````````````````````````````` example Definition List Extension: 6
+```````````````````````````````` example Definition List Extension: 6
 > definition
 : definition item 
 .
@@ -190,7 +190,7 @@ not a definition in a lazy block quote
 
 a definition in a block quote
 
-```````````````````````````````` example Definition List Extension: 7
+```````````````````````````````` example Definition List Extension: 7
 > Definition Term
 > : definition item 
 .
@@ -202,7 +202,7 @@ a definition in a block quote
 
 simple list
 
-```````````````````````````````` example Definition List Extension: 8
+```````````````````````````````` example Definition List Extension: 8
 Definition Term
 : definition item 
 .
@@ -213,7 +213,7 @@ Definition Term
 
 A simple definition list:
 
-```````````````````````````````` example Definition List Extension: 9
+```````````````````````````````` example Definition List Extension: 9
 Term 1
 :   Definition 1
 
@@ -232,7 +232,7 @@ Term 2
 
 With multiple terms:
 
-```````````````````````````````` example Definition List Extension: 10
+```````````````````````````````` example Definition List Extension: 10
 Term 1
 Term 2
 :   Definition 1
@@ -255,7 +255,7 @@ Term 4
 
 With multiple definitions:
 
-```````````````````````````````` example Definition List Extension: 11
+```````````````````````````````` example Definition List Extension: 11
 Term 1
 :   Definition 1
 :   Definition 2
@@ -278,7 +278,7 @@ Term 2
 
 With multiple lines per definition:
 
-```````````````````````````````` example Definition List Extension: 12
+```````````````````````````````` example Definition List Extension: 12
 Term 1
 :   Definition 1 line 1 ...
 Definition 1 line 2
@@ -309,7 +309,7 @@ Term 2
 
 With paragraphs:
 
-```````````````````````````````` example Definition List Extension: 13
+```````````````````````````````` example Definition List Extension: 13
 Term 1
 
 :   Definition 1 (paragraph)
@@ -332,7 +332,7 @@ Term 2
 
 With multiple paragraphs:
 
-```````````````````````````````` example Definition List Extension: 14
+```````````````````````````````` example Definition List Extension: 14
 Term 1
 
 :   Definition 1 paragraph 1 line 1 ...
@@ -371,7 +371,7 @@ Term 2
 
 A mix:
 
-```````````````````````````````` example Definition List Extension: 15
+```````````````````````````````` example Definition List Extension: 15
 Term 1
 Term 2
 
@@ -444,7 +444,7 @@ Term 4
 
 inlines allowed
 
-```````````````````````````````` example Definition List Extension: 16
+```````````````````````````````` example Definition List Extension: 16
 Definition **Term**
 : definition `item` 
 .
@@ -455,7 +455,7 @@ Definition **Term**
 
 inlines will be split
 
-```````````````````````````````` example Definition List Extension: 17
+```````````````````````````````` example Definition List Extension: 17
 Definition **Term 
 Another** Definition Term 
 : definition `item`
@@ -468,7 +468,7 @@ Another** Definition Term
 
 don't include preceding blank lines
 
-```````````````````````````````` example Definition List Extension: 18
+```````````````````````````````` example Definition List Extension: 18
 - bullet item
 
 
@@ -500,7 +500,7 @@ Document[0, 50]
 
 nested elements allowed
 
-```````````````````````````````` example Definition List Extension: 19
+```````````````````````````````` example Definition List Extension: 19
 Definition **Term**
 : definition `item` 
     
@@ -527,7 +527,7 @@ Definition **Term**
 
 With disparate looseness with auto-loose
 
-```````````````````````````````` example Definition List Extension: 20
+```````````````````````````````` example Definition List Extension: 20
 Term 1
 
 :   Definition 1 (paragraph)
@@ -548,7 +548,7 @@ Term 2
 
 With disparate looseness without auto-loose
 
-```````````````````````````````` example Definition List Extension: 21
+```````````````````````````````` example Definition List Extension: 21
 Term 1
 
 :   Definition 1 (paragraph)
@@ -567,7 +567,7 @@ Term 2
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 22
+```````````````````````````````` example Definition List Extension: 22
 Definition Term
 : Definition of above term
 : Another definition of above term
@@ -578,7 +578,7 @@ Definition Term
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 23
+```````````````````````````````` example Definition List Extension: 23
 Definition Term
 : Definition of above term
 : Another definition of above term
@@ -591,7 +591,7 @@ Definition Term
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 24
+```````````````````````````````` example Definition List Extension: 24
 Term 1
 Term 2
 
@@ -662,7 +662,7 @@ Term 4
 ````````````````````````````````
 
 
-```````````````````````````````` example(Definition List Extension: 25) options(marker-spaces-1)
+```````````````````````````````` example(Definition List Extension: 25) options(marker-spaces-1)
 Term 1
 
 :   Definition 1 (paragraph)
@@ -681,7 +681,7 @@ Term 2
 ````````````````````````````````
 
 
-```````````````````````````````` example(Definition List Extension: 26) options(marker-spaces-1)
+```````````````````````````````` example(Definition List Extension: 26) options(marker-spaces-1)
 Term 1
 
 :  Definition 1 (paragraph)
@@ -724,7 +724,7 @@ Term 2
 ````````````````````````````````
 
 
-```````````````````````````````` example(Definition List Extension: 27) options(marker-spaces-1, format-fixed-indent)
+```````````````````````````````` example(Definition List Extension: 27) options(marker-spaces-1, format-fixed-indent)
 Term 1
 
 :  Definition 1 (paragraph)
@@ -767,7 +767,7 @@ Term 2
 ````````````````````````````````
 
 
-```````````````````````````````` example(Definition List Extension: 28) options(marker-type-tilde)
+```````````````````````````````` example(Definition List Extension: 28) options(marker-type-tilde)
 Term 1
 
 :   Definition 1 (paragraph)
@@ -786,7 +786,7 @@ Term 2
 ````````````````````````````````
 
 
-```````````````````````````````` example(Definition List Extension: 29) options(marker-type-colon)
+```````````````````````````````` example(Definition List Extension: 29) options(marker-type-colon)
 Term 1
 
 ~   Definition 1 (paragraph)
@@ -809,7 +809,7 @@ Term 2
 
 Issue #245
 
-```````````````````````````````` example Issue 245: 1
+```````````````````````````````` example Issue 245: 1
 Term 1
 :   Definition1
 
@@ -842,7 +842,7 @@ Document[0, 46]
 
 no blank lines
 
-```````````````````````````````` example(Issue 245: 2) options(no-blank-lines)
+```````````````````````````````` example(Issue 245: 2) options(no-blank-lines)
 Term 1
 :   Definition1
 
@@ -874,7 +874,7 @@ Document[0, 46]
 
 no blank lines
 
-```````````````````````````````` example(Issue 245: 3) options(no-blank-lines)
+```````````````````````````````` example(Issue 245: 3) options(no-blank-lines)
 Term 1
 :   Definition1
 :   Definition2

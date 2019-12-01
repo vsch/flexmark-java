@@ -14,7 +14,7 @@ Converts :warning: to its emoji image
 
 No spaces between markers
 
-```````````````````````````````` example Emoji: 1
+```````````````````````````````` example Emoji: 1
 # some leading text 
 more text :warning : more text
 .
@@ -26,7 +26,7 @@ moReE teEXt :WaARNiING : moReE teEXt
 
 No spaces between markers
 
-```````````````````````````````` example Emoji: 2
+```````````````````````````````` example Emoji: 2
 # some leading text 
 more text : warning: more text
 .
@@ -38,7 +38,7 @@ moReE teEXt : WaARNiING: moReE teEXt
 
 No spaces between markers
 
-```````````````````````````````` example Emoji: 3
+```````````````````````````````` example Emoji: 3
 # some leading text 
 more text :warning
 : more text
@@ -52,7 +52,7 @@ moReE teEXt :WaARNiING
 
 No spaces between markers
 
-```````````````````````````````` example Emoji: 4
+```````````````````````````````` example Emoji: 4
 # some leading text 
 more text :
 warning: more text
@@ -66,7 +66,7 @@ WaARNiING: moReE teEXt
 
 Converts :warning: to its emoji image
 
-```````````````````````````````` example Emoji: 5
+```````````````````````````````` example Emoji: 5
 # some leading text 
 :warning:
 .
@@ -78,7 +78,7 @@ Converts :warning: to its emoji image
 
 Converts :warning: to its emoji image
 
-```````````````````````````````` example(Emoji: 6) options(use-github)
+```````````````````````````````` example(Emoji: 6) options(use-github)
 # some leading text 
 :warning:
 .
@@ -90,7 +90,7 @@ Converts :warning: to its emoji image
 
 Converts :warning: to its emoji image
 
-```````````````````````````````` example(Emoji: 7) options(prefer-github)
+```````````````````````````````` example(Emoji: 7) options(prefer-github)
 # some leading text 
 :warning:
 .
@@ -102,7 +102,7 @@ Converts :warning: to its emoji image
 
 Should use cheat sheet image
 
-```````````````````````````````` example(Emoji: 8) options(prefer-github)
+```````````````````````````````` example(Emoji: 8) options(prefer-github)
 # some leading text 
 :couplekiss:
 .
@@ -121,7 +121,7 @@ Document[0, 33]
 
 Should use github
 
-```````````````````````````````` example(Emoji: 9) options(prefer-cheat)
+```````````````````````````````` example(Emoji: 9) options(prefer-cheat)
 # some leading text 
 :basecamp:
 .
@@ -133,7 +133,7 @@ Should use github
 
 Should fail
 
-```````````````````````````````` example(Emoji: 10) options(prefer-cheat, unicode-only)
+```````````````````````````````` example(Emoji: 10) options(prefer-cheat, unicode-only)
 # some leading text 
 :basecamp:
 .
@@ -145,7 +145,7 @@ Should fail
 
 Should use github
 
-```````````````````````````````` example(Emoji: 11) options(prefer-cheat, unicode)
+```````````````````````````````` example(Emoji: 11) options(prefer-cheat, unicode)
 # some leading text 
 :basecamp:
 .
@@ -157,7 +157,7 @@ Should use github
 
 Should fail
 
-```````````````````````````````` example(Emoji: 12) options(unicode-only, prefer-github)
+```````````````````````````````` example(Emoji: 12) options(unicode-only, prefer-github)
 # some leading text 
 :basecamp:
 .
@@ -169,7 +169,7 @@ Should fail
 
 Converts :warning: to its emoji image
 
-```````````````````````````````` example(Emoji: 13) options(unicode)
+```````````````````````````````` example(Emoji: 13) options(unicode)
 # some leading text 
 :warning:
 .
@@ -181,7 +181,7 @@ Converts :warning: to its emoji image
 
 Converts :warning: to its emoji image
 
-```````````````````````````````` example(Emoji: 14) options(use-github, unicode)
+```````````````````````````````` example(Emoji: 14) options(use-github, unicode)
 # some leading text 
 :warning:
 .
@@ -193,7 +193,7 @@ Converts :warning: to its emoji image
 
 should fail
 
-```````````````````````````````` example(Emoji: 15) options(use-github, unicode)
+```````````````````````````````` example(Emoji: 15) options(use-github, unicode)
 # some leading text 
 :couplekiss:
 .
@@ -205,7 +205,7 @@ should fail
 
 Converts :warning: to its emoji image
 
-```````````````````````````````` example(Emoji: 16) options(prefer-github, unicode)
+```````````````````````````````` example(Emoji: 16) options(prefer-github, unicode)
 # some leading text 
 :warning:
 .
@@ -217,7 +217,7 @@ Converts :warning: to its emoji image
 
 Should use cheat sheet image
 
-```````````````````````````````` example(Emoji: 17) options(prefer-github, unicode)
+```````````````````````````````` example(Emoji: 17) options(prefer-github, unicode)
 # some leading text 
 :couplekiss:
 .
@@ -229,7 +229,7 @@ Should use cheat sheet image
 
 Should be undefined
 
-```````````````````````````````` example(Emoji: 18) options(use-github)
+```````````````````````````````` example(Emoji: 18) options(use-github)
 # some leading text 
 :couplekiss:
 .
@@ -241,7 +241,7 @@ Should be undefined
 
 Should use cheat sheet image
 
-```````````````````````````````` example(Emoji: 19) options(unicode)
+```````````````````````````````` example(Emoji: 19) options(unicode)
 # some leading text 
 :couplekiss:
 .
@@ -253,7 +253,7 @@ Should use cheat sheet image
 
 should be undefined
 
-```````````````````````````````` example(Emoji: 20) options(use-github, unicode-only)
+```````````````````````````````` example(Emoji: 20) options(use-github, unicode-only)
 # some leading text 
 :basecamp:
 .
@@ -265,7 +265,7 @@ should be undefined
 
 change size
 
-```````````````````````````````` example(Emoji: 21) options(size)
+```````````````````````````````` example(Emoji: 21) options(size)
 # some leading text 
 :warning:
 .
@@ -277,7 +277,7 @@ change size
 
 no size
 
-```````````````````````````````` example(Emoji: 22) options(no-size)
+```````````````````````````````` example(Emoji: 22) options(no-size)
 # some leading text 
 :warning:
 .
@@ -289,7 +289,7 @@ no size
 
 no align
 
-```````````````````````````````` example(Emoji: 23) options(no-align)
+```````````````````````````````` example(Emoji: 23) options(no-align)
 # some leading text 
 :warning:
 .
@@ -301,7 +301,7 @@ no align
 
 Should work in links
 
-```````````````````````````````` example Emoji: 24
+```````````````````````````````` example Emoji: 24
 # some leading text 
 [:warning:](/url)
 .
@@ -311,7 +311,7 @@ Should work in links
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 25) options(use-github)
+```````````````````````````````` example(Emoji: 25) options(use-github)
 # some leading text 
 :warning:
 .
@@ -321,7 +321,7 @@ Should work in links
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 26) options(unicode)
+```````````````````````````````` example(Emoji: 26) options(unicode)
 # some leading text 
 :warning:
 .
@@ -331,7 +331,7 @@ Should work in links
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 27) options(use-github, unicode)
+```````````````````````````````` example(Emoji: 27) options(use-github, unicode)
 # some leading text 
 :warning:
 .
@@ -343,7 +343,7 @@ Should work in links
 
 Should work in links
 
-```````````````````````````````` example Emoji: 28
+```````````````````````````````` example Emoji: 28
 # some leading text 
 [:warning:](/url)
 .
@@ -355,7 +355,7 @@ Should work in links
 
 Can be known only to requested target
 
-```````````````````````````````` example(Emoji: 29) options(use-github)
+```````````````````````````````` example(Emoji: 29) options(use-github)
 # some leading text 
 :basecamp:
 .
@@ -367,7 +367,7 @@ Can be known only to requested target
 
 Can be known only to requested target fallback from unicode
 
-```````````````````````````````` example(Emoji: 30) options(use-github, unicode)
+```````````````````````````````` example(Emoji: 30) options(use-github, unicode)
 # some leading text 
 :basecamp:
 .
@@ -379,43 +379,7 @@ Can be known only to requested target fallback from unicode
 
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example Emoji: 31
-# some leading text 
-:warnings:
-.
-# SomeE LeEaADiING teEXt
-
-:warnings:
-````````````````````````````````
-
-
-Unknown shortcuts are converted to text
-
-```````````````````````````````` example Emoji: 32
-# some leading text 
-:basecamp:
-.
-# SomeE LeEaADiING teEXt
-
-:basecamp:
-````````````````````````````````
-
-
-Unknown shortcuts are converted to text
-
-```````````````````````````````` example(Emoji: 33) options(unicode)
-# some leading text 
-:basecamp:
-.
-# SomeE LeEaADiING teEXt
-
-:basecamp:
-````````````````````````````````
-
-
-Unknown shortcuts are converted to text
-
-```````````````````````````````` example(Emoji: 34) options(use-github)
+```````````````````````````````` example Emoji: 31
 # some leading text 
 :warnings:
 .
@@ -427,7 +391,43 @@ Unknown shortcuts are converted to text
 
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example(Emoji: 35) options(use-github)
+```````````````````````````````` example Emoji: 32
+# some leading text 
+:basecamp:
+.
+# SomeE LeEaADiING teEXt
+
+:basecamp:
+````````````````````````````````
+
+
+Unknown shortcuts are converted to text
+
+```````````````````````````````` example(Emoji: 33) options(unicode)
+# some leading text 
+:basecamp:
+.
+# SomeE LeEaADiING teEXt
+
+:basecamp:
+````````````````````````````````
+
+
+Unknown shortcuts are converted to text
+
+```````````````````````````````` example(Emoji: 34) options(use-github)
+# some leading text 
+:warnings:
+.
+# SomeE LeEaADiING teEXt
+
+:warnings:
+````````````````````````````````
+
+
+Unknown shortcuts are converted to text
+
+```````````````````````````````` example(Emoji: 35) options(use-github)
 # some leading text 
 :couplekiss:
 .
@@ -439,7 +439,7 @@ Unknown shortcuts are converted to text
 
 Unknown shortcuts are converted to text, fallback to non unicode
 
-```````````````````````````````` example(Emoji: 36) options(unicode)
+```````````````````````````````` example(Emoji: 36) options(unicode)
 # some leading text 
 :couplekiss:
 .
@@ -451,7 +451,7 @@ Unknown shortcuts are converted to text, fallback to non unicode
 
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example(Emoji: 37) options(unicode)
+```````````````````````````````` example(Emoji: 37) options(unicode)
 # some leading text 
 :warnings:
 .
@@ -463,7 +463,7 @@ Unknown shortcuts are converted to text
 
 Unknown shortcuts are converted to text with inline emphasis parsing
 
-```````````````````````````````` example Emoji: 38
+```````````````````````````````` example Emoji: 38
 # some leading text 
 :**warnings**:
 .
@@ -475,9 +475,9 @@ Unknown shortcuts are converted to text with inline emphasis parsing
 
 ## Issue 168
 
-#168, Text with colons is incorrectly interpreted as an invalid emoji shortcut
+# 168, Text with colons is incorrectly interpreted as an invalid emoji shortcut
 
-```````````````````````````````` example Issue 168: 1
+```````````````````````````````` example 168, Text with colons is incorrectly interpreted as an invalid emoji shortcut: 1
 На сервере выставлен пояс GMT 00:00. Оно всегда должно быть *"3:50 ночи"*, даже если
 .
 нА СЕРВЕРЕ ВЫСТАВЛЕН ПОЯС gmt 00:00. оНО ВСЕГДА ДОЛЖНО БЫТЬ *"3:50 НОЧИ"*, ДАЖЕ ЕСЛИ

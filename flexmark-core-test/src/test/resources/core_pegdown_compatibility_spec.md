@@ -15,7 +15,7 @@ found.
 
 Test to see if bullet mismatch starts a new list
 
-```````````````````````````````` example Bullet Mismatch Starts a New List: 1
+```````````````````````````````` example Bullet Mismatch Starts a New List: 1
 - item
 + item
 * item
@@ -45,7 +45,7 @@ Document[0, 22]
 
 Test to see if ordered list item will set list start if not one
 
-```````````````````````````````` example Ordered List Item Sets List Start: 1
+```````````````````````````````` example Ordered List Item Sets List Start: 1
 2. Non One Start Item
 .
 <ol>
@@ -64,7 +64,7 @@ Document[0, 21]
 
 Test how mismatches in item types are handled
 
-```````````````````````````````` example Mismatched List Item Type Handling: 1
+```````````````````````````````` example Mismatched List Item Type Handling: 1
 - Bullet List
 1. With Ordered Item
 .
@@ -87,7 +87,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example Mismatched List Item Type Handling: 2
+```````````````````````````````` example Mismatched List Item Type Handling: 2
 1. Ordered Item
 - With Bullet List
 .
@@ -114,7 +114,7 @@ Document[0, 34]
 
 Tests how all tight items are generated
 
-```````````````````````````````` example Loose Item Handling: 1
+```````````````````````````````` example Loose Item Handling: 1
 - item 1
 - item 2 
 - item 3 
@@ -146,7 +146,7 @@ Document[0, 38]
 
 Test to see how trailing blank after item determines looseness
 
-```````````````````````````````` example Loose Item Handling: 2
+```````````````````````````````` example Loose Item Handling: 2
 - item 1
 
 - item 2 
@@ -181,7 +181,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 3
+```````````````````````````````` example Loose Item Handling: 3
 - item 1
 - item 2 
 
@@ -214,7 +214,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 4
+```````````````````````````````` example Loose Item Handling: 4
 - item 1
 - item 2 
 - item 3 
@@ -249,7 +249,7 @@ Document[0, 39]
 
 Test looseness with child items
 
-```````````````````````````````` example Loose Item Handling: 5
+```````````````````````````````` example Loose Item Handling: 5
 - item 1
     - item 1.1
 - item 2 
@@ -317,7 +317,7 @@ Document[0, 101]
 
 real pegdown rendering not implemented. See next example
 
-```````````````````````````````` example Loose Item Handling: 6
+```````````````````````````````` example Loose Item Handling: 6
 - item 1
 
     - item 1.1
@@ -386,7 +386,7 @@ Document[0, 102]
 
 actual pegdown rendering, not implemented
 
-```````````````````````````````` example(Loose Item Handling: 7) options(IGNORE)
+```````````````````````````````` example(Loose Item Handling: 7) options(IGNORE)
 - item 1
 
     - item 1.1
@@ -425,7 +425,7 @@ actual pegdown rendering, not implemented
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 8
+```````````````````````````````` example Loose Item Handling: 8
 - item 1
     - item 1.1
 
@@ -496,7 +496,7 @@ Document[0, 102]
 
 real pegdown rendering not implemented. See next example
 
-```````````````````````````````` example Loose Item Handling: 9
+```````````````````````````````` example Loose Item Handling: 9
 - item 1
     - item 1.1
 - item 2 
@@ -565,7 +565,7 @@ Document[0, 102]
 
 actual pegdown rendering, not implemented
 
-```````````````````````````````` example(Loose Item Handling: 10) options(IGNORE)
+```````````````````````````````` example(Loose Item Handling: 10) options(IGNORE)
 - item 1
     - item 1.1
 - item 2 
@@ -604,7 +604,7 @@ actual pegdown rendering, not implemented
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 11
+```````````````````````````````` example Loose Item Handling: 11
 - item 1
     - item 1.1
 - item 2 
@@ -674,7 +674,7 @@ Document[0, 102]
 
 real pegdown rendering not implemented. See next example
 
-```````````````````````````````` example Loose Item Handling: 12
+```````````````````````````````` example Loose Item Handling: 12
 - item 1
     - item 1.1
 - item 2 
@@ -743,7 +743,7 @@ Document[0, 102]
 
 actual pegdown rendering, not implemented
 
-```````````````````````````````` example(Loose Item Handling: 13) options(IGNORE)
+```````````````````````````````` example(Loose Item Handling: 13) options(IGNORE)
 - item 1
     - item 1.1
 - item 2 
@@ -783,7 +783,7 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 14
+```````````````````````````````` example Loose Item Handling: 14
 - item 1
     - item 1.1
 - item 2 
@@ -853,7 +853,7 @@ Document[0, 102]
 
 real pegdown rendering not implemented. See next example
 
-```````````````````````````````` example Loose Item Handling: 15
+```````````````````````````````` example Loose Item Handling: 15
 - item 1
     - item 1.1
 - item 2 
@@ -922,7 +922,7 @@ Document[0, 102]
 
 actual pegdown rendering, not implemented
 
-```````````````````````````````` example(Loose Item Handling: 16) options(IGNORE)
+```````````````````````````````` example(Loose Item Handling: 16) options(IGNORE)
 - item 1
     - item 1.1
 - item 2 
@@ -965,7 +965,7 @@ actual pegdown rendering, not implemented
 
 Test to see which list items can interrupt paragraphs.
 
-```````````````````````````````` example List Item Interrupts Paragraph: 1
+```````````````````````````````` example List Item Interrupts Paragraph: 1
 Bullet item can interrupt paragraph
 * item
 
@@ -1046,7 +1046,7 @@ Document[0, 547]
 
 Test to see which list items can interrupt another bullet list item's paragraphs
 
-```````````````````````````````` example List Item Interrupts Paragraph: 2
+```````````````````````````````` example List Item Interrupts Paragraph: 2
 * Bullet item can interrupt paragraph of a bullet list item
 * item
 
@@ -1213,7 +1213,7 @@ Document[0, 914]
 
 Test to see which list items can interrupt another numbered list item's paragraphs
 
-```````````````````````````````` example List Item Interrupts Paragraph: 3
+```````````````````````````````` example List Item Interrupts Paragraph: 3
 1. Bullet item can interrupt paragraph of a numbered list item
 * item
 
@@ -1376,7 +1376,7 @@ Document[0, 943]
 
 Test if list item indent handling for edge cases
 
-```````````````````````````````` example List Item Indent Handling: 1
+```````````````````````````````` example List Item Indent Handling: 1
 * item 1
  * item 2
   * item 3
@@ -1441,7 +1441,7 @@ Document[0, 116]
 
 real pegdown rendering not implemented. See next example
 
-```````````````````````````````` example List Item Indent Handling: 2
+```````````````````````````````` example List Item Indent Handling: 2
 * item 1
 
  * item 2
@@ -1528,7 +1528,7 @@ Document[0, 152]
 
 actual pegdown rendering, not implemented
 
-```````````````````````````````` example(List Item Indent Handling: 3) options(IGNORE)
+```````````````````````````````` example(List Item Indent Handling: 3) options(IGNORE)
 * item 1
 
  * item 2
@@ -1615,7 +1615,7 @@ Document[0, 153]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 4
+```````````````````````````````` example List Item Indent Handling: 4
 *  item 1
  *  item 2
   *  item 3
@@ -1681,7 +1681,7 @@ Document[0, 125]
 Test shows where the boundary switch to indented code occurs. Sub-items first paragraph is a
 paragraph, the second is indented code
 
-```````````````````````````````` example List Item Indent Handling: 5
+```````````````````````````````` example List Item Indent Handling: 5
 -   test
     - sub item
 
@@ -1756,7 +1756,7 @@ paragraph, the second is indented code
 More extensive test to show where the boundary switch to indented code occurs. Sub-items first
 paragraph is a paragraph, the second is indented code
 
-```````````````````````````````` example List Item Indent Handling: 6
+```````````````````````````````` example List Item Indent Handling: 6
 * item 1
     
   item para 1
@@ -1971,7 +1971,7 @@ the previous list item. There was one that did it that way, GitHub comments if I
 right, but now they switched to commonmark list handling with mods. Guess it is now GFC--GitHub
 Flavoured Commonmark.
 
-```````````````````````````````` example List Item Indent Handling: 7
+```````````````````````````````` example List Item Indent Handling: 7
 *  item 1
    * item 2
   * item 3
@@ -1998,7 +1998,7 @@ Document[0, 32]
 
 Test how headings in list items are handled, leading space allowed or not
 
-```````````````````````````````` example List Item Indent Handling: 8
+```````````````````````````````` example List Item Indent Handling: 8
 * item 1
 
     # Heading 1
@@ -2087,7 +2087,7 @@ Document[0, 374]
 
 Whether blank lines are required to start a block quote
 
-```````````````````````````````` example Block quote parsing: 1
+```````````````````````````````` example Block quote parsing: 1
 paragraph text
 > block quoted text
 .
@@ -2107,7 +2107,7 @@ Document[0, 34]
 
 Whether blank lines are required to start a block quote
 
-```````````````````````````````` example Block quote parsing: 2
+```````````````````````````````` example Block quote parsing: 2
 paragraph text
 
 > block quoted text
@@ -2128,7 +2128,7 @@ Document[0, 35]
 
 Whether blank lines are ignored and treated as if prefixed with block quote
 
-```````````````````````````````` example Block quote parsing: 3
+```````````````````````````````` example Block quote parsing: 3
 > block quoted text
 
 > more block quoted text
@@ -2149,7 +2149,7 @@ Document[0, 45]
 
 Whether block quotes continue to a blank line
 
-```````````````````````````````` example Block quote parsing: 4
+```````````````````````````````` example Block quote parsing: 4
 > block quoted text
 lazy continuation
 
@@ -2173,7 +2173,7 @@ Document[0, 56]
 
 Whether leading spaces are allowed before block quote marker
 
-```````````````````````````````` example Block quote parsing: 5
+```````````````````````````````` example Block quote parsing: 5
  > block quote paragraph text
 .
 <p>&gt; block quote paragraph text</p>
@@ -2186,7 +2186,7 @@ Document[0, 29]
 
 Whether trailing spaces are required after block quote marker
 
-```````````````````````````````` example Block quote parsing: 6
+```````````````````````````````` example Block quote parsing: 6
 >block quote paragraph text
 .
 <blockquote>
@@ -2204,7 +2204,7 @@ Whether block quotes can interrupt item paragraph
 
 real pegdown rendering not implemented. See next example
 
-```````````````````````````````` example Block quote parsing: 7
+```````````````````````````````` example Block quote parsing: 7
 * item 1
     > block quoted text
 
@@ -2251,7 +2251,7 @@ Document[0, 90]
 
 actual pegdown rendering, not implemented
 
-```````````````````````````````` example(Block quote parsing: 8) options(IGNORE)
+```````````````````````````````` example(Block quote parsing: 8) options(IGNORE)
 * item 1
     > block quoted text
 
@@ -2282,7 +2282,7 @@ actual pegdown rendering, not implemented
 
 Whether block quotes can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 9
+```````````````````````````````` example Block quote parsing: 9
 * item 1
 
     > block quoted text
@@ -2331,7 +2331,7 @@ Document[0, 92]
 
 Whether block quotes with leading space can interrupt item paragraphs
 
-```````````````````````````````` example Block quote parsing: 10
+```````````````````````````````` example Block quote parsing: 10
 * item 1
      > block quoted text
 
@@ -2368,7 +2368,7 @@ Document[0, 92]
 
 Whether block quotes with leading space can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 11
+```````````````````````````````` example Block quote parsing: 11
 * item 1
 
      > block quoted text
@@ -2413,7 +2413,7 @@ Whether block quotes without trailing space can interrupt item paragraphs
 
 real pegdown rendering not implemented. See next example
 
-```````````````````````````````` example Block quote parsing: 12
+```````````````````````````````` example Block quote parsing: 12
 * item 1
     >block quoted text
 
@@ -2460,7 +2460,7 @@ Document[0, 88]
 
 actual pegdown rendering, not implemented
 
-```````````````````````````````` example(Block quote parsing: 13) options(IGNORE)
+```````````````````````````````` example(Block quote parsing: 13) options(IGNORE)
 * item 1
     >block quoted text
 
@@ -2491,7 +2491,7 @@ actual pegdown rendering, not implemented
 
 Whether block quotes without trailing space can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 14
+```````````````````````````````` example Block quote parsing: 14
 * item 1
 
     >block quoted text
@@ -2540,7 +2540,7 @@ Document[0, 90]
 
 Test to make sure content indented deeply nested lists process correctly
 
-```````````````````````````````` example Block quote parsing: 15
+```````````````````````````````` example Block quote parsing: 15
 - item 1
     - item 2
         - item 3
@@ -2628,7 +2628,7 @@ Document[0, 226]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quote parsing: 16
+```````````````````````````````` example Block quote parsing: 16
 1. item 1
     1. item 2
         1. item 3
@@ -2720,7 +2720,7 @@ Document[0, 235]
 
 options for plain text rendering
 
-```````````````````````````````` example Issues: 1
+```````````````````````````````` example Issues: 1
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
 * Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
@@ -2857,7 +2857,7 @@ Document[0, 1096]
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return
 
-```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
 <<test>>
 .
 <p>&lt;<test>&gt;</p>
@@ -2870,7 +2870,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
+```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
 <<test>>⏎
 .
 <p>&lt;<test>&gt;</p>
@@ -2883,7 +2883,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
 <<test>>⏎
 .
 <p>&lt;<test>&gt;</p>
@@ -2896,7 +2896,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
 <<test>>
 
 .
@@ -2915,7 +2915,7 @@ Document[0, 10]
 Issue #108, problem of the list of some Space in front, misunderstanding of
 `Parser.LISTS_ITEM_INDENT` setting to 2
 
-```````````````````````````````` example(Issue 108: 1) options(lists-item-indent)
+```````````````````````````````` example(Issue 108: 1) options(lists-item-indent)
   1. **download**  
   2. **abc**  →→
   3. **999**
@@ -2948,7 +2948,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue 108: 2
+```````````````````````````````` example Issue 108: 2
   1. **download**  
   2. **abc**  →→
   3. **999**
@@ -2979,7 +2979,7 @@ Document[0, 51]
 
 ## HTML Parsing
 
-```````````````````````````````` example HTML Parsing: 1
+```````````````````````````````` example HTML Parsing: 1
 <div>
 
   This is html text
@@ -3002,7 +3002,7 @@ Document[0, 62]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML Parsing: 2
+```````````````````````````````` example HTML Parsing: 2
 <div><strong>
 
   This is html text
@@ -3025,7 +3025,7 @@ Document[0, 70]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML Parsing: 3
+```````````````````````````````` example HTML Parsing: 3
 <div>
   <!--
 
@@ -3061,7 +3061,7 @@ Document[0, 97]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML Parsing: 4
+```````````````````````````````` example HTML Parsing: 4
 <hr>
 # Heading
 .
@@ -3075,7 +3075,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML Parsing: 5
+```````````````````````````````` example HTML Parsing: 5
 <div attr
     attr1="test"
 >
@@ -3098,7 +3098,7 @@ Document[0, 61]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML Parsing: 6
+```````````````````````````````` example HTML Parsing: 6
 <div attr
     attr1="test"
     
@@ -3123,7 +3123,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML Parsing: 7
+```````````````````````````````` example HTML Parsing: 7
 <div>
   <div>
 
@@ -3150,7 +3150,7 @@ Document[0, 98]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML Parsing: 8
+```````````````````````````````` example HTML Parsing: 8
 <p>par</p>
     <ul>
       <li>list item</li>
@@ -3168,7 +3168,7 @@ Document[0, 54]
 
 allow blank line interruption of unclosed HTML blocks
 
-```````````````````````````````` example(HTML Parsing: 9) options(blank-line-interrupts-html)
+```````````````````````````````` example(HTML Parsing: 9) options(blank-line-interrupts-html)
 <div>
 <a href="http://somelink.com/poster.pdf">
 
@@ -3198,7 +3198,7 @@ Document[0, 111]
 
 Don't make items loose
 
-```````````````````````````````` example(Issue 124: 1) options(lists-no-loose)
+```````````````````````````````` example(Issue 124: 1) options(lists-no-loose)
 * list1
 * list2
 

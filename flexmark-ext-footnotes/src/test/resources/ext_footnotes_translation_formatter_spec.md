@@ -18,7 +18,7 @@ indented by 4 spaces or a tab from the indent level of the footnote.
 
 basic
 
-```````````````````````````````` example(Footnotes: 1) options(details)
+```````````````````````````````` example(Footnotes: 1) options(details)
 text [^footnote] embedded.
 
 [^footnote]: footnote text
@@ -52,7 +52,7 @@ teEXt [^footnote] eEmBeEDDeED.
 
 undefined
 
-```````````````````````````````` example Footnotes: 2
+```````````````````````````````` example Footnotes: 2
 text [^undefined] embedded.
 
 [^footnote]: footnote text
@@ -69,7 +69,7 @@ teEXt [^undefined] eEmBeEDDeED.
 
 duplicated
 
-```````````````````````````````` example Footnotes: 3
+```````````````````````````````` example Footnotes: 3
 text [^footnote] embedded.
 
 [^footnote]: footnote text
@@ -91,7 +91,7 @@ teEXt [^footnote] eEmBeEDDeED.
 
 nested
 
-```````````````````````````````` example Footnotes: 4
+```````````````````````````````` example Footnotes: 4
 text [^footnote] embedded.
 
 [^footnote]: footnote text with [^another] embedded footnote
@@ -113,7 +113,7 @@ teEXt [^footnote] eEmBeEDDeED.
 
 circular
 
-```````````````````````````````` example Footnotes: 5
+```````````````````````````````` example Footnotes: 5
 text [^footnote] embedded.
 
 [^footnote]: footnote text with [^another] embedded footnote
@@ -135,7 +135,7 @@ teEXt [^footnote] eEmBeEDDeED.
 
 compound
 
-```````````````````````````````` example Footnotes: 6
+```````````````````````````````` example Footnotes: 6
 This paragraph has a footnote[^footnote].
 
 [^footnote]: This is the body of the footnote.
@@ -164,7 +164,7 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^footnote].
 
 Not a footnote nor a footnote definition if space between [ and ^.
 
-```````````````````````````````` example Footnotes: 7
+```````````````````````````````` example Footnotes: 7
 This paragraph has no footnote[ ^footnote].
 
 [ ^footnote]: This is the body of the footnote.
@@ -216,7 +216,7 @@ Document[0, 264]
 
 Unused footnotes are not used and do not show up on the page.
 
-```````````````````````````````` example Footnotes: 8
+```````````````````````````````` example Footnotes: 8
 This paragraph has a footnote[^2].
 
 [^1]: This is the body of the unused footnote.
@@ -253,7 +253,7 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
 Undefined footnotes are rendered as if they were text, with emphasis left as is.
 
-```````````````````````````````` example Footnotes: 9
+```````````````````````````````` example Footnotes: 9
 This paragraph has a footnote[^**footnote**].
 
 [^footnote]: This is the body of the footnote.
@@ -282,7 +282,7 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^**footnote**].
 
 Footnote numbers are assigned in order of their reference in the document
 
-```````````````````````````````` example Footnotes: 10
+```````````````````````````````` example Footnotes: 10
 This paragraph has a footnote[^2]. Followed by another[^1]. 
 
 [^1]: This is the body of the unused footnote.
@@ -319,7 +319,7 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^2]. foLLoWeED ByY aANotheER[^1].
 
 Footnotes can contain references to other footnotes.
 
-```````````````````````````````` example Footnotes: 11
+```````````````````````````````` example Footnotes: 11
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -356,7 +356,7 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
 Customized strings
 
-```````````````````````````````` example Footnotes: 12
+```````````````````````````````` example Footnotes: 12
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -393,7 +393,7 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
 Customized link ref class
 
-```````````````````````````````` example Footnotes: 13
+```````````````````````````````` example Footnotes: 13
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -406,7 +406,7 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
 Customized link ref class
 
-```````````````````````````````` example Footnotes: 14
+```````````````````````````````` example Footnotes: 14
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -419,7 +419,7 @@ thiIS paARaAGRaAph haAS aA FootNoteE[^2].
 
 Parser emulation family indent handling is ignored. Otherwise the indent can be huge.
 
-```````````````````````````````` example Footnotes: 15
+```````````````````````````````` example Footnotes: 15
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -460,7 +460,7 @@ Document[0, 205]
 
 List item indent is used
 
-```````````````````````````````` example Footnotes: 16
+```````````````````````````````` example Footnotes: 16
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -485,7 +485,7 @@ not aA paARaAGRaAph oF theE FootNoteE
 
 ## Placement Options
 
-```````````````````````````````` example Placement Options: 1
+```````````````````````````````` example Placement Options: 1
 This paragraph has a footnote[^1].  
 
 [^2]: This is the body of the footnote.
@@ -548,7 +548,7 @@ not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
-```````````````````````````````` example(Placement Options: 2) options(references-document-top)
+```````````````````````````````` example(Placement Options: 2) options(references-document-top)
 This paragraph has a footnote[^1].  
 
 [^2]: This is the body of the footnote.
@@ -611,7 +611,7 @@ not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
-```````````````````````````````` example(Placement Options: 3) options(references-document-bottom)
+```````````````````````````````` example(Placement Options: 3) options(references-document-bottom)
 This paragraph has a footnote[^1].  
 
 [^2]: This is the body of the footnote.
@@ -674,7 +674,7 @@ not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
-```````````````````````````````` example(Placement Options: 4) options(references-group-with-first)
+```````````````````````````````` example(Placement Options: 4) options(references-group-with-first)
 This paragraph has a footnote[^1].  
 
 [^2]: This is the body of the footnote.
@@ -737,7 +737,7 @@ not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
-```````````````````````````````` example(Placement Options: 5) options(references-group-with-last)
+```````````````````````````````` example(Placement Options: 5) options(references-group-with-last)
 This paragraph has a footnote[^1].  
 
 [^2]: This is the body of the footnote.
@@ -800,7 +800,7 @@ not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
-```````````````````````````````` example(Placement Options: 6) options(references-document-bottom, references-sort)
+```````````````````````````````` example(Placement Options: 6) options(references-document-bottom, references-sort)
 This paragraph has a footnote[^1].  
 
 [^2]: This is the body of the footnote.
@@ -863,7 +863,7 @@ not aA paARaAGRaAph oF theE FootNoteE
 ````````````````````````````````
 
 
-```````````````````````````````` example(Placement Options: 7) options(references-document-bottom, references-sort-unused-last)
+```````````````````````````````` example(Placement Options: 7) options(references-document-bottom, references-sort-unused-last)
 This paragraph has a footnote[^1].  
 
 [^2]: This is the body of the footnote.

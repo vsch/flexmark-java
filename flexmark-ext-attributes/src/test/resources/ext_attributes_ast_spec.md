@@ -93,7 +93,7 @@ text.
 
 attributes assigned to paragraph
 
-```````````````````````````````` example(Text Node Previous Sibling: 1) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 1) options(no-text-attributes)
 Cond 1.1 text node{.red}
 
 Cond 1.1 text node {.red}
@@ -113,7 +113,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example Text Node Previous Sibling: 2
+```````````````````````````````` example Text Node Previous Sibling: 2
 Cond 1.2 text node{.red}
 
 Cond 1.3 text node {.red}
@@ -136,7 +136,7 @@ Document[0, 51]
 
 can delimit with comments
 
-```````````````````````````````` example Text Node Previous Sibling: 3
+```````````````````````````````` example Text Node Previous Sibling: 3
 Cond 1.2 text <!---->node{.red}
 
 Cond 1.3 text <!---->node {.red}
@@ -161,7 +161,7 @@ Document[0, 65]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Text Node Previous Sibling: 4) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 4) options(no-text-attributes)
 Cond 1.2 **text node{.red}**
 
 Cond 1.3 **text node {.red}**
@@ -185,7 +185,7 @@ Document[0, 59]
 ````````````````````````````````
 
 
-```````````````````````````````` example Text Node Previous Sibling: 5
+```````````````````````````````` example Text Node Previous Sibling: 5
 Cond 1.2 **text node{.red}**
 
 Cond 1.3 **text node {.red}**
@@ -212,7 +212,7 @@ Document[0, 59]
 
 can delimit with comments
 
-```````````````````````````````` example Text Node Previous Sibling: 6
+```````````````````````````````` example Text Node Previous Sibling: 6
 Cond 1.2 **text <!---->node{.red}**
 
 Cond 1.3 **text <!---->node {.red}**
@@ -241,7 +241,7 @@ Document[0, 73]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Text Node Previous Sibling: 7) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 7) options(no-text-attributes)
 > Cond 1.1 text node{.red}
 
 > Cond 1.1 text node {.red}
@@ -269,7 +269,7 @@ Document[0, 55]
 
 attributes assigned to paragraph
 
-```````````````````````````````` example(Text Node Previous Sibling: 8) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 8) options(no-text-attributes)
 > Cond 1.2 text node{.red}
 
 > Cond 1.3 text node {.red}
@@ -297,7 +297,7 @@ Document[0, 55]
 
 attributes assigned to list item
 
-```````````````````````````````` example(Text Node Previous Sibling: 9) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 9) options(no-text-attributes)
 * Cond 1.1 text node{.red}
 
 * Cond 1.1 text node {.red}
@@ -328,7 +328,7 @@ Document[0, 55]
 
 attributes assigned to list item
 
-```````````````````````````````` example Text Node Previous Sibling: 10
+```````````````````````````````` example Text Node Previous Sibling: 10
 * Cond 1.2 text node{.red}
 
 * Cond 1.3 text node {.red}
@@ -368,7 +368,7 @@ Document[0, 55]
   * else
     * Cond 2.3 attributes are assigned to the previous sibling
 
-```````````````````````````````` example(Non Text Node Previous Sibling: 1) options(no-text-attributes)
+```````````````````````````````` example(Non Text Node Previous Sibling: 1) options(no-text-attributes)
 Cond 2.1 Some text **bold text** {.red}
 
 Cond 2.2 Some text **bold text**{.red}{.blue}
@@ -403,7 +403,7 @@ Document[0, 126]
 ````````````````````````````````
 
 
-```````````````````````````````` example Non Text Node Previous Sibling: 2
+```````````````````````````````` example Non Text Node Previous Sibling: 2
 Cond 2.1 Some text **bold text** {.red}
 
 Cond 2.2 Some text **bold text**{.red}{.blue}
@@ -466,7 +466,7 @@ Cond 3.1 attributes go to the paragraph parent's parent
 
 attributes are assigned to the list element
 
-```````````````````````````````` example No Previous Sibling - Cond 3.1: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.1: 1
 * {.red} list item 1
 * list item 2
 
@@ -511,7 +511,7 @@ Document[0, 70]
 
 attributes are assigned to the definition list
 
-```````````````````````````````` example No Previous Sibling - Cond 3.1: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.1: 2
 Definition Term
 :   {.red} definition item 1
 :   definition item 2
@@ -562,7 +562,7 @@ Cond 3.2 attributes go to paragraph's previous sibling,
 
 Assigned to paragraph of list item 2
 
-```````````````````````````````` example No Previous Sibling - Cond 3.2: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 1
 * list item 1
 * list item 2
 
@@ -593,7 +593,7 @@ Document[0, 37]
 
 Assigned to paragraph of list item 2
 
-```````````````````````````````` example No Previous Sibling - Cond 3.2: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 2
 * list item 1
 
 * list item 2
@@ -625,7 +625,7 @@ Document[0, 38]
 
 Assigned to definition item 2 paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.2: 3
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 3
 definition term
 : definition item 1
 : definition item 2
@@ -658,7 +658,7 @@ Document[0, 67]
 
 Assigned to definition item 2 paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.2: 4
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 4
 definition term
 : definition item 1
 
@@ -700,7 +700,7 @@ Cond 3.3 attributes go to the paragraph
 
 Assigned to paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.3: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.3: 1
 * list item 1
 * list item 2
 
@@ -734,7 +734,7 @@ Document[0, 49]
 
 Assigned to definition item 2
 
-```````````````````````````````` example No Previous Sibling - Cond 3.3: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.3: 2
 definition term
 : definition item 1
 : definition item 2
@@ -777,7 +777,7 @@ Document[0, 77]
 
 Assigned to block quote
 
-```````````````````````````````` example No Previous Sibling - Cond 3.4: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.4: 1
 > {.red}
 > 
 > block quote text
@@ -802,7 +802,7 @@ Cond 3.5 attributes go to paragraph's previous sibling,
 
 Assigned to previous paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 1
 Some paragraph
  
 {.red}
@@ -820,7 +820,7 @@ Document[0, 23]
 
 Assigned to previous block quote
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 2
 > Some paragraph
  
 {.red}
@@ -841,7 +841,7 @@ Document[0, 25]
 
 Assigned to previous paragraph in the block quote
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 3
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 3
 > Some paragraph
 > 
 > {.red}
@@ -862,7 +862,7 @@ Document[0, 28]
 
 Assigned to previous list
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 4
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 4
 * list item 1
 * list item 2
  
@@ -889,7 +889,7 @@ Document[0, 36]
 
 Assigned to previous definition list
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 5
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 5
 definition term 1
 : definition item 1.1
  
@@ -927,7 +927,7 @@ Document[0, 90]
 
 Assigned to previous table
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 6
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 6
 
 | head |
 |------|
@@ -970,7 +970,7 @@ Cond 3.6 attributes go to the paragraph
 
 Assigned to paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.6: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.6: 1
 Some paragraph
  
 {.red} Some Text
@@ -993,7 +993,7 @@ Document[0, 33]
 * non paragraph parent
 * Cond 3.7 attributes go to the parent
 
-```````````````````````````````` example No Previous Sibling - Cond 3.7: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.7: 1
 Some Text **{.red}bold text**
 .
 <p>Some Text <strong class="red">bold text</strong></p>
@@ -1018,7 +1018,7 @@ assigned to the element and has an `id` attribute.
 
 ### Cond 4.1
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 1
+```````````````````````````````` example Anchor Targets - Cond 4.1: 1
 # Heading
 .
 <h1 id="heading">Heading</h1>
@@ -1029,7 +1029,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 2
+```````````````````````````````` example Anchor Targets - Cond 4.1: 2
 # Heading {#custom-id}
 .
 <h1 id="custom-id">Heading</h1>
@@ -1042,7 +1042,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Anchor Targets - Cond 4.1: 3) options(anchors)
+```````````````````````````````` example(Anchor Targets - Cond 4.1: 3) options(anchors)
 # Heading {#custom-id}
 .
 <h1><a href="#custom-id" id="custom-id"></a>Heading</h1>
@@ -1056,7 +1056,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 4
+```````````````````````````````` example Anchor Targets - Cond 4.1: 4
 # Heading # {#custom-id}
 .
 <h1 id="custom-id">Heading #</h1>
@@ -1069,7 +1069,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 5
+```````````````````````````````` example Anchor Targets - Cond 4.1: 5
 Heading {#custom-id}
 ======================
 .
@@ -1083,7 +1083,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 6
+```````````````````````````````` example Anchor Targets - Cond 4.1: 6
 Heading {#123-heading}
 ======================
 .
@@ -1107,7 +1107,7 @@ paragraph text.
 
 ### Cond 5.1
 
-```````````````````````````````` example Attributes on Reference - Cond 5.1: 1
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 1
 [test]
 
 [test]: http://example.com 
@@ -1127,7 +1127,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example Attributes on Reference - Cond 5.1: 2
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 2
 [reference 1][test] 
 
 [reference 2][test] 
@@ -1155,7 +1155,7 @@ Document[0, 92]
 
 Ref image
 
-```````````````````````````````` example Attributes on Reference - Cond 5.1: 3
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 3
 ![test]
 
 [test]: <http://example.com/test.png> 
@@ -1175,7 +1175,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-```````````````````````````````` example Attributes on Reference - Cond 5.1: 4
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 4
 ![reference 1][test]
 
 ![reference 2][test]
@@ -1203,7 +1203,7 @@ Document[0, 110]
 
 ## Random Tests
 
-```````````````````````````````` example(Random Tests: 1) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 1) options(no-text-attributes)
 Sample text{.class-name}
 .
 <p class="class-name">Sample text</p>
@@ -1218,7 +1218,7 @@ Document[0, 24]
 
 Immediately attached to previous text will apply to the sibling text node
 
-```````````````````````````````` example Random Tests: 2
+```````````````````````````````` example Random Tests: 2
 Sample text{.class-name}
 .
 <p><span class="class-name">Sample text</span></p>
@@ -1232,7 +1232,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 3) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 3) options(no-text-attributes)
 Paragraph{style="color:red"}
 .
 <p style="color:red">Paragraph</p>
@@ -1245,7 +1245,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 4
+```````````````````````````````` example Random Tests: 4
 Paragraph{style="color:red"}
 .
 <p><span style="color:red">Paragraph</span></p>
@@ -1259,7 +1259,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 5) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 5) options(no-text-attributes)
 Paragraph {style="color:red"}
 .
 <p style="color:red">Paragraph</p>
@@ -1272,7 +1272,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 6) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 6) options(no-text-attributes)
 Sample text **bold**{.class-name}
 .
 <p>Sample text <strong class="class-name">bold</strong></p>
@@ -1287,7 +1287,7 @@ Document[0, 33]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 7) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 7) options(no-text-attributes)
 Sample text **bold** {.class-name}
 .
 <p class="class-name">Sample text <strong>bold</strong></p>
@@ -1302,7 +1302,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 8
+```````````````````````````````` example Random Tests: 8
 Sample<!----> text{.class-name}
 .
 <p>Sample<!----><span class="class-name"> text</span></p>
@@ -1318,7 +1318,7 @@ Document[0, 31]
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 9
+```````````````````````````````` example Random Tests: 9
 Sample text **bold<!----> text{.class-name}**
 .
 <p>Sample text <strong>bold<!----><span class="class-name"> text</span></strong></p>
@@ -1336,7 +1336,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 10) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 10) options(no-text-attributes)
 Sample text **bold{.class-name}**
 .
 <p>Sample text <strong class="class-name">bold</strong></p>
@@ -1351,7 +1351,7 @@ Document[0, 33]
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 11
+```````````````````````````````` example Random Tests: 11
 Sample text **bold{.class-name}**
 .
 <p>Sample text <strong><span class="class-name">bold</span></strong></p>
@@ -1367,7 +1367,7 @@ Document[0, 33]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 12) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 12) options(no-text-attributes)
 Sample text **bold {.class-name}**
 .
 <p>Sample text <strong class="class-name">bold</strong></p>
@@ -1382,7 +1382,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 13) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 13) options(no-text-attributes)
 Sample text ![Sample Image](http://example.com){width=64 height=32}
 .
 <p>Sample text <img src="http://example.com" alt="Sample Image" width="64" height="32" /></p>
@@ -1398,7 +1398,7 @@ Document[0, 67]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 14) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 14) options(no-text-attributes)
 * list item{style="color:red"}
 * list item {style="color:blue"}
 .
@@ -1422,7 +1422,7 @@ Document[0, 63]
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 15
+```````````````````````````````` example Random Tests: 15
 * list item{style="color:red"}
 * list item {style="color:blue"}
 .
@@ -1449,7 +1449,7 @@ Document[0, 63]
 
 empty tight items without attributes should not wrap spans
 
-```````````````````````````````` example(Random Tests: 16) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 16) options(no-text-attributes)
 paragraph 1
 
 * list item 2
@@ -1482,7 +1482,7 @@ Only attributes, go to paragraph's previous, if none to paragraph's parent
 
 To previous sibling
 
-```````````````````````````````` example Paragraphs: 1
+```````````````````````````````` example Paragraphs: 1
 paragraph 1
 
 {style="color:red"}
@@ -1500,7 +1500,7 @@ Document[0, 32]
 
 To parent
 
-```````````````````````````````` example Paragraphs: 2
+```````````````````````````````` example Paragraphs: 2
 {style="color:red"}
 
 paragraph 1
@@ -1518,7 +1518,7 @@ Document[0, 32]
 
 To parent, in this case list
 
-```````````````````````````````` example Paragraphs: 3
+```````````````````````````````` example Paragraphs: 3
 paragraph 1
 
 * {style="color:red"} list item 1
@@ -1547,7 +1547,7 @@ Document[0, 60]
 
 To parent, in this case list
 
-```````````````````````````````` example Paragraphs: 4
+```````````````````````````````` example Paragraphs: 4
 paragraph 1
 
 * list item 2
@@ -1576,7 +1576,7 @@ Document[0, 60]
 
 ## Headings Tests
 
-```````````````````````````````` example Headings Tests: 1
+```````````````````````````````` example Headings Tests: 1
 Heading
 =======
 .
@@ -1588,7 +1588,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 2
+```````````````````````````````` example Headings Tests: 2
 Heading with emoji :+1:
 =======================
 .
@@ -1602,7 +1602,7 @@ Document[0, 47]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings Tests: 3) options(no-text-attributes)
+```````````````````````````````` example(Headings Tests: 3) options(no-text-attributes)
 Heading{#id1} with multiple{#id2} anchors{#id3}
 ===============================================
 .
@@ -1622,7 +1622,7 @@ Document[0, 95]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 4
+```````````````````````````````` example Headings Tests: 4
 Heading{#id1} with multiple{#id2} anchors{#id3}
 ===============================================
 .
@@ -1645,7 +1645,7 @@ Document[0, 95]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings Tests: 5) options(no-text-attributes)
+```````````````````````````````` example(Headings Tests: 5) options(no-text-attributes)
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 =================================================================
 .
@@ -1666,7 +1666,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 6
+```````````````````````````````` example Headings Tests: 6
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 =================================================================
 .
@@ -1690,7 +1690,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 7
+```````````````````````````````` example Headings Tests: 7
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3} {#id4}
 ========================================================================
 .
@@ -1716,7 +1716,7 @@ Document[0, 145]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 8
+```````````````````````````````` example Headings Tests: 8
 ### Heading with trailing { style='color:red' } More Text
 .
 <h3 id="heading-with-trailing--more-text"><span style="color:red">Heading with trailing </span> More Text</h3>
@@ -1731,7 +1731,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 9
+```````````````````````````````` example Headings Tests: 9
 ### Heading with trailing{ style='color:red' } More Text
 .
 <h3 id="heading-with-trailing-more-text"><span style="color:red">Heading with trailing</span> More Text</h3>
@@ -1746,7 +1746,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 10
+```````````````````````````````` example Headings Tests: 10
 ### Heading with trailing{ style='color:red' }
 .
 <h3 id="heading-with-trailing"><span style="color:red">Heading with trailing</span></h3>
@@ -1760,7 +1760,7 @@ Document[0, 46]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 11
+```````````````````````````````` example Headings Tests: 11
 ### Heading {#explicit-id}
 .
 <h3 id="explicit-id">Heading</h3>
@@ -1773,7 +1773,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 12
+```````````````````````````````` example Headings Tests: 12
 ### Heading{#explicit-id}
 .
 <h3 id="heading"><span id="explicit-id">Heading</span></h3>
@@ -1787,7 +1787,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 13
+```````````````````````````````` example Headings Tests: 13
 Heading {#explicit-id}
 ==============
 .
@@ -1801,7 +1801,7 @@ Document[0, 37]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 14
+```````````````````````````````` example Headings Tests: 14
 Heading{#explicit-id}
 ==============
 .
@@ -1820,7 +1820,7 @@ Document[0, 36]
 
 Default rendering with emphasis
 
-```````````````````````````````` example TOC: 1
+```````````````````````````````` example TOC: 1
 [TOC] 
 
 # Heading **some bold** 1 {#heading-1}
@@ -1872,7 +1872,7 @@ Document[0, 161]
 
 wrap non-attributes by default
 
-```````````````````````````````` example Non-Attributes: 1
+```````````````````````````````` example Non-Attributes: 1
 This is a test. It works fine until a word like don't appears.{.style} Another style might follow.{.style2}
 .
 <p><span class="style">This is a test. It works fine until a word like don&rsquo;t appears.</span><span class="style2"> Another style might follow.</span></p>
@@ -1892,7 +1892,7 @@ Document[0, 107]
 ````````````````````````````````
 
 
-```````````````````````````````` example Non-Attributes: 2
+```````````````````````````````` example Non-Attributes: 2
 This is a test. It works fine until a word like 'don't' appears.{.style} Another style might
 follow.{.style2}
 .
@@ -1919,7 +1919,7 @@ Document[0, 109]
 ````````````````````````````````
 
 
-```````````````````````````````` example Non-Attributes: 3
+```````````````````````````````` example Non-Attributes: 3
 This is a test. It works fine until a word like don\'t appears.{.style} Another style might
 follow.{.style2}
 .
@@ -1943,7 +1943,7 @@ Document[0, 108]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Non-Attributes: 4) options(dont-wrap-non-attributes)
+```````````````````````````````` example(Non-Attributes: 4) options(dont-wrap-non-attributes)
 This is a test. It works fine until a word like don't appears.{.style} Another style might follow.{.style2}
 .
 <p>This is a test. It works fine until a word like don&rsquo;<span class="style">t appears.</span><span class="style2"> Another style might follow.</span></p>
@@ -1963,7 +1963,7 @@ Document[0, 107]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Non-Attributes: 5) options(dont-wrap-non-attributes)
+```````````````````````````````` example(Non-Attributes: 5) options(dont-wrap-non-attributes)
 This is a test. It works fine until a word like 'don't' appears.{.style} Another style might follow.{.style2}
 .
 <p>This is a test. It works fine until a word like &lsquo;don&rsquo;t&rsquo;<span class="style"> appears.</span><span class="style2"> Another style might follow.</span></p>
@@ -1986,7 +1986,7 @@ Document[0, 109]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Non-Attributes: 6) options(dont-wrap-non-attributes)
+```````````````````````````````` example(Non-Attributes: 6) options(dont-wrap-non-attributes)
 This is a test. It works fine until a word like don\'t appears.{.style} Another style might
 follow.{.style2}
 .
@@ -2012,7 +2012,7 @@ Document[0, 108]
 
 ## Attribute Span
 
-```````````````````````````````` example Attribute Span: 1
+```````````````````````````````` example Attribute Span: 1
 Cond 1.2 text node{.red}
 .
 <p><span class="red">Cond 1.2 text node</span></p>
@@ -2028,7 +2028,7 @@ Document[0, 24]
 
 can use empty for braces
 
-```````````````````````````````` example Attribute Span: 2
+```````````````````````````````` example Attribute Span: 2
 Cond 1.2 text {}node
 .
 <p>Cond 1.2 text {}node</p>
@@ -2041,7 +2041,7 @@ Document[0, 20]
 
 empty attributes are just text
 
-```````````````````````````````` example Attribute Span: 3
+```````````````````````````````` example Attribute Span: 3
 Cond 1.2 text {}node{.red}
 .
 <p><span class="red">Cond 1.2 text {}node</span></p>
@@ -2057,7 +2057,7 @@ Document[0, 26]
 
 empty attributes are just text
 
-```````````````````````````````` example Attribute Span: 4
+```````````````````````````````` example Attribute Span: 4
 Cond 1.2 text { }node{.red}
 .
 <p><span class="red">Cond 1.2 text { }node</span></p>
@@ -2073,7 +2073,7 @@ Document[0, 27]
 
 can use empty class is just text
 
-```````````````````````````````` example Attribute Span: 5
+```````````````````````````````` example Attribute Span: 5
 Cond 1.2 text {.}node{.red}
 .
 <p><span class="red">Cond 1.2 text {.}node</span></p>
@@ -2089,7 +2089,7 @@ Document[0, 27]
 
 spaces in empty id is just text
 
-```````````````````````````````` example Attribute Span: 6
+```````````````````````````````` example Attribute Span: 6
 Cond 1.2 text { #}node{.red}
 .
 <p><span class="red">Cond 1.2 text { #}node</span></p>
@@ -2103,7 +2103,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Attribute Span: 7
+```````````````````````````````` example Attribute Span: 7
 Cond 1.2 text {# }node{.red}
 .
 <p><span class="red">Cond 1.2 text {# }node</span></p>
@@ -2119,7 +2119,7 @@ Document[0, 28]
 
 spaces in empty class is just text
 
-```````````````````````````````` example(Attribute Span: 8) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 8) options(empty-implicit-delimiters)
 Cond 1.2 text { .}node{.red}
 .
 <p><span class="red">Cond 1.2 text { .}node</span></p>
@@ -2133,7 +2133,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 9) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 9) options(empty-implicit-delimiters)
 Cond 1.2 text {. }node{.red}
 .
 <p><span class="red">Cond 1.2 text {. }node</span></p>
@@ -2149,7 +2149,7 @@ Document[0, 28]
 
 can use empty id is just text
 
-```````````````````````````````` example Attribute Span: 10
+```````````````````````````````` example Attribute Span: 10
 Cond 1.2 text {#}node{.red}
 .
 <p><span class="red">Cond 1.2 text {#}node</span></p>
@@ -2165,7 +2165,7 @@ Document[0, 27]
 
 can use empty class as delimiter
 
-```````````````````````````````` example(Attribute Span: 11) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 11) options(empty-implicit-delimiters)
 Cond 1.2 text {.}node{.red}
 .
 <p>Cond 1.2 text <span class="red">node</span></p>
@@ -2181,7 +2181,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 12) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 12) options(empty-implicit-delimiters)
 Cond 1.2 {.}text node{.red}
 .
 <p>Cond 1.2 <span class="red">text node</span></p>
@@ -2199,7 +2199,7 @@ Document[0, 27]
 
 can use empty id as delimiter
 
-```````````````````````````````` example(Attribute Span: 13) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 13) options(empty-implicit-delimiters)
 Cond 1.2 {#}text node{.red}
 .
 <p>Cond 1.2 <span class="red">text node</span></p>
@@ -2217,7 +2217,7 @@ Document[0, 27]
 
 nesting is allowed
 
-```````````````````````````````` example(Attribute Span: 14) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 14) options(empty-implicit-delimiters)
 Cond {.}1.2 {#}text node{.red}{.green}
 .
 <p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
@@ -2239,7 +2239,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 15) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 15) options(empty-implicit-delimiters)
 Cond {#}1.2 {.}text node{.red}{.green}
 .
 <p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
@@ -2261,7 +2261,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 16) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 16) options(empty-implicit-delimiters)
 Cond {#}1.2 {#}text node{.red}{.green}
 .
 <p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
@@ -2283,7 +2283,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 17) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 17) options(empty-implicit-delimiters)
 Cond {.}1.2 {.}text node{.red}{.green}
 .
 <p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
@@ -2305,7 +2305,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 18) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 18) options(empty-implicit-delimiters)
 Cond {.}1.2 {.}text node{.red}{.green}
 .
 <p>Cond <span class="green">1.2 <span class="red">text node</span></span></p>
@@ -2329,7 +2329,7 @@ Document[0, 38]
 
 delimiters override assignment to parent
 
-```````````````````````````````` example(Attribute Span: 19) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 19) options(empty-implicit-delimiters)
 Cond {.}1.2 {.}decorated text {.red} {.green}
 .
 <p>Cond <span class="green">1.2 <span class="red">decorated text </span></span></p>
@@ -2353,7 +2353,7 @@ Document[0, 45]
 
 unmatched goes to parent
 
-```````````````````````````````` example(Attribute Span: 20) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 20) options(empty-implicit-delimiters)
 Cond 1.2 {.}decorated text {.red} {.green}
 .
 <p class="green">Cond 1.2 <span class="red">decorated text </span></p>
@@ -2372,7 +2372,7 @@ Document[0, 42]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 21) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 21) options(empty-implicit-delimiters)
 Cond {.}blue {.}green {.}red{.red}{.green}{.blue}{.rgb}
 .
 <p>Cond <span class="rgb"><span class="blue">blue <span class="green">green <span class="red">red</span></span></span></span></p>
@@ -2404,7 +2404,7 @@ Document[0, 55]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Attribute Span: 22) options(empty-implicit-delimiters)
+```````````````````````````````` example(Attribute Span: 22) options(empty-implicit-delimiters)
 Cond {.}blue {.}green {.}red{.red}{.green}{.blue} rgb{.rgb}
 .
 <p>Cond <span class="blue">blue <span class="green">green <span class="red">red</span></span></span><span class="rgb"> rgb</span></p>
@@ -2441,7 +2441,7 @@ Document[0, 59]
 
 leading spaces
 
-```````````````````````````````` example Embedded Spaces: 1
+```````````````````````````````` example Embedded Spaces: 1
 text {   attribute=value}
 .
 <p attribute="value">text</p>
@@ -2456,7 +2456,7 @@ Document[0, 25]
 
 trailing spaces
 
-```````````````````````````````` example Embedded Spaces: 2
+```````````````````````````````` example Embedded Spaces: 2
 text {attribute=value   }
 .
 <p attribute="value">text</p>
@@ -2471,7 +2471,7 @@ Document[0, 25]
 
 Attributes go to link or element
 
-```````````````````````````````` example Embedded Spaces: 3
+```````````````````````````````` example Embedded Spaces: 3
 Work with
 [Markdown]{style="color:[[LINK]]"} files like you do with other languages in the IDE:
 
@@ -2493,7 +2493,7 @@ Document[0, 128]
 ````````````````````````````````
 
 
-```````````````````````````````` example Embedded Spaces: 4
+```````````````````````````````` example Embedded Spaces: 4
 Work with
 ![Markdown]{style="color:[[LINK]]"} files like you do with other languages in the IDE:
 
@@ -2515,7 +2515,7 @@ Document[0, 139]
 ````````````````````````````````
 
 
-```````````````````````````````` example Embedded Spaces: 5
+```````````````````````````````` example Embedded Spaces: 5
 Work with
 [Markdown](https://example.com){style="color:[[LINK]]"} files like you do with other languages in the IDE:
 .
@@ -2534,7 +2534,7 @@ Document[0, 116]
 ````````````````````````````````
 
 
-```````````````````````````````` example Embedded Spaces: 6
+```````````````````````````````` example Embedded Spaces: 6
 Work with
 ![Markdown](https://example.com/image.png){style="color:[[LINK]]"} files like you do with other languages in the IDE:
 .
@@ -2557,7 +2557,7 @@ Document[0, 127]
 
 Fenced code info attributes
 
-```````````````````````````````` example(Fenced Code: 1) options(info-attributes)
+```````````````````````````````` example(Fenced Code: 1) options(info-attributes)
 ```plantuml {caption="Caption"}
 ```    
 .
@@ -2570,7 +2570,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 2) options(info-attributes)
+```````````````````````````````` example(Fenced Code: 2) options(info-attributes)
 ```plantuml {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2586,7 +2586,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 3) options(info-attributes)
+```````````````````````````````` example(Fenced Code: 3) options(info-attributes)
 ```plantuml {title="Title"} {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2604,7 +2604,7 @@ Document[0, 72]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 4) options(info-attributes)
+```````````````````````````````` example(Fenced Code: 4) options(info-attributes)
 ```plantuml {title= {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2620,7 +2620,7 @@ Document[0, 64]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 5) options(info-attributes)
+```````````````````````````````` example(Fenced Code: 5) options(info-attributes)
 ```plantuml {title="Title" caption="Cap"} {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2639,7 +2639,7 @@ Document[0, 86]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 6) options(info-attributes)
+```````````````````````````````` example(Fenced Code: 6) options(info-attributes)
 ```info {#not-id} not {title="Title" caption="Cap"} {caption="Caption"}
 
 ```    
@@ -2660,7 +2660,7 @@ Document[0, 80]
 
 No fenced code info attributes
 
-```````````````````````````````` example(Fenced Code: 7) options(no-info-attributes)
+```````````````````````````````` example(Fenced Code: 7) options(no-info-attributes)
 ```plantuml {caption="Caption"}
 ```    
 .
@@ -2671,7 +2671,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 8) options(no-info-attributes)
+```````````````````````````````` example(Fenced Code: 8) options(no-info-attributes)
 ```plantuml {caption="Caption"}
 PlatUML Code    
 ```    
@@ -2685,7 +2685,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 9) options(no-info-attributes)
+```````````````````````````````` example(Fenced Code: 9) options(no-info-attributes)
 ```plantuml {caption
 PlatUML Code    
 ```    
@@ -2701,7 +2701,7 @@ Document[0, 45]
 
 Attributes after element
 
-```````````````````````````````` example Fenced Code: 10
+```````````````````````````````` example Fenced Code: 10
 ```plantuml
 ```
 {caption="Caption"}
@@ -2716,7 +2716,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 11) options(fenced-code-to-both)
+```````````````````````````````` example(Fenced Code: 11) options(fenced-code-to-both)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2731,7 +2731,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 12) options(fenced-code-to-pre)
+```````````````````````````````` example(Fenced Code: 12) options(fenced-code-to-pre)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2746,7 +2746,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 13) options(fenced-code-to-code)
+```````````````````````````````` example(Fenced Code: 13) options(fenced-code-to-code)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2761,7 +2761,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 14) options(no-info-attributes)
+```````````````````````````````` example(Fenced Code: 14) options(no-info-attributes)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2776,7 +2776,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 15) options(no-info-attributes, fenced-code-to-both)
+```````````````````````````````` example(Fenced Code: 15) options(no-info-attributes, fenced-code-to-both)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2791,7 +2791,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 16) options(no-info-attributes, fenced-code-to-pre)
+```````````````````````````````` example(Fenced Code: 16) options(no-info-attributes, fenced-code-to-pre)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2806,7 +2806,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 17) options(no-info-attributes, fenced-code-to-code)
+```````````````````````````````` example(Fenced Code: 17) options(no-info-attributes, fenced-code-to-code)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2821,7 +2821,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 18) options(info-attributes)
+```````````````````````````````` example(Fenced Code: 18) options(info-attributes)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2836,7 +2836,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 19) options(info-attributes, fenced-code-to-both)
+```````````````````````````````` example(Fenced Code: 19) options(info-attributes, fenced-code-to-both)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2866,7 +2866,7 @@ Document[0, 35]
       AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
 ````````````````````````````````
 -->
-```````````````````````````````` example(Fenced Code: 20) options(info-attributes, fenced-code-to-code)
+```````````````````````````````` example(Fenced Code: 20) options(info-attributes, fenced-code-to-code)
 ```plantuml
 ```
 {caption="Caption"}
@@ -2883,7 +2883,7 @@ Document[0, 35]
 
 ## Translator Encoding
 
-```````````````````````````````` example Translator Encoding: 1
+```````````````````````````````` example Translator Encoding: 1
 text {#_1_}{#_2_}
 .
 <p><span id="_2_">text </span></p>
@@ -2901,7 +2901,7 @@ Document[0, 17]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos, no-text-attributes)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos, no-text-attributes)
 Paragraph{style="color:red"}
 .
 <p md-pos="0-28" style="color:red">Paragraph</p>
@@ -2914,7 +2914,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
 Paragraph{style="color:red"}
 .
 <p md-pos="0-28"><span style="color:red">Paragraph</span></p>

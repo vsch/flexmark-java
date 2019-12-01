@@ -50,7 +50,7 @@ Converts `[TOC style]` text to TocBlock nodes.
 
 no spaces between brackets
 
-```````````````````````````````` example Toc: 1
+```````````````````````````````` example Toc: 1
 [ TOC] 
 
 [ TOC ] 
@@ -76,7 +76,7 @@ Document[0, 25]
 
 Invalid level
 
-```````````````````````````````` example Toc: 2
+```````````````````````````````` example Toc: 2
 [TOC levels=0] 
 
 [TOC levels=7] 
@@ -201,7 +201,7 @@ Document[0, 260]
 
 Default case sensitive
 
-```````````````````````````````` example Toc: 3
+```````````````````````````````` example Toc: 3
 [toc] 
 
 # Heading **some bold** 1
@@ -230,7 +230,7 @@ Document[0, 64]
 
 case insensitive
 
-```````````````````````````````` example(Toc: 4) options(not-case-sensitive)
+```````````````````````````````` example(Toc: 4) options(not-case-sensitive)
 [toc] 
 
 # Heading **some bold** 1
@@ -257,7 +257,7 @@ Document[0, 64]
 ````````````````````````````````
 
 
-```````````````````````````````` example Toc: 5
+```````````````````````````````` example Toc: 5
 [TOC] 
 
 # Heading **some bold** 1
@@ -329,7 +329,7 @@ Document[0, 202]
 
 Default rendering with emphasis
 
-```````````````````````````````` example Toc: 6
+```````````````````````````````` example Toc: 6
 [TOC] 
 
 # Heading **some bold** 1
@@ -373,7 +373,7 @@ Document[0, 122]
 
 Set levels rendering
 
-```````````````````````````````` example Toc: 7
+```````````````````````````````` example Toc: 7
 [TOC levels=1] 
 
 ---
@@ -446,7 +446,7 @@ Document[0, 233]
 
 Invalid levels take default
 
-```````````````````````````````` example Toc: 8
+```````````````````````````````` example Toc: 8
 [TOC levels=0] 
 
 [TOC levels=7] 
@@ -571,7 +571,7 @@ Document[0, 260]
 
 Use title
 
-```````````````````````````````` example(Toc: 9) options(title)
+```````````````````````````````` example(Toc: 9) options(title)
 [TOC] 
 
 # Heading **some bold** 1
@@ -610,7 +610,7 @@ Document[0, 80]
 
 Use title, div class
 
-```````````````````````````````` example(Toc: 10) options(title, div-class)
+```````````````````````````````` example(Toc: 10) options(title, div-class)
 [TOC] 
 
 # Heading **some bold** 1
@@ -649,7 +649,7 @@ Document[0, 80]
 
 Use title, div class, list Class
 
-```````````````````````````````` example(Toc: 11) options(title, div-class, list-class)
+```````````````````````````````` example(Toc: 11) options(title, div-class, list-class)
 [TOC] 
 
 # Heading **some bold** 1
@@ -688,7 +688,7 @@ Document[0, 80]
 
 Use list Class
 
-```````````````````````````````` example(Toc: 12) options(list-class)
+```````````````````````````````` example(Toc: 12) options(list-class)
 [TOC] 
 
 # Heading **some bold** 1
@@ -724,7 +724,7 @@ Document[0, 80]
 
 Text only rendering
 
-```````````````````````````````` example(Toc: 13) options(text-only)
+```````````````````````````````` example(Toc: 13) options(text-only)
 [TOC] 
 
 # Heading **some bold** 1
@@ -769,7 +769,7 @@ Document[0, 124]
 
 Text only style
 
-```````````````````````````````` example Toc: 14
+```````````````````````````````` example Toc: 14
 [TOC text] 
 
 # Heading **some bold** 1
@@ -814,7 +814,7 @@ Document[0, 129]
 
 Text and inlines style
 
-```````````````````````````````` example(Toc: 15) options(text-only)
+```````````````````````````````` example(Toc: 15) options(text-only)
 [TOC format] 
 
 # Heading **some bold** 1
@@ -859,7 +859,7 @@ Document[0, 131]
 
 Text only, flat
 
-```````````````````````````````` example(Toc: 16) options(text-only, flat)
+```````````````````````````````` example(Toc: 16) options(text-only, flat)
 [TOC] 
 
 # Heading **some bold** 1
@@ -901,7 +901,7 @@ Document[0, 124]
 
 Text and inlines, flat
 
-```````````````````````````````` example(Toc: 17) options(flat)
+```````````````````````````````` example(Toc: 17) options(flat)
 [TOC] 
 
 # Heading **some bold** 1
@@ -943,7 +943,7 @@ Document[0, 124]
 
 Text only, flat reversed
 
-```````````````````````````````` example(Toc: 18) options(text-only, flat-reversed)
+```````````````````````````````` example(Toc: 18) options(text-only, flat-reversed)
 [TOC] 
 
 # Heading **some bold** 1
@@ -985,7 +985,7 @@ Document[0, 124]
 
 Text and inlines, flat
 
-```````````````````````````````` example(Toc: 19) options(flat-reversed)
+```````````````````````````````` example(Toc: 19) options(flat-reversed)
 [TOC] 
 
 # Heading **some bold** 1
@@ -1027,7 +1027,7 @@ Document[0, 124]
 
 Text and inlines, hierarchy
 
-```````````````````````````````` example(Toc: 20) options(sorted)
+```````````````````````````````` example(Toc: 20) options(sorted)
 [TOC hierarchy] 
 
 # Heading **some bold** 1
@@ -1072,7 +1072,7 @@ Document[0, 134]
 
 Text only, sorted
 
-```````````````````````````````` example(Toc: 21) options(text-only, sorted)
+```````````````````````````````` example(Toc: 21) options(text-only, sorted)
 [TOC] 
 
 ## Heading 1.1 _some italic_
@@ -1114,7 +1114,7 @@ Document[0, 124]
 
 Text only, reverse sorted
 
-```````````````````````````````` example(Toc: 22) options(text-only, sorted-reversed)
+```````````````````````````````` example(Toc: 22) options(text-only, sorted-reversed)
 [TOC] 
 
 ## Heading 1.1 _some italic_
@@ -1156,7 +1156,7 @@ Document[0, 124]
 
 Text and inlines, sorted
 
-```````````````````````````````` example(Toc: 23) options(sorted)
+```````````````````````````````` example(Toc: 23) options(sorted)
 [TOC] 
 
 ### Heading 1.1.2  **_some bold italic_**
@@ -1198,7 +1198,7 @@ Document[0, 124]
 
 Text and inlines, unsorted
 
-```````````````````````````````` example(Toc: 24) options(sorted)
+```````````````````````````````` example(Toc: 24) options(sorted)
 [TOC flat] 
 
 ### Heading 1.1.2  **_some bold italic_**
@@ -1240,7 +1240,7 @@ Document[0, 129]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 ## Header 2
 ### Header 3
 
@@ -1266,7 +1266,7 @@ Document[0, 40]
 
 ## Test unordered skipped headings
 
-```````````````````````````````` example Test unordered skipped headings: 1
+```````````````````````````````` example Test unordered skipped headings: 1
 # Test 1
 
 ### test 0.0.1
@@ -1345,7 +1345,7 @@ Document[0, 194]
 ````````````````````````````````
 
 
-```````````````````````````````` example Test unordered skipped headings: 2
+```````````````````````````````` example Test unordered skipped headings: 2
 Common configuration for `its-base`-based plugins
 =================================================
 

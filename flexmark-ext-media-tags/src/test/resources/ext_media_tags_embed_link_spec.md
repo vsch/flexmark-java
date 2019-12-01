@@ -10,10 +10,10 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Media Tags embed link transformer
 
-Transforms links prefixed with 'E' into an embed media tag.
-(Special thanks to http://condor.depaul.edu/sjost/hci430/flash-examples.htm ).
+Transforms links prefixed with 'E' into an embed media tag. (Special thanks to
+http://condor.depaul.edu/sjost/hci430/flash-examples.htm ).
 
-```````````````````````````````` example Media Tags embed link transformer: 1
+```````````````````````````````` example Media Tags embed link transformer: 1
 !E[Snowy Flash Animation](http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf)
 .
 <p><embed title="Snowy Flash Animation" src="http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf" /></p>
@@ -24,9 +24,10 @@ Document[0, 92]
       Text[3, 24] chars:[3, 24, "Snowy … ation"]
 ````````````````````````````````
 
+
 Ignore escaped prefix '\E'.
 
-```````````````````````````````` example Media Tags embed link transformer: 2
+```````````````````````````````` example Media Tags embed link transformer: 2
 \!E[Snowy Flash Animation](http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf)
 .
 <p>!E<a href="http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf">Snowy Flash Animation</a></p>
@@ -38,9 +39,10 @@ Document[0, 93]
       Text[4, 25] chars:[4, 25, "Snowy … ation"]
 ````````````````````````````````
 
+
 Ignore escaped prefix '\\\E'.
 
-```````````````````````````````` example Media Tags embed link transformer: 3
+```````````````````````````````` example Media Tags embed link transformer: 3
 \\\!E[Snowy Flash Animation](http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf)
 .
 <p>\!E<a href="http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf">Snowy Flash Animation</a></p>
@@ -52,9 +54,10 @@ Document[0, 95]
       Text[6, 27] chars:[6, 27, "Snowy … ation"]
 ````````````````````````````````
 
+
 Don't ignore escaped prefix '\\E'.
 
-```````````````````````````````` example Media Tags embed link transformer: 4
+```````````````````````````````` example Media Tags embed link transformer: 4
 \\!E[Snowy Flash Animation](http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf)
 .
 <p>\<embed title="Snowy Flash Animation" src="http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf" /></p>
@@ -65,3 +68,4 @@ Document[0, 94]
     EmbedLink[2, 94] textOpen:[2, 5, "!E["] text:[5, 26, "Snowy Flash Animation"] textClose:[26, 27, "]"] linkOpen:[27, 28, "("] url:[28, 93, "http://condor.depaul.edu/sjost/hci430/flash-examples/swf/snow.swf"] linkClose:[93, 94, ")"]
       Text[5, 26] chars:[5, 26, "Snowy … ation"]
 ````````````````````````````````
+

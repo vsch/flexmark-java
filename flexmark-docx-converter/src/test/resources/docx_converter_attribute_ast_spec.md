@@ -16,7 +16,7 @@ Converts markdown to docx with attributes
 
 basic text
 
-```````````````````````````````` example Paragraphs: 1
+```````````````````````````````` example Paragraphs: 1
 {style="color:red"}plain text
 .
 <w:body>
@@ -35,7 +35,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 2
+```````````````````````````````` example Paragraphs: 2
 {style="color:red"}plain **Bold** text
 .
 <w:body>
@@ -67,7 +67,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 3
+```````````````````````````````` example Paragraphs: 3
 {style="color:red"}plain *Italic* text
 .
 <w:body>
@@ -99,7 +99,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 4
+```````````````````````````````` example Paragraphs: 4
 {style="color:red"}plain ~~strike-through~~ text
 .
 <w:body>
@@ -131,7 +131,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 5
+```````````````````````````````` example Paragraphs: 5
 {style="color:red"}plain ~subscript~ text H~2~O
 .
 <w:body>
@@ -176,7 +176,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 6
+```````````````````````````````` example Paragraphs: 6
 {style="color:red"}plain ^superscript^ text e^*i*pi^ = -1
 .
 <w:body>
@@ -244,7 +244,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 7
+```````````````````````````````` example Paragraphs: 7
 {style="color:red"}plain ^superscript^ text e^ipi^ = -1
 .
 <w:body>
@@ -289,7 +289,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 8
+```````````````````````````````` example Paragraphs: 8
 {style="color:red"}plain ++underline++ text
 .
 <w:body>
@@ -321,7 +321,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 9
+```````````````````````````````` example Paragraphs: 9
 {style="color:red"}plain `inline code` text
 .
 <w:body>
@@ -353,7 +353,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 10) options(highlight-code)
+```````````````````````````````` example(Paragraphs: 10) options(highlight-code)
 {style="color:red"}plain `inline code` highlight text
 .
 <w:body>
@@ -388,7 +388,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 11) options(highlight-shade)
+```````````````````````````````` example(Paragraphs: 11) options(highlight-shade)
 {style="color:red"}plain `inline code` highlight text
 .
 <w:body>
@@ -423,7 +423,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 12
+```````````````````````````````` example Paragraphs: 12
 # Change Font Size {style="font-size: 20pt"}
 .
 <w:body>
@@ -445,7 +445,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 13
+```````````````````````````````` example Paragraphs: 13
 # Change Font Size {style="font-size: 20.5 pt"}
 .
 <w:body>
@@ -467,7 +467,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 14
+```````````````````````````````` example Paragraphs: 14
 # Change Font Size {style="font-size: 20"}
 .
 <w:body>
@@ -489,7 +489,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 15
+```````````````````````````````` example Paragraphs: 15
 # Change Font Size {style="font-size: 20.5"}
 .
 <w:body>
@@ -513,7 +513,7 @@ Document[0, 57]
 
 permutations of formatting
 
-```````````````````````````````` example Paragraphs: 16
+```````````````````````````````` example Paragraphs: 16
 {style="color:red"}plain **Bold *Bold-Italic*** text
 {style="color:red"}plain *Italic **Bold-Italic*** text
 {style="color:red"}plain **Bold ++Bold-Underline++** text
@@ -766,7 +766,7 @@ permutations of formatting
 
 Partial text attributes
 
-```````````````````````````````` example Paragraphs: 17
+```````````````````````````````` example Paragraphs: 17
 plain text{style="color:blue"}
 .
 <w:body>
@@ -792,7 +792,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 18
+```````````````````````````````` example Paragraphs: 18
 plain **Bold**{style="color:blue"} text
 .
 <w:body>
@@ -818,7 +818,7 @@ plain **Bold**{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 19
+```````````````````````````````` example Paragraphs: 19
 plain *Italic*{style="color:blue"} text
 .
 <w:body>
@@ -844,7 +844,7 @@ plain *Italic*{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 20
+```````````````````````````````` example Paragraphs: 20
 plain ~~strike-through~~{style="color:blue"} text
 .
 <w:body>
@@ -870,7 +870,7 @@ plain ~~strike-through~~{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 21
+```````````````````````````````` example Paragraphs: 21
 plain ~subscript~{style="color:blue"} text H~2~O{
 .
 <w:body>
@@ -905,7 +905,7 @@ plain ~subscript~{style="color:blue"} text H~2~O{
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 22
+```````````````````````````````` example Paragraphs: 22
 plain ^superscript^{style="color:blue"} text e^*i*pi^ = -1
 .
 <w:body>
@@ -948,7 +948,7 @@ plain ^superscript^{style="color:blue"} text e^*i*pi^ = -1
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 23
+```````````````````````````````` example Paragraphs: 23
 plain ^superscript^{style="color:blue"} text e^ipi^ = -1
 .
 <w:body>
@@ -983,7 +983,7 @@ plain ^superscript^{style="color:blue"} text e^ipi^ = -1
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 24
+```````````````````````````````` example Paragraphs: 24
 plain ++underline++{style="color:blue"} text
 .
 <w:body>
@@ -1009,7 +1009,7 @@ plain ++underline++{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 25
+```````````````````````````````` example Paragraphs: 25
 plain `inline code`{style="color:blue"} text
 .
 <w:body>
@@ -1035,7 +1035,7 @@ plain `inline code`{style="color:blue"} text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 26) options(highlight-code)
+```````````````````````````````` example(Paragraphs: 26) options(highlight-code)
 plain `inline code`{style="color:blue"} highlight text
 .
 <w:body>
@@ -1064,7 +1064,7 @@ plain `inline code`{style="color:blue"} highlight text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 27) options(highlight-shade)
+```````````````````````````````` example(Paragraphs: 27) options(highlight-shade)
 {style="color:red"}plain `inline code`{style="color:blue"} highlight text
 .
 <w:body>
@@ -1101,7 +1101,7 @@ plain `inline code`{style="color:blue"} highlight text
 
 permutations of formatting
 
-```````````````````````````````` example Paragraphs: 28
+```````````````````````````````` example Paragraphs: 28
 plain **Bold *Bold-Italic***{style="color:blue"} text
 plain *Italic **Bold-Italic***{style="color:blue"} text
 plain **Bold ++Bold-Underline++**{style="color:blue"} text
@@ -1294,7 +1294,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
 
 basic text
 
-```````````````````````````````` example Paragraphs: 29
+```````````````````````````````` example Paragraphs: 29
 {style="color:red"}plain text{style="color:blue"}
 .
 <w:body>
@@ -1313,7 +1313,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 30
+```````````````````````````````` example Paragraphs: 30
 {style="color:red"}plain **Bold**{style="color:blue"} text
 .
 <w:body>
@@ -1345,7 +1345,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 31
+```````````````````````````````` example Paragraphs: 31
 {style="color:red"}plain *Italic*{style="color:blue"} text
 .
 <w:body>
@@ -1377,7 +1377,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 32
+```````````````````````````````` example Paragraphs: 32
 {style="color:red"}plain ~~strike-through~~{style="color:blue"} text
 .
 <w:body>
@@ -1409,7 +1409,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 33
+```````````````````````````````` example Paragraphs: 33
 {style="color:red"}plain ~subscript~{style="color:blue"} text H~2~O
 .
 <w:body>
@@ -1454,7 +1454,7 @@ basic text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 34
+```````````````````````````````` example Paragraphs: 34
 {style="color:red"}plain ^superscript^{style="color:blue"} text e^*i*pi^ = -1
 .
 <w:body>
@@ -1524,7 +1524,7 @@ Document[0, 77]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 35
+```````````````````````````````` example Paragraphs: 35
 {style="color:red"}plain ^superscript^{style="color:blue"} text e^ipi^ = -1
 .
 <w:body>
@@ -1569,7 +1569,7 @@ Document[0, 77]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 36
+```````````````````````````````` example Paragraphs: 36
 {style="color:red"}plain ++underline++{style="color:blue"} text
 .
 <w:body>
@@ -1601,7 +1601,7 @@ Document[0, 77]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 37
+```````````````````````````````` example Paragraphs: 37
 {style="color:red"}plain `inline code`{style="color:blue"} text
 .
 <w:body>
@@ -1633,7 +1633,7 @@ Document[0, 77]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 38) options(highlight-code)
+```````````````````````````````` example(Paragraphs: 38) options(highlight-code)
 {style="color:red"}plain `inline code`{style="color:blue"} highlight text
 .
 <w:body>
@@ -1668,7 +1668,7 @@ Document[0, 77]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 39) options(highlight-shade)
+```````````````````````````````` example(Paragraphs: 39) options(highlight-shade)
 {style="color:red"}plain `inline code`{style="color:blue"} highlight text
 .
 <w:body>
@@ -1705,7 +1705,7 @@ Document[0, 77]
 
 permutations of formatting
 
-```````````````````````````````` example Paragraphs: 40
+```````````````````````````````` example Paragraphs: 40
 {style="color:red"}plain **Bold *Bold-Italic***{style="color:blue"} text
 {style="color:red"}plain *Italic **Bold-Italic***{style="color:blue"} text
 {style="color:red"}plain **Bold ++Bold-Underline++**{style="color:blue"} text
@@ -1958,7 +1958,7 @@ permutations of formatting
 
 background color for paragraphs
 
-```````````````````````````````` example Paragraphs: 41
+```````````````````````````````` example Paragraphs: 41
 {style="color:red;background-color:yellow"}plain text
 .
 <w:body>
@@ -1980,7 +1980,7 @@ background color for paragraphs
 
 background color for paragraphs
 
-```````````````````````````````` example Paragraphs: 42
+```````````````````````````````` example Paragraphs: 42
 {style="color:red;background-color:yellow"}plain text{style="color:blue"}
 .
 <w:body>
@@ -2000,7 +2000,7 @@ background color for paragraphs
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 43
+```````````````````````````````` example Paragraphs: 43
 {style="color:red;background-color:yellow"}plain **Bold**{style="color:blue"} text
 .
 <w:body>
@@ -2037,7 +2037,7 @@ background color for paragraphs
 
 ## Lists
 
-```````````````````````````````` example Lists: 1
+```````````````````````````````` example Lists: 1
 * {style="color:red"}list 1
 
   with some text
@@ -2110,7 +2110,7 @@ background color for paragraphs
 
 Numbering start
 
-```````````````````````````````` example(Lists: 2) options(IGNORED)
+```````````````````````````````` example(Lists: 2) options(IGNORED)
 2. {style="color:red"}list 1
 
    with some text
@@ -2183,7 +2183,7 @@ Numbering start
 
 ## Headings
 
-```````````````````````````````` example Headings: 1
+```````````````````````````````` example Headings: 1
 # {style="color:red;background-color:yellow"}Heading <!---->Text{style="color:blue"}
 .
 <w:body>
@@ -2212,7 +2212,7 @@ Numbering start
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 2
+```````````````````````````````` example Headings: 2
 Heading {style="font-size: 26pt"}
 -------
 .
@@ -2235,7 +2235,7 @@ Heading {style="font-size: 26pt"}
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 3
+```````````````````````````````` example Headings: 3
 # Heading {style="font-size: 26pt"}
 .
 <w:body>
@@ -2259,7 +2259,7 @@ Heading {style="font-size: 26pt"}
 
 ## Style
 
-```````````````````````````````` example Style: 1
+```````````````````````````````` example Style: 1
 Paragraph Style 
 
 {.Heading1}
@@ -2279,7 +2279,7 @@ Paragraph Style
 
 ## Page Break
 
-```````````````````````````````` example Page Break: 1
+```````````````````````````````` example Page Break: 1
 {.pagebreak}
 .
 <w:body>
@@ -2295,7 +2295,7 @@ Paragraph Style
 ````````````````````````````````
 
 
-```````````````````````````````` example Page Break: 2
+```````````````````````````````` example Page Break: 2
 Some text
 {.pagebreak}
 
@@ -2323,7 +2323,7 @@ Following Text
 ````````````````````````````````
 
 
-```````````````````````````````` example Page Break: 3
+```````````````````````````````` example Page Break: 3
 Some text  
 
 {.pagebreak} Following text
@@ -2352,7 +2352,7 @@ Some text
 ````````````````````````````````
 
 
-```````````````````````````````` example Page Break: 4
+```````````````````````````````` example Page Break: 4
 Some text
 
 {.pagebreak}
@@ -2390,7 +2390,7 @@ Following Text
 
 ## Tab
 
-```````````````````````````````` example Tab: 1
+```````````````````````````````` example Tab: 1
 {.tab}
 .
 <w:body>
@@ -2406,7 +2406,7 @@ Following Text
 ````````````````````````````````
 
 
-```````````````````````````````` example Tab: 2
+```````````````````````````````` example Tab: 2
 Some text {.tab} Following Text
 .
 <w:body>
@@ -2430,7 +2430,7 @@ Some text {.tab} Following Text
 
 Bare
 
-```````````````````````````````` example(Images: 1) options(url, IGNORED)
+```````````````````````````````` example(Images: 1) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png) with some text wrapped around the image
 if possible. So we add more text otherwise there is not enough to wrap in Word and validate how
 the text is wrapped.
@@ -2499,7 +2499,7 @@ the text is wrapped.
 
 Align left
 
-```````````````````````````````` example(Images: 2) options(url, IGNORED)
+```````````````````````````````` example(Images: 2) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="left"}with some text wrapped
 around the image if possible. So we add more text otherwise there is not enough to wrap in Word
 and validate how the text is wrapped.
@@ -2579,7 +2579,7 @@ and validate how the text is wrapped.
 
 Align right
 
-```````````````````````````````` example(Images: 3) options(url, IGNORED)
+```````````````````````````````` example(Images: 3) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="right"}with some text wrapped
 around the image if possible. So we add more text otherwise there is not enough to wrap in Word
 and validate how the text is wrapped.
@@ -2659,7 +2659,7 @@ and validate how the text is wrapped.
 
 Align center
 
-```````````````````````````````` example(Images: 4) options(url, IGNORED)
+```````````````````````````````` example(Images: 4) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png){align="center"}with some text wrapped
 around the image if possible. So we add more text otherwise there is not enough to wrap in Word
 and validate how the text is wrapped.
@@ -2739,7 +2739,7 @@ and validate how the text is wrapped.
 
 Size in cm
 
-```````````````````````````````` example(Images: 5) options(url, IGNORED)
+```````````````````````````````` example(Images: 5) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right width=2cm} 
 with some text
 .
@@ -2809,7 +2809,7 @@ with some text
 
 Size in cm
 
-```````````````````````````````` example(Images: 6) options(url, IGNORED)
+```````````````````````````````` example(Images: 6) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right height=6cm} with some text
 .
 <w:body>
@@ -2875,7 +2875,7 @@ Size in cm
 
 Size in cm
 
-```````````````````````````````` example(Images: 7) options(url, IGNORED)
+```````````````````````````````` example(Images: 7) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){align=right height=6cm width=4cm}
 with some text
 .
@@ -2945,7 +2945,7 @@ with some text
 
 Size in inches
 
-```````````````````````````````` example(Images: 8) options(url, IGNORED)
+```````````````````````````````` example(Images: 8) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){width=1in} 
 
 with some text
@@ -3007,7 +3007,7 @@ with some text
 
 Max width in cm
 
-```````````````````````````````` example(Images: 9) options(url, IGNORED)
+```````````````````````````````` example(Images: 9) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-width=1cm} 
 
 with some text
@@ -3069,7 +3069,7 @@ with some text
 
 Max width in cm, smaller image
 
-```````````````````````````````` example(Images: 10) options(url, IGNORED)
+```````````````````````````````` example(Images: 10) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-width=10cm} 
 
 with some text
@@ -3131,7 +3131,7 @@ with some text
 
 Max height in cm
 
-```````````````````````````````` example(Images: 11) options(url, IGNORED)
+```````````````````````````````` example(Images: 11) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-height=1cm} 
 
 with some text
@@ -3193,7 +3193,7 @@ with some text
 
 Max width/height in cm, use max width
 
-```````````````````````````````` example(Images: 12) options(url, IGNORED)
+```````````````````````````````` example(Images: 12) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-width=1cm max-height=2cm} 
 
 with some text
@@ -3255,7 +3255,7 @@ with some text
 
 Max width/height in cm, use max height
 
-```````````````````````````````` example(Images: 13) options(url, IGNORED)
+```````````````````````````````` example(Images: 13) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-width=2cm max-height=1cm} 
 
 with some text
@@ -3317,7 +3317,7 @@ with some text
 
 Max height in cm, smaller image
 
-```````````````````````````````` example(Images: 14) options(url, IGNORED)
+```````````````````````````````` example(Images: 14) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png){max-height=10cm} 
 
 with some text
@@ -3379,7 +3379,7 @@ with some text
 
 Max height in cm, smaller image
 
-```````````````````````````````` example(Images: 15) options(url, IGNORED)
+```````````````````````````````` example(Images: 15) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/testImage.png){max-width=6cm max-height=2.4cm} 
 
 with some text

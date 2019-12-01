@@ -14,7 +14,7 @@ Converts ~~text~~ to strikethrough of text
 
 The tests here are converted to commonmark spec.txt format and AST expected results added.
 
-```````````````````````````````` example Gfm Strikethrough Extension: 1
+```````````````````````````````` example Gfm Strikethrough Extension: 1
 ~foo~
 .
 <p>~foo~</p>
@@ -25,7 +25,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 2
+```````````````````````````````` example Gfm Strikethrough Extension: 2
 ~~foo~~
 .
 <p><del>foo</del></p>
@@ -37,7 +37,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 3
+```````````````````````````````` example Gfm Strikethrough Extension: 3
 foo ~~~~
 .
 <p>foo ~~~~</p>
@@ -48,7 +48,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 4
+```````````````````````````````` example Gfm Strikethrough Extension: 4
 ~~foo
 .
 <p>~~foo</p>
@@ -59,7 +59,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 5
+```````````````````````````````` example Gfm Strikethrough Extension: 5
 foo~~
 .
 <p>foo~~</p>
@@ -70,7 +70,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 6
+```````````````````````````````` example Gfm Strikethrough Extension: 6
 ~~~foo~~~
 .
 <p>~<del>foo</del>~</p>
@@ -84,7 +84,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 7
+```````````````````````````````` example Gfm Strikethrough Extension: 7
 ~~foo~~~
 .
 <p><del>foo</del>~</p>
@@ -97,7 +97,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 8
+```````````````````````````````` example Gfm Strikethrough Extension: 8
 ~~foo~bar~~
 
 ~~foo~~bar~~
@@ -158,7 +158,7 @@ Document[0, 110]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 9
+```````````````````````````````` example Gfm Strikethrough Extension: 9
 ~~Paragraph with *emphasis* and __strong emphasis__~~
 .
 <p><del>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></del></p>
@@ -175,7 +175,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example Gfm Strikethrough Extension: 10
+```````````````````````````````` example Gfm Strikethrough Extension: 10
 > strike ~~that~~
 .
 <blockquote>
@@ -193,7 +193,7 @@ Document[0, 17]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 ~~Paragraph with *emphasis* and __strong emphasis__~~
 .
 <p md-pos="0-53"><del md-pos="2-51">Paragraph with <em md-pos="18-26">emphasis</em> and <strong md-pos="34-49">strong emphasis</strong></del></p>
@@ -212,7 +212,7 @@ Document[0, 53]
 
 ## Custom Style HTML
 
-```````````````````````````````` example(Custom Style HTML: 1) options(style-strikethrough)
+```````````````````````````````` example(Custom Style HTML: 1) options(style-strikethrough)
 ~~strikethrough~~
 
 ~subscript~

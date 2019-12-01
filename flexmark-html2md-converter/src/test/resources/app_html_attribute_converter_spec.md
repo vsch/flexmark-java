@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Word Samples
 
-```````````````````````````````` example MS Word 2011 for Mac: 1
+```````````````````````````````` example MS Word 2011 for Mac: 1
 * Equipment
 
 * Chemicals
@@ -706,7 +706,7 @@ lang=EN-US style='mso-ansi-language:EN-US'>Oligos<o:p></o:p></span></p>
 
 Word Samples
 
-```````````````````````````````` example MS Word 2011 for Mac: 2
+```````````````````````````````` example MS Word 2011 for Mac: 2
 1. Equipment
 
 2. Chemicals
@@ -1394,7 +1394,7 @@ lang=EN-US style='mso-ansi-language:EN-US'>Oligos<o:p></o:p></span></p>
 
 Word Samples, paren list, default
 
-```````````````````````````````` example MS Word 2011 for Mac: 3
+```````````````````````````````` example MS Word 2011 for Mac: 3
 1. Equipment
 
 2. Chemicals
@@ -2083,7 +2083,7 @@ lang=EN-US style='mso-ansi-language:EN-US'>Oligos<o:p></o:p></span></p>
 
 Word Samples, paren list, default
 
-```````````````````````````````` example(MS Word 2011 for Mac: 4) options(paren-lists)
+```````````````````````````````` example(MS Word 2011 for Mac: 4) options(paren-lists)
 1) Equipment
 
 2) Chemicals
@@ -2772,7 +2772,7 @@ lang=EN-US style='mso-ansi-language:EN-US'>Oligos<o:p></o:p></span></p>
 
 Word Samples, paren list, default
 
-```````````````````````````````` example(MS Word 2011 for Mac: 5) options(paren-lists)
+```````````````````````````````` example(MS Word 2011 for Mac: 5) options(paren-lists)
 1. Equipment
 
 2. Chemicals
@@ -3852,7 +3852,7 @@ lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 
 ## MS Excel 2011 for Mac
 
-```````````````````````````````` example MS Excel 2011 for Mac: 1
+```````````````````````````````` example MS Excel 2011 for Mac: 1
 |---------|---------|
 | Title 1 | Title 2 |
 | abc     | 1       |
@@ -3941,7 +3941,7 @@ td
 
 text wrapped in div should be treated as having a hard break at the end.
 
-```````````````````````````````` example Apple Mail: 1
+```````````````````````````````` example Apple Mail: 1
 P.S. I will focus on the conversion of elements you listed in your prioritized list but will  
 implement all markdown elements for the final version of the module. I like orthogonal solutions  
 that require as little effort in use as much as possible.
@@ -3951,7 +3951,7 @@ that require as little effort in use as much as possible.
 ````````````````````````````````
 
 
-```````````````````````````````` example Apple Mail: 2
+```````````````````````````````` example Apple Mail: 2
 For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%  
 
 For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%  
@@ -3965,7 +3965,7 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 ````````````````````````````````
 
 
-```````````````````````````````` example(Apple Mail: 3) options(no-br-as-para-breaks)
+```````````````````````````````` example(Apple Mail: 3) options(no-br-as-para-breaks)
 For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%  
 For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%  
 For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%  
@@ -3975,7 +3975,7 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 ````````````````````````````````
 
 
-```````````````````````````````` example(Apple Mail: 4) options(div-as-para)
+```````````````````````````````` example(Apple Mail: 4) options(div-as-para)
 For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%
 
 <br />
@@ -3997,7 +3997,7 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 ````````````````````````````````
 
 
-```````````````````````````````` example Apple Mail: 5
+```````````````````````````````` example Apple Mail: 5
 Best regards,  
 
 <br />
@@ -4010,7 +4010,7 @@ Vladimir.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Apple Mail: 6) options(no-br-as-extra-blank-lines)
+```````````````````````````````` example(Apple Mail: 6) options(no-br-as-extra-blank-lines)
 Best regards,  
 
 Vladimir.
@@ -4019,11 +4019,11 @@ Vladimir.
 ````````````````````````````````
 
 
-## Office Libre 
+## Office Libre
 
 Uses `<strike>` tags instead of del.
 
-```````````````````````````````` example Office Libre: 1
+```````````````````````````````` example Office Libre: 1
 ~~strike-through~~
 .
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -4049,7 +4049,7 @@ Uses `<strike>` tags instead of del.
 
 ## GitHub RST Rendered Document
 
-```````````````````````````````` example GitHub RST Rendered Document: 1
+```````````````````````````````` example GitHub RST Rendered Document: 1
 ### error: attempt to use poisoned "SIG_USART0_RECV" {#error-attempt-to-use-poisoned-sig_usart0_recv}
 
 If you get the following error:

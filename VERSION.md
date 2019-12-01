@@ -248,6 +248,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.62
 
+* Fix: remove space to `&nbsp;` conversion of spec example first line. Was done to allow GitHub
+  to display spec examples as fenced code. No longer needed since GitHub switched to CommonMark
+  parser.
 * Add: `TestUtils.customIntOption(String, String, Function<Integer, DataHolder>)` and
   `TestUtils.customStringOption(String, String, Function<String, DataHolder>)` to ease creating
   `CUSTOM_OPTION` option types.

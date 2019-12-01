@@ -14,7 +14,7 @@ Converts macros text to macros nodes.
 
 not a block macro
 
-```````````````````````````````` example Macros: 1
+```````````````````````````````` example Macros: 1
  {{macro}}
 content
 {{/macro}}
@@ -33,7 +33,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 2
+```````````````````````````````` example Macros: 2
  {{macro}} content {{/macro}}
 .
 <p>{{macro}} content {{/macro}}</p>
@@ -46,7 +46,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 3
+```````````````````````````````` example Macros: 3
  {{macro/}}
 .
 <p>{{macro/}}</p>
@@ -57,7 +57,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 4
+```````````````````````````````` example Macros: 4
 needs blank line before
 {{macro}}
 content
@@ -82,7 +82,7 @@ Document[0, 52]
 
 Converts macros text to macros nodes.
 
-```````````````````````````````` example Macros: 5
+```````````````````````````````` example Macros: 5
 {{macro}}
 content
 {{/macro}}
@@ -100,7 +100,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 6
+```````````````````````````````` example Macros: 6
 {{macro}}
 content
 
@@ -123,7 +123,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 7
+```````````````````````````````` example Macros: 7
 {{macro}}
 content
 
@@ -162,7 +162,7 @@ Document[0, 105]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 8
+```````````````````````````````` example Macros: 8
 {{macro}}
 content
 - bullet item
@@ -210,7 +210,7 @@ Document[0, 105]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 9
+```````````````````````````````` example Macros: 9
 {{macro/}}
 .
 {{macro/}}
@@ -221,7 +221,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 10
+```````````````````````````````` example Macros: 10
 {{macro /}}
 .
 {{macro /}}
@@ -232,7 +232,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 11
+```````````````````````````````` example Macros: 11
 {{macro}}{{/macro}}
 .
 {{macro}}{{/macro}}
@@ -244,7 +244,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 12
+```````````````````````````````` example Macros: 12
 {{macro}}text content{{/macro}}
 .
 {{macro}}text content{{/macro}}
@@ -257,7 +257,7 @@ Document[0, 31]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 13
+```````````````````````````````` example Macros: 13
 {{macro}}text **bold** content{{/macro}}
 .
 {{macro}}text <strong>bold</strong> content{{/macro}}
@@ -273,7 +273,7 @@ Document[0, 40]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 14
+```````````````````````````````` example Macros: 14
 {{macro attribute}}text{{/macro}}
 .
 {{macro attribute}}text{{/macro}}
@@ -286,9 +286,10 @@ Document[0, 33]
     MacroClose[23, 33] nameOpen:[23, 26, "{{/"] name:[26, 31, "macro"] nameClose:[31, 33, "}}"]
 ````````````````````````````````
 
+
 not a valid attribute, now not a macro block
 
-```````````````````````````````` example Macros: 15
+```````````````````````````````` example Macros: 15
 {{macro attribute=}}text{{/macro}}
 .
 <p>{{macro attribute=}}text{{/macro}}</p>
@@ -299,7 +300,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 16
+```````````````````````````````` example Macros: 16
 {{macro attribute=""}}text{{/macro}}
 .
 {{macro attribute=&quot;&quot;}}text{{/macro}}
@@ -313,7 +314,7 @@ Document[0, 36]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 17
+```````````````````````````````` example Macros: 17
 {{macro attribute=''}}text{{/macro}}
 .
 {{macro attribute=''}}text{{/macro}}
@@ -327,7 +328,7 @@ Document[0, 36]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 18
+```````````````````````````````` example Macros: 18
 {{macro attribute="value"}}text{{/macro}}
 .
 {{macro attribute=&quot;value&quot;}}text{{/macro}}
@@ -341,7 +342,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 19
+```````````````````````````````` example Macros: 19
 {{macro attribute='value'}}text{{/macro}}
 .
 {{macro attribute='value'}}text{{/macro}}
@@ -355,7 +356,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 20
+```````````````````````````````` example Macros: 20
 {{macro disabled class="aClass" attribute='value' mixed='test "quoted"'}}text{{/macro}}
 .
 {{macro disabled class=&quot;aClass&quot; attribute='value' mixed='test &quot;quoted&quot;'}}text{{/macro}}
@@ -372,7 +373,7 @@ Document[0, 87]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Macros: 21) options(no-rendering)
+```````````````````````````````` example(Macros: 21) options(no-rendering)
 {{macro disabled class="aClass" attribute='value' mixed='test "quoted"'}}text{{/macro}}
 .
 .
@@ -388,7 +389,7 @@ Document[0, 87]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 22
+```````````````````````````````` example Macros: 22
  {{macro}}text **bold** content{{/macro}}
 .
 <p>{{macro}}text <strong>bold</strong> content{{/macro}}</p>
@@ -404,7 +405,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 23
+```````````````````````````````` example Macros: 23
  **{{macro}}text *italic* content{{/macro}}**
 .
 <p><strong>{{macro}}text <em>italic</em> content{{/macro}}</strong></p>
@@ -421,7 +422,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Macros: 24) options(no-rendering)
+```````````````````````````````` example(Macros: 24) options(no-rendering)
  **{{macro}}text *italic* content{{/macro}}**
 .
 <p><strong></strong></p>
@@ -438,7 +439,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 25
+```````````````````````````````` example Macros: 25
  **{{macro class="aClass" style="margin:0" disabled}}text *italic* content{{/macro}}**
 .
 <p><strong>{{macro class=&quot;aClass&quot; style=&quot;margin:0&quot; disabled}}text <em>italic</em> content{{/macro}}</strong></p>
@@ -458,7 +459,7 @@ Document[0, 86]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 26
+```````````````````````````````` example Macros: 26
  {{macro}}nested{{macro}}content{{/macro}}{{/macro}}
 .
 <p>{{macro}}nested{{macro}}content{{/macro}}{{/macro}}</p>
@@ -476,7 +477,7 @@ Document[0, 52]
 
 macros are automatically closed
 
-```````````````````````````````` example Macros: 27
+```````````````````````````````` example Macros: 27
  {{macro}}nested{{macro}}content
 .
 <p>{{macro}}nested{{macro}}content</p>
@@ -492,7 +493,7 @@ Document[0, 32]
 
 macros are automatically closed
 
-```````````````````````````````` example Macros: 28
+```````````````````````````````` example Macros: 28
  {{macro1}}nested{{macro2}}content{{/macro1}}
 .
 <p>{{macro1}}nested{{macro2}}content{{/macro1}}</p>
@@ -509,7 +510,7 @@ Document[0, 45]
 
 Incorrect input
 
-```````````````````````````````` example Macros: 29
+```````````````````````````````` example Macros: 29
 {{mymacro par1="val1" par2=2}}
 {{/nomacro}} is not end
 and even {{mymacro}} is just plain content
@@ -546,7 +547,7 @@ Document[0, 133]
 
 Corrected input
 
-```````````````````````````````` example Macros: 30
+```````````````````````````````` example Macros: 30
 {{mymacro par1="val1" par2=2}}
 {{/nomacro}} is not end
 and even {{mymacro}} is just plain content

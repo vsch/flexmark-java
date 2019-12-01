@@ -14,7 +14,7 @@ Converts GitHub `#issue` syntax to GitHubIssue nodes that renders as a link to t
 
 Only digits allowed
 
-```````````````````````````````` example GfmIssues: 1
+```````````````````````````````` example GfmIssues: 1
 abc #123abc xyz
 .
 <p>abc #123abc xyz</p>
@@ -25,7 +25,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmIssues: 2
+```````````````````````````````` example GfmIssues: 2
 abc #123-4 xyz
 .
 <p>abc <a href="issues/123">#123</a>-4 xyz</p>
@@ -38,7 +38,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmIssues: 3
+```````````````````````````````` example GfmIssues: 3
 abc #123
 .
 <p>abc <a href="issues/123">#123</a></p>
@@ -50,7 +50,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmIssues: 4
+```````````````````````````````` example GfmIssues: 4
 abc #123
 
 .
@@ -65,7 +65,7 @@ Document[0, 10]
 
 make sure cr/lf work
 
-```````````````````````````````` example GfmIssues: 5
+```````````````````````````````` example GfmIssues: 5
 abc #123⏎
 
 .
@@ -80,7 +80,7 @@ Document[0, 11]
 
 make sure cr works
 
-```````````````````````````````` example(GfmIssues: 6) options(NO_FILE_EOL)
+```````````````````````````````` example(GfmIssues: 6) options(NO_FILE_EOL)
 abc #123⏎
 .
 <p>abc <a href="issues/123">#123</a></p>
@@ -92,7 +92,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmIssues: 7
+```````````````````````````````` example GfmIssues: 7
 abc #123 xyz
 .
 <p>abc <a href="issues/123">#123</a> xyz</p>
@@ -105,7 +105,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example GfmIssues: 8
+```````````````````````````````` example GfmIssues: 8
 abc #123
 xyz
 .
@@ -121,7 +121,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmIssues: 9) options(root)
+```````````````````````````````` example(GfmIssues: 9) options(root)
 #123
 .
 <p><a href="https://github.com/vsch/flexmark-java/issues/123">#123</a></p>
@@ -132,7 +132,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmIssues: 10) options(root, prefix)
+```````````````````````````````` example(GfmIssues: 10) options(root, prefix)
 #123
 .
 <p><a href="https://github.com/vsch/flexmark-java/issues?issue=123">#123</a></p>
@@ -143,7 +143,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmIssues: 11) options(root, suffix)
+```````````````````````````````` example(GfmIssues: 11) options(root, suffix)
 #123
 .
 <p><a href="https://github.com/vsch/flexmark-java/issues/123&amp;">#123</a></p>
@@ -154,7 +154,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmIssues: 12) options(root, prefix, suffix)
+```````````````````````````````` example(GfmIssues: 12) options(root, prefix, suffix)
 #123
 .
 <p><a href="https://github.com/vsch/flexmark-java/issues?issue=123&amp;">#123</a></p>
@@ -165,7 +165,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example(GfmIssues: 13) options(root, prefix, suffix, bold)
+```````````````````````````````` example(GfmIssues: 13) options(root, prefix, suffix, bold)
 #123
 .
 <p><a href="https://github.com/vsch/flexmark-java/issues?issue=123&amp;"><strong>#123</strong></a></p>
@@ -178,7 +178,7 @@ Document[0, 4]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 #123
 .
 <p md-pos="0-4"><a md-pos="0-4" href="issues/123">#123</a></p>
@@ -194,7 +194,7 @@ Document[0, 4]
 Issue #252, GfmUser and GfmIssue are not recognized if immediately followed by non-space
 character
 
-```````````````````````````````` example(Issue 252: 1) options(root, prefix, suffix)
+```````````````````````````````` example(Issue 252: 1) options(root, prefix, suffix)
 Hello, @world, and #1!
 .
 <p>Hello, @world, and <a href="https://github.com/vsch/flexmark-java/issues?issue=1&amp;">#1</a>!</p>
@@ -205,4 +205,5 @@ Document[0, 22]
     GfmIssue[19, 21] textOpen:[19, 20, "#"] text:[20, 21, "1"]
     Text[21, 22] chars:[21, 22, "!"]
 ````````````````````````````````
+
 

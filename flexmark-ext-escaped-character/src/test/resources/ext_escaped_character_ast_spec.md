@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts escaped_character text to EscapedCharacter nodes.
 
-```````````````````````````````` example EscapedCharacter: 1
+```````````````````````````````` example EscapedCharacter: 1
 Sample  \t\e\x\t and \\ \- \~
 .
 <p>Sample  \t\e\x\t and \ - ~</p>
@@ -31,7 +31,7 @@ Document[0, 29]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 Sample  \t\e\x\t and \\ \- \~
 .
 <p md-pos="0-29">Sample  \t\e\x\t and \ - ~</p>
@@ -50,9 +50,9 @@ Document[0, 29]
 
 ## Issues
 
-#19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block
+# 19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block
 
-```````````````````````````````` example Issues: 1
+```````````````````````````````` example 19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block: 1
 - some item
     - some sub item
       continuation        \
@@ -87,7 +87,7 @@ Document[0, 82]
 
 Don't process fenced code blocks
 
-```````````````````````````````` example Issues: 2
+```````````````````````````````` example 19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block: 2
 ```
 this is not escaped \. 
 ```

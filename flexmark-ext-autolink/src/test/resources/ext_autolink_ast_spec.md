@@ -14,7 +14,7 @@ Autolink extension converts links and e-mail addresses to links in the markdown 
 
 The tests here are converted to commonmark spec.txt format and AST expected results added.
 
-```````````````````````````````` example Autolink: 1
+```````````````````````````````` example Autolink: 1
 foo http://one.org/ bar http://two.org/
 .
 <p>foo <a href="http://one.org/">http://one.org/</a> bar <a href="http://two.org/">http://two.org/</a></p>
@@ -31,7 +31,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 2
+```````````````````````````````` example Autolink: 2
 foo http://one.org/ bar `code` baz http://two.org/
 .
 <p>foo <a href="http://one.org/">http://one.org/</a> bar <code>code</code> baz <a href="http://two.org/">http://two.org/</a></p>
@@ -54,7 +54,7 @@ Document[0, 50]
 
 with anchor ref
 
-```````````````````````````````` example Autolink: 3
+```````````````````````````````` example Autolink: 3
 foo http://one.org/#anchor bar `code` baz http://two.org/#anchor
 .
 <p>foo <a href="http://one.org/#anchor">http://one.org/#anchor</a> bar <code>code</code> baz <a href="http://two.org/#anchor">http://two.org/#anchor</a></p>
@@ -77,7 +77,7 @@ Document[0, 64]
 
 with intellij dummy identfier
 
-```````````````````````````````` example(Autolink: 4) options(intellij-dummy)
+```````````````````````````````` example(Autolink: 4) options(intellij-dummy)
 foo http://one.org/#⎮anchor bar `code` baz http://two.org/#anchor
 .
 <p>foo <a href="http://one.org/#⎮anchor">http://one.org/#⎮anchor</a> bar <code>code</code> baz <a href="http://two.org/#anchor">http://two.org/#anchor</a></p>
@@ -98,7 +98,7 @@ Document[0, 65]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Autolink: 5) options(no-autolink)
+```````````````````````````````` example(Autolink: 5) options(no-autolink)
 http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)
 .
 <p>http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)</p>
@@ -109,7 +109,7 @@ Document[0, 103]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 6
+```````````````````````````````` example Autolink: 6
 http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)
 .
 <p><a href="http://example.com/one">http://example.com/one</a>. Example 2 (see <a href="http://example.com/two">http://example.com/two</a>). Example 3: <a href="http://example.com/foo_(bar)">http://example.com/foo_(bar)</a></p>
@@ -130,7 +130,7 @@ Document[0, 103]
 
 make sure www. auto links are recognized
 
-```````````````````````````````` example Autolink: 7
+```````````````````````````````` example Autolink: 7
 www.example.com
 .
 <p><a href="http://www.example.com">www.example.com</a></p>
@@ -143,7 +143,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 8
+```````````````````````````````` example Autolink: 8
 foo@example.com
 .
 <p><a href="mailto:foo@example.com">foo@example.com</a></p>
@@ -156,14 +156,14 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 9
+```````````````````````````````` example Autolink: 9
 foo@com
 .
 <p>foo@com</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 10
+```````````````````````````````` example Autolink: 10
 <http://example.com>
 .
 <p><a href="http://example.com">http://example.com</a></p>
@@ -176,7 +176,7 @@ Document[0, 20]
 
 Issue #37, How to add attribute 'class' to AutoLink node
 
-```````````````````````````````` example Autolink: 11
+```````````````````````````````` example Autolink: 11
 https://google.com/abc?hello=456&world=789
 .
 <p><a href="https://google.com/abc?hello=456&amp;world=789">https://google.com/abc?hello=456&amp;world=789</a></p>
@@ -191,7 +191,7 @@ Document[0, 42]
 
 Issue #62, Autolinks extension for http:// and https:// links includes trailing spaces
 
-```````````````````````````````` example Autolink: 12
+```````````````````````````````` example Autolink: 12
 http:// some text
 
 https:// some text
@@ -231,7 +231,7 @@ Document[0, 77]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 13
+```````````````````````````````` example Autolink: 13
 http:// some text https:// some text ftp:// some text file:// some text
 
 .
@@ -255,7 +255,7 @@ Document[0, 73]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 14
+```````````````````````````````` example Autolink: 14
 http:// or https://
 
 .
@@ -274,7 +274,7 @@ Document[0, 21]
 
 Don't process fenced code blocks
 
-```````````````````````````````` example Autolink: 15
+```````````````````````````````` example Autolink: 15
 ```
 http://example.com 
 ```
@@ -290,7 +290,7 @@ Document[0, 27]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 foo@example.com
 http://example.com
 .
@@ -313,7 +313,7 @@ Document[0, 34]
 
 Issue #178, AutolinkExtension does not add http:// to simple urls starting with www.
 
-```````````````````````````````` example Issue 178: 1
+```````````````````````````````` example Issue 178: 1
 auto link www.example.com
 .
 <p>auto link <a href="http://www.example.com">www.example.com</a></p>
@@ -331,7 +331,7 @@ Document[0, 25]
 
 Issue #217, Escape an Autolink
 
-```````````````````````````````` example(Issue 217: 1) options(ignore-google)
+```````````````````````````````` example(Issue 217: 1) options(ignore-google)
 auto link www.google.com
 .
 <p>auto link www.google.com</p>
@@ -346,7 +346,7 @@ Document[0, 24]
 
 Issue #265, Autolink extension converts autolinks in inline code nodes in code
 
-```````````````````````````````` example Issue 265: 1
+```````````````````````````````` example Issue 265: 1
 `http://..../wiki`
 .
 <p><code>http://..../wiki</code></p>
@@ -362,7 +362,7 @@ Document[0, 18]
 
 Issue #300, Typography extension breaks some auto links
 
-```````````````````````````````` example Issue 300: 1
+```````````````````````````````` example Issue 300: 1
 https://youtu.be/L1--OW4j0Pw
 .
 <p><a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a></p>
@@ -375,7 +375,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 300: 2) options(typographic-ext)
+```````````````````````````````` example(Issue 300: 2) options(typographic-ext)
 https://youtu.be/L1--OW4j0Pw
 .
 <p><a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a></p>
@@ -388,7 +388,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 300: 3) options(typographic-ext)
+```````````````````````````````` example(Issue 300: 3) options(typographic-ext)
 Embedded in text https://youtu.be/L1--OW4j0Pw -- with typographic following
 .
 <p>Embedded in text <a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a> &ndash; with typographic following</p>
@@ -405,7 +405,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 300: 4) options(typographic-ext)
+```````````````````````````````` example(Issue 300: 4) options(typographic-ext)
 Embedded in text https://youtu.be/L1--OW4j0Pw more text--with typographic following
 .
 <p>Embedded in text <a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a> more text&ndash;with typographic following</p>
@@ -422,7 +422,7 @@ Document[0, 83]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 300: 5) options(typographic-ext)
+```````````````````````````````` example(Issue 300: 5) options(typographic-ext)
 Embedded in text with--typographic prefix https://youtu.be/L1--OW4j0Pw more text--with
 typographic following
 .
@@ -449,7 +449,7 @@ Document[0, 108]
 
 Issue, Autolink extension does not convert URI prefix without following text
 
-```````````````````````````````` example Issue xxx-1: 1
+```````````````````````````````` example Issue xxx-1: 1
 http://
 .
 <p><a href="http://">http://</a></p>
@@ -462,7 +462,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 2
+```````````````````````````````` example Issue xxx-1: 2
 http://abc http://
 .
 <p><a href="http://abc">http://abc</a> <a href="http://">http://</a></p>
@@ -478,7 +478,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 3
+```````````````````````````````` example Issue xxx-1: 3
 test http://
 .
 <p>test <a href="http://">http://</a></p>
@@ -492,7 +492,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 4
+```````````````````````````````` example Issue xxx-1: 4
 test http://   
 .
 <p>test <a href="http://">http://</a></p>
@@ -506,7 +506,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 5
+```````````````````````````````` example Issue xxx-1: 5
 test custom.protocol-1+2://   
 .
 <p>test <a href="custom.protocol-1+2://">custom.protocol-1+2://</a></p>
@@ -520,7 +520,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 6
+```````````````````````````````` example Issue xxx-1: 6
 test custom.protocol-1+2://abc
 .
 <p>test <a href="custom.protocol-1+2://abc">custom.protocol-1+2://abc</a></p>
@@ -538,7 +538,7 @@ Document[0, 30]
 
 Issue of autolinks not parsed after built in auto link
 
-```````````````````````````````` example Issue xxx.2: 1
+```````````````````````````````` example Issue xxx.2: 1
 <http://test.com> www.vladsch.com
 .
 <p><a href="http://test.com">http://test.com</a> <a href="http://www.vladsch.com">www.vladsch.com</a></p>
@@ -557,7 +557,7 @@ Document[0, 33]
 
 Issue of autolinks not parsed after built in auto link
 
-```````````````````````````````` example Issue xxx.3: 1
+```````````````````````````````` example Issue xxx.3: 1
 <http://foo.bar/baz bim>
 .
 <p>&lt;<a href="http://foo.bar/baz">http://foo.bar/baz</a> bim&gt;</p>

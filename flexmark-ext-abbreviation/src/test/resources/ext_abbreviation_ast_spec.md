@@ -13,7 +13,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 flexmark-java extension for defining abbreviations and turning appearance of these abbreviations
 in text into abbr tags with titles consisting of the expansion of the abbreviation.
 
-```````````````````````````````` example(Abbreviation: 1) options(FILE_EOL)
+```````````````````````````````` example(Abbreviation: 1) options(FILE_EOL)
 *[Abbr]:Abbreviation
 .
 .
@@ -24,7 +24,7 @@ Document[0, 21]
 
 Should work without trailing EOL
 
-```````````````````````````````` example(Abbreviation: 2) options(NO_FILE_EOL)
+```````````````````````````````` example(Abbreviation: 2) options(NO_FILE_EOL)
 *[Abbr]:Abbreviation
 .
 .
@@ -33,7 +33,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 3
+```````````````````````````````` example Abbreviation: 3
 *[Abbr]:Abbreviation
 
 This has an Abbr embedded in it.
@@ -52,7 +52,7 @@ Document[0, 54]
 
 No inline processing in expansion text.
 
-```````````````````````````````` example Abbreviation: 4
+```````````````````````````````` example Abbreviation: 4
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -69,7 +69,7 @@ Document[0, 90]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 5) options(links)
+```````````````````````````````` example(Abbreviation: 5) options(links)
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -86,7 +86,7 @@ Document[0, 90]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 6
+```````````````````````````````` example Abbreviation: 6
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 .
@@ -97,7 +97,7 @@ Document[0, 48]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 7
+```````````````````````````````` example Abbreviation: 7
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 
@@ -123,7 +123,7 @@ Document[0, 125]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 8
+```````````````````````````````` example Abbreviation: 8
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
 
@@ -143,7 +143,7 @@ Document[0, 135]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 9
+```````````````````````````````` example Abbreviation: 9
 *[US]: United States
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
@@ -167,7 +167,7 @@ Document[0, 141]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 10
+```````````````````````````````` example Abbreviation: 10
 *[Abbr]: Abbreviation
 [Abbr]: http://test.com
 
@@ -192,7 +192,7 @@ Document[0, 88]
 
 A reference that is not on the first line is just text.
 
-```````````````````````````````` example Abbreviation: 11
+```````````````````````````````` example Abbreviation: 11
 Paragraph with second line having a reference
 *[test]: test abbreviation
 
@@ -208,7 +208,7 @@ Document[0, 74]
 
 simple use case
 
-```````````````````````````````` example Abbreviation: 12
+```````````````````````````````` example Abbreviation: 12
 text with abbr embedded
 
 *[abbr]: abbreviation
@@ -228,7 +228,7 @@ Document[0, 48]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 text with abbr embedded
 
 *[abbr]: abbreviation
@@ -250,7 +250,7 @@ Document[0, 48]
 
 Typographic quotes and smarts will break up text and make it not match abbreviations
 
-```````````````````````````````` example Typographic quotes interaction: 1
+```````````````````````````````` example Typographic quotes interaction: 1
 Some text about HTML, SGML and HTML4.
 
 Let's talk about the U.S.A., (É.U. or É.-U. d'A. in French).
@@ -330,7 +330,7 @@ Document[0, 535]
 
 ## Ins extension interaction
 
-```````````````````````````````` example Ins extension interaction: 1
+```````````````````````````````` example Ins extension interaction: 1
 ++TCP++
 .
 <p><ins>TCP</ins></p>
@@ -342,7 +342,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins extension interaction: 2
+```````````````````````````````` example Ins extension interaction: 2
 ~~TCP~~
 .
 <p><del>TCP</del></p>
@@ -354,7 +354,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins extension interaction: 3
+```````````````````````````````` example Ins extension interaction: 3
 ++TCP++
 
 *[TCP]: Transmission Control Protocol
@@ -370,7 +370,7 @@ Document[0, 46]
 ````````````````````````````````
 
 
-```````````````````````````````` example Ins extension interaction: 4
+```````````````````````````````` example Ins extension interaction: 4
 ~~TCP~~
 
 *[TCP]: Transmission Control Protocol
@@ -390,7 +390,7 @@ Document[0, 46]
 
 Issue #198
 
-```````````````````````````````` example Issue 198: 1
+```````````````````````````````` example Issue 198: 1
 
 *[]:a
 
@@ -405,7 +405,7 @@ Document[0, 9]
 
 References loose special characters when abbreviation extension is included
 
-```````````````````````````````` example(Issue xxx-01: 1) options(no-abbr)
+```````````````````````````````` example(Issue xxx-01: 1) options(no-abbr)
 * [ ] Fix: [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]
     
 [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]: https://github.com/vsch/flexmark-java/issues/326
@@ -439,7 +439,7 @@ Document[0, 203]
 
 References loose special characters when abbreviation extension is included
 
-```````````````````````````````` example Issue xxx-01: 2
+```````````````````````````````` example Issue xxx-01: 2
 * [ ] Fix: [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]
 
 [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]: https://github.com/vsch/flexmark-java/issues/326

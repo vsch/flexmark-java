@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Transforms links to YouTube to iframe embedded video links
 
-```````````````````````````````` example YouTube embedded link transformer: 1
+```````````````````````````````` example YouTube embedded link transformer: 1
 [test](https://www.youtube.com/watch?v=GYem-BGEhaY)
 .
 <p><a href="https://www.youtube.com/watch?v=GYem-BGEhaY">test</a></p>
@@ -24,7 +24,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example YouTube embedded link transformer: 2
+```````````````````````````````` example YouTube embedded link transformer: 2
 @[test](https://www.youtube.com/watch?v=GYem-BGEhaY)
 .
 <p><iframe src="https://www.youtube.com/embed/GYem-BGEhaY" width="420" height="315" class="youtube-embedded" allowfullscreen="true" frameborder="0"></iframe></p>
@@ -39,7 +39,7 @@ Document[0, 52]
 
 Ignore escaped `@`
 
-```````````````````````````````` example YouTube embedded link transformer: 3
+```````````````````````````````` example YouTube embedded link transformer: 3
 \@[test](https://www.youtube.com/watch?v=GYem-BGEhaY)
 .
 <p>@<a href="https://www.youtube.com/watch?v=GYem-BGEhaY">test</a></p>
@@ -54,7 +54,7 @@ Document[0, 53]
 
 Ignore escaped `@`
 
-```````````````````````````````` example YouTube embedded link transformer: 4
+```````````````````````````````` example YouTube embedded link transformer: 4
 \\\@[test](https://www.youtube.com/watch?v=GYem-BGEhaY)
 .
 <p>\@<a href="https://www.youtube.com/watch?v=GYem-BGEhaY">test</a></p>
@@ -69,7 +69,7 @@ Document[0, 55]
 
 Don't ignore escaped `\\\\`
 
-```````````````````````````````` example YouTube embedded link transformer: 5
+```````````````````````````````` example YouTube embedded link transformer: 5
 \\@[test](https://www.youtube.com/watch?v=GYem-BGEhaY)
 .
 <p>\<iframe src="https://www.youtube.com/embed/GYem-BGEhaY" width="420" height="315" class="youtube-embedded" allowfullscreen="true" frameborder="0"></iframe></p>
@@ -83,7 +83,8 @@ Document[0, 54]
 
 
 New form, without start time
-```````````````````````````````` example YouTube embedded link transformer: 6
+
+```````````````````````````````` example YouTube embedded link transformer: 6
 @[test](https://youtu.be/BaA0hZ406YY)
 .
 <p><iframe src="https://www.youtube-nocookie.com/embed/BaA0hZ406YY" width="560" height="315" class="youtube-embedded" allowfullscreen="true" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe></p>
@@ -97,7 +98,8 @@ Document[0, 37]
 
 
 New form, with start time
-```````````````````````````````` example YouTube embedded link transformer: 7
+
+```````````````````````````````` example YouTube embedded link transformer: 7
 @[test](https://youtu.be/BaA0hZ406YY?t=123)
 .
 <p><iframe src="https://www.youtube-nocookie.com/embed/BaA0hZ406YY?start=123" width="560" height="315" class="youtube-embedded" allowfullscreen="true" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe></p>

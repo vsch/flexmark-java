@@ -36,7 +36,7 @@ Parses and renders GitLab Flavoured Markdown.
 
 ## Block Quotes
 
-```````````````````````````````` example Block Quotes: 1
+```````````````````````````````` example Block Quotes: 1
 >>>
 Block Quote Contents
 
@@ -51,7 +51,7 @@ A paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 2
+```````````````````````````````` example Block Quotes: 2
 >>>
 Block Quote Contents
 >>>
@@ -64,7 +64,7 @@ Block Quote Contents
 
 nested quotes
 
-```````````````````````````````` example Block Quotes: 3
+```````````````````````````````` example Block Quotes: 3
 >>>
 Block Quote Contents
 >>>
@@ -83,7 +83,7 @@ Nested Block Quote Contents
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 4
+```````````````````````````````` example Block Quotes: 4
 >>>
 Block Quote Contents
 >>>
@@ -116,28 +116,28 @@ Another Nested Block Quote Contents
 
 matched
 
-```````````````````````````````` example Inline: 1
+```````````````````````````````` example Inline: 1
 {+inserted+}
 .
 {+inserted+}
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 2
+```````````````````````````````` example Inline: 2
 [+inserted+]
 .
 [+inserted+]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 3
+```````````````````````````````` example Inline: 3
 {-deleted-}
 .
 {-deleted-}
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 4
+```````````````````````````````` example Inline: 4
 [-deleted-]
 .
 [-deleted-]
@@ -146,14 +146,14 @@ matched
 
 nested
 
-```````````````````````````````` example Inline: 5
+```````````````````````````````` example Inline: 5
 [+inserted [-deleted-]+]
 .
 [+inserted [-deleted-]+]
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline: 6
+```````````````````````````````` example Inline: 6
 *[+**inserted** [-deleted-]+]*
 .
 *[+**inserted** [-deleted-]+]*
@@ -162,21 +162,21 @@ nested
 
 ## Inline Math
 
-```````````````````````````````` example Inline Math: 1
+```````````````````````````````` example Inline Math: 1
 $`a^2+b^2=c^2`$
 .
 $`a^2+b^2=c^2`$
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline Math: 2
+```````````````````````````````` example Inline Math: 2
 Prefix $`a^2+b^2=c^2`$ suffix
 .
 Prefix $`a^2+b^2=c^2`$ suffix
 ````````````````````````````````
 
 
-```````````````````````````````` example Inline Math: 3
+```````````````````````````````` example Inline Math: 3
 prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
 .
 prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
@@ -185,7 +185,7 @@ prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ $$\sum_
 
 allow split lines
 
-```````````````````````````````` example Inline Math: 4
+```````````````````````````````` example Inline Math: 4
 prefix $`\Pr\left[\sum_{i=1}^k X_i > c \right] \leq 2^{-\Omega(c^2 k)}$$ 
 $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
 .
@@ -196,7 +196,7 @@ $$\sum_{i=1}^\infty \frac{1}{2^i} = 1`$
 
 ## Fenced Code Math
 
-```````````````````````````````` example Fenced Code Math: 1
+```````````````````````````````` example Fenced Code Math: 1
 ```math
 a^2+b^2=c^2
 ```
@@ -210,7 +210,7 @@ a^2+b^2=c^2
 
 ## Fenced Code Mermaid
 
-```````````````````````````````` example Fenced Code Mermaid: 1
+```````````````````````````````` example Fenced Code Mermaid: 1
 ```mermaid
 graph TD;
   A-->B;
@@ -232,7 +232,7 @@ graph TD;
 
 ## Video Images
 
-```````````````````````````````` example Video Images: 1
+```````````````````````````````` example Video Images: 1
 ![Video](video.mp4)
 .
 ![Video](video.mp4)

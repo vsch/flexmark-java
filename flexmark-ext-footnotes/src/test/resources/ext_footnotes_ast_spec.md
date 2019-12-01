@@ -18,7 +18,7 @@ indented by 4 spaces or a tab from the indent level of the footnote.
 
 basic
 
-```````````````````````````````` example Footnotes: 1
+```````````````````````````````` example Footnotes: 1
 text [^footnote] embedded.
 
 [^footnote]: footnote text
@@ -53,7 +53,7 @@ Document[0, 74]
 
 undefined
 
-```````````````````````````````` example Footnotes: 2
+```````````````````````````````` example Footnotes: 2
 text [^undefined] embedded.
 
 [^footnote]: footnote text
@@ -79,7 +79,7 @@ Document[0, 76]
 
 duplicated
 
-```````````````````````````````` example Footnotes: 3
+```````````````````````````````` example Footnotes: 3
 text [^footnote] embedded.
 
 [^footnote]: footnote text
@@ -122,7 +122,7 @@ Document[0, 131]
 
 nested
 
-```````````````````````````````` example Footnotes: 4
+```````````````````````````````` example Footnotes: 4
 text [^footnote] embedded.
 
 [^footnote]: footnote text with [^another] embedded footnote
@@ -173,7 +173,7 @@ Document[0, 153]
 
 circular
 
-```````````````````````````````` example Footnotes: 5
+```````````````````````````````` example Footnotes: 5
 text [^footnote] embedded.
 
 [^footnote]: footnote text with [^another] embedded footnote
@@ -228,7 +228,7 @@ Document[0, 187]
 
 compound
 
-```````````````````````````````` example Footnotes: 6
+```````````````````````````````` example Footnotes: 6
 This paragraph has a footnote[^footnote].
 
 [^footnote]: This is the body of the footnote.
@@ -294,7 +294,7 @@ Document[0, 261]
 
 Not a footnote nor a footnote definition if space between [ and ^.
 
-```````````````````````````````` example Footnotes: 7
+```````````````````````````````` example Footnotes: 7
 This paragraph has no footnote[ ^footnote].
 
 [ ^footnote]: This is the body of the footnote.
@@ -343,7 +343,7 @@ Document[0, 264]
 
 Unused footnotes are not used and do not show up on the page.
 
-```````````````````````````````` example Footnotes: 8
+```````````````````````````````` example Footnotes: 8
 This paragraph has a footnote[^2].
 
 [^1]: This is the body of the unused footnote.
@@ -425,7 +425,7 @@ Document[0, 350]
 
 Undefined footnotes are rendered as if they were text, with emphasis left as is.
 
-```````````````````````````````` example Footnotes: 9
+```````````````````````````````` example Footnotes: 9
 This paragraph has a footnote[^**footnote**].
 
 [^footnote]: This is the body of the footnote.
@@ -475,7 +475,7 @@ Document[0, 265]
 
 Footnote numbers are assigned in order of their reference in the document
 
-```````````````````````````````` example Footnotes: 10
+```````````````````````````````` example Footnotes: 10
 This paragraph has a footnote[^2]. Followed by another[^1]. 
 
 [^1]: This is the body of the unused footnote.
@@ -566,7 +566,7 @@ Document[0, 376]
 
 Footnotes can contain references to other footnotes.
 
-```````````````````````````````` example Footnotes: 11
+```````````````````````````````` example Footnotes: 11
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -657,7 +657,7 @@ Document[0, 384]
 
 Customized strings
 
-```````````````````````````````` example(Footnotes: 12) options(custom)
+```````````````````````````````` example(Footnotes: 12) options(custom)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -748,7 +748,7 @@ Document[0, 384]
 
 Customized link ref class
 
-```````````````````````````````` example(Footnotes: 13) options(link-class-none, back-link-class-text)
+```````````````````````````````` example(Footnotes: 13) options(link-class-none, back-link-class-text)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -778,7 +778,7 @@ Document[0, 77]
 
 Customized link ref class
 
-```````````````````````````````` example(Footnotes: 14) options(link-class-text, back-link-class-none)
+```````````````````````````````` example(Footnotes: 14) options(link-class-text, back-link-class-none)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -808,7 +808,7 @@ Document[0, 77]
 
 Parser emulation family indent handling is ignored. Otherwise the indent can be huge.
 
-```````````````````````````````` example Footnotes: 15
+```````````````````````````````` example Footnotes: 15
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -853,7 +853,7 @@ Document[0, 205]
 
 List item indent is used
 
-```````````````````````````````` example(Footnotes: 16) options(item-indent-8)
+```````````````````````````````` example(Footnotes: 16) options(item-indent-8)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -898,7 +898,7 @@ Document[0, 213]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -932,7 +932,7 @@ Issue #75, Incorrect footnote link
 
 Actually it is incorrect reference parsing with `\r\n`
 
-```````````````````````````````` example Issue 75: 1
+```````````````````````````````` example Issue 75: 1
 Incorrect: amazon[^2]⏎
 
 [^1]: http://www.google.com/⏎
@@ -964,7 +964,7 @@ Document[0, 84]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue 75: 2
+```````````````````````````````` example Issue 75: 2
 Incorrect: amazon[^2]
 
 [^1]: http://www.google.com/
@@ -1000,7 +1000,7 @@ Document[0, 81]
 
 Issue #244
 
-```````````````````````````````` example Issue 244: 1
+```````````````````````````````` example Issue 244: 1
 Duplicated footnote reference[^id].
 
 reference[^id]

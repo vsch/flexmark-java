@@ -10,7 +10,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Stack Overflow in parser
 
-```````````````````````````````` example(Stack Overflow in parser: 1) options(IGNORE)
+```````````````````````````````` example(Stack Overflow in parser: 1) options(IGNORE)
 [other](#)
 
 [other](other.html)

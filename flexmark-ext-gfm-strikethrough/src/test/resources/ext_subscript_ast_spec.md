@@ -14,7 +14,7 @@ Converts ~text~ to subscript of text
 
 The tests here are converted to commonmark spec.txt format and AST expected results added.
 
-```````````````````````````````` example Subscript Extension: 1
+```````````````````````````````` example Subscript Extension: 1
 ~foo~
 .
 <p><sub>foo</sub></p>
@@ -26,7 +26,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 2
+```````````````````````````````` example Subscript Extension: 2
 ~~foo~~
 .
 <p><sub><sub>foo</sub></sub></p>
@@ -39,7 +39,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 3
+```````````````````````````````` example Subscript Extension: 3
 foo ~~~~
 .
 <p>foo ~~~~</p>
@@ -50,7 +50,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 4
+```````````````````````````````` example Subscript Extension: 4
 ~~foo
 .
 <p>~~foo</p>
@@ -61,7 +61,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 5
+```````````````````````````````` example Subscript Extension: 5
 foo~~
 .
 <p>foo~~</p>
@@ -72,7 +72,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 6
+```````````````````````````````` example Subscript Extension: 6
 ~~~foo~~~
 .
 <p><sub><sub><sub>foo</sub></sub></sub></p>
@@ -86,7 +86,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 7
+```````````````````````````````` example Subscript Extension: 7
 ~~foo~~~
 .
 <p><sub><sub>foo</sub></sub>~</p>
@@ -100,7 +100,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 8
+```````````````````````````````` example Subscript Extension: 8
 ~foo~bar~
 
 ~foo~~bar~
@@ -166,7 +166,7 @@ Document[0, 96]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 9
+```````````````````````````````` example Subscript Extension: 9
 ~Paragraph with *emphasis* and __strong emphasis__~
 .
 <p><sub>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></sub></p>
@@ -183,7 +183,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example Subscript Extension: 10
+```````````````````````````````` example Subscript Extension: 10
 > strike ~~that~~
 .
 <blockquote>
@@ -202,7 +202,7 @@ Document[0, 17]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 ~Paragraph with *emphasis* and __strong emphasis__~
 .
 <p md-pos="0-51"><sub md-pos="1-50">Paragraph with <em md-pos="17-25">emphasis</em> and <strong md-pos="33-48">strong emphasis</strong></sub></p>
@@ -221,7 +221,7 @@ Document[0, 51]
 
 ## Custom Style HTML
 
-```````````````````````````````` example(Custom Style HTML: 1) options(style-subscript)
+```````````````````````````````` example(Custom Style HTML: 1) options(style-subscript)
 ~~strikethrough~~
 
 ~subscript~

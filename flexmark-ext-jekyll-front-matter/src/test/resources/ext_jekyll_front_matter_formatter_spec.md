@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts jekyll_front_matter text to JekyllFrontMatter node.
 
-```````````````````````````````` example JekyllFrontMatter: 1
+```````````````````````````````` example JekyllFrontMatter: 1
 ---
 title: JekyllFrontMatter Extension Spec
 author: 
@@ -34,7 +34,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 preserve whitespaces in block
 
-```````````````````````````````` example JekyllFrontMatter: 2
+```````````````````````````````` example JekyllFrontMatter: 2
 ---
 linters:
   - name: linter
@@ -57,7 +57,7 @@ Document[0, 189]
 ````````````````````````````````
 
 
-```````````````````````````````` example(JekyllFrontMatter: 3) options(references-document-top)
+```````````````````````````````` example(JekyllFrontMatter: 3) options(references-document-top)
 ---
 title: JekyllFrontMatter Extension Spec
 author: 
@@ -90,7 +90,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts jekyll front matter text to JekyllFrontMatter node.
 
-```````````````````````````````` example FlexmarkFrontMatter: 1
+```````````````````````````````` example FlexmarkFrontMatter: 1
 ---
 title: JekyllFrontMatter Extension Spec
 author: 
@@ -110,7 +110,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ````````````````````````````````
 
 
-```````````````````````````````` example(FlexmarkFrontMatter: 2) options(references-document-top)
+```````````````````````````````` example(FlexmarkFrontMatter: 2) options(references-document-top)
 ---
 title: JekyllFrontMatter Extension Spec
 author: 

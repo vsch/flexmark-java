@@ -12,14 +12,14 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts HTML to markdown
 
-```````````````````````````````` example Text: 1
+```````````````````````````````` example Text: 1
 Expected rendered HTML
 .
 <p>Expected rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Text: 2
+```````````````````````````````` example Text: 2
 Expected rendered HTML  
 Another line
 .
@@ -27,7 +27,7 @@ Another line
 ````````````````````````````````
 
 
-```````````````````````````````` example Text: 3
+```````````````````````````````` example Text: 3
 Expected rendered HTML  
 
 Another line
@@ -36,7 +36,7 @@ Another line
 ````````````````````````````````
 
 
-```````````````````````````````` example Text: 4
+```````````````````````````````` example Text: 4
 15 days ago by
 .
 <relative-time datetime="2018-07-31T12:16:08Z" title="Jul 31, 2018, 8:16 AM GMT-4" style="box-sizing: border-box;">15 days ago</relative-time><span class="Apple-converted-space"> </span>by<span class="Apple-converted-space"> </span>
@@ -45,77 +45,77 @@ Another line
 
 ## Emphasis
 
-```````````````````````````````` example Emphasis: 1
+```````````````````````````````` example Emphasis: 1
 **Expected** rendered HTML
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 2
+```````````````````````````````` example Emphasis: 2
 **Expected** rendered HTML
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 3
+```````````````````````````````` example Emphasis: 3
 *Expected* rendered HTML
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 4
+```````````````````````````````` example Emphasis: 4
 *Expected* rendered HTML
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 5
+```````````````````````````````` example Emphasis: 5
 ++Expected++ rendered HTML
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 6
+```````````````````````````````` example Emphasis: 6
 ~~Expected~~ rendered HTML
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 7
+```````````````````````````````` example Emphasis: 7
 ~Expected~ rendered HTML
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 8
+```````````````````````````````` example Emphasis: 8
 H~2~O
 .
 <p>H<sub>2</sub>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 9
+```````````````````````````````` example Emphasis: 9
 ^Expected^ rendered HTML
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 10
+```````````````````````````````` example Emphasis: 10
 H^2^O
 .
 <p>H<sup>2</sup>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 11
+```````````````````````````````` example Emphasis: 11
 `Expected` rendered HTML
 .
 <p><code>Expected</code> rendered HTML</p>
@@ -124,161 +124,161 @@ H^2^O
 
 ``Expected `a``
 
-```````````````````````````````` example Emphasis: 12
+```````````````````````````````` example Emphasis: 12
 ``Expected `a`` rendered HTML
 .
 <p><code>Expected `a</code> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 13) options(text-ext-inline-strong)
+```````````````````````````````` example(Emphasis: 13) options(text-ext-inline-strong)
 Expected rendered HTML
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 14) options(text-ext-inline-strong)
+```````````````````````````````` example(Emphasis: 14) options(text-ext-inline-strong)
 Expected rendered HTML
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 15) options(text-ext-inline-emphasis)
+```````````````````````````````` example(Emphasis: 15) options(text-ext-inline-emphasis)
 Expected rendered HTML
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 16) options(text-ext-inline-emphasis)
+```````````````````````````````` example(Emphasis: 16) options(text-ext-inline-emphasis)
 Expected rendered HTML
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 17) options(text-ext-inline-ins)
+```````````````````````````````` example(Emphasis: 17) options(text-ext-inline-ins)
 Expected rendered HTML
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 18) options(text-ext-inline-del)
+```````````````````````````````` example(Emphasis: 18) options(text-ext-inline-del)
 Expected rendered HTML
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 19) options(text-ext-inline-sub)
+```````````````````````````````` example(Emphasis: 19) options(text-ext-inline-sub)
 Expected rendered HTML
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 20) options(text-ext-inline-sub)
+```````````````````````````````` example(Emphasis: 20) options(text-ext-inline-sub)
 H2O
 .
 <p>H<sub>2</sub>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 21) options(text-ext-inline-sup)
+```````````````````````````````` example(Emphasis: 21) options(text-ext-inline-sup)
 Expected rendered HTML
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 22) options(text-ext-inline-sup)
+```````````````````````````````` example(Emphasis: 22) options(text-ext-inline-sup)
 H2O
 .
 <p>H<sup>2</sup>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 23) options(text-ext-inline-code)
+```````````````````````````````` example(Emphasis: 23) options(text-ext-inline-code)
 Expected rendered HTML
 .
 <p><code>Expected</code> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 24) options(text-ext-inline-strong)
+```````````````````````````````` example(Emphasis: 24) options(text-ext-inline-strong)
 Expected rendered HTML
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 25) options(text-ext-inline-strong)
+```````````````````````````````` example(Emphasis: 25) options(text-ext-inline-strong)
 Expected rendered HTML
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 26) options(text-ext-inline-emphasis)
+```````````````````````````````` example(Emphasis: 26) options(text-ext-inline-emphasis)
 Expected rendered HTML
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 27) options(text-ext-inline-emphasis)
+```````````````````````````````` example(Emphasis: 27) options(text-ext-inline-emphasis)
 Expected rendered HTML
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 28) options(text-ext-inline-ins)
+```````````````````````````````` example(Emphasis: 28) options(text-ext-inline-ins)
 Expected rendered HTML
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 29) options(text-ext-inline-del)
+```````````````````````````````` example(Emphasis: 29) options(text-ext-inline-del)
 Expected rendered HTML
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 30) options(text-ext-inline-sub)
+```````````````````````````````` example(Emphasis: 30) options(text-ext-inline-sub)
 Expected rendered HTML
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 31) options(text-ext-inline-sub)
+```````````````````````````````` example(Emphasis: 31) options(text-ext-inline-sub)
 H2O
 .
 <p>H<sub>2</sub>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 32) options(text-ext-inline-sup)
+```````````````````````````````` example(Emphasis: 32) options(text-ext-inline-sup)
 Expected rendered HTML
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 33) options(text-ext-inline-sup)
+```````````````````````````````` example(Emphasis: 33) options(text-ext-inline-sup)
 H2O
 .
 <p>H<sup>2</sup>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emphasis: 34) options(text-ext-inline-code)
+```````````````````````````````` example(Emphasis: 34) options(text-ext-inline-code)
 Expected rendered HTML
 .
 <p><code>Expected</code> rendered HTML</p>
@@ -287,7 +287,7 @@ Expected rendered HTML
 
 ``Expected `a``
 
-```````````````````````````````` example(Emphasis: 35) options(text-ext-inline-code)
+```````````````````````````````` example(Emphasis: 35) options(text-ext-inline-code)
 Expected `a rendered HTML
 .
 <p><code>Expected `a</code> rendered HTML</p>
@@ -296,77 +296,77 @@ Expected `a rendered HTML
 
 ## HTML Emphasis
 
-```````````````````````````````` example(HTML Emphasis: 1) options(html-ext-inline-strong)
+```````````````````````````````` example(HTML Emphasis: 1) options(html-ext-inline-strong)
 <strong>Expected</strong> rendered HTML
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 2) options(html-ext-inline-strong)
+```````````````````````````````` example(HTML Emphasis: 2) options(html-ext-inline-strong)
 <b>Expected</b> rendered HTML
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 3) options(html-ext-inline-emphasis)
+```````````````````````````````` example(HTML Emphasis: 3) options(html-ext-inline-emphasis)
 <em>Expected</em> rendered HTML
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 4) options(html-ext-inline-emphasis)
+```````````````````````````````` example(HTML Emphasis: 4) options(html-ext-inline-emphasis)
 <i>Expected</i> rendered HTML
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 5) options(html-ext-inline-ins)
+```````````````````````````````` example(HTML Emphasis: 5) options(html-ext-inline-ins)
 <ins>Expected</ins> rendered HTML
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 6) options(html-ext-inline-del)
+```````````````````````````````` example(HTML Emphasis: 6) options(html-ext-inline-del)
 <del>Expected</del> rendered HTML
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 7) options(html-ext-inline-sub)
+```````````````````````````````` example(HTML Emphasis: 7) options(html-ext-inline-sub)
 <sub>Expected</sub> rendered HTML
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 8) options(html-ext-inline-sub)
+```````````````````````````````` example(HTML Emphasis: 8) options(html-ext-inline-sub)
 H<sub>2</sub>O
 .
 <p>H<sub>2</sub>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 9) options(html-ext-inline-sup)
+```````````````````````````````` example(HTML Emphasis: 9) options(html-ext-inline-sup)
 <sup>Expected</sup> rendered HTML
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 10) options(html-ext-inline-sup)
+```````````````````````````````` example(HTML Emphasis: 10) options(html-ext-inline-sup)
 H<sup>2</sup>O
 .
 <p>H<sup>2</sup>O</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 11) options(html-ext-inline-code)
+```````````````````````````````` example(HTML Emphasis: 11) options(html-ext-inline-code)
 <code>Expected</code> rendered HTML
 .
 <p><code>Expected</code> rendered HTML</p>
@@ -375,14 +375,14 @@ H<sup>2</sup>O
 
 ``Expected `a``
 
-```````````````````````````````` example(HTML Emphasis: 12) options(html-ext-inline-code)
+```````````````````````````````` example(HTML Emphasis: 12) options(html-ext-inline-code)
 <code>Expected \`a</code> rendered HTML
 .
 <p><code>Expected `a</code> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(HTML Emphasis: 13) options(html-ext-inline-strong, html-ext-inline-emphasis)
+```````````````````````````````` example(HTML Emphasis: 13) options(html-ext-inline-strong, html-ext-inline-emphasis)
 <strong>Expected <em>Nested</em></strong> rendered HTML
 .
 <p><strong>Expected <em>Nested</em></strong> rendered HTML</p>
@@ -391,14 +391,14 @@ H<sup>2</sup>O
 
 ## Nested Emphasis
 
-```````````````````````````````` example(Nested Emphasis: 1) options(text-ext-inline-strong, html-ext-inline-emphasis)
+```````````````````````````````` example(Nested Emphasis: 1) options(text-ext-inline-strong, html-ext-inline-emphasis)
 Expected <em>Nested</em> rendered HTML
 .
 <p><strong>Expected <em>Nested</em></strong> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Nested Emphasis: 2) options(html-ext-inline-emphasis)
+```````````````````````````````` example(Nested Emphasis: 2) options(html-ext-inline-emphasis)
 **Expected <em>Nested</em>** rendered HTML
 .
 <p><strong>Expected <em>Nested</em></strong> rendered HTML</p>
@@ -407,7 +407,7 @@ Expected <em>Nested</em> rendered HTML
 
 ## Bullet Lists
 
-```````````````````````````````` example Bullet Lists: 1
+```````````````````````````````` example Bullet Lists: 1
 * item
 .
 <ul>
@@ -416,7 +416,7 @@ Expected <em>Nested</em> rendered HTML
 ````````````````````````````````
 
 
-```````````````````````````````` example Bullet Lists: 2
+```````````````````````````````` example Bullet Lists: 2
 * item 1
 * item 2
 * item 3
@@ -431,7 +431,7 @@ Expected <em>Nested</em> rendered HTML
 ````````````````````````````````
 
 
-```````````````````````````````` example Bullet Lists: 3
+```````````````````````````````` example Bullet Lists: 3
 * item 1
 
 * item 2
@@ -450,7 +450,7 @@ Expected <em>Nested</em> rendered HTML
 ````````````````````````````````
 
 
-```````````````````````````````` example Bullet Lists: 4
+```````````````````````````````` example Bullet Lists: 4
 * item 1
 
   * item 1
@@ -489,7 +489,7 @@ Expected <em>Nested</em> rendered HTML
 
 Escape special chars
 
-```````````````````````````````` example Escape Special Chars: 1
+```````````````````````````````` example Escape Special Chars: 1
 The following instructions are for **\*nix** type systems, specifically this is a Linux example.
 .
 <span style="caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">The following instructions are for<span class="Apple-converted-space"> </span></span><strong
@@ -500,7 +500,7 @@ The following instructions are for **\*nix** type systems, specifically this is 
 
 Escape special chars skipped
 
-```````````````````````````````` example(Escape Special Chars: 2) options(skip-char-escape)
+```````````````````````````````` example(Escape Special Chars: 2) options(skip-char-escape)
 The following instructions are for ***nix** type systems, specifically this is a Linux example.
 .
 <span style="caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration: none; display: inline !important; float: none;">The following instructions are for<span class="Apple-converted-space"> </span></span><strong
@@ -509,7 +509,7 @@ The following instructions are for ***nix** type systems, specifically this is a
 ````````````````````````````````
 
 
-```````````````````````````````` example(Escape Special Chars: 3) options(skip-char-escape)
+```````````````````````````````` example(Escape Special Chars: 3) options(skip-char-escape)
 | c | d | | - | - | | *a | b* | | `e | f` | | [g | h](http://a.com) |
 .
 <meta charset='utf-8'><span style="color: rgb(51, 51, 51); font-family: Consolas, Menlo, Monaco, &quot;Lucida Console&quot;, &quot;Liberation Mono&quot;, &quot;DejaVu Sans Mono&quot;, &quot;Bitstream Vera Sans Mono&quot;, &quot;Courier New&quot;, monospace; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(249, 249, 249); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">| c | d |
@@ -520,7 +520,7 @@ The following instructions are for ***nix** type systems, specifically this is a
 ````````````````````````````````
 
 
-```````````````````````````````` example Escape Special Chars: 4
+```````````````````````````````` example Escape Special Chars: 4
 [535 Closed](https://github.com/vsch/idea-multimarkdown/issues?q=is%3Aissue+is%3Aclosed)  
 Author  
 Labels  
@@ -624,7 +624,7 @@ Assignee Sort
 
 ## Numbered Lists
 
-```````````````````````````````` example Numbered Lists: 1
+```````````````````````````````` example Numbered Lists: 1
 1. item
 .
 <ol>
@@ -633,7 +633,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Numbered Lists: 2
+```````````````````````````````` example Numbered Lists: 2
 1. item 1
 2. item 2
 3. item 3
@@ -648,7 +648,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Numbered Lists: 3
+```````````````````````````````` example Numbered Lists: 3
 1. item 1
 
 2. item 2
@@ -667,7 +667,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Numbered Lists: 4
+```````````````````````````````` example Numbered Lists: 4
 1. item 1
 
    1. item 1
@@ -704,7 +704,7 @@ Assignee Sort
 
 ## Task List Items
 
-```````````````````````````````` example Task List Items: 1
+```````````````````````````````` example Task List Items: 1
 * [ ] item
 * [x] item
 
@@ -717,7 +717,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Task List Items: 2
+```````````````````````````````` example Task List Items: 2
 1. [ ] item
 2. [x] item
 
@@ -732,7 +732,7 @@ Assignee Sort
 
 ## Block Quotes
 
-```````````````````````````````` example Block Quotes: 1
+```````````````````````````````` example Block Quotes: 1
 > Expected rendered HTML
 .
 <blockquote>
@@ -741,7 +741,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 2
+```````````````````````````````` example Block Quotes: 2
 > **Expected** rendered HTML
 .
 <blockquote>
@@ -750,7 +750,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 3
+```````````````````````````````` example Block Quotes: 3
 > **Expected** rendered HTML
 .
 <blockquote>
@@ -759,7 +759,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 4
+```````````````````````````````` example Block Quotes: 4
 > *Expected* rendered HTML
 .
 <blockquote>
@@ -768,7 +768,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 5
+```````````````````````````````` example Block Quotes: 5
 > *Expected* rendered HTML
 .
 <blockquote>
@@ -777,7 +777,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 6
+```````````````````````````````` example Block Quotes: 6
 > ++Expected++ rendered HTML
 .
 <blockquote>
@@ -786,7 +786,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 7
+```````````````````````````````` example Block Quotes: 7
 > ~~Expected~~ rendered HTML
 .
 <blockquote>
@@ -795,7 +795,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 8
+```````````````````````````````` example Block Quotes: 8
 > ~Expected~ rendered HTML
 .
 <blockquote>
@@ -804,7 +804,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 9
+```````````````````````````````` example Block Quotes: 9
 > ^Expected^ rendered HTML
 .
 <blockquote>
@@ -813,7 +813,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 10
+```````````````````````````````` example Block Quotes: 10
 > `Expected` rendered HTML
 .
 <blockquote>
@@ -824,7 +824,7 @@ Assignee Sort
 
 ``Expected `a``
 
-```````````````````````````````` example Block Quotes: 11
+```````````````````````````````` example Block Quotes: 11
 > ``Expected `a`` rendered HTML
 .
 <blockquote>
@@ -833,7 +833,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 12
+```````````````````````````````` example Block Quotes: 12
 > * item
 .
 <blockquote>
@@ -844,7 +844,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 13
+```````````````````````````````` example Block Quotes: 13
 > * item 1
 > * item 2
 > * item 3
@@ -861,7 +861,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 14
+```````````````````````````````` example Block Quotes: 14
 > * item 1
 >
 > * item 2
@@ -882,7 +882,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 15
+```````````````````````````````` example Block Quotes: 15
 * item 1
 
   > * item 1
@@ -907,7 +907,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 16
+```````````````````````````````` example Block Quotes: 16
 * item 1
 
   > * item 1
@@ -944,7 +944,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 17
+```````````````````````````````` example Block Quotes: 17
 > * item 1
 >
 >   * item 1
@@ -981,7 +981,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 18
+```````````````````````````````` example Block Quotes: 18
 > 1. item
 .
 <blockquote>
@@ -992,7 +992,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 19
+```````````````````````````````` example Block Quotes: 19
 > 1. item 1
 > 2. item 2
 > 3. item 3
@@ -1009,7 +1009,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 20
+```````````````````````````````` example Block Quotes: 20
 > 1. item 1
 >
 > 2. item 2
@@ -1030,7 +1030,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 21
+```````````````````````````````` example Block Quotes: 21
 1. item 1
 
    > 1. item 1
@@ -1067,7 +1067,7 @@ Assignee Sort
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 22
+```````````````````````````````` example Block Quotes: 22
 > 1. item 1
 >
 >    1. item 1
@@ -1106,7 +1106,7 @@ Assignee Sort
 
 ## Headings
 
-```````````````````````````````` example Headings: 1
+```````````````````````````````` example Headings: 1
 Heading
 =======
 
@@ -1115,7 +1115,7 @@ Heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 2
+```````````````````````````````` example Headings: 2
 Heading
 -------
 
@@ -1124,7 +1124,7 @@ Heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 3
+```````````````````````````````` example Headings: 3
 ### Heading
 
 .
@@ -1132,7 +1132,7 @@ Heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 4
+```````````````````````````````` example Headings: 4
 #### Heading
 
 .
@@ -1140,7 +1140,7 @@ Heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 5
+```````````````````````````````` example Headings: 5
 ##### Heading
 
 .
@@ -1148,7 +1148,7 @@ Heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 6
+```````````````````````````````` example Headings: 6
 ###### Heading
 
 .
@@ -1158,7 +1158,7 @@ Heading
 
 ## Thematic Break
 
-```````````````````````````````` example Thematic Break: 1
+```````````````````````````````` example Thematic Break: 1
 *** ** * ** ***
 
 .
@@ -1170,14 +1170,14 @@ Heading
 
 not links
 
-```````````````````````````````` example Links: 1
+```````````````````````````````` example Links: 1
 Text
 .
 <a attr="http://example.com">Text</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 2
+```````````````````````````````` example Links: 2
 Text **Bold**
 .
 <a attr="http://example.com">Text <b>Bold</b></a>
@@ -1186,35 +1186,35 @@ Text **Bold**
 
 links
 
-```````````````````````````````` example Links: 3
+```````````````````````````````` example Links: 3
 [](http://example.com)
 .
 <a href="http://example.com"></a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 4
+```````````````````````````````` example Links: 4
 [Text](http://example.com)
 .
 <a href="http://example.com">Text</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 5
+```````````````````````````````` example Links: 5
 [Text](http://example.com "Title")
 .
 <a href="http://example.com" title="Title">Text</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 6
+```````````````````````````````` example Links: 6
 [Text **Bold**](http://example.com)
 .
 <a href="http://example.com">Text <b>Bold</b></a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 7
+```````````````````````````````` example Links: 7
 [\[Text **Bold**\]](http://example.com)
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -1223,42 +1223,42 @@ links
 
 auto links
 
-```````````````````````````````` example Links: 8
+```````````````````````````````` example Links: 8
 <http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 9) options(wrap-autolinks)
+```````````````````````````````` example(Links: 9) options(wrap-autolinks)
 <http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 10) options(no-wrap-autolinks)
+```````````````````````````````` example(Links: 10) options(no-wrap-autolinks)
 http://example.com
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 11
+```````````````````````````````` example Links: 11
 [http://example.com](http://example.com "Title")
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 12
+```````````````````````````````` example Links: 12
 <http://example.com>
 .
 <a href="http://example.com" title="">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 13) options(no-autolinks)
+```````````````````````````````` example(Links: 13) options(no-autolinks)
 [http://example.com](http://example.com)
 .
 <a href="http://example.com">http://example.com</a>
@@ -1267,13 +1267,13 @@ http://example.com
 
 No links
 
-```````````````````````````````` example(Links: 14) options(no-autolinks, links-none)
+```````````````````````````````` example(Links: 14) options(no-autolinks, links-none)
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 15) options(links-none)
+```````````````````````````````` example(Links: 15) options(links-none)
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -1281,14 +1281,14 @@ No links
 
 As text links
 
-```````````````````````````````` example(Links: 16) options(no-autolinks, links-text)
+```````````````````````````````` example(Links: 16) options(no-autolinks, links-text)
 http://example.com
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 17) options(links-text)
+```````````````````````````````` example(Links: 17) options(links-text)
 <http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
@@ -1297,14 +1297,14 @@ http://example.com
 
 custom resolver
 
-```````````````````````````````` example(Links: 18) options(links-text, link-resolver)
+```````````````````````````````` example(Links: 18) options(links-text, link-resolver)
 <https://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 19) options(links-text)
+```````````````````````````````` example(Links: 19) options(links-text)
 http://example.com
 .
 <a href="http://example.com" title="Title">http://example.com</a>
@@ -1313,14 +1313,14 @@ http://example.com
 
 custom resolver
 
-```````````````````````````````` example(Links: 20) options(links-text, link-resolver)
+```````````````````````````````` example(Links: 20) options(links-text, link-resolver)
 https://example.com
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 21) options(links-text)
+```````````````````````````````` example(Links: 21) options(links-text)
 \[Text **Bold**\]
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -1329,7 +1329,7 @@ https://example.com
 
 custom resolver
 
-```````````````````````````````` example(Links: 22) options(link-resolver)
+```````````````````````````````` example(Links: 22) options(link-resolver)
 [](https://example.com)
 .
 <a href="http://example.com"></a>
@@ -1338,42 +1338,42 @@ custom resolver
 
 As html
 
-```````````````````````````````` example(Links: 23) options(no-autolinks, links-html)
+```````````````````````````````` example(Links: 23) options(no-autolinks, links-html)
 <a href="http://example.com">http://example.com</a>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 24) options(links-html)
+```````````````````````````````` example(Links: 24) options(links-html)
 <a href="http://example.com">http://example.com</a>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 25) options(no-autolinks, links-html, link-resolver)
+```````````````````````````````` example(Links: 25) options(no-autolinks, links-html, link-resolver)
 <a href="http://example.com">http://example.com</a>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 26) options(links-html, link-resolver)
+```````````````````````````````` example(Links: 26) options(links-html, link-resolver)
 <a href="http://example.com">http://example.com</a>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 27) options(links-html)
+```````````````````````````````` example(Links: 27) options(links-html)
 <a href="http://example.com" title="Title">http://example.com</a>
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 28) options(links-html)
+```````````````````````````````` example(Links: 28) options(links-html)
 <a href="http://example.com">\[Text <b>Bold</b>\]</a>
 .
 <a href="http://example.com">[Text <b>Bold</b>]</a>
@@ -1382,7 +1382,7 @@ As html
 
 As ref
 
-```````````````````````````````` example(Links: 29) options(no-autolinks, links-ref)
+```````````````````````````````` example(Links: 29) options(no-autolinks, links-ref)
 [http://example.com][]
 
 [http://example.com]: http://example.com
@@ -1392,7 +1392,7 @@ As ref
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 30) options(links-ref)
+```````````````````````````````` example(Links: 30) options(links-ref)
 <http://example.com>
 .
 <a href="http://example.com">http://example.com</a>
@@ -1401,7 +1401,7 @@ As ref
 
 custom resolver
 
-```````````````````````````````` example(Links: 31) options(links-ref, link-resolver)
+```````````````````````````````` example(Links: 31) options(links-ref, link-resolver)
 [http://example.com][]
 
 [http://example.com]: https://example.com 'Title'
@@ -1411,14 +1411,14 @@ custom resolver
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 32) options(links-ref, link-resolver)
+```````````````````````````````` example(Links: 32) options(links-ref, link-resolver)
 <https://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 33) options(links-ref)
+```````````````````````````````` example(Links: 33) options(links-ref)
 [\[Text **Bold**\]][]
 
 [\[Text **Bold**\]]: http://example.com
@@ -1428,7 +1428,7 @@ custom resolver
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 34) options(links-ref)
+```````````````````````````````` example(Links: 34) options(links-ref)
 [![alt](image.png)](http://example.com)
 .
 <a href="http://example.com"><img src="image.png" alt="alt"></a>
@@ -1437,14 +1437,14 @@ custom resolver
 
 As ref re-use document
 
-```````````````````````````````` example(Links: 35) options(no-autolinks, links-ref, for-document)
+```````````````````````````````` example(Links: 35) options(no-autolinks, links-ref, for-document)
 [http://example.com][example.com]
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 36) options(links-none)
+```````````````````````````````` example(Links: 36) options(links-none)
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -1454,62 +1454,62 @@ As ref re-use document
 
 Not images
 
-```````````````````````````````` example Images: 1
+```````````````````````````````` example Images: 1
 .
 <img id="http://example.com">
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 2
+```````````````````````````````` example Images: 2
 ![](http://example.com/image.png)
 .
 <img src="http://example.com/image.png">
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 3
+```````````````````````````````` example Images: 3
 ![](http://example.com/image.png)
 .
 <img src="http://example.com/image.png" alt="">
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 4
+```````````````````````````````` example Images: 4
 ![Alt](http://example.com/image.png)
 .
 <img src="http://example.com/image.png" alt="Alt">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 5) options(link-resolver)
+```````````````````````````````` example(Images: 5) options(link-resolver)
 ![Alt](https://example.com/image.png)
 .
 <img src="http://example.com/image.png" alt="Alt">
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 6
+```````````````````````````````` example Images: 6
 ![](http://example.com/image.png "Title")
 .
 <img src="http://example.com/image.png" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 7) options(link-resolver)
+```````````````````````````````` example(Images: 7) options(link-resolver)
 ![](https://example.com/image.png "Title")
 .
 <img src="http://example.com/image.png" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 8
+```````````````````````````````` example Images: 8
 ![](http://example.com/image.png "Title")
 .
 <img src="http://example.com/image.png" alt="" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 9
+```````````````````````````````` example Images: 9
 ![Alt](http://example.com/image.png "Title")
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
@@ -1518,7 +1518,7 @@ Not images
 
 Multi-line URL
 
-```````````````````````````````` example Images: 10
+```````````````````````````````` example Images: 10
 ![alt](http://latex.codecogs.com/gif.latex?
 \begin{align*}
 x^2 + y^2 &= 1 \\
@@ -1530,7 +1530,7 @@ y &= \sqrt{1 - x^2} \\
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 11) options(link-resolver)
+```````````````````````````````` example(Images: 11) options(link-resolver)
 ![alt](https://latex.codecogs.com/gif.latex?
 \begin{align*}
 x^2 + y^2 &= 1 \\
@@ -1544,19 +1544,19 @@ y &= \sqrt{1 - x^2} \\
 
 No Images
 
-```````````````````````````````` example(Images: 12) options(img-none)
+```````````````````````````````` example(Images: 12) options(img-none)
 .
 <img src="http://example.com/image.png" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 13) options(img-none)
+```````````````````````````````` example(Images: 13) options(img-none)
 .
 <img src="http://example.com/image.png" alt="" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 14) options(img-none)
+```````````````````````````````` example(Images: 14) options(img-none)
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
 ````````````````````````````````
@@ -1564,7 +1564,7 @@ No Images
 
 Multi-line URL
 
-```````````````````````````````` example(Images: 15) options(img-none)
+```````````````````````````````` example(Images: 15) options(img-none)
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
 ````````````````````````````````
@@ -1572,28 +1572,28 @@ Multi-line URL
 
 Html images
 
-```````````````````````````````` example(Images: 16) options(img-html)
+```````````````````````````````` example(Images: 16) options(img-html)
 <img src="http://example.com/image.png" title="Title">
 .
 <img src="http://example.com/image.png" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 17) options(img-html)
+```````````````````````````````` example(Images: 17) options(img-html)
 <img src="http://example.com/image.png" alt="" title="Title">
 .
 <img src="http://example.com/image.png" alt="" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 18) options(img-html)
+```````````````````````````````` example(Images: 18) options(img-html)
 <img src="http://example.com/image.png" alt="Alt" title="Title">
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 19) options(img-html, link-resolver)
+```````````````````````````````` example(Images: 19) options(img-html, link-resolver)
 <img src="http://example.com/image.png" alt="Alt" title="Title">
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
@@ -1602,7 +1602,7 @@ Html images
 
 Multi-line URL
 
-```````````````````````````````` example(Images: 20) options(img-html)
+```````````````````````````````` example(Images: 20) options(img-html)
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title">
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
@@ -1611,21 +1611,21 @@ Multi-line URL
 
 text only images
 
-```````````````````````````````` example(Images: 21) options(img-text)
+```````````````````````````````` example(Images: 21) options(img-text)
 Title
 .
 <img src="http://example.com/image.png" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 22) options(img-text)
+```````````````````````````````` example(Images: 22) options(img-text)
 Title
 .
 <img src="http://example.com/image.png" alt="" title="Title">
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 23) options(img-text)
+```````````````````````````````` example(Images: 23) options(img-text)
 Alt
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
@@ -1634,7 +1634,7 @@ Alt
 
 Multi-line URL
 
-```````````````````````````````` example(Images: 24) options(img-text)
+```````````````````````````````` example(Images: 24) options(img-text)
 alt
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
@@ -1643,7 +1643,7 @@ alt
 
 ref images
 
-```````````````````````````````` example(Images: 25) options(img-ref)
+```````````````````````````````` example(Images: 25) options(img-ref)
 ![image][]
 
 [image]: http://example.com/image.png 'Title'
@@ -1653,7 +1653,7 @@ ref images
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 26) options(img-ref, link-resolver)
+```````````````````````````````` example(Images: 26) options(img-ref, link-resolver)
 ![image][]
 
 [image]: https://example.com/image.png 'Title'
@@ -1663,7 +1663,7 @@ ref images
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 27) options(img-ref)
+```````````````````````````````` example(Images: 27) options(img-ref)
 ![image][]
 
 [image]: http://example.com/image.png 'Title'
@@ -1673,7 +1673,7 @@ ref images
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images: 28) options(img-ref)
+```````````````````````````````` example(Images: 28) options(img-ref)
 ![Alt][]
 
 [Alt]: http://example.com/image.png 'Title'
@@ -1685,7 +1685,7 @@ ref images
 
 Multi-line URL
 
-```````````````````````````````` example(Images: 29) options(img-ref)
+```````````````````````````````` example(Images: 29) options(img-ref)
 ![alt](http://latex.codecogs.com/gif.latex?
 \begin{align*}
 x^2 + y^2 &= 1 \\
@@ -1699,7 +1699,7 @@ y &= \sqrt{1 - x^2} \\
 
 As ref re-use document
 
-```````````````````````````````` example(Images: 30) options(img-ref, for-document)
+```````````````````````````````` example(Images: 30) options(img-ref, for-document)
 ![Alt][example image]
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
@@ -1708,7 +1708,7 @@ As ref re-use document
 
 none
 
-```````````````````````````````` example(Images: 31) options(img-none)
+```````````````````````````````` example(Images: 31) options(img-none)
 .
 <img src="http://example.com/image.png" alt="Alt" title="Title">
 ````````````````````````````````
@@ -1716,7 +1716,7 @@ none
 
 ## Tables
 
-```````````````````````````````` example Tables: 1
+```````````````````````````````` example Tables: 1
 .
 <table>
   <thead></thead>
@@ -1725,7 +1725,7 @@ none
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 2
+```````````````````````````````` example Tables: 2
 | Abc | Def |
 |-----|-----|
 
@@ -1741,7 +1741,7 @@ none
 
 Separator columns need to be at least 3 characters, not 3 dashes
 
-```````````````````````````````` example Tables: 3
+```````````````````````````````` example Tables: 3
 | Abc | Def |
 |:----|-----|
 
@@ -1757,7 +1757,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 
 Separator columns need to be at least 3 characters, not 3 dashes
 
-```````````````````````````````` example Tables: 4
+```````````````````````````````` example Tables: 4
 | Abc | Def |
 |----:|-----|
 
@@ -1771,7 +1771,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 5
+```````````````````````````````` example Tables: 5
 | Abc | Def |
 |:---:|-----|
 
@@ -1785,7 +1785,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 6
+```````````````````````````````` example Tables: 6
 | Abc |
 |-----|
 
@@ -1799,7 +1799,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 7
+```````````````````````````````` example Tables: 7
 | Abc |
 |-----|
 
@@ -1813,7 +1813,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 8
+```````````````````````````````` example Tables: 8
 | Abc |
 |-----|
 
@@ -1827,7 +1827,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 9
+```````````````````````````````` example Tables: 9
 | Abc |
 |-----|
 | 1   |
@@ -1844,7 +1844,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 10
+```````````````````````````````` example Tables: 10
 | Abc |
 |-----|
 | 1   |
@@ -1861,7 +1861,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 11
+```````````````````````````````` example Tables: 11
 | Abc |
 |-----|
 | 1   |
@@ -1878,7 +1878,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 12
+```````````````````````````````` example Tables: 12
 | Abc |
 |-----|
 
@@ -1892,7 +1892,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 13
+```````````````````````````````` example Tables: 13
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
@@ -1909,7 +1909,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 14
+```````````````````````````````` example Tables: 14
 | Abc | Def | Ghi |
 |-----|-----|-----|
 | 1   | 2   | 3   |
@@ -1926,7 +1926,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 15
+```````````````````````````````` example Tables: 15
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
@@ -1943,7 +1943,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 16
+```````````````````````````````` example Tables: 16
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
@@ -1960,7 +1960,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 17
+```````````````````````````````` example Tables: 17
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
@@ -1979,7 +1979,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 
 Embedded pipes in inline elements
 
-```````````````````````````````` example Tables: 18
+```````````````````````````````` example Tables: 18
 | Abc | Def |
 |-----|-----|
 | `|` | `|` |
@@ -1998,7 +1998,7 @@ Embedded pipes in inline elements
 
 unclosed delimiters in cells
 
-```````````````````````````````` example Tables: 19
+```````````````````````````````` example Tables: 19
 | Abc | Def |
 |-----|-----|-----|
 | \`  |     | abc |
@@ -2017,7 +2017,7 @@ unclosed delimiters in cells
 
 unclosed delimiters in cells
 
-```````````````````````````````` example Tables: 20
+```````````````````````````````` example Tables: 20
 |   Abc   | Def |
 |---------|-----|
 | \*\*def | abc |
@@ -2034,7 +2034,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 21
+```````````````````````````````` example Tables: 21
 | *Abc* | Def |
 |-------|-----|
 | 1     | 2   |
@@ -2051,7 +2051,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 22
+```````````````````````````````` example Tables: 22
 | Abc | Def |
 |-----|-----|----|
 | 1\\ | 2   | 20 |
@@ -2068,7 +2068,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 23
+```````````````````````````````` example Tables: 23
 |  Abc  | Def |
 |-------|-----|
 | 1\\\\ | 2   |
@@ -2085,7 +2085,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 24
+```````````````````````````````` example Tables: 24
 | Abc | Def |
 |:----|-----|
 | 1   | 2   |
@@ -2102,7 +2102,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 25
+```````````````````````````````` example Tables: 25
 | Abc | Def |
 |----:|-----|
 |   1 | 2   |
@@ -2119,7 +2119,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 26
+```````````````````````````````` example Tables: 26
 | Abc | Def |
 |:---:|-----|
 |  1  | 2   |
@@ -2136,7 +2136,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 27
+```````````````````````````````` example Tables: 27
 | Abc | Def |
 |-----|:---:|
 | 1   |  2  |
@@ -2153,7 +2153,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 28
+```````````````````````````````` example Tables: 28
 | Abc | Def |
 |:----|-----|
 | 1   | 2   |
@@ -2170,7 +2170,7 @@ unclosed delimiters in cells
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 29
+```````````````````````````````` example Tables: 29
 | Abc | Def |
 |-----|-----|---|
 | 1   | 2   | 3 |
@@ -2189,7 +2189,7 @@ unclosed delimiters in cells
 
 Extra columns truncated with GFM compatibility on.
 
-```````````````````````````````` example Tables: 30
+```````````````````````````````` example Tables: 30
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
@@ -2206,7 +2206,7 @@ Extra columns truncated with GFM compatibility on.
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 31
+```````````````````````````````` example Tables: 31
 | Abc | Def | Ghi |
 |-----|-----|-----|
 | 1   | 2   |
@@ -2223,7 +2223,7 @@ Extra columns truncated with GFM compatibility on.
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 32
+```````````````````````````````` example Tables: 32
 > | Abc | Def |
 > |-----|-----|
 > | 1   | 2   |
@@ -2242,7 +2242,7 @@ Extra columns truncated with GFM compatibility on.
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables: 33
+```````````````````````````````` example Tables: 33
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
@@ -2263,7 +2263,7 @@ table, you are over
 
 inlines should be processed
 
-```````````````````````````````` example Tables: 34
+```````````````````````````````` example Tables: 34
 |   **Abc**   | *Def*  |
 |-------------|--------|
 | [ref](/url) | `code` |
@@ -2282,7 +2282,7 @@ inlines should be processed
 
 inlines should be processed
 
-```````````````````````````````` example Tables: 35
+```````````````````````````````` example Tables: 35
 | **Abc** **test** |  *Def* *Def*  |
 |------------------|---------------|
 | [ref](/url)      | `code` `code` |
@@ -2301,7 +2301,7 @@ inlines should be processed
 
 Column spans are created with repeated | pipes one for each additional column to span
 
-```````````````````````````````` example Tables: 36
+```````````````````````````````` example Tables: 36
 | Abc | Def |
 |-----|-----|
 | span     ||
@@ -2320,7 +2320,7 @@ Column spans are created with repeated | pipes one for each additional column to
 
 Now we try varying the header lines and make sure we get the right output
 
-```````````````````````````````` example Tables: 37
+```````````````````````````````` example Tables: 37
 | Abc | Def |
 | Hij | Lmn |
 |-----|-----|
@@ -2341,7 +2341,7 @@ Now we try varying the header lines and make sure we get the right output
 
 No header lines
 
-```````````````````````````````` example Tables: 38
+```````````````````````````````` example Tables: 38
 |------|------|
 | col1 | col2 |
 
@@ -2357,7 +2357,7 @@ No header lines
 
 No body lines
 
-```````````````````````````````` example Tables: 39
+```````````````````````````````` example Tables: 39
 | col1 | col2 |
 |------|------|
 
@@ -2373,7 +2373,7 @@ No body lines
 
 With caption
 
-```````````````````````````````` example Tables: 40
+```````````````````````````````` example Tables: 40
 | col1 | col2 |
 |------|------|
 [Caption **bold** *italic* `code`]
@@ -2391,7 +2391,7 @@ With caption
 
 Alignment should be taken from column after span is added
 
-```````````````````````````````` example Tables: 41
+```````````````````````````````` example Tables: 41
 | day         | time  |   spent |
 |:------------|:-----:|--------:|
 | nov. 2. tue | 10:00 |  4h 40m |
@@ -2416,7 +2416,7 @@ Alignment should be taken from column after span is added
 
 multiple tables parsed correctly
 
-```````````````````````````````` example Tables: 42
+```````````````````````````````` example Tables: 42
 not a table, followed by a table
 
 | col1 | col2 |
@@ -2464,7 +2464,7 @@ not a table, followed by a table
 
 multi row/column
 
-```````````````````````````````` example Tables: 43
+```````````````````````````````` example Tables: 43
 | col11  | col12  | col13  |
 | col21  | col22  | col23  |
 | col31  | col32  | col33  |
@@ -2491,7 +2491,7 @@ multi row/column
 
 keep cell whitespace
 
-```````````````````````````````` example Tables: 44
+```````````````````````````````` example Tables: 44
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
@@ -2510,7 +2510,7 @@ keep cell whitespace
 
 Custom class name
 
-```````````````````````````````` example Tables: 45
+```````````````````````````````` example Tables: 45
 | Abc | Def |
 |-----|-----|
 
@@ -2526,7 +2526,7 @@ Custom class name
 
 in item
 
-```````````````````````````````` example Tables: 46
+```````````````````````````````` example Tables: 46
 * Add: live templates starting with `.`
 
   |    Element    |  Abbreviation   |     Expansion     |
@@ -2556,7 +2556,7 @@ in item
 
 real life table
 
-```````````````````````````````` example Tables: 47
+```````````````````````````````` example Tables: 47
 | Feature                                                                                         | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                |   X   |    X     |
@@ -2711,7 +2711,7 @@ real life table
 
 real life table
 
-```````````````````````````````` example(Tables: 48) options(nbsp)
+```````````````````````````````` example(Tables: 48) options(nbsp)
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -2866,7 +2866,7 @@ real life table
 
 Table with `th` in `tbody`
 
-```````````````````````````````` example Tables: 49
+```````````````````````````````` example Tables: 49
 | Result |    Description     | Entity Name |
 |--------|--------------------|-------------|
 |        | non-breaking space | \&nbsp;     |
@@ -2909,7 +2909,7 @@ Table with `th` in `tbody`
 
 tables with row span cells
 
-```````````````````````````````` example Tables: 50
+```````````````````````````````` example Tables: 50
 | ID |  e-mail  |   Name   | Visits | Trials |                 Points                 |||| Discount On Next License |
 | ID |  e-mail  |   Name   | Visits | Trials | Earned | Complimentary | Used | Available | Discount On Next License |
 |----|----------|----------|-------:|-------:|-------:|--------------:|-----:|----------:|:------------------------:|
@@ -2969,7 +2969,7 @@ tables with row span cells
 
 a definition in a block quote
 
-```````````````````````````````` example Definition Lists: 1
+```````````````````````````````` example Definition Lists: 1
 > Definition Term
 > :   definition item
 .
@@ -2984,7 +2984,7 @@ a definition in a block quote
 
 simple list
 
-```````````````````````````````` example Definition Lists: 2
+```````````````````````````````` example Definition Lists: 2
 Definition Term
 :   definition item
 .
@@ -2997,7 +2997,7 @@ Definition Term
 
 A simple definition list:
 
-```````````````````````````````` example Definition Lists: 3
+```````````````````````````````` example Definition Lists: 3
 Term 1
 :   Definition 1
 
@@ -3015,7 +3015,7 @@ Term 2
 
 With multiple terms:
 
-```````````````````````````````` example Definition Lists: 4
+```````````````````````````````` example Definition Lists: 4
 Term 1
 Term 2
 :   Definition 1
@@ -3037,7 +3037,7 @@ Term 4
 
 With multiple definitions:
 
-```````````````````````````````` example Definition Lists: 5
+```````````````````````````````` example Definition Lists: 5
 Term 1
 :   Definition 1
 :   Definition 2
@@ -3059,7 +3059,7 @@ Term 2
 
 With multiple lines per definition:
 
-```````````````````````````````` example Definition Lists: 6
+```````````````````````````````` example Definition Lists: 6
 Term 1
 :   Definition 1 line 1 ...
     Definition 1 line 2
@@ -3089,7 +3089,7 @@ Term 2
 
 With paragraphs:
 
-```````````````````````````````` example Definition Lists: 7
+```````````````````````````````` example Definition Lists: 7
 Term 1
 
 :   Definition 1 (paragraph)
@@ -3114,7 +3114,7 @@ Term 2
 
 With multiple paragraphs:
 
-```````````````````````````````` example Definition Lists: 8
+```````````````````````````````` example Definition Lists: 8
 Term 1
 
 :   Definition 1 paragraph 1 line 1 ...
@@ -3152,7 +3152,7 @@ Term 2
 
 A mix:
 
-```````````````````````````````` example Definition Lists: 9
+```````````````````````````````` example Definition Lists: 9
 Term 1
 Term 2
 
@@ -3245,7 +3245,7 @@ Term 4
 
 inlines allowed
 
-```````````````````````````````` example Definition Lists: 10
+```````````````````````````````` example Definition Lists: 10
 Definition **Term**
 :   definition `item`
 .
@@ -3258,7 +3258,7 @@ Definition **Term**
 
 inlines will be split
 
-```````````````````````````````` example Definition Lists: 11
+```````````````````````````````` example Definition Lists: 11
 Definition \*\*Term
 Another\*\* Definition Term
 :   definition `item`
@@ -3273,7 +3273,7 @@ Another\*\* Definition Term
 
 don't include preceding blank lines
 
-```````````````````````````````` example Definition Lists: 12
+```````````````````````````````` example Definition Lists: 12
 * bullet item
 
 Definition Term
@@ -3291,7 +3291,7 @@ Definition Term
 
 nested elements allowed
 
-```````````````````````````````` example Definition Lists: 13
+```````````````````````````````` example Definition Lists: 13
 Definition **Term**
 :   definition `item`
 
@@ -3323,7 +3323,7 @@ Definition **Term**
 
 With disparate looseness with auto-loose
 
-```````````````````````````````` example Definition Lists: 14
+```````````````````````````````` example Definition Lists: 14
 Term 1
 
 :   Definition 1 (paragraph)
@@ -3348,7 +3348,7 @@ Term 2
 
 With disparate looseness without auto-loose
 
-```````````````````````````````` example Definition Lists: 15
+```````````````````````````````` example Definition Lists: 15
 Term 1
 
 :   Definition 1 (paragraph)
@@ -3367,7 +3367,7 @@ Term 2
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition Lists: 16
+```````````````````````````````` example Definition Lists: 16
 Definition Term
 :   Definition of above term
 :   Another definition of above term
@@ -3380,7 +3380,7 @@ Definition Term
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition Lists: 17
+```````````````````````````````` example Definition Lists: 17
 Definition Term
 :   Definition of above term
 :   Another definition of above term
@@ -3393,7 +3393,7 @@ Definition Term
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition Lists: 18
+```````````````````````````````` example Definition Lists: 18
 Definition Term
 :   Definition of above term
     Another definition of above term
@@ -3410,7 +3410,7 @@ Definition Term
 
 Change language class prefix
 
-```````````````````````````````` example Fenced Code: 1
+```````````````````````````````` example Fenced Code: 1
 ```text
 plain text
 ```
@@ -3423,7 +3423,7 @@ plain text
 
 empty, no info
 
-```````````````````````````````` example Fenced Code: 2
+```````````````````````````````` example Fenced Code: 2
 ```
 
 ```
@@ -3436,7 +3436,7 @@ empty, no info
 
 empty, no info, blank line follows
 
-```````````````````````````````` example Fenced Code: 3
+```````````````````````````````` example Fenced Code: 3
 ```
 
 ```
@@ -3449,7 +3449,7 @@ empty, no info, blank line follows
 
 empty, info
 
-```````````````````````````````` example Fenced Code: 4
+```````````````````````````````` example Fenced Code: 4
 ```info
 
 ```
@@ -3462,7 +3462,7 @@ empty, info
 
 empty, info, blank line follows
 
-```````````````````````````````` example Fenced Code: 5
+```````````````````````````````` example Fenced Code: 5
 ```info
 
 ```
@@ -3475,7 +3475,7 @@ empty, info, blank line follows
 
 non-break space replacement
 
-```````````````````````````````` example Fenced Code: 6
+```````````````````````````````` example Fenced Code: 6
 ```info
  
 ```
@@ -3488,7 +3488,7 @@ non-break space replacement
 
 non-break space replacement, custom replaced with space
 
-```````````````````````````````` example(Fenced Code: 7) options(nbsp)
+```````````````````````````````` example(Fenced Code: 7) options(nbsp)
 ```info
  
 ```
@@ -3499,7 +3499,7 @@ non-break space replacement, custom replaced with space
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 8
+```````````````````````````````` example Fenced Code: 8
 `````java
 some back ticks in the ````code````
 `````
@@ -3510,7 +3510,7 @@ some back ticks in the ````code````
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 9
+```````````````````````````````` example Fenced Code: 9
 > `````java
 >     some back ticks in the ````code````
 > `````
@@ -3525,7 +3525,7 @@ some back ticks in the ````code````
 
 ## Skipped Fenced Code
 
-```````````````````````````````` example(Skipped Fenced Code: 1) options(skip-fenced-code)
+```````````````````````````````` example(Skipped Fenced Code: 1) options(skip-fenced-code)
 >         some back ticks in the ````code````
 
 .
@@ -3536,7 +3536,7 @@ some back ticks in the ````code````
 ````````````````````````````````
 
 
-```````````````````````````````` example Skipped Fenced Code: 2
+```````````````````````````````` example Skipped Fenced Code: 2
 * item
 
   > `````markdown
@@ -3562,7 +3562,7 @@ some back ticks in the ````code````
 ````````````````````````````````
 
 
-```````````````````````````````` example Skipped Fenced Code: 3
+```````````````````````````````` example Skipped Fenced Code: 3
 * item
 
   >     some back ticks in the ````code````
@@ -3586,7 +3586,7 @@ some back ticks in the ````code````
 
 code with emphasis preserved
 
-```````````````````````````````` example(Skipped Fenced Code: 4) options(code-emphasis)
+```````````````````````````````` example(Skipped Fenced Code: 4) options(code-emphasis)
 ```html
 <html>
 <body>
@@ -3621,7 +3621,7 @@ code with emphasis preserved
 
 code with emphasis not preserved
 
-```````````````````````````````` example Skipped Fenced Code: 5
+```````````````````````````````` example Skipped Fenced Code: 5
 ```html
 <html>
 <body>
@@ -3656,28 +3656,28 @@ sub
 
 ## Emoji Shortcuts
 
-```````````````````````````````` example Emoji Shortcuts: 1
+```````````````````````````````` example Emoji Shortcuts: 1
 :heavy_check_mark:
 .
 <g-emoji alias="heavy_check_mark" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji Shortcuts: 2
+```````````````````````````````` example Emoji Shortcuts: 2
 :heavy_check_mark:
 .
 <g-emoji fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji Shortcuts: 3
+```````````````````````````````` example Emoji Shortcuts: 3
 :heavy_check_mark:
 .
 <img src="file:/Users/vlad/Library/Application Support/IdeaIC2017-1-EAP/idea-multimarkdown/emojis/heavy_check_mark.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji Shortcuts: 4
+```````````````````````````````` example Emoji Shortcuts: 4
 :heavy_check_mark:
 .
 <img src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
@@ -3686,133 +3686,133 @@ sub
 
 ## Typographics
 
-```````````````````````````````` example Typographics: 1
+```````````````````````````````` example Typographics: 1
 "
 .
 “
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 2
+```````````````````````````````` example Typographics: 2
 "
 .
 ”
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 3
+```````````````````````````````` example Typographics: 3
 "
 .
 &ldquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 4
+```````````````````````````````` example Typographics: 4
 "
 .
 &rdquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 5
+```````````````````````````````` example Typographics: 5
 '
 .
 ‘
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 6
+```````````````````````````````` example Typographics: 6
 '
 .
 ’
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 7
+```````````````````````````````` example Typographics: 7
 '
 .
 &lsquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 8
+```````````````````````````````` example Typographics: 8
 '
 .
 &rsquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 9
+```````````````````````````````` example Typographics: 9
 '
 .
 &apos;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 10
+```````````````````````````````` example Typographics: 10
 \<\<
 .
 «
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 11
+```````````````````````````````` example Typographics: 11
 \<\<
 .
 &laquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 12
+```````````````````````````````` example Typographics: 12
 \>\>
 .
 »
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 13
+```````````````````````````````` example Typographics: 13
 \>\>
 .
 &raquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 14
+```````````````````````````````` example Typographics: 14
 ...
 .
 …
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 15
+```````````````````````````````` example Typographics: 15
 ...
 .
 &hellip;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 16
+```````````````````````````````` example Typographics: 16
 --
 .
 –
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 17
+```````````````````````````````` example Typographics: 17
 --
 .
 &endash;
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 18
+```````````````````````````````` example Typographics: 18
 ---
 .
 —
 ````````````````````````````````
 
 
-```````````````````````````````` example Typographics: 19
+```````````````````````````````` example Typographics: 19
 ---
 .
 &emdash;
@@ -3821,133 +3821,133 @@ sub
 
 ## Custom Typographics
 
-```````````````````````````````` example(Custom Typographics: 1) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 1) options(typo-map)
 ''
 .
 “
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 2) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 2) options(typo-map)
 ''
 .
 ”
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 3) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 3) options(typo-map)
 ''
 .
 &ldquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 4) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 4) options(typo-map)
 ''
 .
 &rdquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 5) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 5) options(typo-map)
 '
 .
 ‘
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 6) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 6) options(typo-map)
 '
 .
 ’
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 7) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 7) options(typo-map)
 '
 .
 &lsquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 8) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 8) options(typo-map)
 '
 .
 &rsquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 9) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 9) options(typo-map)
 '
 .
 &apos;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 10) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 10) options(typo-map)
 \<\<\<\<
 .
 «
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 11) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 11) options(typo-map)
 \<\<\<\<
 .
 &laquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 12) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 12) options(typo-map)
 \>\>\>\>
 .
 »
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 13) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 13) options(typo-map)
 \>\>\>\>
 .
 &raquo;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 14) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 14) options(typo-map)
 etc.
 .
 …
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 15) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 15) options(typo-map)
 etc.
 .
 &hellip;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 16) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 16) options(typo-map)
 --
 .
 –
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 17) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 17) options(typo-map)
 --
 .
 &endash;
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 18) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 18) options(typo-map)
 ---
 .
 —
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom Typographics: 19) options(typo-map)
+```````````````````````````````` example(Custom Typographics: 19) options(typo-map)
 ---
 .
 &emdash;

@@ -15,7 +15,7 @@ found.
 
 Test to see if bullet mismatch starts a new list
 
-```````````````````````````````` example Bullet Mismatch Starts a New List: 1
+```````````````````````````````` example Bullet Mismatch Starts a New List: 1
 - item
 + item
 * item
@@ -45,7 +45,7 @@ Document[0, 22]
 
 Test to see if ordered list item will set list start if not one
 
-```````````````````````````````` example Ordered List Item Sets List Start: 1
+```````````````````````````````` example Ordered List Item Sets List Start: 1
 2. Non One Start Item
 .
 <ol>
@@ -64,7 +64,7 @@ Document[0, 21]
 
 Test how mismatches in item types are handled
 
-```````````````````````````````` example Mismatched List Item Type Handling: 1
+```````````````````````````````` example Mismatched List Item Type Handling: 1
 - Bullet List
 1. With Ordered Item
 .
@@ -84,7 +84,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example Mismatched List Item Type Handling: 2
+```````````````````````````````` example Mismatched List Item Type Handling: 2
 1. Ordered Item
 - With Bullet List
 .
@@ -104,7 +104,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Mismatched List Item Type Handling: 3) options(FAIL)
+```````````````````````````````` example(Mismatched List Item Type Handling: 3) options(FAIL)
 1. First ordered list item
 2. Another item 
   * Unordered sub-list.
@@ -136,7 +136,7 @@ Document[0, 68]
 
 Tests how all tight items are generated
 
-```````````````````````````````` example Loose Item Handling: 1
+```````````````````````````````` example Loose Item Handling: 1
 - item 1
 - item 2 
 - item 3 
@@ -168,7 +168,7 @@ Document[0, 38]
 
 Test to see how trailing blank after item determines looseness
 
-```````````````````````````````` example Loose Item Handling: 2
+```````````````````````````````` example Loose Item Handling: 2
 - item 1
 
 - item 2 
@@ -203,7 +203,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 3
+```````````````````````````````` example Loose Item Handling: 3
 - item 1
 - item 2 
 
@@ -238,7 +238,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 4
+```````````````````````````````` example Loose Item Handling: 4
 - item 1
 - item 2 
 - item 3 
@@ -275,7 +275,7 @@ Document[0, 39]
 
 Test looseness with child items
 
-```````````````````````````````` example Loose Item Handling: 5
+```````````````````````````````` example Loose Item Handling: 5
 - item 1
   - item 1.1
 - item 2 
@@ -341,7 +341,7 @@ Document[0, 93]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 6
+```````````````````````````````` example Loose Item Handling: 6
 - item 1
 
   - item 1.1
@@ -409,7 +409,7 @@ Document[0, 94]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 7
+```````````````````````````````` example Loose Item Handling: 7
 - item 1
   - item 1.1
 
@@ -478,7 +478,7 @@ Document[0, 94]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 8
+```````````````````````````````` example Loose Item Handling: 8
 - item 1
   - item 1.1
 - item 2 
@@ -546,7 +546,7 @@ Document[0, 94]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 9
+```````````````````````````````` example Loose Item Handling: 9
 - item 1
   - item 1.1
 - item 2 
@@ -615,7 +615,7 @@ Document[0, 94]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 10
+```````````````````````````````` example Loose Item Handling: 10
 - item 1
   - item 1.1
 - item 2 
@@ -683,7 +683,7 @@ Document[0, 94]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 11
+```````````````````````````````` example Loose Item Handling: 11
 - item 1
   - item 1.1
 - item 2 
@@ -752,7 +752,7 @@ Document[0, 94]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 12
+```````````````````````````````` example Loose Item Handling: 12
 - item 1
   - item 1.1
 - item 2 
@@ -824,7 +824,7 @@ Document[0, 94]
 
 Test to see which list items can interrupt paragraphs.
 
-```````````````````````````````` example List Item Interrupts Paragraph: 1
+```````````````````````````````` example List Item Interrupts Paragraph: 1
 Bullet item can interrupt paragraph
 * item
 
@@ -913,7 +913,7 @@ Document[0, 547]
 
 Test to see which list items can interrupt another bullet list item's paragraphs
 
-```````````````````````````````` example List Item Interrupts Paragraph: 2
+```````````````````````````````` example List Item Interrupts Paragraph: 2
 * Bullet item can interrupt paragraph of a bullet list item
 * item
 
@@ -1068,7 +1068,7 @@ Document[0, 914]
 
 Test to see which list items can interrupt another numbered list item's paragraphs
 
-```````````````````````````````` example List Item Interrupts Paragraph: 3
+```````````````````````````````` example List Item Interrupts Paragraph: 3
 1. Bullet item can interrupt paragraph of a numbered list item
 * item
 
@@ -1228,7 +1228,7 @@ Test how list indentation is determined
 Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
 level.
 
-```````````````````````````````` example List Item Indent Handling: 1
+```````````````````````````````` example List Item Indent Handling: 1
 * item 1
  * item 2
   * item 3
@@ -1310,7 +1310,7 @@ Document[0, 135]
 
 Actual GitHub results. Not matched.
 
-```````````````````````````````` example(List Item Indent Handling: 2) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 2) options(FAIL)
 * item 1
  * item 2
   * item 3
@@ -1388,7 +1388,7 @@ test differ in list structure, then content indent is used. Otherwise, marker in
 Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
 level.
 
-```````````````````````````````` example List Item Indent Handling: 3
+```````````````````````````````` example List Item Indent Handling: 3
 *  item 1
  *  item 2
   *  item 3
@@ -1462,7 +1462,7 @@ Document[0, 145]
 
 Actual GitHub results. Not matched.
 
-```````````````````````````````` example(List Item Indent Handling: 4) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 4) options(FAIL)
 *  item 1
  *  item 2
   *  item 3
@@ -1541,7 +1541,7 @@ does not affect indentation level.
 Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
 level.
 
-```````````````````````````````` example List Item Indent Handling: 5
+```````````````````````````````` example List Item Indent Handling: 5
 * item 1
 
  * item 2
@@ -1645,7 +1645,7 @@ Document[0, 180]
 
 Actual GitHub results. Not matched.
 
-```````````````````````````````` example(List Item Indent Handling: 6) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 6) options(FAIL)
 * item 1
 
  * item 2
@@ -1747,7 +1747,7 @@ same list but without leading first item space then yes.
 Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
 level.
 
-```````````````````````````````` example List Item Indent Handling: 7
+```````````````````````````````` example List Item Indent Handling: 7
  * item 1
   * item 2
    * item 3
@@ -1829,7 +1829,7 @@ Document[0, 145]
 
 Actual GitHub results. Not matched.
 
-```````````````````````````````` example(List Item Indent Handling: 8) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 8) options(FAIL)
  * item 1
   * item 2
    * item 3
@@ -1906,7 +1906,7 @@ Test where lazy continuation affects list item processing.
 Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
 level.
 
-```````````````````````````````` example List Item Indent Handling: 9
+```````````````````````````````` example List Item Indent Handling: 9
 * item 1
        * item 2
 * item 3
@@ -1934,7 +1934,7 @@ Document[0, 50]
 
 Actual GitHub results. Not matched.
 
-```````````````````````````````` example(List Item Indent Handling: 10) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 10) options(FAIL)
 * item 1
        * item 2
 * item 3
@@ -1971,7 +1971,7 @@ affects sub-list indentation.
 
 Test if block quote can interrupt item paragraph
 
-```````````````````````````````` example List Item Indent Handling: 11
+```````````````````````````````` example List Item Indent Handling: 11
 * item 1
  * item 2
   * item 3
@@ -2009,7 +2009,7 @@ Document[0, 77]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 12
+```````````````````````````````` example List Item Indent Handling: 12
 * item 1
  * item 2
   * item 3
@@ -2047,7 +2047,7 @@ Document[0, 80]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 13
+```````````````````````````````` example List Item Indent Handling: 13
 * item 1
  * item 2
   * item 3
@@ -2105,7 +2105,7 @@ Document[0, 80]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 14
+```````````````````````````````` example List Item Indent Handling: 14
 * item 1
  * item 2
   * item 3
@@ -2166,7 +2166,7 @@ Document[0, 83]
 Test shows where the boundary switch to indented code occurs. First paragraph is a paragraph,
 the second is indented code.
 
-```````````````````````````````` example List Item Indent Handling: 15
+```````````````````````````````` example List Item Indent Handling: 15
 -   test
     - sub item
 
@@ -2239,7 +2239,7 @@ Document[0, 178]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 16
+```````````````````````````````` example List Item Indent Handling: 16
 -   test
 
        item child para
@@ -2353,7 +2353,7 @@ paragraph is a paragraph, the second is indented code
 
 Not a complete match to GitHub, see next example
 
-```````````````````````````````` example List Item Indent Handling: 17
+```````````````````````````````` example List Item Indent Handling: 17
 * item 1
     
   item para 1
@@ -2581,7 +2581,7 @@ Document[0, 981]
 
 Cannot generate exact GitHub idiosyncrasies
 
-```````````````````````````````` example(List Item Indent Handling: 18) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 18) options(FAIL)
 * item 1
     
   item para 1
@@ -2729,7 +2729,7 @@ the previous list item. There was one that did it that way, GitHub comments if I
 right, but now they switched to commonmark list handling with mods. Guess it is now GFC--GitHub
 Flavoured Commonmark.
 
-```````````````````````````````` example List Item Indent Handling: 19
+```````````````````````````````` example List Item Indent Handling: 19
 *  item 1
    * item 2
   * item 3
@@ -2760,7 +2760,7 @@ Document[0, 32]
 
 Test how headings in list items are handled, leading space allowed or not
 
-```````````````````````````````` example List Item Indent Handling: 20
+```````````````````````````````` example List Item Indent Handling: 20
 * item 1
   # Heading 1
    ## Heading 2
@@ -2830,7 +2830,7 @@ Document[0, 261]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 21
+```````````````````````````````` example List Item Indent Handling: 21
 * item 1
   # Heading 1
    ## Heading 2
@@ -2936,7 +2936,7 @@ Document[0, 405]
 GitHub processes ATX headings if the list has a blank line, cannot do that. More accurately, can
 but this is a KLUDGE in GitHub that is not supported.
 
-```````````````````````````````` example(List Item Indent Handling: 22) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 22) options(FAIL)
 * item 1
   # Heading 1
    ## Heading 2
@@ -2973,7 +2973,7 @@ but this is a KLUDGE in GitHub that is not supported.
 GitHub processes ATX headings if the list has a blank line, cannot do that. More accurately, can
 but this is a KLUDGE in GitHub that is not supported.
 
-```````````````````````````````` example(List Item Indent Handling: 23) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 23) options(FAIL)
 * item 1
   # Heading 1
    ## Heading 2
@@ -3032,7 +3032,7 @@ but this is a KLUDGE in GitHub that is not supported.
 Not an exact match, GitHub has idiosyncrasies in its leading space removal that are not
 duplicated.
 
-```````````````````````````````` example List Item Indent Handling: 24
+```````````````````````````````` example List Item Indent Handling: 24
 * item 1
 
   # Heading 1
@@ -3123,7 +3123,7 @@ Document[0, 296]
 
 GitHub idosyncrasies not duplicated
 
-```````````````````````````````` example(List Item Indent Handling: 25) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 25) options(FAIL)
 * item 1
 
   # Heading 1
@@ -3182,7 +3182,7 @@ GitHub idosyncrasies not duplicated
 Not an exact match, GitHub has idiosyncrasies in its leading space removal that are not
 duplicated.
 
-```````````````````````````````` example List Item Indent Handling: 26
+```````````````````````````````` example List Item Indent Handling: 26
 * item 1
 
   # Heading 1
@@ -3312,7 +3312,7 @@ Document[0, 480]
 
 GitHub idosyncrasies not duplicated
 
-```````````````````````````````` example(List Item Indent Handling: 27) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 27) options(FAIL)
 * item 1
 
   # Heading 1
@@ -3391,7 +3391,7 @@ GitHub idosyncrasies not duplicated
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 28
+```````````````````````````````` example List Item Indent Handling: 28
 * item 1
 *  item 2
 *   item 3
@@ -3450,7 +3450,7 @@ Document[0, 116]
 
 Whether blank lines are required to start a block quote
 
-```````````````````````````````` example Block quote parsing: 1
+```````````````````````````````` example Block quote parsing: 1
 paragraph text
 > block quoted text
 .
@@ -3470,7 +3470,7 @@ Document[0, 34]
 
 Whether blank lines are required to start a block quote
 
-```````````````````````````````` example Block quote parsing: 2
+```````````````````````````````` example Block quote parsing: 2
 paragraph text
 
 > block quoted text
@@ -3491,7 +3491,7 @@ Document[0, 35]
 
 Whether blank lines are ignored and treated as if prefixed with block quote
 
-```````````````````````````````` example Block quote parsing: 3
+```````````````````````````````` example Block quote parsing: 3
 > block quoted text
 
 > more block quoted text
@@ -3512,7 +3512,7 @@ Document[0, 45]
 
 Whether block quotes continue to a blank line
 
-```````````````````````````````` example Block quote parsing: 4
+```````````````````````````````` example Block quote parsing: 4
 > block quoted text
 lazy continuation
 
@@ -3536,7 +3536,7 @@ Document[0, 56]
 
 Whether leading spaces are allowed before block quote marker
 
-```````````````````````````````` example Block quote parsing: 5
+```````````````````````````````` example Block quote parsing: 5
  > block quote paragraph text
 .
 <blockquote>
@@ -3552,7 +3552,7 @@ Document[0, 29]
 
 Whether trailing spaces are required after block quote marker
 
-```````````````````````````````` example Block quote parsing: 6
+```````````````````````````````` example Block quote parsing: 6
 >block quote paragraph text
 .
 <blockquote>
@@ -3568,7 +3568,7 @@ Document[0, 27]
 
 Whether block quotes can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 7
+```````````````````````````````` example Block quote parsing: 7
 * item 1
   > block quoted text
 
@@ -3605,7 +3605,7 @@ Document[0, 87]
 
 Whether block quotes can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 8
+```````````````````````````````` example Block quote parsing: 8
 * item 1
 
   > block quoted text
@@ -3656,7 +3656,7 @@ Document[0, 89]
 
 Whether block quotes with leading space can interrupt item paragraphs
 
-```````````````````````````````` example Block quote parsing: 9
+```````````````````````````````` example Block quote parsing: 9
 * item 1
    > block quoted text
 
@@ -3693,7 +3693,7 @@ Document[0, 89]
 
 Whether block quotes with leading space can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 10
+```````````````````````````````` example Block quote parsing: 10
 * item 1
 
    > block quoted text
@@ -3744,7 +3744,7 @@ Document[0, 91]
 
 Whether block quotes without trailing space can interrupt item paragraphs
 
-```````````````````````````````` example Block quote parsing: 11
+```````````````````````````````` example Block quote parsing: 11
 * item 1
   >block quoted text
 
@@ -3781,7 +3781,7 @@ Document[0, 85]
 
 Whether block quotes without trailing space can interrupt item paragraph
 
-```````````````````````````````` example Block quote parsing: 12
+```````````````````````````````` example Block quote parsing: 12
 * item 1
 
    >block quoted text
@@ -3830,7 +3830,7 @@ Document[0, 88]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quote parsing: 13
+```````````````````````````````` example Block quote parsing: 13
 - item 1
   - sub-item 1
     1. sub-sub-item 1
@@ -3870,7 +3870,7 @@ Document[0, 67]
 
 Test to make sure content indented deeply nested lists process correctly
 
-```````````````````````````````` example Block quote parsing: 14
+```````````````````````````````` example Block quote parsing: 14
 - item 1
   - item 2
     - item 3
@@ -3958,7 +3958,7 @@ Document[0, 154]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quote parsing: 15
+```````````````````````````````` example Block quote parsing: 15
 1. item 1
    1. item 2
       1. item 3
@@ -4048,10 +4048,11 @@ Document[0, 199]
 
 ## Issues
 
-#51, GitHub compatibility, setext headings in list items not properly parsed if marker not
+# 51, GitHub compatibility, setext headings in list items not properly parsed if marker not
+
 indented
 
-```````````````````````````````` example(Issues: 1) options(FAIL)
+```````````````````````````````` example(51, GitHub compatibility, setext headings in list items not properly parsed if marker not: 1) options(FAIL)
 * baz
 
  Second level heading
@@ -4076,7 +4077,7 @@ Document[0, 52]
 
 options for plain text rendering
 
-```````````````````````````````` example(Issues: 2) options(no-loose-non-list-children)
+```````````````````````````````` example(51, GitHub compatibility, setext headings in list items not properly parsed if marker not: 2) options(no-loose-non-list-children)
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
 * Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
@@ -4210,11 +4211,11 @@ Document[0, 1096]
 
 ## Issue 66
 
-#66, GitHub Doc profile incorrect parsing of following markdown
+# 66, GitHub Doc profile incorrect parsing of following markdown
 
 Heading in fenced code interrupts fenced code
 
-```````````````````````````````` example Issue 66: 1
+```````````````````````````````` example 66, GitHub Doc profile incorrect parsing of following markdown: 1
 * list item
 ```
 # test
@@ -4247,9 +4248,9 @@ Document[0, 60]
 
 ## Issue 73
 
-#73, Can't nest code blocks in ordered list
+# 73, Can't nest code blocks in ordered list
 
-```````````````````````````````` example Issue 73: 1
+```````````````````````````````` example 73, Can't nest code blocks in ordered list: 1
 * list item
 
   ```
@@ -4276,7 +4277,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue 73: 2
+```````````````````````````````` example 73, Can't nest code blocks in ordered list: 2
 1. list item
 
    ```
@@ -4307,7 +4308,7 @@ Document[0, 56]
 
 Heading Ids preserve `_`
 
-```````````````````````````````` example Issue MN-567: 1
+```````````````````````````````` example Issue MN-567: 1
 # heading_id
 
 .
@@ -4323,7 +4324,7 @@ Document[0, 14]
 
 GitHub does not convert non-ascii heading text to lowercase
 
-```````````````````````````````` example Issue MN-xxx: 1
+```````````````````````````````` example Issue MN-xxx: 1
 ## Тест Заголовок
 .
 <h2 id="Тест-Заголовок">Тест Заголовок</h2>

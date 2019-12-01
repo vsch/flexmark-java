@@ -13,7 +13,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 flexmark-java extension for defining abbreviations and turning appearance of these abbreviations
 in text into abbr tags with titles consisting of the expansion of the abbreviation.
 
-```````````````````````````````` example(Abbreviation: 1) options(FILE_EOL)
+```````````````````````````````` example(Abbreviation: 1) options(FILE_EOL)
 *[Abbr]:Abbreviation
 .
 *[Abbr]: Abbreviation
@@ -23,7 +23,7 @@ in text into abbr tags with titles consisting of the expansion of the abbreviati
 
 Should work without trailing EOL
 
-```````````````````````````````` example Abbreviation: 2
+```````````````````````````````` example Abbreviation: 2
 *[Abbr]:Abbreviation
 .
 *[Abbr]: Abbreviation
@@ -31,7 +31,7 @@ Should work without trailing EOL
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 3
+```````````````````````````````` example Abbreviation: 3
 *[Abbr]:Abbreviation
 
 This has an Abbr embedded in it.
@@ -44,7 +44,7 @@ This has an Abbr embedded in it.
 
 No inline processing in expansion text.
 
-```````````````````````````````` example Abbreviation: 4
+```````````````````````````````` example Abbreviation: 4
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -55,7 +55,7 @@ This has an Abbr embedded in it.
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 5
+```````````````````````````````` example Abbreviation: 5
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -66,7 +66,7 @@ This has an Abbr embedded in it.
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 6
+```````````````````````````````` example Abbreviation: 6
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 .
@@ -76,22 +76,22 @@ This has an Abbr embedded in it.
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 7
-*[Abbr]: Abbreviation 1
-*[Abbre]: Abbreviation 2
-
-This has an Abbre embedded in it.
-And this has another Abbr embedded in it.
-.
+```````````````````````````````` example Abbreviation: 7
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 
 This has an Abbre embedded in it.
 And this has another Abbr embedded in it.
+.
+*[Abbr]: Abbreviation 1
+*[Abbre]: Abbreviation 2
+
+This has an Abbre embedded in it.
+And this has another Abbr embedded in it.
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 8
+```````````````````````````````` example Abbreviation: 8
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
 
@@ -104,7 +104,7 @@ U.S.A. is an abbreviation and so is US of A, an abbreviation.
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 9
+```````````````````````````````` example Abbreviation: 9
 *[US]: United States
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
@@ -119,7 +119,7 @@ U.S.A., US of A, and US are all abbreviations.
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 10
+```````````````````````````````` example Abbreviation: 10
 *[Abbr]: Abbreviation
 [Abbr]: http://test.com
 
@@ -137,7 +137,7 @@ This is an Abbr and this is not [Abbr].
 
 A reference that is not on the first line is just text.
 
-```````````````````````````````` example Abbreviation: 11
+```````````````````````````````` example Abbreviation: 11
 Paragraph with second line having a reference
 *[test]: test abbreviation
 
@@ -149,7 +149,7 @@ Paragraph with second line having a reference
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 12
+```````````````````````````````` example Abbreviation: 12
 text with abbr1 embedded
 
 *[abbr3]: abbreviation3
@@ -177,7 +177,7 @@ text with abbr1 embedded
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 13) options(references-document-top)
+```````````````````````````````` example(Abbreviation: 13) options(references-document-top)
 text with abbr1 embedded
 
 *[abbr3]: abbreviation3
@@ -203,7 +203,7 @@ text with abbr1 embedded
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 14) options(references-group-with-first)
+```````````````````````````````` example(Abbreviation: 14) options(references-group-with-first)
 text with abbr1 embedded
 
 *[abbr3]: abbreviation3
@@ -229,7 +229,7 @@ text with abbr1 embedded
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 15) options(references-group-with-last)
+```````````````````````````````` example(Abbreviation: 15) options(references-group-with-last)
 text with abbr1 embedded
 
 *[abbr3]: abbreviation3
@@ -255,7 +255,7 @@ text with abbr1 embedded
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 16) options(references-document-bottom)
+```````````````````````````````` example(Abbreviation: 16) options(references-document-bottom)
 text with abbr1 embedded
 
 *[abbr3]: abbreviation3
@@ -285,7 +285,7 @@ text bottom
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 17) options(references-document-bottom, references-sort)
+```````````````````````````````` example(Abbreviation: 17) options(references-document-bottom, references-sort)
 text with abbr1 embedded
 
 *[abbr3]: abbreviation3
@@ -311,7 +311,7 @@ text with abbr1 embedded
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 18) options(references-document-bottom, references-sort-unused-last)
+```````````````````````````````` example(Abbreviation: 18) options(references-document-bottom, references-sort-unused-last)
 text with abbr1 embedded
 
 *[abbr3]: abbreviation3

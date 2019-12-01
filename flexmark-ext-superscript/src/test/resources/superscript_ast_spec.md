@@ -14,7 +14,7 @@ Converts ^text^ to subscript of text
 
 The tests here are converted to commonmark spec.txt format and AST expected results added.
 
-```````````````````````````````` example Superscript Extension: 1
+```````````````````````````````` example Superscript Extension: 1
 ^foo^
 .
 <p><sup>foo</sup></p>
@@ -26,7 +26,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 2
+```````````````````````````````` example Superscript Extension: 2
 ^^foo^^
 .
 <p><sup><sup>foo</sup></sup></p>
@@ -39,7 +39,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 3
+```````````````````````````````` example Superscript Extension: 3
 foo ^^^^
 .
 <p>foo ^^^^</p>
@@ -50,7 +50,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 4
+```````````````````````````````` example Superscript Extension: 4
 ^^foo
 .
 <p>^^foo</p>
@@ -61,7 +61,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 5
+```````````````````````````````` example Superscript Extension: 5
 foo^^
 .
 <p>foo^^</p>
@@ -72,7 +72,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 6
+```````````````````````````````` example Superscript Extension: 6
 ^^^foo^^^
 .
 <p><sup><sup><sup>foo</sup></sup></sup></p>
@@ -86,7 +86,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 7
+```````````````````````````````` example Superscript Extension: 7
 ^^foo^^^
 .
 <p><sup><sup>foo</sup></sup>^</p>
@@ -100,7 +100,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 8
+```````````````````````````````` example Superscript Extension: 8
 ^foo^bar^
 
 ^foo^^bar^
@@ -166,7 +166,7 @@ Document[0, 96]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 9
+```````````````````````````````` example Superscript Extension: 9
 ^Paragraph with *emphasis* and __strong emphasis__^
 .
 <p><sup>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></sup></p>
@@ -183,7 +183,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 10
+```````````````````````````````` example Superscript Extension: 10
 > strike ^^that^^
 .
 <blockquote>
@@ -200,7 +200,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Superscript Extension: 11
+```````````````````````````````` example Superscript Extension: 11
 e^iπ^ = -1
 .
 <p>e<sup>iπ</sup> = -1</p>
@@ -216,7 +216,7 @@ Document[0, 10]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 Normal^Paragraph with *emphasis* and __strong emphasis__^
 .
 <p md-pos="0-57">Normal<sup md-pos="7-56">Paragraph with <em md-pos="23-31">emphasis</em> and <strong md-pos="39-54">strong emphasis</strong></sup></p>
@@ -236,7 +236,7 @@ Document[0, 57]
 
 ## Custom Style HTML
 
-```````````````````````````````` example(Custom Style HTML: 1) options(style-superscript)
+```````````````````````````````` example(Custom Style HTML: 1) options(style-superscript)
 ^superscript^
 
 .

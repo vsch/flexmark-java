@@ -16,7 +16,7 @@ Issue related tests
 
 Issue #176, docx-converter pandoc emulation mode
 
-```````````````````````````````` example Issue 176: 1
+```````````````````````````````` example Issue 176: 1
 ### header
 1. List item started from 1
 ### header
@@ -112,7 +112,7 @@ Issue #176, docx-converter pandoc emulation mode
 
 Hyperlinks in footnotes would cause invalid document
 
-```````````````````````````````` example Issue - Footnote relationship parts: 1
+```````````````````````````````` example Issue - Footnote relationship parts: 1
 Footnote [^1]
 
 [^1]: Link [www.example](http://www.example.com) 
@@ -181,7 +181,7 @@ Footnote [^1]
 
 Images in footnotes would cause invalid document
 
-```````````````````````````````` example(Issue - Footnote relationship parts: 2) options(IGNORED)
+```````````````````````````````` example(Issue - Footnote relationship parts: 2) options(IGNORED)
 Footnote [^1]
 
 [^1]: Link ![flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
@@ -281,7 +281,7 @@ Footnote [^1]
 
 Formatting applied to reference gets applied to footnote block
 
-```````````````````````````````` example Issue - Footnote reference: 1
+```````````````````````````````` example Issue - Footnote reference: 1
 Footnote **[^1]**
 
 [^1]: Should be plain text 
@@ -343,7 +343,7 @@ Footnote **[^1]**
 
 ## flexmark-empty-template
 
-```````````````````````````````` example flexmark-empty-template: 1
+```````````````````````````````` example flexmark-empty-template: 1
 ## Markdown to DOCX Empty Document  Template
 
 This document is used to generate an empty document template for the docx conversion.
@@ -2048,7 +2048,7 @@ Aside Block Numbered List
 
 ## Heading Bookmarks
 
-```````````````````````````````` example Heading Bookmarks: 1
+```````````````````````````````` example Heading Bookmarks: 1
 # Heading 1
 
 Some text
@@ -2134,7 +2134,7 @@ Some text
 
 ## Missing Local Hyperlink
 
-```````````````````````````````` example Missing Local Hyperlink: 1
+```````````````````````````````` example Missing Local Hyperlink: 1
 [text](#missing)
 
 .
@@ -2160,7 +2160,7 @@ Some text
 
 custom color
 
-```````````````````````````````` example(Missing Local Hyperlink: 2) options(yellow-missing-hyperlink)
+```````````````````````````````` example(Missing Local Hyperlink: 2) options(yellow-missing-hyperlink)
 [text](#missing)
 
 .
@@ -2186,7 +2186,7 @@ custom color
 
 suppress
 
-```````````````````````````````` example(Missing Local Hyperlink: 3) options(no-missing-hyperlink)
+```````````````````````````````` example(Missing Local Hyperlink: 3) options(no-missing-hyperlink)
 [text](#missing)
 
 .
@@ -2210,7 +2210,7 @@ suppress
 
 wrong bookmark destination
 
-```````````````````````````````` example Missing Local Hyperlink: 4
+```````````````````````````````` example Missing Local Hyperlink: 4
 text{#tmp:test}
 
 See [@tmp:test]
@@ -2320,7 +2320,7 @@ Document[0, 74]
 
 Rendering autolinks NPE
 
-```````````````````````````````` example Issue Autolinks: 1
+```````````````````````````````` example Issue Autolinks: 1
 www.example.com
 .
 <w:body>
@@ -2343,7 +2343,7 @@ www.example.com
 
 ## Emoji
 
-```````````````````````````````` example Emoji: 1
+```````````````````````````````` example Emoji: 1
 TEXT :+1: TEXT
 
 .
@@ -2403,7 +2403,7 @@ TEXT :+1: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji: 2
+```````````````````````````````` example Emoji: 2
 # Heading 1 :+1:
 
 ## Heading 2 :+1:
@@ -2775,7 +2775,7 @@ TEXT :+1: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji: 3
+```````````````````````````````` example Emoji: 3
 TEXT ![](https://s3.amazonaws.com/vladsch-env/images/MNLogo.png) TEXT
 .
 <w:body>
@@ -2831,7 +2831,7 @@ TEXT ![](https://s3.amazonaws.com/vladsch-env/images/MNLogo.png) TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji: 4
+```````````````````````````````` example Emoji: 4
 TEXT ![](https://vladsch.com/images/MNLogo.png) TEXT
 .
 <w:body>
@@ -2887,7 +2887,7 @@ TEXT ![](https://vladsch.com/images/MNLogo.png) TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji: 5
+```````````````````````````````` example Emoji: 5
 TEXT :+1: TEXT
 .
 <w:body>
@@ -2951,7 +2951,7 @@ TEXT :+1: TEXT
 GitHub sourced images do not load with Java 7, disabled tests until Java 8 is minimal supported
 version.
 
-```````````````````````````````` example(GitHub: 1) options(emoji-github)
+```````````````````````````````` example(GitHub: 1) options(emoji-github)
 TEXT :basecamp: TEXT
 .
 <w:body>
@@ -3010,7 +3010,7 @@ TEXT :basecamp: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(GitHub: 2) options(emoji-github, IGNORED)
+```````````````````````````````` example(GitHub: 2) options(emoji-github, IGNORED)
 # Heading 1 :basecamp:
 
 ## Heading 2 :basecamp:
@@ -3382,7 +3382,7 @@ TEXT :basecamp: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example GitHub: 3
+```````````````````````````````` example GitHub: 3
 TEXT ![](https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png) TEXT
 .
 <w:body>
@@ -3438,7 +3438,7 @@ TEXT ![](https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png) T
 ````````````````````````````````
 
 
-```````````````````````````````` example(GitHub: 4) options(emoji-github)
+```````````````````````````````` example(GitHub: 4) options(emoji-github)
 TEXT :+1: TEXT
 .
 <w:body>
@@ -3497,7 +3497,7 @@ TEXT :+1: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(GitHub: 5) options(emoji-github)
+```````````````````````````````` example(GitHub: 5) options(emoji-github)
 # Heading 1 :basecamp:
 
 ## Heading 2 :basecamp:
@@ -3869,7 +3869,7 @@ TEXT :basecamp: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example(GitHub: 6) options(emoji-unicode)
+```````````````````````````````` example(GitHub: 6) options(emoji-unicode)
 # Heading 1 :+1:
 
 ## Heading 2 :+1:
@@ -3984,7 +3984,7 @@ TEXT :+1: TEXT
 
 ## Image CRC Error
 
-```````````````````````````````` example(Image CRC Error: 1) options(IGNORED)
+```````````````````````````````` example(Image CRC Error: 1) options(IGNORED)
 ![crc-error](/images/crc-error.png)
 .
 <w:body>
@@ -4038,7 +4038,7 @@ TEXT :+1: TEXT
 
 unprefixed
 
-```````````````````````````````` example(www. link: 1) options(no-www-prefix)
+```````````````````````````````` example(www. link: 1) options(no-www-prefix)
 [www.example](www.example.com) 
 .
 <w:body>
@@ -4061,7 +4061,7 @@ unprefixed
 
 prefixed
 
-```````````````````````````````` example www. link: 2
+```````````````````````````````` example www. link: 2
 [www.example](www.example.com) 
 .
 <w:body>
@@ -4086,7 +4086,7 @@ prefixed
 
 invalid docx
 
-```````````````````````````````` example WordGen: 1
+```````````````````````````````` example WordGen: 1
 |ID|Anforderung|Stufe|Kommentare|
 |:--:|:--|:--:|:--|
 ||Der [^C6-02] vor.|2|für [NIST](https://nvd.nist.gov/) eine|
@@ -4295,7 +4295,7 @@ invalid docx
 ````````````````````````````````
 
 
-```````````````````````````````` example WordGen: 2
+```````````````````````````````` example WordGen: 2
 |ID|Anforderung|Stufe|Kommentare|
 |:--:|:--|:--:|:--|
 ||Der [^C6-02] vor.|2|für [NIST](https://nvd.nist.gov/) eine|
@@ -4493,7 +4493,7 @@ invalid docx
 ````````````````````````````````
 
 
-```````````````````````````````` example WordGen: 3
+```````````````````````````````` example WordGen: 3
 |ID|Anforderung|Stufe|Kommentare|
 |:--:|:--|:--:|:--|
 ||Der [^C6-02] vor.|2|für NIST eine|
@@ -4691,7 +4691,7 @@ invalid docx
 ````````````````````````````````
 
 
-```````````````````````````````` example WordGen: 4
+```````````````````````````````` example WordGen: 4
 |ID|Anforderung|Stufe|Kommentare|
 |:--:|:--|:--:|:--|
 ||Der vor.|2|für [NIST](https://nvd.nist.gov/) eine|

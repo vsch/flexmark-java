@@ -14,7 +14,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Should be ignored
 
-```````````````````````````````` example(Flexmark Spec: 1) options(IGNORE)
+```````````````````````````````` example(Flexmark Spec: 1) options(IGNORE)
 ```markdown
 ---
 ```
@@ -29,7 +29,7 @@ Document[0, 20]
 
 Should fail
 
-```````````````````````````````` example(Flexmark Spec: 2) options(FAIL)
+```````````````````````````````` example(Flexmark Spec: 2) options(FAIL)
 ```markdown
 abc
 ```
@@ -44,7 +44,7 @@ Document[0, 20]
 
 Code fence starting with setext header marker
 
-```````````````````````````````` example Flexmark Spec: 3
+```````````````````````````````` example Flexmark Spec: 3
 ```markdown
 ---
 ```
@@ -58,7 +58,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Flexmark Spec: 4
+```````````````````````````````` example Flexmark Spec: 4
 ```markdown
 ===
 ```
@@ -76,7 +76,7 @@ Document[0, 19]
 
 Make sure indentation is properly implemented
 
-```````````````````````````````` example Indent: 1
+```````````````````````````````` example Indent: 1
 > - item 1
 > - item 2
 >     1. item 1
@@ -115,7 +115,7 @@ Document[0, 53]
 
 Make sure indentation is properly implemented
 
-```````````````````````````````` example Indent: 2
+```````````````````````````````` example Indent: 2
 > - item 1
 >
 > - item 2
@@ -162,7 +162,7 @@ Document[0, 59]
 ````````````````````````````````
 
 
-```````````````````````````````` example Indent: 3
+```````````````````````````````` example Indent: 3
 - item 
   - sub item  
 with lazy continuation
@@ -190,7 +190,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example Indent: 4
+```````````````````````````````` example Indent: 4
 - item 
   - sub item  
             with lazy continuation
@@ -222,7 +222,7 @@ Document[0, 57]
 
 headings should contain inlines
 
-```````````````````````````````` example Heading: 1
+```````````````````````````````` example Heading: 1
 # Atx Heading with **bold** and _italic_ and `code`
 
 Setext Heading with **bold** and _italic_ and `code`
@@ -257,7 +257,7 @@ Document[0, 158]
 
 headings should not contain trailing spaces or markers
 
-```````````````````````````````` example(Heading: 2) options(keep-blank-lines)
+```````````````````````````````` example(Heading: 2) options(keep-blank-lines)
 # Atx Heading Text ####
 
 .
@@ -274,7 +274,7 @@ Document[0, 25]
 
 Test repository KEEP_FIRST behavior, meaning the first reference def is used
 
-```````````````````````````````` example Reference Repository Keep First tests: 1
+```````````````````````````````` example Reference Repository Keep First tests: 1
 [ref]
 
 [ref]: /url1
@@ -297,7 +297,7 @@ Document[0, 45]
 
 Test repository KEEP_LAST behavior, meaning the last reference def is used
 
-```````````````````````````````` example(Reference Repository Keep Last tests: 1) options(keep-last)
+```````````````````````````````` example(Reference Repository Keep Last tests: 1) options(keep-last)
 [ref]
 
 [ref]: /url1
@@ -320,7 +320,7 @@ Document[0, 45]
 
 References with up to 3 leading blanks should be processed.
 
-```````````````````````````````` example References: 1
+```````````````````````````````` example References: 1
 [ref]
 
  [ref]: /url1
@@ -337,7 +337,7 @@ Document[0, 20]
 
 References with up to 3 leading blanks should be processed.
 
-```````````````````````````````` example References: 2
+```````````````````````````````` example References: 2
 [ref]
 
   [ref]: /url1
@@ -354,7 +354,7 @@ Document[0, 21]
 
 References with up to 3 leading blanks should be processed.
 
-```````````````````````````````` example References: 3
+```````````````````````````````` example References: 3
 [ref]
 
    [ref]: /url1
@@ -371,7 +371,7 @@ Document[0, 22]
 
 References with up to 3 leading blanks should be processed.
 
-```````````````````````````````` example References: 4
+```````````````````````````````` example References: 4
 [ref]
 
     [ref]: /url1
@@ -393,7 +393,7 @@ Document[0, 23]
 If allow atx headers without a space between # and the title is false, don't treat bare `#`'s
 without a trailing space as empty headings
 
-```````````````````````````````` example(Heading options: 1) options(no-empty-heading-without-space)
+```````````````````````````````` example(Heading options: 1) options(no-empty-heading-without-space)
 #
 
 ##
@@ -433,7 +433,7 @@ Document[0, 33]
 If allow atx headers without a space between # and the title is false, treat bare `#`'s with a
 trailing space as empty headings
 
-```````````````````````````````` example(Heading options: 2) options(no-empty-heading-without-space)
+```````````````````````````````` example(Heading options: 2) options(no-empty-heading-without-space)
 # 
 
 ## 
@@ -466,7 +466,7 @@ Document[0, 39]
 
 Allow atx headers without a space between # and the title
 
-```````````````````````````````` example(Heading options: 3) options(hdr-no-atx-space)
+```````````````````````````````` example(Heading options: 3) options(hdr-no-atx-space)
 #Heading
 ##Heading
 ###Heading
@@ -524,7 +524,7 @@ Document[0, 150]
 
 Don't allow leading spaces
 
-```````````````````````````````` example(Heading options: 4) options(hdr-no-lead-space)
+```````````````````````````````` example(Heading options: 4) options(hdr-no-lead-space)
  # Heading
  ## Heading
  ### Heading
@@ -557,7 +557,7 @@ Document[0, 80]
 
 Don't allow leading spaces, don't require atx marker space
 
-```````````````````````````````` example(Heading options: 5) options(hdr-no-lead-space, hdr-no-atx-space)
+```````````````````````````````` example(Heading options: 5) options(hdr-no-lead-space, hdr-no-atx-space)
  #Heading
  ##Heading
  ###Heading
@@ -590,7 +590,7 @@ Document[0, 74]
 
 Minimum setext marker length 3
 
-```````````````````````````````` example(Heading options: 6) options(setext-marker-length)
+```````````````````````````````` example(Heading options: 6) options(setext-marker-length)
 Not a Heading 1
 =
  
@@ -648,7 +648,7 @@ Document[0, 116]
 
 Minimum setext marker length 3 in lists
 
-```````````````````````````````` example(Heading options: 7) options(setext-marker-length, empty-bullet-no-sub-item-break)
+```````````````````````````````` example(Heading options: 7) options(setext-marker-length, empty-bullet-no-sub-item-break)
 - item 
   - 
  
@@ -670,7 +670,7 @@ Document[0, 15]
 
 Minimum setext marker length 3 in lists
 
-```````````````````````````````` example(Heading options: 8) options(setext-marker-length, empty-bullet-sub-item-break)
+```````````````````````````````` example(Heading options: 8) options(setext-marker-length, empty-bullet-sub-item-break)
 - item 
   - 
  
@@ -695,7 +695,7 @@ Document[0, 15]
 
 trailing marker does not require spaces before it
 
-```````````````````````````````` example(Heading options: 9) options(hdr-no-atx-space)
+```````````````````````````````` example(Heading options: 9) options(hdr-no-atx-space)
 # Heading####
 .
 <h1>Heading</h1>
@@ -712,7 +712,7 @@ Document[0, 13]
 
 With auto loose setting for list
 
-```````````````````````````````` example List - No Auto Loose: 1
+```````````````````````````````` example List - No Auto Loose: 1
 * item 1
 * item 2
 * item 3
@@ -771,7 +771,7 @@ Document[0, 96]
 
 Without auto loose setting for list
 
-```````````````````````````````` example(List - No Auto Loose: 2) options(list-no-loose)
+```````````````````````````````` example(List - No Auto Loose: 2) options(list-no-loose)
 * item 1
 * item 2
 * item 3
@@ -830,7 +830,7 @@ Document[0, 96]
 
 Without auto loose setting for list with loose if previous loose item
 
-```````````````````````````````` example(List - No Auto Loose, Loose Item if Previous Loose: 1) options(list-no-loose, list-loose-if-prev)
+```````````````````````````````` example(List - No Auto Loose, Loose Item if Previous Loose: 1) options(list-no-loose, list-loose-if-prev)
 * item 1
 * item 2
 * item 3
@@ -891,7 +891,7 @@ Document[0, 67]
 
 Without auto loose setting for list with loose if previous loose item
 
-```````````````````````````````` example(List - No Auto Loose, Loose Item if Previous Loose: 2) options(list-no-loose, list-loose-if-prev)
+```````````````````````````````` example(List - No Auto Loose, Loose Item if Previous Loose: 2) options(list-no-loose, list-loose-if-prev)
 * main item 
     * item 1
     * item 2
@@ -963,7 +963,7 @@ Document[0, 120]
 
 With break all lists on two blank lines
 
-```````````````````````````````` example(List - No Break on Double Blank Line: 1) options(list-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 1) options(list-break)
 * item 1
 * item 2
     * sub item 1
@@ -1014,7 +1014,7 @@ Document[0, 79]
 
 Without break all lists on two blank lines
 
-```````````````````````````````` example List - No Break on Double Blank Line: 2
+```````````````````````````````` example List - No Break on Double Blank Line: 2
 * item 1
 * item 2
     * sub item 1
@@ -1069,7 +1069,7 @@ Document[0, 79]
 
 Without break all lists on two blank lines no auto loose
 
-```````````````````````````````` example(List - No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
 * item 1
 * item 2
     * sub item 1
@@ -1118,7 +1118,7 @@ Document[0, 79]
 
 With break all lists on two blank lines
 
-```````````````````````````````` example(List - No Break on Double Blank Line: 4) options(list-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 4) options(list-break)
 * item 1
 * item 2
     * sub item 1
@@ -1175,7 +1175,7 @@ Document[0, 113]
 
 Without break on two blank lines
 
-```````````````````````````````` example List - No Break on Double Blank Line: 5
+```````````````````````````````` example List - No Break on Double Blank Line: 5
 * item 1
 * item 2
     * sub item 1
@@ -1243,7 +1243,7 @@ Document[0, 113]
 
 With bullet matching for items within a list
 
-```````````````````````````````` example List - No Bullet Match: 1
+```````````````````````````````` example List - No Bullet Match: 1
 - item 1
 * item 1
 + item 1
@@ -1276,7 +1276,7 @@ Document[0, 26]
 
 Without bullet matching for items within a list
 
-```````````````````````````````` example(List - No Bullet Match: 2) options(list-no-bullet-match)
+```````````````````````````````` example(List - No Bullet Match: 2) options(list-no-bullet-match)
 - item 1
 * item 2
 + item 3
@@ -1305,7 +1305,7 @@ Document[0, 26]
 
 With start
 
-```````````````````````````````` example List - No Manual Start: 1
+```````````````````````````````` example List - No Manual Start: 1
 2. item 1
 1. item 2
 3. item 3
@@ -1332,7 +1332,7 @@ Document[0, 29]
 
 Without start
 
-```````````````````````````````` example(List - No Manual Start: 2) options(list-no-start)
+```````````````````````````````` example(List - No Manual Start: 2) options(list-no-start)
 2. item 1
 1. item 1
 1. item 1
@@ -1362,7 +1362,7 @@ Document[0, 29]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1.
 
-```````````````````````````````` example(List - Paragraph Break Options: 1) options(bullet-no-para-break, ordered-no-para-break, ordered-no-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 1) options(bullet-no-para-break, ordered-no-para-break, ordered-no-non-1-item-break)
 1. this is a list
 1. item 1
    1. item 2
@@ -1394,7 +1394,7 @@ Document[0, 40]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1.
 
-```````````````````````````````` example(List - Paragraph Break Options: 2) options(bullet-no-para-break, ordered-no-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 2) options(bullet-no-para-break, ordered-no-non-1-item-break)
 1. this is a list
 1. item 1
    2. item 2
@@ -1421,7 +1421,7 @@ Document[0, 40]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(List - Paragraph Break Options: 3) options(ordered-non-1-para-break, ordered-no-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 3) options(ordered-non-1-para-break, ordered-no-non-1-item-break)
 This is a paragraph
 2. this is a list
 1. item 1
@@ -1452,7 +1452,7 @@ Document[0, 60]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(List - Paragraph Break Options: 4) options(ordered-non-1-para-break, ordered-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 4) options(ordered-non-1-para-break, ordered-non-1-item-break)
 This is a paragraph
 2. this is a list
 1. item 1
@@ -1488,7 +1488,7 @@ Document[0, 60]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(List - Paragraph Break Options: 5) options(ordered-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 5) options(ordered-non-1-item-break)
 1. this is a list
 1. item 1
    2. item 2
@@ -1519,7 +1519,7 @@ Document[0, 40]
 
 Without relaxed start. Lists start only if preceded by a blank line.
 
-```````````````````````````````` example(List - Paragraph Break Options: 6) options(bullet-no-para-break, ordered-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 6) options(bullet-no-para-break, ordered-no-para-break)
 - this is a list
 - item 1
   - item 2
@@ -1550,7 +1550,7 @@ Document[0, 36]
 
 With relaxed start. Lists can start without preceding blank lines.
 
-```````````````````````````````` example List - Paragraph Break Options: 7
+```````````````````````````````` example List - Paragraph Break Options: 7
 This is a paragraph
 2. item 1
 1. item 2
@@ -1646,7 +1646,7 @@ Document[0, 162]
 Without relaxed start. Lists start only if preceded by a blank line. Items and sub-items can
 start without a blank line.
 
-```````````````````````````````` example(List - Paragraph Break Options: 8) options(bullet-no-para-break, ordered-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 8) options(bullet-no-para-break, ordered-no-para-break)
 This is a paragraph
 2. item 1
 1. item 2
@@ -1727,7 +1727,7 @@ Document[0, 159]
 Without relaxed start for bullet Lists start only if preceded by a blank line. Items and
 sub-items can start without a blank line.
 
-```````````````````````````````` example(List - Paragraph Break Options: 9) options(bullet-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 9) options(bullet-no-para-break)
 This is a paragraph
 1. item 1
 1. item 2
@@ -1817,7 +1817,7 @@ Document[0, 159]
 With relaxed start but not for ordered lists. Ordered lists start only if preceded by a blank
 line.
 
-```````````````````````````````` example(List - Paragraph Break Options: 10) options(ordered-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 10) options(ordered-no-para-break)
 This is a paragraph
 2. item 1
 1. item 2
@@ -1906,7 +1906,7 @@ Document[0, 159]
 
 Ordered items must have a blank line before them
 
-```````````````````````````````` example(List - Paragraph Break Options: 11) options(ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 11) options(ordered-no-para-break, ordered-no-item-break)
 This is a paragraph
 2. not item 1
 1. not item 2
@@ -1927,7 +1927,7 @@ Document[0, 47]
 
 Ordered items must have a blank line before them
 
-```````````````````````````````` example(List - Paragraph Break Options: 12) options(ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 12) options(ordered-no-para-break, ordered-no-item-break)
 1. item 1.0
 
 2. item 2.0
@@ -1966,7 +1966,7 @@ Document[0, 51]
 
 Ordered items must have a blank line before them, but not bullet items
 
-```````````````````````````````` example(List - Paragraph Break Options: 13) options(ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 13) options(ordered-no-para-break, ordered-no-item-break)
 This is a paragraph
 - item 1
 - item 2
@@ -1993,7 +1993,7 @@ Document[0, 37]
 Bullet items must have a blank line before them when preceded by paragraph but should not append
 following child paragraph
 
-```````````````````````````````` example(List - Paragraph Break Options: 14) options(bullet-no-para-break, list-no-type-match, list-no-loose)
+```````````````````````````````` example(List - Paragraph Break Options: 14) options(bullet-no-para-break, list-no-type-match, list-no-loose)
 - item 1 paragraph
   * sublist
 - item 2 paragraph
@@ -2030,7 +2030,7 @@ Document[0, 64]
 
 Bullet items must have a blank line before them
 
-```````````````````````````````` example(List - Paragraph Break Options: 15) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 15) options(bullet-no-para-break, bullet-no-item-break)
 This is a paragraph
 - not item 1
 - not item 2
@@ -2051,7 +2051,7 @@ Document[0, 45]
 
 Bullet items must have a blank line before them
 
-```````````````````````````````` example(List - Paragraph Break Options: 16) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 16) options(bullet-no-para-break, bullet-no-item-break)
 - item 1.0
 
 - item 2.0
@@ -2090,7 +2090,7 @@ Document[0, 47]
 
 Bullet items must have a blank line before them, but not ordered items
 
-```````````````````````````````` example(List - Paragraph Break Options: 17) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 17) options(bullet-no-para-break, bullet-no-item-break)
 This is a paragraph
 1. item 1
 2. item 2
@@ -2116,7 +2116,7 @@ Document[0, 39]
 
 All items must have a blank line before them
 
-```````````````````````````````` example(List - Paragraph Break Options: 18) options(bullet-no-para-break, bullet-no-item-break, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 18) options(bullet-no-para-break, bullet-no-item-break, ordered-no-para-break, ordered-no-item-break)
 This is a paragraph
 2. not item 1
 1. not item 2
@@ -2218,7 +2218,7 @@ Document[0, 208]
 
 Without ordered items dot only
 
-```````````````````````````````` example List - Marker Options: 1
+```````````````````````````````` example List - Marker Options: 1
 1. item 1
 2. item 2
 
@@ -2260,7 +2260,7 @@ Document[0, 43]
 
 With ordered items dot only
 
-```````````````````````````````` example(List - Marker Options: 2) options(ordered-dot-only)
+```````````````````````````````` example(List - Marker Options: 2) options(ordered-dot-only)
 1. item 1
 2. item 2
 
@@ -2293,7 +2293,7 @@ Document[0, 43]
 
 An ordered list after bullet list with no bullet matching
 
-```````````````````````````````` example(List - Marker Options: 3) options(list-no-bullet-match)
+```````````````````````````````` example(List - Marker Options: 3) options(list-no-bullet-match)
 - item 1
 - item 2
 + item 3
@@ -2339,7 +2339,7 @@ Document[0, 56]
 
 A bullet list after an ordered list with no bullet matching
 
-```````````````````````````````` example(List - Marker Options: 4) options(list-no-bullet-match)
+```````````````````````````````` example(List - Marker Options: 4) options(list-no-bullet-match)
 2. item 1
 1. item 2
 
@@ -2385,7 +2385,7 @@ Document[0, 56]
 
 An ordered list after bullet list, no type match
 
-```````````````````````````````` example(List - Marker Options: 5) options(list-no-type-match)
+```````````````````````````````` example(List - Marker Options: 5) options(list-no-type-match)
 - item 1
 - item 2
 
@@ -2426,7 +2426,7 @@ Document[0, 38]
 
 A bullet list after an ordered list, no type match
 
-```````````````````````````````` example(List - Marker Options: 6) options(list-no-type-match)
+```````````````````````````````` example(List - Marker Options: 6) options(list-no-type-match)
 2. item 1
 1. item 2
 
@@ -2467,7 +2467,7 @@ Document[0, 38]
 
 An ordered list item can interrupt a previous list item's paragraph
 
-```````````````````````````````` example List - Marker Options: 7
+```````````````````````````````` example List - Marker Options: 7
 1. item 1
 lazy continuation
 2. item 2
@@ -2494,7 +2494,7 @@ Document[0, 37]
 An ordered list sub item can interrupt its parent item's paragraph even if it does not start
 with 1 when start setting is disabled.
 
-```````````````````````````````` example(List - Marker Options: 8) options(list-no-start)
+```````````````````````````````` example(List - Marker Options: 8) options(list-no-start)
 1. item 1
 lazy continuation
    2. item 1.1
@@ -2524,7 +2524,7 @@ Document[0, 42]
 
 nested
 
-```````````````````````````````` example(List - Marker Options: 9) options(list-no-start)
+```````````````````````````````` example(List - Marker Options: 9) options(list-no-start)
 4. item 1
 3. item 2
    2. item 2.1
@@ -2560,7 +2560,7 @@ Document[0, 44]
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(List - Marker Options: 10) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Marker Options: 10) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
 4. item 1
 3. item 2
    2. item 2.1
@@ -2589,7 +2589,7 @@ Document[0, 44]
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(List - Marker Options: 11) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Marker Options: 11) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
 4. item 1
 
 3. item 2
@@ -2633,7 +2633,7 @@ Document[0, 51]
 
 no relaxed ordered start with exception for another item's paragraph
 
-```````````````````````````````` example(List - Marker Options: 12) options(list-no-start, ordered-no-para-break)
+```````````````````````````````` example(List - Marker Options: 12) options(list-no-start, ordered-no-para-break)
 4. item 1
 3. item 2
    2. item 2.1
@@ -2684,7 +2684,7 @@ Document[0, 113]
 no relaxed ordered start with exception for another item's paragraph but only if manual list
 start is enabled
 
-```````````````````````````````` example(List - Marker Options: 13) options(ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Marker Options: 13) options(ordered-no-para-break, ordered-no-item-break)
 4. item 1
 3. item 2
    2. item 2.1
@@ -2730,7 +2730,7 @@ Document[0, 112]
 
 nested, no bullet para break, no bullet item paragraph break
 
-```````````````````````````````` example(List - Marker Options: 14) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Marker Options: 14) options(bullet-no-para-break, bullet-no-item-break)
 - item 1
 - item 2
   - item 2.1
@@ -2759,7 +2759,7 @@ Document[0, 39]
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(List - Marker Options: 15) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Marker Options: 15) options(bullet-no-para-break, bullet-no-item-break)
 - item 1
 
 - item 2
@@ -2803,7 +2803,7 @@ Document[0, 46]
 
 mismatched item to sub-item
 
-```````````````````````````````` example(List - Marker Options: 16) options(list-item-mismatch-to-subitem)
+```````````````````````````````` example(List - Marker Options: 16) options(list-item-mismatch-to-subitem)
 - item
 1. sub-item
 1. sub-item
@@ -2853,7 +2853,7 @@ Document[0, 61]
 
 mismatched item to sub-item
 
-```````````````````````````````` example(List - Marker Options: 17) options(list-item-mismatch-to-subitem)
+```````````````````````````````` example(List - Marker Options: 17) options(list-item-mismatch-to-subitem)
 1. item
 - sub-item
 - sub-item
@@ -2908,7 +2908,7 @@ Document[0, 59]
 With relaxed rules. Thematic break can occur without a preceding blank line. Applies to
 non-dashed thematic break, dashes are a heading.
 
-```````````````````````````````` example Thematic Break - No Relaxed Rules: 1
+```````````````````````````````` example Thematic Break - No Relaxed Rules: 1
 This is a paragraph
 ***
 .
@@ -2925,7 +2925,7 @@ Document[0, 23]
 Without relaxed rules. Thematic break must be preceded by a blank line. Applies to non-dashed
 thematic break, dashes are a heading.
 
-```````````````````````````````` example(Thematic Break - No Relaxed Rules: 2) options(thematic-break-no-relaxed-start)
+```````````````````````````````` example(Thematic Break - No Relaxed Rules: 2) options(thematic-break-no-relaxed-start)
 This is a paragraph
 ***
 .
@@ -2942,7 +2942,7 @@ Document[0, 23]
 
 Nested in other elements
 
-```````````````````````````````` example Thematic Break - No Relaxed Rules: 3
+```````````````````````````````` example Thematic Break - No Relaxed Rules: 3
 > - ***
 .
 <blockquote>
@@ -2967,7 +2967,7 @@ Document[0, 7]
 
 Default pass it all through
 
-```````````````````````````````` example HTML - Encode Options: 1
+```````````````````````````````` example HTML - Encode Options: 1
 <div>
 <p>paragraph</p>
 </div>
@@ -3001,7 +3001,7 @@ Document[0, 196]
 
 Encode all html
 
-```````````````````````````````` example(HTML - Encode Options: 2) options(escape-html)
+```````````````````````````````` example(HTML - Encode Options: 2) options(escape-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -3035,7 +3035,7 @@ Document[0, 196]
 
 Encode html blocks
 
-```````````````````````````````` example(HTML - Encode Options: 3) options(escape-html-blocks)
+```````````````````````````````` example(HTML - Encode Options: 3) options(escape-html-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -3069,7 +3069,7 @@ Document[0, 196]
 
 Encode html block comments
 
-```````````````````````````````` example(HTML - Encode Options: 4) options(escape-html-comment-blocks)
+```````````````````````````````` example(HTML - Encode Options: 4) options(escape-html-comment-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -3103,7 +3103,7 @@ Document[0, 196]
 
 Encode inline html
 
-```````````````````````````````` example(HTML - Encode Options: 5) options(escape-inline-html)
+```````````````````````````````` example(HTML - Encode Options: 5) options(escape-inline-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -3137,7 +3137,7 @@ Document[0, 196]
 
 Encode inline html comments
 
-```````````````````````````````` example(HTML - Encode Options: 6) options(escape-inline-html-comments)
+```````````````````````````````` example(HTML - Encode Options: 6) options(escape-inline-html-comments)
 <div>
 <p>paragraph</p>
 </div>
@@ -3173,7 +3173,7 @@ Document[0, 196]
 
 Suppress all html
 
-```````````````````````````````` example(HTML - Suppress Options: 1) options(suppress-html)
+```````````````````````````````` example(HTML - Suppress Options: 1) options(suppress-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -3202,7 +3202,7 @@ Document[0, 196]
 
 Suppress html blocks
 
-```````````````````````````````` example(HTML - Suppress Options: 2) options(suppress-html-blocks)
+```````````````````````````````` example(HTML - Suppress Options: 2) options(suppress-html-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -3231,7 +3231,7 @@ Document[0, 196]
 
 Suppress html comment blocks
 
-```````````````````````````````` example(HTML - Suppress Options: 3) options(suppress-html-comment-blocks)
+```````````````````````````````` example(HTML - Suppress Options: 3) options(suppress-html-comment-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -3264,7 +3264,7 @@ Document[0, 196]
 
 Suppress inline html
 
-```````````````````````````````` example(HTML - Suppress Options: 4) options(suppress-inline-html)
+```````````````````````````````` example(HTML - Suppress Options: 4) options(suppress-inline-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -3298,7 +3298,7 @@ Document[0, 196]
 
 Suppress inline html comments
 
-```````````````````````````````` example(HTML - Suppress Options: 5) options(suppress-inline-html-comments)
+```````````````````````````````` example(HTML - Suppress Options: 5) options(suppress-inline-html-comments)
 <div>
 <p>paragraph</p>
 </div>
@@ -3334,7 +3334,7 @@ Document[0, 196]
 
 Html comments in block
 
-```````````````````````````````` example HTML - Parse Inner Comments: 1
+```````````````````````````````` example HTML - Parse Inner Comments: 1
 <!-- HTML Comment -->
 <div>
 </div>
@@ -3351,7 +3351,7 @@ Document[0, 34]
 
 Html comments in block
 
-```````````````````````````````` example HTML - Parse Inner Comments: 2
+```````````````````````````````` example HTML - Parse Inner Comments: 2
 <div>
     <!-- HTML Comment -->
 </div>
@@ -3367,7 +3367,7 @@ Document[0, 38]
 
 Html comments in block
 
-```````````````````````````````` example HTML - Parse Inner Comments: 3
+```````````````````````````````` example HTML - Parse Inner Comments: 3
 <div>
 </div>
 <!-- HTML Comment -->
@@ -3383,7 +3383,7 @@ Document[0, 34]
 
 Html comments in block, parse inner comments
 
-```````````````````````````````` example(HTML - Parse Inner Comments: 4) options(parse-inner-comments)
+```````````````````````````````` example(HTML - Parse Inner Comments: 4) options(parse-inner-comments)
 <!-- HTML Comment -->
 <div>
 </div>
@@ -3400,7 +3400,7 @@ Document[0, 34]
 
 Html comments in block, parse inner comments
 
-```````````````````````````````` example(HTML - Parse Inner Comments: 5) options(parse-inner-comments)
+```````````````````````````````` example(HTML - Parse Inner Comments: 5) options(parse-inner-comments)
 <div>
     <!-- HTML Comment -->
 </div>
@@ -3419,7 +3419,7 @@ Document[0, 38]
 
 Html comments in block, parse inner comments
 
-```````````````````````````````` example(HTML - Parse Inner Comments: 6) options(parse-inner-comments)
+```````````````````````````````` example(HTML - Parse Inner Comments: 6) options(parse-inner-comments)
 <div>
 </div>
 <!-- HTML Comment -->
@@ -3439,7 +3439,7 @@ Document[0, 34]
 
 math tag
 
-```````````````````````````````` example Block HTML: 1
+```````````````````````````````` example Block HTML: 1
 <math></math>
 .
 <math></math>
@@ -3451,7 +3451,7 @@ Document[0, 13]
 
 user tag
 
-```````````````````````````````` example(Block HTML: 2) options(user-block-tags)
+```````````````````````````````` example(Block HTML: 2) options(user-block-tags)
 <tag></tag>
 .
 <tag></tag>
@@ -3465,7 +3465,7 @@ Document[0, 11]
 
 kbd tag
 
-```````````````````````````````` example Inline HTML: 1
+```````````````````````````````` example Inline HTML: 1
 text with <kbd>ENTER</kbd> embedded
 .
 <p>text with <kbd>ENTER</kbd> embedded</p>
@@ -3482,7 +3482,7 @@ Document[0, 35]
 
 non-blocks cannot start HTML block
 
-```````````````````````````````` example(Inline HTML: 2) options(html-block-start-only-on-block-tags)
+```````````````````````````````` example(Inline HTML: 2) options(html-block-start-only-on-block-tags)
 Best regards,
 
 <br />
@@ -3504,7 +3504,7 @@ Document[0, 31]
 
 non-blocks start HTML block
 
-```````````````````````````````` example Inline HTML: 3
+```````````````````````````````` example Inline HTML: 3
 Best regards,
 
 <br />
@@ -3527,7 +3527,7 @@ Document[0, 31]
 
 Emphasis around inline code spans
 
-```````````````````````````````` example GFM - Emphasis: 1
+```````````````````````````````` example GFM - Emphasis: 1
 please add  `add_gtest(`**`your_unittest`**` `**`your_unittest_unittest.cc`**` )`
 .
 <p>please add  <code>add_gtest(</code><strong><code>your_unittest</code></strong><code></code><strong><code>your_unittest_unittest.cc</code></strong><code>)</code></p>
@@ -3552,7 +3552,7 @@ Document[0, 81]
 
 Some weird commonmark processing of emphasis
 
-```````````````````````````````` example GFM - Emphasis: 2
+```````````````````````````````` example GFM - Emphasis: 2
 **bold*bold-italic*bold**
 .
 <p><strong>bold<em>bold-italic</em>bold</strong></p>
@@ -3569,7 +3569,7 @@ Document[0, 25]
 
 more emphasis tests
 
-```````````````````````````````` example GFM - Emphasis: 3
+```````````````````````````````` example GFM - Emphasis: 3
 *a**b**c*
 .
 <p><em>a<strong>b</strong>c</em></p>
@@ -3586,7 +3586,7 @@ Document[0, 9]
 
 more emphasis tests
 
-```````````````````````````````` example GFM - Emphasis: 4
+```````````````````````````````` example GFM - Emphasis: 4
 ***a**b*
 .
 <p><em><strong>a</strong>b</em></p>
@@ -3602,7 +3602,7 @@ Document[0, 8]
 
 more emphasis tests
 
-```````````````````````````````` example GFM - Emphasis: 5
+```````````````````````````````` example GFM - Emphasis: 5
 *b**a***
 
 .
@@ -3619,7 +3619,7 @@ Document[0, 10]
 
 more emphasis tests
 
-```````````````````````````````` example GFM - Emphasis: 6
+```````````````````````````````` example GFM - Emphasis: 6
 *a**b**c*
 
 .
@@ -3637,7 +3637,7 @@ Document[0, 11]
 
 more emphasis tests
 
-```````````````````````````````` example GFM - Emphasis: 7
+```````````````````````````````` example GFM - Emphasis: 7
 **a*b*c**
 
 .
@@ -3655,7 +3655,7 @@ Document[0, 11]
 
 more emphasis tests
 
-```````````````````````````````` example GFM - Emphasis: 8
+```````````````````````````````` example GFM - Emphasis: 8
 **a b*b*b c**
 
 .
@@ -3673,7 +3673,7 @@ Document[0, 15]
 
 This works as expected:
 
-```````````````````````````````` example GFM - Emphasis: 9
+```````````````````````````````` example GFM - Emphasis: 9
 **bold *bold-italic* bold**
 .
 <p><strong>bold <em>bold-italic</em> bold</strong></p>
@@ -3690,7 +3690,7 @@ Document[0, 27]
 
 code mixed with emphasis:
 
-```````````````````````````````` example GFM - Emphasis: 10
+```````````````````````````````` example GFM - Emphasis: 10
 `code with `**`bold`**` inside`
 .
 <p><code>code with</code><strong><code>bold</code></strong><code>inside</code></p>
@@ -3711,7 +3711,7 @@ Document[0, 31]
 
 Change language class prefix
 
-```````````````````````````````` example(Fenced Code Options: 1) options(no-class-prefix)
+```````````````````````````````` example(Fenced Code Options: 1) options(no-class-prefix)
 ```text
 plain text
 ```
@@ -3727,7 +3727,7 @@ Document[0, 22]
 
 no info with custom class
 
-```````````````````````````````` example(Fenced Code Options: 2) options(no-language-class)
+```````````````````````````````` example(Fenced Code Options: 2) options(no-language-class)
 ```
 plain text
 ```
@@ -3743,7 +3743,7 @@ Document[0, 18]
 
 indented code with custom class
 
-```````````````````````````````` example(Fenced Code Options: 3) options(no-language-class)
+```````````````````````````````` example(Fenced Code Options: 3) options(no-language-class)
     plain text
 .
 <pre><code class="nohighlight">plain text
@@ -3756,7 +3756,7 @@ Document[0, 14]
 
 empty, no info
 
-```````````````````````````````` example Fenced Code Options: 4
+```````````````````````````````` example Fenced Code Options: 4
 ```
 
 ```
@@ -3772,7 +3772,7 @@ Document[0, 8]
 
 empty, no info, blank line follows
 
-```````````````````````````````` example Fenced Code Options: 5
+```````````````````````````````` example Fenced Code Options: 5
 ```
 
 ```
@@ -3789,7 +3789,7 @@ Document[0, 10]
 
 empty, info
 
-```````````````````````````````` example Fenced Code Options: 6
+```````````````````````````````` example Fenced Code Options: 6
 ```info
 
 ```
@@ -3805,7 +3805,7 @@ Document[0, 12]
 
 empty, info, blank line follows
 
-```````````````````````````````` example Fenced Code Options: 7
+```````````````````````````````` example Fenced Code Options: 7
 ```info
 
 ```
@@ -3822,7 +3822,7 @@ Document[0, 14]
 
 Unclosed Fenced code should take all input to end
 
-```````````````````````````````` example Fenced Code Options: 8
+```````````````````````````````` example Fenced Code Options: 8
 ```
 sample 
 unclosed
@@ -3853,7 +3853,7 @@ Document[0, 38]
 
 Wrap content in CodeBlock
 
-```````````````````````````````` example(Fenced Code Options: 9) options(code-content-block)
+```````````````````````````````` example(Fenced Code Options: 9) options(code-content-block)
 ```info
 code content
    indented code line
@@ -3871,7 +3871,7 @@ Document[0, 46]
 
 Wrap content in CodeBlock
 
-```````````````````````````````` example(Fenced Code Options: 10) options(code-content-block)
+```````````````````````````````` example(Fenced Code Options: 10) options(code-content-block)
     code content
        indented code line
 .
@@ -3887,7 +3887,7 @@ Document[0, 42]
 
 Option not to match closing fence characters to opening ones
 
-```````````````````````````````` example(Fenced Code Options: 11) options(unmatched-fence)
+```````````````````````````````` example(Fenced Code Options: 11) options(unmatched-fence)
 ```
 proper unmatched fenced code
 ~~~
@@ -3901,7 +3901,7 @@ Document[0, 36]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Options: 12) options(unmatched-fence)
+```````````````````````````````` example(Fenced Code Options: 12) options(unmatched-fence)
 ```
 proper unmatched fenced code
 ```
@@ -3920,7 +3920,7 @@ Document[0, 38]
 
 Change language class prefix
 
-```````````````````````````````` example Anchor links option: 1
+```````````````````````````````` example Anchor links option: 1
 inline anchor <a id="test" href="#"></a><em></em> test 
 .
 <p>inline anchor <a id="test" href="#"></a><em></em> test</p>
@@ -3940,7 +3940,7 @@ Document[0, 55]
 
 Break with trailing spaces
 
-```````````````````````````````` example Thematic Break: 1
+```````````````````````````````` example Thematic Break: 1
 ---                 
 .
 <hr />
@@ -3952,7 +3952,7 @@ Document[0, 20]
 
 ## Image links
 
-```````````````````````````````` example Image links: 1
+```````````````````````````````` example Image links: 1
 ![alt](/url) 
 .
 <p><img src="/url" alt="alt" /></p>
@@ -3966,7 +3966,7 @@ Document[0, 13]
 
 dummy ref
 
-```````````````````````````````` example Image links: 2
+```````````````````````````````` example Image links: 2
 [ref]: /url1
 
 ![ref][]
@@ -3985,7 +3985,7 @@ Document[0, 22]
 
 not parsed, invalid end
 
-```````````````````````````````` example(Multi-Line Image URL: 1) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 1) options(multi-line-image-url)
 ![ref](/url1?
     )
 .
@@ -4000,7 +4000,7 @@ Document[0, 19]
 
 empty content
 
-```````````````````````````````` example(Multi-Line Image URL: 2) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 2) options(multi-line-image-url)
 ![ref](/url1?
 )
 .
@@ -4015,7 +4015,7 @@ Document[0, 15]
 
 empty content
 
-```````````````````````````````` example(Multi-Line Image URL: 3) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 3) options(multi-line-image-url)
 ![ref](/url1?
    )
 .
@@ -4030,7 +4030,7 @@ Document[0, 18]
 
 simple content
 
-```````````````````````````````` example(Multi-Line Image URL: 4) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 4) options(multi-line-image-url)
 ![ref](/url1?
 one line
 )
@@ -4046,7 +4046,7 @@ Document[0, 24]
 
 simple content
 
-```````````````````````````````` example(Multi-Line Image URL: 5) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 5) options(multi-line-image-url)
 ![ref](/url1?
 one line
 two line
@@ -4063,7 +4063,7 @@ Document[0, 33]
 
 false title
 
-```````````````````````````````` example(Multi-Line Image URL: 6) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 6) options(multi-line-image-url)
 ![ref](/url1?
 one line
 "false title"
@@ -4080,7 +4080,7 @@ Document[0, 51]
 
 trailing text
 
-```````````````````````````````` example(Multi-Line Image URL: 7) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 7) options(multi-line-image-url)
 ![ref](/url1?
 one line
 two line
@@ -4098,7 +4098,7 @@ Document[0, 47]
 
 encoding of &, =
 
-```````````````````````````````` example(Multi-Line Image URL: 8) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 8) options(multi-line-image-url)
 ![ref](/url1?
 one = 1 & line
 ) trailing text
@@ -4115,7 +4115,7 @@ Document[0, 44]
 
 encoding of +
 
-```````````````````````````````` example(Multi-Line Image URL: 9) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 9) options(multi-line-image-url)
 ![ref](/url1?
 one = 1 + line
 ) trailing text
@@ -4132,7 +4132,7 @@ Document[0, 44]
 
 encoding of embedded EOL
 
-```````````````````````````````` example(Multi-Line Image URL: 10) options(multi-line-image-url)
+```````````````````````````````` example(Multi-Line Image URL: 10) options(multi-line-image-url)
 ![ref](/url1?
 one = 1 & line \\
 line two \\
@@ -4148,7 +4148,7 @@ Document[0, 59]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Multi-Line Image URL: 11) options(unmatched-fence)
+```````````````````````````````` example(Multi-Line Image URL: 11) options(unmatched-fence)
 ~~~
 proper unmatched fenced code
 ```
@@ -4164,7 +4164,7 @@ Document[0, 36]
 
 non empty, info, blank line follows, unmatched
 
-```````````````````````````````` example(Multi-Line Image URL: 12) options(unmatched-fence)
+```````````````````````````````` example(Multi-Line Image URL: 12) options(unmatched-fence)
 ```info
 some text
 ~~~
@@ -4183,7 +4183,7 @@ Document[0, 23]
 
 allow dummy identifier in url and text
 
-```````````````````````````````` example(IntelliJ Dummy Identifier: 1) options(dummy-identifier)
+```````````````````````````````` example(IntelliJ Dummy Identifier: 1) options(dummy-identifier)
 [⎮text](/ur⎮l)
 
 ![al⎮t](/url⎮)
@@ -4206,7 +4206,7 @@ Document[0, 32]
 
 trim trailing blank lines by default
 
-```````````````````````````````` example Indented Code Options: 1
+```````````````````````````````` example Indented Code Options: 1
     code
     code line
     
@@ -4224,7 +4224,7 @@ Document[0, 38]
 
 don't trim trailing blank lines
 
-```````````````````````````````` example(Indented Code Options: 2) options(code-no-trim-trailing)
+```````````````````````````````` example(Indented Code Options: 2) options(code-no-trim-trailing)
     code
     code line
     
@@ -4244,7 +4244,7 @@ Document[0, 38]
 
 Url encoded link address should not % encode the query separator `&`
 
-```````````````````````````````` example Links: 1
+```````````````````````````````` example Links: 1
 [test](http://url?opt=a&opt1=b)
 .
 <p><a href="http://url?opt=a&amp;opt1=b">test</a></p>
@@ -4256,7 +4256,7 @@ Document[0, 31]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 2
+```````````````````````````````` example Links: 2
 [ref]: /url1
 
 [ref][]
@@ -4273,7 +4273,7 @@ Document[0, 21]
 
 Escaped chars in links
 
-```````````````````````````````` example Links: 3
+```````````````````````````````` example Links: 3
 [test](http://url\(.com\))   
 
 ![test](http://url\(.com\))
@@ -4291,7 +4291,7 @@ Document[0, 58]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 4
+```````````````````````````````` example Links: 4
 [ref]: /url1\(.com\)
 
 [ref][]
@@ -4314,7 +4314,7 @@ Document[0, 39]
 
 obfuscate e-mail
 
-```````````````````````````````` example(Links: 5) options(obfuscate-email)
+```````````````````````````````` example(Links: 5) options(obfuscate-email)
 this <example@example.com>
 .
 <p>this <a href="&#109;&#x61;i&#x6c;&#116;&#x6f;&#58;&#101;xa&#x6d;&#x70;&#x6c;&#x65;&#64;ex&#97;&#109;&#112;&#x6c;&#x65;.&#x63;&#x6f;&#109;">&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#x6d;</a></p>
@@ -4328,7 +4328,7 @@ Document[0, 26]
 
 spaces in links allowed
 
-```````````````````````````````` example(Links: 6) options(url-spaces)
+```````````````````````````````` example(Links: 6) options(url-spaces)
 [Sample Link Spaces](link with spaces.html)
 .
 <p><a href="link%20with%20spaces.html">Sample Link Spaces</a></p>
@@ -4342,7 +4342,7 @@ Document[0, 43]
 
 spaces in links allowed with title
 
-```````````````````````````````` example(Links: 7) options(url-spaces)
+```````````````````````````````` example(Links: 7) options(url-spaces)
 [Sample Link Spaces](link with spaces.html "title")
 .
 <p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
@@ -4354,7 +4354,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 8) options(url-spaces)
+```````````````````````````````` example(Links: 8) options(url-spaces)
 [Sample Link Spaces](link with spaces.html 'title')
 .
 <p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
@@ -4366,7 +4366,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 9) options(url-spaces)
+```````````````````````````````` example(Links: 9) options(url-spaces)
 [Sample Link Spaces](link with spaces.html 
 "title")
 .
@@ -4379,7 +4379,7 @@ Document[0, 52]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 10) options(url-spaces)
+```````````````````````````````` example(Links: 10) options(url-spaces)
 [Sample Link Spaces](link with spaces.html 
 'title')
 .
@@ -4394,7 +4394,7 @@ Document[0, 52]
 
 embed double quotes
 
-```````````````````````````````` example(Links: 11) options(url-spaces)
+```````````````````````````````` example(Links: 11) options(url-spaces)
 [Sample Link Spaces](link" with spaces.html 
 "title")
 .
@@ -4407,7 +4407,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 12) options(url-spaces)
+```````````````````````````````` example(Links: 12) options(url-spaces)
 [Sample Link Spaces](link" with spaces.html 
 'title')
 .
@@ -4422,7 +4422,7 @@ Document[0, 53]
 
 embed single quotes
 
-```````````````````````````````` example(Links: 13) options(url-spaces)
+```````````````````````````````` example(Links: 13) options(url-spaces)
 [Sample Link Spaces](link' with spaces.html 
 "title")
 .
@@ -4435,7 +4435,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 14) options(url-spaces)
+```````````````````````````````` example(Links: 14) options(url-spaces)
 [Sample Link Spaces](link' with spaces.html 
 'title')
 .
@@ -4448,7 +4448,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 15) options(url-spaces)
+```````````````````````````````` example(Links: 15) options(url-spaces)
 [Sample Link Spaces](<link with spaces.html> "title")
 .
 <p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
@@ -4460,7 +4460,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 16) options(url-spaces)
+```````````````````````````````` example(Links: 16) options(url-spaces)
 [Sample Link Spaces](<link with spaces.html>  
 "title")
 .
@@ -4475,7 +4475,7 @@ Document[0, 55]
 
 embed double quotes
 
-```````````````````````````````` example(Links: 17) options(url-spaces)
+```````````````````````````````` example(Links: 17) options(url-spaces)
 [Sample Link Spaces](<link" with spaces.html> 
 "title")
 .
@@ -4490,7 +4490,7 @@ Document[0, 55]
 
 no trailing space before >
 
-```````````````````````````````` example(Links: 18) options(url-spaces)
+```````````````````````````````` example(Links: 18) options(url-spaces)
 [Sample Link Spaces](<link with spaces.html >  
 "title")
 .
@@ -4505,7 +4505,7 @@ Document[0, 56]
 
 embed double quotes
 
-```````````````````````````````` example(Links: 19) options(url-spaces)
+```````````````````````````````` example(Links: 19) options(url-spaces)
 [Sample Link Spaces](<link" with spaces.html > 
 "title")
 .
@@ -4520,7 +4520,7 @@ Document[0, 56]
 
 Jekyll macros in URL
 
-```````````````````````````````` example Links: 20
+```````````````````````````````` example Links: 20
 [Sample Link Spaces]({{ macro }} "title")
 .
 <p>[Sample Link Spaces]({{ macro }} &quot;title&quot;)</p>
@@ -4533,7 +4533,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 21) options(jekyll-macros-in-urls)
+```````````````````````````````` example(Links: 21) options(jekyll-macros-in-urls)
 [Sample Link Spaces]({{ macro }} "title")
 .
 <p><a href="%7B%7B%20macro%20%7D%7D" title="title">Sample Link Spaces</a></p>
@@ -4547,7 +4547,7 @@ Document[0, 41]
 
 handle escape
 
-```````````````````````````````` example(Links: 22) options(jekyll-macros-in-urls)
+```````````````````````````````` example(Links: 22) options(jekyll-macros-in-urls)
 [Sample Link Spaces](\{{ macro }} "title")
 .
 <p>[Sample Link Spaces]({{ macro }} &quot;title&quot;)</p>
@@ -4562,7 +4562,7 @@ Document[0, 42]
 
 handle escape
 
-```````````````````````````````` example(Links: 23) options(jekyll-macros-in-urls)
+```````````````````````````````` example(Links: 23) options(jekyll-macros-in-urls)
 [Sample Link Spaces]({{ macro \}} "title")
 .
 <p>[Sample Link Spaces]({{ macro }} &quot;title&quot;)</p>
@@ -4575,7 +4575,7 @@ Document[0, 42]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 24
+```````````````````````````````` example Links: 24
 <http://example.com/linkWithoutSpaces.html> 
 .
 <p><a href="http://example.com/linkWithoutSpaces.html">http://example.com/linkWithoutSpaces.html</a></p>
@@ -4586,7 +4586,7 @@ Document[0, 44]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 25) options(url-spaces)
+```````````````````````````````` example(Links: 25) options(url-spaces)
 <http://example.com/link with spaces.html> 
 .
 <p>&lt;http://example.com/link with spaces.html&gt;</p>
@@ -4597,7 +4597,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 26) options(url-spaces)
+```````````````````````````````` example(Links: 26) options(url-spaces)
 <http://example.com/link with spaces.html > 
 .
 <p>&lt;http://example.com/link with spaces.html &gt;</p>
@@ -4610,7 +4610,7 @@ Document[0, 44]
 
 embed double quotes
 
-```````````````````````````````` example(Links: 27) options(url-spaces)
+```````````````````````````````` example(Links: 27) options(url-spaces)
 <http://example.com/link" with spaces.html>
 .
 <p>&lt;http://example.com/link&quot; with spaces.html&gt;</p>
@@ -4621,7 +4621,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 28) options(url-spaces)
+```````````````````````````````` example(Links: 28) options(url-spaces)
 <http://example.com/link" with spaces.html >
 .
 <p>&lt;http://example.com/link&quot; with spaces.html &gt;</p>
@@ -4634,7 +4634,7 @@ Document[0, 44]
 
 Spaces in link elements
 
-```````````````````````````````` example(Links: 29) options(space-in-link-elements)
+```````````````````````````````` example(Links: 29) options(space-in-link-elements)
 [Test Text]       (/url)
 .
 <p><a href="/url">Test Text</a></p>
@@ -4648,7 +4648,7 @@ Document[0, 24]
 
 Spaces in image elements
 
-```````````````````````````````` example(Links: 30) options(space-in-link-elements)
+```````````````````````````````` example(Links: 30) options(space-in-link-elements)
 ![Test Text]        (/url)
 .
 <p><img src="/url" alt="Test Text" /></p>
@@ -4662,7 +4662,7 @@ Document[0, 26]
 
 www. in auto-link elements
 
-```````````````````````````````` example(Links: 31) options(www-auto-link-element)
+```````````````````````````````` example(Links: 31) options(www-auto-link-element)
 <www.example.com>
 .
 <p><a href="http://www.example.com">www.example.com</a></p>
@@ -4677,7 +4677,7 @@ Document[0, 17]
 
 empty link ref
 
-```````````````````````````````` example LinkRefs and ImageRefs: 1
+```````````````````````````````` example LinkRefs and ImageRefs: 1
 [ ]
 .
 <p>[ ]</p>
@@ -4691,7 +4691,7 @@ Document[0, 3]
 
 empty link ref
 
-```````````````````````````````` example LinkRefs and ImageRefs: 2
+```````````````````````````````` example LinkRefs and ImageRefs: 2
 [ ][]
 .
 <p>[ ][]</p>
@@ -4705,7 +4705,7 @@ Document[0, 5]
 
 empty link ref
 
-```````````````````````````````` example LinkRefs and ImageRefs: 3
+```````````````````````````````` example LinkRefs and ImageRefs: 3
 [ ][ ]
 .
 <p>[ ][ ]</p>
@@ -4719,7 +4719,7 @@ Document[0, 6]
 
 empty image ref
 
-```````````````````````````````` example LinkRefs and ImageRefs: 4
+```````````````````````````````` example LinkRefs and ImageRefs: 4
 ![ ]
 .
 <p>![ ]</p>
@@ -4733,7 +4733,7 @@ Document[0, 4]
 
 empty link ref
 
-```````````````````````````````` example LinkRefs and ImageRefs: 5
+```````````````````````````````` example LinkRefs and ImageRefs: 5
 ![ ][]
 .
 <p>![ ][]</p>
@@ -4747,7 +4747,7 @@ Document[0, 6]
 
 empty link ref
 
-```````````````````````````````` example LinkRefs and ImageRefs: 6
+```````````````````````````````` example LinkRefs and ImageRefs: 6
 ![ ][ ]
 .
 <p>![ ][ ]</p>
@@ -4763,7 +4763,7 @@ Document[0, 7]
 
 Extend block quote to next blank line
 
-```````````````````````````````` example(Block Quotes: 1) options(block-quote-extend)
+```````````````````````````````` example(Block Quotes: 1) options(block-quote-extend)
 > 1. one
 2. two
 .
@@ -4789,7 +4789,7 @@ Document[0, 15]
 without block quote to next blank line causes an interrupted list with a second list after the
 quote.
 
-```````````````````````````````` example Block Quotes: 2
+```````````````````````````````` example Block Quotes: 2
 > 1. one
 2. two
 .
@@ -4817,7 +4817,7 @@ Document[0, 15]
 
 Block quotes don't ignore interspersing blank lines
 
-```````````````````````````````` example Block Quotes: 3
+```````````````````````````````` example Block Quotes: 3
 > Block Quote
 >> Nested Quote
 >>> Another Quote
@@ -4865,7 +4865,7 @@ Document[0, 68]
 
 Block quotes ignore interspersing blank lines
 
-```````````````````````````````` example(Block Quotes: 4) options(block-ignore-blank)
+```````````````````````````````` example(Block Quotes: 4) options(block-ignore-blank)
 > Block Quote
 >> Nested Quote
 >>> Another Quote
@@ -4905,7 +4905,7 @@ Document[0, 68]
 Block quotes ignore interspersing blank lines but don't include any lines without prefix after
 blank lines
 
-```````````````````````````````` example(Block Quotes: 5) options(block-ignore-blank, block-quote-extend)
+```````````````````````````````` example(Block Quotes: 5) options(block-ignore-blank, block-quote-extend)
 > Block Quote 
 > this is still block quote 
 
@@ -4934,7 +4934,7 @@ Document[0, 59]
 
 Only attribute two last spaces of a hard line break space sequence
 
-```````````````````````````````` example(Hard Line Break Limit: 1) options(hard-line-break-limit)
+```````````````````````````````` example(Hard Line Break Limit: 1) options(hard-line-break-limit)
 hard    
 line breaks
 .
@@ -4951,7 +4951,7 @@ Document[0, 20]
 
 Only attribute two last spaces of a hard line break space sequence
 
-```````````````````````````````` example(Hard Line Break Limit: 2) options(hard-line-break-limit)
+```````````````````````````````` example(Hard Line Break Limit: 2) options(hard-line-break-limit)
 hard    ⏎
 line breaks
 .
@@ -4968,7 +4968,7 @@ Document[0, 21]
 
 default, all trailing spaces and eol
 
-```````````````````````````````` example Hard Line Break Limit: 3
+```````````````````````````````` example Hard Line Break Limit: 3
 hard  ⏎
 line breaks
 .
@@ -4985,7 +4985,7 @@ Document[0, 19]
 
 default, all trailing spaces and eol
 
-```````````````````````````````` example Hard Line Break Limit: 4
+```````````````````````````````` example Hard Line Break Limit: 4
 hard    ⏎
 line breaks
 .
@@ -5002,7 +5002,7 @@ Document[0, 21]
 
 EOL with \r should not include \r as part of text
 
-```````````````````````````````` example Hard Line Break Limit: 5
+```````````````````````````````` example Hard Line Break Limit: 5
 soft⏎
 line breaks
 .
@@ -5019,7 +5019,7 @@ Document[0, 17]
 
 EOL with \r should not include \r as part of text
 
-```````````````````````````````` example Hard Line Break Limit: 6
+```````````````````````````````` example Hard Line Break Limit: 6
 soft ⏎
 line breaks
 .
@@ -5038,7 +5038,7 @@ Document[0, 18]
 
 ### General
 
-```````````````````````````````` example(Source Position Attribute - General: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute - General: 1) options(src-pos)
 <http://url> 
 `code` 
 _text_ 
@@ -5152,7 +5152,7 @@ Document[0, 230]
 
 ### Fenced Code
 
-```````````````````````````````` example(Source Position Attribute - Fenced Code: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute - Fenced Code: 1) options(src-pos)
 ```text
 text
 ```
@@ -5169,7 +5169,7 @@ Document[0, 18]
 
 fenced code with trailing spaces and tabs on close
 
-```````````````````````````````` example(Source Position Attribute - Fenced Code: 2) options(src-pos)
+```````````````````````````````` example(Source Position Attribute - Fenced Code: 2) options(src-pos)
 ```text
 text
 ``` →
@@ -5190,7 +5190,7 @@ Document[0, 24]
 
 ### Paragraph
 
-```````````````````````````````` example(Source Position Attribute - Paragraph: 1) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 1) options(src-pos, src-pos-lines)
 text
 .
 <p md-pos="0-4"><span md-pos="0-4">text</span></p>
@@ -5203,7 +5203,7 @@ Document[0, 4]
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Source Position Attribute - Paragraph: 2) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 2) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -5351,7 +5351,7 @@ Document[0, 455]
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Source Position Attribute - Paragraph: 3) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 3) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -5372,7 +5372,7 @@ Document[0, 70]
 
 Wrap individual paragraph lines in source position marked spans with spanning inlines
 
-```````````````````````````````` example(Source Position Attribute - Paragraph: 4) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 4) options(src-pos, src-pos-lines)
 paragraph `test 
  with` multiple lazy **lines
 paragraph `test
@@ -5412,7 +5412,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Source Position Attribute - Paragraph: 5) options(src-pos, src-pos-lines-splice)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 5) options(src-pos, src-pos-lines-splice)
 paragraph `test 
  with` multiple lazy **lines
 paragraph `test
@@ -5454,7 +5454,7 @@ Document[0, 131]
 
 Wrap individual paragraph lines in source position marked spans tight list items
 
-```````````````````````````````` example(Source Position Attribute - Paragraph: 6) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 6) options(src-pos, src-pos-lines)
 - item
 with multiple lazy lines
 all should be src pos wrapped
@@ -5501,7 +5501,7 @@ Document[0, 137]
 
 Wrap individual paragraph lines in source position marked spans loose list items
 
-```````````````````````````````` example(Source Position Attribute - Paragraph: 7) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - Paragraph: 7) options(src-pos, src-pos-lines)
 - item
 
 - item
@@ -5568,7 +5568,7 @@ Document[0, 154]
 
 ### List Item
 
-```````````````````````````````` example(Source Position Attribute - List Item: 1) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - List Item: 1) options(src-pos, src-pos-lines)
 * a 
 .
 <ul>
@@ -5587,7 +5587,7 @@ Document[0, 4]
 
 no source wrap HTML
 
-```````````````````````````````` example(Source Position Attribute - HTML: 1) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute - HTML: 1) options(src-pos, src-pos-lines)
 <div>
 <p>HTML Block</p>
 </div>
@@ -5611,7 +5611,7 @@ Document[0, 64]
 
 source wrap HTML
 
-```````````````````````````````` example(Source Position Attribute - HTML: 2) options(src-pos, src-pos-lines, src-wrap-html)
+```````````````````````````````` example(Source Position Attribute - HTML: 2) options(src-pos, src-pos-lines, src-wrap-html)
 <div>
 <p>HTML Block</p>
 </div>
@@ -5637,7 +5637,7 @@ Document[0, 64]
 
 source wrap HTML blocks
 
-```````````````````````````````` example(Source Position Attribute - HTML: 3) options(src-pos, src-pos-lines, src-wrap-blocks)
+```````````````````````````````` example(Source Position Attribute - HTML: 3) options(src-pos, src-pos-lines, src-wrap-blocks)
 <div>
 <p>HTML Block</p>
 </div>
@@ -5665,7 +5665,7 @@ Document[0, 64]
 
 Allow funny URLs
 
-```````````````````````````````` example(Jekyll Macros in URLs: 1) options(jekyll-macros-in-urls)
+```````````````````````````````` example(Jekyll Macros in URLs: 1) options(jekyll-macros-in-urls)
 [ref]({{ macro }}/someDir/someFile.someExt)
 .
 <p><a href="%7B%7B%20macro%20%7D%7D/someDir/someFile.someExt">ref</a></p>
@@ -5679,7 +5679,7 @@ Document[0, 43]
 
 Allow funny URLs
 
-```````````````````````````````` example(Jekyll Macros in URLs: 2) options(jekyll-macros-in-urls)
+```````````````````````````````` example(Jekyll Macros in URLs: 2) options(jekyll-macros-in-urls)
 [ref]({{ macro }}/someDir/someFile.{{someExt}})
 .
 <p><a href="%7B%7B%20macro%20%7D%7D/someDir/someFile.%7B%7BsomeExt%7D%7D">ref</a></p>
@@ -5693,7 +5693,7 @@ Document[0, 47]
 
 Allow funny URLs
 
-```````````````````````````````` example(Jekyll Macros in URLs: 3) options(jekyll-macros-in-urls)
+```````````````````````````````` example(Jekyll Macros in URLs: 3) options(jekyll-macros-in-urls)
 [ref]({{ macro|()|$/| }}someFile.ext)
 .
 <p><a href="%7B%7B%20macro%7C()%7C$/%7C%20%7D%7DsomeFile.ext">ref</a></p>
@@ -5709,7 +5709,7 @@ Document[0, 37]
 
 Embedded headings Markdown Navigator options
 
-```````````````````````````````` example(Lists - Markdown Navigator: 1) options(list-markdown-navigator)
+```````````````````````````````` example(Lists - Markdown Navigator: 1) options(list-markdown-navigator)
 1. Some Lists
     
     # Test
@@ -5733,7 +5733,7 @@ Document[0, 31]
 
 Allow all breaks for list items
 
-```````````````````````````````` example(Lists - Markdown Navigator: 2) options(list-markdown-navigator)
+```````````````````````````````` example(Lists - Markdown Navigator: 2) options(list-markdown-navigator)
 paragraph
 * list item
 
@@ -5844,7 +5844,7 @@ Document[0, 162]
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists - Markdown Navigator: 3
+```````````````````````````````` example Lists - Markdown Navigator: 3
 - ****adsfasddasfdsa****
 .
 <ul>
@@ -5863,7 +5863,7 @@ Document[0, 24]
 
 ### Blank Lines in AST
 
-```````````````````````````````` example(Lists - Markdown Navigator - Blank Lines in AST: 1) options(keep-blank-lines)
+```````````````````````````````` example(Lists - Markdown Navigator - Blank Lines in AST: 1) options(keep-blank-lines)
 ## Heading
 
 
@@ -5951,7 +5951,7 @@ Document[0, 139]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists - Markdown Navigator - Blank Lines in AST: 2) options(keep-blank-lines)
+```````````````````````````````` example(Lists - Markdown Navigator - Blank Lines in AST: 2) options(keep-blank-lines)
 * item 1
   * item 1.1 
   
@@ -6007,7 +6007,7 @@ Document[0, 69]
 
 strong emphasis
 
-```````````````````````````````` example(Custom Style HTML: 1) options(style-strong-emphasis)
+```````````````````````````````` example(Custom Style HTML: 1) options(style-strong-emphasis)
 **bold**
 
 *italic*
@@ -6034,7 +6034,7 @@ Document[0, 28]
 
 emphasis
 
-```````````````````````````````` example(Custom Style HTML: 2) options(style-emphasis)
+```````````````````````````````` example(Custom Style HTML: 2) options(style-emphasis)
 **bold**
 
 *italic*
@@ -6061,7 +6061,7 @@ Document[0, 28]
 
 code
 
-```````````````````````````````` example(Custom Style HTML: 3) options(style-code)
+```````````````````````````````` example(Custom Style HTML: 3) options(style-code)
 **bold**
 
 *italic*
@@ -6088,7 +6088,7 @@ Document[0, 28]
 
 ## Suppress HTML Block EOL
 
-```````````````````````````````` example(Suppress HTML Block EOL: 1) options(suppress-format-eol)
+```````````````````````````````` example(Suppress HTML Block EOL: 1) options(suppress-format-eol)
 
 ---
 
@@ -6115,7 +6115,7 @@ Document[0, 32]
 
 do not unescape entities
 
-```````````````````````````````` example(Unescape Entities: 1) options(no-unescape-entities)
+```````````````````````````````` example(Unescape Entities: 1) options(no-unescape-entities)
 stuff &Aacute; stuff
 .
 <p>stuff &Aacute; stuff</p>
@@ -6130,7 +6130,7 @@ Document[0, 20]
 
 ## Deep HTML Parsing
 
-```````````````````````````````` example(Deep HTML Parsing: 1) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 1) options(deep-html-parsing)
 <div>
 
   This is markdown text
@@ -6154,7 +6154,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Deep HTML Parsing: 2) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 2) options(deep-html-parsing)
 <div><strong>
 
   This is markdown text
@@ -6178,7 +6178,7 @@ Document[0, 74]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Deep HTML Parsing: 3) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 3) options(deep-html-parsing)
 <div><!--
 
   This is comment
@@ -6210,7 +6210,7 @@ Document[0, 98]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Deep HTML Parsing: 4) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 4) options(deep-html-parsing)
 <div>
   <!--
 
@@ -6244,7 +6244,7 @@ Document[0, 101]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Deep HTML Parsing: 5) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 5) options(deep-html-parsing)
 <hr>
 # Heading
 .
@@ -6256,7 +6256,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Deep HTML Parsing: 6) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 6) options(deep-html-parsing)
 <div attr
     attr1="test"
 >
@@ -6280,7 +6280,7 @@ Document[0, 61]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Deep HTML Parsing: 7) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 7) options(deep-html-parsing)
 <div attr
     attr1="test"
     
@@ -6307,7 +6307,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Deep HTML Parsing: 8) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 8) options(deep-html-parsing)
 <p>par</p>
     <ul>
       <li>list item</li>
@@ -6323,7 +6323,7 @@ Document[0, 54]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Deep HTML Parsing: 9) options(deep-html-parsing)
+```````````````````````````````` example(Deep HTML Parsing: 9) options(deep-html-parsing)
 <br>some text
 .
 <p><br>some text</p>
@@ -6339,7 +6339,7 @@ Document[0, 13]
 
 Directional punctuation delimiter parsing
 
-```````````````````````````````` example Directional punctuations: 1
+```````````````````````````````` example Directional punctuations: 1
 可以**foo()**可以
 .
 <p>可以**foo()**可以</p>
@@ -6350,7 +6350,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Directional punctuations: 2
+```````````````````````````````` example Directional punctuations: 2
 可以**()foo()**可以
 .
 <p>可以**()foo()**可以</p>
@@ -6361,7 +6361,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Directional punctuations: 3
+```````````````````````````````` example Directional punctuations: 3
 可以**()foo**可以
 .
 <p>可以**()foo**可以</p>
@@ -6374,7 +6374,7 @@ Document[0, 13]
 
 Directional punctuation delimiter parsing
 
-```````````````````````````````` example(Directional punctuations: 4) options(directional-punctuation)
+```````````````````````````````` example(Directional punctuations: 4) options(directional-punctuation)
 可以**foo()**可以
 .
 <p>可以<strong>foo()</strong>可以</p>
@@ -6388,7 +6388,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Directional punctuations: 5) options(directional-punctuation)
+```````````````````````````````` example(Directional punctuations: 5) options(directional-punctuation)
 可以**()foo()**可以
 .
 <p>可以<strong>()foo()</strong>可以</p>
@@ -6402,7 +6402,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Directional punctuations: 6) options(directional-punctuation)
+```````````````````````````````` example(Directional punctuations: 6) options(directional-punctuation)
 可以**()foo**可以
 .
 <p>可以<strong>()foo</strong>可以</p>
@@ -6416,7 +6416,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Directional punctuations: 7) options(directional-punctuation)
+```````````````````````````````` example(Directional punctuations: 7) options(directional-punctuation)
 可以**foo(**可以
 .
 <p>可以**foo(**可以</p>
@@ -6427,7 +6427,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Directional punctuations: 8) options(directional-punctuation)
+```````````````````````````````` example(Directional punctuations: 8) options(directional-punctuation)
 可以**)foo(**可以
 .
 <p>可以**)foo(**可以</p>
@@ -6438,7 +6438,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Directional punctuations: 9) options(directional-punctuation)
+```````````````````````````````` example(Directional punctuations: 9) options(directional-punctuation)
 可以**)foo**可以
 .
 <p>可以**)foo**可以</p>
@@ -6453,7 +6453,7 @@ Document[0, 12]
 
 Multi-line code span in paragraph
 
-```````````````````````````````` example(Soft-Breaks in code: 1) options(code-soft-breaks)
+```````````````````````````````` example(Soft-Breaks in code: 1) options(code-soft-breaks)
 line ```{
 "key1": "xxx",
 "key2": [
@@ -6490,7 +6490,7 @@ Document[0, 55]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Soft-Breaks in code: 2) options(code-soft-break-spaces)
+```````````````````````````````` example(Soft-Breaks in code: 2) options(code-soft-break-spaces)
 line ```{
 "key1": "xxx",
 "key2": [
@@ -6523,7 +6523,7 @@ Document[0, 55]
 
 ## Spec 0.28 Changes
 
-```````````````````````````````` example Spec 0.28 Changes: 1
+```````````````````````````````` example Spec 0.28 Changes: 1
 ***foo***
 .
 <p><em><strong>foo</strong></em></p>
@@ -6536,7 +6536,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 2
+```````````````````````````````` example Spec 0.28 Changes: 2
 _____foo_____
 .
 <p><em><strong><strong>foo</strong></strong></em></p>
@@ -6552,7 +6552,7 @@ Document[0, 13]
 
 spec 0.27 compatibility
 
-```````````````````````````````` example(Spec 0.28 Changes: 3) options(spec-027)
+```````````````````````````````` example(Spec 0.28 Changes: 3) options(spec-027)
 ***foo***
 .
 <p><strong><em>foo</em></strong></p>
@@ -6565,7 +6565,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Spec 0.28 Changes: 4) options(spec-027)
+```````````````````````````````` example(Spec 0.28 Changes: 4) options(spec-027)
 _____foo_____
 .
 <p><strong><strong><em>foo</em></strong></strong></p>
@@ -6579,7 +6579,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 5
+```````````````````````````````` example Spec 0.28 Changes: 5
 [link](foo(and(bar)))
 .
 <p><a href="foo(and(bar))">link</a></p>
@@ -6591,7 +6591,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 6
+```````````````````````````````` example Spec 0.28 Changes: 6
 [link](foo(and(bar))
 .
 <p>[link](foo(and(bar))</p>
@@ -6604,7 +6604,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 7
+```````````````````````````````` example Spec 0.28 Changes: 7
 *foo [bar](/url)*
 .
 <p><em>foo <a href="/url">bar</a></em></p>
@@ -6618,7 +6618,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 8
+```````````````````````````````` example Spec 0.28 Changes: 8
 [link](/my uri)
 .
 <p>[link](/my uri)</p>
@@ -6631,7 +6631,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 9
+```````````````````````````````` example Spec 0.28 Changes: 9
 [link](</my uri>)
 .
 <p>[link](&lt;/my uri&gt;)</p>
@@ -6644,7 +6644,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 10
+```````````````````````````````` example Spec 0.28 Changes: 10
 [link](foo
 bar)
 .
@@ -6661,7 +6661,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 11
+```````````````````````````````` example Spec 0.28 Changes: 11
 [link](<foo
 bar>)
 .
@@ -6678,7 +6678,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 12
+```````````````````````````````` example Spec 0.28 Changes: 12
 [link](<foo(and(bar)>)
 .
 <p><a href="foo(and(bar)">link</a></p>
@@ -6690,7 +6690,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 13
+```````````````````````````````` example Spec 0.28 Changes: 13
 ![foo ![bar](/url)](/url2)
 .
 <p><img src="/url2" alt="foo bar" /></p>
@@ -6704,7 +6704,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 14
+```````````````````````````````` example Spec 0.28 Changes: 14
 ![foo [bar](/url)](/url2)
 .
 <p><img src="/url2" alt="foo bar" /></p>
@@ -6718,7 +6718,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 15
+```````````````````````````````` example Spec 0.28 Changes: 15
 [![moon](moon.jpg)](/uri)
 .
 <p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
@@ -6733,7 +6733,7 @@ Document[0, 25]
 
 However, links may not contain other links, at any level of nesting.
 
-```````````````````````````````` example Spec 0.28 Changes: 16
+```````````````````````````````` example Spec 0.28 Changes: 16
 [foo [bar](/uri)](/uri)
 .
 <p>[foo <a href="/uri">bar</a>](/uri)</p>
@@ -6747,7 +6747,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 17
+```````````````````````````````` example Spec 0.28 Changes: 17
 [foo *[bar [baz](/uri)](/uri)*](/uri)
 .
 <p>[foo <em>[bar <a href="/uri">baz</a>](/uri)</em>](/uri)</p>
@@ -6765,7 +6765,7 @@ Document[0, 37]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 18
+```````````````````````````````` example Spec 0.28 Changes: 18
 ![[[foo](uri1)](uri2)](uri3)
 .
 <p><img src="uri3" alt="[foo](uri2)" /></p>
@@ -6780,7 +6780,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec 0.28 Changes: 19
+```````````````````````````````` example Spec 0.28 Changes: 19
 [link](<foo(and(bar)>)
 .
 <p><a href="foo(and(bar)">link</a></p>
@@ -6794,7 +6794,7 @@ Document[0, 22]
 
 Line source tracing should not split links and should chunk text content into their own spans
 
-```````````````````````````````` example(Spec 0.28 Changes: 20) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Spec 0.28 Changes: 20) options(src-pos, src-pos-lines)
 [hello
 world](#test)
 .
@@ -6810,7 +6810,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Spec 0.28 Changes: 21) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Spec 0.28 Changes: 21) options(src-pos, src-pos-lines)
 [hello **bold
   world**](#test)
 .
@@ -6830,7 +6830,7 @@ Document[0, 31]
 
 ## Custom List Markers
 
-```````````````````````````````` example(Custom List Markers: 1) options(custom-list-marker)
+```````````````````````````````` example(Custom List Markers: 1) options(custom-list-marker)
 * list item
 + lazy continuation 
 - lazy continuation 
@@ -6853,7 +6853,7 @@ Document[0, 53]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Custom List Markers: 2) options(custom-list-marker)
+```````````````````````````````` example(Custom List Markers: 2) options(custom-list-marker)
 * list item
 / another list item
 / another list item 2
@@ -6883,7 +6883,7 @@ Document[0, 53]
 
 ## Space in URL
 
-```````````````````````````````` example(Space in URL: 1) options(url-spaces)
+```````````````````````````````` example(Space in URL: 1) options(url-spaces)
 [some file](some file.md)
 .
 <p><a href="some%20file.md">some file</a></p>
@@ -6897,7 +6897,7 @@ Document[0, 25]
 
 ## No p tags
 
-```````````````````````````````` example(No p tags: 1) options(no-p-tags)
+```````````````````````````````` example(No p tags: 1) options(no-p-tags)
 First paragraph
 
 Second paragraph

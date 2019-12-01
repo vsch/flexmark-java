@@ -16,7 +16,7 @@ Converts markdown to docx
 
 All headings
 
-```````````````````````````````` example(Headings: 1) options(full-render)
+```````````````````````````````` example(Headings: 1) options(full-render)
 # Heading 1
 ## Heading 2
 ### Heading 3
@@ -2309,7 +2309,7 @@ All headings
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 2) options(full-render)
+```````````````````````````````` example(Headings: 2) options(full-render)
 # Heading
 .
 <?xml version="1.0" encoding="UTF-8"?>
@@ -4546,7 +4546,7 @@ All headings
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 3
+```````````````````````````````` example Headings: 3
 ## Heading
 .
 <w:body>
@@ -4564,7 +4564,7 @@ All headings
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 4
+```````````````````````````````` example Headings: 4
 ### Heading
 .
 <w:body>
@@ -4582,7 +4582,7 @@ All headings
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 5
+```````````````````````````````` example Headings: 5
 #### Heading
 .
 <w:body>
@@ -4600,7 +4600,7 @@ All headings
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 6
+```````````````````````````````` example Headings: 6
 ##### Heading
 .
 <w:body>
@@ -4618,7 +4618,7 @@ All headings
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 7
+```````````````````````````````` example Headings: 7
 ###### Heading
 .
 <w:body>
@@ -4636,7 +4636,7 @@ All headings
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 8
+```````````````````````````````` example Headings: 8
 Heading
 =======
 .
@@ -4655,7 +4655,7 @@ Heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 9
+```````````````````````````````` example Headings: 9
 Heading
 -------
 .

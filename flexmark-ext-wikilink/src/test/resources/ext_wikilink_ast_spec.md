@@ -15,7 +15,7 @@ page.
 
 no spaces between brackets
 
-```````````````````````````````` example WikiLinks: 1
+```````````````````````````````` example WikiLinks: 1
 [ [not wiki link]]
 .
 <p>[ [not wiki link]]</p>
@@ -31,7 +31,7 @@ Document[0, 18]
 
 no spaces between brackets
 
-```````````````````````````````` example WikiLinks: 2
+```````````````````````````````` example WikiLinks: 2
 [[not wiki link] ]
 .
 <p>[[not wiki link] ]</p>
@@ -47,7 +47,7 @@ Document[0, 18]
 
 simple wiki link
 
-```````````````````````````````` example WikiLinks: 3
+```````````````````````````````` example WikiLinks: 3
 [[wiki link]]
 .
 <p><a href="wiki-link">wiki link</a></p>
@@ -61,7 +61,7 @@ Document[0, 13]
 
 simple wiki link with anchor ref
 
-```````````````````````````````` example WikiLinks: 4
+```````````````````````````````` example WikiLinks: 4
 [[wiki link#anchor-ref]]
 .
 <p><a href="wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
@@ -75,7 +75,7 @@ Document[0, 24]
 
 simple wiki link with anchor ref
 
-```````````````````````````````` example(WikiLinks: 5) options(allow-anchors)
+```````````````````````````````` example(WikiLinks: 5) options(allow-anchors)
 [[wiki link#anchor-ref]]
 .
 <p><a href="wiki-link#anchor-ref">wiki link</a></p>
@@ -89,7 +89,7 @@ Document[0, 24]
 
 simple wiki link with anchor-ref
 
-```````````````````````````````` example(WikiLinks: 6) options(allow-anchors, allow-anchor-escape)
+```````````````````````````````` example(WikiLinks: 6) options(allow-anchors, allow-anchor-escape)
 [[wiki link#anchor-ref]]
 .
 <p><a href="wiki-link#anchor-ref">wiki link</a></p>
@@ -103,7 +103,7 @@ Document[0, 24]
 
 simple wiki link with escaped anchor-ref
 
-```````````````````````````````` example WikiLinks: 7
+```````````````````````````````` example WikiLinks: 7
 [[wiki link#anchor-ref]]
 [[wiki link\#anchor-ref]]
 [[wiki link\\#anchor-ref]]
@@ -132,7 +132,7 @@ Document[0, 105]
 
 simple wiki link with escaped anchor-ref
 
-```````````````````````````````` example(WikiLinks: 8) options(allow-anchors)
+```````````````````````````````` example(WikiLinks: 8) options(allow-anchors)
 [[wiki link#anchor-ref]]
 [[wiki link\#anchor-ref]]
 [[wiki link\\#anchor-ref]]
@@ -161,7 +161,7 @@ Document[0, 105]
 
 simple wiki link with escaped anchor-ref
 
-```````````````````````````````` example(WikiLinks: 9) options(allow-anchors, allow-anchor-escape)
+```````````````````````````````` example(WikiLinks: 9) options(allow-anchors, allow-anchor-escape)
 [[wiki link#anchor-ref]]
 [[wiki link\#anchor-ref]]
 [[wiki link\\#anchor-ref]]
@@ -190,7 +190,7 @@ Document[0, 105]
 
 wiki link with text
 
-```````````````````````````````` example WikiLinks: 10
+```````````````````````````````` example WikiLinks: 10
 [[wiki text|wiki link]]
 .
 <p><a href="wiki-link">wiki text</a></p>
@@ -204,7 +204,7 @@ Document[0, 23]
 
 wiki link with text, links first option
 
-```````````````````````````````` example(WikiLinks: 11) options(links-first)
+```````````````````````````````` example(WikiLinks: 11) options(links-first)
 [[wiki link|wiki text]]
 .
 <p><a href="wiki-link">wiki text</a></p>
@@ -218,7 +218,7 @@ Document[0, 23]
 
 wiki link with text
 
-```````````````````````````````` example WikiLinks: 12
+```````````````````````````````` example WikiLinks: 12
 [[wiki text\|wiki link]]
 .
 <p><a href="wiki-link">wiki text\</a></p>
@@ -232,7 +232,7 @@ Document[0, 24]
 
 wiki link with text, links first option
 
-```````````````````````````````` example(WikiLinks: 13) options(links-first)
+```````````````````````````````` example(WikiLinks: 13) options(links-first)
 [[wiki link\|wiki text]]
 .
 <p><a href="wiki-link\">wiki text</a></p>
@@ -246,7 +246,7 @@ Document[0, 24]
 
 wiki link with text
 
-```````````````````````````````` example(WikiLinks: 14) options(allow-pipe-escape)
+```````````````````````````````` example(WikiLinks: 14) options(allow-pipe-escape)
 [[wiki text\|wiki link]]
 .
 <p><a href="wiki-text|wiki-link">wiki text|wiki link</a></p>
@@ -260,7 +260,7 @@ Document[0, 24]
 
 wiki link with text, links first option
 
-```````````````````````````````` example(WikiLinks: 15) options(links-first, allow-pipe-escape)
+```````````````````````````````` example(WikiLinks: 15) options(links-first, allow-pipe-escape)
 [[wiki link\|wiki text]]
 .
 <p><a href="wiki-link|wiki-text">wiki link|wiki text</a></p>
@@ -274,7 +274,7 @@ Document[0, 24]
 
 wiki link with text, muliple pipes with escapes
 
-```````````````````````````````` example WikiLinks: 16
+```````````````````````````````` example WikiLinks: 16
 [[wiki text|more text|wiki link]]
 [[wiki text\|more text|wiki link]]
 [[wiki text\\|more text|wiki link]]
@@ -313,7 +313,7 @@ Document[0, 212]
 
 wiki link with text, multiple pipes with escapes, links first option
 
-```````````````````````````````` example(WikiLinks: 17) options(links-first)
+```````````````````````````````` example(WikiLinks: 17) options(links-first)
 [[wiki link|wiki text|more text]]
 [[wiki link\|wiki text|more text]]
 [[wiki text\\|more text|wiki link]]
@@ -352,7 +352,7 @@ Document[0, 212]
 
 wiki link with text, muliple pipes with escapes
 
-```````````````````````````````` example(WikiLinks: 18) options(allow-pipe-escape)
+```````````````````````````````` example(WikiLinks: 18) options(allow-pipe-escape)
 [[wiki text|more text|wiki link]]
 [[wiki text\|more text|wiki link]]
 [[wiki text\\|more text|wiki link]]
@@ -391,7 +391,7 @@ Document[0, 212]
 
 wiki link with text, multiple pipes with escapes, links first option
 
-```````````````````````````````` example(WikiLinks: 19) options(links-first, allow-pipe-escape)
+```````````````````````````````` example(WikiLinks: 19) options(links-first, allow-pipe-escape)
 [[wiki link|wiki text|more text]]
 [[wiki link\|wiki text|more text]]
 [[wiki text\\|more text|wiki link]]
@@ -430,7 +430,7 @@ Document[0, 212]
 
 simple wiki link with inlines disabled
 
-```````````````````````````````` example WikiLinks: 20
+```````````````````````````````` example WikiLinks: 20
 [[**wiki link**]]
 .
 <p><a href="**wiki-link**">**wiki link**</a></p>
@@ -444,7 +444,7 @@ Document[0, 17]
 
 simple wiki link with inlines
 
-```````````````````````````````` example(WikiLinks: 21) options(allow-inlines)
+```````````````````````````````` example(WikiLinks: 21) options(allow-inlines)
 [[**wiki link**]]
 .
 <p><a href="wiki-link"><strong>wiki link</strong></a></p>
@@ -459,7 +459,7 @@ Document[0, 17]
 
 wiki link with text with inlines
 
-```````````````````````````````` example(WikiLinks: 22) options(allow-inlines)
+```````````````````````````````` example(WikiLinks: 22) options(allow-inlines)
 [[**wiki text**|wiki link]]
 .
 <p><a href="wiki-link"><strong>wiki text</strong></a></p>
@@ -474,7 +474,7 @@ Document[0, 27]
 
 wiki link with text with inlines split
 
-```````````````````````````````` example(WikiLinks: 23) options(allow-inlines)
+```````````````````````````````` example(WikiLinks: 23) options(allow-inlines)
 [[**wiki text|wiki** link]]
 .
 <p><a href="wiki**-link">**wiki text</a></p>
@@ -488,7 +488,7 @@ Document[0, 27]
 
 wiki link with text, links first option with inlines
 
-```````````````````````````````` example(WikiLinks: 24) options(links-first, allow-inlines)
+```````````````````````````````` example(WikiLinks: 24) options(links-first, allow-inlines)
 [[wiki link|**wiki text**]]
 .
 <p><a href="wiki-link"><strong>wiki text</strong></a></p>
@@ -503,7 +503,7 @@ Document[0, 27]
 
 wiki link with text, links first option with inlines split
 
-```````````````````````````````` example(WikiLinks: 25) options(links-first, allow-inlines)
+```````````````````````````````` example(WikiLinks: 25) options(links-first, allow-inlines)
 [[wiki **link|wiki** text]]
 .
 <p><a href="wiki-**link">wiki** text</a></p>
@@ -517,7 +517,7 @@ Document[0, 27]
 
 wiki link with text, muliple pipes with escapes
 
-```````````````````````````````` example(WikiLinks: 26) options(allow-inlines)
+```````````````````````````````` example(WikiLinks: 26) options(allow-inlines)
 [[wiki text|more text|wiki link]]
 [[wiki text\|more text|wiki link]]
 [[wiki **text\|more** text|wiki link]]
@@ -561,7 +561,7 @@ Document[0, 257]
 
 wiki link with text, multiple pipes with escapes, links first option
 
-```````````````````````````````` example(WikiLinks: 27) options(links-first, allow-inlines)
+```````````````````````````````` example(WikiLinks: 27) options(links-first, allow-inlines)
 [[wiki link|wiki text|more text]]
 [[wiki link\|wiki text|more text]]
 [[wiki **text\|more** text|wiki link]]
@@ -605,7 +605,7 @@ Document[0, 257]
 
 wiki link with text, muliple pipes with escapes
 
-```````````````````````````````` example(WikiLinks: 28) options(allow-pipe-escape, allow-inlines)
+```````````````````````````````` example(WikiLinks: 28) options(allow-pipe-escape, allow-inlines)
 [[wiki text|more text|wiki link]]
 [[wiki text\|more text|wiki link]]
 [[wiki **text\|more** text|wiki link]]
@@ -655,7 +655,7 @@ Document[0, 257]
 
 wiki link with text, multiple pipes with escapes, links first option
 
-```````````````````````````````` example(WikiLinks: 29) options(links-first, allow-pipe-escape, allow-inlines)
+```````````````````````````````` example(WikiLinks: 29) options(links-first, allow-pipe-escape, allow-inlines)
 [[wiki link|wiki text|more text]]
 [[wiki link\|wiki text|more text]]
 [[wiki **text\|more** text|wiki link]]
@@ -702,7 +702,7 @@ Document[0, 257]
 
 simple wiki link with ! before
 
-```````````````````````````````` example WikiLinks: 30
+```````````````````````````````` example WikiLinks: 30
 ![[wiki link]]
 .
 <p>!<a href="wiki-link">wiki link</a></p>
@@ -717,7 +717,7 @@ Document[0, 14]
 
 wiki link with text with ! before
 
-```````````````````````````````` example WikiLinks: 31
+```````````````````````````````` example WikiLinks: 31
 ![[wiki text|wiki link]]
 .
 <p>!<a href="wiki-link">wiki text</a></p>
@@ -732,7 +732,7 @@ Document[0, 24]
 
 reference following will be a reference, even if not defined
 
-```````````````````````````````` example WikiLinks: 32
+```````````````````````````````` example WikiLinks: 32
 [[wiki link]][ref]
 .
 <p><a href="wiki-link">wiki link</a>[ref]</p>
@@ -748,7 +748,7 @@ Document[0, 18]
 
 reference following will be a reference
 
-```````````````````````````````` example WikiLinks: 33
+```````````````````````````````` example WikiLinks: 33
 [[wiki link]][ref]
 
 [ref]: /url
@@ -767,7 +767,7 @@ Document[0, 31]
 
 dummy reference following will be an empty reference
 
-```````````````````````````````` example WikiLinks: 34
+```````````````````````````````` example WikiLinks: 34
 [[wiki link]][]
 .
 <p><a href="wiki-link">wiki link</a>[]</p>
@@ -782,7 +782,7 @@ Document[0, 15]
 
 reference inside is not a wiki link but a link ref with brackets around it
 
-```````````````````````````````` example WikiLinks: 35
+```````````````````````````````` example WikiLinks: 35
 [[not wiki link][ref]]
 .
 <p>[[not wiki link][ref]]</p>
@@ -798,7 +798,7 @@ Document[0, 22]
 
 dummy reference inside is not a wiki link but a link ref with brackets around it
 
-```````````````````````````````` example WikiLinks: 36
+```````````````````````````````` example WikiLinks: 36
 [[not wiki link][]]
 .
 <p>[[not wiki link][]]</p>
@@ -812,7 +812,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example WikiLinks: 37
+```````````````````````````````` example WikiLinks: 37
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
 <p><a href="wiki-link">wiki link</a> [^link][ref] <a href="^wiki-link">^wiki link</a></p>
@@ -832,7 +832,7 @@ Document[0, 41]
 
 Exclamation before is just text
 
-```````````````````````````````` example WikiLinks: 38
+```````````````````````````````` example WikiLinks: 38
 ![[wiki link]] [^link][ref] [[^wiki link]] [[wiki]][ref]
 .
 <p>!<a href="wiki-link">wiki link</a> [^link][ref] <a href="^wiki-link">^wiki link</a> <a href="wiki">wiki</a>[ref]</p>
@@ -858,7 +858,7 @@ Document[0, 56]
 
 Custom extension
 
-```````````````````````````````` example(WikiLinks: 39) options(link-ext)
+```````````````````````````````` example(WikiLinks: 39) options(link-ext)
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
 <p><a href="wiki-link.html">wiki link</a> [^link][ref] <a href="^wiki-link.html">^wiki link</a></p>
@@ -878,7 +878,7 @@ Document[0, 41]
 
 Custom prefix
 
-```````````````````````````````` example(WikiLinks: 40) options(link-prefix)
+```````````````````````````````` example(WikiLinks: 40) options(link-prefix)
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
 <p><a href="/prefix/wiki-link">wiki link</a> [^link][ref] <a href="/prefix/^wiki-link">^wiki link</a></p>
@@ -898,7 +898,7 @@ Document[0, 41]
 
 With empty anchor ref
 
-```````````````````````````````` example WikiLinks: 41
+```````````````````````````````` example WikiLinks: 41
 [[wiki link#]] 
 .
 <p><a href="wiki-link#">wiki link#</a></p>
@@ -912,7 +912,7 @@ Document[0, 15]
 
 With empty anchor ref
 
-```````````````````````````````` example(WikiLinks: 42) options(allow-anchors)
+```````````````````````````````` example(WikiLinks: 42) options(allow-anchors)
 [[wiki link#]] 
 .
 <p><a href="wiki-link#">wiki link</a></p>
@@ -926,7 +926,7 @@ Document[0, 15]
 
 With Anchor ref
 
-```````````````````````````````` example WikiLinks: 43
+```````````````````````````````` example WikiLinks: 43
 [[wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
@@ -940,7 +940,7 @@ Document[0, 25]
 
 With Anchor ref
 
-```````````````````````````````` example(WikiLinks: 44) options(allow-anchors)
+```````````````````````````````` example(WikiLinks: 44) options(allow-anchors)
 [[wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki link</a></p>
@@ -954,7 +954,7 @@ Document[0, 25]
 
 With text, empty anchor ref
 
-```````````````````````````````` example WikiLinks: 45
+```````````````````````````````` example WikiLinks: 45
 [[wiki text|wiki link#]] 
 .
 <p><a href="wiki-link#">wiki text</a></p>
@@ -968,7 +968,7 @@ Document[0, 25]
 
 With text, empty anchor ref
 
-```````````````````````````````` example(WikiLinks: 46) options(allow-anchors)
+```````````````````````````````` example(WikiLinks: 46) options(allow-anchors)
 [[wiki text|wiki link#]] 
 .
 <p><a href="wiki-link#">wiki text</a></p>
@@ -982,7 +982,7 @@ Document[0, 25]
 
 With text, anchor ref
 
-```````````````````````````````` example WikiLinks: 47
+```````````````````````````````` example WikiLinks: 47
 [[wiki text|wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki text</a></p>
@@ -996,7 +996,7 @@ Document[0, 35]
 
 With text, anchor ref
 
-```````````````````````````````` example(WikiLinks: 48) options(allow-anchors)
+```````````````````````````````` example(WikiLinks: 48) options(allow-anchors)
 [[wiki text|wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki text</a></p>
@@ -1010,7 +1010,7 @@ Document[0, 35]
 
 Links first, with text, empty anchor ref
 
-```````````````````````````````` example(WikiLinks: 49) options(links-first)
+```````````````````````````````` example(WikiLinks: 49) options(links-first)
 [[wiki link#|wiki text]] 
 .
 <p><a href="wiki-link#">wiki text</a></p>
@@ -1024,7 +1024,7 @@ Document[0, 25]
 
 Links first, with text, anchor ref
 
-```````````````````````````````` example(WikiLinks: 50) options(links-first)
+```````````````````````````````` example(WikiLinks: 50) options(links-first)
 [[wiki link#anchor-ref|wiki text]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki text</a></p>
@@ -1038,7 +1038,7 @@ Document[0, 35]
 
 Links first, with text, anchor ref
 
-```````````````````````````````` example(WikiLinks: 51) options(links-first, allow-anchors)
+```````````````````````````````` example(WikiLinks: 51) options(links-first, allow-anchors)
 [[wiki link#anchor-ref|wiki text]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki text</a></p>
@@ -1052,7 +1052,7 @@ Document[0, 35]
 
 Custom extension with empty Anchor ref
 
-```````````````````````````````` example(WikiLinks: 52) options(link-ext)
+```````````````````````````````` example(WikiLinks: 52) options(link-ext)
 [[wiki link#]] 
 .
 <p><a href="wiki-link.html#">wiki link#</a></p>
@@ -1066,7 +1066,7 @@ Document[0, 15]
 
 Custom extension with empty Anchor ref
 
-```````````````````````````````` example(WikiLinks: 53) options(link-ext, allow-anchors)
+```````````````````````````````` example(WikiLinks: 53) options(link-ext, allow-anchors)
 [[wiki link#]] 
 .
 <p><a href="wiki-link.html#">wiki link</a></p>
@@ -1080,7 +1080,7 @@ Document[0, 15]
 
 Custom extension with anchor ref
 
-```````````````````````````````` example(WikiLinks: 54) options(link-ext)
+```````````````````````````````` example(WikiLinks: 54) options(link-ext)
 [[wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link.html#anchor-ref">wiki link#anchor-ref</a></p>
@@ -1094,7 +1094,7 @@ Document[0, 25]
 
 Custom extension with anchor ref
 
-```````````````````````````````` example(WikiLinks: 55) options(link-ext, allow-anchors)
+```````````````````````````````` example(WikiLinks: 55) options(link-ext, allow-anchors)
 [[wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link.html#anchor-ref">wiki link</a></p>
@@ -1108,7 +1108,7 @@ Document[0, 25]
 
 Custom prefix with empty anchor ref
 
-```````````````````````````````` example(WikiLinks: 56) options(link-prefix)
+```````````````````````````````` example(WikiLinks: 56) options(link-prefix)
 [[wiki link#]]
 .
 <p><a href="/prefix/wiki-link#">wiki link#</a></p>
@@ -1122,7 +1122,7 @@ Document[0, 14]
 
 Custom prefix with empty anchor ref
 
-```````````````````````````````` example(WikiLinks: 57) options(link-prefix, allow-anchors)
+```````````````````````````````` example(WikiLinks: 57) options(link-prefix, allow-anchors)
 [[wiki link#]]
 .
 <p><a href="/prefix/wiki-link#">wiki link</a></p>
@@ -1136,7 +1136,7 @@ Document[0, 14]
 
 Custom prefix with anchor ref
 
-```````````````````````````````` example(WikiLinks: 58) options(link-prefix)
+```````````````````````````````` example(WikiLinks: 58) options(link-prefix)
 [[wiki link#anchor-ref]]
 .
 <p><a href="/prefix/wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
@@ -1150,7 +1150,7 @@ Document[0, 24]
 
 Custom prefix with anchor ref
 
-```````````````````````````````` example(WikiLinks: 59) options(link-prefix, allow-anchors)
+```````````````````````````````` example(WikiLinks: 59) options(link-prefix, allow-anchors)
 [[wiki link#anchor-ref]]
 .
 <p><a href="/prefix/wiki-link#anchor-ref">wiki link</a></p>
@@ -1164,9 +1164,11 @@ Document[0, 24]
 
 Custom link escape
 
-With configuration options `LINK_ESCAPE_CHARS` and `LINK_REPLACE_CHARS` it is possible to change the link escaping. `LINK_ESCAPE_CHARS` gives the character to escape in links. `LINK_REPLACE_CHARS` gives the correponding replacement characters.
+With configuration options `LINK_ESCAPE_CHARS` and `LINK_REPLACE_CHARS` it is possible to change
+the link escaping. `LINK_ESCAPE_CHARS` gives the character to escape in links.
+`LINK_REPLACE_CHARS` gives the correponding replacement characters.
 
-```````````````````````````````` example(WikiLinks: 60) options(custom-link-escape)
+```````````````````````````````` example(WikiLinks: 60) options(custom-link-escape)
 See [[My Page]].
 .
 <p>See <a href="My_Page">My Page</a>.</p>
@@ -1182,9 +1184,10 @@ Document[0, 16]
 
 Links to virtual directories
 
-With configuration options `LINK_ESCAPE_CHARS` and `LINK_REPLACE_CHARS` it is possible to create wiki links to virtual directories (links containing the `/` character.
+With configuration options `LINK_ESCAPE_CHARS` and `LINK_REPLACE_CHARS` it is possible to create
+wiki links to virtual directories (links containing the `/` character.
 
-```````````````````````````````` example(WikiLinks: 61) options(custom-link-escape)
+```````````````````````````````` example(WikiLinks: 61) options(custom-link-escape)
 See [[directory/WikiPage]].
 .
 <p>See <a href="directory/WikiPage">directory/WikiPage</a>.</p>
@@ -1200,7 +1203,7 @@ Document[0, 27]
 
 Absolute link prefix
 
-```````````````````````````````` example(WikiLinks: 62) options(custom-link-escape,link-prefix-absolute)
+```````````````````````````````` example(WikiLinks: 62) options(custom-link-escape, link-prefix-absolute)
 [[Page]]
 
 [[dir/Page]]
@@ -1232,7 +1235,7 @@ Document[0, 48]
 
 Absolute image prefix
 
-```````````````````````````````` example(WikiLinks: 63) options(wiki-images,custom-link-escape,image-prefix-absolute)
+```````````````````````````````` example(WikiLinks: 63) options(wiki-images, custom-link-escape, image-prefix-absolute)
 ![[Img]]
 
 ![[dir/Img]]
@@ -1266,7 +1269,7 @@ Document[0, 48]
 
 With empty anchor ref
 
-```````````````````````````````` example Wiki Typographic Text: 1
+```````````````````````````````` example Wiki Typographic Text: 1
 [[wiki--link#]] 
 [[wiki...link#]] 
 [[wiki'link#]] 
@@ -1303,7 +1306,7 @@ Document[0, 67]
 
 With empty anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 2) options(allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 2) options(allow-anchors)
 [[wiki--link#]] 
 [[wiki...link#]] 
 [[wiki'link#]] 
@@ -1339,7 +1342,7 @@ Document[0, 67]
 
 With Anchor ref
 
-```````````````````````````````` example Wiki Typographic Text: 3
+```````````````````````````````` example Wiki Typographic Text: 3
 [[wiki--link#anchor-ref]] 
 [[wiki...link#anchor-ref]] 
 [[wiki'link#anchor-ref]] 
@@ -1377,7 +1380,7 @@ Document[0, 108]
 
 With Anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 4) options(allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 4) options(allow-anchors)
 [[wiki--link#anchor-ref]] 
 [[wiki...link#anchor-ref]] 
 [[wiki'link#anchor-ref]] 
@@ -1414,7 +1417,7 @@ Document[0, 108]
 
 With text, empty anchor ref
 
-```````````````````````````````` example Wiki Typographic Text: 5
+```````````````````````````````` example Wiki Typographic Text: 5
 [[wiki text|wiki link#]] 
 [[wiki--link|wiki--link#]] 
 [[wiki...link|wiki...link#]] 
@@ -1456,7 +1459,7 @@ Document[0, 139]
 
 With text, empty anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 6) options(allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 6) options(allow-anchors)
 [[wiki text|wiki link#]] 
 [[wiki--link|wiki--link#]] 
 [[wiki...link|wiki...link#]] 
@@ -1498,7 +1501,7 @@ Document[0, 139]
 
 With text, anchor ref
 
-```````````````````````````````` example Wiki Typographic Text: 7
+```````````````````````````````` example Wiki Typographic Text: 7
 [[wiki text|wiki link#anchor-ref]] 
 [[wiki--link|wiki--link#anchor-ref]] 
 [[wiki...link|wiki...link#anchor-ref]] 
@@ -1540,7 +1543,7 @@ Document[0, 189]
 
 With text, anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 8) options(allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 8) options(allow-anchors)
 [[wiki text|wiki link#anchor-ref]] 
 [[wiki--link|wiki--link#anchor-ref]] 
 [[wiki...link|wiki...link#anchor-ref]] 
@@ -1582,7 +1585,7 @@ Document[0, 189]
 
 Links first, with text, empty anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 9) options(links-first)
+```````````````````````````````` example(Wiki Typographic Text: 9) options(links-first)
 [[wiki link#|wiki text]] 
 [[wiki--link#|wiki--link]] 
 [[wiki...link#|wiki...link]] 
@@ -1624,7 +1627,7 @@ Document[0, 139]
 
 Links first, with text, anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 10) options(links-first)
+```````````````````````````````` example(Wiki Typographic Text: 10) options(links-first)
 [[wiki link#anchor-ref|wiki text]] 
 [[wiki--link#anchor-ref|wiki--link]] 
 [[wiki...link#anchor-ref|wiki...link]] 
@@ -1666,7 +1669,7 @@ Document[0, 189]
 
 Links first, with text, anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 11) options(links-first, allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 11) options(links-first, allow-anchors)
 [[wiki link#anchor-ref|wiki text]] 
 [[wiki--link#anchor-ref|wiki--link]] 
 [[wiki...link#anchor-ref|wiki...link]] 
@@ -1708,7 +1711,7 @@ Document[0, 189]
 
 Custom extension with empty Anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 12) options(link-ext)
+```````````````````````````````` example(Wiki Typographic Text: 12) options(link-ext)
 [[wiki link#]] 
 [[wiki--link#]] 
 [[wiki...link#]] 
@@ -1751,7 +1754,7 @@ Document[0, 84]
 
 Custom extension with empty Anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 13) options(link-ext, allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 13) options(link-ext, allow-anchors)
 [[wiki link#]] 
 [[wiki--link#]] 
 [[wiki...link#]] 
@@ -1793,7 +1796,7 @@ Document[0, 84]
 
 Custom extension with anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 14) options(link-ext)
+```````````````````````````````` example(Wiki Typographic Text: 14) options(link-ext)
 [[wiki link#anchor-ref]] 
 [[wiki--link#anchor-ref]] 
 [[wiki...link#anchor-ref]] 
@@ -1836,7 +1839,7 @@ Document[0, 134]
 
 Custom extension with anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 15) options(link-ext, allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 15) options(link-ext, allow-anchors)
 [[wiki link#anchor-ref]] 
 [[wiki--link#anchor-ref]] 
 [[wiki...link#anchor-ref]] 
@@ -1878,7 +1881,7 @@ Document[0, 134]
 
 Custom prefix with empty anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 16) options(link-prefix)
+```````````````````````````````` example(Wiki Typographic Text: 16) options(link-prefix)
 [[wiki link#]]
 [[wiki--link#]]
 [[wiki...link#]]
@@ -1921,7 +1924,7 @@ Document[0, 79]
 
 Custom prefix with empty anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 17) options(link-prefix, allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 17) options(link-prefix, allow-anchors)
 [[wiki link#]]
 [[wiki--link#]]
 [[wiki...link#]]
@@ -1963,7 +1966,7 @@ Document[0, 79]
 
 Custom prefix with anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 18) options(link-prefix)
+```````````````````````````````` example(Wiki Typographic Text: 18) options(link-prefix)
 [[wiki link#anchor-ref]]
 [[wiki--link#anchor-ref]]
 [[wiki...link#anchor-ref]]
@@ -2006,7 +2009,7 @@ Document[0, 129]
 
 Custom prefix with anchor ref
 
-```````````````````````````````` example(Wiki Typographic Text: 19) options(link-prefix, allow-anchors)
+```````````````````````````````` example(Wiki Typographic Text: 19) options(link-prefix, allow-anchors)
 [[wiki link#anchor-ref]]
 [[wiki--link#anchor-ref]]
 [[wiki...link#anchor-ref]]
@@ -2050,7 +2053,7 @@ Document[0, 129]
 
 simple wiki link
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 [[wiki link]]
 .
 <p md-pos="0-13"><a href="wiki-link" md-pos="0-13">wiki link</a></p>
@@ -2064,7 +2067,7 @@ Document[0, 13]
 
 wiki link with text
 
-```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
 [[wiki text|wiki link]]
 .
 <p md-pos="0-23"><a href="wiki-link" md-pos="0-23">wiki text</a></p>
@@ -2078,7 +2081,7 @@ Document[0, 23]
 
 wiki link with text, links first option
 
-```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, links-first)
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, links-first)
 [[wiki link|wiki text]]
 .
 <p md-pos="0-23"><a href="wiki-link" md-pos="0-23">wiki text</a></p>
@@ -2097,7 +2100,7 @@ images in the HTML page.
 
 no spaces between brackets
 
-```````````````````````````````` example(WikiImages: 1) options(wiki-images)
+```````````````````````````````` example(WikiImages: 1) options(wiki-images)
 ![ [not wiki image]]
 .
 <p>![ [not wiki image]]</p>
@@ -2113,7 +2116,7 @@ Document[0, 20]
 
 no spaces between brackets
 
-```````````````````````````````` example(WikiImages: 2) options(wiki-images)
+```````````````````````````````` example(WikiImages: 2) options(wiki-images)
 ![[not wiki image] ]
 .
 <p>![[not wiki image] ]</p>
@@ -2129,7 +2132,7 @@ Document[0, 20]
 
 simple wiki image
 
-```````````````````````````````` example(WikiImages: 3) options(wiki-images)
+```````````````````````````````` example(WikiImages: 3) options(wiki-images)
 ![[wiki image]]
 .
 <p><img src="wiki-image" alt="wiki image" /></p>
@@ -2143,7 +2146,7 @@ Document[0, 15]
 
 simple wiki image ignored without wiki images option
 
-```````````````````````````````` example WikiImages: 4
+```````````````````````````````` example WikiImages: 4
 ![[wiki image]]
 .
 <p>!<a href="wiki-image">wiki image</a></p>
@@ -2158,7 +2161,7 @@ Document[0, 15]
 
 wiki image with text
 
-```````````````````````````````` example(WikiImages: 5) options(wiki-images)
+```````````````````````````````` example(WikiImages: 5) options(wiki-images)
 ![[alt text|wiki image]]
 .
 <p><img src="wiki-image" alt="alt text" /></p>
@@ -2172,7 +2175,7 @@ Document[0, 24]
 
 wiki image with text, images first option
 
-```````````````````````````````` example(WikiImages: 6) options(wiki-images, links-first)
+```````````````````````````````` example(WikiImages: 6) options(wiki-images, links-first)
 ![[wiki image|alt text]]
 .
 <p><img src="wiki-image" alt="alt text" /></p>
@@ -2186,7 +2189,7 @@ Document[0, 24]
 
 reference following will be a reference, even if not defined
 
-```````````````````````````````` example(WikiImages: 7) options(wiki-images)
+```````````````````````````````` example(WikiImages: 7) options(wiki-images)
 ![[wiki image]][ref]
 .
 <p><img src="wiki-image" alt="wiki image" />[ref]</p>
@@ -2202,7 +2205,7 @@ Document[0, 20]
 
 reference following will be a reference
 
-```````````````````````````````` example(WikiImages: 8) options(wiki-images)
+```````````````````````````````` example(WikiImages: 8) options(wiki-images)
 ![[wiki image]][ref]
 
 [ref]: /url
@@ -2221,7 +2224,7 @@ Document[0, 33]
 
 dummy reference following will be an empty reference
 
-```````````````````````````````` example(WikiImages: 9) options(wiki-images)
+```````````````````````````````` example(WikiImages: 9) options(wiki-images)
 ![[wiki image]][]
 .
 <p><img src="wiki-image" alt="wiki image" />[]</p>
@@ -2236,7 +2239,7 @@ Document[0, 17]
 
 reference inside is not a wiki image but a image ref with brackets around it
 
-```````````````````````````````` example(WikiImages: 10) options(wiki-images)
+```````````````````````````````` example(WikiImages: 10) options(wiki-images)
 ![[not wiki image][ref]]
 .
 <p>![[not wiki image][ref]]</p>
@@ -2252,7 +2255,7 @@ Document[0, 24]
 
 dummy reference inside is not a wiki image but a image ref with brackets around it
 
-```````````````````````````````` example(WikiImages: 11) options(wiki-images)
+```````````````````````````````` example(WikiImages: 11) options(wiki-images)
 ![[not wiki image][]]
 .
 <p>![[not wiki image][]]</p>
@@ -2266,7 +2269,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example(WikiImages: 12) options(wiki-images)
+```````````````````````````````` example(WikiImages: 12) options(wiki-images)
 ![[wiki image]] ![^image][ref] ![[^wiki image]]
 .
 <p><img src="wiki-image" alt="wiki image" /> ![^image][ref] <img src="^wiki-image" alt="^wiki image" /></p>
@@ -2286,7 +2289,7 @@ Document[0, 47]
 
 Custom extension
 
-```````````````````````````````` example(WikiImages: 13) options(wiki-images, image-ext)
+```````````````````````````````` example(WikiImages: 13) options(wiki-images, image-ext)
 [[wiki image]] [^image][ref] [[^wiki image]]
 .
 <p><a href="wiki-image">wiki image</a> [^image][ref] <a href="^wiki-image">^wiki image</a></p>
@@ -2304,7 +2307,7 @@ Document[0, 44]
 ````````````````````````````````
 
 
-```````````````````````````````` example(WikiImages: 14) options(wiki-images, image-ext)
+```````````````````````````````` example(WikiImages: 14) options(wiki-images, image-ext)
 ![[wiki image]] ![^image][ref] ![[^wiki image]]
 .
 <p><img src="wiki-image.png" alt="wiki image" /> ![^image][ref] <img src="^wiki-image.png" alt="^wiki image" /></p>
@@ -2324,7 +2327,7 @@ Document[0, 47]
 
 Custom prefix
 
-```````````````````````````````` example(WikiImages: 15) options(wiki-images, image-prefix)
+```````````````````````````````` example(WikiImages: 15) options(wiki-images, image-prefix)
 [[wiki image]] [^image][ref] [[^wiki image]]
 .
 <p><a href="wiki-image">wiki image</a> [^image][ref] <a href="^wiki-image">^wiki image</a></p>
@@ -2344,7 +2347,7 @@ Document[0, 44]
 
 Custom prefix
 
-```````````````````````````````` example(WikiImages: 16) options(wiki-images, image-prefix)
+```````````````````````````````` example(WikiImages: 16) options(wiki-images, image-prefix)
 ![[wiki image]] ![^image][ref] ![[^wiki image]]
 .
 <p><img src="/images/wiki-image" alt="wiki image" /> ![^image][ref] <img src="/images/^wiki-image" alt="^wiki image" /></p>
@@ -2364,7 +2367,7 @@ Document[0, 47]
 
 With empty anchor ref
 
-```````````````````````````````` example(WikiImages: 17) options(wiki-images)
+```````````````````````````````` example(WikiImages: 17) options(wiki-images)
 ![[wiki image#]] 
 .
 <p><img src="wiki-image#" alt="wiki image#" /></p>
@@ -2378,7 +2381,7 @@ Document[0, 17]
 
 With Anchor ref
 
-```````````````````````````````` example(WikiImages: 18) options(wiki-images)
+```````````````````````````````` example(WikiImages: 18) options(wiki-images)
 ![[wiki image#anchor-ref]] 
 .
 <p><img src="wiki-image#anchor-ref" alt="wiki image#anchor-ref" /></p>
@@ -2392,7 +2395,7 @@ Document[0, 27]
 
 With text, empty anchor ref
 
-```````````````````````````````` example(WikiImages: 19) options(wiki-images)
+```````````````````````````````` example(WikiImages: 19) options(wiki-images)
 ![[alt text|wiki image#]] 
 .
 <p><img src="wiki-image#" alt="alt text" /></p>
@@ -2406,7 +2409,7 @@ Document[0, 26]
 
 With text, anchor ref
 
-```````````````````````````````` example(WikiImages: 20) options(wiki-images)
+```````````````````````````````` example(WikiImages: 20) options(wiki-images)
 ![[alt text|wiki image#anchor-ref]] 
 .
 <p><img src="wiki-image#anchor-ref" alt="alt text" /></p>
@@ -2420,7 +2423,7 @@ Document[0, 36]
 
 Links first, with text, empty anchor ref
 
-```````````````````````````````` example(WikiImages: 21) options(wiki-images, links-first)
+```````````````````````````````` example(WikiImages: 21) options(wiki-images, links-first)
 ![[wiki image#|alt text]] 
 .
 <p><img src="wiki-image#" alt="alt text" /></p>
@@ -2434,7 +2437,7 @@ Document[0, 26]
 
 Links first, with text, anchor ref
 
-```````````````````````````````` example(WikiImages: 22) options(wiki-images, links-first)
+```````````````````````````````` example(WikiImages: 22) options(wiki-images, links-first)
 ![[wiki image#anchor-ref|alt text]] 
 .
 <p><img src="wiki-image#anchor-ref" alt="alt text" /></p>
@@ -2448,7 +2451,7 @@ Document[0, 36]
 
 Custom extension with empty Anchor ref
 
-```````````````````````````````` example(WikiImages: 23) options(wiki-images, image-ext)
+```````````````````````````````` example(WikiImages: 23) options(wiki-images, image-ext)
 ![[wiki image#]] 
 .
 <p><img src="wiki-image.png#" alt="wiki image#" /></p>
@@ -2462,7 +2465,7 @@ Document[0, 17]
 
 Custom extension with anchor ref
 
-```````````````````````````````` example(WikiImages: 24) options(wiki-images, image-ext)
+```````````````````````````````` example(WikiImages: 24) options(wiki-images, image-ext)
 ![[wiki image#anchor-ref]] 
 .
 <p><img src="wiki-image.png#anchor-ref" alt="wiki image#anchor-ref" /></p>
@@ -2476,7 +2479,7 @@ Document[0, 27]
 
 Custom prefix with empty anchor ref
 
-```````````````````````````````` example(WikiImages: 25) options(wiki-images, image-prefix)
+```````````````````````````````` example(WikiImages: 25) options(wiki-images, image-prefix)
 ![[wiki image#]]
 .
 <p><img src="/images/wiki-image#" alt="wiki image#" /></p>
@@ -2490,7 +2493,7 @@ Document[0, 16]
 
 Custom prefix with anchor ref
 
-```````````````````````````````` example(WikiImages: 26) options(wiki-images, image-prefix)
+```````````````````````````````` example(WikiImages: 26) options(wiki-images, image-prefix)
 ![[wiki image#anchor-ref]]
 .
 <p><img src="/images/wiki-image#anchor-ref" alt="wiki image#anchor-ref" /></p>
@@ -2506,7 +2509,7 @@ Document[0, 26]
 
 simple wiki image
 
-```````````````````````````````` example(WikiImages Source Position Attribute: 1) options(wiki-images, src-pos)
+```````````````````````````````` example(WikiImages Source Position Attribute: 1) options(wiki-images, src-pos)
 ![[wiki image]]
 .
 <p md-pos="0-15"><img src="wiki-image" alt="wiki image" md-pos="0-15" /></p>
@@ -2520,7 +2523,7 @@ Document[0, 15]
 
 wiki image with text
 
-```````````````````````````````` example(WikiImages Source Position Attribute: 2) options(wiki-images, src-pos)
+```````````````````````````````` example(WikiImages Source Position Attribute: 2) options(wiki-images, src-pos)
 ![[alt text|wiki image]]
 .
 <p md-pos="0-24"><img src="wiki-image" alt="alt text" md-pos="0-24" /></p>
@@ -2534,7 +2537,7 @@ Document[0, 24]
 
 wiki image with text, images first option
 
-```````````````````````````````` example(WikiImages Source Position Attribute: 3) options(wiki-images, src-pos, links-first)
+```````````````````````````````` example(WikiImages Source Position Attribute: 3) options(wiki-images, src-pos, links-first)
 ![[wiki image|alt text]]
 .
 <p md-pos="0-24"><img src="wiki-image" alt="alt text" md-pos="0-24" /></p>

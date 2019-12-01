@@ -14,7 +14,7 @@ Converts jekyll tag text to JekyllTag nodes.
 
 no empty tags
 
-```````````````````````````````` example Jekyll Tag: 1
+```````````````````````````````` example Jekyll Tag: 1
 {% %}
 .
 <p>{% %}</p>
@@ -27,7 +27,7 @@ Document[0, 5]
 
 some tags
 
-```````````````````````````````` example Jekyll Tag: 2
+```````````````````````````````` example Jekyll Tag: 2
 {% tag %}
 .
 .
@@ -39,7 +39,7 @@ Document[0, 9]
 
 some tags
 
-```````````````````````````````` example Jekyll Tag: 3
+```````````````````````````````` example Jekyll Tag: 3
 {% tag paramters %}
 .
 .
@@ -51,7 +51,7 @@ Document[0, 19]
 
 inline tags
 
-```````````````````````````````` example Jekyll Tag: 4
+```````````````````````````````` example Jekyll Tag: 4
  {% tag %}
 .
 <p></p>
@@ -64,7 +64,7 @@ Document[0, 10]
 
 inline tags
 
-```````````````````````````````` example Jekyll Tag: 5
+```````````````````````````````` example Jekyll Tag: 5
  {% tag paramters %}
 .
 <p></p>
@@ -77,7 +77,7 @@ Document[0, 20]
 
 no blocks
 
-```````````````````````````````` example(Jekyll Tag: 6) options(no-blocks)
+```````````````````````````````` example(Jekyll Tag: 6) options(no-blocks)
 {% tag %}
 .
 <p></p>
@@ -90,7 +90,7 @@ Document[0, 9]
 
 no blocks no inlines
 
-```````````````````````````````` example(Jekyll Tag: 7) options(no-blocks, no-inlines)
+```````````````````````````````` example(Jekyll Tag: 7) options(no-blocks, no-inlines)
 {% tag %}
 .
 <p>{% tag %}</p>
@@ -103,7 +103,7 @@ Document[0, 9]
 
 no inlines
 
-```````````````````````````````` example(Jekyll Tag: 8) options(no-inlines)
+```````````````````````````````` example(Jekyll Tag: 8) options(no-inlines)
  {% tag %}
 .
 <p>{% tag %}</p>
@@ -116,7 +116,7 @@ Document[0, 10]
 
 include
 
-```````````````````````````````` example Jekyll Tag: 9
+```````````````````````````````` example Jekyll Tag: 9
 {% include  %}
 .
 .
@@ -128,7 +128,7 @@ Document[0, 14]
 
 include
 
-```````````````````````````````` example(Jekyll Tag: 10) options(dummy-identifier)
+```````````````````````````````` example(Jekyll Tag: 10) options(dummy-identifier)
 {% include ⎮ %}
 .
 .
@@ -140,7 +140,7 @@ Document[0, 15]
 
 include
 
-```````````````````````````````` example(Jekyll Tag: 11) options(includes)
+```````````````````````````````` example(Jekyll Tag: 11) options(includes)
 {% include test.html %}
 .
 <h1>Heading 1</h1>
@@ -154,7 +154,7 @@ Document[0, 23]
 
 include
 
-```````````````````````````````` example(Jekyll Tag: 12) options(includes)
+```````````````````````````````` example(Jekyll Tag: 12) options(includes)
 {% include links.html %}
 .
 .

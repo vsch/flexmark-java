@@ -15,7 +15,7 @@ from the commonmark spec for block quotes with the marker changed to `|`
 
 no trailing pipes allowed, reserved for tables
 
-```````````````````````````````` example Aside: 1
+```````````````````````````````` example Aside: 1
 | Sample text |
 .
 <p>| Sample text |</p>
@@ -28,7 +28,7 @@ Document[0, 15]
 
 no trailing pipes allowed, reserved for tables
 
-```````````````````````````````` example Aside: 2
+```````````````````````````````` example Aside: 2
 | Sample text |   
 .
 <p>| Sample text |</p>
@@ -39,7 +39,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Aside: 3
+```````````````````````````````` example Aside: 3
 | # Foo
 | bar
 | baz
@@ -63,7 +63,7 @@ Document[0, 19]
 
 The spaces after the `|` characters can be omitted:
 
-```````````````````````````````` example Aside: 4
+```````````````````````````````` example Aside: 4
 |# Foo
 |bar
 | baz
@@ -87,7 +87,7 @@ Document[0, 17]
 
 The `|` characters can be indented 1-3 spaces:
 
-```````````````````````````````` example Aside: 5
+```````````````````````````````` example Aside: 5
    | # Foo
    | bar
  | baz
@@ -111,7 +111,7 @@ Document[0, 26]
 
 Four spaces gives us a code block:
 
-```````````````````````````````` example Aside: 6
+```````````````````````````````` example Aside: 6
     | # Foo
     | bar
     | baz
@@ -128,7 +128,7 @@ Document[0, 31]
 
 The Laziness clause allows us to omit the `|` before [paragraph continuation text]:
 
-```````````````````````````````` example Aside: 7
+```````````````````````````````` example Aside: 7
 | # Foo
 | bar
 baz
@@ -152,7 +152,7 @@ Document[0, 17]
 
 A block quote can contain some lazy and some non-lazy continuation lines:
 
-```````````````````````````````` example Aside: 8
+```````````````````````````````` example Aside: 8
 | bar
 baz
 | foo
@@ -185,7 +185,7 @@ of
 
 without changing the meaning:
 
-```````````````````````````````` example Aside: 9
+```````````````````````````````` example Aside: 9
 | foo
 ---
 .
@@ -211,7 +211,7 @@ Similarly, if we omit the `| ` in the second line of
 
 then the block quote ends after the first line:
 
-```````````````````````````````` example Aside: 10
+```````````````````````````````` example Aside: 10
 | - foo
 - bar
 .
@@ -240,7 +240,7 @@ Document[0, 13]
 For the same reason, we can't omit the `| ` in front of subsequent lines of an indented or
 fenced code block:
 
-```````````````````````````````` example Aside: 11
+```````````````````````````````` example Aside: 11
 |     foo
     bar
 .
@@ -258,7 +258,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Aside: 12
+```````````````````````````````` example Aside: 12
 | ```
 foo
 ```
@@ -280,7 +280,7 @@ Document[0, 13]
 
 Note that in the following case, we have a [lazy continuation line]:
 
-```````````````````````````````` example Aside: 13
+```````````````````````````````` example Aside: 13
 | foo
     - bar
 .
@@ -310,7 +310,7 @@ indented code blocks cannot interrupt paragraphs, so it is [paragraph continuati
 
 A block quote can be empty:
 
-```````````````````````````````` example Aside: 14
+```````````````````````````````` example Aside: 14
 |
 .
 <aside></aside>
@@ -320,7 +320,7 @@ Document[0, 1]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Aside: 15) options(blank-lines)
+```````````````````````````````` example(Aside: 15) options(blank-lines)
 |
 .
 <aside></aside>
@@ -331,7 +331,7 @@ Document[0, 2]
 ````````````````````````````````
 
 
-```````````````````````````````` example Aside: 16
+```````````````````````````````` example Aside: 16
 |
 |  
 | 
@@ -343,7 +343,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Aside: 17) options(blank-lines)
+```````````````````````````````` example(Aside: 17) options(blank-lines)
 |
 |  
 | 
@@ -360,7 +360,7 @@ Document[0, 9]
 
 Can have initial or final blank lines:
 
-```````````````````````````````` example Aside: 18
+```````````````````````````````` example Aside: 18
 |
 | foo
 |  
@@ -376,7 +376,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Aside: 19) options(blank-lines)
+```````````````````````````````` example(Aside: 19) options(blank-lines)
 |
 | foo
 |  
@@ -396,7 +396,7 @@ Document[0, 12]
 
 A blank line always separates block quotes:
 
-```````````````````````````````` example Aside: 20
+```````````````````````````````` example Aside: 20
 | foo
 
 | bar
@@ -424,7 +424,7 @@ author to decide whether two block quotes or one are wanted.)
 
 Consecutiveness means that if we put these block quotes together, we get a single block quote:
 
-```````````````````````````````` example Aside: 21
+```````````````````````````````` example Aside: 21
 | foo
 | bar
 .
@@ -444,7 +444,7 @@ Document[0, 11]
 
 To get a block with two paragraphs, use:
 
-```````````````````````````````` example Aside: 22
+```````````````````````````````` example Aside: 22
 | foo
 |
 | bar
@@ -463,7 +463,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Aside: 23) options(blank-lines)
+```````````````````````````````` example(Aside: 23) options(blank-lines)
 | foo
 |
 | bar
@@ -485,7 +485,7 @@ Document[0, 14]
 
 Block can interrupt paragraphs:
 
-```````````````````````````````` example Aside: 24
+```````````````````````````````` example Aside: 24
 foo
 | bar
 .
@@ -505,7 +505,7 @@ Document[0, 9]
 
 In general, blank lines are not needed before or after marker:
 
-```````````````````````````````` example Aside: 25
+```````````````````````````````` example Aside: 25
 | aaa
 ***
 | bbb
@@ -531,7 +531,7 @@ Document[0, 15]
 
 However, because of laziness, a blank line is needed between a block and a following paragraph:
 
-```````````````````````````````` example Aside: 26
+```````````````````````````````` example Aside: 26
 | bar
 baz
 .
@@ -549,7 +549,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Aside: 27
+```````````````````````````````` example Aside: 27
 | bar
 
 baz
@@ -568,7 +568,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Aside: 28
+```````````````````````````````` example Aside: 28
 | bar
 |
 baz
@@ -587,7 +587,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Aside: 29) options(blank-lines)
+```````````````````````````````` example(Aside: 29) options(blank-lines)
 | bar
 |
 baz
@@ -610,7 +610,7 @@ Document[0, 12]
 It is a consequence of the Laziness rule that any number of initial `|`s may be omitted on a
 continuation line of a nested block quote:
 
-```````````````````````````````` example Aside: 30
+```````````````````````````````` example Aside: 30
 | | | foo
 bar
 .
@@ -634,7 +634,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Aside: 31
+```````````````````````````````` example Aside: 31
 ||| foo
 | bar
 ||baz
@@ -665,7 +665,7 @@ Document[0, 19]
 When including an indented code block in a block quote, remember that the [block quote marker]
 includes both the `|` and a following space. So *five spaces* are needed after the `|`:
 
-```````````````````````````````` example Aside: 32
+```````````````````````````````` example Aside: 32
 |     code
 
 |    not code
@@ -689,7 +689,7 @@ Document[0, 25]
 
 Extend block quote to next blank line
 
-```````````````````````````````` example(Aside: 33) options(extend-to-blank-line)
+```````````````````````````````` example(Aside: 33) options(extend-to-blank-line)
 | 1. one
 2. two
 .
@@ -714,7 +714,7 @@ Document[0, 15]
 
 without aside to next blank line causes an interrupted list with a second list after the quote.
 
-```````````````````````````````` example Aside: 34
+```````````````````````````````` example Aside: 34
 | 1. one
 2. two
 .
@@ -742,7 +742,7 @@ Document[0, 15]
 
 Asides don't ignore interspersing blank lines
 
-```````````````````````````````` example Aside: 35
+```````````````````````````````` example Aside: 35
 | Block Quote
 || Nested Quote
 ||| Another Quote
@@ -790,7 +790,7 @@ Document[0, 68]
 
 Block quotes ignore interspersing blank lines
 
-```````````````````````````````` example(Aside: 36) options(ignore-blank-line)
+```````````````````````````````` example(Aside: 36) options(ignore-blank-line)
 | Block Quote
 || Nested Quote
 ||| Another Quote
@@ -830,7 +830,7 @@ Document[0, 68]
 Block quotes ignore interspersing blank lines but don't include any lines without prefix after
 blank lines
 
-```````````````````````````````` example(Aside: 37) options(ignore-blank-line, extend-to-blank-line)
+```````````````````````````````` example(Aside: 37) options(ignore-blank-line, extend-to-blank-line)
 | Block Quote 
 | this is still block quote 
 
@@ -859,7 +859,7 @@ Document[0, 59]
 
 blank line in block quoted list breaks list
 
-```````````````````````````````` example(Issue MN-01: 1) options(ignore-blank-line, extend-to-blank-line)
+```````````````````````````````` example(Issue MN-01: 1) options(ignore-blank-line, extend-to-blank-line)
 > 1. item
 > 2. item
 
@@ -895,7 +895,7 @@ Document[0, 32]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue MN-01: 2) options(ignore-blank-line, extend-to-blank-line)
+```````````````````````````````` example(Issue MN-01: 2) options(ignore-blank-line, extend-to-blank-line)
 | 1. item
 | 2. item
 
@@ -932,7 +932,7 @@ Document[0, 33]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue MN-01: 3) options(extend-to-blank-line)
+```````````````````````````````` example(Issue MN-01: 3) options(extend-to-blank-line)
 > 1. item
 > 2. item
 
@@ -968,7 +968,7 @@ Document[0, 32]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue MN-01: 4) options(extend-to-blank-line)
+```````````````````````````````` example(Issue MN-01: 4) options(extend-to-blank-line)
 | 1. item
 | 2. item
 
@@ -1007,7 +1007,7 @@ Document[0, 33]
 
 should match block quote parsing information
 
-```````````````````````````````` example(Issue MN-01: 5) options(ignore-blank-line, extend-to-blank-line)
+```````````````````````````````` example(Issue MN-01: 5) options(ignore-blank-line, extend-to-blank-line)
 >>| asdf asldf alsdf asldf asdf as dflasdjflasjdf as;ldf lasdfj asldfj
 >>| asdfasdf asdf asdfasfd
 > 11. alalsdfkj alsdjf lsa;fdj l;as fd;l sadf;l sajdf;l jasdf;l saldfj
@@ -1060,7 +1060,7 @@ Document[0, 396]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue MN-01: 6) options(ignore-blank-line, extend-to-blank-line)
+```````````````````````````````` example(Issue MN-01: 6) options(ignore-blank-line, extend-to-blank-line)
 ||> asdf asldf alsdf asldf asdf as dflasdjflasjdf as;ldf lasdfj asldfj
 ||> asdfasdf asdf asdfasfd
 | 11. alalsdfkj alsdjf lsa;fdj l;as fd;l sadf;l sajdf;l jasdf;l saldfj
@@ -1115,7 +1115,7 @@ Document[0, 396]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 | Block Quote 
 | this is still block quote 
 .

@@ -37,7 +37,7 @@ attributes:
 
 #### Regular
 
-```````````````````````````````` example(Form Controls - Text - Regular: 1) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Text - Regular: 1) options(form-controls-input)
 Text: [input]{.text default=test}
 .
 <w:body>
@@ -81,7 +81,7 @@ Text: [input]{.text default=test}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Text - Regular: 2) options(form-controls-form)
+```````````````````````````````` example(Form Controls - Text - Regular: 2) options(form-controls-form)
 Text: [form]{.text default=test}
 .
 <w:body>
@@ -125,7 +125,7 @@ Text: [form]{.text default=test}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Text - Regular: 3) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Text - Regular: 3) options(form-controls-input)
 Text: [input]{.text default=test help="Help String for field"}
 .
 <w:body>
@@ -173,7 +173,7 @@ Text: [input]{.text default=test help="Help String for field"}
 
 #### Number
 
-```````````````````````````````` example(Form Controls - Text - Number: 1) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Text - Number: 1) options(form-controls-input)
 Number: [input]{.text type=number format=#,##0}
     
 .
@@ -221,7 +221,7 @@ Number: [input]{.text type=number format=#,##0}
 
 #### Date
 
-```````````````````````````````` example(Form Controls - Text - Date: 1) options(form-controls-input, IGNORED)
+```````````````````````````````` example(Form Controls - Text - Date: 1) options(form-controls-input, IGNORED)
 Date No Default: [input]{.text type=date format=yyyy/M/d}
 .
 <w:body>
@@ -266,7 +266,7 @@ Date No Default: [input]{.text type=date format=yyyy/M/d}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Text - Date: 2) options(form-controls-input, IGNORED)
+```````````````````````````````` example(Form Controls - Text - Date: 2) options(form-controls-input, IGNORED)
 Date: [input]{.text type=date default=2019/11/11 format=yyyy/M/d}
 .
 <w:body>
@@ -313,7 +313,7 @@ Date: [input]{.text type=date default=2019/11/11 format=yyyy/M/d}
 
 #### Current Date
 
-```````````````````````````````` example(Form Controls - Text - Current Date: 1) options(form-controls-input, IGNORED)
+```````````````````````````````` example(Form Controls - Text - Current Date: 1) options(form-controls-input, IGNORED)
 Current Date: [input]{.text type=current-date format=yyyy/M/d}
 .
 <w:body>
@@ -378,7 +378,7 @@ Current Date: [input]{.text type=current-date format=yyyy/M/d}
 
 #### Current Time
 
-```````````````````````````````` example(Form Controls - Text - Current Time: 1) options(form-controls-input, IGNORED)
+```````````````````````````````` example(Form Controls - Text - Current Time: 1) options(form-controls-input, IGNORED)
 Current Time: [input]{.text type=current-time format=hh:mm:ss}
 .
 <w:body>
@@ -449,7 +449,7 @@ class name `.checkbox`
 * `checked` - default will be checked, otherwise unchecked
 * `help` - text to show in status bar and on hitting F1
 
-```````````````````````````````` example(Form Controls - Checkbox: 1) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Checkbox: 1) options(form-controls-input)
 Trial: [input]{.checkbox name="Trial"}
 .
 <w:body>
@@ -484,7 +484,7 @@ Trial: [input]{.checkbox name="Trial"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Checkbox: 2) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Checkbox: 2) options(form-controls-input)
 Checked: [input]{.checkbox checked}
 .
 <w:body>
@@ -531,7 +531,7 @@ class name `.dropdown`
 * `options` - list of options separated by `|`, individual options will be trimmed but otherwise
   left as is
 
-```````````````````````````````` example(Form Controls - Dropdown: 1) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Dropdown: 1) options(form-controls-input)
 No Default: [input]{.dropdown options="Item 1 | Item 2 | Item 3"}
 .
 <w:body>
@@ -567,7 +567,7 @@ No Default: [input]{.dropdown options="Item 1 | Item 2 | Item 3"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Dropdown: 2) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Dropdown: 2) options(form-controls-input)
 1: [input]{.dropdown options="Item 1 | Item 2 | Item 3" default=1}
 .
 <w:body>
@@ -604,7 +604,7 @@ No Default: [input]{.dropdown options="Item 1 | Item 2 | Item 3"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Dropdown: 3) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Dropdown: 3) options(form-controls-input)
 2: [input]{.dropdown options="Item 1 | Item 2 | Item 3" default=2}
 .
 <w:body>
@@ -641,7 +641,7 @@ No Default: [input]{.dropdown options="Item 1 | Item 2 | Item 3"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Dropdown: 4) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Dropdown: 4) options(form-controls-input)
 3: [input]{.dropdown options="Item 1 | Item 2 | Item 3" default=3}
 .
 <w:body>
@@ -678,7 +678,7 @@ No Default: [input]{.dropdown options="Item 1 | Item 2 | Item 3"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Dropdown: 5) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Dropdown: 5) options(form-controls-input)
 Item 2: [input]{.dropdown default="Item 2" options="Item 1 | Item 2 | Item 3"}
 .
 <w:body>
@@ -715,7 +715,7 @@ Item 2: [input]{.dropdown default="Item 2" options="Item 1 | Item 2 | Item 3"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Dropdown: 6) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Dropdown: 6) options(form-controls-input)
 item 1: [input]{.dropdown default="item 1" options="Item 1 | item 1 | Item 3"}
 .
 <w:body>
@@ -752,7 +752,7 @@ item 1: [input]{.dropdown default="item 1" options="Item 1 | item 1 | Item 3"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Form Controls - Dropdown: 7) options(form-controls-input)
+```````````````````````````````` example(Form Controls - Dropdown: 7) options(form-controls-input)
 Item 3: [input]{.dropdown default="item 3" options="Item 1 | item 1 | Item 3"}
 .
 <w:body>

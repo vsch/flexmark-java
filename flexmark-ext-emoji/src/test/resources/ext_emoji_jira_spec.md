@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts emoji shortcuts to JIRA equivalents
 
-```````````````````````````````` example(Emoji JIRA: 1) options(IGNORE)
+```````````````````````````````` example(Emoji JIRA: 1) options(IGNORE)
 :smile:                           
 :frowning:                        
 :stuck_out_tongue:                

@@ -16,7 +16,7 @@ Converts markdown to YouTrack formatting
 
 Atx headings
 
-```````````````````````````````` example Headings: 1
+```````````````````````````````` example Headings: 1
 # Heading 1
 ## Heading 2
 ### Heading 3
@@ -55,7 +55,7 @@ Document[0, 86]
 
 Setext headings
 
-```````````````````````````````` example Headings: 2
+```````````````````````````````` example Headings: 2
 Heading 1
 =========
 
@@ -79,7 +79,7 @@ Document[0, 40]
 
 Simple
 
-```````````````````````````````` example Text formatting: 1
+```````````````````````````````` example Text formatting: 1
 Text formatting *emphasis*, **strong emphasis**, `inline code`
 .
 Text formatting ''emphasis'', *strong emphasis*, `inline code`
@@ -101,7 +101,7 @@ Document[0, 62]
 
 Links
 
-```````````````````````````````` example Text formatting: 2
+```````````````````````````````` example Text formatting: 2
 Text with [link](http://link.com), image ![image](http://link.com/image.png), mail <vladimir@vladsch.com>
 .
 Text with [link|http://link.com], image !http://link.com/image.png!, mail [vladimir@vladsch.com|mailto:vladimir@vladsch.com]
@@ -120,7 +120,7 @@ Document[0, 105]
 ````````````````````````````````
 
 
-```````````````````````````````` example Text formatting: 3
+```````````````````````````````` example Text formatting: 3
 Text with [link], image ![image], mail <vladimir@vladsch.com>
 
 [link]: http://link.com
@@ -148,7 +148,7 @@ Document[0, 121]
 
 Single line block quote
 
-```````````````````````````````` example Block quotes: 1
+```````````````````````````````` example Block quotes: 1
 > simple block quote
 .
 > simple block quote
@@ -163,7 +163,7 @@ Document[0, 20]
 
 Simple
 
-```````````````````````````````` example Block quotes: 2
+```````````````````````````````` example Block quotes: 2
 > simple block quote
 > paragraph.
 .
@@ -181,7 +181,7 @@ Document[0, 33]
 
 Multi-paragraph
 
-```````````````````````````````` example Block quotes: 3
+```````````````````````````````` example Block quotes: 3
 > simple block quote
 > paragraph.
 >
@@ -208,7 +208,7 @@ Document[0, 70]
 
 Thematic break
 
-```````````````````````````````` example Block quotes: 4
+```````````````````````````````` example Block quotes: 4
 Some text
 
 ---
@@ -234,7 +234,7 @@ Document[0, 24]
 
 Bullet lists
 
-```````````````````````````````` example Lists: 1
+```````````````````````````````` example Lists: 1
 - item 1
 - item 2
 with lazy continuation
@@ -258,7 +258,7 @@ Document[0, 40]
 
 Ordered lists
 
-```````````````````````````````` example Lists: 2
+```````````````````````````````` example Lists: 2
 1. item 1
 2. item 2
 with lazy continuation
@@ -282,7 +282,7 @@ Document[0, 42]
 
 Nested lists
 
-```````````````````````````````` example Lists: 3
+```````````````````````````````` example Lists: 3
 - item 1
 lazy continuation
   - sub-item 1
@@ -335,7 +335,7 @@ Document[0, 122]
 
 Nested lists
 
-```````````````````````````````` example Lists: 4
+```````````````````````````````` example Lists: 4
 1. item 1
 lazy continuation
    1. sub-item 1
@@ -388,7 +388,7 @@ Document[0, 136]
 
 Loose Nested lists
 
-```````````````````````````````` example(Lists: 5) options(list-no-auto-loose)
+```````````````````````````````` example(Lists: 5) options(list-no-auto-loose)
 1. item 1
 lazy continuation
 
@@ -449,7 +449,7 @@ Document[0, 141]
 
 plain
 
-```````````````````````````````` example Fenced code: 1
+```````````````````````````````` example Fenced code: 1
 ```
 fenced code
 ```
@@ -468,7 +468,7 @@ Document[0, 21]
 
 with language
 
-```````````````````````````````` example Fenced code: 2
+```````````````````````````````` example Fenced code: 2
 ```kotlin
 fenced code
 ```
@@ -489,7 +489,7 @@ Document[0, 27]
 
 multiple paragraphs
 
-```````````````````````````````` example Paragraph Spacing: 1
+```````````````````````````````` example Paragraph Spacing: 1
 paragraph 1
 with lazy continuation
 
@@ -561,7 +561,7 @@ Document[0, 197]
 
 multiple paragraphs
 
-```````````````````````````````` example(Paragraph Spacing: 2) options(list-no-auto-loose)
+```````````````````````````````` example(Paragraph Spacing: 2) options(list-no-auto-loose)
 paragraph 1
 with lazy continuation
 
@@ -629,7 +629,7 @@ Document[0, 197]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraph Spacing: 3
+```````````````````````````````` example Paragraph Spacing: 3
 Heading One
 ===========
 
@@ -758,7 +758,7 @@ Document[0, 381]
 
 Converts pipe separated tables to JIRA tables
 
-```````````````````````````````` example Tables Extension: 1
+```````````````````````````````` example Tables Extension: 1
 Abc|Def
 ---|---
 .
@@ -783,7 +783,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 2
+```````````````````````````````` example Tables Extension: 2
 |Abc
 |---
 |1
@@ -809,7 +809,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 3
+```````````````````````````````` example Tables Extension: 3
 Abc|Def
 ---|---
 1|2
@@ -841,7 +841,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 4
+```````````````````````````````` example Tables Extension: 4
 Abc|Def|Ghi
 ---|---
 1|2|3
@@ -877,7 +877,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 5
+```````````````````````````````` example Tables Extension: 5
 *Abc*|Def
 ---|---
 1|2
@@ -910,7 +910,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 6
+```````````````````````````````` example Tables Extension: 6
 > Abc|Def
 > ---|---
 > 1|2
@@ -946,7 +946,7 @@ Document[0, 25]
 
 inlines should be processed
 
-```````````````````````````````` example Tables Extension: 7
+```````````````````````````````` example Tables Extension: 7
 **Abc**|_Def_
 ---|---
 [ref]|`code`
@@ -987,7 +987,7 @@ Document[0, 47]
 
 Column spans are created with repeated | pipes one for each additional column to span
 
-```````````````````````````````` example Tables Extension: 8
+```````````````````````````````` example Tables Extension: 8
 |Abc|Def
 |---|---|
 | span ||
@@ -1019,7 +1019,7 @@ Document[0, 28]
 
 Now we try varying the header lines and make sure we get the right output
 
-```````````````````````````````` example Tables Extension: 9
+```````````````````````````````` example Tables Extension: 9
 |Abc|Def
 |Hij|Lmn
 |---|---|
@@ -1058,7 +1058,7 @@ Document[0, 37]
 
 No header lines
 
-```````````````````````````````` example Tables Extension: 10
+```````````````````````````````` example Tables Extension: 10
 |---|---|
 | col1 | col2|
 .
@@ -1085,7 +1085,7 @@ Document[0, 24]
 
 No body lines
 
-```````````````````````````````` example Tables Extension: 11
+```````````````````````````````` example Tables Extension: 11
 | col1 | col2|
 |---|---|
 .
@@ -1112,7 +1112,7 @@ Document[0, 24]
 
 multiple tables parsed correctly
 
-```````````````````````````````` example Tables Extension: 12
+```````````````````````````````` example Tables Extension: 12
 not a table, followed by a table
 
 | col1 | col2|
@@ -1211,7 +1211,7 @@ Document[0, 199]
 
 in item
 
-```````````````````````````````` example(Tables Extension: 13) options(keep-whitespace)
+```````````````````````````````` example(Tables Extension: 13) options(keep-whitespace)
 - Add: live templates starting with `.` 
  
 | Element       | Abbreviation    | Expansion         |
@@ -1299,7 +1299,7 @@ Document[0, 322]
 
 real life table
 
-```````````````````````````````` example Tables Extension: 14
+```````````````````````````````` example Tables Extension: 14
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -2190,7 +2190,7 @@ Document[0, 10152]
 
 invalid table:
 
-```````````````````````````````` example(GFM options: 1) options(gfm)
+```````````````````````````````` example(GFM options: 1) options(gfm)
 | A | B | C |
 |-----------|
 | a | b | c |
@@ -2213,7 +2213,7 @@ Document[0, 55]
 
 invalid table:
 
-```````````````````````````````` example(GFM options: 2) options(gfm)
+```````````````````````````````` example(GFM options: 2) options(gfm)
 | A | B | C |
 | a | b | c |
 | b | a | c |

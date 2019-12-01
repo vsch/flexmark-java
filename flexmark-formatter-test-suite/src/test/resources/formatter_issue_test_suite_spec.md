@@ -10,7 +10,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Formatter
 
-```````````````````````````````` example(Formatter: 1) options(item-indent-1)
+```````````````````````````````` example(Formatter: 1) options(item-indent-1)
 Text
 
 1. numbered list one
@@ -61,7 +61,7 @@ Document[0, 180]
 
 Without append just include
 
-```````````````````````````````` example(Append References: 1) options(no-append-references)
+```````````````````````````````` example(Append References: 1) options(no-append-references)
 Text with footnote[^footnote] abbr, link ref [ref], image ref ![image], []
 
 Enumerated Ref{#enum:this}
@@ -109,7 +109,7 @@ Document[0, 122]
 
 With append just include
 
-```````````````````````````````` example(Append References: 2) options(append-references)
+```````````````````````````````` example(Append References: 2) options(append-references)
 Text with footnote[^footnote] abbr, link ref [ref], image ref ![image], <<<macro1>>>
 
 Enumerated Ref{#enum:this}
@@ -176,7 +176,7 @@ Document[0, 133]
 When no soft line breaks are used, soft line breaks in inline code, quotes, and other inline
 elements should be removed also
 
-```````````````````````````````` example(Issue - xxx-01: 1) options(no-soft-breaks)
+```````````````````````````````` example(Issue - xxx-01: 1) options(no-soft-breaks)
 "broken quoted
 string"
 .
@@ -191,7 +191,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue - xxx-01: 2) options(no-soft-breaks)
+```````````````````````````````` example(Issue - xxx-01: 2) options(no-soft-breaks)
 `broken inline code 
 string`
 .
@@ -208,7 +208,7 @@ Document[0, 28]
 
 Autolinks wrapped in `<>` during merge
 
-```````````````````````````````` example Issue - xxx-02: 1
+```````````````````````````````` example Issue - xxx-02: 1
 test@example.com
 .
 test@example.com

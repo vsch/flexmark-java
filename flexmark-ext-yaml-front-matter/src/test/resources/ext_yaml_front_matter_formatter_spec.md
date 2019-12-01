@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts yaml front_matter text
 
-```````````````````````````````` example Yaml Front Matter: 1
+```````````````````````````````` example Yaml Front Matter: 1
 ---
 title: JekyllFrontMatter Extension Spec
 author: 
@@ -45,7 +45,7 @@ Document[0, 159]
 
 preserve whitespaces in block
 
-```````````````````````````````` example Yaml Front Matter: 2
+```````````````````````````````` example Yaml Front Matter: 2
 ---
 linters:
   - name: linter
@@ -71,7 +71,7 @@ Document[0, 189]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Yaml Front Matter: 3) options(references-document-top)
+```````````````````````````````` example(Yaml Front Matter: 3) options(references-document-top)
 ---
 title: JekyllFrontMatter Extension Spec
 author: 

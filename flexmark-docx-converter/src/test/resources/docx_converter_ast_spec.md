@@ -16,7 +16,7 @@ Converts markdown to docx
 
 basic text
 
-```````````````````````````````` example Paragraphs: 1
+```````````````````````````````` example Paragraphs: 1
 plain text
 .
 <w:body>
@@ -32,7 +32,7 @@ plain text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 2
+```````````````````````````````` example Paragraphs: 2
 plain **Bold** text
 .
 <w:body>
@@ -57,7 +57,7 @@ plain **Bold** text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 3
+```````````````````````````````` example Paragraphs: 3
 plain *Italic* text
 .
 <w:body>
@@ -82,7 +82,7 @@ plain *Italic* text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 4
+```````````````````````````````` example Paragraphs: 4
 plain ~~strike-through~~ text
 .
 <w:body>
@@ -107,7 +107,7 @@ plain ~~strike-through~~ text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 5
+```````````````````````````````` example Paragraphs: 5
 plain ~subscript~ text H~2~O
 .
 <w:body>
@@ -141,7 +141,7 @@ plain ~subscript~ text H~2~O
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 6
+```````````````````````````````` example Paragraphs: 6
 plain ^superscript^ text e^*i*pi^ = -1
 .
 <w:body>
@@ -195,7 +195,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 7
+```````````````````````````````` example Paragraphs: 7
 plain ^superscript^ text e^ipi^ = -1
 .
 <w:body>
@@ -229,7 +229,7 @@ plain ^superscript^ text e^ipi^ = -1
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 8
+```````````````````````````````` example Paragraphs: 8
 plain ++underline++ text
 .
 <w:body>
@@ -254,7 +254,7 @@ plain ++underline++ text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 9
+```````````````````````````````` example Paragraphs: 9
 plain `inline code` text
 .
 <w:body>
@@ -279,7 +279,7 @@ plain `inline code` text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 10) options(highlight-code)
+```````````````````````````````` example(Paragraphs: 10) options(highlight-code)
 plain `inline code` highlight text
 .
 <w:body>
@@ -308,7 +308,7 @@ plain `inline code` highlight text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Paragraphs: 11) options(highlight-shade)
+```````````````````````````````` example(Paragraphs: 11) options(highlight-shade)
 plain `inline code` highlight text
 .
 <w:body>
@@ -339,7 +339,7 @@ plain `inline code` highlight text
 
 permutations of formatting
 
-```````````````````````````````` example Paragraphs: 12
+```````````````````````````````` example Paragraphs: 12
 plain **Bold *Bold-Italic*** text
 plain *Italic **Bold-Italic*** text
 plain **Bold ++Bold-Underline++** text
@@ -520,7 +520,7 @@ plain **Bold ~~Bold-strike-through~~** text
 
 ## Lists
 
-```````````````````````````````` example Lists: 1
+```````````````````````````````` example Lists: 1
 * list 1
 
   with some text
@@ -581,7 +581,7 @@ plain **Bold ~~Bold-strike-through~~** text
 
 Numbering start
 
-```````````````````````````````` example(Lists: 2) options(IGNORED)
+```````````````````````````````` example(Lists: 2) options(IGNORED)
 2. list 1
 
    with some text
@@ -642,7 +642,7 @@ Numbering start
 
 tight lists
 
-```````````````````````````````` example Lists: 3
+```````````````````````````````` example Lists: 3
 * list 1 
   * list 1.1
   * list 1.2
@@ -729,7 +729,7 @@ tight lists
 
 loose lists
 
-```````````````````````````````` example Lists: 4
+```````````````````````````````` example Lists: 4
 * list 1 
   * list 1.1
   * list 1.2
@@ -820,7 +820,7 @@ loose lists
 
 loose lists
 
-```````````````````````````````` example Lists: 5
+```````````````````````````````` example Lists: 5
 * list 1 
   * list 1.1
   
@@ -917,7 +917,7 @@ loose lists
 
 full list items
 
-```````````````````````````````` example Lists: 6
+```````````````````````````````` example Lists: 6
 * list 1 
   * list 2
     * list 3
@@ -991,7 +991,7 @@ full list items
 
 full list items
 
-```````````````````````````````` example Lists: 7
+```````````````````````````````` example Lists: 7
 1. list 1 
    1. list 2
       1. list 3
@@ -1069,7 +1069,7 @@ full list items
 
 Web URL
 
-```````````````````````````````` example Links - URL: 1
+```````````````````````````````` example Links - URL: 1
 [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 
 with some text
@@ -1112,7 +1112,7 @@ with some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links - URL: 2) options(full-render)
+```````````````````````````````` example(Links - URL: 2) options(full-render)
 <http://example.com>
 .
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2097,7 +2097,7 @@ with some text
 
 Mail link
 
-```````````````````````````````` example Links - Mail: 1
+```````````````````````````````` example Links - Mail: 1
 prefix vladimir@vladsch.com suffix 
     
 .
@@ -2129,7 +2129,7 @@ prefix vladimir@vladsch.com suffix
 
 Web URL
 
-```````````````````````````````` example(Images: 1) options(IGNORED)
+```````````````````````````````` example(Images: 1) options(IGNORED)
 ![flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 
 with some text
@@ -2191,7 +2191,7 @@ with some text
 
 Local File
 
-```````````````````````````````` example(Images: 2) options(IGNORED)
+```````````````````````````````` example(Images: 2) options(IGNORED)
 ![flexmark-icon-logo](file:///Users/vlad/src/projects/flexmark-java/assets/images/flexmark-icon-logo@2x.png "Title: flexmark-java logo") 
 
 with some text
@@ -2253,7 +2253,7 @@ with some text
 
 Relative Path
 
-```````````````````````````````` example(Images: 3) options(url, IGNORED)
+```````````````````````````````` example(Images: 3) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png) 
 
 with some text
@@ -2315,7 +2315,7 @@ with some text
 
 Root Path
 
-```````````````````````````````` example(Images: 4) options(url, IGNORED)
+```````````````````````````````` example(Images: 4) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png) 
 
 with some text
@@ -2379,7 +2379,7 @@ with some text
 
 lazy continuation
 
-```````````````````````````````` example Block Quotes: 1
+```````````````````````````````` example Block Quotes: 1
 * list item
     > block quote
     lazy continuation
@@ -2430,7 +2430,7 @@ lazy continuation
 
 with hyperlink
 
-```````````````````````````````` example Block Quotes: 2
+```````````````````````````````` example Block Quotes: 2
 > [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 .
 <w:body>
@@ -2477,7 +2477,7 @@ with hyperlink
 
 with hard break
 
-```````````````````````````````` example Block Quotes: 3
+```````````````````````````````` example Block Quotes: 3
 > block quote 1  
 > with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 .
@@ -2534,7 +2534,7 @@ with hard break
 
 with child paragraphs
 
-```````````````````````````````` example Block Quotes: 4
+```````````````````````````````` example Block Quotes: 4
 > block quote 1  
 >
 > with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
@@ -2594,7 +2594,7 @@ with child paragraphs
 
 with child block quote
 
-```````````````````````````````` example Block Quotes: 5
+```````````````````````````````` example Block Quotes: 5
 > block quote 1  
 >
 >> another block quote
@@ -2647,7 +2647,7 @@ with child block quote
 
 with child paragraphs
 
-```````````````````````````````` example Block Quotes: 6
+```````````````````````````````` example Block Quotes: 6
 > block quote 1  
 >
 > with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
@@ -2729,7 +2729,7 @@ with child paragraphs
 
 ## Fenced Code
 
-```````````````````````````````` example Fenced Code: 1
+```````````````````````````````` example Fenced Code: 1
 ```
 pre-formatted code
 code
@@ -2768,7 +2768,7 @@ code
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 2
+```````````````````````````````` example Fenced Code: 2
 text before
 
 ```
@@ -2828,7 +2828,7 @@ text after
 
 ## HTML
 
-```````````````````````````````` example HTML: 1
+```````````````````````````````` example HTML: 1
 <h1>This is a heading</h1>
 <p>paragraph</p>
 <hr />
@@ -2837,7 +2837,7 @@ text after
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML: 2
+```````````````````````````````` example HTML: 2
 Text
     
 <br />
@@ -2870,7 +2870,7 @@ Text
 
 With image
 
-```````````````````````````````` example(Mixed: 1) options(IGNORED)
+```````````````````````````````` example(Mixed: 1) options(IGNORED)
 # Heading 1 _italic_
 
 Some Text
@@ -4003,7 +4003,7 @@ code
 
 Without image
 
-```````````````````````````````` example(Mixed: 2) options(IGNORED)
+```````````````````````````````` example(Mixed: 2) options(IGNORED)
 # Heading 1 _italic_
 
 Some Text
@@ -5089,7 +5089,7 @@ code
 ````````````````````````````````
 
 
-```````````````````````````````` example(Mixed: 3) options(IGNORED)
+```````````````````````````````` example(Mixed: 3) options(IGNORED)
 # Heading 1 _italic_
 
 &nbsp;
@@ -6038,7 +6038,7 @@ code
 
 GitLab formatting
 
-```````````````````````````````` example GitLab: 1
+```````````````````````````````` example GitLab: 1
 plain [-del-] [+ins+]
 plain {-del-} {+ins+}
 .
@@ -6093,7 +6093,7 @@ plain {-del-} {+ins+}
 
 GitLab block quotes formatting
 
-```````````````````````````````` example GitLab: 2
+```````````````````````````````` example GitLab: 2
 >>>
 Block Quote
 >>>
@@ -6133,7 +6133,7 @@ Block Quote
 
 GitLab block quotes formatting
 
-```````````````````````````````` example GitLab: 3
+```````````````````````````````` example GitLab: 3
 >>>
 Block Quote
 >>>
@@ -6198,7 +6198,7 @@ Nested Block Quote
 
 All the fixings
 
-```````````````````````````````` example Tables: 1
+```````````````````````````````` example Tables: 1
 | Combined _header_                                        ||||
 | Default         | Left **Align** | Center | Right ++Align++ |
 |-----------------|:---------------|:------:|----------------:|
@@ -6634,7 +6634,7 @@ All the fixings
 
 With breaks
 
-```````````````````````````````` example Tables: 2
+```````````````````````````````` example Tables: 2
 |Document / Item|versioning|
 |:---------------------|:-------------|
 |Technical Documentation, e.g.<br/> - Software Requirements<br/> - Software Architecture<br/> - Validation Plan|We use our versioning system to control changes to these (markdown) documents|
@@ -6868,7 +6868,7 @@ With breaks
 
 With breaks and caption before
 
-```````````````````````````````` example(Tables: 3) options(caption-before)
+```````````````````````````````` example(Tables: 3) options(caption-before)
 |Document / Item|versioning|
 |:---------------------|:-------------|
 |Technical Documentation, e.g.<br/> - Software Requirements<br/> - Software Architecture<br/> - Validation Plan|We use our versioning system to control changes to these (markdown) documents|
@@ -7102,7 +7102,7 @@ With breaks and caption before
 
 With spanning columns
 
-```````````````````````````````` example Tables: 4
+```````````````````````````````` example Tables: 4
 
 | data   | label  |
 |:-------|:-------|
@@ -7217,7 +7217,7 @@ With spanning columns
 
 With spanning columns turned off
 
-```````````````````````````````` example(Tables: 5) options(table-no-span)
+```````````````````````````````` example(Tables: 5) options(table-no-span)
 
 | data   | label  |
 |:-------|:-------|
@@ -7338,7 +7338,7 @@ With spanning columns turned off
 
 With embedded links
 
-```````````````````````````````` example Tables: 6
+```````````````````````````````` example Tables: 6
 
 | data   | label  |
 |:-------|:-------|
@@ -7450,7 +7450,7 @@ Tests for inheritance of indentation and borders
 
 block quote with bullet list
 
-```````````````````````````````` example Inheritance: 1
+```````````````````````````````` example Inheritance: 1
 > some quote
 >
 > * a list item 
@@ -7524,7 +7524,7 @@ block quote with bullet list
 
 block quote with bullet nested list
 
-```````````````````````````````` example Inheritance: 2
+```````````````````````````````` example Inheritance: 2
 > some quote
 >
 > * a list item 
@@ -7598,7 +7598,7 @@ block quote with bullet nested list
 
 block quote with bullet list nested beyond border space limit
 
-```````````````````````````````` example Inheritance: 3
+```````````````````````````````` example Inheritance: 3
 > some quote
 >
 > * a list item 
@@ -7735,7 +7735,7 @@ block quote with bullet list nested beyond border space limit
 
 block quote with ordered list
 
-```````````````````````````````` example(Inheritance: 4) options(IGNORED)
+```````````````````````````````` example(Inheritance: 4) options(IGNORED)
 > some quote
 >
 > 1. a list item 
@@ -7807,7 +7807,7 @@ block quote with ordered list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Inheritance: 5) options(IGNORED)
+```````````````````````````````` example(Inheritance: 5) options(IGNORED)
 1. Table in a list
 
    | Simple Table |
@@ -7887,7 +7887,7 @@ block quote with ordered list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Inheritance: 6) options(IGNORED)
+```````````````````````````````` example(Inheritance: 6) options(IGNORED)
 > Table in quote
 >
 > | Simple Table |
@@ -7976,7 +7976,7 @@ block quote with ordered list
 
 list with block quote
 
-```````````````````````````````` example(Inheritance: 7) options(IGNORED)
+```````````````````````````````` example(Inheritance: 7) options(IGNORED)
 1. ordered list
 
    > with block quote
@@ -8022,7 +8022,7 @@ list with block quote
 
 list with block quote
 
-```````````````````````````````` example(Inheritance: 8) options(IGNORED)
+```````````````````````````````` example(Inheritance: 8) options(IGNORED)
 1. ordered list
    * bullet list
    
@@ -8081,7 +8081,7 @@ list with block quote
 
 list with block quote
 
-```````````````````````````````` example(Inheritance: 9) options(IGNORED)
+```````````````````````````````` example(Inheritance: 9) options(IGNORED)
  > with block quote
  >
  > text
@@ -8414,7 +8414,7 @@ list with block quote
 
 list with block quote
 
-```````````````````````````````` example(Inheritance: 10) options(IGNORED)
+```````````````````````````````` example(Inheritance: 10) options(IGNORED)
 1. ordered list
    * bullet list
      > with block quote
@@ -8551,7 +8551,7 @@ list with block quote
 
 aside block with bullet list
 
-```````````````````````````````` example Inheritance: 11
+```````````````````````````````` example Inheritance: 11
 | some quote
 |
 | * a list item 
@@ -8619,7 +8619,7 @@ aside block with bullet list
 
 aside block with bullet nested list
 
-```````````````````````````````` example Inheritance: 12
+```````````````````````````````` example Inheritance: 12
 | some quote
 |
 | * a list item 
@@ -8687,7 +8687,7 @@ aside block with bullet nested list
 
 aside block with bullet list nested beyond border space limit
 
-```````````````````````````````` example Inheritance: 13
+```````````````````````````````` example Inheritance: 13
 | some quote
 |
 | * a list item 
@@ -8809,7 +8809,7 @@ aside block with bullet list nested beyond border space limit
 
 aside block with ordered list
 
-```````````````````````````````` example(Inheritance: 14) options(IGNORED)
+```````````````````````````````` example(Inheritance: 14) options(IGNORED)
 | some quote
 |
 | 1. a list item 
@@ -8875,7 +8875,7 @@ aside block with ordered list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Inheritance: 15) options(IGNORED)
+```````````````````````````````` example(Inheritance: 15) options(IGNORED)
 1. Table in a list
 
    | Simple Table |
@@ -8955,7 +8955,7 @@ aside block with ordered list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Inheritance: 16) options(IGNORED)
+```````````````````````````````` example(Inheritance: 16) options(IGNORED)
 | Table in quote
 |
 | | Simple Table |
@@ -9044,7 +9044,7 @@ aside block with ordered list
 
 list with aside block
 
-```````````````````````````````` example(Inheritance: 17) options(IGNORED)
+```````````````````````````````` example(Inheritance: 17) options(IGNORED)
 1. ordered list
 
    | with aside block
@@ -9090,7 +9090,7 @@ list with aside block
 
 list with aside block
 
-```````````````````````````````` example(Inheritance: 18) options(IGNORED)
+```````````````````````````````` example(Inheritance: 18) options(IGNORED)
 1. ordered list
    * bullet list
    
@@ -9149,7 +9149,7 @@ list with aside block
 
 list with aside block
 
-```````````````````````````````` example(Inheritance: 19) options(IGNORED)
+```````````````````````````````` example(Inheritance: 19) options(IGNORED)
  | with aside block
  |
  | text
@@ -9458,7 +9458,7 @@ list with aside block
 
 list with aside block
 
-```````````````````````````````` example(Inheritance: 20) options(IGNORED)
+```````````````````````````````` example(Inheritance: 20) options(IGNORED)
 1. ordered list
    * bullet list
      | with aside block
@@ -9592,7 +9592,7 @@ list with aside block
 
 ## Emoji
 
-```````````````````````````````` example(Emoji: 1) options(IGNORED)
+```````````````````````````````` example(Emoji: 1) options(IGNORED)
 :information_source: Emoji
 .
 <w:body>
@@ -9649,7 +9649,7 @@ list with aside block
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 2) options(IGNORED)
+```````````````````````````````` example(Emoji: 2) options(IGNORED)
 :warning: Emoji
 .
 <w:body>
@@ -9707,7 +9707,7 @@ list with aside block
 
 ## Headings
 
-```````````````````````````````` example Headings: 1
+```````````````````````````````` example Headings: 1
 # Heading
 .
 <w:body>
@@ -9725,7 +9725,7 @@ list with aside block
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 2
+```````````````````````````````` example Headings: 2
 ## Heading
 .
 <w:body>
@@ -9743,7 +9743,7 @@ list with aside block
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 3
+```````````````````````````````` example Headings: 3
 ### Heading
 .
 <w:body>
@@ -9761,7 +9761,7 @@ list with aside block
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 4
+```````````````````````````````` example Headings: 4
 #### Heading
 .
 <w:body>
@@ -9779,7 +9779,7 @@ list with aside block
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 5
+```````````````````````````````` example Headings: 5
 ##### Heading
 .
 <w:body>
@@ -9797,7 +9797,7 @@ list with aside block
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 6
+```````````````````````````````` example Headings: 6
 ###### Heading
 .
 <w:body>
@@ -9815,7 +9815,7 @@ list with aside block
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 7
+```````````````````````````````` example Headings: 7
 Heading
 =======
 .
@@ -9834,7 +9834,7 @@ Heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 8
+```````````````````````````````` example Headings: 8
 Heading
 -------
 .

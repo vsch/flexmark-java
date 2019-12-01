@@ -18,7 +18,7 @@ Converts:
 
 not quotes
 
-```````````````````````````````` example TypographicQuotes: 1
+```````````````````````````````` example TypographicQuotes: 1
 a'l'ordre'b
 .
 <p>a&rsquo;l&rsquo;ordre&rsquo;b</p>
@@ -34,9 +34,10 @@ Document[0, 11]
     Text[10, 11] chars:[10, 11, "b"]
 ````````````````````````````````
 
+
 not quoted
 
-```````````````````````````````` example TypographicQuotes: 2
+```````````````````````````````` example TypographicQuotes: 2
 a"l"ordre"b
 .
 <p>a&quot;l&quot;ordre&quot;b</p>
@@ -49,7 +50,7 @@ Document[0, 11]
 
 basic quotes
 
-```````````````````````````````` example TypographicQuotes: 3
+```````````````````````````````` example TypographicQuotes: 3
 'l'ordre'
 .
 <p>&lsquo;l&rsquo;ordre&rsquo;</p>
@@ -63,7 +64,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 4
+```````````````````````````````` example TypographicQuotes: 4
 'l''ordre'
 .
 <p>&lsquo;l''ordre&rsquo;</p>
@@ -75,7 +76,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 5
+```````````````````````````````` example TypographicQuotes: 5
 **'l'ordre'**
 .
 <p><strong>&lsquo;l&rsquo;ordre&rsquo;</strong></p>
@@ -90,7 +91,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 6
+```````````````````````````````` example TypographicQuotes: 6
 '**l'ordre**'
 .
 <p>&lsquo;<strong>l&rsquo;ordre</strong>&rsquo;</p>
@@ -105,7 +106,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 7
+```````````````````````````````` example TypographicQuotes: 7
 **'l''ordre'**
 .
 <p><strong>&lsquo;l''ordre&rsquo;</strong></p>
@@ -118,7 +119,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 8
+```````````````````````````````` example TypographicQuotes: 8
 **"l'ordre"**
 .
 <p><strong>&ldquo;l&rsquo;ordre&rdquo;</strong></p>
@@ -133,7 +134,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 9
+```````````````````````````````` example TypographicQuotes: 9
 "**l'ordre**"
 .
 <p>&ldquo;<strong>l&rsquo;ordre</strong>&rdquo;</p>
@@ -148,7 +149,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 10
+```````````````````````````````` example TypographicQuotes: 10
 **"l''ordre"**
 .
 <p><strong>&ldquo;l''ordre&rdquo;</strong></p>
@@ -161,7 +162,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 11
+```````````````````````````````` example TypographicQuotes: 11
 a's and b's
 .
 <p>a&rsquo;s and b&rsquo;s</p>
@@ -176,7 +177,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 12
+```````````````````````````````` example TypographicQuotes: 12
 'Twas the night before Christmas.
 .
 <p>&rsquo;Twas the night before Christmas.</p>
@@ -188,7 +189,7 @@ Document[0, 33]
 ````````````````````````````````
 
 
-```````````````````````````````` example TypographicQuotes: 13
+```````````````````````````````` example TypographicQuotes: 13
 Sample "double" 'single' <<angle>> "l'ordre" 'l'ordre' <span>test</span>
 .
 <p>Sample &ldquo;double&rdquo; &lsquo;single&rsquo; &laquo;angle&raquo; &ldquo;l&rsquo;ordre&rdquo; &lsquo;l&rsquo;ordre&rsquo; <span>test</span></p>
@@ -223,7 +224,7 @@ Document[0, 72]
 
 escaped quotes
 
-```````````````````````````````` example TypographicQuotes: 14
+```````````````````````````````` example TypographicQuotes: 14
 Sample \"double\" \'single\' \<<angle\>> \"l'ordre" \'l'ordre\'
 .
 <p>Sample &quot;double&quot; 'single' &lt;&lt;angle&gt;&gt; &quot;l&rsquo;ordre&quot; 'l&rsquo;ordre'</p>
@@ -240,7 +241,7 @@ Document[0, 63]
 
 escaped quotes
 
-```````````````````````````````` example TypographicQuotes: 15
+```````````````````````````````` example TypographicQuotes: 15
 Sample \"double\" \'single\' \<<angle>\> \"l'ordre" \'l'ordre\'
 .
 <p>Sample &quot;double&quot; 'single' &lt;<angle>&gt; &quot;l&rsquo;ordre&quot; 'l&rsquo;ordre'</p>
@@ -259,7 +260,7 @@ Document[0, 63]
 
 basic quotes turned off
 
-```````````````````````````````` example(TypographicQuotes: 16) options(no-quotes)
+```````````````````````````````` example(TypographicQuotes: 16) options(no-quotes)
 Sample "double" 'single' <<angle>> "l'ordre" 'l'ordre'
 .
 <p>Sample &quot;double&quot; 'single' &lt;<angle>&gt; &quot;l'ordre&quot; 'l'ordre'</p>
@@ -285,7 +286,7 @@ to TypographicSmarts nodes
 
 basic
 
-```````````````````````````````` example Typographic Smarts: 1
+```````````````````````````````` example Typographic Smarts: 1
 Sample with l'existence, from 1...2 and so on. . . 
 
 en--dash and em---dash
@@ -312,7 +313,7 @@ Document[0, 75]
 
 escaped smarts
 
-```````````````````````````````` example Typographic Smarts: 2
+```````````````````````````````` example Typographic Smarts: 2
 Sample with l\'existence, from 1\...2 and so on\. . . 
 
 en\--dash and em\---dash
@@ -332,7 +333,7 @@ Document[0, 80]
 
 escaped smarts
 
-```````````````````````````````` example Typographic Smarts: 3
+```````````````````````````````` example Typographic Smarts: 3
 Sample with l\'existence, from 1\...2 and so on\. . . 
 
 en-\-dash and em-\--dash
@@ -350,7 +351,7 @@ Document[0, 80]
 
 escaped smarts
 
-```````````````````````````````` example Typographic Smarts: 4
+```````````````````````````````` example Typographic Smarts: 4
 Sample with l\'existence, from 1\...2 and so on\. . . 
 
 en-\-dash and em--\-dash
@@ -370,7 +371,7 @@ Document[0, 80]
 
 basic smarts turned off
 
-```````````````````````````````` example(Typographic Smarts: 5) options(no-smarts)
+```````````````````````````````` example(Typographic Smarts: 5) options(no-smarts)
 Sample with l'existence, from 1...2 and so on. . . 
 
 en--dash and em---dash
@@ -388,7 +389,7 @@ Document[0, 75]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 Sample with l'existence, from 1...2 and so on. . . 
 
 en--dash and em---dash
@@ -418,7 +419,7 @@ Document[0, 75]
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return
 
-```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
 <<test>>
 .
 <p>&laquo;test&raquo;</p>
@@ -430,7 +431,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
+```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
 <<test>>⏎
 .
 <p>&laquo;test&raquo;</p>
@@ -442,7 +443,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
 <<test>>⏎
 .
 <p>&laquo;test&raquo;</p>
@@ -454,7 +455,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
 <<test>>
 
 .
@@ -471,7 +472,7 @@ Document[0, 10]
 
 Issue #72, Multiple angle quotes not being handled correctly
 
-```````````````````````````````` example Issue 72: 1
+```````````````````````````````` example Issue 72: 1
 <<test>><<test1>>
 
 .
@@ -486,7 +487,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 72: 2) options(FILE_EOL)
+```````````````````````````````` example(Issue 72: 2) options(FILE_EOL)
 <<test>>
 abcd
 <<test>>
@@ -507,7 +508,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 72: 3) options(FILE_EOL)
+```````````````````````````````` example(Issue 72: 3) options(FILE_EOL)
 <<test>>abcd
 
 <<test>>
@@ -528,7 +529,7 @@ Document[0, 23]
 
 test handling of double quotes and angle quotes
 
-```````````````````````````````` example Issue 72: 4
+```````````````````````````````` example Issue 72: 4
 "<<test>>""<<test1>>"
 
 .
@@ -549,7 +550,7 @@ Document[0, 23]
 
 Issue #74, Angle quotes again :)
 
-```````````````````````````````` example(Issue 74: 1) options(NO_FILE_EOL)
+```````````````````````````````` example(Issue 74: 1) options(NO_FILE_EOL)
 <<test>>abcd<</test1>>
 .
 <p>&laquo;test&raquo;abcd&laquo;/test1&raquo;</p>
@@ -564,7 +565,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 74: 2) options(NO_FILE_EOL)
+```````````````````````````````` example(Issue 74: 2) options(NO_FILE_EOL)
 <<test>>abcd<<:test1>>
 .
 <p>&laquo;test&raquo;abcd&laquo;:test1&raquo;</p>

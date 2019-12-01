@@ -10,12 +10,12 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Media Tags video link transformer
 
-Transforms links prefixed with 'V' into a video media tag.
-(Special thanks to http://techslides.com/sample-webm-ogg-and-mp4-video-files-for-html5 ).
+Transforms links prefixed with 'V' into a video media tag. (Special thanks to
+http://techslides.com/sample-webm-ogg-and-mp4-video-files-for-html5 ).
 
 Media type is guessed based on extension.
 
-```````````````````````````````` example Media Tags video link transformer: 1
+```````````````````````````````` example Media Tags video link transformer: 1
 !V[Sample Video](http://techslides.com/demos/sample-videos/small.mp4)
 .
 <p><video title="Sample Video" controls=""><source src="http://techslides.com/demos/sample-videos/small.mp4" type="video/mp4" />Your browser does not support the video element.</video></p>
@@ -27,7 +27,7 @@ Document[0, 69]
 ````````````````````````````````
 
 
-```````````````````````````````` example Media Tags video link transformer: 2
+```````````````````````````````` example Media Tags video link transformer: 2
 !V[Sample Video](http://techslides.com/demos/sample-videos/small.webm)
 .
 <p><video title="Sample Video" controls=""><source src="http://techslides.com/demos/sample-videos/small.webm" type="video/webm" />Your browser does not support the video element.</video></p>
@@ -39,7 +39,7 @@ Document[0, 70]
 ````````````````````````````````
 
 
-```````````````````````````````` example Media Tags video link transformer: 3
+```````````````````````````````` example Media Tags video link transformer: 3
 !V[Sample Video](http://techslides.com/demos/sample-videos/small.ogv)
 .
 <p><video title="Sample Video" controls=""><source src="http://techslides.com/demos/sample-videos/small.ogv" type="video/ogg" />Your browser does not support the video element.</video></p>
@@ -51,7 +51,7 @@ Document[0, 69]
 ````````````````````````````````
 
 
-```````````````````````````````` example Media Tags video link transformer: 4
+```````````````````````````````` example Media Tags video link transformer: 4
 !V[Sample Video](http://techslides.com/demos/sample-videos/small.3gp)
 .
 <p><video title="Sample Video" controls=""><source src="http://techslides.com/demos/sample-videos/small.3gp" type="video/3gp" />Your browser does not support the video element.</video></p>
@@ -62,9 +62,10 @@ Document[0, 69]
       Text[3, 15] chars:[3, 15, "Sampl … Video"]
 ````````````````````````````````
 
+
 Unknown media types results in no type data for source.
 
-```````````````````````````````` example Media Tags video link transformer: 5
+```````````````````````````````` example Media Tags video link transformer: 5
 !V[Sample Video](http://techslides.com/demos/sample-videos/small.flv)
 .
 <p><video title="Sample Video" controls=""><source src="http://techslides.com/demos/sample-videos/small.flv" />Your browser does not support the video element.</video></p>
@@ -75,9 +76,10 @@ Document[0, 69]
       Text[3, 15] chars:[3, 15, "Sampl … Video"]
 ````````````````````````````````
 
+
 Multiple sources can be specified by separating with a vertical bar '|'.
 
-```````````````````````````````` example Media Tags video link transformer: 6
+```````````````````````````````` example Media Tags video link transformer: 6
 !V[Sample Video](http://techslides.com/demos/sample-videos/small.mp4|http://techslides.com/demos/sample-videos/small.webm)
 .
 <p><video title="Sample Video" controls=""><source src="http://techslides.com/demos/sample-videos/small.mp4" type="video/mp4" /><source src="http://techslides.com/demos/sample-videos/small.webm" type="video/webm" />Your browser does not support the video element.</video></p>
@@ -88,9 +90,10 @@ Document[0, 122]
       Text[3, 15] chars:[3, 15, "Sampl … Video"]
 ````````````````````````````````
 
+
 Ignore escaped prefix '\V'.
 
-```````````````````````````````` example Media Tags video link transformer: 7
+```````````````````````````````` example Media Tags video link transformer: 7
 \!V[Sample Video](http://techslides.com/demos/sample-videos/small.mp4)
 .
 <p>!V<a href="http://techslides.com/demos/sample-videos/small.mp4">Sample Video</a></p>
@@ -102,9 +105,10 @@ Document[0, 70]
       Text[4, 16] chars:[4, 16, "Sampl … Video"]
 ````````````````````````````````
 
+
 Ignore escaped prefix '\\\V'.
 
-```````````````````````````````` example Media Tags video link transformer: 8
+```````````````````````````````` example Media Tags video link transformer: 8
 \\\!V[Sample Video](http://techslides.com/demos/sample-videos/small.mp4)
 .
 <p>\!V<a href="http://techslides.com/demos/sample-videos/small.mp4">Sample Video</a></p>
@@ -116,9 +120,10 @@ Document[0, 72]
       Text[6, 18] chars:[6, 18, "Sampl … Video"]
 ````````````````````````````````
 
+
 Don't ignore escaped prefix '\\V'.
 
-```````````````````````````````` example Media Tags video link transformer: 9
+```````````````````````````````` example Media Tags video link transformer: 9
 \\!V[Sample Video](http://techslides.com/demos/sample-videos/small.mp4)
 .
 <p>\<video title="Sample Video" controls=""><source src="http://techslides.com/demos/sample-videos/small.mp4" type="video/mp4" />Your browser does not support the video element.</video></p>
@@ -129,3 +134,4 @@ Document[0, 71]
     VideoLink[2, 71] textOpen:[2, 5, "!V["] text:[5, 17, "Sample Video"] textClose:[17, 18, "]"] linkOpen:[18, 19, "("] url:[19, 70, "http://techslides.com/demos/sample-videos/small.mp4"] linkClose:[70, 71, ")"]
       Text[5, 17] chars:[5, 17, "Sampl … Video"]
 ````````````````````````````````
+

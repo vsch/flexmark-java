@@ -1,18 +1,18 @@
 ---
 title: PdfConverter Extension Spec
-author: 
-version: 
+author:
+version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## PdfConverter  
+## PdfConverter
 
 Converts pdf_converter text to PdfConverter nodes.
 
-```````````````````````````````` example PdfConverter: 1
+```````````````````````````````` example PdfConverter: 1
 <p>Expected rendered HTML</p>
 .
 <html><head><style>
@@ -55,7 +55,7 @@ h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." count
 ````````````````````````````````
 
 
-```````````````````````````````` example PdfConverter: 2
+```````````````````````````````` example PdfConverter: 2
 <html><body>
 <p>Expected rendered HTML</p>
 </body></html>
@@ -100,7 +100,7 @@ h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." count
 ````````````````````````````````
 
 
-```````````````````````````````` example PdfConverter: 3
+```````````````````````````````` example PdfConverter: 3
 <html><head>
     <!-- other stuff -->
 </head><body>
@@ -149,7 +149,7 @@ h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." count
 ````````````````````````````````
 
 
-```````````````````````````````` example PdfConverter: 4
+```````````````````````````````` example PdfConverter: 4
 <body>
 <p>Expected rendered HTML</p>
 </body>

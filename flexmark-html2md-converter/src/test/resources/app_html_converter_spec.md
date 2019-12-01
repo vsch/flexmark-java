@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Word Samples
 
-```````````````````````````````` example MS Word 2011 for Mac: 1
+```````````````````````````````` example MS Word 2011 for Mac: 1
 * Equipment
 
 * Chemicals
@@ -706,7 +706,7 @@ lang=EN-US style='mso-ansi-language:EN-US'>Oligos<o:p></o:p></span></p>
 
 Word Samples
 
-```````````````````````````````` example MS Word 2011 for Mac: 2
+```````````````````````````````` example MS Word 2011 for Mac: 2
 1. Equipment
 
 2. Chemicals
@@ -1394,7 +1394,7 @@ lang=EN-US style='mso-ansi-language:EN-US'>Oligos<o:p></o:p></span></p>
 
 Word Samples, paren list, default
 
-```````````````````````````````` example MS Word 2011 for Mac: 3
+```````````````````````````````` example MS Word 2011 for Mac: 3
 1. Equipment
 
 2. Chemicals
@@ -2083,7 +2083,7 @@ lang=EN-US style='mso-ansi-language:EN-US'>Oligos<o:p></o:p></span></p>
 
 Word Samples, paren list, default
 
-```````````````````````````````` example(MS Word 2011 for Mac: 4) options(paren-lists)
+```````````````````````````````` example(MS Word 2011 for Mac: 4) options(paren-lists)
 1) Equipment
 
 2) Chemicals
@@ -2772,7 +2772,7 @@ lang=EN-US style='mso-ansi-language:EN-US'>Oligos<o:p></o:p></span></p>
 
 Word Samples, paren list, default
 
-```````````````````````````````` example(MS Word 2011 for Mac: 5) options(paren-lists)
+```````````````````````````````` example(MS Word 2011 for Mac: 5) options(paren-lists)
 1. Equipment
 
 2. Chemicals
@@ -3852,7 +3852,7 @@ lang=EN-US style='mso-ansi-language:EN-US'><o:p>&nbsp;</o:p></span></p>
 
 ## MS Excel 2011 for Mac
 
-```````````````````````````````` example MS Excel 2011 for Mac: 1
+```````````````````````````````` example MS Excel 2011 for Mac: 1
 |---------|---------|
 | Title 1 | Title 2 |
 | abc     | 1       |
@@ -3941,7 +3941,7 @@ td
 
 text wrapped in div should be treated as having a hard break at the end.
 
-```````````````````````````````` example Apple Mail: 1
+```````````````````````````````` example Apple Mail: 1
 P.S. I will focus on the conversion of elements you listed in your prioritized list but will  
 implement all markdown elements for the final version of the module. I like orthogonal solutions  
 that require as little effort in use as much as possible.
@@ -3957,7 +3957,7 @@ that require as little effort in use as much as possible.
 ````````````````````````````````
 
 
-```````````````````````````````` example Apple Mail: 2
+```````````````````````````````` example Apple Mail: 2
 For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%  
 
 For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%  
@@ -3983,7 +3983,7 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 ````````````````````````````````
 
 
-```````````````````````````````` example(Apple Mail: 3) options(no-br-as-para-breaks)
+```````````````````````````````` example(Apple Mail: 3) options(no-br-as-para-breaks)
 For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%  
 For compartment at 25 C, chilled to 0 C gives 19%, 5 C gives 25%, 10 C gives 39%  
 For compartment at 30 C, chilled to 0 C gives 14%, 5 C gives 18%, 10 C gives 38%  
@@ -4005,7 +4005,7 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 ````````````````````````````````
 
 
-```````````````````````````````` example(Apple Mail: 4) options(div-as-para)
+```````````````````````````````` example(Apple Mail: 4) options(div-as-para)
 For compartment at 20 C, chilled to 0 C gives 25%, 5 C gives 33%, 10 C gives 52%
 
 <br />
@@ -4039,7 +4039,7 @@ For compartment at 35 C, chilled to 0 C gives 11%, 5 C gives 14%, 10 C gives 22%
 ````````````````````````````````
 
 
-```````````````````````````````` example Apple Mail: 5
+```````````````````````````````` example Apple Mail: 5
 Best regards,  
 
 <br />
@@ -4052,7 +4052,7 @@ Vladimir.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Apple Mail: 6) options(no-br-as-extra-blank-lines)
+```````````````````````````````` example(Apple Mail: 6) options(no-br-as-extra-blank-lines)
 Best regards,  
 
 Vladimir.
@@ -4063,7 +4063,7 @@ Vladimir.
 
 no blank line after salutation
 
-```````````````````````````````` example Apple Mail: 7
+```````````````````````````````` example Apple Mail: 7
 Hi Felix,  
 
 This is a test.  
@@ -4090,7 +4090,7 @@ Vladimir.
 ````````````````````````````````
 
 
-```````````````````````````````` example Apple Mail: 8
+```````````````````````````````` example Apple Mail: 8
 1. Project was created by a team working for a company. The company decided to OSS the project to help it move faster and because the project was not part of their "secret sauce". The project was an excellent idea that solved a hard problem: Bootstrap, React and others.
 2. Project hit a sweet-spot of solving a high cost problem and was done well. Got widely adopted where it became either a revenue generator for some large business or mission critical for it. The company or companies sponsored the project to support its further development and ensure their continued ability to rely on it. Linux, MySQL, and a few others. These cases are very rare compared to all OSS project attempts.
 3. Project had commercial interest from the start and used OSS to do the market penetration and marketing of their idea. They had financing or were revenue generating from the beginning. Most common case of success stories: GitHub, Discourse, Dropbox, etc.
@@ -4114,7 +4114,7 @@ I think that would apply to any successful endeavour in history, to just OSS pro
 ````````````````````````````````
 
 
-```````````````````````````````` example Apple Mail: 9
+```````````````````````````````` example Apple Mail: 9
 Best regards,  
 
 <br />
@@ -4143,7 +4143,7 @@ Mobile: 111111
 
 Uses `<strike>` tags instead of del.
 
-```````````````````````````````` example Office Libre: 1
+```````````````````````````````` example Office Libre: 1
 ~~strike-through~~
 .
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -4169,7 +4169,7 @@ Uses `<strike>` tags instead of del.
 
 ## Unicode Emoji Page
 
-```````````````````````````````` example(Unicode Emoji Page: 1) options(table-no-alignment, table-no-width)
+```````````````````````````````` example(Unicode Emoji Page: 1) options(table-no-alignment, table-no-width)
 | [Smileys \& People](#smileys_&_people) |||||
 | [face-positive](#face-positive) |||||
 | [№](../format.html#col-num) | [Code](../format.html#col-code) | [Sample](../format.html#col-vendor) | [CLDR Short Name](../format.html#col-name) | [Other Keywords](../format.html#col-annotations) |
@@ -4203,7 +4203,7 @@ Uses `<strike>` tags instead of del.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Unicode Emoji Page: 2) options(table-no-alignment, table-no-width, table-ignore-mid-heading)
+```````````````````````````````` example(Unicode Emoji Page: 2) options(table-no-alignment, table-no-width, table-ignore-mid-heading)
 | [Smileys \& People](#smileys_&_people) |||||
 | [face-positive](#face-positive) |||||
 | [№](../format.html#col-num) | [Code](../format.html#col-code) | [Sample](../format.html#col-vendor) | [CLDR Short Name](../format.html#col-name) | [Other Keywords](../format.html#col-annotations) |
@@ -4247,7 +4247,7 @@ Uses `<strike>` tags instead of del.
 
 ## Apple Mail from Markdown Navigator HTML mime paste
 
-```````````````````````````````` example Apple Mail from Markdown Navigator HTML mime paste: 1
+```````````````````````````````` example Apple Mail from Markdown Navigator HTML mime paste: 1
 :wink:
 .
 <img alt="emoji people:wink" src="data:image/png;base64,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">
@@ -4258,7 +4258,7 @@ Uses `<strike>` tags instead of del.
 
 Includes part of math ml text
 
-```````````````````````````````` example Wiki Page Drag/Drop: 1
+```````````````````````````````` example Wiki Page Drag/Drop: 1
 Then we calculate <math xmlns="http://www.w3.org/1998/Math/MathML" alttext="{\displaystyle \min
 \left\{d_{i}\right\}}">min{di}</math>![\min
 \left\{d_{i}\right\}](https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45) for intervals
@@ -4302,7 +4302,7 @@ class="Apple-converted-space"> </span>for intervals</span>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wiki Page Drag/Drop: 2) options(math-none)
+```````````````````````````````` example(Wiki Page Drag/Drop: 2) options(math-none)
 Then we calculate ![\min
 \left\{d_{i}\right\}](https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45) for intervals
 .
@@ -4345,7 +4345,7 @@ class="Apple-converted-space"> </span>for intervals</span>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wiki Page Drag/Drop: 3) options(math-text)
+```````````````````````````````` example(Wiki Page Drag/Drop: 3) options(math-text)
 Then we calculate min{di}![\min
 \left\{d_{i}\right\}](https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45) for intervals
 .
@@ -4390,7 +4390,7 @@ class="Apple-converted-space"> </span>for intervals</span>
 
 Not implemented
 
-```````````````````````````````` example(Wiki Page Drag/Drop: 4) options(IGNORE, math-markdown)
+```````````````````````````````` example(Wiki Page Drag/Drop: 4) options(IGNORE, math-markdown)
 Then we calculate $`\displaystyle \min \left\{d_{i}\right\}`$![\min
 \left\{d_{i}\right\}](https://wikimedia.org/api/rest_v1/media/math/render/svg/e073d5ed25d56134b3c893a4a6313c952f62ad45)
 for intervals
@@ -4439,7 +4439,7 @@ class="Apple-converted-space"> </span>for intervals</span>
 GitHub comments are now wrapped in a single cell, single row table. This we will need to discard
 so contents can be extracted as Markdown:
 
-```````````````````````````````` example Effing GitHub: 1
+```````````````````````````````` example Effing GitHub: 1
 ### **[vsch](https://github.com/vsch)** commented [27 days ago](https://github.com/vsch/MarkdownTest/issues/5#issue-403521415)
 
 |----------------|
@@ -4466,7 +4466,7 @@ so contents can be extracted as Markdown:
 ````````````````````````````````
 
 
-```````````````````````````````` example Effing GitHub: 2
+```````````````````````````````` example Effing GitHub: 2
 ### **[vsch](https://github.com/vsch)** commented [27 days ago](https://github.com/vsch/MarkdownTest/issues/5#issue-403521415)
 
 |----------------|
@@ -4477,7 +4477,7 @@ so contents can be extracted as Markdown:
 ````````````````````````````````
 
 
-```````````````````````````````` example Effing GitHub: 3
+```````````````````````````````` example Effing GitHub: 3
 ### **[vsch](https://github.com/vsch)** commented [Jan 27, 2019](https://github.com/vsch/MarkdownTest/issues/5#issue-403521415)
 
 |----------------|
@@ -4577,7 +4577,7 @@ OwnerAuthor
 
 Issue #348, wrap auto links needs to be on to convert auto-links
 
-```````````````````````````````` example(Issue 348: 1) options(no-wrap-autolinks)
+```````````````````````````````` example(Issue 348: 1) options(no-wrap-autolinks)
 This doesn't get rendered: https://google.com [This does.](https://google.com)
 .
 <p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
@@ -4586,14 +4586,14 @@ This doesn't get rendered: https://google.com [This does.](https://google.com)
 
 default to no wrap
 
-```````````````````````````````` example(Issue 348: 2) options(no-wrap-autolinks)
+```````````````````````````````` example(Issue 348: 2) options(no-wrap-autolinks)
 This doesn't get rendered: https://google.com [This does.](https://google.com)
 .
 <p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 348: 3) options(wrap-autolinks)
+```````````````````````````````` example(Issue 348: 3) options(wrap-autolinks)
 This doesn't get rendered: <https://google.com> [This does.](https://google.com)
 .
 <p>This doesn't get rendered: <a href="https://google.com" rel="nofollow">https://google.com</a> <a href="https://google.com" rel="nofollow">This does.</a></p> 

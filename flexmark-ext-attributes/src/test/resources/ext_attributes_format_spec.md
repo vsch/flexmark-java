@@ -85,7 +85,7 @@ For the rest of the specification the `options` following the example will conta
 
 attributes assigned to paragraph
 
-```````````````````````````````` example(Text Node Previous Sibling: 1) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 1) options(no-text-attributes)
 Cond 1.1 text node{.red}
 
 Cond 1.1 text node {.red}
@@ -96,7 +96,7 @@ Cond 1.1 text node {.red}
 ````````````````````````````````
 
 
-```````````````````````````````` example Text Node Previous Sibling: 2
+```````````````````````````````` example Text Node Previous Sibling: 2
 Cond 1.2 text node{.red}
 
 Cond 1.3 text node {.red}
@@ -109,7 +109,7 @@ Cond 1.3 text node {.red}
 
 can delimit with comments
 
-```````````````````````````````` example Text Node Previous Sibling: 3
+```````````````````````````````` example Text Node Previous Sibling: 3
 Cond 1.2 text <!---->node{.red}
 
 Cond 1.3 text <!---->node {.red}
@@ -120,7 +120,7 @@ Cond 1.3 text <!---->node {.red}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Text Node Previous Sibling: 4) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 4) options(no-text-attributes)
 Cond 1.2 **text node{.red}**
 
 Cond 1.3 **text node {.red}**
@@ -131,7 +131,7 @@ Cond 1.3 **text node {.red}**
 ````````````````````````````````
 
 
-```````````````````````````````` example Text Node Previous Sibling: 5
+```````````````````````````````` example Text Node Previous Sibling: 5
 Cond 1.2 **text node{.red}**
 
 Cond 1.3 **text node {.red}**
@@ -144,7 +144,7 @@ Cond 1.3 **text node {.red}**
 
 can delimit with comments
 
-```````````````````````````````` example Text Node Previous Sibling: 6
+```````````````````````````````` example Text Node Previous Sibling: 6
 Cond 1.2 **text <!---->node{.red}**
 
 Cond 1.3 **text <!---->node {.red}**
@@ -155,7 +155,7 @@ Cond 1.3 **text <!---->node {.red}**
 ````````````````````````````````
 
 
-```````````````````````````````` example(Text Node Previous Sibling: 7) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 7) options(no-text-attributes)
 > Cond 1.1 text node{.red}
 
 > Cond 1.1 text node {.red}
@@ -169,7 +169,7 @@ Cond 1.3 **text <!---->node {.red}**
 
 attributes assigned to paragraph
 
-```````````````````````````````` example(Text Node Previous Sibling: 8) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 8) options(no-text-attributes)
 > Cond 1.2 text node{.red}
 
 > Cond 1.3 text node {.red}
@@ -183,7 +183,7 @@ attributes assigned to paragraph
 
 attributes assigned to list item
 
-```````````````````````````````` example(Text Node Previous Sibling: 9) options(no-text-attributes)
+```````````````````````````````` example(Text Node Previous Sibling: 9) options(no-text-attributes)
 * Cond 1.1 text node{.red}
 
 * Cond 1.1 text node {.red}
@@ -197,7 +197,7 @@ attributes assigned to list item
 
 attributes assigned to list item
 
-```````````````````````````````` example Text Node Previous Sibling: 10
+```````````````````````````````` example Text Node Previous Sibling: 10
 * Cond 1.2 text node{.red}
 
 * Cond 1.3 text node {.red}
@@ -219,7 +219,7 @@ attributes assigned to list item
   * else
     * Cond 2.3 attributes are assigned to the previous sibling
 
-```````````````````````````````` example(Non Text Node Previous Sibling: 1) options(no-text-attributes)
+```````````````````````````````` example(Non Text Node Previous Sibling: 1) options(no-text-attributes)
 Cond 2.1 Some text **bold text** {.red}
 
 Cond 2.2 Some text **bold text**{.red}{.blue}
@@ -234,7 +234,7 @@ Cond 2.3 Some text **bold text**{.red}
 ````````````````````````````````
 
 
-```````````````````````````````` example Non Text Node Previous Sibling: 2
+```````````````````````````````` example Non Text Node Previous Sibling: 2
 Cond 2.1 Some text **bold text** {.red}
 
 Cond 2.2 Some text **bold text**{.red}{.blue}
@@ -277,7 +277,7 @@ Cond 3.1 attributes go to the paragraph parent's parent
 
 attributes are assigned to the list element
 
-```````````````````````````````` example No Previous Sibling - Cond 3.1: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.1: 1
 * {.red} list item 1
 * list item 2
 
@@ -295,7 +295,7 @@ attributes are assigned to the list element
 
 attributes are assigned to the definition list
 
-```````````````````````````````` example No Previous Sibling - Cond 3.1: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.1: 2
 Definition Term
 :   {.red} definition item 1
 :   definition item 2
@@ -320,7 +320,7 @@ Cond 3.2 attributes go to paragraph's previous sibling,
 
 Assigned to paragraph of list item 2
 
-```````````````````````````````` example No Previous Sibling - Cond 3.2: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 1
 * list item 1
 * list item 2
 
@@ -336,7 +336,7 @@ Assigned to paragraph of list item 2
 
 Assigned to paragraph of list item 2
 
-```````````````````````````````` example No Previous Sibling - Cond 3.2: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 2
 * list item 1
 
 * list item 2
@@ -354,7 +354,7 @@ Assigned to paragraph of list item 2
 
 Assigned to definition item 2 paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.2: 3
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 3
 definition term
 : definition item 1
 : definition item 2
@@ -373,7 +373,7 @@ definition term
 
 Assigned to definition item 2 paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.2: 4
+```````````````````````````````` example No Previous Sibling - Cond 3.2: 4
 definition term
 : definition item 1
 
@@ -398,7 +398,7 @@ Cond 3.3 attributes go to the paragraph
 
 Assigned to paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.3: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.3: 1
 * list item 1
 * list item 2
 
@@ -415,7 +415,7 @@ Assigned to paragraph
 
 Assigned to definition item 2
 
-```````````````````````````````` example No Previous Sibling - Cond 3.3: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.3: 2
 definition term
 : definition item 1
 : definition item 2
@@ -441,7 +441,7 @@ definition term
 
 Assigned to block quote
 
-```````````````````````````````` example No Previous Sibling - Cond 3.4: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.4: 1
 > {.red}
 > 
 > block quote text
@@ -459,7 +459,7 @@ Cond 3.5 attributes go to paragraph's previous sibling,
 
 Assigned to previous paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 1
 Some paragraph
  
 {.red}
@@ -472,7 +472,7 @@ Some paragraph
 
 Assigned to previous block quote
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 2
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 2
 > Some paragraph
  
 {.red}
@@ -485,7 +485,7 @@ Assigned to previous block quote
 
 Assigned to previous paragraph in the block quote
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 3
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 3
 > Some paragraph
 > 
 > {.red}
@@ -499,7 +499,7 @@ Assigned to previous paragraph in the block quote
 
 Assigned to previous list
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 4
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 4
 * list item 1
 * list item 2
  
@@ -514,7 +514,7 @@ Assigned to previous list
 
 Assigned to previous definition list
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 5
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 5
 definition term 1
 : definition item 1.1
  
@@ -535,7 +535,7 @@ definition term 2
 
 Assigned to previous table
 
-```````````````````````````````` example No Previous Sibling - Cond 3.5: 6
+```````````````````````````````` example No Previous Sibling - Cond 3.5: 6
 | head |
 |------|
 | body |
@@ -556,7 +556,7 @@ Cond 3.6 attributes go to the paragraph
 
 Assigned to paragraph
 
-```````````````````````````````` example No Previous Sibling - Cond 3.6: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.6: 1
 Some paragraph
  
 {.red} Some Text
@@ -572,7 +572,7 @@ Some paragraph
 * non paragraph parent
 * Cond 3.7 attributes go to the parent
 
-```````````````````````````````` example No Previous Sibling - Cond 3.7: 1
+```````````````````````````````` example No Previous Sibling - Cond 3.7: 1
 Some Text **{.red}bold text**
 .
 Some Text **{.red}bold text**
@@ -589,7 +589,7 @@ assigned to the element and has an `id` attribute.
 
 ### Cond 4.1
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 1
+```````````````````````````````` example Anchor Targets - Cond 4.1: 1
 # Heading
 .
 # Heading
@@ -597,7 +597,7 @@ assigned to the element and has an `id` attribute.
 ````````````````````````````````
 
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 2
+```````````````````````````````` example Anchor Targets - Cond 4.1: 2
 # Heading {#custom-id}
 .
 # Heading {#custom-id}
@@ -605,7 +605,7 @@ assigned to the element and has an `id` attribute.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Anchor Targets - Cond 4.1: 3) options(anchors)
+```````````````````````````````` example(Anchor Targets - Cond 4.1: 3) options(anchors)
 # Heading {#custom-id}
 .
 # Heading {#custom-id}
@@ -613,7 +613,7 @@ assigned to the element and has an `id` attribute.
 ````````````````````````````````
 
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 4
+```````````````````````````````` example Anchor Targets - Cond 4.1: 4
 # Heading # {#custom-id}
 .
 # Heading # {#custom-id}
@@ -621,7 +621,7 @@ assigned to the element and has an `id` attribute.
 ````````````````````````````````
 
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 5
+```````````````````````````````` example Anchor Targets - Cond 4.1: 5
 Heading {#custom-id}
 ======================
 .
@@ -631,7 +631,7 @@ Heading {#custom-id}
 ````````````````````````````````
 
 
-```````````````````````````````` example Anchor Targets - Cond 4.1: 6
+```````````````````````````````` example Anchor Targets - Cond 4.1: 6
 Heading {#123-heading}
 ======================
 .
@@ -651,7 +651,7 @@ paragraph text.
 
 ### Cond 5.1
 
-```````````````````````````````` example Attributes on Reference - Cond 5.1: 1
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 1
 [test]
 
 [test]: http://example.com 
@@ -666,7 +666,7 @@ paragraph text.
 ````````````````````````````````
 
 
-```````````````````````````````` example Attributes on Reference - Cond 5.1: 2
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 2
 [reference 1][test] 
 
 [reference 2][test] 
@@ -687,7 +687,7 @@ paragraph text.
 
 Ref image
 
-```````````````````````````````` example Attributes on Reference - Cond 5.1: 3
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 3
 ![test]
 
 [test]: <http://example.com/test.png> 
@@ -702,7 +702,7 @@ Ref image
 ````````````````````````````````
 
 
-```````````````````````````````` example Attributes on Reference - Cond 5.1: 4
+```````````````````````````````` example Attributes on Reference - Cond 5.1: 4
 ![reference 1][test]
 
 ![reference 2][test]
@@ -723,7 +723,7 @@ Ref image
 
 ## Random Tests
 
-```````````````````````````````` example(Random Tests: 1) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 1) options(no-text-attributes)
 Sample text{.class-name}
 .
 Sample text{.class-name}
@@ -732,91 +732,91 @@ Sample text{.class-name}
 
 Immediately attached to previous text will apply to the sibling text node
 
-```````````````````````````````` example Random Tests: 2
+```````````````````````````````` example Random Tests: 2
 Sample text{.class-name}
 .
 Sample text{.class-name}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 3) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 3) options(no-text-attributes)
 Paragraph{style="color:red"}
 .
 Paragraph{style="color:red"}
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 4
+```````````````````````````````` example Random Tests: 4
 Paragraph{style="color:red"}
 .
 Paragraph{style="color:red"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 5) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 5) options(no-text-attributes)
 Paragraph {style="color:red"}
 .
 Paragraph {style="color:red"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 6) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 6) options(no-text-attributes)
 Sample text **bold**{.class-name}
 .
 Sample text **bold**{.class-name}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 7) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 7) options(no-text-attributes)
 Sample text **bold** {.class-name}
 .
 Sample text **bold** {.class-name}
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 8
+```````````````````````````````` example Random Tests: 8
 Sample<!----> text{.class-name}
 .
 Sample<!----> text{.class-name}
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 9
+```````````````````````````````` example Random Tests: 9
 Sample text **bold<!----> text{.class-name}**
 .
 Sample text **bold<!----> text{.class-name}**
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 10) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 10) options(no-text-attributes)
 Sample text **bold{.class-name}**
 .
 Sample text **bold{.class-name}**
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 11
+```````````````````````````````` example Random Tests: 11
 Sample text **bold{.class-name}**
 .
 Sample text **bold{.class-name}**
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 12) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 12) options(no-text-attributes)
 Sample text **bold {.class-name}**
 .
 Sample text **bold {.class-name}**
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 13) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 13) options(no-text-attributes)
 Sample text ![Sample Image](http://example.com){width=64 height=32}
 .
 Sample text ![Sample Image](http://example.com){width=64 height=32}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Random Tests: 14) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 14) options(no-text-attributes)
 * list item{style="color:red"}
 * list item {style="color:blue"}
 .
@@ -826,7 +826,7 @@ Sample text ![Sample Image](http://example.com){width=64 height=32}
 ````````````````````````````````
 
 
-```````````````````````````````` example Random Tests: 15
+```````````````````````````````` example Random Tests: 15
 * list item{style="color:red"}
 * list item {style="color:blue"}
 .
@@ -838,7 +838,7 @@ Sample text ![Sample Image](http://example.com){width=64 height=32}
 
 empty tight items without attributes should not wrap spans
 
-```````````````````````````````` example(Random Tests: 16) options(no-text-attributes)
+```````````````````````````````` example(Random Tests: 16) options(no-text-attributes)
 paragraph 1
 
 * list item 2
@@ -858,7 +858,7 @@ Only attributes, go to paragraph's previous, if none to paragraph's parent
 
 To previous sibling
 
-```````````````````````````````` example Paragraphs: 1
+```````````````````````````````` example Paragraphs: 1
 paragraph 1
 
 {style="color:red"}
@@ -871,7 +871,7 @@ paragraph 1
 
 To parent
 
-```````````````````````````````` example Paragraphs: 2
+```````````````````````````````` example Paragraphs: 2
 {style="color:red"}
 
 paragraph 1
@@ -884,7 +884,7 @@ paragraph 1
 
 To parent, in this case list
 
-```````````````````````````````` example Paragraphs: 3
+```````````````````````````````` example Paragraphs: 3
 paragraph 1
 
 * {style="color:red"} list item 1
@@ -900,7 +900,7 @@ paragraph 1
 
 To parent, in this case list
 
-```````````````````````````````` example Paragraphs: 4
+```````````````````````````````` example Paragraphs: 4
 paragraph 1
 
 * list item 2
@@ -916,7 +916,7 @@ paragraph 1
 
 ## Headings Tests
 
-```````````````````````````````` example Headings Tests: 1
+```````````````````````````````` example Headings Tests: 1
 Heading
 =======
 .
@@ -926,7 +926,7 @@ Heading
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 2
+```````````````````````````````` example Headings Tests: 2
 Heading with emoji :+1:
 =======================
 .
@@ -936,7 +936,7 @@ Heading with emoji :+1:
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings Tests: 3) options(no-text-attributes)
+```````````````````````````````` example(Headings Tests: 3) options(no-text-attributes)
 Heading{#id1} with multiple{#id2} anchors{#id3}
 ===============================================
 .
@@ -946,7 +946,7 @@ Heading{#id1} with multiple{#id2} anchors{#id3}
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 4
+```````````````````````````````` example Headings Tests: 4
 Heading{#id1} with multiple{#id2} anchors{#id3}
 ===============================================
 .
@@ -956,7 +956,7 @@ Heading{#id1} with multiple{#id2} anchors{#id3}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings Tests: 5) options(no-text-attributes)
+```````````````````````````````` example(Headings Tests: 5) options(no-text-attributes)
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 =================================================================
 .
@@ -966,7 +966,7 @@ Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 6
+```````````````````````````````` example Headings Tests: 6
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 =================================================================
 .
@@ -976,7 +976,7 @@ Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 7
+```````````````````````````````` example Headings Tests: 7
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3} {#id4}
 ========================================================================
 .
@@ -990,7 +990,7 @@ Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3} {#id4}
 
 Default rendering with emphasis
 
-```````````````````````````````` example TOC: 1
+```````````````````````````````` example TOC: 1
 [TOC] 
 
 # Heading **some bold** 1 {#heading-1}
@@ -1013,7 +1013,7 @@ Default rendering with emphasis
 
 ## Trailing Spaces
 
-```````````````````````````````` example(Trailing Spaces: 1) options(IGNORED)
+```````````````````````````````` example(Trailing Spaces: 1) options(IGNORED)
 text {attribute=value   }
 .
 text {attribute=value}
@@ -1022,21 +1022,21 @@ text {attribute=value}
 
 ## Original preserved
 
-```````````````````````````````` example(Original preserved: 1) options(IGNORED)
+```````````````````````````````` example(Original preserved: 1) options(IGNORED)
 text {id=value   }
 .
 text {id=value}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Original preserved: 2) options(IGNORED)
+```````````````````````````````` example(Original preserved: 2) options(IGNORED)
 text {id="value"   }
 .
 text {id="value"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Original preserved: 3) options(IGNORED)
+```````````````````````````````` example(Original preserved: 3) options(IGNORED)
 text {#value }
 .
 text {#value}

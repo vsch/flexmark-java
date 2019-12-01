@@ -12,7 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 not task lis items
 
-```````````````````````````````` example(Gfm Task List Core: 1) options(marker-space)
+```````````````````````````````` example(Gfm Task List Core: 1) options(marker-space)
 - [ ]abc
 .
 <ul>
@@ -31,7 +31,7 @@ Document[0, 8]
 
 task list item
 
-```````````````````````````````` example Gfm Task List Core: 2
+```````````````````````````````` example Gfm Task List Core: 2
 - [ ]abc
 .
 <ul>
@@ -48,7 +48,7 @@ Document[0, 8]
 
 not task lis items
 
-```````````````````````````````` example(Gfm Task List Core: 3) options(marker-space)
+```````````````````````````````` example(Gfm Task List Core: 3) options(marker-space)
 - []
 - [x ]
 - [ x]
@@ -134,7 +134,7 @@ Document[0, 95]
 
 empty task list items
 
-```````````````````````````````` example Gfm Task List Core: 4
+```````````````````````````````` example Gfm Task List Core: 4
 - [ ]
 -  [X]
 -    [x]
@@ -189,7 +189,7 @@ Document[0, 61]
 
 non empty task list items
 
-```````````````````````````````` example Gfm Task List Core: 5
+```````````````````````````````` example Gfm Task List Core: 5
 - [ ] task
 - [X] task
 - [x] task
@@ -262,7 +262,7 @@ Document[0, 102]
 
 non empty task list items with inlines
 
-```````````````````````````````` example Gfm Task List Core: 6
+```````````````````````````````` example Gfm Task List Core: 6
 - [ ] task **emphasis**
 - [X] task **emphasis**
 - [x] task **emphasis**
@@ -353,7 +353,7 @@ Document[0, 219]
 
 nested task items
 
-```````````````````````````````` example Gfm Task List Core: 7
+```````````````````````````````` example Gfm Task List Core: 7
 - non-task item
   - [ ] task item
   
@@ -416,7 +416,7 @@ Document[0, 107]
 
 task list item class
 
-```````````````````````````````` example(Gfm Task List Options: 1) options(item-class)
+```````````````````````````````` example(Gfm Task List Options: 1) options(item-class)
 - [ ] task
 - [x] task
 .
@@ -438,7 +438,7 @@ Document[0, 21]
 
 task list item class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 2) options(item-class)
+```````````````````````````````` example(Gfm Task List Options: 2) options(item-class)
 - [ ] task
 
 - [x] task
@@ -465,7 +465,7 @@ Document[0, 22]
 
 loose task list item class
 
-```````````````````````````````` example(Gfm Task List Options: 3) options(loose-class)
+```````````````````````````````` example(Gfm Task List Options: 3) options(loose-class)
 - [ ] task
 - [x] task
 .
@@ -487,7 +487,7 @@ Document[0, 21]
 
 loose task list item class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 4) options(loose-class)
+```````````````````````````````` example(Gfm Task List Options: 4) options(loose-class)
 - [ ] task
 
 - [x] task
@@ -514,7 +514,7 @@ Document[0, 22]
 
 loose task list item class
 
-```````````````````````````````` example(Gfm Task List Options: 5) options(loose-class, open-item-class, closed-item-class)
+```````````````````````````````` example(Gfm Task List Options: 5) options(loose-class, open-item-class, closed-item-class)
 - [ ] task
 - [x] task
 .
@@ -536,7 +536,7 @@ Document[0, 21]
 
 loose task list item class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 6) options(loose-class, open-item-class, closed-item-class)
+```````````````````````````````` example(Gfm Task List Options: 6) options(loose-class, open-item-class, closed-item-class)
 - [ ] task
 
 - [x] task
@@ -563,7 +563,7 @@ Document[0, 22]
 
 loose task list item class
 
-```````````````````````````````` example(Gfm Task List Options: 7) options(open-item-class, closed-item-class)
+```````````````````````````````` example(Gfm Task List Options: 7) options(open-item-class, closed-item-class)
 - [ ] task
 - [x] task
 .
@@ -585,7 +585,7 @@ Document[0, 21]
 
 loose task list item class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 8) options(open-item-class, closed-item-class)
+```````````````````````````````` example(Gfm Task List Options: 8) options(open-item-class, closed-item-class)
 - [ ] task
 
 - [x] task
@@ -612,7 +612,7 @@ Document[0, 22]
 
 task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 9) options(item-class, p-class)
+```````````````````````````````` example(Gfm Task List Options: 9) options(item-class, p-class)
 - [ ] task
 - [x] task
 .
@@ -634,7 +634,7 @@ Document[0, 21]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 10) options(item-class, p-class)
+```````````````````````````````` example(Gfm Task List Options: 10) options(item-class, p-class)
 - [ ] task
 
 - [x] task
@@ -661,7 +661,7 @@ Document[0, 22]
 
 custom marker task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 11) options(item-class, p-class, done)
+```````````````````````````````` example(Gfm Task List Options: 11) options(item-class, p-class, done)
 - [ ] task
 - [x] task
 .
@@ -683,7 +683,7 @@ Document[0, 21]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 12) options(item-class, p-class, done)
+```````````````````````````````` example(Gfm Task List Options: 12) options(item-class, p-class, done)
 - [ ] task
 
 - [x] task
@@ -710,7 +710,7 @@ Document[0, 22]
 
 custom marker task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 13) options(item-class, p-class, done, not-done)
+```````````````````````````````` example(Gfm Task List Options: 13) options(item-class, p-class, done, not-done)
 - [ ] task
 - [x] task
 .
@@ -732,7 +732,7 @@ Document[0, 21]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 14) options(item-class, p-class, done, not-done)
+```````````````````````````````` example(Gfm Task List Options: 14) options(item-class, p-class, done, not-done)
 - [ ] task
 
 - [x] task
@@ -759,7 +759,7 @@ Document[0, 22]
 
 task list item on ordered list item
 
-```````````````````````````````` example Gfm Task List Options: 15
+```````````````````````````````` example Gfm Task List Options: 15
 1. [ ] task
 2. [x] task
 .
@@ -781,7 +781,7 @@ Document[0, 23]
 
 task list item on ordered list item without ordered list item conversion
 
-```````````````````````````````` example(Gfm Task List Options: 16) options(no-ordered-items)
+```````````````````````````````` example(Gfm Task List Options: 16) options(no-ordered-items)
 1. [ ] task
 2. [x] task
 .
@@ -807,7 +807,7 @@ Document[0, 23]
 
 content indent is after task marker
 
-```````````````````````````````` example Gfm Task List Options: 17
+```````````````````````````````` example Gfm Task List Options: 17
 - [ ] task
 
   paragraph child item
@@ -832,7 +832,7 @@ Document[0, 34]
 
 content indent is after task marker
 
-```````````````````````````````` example Gfm Task List Options: 18
+```````````````````````````````` example Gfm Task List Options: 18
 - [ ] task
 
   paragraph child item
@@ -878,7 +878,7 @@ Document[0, 82]
 
 when content indent > code indent becomes code
 
-```````````````````````````````` example Gfm Task List Options: 19
+```````````````````````````````` example Gfm Task List Options: 19
 -     task
 -     [ ] task
 
@@ -926,7 +926,7 @@ Document[0, 64]
 
 when content indent > code indent becomes code
 
-```````````````````````````````` example Gfm Task List Options: 20
+```````````````````````````````` example Gfm Task List Options: 20
 -     task
 - [ ]      task
 
@@ -974,7 +974,7 @@ Document[0, 65]
 
 ## Source Position Attribute
 
-```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 1. [ ] task
 2. [x] task
 <!-- -->
@@ -1012,7 +1012,7 @@ Document[0, 54]
 
 Wrap individual lines in source position spans tight items
 
-```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, src-pos-lines)
 1. [ ] item
 with multiple lazy lines
 all should be src pos wrapped
@@ -1056,7 +1056,7 @@ Document[0, 141]
 
 Wrap individual lines in source position spans loose items
 
-```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, src-pos-lines)
 1. [ ] item
 
 1. [ ] item
@@ -1120,7 +1120,7 @@ Document[0, 166]
 
 Deep indent testing, commonmark
 
-```````````````````````````````` example Source Position Attribute: 4
+```````````````````````````````` example Source Position Attribute: 4
 * [ ] item 1
 * [ ]  item 2
 * [ ]   item 3
@@ -1187,7 +1187,7 @@ Document[0, 152]
 
 Deep indent testing, kramdown
 
-```````````````````````````````` example(Source Position Attribute: 5) options(kramdown)
+```````````````````````````````` example(Source Position Attribute: 5) options(kramdown)
 * [ ] item 1
 * [ ]  item 2
 * [ ]   item 3
@@ -1244,7 +1244,7 @@ Document[0, 152]
 
 Deep indent testing, markdown
 
-```````````````````````````````` example(Source Position Attribute: 6) options(markdown)
+```````````````````````````````` example(Source Position Attribute: 6) options(markdown)
 * [ ] item 1
 * [ ]  item 2
 * [ ]   item 3
@@ -1301,7 +1301,7 @@ Document[0, 152]
 
 Treat content as starting after the suffix.
 
-```````````````````````````````` example(Source Position Attribute: 7) options(no-suffix-content)
+```````````````````````````````` example(Source Position Attribute: 7) options(no-suffix-content)
 * [ ] item
   * [ ] item 2
     * [ ] item 2
@@ -1328,7 +1328,7 @@ Document[0, 42]
 
 Treat content as starting at the suffix.
 
-```````````````````````````````` example Source Position Attribute: 8
+```````````````````````````````` example Source Position Attribute: 8
 * [ ] item
   * [ ] item 2
     * [ ] item 2

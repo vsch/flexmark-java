@@ -10,10 +10,9 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Emoji
 
-
 No spaces between markers
 
-```````````````````````````````` example Emoji: 1
+```````````````````````````````` example Emoji: 1
 ## Markdown Navigator
 
 Converts :warning: to its emoji image

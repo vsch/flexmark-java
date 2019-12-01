@@ -15,7 +15,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 repeated translating snippets only translated once, ones containing placeholder with only
 brackets of all types are excluded.
 
-```````````````````````````````` example(Formatter: 1) options(details)
+```````````````````````````````` example(Formatter: 1) options(details)
 [Markdown]
 
 [Markdown]
@@ -40,7 +40,7 @@ brackets of all types are excluded.
 
 HTML Blocks not translated
 
-```````````````````````````````` example(Formatter: 2) options(details)
+```````````````````````````````` example(Formatter: 2) options(details)
 <span>this is a test</span>
 .
 - Translating Spans ------
@@ -57,7 +57,7 @@ HTML Blocks not translated
 
 comments translate
 
-```````````````````````````````` example Formatter: 3
+```````````````````````````````` example Formatter: 3
 <!--this is a test-->
 .
 <!--thiIS iIS aA teESt-->
@@ -66,7 +66,7 @@ comments translate
 
 comments translate
 
-```````````````````````````````` example Formatter: 4
+```````````````````````````````` example Formatter: 4
 <div>
    <!--this is a test-->
 </div>
@@ -79,7 +79,7 @@ comments translate
 
 inline comments translate
 
-```````````````````````````````` example(Formatter: 5) options(details)
+```````````````````````````````` example(Formatter: 5) options(details)
 This <!--this is a test--> is a test
 .
 - Translating Spans ------
@@ -98,7 +98,7 @@ thiIS <!--thiIS iIS aA teESt--> iIS aA teESt
 
 ref anchor translation
 
-```````````````````````````````` example Formatter: 6
+```````````````````````````````` example Formatter: 6
 # Heading Of a Different type
 
 
@@ -113,7 +113,7 @@ ref anchor translation
 
 ref anchor translation forward ref heading
 
-```````````````````````````````` example Formatter: 7
+```````````````````````````````` example Formatter: 7
 [Heading Of a Different type](#heading-of-a-different-type) 
 
 # Heading Of a Different type
@@ -126,7 +126,7 @@ ref anchor translation forward ref heading
 
 inline html preserved
 
-```````````````````````````````` example Formatter: 8
+```````````````````````````````` example Formatter: 8
 **[<span style="color:#30A0D8;">Markdown</span>][Markdown] language support for IntelliJ 
 platform**
 .
@@ -137,7 +137,7 @@ pLaAtFoRm**
 
 mail link preserved
 
-```````````````````````````````` example Formatter: 9
+```````````````````````````````` example Formatter: 9
 Test <test@test.com> 
 .
 teESt <test@test.com>
@@ -146,7 +146,7 @@ teESt <test@test.com>
 
 auto link preserved
 
-```````````````````````````````` example Formatter: 10
+```````````````````````````````` example Formatter: 10
 Test <http://example.com> 
 .
 teESt <http://example.com>
@@ -155,7 +155,7 @@ teESt <http://example.com>
 
 hard breaks preserved
 
-```````````````````````````````` example Formatter: 11
+```````````````````````````````` example Formatter: 11
 Test  
 Another
 .
@@ -166,7 +166,7 @@ aNotheER
 
 html entities preserved
 
-```````````````````````````````` example Formatter: 12
+```````````````````````````````` example Formatter: 12
 text &nbsp;   
 text &nbsp;   
 &quot;   
@@ -225,7 +225,7 @@ teEXt &nbsp;
 
 default
 
-```````````````````````````````` example Formatter: 13
+```````````````````````````````` example Formatter: 13
 #Heading
 -----
 paragraph text 
@@ -247,7 +247,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 14
+```````````````````````````````` example Formatter: 14
 ~~~info
         with uneven indent
            with uneven indent
@@ -262,7 +262,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 15
+```````````````````````````````` example Formatter: 15
         with uneven indent
            with uneven indent
      indented code
@@ -273,7 +273,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 16
+```````````````````````````````` example Formatter: 16
 Work with [Markdown]
 
 Work with [Markdown][]
@@ -300,7 +300,7 @@ woRK WiIth ![maARKDoWN imaAGeE][maARKDoWN]
 ````````````````````````````````
 
 
-```````````````````````````````` example Formatter: 17
+```````````````````````````````` example Formatter: 17
 Work with [Markdown](https://test.com/doc.png)
 
 Work with [Markdown](https://test.com/doc.png "")
@@ -333,7 +333,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 
 ## Lists
 
-```````````````````````````````` example Lists: 1
+```````````````````````````````` example Lists: 1
 * list item 1
   * list item 1.1
   * list item 1.2
@@ -362,7 +362,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 2
+```````````````````````````````` example Lists: 2
 1. list item 1
    1. list item 1.1
    1. list item 1.2
@@ -391,7 +391,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 3
+```````````````````````````````` example Lists: 3
 1. list item 1
    1. list item 1.1
    1. list item 1.2
@@ -420,7 +420,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 4
+```````````````````````````````` example Lists: 4
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -431,7 +431,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 5) options(list-numbered-dot)
+```````````````````````````````` example(Lists: 5) options(list-numbered-dot)
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -442,7 +442,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 6) options(list-numbered-paren)
+```````````````````````````````` example(Lists: 6) options(list-numbered-paren)
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -453,7 +453,7 @@ woRK WiIth ![maARKDoWN](https://test.com/doc.png "teESt")
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 7
+```````````````````````````````` example Lists: 7
 paragraph
 * item 1
 * item 2
@@ -468,7 +468,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 8
+```````````````````````````````` example Lists: 8
 paragraph
 
 * item 1
@@ -485,7 +485,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 9
+```````````````````````````````` example Lists: 9
 paragraph
 1. item 1
 1. item 2
@@ -500,7 +500,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 10) options(list-add-blank-line-before)
+```````````````````````````````` example(Lists: 10) options(list-add-blank-line-before)
 paragraph
 * item 1
 * item 2
@@ -515,7 +515,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 11) options(list-add-blank-line-before)
+```````````````````````````````` example(Lists: 11) options(list-add-blank-line-before)
 paragraph
 1. item 1
 1. item 2
@@ -530,7 +530,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 12) options(list-bullet-asterisk)
+```````````````````````````````` example(Lists: 12) options(list-bullet-asterisk)
 + item 1
 + item 2
   + item 2.1
@@ -543,7 +543,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 13) options(list-bullet-plus)
+```````````````````````````````` example(Lists: 13) options(list-bullet-plus)
 * item 1
 * item 2
   * item 2.1
@@ -556,7 +556,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 14) options(list-bullet-dash)
+```````````````````````````````` example(Lists: 14) options(list-bullet-dash)
 * item 1
 * item 2
   * item 2.1
@@ -569,7 +569,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 15) options(list-no-renumber-items)
+```````````````````````````````` example(Lists: 15) options(list-no-renumber-items)
 1. item 1
 1. item 2
    1. item 2.1
@@ -582,7 +582,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 16) options(list-no-renumber-items, list-numbered-paren)
+```````````````````````````````` example(Lists: 16) options(list-no-renumber-items, list-numbered-paren)
 1. item 1
 1. item 2
    1. item 2.1
@@ -595,7 +595,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 17) options(list-no-renumber-items, list-numbered-dot)
+```````````````````````````````` example(Lists: 17) options(list-no-renumber-items, list-numbered-dot)
 1) item 1
 1) item 2
    1) item 2.1
@@ -610,7 +610,7 @@ paARaAGRaAph
 
 list spacing
 
-```````````````````````````````` example Lists: 18
+```````````````````````````````` example Lists: 18
 * item 1
 * item 2
   * item 2.1
@@ -629,7 +629,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 19) options(list-spacing-loose)
+```````````````````````````````` example(Lists: 19) options(list-spacing-loose)
 * item 1
 * item 2
   * item 2.1
@@ -648,7 +648,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 20) options(list-spacing-tight)
+```````````````````````````````` example(Lists: 20) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -667,7 +667,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 21) options(list-spacing-loosen)
+```````````````````````````````` example(Lists: 21) options(list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
@@ -686,7 +686,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 22) options(list-spacing-tighten)
+```````````````````````````````` example(Lists: 22) options(list-spacing-tighten)
 * item 1
 * item 2
   * item 2.1
@@ -705,7 +705,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 23) options(list-spacing-tighten)
+```````````````````````````````` example(Lists: 23) options(list-spacing-tighten)
 * item 1
 * item 2
   * item 2.1
@@ -728,7 +728,7 @@ paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 24) options(list-spacing-tight)
+```````````````````````````````` example(Lists: 24) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -753,7 +753,7 @@ paARaAGRaAph
 
 list family changing
 
-```````````````````````````````` example(Lists: 25) options(format-fixed-indent)
+```````````````````````````````` example(Lists: 25) options(format-fixed-indent)
 * item 1
 * item 2
   * item 2.1
@@ -772,7 +772,7 @@ list family changing
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 26
+```````````````````````````````` example Lists: 26
 - [link](link.txt)
 
 next line
@@ -783,7 +783,7 @@ NeEXt LiINeE
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 27
+```````````````````````````````` example Lists: 27
 - [link](link.txt)
 
 next line
@@ -796,7 +796,7 @@ NeEXt LiINeE
 
 ## Block Quotes
 
-```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space, fenced-code-minimize)
+```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space, fenced-code-minimize)
 > > block quote
 > lazy continuation
 > 
@@ -822,7 +822,7 @@ NeEXt LiINeE
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 2) options(block-quote-compact-with-space)
+```````````````````````````````` example(Block Quotes: 2) options(block-quote-compact-with-space)
 > #Heading
 > -----
 > paragraph text 
@@ -869,7 +869,7 @@ NeEXt LiINeE
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 3) options(block-quote-spaced)
+```````````````````````````````` example(Block Quotes: 3) options(block-quote-spaced)
 > #Heading
 > -----
 > paragraph text 
@@ -916,7 +916,7 @@ NeEXt LiINeE
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 4
+```````````````````````````````` example Block Quotes: 4
 paragraph text 
 lazy continuation
 * list item
@@ -932,7 +932,7 @@ LaAZyY coNtiINuUaAtiIoN
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 5) options(no-block-quote-blank-lines)
+```````````````````````````````` example(Block Quotes: 5) options(no-block-quote-blank-lines)
 paragraph text 
 lazy continuation
 * list item
@@ -951,7 +951,7 @@ LaAZyY coNtiINuUaAtiIoN
 
 default
 
-```````````````````````````````` example Blank Lines: 1
+```````````````````````````````` example Blank Lines: 1
 paragraph
 
 
@@ -967,7 +967,7 @@ aANotheER paARaAGRaAph
 
 blank lines
 
-```````````````````````````````` example(Blank Lines: 2) options(max-blank-lines-1)
+```````````````````````````````` example(Blank Lines: 2) options(max-blank-lines-1)
 paragraph
 
 
@@ -981,7 +981,7 @@ aANotheER paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Blank Lines: 3) options(max-blank-lines-2)
+```````````````````````````````` example(Blank Lines: 3) options(max-blank-lines-2)
 paragraph
 
 
@@ -996,7 +996,7 @@ aANotheER paARaAGRaAph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Blank Lines: 4) options(max-blank-lines-3)
+```````````````````````````````` example(Blank Lines: 4) options(max-blank-lines-3)
 paragraph
 
 
@@ -1014,7 +1014,7 @@ aANotheER paARaAGRaAph
 
 default
 
-```````````````````````````````` example Blank Lines: 5
+```````````````````````````````` example Blank Lines: 5
 paragraph
 
 
@@ -1025,7 +1025,7 @@ paARaAGRaAph
 
 no trailing blank lines
 
-```````````````````````````````` example(Blank Lines: 6) options(no-tailing-blanks)
+```````````````````````````````` example(Blank Lines: 6) options(no-tailing-blanks)
 paragraph
 
 
@@ -1036,49 +1036,49 @@ paARaAGRaAph
 
 ## Headings
 
-```````````````````````````````` example(Headings: 1) options(atx-space-remove)
+```````````````````````````````` example(Headings: 1) options(atx-space-remove)
 # Heading
 .
 #heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 2) options(atx-space-remove, atx-trailing-equalize)
+```````````````````````````````` example(Headings: 2) options(atx-space-remove, atx-trailing-equalize)
 # Heading ####
 .
 #heEaADiING#
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 3) options(atx-space-as-is, atx-trailing-equalize)
+```````````````````````````````` example(Headings: 3) options(atx-space-as-is, atx-trailing-equalize)
 # Heading ####
 .
 # heEaADiING #
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 4) options(atx-space-add, atx-trailing-equalize)
+```````````````````````````````` example(Headings: 4) options(atx-space-add, atx-trailing-equalize)
 # Heading ####
 .
 # heEaADiING #
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 5) options(atx-space-remove, atx-trailing-as-is)
+```````````````````````````````` example(Headings: 5) options(atx-space-remove, atx-trailing-as-is)
 # Heading ####
 .
 #heEaADiING####
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 6) options(atx-space-add, atx-trailing-equalize)
+```````````````````````````````` example(Headings: 6) options(atx-space-add, atx-trailing-equalize)
 #Heading####
 .
 # heEaADiING #
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 7) options(atx-space-add, atx-trailing-remove)
+```````````````````````````````` example(Headings: 7) options(atx-space-add, atx-trailing-remove)
 #Heading####
 .
 # heEaADiING
@@ -1089,7 +1089,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 8
+```````````````````````````````` example Headings: 8
 Heading
 ==
 .
@@ -1098,7 +1098,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings: 9
+```````````````````````````````` example Headings: 9
 Heading
 ---
 .
@@ -1107,7 +1107,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 10) options(setext-no-equalize)
+```````````````````````````````` example(Headings: 10) options(setext-no-equalize)
 Heading
 ==
 .
@@ -1116,7 +1116,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings: 11) options(setext-no-equalize)
+```````````````````````````````` example(Headings: 11) options(setext-no-equalize)
 Heading
 ---
 .
@@ -1127,14 +1127,14 @@ heEaADiING
 
 ## Thematic Break
 
-```````````````````````````````` example Thematic Break: 1
+```````````````````````````````` example Thematic Break: 1
 ---
 .
 ---
 ````````````````````````````````
 
 
-```````````````````````````````` example(Thematic Break: 2) options(thematic-break)
+```````````````````````````````` example(Thematic Break: 2) options(thematic-break)
 ---
 .
 *** ** * ** ***
@@ -1143,7 +1143,7 @@ heEaADiING
 
 ## Fenced Code
 
-```````````````````````````````` example Fenced Code: 1
+```````````````````````````````` example Fenced Code: 1
 ```info
    indented
        text
@@ -1158,7 +1158,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 2
+```````````````````````````````` example Fenced Code: 2
 ~~~info
    indented
        text
@@ -1173,7 +1173,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 3) options(fenced-code-minimize)
+```````````````````````````````` example(Fenced Code: 3) options(fenced-code-minimize)
 ```info
    indented
        text
@@ -1188,7 +1188,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 4) options(fenced-code-minimize)
+```````````````````````````````` example(Fenced Code: 4) options(fenced-code-minimize)
 ```info
      indented
          text
@@ -1203,7 +1203,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 5) options(fenced-code-minimize)
+```````````````````````````````` example(Fenced Code: 5) options(fenced-code-minimize)
 ~~~info
    indented
        text
@@ -1218,7 +1218,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 6) options(fenced-code-marker-backtick)
+```````````````````````````````` example(Fenced Code: 6) options(fenced-code-marker-backtick)
 ~~~info
    indented
        text
@@ -1233,7 +1233,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 7) options(fenced-code-marker-tilde)
+```````````````````````````````` example(Fenced Code: 7) options(fenced-code-marker-tilde)
 ```info
    indented
        text
@@ -1248,7 +1248,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 8) options(fenced-code-match-closing)
+```````````````````````````````` example(Fenced Code: 8) options(fenced-code-match-closing)
 ~~~info
    indented
        text
@@ -1263,7 +1263,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 9) options(fenced-code-match-closing)
+```````````````````````````````` example(Fenced Code: 9) options(fenced-code-match-closing)
 ```info
    indented
        text
@@ -1278,7 +1278,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 10) options(fenced-code-marker-length)
+```````````````````````````````` example(Fenced Code: 10) options(fenced-code-marker-length)
 ~~~info
    indented
        text
@@ -1293,7 +1293,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code: 11) options(fenced-code-marker-length)
+```````````````````````````````` example(Fenced Code: 11) options(fenced-code-marker-length)
 ```info
    indented
        text
@@ -1308,7 +1308,7 @@ heEaADiING
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced Code: 12
+```````````````````````````````` example Fenced Code: 12
 ```java
   System.out.println("Hello world");
 ```
@@ -1325,21 +1325,21 @@ thiIS iIS [spaARtaA](http://sparta.com#anchor)
 
 ## Link Text Translation
 
-```````````````````````````````` example Link Text Translation: 1
+```````````````````````````````` example Link Text Translation: 1
 [**Translated *Bold-Italic***](http://example.com)
 .
 [**tRaANSLaAteED *boLD-itaALiIc***](http://example.com)
 ````````````````````````````````
 
 
-```````````````````````````````` example Link Text Translation: 2
+```````````````````````````````` example Link Text Translation: 2
 [Translated](http://example.com#anchor)
 .
 [tRaANSLaAteED](http://example.com#anchor)
 ````````````````````````````````
 
 
-```````````````````````````````` example Link Text Translation: 3
+```````````````````````````````` example Link Text Translation: 3
 # Anchora
     
 [Translated](http://example.com#anchora)
@@ -1350,7 +1350,7 @@ thiIS iIS [spaARtaA](http://sparta.com#anchor)
 ````````````````````````````````
 
 
-```````````````````````````````` example Link Text Translation: 4
+```````````````````````````````` example Link Text Translation: 4
 # Anchora
     
 [Translated](#anchora)
@@ -1361,7 +1361,7 @@ thiIS iIS [spaARtaA](http://sparta.com#anchor)
 ````````````````````````````````
 
 
-```````````````````````````````` example Link Text Translation: 5
+```````````````````````````````` example Link Text Translation: 5
 # Anchora
     
 [Translated](#anchors)
@@ -1376,7 +1376,7 @@ thiIS iIS [spaARtaA](http://sparta.com#anchor)
 
 default
 
-```````````````````````````````` example Reference Placement: 1
+```````````````````````````````` example Reference Placement: 1
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -1408,7 +1408,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 2) options(references-document-top)
+```````````````````````````````` example(Reference Placement: 2) options(references-document-top)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -1440,7 +1440,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 3) options(references-document-bottom)
+```````````````````````````````` example(Reference Placement: 3) options(references-document-bottom)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -1472,7 +1472,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 4) options(references-group-with-first)
+```````````````````````````````` example(Reference Placement: 4) options(references-group-with-first)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -1504,7 +1504,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 5) options(references-group-with-last)
+```````````````````````````````` example(Reference Placement: 5) options(references-group-with-last)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -1536,7 +1536,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 6) options(references-document-bottom, references-sort)
+```````````````````````````````` example(Reference Placement: 6) options(references-document-bottom, references-sort)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -1568,7 +1568,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 7) options(references-document-bottom, references-sort-unused-last)
+```````````````````````````````` example(Reference Placement: 7) options(references-document-bottom, references-sort-unused-last)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -1600,7 +1600,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 8) options(references-document-bottom, references-sort-unused-last, references-keep-last)
+```````````````````````````````` example(Reference Placement: 8) options(references-document-bottom, references-sort-unused-last, references-keep-last)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -1632,7 +1632,7 @@ paARaAGRaAph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 9) options(references-document-bottom, references-sort-unused-last, references-keep-last)
+```````````````````````````````` example(Reference Placement: 9) options(references-document-bottom, references-sort-unused-last, references-keep-last)
 paragraph 1 [ref2]
 
 [ref3]: </ref3>
@@ -1666,14 +1666,14 @@ paARaAGRaAph 3
 
 ## Images and links at start of line
 
-```````````````````````````````` example Images and links at start of line: 1
+```````````````````````````````` example Images and links at start of line: 1
 text with [link](/url) followed by ![alt](/image)
 .
 teEXt WiIth [LiINK](/url) FoLLoWeED ByY ![aALt](/image)
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images and links at start of line: 2) options(image-links-at-start)
+```````````````````````````````` example(Images and links at start of line: 2) options(image-links-at-start)
 text with [link](/url) followed by ![alt](/image)
 .
 teEXt WiIth [LiINK](/url) FoLLoWeED ByY
@@ -1681,7 +1681,7 @@ teEXt WiIth [LiINK](/url) FoLLoWeED ByY
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images and links at start of line: 3) options(explicit-links-at-start)
+```````````````````````````````` example(Images and links at start of line: 3) options(explicit-links-at-start)
 text with [link](/url) followed by ![alt](/image)
 .
 teEXt WiIth
@@ -1689,7 +1689,7 @@ teEXt WiIth
 ````````````````````````````````
 
 
-```````````````````````````````` example(Images and links at start of line: 4) options(image-links-at-start, explicit-links-at-start)
+```````````````````````````````` example(Images and links at start of line: 4) options(image-links-at-start, explicit-links-at-start)
 text with [link](/url) followed by ![alt](/image)
 .
 teEXt WiIth
@@ -1700,7 +1700,7 @@ teEXt WiIth
 
 ## Format Conversion
 
-```````````````````````````````` example Format Conversion: 1
+```````````````````````````````` example Format Conversion: 1
 Adds missing editor actions for end of word navigation but that is just the beginning:
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
@@ -1775,7 +1775,7 @@ aDDS miISSiING eEDiItoR aActiIoNS FoR eEND oF WoRD NaAViIGaAtiIoN BuUt thaAt iIS
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format Conversion: 2) options(parse-fixed-indent, format-github, references-as-is)
+```````````````````````````````` example(Format Conversion: 2) options(parse-fixed-indent, format-github, references-as-is)
 ![Screenshot](https://raw.githubusercontent.com/vsch/idea-multimarkdown/master/assets/images/plugin_description_img.png)
 
 <img src="https://github.com/vsch/idea-multimarkdown/raw/master/assets/images/MNLogo.png?" height="20" width="20" border="0" style="padding-left:10px;">Markdown Navigator 2.0
@@ -1896,7 +1896,7 @@ FoR:
 
 Handle proper GitHub indented code in list items
 
-```````````````````````````````` example(Format Conversion: 3) options(parse-fixed-indent, format-github, details, ast-details)
+```````````````````````````````` example(Format Conversion: 3) options(parse-fixed-indent, format-github, details, ast-details)
 * item 
 
         indented code
@@ -1983,7 +1983,7 @@ Document[0, 87]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format Conversion: 4) options(parse-fixed-indent, format-github)
+```````````````````````````````` example(Format Conversion: 4) options(parse-fixed-indent, format-github)
 1. item 
 
         indented code
@@ -2004,7 +2004,7 @@ Document[0, 87]
 
 ## HTML Blocks
 
-```````````````````````````````` example HTML Blocks: 1
+```````````````````````````````` example HTML Blocks: 1
 line 1
 
   <img src="i.jpg">
@@ -2019,7 +2019,7 @@ LiINeE 2
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML Blocks: 2
+```````````````````````````````` example HTML Blocks: 2
 line 1
 
 <img src="i.jpg">
@@ -2036,7 +2036,7 @@ LiINeE 2
 
 ## Empty List Items
 
-```````````````````````````````` example Empty List Items: 1
+```````````````````````````````` example Empty List Items: 1
 * list item 1
 * 
 
@@ -2053,7 +2053,7 @@ Not aA LiISt iIteEm
 ````````````````````````````````
 
 
-```````````````````````````````` example Empty List Items: 2
+```````````````````````````````` example Empty List Items: 2
 * list item 1
 * 
 * list item 2
@@ -2070,7 +2070,7 @@ Not aA LiISt iIteEm
 
 With removal of empty list items
 
-```````````````````````````````` example(Empty List Items: 3) options(remove-empty-items)
+```````````````````````````````` example(Empty List Items: 3) options(remove-empty-items)
 * list item 1
 * 
 
@@ -2087,7 +2087,7 @@ Not aA LiISt iIteEm
 ````````````````````````````````
 
 
-```````````````````````````````` example(Empty List Items: 4) options(remove-empty-items)
+```````````````````````````````` example(Empty List Items: 4) options(remove-empty-items)
 * list item 1
 * 
 * list item 2
@@ -2102,7 +2102,7 @@ Not aA LiISt iIteEm
 ````````````````````````````````
 
 
-```````````````````````````````` example(Empty List Items: 5) options(remove-empty-items)
+```````````````````````````````` example(Empty List Items: 5) options(remove-empty-items)
 1. list item 1
 1. 
 
@@ -2119,7 +2119,7 @@ Not aA LiISt iIteEm
 ````````````````````````````````
 
 
-```````````````````````````````` example(Empty List Items: 6) options(remove-empty-items)
+```````````````````````````````` example(Empty List Items: 6) options(remove-empty-items)
 1. list item 1
 1. 
 1. list item 2
@@ -2134,7 +2134,7 @@ Not aA LiISt iIteEm
 ````````````````````````````````
 
 
-```````````````````````````````` example(Empty List Items: 7) options(IGNORED)
+```````````````````````````````` example(Empty List Items: 7) options(IGNORED)
 1. 
     ##### Overriding the Web Interface Translations
 
@@ -2165,7 +2165,7 @@ Not aA LiISt iIteEm
 
 should discard all non-alpha
 
-```````````````````````````````` example(Empty List Items: 8) options(details, IGNORED)
+```````````````````````````````` example(Empty List Items: 8) options(details, IGNORED)
 ![Alt](/url)
 
 this is an image 
@@ -2175,7 +2175,7 @@ following text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Empty List Items: 9) options(details)
+```````````````````````````````` example(Empty List Items: 9) options(details)
 Paragraph text with embedded link [Example Link](http://example.com) in it.
 .
 - Translating Spans ------
@@ -2196,7 +2196,7 @@ paARaAGRaAph teEXt WiIth eEmBeEDDeED LiINK [eXaAmpLeE liINK](http://example.com)
 
 Issue #271, Regression? Comments are presereved in 0.26.4 but removed in 0.34.40
 
-```````````````````````````````` example Issue 271: 1
+```````````````````````````````` example Issue 271: 1
 Table of contents:
 
 <!-- TOC depthFrom:2 -->

@@ -16,39 +16,39 @@ The TOC tag has the following format: `[TOC style]: # "Title"`
 
 1. `style` consists of space separated list of options:
 
-    - `levels=levelList` where level list is a comma separated list of levels or ranges. Default
-      is to include heading levels 2 and 3. Examples:
-        - `levels=4` include levels 2,3 and 4
-        - `levels=2-4` include levels 2,3 and 4. same as `levels=4`
-        - `levels=2-4,5` include levels 2,3,4 and 5
-        - `levels=1,3` include levels 1 and 3
+   * `levels=levelList` where level list is a comma separated list of levels or ranges. Default
+     is to include heading levels 2 and 3. Examples:
+     * `levels=4` include levels 2,3 and 4
+     * `levels=2-4` include levels 2,3 and 4. same as `levels=4`
+     * `levels=2-4,5` include levels 2,3,4 and 5
+     * `levels=1,3` include levels 1 and 3
 
-    - `html` generate HTML version of the TOC
+   * `html` generate HTML version of the TOC
 
-    - `markdown` generate Markdown version of the TOC
+   * `markdown` generate Markdown version of the TOC
 
-    - `text` to only include the text of the heading
+   * `text` to only include the text of the heading
 
-    - `formatted` to include text and inline formatting
+   * `formatted` to include text and inline formatting
 
-    - `hierarchy` to render as hierarchical list in order of appearance in the document
+   * `hierarchy` to render as hierarchical list in order of appearance in the document
 
-    - `flat` to render as a flat list in order of appearance in the document
+   * `flat` to render as a flat list in order of appearance in the document
 
-    - `reversed` to render as a flat list in order of appearance in the document
+   * `reversed` to render as a flat list in order of appearance in the document
 
-    - `sort-up` to render as a flat list sorted alphabetically by heading text only, no inlines
+   * `sort-up` to render as a flat list sorted alphabetically by heading text only, no inlines
 
-    - `sort-down` to render as a flat list sorted reversed alphabetically by heading text only,
-      no inlines
+   * `sort-down` to render as a flat list sorted reversed alphabetically by heading text only,
+     no inlines
 
-    - `bullet` to use a bullet list for the TOC items
+   * `bullet` to use a bullet list for the TOC items
 
-    - `numbered` to use a numbered list for TOC items
+   * `numbered` to use a numbered list for TOC items
 
 Default
 
-```````````````````````````````` example TocOptionsParser: 1
+```````````````````````````````` example TocOptionsParser: 1
 .
 .
 Example[0, 0]
@@ -57,7 +57,7 @@ Example[0, 0]
 
 Simple levels results in 2- level, or just level if < 2
 
-```````````````````````````````` example TocOptionsParser: 2
+```````````````````````````````` example TocOptionsParser: 2
 levels=0
 levels=1
 levels=2
@@ -130,7 +130,7 @@ Example[0, 89]
 
 Level ranges
 
-```````````````````````````````` example TocOptionsParser: 3
+```````````````````````````````` example TocOptionsParser: 3
 levels=1-3 
 levels=3-1 
 levels=0-9
@@ -158,7 +158,7 @@ Example[0, 34]
 
 other options, not using sim-toc
 
-```````````````````````````````` example TocOptionsParser: 4
+```````````````````````````````` example TocOptionsParser: 4
 html
 markdown
 numbered
@@ -235,7 +235,7 @@ Example[0, 90]
 
 other options, using sim-toc
 
-```````````````````````````````` example(TocOptionsParser: 5) options(sim-toc)
+```````````````````````````````` example(TocOptionsParser: 5) options(sim-toc)
 html
 markdown
 numbered
@@ -310,7 +310,7 @@ Example[0, 90]
 
 ambiguous options don't exist yet
 
-```````````````````````````````` example(TocOptionsParser: 6) options(IGNORE)
+```````````````````````````````` example(TocOptionsParser: 6) options(IGNORE)
 html
 markdown
 numbered
@@ -324,7 +324,7 @@ formatted
 
 invalid options
 
-```````````````````````````````` example TocOptionsParser: 7
+```````````````````````````````` example TocOptionsParser: 7
 htmls
 markdowns
 snumbered

@@ -14,7 +14,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 default
 
-```````````````````````````````` example Formatter: 1
+```````````````````````````````` example Formatter: 1
 #Heading
 -----
 paragraph text 
@@ -93,7 +93,7 @@ Document[0, 303]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Formatter: 2) options(atx-space-add, atx-trailing-add, list-no-renumber-items, block-quote-compact, fenced-code-spaced-info, list-bullet-plus, fenced-code-marker-backtick, fenced-code-marker-length, fenced-code-minimize, indented-code-minimize)
+```````````````````````````````` example(Formatter: 2) options(atx-space-add, atx-trailing-add, list-no-renumber-items, block-quote-compact, fenced-code-spaced-info, list-bullet-plus, fenced-code-marker-backtick, fenced-code-marker-length, fenced-code-minimize, indented-code-minimize)
 #Heading
 -----
 paragraph text 
@@ -143,7 +143,7 @@ indented code
 
 ## Lists
 
-```````````````````````````````` example Lists: 1
+```````````````````````````````` example Lists: 1
 * list item 1
 * list item 1.1
 * list item 1.2
@@ -175,7 +175,7 @@ indented code
 
 ## Block Quotes
 
-```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space)
+```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space)
 > #Heading
 > -----
 > paragraph text 
@@ -227,7 +227,7 @@ indented code
 
 default
 
-```````````````````````````````` example Task List Items: 1
+```````````````````````````````` example Task List Items: 1
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -245,7 +245,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example(Task List Items: 2) options(task-case-lowercase)
+```````````````````````````````` example(Task List Items: 2) options(task-case-lowercase)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -263,7 +263,7 @@ default
 ````````````````````````````````
 
 
-```````````````````````````````` example(Task List Items: 3) options(task-case-uppercase)
+```````````````````````````````` example(Task List Items: 3) options(task-case-uppercase)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -283,7 +283,7 @@ default
 
 ## Table of Contents
 
-```````````````````````````````` example Table of Contents: 1
+```````````````````````````````` example Table of Contents: 1
 ## Header 2
 ### Header 3
 

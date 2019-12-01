@@ -14,7 +14,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 empty text
 
-```````````````````````````````` example Markdown elements - empty text: 1
+```````````````````````````````` example Markdown elements - empty text: 1
 .
 ````````````````````````````````
 
@@ -23,7 +23,7 @@ empty text
 
 `Abbreviation` `AbbreviationBlock`
 
-```````````````````````````````` example Markdown elements - Abbreviation: 1
+```````````````````````````````` example Markdown elements - Abbreviation: 1
 text with abbr embedded
 
 *[abbr]: abbreviation
@@ -33,7 +33,7 @@ text with abbr embedded
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Abbreviation: 2
+```````````````````````````````` example Markdown elements - Abbreviation: 2
 *[abbr]: abbreviation
 
 text with abbr embedded
@@ -42,13 +42,13 @@ text with abbr embedded
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Abbreviation: 3
+```````````````````````````````` example Markdown elements - Abbreviation: 3
 *[Abbr]:Abbreviation
 .
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Abbreviation: 4
+```````````````````````````````` example Markdown elements - Abbreviation: 4
 *[Abbr]:Abbreviation
 
 This has an Abbr embedded in it.
@@ -59,7 +59,7 @@ This has an Abbr embedded in it.
 
 No inline processing in expansion text.
 
-```````````````````````````````` example Markdown elements - Abbreviation: 5
+```````````````````````````````` example Markdown elements - Abbreviation: 5
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -68,14 +68,14 @@ This has an Abbr embedded in it.
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Abbreviation: 6
+```````````````````````````````` example Markdown elements - Abbreviation: 6
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 .
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Abbreviation: 7
+```````````````````````````````` example Markdown elements - Abbreviation: 7
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 
@@ -86,7 +86,7 @@ And this has another Abbr embedded in it.
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Abbreviation: 8
+```````````````````````````````` example Markdown elements - Abbreviation: 8
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
 
@@ -96,7 +96,7 @@ U.S.A. is an abbreviation and so is US of A, an abbreviation.
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Abbreviation: 9
+```````````````````````````````` example Markdown elements - Abbreviation: 9
 *[US]: United States
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
@@ -107,7 +107,7 @@ U.S.A., US of A, and US are all abbreviations.
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Abbreviation: 10
+```````````````````````````````` example Markdown elements - Abbreviation: 10
 *[Abbr]: Abbreviation
 [Abbr]: http://test.com
 
@@ -120,7 +120,7 @@ This is an Abbr and this is not [Abbr].
 
 An abbreviation that is not on the first line is just text.
 
-```````````````````````````````` example Markdown elements - Abbreviation: 11
+```````````````````````````````` example Markdown elements - Abbreviation: 11
 Paragraph with second line having a reference
 *[test]: test abbreviation
 
@@ -133,7 +133,7 @@ Paragraph with second line having a reference
 
 `AnchorLink`
 
-```````````````````````````````` example(Markdown elements - AnchorLink: 1) options(anchor-links)
+```````````````````````````````` example(Markdown elements - AnchorLink: 1) options(anchor-links)
 Setext Heading 1
 ===
 Setext Heading 2
@@ -162,7 +162,7 @@ Setext Heading 2
 
 Wraped autolink
 
-```````````````````````````````` example Markdown elements - AutoLink: 1
+```````````````````````````````` example Markdown elements - AutoLink: 1
 text <http://autolink.com> embedded
 
 .
@@ -172,7 +172,7 @@ text <http://autolink.com> embedded
 
 Plain autolink
 
-```````````````````````````````` example Markdown elements - AutoLink: 2
+```````````````````````````````` example Markdown elements - AutoLink: 2
 text http://autolink.com embedded
 
 .
@@ -182,7 +182,7 @@ text http://autolink.com embedded
 
 mail autolink
 
-```````````````````````````````` example Markdown elements - AutoLink: 3
+```````````````````````````````` example Markdown elements - AutoLink: 3
 text example@example.com
 
 .
@@ -196,7 +196,7 @@ text example@example.com
 
 Lazy continuation, no prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 1
+```````````````````````````````` example Markdown elements - BlockQuote: 1
 > block quote
 with lazy continuation
 >
@@ -209,7 +209,7 @@ with lazy continuation
 
 Lazy continuation, with prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 2
+```````````````````````````````` example Markdown elements - BlockQuote: 2
 > block quote
 > with lazy continuation
 >
@@ -222,7 +222,7 @@ Lazy continuation, with prefix
 
 Nested, Lazy continuation, no prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 3
+```````````````````````````````` example Markdown elements - BlockQuote: 3
 >> block quote
 with lazy continuation
 >>
@@ -237,7 +237,7 @@ with lazy continuation
 
 Nested, Lazy continuation, with prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 4
+```````````````````````````````` example Markdown elements - BlockQuote: 4
 >> block quote
 >> with lazy continuation
 >>
@@ -252,7 +252,7 @@ Nested, Lazy continuation, with prefix
 
 Nested, Lazy continuation less, with prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 5
+```````````````````````````````` example Markdown elements - BlockQuote: 5
 >> block quote
 > with lazy continuation
 >> 
@@ -267,7 +267,7 @@ Nested, Lazy continuation less, with prefix
 
 Nested, Lazy continuation more, with prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 6
+```````````````````````````````` example Markdown elements - BlockQuote: 6
 >> block quote
 >> with lazy continuation
 >> 
@@ -282,7 +282,7 @@ Nested, Lazy continuation more, with prefix
 
 Nested, Lazy continuation less, with prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 7
+```````````````````````````````` example Markdown elements - BlockQuote: 7
 >> block quote
 with lazy continuation
 >>
@@ -299,7 +299,7 @@ with lazy continuation
 
 Nested, Lazy continuation, with prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 8
+```````````````````````````````` example Markdown elements - BlockQuote: 8
 >> block quote
 >> with lazy continuation
 >>
@@ -316,7 +316,7 @@ Nested, Lazy continuation, with prefix
 
 Nested, Lazy continuation less, with prefix
 
-```````````````````````````````` example Markdown elements - BlockQuote: 9
+```````````````````````````````` example Markdown elements - BlockQuote: 9
 >> block quote
 > with lazy continuation
 >>
@@ -337,7 +337,7 @@ Nested, Lazy continuation less, with prefix
 
 empty
 
-```````````````````````````````` example Markdown elements - BulletList: 1
+```````````````````````````````` example Markdown elements - BulletList: 1
 + 
 
 .
@@ -349,7 +349,7 @@ empty
 
 empty, generates exception
 
-```````````````````````````````` example(Markdown elements - BulletList: 2) options(IGNORE)
+```````````````````````````````` example(Markdown elements - BulletList: 2) options(IGNORE)
 - [ ] 
 
 .
@@ -361,7 +361,7 @@ empty, generates exception
 
 nested
 
-```````````````````````````````` example Markdown elements - BulletList: 3
+```````````````````````````````` example Markdown elements - BulletList: 3
 - item 1
 * item 2
     - item 2.1
@@ -381,7 +381,7 @@ nested
 
 nested some loose
 
-```````````````````````````````` example Markdown elements - BulletList: 4
+```````````````````````````````` example Markdown elements - BulletList: 4
 - item 1
 
 * item 2
@@ -405,7 +405,7 @@ nested some loose
 
 nested loose
 
-```````````````````````````````` example Markdown elements - BulletList: 5
+```````````````````````````````` example Markdown elements - BulletList: 5
 - item 1
 
 * item 2
@@ -432,7 +432,7 @@ nested loose
 
 tight nested loose
 
-```````````````````````````````` example Markdown elements - BulletList: 6
+```````````````````````````````` example Markdown elements - BulletList: 6
 - item 1
 * item 2
 
@@ -460,7 +460,7 @@ tight nested loose
 
 nested task item
 
-```````````````````````````````` example Markdown elements - BulletList: 7
+```````````````````````````````` example Markdown elements - BulletList: 7
 - item 1
 * item 2
     - [ ] item 2.1
@@ -482,7 +482,7 @@ nested task item
 
 task item, nested
 
-```````````````````````````````` example Markdown elements - BulletList: 8
+```````````````````````````````` example Markdown elements - BulletList: 8
 - item 1
 * item 2
 * [ ] item 2
@@ -506,7 +506,7 @@ task item, nested
 
 task item, nested task item
 
-```````````````````````````````` example Markdown elements - BulletList: 9
+```````````````````````````````` example Markdown elements - BulletList: 9
 - item 1
 * item 2
 * [ ] item 2
@@ -530,7 +530,7 @@ task item, nested task item
 
 A bullet list after an ordered list
 
-```````````````````````````````` example Markdown elements - BulletList: 10
+```````````````````````````````` example Markdown elements - BulletList: 10
 2. item 1
 1. item 2
 5. [ ] tem 3
@@ -555,7 +555,7 @@ A bullet list after an ordered list
 Bullet items must have a blank line before them when preceded by paragraph but should not append
 following child paragraph
 
-```````````````````````````````` example Markdown elements - BulletList: 11
+```````````````````````````````` example Markdown elements - BulletList: 11
 - item 1 paragraph
     * sublist
 - item 2 paragraph
@@ -577,7 +577,7 @@ following child paragraph
 
 Bullet items can have headings as children
 
-```````````````````````````````` example Markdown elements - BulletList: 12
+```````````````````````````````` example Markdown elements - BulletList: 12
 - Some Lists
     
     # Test
@@ -596,7 +596,7 @@ Bullet items can have headings as children
 
 Plain text with unterminated or empty code
 
-```````````````````````````````` example Markdown elements - Code: 1
+```````````````````````````````` example Markdown elements - Code: 1
 First line
 Second line ``
 Last line
@@ -607,7 +607,7 @@ Last line
 
 Plain text with simple code
 
-```````````````````````````````` example Markdown elements - Code: 2
+```````````````````````````````` example Markdown elements - Code: 2
 First line
 Second line `code`
 Last line
@@ -618,7 +618,7 @@ Last line
 
 Plain text with code with embedded looking HTML comment
 
-```````````````````````````````` example Markdown elements - Code: 3
+```````````````````````````````` example Markdown elements - Code: 3
 First line
 Second line `<!--code-->`
 Last line
@@ -633,7 +633,7 @@ Last line
 
 No optional : at end
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 1
+```````````````````````````````` example Markdown elements - DefinitionItem: 1
 Definition Term
 : definition item 
 .
@@ -644,7 +644,7 @@ Definition Term
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 2
+```````````````````````````````` example Markdown elements - DefinitionItem: 2
 Definition Term
 ~ definition item 
 .
@@ -657,7 +657,7 @@ Definition Term
 
 A simple definition list:
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 3
+```````````````````````````````` example Markdown elements - DefinitionItem: 3
 Term 1
 :   Definition 1
 
@@ -676,7 +676,7 @@ Term 2
 
 With multiple terms:
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 4
+```````````````````````````````` example Markdown elements - DefinitionItem: 4
 Term 1
 Term 2
 :   Definition 1
@@ -699,7 +699,7 @@ Term 4
 
 With multiple definitions:
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 5
+```````````````````````````````` example Markdown elements - DefinitionItem: 5
 Term 1
 :   Definition 1
 :   Definition 2
@@ -722,7 +722,7 @@ Term 2
 
 With multiple lines per definition:
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 6
+```````````````````````````````` example Markdown elements - DefinitionItem: 6
 Term 1
 :   Definition 1 line 1 
 Definition 1 line 2
@@ -749,7 +749,7 @@ Term 2
 
 With paragraphs:
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 7
+```````````````````````````````` example Markdown elements - DefinitionItem: 7
 Term 1
 
 :   Definition 1 (paragraph)
@@ -774,7 +774,7 @@ Term 2
 
 With multiple paragraphs:
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 8
+```````````````````````````````` example Markdown elements - DefinitionItem: 8
 Term 1
 
 :   Definition 1 paragraph 1 line 1 
@@ -809,7 +809,7 @@ Definition 1 paragraph 2 line 2 (lazy)
 
 A mix:
 
-```````````````````````````````` example Markdown elements - DefinitionItem: 9
+```````````````````````````````` example Markdown elements - DefinitionItem: 9
 Term 1
 Term 2
 
@@ -879,7 +879,7 @@ Term 4
 
 underscore
 
-```````````````````````````````` example Markdown elements - Emphasis: 1
+```````````````````````````````` example Markdown elements - Emphasis: 1
 _italic_
 text _italic_ embedded 
 _italic_ embedded 
@@ -891,7 +891,7 @@ text _italic_
 
 asterisk
 
-```````````````````````````````` example Markdown elements - Emphasis: 2
+```````````````````````````````` example Markdown elements - Emphasis: 2
 *italic*
 text *italic* embedded 
 *italic* embedded 
@@ -905,7 +905,7 @@ text *italic*
 
 `EscapedCharacter`
 
-```````````````````````````````` example Markdown elements - EscapedCharacter: 1
+```````````````````````````````` example Markdown elements - EscapedCharacter: 1
 \\  \* \~ \t \"
 .
 <p>\  * ~ \t &quot;</p>
@@ -918,7 +918,7 @@ text *italic*
 
 empty, no info
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 1
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 1
 ```
 
 ```
@@ -930,7 +930,7 @@ empty, no info
 
 unterminated
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 2
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 2
 ```
 .
 <pre><code></code></pre>
@@ -939,7 +939,7 @@ unterminated
 
 empty, no info, blank line follows
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 3
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 3
 ```
 
 ```
@@ -952,7 +952,7 @@ empty, no info, blank line follows
 
 empty, info
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 4
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 4
 ```info
 
 ```
@@ -964,7 +964,7 @@ empty, info
 
 empty, info, blank line follows
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 5
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 5
 ```info
 
 ```
@@ -977,7 +977,7 @@ empty, info, blank line follows
 
 non empty, no info, blank line follows
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 6
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 6
 ```
 some text
 ```
@@ -990,7 +990,7 @@ some text
 
 non empty, info
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 7
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 7
 ```info
 some text
 ```
@@ -1002,7 +1002,7 @@ some text
 
 non empty, info, blank line follows
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 8
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 8
 ```info
 some text
 ```
@@ -1015,7 +1015,7 @@ some text
 
 non empty, info, blank line follows, unmatched
 
-```````````````````````````````` example Markdown elements - FencedCodeBlock: 9
+```````````````````````````````` example Markdown elements - FencedCodeBlock: 9
 ```info
 some text
 ~~~
@@ -1032,7 +1032,7 @@ some text
 
 minimal
 
-```````````````````````````````` example(Markdown elements - HardLineBreak: 1) options(hard-breaks)
+```````````````````````````````` example(Markdown elements - HardLineBreak: 1) options(hard-breaks)
 text with hard line break  
 more text
 .
@@ -1043,7 +1043,7 @@ more text</p>
 
 non minimal
 
-```````````````````````````````` example(Markdown elements - HardLineBreak: 2) options(hard-breaks)
+```````````````````````````````` example(Markdown elements - HardLineBreak: 2) options(hard-breaks)
 text with hard line break   
 more text
 .
@@ -1058,7 +1058,7 @@ more text</p>
 
 Setext 1
 
-```````````````````````````````` example(Markdown elements - Heading: 1) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 1) options(anchor-links)
 Heading 1
 ===
 .
@@ -1068,7 +1068,7 @@ Heading 1
 
 Setext 2
 
-```````````````````````````````` example(Markdown elements - Heading: 2) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 2) options(anchor-links)
 Heading 2
 ---
 .
@@ -1078,7 +1078,7 @@ Heading 2
 
 Setext 1 with inlines
 
-```````````````````````````````` example(Markdown elements - Heading: 3) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 3) options(anchor-links)
 Heading 1 **bold** _italic_ `code` 
 ==================================
 .
@@ -1088,7 +1088,7 @@ Heading 1 **bold** _italic_ `code`
 
 Setext 2 with inliines
 
-```````````````````````````````` example(Markdown elements - Heading: 4) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 4) options(anchor-links)
 Heading 2 **bold** _italic_ `code` 
 ----------------------------------
 .
@@ -1098,7 +1098,7 @@ Heading 2 **bold** _italic_ `code`
 
 Atx 1
 
-```````````````````````````````` example(Markdown elements - Heading: 5) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 5) options(anchor-links)
 # Heading 1
 # Heading 1 Tail #
 .
@@ -1109,7 +1109,7 @@ Atx 1
 
 Atx 1 with inlines
 
-```````````````````````````````` example(Markdown elements - Heading: 6) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 6) options(anchor-links)
 # Heading 1 **bold** _italic_ `code`
 .
 <h1><a href="#heading-1-bold-italic-code" id="heading-1-bold-italic-code">Heading 1 <strong>bold</strong> <em>italic</em> <code>code</code></a></h1>
@@ -1118,7 +1118,7 @@ Atx 1 with inlines
 
 Atx 2
 
-```````````````````````````````` example(Markdown elements - Heading: 7) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 7) options(anchor-links)
 ## Heading 2
 ## Heading 2 Tail #
 .
@@ -1129,7 +1129,7 @@ Atx 2
 
 Atx 3
 
-```````````````````````````````` example(Markdown elements - Heading: 8) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 8) options(anchor-links)
 ### Heading 3
 ### Heading 3 Tail #
 .
@@ -1140,7 +1140,7 @@ Atx 3
 
 Atx 4
 
-```````````````````````````````` example(Markdown elements - Heading: 9) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 9) options(anchor-links)
 #### Heading 4
 #### Heading 4 Tail #
 .
@@ -1151,7 +1151,7 @@ Atx 4
 
 Atx 5
 
-```````````````````````````````` example(Markdown elements - Heading: 10) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 10) options(anchor-links)
 ##### Heading 5
 ##### Heading 5 Tail #
 .
@@ -1162,7 +1162,7 @@ Atx 5
 
 Atx 6
 
-```````````````````````````````` example(Markdown elements - Heading: 11) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Heading: 11) options(anchor-links)
 ###### Heading 6
 ###### Heading 6 Tail #
 .
@@ -1177,7 +1177,7 @@ Atx 6
 
 Html Blocks
 
-```````````````````````````````` example Markdown elements - HtmlBlock: 1
+```````````````````````````````` example Markdown elements - HtmlBlock: 1
 <div>
   <ul>
     <li>item</li>
@@ -1198,7 +1198,7 @@ Html Blocks
 
 empty
 
-```````````````````````````````` example Markdown elements - HtmlCommentBlock: 1
+```````````````````````````````` example Markdown elements - HtmlCommentBlock: 1
 <!---->
 .
 <!---->
@@ -1207,7 +1207,7 @@ empty
 
 non-empty, no whitespace
 
-```````````````````````````````` example Markdown elements - HtmlCommentBlock: 2
+```````````````````````````````` example Markdown elements - HtmlCommentBlock: 2
 <!--test-->
 .
 <!--test-->
@@ -1216,7 +1216,7 @@ non-empty, no whitespace
 
 non-empty whitespace
 
-```````````````````````````````` example Markdown elements - HtmlCommentBlock: 3
+```````````````````````````````` example Markdown elements - HtmlCommentBlock: 3
 <!-- test -->
 .
 <!-- test -->
@@ -1229,7 +1229,7 @@ non-empty whitespace
 
 named
 
-```````````````````````````````` example Markdown elements - HtmlEntity: 1
+```````````````````````````````` example Markdown elements - HtmlEntity: 1
 &nbsp;
 .
 <p> </p>
@@ -1238,7 +1238,7 @@ named
 
 numbered
 
-```````````````````````````````` example Markdown elements - HtmlEntity: 2
+```````````````````````````````` example Markdown elements - HtmlEntity: 2
 &#10;
 .
 <p>
@@ -1248,7 +1248,7 @@ numbered
 
 named embedded
 
-```````````````````````````````` example Markdown elements - HtmlEntity: 3
+```````````````````````````````` example Markdown elements - HtmlEntity: 3
 text with &nbsp; embedded
 .
 <p>text with   embedded</p>
@@ -1257,7 +1257,7 @@ text with &nbsp; embedded
 
 numbered embedded
 
-```````````````````````````````` example Markdown elements - HtmlEntity: 4
+```````````````````````````````` example Markdown elements - HtmlEntity: 4
 text with &#10; embedded
 .
 <p>text with 
@@ -1267,7 +1267,7 @@ embedded</p>
 
 named embedded, no whitespace
 
-```````````````````````````````` example Markdown elements - HtmlEntity: 5
+```````````````````````````````` example Markdown elements - HtmlEntity: 5
 text with&nbsp;embedded
 .
 <p>text with embedded</p>
@@ -1276,7 +1276,7 @@ text with&nbsp;embedded
 
 numbered embedded, no whitespace
 
-```````````````````````````````` example Markdown elements - HtmlEntity: 6
+```````````````````````````````` example Markdown elements - HtmlEntity: 6
 text with&#10;embedded
 .
 <p>text with
@@ -1290,7 +1290,7 @@ embedded</p>
 
 empty
 
-```````````````````````````````` example Markdown elements - HtmlInline: 1
+```````````````````````````````` example Markdown elements - HtmlInline: 1
 <span></span>
 .
 <p><span></span></p>
@@ -1299,7 +1299,7 @@ empty
 
 non-empty
 
-```````````````````````````````` example Markdown elements - HtmlInline: 2
+```````````````````````````````` example Markdown elements - HtmlInline: 2
 <span>span</span>
 .
 <p><span>span</span></p>
@@ -1308,7 +1308,7 @@ non-empty
 
 empty leading
 
-```````````````````````````````` example Markdown elements - HtmlInline: 3
+```````````````````````````````` example Markdown elements - HtmlInline: 3
 <span></span> embedded
 .
 <p><span></span> embedded</p>
@@ -1317,7 +1317,7 @@ empty leading
 
 non-empty leading
 
-```````````````````````````````` example Markdown elements - HtmlInline: 4
+```````````````````````````````` example Markdown elements - HtmlInline: 4
 <span>span</span> embedded
 .
 <p><span>span</span> embedded</p>
@@ -1326,7 +1326,7 @@ non-empty leading
 
 empty embedded
 
-```````````````````````````````` example Markdown elements - HtmlInline: 5
+```````````````````````````````` example Markdown elements - HtmlInline: 5
 text with <span></span> embedded
 .
 <p>text with <span></span> embedded</p>
@@ -1335,7 +1335,7 @@ text with <span></span> embedded
 
 non-empty embedded
 
-```````````````````````````````` example Markdown elements - HtmlInline: 6
+```````````````````````````````` example Markdown elements - HtmlInline: 6
 text with <span>span</span> embedded
 .
 <p>text with <span>span</span> embedded</p>
@@ -1344,7 +1344,7 @@ text with <span>span</span> embedded
 
 empty trailing
 
-```````````````````````````````` example Markdown elements - HtmlInline: 7
+```````````````````````````````` example Markdown elements - HtmlInline: 7
 text with <span></span>
 .
 <p>text with <span></span></p>
@@ -1353,7 +1353,7 @@ text with <span></span>
 
 non-empty trailing
 
-```````````````````````````````` example Markdown elements - HtmlInline: 8
+```````````````````````````````` example Markdown elements - HtmlInline: 8
 text with <span>span</span>
 .
 <p>text with <span>span</span></p>
@@ -1366,7 +1366,7 @@ text with <span>span</span>
 
 Plain text with empty HTML comment
 
-```````````````````````````````` example Markdown elements - HtmlInlineComment: 1
+```````````````````````````````` example Markdown elements - HtmlInlineComment: 1
 First line
 Second line <!---->
 Last line
@@ -1377,7 +1377,7 @@ Last line
 
 Html Inline with comment
 
-```````````````````````````````` example Markdown elements - HtmlInlineComment: 2
+```````````````````````````````` example Markdown elements - HtmlInlineComment: 2
 text <div><!-- HTML Comment --></div> some more text
 .
 <p>text <div><!-- HTML Comment --></div> some more text</p>
@@ -1386,7 +1386,7 @@ text <div><!-- HTML Comment --></div> some more text
 
 Plain text with simple HTML comment
 
-```````````````````````````````` example Markdown elements - HtmlInlineComment: 3
+```````````````````````````````` example Markdown elements - HtmlInlineComment: 3
 First line
 Second line <!--simple-->
 Last line
@@ -1397,7 +1397,7 @@ Last line
 
 Plain text with unterminated HTML comment
 
-```````````````````````````````` example Markdown elements - HtmlInlineComment: 4
+```````````````````````````````` example Markdown elements - HtmlInlineComment: 4
 First line
 Second line <!--simple
 Last line
@@ -1408,7 +1408,7 @@ Last line
 
 Plain text with HTML comment with embedded looking code
 
-```````````````````````````````` example Markdown elements - HtmlInlineComment: 5
+```````````````````````````````` example Markdown elements - HtmlInlineComment: 5
 First line
 Second line <!--`code`-->
 Last line
@@ -1423,7 +1423,7 @@ Last line
 
 Html Blocks
 
-```````````````````````````````` example Markdown elements - HtmlInnerBlock: 1
+```````````````````````````````` example Markdown elements - HtmlInnerBlock: 1
 <div>
     <!-- HTML Comment -->
 </div>
@@ -1446,7 +1446,7 @@ Document[0, 38]
 
 plain
 
-```````````````````````````````` example Markdown elements - Image: 1
+```````````````````````````````` example Markdown elements - Image: 1
 ![alt](/url) 
 .
 <p><img src="/url" alt="alt" /></p>
@@ -1455,7 +1455,7 @@ plain
 
 embedded
 
-```````````````````````````````` example Markdown elements - Image: 2
+```````````````````````````````` example Markdown elements - Image: 2
 text with ![alt](/url) embedded 
 .
 <p>text with <img src="/url" alt="alt" /> embedded</p>
@@ -1468,7 +1468,7 @@ text with ![alt](/url) embedded
 
 basic
 
-```````````````````````````````` example Markdown elements - ImageRef: 1
+```````````````````````````````` example Markdown elements - ImageRef: 1
 [ref]: /url
 
 ![ref]
@@ -1479,7 +1479,7 @@ basic
 
 undefined
 
-```````````````````````````````` example Markdown elements - ImageRef: 2
+```````````````````````````````` example Markdown elements - ImageRef: 2
 [ref2]: /url2
 
 ![ref]
@@ -1490,7 +1490,7 @@ undefined
 
 duplicate
 
-```````````````````````````````` example Markdown elements - ImageRef: 3
+```````````````````````````````` example Markdown elements - ImageRef: 3
 [ref]: /url1
 [ref]: /url2
 
@@ -1502,7 +1502,7 @@ duplicate
 
 dummy ref
 
-```````````````````````````````` example Markdown elements - ImageRef: 4
+```````````````````````````````` example Markdown elements - ImageRef: 4
 [ref]: /url1
 
 ![ref][]
@@ -1517,7 +1517,7 @@ dummy ref
 
 basic
 
-```````````````````````````````` example Markdown elements - IndentedCodeBlock: 1
+```````````````````````````````` example Markdown elements - IndentedCodeBlock: 1
     code
 .
 <pre><code>code
@@ -1527,7 +1527,7 @@ basic
 
 multi line
 
-```````````````````````````````` example Markdown elements - IndentedCodeBlock: 2
+```````````````````````````````` example Markdown elements - IndentedCodeBlock: 2
     code
         more code
 .
@@ -1539,7 +1539,7 @@ multi line
 
 multi line, blanks
 
-```````````````````````````````` example Markdown elements - IndentedCodeBlock: 3
+```````````````````````````````` example Markdown elements - IndentedCodeBlock: 3
     code
     
         more code
@@ -1553,7 +1553,7 @@ multi line, blanks
 
 tabbed
 
-```````````````````````````````` example Markdown elements - IndentedCodeBlock: 4
+```````````````````````````````` example Markdown elements - IndentedCodeBlock: 4
 →code
 .
 <pre><code>code
@@ -1563,7 +1563,7 @@ tabbed
 
 multi line
 
-```````````````````````````````` example Markdown elements - IndentedCodeBlock: 5
+```````````````````````````````` example Markdown elements - IndentedCodeBlock: 5
 →code
 →→more code
 .
@@ -1575,7 +1575,7 @@ multi line
 
 multi line, blanks
 
-```````````````````````````````` example Markdown elements - IndentedCodeBlock: 6
+```````````````````````````````` example Markdown elements - IndentedCodeBlock: 6
 →code
 
 →→more code
@@ -1589,7 +1589,7 @@ multi line, blanks
 
 trailing blank lines
 
-```````````````````````````````` example Markdown elements - IndentedCodeBlock: 7
+```````````````````````````````` example Markdown elements - IndentedCodeBlock: 7
     code
     more code
     
@@ -1607,7 +1607,7 @@ more code
 
 Jekyll front matter
 
-```````````````````````````````` example(Markdown elements - JekyllFrontMatterBlock: 1) options(FAIL)
+```````````````````````````````` example(Markdown elements - JekyllFrontMatterBlock: 1) options(FAIL)
 ---
 title: SimToc Extension Spec
 author: 
@@ -1623,7 +1623,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 flexmark front matter
 
-```````````````````````````````` example(Markdown elements - JekyllFrontMatterBlock: 2) options(FAIL)
+```````````````````````````````` example(Markdown elements - JekyllFrontMatterBlock: 2) options(FAIL)
 ---
 title: SimToc Extension Spec
 author: 
@@ -1645,7 +1645,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 basic
 
-```````````````````````````````` example Markdown elements - Link: 1
+```````````````````````````````` example Markdown elements - Link: 1
 [text](/url) 
 .
 <p><a href="/url">text</a></p>
@@ -1654,7 +1654,7 @@ basic
 
 emphasis
 
-```````````````````````````````` example Markdown elements - Link: 2
+```````````````````````````````` example Markdown elements - Link: 2
 [**text**](/url) 
 .
 <p><a href="/url"><strong>text</strong></a></p>
@@ -1663,7 +1663,7 @@ emphasis
 
 code
 
-```````````````````````````````` example Markdown elements - Link: 3
+```````````````````````````````` example Markdown elements - Link: 3
 [`text`](/url) 
 .
 <p><a href="/url"><code>text</code></a></p>
@@ -1672,7 +1672,7 @@ code
 
 image
 
-```````````````````````````````` example Markdown elements - Link: 4
+```````````````````````````````` example Markdown elements - Link: 4
 [![alt](/url2)](/url) 
 .
 <p><a href="/url"><img src="/url2" alt="alt" /></a></p>
@@ -1681,7 +1681,7 @@ image
 
 basic embedded
 
-```````````````````````````````` example Markdown elements - Link: 5
+```````````````````````````````` example Markdown elements - Link: 5
 text with [text](/url) embedded 
 .
 <p>text with <a href="/url">text</a> embedded</p>
@@ -1690,7 +1690,7 @@ text with [text](/url) embedded
 
 header embedded
 
-```````````````````````````````` example(Markdown elements - Link: 6) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Link: 6) options(anchor-links)
 # Heading [text](/url) 
 .
 <h1><a href="#heading-text" id="heading-text">Heading <a href="/url">text</a></a></h1>
@@ -1699,7 +1699,7 @@ header embedded
 
 header embedded
 
-```````````````````````````````` example(Markdown elements - Link: 7) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Link: 7) options(anchor-links)
 Heading [text](/url) 
 ---
 .
@@ -1709,7 +1709,7 @@ Heading [text](/url)
 
 header image embedded
 
-```````````````````````````````` example(Markdown elements - Link: 8) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Link: 8) options(anchor-links)
 # Heading [![alt](/url2)](/url) 
 .
 <h1><a href="#heading-alt" id="heading-alt">Heading <a href="/url"><img src="/url2" alt="alt" /></a></a></h1>
@@ -1718,7 +1718,7 @@ header image embedded
 
 header image embedded
 
-```````````````````````````````` example(Markdown elements - Link: 9) options(anchor-links)
+```````````````````````````````` example(Markdown elements - Link: 9) options(anchor-links)
 Heading [![alt](/url2)](/url) 
 ---
 .
@@ -1732,7 +1732,7 @@ Heading [![alt](/url2)](/url)
 
 basic
 
-```````````````````````````````` example Markdown elements - LinkRef: 1
+```````````````````````````````` example Markdown elements - LinkRef: 1
 [ref]: /url
 
 [ref]
@@ -1743,7 +1743,7 @@ basic
 
 undefined
 
-```````````````````````````````` example Markdown elements - LinkRef: 2
+```````````````````````````````` example Markdown elements - LinkRef: 2
 [ref2]: /url2
 
 [ref]
@@ -1754,7 +1754,7 @@ undefined
 
 duplicate
 
-```````````````````````````````` example Markdown elements - LinkRef: 3
+```````````````````````````````` example Markdown elements - LinkRef: 3
 [ref]: /url1
 [ref]: /url2
 
@@ -1766,7 +1766,7 @@ duplicate
 
 dummy ref
 
-```````````````````````````````` example Markdown elements - LinkRef: 4
+```````````````````````````````` example Markdown elements - LinkRef: 4
 [ref]: /url1
 
 [ref][]
@@ -1781,7 +1781,7 @@ dummy ref
 
 basic, comparison may fail because of random obfuscation
 
-```````````````````````````````` example(Markdown elements - MailLink: 1) options(IGNORE)
+```````````````````````````````` example(Markdown elements - MailLink: 1) options(IGNORE)
 name@url.dom
 .
 <p><a href="mailto:&#110;a&#109;&#x65;&#x40;&#x75;&#x72;&#108;&#x2e;&#x64;o&#109;">&#110;a&#109;&#x65;&#x40;&#x75;&#x72;&#108;&#x2e;&#x64;o&#109;</a></p>
@@ -1790,7 +1790,7 @@ name@url.dom
 
 basic leading
 
-```````````````````````````````` example(Markdown elements - MailLink: 2) options(IGNORE)
+```````````````````````````````` example(Markdown elements - MailLink: 2) options(IGNORE)
 name@url.dom embedded
 .
 <p><a href="mailto:&#x6e;&#97;m&#101;&#64;&#117;r&#108;.&#x64;&#111;&#x6d;">&#x6e;&#97;m&#101;&#64;&#117;r&#108;.&#x64;&#111;&#x6d;</a> embedded</p>
@@ -1799,7 +1799,7 @@ name@url.dom embedded
 
 basic embedded
 
-```````````````````````````````` example(Markdown elements - MailLink: 3) options(IGNORE)
+```````````````````````````````` example(Markdown elements - MailLink: 3) options(IGNORE)
 text with name@url.dom embedded
 .
 <p>text with <a href="mailto:&#x6e;&#97;&#109;e&#x40;&#x75;r&#108;&#x2e;&#x64;&#111;&#109;">&#x6e;&#97;&#109;e&#x40;&#x75;r&#108;&#x2e;&#x64;&#111;&#109;</a> embedded</p>
@@ -1808,7 +1808,7 @@ text with name@url.dom embedded
 
 basic trailing
 
-```````````````````````````````` example(Markdown elements - MailLink: 4) options(IGNORE)
+```````````````````````````````` example(Markdown elements - MailLink: 4) options(IGNORE)
 text with name@url.dom
 .
 <p>text with <a href="mailto:&#110;&#97;&#109;&#x65;&#x40;&#117;&#114;&#108;&#46;&#x64;&#111;&#109;">&#110;&#97;&#109;&#x65;&#x40;&#117;&#114;&#108;&#46;&#x64;&#111;&#109;</a></p>
@@ -1821,7 +1821,7 @@ text with name@url.dom
 
 empty
 
-```````````````````````````````` example Markdown elements - OrderedList: 1
+```````````````````````````````` example Markdown elements - OrderedList: 1
 1. 
 
 .
@@ -1833,7 +1833,7 @@ empty
 
 empty task list
 
-```````````````````````````````` example Markdown elements - OrderedList: 2
+```````````````````````````````` example Markdown elements - OrderedList: 2
 1. [ ]
 
 .
@@ -1845,7 +1845,7 @@ empty task list
 
 nested
 
-```````````````````````````````` example Markdown elements - OrderedList: 3
+```````````````````````````````` example Markdown elements - OrderedList: 3
 4. item 1
 3. item 2
     2. item 2.1
@@ -1865,7 +1865,7 @@ nested
 
 nested some loose
 
-```````````````````````````````` example Markdown elements - OrderedList: 4
+```````````````````````````````` example Markdown elements - OrderedList: 4
 4. item 1
 
 3. item 2
@@ -1889,7 +1889,7 @@ nested some loose
 
 nested loose
 
-```````````````````````````````` example Markdown elements - OrderedList: 5
+```````````````````````````````` example Markdown elements - OrderedList: 5
 4. item 1
 
 3. item 2
@@ -1916,7 +1916,7 @@ nested loose
 
 tight nested loose
 
-```````````````````````````````` example Markdown elements - OrderedList: 6
+```````````````````````````````` example Markdown elements - OrderedList: 6
 4. item 1
 3. item 2
 
@@ -1944,7 +1944,7 @@ tight nested loose
 
 An ordered list after bullet list
 
-```````````````````````````````` example Markdown elements - OrderedList: 7
+```````````````````````````````` example Markdown elements - OrderedList: 7
 - item 1
 - item 2
 - [ ] item 3
@@ -1968,7 +1968,7 @@ An ordered list after bullet list
 
 no parens delimiter
 
-```````````````````````````````` example Markdown elements - OrderedList: 8
+```````````````````````````````` example Markdown elements - OrderedList: 8
 2. item 1
 1. item 2
 
@@ -1988,7 +1988,7 @@ no parens delimiter
 
 Plain text should return the whole input
 
-```````````````````````````````` example Markdown elements - Paragraph: 1
+```````````````````````````````` example Markdown elements - Paragraph: 1
 First line
 Second line
 Last line
@@ -1999,7 +1999,7 @@ Last line
 
 Item text in a tight list should have no para wrapper.
 
-```````````````````````````````` example Markdown elements - Paragraph: 2
+```````````````````````````````` example Markdown elements - Paragraph: 2
 * first item 
 * first item 
 .
@@ -2012,7 +2012,7 @@ Item text in a tight list should have no para wrapper.
 
 Paragraphs Following the item text should have paragraph wrappers
 
-```````````````````````````````` example Markdown elements - Paragraph: 3
+```````````````````````````````` example Markdown elements - Paragraph: 3
 * first item 
     
     Para wrapped
@@ -2034,7 +2034,7 @@ Paragraphs Following the item text should have paragraph wrappers
 
 `Reference`
 
-```````````````````````````````` example Markdown elements - Reference: 1
+```````````````````````````````` example Markdown elements - Reference: 1
 [url1]: /url1
 [url2]: /url2
 .
@@ -2043,7 +2043,7 @@ Paragraphs Following the item text should have paragraph wrappers
 
 Footnote looking references with footnotes disabled
 
-```````````````````````````````` example Markdown elements - Reference: 2
+```````````````````````````````` example Markdown elements - Reference: 2
 [^url1]: /url1
 [^url2]: /url2
 .
@@ -2052,7 +2052,7 @@ Footnote looking references with footnotes disabled
 
 Footnote looking references with footnotes disabled
 
-```````````````````````````````` example Markdown elements - Reference: 3
+```````````````````````````````` example Markdown elements - Reference: 3
 this is not a footnote[^]. And this is a footnote[^A].
 
 this is an undefined footnote [^undef]
@@ -2079,7 +2079,7 @@ this is an undefined footnote [^undef]
 
 `SoftLineBreak`
 
-```````````````````````````````` example Markdown elements - SoftLineBreak: 1
+```````````````````````````````` example Markdown elements - SoftLineBreak: 1
 line 1
 line 2
 line 3
@@ -2094,7 +2094,7 @@ line 3
 
 basic
 
-```````````````````````````````` example Markdown elements - Strikethrough: 1
+```````````````````````````````` example Markdown elements - Strikethrough: 1
 ~italic~
 text ~italic~ embedded 
 ~italic~ embedded 
@@ -2110,7 +2110,7 @@ text ~italic~
 
 basic
 
-```````````````````````````````` example Markdown elements - StrongEmphasis: 1
+```````````````````````````````` example Markdown elements - StrongEmphasis: 1
 **italic**
 text **italic** embedded 
 **italic** embedded 
@@ -2124,7 +2124,7 @@ text **italic**
 
 `TableBlock` `TableBody` `TableCaption` `TableCell` `TableHead` `TableRow` `TableSeparator`
 
-```````````````````````````````` example Markdown elements - TableBlock: 1
+```````````````````````````````` example Markdown elements - TableBlock: 1
 Abc|Def
 ---|---
 1|2
@@ -2144,7 +2144,7 @@ table, you are over
 
 inlines should be processed
 
-```````````````````````````````` example Markdown elements - TableBlock: 2
+```````````````````````````````` example Markdown elements - TableBlock: 2
 |**Abc** **test** |_Def_ _Def_
 ---|---
 [ref]|`code` `code`
@@ -2166,7 +2166,7 @@ table, you are over
 
 Column spans are created with repeated | pipes one for each additional column to span
 
-```````````````````````````````` example Markdown elements - TableBlock: 3
+```````````````````````````````` example Markdown elements - TableBlock: 3
 |Abc|Def
 |---|---|
 | span ||
@@ -2184,7 +2184,7 @@ Column spans are created with repeated | pipes one for each additional column to
 
 Now we try varying the header lines and make sure we get the right output
 
-```````````````````````````````` example Markdown elements - TableBlock: 4
+```````````````````````````````` example Markdown elements - TableBlock: 4
 |Abc|Def
 |Hij|Lmn
 |---|---|
@@ -2204,7 +2204,7 @@ Now we try varying the header lines and make sure we get the right output
 
 No header lines
 
-```````````````````````````````` example Markdown elements - TableBlock: 5
+```````````````````````````````` example Markdown elements - TableBlock: 5
 |---|---|
 | col1 | col2|
 .
@@ -2219,7 +2219,7 @@ No header lines
 
 No body lines
 
-```````````````````````````````` example Markdown elements - TableBlock: 6
+```````````````````````````````` example Markdown elements - TableBlock: 6
 | col1 | col2|
 |---|---|
 .
@@ -2234,7 +2234,7 @@ No body lines
 
 multiple tables parsed correctly
 
-```````````````````````````````` example Markdown elements - TableBlock: 7
+```````````````````````````````` example Markdown elements - TableBlock: 7
 not a table, followed by a table
 
 | col1 | col2|
@@ -2282,7 +2282,7 @@ not a table, followed by a table
 
 multi row/column
 
-```````````````````````````````` example Markdown elements - TableBlock: 8
+```````````````````````````````` example Markdown elements - TableBlock: 8
 | col11 | col12| col13|
 | col21 | col22| col23|
 | col31 | col32| col33|
@@ -2309,7 +2309,7 @@ multi row/column
 
 real life table
 
-```````````````````````````````` example Markdown elements - TableBlock: 9
+```````````````````````````````` example Markdown elements - TableBlock: 9
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -2463,7 +2463,7 @@ real life table
 
 Multi-line code span
 
-```````````````````````````````` example Markdown elements - TableBlock: 10
+```````````````````````````````` example Markdown elements - TableBlock: 10
 |header1|header2|header3|
 |-------|----|------|
 | line | ```{
@@ -2559,7 +2559,7 @@ Document[0, 149]
 
 Multi-line code span with multi-line table rows
 
-```````````````````````````````` example(Markdown elements - TableBlock: 11) options(FAIL)
+```````````````````````````````` example(Markdown elements - TableBlock: 11) options(FAIL)
 |header1|header2|header3|
 |-------|----|------|
 | line | ```{
@@ -2591,7 +2591,7 @@ PegdownParser$PegdownRootNode[0, 0]
 
 Multi-line code span in paragraph
 
-```````````````````````````````` example Markdown elements - TableBlock: 12
+```````````````````````````````` example Markdown elements - TableBlock: 12
 line ```{
 "key1": "xxx",
 "key2": [
@@ -2614,7 +2614,7 @@ Document[0, 55]
 
 `ThematicBreak`
 
-```````````````````````````````` example Markdown elements - ThematicBreak: 1
+```````````````````````````````` example Markdown elements - ThematicBreak: 1
 ---
 .
 <hr />
@@ -2627,7 +2627,7 @@ Document[0, 55]
 
 basic quotes
 
-```````````````````````````````` example Markdown elements - TypographicQuotes: 1
+```````````````````````````````` example Markdown elements - TypographicQuotes: 1
 Sample "double" 'single' <<angle>> "l'ordre" 'l'ordre'
 .
 <p>Sample &ldquo;double&rdquo; &lsquo;single&rsquo; &laquo;angle&raquo; &ldquo;l&rsquo;ordre&rdquo; &lsquo;l&rsquo;ordre&rsquo;</p>
@@ -2636,7 +2636,7 @@ Sample "double" 'single' <<angle>> "l'ordre" 'l'ordre'
 
 escaped quotes
 
-```````````````````````````````` example Markdown elements - TypographicQuotes: 2
+```````````````````````````````` example Markdown elements - TypographicQuotes: 2
 Sample \"double\" \'single\' \<<angle\>> \"l\'ordre\" \'l\'ordre\'
 .
 <p>Sample &quot;double&quot; 'single' &lt;&lt;angle&gt;&gt; &quot;l'ordre&quot; 'l'ordre'</p>
@@ -2649,7 +2649,7 @@ Sample \"double\" \'single\' \<<angle\>> \"l\'ordre\" \'l\'ordre\'
 
 basic
 
-```````````````````````````````` example Markdown elements - TypographicSmarts: 1
+```````````````````````````````` example Markdown elements - TypographicSmarts: 1
 Sample with l'existence, from 1...2 and so on. . . 
 
 en--dash and em---dash
@@ -2661,7 +2661,7 @@ en--dash and em---dash
 
 escaped smarts
 
-```````````````````````````````` example Markdown elements - TypographicSmarts: 2
+```````````````````````````````` example Markdown elements - TypographicSmarts: 2
 Sample with l\'existence, from 1\...2 and so on\. . . 
 
 en\--dash and em\---dash
@@ -2677,7 +2677,7 @@ en\--dash and em\---dash
 
 no spaces between brackets
 
-```````````````````````````````` example Markdown elements - WikiLink: 1
+```````````````````````````````` example Markdown elements - WikiLink: 1
 [ [not wiki link]]
 .
 <p>[ [not wiki link]]</p>
@@ -2686,7 +2686,7 @@ no spaces between brackets
 
 no spaces between brackets
 
-```````````````````````````````` example Markdown elements - WikiLink: 2
+```````````````````````````````` example Markdown elements - WikiLink: 2
 [[not wiki link] ]
 .
 <p>[[not wiki link] ]</p>
@@ -2695,7 +2695,7 @@ no spaces between brackets
 
 simple wiki link
 
-```````````````````````````````` example Markdown elements - WikiLink: 3
+```````````````````````````````` example Markdown elements - WikiLink: 3
 [[wiki link]]
 .
 <p><a href="wiki-link">wiki link</a></p>
@@ -2704,7 +2704,7 @@ simple wiki link
 
 wiki link with text
 
-```````````````````````````````` example Markdown elements - WikiLink: 4
+```````````````````````````````` example Markdown elements - WikiLink: 4
 [[wiki text|wiki link]]
 .
 <p><a href="wiki-link">wiki text</a></p>
@@ -2713,7 +2713,7 @@ wiki link with text
 
 simple wiki link with ! before
 
-```````````````````````````````` example Markdown elements - WikiLink: 5
+```````````````````````````````` example Markdown elements - WikiLink: 5
 ![[wiki link]]
 .
 <p>!<a href="wiki-link">wiki link</a></p>
@@ -2722,7 +2722,7 @@ simple wiki link with ! before
 
 wiki link with text with ! before
 
-```````````````````````````````` example Markdown elements - WikiLink: 6
+```````````````````````````````` example Markdown elements - WikiLink: 6
 ![[wiki text|wiki link]]
 .
 <p>!<a href="wiki-link">wiki text</a></p>
@@ -2731,7 +2731,7 @@ wiki link with text with ! before
 
 reference following will be a reference, even if not defined
 
-```````````````````````````````` example Markdown elements - WikiLink: 7
+```````````````````````````````` example Markdown elements - WikiLink: 7
 [[wiki link]][ref]
 .
 <p><a href="wiki-link">wiki link</a>[ref]</p>
@@ -2740,7 +2740,7 @@ reference following will be a reference, even if not defined
 
 reference following will be a reference
 
-```````````````````````````````` example Markdown elements - WikiLink: 8
+```````````````````````````````` example Markdown elements - WikiLink: 8
 [[wiki link]][ref]
 
 [ref]: /url
@@ -2751,7 +2751,7 @@ reference following will be a reference
 
 dummy reference following will be an empty reference
 
-```````````````````````````````` example Markdown elements - WikiLink: 9
+```````````````````````````````` example Markdown elements - WikiLink: 9
 [[wiki link]][]
 .
 <p><a href="wiki-link">wiki link</a>[]</p>
@@ -2760,7 +2760,7 @@ dummy reference following will be an empty reference
 
 reference inside is not a wiki link but a link ref with brackets around it
 
-```````````````````````````````` example Markdown elements - WikiLink: 10
+```````````````````````````````` example Markdown elements - WikiLink: 10
 [[not wiki link][ref]]
 .
 <p>[[not wiki link][ref]]</p>
@@ -2769,14 +2769,14 @@ reference inside is not a wiki link but a link ref with brackets around it
 
 dummy reference inside is not a wiki link but a link ref with brackets around it
 
-```````````````````````````````` example Markdown elements - WikiLink: 11
+```````````````````````````````` example Markdown elements - WikiLink: 11
 [[not wiki link][]]
 .
 <p>[[not wiki link][]]</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - WikiLink: 12
+```````````````````````````````` example Markdown elements - WikiLink: 12
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
 <p><a href="wiki-link">wiki link</a> [^link][ref] <a href="%5Ewiki-link">^wiki link</a></p>
@@ -2785,7 +2785,7 @@ dummy reference inside is not a wiki link but a link ref with brackets around it
 
 Exclamation before is just text
 
-```````````````````````````````` example Markdown elements - WikiLink: 13
+```````````````````````````````` example Markdown elements - WikiLink: 13
 ![[wiki link]] [^link][ref] [[^wiki link]] [[wiki]][ref]
 .
 <p>!<a href="wiki-link">wiki link</a> [^link][ref] <a href="%5Ewiki-link">^wiki link</a> <a href="wiki">wiki</a>[ref]</p>
@@ -2794,7 +2794,7 @@ Exclamation before is just text
 
 With empty anchor ref
 
-```````````````````````````````` example Markdown elements - WikiLink: 14
+```````````````````````````````` example Markdown elements - WikiLink: 14
 [[wiki link#]] 
 .
 <p><a href="wiki-link#">wiki link#</a></p>
@@ -2803,7 +2803,7 @@ With empty anchor ref
 
 With Anchor ref
 
-```````````````````````````````` example Markdown elements - WikiLink: 15
+```````````````````````````````` example Markdown elements - WikiLink: 15
 [[wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
@@ -2812,7 +2812,7 @@ With Anchor ref
 
 With text, empty anchor ref
 
-```````````````````````````````` example Markdown elements - WikiLink: 16
+```````````````````````````````` example Markdown elements - WikiLink: 16
 [[wiki text|wiki link#]] 
 .
 <p><a href="wiki-link#">wiki text</a></p>
@@ -2821,7 +2821,7 @@ With text, empty anchor ref
 
 With text, anchor ref
 
-```````````````````````````````` example Markdown elements - WikiLink: 17
+```````````````````````````````` example Markdown elements - WikiLink: 17
 [[wiki text|wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki text</a></p>
@@ -2832,7 +2832,7 @@ With text, anchor ref
 
 encoding of &, =
 
-```````````````````````````````` example Markdown elements - Multi-Line Image URL: 1
+```````````````````````````````` example Markdown elements - Multi-Line Image URL: 1
 ![ref](/url1?
 one = 1 & line
 ) trailing text
@@ -2843,7 +2843,7 @@ one = 1 & line
 
 encoding of +
 
-```````````````````````````````` example Markdown elements - Multi-Line Image URL: 2
+```````````````````````````````` example Markdown elements - Multi-Line Image URL: 2
 ![ref](/url1?
 one = 1 + line
 ) trailing text
@@ -2854,7 +2854,7 @@ one = 1 + line
 
 ### Extra Style Elements
 
-```````````````````````````````` example Markdown elements - Extra Style Elements: 1
+```````````````````````````````` example Markdown elements - Extra Style Elements: 1
 ~subscript~ ^superscript^ ++inserted++
 .
 <p><sub>subscript</sub> <sup>superscript</sup> <ins>inserted</ins></p>
@@ -2863,7 +2863,7 @@ one = 1 + line
 
 ### Gfm Task List Items
 
-```````````````````````````````` example Markdown elements - Gfm Task List Items: 1
+```````````````````````````````` example Markdown elements - Gfm Task List Items: 1
 - [ ] task item
 - [x] task item
 - [x] task item
@@ -2876,7 +2876,7 @@ one = 1 + line
 ````````````````````````````````
 
 
-```````````````````````````````` example Markdown elements - Gfm Task List Items: 2
+```````````````````````````````` example Markdown elements - Gfm Task List Items: 2
 1. [ ] task item
 1. [x] task item
 1. [x] task item
@@ -2893,7 +2893,7 @@ one = 1 + line
 
 Text and inlines, hierarchy
 
-```````````````````````````````` example Markdown elements - Table Of Contents: 1
+```````````````````````````````` example Markdown elements - Table Of Contents: 1
 [TOC hierarchy] 
 
 # Heading **some bold** 1
@@ -2919,7 +2919,7 @@ Text and inlines, hierarchy
 
 Text only, sorted
 
-```````````````````````````````` example Markdown elements - Table Of Contents: 2
+```````````````````````````````` example Markdown elements - Table Of Contents: 2
 [TOC text sorted] 
 
 ## Heading 1.1 _some italic_
@@ -2945,7 +2945,7 @@ Text only, sorted
 
 Text only, reverse sorted
 
-```````````````````````````````` example Markdown elements - Table Of Contents: 3
+```````````````````````````````` example Markdown elements - Table Of Contents: 3
 [TOC text decreasing] 
 
 ## Heading 1.1 _some italic_
@@ -2968,7 +2968,7 @@ Text only, reverse sorted
 
 Text and inlines, sorted
 
-```````````````````````````````` example Markdown elements - Table Of Contents: 4
+```````````````````````````````` example Markdown elements - Table Of Contents: 4
 [TOC increasing] 
 
 ### Heading 1.1.2  **_some bold italic_**
@@ -2991,7 +2991,7 @@ Text and inlines, sorted
 
 Text and inlines, unsorted
 
-```````````````````````````````` example Markdown elements - Table Of Contents: 5
+```````````````````````````````` example Markdown elements - Table Of Contents: 5
 [TOC flat] 
 
 ### Heading 1.1.2  **_some bold italic_**
@@ -3012,7 +3012,7 @@ Text and inlines, unsorted
 ````````````````````````````````
 
 
-```````````````````````````````` example(Markdown elements - Table Of Contents: 6) options(hard-breaks)
+```````````````````````````````` example(Markdown elements - Table Of Contents: 6) options(hard-breaks)
 paragraph with
 hard breaks
 option
@@ -3027,7 +3027,7 @@ option</p>
 
 options for plain text rendering
 
-```````````````````````````````` example Issues: 1
+```````````````````````````````` example Issues: 1
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
 * Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
@@ -3166,7 +3166,7 @@ Document[0, 1096]
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return
 
-```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
 <<test>>
 .
 <p>&laquo;test&raquo;</p>
@@ -3178,7 +3178,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
+```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
 <<test>>⏎
 .
 <p>&laquo;test&raquo;</p>
@@ -3190,7 +3190,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
 <<test>>⏎
 .
 <p>&laquo;test&raquo;</p>
@@ -3202,7 +3202,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
+```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
 <<test>>
 
 .
@@ -3219,7 +3219,7 @@ Document[0, 10]
 
 Issue #136, Tasklist display issue
 
-```````````````````````````````` example(Issue 136: 1) options(no-anchor-links)
+```````````````````````````````` example(Issue 136: 1) options(no-anchor-links)
 Task List
 
 - [x] Task 1
@@ -3249,7 +3249,7 @@ Document[0, 49]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 136: 2) options(no-anchor-links)
+```````````````````````````````` example(Issue 136: 2) options(no-anchor-links)
 # Task List
 - [x] Task 1
 - [ ] Task 2
@@ -3284,7 +3284,7 @@ Document[0, 50]
 
 Issue markdown page generator
 
-```````````````````````````````` example Issues - xxx: 1
+```````````````````````````````` example Issues - xxx: 1
 ### hello `<html>` and `<body>`
 .
 <h3><a href="#hello-html-and-body" id="hello-html-and-body"></a>hello <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code></h3>
@@ -3303,7 +3303,7 @@ Document[0, 31]
 
 ### 376
 
-```````````````````````````````` example Issues - 376: 1
+```````````````````````````````` example Issues - 376: 1
 test1|test2|test3|test4|test5|test6
 :------:|:------:|:------:|:------:|:------:|:------:|:------:
 1*1 | 1*1|1 |3.8%|40.6|523|78
