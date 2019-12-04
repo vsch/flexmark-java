@@ -619,7 +619,7 @@ public class DocumentParser implements ParserState {
                 }
             }
 
-            // KLUDGE: may work to detect when a real blank line follows a paragraph
+            // HACK: may work to detect when a real blank line follows a paragraph
             isBlankLine = wasBlank;
 
             BlockContinue result = blockParser.tryContinue(this);

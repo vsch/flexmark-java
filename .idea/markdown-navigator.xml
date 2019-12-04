@@ -89,6 +89,7 @@
       </StylesheetProvider>
       <ScriptProviders>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-in-comment.html.script" providerName="Details tag opener" />
+        <provider providerId="com.vladsch.idea.multimarkdown.editor.hljs.html.script" providerName="HighlightJS Script" />
         <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-markdown.html.script" providerName="GitHub Collapse Markdown" />
       </ScriptProviders>
       <cssText>.markdown-body,

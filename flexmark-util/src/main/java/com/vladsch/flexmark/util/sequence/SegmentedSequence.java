@@ -325,10 +325,10 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         int offset = baseOffsets[baseStartOffset + index];
 
         if (offset < 0) {
-            /* KLUDGE: allows having characters which are not from original base sequence
-                       but with the only penalty for charAt access being an extra indirection,
-                       which is a small price to pay for having the flexibility of adding out of
-                       context text to the based sequence.
+            /* HACK: allows having characters which are not from original base sequence
+                 but with the only penalty for charAt access being an extra indirection,
+                 which is a small price to pay for having the flexibility of adding out of
+                 context text to the based sequence.
              */
             return (char) (-offset - 1);
         }

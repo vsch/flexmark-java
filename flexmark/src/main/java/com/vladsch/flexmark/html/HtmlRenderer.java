@@ -146,7 +146,7 @@ public class HtmlRenderer implements IRender {
         RendererDependencyHandler resolver = new RendererDependencyHandler();
         nodeRendererFactories = resolver.resolveDependencies(nodeRenderers).getNodeRendererFactories();
 
-        // KLUDGE: but for now works
+        // HACK: but for now works
         boolean addEmbedded = !builder.attributeProviderFactories.containsKey(EmbeddedAttributeProvider.Factory.getClass());
         List<AttributeProviderFactory> values = new ArrayList<>(builder.attributeProviderFactories.values());
         if (addEmbedded && EMBEDDED_ATTRIBUTE_PROVIDER.get(options)) {

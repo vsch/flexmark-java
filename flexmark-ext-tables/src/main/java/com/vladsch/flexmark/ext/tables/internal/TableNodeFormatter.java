@@ -132,7 +132,7 @@ public class TableNodeFormatter implements NodeFormatter {
         if (context.getRenderPurpose() == FORMAT) {
             myTable.setCaptionWithMarkers(node, node.getOpeningMarker(), node.getText(), node.getClosingMarker());
         } else {
-            // KLUDGE: to reuse the table formatting logic of MarkdownTable
+            // HACK: to reuse the table formatting logic of MarkdownTable
             String dummyCaption = node.hasChildren() ? "dummy" : "";
             String formattedCaption = MarkdownTable.formattedCaption(BasedSequence.of(dummyCaption).subSequence(0, ((CharSequence) dummyCaption).length()), options);
 
