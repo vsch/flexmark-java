@@ -6,8 +6,8 @@ with properties:
 * `range`: range of the resulting sequence in original sequence. `Range.NULL` for a list which
   does not contain such information. :information_source: null range has start =
   `Integer.MAX_VALUE` and end = `Integer.MIN_VALUE`
-* `startOffset`: `range` start,  start offset of the resulting sequence in original sequence,
-* `endOffset`: `range` end,  end offset of the resulting sequence in original sequence,
+* `startOffset`: `range` start, start offset of the resulting sequence in original sequence,
+* `endOffset`: `range` end, end offset of the resulting sequence in original sequence,
 * `lastSegment`: last segment contained in the list, is null for empty list.
 * `segments`: list of segments describing the resulting sequence and their position in the
   original sequence.
@@ -32,7 +32,7 @@ A segment list can contain the following segment types:
 * `TEXT`: range of span >= 0, text is not empty, `length` is length of text, `span` is span of
   range. Start is `startOffset` of list if it is the first element in the list. Otherwise it is
   equal to previous `BASE` end. End offset is equal `endOffset` of list when the last segment in
-  a  list. Otherwise it is equal to start of following `BASE`.
+  a list. Otherwise it is equal to start of following `BASE`.
 * `BASE`: range of span >0, text is empty, `span` is span of range, `length` is `span`
 
 Only `ANCHOR`, `BASE` or `STRING` types can be appended to a segment list and always results in
@@ -55,7 +55,8 @@ it does not affect the extent of the resulting sequence.
 * `textLength` equals the sum of `length` of non `BASE` segments in the list.
 * `STRING` segment can only be the the only element in a list with null range.
 * `TEXT` start will always be `startOffset` if first element or end of previous `BASE`. end
-  offset will be `endOffset` if last segment in list or start of next `BASE`.
+  offset will be `endOffset` if `TEXT` is last segment in list or it will be start of next
+  `BASE`.
 
 ### Appending Rules
 
