@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public interface BasedUtils {
@@ -32,7 +33,7 @@ public interface BasedUtils {
      * @param chars          based sequence for which to generate segments
      * @return true if had out of base chars.
      */
-    static boolean generateSegments(BasedSegmentBuilder segments, @NotNull BasedSequence chars) {
+    static boolean generateSegments(IBasedSegmentBuilder<?> segments, @NotNull BasedSequence chars) {
         // find contiguous ranges of base chars and replaced chars, slower but only when optimizers are available
         int baseStart = -1;
         int baseEnd = -1;

@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
-public class BasedSegmentBuilder2 extends SegmentBuilder2 implements IBasedSegmentBuilder<BasedSegmentBuilder> {
+public class BasedSegmentBuilder2 extends SegmentBuilderBase2<BasedSegmentBuilder2> implements IBasedSegmentBuilder<BasedSegmentBuilder2> {
     final @NotNull BasedSequence myBase;
     final @NotNull SegmentOptimizer2 myOptimizer;
 
@@ -79,14 +79,17 @@ public class BasedSegmentBuilder2 extends SegmentBuilder2 implements IBasedSegme
         return parts;
     }
 
+    @Override
     public String toStringWithRangesVisibleWhitespace() {
         return super.toStringWithRangesVisibleWhitespace(myBase);
     }
 
+    @Override
     public String toStringWithRanges() {
         return super.toStringWithRanges(myBase);
     }
 
+    @Override
     public String toStringChars() {
         return super.toString(myBase);
     }

@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -93,7 +94,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
     }
 
     @Override
-    public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
+    public boolean addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
         // FIX: clean up and optimize the structure. it is error prone and inefficient
         return BasedUtils.generateSegments(builder, this);
     }

@@ -3,7 +3,9 @@ package com.vladsch.flexmark.util.sequence.edit;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
-public interface ISegmentBuilder<S extends ISegmentBuilder<S>> {
+import java.util.Iterator;
+
+public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<Object> {
     int F_INCLUDE_ANCHORS = 0x01;
     int F_TRACK_UNIQUE = 0x02;
     int getOptions();
@@ -27,6 +29,16 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> {
 
     int getTextFirst256Length();
     int getTextFirst256Segments();
+
+    /**
+     * Return iterator over segment parts
+     * Range - BASE
+     * CharSequence - TEXT
+     * @return iterator over segment builder parts
+     */
+    @NotNull
+    @Override
+    Iterator<Object> iterator();
 
     @NotNull S append(int startOffset, int endOffset);
     @NotNull S append(CharSequence text);

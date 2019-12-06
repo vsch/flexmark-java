@@ -141,18 +141,12 @@ public class BasedSequenceBuilder2 implements SequenceBuilder<BasedSequenceBuild
     @NotNull
     public List<BasedSequence> getSequences() {
         if (myBasedSequences == null) {
-            if (myOptimizer != null) {
-                for (BasedSegmentOptimizer optimizer : myOptimizer) {
-                    mySegments.optimizeFor(myBase, optimizer);
-                }
-            }
-
             ArrayList<BasedSequence> sequences = new ArrayList<>();
             BasedSequence lastSequence = null;
             String prefix = null;
-            for (Seg part : mySegments.getParts()) {
-                if (part.isBase()) {
-                    lastSequence = myBase.subSequence(part.getStart(), part.getEnd());
+            for (Object part : mySegments) {
+                if (part instanceof Range) {
+                    lastSequence = myBase.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
 
                     if (lastSequence.getStartOffset() > mySegments.getStartOffset()) {
                         // add an empty prefix
@@ -166,14 +160,16 @@ public class BasedSequenceBuilder2 implements SequenceBuilder<BasedSequenceBuild
                     } else {
                         sequences.add(lastSequence);
                     }
-                } else {
-                    assert prefix == null && part.isText();
-                    prefix = part.getText();
+                } else if (part instanceof CharSequence) {
+                    assert prefix == null;
+                    prefix = part.toString();
 
                     if (lastSequence != null) {
                         sequences.add(PrefixedSubSequence.prefixOf(prefix, lastSequence.getEmptySuffix()));
                         prefix = null;
                     }
+                } else if(part != null) {
+                    throw new IllegalStateException("Invalid part type " + part.getClass());
                 }
             }
 
@@ -227,20 +223,15 @@ public class BasedSequenceBuilder2 implements SequenceBuilder<BasedSequenceBuild
 
     @NotNull
     public String toStringWithRangesOptimized() {
-        if (myOptimizer != null) {
-            for (BasedSegmentOptimizer optimizer : myOptimizer) {
-                mySegments.optimizeFor(myBase, optimizer);
-            }
-        }
         return mySegments.toStringWithRangesVisibleWhitespace(myBase);
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         BasedSequence last = null;
-        for (Seg part : mySegments.getParts()) {
-            if (part.isBase()) {
-                BasedSequence s = myBase.subSequence(part.getStart(), part.getEnd());
+        for (Object part : mySegments) {
+            if (part instanceof Range) {
+                BasedSequence s = myBase.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
 
                 if (last != null && last.getEndOffset() < s.getStartOffset()
                         && (BasedSequence.WHITESPACE.indexOf(last.charAt(last.length() - 1)) == -1)
@@ -252,9 +243,11 @@ public class BasedSequenceBuilder2 implements SequenceBuilder<BasedSequenceBuild
 
                 s.appendTo(sb);
                 last = s;
-            } else {
-                sb.append(part.getText());
+            } else if (part instanceof CharSequence) {
+                sb.append(part);
                 last = null;
+            } else if(part != null) {
+                throw new IllegalStateException("Invalid part type " + part.getClass());
             }
         }
         return sb.toString();
@@ -262,11 +255,13 @@ public class BasedSequenceBuilder2 implements SequenceBuilder<BasedSequenceBuild
 
     public String toStringNoAddedSpaces() {
         StringBuilder sb = new StringBuilder();
-        for (Seg part : mySegments.getParts()) {
-            if (part.isBase()) {
-                sb.append(myBase.subSequence(part.getStart(), part.getEnd()));
-            } else {
-                sb.append(part.getText());
+        for (Object part : mySegments) {
+            if (part instanceof Range) {
+                sb.append(myBase.subSequence(((Range) part).getStart(), ((Range) part).getEnd()));
+            } else if (part instanceof CharSequence)  {
+                sb.append(part);
+            } else if(part != null) {
+                throw new IllegalStateException("Invalid part type " + part.getClass());
             }
         }
         return sb.toString();
@@ -276,23 +271,15 @@ public class BasedSequenceBuilder2 implements SequenceBuilder<BasedSequenceBuild
         return new BasedSequenceBuilder2(base, null);
     }
 
-    public static BasedSequenceBuilder2 emptyBuilder(@NotNull BasedSequence base, @NotNull BasedSegmentOptimizer optimizer) {
-        return new BasedSequenceBuilder2(base, Collections.singletonList(optimizer));
-    }
-
-    public static BasedSequenceBuilder2 emptyBuilder(@NotNull BasedSequence base, @NotNull List<BasedSegmentOptimizer> optimizers) {
-        return new BasedSequenceBuilder2(base, optimizers);
+    public static BasedSequenceBuilder2 emptyBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer2 optimizer) {
+        return new BasedSequenceBuilder2(base, optimizer);
     }
 
     public static BasedSequenceBuilder2 emptyBuilder(@NotNull BasedSequence base, int options) {
         return new BasedSequenceBuilder2(base, options, null);
     }
 
-    public static BasedSequenceBuilder2 emptyBuilder(@NotNull BasedSequence base, int options, @NotNull BasedSegmentOptimizer optimizer) {
-        return new BasedSequenceBuilder2(base, options, Collections.singletonList(optimizer));
-    }
-
-    public static BasedSequenceBuilder2 emptyBuilder(@NotNull BasedSequence base, int options, @NotNull List<BasedSegmentOptimizer> optimizers) {
-        return new BasedSequenceBuilder2(base, options, optimizers);
+    public static BasedSequenceBuilder2 emptyBuilder(@NotNull BasedSequence base, int options, @NotNull SegmentOptimizer2 optimizer) {
+        return new BasedSequenceBuilder2(base, options, optimizer);
     }
 }

@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -131,7 +132,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
      * @param builder builder
      * @return true if had out of base chars
      */
-    boolean addSegments(@NotNull BasedSegmentBuilder builder);
+    boolean addSegments(@NotNull IBasedSegmentBuilder<?> builder);
 
     /**
      * Get the range of this sequence in original {@link #getBaseSequence()} and {@link #getBase()} original text source.

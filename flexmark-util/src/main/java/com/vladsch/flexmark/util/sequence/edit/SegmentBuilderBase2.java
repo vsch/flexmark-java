@@ -6,7 +6,9 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.function.Function;
 
 import static com.vladsch.flexmark.util.Utils.escapeJavaString;
@@ -126,6 +128,30 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
 // @formatter:on
 
     @Override
+    public @NotNull Iterator<Object> iterator() {
+        return new PartsIterator(this);
+    }
+
+    static class PartsIterator implements Iterator<Object> {
+        final SegmentBuilderBase2<?> myBuilder;
+        int myNextIndex;
+
+        public PartsIterator(SegmentBuilderBase2<?> builder) {
+            myBuilder = builder;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return myNextIndex < myBuilder.size();
+        }
+
+        @Override
+        public Object next() {
+            return myBuilder.getPart(myNextIndex++);
+        }
+    }
+
+    @Override
     public int getOptions() {
         return myOptions;
     }
@@ -155,6 +181,18 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
     private Seg2 getSeg(int index) {
         int i = index * 2;
         return i + 1 >= myParts.length ? Seg2.NULL : Seg2.segOf(myParts[i], myParts[i + 1]);
+    }
+
+    @NotNull
+    Object getPart(int index) {
+        if (index == myPartsSize && haveDanglingText()) {
+            // return dangling text
+            return myText.subSequence(myImmutableOffset, myText.length());
+        } else {
+            int i = index * 2;
+            Seg2 seg2 = i + 1 >= myParts.length ? Seg2.NULL : Seg2.segOf(myParts[i], myParts[i + 1]);
+            return seg2.isBase() ? seg2.getRange() : seg2.isText() ? myText.subSequence(seg2.getTextStart(), seg2.getTextEnd()) : Range.NULL;
+        }
     }
 
     private void setSegEnd(int index, int endOffset) {
@@ -332,7 +370,7 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
      * @return this
      */
     @NotNull
-    public SegmentBuilder2 appendAnchor(int offset) {
+    public S appendAnchor(int offset) {
         return append(offset, offset);
     }
 
@@ -344,7 +382,7 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
      * @return this
      */
     @NotNull
-    public SegmentBuilder2 append(@NotNull Range range) {
+    public S append(@NotNull Range range) {
         return append(range.getStart(), range.getEnd());
     }
 
@@ -357,8 +395,10 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
      * @return this
      */
     @NotNull
-    public SegmentBuilder2 append(int startOffset, int endOffset) {
-        if (endOffset < 0 || startOffset > endOffset) return this;
+    public S append(int startOffset, int endOffset) {
+        if (endOffset < 0 || startOffset > endOffset)
+            //noinspection unchecked
+            return (S) this;
 
         int rangeSpan = endOffset - startOffset;
         if (rangeSpan == 0 && (!isIncludeAnchors() || startOffset < myEndOffset)) {
@@ -372,7 +412,8 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
                     processParts(startOffset, endOffset, false, this::optimizeText);
                 }
             }
-            return this;
+            //noinspection unchecked
+            return (S) this;
         }
 
         if (myEndOffset > startOffset) {
@@ -409,11 +450,12 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
                 addSeg(startOffset, endOffset);
             }
         }
-        return this;
+        //noinspection unchecked
+        return (S) this;
     }
 
     @NotNull
-    public SegmentBuilder2 append(@NotNull CharSequence text) {
+    public S append(@NotNull CharSequence text) {
         int length = text.length();
         if (length != 0) {
             myStats.addText(text);
@@ -422,22 +464,24 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
             myText.append(text);
             myLength += length;
         }
-        return this;
+        //noinspection unchecked
+        return (S) this;
     }
 
     @NotNull
-    public SegmentBuilder2 append(char c) {
+    public S append(char c) {
         myStats.addText(c);
         myTextStats.addText(c);
 
         myText.append(c);
         myLength++;
 
-        return this;
+        //noinspection unchecked
+        return (S) this;
     }
 
     @NotNull
-    public SegmentBuilder2 append(char c, int repeat) {
+    public S append(char c, int repeat) {
         if (repeat > 0) {
             myStats.addText(c, repeat);
             myTextStats.addText(c, repeat);
@@ -445,7 +489,8 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
 
             while (repeat-- > 0) myText.append(c);
         }
-        return this;
+        //noinspection unchecked
+        return (S) this;
     }
 
     @NotNull
@@ -533,15 +578,5 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
 
         sb.unmark().append(" }");
         return sb.toString();
-    }
-
-    @NotNull
-    public static SegmentBuilder2 emptyBuilder() {
-        return new SegmentBuilder2();
-    }
-
-    @NotNull
-    public static SegmentBuilder2 emptyBuilder(int options) {
-        return new SegmentBuilder2(options);
     }
 }

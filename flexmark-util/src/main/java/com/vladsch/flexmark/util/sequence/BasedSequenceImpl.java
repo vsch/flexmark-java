@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +56,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     @Override
-    public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
+    public boolean addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
         builder.append(getStartOffset(), getEndOffset());
         return false;
     }

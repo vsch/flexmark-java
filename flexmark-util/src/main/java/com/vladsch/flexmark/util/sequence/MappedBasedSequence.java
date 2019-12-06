@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,7 +109,7 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
     }
 
     @Override
-    public boolean addSegments(@NotNull BasedSegmentBuilder builder) {
+    public boolean addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
         return BasedUtils.generateSegments(builder, this);
     }
 

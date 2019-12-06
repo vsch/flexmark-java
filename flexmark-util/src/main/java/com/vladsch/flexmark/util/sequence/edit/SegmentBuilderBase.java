@@ -8,13 +8,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.function.Supplier;
 
 @SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISegmentBuilder<S> {
     public static final String[] EMPTY_STRINGS = new String[0];
 
-    protected ArrayList<Seg> myParts = new ArrayList<>();
+    final protected ArrayList<Seg> myParts = new ArrayList<>();
     protected int myStartOffset = Range.NULL.getStart();
     protected int myEndOffset = Range.NULL.getEnd();
     protected int myLength = 0;
@@ -89,6 +90,31 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
 // @formatter:on
 
+    @Override
+    public @NotNull Iterator<Object> iterator() {
+        return new PartsIterator(myParts);
+    }
+
+    static class PartsIterator implements Iterator<Object> {
+        final ArrayList<Seg> myParts;
+        int myNextIndex;
+
+        public PartsIterator(ArrayList<Seg> parts) {
+            myParts = parts;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return myNextIndex < myParts.size();
+        }
+
+        @Override
+        public Object next() {
+            Seg seg = myParts.get(myNextIndex);
+            myNextIndex++;
+            return seg.isTextOrString() ? seg.getText() : seg.getRange();
+        }
+    }
 
     @Override
     public int getOptions() {
@@ -496,8 +522,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         for (SegmentPosition position : segmentList) {
             Object frameId = segmentList.openFrame();
             try {
-                //noinspection unchecked
-                optimizer.accept((S) this, chars, position);
+                optimizer.accept(this, chars, position);
             } finally {
                 segmentList.closeFrame(frameId);
             }
