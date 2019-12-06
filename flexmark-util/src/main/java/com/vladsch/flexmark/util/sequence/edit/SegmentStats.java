@@ -5,15 +5,15 @@ import com.vladsch.flexmark.util.DelimitedBuilder;
 public class SegmentStats {
     protected int myTextLength = 0;             // length of all text in stats
     protected int myTextSegments = 0;           // total disjoint text segments
-    protected int myTextSegmentLength = 0;      // length of last segment
+    protected int myTextSegmentLength = 0;      // length at start of last segment
 
     protected int myTextSpaceLength = 0;        // length of all space text
     protected int myTextSpaceSegments = 0;      // total disjoint spaces only segments
-    protected int myTextSpaceSegmentLength = 0; // length of spaces in last segment
+    protected int myTextSpaceSegmentLength = 0; // length at start of spaces in last segment
 
     protected int myTextFirst256Length = 0;     // length of all text chars < 256
     protected int myTextFirst256Segments = 0;   // total disjoint chars < 256 only segments
-    protected int myTextFirst256SegmentLength = 0;// length of chars < 256 in last segment
+    protected int myTextFirst256SegmentLength = 0;// length at start of chars < 256 in last segment
 
     final protected boolean myTrackFirst256;    // options
 
@@ -61,7 +61,24 @@ public class SegmentStats {
                 ;
     }
 
+    public SegmentStats committedCopy() {
+        SegmentStats other = new SegmentStats(myTrackFirst256);
+        other.myTextLength = this.myTextLength;
+        other.myTextSegments = this.myTextSegments;
+        other.myTextSegmentLength = this.myTextSegmentLength;
+        other.myTextSpaceLength = this.myTextSpaceLength;
+        other.myTextSpaceSegments = this.myTextSpaceSegments;
+        other.myTextSpaceSegmentLength = this.myTextSpaceSegmentLength;
+        other.myTextFirst256Length = this.myTextFirst256Length;
+        other.myTextFirst256Segments = this.myTextFirst256Segments;
+        other.myTextFirst256SegmentLength = this.myTextFirst256SegmentLength;
+        other.commitText();
+        return other;
+    }
+
     public void clear() {
+//        System.out.println("clear()");
+
         myTextLength = 0;
         myTextSegments = 0;
         myTextSegmentLength = 0;
@@ -74,6 +91,8 @@ public class SegmentStats {
     }
 
     public void add(SegmentStats other) {
+//        System.out.println("add(" + other + ")");
+
         myTextLength += other.myTextLength;
         myTextSegments += other.myTextSegments;
         myTextSpaceLength += other.myTextSpaceLength;
@@ -83,6 +102,8 @@ public class SegmentStats {
     }
 
     public void remove(SegmentStats other) {
+//        System.out.println("remove(" + other + ")");
+
         assert myTextLength >= other.myTextLength;
         assert myTextSegments >= other.myTextSegments;
         assert myTextSpaceLength >= other.myTextSpaceLength;
@@ -96,37 +117,44 @@ public class SegmentStats {
         myTextSpaceSegments -= other.myTextSpaceSegments;
         myTextFirst256Length -= other.myTextFirst256Length;
         myTextFirst256Segments -= other.myTextFirst256Segments;
+
+        // reset segment starts
+        myTextSegmentLength = myTextLength;
+        myTextSpaceSegmentLength = myTextSpaceLength;
+        myTextFirst256SegmentLength = myTextFirst256Length;
     }
 
     public void commitText() {
-        if (myTextSegmentLength > 0) {
+//        System.out.println("commitText()");
+        if (myTextLength > myTextSegmentLength) {
             myTextSegments++;
+            int segmentLength = myTextLength - myTextSegmentLength;
 
-            if (myTextSpaceSegmentLength == myTextSegmentLength) myTextSpaceSegments++;
-            if (myTextFirst256SegmentLength == myTextSegmentLength) myTextFirst256Segments++;
-
-            myTextSegmentLength = 0;
-            myTextSpaceSegmentLength = 0;
-            myTextFirst256SegmentLength = 0;
+            if (myTextSpaceLength - myTextSpaceSegmentLength == segmentLength) myTextSpaceSegments++;
+            if (myTextFirst256Length - myTextFirst256SegmentLength == segmentLength) myTextFirst256Segments++;
         }
+
+        myTextSegmentLength = myTextLength;
+        myTextSpaceSegmentLength = myTextSpaceLength;
+        myTextFirst256SegmentLength = myTextFirst256Length;
     }
 
     public void addText(CharSequence text) {
+//        System.out.println("addText(" + Utils.quoteJavaString(SequenceUtils.toVisibleWhitespaceString(text)) + ")");
+//        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+//        for (StackTraceElement element : stackTrace) {
+//            System.out.append("\n").append(element.toString());
+//        }
+
         // need to count spaces in it
         myTextLength += text.length();
-        myTextSegmentLength += text.length();
 
         if (myTrackFirst256) {
             int iMax = text.length();
             for (int i = 0; i < iMax; i++) {
                 char c = text.charAt(i);
                 if (c < 256) {
-                    if (c == ' ') {
-                        myTextSpaceSegmentLength++;
-                        myTextSpaceLength++;
-                    }
-
-                    myTextFirst256SegmentLength++;
+                    if (c == ' ') myTextSpaceLength++;
                     myTextFirst256Length++;
                 }
             }
@@ -134,29 +162,39 @@ public class SegmentStats {
     }
 
     public void addText(char c) {
+//        System.out.println("addText('" + SequenceUtils.toVisibleWhitespaceString(Character.toString(c)) + "')");
+
         // need to count spaces in it
         myTextLength += 1;
-        myTextSegmentLength += 1;
 
         if (myTrackFirst256) {
             if (c < 256) {
-                if (c == ' ') {
-                    myTextSpaceSegmentLength++;
-                    myTextSpaceLength++;
-                }
-
-                myTextFirst256SegmentLength++;
+                if (c == ' ') myTextSpaceLength++;
                 myTextFirst256Length++;
+            }
+        }
+    }
+
+    public void addText(char c, int repeat) {
+        assert repeat > 0;
+//        System.out.println("addText('" + SequenceUtils.toVisibleWhitespaceString(Character.toString(c)) + "')");
+
+        // need to count spaces in it
+        myTextLength += repeat;
+
+        if (myTrackFirst256) {
+            if (c < 256) {
+                if (c == ' ') myTextSpaceLength += repeat;
+                myTextFirst256Length += repeat;
             }
         }
     }
 
     public void removeText(CharSequence text) {
         // need to count spaces in it
-        myTextLength -= text.length();
+//        System.out.println("removeText(" + SequenceUtils.toVisibleWhitespaceString(text) + ")");
 
-        assert myTextSegmentLength >= text.length();
-        myTextSegmentLength -= text.length();
+        myTextLength -= text.length();
 
         if (myTrackFirst256) {
             int iMax = text.length();
@@ -165,17 +203,11 @@ public class SegmentStats {
                 if (c < 256) {
                     if (c == ' ') {
                         assert myTextSpaceLength > 0;
-                        assert myTextSpaceSegmentLength > 0;
-
                         myTextSpaceLength--;
-                        myTextSpaceSegmentLength--;
                     }
 
                     assert myTextFirst256Length > 0;
-                    assert myTextFirst256SegmentLength > 0;
-
                     myTextFirst256Length--;
-                    myTextFirst256SegmentLength--;
                 }
             }
         }

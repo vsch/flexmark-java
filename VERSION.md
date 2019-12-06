@@ -194,80 +194,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.64
 
-+ [ ] Fix: `SegmentBuilder`:
-  + [ ] Change to an abstract base class
-  + [ ] Change `TEXT` segments from `String` content to start/end being the -ve of start+1/end+1
-        of the subsequence for this `TEXT` in `StringBuilder`
-  + [ ] Change `Seg` to remove `myText` field and require `CharSequence` argument for to be
-        passed to all methods which returned `myText` in previous implementation. Returned value
-        should be `CharSequence` which is the `subSequence` representing the `TEXT` content.
-  + [ ] `TEXT` segments no longer have a start/end offset of prev/next `BASE` since their
-        start/end offsets represent offset in `StringBuilder` for their character sequence.
-        Their base start offset is `endOffset` of previous `BASE` or `startOffset` of
-        `SegmentBuilder` if first segment. Their `endOffset` is `startOffset` of next `BASE` or
-        `endOffset` of `SegmentBuilder` if it is a dangling `TEXT` segment.
-  + [ ] `TEXT` segments to be accumulated in `StringBuilder` so a single char sequence for out
-        of base characters is available.
-  + [ ] `SegmentBuilder` tracks last `immutableOffset` in its `StringBuilder` to reflect the
-        accumulated, immutable out of base `TEXT` segments in the segment builder.
-  + [ ] `immutableOffset` and `StringBuilder.length()` represents the start/end offsets of
-        dangling `TEXT` segment.
-  + [ ] dangling `TEXT` segment is mutable **until** a `BASE` segment is added after it which
-        results in `SegmentBuilder` `endOffset` change and after `optimizeText` method has been
-        invoked. If `TEXT` segment becomes immutable then `immutableOffset` is changed to the
-        `endOffset` of the `TEXT` segment's subSequence end.
-  + [ ] adding an `ANCHOR` after dangling `TEXT` with an `offset` equal to `StringBuilder`
-        `endOffset` will invoke `optimizeText` to allow extending previous `BASE` range and
-        reducing dangling `TEXT` content. It will not change the dangling `TEXT` to immutable
-        `TEXT` to allow appending more text after the call.
-  + [ ] appending `TEXT` to `SegmentBuilder` appends the text to `StringBuilder` and updates out
-        of base stats for appended `TEXT` content. Out of base stats **always** reflect the
-        current content of `SegmentBuilder`
-  * [ ] abstract methods:
-    * [ ] `handleOverlap` is invoked when an overlapping, `BASE` segment is added. It may result
-          in calling `optimizeText` if the resolution of overlap causes a `BASE` segment to be
-          appended after a dangling `TEXT` segment.
-      * [ ] An exception is thrown if:
-        * [ ] an overlap is found in returned segments
-        * [ ] resulting `SegmentBuilder` start/end `BASE` offsets of returned segments are
-              different from resulting `SegmentBuilder` start/end offsets of original
-              overlapping segment arguments.
-        * [ ] text length of returned segments does not equal the text length of original
-              sequence.
-      * [ ] Arguments are: last `BASE` range, optional dangling `TEXT` and new `BASE` range
-            passed as `Object[]` with `Range` and `String` representing `BASE` and `TEXT`
-            segments.
-      * [ ] `StringBuilder` content is truncated to `immutableOffset` and out of base statistics
-            are updated to remove the `TEXT` content character information before method
-            invocation because they will be updated for changed segments returned by the method.
-      * [ ] It must return an `Object[]` of segments that resolve the overlap. No optimization
-            needs to be done at this point because `optimizeText` will be called if needed as
-            the resulting segments are appended to the `SegmentBuilder`
-      * [ ] `SegmentBuilder` will replace last range and append the rest of the returned
-            segments and update all internal structures, eliminating the concern for these in
-            `handleOverlap`.
-    * [ ] `optimizeText` called when a `BASE` or `ANCHOR` segment is added after dangling `TEXT`
-          segment.
-      * [ ] An exception is thrown if:
-        * [ ] an overlap is found in returned segments
-        * [ ] resulting `SegmentBuilder` start/end `BASE` offsets of returned segments are
-              different from resulting `SegmentBuilder` start/end offsets of original segments
-              argument.
-        * [ ] text length of returned segments does not equal the text length of original
-              arguments.
-      * [ ] Arguments are: last `BASE` range, dangling `TEXT` and new `BASE`/`ANCHOR` range are
-            passed as `Object[]` with `Range` and `String` representing `BASE`/`ANCHOR` and
-            `TEXT` segments respectively.
-      * [ ] `StringBuilder` content is truncated to `immutableOffset` and out of base statistics
-            are updated to remove the `TEXT` content character information before method
-            invocation because they will be updated for changed segments returned by the method.
-      * [ ] Method to return an `Object[]` of optimized segments, with `Range` representing
-            `BASE`/`ANCHOR` segments and `String` representing `TEXT` segments.
-      * [ ] `SegmentBuilder` will replace last range and append the rest of the returned
-            segments and update all internal structures, eliminating the concern for these in
-            `optimizeText`.
 + [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
-      stuff.
+      experimental stuff.
 * [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
   * [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `BasedSequenceBuilder` can
@@ -309,6 +237,71 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * After recovering the EOL range, see if it can be expanded left/right to encompass more
       based chars from text on either side.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
++ [x] Fix: optimized `SegmentBuilder` temporarily to `SegmentBuilder2`:
+  + [x] Change `TEXT` segments from `String` content to start/end being the -ve of start+1/end+1
+        of the subsequence for this `TEXT` in `StringBuilder`
+  + [x] Change `Seg` to remove `myText` field and require `CharSequence` argument for to be
+        passed to all methods which returned `myText` in previous implementation. Returned value
+        should be `CharSequence` which is the `subSequence` representing the `TEXT` content.
+  + [x] `TEXT` segments no longer have a start/end offset of prev/next `BASE` since their
+        start/end offsets represent offset in `StringBuilder` for their character sequence.
+        Their base start offset is `endOffset` of previous `BASE` or `startOffset` of
+        `SegmentBuilder` if first segment. Their `endOffset` is `startOffset` of next `BASE` or
+        `endOffset` of `SegmentBuilder` if it is a dangling `TEXT` segment.
+  + [x] `TEXT` segments to be accumulated in `StringBuilder` so a single char sequence for out
+        of base characters is available.
+  + [x] `SegmentBuilder` tracks last `immutableOffset` in its `StringBuilder` to reflect the
+        accumulated, immutable out of base `TEXT` segments in the segment builder.
+  + [x] `immutableOffset` and `StringBuilder.length()` represents the start/end offsets of
+        dangling `TEXT` segment.
+  + [x] dangling `TEXT` segment is mutable **until** a `BASE` segment is added after it which
+        results in `SegmentBuilder` `endOffset` change and after `optimizeText` method has been
+        invoked. If `TEXT` segment becomes immutable then `immutableOffset` is changed to the
+        `endOffset` of the `TEXT` segment's subSequence end.
+  + [x] adding an `ANCHOR` after dangling `TEXT` with an `offset` equal to `StringBuilder`
+        `endOffset` will invoke `optimizeText` to allow extending previous `BASE` range and
+        reducing dangling `TEXT` content. It will not change the dangling `TEXT` to immutable
+        `TEXT` to allow appending more text after the call.
+  + [x] appending `TEXT` to `SegmentBuilder` appends the text to `StringBuilder` and updates out
+        of base stats for appended `TEXT` content. Out of base stats **always** reflect the
+        current content of `SegmentBuilder`
+  * [x] methods:
+    * [x] `handleOverlap` is invoked when an overlapping, `BASE` segment is added. It may result
+          in calling `optimizeText` if the resolution of overlap causes a `BASE` segment to be
+          appended after a dangling `TEXT` segment.
+      * [x] An exception is thrown if:
+        * [x] an overlap is found in returned segments
+        * [x] text length of returned segments does not equal the text length of original
+              sequence.
+      * [x] Arguments are `Object[3]`: last `BASE` range, optional dangling `TEXT` and new
+            `BASE` range passed as `Object[]` with `Range` and `CharSequence` representing
+            `BASE` and `TEXT` segments.
+      * [x] `StringBuilder` content is truncated to `immutableOffset` and out of base statistics
+            are updated to remove the `TEXT` content character information before method
+            invocation because they will be updated for changed segments returned by the method.
+      * [x] It must return an `Object[]` of segments that resolve the overlap. No optimization
+            needs to be done at this point because `optimizeText` will be called if needed as
+            the resulting segments are appended to the `SegmentBuilder`
+      * [x] `SegmentBuilder` will replace last range and append the rest of the returned
+            segments and update all internal structures, eliminating the concern for these in
+            `handleOverlap`.
+    * [x] `optimizeText` called when a `BASE` or `ANCHOR` segment is added after dangling `TEXT`
+          segment.
+      * [x] An exception is thrown if:
+        * [x] an overlap is found in returned segments
+        * [x] text length of returned segments does not equal the text length of original
+              arguments.
+      * [x] Arguments are `Object[3]`: last `BASE` range or `Range.NULL`, dangling `TEXT` and
+            new `BASE`/`ANCHOR` range or `Range.NULL` are passed as `Object[]` with `Range` and
+            `String` representing `BASE`/`ANCHOR` and `TEXT` segments respectively.
+      * [x] `StringBuilder` content is truncated to `immutableOffset` and out of base statistics
+            are updated to remove the `TEXT` content character information before method
+            invocation because they will be updated for changed segments returned by the method.
+      * [x] Method to return an `Object[]` of optimized segments, with `Range` representing
+            `BASE`/`ANCHOR` segments and `CharSequence` representing `TEXT` segments.
+      * [x] `SegmentBuilder` will replace last range and append the rest of the returned
+            segments and update all internal structures, eliminating the concern for these in
+            `optimizeText`.
 
 ## 0.59.62
 

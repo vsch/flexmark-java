@@ -88,6 +88,21 @@ class Seg2 {
         }
     }
 
+    @Override
+    public String toString() {
+        if (this.isNull()) {
+            return "NULL";
+        } else if (isBase()) {
+            if (myStart == myEnd) {
+                return "BASE[" + myStart + ")";
+            } else {
+                return "BASE[" + myStart + ", " + myEnd + ")";
+            }
+        } else {
+            return "TEXT[" + getTextStart() + ", " + getTextEnd() + ")";
+        }
+    }
+
     @NotNull
     static Seg2 segOf(int startOffset, int endOffset) {
         return new Seg2(startOffset, endOffset);

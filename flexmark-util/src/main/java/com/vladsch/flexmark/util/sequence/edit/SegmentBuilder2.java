@@ -8,7 +8,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import static com.vladsch.flexmark.util.Utils.escapeJavaString;
 import static java.lang.Integer.MAX_VALUE;
@@ -17,6 +16,7 @@ import static java.lang.Integer.MIN_VALUE;
 @SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilder2 {
     public static final String[] EMPTY_STRINGS = new String[0];
+    public static final int MIN_PART_CAPACITY = 8;
 
     public static final int F_INCLUDE_ANCHORS = 0x01;
     public static final int F_TRACK_FIRST256 = 0x02;
@@ -29,7 +29,7 @@ public class SegmentBuilder2 {
     protected int myStartOffset = Range.NULL.getStart();
     protected int myEndOffset = Range.NULL.getEnd();
     protected int myLength = 0;
-    final protected SegmentStats myStats;      // committed text stats
+    final protected SegmentStats myStats;      // committed and dangling text stats
     final protected SegmentStats myTextStats;  // dangling text stats
     final protected int myOptions;
 
@@ -38,7 +38,7 @@ public class SegmentBuilder2 {
 
         int prevSize = prev.length / 2;
         if (prevSize <= size) {
-            int nextSize = Math.max(16, Math.max(prevSize + prevSize >> 1, size));
+            int nextSize = Math.max(MIN_PART_CAPACITY, Math.max(prevSize + prevSize >> 1, size));
             return Arrays.copyOf(prev, nextSize * 2);
         }
         return prev;
@@ -84,7 +84,22 @@ public class SegmentBuilder2 {
         return myPartsSize;
     }
 
+    private int computeLength() {
+        int length = 0;
+        int iMax = myPartsSize;
+        for (int i = 0; i < iMax; i++) {
+            Seg2 part = getSeg(i);
+            length += part.length();
+        }
+
+        if (haveDanglingText()) {
+            length += myText.length() - myImmutableOffset;
+        }
+        return length;
+    }
+
     public int length() {
+        // RELEASE: remove assert for release
         assert myLength == computeLength() : "myLength:" + myLength + " != computeLength(): " + computeLength();
         return myLength;
     }
@@ -99,10 +114,6 @@ public class SegmentBuilder2 {
 
     public boolean isIncludeAnchors() {
         return (myOptions & F_INCLUDE_ANCHORS) != 0;
-    }
-
-    public boolean isTrackTextFirst256() {
-        return (myOptions & F_TRACK_FIRST256) != 0;
     }
 
     /**
@@ -130,22 +141,6 @@ public class SegmentBuilder2 {
         return i + 1 >= myParts.length ? Seg2.NULL : Seg2.segOf(myParts[i], myParts[i + 1]);
     }
 
-    private void setSeg(int index, int startOffset, int endOffset) {
-        int i = index * 2;
-        assert i + 1 < myParts.length;
-
-        myParts[i] = startOffset;
-        myParts[i + 1] = endOffset;
-    }
-
-    private void setSegStart(int index, int startOffset) {
-        int i = index * 2;
-        assert i + 1 < myParts.length;
-
-        myParts[i] = startOffset;
-//        myParts[i + 1] = endOffset;
-    }
-
     private void setSegEnd(int index, int endOffset) {
         int i = index * 2;
         assert i + 1 < myParts.length;
@@ -163,68 +158,8 @@ public class SegmentBuilder2 {
     }
 
     @Nullable
-    private Seg2 firstSegOrNull() {
-        return getSegOrNull(0);
-    }
-
-    @Nullable
     private Seg2 lastSegOrNull() {
         return myPartsSize == 0 ? null : getSegOrNull(myPartsSize - 1);
-    }
-
-    private int computeLength() {
-        int length = 0;
-        int iMax = myPartsSize;
-        for (int i = 0; i < iMax; i++) {
-            Seg2 part = getSeg(i);
-            length += part.length();
-        }
-        return length;
-    }
-
-    private int computeTextLength() {
-        int length = 0;
-        int iMax = myPartsSize;
-        for (int i = 0; i < iMax; i++) {
-            Seg2 part = getSeg(i);
-            if (!part.isBase()) {
-                length += part.length();
-            }
-        }
-        return length;
-    }
-
-    private String assertionError(String message, @Nullable Supplier<String[]> partSupplier) {
-        String[] parts = partSupplier == null ? EMPTY_STRINGS : partSupplier.get();
-        if (parts.length > 0) {
-            // must be optimizer screw up
-            StringBuilder sb = new StringBuilder();
-            sb.append(message);
-            if (!message.endsWith("\n")) sb.append("\n");
-            for (String part : parts) sb.append(part).append("\n");
-            return sb.toString();
-        } else {
-            return "Invariants violated: " + message + toString();
-        }
-    }
-
-    private void validateInvariants(@Nullable Supplier<String[]> parts) {
-        if (isEmpty()) {
-            assert myStartOffset == myEndOffset || myStartOffset == Range.NULL.getStart() && myEndOffset == Range.NULL.getEnd() : assertionError("empty, no offsets, ", parts);
-            assert myLength == 0 && myStats.isEmpty() : assertionError("empty, all lengths = 0", parts);
-        } else {
-            Seg2 lastSeg = lastSegOrNull();
-            if (lastSeg == null) {
-                assert myStartOffset == Range.NULL.getStart() && myEndOffset == Range.NULL.getEnd() : assertionError("last seg string, no offsets ", parts);
-            } else {
-                Seg2 firstSeg = firstSegOrNull();
-                assert firstSeg != null;
-
-                assert myStartOffset <= firstSeg.getStart() && myEndOffset >= lastSeg.getEnd()
-                        : assertionError(String.format("start:%d==first.start:%d, end:%d==last.end:%d ", myStartOffset, firstSeg.getStart(), myEndOffset, lastSeg.getEnd()), parts);
-            }
-            assert myLength >= myStats.getTextLength() && myStats.isValid() : assertionError("lengths are valid", parts);
-        }
     }
 
     private boolean haveDanglingText() {
@@ -259,106 +194,103 @@ public class SegmentBuilder2 {
         return parts;
     }
 
-    private void optimizeText(int startOffset, int endOffset) {
-        assert haveDanglingText();
-        processParts(startOffset, endOffset, false, this::optimizeText);
-    }
-
-    private void handleOverlap(int startOffset, int endOffset) {
-        processParts(startOffset, endOffset, true, this::handleOverlap);
-    }
-
-    private void processParts(int segStart, int segEnd, boolean invokeOptimizeText, @NotNull Function<Object[], Object[]> transform) {
+    private void processParts(int segStart, int segEnd, boolean resolveOverlap, @NotNull Function<Object[], Object[]> transform) {
         assert segStart >= 0 && segEnd >= 0 && segStart <= segEnd;
 
         CharSequence text = myText.subSequence(myImmutableOffset, myText.length());
+        assert resolveOverlap || text.length() > 0;
+
         Seg2 lastSeg = lastSegOrNull();
-        int startOffset = lastSeg == null ? haveOffsets() ? myStartOffset : segStart : lastSeg.getStart();
-        Object[] optimizeParts = {
-                lastSeg == null ? Range.of(startOffset, startOffset) : lastSeg.getRange(),
+        Object[] parts = {
+                lastSeg == null ? Range.NULL : lastSeg.getRange(),
                 text,
-                Range.of(segStart, segEnd),
+                segStart == segEnd ? Range.NULL : Range.of(segStart, segEnd),
         };
 
-        int endOffset = Math.max(myEndOffset, segEnd);
-        int length = (lastSeg == null ? 0 : lastSeg.length()) + text.length() + segEnd - segStart;
-
-        // remove dangling text
-        myTextStats.commitText();
-        myStats.commitText();
-        myStats.remove(myTextStats);
-        myTextStats.clear();
-
-        myLength -= myText.length() - myImmutableOffset;
-        myText.delete(myImmutableOffset, myText.length());
-
-        if (lastSeg != null) {
-            // remove last seg from parts, it will be added on return
-            myLength -= lastSeg.length();
-            myPartsSize--;
-        }
-
-        Object[] optimizedText = transform.apply(optimizeParts);
+        Object[] originalParts = parts.clone();
+        Object[] optimizedText = transform.apply(parts);
         assert optimizedText.length > 0;
 
-        int iMax = optimizedText.length;
-        int optStartOffset = MAX_VALUE;
-        int optEndOffset = MIN_VALUE;
-        int optLength = 0;
+        if (Arrays.equals(optimizedText, originalParts)) {
+            // nothing changed, make sure it was not called to resolve overlap
+            assert !resolveOverlap;
 
-        for (int i = 0; i < iMax; i++) {
-            Object oPart = optimizedText[i];
-            if (oPart instanceof CharSequence) {
-                CharSequence optText = (CharSequence) oPart;
-                if (optText.length() > 0) {
-                    optLength += optText.length();
-                    addText(optText);
+            if (!haveOffsets()) myStartOffset = segStart;
+            myEndOffset = segEnd;
+
+            if (text.length() > 0) {
+                commitText();
+            }
+
+            if (segEnd > segStart) {
+                myLength += segEnd - segStart;
+                addSeg(segStart, segEnd);
+            }
+        } else {
+            // remove dangling text information
+            myTextStats.commitText();
+            myStats.commitText();
+            myStats.remove(myTextStats);
+            myTextStats.clear();
+            myLength -= text.length();
+            myText.delete(myImmutableOffset, myText.length());
+
+            if (lastSeg != null) {
+                // remove last seg from parts, it will be added on return
+                myLength -= lastSeg.length();
+                myPartsSize--;
+            }
+
+            int iMax = optimizedText.length;
+            int optStartOffset = MAX_VALUE;
+            int optEndOffset = MIN_VALUE;
+
+            for (int i = 0; i < iMax; i++) {
+                Object oPart = optimizedText[i];
+                if (oPart instanceof CharSequence) {
+                    CharSequence optText = (CharSequence) oPart;
+                    if (optText.length() > 0) {
+                        addText(optText);
+                    }
+                } else if (oPart instanceof Range) {
+                    if (((Range) oPart).isNotNull()) {
+                        int optRangeStart = ((Range) oPart).getStart();
+                        int optRangeEnd = ((Range) oPart).getEnd();
+                        assert optRangeStart >= 0 && optRangeEnd >= 0 && optRangeStart <= optRangeEnd;
+
+                        if (optStartOffset == MAX_VALUE) optStartOffset = optRangeStart;
+
+                        if (optRangeStart < optEndOffset) {
+                            throw new IllegalStateException(String.format("Transformed Range[%d]: [%d, %d) overlaps accumulated range [%d, %d)", i, optRangeStart, optRangeEnd, optStartOffset, optEndOffset));
+                        }
+
+                        // adjust offsets since they could have expanded
+                        myStartOffset = Math.min(myStartOffset, optRangeStart);
+                        myEndOffset = Math.max(myEndOffset, optRangeEnd);
+
+                        optEndOffset = Math.max(optEndOffset, optRangeEnd);
+
+                        boolean haveDanglingText = haveDanglingText();
+
+                        if (haveDanglingText && resolveOverlap) {
+                            processParts(optRangeStart, optRangeEnd, false, this::optimizeText);
+                        } else {
+                            if (haveDanglingText) {
+                                commitText();
+                            }
+
+                            if (optRangeStart != optRangeEnd || i > 0 && i + 1 < iMax) {
+                                // add base segment
+                                myLength += optRangeEnd - optRangeStart;
+                                addSeg(optRangeStart, optRangeEnd);
+                            }
+                        }
+                    }
+                } else if (oPart != null) {
+                    throw new IllegalStateException("Invalid optimized part type " + oPart.getClass());
                 }
-            } else if (oPart instanceof Range) {
-                if (((Range) oPart).isNotNull()) {
-                    int optRangeStart = ((Range) oPart).getStart();
-                    int optRangeEnd = ((Range) oPart).getEnd();
-                    assert optRangeStart >= 0 && optRangeEnd >= 0 && optRangeStart <= optRangeEnd;
-
-                    if (haveOffsets()) {
-                        if (optRangeStart < myStartOffset || optRangeEnd > myEndOffset) {
-                            throw new IllegalStateException(String.format("Transformed Range[%d]: [%d, %d) out of bounds [%d, %d]", i, optRangeStart, optRangeEnd, myStartOffset, myEndOffset));
-                        }
-                    }
-
-                    if (optStartOffset == MAX_VALUE) optStartOffset = optRangeStart;
-
-                    if (optRangeStart < optEndOffset) {
-                        throw new IllegalStateException(String.format("Transformed Range[%d]: [%d, %d) overlaps accumulated range [%d, %d)", i, optRangeStart, optRangeEnd, optStartOffset, optEndOffset));
-                    }
-
-                    optEndOffset = Math.max(optEndOffset, optRangeEnd);
-
-                    boolean haveDanglingText = haveDanglingText();
-
-                    if (haveDanglingText && invokeOptimizeText) {
-                        optimizeText(optRangeStart, optRangeEnd);
-                    } else {
-                        if (haveDanglingText) {
-                            commitText();
-                        }
-
-                        if (optRangeStart != optRangeEnd || i > 0 && i + 1 < iMax) {
-                            // add base segment
-                            optLength += optRangeEnd - optRangeStart;
-                            myLength += optRangeEnd - optRangeStart;
-                            addSeg(optRangeStart, optRangeEnd);
-                        }
-                    }
-                }
-            } else {
-                throw new IllegalStateException("Invalid optimized part type " + oPart.getClass());
             }
         }
-
-        assert startOffset == optStartOffset : "startOffset != optStartOffset, startOffset: " + startOffset + ", optStartOffset: " + optStartOffset;
-        assert endOffset == optEndOffset : "endOffset != optEndOffset, endOffset: " + endOffset + ", optEndOffset: " + optEndOffset;
-        assert invokeOptimizeText || length == optLength : "length != optLength, length: " + length + ", optLength: " + optLength;
     }
 
     private void commitText() {
@@ -421,7 +353,7 @@ public class SegmentBuilder2 {
                 myEndOffset = startOffset;
 
                 if (haveDanglingText()) {
-                    optimizeText(startOffset, endOffset);
+                    processParts(startOffset, endOffset, false, this::optimizeText);
                 }
             }
             return this;
@@ -431,14 +363,13 @@ public class SegmentBuilder2 {
             // overlap
             myEndOffset = Math.max(myEndOffset, endOffset);
 
-            handleOverlap(startOffset, endOffset);
-            validateInvariants(() -> new String[] { "After " + toString() });
+            processParts(startOffset, endOffset, true, this::handleOverlap);
         } else if (myEndOffset == startOffset) {
             myEndOffset = endOffset;
 
             // adjacent, merge the two if no text between them
             if (haveDanglingText()) {
-                optimizeText(startOffset, endOffset);
+                processParts(startOffset, endOffset, false, this::optimizeText);
             } else {
                 myLength += rangeSpan;
 
@@ -456,7 +387,7 @@ public class SegmentBuilder2 {
             myEndOffset = endOffset;
 
             if (haveDanglingText()) {
-                optimizeText(startOffset, endOffset);
+                processParts(startOffset, endOffset, false, this::optimizeText);
             } else {
                 myLength += rangeSpan;
                 addSeg(startOffset, endOffset);
@@ -490,13 +421,25 @@ public class SegmentBuilder2 {
     }
 
     @NotNull
+    public SegmentBuilder2 append(char c, int repeat) {
+        if (repeat > 0) {
+            myStats.addText(c, repeat);
+            myTextStats.addText(c, repeat);
+            myLength+=repeat;
+
+            while (repeat-- > 0) myText.append(c);
+        }
+        return this;
+    }
+
+    @NotNull
     public String toString(@NotNull CharSequence chars, @NotNull CharSequence rangePrefix, @NotNull CharSequence rangeSuffix, @NotNull Function<CharSequence, CharSequence> textMapper) {
         if (myEndOffset > chars.length()) {
             throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + chars.length());
         }
 
         if (haveDanglingText()) {
-            optimizeText(myEndOffset, myEndOffset);
+            processParts(myEndOffset, myEndOffset, false, this::optimizeText);
         }
 
         StringBuilder out = new StringBuilder();
@@ -534,6 +477,13 @@ public class SegmentBuilder2 {
         return toString(chars, "", "", Function.identity());
     }
 
+    public String toStringPrep() {
+        if (haveDanglingText() && haveOffsets()) {
+            processParts(myEndOffset, myEndOffset, false, this::optimizeText);
+        }
+        return toString();
+    }
+
     @Override
     public String toString() {
         DelimitedBuilder sb = new DelimitedBuilder(", ");
@@ -547,12 +497,13 @@ public class SegmentBuilder2 {
             sb.append("NULL").mark();
         }
 
-        if (haveDanglingText()) {
-            optimizeText(myEndOffset, myEndOffset);
-        }
-
-        myStats.commitText();
-        sb.append(myStats).mark().append("l=").append(myLength).mark();
+//        // CAUTION: this method is invoked from the debugger and any non-pure method invocation messes up internal structures
+//        if (haveDanglingText() && haveOffsets()) {
+//            optimizeText(myEndOffset, myEndOffset);
+//        }
+//
+        SegmentStats committedStats = myStats.committedCopy();
+        sb.append(committedStats).mark().append("l=").append(myLength).mark();
 
         int iMax = myPartsSize;
         for (int i = 0; i < iMax; i++) {
@@ -563,6 +514,7 @@ public class SegmentBuilder2 {
         if (haveDanglingText()) {
             sb.append("'" + escapeJavaString(myText.subSequence(myImmutableOffset, myText.length())) + "'").mark();
         }
+
         sb.unmark().append(" }");
         return sb.toString();
     }
