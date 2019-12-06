@@ -1,15 +1,10 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * A Builder for Segmented BasedSequences
@@ -17,7 +12,7 @@ import java.util.List;
 public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilder, BasedSequence> {
     private final BasedSegmentBuilder mySegments;
     private final @NotNull BasedSequence myBase;
-    private @Nullable List<BasedSequence> myBasedSequences;
+    private @Nullable BasedSequence myBasedSequence;
 
     /**
      * Construct a base sequence builder for given base sequence with default options.
@@ -70,11 +65,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     @Override
-    public BasedSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> sequences) {
-        if (!sequences.isEmpty()) {
-            for (CharSequence s : sequences) {
-                add(s);
-            }
+    public BasedSequenceBuilder addAll(Iterable<? extends CharSequence> sequences) {
+        for (CharSequence s : sequences) {
+            add(s);
         }
         return this;
     }
@@ -85,11 +78,11 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
         if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == myBase.getBase()) {
             if (((BasedSequence) chars).isNotNull()) {
                 ((BasedSequence) chars).addSegments(mySegments);
-                myBasedSequences = null;
+                myBasedSequence = null;
             }
         } else if (chars != null && chars.length() > 0) {
             mySegments.append(chars);
-            myBasedSequences = null;
+            myBasedSequence = null;
         }
         return this;
     }
@@ -102,12 +95,16 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     public BasedSequenceBuilder append(char c) {
         mySegments.append(c);
+        myBasedSequence = null;
         return this;
     }
 
     @NotNull
     public BasedSequenceBuilder append(char c, int count) {
-        mySegments.append(c, count);
+        if (count > 0) {
+            mySegments.append(c, count);
+            myBasedSequence = null;
+        }
         return this;
     }
 
@@ -124,7 +121,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     public BasedSequenceBuilder addRange(@NotNull Range range) {
         mySegments.append(range);
-        myBasedSequences = null;
+        myBasedSequence = null;
         return this;
     }
 
@@ -134,7 +131,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
             throw new IllegalArgumentException("addByOffsets start/end must be a valid range in [0, " + myBase.length() + "], got: [" + startOffset + ", " + endOffset + "]");
         }
         mySegments.append(Range.of(startOffset, endOffset));
-        myBasedSequences = null;
+        myBasedSequence = null;
         return this;
     }
 
@@ -146,75 +143,10 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     @Override
     public BasedSequence toSequence() {
-        return SegmentedSequence.of(getSequences());
-    }
-
-    @NotNull
-    public List<BasedSequence> getSequences() {
-        if (myBasedSequences == null) {
-            ArrayList<BasedSequence> sequences = new ArrayList<>();
-            BasedSequence lastSequence = null;
-            CharSequence prefix = null;
-            for (Object part : mySegments) {
-                if (part instanceof Range) {
-                    lastSequence = myBase.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
-
-                    if (lastSequence.getStartOffset() > mySegments.getStartOffset()) {
-                        // add an empty prefix
-                        sequences.add(myBase.subSequence(mySegments.getStartOffset(), mySegments.getStartOffset()));
-                    }
-
-                    if (prefix != null) {
-                        lastSequence = PrefixedSubSequence.prefixOf(prefix, lastSequence);
-                        sequences.add(lastSequence);
-                        prefix = null;
-                    } else {
-                        sequences.add(lastSequence);
-                    }
-                } else if (part instanceof CharSequence) {
-                    assert prefix == null;
-                    prefix = (CharSequence) part;
-
-                    if (lastSequence != null) {
-                        sequences.add(PrefixedSubSequence.prefixOf(prefix, lastSequence.getEmptySuffix()));
-                        prefix = null;
-                    }
-                } else if (part != null) {
-                    throw new IllegalStateException("Invalid part type " + part.getClass());
-                }
-            }
-
-            if (lastSequence != null && lastSequence.getEndOffset() < mySegments.getEndOffset()) {
-                sequences.add(myBase.subSequence(mySegments.getEndOffset(), mySegments.getEndOffset()));
-            }
-
-            if (prefix != null) {
-                // lone string, goes at 0
-                sequences.add(PrefixedSubSequence.prefixOf(prefix, myBase.getEmptyPrefix()));
-            }
-            myBasedSequences = sequences;
+        if (myBasedSequence == null) {
+            myBasedSequence = SegmentedSequence.of(mySegments);
         }
-        return myBasedSequences;
-    }
-
-    @NotNull
-    public BasedSequence[] toBasedArray() {
-        return getSequences().toArray(BasedSequence.EMPTY_SEGMENTS);
-    }
-
-    @NotNull
-    public List<BasedSequence> getSegments() {
-        return getSequences();
-    }
-
-    @NotNull
-    public List<BasedSequence> toLineList() {
-        return toSequence().splitListEOL();
-    }
-
-    @NotNull
-    public BasedSequence[] toLineArray() {
-        return toSequence().splitListEOL().toArray(BasedSequence.EMPTY_SEGMENTS);
+        return myBasedSequence;
     }
 
     @Override

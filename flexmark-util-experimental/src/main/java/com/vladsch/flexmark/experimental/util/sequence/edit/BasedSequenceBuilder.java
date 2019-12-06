@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -80,11 +79,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @NotNull
     @Override
-    public BasedSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> sequences) {
-        if (!sequences.isEmpty()) {
-            for (CharSequence s : sequences) {
-                add(s);
-            }
+    public BasedSequenceBuilder addAll(Iterable<? extends CharSequence> sequences) {
+        for (CharSequence s : sequences) {
+            add(s);
         }
         return this;
     }
@@ -156,7 +153,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     @Override
     public BasedSequence toSequence() {
-        return SegmentedSequence.of(getSequences());
+        return SegmentedSequence.of(myBase, getSequences());
     }
 
     @NotNull

@@ -54,7 +54,7 @@ public class FormatterWithMods {
         private void visit(LinkNodeBase node) {
             if (node.getPageRef().endsWith("replace.com")) {
                 node.setUrlChars(PrefixedSubSequence.prefixOf("http://replaced.com", node.getPageRef().getEmptyPrefix()));
-                node.setChars(SegmentedSequence.of(Arrays.asList(node.getSegmentsForChars())));
+                node.setChars(SegmentedSequence.of(node.getChars(), Arrays.asList(node.getSegmentsForChars())));
             }
         }
     }

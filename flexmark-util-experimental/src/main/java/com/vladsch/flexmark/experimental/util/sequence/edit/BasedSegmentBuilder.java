@@ -24,10 +24,17 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
     }
 
     @Override
+    public @NotNull BasedSequence getBaseSequence() {
+        return myBase;
+    }
+
+    @NotNull
+    @Override
     public String toStringWithRangesVisibleWhitespace() {
         return super.toStringWithRangesVisibleWhitespace(myBase);
     }
 
+    @NotNull
     @Override
     public String toStringWithRanges() {
         return super.toStringWithRanges(myBase);
@@ -83,6 +90,7 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
         }
     }
 
+    @NotNull
     @Override
     public String toStringChars() {
         return super.toString(myBase);

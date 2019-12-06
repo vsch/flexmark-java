@@ -23,6 +23,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/com/vladsch/flexmark/experimental/util/sequence/edit" />
+      <excludeFolder url="file://$MODULE_DIR$/src/test/java/com/vladsch/flexmark/experimental/util/sequence/edit" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

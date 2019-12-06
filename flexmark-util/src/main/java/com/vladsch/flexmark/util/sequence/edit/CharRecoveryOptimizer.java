@@ -83,16 +83,23 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
                     Range eolRange = Range.ofLength(eol, 1);
                     text = text.subSequence(1, textLength);
 
+                    if (nextRange.isEmpty() && nextRange.getStart() < eolRange.getEnd()) {
+                        // serves no purpose and causes
+                        nextRange = Range.NULL;
+                    }
+
                     // need to insert EOL range between prevRange and text
                     if (text.length() == 0) {
                         // no text left, can replace that with EOL range
                         parts[1] = eolRange;
+                        parts[2] = nextRange;
                     } else {
                         // EOL range between prevRange and text and replace text with left-over text
                         if (prevRange.isNull()) {
                             // replace prev range
                             parts[0] = eolRange;
                             parts[1] = text;
+                            parts[2] = nextRange;
                         } else if (nextRange.isNull()) {
                             // replace next range
                             parts[1] = eolRange;
@@ -207,6 +214,11 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
         } else {
             if (eolRange.isNotNull()) {
                 // need to insert eolRange, can replace prevRange if it is NULL or text if it is empty, or move text to nextRange if it is NULL
+                if (nextRange.isEmpty() && nextRange.getStart() < eolRange.getEnd()) {
+                    // serves no purpose and causes
+                    nextRange = Range.NULL;
+                }
+
                 if (text.length() == 0) {
                     parts[0] = prevRange;
                     parts[1] = eolRange;

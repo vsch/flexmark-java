@@ -1067,7 +1067,6 @@ public class BasedSequenceImplTest {
         assertEquals(segments.toString(sequence).length(), segments.length());
         assertEquals("^123456789", segments.toString(sequence));
 
-        @NotNull List<BasedSequence> segs = builder.getSegments();
         BasedSequence replaced = builder.toSequence();
         assertEquals("^123456789", replaced.toString());
         assertEquals(Range.of(0, 10), replaced.getSourceRange());

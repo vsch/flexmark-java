@@ -56,7 +56,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     protected int myImmutableOffset = 0;   // text offset for all committed text segments
 
     protected SegmentBuilderBase() {
-        this(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+        this(F_INCLUDE_ANCHORS /*| F_TRACK_FIRST256*/);
     }
 
     protected SegmentBuilderBase(int options) {
@@ -81,6 +81,27 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     @Override
+    public boolean isBaseSubSequenceRange() {
+        if (myPartsSize == 1 && !haveDanglingText()) {
+            Seg seg = lastSegOrNull();
+            return seg != null && seg.isBase() && seg.getStart() == myStartOffset && seg.getEnd() == myEndOffset;
+        }
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public Range baseSubSequenceRange() {
+        if (myPartsSize == 1 && !haveDanglingText()) {
+            Seg seg = lastSegOrNull();
+            if (seg != null && seg.isBase() && seg.getStart() == myStartOffset && seg.getEnd() == myEndOffset) {
+                return seg.getRange();
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean hasOffsets() {
         return myStartOffset <= myEndOffset;
     }
@@ -94,7 +115,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         int length = 0;
         int iMax = myPartsSize;
         for (int i = 0; i < iMax; i++) {
-            Seg2 part = getSeg(i);
+            Seg part = getSeg(i);
             length += part.length();
         }
 
@@ -171,15 +192,15 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     @Nullable
-    private Seg2 getSegOrNull(int index) {
+    private Seg getSegOrNull(int index) {
         int i = index * 2;
-        return i + 1 >= myParts.length ? null : Seg2.segOf(myParts[i], myParts[i + 1]);
+        return i + 1 >= myParts.length ? null : Seg.segOf(myParts[i], myParts[i + 1]);
     }
 
     @NotNull
-    private Seg2 getSeg(int index) {
+    private Seg getSeg(int index) {
         int i = index * 2;
-        return i + 1 >= myParts.length ? Seg2.NULL : Seg2.segOf(myParts[i], myParts[i + 1]);
+        return i + 1 >= myParts.length ? Seg.NULL : Seg.segOf(myParts[i], myParts[i + 1]);
     }
 
     @NotNull
@@ -189,8 +210,8 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
             return myText.subSequence(myImmutableOffset, myText.length());
         } else {
             int i = index * 2;
-            Seg2 seg2 = i + 1 >= myParts.length ? Seg2.NULL : Seg2.segOf(myParts[i], myParts[i + 1]);
-            return seg2.isBase() ? seg2.getRange() : seg2.isText() ? myText.subSequence(seg2.getTextStart(), seg2.getTextEnd()) : Range.NULL;
+            Seg seg = i + 1 >= myParts.length ? Seg.NULL : Seg.segOf(myParts[i], myParts[i + 1]);
+            return seg.isBase() ? seg.getRange() : seg.isText() ? myText.subSequence(seg.getTextStart(), seg.getTextEnd()) : Range.NULL;
         }
     }
 
@@ -211,7 +232,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     @Nullable
-    private Seg2 lastSegOrNull() {
+    private Seg lastSegOrNull() {
         return myPartsSize == 0 ? null : getSegOrNull(myPartsSize - 1);
     }
 
@@ -253,7 +274,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         CharSequence text = myText.subSequence(myImmutableOffset, myText.length());
         assert resolveOverlap || text.length() > 0;
 
-        Seg2 lastSeg = lastSegOrNull();
+        Seg lastSeg = lastSegOrNull();
         Object[] parts = {
                 lastSeg == null ? Range.NULL : lastSeg.getRange(),
                 text,
@@ -507,7 +528,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
         int iMax = myPartsSize;
         for (int i = 0; i < iMax; i++) {
-            Seg2 part = getSeg(i);
+            Seg part = getSeg(i);
 
             if (!part.isBase()) {
                 out.append(textMapper.apply(myText.subSequence(part.getTextStart(), part.getTextEnd())));
@@ -568,7 +589,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
         int iMax = myPartsSize;
         for (int i = 0; i < iMax; i++) {
-            Seg2 part = getSeg(i);
+            Seg part = getSeg(i);
             sb.append(part.toString(myText)).mark();
         }
 

@@ -80,6 +80,16 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         return myParts.size();
     }
 
+    @Override
+    public boolean isBaseSubSequenceRange() {
+        return false;
+    }
+
+    @Override
+    public @Nullable Range baseSubSequenceRange() {
+        return null;
+    }
+
 // @formatter:off
     @Override public boolean isTrackTextFirst256() {return (myOptions & F_TRACK_FIRST256) != 0;}
     @Override public int getTextLength() {return myTextLength;}

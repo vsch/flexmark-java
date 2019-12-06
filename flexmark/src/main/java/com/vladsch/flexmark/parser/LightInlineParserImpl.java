@@ -140,7 +140,7 @@ public class LightInlineParserImpl implements LightInlineParser {
     @Override
     public boolean flushTextNode() {
         if (currentText != null) {
-            block.appendChild(new Text(SegmentedSequence.of(currentText)));
+            block.appendChild(new Text(SegmentedSequence.of(input, currentText)));
             currentText = null;
             return true;
         }

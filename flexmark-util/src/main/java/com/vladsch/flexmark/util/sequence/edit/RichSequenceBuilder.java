@@ -4,8 +4,6 @@ import com.vladsch.flexmark.util.sequence.RichSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-
 /**
  * A Builder for non based strings. Just a string builder wrapped in a sequence builder interface
  */
@@ -50,7 +48,7 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
-    public RichSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> sequences) {
+    public RichSequenceBuilder addAll(Iterable<? extends CharSequence> sequences) {
         for (CharSequence chars : sequences) {
             add(chars);
         }

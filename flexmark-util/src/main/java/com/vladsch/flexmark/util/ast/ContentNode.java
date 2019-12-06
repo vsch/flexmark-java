@@ -81,13 +81,13 @@ public abstract class ContentNode extends Node implements Content {
     @NotNull
     @Override
     public BasedSequence getContentChars() {
-        return SegmentedSequence.of(lineSegments);
+        return lineSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequence.of(lineSegments.get(0), lineSegments);
     }
 
     @NotNull
     @Override
     public BasedSequence getContentChars(int startLine, int endLine) {
-        return SegmentedSequence.of(getContentLines(startLine, endLine));
+        return lineSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequence.of(lineSegments.get(0), getContentLines(startLine, endLine));
     }
 
     public void setContentLines(@NotNull List<BasedSequence> contentLines) {

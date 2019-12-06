@@ -5,12 +5,10 @@ import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A BasedSequence which consists of segments of other BasedSequences
@@ -106,134 +104,81 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
      * <p>
      * If you need the location where content would have been use the FencedCodeBlock.getOpeningMarker().getEndOffset() + 1
      *
-     * @param segments list of based sequences to put into a based sequence
+     * @param basedSequence base sequence for the segments
+     * @param segments      list of based sequences to put into a based sequence
      * @return based sequence of segments. Result is a sequence which looks like
      *         all the segments were concatenated, while still maintaining
      *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
      * @deprecated use {@link BasedSequence#getBuilder()} or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder} to construct segments directly.
      */
     @Deprecated
-    public static BasedSequence of(@NotNull Iterable<? extends BasedSequence> segments) {
-        BasedSequence lastSegment = null;
-        BasedSequence firstSegment = null;
+    public static BasedSequence of(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
+        BasedSequence base = basedSequence.getBaseSequence();
+        BasedSequenceBuilder builder = base.getBuilder();
+
         for (BasedSequence sequence : segments) {
-            firstSegment = sequence;
-            break;
+            builder.add(sequence);
         }
 
-        if (firstSegment != null) {
-            BasedSequence base = firstSegment.getBaseSequence();
-            ArrayList<BasedSequence> mergedSequences = new ArrayList<>();
-            int startOffset = -1;
-            int endOffset = -1;
-
-            for (BasedSequence segment : segments) {
-                if (segment == null || segment.isNull()) continue;
-
-                if (base.getBase() != segment.getBase()) {
-                    throw new AssertionError("all segments must come from the same base sequence");
-                }
-
-                if (startOffset == -1) startOffset = segment.getStartOffset();
-                endOffset = segment.getEndOffset();
-
-                if (segment.isEmpty()) continue;  // skip empty sequences, they serve no purpose
-
-                if (segment instanceof ReplacedBasedSequence) {
-                    if (lastSegment != null) mergedSequences.add(lastSegment);
-                    mergedSequences.add(segment);
-                    lastSegment = null;
-                } else {
-                    if (lastSegment == null) {
-                        lastSegment = segment;
-                    } else {
-                        if (lastSegment.getEndOffset() != segment.getStartOffset()) {
-                            mergedSequences.add(lastSegment);
-                            lastSegment = segment;
-                        } else {
-                            lastSegment = lastSegment.baseSubSequence(lastSegment.getStartOffset(), segment.getEndOffset());
-                        }
-                    }
-                }
-            }
-
-            if (lastSegment != null) mergedSequences.add(lastSegment);
-
-            if (mergedSequences.size() == 1 && mergedSequences.get(0).getStartOffset() == startOffset && mergedSequences.get(0).getEndOffset() == endOffset) {
-                return mergedSequences.get(0);
-            } else if (mergedSequences.size() != 0) {
-                return new SegmentedSequence(mergedSequences, startOffset, endOffset);
-            }
+        BasedSegmentBuilder segmentBuilder = builder.getSegmentBuilder();
+        Range range = segmentBuilder.baseSubSequenceRange();
+        if (range != null) {
+            return base.subSequence(range.getStart(), range.getEnd());
+        } else if (!builder.isEmpty()) {
+            return new SegmentedSequence(segmentBuilder);
         }
         return BasedSequence.NULL;
     }
 
-    private SegmentedSequence(List<BasedSequence> segments, int startOffset, int endOffset) {
+    public static BasedSequence of(BasedSegmentBuilder builder) {
+        Range range = builder.baseSubSequenceRange();
+        if (range != null) {
+            return builder.getBaseSequence().subSequence(range.getStart(), range.getEnd());
+        } else if (!builder.isEmpty()) {
+            return new SegmentedSequence(builder);
+        }
+        return BasedSequence.NULL;
+    }
+
+    private SegmentedSequence(BasedSegmentBuilder builder) {
         super(0);
 
-        this.baseSeq = segments.get(0).getBaseSequence();
-        this.startOffset = startOffset;
-        this.endOffset = endOffset;
+        this.baseSeq = builder.getBaseSequence();
+        this.startOffset = builder.getStartOffset();
+        this.endOffset = builder.getEndOffset();
 
-        int length = 0;
-
-        BasedSequence base = segments.size() > 0 ? segments.get(0).getBaseSequence() : BasedSequence.NULL;
-
-        int index = 0;
-        int lastEnd = base.getStartOffset();
-
-        for (BasedSequence segment : segments) {
-            assert base.getBase() == segment.getBase() : "all segments must come from the same base sequence, segments[" + index + "], length so far: " + length;
-            assert segment.getStartOffset() >= lastEnd : "segments must be in increasing index order from base sequence start=" + segment.getStartOffset() + " lastEnd:" + lastEnd + ", length=" + length + " at index: " + index;
-            lastEnd = segment.getEndOffset();
-            length += segment.length();
-            index++;
-        }
+        int length = builder.length();
 
         this.baseStartOffset = 0;
         this.length = length;
         this.baseOffsets = new int[length + 1];
-        int nonBasedChars = 0;
-        int len = 0;
-        int nonBaseSeg = 0;
-        int baseSeg = 0;
-        boolean wasNonBase = false;
-        int lastOffset = -1;
 
-        for (BasedSequence basedSequence : segments) {
-            int ciMax = basedSequence.length();
-
-            for (int ci = 0; ci < ciMax; ci++) {
-                int offset = basedSequence.getIndexOffset(ci);
-                if (offset < 0) {
-                    if (!wasNonBase) {
-                        nonBaseSeg++;
-                        wasNonBase = true;
-                        lastOffset = -1;
-                    }
-                    offset = -(int) basedSequence.charAt(ci) - 1;
-                    nonBasedChars++;
-                } else {
-                    wasNonBase = false;
-                    if (offset != lastOffset + 1) baseSeg++;
-                    lastOffset = offset;
+        int index = 0;
+        for (Object part : builder) {
+            if (part instanceof Range) {
+                int iMax = ((Range) part).getEnd();
+                for (int i = ((Range) part).getStart(); i < iMax; i++) {
+                    baseOffsets[index++] = i;
                 }
-
-                assert ci + len < this.baseOffsets.length : "Incorrect array size calculation: length: " + length + " ci + len: " + (ci + len);
-                this.baseOffsets[ci + len] = offset;
+            } else if (part instanceof CharSequence) {
+                CharSequence sequence = (CharSequence) part;
+                int iMax = sequence.length();
+                for (int i = 0; i < iMax; i++) {
+                    baseOffsets[index++] = -sequence.charAt(i) - 1;
+                }
+            } else if (part != null) {
+                throw new IllegalStateException("Invalid part type " + part.getClass());
             }
-
-            len += ciMax;
         }
 
         int end = baseOffsets[length - 1];
         baseOffsets[length] = end < 0 ? end - 1 : end + 1;
-        this.nonBaseChars = nonBasedChars > 0;
+        this.nonBaseChars = builder.getTextLength() > 0;
 
-        if (base.isOption(O_COLLECT_SEGMENTED_STATS)) {
-            SegmentedSequenceStats stats = base.getOption(SEGMENTED_STATS);
+        if (baseSeq.isOption(O_COLLECT_SEGMENTED_STATS)) {
+            SegmentedSequenceStats stats = baseSeq.getOption(SEGMENTED_STATS);
             if (stats != null) {
-                stats.addStats(baseSeg + nonBaseSeg, nonBasedChars, nonBaseSeg, length, startOffset, endOffset);
+                stats.addStats(builder.size(), builder.getTextLength(), builder.getTextSegments(), length, startOffset, endOffset);
             }
         }
     }
@@ -368,6 +313,6 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
     }
 
     public static BasedSequence of(BasedSequence... segments) {
-        return of(new ArrayIterable<>(segments));
+        return segments.length == 0 ? BasedSequence.NULL : of(segments[0], new ArrayIterable<>(segments));
     }
 }

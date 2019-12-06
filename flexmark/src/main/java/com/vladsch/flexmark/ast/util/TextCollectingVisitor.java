@@ -74,11 +74,6 @@ public class TextCollectingVisitor {
         return out.toString();
     }
 
-    public BasedSequence[] collectAndGetSegments(Node node) {
-        collect(node);
-        return out.toBasedArray();
-    }
-
     public BasedSequence collectAndGetSequence(Node node) {
         collect(node);
         return out.toSequence();

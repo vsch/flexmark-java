@@ -96,7 +96,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                     typoGraphic = typoGraphic.getNext();
                 }
 
-                original = SegmentedSequence.of(combinedSequences);
+                original = SegmentedSequence.of(node.getChars(), combinedSequences);
             }
         }
 

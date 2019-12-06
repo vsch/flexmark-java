@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
@@ -12,6 +13,8 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
     boolean isIncludeAnchors();
 
     boolean isEmpty();
+    boolean isBaseSubSequenceRange();
+    @Nullable Range baseSubSequenceRange();
     boolean hasOffsets();
     int getSpan();
     int getStartOffset();

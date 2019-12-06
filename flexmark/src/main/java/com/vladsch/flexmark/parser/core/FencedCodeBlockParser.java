@@ -121,7 +121,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
                     codeBlock.setCharsFromContent();
                     block.appendChild(codeBlock);
                 } else {
-                    Text codeBlock = new Text(SegmentedSequence.of(segments));
+                    Text codeBlock = new Text(SegmentedSequence.of(chars, segments));
                     block.appendChild(codeBlock);
                 }
             } else {

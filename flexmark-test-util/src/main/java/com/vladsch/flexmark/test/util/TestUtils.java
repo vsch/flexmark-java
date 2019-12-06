@@ -268,7 +268,7 @@ public class TestUtils {
                 lastPos = end + sourceIndent.length();
             }
 
-            result = SegmentedSequence.of(segments);
+            result = SegmentedSequence.of(input, segments);
         }
         return result;
     }

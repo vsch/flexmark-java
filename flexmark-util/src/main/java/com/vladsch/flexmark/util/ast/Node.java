@@ -780,7 +780,7 @@ public abstract class Node {
                 }
             }
 
-            return segments.size() == 1 ? segments.get(0) : SegmentedSequence.of(segments);
+            return segments.size() == 1 ? segments.get(0) : SegmentedSequence.of(segments.get(0), segments);
         } else {
             return firstChild.baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
         }
@@ -858,7 +858,8 @@ public abstract class Node {
      * @return concatenated string of all segments
      */
     public @NotNull BasedSequence getCharsFromSegments() {
-        return SegmentedSequence.of(Arrays.asList(getSegmentsForChars()));
+        @NotNull BasedSequence[] segments = getSegmentsForChars();
+        return segments.length == 0 ? BasedSequence.NULL: SegmentedSequence.of(segments[0], Arrays.asList(segments));
     }
 
     /**

@@ -94,16 +94,6 @@ public class EnumRefTextCollectingVisitor {
         return out.toString();
     }
 
-    public BasedSequence[] collectAndGetSegments(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
-        collect(basedSequence, renderings, defaultFormat);
-        return out.toBasedArray();
-    }
-
-    public BasedSequence collectAndGetSequence(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
-        collect(basedSequence, renderings, defaultFormat);
-        return out.toSequence();
-    }
-
     private void visit(EnumeratedReferenceText node) {
         String text = node.getText().toString();
 

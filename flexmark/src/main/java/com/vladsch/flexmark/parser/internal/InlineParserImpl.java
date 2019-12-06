@@ -230,7 +230,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                 node = node.getNext();
                 unlink.unlink();
             }
-            BasedSequence literal = SegmentedSequence.of(sb);
+            BasedSequence literal = SegmentedSequence.of(first.getChars(), sb);
             first.setChars(literal);
         }
     }
@@ -455,7 +455,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         node.setChars(input.subSequence(index, index + 1));
 
         if (currentText != null) {
-            BasedSequence prevText = SegmentedSequence.of(currentText);
+            BasedSequence prevText = SegmentedSequence.of(node.getChars(), currentText);
             currentText = null;
 
             // see if need to trim some off the end

@@ -15,7 +15,7 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
 
     protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer) {
         super();
-        myBase = base;
+        myBase = base.getBaseSequence();
         myOptimizer = optimizer;
     }
 
@@ -25,8 +25,13 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
 
     protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer, int options) {
         super(options);
-        myBase = base;
+        myBase = base.getBaseSequence();
         myOptimizer = optimizer;
+    }
+
+    @Override
+    public @NotNull BasedSequence getBaseSequence() {
+        return myBase;
     }
 
     @Override
@@ -79,16 +84,19 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
         return parts;
     }
 
+    @NotNull
     @Override
     public String toStringWithRangesVisibleWhitespace() {
         return super.toStringWithRangesVisibleWhitespace(myBase);
     }
 
+    @NotNull
     @Override
     public String toStringWithRanges() {
         return super.toStringWithRanges(myBase);
     }
 
+    @NotNull
     @Override
     public String toStringChars() {
         return super.toString(myBase);

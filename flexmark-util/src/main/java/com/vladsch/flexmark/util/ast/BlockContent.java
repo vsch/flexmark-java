@@ -101,7 +101,7 @@ public class BlockContent {
             throw new IndexOutOfBoundsException("endLine must not be greater than line cardinality");
         }
 
-        return SegmentedSequence.of(lines.subList(startLine, endLine));
+        return SegmentedSequence.of(lines.get(0), lines.subList(startLine, endLine));
     }
 
     public @NotNull String getString() {
