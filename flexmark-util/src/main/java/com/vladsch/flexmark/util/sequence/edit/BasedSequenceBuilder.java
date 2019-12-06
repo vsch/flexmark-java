@@ -27,7 +27,10 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
      */
     private BasedSequenceBuilder(@NotNull BasedSequence base, @Nullable SegmentOptimizer optimizer) {
         myBase = base.getBaseSequence();
-        mySegments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(myBase) : BasedSegmentBuilder.emptyBuilder(myBase, optimizer);
+        int options = SegmentBuilder.F_DEFAULT;
+
+        if (myBase.isOption(BasedSequence.O_COLLECT_FIRST256_STATS)) options |= SegmentBuilder.F_TRACK_FIRST256;
+        mySegments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(myBase, options) : BasedSegmentBuilder.emptyBuilder(myBase, optimizer, options);
     }
 
     /**
@@ -44,6 +47,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
      */
     private BasedSequenceBuilder(@NotNull BasedSequence base, int options, @Nullable SegmentOptimizer optimizer) {
         myBase = base.getBaseSequence();
+        if (myBase.isOption(BasedSequence.O_COLLECT_FIRST256_STATS)) options |= SegmentBuilder.F_TRACK_FIRST256;
         mySegments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(myBase, options) : BasedSegmentBuilder.emptyBuilder(myBase, optimizer, options);
     }
 
