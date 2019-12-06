@@ -1,43 +1,47 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
+import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
-public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder> implements IBasedSegmentBuilder<BasedSegmentBuilder> {
-    private final @NotNull BasedSequence myBase;
+public class BasedSegmentBuilder extends SegmentBuilderBase2<BasedSegmentBuilder> implements IBasedSegmentBuilder<BasedSegmentBuilder> {
+    final @NotNull BasedSequence myBase;
+    final @NotNull SegmentOptimizer2 myOptimizer;
 
     protected BasedSegmentBuilder(@NotNull BasedSequence base) {
+        this(base, new CharRecoveryOptimizer2(PositionAnchor.CURRENT));
+    }
+
+    protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer2 optimizer) {
         super();
         myBase = base;
+        myOptimizer = optimizer;
     }
 
     protected BasedSegmentBuilder(@NotNull BasedSequence base, int options) {
+        this(base, new CharRecoveryOptimizer2(PositionAnchor.CURRENT), options);
+    }
+
+    protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer2 optimizer, int options) {
         super(options);
         myBase = base;
-    }
-
-    public BasedSegmentBuilder(@NotNull BasedSegmentBuilder other) {
-        super(other);
-        myBase = other.myBase;
+        myOptimizer = optimizer;
     }
 
     @Override
-    public String toStringWithRangesVisibleWhitespace() {
-        return super.toStringWithRangesVisibleWhitespace(myBase);
+    protected Object[] optimizeText(@NotNull Object[] parts) {
+        return myOptimizer.apply(myBase, parts);
     }
 
     @Override
-    public String toStringWithRanges() {
-        return super.toStringWithRanges(myBase);
-    }
-
-    @Override
-    public void handleOverlap(@NotNull Range range) {
+    protected Object[] handleOverlap(@NotNull Object[] parts) {
         // convert overlap to text from our base
         // range overlaps with last segment in the list
-        Seg lastSeg = lastSeg();
-        assert !lastSeg.isNullRange() && lastSeg.getEnd() > range.getStart();
+        Range lastSeg = (Range) parts[0];
+        CharSequence text = (CharSequence) parts[1];
+        Range range = (Range) parts[2];
+        assert !lastSeg.isNull() && lastSeg.getEnd() > range.getStart();
 
         Range overlap;
         Range after = Range.NULL;
@@ -63,23 +67,26 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
         int overlapSpan = overlap.getSpan();
         assert overlapSpan + after.getSpan() == range.getSpan();
 
-        // NOTE: addBaseSeg adds length
-        myLength += overlapSpan;
-        myTextLength += overlapSpan;
+        // append overlap to text
+        if (text.length() == 0) {
+            parts[1] = myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString();
 
-        if (lastSeg.isText()) {
-            // can append to it
-            setLastSeg(lastSeg.withTextSuffix(myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString()));
         } else {
-            // will append overlap text, followed by non-overlapping range if any
-            myParts.add(Seg.textSeg(lastSeg.getEnd(), myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString()));
+            parts[1] = text.toString() + myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString();
         }
+        parts[2] = after;
 
-        if (after.isNotEmpty()) {
-            // there is a part of the overlap outside the last seg range
-            // append the chopped off base part
-            addBaseSeg(Seg.baseSeg(after.getStart(), after.getEnd()));
-        }
+        return parts;
+    }
+
+    @Override
+    public String toStringWithRangesVisibleWhitespace() {
+        return super.toStringWithRangesVisibleWhitespace(myBase);
+    }
+
+    @Override
+    public String toStringWithRanges() {
+        return super.toStringWithRanges(myBase);
     }
 
     @Override
@@ -95,5 +102,15 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
     @NotNull
     public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, int options) {
         return new BasedSegmentBuilder(sequence, options);
+    }
+
+    @NotNull
+    public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, @NotNull SegmentOptimizer2 optimizer) {
+        return new BasedSegmentBuilder(sequence, optimizer);
+    }
+
+    @NotNull
+    public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, @NotNull SegmentOptimizer2 optimizer, int options) {
+        return new BasedSegmentBuilder(sequence, optimizer, options);
     }
 }

@@ -1,6 +1,7 @@
-package com.vladsch.flexmark.util.sequence.edit;
+package com.vladsch.flexmark.experimental.util.sequence.edit;
 
 import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.edit.Seg;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

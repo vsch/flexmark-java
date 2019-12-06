@@ -1,9 +1,10 @@
-package com.vladsch.flexmark.util.sequence.edit;
+package com.vladsch.flexmark.experimental.util.sequence.edit;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
 import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

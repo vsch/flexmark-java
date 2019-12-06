@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 

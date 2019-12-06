@@ -17,11 +17,9 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        SegTest.class,
-        SegmentBuilderTest.class,
         SegmentBuilder2Test.class,
         BasedSegmentBuilderTest.class,
-        BasedSegmentBuilder2Test.class,
+        BasedSegmentBuilderTest.class,
         BasedSequenceBuilderTest.class,
         BasedSequenceImplTest.class,
         BaseSequenceEntryTest.class,

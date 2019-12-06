@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.sequence.edit;
+package com.vladsch.flexmark.experimental.util.sequence.edit;
 
 import com.vladsch.flexmark.util.sequence.IRichSequence;
 import org.jetbrains.annotations.NotNull;
