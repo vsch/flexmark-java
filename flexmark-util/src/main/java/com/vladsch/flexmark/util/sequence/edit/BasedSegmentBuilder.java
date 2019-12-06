@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
-public class BasedSegmentBuilder extends SegmentBuilderBase<SegmentBuilderBase> implements IBasedSegmentBuilder<BasedSegmentBuilder> {
+public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder> implements IBasedSegmentBuilder<BasedSegmentBuilder> {
     private final @NotNull BasedSequence myBase;
 
     protected BasedSegmentBuilder(@NotNull BasedSequence base) {
@@ -22,10 +22,12 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<SegmentBuilderBase> 
         myBase = other.myBase;
     }
 
+    @Override
     public String toStringWithRangesVisibleWhitespace() {
         return super.toStringWithRangesVisibleWhitespace(myBase);
     }
 
+    @Override
     public String toStringWithRanges() {
         return super.toStringWithRanges(myBase);
     }
@@ -80,6 +82,7 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<SegmentBuilderBase> 
         }
     }
 
+    @Override
     public String toStringChars() {
         return super.toString(myBase);
     }

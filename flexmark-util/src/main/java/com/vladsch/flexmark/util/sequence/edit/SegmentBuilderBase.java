@@ -536,14 +536,4 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         sb.unmark().append(" }");
         return sb.toString();
     }
-
-    @NotNull
-    public static SegmentBuilderBase<S> emptyBuilder() {
-        return new S();
-    }
-
-    @NotNull
-    public static S emptyBuilder(int options) {
-        return new S(options);
-    }
 }

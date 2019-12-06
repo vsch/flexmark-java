@@ -14,7 +14,7 @@ import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
 
 @SuppressWarnings("UnusedReturnValue")
-public class SegmentBuilder2 implements ISegmentBuilder<SegmentBuilder2> {
+public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements ISegmentBuilder<S> {
     public static final int MIN_PART_CAPACITY = 8;
 
     final public static int[] EMPTY_PARTS = { };
@@ -54,11 +54,11 @@ public class SegmentBuilder2 implements ISegmentBuilder<SegmentBuilder2> {
     final protected StringBuilder myText = new StringBuilder();    // text segment ranges come from this CharSequence
     protected int myImmutableOffset = 0;   // text offset for all committed text segments
 
-    protected SegmentBuilder2() {
+    protected SegmentBuilderBase2() {
         this(F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
     }
 
-    protected SegmentBuilder2(int options) {
+    protected SegmentBuilderBase2(int options) {
         myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
         myStats = new SegmentStats((options & F_TRACK_UNIQUE) != 0);
         myTextStats = new SegmentStats((options & F_TRACK_UNIQUE) != 0);

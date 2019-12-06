@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
-public class BasedSegmentBuilder2 extends SegmentBuilder2 {
+public class BasedSegmentBuilder2 extends SegmentBuilder2 implements IBasedSegmentBuilder<BasedSegmentBuilder> {
     final @NotNull BasedSequence myBase;
     final @NotNull SegmentOptimizer2 myOptimizer;
 
