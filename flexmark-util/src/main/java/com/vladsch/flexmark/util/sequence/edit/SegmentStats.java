@@ -33,7 +33,7 @@ public class SegmentStats {
         return myTextFirst256Length;
     }
 
-    public boolean isTrackFirst256() {
+    public boolean isTrackTextFirst256() {
         return myTrackFirst256;
     }
 
@@ -41,24 +41,31 @@ public class SegmentStats {
         return myTextSegments;
     }
 
+    public int getTextSpaceSegments() {
+        return myTextSpaceSegments;
+    }
+
+    public int getTextFirst256Segments() {
+        return myTextFirst256Segments;
+    }
+
     public boolean isEmpty() {
-        return myTextLength == 0 &&
-                myTextSegments == 0 &&
-                myTextSegmentLength == 0 &&
-                myTextSpaceLength == 0 &&
-                myTextSpaceSegments == 0 &&
-                myTextSpaceSegmentLength == 0 &&
-                myTextFirst256Length == 0 &&
-                myTextFirst256Segments == 0 &&
-                myTextFirst256SegmentLength == 0
-                ;
+        return myTextLength == 0 && myTextSegments == 0 && myTextSegmentLength == 0
+                && (!myTrackFirst256
+                || myTextSpaceLength == 0
+                && myTextSpaceSegments == 0
+                && myTextSpaceSegmentLength == 0
+                && myTextFirst256Length == 0
+                && myTextFirst256Segments == 0
+                && myTextFirst256SegmentLength == 0);
     }
 
     public boolean isValid() {
         return myTextLength >= myTextSegments
-                && myTextLength >= myTextFirst256Length && myTextSegments >= myTextFirst256Segments && myTextFirst256Length >= myTextFirst256Segments
-                && myTextFirst256Length >= myTextSpaceLength && myTextFirst256Segments >= myTextSpaceSegments && myTextSpaceLength >= myTextSpaceSegments
-                ;
+                && (
+                !myTrackFirst256
+                        || myTextLength >= myTextFirst256Length && myTextSegments >= myTextFirst256Segments && myTextFirst256Length >= myTextFirst256Segments
+                        && myTextFirst256Length >= myTextSpaceLength && myTextFirst256Segments >= myTextSpaceSegments && myTextSpaceLength >= myTextSpaceSegments);
     }
 
     public SegmentStats committedCopy() {
@@ -66,12 +73,16 @@ public class SegmentStats {
         other.myTextLength = this.myTextLength;
         other.myTextSegments = this.myTextSegments;
         other.myTextSegmentLength = this.myTextSegmentLength;
-        other.myTextSpaceLength = this.myTextSpaceLength;
-        other.myTextSpaceSegments = this.myTextSpaceSegments;
-        other.myTextSpaceSegmentLength = this.myTextSpaceSegmentLength;
-        other.myTextFirst256Length = this.myTextFirst256Length;
-        other.myTextFirst256Segments = this.myTextFirst256Segments;
-        other.myTextFirst256SegmentLength = this.myTextFirst256SegmentLength;
+
+        if (myTrackFirst256) {
+            other.myTextSpaceLength = this.myTextSpaceLength;
+            other.myTextSpaceSegments = this.myTextSpaceSegments;
+            other.myTextSpaceSegmentLength = this.myTextSpaceSegmentLength;
+            other.myTextFirst256Length = this.myTextFirst256Length;
+            other.myTextFirst256Segments = this.myTextFirst256Segments;
+            other.myTextFirst256SegmentLength = this.myTextFirst256SegmentLength;
+        }
+
         other.commitText();
         return other;
     }
@@ -82,12 +93,15 @@ public class SegmentStats {
         myTextLength = 0;
         myTextSegments = 0;
         myTextSegmentLength = 0;
-        myTextSpaceLength = 0;
-        myTextSpaceSegments = 0;
-        myTextSpaceSegmentLength = 0;
-        myTextFirst256Length = 0;
-        myTextFirst256Segments = 0;
-        myTextFirst256SegmentLength = 0;
+
+        if (myTrackFirst256) {
+            myTextSpaceLength = 0;
+            myTextSpaceSegments = 0;
+            myTextSpaceSegmentLength = 0;
+            myTextFirst256Length = 0;
+            myTextFirst256Segments = 0;
+            myTextFirst256SegmentLength = 0;
+        }
     }
 
     public void add(SegmentStats other) {
@@ -95,10 +109,12 @@ public class SegmentStats {
 
         myTextLength += other.myTextLength;
         myTextSegments += other.myTextSegments;
-        myTextSpaceLength += other.myTextSpaceLength;
-        myTextSpaceSegments += other.myTextSpaceSegments;
-        myTextFirst256Length += other.myTextFirst256Length;
-        myTextFirst256Segments += other.myTextFirst256Segments;
+        if (myTrackFirst256 && other.myTrackFirst256) {
+            myTextSpaceLength += other.myTextSpaceLength;
+            myTextSpaceSegments += other.myTextSpaceSegments;
+            myTextFirst256Length += other.myTextFirst256Length;
+            myTextFirst256Segments += other.myTextFirst256Segments;
+        }
     }
 
     public void remove(SegmentStats other) {
@@ -106,37 +122,47 @@ public class SegmentStats {
 
         assert myTextLength >= other.myTextLength;
         assert myTextSegments >= other.myTextSegments;
-        assert myTextSpaceLength >= other.myTextSpaceLength;
-        assert myTextSpaceSegments >= other.myTextSpaceSegments;
-        assert myTextFirst256Length >= other.myTextFirst256Length;
-        assert myTextFirst256Segments >= other.myTextFirst256Segments;
-
         myTextLength -= other.myTextLength;
         myTextSegments -= other.myTextSegments;
-        myTextSpaceLength -= other.myTextSpaceLength;
-        myTextSpaceSegments -= other.myTextSpaceSegments;
-        myTextFirst256Length -= other.myTextFirst256Length;
-        myTextFirst256Segments -= other.myTextFirst256Segments;
 
         // reset segment starts
         myTextSegmentLength = myTextLength;
-        myTextSpaceSegmentLength = myTextSpaceLength;
-        myTextFirst256SegmentLength = myTextFirst256Length;
+
+        if (myTrackFirst256 && other.myTrackFirst256) {
+            assert myTextSpaceLength >= other.myTextSpaceLength;
+            assert myTextSpaceSegments >= other.myTextSpaceSegments;
+            assert myTextFirst256Length >= other.myTextFirst256Length;
+            assert myTextFirst256Segments >= other.myTextFirst256Segments;
+
+            myTextSpaceLength -= other.myTextSpaceLength;
+            myTextSpaceSegments -= other.myTextSpaceSegments;
+            myTextFirst256Length -= other.myTextFirst256Length;
+            myTextFirst256Segments -= other.myTextFirst256Segments;
+
+            // reset segment starts
+            myTextSpaceSegmentLength = myTextSpaceLength;
+            myTextFirst256SegmentLength = myTextFirst256Length;
+        }
     }
 
     public void commitText() {
 //        System.out.println("commitText()");
         if (myTextLength > myTextSegmentLength) {
             myTextSegments++;
-            int segmentLength = myTextLength - myTextSegmentLength;
 
-            if (myTextSpaceLength - myTextSpaceSegmentLength == segmentLength) myTextSpaceSegments++;
-            if (myTextFirst256Length - myTextFirst256SegmentLength == segmentLength) myTextFirst256Segments++;
+            if (myTrackFirst256) {
+                int segmentLength = myTextLength - myTextSegmentLength;
+
+                if (myTextSpaceLength - myTextSpaceSegmentLength == segmentLength) myTextSpaceSegments++;
+                if (myTextFirst256Length - myTextFirst256SegmentLength == segmentLength) myTextFirst256Segments++;
+            }
+
+            myTextSegmentLength = myTextLength;
+            if (myTrackFirst256) {
+                myTextSpaceSegmentLength = myTextSpaceLength;
+                myTextFirst256SegmentLength = myTextFirst256Length;
+            }
         }
-
-        myTextSegmentLength = myTextLength;
-        myTextSpaceSegmentLength = myTextSpaceLength;
-        myTextFirst256SegmentLength = myTextFirst256Length;
     }
 
     public void addText(CharSequence text) {

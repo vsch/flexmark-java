@@ -67,6 +67,7 @@
         <module>flexmark-test-util</module>
         <module>flexmark-tree-iteration</module>
         <module>flexmark-util</module>
+        <module>flexmark-util-experimental</module>
         <module>flexmark-youtrack-converter</module>
     </modules>
 
@@ -423,6 +424,11 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-util</artifactId>
+                <version>0.59.62</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-util-experimental</artifactId>
                 <version>0.59.62</version>
             </dependency>
             <dependency>

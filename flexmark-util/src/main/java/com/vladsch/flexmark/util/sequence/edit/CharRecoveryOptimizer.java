@@ -50,7 +50,7 @@ public class CharRecoveryOptimizer<S extends IRichSequence<S>> implements Segmen
     }
 
     @Override
-    public void accept(@NotNull SegmentBuilder builder, @NotNull S chars, @NotNull SegmentPosition position) {
+    public void accept(@NotNull SegmentBuilderBase<SegmentBuilderBase> builder, @NotNull S chars, @NotNull SegmentPosition position) {
         @NotNull Seg textOp = position.getSeg();
         if (!textOp.isText()) return;
 

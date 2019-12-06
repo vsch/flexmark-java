@@ -196,6 +196,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 + [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
       experimental stuff.
+  + [ ] Fix: move `PositionList` related classes to `flexmark-util-experimental`
 * [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
   * [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `BasedSequenceBuilder` can

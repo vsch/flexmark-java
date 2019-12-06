@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
 
-public abstract class CharRecoveryOptimizer2 implements SegmentOptimizer2 {
+public class CharRecoveryOptimizer2 implements SegmentOptimizer2 {
     private final PositionAnchor myAnchor;
 
     public CharRecoveryOptimizer2(PositionAnchor anchor) {
@@ -50,11 +50,7 @@ public abstract class CharRecoveryOptimizer2 implements SegmentOptimizer2 {
         return charsOffset;
     }
 
-    @NotNull
-    public abstract CharSequence getBaseChars();
-
-    @Override
-    public Object[] apply(Object[] parts) {
+    public Object[] apply(@NotNull CharSequence chars, Object[] parts) {
         // optimizer already applied
         if (parts.length != 3 || !(parts[0] instanceof Range && parts[1] instanceof CharSequence && parts[2] instanceof Range)) return parts;
 
@@ -65,7 +61,6 @@ public abstract class CharRecoveryOptimizer2 implements SegmentOptimizer2 {
         // optimizer already applied
         if (originalPrev.isNull() && originalNext.isNull() || text.length() == 0) return parts;
 
-        CharSequence chars = getBaseChars();
         final int textLength = text.length();
         final int charsLength = chars.length();
 

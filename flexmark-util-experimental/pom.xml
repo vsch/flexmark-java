@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.vladsch.flexmark</groupId>
+        <artifactId>flexmark-java</artifactId>
+        <version>0.59.62</version>
+    </parent>
+
+    <artifactId>flexmark-util-experimental</artifactId>
+    <name>flexmark-java experimental utility classes</name>
+    <description>Contains experimental classes that may or may not work in all cases. Use at your own risk.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-test-util</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

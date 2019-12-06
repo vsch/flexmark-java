@@ -17,7 +17,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         String expected = "";
 
@@ -33,7 +33,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         segments.append(0, 0);
         segments.append(sequence.length(), sequence.length());
 
@@ -47,7 +47,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE);
         segments.append(0, 0);
         segments.append(sequence.length(), sequence.length());
 
@@ -61,7 +61,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
         segments.append(0, 0);
         segments.append(sequence.length(), sequence.length());
 
@@ -75,7 +75,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append("  ");
         segments.append(0, 4);
@@ -92,7 +92,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         segments.append("  ");
         segments.append(0, 4);
@@ -110,7 +110,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         segments.append("  ");
         segments.append(0, 4);
@@ -128,7 +128,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         segments.append("  ");
         segments.append(0, 4);
@@ -146,7 +146,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 4);
         String expected = input.substring(0, 4);
@@ -163,7 +163,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 4);
         segments.append(6, 7);
@@ -181,7 +181,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append(3, 7);
@@ -199,7 +199,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         segments.append(0, 5);
         segments.append("abc");
         segments.append(3, 7);
@@ -217,7 +217,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("abc");
@@ -236,7 +236,7 @@ public class SegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append(5, 7);
@@ -253,7 +253,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultChop1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append("-");
@@ -267,7 +267,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultChop2() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append("-");
@@ -280,7 +280,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultChop3() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append("-");
@@ -293,7 +293,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultChop4() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append("-");
@@ -306,7 +306,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultChop5() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append("-");
@@ -319,7 +319,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultChop6() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append("-");
@@ -332,7 +332,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultMerge1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append(4, 8);
@@ -344,7 +344,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultMerge2() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append(1, 8);
@@ -356,7 +356,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultMerge3() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append(3, 5);
@@ -368,7 +368,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultMerge4() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append(2, 4);
@@ -380,7 +380,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultMerge5() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append(2, 5);
@@ -392,7 +392,7 @@ public class SegmentBuilderTest {
     public void test_handleOverlapDefaultMerge6() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(2, 5);
         segments.append(3, 4);
@@ -408,7 +408,7 @@ public class SegmentBuilderTest {
     public void test_optimizerExtendPrev1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
         segments.append(0, 3);
@@ -426,7 +426,7 @@ public class SegmentBuilderTest {
     public void test_optimizerExtendPrev2() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
         segments.append(0, 3);
@@ -444,7 +444,7 @@ public class SegmentBuilderTest {
     public void test_optimizerExtendPrevNext() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
         segments.append(0, 3);
@@ -464,7 +464,7 @@ public class SegmentBuilderTest {
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         segments.append(0, 3);
@@ -482,7 +482,7 @@ public class SegmentBuilderTest {
     public void test_optimizerExtendNext() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
         segments.append(0, 3);
@@ -500,7 +500,7 @@ public class SegmentBuilderTest {
     public void test_optimizerExtendNext1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
         segments.append(0, 3);
@@ -516,7 +516,7 @@ public class SegmentBuilderTest {
     public void test_optimizerIndent1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
 
         segments.append(0, 3);
@@ -539,7 +539,7 @@ public class SegmentBuilderTest {
         String input = "  0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append("    ");
         segments.append(2, 12);
@@ -556,7 +556,7 @@ public class SegmentBuilderTest {
         String input = "01234  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("    ");
@@ -574,7 +574,7 @@ public class SegmentBuilderTest {
         String input = "01234  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.PREVIOUS);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("    ");
@@ -592,7 +592,7 @@ public class SegmentBuilderTest {
         String input = "01234  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("    ");
@@ -610,7 +610,7 @@ public class SegmentBuilderTest {
         String input = "  0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.PREVIOUS);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append("    ");
         segments.append(2, 12);
@@ -627,7 +627,7 @@ public class SegmentBuilderTest {
         String input = "  0123456789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append("    ");
         segments.append(2, 12);
@@ -644,7 +644,7 @@ public class SegmentBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n    ");
@@ -662,7 +662,7 @@ public class SegmentBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.PREVIOUS);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n    ");
@@ -680,7 +680,7 @@ public class SegmentBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n    ");
@@ -698,7 +698,7 @@ public class SegmentBuilderTest {
         String input = "01234\n\n 56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n\n   ");
@@ -716,7 +716,7 @@ public class SegmentBuilderTest {
         String input = "01234\n\n 56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.PREVIOUS);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n\n   ");
@@ -734,7 +734,7 @@ public class SegmentBuilderTest {
         String input = "01234\n\n 56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n\n   ");
@@ -752,7 +752,7 @@ public class SegmentBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 3);
         segments.append("34\n    ");
@@ -770,7 +770,7 @@ public class SegmentBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.PREVIOUS);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 3);
         segments.append("34\n    ");
@@ -788,7 +788,7 @@ public class SegmentBuilderTest {
         String input = "01234\n  56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 3);
         segments.append("34\n    ");
@@ -806,7 +806,7 @@ public class SegmentBuilderTest {
         String input = "01234 \n56789";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n  ");
@@ -827,7 +827,7 @@ public class SegmentBuilderTest {
         String input = "01234 \n";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n");
@@ -845,7 +845,7 @@ public class SegmentBuilderTest {
         String input = "01234  \n";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append(" \n");
@@ -862,7 +862,7 @@ public class SegmentBuilderTest {
         String input = "012340123401234";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("01234");
@@ -879,7 +879,7 @@ public class SegmentBuilderTest {
         String input = "0123  \n  5678";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.NEXT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder();
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder();
 
         segments.append(0, 5);
         segments.append("\n");
@@ -902,7 +902,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -937,7 +937,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -973,7 +973,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1009,7 +1009,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1042,7 +1042,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1078,7 +1078,7 @@ public class SegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        SegmentBuilder segments = SegmentBuilder.emptyBuilder(SegmentBuilder.F_TRACK_UNIQUE | SegmentBuilder.F_INCLUDE_ANCHORS);
+        SegmentBuilderBase<SegmentBuilderBase> segments = SegmentBuilderBase.emptyBuilder(ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {

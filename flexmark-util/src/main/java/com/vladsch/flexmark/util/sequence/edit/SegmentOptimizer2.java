@@ -3,12 +3,14 @@ package com.vladsch.flexmark.util.sequence.edit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public interface SegmentOptimizer2 extends Function<Object[], Object[]> {
+public interface SegmentOptimizer2 extends BiFunction<CharSequence, Object[], Object[]> {
     /**
      * Optimize segment BASE parts surrounding TEXT contained in Object[] array.
      *
+     * @param chars   base character sequence
      * @param objects parts to optimize
      *                Object[0] - previous BASE Range, will be Range.NULL if no previous range
      *                Object[1] - char sequence of TEXT to optimize
@@ -19,7 +21,7 @@ public interface SegmentOptimizer2 extends Function<Object[], Object[]> {
      *         CharSequence with 0 length skipped
      */
     @Override
-    Object[] apply(Object[] objects);
+    Object[] apply(@NotNull CharSequence chars, Object[] objects);
 
     /**
      * Insert a null at index in given parts array

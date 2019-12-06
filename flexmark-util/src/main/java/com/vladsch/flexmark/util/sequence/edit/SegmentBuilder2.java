@@ -14,12 +14,8 @@ import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
 
 @SuppressWarnings("UnusedReturnValue")
-public class SegmentBuilder2 {
-    public static final String[] EMPTY_STRINGS = new String[0];
+public class SegmentBuilder2 implements ISegmentBuilder<SegmentBuilder2> {
     public static final int MIN_PART_CAPACITY = 8;
-
-    public static final int F_INCLUDE_ANCHORS = 0x01;
-    public static final int F_TRACK_FIRST256 = 0x02;
 
     final public static int[] EMPTY_PARTS = { };
 
@@ -59,29 +55,38 @@ public class SegmentBuilder2 {
     protected int myImmutableOffset = 0;   // text offset for all committed text segments
 
     protected SegmentBuilder2() {
-        this(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+        this(F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
     }
 
     protected SegmentBuilder2(int options) {
-        myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
-        myStats = new SegmentStats((options & F_TRACK_FIRST256) != 0);
-        myTextStats = new SegmentStats((options & F_TRACK_FIRST256) != 0);
+        myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
+        myStats = new SegmentStats((options & F_TRACK_UNIQUE) != 0);
+        myTextStats = new SegmentStats((options & F_TRACK_UNIQUE) != 0);
     }
 
+    @Override
     public int getStartOffset() {
         return myStartOffset <= myEndOffset ? myStartOffset : -1;
     }
 
+    @Override
     public int getEndOffset() {
         return myEndOffset >= myStartOffset ? myEndOffset : -1;
     }
 
+    @Override
     public boolean isEmpty() {
         return myPartsSize == 0;
     }
 
+    @Override
+    public boolean hasOffsets() {
+        return myStartOffset <= myEndOffset;
+    }
+
+    @Override
     public int size() {
-        return myPartsSize;
+        return myPartsSize + (haveDanglingText() ? 1 : 0);
     }
 
     private int computeLength() {
@@ -98,6 +103,7 @@ public class SegmentBuilder2 {
         return length;
     }
 
+    @Override
     public int length() {
         // RELEASE: remove assert for release
         assert myLength == computeLength() : "myLength:" + myLength + " != computeLength(): " + computeLength();
@@ -108,10 +114,23 @@ public class SegmentBuilder2 {
         return myStats;
     }
 
+// @formatter:off
+    @Override public boolean isTrackTextFirst256() { return myStats.isTrackTextFirst256(); }
+    @Override public int getTextLength() { return myStats.getTextLength(); }
+    @Override public int getTextSegments() { return myStats.getTextSegments(); }
+    @Override public int getTextSpaceLength() { return myStats.getTextSpaceLength(); }
+    @Override public int getTextSpaceSegments() { return myStats.getTextSpaceSegments(); }
+    @Override public int getTextFirst256Length() { return myStats.getTextFirst256Length(); }
+    @Override public int getTextFirst256Segments() { return myStats.getTextFirst256Segments(); }
+
+// @formatter:on
+
+    @Override
     public int getOptions() {
         return myOptions;
     }
 
+    @Override
     public boolean isIncludeAnchors() {
         return (myOptions & F_INCLUDE_ANCHORS) != 0;
     }
@@ -121,12 +140,9 @@ public class SegmentBuilder2 {
      *
      * @return -ve if no information in the list, or span of offsets
      */
+    @Override
     public int getSpan() {
         return myStartOffset > myEndOffset ? -1 : myEndOffset - myStartOffset;
-    }
-
-    private boolean haveOffsets() {
-        return myStartOffset <= myEndOffset;
     }
 
     @Nullable
@@ -215,7 +231,7 @@ public class SegmentBuilder2 {
             // nothing changed, make sure it was not called to resolve overlap
             assert !resolveOverlap;
 
-            if (!haveOffsets()) myStartOffset = segStart;
+            if (!hasOffsets()) myStartOffset = segStart;
             myEndOffset = segEnd;
 
             if (text.length() > 0) {
@@ -346,7 +362,7 @@ public class SegmentBuilder2 {
 
         int rangeSpan = endOffset - startOffset;
         if (rangeSpan == 0 && (!isIncludeAnchors() || startOffset < myEndOffset)) {
-            if (!haveOffsets()) myStartOffset = startOffset;
+            if (!hasOffsets()) myStartOffset = startOffset;
 
             if (startOffset > myEndOffset) {
                 // can optimize text
@@ -383,7 +399,7 @@ public class SegmentBuilder2 {
             }
         } else {
             // disjoint
-            if (!haveOffsets()) myStartOffset = startOffset;
+            if (!hasOffsets()) myStartOffset = startOffset;
             myEndOffset = endOffset;
 
             if (haveDanglingText()) {
@@ -425,7 +441,7 @@ public class SegmentBuilder2 {
         if (repeat > 0) {
             myStats.addText(c, repeat);
             myTextStats.addText(c, repeat);
-            myLength+=repeat;
+            myLength += repeat;
 
             while (repeat-- > 0) myText.append(c);
         }
@@ -478,7 +494,7 @@ public class SegmentBuilder2 {
     }
 
     public String toStringPrep() {
-        if (haveDanglingText() && haveOffsets()) {
+        if (haveDanglingText() && hasOffsets()) {
             processParts(myEndOffset, myEndOffset, false, this::optimizeText);
         }
         return toString();
@@ -489,7 +505,7 @@ public class SegmentBuilder2 {
         DelimitedBuilder sb = new DelimitedBuilder(", ");
         sb.append(this.getClass().getSimpleName()).append("{");
 
-        if (haveOffsets()) {
+        if (hasOffsets()) {
             sb.append("[").append(myStartOffset).mark()
                     .append(myEndOffset).unmark()
                     .append(")").mark();

@@ -52,6 +52,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" filepath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-tree-iteration/flexmark-tree-iteration.iml" filepath="$PROJECT_DIR$/flexmark-tree-iteration/flexmark-tree-iteration.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-util/flexmark-util.iml" filepath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-util-experimental/flexmark-util-experimental.iml" filepath="$PROJECT_DIR$/flexmark-util-experimental/flexmark-util-experimental.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" filepath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" />
     </modules>
   </component>

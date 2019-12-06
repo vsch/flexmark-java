@@ -11,33 +11,31 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 
 @SuppressWarnings("UnusedReturnValue")
-public class SegmentBuilder {
+public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISegmentBuilder<S> {
     public static final String[] EMPTY_STRINGS = new String[0];
-    public static final int F_INCLUDE_ANCHORS = 0x01;
-    public static final int F_TRACK_UNIQUE = 0x02;
 
     protected ArrayList<Seg> myParts = new ArrayList<>();
     protected int myStartOffset = Range.NULL.getStart();
     protected int myEndOffset = Range.NULL.getEnd();
     protected int myLength = 0;
     protected int myTextLength = 0;
-    protected int myTextUnique = 0;
+    protected int myTextFirst256Segments = 0;
     protected int myTextSpaceLength = 0;
-    protected int myTextUniqueLength = 0;
+    protected int myTextFirst256Length = 0;
     protected final @Nullable int[] myFirst256;
     final protected int myOptions;
 
-    protected SegmentBuilder() {
+    protected SegmentBuilderBase() {
         this(F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
     }
 
-    protected SegmentBuilder(int options) {
+    protected SegmentBuilderBase(int options) {
         myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
         myFirst256 = (options & F_TRACK_UNIQUE) != 0 ? new int[256] : null;
     }
 
     @SuppressWarnings("CopyConstructorMissesField")
-    protected SegmentBuilder(@NotNull SegmentBuilder other) {
+    protected SegmentBuilderBase(@NotNull SegmentBuilderBase<S> other) {
         this(other.myOptions);
 
         myParts.addAll(other.myParts);
@@ -45,71 +43,61 @@ public class SegmentBuilder {
         myEndOffset = other.myEndOffset;
         myLength = other.myLength;
         myTextLength = other.myTextLength;
-        myTextUnique = other.myTextUnique;
+        myTextFirst256Segments = other.myTextFirst256Segments;
         myTextSpaceLength = other.myTextSpaceLength;
-        myTextUniqueLength = other.myTextUniqueLength;
+        myTextFirst256Length = other.myTextFirst256Length;
 
         if (myFirst256 != null && other.myFirst256 != null) {
             System.arraycopy(other.myFirst256, 0, myFirst256, 0, other.myFirst256.length);
         }
     }
 
+    @Override
     public int getStartOffset() {
         return myStartOffset >= 0 ? myStartOffset : -1;
     }
 
+    @Override
     public int getEndOffset() {
         return myEndOffset >= 0 ? myEndOffset : -1;
     }
 
+    @Override
     public boolean isEmpty() {
         return myParts.isEmpty();
     }
 
+    @Override
     public int length() {
         assert myLength == computeLength();
         return myLength;
     }
 
-    public int getLength() {
-        return myLength;
+    @Override
+    public int size() {
+        return myParts.size();
     }
 
-    public int getTextLength() {
-        return myTextLength;
-    }
+// @formatter:off
+    @Override public boolean isTrackTextFirst256() {return (myOptions & F_TRACK_UNIQUE) != 0;}
+    @Override public int getTextLength() {return myTextLength;}
+    @Override public int getTextSegments() {return 0;}
+    @Override public int getTextSpaceLength() {return myFirst256 == null ? 0 : myFirst256[' '];}
+    @Override public int getTextSpaceSegments() {return myTextSpaceLength;}
+    @Override public int getTextFirst256Segments() {return myTextFirst256Segments;}
+    @Override public int getTextFirst256Length() {return myTextFirst256Length;}
 
-    public int getTextSpaces() {
-        return myFirst256 == null ? 0 : myFirst256[' '];
-    }
+// @formatter:on
 
-    public int getTextSpaceLength() {
-        return myTextSpaceLength;
-    }
 
-    public int getTextUnique() {
-        return myTextUnique;
-    }
-
-    public int getTextUniqueLength() {
-        return myTextUniqueLength;
-    }
-
-    @Nullable
-    public int[] getFirst256() {
-        return myFirst256;
-    }
-
+    @Override
     public int getOptions() {
         return myOptions;
     }
 
+    @Override
     public boolean isIncludeAnchors() {
         return (myOptions & F_INCLUDE_ANCHORS) != 0;
-    }
-
-    public boolean isTrackTextUnique() {
-        return (myOptions & F_TRACK_UNIQUE) != 0;
     }
 
     @NotNull
@@ -122,10 +110,12 @@ public class SegmentBuilder {
      *
      * @return -ve if no information in the list, or span of offsets
      */
+    @Override
     public int getSpan() {
         return myStartOffset > myEndOffset ? -1 : myEndOffset - myStartOffset;
     }
 
+    @Override
     public boolean hasOffsets() {
         return myStartOffset <= myEndOffset;
     }
@@ -199,7 +189,7 @@ public class SegmentBuilder {
     private void validateInvariants(@Nullable Supplier<String[]> parts) {
         if (myParts.isEmpty()) {
             assert myStartOffset == myEndOffset || myStartOffset == Range.NULL.getStart() && myEndOffset == Range.NULL.getEnd() : assertionError("empty, no offsets, ", parts);
-            assert myLength == 0 && myTextLength == 0 && myTextUniqueLength == 0 && myTextUnique == 0 : assertionError("empty, all lengths = 0", parts);
+            assert myLength == 0 && myTextLength == 0 && myTextFirst256Length == 0 && myTextFirst256Segments == 0 : assertionError("empty, all lengths = 0", parts);
         } else {
             Seg lastSeg = lastSeg();
             if (lastSeg.isString()) {
@@ -208,7 +198,7 @@ public class SegmentBuilder {
                 assert myStartOffset <= firstSeg().getStart() && myEndOffset >= lastSeg().getEnd()
                         : assertionError(String.format("start:%d==first.start:%d, end:%d==last.end:%d ", myStartOffset, firstSeg().getStart(), myEndOffset, lastSeg().getEnd()), parts);
             }
-            assert myLength >= myTextLength && myTextLength >= myTextUniqueLength && myTextLength >= myTextUnique : assertionError("l >= t >= ul", parts);
+            assert myLength >= myTextLength && myTextLength >= myTextFirst256Length && myTextLength >= myTextFirst256Segments : assertionError("l >= t >= ul", parts);
         }
     }
 
@@ -270,10 +260,10 @@ public class SegmentBuilder {
             for (int i = 0; i < iMax; i++) {
                 char c = text.charAt(i);
                 if (c < 256) {
-                    if (myFirst256[c] == 0) myTextUnique++;
+                    if (myFirst256[c] == 0) myTextFirst256Segments++;
                     myFirst256[c]++;
                     if (c == ' ') myTextSpaceLength++;
-                    myTextUniqueLength++;
+                    myTextFirst256Length++;
                 }
             }
         }
@@ -289,15 +279,15 @@ public class SegmentBuilder {
                     assert myFirst256[c] > 0;
                     myFirst256[c]--;
 
-                    if (myFirst256[c] == 0) myTextUnique--;
+                    if (myFirst256[c] == 0) myTextFirst256Segments--;
 
                     if (c == ' ') {
                         assert myTextSpaceLength > 0;
                         myTextSpaceLength--;
                     }
 
-                    assert myTextUniqueLength > 0;
-                    myTextUniqueLength--;
+                    assert myTextFirst256Length > 0;
+                    myTextFirst256Length--;
                 }
             }
         }
@@ -329,8 +319,9 @@ public class SegmentBuilder {
      * @param endOffset   end offset in original sequence
      * @return this
      */
+    @Override
     @NotNull
-    public SegmentBuilder append(int startOffset, int endOffset) {
+    public S append(int startOffset, int endOffset) {
         @NotNull Range range = Range.of(startOffset, endOffset);
         return append(range);
     }
@@ -342,8 +333,9 @@ public class SegmentBuilder {
      * @param offset offset in original sequence
      * @return this
      */
+    @Override
     @NotNull
-    public SegmentBuilder appendAnchor(int offset) {
+    public S appendAnchor(int offset) {
         @NotNull Range range = Range.of(offset, offset);
         return append(range);
     }
@@ -355,13 +347,17 @@ public class SegmentBuilder {
      * @param range range in original sequence
      * @return this
      */
+    @Override
     @NotNull
-    public SegmentBuilder append(@NotNull Range range) {
-        if (range.isNull()) return this;
+    public S append(@NotNull Range range) {
+        if (range.isNull())
+            //noinspection unchecked
+            return (S) this;
         int rangeSpan = range.getSpan();
         if (rangeSpan < 0 || rangeSpan == 0 && (!isIncludeAnchors() || range.getStart() < myEndOffset)) {
             if (rangeSpan == 0 && range.getStart() > myEndOffset) updateLastTextSeg(Seg.anchorSeg(range.getEnd()));
-            return this;
+            //noinspection unchecked
+            return (S) this;
         }
 
         if (myEndOffset > range.getStart()) {
@@ -383,32 +379,37 @@ public class SegmentBuilder {
             // disjoint
             addBaseSeg(Seg.baseSeg(range));
         }
-        return this;
+        //noinspection unchecked
+        return (S) this;
     }
 
+    @Override
     @NotNull
-    public SegmentBuilder append(@NotNull String text) {
+    public S append(CharSequence text) {
         int length = text.length();
         if (length != 0) {
             changeLength(length, true);
 
+            String useText = text.toString();
             Seg lastSeg = lastSeg();
             if (lastSeg.isNull()) {
-                myParts.add(Seg.stringSeg(text));
-                addedText(text);
+                myParts.add(Seg.stringSeg(useText));
+                addedText(useText);
             } else if (lastSeg.isText()) {
                 // append to it
-                setLastSeg(lastSeg.withTextSuffix(text));
-                addedText(text);
+                setLastSeg(lastSeg.withTextSuffix(useText));
+                addedText(useText);
             } else {
                 // add after last seg as text
-                myParts.add(Seg.textSeg(lastSeg.getEnd(), text));
-                addedText(text);
+                myParts.add(Seg.textSeg(lastSeg.getEnd(), useText));
+                addedText(useText);
             }
         }
-        return this;
+        //noinspection unchecked
+        return (S) this;
     }
 
+    @Override
     @NotNull
     public String toStringWithRangesVisibleWhitespace(@NotNull CharSequence chars) {
         BasedSequence baseSequence = BasedSequence.of(chars);
@@ -430,6 +431,7 @@ public class SegmentBuilder {
         return out.toString();
     }
 
+    @Override
     @NotNull
     public String toStringWithRanges(@NotNull CharSequence chars) {
         BasedSequence baseSequence = BasedSequence.of(chars);
@@ -451,6 +453,7 @@ public class SegmentBuilder {
         return out.toString();
     }
 
+    @Override
     @NotNull
     public String toString(@NotNull CharSequence chars) {
         BasedSequence baseSequence = BasedSequence.of(chars);
@@ -493,7 +496,8 @@ public class SegmentBuilder {
         for (SegmentPosition position : segmentList) {
             Object frameId = segmentList.openFrame();
             try {
-                optimizer.accept(this, chars, position);
+                //noinspection unchecked
+                optimizer.accept((S) this, chars, position);
             } finally {
                 segmentList.closeFrame(frameId);
             }
@@ -521,8 +525,8 @@ public class SegmentBuilder {
             sb.append("NULL").mark();
         }
 
-        sb.append("s=").append(getTextSpaces()).append(":").append(myTextSpaceLength).mark()
-                .append("u=").append(myTextUnique).append(":").append(myTextUniqueLength).mark()
+        sb.append("s=").append(this.getTextSpaceLength()).append(":").append(myTextSpaceLength).mark()
+                .append("u=").append(myTextFirst256Segments).append(":").append(myTextFirst256Length).mark()
                 .append("t=").append(myTextLength).mark()
                 .append("l=").append(myLength).mark();
 
@@ -534,12 +538,12 @@ public class SegmentBuilder {
     }
 
     @NotNull
-    public static SegmentBuilder emptyBuilder() {
-        return new SegmentBuilder();
+    public static SegmentBuilderBase<S> emptyBuilder() {
+        return new S();
     }
 
     @NotNull
-    public static SegmentBuilder emptyBuilder(int options) {
-        return new SegmentBuilder(options);
+    public static S emptyBuilder(int options) {
+        return new S(options);
     }
 }
