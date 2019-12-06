@@ -100,6 +100,18 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     }
 
     @NotNull
+    public BasedSequenceBuilder append(char c) {
+        mySegments.append(c);
+        return this;
+    }
+
+    @NotNull
+    public BasedSequenceBuilder append(char c, int count) {
+        mySegments.append(c, count);
+        return this;
+    }
+
+    @NotNull
     public BasedSequenceBuilder append(int startOffset, int endOffset) {
         return addByOffsets(startOffset, endOffset);
     }
@@ -167,7 +179,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
                         sequences.add(PrefixedSubSequence.prefixOf(prefix, lastSequence.getEmptySuffix()));
                         prefix = null;
                     }
-                } else if(part != null) {
+                } else if (part != null) {
                     throw new IllegalStateException("Invalid part type " + part.getClass());
                 }
             }
@@ -240,7 +252,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
             } else if (part instanceof CharSequence) {
                 sb.append(part);
                 last = null;
-            } else if(part != null) {
+            } else if (part != null) {
                 throw new IllegalStateException("Invalid part type " + part.getClass());
             }
         }
@@ -252,9 +264,9 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
         for (Object part : mySegments) {
             if (part instanceof Range) {
                 sb.append(myBase.subSequence(((Range) part).getStart(), ((Range) part).getEnd()));
-            } else if (part instanceof CharSequence)  {
+            } else if (part instanceof CharSequence) {
                 sb.append(part);
-            } else if(part != null) {
+            } else if (part != null) {
                 throw new IllegalStateException("Invalid part type " + part.getClass());
             }
         }

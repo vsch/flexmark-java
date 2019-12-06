@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.experimental.util.sequence.edit;
 
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.Range;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -120,6 +117,18 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @NotNull
     public BasedSequenceBuilder append(@NotNull Range chars) {
         return addRange(chars);
+    }
+
+    @NotNull
+    @Override
+    public BasedSequenceBuilder append(char c) {
+        return add(Character.toString(c));
+    }
+
+    @NotNull
+    @Override
+    public BasedSequenceBuilder append(char c, int count) {
+        return add(RepeatedSequence.repeatOf(c, count));
     }
 
     @NotNull

@@ -50,7 +50,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private boolean myAllWhitespace;    // all chars were whitespace
     private boolean myWasWhitespace;    // last char was whitespace
     private int myLineOnFirstText;      // issue EOL on first text
-    private ArrayList<Runnable> myIndentsOnFirstEol;    // issue indents on first eol
+    final private ArrayList<Runnable> myIndentsOnFirstEol;    // issue indents on first eol
 
     public LineFormattingAppendableImpl(int formatOptions) {
         this(formatOptions, null);
@@ -394,26 +394,23 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     private void appendBuilder(CharSequence s, int start, int end) {
         if (myBuilder != null) {
-            if (s.equals("_.template")) {
-                int tmp=0;
-            }
-            if (myBuilder.length() + end - start != myAppendable.length()) {
-                int tmp = 0;
-            }
-
             if (start == 0 && end == s.length()) {
                 myBuilder.append(s);
             } else {
                 myBuilder.append(s.subSequence(start, end));
             }
+        }
+    }
 
-            if (myBuilder.length() != myAppendable.length()) {
-                int tmp = 0;
-            }
+    private void appendBuilder(char c) {
+        if (myBuilder != null) {
+            myBuilder.append(c);
+        }
+    }
 
-            if (myBuilder.length() > 2 * myAppendable.length()) {
-                throw new RuntimeException("Builder length() > 2* appendable.length() ");
-            }
+    private void appendBuilder(char c, int count) {
+        if (myBuilder != null) {
+            myBuilder.append(c, count);
         }
     }
 
@@ -467,7 +464,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                     if (myPreFormattedNesting == 0 && haveOptions(COLLAPSE_WHITESPACE)) {
                         if (!myWasWhitespace) {
                             myAppendable.append(' ');
-                            appendBuilder(SequenceUtils.SPACE);
+                            appendBuilder(' ');
                             myWasWhitespace = true;
                         }
                     } else {
@@ -475,7 +472,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                             int column = myAppendable.length() - myLineStart;
                             int spaces = 4 - (column % 4);
                             myAppendable.append("    ", 0, spaces);
-                            appendBuilder("    ", 0, spaces);
+                            appendBuilder(' ', spaces);
                         } else {
                             myAppendable.append(c);
                             appendBuilder(s, index, index + 1);
@@ -486,11 +483,11 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                         if (myPreFormattedNesting == 0 && haveOptions(COLLAPSE_WHITESPACE)) {
                             if (!myWasWhitespace) {
                                 myAppendable.append(' ');
-                                appendBuilder(SequenceUtils.SPACE);
+                                appendBuilder(' ');
                             }
                         } else {
                             myAppendable.append(' ');
-                            appendBuilder(SequenceUtils.SPACE);
+                            appendBuilder(' ');
                         }
                         myWasWhitespace = true;
                     } else {
@@ -587,7 +584,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             appendBuilder(line);
 
             myAppendable.append(EOL);
-            appendBuilder(SequenceUtils.EOL);
+            appendBuilder(EOL);
 
             int endOffset = myAppendable.length();
 

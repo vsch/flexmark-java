@@ -37,6 +37,20 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
+    public RichSequenceBuilder append(char c) {
+        segments.append(c);
+        return this;
+    }
+
+    @NotNull
+    @Override
+    public RichSequenceBuilder append(char c, int count) {
+        while (count-- > 0) segments.append(c);
+        return this;
+    }
+
+    @NotNull
+    @Override
     public RichSequenceBuilder addAll(@NotNull Collection<? extends CharSequence> sequences) {
         for (CharSequence chars : sequences) {
             add(chars);

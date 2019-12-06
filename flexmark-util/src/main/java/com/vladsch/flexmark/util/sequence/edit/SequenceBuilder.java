@@ -10,6 +10,8 @@ public interface SequenceBuilder<T extends SequenceBuilder<T, S>, S extends IRic
     @NotNull T subContext();
     @NotNull T addAll(@NotNull Collection<? extends CharSequence> sequences);
     @NotNull T add(@Nullable CharSequence chars);
+    @NotNull T append(char c);
+    @NotNull T append(char c, int count);
     @NotNull S toSequence();
     int length();
     boolean isEmpty();
