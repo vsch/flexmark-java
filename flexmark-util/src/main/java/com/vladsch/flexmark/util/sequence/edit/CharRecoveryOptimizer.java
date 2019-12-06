@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
 
-public class CharRecoveryOptimizer2 implements SegmentOptimizer2 {
+public class CharRecoveryOptimizer implements SegmentOptimizer {
     private final PositionAnchor myAnchor;
 
-    public CharRecoveryOptimizer2(PositionAnchor anchor) {
+    public CharRecoveryOptimizer(PositionAnchor anchor) {
         this.myAnchor = anchor;
     }
 
@@ -126,7 +126,7 @@ public class CharRecoveryOptimizer2 implements SegmentOptimizer2 {
 
         int matchedPrev = prevPos;
         int matchedNext = textLength - nextPos;
-        int maxSpan = (nextRange.isNotNull() ? nextRange.getStart() : charsLength) - (prevRange.isNotNull() ? prevRange.getEnd() : 0);
+        int maxSpan = Math.min(textLength, (nextRange.isNotNull() ? nextRange.getStart() : charsLength) - (prevRange.isNotNull() ? prevRange.getEnd() : 0));
         int excess = matchedPrev + matchedNext - maxSpan;
 
         if (excess > 0) {
@@ -178,7 +178,10 @@ public class CharRecoveryOptimizer2 implements SegmentOptimizer2 {
 //        if (matchedPrev < 0 || matchedPrev > textLength) {
 //            assert false;
 //        }
-//        if (matchedNext < 0 || matchedNext > textLength) {
+//        if (matchedNext < 0 || textLength - matchedNext < 0) {
+//            assert false;
+//        }
+//        if (matchedPrev > textLength - matchedNext) {
 //            assert false;
 //        }
 

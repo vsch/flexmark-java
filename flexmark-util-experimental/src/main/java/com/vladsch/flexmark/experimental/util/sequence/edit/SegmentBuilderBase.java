@@ -28,12 +28,12 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     final protected int myOptions;
 
     protected SegmentBuilderBase() {
-        this(F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
+        this(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
     }
 
     protected SegmentBuilderBase(int options) {
-        myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
-        myFirst256 = (options & F_TRACK_UNIQUE) != 0 ? new int[256] : null;
+        myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+        myFirst256 = (options & F_TRACK_FIRST256) != 0 ? new int[256] : null;
     }
 
     @SuppressWarnings("CopyConstructorMissesField")
@@ -81,7 +81,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
 // @formatter:off
-    @Override public boolean isTrackTextFirst256() {return (myOptions & F_TRACK_UNIQUE) != 0;}
+    @Override public boolean isTrackTextFirst256() {return (myOptions & F_TRACK_FIRST256) != 0;}
     @Override public int getTextLength() {return myTextLength;}
     @Override public int getTextSegments() {return 0;}
     @Override public int getTextSpaceLength() {return myFirst256 == null ? 0 : myFirst256[' '];}

@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Function;
@@ -16,7 +15,7 @@ import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
 
 @SuppressWarnings("UnusedReturnValue")
-public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements ISegmentBuilder<S> {
+public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISegmentBuilder<S> {
     public static final int MIN_PART_CAPACITY = 8;
 
     final public static int[] EMPTY_PARTS = { };
@@ -56,14 +55,14 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
     final protected StringBuilder myText = new StringBuilder();    // text segment ranges come from this CharSequence
     protected int myImmutableOffset = 0;   // text offset for all committed text segments
 
-    protected SegmentBuilderBase2() {
-        this(F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
+    protected SegmentBuilderBase() {
+        this(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
     }
 
-    protected SegmentBuilderBase2(int options) {
-        myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_UNIQUE);
-        myStats = new SegmentStats((options & F_TRACK_UNIQUE) != 0);
-        myTextStats = new SegmentStats((options & F_TRACK_UNIQUE) != 0);
+    protected SegmentBuilderBase(int options) {
+        myOptions = options & (F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+        myStats = new SegmentStats((options & F_TRACK_FIRST256) != 0);
+        myTextStats = new SegmentStats((options & F_TRACK_FIRST256) != 0);
     }
 
     @Override
@@ -116,7 +115,7 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
         return myStats;
     }
 
-// @formatter:off
+    // @formatter:off
     @Override public boolean isTrackTextFirst256() { return myStats.isTrackTextFirst256(); }
     @Override public int getTextLength() { return myStats.getTextLength(); }
     @Override public int getTextSegments() { return myStats.getTextSegments(); }
@@ -133,10 +132,10 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
     }
 
     static class PartsIterator implements Iterator<Object> {
-        final SegmentBuilderBase2<?> myBuilder;
+        final SegmentBuilderBase<?> myBuilder;
         int myNextIndex;
 
-        public PartsIterator(SegmentBuilderBase2<?> builder) {
+        public PartsIterator(SegmentBuilderBase<?> builder) {
             myBuilder = builder;
         }
 
@@ -248,7 +247,7 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
         return parts;
     }
 
-    private void processParts(int segStart, int segEnd, boolean resolveOverlap, @NotNull Function<Object[], Object[]> transform) {
+    private void processParts(int segStart, int segEnd, boolean resolveOverlap, boolean nullNextRange, @NotNull Function<Object[], Object[]> transform) {
         assert segStart >= 0 && segEnd >= 0 && segStart <= segEnd;
 
         CharSequence text = myText.subSequence(myImmutableOffset, myText.length());
@@ -258,7 +257,7 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
         Object[] parts = {
                 lastSeg == null ? Range.NULL : lastSeg.getRange(),
                 text,
-                segStart == segEnd ? Range.NULL : Range.of(segStart, segEnd),
+                nullNextRange ? Range.NULL : Range.of(segStart, segEnd),
         };
 
         Object[] originalParts = parts.clone();
@@ -272,11 +271,12 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
             if (!hasOffsets()) myStartOffset = segStart;
             myEndOffset = segEnd;
 
-            if (text.length() > 0) {
-                commitText();
-            }
+            if (segEnd > segStart || isIncludeAnchors()) {
+                // NOTE: only commit text if adding real range after it
+                if (text.length() > 0) {
+                    commitText();
+                }
 
-            if (segEnd > segStart) {
                 myLength += segEnd - segStart;
                 addSeg(segStart, segEnd);
             }
@@ -327,13 +327,13 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
                         boolean haveDanglingText = haveDanglingText();
 
                         if (haveDanglingText && resolveOverlap) {
-                            processParts(optRangeStart, optRangeEnd, false, this::optimizeText);
+                            processParts(optRangeStart, optRangeEnd, false, false, this::optimizeText);
                         } else {
-                            if (haveDanglingText) {
-                                commitText();
-                            }
+                            if (optRangeStart != optRangeEnd || isIncludeAnchors()) {
+                                if (haveDanglingText) {
+                                    commitText();
+                                }
 
-                            if (optRangeStart != optRangeEnd || i > 0 && i + 1 < iMax) {
                                 // add base segment
                                 myLength += optRangeEnd - optRangeStart;
                                 addSeg(optRangeStart, optRangeEnd);
@@ -404,12 +404,12 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
         if (rangeSpan == 0 && (!isIncludeAnchors() || startOffset < myEndOffset)) {
             if (!hasOffsets()) myStartOffset = startOffset;
 
-            if (startOffset > myEndOffset) {
+            if (startOffset >= myEndOffset) {
                 // can optimize text
                 myEndOffset = startOffset;
 
                 if (haveDanglingText()) {
-                    processParts(startOffset, endOffset, false, this::optimizeText);
+                    processParts(startOffset, endOffset, false, false, this::optimizeText);
                 }
             }
             //noinspection unchecked
@@ -420,13 +420,13 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
             // overlap
             myEndOffset = Math.max(myEndOffset, endOffset);
 
-            processParts(startOffset, endOffset, true, this::handleOverlap);
+            processParts(startOffset, endOffset, true, false, this::handleOverlap);
         } else if (myEndOffset == startOffset) {
             myEndOffset = endOffset;
 
             // adjacent, merge the two if no text between them
             if (haveDanglingText()) {
-                processParts(startOffset, endOffset, false, this::optimizeText);
+                processParts(startOffset, endOffset, false, false, this::optimizeText);
             } else {
                 myLength += rangeSpan;
 
@@ -444,7 +444,7 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
             myEndOffset = endOffset;
 
             if (haveDanglingText()) {
-                processParts(startOffset, endOffset, false, this::optimizeText);
+                processParts(startOffset, endOffset, false, false, this::optimizeText);
             } else {
                 myLength += rangeSpan;
                 addSeg(startOffset, endOffset);
@@ -499,8 +499,8 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
             throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + chars.length());
         }
 
-        if (haveDanglingText()) {
-            processParts(myEndOffset, myEndOffset, false, this::optimizeText);
+        if (haveDanglingText() && hasOffsets()) {
+            processParts(myEndOffset, myEndOffset, false, true, this::optimizeText);
         }
 
         StringBuilder out = new StringBuilder();
@@ -540,7 +540,7 @@ public class SegmentBuilderBase2<S extends SegmentBuilderBase2<S>> implements IS
 
     public String toStringPrep() {
         if (haveDanglingText() && hasOffsets()) {
-            processParts(myEndOffset, myEndOffset, false, this::optimizeText);
+            processParts(myEndOffset, myEndOffset, false, true, this::optimizeText);
         }
         return toString();
     }

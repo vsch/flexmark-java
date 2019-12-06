@@ -185,32 +185,32 @@ public class Seg {
     }
 
     @NotNull
-    static Seg baseSeg(int startOffset, int endOffset) {
+    public static Seg baseSeg(int startOffset, int endOffset) {
         return new Seg(startOffset, endOffset, "");
     }
 
     @NotNull
-    static Seg anchorSeg(int offset) {
+    public static Seg anchorSeg(int offset) {
         return offset == 0 ? ANCHOR_0 : new Seg(offset, offset, "");
     }
 
     @NotNull
-    static Seg baseSeg(@NotNull Range range) {
+    public static Seg baseSeg(@NotNull Range range) {
         return range.isNull() ? NULL : new Seg(range.getStart(), range.getEnd(), "");
     }
 
     @NotNull
-    static Seg textSeg(int offset, @NotNull String text) {
+    public static Seg textSeg(int offset, @NotNull String text) {
         return new Seg(offset, offset, text);
     }
 
     @NotNull
-    static Seg textSeg(int startOffset, int endOffset, @NotNull String text) {
+    public static Seg textSeg(int startOffset, int endOffset, @NotNull String text) {
         return new Seg(startOffset, endOffset, text);
     }
 
     @NotNull
-    static Seg stringSeg(@NotNull String text) {
+    public static Seg stringSeg(@NotNull String text) {
         return text.isEmpty() ? NULL : new Seg(Range.NULL.getStart(), Range.NULL.getEnd(), text);
     }
 }

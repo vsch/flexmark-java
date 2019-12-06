@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public interface SegmentOptimizer2 extends BiFunction<CharSequence, Object[], Object[]> {
+public interface SegmentOptimizer extends BiFunction<CharSequence, Object[], Object[]> {
     /**
      * Optimize segment BASE parts surrounding TEXT contained in Object[] array.
      *

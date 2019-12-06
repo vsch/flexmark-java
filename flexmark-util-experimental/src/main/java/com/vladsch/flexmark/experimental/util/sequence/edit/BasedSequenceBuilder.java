@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilder, BasedSequence> {
     public static final int F_INCLUDE_ANCHORS = ISegmentBuilder.F_INCLUDE_ANCHORS;
-    public static final int F_TRACK_UNIQUE = ISegmentBuilder.F_TRACK_UNIQUE;
+    public static final int F_TRACK_UNIQUE = ISegmentBuilder.F_TRACK_FIRST256;
 
     private final BasedSegmentBuilder mySegments;
     private final @NotNull BasedSequence myBase;

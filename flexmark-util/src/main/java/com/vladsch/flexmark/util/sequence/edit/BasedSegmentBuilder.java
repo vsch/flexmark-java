@@ -5,25 +5,25 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
-public class BasedSegmentBuilder extends SegmentBuilderBase2<BasedSegmentBuilder> implements IBasedSegmentBuilder<BasedSegmentBuilder> {
+public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder> implements IBasedSegmentBuilder<BasedSegmentBuilder> {
     final @NotNull BasedSequence myBase;
-    final @NotNull SegmentOptimizer2 myOptimizer;
+    final @NotNull SegmentOptimizer myOptimizer;
 
     protected BasedSegmentBuilder(@NotNull BasedSequence base) {
-        this(base, new CharRecoveryOptimizer2(PositionAnchor.CURRENT));
+        this(base, new CharRecoveryOptimizer(PositionAnchor.CURRENT));
     }
 
-    protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer2 optimizer) {
+    protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer) {
         super();
         myBase = base;
         myOptimizer = optimizer;
     }
 
     protected BasedSegmentBuilder(@NotNull BasedSequence base, int options) {
-        this(base, new CharRecoveryOptimizer2(PositionAnchor.CURRENT), options);
+        this(base, new CharRecoveryOptimizer(PositionAnchor.CURRENT), options);
     }
 
-    protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer2 optimizer, int options) {
+    protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer, int options) {
         super(options);
         myBase = base;
         myOptimizer = optimizer;
@@ -105,12 +105,12 @@ public class BasedSegmentBuilder extends SegmentBuilderBase2<BasedSegmentBuilder
     }
 
     @NotNull
-    public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, @NotNull SegmentOptimizer2 optimizer) {
+    public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, @NotNull SegmentOptimizer optimizer) {
         return new BasedSegmentBuilder(sequence, optimizer);
     }
 
     @NotNull
-    public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, @NotNull SegmentOptimizer2 optimizer, int options) {
+    public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, @NotNull SegmentOptimizer optimizer, int options) {
         return new BasedSegmentBuilder(sequence, optimizer, options);
     }
 }

@@ -3,8 +3,6 @@ package com.vladsch.flexmark.experimental.util.sequence.edit;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
-import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.CharRecoveryOptimizer;
 import com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
@@ -51,7 +49,7 @@ public class BasedSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256);
         segments.append(0, 0);
         segments.append(sequence.length(), sequence.length());
 
@@ -65,7 +63,7 @@ public class BasedSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
         segments.append(0, 0);
         segments.append(sequence.length(), sequence.length());
 
@@ -986,7 +984,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1019,7 +1017,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1055,7 +1053,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1091,7 +1089,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1124,7 +1122,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1160,7 +1158,7 @@ public class BasedSegmentBuilderTest {
                 "";
         BasedSequence sequence = BasedSequence.of(input);
         CharRecoveryOptimizer<BasedSequence> optimizer = new CharRecoveryOptimizer<>(PositionAnchor.CURRENT);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
         for (BasedSequence line : lines) {
@@ -1214,7 +1212,7 @@ public class BasedSegmentBuilderTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
         // BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3, 6), Range.of(8, 12));
@@ -1232,7 +1230,7 @@ public class BasedSegmentBuilderTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256);
 
         // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
         // BasedSequence replaced = sequence.extractRanges(Range.of(0, 0), Range.of(0, 1), Range.of(3, 6), Range.of(8, 12));
@@ -1269,7 +1267,7 @@ public class BasedSegmentBuilderTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE | ISegmentBuilder.F_INCLUDE_ANCHORS);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
         // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
         // BasedSequence replaced = sequence.replace(0, 1, "^");
@@ -1288,7 +1286,7 @@ public class BasedSegmentBuilderTest {
         String input = "0123456789";
 
         BasedSequence sequence = BasedSequence.of(input);
-        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_UNIQUE);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, ISegmentBuilder.F_TRACK_FIRST256);
 
         // NOTE: test from BasedSequenceImpl which is fragile and depends on segment builder working 100%
         // BasedSequence replaced = sequence.replace(0, 1, "^");
