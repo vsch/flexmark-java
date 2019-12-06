@@ -221,3 +221,89 @@ Document[0, 16]
 ````````````````````````````````
 
 
+### xxx-03
+
+Overlapping transformed range when using SegmentBuilder appending
+
+```````````````````````````````` example Issue - xxx-03: 1
+# Changelog
+
+### 0.4
+- browser support
+
+### 0.3
+- passing more information into {Function} config
+- API change: returning {Object} with code, ast, comments and tokens attached instead of just a code {String}
+- comments support
+
+### 0.2 
+- upgrade to Esprima 1.0.0
+
+### 0.1
+- first working version
+
+.
+# Changelog
+
+### 0.4
+
+- browser support
+
+### 0.3
+
+- passing more information into {Function} config
+- API change: returning {Object} with code, ast, comments and tokens attached instead of just a code {String}
+- comments support
+
+### 0.2
+
+- upgrade to Esprima 1.0.0
+
+### 0.1
+
+- first working version
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue - xxx-03: 2) options(use-builder)
+# Changelog
+
+### 0.4
+- browser support
+
+### 0.3
+- passing more information into {Function} config
+- API change: returning {Object} with code, ast, comments and tokens attached instead of just a code {String}
+- comments support
+
+### 0.2 
+- upgrade to Esprima 1.0.0
+
+### 0.1
+- first working version
+
+.
+# Changelog
+
+### 0.4
+
+- browser support
+
+### 0.3
+
+- passing more information into {Function} config
+- API change: returning {Object} with code, ast, comments and tokens attached instead of just a code {String}
+- comments support
+
+### 0.2
+
+- upgrade to Esprima 1.0.0
+
+### 0.1
+
+- first working version
+
+````````````````````````````````
+
+

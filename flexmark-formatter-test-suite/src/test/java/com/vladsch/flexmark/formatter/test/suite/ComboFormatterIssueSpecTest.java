@@ -36,10 +36,13 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
@@ -81,11 +84,14 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
                     YamlFrontMatterExtension.create()
             ));
 
+    private static final DataKey<Boolean> USE_BUILDER = new DataKey<>("USE_BUILDER", false);
+
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("item-indent-1", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 1));
         optionsMap.put("item-indent-2", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 2));
         optionsMap.put("no-soft-breaks", new MutableDataSet().set(Formatter.KEEP_SOFT_LINE_BREAKS, false));
+        optionsMap.put("use-builder", new MutableDataSet().set(USE_BUILDER, true));
 
         optionsMap.put("no-append-references", new MutableDataSet().set(Formatter.APPEND_TRANSFERRED_REFERENCES, false)
                 .set(TestUtils.INCLUDED_DOCUMENT, "" +
@@ -134,19 +140,45 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = aggregate(OPTIONS, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
-            @Override
-            protected void adjustParserForInclusion() {
-                super.adjustParserForInclusion();
 
-                AbbreviationRepository abbreviationRepository = AbbreviationExtension.ABBREVIATIONS.get((MutableDataHolder) ((Document) getIncludedDocument()));
-                if (!abbreviationRepository.isEmpty()) {
-                    DataHolder withAbbreviations = getOptions().toMutable().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository).toImmutable();
-                    // need to transfer it to new instance of parser
-                    setParser(Parser.builder(withAbbreviations).build());
+        if (USE_BUILDER.get(combinedOptions)) {
+            return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
+                @Override
+                protected @NotNull String renderHtml() {
+                    BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(getDocument().getChars());
+                    String formatted = ((Formatter) getRenderer()).render(getDocument(), builder);
+                    BasedSequence basedFormatted = builder.toSequence();
+
+                    return basedFormatted.toString();
                 }
-            }
-        };
+
+                @Override
+                protected void adjustParserForInclusion() {
+                    super.adjustParserForInclusion();
+
+                    AbbreviationRepository abbreviationRepository = AbbreviationExtension.ABBREVIATIONS.get((MutableDataHolder) ((Document) getIncludedDocument()));
+                    if (!abbreviationRepository.isEmpty()) {
+                        DataHolder withAbbreviations = getOptions().toMutable().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository).toImmutable();
+                        // need to transfer it to new instance of parser
+                        setParser(Parser.builder(withAbbreviations).build());
+                    }
+                }
+            };
+        } else {
+            return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
+                @Override
+                protected void adjustParserForInclusion() {
+                    super.adjustParserForInclusion();
+
+                    AbbreviationRepository abbreviationRepository = AbbreviationExtension.ABBREVIATIONS.get((MutableDataHolder) ((Document) getIncludedDocument()));
+                    if (!abbreviationRepository.isEmpty()) {
+                        DataHolder withAbbreviations = getOptions().toMutable().set(AbbreviationExtension.ABBREVIATIONS, abbreviationRepository).toImmutable();
+                        // need to transfer it to new instance of parser
+                        setParser(Parser.builder(withAbbreviations).build());
+                    }
+                }
+            };
+        }
     }
 
     @Parameterized.Parameters(name = "{0}")

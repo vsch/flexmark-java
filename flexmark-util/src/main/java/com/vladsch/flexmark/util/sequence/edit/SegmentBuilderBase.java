@@ -315,7 +315,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
                         if (optStartOffset == MAX_VALUE) optStartOffset = optRangeStart;
 
                         if (optRangeStart < optEndOffset) {
-                            throw new IllegalStateException(String.format("Transformed Range[%d]: [%d, %d) overlaps accumulated range [%d, %d)", i, optRangeStart, optRangeEnd, optStartOffset, optEndOffset));
+                            throw new IllegalStateException(String.format("Accumulated range [%d, %d) overlaps Transformed Range[%d]: [%d, %d)", optStartOffset, optEndOffset, i, optRangeStart, optRangeEnd));
                         }
 
                         // adjust offsets since they could have expanded

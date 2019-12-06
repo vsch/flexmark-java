@@ -192,7 +192,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
         if (prevRange.isNotNull() && !endsWithEOL(chars.subSequence(prevRange.getStart(), prevRange.getEnd())) && startsWith(text, "\n")) {
             // see if there is an EOL between prevRange end and nextRange start with only spaces between them
             int eol = endOfLine(chars, prevRange.getEnd());
-            if (eol < charsLength && isBlank(chars.subSequence(prevRange.getEnd(), eol))) {
+            if (eol < charsLength && (nextRange.isNull() || eol < nextRange.getStart()) && isBlank(chars.subSequence(prevRange.getEnd(), eol))) {
                 // we have an EOL
                 eolRange = Range.ofLength(eol, 1);
                 text = text.subSequence(1, text.length());
