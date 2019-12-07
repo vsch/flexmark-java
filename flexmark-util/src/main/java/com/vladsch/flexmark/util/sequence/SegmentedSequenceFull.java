@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A BasedSequence which consists of segments of other BasedSequences
  */
-public final class SegmentedSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
+public final class SegmentedSequenceFull extends BasedSequenceImpl implements ReplacedBasedSequence {
     private final BasedSequence baseSeq;  // base sequence
     // NOTE: reducing the size of type for baseOffsets and adding only unique nonBasedChars will give greater memory saving than encoding out of base chars as -ve offsets
     // on the other hand if the baseOffset type is int then non base chars as -ve offset should be used
@@ -121,12 +121,12 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         if (baseSubSequence != null) {
             return baseSubSequence;
         } else if (!builder.isEmpty()) {
-            return new SegmentedSequence(builder.getSegmentBuilder());
+            return new SegmentedSequenceFull(builder.getSegmentBuilder());
         }
         return BasedSequence.NULL;
     }
 
-    SegmentedSequence(IBasedSegmentBuilder<?> builder) {
+    SegmentedSequenceFull(IBasedSegmentBuilder<?> builder) {
         super(0);
 
         this.baseSeq = builder.getBaseSequence();
@@ -169,7 +169,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         }
     }
 
-    private SegmentedSequence(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final boolean nonBaseChars, final int length) {
+    private SegmentedSequenceFull(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final boolean nonBaseChars, final int length) {
         super(0);
 
         int iMax = baseOffsets.length - 1;
@@ -294,7 +294,7 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
         if (startIndex == 0 && endIndex == length) {
             return this;
         } else {
-            return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + startIndex, nonBaseChars, endIndex - startIndex);
+            return new SegmentedSequenceFull(baseSeq, baseOffsets, baseStartOffset + startIndex, nonBaseChars, endIndex - startIndex);
         }
     }
 
