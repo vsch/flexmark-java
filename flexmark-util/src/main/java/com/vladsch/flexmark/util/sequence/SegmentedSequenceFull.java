@@ -181,6 +181,8 @@ public final class SegmentedSequenceFull extends BasedSequenceImpl implements Re
         int index = 0;
         for (Object part : builder) {
             if (part instanceof Range) {
+                if (((Range) part).isEmpty()) continue;
+
                 int iMax = ((Range) part).getEnd();
                 for (int i = ((Range) part).getStart(); i < iMax; i++) {
                     baseOffsets[index++] = i;
@@ -206,7 +208,7 @@ public final class SegmentedSequenceFull extends BasedSequenceImpl implements Re
         if (baseSeq.isOption(O_COLLECT_SEGMENTED_STATS)) {
             SegmentedSequenceStats stats = baseSeq.getOption(SEGMENTED_STATS);
             if (stats != null) {
-                stats.addStats(builder.size(), builder.getTextLength(), builder.getTextSegments(), length, startOffset, endOffset);
+                stats.addStats(builder.noAnchorsSize(), builder.getTextLength(), builder.getTextSegments(), length, startOffset, endOffset);
             }
         }
 

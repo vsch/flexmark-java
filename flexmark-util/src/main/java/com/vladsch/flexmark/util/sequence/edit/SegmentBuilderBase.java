@@ -22,6 +22,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
     protected @NotNull int[] myParts = EMPTY_PARTS;
     protected int myPartsSize = 0;
+    protected int myAnchorsSize = 0;
 
     protected int myStartOffset = Range.NULL.getStart();
     protected int myEndOffset = Range.NULL.getEnd();
@@ -82,19 +83,16 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
     @Override
     public boolean isBaseSubSequenceRange() {
-        if (myPartsSize == 1 && !haveDanglingText()) {
-            Seg seg = lastSegOrNull();
-            return seg != null && seg.isBase() && seg.getStart() == myStartOffset && seg.getEnd() == myEndOffset;
-        }
-        return false;
+        return getBaseSubSequenceRange() != null;
     }
 
     @Nullable
     @Override
     public Range getBaseSubSequenceRange() {
         if (myPartsSize == 1 && !haveDanglingText()) {
-            Seg seg = lastSegOrNull();
-            if (seg != null && seg.isBase() && seg.getStart() == myStartOffset && seg.getEnd() == myEndOffset) {
+            Seg seg = getSeg(myPartsSize - 1);
+            if (seg.length() != 0 && myAnchorsSize == 1) seg = getSeg(myPartsSize - 2);
+            if (seg.isBase() && seg.getStart() == myStartOffset && seg.getEnd() == myEndOffset) {
                 return seg.getRange();
             }
         }
@@ -102,13 +100,18 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     @Override
-    public boolean hasOffsets() {
+    public boolean haveOffsets() {
         return myStartOffset <= myEndOffset;
     }
 
     @Override
     public int size() {
         return myPartsSize + (haveDanglingText() ? 1 : 0);
+    }
+
+    @Override
+    public int noAnchorsSize() {
+        return size() - myAnchorsSize;
     }
 
     private int computeLength() {
@@ -220,6 +223,11 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         assert i + 1 < myParts.length;
 
 //        myParts[i] = startOffset;
+        // adjust anchor count
+        if (myParts[i] == endOffset) {
+            if (myParts[i] != myParts[i + 1]) myAnchorsSize++;
+        } else if (myParts[i] == myParts[i + 1]) myAnchorsSize--;
+
         myParts[i + 1] = endOffset;
     }
 
@@ -229,6 +237,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         myParts[i] = startOffset;
         myParts[i + 1] = endOffset;
         myPartsSize++;
+        if (startOffset == endOffset) myAnchorsSize++;
     }
 
     @Nullable
@@ -275,8 +284,20 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         assert resolveOverlap || text.length() > 0;
 
         Seg lastSeg = lastSegOrNull();
+        Range prevRange = lastSeg == null || !lastSeg.isBase() ? Range.NULL : lastSeg.getRange();
+
+        if (!isIncludeAnchors() && haveOffsets()) {
+            // need to use max with endOffset since anchors are not stored
+            if (prevRange.isNull() || prevRange.getEnd() < myEndOffset) prevRange = Range.emptyOf(myEndOffset);
+        }
+
+        if (!haveOffsets()) myStartOffset = segStart;
+
+        // NOTE: cannot incorporate segEnd if overlap is being resolved
+        if (!resolveOverlap) myEndOffset = Math.max(myEndOffset, segEnd);
+
         Object[] parts = {
-                lastSeg == null ? Range.NULL : lastSeg.getRange(),
+                prevRange,
                 text,
                 nullNextRange ? Range.NULL : Range.of(segStart, segEnd),
         };
@@ -288,9 +309,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         if (Arrays.equals(optimizedText, originalParts)) {
             // nothing changed, make sure it was not called to resolve overlap
             assert !resolveOverlap;
-
-            if (!hasOffsets()) myStartOffset = segStart;
-            myEndOffset = segEnd;
 
             if (segEnd > segStart || isIncludeAnchors()) {
                 // NOTE: only commit text if adding real range after it
@@ -310,10 +328,11 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
             myLength -= text.length();
             myText.delete(myImmutableOffset, myText.length());
 
-            if (lastSeg != null) {
+            if (lastSeg != null && lastSeg.isBase()) {
                 // remove last seg from parts, it will be added on return
                 myLength -= lastSeg.length();
                 myPartsSize--;
+                if (lastSeg.length() == 0) myAnchorsSize--;
             }
 
             int iMax = optimizedText.length;
@@ -339,10 +358,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
                             throw new IllegalStateException(String.format("Accumulated range [%d, %d) overlaps Transformed Range[%d]: [%d, %d)", optStartOffset, optEndOffset, i, optRangeStart, optRangeEnd));
                         }
 
-                        // adjust offsets since they could have expanded
-                        myStartOffset = Math.min(myStartOffset, optRangeStart);
-                        myEndOffset = Math.max(myEndOffset, optRangeEnd);
-
                         optEndOffset = Math.max(optEndOffset, optRangeEnd);
 
                         boolean haveDanglingText = haveDanglingText();
@@ -350,6 +365,10 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
                         if (haveDanglingText && resolveOverlap) {
                             processParts(optRangeStart, optRangeEnd, false, false, this::optimizeText);
                         } else {
+                            // adjust offsets since they could have expanded
+                            myStartOffset = Math.min(myStartOffset, optRangeStart);
+                            myEndOffset = Math.max(myEndOffset, optRangeEnd);
+
                             if (optRangeStart != optRangeEnd || isIncludeAnchors()) {
                                 if (haveDanglingText) {
                                     commitText();
@@ -423,14 +442,13 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
         int rangeSpan = endOffset - startOffset;
         if (rangeSpan == 0 && (!isIncludeAnchors() || startOffset < myEndOffset)) {
-            if (!hasOffsets()) myStartOffset = startOffset;
-
             if (startOffset >= myEndOffset) {
                 // can optimize text
-                myEndOffset = startOffset;
-
                 if (haveDanglingText()) {
                     processParts(startOffset, endOffset, false, false, this::optimizeText);
+                } else {
+                    if (!haveOffsets()) myStartOffset = startOffset;
+                    myEndOffset = startOffset;
                 }
             }
             //noinspection unchecked
@@ -439,16 +457,14 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
         if (myEndOffset > startOffset) {
             // overlap
-            myEndOffset = Math.max(myEndOffset, endOffset);
-
             processParts(startOffset, endOffset, true, false, this::handleOverlap);
         } else if (myEndOffset == startOffset) {
-            myEndOffset = endOffset;
 
             // adjacent, merge the two if no text between them
             if (haveDanglingText()) {
                 processParts(startOffset, endOffset, false, false, this::optimizeText);
             } else {
+                myEndOffset = endOffset;
                 myLength += rangeSpan;
 
                 if (myPartsSize == 0) {
@@ -461,12 +477,12 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
             }
         } else {
             // disjoint
-            if (!hasOffsets()) myStartOffset = startOffset;
-            myEndOffset = endOffset;
 
             if (haveDanglingText()) {
                 processParts(startOffset, endOffset, false, false, this::optimizeText);
             } else {
+                if (!haveOffsets()) myStartOffset = startOffset;
+                myEndOffset = endOffset;
                 myLength += rangeSpan;
                 addSeg(startOffset, endOffset);
             }
@@ -520,7 +536,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
             throw new IllegalArgumentException("baseSequence length() must be at least " + myEndOffset + ", got: " + chars.length());
         }
 
-        if (haveDanglingText() && hasOffsets()) {
+        if (haveDanglingText() && haveOffsets()) {
             processParts(myEndOffset, myEndOffset, false, true, this::optimizeText);
         }
 
@@ -560,7 +576,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     public String toStringPrep() {
-        if (haveDanglingText() && hasOffsets()) {
+        if (haveDanglingText() && haveOffsets()) {
             processParts(myEndOffset, myEndOffset, false, true, this::optimizeText);
         }
         return toString();
@@ -571,7 +587,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         DelimitedBuilder sb = new DelimitedBuilder(", ");
         sb.append(this.getClass().getSimpleName()).append("{");
 
-        if (hasOffsets()) {
+        if (haveOffsets()) {
             sb.append("[").append(myStartOffset).mark()
                     .append(myEndOffset).unmark()
                     .append(")").mark();
@@ -585,7 +601,13 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 //        }
 //
         SegmentStats committedStats = myStats.committedCopy();
-        sb.append(committedStats).mark().append("l=").append(myLength).mark();
+        sb.append(committedStats).mark()
+                .append("l=").append(myLength).mark()
+                .append("sz=").append(size()).mark()
+                .append("na=").append(noAnchorsSize())
+        ;
+
+        if (size() > 0) sb.append(": ");
 
         int iMax = myPartsSize;
         for (int i = 0; i < iMax; i++) {

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.SegmentedSequenceStats;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
@@ -15,10 +16,19 @@ import org.jetbrains.annotations.Nullable;
 public interface BasedOptionsHolder {
     int O_COLLECT_SEGMENTED_STATS = 0x0001;     // set if segmented stats collector key is set to non-null value
     int O_COLLECT_FIRST256_STATS = 0x0002;      // collect statistics for segments sequence on chars < code 256
+    int O_NO_ANCHORS = 0x0004;                  // do not include anchors in segment builder
     int O_RESERVED = 0x0000ffff;                // reserved for library use, extensions must use data keys since there is no way to manage bit allocations
     int O_APPLICATION = 0xffff0000;             // open for user application defined use, extensions must use data keys since there is no way to manage bit allocations
 
     NullableDataKey<SegmentedSequenceStats> SEGMENTED_STATS = new NullableDataKey<>("SEGMENTED_STATS", (SegmentedSequenceStats) null);
+
+    static String optionsToString(int options) {
+        DelimitedBuilder out = new DelimitedBuilder(", ");
+        if ((options & O_COLLECT_SEGMENTED_STATS) != 0) out.append("O_COLLECT_SEGMENTED_STATS").mark();
+        if ((options & O_COLLECT_FIRST256_STATS) != 0) out.append("O_COLLECT_FIRST256_STATS").mark();
+        if ((options & O_NO_ANCHORS) != 0) out.append("O_NO_ANCHORS").mark();
+        return out.toString();
+    }
 
     /**
      * Options test for options for this sequence
@@ -36,8 +46,7 @@ public interface BasedOptionsHolder {
      * @param dataKey in options
      * @return true if data key is available
      */
-    @Nullable
-    <T> T getOption(DataKeyBase<T> dataKey);
+    @Nullable <T> T getOption(DataKeyBase<T> dataKey);
 
     /**
      * Options holder, default has none, only available on BasedSequenceWithOptions

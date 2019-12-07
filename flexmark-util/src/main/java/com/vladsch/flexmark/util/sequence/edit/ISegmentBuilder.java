@@ -17,12 +17,13 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
     boolean isEmpty();
     boolean isBaseSubSequenceRange();
     @Nullable Range getBaseSubSequenceRange();
-    boolean hasOffsets();
+    boolean haveOffsets();
     int getSpan();
     int getStartOffset();
     int getEndOffset();
 
     int size();
+    int noAnchorsSize();
     int length();
 
     boolean isTrackTextFirst256();

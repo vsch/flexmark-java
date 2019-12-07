@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
@@ -55,16 +56,17 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
         if (parts.length != 3 || !(parts[0] instanceof Range && parts[1] instanceof CharSequence && parts[2] instanceof Range)) return parts;
 
         final @NotNull Range originalPrev = (Range) parts[0];
-        @NotNull CharSequence text = (CharSequence) parts[1];
+        @NotNull CharSequence originalText = (CharSequence) parts[1];
         final @NotNull Range originalNext = (Range) parts[2];
 
         // optimizer already applied
-        if (originalPrev.isNull() && originalNext.isNull() || text.length() == 0) return parts;
+        final int textLength = originalText.length();
+        if (originalPrev.isNull() && originalNext.isNull() || textLength == 0) return parts;
 
-        final int textLength = text.length();
         final int charsLength = chars.length();
 
         @NotNull Range prevRange = originalPrev;
+        @NotNull CharSequence text = originalText;
         @NotNull Range nextRange = originalNext;
 
         prevEolPos = -1;
@@ -129,7 +131,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
             }
         }
 
-        assert nextPos <= textLength;
+        assert nextPos <= textLength : "prevRange: " + originalPrev + ", '"+ Utils.escapeJavaString(text)+"', nextRange: " + originalNext;
 
         int matchedPrev = prevPos;
         int matchedNext = textLength - nextPos;
@@ -141,7 +143,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
             // this cannot happen with one range match only. It would mean we matched more chars than are available between ranges without both ranges matching these from each end
             // overlaps can only occur when string contains sequence that can be matched by both ranges. Otherwise match ends at least one char before other range begins because there is no match
             // otherwise the range would match from the other end.
-            assert matchedNext > 0 && matchedPrev > 0;
+            assert matchedNext > 0 && matchedPrev > 0 : "prevRange: " + originalPrev + ", '"+ Utils.escapeJavaString(text)+"', nextRange: " + originalNext;
 
             // the two positions may not overlap but the matches together may exceed the span between ranges
             switch (myAnchor) {
