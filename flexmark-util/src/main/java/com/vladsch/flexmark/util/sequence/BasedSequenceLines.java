@@ -209,7 +209,7 @@ public class BasedSequenceLines implements List<CharSequence> {
         ArrayList<BasedSequence> sequences = new ArrayList<>(lines.size());
         updateSegments(sequences);
         adjustLastLineEOL(sequences, lastLineEOL);
-        return SegmentedSequenceFull.of(base, segments);
+        return SegmentedSequence.create(base, segments);
     }
 
     @Override

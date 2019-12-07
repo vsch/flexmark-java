@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -121,7 +121,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
                     codeBlock.setCharsFromContent();
                     block.appendChild(codeBlock);
                 } else {
-                    Text codeBlock = new Text(SegmentedSequenceFull.of(chars, segments));
+                    Text codeBlock = new Text(SegmentedSequence.create(chars, segments));
                     block.appendChild(codeBlock);
                 }
             } else {

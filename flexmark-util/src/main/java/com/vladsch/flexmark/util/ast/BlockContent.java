@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -101,7 +101,7 @@ public class BlockContent {
             throw new IndexOutOfBoundsException("endLine must not be greater than line cardinality");
         }
 
-        return SegmentedSequenceFull.of(lines.get(0), lines.subList(startLine, endLine));
+        return SegmentedSequence.create(lines.get(0), lines.subList(startLine, endLine));
     }
 
     public @NotNull String getString() {

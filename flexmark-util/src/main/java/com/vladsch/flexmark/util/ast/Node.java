@@ -4,10 +4,7 @@ import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.Range;
-import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
+import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.visitor.AstNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -780,7 +777,7 @@ public abstract class Node {
                 }
             }
 
-            return segments.size() == 1 ? segments.get(0) : SegmentedSequenceFull.of(segments.get(0), segments);
+            return segments.size() == 1 ? segments.get(0) : SegmentedSequence.create(segments.get(0), segments);
         } else {
             return firstChild.baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
         }
@@ -859,7 +856,7 @@ public abstract class Node {
      */
     public @NotNull BasedSequence getCharsFromSegments() {
         @NotNull BasedSequence[] segments = getSegmentsForChars();
-        return segments.length == 0 ? BasedSequence.NULL: SegmentedSequenceFull.of(segments[0], Arrays.asList(segments));
+        return segments.length == 0 ? BasedSequence.NULL: SegmentedSequence.create(segments[0], Arrays.asList(segments));
     }
 
     /**

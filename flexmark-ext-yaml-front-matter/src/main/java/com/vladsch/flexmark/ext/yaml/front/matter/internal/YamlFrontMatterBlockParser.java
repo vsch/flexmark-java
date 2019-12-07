@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -104,7 +104,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
                     matcher = REGEX_METADATA_LITERAL.matcher(line);
                     if (matcher.matches()) {
                         if (currentValues.size() == 1) {
-                            BasedSequence combined = SegmentedSequenceFull.of(currentValues.get(0), PrefixedSubSequence.prefixOf("\n", line.subSequence(matcher.start(1), matcher.end(1)).trim()));
+                            BasedSequence combined = SegmentedSequence.create(currentValues.get(0), PrefixedSubSequence.prefixOf("\n", line.subSequence(matcher.start(1), matcher.end(1)).trim()));
                             currentValues.set(0, combined);
                         } else {
                             currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)).trim());

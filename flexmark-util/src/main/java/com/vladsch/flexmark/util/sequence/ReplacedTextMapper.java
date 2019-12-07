@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * <p>
  * when isModified() returns true then the text mapper is already used and nested replacements need to be applied
  */
+// REFACTOR: to use segment builder with ISegmentBuilder.F_INCLUDE_ANCHORS and use segment information to find original offsets
 public class ReplacedTextMapper {
     private ReplacedTextMapper parent;
     private BasedSequence original;
@@ -57,7 +58,7 @@ public class ReplacedTextMapper {
 
     private void finalizeMods() {
         if (replacedSequence == null) {
-            replacedSequence = replacedSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequenceFull.of(original, replacedSegments);
+            replacedSequence = replacedSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequence.create(original, replacedSegments);
         }
     }
 

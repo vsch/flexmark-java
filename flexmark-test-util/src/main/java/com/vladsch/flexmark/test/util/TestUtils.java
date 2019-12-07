@@ -9,10 +9,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.RichSequenceImpl;
-import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import com.vladsch.flexmark.util.sequence.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
@@ -268,7 +265,7 @@ public class TestUtils {
                 lastPos = end + sourceIndent.length();
             }
 
-            result = SegmentedSequenceFull.of(input, segments);
+            result = SegmentedSequence.create(input, segments);
         }
         return result;
     }

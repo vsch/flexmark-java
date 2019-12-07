@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,9 +41,9 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
 
     /**
      * Get the start in the base sequence for this segmented sequence.
-     *
+     * <p>
      * NOTE: this is the startOffset determined when the sequence was built from segments and may differ from
-     *    the startOffset of the first based segment in this sequence
+     * the startOffset of the first based segment in this sequence
      *
      * @return start in base sequence
      */
@@ -54,9 +53,9 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
 
     /**
      * Get the end offset in the base sequence
-     *
+     * <p>
      * NOTE: this is the endOffset determined when the sequence was built from segments and may differ from
-     *    the endOffset of the last based segment in this sequence
+     * the endOffset of the last based segment in this sequence
      *
      * @return end in base sequence
      */
@@ -104,9 +103,12 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     }
 
     /**
-     * removed empty and return BasedSequence.NULL when no segments which is the logical result however,
-     * this will mean empty node text in FencedCodeBlock will now return NULL sequence instead of an empty
-     * sequence from the document.
+     * Use {@link BasedSequence#getBuilder()} and then {@link BasedSequenceBuilder#addAll(Iterable)} or
+     * if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder}
+     * to construct segments directly.
+     * <p>
+     * Use only if you absolutely need to use this old method because it calls the builder.addAll() for all the segments
+     * anyway.
      * <p>
      * If you need the location where content would have been use the FencedCodeBlock.getOpeningMarker().getEndOffset() + 1
      *
@@ -115,16 +117,13 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
      * @return based sequence of segments. Result is a sequence which looks like
      *         all the segments were concatenated, while still maintaining
      *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
-     * @deprecated use {@link BasedSequence#getBuilder()} and then {@link BasedSequenceBuilder#addAll(Iterable)} or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder} to construct segments directly.
      */
-    @Deprecated
-    public static BasedSequence of(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
+    public static BasedSequence create(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
         return create(basedSequence.getBuilder().addAll(segments));
     }
 
-    @Deprecated
-    public static BasedSequence of(BasedSequence... segments) {
-        return segments.length == 0 ? BasedSequence.NULL : of(segments[0], new ArrayIterable<>(segments));
+    public static BasedSequence create(BasedSequence... segments) {
+        return segments.length == 0 ? BasedSequence.NULL : create(segments[0], new ArrayIterable<>(segments));
     }
 
     public static BasedSequence create(BasedSequenceBuilder builder) {
@@ -135,5 +134,24 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
             return SegmentedSequenceFull.create(builder.getSegmentBuilder());
         }
         return BasedSequence.NULL;
+    }
+
+    /**
+     * @param basedSequence base sequence for the segments
+     * @param segments      list of based sequences to put into a based sequence
+     * @return based sequence of segments. Result is a sequence which looks like
+     *         all the segments were concatenated, while still maintaining
+     *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
+     * @deprecated use {@link BasedSequence#getBuilder()} and then {@link BasedSequenceBuilder#addAll(Iterable)} or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder} to construct segments directly.
+     *         If you absolutely need to use the old method then use {@link #create(BasedSequence, Iterable)}
+     */
+    @Deprecated
+    public static BasedSequence of(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
+        return create(basedSequence, segments);
+    }
+
+    @Deprecated
+    public static BasedSequence of(BasedSequence... segments) {
+        return create(segments);
     }
 }
