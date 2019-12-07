@@ -61,6 +61,13 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
         return mySegments;
     }
 
+    @Nullable
+    @Override
+    public BasedSequence getBaseSubSequence() {
+        Range range = mySegments.getBaseSubSequenceRange();
+        return range == null ? null : myBase.subSequence(range.getStart(), range.getEnd());
+    }
+
     @NotNull
     @Override
     public BasedSequenceBuilder subContext() {
@@ -148,7 +155,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @Override
     public BasedSequence toSequence() {
         if (myBasedSequence == null) {
-            myBasedSequence = SegmentedSequence.of(mySegments);
+            myBasedSequence = SegmentedSequence.of(this);
         }
         return myBasedSequence;
     }

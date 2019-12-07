@@ -16,7 +16,7 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
 
     boolean isEmpty();
     boolean isBaseSubSequenceRange();
-    @Nullable Range baseSubSequenceRange();
+    @Nullable Range getBaseSubSequenceRange();
     boolean hasOffsets();
     int getSpan();
     int getStartOffset();

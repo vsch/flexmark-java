@@ -48,6 +48,12 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
+    public RichSequence getBaseSubSequence() {
+        return toSequence();
+    }
+
+    @NotNull
+    @Override
     public RichSequenceBuilder addAll(Iterable<? extends CharSequence> sequences) {
         for (CharSequence chars : sequences) {
             add(chars);

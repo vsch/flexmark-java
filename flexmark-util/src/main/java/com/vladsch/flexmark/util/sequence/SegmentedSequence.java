@@ -113,34 +113,20 @@ public final class SegmentedSequence extends BasedSequenceImpl implements Replac
      */
     @Deprecated
     public static BasedSequence of(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
-        BasedSequence base = basedSequence.getBaseSequence();
-        BasedSequenceBuilder builder = base.getBuilder();
+        return of(basedSequence.getBaseSequence().getBuilder().addAll(segments));
+    }
 
-        for (BasedSequence sequence : segments) {
-            builder.add(sequence);
-        }
-
-        BasedSegmentBuilder segmentBuilder = builder.getSegmentBuilder();
-        Range range = segmentBuilder.baseSubSequenceRange();
-        if (range != null) {
-            return base.subSequence(range.getStart(), range.getEnd());
+    public static BasedSequence of(BasedSequenceBuilder builder) {
+        BasedSequence baseSubSequence = builder.getBaseSubSequence();
+        if (baseSubSequence != null) {
+            return baseSubSequence;
         } else if (!builder.isEmpty()) {
-            return new SegmentedSequence(segmentBuilder);
+            return new SegmentedSequence(builder.getSegmentBuilder());
         }
         return BasedSequence.NULL;
     }
 
-    public static BasedSequence of(BasedSegmentBuilder builder) {
-        Range range = builder.baseSubSequenceRange();
-        if (range != null) {
-            return builder.getBaseSequence().subSequence(range.getStart(), range.getEnd());
-        } else if (!builder.isEmpty()) {
-            return new SegmentedSequence(builder);
-        }
-        return BasedSequence.NULL;
-    }
-
-    private SegmentedSequence(BasedSegmentBuilder builder) {
+    SegmentedSequence(IBasedSegmentBuilder<?> builder) {
         super(0);
 
         this.baseSeq = builder.getBaseSequence();

@@ -5,6 +5,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface SequenceBuilder<T extends SequenceBuilder<T, S>, S extends IRichSequence<S>> {
+    /**
+     * NOTE: returns non-null value if the underlying {@link IBasedSegmentBuilder#getBaseSubSequenceRange()} returns non-null value
+     *
+     * @return sub-sequence of base representing the single segment or null if sequence not representable by a single subsequence
+     */
+    @Nullable S getBaseSubSequence();
     @NotNull T subContext();
     @NotNull T addAll(Iterable<? extends CharSequence> sequences);
     @NotNull T add(@Nullable CharSequence chars);

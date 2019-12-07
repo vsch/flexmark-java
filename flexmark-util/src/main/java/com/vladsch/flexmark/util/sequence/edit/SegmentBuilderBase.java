@@ -91,7 +91,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
     @Nullable
     @Override
-    public Range baseSubSequenceRange() {
+    public Range getBaseSubSequenceRange() {
         if (myPartsSize == 1 && !haveDanglingText()) {
             Seg seg = lastSegOrNull();
             if (seg != null && seg.isBase() && seg.getStart() == myStartOffset && seg.getEnd() == myEndOffset) {
