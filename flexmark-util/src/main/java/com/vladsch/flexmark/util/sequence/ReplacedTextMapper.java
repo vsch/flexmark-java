@@ -57,7 +57,7 @@ public class ReplacedTextMapper {
 
     private void finalizeMods() {
         if (replacedSequence == null) {
-            replacedSequence = replacedSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequence.of(original, replacedSegments);
+            replacedSequence = replacedSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequenceFull.of(original, replacedSegments);
         }
     }
 

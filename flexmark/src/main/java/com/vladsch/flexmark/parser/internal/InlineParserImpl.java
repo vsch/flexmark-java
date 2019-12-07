@@ -21,7 +21,7 @@ import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -230,7 +230,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                 node = node.getNext();
                 unlink.unlink();
             }
-            BasedSequence literal = SegmentedSequence.of(first.getChars(), sb);
+            BasedSequence literal = SegmentedSequenceFull.of(first.getChars(), sb);
             first.setChars(literal);
         }
     }
@@ -455,7 +455,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         node.setChars(input.subSequence(index, index + 1));
 
         if (currentText != null) {
-            BasedSequence prevText = SegmentedSequence.of(node.getChars(), currentText);
+            BasedSequence prevText = SegmentedSequenceFull.of(node.getChars(), currentText);
             currentText = null;
 
             // see if need to trim some off the end

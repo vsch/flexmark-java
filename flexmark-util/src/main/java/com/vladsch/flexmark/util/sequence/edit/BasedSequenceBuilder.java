@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.sequence.edit;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -155,7 +156,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     @Override
     public BasedSequence toSequence() {
         if (myBasedSequence == null) {
-            myBasedSequence = SegmentedSequence.of(this);
+            myBasedSequence = SegmentedSequence.create(this);
         }
         return myBasedSequence;
     }

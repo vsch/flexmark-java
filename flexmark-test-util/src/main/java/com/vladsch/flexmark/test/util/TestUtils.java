@@ -11,7 +11,7 @@ import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RichSequenceImpl;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -268,7 +268,7 @@ public class TestUtils {
                 lastPos = end + sourceIndent.length();
             }
 
-            result = SegmentedSequence.of(input, segments);
+            result = SegmentedSequenceFull.of(input, segments);
         }
         return result;
     }

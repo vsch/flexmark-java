@@ -13,7 +13,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 
 import java.util.Arrays;
 
@@ -55,7 +55,7 @@ public class FormatterWithMods2 {
         private void visit(LinkNodeBase node) {
             if (node.getPageRef().startsWith("/")) {
                 node.setUrlChars(PrefixedSubSequence.prefixOf("https:", node.getPageRef()));
-                node.setChars(SegmentedSequence.of(node.getChars(), Arrays.asList(node.getSegmentsForChars())));
+                node.setChars(SegmentedSequenceFull.of(node.getChars(), Arrays.asList(node.getSegmentsForChars())));
             }
         }
     }

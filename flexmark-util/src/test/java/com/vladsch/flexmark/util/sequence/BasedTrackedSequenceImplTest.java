@@ -951,7 +951,7 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSequence inserted = sequence.insert(10, "^");
         assertEquals("0123456789^", inserted.toString());
-        assertTrue(inserted instanceof SegmentedSequence);
+        assertTrue(inserted instanceof SegmentedSequenceFull);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
         assertEquals(0, inserted.getIndexOffset(0));
         assertEquals(1, inserted.getIndexOffset(1));
@@ -968,7 +968,7 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSequence inserted = sequence.insert(1, "^");
         assertEquals("0^123456789", inserted.toString());
-        assertTrue(inserted instanceof SegmentedSequence);
+        assertTrue(inserted instanceof SegmentedSequenceFull);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
         assertEquals(0, inserted.getIndexOffset(0));
         assertEquals(-1, inserted.getIndexOffset(1));
@@ -985,7 +985,7 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSequence inserted = sequence.insert(5, "^");
         assertEquals("01234^56789", inserted.toString());
-        assertTrue(inserted instanceof SegmentedSequence);
+        assertTrue(inserted instanceof SegmentedSequenceFull);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
         assertEquals(0, inserted.getIndexOffset(0));
         assertEquals(1, inserted.getIndexOffset(1));
@@ -1003,7 +1003,7 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSequence inserted = sequence.insert(9, "^");
         assertEquals("012345678^9", inserted.toString());
-        assertTrue(inserted instanceof SegmentedSequence);
+        assertTrue(inserted instanceof SegmentedSequenceFull);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
         assertEquals(0, inserted.getIndexOffset(0));
         assertEquals(1, inserted.getIndexOffset(1));

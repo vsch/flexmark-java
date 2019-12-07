@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.Range;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.visitor.AstNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -752,7 +752,7 @@ public abstract class Node {
         Node last = child;
 
         while (child != null) {
-            if (child.getChars() instanceof SegmentedSequence || child.getChars() instanceof PrefixedSubSequence) {
+            if (child.getChars() instanceof SegmentedSequenceFull || child.getChars() instanceof PrefixedSubSequence) {
                 // this one will cause problems
                 if (segments == null) segments = new ArrayList<>();
                 if (last != child) {
@@ -780,7 +780,7 @@ public abstract class Node {
                 }
             }
 
-            return segments.size() == 1 ? segments.get(0) : SegmentedSequence.of(segments.get(0), segments);
+            return segments.size() == 1 ? segments.get(0) : SegmentedSequenceFull.of(segments.get(0), segments);
         } else {
             return firstChild.baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
         }
@@ -859,7 +859,7 @@ public abstract class Node {
      */
     public @NotNull BasedSequence getCharsFromSegments() {
         @NotNull BasedSequence[] segments = getSegmentsForChars();
-        return segments.length == 0 ? BasedSequence.NULL: SegmentedSequence.of(segments[0], Arrays.asList(segments));
+        return segments.length == 0 ? BasedSequence.NULL: SegmentedSequenceFull.of(segments[0], Arrays.asList(segments));
     }
 
     /**

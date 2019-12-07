@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import org.jetbrains.annotations.NotNull;
 import org.nibor.autolink.LinkExtractor;
 import org.nibor.autolink.LinkSpan;
@@ -96,7 +96,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
                     typoGraphic = typoGraphic.getNext();
                 }
 
-                original = SegmentedSequence.of(node.getChars(), combinedSequences);
+                original = SegmentedSequenceFull.of(node.getChars(), combinedSequences);
             }
         }
 

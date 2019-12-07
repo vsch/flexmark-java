@@ -12,7 +12,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 
 import java.util.Arrays;
 
@@ -54,7 +54,7 @@ public class FormatterWithMods {
         private void visit(LinkNodeBase node) {
             if (node.getPageRef().endsWith("replace.com")) {
                 node.setUrlChars(PrefixedSubSequence.prefixOf("http://replaced.com", node.getPageRef().getEmptyPrefix()));
-                node.setChars(SegmentedSequence.of(node.getChars(), Arrays.asList(node.getSegmentsForChars())));
+                node.setChars(SegmentedSequenceFull.of(node.getChars(), Arrays.asList(node.getSegmentsForChars())));
             }
         }
     }

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -81,13 +81,13 @@ public abstract class ContentNode extends Node implements Content {
     @NotNull
     @Override
     public BasedSequence getContentChars() {
-        return lineSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequence.of(lineSegments.get(0), lineSegments);
+        return lineSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequenceFull.of(lineSegments.get(0), lineSegments);
     }
 
     @NotNull
     @Override
     public BasedSequence getContentChars(int startLine, int endLine) {
-        return lineSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequence.of(lineSegments.get(0), getContentLines(startLine, endLine));
+        return lineSegments.isEmpty() ? BasedSequence.NULL : SegmentedSequenceFull.of(lineSegments.get(0), getContentLines(startLine, endLine));
     }
 
     public void setContentLines(@NotNull List<BasedSequence> contentLines) {

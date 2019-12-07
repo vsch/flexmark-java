@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -140,7 +140,7 @@ public class LightInlineParserImpl implements LightInlineParser {
     @Override
     public boolean flushTextNode() {
         if (currentText != null) {
-            block.appendChild(new Text(SegmentedSequence.of(input, currentText)));
+            block.appendChild(new Text(SegmentedSequenceFull.of(input, currentText)));
             currentText = null;
             return true;
         }
