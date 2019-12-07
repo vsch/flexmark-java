@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,12 +25,12 @@ public class SegmentedSequenceStats {
         }
 
         public void add(int segments, int nonBased, int nonBasedSeg, int length, int start, int end) {
-            assert segments >= 1 : "segments: " + segments + " < 1";
-            assert nonBased >= 0 : "nonBased: " + nonBased + " < 0";
-            assert nonBasedSeg >= (nonBased > 0 ? 1 : 0) && nonBasedSeg <= nonBased : "nonBasedSeg: " + nonBasedSeg + " not in [" + (nonBased > 0 ? 1 : 0) + ", " + nonBased + "]";
-            assert length >= 0 : "length: " + length + " < 0";
-            assert end >= 0 : " end:" + end + " < 0 ";
-            assert start >= 0 && start <= end : " start:" + start + " not in [" + 0 + ", " + end + "]";
+//            assert segments >= 1 : "segments: " + segments + " < 1";
+//            assert nonBased >= 0 : "nonBased: " + nonBased + " < 0";
+//            assert nonBasedSeg >= (nonBased > 0 ? 1 : 0) && nonBasedSeg <= nonBased : "nonBasedSeg: " + nonBasedSeg + " not in [" + (nonBased > 0 ? 1 : 0) + ", " + nonBased + "]";
+//            assert length >= 0 : "length: " + length + " < 0";
+//            assert end >= 0 : " end:" + end + " < 0 ";
+//            assert start >= 0 && start <= end : " start:" + start + " not in [" + 0 + ", " + end + "]";
 
             count++;
             this.segStats.add(segments);
@@ -74,6 +73,7 @@ public class SegmentedSequenceStats {
         }
     }
 
+    private ArrayList<SegmentedSequenceStats.StatsEntry> myAggregatedStats;
     final private HashMap<StatsEntry, StatsEntry> myStats = new HashMap<>();
 
     private SegmentedSequenceStats() {
@@ -146,89 +146,79 @@ public class SegmentedSequenceStats {
         return out.toString();
     }
 
-    private int findLastLess(int[] multiples, int value) {
-        int lastMultiple = 1;
-        for (int m : multiples) {
-            if (m > value) return lastMultiple;
-        }
-        return multiples[multiples.length - 1];
-    }
-
     @NotNull
     public String getAggregatedStatsText() {
         return getStatsText(getAggregatedStats());
     }
 
+    static final ArrayList<Integer> AGGR_STEPS = new ArrayList<>();
+    static {
+        AGGR_STEPS.add(1);
+        AGGR_STEPS.add(2);
+        AGGR_STEPS.add(3);
+        AGGR_STEPS.add(4);
+        AGGR_STEPS.add(5);
+        AGGR_STEPS.add(6);
+        AGGR_STEPS.add(7);
+        AGGR_STEPS.add(8);
+        AGGR_STEPS.add(15);
+        AGGR_STEPS.add(16);
+        AGGR_STEPS.add(256);
+
+        int step = 65536;
+        int start = 65536;
+        int nextStep = 65536 * 16;
+        for (int i = start; i < nextStep; i += step) AGGR_STEPS.add(i);
+    }
+
+    static final int MAX_BUCKETS = AGGR_STEPS.size();
+
     @NotNull
     public List<StatsEntry> getAggregatedStats() {
-        List<StatsEntry> entries = getStats();
-        ArrayList<StatsEntry> aggr = new ArrayList<>();
-        ArrayList<Range> ranges = new ArrayList<>();
+        if (myAggregatedStats == null) {
+            List<StatsEntry> entries = getStats();
+            myAggregatedStats = new ArrayList<>(MAX_BUCKETS);
 
-        ArrayList<Integer> steps = new ArrayList<>();
+            int currentBucket = MAX_BUCKETS - 1;
+            int currentBucketSegments = AGGR_STEPS.get(currentBucket);
 
-        // @formatter:off
-        int step = 1; int start = 1; int nextStep = 16;
-//        for (int i = start; i < nextStep; i += step) steps.add(i);
-//        start = 16; step = 16; nextStep = 256;
-//        for (int i = start; i < nextStep; i += step) steps.add(i);
-        steps.add(1);
-        steps.add(2);
-        steps.add(3);
-        steps.add(4);
-        steps.add(5);
-        steps.add(6);
-        steps.add(7);
-        steps.add(8);
-        steps.add(15);
-        steps.add(16);
-        steps.add(256);
-        start = 65536; step = 65536; nextStep = 65536*16;
-        for (int i = start; i < nextStep; i += step) steps.add(i);
-        // @formatter:on
+            int iMax = entries.size();
+            for (int i = 0; i < MAX_BUCKETS; i++) {
+                myAggregatedStats.add(null);
+            }
 
-        int buckets = steps.size();
-        ArrayList<SegmentedSequenceStats.StatsEntry> aggregated = new ArrayList<>(buckets);
-        int iMax = entries.size();
-
-        int currentBucket = buckets - 1;
-        int currentBucketSegments = steps.get(currentBucket);
-
-        for (int i = 0; i < buckets; i++) {
-            aggregated.add(null);
-        }
-
-        for (int i = iMax; i-- > 0; ) {
-            StatsEntry entry = entries.get(i);
-            if (entry.segments < currentBucketSegments) {
-                // find the next bucket to hold this entry
-                while (currentBucket > 0) {
-                    currentBucket--;
-                    currentBucketSegments = steps.get(currentBucket);
-                    if (entry.segments >= currentBucketSegments) break;
+            for (int i = iMax; i-- > 0; ) {
+                StatsEntry entry = entries.get(i);
+                if (entry.segments < currentBucketSegments) {
+                    // find the next bucket to hold this entry
+                    while (currentBucket > 0) {
+                        currentBucket--;
+                        currentBucketSegments = AGGR_STEPS.get(currentBucket);
+                        if (entry.segments >= currentBucketSegments) break;
+                    }
+                    assert currentBucket >= 0;
                 }
-                assert currentBucket >= 0;
+
+                if (entry.segments < currentBucketSegments) {
+                    int tmp = 0;
+                }
+
+                assert (entry.segments >= currentBucketSegments);
+
+                StatsEntry aggrEntry = myAggregatedStats.get(currentBucket);
+
+                if (aggrEntry == null) {
+                    aggrEntry = new StatsEntry(currentBucketSegments);
+                    myAggregatedStats.set(currentBucket, aggrEntry);
+                }
+
+                aggrEntry.add(entry);
             }
 
-            if (entry.segments < currentBucketSegments) {
-                int tmp = 0;
-            }
-
-            assert (entry.segments >= currentBucketSegments);
-
-            StatsEntry aggrEntry = aggregated.get(currentBucket);
-
-            if (aggrEntry == null) {
-                aggrEntry = new StatsEntry(currentBucketSegments);
-                aggregated.set(currentBucket, aggrEntry);
-            }
-
-            aggrEntry.add(entry);
+            myAggregatedStats.removeIf(Objects::isNull);
         }
 
-        aggregated.removeIf(Objects::isNull);
-
-        return aggregated;
+        return myAggregatedStats;
     }
 
     @NotNull

@@ -16,7 +16,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     protected final int startOffset;          // this sequence's start offset in base
     protected final int endOffset;            // this sequence's end offset in base
     protected final int length;               // length of this sequence
-    protected final boolean nonBaseChars;     // all non-base characters, offset by baseStartOffset. When baseOffsets[] < 0, take -ve - 1 to get index into this array
+    protected final boolean nonBaseChars;     // true if contains non-base chars
 
     protected SegmentedSequence(BasedSequence baseSeq, int startOffset, int endOffset, int length, boolean nonBaseChars) {
         super(0);
@@ -36,7 +36,8 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     @NotNull
     @Override
     final public BasedSequence getBaseSequence() {
-        return baseSeq.getBaseSequence();
+        assert baseSeq == baseSeq.getBaseSequence();
+        return baseSeq;
     }
 
     /**
@@ -143,7 +144,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
      *         all the segments were concatenated, while still maintaining
      *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
      * @deprecated use {@link BasedSequence#getBuilder()} and then {@link BasedSequenceBuilder#addAll(Iterable)} or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder} to construct segments directly.
-     *         If you absolutely need to use the old method then use {@link #create(BasedSequence, Iterable)}
+     *         If you absolutely need to use the old method then use {@link SegmentedSequenceFull#create(BasedSequence, Iterable)}
      */
     @Deprecated
     public static BasedSequence of(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
