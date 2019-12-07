@@ -238,6 +238,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * After recovering the EOL range, see if it can be expanded left/right to encompass more
       based chars from text on either side.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
++ [x] Add: segment builder text part stats for first256 and repeatedText, former if all chars in
+      part < 256, latter if all chars are the same. In preparation for storage optimized
+      segmented sequence impl.
 + [x] Fix: optimized `SegmentBuilder` temporarily to `SegmentBuilder2`:
   + [x] Change `TEXT` segments from `String` content to start/end being the -ve of start+1/end+1
         of the subsequence for this `TEXT` in `StringBuilder`
