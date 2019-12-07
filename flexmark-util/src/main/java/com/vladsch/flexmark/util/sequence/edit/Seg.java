@@ -14,9 +14,9 @@ import static com.vladsch.flexmark.util.Utils.escapeJavaString;
  */
 class Seg {
     final public static Seg NULL = new Seg(Range.NULL.getStart(), Range.NULL.getEnd());
-
-    // OPTIMIZE: can add N anchors from 0 to N for most frequent offset anchors
     final public static Seg ANCHOR_0 = new Seg(0, 0);
+    final public static int MAX_TEXT_OFFSET = Integer.MAX_VALUE >> 1;
+    final public static int F_TEXT_OPTION = Integer.MAX_VALUE & ~(MAX_TEXT_OFFSET);
 
     private final int myStart;
     private final int myEnd;
@@ -35,15 +35,35 @@ class Seg {
     }
 
     public int getTextStart() {
-        return -myStart - 1;
+        return getTextOffset(myStart);
+    }
+
+    public static int getTextOffset(int startOffset) {
+        return (-startOffset - 1) & MAX_TEXT_OFFSET;
     }
 
     public int getTextEnd() {
-        return -myEnd - 1;
+        return getTextOffset(myEnd);
+    }
+
+    public boolean isFirst256Start() {
+        return isFirst256Start(myStart);
+    }
+
+    public static boolean isFirst256Start(int start) {
+        return ((-start - 1) & F_TEXT_OPTION) != 0;
+    }
+
+    public boolean isRepeatedTextEnd() {
+        return isRepeatedTextEnd(myEnd);
+    }
+
+    public static boolean isRepeatedTextEnd(int end) {
+        return ((-end - 1) & F_TEXT_OPTION) != 0;
     }
 
     public boolean isText() {
-        return myStart < 0 && myEnd < 0 && myStart > myEnd;
+        return myStart < 0 && myEnd < 0 && (myStart & MAX_TEXT_OFFSET) > (myEnd & MAX_TEXT_OFFSET);
     }
 
     /**
@@ -71,7 +91,7 @@ class Seg {
      * @return length of this part in the sequence
      */
     public int length() {
-        return isBase() ? myEnd - myStart : isText() ? myStart - myEnd : 0;
+        return isBase() ? myEnd - myStart : isText() ? (myStart & MAX_TEXT_OFFSET) - (myEnd & MAX_TEXT_OFFSET) : 0;
     }
 
     public String toString(@NotNull CharSequence allText) {
@@ -84,7 +104,7 @@ class Seg {
                 return "[" + myStart + ", " + myEnd + ")";
             }
         } else {
-            return "'" + escapeJavaString(allText.subSequence(getTextStart(), getTextEnd())) + "'";
+            return (isFirst256Start() ? "a:" : "") + (isRepeatedTextEnd() && length() > 1 ? length() + "x'" + escapeJavaString(allText.subSequence(getTextStart(), getTextStart() + 1)) + "'" : "'" + escapeJavaString(allText.subSequence(getTextStart(), getTextEnd())) + "'");
         }
     }
 
@@ -105,6 +125,21 @@ class Seg {
 
     @NotNull
     static Seg segOf(int startOffset, int endOffset) {
-        return new Seg(startOffset, endOffset);
+        return startOffset == 0 && endOffset == 0 ? ANCHOR_0 : new Seg(startOffset, endOffset);
+    }
+
+    static int getTextStart(int startOffset, boolean isFirst256) {
+        assert startOffset < MAX_TEXT_OFFSET;
+        return -(isFirst256 ? startOffset | F_TEXT_OPTION : startOffset) - 1;
+    }
+
+    static int getTextEnd(int startOffset, boolean isRepeatedText) {
+        assert startOffset < MAX_TEXT_OFFSET;
+        return -(isRepeatedText ? startOffset | F_TEXT_OPTION : startOffset) - 1;
+    }
+
+    @NotNull
+    static Seg textOf(int startOffset, int endOffset, boolean isFirst256, boolean isRepeatedText) {
+        return new Seg(getTextStart(startOffset, isFirst256), getTextEnd(endOffset, isRepeatedText));
     }
 }

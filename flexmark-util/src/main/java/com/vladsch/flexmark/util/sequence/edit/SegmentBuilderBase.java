@@ -388,7 +388,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     private void commitText() {
-        addSeg(-myImmutableOffset - 1, -myText.length() - 1);
+        addSeg(Seg.getTextStart(myImmutableOffset, myTextStats.isTextFirst256()), Seg.getTextEnd(myText.length(), myTextStats.isRepeatedText()));
         myImmutableOffset = myText.length();
         myStats.commitText();
         myTextStats.clear();
@@ -616,7 +616,8 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         }
 
         if (haveDanglingText()) {
-            sb.append("'" + escapeJavaString(myText.subSequence(myImmutableOffset, myText.length())) + "'").mark();
+            Seg part = Seg.textOf(myImmutableOffset, myText.length(), myTextStats.isTextFirst256(), myTextStats.isRepeatedText());
+            sb.append(part.toString(myText)).mark();
         }
 
         sb.unmark().append(" }");
