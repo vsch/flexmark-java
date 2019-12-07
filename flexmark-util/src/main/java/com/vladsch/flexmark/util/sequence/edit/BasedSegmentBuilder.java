@@ -63,7 +63,7 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
         } else if (range.getEnd() <= lastSeg.getEnd()) {
             // all contained within
             overlap = range;
-        } else  {
+        } else {
             assert range.getStart() < lastSeg.getEnd();
             overlap = range.withEnd(lastSeg.getEnd());
             after = range.withStart(lastSeg.getEnd());
@@ -75,7 +75,6 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
         // append overlap to text
         if (text.length() == 0) {
             parts[1] = myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString();
-
         } else {
             parts[1] = text.toString() + myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString();
         }
