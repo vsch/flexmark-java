@@ -51,10 +51,6 @@ public abstract class SeqSeg {
             this.flags = flags;
         }
 
-        public boolean hasSome(int flags) {
-            return (this.flags & flags) != 0;
-        }
-
         public boolean hasAll(int flags) {
             return (this.flags & flags) == flags;
         }
@@ -86,10 +82,6 @@ public abstract class SeqSeg {
         public boolean hasBytes() {
             return hasAll(TYPE_HAS_BYTES);
         }
-    }
-
-    public static boolean hasSome(int flags, int mask) {
-        return (flags & mask) != 0;
     }
 
     public boolean hasAll(int flags, int mask) {
