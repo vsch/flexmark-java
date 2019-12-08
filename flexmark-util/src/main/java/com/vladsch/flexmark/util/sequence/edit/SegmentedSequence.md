@@ -125,7 +125,7 @@ format of the segment:
   * 0b1100_0000: `REPEATED_SPACE`: `length`
   * 0b1110_0000: `REPEATED_EOL`: `length`
 * `SEG_BYTES`: encodes number of bytes used for segment's numeric values.
-  * 0b0001_xxxx: no bytes. If has startOffset then offset = xxxx, length = 0, if has only length then length = xxxx
+  * 0b0001_xxxx: no size/offset bytes. If has startOffset then offset = xxxx, length = 0, if has only length then length = xxxx, not valid if has both length and start offset
   * 0b0000_0000: 1 byte for start
   * 0b0000_0001: 2 byte for start
   * 0b0000_0010: 3 bytes for start

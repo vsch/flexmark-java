@@ -7,10 +7,9 @@ import static com.vladsch.flexmark.util.Utils.escapeJavaString;
 
 /**
  * Representation of a segment part in a segment list for a sequence
- * it is a Range with non-null text.
+ * it is a Range, either in the base sequence or in the out of base characters for the builder.
  * <p>
- * NULL range means the segment has no offset information
- * empty text means the segment represents characters from original sequence
+ * Out of base text offsets are limited to 1GB. Upper bit is used to store repeated and ascii only flags.
  */
 class Seg {
     final public static Seg NULL = new Seg(Range.NULL.getStart(), Range.NULL.getEnd());
@@ -113,7 +112,22 @@ class Seg {
                 return "[" + myStart + ", " + myEnd + ")";
             }
         } else {
-            return (isFirst256Start() ? "a:" : "") + (isRepeatedTextEnd() && length() > 1 ? length() + "x'" + escapeJavaString(allText.subSequence(getTextStart(), getTextStart() + 1)) + "'" : "'" + escapeJavaString(allText.subSequence(getTextStart(), getTextEnd())) + "'");
+            CharSequence charSequence = allText.subSequence(getTextStart(), getTextEnd());
+
+            if (isRepeatedTextEnd() && length() > 1) {
+                if (isFirst256Start()) {
+                    return "a:" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
+                } else {
+                    return "" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
+                }
+            } else {
+                String chars = length() <= 20 ? charSequence.toString() : charSequence.subSequence(0, 10).toString() + "…" + charSequence.subSequence(length() - 10, length()).toString();
+                if (isFirst256Start()) {
+                    return "a:'" + escapeJavaString(chars) + "'";
+                } else {
+                    return "'" + escapeJavaString(chars) + "'";
+                }
+            }
         }
     }
 

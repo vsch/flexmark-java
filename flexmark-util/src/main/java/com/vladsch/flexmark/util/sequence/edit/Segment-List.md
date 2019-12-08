@@ -15,6 +15,12 @@ with properties:
 * `textLength`: length of all text in the resulting sequence which is out of the original
   sequence.
 
+:warning: This doc was not updated for latest changes. There is no longer a `STRING` type and
+`TEXT` no longer has any base offset information. `BASE` or `ANCHOR` segments before/after
+`TEXT` provide the base sequence context. If the `TEXT` segment is first in the list then
+`SegmentBuilder` `startOffset` is the base context for its start, if it is last then `endOffset`
+of string builder is the `endOffset` for its base context
+
 Each segment part consists of a range in the original sequence that it represents and text from
 out of original sequence. It has `span` and `length` properties, with `length` being the length
 of text it is contributing to the sequence being constructed. `span` is the number of characters

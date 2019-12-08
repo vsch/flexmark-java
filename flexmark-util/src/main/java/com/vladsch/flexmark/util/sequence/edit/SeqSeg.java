@@ -3,15 +3,16 @@ package com.vladsch.flexmark.util.sequence.edit;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
+import static com.vladsch.flexmark.util.Utils.escapeJavaString;
+
 /**
- * SegmentedSequence Segment
+ * SegmentedSequence Segment stored in byte[] in serialized format
  */
 public abstract class SeqSeg {
     // @formatter:off
-    final static int TYPE_BYTE              = 0b0000_0000_1111_1111;
     final static int TYPE_MASK              = 0b0000_0000_1110_0000;
 
-    final static int TYPE_NO_SIZE_BYTES          = 0b0000_0000_0001_0000;
+    final static int TYPE_NO_SIZE_BYTES     = 0b0000_0000_0001_0000;
     final static int TYPE_START_BYTES       = 0b0000_0000_0000_0011;
     final static int TYPE_LENGTH_BYTES      = 0b0000_0000_0000_1100;
 
@@ -75,7 +76,7 @@ public abstract class SeqSeg {
         }
 
         public boolean hasChars() {
-            return hasAll(TYPE_HAS_CHAR);
+            return hasAll(TYPE_HAS_CHARS);
         }
 
         public boolean hasByte() {
@@ -83,7 +84,7 @@ public abstract class SeqSeg {
         }
 
         public boolean hasBytes() {
-            return hasAll(TYPE_HAS_BYTE);
+            return hasAll(TYPE_HAS_BYTES);
         }
     }
 
@@ -108,13 +109,42 @@ public abstract class SeqSeg {
     }
 
     public abstract int length();
-    public abstract boolean isNull();
     public abstract boolean isBase();
     public abstract boolean isAnchor();
     public abstract boolean isText();
+    public abstract boolean isFirst256Start();
+    public abstract boolean isRepeatedTextEnd();
     public abstract int getStartOffset();
     public abstract int getEndOffset();
     public abstract CharSequence getCharSequence();
+
+    @Override
+    public String toString() {
+        if (isBase()) {
+            if (isAnchor()) {
+                return "[" + getStartOffset() + ")";
+            } else {
+                return "[" + getStartOffset() + ", " + getEndOffset() + ")";
+            }
+        } else {
+            CharSequence charSequence = getCharSequence();
+            if (isRepeatedTextEnd() && length() > 1) {
+                if (isFirst256Start()) {
+                    return "a:" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
+                } else {
+                    return "" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
+                }
+            } else {
+                int length = charSequence.length();
+                String chars = length <= 20 ? charSequence.toString() : charSequence.subSequence(0, 10).toString() + "…" + charSequence.subSequence(length - 10, length).toString();
+                if (isFirst256Start()) {
+                    return "a:'" + escapeJavaString(chars) + "'";
+                } else {
+                    return "'" + escapeJavaString(chars) + "'";
+                }
+            }
+        }
+    }
 
     static class Base extends SeqSeg {
         protected final int myStartOffset;
@@ -132,27 +162,23 @@ public abstract class SeqSeg {
                     myEndOffset = myStartOffset = type & 0x000f;
                 } else {
                     int intBytes = type & TYPE_START_BYTES;
-                    myEndOffset = myStartOffset = getInt(bytes, offset, intBytes);
+                    myEndOffset = myStartOffset = getInt(bytes, offset, intBytes + 1);
                 }
             } else {
                 assert !hasAll(type, TYPE_NO_SIZE_BYTES);
 
                 int intBytes = type & TYPE_START_BYTES;
-                myStartOffset = getInt(bytes, offset, intBytes);
+                myStartOffset = getInt(bytes, offset, intBytes + 1);
+                offset += intBytes + 1;
 
                 int lengthBytes = (type & TYPE_LENGTH_BYTES) >> 2;
-                this.myEndOffset = this.myStartOffset + getInt(bytes, offset + intBytes, lengthBytes);
+                myEndOffset = myStartOffset + getInt(bytes, offset, lengthBytes + 1);
             }
         }
 
         @Override
         public int length() {
             return myEndOffset - myStartOffset;
-        }
-
-        @Override
-        public boolean isNull() {
-            return false;
         }
 
         @Override
@@ -167,6 +193,16 @@ public abstract class SeqSeg {
 
         @Override
         public boolean isText() {
+            return false;
+        }
+
+        @Override
+        public boolean isFirst256Start() {
+            return false;
+        }
+
+        @Override
+        public boolean isRepeatedTextEnd() {
             return false;
         }
 
@@ -222,7 +258,7 @@ public abstract class SeqSeg {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < myLength; i++) {
-                sb.append(charAt(i + myStartOffset));
+                sb.append(charAt(i));
             }
             return sb.toString();
         }
@@ -322,8 +358,8 @@ public abstract class SeqSeg {
                 length = type & 0x000f;
             } else {
                 int lengthBytes = (type & TYPE_LENGTH_BYTES) >> 2;
-                length = getInt(bytes, offset, lengthBytes);
-                offset += lengthBytes;
+                length = getInt(bytes, offset, lengthBytes + 1);
+                offset += lengthBytes + 1;
             }
 
             switch (textType) {
@@ -362,11 +398,6 @@ public abstract class SeqSeg {
         }
 
         @Override
-        public boolean isNull() {
-            return false;
-        }
-
-        @Override
         public boolean isBase() {
             return false;
         }
@@ -379,6 +410,22 @@ public abstract class SeqSeg {
         @Override
         public boolean isText() {
             return true;
+        }
+
+        int textType() {
+            return myBytes[myOffset] & TYPE_MASK;
+        }
+
+        @Override
+        public boolean isFirst256Start() {
+            int textType = textType();
+            return textType == TYPE_TEXT_ASCII || textType == TYPE_REPEATED_ASCII || textType == TYPE_REPEATED_SPACE || textType == TYPE_REPEATED_EOL;
+        }
+
+        @Override
+        public boolean isRepeatedTextEnd() {
+            int textType = textType();
+            return textType == TYPE_REPEATED_TEXT || textType == TYPE_REPEATED_ASCII || textType == TYPE_REPEATED_SPACE || textType == TYPE_REPEATED_EOL;
         }
 
         @Override
@@ -462,7 +509,7 @@ public abstract class SeqSeg {
         int length = 1;
 
         if (segType.hasBoth()) {
-            length += getOffsetBytes(seg.getStart()) + getIntBytes(seg.length());
+            length += getIntBytes(seg.getStart()) + getIntBytes(seg.length());
         } else if (segType.hasOffset()) {
             length += getOffsetBytes(seg.getStart());
         } else if (segType.hasLength()) {
@@ -514,7 +561,9 @@ public abstract class SeqSeg {
     }
 
     public static char getChar(byte[] bytes, int offset) {
-        return (char) (((0x00ff & bytes[offset++]) << 8) | (0x00ff & bytes[offset]));
+        char c = (char) ((0x00ff & bytes[offset++]) << 8);
+        c |= 0x00ff & bytes[offset];
+        return c;
     }
 
     public static int addChars(byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
@@ -526,13 +575,13 @@ public abstract class SeqSeg {
         return offset;
     }
 
-    public static int addCharByte(byte[] bytes, int offset, char c) {
+    public static int addCharAscii(byte[] bytes, int offset, char c) {
         assert c < 256;
         bytes[offset++] = (byte) (c & 0x000000ff);
         return offset;
     }
 
-    public static int addCharsBytes(byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
+    public static int addCharsAscii(byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
         for (int i = start; i < end; i++) {
             char c = chars.charAt(i);
             assert c < 256;
@@ -541,30 +590,31 @@ public abstract class SeqSeg {
         return offset;
     }
 
+    public static char getCharAscii(byte[] bytes, int offset) {
+        return (char) (0x00ff & bytes[offset]);
+    }
+
     public static int addSegBytes(byte[] bytes, int offset, @NotNull Seg seg, @NotNull CharSequence textChars) {
         SegType segType = getSegType(seg, textChars);
         int segLength = seg.length();
 
         if (segType.hasOffset()) {
             int segStart = seg.getStart();
-            int offsetBytes = getOffsetBytes(segStart);
 
             if (segType.hasLength()) {
+                int offsetBytes = getIntBytes(segStart);
                 int intBytes = getIntBytes(segLength);
-                if (offsetBytes + intBytes == 0) {
-                    assert segStart < 16;
-                    bytes[offset++] = (byte) (segType.flags | TYPE_NO_SIZE_BYTES | segStart);
-                } else {
-                    bytes[offset++] = (byte) (segType.flags | TYPE_NO_SIZE_BYTES | (offsetBytes - 1) | ((intBytes - 1) << 2));
-                    offset = addIntBytes(bytes, offset, segStart, offsetBytes);
-                    offset = addIntBytes(bytes, offset, segLength, intBytes);
-                }
+
+                bytes[offset++] = (byte) (segType.flags | (offsetBytes - 1) | ((intBytes - 1) << 2));
+                offset = addIntBytes(bytes, offset, segStart, offsetBytes);
+                offset = addIntBytes(bytes, offset, segLength, intBytes);
             } else {
+                int offsetBytes = getOffsetBytes(segStart);
                 if (offsetBytes == 0) {
                     assert segStart < 16;
                     bytes[offset++] = (byte) (segType.flags | TYPE_NO_SIZE_BYTES | segStart);
                 } else {
-                    bytes[offset++] = (byte) (segType.flags | TYPE_NO_SIZE_BYTES | (offsetBytes - 1));
+                    bytes[offset++] = (byte) (segType.flags | (offsetBytes - 1));
                     offset = addIntBytes(bytes, offset, segStart, offsetBytes);
                 }
             }
@@ -574,15 +624,15 @@ public abstract class SeqSeg {
                 assert segLength < 16;
                 bytes[offset++] = (byte) (segType.flags | TYPE_NO_SIZE_BYTES | segLength);
             } else {
-                bytes[offset++] = (byte) (segType.flags | TYPE_NO_SIZE_BYTES | ((lengthBytes - 1) << 2));
+                bytes[offset++] = (byte) (segType.flags | ((lengthBytes - 1) << 2));
                 offset = addIntBytes(bytes, offset, segLength, lengthBytes);
             }
         }
 
         if (segType.hasChar()) offset = addChar(bytes, offset, textChars.charAt(seg.getTextStart()));
         else if (segType.hasChars()) offset = addChars(bytes, offset, textChars, seg.getTextStart(), seg.getTextEnd());
-        else if (segType.hasByte()) offset = addCharByte(bytes, offset, textChars.charAt(seg.getTextStart()));
-        else if (segType.hasBytes()) offset = addCharsBytes(bytes, offset, textChars, seg.getTextStart(), seg.getTextEnd());
+        else if (segType.hasByte()) offset = addCharAscii(bytes, offset, textChars.charAt(seg.getTextStart()));
+        else if (segType.hasBytes()) offset = addCharsAscii(bytes, offset, textChars, seg.getTextStart(), seg.getTextEnd());
 
         return offset;
     }

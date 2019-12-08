@@ -22,6 +22,7 @@ import org.junit.runners.Suite;
         BasedSequenceBuilderTest.class,
         BasedSequenceImplTest.class,
         BaseSequenceEntryTest.class,
+        SeqSegTest.class,
         PositionListTest.class,
         BaseSequenceManagerTest.class,
         MarkdownParagraphTest.class,
