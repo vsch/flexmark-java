@@ -213,30 +213,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * [ ] Test: position marker preservation with direction type
   * [ ] Add: preview listener to position list so optimizer changes are fixed up for consistency
         and stats updates.
-* [ ] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
+* [x] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
-  * [ ] Fix: optimize change storage of segments by storing segment number in `baseOffsets`,
-        which defines the segment `startOffset`, `endOffset` and `startIndex` in the original
-        sequence. All chars from the same sequence have the same value in `segmentOffsets[]`.
-        The final offset is `index` - `segment.startIndex` + `segment.startOffset`. The total
-        number of segments determines if need to use `byte`, `short`, 3x`byte` or `int` for
-        `segmentOffsets[]` type. NonBased chars will always be stored in segment 0 and this will
-        have different computation because there is no start/end offsets only char value that
-        needs to be accessed. Can create a segmented sequence for only non-based chars which
-        stores their segments. Then it can optimize its content the same way. This will slightly
-        increase `charAt` computation but greatly reduce the memory usage for segmented
-        sequences.
-* [ ] Fix: `BasedSegmentBuilder` by doing in line optimization as the segments are built:
-* [ ] Add: EOL recovery `BasedEolRecoveryOptimizer`:
-  * recover EOLs from text when preceded by range and only blanks between end of range and EOL.
-    Regardless of whether the blanks are skipped in base sequence or part of the text.
-    * If part of text split text into before and after and insert EOL.
-    * If part of base then just insert before text, trimming EOL out of text.
-    * Keep recovering EOLs from text until there are none that meet the criteria of having
-      nothing but blanks between them and end of previous range.
-    * After recovering the EOL range, see if it can be expanded left/right to encompass more
-      based chars from text on either side.
+  + [ ] Fix: optimize storage by implementing binary search with segments serialized to byte
+        array.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
 + [x] Add: segment builder text part stats for first256 and repeatedText, former if all chars in
       part < 256, latter if all chars are the same. In preparation for storage optimized

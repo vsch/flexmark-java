@@ -75,6 +75,15 @@ class Seg {
         return myStart >= 0 && myEnd >= 0 && myStart <= myEnd;
     }
 
+    /**
+     * Test segment type being from original sequence
+     *
+     * @return true if it is
+     */
+    public boolean isAnchor() {
+        return myStart >= 0 && myEnd >= 0 && myStart == myEnd;
+    }
+
     public boolean isNull() {
         return !(isBase() || isText());
     }
