@@ -197,17 +197,23 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 + [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
       experimental stuff.
   + [x] Fix: move `PositionList` related classes to `flexmark-util-experimental`
++ [ ] Fix: `MarkdownParagraph`
+  + [ ] use `SegmentBuilder` for accumulating wrapped text.
+  + [ ] Fix: remove any position tracking code from paragraph formatter
+  - [ ] Add: `LS` awareness to segment optimization. <!--QUERY: is this really necessary-->
 * [x] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
       list of based sequences. The parts are already resolved by builder, based sequences
       duplicates useless work on both ends.
-  + [ ] Fix: optimize storage by implementing binary search with segments serialized to byte
+  + [x] Fix: optimize storage by implementing binary search with segments serialized to byte
         array.
-    + [ ] Add: build `SegmentBuilder` from `SegmentTree`
-    + [ ] Add: code to extract `startOffset`/`endOffset` and `treeData` range for `subSequence`
-          of `SegmentedSequenceTree`
     + [ ] Add: `SegmentTreeStatsCollector` and options to allow collecting segment tree
           statistics.
+    + [x] Add: build `SegmentBuilder` from `SegmentTree`
+    + [x] Add: code to extract `startOffset`/`endOffset` and `treeData` range for `subSequence`
+          of `SegmentedSequenceTree`
     + [x] Add: `SegmentTree` binary search tree for segmented sequence segments
+  + [ ] Add: `SegmentedSequenceTree` binary tree based segmented sequences with option to use
+        old `SegmentedSequenceFull` if desired.
   + [x] Add: build `SegmentTree` from `SegmentBuilder` segments
 * [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
   * [ ] optimize by not processing one char at a time. Split the sequence into regions of
@@ -218,13 +224,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * [ ] use an instance of sequence builder for the line under construction, and keep parallel
         string builder for the content tests, but only if needed to avoid construction of
         segmented sequence.
-* [ ] Fix: `MarkdownParagraph`
-  * [ ] Add: `LS` awareness to segment optimization
-  * [ ] use `SegmentBuilder` for accumulating wrapped text.
-  * [ ] remove any indents from lines being wrapped.
-  * [ ] Test: position marker preservation with direction type
-  * [ ] Add: preview listener to position list so optimizer changes are fixed up for consistency
-        and stats updates.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
 + [x] Add: segment builder text part stats for first256 and repeatedText, former if all chars in
       part < 256, latter if all chars are the same. In preparation for storage optimized

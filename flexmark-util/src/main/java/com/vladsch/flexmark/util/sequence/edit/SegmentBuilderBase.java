@@ -70,9 +70,29 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         return myStartOffset <= myEndOffset ? myStartOffset : -1;
     }
 
+    public boolean needStartOffset() {
+        return getStartOffsetIfNeeded() != -1;
+    }
+
+    public int getStartOffsetIfNeeded() {
+        int startOffset = getStartOffset();
+        Seg seg = getSegOrNull(0);
+        return startOffset != -1 && seg != null && seg.isBase() && startOffset != seg.getStart() ? startOffset : -1;
+    }
+
     @Override
     public int getEndOffset() {
         return myEndOffset >= myStartOffset ? myEndOffset : -1;
+    }
+
+    public boolean needEndOffset() {
+        return getEndOffsetIfNeeded() != -1;
+    }
+
+    public int getEndOffsetIfNeeded() {
+        int endOffset = getEndOffset();
+        Seg seg = getSegOrNull(myPartsSize - 1);
+        return endOffset != -1 && seg != null && seg.isBase() && endOffset != seg.getEnd() ? endOffset : -1;
     }
 
     @Override
