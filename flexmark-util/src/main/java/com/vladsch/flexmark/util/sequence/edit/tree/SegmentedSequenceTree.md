@@ -1,27 +1,26 @@
-[Binary search tree]: https://en.wikipedia.org/wiki/Binary_search_tree "Binary search tree - Wikipedia"
-[Interval tree]: https://en.wikipedia.org/wiki/Interval_tree "Interval tree - Wikipedia"
-[Segment tree - Wikipedia]: https://en.wikipedia.org/wiki/Segment_tree "Segment tree - Wikipedia"
-
 # Segmented Sequence Optimization
 
-Need optimization for segmented sequences which does not store index for every character but at
-the same does not impact random access to characters via `charAt(n)` where n is offset from
-start of sequence except by a constant factor independent of number of segments. Search $`O(log
-\ n)`$ where *n* is number of segments can be made to appear to have constant time for
-sequential and intra-segment random access by using per-thread caching of the current segment
-index and segment data with additional checking of next/previous segment hits when the current
-segment does not match, before resorting to the binary search for a given index.
+Needed optimization for segmented sequences which does not store base sequence offset for every
+character but at the same does not impact random access to characters via `charAt(n)` by a
+constant factor independent of number of segments.
 
 Some known approaches are an [Interval tree] for overlapping multiple intervals,
 [Segment tree - Wikipedia] or [Binary search tree]. All have $`O(log \ n)`$ query time.
 
-Additionally, each `BasedSequence` needs to provide its segment information efficiently to allow
-construction of a new segmented sequence consisting of subsequences of the base segmented
-sequence. Being able to extract segment information using the offset and length of the
-subsequence from parent structure is highly desired.
+In practice, search $`O(log \ n)`$ where *n* is number of segments can be made to appear to have
+almost constant time for sequential and intra-segment random access by using per-thread caching
+of the current segment index and segment data with additional checking of next/previous segment
+hits when the current segment does not match, before resorting to the binary search for a given
+index.
 
-The tree structure must be immutable like the sequences it represents so beyond cost the of
-creation and querying there is no concern for insert/delete/copy operation efficiency.
+Another desired optimization is to have each `BasedSequence` provide its segment information
+efficiently to allow construction of a new segmented sequences consisting of subsequences of the
+segmented sequence. Being able to extract segment information using the offset and length of the
+subsequence from parent structure is highly desired and will reduce construction time of
+segmented sequences.
+
+The tree structure is immutable like the sequences it represents so beyond cost the of creation
+and querying there is no concern for insert/delete/copy operation efficiency.
 
 ### Segment Binary Tree
 
@@ -29,29 +28,32 @@ With query time of $`O(log \ n)`$ where *n* is number of segments in the sequenc
 storing any information per character, a binary tree of aggregated length of ordered segments in
 the sequence is ideal for segmented sequences.
 
-An array of aggregated lengths `len[]` provides the binary tree structure. The middle entry is
-the root node for the search with an initial step of $`2 ^ N > L/2`$ where L is length of
-sequence.
+An array of aggregated lengths `int[]` provides the binary tree structure. The middle entry is
+the root node for the search.
 
-Advantage for storage is significant especially for long sequences with few segments.
+Advantage for compact storage is significant especially for long sequences with few segments.
+Current implementation used `int` for every character in the sequence, tripling the native Java
+character storage. This huge memory footprint makes use of `SegmentedSequence` for accumulation
+of text output from `HtmlRenderer` and `Formatter` problematic for large files. In tests the
+limit for `Formatter` was about 250k of markdown source. Larger and the operation would fail
+with out of memory exception. Running smaller files would require over 6GB of memory.
 
 Query penalty for sequential access can be mitigated by per thread caching of last used segment
-and segment index.
+information.
 
-If a char index is within cached segment then the segment can be re-used. If it is less than the
-first aggregated length then first segment can be used, if it is greater than the last
-aggregated length then last segment can be used. The latter checks will eliminate a search
-penalty for access starting at 0 or at length-1.
+If a char index is within cached segment then the segment can be re-used. If it is after the end
+of the segment, then the next segment can be tried. If it is before start of segment, then
+previous segment can be tried.
 
-On cache miss, checking of next/previous segments to cached segment index will eliminate the
-search penalty for random access within a segment or next/previous segment, which in most use
-cases should result in no binary search penalty for sequential access since string processing
-operations are sequential around a given position.
+If there is no match then first and last segments should be checked to optimize sequential char
+access of sequences from start or end of the sequence.
 
-If the requested index is before the previous segment then binary search should be done on
-segments [0, prevSeg) and if it is greater than the next segment's aggregated length the it
-should be done on (nextSeg, endSeg). This will also reduce the search penalty by reducing the
-search region.
+These tests are a quick index into `int[]` so do not incur a heavy penalty. Additionally, failed
+tests are not wasted because they serve to narrow the range of segments which must be searched.
+
+If the requested index is before the previous segment then binary search should be done on [0,
+prevSeg) and if it is greater than the next segment's aggregated length then search is narrowed
+to (nextSeg, endSeg).
 
 Because all segments are already ordered, the aggregated length array can be generated by a
 single iteration of the segments, which is already done to build the segmented sequence.
@@ -62,16 +64,21 @@ Subsequences can use the parent binary tree or a sub-section of it by defining a
 length of their portion of it, eliminating the overhead of searching extra segments and copying
 of data. Effectively no penalty to subsequences for re-use of parent search structure.
 
-The total storage overhead then becomes `(4 bytes * 2 + per segment overhead) * number of
-segments`. 4 bytes per integer, one being the aggregated length and the other an offset of the
-segment in the serialized segment byte array.
+Construction of segments from parent binary tree by subsequences is another feature which speeds
+up overall tree based segmented sequence use.
+
+The total storage overhead for segmented sequences is `(4 bytes * 2 + per segment overhead) *
+number of segments`. 4 bytes per integer, one being the aggregated length and the other an
+offset of the segment in the serialized segment byte array.
 
 Out of base characters have additional overhead for character storage and all have access
-penalty for de-serializing the segment data.
+penalty for de-serializing the segment data. This is relatively painless because each segment
+contains little data needed for class construction. Character data is not de-serialized and
+character access is done directly from serialized byte data as characters are accessed.
 
-However, deserialization is only performed once the segment is positively identified. Even when
-trying to determine if previous or next segment contains an index, **binary tree search data is
-used** not the serialized segment data.
+Deserialization is only performed once the segment is positively identified as one to be used.
+Even when trying to determine if previous or next segment contains an index, **binary tree
+search data is used** not the serialized segment data.
 
 ### Segments for Segmented Sequences
 
@@ -82,23 +89,39 @@ would be a sealed class. `SeqSeg` are only deserialized from a `byte[]`. Seriali
 performed by `SegmentBuilder` from a `Seg` element.
 
 Serialized data is optimized to minimize number of bytes taken by each segment.
+* Lengths and offsets of <16 require no extra information and fit into the first byte
+  identifying the segment.
+* Lengths and offsets are stored in 1, 2, 3 or 4 byte format as needed to fit the data
+* Out of base text will use 1 byte per character if all characters in the segment have code <
+  256
+* Repeated characters only store the character and repeat count
+* Repeated spaces and `\n` only need length and if <16 then a single byte encodes all the
+  information.
 
 Numeric values can have only value starting at 0..Integer.MAX_VALUE. Negative values are not
-supported.
+supported. Additionally length of any segment which is limited to 0.5 GB which is plenty for the
+required application.
 
-* `BASE`: base segment representing a range of base sequence characters
-  * `PURE_BASE`: base segment for whose start/end offset correspond to start/end offset of the
-    character sequence.
-  * `ANCHOR`: base segment representing a range of 0 span of base sequence characters
-* `TEXT`: segment representing a segment of characters out of base sequence
-  * `REPEATED`: segment representing a segment of a single repeated character
-    * `REPEATED_SPACE`: repeated space
-    * `REPEATED_ASCII`: repeated character with code < 256
-  * `TEXT_ASCII`: segment where all characters code < 256, each character is stored in a byte
-    array.
+Segment types:
 
-First byte of serialized sequence carries the information about the specifics and serialized
-format of the segment:
+* `BASE`: base segment representing a range of base sequence characters. 1 to 9 bytes, in
+  practice probably hitting an average of 3-4 bytes.
+  * `ANCHOR`: base segment representing a range of 0 span of base sequence characters, 1 to 5
+    bytes, average most likely 2-3 bytes.
+* `TEXT`: segment representing characters out of base sequence, general case 1-5 bytes + 2 bytes
+  per character
+  * `REPEATED_TEXT`: segment representing a repeated character span, 3-7 bytes.
+    * `REPEATED_SPACE`: repeated space, 1 to 3 bytes. Most will probably be 1 or 2 bytes. The
+      latter can handle up to 255 spaces.
+      * `REPEATED_EOL`: repeated `\n`, 1 to 3 bytes. Most will probably be 1 or 2 bytes. The
+        latter can handle up to 255 EOLs.
+    * `REPEATED_ASCII`: repeated character with code < 256, 2-6 bytes, most likely 2 bytes for
+      repeat <16, 3 bytes up to 255 repeats.
+  * `TEXT_ASCII`: segment where all characters code < 256, 1 to 5 bytes plus 1 byte per
+    character.
+
+First byte of serialized segment carries the information about the specifics and serialized
+format of the rest of the bytes:
 
 * `SEG_TYPE`:
   * 0b0000_0000: `ANCHOR`: `startOffset`
@@ -113,10 +136,15 @@ format of the segment:
   * 0b0001_xxxx: no size/offset bytes. If has startOffset then offset = xxxx, length = 0, if has
     only length then length = xxxx, not valid if has both length and start offset
   * 0b0000_0000: 1 byte for start
-  * 0b0000_0001: 2 byte for start
+  * 0b0000_0001: 2 bytes for start
   * 0b0000_0010: 3 bytes for start
   * 0b0000_0011: 4 bytes for start
   * 0b0000_0000: 1 byte for length
   * 0b0000_0100: 2 bytes for length
   * 0b0000_1000: 3 bytes for length
   * 0b0000_1100: 4 bytes for length
+
+[Binary search tree]: https://en.wikipedia.org/wiki/Binary_search_tree "Binary search tree - Wikipedia"
+[Interval tree]: https://en.wikipedia.org/wiki/Interval_tree "Interval tree - Wikipedia"
+[Segment tree - Wikipedia]: https://en.wikipedia.org/wiki/Segment_tree "Segment tree - Wikipedia"
+
