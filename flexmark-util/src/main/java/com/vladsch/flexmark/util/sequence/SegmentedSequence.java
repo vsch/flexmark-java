@@ -132,7 +132,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
         if (baseSubSequence != null) {
             return baseSubSequence;
         } else if (!builder.isEmpty()) {
-            return SegmentedSequenceFull.create(builder.getSegmentBuilder());
+            return SegmentedSequenceFull.create(builder.getBaseSubSequence(), builder.getSegmentBuilder());
         }
         return BasedSequence.NULL;
     }

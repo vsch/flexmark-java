@@ -109,6 +109,11 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     @Override
+    public CharSequence getText() {
+        return myText;
+    }
+
+    @Override
     public int noAnchorsSize() {
         return size() - myAnchorsSize;
     }

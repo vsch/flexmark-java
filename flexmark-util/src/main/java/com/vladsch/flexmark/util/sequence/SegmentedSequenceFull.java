@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -171,9 +172,10 @@ public final class SegmentedSequenceFull extends BasedSequenceImpl implements Re
      * Base Constructor
      *
      * @param builder builder for which to construct segmented sequence
+     *
      */
-    static SegmentedSequenceFull create(IBasedSegmentBuilder<?> builder) {
-        BasedSequence baseSeq = builder.getBaseSequence();
+    public static SegmentedSequenceFull create(@NotNull BasedSequence basedSequence, ISegmentBuilder<?> builder) {
+        BasedSequence baseSeq = basedSequence.getBaseSequence();
         int length = builder.length();
         int baseStartOffset = 0;
         int[] baseOffsets = new int[length + 1];

@@ -19,5 +19,4 @@ public class SegmentBuilder extends SegmentBuilderBase<SegmentBuilder> {
     public static SegmentBuilder emptyBuilder(int options) {
         return new SegmentBuilder(options);
     }
-
 }

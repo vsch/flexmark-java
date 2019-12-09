@@ -23,6 +23,7 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
     int getEndOffset();
 
     int size();
+    CharSequence getText();
     int noAnchorsSize();
     int length();
 
