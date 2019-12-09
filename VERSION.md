@@ -196,7 +196,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 + [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
       experimental stuff.
-  + [ ] Fix: move `PositionList` related classes to `flexmark-util-experimental`
+  + [x] Fix: move `PositionList` related classes to `flexmark-util-experimental`
+* [x] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
+      list of based sequences. The parts are already resolved by builder, based sequences
+      duplicates useless work on both ends.
+  + [ ] Fix: optimize storage by implementing binary search with segments serialized to byte
+        array.
+    + [ ] Add: build `SegmentBuilder` from `SegmentTree`
+    + [ ] Add: code to extract `startOffset`/`endOffset` and `treeData` range for `subSequence`
+          of `SegmentedSequenceTree`
+    + [x] Add: `SegmentTree` binary search tree for segmented sequence segments
+  + [x] Add: build `SegmentTree` from `SegmentBuilder` segments
 * [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
   * [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `BasedSequenceBuilder` can
@@ -213,16 +223,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * [ ] Test: position marker preservation with direction type
   * [ ] Add: preview listener to position list so optimizer changes are fixed up for consistency
         and stats updates.
-* [x] Fix: `SegmentedSequence` to take `SegmentBuilder` parts for sequence generation instead of
-      list of based sequences. The parts are already resolved by builder, based sequences
-      duplicates useless work on both ends.
-  + [ ] Fix: optimize storage by implementing binary search with segments serialized to byte
-        array.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
 + [x] Add: segment builder text part stats for first256 and repeatedText, former if all chars in
       part < 256, latter if all chars are the same. In preparation for storage optimized
       segmented sequence impl.
-+ [x] Fix: optimized `SegmentBuilder` temporarily to `SegmentBuilder2`:
++ [x] Fix: optimized `SegmentBuilder`
   + [x] Change `TEXT` segments from `String` content to start/end being the -ve of start+1/end+1
         of the subsequence for this `TEXT` in `StringBuilder`
   + [x] Change `Seg` to remove `myText` field and require `CharSequence` argument for to be

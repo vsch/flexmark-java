@@ -44,7 +44,7 @@
       <option name="CODE_FENCE_MINIMIZE_INDENT" value="true" />
       <option name="CODE_FENCE_MATCH_CLOSING_MARKER" value="true" />
       <option name="BLOCK_QUOTE_FIRST_LINE_MARKERS" value="3" />
-      <option name="REFERENCE_PLACEMENT" value="1" />
+      <option name="REFERENCE_PLACEMENT" value="4" />
       <option name="ABBREVIATIONS_SORT" value="2" />
       <option name="FOOTNOTE_SORT" value="2" />
       <option name="REFERENCE_SORT" value="2" />
