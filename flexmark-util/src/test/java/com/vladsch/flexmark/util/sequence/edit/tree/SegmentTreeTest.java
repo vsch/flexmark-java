@@ -1,7 +1,8 @@
-package com.vladsch.flexmark.util.sequence.edit;
+package com.vladsch.flexmark.util.sequence.edit.tree;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
+import com.vladsch.flexmark.util.sequence.edit.SegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ import java.util.function.BiConsumer;
 
 import static com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder.F_TRACK_FIRST256;
-import static com.vladsch.flexmark.util.sequence.edit.SegmentTree.*;
+import static com.vladsch.flexmark.util.sequence.edit.tree.SegmentTree.*;
 import static org.junit.Assert.assertEquals;
 
 public class SegmentTreeTest {
@@ -144,8 +145,8 @@ public class SegmentTreeTest {
                 int[] aggrSegData2 = { -1, -2, i, -3 };
 
                 loopEnd(i, (bj, j) -> {
-                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegTreePos(0, 0, 0), findSegmentPos(j, aggrSegData1, 0, 1));
-                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegTreePos(1, 0, 0), findSegmentPos(j, aggrSegData2, 1, 1));
+                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegmentTreePos(0, 0, 0), findSegmentPos(j, aggrSegData1, 0, 1));
+                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegmentTreePos(1, 0, 0), findSegmentPos(j, aggrSegData2, 1, 1));
                 });
             }
         });
@@ -162,8 +163,8 @@ public class SegmentTreeTest {
                     if (i == 1 && j == 65529) {
                         int tmp = 0;
                     }
-                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegTreePos(j >= i ? 1 : 0, j >= i ? i : 0, 0), findSegmentPos(j, aggrSegData1, 0, 2));
-                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegTreePos((j >= i ? 2 : 1), (j >= i ? i : 0), 0), findSegmentPos(j, aggrSegData2, 1, 3));
+                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegmentTreePos(j >= i ? 1 : 0, j >= i ? i : 0, 0), findSegmentPos(j, aggrSegData1, 0, 2));
+                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegmentTreePos((j >= i ? 2 : 1), (j >= i ? i : 0), 0), findSegmentPos(j, aggrSegData2, 1, 3));
                 });
             }
         });
@@ -201,8 +202,8 @@ public class SegmentTreeTest {
                             int tmp = 0;
                         }
 
-                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegTreePos(segment[0], startIndex[0], 0), findSegmentPos(j, aggrSegData1, 0, finalK));
-                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegTreePos(segment[0] + 1, startIndex[0], 0), findSegmentPos(j, aggrSegData2, 1, finalK + 1));
+                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegmentTreePos(segment[0], startIndex[0], 0), findSegmentPos(j, aggrSegData1, 0, finalK));
+                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegmentTreePos(segment[0] + 1, startIndex[0], 0), findSegmentPos(j, aggrSegData2, 1, finalK + 1));
                     });
                 }
             }

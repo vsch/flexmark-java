@@ -1,6 +1,7 @@
-package com.vladsch.flexmark.util.sequence.edit;
+package com.vladsch.flexmark.util.sequence.edit.tree;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.edit.Seg;
 import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.Utils.escapeJavaString;

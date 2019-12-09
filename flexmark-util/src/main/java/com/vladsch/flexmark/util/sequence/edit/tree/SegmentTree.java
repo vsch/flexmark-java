@@ -1,7 +1,9 @@
-package com.vladsch.flexmark.util.sequence.edit;
+package com.vladsch.flexmark.util.sequence.edit.tree;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.Seg;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,7 +67,7 @@ public class SegmentTree {
     }
 
     @Nullable
-    public SegTreePos findSegmentPos(int index) {
+    public SegmentTreePos findSegmentPos(int index) {
         return findSegmentPos(index, treeData, 0, treeData.length >> 1);
     }
 
@@ -142,16 +144,103 @@ public class SegmentTree {
             }
         }
 
-        // NOTE: all optimizations failed, but not wasted since they served to shorten the search range.
-        SegTreePos treePos = findSegmentPos(index, startPos, endPos);
+        // NOTE: all optimizations failed, but not completely wasted since they served to shorten the search range.
+        SegmentTreePos treePos = findSegmentPos(index, startPos, endPos);
         if (treePos != null) {
             return Segment.getSegment(segmentBytes, byteOffset(treePos.pos), treePos.pos, treePos.startIndex, basedSequence);
         }
         return null;
     }
 
+    @NotNull
+    public SegmentTreeRange getSegmentRange(int startIndex, int endIndex, int[] treeData, int startPos, int endPos, @NotNull BasedSequence basedSequence, @Nullable Segment hint) {
+        Segment startSegment = findSegment(startIndex, startPos, endPos, basedSequence, hint);
+        assert startSegment != null;
+        Segment endSegment = endIndex == startIndex ? startSegment : findSegment(endIndex - 1, startPos, endPos, basedSequence, startSegment);
+        assert endSegment != null;
+
+        int startOffset = -1;
+        int endOffset = -1;
+
+        // if start segment is text then we look for previous anchor or range to get startOffset base context information, failing that look for next range or anchor
+        if (startSegment.isText()) {
+            Segment prevSegment = getPrevAnchor(startSegment.myPos, basedSequence);
+            if (prevSegment == null && startSegment.myPos > 0) {
+                prevSegment = getSegment(startSegment.myPos - 1, basedSequence);
+            }
+
+            if (prevSegment != null && prevSegment.isBase()) {
+                startOffset = prevSegment.getEndOffset();
+            }
+        } else {
+            startOffset = startSegment.getStartOffset() + startIndex - startSegment.getStartIndex();
+        }
+
+        // if end segment is text then we look for next anchor or range to get endOffset base context information
+        if (endSegment.isText()) {
+            if (endSegment.myPos + 1 < treeData.length / 2) {
+                Segment nextSegment = getSegment(endSegment.myPos + 1, basedSequence);
+                if (nextSegment.isBase()) {
+                    endOffset = nextSegment.getStartOffset();
+                }
+            }
+        } else {
+            endOffset = endSegment.getEndOffset() + endIndex - endSegment.getStartIndex();
+        }
+
+        if (startOffset < 0) startOffset = endOffset;
+        if (endOffset < startOffset) endOffset = startOffset;
+
+        return new SegmentTreeRange(
+                startIndex,
+                endIndex,
+                startOffset,
+                endOffset,
+                startPos,
+                endPos
+        );
+    }
+
+    /**
+     * Add segments selected by given treeRange
+     *
+     * @param builder   based segment builder
+     * @param treeRange treeRange for which to add segments
+     */
+    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder, @NotNull SegmentTreeRange treeRange) {
+        // add our stuff to builder
+        if (treeRange.startOffset != -1) {
+            builder.appendAnchor(treeRange.startOffset);
+        }
+
+        BasedSequence baseSequence = builder.getBaseSequence();
+        int iMax = treeRange.endPos;
+        for (int i = treeRange.startPos; i < iMax; i++) {
+            Segment segment = getSegment(i, baseSequence);
+
+            // OPTIMIZE: add append Segment method with start/end offsets to allow builder to extract repeat and first256 information
+            //  without needing to scan text, range information does not have any benefit from this
+            if (i == treeRange.startPos && i + 1 == treeRange.endPos) {
+                // need to trim start/end
+                builder.append(segment.getCharSequence().subSequence(treeRange.startIndex - segment.getStartIndex(), treeRange.endIndex - segment.getStartIndex()));
+            } else if (i == treeRange.startPos) {
+                // need to trim start
+                builder.append(segment.getCharSequence().subSequence(treeRange.startIndex - segment.getStartIndex(), segment.length()));
+            } else if (i + 1 == treeRange.endPos) {
+                // need to trim end
+                builder.append(segment.getCharSequence().subSequence(0, treeRange.endIndex - segment.getStartIndex()));
+            } else {
+                builder.append(segment.getCharSequence());
+            }
+        }
+
+        if (treeRange.endOffset != -1) {
+            builder.appendAnchor(treeRange.endOffset);
+        }
+    }
+
     @Nullable
-    public SegTreePos findSegmentPos(int index, int startPos, int endPos) {
+    public SegmentTreePos findSegmentPos(int index, int startPos, int endPos) {
         return findSegmentPos(index, treeData, startPos, endPos);
     }
 
@@ -213,14 +302,15 @@ public class SegmentTree {
     }
 
     public static int previousAnchorOffset(int pos, int[] treeData) {
-        return byteOffset(pos, treeData) - getAnchorOffset(treeData[(pos << 1) + 1]);
+        int byteOffsetData = byteOffsetData(pos, treeData);
+        return getByteOffset(byteOffsetData) - getAnchorOffset(byteOffsetData);
     }
 
     @Nullable
-    public static SegTreePos findSegmentPos(int index, int[] treeData, int startPos, int endPos) {
+    public static SegmentTreePos findSegmentPos(int index, int[] treeData, int startPos, int endPos) {
         // FIX: add segmented sequence stats collection for iteration counts
         // FIX: check first segment and last segment in case it is a scan from start/end of sequence
-        if (index == 0 && startPos == 0) return new SegTreePos(0, 0, 0);
+        if (index == 0 && startPos == 0) return new SegmentTreePos(0, 0, 0);
 
         int iterations = 0;
         while (startPos < endPos) {
@@ -235,7 +325,7 @@ public class SegmentTree {
                 if (index < startIndex) {
                     endPos = pos;
                 } else {
-                    return new SegTreePos(pos, startIndex, iterations);
+                    return new SegmentTreePos(pos, startIndex, iterations);
                 }
             }
         }
@@ -244,46 +334,11 @@ public class SegmentTree {
 
     @Nullable
     public static Segment findSegment(int index, int[] treeData, int startPos, int endPos, byte[] segmentBytes, @NotNull BasedSequence basedSequence) {
-        SegTreePos treePos = findSegmentPos(index, treeData, startPos, endPos);
+        SegmentTreePos treePos = findSegmentPos(index, treeData, startPos, endPos);
         if (treePos != null) {
             return Segment.getSegment(segmentBytes, byteOffset(treePos.pos, treeData), treePos.pos, treePos.startIndex, basedSequence);
         }
         return null;
-    }
-
-    final public static class SegTreePos {
-        final public int pos;
-        final public int startIndex;
-        final public int iterations;
-
-        public SegTreePos(int pos, int startIndex, int iterations) {
-            this.pos = pos;
-            this.startIndex = startIndex;
-            this.iterations = iterations;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof SegTreePos)) return false;
-
-            SegTreePos pos1 = (SegTreePos) o;
-
-            if (pos != pos1.pos) return false;
-            return startIndex == pos1.startIndex;
-        }
-
-        @Override
-        public int hashCode() {
-            int result = pos;
-            result = 31 * result + startIndex;
-            return result;
-        }
-
-        @Override
-        public String toString() {
-            return "{" + pos + ", s: " + startIndex + ", i: " + iterations + '}';
-        }
     }
 
     @NotNull

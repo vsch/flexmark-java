@@ -1,6 +1,8 @@
-package com.vladsch.flexmark.util.sequence.edit;
+package com.vladsch.flexmark.util.sequence.edit.tree;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.edit.Seg;
+import com.vladsch.flexmark.util.sequence.edit.tree.Segment;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 

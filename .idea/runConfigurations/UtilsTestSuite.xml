@@ -7,7 +7,7 @@
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.util.sequence.edit.SegmentTreeTest" />
+        <option name="PATTERN" value="com.vladsch.flexmark.util.sequence.edit.tree.SegmentTreeTest" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

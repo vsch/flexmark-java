@@ -11,6 +11,8 @@ import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.edit.*;
+import com.vladsch.flexmark.util.sequence.edit.tree.SegmentTest;
+import com.vladsch.flexmark.util.sequence.edit.tree.SegmentTreeTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

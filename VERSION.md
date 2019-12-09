@@ -205,6 +205,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     + [ ] Add: build `SegmentBuilder` from `SegmentTree`
     + [ ] Add: code to extract `startOffset`/`endOffset` and `treeData` range for `subSequence`
           of `SegmentedSequenceTree`
+    + [ ] Add: `SegmentTreeStatsCollector` and options to allow collecting segment tree
+          statistics.
     + [x] Add: `SegmentTree` binary search tree for segmented sequence segments
   + [x] Add: build `SegmentTree` from `SegmentBuilder` segments
 * [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`

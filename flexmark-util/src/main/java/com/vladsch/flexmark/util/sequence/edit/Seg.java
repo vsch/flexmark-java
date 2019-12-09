@@ -155,22 +155,22 @@ public class Seg {
     }
 
     @NotNull
-    static Seg segOf(int startOffset, int endOffset) {
+    public static Seg segOf(int startOffset, int endOffset) {
         return startOffset == 0 && endOffset == 0 ? ANCHOR_0 : new Seg(startOffset, endOffset);
     }
 
-    static int getTextStart(int startOffset, boolean isFirst256) {
+    public static int getTextStart(int startOffset, boolean isFirst256) {
         assert startOffset < MAX_TEXT_OFFSET;
         return -(isFirst256 ? startOffset | F_TEXT_OPTION : startOffset) - 1;
     }
 
-    static int getTextEnd(int startOffset, boolean isRepeatedText) {
+    public static int getTextEnd(int startOffset, boolean isRepeatedText) {
         assert startOffset < MAX_TEXT_OFFSET;
         return -(isRepeatedText ? startOffset | F_TEXT_OPTION : startOffset) - 1;
     }
 
     @NotNull
-    static Seg textOf(int startOffset, int endOffset, boolean isFirst256, boolean isRepeatedText) {
+    public static Seg textOf(int startOffset, int endOffset, boolean isFirst256, boolean isRepeatedText) {
         return new Seg(getTextStart(startOffset, isFirst256), getTextEnd(endOffset, isRepeatedText));
     }
 }
