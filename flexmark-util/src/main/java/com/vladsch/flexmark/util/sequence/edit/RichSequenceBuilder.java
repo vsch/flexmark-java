@@ -48,7 +48,7 @@ public final class RichSequenceBuilder implements SequenceBuilder<RichSequenceBu
 
     @NotNull
     @Override
-    public RichSequence getBaseSubSequence() {
+    public RichSequence getSingleBasedSequence() {
         return toSequence();
     }
 

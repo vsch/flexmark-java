@@ -10,7 +10,7 @@ public interface SequenceBuilder<T extends SequenceBuilder<T, S>, S extends IRic
      *
      * @return sub-sequence of base representing the single segment or null if sequence not representable by a single subsequence
      */
-    @Nullable S getBaseSubSequence();
+    @Nullable S getSingleBasedSequence();
     @NotNull T subContext();
     @NotNull T addAll(Iterable<? extends CharSequence> sequences);
     @NotNull T add(@Nullable CharSequence chars);

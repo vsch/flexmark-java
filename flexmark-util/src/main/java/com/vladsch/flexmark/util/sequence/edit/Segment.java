@@ -8,7 +8,7 @@ import static com.vladsch.flexmark.util.Utils.escapeJavaString;
 /**
  * SegmentedSequence Segment stored in byte[] in serialized format
  */
-public abstract class SeqSeg {
+public abstract class Segment {
     // @formatter:off
     final static int TYPE_MASK              = 0b0000_0000_1110_0000;
 
@@ -106,20 +106,36 @@ public abstract class SeqSeg {
         return (flags & mask) == mask;
     }
 
+    protected final int myPos;  // position of segment in aggr length table
     protected final byte[] myBytes;
-    protected final int myOffset;
+    protected final int myByteOffset;
+    protected final int myIndexOffset;
 
-    public SeqSeg(byte[] bytes, int offset) {
+    public Segment(int pos, byte[] bytes, int byteOffset, int indexOffset) {
+        myPos = pos;
         myBytes = bytes;
-        myOffset = offset;
+        myByteOffset = byteOffset;
+        myIndexOffset = indexOffset;
     }
 
-    final public int getOffset() {
-        return myOffset;
+    public int getPos() {
+        return myPos;
+    }
+
+    public byte[] getBytes() {
+        return myBytes;
+    }
+
+    final public int getByteOffset() {
+        return myByteOffset;
+    }
+
+    public int getIndexOffset() {
+        return myIndexOffset;
     }
 
     final public SegType getType() {
-        return SegType.fromTypeMask(myBytes[myOffset]);
+        return SegType.fromTypeMask(myBytes[myByteOffset]);
     }
 
     final public int getByteLength() {
@@ -135,6 +151,13 @@ public abstract class SeqSeg {
     public abstract int getStartOffset();
     public abstract int getEndOffset();
     public abstract CharSequence getCharSequence();
+    /**
+     * get char at index
+     *
+     * @param index index in segmented sequence coordinates. index offset must be subtracted to convert to segment coordinates
+     * @return character at given index in segmented sequence
+     */
+    public abstract char charAt(int index);
 
     @Override
     public String toString() {
@@ -164,33 +187,33 @@ public abstract class SeqSeg {
         }
     }
 
-    static class Base extends SeqSeg {
+    static class Base extends Segment {
         protected final int myStartOffset;
         protected final int myEndOffset;
         protected final @NotNull BasedSequence myBasedSequence;
 
-        public Base(byte[] bytes, int offset, @NotNull BasedSequence basedSequence) {
-            super(bytes, offset);
+        public Base(int pos, byte[] bytes, int byteOffset, int indexOffset, @NotNull BasedSequence basedSequence) {
+            super(pos, bytes, byteOffset, indexOffset);
 
             myBasedSequence = basedSequence;
 
-            int type = bytes[offset++] & 0x00ff;
+            int type = bytes[byteOffset++] & 0x00ff;
             if ((type & TYPE_MASK) == TYPE_ANCHOR) {
                 if (hasAll(type, TYPE_NO_SIZE_BYTES)) {
                     myEndOffset = myStartOffset = type & 0x000f;
                 } else {
                     int intBytes = type & TYPE_START_BYTES;
-                    myEndOffset = myStartOffset = getInt(bytes, offset, intBytes + 1);
+                    myEndOffset = myStartOffset = getInt(bytes, byteOffset, intBytes + 1);
                 }
             } else {
                 assert !hasAll(type, TYPE_NO_SIZE_BYTES);
 
                 int intBytes = type & TYPE_START_BYTES;
-                myStartOffset = getInt(bytes, offset, intBytes + 1);
-                offset += intBytes + 1;
+                myStartOffset = getInt(bytes, byteOffset, intBytes + 1);
+                byteOffset += intBytes + 1;
 
                 int lengthBytes = (type & TYPE_LENGTH_BYTES) >> 2;
-                myEndOffset = myStartOffset + getInt(bytes, offset, lengthBytes + 1);
+                myEndOffset = myStartOffset + getInt(bytes, byteOffset, lengthBytes + 1);
             }
         }
 
@@ -232,6 +255,14 @@ public abstract class SeqSeg {
         @Override
         public int getEndOffset() {
             return myEndOffset;
+        }
+
+        @Override
+        public char charAt(int index) {
+            if (index < myIndexOffset || index - myIndexOffset >= length()) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + myIndexOffset + ", " + myIndexOffset +  length() + ")");
+            }
+            return myBasedSequence.charAt(myStartOffset + index - myIndexOffset);
         }
 
         @Override
@@ -362,12 +393,12 @@ public abstract class SeqSeg {
         }
     }
 
-    static class Text extends SeqSeg {
+    static class Text extends Segment {
         protected final @NotNull CharSequence myCharSequence;
 
-        public Text(byte[] bytes, int offset) {
-            super(bytes, offset);
-            int type = bytes[offset++] & 0x00ff;
+        public Text(int pos, byte[] bytes, int byteOffset, int indexOffset) {
+            super(pos, bytes, byteOffset, indexOffset);
+            int type = bytes[byteOffset++] & 0x00ff;
             int segTypeMask = type & TYPE_MASK;
 
             int length;
@@ -376,25 +407,25 @@ public abstract class SeqSeg {
                 length = type & 0x000f;
             } else {
                 int lengthBytes = (type & TYPE_LENGTH_BYTES) >> 2;
-                length = getInt(bytes, offset, lengthBytes + 1);
-                offset += lengthBytes + 1;
+                length = getInt(bytes, byteOffset, lengthBytes + 1);
+                byteOffset += lengthBytes + 1;
             }
 
             switch (segTypeMask) {
                 case TYPE_TEXT:
-                    myCharSequence = new TextCharSequence(bytes, offset, 0, length);
+                    myCharSequence = new TextCharSequence(bytes, byteOffset, 0, length);
                     break;
 
                 case TYPE_TEXT_ASCII:
-                    myCharSequence = new TextAsciiCharSequence(bytes, offset, 0, length);
+                    myCharSequence = new TextAsciiCharSequence(bytes, byteOffset, 0, length);
                     break;
 
                 case TYPE_REPEATED_TEXT:
-                    myCharSequence = new TextRepeatedSequence(getChar(bytes, offset), length);
+                    myCharSequence = new TextRepeatedSequence(getChar(bytes, byteOffset), length);
                     break;
 
                 case TYPE_REPEATED_ASCII:
-                    myCharSequence = new TextRepeatedSequence((char) (0x00ff & bytes[offset]), length);
+                    myCharSequence = new TextRepeatedSequence((char) (0x00ff & bytes[byteOffset]), length);
                     break;
 
                 case TYPE_REPEATED_SPACE:
@@ -416,6 +447,14 @@ public abstract class SeqSeg {
         }
 
         @Override
+        public char charAt(int index) {
+            if (index < myIndexOffset || index - myIndexOffset >= myCharSequence.length()) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + myIndexOffset + ", " + myIndexOffset + myCharSequence.length() + ")");
+            }
+            return myCharSequence.charAt(index - myIndexOffset);
+        }
+
+        @Override
         public boolean isBase() {
             return false;
         }
@@ -431,7 +470,7 @@ public abstract class SeqSeg {
         }
 
         int textType() {
-            return myBytes[myOffset] & TYPE_MASK;
+            return myBytes[myByteOffset] & TYPE_MASK;
         }
 
         @Override
@@ -463,13 +502,13 @@ public abstract class SeqSeg {
         }
     }
 
-    public static SeqSeg getSeqSeg(byte[] bytes, int offset, @NotNull BasedSequence basedSequence) {
-        int type = bytes[offset] & TYPE_MASK;
+    public static Segment getSegment(byte[] bytes, int byteOffset, int pos, int indexOffset, @NotNull BasedSequence basedSequence) {
+        int type = bytes[byteOffset] & TYPE_MASK;
 
         switch (type) {
             case TYPE_ANCHOR:
             case TYPE_BASE:
-                return new Base(bytes, offset, basedSequence);
+                return new Base(pos, bytes, byteOffset, indexOffset, basedSequence);
 
             case TYPE_TEXT:
             case TYPE_REPEATED_TEXT:
@@ -477,7 +516,7 @@ public abstract class SeqSeg {
             case TYPE_REPEATED_ASCII:
             case TYPE_REPEATED_SPACE:
             case TYPE_REPEATED_EOL:
-                return new Text(bytes, offset);
+                return new Text(pos, bytes, byteOffset, indexOffset);
 
             default:
                 throw new IllegalStateException("Invalid text type " + type);
@@ -522,7 +561,7 @@ public abstract class SeqSeg {
         return length < 256 ? 1 : length < 65536 ? 2 : length < 65536 * 256 ? 3 : 4;
     }
 
-    public static int getSegByteLength(@NotNull SeqSeg.SegType segType, int segStart, int segLength) {
+    public static int getSegByteLength(@NotNull Segment.SegType segType, int segStart, int segLength) {
         int length = 1;
 
         if (segType.hasBoth()) {

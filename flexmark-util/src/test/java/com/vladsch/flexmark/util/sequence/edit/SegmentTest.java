@@ -9,7 +9,7 @@ import java.util.function.BiConsumer;
 
 import static org.junit.Assert.assertEquals;
 
-public class SeqSegTest {
+public class SegmentTest {
 
     static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
         int iMaxStart = start + span;
@@ -65,7 +65,7 @@ public class SeqSegTest {
         loopSizes((b, i) -> {
             Seg seg = Seg.segOf(i, i);
 //            System.out.println(i);
-            assertEquals("i: " + i, b + 1, SeqSeg.getSegByteLength(seg, ""));
+            assertEquals("i: " + i, b + 1, Segment.getSegByteLength(seg, ""));
         });
     }
 
@@ -76,7 +76,7 @@ public class SeqSegTest {
                 if (j > i) {
 //                    System.out.println("i: " + i + " j: " + j);
                     Seg seg = Seg.segOf(i, j);
-                    assertEquals("i: " + i + " j: " + j, Math.max(1, bi) + Math.max(1, bj) + 1, SeqSeg.getSegByteLength(seg, ""));
+                    assertEquals("i: " + i + " j: " + j, Math.max(1, bi) + Math.max(1, bj) + 1, Segment.getSegByteLength(seg, ""));
                 }
             });
         });
@@ -121,7 +121,7 @@ public class SeqSegTest {
             loopEnd(i, (bj, j) -> {
                 if (j > i) {
                     Seg seg = Seg.textOf(i, j, true, true);
-                    assertEquals("i: " + i + " j: " + j, bj + 1, SeqSeg.getSegByteLength(seg, new DummyCharSequence(' ', j)));
+                    assertEquals("i: " + i + " j: " + j, bj + 1, Segment.getSegByteLength(seg, new DummyCharSequence(' ', j)));
                 }
             });
         });
@@ -133,7 +133,7 @@ public class SeqSegTest {
             loopEnd(i, (bj, j) -> {
                 if (j > i) {
                     Seg seg = Seg.textOf(i, j, true, true);
-                    assertEquals("i: " + i + " j: " + j, bj + 1, SeqSeg.getSegByteLength(seg, new DummyCharSequence('\n', j)));
+                    assertEquals("i: " + i + " j: " + j, bj + 1, Segment.getSegByteLength(seg, new DummyCharSequence('\n', j)));
                 }
             });
         });
@@ -145,7 +145,7 @@ public class SeqSegTest {
             loopEnd(i, (bj, j) -> {
                 if (j > i) {
                     Seg seg = Seg.textOf(i, j, true, true);
-                    assertEquals("i: " + i + " j: " + j, bj + 2, SeqSeg.getSegByteLength(seg, new DummyCharSequence('a', j)));
+                    assertEquals("i: " + i + " j: " + j, bj + 2, Segment.getSegByteLength(seg, new DummyCharSequence('a', j)));
                 }
             });
         });
@@ -157,7 +157,7 @@ public class SeqSegTest {
             loopEnd(i, (bj, j) -> {
                 if (j > i) {
                     Seg seg = Seg.textOf(i, j, true, false);
-                    assertEquals("i: " + i + " j: " + j, bj + 1 + j - i, SeqSeg.getSegByteLength(seg, new DummyCharSequence('a', j)));
+                    assertEquals("i: " + i + " j: " + j, bj + 1 + j - i, Segment.getSegByteLength(seg, new DummyCharSequence('a', j)));
                 }
             });
         });
@@ -169,7 +169,7 @@ public class SeqSegTest {
             loopEnd(i, (bj, j) -> {
                 if (j > i) {
                     Seg seg = Seg.textOf(i, j, false, false);
-                    assertEquals("i: " + i + " j: " + j, bj + 1 + (j - i) * 2, SeqSeg.getSegByteLength(seg, new DummyCharSequence('a', j)));
+                    assertEquals("i: " + i + " j: " + j, bj + 1 + (j - i) * 2, Segment.getSegByteLength(seg, new DummyCharSequence('a', j)));
                 }
             });
         });
@@ -183,10 +183,10 @@ public class SeqSegTest {
             for (int j = 0; j < 10 - 4; j++) {
                 Arrays.fill(bytes, (byte) 0xff);
                 int b = Math.max(1, bi);
-                int offset = SeqSeg.addIntBytes(bytes, j, i, b);
+                int offset = Segment.addIntBytes(bytes, j, i, b);
                 assertEquals("i: " + i + " j: " + j, b + j, offset);
 
-                int value = SeqSeg.getInt(bytes, j, b);
+                int value = Segment.getInt(bytes, j, b);
                 assertEquals("i: " + i + " j: " + j, value, (int) i);
             }
         });
@@ -200,10 +200,10 @@ public class SeqSegTest {
             CharSequence chars = new DummyCharSequence(c, 10);
             for (int j = 0; j < 10 - 4; j++) {
                 Arrays.fill(bytes, (byte) 0xff);
-                int offset = SeqSeg.addChars(bytes, j, chars, j, j + 1);
+                int offset = Segment.addChars(bytes, j, chars, j, j + 1);
                 assertEquals("c: " + c + " j: " + j, j + 2, offset);
 
-                char value = SeqSeg.getChar(bytes, j);
+                char value = Segment.getChar(bytes, j);
                 assertEquals("c: " + c + " j: " + j, value, c);
             }
 
@@ -218,10 +218,10 @@ public class SeqSegTest {
         for (char c = 0; ; c++) {
             for (int j = 0; j < 10 - 4; j++) {
                 Arrays.fill(bytes, (byte) 0xff);
-                int offset = SeqSeg.addChar(bytes, j, c);
+                int offset = Segment.addChar(bytes, j, c);
                 assertEquals("c: " + c + " j: " + j, j + 2, offset);
 
-                char value = SeqSeg.getChar(bytes, j);
+                char value = Segment.getChar(bytes, j);
                 assertEquals("c: " + c + " j: " + j, value, c);
             }
 
@@ -237,10 +237,10 @@ public class SeqSegTest {
             CharSequence chars = new DummyCharSequence(c, 10);
             for (int j = 0; j < 10 - 4; j++) {
                 Arrays.fill(bytes, (byte) 0xff);
-                int offset = SeqSeg.addCharsAscii(bytes, j, chars, j, j + 1);
+                int offset = Segment.addCharsAscii(bytes, j, chars, j, j + 1);
                 assertEquals("c: " + c + " j: " + j, j + 1, offset);
 
-                char value = SeqSeg.getCharAscii(bytes, j);
+                char value = Segment.getCharAscii(bytes, j);
                 assertEquals("c: " + c + " j: " + j, value, c);
             }
         }
@@ -252,10 +252,10 @@ public class SeqSegTest {
 
         for (char c = 0; c < 256; c++) {
             for (int j = 0; j < 10 - 4; j++) {
-                int offset = SeqSeg.addCharAscii(bytes, j, c);
+                int offset = Segment.addCharAscii(bytes, j, c);
                 assertEquals("c: " + c + " j: " + j, j + 1, offset);
 
-                char value = SeqSeg.getCharAscii(bytes, j);
+                char value = Segment.getCharAscii(bytes, j);
                 assertEquals("c: " + c + " j: " + j, value, c);
             }
         }
@@ -274,11 +274,11 @@ public class SeqSegTest {
                     BasedSequence basedSequence = BasedSequence.of(dummy);
                     Seg seg = Seg.segOf(i, j);
 
-                    int offset = SeqSeg.addSegBytes(bytes, j, seg, dummy);
-                    int segByteLength = SeqSeg.getSegByteLength(seg, dummy);
+                    int offset = Segment.addSegBytes(bytes, j, seg, dummy);
+                    int segByteLength = Segment.getSegByteLength(seg, dummy);
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
-                    SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
+                    Segment value = Segment.getSegment(bytes, j, 0, 0, basedSequence);
                     assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
@@ -298,11 +298,11 @@ public class SeqSegTest {
                 BasedSequence basedSequence = BasedSequence.of(dummy);
                 Seg seg = Seg.segOf(i, i);
 
-                int offset = SeqSeg.addSegBytes(bytes, j, seg, dummy);
-                int segByteLength = SeqSeg.getSegByteLength(seg, dummy);
+                int offset = Segment.addSegBytes(bytes, j, seg, dummy);
+                int segByteLength = Segment.getSegByteLength(seg, dummy);
                 assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
-                SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
+                Segment value = Segment.getSegment(bytes, j, 0, 0, basedSequence);
                 assertEquals(segByteLength, value.getByteLength());
                 assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
             }
@@ -322,11 +322,11 @@ public class SeqSegTest {
                     BasedSequence basedSequence = BasedSequence.of(dummy);
                     Seg seg = Seg.textOf(i, j, false, false);
 
-                    int offset = SeqSeg.addSegBytes(bytes, j, seg, dummy);
-                    int segByteLength = SeqSeg.getSegByteLength(seg, dummy);
+                    int offset = Segment.addSegBytes(bytes, j, seg, dummy);
+                    int segByteLength = Segment.getSegByteLength(seg, dummy);
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
-                    SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
+                    Segment value = Segment.getSegment(bytes, j, 0, 0, basedSequence);
                     assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
@@ -347,11 +347,11 @@ public class SeqSegTest {
                     BasedSequence basedSequence = BasedSequence.of(dummy);
                     Seg seg = Seg.textOf(i, j, true, false);
 
-                    int offset = SeqSeg.addSegBytes(bytes, j, seg, dummy);
-                    int segByteLength = SeqSeg.getSegByteLength(seg, dummy);
+                    int offset = Segment.addSegBytes(bytes, j, seg, dummy);
+                    int segByteLength = Segment.getSegByteLength(seg, dummy);
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
-                    SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
+                    Segment value = Segment.getSegment(bytes, j, 0, 0, basedSequence);
                     assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
@@ -372,11 +372,11 @@ public class SeqSegTest {
                     BasedSequence basedSequence = BasedSequence.of(dummy);
                     Seg seg = Seg.textOf(i, j, true, true);
 
-                    int offset = SeqSeg.addSegBytes(bytes, j, seg, dummy);
-                    int segByteLength = SeqSeg.getSegByteLength(seg, dummy);
+                    int offset = Segment.addSegBytes(bytes, j, seg, dummy);
+                    int segByteLength = Segment.getSegByteLength(seg, dummy);
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
-                    SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
+                    Segment value = Segment.getSegment(bytes, j, 0, 0, basedSequence);
                     assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
@@ -397,11 +397,11 @@ public class SeqSegTest {
                     BasedSequence basedSequence = BasedSequence.of(dummy);
                     Seg seg = Seg.textOf(i, j, true, true);
 
-                    int offset = SeqSeg.addSegBytes(bytes, j, seg, dummy);
-                    int segByteLength = SeqSeg.getSegByteLength(seg, dummy);
+                    int offset = Segment.addSegBytes(bytes, j, seg, dummy);
+                    int segByteLength = Segment.getSegByteLength(seg, dummy);
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
-                    SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
+                    Segment value = Segment.getSegment(bytes, j, 0, 0, basedSequence);
                     assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
@@ -422,11 +422,11 @@ public class SeqSegTest {
                     BasedSequence basedSequence = BasedSequence.of(dummy);
                     Seg seg = Seg.textOf(i, j, true, true);
 
-                    int offset = SeqSeg.addSegBytes(bytes, j, seg, dummy);
-                    int segByteLength = SeqSeg.getSegByteLength(seg, dummy);
+                    int offset = Segment.addSegBytes(bytes, j, seg, dummy);
+                    int segByteLength = Segment.getSegByteLength(seg, dummy);
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
-                    SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
+                    Segment value = Segment.getSegment(bytes, j, 0, 0, basedSequence);
                     assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
@@ -447,11 +447,11 @@ public class SeqSegTest {
                     BasedSequence basedSequence = BasedSequence.of(dummy);
                     Seg seg = Seg.textOf(i, j, false, true);
 
-                    int offset = SeqSeg.addSegBytes(bytes, j, seg, dummy);
-                    int segByteLength = SeqSeg.getSegByteLength(seg, dummy);
+                    int offset = Segment.addSegBytes(bytes, j, seg, dummy);
+                    int segByteLength = Segment.getSegByteLength(seg, dummy);
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
-                    SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
+                    Segment value = Segment.getSegment(bytes, j, 0, 0, basedSequence);
                     assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }

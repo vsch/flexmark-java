@@ -65,7 +65,7 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
 
     @Nullable
     @Override
-    public BasedSequence getBaseSubSequence() {
+    public BasedSequence getSingleBasedSequence() {
         Range range = mySegments.getBaseSubSequenceRange();
         return range == null ? null : myBase.subSequence(range.getStart(), range.getEnd());
     }

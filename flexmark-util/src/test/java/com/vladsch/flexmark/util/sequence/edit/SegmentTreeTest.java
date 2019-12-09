@@ -10,10 +10,10 @@ import java.util.function.BiConsumer;
 
 import static com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder.F_TRACK_FIRST256;
-import static com.vladsch.flexmark.util.sequence.edit.SeqSegTree.*;
+import static com.vladsch.flexmark.util.sequence.edit.SegmentTree.*;
 import static org.junit.Assert.assertEquals;
 
-public class SeqSegTreeTest {
+public class SegmentTreeTest {
 
     static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
         int iMaxStart = start + span;
@@ -72,14 +72,14 @@ public class SeqSegTreeTest {
 
     @Test
     public void test_anchorOffset() {
-        assertEquals(0, anchorOffset(0x0000_0000));
-        assertEquals(1, anchorOffset(0x2000_0000));
-        assertEquals(2, anchorOffset(0x4000_0000));
-        assertEquals(3, anchorOffset(0x6000_0000));
-        assertEquals(4, anchorOffset(0x8000_0000));
-        assertEquals(5, anchorOffset(0xA000_0000));
-        assertEquals(6, anchorOffset(0xC000_0000));
-        assertEquals(7, anchorOffset(0xE000_0000));
+        assertEquals(0, SegmentTree.getAnchorOffset(0x0000_0000));
+        assertEquals(1, SegmentTree.getAnchorOffset(0x2000_0000));
+        assertEquals(2, SegmentTree.getAnchorOffset(0x4000_0000));
+        assertEquals(3, SegmentTree.getAnchorOffset(0x6000_0000));
+        assertEquals(4, SegmentTree.getAnchorOffset(0x8000_0000));
+        assertEquals(5, SegmentTree.getAnchorOffset(0xA000_0000));
+        assertEquals(6, SegmentTree.getAnchorOffset(0xC000_0000));
+        assertEquals(7, SegmentTree.getAnchorOffset(0xE000_0000));
     }
 
     int highestBit(int value) {
@@ -88,51 +88,6 @@ public class SeqSegTreeTest {
             if ((value & (1 << i)) != 0) return i;
         }
         return -1;
-    }
-
-    @Test
-    public void test_getStep() {
-        assertEquals(1, getStep(2));
-        assertEquals(2, getStep(3));
-        assertEquals(2, getStep(4));
-        assertEquals(4, getStep(5));
-        assertEquals(4, getStep(6));
-        assertEquals(4, getStep(7));
-        assertEquals(4, getStep(8));
-        assertEquals(8, getStep(9));
-        assertEquals(8, getStep(10));
-        assertEquals(8, getStep(11));
-        assertEquals(8, getStep(12));
-        assertEquals(8, getStep(13));
-        assertEquals(8, getStep(14));
-        assertEquals(8, getStep(15));
-        assertEquals(8, getStep(16));
-        assertEquals(16, getStep(17));
-        assertEquals(16, getStep(18));
-        assertEquals(16, getStep(19));
-        assertEquals(16, getStep(20));
-        assertEquals(16, getStep(21));
-        assertEquals(16, getStep(22));
-        assertEquals(16, getStep(23));
-        assertEquals(16, getStep(24));
-        assertEquals(16, getStep(25));
-        assertEquals(16, getStep(26));
-        assertEquals(16, getStep(27));
-        assertEquals(16, getStep(28));
-        assertEquals(16, getStep(29));
-        assertEquals(16, getStep(30));
-        assertEquals(16, getStep(31));
-        assertEquals(16, getStep(32));
-
-        loopSizes((b, i) -> {
-            int bit = highestBit(i);
-            if (bit >= 0) {
-                int mask = (1 << bit) - 1;
-                if ((mask & i) == 0) bit = bit - 1;
-                int step = 1 << bit;
-                assertEquals("i: " + i, step, getStep(i));
-            }
-        });
     }
 
     @Test
@@ -189,8 +144,8 @@ public class SeqSegTreeTest {
                 int[] aggrSegData2 = { -1, -2, i, -3 };
 
                 loopEnd(i, (bj, j) -> {
-                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegTreePos(0, 0, 0), findSegSegPos(j, aggrSegData1, 0, 1));
-                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegTreePos(1, 0, 0), findSegSegPos(j, aggrSegData2, 1, 1));
+                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegTreePos(0, 0, 0), findSegmentPos(j, aggrSegData1, 0, 1));
+                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegTreePos(1, 0, 0), findSegmentPos(j, aggrSegData2, 1, 1));
                 });
             }
         });
@@ -207,8 +162,8 @@ public class SeqSegTreeTest {
                     if (i == 1 && j == 65529) {
                         int tmp = 0;
                     }
-                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegTreePos(j >= i ? 1 : 0, j >= i ? i : 0, 0), findSegSegPos(j, aggrSegData1, 0, 2));
-                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegTreePos((j >= i ? 2 : 1), (j >= i ? i : 0), 0), findSegSegPos(j, aggrSegData2, 1, 2));
+                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegTreePos(j >= i ? 1 : 0, j >= i ? i : 0, 0), findSegmentPos(j, aggrSegData1, 0, 2));
+                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegTreePos((j >= i ? 2 : 1), (j >= i ? i : 0), 0), findSegmentPos(j, aggrSegData2, 1, 3));
                 });
             }
         });
@@ -246,8 +201,8 @@ public class SeqSegTreeTest {
                             int tmp = 0;
                         }
 
-                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegTreePos(segment[0], startIndex[0], 0), findSegSegPos(j, aggrSegData1, 0, finalK));
-                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegTreePos(segment[0] + 1, startIndex[0], 0), findSegSegPos(j, aggrSegData2, 1, finalK));
+                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegTreePos(segment[0], startIndex[0], 0), findSegmentPos(j, aggrSegData1, 0, finalK));
+                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegTreePos(segment[0] + 1, startIndex[0], 0), findSegmentPos(j, aggrSegData2, 1, finalK + 1));
                     });
                 }
             }
@@ -259,21 +214,19 @@ public class SeqSegTreeTest {
         // TEST: need test for this
     }
 
-    void assertCharAt(@NotNull BasedSequence sequence, @NotNull SegmentBuilder segments, @NotNull SeqSegTree segTree) {
+    void assertCharAt(@NotNull BasedSequence sequence, @NotNull SegmentBuilder segments, @NotNull SegmentTree segTree) {
         BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
         int iMax = sequenceFull.length();
         System.out.println(segTree.toString(sequence));
 
         for (int i = 0; i < iMax; i++) {
-            SegTreePos treePos = segTree.findSegSegPos(i);
-            assert treePos != null;
+            Segment seg = segTree.findSegment(i, sequence);
+            assert seg != null;
 
-            SeqSeg seqSeg = segTree.getSegment(treePos.pos, sequence);
-
-            System.out.println("i: " + i + " pos: " + treePos + ", seg: " + seqSeg);
+            System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
 
             String expected = Character.toString(sequenceFull.charAt(i));
-            String actual = Character.toString(seqSeg.getCharSequence().charAt(i - treePos.startIndex));
+            String actual = Character.toString(seg.charAt(i));
             assertEquals("i: " + i, expected, actual);
         }
     }
@@ -290,7 +243,7 @@ public class SeqSegTreeTest {
         segments.append(10, 10);
         assertEquals("SegmentBuilder{[0, 10), s=0:0, u=0:0, t=0:0, l=6, sz=4, na=2: [0), [2, 5), [6, 9), [10) }", segments.toStringPrep());
 
-        SeqSegTree segTree = SeqSegTree.build(segments.getSegments(), segments.getText());
+        SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
         assertEquals("SeqSegTree{aggr: {[3, 1:, 0:], [6, 4:] }, seg: { 0:[0), 1:[2, 5), 4:[6, 9), 7:[10) } }", segTree.toString(sequence));
         assertCharAt(sequence, segments, segTree);
     }
@@ -308,7 +261,8 @@ public class SeqSegTreeTest {
         segments.append(10, 10);
         assertEquals("SegmentBuilder{[0, 10), s=0:0, u=1:4, t=1:4, l=10, sz=5, na=3: [0), [2, 5), a:'abcd', [6, 9), [10) }", segments.toStringPrep());
 
-        SeqSegTree segTree = SeqSegTree.build(segments.getSegments(), segments.getText());
+        SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
         assertEquals("SeqSegTree{aggr: {[3, 1:, 0:], [7, 4:], [10, 9:] }, seg: { 0:[0), 1:[2, 5), 4:a:'abcd', 9:[6, 9), 12:[10) } }", segTree.toString(sequence));
+        assertCharAt(sequence, segments, segTree);
     }
 }

@@ -128,11 +128,11 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     }
 
     public static BasedSequence create(BasedSequenceBuilder builder) {
-        BasedSequence baseSubSequence = builder.getBaseSubSequence();
+        BasedSequence baseSubSequence = builder.getSingleBasedSequence();
         if (baseSubSequence != null) {
             return baseSubSequence;
         } else if (!builder.isEmpty()) {
-            return SegmentedSequenceFull.create(builder.getBaseSubSequence(), builder.getSegmentBuilder());
+            return SegmentedSequenceFull.create(builder.getBaseSequence(), builder.getSegmentBuilder());
         }
         return BasedSequence.NULL;
     }
