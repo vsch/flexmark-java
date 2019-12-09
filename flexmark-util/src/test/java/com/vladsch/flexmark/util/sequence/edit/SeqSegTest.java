@@ -279,7 +279,7 @@ public class SeqSegTest {
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
                     SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
-
+                    assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
             });
@@ -303,7 +303,7 @@ public class SeqSegTest {
                 assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
                 SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
-
+                assertEquals(segByteLength, value.getByteLength());
                 assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
             }
         });
@@ -327,7 +327,7 @@ public class SeqSegTest {
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
                     SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
-
+                    assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
             });
@@ -352,7 +352,7 @@ public class SeqSegTest {
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
                     SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
-
+                    assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
             });
@@ -377,7 +377,7 @@ public class SeqSegTest {
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
                     SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
-
+                    assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
             });
@@ -402,7 +402,7 @@ public class SeqSegTest {
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
                     SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
-
+                    assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
             });
@@ -427,7 +427,7 @@ public class SeqSegTest {
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
                     SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
-
+                    assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
             });
@@ -452,7 +452,7 @@ public class SeqSegTest {
                     assertEquals("i: " + i + " j: " + j, j + segByteLength, offset);
 
                     SeqSeg value = SeqSeg.getSeqSeg(bytes, j, basedSequence);
-
+                    assertEquals(segByteLength, value.getByteLength());
                     assertEquals("i: " + i + " j: " + j, seg.toString(dummy), value.toString());
                 }
             });

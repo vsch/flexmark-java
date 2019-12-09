@@ -11,7 +11,7 @@ import static com.vladsch.flexmark.util.Utils.escapeJavaString;
  * <p>
  * Out of base text offsets are limited to 1GB. Upper bit is used to store repeated and ascii only flags.
  */
-class Seg {
+public class Seg {
     final public static Seg NULL = new Seg(Range.NULL.getStart(), Range.NULL.getEnd());
     final public static Seg ANCHOR_0 = new Seg(0, 0);
     final public static int MAX_TEXT_OFFSET = Integer.MAX_VALUE >> 1;
@@ -31,6 +31,14 @@ class Seg {
 
     public int getEnd() {
         return myEnd;
+    }
+
+    public int getSegStart() {
+        return isText() ? getTextStart() : myStart;
+    }
+
+    public int getSegEnd() {
+        return isText() ? getTextEnd() : myEnd;
     }
 
     public int getTextStart() {

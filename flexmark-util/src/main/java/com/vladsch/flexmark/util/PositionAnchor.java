@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.collection.iteration;
+package com.vladsch.flexmark.util;
 
 public enum PositionAnchor {
     CURRENT,       // not leaning, pad around it

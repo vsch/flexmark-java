@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.collection.iteration;
+package com.vladsch.flexmark.experimental.util.collection.iteration;
 
 import org.jetbrains.annotations.NotNull;
 

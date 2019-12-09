@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
+import com.vladsch.flexmark.util.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;

@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.util.collection.iteration;
+package com.vladsch.flexmark.experimental.util.collection.iteration;
 
+import com.vladsch.flexmark.util.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Rule;
 import org.junit.Test;
@@ -1900,7 +1901,7 @@ public class PositionListTest {
         Object frameId2 = positions.openFrame();
         thrown.expect(matchPrefix(IllegalStateException.class, "" +
                 "closeFrame() open nested frames, openFrame trace:\n" +
-                "      com.vladsch.flexmark.util.collection.iteration.PositionListTest.framesNotClosed(PositionListTest.java:" +
+                "      com.vladsch.flexmark.experimental.util.collection.iteration.PositionListTest.framesNotClosed(PositionListTest.java:" +
                 ""));
         positions.closeFrame(frameId);
     }
@@ -1917,8 +1918,8 @@ public class PositionListTest {
         Object frameId3 = positions.openFrame();
         thrown.expect(matchRegEx(IllegalStateException.class, "" +
                 "\\QcloseFrame() open nested frames, openFrame trace:\n\\E" +
-                "\\Q      com.vladsch.flexmark.util.collection.iteration.PositionListTest.framesNotClosed2(PositionListTest.java:\\E(?s:.*?)" +
-                "\\Q        com.vladsch.flexmark.util.collection.iteration.PositionListTest.framesNotClosed2(PositionListTest.java:\\E(?s:.*)" +
+                "\\Q      com.vladsch.flexmark.experimental.util.collection.iteration.PositionListTest.framesNotClosed2(PositionListTest.java:\\E(?s:.*?)" +
+                "\\Q        com.vladsch.flexmark.experimental.util.collection.iteration.PositionListTest.framesNotClosed2(PositionListTest.java:\\E(?s:.*)" +
                 ""));
         positions.closeFrame(frameId);
     }
@@ -1936,7 +1937,7 @@ public class PositionListTest {
         positions.closeFrame(frameId3);
         thrown.expect(matchRegEx(IllegalStateException.class, "" +
                 "\\QcloseFrame() open nested frames, openFrame trace:\n\\E" +
-                "\\Q      com.vladsch.flexmark.util.collection.iteration.PositionListTest.framesNotClosed3(PositionListTest.java:\\E(?s:.*?)" +
+                "\\Q      com.vladsch.flexmark.experimental.util.collection.iteration.PositionListTest.framesNotClosed3(PositionListTest.java:\\E(?s:.*?)" +
                 ""));
         positions.closeFrame(frameId);
     }

@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.util.collection.iteration;
+package com.vladsch.flexmark.experimental.util.collection.iteration;
 
+import com.vladsch.flexmark.util.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 
 public class Position<T> extends IPositionBase<T, Position<T>> {

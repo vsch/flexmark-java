@@ -1,12 +1,13 @@
-package com.vladsch.flexmark.util.collection.iteration;
+package com.vladsch.flexmark.experimental.util.collection.iteration;
 
+import com.vladsch.flexmark.util.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static com.vladsch.flexmark.util.collection.iteration.PositionAnchor.*;
+import static com.vladsch.flexmark.util.PositionAnchor.*;
 
 /**
  * Bidirectional iterator, direction depends on the position anchor NEXT is a forward iterator, PREVIOUS is a reverse iterator

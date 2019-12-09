@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Function;
 
-import static com.vladsch.flexmark.util.Utils.escapeJavaString;
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
 
@@ -175,6 +174,44 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     @Override
+    public @NotNull Iterable<Seg> getSegments() {
+        return new SegIterable(this);
+    }
+
+    static class SegIterable implements Iterable<Seg> {
+        final SegmentBuilderBase<?> myBuilder;
+
+        public SegIterable(SegmentBuilderBase<?> builder) {
+            myBuilder = builder;
+        }
+
+        @NotNull
+        @Override
+        public Iterator<Seg> iterator() {
+            return new SegIterator(myBuilder);
+        }
+    }
+
+    static class SegIterator implements Iterator<Seg> {
+        final SegmentBuilderBase<?> myBuilder;
+        int myNextIndex;
+
+        public SegIterator(SegmentBuilderBase<?> builder) {
+            myBuilder = builder;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return myNextIndex < myBuilder.size();
+        }
+
+        @Override
+        public Seg next() {
+            return myBuilder.getSegPart(myNextIndex++);
+        }
+    }
+
+    @Override
     public int getOptions() {
         return myOptions;
     }
@@ -215,6 +252,17 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
             int i = index * 2;
             Seg seg = i + 1 >= myParts.length ? Seg.NULL : Seg.segOf(myParts[i], myParts[i + 1]);
             return seg.isBase() ? seg.getRange() : seg.isText() ? myText.subSequence(seg.getTextStart(), seg.getTextEnd()) : Range.NULL;
+        }
+    }
+
+    @NotNull
+    Seg getSegPart(int index) {
+        if (index == myPartsSize && haveDanglingText()) {
+            // return dangling text
+            return Seg.textOf(myImmutableOffset, myText.length(), myTextStats.isTextFirst256(), myTextStats.isRepeatedText());
+        } else {
+            int i = index * 2;
+            return i + 1 >= myParts.length ? Seg.NULL : Seg.segOf(myParts[i], myParts[i + 1]);
         }
     }
 

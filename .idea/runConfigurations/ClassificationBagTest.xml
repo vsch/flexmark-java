@@ -3,7 +3,7 @@
     <module name="flexmark" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.util.collection.iteration.IPosition" />
+        <option name="PATTERN" value="com.vladsch.flexmark.experimental.util.collection.iteration.IPosition" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

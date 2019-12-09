@@ -2,15 +2,11 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKeyBase;
+import com.vladsch.flexmark.util.PositionAnchor;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

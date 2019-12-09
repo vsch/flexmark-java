@@ -78,6 +78,7 @@ int aggrLength = aggregatedLengths.length;  // length of subsequence's portion o
 while(step > 0) {
    if (pos < aggrOffset) pos += step;
    else if (pos >= aggrLength) pos -= step;
+   else if (i == aggr[pos]) break;
    else if (i < aggr[pos]) pos -= step;
    else pos += step;
    step >>= 1;

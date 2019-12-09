@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util;
 
 import com.vladsch.flexmark.util.ast.DocumentTest;
 import com.vladsch.flexmark.util.collection.*;
-import com.vladsch.flexmark.util.collection.iteration.PositionListTest;
 import com.vladsch.flexmark.util.format.MarkdownParagraphTest;
 import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBaseTest;
 import com.vladsch.flexmark.util.html.ui.HtmlBuilderTest;
@@ -18,12 +17,12 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         SegmentBuilderTest.class,
+        SeqSegTest.class,
+        SeqSegTreeTest.class,
         BasedSegmentBuilderTest.class,
         BasedSequenceBuilderTest.class,
         BasedSequenceImplTest.class,
         BaseSequenceEntryTest.class,
-        SeqSegTest.class,
-        PositionListTest.class,
         BaseSequenceManagerTest.class,
         MarkdownParagraphTest.class,
         TemplateUtilTest.class,

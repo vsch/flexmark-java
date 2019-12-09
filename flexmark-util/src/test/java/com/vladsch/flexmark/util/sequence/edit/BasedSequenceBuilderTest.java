@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
-import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
+import com.vladsch.flexmark.util.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.Range;

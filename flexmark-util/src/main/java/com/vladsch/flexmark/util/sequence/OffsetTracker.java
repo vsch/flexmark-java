@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.collection.iteration.PositionAnchor;
+import com.vladsch.flexmark.util.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 
 /**

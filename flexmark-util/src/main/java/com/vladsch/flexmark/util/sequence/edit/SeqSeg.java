@@ -82,6 +82,24 @@ public abstract class SeqSeg {
         public boolean hasBytes() {
             return hasAll(TYPE_HAS_BYTES);
         }
+
+        public static SegType fromTypeMask(int segTypeMask) {
+            switch (segTypeMask & TYPE_MASK) {
+// @formatter:off
+                case TYPE_ANCHOR: return SegType.ANCHOR;
+                case TYPE_BASE: return SegType.BASE;
+                case TYPE_TEXT: return SegType.TEXT;
+                case TYPE_TEXT_ASCII: return SegType.TEXT_ASCII;
+                case TYPE_REPEATED_TEXT: return SegType.REPEATED_TEXT;
+                case TYPE_REPEATED_ASCII: return SegType.REPEATED_ASCII;
+                case TYPE_REPEATED_SPACE: return SegType.REPEATED_SPACE;
+                case TYPE_REPEATED_EOL: return SegType.REPEATED_EOL;
+// @formatter:on
+
+                default:
+                    throw new IllegalStateException(String.format("Invalid text type %02x", segTypeMask));
+            }
+        }
     }
 
     public boolean hasAll(int flags, int mask) {
@@ -98,6 +116,14 @@ public abstract class SeqSeg {
 
     final public int getOffset() {
         return myOffset;
+    }
+
+    final public SegType getType() {
+        return SegType.fromTypeMask(myBytes[myOffset]);
+    }
+
+    final public int getByteLength() {
+        return getSegByteLength(getType(), getStartOffset(), length());
     }
 
     public abstract int length();
@@ -342,7 +368,7 @@ public abstract class SeqSeg {
         public Text(byte[] bytes, int offset) {
             super(bytes, offset);
             int type = bytes[offset++] & 0x00ff;
-            int textType = type & TYPE_MASK;
+            int segTypeMask = type & TYPE_MASK;
 
             int length;
 
@@ -354,7 +380,7 @@ public abstract class SeqSeg {
                 offset += lengthBytes + 1;
             }
 
-            switch (textType) {
+            switch (segTypeMask) {
                 case TYPE_TEXT:
                     myCharSequence = new TextCharSequence(bytes, offset, 0, length);
                     break;
@@ -380,7 +406,7 @@ public abstract class SeqSeg {
                     break;
 
                 default:
-                    throw new IllegalStateException("Invalid text type " + textType);
+                    throw new IllegalStateException("Invalid text type " + segTypeMask);
             }
         }
 
@@ -496,24 +522,28 @@ public abstract class SeqSeg {
         return length < 256 ? 1 : length < 65536 ? 2 : length < 65536 * 256 ? 3 : 4;
     }
 
-    public static int getSegByteLength(@NotNull Seg seg, @NotNull CharSequence textChars) {
-        SegType segType = getSegType(seg, textChars);
+    public static int getSegByteLength(@NotNull SeqSeg.SegType segType, int segStart, int segLength) {
         int length = 1;
 
         if (segType.hasBoth()) {
-            length += getIntBytes(seg.getStart()) + getIntBytes(seg.length());
+            length += getIntBytes(segStart) + getIntBytes(segLength);
         } else if (segType.hasOffset()) {
-            length += getOffsetBytes(seg.getStart());
+            length += getOffsetBytes(segStart);
         } else if (segType.hasLength()) {
-            length += getLengthBytes(seg.length());
+            length += getLengthBytes(segLength);
         }
 
         if (segType.hasChar()) length += 2;
-        else if (segType.hasChars()) length += 2 * seg.length();
+        else if (segType.hasChars()) length += 2 * segLength;
         else if (segType.hasByte()) length += 1;
-        else if (segType.hasBytes()) length += seg.length();
+        else if (segType.hasBytes()) length += segLength;
 
         return length;
+    }
+
+    public static int getSegByteLength(@NotNull Seg seg, @NotNull CharSequence textChars) {
+        SegType segType = getSegType(seg, textChars);
+        return getSegByteLength(segType, seg.getSegStart(), seg.length());
     }
 
     public static int addIntBytes(byte[] bytes, int offset, int value, int count) {

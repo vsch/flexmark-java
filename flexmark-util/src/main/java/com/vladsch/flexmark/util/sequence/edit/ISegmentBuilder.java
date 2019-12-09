@@ -46,6 +46,13 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
     @Override
     Iterator<Object> iterator();
 
+    /**
+     * Return iterator over segments
+     * @return iterator over segment builder segments
+     */
+    @NotNull
+    Iterable<Seg> getSegments();
+
     @NotNull S append(int startOffset, int endOffset);
     @NotNull S append(CharSequence text);
     @NotNull S appendAnchor(int offset);
