@@ -70,16 +70,79 @@ public class SegmentTree {
     }
 
     @Nullable
-    public Segment findSegment(int index, @NotNull BasedSequence basedSequence) {
-        SegTreePos treePos = findSegmentPos(index, treeData, 0, treeData.length >> 1);
-        if (treePos != null) {
-            return Segment.getSegment(segmentBytes, byteOffset(treePos.pos), treePos.pos, treePos.startIndex, basedSequence);
-        }
-        return null;
+    public Segment findSegment(int index, @NotNull BasedSequence basedSequence, @Nullable Segment hint) {
+        return findSegment(index, 0, treeData.length / 2, basedSequence, hint);
     }
 
     @Nullable
-    public Segment findSegment(int index, int startPos, int endPos, @NotNull BasedSequence basedSequence) {
+    public Segment findSegment(int index, int startPos, int endPos, @NotNull BasedSequence basedSequence, @Nullable Segment hint) {
+        if (hint != null) {
+            // NOTE: first try around cached segment for this index
+            int startIndex = hint.getStartIndex();
+            if (index >= startIndex) {
+                int endIndex = hint.getEndIndex();
+                assert index >= endIndex : String.format("FindSegment should not be called, index %d is in range [%d, %d) of hint segment: %s", index, startIndex, endIndex, hint);
+                if (hint.myPos + 1 >= endPos) return null;
+                int nextLength = aggrLength(hint.myPos + 1);
+                if (index < nextLength) {
+                    // FIX: add stats to track this
+                    System.out.println("Using next segment");
+                    return Segment.getSegment(segmentBytes, byteOffset(hint.myPos + 1), hint.myPos + 1, endIndex, basedSequence);
+                }
+                // can skip next one too
+                startPos = hint.myPos + 2;
+            } else {
+                // see if previous contains index
+                if (hint.myPos == startPos) return null;
+
+                int prevPrevLength = hint.myPos < 2 ? 0 : aggrLength(hint.myPos - 2);
+                if (index >= prevPrevLength) {
+                    // it is previous one
+                    // FIX: add stats to track this
+                    System.out.println("Using previous segment");
+                    return Segment.getSegment(segmentBytes, byteOffset(hint.myPos - 1), hint.myPos - 1, prevPrevLength, basedSequence);
+                }
+                // previous one can be skipped
+                endPos = hint.myPos - 1;
+            }
+        }
+
+        // NOTE: most of the time char sequence access starts at 0, so we try the start pos
+        if (startPos >= 0) {
+            int firstLength = aggrLength(startPos);
+            if (index < firstLength) {
+                int prevLength = startPos == 0 ? 0 : aggrLength(startPos - 1);
+                if (index >= prevLength) {
+                    // FIX: add stats to track this
+                    System.out.println("Using first segment");
+                    return Segment.getSegment(segmentBytes, byteOffset(startPos), startPos, prevLength, basedSequence);
+                }
+                // first one is too far, we can skip it
+                endPos = startPos;
+            } else {
+                // first one can be skipped
+                startPos = startPos + 1;
+            }
+        }
+
+        // NOTE: failing that we try the last segment in case it is backwards scan through sequence
+        if (endPos - 1 >= startPos) {
+            // check last one for match
+            int secondToLastLength = endPos < 2 ? 0 : aggrLength(endPos - 2);
+            if (index >= secondToLastLength) {
+                int lastLength = aggrLength(endPos - 1);
+                if (index >= lastLength) return null; /* beyond last segment*/
+
+                // FIX: add stats to track this
+                System.out.println("Using last segment");
+                return Segment.getSegment(segmentBytes, byteOffset(endPos - 1), endPos - 1, secondToLastLength, basedSequence);
+            } else {
+                // previous to last can be skipped
+                endPos = endPos - 1;
+            }
+        }
+
+        // NOTE: all optimizations failed, but not wasted since they served to shorten the search range.
         SegTreePos treePos = findSegmentPos(index, startPos, endPos);
         if (treePos != null) {
             return Segment.getSegment(segmentBytes, byteOffset(treePos.pos), treePos.pos, treePos.startIndex, basedSequence);
@@ -156,6 +219,9 @@ public class SegmentTree {
     @Nullable
     public static SegTreePos findSegmentPos(int index, int[] treeData, int startPos, int endPos) {
         // FIX: add segmented sequence stats collection for iteration counts
+        // FIX: check first segment and last segment in case it is a scan from start/end of sequence
+        if (index == 0 && startPos == 0) return new SegTreePos(0, 0, 0);
+
         int iterations = 0;
         while (startPos < endPos) {
             int pos = (startPos + endPos) >> 1;

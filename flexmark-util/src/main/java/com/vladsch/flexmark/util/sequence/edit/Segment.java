@@ -32,6 +32,7 @@ public abstract class Segment {
     final static int TYPE_HAS_CHARS         = 0b0000_1000_0000_0000;
     final static int TYPE_HAS_BYTE          = 0b0001_0000_0000_0000;
     final static int TYPE_HAS_BYTES         = 0b0010_0000_0000_0000;
+
 // @formatter:on
 
     public enum SegType {
@@ -109,13 +110,13 @@ public abstract class Segment {
     protected final int myPos;  // position of segment in aggr length table
     protected final byte[] myBytes;
     protected final int myByteOffset;
-    protected final int myIndexOffset;
+    protected final int myStartIndex;
 
-    public Segment(int pos, byte[] bytes, int byteOffset, int indexOffset) {
+    public Segment(int pos, byte[] bytes, int byteOffset, int startIndex) {
         myPos = pos;
         myBytes = bytes;
         myByteOffset = byteOffset;
-        myIndexOffset = indexOffset;
+        myStartIndex = startIndex;
     }
 
     public int getPos() {
@@ -130,9 +131,18 @@ public abstract class Segment {
         return myByteOffset;
     }
 
-    public int getIndexOffset() {
-        return myIndexOffset;
+    final public int getStartIndex() {
+        return myStartIndex;
     }
+
+    final public int getEndIndex() {
+        return myStartIndex + length();
+    }
+
+    public boolean notInSegment(int index) {
+        return index < myStartIndex || index >= myStartIndex + length();
+    }
+
 
     final public SegType getType() {
         return SegType.fromTypeMask(myBytes[myByteOffset]);
@@ -259,10 +269,10 @@ public abstract class Segment {
 
         @Override
         public char charAt(int index) {
-            if (index < myIndexOffset || index - myIndexOffset >= length()) {
-                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + myIndexOffset + ", " + myIndexOffset +  length() + ")");
+            if (index < myStartIndex || index - myStartIndex >= length()) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + myStartIndex + ", " + myStartIndex +  length() + ")");
             }
-            return myBasedSequence.charAt(myStartOffset + index - myIndexOffset);
+            return myBasedSequence.charAt(myStartOffset + index - myStartIndex);
         }
 
         @Override
@@ -448,10 +458,10 @@ public abstract class Segment {
 
         @Override
         public char charAt(int index) {
-            if (index < myIndexOffset || index - myIndexOffset >= myCharSequence.length()) {
-                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + myIndexOffset + ", " + myIndexOffset + myCharSequence.length() + ")");
+            if (index < myStartIndex || index - myStartIndex >= myCharSequence.length()) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + myStartIndex + ", " + myStartIndex + myCharSequence.length() + ")");
             }
-            return myCharSequence.charAt(index - myIndexOffset);
+            return myCharSequence.charAt(index - myStartIndex);
         }
 
         @Override

@@ -1,9 +1,13 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="UtilsTestSuite" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
     <module name="flexmark-util" />
-    <extension name="coverage">
+    <extension name="coverage" sample_coverage="false" track_test_folders="true">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.util.SegmentedSequenceStatsTest" />
+        <option name="PATTERN" value="com.vladsch.flexmark.util.sequence.edit.SegmentTree" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="com.vladsch.flexmark.util.sequence.edit.SegmentTreeTest" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

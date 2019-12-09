@@ -218,12 +218,27 @@ public class SegmentTreeTest {
         BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
         int iMax = sequenceFull.length();
         System.out.println(segTree.toString(sequence));
+        Segment seg = null;
 
         for (int i = 0; i < iMax; i++) {
-            Segment seg = segTree.findSegment(i, sequence);
-            assert seg != null;
+            if (seg == null || seg.notInSegment(i)) {
+                seg = segTree.findSegment(i, sequence, seg);
+                assert seg != null;
+                System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
+            }
 
-            System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
+            String expected = Character.toString(sequenceFull.charAt(i));
+            String actual = Character.toString(seg.charAt(i));
+            assertEquals("i: " + i, expected, actual);
+        }
+
+        seg = null;
+        for (int i = iMax; i-- > 0; ) {
+            if (seg == null || seg.notInSegment(i)) {
+                seg = segTree.findSegment(i, sequence, seg);
+                assert seg != null;
+                System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
+            }
 
             String expected = Character.toString(sequenceFull.charAt(i));
             String actual = Character.toString(seg.charAt(i));
