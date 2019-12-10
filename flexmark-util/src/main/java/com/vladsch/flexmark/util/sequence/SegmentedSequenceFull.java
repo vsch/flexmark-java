@@ -109,7 +109,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
         if (baseSeq.isOption(O_COLLECT_SEGMENTED_STATS)) {
             SegmentedSequenceStats stats = baseSeq.getOption(SEGMENTED_STATS);
             if (stats != null) {
-                stats.addStats(builder.noAnchorsSize(), builder.getTextLength(), builder.getTextSegments(), length, startOffset, endOffset);
+                stats.addStats(builder.noAnchorsSize(), length, baseOffsets.length * 4);
             }
         }
 

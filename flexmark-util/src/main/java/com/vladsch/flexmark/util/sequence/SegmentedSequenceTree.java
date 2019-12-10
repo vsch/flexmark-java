@@ -134,7 +134,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
         if (baseSeq.isOption(O_COLLECT_SEGMENTED_STATS)) {
             SegmentedSequenceStats stats = baseSeq.getOption(SEGMENTED_STATS);
             if (stats != null) {
-                stats.addStats(builder.noAnchorsSize(), builder.getTextLength(), builder.getTextSegments(), builder.length(), builder.getStartOffset(), builder.getEndOffset());
+                stats.addStats(builder.noAnchorsSize(), builder.length(), segmentTree.getTreeData().length * 4 + segmentTree.getSegmentBytes().length);
             }
         }
 
