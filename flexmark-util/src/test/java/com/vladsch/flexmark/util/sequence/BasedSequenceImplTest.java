@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.vladsch.flexmark.util.Utils.escapeJavaString;
 import static org.junit.Assert.*;
 
 public class BasedSequenceImplTest {
@@ -1075,7 +1074,6 @@ public class BasedSequenceImplTest {
         assertEquals(9, replaced.getIndexOffset(9));
         assertEquals(10, replaced.getIndexOffset(10));
     }
-
 
     @Test
     public void test_replaceSuffix() {

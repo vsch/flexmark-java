@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class BasedTrackedSequenceImplTest {
+public class BasedSequenceTreeImplTest {
     // TODO: need complete tests here
 
     @Test
@@ -366,7 +368,7 @@ public class BasedTrackedSequenceImplTest {
     @Test
     public void testSplitBasic() throws Exception {
         BasedSequence sequence = BasedSequence.of(" 1,2 , 3 ,4,5,   ").subSequence(0, ((CharSequence) " 1,2 , 3 ,4,5,   ").length());
-        BasedSequence[] list = sequence.split(",", 0, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_SKIP_EMPTY,null);
+        BasedSequence[] list = sequence.split(",", 0, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_SKIP_EMPTY, null);
         ArrayList<String> sl = new ArrayList<>(list.length);
         for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
@@ -425,12 +427,12 @@ public class BasedTrackedSequenceImplTest {
     @Test
     public void test_getLineColumnAtIndex() {
         String[] lines = new String[] {
-            "1: line 1\n",
-            "2: line 2\n",
-            "3: line 3\r",
-            "4: line 4\r\n",
-            "5: line 5\r",
-            "6: line 6"
+                "1: line 1\n",
+                "2: line 2\n",
+                "3: line 3\r",
+                "4: line 4\r\n",
+                "5: line 5\r",
+                "6: line 6"
         };
 
         int iMax = lines.length;
@@ -811,14 +813,14 @@ public class BasedTrackedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges1() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "";
+                "\t    test\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -827,16 +829,16 @@ public class BasedTrackedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges2() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "    t\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "    t\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "    t\n" +
-            "";
+                "\t    test\n" +
+                "    t\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -845,27 +847,27 @@ public class BasedTrackedSequenceImplTest {
     @Test
     public void test_removeBlankLinesRanges3() {
         String input = "\n" +
-            "\t    test\n" +
-            "\n" +
-            "    t1\n" +
-            "\n" +
-            "    t2\n" +
-            "\n" +
-            "\n" +
-            "\n" +
-            "    t3\n" +
-            "\n" +
-            "    t4\n" +
-            "\n" +
-            "";
+                "\t    test\n" +
+                "\n" +
+                "    t1\n" +
+                "\n" +
+                "    t2\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "    t3\n" +
+                "\n" +
+                "    t4\n" +
+                "\n" +
+                "";
 
         String result = "" +
-            "\t    test\n" +
-            "    t1\n" +
-            "    t2\n" +
-            "    t3\n" +
-            "    t4\n" +
-            "";
+                "\t    test\n" +
+                "    t1\n" +
+                "    t2\n" +
+                "    t3\n" +
+                "    t4\n" +
+                "";
 
         BasedSequence sequence = BasedSequence.of(input);
         assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
@@ -874,9 +876,9 @@ public class BasedTrackedSequenceImplTest {
     @Test
     public void test_extendToEndOfLine() {
         String input = "" +
-            "0123456789\n" +
-            "abcdefghij\n" +
-            "\n";
+                "0123456789\n" +
+                "abcdefghij\n" +
+                "\n";
 
         BasedSequence sequence = BasedSequence.of(input);
 
@@ -896,9 +898,9 @@ public class BasedTrackedSequenceImplTest {
     @Test
     public void test_extendToStartOfLine() {
         String input = "" +
-            "0123456789\n" +
-            "abcdefghij\n" +
-            "\n";
+                "0123456789\n" +
+                "abcdefghij\n" +
+                "\n";
 
         BasedSequence sequence = BasedSequence.of(input);
 
@@ -1037,6 +1039,33 @@ public class BasedTrackedSequenceImplTest {
         BasedSequence sequence = BasedSequence.of(input);
         BasedSequence replaced = sequence.replace(0, 1, "^");
 
+        assertEquals("^123456789", replaced.toString());
+        assertEquals(Range.of(0, 10), replaced.getSourceRange());
+        assertEquals(-1, replaced.getIndexOffset(0));
+        assertEquals(1, replaced.getIndexOffset(1));
+        assertEquals(2, replaced.getIndexOffset(2));
+        assertEquals(9, replaced.getIndexOffset(9));
+        assertEquals(10, replaced.getIndexOffset(10));
+    }
+
+    @Test
+    public void test_replacePrefix11() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequenceBuilder builder = sequence.getBuilder();
+        BasedSegmentBuilder segments = builder.getSegmentBuilder();
+
+//        BasedSequence replaced = sequence.replace(0, 1, "^");
+//        assertEquals("^123456789", replaced.toString());
+
+        segments.append(Range.of(0, 0));
+        segments.append("^");
+        segments.append(Range.of(1, 10));
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("^123456789", segments.toString(sequence));
+
+        BasedSequence replaced = builder.toSequence();
         assertEquals("^123456789", replaced.toString());
         assertEquals(Range.of(0, 10), replaced.getSourceRange());
         assertEquals(-1, replaced.getIndexOffset(0));
@@ -1510,5 +1539,67 @@ public class BasedTrackedSequenceImplTest {
         assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 12).getSourceRange());
         assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 13).getSourceRange());
         assertEquals(Range.of(0, 12), sequence.trimToEndOfLine(BasedSequence.ANY_EOL_SET, false, 14).getSourceRange());
+    }
+
+    @Test
+    public void test_matchedCharCount() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        assertEquals(0, sequence.matchedCharCount("6789", 0, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 1, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 2, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 3, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 4, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 5, false));
+        assertEquals(4, sequence.matchedCharCount("6789", 6, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 7, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 8, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 9, false));
+        assertEquals(0, sequence.matchedCharCount("6789", 10, false));
+
+        assertEquals(4, sequence.matchedCharCount("6789A", 6, false));
+        assertEquals(3, sequence.matchedCharCount("678AB", 6, false));
+        assertEquals(2, sequence.matchedCharCount("67ABC", 6, false));
+        assertEquals(1, sequence.matchedCharCount("6ABCD", 6, false));
+        assertEquals(0, sequence.matchedCharCount("ABCDE", 6, false));
+
+        assertEquals(4, sequence.matchedCharCount("6789AB", 6, false));
+        assertEquals(3, sequence.matchedCharCount("678ABC", 6, false));
+        assertEquals(2, sequence.matchedCharCount("67ABCD", 6, false));
+        assertEquals(1, sequence.matchedCharCount("6ABCDE", 6, false));
+        assertEquals(0, sequence.matchedCharCount("ABCDEF", 6, false));
+        assertEquals(0, sequence.matchedCharCount("ABCDEF", 6, false));
+    }
+
+    @Test
+    public void test_matchedCharCountReversed() {
+        String input = "0123456789";
+
+        BasedSequence sequence = BasedSequence.of(input);
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 0, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 1, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 2, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 3, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 4, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 5, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 6, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 7, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 8, false));
+        assertEquals(0, sequence.matchedCharCountReversed("6789", 0, 9, false));
+        assertEquals(4, sequence.matchedCharCountReversed("6789", 0, 10, false));
+
+        assertEquals(4, sequence.matchedCharCountReversed("A6789", 0, 10, false));
+        assertEquals(3, sequence.matchedCharCountReversed("AB789", 0, 10, false));
+        assertEquals(2, sequence.matchedCharCountReversed("ABC89", 0, 10, false));
+        assertEquals(1, sequence.matchedCharCountReversed("ABCD9", 0, 10, false));
+        assertEquals(0, sequence.matchedCharCountReversed("ABCDE", 0, 10, false));
+
+        assertEquals(4, sequence.matchedCharCountReversed("AB6789", 0, 10, false));
+        assertEquals(3, sequence.matchedCharCountReversed("ABC789", 0, 10, false));
+        assertEquals(2, sequence.matchedCharCountReversed("ABCD89", 0, 10, false));
+        assertEquals(1, sequence.matchedCharCountReversed("ABCDE9", 0, 10, false));
+        assertEquals(0, sequence.matchedCharCountReversed("ABCDEF", 0, 10, false));
+        assertEquals(0, sequence.matchedCharCountReversed("ABCDEF", 0, 10, false));
     }
 }

@@ -98,9 +98,8 @@ Serialized data is optimized to minimize number of bytes taken by each segment.
 * Repeated spaces and `\n` only need length and if <16 then a single byte encodes all the
   information.
 
-Numeric values can have only value starting at 0..Integer.MAX_VALUE. Negative values are not
-supported. Additionally length of any segment which is limited to 0.5 GB which is plenty for the
-required application.
+Numeric values for offsets and length can have only positive values and 0, with length of any
+segment limited to Integer.MAX_VALUE/4, ie. 0.5 GB which is plenty for the required application.
 
 Segment types:
 
@@ -129,7 +128,7 @@ format of the rest of the bytes:
   * 0b0100_0000: `TEXT`: `length`: `char[]`
   * 0b0110_0000: `REPEATED_TEXT`: `char`, `length`
   * 0b1000_0000: `TEXT_ASCII`: `length`, `byte[]`
-  * 0b1010_0000: `REPEATED_ASCII`: `byte`, `length`
+  * 0b1010_0000: `REPEATED_ASCII`: `byte`, `length`, not needed and should be freed up for other uses.
   * 0b1100_0000: `REPEATED_SPACE`: `length`
   * 0b1110_0000: `REPEATED_EOL`: `length`
 * `SEG_BYTES`: encodes number of bytes used for segment's numeric values.
