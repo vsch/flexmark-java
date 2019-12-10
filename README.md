@@ -179,7 +179,7 @@ custom node renderer if you need to override the generated link HTML.
 ### Latest Additions and Changes
 
 * Major reorganization and code cleanup of implementation for next version 0.60.0
-  * Formatter implementation is now part of code implementation in `flexmark` module
+  * Formatter implementation is now part of core implementation in `flexmark` module
   * Tests cleaned up to eliminate duplication and hacks
   * Test Util made reusable for other projects. Having markdown as the source code for tests is
     too convenient to have it only used for `flexmark-java` tests.
