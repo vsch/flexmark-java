@@ -55,7 +55,7 @@
         <option name="ENUMERATED_REFERENCES_EXT" value="true" />
         <option name="FLEXMARK_FRONT_MATTER" value="true" />
         <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
-        <option name="GFM_TABLE_RENDERING" value="true" />
+        <option name="GFM_TABLE_RENDERING" value="false" />
         <option name="GITBOOK_URL_ENCODING" value="false" />
         <option name="GITHUB_LISTS" value="false" />
         <option name="GITHUB_WIKI_LINKS" value="true" />

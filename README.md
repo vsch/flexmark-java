@@ -183,10 +183,36 @@ custom node renderer if you need to override the generated link HTML.
   * Tests cleaned up to eliminate duplication and hacks
   * Test Util made reusable for other projects. Having markdown as the source code for tests is
     too convenient to have it only used for `flexmark-java` tests.
+  * Optimized `SegmentedSequence` implementation using binary trees for searching segments and
+    byte efficient segment packing. Parser performance is not affected but allows using
+    `SegmentedSequences` for collecting `Formatter` and `HtmlRenderer` output to track source
+    location of all text with minimal overhead and double the performance of old implementation.
+
+    Tests run on 1141 markdown files from GitHub projects and some other user samples. Largest
+    was 256k bytes.
+
+    | Description                | Old SegmentedSequence | New Segmented Sequence |
+    |:---------------------------|----------------------:|-----------------------:|
+    | Total wall clock time      |            15.814 sec |             12.728 sec |
+    | Parse time                 |             2.859 sec |              2.939 sec |
+    | Formatter appendable       |             0.598 sec |              0.630 sec |
+    | Formatter sequence builder |             8.323 sec |              4.666 sec |
+
+    The overhead difference is significant. The totals are for all segmented sequences created
+    during the test run of 1141 files. Parser statistics show requirements during parsing and
+    formatter ones are only for formatting of them while accumulating the text as a segmented
+    sequence.
+
+    | Description                                     | Old Parser |  Old Formatter | New Parser | New Formatter |
+    |:------------------------------------------------|-----------:|---------------:|-----------:|--------------:|
+    | Bytes for characters of all segmented sequences |    917,016 |  6,029,774,470 |    917,016 | 6,029,774,470 |
+    | Bytes for overhead of all segmented sequences   |  1,845,048 | 12,060,276,296 |     93,628 |   342,351,491 |
+    | Overhead %                                      |     201.2% |         200.0% |      10.2% |          5.7% |
 * [Flexmark Architecture and Dependencies Diagrams](https://sourcespy.com/github/flexmark/)
   thanks to great work by [Alex Karezin](mailto:javadiagrams@gmail.com) you can get an overview
   of module dependencies with ability to drill down to packages and classes.
-* [Merge API](../../wiki/Markdown-Merge-API) to merge multiple markdown documents into a single document.
+* [Merge API](../../wiki/Markdown-Merge-API) to merge multiple markdown documents into a single
+  document.
 * [Docx Renderer Extension: Limited Attributes Node Handling](../../wiki/Docx-Renderer-Extension#limited-attributes-node-handling)
 * Extensible HTML to Markdown Converter module:
   [flexmark-html2md-converter](https://github.com/vsch/flexmark-java/blob/master/flexmark-html2md-converter).
@@ -359,12 +385,12 @@ If you find a discrepancy please open an issue so it can be addressed.
 
 Major processor families are implemented and some family members also:
 
+* [ ] [Jekyll]
 * [CommonMark] for latest implemented spec, currently [CommonMark (spec 0.28)]
   * [ ] [League/CommonMark]
   * [CommonMark (spec 0.27)] for specific version compatibility
   * [CommonMark (spec 0.28)] for specific version compatibility
   * [GitHub] Comments
-* [ ] [Jekyll]
 * [Markdown.pl][Markdown]
   * [ ] [Php Markdown Extra]
   * [GitHub] Docs (old GitHub markdown parser)
