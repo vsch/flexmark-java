@@ -104,8 +104,8 @@ packagingOptions {
 }
 ```
 
-More information can be found in the documentation: [Wiki Home](../../wiki)
-&nbsp;&nbsp;&nbsp;&nbsp;[Usage Examples](../../wiki/Usage)
+More information can be found in the documentation:  
+[Wiki Home](../../wiki) &nbsp;&nbsp;&nbsp;&nbsp;[Usage Examples](../../wiki/Usage)
 &nbsp;&nbsp;&nbsp;&nbsp;[Extension Details](../../wiki/Extensions)
 &nbsp;&nbsp;&nbsp;&nbsp;[Writing Extensions](../../wiki/Writing-Extensions)
 
@@ -191,7 +191,7 @@ custom node renderer if you need to override the generated link HTML.
     Tests run on 1141 markdown files from GitHub projects and some other user samples. Largest
     was 256k bytes.
 
-    | Description                | Old SegmentedSequence | New Segmented Sequence |
+| Description                | Old SegmentedSequence | New Segmented Sequence |
     |:---------------------------|----------------------:|-----------------------:|
     | Total wall clock time      |            15.814 sec |             12.728 sec |
     | Parse time                 |             2.859 sec |              2.939 sec |
@@ -203,7 +203,7 @@ custom node renderer if you need to override the generated link HTML.
     formatter ones are only for formatting of them while accumulating the text as a segmented
     sequence.
 
-    | Description                                     | Old Parser |  Old Formatter | New Parser | New Formatter |
+| Description                                     | Old Parser |  Old Formatter | New Parser | New Formatter |
     |:------------------------------------------------|-----------:|---------------:|-----------:|--------------:|
     | Bytes for characters of all segmented sequences |    917,016 |  6,029,774,470 |    917,016 | 6,029,774,470 |
     | Bytes for overhead of all segmented sequences   |  1,845,048 | 12,060,276,296 |     93,628 |   342,351,491 |
