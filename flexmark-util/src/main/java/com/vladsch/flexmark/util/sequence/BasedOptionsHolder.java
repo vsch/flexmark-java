@@ -16,7 +16,13 @@ import org.jetbrains.annotations.Nullable;
 public interface BasedOptionsHolder {
     int O_COLLECT_SEGMENTED_STATS = 0x0001;     // set if segmented stats collector key is set to non-null value
     int O_COLLECT_FIRST256_STATS = 0x0002;      // collect statistics for segments sequence on chars < code 256
-    int O_NO_ANCHORS = 0x0004;                  // do not include anchors in segment builder
+    int O_NO_ANCHORS = 0x0004;                  // do not include anchors in segment builder, test only, not guaranteed to be stable for general use
+
+    // NOTE: if neither is specified then one will be chosen, most likely tree
+    //   but may be full for short sequences or ones where number of segments vs
+    //   sequence length makes tree based one wasteful and slow
+    int O_FULL_SEGMENTED_SEQUENCES = 0x0008;    // use non-tree based, fast access, slow create segmented sequences because they add 4 bytes per character overhead
+    int O_TREE_SEGMENTED_SEQUENCES = 0x0010;    // use tree based, fast enough access and minimal overhead per segment
     int O_RESERVED = 0x0000ffff;                // reserved for library use, extensions must use data keys since there is no way to manage bit allocations
     int O_APPLICATION = 0xffff0000;             // open for user application defined use, extensions must use data keys since there is no way to manage bit allocations
 
@@ -27,6 +33,7 @@ public interface BasedOptionsHolder {
         if ((options & O_COLLECT_SEGMENTED_STATS) != 0) out.append("O_COLLECT_SEGMENTED_STATS").mark();
         if ((options & O_COLLECT_FIRST256_STATS) != 0) out.append("O_COLLECT_FIRST256_STATS").mark();
         if ((options & O_NO_ANCHORS) != 0) out.append("O_NO_ANCHORS").mark();
+        if ((options & O_FULL_SEGMENTED_SEQUENCES) != 0) out.append("O_FULL_SEGMENTED_SEQUENCES").mark();
         return out.toString();
     }
 

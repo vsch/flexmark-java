@@ -1,141 +1,46 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.SegmentedSequenceStats;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
 import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * A BasedSequence which consists of segments of other BasedSequences
+ * NOTE: very efficient for random access but extremely wasteful with space by allocating 4 bytes per character in the sequence with corresponding construction penalty
+ * use SegmentedSequenceTree which is binary tree based segmented sequence with minimal overhead and optimized to give penalty free random access for most applications.
  */
-public final class SegmentedSequenceFull extends BasedSequenceImpl implements ReplacedBasedSequence {
-    // NOTE: reducing the size of type for baseOffsets and adding only unique nonBasedChars will give greater memory saving than encoding out of base chars as -ve offsets
-    // on the other hand if the baseOffset type is int then non base chars as -ve offset should be used
-    //    private final char[] nonBaseChars;    // all non-base characters, offset by baseStartOffset. When baseOffsets[] < 0, take -ve - 1 to get index into this array
-    private final BasedSequence baseSeq;    // base sequence
-    private final int startOffset;          // this sequence's start offset in base
-    private final int endOffset;            // this sequence's end offset in base
-    private final int length;               // length of this sequence
+public final class SegmentedSequenceFull extends SegmentedSequence {
     private final boolean nonBaseChars;     // true if contains non-base chars
     private final int[] baseOffsets;        // list of base offsets, offset by baseStartOffset
     private final int baseStartOffset;      // start offset for baseOffsets of this sequence, offset from baseSeq for all chars, including non-base chars
 
     private SegmentedSequenceFull(BasedSequence baseSeq, int startOffset, int endOffset, int length, boolean nonBaseChars, int[] baseOffsets, int baseStartOffset) {
-        super(0);
-        this.baseSeq = baseSeq;
-        this.startOffset = startOffset;
-        this.endOffset = endOffset;
-        this.length = length;
+        super(baseSeq, startOffset, endOffset, length);
         this.nonBaseChars = nonBaseChars;
         this.baseOffsets = baseOffsets;
         this.baseStartOffset = baseStartOffset;
     }
 
-    @NotNull
-    @Override
-    final public Object getBase() {
-        return baseSeq.getBase();
-    }
-
-    @NotNull
-    @Override
-    final public BasedSequence getBaseSequence() {
-        assert baseSeq == baseSeq.getBaseSequence();
-        return baseSeq;
-    }
-
-    /**
-     * Get the start in the base sequence for this segmented sequence.
-     * <p>
-     * NOTE: this is the startOffset determined when the sequence was built from segments and may differ from
-     * the startOffset of the first based segment in this sequence
-     *
-     * @return start in base sequence
-     */
-    final public int getStartOffset() {
-        return startOffset;
-    }
-
-    /**
-     * Get the end offset in the base sequence
-     * <p>
-     * NOTE: this is the endOffset determined when the sequence was built from segments and may differ from
-     * the endOffset of the last based segment in this sequence
-     *
-     * @return end in base sequence
-     */
-    final public int getEndOffset() {
-        return endOffset;
-    }
-
-    @Override
-    final public boolean isOption(int option) {
-        return getBaseSequence().isOption(option);
-    }
-
-    @Override
-    final public <T> T getOption(DataKeyBase<T> dataKey) {
-        return getBaseSequence().getOption(dataKey);
-    }
-
-    @Override
-    final public @Nullable DataHolder getOptions() {
-        return getBaseSequence().getOptions();
-    }
-
-    @Override
-    final public int length() {
-        return length;
-    }
-
-    @NotNull
-    @Override
-    final public Range getSourceRange() {
-        return Range.of(getStartOffset(), getEndOffset());
-    }
-
-    @NotNull
-    @Override
-    final public BasedSequence baseSubSequence(int startIndex, int endIndex) {
-        if (startIndex < 0 || startIndex > baseSeq.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + startIndex);
-        }
-        if (endIndex < 0 || endIndex > baseSeq.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + endIndex);
-        }
-
-        return baseSeq.baseSubSequence(startIndex, endIndex);
-    }
-
     @Override
     public int getIndexOffset(int index) {
-        if (index < 0 || index > length) {
-            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
-        }
+        validateIndexInclusiveEnd(index);
 
-        if (index == length && index == 0) {
-            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
-        }
         int offset = baseOffsets[baseStartOffset + index];
         return offset < 0 ? -1 : offset;
     }
 
     @Override
-    public boolean addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
         // FIX: clean up and optimize the structure. it is error prone and inefficient
-        return BasedUtils.generateSegments(builder, this);
+        BasedUtils.generateSegments(builder, this);
     }
 
     @Override
     public char charAt(int index) {
-        if (index < 0 || index >= length) {
-            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
-        }
+        validateIndex(index);
 
         int offset = baseOffsets[baseStartOffset + index];
 
@@ -146,20 +51,15 @@ public final class SegmentedSequenceFull extends BasedSequenceImpl implements Re
                  context text to the based sequence.
              */
             return (char) (-offset - 1);
+        } else {
+            return baseSeq.charAt(offset);
         }
-        return baseSeq.charAt(offset);
     }
 
     @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
-        if (startIndex < 0 || startIndex > length) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + startIndex);
-        }
-
-        if (endIndex < 0 || endIndex > length) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + endIndex);
-        }
+        validateStartEnd(startIndex, endIndex);
 
         if (startIndex == 0 && endIndex == length) {
             return this;
@@ -172,7 +72,6 @@ public final class SegmentedSequenceFull extends BasedSequenceImpl implements Re
      * Base Constructor
      *
      * @param builder builder for which to construct segmented sequence
-     *
      */
     public static SegmentedSequenceFull create(@NotNull BasedSequence basedSequence, ISegmentBuilder<?> builder) {
         BasedSequence baseSeq = basedSequence.getBaseSequence();

@@ -11,11 +11,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class BasedSequenceTreeImplTest {
+public class BasedSequenceFullImplTest {
     // TEST: need to complete tests here
 
     static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
-        return BasedSequence.of(BasedOptionsSequence.of(chars, BasedSequence.O_TREE_SEGMENTED_SEQUENCES));
+        return BasedSequence.of(BasedOptionsSequence.of(chars, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
     }
 
     @Test
@@ -958,7 +958,7 @@ public class BasedSequenceTreeImplTest {
         BasedSequence sequence = basedSequenceOf(input);
         BasedSequence inserted = sequence.insert(10, "^");
         assertEquals("0123456789^", inserted.toString());
-        assertTrue(inserted instanceof SegmentedSequenceTree);
+        assertTrue(inserted instanceof SegmentedSequenceFull);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
         assertEquals(0, inserted.getIndexOffset(0));
         assertEquals(1, inserted.getIndexOffset(1));
@@ -975,7 +975,7 @@ public class BasedSequenceTreeImplTest {
         BasedSequence sequence = basedSequenceOf(input);
         BasedSequence inserted = sequence.insert(1, "^");
         assertEquals("0^123456789", inserted.toString());
-        assertTrue(inserted instanceof SegmentedSequenceTree);
+        assertTrue(inserted instanceof SegmentedSequenceFull);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
         assertEquals(0, inserted.getIndexOffset(0));
         assertEquals(-1, inserted.getIndexOffset(1));
@@ -992,7 +992,7 @@ public class BasedSequenceTreeImplTest {
         BasedSequence sequence = basedSequenceOf(input);
         BasedSequence inserted = sequence.insert(5, "^");
         assertEquals("01234^56789", inserted.toString());
-        assertTrue(inserted instanceof SegmentedSequenceTree);
+        assertTrue(inserted instanceof SegmentedSequenceFull);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
         assertEquals(0, inserted.getIndexOffset(0));
         assertEquals(1, inserted.getIndexOffset(1));
@@ -1010,7 +1010,7 @@ public class BasedSequenceTreeImplTest {
         BasedSequence sequence = basedSequenceOf(input);
         BasedSequence inserted = sequence.insert(9, "^");
         assertEquals("012345678^9", inserted.toString());
-        assertTrue(inserted instanceof SegmentedSequenceTree);
+        assertTrue(inserted instanceof SegmentedSequenceFull);
         assertEquals(Range.of(0, 10), inserted.getSourceRange());
         assertEquals(0, inserted.getIndexOffset(0));
         assertEquals(1, inserted.getIndexOffset(1));

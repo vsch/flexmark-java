@@ -86,43 +86,30 @@ public final class SubSequence extends BasedSequenceImpl {
 
     @Override
     public int getIndexOffset(int index) {
-        if (index >= 0 && index <= endOffset - startOffset) {
-            return startOffset + index;
-        }
-        throw new StringIndexOutOfBoundsException("SubSequence index: " + index + " out of range: [0, " + length() + "]");
+        validateIndexInclusiveEnd(index);
+        return startOffset + index;
     }
 
     @Override
     public char charAt(int index) {
-        if (index >= 0 && index < endOffset - startOffset) {
-            char c = baseSeq.charAt(index + startOffset);
-            return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
-        }
-        throw new StringIndexOutOfBoundsException("SubSequence index: " + index + " out of range: [0, " + length() + ")");
+        validateIndex(index);
+
+        char c = baseSeq.charAt(index + startOffset);
+        return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
     }
 
     @NotNull
     @Override
     public SubSequence subSequence(int startIndex, int endIndex) {
-        if (startIndex >= 0 && endIndex <= endOffset - startOffset) {
-            return baseSubSequence(startOffset + startIndex, startOffset + endIndex);
-        }
-        if (startIndex < 0 || startOffset + startIndex > endOffset) {
-            throw new StringIndexOutOfBoundsException("subSequence startIndex: " + startIndex + " out of range:  [0, " + length() + ")");
-        }
-        throw new StringIndexOutOfBoundsException("subSequence endIndex: " + endIndex + " out of range:  [0, " + length() + "]");
+        validateStartEnd(startIndex, endIndex);
+        return baseSubSequence(startOffset + startIndex, startOffset + endIndex);
     }
 
     @NotNull
     @Override
     public SubSequence baseSubSequence(int startIndex, int endIndex) {
-        if (startIndex >= 0 && endIndex <= base.length()) {
-            return startIndex == startOffset && endIndex == endOffset ? this : base != this ? base.baseSubSequence(startIndex, endIndex) : new SubSequence(this, startIndex, endIndex);
-        }
-        if (startIndex < 0 || startIndex > base.length()) {
-            throw new StringIndexOutOfBoundsException("subSequence startIndex: " + startIndex + " out of range:  [0, " + length() + ")");
-        }
-        throw new StringIndexOutOfBoundsException("subSequence endIndex: " + endIndex + " out of range:  [0, " + length() + "]");
+        SequenceUtils.validateStartEnd(startIndex, endIndex, base.length());
+        return startIndex == startOffset && endIndex == endOffset ? this : base != this ? base.baseSubSequence(startIndex, endIndex) : new SubSequence(this, startIndex, endIndex);
     }
 
     static BasedSequence create(@Nullable CharSequence charSequence) {

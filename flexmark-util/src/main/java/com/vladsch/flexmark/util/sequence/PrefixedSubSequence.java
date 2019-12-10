@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
-import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,6 +78,8 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
 
     @Override
     public int getIndexOffset(int index) {
+        validateIndexInclusiveEnd(index);
+
         if (index < prefix.length()) {
             // NOTE: to allow creation of segmented sequences from modified original base return -1 for all such modified content positions
             return -1;
@@ -87,50 +88,44 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     }
 
     @Override
-    public boolean addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
-        boolean hadOutOfBase = prefix.length() != 0;
-        if (hadOutOfBase) {
+    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+        if (prefix.length() != 0) {
             builder.append(base.getStartOffset(), base.getStartOffset());
             builder.append(prefix.toString());
         }
-        return base.addSegments(builder) || hadOutOfBase;
+        base.addSegments(builder);
     }
 
     @Override
     public char charAt(int index) {
+        validateIndex(index);
+
         int prefixLength = prefix.length();
-        if (index >= 0 && index < base.length() + prefixLength) {
-            if (index < prefixLength) {
-                return prefix.charAt(index);
-            } else {
-                return base.charAt(index - prefixLength);
-            }
+        if (index < prefixLength) {
+            return prefix.charAt(index);
+        } else {
+            return base.charAt(index - prefixLength);
         }
-        throw new StringIndexOutOfBoundsException("String index out of range: " + index);
     }
 
     @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
+        validateStartEnd(startIndex, endIndex);
+
         int prefixLength = prefix.length();
-        if (startIndex >= 0 && endIndex <= base.length() + prefixLength) {
-            if (startIndex < prefixLength) {
-                if (endIndex <= prefixLength) {
-                    // all from prefix
-                    return new PrefixedSubSequence(prefix.subSequence(startIndex, endIndex), base.subSequence(0, 0), 0, 0);
-                } else {
-                    // some from prefix some from base
-                    return new PrefixedSubSequence(prefix.subSequence(startIndex, prefixLength), base, 0, endIndex - prefixLength);
-                }
+        if (startIndex < prefixLength) {
+            if (endIndex <= prefixLength) {
+                // all from prefix
+                return new PrefixedSubSequence(prefix.subSequence(startIndex, endIndex), base.subSequence(0, 0), 0, 0);
             } else {
-                // all from base
-                return base.subSequence(startIndex - prefixLength, endIndex - prefixLength);
+                // some from prefix some from base
+                return new PrefixedSubSequence(prefix.subSequence(startIndex, prefixLength), base, 0, endIndex - prefixLength);
             }
+        } else {
+            // all from base
+            return base.subSequence(startIndex - prefixLength, endIndex - prefixLength);
         }
-        if (startIndex < 0 || startIndex > base.length() + prefixLength) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + startIndex);
-        }
-        throw new StringIndexOutOfBoundsException("String index out of range: " + endIndex);
     }
 
     @NotNull

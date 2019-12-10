@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.sequence.edit;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,7 +28,8 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
     private BasedSequenceBuilder(@NotNull BasedSequence base, @Nullable SegmentOptimizer optimizer) {
         myBase = base.getBaseSequence();
         int options = SegmentBuilder.F_DEFAULT;
-        if (myBase.isOption(BasedSequence.O_COLLECT_FIRST256_STATS)) options |= SegmentBuilder.F_TRACK_FIRST256;
+        // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
+        if (!myBase.isOption(BasedSequence.O_FULL_SEGMENTED_SEQUENCES) || myBase.isOption(BasedSequence.O_COLLECT_FIRST256_STATS)) options |= SegmentBuilder.F_TRACK_FIRST256;
         if (myBase.isOption(BasedSequence.O_NO_ANCHORS)) options &= ~SegmentBuilder.F_INCLUDE_ANCHORS;
         mySegments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(myBase, options) : BasedSegmentBuilder.emptyBuilder(myBase, optimizer, options);
     }
@@ -48,7 +48,8 @@ public class BasedSequenceBuilder implements SequenceBuilder<BasedSequenceBuilde
      */
     private BasedSequenceBuilder(@NotNull BasedSequence base, int options, @Nullable SegmentOptimizer optimizer) {
         myBase = base.getBaseSequence();
-        if (myBase.isOption(BasedSequence.O_COLLECT_FIRST256_STATS)) options |= SegmentBuilder.F_TRACK_FIRST256;
+        // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
+        if (!myBase.isOption(BasedSequence.O_FULL_SEGMENTED_SEQUENCES) || myBase.isOption(BasedSequence.O_COLLECT_FIRST256_STATS)) options |= SegmentBuilder.F_TRACK_FIRST256;
         if (myBase.isOption(BasedSequence.O_NO_ANCHORS)) options &= ~SegmentBuilder.F_INCLUDE_ANCHORS;
         mySegments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(myBase, options) : BasedSegmentBuilder.emptyBuilder(myBase, optimizer, options);
     }

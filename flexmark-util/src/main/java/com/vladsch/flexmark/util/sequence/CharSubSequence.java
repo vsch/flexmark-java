@@ -95,35 +95,23 @@ public final class CharSubSequence extends BasedSequenceImpl {
 
     @Override
     public char charAt(int index) {
-        if (index >= 0 && index < endOffset - startOffset) {
-            char c = baseChars[index + startOffset];
-            return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
-        }
-        throw new StringIndexOutOfBoundsException("CharSubSequence index: " + index + " out of range: 0, " + length());
+        validateIndex(index);
+        char c = baseChars[index + startOffset];
+        return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
     }
 
     @NotNull
     @Override
     public CharSubSequence subSequence(int startIndex, int endIndex) {
-        if (startIndex >= 0 && endIndex <= endOffset - startOffset) {
-            return base.baseSubSequence(startOffset + startIndex, startOffset + endIndex);
-        }
-        if (startIndex < 0 || startOffset + startIndex > endOffset) {
-            throw new StringIndexOutOfBoundsException("subSequence index: " + startIndex + " out of range: 0, " + length());
-        }
-        throw new StringIndexOutOfBoundsException("subSequence index: " + endIndex + " out of range: 0, " + length());
+        validateStartEnd(startIndex, endIndex);
+        return base.baseSubSequence(startOffset + startIndex, startOffset + endIndex);
     }
 
     @NotNull
     @Override
     public CharSubSequence baseSubSequence(int startIndex, int endIndex) {
-        if (startIndex >= 0 && endIndex <= baseChars.length) {
-            return startIndex == startOffset && endIndex == endOffset ? this : base != this ? base.baseSubSequence(startIndex, endIndex) : new CharSubSequence(base, startIndex, endIndex);
-        }
-        if (startIndex < 0 || startIndex > base.length()) {
-            throw new StringIndexOutOfBoundsException("subSequence index: " + startIndex + " out of range: 0, " + length());
-        }
-        throw new StringIndexOutOfBoundsException("subSequence index: " + endIndex + " out of range: 0, " + length());
+        SequenceUtils.validateStartEnd(startIndex, endIndex, baseChars.length);
+        return startIndex == startOffset && endIndex == endOffset ? this : base != this ? base.baseSubSequence(startIndex, endIndex) : new CharSubSequence(base, startIndex, endIndex);
     }
 
     public static CharSubSequence of(CharSequence charSequence) {
@@ -132,7 +120,6 @@ public final class CharSubSequence extends BasedSequenceImpl {
 
     public static CharSubSequence of(CharSequence charSequence, int startIndex) {
         assert startIndex <= charSequence.length();
-
         return of(charSequence, startIndex, charSequence.length());
     }
 

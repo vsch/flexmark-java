@@ -211,6 +211,17 @@ public class SegmentTree {
         addSegments(builder, treeRange.startIndex, treeRange.endIndex, treeRange.startOffset, treeRange.endOffset, treeRange.startPos, treeRange.endPos);
     }
 
+    /**
+     * Add segments of subsequence of this tree to builder
+     *
+     * @param builder     builder to which to add the segments
+     * @param startIndex  start index of sub-sequence of segment tree
+     * @param endIndex    end index of sub-sequence of segment tree
+     * @param startOffset start offset of the subsequence to use as start anchor
+     * @param endOffset   end offset of the subsequence to use as end anchor
+     * @param startPos    start pos of sub-sequence segments  in tree
+     * @param endPos      end  pos of sub-sequence segments  in tree
+     */
     public void addSegments(@NotNull IBasedSegmentBuilder<?> builder, int startIndex, int endIndex, int startOffset, int endOffset, int startPos, int endPos) {
         // add our stuff to builder
         if (startOffset != -1) {
@@ -229,20 +240,7 @@ public class SegmentTree {
 
             // OPTIMIZE: add append Segment method with start/end offsets to allow builder to extract repeat and first256 information
             //  without needing to scan text, range information does not have any benefit from this
-            CharSequence charSequence;
-
-            if (i == startPos && i + 1 == endPos) {
-                // need to trim start/end
-                charSequence = segment.getCharSequence().subSequence(startIndex - segment.getStartIndex(), endIndex - segment.getStartIndex());
-            } else if (i == startPos) {
-                // need to trim start
-                charSequence = segment.getCharSequence().subSequence(startIndex - segment.getStartIndex(), segment.length());
-            } else if (i + 1 == endPos) {
-                // need to trim end
-                charSequence = segment.getCharSequence().subSequence(0, endIndex - segment.getStartIndex());
-            } else {
-                charSequence = segment.getCharSequence();
-            }
+            CharSequence charSequence = getCharSequence(segment, startIndex, endIndex, startPos, endPos);
 
             if (segment.isText()) {
                 builder.append(charSequence);
@@ -263,6 +261,37 @@ public class SegmentTree {
         if (endOffset != -1) {
             builder.appendAnchor(endOffset);
         }
+    }
+
+    /**
+     * Get char sequence of segment corresponding to sub-sequence in segment tree
+     *
+     * @param segment    segment
+     * @param startIndex start index of sub-sequence of segment tree
+     * @param endIndex   end index of sub-sequence of segment tree
+     * @param startPos   start pos of sub-sequence segments  in tree
+     * @param endPos     end  pos of sub-sequence segments  in tree
+     * @return subsequence of segment corresponding to part of it which is in the sub-sequence of the tree
+     */
+    @NotNull
+    public static CharSequence getCharSequence(@NotNull Segment segment, int startIndex, int endIndex, int startPos, int endPos) {
+        CharSequence charSequence;
+        int pos = segment.myPos;
+
+        if (pos == startPos && pos + 1 == endPos) {
+            // need to trim start/end
+            charSequence = segment.getCharSequence().subSequence(startIndex - segment.getStartIndex(), endIndex - segment.getStartIndex());
+        } else if (pos == startPos) {
+            // need to trim start
+            charSequence = segment.getCharSequence().subSequence(startIndex - segment.getStartIndex(), segment.length());
+        } else if (pos + 1 == endPos) {
+            // need to trim end
+            charSequence = segment.getCharSequence().subSequence(0, endIndex - segment.getStartIndex());
+        } else {
+            charSequence = segment.getCharSequence();
+        }
+
+        return charSequence;
     }
 
     @Nullable

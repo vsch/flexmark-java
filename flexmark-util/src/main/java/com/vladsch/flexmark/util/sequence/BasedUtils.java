@@ -31,14 +31,12 @@ public interface BasedUtils {
      *
      * @param segments       segment builder
      * @param chars          based sequence for which to generate segments
-     * @return true if had out of base chars.
      */
-    static boolean generateSegments(IBasedSegmentBuilder<?> segments, @NotNull BasedSequence chars) {
+    static void generateSegments(IBasedSegmentBuilder<?> segments, @NotNull BasedSequence chars) {
         // find contiguous ranges of base chars and replaced chars, slower but only when optimizers are available
         int baseStart = -1;
         int baseEnd = -1;
         boolean hadSequence = false;
-        boolean hadOutOfBase = false;
 
         StringBuilder stringBuilder = null;
 
@@ -55,7 +53,6 @@ public interface BasedUtils {
                         }
                         segments.append(stringBuilder.toString());
                         stringBuilder = null;
-                        hadOutOfBase = true;
                     }
 
                     baseStart = offset;
@@ -92,13 +89,11 @@ public interface BasedUtils {
             }
             segments.append(stringBuilder.toString());
             segments.appendAnchor(chars.getEndOffset());
-            hadOutOfBase = true;
         }
 
         if (!hadSequence) {
             assert chars.length() == 0;
             segments.appendAnchor(chars.getStartOffset());
         }
-        return hadOutOfBase;
     }
 }

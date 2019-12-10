@@ -1044,4 +1044,26 @@ public interface SequenceUtils {
 
         return new Pair<>(line, col);
     }
+
+    static void validateIndex(int index, int length) {
+        if (index < 0 || index >= length) {
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: [0, " + length + ")");
+        }
+    }
+
+    static void validateIndexInclusiveEnd(int index, int length) {
+        if (index < 0 || index > length) {
+            throw new StringIndexOutOfBoundsException("index: " + index + " out of range: [0, " + length + "]");
+        }
+    }
+
+    static void validateStartEnd(int startIndex, int endIndex, int length) {
+        if (startIndex < 0 || startIndex > length) {
+            throw new StringIndexOutOfBoundsException("startIndex: " + startIndex + " out of range: [0, " + length + ")");
+        }
+
+        if (endIndex < startIndex || endIndex > length) {
+            throw new StringIndexOutOfBoundsException("endIndex: " + endIndex + " out of range: [" + startIndex + ", " + length + "]");
+        }
+    }
 }

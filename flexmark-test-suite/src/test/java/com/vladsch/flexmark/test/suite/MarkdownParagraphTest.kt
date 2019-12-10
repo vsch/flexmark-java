@@ -11,7 +11,8 @@ import org.junit.Test
 
 class MarkdownParagraphTest {
     companion object {
-        @JvmField var iterations = 0
+        @JvmField
+        var iterations = 0
     }
 
     val simplePar = """Lorem ipsum dolor sit amet, consectetaur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."""
@@ -61,7 +62,7 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
     fun ensureAligned(alignment: TextAlignment, chars: BasedSequence, firstIndent: Int, indent: Int, width: Int, respectHardBreaks: Boolean) {
         iterations++
 
-        val lines = chars.split('\n', 0)
+        val lines = chars.split("\n", 0, 0)
         var lineCount = 0
         for (line in lines) {
             val indentSize = if (lineCount == 0) firstIndent else indent
@@ -219,21 +220,21 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
         }
     }
 
-//    @Test
-//    fun test_SingleDebug() {
-//        val par = MarkdownParagraph(multiLineHardBreaksPar)
-//        assertEquals(multiLineHardBreaksPar, par.computeResultSequence().toString())
-//
-//        par.alignment = TextAlignment.JUSTIFIED
-//        par.indent = 4
-//        par.firstIndent = 8
-//        par.width = 40
-//        par.isKeepHardBreaks = true
-//        println("reformat to ${par.width}, to ${par.width} align: ${par.alignment} first: ${par.firstIndent} ind: ${par.indent}")
-//        println(par.computeResultSequence())
-//        println()
-//        if (par.width > 0) ensureAligned(par.alignment, par.computeResultSequence(), par.firstIndent, par.indent, par.width, par.isKeepHardBreaks)
-//    }
+    //    @Test
+    //    fun test_SingleDebug() {
+    //        val par = MarkdownParagraph(multiLineHardBreaksPar)
+    //        assertEquals(multiLineHardBreaksPar, par.computeResultSequence().toString())
+    //
+    //        par.alignment = TextAlignment.JUSTIFIED
+    //        par.indent = 4
+    //        par.firstIndent = 8
+    //        par.width = 40
+    //        par.isKeepHardBreaks = true
+    //        println("reformat to ${par.width}, to ${par.width} align: ${par.alignment} first: ${par.firstIndent} ind: ${par.indent}")
+    //        println(par.computeResultSequence())
+    //        println()
+    //        if (par.width > 0) ensureAligned(par.alignment, par.computeResultSequence(), par.firstIndent, par.indent, par.width, par.isKeepHardBreaks)
+    //    }
 
     @After
     fun tearDown() {

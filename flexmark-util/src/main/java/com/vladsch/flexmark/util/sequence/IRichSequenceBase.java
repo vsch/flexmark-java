@@ -208,6 +208,21 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return isEmpty() ? SequenceUtils.NUL : charAt(0);
     }
 
+    // RELEASE: inline all and keep method
+    final public void validateIndex(int index) {
+        SequenceUtils.validateIndex(index, length());
+    }
+
+    // RELEASE: inline all and keep method
+    final public void validateIndexInclusiveEnd(int index) {
+        SequenceUtils.validateIndexInclusiveEnd(index, length());
+    }
+
+    // RELEASE: inline all and keep method
+    final public void validateStartEnd(int startIndex, int endIndex) {
+        SequenceUtils.validateStartEnd(startIndex, endIndex, length());
+    }
+
     @Override
     public char safeCharAt(int index) {
         return index < 0 || index >= length() ? SequenceUtils.NUL : charAt(index);

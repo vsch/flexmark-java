@@ -10,6 +10,7 @@ public class SegmentTreeRange {
     final public int endOffset;
     final public int startPos;
     final public int endPos;
+    final public int length;
 
     public SegmentTreeRange(int startIndex, int endIndex, int startOffset, int endOffset, int startPos, int endPos) {
         this.startIndex = startIndex;
@@ -18,5 +19,6 @@ public class SegmentTreeRange {
         this.endOffset = endOffset;
         this.startPos = startPos;
         this.endPos = endPos;
+        this.length = endIndex - startIndex;
     }
 }

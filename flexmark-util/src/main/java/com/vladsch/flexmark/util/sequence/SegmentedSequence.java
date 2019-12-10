@@ -12,19 +12,17 @@ import org.jetbrains.annotations.Nullable;
  * A BasedSequence which consists of segments of other BasedSequences
  */
 public abstract class SegmentedSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
-    protected final BasedSequence baseSeq;  // base sequence
+    protected final BasedSequence baseSeq;    // base sequence
     protected final int startOffset;          // this sequence's start offset in base
     protected final int endOffset;            // this sequence's end offset in base
     protected final int length;               // length of this sequence
-    protected final boolean nonBaseChars;     // true if contains non-base chars
 
-    protected SegmentedSequence(BasedSequence baseSeq, int startOffset, int endOffset, int length, boolean nonBaseChars) {
+    protected SegmentedSequence(BasedSequence baseSeq, int startOffset, int endOffset, int length) {
         super(0);
         this.baseSeq = baseSeq;
         this.startOffset = startOffset;
         this.endOffset = endOffset;
         this.length = length;
-        this.nonBaseChars = nonBaseChars;
     }
 
     @NotNull
@@ -132,7 +130,15 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
         if (baseSubSequence != null) {
             return baseSubSequence;
         } else if (!builder.isEmpty()) {
-            return SegmentedSequenceFull.create(builder.getBaseSequence(), builder.getSegmentBuilder());
+            BasedSequence baseSequence = builder.getBaseSequence();
+            if (baseSequence.isOption(O_FULL_SEGMENTED_SEQUENCES)) {
+                return SegmentedSequenceFull.create(baseSequence, builder.getSegmentBuilder());
+            } else if (baseSequence.isOption(O_TREE_SEGMENTED_SEQUENCES)) {
+                return SegmentedSequenceTree.create(baseSequence, builder.getSegmentBuilder());
+            } else {
+                // Can decide based on segments and length
+                return SegmentedSequenceFull.create(baseSequence, builder.getSegmentBuilder());
+            }
         }
         return BasedSequence.NULL;
     }
@@ -144,7 +150,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
      *         all the segments were concatenated, while still maintaining
      *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
      * @deprecated use {@link BasedSequence#getBuilder()} and then {@link BasedSequenceBuilder#addAll(Iterable)} or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder} to construct segments directly.
-     *         If you absolutely need to use the old method then use {@link SegmentedSequenceFull#create(BasedSequence, Iterable)}
+     *         If you absolutely need to use the old method then use {@link SegmentedSequence#create(BasedSequence, Iterable)}
      */
     @Deprecated
     public static BasedSequence of(BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {

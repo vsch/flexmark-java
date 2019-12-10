@@ -128,9 +128,8 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
      * Add segments for this sequence, replacing out of base characters with strings
      *
      * @param builder builder
-     * @return true if had out of base chars
      */
-    boolean addSegments(@NotNull IBasedSegmentBuilder<?> builder);
+    void addSegments(@NotNull IBasedSegmentBuilder<?> builder);
 
     /**
      * Get the range of this sequence in original {@link #getBaseSequence()} and {@link #getBase()} original text source.

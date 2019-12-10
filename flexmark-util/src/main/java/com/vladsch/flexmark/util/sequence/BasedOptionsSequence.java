@@ -17,11 +17,7 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
     final private int optionFlags;
     final private @Nullable DataHolder options;
 
-    public BasedOptionsSequence(@NotNull CharSequence chars, int optionFlags) {
-        this(chars, optionFlags, null);
-    }
-
-    public BasedOptionsSequence(@NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
+    private BasedOptionsSequence(@NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
         this.chars = chars;
         this.optionFlags = optionFlags & ~(options == null || SEGMENTED_STATS.get(options) == null ? O_COLLECT_SEGMENTED_STATS : 0);
         this.options = options;
@@ -70,5 +66,13 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
     @Override
     public int hashCode() {
         return chars.hashCode();
+    }
+
+    public static BasedOptionsSequence of(@NotNull CharSequence chars, int optionFlags) {
+        return new BasedOptionsSequence(chars, optionFlags, null);
+    }
+
+    public static BasedOptionsSequence of(@NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
+        return new BasedOptionsSequence(chars, optionFlags, options);
     }
 }

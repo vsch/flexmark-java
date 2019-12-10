@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.PositionAnchor;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
@@ -52,9 +52,8 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     }
 
     @Override
-    public boolean addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
+    public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
         builder.append(getStartOffset(), getEndOffset());
-        return false;
     }
 
     @NotNull

@@ -47,6 +47,7 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
     @NotNull
     @Override
     public RichSequence subSequence(int startIndex, int endIndex) {
+        validateStartEnd(startIndex, endIndex);
         if (startIndex == 0 && endIndex == charSequence.length()) return this;
         return create(charSequence, startIndex, endIndex);
     }
