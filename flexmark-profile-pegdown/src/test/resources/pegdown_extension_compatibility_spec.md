@@ -2486,9 +2486,7 @@ Multi-line code span
     <tr><td> line </td><td> ```{</td></tr>
   </tbody>
 </table>
-<p>&ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: [
-&ldquo;xxx&rdquo;, &ldquo;zzz&rdquo; 
-] } <code>|</code>{ &ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: &ldquo;xxx&rdquo; }```|</p>
+<p>&ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: [ &ldquo;xxx&rdquo;, &ldquo;zzz&rdquo; ] } <code>|</code>{ &ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: &ldquo;xxx&rdquo; }```|</p>
 .
 Document[0, 149]
   TableBlock[0, 62]
@@ -2533,7 +2531,7 @@ Document[0, 149]
       SoftLineBreak[93, 94]
       TypographicQuotes[94, 99] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[94, 95, "\""] text:[95, 98, "zzz"] textClose:[98, 99, "\""]
         Text[95, 98] chars:[95, 98, "zzz"]
-      SoftLineBreak[98, 99]
+      SoftLineBreak[99, 100]
     SoftLineBreak[101, 102]
     Text[102, 104] chars:[102, 104, "} "]
     Code[104, 113] textOpen:[104, 107, "```"] text:[107, 110, "\n| "] textClose:[110, 113, "```"]

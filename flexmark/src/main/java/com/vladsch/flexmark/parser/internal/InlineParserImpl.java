@@ -12,10 +12,7 @@ import com.vladsch.flexmark.parser.core.delimiter.Bracket;
 import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.core.delimiter.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
-import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.DoNotDecorate;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
@@ -1149,10 +1146,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             Node lastChild = node.getLastChild();
 
             if (firstChild == lastChild) {
-                if (firstChild != null) firstChild.setChars(firstChild.getChars().trim());
+                if (firstChild != null && !(firstChild instanceof DoNotTrim)) firstChild.setChars(firstChild.getChars().trim());
             } else {
-                if (firstChild != null) firstChild.setChars(firstChild.getChars().trimStart());
-                if (lastChild != null) lastChild.setChars(lastChild.getChars().trimEnd());
+                if (firstChild != null && !(firstChild instanceof DoNotTrim)) firstChild.setChars(firstChild.getChars().trimStart());
+                if (lastChild != null && !(lastChild instanceof DoNotTrim)) lastChild.setChars(lastChild.getChars().trimEnd());
             }
         }
     }

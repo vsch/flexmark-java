@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.experimental.util.collection.iteration;
 
+import com.vladsch.flexmark.test.util.ExceptionMatcher;
 import com.vladsch.flexmark.util.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Rule;
@@ -11,7 +12,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.vladsch.flexmark.util.ExceptionMatcher.*;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.*;
@@ -37,7 +37,7 @@ public class PositionListTest {
         assertTrue(position.isDetached());
 
         // should throw
-        thrown.expect(match(IllegalStateException.class, "Position is detached but still receiving notifications"));
+        thrown.expect(ExceptionMatcher.match(IllegalStateException.class, "Position is detached but still receiving notifications"));
         positions.add(5);
     }
 
@@ -738,7 +738,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
-        thrown.expect(match(IllegalStateException.class, "next() has not been called"));
+        thrown.expect(ExceptionMatcher.match(IllegalStateException.class, "next() has not been called"));
 
         int i = 1;
         Iterator<Position<Integer>> iterator = positions.iterator();
@@ -752,7 +752,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
-        thrown.expect(match(IllegalStateException.class, "Position is detached from its list"));
+        thrown.expect(ExceptionMatcher.match(IllegalStateException.class, "Position is detached from its list"));
 
         Position<Integer> position = positions.getPosition(0);
         position.detachListener();
@@ -779,7 +779,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
-        thrown.expect(match(IllegalArgumentException.class, "startOffset: 5 must be less than endOffset: 4"));
+        thrown.expect(ExceptionMatcher.match(IllegalArgumentException.class, "startOffset: 5 must be less than endOffset: 4"));
 
         Position<Integer> position = positions.getPosition(0);
         position.remove(5, 4);
@@ -865,7 +865,7 @@ public class PositionListTest {
         PositionList<Integer> positions = new PositionList<>(list);
         ArrayList<Integer> list2 = new ArrayList<>();
 
-        thrown.expect(match(IllegalStateException.class, "Position is not valid"));
+        thrown.expect(ExceptionMatcher.match(IllegalStateException.class, "Position is not valid"));
 
         int i = 1;
         for (Position<Integer> position : positions) {
@@ -1311,7 +1311,7 @@ public class PositionListTest {
         ArrayList<Integer> list = new ArrayList<>(Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
         PositionList<Integer> positions = new PositionList<>(list);
 
-        thrown.expect(match(IllegalStateException.class, "Position is not valid"));
+        thrown.expect(ExceptionMatcher.match(IllegalStateException.class, "Position is not valid"));
         Position<Integer> position0 = positions.getPosition(0);
         Position<Integer> position1 = position0.getPosition(1);
         position0.remove(1);
@@ -1858,7 +1858,7 @@ public class PositionListTest {
         StringBuilder out = new StringBuilder();
 
         Object frameId = positions.openFrame();
-        thrown.expect(match(IllegalStateException.class, "Invalid frame id: 1"));
+        thrown.expect(ExceptionMatcher.match(IllegalStateException.class, "Invalid frame id: 1"));
         positions.closeFrame(1);
         positions.closeFrame(frameId);
     }
@@ -1872,7 +1872,7 @@ public class PositionListTest {
 
         Object frameId = positions.openFrame();
         positions.closeFrame(frameId);
-        thrown.expect(match(IllegalStateException.class, "No frames open"));
+        thrown.expect(ExceptionMatcher.match(IllegalStateException.class, "No frames open"));
         positions.closeFrame(frameId);
     }
 
@@ -1885,7 +1885,7 @@ public class PositionListTest {
 
         Object frameId = positions.openFrame();
         Object frameId2 = positions2.openFrame();
-        thrown.expect(matchRegEx(IllegalStateException.class, "FrameId created by: PositionList@[\\dabcdef]+, not by this list: PositionList@[\\dabcdef]+"));
+        thrown.expect(ExceptionMatcher.matchRegEx(IllegalStateException.class, "FrameId created by: PositionList@[\\dabcdef]+, not by this list: PositionList@[\\dabcdef]+"));
         positions.closeFrame(frameId2);
         positions.closeFrame(frameId);
     }
@@ -1899,7 +1899,7 @@ public class PositionListTest {
 
         Object frameId = positions.openFrame();
         Object frameId2 = positions.openFrame();
-        thrown.expect(matchPrefix(IllegalStateException.class, "" +
+        thrown.expect(ExceptionMatcher.matchPrefix(IllegalStateException.class, "" +
                 "closeFrame() open nested frames, openFrame trace:\n" +
                 "      com.vladsch.flexmark.experimental.util.collection.iteration.PositionListTest.framesNotClosed(PositionListTest.java:" +
                 ""));
@@ -1916,7 +1916,7 @@ public class PositionListTest {
         Object frameId = positions.openFrame();
         Object frameId2 = positions.openFrame();
         Object frameId3 = positions.openFrame();
-        thrown.expect(matchRegEx(IllegalStateException.class, "" +
+        thrown.expect(ExceptionMatcher.matchRegEx(IllegalStateException.class, "" +
                 "\\QcloseFrame() open nested frames, openFrame trace:\n\\E" +
                 "\\Q      com.vladsch.flexmark.experimental.util.collection.iteration.PositionListTest.framesNotClosed2(PositionListTest.java:\\E(?s:.*?)" +
                 "\\Q        com.vladsch.flexmark.experimental.util.collection.iteration.PositionListTest.framesNotClosed2(PositionListTest.java:\\E(?s:.*)" +
@@ -1935,7 +1935,7 @@ public class PositionListTest {
         Object frameId2 = positions.openFrame();
         Object frameId3 = positions.openFrame();
         positions.closeFrame(frameId3);
-        thrown.expect(matchRegEx(IllegalStateException.class, "" +
+        thrown.expect(ExceptionMatcher.matchRegEx(IllegalStateException.class, "" +
                 "\\QcloseFrame() open nested frames, openFrame trace:\n\\E" +
                 "\\Q      com.vladsch.flexmark.experimental.util.collection.iteration.PositionListTest.framesNotClosed3(PositionListTest.java:\\E(?s:.*?)" +
                 ""));

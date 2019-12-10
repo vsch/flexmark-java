@@ -2300,6 +2300,33 @@ Document[0, 54]
 ````````````````````````````````
 
 
+### 12
+
+SoftLineBreak has 0 span
+
+```````````````````````````````` example Issues xxx - 12: 1
+[
+ ]
+
+[
+ ]: /uri
+.
+<p>[
+]</p>
+<p>[
+]: /uri</p>
+.
+Document[0, 16]
+  Paragraph[0, 5] isTrailingBlankLine
+    LinkRef[0, 4] referenceOpen:[0, 1, "["] reference:[3, 3] referenceClose:[3, 4, "]"]
+      SoftLineBreak[1, 2]
+  Paragraph[6, 16]
+    LinkRef[6, 10] referenceOpen:[6, 7, "["] reference:[9, 9] referenceClose:[9, 10, "]"]
+      SoftLineBreak[7, 8]
+    Text[10, 16] chars:[10, 16, ": /uri"]
+````````````````````````````````
+
+
 ## StackOverflow
 
 spurious, cannot duplicate

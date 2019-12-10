@@ -1,10 +1,11 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.ast.DoNotTrim;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
-public class HardLineBreak extends Node {
+public class HardLineBreak extends Node implements DoNotTrim {
     @NotNull
     @Override
     public BasedSequence[] getSegments() {
