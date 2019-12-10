@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence.edit;
 
 import com.vladsch.flexmark.util.PositionAnchor;
+import com.vladsch.flexmark.util.sequence.BasedOptionsSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.Range;
@@ -885,7 +886,7 @@ public class BasedSequenceBuilderTest {
     public void test_replaced2() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = "01234567890123456789";
-        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
         CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.NEXT);
         BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
@@ -919,7 +920,7 @@ public class BasedSequenceBuilderTest {
     public void test_replaced3() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = " 0123456789\n 0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
         CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.NEXT);
         BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 
@@ -953,7 +954,7 @@ public class BasedSequenceBuilderTest {
     public void test_replaced4() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = " 0123456789\n 0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
         BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence);
 
         builder.append(0, 1);
@@ -998,7 +999,7 @@ public class BasedSequenceBuilderTest {
     public void test_appendPrefixed2() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
         CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
         BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(sequence, optimizer);
 

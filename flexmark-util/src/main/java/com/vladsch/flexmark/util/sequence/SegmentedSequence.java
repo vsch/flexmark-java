@@ -19,6 +19,8 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
 
     protected SegmentedSequence(BasedSequence baseSeq, int startOffset, int endOffset, int length) {
         super(0);
+        assert baseSeq == baseSeq.getBaseSequence();
+
         this.baseSeq = baseSeq;
         this.startOffset = startOffset;
         this.endOffset = endOffset;
@@ -34,7 +36,6 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     @NotNull
     @Override
     final public BasedSequence getBaseSequence() {
-        assert baseSeq == baseSeq.getBaseSequence();
         return baseSeq;
     }
 
@@ -91,13 +92,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     @NotNull
     @Override
     final public BasedSequence baseSubSequence(int startIndex, int endIndex) {
-        if (startIndex < 0 || startIndex > baseSeq.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + startIndex);
-        }
-        if (endIndex < 0 || endIndex > baseSeq.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + endIndex);
-        }
-
+        SequenceUtils.validateStartEnd(startIndex, endIndex, baseSeq.length());
         return baseSeq.baseSubSequence(startIndex, endIndex);
     }
 
@@ -136,8 +131,9 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
             } else if (baseSequence.isOption(O_TREE_SEGMENTED_SEQUENCES)) {
                 return SegmentedSequenceTree.create(baseSequence, builder.getSegmentBuilder());
             } else {
-                // Can decide based on segments and length
-                return SegmentedSequenceFull.create(baseSequence, builder.getSegmentBuilder());
+                // Can decide based on segments and length but tree based is not slower and much more efficient
+//                return SegmentedSequenceFull.create(baseSequence, builder.getSegmentBuilder());
+                return SegmentedSequenceTree.create(baseSequence, builder.getSegmentBuilder());
             }
         }
         return BasedSequence.NULL;

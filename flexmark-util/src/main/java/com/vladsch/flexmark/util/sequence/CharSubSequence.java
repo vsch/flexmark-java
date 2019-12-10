@@ -87,10 +87,8 @@ public final class CharSubSequence extends BasedSequenceImpl {
 
     @Override
     public int getIndexOffset(int index) {
-        if (index >= 0 && index <= endOffset - startOffset) {
-            return startOffset + index;
-        }
-        throw new StringIndexOutOfBoundsException("subSequence index: " + index + " out of range: 0, " + length());
+        validateIndexInclusiveEnd(index);
+        return startOffset + index;
     }
 
     @Override

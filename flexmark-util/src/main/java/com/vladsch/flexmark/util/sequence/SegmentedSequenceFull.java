@@ -73,8 +73,8 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
      *
      * @param builder builder for which to construct segmented sequence
      */
-    public static SegmentedSequenceFull create(@NotNull BasedSequence basedSequence, ISegmentBuilder<?> builder) {
-        BasedSequence baseSeq = basedSequence.getBaseSequence();
+    public static SegmentedSequenceFull create(@NotNull BasedSequence baseSequence, ISegmentBuilder<?> builder) {
+        BasedSequence baseSeq = baseSequence.getBaseSequence();
         int length = builder.length();
         int baseStartOffset = 0;
         int[] baseOffsets = new int[length + 1];

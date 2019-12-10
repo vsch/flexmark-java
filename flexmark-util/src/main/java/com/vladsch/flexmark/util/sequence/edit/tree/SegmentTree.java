@@ -88,7 +88,7 @@ public class SegmentTree {
                 int nextLength = aggrLength(hint.myPos + 1);
                 if (index < nextLength) {
                     // FIX: add stats to track this
-                    System.out.println("Using next segment");
+//                    System.out.println("Using next segment");
                     return Segment.getSegment(segmentBytes, byteOffset(hint.myPos + 1), hint.myPos + 1, endIndex, basedSequence);
                 }
                 // can skip next one too
@@ -101,7 +101,7 @@ public class SegmentTree {
                 if (index >= prevPrevLength) {
                     // it is previous one
                     // FIX: add stats to track this
-                    System.out.println("Using previous segment");
+//                    System.out.println("Using previous segment");
                     return Segment.getSegment(segmentBytes, byteOffset(hint.myPos - 1), hint.myPos - 1, prevPrevLength, basedSequence);
                 }
                 // previous one can be skipped
@@ -116,7 +116,7 @@ public class SegmentTree {
                 int prevLength = aggrLength(startPos - 1);
                 if (index >= prevLength) {
                     // FIX: add stats to track this
-                    System.out.println("Using first segment");
+//                    System.out.println("Using first segment");
                     return Segment.getSegment(segmentBytes, byteOffset(startPos), startPos, prevLength, basedSequence);
                 }
                 // first one is too far, we can skip it
@@ -136,7 +136,7 @@ public class SegmentTree {
                 if (index >= lastLength) return null; /* beyond last segment*/
 
                 // FIX: add stats to track this
-                System.out.println("Using last segment");
+//                System.out.println("Using last segment");
                 return Segment.getSegment(segmentBytes, byteOffset(endPos - 1), endPos - 1, secondToLastLength, basedSequence);
             } else {
                 // previous to last can be skipped
@@ -153,20 +153,44 @@ public class SegmentTree {
     }
 
     @NotNull
-    public SegmentTreeRange getSegmentRange(int startIndex, int endIndex, int startPos, int endPos, @NotNull BasedSequence basedSequence, @Nullable Segment hint) {
-        Segment startSegment = findSegment(startIndex, startPos, endPos, basedSequence, hint);
-        assert startSegment != null;
-        Segment endSegment = endIndex == startIndex ? startSegment : findSegment(endIndex, startPos, endPos, basedSequence, startSegment);
-        assert endSegment != null;
+    public SegmentTreeRange getSegmentRange(int startIndex, int endIndex, int startPos, int endPos, @NotNull BasedSequence baseSequence, @Nullable Segment hint) {
+        Segment startSegment;
+        Segment endSegment;
+
+        if (startIndex == endIndex) {
+            // this is could be an empty suffix so it may be the end of a segment, search for startIndex-1 and use that segment as its location
+            startSegment = hint == null || hint.notInSegment(startIndex) ? findSegment(startIndex, startPos, endPos, baseSequence, hint) : hint;
+            if (startSegment == null) {
+                assert startIndex > 0;
+
+                startSegment = hint == null || hint.notInSegment(startIndex - 1) ? findSegment(startIndex - 1, startPos, endPos, baseSequence, hint) : hint;
+                assert startSegment != null;
+
+                // if index is out of the found segment and there is a next segment which contains start index, then use that one
+                if (startSegment.notInSegment(startIndex) && startSegment.myPos + 1 < size()) {
+                    Segment nextSegment = getSegment(startSegment.myPos + 1, baseSequence);
+                    if (!nextSegment.notInSegment(startIndex)) {
+                        startSegment = nextSegment;
+                    }
+                }
+            }
+
+            endSegment = startSegment;
+        } else {
+            startSegment = hint == null || hint.notInSegment(startIndex) ? findSegment(startIndex, startPos, endPos, baseSequence, hint) : hint;
+            assert startSegment != null;
+            endSegment = !startSegment.notInSegment(endIndex - 1) ? startSegment : (hint == null || hint.notInSegment(endIndex - 1) ? findSegment(endIndex - 1, startPos, endPos, baseSequence, startSegment) : hint);
+            assert endSegment != null;
+        }
 
         int startOffset = -1;
         int endOffset = -1;
 
         // if start segment is text then we look for previous anchor or range to get startOffset base context information, failing that look for next range or anchor
         if (startSegment.isText()) {
-            Segment prevSegment = getPrevAnchor(startSegment.myPos, basedSequence);
+            Segment prevSegment = getPrevAnchor(startSegment.myPos, baseSequence);
             if (prevSegment == null && startSegment.myPos > 0) {
-                prevSegment = getSegment(startSegment.myPos - 1, basedSequence);
+                prevSegment = getSegment(startSegment.myPos - 1, baseSequence);
             }
 
             if (prevSegment != null && prevSegment.isBase()) {
@@ -179,17 +203,25 @@ public class SegmentTree {
         // if end segment is text then we look for next anchor or range to get endOffset base context information
         if (endSegment.isText()) {
             if (endSegment.myPos + 1 < treeData.length / 2) {
-                Segment nextSegment = getSegment(endSegment.myPos + 1, basedSequence);
+                Segment nextSegment = getSegment(endSegment.myPos + 1, baseSequence);
                 if (nextSegment.isBase()) {
                     endOffset = nextSegment.getStartOffset();
                 }
             }
         } else {
-            endOffset = endSegment.getEndOffset() + endIndex - endSegment.getStartIndex();
+            endOffset = endSegment.getStartOffset() + endIndex - endSegment.getStartIndex();
         }
 
         if (startOffset < 0) startOffset = endOffset;
         if (endOffset < startOffset) endOffset = startOffset;
+
+        if (startOffset > baseSequence.length()) {
+            throw new IllegalStateException(String.format("startOffset:%d > baseSeq.length: %d", startOffset, baseSequence.length()));
+        }
+
+        if (endOffset > baseSequence.length()) {
+            throw new IllegalStateException(String.format("endOffset:%d > baseSeq.length: %d", endOffset, baseSequence.length()));
+        }
 
         return new SegmentTreeRange(
                 startIndex,
@@ -331,6 +363,12 @@ public class SegmentTree {
         }
         out.unmark().append(" } }");
         return out.toString();
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return toString(BasedSequence.NULL);
     }
 
     // Implementation is static to allow not having to use the class but just its computed data

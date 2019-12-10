@@ -11355,10 +11355,10 @@ Document[0, 13]
 Document[0, 17]
   Paragraph[0, 5] isTrailingBlankLine
     LinkRef[0, 4] referenceOpen:[0, 1, "["] reference:[3, 3] referenceClose:[3, 4, "]"]
-      SoftLineBreak[3, 3]
+      SoftLineBreak[2, 3]
   Paragraph[6, 17]
     LinkRef[6, 10] referenceOpen:[6, 7, "["] reference:[9, 9] referenceClose:[9, 10, "]"]
-      SoftLineBreak[9, 9]
+      SoftLineBreak[8, 9]
     Text[10, 16] chars:[10, 16, ": /uri"]
 ````````````````````````````````
 

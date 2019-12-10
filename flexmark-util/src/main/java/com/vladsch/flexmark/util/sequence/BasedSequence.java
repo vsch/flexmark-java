@@ -469,20 +469,20 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
 
         @Override
         public char charAt(int index) {
-            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+            throw new StringIndexOutOfBoundsException("EMPTY sequence has no characters");
         }
 
         @Override
         public int getIndexOffset(int index) {
-            if (index == 0) return 0;
-            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+            validateIndexInclusiveEnd(index);
+            return 0;
         }
 
         @NotNull
         @Override
         public BasedSequence subSequence(int i, int i1) {
-            if (i == 0 && i1 == 0) return this;
-            throw new StringIndexOutOfBoundsException("EMPTY subSequence(" + i + "," + i1 + ") only subSequence(0, 0) is allowed");
+            validateStartEnd(i,i1);
+            return this;
         }
 
         @NotNull

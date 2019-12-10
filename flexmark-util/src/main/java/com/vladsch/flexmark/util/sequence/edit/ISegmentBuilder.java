@@ -9,7 +9,7 @@ import java.util.Iterator;
 public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<Object> {
     int F_INCLUDE_ANCHORS = 0x01;
     int F_TRACK_FIRST256 = 0x02;
-    int F_DEFAULT = F_INCLUDE_ANCHORS;
+    int F_DEFAULT = F_INCLUDE_ANCHORS | F_TRACK_FIRST256;
 
     int getOptions();
     boolean isIncludeAnchors();

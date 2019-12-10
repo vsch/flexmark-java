@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.SegmentedSequenceStats;
 import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder;
 import com.vladsch.flexmark.util.sequence.edit.tree.Segment;
@@ -23,12 +24,20 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
     private static class Cache {
         final @NotNull Segment mySegment;
         final @NotNull CharSequence myChars;
-        final int myCharsStartIndex;
+        final int myIndexDelta;
 
-        public Cache(@NotNull Segment segment, @NotNull CharSequence chars) {
+        public Cache(@NotNull Segment segment, @NotNull CharSequence chars, int startIndex) {
             mySegment = segment;
             myChars = chars;
-            myCharsStartIndex = segment.getStartIndex();
+            myIndexDelta = startIndex - segment.getStartIndex();
+        }
+
+        public char charAt(int index) {
+            return myChars.charAt(index + myIndexDelta);
+        }
+
+        public int charIndex(int index) {
+            return index + myIndexDelta;
         }
     }
 
@@ -52,11 +61,11 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
     private Cache getCache(int index) {
         Cache cache = myCache.get();
 
-        if (cache == null || cache.mySegment.notInSegment(index)) {
+        if (cache == null || cache.mySegment.notInSegment(index + myStartIndex)) {
             Segment segment = mySegmentTree.findSegment(index + myStartIndex, myStartPos, myEndPos, baseSeq, cache == null ? null : cache.mySegment);
             assert segment != null;
 
-            cache = new Cache(segment, SegmentTree.getCharSequence(segment, myStartIndex, myStartIndex + length, myStartPos, myEndPos));
+            cache = new Cache(segment, segment.getCharSequence(), myStartIndex);
             myCache.set(cache);
         }
         return cache;
@@ -74,7 +83,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
             Cache cache = getCache(index - 1);
             CharSequence charSequence = cache.myChars;
             if (charSequence instanceof BasedSequence) {
-                return ((BasedSequence) charSequence).getIndexOffset(index + myStartIndex - cache.myCharsStartIndex);
+                return ((BasedSequence) charSequence).getIndexOffset(cache.charIndex(index));
             } else {
                 return -1;
             }
@@ -84,7 +93,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
             Cache cache = getCache(index);
             CharSequence charSequence = cache.myChars;
             if (charSequence instanceof BasedSequence) {
-                return ((BasedSequence) charSequence).getIndexOffset(index + myStartIndex - cache.myCharsStartIndex);
+                return ((BasedSequence) charSequence).getIndexOffset(cache.charIndex(index));
             } else {
                 return -1;
             }
@@ -99,8 +108,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
     @Override
     public char charAt(int index) {
         validateIndex(index);
-        Cache cache = getCache(index);
-        return cache.myChars.charAt(index + myStartIndex - cache.myCharsStartIndex);
+        return getCache(index).charAt(index);
     }
 
     @NotNull
@@ -122,6 +130,14 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
      */
     public static SegmentedSequenceTree create(@NotNull BasedSequence baseSeq, ISegmentBuilder<?> builder) {
         SegmentTree segmentTree = SegmentTree.build(builder.getSegments(), builder.getText());
-        return new SegmentedSequenceTree(baseSeq, builder.getStartOffset(), builder.getEndOffset(), builder.length(), segmentTree);
+
+        if (baseSeq.isOption(O_COLLECT_SEGMENTED_STATS)) {
+            SegmentedSequenceStats stats = baseSeq.getOption(SEGMENTED_STATS);
+            if (stats != null) {
+                stats.addStats(builder.noAnchorsSize(), builder.getTextLength(), builder.getTextSegments(), builder.length(), builder.getStartOffset(), builder.getEndOffset());
+            }
+        }
+
+        return new SegmentedSequenceTree(baseSeq.getBaseSequence(), builder.getStartOffset(), builder.getEndOffset(), builder.length(), segmentTree);
     }
 }
