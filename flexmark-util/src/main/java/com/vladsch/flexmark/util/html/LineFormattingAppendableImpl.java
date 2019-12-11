@@ -85,6 +85,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return myOptions;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable setOptions(int options) {
         myOptions = options;
@@ -111,14 +112,16 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return haveOptions(COLLAPSE_WHITESPACE);
     }
 
+    @NotNull
     @Override
     public CharSequence getIndentPrefix() {
         return myIndentPrefix;
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable setIndentPrefix(CharSequence prefix) {
-        myIndentPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix).subSequence(0, prefix.length());
+    public LineFormattingAppendable setIndentPrefix(@Nullable CharSequence prefix) {
+        myIndentPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
         return this;
     }
 
@@ -127,8 +130,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return myPrefixAfterEol;
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable addPrefix(CharSequence prefix, boolean afterEol) {
+    public LineFormattingAppendable addPrefix(@NotNull CharSequence prefix, boolean afterEol) {
         if (!myPassThrough) {
             if (afterEol) {
                 myPrefixAfterEol = combinedPrefix(myPrefixAfterEol, prefix);
@@ -140,19 +144,21 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable setPrefix(CharSequence prefix, boolean afterEol) {
+    public LineFormattingAppendable setPrefix(@NotNull CharSequence prefix, boolean afterEol) {
         if (!myPassThrough) {
             if (afterEol) {
-                myPrefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix).subSequence(0, prefix.length());
+                myPrefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
             } else {
-                myPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix).subSequence(0, prefix.length());
+                myPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
                 myPrefixAfterEol = myPrefix;
             }
         }
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable indent() {
         if (!myPassThrough) {
@@ -178,6 +184,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         myIndentPrefixStack.pop();
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable unIndent() {
         if (!myPassThrough) {
@@ -187,6 +194,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable unIndentNoEol() {
         if (!myPassThrough) {
@@ -202,6 +210,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable pushPrefix() {
         if (!myPassThrough) {
@@ -211,6 +220,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable popPrefix(boolean afterEol) {
         if (!myPassThrough) {
@@ -508,24 +518,28 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         }
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable append(CharSequence csq) {
+    public LineFormattingAppendable append(@NotNull CharSequence csq) {
         appendImpl(csq, 0, csq.length());
         return this;
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable append(CharSequence csq, int start, int end) {
+    public LineFormattingAppendable append(@NotNull CharSequence csq, int start, int end) {
         appendImpl(csq, start, end);
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable append(char c) {
         appendImpl(Character.toString(c), 0);
         return this;
     }
 
+    @NotNull
     public LineFormattingAppendable repeat(char c, int count) {
         append(RepeatedSequence.repeatOf(c, count));
 //        int i = count;
@@ -534,30 +548,30 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
-    public LineFormattingAppendable repeat(CharSequence csq, int count) {
+    @NotNull
+    public LineFormattingAppendable repeat(@NotNull CharSequence csq, int count) {
         append(RepeatedSequence.repeatOf(csq, count));
 //        int i = count;
 //        while (i-- > 0) append(csq);
         return this;
     }
 
-    public LineFormattingAppendable repeat(CharSequence csq, int start, int end, int count) {
+    @NotNull
+    public LineFormattingAppendable repeat(@NotNull CharSequence csq, int start, int end, int count) {
         append(RepeatedSequence.repeatOf(csq.subSequence(start, end), count));
 //        int i = count;
 //        while (i-- > 0) append(csq, start, end);
         return this;
     }
 
-    private BasedSequence combinedPrefix(CharSequence prefix, CharSequence suffix) {
+    private BasedSequence combinedPrefix(@Nullable CharSequence prefix, @Nullable CharSequence suffix) {
         if (prefix != null && prefix.length() > 0 && suffix != null && suffix.length() > 0) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(prefix).append(suffix);
-            CharSequence charSequence = sb.toString();
-            return BasedSequence.of(charSequence).subSequence(0, charSequence.length());
+            CharSequence charSequence = String.valueOf(prefix) + suffix;
+            return BasedSequence.of(charSequence);
         } else if (prefix != null && prefix.length() > 0) {
-            return BasedSequence.of(prefix).subSequence(0, prefix.length());
+            return BasedSequence.of(prefix);
         } else if (suffix != null && suffix.length() > 0) {
-            return BasedSequence.of(suffix).subSequence(0, suffix.length());
+            return BasedSequence.of(suffix);
         } else {
             return BasedSequence.NULL;
         }
@@ -568,8 +582,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return getLinePrefix(line).isNull();
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable append(LineFormattingAppendable lineAppendable, int startLine, int endLine) {
+    public LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable, int startLine, int endLine) {
         List<CharSequence> lines = lineAppendable.getLineContents(startLine, endLine);
         List<BasedSequence> prefixes = lineAppendable.getLinePrefixes(startLine, endLine);
 
@@ -595,12 +610,13 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable prefixLines(CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine) {
+    public LineFormattingAppendable prefixLines(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine) {
         int useStartLine = minLimit(startLine, 0);
         int useEndLine = maxLimit(endLine, getLineCount());
 
-        if (prefix != null && prefix.length() > 0 && useStartLine < useEndLine) {
+        if (prefix.length() > 0 && useStartLine < useEndLine) {
             // now need to add prefix to line contents
             CharSequence lastLinePrefix = BasedSequence.NULL;
             BasedSequence lastPrefix = addAfterLinePrefix ? combinedPrefix(lastLinePrefix, prefix) : combinedPrefix(prefix, lastLinePrefix);
@@ -622,6 +638,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable removeLines(int startLine, int endLine) {
         int useStartLine = minLimit(startLine, 0);
@@ -655,6 +672,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         }
     }
 
+    @NotNull
     @Override
     public List<CharSequence> getLineContents(int startOffset, int endOffset) {
         line();
@@ -668,6 +686,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return result;
     }
 
+    @NotNull
     @Override
     public List<BasedSequence> getLinePrefixes(int startOffset, int endOffset) {
         line();
@@ -680,6 +699,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return result;
     }
 
+    @NotNull
     @Override
     public List<CharSequence> getLines(int startOffset, int endOffset) {
         line();
@@ -716,8 +736,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return result;
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable appendTo(Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException {
+    public LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException {
         line();
         int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
 
@@ -737,6 +758,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable line() {
         if (myPreFormattedNesting > 0 || myLineStart < myAppendable.length() || haveOptions(ALLOW_LEADING_EOL)) {
@@ -761,6 +783,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable lineWithTrailingSpaces(int count) {
         if (myPreFormattedNesting > 0 || myLineStart < myAppendable.length() || haveOptions(ALLOW_LEADING_EOL)) {
@@ -773,18 +796,21 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable addLine() {
         appendImpl(SequenceUtils.EOL, 0);
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable lineIf(boolean predicate) {
         if (predicate) line();
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable blankLine() {
         line();
@@ -792,12 +818,14 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable blankLineIf(boolean predicate) {
         if (predicate) blankLine();
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable blankLine(int count) {
         line();
@@ -869,6 +897,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return myPreFormattedNesting > 0;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable openPreFormatted(boolean addPrefixToFirstLine) {
         if (myPreFormattedNesting == 0) {
@@ -882,6 +911,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable closePreFormatted() {
         if (myPreFormattedNesting <= 0) throw new IllegalStateException("closePreFormatted called with nesting == 0");
@@ -920,6 +950,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         }
     }
 
+    @NotNull
     @Override
     public LineFormattingAppendable lineOnFirstText(boolean value) {
         if (value) myLineOnFirstText++;
@@ -927,14 +958,16 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable removeIndentOnFirstEOL(Runnable runnable) {
+    public LineFormattingAppendable removeIndentOnFirstEOL(@NotNull Runnable runnable) {
         myIndentsOnFirstEol.remove(runnable);
         return this;
     }
 
+    @NotNull
     @Override
-    public LineFormattingAppendable addIndentOnFirstEOL(Runnable runnable) {
+    public LineFormattingAppendable addIndentOnFirstEOL(@NotNull Runnable runnable) {
         myIndentsOnFirstEol.add(runnable);
         return this;
     }

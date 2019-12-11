@@ -182,25 +182,15 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       all of the node types. The text container should implement ability to append to
       `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
       be visited.
-* [ ] Fix: change `BasedSequenceImpl` to use `Range` instead of `startOffset` and `endOffset`
 * Add: spec example language per section options and rendering in HTML.
   * [ ] Add: Tests for section name options
 
 ## Next 0.59.xx
 
 + [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with
-      `BasedSequenceBuilder`
+      `SequenceBuilder`
 + [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
       implementation.
-* [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
-  * [ ] optimize by not processing one char at a time. Split the sequence into regions of
-        interest and process the regions as one piece which the `BasedSequenceBuilder` can
-        optimize to base sequence.
-  * [ ] do not construct temporary `StringBuilder` but only keep the last line under
-        construction temporary, with all previously constructed lines used for prior content.
-  * [ ] use an instance of sequence builder for the line under construction, and keep parallel
-        string builder for the content tests, but only if needed to avoid construction of
-        segmented sequence.
 * [ ] Add: `Formatter` Paragraph wrapping options and code.
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
@@ -208,6 +198,15 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.68
 
++ [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
+  + [ ] optimize by not processing one char at a time. Split the sequence into regions of
+        interest and process the regions as one piece which the `SequenceBuilder` can
+        optimize to base sequence.
+  + [ ] do not construct temporary `StringBuilder` but only keep the last line under
+        construction temporary, with all previously constructed lines used for prior content.
+  + [ ] use an instance of sequence builder for the line under construction, and keep parallel
+        string builder for the content tests, but only if needed to avoid construction of
+        segmented sequence.
 * Add: `ArrayUtils.toArray(BitSet)` to return an `int[]` of all bit numbers that are set.
 
 ## 0.59.66

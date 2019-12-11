@@ -100,7 +100,7 @@ public class MarkdownTable {
             CharSequence caption,
             CharSequence captionClose
     ) {
-        setCaptionCell(new TableCell(tableCellNode, captionOpen, options.formatTableCaptionSpaces == DiscretionaryText.AS_IS ? caption : BasedSequence.of(caption).subSequence(0, caption.length()).trim(), captionClose, 1, 1));
+        setCaptionCell(new TableCell(tableCellNode, captionOpen, options.formatTableCaptionSpaces == DiscretionaryText.AS_IS ? caption : BasedSequence.of(caption).trim(), captionClose, 1, 1));
     }
 
     public int getHeadingRowCount() {

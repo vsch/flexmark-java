@@ -25,7 +25,7 @@ public class ExampleOption {
         BasedSequence optionName;
         BasedSequence customParams;
         boolean isDisabled = false;
-        BasedSequence optionText = BasedSequence.of(option).subSequence(0, option.length());
+        BasedSequence optionText = BasedSequence.of(option);
 
         int pos = optionText.indexOf("[");
         if (pos > 0 && pos < optionText.length() && optionText.endsWith("]")) {

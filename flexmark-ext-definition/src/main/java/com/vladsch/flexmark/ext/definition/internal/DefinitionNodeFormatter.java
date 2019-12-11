@@ -59,7 +59,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
 
         if (options.markerSpaces >= 1 && openMarkerSpaces.length() != options.markerSpaces) {
             CharSequence charSequence = RepeatedSequence.repeatOf(' ', options.markerSpaces);
-            openMarkerSpaces = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
+            openMarkerSpaces = BasedSequence.of(charSequence);
         }
 
         switch (options.markerType) {

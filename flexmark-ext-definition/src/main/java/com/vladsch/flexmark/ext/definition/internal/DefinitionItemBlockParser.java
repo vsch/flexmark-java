@@ -263,7 +263,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
                     // intervening characters between previous paragraph and definition terms
                     lastChildAnyNot.setCharsFromContent();
                     CharSequence charSequence = state.getLine().baseSubSequence(lastChildAnyNot.getEndOffset(), state.getLine().getStartOffset()).normalizeEOL();
-                    final BasedSequence interSpace = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
+                    final BasedSequence interSpace = BasedSequence.of(charSequence);
                     if (interSpace.countLeading(BasedSequence.EOL_SET) >= 2) {
                         return BlockStart.none();
                     }

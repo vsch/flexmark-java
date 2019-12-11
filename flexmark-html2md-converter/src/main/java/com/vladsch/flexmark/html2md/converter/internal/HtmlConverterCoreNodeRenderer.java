@@ -181,7 +181,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                         out.blankLine();
                         out.append(">>>").append(entry.getKey()).line();
                         CharSequence charSequence = entry.getValue();
-                        BasedSequence value = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
+                        BasedSequence value = BasedSequence.of(charSequence);
                         out.append(value.trimEnd()).append("\n");
                         out.append("<<<\n");
                         out.blankLine();
@@ -201,7 +201,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     }
 
     public static int getMaxRepeatedChars(CharSequence text, char c, int minCount) {
-        BasedSequence chars = BasedSequence.of(text).subSequence(0, text.length());
+        BasedSequence chars = BasedSequence.of(text);
         int lastPos = 0;
         while (lastPos < chars.length()) {
             int pos = chars.indexOf(c, lastPos);
@@ -398,7 +398,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     private void processCode(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
         context.processConditional(myHtmlConverterOptions.extInlineCode, element, () -> {
             CharSequence charSequence = element.ownText();
-            BasedSequence text = BasedSequence.of(charSequence).subSequence(0, charSequence.length());
+            BasedSequence text = BasedSequence.of(charSequence);
             int backTickCount = getMaxRepeatedChars(text, '`', 1);
             CharSequence backTicks = RepeatedSequence.repeatOf("`", backTickCount);
             context.inlineCode(() -> context.processTextNodes(element, false, myHtmlConverterOptions.extInlineCode.isTextOnly() ? "" : backTicks));
@@ -429,7 +429,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     int lineCount = out.getLineCount();
                     if (lineCount > 0) {
                         CharSequence lineContent = out.getLineContent(lineCount - 1);
-                        int pendingSpace = BasedSequence.of(lineContent).subSequence(0, lineContent.length()).countTrailing(BasedSequence.SPACE_TAB_SET);
+                        int pendingSpace = BasedSequence.of(lineContent).countTrailing(BasedSequence.SPACE_TAB_SET);
                         if (pendingSpace < 2) {
                             // replace last line
                             out.removeLines(lineCount - 1, lineCount);

@@ -186,9 +186,11 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
 
     public HtmlBuilder append(StringBuffer sb) { return super.append(sb.toString()); }
 
-    public HtmlBuilder append(CharSequence s) { return super.append(s); }
+    @NotNull
+    public HtmlBuilder append(@NotNull CharSequence s) { return super.append(s); }
 
-    public HtmlBuilder append(CharSequence s, int start, int end) { return super.append(s, start, end); }
+    @NotNull
+    public HtmlBuilder append(@NotNull CharSequence s, int start, int end) { return super.append(s, start, end); }
 
     public HtmlBuilder append(char[] str) { return super.append(String.valueOf(str)); }
 
@@ -196,6 +198,7 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
 
     public HtmlBuilder append(boolean b) { return super.append(b ? "true" : "false"); }
 
+    @NotNull
     public HtmlBuilder append(char c) { return super.append(c); }
 
     public HtmlBuilder append(int i) { return super.append(String.valueOf(i)); }

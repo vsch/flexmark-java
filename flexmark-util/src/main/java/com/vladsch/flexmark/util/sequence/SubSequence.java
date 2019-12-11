@@ -123,7 +123,7 @@ public final class SubSequence extends BasedSequenceImpl {
      */
     @Deprecated
     public static BasedSequence of(CharSequence charSequence) {
-        return BasedSequence.of(charSequence).subSequence(0, charSequence.length());
+        return BasedSequence.of(charSequence);
     }
 
     /**

@@ -46,7 +46,7 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
 
     @Override
     public void parse(CharSequence input) {
-        myDocument = getParser().parse(BasedSequence.of(input).subSequence(0, input.length()));
+        myDocument = getParser().parse(BasedSequence.of(input));
     }
 
     @Override

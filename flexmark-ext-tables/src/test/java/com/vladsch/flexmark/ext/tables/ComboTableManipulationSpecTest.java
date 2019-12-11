@@ -74,7 +74,7 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
 
                 @Override
                 public int charWidth(@NotNull CharSequence s) {
-                    return BasedSequence.of(s).subSequence(0, s.length()).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_SET);
+                    return BasedSequence.of(s).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_SET);
                 }
             })
         );

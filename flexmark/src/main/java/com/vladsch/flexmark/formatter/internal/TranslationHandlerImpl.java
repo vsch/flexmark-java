@@ -434,7 +434,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         if (suffix2 != null) {
             trimmedEOL = suffix2;
         } else {
-            BasedSequence basedSequence = BasedSequence.of(nonTranslatingText).subSequence(0, nonTranslatingText.length());
+            BasedSequence basedSequence = BasedSequence.of(nonTranslatingText);
             trimmedEOL = basedSequence.trimmedEOL();
         }
 
