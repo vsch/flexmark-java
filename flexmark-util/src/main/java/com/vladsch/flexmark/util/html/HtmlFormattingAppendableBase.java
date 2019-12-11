@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.html;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,7 +31,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public void toBuilder(@NotNull BasedSequenceBuilder builder, int maxBlankLines) {
+    public void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines) {
         throw new IllegalStateException("Not Implemented");
     }
 

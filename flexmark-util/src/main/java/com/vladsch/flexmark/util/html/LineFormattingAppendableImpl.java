@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +43,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private BasedSequence myIndentPrefix;
     final private Stack<BasedSequence> myPrefixStack;
     final private Stack<Boolean> myIndentPrefixStack;
-    final private BasedSequenceBuilder myBuilder;
+    final private SequenceBuilder myBuilder;
 
     // current line being accumulated
     private int myLineStart;            // start of line
@@ -56,7 +56,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         this(formatOptions, null);
     }
 
-    public LineFormattingAppendableImpl(int formatOptions, @Nullable BasedSequenceBuilder builder) {
+    public LineFormattingAppendableImpl(int formatOptions, @Nullable SequenceBuilder builder) {
         myBuilder = builder;
         myOptions = formatOptions;
         myPassThrough = haveOptions(PASS_THROUGH);
@@ -901,7 +901,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @Override
-    public void toBuilder(@NotNull BasedSequenceBuilder builder, int maxBlankLines) {
+    public void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines) {
         if (myBuilder == null) return;
 
         line();

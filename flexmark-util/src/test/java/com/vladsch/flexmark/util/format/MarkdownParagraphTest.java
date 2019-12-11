@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -73,7 +73,7 @@ public class MarkdownParagraphTest {
         BasedSequence actual = formatter.computeLeftAlignedSequence();
         assertEquals(expected, actual.toString());
 
-        BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(basedInput);
+        SequenceBuilder builder = SequenceBuilder.emptyBuilder(basedInput);
         actual.addSegments(builder.getSegmentBuilder());
         assertEquals("" +
                 "⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\n" +
@@ -82,7 +82,7 @@ public class MarkdownParagraphTest {
 
         BasedSequence sequence = actual.toSpc().trimEnd(BasedSequence.WHITESPACE_SET).appendEOL();
 
-        BasedSequenceBuilder builder2 = BasedSequenceBuilder.emptyBuilder(basedInput);
+        SequenceBuilder builder2 = SequenceBuilder.emptyBuilder(basedInput);
         sequence.addSegments(builder2.getSegmentBuilder());
         assertEquals("" +
                 "⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\n" +

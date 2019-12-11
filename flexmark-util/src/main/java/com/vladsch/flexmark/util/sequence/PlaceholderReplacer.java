@@ -4,6 +4,12 @@ import java.util.Collection;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+/**
+ * Used to replace placeholder text in the form of open/close char such as &lt;text&gt; in a markdown document.
+ *
+ * Used by docx conversion application to replace custom fields.
+ *
+ */
 public class PlaceholderReplacer {
     public static <T> void replaceAll(Collection<T> spanList, Function<String, String> mapper, char openPlaceholder, char closePlaceholder, Function<T, String> getter, BiConsumer<T, String> setter) {
         if (spanList.isEmpty()) return;

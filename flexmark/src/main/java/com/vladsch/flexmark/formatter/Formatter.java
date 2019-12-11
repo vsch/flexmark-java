@@ -24,7 +24,7 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -238,8 +238,8 @@ public class Formatter implements IRender {
      * @param document node to render
      * @param builder  sequence builder
      */
-    public String render(@NotNull Node document, @NotNull BasedSequenceBuilder builder) {
-        BasedSequenceBuilder subBuilder = builder.subContext();
+    public String render(@NotNull Node document, @NotNull SequenceBuilder builder) {
+        SequenceBuilder subBuilder = builder.subContext();
 
         MarkdownWriter out = new MarkdownWriter(formatterOptions.formatFlags, subBuilder);
         MainNodeFormatter renderer = new MainNodeFormatter(options, out, document.getDocument(), null);

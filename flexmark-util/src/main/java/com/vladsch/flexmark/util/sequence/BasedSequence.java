@@ -1,14 +1,12 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.PositionAnchor;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.TestOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +79,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     @SuppressWarnings("unchecked")
     @Override
     @NotNull
-    BasedSequenceBuilder getBuilder();
+    SequenceBuilder getBuilder();
 
     /**
      * Get the underlying object on which this sequence contents are based
@@ -119,9 +117,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
      *
      * @param index index for which to get the offset in original source
      * @return offset of index of this sequence in original text
-     * @deprecated being phased out since it is quite inefficient and useless to find source range of changes sequences
      */
-    @TestOnly
     int getIndexOffset(int index);
 
     /**
@@ -474,14 +470,14 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
 
         @Override
         public int getIndexOffset(int index) {
-            validateIndexInclusiveEnd(index);
+            SequenceUtils.validateIndexInclusiveEnd(index, length());
             return 0;
         }
 
         @NotNull
         @Override
         public BasedSequence subSequence(int i, int i1) {
-            validateStartEnd(i,i1);
+            SequenceUtils.validateStartEnd(i, i1, length());
             return this;
         }
 

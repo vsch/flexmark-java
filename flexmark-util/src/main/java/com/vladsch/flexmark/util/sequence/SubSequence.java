@@ -86,13 +86,13 @@ public final class SubSequence extends BasedSequenceImpl {
 
     @Override
     public int getIndexOffset(int index) {
-        validateIndexInclusiveEnd(index);
+        SequenceUtils.validateIndexInclusiveEnd(index, length());
         return startOffset + index;
     }
 
     @Override
     public char charAt(int index) {
-        validateIndex(index);
+        SequenceUtils.validateIndex(index, length());
 
         char c = baseSeq.charAt(index + startOffset);
         return c == SequenceUtils.NUL ? SequenceUtils.ENC_NUL : c;
@@ -101,7 +101,7 @@ public final class SubSequence extends BasedSequenceImpl {
     @NotNull
     @Override
     public SubSequence subSequence(int startIndex, int endIndex) {
-        validateStartEnd(startIndex, endIndex);
+        SequenceUtils.validateStartEnd(startIndex, endIndex, length());
         return baseSubSequence(startOffset + startIndex, startOffset + endIndex);
     }
 

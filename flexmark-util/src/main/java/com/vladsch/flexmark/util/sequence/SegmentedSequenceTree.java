@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.SegmentedSequenceStats;
-import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.tree.Segment;
-import com.vladsch.flexmark.util.sequence.edit.tree.SegmentTree;
-import com.vladsch.flexmark.util.sequence.edit.tree.SegmentTreeRange;
+import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
+import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.tree.Segment;
+import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree;
+import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTreeRange;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -88,7 +88,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
                 return -1;
             }
         } else {
-            validateIndexInclusiveEnd(index);
+            SequenceUtils.validateIndexInclusiveEnd(index, length());
 
             Cache cache = getCache(index);
             CharSequence charSequence = cache.myChars;
@@ -107,7 +107,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
 
     @Override
     public char charAt(int index) {
-        validateIndex(index);
+        SequenceUtils.validateIndex(index, length());
         return getCache(index).charAt(index);
     }
 
@@ -117,7 +117,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
         if (startIndex == 0 && endIndex == length) {
             return this;
         } else {
-            validateStartEnd(startIndex, endIndex);
+            SequenceUtils.validateStartEnd(startIndex, endIndex, length());
             SegmentTreeRange subSequenceRange = mySegmentTree.getSegmentRange(startIndex + myStartIndex, endIndex + myStartIndex, myStartPos, myEndPos, baseSeq, getCachedSegment());
             return new SegmentedSequenceTree(baseSeq, mySegmentTree, subSequenceRange);
         }

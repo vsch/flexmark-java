@@ -1,36 +1,14 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public interface BasedUtils {
-    interface OffsetFunction {
-        /**
-         * Return -ve if this index is out of base
-         *
-         * @param index index into sequence
-         * @return -ve or offset into base
-         */
-        int getIndexOffset(int index);
-    }
-
-    interface StringFunction {
-        /**
-         * Return -ve if this index is out of base
-         *
-         * @param startIndex index into sequence where -ve offset was first reported
-         * @param endIndex   index into sequence where -ve offset stopped being reported
-         * @return string for the subsequence
-         */
-        String getString(int startIndex, int endIndex);
-    }
-
     /**
      * Generate segments for given sequence
      *
-     * @param segments       segment builder
-     * @param chars          based sequence for which to generate segments
+     * @param segments segment builder
+     * @param chars    based sequence for which to generate segments
      */
     static void generateSegments(IBasedSegmentBuilder<?> segments, @NotNull BasedSequence chars) {
         // find contiguous ranges of base chars and replaced chars, slower but only when optimizers are available

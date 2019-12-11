@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -199,7 +199,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *
      * @return builder which can build this type of sequence
      */
-    @NotNull <B extends SequenceBuilder<B, T>> B getBuilder();
+    @NotNull <B extends ISequenceBuilder<B, T>> B getBuilder();
 
     /**
      * All index methods return the position or -1 if not found of the given character, characters or string.

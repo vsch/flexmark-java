@@ -6,11 +6,11 @@ import com.vladsch.flexmark.util.ast.DoNotCollectText;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 
 @SuppressWarnings("WeakerAccess")
 public class EnumRefTextCollectingVisitor {
-    private BasedSequenceBuilder out;
+    private SequenceBuilder out;
     private final NodeVisitor visitor;
     private Runnable ordinalRunnable;
 
@@ -37,7 +37,7 @@ public class EnumRefTextCollectingVisitor {
     }
 
     public void collect(BasedSequence basedSequence, EnumeratedReferenceRendering[] renderings, String defaultFormat) {
-        out = BasedSequenceBuilder.emptyBuilder(basedSequence);
+        out = SequenceBuilder.emptyBuilder(basedSequence);
         EnumeratedReferences.renderReferenceOrdinals(renderings, new OrdinalRenderer(this));
     }
 

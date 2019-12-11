@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -1058,7 +1058,7 @@ public class BasedSequenceFullImplTest {
         String input = "0123456789";
 
         BasedSequence sequence = basedSequenceOf(input);
-        BasedSequenceBuilder builder = sequence.getBuilder();
+        SequenceBuilder builder = sequence.getBuilder();
         BasedSegmentBuilder segments = builder.getSegmentBuilder();
 
 //        BasedSequence replaced = sequence.replace(0, 1, "^");

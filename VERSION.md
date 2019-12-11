@@ -9,6 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [0.59.66](#05966)
 - [0.59.64](#05964)
 - [0.59.62](#05962)
 - [0.59.60](#05960)
@@ -186,13 +187,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.xx
 
-+ [ ] Fix: move experimental concept classes out of the library. Too much clutter of unused old
-      experimental stuff.
-  + [x] Fix: move `PositionList` related classes to `flexmark-util-experimental`
-+ [ ] Fix: `MarkdownParagraph`
-  + [ ] use `SegmentBuilder` for accumulating wrapped text.
-  + [ ] Fix: remove any position tracking code from paragraph formatter
-  - [ ] Add: `LS` awareness to segment optimization. <!--QUERY: is this really necessary-->
++ [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with
+      `BasedSequenceBuilder`
++ [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
+      implementation.
 * [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `BaseSequenceBuilder`
   * [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `BasedSequenceBuilder` can
@@ -206,6 +204,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
+
+## 0.59.66
+
+* Fix: move experimental concept classes out of the library. Too much clutter of unused old
+  experimental stuff.
+  * Fix: move `PositionList` related classes to `flexmark-util-experimental`
+  * Fix: move unused classes from utils to experimental
+* Fix: rename `BasedSequenceBuilder` to `SequenceBuilder`
+* Fix: `MarkdownParagraph`
+  * use `SegmentBuilder` for accumulating wrapped text.
+  * Fix: remove any position tracking code from paragraph formatter
 
 ## 0.59.64
 
@@ -292,7 +301,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: remove space to `&nbsp;` conversion of spec example first line. Was done to allow GitHub
   to display spec examples as fenced code. No longer needed since GitHub switched to CommonMark
   parser.
-* Fix: update all spec files to have no nb-sp in example opener.
+* Fix: update all spec files to have no non-break spaces in example opener.
 * Add: `TestUtils.customIntOption(String, String, Function<Integer, DataHolder>)` and
   `TestUtils.customStringOption(String, String, Function<String, DataHolder>)` to ease creating
   `CUSTOM_OPTION` option types.

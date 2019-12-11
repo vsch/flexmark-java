@@ -1,14 +1,14 @@
 package com.vladsch.flexmark.experimental.util.collection.iteration;
 
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.PositionAnchor;
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static com.vladsch.flexmark.util.PositionAnchor.*;
+import static com.vladsch.flexmark.util.sequence.PositionAnchor.*;
 
 public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
     private static final int F_CURRENT = 0;

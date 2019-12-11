@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
-import com.vladsch.flexmark.util.SegmentedSequenceStats;
+import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.data.NullableDataKey;

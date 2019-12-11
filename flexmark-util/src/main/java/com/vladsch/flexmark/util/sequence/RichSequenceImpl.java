@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.sequence.edit.RichSequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.RichSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +39,7 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
     }
 
     @Override
-    public <B extends SequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
+    public <B extends ISequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
         //noinspection unchecked
         return (B) new RichSequenceBuilder();
     }
@@ -47,7 +47,7 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
     @NotNull
     @Override
     public RichSequence subSequence(int startIndex, int endIndex) {
-        validateStartEnd(startIndex, endIndex);
+        SequenceUtils.validateStartEnd(startIndex, endIndex, length());
         if (startIndex == 0 && endIndex == charSequence.length()) return this;
         return create(charSequence, startIndex, endIndex);
     }

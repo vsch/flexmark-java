@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.NullEncoder;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
-import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -10,19 +10,21 @@ import com.vladsch.flexmark.util.options.AttributeTest;
 import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.*;
-import com.vladsch.flexmark.util.sequence.edit.*;
-import com.vladsch.flexmark.util.sequence.edit.tree.SegmentTest;
-import com.vladsch.flexmark.util.sequence.edit.tree.SegmentTreeTest;
+import com.vladsch.flexmark.util.sequence.builder.*;
+import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTest;
+import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTreeTest;
+import com.vladsch.flexmark.util.sequence.managed.BaseSequenceEntryTest;
+import com.vladsch.flexmark.util.sequence.managed.BaseSequenceManagerTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        SegmentBuilderTest.class,
+        PlainSegmentBuilderTest.class,
         SegmentTest.class,
         SegmentTreeTest.class,
         BasedSegmentBuilderTest.class,
-        BasedSequenceBuilderTest.class,
+        SequenceBuilderTest.class,
         BasedSequenceFullImplTest.class,
         BasedSequenceTreeImplTest.class,
         BaseSequenceEntryTest.class,
@@ -48,7 +50,6 @@ import org.junit.runners.Suite;
         HtmlBuilderTest.class,
         HtmlFormattingAppendableBaseTest.class,
         HtmlHelpersTest.class,
-        IntegerBitSetTest.class,
         LineFormattingAppendableImplTest.class,
         PrefixedSubSequenceTest.class,
         RepeatedSequenceTest.class,

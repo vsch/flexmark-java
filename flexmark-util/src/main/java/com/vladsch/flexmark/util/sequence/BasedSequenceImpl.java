@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.PositionAnchor;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,8 +46,8 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @SuppressWarnings("unchecked")
     @NotNull
     @Override
-    public BasedSequenceBuilder getBuilder() {
-        return BasedSequenceBuilder.emptyBuilder(this);
+    public SequenceBuilder getBuilder() {
+        return SequenceBuilder.emptyBuilder(this);
     }
 
     @Override
@@ -381,36 +380,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         else if (charSequence instanceof BasedSequence) {
             return (BasedSequence) charSequence;
         } else {
-//            if (charSequence instanceof String) {
-//                return SubSequence.create(charSequence);
-//            } else if (charSequence instanceof Appendable) {
-//                return SubSequence.create(charSequence.toString());
-//            } else {
-//            }
-            // this one should not be mutable
             return SubSequence.create(charSequence);
-        }
-    }
-
-    static BasedSequence managedCreate(@Nullable CharSequence charSequence) {
-        if (charSequence == null) return BasedSequence.NULL;
-
-        else if (charSequence instanceof BasedSequence) {
-            return (BasedSequence) charSequence;
-        } else {
-            CharSequence useSequence;
-
-            if (charSequence instanceof String) {
-                useSequence = charSequence;
-            } else if (charSequence instanceof Appendable) {
-                useSequence = charSequence.toString();
-            } else {
-                // this one should not be mutable
-                useSequence = charSequence;
-            }
-
-            // NOTE: using BaseSequenceManager to get matching base sequence
-            return BaseSequenceManager.INSTANCE.getBaseSequence(useSequence, null, SubSequence::create);
         }
     }
 

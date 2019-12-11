@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
-import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -97,7 +97,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     }
 
     /**
-     * Use {@link BasedSequence#getBuilder()} and then {@link BasedSequenceBuilder#addAll(Iterable)} or
+     * Use {@link BasedSequence#getBuilder()} and then {@link SequenceBuilder#addAll(Iterable)} or
      * if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder}
      * to construct segments directly.
      * <p>
@@ -120,7 +120,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
         return segments.length == 0 ? BasedSequence.NULL : create(segments[0], new ArrayIterable<>(segments));
     }
 
-    public static BasedSequence create(BasedSequenceBuilder builder) {
+    public static BasedSequence create(SequenceBuilder builder) {
         BasedSequence baseSubSequence = builder.getSingleBasedSequence();
         if (baseSubSequence != null) {
             return baseSubSequence;
@@ -145,7 +145,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
      * @return based sequence of segments. Result is a sequence which looks like
      *         all the segments were concatenated, while still maintaining
      *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
-     * @deprecated use {@link BasedSequence#getBuilder()} and then {@link BasedSequenceBuilder#addAll(Iterable)} or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder} to construct segments directly.
+     * @deprecated use {@link BasedSequence#getBuilder()} and then {@link SequenceBuilder#addAll(Iterable)} or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder} to construct segments directly.
      *         If you absolutely need to use the old method then use {@link SegmentedSequence#create(BasedSequence, Iterable)}
      */
     @Deprecated

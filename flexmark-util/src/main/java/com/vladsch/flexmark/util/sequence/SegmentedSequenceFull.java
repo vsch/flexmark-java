@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.SegmentedSequenceStats;
-import com.vladsch.flexmark.util.sequence.edit.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.edit.ISegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -26,7 +26,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
 
     @Override
     public int getIndexOffset(int index) {
-        validateIndexInclusiveEnd(index);
+        SequenceUtils.validateIndexInclusiveEnd(index, length());
 
         int offset = baseOffsets[baseStartOffset + index];
         return offset < 0 ? -1 : offset;
@@ -40,7 +40,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
 
     @Override
     public char charAt(int index) {
-        validateIndex(index);
+        SequenceUtils.validateIndex(index, length());
 
         int offset = baseOffsets[baseStartOffset + index];
 
@@ -59,7 +59,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
     @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
-        validateStartEnd(startIndex, endIndex);
+        SequenceUtils.validateStartEnd(startIndex, endIndex, length());
 
         if (startIndex == 0 && endIndex == length) {
             return this;
@@ -198,7 +198,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
      * @return based sequence of segments. Result is a sequence which looks like
      *         all the segments were concatenated, while still maintaining
      *         the original offset for each character when using {@link #getIndexOffset(int)}(int index)
-     * @deprecated use {@link BasedSequence#getBuilder()} and then {@link BasedSequenceBuilder#addAll(Iterable)}
+     * @deprecated use {@link BasedSequence#getBuilder()} and then {@link SequenceBuilder#addAll(Iterable)}
      *         or if you know which are based segments vs. out of base Strings then use {@link BasedSegmentBuilder}
      *         to construct segments directly. If you must use segments then use {@link SegmentedSequence#create(BasedSequence, Iterable)}
      *         which does the builder calls for you.

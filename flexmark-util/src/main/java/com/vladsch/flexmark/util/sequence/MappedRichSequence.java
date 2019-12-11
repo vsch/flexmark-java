@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.sequence.edit.RichSequenceBuilder;
-import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.RichSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,7 +67,7 @@ public class MappedRichSequence extends IRichSequenceBase<RichSequence> implemen
     }
 
     @Override
-    public <B extends SequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
+    public <B extends ISequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
         //noinspection unchecked
         return (B) new RichSequenceBuilder();
     }

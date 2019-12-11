@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.experimental.util.collection.iteration;
 
 import com.vladsch.flexmark.test.util.ExceptionMatcher;
-import com.vladsch.flexmark.util.PositionAnchor;
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Rule;
 import org.junit.Test;

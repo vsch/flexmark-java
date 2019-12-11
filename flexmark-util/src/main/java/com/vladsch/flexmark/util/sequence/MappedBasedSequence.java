@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -74,7 +74,7 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
     @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
-        validateStartEnd(startIndex, endIndex);
+        SequenceUtils.validateStartEnd(startIndex, endIndex, length());
 
         if (startIndex == 0 && endIndex == baseSeq.length()) {
             return this;

@@ -1,9 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.sequence.*;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
-import com.vladsch.flexmark.util.PositionAnchor;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +12,6 @@ import static com.vladsch.flexmark.util.format.TextAlignment.LEFT;
 
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
-    final private static BasedSequence MARKDOWN_START_LINE = BasedSequence.LINE_SEP;   // this one is not preserved but will cause a line break if not already at beginning of line
 
     final @NotNull BasedSequence myChars;
     final @NotNull CharWidthProvider myCharWidthProvider;
@@ -26,8 +23,6 @@ public class MarkdownParagraph {
     private @NotNull TextAlignment myAlignment = LEFT;
     boolean myKeepHardBreaks = true;
     boolean myKeepLineBreaks = false;
-    private @NotNull PositionAnchor myPositionAnchor = PositionAnchor.CURRENT;
-    private int myMarkerOffset = -1;
 
     public MarkdownParagraph(CharSequence chars) {
         this(BasedSequence.of(chars), CharWidthProvider.NULL);
@@ -40,23 +35,6 @@ public class MarkdownParagraph {
     public MarkdownParagraph(@NotNull BasedSequence chars, @NotNull CharWidthProvider charWidthProvider) {
         myChars = chars;
         myCharWidthProvider = charWidthProvider;
-    }
-
-    @NotNull
-    public PositionAnchor getPositionAnchor() {
-        return myPositionAnchor;
-    }
-
-    public void setPositionAnchor(@NotNull PositionAnchor positionAnchor) {
-        myPositionAnchor = positionAnchor;
-    }
-
-    public int getMarkerOffset() {
-        return myMarkerOffset;
-    }
-
-    public void setMarkerOffset(int markerOffset) {
-        myMarkerOffset = Math.min(-1, markerOffset);
     }
 
     @NotNull
@@ -150,59 +128,6 @@ public class MarkdownParagraph {
         setWidth(width);
     }
 
-    protected List<Token> tokenizeSequence(CharSequence chars) {
-        int pos = 0;
-        final int maxPos = chars.length();
-        int lastPos = 0;
-        boolean inWord = false;
-        final ArrayList<Token> tokenList = new ArrayList<Token>();
-        int lastConsecutiveSpaces = 0;
-        while (pos < maxPos) {
-            char c = chars.charAt(pos);
-            if (inWord) {
-                if (c == ' ' || c == '\t' || c == '\n' || c == MARKDOWN_START_LINE_CHAR) {
-                    inWord = false;
-                    if (lastPos < pos) {
-                        // have a word;
-                        tokenList.add(Token.of(TextType.WORD, lastPos, pos));
-                        lastPos = pos;
-                    }
-                } else {
-                    pos++;
-                }
-            } else {
-                // in white space;
-                if (c != ' ' && c != '\t' && c != '\n' && c != MARKDOWN_START_LINE_CHAR) {
-                    if (lastPos < pos) {
-                        tokenList.add(Token.of(TextType.SPACE, lastPos, pos));
-                        lastPos = pos;
-                    }
-                    inWord = true;
-                    lastConsecutiveSpaces = 0;
-                } else {
-                    if (c == '\n') {
-                        if (lastConsecutiveSpaces >= 2) {
-                            tokenList.add(Token.of(TextType.MARKDOWN_BREAK, pos - lastConsecutiveSpaces, pos + 1));
-                        } else {
-                            tokenList.add(Token.of(TextType.BREAK, pos, pos + 1));
-                        }
-                        lastPos = pos + 1;
-                    } else if (c == MARKDOWN_START_LINE_CHAR) {
-                        tokenList.add(Token.of(TextType.MARKDOWN_START_LINE, pos, pos + 1));
-                        lastPos = pos + 1;
-                    }
-                    if (c == ' ') lastConsecutiveSpaces++;
-                    else lastConsecutiveSpaces = 0;
-                    pos++;
-                }
-            }
-        }
-        if (lastPos < pos) {
-            tokenList.add(Token.of((inWord) ? TextType.WORD : TextType.SPACE, lastPos, pos));
-        }
-        return tokenList;
-    }
-
     public interface LineBreakProcessor {
         void run(@Nullable Token token, CharSequence breakChars, boolean isLastLine);
     }
@@ -228,7 +153,7 @@ public class MarkdownParagraph {
         final int[] pos = { 0 };
         final int[] lineCount = { 0 };
         ArrayList<Token> lineWords = new ArrayList<>();
-        BasedSequenceBuilder result = BasedSequenceBuilder.emptyBuilder(myChars);
+        SequenceBuilder result = SequenceBuilder.emptyBuilder(myChars);
         int spaceWidth = myCharWidthProvider.spaceWidth();
         final int[] lineIndent = { spaceWidth * getFirstIndent() };
         int nextIndent = spaceWidth * getIndent();
@@ -325,7 +250,7 @@ public class MarkdownParagraph {
         return result.toSequence();
     }
 
-    private void addLine(BasedSequenceBuilder result, BasedSequence charSequence, ArrayList<Token> lineWords, int wordsOnLine, int lineCount, int extraSpaces, boolean lastLine) {
+    private void addLine(SequenceBuilder result, BasedSequence charSequence, ArrayList<Token> lineWords, int wordsOnLine, int lineCount, int extraSpaces, boolean lastLine) {
         int leadSpaces = 0;
         int addSpaces = 0;
         int remSpaces = 0;
@@ -354,7 +279,7 @@ public class MarkdownParagraph {
                 break;
         }
 
-        if (leadSpaces > 0) result.add(RepeatedSequence.repeatOf(' ', leadSpaces));
+        if (leadSpaces > 0) result.append(' ', leadSpaces);
 
         boolean firstWord = true;
         Token lastSpace = null;
@@ -370,144 +295,13 @@ public class MarkdownParagraph {
                 } else {
                     int spcSize = (remSpaces > 0) ? 1 : 0;
                     int spcCount = addSpaces + 1 + spcSize;
-                    replaceSpaces(result, lastSpace.subSequence(charSequence), spcCount, myPositionAnchor, myMarkerOffset);
+                    result.append(' ', spcCount);
                     remSpaces -= spcSize;
                 }
                 result.add(word.subSequence(charSequence));
                 lastSpace = null;
             } else {
                 lastSpace = word;
-            }
-        }
-    }
-
-    @NotNull
-    public Pair<Integer, Integer> distributeSpan(int total, boolean leftMajor) {
-        int left;
-        int right;
-
-        if (leftMajor) {
-            right = total >> 1;
-            left = total - right;
-        } else {
-            left = total >> 1;
-            right = total - left;
-        }
-        return Pair.of(left, right);
-    }
-
-    /**
-     * Replace given sequence of spaces with another sequence of spaces of given length
-     * while keeping marker (0 width characters) in resulting sequence so that they are not lost
-     *
-     * @param chars sequence of spaces
-     * @param count number of desired spaces
-     */
-    public void replaceSpaces(@NotNull BasedSequenceBuilder result, @NotNull BasedSequence chars, int count, @NotNull PositionAnchor positionAnchor, int markerIndex) {
-        assert count >= 0;
-
-        if (chars.length() == 0) {
-            result.add(RepeatedSequence.ofSpaces(count));
-            return;
-        }
-
-        int spaces = 0;
-        int iMax = chars.length();
-        PositionAnchor direction = null;
-        int markerPosition = -1;
-
-        for (int i = 0; i < iMax; i++) {
-            char c = chars.charAt(i);
-            if (c == ' ') spaces++;
-            else if (chars.getStartOffset() + i == markerIndex) {
-                direction = positionAnchor;
-                markerPosition = i;
-            } else {
-                throw new IllegalStateException("Not space or marker " + c);
-            }
-        }
-
-        if (spaces == count) {
-            result.add(chars);
-        } else if (chars.length() == 0) {
-            result.add(PrefixedSubSequence.prefixOf(RepeatedSequence.ofSpaces(count), chars));
-        } else if (markerPosition == -1) {
-            // no marker
-            if (spaces < count) {
-                // divide existing spaces in two parts and add padding in the middle
-                int leftSpaces = spaces >> 1;
-                result.add(chars.subSequence(0, leftSpaces));
-                result.add(RepeatedSequence.ofSpaces(count - spaces));
-                result.add(chars.subSequence(leftSpaces));
-            } else {
-                // divide kept spaces in two parts, keeping first and last spaces, leaving out the middle
-                int leftSpaces = count >> 1;
-                int rightSpaces = count - leftSpaces;
-                result.add(chars.subSequence(0, leftSpaces));
-                result.add(chars.endSequence(rightSpaces));
-            }
-        } else {
-            // more convoluted:
-            if (spaces < count) {
-                int leftSpaces;
-                switch (direction) {
-                    case PREVIOUS:
-                        //   if leaning left then keep marker on left pad between it and right part
-                        leftSpaces = markerIndex + 1;
-                        break;
-                    case NEXT:
-                        //   if leaning right then keep marker on right and pad between it and left part
-                        leftSpaces = markerIndex;
-                        break;
-
-                    default:
-                    case CURRENT:
-                        //   if not leaning then divide around marker keeping marker in middle of padding
-                        leftSpaces = markerIndex + 1;
-                        break;
-                }
-
-                result.add(chars.subSequence(0, leftSpaces));
-                result.add(RepeatedSequence.ofSpaces(count - spaces));
-                result.add(chars.subSequence(leftSpaces));
-            } else {
-                int leftStart;
-                int leftEnd;
-                int rightStart;
-                int rightEnd;
-                int usedSpaces;
-                switch (direction) {
-                    case PREVIOUS:
-                        //   if leaning left then keep marker on left, keeping as many leading spaces as possible before the marker
-                        leftEnd = markerIndex + 1;
-                        leftStart = Math.max(0, markerIndex - count);
-                        usedSpaces = leftEnd - leftStart - 1;
-                        rightEnd = chars.length();
-                        rightStart = Math.max(leftEnd, rightEnd - (count - usedSpaces));
-                        break;
-
-                    case NEXT:
-                        //   if leaning right then keep marker on right and keep as many right spaces as possible after the marker
-                        rightStart = markerIndex;
-                        rightEnd = Math.min(chars.length(), markerIndex + 1 + count);
-                        usedSpaces = rightEnd - rightStart - 1;
-                        leftStart = 0;
-                        leftEnd = Math.max(rightStart, leftStart + Math.max(0, count - usedSpaces));
-                        break;
-
-                    default:
-                    case CURRENT:
-                        //   if not leaning then divide around marker keeping marker in middle of kept spaces
-                        leftEnd = markerIndex + 1;
-                        leftStart = Math.max(0, markerIndex - count);
-                        usedSpaces = leftEnd - leftStart - 1;
-                        rightEnd = chars.length();
-                        rightStart = Math.max(leftEnd, rightEnd - (count - usedSpaces));
-                        break;
-                }
-
-                result.add(chars.subSequence(leftStart, leftEnd));
-                result.add(chars.subSequence(rightStart, rightEnd));
             }
         }
     }
@@ -574,7 +368,7 @@ public class MarkdownParagraph {
         final String lineBreak = SequenceUtils.EOL;
         int col = 0;
         int lineCount = 0;
-        final BasedSequenceBuilder result = BasedSequenceBuilder.emptyBuilder(myChars);
+        final SequenceBuilder result = SequenceBuilder.emptyBuilder(myChars);
         final int spaceWidth = myCharWidthProvider.spaceWidth();
         int lineIndent = spaceWidth * getFirstIndent();
         final int nextIndent = spaceWidth * getIndent();
@@ -713,7 +507,7 @@ public class MarkdownParagraph {
 
     public static class TextTokenizer {
         final private CharSequence myChars;
-        private int myMaxIndex;
+        private final int myMaxIndex;
         private int myIndex = 0;
         private int myLastPos = 0;
         private boolean myInWord = false;
@@ -835,138 +629,3 @@ public class MarkdownParagraph {
     }
 }
 
-//    protected fun computeLeftAlignedSequence(): SmartCharSequence {
-//        if (firstWidth <= 0) return myReplacedChars//.cachedProxy
-//
-//        val lineBreak = SmartRepeatedCharSequence("\n")
-//        var col = 0
-//        var lineCount = 0
-//        val result = ArrayList<SmartCharSequence>()
-//        val spaceWidth = myCharWidthProvider.spaceWidth
-//        var lineIndent = spaceWidth * firstIndent
-//        val nextIndent = spaceWidth * indent
-//        var lineWidth = spaceWidth * firstWidth
-//        val nextWidth = if (myWidth.get() <= 0) Integer.MAX_VALUE else spaceWidth * myWidth.get()
-//        var wordsOnLine = 0
-//        var leadingIndent: Token? = null
-//        var lastRange: Range? = null
-//        var lastSpace: Token? = null
-//
-//        val chars = myReplacedChars//.cachedProxy
-//        val tokenizer = TextTokenizer(chars)
-//
-//        fun advance() {
-//            tokenizer.next()
-//        }
-//
-//        fun commitLastRange() {
-//            val range = lastRange
-//            if (range != null) result.add(chars.subSequence(range.start, range.end))
-//            lastRange = null
-//        }
-//
-//        fun addToken(token: Token) {
-//            val range = lastRange
-//            if (range != null && range.isAdjacentBefore(token.range)) {
-//                // combine them
-//                lastRange = range.withEnd(token.range.end)
-//            } else {
-//                if (range != null) result.add(chars.subSequence(range.start, range.end))
-//                lastRange = token.range
-//            }
-//            col += myCharWidthProvider.getStringWidth(token.subSequence(chars))
-//        }
-//
-//        fun addChars(charSequence: SmartCharSequence) {
-//            commitLastRange()
-//            result.add(charSequence)
-//            col += myCharWidthProvider.getStringWidth(charSequence)
-//        }
-//
-//        fun addTokenSubRange(token: Token, count: Int) {
-//            if (token.range.span == count) addToken(token)
-//            else addChars(SmartRepeatedCharSequence(token.subSequence(chars), 0, count))
-//        }
-//
-//        fun addSpaces(token: Token?, count: Int) {
-//            if (token != null) {
-//                addTokenSubRange(token, count)
-//            } else {
-//                addChars(SmartRepeatedCharSequence(' ', count))
-//            }
-//        }
-//
-//        fun afterLineBreak() {
-//            col = 0
-//            wordsOnLine = 0
-//            lineCount++
-//            lineIndent = nextIndent
-//            lineWidth = nextWidth
-//            lastSpace = null
-//            leadingIndent = null
-//        }
-//
-//        while (true) {
-//            val token = tokenizer.token ?: break
-//
-//            when (token.type) {
-//                TextType.SPACE -> {
-//                    if (col == 0) leadingIndent = token
-//                    else lastSpace = token
-//                    advance()
-//                }
-//
-//                TextType.WORD -> {
-//                    if (col == 0 || col + myCharWidthProvider.getStringWidth(token.subSequence(chars)) + spaceWidth <= lineWidth) {
-//                        // fits, add it
-//                        if (col > 0) addSpaces(lastSpace, 1)
-//                        else if (lineIndent > 0) addSpaces(leadingIndent, lineIndent)
-//
-//                        addToken(token)
-//                        advance()
-//                        wordsOnLine++
-//                    } else {
-//                        // need to insert a line break and repeat
-//                        addChars(lineBreak)
-//                        afterLineBreak()
-//                    }
-//                }
-//
-//                TextType.MARKDOWN_START_LINE -> {
-//                    // start a new line if not already new
-//                    if (col > 0) {
-//                        addChars(lineBreak)
-//                        afterLineBreak()
-//                    }
-//                    advance()
-//                }
-//
-//                TextType.MARKDOWN_BREAK -> {
-//                    // start a new line if not already new
-//                    if (myKeepMarkdownHardBreaks.get()) {
-//                        if (col > 0) {
-//                            addToken(token)
-//                            afterLineBreak()
-//                        }
-//                    } else {
-//                        // treat as a space
-//                        lastSpace = token
-//                    }
-//                    advance()
-//                }
-//
-//                TextType.BREAK -> {
-//                    if (col > 0 && myKeepLineBreaks.get()) {
-//                        addToken(token)
-//                        afterLineBreak()
-//                    }
-//                    advance()
-//                }
-//            }
-//        }
-//
-//        commitLastRange()
-//
-//        return SmartCharSequenceBase.smart(result)//.cachedProxy
-//    }
-//

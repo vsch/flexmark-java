@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
-import com.vladsch.flexmark.util.sequence.edit.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -78,7 +78,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
 
     @Override
     public int getIndexOffset(int index) {
-        validateIndexInclusiveEnd(index);
+        SequenceUtils.validateIndexInclusiveEnd(index, length());
 
         if (index < prefix.length()) {
             // NOTE: to allow creation of segmented sequences from modified original base return -1 for all such modified content positions
@@ -98,7 +98,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
 
     @Override
     public char charAt(int index) {
-        validateIndex(index);
+        SequenceUtils.validateIndex(index, length());
 
         int prefixLength = prefix.length();
         if (index < prefixLength) {
@@ -111,7 +111,7 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     @NotNull
     @Override
     public BasedSequence subSequence(int startIndex, int endIndex) {
-        validateStartEnd(startIndex, endIndex);
+        SequenceUtils.validateStartEnd(startIndex, endIndex, length());
 
         int prefixLength = prefix.length();
         if (startIndex < prefixLength) {

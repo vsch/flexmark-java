@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.ChangeCase;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
-import com.vladsch.flexmark.util.sequence.edit.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -208,17 +208,14 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         return isEmpty() ? SequenceUtils.NUL : charAt(0);
     }
 
-    // RELEASE: inline all and keep method
     final public void validateIndex(int index) {
         SequenceUtils.validateIndex(index, length());
     }
 
-    // RELEASE: inline all and keep method
     final public void validateIndexInclusiveEnd(int index) {
         SequenceUtils.validateIndexInclusiveEnd(index, length());
     }
 
-    // RELEASE: inline all and keep method
     final public void validateStartEnd(int startIndex, int endIndex) {
         SequenceUtils.validateStartEnd(startIndex, endIndex, length());
     }
@@ -761,7 +758,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         startIndex = Math.max(startIndex, 0);
         endIndex = Math.min(endIndex, length);
 
-        SequenceBuilder<?, T> segments = getBuilder();
+        ISequenceBuilder<?, T> segments = getBuilder();
         return segments.add(subSequence(0, startIndex)).add(replacement).add(subSequence(endIndex)).toSequence();
     }
 
@@ -770,7 +767,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     final public T replace(@NotNull CharSequence find, @NotNull CharSequence replace) {
         int[] indices = indexOfAll(find);
         if (indices.length == 0) return (T) this;
-        SequenceBuilder<?, T> segments = getBuilder();
+        ISequenceBuilder<?, T> segments = getBuilder();
 
         int iMax = indices.length;
         int length = length();
@@ -800,7 +797,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull
     @Override
     final public T append(Iterable<? extends CharSequence> sequences) {
-        SequenceBuilder<?, T> segments = getBuilder();
+        ISequenceBuilder<?, T> segments = getBuilder();
         segments.add(this);
         for (CharSequence sequence : sequences) {
             segments.add(sequence);
@@ -817,7 +814,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull
     @Override
     final public T extractRanges(Iterable<Range> ranges) {
-        SequenceBuilder<?, T> segments = getBuilder();
+        ISequenceBuilder<?, T> segments = getBuilder();
         for (Range range : ranges) {
             if (!(range == null || range.isNull())) segments.add(range.safeSubSequence(this));
         }

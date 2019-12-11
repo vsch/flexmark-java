@@ -42,7 +42,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.edit.BasedSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
@@ -145,7 +145,7 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
             return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
                 @Override
                 protected @NotNull String renderHtml() {
-                    BasedSequenceBuilder builder = BasedSequenceBuilder.emptyBuilder(getDocument().getChars());
+                    SequenceBuilder builder = SequenceBuilder.emptyBuilder(getDocument().getChars());
                     String formatted = ((Formatter) getRenderer()).render(getDocument(), builder);
                     BasedSequence basedFormatted = builder.toSequence();
 
