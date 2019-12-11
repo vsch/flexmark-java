@@ -9,6 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.68](#next-05968)
 - [0.59.66](#05966)
 - [0.59.64](#05964)
 - [0.59.62](#05962)
@@ -204,6 +205,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
+
+## Next 0.59.68
+
+* Add: `ArrayUtils.toArray(BitSet)` to return an `int[]` of all bit numbers that are set.
 
 ## 0.59.66
 

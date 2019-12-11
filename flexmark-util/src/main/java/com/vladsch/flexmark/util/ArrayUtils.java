@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.util;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.BitSet;
 import java.util.Objects;
 import java.util.function.Predicate;
 
@@ -124,5 +126,20 @@ public class ArrayUtils {
             }
         }
         return -1;
+    }
+
+    public static int[] toArray(@NotNull BitSet bitSet) {
+        int i = bitSet.cardinality();
+        int[] bits = new int[i];
+
+        int lastSet = bitSet.length();
+        while (lastSet >= 0) {
+            lastSet = bitSet.previousSetBit(lastSet - 1);
+            if (lastSet < 0) break;
+
+            bits[--i] = lastSet;
+        }
+        assert i == 0;
+        return bits;
     }
 }
