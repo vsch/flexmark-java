@@ -19,7 +19,7 @@ import static com.vladsch.flexmark.util.Utils.*;
 public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     final private static char EOL = '\n';
 
-    final private boolean passThrough;              // pass through mode for all operations to appendable
+    final private boolean passThrough;              // pass through mode for all operations to appendable without examination
     final private BitEnumSet<Options> options;
 
     // pre-formatted nesting level, while >0 all text is passed through as is and not monitored
