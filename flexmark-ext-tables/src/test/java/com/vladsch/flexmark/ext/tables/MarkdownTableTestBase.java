@@ -52,7 +52,7 @@ public class MarkdownTableTestBase {
         String linePrefix,
         String intellijDummyIdentifier
     ) {
-        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.FORMAT_ALL);
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
         table.appendTable(out);
         return out.toString(0);
     }
@@ -61,7 +61,7 @@ public class MarkdownTableTestBase {
         List<String> formatted = new ArrayList<>();
 
         for (MarkdownTable table : tables) {
-            MarkdownWriter out = new MarkdownWriter(MarkdownWriter.FORMAT_ALL);
+            MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
             table.appendTable(out);
             formatted.add(out.toString(0));
         }

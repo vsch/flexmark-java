@@ -1,12 +1,16 @@
 package com.vladsch.flexmark.util.html;
 
+import com.vladsch.flexmark.util.EnumSetUtils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.EnumSet;
 import java.util.List;
+
+import static com.vladsch.flexmark.util.EnumSetUtils.toEnumSet;
 
 /**
  * Used to collect line text for further processing
@@ -17,24 +21,56 @@ import java.util.List;
  * <p>
  * consecutive \n in the data are going go be collapsed to a single \n
  * <p>
- * tab is converted to a space if {@link #CONVERT_TABS} option is selected
+ * tab is converted to a space if {@link #F_CONVERT_TABS} option is selected
  * <p>
- * spaces before and after \n are removed controlled by {@link #SUPPRESS_TRAILING_WHITESPACE} and {@link #ALLOW_LEADING_WHITESPACE}
+ * spaces before and after \n are removed controlled by {@link #F_SUPPRESS_TRAILING_WHITESPACE} and {@link #F_ALLOW_LEADING_WHITESPACE}
  * <p>
  * use {@link #line()}, {@link #lineIf(boolean)}, {@link #blankLine()}, {@link #blankLineIf(boolean)}
  * and {@link #blankLine(int)} for getting these appended to result
  */
 @SuppressWarnings({ "UnusedReturnValue", "SameParameterValue" })
 public interface LineFormattingAppendable extends Appendable {
-    int CONVERT_TABS = 0x0001;                  // expand tabs on column multiples of 4
-    int COLLAPSE_WHITESPACE = 0x0002;           // collapse multiple tabs and spaces to single space
-    int SUPPRESS_TRAILING_WHITESPACE = 0x0004;  // don't output trailing whitespace
-    int PREFIX_AFTER_PENDING_EOL = 0; //0x0008;    // prefix takes effect after pending EOLs are output, there are no pending EOL
-    int PASS_THROUGH = 0x0010;                  // just pass everything through to appendable with no formatting
-    int ALLOW_LEADING_WHITESPACE = 0x0020;      // allow leading spaces on a line, else remove
-    int ALLOW_LEADING_EOL = 0x0040;             // allow EOL at offset 0
-    int PREFIX_PRE_FORMATTED = 0x0080;          // when prefixing lines, prefix pre-formatted lines
-    int FORMAT_ALL = CONVERT_TABS | COLLAPSE_WHITESPACE | SUPPRESS_TRAILING_WHITESPACE;
+    enum Option {
+        CONVERT_TABS,
+        COLLAPSE_WHITESPACE,
+        SUPPRESS_TRAILING_WHITESPACE,
+        PASS_THROUGH,
+        ALLOW_LEADING_WHITESPACE,
+        ALLOW_LEADING_EOL,
+        PREFIX_PRE_FORMATTED,
+    }
+
+    Option O_CONVERT_TABS = Option.CONVERT_TABS;
+    Option O_COLLAPSE_WHITESPACE = Option.COLLAPSE_WHITESPACE;
+    Option O_SUPPRESS_TRAILING_WHITESPACE = Option.SUPPRESS_TRAILING_WHITESPACE;
+    Option O_PASS_THROUGH = Option.PASS_THROUGH;
+    Option O_ALLOW_LEADING_WHITESPACE = Option.ALLOW_LEADING_WHITESPACE;
+    Option O_ALLOW_LEADING_EOL = Option.ALLOW_LEADING_EOL;
+    Option O_PREFIX_PRE_FORMATTED = Option.PREFIX_PRE_FORMATTED;
+    Option[] O_FORMAT_ALL = { O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_SUPPRESS_TRAILING_WHITESPACE };
+
+    int F_CONVERT_TABS = 1 << O_CONVERT_TABS.ordinal();                                   // expand tabs on column multiples of 4
+    int F_COLLAPSE_WHITESPACE = 1 << O_COLLAPSE_WHITESPACE.ordinal();                     // collapse multiple tabs and spaces to single space
+    int F_SUPPRESS_TRAILING_WHITESPACE = 1 << O_SUPPRESS_TRAILING_WHITESPACE.ordinal();   // don't output trailing whitespace
+    int F_PASS_THROUGH = 1 << O_PASS_THROUGH.ordinal();                                   // just pass everything through to appendable with no formatting
+    int F_ALLOW_LEADING_WHITESPACE = 1 << O_ALLOW_LEADING_WHITESPACE.ordinal();           // allow leading spaces on a line, else remove
+    int F_ALLOW_LEADING_EOL = 1 << O_ALLOW_LEADING_EOL.ordinal();                         // allow EOL at offset 0
+    int F_PREFIX_PRE_FORMATTED = 1 << O_PREFIX_PRE_FORMATTED.ordinal();                   // when prefixing lines, prefix pre-formatted lines
+    int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_SUPPRESS_TRAILING_WHITESPACE; // select all formatting options
+
+    // Use F_ prefixed constants
+    @Deprecated int CONVERT_TABS = F_CONVERT_TABS;
+    @Deprecated int COLLAPSE_WHITESPACE = F_COLLAPSE_WHITESPACE;
+    @Deprecated int SUPPRESS_TRAILING_WHITESPACE = F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated int PASS_THROUGH = F_PASS_THROUGH;
+    @Deprecated int ALLOW_LEADING_WHITESPACE = F_ALLOW_LEADING_WHITESPACE;
+    @Deprecated int ALLOW_LEADING_EOL = F_ALLOW_LEADING_EOL;
+    @Deprecated int PREFIX_PRE_FORMATTED = F_PREFIX_PRE_FORMATTED;
+    @Deprecated int FORMAT_ALL = F_FORMAT_ALL;
+
+    static EnumSet<Option> toOptionSet(int options) {
+        return EnumSetUtils.toEnumSet(Option.class, options);
+    }
 
     /**
      * Get current options
@@ -44,12 +80,32 @@ public interface LineFormattingAppendable extends Appendable {
     int getOptions();
 
     /**
+     * Get current options as set which can be used to modify options
+     *
+     * @return mutable option set
+     */
+    @NotNull
+    default EnumSet<Option> getOptionSet() {
+        return toOptionSet(getOptions());
+    }
+
+    /**
      * Set options on processing text
      *
      * @param options option flags
      * @return this
      */
     @NotNull LineFormattingAppendable setOptions(int options);
+
+    @NotNull
+    default LineFormattingAppendable setOptions(Option... options) {
+        return setOptions(EnumSetUtils.toInt(EnumSetUtils.toEnumSet(Option.class, options)));
+    }
+
+    @NotNull
+    default LineFormattingAppendable setOptions(EnumSet<Option> options) {
+        return setOptions(EnumSetUtils.toInt(options));
+    }
 
     // these methods are monitored for content and formatting applied
     @Override
@@ -71,7 +127,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param lineAppendable lines to append
      * @return this
      */
-    @NotNull default LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable) {
+    @NotNull
+    default LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable) {
         return append(lineAppendable, 0, Integer.MAX_VALUE);
     }
 
@@ -82,7 +139,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param startLine      start line to append
      * @return this
      */
-    @NotNull default LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable, int startLine) {
+    @NotNull
+    default LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable, int startLine) {
         return append(lineAppendable, startLine, Integer.MAX_VALUE);
     }
 
@@ -105,8 +163,7 @@ public interface LineFormattingAppendable extends Appendable {
     boolean isPreFormattedLine(int line);
 
     /**
-     * Get the number of lines appended, does not include pending: EOLs
-     *
+     * Get the number of lines appended
      * @return number of lines appended
      */
     int getLineCount();
@@ -117,7 +174,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param prefix prefix to add
      * @return this
      */
-    @NotNull default LineFormattingAppendable prefixLines(@NotNull CharSequence prefix) {
+    @NotNull
+    default LineFormattingAppendable prefixLines(@NotNull CharSequence prefix) {
         return prefixLines(prefix, 0, getLineCount());
     }
 
@@ -128,7 +186,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param startLine starting line offset
      * @return this
      */
-    @NotNull default LineFormattingAppendable prefixLines(@NotNull CharSequence prefix, int startLine) {
+    @NotNull
+    default LineFormattingAppendable prefixLines(@NotNull CharSequence prefix, int startLine) {
         return prefixLines(prefix, startLine, getLineCount());
     }
 
@@ -140,7 +199,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param endLine   end line offset
      * @return this
      */
-    @NotNull default LineFormattingAppendable prefixLines(@NotNull CharSequence prefix, int startLine, int endLine) {
+    @NotNull
+    default LineFormattingAppendable prefixLines(@NotNull CharSequence prefix, int startLine, int endLine) {
         return prefixLines(prefix, false, startLine, endLine);
     }
 
@@ -148,7 +208,7 @@ public interface LineFormattingAppendable extends Appendable {
      * Add prefix to selected lines either before the line prefix or after it
      *
      * @param prefix             prefix to add
-     * @param addAfterLinePrefix if true add given prefix after the line prefix
+     * @param addAfterLinePrefix if true add given prefix after the line prefix, else replace
      * @param startLine          starting line offset
      * @param endLine            end line offset
      * @return this
@@ -160,7 +220,8 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return list of lines
      */
-    @NotNull default List<CharSequence> getLines() {
+    @NotNull
+    default List<CharSequence> getLines() {
         return getLines(0, Integer.MAX_VALUE);
     }
 
@@ -170,7 +231,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param startLine starting line offset
      * @return list of lines
      */
-    @NotNull default List<CharSequence> getLines(int startLine) {
+    @NotNull
+    default List<CharSequence> getLines(int startLine) {
         return getLines(startLine, Integer.MAX_VALUE);
     }
 
@@ -188,7 +250,8 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return list of lines
      */
-    @NotNull default List<CharSequence> getLineContents() {
+    @NotNull
+    default List<CharSequence> getLineContents() {
         return getLineContents(0, Integer.MAX_VALUE);
     }
 
@@ -197,7 +260,8 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return char sequence for the line
      */
-    @NotNull default CharSequence getLineContent(int lineIndex) {
+    @NotNull
+    default CharSequence getLineContent(int lineIndex) {
         return getLineContents(lineIndex, lineIndex + 1).get(0);
     }
 
@@ -206,7 +270,8 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return list of lines
      */
-    @NotNull default BasedSequence getLinePrefix(int lineIndex) {
+    @NotNull
+    default BasedSequence getLinePrefix(int lineIndex) {
         return getLinePrefixes(lineIndex, lineIndex + 1).get(0);
     }
 
@@ -225,7 +290,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param startLine starting line offset
      * @return list of lines
      */
-    @NotNull default List<CharSequence> getLineContents(int startLine) {
+    @NotNull
+    default List<CharSequence> getLineContents(int startLine) {
         return getLineContents(startLine, Integer.MAX_VALUE);
     }
 
@@ -243,7 +309,8 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return list of lines
      */
-    @NotNull default List<BasedSequence> getLinePrefixes() {
+    @NotNull
+    default List<BasedSequence> getLinePrefixes() {
         return getLinePrefixes(0, Integer.MAX_VALUE);
     }
 
@@ -253,7 +320,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param startLine starting line offset
      * @return list of lines
      */
-    @NotNull default List<BasedSequence> getLinePrefixes(int startLine) {
+    @NotNull
+    default List<BasedSequence> getLinePrefixes(int startLine) {
         return getLinePrefixes(startLine, Integer.MAX_VALUE);
     }
 
@@ -341,7 +409,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      * @throws IOException if thrown by appendable
      */
-    @NotNull default LineFormattingAppendable appendTo(@NotNull Appendable out) throws IOException {
+    @NotNull
+    default LineFormattingAppendable appendTo(@NotNull Appendable out) throws IOException {
         return appendTo(out, 0, null, 0, Integer.MAX_VALUE);
     }
 
@@ -353,7 +422,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      * @throws IOException if thrown by appendable
      */
-    @NotNull default LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines) throws IOException {
+    @NotNull
+    default LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines) throws IOException {
         return appendTo(out, maxBlankLines, null, 0, Integer.MAX_VALUE);
     }
 
@@ -366,7 +436,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      * @throws IOException if thrown by appendable
      */
-    @NotNull default LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines, @Nullable CharSequence prefix) throws IOException {
+    @NotNull
+    default LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines, @Nullable CharSequence prefix) throws IOException {
         return appendTo(out, maxBlankLines, prefix, 0, Integer.MAX_VALUE);
     }
 
@@ -380,7 +451,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      * @throws IOException if thrown by appendable
      */
-    @NotNull default LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines, @Nullable CharSequence prefix, int startLine) throws IOException {
+    @NotNull
+    default LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines, @Nullable CharSequence prefix, int startLine) throws IOException {
         return appendTo(out, maxBlankLines, prefix, startLine, Integer.MAX_VALUE);
     }
 
@@ -408,7 +480,8 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return this
      */
-    @NotNull default LineFormattingAppendable lineWithTrailingSpaces() {
+    @NotNull
+    default LineFormattingAppendable lineWithTrailingSpaces() {
         return lineWithTrailingSpaces(0);
     }
 
@@ -469,7 +542,8 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return this
      */
-    @NotNull default LineFormattingAppendable openPreFormatted() {
+    @NotNull
+    default LineFormattingAppendable openPreFormatted() {
         return openPreFormatted(true);
     }
 
@@ -551,7 +625,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param prefix prefix characters to add to current prefix for new lines appended after this is set
      * @return this
      */
-    @NotNull default LineFormattingAppendable addPrefix(@NotNull CharSequence prefix) {
+    @NotNull
+    default LineFormattingAppendable addPrefix(@NotNull CharSequence prefix) {
         return addPrefix(prefix, getPendingEOL() == 0);
     }
 
@@ -564,7 +639,8 @@ public interface LineFormattingAppendable extends Appendable {
      * @param prefix prefix characters to add to current prefix for new lines appended after this is set
      * @return this
      */
-    @NotNull default LineFormattingAppendable setPrefix(@NotNull CharSequence prefix) {
+    @NotNull
+    default LineFormattingAppendable setPrefix(@NotNull CharSequence prefix) {
         return setPrefix(prefix, getPendingEOL() == 0);
     }
 
@@ -590,7 +666,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */
-    @NotNull LineFormattingAppendable setPrefix(@NotNull CharSequence prefix, boolean afterEol);
+    @NotNull LineFormattingAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol);
 
     /**
      * Save the current prefix on the stack
@@ -604,7 +680,8 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return this
      */
-    @NotNull default LineFormattingAppendable popPrefix() {
+    @NotNull
+    default LineFormattingAppendable popPrefix() {
         return popPrefix(false);
     }
 
@@ -616,11 +693,13 @@ public interface LineFormattingAppendable extends Appendable {
      */
     @NotNull LineFormattingAppendable popPrefix(boolean afterEol);
 
-    @NotNull default LineFormattingAppendable setLineOnFirstText() {
+    @NotNull
+    default LineFormattingAppendable setLineOnFirstText() {
         return lineOnFirstText(true);
     }
 
-    @NotNull default LineFormattingAppendable clearLineOnFirstText() {
+    @NotNull
+    default LineFormattingAppendable clearLineOnFirstText() {
         return lineOnFirstText(false);
     }
 

@@ -32,7 +32,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
         itemDoneClass = TaskListExtension.ITEM_DONE_CLASS.get(options);
         itemNotDoneClass = TaskListExtension.ITEM_NOT_DONE_CLASS.get(options);
         paragraphClass = TaskListExtension.PARAGRAPH_CLASS.get(options);
-        listOptions = ListOptions.getFrom(options);
+        listOptions = ListOptions.get(options);
     }
 
     @Override

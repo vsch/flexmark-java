@@ -29,7 +29,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
 
     public TaskListNodeFormatter(DataHolder options) {
         myOptions = new FormatOptions(options);
-        listOptions = ListOptions.getFrom(options);
+        listOptions = ListOptions.get(options);
     }
 
     @Nullable

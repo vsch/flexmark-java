@@ -12,7 +12,7 @@ public class MutableListOptions extends ListOptions {
     }
 
     public MutableListOptions(@Nullable DataHolder options) {
-        this(ListOptions.getFrom(options));
+        this(ListOptions.get(options));
     }
 
     MutableListOptions(@NotNull ListOptions other) {

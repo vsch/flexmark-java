@@ -49,11 +49,11 @@ public class Formatter implements IRender {
      */
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
 
-    // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
-    public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.CONVERT_TABS;
-    public static final int FORMAT_COLLAPSE_WHITESPACE = LineFormattingAppendable.COLLAPSE_WHITESPACE;
-    public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
-    public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.FORMAT_ALL;
+    // Use LineFormattingAppendable values instead
+    @Deprecated public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.F_CONVERT_TABS;
+    @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineFormattingAppendable.F_COLLAPSE_WHITESPACE;
+    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.F_FORMAT_ALL;
 
     public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_BLANK_LINES;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_TRAILING_BLANK_LINES;
@@ -310,7 +310,7 @@ public class Formatter implements IRender {
      */
     public void translationRender(Node document, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags | LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
         renderer.render(document);
         renderer.flushTo(output, maxTrailingBlankLines);
     }

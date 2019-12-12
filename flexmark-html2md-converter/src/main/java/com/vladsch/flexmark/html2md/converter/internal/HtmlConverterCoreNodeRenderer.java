@@ -366,7 +366,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             out.append('\n');
         } else {
             int options = out.getOptions();
-            out.setOptions(options & ~(LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.COLLAPSE_WHITESPACE));
+            out.setOptions(options & ~(LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.F_COLLAPSE_WHITESPACE));
             if (out.getPendingEOL() == 0) {
                 // hard break
                 out.repeat(' ', 2).line();
@@ -498,7 +498,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         int count = myHtmlConverterOptions.listContentIndent ? myHtmlConverterOptions.definitionMarkerSpaces + 1 : 4;
         CharSequence childPrefix = RepeatedSequence.repeatOf(" ", count);
 
-        out.line().setOptions(options & ~LineFormattingAppendable.COLLAPSE_WHITESPACE);
+        out.line().setOptions(options & ~LineFormattingAppendable.F_COLLAPSE_WHITESPACE);
         out.append(':').repeat(' ', myHtmlConverterOptions.definitionMarkerSpaces);
         out.pushPrefix();
         out.addPrefix(childPrefix, true);
@@ -720,7 +720,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         if (offset == out.offsetWithPending()) {
             // completely empty, add space and make sure it is not suppressed
             int options = out.getOptions();
-            out.setOptions((options | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE) & ~(LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
+            out.setOptions((options | LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE) & ~(LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE));
             //out.append(' ');
             out.line();
             out.setOptions(options);
@@ -954,7 +954,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         String className = "";
 
         HtmlNodeConverterContext preText = context.getSubContext();
-        preText.getMarkdown().setOptions(out.getOptions() & ~(LineFormattingAppendable.COLLAPSE_WHITESPACE | LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
+        preText.getMarkdown().setOptions(out.getOptions() & ~(LineFormattingAppendable.F_COLLAPSE_WHITESPACE | LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE));
         preText.getMarkdown().openPreFormatted(false);
 
         Node next;

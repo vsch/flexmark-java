@@ -29,7 +29,7 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
@@ -73,7 +73,7 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
@@ -363,7 +363,7 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        HtmlWriter out = new HtmlWriter(0, HtmlWriter.FORMAT_ALL);
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);

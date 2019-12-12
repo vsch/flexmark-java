@@ -60,7 +60,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     public CoreNodeFormatter(DataHolder options) {
         super(options, null, UNIQUIFICATION_MAP);
         this.formatterOptions = new FormatterOptions(options);
-        this.listOptions = ListOptions.getFrom(options);
+        this.listOptions = ListOptions.get(options);
         blankLines = 0;
         myHtmlBlockPrefix = "<" + this.formatterOptions.translationHtmlBlockPrefix;
         myHtmlInlinePrefix = this.formatterOptions.translationHtmlInlinePrefix;
@@ -389,12 +389,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             combinedPrefix += prefix;
         }
 
-        // delay prefix after EOL
-        int markdownOptions = markdown.getOptions();
-        markdown.setOptions(markdownOptions | LineFormattingAppendable.PREFIX_AFTER_PENDING_EOL);
         markdown.setPrefix(combinedPrefix, false);
-        markdown.setOptions(markdownOptions);
-
         context.renderChildren(node);
         markdown.popPrefix();
         if (formatterOptions.blockQuoteBlankLines) markdown.blankLine();
@@ -1118,7 +1113,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     } else {
                         // need to set pre-formatted or spaces after eol are ignored assuming prefixes are used
                         int saved = markdown.getOptions();
-                        markdown.setOptions(saved | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE);
+                        markdown.setOptions(saved | LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE);
                         markdown.append(sequence);
                         markdown.setOptions(saved);
                     }

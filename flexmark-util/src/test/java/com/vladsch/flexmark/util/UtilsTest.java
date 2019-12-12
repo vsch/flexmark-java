@@ -65,9 +65,9 @@ public class UtilsTest {
 
     @Test
     public void testIsBlank() {
-        assertEquals(false, Utils.isBlank("      `a "));
-        assertEquals(true, Utils.isBlank("      "));
-        assertEquals(true, Utils.isBlank(null));
+        assertFalse(Utils.isBlank("      `a "));
+        assertTrue(Utils.isBlank("      "));
+        assertTrue(Utils.isBlank(null));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class UtilsTest {
         assertEquals(new Integer(8), Utils.parseIntOrNull("8"));
         assertEquals(new Integer(7), Utils.parseIntOrNull("7"));
         assertEquals(new Integer(0), Utils.parseIntOrNull("0"));
-        assertEquals(null, Utils.parseIntOrNull(""));
+        assertNull(Utils.parseIntOrNull(""));
     }
 
     @Test
@@ -148,7 +148,7 @@ public class UtilsTest {
     public void testRemoveAnySuffix() {
         assertEquals("!!", Utils.removeAnySuffix("!!"));
         assertEquals("testString", Utils.removeAnySuffix("testString", "?"));
-        assertEquals("", Utils.removeAnySuffix(null, null));
+        assertEquals("", Utils.removeAnySuffix(null, (String)null));
         assertEquals("testString", Utils.removeAnySuffix("testString!", "!"));
         assertEquals("testString", Utils.removeAnySuffix("testString!", "!"));
         assertEquals("testStrin!g", Utils.removeAnySuffix("testStrin!g", "!"));
@@ -157,7 +157,7 @@ public class UtilsTest {
 
     @Test
     public void testRemoveAnyPrefix() {
-        assertEquals("", Utils.removeAnyPrefix(null, null));
+        assertEquals("", Utils.removeAnyPrefix(null, (String)null));
         assertEquals("testString", Utils.removeAnyPrefix("testString"));
         assertEquals("testString", Utils.removeAnyPrefix("testString", new String[] { null }));
         assertEquals("testString!", Utils.removeAnyPrefix("testString!", "!"));
@@ -204,7 +204,7 @@ public class UtilsTest {
         assertFalse(Utils.startsWith("", "????"));
         assertFalse(Utils.startsWith("?", "???"));
         assertFalse(Utils.startsWith("????????", "??????????", "?????????"));
-        assertFalse(Utils.startsWith(null, true, new String[] { }));
+        assertFalse(Utils.startsWith(null, true));
 
         assertTrue(Utils.startsWith("aaa???", "aaa"));
         assertTrue(Utils.startsWith("testString", "testString"));

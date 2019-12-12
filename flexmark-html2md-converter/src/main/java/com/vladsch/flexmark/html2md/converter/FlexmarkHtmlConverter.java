@@ -48,7 +48,7 @@ public class FlexmarkHtmlConverter {
     /**
      * output control for FormattingAppendable, see {@link LineFormattingAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.COLLAPSE_WHITESPACE | LineFormattingAppendable.PREFIX_PRE_FORMATTED);
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.F_COLLAPSE_WHITESPACE | LineFormattingAppendable.F_PREFIX_PRE_FORMATTED);
     public static final DataKey<Integer> MAX_BLANK_LINES = new DataKey<>("MAX_BLANK_LINES", 2);
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
 

@@ -27,7 +27,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     public HtmlFormattingAppendableBase(LineFormattingAppendable other, boolean inheritIndent) {
         this.out = new LineFormattingAppendableImpl(other.getOptions());
-        this.out.setIndentPrefix(other.getIndentPrefix());
+        if (inheritIndent) this.out.setIndentPrefix(other.getIndentPrefix());
     }
 
     @Override
@@ -333,7 +333,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
         if (withIndent && !isIndentOnFirstEol) out.indent();
 
-        if ((out.getOptions() & PASS_THROUGH) != 0) {
+        if ((out.getOptions() & F_PASS_THROUGH) != 0) {
             runnable.run();
         } else {
             boolean[] hadConditionalIndent = new boolean[] { false };
@@ -462,10 +462,10 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @NotNull@Override public T repeat(char c, int count)                                                                                        { out.repeat(c, count); return (T)this; }
     @NotNull@Override public T repeat(@NotNull CharSequence csq, int count)                                                                              { out.repeat(csq, count); return (T)this; }
     @NotNull@Override public T repeat(@NotNull CharSequence csq, int start, int end, int count)                                                          { out.repeat(csq, start, end, count); return (T)this; }
-    @NotNull@Override public T setIndentPrefix(@NotNull CharSequence prefix)                                                                             { out.setIndentPrefix(prefix); return (T)this; }
+    @NotNull@Override public T setIndentPrefix(@Nullable CharSequence prefix)                                                                             { out.setIndentPrefix(prefix); return (T)this; }
     @NotNull@Override public T setOptions(int options)                                                                                          { out.setOptions(options); return (T)this; }
     @NotNull@Override public T setPrefix(@NotNull CharSequence prefix)                                                                                   { out.setPrefix(prefix); return (T)this; }
-    @NotNull@Override public T setPrefix(@NotNull CharSequence prefix, boolean afterEol)                                                                 { out.setPrefix(prefix, afterEol); return (T)this; }
+    @NotNull@Override public T setPrefix(@Nullable CharSequence prefix, boolean afterEol)                                                                 { out.setPrefix(prefix, afterEol); return (T)this; }
     @NotNull@Override public T unIndent()                                                                                                       { out.unIndent(); return (T)this; }
     @NotNull@Override public T unIndentNoEol()                                                                                                  { out.unIndentNoEol();  return (T)this; }
     // @formatter:on

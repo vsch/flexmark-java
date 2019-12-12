@@ -18,19 +18,17 @@
 package com.vladsch.flexmark.util.html.ui;
 
 import com.vladsch.flexmark.util.html.*;
-import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.plaf.FontUIResource;
 import java.awt.Font;
-import java.util.Arrays;
 import java.util.HashMap;
 
 @SuppressWarnings("WeakerAccess")
 public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
     public HtmlBuilder() {
-        super(0, LineFormattingAppendable.PASS_THROUGH);
+        super(0, LineFormattingAppendable.F_PASS_THROUGH);
     }
 
     public HtmlBuilder(int indentSize, int formatOptions) {

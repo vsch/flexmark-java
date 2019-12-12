@@ -1,12 +1,13 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+
+import static org.junit.Assert.assertEquals;
 
 public class OrderedSetTest {
     @Rule
@@ -17,26 +18,26 @@ public class OrderedSetTest {
         OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
-            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+            assertEquals(true, orderedSet.add(String.valueOf(i)));
+            assertEquals(false, orderedSet.add(String.valueOf(i)));
         }
 
-        Assert.assertEquals(false, orderedSet.addAll(orderedSet));
+        assertEquals(false, orderedSet.addAll(orderedSet));
 
         int i = 0;
         for (String it : orderedSet) {
-            Assert.assertEquals(String.valueOf(i), it);
+            assertEquals(String.valueOf(i), it);
             i++;
         }
 
         for (int j = 0; j < 10; j++) {
-            Assert.assertEquals(true, orderedSet.remove(String.valueOf(j)));
+            assertEquals(true, orderedSet.remove(String.valueOf(j)));
 
-            Assert.assertEquals(j == 9 ? 0 : 10, orderedSet.getValueList().size());
+            assertEquals(j == 9 ? 0 : 10, orderedSet.getValueList().size());
 
             int lastJ = j + 1;
             for (String it : orderedSet) {
-                Assert.assertEquals(String.valueOf(lastJ), it);
+                assertEquals(String.valueOf(lastJ), it);
                 lastJ++;
             }
         }
@@ -47,29 +48,29 @@ public class OrderedSetTest {
         OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
-            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+            assertEquals(true, orderedSet.add(String.valueOf(i)));
+            assertEquals(false, orderedSet.add(String.valueOf(i)));
         }
 
-        Assert.assertEquals(false, orderedSet.addAll(orderedSet));
+        assertEquals(false, orderedSet.addAll(orderedSet));
 
         int i = 0;
         for (String it : orderedSet) {
-            Assert.assertEquals(String.valueOf(i), it);
+            assertEquals(String.valueOf(i), it);
             i++;
         }
 
         for (int j = 10; j-- > 0; ) {
-            Assert.assertEquals(true, orderedSet.remove(String.valueOf(j)));
+            assertEquals(true, orderedSet.remove(String.valueOf(j)));
 
-            Assert.assertEquals(j, orderedSet.getValueList().size());
+            assertEquals(j, orderedSet.getValueList().size());
 
             int lastJ = 0;
             for (String it : orderedSet) {
-                Assert.assertEquals(String.valueOf(lastJ++), it);
+                assertEquals(String.valueOf(lastJ++), it);
             }
 
-            Assert.assertEquals(lastJ, j);
+            assertEquals(lastJ, j);
         }
     }
 
@@ -79,32 +80,32 @@ public class OrderedSetTest {
         OrderedSet<String> retainSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
-            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+            assertEquals(true, orderedSet.add(String.valueOf(i)));
+            assertEquals(false, orderedSet.add(String.valueOf(i)));
         }
 
         for (int i = 0; i < 10; i += 2) {
-            Assert.assertEquals(true, retainSet.add(String.valueOf(i)));
-            Assert.assertEquals(false, retainSet.add(String.valueOf(i)));
+            assertEquals(true, retainSet.add(String.valueOf(i)));
+            assertEquals(false, retainSet.add(String.valueOf(i)));
         }
 
-        Assert.assertEquals(false, orderedSet.addAll(orderedSet));
-        Assert.assertEquals(false, retainSet.addAll(retainSet));
+        assertEquals(false, orderedSet.addAll(orderedSet));
+        assertEquals(false, retainSet.addAll(retainSet));
 
-        Assert.assertEquals(false, orderedSet.retainAll(orderedSet));
-        Assert.assertEquals(false, retainSet.retainAll(retainSet));
+        assertEquals(false, orderedSet.retainAll(orderedSet));
+        assertEquals(false, retainSet.retainAll(retainSet));
 
-        Assert.assertEquals(true, orderedSet.retainAll(retainSet));
-        Assert.assertEquals(true, orderedSet.equals(retainSet));
+        assertEquals(true, orderedSet.retainAll(retainSet));
+        assertEquals(true, orderedSet.equals(retainSet));
 
         int i = 0;
         for (String it : orderedSet) {
-            Assert.assertEquals(String.valueOf(i), it);
+            assertEquals(String.valueOf(i), it);
             i += 2;
         }
 
         for (int j = 10; j-- > 0; ) {
-            Assert.assertEquals((j & 1) == 0, orderedSet.remove(String.valueOf(j)));
+            assertEquals((j & 1) == 0, orderedSet.remove(String.valueOf(j)));
         }
     }
 
@@ -113,17 +114,17 @@ public class OrderedSetTest {
         OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
-            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+            assertEquals(true, orderedSet.add(String.valueOf(i)));
+            assertEquals(false, orderedSet.add(String.valueOf(i)));
         }
 
-        Assert.assertEquals(false, orderedSet.addAll(orderedSet));
+        assertEquals(false, orderedSet.addAll(orderedSet));
 
         int i = 0;
         Iterator<String> iterator = orderedSet.iterator();
         while (iterator.hasNext()) {
             String it = iterator.next();
-            Assert.assertEquals(String.valueOf(i), it);
+            assertEquals(String.valueOf(i), it);
             i++;
         }
 
@@ -133,11 +134,11 @@ public class OrderedSetTest {
             String item = iterator.next();
             iterator.remove();
 
-            Assert.assertEquals(j == 9 ? 0 : 10, orderedSet.getValueList().size());
+            assertEquals(j == 9 ? 0 : 10, orderedSet.getValueList().size());
 
             int lastJ = j + 1;
             for (String it : orderedSet) {
-                Assert.assertEquals(String.valueOf(lastJ), it);
+                assertEquals(String.valueOf(lastJ), it);
                 lastJ++;
             }
 
@@ -150,17 +151,17 @@ public class OrderedSetTest {
         OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
-            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+            assertEquals(true, orderedSet.add(String.valueOf(i)));
+            assertEquals(false, orderedSet.add(String.valueOf(i)));
         }
 
-        Assert.assertEquals(false, orderedSet.addAll(orderedSet));
+        assertEquals(false, orderedSet.addAll(orderedSet));
 
         int i = 9;
         Iterator<String> iterator = orderedSet.reversedIterator();
         while (iterator.hasNext()) {
             String it = iterator.next();
-            Assert.assertEquals(String.valueOf(i), it);
+            assertEquals(String.valueOf(i), it);
             i--;
         }
 
@@ -170,14 +171,14 @@ public class OrderedSetTest {
             String item = iterator.next();
             iterator.remove();
 
-            Assert.assertEquals(j, orderedSet.getValueList().size());
+            assertEquals(j, orderedSet.getValueList().size());
 
             int lastJ = 0;
             for (String it : orderedSet) {
-                Assert.assertEquals(String.valueOf(lastJ++), it);
+                assertEquals(String.valueOf(lastJ++), it);
             }
 
-            Assert.assertEquals(lastJ, j);
+            assertEquals(lastJ, j);
             j--;
         }
     }
@@ -187,11 +188,11 @@ public class OrderedSetTest {
         OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
-            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+            assertEquals(true, orderedSet.add(String.valueOf(i)));
+            assertEquals(false, orderedSet.add(String.valueOf(i)));
         }
 
-        Assert.assertEquals(false, orderedSet.addAll(orderedSet));
+        assertEquals(false, orderedSet.addAll(orderedSet));
 
         int i = 0;
         Iterator<String> iterator = orderedSet.iterator();
@@ -199,7 +200,7 @@ public class OrderedSetTest {
             orderedSet.removeIndex(0);
             thrown.expect(ConcurrentModificationException.class);
             String it = iterator.next();
-            Assert.assertEquals("ConcurrentModificationException was not thrown on modification", false, true);
+            assertEquals("ConcurrentModificationException was not thrown on modification", false, true);
         }
     }
 
@@ -208,11 +209,11 @@ public class OrderedSetTest {
         OrderedSet<String> orderedSet = new OrderedSet<>();
 
         for (int i = 0; i < 10; i++) {
-            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
-            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+            assertEquals(true, orderedSet.add(String.valueOf(i)));
+            assertEquals(false, orderedSet.add(String.valueOf(i)));
         }
 
         thrown.expect(IllegalStateException.class);
-        Assert.assertEquals(false, orderedSet.setValueAt(0, String.valueOf(1), "1"));
+        assertEquals(false, orderedSet.setValueAt(0, String.valueOf(1), "1"));
     }
 }

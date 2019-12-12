@@ -458,7 +458,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
         BlockFactory(DataHolder options) {
             super(options);
-            myOptions = ListOptions.getFrom(options);
+            myOptions = ListOptions.get(options);
         }
 
         @Override

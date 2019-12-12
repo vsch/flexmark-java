@@ -780,7 +780,7 @@ public class MarkdownTable {
         trackedOffsets.clear();
 
         int formatterOptions = out.getOptions();
-        out.setOptions((formatterOptions & ~(LineFormattingAppendable.COLLAPSE_WHITESPACE | LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE)) | LineFormattingAppendable.ALLOW_LEADING_WHITESPACE);
+        out.setOptions((formatterOptions & ~(LineFormattingAppendable.F_COLLAPSE_WHITESPACE | LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE)) | LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE);
 
         finalizeTable();
 

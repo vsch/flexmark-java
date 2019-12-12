@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, N, C extends NodeContext<N, C>> implements LineFormattingAppendable {
     protected final LineFormattingAppendable myAppendable;
     protected C context;
@@ -28,8 +29,8 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     }
 
     public MarkdownWriterBase(int formatOptions, @Nullable SequenceBuilder builder) {
-        myAppendable = new LineFormattingAppendableImpl(formatOptions, builder);
-        myAppendable.setOptions(myAppendable.getOptions() | LineFormattingAppendable.PREFIX_PRE_FORMATTED);
+        myAppendable = new LineFormattingAppendableImpl(builder, formatOptions);
+        myAppendable.setOptions(myAppendable.getOptions() | LineFormattingAppendable.F_PREFIX_PRE_FORMATTED);
     }
 
     public void setContext(C context) {
@@ -93,10 +94,10 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @NotNull@Override public M repeat(char c, int count)                                                                                       { myAppendable.repeat(c, count); return (M)this; }
     @NotNull@Override public M repeat(@NotNull CharSequence csq, int count)                                                                             { myAppendable.repeat(csq, count); return (M)this; }
     @NotNull@Override public M repeat(@NotNull CharSequence csq, int start, int end, int count)                                                         { myAppendable.repeat(csq, start, end, count); return (M)this; }
-    @NotNull@Override public M setIndentPrefix(@NotNull CharSequence prefix)                                                                            { myAppendable.setIndentPrefix(prefix); return (M)this; }
+    @NotNull@Override public M setIndentPrefix(@Nullable CharSequence prefix)                                                                            { myAppendable.setIndentPrefix(prefix); return (M)this; }
     @NotNull@Override public M setOptions(int options)                                                                                         { myAppendable.setOptions(options); return (M)this; }
     @NotNull@Override public M setPrefix(@NotNull CharSequence prefix)                                                                                  { myAppendable.setPrefix(prefix); return (M)this; }
-    @NotNull@Override public M setPrefix(@NotNull CharSequence prefix, boolean afterEol)                                                                { myAppendable.setPrefix(prefix, afterEol); return (M)this; }
+    @NotNull@Override public M setPrefix(@Nullable CharSequence prefix, boolean afterEol)                                                                { myAppendable.setPrefix(prefix, afterEol); return (M)this; }
     @NotNull@Override public M unIndent()                                                                                                      { myAppendable.unIndent(); return (M)this; }
     @NotNull@Override public M unIndentNoEol()                                                                                                 { myAppendable.unIndentNoEol(); return (M)this; }
     @Override public String toString(int maxBlankLines)                                                                                { return myAppendable.toString(maxBlankLines); }

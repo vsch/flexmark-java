@@ -93,14 +93,13 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Integer> FORMAT_FLAGS = SharedDataKeys.RENDERER_FORMAT_FLAGS;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.RENDERER_MAX_TRAILING_BLANK_LINES;
 
-    // convenience pass through
-    public static final int CONVERT_TABS = LineFormattingAppendable.CONVERT_TABS;
-    public static final int COLLAPSE_WHITESPACE = LineFormattingAppendable.COLLAPSE_WHITESPACE;
-    public static final int SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
-    public static final int PREFIX_AFTER_PENDING_EOL = LineFormattingAppendable.PREFIX_AFTER_PENDING_EOL;
-    public static final int PASS_THROUGH = LineFormattingAppendable.PASS_THROUGH;
-    public static final int ALLOW_LEADING_WHITESPACE = LineFormattingAppendable.ALLOW_LEADING_WHITESPACE;
-    public static final int FORMAT_ALL = LineFormattingAppendable.FORMAT_ALL;
+    // Use LineFormattingAppendable values instead
+    @Deprecated public static final int CONVERT_TABS = LineFormattingAppendable.F_CONVERT_TABS;
+    @Deprecated public static final int COLLAPSE_WHITESPACE = LineFormattingAppendable.F_COLLAPSE_WHITESPACE;
+    @Deprecated public static final int SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int PASS_THROUGH = LineFormattingAppendable.F_PASS_THROUGH;
+    @Deprecated public static final int ALLOW_LEADING_WHITESPACE = LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE;
+    @Deprecated public static final int FORMAT_ALL = LineFormattingAppendable.F_FORMAT_ALL;
 
     /**
      * Stores pairs of equivalent renderer types to allow extensions to resolve types not known to them
@@ -109,11 +108,11 @@ public class HtmlRenderer implements IRender {
      */
     public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<>("RENDERER_TYPE_EQUIVALENCE", Collections.<Pair<String, String>>emptyList());
 
-    // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
-    public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.CONVERT_TABS;
-    public static final int FORMAT_COLLAPSE_WHITESPACE = LineFormattingAppendable.COLLAPSE_WHITESPACE;
-    public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
-    public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.FORMAT_ALL;
+    // Use LineFormattingAppendable values instead
+    @Deprecated public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.F_CONVERT_TABS;
+    @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineFormattingAppendable.F_COLLAPSE_WHITESPACE;
+    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.F_FORMAT_ALL;
 
     // now not final only to allow disposal of resources
     final List<AttributeProviderFactory> attributeProviderFactories;

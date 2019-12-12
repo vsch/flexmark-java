@@ -147,7 +147,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         repositoryNodesDone = false;
 
         this.options = new DocxRendererOptions(options);
-        listOptions = ListOptions.getFrom(options);
+        listOptions = ListOptions.get(options);
         footnoteIDs = new HashMap<>();
         lastTocBlock = null;
         ordinalRunnable = null;
