@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.collection.BitEnumSet;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import org.jetbrains.annotations.NotNull;
@@ -78,8 +79,16 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
         return chars.hashCode();
     }
 
+    public static BasedOptionsSequence of(@NotNull CharSequence chars, BitEnumSet<Options> optionFlags) {
+        return new BasedOptionsSequence(chars, optionFlags.toInt(), null);
+    }
+
     public static BasedOptionsSequence of(@NotNull CharSequence chars, int optionFlags) {
         return new BasedOptionsSequence(chars, optionFlags, null);
+    }
+
+    public static BasedOptionsSequence of(@NotNull CharSequence chars, BitEnumSet<Options> optionFlags, @Nullable DataHolder options) {
+        return new BasedOptionsSequence(chars, optionFlags.toInt(), options);
     }
 
     public static BasedOptionsSequence of(@NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
