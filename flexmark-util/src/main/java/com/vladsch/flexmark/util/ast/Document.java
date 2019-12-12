@@ -37,9 +37,6 @@ public class Document extends Block implements MutableDataHolder {
     @Override
     public <T> MutableDataHolder set(@NotNull NullableDataKey<T> key, @Nullable T value) {return dataSet.set(key, value);}
 
-    @Override
-    public <T> T get(@NotNull DataKey<T> key) { return key.get(this);}
-
     @NotNull
     @Override
     public MutableDataSet setFrom(@NotNull MutableDataSetter dataSetter) {return dataSet.setFrom(dataSetter);}
