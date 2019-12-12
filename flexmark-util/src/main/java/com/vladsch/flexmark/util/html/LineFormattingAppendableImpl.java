@@ -74,7 +74,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, BitEnumSet<Options> formatOptions) {
         this.builder = builder;
         options = formatOptions;
-        passThrough = some(F_PASS_THROUGH);
+        passThrough = any(F_PASS_THROUGH);
         preFormattedNesting = 0;
         preFormattedFirstLine = -1;
         preFormattedLastLine = -1;
@@ -108,24 +108,24 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         return this;
     }
 
-    private boolean some(int options) {
-        return this.options.some(options);
+    private boolean any(int options) {
+        return this.options.any(options);
     }
 
     private boolean isConvertingTabs() {
-        return some(F_CONVERT_TABS | F_COLLAPSE_WHITESPACE);
+        return any(F_CONVERT_TABS | F_COLLAPSE_WHITESPACE);
     }
 
     private boolean isSuppressingTrailingWhitespace() {
-        return some(F_SUPPRESS_TRAILING_WHITESPACE);
+        return any(F_SUPPRESS_TRAILING_WHITESPACE);
     }
 
     private boolean isAllowLeadingWhitespace() {
-        return some(F_ALLOW_LEADING_WHITESPACE);
+        return any(F_ALLOW_LEADING_WHITESPACE);
     }
 
     private boolean isCollapseWhitespace() {
-        return some(F_COLLAPSE_WHITESPACE);
+        return any(F_COLLAPSE_WHITESPACE);
     }
 
     @NotNull
@@ -343,20 +343,20 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         int startOffset = lineStart;
         int endOffset = appendable.length() + 1;
         int currentLine = getLineCount();
-        boolean needPrefix = some(F_PREFIX_PRE_FORMATTED) || (preFormattedNesting == 0 && preFormattedLastLine != currentLine || preFormattedFirstLine == currentLine);
+        boolean needPrefix = any(F_PREFIX_PRE_FORMATTED) || (preFormattedNesting == 0 && preFormattedLastLine != currentLine || preFormattedFirstLine == currentLine);
 
         if (passThrough) {
             return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? prefix : BasedSequence.NULL);
         } else {
             if (allWhitespace && (preFormattedNesting == 0 && !(preFormattedFirstLine == currentLine || preFormattedLastLine == currentLine))) {
-                if (some(F_ALLOW_LEADING_EOL) && appendable.length() == 0) {
+                if (any(F_ALLOW_LEADING_EOL) && appendable.length() == 0) {
                     return new Pair<>(Range.of(startOffset, endOffset - 1), prefix);
                 } else {
                     return new Pair<>(Range.NULL, BasedSequence.NULL);
                 }
             } else {
                 // apply options other than convert tabs which is done at time of appending
-                if (!some(F_ALLOW_LEADING_WHITESPACE) &&
+                if (!any(F_ALLOW_LEADING_WHITESPACE) &&
                         (preFormattedNesting == 0 || preFormattedFirstLine == currentLine) &&
                         preFormattedNesting == 0 && preFormattedLastLine != currentLine
                 ) {
@@ -369,7 +369,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                     }
                 }
 
-                if (some(F_SUPPRESS_TRAILING_WHITESPACE) && preFormattedNesting == 0) {
+                if (any(F_SUPPRESS_TRAILING_WHITESPACE) && preFormattedNesting == 0) {
                     if (allWhitespace) {
                         startOffset = endOffset - 1;
                     } else {
@@ -487,14 +487,14 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                 }
 
                 if (c == '\t') {
-                    if (preFormattedNesting == 0 && some(F_COLLAPSE_WHITESPACE)) {
+                    if (preFormattedNesting == 0 && any(F_COLLAPSE_WHITESPACE)) {
                         if (!lastWasWhitespace) {
                             appendable.append(' ');
                             appendBuilder(' ');
                             lastWasWhitespace = true;
                         }
                     } else {
-                        if (some(F_CONVERT_TABS)) {
+                        if (any(F_CONVERT_TABS)) {
                             int column = appendable.length() - lineStart;
                             int spaces = 4 - (column % 4);
                             appendable.append("    ", 0, spaces);
@@ -506,7 +506,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                     }
                 } else {
                     if (c == ' ') {
-                        if (preFormattedNesting == 0 && some(F_COLLAPSE_WHITESPACE)) {
+                        if (preFormattedNesting == 0 && any(F_COLLAPSE_WHITESPACE)) {
                             if (!lastWasWhitespace) {
                                 appendable.append(' ');
                                 appendBuilder(' ');
@@ -619,7 +619,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
             int endOffset = appendable.length();
 
-            BasedSequence combinedPrefix = some(F_PREFIX_PRE_FORMATTED) || !lineAppendable.isPreFormattedLine(startLine + i) ? combinedPrefix(this.prefix, prefix) : BasedSequence.NULL;
+            BasedSequence combinedPrefix = any(F_PREFIX_PRE_FORMATTED) || !lineAppendable.isPreFormattedLine(startLine + i) ? combinedPrefix(this.prefix, prefix) : BasedSequence.NULL;
             addLineRange(Range.of(startOffset, endOffset - 1), combinedPrefix);
             lineStart = endOffset;
         }
@@ -639,7 +639,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
             for (int i = useStartLine; i < useEndLine; i++) {
                 BasedSequence linePrefix = prefixes.get(i);
-                if (some(F_PREFIX_PRE_FORMATTED) || !isPreFormattedLine(i)) {
+                if (any(F_PREFIX_PRE_FORMATTED) || !isPreFormattedLine(i)) {
                     // need prefix
                     if (!linePrefix.equals(lastLinePrefix)) {
                         lastLinePrefix = linePrefix;
@@ -777,7 +777,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable line() {
-        if (preFormattedNesting > 0 || lineStart < appendable.length() || some(F_ALLOW_LEADING_EOL)) {
+        if (preFormattedNesting > 0 || lineStart < appendable.length() || any(F_ALLOW_LEADING_EOL)) {
             appendImpl(SequenceUtils.EOL, 0);
         } else {
             rawIndentsOnFirstEol();
@@ -788,7 +788,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable lineWithTrailingSpaces(int count) {
-        if (preFormattedNesting > 0 || lineStart < appendable.length() || some(F_ALLOW_LEADING_EOL)) {
+        if (preFormattedNesting > 0 || lineStart < appendable.length() || any(F_ALLOW_LEADING_EOL)) {
             int options = this.options.toInt();
             this.options.clear(F_SUPPRESS_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
             if (count > 0) append(' ', count);

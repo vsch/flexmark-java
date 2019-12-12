@@ -131,8 +131,8 @@ public class BitEnumSetTest {
         assertEquals(BitEnumSet.noneOf(IntSet.class), BitEnumSet.of(IntSet.class, 0));
         for (int i = 0; i < IntSet.values().length; i++) {
             assertEquals(1L << i, BitEnumSet.of(IntSet.class, 1L << i).mask(IntSet.values()[i]));
-            assertTrue(BitEnumSet.of(IntSet.class, 1L << i).some(1L << i));
-            assertTrue(BitEnumSet.of(IntSet.class, 1L << i).some(IntSet.values()[i]));
+            assertTrue(BitEnumSet.of(IntSet.class, 1L << i).any(1L << i));
+            assertTrue(BitEnumSet.of(IntSet.class, 1L << i).any(IntSet.values()[i]));
             assertFalse(BitEnumSet.of(IntSet.class, 1L << i).none(1L << i));
             assertFalse(BitEnumSet.of(IntSet.class, 1L << i).none(IntSet.values()));
             assertTrue(BitEnumSet.of(IntSet.class, 1L << i).all(IntSet.values()[i]));
@@ -142,8 +142,8 @@ public class BitEnumSetTest {
         assertEquals(BitEnumSet.noneOf(OverIntSet.class), BitEnumSet.of(OverIntSet.class, 0));
         for (int i = 0; i < OverIntSet.values().length; i++) {
             assertEquals(1L << i, BitEnumSet.of(OverIntSet.class, 1L << i).mask(OverIntSet.values()[i]));
-            assertTrue(BitEnumSet.of(OverIntSet.class, 1L << i).some(1L << i));
-            assertTrue(BitEnumSet.of(OverIntSet.class, 1L << i).some(OverIntSet.values()[i]));
+            assertTrue(BitEnumSet.of(OverIntSet.class, 1L << i).any(1L << i));
+            assertTrue(BitEnumSet.of(OverIntSet.class, 1L << i).any(OverIntSet.values()[i]));
             assertFalse(BitEnumSet.of(OverIntSet.class, 1L << i).none(1L << i));
             assertFalse(BitEnumSet.of(OverIntSet.class, 1L << i).none(OverIntSet.values()));
             assertTrue(BitEnumSet.of(OverIntSet.class, 1L << i).all(OverIntSet.values()[i]));
@@ -153,8 +153,8 @@ public class BitEnumSetTest {
         assertEquals(BitEnumSet.noneOf(LongSet.class), BitEnumSet.of(LongSet.class, 0));
         for (int i = 0; i < LongSet.values().length; i++) {
             assertEquals(1L << i, BitEnumSet.of(LongSet.class, 1L << i).mask(LongSet.values()[i]));
-            assertTrue(BitEnumSet.of(LongSet.class, 1L << i).some(1L << i));
-            assertTrue(BitEnumSet.of(LongSet.class, 1L << i).some(LongSet.values()[i]));
+            assertTrue(BitEnumSet.of(LongSet.class, 1L << i).any(1L << i));
+            assertTrue(BitEnumSet.of(LongSet.class, 1L << i).any(LongSet.values()[i]));
             assertFalse(BitEnumSet.of(LongSet.class, 1L << i).none(1L << i));
             assertFalse(BitEnumSet.of(LongSet.class, 1L << i).none(LongSet.values()));
             assertTrue(BitEnumSet.of(LongSet.class, 1L << i).all(LongSet.values()[i]));

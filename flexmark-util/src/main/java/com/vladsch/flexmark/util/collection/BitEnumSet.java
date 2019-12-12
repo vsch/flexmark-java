@@ -110,7 +110,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
 
             out.append(elementType.getSimpleName()).append("{ ");
             for (E e : universe) {
-                if (some(mask(e))) out.append(e.name()).mark();
+                if (any(mask(e))) out.append(e.name()).mark();
             }
             out.unmark().append(" }");
             return out.toString();
@@ -123,7 +123,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         return oldElements != elements;
     }
 
-    public boolean some(long mask) {
+    public boolean any(long mask) {
         return (elements & mask) != 0;
     }
 
@@ -191,18 +191,18 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     @SafeVarargs
     final public boolean clear(E... rest) { return clear(mask(rest));}
 
-    public boolean some(E e1) { return some(mask(e1)); }
+    public boolean any(E e1) { return any(mask(e1)); }
 
-    public boolean some(E e1, E e2) { return some(mask(e1, e2));}
+    public boolean any(E e1, E e2) { return any(mask(e1, e2));}
 
-    public boolean some(E e1, E e2, E e3) { return some(mask(e1, e2, e3));}
+    public boolean any(E e1, E e2, E e3) { return any(mask(e1, e2, e3));}
 
-    public boolean some(E e1, E e2, E e3, E e4) { return some(mask(e1, e2, e3, e4));}
+    public boolean any(E e1, E e2, E e3, E e4) { return any(mask(e1, e2, e3, e4));}
 
-    public boolean some(E e1, E e2, E e3, E e4, E e5) { return some(mask(e1, e2, e3, e4, e5));}
+    public boolean any(E e1, E e2, E e3, E e4, E e5) { return any(mask(e1, e2, e3, e4, e5));}
 
     @SafeVarargs
-    final public boolean some(E... rest) { return some(mask(rest));}
+    final public boolean any(E... rest) { return any(mask(rest));}
 
     public boolean all(E e1) { return all(mask(e1)); }
 
