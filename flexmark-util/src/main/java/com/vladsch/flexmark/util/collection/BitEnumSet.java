@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Re-Implementation of RegularEnumSet class for EnumSet, for "regular sized" enum types
@@ -25,7 +26,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     private static final long serialVersionUID = 3411599620347842686L;
 
     public static class UniverseLoader {
-        @SuppressWarnings("rawtypes") final static HashMap<Class, Enum[]> slowAccessUniverses = new HashMap<>();
+        @SuppressWarnings("rawtypes") final static ConcurrentHashMap<Class, Enum[]> slowAccessUniverses = new ConcurrentHashMap<>();
 
         @SuppressWarnings("rawtypes")
         @Nullable
@@ -54,9 +55,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
                     cachedUniverse = ZERO_LENGTH_ENUM_ARRAY;
                 }
 
-                synchronized (slowAccessUniverses) {
-                    slowAccessUniverses.put(elementType, cachedUniverse);
-                }
+                slowAccessUniverses.put(elementType, cachedUniverse);
                 return cachedUniverse;
             }
             return null;
