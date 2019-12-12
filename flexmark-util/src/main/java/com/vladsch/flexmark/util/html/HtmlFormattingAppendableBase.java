@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.BitEnumSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -413,58 +412,63 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+
     // delegated to LineFormattingAppendable
     // @formatter:off
-    @Override public boolean isPendingSpace()                                                                                                               { return appendable.isPendingSpace(); }
-    @Override public boolean isPreFormatted()                                                                                                               { return appendable.isPreFormatted(); }
-    @Override public boolean isPreFormattedLine(int line)                                                                                                   { return appendable.isPreFormattedLine(line); }
-    @NotNull @Override public CharSequence getIndentPrefix()                                                                                                { return appendable.getIndentPrefix(); }
-    @Override public CharSequence getPrefix()                                                                                                               { return appendable.getPrefix(); }
-    @Override public int column()                                                                                                                           { return appendable.column(); }
-    @Override public int getLineCount()                                                                                                                     { return appendable.getLineCount(); }
-    @Override public int getOptions()                                                                                                                       { return appendable.getOptions(); }
-    @Override public int getPendingEOL()                                                                                                                    { return appendable.getPendingEOL(); }
-    @Override public int getPendingSpace()                                                                                                                  { return appendable.getPendingSpace(); }
-    @Override public int offset()                                                                                                                           { return appendable.offset(); }
-    @Override public int offsetWithPending()                                                                                                                { return appendable.offsetWithPending(); }
-    @Override public int textOnlyOffset()                                                                                                                   { return appendable.textOnlyOffset(); }
-    @Override public int textOnlyOffsetWithPending()                                                                                                        { return appendable.textOnlyOffsetWithPending(); }
-    @NotNull @Override public List<BasedSequence> getLinesPrefix(int startLine, int endLine)                                                                { return appendable.getLinesPrefix(startLine, endLine); }
-    @NotNull @Override public List<CharSequence> getLinesContent(int startLine, int endLine)                                                                { return appendable.getLinesContent(startLine, endLine); }
-    @NotNull @Override public List<CharSequence> getLines(int startLine, int endLine)                                                                       { return appendable.getLines(startLine, endLine); }
-    @Override public String toString(int maxBlankLines)                                                                                                     { return appendable.toString(maxBlankLines); }
-    @Override @NotNull public BitEnumSet<Options> getOptionSet()                                                                                            { return appendable.getOptionSet();}
-    @NotNull @Override public T addIndentOnFirstEOL(@NotNull Runnable runnable)                                                                             { appendable.addIndentOnFirstEOL(runnable);  return (T)this; }
-    @NotNull @Override public T addPrefix(@NotNull CharSequence prefix)                                                                                     { appendable.addPrefix(prefix); return (T)this; }
-    @NotNull @Override public T addPrefix(@NotNull CharSequence prefix, boolean afterEol)                                                                   { appendable.addPrefix(prefix, afterEol);  return (T)this; }
-    @NotNull @Override public T append(char c)                                                                                                              { appendable.append(c); return (T)this; }
-    @NotNull @Override public T append(@NotNull CharSequence csq)                                                                                           { appendable.append(csq); return (T)this; }
-    @NotNull @Override public T append(@NotNull CharSequence csq, int start, int end)                                                                       { appendable.append(csq, start, end); return (T)this; }
-    @NotNull @Override public T append(@NotNull LineFormattingAppendable lines, int startLine, int endLine)                                                 { appendable.append(lines, startLine, endLine);  return (T)this; }
-    @NotNull @Override public T appendTo(@NotNull Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException    { this.appendable.appendTo(out, maxBlankLines, prefix, startLine, endLine);  return (T)this; }
-    @NotNull @Override public T blankLine()                                                                                                                 { appendable.blankLine(); return (T)this; }
-    @NotNull @Override public T blankLine(int count)                                                                                                        { appendable.blankLine(count); return (T)this; }
-    @NotNull @Override public T blankLineIf(boolean predicate)                                                                                              { appendable.blankLineIf(predicate); return (T)this; }
-    @NotNull @Override public T closePreFormatted()                                                                                                         { appendable.closePreFormatted(); return (T)this; }
-    @NotNull @Override public T indent()                                                                                                                    { appendable.indent(); return (T)this; }
-    @NotNull @Override public T line()                                                                                                                      { appendable.line(); return (T)this; }
-    @NotNull @Override public T lineIf(boolean predicate)                                                                                                   { appendable.lineIf(predicate); return (T)this; }
-    @NotNull @Override public T lineOnFirstText(boolean value)                                                                                              { appendable.lineOnFirstText(value);  return (T)this; }
-    @NotNull @Override public T lineWithTrailingSpaces(int count)                                                                                           { appendable.lineWithTrailingSpaces(count);  return (T)this; }
-    @NotNull @Override public T openPreFormatted(boolean keepIndent)                                                                                        { appendable.openPreFormatted(true); return (T)this; }
-    @NotNull @Override public T popPrefix()                                                                                                                 { appendable.popPrefix(); return (T)this; }
-    @NotNull @Override public T popPrefix(boolean afterEol)                                                                                                 { appendable.popPrefix(afterEol); return (T)this; }
-    @NotNull @Override public T prefixLines(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine)                           { appendable.prefixLines(prefix, addAfterLinePrefix, startLine, endLine);  return (T)this; }
-    @NotNull @Override public T pushPrefix()                                                                                                                { appendable.pushPrefix(); return (T)this; }
-    @NotNull @Override public T removeIndentOnFirstEOL(@NotNull Runnable runnable)                                                                          { appendable.removeIndentOnFirstEOL(runnable);  return (T)this; }
-    @NotNull @Override public T removeLines(int startLine, int endLine)                                                                                     { appendable.removeLines(startLine, endLine);  return (T)this; }
-    @NotNull @Override public T append(char c, int count)                                                                                                   { appendable.append(c, count); return (T)this; }
-    @NotNull @Override public T setIndentPrefix(@Nullable CharSequence prefix)                                                                              { appendable.setIndentPrefix(prefix); return (T)this; }
-    @NotNull @Override public T setOptions(int options)                                                                                                     { appendable.setOptions(options); return (T)this; }
-    @NotNull @Override public T setPrefix(@NotNull CharSequence prefix)                                                                                     { appendable.setPrefix(prefix); return (T)this; }
-    @NotNull @Override public T setPrefix(@Nullable CharSequence prefix, boolean afterEol)                                                                  { appendable.setPrefix(prefix, afterEol); return (T)this; }
-    @NotNull @Override public T unIndent()                                                                                                                  { appendable.unIndent(); return (T)this; }
-    @NotNull @Override public T unIndentNoEol()                                                                                                             { appendable.unIndentNoEol();  return (T)this; }
+    @Override public boolean isPendingSpace()                                                                                                                   { return appendable.isPendingSpace(); }
+    @Override public boolean isPreFormatted()                                                                                                                   { return appendable.isPreFormatted(); }
+    @Override public boolean isPreFormattedLine(int line)                                                                                                       { return appendable.isPreFormattedLine(line); }
+    @NotNull @Override public CharSequence getIndentPrefix()                                                                                                    { return appendable.getIndentPrefix(); }
+    @Override public CharSequence getPrefix()                                                                                                                   { return appendable.getPrefix(); }
+    @Override public int column()                                                                                                                               { return appendable.column(); }
+    @Override public int getLineCount()                                                                                                                         { return appendable.getLineCount(); }
+    @Override public int getOptions()                                                                                                                           { return appendable.getOptions(); }
+    @Override public int getPendingEOL()                                                                                                                        { return appendable.getPendingEOL(); }
+    @Override public int getPendingSpace()                                                                                                                      { return appendable.getPendingSpace(); }
+    @Override public int offset()                                                                                                                               { return appendable.offset(); }
+    @Override public int offsetWithPending()                                                                                                                    { return appendable.offsetWithPending(); }
+    @Override public int textOnlyOffset()                                                                                                                       { return appendable.textOnlyOffset(); }
+    @Override public int textOnlyOffsetWithPending()                                                                                                            { return appendable.textOnlyOffsetWithPending(); }
+    @Override public int getLinePrefixIndex(int lineIndex)                                                                                                      { return appendable.getLinePrefixIndex(lineIndex); }
+    @Override public void setLinePrefixIndex(int lineIndex, int prefixEndIndex)                                                                                 { appendable.setLinePrefixIndex(lineIndex, prefixEndIndex); }
+    @Override public void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content)                                        { appendable.setLinePrefixIndex(lineIndex, prefix, content); }
+    @NotNull @Override public int[] getLinesPrefixIndex(int startLine, int endLine)                                                                             { return appendable.getLinesPrefixIndex(startLine, endLine); }
+    @NotNull @Override public CharSequence[] getLinesPrefix(int startLine, int endLine)                                                                         { return appendable.getLinesPrefix(startLine, endLine); }
+    @NotNull @Override public CharSequence[] getLinesContent(int startLine, int endLine)                                                                        { return appendable.getLinesContent(startLine, endLine); }
+    @NotNull @Override public CharSequence[] getLines(int startLine, int endLine)                                                                               { return appendable.getLines(startLine, endLine); }
+    @Override public String toString(int maxBlankLines)                                                                                                         { return appendable.toString(maxBlankLines); }
+    @Override @NotNull public BitEnumSet<Options> getOptionSet()                                                                                                { return appendable.getOptionSet();}
+    @NotNull @Override public T addIndentOnFirstEOL(@NotNull Runnable runnable)                                                                                 { appendable.addIndentOnFirstEOL(runnable);  return (T)this; }
+    @NotNull @Override public T addPrefix(@NotNull CharSequence prefix)                                                                                         { appendable.addPrefix(prefix); return (T)this; }
+    @NotNull @Override public T addPrefix(@NotNull CharSequence prefix, boolean afterEol)                                                                       { appendable.addPrefix(prefix, afterEol);  return (T)this; }
+    @NotNull @Override public T append(char c)                                                                                                                  { appendable.append(c); return (T)this; }
+    @NotNull @Override public T append(@NotNull CharSequence csq)                                                                                               { appendable.append(csq); return (T)this; }
+    @NotNull @Override public T append(@NotNull CharSequence csq, int start, int end)                                                                           { appendable.append(csq, start, end); return (T)this; }
+    @NotNull @Override public T append(@NotNull LineFormattingAppendable lines, int startLine, int endLine)                                                     { appendable.append(lines, startLine, endLine);  return (T)this; }
+    @NotNull @Override public T appendTo(@NotNull Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException        { appendable.appendTo(out, maxBlankLines, prefix, startLine, endLine); return (T)this; }
+    @NotNull @Override public T blankLine()                                                                                                                     { appendable.blankLine(); return (T)this; }
+    @NotNull @Override public T blankLine(int count)                                                                                                            { appendable.blankLine(count); return (T)this; }
+    @NotNull @Override public T blankLineIf(boolean predicate)                                                                                                  { appendable.blankLineIf(predicate); return (T)this; }
+    @NotNull @Override public T closePreFormatted()                                                                                                             { appendable.closePreFormatted(); return (T)this; }
+    @NotNull @Override public T indent()                                                                                                                        { appendable.indent(); return (T)this; }
+    @NotNull @Override public T line()                                                                                                                          { appendable.line(); return (T)this; }
+    @NotNull @Override public T lineIf(boolean predicate)                                                                                                       { appendable.lineIf(predicate); return (T)this; }
+    @NotNull @Override public T lineOnFirstText(boolean value)                                                                                                  { appendable.lineOnFirstText(value);  return (T)this; }
+    @NotNull @Override public T lineWithTrailingSpaces(int count)                                                                                               { appendable.lineWithTrailingSpaces(count);  return (T)this; }
+    @NotNull @Override public T openPreFormatted(boolean keepIndent)                                                                                            { appendable.openPreFormatted(true); return (T)this; }
+    @NotNull @Override public T popPrefix()                                                                                                                     { appendable.popPrefix(); return (T)this; }
+    @NotNull @Override public T popPrefix(boolean afterEol)                                                                                                     { appendable.popPrefix(afterEol); return (T)this; }
+    @NotNull @Override public T prefixLinesWith(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine)                           { appendable.prefixLinesWith(prefix, addAfterLinePrefix, startLine, endLine);  return (T)this; }
+    @NotNull @Override public T pushPrefix()                                                                                                                    { appendable.pushPrefix(); return (T)this; }
+    @NotNull @Override public T removeIndentOnFirstEOL(@NotNull Runnable runnable)                                                                              { appendable.removeIndentOnFirstEOL(runnable);  return (T)this; }
+    @NotNull @Override public T removeLines(int startLine, int endLine)                                                                                         { appendable.removeLines(startLine, endLine);  return (T)this; }
+    @NotNull @Override public T append(char c, int count)                                                                                                       { appendable.append(c, count); return (T)this; }
+    @NotNull @Override public T setIndentPrefix(@Nullable CharSequence prefix)                                                                                  { appendable.setIndentPrefix(prefix); return (T)this; }
+    @NotNull @Override public T setOptions(int options)                                                                                                         { appendable.setOptions(options); return (T)this; }
+    @NotNull @Override public T setPrefix(@NotNull CharSequence prefix)                                                                                         { appendable.setPrefix(prefix); return (T)this; }
+    @NotNull @Override public T setPrefix(@Nullable CharSequence prefix, boolean afterEol)                                                                      { appendable.setPrefix(prefix, afterEol); return (T)this; }
+    @NotNull @Override public T unIndent()                                                                                                                      { appendable.unIndent(); return (T)this; }
+    @NotNull @Override public T unIndentNoEol()                                                                                                                 { appendable.unIndentNoEol();  return (T)this; }
     // @formatter:on
 
 }

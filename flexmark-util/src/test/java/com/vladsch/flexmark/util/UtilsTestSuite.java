@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.ast.DocumentTest;
 import com.vladsch.flexmark.util.collection.*;
 import com.vladsch.flexmark.util.format.MarkdownParagraphTest;
 import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBaseTest;
+import com.vladsch.flexmark.util.html.LineFormattingAppendableImplTest;
 import com.vladsch.flexmark.util.html.ui.HtmlBuilderTest;
 import com.vladsch.flexmark.util.html.ui.HtmlHelpersTest;
 import com.vladsch.flexmark.util.options.AttributeTest;
@@ -52,6 +53,7 @@ import org.junit.runners.Suite;
         HtmlFormattingAppendableBaseTest.class,
         HtmlHelpersTest.class,
         LineFormattingAppendableImplTest.class,
+//        LineAppendableImplTest.class,
         PrefixedSubSequenceTest.class,
         RepeatedSequenceTest.class,
         CharPredicateTest.class,

@@ -1,13 +1,11 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.collection.BitEnumSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Used to collect line text for further processing
@@ -28,13 +26,13 @@ import java.util.List;
 @SuppressWarnings({ "UnusedReturnValue", "SameParameterValue" })
 public interface LineFormattingAppendable extends Appendable {
     enum Options {
-        CONVERT_TABS,
-        COLLAPSE_WHITESPACE,
-        SUPPRESS_TRAILING_WHITESPACE,
-        PASS_THROUGH,
-        ALLOW_LEADING_WHITESPACE,
-        ALLOW_LEADING_EOL,
-        PREFIX_PRE_FORMATTED,
+        CONVERT_TABS,                       // expand tabs on column multiples of 4
+        COLLAPSE_WHITESPACE,                // collapse multiple tabs and spaces to single space
+        SUPPRESS_TRAILING_WHITESPACE,       // don't output trailing whitespace
+        PASS_THROUGH,                       // just pass everything through to appendable with no formatting
+        ALLOW_LEADING_WHITESPACE,           // allow leading spaces on a line, else remove
+        ALLOW_LEADING_EOL,                  // allow EOL at offset 0
+        PREFIX_PRE_FORMATTED,               // when prefixing lines, prefix pre-formatted lines
     }
 
     Options O_CONVERT_TABS = Options.CONVERT_TABS;
@@ -44,15 +42,15 @@ public interface LineFormattingAppendable extends Appendable {
     Options O_ALLOW_LEADING_WHITESPACE = Options.ALLOW_LEADING_WHITESPACE;
     Options O_ALLOW_LEADING_EOL = Options.ALLOW_LEADING_EOL;
     Options O_PREFIX_PRE_FORMATTED = Options.PREFIX_PRE_FORMATTED;
-    BitEnumSet<Options> O_FORMAT_ALL = BitEnumSet.of( O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_SUPPRESS_TRAILING_WHITESPACE);
+    BitEnumSet<Options> O_FORMAT_ALL = BitEnumSet.of(O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_SUPPRESS_TRAILING_WHITESPACE);
 
-    int F_CONVERT_TABS = BitEnumSet.intMask(O_CONVERT_TABS);                                   // expand tabs on column multiples of 4
-    int F_COLLAPSE_WHITESPACE = BitEnumSet.intMask(O_COLLAPSE_WHITESPACE);                     // collapse multiple tabs and spaces to single space
-    int F_SUPPRESS_TRAILING_WHITESPACE = BitEnumSet.intMask(O_SUPPRESS_TRAILING_WHITESPACE);   // don't output trailing whitespace
-    int F_PASS_THROUGH = BitEnumSet.intMask(O_PASS_THROUGH);                                   // just pass everything through to appendable with no formatting
-    int F_ALLOW_LEADING_WHITESPACE = BitEnumSet.intMask(O_ALLOW_LEADING_WHITESPACE);           // allow leading spaces on a line, else remove
-    int F_ALLOW_LEADING_EOL = BitEnumSet.intMask(O_ALLOW_LEADING_EOL);                         // allow EOL at offset 0
-    int F_PREFIX_PRE_FORMATTED = BitEnumSet.intMask(O_PREFIX_PRE_FORMATTED);                   // when prefixing lines, prefix pre-formatted lines
+    int F_CONVERT_TABS = BitEnumSet.intMask(O_CONVERT_TABS);                                    // expand tabs on column multiples of 4
+    int F_COLLAPSE_WHITESPACE = BitEnumSet.intMask(O_COLLAPSE_WHITESPACE);                      // collapse multiple tabs and spaces to single space
+    int F_SUPPRESS_TRAILING_WHITESPACE = BitEnumSet.intMask(O_SUPPRESS_TRAILING_WHITESPACE);    // don't output trailing whitespace
+    int F_PASS_THROUGH = BitEnumSet.intMask(O_PASS_THROUGH);                                    // just pass everything through to appendable with no formatting
+    int F_ALLOW_LEADING_WHITESPACE = BitEnumSet.intMask(O_ALLOW_LEADING_WHITESPACE);            // allow leading spaces on a line, else remove
+    int F_ALLOW_LEADING_EOL = BitEnumSet.intMask(O_ALLOW_LEADING_EOL);                          // allow EOL at offset 0
+    int F_PREFIX_PRE_FORMATTED = BitEnumSet.intMask(O_PREFIX_PRE_FORMATTED);                    // when prefixing lines, prefix pre-formatted lines
     int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_SUPPRESS_TRAILING_WHITESPACE; // select all formatting options
 
     // Use F_ prefixed constants
@@ -120,15 +118,20 @@ public interface LineFormattingAppendable extends Appendable {
     // these methods are monitored for content and formatting applied
     @Override
     @NotNull LineFormattingAppendable append(@NotNull CharSequence csq);
+
     @Override
     @NotNull LineFormattingAppendable append(@NotNull CharSequence csq, int start, int end);
+
     @Override
     @NotNull LineFormattingAppendable append(char c);
     @NotNull LineFormattingAppendable append(char c, int count);
 
-    // the following do not apply formatting options
     /**
-     * Append lines
+     * Append lines from another line formatting appendable.
+     * <p>
+     * NOTE: does not apply formatting options. Instead appends already formatted lines as is
+     * <p>
+     * If there is an accumulating line, it will be terminated by an EOL before appending lines
      *
      * @param lineAppendable lines to append
      * @return this
@@ -139,19 +142,11 @@ public interface LineFormattingAppendable extends Appendable {
     }
 
     /**
-     * Append lines with given prefix
-     *
-     * @param lineAppendable lines to append
-     * @param startLine      start line to append
-     * @return this
-     */
-    @NotNull
-    default LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable, int startLine) {
-        return append(lineAppendable, startLine, Integer.MAX_VALUE);
-    }
-
-    /**
-     * Append lines with given prefix
+     * Append lines from another line formatting appendable.
+     * <p>
+     * NOTE: does not apply formatting options. Instead appends already formatted lines as is
+     * <p>
+     * If there is an accumulating line, it will be terminated by an EOL before appending lines
      *
      * @param lineAppendable lines to append
      * @param startLine      start line to append
@@ -170,6 +165,7 @@ public interface LineFormattingAppendable extends Appendable {
 
     /**
      * Get the number of lines appended
+     *
      * @return number of lines appended
      */
     int getLineCount();
@@ -183,46 +179,80 @@ public interface LineFormattingAppendable extends Appendable {
      * @param endLine            end line offset
      * @return this
      */
-    @NotNull LineFormattingAppendable prefixLines(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine);
+    @NotNull LineFormattingAppendable prefixLinesWith(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine);
 
     /**
-     * Get Lines without EOL
+     * Get Lines with EOL
+     * <p>
+     * NOTE: if the last line is not complete it will be returned without an EOL
      *
-     * @return list of lines
+     * @return array of line char sequences
      */
     @NotNull
-    default List<CharSequence> getLines() {
+    default CharSequence[] getLines() {
         return getLines(0, Integer.MAX_VALUE);
     }
 
     /**
-     * Get Lines without EOL
+     * Get Lines with EOL
+     * <p>
+     * NOTE: if the last line is not complete it will be returned without an EOL
      *
      * @param startLine starting line offset
+     * @param endLine   end line offset
+     * @return array of line char sequences
+     */
+    @NotNull CharSequence[] getLines(int startLine, int endLine);
+
+    /**
+     * Get Lines without prefix but with EOL
+     * <p>
+     * NOTE: if the last line is not complete it will be returned without an EOL
+     *
      * @return list of lines
      */
     @NotNull
-    default List<CharSequence> getLines(int startLine) {
-        return getLines(startLine, Integer.MAX_VALUE);
+    default CharSequence[] getLinesContent() {
+        return getLinesContent(0, Integer.MAX_VALUE);
     }
 
     /**
-     * Get Lines without EOL
+     * Get Lines without prefixes or EOL
      *
      * @param startLine starting line offset
      * @param endLine   end line offset
      * @return list of lines
      */
-    @NotNull List<CharSequence> getLines(int startLine, int endLine);
+    @NotNull CharSequence[] getLinesContent(int startLine, int endLine);
 
     /**
-     * Get Lines without prefixes or EOL
+     * Get Line prefixes
      *
+     * @param startLine starting line offset
+     * @param endLine   end line offset
      * @return list of lines
      */
+    @NotNull CharSequence[] getLinesPrefix(int startLine, int endLine);
+
+    /**
+     * Get Line prefix index for selected lines
+     *
+     * @param startLine starting line offset
+     * @param endLine   end line offset
+     * @return array of prefix end indices for the selected lines
+     */
+    @NotNull int[] getLinesPrefixIndex(int startLine, int endLine);
+
+    /**
+     * Get Line with EOL
+     * <p>
+     * NOTE: if the last line is not complete it will be returned without an EOL
+     *
+     * @return array of line char sequences
+     */
     @NotNull
-    default List<CharSequence> getLinesContent() {
-        return getLinesContent(0, Integer.MAX_VALUE);
+    default CharSequence getLine(int lineIndex) {
+        return getLines(lineIndex, lineIndex + 1)[0];
     }
 
     /**
@@ -232,18 +262,44 @@ public interface LineFormattingAppendable extends Appendable {
      */
     @NotNull
     default CharSequence getLineContent(int lineIndex) {
-        return getLinesContent(lineIndex, lineIndex + 1).get(0);
+        return getLinesContent(lineIndex, lineIndex + 1)[0];
     }
 
     /**
      * Get prefix of given line
      *
-     * @return list of lines
+     * @return line prefix char sequence
      */
     @NotNull
-    default BasedSequence getLinePrefix(int lineIndex) {
-        return getLinesPrefix(lineIndex, lineIndex + 1).get(0);
+    default CharSequence getLinePrefix(int lineIndex) {
+        return getLinesPrefix(lineIndex, lineIndex + 1)[0];
     }
+
+    /**
+     * Get prefix of given line
+     *
+     * @return index of the end of prefix of the line
+     */
+    default int getLinePrefixIndex(int lineIndex) {
+        return getLinesPrefixIndex(lineIndex, lineIndex + 1)[0];
+    }
+
+    /**
+     * Set prefix index for a given line
+     *
+     * @param lineIndex      index of the line
+     * @param prefixEndIndex index where the prefix for the line ends
+     */
+    void setLinePrefixIndex(int lineIndex, int prefixEndIndex);
+
+    /**
+     * Set content and prefix for a line
+     *
+     * @param lineIndex index of the line
+     * @param prefix    prefix of the line
+     * @param content   content text of the line
+     */
+    void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content);
 
     /**
      * Remove line range from result set
@@ -255,24 +311,6 @@ public interface LineFormattingAppendable extends Appendable {
     @NotNull LineFormattingAppendable removeLines(int startLine, int endLine);
 
     /**
-     * Get Lines without prefixes or EOL
-     *
-     * @param startLine starting line offset
-     * @param endLine   end line offset
-     * @return list of lines
-     */
-    @NotNull List<CharSequence> getLinesContent(int startLine, int endLine);
-
-    /**
-     * Get Line prefixes
-     *
-     * @param startLine starting line offset
-     * @param endLine   end line offset
-     * @return list of lines
-     */
-    @NotNull List<BasedSequence> getLinesPrefix(int startLine, int endLine);
-
-    /**
      * Get column offset after last append
      *
      * @return column offset after last append
@@ -280,15 +318,17 @@ public interface LineFormattingAppendable extends Appendable {
     int column();
 
     /**
-     * Get text offset of all output lines (not including any text not included because it is not yet terminated by line() call)
+     * Get text offset of all output lines, excluding any text for the last line being accumulated
+     *
      * NOTE: this includes prefixes
      *
-     * @return offset of text as would be returned if all current lines were taken (without prefixes)
+     * @return offset of text as would be returned if all lines
      */
     int offset();
 
     /**
-     * Get column offset after last append
+     * Get offset after last append
+     *
      * NOTE: this includes prefixes
      *
      * @return offset as would be returned by {@link #offset()} after line() call less 1 for EOL
@@ -590,6 +630,7 @@ public interface LineFormattingAppendable extends Appendable {
 
     /**
      * Add indent on first EOL appended and run runnable
+     *
      * @param runnable runnable to run if adding indent on first EOL
      * @return this
      */

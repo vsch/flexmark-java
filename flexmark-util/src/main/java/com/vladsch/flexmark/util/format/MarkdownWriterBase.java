@@ -3,13 +3,11 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.collection.BitEnumSet;
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.List;
 
 @SuppressWarnings("unchecked")
 public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, N, C extends NodeContext<N, C>> implements LineFormattingAppendable {
@@ -64,9 +62,13 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @Override public int offsetWithPending()                                                                                                                    { return appendable.offsetWithPending(); }
     @Override public int textOnlyOffset()                                                                                                                       { return appendable.textOnlyOffset(); }
     @Override public int textOnlyOffsetWithPending()                                                                                                            { return appendable.textOnlyOffsetWithPending(); }
-    @NotNull @Override public List<BasedSequence> getLinesPrefix(int startLine, int endLine)                                                                    { return appendable.getLinesPrefix(startLine, endLine); }
-    @NotNull @Override public List<CharSequence> getLinesContent(int startLine, int endLine)                                                                    { return appendable.getLinesContent(startLine, endLine); }
-    @NotNull @Override public List<CharSequence> getLines(int startLine, int endLine)                                                                           { return appendable.getLines(startLine, endLine); }
+    @Override public int getLinePrefixIndex(int lineIndex)                                                                                                      { return appendable.getLinePrefixIndex(lineIndex); }
+    @Override public void setLinePrefixIndex(int lineIndex, int prefixEndIndex)                                                                                 { appendable.setLinePrefixIndex(lineIndex, prefixEndIndex); }
+    @Override public void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content)                                        { appendable.setLinePrefixIndex(lineIndex, prefix, content); }
+    @NotNull @Override public int[] getLinesPrefixIndex(int startLine, int endLine)                                                                             { return appendable.getLinesPrefixIndex(startLine, endLine); }
+    @NotNull @Override public CharSequence[] getLinesPrefix(int startLine, int endLine)                                                                         { return appendable.getLinesPrefix(startLine, endLine); }
+    @NotNull @Override public CharSequence[] getLinesContent(int startLine, int endLine)                                                                        { return appendable.getLinesContent(startLine, endLine); }
+    @NotNull @Override public CharSequence[] getLines(int startLine, int endLine)                                                                               { return appendable.getLines(startLine, endLine); }
     @Override @NotNull public BitEnumSet<Options> getOptionSet()                                                                                                { return appendable.getOptionSet();}
     @NotNull @Override public M addIndentOnFirstEOL(@NotNull Runnable runnable)                                                                                 { appendable.addIndentOnFirstEOL(runnable); return (M)this; }
     @NotNull @Override public M addPrefix(@NotNull CharSequence prefix)                                                                                         { appendable.addPrefix(prefix); return (M)this; }
@@ -88,7 +90,7 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @NotNull @Override public M openPreFormatted(boolean keepIndent)                                                                                            { appendable.openPreFormatted(keepIndent); return (M)this; }
     @NotNull @Override public M popPrefix()                                                                                                                     { appendable.popPrefix(); return (M)this; }
     @NotNull @Override public M popPrefix(boolean afterEol)                                                                                                     { appendable.popPrefix(afterEol); return (M)this; }
-    @NotNull @Override public M prefixLines(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine)                               { appendable.prefixLines(prefix, addAfterLinePrefix, startLine, endLine); return (M)this; }
+    @NotNull @Override public M prefixLinesWith(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine)                           { appendable.prefixLinesWith(prefix, addAfterLinePrefix, startLine, endLine); return (M)this; }
     @NotNull @Override public M pushPrefix()                                                                                                                    { appendable.pushPrefix(); return (M)this; }
     @NotNull @Override public M removeIndentOnFirstEOL(@NotNull Runnable runnable)                                                                              { appendable.removeIndentOnFirstEOL(runnable); return (M)this; }
     @NotNull @Override public M removeLines(int startLine, int endLine)                                                                                         { appendable.removeLines(startLine, endLine); return (M)this; }

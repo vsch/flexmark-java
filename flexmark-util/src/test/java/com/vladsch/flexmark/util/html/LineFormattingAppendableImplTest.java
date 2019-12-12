@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util;
+package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.html.LineFormattingAppendable;
 import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
