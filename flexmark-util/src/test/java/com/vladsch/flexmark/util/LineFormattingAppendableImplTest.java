@@ -283,25 +283,25 @@ public class LineFormattingAppendableImplTest {
         String indent = "  ";
         LineFormattingAppendable fa = new LineFormattingAppendableImpl(LineFormattingAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
-        fa.indent().append("<pre>").openPreFormatted().append("abc\ndef \n\n").append("hij\n")
+        fa.indent().append("<pre>").openPreFormatted(false).append("abc\ndef \n\n").append("hij\n")
                 .append("</pre>").closePreFormatted().unIndent();
         assertEquals("  <pre>abc\ndef \n\nhij\n</pre>\n", fa.toString(0));
 
         fa = new LineFormattingAppendableImpl(LineFormattingAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
-        fa.indent().append("<p>this is a paragraph ").openPreFormatted().append("<div style=''>    some text\n    some more text\n")
+        fa.indent().append("<p>this is a paragraph ").openPreFormatted(false).append("<div style=''>    some text\n    some more text\n")
                 .closePreFormatted().append("</div>").unIndent();
         assertEquals("  <p>this is a paragraph <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0));
 
         fa = new LineFormattingAppendableImpl(LineFormattingAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
-        fa.indent().append("<p>this is a paragraph ").line().openPreFormatted().append("<div style=''>    some text\n    some more text\n")
+        fa.indent().append("<p>this is a paragraph ").line().openPreFormatted(false).append("<div style=''>    some text\n    some more text\n")
                 .closePreFormatted().append("</div>").unIndent();
         assertEquals("  <p>this is a paragraph\n  <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0));
 
         fa = new LineFormattingAppendableImpl(LineFormattingAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
-        fa.indent().append("<p>this is a paragraph ").indent().openPreFormatted().append("<div style=''>    some text\n    some more text\n")
+        fa.indent().append("<p>this is a paragraph ").indent().openPreFormatted(false).append("<div style=''>    some text\n    some more text\n")
                 .closePreFormatted().unIndent().append("</div>").unIndent();
         assertEquals("  <p>this is a paragraph\n    <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0));
     }
@@ -312,7 +312,7 @@ public class LineFormattingAppendableImplTest {
         LineFormattingAppendable fa = new LineFormattingAppendableImpl(LineFormattingAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
         fa.indent().append("<pre>")
-                .openPreFormatted()
+                .openPreFormatted(false)
                 .append("abc\ndef \n\n")
                 .append("hij\n")
                 .append("</pre>")
@@ -339,14 +339,14 @@ public class LineFormattingAppendableImplTest {
 
         fa = new LineFormattingAppendableImpl(LineFormattingAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
-        fa.indent().append("<p>this is a paragraph ").openPreFormatted().append("<div style=''>    some text\n    some more text\n")
+        fa.indent().append("<p>this is a paragraph ").openPreFormatted(false).append("<div style=''>    some text\n    some more text\n")
                 .closePreFormatted().append("</div>").unIndent();
         //assertEquals("  <p>this is a paragraph <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0));
         assertEquals(3, fa.getLineCount());
 
         fa = new LineFormattingAppendableImpl(LineFormattingAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
-        fa.indent().append("<p>this is a paragraph ").line().openPreFormatted().append("<div style=''>    some text\n    some more text\n")
+        fa.indent().append("<p>this is a paragraph ").line().openPreFormatted(false).append("<div style=''>    some text\n    some more text\n")
                 .closePreFormatted().append("</div>").unIndent();
         //assertEquals("  <p>this is a paragraph\n  <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0));
         assertEquals(4, fa.getLineCount());
@@ -356,7 +356,7 @@ public class LineFormattingAppendableImplTest {
         fa.indent()
                 .append("<p>this is a paragraph ")
                 .indent()
-                .openPreFormatted()
+                .openPreFormatted(false)
                 .append("<div style=''>    some text\n    some more text\n")
                 .closePreFormatted()
                 .unIndent()

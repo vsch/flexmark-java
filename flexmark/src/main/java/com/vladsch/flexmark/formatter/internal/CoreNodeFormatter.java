@@ -350,7 +350,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.line();
 
             if (formatterOptions.setextHeaderEqualizeMarker) {
-                markdown.repeat(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
+                markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
             } else {
                 markdown.append(node.getClosingMarker());
             }
@@ -464,7 +464,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     //}
                     //markdown.append(out);
                     for (BasedSequence line : lines) {
-                        if (leadColumns[i] > minSpaces) markdown.repeat(' ', leadColumns[i] - minSpaces);
+                        if (leadColumns[i] > minSpaces) markdown.append(' ', leadColumns[i] - minSpaces);
                         markdown.append(line.trimStart());
                         i++;
                     }
@@ -529,7 +529,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     //}
                     //markdown.append(out);
                     for (BasedSequence line : lines) {
-                        if (leadColumns[i] > minSpaces) markdown.repeat(' ', leadColumns[i] - minSpaces);
+                        if (leadColumns[i] > minSpaces) markdown.append(' ', leadColumns[i] - minSpaces);
                         markdown.append(line.trimStart());
                         i++;
                     }

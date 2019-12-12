@@ -19,7 +19,7 @@ import static com.vladsch.flexmark.util.Utils.*;
 public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     final private static char EOL = '\n';
 
-    final private boolean passThrough;
+    final private boolean passThrough;              // pass through mode for all operations to appendable
     final private BitEnumSet<Options> options;
 
     // pre-formatted nesting level, while >0 all text is passed through as is and not monitored
@@ -45,11 +45,11 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     final private SequenceBuilder builder;
 
     // current line being accumulated
-    private int lineStart;            // start of line
-    private boolean allWhitespace;    // all chars were whitespace
-    private boolean wasWhitespace;    // last char was whitespace
-    private int lineOnFirstText;      // issue EOL on first text
-    final private ArrayList<Runnable> indentsOnFirstEol;    // issue indents on first eol
+    private int lineStart;                                  // start of line
+    private boolean allWhitespace;                          // all chars were whitespace
+    private boolean lastWasWhitespace;                      // last char was whitespace
+    private int lineOnFirstText;                            // append EOL on first text
+    final private ArrayList<Runnable> indentsOnFirstEol;    // append indents on first eol
 
     public LineFormattingAppendableImpl(Options... formatOptions) {
         this(null, LineFormattingAppendable.toOptionSet(formatOptions));
@@ -82,7 +82,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         textLength = 0;
         prefixLength = 0;
         allWhitespace = true;
-        wasWhitespace = false;
+        lastWasWhitespace = false;
         appendable = new StringBuilder();
         lines = new ArrayList<>();
         prefixes = new ArrayList<>();
@@ -310,7 +310,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         int endOffset = lineStart;
         addLineRange(Range.of(startOffset, endOffset - 1), prefix);
         allWhitespace = true;
-        wasWhitespace = false;
+        lastWasWhitespace = false;
         lineOnFirstText = 0;
 
         rawIndentsOnFirstEol();
@@ -467,7 +467,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
                     lineStart = appendable.length();
                     allWhitespace = true;
-                    wasWhitespace = false;
+                    lastWasWhitespace = false;
                     rawIndentsOnFirstEol();
                 } else {
                     // add EOL and line
@@ -477,7 +477,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                     lineStart = appendable.length();
                     addLineRange(rangePrefixAfterEol.getFirst(), rangePrefixAfterEol.getSecond());
                     allWhitespace = true;
-                    wasWhitespace = false;
+                    lastWasWhitespace = false;
                     rawIndentsOnFirstEol();
                 }
             } else {
@@ -488,10 +488,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
                 if (c == '\t') {
                     if (preFormattedNesting == 0 && some(F_COLLAPSE_WHITESPACE)) {
-                        if (!wasWhitespace) {
+                        if (!lastWasWhitespace) {
                             appendable.append(' ');
                             appendBuilder(' ');
-                            wasWhitespace = true;
+                            lastWasWhitespace = true;
                         }
                     } else {
                         if (some(F_CONVERT_TABS)) {
@@ -507,7 +507,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                 } else {
                     if (c == ' ') {
                         if (preFormattedNesting == 0 && some(F_COLLAPSE_WHITESPACE)) {
-                            if (!wasWhitespace) {
+                            if (!lastWasWhitespace) {
                                 appendable.append(' ');
                                 appendBuilder(' ');
                             }
@@ -515,10 +515,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                             appendable.append(' ');
                             appendBuilder(' ');
                         }
-                        wasWhitespace = true;
+                        lastWasWhitespace = true;
                     } else {
                         allWhitespace = false;
-                        wasWhitespace = false;
+                        lastWasWhitespace = false;
                         appendable.append(c);
                         appendBuilder(s, index, index + 1);
                     }
@@ -556,7 +556,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     @NotNull
-    public LineFormattingAppendable repeat(char c, int count) {
+    public LineFormattingAppendable append(char c, int count) {
         append(RepeatedSequence.repeatOf(c, count));
 //        int i = count;
 //        String s = Character.toString(c);
@@ -601,8 +601,8 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable, int startLine, int endLine) {
-        List<CharSequence> lines = lineAppendable.getLineContents(startLine, endLine);
-        List<BasedSequence> prefixes = lineAppendable.getLinePrefixes(startLine, endLine);
+        List<CharSequence> lines = lineAppendable.getLinesContent(startLine, endLine);
+        List<BasedSequence> prefixes = lineAppendable.getLinesPrefix(startLine, endLine);
 
         int iMax = lines.size();
         for (int i = 0; i < iMax; i++) {
@@ -690,7 +690,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @NotNull
     @Override
-    public List<CharSequence> getLineContents(int startOffset, int endOffset) {
+    public List<CharSequence> getLinesContent(int startOffset, int endOffset) {
         line();
         ArrayList<CharSequence> result = new ArrayList<>();
         int iMax = Utils.maxLimit(endOffset, lines.size());
@@ -704,7 +704,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @NotNull
     @Override
-    public List<BasedSequence> getLinePrefixes(int startOffset, int endOffset) {
+    public List<BasedSequence> getLinesPrefix(int startOffset, int endOffset) {
         line();
         ArrayList<BasedSequence> result = new ArrayList<>();
         int iMax = Utils.maxLimit(endOffset, lines.size());
@@ -791,17 +791,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         if (preFormattedNesting > 0 || lineStart < appendable.length() || some(F_ALLOW_LEADING_EOL)) {
             int options = this.options.toInt();
             this.options.clear(F_SUPPRESS_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
-            if (count > 0) repeat(' ', count);
+            if (count > 0) append(' ', count);
             appendImpl(SequenceUtils.EOL, 0);
             this.options.replaceAll(options);
         }
-        return this;
-    }
-
-    @NotNull
-    @Override
-    public LineFormattingAppendable addLine() {
-        appendImpl(SequenceUtils.EOL, 0);
         return this;
     }
 

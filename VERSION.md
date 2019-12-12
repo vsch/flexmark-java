@@ -203,9 +203,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         to base sequence.
   + [ ] do not construct temporary `StringBuilder` but only keep the last line under
         construction temporary, with all previously constructed lines used for prior content.
-  + [ ] use an instance of sequence builder for the line under construction, and keep parallel
-        string builder for the content tests, but only if needed to avoid construction of
-        segmented sequence.
+  + [ ] use separate instance of sequence builder for the line under construction.
+        `SegmentedSequence` construction is fast enough to not need a parallel string builder
+        for context tests.
+  * Fix: remove unused overloads and methods from `LineFormattingAppendable`
 * Fix: remove `my` prefix from fields in `flexmark-utils` to keep consistent naming convention
   in module.
 * Add: `BitEnumSet` to expose the bit mask of elements to use as efficient and convenient bit

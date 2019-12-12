@@ -369,7 +369,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             out.setOptions(options & ~(LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.F_COLLAPSE_WHITESPACE));
             if (out.getPendingEOL() == 0) {
                 // hard break
-                out.repeat(' ', 2).line();
+                out.append(' ', 2).line();
             } else {
                 if (out.getPendingEOL() == 1) {
                     String s = out.toString();
@@ -499,7 +499,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         CharSequence childPrefix = RepeatedSequence.repeatOf(" ", count);
 
         out.line().setOptions(options & ~LineFormattingAppendable.F_COLLAPSE_WHITESPACE);
-        out.append(':').repeat(' ', myHtmlConverterOptions.definitionMarkerSpaces);
+        out.append(':').append(' ', myHtmlConverterOptions.definitionMarkerSpaces);
         out.pushPrefix();
         out.addPrefix(childPrefix, true);
         out.setOptions(options);
@@ -934,9 +934,9 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     if (myHtmlConverterOptions.setextHeadings && level <= 2) {
                         out.append(headingText);
                         int extraChars = context.outputAttributes(out, " ");
-                        out.line().repeat(level == 1 ? '=' : '-', minLimit(headingText.length() + extraChars, myHtmlConverterOptions.minSetextHeadingMarkerLength));
+                        out.line().append(level == 1 ? '=' : '-', minLimit(headingText.length() + extraChars, myHtmlConverterOptions.minSetextHeadingMarkerLength));
                     } else {
-                        out.repeat('#', level).append(' ');
+                        out.append('#', level).append(' ');
                         out.append(headingText);
                         context.outputAttributes(out, " ");
                     }

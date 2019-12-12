@@ -854,19 +854,19 @@ public class MarkdownTable {
                         if (trackedPos == 0) {
                             trackedOffsets.put(cell.trackedTextOffset + cell.getInsideStartOffset(previousCell), out.offsetWithPending());
                             trackedPos = NOT_TRACKED;
-                            out.repeat('-', dashCount);
+                            out.append('-', dashCount);
                         } else if (!afterLastDash && trackedPos < dashCount) {
-                            out.repeat('-', trackedPos);
+                            out.append('-', trackedPos);
                             trackedOffsets.put(cell.trackedTextOffset + cell.getInsideStartOffset(previousCell), out.offsetWithPending());
-                            out.repeat('-', dashCount - trackedPos);
+                            out.append('-', dashCount - trackedPos);
                             trackedPos = NOT_TRACKED;
                         } else {
-                            out.repeat('-', dashCount);
+                            out.append('-', dashCount);
                             trackedOffsets.put(cell.trackedTextOffset + cell.getInsideStartOffset(previousCell), out.offsetWithPending());
                             trackedPos = NOT_TRACKED;
                         }
                     } else {
-                        out.repeat('-', dashCount);
+                        out.append('-', dashCount);
                     }
 
                     if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) {
@@ -891,7 +891,7 @@ public class MarkdownTable {
                     if (options.leadTrailPipes && j == 0) out.append('|');
                     if (alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.CENTER) { out.append(':'); }
 
-                    out.repeat('-', dashCount);
+                    out.append('-', dashCount);
                     if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) { out.append(':'); }
                 }
 
@@ -1143,17 +1143,17 @@ public class MarkdownTable {
             HashMap<Integer, Integer> offsets
     ) {
         if (trackedSpanOffset == NOT_TRACKED) {
-            out.repeat('|', span);
+            out.append('|', span);
         } else {
             if (trackedSpanOffset == 0) {
                 if (offsets != null) { offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending()); }
-                out.repeat('|', span);
+                out.append('|', span);
             } else if (trackedSpanOffset < span) {
-                out.repeat('|', trackedSpanOffset);
+                out.append('|', trackedSpanOffset);
                 if (offsets != null) { offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending()); }
-                out.repeat('|', span - trackedSpanOffset);
+                out.append('|', span - trackedSpanOffset);
             } else {
-                out.repeat('|', span);
+                out.append('|', span);
                 if (offsets != null) { offsets.put(cellInsideEndOffset + trackedSpanOffset, out.offsetWithPending()); }
             }
         }
