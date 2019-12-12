@@ -8,30 +8,30 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracker {
-    private final OrderedMap<Class<?>, Set<Class<?>>> myExclusionMap;
-    private final OrderedSet<Class<?>> myExclusionSet;
-    private final HashMap<Integer, BitSet> myNodeAncestryMap;
-    private final Stack<BitSet> myNodeAncestryBitSetStack = new Stack<>();
-    private final CopyOnWriteRef<BitSet> myNodeAncestryBitSet = new CopyOnWriteRef<>(new BitSet(), value -> value != null ? (BitSet) value.clone() : new BitSet());
+    private final OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
+    private final OrderedSet<Class<?>> exclusionSet;
+    private final HashMap<Integer, BitSet> nodeAncestryMap;
+    private final Stack<BitSet> nodeAncestryBitSetStack = new Stack<>();
+    private final CopyOnWriteRef<BitSet> nodeAncestryBitSet = new CopyOnWriteRef<>(new BitSet(), value -> value != null ? (BitSet) value.clone() : new BitSet());
 
     private static final BitSet EMPTY_SET = new BitSet();
-    private boolean myClassificationDone = false;
+    private boolean isClassificationDone = false;
 
-    private final ClassifyingNodeTracker myClassifyingNodeTracker;
+    private final ClassifyingNodeTracker classifyingNodeTracker;
 
     public NodeClassifierVisitor(Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
-        myClassifyingNodeTracker = new ClassifyingNodeTracker(this, exclusionMap);
-        myExclusionMap = myClassifyingNodeTracker.getExclusionMap();
-        myNodeAncestryMap = myClassifyingNodeTracker.getNodeAncestryMap();
-        myExclusionSet = myClassifyingNodeTracker.getExclusionSet();
+        classifyingNodeTracker = new ClassifyingNodeTracker(this, exclusionMap);
+        this.exclusionMap = classifyingNodeTracker.getExclusionMap();
+        nodeAncestryMap = classifyingNodeTracker.getNodeAncestryMap();
+        exclusionSet = classifyingNodeTracker.getExclusionSet();
     }
 
     public @NotNull ClassifyingNodeTracker classify(@NotNull Node node) {
         // no double dipping
-        assert !myClassificationDone;
+        assert !isClassificationDone;
         visit(node);
-        myClassificationDone = true;
-        return myClassifyingNodeTracker;
+        isClassificationDone = true;
+        return classifyingNodeTracker;
     }
 
     @Override
@@ -49,56 +49,56 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
 
     @Override
     public void nodeAdded(@NotNull Node node) {
-        if (myClassificationDone) {
+        if (isClassificationDone) {
             if (node.getParent() == null) {
                 throw new IllegalStateException("Node must be inserted into the document before calling node tracker nodeAdded functions");
             }
 
             if (!(node.getParent() instanceof Document)) {
-                int parentIndex = myClassifyingNodeTracker.getItems().indexOf(node.getParent());
+                int parentIndex = classifyingNodeTracker.getItems().indexOf(node.getParent());
                 if (parentIndex == -1) {
                     throw new IllegalStateException("Parent node: " + node.getParent() + " of " + node + " is not tracked, some post processor forgot to call tracker.nodeAdded().");
                 }
 
-                BitSet ancestorBitSet = myNodeAncestryMap.get(parentIndex);
-                myNodeAncestryBitSet.setValue(ancestorBitSet);
+                BitSet ancestorBitSet = nodeAncestryMap.get(parentIndex);
+                nodeAncestryBitSet.setValue(ancestorBitSet);
             }
 
             // let'er rip to update the descendants
-            myNodeAncestryBitSetStack.clear();
+            nodeAncestryBitSetStack.clear();
             visit(node);
         }
     }
 
     void pushNodeAncestry() {
-        if (!myExclusionMap.isEmpty()) {
-            myNodeAncestryBitSetStack.push(myNodeAncestryBitSet.getImmutable());
+        if (!exclusionMap.isEmpty()) {
+            nodeAncestryBitSetStack.push(nodeAncestryBitSet.getImmutable());
         }
     }
 
     void popNodeAncestry() {
-        myNodeAncestryBitSet.setValue(myNodeAncestryBitSetStack.pop());
+        nodeAncestryBitSet.setValue(nodeAncestryBitSetStack.pop());
     }
 
     boolean updateNodeAncestry(Node node, CopyOnWriteRef<BitSet> nodeAncestryBitSet) {
         Node parent = node.getParent();
-        if (!myExclusionMap.isEmpty() && !(node instanceof Document)) {
+        if (!exclusionMap.isEmpty() && !(node instanceof Document)) {
             // add flags if needed
             BitSet bitSet = nodeAncestryBitSet.getPeek();
 
-            int index = myClassifyingNodeTracker.getItems().indexOf(node);
+            int index = classifyingNodeTracker.getItems().indexOf(node);
             if (index == -1) {
                 throw new IllegalStateException("Node: " + node + " is not tracked, some post processor forgot to call tracker.nodeAdded().");
             }
 
-            if (myExclusionSet != null && !myExclusionSet.isEmpty()) {
-                Iterator<Class<?>> iterator = ((Set<Class<?>>) myExclusionSet).iterator();
+            if (exclusionSet != null && !exclusionSet.isEmpty()) {
+                Iterator<Class<?>> iterator = ((Set<Class<?>>) exclusionSet).iterator();
 
                 while (iterator.hasNext()) {
                     Class<?> nodeType = iterator.next();
                     if (nodeType.isInstance(node)) {
                         // get the index of this exclusion
-                        int i = myExclusionSet.indexOf(nodeType);
+                        int i = exclusionSet.indexOf(nodeType);
                         assert i != -1;
                         if (!bitSet.get(i)) {
                             bitSet = nodeAncestryBitSet.getMutable();
@@ -108,10 +108,10 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
                 }
             }
 
-            if (myClassificationDone && myNodeAncestryBitSetStack.size() > 1) {
+            if (isClassificationDone && nodeAncestryBitSetStack.size() > 1) {
                 // see if we can stop
                 // now store the stuff for the node index
-                BitSet oldBitSet = myNodeAncestryMap.get(index);
+                BitSet oldBitSet = nodeAncestryMap.get(index);
                 if (oldBitSet != null && oldBitSet.equals(bitSet)) {
                     // no need to process descendants of this node
                     return false;
@@ -119,7 +119,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
             }
 
             if (!bitSet.isEmpty()) {
-                myNodeAncestryMap.put(index, nodeAncestryBitSet.getImmutable());
+                nodeAncestryMap.put(index, nodeAncestryBitSet.getImmutable());
             }
         }
 
@@ -133,10 +133,10 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
      */
     @Override
     public void visitChildren(@NotNull Node parent) {
-        if (!myClassificationDone) {
+        if (!isClassificationDone) {
             // initial collection phase
             if (!(parent instanceof Document)) {
-                myClassifyingNodeTracker.nodeAdded(parent);
+                classifyingNodeTracker.nodeAdded(parent);
             }
         } else {
             // postProcessor modification update phase
@@ -144,12 +144,12 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
 
         if (parent.getFirstChild() != null) {
             pushNodeAncestry();
-            if (updateNodeAncestry(parent, myNodeAncestryBitSet)) {
+            if (updateNodeAncestry(parent, nodeAncestryBitSet)) {
                 super.visitChildren(parent);
             }
             popNodeAncestry();
         } else {
-            updateNodeAncestry(parent, myNodeAncestryBitSet);
+            updateNodeAncestry(parent, nodeAncestryBitSet);
         }
     }
 }

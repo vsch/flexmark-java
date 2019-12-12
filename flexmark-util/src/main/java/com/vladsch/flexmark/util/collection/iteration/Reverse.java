@@ -6,21 +6,21 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class Reverse<T> implements ReversibleIterable<T> {
-    private final @NotNull List<T> myList;
-    private final boolean myIsReversed;
+    private final @NotNull List<T> list;
+    private final boolean isReversed;
 
     public Reverse(@NotNull List<T> list) {
         this(list, true);
     }
 
     public Reverse(@NotNull List<T> list, boolean isReversed) {
-        myList = list;
-        myIsReversed = isReversed;
+        this.list = list;
+        this.isReversed = isReversed;
     }
 
     static class ReversedListIterator<T> implements ReversibleIterator<T> {
-        private final @NotNull List<T> myList;
-        private final boolean myIsReversed;
+        private final @NotNull List<T> list;
+        private final boolean isReversed;
         private int index;
 
         public ReversedListIterator(List<T> list) {
@@ -28,8 +28,8 @@ public class Reverse<T> implements ReversibleIterable<T> {
         }
 
         ReversedListIterator(@NotNull List<T> list, boolean isReversed) {
-            myList = list;
-            myIsReversed = isReversed;
+            this.list = list;
+            this.isReversed = isReversed;
             if (isReversed) {
                 this.index = list.size() == 0 ? -1 : list.size() - 1;
             } else {
@@ -39,7 +39,7 @@ public class Reverse<T> implements ReversibleIterable<T> {
 
         @Override
         public boolean isReversed() {
-            return myIsReversed;
+            return isReversed;
         }
 
         @Override
@@ -54,12 +54,12 @@ public class Reverse<T> implements ReversibleIterable<T> {
 
         @Override
         public T next() {
-            T t = myList.get(index);
+            T t = list.get(index);
             if (index != -1) {
-                if (myIsReversed) {
+                if (isReversed) {
                     index--;
                 } else {
-                    if (index == myList.size() - 1) {
+                    if (index == list.size() - 1) {
                         index = -1;
                     } else {
                         index++;
@@ -74,23 +74,23 @@ public class Reverse<T> implements ReversibleIterable<T> {
     @NotNull
     @Override
     public ReversibleIterator<T> iterator() {
-        return new ReversedListIterator<>(myList, myIsReversed);
+        return new ReversedListIterator<>(list, isReversed);
     }
 
     @NotNull
     @Override
     public ReversibleIterable<T> reversed() {
-        return new Reverse<>(myList, !myIsReversed);
+        return new Reverse<>(list, !isReversed);
     }
 
     @Override
     public boolean isReversed() {
-        return myIsReversed;
+        return isReversed;
     }
 
     @NotNull
     @Override
     public ReversibleIterator<T> reversedIterator() {
-        return new ReversedListIterator<>(myList, !myIsReversed);
+        return new ReversedListIterator<>(list, !isReversed);
     }
 }

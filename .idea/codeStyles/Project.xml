@@ -22,8 +22,6 @@
       <option name="OBJECT_LITERAL_WRAP" value="2" />
     </JSCodeStyleSettings>
     <JavaCodeStyleSettings>
-      <option name="FIELD_NAME_PREFIX" value="my" />
-      <option name="STATIC_FIELD_NAME_PREFIX" value="our" />
       <option name="PREFER_LONGER_NAMES" value="false" />
       <option name="DO_NOT_WRAP_AFTER_SINGLE_ANNOTATION" value="true" />
       <option name="BLANK_LINES_AROUND_INITIALIZER" value="0" />

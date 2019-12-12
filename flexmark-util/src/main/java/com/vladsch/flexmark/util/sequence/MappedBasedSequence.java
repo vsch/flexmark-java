@@ -49,8 +49,18 @@ final public class MappedBasedSequence extends BasedSequenceImpl implements Mapp
     }
 
     @Override
-    public boolean isOption(int option) {
-        return getBaseSequence().isOption(option);
+    public int getOptionFlags() {
+        return getBaseSequence().getOptionFlags();
+    }
+
+    @Override
+    public boolean allOptions(int options) {
+        return getBaseSequence().allOptions(options);
+    }
+
+    @Override
+    public boolean anyOptions(int options) {
+        return getBaseSequence().anyOptions(options);
     }
 
     @Override

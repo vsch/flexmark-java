@@ -55,8 +55,8 @@ public class SegmentedSequenceStats {
         }
     }
 
-    private ArrayList<SegmentedSequenceStats.StatsEntry> myAggregatedStats;
-    final private HashMap<StatsEntry, StatsEntry> myStats = new HashMap<>();
+    private ArrayList<SegmentedSequenceStats.StatsEntry> aggregatedStats;
+    final private HashMap<StatsEntry, StatsEntry> stats = new HashMap<>();
 
     private SegmentedSequenceStats() {
 
@@ -64,14 +64,14 @@ public class SegmentedSequenceStats {
 
     public void addStats(int segments, int length, int overhead) {
         StatsEntry entry = new StatsEntry(segments);
-        entry = myStats.computeIfAbsent(entry, k -> k);
+        entry = stats.computeIfAbsent(entry, k -> k);
         entry.add(segments, length, overhead);
     }
 
     public int getCount(int segments) {
         StatsEntry entry = new StatsEntry(segments);
-        if (myStats.containsKey(entry)) {
-            return myStats.get(entry).count;
+        if (stats.containsKey(entry)) {
+            return stats.get(entry).count;
         }
         return 0;
     }
@@ -153,16 +153,16 @@ public class SegmentedSequenceStats {
 
     @NotNull
     public List<StatsEntry> getAggregatedStats() {
-        if (myAggregatedStats == null) {
+        if (aggregatedStats == null) {
             List<StatsEntry> entries = getStats();
-            myAggregatedStats = new ArrayList<>(MAX_BUCKETS);
+            aggregatedStats = new ArrayList<>(MAX_BUCKETS);
 
             int currentBucket = MAX_BUCKETS - 1;
             int currentBucketSegments = AGGR_STEPS.get(currentBucket);
 
             int iMax = entries.size();
             for (int i = 0; i < MAX_BUCKETS; i++) {
-                myAggregatedStats.add(null);
+                aggregatedStats.add(null);
             }
 
             for (int i = iMax; i-- > 0; ) {
@@ -183,20 +183,20 @@ public class SegmentedSequenceStats {
 
                 assert (entry.segments >= currentBucketSegments);
 
-                StatsEntry aggrEntry = myAggregatedStats.get(currentBucket);
+                StatsEntry aggrEntry = aggregatedStats.get(currentBucket);
 
                 if (aggrEntry == null) {
                     aggrEntry = new StatsEntry(currentBucketSegments);
-                    myAggregatedStats.set(currentBucket, aggrEntry);
+                    aggregatedStats.set(currentBucket, aggrEntry);
                 }
 
                 aggrEntry.add(entry);
             }
 
-            myAggregatedStats.removeIf(Objects::isNull);
+            aggregatedStats.removeIf(Objects::isNull);
         }
 
-        return myAggregatedStats;
+        return aggregatedStats;
     }
 
     @NotNull
@@ -206,12 +206,12 @@ public class SegmentedSequenceStats {
     }
 
     public void clear() {
-        myStats.clear();
+        stats.clear();
     }
 
     @NotNull
     public List<StatsEntry> getStats() {
-        ArrayList<StatsEntry> entries = new ArrayList<>(myStats.keySet());
+        ArrayList<StatsEntry> entries = new ArrayList<>(stats.keySet());
 
         entries.sort(StatsEntry::compareTo);
         return entries;

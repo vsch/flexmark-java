@@ -6,35 +6,35 @@ import java.util.function.BiConsumer;
 public class Attributes {
     public static final Attributes EMPTY = new Attributes();
 
-    private LinkedHashMap<String, Attribute> myAttributes;
+    private LinkedHashMap<String, Attribute> attributes;
 
     public Attributes() {
-        myAttributes = null;
+        attributes = null;
     }
 
     public Attributes(Attributes attributes) {
-        myAttributes = attributes == null || attributes.myAttributes == null ? null : new LinkedHashMap<>(attributes.myAttributes);
+        this.attributes = attributes == null || attributes.attributes == null ? null : new LinkedHashMap<>(attributes.attributes);
     }
 
     protected LinkedHashMap<String, Attribute> getAttributes() {
-        if (myAttributes == null) {
-            myAttributes = new LinkedHashMap<>();
+        if (attributes == null) {
+            attributes = new LinkedHashMap<>();
         }
-        return myAttributes;
+        return attributes;
     }
 
     public Attribute get(CharSequence key) {
-        if (myAttributes == null || key == null || key.length() == 0) return null;
+        if (attributes == null || key == null || key.length() == 0) return null;
 
         String useKey = String.valueOf(key);
-        return myAttributes.get(useKey);
+        return attributes.get(useKey);
     }
 
     public String getValue(CharSequence key) {
-        if (myAttributes == null || key == null || key.length() == 0) return "";
+        if (attributes == null || key == null || key.length() == 0) return "";
 
         String useKey = String.valueOf(key);
-        Attribute attribute = myAttributes.get(useKey);
+        Attribute attribute = attributes.get(useKey);
         if (attribute == null) return "";
         return attribute.getValue();
     }
@@ -55,10 +55,10 @@ public class Attributes {
     public Attribute replaceValue(CharSequence key, CharSequence value) {
         String useKey = String.valueOf(key);
         Attribute attribute;
-        if (myAttributes == null) {
+        if (attributes == null) {
             attribute = AttributeImpl.of(useKey, value);
         } else {
-            attribute = myAttributes.get(useKey);
+            attribute = attributes.get(useKey);
             if (attribute != null) attribute = attribute.replaceValue(value);
             else attribute = AttributeImpl.of(useKey, value);
         }
@@ -80,10 +80,10 @@ public class Attributes {
     public Attribute addValue(CharSequence key, CharSequence value) {
         Attribute attribute;
         String useKey = String.valueOf(key);
-        if (myAttributes == null) {
+        if (attributes == null) {
             attribute = AttributeImpl.of(key, value);
         } else {
-            attribute = myAttributes.get(useKey);
+            attribute = attributes.get(useKey);
             if (attribute != null) attribute = attribute.setValue(value);
             else attribute = AttributeImpl.of(useKey, value);
         }
@@ -100,78 +100,78 @@ public class Attributes {
     }
 
     public Attribute removeValue(CharSequence key, CharSequence value) {
-        if (myAttributes == null || key == null || key.length() == 0) return null;
+        if (attributes == null || key == null || key.length() == 0) return null;
 
         String useKey = String.valueOf(key);
-        Attribute oldAttribute = myAttributes.get(useKey);
+        Attribute oldAttribute = attributes.get(useKey);
         Attribute attribute = oldAttribute.removeValue(value);
         getAttributes().put(useKey, attribute);
         return attribute;
     }
 
     public boolean contains(CharSequence key) {
-        if (myAttributes == null || key == null || key.length() == 0) return false;
+        if (attributes == null || key == null || key.length() == 0) return false;
 
         String useKey = String.valueOf(key);
-        return myAttributes.containsKey(useKey);
+        return attributes.containsKey(useKey);
     }
 
     public boolean containsValue(CharSequence key, CharSequence value) {
-        if (myAttributes == null) return false;
+        if (attributes == null) return false;
         String useKey = String.valueOf(key);
-        Attribute attribute = myAttributes.get(useKey);
+        Attribute attribute = attributes.get(useKey);
         return attribute != null && attribute.containsValue(value);
     }
 
     public boolean isEmpty() {
-        return myAttributes == null || myAttributes.isEmpty();
+        return attributes == null || attributes.isEmpty();
     }
 
     public void clear() {
-        myAttributes = null;
+        attributes = null;
     }
 
     @SuppressWarnings("unchecked")
     public Set<String> keySet() {
-        return myAttributes != null ? myAttributes.keySet() : Collections.EMPTY_SET;
+        return attributes != null ? attributes.keySet() : Collections.EMPTY_SET;
     }
 
     @SuppressWarnings("unchecked")
     public Collection<Attribute> values() {
-        return myAttributes != null ? myAttributes.values() : Collections.EMPTY_LIST;
+        return attributes != null ? attributes.values() : Collections.EMPTY_LIST;
     }
 
     @SuppressWarnings("unchecked")
     public Set<Map.Entry<String, Attribute>> entrySet() {
-        return myAttributes != null ? myAttributes.entrySet() : Collections.EMPTY_SET;
+        return attributes != null ? attributes.entrySet() : Collections.EMPTY_SET;
     }
 
     public void forEach(BiConsumer<String, Attribute> action) {
-        if (myAttributes != null) {
-            for (Map.Entry<String, Attribute> entry : myAttributes.entrySet()) {
+        if (attributes != null) {
+            for (Map.Entry<String, Attribute> entry : attributes.entrySet()) {
                 action.accept(entry.getKey(), entry.getValue());
             }
         }
     }
 
     public int size() {
-        return myAttributes == null ? 0 : myAttributes.size();
+        return attributes == null ? 0 : attributes.size();
     }
 
     public Attribute remove(CharSequence key) {
-        if (myAttributes == null || key == null || key.length() == 0) return null;
+        if (attributes == null || key == null || key.length() == 0) return null;
 
         String useKey = String.valueOf(key);
-        Attribute oldAttribute = myAttributes.get(useKey);
-        myAttributes.remove(useKey);
+        Attribute oldAttribute = attributes.get(useKey);
+        attributes.remove(useKey);
         return oldAttribute;
     }
 
     public void replaceValues(Attributes attributes) {
-        if (myAttributes == null) {
-            myAttributes = new LinkedHashMap<>(attributes.myAttributes);
+        if (this.attributes == null) {
+            this.attributes = new LinkedHashMap<>(attributes.attributes);
         } else {
-            myAttributes.putAll(attributes.myAttributes);
+            this.attributes.putAll(attributes.attributes);
         }
     }
 
@@ -181,7 +181,7 @@ public class Attributes {
         String sep = "";
         for (String attrName : keySet()) {
             sb.append(sep).append(attrName);
-            Attribute attribute = myAttributes.get(attrName);
+            Attribute attribute = attributes.get(attrName);
             if (!attribute.getValue().isEmpty()) sb.append("=").append("\"").append(attribute.getValue().replace("\"", "\\\"")).append("\"");
             sep = " ";
         }

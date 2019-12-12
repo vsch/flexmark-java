@@ -10,9 +10,9 @@ import org.jetbrains.annotations.Nullable;
  * A Builder for Segmented BasedSequences
  */
 public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedSequence> {
-    private final BasedSegmentBuilder mySegments;
-    private final @NotNull BasedSequence myBase;
-    private @Nullable BasedSequence myBasedSequence;
+    private final BasedSegmentBuilder segments;
+    private final @NotNull BasedSequence baseSeq;
+    private @Nullable BasedSequence resultSeq;
 
     /**
      * Construct a base sequence builder for given base sequence with default options.
@@ -26,12 +26,12 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      * @param optimizer optimizer for based segment builder, or default {@link CharRecoveryOptimizer}
      */
     private SequenceBuilder(@NotNull BasedSequence base, @Nullable SegmentOptimizer optimizer) {
-        myBase = base.getBaseSequence();
+        baseSeq = base.getBaseSequence();
         int options = PlainSegmentBuilder.F_DEFAULT;
         // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
-        if (!myBase.isOption(BasedSequence.O_FULL_SEGMENTED_SEQUENCES) || myBase.isOption(BasedSequence.O_COLLECT_FIRST256_STATS)) options |= PlainSegmentBuilder.F_TRACK_FIRST256;
-        if (myBase.isOption(BasedSequence.O_NO_ANCHORS)) options &= ~PlainSegmentBuilder.F_INCLUDE_ANCHORS;
-        mySegments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(myBase, options) : BasedSegmentBuilder.emptyBuilder(myBase, optimizer, options);
+        if (!baseSeq.anyOptions(BasedSequence.F_FULL_SEGMENTED_SEQUENCES) || baseSeq.anyOptions(BasedSequence.F_COLLECT_FIRST256_STATS)) options |= PlainSegmentBuilder.F_TRACK_FIRST256;
+        if (baseSeq.anyOptions(BasedSequence.F_NO_ANCHORS)) options &= ~PlainSegmentBuilder.F_INCLUDE_ANCHORS;
+        segments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(baseSeq, options) : BasedSegmentBuilder.emptyBuilder(baseSeq, optimizer, options);
     }
 
     /**
@@ -47,34 +47,34 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      * @param optimizer optimizer for based segment builder, or default {@link CharRecoveryOptimizer}
      */
     private SequenceBuilder(@NotNull BasedSequence base, int options, @Nullable SegmentOptimizer optimizer) {
-        myBase = base.getBaseSequence();
+        baseSeq = base.getBaseSequence();
         // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
-        if (!myBase.isOption(BasedSequence.O_FULL_SEGMENTED_SEQUENCES) || myBase.isOption(BasedSequence.O_COLLECT_FIRST256_STATS)) options |= PlainSegmentBuilder.F_TRACK_FIRST256;
-        if (myBase.isOption(BasedSequence.O_NO_ANCHORS)) options &= ~PlainSegmentBuilder.F_INCLUDE_ANCHORS;
-        mySegments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(myBase, options) : BasedSegmentBuilder.emptyBuilder(myBase, optimizer, options);
+        if (!baseSeq.anyOptions(BasedSequence.F_FULL_SEGMENTED_SEQUENCES) || baseSeq.anyOptions(BasedSequence.F_COLLECT_FIRST256_STATS)) options |= PlainSegmentBuilder.F_TRACK_FIRST256;
+        if (baseSeq.anyOptions(BasedSequence.F_NO_ANCHORS)) options &= ~PlainSegmentBuilder.F_INCLUDE_ANCHORS;
+        segments = optimizer == null ? BasedSegmentBuilder.emptyBuilder(baseSeq, options) : BasedSegmentBuilder.emptyBuilder(baseSeq, optimizer, options);
     }
 
     @NotNull
     public BasedSequence getBaseSequence() {
-        return myBase;
+        return baseSeq;
     }
 
     @NotNull
     public BasedSegmentBuilder getSegmentBuilder() {
-        return mySegments;
+        return segments;
     }
 
     @Nullable
     @Override
     public BasedSequence getSingleBasedSequence() {
-        Range range = mySegments.getBaseSubSequenceRange();
-        return range == null ? null : myBase.subSequence(range.getStart(), range.getEnd());
+        Range range = segments.getBaseSubSequenceRange();
+        return range == null ? null : baseSeq.subSequence(range.getStart(), range.getEnd());
     }
 
     @NotNull
     @Override
     public SequenceBuilder subContext() {
-        return new SequenceBuilder(myBase, mySegments.myOptions, mySegments.myOptimizer);
+        return new SequenceBuilder(baseSeq, segments.options, segments.optimizer);
     }
 
     @NotNull
@@ -89,14 +89,14 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     @NotNull
     @Override
     public SequenceBuilder add(@Nullable CharSequence chars) {
-        if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == myBase.getBase()) {
+        if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == baseSeq.getBase()) {
             if (((BasedSequence) chars).isNotNull()) {
-                ((BasedSequence) chars).addSegments(mySegments);
-                myBasedSequence = null;
+                ((BasedSequence) chars).addSegments(segments);
+                resultSeq = null;
             }
         } else if (chars != null && chars.length() > 0) {
-            mySegments.append(chars);
-            myBasedSequence = null;
+            segments.append(chars);
+            resultSeq = null;
         }
         return this;
     }
@@ -108,16 +108,16 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
 
     @NotNull
     public SequenceBuilder append(char c) {
-        mySegments.append(c);
-        myBasedSequence = null;
+        segments.append(c);
+        resultSeq = null;
         return this;
     }
 
     @NotNull
     public SequenceBuilder append(char c, int count) {
         if (count > 0) {
-            mySegments.append(c, count);
-            myBasedSequence = null;
+            segments.append(c, count);
+            resultSeq = null;
         }
         return this;
     }
@@ -134,56 +134,56 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
 
     @NotNull
     public SequenceBuilder addRange(@NotNull Range range) {
-        mySegments.append(range);
-        myBasedSequence = null;
+        segments.append(range);
+        resultSeq = null;
         return this;
     }
 
     @NotNull
     public SequenceBuilder addByOffsets(int startOffset, int endOffset) {
-        if (startOffset < 0 || startOffset > endOffset || endOffset > myBase.length()) {
-            throw new IllegalArgumentException("addByOffsets start/end must be a valid range in [0, " + myBase.length() + "], got: [" + startOffset + ", " + endOffset + "]");
+        if (startOffset < 0 || startOffset > endOffset || endOffset > baseSeq.length()) {
+            throw new IllegalArgumentException("addByOffsets start/end must be a valid range in [0, " + baseSeq.length() + "], got: [" + startOffset + ", " + endOffset + "]");
         }
-        mySegments.append(Range.of(startOffset, endOffset));
-        myBasedSequence = null;
+        segments.append(Range.of(startOffset, endOffset));
+        resultSeq = null;
         return this;
     }
 
     @NotNull
     public SequenceBuilder addByLength(int startOffset, int textLength) {
-        return add(myBase.subSequence(startOffset, startOffset + textLength));
+        return add(baseSeq.subSequence(startOffset, startOffset + textLength));
     }
 
     @NotNull
     @Override
     public BasedSequence toSequence() {
-        if (myBasedSequence == null) {
-            myBasedSequence = SegmentedSequence.create(this);
+        if (resultSeq == null) {
+            resultSeq = SegmentedSequence.create(this);
         }
-        return myBasedSequence;
+        return resultSeq;
     }
 
     @Override
     public int length() {
-        return mySegments.length();
+        return segments.length();
     }
 
     @Override
     public boolean isEmpty() {
-        return mySegments.length() == 0;
+        return segments.length() == 0;
     }
 
     @NotNull
     public String toStringWithRanges() {
-        return mySegments.toStringWithRangesVisibleWhitespace(myBase);
+        return segments.toStringWithRangesVisibleWhitespace(baseSeq);
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         BasedSequence last = null;
-        for (Object part : mySegments) {
+        for (Object part : segments) {
             if (part instanceof Range) {
-                BasedSequence s = myBase.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
+                BasedSequence s = baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
 
                 if (last != null && last.getEndOffset() < s.getStartOffset()
                         && (BasedSequence.WHITESPACE.indexOf(last.charAt(last.length() - 1)) == -1)
@@ -207,9 +207,9 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
 
     public String toStringNoAddedSpaces() {
         StringBuilder sb = new StringBuilder();
-        for (Object part : mySegments) {
+        for (Object part : segments) {
             if (part instanceof Range) {
-                sb.append(myBase.subSequence(((Range) part).getStart(), ((Range) part).getEnd()));
+                sb.append(baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd()));
             } else if (part instanceof CharSequence) {
                 sb.append(part);
             } else if (part != null) {

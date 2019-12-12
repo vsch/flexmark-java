@@ -106,7 +106,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
         int endOffset = builder.getEndOffset();
         boolean nonBaseChars = builder.getTextLength() > 0;
 
-        if (baseSeq.isOption(O_COLLECT_SEGMENTED_STATS)) {
+        if (baseSeq.anyOptions(F_COLLECT_SEGMENTED_STATS)) {
             SegmentedSequenceStats stats = baseSeq.getOption(SEGMENTED_STATS);
             if (stats != null) {
                 stats.addStats(builder.noAnchorsSize(), length, baseOffsets.length * 4);

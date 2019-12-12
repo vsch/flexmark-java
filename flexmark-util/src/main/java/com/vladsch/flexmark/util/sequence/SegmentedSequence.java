@@ -64,8 +64,18 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     }
 
     @Override
-    final public boolean isOption(int option) {
-        return getBaseSequence().isOption(option);
+    final public int getOptionFlags() {
+        return getBaseSequence().getOptionFlags();
+    }
+
+    @Override
+    final public boolean allOptions(int options) {
+        return getBaseSequence().allOptions(options);
+    }
+
+    @Override
+    final public boolean anyOptions(int options) {
+        return getBaseSequence().anyOptions(options);
     }
 
     @Override
@@ -126,9 +136,9 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
             return baseSubSequence;
         } else if (!builder.isEmpty()) {
             BasedSequence baseSequence = builder.getBaseSequence();
-            if (baseSequence.isOption(O_FULL_SEGMENTED_SEQUENCES)) {
+            if (baseSequence.anyOptions(F_FULL_SEGMENTED_SEQUENCES)) {
                 return SegmentedSequenceFull.create(baseSequence, builder.getSegmentBuilder());
-            } else if (baseSequence.isOption(O_TREE_SEGMENTED_SEQUENCES)) {
+            } else if (baseSequence.anyOptions(F_TREE_SEGMENTED_SEQUENCES)) {
                 return SegmentedSequenceTree.create(baseSequence, builder.getSegmentBuilder());
             } else {
                 // Can decide based on segments and length but tree based is not slower and much more efficient

@@ -9,20 +9,20 @@ import org.jetbrains.annotations.NotNull;
  * @param <A> node action
  */
 abstract public class AstHandler<N, A extends AstAction<? super N>> {
-    final private @NotNull Class<? extends N> myClass;
-    final private @NotNull A myAdapter;
+    final private @NotNull Class<? extends N> aClass;
+    final private @NotNull A adapter;
 
     public AstHandler(@NotNull Class<? extends N> klass, @NotNull A adapter) {
-        myClass = klass;
-        myAdapter = adapter;
+        aClass = klass;
+        this.adapter = adapter;
     }
 
     public @NotNull Class<? extends N> getNodeType() {
-        return myClass;
+        return aClass;
     }
 
     public @NotNull A getAdapter() {
-        return myAdapter;
+        return adapter;
     }
 
     @Override
@@ -32,14 +32,14 @@ abstract public class AstHandler<N, A extends AstAction<? super N>> {
 
         AstHandler<?, ?> other = (AstHandler<?, ?>) o;
 
-        if (myClass != other.myClass) return false;
-        return myAdapter == other.myAdapter;
+        if (aClass != other.aClass) return false;
+        return adapter == other.adapter;
     }
 
     @Override
     public int hashCode() {
-        int result = myClass.hashCode();
-        result = 31 * result + myAdapter.hashCode();
+        int result = aClass.hashCode();
+        result = 31 * result + adapter.hashCode();
         return result;
     }
 }

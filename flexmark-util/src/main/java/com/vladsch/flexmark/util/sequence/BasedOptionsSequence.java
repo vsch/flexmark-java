@@ -19,13 +19,23 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
 
     private BasedOptionsSequence(@NotNull CharSequence chars, int optionFlags, @Nullable DataHolder options) {
         this.chars = chars;
-        this.optionFlags = optionFlags & ~(options == null || SEGMENTED_STATS.get(options) == null ? O_COLLECT_SEGMENTED_STATS : 0);
+        this.optionFlags = optionFlags & ~(options == null || SEGMENTED_STATS.get(options) == null ? F_COLLECT_SEGMENTED_STATS : 0);
         this.options = options;
     }
 
     @Override
-    public boolean isOption(int option) {
-        return (optionFlags & option) != 0;
+    public int getOptionFlags() {
+        return optionFlags;
+    }
+
+    @Override
+    public boolean allOptions(int options) {
+        return (optionFlags & options) == options;
+    }
+
+    @Override
+    public boolean anyOptions(int options) {
+        return (optionFlags & options) != 0;
     }
 
     @Override

@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class ClassificationBag<K, V> {
-    private final @NotNull OrderedSet<V> myItems;
-    final @NotNull IndexedItemBitSetMap<K, V> myBag;
-    final @Nullable CollectionHost<V> myHost;
+    private final @NotNull OrderedSet<V> items;
+    final @NotNull IndexedItemBitSetMap<K, V> bag;
+    final @Nullable CollectionHost<V> host;
 
     public ClassificationBag(Function<V, K> mapper) {
         this(0, mapper);
@@ -29,31 +29,31 @@ public class ClassificationBag<K, V> {
     }
 
     public ClassificationBag(int capacity, @NotNull Function<V, K> mapper, @Nullable CollectionHost<V> host) {
-        this.myHost = host;
-        this.myItems = new OrderedSet<>(capacity, new CollectionHost<V>() {
+        this.host = host;
+        this.items = new OrderedSet<>(capacity, new CollectionHost<V>() {
             @Override
             public void adding(int index, @Nullable V v, @Nullable Object v2) {
-                if (myHost != null && !myHost.skipHostUpdate()) myHost.adding(index, v, v2);
-                myBag.addItem(v, index);
+                if (ClassificationBag.this.host != null && !ClassificationBag.this.host.skipHostUpdate()) ClassificationBag.this.host.adding(index, v, v2);
+                bag.addItem(v, index);
             }
 
             @Override
             public Object removing(int index, @Nullable V v) {
-                if (myHost != null && !myHost.skipHostUpdate()) myHost.removing(index, v);
-                myBag.removeItem(v, index);
+                if (ClassificationBag.this.host != null && !ClassificationBag.this.host.skipHostUpdate()) ClassificationBag.this.host.removing(index, v);
+                bag.removeItem(v, index);
                 return null;
             }
 
             @Override
             public void clearing() {
-                if (myHost != null && !myHost.skipHostUpdate()) myHost.clearing();
-                myBag.clear();
+                if (ClassificationBag.this.host != null && !ClassificationBag.this.host.skipHostUpdate()) ClassificationBag.this.host.clearing();
+                bag.clear();
             }
 
             @Override
             public void addingNulls(int index) {
                 // nothing to be done, we're good
-                if (myHost != null && !myHost.skipHostUpdate()) myHost.addingNulls(index);
+                if (ClassificationBag.this.host != null && !ClassificationBag.this.host.skipHostUpdate()) ClassificationBag.this.host.addingNulls(index);
             }
 
             @Override
@@ -67,82 +67,82 @@ public class ClassificationBag<K, V> {
             }
         });
 
-        this.myBag = new IndexedItemBitSetMap<>(mapper);
+        this.bag = new IndexedItemBitSetMap<>(mapper);
     }
 
     @NotNull
     public OrderedSet<V> getItems() {
-        return myItems;
+        return items;
     }
 
     @SuppressWarnings("WeakerAccess")
     public int getModificationCount() {
-        return myItems.getModificationCount();
+        return items.getModificationCount();
     }
 
     public boolean add(@Nullable V item) {
-        return myItems.add(item);
+        return items.add(item);
     }
 
     public boolean remove(@Nullable V item) {
-        return myItems.remove(item);
+        return items.remove(item);
     }
 
     public boolean remove(int index) {
-        return myItems.removeIndex(index);
+        return items.removeIndex(index);
     }
 
     public boolean contains(@Nullable V item) {
-        return myItems.contains(item);
+        return items.contains(item);
     }
 
     public boolean containsCategory(@Nullable K category) {
-        BitSet bitSet = myBag.get(category);
+        BitSet bitSet = bag.get(category);
         return bitSet != null && !bitSet.isEmpty();
     }
 
     public @Nullable BitSet getCategorySet(@Nullable K category) {
-        return myBag.get(category);
+        return bag.get(category);
     }
 
     @SuppressWarnings("WeakerAccess")
     public int getCategoryCount(@Nullable K category) {
-        BitSet bitSet = myBag.get(category);
+        BitSet bitSet = bag.get(category);
         return bitSet == null ? 0 : bitSet.cardinality();
     }
 
     public @NotNull Map<K, BitSet> getCategoryMap() {
-        return myBag;
+        return bag;
     }
 
     public void clear() {
-        myItems.clear();
+        items.clear();
     }
 
     @SafeVarargs
     public final <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull Class<? extends X> xClass, @NotNull K... categories) {
-        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
+        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
     }
 
     public final <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull Class<? extends X> xClass, @NotNull Collection<? extends K> categories) {
-        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
+        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
     }
 
     public final <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull Class<? extends X> xClass, @NotNull BitSet bitSet) {
-        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, false));
+        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, false));
     }
 
     @SafeVarargs
     public final <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(@NotNull Class<? extends X> xClass, @NotNull K... categories) {
-        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
+        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
     }
 
     public final <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(@NotNull Class<? extends X> xClass, @NotNull Collection<? extends K> categories) {
-        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
+        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
     }
 
     public final <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(@NotNull Class<? extends X> xClass, @NotNull BitSet bitSet) {
-        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, true));
+        return new IndexedIterable<X, V, ReversibleIterable<Integer>>(items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, true));
     }
 
     @SafeVarargs
@@ -150,7 +150,7 @@ public class ClassificationBag<K, V> {
     public final @NotNull BitSet categoriesBitSet(@NotNull K... categories) {
         BitSet bitSet = new BitSet();
         for (K category : categories) {
-            BitSet bitSet1 = myBag.get(category);
+            BitSet bitSet1 = bag.get(category);
             if (bitSet1 != null) {
                 bitSet.or(bitSet1);
             }
@@ -161,7 +161,7 @@ public class ClassificationBag<K, V> {
     public final @NotNull BitSet categoriesBitSet(@NotNull Collection<? extends K> categories) {
         BitSet bitSet = new BitSet();
         for (K category : categories) {
-            BitSet bitSet1 = myBag.get(category);
+            BitSet bitSet1 = bag.get(category);
             if (bitSet1 != null) {
                 bitSet.or(bitSet1);
             }

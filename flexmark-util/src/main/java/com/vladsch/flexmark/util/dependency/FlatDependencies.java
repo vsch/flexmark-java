@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlatDependencies<T> extends ResolvedDependencies<FlatDependencyStage<T>> {
-    ArrayList<T> myLinkResolverFactories;
+    ArrayList<T> linkResolverFactories;
 
     public FlatDependencies(List<FlatDependencyStage<T>> dependentStages) {
         super(dependentStages);
@@ -13,6 +13,6 @@ public class FlatDependencies<T> extends ResolvedDependencies<FlatDependencyStag
             list.addAll(stage.getDependents());
         }
 
-        myLinkResolverFactories = list;
+        linkResolverFactories = list;
     }
 }

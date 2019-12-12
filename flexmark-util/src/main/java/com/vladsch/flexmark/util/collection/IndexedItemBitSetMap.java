@@ -6,7 +6,7 @@ import java.util.BitSet;
 import java.util.function.Function;
 
 public class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet, M> {
-    private final @NotNull Function<M, K> myComputable;
+    private final @NotNull Function<M, K> computable;
 
     public IndexedItemBitSetMap(@NotNull Function<M, K> computable) {
         this(computable, 0);
@@ -14,16 +14,16 @@ public class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet,
 
     public IndexedItemBitSetMap(@NotNull Function<M, K> computable, int capacity) {
         super(capacity);
-        this.myComputable = computable;
+        this.computable = computable;
     }
 
     public @NotNull Function<M, K> getComputable() {
-        return myComputable;
+        return computable;
     }
 
     @Override
     public @NotNull K mapKey(@NotNull M key) {
-        return myComputable.apply(key);
+        return computable.apply(key);
     }
 
     @Override

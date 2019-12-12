@@ -9,10 +9,10 @@ import org.jetbrains.annotations.NotNull;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
 
 public class CharRecoveryOptimizer implements SegmentOptimizer {
-    private final PositionAnchor myAnchor;
+    private final PositionAnchor anchor;
 
     public CharRecoveryOptimizer(PositionAnchor anchor) {
-        this.myAnchor = anchor;
+        this.anchor = anchor;
     }
 
     private int prevEolPos;
@@ -146,7 +146,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
             assert matchedNext > 0 && matchedPrev > 0 : "prevRange: " + originalPrev + ", '"+ Utils.escapeJavaString(text)+"', nextRange: " + originalNext;
 
             // the two positions may not overlap but the matches together may exceed the span between ranges
-            switch (myAnchor) {
+            switch (anchor) {
                 case PREVIOUS:
                     // give it all to next
                     int prevDelta = Math.min(matchedPrev, excess);

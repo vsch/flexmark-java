@@ -7,10 +7,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class ParsedOption<T> {
-    protected final BasedSequence mySource;
-    protected final OptionParser<T> myOptionParser;
-    protected final ParsedOptionStatus myOptionResult;
-    protected final List<ParserMessage> myMessages;
+    protected final BasedSequence source;
+    protected final OptionParser<T> optionParser;
+    protected final ParsedOptionStatus optionResult;
+    protected final List<ParserMessage> messages;
 
     public ParsedOption(BasedSequence source, OptionParser<T> optionParser, ParsedOptionStatus optionResult) {
         this(source, optionParser, optionResult, (List<ParserMessage>) null);
@@ -25,7 +25,7 @@ public class ParsedOption<T> {
     }
 
     public ParsedOption(BasedSequence source, OptionParser<T> optionParser, ParsedOptionStatus optionResult, List<ParserMessage> messages, List<ParsedOption<T>> parsedOptions) {
-        mySource = source;
+        this.source = source;
 
         if (parsedOptions != null) {
             ArrayList<ParserMessage> mergedMessages = messages != null ? new ArrayList<>(messages) : null;
@@ -40,24 +40,24 @@ public class ParsedOption<T> {
             messages = mergedMessages;
         }
 
-        myOptionParser = optionParser;
-        myOptionResult = optionResult;
-        myMessages = messages;
+        this.optionParser = optionParser;
+        this.optionResult = optionResult;
+        this.messages = messages;
     }
 
     public BasedSequence getSource() {
-        return mySource;
+        return source;
     }
 
     public OptionParser<T> getOptionParser() {
-        return myOptionParser;
+        return optionParser;
     }
 
     public ParsedOptionStatus getOptionResult() {
-        return myOptionResult;
+        return optionResult;
     }
 
     public List<ParserMessage> getMessages() {
-        return myMessages;
+        return messages;
     }
 }

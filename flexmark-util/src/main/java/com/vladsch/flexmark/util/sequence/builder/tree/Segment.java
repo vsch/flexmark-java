@@ -108,45 +108,45 @@ public abstract class Segment {
         return (flags & mask) == mask;
     }
 
-    protected final int myPos;  // position of segment in aggr length table
-    protected final byte[] myBytes;
-    protected final int myByteOffset;
-    protected final int myStartIndex;
+    protected final int pos;  // position of segment in aggr length table
+    protected final byte[] bytes;
+    protected final int byteOffset;
+    protected final int startIndex;
 
     public Segment(int pos, byte[] bytes, int byteOffset, int startIndex) {
-        myPos = pos;
-        myBytes = bytes;
-        myByteOffset = byteOffset;
-        myStartIndex = startIndex;
+        this.pos = pos;
+        this.bytes = bytes;
+        this.byteOffset = byteOffset;
+        this.startIndex = startIndex;
     }
 
     public int getPos() {
-        return myPos;
+        return pos;
     }
 
     public byte[] getBytes() {
-        return myBytes;
+        return bytes;
     }
 
     final public int getByteOffset() {
-        return myByteOffset;
+        return byteOffset;
     }
 
     final public int getStartIndex() {
-        return myStartIndex;
+        return startIndex;
     }
 
     final public int getEndIndex() {
-        return myStartIndex + length();
+        return startIndex + length();
     }
 
     public boolean notInSegment(int index) {
-        return index < myStartIndex || index >= myStartIndex + length();
+        return index < startIndex || index >= startIndex + length();
     }
 
 
     final public SegType getType() {
-        return SegType.fromTypeMask(myBytes[myByteOffset]);
+        return SegType.fromTypeMask(bytes[byteOffset]);
     }
 
     final public int getByteLength() {
@@ -199,38 +199,38 @@ public abstract class Segment {
     }
 
     static class Base extends Segment {
-        protected final int myStartOffset;
-        protected final int myEndOffset;
-        protected final @NotNull BasedSequence myBasedSequence;
+        protected final int startOffset;
+        protected final int endOffset;
+        protected final @NotNull BasedSequence baseSeq;
 
         public Base(int pos, byte[] bytes, int byteOffset, int indexOffset, @NotNull BasedSequence basedSequence) {
             super(pos, bytes, byteOffset, indexOffset);
 
-            myBasedSequence = basedSequence;
+            baseSeq = basedSequence;
 
             int type = bytes[byteOffset++] & 0x00ff;
             if ((type & TYPE_MASK) == TYPE_ANCHOR) {
                 if (hasAll(type, TYPE_NO_SIZE_BYTES)) {
-                    myEndOffset = myStartOffset = type & 0x000f;
+                    endOffset = startOffset = type & 0x000f;
                 } else {
                     int intBytes = type & TYPE_START_BYTES;
-                    myEndOffset = myStartOffset = getInt(bytes, byteOffset, intBytes + 1);
+                    endOffset = startOffset = getInt(bytes, byteOffset, intBytes + 1);
                 }
             } else {
                 assert !hasAll(type, TYPE_NO_SIZE_BYTES);
 
                 int intBytes = type & TYPE_START_BYTES;
-                myStartOffset = getInt(bytes, byteOffset, intBytes + 1);
+                startOffset = getInt(bytes, byteOffset, intBytes + 1);
                 byteOffset += intBytes + 1;
 
                 int lengthBytes = (type & TYPE_LENGTH_BYTES) >> 2;
-                myEndOffset = myStartOffset + getInt(bytes, byteOffset, lengthBytes + 1);
+                endOffset = startOffset + getInt(bytes, byteOffset, lengthBytes + 1);
             }
         }
 
         @Override
         public int length() {
-            return myEndOffset - myStartOffset;
+            return endOffset - startOffset;
         }
 
         @Override
@@ -240,7 +240,7 @@ public abstract class Segment {
 
         @Override
         public boolean isAnchor() {
-            return myStartOffset == myEndOffset;
+            return startOffset == endOffset;
         }
 
         @Override
@@ -260,44 +260,44 @@ public abstract class Segment {
 
         @Override
         public int getStartOffset() {
-            return myStartOffset;
+            return startOffset;
         }
 
         @Override
         public int getEndOffset() {
-            return myEndOffset;
+            return endOffset;
         }
 
         @Override
         public char charAt(int index) {
-            if (index < myStartIndex || index - myStartIndex >= length()) {
-                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + myStartIndex + ", " + myStartIndex +  length() + ")");
+            if (index < startIndex || index - startIndex >= length()) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + startIndex + ", " + startIndex +  length() + ")");
             }
-            return myBasedSequence.charAt(myStartOffset + index - myStartIndex);
+            return baseSeq.charAt(startOffset + index - startIndex);
         }
 
         @Override
         public CharSequence getCharSequence() {
-            return myBasedSequence.subSequence(myStartOffset, myEndOffset);
+            return baseSeq.subSequence(startOffset, endOffset);
         }
     }
 
     static abstract class TextCharSequenceBase implements CharSequence {
-        protected final byte[] myBytes;
-        protected final int myByteOffset;  // byte offset of first byte of chars for original base sequence
-        protected final int myStartOffset;
-        protected final int myLength;
+        protected final byte[] bytes;
+        protected final int byteOffset;  // byte offset of first byte of chars for original base sequence
+        protected final int startOffset;
+        protected final int length;
 
         public TextCharSequenceBase(byte[] bytes, int byteOffset, int startOffset, int length) {
-            myBytes = bytes;
-            myByteOffset = byteOffset;
-            myStartOffset = startOffset;
-            myLength = length;
+            this.bytes = bytes;
+            this.byteOffset = byteOffset;
+            this.startOffset = startOffset;
+            this.length = length;
         }
 
         @Override
         public int length() {
-            return myLength;
+            return length;
         }
 
         @Override
@@ -307,17 +307,17 @@ public abstract class Segment {
 
         @Override
         public CharSequence subSequence(int startIndex, int endIndex) {
-            if (startIndex < 0 || startIndex > endIndex || endIndex > myLength) {
+            if (startIndex < 0 || startIndex > endIndex || endIndex > length) {
                 throw new IndexOutOfBoundsException("Invalid index range [" + startIndex + ", " + endIndex + "] out of bounds [0, " + length() + ")");
             }
-            return create(myStartOffset + startIndex, endIndex - startIndex);
+            return create(startOffset + startIndex, endIndex - startIndex);
         }
 
         @NotNull
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < myLength; i++) {
+            for (int i = 0; i < length; i++) {
                 sb.append(charAt(i));
             }
             return sb.toString();
@@ -331,15 +331,15 @@ public abstract class Segment {
 
         @Override
         public char charAt(int index) {
-            if (index < 0 || index >= myLength) {
-                throw new IndexOutOfBoundsException("index " + index + " out of bounds [0, " + myLength + ")");
+            if (index < 0 || index >= length) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [0, " + length + ")");
             }
-            return getChar(myBytes, myByteOffset + (myStartOffset + index) * 2);
+            return getChar(bytes, byteOffset + (startOffset + index) * 2);
         }
 
         @Override
         CharSequence create(int startOffset, int length) {
-            return new TextCharSequence(myBytes, myByteOffset, startOffset, length);
+            return new TextCharSequence(bytes, byteOffset, startOffset, length);
         }
     }
 
@@ -350,62 +350,62 @@ public abstract class Segment {
 
         @Override
         public char charAt(int index) {
-            if (index < 0 || index >= myLength) {
-                throw new IndexOutOfBoundsException("index " + index + " out of bounds [0, " + myLength + ")");
+            if (index < 0 || index >= length) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [0, " + length + ")");
             }
 
-            return (char) (0x00ff & myBytes[myByteOffset + myStartOffset + index]);
+            return (char) (0x00ff & bytes[byteOffset + startOffset + index]);
         }
 
         @Override
         CharSequence create(int startOffset, int length) {
-            return new TextAsciiCharSequence(myBytes, myByteOffset, startOffset, length);
+            return new TextAsciiCharSequence(bytes, byteOffset, startOffset, length);
         }
     }
 
     static class TextRepeatedSequence implements CharSequence {
-        protected final char myChar;
-        protected final int myLength;
+        protected final char c;
+        protected final int length;
 
         public TextRepeatedSequence(char c, int length) {
-            myChar = c;
-            myLength = length;
+            this.c = c;
+            this.length = length;
         }
 
         @Override
         public int length() {
-            return myLength;
+            return length;
         }
 
         @Override
         public char charAt(int index) {
-            if (index < 0 || index >= myLength) {
-                throw new IndexOutOfBoundsException("index " + index + " out of bounds [0, " + myLength + ")");
+            if (index < 0 || index >= length) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [0, " + length + ")");
             }
-            return myChar;
+            return c;
         }
 
         @Override
         public CharSequence subSequence(int startIndex, int endIndex) {
-            if (startIndex < 0 || startIndex > endIndex || endIndex > myLength) {
+            if (startIndex < 0 || startIndex > endIndex || endIndex > length) {
                 throw new IndexOutOfBoundsException("Invalid index range [" + startIndex + ", " + endIndex + "] out of bounds [0, " + length() + ")");
             }
-            return new TextRepeatedSequence(myChar, endIndex - startIndex);
+            return new TextRepeatedSequence(c, endIndex - startIndex);
         }
 
         @NotNull
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < myLength; i++) {
-                sb.append(myChar);
+            for (int i = 0; i < length; i++) {
+                sb.append(c);
             }
             return sb.toString();
         }
     }
 
     static class Text extends Segment {
-        protected final @NotNull CharSequence myCharSequence;
+        protected final @NotNull CharSequence chars;
 
         public Text(int pos, byte[] bytes, int byteOffset, int indexOffset) {
             super(pos, bytes, byteOffset, indexOffset);
@@ -424,27 +424,27 @@ public abstract class Segment {
 
             switch (segTypeMask) {
                 case TYPE_TEXT:
-                    myCharSequence = new TextCharSequence(bytes, byteOffset, 0, length);
+                    chars = new TextCharSequence(bytes, byteOffset, 0, length);
                     break;
 
                 case TYPE_TEXT_ASCII:
-                    myCharSequence = new TextAsciiCharSequence(bytes, byteOffset, 0, length);
+                    chars = new TextAsciiCharSequence(bytes, byteOffset, 0, length);
                     break;
 
                 case TYPE_REPEATED_TEXT:
-                    myCharSequence = new TextRepeatedSequence(getChar(bytes, byteOffset), length);
+                    chars = new TextRepeatedSequence(getChar(bytes, byteOffset), length);
                     break;
 
                 case TYPE_REPEATED_ASCII:
-                    myCharSequence = new TextRepeatedSequence((char) (0x00ff & bytes[byteOffset]), length);
+                    chars = new TextRepeatedSequence((char) (0x00ff & bytes[byteOffset]), length);
                     break;
 
                 case TYPE_REPEATED_SPACE:
-                    myCharSequence = new TextRepeatedSequence(' ', length);
+                    chars = new TextRepeatedSequence(' ', length);
                     break;
 
                 case TYPE_REPEATED_EOL:
-                    myCharSequence = new TextRepeatedSequence('\n', length);
+                    chars = new TextRepeatedSequence('\n', length);
                     break;
 
                 default:
@@ -454,15 +454,15 @@ public abstract class Segment {
 
         @Override
         public int length() {
-            return myCharSequence.length();
+            return chars.length();
         }
 
         @Override
         public char charAt(int index) {
-            if (index < myStartIndex || index - myStartIndex >= myCharSequence.length()) {
-                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + myStartIndex + ", " + myStartIndex + myCharSequence.length() + ")");
+            if (index < startIndex || index - startIndex >= chars.length()) {
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + startIndex + ", " + startIndex + chars.length() + ")");
             }
-            return myCharSequence.charAt(index - myStartIndex);
+            return chars.charAt(index - startIndex);
         }
 
         @Override
@@ -481,7 +481,7 @@ public abstract class Segment {
         }
 
         int textType() {
-            return myBytes[myByteOffset] & TYPE_MASK;
+            return bytes[byteOffset] & TYPE_MASK;
         }
 
         @Override
@@ -509,7 +509,7 @@ public abstract class Segment {
         @NotNull
         @Override
         public CharSequence getCharSequence() {
-            return myCharSequence;
+            return chars;
         }
     }
 

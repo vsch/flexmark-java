@@ -6,39 +6,39 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Function;
 
 public class CopyOnWriteRef<T> {
-    private @Nullable T myValue;
-    private int myReferenceCount;
-    private @NotNull Function<T, T> myCloner;
+    private @Nullable T value;
+    private int referenceCount;
+    final private @NotNull Function<T, T> copyFunction;
 
-    public CopyOnWriteRef(@Nullable T value, @NotNull Function<T, T> cloner) {
-        myValue = value;
-        myReferenceCount = 0;
-        myCloner = cloner;
+    public CopyOnWriteRef(@Nullable T value, @NotNull Function<T, T> copyFunction) {
+        this.value = value;
+        referenceCount = 0;
+        this.copyFunction = copyFunction;
     }
 
     public @Nullable T getPeek() {
-        return myValue;
+        return value;
     }
 
     public @Nullable T getImmutable() {
-        if (myValue != null) myReferenceCount++;
-        return myValue;
+        if (value != null) referenceCount++;
+        return value;
     }
 
     public @Nullable T getMutable() {
-        if (myReferenceCount > 0) {
-            myValue = myCloner.apply(myValue);
-            myReferenceCount = 0;
+        if (referenceCount > 0) {
+            value = copyFunction.apply(value);
+            referenceCount = 0;
         }
-        return myValue;
+        return value;
     }
 
     public void setValue(@Nullable T value) {
-        myReferenceCount = 0;
-        myValue = myCloner.apply(value);
+        referenceCount = 0;
+        this.value = copyFunction.apply(value);
     }
 
     public boolean isMutable() {
-        return myReferenceCount == 0;
+        return referenceCount == 0;
     }
 }

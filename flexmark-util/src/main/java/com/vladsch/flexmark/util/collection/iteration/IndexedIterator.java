@@ -7,60 +7,60 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
 public class IndexedIterator<R, S, I extends ReversibleIterator<Integer>> implements ReversibleIndexedIterator<R> {
-    private final I myIterator;
-    private final Indexed<S> myItems;
-    private int myLastIndex;
-    private int myModificationCount;
+    private final I iterator;
+    private final Indexed<S> items;
+    private int lastIndex;
+    private int modificationCount;
 
     public IndexedIterator(@NotNull Indexed<S> items, @NotNull I iterator) {
-        this.myItems = items;
-        this.myIterator = iterator;
-        this.myLastIndex = -1;
-        this.myModificationCount = items.modificationCount();
+        this.items = items;
+        this.iterator = iterator;
+        this.lastIndex = -1;
+        this.modificationCount = items.modificationCount();
     }
 
     @Override
     public boolean isReversed() {
-        return myIterator.isReversed();
+        return iterator.isReversed();
     }
 
     @Override
     public boolean hasNext() {
-        return myIterator.hasNext();
+        return iterator.hasNext();
     }
 
     @Override
     public @NotNull R next() {
-        if (myModificationCount != myItems.modificationCount()) {
+        if (modificationCount != items.modificationCount()) {
             throw new ConcurrentModificationException();
         }
 
-        myLastIndex = myIterator.next();
+        lastIndex = iterator.next();
         //noinspection unchecked
-        return (R) myItems.get(myLastIndex);
+        return (R) items.get(lastIndex);
     }
 
     @Override
     public void remove() {
-        if (myLastIndex == -1) {
+        if (lastIndex == -1) {
             throw new NoSuchElementException();
         }
 
-        if (myModificationCount != myItems.modificationCount()) {
+        if (modificationCount != items.modificationCount()) {
             throw new ConcurrentModificationException();
         }
 
-        myItems.removeAt(myLastIndex);
-        myLastIndex = -1;
-        myModificationCount = myItems.modificationCount();
+        items.removeAt(lastIndex);
+        lastIndex = -1;
+        modificationCount = items.modificationCount();
     }
 
     @Override
     public int getIndex() {
-        if (myLastIndex < 0) {
+        if (lastIndex < 0) {
             throw new NoSuchElementException();
         }
-        return myLastIndex;
+        return lastIndex;
     }
 
     public void forEachRemaining(@NotNull Consumer<? super R> consumer) {

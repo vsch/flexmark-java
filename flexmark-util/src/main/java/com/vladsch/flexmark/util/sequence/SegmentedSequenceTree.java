@@ -15,73 +15,73 @@ import org.jetbrains.annotations.Nullable;
  * use SegmentedSequenceTree which is binary tree based segmented sequence with minimal overhead and optimized to give penalty free random access for most applications.
  */
 public final class SegmentedSequenceTree extends SegmentedSequence {
-    final private SegmentTree mySegmentTree;   // segment tree
-    final private int myStartIndex;               // start index of this sub-sequence in the segment tree, 0 for original
-    final private int myStartPos;                 // start position for segments of this sequence in the tree
-    final private int myEndPos;                   // end position for segments of this sequence in the tree
-    final private ThreadLocal<Cache> myCache = new ThreadLocal<>();
+    final private SegmentTree segmentTree;   // segment tree
+    final private int startIndex;               // start index of this sub-sequence in the segment tree, 0 for original
+    final private int startPos;                 // start position for segments of this sequence in the tree
+    final private int endPos;                   // end position for segments of this sequence in the tree
+    final private ThreadLocal<Cache> cache = new ThreadLocal<>();
 
     private static class Cache {
-        final @NotNull Segment mySegment;
-        final @NotNull CharSequence myChars;
-        final int myIndexDelta;
+        final @NotNull Segment segment;
+        final @NotNull CharSequence chars;
+        final int indexDelta;
 
         public Cache(@NotNull Segment segment, @NotNull CharSequence chars, int startIndex) {
-            mySegment = segment;
-            myChars = chars;
-            myIndexDelta = startIndex - segment.getStartIndex();
+            this.segment = segment;
+            this.chars = chars;
+            indexDelta = startIndex - segment.getStartIndex();
         }
 
         public char charAt(int index) {
-            return myChars.charAt(index + myIndexDelta);
+            return chars.charAt(index + indexDelta);
         }
 
         public int charIndex(int index) {
-            return index + myIndexDelta;
+            return index + indexDelta;
         }
     }
 
     private SegmentedSequenceTree(BasedSequence baseSeq, int startOffset, int endOffset, int length, @NotNull SegmentTree segmentTree) {
         super(baseSeq, startOffset, endOffset, length);
-        mySegmentTree = segmentTree;
-        myStartIndex = 0;
-        myStartPos = 0;
-        myEndPos = segmentTree.size();
+        this.segmentTree = segmentTree;
+        startIndex = 0;
+        startPos = 0;
+        endPos = segmentTree.size();
     }
 
     private SegmentedSequenceTree(BasedSequence baseSeq, @NotNull SegmentTree segmentTree, @NotNull SegmentTreeRange subSequenceRange) {
         super(baseSeq, subSequenceRange.startOffset, subSequenceRange.endOffset, subSequenceRange.length);
-        mySegmentTree = segmentTree;
-        myStartIndex = subSequenceRange.startIndex;
-        myStartPos = subSequenceRange.startPos;
-        myEndPos = subSequenceRange.endPos;
+        this.segmentTree = segmentTree;
+        startIndex = subSequenceRange.startIndex;
+        startPos = subSequenceRange.startPos;
+        endPos = subSequenceRange.endPos;
     }
 
     @NotNull
     private Cache getCache(int index) {
-        Cache cache = myCache.get();
+        Cache cache = this.cache.get();
 
-        if (cache == null || cache.mySegment.notInSegment(index + myStartIndex)) {
-            Segment segment = mySegmentTree.findSegment(index + myStartIndex, myStartPos, myEndPos, baseSeq, cache == null ? null : cache.mySegment);
+        if (cache == null || cache.segment.notInSegment(index + startIndex)) {
+            Segment segment = segmentTree.findSegment(index + startIndex, startPos, endPos, baseSeq, cache == null ? null : cache.segment);
             assert segment != null;
 
-            cache = new Cache(segment, segment.getCharSequence(), myStartIndex);
-            myCache.set(cache);
+            cache = new Cache(segment, segment.getCharSequence(), startIndex);
+            this.cache.set(cache);
         }
         return cache;
     }
 
     @Nullable
     private Segment getCachedSegment() {
-        Cache cache = myCache.get();
-        return cache == null ? null : cache.mySegment;
+        Cache cache = this.cache.get();
+        return cache == null ? null : cache.segment;
     }
 
     @Override
     public int getIndexOffset(int index) {
         if (index == length) {
             Cache cache = getCache(index - 1);
-            CharSequence charSequence = cache.myChars;
+            CharSequence charSequence = cache.chars;
             if (charSequence instanceof BasedSequence) {
                 return ((BasedSequence) charSequence).getIndexOffset(cache.charIndex(index));
             } else {
@@ -91,7 +91,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
             SequenceUtils.validateIndexInclusiveEnd(index, length());
 
             Cache cache = getCache(index);
-            CharSequence charSequence = cache.myChars;
+            CharSequence charSequence = cache.chars;
             if (charSequence instanceof BasedSequence) {
                 return ((BasedSequence) charSequence).getIndexOffset(cache.charIndex(index));
             } else {
@@ -102,7 +102,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
 
     @Override
     public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
-        mySegmentTree.addSegments(builder, myStartIndex, myStartIndex + length, startOffset, endOffset, myStartPos, myEndPos);
+        segmentTree.addSegments(builder, startIndex, startIndex + length, startOffset, endOffset, startPos, endPos);
     }
 
     @Override
@@ -118,8 +118,8 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
             return this;
         } else {
             SequenceUtils.validateStartEnd(startIndex, endIndex, length());
-            SegmentTreeRange subSequenceRange = mySegmentTree.getSegmentRange(startIndex + myStartIndex, endIndex + myStartIndex, myStartPos, myEndPos, baseSeq, getCachedSegment());
-            return new SegmentedSequenceTree(baseSeq, mySegmentTree, subSequenceRange);
+            SegmentTreeRange subSequenceRange = segmentTree.getSegmentRange(startIndex + this.startIndex, endIndex + this.startIndex, startPos, endPos, baseSeq, getCachedSegment());
+            return new SegmentedSequenceTree(baseSeq, segmentTree, subSequenceRange);
         }
     }
 
@@ -131,7 +131,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
     public static SegmentedSequenceTree create(@NotNull BasedSequence baseSeq, ISegmentBuilder<?> builder) {
         SegmentTree segmentTree = SegmentTree.build(builder.getSegments(), builder.getText());
 
-        if (baseSeq.isOption(O_COLLECT_SEGMENTED_STATS)) {
+        if (baseSeq.anyOptions(F_COLLECT_SEGMENTED_STATS)) {
             SegmentedSequenceStats stats = baseSeq.getOption(SEGMENTED_STATS);
             if (stats != null) {
                 stats.addStats(builder.noAnchorsSize(), builder.length(), segmentTree.getTreeData().length * 4 + segmentTree.getSegmentBytes().length);

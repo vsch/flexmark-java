@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.EnumSetUtils;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.collection.BitEnumSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
@@ -19,141 +19,142 @@ import static com.vladsch.flexmark.util.Utils.*;
 public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     final private static char EOL = '\n';
 
-    final private boolean myPassThrough;
-    private int myOptions;
+    final private boolean passThrough;
+    final private BitEnumSet<Options> options;
 
     // pre-formatted nesting level, while >0 all text is passed through as is and not monitored
-    private int myPreFormattedNesting;
-    private int myPreFormattedFirstLine;        // line which should be prefixed
-    private int myPreFormattedFirstLineOffset;  // first line start of preformatted offset
-    private int myPreFormattedLastLine;         // last line of preformatted text
-    private int myPreFormattedLastLineOffset;   // first line end of preformatted offset
+    private int preFormattedNesting;
+    private int preFormattedFirstLine;        // line which should be prefixed
+    private int preFormattedFirstLineOffset;  // first line start of preformatted offset
+    private int preFormattedLastLine;         // last line of preformatted text
+    private int preFormattedLastLineOffset;   // first line end of preformatted offset
 
     // accumulated text and line information
-    final private StringBuilder myAppendable;
-    final private ArrayList<BasedSequence> myLines;     // line contents
-    final private ArrayList<BasedSequence> myPrefixes;  // line prefixes
-    private int myTextLength;                           // accumulated length of all offsets
-    private int myPrefixLength;                         // accumulated length of all prefixes
+    final private StringBuilder appendable;
+    final private ArrayList<BasedSequence> lines;     // line contents
+    final private ArrayList<BasedSequence> prefixes;  // line prefixes
+    private int textLength;                           // accumulated length of all offsets
+    private int prefixLength;                         // accumulated length of all prefixes
 
     // indent level to use after the next \n and before text is appended
-    private BasedSequence myPrefix;
-    private BasedSequence myPrefixAfterEol;
-    private BasedSequence myIndentPrefix;
-    final private Stack<BasedSequence> myPrefixStack;
-    final private Stack<Boolean> myIndentPrefixStack;
-    final private SequenceBuilder myBuilder;
+    private BasedSequence prefix;
+    private BasedSequence prefixAfterEol;
+    private BasedSequence indentPrefix;
+    final private Stack<BasedSequence> prefixStack;
+    final private Stack<Boolean> indentPrefixStack;
+    final private SequenceBuilder builder;
 
     // current line being accumulated
-    private int myLineStart;            // start of line
-    private boolean myAllWhitespace;    // all chars were whitespace
-    private boolean myWasWhitespace;    // last char was whitespace
-    private int myLineOnFirstText;      // issue EOL on first text
-    final private ArrayList<Runnable> myIndentsOnFirstEol;    // issue indents on first eol
+    private int lineStart;            // start of line
+    private boolean allWhitespace;    // all chars were whitespace
+    private boolean wasWhitespace;    // last char was whitespace
+    private int lineOnFirstText;      // issue EOL on first text
+    final private ArrayList<Runnable> indentsOnFirstEol;    // issue indents on first eol
 
-    public LineFormattingAppendableImpl(Option... formatOptions) {
-        this(null, EnumSetUtils.toInt(EnumSetUtils.toEnumSet(Option.class, formatOptions)));
+    public LineFormattingAppendableImpl(Options... formatOptions) {
+        this(null, LineFormattingAppendable.toOptionSet(formatOptions));
     }
 
-    public LineFormattingAppendableImpl(EnumSet<Option> formatOptions) {
-        this(null, EnumSetUtils.toInt(formatOptions));
-    }
-
-    public LineFormattingAppendableImpl(int formatOptions) {
+    public LineFormattingAppendableImpl(BitEnumSet<Options> formatOptions) {
         this(null, formatOptions);
     }
 
-    public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, EnumSet<Option> formatOptions) {
-        this(builder, EnumSetUtils.toInt(formatOptions));
-    }
-
-    public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, Option... formatOptions) {
-        this(builder, EnumSetUtils.toInt(EnumSetUtils.toEnumSet(Option.class, formatOptions)));
+    public LineFormattingAppendableImpl(int formatOptions) {
+        this(null, LineFormattingAppendable.toOptionSet(formatOptions));
     }
 
     public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, int formatOptions) {
-        myBuilder = builder;
-        myOptions = formatOptions;
-        myPassThrough = haveOptions(F_PASS_THROUGH);
-        myPreFormattedNesting = 0;
-        myPreFormattedFirstLine = -1;
-        myPreFormattedLastLine = -1;
-        myLineStart = 0;
-        myTextLength = 0;
-        myPrefixLength = 0;
-        myAllWhitespace = true;
-        myWasWhitespace = false;
-        myAppendable = new StringBuilder();
-        myLines = new ArrayList<>();
-        myPrefixes = new ArrayList<>();
-        myPrefixStack = new Stack<>();
-        myIndentPrefixStack = new Stack<>();
-        myPrefix = BasedSequence.EMPTY;
-        myPrefixAfterEol = BasedSequence.EMPTY;
-        myIndentPrefix = BasedSequence.EMPTY;
-        myLineOnFirstText = 0;
-        myIndentsOnFirstEol = new ArrayList<>();
+        this(builder, LineFormattingAppendable.toOptionSet(formatOptions));
     }
 
+    public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, Options... formatOptions) {
+        this(builder, LineFormattingAppendable.toOptionSet(formatOptions));
+    }
+
+    public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, BitEnumSet<Options> formatOptions) {
+        this.builder = builder;
+        options = formatOptions;
+        passThrough = some(F_PASS_THROUGH);
+        preFormattedNesting = 0;
+        preFormattedFirstLine = -1;
+        preFormattedLastLine = -1;
+        lineStart = 0;
+        textLength = 0;
+        prefixLength = 0;
+        allWhitespace = true;
+        wasWhitespace = false;
+        appendable = new StringBuilder();
+        lines = new ArrayList<>();
+        prefixes = new ArrayList<>();
+        prefixStack = new Stack<>();
+        indentPrefixStack = new Stack<>();
+        prefix = BasedSequence.EMPTY;
+        prefixAfterEol = BasedSequence.EMPTY;
+        indentPrefix = BasedSequence.EMPTY;
+        lineOnFirstText = 0;
+        indentsOnFirstEol = new ArrayList<>();
+    }
+
+    @NotNull
     @Override
-    public int getOptions() {
-        return myOptions;
+    public BitEnumSet<Options> getOptionSet() {
+        return options;
     }
 
     @NotNull
     @Override
     public LineFormattingAppendable setOptions(int options) {
-        myOptions = options;
+        this.options.replaceAll(options);
         return this;
     }
 
-    private boolean haveOptions(int options) {
-        return (myOptions & options) != 0;
+    private boolean some(int options) {
+        return this.options.some(options);
     }
 
     private boolean isConvertingTabs() {
-        return haveOptions(F_CONVERT_TABS | F_COLLAPSE_WHITESPACE);
+        return some(F_CONVERT_TABS | F_COLLAPSE_WHITESPACE);
     }
 
     private boolean isSuppressingTrailingWhitespace() {
-        return haveOptions(F_SUPPRESS_TRAILING_WHITESPACE);
+        return some(F_SUPPRESS_TRAILING_WHITESPACE);
     }
 
     private boolean isAllowLeadingWhitespace() {
-        return haveOptions(F_ALLOW_LEADING_WHITESPACE);
+        return some(F_ALLOW_LEADING_WHITESPACE);
     }
 
     private boolean isCollapseWhitespace() {
-        return haveOptions(F_COLLAPSE_WHITESPACE);
+        return some(F_COLLAPSE_WHITESPACE);
     }
 
     @NotNull
     @Override
     public CharSequence getIndentPrefix() {
-        return myIndentPrefix;
+        return indentPrefix;
     }
 
     @NotNull
     @Override
     public LineFormattingAppendable setIndentPrefix(@Nullable CharSequence prefix) {
-        myIndentPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
+        indentPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
         return this;
     }
 
     @Override
     public CharSequence getPrefix() {
-        return myPrefixAfterEol;
+        return prefixAfterEol;
     }
 
     @NotNull
     @Override
     public LineFormattingAppendable addPrefix(@NotNull CharSequence prefix, boolean afterEol) {
-        if (!myPassThrough) {
+        if (!passThrough) {
             if (afterEol) {
-                myPrefixAfterEol = combinedPrefix(myPrefixAfterEol, prefix);
+                prefixAfterEol = combinedPrefix(prefixAfterEol, prefix);
             } else {
-                myPrefix = combinedPrefix(myPrefixAfterEol, prefix);
-                myPrefixAfterEol = myPrefix;
+                this.prefix = combinedPrefix(prefixAfterEol, prefix);
+                prefixAfterEol = this.prefix;
             }
         }
         return this;
@@ -162,12 +163,12 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol) {
-        if (!myPassThrough) {
+        if (!passThrough) {
             if (afterEol) {
-                myPrefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
+                prefixAfterEol = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
             } else {
-                myPrefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
-                myPrefixAfterEol = myPrefix;
+                this.prefix = prefix == null ? BasedSequence.NULL : BasedSequence.of(prefix);
+                prefixAfterEol = this.prefix;
             }
         }
         return this;
@@ -176,7 +177,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable indent() {
-        if (!myPassThrough) {
+        if (!passThrough) {
             line();
             rawIndent();
         }
@@ -184,25 +185,25 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     private void rawIndent() {
-        myPrefixStack.push(myPrefixAfterEol);
-        myPrefix = combinedPrefix(myPrefixAfterEol, myIndentPrefix);
-        myPrefixAfterEol = myPrefix;
-        myIndentPrefixStack.push(true);
+        prefixStack.push(prefixAfterEol);
+        prefix = combinedPrefix(prefixAfterEol, indentPrefix);
+        prefixAfterEol = prefix;
+        indentPrefixStack.push(true);
     }
 
     private void rawUnIndent() {
-        if (myPrefixStack.isEmpty()) throw new IllegalStateException("unIndent with an empty stack");
-        if (!myIndentPrefixStack.peek()) throw new IllegalStateException("unIndent for element added by pushPrefix(), use popPrefix() instead");
+        if (prefixStack.isEmpty()) throw new IllegalStateException("unIndent with an empty stack");
+        if (!indentPrefixStack.peek()) throw new IllegalStateException("unIndent for element added by pushPrefix(), use popPrefix() instead");
 
-        myPrefix = myPrefixStack.pop();
-        myPrefixAfterEol = myPrefix;
-        myIndentPrefixStack.pop();
+        prefix = prefixStack.pop();
+        prefixAfterEol = prefix;
+        indentPrefixStack.pop();
     }
 
     @NotNull
     @Override
     public LineFormattingAppendable unIndent() {
-        if (!myPassThrough) {
+        if (!passThrough) {
             line();
             rawUnIndent();
         }
@@ -212,14 +213,14 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable unIndentNoEol() {
-        if (!myPassThrough) {
+        if (!passThrough) {
             if (isLastEol()) {
                 rawUnIndent();
             } else {
-                BasedSequence prefix = myPrefix;
+                BasedSequence prefix = this.prefix;
                 rawUnIndent();
-                myPrefixAfterEol = myPrefix;
-                myPrefix = prefix;
+                prefixAfterEol = this.prefix;
+                this.prefix = prefix;
             }
         }
         return this;
@@ -228,9 +229,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable pushPrefix() {
-        if (!myPassThrough) {
-            myPrefixStack.push(myPrefixAfterEol);
-            myIndentPrefixStack.push(false);
+        if (!passThrough) {
+            prefixStack.push(prefixAfterEol);
+            indentPrefixStack.push(false);
         }
         return this;
     }
@@ -238,43 +239,43 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable popPrefix(boolean afterEol) {
-        if (!myPassThrough) {
-            if (myPrefixStack.isEmpty()) throw new IllegalStateException("popPrefix with an empty stack");
-            if (myIndentPrefixStack.peek()) throw new IllegalStateException("popPrefix for element added by indent(), use unIndent() instead");
+        if (!passThrough) {
+            if (prefixStack.isEmpty()) throw new IllegalStateException("popPrefix with an empty stack");
+            if (indentPrefixStack.peek()) throw new IllegalStateException("popPrefix for element added by indent(), use unIndent() instead");
 
-            myPrefixAfterEol = myPrefixStack.pop();
+            prefixAfterEol = prefixStack.pop();
             if (!afterEol) {
-                myPrefix = myPrefixAfterEol;
+                prefix = prefixAfterEol;
             }
-            myIndentPrefixStack.pop();
+            indentPrefixStack.pop();
         }
         return this;
     }
 
     private boolean isTrailingBlankLine() {
-        int i = myLines.size();
+        int i = lines.size();
         if (i-- > 0) {
-            BasedSequence line = myLines.get(i);
+            BasedSequence line = lines.get(i);
             return line.isBlank();
         }
-        return myAppendable.length() == 0;
+        return appendable.length() == 0;
     }
 
     private int lastNonBlankLine() {
-        int i = myLines.size();
+        int i = lines.size();
         while (i-- > 0) {
-            BasedSequence line = myLines.get(i);
+            BasedSequence line = lines.get(i);
             if (!line.isBlank()) break;
         }
         return i + 1;
     }
 
     private int trailingBlankLines() {
-        return myLines.size() - lastNonBlankLine();
+        return lines.size() - lastNonBlankLine();
     }
 
     private boolean isLastEol() {
-        return myAppendable.length() > 0 && myAppendable.charAt(myAppendable.length() - 1) == EOL;
+        return appendable.length() > 0 && appendable.charAt(appendable.length() - 1) == EOL;
     }
 
     private void addLineRange(Range range, BasedSequence prefix) {
@@ -283,43 +284,43 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         //}
         assert range.getStart() <= range.getEnd();
 
-        if (myBuilder != null) {
-            myLines.add(range.isNull() ? BasedSequence.NULL : myBuilder.toSequence().subSequence(range.getStart(), range.getEnd()));
+        if (builder != null) {
+            lines.add(range.isNull() ? BasedSequence.NULL : builder.toSequence().subSequence(range.getStart(), range.getEnd()));
         } else {
-            myLines.add(range.isNull() ? BasedSequence.NULL : range.basedSubSequence(myAppendable));
+            lines.add(range.isNull() ? BasedSequence.NULL : range.basedSubSequence(appendable));
         }
 
         if (range.isEmpty() && !prefix.isEmpty()) {
             prefix = prefix.trimEnd();
-            myPrefixes.add(prefix);
+            prefixes.add(prefix);
         } else {
-            myPrefixes.add(prefix);
+            prefixes.add(prefix);
         }
 
-        myTextLength += range.getSpan() + 1;
-        myPrefixLength += prefix.length();
+        textLength += range.getSpan() + 1;
+        prefixLength += prefix.length();
     }
 
     private void appendEol() {
-        myAppendable.append(EOL);
+        appendable.append(EOL);
         appendBuilder(SequenceUtils.EOL);
 
-        int startOffset = myLineStart;
-        myLineStart = myAppendable.length();
-        int endOffset = myLineStart;
-        addLineRange(Range.of(startOffset, endOffset - 1), myPrefix);
-        myAllWhitespace = true;
-        myWasWhitespace = false;
-        myLineOnFirstText = 0;
+        int startOffset = lineStart;
+        lineStart = appendable.length();
+        int endOffset = lineStart;
+        addLineRange(Range.of(startOffset, endOffset - 1), prefix);
+        allWhitespace = true;
+        wasWhitespace = false;
+        lineOnFirstText = 0;
 
         rawIndentsOnFirstEol();
     }
 
     private void rawIndentsOnFirstEol() {
-        myPrefix = myPrefixAfterEol;
+        prefix = prefixAfterEol;
 
-        while (!myIndentsOnFirstEol.isEmpty()) {
-            Runnable runnable = myIndentsOnFirstEol.remove(myIndentsOnFirstEol.size() - 1);
+        while (!indentsOnFirstEol.isEmpty()) {
+            Runnable runnable = indentsOnFirstEol.remove(indentsOnFirstEol.size() - 1);
             rawIndent();
             runnable.run();
         }
@@ -339,54 +340,54 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
      * @return pair of line text range if EOL was added and prefix
      */
     private Pair<Range, BasedSequence> getRangePrefixAfterEol() {
-        int startOffset = myLineStart;
-        int endOffset = myAppendable.length() + 1;
+        int startOffset = lineStart;
+        int endOffset = appendable.length() + 1;
         int currentLine = getLineCount();
-        boolean needPrefix = haveOptions(F_PREFIX_PRE_FORMATTED) || (myPreFormattedNesting == 0 && myPreFormattedLastLine != currentLine || myPreFormattedFirstLine == currentLine);
+        boolean needPrefix = some(F_PREFIX_PRE_FORMATTED) || (preFormattedNesting == 0 && preFormattedLastLine != currentLine || preFormattedFirstLine == currentLine);
 
-        if (myPassThrough) {
-            return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? myPrefix : BasedSequence.NULL);
+        if (passThrough) {
+            return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? prefix : BasedSequence.NULL);
         } else {
-            if (myAllWhitespace && (myPreFormattedNesting == 0 && !(myPreFormattedFirstLine == currentLine || myPreFormattedLastLine == currentLine))) {
-                if (haveOptions(F_ALLOW_LEADING_EOL) && myAppendable.length() == 0) {
-                    return new Pair<>(Range.of(startOffset, endOffset - 1), myPrefix);
+            if (allWhitespace && (preFormattedNesting == 0 && !(preFormattedFirstLine == currentLine || preFormattedLastLine == currentLine))) {
+                if (some(F_ALLOW_LEADING_EOL) && appendable.length() == 0) {
+                    return new Pair<>(Range.of(startOffset, endOffset - 1), prefix);
                 } else {
                     return new Pair<>(Range.NULL, BasedSequence.NULL);
                 }
             } else {
                 // apply options other than convert tabs which is done at time of appending
-                if (!haveOptions(F_ALLOW_LEADING_WHITESPACE) &&
-                        (myPreFormattedNesting == 0 || myPreFormattedFirstLine == currentLine) &&
-                        myPreFormattedNesting == 0 && myPreFormattedLastLine != currentLine
+                if (!some(F_ALLOW_LEADING_WHITESPACE) &&
+                        (preFormattedNesting == 0 || preFormattedFirstLine == currentLine) &&
+                        preFormattedNesting == 0 && preFormattedLastLine != currentLine
                 ) {
-                    if (myAllWhitespace) {
+                    if (allWhitespace) {
                         startOffset = endOffset - 1;
                     } else {
-                        while (startOffset < endOffset && myAppendable.charAt(startOffset) == ' ') {
+                        while (startOffset < endOffset && appendable.charAt(startOffset) == ' ') {
                             startOffset++;
                         }
                     }
                 }
 
-                if (haveOptions(F_SUPPRESS_TRAILING_WHITESPACE) && myPreFormattedNesting == 0) {
-                    if (myAllWhitespace) {
+                if (some(F_SUPPRESS_TRAILING_WHITESPACE) && preFormattedNesting == 0) {
+                    if (allWhitespace) {
                         startOffset = endOffset - 1;
                     } else {
-                        while (startOffset < endOffset - 1 && myAppendable.charAt(endOffset - 2) == ' ') {
+                        while (startOffset < endOffset - 1 && appendable.charAt(endOffset - 2) == ' ') {
                             endOffset--;
                         }
                     }
                 }
 
-                if (myPreFormattedFirstLine == currentLine) {
-                    if (startOffset > myPreFormattedFirstLineOffset) startOffset = myPreFormattedFirstLineOffset;
+                if (preFormattedFirstLine == currentLine) {
+                    if (startOffset > preFormattedFirstLineOffset) startOffset = preFormattedFirstLineOffset;
                 }
 
-                if (myPreFormattedLastLine == currentLine) {
-                    if (endOffset < myPreFormattedLastLineOffset + 1) endOffset = myPreFormattedLastLineOffset + 1;
+                if (preFormattedLastLine == currentLine) {
+                    if (endOffset < preFormattedLastLineOffset + 1) endOffset = preFormattedLastLineOffset + 1;
                 }
 
-                return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? myPrefix : BasedSequence.NULL);
+                return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? prefix : BasedSequence.NULL);
             }
         }
     }
@@ -399,7 +400,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private int offsetAfterEol(boolean includePrefixes) {
         Pair<Range, BasedSequence> rangePrefixAfterEol = getRangePrefixAfterEol();
         if (rangePrefixAfterEol.getFirst().isNull()) {
-            return includePrefixes ? myTextLength + myPrefixLength : myTextLength;
+            return includePrefixes ? textLength + prefixLength : textLength;
         } else {
             Range range = rangePrefixAfterEol.getFirst();
             BasedSequence prefix = rangePrefixAfterEol.getSecond();
@@ -408,8 +409,8 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                 prefix = prefix.trimEnd();
             }
 
-            return includePrefixes ? myTextLength + rangePrefixAfterEol.getFirst().getSpan() + myPrefixLength + prefix.length()
-                    : myTextLength + rangePrefixAfterEol.getFirst().getSpan();
+            return includePrefixes ? textLength + rangePrefixAfterEol.getFirst().getSpan() + prefixLength + prefix.length()
+                    : textLength + rangePrefixAfterEol.getFirst().getSpan();
         }
     }
 
@@ -418,41 +419,41 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     }
 
     private void appendBuilder(CharSequence s, int start, int end) {
-        if (myBuilder != null) {
+        if (builder != null) {
             if (start == 0 && end == s.length()) {
-                myBuilder.append(s);
+                builder.append(s);
             } else {
-                myBuilder.append(s.subSequence(start, end));
+                builder.append(s.subSequence(start, end));
             }
         }
     }
 
     private void appendBuilder(char c) {
-        if (myBuilder != null) {
-            myBuilder.append(c);
+        if (builder != null) {
+            builder.append(c);
         }
     }
 
     private void appendBuilder(char c, int count) {
-        if (myBuilder != null) {
-            myBuilder.append(c, count);
+        if (builder != null) {
+            builder.append(c, count);
         }
     }
 
     private void appendImpl(CharSequence s, int index) {
         char c = s.charAt(index);
 
-        if (myPassThrough) {
+        if (passThrough) {
             if (c == EOL) {
                 appendEol();
             } else {
-                if (myLineOnFirstText > 0) {
-                    myLineOnFirstText = 0;
+                if (lineOnFirstText > 0) {
+                    lineOnFirstText = 0;
                     appendEol();
                 }
 
-                if (c != '\t' && c != ' ') myAllWhitespace = false;
-                myAppendable.append(c);
+                if (c != '\t' && c != ' ') allWhitespace = false;
+                appendable.append(c);
                 appendBuilder(s, index, index + 1);
             }
         } else {
@@ -461,64 +462,64 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
                 if (rangePrefixAfterEol.getFirst().isNull()) {
                     // nothing, add EOL and don't add line
                     // add the EOL so as not to mess up the text but do not add the line
-                    myAppendable.append(c);
+                    appendable.append(c);
                     appendBuilder(s, index, index + 1);
 
-                    myLineStart = myAppendable.length();
-                    myAllWhitespace = true;
-                    myWasWhitespace = false;
+                    lineStart = appendable.length();
+                    allWhitespace = true;
+                    wasWhitespace = false;
                     rawIndentsOnFirstEol();
                 } else {
                     // add EOL and line
-                    myAppendable.append(c);
+                    appendable.append(c);
                     appendBuilder(s, index, index + 1);
 
-                    myLineStart = myAppendable.length();
+                    lineStart = appendable.length();
                     addLineRange(rangePrefixAfterEol.getFirst(), rangePrefixAfterEol.getSecond());
-                    myAllWhitespace = true;
-                    myWasWhitespace = false;
+                    allWhitespace = true;
+                    wasWhitespace = false;
                     rawIndentsOnFirstEol();
                 }
             } else {
-                if (myLineOnFirstText > 0) {
-                    myLineOnFirstText = 0;
+                if (lineOnFirstText > 0) {
+                    lineOnFirstText = 0;
                     appendEol();
                 }
 
                 if (c == '\t') {
-                    if (myPreFormattedNesting == 0 && haveOptions(F_COLLAPSE_WHITESPACE)) {
-                        if (!myWasWhitespace) {
-                            myAppendable.append(' ');
+                    if (preFormattedNesting == 0 && some(F_COLLAPSE_WHITESPACE)) {
+                        if (!wasWhitespace) {
+                            appendable.append(' ');
                             appendBuilder(' ');
-                            myWasWhitespace = true;
+                            wasWhitespace = true;
                         }
                     } else {
-                        if (haveOptions(F_CONVERT_TABS)) {
-                            int column = myAppendable.length() - myLineStart;
+                        if (some(F_CONVERT_TABS)) {
+                            int column = appendable.length() - lineStart;
                             int spaces = 4 - (column % 4);
-                            myAppendable.append("    ", 0, spaces);
+                            appendable.append("    ", 0, spaces);
                             appendBuilder(' ', spaces);
                         } else {
-                            myAppendable.append(c);
+                            appendable.append(c);
                             appendBuilder(s, index, index + 1);
                         }
                     }
                 } else {
                     if (c == ' ') {
-                        if (myPreFormattedNesting == 0 && haveOptions(F_COLLAPSE_WHITESPACE)) {
-                            if (!myWasWhitespace) {
-                                myAppendable.append(' ');
+                        if (preFormattedNesting == 0 && some(F_COLLAPSE_WHITESPACE)) {
+                            if (!wasWhitespace) {
+                                appendable.append(' ');
                                 appendBuilder(' ');
                             }
                         } else {
-                            myAppendable.append(' ');
+                            appendable.append(' ');
                             appendBuilder(' ');
                         }
-                        myWasWhitespace = true;
+                        wasWhitespace = true;
                     } else {
-                        myAllWhitespace = false;
-                        myWasWhitespace = false;
-                        myAppendable.append(c);
+                        allWhitespace = false;
+                        wasWhitespace = false;
+                        appendable.append(c);
                         appendBuilder(s, index, index + 1);
                     }
                 }
@@ -608,19 +609,19 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             CharSequence line = lines.get(i);
             BasedSequence prefix = prefixes.get(i);
 
-            int startOffset = myAppendable.length();
+            int startOffset = appendable.length();
 
-            myAppendable.append(line);
+            appendable.append(line);
             appendBuilder(line);
 
-            myAppendable.append(EOL);
+            appendable.append(EOL);
             appendBuilder(EOL);
 
-            int endOffset = myAppendable.length();
+            int endOffset = appendable.length();
 
-            BasedSequence combinedPrefix = haveOptions(F_PREFIX_PRE_FORMATTED) || !lineAppendable.isPreFormattedLine(startLine + i) ? combinedPrefix(myPrefix, prefix) : BasedSequence.NULL;
+            BasedSequence combinedPrefix = some(F_PREFIX_PRE_FORMATTED) || !lineAppendable.isPreFormattedLine(startLine + i) ? combinedPrefix(this.prefix, prefix) : BasedSequence.NULL;
             addLineRange(Range.of(startOffset, endOffset - 1), combinedPrefix);
-            myLineStart = endOffset;
+            lineStart = endOffset;
         }
         return this;
     }
@@ -637,16 +638,16 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
             BasedSequence lastPrefix = addAfterLinePrefix ? combinedPrefix(lastLinePrefix, prefix) : combinedPrefix(prefix, lastLinePrefix);
 
             for (int i = useStartLine; i < useEndLine; i++) {
-                BasedSequence linePrefix = myPrefixes.get(i);
-                if (haveOptions(F_PREFIX_PRE_FORMATTED) || !isPreFormattedLine(i)) {
+                BasedSequence linePrefix = prefixes.get(i);
+                if (some(F_PREFIX_PRE_FORMATTED) || !isPreFormattedLine(i)) {
                     // need prefix
                     if (!linePrefix.equals(lastLinePrefix)) {
                         lastLinePrefix = linePrefix;
                         lastPrefix = addAfterLinePrefix ? combinedPrefix(lastLinePrefix, prefix) : combinedPrefix(prefix, lastLinePrefix);
                     }
-                    myPrefixes.set(i, lastPrefix);
+                    prefixes.set(i, lastPrefix);
                 } else {
-                    myPrefixes.set(i, BasedSequence.NULL);
+                    prefixes.set(i, BasedSequence.NULL);
                 }
             }
         }
@@ -662,10 +663,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         if (useStartLine < useEndLine) {
             int count = useEndLine - useStartLine;
             while (count-- > 0) {
-                BasedSequence line = myLines.remove(startLine);
-                BasedSequence prefix = myPrefixes.remove(startLine);
-                myTextLength -= line.length() + 1;
-                myPrefixLength -= prefix.length();
+                BasedSequence line = lines.remove(startLine);
+                BasedSequence prefix = prefixes.remove(startLine);
+                textLength -= line.length() + 1;
+                prefixLength -= prefix.length();
             }
         }
         return this;
@@ -673,9 +674,9 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public String toString(int maxBlankLines) {
-        if (myPassThrough) {
+        if (passThrough) {
             line();
-            return myAppendable.toString();
+            return appendable.toString();
         } else {
             StringBuilder out = new StringBuilder();
             try {
@@ -692,10 +693,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     public List<CharSequence> getLineContents(int startOffset, int endOffset) {
         line();
         ArrayList<CharSequence> result = new ArrayList<>();
-        int iMax = Utils.maxLimit(endOffset, myLines.size());
+        int iMax = Utils.maxLimit(endOffset, lines.size());
 
         for (int i = startOffset; i < iMax; i++) {
-            BasedSequence line = myLines.get(i);
+            BasedSequence line = lines.get(i);
             result.add(line);
         }
         return result;
@@ -706,10 +707,10 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     public List<BasedSequence> getLinePrefixes(int startOffset, int endOffset) {
         line();
         ArrayList<BasedSequence> result = new ArrayList<>();
-        int iMax = Utils.maxLimit(endOffset, myLines.size());
+        int iMax = Utils.maxLimit(endOffset, lines.size());
 
         for (int i = startOffset; i < iMax; i++) {
-            result.add(myPrefixes.get(i));
+            result.add(prefixes.get(i));
         }
         return result;
     }
@@ -720,15 +721,15 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         line();
 
         ArrayList<CharSequence> result = new ArrayList<>();
-        int iMax = Utils.maxLimit(endOffset, myLines.size());
+        int iMax = Utils.maxLimit(endOffset, lines.size());
 
-        if (myBuilder != null) {
+        if (builder != null) {
             for (int i = startOffset; i < iMax; i++) {
-                BasedSequence line = myLines.get(i);
-                BasedSequence linePrefix = myPrefixes.get(i);
+                BasedSequence line = lines.get(i);
+                BasedSequence linePrefix = prefixes.get(i);
 
                 if (!linePrefix.isEmpty()) {
-                    BasedSequence basedSequence = myBuilder.subContext().append(linePrefix).append(line).toSequence();
+                    BasedSequence basedSequence = builder.subContext().append(linePrefix).append(line).toSequence();
                     result.add(basedSequence);
                 } else {
                     result.add(line);
@@ -737,8 +738,8 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         } else {
             StringBuilder sb = new StringBuilder();
             for (int i = startOffset; i < iMax; i++) {
-                BasedSequence line = myLines.get(i);
-                BasedSequence linePrefix = myPrefixes.get(i);
+                BasedSequence line = lines.get(i);
+                BasedSequence linePrefix = prefixes.get(i);
 
                 int lineStart = sb.length();
                 if (!linePrefix.isEmpty()) sb.append(linePrefix);
@@ -757,11 +758,11 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
         line();
         int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
 
-        int iMax = min(endLine, myLines.size() - removeBlankLines);
+        int iMax = min(endLine, lines.size() - removeBlankLines);
 
         for (int i = startLine; i < iMax; i++) {
-            BasedSequence line = myLines.get(i);
-            BasedSequence linePrefix = myPrefixes.get(i);
+            BasedSequence line = lines.get(i);
+            BasedSequence linePrefix = prefixes.get(i);
             if (!linePrefix.isEmpty()) out.append(linePrefix);
             if (prefix != null && prefix.length() > 0) out.append(prefix);
             out.append(line);
@@ -776,21 +777,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable line() {
-        if (myPreFormattedNesting > 0 || myLineStart < myAppendable.length() || haveOptions(F_ALLOW_LEADING_EOL)) {
-            //// see if really have something that will be kept
-            //BasedSequence pendingText = BasedSequenceImpl.of(myAppendable.subSequence(myLineStart, myAppendable.length()));
-            //
-            //if (!haveOptions(ALLOW_LEADING_WHITESPACE)) {
-            //   pendingText = pendingText.trimEnd();
-            //}
-            //
-            //if (haveOptions(SUPPRESS_TRAILING_WHITESPACE)) {
-            //   pendingText = pendingText.trimStart();
-            //}
-            //
-            //if (!pendingText.isEmpty()) {
-            //    appendImpl(EOL);
-            //}
+        if (preFormattedNesting > 0 || lineStart < appendable.length() || some(F_ALLOW_LEADING_EOL)) {
             appendImpl(SequenceUtils.EOL, 0);
         } else {
             rawIndentsOnFirstEol();
@@ -801,12 +788,12 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable lineWithTrailingSpaces(int count) {
-        if (myPreFormattedNesting > 0 || myLineStart < myAppendable.length() || haveOptions(F_ALLOW_LEADING_EOL)) {
-            int options = myOptions;
-            myOptions &= ~(F_SUPPRESS_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
+        if (preFormattedNesting > 0 || lineStart < appendable.length() || some(F_ALLOW_LEADING_EOL)) {
+            int options = this.options.toInt();
+            this.options.clear(F_SUPPRESS_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
             if (count > 0) repeat(' ', count);
             appendImpl(SequenceUtils.EOL, 0);
-            myOptions = options;
+            this.options.replaceAll(options);
         }
         return this;
     }
@@ -851,17 +838,17 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public int getLineCount() {
-        return myLines.size();
+        return lines.size();
     }
 
     @Override
     public int column() {
-        return myAppendable.length() - myLineStart;
+        return appendable.length() - lineStart;
     }
 
     @Override
     public int offset() {
-        return myTextLength + myPrefixLength;
+        return textLength + prefixLength;
     }
 
     @Override
@@ -871,7 +858,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public int textOnlyOffset() {
-        return myTextLength;
+        return textLength;
     }
 
     @Override
@@ -881,15 +868,15 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public boolean isPendingSpace() {
-        return myAppendable.length() > 0 && " \t".indexOf(myAppendable.charAt(myAppendable.length() - 1)) != -1;
+        return appendable.length() > 0 && " \t".indexOf(appendable.charAt(appendable.length() - 1)) != -1;
     }
 
     @Override
     public int getPendingSpace() {
-        int length = myAppendable.length();
+        int length = appendable.length();
         if (length == 0) return 0;
         int spaces = 0;
-        while (length-- > 0 && " \t".indexOf(myAppendable.charAt(length)) != -1) {
+        while (length-- > 0 && " \t".indexOf(appendable.charAt(length)) != -1) {
             spaces++;
         }
         return spaces;
@@ -899,7 +886,7 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     public int getPendingEOL() {
         int withPending = textOnlyOffsetWithPending();
 
-        if (withPending == myTextLength) {
+        if (withPending == textLength) {
             // use count of blank lines+1
             return trailingBlankLines() + 1;
         } else {
@@ -909,53 +896,53 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
 
     @Override
     public boolean isPreFormatted() {
-        return myPreFormattedNesting > 0;
+        return preFormattedNesting > 0;
     }
 
     @NotNull
     @Override
     public LineFormattingAppendable openPreFormatted(boolean addPrefixToFirstLine) {
-        if (myPreFormattedNesting == 0) {
-            if (myPreFormattedFirstLine != myLines.size()) {
-                myPreFormattedFirstLine = myLines.size();
-                myPreFormattedFirstLineOffset = myAppendable.length();
+        if (preFormattedNesting == 0) {
+            if (preFormattedFirstLine != lines.size()) {
+                preFormattedFirstLine = lines.size();
+                preFormattedFirstLineOffset = appendable.length();
             }
         }
 
-        ++myPreFormattedNesting;
+        ++preFormattedNesting;
         return this;
     }
 
     @NotNull
     @Override
     public LineFormattingAppendable closePreFormatted() {
-        if (myPreFormattedNesting <= 0) throw new IllegalStateException("closePreFormatted called with nesting == 0");
-        --myPreFormattedNesting;
+        if (preFormattedNesting <= 0) throw new IllegalStateException("closePreFormatted called with nesting == 0");
+        --preFormattedNesting;
 
-        if (myPreFormattedNesting == 0 && !isLastEol()) {
+        if (preFormattedNesting == 0 && !isLastEol()) {
             // this will be the last line of preformatted text
-            myPreFormattedLastLine = myLines.size();
-            myPreFormattedLastLineOffset = myAppendable.length();
+            preFormattedLastLine = lines.size();
+            preFormattedLastLineOffset = appendable.length();
         }
         return this;
     }
 
     @Override
     public String toString() {
-        return myAppendable.toString();
+        return appendable.toString();
     }
 
     @Override
     public void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines) {
-        if (myBuilder == null) return;
+        if (this.builder == null) return;
 
         line();
         int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
 
-        int iMax = myLines.size() - removeBlankLines;
+        int iMax = lines.size() - removeBlankLines;
         for (int i = 0; i < iMax; i++) {
-            BasedSequence prefix = myPrefixes.get(i);
-            BasedSequence line = myLines.get(i);
+            BasedSequence prefix = prefixes.get(i);
+            BasedSequence line = lines.get(i);
             builder.append(prefix);
             builder.append(line);
 
@@ -968,22 +955,22 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     @NotNull
     @Override
     public LineFormattingAppendable lineOnFirstText(boolean value) {
-        if (value) myLineOnFirstText++;
-        else if (myLineOnFirstText > 0) myLineOnFirstText--;
+        if (value) lineOnFirstText++;
+        else if (lineOnFirstText > 0) lineOnFirstText--;
         return this;
     }
 
     @NotNull
     @Override
     public LineFormattingAppendable removeIndentOnFirstEOL(@NotNull Runnable runnable) {
-        myIndentsOnFirstEol.remove(runnable);
+        indentsOnFirstEol.remove(runnable);
         return this;
     }
 
     @NotNull
     @Override
     public LineFormattingAppendable addIndentOnFirstEOL(@NotNull Runnable runnable) {
-        myIndentsOnFirstEol.add(runnable);
+        indentsOnFirstEol.add(runnable);
         return this;
     }
 }

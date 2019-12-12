@@ -25,8 +25,18 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public boolean isOption(int option) {
-        return baseSeq instanceof BasedOptionsHolder && ((BasedOptionsHolder) baseSeq).isOption(option);
+    public int getOptionFlags() {
+        return baseSeq instanceof BasedOptionsHolder ? ((BasedOptionsHolder) baseSeq).getOptionFlags() : 0;
+    }
+
+    @Override
+    public boolean allOptions(int options) {
+        return baseSeq instanceof BasedOptionsHolder && ((BasedOptionsHolder) baseSeq).allOptions(options);
+    }
+
+    @Override
+    public boolean anyOptions(int options) {
+        return baseSeq instanceof BasedOptionsHolder && ((BasedOptionsHolder) baseSeq).anyOptions(options);
     }
 
     @Override

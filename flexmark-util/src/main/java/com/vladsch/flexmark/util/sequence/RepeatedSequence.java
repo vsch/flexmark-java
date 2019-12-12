@@ -12,50 +12,50 @@ import org.jetbrains.annotations.NotNull;
 public class RepeatedSequence implements CharSequence {
     public static RepeatedSequence NULL = new RepeatedSequence(BasedSequence.NULL, 0, 0);
 
-    private final CharSequence myChars;
-    private final int myStartIndex;
-    private final int myEndIndex;
-    private int myHash;
+    private final CharSequence chars;
+    private final int startIndex;
+    private final int endIndex;
+    private int hashCode;
 
     private RepeatedSequence(CharSequence chars, int startIndex, int endIndex) {
-        myChars = chars;
-        myStartIndex = startIndex;
-        myEndIndex = endIndex;
+        this.chars = chars;
+        this.startIndex = startIndex;
+        this.endIndex = endIndex;
     }
 
     @Override
     public int length() {
-        return myEndIndex - myStartIndex;
+        return endIndex - startIndex;
     }
 
     @Override
     public char charAt(int index) {
-        if (index < 0 || index >= myEndIndex - myStartIndex) throw new IndexOutOfBoundsException();
-        return myChars.charAt((myStartIndex + index) % myChars.length());
+        if (index < 0 || index >= endIndex - startIndex) throw new IndexOutOfBoundsException();
+        return chars.charAt((startIndex + index) % chars.length());
     }
 
     @Override
     public CharSequence subSequence(int startIndex, int endIndex) {
-        if (startIndex >= 0 && startIndex <= endIndex && endIndex <= myEndIndex - myStartIndex) {
-            return (startIndex == endIndex) ? NULL : startIndex == myStartIndex && endIndex == myEndIndex ? this : new RepeatedSequence(myChars, myStartIndex + startIndex, myStartIndex + endIndex);
+        if (startIndex >= 0 && startIndex <= endIndex && endIndex <= this.endIndex - this.startIndex) {
+            return (startIndex == endIndex) ? NULL : startIndex == this.startIndex && endIndex == this.endIndex ? this : new RepeatedSequence(chars, this.startIndex + startIndex, this.startIndex + endIndex);
         }
 
-        throw new IllegalArgumentException("subSequence($startIndex, $endIndex) in RepeatedCharSequence('', " + myStartIndex + ", " + myEndIndex + ")");
+        throw new IllegalArgumentException("subSequence($startIndex, $endIndex) in RepeatedCharSequence('', " + this.startIndex + ", " + this.endIndex + ")");
     }
 
     public RepeatedSequence repeat(int count) {
-        int endIndex = myStartIndex + (myEndIndex - myStartIndex) * count;
-        return myStartIndex >= myEndIndex ? NULL : myEndIndex == endIndex ? this : new RepeatedSequence(myChars, myStartIndex, endIndex);
+        int endIndex = startIndex + (this.endIndex - startIndex) * count;
+        return startIndex >= this.endIndex ? NULL : this.endIndex == endIndex ? this : new RepeatedSequence(chars, startIndex, endIndex);
     }
 
     @Override
     public int hashCode() {
-        int h = myHash;
+        int h = hashCode;
         if (h == 0 && length() > 0) {
             for (int i = 0; i < length(); i++) {
                 h = 31 * h + charAt(i);
             }
-            myHash = h;
+            hashCode = h;
         }
         return h;
     }

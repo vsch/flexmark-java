@@ -39,7 +39,7 @@ import org.junit.runners.Suite;
         MutableAttributeTest.class,
         UtilsTest.class,
         ArrayUtilsTest.class,
-        EnumSetUtilsTest.class,
+        BitEnumSetTest.class,
         MappedBasedSequenceTest.class,
         MappedRichSequenceTest.class,
         AttributesTest.class,

@@ -7,22 +7,22 @@ import java.util.Map;
 import java.util.Objects;
 
 public final class MapEntry<K, V> implements Map.Entry<K, V> {
-    private final @NotNull K myKey;
-    private final @Nullable V myValue;
+    private final @NotNull K key;
+    private final @Nullable V value;
 
     public MapEntry(@NotNull K key, @Nullable V value) {
-        myKey = key;
-        myValue = value;
+        this.key = key;
+        this.value = value;
     }
 
     @Override
     public @NotNull K getKey() {
-        return myKey;
+        return key;
     }
 
     @Override
     public @Nullable V getValue() {
-        return myValue;
+        return value;
     }
 
     @Override
@@ -37,14 +37,14 @@ public final class MapEntry<K, V> implements Map.Entry<K, V> {
 
         MapEntry<?, ?> entry = (MapEntry<?, ?>) o;
 
-        if (!Objects.equals(myKey, entry.myKey)) return false;
-        return Objects.equals(myValue, entry.myValue);
+        if (!Objects.equals(key, entry.key)) return false;
+        return Objects.equals(value, entry.value);
     }
 
     @Override
     public int hashCode() {
-        int result = myKey.hashCode();
-        result = 31 * result + (myValue != null ? myValue.hashCode() : 0);
+        int result = key.hashCode();
+        result = 31 * result + (value != null ? value.hashCode() : 0);
         return result;
     }
 }

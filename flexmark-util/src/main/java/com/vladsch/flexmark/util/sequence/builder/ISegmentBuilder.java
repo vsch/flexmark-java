@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
+import com.vladsch.flexmark.util.collection.BitEnumSet;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -7,8 +8,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Iterator;
 
 public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<Object> {
-    int F_INCLUDE_ANCHORS = 0x01;
-    int F_TRACK_FIRST256 = 0x02;
+    enum Options {
+        INCLUDE_ANCHORS,
+        TRACK_FIRST256,
+    }
+
+    Options O_INCLUDE_ANCHORS = Options.INCLUDE_ANCHORS;
+    Options O_TRACK_FIRST256 = Options.TRACK_FIRST256;
+
+    int F_INCLUDE_ANCHORS = BitEnumSet.intMask(O_INCLUDE_ANCHORS);
+    int F_TRACK_FIRST256 = BitEnumSet.intMask(O_TRACK_FIRST256);
+
     int F_DEFAULT = F_INCLUDE_ANCHORS | F_TRACK_FIRST256;
 
     int getOptions();

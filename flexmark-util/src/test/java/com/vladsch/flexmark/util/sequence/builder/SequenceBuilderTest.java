@@ -886,7 +886,7 @@ public class SequenceBuilderTest {
     public void test_replaced2() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = "01234567890123456789";
-        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
+        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
         CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.NEXT);
         SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 
@@ -920,7 +920,7 @@ public class SequenceBuilderTest {
     public void test_replaced3() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = " 0123456789\n 0123456789";
-        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
+        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
         CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.NEXT);
         SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 
@@ -954,7 +954,7 @@ public class SequenceBuilderTest {
     public void test_replaced4() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = " 0123456789\n 0123456789";
-        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
+        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
         SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
         builder.append(0, 1);
@@ -999,7 +999,7 @@ public class SequenceBuilderTest {
     public void test_appendPrefixed2() {
         // this one causes text to be replaced with recovered EOL in the code
         String input = "0123456789";
-        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.O_FULL_SEGMENTED_SEQUENCES));
+        BasedSequence sequence = BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
         CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
         SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 

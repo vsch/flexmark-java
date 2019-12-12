@@ -4,16 +4,16 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 
 public class AttributeImpl implements Attribute {
-    private final String myName;
-    private final char myValueListDelimiter;
-    private final char myValueNameDelimiter;
-    private final String myValue;
+    private final String name;
+    private final char valueListDelimiter;
+    private final char valueNameDelimiter;
+    private final String value;
 
     private AttributeImpl(CharSequence name, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
-        myName = String.valueOf(name);
-        myValueListDelimiter = valueListDelimiter;
-        myValueNameDelimiter = valueNameDelimiter;
-        myValue = value == null ? "" : String.valueOf(value);
+        this.name = String.valueOf(name);
+        this.valueListDelimiter = valueListDelimiter;
+        this.valueNameDelimiter = valueNameDelimiter;
+        this.value = value == null ? "" : String.valueOf(value);
     }
 
     @Override
@@ -23,27 +23,27 @@ public class AttributeImpl implements Attribute {
 
     @Override
     public char getValueListDelimiter() {
-        return myValueListDelimiter;
+        return valueListDelimiter;
     }
 
     @Override
     public char getValueNameDelimiter() {
-        return myValueNameDelimiter;
+        return valueNameDelimiter;
     }
 
     @Override
     public String getName() {
-        return myName;
+        return name;
     }
 
     @Override
     public String getValue() {
-        return myValue;
+        return value;
     }
 
     @Override
     public boolean isNonRendering() {
-        return myName.indexOf(' ') != -1 || myValue.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(myName);
+        return name.indexOf(' ') != -1 || value.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(name);
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -78,12 +78,12 @@ public class AttributeImpl implements Attribute {
 
     @Override
     public boolean containsValue(CharSequence value) {
-        return indexOfValue(myValue, value, myValueListDelimiter, myValueNameDelimiter) != -1;
+        return indexOfValue(this.value, value, valueListDelimiter, valueNameDelimiter) != -1;
     }
 
     @Override
     public Attribute replaceValue(CharSequence value) {
-        return value.equals(myValue) ? this : of(myName, value, myValueListDelimiter, myValueNameDelimiter);
+        return value.equals(this.value) ? this : of(name, value, valueListDelimiter, valueNameDelimiter);
     }
 
     @Override
@@ -105,22 +105,22 @@ public class AttributeImpl implements Attribute {
 
         Attribute attribute = (Attribute) o;
 
-        if (!myName.equals(attribute.getName())) return false;
-        return myValue.equals(attribute.getValue());
+        if (!name.equals(attribute.getName())) return false;
+        return value.equals(attribute.getValue());
     }
 
     @Override
     public int hashCode() {
-        int result = myName.hashCode();
-        result = 31 * result + myValue.hashCode();
+        int result = name.hashCode();
+        result = 31 * result + value.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
         return "AttributeImpl { " +
-                "myName='" + myName + '\'' +
-                ", myValue='" + myValue + '\'' +
+                "name='" + name + '\'' +
+                ", value='" + value + '\'' +
                 " }";
     }
 

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.EnumSetUtils;
+import com.vladsch.flexmark.util.collection.BitEnumSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -9,8 +9,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.EnumSet;
 import java.util.List;
-
-import static com.vladsch.flexmark.util.EnumSetUtils.toEnumSet;
 
 /**
  * Used to collect line text for further processing
@@ -30,7 +28,7 @@ import static com.vladsch.flexmark.util.EnumSetUtils.toEnumSet;
  */
 @SuppressWarnings({ "UnusedReturnValue", "SameParameterValue" })
 public interface LineFormattingAppendable extends Appendable {
-    enum Option {
+    enum Options {
         CONVERT_TABS,
         COLLAPSE_WHITESPACE,
         SUPPRESS_TRAILING_WHITESPACE,
@@ -40,22 +38,22 @@ public interface LineFormattingAppendable extends Appendable {
         PREFIX_PRE_FORMATTED,
     }
 
-    Option O_CONVERT_TABS = Option.CONVERT_TABS;
-    Option O_COLLAPSE_WHITESPACE = Option.COLLAPSE_WHITESPACE;
-    Option O_SUPPRESS_TRAILING_WHITESPACE = Option.SUPPRESS_TRAILING_WHITESPACE;
-    Option O_PASS_THROUGH = Option.PASS_THROUGH;
-    Option O_ALLOW_LEADING_WHITESPACE = Option.ALLOW_LEADING_WHITESPACE;
-    Option O_ALLOW_LEADING_EOL = Option.ALLOW_LEADING_EOL;
-    Option O_PREFIX_PRE_FORMATTED = Option.PREFIX_PRE_FORMATTED;
-    Option[] O_FORMAT_ALL = { O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_SUPPRESS_TRAILING_WHITESPACE };
+    Options O_CONVERT_TABS = Options.CONVERT_TABS;
+    Options O_COLLAPSE_WHITESPACE = Options.COLLAPSE_WHITESPACE;
+    Options O_SUPPRESS_TRAILING_WHITESPACE = Options.SUPPRESS_TRAILING_WHITESPACE;
+    Options O_PASS_THROUGH = Options.PASS_THROUGH;
+    Options O_ALLOW_LEADING_WHITESPACE = Options.ALLOW_LEADING_WHITESPACE;
+    Options O_ALLOW_LEADING_EOL = Options.ALLOW_LEADING_EOL;
+    Options O_PREFIX_PRE_FORMATTED = Options.PREFIX_PRE_FORMATTED;
+    BitEnumSet<Options> O_FORMAT_ALL = BitEnumSet.of( O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_SUPPRESS_TRAILING_WHITESPACE);
 
-    int F_CONVERT_TABS = 1 << O_CONVERT_TABS.ordinal();                                   // expand tabs on column multiples of 4
-    int F_COLLAPSE_WHITESPACE = 1 << O_COLLAPSE_WHITESPACE.ordinal();                     // collapse multiple tabs and spaces to single space
-    int F_SUPPRESS_TRAILING_WHITESPACE = 1 << O_SUPPRESS_TRAILING_WHITESPACE.ordinal();   // don't output trailing whitespace
-    int F_PASS_THROUGH = 1 << O_PASS_THROUGH.ordinal();                                   // just pass everything through to appendable with no formatting
-    int F_ALLOW_LEADING_WHITESPACE = 1 << O_ALLOW_LEADING_WHITESPACE.ordinal();           // allow leading spaces on a line, else remove
-    int F_ALLOW_LEADING_EOL = 1 << O_ALLOW_LEADING_EOL.ordinal();                         // allow EOL at offset 0
-    int F_PREFIX_PRE_FORMATTED = 1 << O_PREFIX_PRE_FORMATTED.ordinal();                   // when prefixing lines, prefix pre-formatted lines
+    int F_CONVERT_TABS = BitEnumSet.intMask(O_CONVERT_TABS);                                   // expand tabs on column multiples of 4
+    int F_COLLAPSE_WHITESPACE = BitEnumSet.intMask(O_COLLAPSE_WHITESPACE);                     // collapse multiple tabs and spaces to single space
+    int F_SUPPRESS_TRAILING_WHITESPACE = BitEnumSet.intMask(O_SUPPRESS_TRAILING_WHITESPACE);   // don't output trailing whitespace
+    int F_PASS_THROUGH = BitEnumSet.intMask(O_PASS_THROUGH);                                   // just pass everything through to appendable with no formatting
+    int F_ALLOW_LEADING_WHITESPACE = BitEnumSet.intMask(O_ALLOW_LEADING_WHITESPACE);           // allow leading spaces on a line, else remove
+    int F_ALLOW_LEADING_EOL = BitEnumSet.intMask(O_ALLOW_LEADING_EOL);                         // allow EOL at offset 0
+    int F_PREFIX_PRE_FORMATTED = BitEnumSet.intMask(O_PREFIX_PRE_FORMATTED);                   // when prefixing lines, prefix pre-formatted lines
     int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_SUPPRESS_TRAILING_WHITESPACE; // select all formatting options
 
     // Use F_ prefixed constants
@@ -68,16 +66,22 @@ public interface LineFormattingAppendable extends Appendable {
     @Deprecated int PREFIX_PRE_FORMATTED = F_PREFIX_PRE_FORMATTED;
     @Deprecated int FORMAT_ALL = F_FORMAT_ALL;
 
-    static EnumSet<Option> toOptionSet(int options) {
-        return EnumSetUtils.toEnumSet(Option.class, options);
+    static BitEnumSet<Options> toOptionSet(int options) {
+        return BitEnumSet.of(Options.class, options);
+    }
+
+    static BitEnumSet<Options> toOptionSet(Options... options) {
+        return BitEnumSet.of(Options.class, options);
     }
 
     /**
-     * Get current options
+     * Get current options as bit mask flags
      *
      * @return option flags
      */
-    int getOptions();
+    default int getOptions() {
+        return getOptionSet().toInt();
+    }
 
     /**
      * Get current options as set which can be used to modify options
@@ -85,9 +89,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @return mutable option set
      */
     @NotNull
-    default EnumSet<Option> getOptionSet() {
-        return toOptionSet(getOptions());
-    }
+    BitEnumSet<Options> getOptionSet();
 
     /**
      * Set options on processing text
@@ -95,16 +97,25 @@ public interface LineFormattingAppendable extends Appendable {
      * @param options option flags
      * @return this
      */
-    @NotNull LineFormattingAppendable setOptions(int options);
-
     @NotNull
-    default LineFormattingAppendable setOptions(Option... options) {
-        return setOptions(EnumSetUtils.toInt(EnumSetUtils.toEnumSet(Option.class, options)));
+    default LineFormattingAppendable setOptions(int options) {
+        return setOptions(toOptionSet(options));
     }
 
     @NotNull
-    default LineFormattingAppendable setOptions(EnumSet<Option> options) {
-        return setOptions(EnumSetUtils.toInt(options));
+    default LineFormattingAppendable setOptions(Options... options) {
+        return setOptions(toOptionSet(options).toInt());
+    }
+
+    /**
+     * Set options on processing text
+     *
+     * @param options option set
+     * @return this
+     */
+    @NotNull
+    default LineFormattingAppendable setOptions(BitEnumSet<Options> options) {
+        return setOptions(options.toInt());
     }
 
     // these methods are monitored for content and formatting applied

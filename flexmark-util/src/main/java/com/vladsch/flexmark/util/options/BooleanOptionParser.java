@@ -9,10 +9,10 @@ import java.util.List;
 public abstract class BooleanOptionParser<T> implements OptionParser<T> {
     public static final String OPTION_0_PARAMETERS_1_IGNORED = "Option {0} does not have any parameters. {1} was ignored";
     public static final String KEY_OPTION_0_PARAMETERS_1_IGNORED = "options.parser.boolean-option.ignored";
-    private final String myOptionName;
+    private final String optionName;
 
     public BooleanOptionParser(String optionName) {
-        myOptionName = optionName;
+        this.optionName = optionName;
     }
 
     abstract protected T setOptions(T options);
@@ -20,23 +20,22 @@ public abstract class BooleanOptionParser<T> implements OptionParser<T> {
 
     @Override
     public String getOptionName() {
-        return myOptionName;
+        return optionName;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Pair<T, List<ParsedOption<T>>> parseOption(BasedSequence optionText, T options, MessageProvider provider) {
         if (optionText.isEmpty()) {
-            return new Pair<>(setOptions(options), (List<ParsedOption<T>>) Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.VALID)));
+            return new Pair<>(setOptions(options), Collections.singletonList(new ParsedOption<>(optionText, this, ParsedOptionStatus.VALID)));
         } else {
             if (provider == null) provider = MessageProvider.DEFAULT;
-            String message = provider.message(KEY_OPTION_0_PARAMETERS_1_IGNORED, OPTION_0_PARAMETERS_1_IGNORED, myOptionName, optionText);
-            return new Pair<>(setOptions(options), (List<ParsedOption<T>>) Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.IGNORED, Collections.singletonList(new ParserMessage(optionText, ParsedOptionStatus.IGNORED, message)))));
+            String message = provider.message(KEY_OPTION_0_PARAMETERS_1_IGNORED, OPTION_0_PARAMETERS_1_IGNORED, optionName, optionText);
+            return new Pair<>(setOptions(options), Collections.singletonList(new ParsedOption<>(optionText, this, ParsedOptionStatus.IGNORED, Collections.singletonList(new ParserMessage(optionText, ParsedOptionStatus.IGNORED, message)))));
         }
     }
 
     @Override
     public String getOptionText(T options, T defaultOptions) {
-        return isOptionSet(options) && (defaultOptions == null || !isOptionSet(defaultOptions)) ? myOptionName : "";
+        return isOptionSet(options) && (defaultOptions == null || !isOptionSet(defaultOptions)) ? optionName : "";
     }
 }

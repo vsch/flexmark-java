@@ -7,29 +7,29 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class MutableAttributeImpl implements MutableAttribute {
-    private final String myName;
-    private final char myValueListDelimiter;
-    private final char myValueNameDelimiter;
+    private final String name;
+    private final char valueListDelimiter;
+    private final char valueNameDelimiter;
 
-    private String myValue;
-    private LinkedHashMap<String, String> myValues;
+    private String value;
+    private LinkedHashMap<String, String> values;
 
     private MutableAttributeImpl(CharSequence name, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
-        myName = String.valueOf(name);
-        myValueListDelimiter = valueListDelimiter;
-        myValueNameDelimiter = valueNameDelimiter;
-        myValue = value == null ? "" : String.valueOf(value);
-        myValues = null;
+        this.name = String.valueOf(name);
+        this.valueListDelimiter = valueListDelimiter;
+        this.valueNameDelimiter = valueNameDelimiter;
+        this.value = value == null ? "" : String.valueOf(value);
+        values = null;
     }
 
     @Override
     public char getValueListDelimiter() {
-        return myValueListDelimiter;
+        return valueListDelimiter;
     }
 
     @Override
     public char getValueNameDelimiter() {
-        return myValueNameDelimiter;
+        return valueNameDelimiter;
     }
 
     @Override
@@ -49,41 +49,41 @@ public class MutableAttributeImpl implements MutableAttribute {
 
     @Override
     public String getName() {
-        return myName;
+        return name;
     }
 
     @Override
     public String getValue() {
-        if (myValue == null) {
-            myValue = valueFromMap();
+        if (value == null) {
+            value = valueFromMap();
         }
-        return myValue;
+        return value;
     }
 
     public void resetToValuesMap() {
-        if (myValues == null) throw new IllegalStateException("resetToValuesMap called when myValues is null");
-        myValue = null;
+        if (values == null) throw new IllegalStateException("resetToValuesMap called when values is null");
+        value = null;
     }
 
     @SuppressWarnings("WeakerAccess")
     protected Map<String, String> getValueMap() {
-        if (myValues == null) {
-            myValues = new LinkedHashMap<>();
-            if (myValueListDelimiter != SequenceUtils.NUL) {
-                if (!myValue.isEmpty()) {
+        if (values == null) {
+            values = new LinkedHashMap<>();
+            if (valueListDelimiter != SequenceUtils.NUL) {
+                if (!value.isEmpty()) {
                     int lastPos = 0;
-                    while (lastPos < myValue.length()) {
-                        int pos = myValue.indexOf(myValueListDelimiter, lastPos);
+                    while (lastPos < value.length()) {
+                        int pos = value.indexOf(valueListDelimiter, lastPos);
 
-                        int endPos = pos == -1 ? myValue.length() : pos;
+                        int endPos = pos == -1 ? value.length() : pos;
                         if (lastPos < endPos) {
-                            String value = myValue.substring(lastPos, endPos);
-                            int namePos = myValueNameDelimiter != SequenceUtils.NUL ? value.indexOf(myValueNameDelimiter) : -1;
+                            String value = this.value.substring(lastPos, endPos);
+                            int namePos = valueNameDelimiter != SequenceUtils.NUL ? value.indexOf(valueNameDelimiter) : -1;
 
                             if (namePos == -1) {
-                                myValues.put(value, "");
+                                values.put(value, "");
                             } else {
-                                myValues.put(value.substring(0, namePos), value.substring(namePos + 1));
+                                values.put(value.substring(0, namePos), value.substring(namePos + 1));
                             }
                         }
                         if (pos == -1) break;
@@ -91,14 +91,14 @@ public class MutableAttributeImpl implements MutableAttribute {
                     }
                 }
             } else {
-                myValues.put(myValue, "");
+                values.put(value, "");
             }
         }
-        return myValues;
+        return values;
     }
 
     /**
-     * Return the attribute value string by splicing the values of the map using myValueListDelimiter and myValueNameDelimiter
+     * Return the attribute value string by splicing the values of the map using valueListDelimiter and valueNameDelimiter
      * with replacements of the given name/value if provided. If the name is not empty and value is empty then this will be
      * removed from the final string
      *
@@ -106,22 +106,22 @@ public class MutableAttributeImpl implements MutableAttribute {
      */
     @SuppressWarnings("WeakerAccess")
     protected String valueFromMap() {
-        if (myValueListDelimiter != SequenceUtils.NUL) {
+        if (valueListDelimiter != SequenceUtils.NUL) {
             StringBuilder sb = new StringBuilder();
-            if (myValueNameDelimiter != SequenceUtils.NUL) {
+            if (valueNameDelimiter != SequenceUtils.NUL) {
                 String sep = "";
-                String del = String.valueOf(myValueListDelimiter);
-                for (Map.Entry<String, String> entry : myValues.entrySet()) {
+                String del = String.valueOf(valueListDelimiter);
+                for (Map.Entry<String, String> entry : values.entrySet()) {
                     if (!entry.getKey().isEmpty()/* && !entry.getValue().isEmpty()*/) {
                         sb.append(sep);
                         sep = del;
-                        sb.append(entry.getKey()).append(myValueNameDelimiter).append(entry.getValue());
+                        sb.append(entry.getKey()).append(valueNameDelimiter).append(entry.getValue());
                     }
                 }
             } else {
                 String sep = "";
-                String del = String.valueOf(myValueListDelimiter);
-                for (String key : myValues.keySet()) {
+                String del = String.valueOf(valueListDelimiter);
+                for (String key : values.keySet()) {
                     if (!key.isEmpty()) {
                         sb.append(sep);
                         sb.append(key);
@@ -129,46 +129,46 @@ public class MutableAttributeImpl implements MutableAttribute {
                     }
                 }
             }
-            myValue = sb.toString();
+            value = sb.toString();
         } else {
-            myValue = myValues == null || myValues.isEmpty() ? "" : myValues.keySet().iterator().next();
+            value = values == null || values.isEmpty() ? "" : values.keySet().iterator().next();
         }
-        return myValue;
+        return value;
     }
 
     @Override
     public boolean isNonRendering() {
-        return myName.indexOf(' ') != -1 || myValue.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(myName);
+        return name.indexOf(' ') != -1 || value.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(name);
     }
 
     public MutableAttributeImpl replaceValue(CharSequence value) {
         String useValue = value == null ? "" : String.valueOf(value);
-        if (myValue == null || value == null || !myValue.equals(useValue)) {
-            myValue = useValue;
-            myValues = null;
+        if (this.value == null || value == null || !this.value.equals(useValue)) {
+            this.value = useValue;
+            values = null;
         }
         return this;
     }
 
     public MutableAttributeImpl setValue(CharSequence value) {
-        if (myValueListDelimiter != SequenceUtils.NUL) {
+        if (valueListDelimiter != SequenceUtils.NUL) {
             if (value != null && value.length() != 0) {
                 Map<String, String> valueMap = getValueMap();
 
                 forEachValue(value, (itemName, itemValue) -> {
-                    if (myValueNameDelimiter != SequenceUtils.NUL && itemValue.isEmpty()) {
+                    if (valueNameDelimiter != SequenceUtils.NUL && itemValue.isEmpty()) {
                         valueMap.remove(itemName);
                     } else {
                         valueMap.put(itemName, itemValue);
                     }
                 });
 
-                myValue = null;
+                this.value = null;
             }
         } else {
-            if (myValue == null || !myValue.contentEquals(value)) {
-                myValue = value == null ? "" : String.valueOf(value);
-                myValues = null;
+            if (this.value == null || !this.value.contentEquals(value)) {
+                this.value = value == null ? "" : String.valueOf(value);
+                values = null;
             }
         }
 
@@ -179,13 +179,13 @@ public class MutableAttributeImpl implements MutableAttribute {
         String useValue = value == null ? "" : String.valueOf(value);
         int lastPos = 0;
         while (lastPos < useValue.length()) {
-            int pos = useValue.indexOf(myValueListDelimiter, lastPos);
+            int pos = useValue.indexOf(valueListDelimiter, lastPos);
 
             int endPos = pos == -1 ? useValue.length() : pos;
             if (lastPos < endPos) {
                 String valueItem = useValue.substring(lastPos, endPos).trim();
                 if (!valueItem.isEmpty()) {
-                    int namePos = myValueNameDelimiter == SequenceUtils.NUL ? -1 : valueItem.indexOf(myValueNameDelimiter);
+                    int namePos = valueNameDelimiter == SequenceUtils.NUL ? -1 : valueItem.indexOf(valueNameDelimiter);
                     String itemName = namePos == -1 ? valueItem : valueItem.substring(0, namePos);
                     String itemValue = namePos == -1 ? "" : valueItem.substring(namePos + 1);
 
@@ -199,7 +199,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     }
 
     public MutableAttributeImpl removeValue(CharSequence value) {
-        if (myValueListDelimiter != SequenceUtils.NUL) {
+        if (valueListDelimiter != SequenceUtils.NUL) {
             if (value != null && value.length() != 0) {
                 Map<String, String> valueMap = getValueMap();
                 boolean[] removed = { false };
@@ -210,19 +210,19 @@ public class MutableAttributeImpl implements MutableAttribute {
                     }
                 });
 
-                if (removed[0]) myValue = null;
+                if (removed[0]) this.value = null;
             }
         } else {
-            if (myValue == null || !myValue.contentEquals(value)) {
-                myValue = "";
-                myValues = null;
+            if (this.value == null || !this.value.contentEquals(value)) {
+                this.value = "";
+                values = null;
             }
         }
         return this;
     }
 
     public boolean containsValue(CharSequence value) {
-        return AttributeImpl.indexOfValue(myValue, value, myValueListDelimiter, myValueNameDelimiter) != -1;
+        return AttributeImpl.indexOfValue(this.value, value, valueListDelimiter, valueNameDelimiter) != -1;
     }
 
     @Override
@@ -232,13 +232,13 @@ public class MutableAttributeImpl implements MutableAttribute {
 
         Attribute attribute = (Attribute) o;
 
-        if (!myName.equals(attribute.getName())) return false;
+        if (!name.equals(attribute.getName())) return false;
         return getValue().equals(attribute.getValue());
     }
 
     @Override
     public int hashCode() {
-        int result = myName.hashCode();
+        int result = name.hashCode();
         result = 31 * result + getValue().hashCode();
         return result;
     }
@@ -246,8 +246,8 @@ public class MutableAttributeImpl implements MutableAttribute {
     @Override
     public String toString() {
         return "MutableAttributeImpl { " +
-                "myName='" + myName + '\'' +
-                ", myValue='" + getValue() + '\'' +
+                "name='" + name + '\'' +
+                ", value='" + getValue() + '\'' +
                 " }";
     }
 

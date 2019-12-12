@@ -13,16 +13,16 @@ import static com.vladsch.flexmark.util.format.TextAlignment.LEFT;
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
 
-    final @NotNull BasedSequence myChars;
-    final @NotNull CharWidthProvider myCharWidthProvider;
+    final @NotNull BasedSequence baseSeq;
+    final @NotNull CharWidthProvider charWidthProvider;
 
-    private int myFirstIndent = 0;
-    private int myIndent = 0;
-    private int myFirstWidthOffset = 0;
-    int myWidth = 0;
-    private @NotNull TextAlignment myAlignment = LEFT;
-    boolean myKeepHardBreaks = true;
-    boolean myKeepLineBreaks = false;
+    private int firstIndent = 0;
+    private int indent = 0;
+    private int firstWidthOffset = 0;
+    int width = 0;
+    private @NotNull TextAlignment alignment = LEFT;
+    boolean keepHardBreaks = true;
+    boolean keepLineBreaks = false;
 
     public MarkdownParagraph(CharSequence chars) {
         this(BasedSequence.of(chars), CharWidthProvider.NULL);
@@ -33,98 +33,98 @@ public class MarkdownParagraph {
     }
 
     public MarkdownParagraph(@NotNull BasedSequence chars, @NotNull CharWidthProvider charWidthProvider) {
-        myChars = chars;
-        myCharWidthProvider = charWidthProvider;
+        baseSeq = chars;
+        this.charWidthProvider = charWidthProvider;
     }
 
     @NotNull
     public BasedSequence getChars() {
-        return myChars;
+        return baseSeq;
     }
 
     public int getFirstIndent() {
-        return myFirstIndent;
+        return firstIndent;
     }
 
     public void setFirstIndent(int firstIndent) {
-        myFirstIndent = Math.max(0, firstIndent);
+        this.firstIndent = Math.max(0, firstIndent);
     }
 
     public int getIndent() {
-        return myIndent;
+        return indent;
     }
 
     public void setIndent(int indent) {
-        myIndent = Math.max(0, indent);
+        this.indent = Math.max(0, indent);
     }
 
     public int getFirstWidth() {
-        return (myWidth == 0) ? 0 : Math.max(0, myWidth + myFirstWidthOffset);
+        return (width == 0) ? 0 : Math.max(0, width + firstWidthOffset);
     }
 
     public int getFirstWidthOffset() {
-        return myFirstWidthOffset;
+        return firstWidthOffset;
     }
 
     public void setFirstWidthOffset(int firstWidthOffset) {
-        myFirstWidthOffset = firstWidthOffset;
+        this.firstWidthOffset = firstWidthOffset;
     }
 
     public int getWidth() {
-        return myWidth;
+        return width;
     }
 
     public void setWidth(int width) {
-        myWidth = Math.max(0, width);
+        this.width = Math.max(0, width);
     }
 
     @NotNull
     public TextAlignment getAlignment() {
-        return myAlignment;
+        return alignment;
     }
 
     public void setAlignment(@NotNull TextAlignment alignment) {
-        myAlignment = alignment;
+        this.alignment = alignment;
     }
 
     public boolean getKeepHardBreaks() {
-        return myKeepHardBreaks;
+        return keepHardBreaks;
     }
 
     public void setKeepHardBreaks(boolean keepHardBreaks) {
-        myKeepHardBreaks = keepHardBreaks;
+        this.keepHardBreaks = keepHardBreaks;
     }
 
     public boolean getKeepLineBreaks() {
-        return myKeepLineBreaks;
+        return keepLineBreaks;
     }
 
     public void setKeepLineBreaks(boolean keepLineBreaks) {
-        myKeepLineBreaks = keepLineBreaks;
+        this.keepLineBreaks = keepLineBreaks;
     }
 
     @NotNull
     public CharWidthProvider getCharWidthProvider() {
-        return myCharWidthProvider;
+        return charWidthProvider;
     }
 
     void leftAlign(int width) {
-        myAlignment = LEFT;
+        alignment = LEFT;
         setWidth(width);
     }
 
     void rightAlign(int width) {
-        myAlignment = TextAlignment.RIGHT;
+        alignment = TextAlignment.RIGHT;
         setWidth(width);
     }
 
     void centerAlign(int width) {
-        myAlignment = TextAlignment.CENTER;
+        alignment = TextAlignment.CENTER;
         setWidth(width);
     }
 
     void justifyAlign(int width) {
-        myAlignment = TextAlignment.JUSTIFIED;
+        alignment = TextAlignment.JUSTIFIED;
         setWidth(width);
     }
 
@@ -142,9 +142,9 @@ public class MarkdownParagraph {
 
     @NotNull
     public BasedSequence computeResultSequence() {
-        if (getFirstWidth() <= 0) return myChars;
+        if (getFirstWidth() <= 0) return baseSeq;
 
-        if (myAlignment == LEFT) {
+        if (alignment == LEFT) {
             return computeLeftAlignedSequence();
         }
 
@@ -153,14 +153,14 @@ public class MarkdownParagraph {
         final int[] pos = { 0 };
         final int[] lineCount = { 0 };
         ArrayList<Token> lineWords = new ArrayList<>();
-        SequenceBuilder result = SequenceBuilder.emptyBuilder(myChars);
-        int spaceWidth = myCharWidthProvider.spaceWidth();
+        SequenceBuilder result = SequenceBuilder.emptyBuilder(baseSeq);
+        int spaceWidth = charWidthProvider.spaceWidth();
         final int[] lineIndent = { spaceWidth * getFirstIndent() };
         int nextIndent = spaceWidth * getIndent();
         final int[] lineWidth = { spaceWidth * getFirstWidth() };
         int nextWidth = (getWidth() <= 0) ? Integer.MAX_VALUE : spaceWidth * getWidth();
         final int[] wordsOnLine = { 0 };
-        BasedSequence chars = myChars;
+        BasedSequence chars = baseSeq;
         TextTokenizer tokenizer = new TextTokenizer(chars);
 
         LineBreakProcessor doLineBreak = (spaceToken, breakChars, lastLine) -> {
@@ -193,11 +193,11 @@ public class MarkdownParagraph {
                 break;
 
                 case WORD: {
-                    if (pos[0] == 0 || lineIndent[0] + pos[0] + myCharWidthProvider.getStringWidth(token.subSequence(chars)) + spaceWidth <= lineWidth[0]) {
+                    if (pos[0] == 0 || lineIndent[0] + pos[0] + charWidthProvider.getStringWidth(token.subSequence(chars)) + spaceWidth <= lineWidth[0]) {
                         // fits, add it;
                         if (pos[0] > 0) pos[0] += spaceWidth;
                         lineWords.add(token);
-                        pos[0] += myCharWidthProvider.getStringWidth(token.subSequence(chars));
+                        pos[0] += charWidthProvider.getStringWidth(token.subSequence(chars));
                         wordsOnLine[0]++;
                         tokenizer.next();
                     } else {
@@ -214,9 +214,9 @@ public class MarkdownParagraph {
 
                 case MARKDOWN_BREAK: {
                     if (pos[0] > 0) {
-                        if (myKeepHardBreaks) {
+                        if (keepHardBreaks) {
                             doLineBreak.run(token, hardBreak, true);
-                        } else if (myKeepLineBreaks) {
+                        } else if (keepLineBreaks) {
                             lineWords.add(token);
                             doLineBreak.run(token, lineBreak, true);
                         }
@@ -226,7 +226,7 @@ public class MarkdownParagraph {
                 break;
 
                 case BREAK: {
-                    if (pos[0] > 0 && myKeepLineBreaks) {
+                    if (pos[0] > 0 && keepLineBreaks) {
                         doLineBreak.run(token, lineBreak, true);
                     }
                     tokenizer.next();
@@ -255,9 +255,9 @@ public class MarkdownParagraph {
         int addSpaces = 0;
         int remSpaces = 0;
         int distributeSpaces = Math.max(extraSpaces, 0);
-        int indent = (lineCount > 0) ? myIndent : myFirstIndent;
+        int indent = (lineCount > 0) ? this.indent : firstIndent;
 
-        switch (myAlignment) {
+        switch (alignment) {
             case LEFT:
                 leadSpaces = indent;
                 break;
@@ -340,25 +340,25 @@ public class MarkdownParagraph {
     }
 
     static class State {
-        final TextTokenizer myTextTokenizer;
-        final int myIndex;
-        final int myLastPos;
-        final boolean myInWord;
-        final int myLastConsecutiveSpaces;
-        final Token myToken;
+        final TextTokenizer textTokenizer;
+        final int index;
+        final int lastPos;
+        final boolean isInWord;
+        final int lastConsecutiveSpaces;
+        final Token token;
 
         public State(TextTokenizer textTokenizer, int index, int lastPos, boolean inWord, int lastConsecutiveSpaces, Token token) {
-            myTextTokenizer = textTokenizer;
-            myIndex = index;
-            myLastPos = lastPos;
-            myInWord = inWord;
-            myLastConsecutiveSpaces = lastConsecutiveSpaces;
-            myToken = token;
+            this.textTokenizer = textTokenizer;
+            this.index = index;
+            this.lastPos = lastPos;
+            isInWord = inWord;
+            this.lastConsecutiveSpaces = lastConsecutiveSpaces;
+            this.token = token;
         }
     }
 
     public BasedSequence computeLeftAlignedSequence() {
-        if (getFirstWidth() <= 0) return myChars;
+        if (getFirstWidth() <= 0) return baseSeq;
 
         LeftAlignedWrapping wrapping = new LeftAlignedWrapping();
         return wrapping.doCompute();
@@ -368,16 +368,16 @@ public class MarkdownParagraph {
         final String lineBreak = SequenceUtils.EOL;
         int col = 0;
         int lineCount = 0;
-        final SequenceBuilder result = SequenceBuilder.emptyBuilder(myChars);
-        final int spaceWidth = myCharWidthProvider.spaceWidth();
+        final SequenceBuilder result = SequenceBuilder.emptyBuilder(baseSeq);
+        final int spaceWidth = charWidthProvider.spaceWidth();
         int lineIndent = spaceWidth * getFirstIndent();
         final int nextIndent = spaceWidth * getIndent();
         int lineWidth = spaceWidth * getFirstWidth();
-        final int nextWidth = myWidth <= 0 ? Integer.MAX_VALUE : spaceWidth * myWidth;
+        final int nextWidth = width <= 0 ? Integer.MAX_VALUE : spaceWidth * width;
         int wordsOnLine = 0;
         BasedSequence leadingIndent = null;
         BasedSequence lastSpace = null;
-        final BasedSequence chars = myChars;
+        final BasedSequence chars = baseSeq;
         final TextTokenizer tokenizer = new TextTokenizer(chars);
 
         LeftAlignedWrapping() {
@@ -394,7 +394,7 @@ public class MarkdownParagraph {
 
         void addChars(CharSequence charSequence) {
             result.add(charSequence);
-            col += myCharWidthProvider.getStringWidth(charSequence);
+            col += charWidthProvider.getStringWidth(charSequence);
         }
 
         BasedSequence addSpaces(BasedSequence sequence, int count) {
@@ -445,7 +445,7 @@ public class MarkdownParagraph {
                     }
 
                     case WORD: {
-                        if (col == 0 || col + myCharWidthProvider.getStringWidth(token.subSequence(chars)) + spaceWidth <= lineWidth) {
+                        if (col == 0 || col + charWidthProvider.getStringWidth(token.subSequence(chars)) + spaceWidth <= lineWidth) {
                             // fits, add it
                             if (col > 0) {
                                 lastSpace = addSpaces(lastSpace, 1);
@@ -477,7 +477,7 @@ public class MarkdownParagraph {
 
                     case MARKDOWN_BREAK: {
                         // start a new line if not already new
-                        if (myKeepHardBreaks) {
+                        if (keepHardBreaks) {
                             if (col > 0) {
                                 addToken(token);
                                 afterLineBreak();
@@ -491,7 +491,7 @@ public class MarkdownParagraph {
                     }
 
                     case BREAK: {
-                        if (col > 0 && myKeepLineBreaks) {
+                        if (col > 0 && keepLineBreaks) {
                             addToken(token);
                             afterLineBreak();
                         }
@@ -506,47 +506,47 @@ public class MarkdownParagraph {
     }
 
     public static class TextTokenizer {
-        final private CharSequence myChars;
-        private final int myMaxIndex;
-        private int myIndex = 0;
-        private int myLastPos = 0;
-        private boolean myInWord = false;
-        private int myLastConsecutiveSpaces = 0;
-        private @Nullable Token myToken = null;
+        final private CharSequence chars;
+        private final int maxIndex;
+        private int index = 0;
+        private int lastPos = 0;
+        private boolean isInWord = false;
+        private int lastConsecutiveSpaces = 0;
+        private @Nullable Token token = null;
 
         TextTokenizer(@NotNull CharSequence chars) {
-            myChars = chars;
-            myMaxIndex = myChars.length();
+            this.chars = chars;
+            maxIndex = this.chars.length();
             reset();
         }
 
         @NotNull
         public State getState() {
-            return new State(this, myIndex, myLastPos, myInWord, myLastConsecutiveSpaces, myToken);
+            return new State(this, index, lastPos, isInWord, lastConsecutiveSpaces, token);
         }
 
         public void setState(@NotNull State value) {
-            assert (this == value.myTextTokenizer);
+            assert (this == value.textTokenizer);
 
-            myIndex = value.myIndex;
-            myLastPos = value.myLastPos;
-            myInWord = value.myInWord;
-            myLastConsecutiveSpaces = value.myLastConsecutiveSpaces;
-            myToken = value.myToken;
+            index = value.index;
+            lastPos = value.lastPos;
+            isInWord = value.isInWord;
+            lastConsecutiveSpaces = value.lastConsecutiveSpaces;
+            token = value.token;
         }
 
         public void reset() {
-            myIndex = 0;
-            myLastPos = 0;
-            myInWord = false;
-            myToken = null;
-            myLastConsecutiveSpaces = 0;
+            index = 0;
+            lastPos = 0;
+            isInWord = false;
+            token = null;
+            lastConsecutiveSpaces = 0;
             next();
         }
 
         @Nullable
         Token getToken() {
-            return myToken;
+            return token;
         }
 
         @NotNull
@@ -554,8 +554,8 @@ public class MarkdownParagraph {
             ArrayList<Token> tokens = new ArrayList<Token>();
             reset();
 
-            while (myToken != null) {
-                tokens.add(myToken);
+            while (token != null) {
+                tokens.add(token);
                 next();
             }
 
@@ -563,67 +563,67 @@ public class MarkdownParagraph {
         }
 
         void next() {
-            myToken = null;
-            while (myIndex < myMaxIndex) {
-                char c = myChars.charAt(myIndex);
-                if (myInWord) {
+            token = null;
+            while (index < maxIndex) {
+                char c = chars.charAt(index);
+                if (isInWord) {
                     if (c == ' ' || c == '\t' || c == '\n' || c == MARKDOWN_START_LINE_CHAR) {
-                        myInWord = false;
-                        if (myLastPos < myIndex) {
+                        isInWord = false;
+                        if (lastPos < index) {
                             // have a word
-                            myToken = Token.of(TextType.WORD, myLastPos, myIndex);
-                            myLastPos = myIndex;
+                            token = Token.of(TextType.WORD, lastPos, index);
+                            lastPos = index;
                             break;
                         }
                     } else {
-                        myIndex++;
+                        index++;
                     }
                 } else {
                     // in white space
                     if (c != ' ' && c != '\t' && c != '\n' && c != MARKDOWN_START_LINE_CHAR) {
-                        if (myLastPos < myIndex) {
-                            myToken = Token.of(TextType.SPACE, myLastPos, myIndex);
-                            myLastPos = myIndex;
-                            myInWord = true;
-                            myLastConsecutiveSpaces = 0;
+                        if (lastPos < index) {
+                            token = Token.of(TextType.SPACE, lastPos, index);
+                            lastPos = index;
+                            isInWord = true;
+                            lastConsecutiveSpaces = 0;
                             break;
                         } else {
-                            myInWord = true;
-                            myLastConsecutiveSpaces = 0;
+                            isInWord = true;
+                            lastConsecutiveSpaces = 0;
                         }
                     } else {
                         if (c == '\n') {
-                            if (myLastConsecutiveSpaces >= 2) {
-                                myToken = Token.of(TextType.MARKDOWN_BREAK, myIndex - myLastConsecutiveSpaces, myIndex + 1);
-                                myLastPos = myIndex + 1;
-                                myLastConsecutiveSpaces = 0;
-                                myIndex++;
+                            if (lastConsecutiveSpaces >= 2) {
+                                token = Token.of(TextType.MARKDOWN_BREAK, index - lastConsecutiveSpaces, index + 1);
+                                lastPos = index + 1;
+                                lastConsecutiveSpaces = 0;
+                                index++;
                                 break;
                             } else {
-                                myToken = Token.of(TextType.BREAK, myIndex, myIndex + 1);
-                                myLastPos = myIndex + 1;
-                                myLastConsecutiveSpaces = 0;
-                                myIndex++;
+                                token = Token.of(TextType.BREAK, index, index + 1);
+                                lastPos = index + 1;
+                                lastConsecutiveSpaces = 0;
+                                index++;
                                 break;
                             }
                         } else if (c == MARKDOWN_START_LINE_CHAR) {
-                            myToken = Token.of(TextType.MARKDOWN_START_LINE, myIndex, myIndex + 1);
-                            myLastPos = myIndex + 1;
-                            myLastConsecutiveSpaces = 0;
-                            myIndex++;
+                            token = Token.of(TextType.MARKDOWN_START_LINE, index, index + 1);
+                            lastPos = index + 1;
+                            lastConsecutiveSpaces = 0;
+                            index++;
                             break;
                         } else {
-                            if (c == ' ') myLastConsecutiveSpaces++;
-                            else myLastConsecutiveSpaces = 0;
-                            myIndex++;
+                            if (c == ' ') lastConsecutiveSpaces++;
+                            else lastConsecutiveSpaces = 0;
+                            index++;
                         }
                     }
                 }
             }
 
-            if (myLastPos < myIndex) {
-                myToken = Token.of((myInWord) ? TextType.WORD : TextType.SPACE, myLastPos, myIndex);
-                myLastPos = myIndex;
+            if (lastPos < index) {
+                token = Token.of((isInWord) ? TextType.WORD : TextType.SPACE, lastPos, index);
+                lastPos = index;
             }
         }
     }

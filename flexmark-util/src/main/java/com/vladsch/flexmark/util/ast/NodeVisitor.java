@@ -12,7 +12,7 @@ import java.util.function.BiConsumer;
  * <p>
  * Usage:
  * {@code
- * myVisitor = new NodeVisitor(
+ * visitor = new NodeVisitor(
  * new VisitHandler&lt;&gt;(Document.class, this::visit),
  * new VisitHandler&lt;&gt;(HtmlEntity.class, this::visit),
  * new VisitHandler&lt;&gt;(SoftLineBreak.class, this::visit),
@@ -21,7 +21,7 @@ import java.util.function.BiConsumer;
  * }
  * <p>
  * Document doc;
- * myVisitor.visit(doc);
+ * visitor.visit(doc);
  * <p>
  * IMPORTANT: This class replaces the old NodeVisitor derived from NodeAdaptedVisitor.
  * <p>

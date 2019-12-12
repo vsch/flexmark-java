@@ -7,22 +7,22 @@ public class Pair<K, V> implements Paired<K, V> {
         return new Pair<>(first, second);
     }
 
-    private final K myFirst;
-    private final V mySecond;
+    private final K first;
+    private final V second;
 
     public Pair(K first, V second) {
-        this.myFirst = first;
-        this.mySecond = second;
+        this.first = first;
+        this.second = second;
     }
 
     @Override
     public K getFirst() {
-        return myFirst;
+        return first;
     }
 
     @Override
     public V getSecond() {
-        return mySecond;
+        return second;
     }
 
     @Override
@@ -30,15 +30,15 @@ public class Pair<K, V> implements Paired<K, V> {
         StringBuilder out = new StringBuilder();
         out.append('(');
 
-        if (myFirst == null) out.append("null");
+        if (first == null) out.append("null");
         else
-            out.append(myFirst.getClass().getName().substring(myFirst.getClass().getPackage().getName().length() + 1)).append(' ').append(myFirst);
+            out.append(first.getClass().getName().substring(first.getClass().getPackage().getName().length() + 1)).append(' ').append(first);
 
         out.append(", ");
 
-        if (mySecond == null) out.append("null");
+        if (second == null) out.append("null");
         else
-            out.append(mySecond.getClass().getName().substring(mySecond.getClass().getPackage().getName().length() + 1)).append(' ').append(mySecond);
+            out.append(second.getClass().getName().substring(second.getClass().getPackage().getName().length() + 1)).append(' ').append(second);
 
         out.append(')');
         return out.toString();
@@ -51,14 +51,14 @@ public class Pair<K, V> implements Paired<K, V> {
 
         Pair<?, ?> pair = (Pair<?, ?>) o;
 
-        if (!Objects.equals(myFirst, pair.myFirst)) return false;
-        return Objects.equals(mySecond, pair.mySecond);
+        if (!Objects.equals(first, pair.first)) return false;
+        return Objects.equals(second, pair.second);
     }
 
     @Override
     public int hashCode() {
-        int result = myFirst != null ? myFirst.hashCode() : 0;
-        result = 31 * result + (mySecond != null ? mySecond.hashCode() : 0);
+        int result = first != null ? first.hashCode() : 0;
+        result = 31 * result + (second != null ? second.hashCode() : 0);
         return result;
     }
 }

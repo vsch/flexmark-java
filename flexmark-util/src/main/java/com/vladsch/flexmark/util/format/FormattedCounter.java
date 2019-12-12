@@ -3,33 +3,33 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.Utils;
 
 public class FormattedCounter {
-    private final NumberFormat myFormat;
-    private final Boolean myLowercase;
-    private final String myDelimiter;
-    private int myCount;
+    private final NumberFormat numberFormat;
+    private final Boolean isLowercase;
+    private final String delimiter;
+    private int count;
 
     public FormattedCounter(NumberFormat format, Boolean lowercase, String delimiter) {
-        myFormat = format;
-        myLowercase = lowercase;
-        myDelimiter = delimiter;
+        numberFormat = format;
+        isLowercase = lowercase;
+        this.delimiter = delimiter;
         reset();
     }
 
     public void reset() {
-        myCount = 0;
+        count = 0;
     }
 
     public int getCount() {
-        return myCount;
+        return count;
     }
 
     public int nextCount() {
-        return ++myCount;
+        return ++count;
     }
 
     public String getFormatted(boolean withDelimiter) {
-        String s = NumberFormat.getFormat(myFormat, Utils.minLimit(myCount, 1));
-        String o = myLowercase == null ? s : myLowercase ? s.toLowerCase() : s.toUpperCase();
-        return withDelimiter && myDelimiter != null && !myDelimiter.isEmpty() ? o + myDelimiter : o;
+        String s = NumberFormat.getFormat(numberFormat, Utils.minLimit(count, 1));
+        String o = isLowercase == null ? s : isLowercase ? s.toLowerCase() : s.toUpperCase();
+        return withDelimiter && delimiter != null && !delimiter.isEmpty() ? o + delimiter : o;
     }
 }

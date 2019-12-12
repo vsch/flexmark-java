@@ -106,7 +106,7 @@ public class HtmlRenderer implements IRender {
      * <p>
      * Pair contains: rendererType, equivalentType
      */
-    public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<>("RENDERER_TYPE_EQUIVALENCE", Collections.<Pair<String, String>>emptyList());
+    public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<>("RENDERER_TYPE_EQUIVALENCE", Collections.emptyList());
 
     // Use LineFormattingAppendable values instead
     @Deprecated public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.F_CONVERT_TABS;
@@ -133,8 +133,6 @@ public class HtmlRenderer implements IRender {
 
         for (int i = builder.nodeRendererFactories.size() - 1; i >= 0; i--) {
             NodeRendererFactory nodeRendererFactory = builder.nodeRendererFactories.get(i);
-            Set<Class<? extends DelegatingNodeRendererFactoryWrapper>>[] myDelegates = new Set[] { null };
-
             nodeRenderers.add(new DelegatingNodeRendererFactoryWrapper(nodeRenderers, nodeRendererFactory));
         }
 
@@ -299,11 +297,11 @@ public class HtmlRenderer implements IRender {
         protected boolean loadExtension(@NotNull Extension extension) {
             if (extension instanceof HtmlRendererExtension) {
                 HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
-                htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
+                htmlRendererExtension.extend(this, TYPE.get(this));
                 return true;
             } else if (extension instanceof RendererExtension) {
                 RendererExtension htmlRendererExtension = (RendererExtension) extension;
-                htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
+                htmlRendererExtension.extend(this, TYPE.get(this));
                 return true;
             }
             return false;
@@ -573,14 +571,20 @@ public class HtmlRenderer implements IRender {
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 NodeRendererFactory nodeRendererFactory = nodeRendererFactories.get(i);
                 NodeRenderer nodeRenderer = nodeRendererFactory.apply(this.getOptions());
-                for (NodeRenderingHandler nodeType : nodeRenderer.getNodeRenderingHandlers()) {
+                Set<NodeRenderingHandler<?>> renderingHandlers = nodeRenderer.getNodeRenderingHandlers();
+
+                assert (renderingHandlers != null);
+                for (NodeRenderingHandler<?> nodeType : renderingHandlers) {
                     // Overwrite existing renderer
                     NodeRenderingHandlerWrapper handlerWrapper = new NodeRenderingHandlerWrapper(nodeType, renderers.get(nodeType.getNodeType()));
                     renderers.put(nodeType.getNodeType(), handlerWrapper);
                 }
 
                 if (nodeRenderer instanceof PhasedNodeRenderer) {
-                    this.renderingPhases.addAll(((PhasedNodeRenderer) nodeRenderer).getRenderingPhases());
+                    Set<RenderingPhase> renderingPhases = ((PhasedNodeRenderer) nodeRenderer).getRenderingPhases();
+                    assert (renderingPhases != null);
+
+                    this.renderingPhases.addAll(renderingPhases);
                     this.phasedRenderers.add((PhasedNodeRenderer) nodeRenderer);
                 }
             }
@@ -610,11 +614,7 @@ public class HtmlRenderer implements IRender {
         @NotNull
         @Override
         public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
-            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.get(linkType);
-            if (resolvedLinks == null) {
-                resolvedLinks = new HashMap<>();
-                resolvedLinkMap.put(linkType, resolvedLinks);
-            }
+            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
             String urlSeq = String.valueOf(url);
             ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
@@ -774,7 +774,7 @@ public class HtmlRenderer implements IRender {
 
                     // go through all renderers that want this phase
                     for (PhasedNodeRenderer phasedRenderer : phasedRenderers) {
-                        if (phasedRenderer.getRenderingPhases().contains(phase)) {
+                        if (Objects.requireNonNull(phasedRenderer.getRenderingPhases()).contains(phase)) {
                             subContext.doNotRenderLinksNesting = documentDoNotRenderLinksNesting;
                             subContext.renderingNode = node;
                             phasedRenderer.renderDocument(subContext, subContext.htmlWriter, (Document) node, phase);

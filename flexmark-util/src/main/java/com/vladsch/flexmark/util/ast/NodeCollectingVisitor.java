@@ -11,28 +11,27 @@ public class NodeCollectingVisitor {
     public static final Function<Node, Class<?>> NODE_CLASSIFIER = Node::getClass;
     private static final Class<?>[] EMPTY_CLASSES = new Class<?>[0];
 
-    private final @NotNull HashMap<Class<?>, List<Class<?>>> mySubClassMap;
-    private final @NotNull HashSet<Class<?>> myIncluded;
-    private final @NotNull HashSet<Class<?>> myExcluded;
-    private final @NotNull ClassificationBag<Class<?>, Node> myNodes;
-    private final @NotNull Class<?>[] myClasses;
+    private final @NotNull HashMap<Class<?>, List<Class<?>>> subClassMap;
+    private final @NotNull HashSet<Class<?>> included;
+    private final @NotNull HashSet<Class<?>> excluded;
+    private final @NotNull ClassificationBag<Class<?>, Node> nodes;
+    private final @NotNull Class<?>[] classes;
 
     public NodeCollectingVisitor(@NotNull Set<Class<?>> classes) {
-        myClasses = classes.toArray(EMPTY_CLASSES);
+        this.classes = classes.toArray(EMPTY_CLASSES);
 
-        mySubClassMap = new HashMap<>();
-        myIncluded = new HashSet<>();
-        myIncluded.addAll(classes);
+        subClassMap = new HashMap<>();
+        included = new HashSet<>();
+        included.addAll(classes);
 
         for (Class<?> clazz : classes) {
             ArrayList<Class<?>> classList = new ArrayList<>(1);
             classList.add(clazz);
-            mySubClassMap.put(clazz, classList);
+            subClassMap.put(clazz, classList);
         }
 
-        myExcluded = new HashSet<>();
-
-        myNodes = new ClassificationBag<>(NODE_CLASSIFIER);
+        excluded = new HashSet<>();
+        nodes = new ClassificationBag<>(NODE_CLASSIFIER);
     }
 
     public void collect(@NotNull Node node) {
@@ -40,37 +39,37 @@ public class NodeCollectingVisitor {
     }
 
     public SubClassingBag<Node> getSubClassingBag() {
-        return new SubClassingBag<>(myNodes, mySubClassMap);
+        return new SubClassingBag<>(nodes, subClassMap);
     }
 
     private void visit(@NotNull Node node) {
         Class<?> nodeClass = node.getClass();
-        if (myIncluded.contains(nodeClass)) {
-            myNodes.add(node);
-        } else if (!myExcluded.contains(nodeClass)) {
+        if (included.contains(nodeClass)) {
+            nodes.add(node);
+        } else if (!excluded.contains(nodeClass)) {
             // see if implements one of the original classes passed in
-            for (Class<?> clazz : myClasses) {
+            for (Class<?> clazz : classes) {
                 if (clazz.isInstance(node)) {
                     // this class is included
-                    myIncluded.add(nodeClass);
-                    List<Class<?>> classList = mySubClassMap.get(clazz);
+                    included.add(nodeClass);
+                    List<Class<?>> classList = subClassMap.get(clazz);
                     if (classList == null) {
                         classList = new ArrayList<>(2);
                         classList.add(clazz);
                         classList.add(nodeClass);
-                        mySubClassMap.put(clazz, classList);
+                        subClassMap.put(clazz, classList);
                     } else {
                         classList.add(nodeClass);
                     }
 
-                    myNodes.add(node);
+                    nodes.add(node);
                     visitChildren(node);
                     return;
                 }
             }
 
             // not of interest, exclude for next occurrence
-            myExcluded.add(nodeClass);
+            excluded.add(nodeClass);
         }
         visitChildren(node);
     }

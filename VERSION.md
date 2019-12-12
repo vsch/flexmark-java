@@ -187,8 +187,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.xx
 
-+ [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with
-      `SequenceBuilder`
++ [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with `SequenceBuilder`
 + [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
       implementation.
 * [ ] Add: `Formatter` Paragraph wrapping options and code.
@@ -200,13 +199,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 + [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
   + [ ] optimize by not processing one char at a time. Split the sequence into regions of
-        interest and process the regions as one piece which the `SequenceBuilder` can
-        optimize to base sequence.
+        interest and process the regions as one piece which the `SequenceBuilder` can optimize
+        to base sequence.
   + [ ] do not construct temporary `StringBuilder` but only keep the last line under
         construction temporary, with all previously constructed lines used for prior content.
   + [ ] use an instance of sequence builder for the line under construction, and keep parallel
         string builder for the content tests, but only if needed to avoid construction of
         segmented sequence.
+* Fix: remove `my` prefix from fields in `flexmark-utils` to keep consistent naming convention
+  in module.
+* Add: `BitEnumSet` to expose the bit mask of elements to use as efficient and convenient bit
+  masked options
 * Add: `ArrayUtils.toArray(BitSet)` to return an `int[]` of all bit numbers that are set.
 
 ## 0.59.66

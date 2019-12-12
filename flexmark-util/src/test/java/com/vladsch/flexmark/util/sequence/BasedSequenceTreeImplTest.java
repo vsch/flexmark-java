@@ -15,7 +15,7 @@ public class BasedSequenceTreeImplTest {
     // TEST: need to complete tests here
 
     static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
-        return BasedSequence.of(BasedOptionsSequence.of(chars, BasedSequence.O_TREE_SEGMENTED_SEQUENCES));
+        return BasedSequence.of(BasedOptionsSequence.of(chars, BasedSequence.F_TREE_SEGMENTED_SEQUENCES));
     }
 
     @Test

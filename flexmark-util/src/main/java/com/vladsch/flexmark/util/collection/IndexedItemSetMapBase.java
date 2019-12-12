@@ -9,14 +9,14 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S, M> {
-    protected final HashMap<K, S> myBag;
+    protected final HashMap<K, S> bag;
 
     public IndexedItemSetMapBase() {
         this(0);
     }
 
     public IndexedItemSetMapBase(int capacity) {
-        this.myBag = new HashMap<>();
+        this.bag = new HashMap<>();
     }
 
     @Override
@@ -33,10 +33,10 @@ public abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMa
     @Override
     public boolean addItem(@NotNull M key, int item) {
         K mapKey = mapKey(key);
-        S itemSet = myBag.get(mapKey);
+        S itemSet = bag.get(mapKey);
         if (itemSet == null) {
             itemSet = newSet();
-            myBag.put(mapKey, itemSet);
+            bag.put(mapKey, itemSet);
         }
         return addSetItem(itemSet, item);
     }
@@ -44,74 +44,74 @@ public abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMa
     @Override
     public boolean removeItem(@NotNull M key, int item) {
         K mapKey = mapKey(key);
-        S itemSet = myBag.get(mapKey);
+        S itemSet = bag.get(mapKey);
         return itemSet != null && removeSetItem(itemSet, item);
     }
 
     @Override
     public boolean containsItem(@NotNull M key, int item) {
         K mapKey = mapKey(key);
-        S itemSet = myBag.get(mapKey);
+        S itemSet = bag.get(mapKey);
         return itemSet != null && containsSetItem(itemSet, item);
     }
 
     @Override
     public int size() {
-        return myBag.size();
+        return bag.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return myBag.isEmpty();
+        return bag.isEmpty();
     }
 
     @Override
     public boolean containsKey(@Nullable Object o) {
-        return myBag.containsKey(o);
+        return bag.containsKey(o);
     }
 
     @Override
     public boolean containsValue(@Nullable Object o) {
-        return myBag.containsValue(o);
+        return bag.containsValue(o);
     }
 
     @Override
     public @Nullable S get(@Nullable Object o) {
-        return myBag.get(o);
+        return bag.get(o);
     }
 
     @Override
     public @Nullable S put(@NotNull K k, @NotNull S vs) {
-        return myBag.put(k, vs);
+        return bag.put(k, vs);
     }
 
     @Override
     public @Nullable S remove(@Nullable Object o) {
-        return myBag.remove(o);
+        return bag.remove(o);
     }
 
     @Override
     public void putAll(@NotNull Map<? extends K, ? extends S> map) {
-        myBag.putAll(map);
+        bag.putAll(map);
     }
 
     @Override
     public void clear() {
-        myBag.clear();
+        bag.clear();
     }
 
     @Override
     public @NotNull Set<K> keySet() {
-        return myBag.keySet();
+        return bag.keySet();
     }
 
     @Override
     public @NotNull Collection<S> values() {
-        return myBag.values();
+        return bag.values();
     }
 
     @Override
     public @NotNull Set<Entry<K, S>> entrySet() {
-        return myBag.entrySet();
+        return bag.entrySet();
     }
 }

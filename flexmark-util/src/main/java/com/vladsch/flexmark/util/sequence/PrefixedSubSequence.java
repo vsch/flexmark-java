@@ -57,8 +57,18 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     }
 
     @Override
-    public boolean isOption(int option) {
-        return getBaseSequence().isOption(option);
+    public int getOptionFlags() {
+        return getBaseSequence().getOptionFlags();
+    }
+
+    @Override
+    public boolean allOptions(int options) {
+        return getBaseSequence().allOptions(options);
+    }
+
+    @Override
+    public boolean anyOptions(int options) {
+        return getBaseSequence().anyOptions(options);
     }
 
     @Override

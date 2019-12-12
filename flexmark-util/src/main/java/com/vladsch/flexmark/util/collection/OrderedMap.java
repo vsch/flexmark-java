@@ -14,8 +14,8 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     private final @NotNull ArrayList<V> valueList;
     private final @Nullable CollectionHost<K> host;
     boolean inUpdate;
-    private @Nullable Indexed<Entry<K, V>> myIndexedEntryProxy;
-    private @Nullable Indexed<V> myIndexedValueProxy;
+    private @Nullable Indexed<Entry<K, V>> indexedEntryProxy;
+    private @Nullable Indexed<V> indexedValueProxy;
 
     public OrderedMap() {
         this(0, null);
@@ -32,8 +32,8 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     public OrderedMap(int capacity, @Nullable CollectionHost<K> host) {
         this.valueList = new ArrayList<>(capacity);
         this.host = host;
-        this.myIndexedEntryProxy = null;
-        this.myIndexedValueProxy = null;
+        this.indexedEntryProxy = null;
+        this.indexedValueProxy = null;
         this.keySet = new OrderedSet<>(capacity, new CollectionHost<K>() {
             @Override
             public void adding(int index, @Nullable K k, @Nullable Object v) {
@@ -69,8 +69,8 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public @NotNull Indexed<Map.Entry<K, V>> getIndexedEntryProxy() {
-        if (myIndexedEntryProxy != null) return myIndexedEntryProxy;
-        myIndexedEntryProxy = new Indexed<Map.Entry<K, V>>() {
+        if (indexedEntryProxy != null) return indexedEntryProxy;
+        indexedEntryProxy = new Indexed<Map.Entry<K, V>>() {
             @Override
             public Map.Entry<K, V> get(int index) {
                 return OrderedMap.this.getEntry(index);
@@ -97,12 +97,12 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
             }
         };
 
-        return myIndexedEntryProxy;
+        return indexedEntryProxy;
     }
 
     public @NotNull Indexed<V> getIndexedValueProxy() {
-        if (myIndexedValueProxy != null) return myIndexedValueProxy;
-        myIndexedValueProxy = new Indexed<V>() {
+        if (indexedValueProxy != null) return indexedValueProxy;
+        indexedValueProxy = new Indexed<V>() {
             @Override
             public V get(int index) {
                 return OrderedMap.this.getValue(index);
@@ -129,7 +129,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
             }
         };
 
-        return myIndexedValueProxy;
+        return indexedValueProxy;
     }
 
     @NotNull Map.Entry<K, V> getEntry(int index) {

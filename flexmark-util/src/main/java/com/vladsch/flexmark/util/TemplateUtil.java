@@ -9,10 +9,10 @@ public class TemplateUtil {
     final public static Resolver NULL_RESOLVER = groups -> null;
 
     public static class MappedResolver implements Resolver {
-        final protected Map<String, String> myMap;
+        final protected Map<String, String> resolved;
 
         public MappedResolver(Map<String, String> map) {
-            myMap = map;
+            resolved = map;
         }
 
         public MappedResolver() {
@@ -20,17 +20,17 @@ public class TemplateUtil {
         }
 
         public MappedResolver set(String name, String value) {
-            myMap.put(name, value);
+            resolved.put(name, value);
             return this;
         }
 
         public Map<String, String> getMMap() {
-            return myMap;
+            return resolved;
         }
 
         @Override
         public String resolve(String[] groups) {
-            return groups.length > 2 ? null : myMap.get(groups[1]);
+            return groups.length > 2 ? null : resolved.get(groups[1]);
         }
     }
 

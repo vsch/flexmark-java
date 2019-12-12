@@ -444,7 +444,17 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
         }
 
         @Override
-        public boolean isOption(int option) {
+        public int getOptionFlags() {
+            return 0;
+        }
+
+        @Override
+        public boolean allOptions(int options) {
+            return false;
+        }
+
+        @Override
+        public boolean anyOptions(int options) {
             return false;
         }
 

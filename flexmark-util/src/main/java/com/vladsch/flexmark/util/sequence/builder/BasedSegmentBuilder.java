@@ -6,37 +6,37 @@ import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 
 public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder> implements IBasedSegmentBuilder<BasedSegmentBuilder> {
-    final @NotNull BasedSequence myBase;
-    final @NotNull SegmentOptimizer myOptimizer;
+    final @NotNull BasedSequence baseSeq;
+    final @NotNull SegmentOptimizer optimizer;
 
-    protected BasedSegmentBuilder(@NotNull BasedSequence base) {
-        this(base, new CharRecoveryOptimizer(PositionAnchor.CURRENT));
+    protected BasedSegmentBuilder(@NotNull BasedSequence baseSeq) {
+        this(baseSeq, new CharRecoveryOptimizer(PositionAnchor.CURRENT));
     }
 
-    protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer) {
+    protected BasedSegmentBuilder(@NotNull BasedSequence baseSeq, @NotNull SegmentOptimizer optimizer) {
         super();
-        myBase = base.getBaseSequence();
-        myOptimizer = optimizer;
+        this.baseSeq = baseSeq.getBaseSequence();
+        this.optimizer = optimizer;
     }
 
-    protected BasedSegmentBuilder(@NotNull BasedSequence base, int options) {
-        this(base, new CharRecoveryOptimizer(PositionAnchor.CURRENT), options);
+    protected BasedSegmentBuilder(@NotNull BasedSequence baseSeq, int options) {
+        this(baseSeq, new CharRecoveryOptimizer(PositionAnchor.CURRENT), options);
     }
 
-    protected BasedSegmentBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer, int options) {
+    protected BasedSegmentBuilder(@NotNull BasedSequence baseSeq, @NotNull SegmentOptimizer optimizer, int options) {
         super(options);
-        myBase = base.getBaseSequence();
-        myOptimizer = optimizer;
+        this.baseSeq = baseSeq.getBaseSequence();
+        this.optimizer = optimizer;
     }
 
     @Override
     public @NotNull BasedSequence getBaseSequence() {
-        return myBase;
+        return baseSeq;
     }
 
     @Override
     protected Object[] optimizeText(@NotNull Object[] parts) {
-        return myOptimizer.apply(myBase, parts);
+        return optimizer.apply(baseSeq, parts);
     }
 
     @Override
@@ -74,9 +74,9 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
 
         // append overlap to text
         if (text.length() == 0) {
-            parts[1] = myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString();
+            parts[1] = baseSeq.subSequence(overlap.getStart(), overlap.getEnd()).toString();
         } else {
-            parts[1] = text.toString() + myBase.subSequence(overlap.getStart(), overlap.getEnd()).toString();
+            parts[1] = text.toString() + baseSeq.subSequence(overlap.getStart(), overlap.getEnd()).toString();
         }
         parts[2] = after;
 
@@ -86,19 +86,19 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
     @NotNull
     @Override
     public String toStringWithRangesVisibleWhitespace() {
-        return super.toStringWithRangesVisibleWhitespace(myBase);
+        return super.toStringWithRangesVisibleWhitespace(baseSeq);
     }
 
     @NotNull
     @Override
     public String toStringWithRanges() {
-        return super.toStringWithRanges(myBase);
+        return super.toStringWithRanges(baseSeq);
     }
 
     @NotNull
     @Override
     public String toStringChars() {
-        return super.toString(myBase);
+        return super.toString(baseSeq);
     }
 
     @NotNull

@@ -13,27 +13,27 @@ public class OptionsParser<T> implements OptionParser<T> {
     public static final String OPTION_0_DOES_NOT_MATCH = "Option {0} does not match any of: ";
     public static final String KEY_OPTION_0_DOES_NOT_MATCH = "options.parser.option.unknown";
 
-    private final String myOptionName;
-    private final OptionParser<T>[] myParsableOptions;
-    private final String myOptionDelimiter;
-    private final String myOptionValueDelimiter;
+    private final String optionName;
+    private final OptionParser<T>[] parseableOptions;
+    private final String optionDelimiter;
+    private final String optionValueDelimiter;
 
-    public OptionsParser(String optionName, OptionParser<T>[] parsableOptions, char optionDelimiter, char optionValueDelimiter) {
-        myOptionName = optionName;
-        myParsableOptions = parsableOptions;
-        myOptionDelimiter = Character.toString(optionDelimiter);
-        myOptionValueDelimiter = Character.toString(optionValueDelimiter);
+    public OptionsParser(String optionName, OptionParser<T>[] parseableOptions, char optionDelimiter, char optionValueDelimiter) {
+        this.optionName = optionName;
+        this.parseableOptions = parseableOptions;
+        this.optionDelimiter = Character.toString(optionDelimiter);
+        this.optionValueDelimiter = Character.toString(optionValueDelimiter);
     }
 
     @Override
     public String getOptionName() {
-        return myOptionName;
+        return optionName;
     }
 
     @Override
     public Pair<T, List<ParsedOption<T>>> parseOption(BasedSequence optionsText, T options, MessageProvider provider) {
         ArrayList<ParserMessage> messages = null;
-        BasedSequence[] optionsList = optionsText.split(myOptionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY, null);
+        BasedSequence[] optionsList = optionsText.split(optionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY, null);
         T result = options;
         if (provider == null) provider = MessageProvider.DEFAULT;
         List<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.length);
@@ -42,12 +42,12 @@ public class OptionsParser<T> implements OptionParser<T> {
             OptionParser<T> matched = null;
             DelimitedBuilder message = null;
 
-            BasedSequence[] optionList = optionText.split(myOptionValueDelimiter, 2, BasedSequence.SPLIT_SKIP_EMPTY, null);
+            BasedSequence[] optionList = optionText.split(optionValueDelimiter, 2, BasedSequence.SPLIT_SKIP_EMPTY, null);
             if (optionList.length == 0) continue;
             BasedSequence optionName = optionList[0];
             BasedSequence optionValue = optionList.length > 1 ? optionList[1] : optionName.subSequence(optionName.length(), optionName.length());
 
-            for (OptionParser<T> optionParser : myParsableOptions) {
+            for (OptionParser<T> optionParser : parseableOptions) {
                 if (optionParser.getOptionName().equals(optionName.toString())) {
                     matched = optionParser;
                     message = null;
@@ -87,15 +87,15 @@ public class OptionsParser<T> implements OptionParser<T> {
     }
 
     public void appendOptionNames(DelimitedBuilder out) {
-        for (OptionParser<T> parsableOption : myParsableOptions) {
+        for (OptionParser<T> parsableOption : parseableOptions) {
             out.append(parsableOption.getOptionName()).mark();
         }
     }
 
     @Override
     public String getOptionText(T options, T defaultOptions) {
-        DelimitedBuilder out = new DelimitedBuilder(String.valueOf(myOptionDelimiter));
-        for (OptionParser<T> parsableOption : myParsableOptions) {
+        DelimitedBuilder out = new DelimitedBuilder(String.valueOf(optionDelimiter));
+        for (OptionParser<T> parsableOption : parseableOptions) {
             String text = parsableOption.getOptionText(options, defaultOptions).trim();
             if (!text.isEmpty()) out.append(text).mark();
         }

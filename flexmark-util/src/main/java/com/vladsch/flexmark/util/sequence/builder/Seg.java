@@ -17,32 +17,32 @@ public class Seg {
     final public static int MAX_TEXT_OFFSET = Integer.MAX_VALUE >> 1;
     final public static int F_TEXT_OPTION = Integer.MAX_VALUE & ~(MAX_TEXT_OFFSET);
 
-    private final int myStart;
-    private final int myEnd;
+    private final int start;
+    private final int end;
 
     private Seg(int start, int end) {
-        myStart = start;
-        myEnd = end;
+        this.start = start;
+        this.end = end;
     }
 
     public int getStart() {
-        return myStart;
+        return start;
     }
 
     public int getEnd() {
-        return myEnd;
+        return end;
     }
 
     public int getSegStart() {
-        return isText() ? getTextStart() : myStart;
+        return isText() ? getTextStart() : start;
     }
 
     public int getSegEnd() {
-        return isText() ? getTextEnd() : myEnd;
+        return isText() ? getTextEnd() : end;
     }
 
     public int getTextStart() {
-        return getTextOffset(myStart);
+        return getTextOffset(start);
     }
 
     public static int getTextOffset(int startOffset) {
@@ -50,11 +50,11 @@ public class Seg {
     }
 
     public int getTextEnd() {
-        return getTextOffset(myEnd);
+        return getTextOffset(end);
     }
 
     public boolean isFirst256Start() {
-        return isFirst256Start(myStart);
+        return isFirst256Start(start);
     }
 
     public static boolean isFirst256Start(int start) {
@@ -62,7 +62,7 @@ public class Seg {
     }
 
     public boolean isRepeatedTextEnd() {
-        return isRepeatedTextEnd(myEnd);
+        return isRepeatedTextEnd(end);
     }
 
     public static boolean isRepeatedTextEnd(int end) {
@@ -70,7 +70,7 @@ public class Seg {
     }
 
     public boolean isText() {
-        return myStart < 0 && myEnd < 0 && (myStart & MAX_TEXT_OFFSET) > (myEnd & MAX_TEXT_OFFSET);
+        return start < 0 && end < 0 && (start & MAX_TEXT_OFFSET) > (end & MAX_TEXT_OFFSET);
     }
 
     /**
@@ -79,7 +79,7 @@ public class Seg {
      * @return true if it is
      */
     public boolean isBase() {
-        return myStart >= 0 && myEnd >= 0 && myStart <= myEnd;
+        return start >= 0 && end >= 0 && start <= end;
     }
 
     /**
@@ -88,7 +88,7 @@ public class Seg {
      * @return true if it is
      */
     public boolean isAnchor() {
-        return myStart >= 0 && myEnd >= 0 && myStart == myEnd;
+        return start >= 0 && end >= 0 && start == end;
     }
 
     public boolean isNull() {
@@ -98,7 +98,7 @@ public class Seg {
     @NotNull
     public Range getRange() {
         assert isBase();
-        return Range.of(myStart, myEnd);
+        return Range.of(start, end);
     }
 
     /**
@@ -107,17 +107,17 @@ public class Seg {
      * @return length of this part in the sequence
      */
     public int length() {
-        return isBase() ? myEnd - myStart : isText() ? (myStart & MAX_TEXT_OFFSET) - (myEnd & MAX_TEXT_OFFSET) : 0;
+        return isBase() ? end - start : isText() ? (start & MAX_TEXT_OFFSET) - (end & MAX_TEXT_OFFSET) : 0;
     }
 
     public String toString(@NotNull CharSequence allText) {
         if (this.isNull()) {
             return "NULL";
         } else if (isBase()) {
-            if (myStart == myEnd) {
-                return "[" + myStart + ")";
+            if (start == end) {
+                return "[" + start + ")";
             } else {
-                return "[" + myStart + ", " + myEnd + ")";
+                return "[" + start + ", " + end + ")";
             }
         } else {
             CharSequence charSequence = allText.subSequence(getTextStart(), getTextEnd());
@@ -144,10 +144,10 @@ public class Seg {
         if (this.isNull()) {
             return "NULL";
         } else if (isBase()) {
-            if (myStart == myEnd) {
-                return "BASE[" + myStart + ")";
+            if (start == end) {
+                return "BASE[" + start + ")";
             } else {
-                return "BASE[" + myStart + ", " + myEnd + ")";
+                return "BASE[" + start + ", " + end + ")";
             }
         } else {
             return "TEXT[" + getTextStart() + ", " + getTextEnd() + ")";

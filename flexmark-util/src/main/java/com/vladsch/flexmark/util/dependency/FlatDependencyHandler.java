@@ -7,7 +7,7 @@ import java.util.List;
 public class FlatDependencyHandler<T extends Dependent<T>> extends DependencyHandler<T, FlatDependencyStage<T>, FlatDependencies<T>> {
     public List<T> resolvedDependencies(List<T> dependentsList) {
         FlatDependencies<T> dependencies = resolveDependencies(dependentsList);
-        return dependencies.myLinkResolverFactories;
+        return dependencies.linkResolverFactories;
     }
 
     @NotNull

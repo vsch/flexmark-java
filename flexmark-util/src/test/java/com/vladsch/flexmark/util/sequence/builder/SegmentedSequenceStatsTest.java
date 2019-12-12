@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedOptionsHolder;
 import com.vladsch.flexmark.util.sequence.BasedOptionsSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -48,7 +47,7 @@ public class SegmentedSequenceStatsTest {
         SegmentedSequenceStats stats = SegmentedSequenceStats.getInstance();
         options.set(BasedOptionsHolder.SEGMENTED_STATS, stats);
 
-        BasedOptionsSequence s1 = BasedOptionsSequence.of(sC, BasedOptionsHolder.O_COLLECT_SEGMENTED_STATS, options);
+        BasedOptionsSequence s1 = BasedOptionsSequence.of(sC, BasedOptionsHolder.F_COLLECT_SEGMENTED_STATS, options);
         BasedSequence s = BasedSequence.of(s1).subSequence(0, ((CharSequence) s1).length());
 
         int iMax = s.length();
