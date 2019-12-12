@@ -212,6 +212,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Add: `BitEnumSet` to expose the bit mask of elements to use as efficient and convenient bit
   masked options
 * Add: `ArrayUtils.toArray(BitSet)` to return an `int[]` of all bit numbers that are set.
+* Break: make constructor `Range(int, int)` protected. Use `Range.of` to create instances.
 
 ## 0.59.66
 

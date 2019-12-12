@@ -2,13 +2,11 @@ package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import org.jetbrains.annotations.NotNull;
-import sun.misc.SharedSecrets;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
-import java.util.AbstractSet;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * Re-Implementation of RegularEnumSet class for EnumSet, for "regular sized" enum types
@@ -25,6 +23,54 @@ import java.util.NoSuchElementException;
 @SuppressWarnings({ "ManualArrayToCollectionCopy", "UseBulkOperation" })
 public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable, Serializable {
     private static final long serialVersionUID = 3411599620347842686L;
+
+    public static class UniverseLoader {
+        @SuppressWarnings("rawtypes") final static HashMap<Class, Enum[]> slowAccessUniverses = new HashMap<>();
+
+        @SuppressWarnings("rawtypes")
+        @Nullable
+        public static Enum[] getUniverseSlow(Class elementType) {
+            if (elementType.isEnum()) {
+                Enum[] cachedUniverse = slowAccessUniverses.get(elementType);
+                if (cachedUniverse != null) return cachedUniverse;
+
+                Field[] fields = elementType.getFields();
+                int enums = 0;
+                for (Field field : fields) {
+                    if (field.getType().isEnum()) enums++;
+                }
+
+                if (enums > 0) {
+                    cachedUniverse = new Enum[enums];
+
+                    enums = 0;
+                    for (Field field : fields) {
+                        if (field.getType().isEnum()) {
+                            //noinspection unchecked
+                            cachedUniverse[enums++] = Enum.valueOf((Class<Enum>) field.getType(), field.getName());
+                        }
+                    }
+                } else {
+                    cachedUniverse = ZERO_LENGTH_ENUM_ARRAY;
+                }
+
+                synchronized (slowAccessUniverses) {
+                    slowAccessUniverses.put(elementType, cachedUniverse);
+                }
+                return cachedUniverse;
+            }
+            return null;
+        }
+    }
+
+    /**
+     * Returns all of the values comprising E.
+     * The result is cloned and slower than SharedSecrets use but works in Java 11 and Java 8 because SharedSecrets are not shared publicly
+     */
+    public static <E extends Enum<E>> E[] getUniverse(Class<E> elementType) {
+        //noinspection unchecked
+        return (E[]) UniverseLoader.getUniverseSlow(elementType);
+    }
 
     /**
      * Bit vector representation of this set.  The 2^k bit indicates the
@@ -562,15 +608,6 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         if (es.elementType != elementType)
             return elements == 0 && es.elements == 0;
         return es.elements == elements;
-    }
-
-    /**
-     * Returns all of the values comprising E.
-     * The result is uncloned, cached, and shared by all callers.
-     */
-    private static <E extends Enum<E>> E[] getUniverse(Class<E> elementType) {
-        return SharedSecrets.getJavaLangAccess()
-                .getEnumConstantsShared(elementType);
     }
 
     /**

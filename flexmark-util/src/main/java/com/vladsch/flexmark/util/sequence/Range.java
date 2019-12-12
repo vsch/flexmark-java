@@ -29,10 +29,9 @@ public class Range {
      *
      * @param start start
      * @param end   end
-     * @deprecated use {@link Range#of(int, int)}
+     *              use {@link Range#of(int, int)}
      */
-    @Deprecated
-    public Range(int start, int end) {
+    protected Range(int start, int end) {
         this.start = start;
         this.end = end;
     }
