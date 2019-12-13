@@ -9,7 +9,8 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.68](#next-05968)
+- [Next 0.59.70](#next-05970)
+- [0.59.68](#05968)
 - [0.59.66](#05966)
 - [0.59.64](#05964)
 - [0.59.62](#05962)
@@ -197,7 +198,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: spec files no longer render HTML when option selected.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
 
-## Next 0.59.68
+## Next 0.59.70
 
 + [ ] Add: `BasedOffsetTracker` to take `BasedSequence` result (could be segmented, offset in
       based sequence, `PositionAnchor` and return index of this offset in the resulting based
@@ -211,22 +212,25 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   + [ ] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
-  * Fix: rename `LineFormattingAppendable` to `LineAppendable`
-  * Fix: remove unused overloads and methods from `LineFormattingAppendable`
-  * Add: new methods to `LineFormattingAppendable` for prefix changes and combined prefix/line
-    manipulation.
-  * Break: rename `LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE` to
-    `LineAppendable.F_TRIM_TRAILING_WHITESPACE`
-  * Break: rename and **invert** `LineAppendable.F_ALLOW_LEADING_WHITESPACE` to
-    `LineAppendable.F_TRIM_LEADING_WHITESPACE`
-  * Deprecate: convenience copies of `LineAppendable` flags in `Formatter` and `HtmlRenderer`.
-    Use `LineAppendable` directly.
-  * Break: `Formatter.FORMAT_FLAGS` default changed from `0` to
-    `LineAppendable.F_TRIM_LEADING_WHITESPACE` to reflect inversion of option flag and preserve
-    behavior
-  * Break: `HtmlRenderer.FORMAT_FLAGS` default changed from `0` to
-    `LineAppendable.F_TRIM_LEADING_WHITESPACE` to reflect inversion of option flag and preserve
-    behavior
+
+## 0.59.68
+
+* Fix: rename `LineFormattingAppendable` to `LineAppendable`
+* Fix: remove unused overloads and methods from `LineFormattingAppendable`
+* Add: new methods to `LineFormattingAppendable` for prefix changes and combined prefix/line
+  manipulation.
+* Break: rename `LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE` to
+  `LineAppendable.F_TRIM_TRAILING_WHITESPACE`
+* Break: rename and **invert** `LineAppendable.F_ALLOW_LEADING_WHITESPACE` to
+  `LineAppendable.F_TRIM_LEADING_WHITESPACE`
+* Deprecate: convenience copies of `LineAppendable` flags in `Formatter` and `HtmlRenderer`. Use
+  `LineAppendable` directly.
+* Break: `Formatter.FORMAT_FLAGS` default changed from `0` to
+  `LineAppendable.F_TRIM_LEADING_WHITESPACE` to reflect inversion of option flag and preserve
+  behavior
+* Break: `HtmlRenderer.FORMAT_FLAGS` default changed from `0` to
+  `LineAppendable.F_TRIM_LEADING_WHITESPACE` to reflect inversion of option flag and preserve
+  behavior
 * Fix: remove `my` prefix from fields in `flexmark-utils` to keep consistent naming convention
   in module.
 * Add: `BitEnumSet` to expose the bit mask of elements to use as efficient and convenient bit
