@@ -47,12 +47,13 @@ public class Formatter implements IRender {
     /**
      * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineAppendable.F_TRIM_LEADING_WHITESPACE);
 
     // Use LineFormattingAppendable values instead
+    // NOTE: F_ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
     @Deprecated public static final int FORMAT_CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
     @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
-    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_TRIM_TRAILING_WHITESPACE;
     @Deprecated public static final int FORMAT_ALL_OPTIONS = LineAppendable.F_FORMAT_ALL;
 
     public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_BLANK_LINES;
@@ -310,7 +311,7 @@ public class Formatter implements IRender {
      */
     public void translationRender(Node document, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags | LineAppendable.F_ALLOW_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags & ~LineAppendable.F_TRIM_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
         renderer.render(document);
         renderer.flushTo(output, maxTrailingBlankLines);
     }

@@ -366,7 +366,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             out.append('\n');
         } else {
             int options = out.getOptions();
-            out.setOptions(options & ~(LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE | LineAppendable.F_COLLAPSE_WHITESPACE));
+            out.setOptions(options & ~(LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_COLLAPSE_WHITESPACE));
             if (out.getPendingEOL() == 0) {
                 // hard break
                 out.append(' ', 2).line();
@@ -720,7 +720,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         if (offset == out.offsetWithPending()) {
             // completely empty, add space and make sure it is not suppressed
             int options = out.getOptions();
-            out.setOptions((options | LineAppendable.F_ALLOW_LEADING_WHITESPACE) & ~(LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE));
+            out.setOptions(options & ~(LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE));
             //out.append(' ');
             out.line();
             out.setOptions(options);
@@ -954,7 +954,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         String className = "";
 
         HtmlNodeConverterContext preText = context.getSubContext();
-        preText.getMarkdown().setOptions(out.getOptions() & ~(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE));
+        preText.getMarkdown().setOptions(out.getOptions() & ~(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE));
         preText.getMarkdown().openPreFormatted(false);
 
         Node next;

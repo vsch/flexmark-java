@@ -120,11 +120,11 @@ public class LineAppendableImpl implements LineAppendable {
     }
 
     private boolean isSuppressingTrailingWhitespace() {
-        return any(F_SUPPRESS_TRAILING_WHITESPACE);
+        return any(F_TRIM_TRAILING_WHITESPACE);
     }
 
     private boolean isAllowLeadingWhitespace() {
-        return any(F_ALLOW_LEADING_WHITESPACE);
+        return !any(F_TRIM_LEADING_WHITESPACE);
     }
 
     private boolean isCollapseWhitespace() {
@@ -359,7 +359,7 @@ public class LineAppendableImpl implements LineAppendable {
                 }
             } else {
                 // apply options other than convert tabs which is done at time of appending
-                if (!any(F_ALLOW_LEADING_WHITESPACE) &&
+                if (any(F_TRIM_LEADING_WHITESPACE) &&
                         (preFormattedNesting == 0 || preFormattedFirstLine == currentLine) &&
                         preFormattedNesting == 0 && preFormattedLastLine != currentLine
                 ) {
@@ -372,7 +372,7 @@ public class LineAppendableImpl implements LineAppendable {
                     }
                 }
 
-                if (any(F_SUPPRESS_TRAILING_WHITESPACE) && preFormattedNesting == 0) {
+                if (any(F_TRIM_TRAILING_WHITESPACE) && preFormattedNesting == 0) {
                     if (allWhitespace) {
                         startOffset = endOffset - 1;
                     } else {
@@ -819,7 +819,7 @@ public class LineAppendableImpl implements LineAppendable {
     public LineAppendable lineWithTrailingSpaces(int count) {
         if (preFormattedNesting > 0 || lineStart < appendable.length() || any(F_ALLOW_LEADING_EOL)) {
             int options = this.options.toInt();
-            this.options.clear(F_SUPPRESS_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
+            this.options.clear(F_TRIM_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
             if (count > 0) append(' ', count);
             appendImpl(SequenceUtils.EOL, 0);
             this.options.replace(options);

@@ -18,7 +18,7 @@ import java.io.IOException;
  * <p>
  * tab is converted to a space if {@link #F_CONVERT_TABS} or {@link #F_COLLAPSE_WHITESPACE} option is selected
  * <p>
- * spaces before and after \n are removed controlled by {@link #F_SUPPRESS_TRAILING_WHITESPACE} and {@link #F_ALLOW_LEADING_WHITESPACE}
+ * spaces before and after \n are removed controlled by {@link #F_TRIM_TRAILING_WHITESPACE} and {@link #F_TRIM_LEADING_WHITESPACE}
  * <p>
  * use {@link #line()}, {@link #lineIf(boolean)}, {@link #blankLine()}, {@link #blankLineIf(boolean)}
  * and {@link #blankLine(int)} for getting these appended to result
@@ -28,37 +28,39 @@ public interface LineAppendable extends Appendable {
     enum Options {
         CONVERT_TABS,                       // expand tabs on column multiples of 4
         COLLAPSE_WHITESPACE,                // collapse multiple tabs and spaces to single space, implies CONVERT_TABS
-        SUPPRESS_TRAILING_WHITESPACE,       // don't output trailing whitespace
+        TRIM_TRAILING_WHITESPACE,       // don't output trailing whitespace
         PASS_THROUGH,                       // just pass everything through to appendable with no formatting
-        ALLOW_LEADING_WHITESPACE,           // allow leading spaces on a line, else remove
+        TRIM_LEADING_WHITESPACE,            // allow leading spaces on a line, else remove
         ALLOW_LEADING_EOL,                  // allow EOL at offset 0
         PREFIX_PRE_FORMATTED,               // when prefixing lines, prefix pre-formatted lines
     }
 
     Options O_CONVERT_TABS = Options.CONVERT_TABS;
     Options O_COLLAPSE_WHITESPACE = Options.COLLAPSE_WHITESPACE;
-    Options O_SUPPRESS_TRAILING_WHITESPACE = Options.SUPPRESS_TRAILING_WHITESPACE;
+    Options O_TRIM_TRAILING_WHITESPACE = Options.TRIM_TRAILING_WHITESPACE;
     Options O_PASS_THROUGH = Options.PASS_THROUGH;
-    Options O_ALLOW_LEADING_WHITESPACE = Options.ALLOW_LEADING_WHITESPACE;
+    Options O_TRIM_LEADING_WHITESPACE = Options.TRIM_LEADING_WHITESPACE;
     Options O_ALLOW_LEADING_EOL = Options.ALLOW_LEADING_EOL;
     Options O_PREFIX_PRE_FORMATTED = Options.PREFIX_PRE_FORMATTED;
-    BitEnumSet<Options> O_FORMAT_ALL = BitEnumSet.of(O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_SUPPRESS_TRAILING_WHITESPACE);
+    BitEnumSet<Options> O_FORMAT_ALL = BitEnumSet.of(O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_TRIM_TRAILING_WHITESPACE, O_TRIM_LEADING_WHITESPACE);
 
     int F_CONVERT_TABS = BitEnumSet.intMask(O_CONVERT_TABS);                                    // expand tabs on column multiples of 4
     int F_COLLAPSE_WHITESPACE = BitEnumSet.intMask(O_COLLAPSE_WHITESPACE);                      // collapse multiple tabs and spaces to single space
-    int F_SUPPRESS_TRAILING_WHITESPACE = BitEnumSet.intMask(O_SUPPRESS_TRAILING_WHITESPACE);    // don't output trailing whitespace
+    int F_TRIM_TRAILING_WHITESPACE = BitEnumSet.intMask(O_TRIM_TRAILING_WHITESPACE);            // don't output trailing whitespace
     int F_PASS_THROUGH = BitEnumSet.intMask(O_PASS_THROUGH);                                    // just pass everything through to appendable with no formatting
-    int F_ALLOW_LEADING_WHITESPACE = BitEnumSet.intMask(O_ALLOW_LEADING_WHITESPACE);            // allow leading spaces on a line, else remove
+    // NOTE: F_ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
+    int F_TRIM_LEADING_WHITESPACE = BitEnumSet.intMask(O_TRIM_LEADING_WHITESPACE);              // allow leading spaces on a line, else remove
     int F_ALLOW_LEADING_EOL = BitEnumSet.intMask(O_ALLOW_LEADING_EOL);                          // allow EOL at offset 0
     int F_PREFIX_PRE_FORMATTED = BitEnumSet.intMask(O_PREFIX_PRE_FORMATTED);                    // when prefixing lines, prefix pre-formatted lines
-    int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_SUPPRESS_TRAILING_WHITESPACE; // select all formatting options
+    int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_TRIM_TRAILING_WHITESPACE;     // select all formatting options
 
     // Use F_ prefixed constants
     @Deprecated int CONVERT_TABS = F_CONVERT_TABS;
     @Deprecated int COLLAPSE_WHITESPACE = F_COLLAPSE_WHITESPACE;
-    @Deprecated int SUPPRESS_TRAILING_WHITESPACE = F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated int TRIM_TRAILING_WHITESPACE = F_TRIM_TRAILING_WHITESPACE;
     @Deprecated int PASS_THROUGH = F_PASS_THROUGH;
-    @Deprecated int ALLOW_LEADING_WHITESPACE = F_ALLOW_LEADING_WHITESPACE;
+    // NOTE: F_ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
+    @Deprecated int TRIM_LEADING_WHITESPACE = F_TRIM_LEADING_WHITESPACE;
     @Deprecated int ALLOW_LEADING_EOL = F_ALLOW_LEADING_EOL;
     @Deprecated int PREFIX_PRE_FORMATTED = F_PREFIX_PRE_FORMATTED;
     @Deprecated int FORMAT_ALL = F_FORMAT_ALL;

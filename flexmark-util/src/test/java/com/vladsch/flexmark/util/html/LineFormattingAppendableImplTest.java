@@ -367,7 +367,7 @@ public class LineFormattingAppendableImplTest {
     @Test
     public void test_leadingSpace() {
         String indent = "";
-        LineAppendable fa = new LineFormattingAppendableImpl((LineAppendable.F_FORMAT_ALL & ~LineAppendable.F_COLLAPSE_WHITESPACE) | LineAppendable.F_ALLOW_LEADING_WHITESPACE);
+        LineAppendable fa = new LineFormattingAppendableImpl(LineAppendable.F_FORMAT_ALL & ~(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE));
         fa.setIndentPrefix(indent);
 
         fa.append("  abc");

@@ -90,7 +90,7 @@
 
 ### To Do
 
-* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
+* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:off -->` tags to `Formatter` for
       controlling non-formatting regions.
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
@@ -138,7 +138,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * [ ] `TemplateUtil.java` to `flexmark-util-misc`
     * [ ] `Utils.java` to `flexmark-util-misc`
 * [ ] Break: delete deprecated properties, methods and classes
-* [x] Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull`
+* [x] Add: `org.jetbrains:annotations:18.0` dependency to have `@Nullable`/`@NotNull`
       annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
       have these annotations for analysis of potential problems and use with Kotlin.
 * [x] Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of
@@ -197,6 +197,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.68
 
++ [ ] Add: `BasedOffsetTracker` to take `BasedSequence` result (could be segmented, offset in
+      based sequence, `PositionAnchor` and return index of this offset in the resulting based
+      sequence. The
 + [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
   + [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `SequenceBuilder` can optimize
@@ -210,6 +213,18 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * Fix: remove unused overloads and methods from `LineFormattingAppendable`
   * Add: new methods to `LineFormattingAppendable` for prefix changes and combined prefix/line
     manipulation.
+  * Break: rename `LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE` to
+    `LineAppendable.F_TRIM_TRAILING_WHITESPACE`
+  * Break: rename and **invert** `LineAppendable.F_ALLOW_LEADING_WHITESPACE` to
+    `LineAppendable.F_TRIM_LEADING_WHITESPACE`
+  * Deprecate: convenience copies of `LineAppendable` flags in `Formatter` and `HtmlRenderer`.
+    Use `LineAppendable` directly.
+  * Break: `Formatter.FORMAT_FLAGS` default changed from `0` to
+    `LineAppendable.F_TRIM_LEADING_WHITESPACE` to reflect inversion of option flag and preserve
+    behavior
+  * Break: `HtmlRenderer.FORMAT_FLAGS` default changed from `0` to
+    `LineAppendable.F_TRIM_LEADING_WHITESPACE` to reflect inversion of option flag and preserve
+    behavior
 * Fix: remove `my` prefix from fields in `flexmark-utils` to keep consistent naming convention
   in module.
 * Add: `BitEnumSet` to expose the bit mask of elements to use as efficient and convenient bit

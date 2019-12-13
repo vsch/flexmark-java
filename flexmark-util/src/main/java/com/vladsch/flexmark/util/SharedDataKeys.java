@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util;
 
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.html.LineAppendable;
 
 import java.util.Collection;
 
@@ -21,7 +22,7 @@ public class SharedDataKeys {
     public static final DataKey<String> TRANSLATION_AUTOLINK_TAG_PATTERN = new DataKey<>("TRANSLATION_AUTOLINK_TAG_PATTERN", "____(?:\\d+)_");
 
     // HtmlRenderer
-    public static final DataKey<Integer> RENDERER_FORMAT_FLAGS = new DataKey<>("RENDERER_FORMAT_FLAGS", 0);
+    public static final DataKey<Integer> RENDERER_FORMAT_FLAGS = new DataKey<>("RENDERER_FORMAT_FLAGS", LineAppendable.F_TRIM_LEADING_WHITESPACE);
     public static final DataKey<Integer> RENDERER_MAX_TRAILING_BLANK_LINES = new DataKey<>("RENDERER_MAX_TRAILING_BLANK_LINES", 1);
     public static final DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT_SIZE", 0);
     public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("PERCENT_ENCODE_URLS", false);

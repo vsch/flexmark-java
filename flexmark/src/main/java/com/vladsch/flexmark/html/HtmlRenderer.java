@@ -93,12 +93,13 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Integer> FORMAT_FLAGS = SharedDataKeys.RENDERER_FORMAT_FLAGS;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.RENDERER_MAX_TRAILING_BLANK_LINES;
 
-    // Use LineFormattingAppendable values instead
+    // Use LineFormattingAppendable values instead,
+    // NOTE: ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
     @Deprecated public static final int CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
     @Deprecated public static final int COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
-    @Deprecated public static final int SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_TRIM_TRAILING_WHITESPACE;
     @Deprecated public static final int PASS_THROUGH = LineAppendable.F_PASS_THROUGH;
-    @Deprecated public static final int ALLOW_LEADING_WHITESPACE = LineAppendable.F_ALLOW_LEADING_WHITESPACE;
+//    @Deprecated public static final int ALLOW_LEADING_WHITESPACE = LineAppendable.F_TRIM_LEADING_WHITESPACE;
     @Deprecated public static final int FORMAT_ALL = LineAppendable.F_FORMAT_ALL;
 
     /**
@@ -111,7 +112,7 @@ public class HtmlRenderer implements IRender {
     // Use LineFormattingAppendable values instead
     @Deprecated public static final int FORMAT_CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
     @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
-    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_TRIM_TRAILING_WHITESPACE;
     @Deprecated public static final int FORMAT_ALL_OPTIONS = LineAppendable.F_FORMAT_ALL;
 
     // now not final only to allow disposal of resources

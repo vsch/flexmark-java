@@ -13,10 +13,9 @@ import org.jetbrains.annotations.Nullable;
 public class SegmentTree {
     final public static int MAX_VALUE = Integer.MAX_VALUE >> 2;
     final public static int F_ANCHOR_FLAGS = ~MAX_VALUE;
-    final public static int F_ANCHOR_OFFSET = Integer.MAX_VALUE & ~MAX_VALUE;
 
-    final private int[] treeData;    // tuples of aggrLength, segByteOffset with flags for prev anchor offset of 1 to 5
-    final private byte[] segmentBytes;      // byte serialized segments
+    final private int[] treeData;           // tuples of aggregated length, segment byte offset with flags for prev anchor offset of 1 to 7
+    final private byte[] segmentBytes;      // bytes of serialized segments
 
     public SegmentTree(int[] treeData, byte[] segmentBytes) {
         this.treeData = treeData;
@@ -53,8 +52,7 @@ public class SegmentTree {
     }
 
     public static int getAnchorOffset(int byteOffsetData) {
-        int anchorBits = byteOffsetData & F_ANCHOR_FLAGS;
-        return anchorBits != 0 ? (anchorBits < 0 ? 0x0004 : 0) | ((byteOffsetData & F_ANCHOR_OFFSET) >> 29) : 0;
+        return (byteOffsetData & F_ANCHOR_FLAGS) >>> 29;
     }
 
     public boolean hasPreviousAnchor(int pos) {

@@ -119,12 +119,12 @@ public class LineFormattingAppendableImpl implements LineAppendable {
         return any(F_CONVERT_TABS | F_COLLAPSE_WHITESPACE);
     }
 
-    private boolean isSuppressingTrailingWhitespace() {
-        return any(F_SUPPRESS_TRAILING_WHITESPACE);
+    private boolean isTrimTrailingWhitespace() {
+        return any(F_TRIM_TRAILING_WHITESPACE);
     }
 
-    private boolean isAllowLeadingWhitespace() {
-        return any(F_ALLOW_LEADING_WHITESPACE);
+    private boolean isTrimLeadingWhitespace() {
+        return any(F_TRIM_LEADING_WHITESPACE);
     }
 
     private boolean isCollapseWhitespace() {
@@ -359,7 +359,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
                 }
             } else {
                 // apply options other than convert tabs which is done at time of appending
-                if (!any(F_ALLOW_LEADING_WHITESPACE) &&
+                if (isTrimLeadingWhitespace() &&
                         (preFormattedNesting == 0 || preFormattedFirstLine == currentLine) &&
                         preFormattedNesting == 0 && preFormattedLastLine != currentLine
                 ) {
@@ -372,7 +372,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
                     }
                 }
 
-                if (any(F_SUPPRESS_TRAILING_WHITESPACE) && preFormattedNesting == 0) {
+                if (isTrimTrailingWhitespace() && preFormattedNesting == 0) {
                     if (allWhitespace) {
                         startOffset = endOffset - 1;
                     } else {
@@ -819,7 +819,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     public LineAppendable lineWithTrailingSpaces(int count) {
         if (preFormattedNesting > 0 || lineStart < appendable.length() || any(F_ALLOW_LEADING_EOL)) {
             int options = this.options.toInt();
-            this.options.clear(F_SUPPRESS_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
+            this.options.clear(F_TRIM_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
             if (count > 0) append(' ', count);
             appendImpl(SequenceUtils.EOL, 0);
             this.options.replace(options);

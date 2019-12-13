@@ -934,7 +934,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             context.renderChildren(node);
         } else {
             markdown.blankLine();
-            // TODO: this really needs to be parsed but we won't do it
+            // FIX: this really needs to be parsed but we won't do it
             switch (context.getRenderPurpose()) {
                 case TRANSLATION_SPANS:
                 case TRANSLATED_SPANS:
@@ -1113,7 +1113,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     } else {
                         // need to set pre-formatted or spaces after eol are ignored assuming prefixes are used
                         int saved = markdown.getOptions();
-                        markdown.setOptions(saved | LineAppendable.F_ALLOW_LEADING_WHITESPACE);
+                        markdown.setOptions(saved & ~LineAppendable.F_TRIM_LEADING_WHITESPACE);
                         markdown.append(sequence);
                         markdown.setOptions(saved);
                     }
