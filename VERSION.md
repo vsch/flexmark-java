@@ -187,7 +187,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.xx
 
-+ [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with `SequenceBuilder`
++ [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with non builder
+      arguments to use `SequenceBuilder` throughout library code. This happens anyway in
+      `SegmentedSequence.create` for non-builder arg, should make it explicit.
 + [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
       implementation.
 * [ ] Add: `Formatter` Paragraph wrapping options and code.
