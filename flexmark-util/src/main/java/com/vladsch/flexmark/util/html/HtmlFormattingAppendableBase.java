@@ -15,7 +15,7 @@ import java.util.Stack;
 
 @SuppressWarnings("unchecked")
 public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase<T>> implements HtmlFormattingAppendable {
-    final private LineFormattingAppendable appendable;
+    final private LineAppendable appendable;
 
     private @Nullable Attributes currentAttributes;
     private boolean indentOnFirstEol = false;
@@ -25,7 +25,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     private boolean suppressCloseTagLine = false;
     private final @NotNull Stack<String> openTags = new Stack<>();
 
-    public HtmlFormattingAppendableBase(LineFormattingAppendable other, boolean inheritIndent) {
+    public HtmlFormattingAppendableBase(LineAppendable other, boolean inheritIndent) {
         this.appendable = new LineFormattingAppendableImpl(other.getOptions());
         if (inheritIndent) this.appendable.setIndentPrefix(other.getIndentPrefix());
     }
@@ -444,7 +444,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @NotNull @Override public T append(char c)                                                                                                                  { appendable.append(c); return (T)this; }
     @NotNull @Override public T append(@NotNull CharSequence csq)                                                                                               { appendable.append(csq); return (T)this; }
     @NotNull @Override public T append(@NotNull CharSequence csq, int start, int end)                                                                           { appendable.append(csq, start, end); return (T)this; }
-    @NotNull @Override public T append(@NotNull LineFormattingAppendable lines, int startLine, int endLine)                                                     { appendable.append(lines, startLine, endLine);  return (T)this; }
+    @NotNull @Override public T append(@NotNull LineAppendable lines, int startLine, int endLine)                                                     { appendable.append(lines, startLine, endLine);  return (T)this; }
     @NotNull @Override public T appendTo(@NotNull Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException        { appendable.appendTo(out, maxBlankLines, prefix, startLine, endLine); return (T)this; }
     @NotNull @Override public T blankLine()                                                                                                                     { appendable.blankLine(); return (T)this; }
     @NotNull @Override public T blankLine(int count)                                                                                                            { appendable.blankLine(count); return (T)this; }

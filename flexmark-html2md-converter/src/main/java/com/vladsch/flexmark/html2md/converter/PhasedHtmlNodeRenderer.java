@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html2md.converter;
 
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import org.jsoup.nodes.Document;
 
 import java.util.Set;
@@ -19,5 +19,5 @@ public interface PhasedHtmlNodeRenderer extends HtmlNodeRenderer {
      * @param document the document node to render
      * @param phase    rendering phase for which to generate the output. Will be any of {@link HtmlConverterPhase} except {@link HtmlConverterPhase#DOCUMENT} because this phase is used for the non-phased node rendering
      */
-    void renderDocument(HtmlNodeConverterContext context, LineFormattingAppendable markdown, Document document, HtmlConverterPhase phase);
+    void renderDocument(HtmlNodeConverterContext context, LineAppendable markdown, Document document, HtmlConverterPhase phase);
 }

@@ -16,7 +16,7 @@ import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.TagRange;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,18 +88,18 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Boolean> EMBEDDED_ATTRIBUTE_PROVIDER = new DataKey<>("EMBEDDED_ATTRIBUTE_PROVIDER", true);
 
     /**
-     * output control for FormattingAppendable, see {@link LineFormattingAppendable#setOptions(int)}
+     * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
     public static final DataKey<Integer> FORMAT_FLAGS = SharedDataKeys.RENDERER_FORMAT_FLAGS;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.RENDERER_MAX_TRAILING_BLANK_LINES;
 
     // Use LineFormattingAppendable values instead
-    @Deprecated public static final int CONVERT_TABS = LineFormattingAppendable.F_CONVERT_TABS;
-    @Deprecated public static final int COLLAPSE_WHITESPACE = LineFormattingAppendable.F_COLLAPSE_WHITESPACE;
-    @Deprecated public static final int SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
-    @Deprecated public static final int PASS_THROUGH = LineFormattingAppendable.F_PASS_THROUGH;
-    @Deprecated public static final int ALLOW_LEADING_WHITESPACE = LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE;
-    @Deprecated public static final int FORMAT_ALL = LineFormattingAppendable.F_FORMAT_ALL;
+    @Deprecated public static final int CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
+    @Deprecated public static final int COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
+    @Deprecated public static final int SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int PASS_THROUGH = LineAppendable.F_PASS_THROUGH;
+    @Deprecated public static final int ALLOW_LEADING_WHITESPACE = LineAppendable.F_ALLOW_LEADING_WHITESPACE;
+    @Deprecated public static final int FORMAT_ALL = LineAppendable.F_FORMAT_ALL;
 
     /**
      * Stores pairs of equivalent renderer types to allow extensions to resolve types not known to them
@@ -109,10 +109,10 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE = new DataKey<>("RENDERER_TYPE_EQUIVALENCE", Collections.emptyList());
 
     // Use LineFormattingAppendable values instead
-    @Deprecated public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.F_CONVERT_TABS;
-    @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineFormattingAppendable.F_COLLAPSE_WHITESPACE;
-    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
-    @Deprecated public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.F_FORMAT_ALL;
+    @Deprecated public static final int FORMAT_CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
+    @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
+    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int FORMAT_ALL_OPTIONS = LineAppendable.F_FORMAT_ALL;
 
     // now not final only to allow disposal of resources
     final List<AttributeProviderFactory> attributeProviderFactories;

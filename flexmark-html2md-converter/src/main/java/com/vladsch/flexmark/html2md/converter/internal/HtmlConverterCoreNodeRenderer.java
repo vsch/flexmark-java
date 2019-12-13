@@ -14,7 +14,7 @@ import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.RomanNumeral;
 import com.vladsch.flexmark.util.format.TableCell;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import org.jsoup.nodes.*;
@@ -123,7 +123,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     }
 
     @Override
-    public void renderDocument(HtmlNodeConverterContext context, LineFormattingAppendable out, Document document, HtmlConverterPhase phase) {
+    public void renderDocument(HtmlNodeConverterContext context, LineAppendable out, Document document, HtmlConverterPhase phase) {
         switch (phase) {
             case COLLECT: {
                 // initialize reference data
@@ -366,7 +366,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             out.append('\n');
         } else {
             int options = out.getOptions();
-            out.setOptions(options & ~(LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.F_COLLAPSE_WHITESPACE));
+            out.setOptions(options & ~(LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE | LineAppendable.F_COLLAPSE_WHITESPACE));
             if (out.getPendingEOL() == 0) {
                 // hard break
                 out.append(' ', 2).line();
@@ -498,7 +498,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         int count = myHtmlConverterOptions.listContentIndent ? myHtmlConverterOptions.definitionMarkerSpaces + 1 : 4;
         CharSequence childPrefix = RepeatedSequence.repeatOf(" ", count);
 
-        out.line().setOptions(options & ~LineFormattingAppendable.F_COLLAPSE_WHITESPACE);
+        out.line().setOptions(options & ~LineAppendable.F_COLLAPSE_WHITESPACE);
         out.append(':').append(' ', myHtmlConverterOptions.definitionMarkerSpaces);
         out.pushPrefix();
         out.addPrefix(childPrefix, true);
@@ -720,7 +720,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         if (offset == out.offsetWithPending()) {
             // completely empty, add space and make sure it is not suppressed
             int options = out.getOptions();
-            out.setOptions((options | LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE) & ~(LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE));
+            out.setOptions((options | LineAppendable.F_ALLOW_LEADING_WHITESPACE) & ~(LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE));
             //out.append(' ');
             out.line();
             out.setOptions(options);
@@ -954,7 +954,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         String className = "";
 
         HtmlNodeConverterContext preText = context.getSubContext();
-        preText.getMarkdown().setOptions(out.getOptions() & ~(LineFormattingAppendable.F_COLLAPSE_WHITESPACE | LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE));
+        preText.getMarkdown().setOptions(out.getOptions() & ~(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE));
         preText.getMarkdown().openPreFormatted(false);
 
         Node next;

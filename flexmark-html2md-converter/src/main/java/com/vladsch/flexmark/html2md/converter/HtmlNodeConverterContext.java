@@ -6,7 +6,7 @@ import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 
@@ -19,7 +19,7 @@ import java.util.Stack;
  */
 public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConverterContext> {
     /**
-     * @return the {@link LineFormattingAppendable} writer to use
+     * @return the {@link LineAppendable} writer to use
      */
     HtmlMarkdownWriter getMarkdown();
 
@@ -94,11 +94,11 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
     Node getCurrentNode();
 
     void pushState(Node parent);
-    void popState(LineFormattingAppendable out);
+    void popState(LineAppendable out);
 
     void excludeAttributes(String... excludes);
     void processAttributes(Node node);
-    int outputAttributes(LineFormattingAppendable out, String initialSep);
+    int outputAttributes(LineAppendable out, String initialSep);
     void transferIdToParent();
     void transferToParentExcept(String... excludes);
     void transferToParentOnly(String... includes);

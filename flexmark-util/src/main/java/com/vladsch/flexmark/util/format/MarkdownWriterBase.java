@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.collection.BitEnumSet;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 @SuppressWarnings("unchecked")
-public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, N, C extends NodeContext<N, C>> implements LineFormattingAppendable {
-    protected final LineFormattingAppendable appendable;
+public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, N, C extends NodeContext<N, C>> implements LineAppendable {
+    protected final LineAppendable appendable;
     protected C context;
 
     public MarkdownWriterBase() {
@@ -29,7 +29,7 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
 
     public MarkdownWriterBase(int formatOptions, @Nullable SequenceBuilder builder) {
         appendable = new LineFormattingAppendableImpl(builder, formatOptions);
-        appendable.setOptions(appendable.getOptions() | LineFormattingAppendable.F_PREFIX_PRE_FORMATTED);
+        appendable.setOptions(appendable.getOptions() | LineAppendable.F_PREFIX_PRE_FORMATTED);
     }
 
     public void setContext(C context) {
@@ -76,7 +76,7 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @NotNull @Override public M append(char c)                                                                                                                  { appendable.append(c); return (M)this; }
     @NotNull @Override public M append(@NotNull CharSequence csq)                                                                                               { appendable.append(csq); return (M)this; }
     @NotNull @Override public M append(@NotNull CharSequence csq, int start, int end)                                                                           { appendable.append(csq, start, end); return (M)this; }
-    @NotNull @Override public M append(@NotNull LineFormattingAppendable lineAppendable, int startLine, int endLine)                                            { appendable.append(lineAppendable, startLine, endLine); return (M)this; }
+    @NotNull @Override public M append(@NotNull LineAppendable lineAppendable, int startLine, int endLine)                                            { appendable.append(lineAppendable, startLine, endLine); return (M)this; }
     @NotNull @Override public M appendTo(@NotNull Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException        { appendable.appendTo(out, maxBlankLines, prefix, startLine, endLine); return (M)this; }
     @NotNull @Override public M blankLine()                                                                                                                     { appendable.blankLine(); return (M)this; }
     @NotNull @Override public M blankLine(int count)                                                                                                            { appendable.blankLine(count); return (M)this; }

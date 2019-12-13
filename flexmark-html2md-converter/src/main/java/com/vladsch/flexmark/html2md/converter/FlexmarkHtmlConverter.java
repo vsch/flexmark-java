@@ -46,9 +46,9 @@ import java.util.regex.Pattern;
 @SuppressWarnings("WeakerAccess")
 public class FlexmarkHtmlConverter {
     /**
-     * output control for FormattingAppendable, see {@link LineFormattingAppendable#setOptions(int)}
+     * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE | LineFormattingAppendable.F_COLLAPSE_WHITESPACE | LineFormattingAppendable.F_PREFIX_PRE_FORMATTED);
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE | LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_PREFIX_PRE_FORMATTED);
     public static final DataKey<Integer> MAX_BLANK_LINES = new DataKey<>("MAX_BLANK_LINES", 2);
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
 
@@ -356,7 +356,7 @@ public class FlexmarkHtmlConverter {
         return eolEnd ? s : Utils.removeSuffix(s, "\n");
     }
 
-    public static void dumpHtmlTree(LineFormattingAppendable out, Node node) {
+    public static void dumpHtmlTree(LineAppendable out, Node node) {
         out.line().append(node.nodeName());
         for (org.jsoup.nodes.Attribute attribute : node.attributes().asList()) {
             out.append(' ').append(attribute.getKey()).append("=\"").append(attribute.getValue()).append("\"");
@@ -932,7 +932,7 @@ public class FlexmarkHtmlConverter {
         }
 
         @Override
-        public int outputAttributes(LineFormattingAppendable out, String initialSep) {
+        public int outputAttributes(LineAppendable out, String initialSep) {
             Attributes attributes = myState.myAttributes;
             int startOffset = out.offsetWithPending();
 
@@ -1049,7 +1049,7 @@ public class FlexmarkHtmlConverter {
         }
 
         @Override
-        public void popState(LineFormattingAppendable out) {
+        public void popState(LineAppendable out) {
             if (myStateStack.isEmpty())
                 throw new IllegalStateException("popState with an empty stack");
             if (out != null) outputAttributes(out, "");
@@ -1335,7 +1335,7 @@ public class FlexmarkHtmlConverter {
             }
 
             @Override
-            public void popState(LineFormattingAppendable out) {
+            public void popState(LineAppendable out) {
                 myMainNodeRenderer.popState(out);
             }
 
@@ -1345,7 +1345,7 @@ public class FlexmarkHtmlConverter {
             }
 
             @Override
-            public int outputAttributes(LineFormattingAppendable out, String initialSep) {
+            public int outputAttributes(LineAppendable out, String initialSep) {
                 return myMainNodeRenderer.outputAttributes(out, initialSep);
             }
 
@@ -1531,7 +1531,7 @@ public class FlexmarkHtmlConverter {
 
         Node child;
 
-        LineFormattingAppendable markdown = context.getMarkdown();
+        LineAppendable markdown = context.getMarkdown();
 
         while ((child = context.next()) != null) {
             if (child instanceof TextNode) {

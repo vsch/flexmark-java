@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.collection.MinAggregator;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
@@ -773,14 +773,14 @@ public class MarkdownTable {
         }
     }
 
-    public void appendTable(LineFormattingAppendable out) {
+    public void appendTable(LineAppendable out) {
         // we will prepare the separator based on max columns
         Ref<Integer> delta = new Ref<>(0);
         String linePrefix = options.formatTableIndentPrefix;
         trackedOffsets.clear();
 
         int formatterOptions = out.getOptions();
-        out.setOptions((formatterOptions & ~(LineFormattingAppendable.F_COLLAPSE_WHITESPACE | LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE)) | LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE);
+        out.setOptions((formatterOptions & ~(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE)) | LineAppendable.F_ALLOW_LEADING_WHITESPACE);
 
         finalizeTable();
 
@@ -996,7 +996,7 @@ public class MarkdownTable {
     }
 
     public static void appendFormattedCaption(
-            LineFormattingAppendable out,
+            LineAppendable out,
             BasedSequence caption,
             TableFormatOptions options
     ) {
@@ -1065,7 +1065,7 @@ public class MarkdownTable {
     }
 
     private void appendRows(
-            LineFormattingAppendable out,
+            LineAppendable out,
             List<TableRow> rows,
             boolean isHeader,
             String linePrefix,
@@ -1136,7 +1136,7 @@ public class MarkdownTable {
     }
 
     private void appendColumnSpan(
-            LineFormattingAppendable out,
+            LineAppendable out,
             int span,
             int cellInsideEndOffset,
             int trackedSpanOffset,

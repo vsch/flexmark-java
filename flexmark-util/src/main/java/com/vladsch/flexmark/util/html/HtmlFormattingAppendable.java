@@ -10,7 +10,7 @@ import java.util.Stack;
  * Used to help with HTML output generation and formatting of HTML
  */
 @SuppressWarnings("UnusedReturnValue")
-public interface HtmlFormattingAppendable extends LineFormattingAppendable {
+public interface HtmlFormattingAppendable extends LineAppendable {
     @Nullable Attributes getAttributes();
     @NotNull HtmlFormattingAppendable setAttributes(@NotNull Attributes attributes);
     boolean inPre();

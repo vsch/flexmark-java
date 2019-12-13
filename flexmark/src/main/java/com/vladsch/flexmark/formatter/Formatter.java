@@ -23,7 +23,7 @@ import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -45,15 +45,15 @@ import java.util.function.Supplier;
 @SuppressWarnings("WeakerAccess")
 public class Formatter implements IRender {
     /**
-     * output control for FormattingAppendable, see {@link LineFormattingAppendable#setOptions(int)}
+     * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
 
     // Use LineFormattingAppendable values instead
-    @Deprecated public static final int FORMAT_CONVERT_TABS = LineFormattingAppendable.F_CONVERT_TABS;
-    @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineFormattingAppendable.F_COLLAPSE_WHITESPACE;
-    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineFormattingAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
-    @Deprecated public static final int FORMAT_ALL_OPTIONS = LineFormattingAppendable.F_FORMAT_ALL;
+    @Deprecated public static final int FORMAT_CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
+    @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
+    @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE;
+    @Deprecated public static final int FORMAT_ALL_OPTIONS = LineAppendable.F_FORMAT_ALL;
 
     public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_BLANK_LINES;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_TRAILING_BLANK_LINES;
@@ -310,7 +310,7 @@ public class Formatter implements IRender {
      */
     public void translationRender(Node document, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags | LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags | LineAppendable.F_ALLOW_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
         renderer.render(document);
         renderer.flushTo(output, maxTrailingBlankLines);
     }

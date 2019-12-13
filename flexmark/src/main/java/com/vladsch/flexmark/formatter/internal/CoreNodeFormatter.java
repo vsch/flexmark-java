@@ -15,7 +15,7 @@ import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
-import com.vladsch.flexmark.util.html.LineFormattingAppendable;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
@@ -1113,7 +1113,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     } else {
                         // need to set pre-formatted or spaces after eol are ignored assuming prefixes are used
                         int saved = markdown.getOptions();
-                        markdown.setOptions(saved | LineFormattingAppendable.F_ALLOW_LEADING_WHITESPACE);
+                        markdown.setOptions(saved | LineAppendable.F_ALLOW_LEADING_WHITESPACE);
                         markdown.append(sequence);
                         markdown.setOptions(saved);
                     }

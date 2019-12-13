@@ -7,7 +7,7 @@
     <entry oldName="com.vladsch.flexmark.util.Consumer" newName="java.util.function.Consumer" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.Function" newName="java.util.function.Function" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.IntConsumer" newName="java.util.function.IntConsumer" type="class"/>
-    <entry oldName="com.vladsch.flexmark.util.html.FormattingAppendable" newName="com.vladsch.flexmark.util.html.LineFormattingAppendable" type="class"/>
+    <entry oldName="com.vladsch.flexmark.util.html.FormattingAppendable" newName="com.vladsch.flexmark.util.html.LineAppendable" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.html.FormattingAppendableImpl" newName="com.vladsch.flexmark.util.html.LineFormattingAppendableImpl" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.RunnableValue" newName="java.util.function.Supplier" type="class"/>
     <entry oldName="com.vladsch.flexmark.util.ValueRunnable" newName="java.util.function.Consumer" type="class"/>

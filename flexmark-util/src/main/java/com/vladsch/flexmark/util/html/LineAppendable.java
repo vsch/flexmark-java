@@ -14,9 +14,9 @@ import java.io.IOException;
  * and control number of blank lines output, eliminate spaces before and after \n, other than indents
  * controlled by this class.
  * <p>
- * consecutive \n in the data are going go be collapsed to a single \n
+ * consecutive \n in the data are going go be collapsed to a single \n. To get blank lines need to use
  * <p>
- * tab is converted to a space if {@link #F_CONVERT_TABS} option is selected
+ * tab is converted to a space if {@link #F_CONVERT_TABS} or {@link #F_COLLAPSE_WHITESPACE} option is selected
  * <p>
  * spaces before and after \n are removed controlled by {@link #F_SUPPRESS_TRAILING_WHITESPACE} and {@link #F_ALLOW_LEADING_WHITESPACE}
  * <p>
@@ -24,10 +24,10 @@ import java.io.IOException;
  * and {@link #blankLine(int)} for getting these appended to result
  */
 @SuppressWarnings({ "UnusedReturnValue", "SameParameterValue" })
-public interface LineFormattingAppendable extends Appendable {
+public interface LineAppendable extends Appendable {
     enum Options {
         CONVERT_TABS,                       // expand tabs on column multiples of 4
-        COLLAPSE_WHITESPACE,                // collapse multiple tabs and spaces to single space
+        COLLAPSE_WHITESPACE,                // collapse multiple tabs and spaces to single space, implies CONVERT_TABS
         SUPPRESS_TRAILING_WHITESPACE,       // don't output trailing whitespace
         PASS_THROUGH,                       // just pass everything through to appendable with no formatting
         ALLOW_LEADING_WHITESPACE,           // allow leading spaces on a line, else remove
@@ -95,12 +95,12 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      */
     @NotNull
-    default LineFormattingAppendable setOptions(int flags) {
+    default LineAppendable setOptions(int flags) {
         return setOptions(toOptionSet(flags));
     }
 
     @NotNull
-    default LineFormattingAppendable setOptions(Options... options) {
+    default LineAppendable setOptions(Options... options) {
         return setOptions(toOptionSet(options).toInt());
     }
 
@@ -111,20 +111,20 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      */
     @NotNull
-    default LineFormattingAppendable setOptions(BitEnumSet<Options> options) {
+    default LineAppendable setOptions(BitEnumSet<Options> options) {
         return setOptions(options.toInt());
     }
 
     // these methods are monitored for content and formatting applied
     @Override
-    @NotNull LineFormattingAppendable append(@NotNull CharSequence csq);
+    @NotNull LineAppendable append(@NotNull CharSequence csq);
 
     @Override
-    @NotNull LineFormattingAppendable append(@NotNull CharSequence csq, int start, int end);
+    @NotNull LineAppendable append(@NotNull CharSequence csq, int start, int end);
 
     @Override
-    @NotNull LineFormattingAppendable append(char c);
-    @NotNull LineFormattingAppendable append(char c, int count);
+    @NotNull LineAppendable append(char c);
+    @NotNull LineAppendable append(char c, int count);
 
     /**
      * Append lines from another line formatting appendable.
@@ -137,7 +137,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      */
     @NotNull
-    default LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable) {
+    default LineAppendable append(@NotNull LineAppendable lineAppendable) {
         return append(lineAppendable, 0, Integer.MAX_VALUE);
     }
 
@@ -153,7 +153,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param endLine        end line to append
      * @return this
      */
-    @NotNull LineFormattingAppendable append(@NotNull LineFormattingAppendable lineAppendable, int startLine, int endLine);
+    @NotNull LineAppendable append(@NotNull LineAppendable lineAppendable, int startLine, int endLine);
 
     /**
      * Test if given line is part of pre-formatted text
@@ -179,7 +179,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param endLine            end line offset
      * @return this
      */
-    @NotNull LineFormattingAppendable prefixLinesWith(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine);
+    @NotNull LineAppendable prefixLinesWith(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine);
 
     /**
      * Get Lines with EOL
@@ -308,7 +308,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param endLine   end line offset
      * @return this
      */
-    @NotNull LineFormattingAppendable removeLines(int startLine, int endLine);
+    @NotNull LineAppendable removeLines(int startLine, int endLine);
 
     /**
      * Get column offset after last append
@@ -388,7 +388,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @throws IOException if thrown by appendable
      */
     @NotNull
-    default LineFormattingAppendable appendTo(@NotNull Appendable out) throws IOException {
+    default LineAppendable appendTo(@NotNull Appendable out) throws IOException {
         return appendTo(out, 0, null, 0, Integer.MAX_VALUE);
     }
 
@@ -401,7 +401,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @throws IOException if thrown by appendable
      */
     @NotNull
-    default LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines) throws IOException {
+    default LineAppendable appendTo(@NotNull Appendable out, int maxBlankLines) throws IOException {
         return appendTo(out, maxBlankLines, null, 0, Integer.MAX_VALUE);
     }
 
@@ -415,14 +415,14 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      * @throws IOException if thrown by appendable
      */
-    @NotNull LineFormattingAppendable appendTo(@NotNull Appendable out, int maxBlankLines, @Nullable CharSequence prefix, int startLine, int endLine) throws IOException;
+    @NotNull LineAppendable appendTo(@NotNull Appendable out, int maxBlankLines, @Nullable CharSequence prefix, int startLine, int endLine) throws IOException;
 
     /**
      * Add a new line, if there was any unterminated text appended
      *
      * @return this
      */
-    @NotNull LineFormattingAppendable line();
+    @NotNull LineAppendable line();
 
     /**
      * Add a new line, keep trailing spaces if there was any unterminated text appended
@@ -430,7 +430,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param count number of trailing spaces to add
      * @return this
      */
-    @NotNull LineFormattingAppendable lineWithTrailingSpaces(int count);
+    @NotNull LineAppendable lineWithTrailingSpaces(int count);
 
     /**
      * Add a new line, if predicate is true and there was any unterminated text appended
@@ -438,14 +438,14 @@ public interface LineFormattingAppendable extends Appendable {
      * @param predicate if true then new line will be started
      * @return this
      */
-    @NotNull LineFormattingAppendable lineIf(boolean predicate);
+    @NotNull LineAppendable lineIf(boolean predicate);
 
     /**
      * Add a blank line, if there is not one already appended.
      *
      * @return this
      */
-    @NotNull LineFormattingAppendable blankLine();
+    @NotNull LineAppendable blankLine();
 
     /**
      * Add a blank line, if predicate is true and there isn't already blank lines appended.
@@ -453,7 +453,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param predicate when true append blank line
      * @return this
      */
-    @NotNull LineFormattingAppendable blankLineIf(boolean predicate);
+    @NotNull LineAppendable blankLineIf(boolean predicate);
 
     /**
      * Add a blank lines, if there isn't already given number of blank lines appended.
@@ -462,7 +462,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param count number of blank lines to append
      * @return this
      */
-    @NotNull LineFormattingAppendable blankLine(int count);
+    @NotNull LineAppendable blankLine(int count);
 
     /**
      * @return true if in pre-formatted region
@@ -475,14 +475,14 @@ public interface LineFormattingAppendable extends Appendable {
      * @param addPrefixToFirstLine if true will add current prefix to first line
      * @return this
      */
-    @NotNull LineFormattingAppendable openPreFormatted(boolean addPrefixToFirstLine);
+    @NotNull LineAppendable openPreFormatted(boolean addPrefixToFirstLine);
 
     /**
      * Close preformatted section and suspend content modification
      *
      * @return this
      */
-    @NotNull LineFormattingAppendable closePreFormatted();
+    @NotNull LineAppendable closePreFormatted();
 
     /**
      * Increase the indent level, will terminate the current line if there is unterminated text
@@ -492,7 +492,7 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return this
      */
-    @NotNull LineFormattingAppendable indent();
+    @NotNull LineAppendable indent();
 
     /**
      * Decrease the indent level, min level is 0, will terminate the current line if there is unterminated text
@@ -502,7 +502,7 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return this
      */
-    @NotNull LineFormattingAppendable unIndent();
+    @NotNull LineAppendable unIndent();
 
     /**
      * Decrease the indent level, if there is unterminated text then unindented prefix
@@ -514,7 +514,7 @@ public interface LineFormattingAppendable extends Appendable {
      *
      * @return this
      */
-    @NotNull LineFormattingAppendable unIndentNoEol();
+    @NotNull LineAppendable unIndentNoEol();
 
     /**
      * Get prefix appended after a new line character for every indent level
@@ -529,7 +529,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param prefix prefix characters for new lines appended after this is set
      * @return this
      */
-    @NotNull LineFormattingAppendable setIndentPrefix(@Nullable CharSequence prefix);
+    @NotNull LineAppendable setIndentPrefix(@Nullable CharSequence prefix);
 
     /**
      * Get prefix being applied to all lines, even in pre-formatted sections
@@ -548,7 +548,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      */
     @NotNull
-    default LineFormattingAppendable addPrefix(@NotNull CharSequence prefix) {
+    default LineAppendable addPrefix(@NotNull CharSequence prefix) {
         return addPrefix(prefix, getPendingEOL() == 0);
     }
 
@@ -562,7 +562,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      */
     @NotNull
-    default LineFormattingAppendable setPrefix(@NotNull CharSequence prefix) {
+    default LineAppendable setPrefix(@NotNull CharSequence prefix) {
         return setPrefix(prefix, getPendingEOL() == 0);
     }
 
@@ -576,7 +576,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */
-    @NotNull LineFormattingAppendable addPrefix(@NotNull CharSequence prefix, boolean afterEol);
+    @NotNull LineAppendable addPrefix(@NotNull CharSequence prefix, boolean afterEol);
 
     /**
      * Set prefix appended after a new line character for every line
@@ -588,14 +588,14 @@ public interface LineFormattingAppendable extends Appendable {
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */
-    @NotNull LineFormattingAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol);
+    @NotNull LineAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol);
 
     /**
      * Save the current prefix on the stack
      *
      * @return this
      */
-    @NotNull LineFormattingAppendable pushPrefix();
+    @NotNull LineAppendable pushPrefix();
 
     /**
      * Pop a prefix from the stack and set the current prefix
@@ -603,7 +603,7 @@ public interface LineFormattingAppendable extends Appendable {
      * @return this
      */
     @NotNull
-    default LineFormattingAppendable popPrefix() {
+    default LineAppendable popPrefix() {
         return popPrefix(false);
     }
 
@@ -613,20 +613,20 @@ public interface LineFormattingAppendable extends Appendable {
      * @param afterEol if true prefix will take effect after EOL
      * @return this
      */
-    @NotNull LineFormattingAppendable popPrefix(boolean afterEol);
+    @NotNull LineAppendable popPrefix(boolean afterEol);
 
     @NotNull
-    default LineFormattingAppendable setLineOnFirstText() {
+    default LineAppendable setLineOnFirstText() {
         return lineOnFirstText(true);
     }
 
     @NotNull
-    default LineFormattingAppendable clearLineOnFirstText() {
+    default LineAppendable clearLineOnFirstText() {
         return lineOnFirstText(false);
     }
 
     void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines);
-    @NotNull LineFormattingAppendable lineOnFirstText(boolean value);
+    @NotNull LineAppendable lineOnFirstText(boolean value);
 
     /**
      * Add indent on first EOL appended and run runnable
@@ -634,12 +634,12 @@ public interface LineFormattingAppendable extends Appendable {
      * @param runnable runnable to run if adding indent on first EOL
      * @return this
      */
-    @NotNull LineFormattingAppendable addIndentOnFirstEOL(@NotNull Runnable runnable);
+    @NotNull LineAppendable addIndentOnFirstEOL(@NotNull Runnable runnable);
     /**
      * Remove runnable, has no effect if EOL was already appended and runnable was run
      *
      * @param runnable runnable added with addIndentOnFirstEOL
      * @return this
      */
-    @NotNull LineFormattingAppendable removeIndentOnFirstEOL(@NotNull Runnable runnable);
+    @NotNull LineAppendable removeIndentOnFirstEOL(@NotNull Runnable runnable);
 }

@@ -28,7 +28,7 @@ import java.util.HashMap;
 @SuppressWarnings("WeakerAccess")
 public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
     public HtmlBuilder() {
-        super(0, LineFormattingAppendable.F_PASS_THROUGH);
+        super(0, LineAppendable.F_PASS_THROUGH);
     }
 
     public HtmlBuilder(int indentSize, int formatOptions) {

@@ -206,6 +206,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   + [ ] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
+  * Fix: rename `LineFormattingAppendable` to `LineAppendable`
   * Fix: remove unused overloads and methods from `LineFormattingAppendable`
   * Add: new methods to `LineFormattingAppendable` for prefix changes and combined prefix/line
     manipulation.
