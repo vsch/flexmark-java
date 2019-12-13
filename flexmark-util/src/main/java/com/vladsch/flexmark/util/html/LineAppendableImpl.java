@@ -19,7 +19,7 @@ import static com.vladsch.flexmark.util.Utils.*;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.trimEnd;
 
-public class LineFormattingAppendableImpl implements LineFormattingAppendable {
+public class LineAppendableImpl implements LineFormattingAppendable {
     final private static char EOL = '\n';
 
     final private boolean passThrough;              // pass through mode for all operations to appendable without examination
@@ -54,27 +54,27 @@ public class LineFormattingAppendableImpl implements LineFormattingAppendable {
     private int lineOnFirstText;                            // append EOL on first text
     final private ArrayList<Runnable> indentsOnFirstEol;    // append indents on first eol
 
-    public LineFormattingAppendableImpl(Options... formatOptions) {
+    public LineAppendableImpl(Options... formatOptions) {
         this(null, LineFormattingAppendable.toOptionSet(formatOptions));
     }
 
-    public LineFormattingAppendableImpl(BitEnumSet<Options> formatOptions) {
+    public LineAppendableImpl(BitEnumSet<Options> formatOptions) {
         this(null, formatOptions);
     }
 
-    public LineFormattingAppendableImpl(int formatOptions) {
+    public LineAppendableImpl(int formatOptions) {
         this(null, LineFormattingAppendable.toOptionSet(formatOptions));
     }
 
-    public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, int formatOptions) {
+    public LineAppendableImpl(@Nullable SequenceBuilder builder, int formatOptions) {
         this(builder, LineFormattingAppendable.toOptionSet(formatOptions));
     }
 
-    public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, Options... formatOptions) {
+    public LineAppendableImpl(@Nullable SequenceBuilder builder, Options... formatOptions) {
         this(builder, LineFormattingAppendable.toOptionSet(formatOptions));
     }
 
-    public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, BitEnumSet<Options> formatOptions) {
+    public LineAppendableImpl(@Nullable SequenceBuilder builder, BitEnumSet<Options> formatOptions) {
         this.builder = builder;
         options = formatOptions;
         passThrough = any(F_PASS_THROUGH);

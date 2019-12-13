@@ -91,12 +91,12 @@ public interface LineFormattingAppendable extends Appendable {
     /**
      * Set options on processing text
      *
-     * @param options option flags
+     * @param flags option flags
      * @return this
      */
     @NotNull
-    default LineFormattingAppendable setOptions(int options) {
-        return setOptions(toOptionSet(options));
+    default LineFormattingAppendable setOptions(int flags) {
+        return setOptions(toOptionSet(flags));
     }
 
     @NotNull

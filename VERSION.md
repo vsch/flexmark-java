@@ -207,6 +207,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
   * Fix: remove unused overloads and methods from `LineFormattingAppendable`
+  * Add: new methods to `LineFormattingAppendable` for prefix changes and combined prefix/line
+    manipulation.
 * Fix: remove `my` prefix from fields in `flexmark-utils` to keep consistent naming convention
   in module.
 * Add: `BitEnumSet` to expose the bit mask of elements to use as efficient and convenient bit

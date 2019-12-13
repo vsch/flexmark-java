@@ -136,7 +136,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         return oldElements != elements;
     }
 
-    public boolean replaceAll(long mask) {
+    public boolean replace(long mask) {
         if ((mask & ~(-1L >>> -universe.length)) != 0) {
             throw new IndexOutOfBoundsException("bitMask " + mask + " value contains elements outside the universe " + Long.toBinaryString(mask & ~allValues()));
         }
@@ -195,6 +195,26 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
             throw new IndexOutOfBoundsException("Enum has more than 32 values");
         }
         return 1 << e1.ordinal();
+    }
+
+    public static long set(long flags, long mask) {
+        return flags | mask;
+    }
+
+    public static long clear(long flags, long mask) {
+        return flags & ~mask;
+    }
+
+    public static boolean any(long flags, long mask) {
+        return (flags & mask) != 0;
+    }
+
+    public static boolean all(long flags, long mask) {
+        return (flags & mask) == mask;
+    }
+
+    public static boolean none(long flags, long mask) {
+        return (flags & mask) == 0;
     }
 
     public long mask(E e1) { return 1L << e1.ordinal(); }

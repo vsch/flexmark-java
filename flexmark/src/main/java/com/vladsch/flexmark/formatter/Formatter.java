@@ -239,7 +239,7 @@ public class Formatter implements IRender {
      * @param builder  sequence builder
      */
     public String render(@NotNull Node document, @NotNull SequenceBuilder builder) {
-        SequenceBuilder subBuilder = builder.subContext();
+        SequenceBuilder subBuilder = builder.getBuilder();
 
         MarkdownWriter out = new MarkdownWriter(formatterOptions.formatFlags, subBuilder);
         MainNodeFormatter renderer = new MainNodeFormatter(options, out, document.getDocument(), null);

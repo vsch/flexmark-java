@@ -73,37 +73,27 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
 
     @NotNull
     @Override
-    public SequenceBuilder subContext() {
+    public SequenceBuilder getBuilder() {
         return new SequenceBuilder(baseSeq, segments.options, segments.optimizer);
     }
 
     @NotNull
     @Override
-    public SequenceBuilder addAll(Iterable<? extends CharSequence> sequences) {
-        for (CharSequence s : sequences) {
-            add(s);
-        }
-        return this;
-    }
-
-    @NotNull
-    @Override
-    public SequenceBuilder add(@Nullable CharSequence chars) {
+    public SequenceBuilder append(@Nullable CharSequence chars, int startIndex, int endIndex) {
         if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == baseSeq.getBase()) {
             if (((BasedSequence) chars).isNotNull()) {
                 ((BasedSequence) chars).addSegments(segments);
                 resultSeq = null;
             }
-        } else if (chars != null && chars.length() > 0) {
-            segments.append(chars);
+        } else if (chars != null && startIndex < endIndex) {
+            if (startIndex == 0 && endIndex == chars.length()) {
+                segments.append(chars);
+            } else {
+                segments.append(chars.subSequence(startIndex, endIndex));
+            }
             resultSeq = null;
         }
         return this;
-    }
-
-    @NotNull
-    public SequenceBuilder append(@Nullable CharSequence chars) {
-        return add(chars);
     }
 
     @NotNull

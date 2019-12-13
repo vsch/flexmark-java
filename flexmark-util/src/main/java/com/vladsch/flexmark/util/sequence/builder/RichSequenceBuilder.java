@@ -19,15 +19,15 @@ public final class RichSequenceBuilder implements ISequenceBuilder<RichSequenceB
     }
 
     @NotNull
-    public RichSequenceBuilder subContext() {
+    public RichSequenceBuilder getBuilder() {
         return new RichSequenceBuilder();
     }
 
     @NotNull
     @Override
-    public RichSequenceBuilder add(@Nullable CharSequence chars) {
-        if (chars != null && chars.length() > 0) {
-            segments.append(chars);
+    public RichSequenceBuilder append(@Nullable CharSequence chars, int startIndex, int endIndex) {
+        if (chars != null && chars.length() > 0 && startIndex < endIndex) {
+            segments.append(chars, startIndex, endIndex);
         }
         return this;
     }
@@ -50,15 +50,6 @@ public final class RichSequenceBuilder implements ISequenceBuilder<RichSequenceB
     @Override
     public RichSequence getSingleBasedSequence() {
         return toSequence();
-    }
-
-    @NotNull
-    @Override
-    public RichSequenceBuilder addAll(Iterable<? extends CharSequence> sequences) {
-        for (CharSequence chars : sequences) {
-            add(chars);
-        }
-        return this;
     }
 
     @NotNull
