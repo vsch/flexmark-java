@@ -6,13 +6,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
 
-public class ExceptionMatcher extends BaseMatcher<RuntimeException> {
+public class ExceptionMatcher extends BaseMatcher<Throwable> {
     final private @NotNull String prefix;
     final private @NotNull Pattern pattern;
     final private @NotNull String message;
 
     public ExceptionMatcher(@NotNull Class<? extends Throwable> throwable, @NotNull Pattern pattern, @NotNull String message) {
-        this.prefix = throwable.getName() + ": ";
+        this.prefix = throwable.getName();
         this.pattern = pattern;
         this.message = message;
     }
@@ -20,8 +20,14 @@ public class ExceptionMatcher extends BaseMatcher<RuntimeException> {
     @Override
     public boolean matches(Object o) {
         if (o instanceof RuntimeException) {
+            if (o.toString().startsWith(prefix + ": ")) {
+                return pattern.matcher(o.toString().substring(prefix.length() + ": ".length())).matches();
+            }
+        } else if (o instanceof Throwable) {
             if (o.toString().startsWith(prefix)) {
-                return pattern.matcher(o.toString().substring(prefix.length())).matches();
+                Throwable throwable = (Throwable) o;
+                String input = throwable.getCause().toString();
+                return pattern.matcher(input).matches();
             }
         }
         return false;
@@ -29,7 +35,7 @@ public class ExceptionMatcher extends BaseMatcher<RuntimeException> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText(prefix + message);
+        description.appendText(prefix + ": " + message);
     }
 
     @NotNull

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.collection.BitEnumSet;
+import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
@@ -69,7 +69,7 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @NotNull @Override public CharSequence[] getLinesPrefix(int startLine, int endLine)                                                                         { return appendable.getLinesPrefix(startLine, endLine); }
     @NotNull @Override public CharSequence[] getLinesContent(int startLine, int endLine)                                                                        { return appendable.getLinesContent(startLine, endLine); }
     @NotNull @Override public CharSequence[] getLines(int startLine, int endLine)                                                                               { return appendable.getLines(startLine, endLine); }
-    @Override @NotNull public BitEnumSet<Options> getOptionSet()                                                                                                { return appendable.getOptionSet();}
+    @Override @NotNull public BitFieldSet<Options> getOptionSet()                                                                                                { return appendable.getOptionSet();}
     @NotNull @Override public M addIndentOnFirstEOL(@NotNull Runnable runnable)                                                                                 { appendable.addIndentOnFirstEOL(runnable); return (M)this; }
     @NotNull @Override public M addPrefix(@NotNull CharSequence prefix)                                                                                         { appendable.addPrefix(prefix); return (M)this; }
     @NotNull @Override public M addPrefix(@NotNull CharSequence prefix, boolean afterEol)                                                                       { appendable.addPrefix(prefix, afterEol); return (M)this; }

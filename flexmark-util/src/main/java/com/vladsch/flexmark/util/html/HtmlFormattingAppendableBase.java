@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.collection.BitEnumSet;
+import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -437,7 +437,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @NotNull @Override public CharSequence[] getLinesContent(int startLine, int endLine)                                                                        { return appendable.getLinesContent(startLine, endLine); }
     @NotNull @Override public CharSequence[] getLines(int startLine, int endLine)                                                                               { return appendable.getLines(startLine, endLine); }
     @Override public String toString(int maxBlankLines)                                                                                                         { return appendable.toString(maxBlankLines); }
-    @Override @NotNull public BitEnumSet<Options> getOptionSet()                                                                                                { return appendable.getOptionSet();}
+    @Override @NotNull public BitFieldSet<Options> getOptionSet()                                                                                                { return appendable.getOptionSet();}
     @NotNull @Override public T addIndentOnFirstEOL(@NotNull Runnable runnable)                                                                                 { appendable.addIndentOnFirstEOL(runnable);  return (T)this; }
     @NotNull @Override public T addPrefix(@NotNull CharSequence prefix)                                                                                         { appendable.addPrefix(prefix); return (T)this; }
     @NotNull @Override public T addPrefix(@NotNull CharSequence prefix, boolean afterEol)                                                                       { appendable.addPrefix(prefix, afterEol);  return (T)this; }

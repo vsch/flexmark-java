@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.collection.BitEnumSet;
+import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.data.NullableDataKey;
@@ -29,15 +29,15 @@ public interface BasedOptionsHolder {
     Options O_TREE_SEGMENTED_SEQUENCES = Options.TREE_SEGMENTED_SEQUENCES;
 
     // NOTE: if no data holder or one with no SEGMENTED_STATS is passed to BasedOptionsSequence, then F_COLLECT_SEGMENTED_STATS flag will be removed from options
-    int F_COLLECT_SEGMENTED_STATS = BitEnumSet.intMask(O_COLLECT_SEGMENTED_STATS);    // set if segmented stats collector key is set to non-null value
-    int F_COLLECT_FIRST256_STATS = BitEnumSet.intMask(O_COLLECT_FIRST256_STATS);      // collect statistics for segments sequence on chars < code 256, used to optimize out of base chars for ascii
-    int F_NO_ANCHORS = BitEnumSet.intMask(O_NO_ANCHORS);                              // do not include anchors in segment builder, test only, not guaranteed to be stable for general use
+    int F_COLLECT_SEGMENTED_STATS = BitFieldSet.intMask(O_COLLECT_SEGMENTED_STATS);    // set if segmented stats collector key is set to non-null value
+    int F_COLLECT_FIRST256_STATS = BitFieldSet.intMask(O_COLLECT_FIRST256_STATS);      // collect statistics for segments sequence on chars < code 256, used to optimize out of base chars for ascii
+    int F_NO_ANCHORS = BitFieldSet.intMask(O_NO_ANCHORS);                              // do not include anchors in segment builder, test only, not guaranteed to be stable for general use
 
     // NOTE: if neither is specified then one will be chosen, most likely tree
     //   but may be full for short sequences or ones where number of segments vs
     //   sequence length makes tree based one wasteful and slow
-    int F_FULL_SEGMENTED_SEQUENCES = BitEnumSet.intMask(O_FULL_SEGMENTED_SEQUENCES);  // use full segmented sequences
-    int F_TREE_SEGMENTED_SEQUENCES = BitEnumSet.intMask(O_TREE_SEGMENTED_SEQUENCES);  // use tree based segmented sequences
+    int F_FULL_SEGMENTED_SEQUENCES = BitFieldSet.intMask(O_FULL_SEGMENTED_SEQUENCES);  // use full segmented sequences
+    int F_TREE_SEGMENTED_SEQUENCES = BitFieldSet.intMask(O_TREE_SEGMENTED_SEQUENCES);  // use tree based segmented sequences
 
     int F_LIBRARY_OPTIONS = 0x0000ffff;                 // reserved for library use, extensions must use data keys since there is no way to manage bit allocations
     int F_APPLICATION_OPTIONS = 0xffff0000;             // open for user application defined use, extensions must use data keys since there is no way to manage bit allocations
@@ -46,7 +46,7 @@ public interface BasedOptionsHolder {
     NullableDataKey<SegmentedSequenceStats> SEGMENTED_STATS = new NullableDataKey<>("SEGMENTED_STATS", (SegmentedSequenceStats) null);
 
     static String optionsToString(int options) {
-        return BitEnumSet.of(Options.class, options).toString();
+        return BitFieldSet.of(Options.class, options).toString();
     }
 
     /**

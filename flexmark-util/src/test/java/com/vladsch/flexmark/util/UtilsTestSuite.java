@@ -40,7 +40,7 @@ import org.junit.runners.Suite;
         MutableAttributeTest.class,
         UtilsTest.class,
         ArrayUtilsTest.class,
-        BitEnumSetTest.class,
+        BitFieldSetTest.class,
         MappedBasedSequenceTest.class,
         MappedRichSequenceTest.class,
         AttributesTest.class,

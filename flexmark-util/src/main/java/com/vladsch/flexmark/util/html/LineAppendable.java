@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.collection.BitEnumSet;
+import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,16 +42,16 @@ public interface LineAppendable extends Appendable {
     Options O_TRIM_LEADING_WHITESPACE = Options.TRIM_LEADING_WHITESPACE;
     Options O_ALLOW_LEADING_EOL = Options.ALLOW_LEADING_EOL;
     Options O_PREFIX_PRE_FORMATTED = Options.PREFIX_PRE_FORMATTED;
-    BitEnumSet<Options> O_FORMAT_ALL = BitEnumSet.of(O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_TRIM_TRAILING_WHITESPACE, O_TRIM_LEADING_WHITESPACE);
+    BitFieldSet<Options> O_FORMAT_ALL = BitFieldSet.of(O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_TRIM_TRAILING_WHITESPACE, O_TRIM_LEADING_WHITESPACE);
 
-    int F_CONVERT_TABS = BitEnumSet.intMask(O_CONVERT_TABS);                                    // expand tabs on column multiples of 4
-    int F_COLLAPSE_WHITESPACE = BitEnumSet.intMask(O_COLLAPSE_WHITESPACE);                      // collapse multiple tabs and spaces to single space
-    int F_TRIM_TRAILING_WHITESPACE = BitEnumSet.intMask(O_TRIM_TRAILING_WHITESPACE);            // don't output trailing whitespace
-    int F_PASS_THROUGH = BitEnumSet.intMask(O_PASS_THROUGH);                                    // just pass everything through to appendable with no formatting
+    int F_CONVERT_TABS = BitFieldSet.intMask(O_CONVERT_TABS);                                    // expand tabs on column multiples of 4
+    int F_COLLAPSE_WHITESPACE = BitFieldSet.intMask(O_COLLAPSE_WHITESPACE);                      // collapse multiple tabs and spaces to single space
+    int F_TRIM_TRAILING_WHITESPACE = BitFieldSet.intMask(O_TRIM_TRAILING_WHITESPACE);            // don't output trailing whitespace
+    int F_PASS_THROUGH = BitFieldSet.intMask(O_PASS_THROUGH);                                    // just pass everything through to appendable with no formatting
     // NOTE: F_ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
-    int F_TRIM_LEADING_WHITESPACE = BitEnumSet.intMask(O_TRIM_LEADING_WHITESPACE);              // allow leading spaces on a line, else remove
-    int F_ALLOW_LEADING_EOL = BitEnumSet.intMask(O_ALLOW_LEADING_EOL);                          // allow EOL at offset 0
-    int F_PREFIX_PRE_FORMATTED = BitEnumSet.intMask(O_PREFIX_PRE_FORMATTED);                    // when prefixing lines, prefix pre-formatted lines
+    int F_TRIM_LEADING_WHITESPACE = BitFieldSet.intMask(O_TRIM_LEADING_WHITESPACE);              // allow leading spaces on a line, else remove
+    int F_ALLOW_LEADING_EOL = BitFieldSet.intMask(O_ALLOW_LEADING_EOL);                          // allow EOL at offset 0
+    int F_PREFIX_PRE_FORMATTED = BitFieldSet.intMask(O_PREFIX_PRE_FORMATTED);                    // when prefixing lines, prefix pre-formatted lines
     int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_TRIM_TRAILING_WHITESPACE;     // select all formatting options
 
     // Use F_ prefixed constants
@@ -65,12 +65,12 @@ public interface LineAppendable extends Appendable {
     @Deprecated int PREFIX_PRE_FORMATTED = F_PREFIX_PRE_FORMATTED;
     @Deprecated int FORMAT_ALL = F_FORMAT_ALL;
 
-    static BitEnumSet<Options> toOptionSet(int options) {
-        return BitEnumSet.of(Options.class, options);
+    static BitFieldSet<Options> toOptionSet(int options) {
+        return BitFieldSet.of(Options.class, options);
     }
 
-    static BitEnumSet<Options> toOptionSet(Options... options) {
-        return BitEnumSet.of(Options.class, options);
+    static BitFieldSet<Options> toOptionSet(Options... options) {
+        return BitFieldSet.of(Options.class, options);
     }
 
     /**
@@ -88,7 +88,7 @@ public interface LineAppendable extends Appendable {
      * @return mutable option set
      */
     @NotNull
-    BitEnumSet<Options> getOptionSet();
+    BitFieldSet<Options> getOptionSet();
 
     /**
      * Set options on processing text
@@ -113,7 +113,7 @@ public interface LineAppendable extends Appendable {
      * @return this
      */
     @NotNull
-    default LineAppendable setOptions(BitEnumSet<Options> options) {
+    default LineAppendable setOptions(BitFieldSet<Options> options) {
         return setOptions(options.toInt());
     }
 

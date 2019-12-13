@@ -2,11 +2,13 @@ package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.AbstractSet;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -14,52 +16,59 @@ import java.util.concurrent.ConcurrentHashMap;
  * (i.e., those with 64 or fewer enum constants)
  * <p>
  * Modification allows access and manipulation of the bit mask for the elements so
- * this class can be easily converted between long/int and BitEnumSet to use as efficient
+ * this class can be easily converted between long/int and BitFieldSet to use as efficient
  * option flags in implementation but convenient enum sets for manipulation.
+ * <p>
+ * If the Enum implements BitField then each field can have 1..N bits up to a maximum total of 64 bits per enum.
+ * The class provides methods for setting and getting values from these fields as long or int values.
  *
+ * @author Vladimir Schneider
  * @author Josh Bloch
  * @serial exclude
  * @since 1.5
  */
 @SuppressWarnings({ "ManualArrayToCollectionCopy", "UseBulkOperation" })
-public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable, Serializable {
+public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable, Serializable {
     private static final long serialVersionUID = 3411599620347842686L;
 
-    public static class UniverseLoader {
-        @SuppressWarnings("rawtypes") final static ConcurrentHashMap<Class, Enum[]> slowAccessUniverses = new ConcurrentHashMap<>();
+    static class UniverseLoader {
+        @SuppressWarnings("rawtypes") final static ConcurrentHashMap<Class, Enum[]> enumUniverseMap = new ConcurrentHashMap<>();
+        @SuppressWarnings("rawtypes") final static ConcurrentHashMap<Class, long[]> enumBitMasksMap = new ConcurrentHashMap<>();
 
         @SuppressWarnings("rawtypes")
-        @Nullable
+        @NotNull
         public static Enum[] getUniverseSlow(Class elementType) {
-            if (elementType.isEnum()) {
-                Enum[] cachedUniverse = slowAccessUniverses.get(elementType);
-                if (cachedUniverse != null) return cachedUniverse;
+            assert (elementType.isEnum());
+            Enum[] cachedUniverse = enumUniverseMap.get(elementType);
+            if (cachedUniverse != null) return cachedUniverse;
 
-                Field[] fields = elementType.getFields();
-                int enums = 0;
-                for (Field field : fields) {
-                    if (field.getType().isEnum()) enums++;
-                }
-
-                if (enums > 0) {
-                    cachedUniverse = new Enum[enums];
-
-                    enums = 0;
-                    for (Field field : fields) {
-                        if (field.getType().isEnum()) {
-                            //noinspection unchecked
-                            cachedUniverse[enums++] = Enum.valueOf((Class<Enum>) field.getType(), field.getName());
-                        }
-                    }
-                } else {
-                    cachedUniverse = ZERO_LENGTH_ENUM_ARRAY;
-                }
-
-                slowAccessUniverses.put(elementType, cachedUniverse);
-                return cachedUniverse;
+            Field[] fields = elementType.getFields();
+            int enums = 0;
+            for (Field field : fields) {
+                if (field.getType().isEnum()) enums++;
             }
-            return null;
+
+            if (enums > 0) {
+                cachedUniverse = new Enum[enums];
+
+                enums = 0;
+                for (Field field : fields) {
+                    if (field.getType().isEnum()) {
+                        //noinspection unchecked
+                        cachedUniverse[enums++] = Enum.valueOf((Class<Enum>) field.getType(), field.getName());
+                    }
+                }
+            } else {
+                cachedUniverse = ZERO_LENGTH_ENUM_ARRAY;
+            }
+
+            enumUniverseMap.put(elementType, cachedUniverse);
+            return cachedUniverse;
         }
+    }
+
+    public static long nextBitMask(int nextAvailableBit, int bits) {
+        return (-1L >>> -bits) << (long) nextAvailableBit;
     }
 
     /**
@@ -69,6 +78,47 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     public static <E extends Enum<E>> E[] getUniverse(Class<E> elementType) {
         //noinspection unchecked
         return (E[]) UniverseLoader.getUniverseSlow(elementType);
+    }
+
+    /**
+     * Returns all of the values comprising E.
+     * The result is cloned and slower than SharedSecrets use but works in Java 11 and Java 8 because SharedSecrets are not shared publicly
+     */
+    public static <E extends Enum<E>> long[] getBitMasks(Class<E> elementType) {
+        long[] bitMasks = UniverseLoader.enumBitMasksMap.get(elementType);
+        if (bitMasks != null) return bitMasks;
+
+        // compute the bit masks for the enum
+        //noinspection unchecked
+        E[] universe = (E[]) UniverseLoader.getUniverseSlow(elementType);
+        if (BitField.class.isAssignableFrom(elementType)) {
+            int bitCount = 0;
+            bitMasks = new long[universe.length];
+
+            for (E e : universe) {
+                int bits = ((BitField) e).getBits();
+                if (bits <= 0)
+                    throw new IllegalArgumentException(String.format("Enum bit field %s.%s bits must be >= 1, got: %d", elementType.getSimpleName(), e.name(), bits));
+
+                if (bitCount + bits > 64)
+                    throw new IllegalArgumentException(String.format("Enum bit field %s.%s bits exceed available 64 bits by %d", elementType.getSimpleName(), e.name(), bitCount + bits - 64));
+
+                bitMasks[e.ordinal()] = nextBitMask(bitCount, bits);
+
+                bitCount += bits;
+            }
+        } else {
+            if (universe.length <= 64) {
+                bitMasks = new long[universe.length];
+                for (E e : universe) {
+                    bitMasks[e.ordinal()] = 1L << e.ordinal();
+                }
+            } else
+                throw new IllegalArgumentException("Enums with more than 64 values are not supported");
+        }
+
+        UniverseLoader.enumBitMasksMap.put(elementType, bitMasks);
+        return bitMasks;
     }
 
     /**
@@ -86,28 +136,37 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * All of the values comprising T.  (Cached for performance.)
      */
     final E[] universe;
+    final long[] bitMasks;  // bit masks for each field since some can span more than one
+    final int totalBits;     // total bits used by all fields
 
     final static Enum<?>[] ZERO_LENGTH_ENUM_ARRAY = new Enum<?>[0];
 
-    BitEnumSet(Class<E> elementType, Enum<?>[] universe) {
+    BitFieldSet(Class<E> elementType, Enum<?>[] universe, long[] bitMasks) {
         this.elementType = elementType;
         //noinspection unchecked
         this.universe = (E[]) universe;
+        this.bitMasks = bitMasks;
+        this.totalBits = getTotalBits(bitMasks);
     }
 
+    public static int getTotalBits(long[] bitMasks) {
+        return bitMasks.length == 0 ? 0 : 64 - Long.numberOfLeadingZeros(bitMasks[bitMasks.length - 1]);
+    }
+
+    // FIX: this for bit fields of more than 1 bit
     void addRange(E from, E to) {
         elements = (-1L >>> (from.ordinal() - to.ordinal() - 1)) << from.ordinal();
     }
 
     void addAll() {
-        if (universe.length != 0)
-            elements = -1L >>> -universe.length;
+        if (totalBits != 0)
+            elements = -1L >>> -totalBits;
     }
 
     public void complement() {
-        if (universe.length != 0) {
+        if (totalBits != 0) {
             elements = ~elements;
-            elements &= -1L >>> -universe.length;  // Mask unused bits
+            elements &= -1L >>> -totalBits;  // Mask unused bits
         }
     }
 
@@ -116,19 +175,19 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     }
 
     public int toInt() {
-        if (universe.length > 32) {
-            throw new IndexOutOfBoundsException("Enum has more than 32 values");
-        }
+        if (totalBits > 32)
+            throw new IllegalArgumentException(String.format("Enum fields use %d, which is more than 32 available in int", totalBits));
         return (int) elements;
     }
 
     public long allValues() {
-        return -1L >>> -universe.length;
+        return -1L >>> -totalBits;
     }
 
     public boolean set(long mask) {
-        if ((mask & ~(-1L >>> -universe.length)) != 0) {
-            throw new IndexOutOfBoundsException("bitMask " + mask + " value contains elements outside the universe " + Long.toBinaryString(mask & ~allValues()));
+        long allValues = allValues();
+        if ((mask & ~allValues) != 0) {
+            throw new IllegalArgumentException(String.format("bitMask %d value contains elements outside the universe %s", mask, Long.toBinaryString(mask & ~allValues)));
         }
 
         long oldElements = elements;
@@ -136,9 +195,10 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         return oldElements != elements;
     }
 
-    public boolean replace(long mask) {
-        if ((mask & ~(-1L >>> -universe.length)) != 0) {
-            throw new IndexOutOfBoundsException("bitMask " + mask + " value contains elements outside the universe " + Long.toBinaryString(mask & ~allValues()));
+    public boolean replaceAll(long mask) {
+        long allValues = allValues();
+        if ((mask & ~allValues) != 0) {
+            throw new IllegalArgumentException(String.format("mask %d(0b%s) value contains elements outside the universe 0b%s", mask, Long.toBinaryString(mask), Long.toBinaryString(mask & ~allValues)));
         }
 
         long oldElements = elements;
@@ -177,24 +237,101 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     }
 
     public boolean all(long mask) {
-        if ((mask & ~(-1L >>> -universe.length)) != 0) {
-            throw new IndexOutOfBoundsException("mask " + mask + " value contains elements outside the universe " + Long.toBinaryString(mask & ~allValues()));
+        long allValues = allValues();
+        if ((mask & ~allValues) != 0) {
+            throw new IllegalArgumentException(String.format("mask %d(0b%s) value contains elements outside the universe 0b%s", mask, Long.toBinaryString(mask), Long.toBinaryString(mask & ~allValues)));
         }
         return (elements & mask) == mask;
     }
 
     public static <E extends Enum<E>> long longMask(E e1) {
-        if (getUniverse(e1.getDeclaringClass()).length > 64) {
-            throw new IndexOutOfBoundsException("Enum has more than 64 values");
-        }
-        return 1L << e1.ordinal();
+        long[] bitMasks = getBitMasks(e1.getDeclaringClass());
+        // if we are here then there is no overflow
+        return bitMasks[e1.ordinal()];
     }
 
     public static <E extends Enum<E>> int intMask(E e1) {
-        if (getUniverse(e1.getDeclaringClass()).length > 32) {
-            throw new IndexOutOfBoundsException("Enum has more than 32 values");
-        }
-        return 1 << e1.ordinal();
+        long[] bitMasks = getBitMasks(e1.getDeclaringClass());
+        int totalBits = getTotalBits(bitMasks);
+        if (totalBits > 32)
+            throw new IllegalArgumentException(String.format("Enum fields use %d, which is more than 32 available in int", totalBits));
+        return (int) bitMasks[e1.ordinal()];
+    }
+
+    /**
+     * Returns unsigned value for the field, except if the field is 64 bits
+     *
+     * @param e1 field to get
+     * @return unsigned value
+     */
+    public long get(E e1) {
+        long bitMask = bitMasks[e1.ordinal()];
+        return (elements & bitMask) >>> Long.numberOfTrailingZeros(bitMask);
+    }
+
+    /**
+     * Set a signed value for the field
+     *
+     * @param e1    field
+     * @param value value to set
+     */
+    public boolean set(E e1, long value) {
+        long bitMask = bitMasks[e1.ordinal()];
+
+        int bitCount = Long.bitCount(bitMask);
+        long halfValue = 1L << bitCount - 1;
+
+        if (value < -halfValue || value > halfValue - 1)
+            throw new IllegalArgumentException(String.format("Enum field %s.%s is %d bit%s, value range is [%d, %d], cannot be set to %d", elementType.getSimpleName(), e1.name(), bitCount, bitCount > 1 ? "s" : "", -halfValue, halfValue - 1, value));
+
+        long shiftedValue = value << Long.numberOfTrailingZeros(bitMask);
+        long oldElements = elements;
+        elements ^= (elements ^ shiftedValue) & bitMask;
+        return oldElements != elements;
+    }
+
+    public void setInt(E e1, int value) {
+        set(e1, value);
+    }
+
+    public void setShort(E e1, short value) {
+        set(e1, value);
+    }
+
+    public void setByte(E e1, byte value) {
+        set(e1, value);
+    }
+
+    public long getSigned(E e1, int maxBits, String typeName) {
+        long bitMask = bitMasks[e1.ordinal()];
+        int bitCount = Long.bitCount(bitMask);
+
+        if (bitCount > maxBits)
+            throw new IllegalArgumentException(String.format("Enum field %s.%s uses %d, which is more than %d available in %s", elementType.getSimpleName(), e1.name(), bitCount, maxBits, typeName));
+
+        return elements << Long.numberOfLeadingZeros(bitMask) >> 64 - bitCount;
+    }
+
+    /**
+     * Returns signed value for the field, except if the field is 64 bits
+     *
+     * @param e1 field to get
+     * @return unsigned value
+     */
+    public long getSigned(E e1) {
+        return getSigned(e1, 64, "long");
+    }
+
+    public int getInt(E e1) {
+        return (int) getSigned(e1, 32, "int");
+    }
+
+    public short getShort(E e1) {
+        return (short) getSigned(e1, 16, "short");
+    }
+
+    public byte getByte(E e1) {
+        return (byte) getSigned(e1, 8, "byte");
     }
 
     public static long set(long flags, long mask) {
@@ -217,18 +354,24 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         return (flags & mask) == 0;
     }
 
-    public long mask(E e1) { return 1L << e1.ordinal(); }
+    public long mask(E e1) { return bitMasks[e1.ordinal()]; }
 
-    public long mask(E e1, E e2) { return 1L << e1.ordinal() | 1L << e2.ordinal();}
+    public long mask(E e1, E e2) { return bitMasks[e1.ordinal()] | bitMasks[e2.ordinal()];}
 
-    public long mask(E e1, E e2, E e3) { return 1L << e1.ordinal() | 1L << e2.ordinal() | 1L << e3.ordinal();}
+    public long mask(E e1, E e2, E e3) { return bitMasks[e1.ordinal()] | bitMasks[e2.ordinal()] | bitMasks[e3.ordinal()];}
 
-    public long mask(E e1, E e2, E e3, E e4) { return 1L << e1.ordinal() | 1L << e2.ordinal() | 1L << e3.ordinal() | 1L << e4.ordinal();}
+    public long mask(E e1, E e2, E e3, E e4) { return bitMasks[e1.ordinal()] | bitMasks[e2.ordinal()] | bitMasks[e3.ordinal()] | bitMasks[e4.ordinal()];}
 
-    public long mask(E e1, E e2, E e3, E e4, E e5) { return 1L << e1.ordinal() | 1L << e2.ordinal() | 1L << e3.ordinal() | 1L << e4.ordinal() | 1L << e5.ordinal();}
+    public long mask(E e1, E e2, E e3, E e4, E e5) { return bitMasks[e1.ordinal()] | bitMasks[e2.ordinal()] | bitMasks[e3.ordinal()] | bitMasks[e4.ordinal()] | bitMasks[e5.ordinal()];}
 
     @SafeVarargs
-    final public long mask(E... rest) { return of(elementType, rest).toLong();}
+    final public long mask(E... rest) {
+        long mask = 0;
+        for (E e : rest) {
+            mask |= bitMasks[e.ordinal()];
+        }
+        return mask;
+    }
 
     public boolean set(E e1) { return set(mask(e1)); }
 
@@ -302,16 +445,17 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * Iterator is a "snapshot" iterator that will never throw {@link
      * java.util.ConcurrentModificationException}; the elements are traversed as they
      * existed when this call was invoked.
+     * <p>
+     * NOTE: bit field iteration requires skipping fields whose bits are all 0 so constant time is violated
      *
      * @return an iterator over the elements contained in this set
      */
     @NotNull
     public Iterator<E> iterator() {
-        //noinspection ReturnOfInnerClass
-        return new EnumSetIterator<>();
+        return bitMasks.length == totalBits ? new EnumBitSetIterator<>() : new EnumBitFieldIterator<>();
     }
 
-    private class EnumSetIterator<E extends Enum<E>> implements Iterator<E> {
+    private class EnumBitSetIterator<E extends Enum<E>> implements Iterator<E> {
         /**
          * A bit vector representing the elements in the set not yet
          * returned by this iterator.
@@ -324,7 +468,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
          */
         long lastReturned = 0;
 
-        EnumSetIterator() {
+        EnumBitSetIterator() {
             unseen = elements;
         }
 
@@ -349,13 +493,52 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         }
     }
 
+    private class EnumBitFieldIterator<E extends Enum<E>> implements Iterator<E> {
+        int nextIndex;
+        int lastReturnedIndex = -1;
+
+        EnumBitFieldIterator() {
+            nextIndex = -1;
+            findNext();
+        }
+
+        public boolean hasNext() {
+            return nextIndex < universe.length;
+        }
+
+        @SuppressWarnings("unchecked")
+        public E next() {
+            if (nextIndex >= universe.length)
+                throw new NoSuchElementException();
+
+            lastReturnedIndex = nextIndex;
+            findNext();
+
+            return (E) universe[lastReturnedIndex];
+        }
+
+        void findNext() {
+            do {
+                nextIndex++;
+                if (nextIndex >= universe.length) break;
+            } while ((elements & bitMasks[nextIndex]) == 0);
+        }
+
+        public void remove() {
+            if (lastReturnedIndex == -1)
+                throw new IllegalStateException();
+            elements &= ~bitMasks[lastReturnedIndex];
+            lastReturnedIndex = -1;
+        }
+    }
+
     /**
      * Returns the number of elements in this set.
      *
      * @return the number of elements in this set
      */
     public int size() {
-        return Long.bitCount(elements);
+        return totalBits;
     }
 
     /**
@@ -380,7 +563,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         if (eClass != elementType && eClass.getSuperclass() != elementType)
             return false;
 
-        return (elements & (1L << ((Enum<?>) e).ordinal())) != 0;
+        return (elements & bitMasks[((Enum<?>) e).ordinal()]) != 0;
     }
 
     // Modification Operations
@@ -396,7 +579,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         typeCheck(e);
 
         long oldElements = elements;
-        elements |= (1L << e.ordinal());
+        elements |= bitMasks[e.ordinal()];
         return elements != oldElements;
     }
 
@@ -414,7 +597,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
             return false;
 
         long oldElements = elements;
-        elements &= ~(1L << ((Enum<?>) e).ordinal());
+        elements &= ~bitMasks[((Enum<?>) e).ordinal()];
         return elements != oldElements;
     }
 
@@ -430,10 +613,10 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @throws NullPointerException if the specified collection is null
      */
     public boolean containsAll(Collection<?> c) {
-        if (!(c instanceof BitEnumSet))
+        if (!(c instanceof BitFieldSet))
             return super.containsAll(c);
 
-        BitEnumSet<?> es = (BitEnumSet<?>) c;
+        BitFieldSet<?> es = (BitFieldSet<?>) c;
         if (es.elementType != elementType)
             return es.isEmpty();
 
@@ -449,10 +632,10 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      *                              of its elements are null
      */
     public boolean addAll(Collection<? extends E> c) {
-        if (!(c instanceof BitEnumSet))
+        if (!(c instanceof BitFieldSet))
             return super.addAll(c);
 
-        BitEnumSet<?> es = (BitEnumSet<?>) c;
+        BitFieldSet<?> es = (BitFieldSet<?>) c;
         if (es.elementType != elementType) {
             if (es.isEmpty())
                 return false;
@@ -475,10 +658,10 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @throws NullPointerException if the specified collection is null
      */
     public boolean removeAll(Collection<?> c) {
-        if (!(c instanceof BitEnumSet))
+        if (!(c instanceof BitFieldSet))
             return super.removeAll(c);
 
-        BitEnumSet<?> es = (BitEnumSet<?>) c;
+        BitFieldSet<?> es = (BitFieldSet<?>) c;
         if (es.elementType != elementType)
             return false;
 
@@ -496,10 +679,10 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @throws NullPointerException if the specified collection is null
      */
     public boolean retainAll(Collection<?> c) {
-        if (!(c instanceof BitEnumSet))
+        if (!(c instanceof BitFieldSet))
             return super.retainAll(c);
 
-        BitEnumSet<?> es = (BitEnumSet<?>) c;
+        BitFieldSet<?> es = (BitFieldSet<?>) c;
         if (es.elementType != elementType) {
             boolean changed = (elements != 0);
             elements = 0;
@@ -526,8 +709,8 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @param <T>       enum type
      * @return bit enum set
      */
-    public static <T extends Enum<T>> BitEnumSet<T> of(@NotNull Class<T> enumClass, long mask) {
-        BitEnumSet<T> optionSet = BitEnumSet.noneOf(enumClass);
+    public static <T extends Enum<T>> BitFieldSet<T> of(@NotNull Class<T> enumClass, long mask) {
+        BitFieldSet<T> optionSet = BitFieldSet.noneOf(enumClass);
         optionSet.set(mask);
         return optionSet;
     }
@@ -538,9 +721,9 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return a copy of this set
      */
     @SuppressWarnings("unchecked")
-    public BitEnumSet<E> clone() {
+    public BitFieldSet<E> clone() {
         try {
-            return (BitEnumSet<E>) super.clone();
+            return (BitFieldSet<E>) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new AssertionError(e);
         }
@@ -575,24 +758,20 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
         private final Class<E> elementType;
 
         /**
-         * The elements contained in this enum set.
+         * The bit mask for elements contained in this enum set.
          *
          * @serial
          */
-        private final Enum<?>[] elements;
+        private final long bits;
 
-        SerializationProxy(BitEnumSet<E> set) {
+        SerializationProxy(BitFieldSet<E> set) {
             elementType = set.elementType;
-            elements = set.toArray(ZERO_LENGTH_ENUM_ARRAY);
+            bits = set.elements;
         }
 
-        // instead of cast to E, we should perhaps use elementType.cast()
-        // to avoid injection of forged stream, but it will slow the implementation
-        @SuppressWarnings("unchecked")
         private Object readResolve() {
-            BitEnumSet<E> result = BitEnumSet.noneOf(elementType);
-            for (Enum<?> e : elements)
-                result.add((E) e);
+            BitFieldSet<E> result = BitFieldSet.noneOf(elementType);
+            result.set(bits);
             return result;
         }
 
@@ -620,10 +799,10 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return <tt>true</tt> if the specified object is equal to this set
      */
     public boolean equals(Object o) {
-        if (!(o instanceof BitEnumSet))
+        if (!(o instanceof BitFieldSet))
             return super.equals(o);
 
-        BitEnumSet<?> es = (BitEnumSet<?>) o;
+        BitFieldSet<?> es = (BitFieldSet<?>) o;
         if (es.elementType != elementType)
             return elements == 0 && es.elements == 0;
         return es.elements == elements;
@@ -638,15 +817,13 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return An empty enum set of the specified type.
      * @throws NullPointerException if <tt>elementType</tt> is null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> noneOf(Class<E> elementType) {
-        Enum<?>[] universe = getUniverse(elementType);
-        if (universe == null)
+    public static <E extends Enum<E>> BitFieldSet<E> noneOf(Class<E> elementType) {
+        if (!elementType.isEnum())
             throw new ClassCastException(elementType + " not an enum");
 
-        if (universe.length <= 64)
-            return new BitEnumSet<>(elementType, universe);
-        else
-            throw new IllegalArgumentException("Enums with more than 64 values are not supported");
+        Enum<?>[] universe = getUniverse(elementType);
+
+        return new BitFieldSet<>(elementType, universe, getBitMasks(elementType));
     }
 
     /**
@@ -659,8 +836,8 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return An enum set containing all the elements in the specified type.
      * @throws NullPointerException if <tt>elementType</tt> is null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> allOf(Class<E> elementType) {
-        BitEnumSet<E> result = noneOf(elementType);
+    public static <E extends Enum<E>> BitFieldSet<E> allOf(Class<E> elementType) {
+        BitFieldSet<E> result = noneOf(elementType);
         result.addAll();
         return result;
     }
@@ -674,14 +851,14 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return A copy of the specified enum set.
      * @throws NullPointerException if <tt>s</tt> is null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> copyOf(BitEnumSet<E> s) {
+    public static <E extends Enum<E>> BitFieldSet<E> copyOf(BitFieldSet<E> s) {
         return s.clone();
     }
 
     /**
      * Creates an enum set initialized from the specified collection.  If
-     * the specified collection is an <tt>BitEnumSet</tt> instance, this static
-     * factory method behaves identically to {@link #copyOf(BitEnumSet)}.
+     * the specified collection is an <tt>BitFieldSet</tt> instance, this static
+     * factory method behaves identically to {@link #copyOf(BitFieldSet)}.
      * Otherwise, the specified collection must contain at least one element
      * (in order to determine the new enum set's element type).
      *
@@ -689,18 +866,18 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @param c   the collection from which to initialize this enum set
      * @return An enum set initialized from the given collection.
      * @throws IllegalArgumentException if <tt>c</tt> is not an
-     *                                  <tt>BitEnumSet</tt> instance and contains no elements
+     *                                  <tt>BitFieldSet</tt> instance and contains no elements
      * @throws NullPointerException     if <tt>c</tt> is null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> copyOf(Collection<E> c) {
-        if (c instanceof BitEnumSet) {
-            return ((BitEnumSet<E>) c).clone();
+    public static <E extends Enum<E>> BitFieldSet<E> copyOf(Collection<E> c) {
+        if (c instanceof BitFieldSet) {
+            return ((BitFieldSet<E>) c).clone();
         } else {
             if (c.isEmpty())
                 throw new IllegalArgumentException("Collection is empty");
             Iterator<E> i = c.iterator();
             E first = i.next();
-            BitEnumSet<E> result = BitEnumSet.of(first);
+            BitFieldSet<E> result = BitFieldSet.of(first);
             while (i.hasNext()) { result.add(i.next()); }
             return result;
         }
@@ -716,8 +893,8 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return The complement of the specified set in this set
      * @throws NullPointerException if <tt>s</tt> is null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> complementOf(BitEnumSet<E> s) {
-        BitEnumSet<E> result = copyOf(s);
+    public static <E extends Enum<E>> BitFieldSet<E> complementOf(BitFieldSet<E> s) {
+        BitFieldSet<E> result = copyOf(s);
         result.complement();
         return result;
     }
@@ -725,19 +902,19 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     /**
      * Creates an enum set initially containing the specified element.
      * <p>
-     * Overloadings of this method exist to initialize an enum set with
+     * Overloads of this method exist to initialize an enum set with
      * one through five elements.  A sixth overloading is provided that
      * uses the varargs feature.  This overloading may be used to create
      * an enum set initially containing an arbitrary number of elements, but
-     * is likely to run slower than the overloadings that do not use varargs.
+     * is likely to run slower than the overloads that do not use varargs.
      *
      * @param <E> The class of the specified element and of the set
      * @param e   the element that this set is to contain initially
      * @return an enum set initially containing the specified element
      * @throws NullPointerException if <tt>e</tt> is null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> of(E e) {
-        BitEnumSet<E> result = noneOf(e.getDeclaringClass());
+    public static <E extends Enum<E>> BitFieldSet<E> of(E e) {
+        BitFieldSet<E> result = noneOf(e.getDeclaringClass());
         result.add(e);
         return result;
     }
@@ -745,11 +922,11 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     /**
      * Creates an enum set initially containing the specified elements.
      * <p>
-     * Overloadings of this method exist to initialize an enum set with
+     * Overloads of this method exist to initialize an enum set with
      * one through five elements.  A sixth overloading is provided that
      * uses the varargs feature.  This overloading may be used to create
      * an enum set initially containing an arbitrary number of elements, but
-     * is likely to run slower than the overloadings that do not use varargs.
+     * is likely to run slower than the overloads that do not use varargs.
      *
      * @param <E> The class of the parameter elements and of the set
      * @param e1  an element that this set is to contain initially
@@ -757,8 +934,8 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return an enum set initially containing the specified elements
      * @throws NullPointerException if any parameters are null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> of(E e1, E e2) {
-        BitEnumSet<E> result = noneOf(e1.getDeclaringClass());
+    public static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2) {
+        BitFieldSet<E> result = noneOf(e1.getDeclaringClass());
         result.add(e1);
         result.add(e2);
         return result;
@@ -767,11 +944,11 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     /**
      * Creates an enum set initially containing the specified elements.
      * <p>
-     * Overloadings of this method exist to initialize an enum set with
+     * Overloads of this method exist to initialize an enum set with
      * one through five elements.  A sixth overloading is provided that
      * uses the varargs feature.  This overloading may be used to create
      * an enum set initially containing an arbitrary number of elements, but
-     * is likely to run slower than the overloadings that do not use varargs.
+     * is likely to run slower than the overloads that do not use varargs.
      *
      * @param <E> The class of the parameter elements and of the set
      * @param e1  an element that this set is to contain initially
@@ -780,8 +957,8 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return an enum set initially containing the specified elements
      * @throws NullPointerException if any parameters are null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> of(E e1, E e2, E e3) {
-        BitEnumSet<E> result = noneOf(e1.getDeclaringClass());
+    public static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2, E e3) {
+        BitFieldSet<E> result = noneOf(e1.getDeclaringClass());
         result.add(e1);
         result.add(e2);
         result.add(e3);
@@ -791,11 +968,11 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     /**
      * Creates an enum set initially containing the specified elements.
      * <p>
-     * Overloadings of this method exist to initialize an enum set with
+     * Overloads of this method exist to initialize an enum set with
      * one through five elements.  A sixth overloading is provided that
      * uses the varargs feature.  This overloading may be used to create
      * an enum set initially containing an arbitrary number of elements, but
-     * is likely to run slower than the overloadings that do not use varargs.
+     * is likely to run slower than the overloads that do not use varargs.
      *
      * @param <E> The class of the parameter elements and of the set
      * @param e1  an element that this set is to contain initially
@@ -805,8 +982,8 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return an enum set initially containing the specified elements
      * @throws NullPointerException if any parameters are null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> of(E e1, E e2, E e3, E e4) {
-        BitEnumSet<E> result = noneOf(e1.getDeclaringClass());
+    public static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2, E e3, E e4) {
+        BitFieldSet<E> result = noneOf(e1.getDeclaringClass());
         result.add(e1);
         result.add(e2);
         result.add(e3);
@@ -817,11 +994,11 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
     /**
      * Creates an enum set initially containing the specified elements.
      * <p>
-     * Overloadings of this method exist to initialize an enum set with
+     * Overloads of this method exist to initialize an enum set with
      * one through five elements.  A sixth overloading is provided that
      * uses the varargs feature.  This overloading may be used to create
      * an enum set initially containing an arbitrary number of elements, but
-     * is likely to run slower than the overloadings that do not use varargs.
+     * is likely to run slower than the overloads that do not use varargs.
      *
      * @param <E> The class of the parameter elements and of the set
      * @param e1  an element that this set is to contain initially
@@ -832,11 +1009,11 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @return an enum set initially containing the specified elements
      * @throws NullPointerException if any parameters are null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> of(
+    public static <E extends Enum<E>> BitFieldSet<E> of(
             E e1, E e2, E e3, E e4,
             E e5
     ) {
-        BitEnumSet<E> result = noneOf(e1.getDeclaringClass());
+        BitFieldSet<E> result = noneOf(e1.getDeclaringClass());
         result.add(e1);
         result.add(e2);
         result.add(e3);
@@ -849,7 +1026,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * Creates an enum set initially containing the specified elements.
      * This factory, whose parameter list uses the varargs feature, may
      * be used to create an enum set initially containing an arbitrary
-     * number of elements, but it is likely to run slower than the overloadings
+     * number of elements, but it is likely to run slower than the overloads
      * that do not use varargs.
      *
      * @param <E>   The class of the parameter elements and of the set
@@ -860,8 +1037,8 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      *                              or if <tt>rest</tt> is null
      */
     @SafeVarargs
-    public static <E extends Enum<E>> BitEnumSet<E> of(E first, E... rest) {
-        BitEnumSet<E> result = noneOf(first.getDeclaringClass());
+    public static <E extends Enum<E>> BitFieldSet<E> of(E first, E... rest) {
+        BitFieldSet<E> result = noneOf(first.getDeclaringClass());
         result.add(first);
         for (E e : rest)
             result.add(e);
@@ -872,7 +1049,7 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * Creates an enum set initially containing the specified elements.
      * This factory, whose parameter list uses the varargs feature, may
      * be used to create an enum set initially containing an arbitrary
-     * number of elements, but it is likely to run slower than the overloadings
+     * number of elements, but it is likely to run slower than the overloads
      * that do not use varargs.
      *
      * @param <E>  The class of the parameter elements and of the set
@@ -881,8 +1058,8 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @throws NullPointerException if any of the specified elements are null,
      *                              or if <tt>rest</tt> is null
      */
-    public static <E extends Enum<E>> BitEnumSet<E> of(@NotNull Class<E> declaringClass, E[] rest) {
-        BitEnumSet<E> result = noneOf(declaringClass);
+    public static <E extends Enum<E>> BitFieldSet<E> of(@NotNull Class<E> declaringClass, E[] rest) {
+        BitFieldSet<E> result = noneOf(declaringClass);
         for (E e : rest)
             result.add(e);
         return result;
@@ -902,10 +1079,10 @@ public class BitEnumSet<E extends Enum<E>> extends AbstractSet<E> implements Clo
      * @throws NullPointerException     if {@code from} or {@code to} are null
      * @throws IllegalArgumentException if {@code from.compareTo(to) > 0}
      */
-    public static <E extends Enum<E>> BitEnumSet<E> range(E from, E to) {
+    public static <E extends Enum<E>> BitFieldSet<E> range(E from, E to) {
         if (from.compareTo(to) > 0)
             throw new IllegalArgumentException(from + " > " + to);
-        BitEnumSet<E> result = noneOf(from.getDeclaringClass());
+        BitFieldSet<E> result = noneOf(from.getDeclaringClass());
         result.addRange(from, to);
         return result;
     }

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.collection.BitEnumSet;
+import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
@@ -23,7 +23,7 @@ public class LineAppendableImpl implements LineAppendable {
     final private static char EOL = '\n';
 
     final private boolean passThrough;              // pass through mode for all operations to appendable without examination
-    final private BitEnumSet<Options> options;
+    final private BitFieldSet<Options> options;
 
     // pre-formatted nesting level, while >0 all text is passed through as is and not monitored
     private int preFormattedNesting;
@@ -58,7 +58,7 @@ public class LineAppendableImpl implements LineAppendable {
         this(null, LineAppendable.toOptionSet(formatOptions));
     }
 
-    public LineAppendableImpl(BitEnumSet<Options> formatOptions) {
+    public LineAppendableImpl(BitFieldSet<Options> formatOptions) {
         this(null, formatOptions);
     }
 
@@ -74,7 +74,7 @@ public class LineAppendableImpl implements LineAppendable {
         this(builder, LineAppendable.toOptionSet(formatOptions));
     }
 
-    public LineAppendableImpl(@Nullable SequenceBuilder builder, BitEnumSet<Options> formatOptions) {
+    public LineAppendableImpl(@Nullable SequenceBuilder builder, BitFieldSet<Options> formatOptions) {
         this.builder = builder;
         options = formatOptions;
         passThrough = any(F_PASS_THROUGH);
@@ -100,14 +100,14 @@ public class LineAppendableImpl implements LineAppendable {
 
     @NotNull
     @Override
-    public BitEnumSet<Options> getOptionSet() {
+    public BitFieldSet<Options> getOptionSet() {
         return options;
     }
 
     @NotNull
     @Override
     public LineAppendable setOptions(int flags) {
-        options.replace(flags);
+        options.replaceAll(flags);
         return this;
     }
 
@@ -822,7 +822,7 @@ public class LineAppendableImpl implements LineAppendable {
             this.options.clear(F_TRIM_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
             if (count > 0) append(' ', count);
             appendImpl(SequenceUtils.EOL, 0);
-            this.options.replace(options);
+            this.options.replaceAll(options);
         }
         return this;
     }

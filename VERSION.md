@@ -9,7 +9,8 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.70](#next-05970)
+- [Next 0.59.72](#next-05972)
+- [0.59.70](#05970)
 - [0.59.68](#05968)
 - [0.59.66](#05966)
 - [0.59.64](#05964)
@@ -198,7 +199,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: spec files no longer render HTML when option selected.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
 
-## Next 0.59.70
+## Next 0.59.72
 
 + [ ] Add: `BasedOffsetTracker` to take `BasedSequence` result (could be segmented, offset in
       based sequence, `PositionAnchor` and return index of this offset in the resulting based
@@ -212,6 +213,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   + [ ] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
+
+## 0.59.70
+
+* Fix: convert `BitEnumSet` to `BitFieldSet` to allow bit fields of more than 1 bit.
+  * Add: Optional `BitField` interface, if implemented by Enum for use by `BitFieldSet` then bit
+    fields can be 1 to 64 bits in size, with manipulation of bit packed values and iteration
+    over non-zero valued elements.
 
 ## 0.59.68
 
