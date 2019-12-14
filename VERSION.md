@@ -198,12 +198,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
++ [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
+      extension add order
 
 ## Next 0.59.72
 
+* Add: `SegmentOffsetTree` for binary search on offset in base sequence for conversion to index
+  in result sequence.
 + [ ] Add: `BasedOffsetTracker` to take `BasedSequence` result (could be segmented, offset in
       based sequence, `PositionAnchor` and return index of this offset in the resulting based
-      sequence. The
+      sequence.
 + [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
   + [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `SequenceBuilder` can optimize

@@ -6,22 +6,24 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.function.BiConsumer;
 
+// @formatter:off
+
 /**
  * Configurable node visitor handler which does not know anything about node subclasses
  * while allowing easy configuration of custom visitor for nodes of interest to visit.
  * <p>
  * Usage:
  * {@code
- * visitor = new NodeVisitor(
- * new VisitHandler&lt;&gt;(Document.class, this::visit),
- * new VisitHandler&lt;&gt;(HtmlEntity.class, this::visit),
- * new VisitHandler&lt;&gt;(SoftLineBreak.class, this::visit),
- * new VisitHandler&lt;&gt;(HardLineBreak.class, this::visit)
+ * myVisitor = new NodeVisitor(
+ *     new VisitHandler&lt;&gt;(Document.class, this::visit),
+ *     new VisitHandler&lt;&gt;(HtmlEntity.class, this::visit),
+ *     new VisitHandler&lt;&gt;(SoftLineBreak.class, this::visit),
+ *     new VisitHandler&lt;&gt;(HardLineBreak.class, this::visit)
  * );
  * }
  * <p>
  * Document doc;
- * visitor.visit(doc);
+ * myVisitor.visit(doc);
  * <p>
  * IMPORTANT: This class replaces the old NodeVisitor derived from NodeAdaptedVisitor.
  * <p>
@@ -31,32 +33,36 @@ import java.util.function.BiConsumer;
  * Previously the implementation for visit(Node) looked like:
  * <p>
  * {@code
+ * @Override
+ * public void visit(Node node) {
+ *    processNode(node, true, this::visit);
  *
- * @Override public void visit(Node node) {
- *         processNode(node, true, this::visit);
- *         VisitHandler&lt;?&gt; handler = getHandler(node);
- *         if (handler != null) {
- *         handler.visit(node);
- *         } else {
- *         visitChildren(node);
- *         }
- *         }
- *         }
- *         <p>
- *         you will need to override {@link #processNode(Node node, boolean withChildren, BiConsumer consumer)}, and to change the
- *         logic of processing child nodes if withChildren is true and passing child processing to processChildren() instead of visitChildren.
- *         <p>
- *         {@code
- * @Override public void processNode(Node node, boolean withChildren, BiConsumer&lt;Node, Visitor&lt;Node&gt;&gt; processor) {
- *         Visitor&lt;?&gt; handler = getAction(node);
- *         if (handler != null) {
+ *    VisitHandler&lt;?&gt; handler = getHandler(node);
+ *    if (handler != null) {
+ *        handler.visit(node);
+ *    } else {
+ *        visitChildren(node);
+ *    }
+ * }
+ * }
+ * <p>
+ * you will need to override {@link #processNode(Node node, boolean withChildren, BiConsumer consumer)}, and to change the
+ * logic of processing child nodes if withChildren is true and passing child processing to processChildren() instead of visitChildren.
+ * <p>
+ * {@code
+ * @Override
+ * public void processNode(Node node, boolean withChildren, BiConsumer&lt;Node, Visitor&lt;Node&gt;&gt; processor) {
+ *     Visitor&lt;?&gt; handler = getAction(node);
+ *     if (handler != null) {
  *         processor.accept(node, visitor);
- *         }  else if (withChildren) {
+ *     }  else if (withChildren) {
  *         processChildren(node, processor);
- *         }
- *         }
- *         }
+ *     }
+ * }
+ * }
  */
+
+// @formatter:on
 @SuppressWarnings("rawtypes")
 public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Node>, VisitHandler<Node>> implements NodeVisitHandler {
     protected static final VisitHandler[] EMPTY_HANDLERS = new VisitHandler[0];

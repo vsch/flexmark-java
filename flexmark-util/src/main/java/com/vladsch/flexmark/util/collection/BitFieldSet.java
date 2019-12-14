@@ -195,6 +195,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         return oldElements != elements;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public boolean replaceAll(long mask) {
         long allValues = allValues();
         if ((mask & ~allValues) != 0) {
@@ -209,11 +210,11 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     @Override
     public String toString() {
         if (elements == 0) {
-            return elementType.getSimpleName() + "{ }";
+            return elementType.getSimpleName() + ": { }";
         } else {
             DelimitedBuilder out = new DelimitedBuilder(", ");
 
-            out.append(elementType.getSimpleName()).append("{ ");
+            out.append(elementType.getSimpleName()).append(": { ");
             for (E e : universe) {
                 if (any(mask(e))) out.append(e.name()).mark();
             }

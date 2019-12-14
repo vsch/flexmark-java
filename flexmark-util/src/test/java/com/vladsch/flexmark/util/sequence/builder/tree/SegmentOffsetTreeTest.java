@@ -3,21 +3,21 @@ package com.vladsch.flexmark.util.sequence.builder.tree;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SegmentBuilderBase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 
 import static com.vladsch.flexmark.util.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
-import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.*;
+import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.MAX_VALUE;
 import static org.junit.Assert.assertEquals;
 
-public class SegmentTreeTest {
+// IMPORTANT: change for SegmentOffsetTree tests
+public class SegmentOffsetTreeTest {
 
     static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
         int iMaxStart = start + span;
@@ -69,176 +69,48 @@ public class SegmentTreeTest {
         loop(startOffset + 65536, startOffset + 65536 * 8, 8, 3, consumer);
     }
 
-    @Test
-    public void test_flags() {
-        assertEquals(0xe000_0000, F_ANCHOR_FLAGS);
-    }
+    void assertCharAt(@NotNull BasedSequence sequence, @NotNull SegmentBuilderBase<?> segments, @NotNull SegmentTree segTree) {
+        BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
+        SegmentOffsetTree segOffsetTree = segTree.getSegmentOffsetTree(sequence);
 
-    @Test
-    public void test_anchorOffset() {
-        assertEquals(0, SegmentTree.getAnchorOffset(0x0000_0000));
-        assertEquals(1, SegmentTree.getAnchorOffset(0x2000_0000));
-        assertEquals(2, SegmentTree.getAnchorOffset(0x4000_0000));
-        assertEquals(3, SegmentTree.getAnchorOffset(0x6000_0000));
-        assertEquals(4, SegmentTree.getAnchorOffset(0x8000_0000));
-        assertEquals(5, SegmentTree.getAnchorOffset(0xA000_0000));
-        assertEquals(6, SegmentTree.getAnchorOffset(0xC000_0000));
-        assertEquals(7, SegmentTree.getAnchorOffset(0xE000_0000));
-    }
+        System.out.println(segments.toStringWithRangesVisibleWhitespace(sequence));
+        System.out.println(segTree.toString(sequence));
+        System.out.println(segOffsetTree.toString(sequence));
 
-    @Test
-    public void test_aggrLength() {
-        loopSizes((b, i) -> {
-            int[] aggrSegData1 = { i, -1, -2, -4 };
-            int[] aggrSegData2 = { -1, -2, i, -3 };
-            assertEquals("i: " + i, (int) i, aggrLength(0, aggrSegData1));
-            assertEquals("i: " + i, (int) i, aggrLength(1, aggrSegData2));
-        });
-    }
+        int iMax = sequenceFull.length();
+        Segment seg = null;
+        for (int i = 0; i < iMax; i++) {
+            int offset = sequenceFull.getIndexOffset(i);
 
-    @Test
-    public void test_byteOffset() {
-        loopSizesShort((b, i) -> {
-            for (int j = 0; j < 8; j++) {
-                int[] aggrSegData1 = { -1, i | (j << 29), -2, -3 };
-                int[] aggrSegData2 = { -1, -2, -3, i | (j << 29) };
-                assertEquals("i: " + i + " j: " + j, (int) i, byteOffset(0, aggrSegData1));
-                assertEquals("i: " + i + " j: " + j, (int) i, byteOffset(1, aggrSegData2));
-            }
-        });
-    }
-
-    @Test
-    public void test_hasPreviousAnchor() {
-        loopSizesShort((b, i) -> {
-            for (int j = 0; j < 8; j++) {
-                int[] aggrSegData1 = { -1, i | (j << 29), -2, -3 };
-                int[] aggrSegData2 = { -1, -2, -3, i | (j << 29) };
-                assertEquals("i: " + i + " j: " + j, j > 0, hasPreviousAnchor(0, aggrSegData1));
-                assertEquals("i: " + i + " j: " + j, j > 0, hasPreviousAnchor(1, aggrSegData2));
-            }
-        });
-    }
-
-    @Test
-    public void test_previousAnchorOffset() {
-        loopSizesShort((b, i) -> {
-            for (int j = 0; j < 8; j++) {
-                int[] aggrSegData1 = { -1, i | (j << 29), -2, -3 };
-                int[] aggrSegData2 = { -1, -2, -3, i | (j << 29) };
-                assertEquals("i: " + i + " j: " + j, i - j, previousAnchorOffset(0, aggrSegData1));
-                assertEquals("i: " + i + " j: " + j, i - j, previousAnchorOffset(1, aggrSegData2));
-            }
-        });
-    }
-
-    @Test
-    public void test_findSegSegIndex1() {
-        loopSizes((b, i) -> {
-            if (i > 0) {
-                int[] aggrSegData1 = { i, -1, -2, -3 };
-                int[] aggrSegData2 = { -1, -2, i, -3 };
-
-                loopEnd(i, (bj, j) -> {
-                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegmentTreePos(0, 0, 0), findSegmentPos(j, aggrSegData1, 0, 1));
-                    assertEquals("i: " + i + " j: " + j, j >= i ? null : new SegmentTreePos(1, 0, 0), findSegmentPos(j, aggrSegData2, 1, 1));
-                });
-            }
-        });
-    }
-
-    @Test
-    public void test_findSegSegIndex2() {
-        loopSizesShort((b, i) -> {
-            if (i > 0) {
-                int[] aggrSegData1 = { i, -1, i + 1000, -3, -4, -5 };
-                int[] aggrSegData2 = { -1, -2, i, -3, i + 1000, -4 };
-
-                loopEnd(i, (bj, j) -> {
-                    if (i == 1 && j == 65529) {
+            if (offset >= 0) {
+                if (seg == null || seg.offsetNotInSegment(offset)) {
+                    if (offset == 6) {
                         int tmp = 0;
                     }
-                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegmentTreePos(j >= i ? 1 : 0, j >= i ? i : 0, 0), findSegmentPos(j, aggrSegData1, 0, 2));
-                    assertEquals("i: " + i + " j: " + j, j >= i + 1000 ? null : new SegmentTreePos((j >= i ? 2 : 1), (j >= i ? i : 0), 0), findSegmentPos(j, aggrSegData2, 1, 3));
-                });
-            }
-        });
-    }
-
-    @Test
-    public void test_findSegSegIndexN() {
-        loopSizesShort((b, i) -> {
-            if (i > 0) {
-                for (int k = 2; k < 16; k++) {
-                    int[] aggrSegData1 = new int[k * 2 + 4];
-                    int[] aggrSegData2 = new int[k * 2 + 4];
-
-                    Arrays.fill(aggrSegData1, -1);
-                    Arrays.fill(aggrSegData2, -1);
-
-                    for (int l = 0; l < k; l++) {
-                        aggrSegData1[l * 2] = i + l * 1000;
-                        aggrSegData2[l * 2 + 2] = i + l * 1000;
-                    }
-
-                    int finalK = k;
-                    loopEnd(i, (bj, j) -> {
-                        int[] segment = { 0 };
-                        int[] startIndex = { 0 };
-
-                        for (int l = 0; l < finalK; l++) {
-                            segment[0] = l;
-                            startIndex[0] = i + Math.max(0, l - 1) * 1000;
-                            if (j >= startIndex[0] && j < i + l * 1000) break;
-                            segment[0] = l + 1;
-                        }
-
-                        if (finalK == 4 && i == 1 && j == 65529) {
-                            int tmp = 0;
-                        }
-
-                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegmentTreePos(segment[0], startIndex[0], 0), findSegmentPos(j, aggrSegData1, 0, finalK));
-                        assertEquals("k: " + finalK + " i: " + i + " j: " + j + " s:" + segment[0], segment[0] >= finalK ? null : new SegmentTreePos(segment[0] + 1, startIndex[0], 0), findSegmentPos(j, aggrSegData2, 1, finalK + 1));
-                    });
+                    seg = segOffsetTree.findSegmentByOffset(offset, sequence, seg);
+                    assert seg != null && (!seg.offsetNotInSegment(offset) || seg.pos == segOffsetTree.size() - 1) : "offset: " + offset + " seg: " + seg;
+//                    System.out.println("i=" + i + " pos=" + seg.getPos() + ", segOff=" + seg);
                 }
+
+                int actual = offset - seg.getStartOffset() + seg.getStartIndex();
+                assertEquals("i=" + i + " offset=" + offset + " seg=" + seg + " segStartIndex=" + seg.getStartIndex(), i, actual);
             }
-        });
-    }
-
-    @Test
-    public void test_getPrevAnchor() {
-        // TEST: need test for this
-    }
-
-    void assertCharAt(@NotNull BasedSequence sequence, @NotNull PlainSegmentBuilder segments, @NotNull SegmentTree segTree) {
-        BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
-        int iMax = sequenceFull.length();
-        System.out.println(segTree.toString(sequence));
-        Segment seg = null;
-
-        for (int i = 0; i < iMax; i++) {
-            if (seg == null || seg.notInSegment(i)) {
-                seg = segTree.findSegment(i, sequence, seg);
-                assert seg != null;
-                System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
-            }
-
-            String expected = Character.toString(sequenceFull.charAt(i));
-            String actual = Character.toString(seg.charAt(i));
-            assertEquals("i: " + i, expected, actual);
         }
 
         seg = null;
         for (int i = iMax; i-- > 0; ) {
-            if (seg == null || seg.notInSegment(i)) {
-                seg = segTree.findSegment(i, sequence, seg);
-                assert seg != null : "i: " + i;
-                System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
-            }
+            int offset = sequenceFull.getIndexOffset(i);
 
-            String expected = Character.toString(sequenceFull.charAt(i));
-            String actual = Character.toString(seg.charAt(i));
-            assertEquals("i: " + i, expected, actual);
+            if (offset >= 0) {
+                if (seg == null || seg.offsetNotInSegment(offset)) {
+                    seg = segOffsetTree.findSegmentByOffset(offset, sequence, seg);
+                    assert seg != null && (!seg.offsetNotInSegment(offset) || seg.pos == segOffsetTree.size() - 1) : "offset: " + offset + " seg: " + seg;
+//                    System.out.println("i=" + i + " pos=" + seg.getPos() + ", segOff=" + seg);
+                }
+
+                int actual = offset - seg.getStartOffset() + seg.getStartIndex();
+                assertEquals("i=" + i + " offset=" + offset + " seg=" + seg + " segStartIndex=" + seg.getStartIndex(), i, actual);
+            }
         }
     }
 
@@ -246,13 +118,13 @@ public class SegmentTreeTest {
     public void test_build1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(0, 0);
         segments.append(2, 5);
         segments.append(6, 9);
         segments.append(10, 10);
-        assertEquals("PlainSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0:0, l=6, sz=4, na=2: [0), [2, 5), [6, 9), [10) }", segments.toStringPrep());
+        assertEquals("BasedSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0:0, l=6, sz=4, na=2: [0), [2, 5), [6, 9), [10) }", segments.toStringPrep());
 
         SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
         assertEquals("SegmentTree{aggr: {[3, 1:, 0:], [6, 4:] }, seg: { 0:[0), 1:[2, 5), 4:[6, 9), 7:[10) } }", segTree.toString(sequence));
@@ -263,14 +135,14 @@ public class SegmentTreeTest {
     public void test_build2() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(0, 0);
         segments.append(2, 5);
         segments.append("abcd");
         segments.append(6, 9);
         segments.append(10, 10);
-        assertEquals("PlainSegmentBuilder{[0, 10), s=0:0, u=1:4, t=1:4, l=10, sz=5, na=3: [0), [2, 5), a:'abcd', [6, 9), [10) }", segments.toStringPrep());
+        assertEquals("BasedSegmentBuilder{[0, 10), s=0:0, u=1:4, t=1:4, l=10, sz=5, na=3: [0), [2, 5), a:'abcd', [6, 9), [10) }", segments.toStringPrep());
 
         SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
         assertEquals("SegmentTree{aggr: {[3, 1:, 0:], [7, 4:], [10, 9:] }, seg: { 0:[0), 1:[2, 5), 4:a:'abcd', 9:[6, 9), 12:[10) } }", segTree.toString(sequence));
@@ -314,6 +186,7 @@ public class SegmentTreeTest {
         assertEquals("BasedSegmentBuilder{[0, 30), s=3:6, u=3:6, t=3:6, l=34, sz=8, na=8: a:2x' ', [0, 8), [9, 10), a:2x' ', [10, 18), [19, 21), a:2x' ', [21, 30) }", escapeJavaString(segments2.toStringPrep()));
         assertEquals(segments.toString(sequence).length(), segments2.length());
         assertEquals("  ⟦  line 1⟧⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧  ⟦  line 3\\n⟧", segments2.toStringWithRangesVisibleWhitespace(input));
+        assertCharAt(sequence, segments, segTree);
     }
 
     @Test
@@ -358,6 +231,7 @@ public class SegmentTreeTest {
         assertEquals("BasedSegmentBuilder{[9, 21), s=2:3, u=2:3, t=2:3, l=14, sz=6, na=5: [9, 10), a:2x' ', [10, 18), [19, 21), a:' ', [21) }", escapeJavaString(segments2.toStringPrep()));
         assertEquals(segments2.toString(sequence).length(), segments2.length());
         assertEquals("⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧ ⟦⟧", segments2.toStringWithRangesVisibleWhitespace(input));
+        assertCharAt(sequence, segments, segTree);
     }
 
 //    @Test

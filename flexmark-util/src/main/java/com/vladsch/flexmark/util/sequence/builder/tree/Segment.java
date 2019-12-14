@@ -144,6 +144,9 @@ public abstract class Segment {
         return index < startIndex || index >= startIndex + length();
     }
 
+    public boolean offsetNotInSegment(int offset) {
+        return offset < getStartOffset() || offset >= getEndOffset();
+    }
 
     final public SegType getType() {
         return SegType.fromTypeMask(bytes[byteOffset]);
@@ -271,7 +274,7 @@ public abstract class Segment {
         @Override
         public char charAt(int index) {
             if (index < startIndex || index - startIndex >= length()) {
-                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + startIndex + ", " + startIndex +  length() + ")");
+                throw new IndexOutOfBoundsException("index " + index + " out of bounds [" + startIndex + ", " + startIndex + length() + ")");
             }
             return baseSeq.charAt(startOffset + index - startIndex);
         }
