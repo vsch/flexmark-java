@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.CharRecoveryOptimizer;
 import com.vladsch.flexmark.util.sequence.builder.SegmentBuilderBase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
@@ -234,66 +236,47 @@ public class SegmentOffsetTreeTest {
         assertCharAt(sequence, segments, segTree);
     }
 
-//    @Test
-//    public void test_buildSegments2() {
-//        String input = "" +
-//                "  line 1 \n" +
-//                "  line 2 \n" +
-//                "\n" +
-//                "  line 3\n" +
-//                "";
-//        BasedSequence sequence = BasedSequence.of(input);
-//        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
-//
-//        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
-//        for (BasedSequence line : lines) {
-//            BasedSequence trim = line.trim();
+    @Test
+    public void test_optimizersCompound3Anchors() {
+        String input = "" +
+                "line 1\n" +
+                "line 2 \n" +
+                "\n" +
+                "line 3\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
+        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, optimizer, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
+
+        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
+        for (BasedSequence line : lines) {
+            BasedSequence trim = line.trim();
 //            if (!trim.isEmpty()) segments.append("  ");
-//            segments.append(trim.getSourceRange());
-//            segments.append("\n");
-//        }
-//        assertEquals("BasedSegmentBuilder{[0, 30), s=0:0, u=0:0, t=0:0, l=28, sz=3, na=3: [0, 8), [9, 18), [19, 30) }", escapeJavaString(segments.toStringPrep()));
-//        assertEquals(segments.toString(sequence).length(), segments.length());
-//
-//        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
-//
-//        assertEquals("" +
-//                "  line 1\n" +
-//                "  line 2\n" +
-//                "\n" +
-//                "  line 3\n" +
-//                "", segments.toString(sequence));
-//    }
-//
-//    @Test
-//    public void test_optimizersCompound3Anchors() {
-//        String input = "" +
-//                "line 1\n" +
-//                "line 2 \n" +
-//                "\n" +
-//                "line 3\n" +
-//                "";
-//        BasedSequence sequence = BasedSequence.of(input);
-//        CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
-//        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, optimizer, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
-//
-//        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
-//        for (BasedSequence line : lines) {
-//            BasedSequence trim = line.trim();
-////            if (!trim.isEmpty()) segments.append("  ");
-//            segments.append(trim.getSourceRange());
-//            segments.append("\n");
-//        }
-//        assertEquals("BasedSegmentBuilder{[0, 23), s=0:0, u=0:0, t=0:0, l=22, sz=2, na=2: [0, 13), [14, 23) }", escapeJavaString(segments.toStringPrep()));
-//        assertEquals(segments.toString(sequence).length(), segments.length());
-//
-//        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
-//
-//        assertEquals("" +
-//                "line 1\n" +
-//                "line 2\n" +
-//                "\n" +
-//                "line 3\n" +
-//                "", segments.toString(sequence));
-//    }
+            segments.append(trim.getSourceRange());
+            segments.append("\n");
+        }
+        assertEquals("BasedSegmentBuilder{[0, 23), s=0:0, u=0:0, t=0:0, l=22, sz=2, na=2: [0, 13), [14, 23) }", escapeJavaString(segments.toStringPrep()));
+        assertEquals(segments.toString(sequence).length(), segments.length());
+        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧", segments.toStringWithRangesVisibleWhitespace(input));
+
+        SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
+        assertEquals("SegmentTree{aggr: {[13, 0:], [22, 3:] }, seg: { 0:[0, 13), 3:[14, 23) } }", segTree.toString(sequence));
+
+        BasedSegmentBuilder segments3 = BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
+        BasedSequence sequence1 = SegmentedSequenceFull.create(sequence, segments);
+        BasedSequence sequence2 = sequence1.subSequence(5, segments.length() - 5);
+        assertEquals("1\\nline 2\\n\\nli", sequence2.toVisibleWhitespaceString());
+        sequence2.addSegments(segments3);
+        assertEquals("BasedSegmentBuilder{[5, 18), s=0:0, u=0:0, t=0:0, l=12, sz=2, na=2: [5, 13), [14, 18) }", escapeJavaString(segments3.toStringPrep()));
+        assertEquals("⟦1\\nline 2⟧⟦\\n\\nli⟧", segments3.toStringWithRangesVisibleWhitespace(input));
+
+        BasedSegmentBuilder segments2 = BasedSegmentBuilder.emptyBuilder(sequence, F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
+        SegmentTreeRange treeRange = segTree.getSegmentRange(5, segments.length() - 5, 0, segTree.size(), sequence, null);
+        segTree.addSegments(segments2, treeRange);
+
+        assertEquals("BasedSegmentBuilder{[5, 18), s=0:0, u=0:0, t=0:0, l=12, sz=2, na=2: [5, 13), [14, 18) }", escapeJavaString(segments2.toStringPrep()));
+        assertEquals(segments2.toString(sequence).length(), segments2.length());
+        assertEquals("⟦1\\nline 2⟧⟦\\n\\nli⟧", segments2.toStringWithRangesVisibleWhitespace(input));
+        assertCharAt(sequence, segments, segTree);
+    }
 }
