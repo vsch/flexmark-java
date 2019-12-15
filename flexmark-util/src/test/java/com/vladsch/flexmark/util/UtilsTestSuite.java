@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.builder.*;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTree;
+import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTreeTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTreeTest;
 import com.vladsch.flexmark.util.sequence.managed.BaseSequenceEntryTest;
@@ -25,7 +26,7 @@ import org.junit.runners.Suite;
         PlainSegmentBuilderTest.class,
         SegmentTest.class,
         SegmentTreeTest.class,
-        SegmentOffsetTree.class,
+        SegmentOffsetTreeTest.class,
         BasedSegmentBuilderTest.class,
         SequenceBuilderTest.class,
         BasedSequenceFullImplTest.class,

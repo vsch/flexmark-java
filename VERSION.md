@@ -205,6 +205,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Add: `SegmentOffsetTree` for binary search on offset in base sequence for conversion to index
   in result sequence.
+* Fix: `BitFieldSet.toString()` to output field values when fields are more than one bit long.
 + [ ] Add: `BasedOffsetTracker` to take `BasedSequence` result (could be segmented, offset in
       based sequence, `PositionAnchor` and return index of this offset in the resulting based
       sequence.

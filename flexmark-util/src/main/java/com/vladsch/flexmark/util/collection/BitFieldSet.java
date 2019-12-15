@@ -216,7 +216,13 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
 
             out.append(elementType.getSimpleName()).append(": { ");
             for (E e : universe) {
-                if (any(mask(e))) out.append(e.name()).mark();
+                if (any(mask(e))) {
+                    out.append(e.name());
+                    if (e instanceof BitField && ((BitField) e).getBits() > 1) {
+                        out.append("(").append(getSigned(e)).append(")");
+                    }
+                    out.mark();
+                }
             }
             out.unmark().append(" }");
             return out.toString();

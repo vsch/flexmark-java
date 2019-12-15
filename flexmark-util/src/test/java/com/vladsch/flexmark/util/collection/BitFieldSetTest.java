@@ -144,6 +144,17 @@ public class BitFieldSetTest {
     }
 
     @Test
+    public void test_BitFieldToString() {
+        BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
+        bitFields.add(BitFields.FIELD_1);
+        bitFields.set(BitFields.FIELD_3, 2);
+        bitFields.set(BitFields.FIELD_5, -10);
+        bitFields.set(BitFields.FIELD_10, 381);
+        bitFields.set(BitFields.FIELD_11, -6);
+        assertEquals("BitFields: { FIELD_1, FIELD_3(2), FIELD_5(-10), FIELD_10(381), FIELD_11(-6) }", bitFields.toString());
+    }
+
+    @Test
     public void test_BitSetIterator() {
         BitFieldSet<IntSet> bitFields = BitFieldSet.of(IntSet.VALUE_2, IntSet.VALUE_4, IntSet.VALUE_12, IntSet.VALUE_21);
         IntSet[] expected = { IntSet.VALUE_2, IntSet.VALUE_4, IntSet.VALUE_12, IntSet.VALUE_21, };
@@ -376,9 +387,9 @@ public class BitFieldSetTest {
 
     @Test
     public void test_toString() {
-        assertEquals("IntSet{ }", BitFieldSet.noneOf(IntSet.class).toString());
-        assertEquals("IntSet{ VALUE_0 }", BitFieldSet.of(IntSet.VALUE_0).toString());
-        assertEquals("IntSet{ VALUE_0, VALUE_2 }", BitFieldSet.of(IntSet.VALUE_0, IntSet.VALUE_2).toString());
-        assertEquals("IntSet{ VALUE_0, VALUE_31 }", BitFieldSet.of(IntSet.VALUE_0, IntSet.VALUE_31).toString());
+        assertEquals("IntSet: { }", BitFieldSet.noneOf(IntSet.class).toString());
+        assertEquals("IntSet: { VALUE_0 }", BitFieldSet.of(IntSet.VALUE_0).toString());
+        assertEquals("IntSet: { VALUE_0, VALUE_2 }", BitFieldSet.of(IntSet.VALUE_0, IntSet.VALUE_2).toString());
+        assertEquals("IntSet: { VALUE_0, VALUE_31 }", BitFieldSet.of(IntSet.VALUE_0, IntSet.VALUE_31).toString());
     }
 }
