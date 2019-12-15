@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.CharRecoveryOptimizer;
 import com.vladsch.flexmark.util.sequence.builder.SegmentBuilderBase;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -149,6 +150,41 @@ public class SegmentOffsetTreeTest {
         SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
         assertEquals("SegmentTree{aggr: {[3, 1:, 0:], [7, 4:], [10, 9:] }, seg: { 0:[0), 1:[2, 5), 4:a:'abcd', 9:[6, 9), 12:[10) } }", segTree.toString(sequence));
         assertCharAt(sequence, segments, segTree);
+    }
+
+    @Test
+    public void test_build1SegmentTree() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        SequenceBuilder segments = SequenceBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+
+        segments.append(0, 0);
+        segments.append(2, 5);
+        segments.append(6, 9);
+        segments.append(10, 10);
+        assertEquals("BasedSegmentBuilder{[0, 10), s=0:0, u=0:0, t=0:0, l=6, sz=4, na=2: [0), [2, 5), [6, 9), [10) }", segments.getSegmentBuilder().toStringPrep());
+
+        SegmentTree segTree = segments.toSequence().getSegmentTree();
+        assertEquals("SegmentTree{aggr: {[3, 1:, 0:], [6, 4:] }, seg: { 0:[0), 1:[2, 5), 4:[6, 9), 7:[10) } }", segTree.toString(sequence));
+        assertCharAt(sequence, segments.getSegmentBuilder(), segTree);
+    }
+
+    @Test
+    public void test_build2SegmentTree() {
+        String input = "0123456789";
+        BasedSequence sequence = BasedSequence.of(input);
+        SequenceBuilder segments = SequenceBuilder.emptyBuilder(sequence, F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+
+        segments.append(0, 0);
+        segments.append(2, 5);
+        segments.append("abcd");
+        segments.append(6, 9);
+        segments.append(10, 10);
+        assertEquals("BasedSegmentBuilder{[0, 10), s=0:0, u=1:4, t=1:4, l=10, sz=5, na=3: [0), [2, 5), a:'abcd', [6, 9), [10) }", segments.getSegmentBuilder().toStringPrep());
+
+        SegmentTree segTree = segments.toSequence().getSegmentTree();
+        assertEquals("SegmentTree{aggr: {[3, 1:, 0:], [7, 4:], [10, 9:] }, seg: { 0:[0), 1:[2, 5), 4:a:'abcd', 9:[6, 9), 12:[10) } }", segTree.toString(sequence));
+        assertCharAt(sequence, segments.getSegmentBuilder(), segTree);
     }
 
     // ************************************************************************

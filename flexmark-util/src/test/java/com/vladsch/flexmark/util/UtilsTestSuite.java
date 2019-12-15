@@ -11,8 +11,9 @@ import com.vladsch.flexmark.util.options.AttributeTest;
 import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.*;
-import com.vladsch.flexmark.util.sequence.builder.*;
-import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTree;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilderTest;
+import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilderTest;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilderTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTreeTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTreeTest;
@@ -23,43 +24,44 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        PlainSegmentBuilderTest.class,
-        SegmentTest.class,
-        SegmentTreeTest.class,
-        SegmentOffsetTreeTest.class,
-        BasedSegmentBuilderTest.class,
-        SequenceBuilderTest.class,
-        BasedSequenceFullImplTest.class,
-        BasedSequenceTreeImplTest.class,
-        BaseSequenceEntryTest.class,
-        BaseSequenceManagerTest.class,
-        MarkdownParagraphTest.class,
-        TemplateUtilTest.class,
         OrderedMapTest.class,
         OrderedMultiMapTest.class,
         OrderedSetTest.class,
+        ClassificationBagTest.class,
+        CharPredicateTest.class,
         MaxAggregatorTest.class,
         MinAggregatorTest.class,
         MutableAttributeTest.class,
+        BoundedMaxAggregatorTest.class,
+        BoundedMinAggregatorTest.class,
         UtilsTest.class,
         ArrayUtilsTest.class,
         BitFieldSetTest.class,
-        MappedBasedSequenceTest.class,
+        PlainSegmentBuilderTest.class,
         MappedRichSequenceTest.class,
+        RepeatedSequenceTest.class,
+        BaseSequenceEntryTest.class,
+        MappedBasedSequenceTest.class,
+        PrefixedSubSequenceTest.class,
+        SegmentTest.class,
+        BasedSegmentBuilderTest.class,
+        SegmentTreeTest.class,
+        SequenceBuilderTest.class,
+        BasedSequenceFullImplTest.class,
+        BasedSequenceTreeImplTest.class,
+        SegmentOffsetTreeTest.class,
+        BasedOffsetTrackerTest.class,
+        BaseSequenceManagerTest.class,
+        MarkdownParagraphTest.class,
+        TemplateUtilTest.class,
         AttributesTest.class,
         AttributeTest.class,
-        BoundedMaxAggregatorTest.class,
-        BoundedMinAggregatorTest.class,
-        ClassificationBagTest.class,
         DocumentTest.class,
         HtmlBuilderTest.class,
         HtmlFormattingAppendableBaseTest.class,
         HtmlHelpersTest.class,
         LineFormattingAppendableImplTest.class,
 //        LineAppendableImplTest.class,
-        PrefixedSubSequenceTest.class,
-        RepeatedSequenceTest.class,
-        CharPredicateTest.class,
 })
 public class UtilsTestSuite {
 }

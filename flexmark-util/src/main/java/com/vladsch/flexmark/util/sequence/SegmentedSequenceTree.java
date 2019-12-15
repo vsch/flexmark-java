@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
 import com.vladsch.flexmark.util.sequence.builder.tree.Segment;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTreeRange;
@@ -103,6 +103,12 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
     @Override
     public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
         segmentTree.addSegments(builder, startIndex, startIndex + length, startOffset, endOffset, startPos, endPos);
+    }
+
+    @NotNull
+    @Override
+    public SegmentTree getSegmentTree() {
+        return segmentTree;
     }
 
     @Override

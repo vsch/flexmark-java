@@ -4,8 +4,10 @@ import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,6 +55,20 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @Override
     public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
         builder.append(getStartOffset(), getEndOffset());
+    }
+
+    /**
+     * Get the segment tree for this sequence or null if sequence is contiguous from startOffset to endOffset
+     *
+     * @return null for contiguous sequences, else segment tree for this sequence
+     */
+    @NotNull
+    @Override
+    public SegmentTree getSegmentTree() {
+        // default implementation
+        BasedSegmentBuilder segmentBuilder = BasedSegmentBuilder.emptyBuilder(getBaseSequence());
+        addSegments(segmentBuilder);
+        return SegmentTree.build(segmentBuilder.getSegments(), segmentBuilder.getText());
     }
 
     @NotNull
