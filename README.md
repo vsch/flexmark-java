@@ -192,11 +192,11 @@ custom node renderer if you need to override the generated link HTML.
     was 256k bytes.
 
 | Description                | Old SegmentedSequence | New Segmented Sequence |
-    |:---------------------------|----------------------:|-----------------------:|
-    | Total wall clock time      |            15.814 sec |             12.728 sec |
-    | Parse time                 |             2.859 sec |              2.939 sec |
-    | Formatter appendable       |             0.598 sec |              0.630 sec |
-    | Formatter sequence builder |             8.323 sec |              4.666 sec |
+|:---------------------------|----------------------:|-----------------------:|
+| Total wall clock time      |            15.814 sec |             12.728 sec |
+| Parse time                 |             2.859 sec |              2.939 sec |
+| Formatter appendable       |             0.598 sec |              0.630 sec |
+| Formatter sequence builder |             8.323 sec |              4.666 sec |
 
     The overhead difference is significant. The totals are for all segmented sequences created
     during the test run of 1141 files. Parser statistics show requirements during parsing and
@@ -204,10 +204,11 @@ custom node renderer if you need to override the generated link HTML.
     sequence.
 
 | Description                                     | Old Parser |  Old Formatter | New Parser | New Formatter |
-    |:------------------------------------------------|-----------:|---------------:|-----------:|--------------:|
-    | Bytes for characters of all segmented sequences |    917,016 |  6,029,774,470 |    917,016 | 6,029,774,470 |
-    | Bytes for overhead of all segmented sequences   |  1,845,048 | 12,060,276,296 |     93,628 |   342,351,491 |
-    | Overhead %                                      |     201.2% |         200.0% |      10.2% |          5.7% |
+|:------------------------------------------------|-----------:|---------------:|-----------:|--------------:|
+| Bytes for characters of all segmented sequences |    917,016 |  6,029,774,470 |    917,016 | 6,029,774,470 |
+| Bytes for overhead of all segmented sequences   |  1,845,048 | 12,060,276,296 |     93,628 |   342,351,491 |
+| Overhead %                                      |     201.2% |         200.0% |      10.2% |          5.7% |
+
 * [Flexmark Architecture and Dependencies Diagrams](https://sourcespy.com/github/flexmark/)
   thanks to great work by [Alex Karezin](mailto:javadiagrams@gmail.com) you can get an overview
   of module dependencies with ability to drill down to packages and classes.
