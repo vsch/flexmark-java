@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilderTest;
 import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilderTest;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilderTest;
+import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTrackerTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTreeTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTreeTest;

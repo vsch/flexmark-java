@@ -1,8 +1,7 @@
-package com.vladsch.flexmark.util.sequence;
+package com.vladsch.flexmark.util.sequence.builder.tree;
 
-import com.vladsch.flexmark.util.sequence.builder.tree.Segment;
-import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTree;
-import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
