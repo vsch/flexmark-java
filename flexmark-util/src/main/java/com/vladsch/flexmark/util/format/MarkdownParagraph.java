@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
+import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
@@ -26,8 +28,7 @@ public class MarkdownParagraph {
     boolean keepHardBreaks = true;
     boolean keepLineBreaks = false;
 
-    @NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInEscaperList = Collections.emptyList();
-    @NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInUnEscaperList = Collections.emptyList();
+    @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = Collections.emptyList();
 
     public MarkdownParagraph(CharSequence chars) {
         this(BasedSequence.of(chars), CharWidthProvider.NULL);
@@ -40,6 +41,14 @@ public class MarkdownParagraph {
     public MarkdownParagraph(@NotNull BasedSequence chars, @NotNull CharWidthProvider charWidthProvider) {
         baseSeq = chars;
         this.charWidthProvider = charWidthProvider;
+    }
+
+    public List<? extends SpecialLeadInHandler> getLeadInHandlers() {
+        return leadInHandlers;
+    }
+
+    public void setLeadInHandlers(List<? extends SpecialLeadInHandler> leadInHandlers) {
+        this.leadInHandlers = leadInHandlers;
     }
 
     @NotNull
@@ -97,24 +106,6 @@ public class MarkdownParagraph {
 
     public void setKeepLineBreaks(boolean keepLineBreaks) {
         this.keepLineBreaks = keepLineBreaks;
-    }
-
-    @NotNull
-    public List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> getLeadInEscaperList() {
-        return leadInEscaperList;
-    }
-
-    public void setLeadInEscaperList(@NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInEscaperList) {
-        this.leadInEscaperList = leadInEscaperList;
-    }
-
-    @NotNull
-    public List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> getLeadInUnEscaperList() {
-        return leadInUnEscaperList;
-    }
-
-    public void setLeadInUnEscaperList(@NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInUnEscaperList) {
-        this.leadInUnEscaperList = leadInUnEscaperList;
     }
 
     @NotNull
@@ -196,8 +187,7 @@ public class MarkdownParagraph {
         BasedSequence leadingIndent = null;
         BasedSequence lastSpace = null;
         final TextTokenizer tokenizer = new TextTokenizer(baseSeq);
-        @NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInEscaperList = MarkdownParagraph.this.leadInEscaperList;
-        @NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInUnEscaperList = MarkdownParagraph.this.leadInUnEscaperList;
+        @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = MarkdownParagraph.this.leadInHandlers;
 
         LeftAlignedWrapping() {
 
@@ -255,20 +245,17 @@ public class MarkdownParagraph {
             leadingIndent = null;
         }
 
-        void processLeadInList(List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> handlers, BasedSequence sequence) {
-            boolean[] handled = { false };
-
-            Consumer<CharSequence> appender = sequence1 -> {
-                addChars(sequence1);
-                handled[0] = true;
-            };
-
-            for (BiConsumer<BasedSequence, Consumer<CharSequence>> handler : handlers) {
-                handler.accept(sequence, appender);
-                if (handled[0]) return;
+        void processLeadInEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
+            for (SpecialLeadInHandler handler : handlers) {
+                if (handler.escape(sequence, this::addChars)) return;
             }
+            addChars(sequence);
+        }
 
-            // not handled
+        void processLeadInUnEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
+            for (SpecialLeadInHandler handler : handlers) {
+                if (handler.unEscape(sequence, this::addChars)) return;
+            }
             addChars(sequence);
         }
 
@@ -299,9 +286,9 @@ public class MarkdownParagraph {
                             }
 
                             if (firstNonBlank) {
-                                processLeadInList(leadInEscaperList, baseSeq.subSequence(token.range));
+                                processLeadInEscape(leadInHandlers, baseSeq.subSequence(token.range));
                             } else if (token.isFirstWord) {
-                                processLeadInList(leadInUnEscaperList, baseSeq.subSequence(token.range));
+                                processLeadInUnEscape(leadInHandlers, baseSeq.subSequence(token.range));
                             } else {
                                 addToken(token);
                             }

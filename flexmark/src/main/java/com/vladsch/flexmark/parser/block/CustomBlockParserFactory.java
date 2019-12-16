@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.parser.SpecialLeadInHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
 import org.jetbrains.annotations.NotNull;
@@ -17,17 +17,9 @@ public interface CustomBlockParserFactory extends Function<DataHolder, BlockPars
 
     /**
      * @param options options for this parser session
-     * @return special lead in character escaper for the block parser elements
+     * @return special lead in character handler for the block parser elements
      */
-    default @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
-        return null;
-    }
-
-    /**
-     * @param options options for this parser session
-     * @return special lead in character un-escaper for the block parser elements
-     */
-    default @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
+    default @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
         return null;
     }
 }

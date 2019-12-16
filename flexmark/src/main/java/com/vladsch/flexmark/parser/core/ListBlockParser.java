@@ -8,21 +8,24 @@ import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.parser.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
@@ -456,39 +459,54 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
-            CharPredicate orderedDelims = CharPredicate.anyOf(Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options) ? "." : ".)");
-            CharPredicate listItemDelims = CharPredicate.anyOf(Parser.LISTS_ITEM_PREFIX_CHARS.get(options));
-            return (sequence, consumer) -> {
-                if (sequence.length() == 1 && listItemDelims.test(sequence.charAt(0))) {
-                    consumer.accept("\\");
-                    consumer.accept(sequence);
-                } else {
-                    int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
-                    if (nonDigit + 1 == sequence.length() && orderedDelims.test(sequence.charAt(nonDigit))) {
-                        consumer.accept(sequence.subSequence(0, nonDigit));
-                        consumer.accept("\\");
-                        consumer.accept(sequence.subSequence(nonDigit));
-                    }
-                }
-            };
+        public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+            return ListItemLeadInHandler.create(Parser.LISTS_ITEM_PREFIX_CHARS.get(options), Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options));
+        }
+    }
+
+    static class ListItemLeadInHandler extends SpecialLeadInCharsHandler {
+        final static CharPredicate ORDERED_DELIM_DOT = CharPredicate.anyOf('.');
+        final static CharPredicate ORDERED_DELIM_DOT_PARENS = CharPredicate.anyOf(".)");
+        final static SpecialLeadInHandler ORDERED_DELIM_DOT_HANDLER = new ListItemLeadInHandler(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), true);
+        final static SpecialLeadInHandler ORDERED_DELIM_DOT_PARENS_HANDLER = new ListItemLeadInHandler(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), false);
+
+        @NotNull
+        static SpecialLeadInHandler create(@NotNull CharSequence listItemDelims, boolean dotOnly) {
+            return SequenceUtils.equals(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), listItemDelims)
+                    ? dotOnly ? ORDERED_DELIM_DOT_HANDLER : ORDERED_DELIM_DOT_PARENS_HANDLER
+                    : new ListItemLeadInHandler(listItemDelims, dotOnly);
+        }
+
+        final CharPredicate orderedDelims;
+
+        public ListItemLeadInHandler(CharSequence listItemDelims, boolean dotOnly) {
+            super(CharPredicate.anyOf(listItemDelims));
+            this.orderedDelims = dotOnly ? ORDERED_DELIM_DOT : ORDERED_DELIM_DOT_PARENS;
         }
 
         @Override
-        public @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
-            CharPredicate orderedDelims = CharPredicate.anyOf(Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options) ? "." : ".)");
-            CharPredicate unorderedDelims = CharPredicate.anyOf(Parser.LISTS_ITEM_PREFIX_CHARS.get(options));
-            return (sequence, consumer) -> {
-                if (sequence.length() == 2 && sequence.charAt(0) == '\\' && unorderedDelims.test(sequence.charAt(1))) {
-                    consumer.accept(sequence.subSequence(1));
-                } else {
-                    int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
-                    if (nonDigit + 2 == sequence.length() && sequence.charAt(nonDigit) == '\\' && orderedDelims.test(sequence.charAt(nonDigit + 1))) {
-                        consumer.accept(sequence.subSequence(0, nonDigit));
-                        consumer.accept(sequence.subSequence(nonDigit + 1));
-                    }
-                }
-            };
+        public boolean escape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
+            if (super.escape(sequence, consumer)) return true;
+            int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
+            if (nonDigit + 1 == sequence.length() && orderedDelims.test(sequence.charAt(nonDigit))) {
+                consumer.accept(sequence.subSequence(0, nonDigit));
+                consumer.accept("\\");
+                consumer.accept(sequence.subSequence(nonDigit));
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean unEscape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
+            if (super.unEscape(sequence, consumer)) return true;
+            int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
+            if (nonDigit + 2 == sequence.length() && sequence.charAt(nonDigit) == '\\' && orderedDelims.test(sequence.charAt(nonDigit + 1))) {
+                consumer.accept(sequence.subSequence(0, nonDigit));
+                consumer.accept(sequence.subSequence(nonDigit + 1));
+                return true;
+            }
+            return false;
         }
     }
 

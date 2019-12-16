@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.admonition;
 
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.SpecialLeadInHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
 
@@ -13,24 +13,22 @@ import static org.junit.Assert.assertEquals;
 final public class AdmonitionParserTest {
     String escape(String input, Parser parser) {
         BasedSequence baseSeq = BasedSequence.of(input);
-        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_ESCAPER_LIST.get(parser.getOptions());
+        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
         StringBuilder sb = new StringBuilder();
 
         for (SpecialLeadInHandler handler : handlers) {
-            handler.accept(baseSeq, sb::append);
-            if (sb.length() > 0) return sb.toString();
+            if (handler.escape(baseSeq, sb::append)) return sb.toString();
         }
         return input;
     }
 
     String unEscape(String input, Parser parser) {
         BasedSequence baseSeq = BasedSequence.of(input);
-        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_UN_ESCAPER_LIST.get(parser.getOptions());
+        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
         StringBuilder sb = new StringBuilder();
 
         for (SpecialLeadInHandler handler : handlers) {
-            handler.accept(baseSeq, sb::append);
-            if (sb.length() > 0) return sb.toString();
+            if (handler.unEscape(baseSeq, sb::append)) return sb.toString();
         }
         return input;
     }

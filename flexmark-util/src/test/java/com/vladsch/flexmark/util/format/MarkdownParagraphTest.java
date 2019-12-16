@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
+import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
@@ -73,13 +74,7 @@ public class MarkdownParagraphTest {
         formatter.setKeepLineBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
-        CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");
-        formatter.setLeadInEscaperList(Collections.singletonList((sequence, consumer) -> {
-            if (sequence.length() == 1 && specialChars.test(sequence.charAt(0))) {
-                consumer.accept("\\");
-                consumer.accept(sequence);
-            }
-        }));
+        formatter.setLeadInHandlers(Collections.singletonList(SpecialLeadInCharsHandler.create('#')));
 
         BasedSequence actual = formatter.wrapText();
         assertEquals(expected, actual.toString());
@@ -123,11 +118,7 @@ public class MarkdownParagraphTest {
         formatter.setKeepHardBreaks(true);
 
         CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");
-        formatter.setLeadInUnEscaperList(Collections.singletonList((sequence, consumer) -> {
-            if (sequence.length() == 2 && sequence.charAt(0) == '\\' && specialChars.test(sequence.charAt(1))) {
-                consumer.accept(sequence.subSequence(1));
-            }
-        }));
+        formatter.setLeadInHandlers(Collections.singletonList(SpecialLeadInCharsHandler.create('#')));
 
         BasedSequence actual = formatter.wrapText();
         assertEquals(expected, actual.toString());

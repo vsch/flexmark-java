@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -278,8 +279,7 @@ public class Parser implements IParse {
     public static final DataKey<String> LISTS_ITEM_PREFIX_CHARS = new DataKey<>("LISTS_ITEM_PREFIX_CHARS", "*-+");
 
     // these are set by the parser for the loaded extensions
-    public static final DataKey<List<SpecialLeadInHandler>> SPECIAL_LEAD_IN_ESCAPER_LIST = new DataKey<>("SPECIAL_LEAD_IN_ESCAPER_LIST", Collections.emptyList());
-    public static final DataKey<List<SpecialLeadInHandler>> SPECIAL_LEAD_IN_UN_ESCAPER_LIST = new DataKey<>("SPECIAL_LEAD_IN_UN_ESCAPER_LIST", Collections.emptyList());
+    public static final DataKey<List<SpecialLeadInHandler>> SPECIAL_LEAD_IN_HANDLERS = new DataKey<>("SPECIAL_LEAD_IN_HANDLERS", Collections.emptyList());
 
     // separate setting for CODE_BLOCK_INDENT
     public static final DataKey<Integer> CODE_BLOCK_INDENT = new DataKey<>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
@@ -299,23 +299,17 @@ public class Parser implements IParse {
         DataSet options = builder.toImmutable();
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(options, builder.blockParserFactories);
 
-        List<SpecialLeadInHandler> specialLeadInEscapers = new ArrayList<>(builder.specialLeadInEscaperList);
-        List<SpecialLeadInHandler> specialLeadInUnEscapers = new ArrayList<>(builder.specialLeadInUnEscaperList);
+        List<SpecialLeadInHandler> specialLeadInHandlers = new ArrayList<>(builder.specialLeadInHandlers);
 
         for (CustomBlockParserFactory factory : this.blockParserFactories) {
-            SpecialLeadInHandler escaper = factory.getLeadInEscaper(options);
+            SpecialLeadInHandler escaper = factory.getLeadInHandler(options);
             if (escaper != null) {
-                specialLeadInEscapers.add(escaper);
-            }
-            SpecialLeadInHandler unEscaper = factory.getLeadInUnEscaper(options);
-            if (unEscaper != null) {
-                specialLeadInUnEscapers.add(unEscaper);
+                specialLeadInHandlers.add(escaper);
             }
         }
 
         MutableDataSet optionsWithSpecialLeadInHandlers = new MutableDataSet(builder);
-        optionsWithSpecialLeadInHandlers.set(SPECIAL_LEAD_IN_ESCAPER_LIST, specialLeadInEscapers);
-        optionsWithSpecialLeadInHandlers.set(SPECIAL_LEAD_IN_UN_ESCAPER_LIST, specialLeadInUnEscapers);
+        optionsWithSpecialLeadInHandlers.set(SPECIAL_LEAD_IN_HANDLERS, specialLeadInHandlers);
 
         this.options = optionsWithSpecialLeadInHandlers.toImmutable();
         this.inlineParserFactory = builder.inlineParserFactory == null ? DocumentParser.INLINE_PARSER_FACTORY : builder.inlineParserFactory;
@@ -453,8 +447,7 @@ public class Parser implements IParse {
         final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
         final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<>();
         InlineParserFactory inlineParserFactory = null;
-        final List<SpecialLeadInHandler> specialLeadInEscaperList = new ArrayList<>();
-        final List<SpecialLeadInHandler> specialLeadInUnEscaperList = new ArrayList<>();
+        final List<SpecialLeadInHandler> specialLeadInHandlers = new ArrayList<>();
 
         public Builder(DataHolder options) {
             super(options);
@@ -488,8 +481,7 @@ public class Parser implements IParse {
             } else if (apiPoint instanceof LinkRefProcessorFactory) {
                 this.linkRefProcessors.remove(apiPoint);
             } else if (apiPoint instanceof SpecialLeadInHandler) {
-                this.specialLeadInEscaperList.remove(apiPoint);
-                this.specialLeadInUnEscaperList.remove(apiPoint);
+                this.specialLeadInHandlers.remove(apiPoint);
             } else if (apiPoint instanceof InlineParserExtensionFactory) {
                 this.inlineParserExtensionFactories.remove(apiPoint);
             } else if (apiPoint instanceof InlineParserFactory) {
@@ -578,15 +570,9 @@ public class Parser implements IParse {
             return this;
         }
 
-        public Builder specialLeadInEscaper(SpecialLeadInHandler specialLeadInEscaper) {
-            specialLeadInEscaperList.add(specialLeadInEscaper);
-            addExtensionApiPoint(specialLeadInEscaper);
-            return this;
-        }
-
-        public Builder specialLeadInUnEscaper(SpecialLeadInHandler specialLeadInUnEscaper) {
-            specialLeadInUnEscaperList.add(specialLeadInUnEscaper);
-            addExtensionApiPoint(specialLeadInUnEscaper);
+        public Builder specialLeadInHandler(SpecialLeadInHandler specialLeadInHandler) {
+            specialLeadInHandlers.add(specialLeadInHandler);
+            addExtensionApiPoint(specialLeadInHandler);
             return this;
         }
     }
@@ -619,8 +605,7 @@ public class Parser implements IParse {
          * @see Builder#paragraphPreProcessorFactory(ParagraphPreProcessorFactory)
          * @see Builder#blockPreProcessorFactory(BlockPreProcessorFactory)
          * @see Builder#linkRefProcessorFactory(LinkRefProcessorFactory)
-         * @see Builder#specialLeadInEscaper(SpecialLeadInHandler)
-         * @see Builder#specialLeadInUnEscaper(SpecialLeadInHandler)
+         * @see Builder#specialLeadInHandler(SpecialLeadInHandler)
          */
         void extend(Builder parserBuilder);
     }

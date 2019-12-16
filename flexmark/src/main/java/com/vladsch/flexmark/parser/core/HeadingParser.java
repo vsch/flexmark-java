@@ -5,11 +5,13 @@ import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.SpecialLeadInHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInStartsWithCharsHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -103,24 +105,9 @@ public class HeadingParser extends AbstractBlockParser {
         }
 
         @Override
-        public @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
+        public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
             boolean noAtxSpace = Parser.HEADING_NO_ATX_SPACE.get(options);
-            return (sequence, consumer) -> {
-                if ((sequence.length() == 1 || noAtxSpace && sequence.length() >= 1) && sequence.charAt(0) == '#') {
-                    consumer.accept("\\");
-                    consumer.accept(sequence);
-                }
-            };
-        }
-
-        @Override
-        public @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
-            boolean noAtxSpace = Parser.HEADING_NO_ATX_SPACE.get(options);
-            return (sequence, consumer) -> {
-                if ((sequence.length() == 2 || noAtxSpace && sequence.length() >= 2) && sequence.charAt(0) == '\\' && sequence.charAt(1) == '#') {
-                    consumer.accept(sequence.subSequence(1));
-                }
-            };
+            return noAtxSpace ? HeadingLeadInHandler.HANDLER_NO_SPACE:HeadingLeadInHandler.HANDLER_SPACE;
         }
 
         @NotNull
@@ -128,6 +115,11 @@ public class HeadingParser extends AbstractBlockParser {
         public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
         }
+    }
+
+    static class HeadingLeadInHandler {
+        final static SpecialLeadInHandler HANDLER_NO_SPACE = SpecialLeadInStartsWithCharsHandler.create('#');
+        final static SpecialLeadInHandler HANDLER_SPACE = SpecialLeadInCharsHandler.create('#');
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {

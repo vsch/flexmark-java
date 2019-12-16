@@ -3,7 +3,8 @@ package com.vladsch.flexmark.core.test.util.parser;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.SpecialLeadInHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.test.specs.TestSpecLocator;
 import com.vladsch.flexmark.util.ast.Block;
@@ -13,6 +14,7 @@ import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInStartsWithCharsHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,6 +27,7 @@ import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -312,40 +315,29 @@ final public class ParserTest {
 
     String escape(String input, Parser parser) {
         BasedSequence baseSeq = BasedSequence.of(input);
-        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_ESCAPER_LIST.get(parser.getOptions());
+        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
         StringBuilder sb = new StringBuilder();
 
         for (SpecialLeadInHandler handler : handlers) {
-            handler.accept(baseSeq, sb::append);
-            if (sb.length() > 0) return sb.toString();
+            if (handler.escape(baseSeq, sb::append)) return sb.toString();
         }
         return input;
     }
 
     String unEscape(String input, Parser parser) {
         BasedSequence baseSeq = BasedSequence.of(input);
-        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_UN_ESCAPER_LIST.get(parser.getOptions());
+        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
         StringBuilder sb = new StringBuilder();
 
         for (SpecialLeadInHandler handler : handlers) {
-            handler.accept(baseSeq, sb::append);
-            if (sb.length() > 0) return sb.toString();
+            if (handler.unEscape(baseSeq, sb::append)) return sb.toString();
         }
         return input;
     }
 
     @Test
     public void test_escapeCustom() {
-        Parser parser = Parser.builder().specialLeadInEscaper((sequence, consumer) -> {
-            if (sequence.length() >= 1 && sequence.charAt(0) == '$') {
-                consumer.accept("\\");
-                consumer.accept(sequence);
-            }
-        }).specialLeadInUnEscaper((sequence, consumer) -> {
-            if (sequence.length() >= 2 && sequence.charAt(0) == '\\' && sequence.charAt(1) == '$') {
-                consumer.accept(sequence.subSequence(1));
-            }
-        }).build();
+        Parser parser = Parser.builder().specialLeadInHandler(SpecialLeadInStartsWithCharsHandler.create('$')).build();
 
         assertEquals("abc", escape("abc", parser));
         assertEquals("\\$", escape("$", parser));

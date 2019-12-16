@@ -3,15 +3,17 @@ package com.vladsch.flexmark.ext.admonition.internal;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
-import com.vladsch.flexmark.parser.SpecialLeadInHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInStartsWithCharsHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,22 +86,8 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
-            return (sequence, consumer) -> {
-                if ((sequence.length() == 3 || sequence.length() == 4 && sequence.charAt(3) == '+') && (sequence.startsWith("???") || sequence.startsWith("!!!"))) {
-                    consumer.accept("\\");
-                    consumer.accept(sequence);
-                }
-            };
-        }
-
-        @Override
-        public @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
-            return (sequence, consumer) -> {
-                if ((sequence.length() == 4 || sequence.length() == 5 && sequence.charAt(4) == '+') && (sequence.startsWith("\\???") || sequence.startsWith("\\!!!"))) {
-                    consumer.accept(sequence.subSequence(1));
-                }
-            };
+        public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+            return AdmonitionLeadInHandler.HANDLER;
         }
 
         @Override
@@ -111,6 +99,29 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         @Override
         public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
+        }
+    }
+
+    static class AdmonitionLeadInHandler implements SpecialLeadInHandler {
+        final static SpecialLeadInHandler HANDLER = new AdmonitionLeadInHandler();
+
+        @Override
+        public boolean escape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
+            if ((sequence.length() == 3 || sequence.length() == 4 && sequence.charAt(3) == '+') && (sequence.startsWith("???") || sequence.startsWith("!!!"))) {
+                consumer.accept("\\");
+                consumer.accept(sequence);
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean unEscape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
+            if ((sequence.length() == 4 || sequence.length() == 5 && sequence.charAt(4) == '+') && (sequence.startsWith("\\???") || sequence.startsWith("\\!!!"))) {
+                consumer.accept(sequence.subSequence(1));
+                return true;
+            }
+            return false;
         }
     }
 

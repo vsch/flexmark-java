@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.parser.SpecialLeadInHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;

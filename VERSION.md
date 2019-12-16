@@ -212,8 +212,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   + [ ] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
-* Add: `CustomBlockParserFactory.getLeadInEscaper(DataHolder)` and
-  `CustomBlockParserFactory.getLeadInUnEscaper(DataHolder)` to handle escaping/unescaping
+* Add: `CustomBlockParserFactory.getLeadInHandler(DataHolder)` and handle escaping/unescaping
   special lead in characters for the block elements. Add escape/unescape to:
   * `BlockQuoteParser`
   * `ListBlockParser`
@@ -221,10 +220,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * `AdmonitionBlockParser`
   * `AsideBlockParser`
   * `DefinitionItemBlockParser`
-* Add: `Parser.Builder.specialLeadInEscaper(SpecialLeadInHandler)` and
-  `Parser.Builder.specialLeadInUnEscaper(SpecialLeadInHandler)` to allow parser extensions to
+* Add: `Parser.Builder.specialLeadInHandler(SpecialLeadInHandler)` to allow parser extensions to
   register special lead in escaper/unescaper handlers for parser extension block elements if
   they do not have any custom block parser factories but do create extensions.
+* Add: special lead-in escape/unescape handlers during text wrapping
 * Add: `SegmentOffsetTree` for binary search on offset in base sequence for conversion to index
   in result sequence.
 * Fix: `BitFieldSet.toString()` to output field values when fields are more than one bit long.
