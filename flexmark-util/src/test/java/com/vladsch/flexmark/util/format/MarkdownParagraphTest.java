@@ -5,6 +5,8 @@ import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static org.junit.Assert.assertEquals;
 
 public class MarkdownParagraphTest {
@@ -72,12 +74,12 @@ public class MarkdownParagraphTest {
         formatter.setKeepHardBreaks(true);
 
         CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");
-        formatter.setLeadInEscaper((sequence, consumer) -> {
+        formatter.setLeadInEscaperList(Collections.singletonList((sequence, consumer) -> {
             if (sequence.length() == 1 && specialChars.test(sequence.charAt(0))) {
                 consumer.accept("\\");
+                consumer.accept(sequence);
             }
-            consumer.accept(sequence);
-        });
+        }));
 
         BasedSequence actual = formatter.wrapText();
         assertEquals(expected, actual.toString());
@@ -121,13 +123,11 @@ public class MarkdownParagraphTest {
         formatter.setKeepHardBreaks(true);
 
         CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");
-        formatter.setLeadInUnEscaper((sequence, consumer) -> {
+        formatter.setLeadInUnEscaperList(Collections.singletonList((sequence, consumer) -> {
             if (sequence.length() == 2 && sequence.charAt(0) == '\\' && specialChars.test(sequence.charAt(1))) {
                 consumer.accept(sequence.subSequence(1));
-            } else {
-                consumer.accept(sequence);
             }
-        });
+        }));
 
         BasedSequence actual = formatter.wrapText();
         assertEquals(expected, actual.toString());

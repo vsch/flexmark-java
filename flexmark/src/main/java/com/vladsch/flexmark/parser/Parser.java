@@ -585,7 +585,7 @@ public class Parser implements IParse {
         }
 
         public Builder specialLeadInUnEscaper(SpecialLeadInHandler specialLeadInUnEscaper) {
-            specialLeadInEscaperList.add(specialLeadInUnEscaper);
+            specialLeadInUnEscaperList.add(specialLeadInUnEscaper);
             addExtensionApiPoint(specialLeadInUnEscaper);
             return this;
         }

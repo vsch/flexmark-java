@@ -335,6 +335,28 @@ final public class ParserTest {
     }
 
     @Test
+    public void test_escapeCustom() {
+        Parser parser = Parser.builder().specialLeadInEscaper((sequence, consumer) -> {
+            if (sequence.length() >= 1 && sequence.charAt(0) == '$') {
+                consumer.accept("\\");
+                consumer.accept(sequence);
+            }
+        }).specialLeadInUnEscaper((sequence, consumer) -> {
+            if (sequence.length() >= 2 && sequence.charAt(0) == '\\' && sequence.charAt(1) == '$') {
+                consumer.accept(sequence.subSequence(1));
+            }
+        }).build();
+
+        assertEquals("abc", escape("abc", parser));
+        assertEquals("\\$", escape("$", parser));
+        assertEquals("\\$abc", escape("$abc", parser));
+
+        assertEquals("abc", unEscape("abc", parser));
+        assertEquals("$", unEscape("\\$", parser));
+        assertEquals("$abc", unEscape("\\$abc", parser));
+    }
+
+    @Test
     public void test_escapeBlockQuote() {
         Parser parser = Parser.builder().build();
 

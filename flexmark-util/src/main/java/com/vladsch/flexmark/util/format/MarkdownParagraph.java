@@ -8,13 +8,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
-    public static final BiConsumer<BasedSequence, Consumer<CharSequence>> NULL_LEAD_IN_HANDLER = (sequence, consumer) -> consumer.accept(sequence);
 
     final @NotNull BasedSequence baseSeq;
     final @NotNull CharWidthProvider charWidthProvider;
@@ -26,8 +26,8 @@ public class MarkdownParagraph {
     boolean keepHardBreaks = true;
     boolean keepLineBreaks = false;
 
-    @NotNull BiConsumer<BasedSequence, Consumer<CharSequence>> leadInEscaper = NULL_LEAD_IN_HANDLER;
-    @NotNull BiConsumer<BasedSequence, Consumer<CharSequence>> leadInUnEscaper = NULL_LEAD_IN_HANDLER;
+    @NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInEscaperList = Collections.emptyList();
+    @NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInUnEscaperList = Collections.emptyList();
 
     public MarkdownParagraph(CharSequence chars) {
         this(BasedSequence.of(chars), CharWidthProvider.NULL);
@@ -100,21 +100,21 @@ public class MarkdownParagraph {
     }
 
     @NotNull
-    public BiConsumer<BasedSequence, Consumer<CharSequence>> getLeadInEscaper() {
-        return leadInEscaper;
+    public List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> getLeadInEscaperList() {
+        return leadInEscaperList;
     }
 
-    public void setLeadInEscaper(@Nullable BiConsumer<BasedSequence, Consumer<CharSequence>> leadInEscaper) {
-        this.leadInEscaper = leadInEscaper == null ? NULL_LEAD_IN_HANDLER : leadInEscaper;
+    public void setLeadInEscaperList(@NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInEscaperList) {
+        this.leadInEscaperList = leadInEscaperList;
     }
 
     @NotNull
-    public BiConsumer<BasedSequence, Consumer<CharSequence>> getLeadInUnEscaper() {
-        return leadInUnEscaper;
+    public List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> getLeadInUnEscaperList() {
+        return leadInUnEscaperList;
     }
 
-    public void setLeadInUnEscaper(@Nullable BiConsumer<BasedSequence, Consumer<CharSequence>> leadInUnEscaper) {
-        this.leadInUnEscaper = leadInUnEscaper == null ? NULL_LEAD_IN_HANDLER : leadInUnEscaper;
+    public void setLeadInUnEscaperList(@NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInUnEscaperList) {
+        this.leadInUnEscaperList = leadInUnEscaperList;
     }
 
     @NotNull
@@ -196,8 +196,8 @@ public class MarkdownParagraph {
         BasedSequence leadingIndent = null;
         BasedSequence lastSpace = null;
         final TextTokenizer tokenizer = new TextTokenizer(baseSeq);
-        @NotNull BiConsumer<BasedSequence, Consumer<CharSequence>> leadInEscaper = MarkdownParagraph.this.leadInEscaper;
-        @NotNull BiConsumer<BasedSequence, Consumer<CharSequence>> leadInUnEscaper = MarkdownParagraph.this.leadInUnEscaper;
+        @NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInEscaperList = MarkdownParagraph.this.leadInEscaperList;
+        @NotNull List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> leadInUnEscaperList = MarkdownParagraph.this.leadInUnEscaperList;
 
         LeftAlignedWrapping() {
 
@@ -255,6 +255,23 @@ public class MarkdownParagraph {
             leadingIndent = null;
         }
 
+        void processLeadInList(List<? extends BiConsumer<BasedSequence, Consumer<CharSequence>>> handlers, BasedSequence sequence) {
+            boolean[] handled = { false };
+
+            Consumer<CharSequence> appender = sequence1 -> {
+                addChars(sequence1);
+                handled[0] = true;
+            };
+
+            for (BiConsumer<BasedSequence, Consumer<CharSequence>> handler : handlers) {
+                handler.accept(sequence, appender);
+                if (handled[0]) return;
+            }
+
+            // not handled
+            addChars(sequence);
+        }
+
         @NotNull
         BasedSequence wrapText() {
             while (true) {
@@ -295,7 +312,7 @@ public class MarkdownParagraph {
 //                                String regex3 = "^\\d+([\\.)])$"; // this one is only if isEscapeNumberedLeadIn, the ) only if isCommonMarkLists
                                 // replace match with \\ added before group 1
 //                                addToken(token);
-                                leadInEscaper.accept(baseSeq.subSequence(token.range), this::addChars);
+                                processLeadInList(leadInEscaperList, baseSeq.subSequence(token.range));
                             } else if (token.isFirstWord) {
                                 // Fix: may need to un-escape lead-in special char sequences
 //                                // NOTE: this can be done with regex match and replace
@@ -310,7 +327,7 @@ public class MarkdownParagraph {
 //                                String regex3 = "^\\d+\\([\\.)])$"; // this one is only if isEscapeNumberedLeadIn, the ) only if isCommonMarkLists
                                 // replace with \\ before group 1 removed and add token
 //                                addToken(token);
-                                leadInUnEscaper.accept(baseSeq.subSequence(token.range), this::addChars);
+                                processLeadInList(leadInUnEscaperList, baseSeq.subSequence(token.range));
                             } else {
                                 addToken(token);
                             }
