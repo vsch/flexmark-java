@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
@@ -12,8 +11,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
@@ -25,8 +22,10 @@ public class MarkdownParagraph {
     private int indent = 0;
     private int firstWidthOffset = 0;
     int width = 0;
-    boolean keepHardBreaks = true;
-    boolean keepLineBreaks = false;
+    boolean keepHardLineBreaks = true;
+    boolean keepSoftLineBreaks = false;
+    boolean unEscapeSpecialLeadInChars = true;
+    boolean escapeSpecialLeadInChars = true;
 
     @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = Collections.emptyList();
 
@@ -93,19 +92,35 @@ public class MarkdownParagraph {
     }
 
     public boolean getKeepHardBreaks() {
-        return keepHardBreaks;
+        return keepHardLineBreaks;
     }
 
     public void setKeepHardBreaks(boolean keepHardBreaks) {
-        this.keepHardBreaks = keepHardBreaks;
+        this.keepHardLineBreaks = keepHardBreaks;
     }
 
-    public boolean getKeepLineBreaks() {
-        return keepLineBreaks;
+    public boolean getKeepSoftBreaks() {
+        return keepSoftLineBreaks;
     }
 
-    public void setKeepSoftLineBreaks(boolean keepLineBreaks) {
-        this.keepLineBreaks = keepLineBreaks;
+    public boolean isUnEscapeSpecialLeadIn() {
+        return unEscapeSpecialLeadInChars;
+    }
+
+    public void setUnEscapeSpecialLeadIn(boolean unEscapeSpecialLeadInChars) {
+        this.unEscapeSpecialLeadInChars = unEscapeSpecialLeadInChars;
+    }
+
+    public boolean isEscapeSpecialLeadIn() {
+        return escapeSpecialLeadInChars;
+    }
+
+    public void setEscapeSpecialLeadIn(boolean escapeSpecialLeadInChars) {
+        this.escapeSpecialLeadInChars = escapeSpecialLeadInChars;
+    }
+
+    public void setKeepSoftBreaks(boolean keepLineBreaks) {
+        this.keepSoftLineBreaks = keepLineBreaks;
     }
 
     @NotNull
@@ -188,6 +203,8 @@ public class MarkdownParagraph {
         BasedSequence lastSpace = null;
         final TextTokenizer tokenizer = new TextTokenizer(baseSeq);
         @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = MarkdownParagraph.this.leadInHandlers;
+        boolean unEscapeSpecialLeadInChars = MarkdownParagraph.this.unEscapeSpecialLeadInChars;
+        boolean escapeSpecialLeadInChars = MarkdownParagraph.this.escapeSpecialLeadInChars;
 
         LeftAlignedWrapping() {
 
@@ -246,15 +263,19 @@ public class MarkdownParagraph {
         }
 
         void processLeadInEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
-            for (SpecialLeadInHandler handler : handlers) {
-                if (handler.escape(sequence, this::addChars)) return;
+            if (escapeSpecialLeadInChars) {
+                for (SpecialLeadInHandler handler : handlers) {
+                    if (handler.escape(sequence, this::addChars)) return;
+                }
             }
             addChars(sequence);
         }
 
         void processLeadInUnEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
-            for (SpecialLeadInHandler handler : handlers) {
-                if (handler.unEscape(sequence, this::addChars)) return;
+            if (unEscapeSpecialLeadInChars) {
+                for (SpecialLeadInHandler handler : handlers) {
+                    if (handler.unEscape(sequence, this::addChars)) return;
+                }
             }
             addChars(sequence);
         }
@@ -285,9 +306,9 @@ public class MarkdownParagraph {
                                 leadingIndent = null;
                             }
 
-                            if (firstNonBlank) {
+                            if (firstNonBlank && !token.isFirstWord) {
                                 processLeadInEscape(leadInHandlers, baseSeq.subSequence(token.range));
-                            } else if (token.isFirstWord) {
+                            } else if (!firstNonBlank && token.isFirstWord) {
                                 processLeadInUnEscape(leadInHandlers, baseSeq.subSequence(token.range));
                             } else {
                                 addToken(token);
@@ -315,7 +336,7 @@ public class MarkdownParagraph {
 
                     case MARKDOWN_BREAK: {
                         // start a new line if not already new
-                        if (keepHardBreaks) {
+                        if (keepHardLineBreaks) {
                             if (col > 0) {
                                 addToken(token);
                                 afterLineBreak();
@@ -329,7 +350,7 @@ public class MarkdownParagraph {
                     }
 
                     case BREAK: {
-                        if (col > 0 && keepLineBreaks) {
+                        if (col > 0 && keepSoftLineBreaks) {
                             addToken(token);
                             afterLineBreak();
                         }

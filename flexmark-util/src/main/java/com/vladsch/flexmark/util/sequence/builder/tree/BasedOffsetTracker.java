@@ -46,7 +46,7 @@ public class BasedOffsetTracker {
             if (offset < seg.getStartOffset()) {
                 if (seg.getPos() > 0) {
                     Segment prevSeg = segmentOffsetTree.getSegment(seg.getPos() - 1, sequence.getBaseSequence());
-                    int indexInPrev = prevSeg.length() - (seg.getStartOffset() - offset);
+                    int indexInPrev = offset == prevSeg.getEndOffset() ? prevSeg.length() : prevSeg.length() - (seg.getStartOffset() - offset);
                     assert indexInPrev >= 0 && indexInPrev <= prevSeg.length();
 
                     switch (anchor) {
@@ -60,7 +60,9 @@ public class BasedOffsetTracker {
                     }
                 }
             } else {
-                if (seg.getPos() + 1 < segmentOffsetTree.size()) {
+                if (offset == seg.getEndOffset()) {
+                    return seg.getStartIndex() + seg.length();
+                } else if (seg.getPos() + 1 < segmentOffsetTree.size()) {
                     Segment nextSeg = segmentOffsetTree.getSegment(seg.getPos() + 1, sequence.getBaseSequence());
                     int indexInNext = offset - seg.getEndOffset();
                     assert indexInNext >= 0 && indexInNext <= nextSeg.length();

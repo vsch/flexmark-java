@@ -28,7 +28,7 @@ public class MarkdownParagraphTest {
         formatter.setFirstIndent(0);
         formatter.setWidth(66);
         formatter.setFirstWidthOffset(0);
-        formatter.setKeepSoftLineBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
         BasedSequence actual = formatter.wrapText();
@@ -49,7 +49,7 @@ public class MarkdownParagraphTest {
         formatter.setFirstIndent(0);
         formatter.setWidth(90);
         formatter.setFirstWidthOffset(0);
-        formatter.setKeepSoftLineBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
         BasedSequence actual = formatter.wrapText();
@@ -71,7 +71,7 @@ public class MarkdownParagraphTest {
         formatter.setFirstIndent(0);
         formatter.setWidth(90);
         formatter.setFirstWidthOffset(0);
-        formatter.setKeepSoftLineBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
         formatter.setLeadInHandlers(Collections.singletonList(SpecialLeadInCharsHandler.create('#')));
@@ -114,7 +114,7 @@ public class MarkdownParagraphTest {
         formatter.setFirstIndent(0);
         formatter.setWidth(92);
         formatter.setFirstWidthOffset(0);
-        formatter.setKeepSoftLineBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
         CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");

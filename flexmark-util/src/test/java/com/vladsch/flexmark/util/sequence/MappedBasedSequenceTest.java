@@ -161,7 +161,7 @@ public class MappedBasedSequenceTest {
         formatter.setFirstIndent(0);
         formatter.setWidth(90);
         formatter.setFirstWidthOffset(0);
-        formatter.setKeepSoftLineBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
         BasedSequence wrapped = formatter.wrapText();
         assertEquals(expected, wrapped.toString());

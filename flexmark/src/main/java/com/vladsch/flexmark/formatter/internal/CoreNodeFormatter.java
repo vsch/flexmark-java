@@ -809,7 +809,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 MarkdownParagraph formatter = new MarkdownParagraph(builder.toSequence(), formatterOptions.charWidthProvider);
                 formatter.setWidth(formatterOptions.rightMargin);
-                formatter.setKeepSoftLineBreaks(formatterOptions.keepSoftLineBreaks);
+                formatter.setKeepSoftBreaks(formatterOptions.keepSoftLineBreaks);
                 formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
                 formatter.setFirstIndent(0);
                 formatter.setIndent(0);
