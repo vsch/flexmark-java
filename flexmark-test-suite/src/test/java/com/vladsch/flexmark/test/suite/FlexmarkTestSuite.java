@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.test.suite;
 
 import com.vladsch.flexmark.docx.converter.DocxConverterTestSuite;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

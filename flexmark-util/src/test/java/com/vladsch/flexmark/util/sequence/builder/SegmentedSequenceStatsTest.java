@@ -16,7 +16,7 @@ public class SegmentedSequenceStatsTest {
         stats.addStats(3, 3, 6);
         assertEquals(1, stats.getCount(3));
 
-        stats.addStats(3, 3,6);
+        stats.addStats(3, 3, 6);
         assertEquals(2, stats.getCount(3));
 
         stats.addStats(3, 1, 1);

@@ -68,7 +68,6 @@ public class ExampleOption {
 //        BUILT_IN_OPTIONS_MAP.put(TIMED_ITERATIONS_OPTION_NAME, build(TIMED_ITERATIONS_OPTION_NAME));
         BUILT_IN_OPTIONS_MAP.put(TIMED_OPTION_NAME, build(TIMED_OPTION_NAME));
     }
-
     @NotNull
     public static HashMap<String, ExampleOption> getBuiltInOptions() {
         return new HashMap<>(BUILT_IN_OPTIONS_MAP);

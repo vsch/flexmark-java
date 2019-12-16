@@ -99,7 +99,7 @@ public class HtmlRenderer implements IRender {
     @Deprecated public static final int COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
     @Deprecated public static final int SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_TRIM_TRAILING_WHITESPACE;
     @Deprecated public static final int PASS_THROUGH = LineAppendable.F_PASS_THROUGH;
-//    @Deprecated public static final int ALLOW_LEADING_WHITESPACE = LineAppendable.F_TRIM_LEADING_WHITESPACE;
+    //    @Deprecated public static final int ALLOW_LEADING_WHITESPACE = LineAppendable.F_TRIM_LEADING_WHITESPACE;
     @Deprecated public static final int FORMAT_ALL = LineAppendable.F_FORMAT_ALL;
 
     /**

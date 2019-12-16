@@ -23,17 +23,17 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
     private static final String SPEC_RESOURCE = "/ext_tables_manipulation_spec.md";
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
-        .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
-        .set(Parser.LISTS_AUTO_LOOSE, false)
-        .set(Parser.BLANK_LINES_IN_AST, true);
+            .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
+            .set(Parser.LISTS_AUTO_LOOSE, false)
+            .set(Parser.BLANK_LINES_IN_AST, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("gfm", new MutableDataSet()
-            .set(TablesExtension.COLUMN_SPANS, false)
-            .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
-            .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
-            .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
+                .set(TablesExtension.COLUMN_SPANS, false)
+                .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
+                .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
+                .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
         );
         optionsMap.put("no-caption", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
         optionsMap.put("no-alignment", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
@@ -49,34 +49,34 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
         optionsMap.put("left-align-marker-remove", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
         optionsMap.put("line-prefix", new MutableDataSet().set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, ">   "));
         optionsMap.put("markdown-navigator", new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "")
-            .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
-            .set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
-            .set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)
-            .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
-            .set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.AS_IS)
-            .set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, true)
-            .set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, true)
-            .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_DASHES, 3)
-            .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS)
-            .set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, true)
-            .set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, new CharWidthProvider() {
-                @Override
-                public int spaceWidth() {
-                    return 1;
-                }
+                .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "")
+                .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
+                .set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
+                .set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)
+                .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
+                .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
+                .set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.AS_IS)
+                .set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, true)
+                .set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, true)
+                .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_DASHES, 3)
+                .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS)
+                .set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, true)
+                .set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, new CharWidthProvider() {
+                    @Override
+                    public int spaceWidth() {
+                        return 1;
+                    }
 
-                @Override
-                public int charWidth(char c) {
-                    return c == TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR ? 0 : 1;
-                }
+                    @Override
+                    public int charWidth(char c) {
+                        return c == TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR ? 0 : 1;
+                    }
 
-                @Override
-                public int charWidth(@NotNull CharSequence s) {
-                    return BasedSequence.of(s).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_SET);
-                }
-            })
+                    @Override
+                    public int charWidth(@NotNull CharSequence s) {
+                        return BasedSequence.of(s).countLeadingNot(TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_SET);
+                    }
+                })
         );
 
         // @formatter:off

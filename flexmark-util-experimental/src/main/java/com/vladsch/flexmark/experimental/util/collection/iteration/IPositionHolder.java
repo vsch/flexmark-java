@@ -36,15 +36,16 @@ public interface IPositionHolder<T, P extends IPositionHolder<T, P>> extends /*L
 
     /**
      * FIX: allow getIndex(offset) to return -1
+     *
      * @return absolute index in list, even when this position does not refer to a valid element it will always be [-1, list.size()]
-     *          if it is referring to a valid element then the returned range will be [0, list.size()-1]
+     *         if it is referring to a valid element then the returned range will be [0, list.size()-1]
      */
     int getIndex();
 
     /**
      * Tells listener to remove itself from parent
      * NOTE: used as optimization in iterators which are guaranteed not to have any other references to their position element.
-     *
+     * <p>
      * Do not otherwise use this because this position will stop having the list modification updates and will throw {@link IllegalStateException}
      * on any attempt to use any methods of this position other than {@link #isDetached()}
      */
@@ -64,6 +65,7 @@ public interface IPositionHolder<T, P extends IPositionHolder<T, P>> extends /*L
 
     /**
      * Position Anchor for this position
+     *
      * @return position anchor
      */
     @NotNull PositionAnchor getAnchor();

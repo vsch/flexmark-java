@@ -1,10 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import com.vladsch.flexmark.util.sequence.BasedOptionsSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.*;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 

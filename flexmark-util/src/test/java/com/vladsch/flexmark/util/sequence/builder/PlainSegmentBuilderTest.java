@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         String expected = "";
 
@@ -34,7 +34,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
         segments.append(0, 0);
         segments.append(sequence.length(), sequence.length());
 
@@ -76,7 +76,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append("  ");
         segments.append(0, 4);
@@ -93,7 +93,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(' ');
         segments.append(' ');
@@ -111,7 +111,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(' ', 2);
         segments.append(0, 4);
@@ -182,7 +182,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(0, 4);
         String expected = input.substring(0, 4);
@@ -199,7 +199,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(0, 4);
         segments.append(6, 7);
@@ -217,7 +217,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(0, 5);
         segments.append(3, 7);
@@ -235,7 +235,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
         segments.append(0, 5);
         segments.append("abc");
         segments.append(3, 7);
@@ -253,7 +253,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(0, 5);
         segments.append("abc");
@@ -272,7 +272,7 @@ public class PlainSegmentBuilderTest {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
 
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(0, 5);
         segments.append(5, 7);
@@ -289,7 +289,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultChop1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append("-");
@@ -303,7 +303,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultChop2() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append("-");
@@ -316,7 +316,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultChop3() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append("-");
@@ -329,7 +329,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultChop4() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append("-");
@@ -342,7 +342,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultChop5() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append("-");
@@ -355,7 +355,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultChop6() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append("-");
@@ -368,7 +368,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultMerge1() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append(4, 8);
@@ -380,7 +380,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultMerge2() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append(1, 8);
@@ -392,7 +392,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultMerge3() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append(3, 5);
@@ -404,7 +404,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultMerge4() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append(2, 4);
@@ -416,7 +416,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultMerge5() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append(2, 5);
@@ -428,7 +428,7 @@ public class PlainSegmentBuilderTest {
     public void test_handleOverlapDefaultMerge6() {
         String input = "0123456789";
         BasedSequence sequence = BasedSequence.of(input);
-        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
 
         segments.append(2, 5);
         segments.append(3, 4);
@@ -445,7 +445,7 @@ public class PlainSegmentBuilderTest {
         final CharRecoveryOptimizer myOptimizer;
 
         public OptimizedSegmentBuilder2(CharSequence base, CharRecoveryOptimizer optimizer) {
-            super(F_INCLUDE_ANCHORS|F_TRACK_FIRST256);
+            super(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
             myBase = base;
             myOptimizer = optimizer;
         }

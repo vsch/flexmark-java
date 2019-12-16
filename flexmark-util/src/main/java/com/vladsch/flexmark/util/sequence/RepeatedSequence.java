@@ -96,7 +96,7 @@ public class RepeatedSequence implements CharSequence {
     @NotNull
     @Deprecated
     public static CharSequence of(char c, int count) {
-        return repeatOf(c,count);
+        return repeatOf(c, count);
     }
 
     @NotNull

@@ -4,14 +4,14 @@ import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
-import com.vladsch.flexmark.util.sequence.*;
-import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.visitor.AstNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class Node {
@@ -65,8 +65,6 @@ public abstract class Node {
     public Pair<Integer, Integer> lineColumnAtStart() { return chars.baseLineColumnAtStart(); }
     public Pair<Integer, Integer> getLineColumnAtEnd() { return chars.baseLineColumnAtEnd(); }
     // @formatter:on
-
-
 
     public @Nullable Node getAncestorOfType(@NotNull Class<?>... classes) {
         Node parent = getParent();
@@ -829,7 +827,7 @@ public abstract class Node {
      */
     public @NotNull BasedSequence getCharsFromSegments() {
         @NotNull BasedSequence[] segments = getSegmentsForChars();
-        return segments.length == 0 ? BasedSequence.NULL: SegmentedSequence.create(segments[0], Arrays.asList(segments));
+        return segments.length == 0 ? BasedSequence.NULL : SegmentedSequence.create(segments[0], Arrays.asList(segments));
     }
 
     /**

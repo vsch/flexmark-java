@@ -5,12 +5,12 @@ import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
-import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.mappers.SpecialLeadInStartsWithCharsHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -107,7 +107,7 @@ public class HeadingParser extends AbstractBlockParser {
         @Override
         public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
             boolean noAtxSpace = Parser.HEADING_NO_ATX_SPACE.get(options);
-            return noAtxSpace ? HeadingLeadInHandler.HANDLER_NO_SPACE:HeadingLeadInHandler.HANDLER_SPACE;
+            return noAtxSpace ? HeadingLeadInHandler.HANDLER_NO_SPACE : HeadingLeadInHandler.HANDLER_SPACE;
         }
 
         @NotNull

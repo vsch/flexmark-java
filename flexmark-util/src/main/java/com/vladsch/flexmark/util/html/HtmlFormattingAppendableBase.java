@@ -412,7 +412,6 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
-
     // delegated to LineFormattingAppendable
     // @formatter:off
     @Override public boolean isPendingSpace()                                                                                                                   { return appendable.isPendingSpace(); }
@@ -471,5 +470,4 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @NotNull @Override public T unIndent()                                                                                                                      { appendable.unIndent(); return (T)this; }
     @NotNull @Override public T unIndentNoEol()                                                                                                                 { appendable.unIndentNoEol();  return (T)this; }
     // @formatter:on
-
 }

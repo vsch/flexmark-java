@@ -12,10 +12,10 @@ public interface ValueIteration<R> extends VoidIteration {
 
     /**
      * @return true if the current loop result value was never set (ie. only set at loop instantiation with
-     * defaultValue)
-     * <p>
-     * NOTE: does not test current value with equality to default value, set by {@link #setResult(Object)} or {@link
-     * #Return(Object)}
+     *         defaultValue)
+     *         <p>
+     *         NOTE: does not test current value with equality to default value, set by {@link #setResult(Object)} or {@link
+     *         #Return(Object)}
      */
     boolean isDefaultResult();       // true if value never set other than initial default setting
 

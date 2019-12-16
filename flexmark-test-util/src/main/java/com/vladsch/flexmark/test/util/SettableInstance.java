@@ -11,12 +11,12 @@ import java.util.function.Consumer;
 /**
  * Instance based on aggregated options used for spec test settings which may contain other such settings which can be
  * accessed through other data keys directly
- *
+ * <p>
  * For example: Rendering profile contains HTML, Parser and CSS settings. Rendering profile and its contained settings can be set by
  * spec options. In order to handle this properly rendering profile settable instance is defined with HTML, Parser and CSS extracted settable instances.
  * thus allowing setting options on contained instances directly or through the rendering profile container, while keeping the results consistent.
  *
- * @param <T>  type for the setting
+ * @param <T> type for the setting
  */
 final public class SettableInstance<T> {
     private final @NotNull DataKey<Consumer<T>> myConsumerKey;

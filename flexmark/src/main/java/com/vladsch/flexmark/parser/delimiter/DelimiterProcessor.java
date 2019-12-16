@@ -13,13 +13,13 @@ public interface DelimiterProcessor {
 
     /**
      * @return the character that marks the beginning of a delimited node, must not clash with any built-in special
-     * characters
+     *         characters
      */
     char getOpeningCharacter();
 
     /**
      * @return the character that marks the the ending of a delimited node, must not clash with any built-in special
-     * characters. Note that for a symmetric delimiter such as "*", this is the same as the opening.
+     *         characters. Note that for a symmetric delimiter such as "*", this is the same as the opening.
      */
     char getClosingCharacter();
 

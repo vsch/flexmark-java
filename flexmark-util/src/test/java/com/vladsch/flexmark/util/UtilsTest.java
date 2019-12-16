@@ -148,7 +148,7 @@ public class UtilsTest {
     public void testRemoveAnySuffix() {
         assertEquals("!!", Utils.removeAnySuffix("!!"));
         assertEquals("testString", Utils.removeAnySuffix("testString", "?"));
-        assertEquals("", Utils.removeAnySuffix(null, (String)null));
+        assertEquals("", Utils.removeAnySuffix(null, (String) null));
         assertEquals("testString", Utils.removeAnySuffix("testString!", "!"));
         assertEquals("testString", Utils.removeAnySuffix("testString!", "!"));
         assertEquals("testStrin!g", Utils.removeAnySuffix("testStrin!g", "!"));
@@ -157,7 +157,7 @@ public class UtilsTest {
 
     @Test
     public void testRemoveAnyPrefix() {
-        assertEquals("", Utils.removeAnyPrefix(null, (String)null));
+        assertEquals("", Utils.removeAnyPrefix(null, (String) null));
         assertEquals("testString", Utils.removeAnyPrefix("testString"));
         assertEquals("testString", Utils.removeAnyPrefix("testString", new String[] { null }));
         assertEquals("testString!", Utils.removeAnyPrefix("testString!", "!"));

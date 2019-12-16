@@ -51,6 +51,7 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
      * Return iterator over segment parts
      * Range - BASE
      * CharSequence - TEXT
+     *
      * @return iterator over segment builder parts
      */
     @NotNull
@@ -59,6 +60,7 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
 
     /**
      * Return iterator over segments
+     *
      * @return iterator over segment builder segments
      */
     @NotNull

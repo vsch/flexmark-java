@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.test.util.spec.SpecReader.EXAMPLE_KEYWORD;
 import static com.vladsch.flexmark.test.util.spec.SpecReader.OPTIONS_KEYWORD;
-import static com.vladsch.flexmark.util.sequence.BasedSequence.*;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 public class SpecExampleBlockParser extends AbstractBlockParser {
     private static final Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:()]*)(?:(:)\\s*([^\\s()]+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^()\\n\\r]*)(\\))?)?\\s*$".replace("options", OPTIONS_KEYWORD));

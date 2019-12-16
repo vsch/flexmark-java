@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.builder;
 
-import com.vladsch.flexmark.util.SharedDataKeys;
 import com.vladsch.flexmark.util.data.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -154,14 +153,15 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
 
     /**
      * Remove given extensions from options[EXTENSIONS] data key.
-     * @param options   options where EXTENSIONS key is set
+     *
+     * @param options           options where EXTENSIONS key is set
      * @param excludeExtensions collection of extension classes to remove from extensions
      * @return modified options if removed and options were immutable or the same options if nothing to remove or options were mutable.
      */
     public static DataHolder removeExtensions(@NotNull DataHolder options, @NotNull Collection<Class<? extends Extension>> excludeExtensions) {
         if (options.contains(EXTENSIONS)) {
             ArrayList<Extension> extensions = new ArrayList<>(EXTENSIONS.get(options));
-            boolean removed = extensions.removeIf(it->excludeExtensions.contains(it.getClass()));
+            boolean removed = extensions.removeIf(it -> excludeExtensions.contains(it.getClass()));
             if (removed) {
                 if (options instanceof MutableDataHolder) {
                     return ((MutableDataHolder) options).set(EXTENSIONS, extensions);

@@ -44,16 +44,16 @@ public interface VoidIteration {
 
     /**
      * @return true if have next element, does not mean it matches filters, just raw next from loop iterator, fast
-     * check
+     *         check
      */
     boolean getHaveNext();
 
     /**
      * @return true if have next element and it passes element filters.
-     * <p>
-     * NOTE: {@link ValueIterationConsumerAdapter} not invoked. It is part of the consumer.accept() call
-     * hierarchy and can have code side-effects. Only predicate filters are tested. This does not mean the final
-     * consumer will see this value.
+     *         <p>
+     *         NOTE: {@link ValueIterationConsumerAdapter} not invoked. It is part of the consumer.accept() call
+     *         hierarchy and can have code side-effects. Only predicate filters are tested. This does not mean the final
+     *         consumer will see this value.
      */
     boolean getHaveAcceptableNext();
 
@@ -101,7 +101,7 @@ public interface VoidIteration {
 
     /**
      * @return count of recursion level, can use in Break(recursionLevel) or Continue(recursionLevel) to break/continue
-     * a particular recursion
+     *         a particular recursion
      */
     int getRecursionLevel();
 

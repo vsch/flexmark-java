@@ -146,7 +146,7 @@ public class MappedBasedSequenceTest {
         BasedSequence eolAdded = mapEncoded.appendEOL();
 
         assertEquals(expected, mapEncoded.toString());
-        assertEquals(expected+"\n", eolAdded.toString());
+        assertEquals(expected + "\n", eolAdded.toString());
     }
 
     // preserve segmented sequence segments
@@ -177,6 +177,6 @@ public class MappedBasedSequenceTest {
         assertEquals("⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\\n⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧", builder2.toStringWithRangesVisibleWhitespace());
 
         assertEquals(expected, mapEncoded.toString());
-        assertEquals(expected+"\n", eolAdded.toString());
+        assertEquals(expected + "\n", eolAdded.toString());
     }
 }

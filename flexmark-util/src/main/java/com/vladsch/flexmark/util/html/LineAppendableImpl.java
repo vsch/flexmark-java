@@ -709,7 +709,6 @@ public class LineAppendableImpl implements LineAppendable {
         return result;
     }
 
-
     @Override
     public void setLinePrefixIndex(int lineIndex, int prefixEndIndex) {
 

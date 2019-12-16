@@ -22,13 +22,13 @@ public class EnumRefTextCollectingVisitor {
         ordinalRunnable = ordinal < 0 ? null : () -> out.add(String.valueOf(ordinal));
 
         visitor = new NodeVisitor(
-            new VisitHandler<>(Text.class, this::visit),
-            new VisitHandler<>(TextBase.class, this::visit),
-            new VisitHandler<>(HtmlEntity.class, this::visit),
-            new VisitHandler<>(SoftLineBreak.class, this::visit),
-            new VisitHandler<>(HardLineBreak.class, this::visit),
-            new VisitHandler<>(EnumeratedReferenceText.class, this::visit),
-            new VisitHandler<>(EnumeratedReferenceLink.class, this::visit)
+                new VisitHandler<>(Text.class, this::visit),
+                new VisitHandler<>(TextBase.class, this::visit),
+                new VisitHandler<>(HtmlEntity.class, this::visit),
+                new VisitHandler<>(SoftLineBreak.class, this::visit),
+                new VisitHandler<>(HardLineBreak.class, this::visit),
+                new VisitHandler<>(EnumeratedReferenceText.class, this::visit),
+                new VisitHandler<>(EnumeratedReferenceLink.class, this::visit)
         );
     }
 

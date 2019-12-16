@@ -321,7 +321,7 @@ public interface LineAppendable extends Appendable {
 
     /**
      * Get text offset of all output lines, excluding any text for the last line being accumulated
-     *
+     * <p>
      * NOTE: this includes prefixes
      *
      * @return offset of text as would be returned if all lines
@@ -330,7 +330,7 @@ public interface LineAppendable extends Appendable {
 
     /**
      * Get offset after last append
-     *
+     * <p>
      * NOTE: this includes prefixes
      *
      * @return offset as would be returned by {@link #offset()} after line() call less 1 for EOL
@@ -582,6 +582,7 @@ public interface LineAppendable extends Appendable {
 
     /**
      * Get pending prefix after EOL
+     *
      * @return change in prefix length after next eol
      */
     int getAfterEolPrefixDelta();

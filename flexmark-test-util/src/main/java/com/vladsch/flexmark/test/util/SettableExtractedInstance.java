@@ -10,13 +10,13 @@ import java.util.function.Function;
 
 /**
  * Instance based on aggregated options used for spec test settings which itself is part of a settable instance
- *
+ * <p>
  * For example: Rendering profile contains HTML, Parser and CSS settings. Rendering profile and its contained settings can be set by
  * spec options. In order to handle this properly rendering profile settable instance is defined with HTML, Parser and CSS extracted settable instances.
  * thus allowing setting options on contained instances directly or through the rendering profile container, while keeping the results consistent.
  *
- * @param <T>  type for the container setting
- * @param <S>  type for the setting
+ * @param <T> type for the container setting
+ * @param <S> type for the setting
  */
 final public class SettableExtractedInstance<T, S> {
     private final @NotNull DataKey<Consumer<S>> myConsumerKey;

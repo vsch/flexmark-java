@@ -976,7 +976,7 @@ public class Formatter implements IRender {
                 MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
-                return new SubNodeFormatter(myMainNodeRenderer, htmlWriter, new ScopedDataSet(myOptions,options));
+                return new SubNodeFormatter(myMainNodeRenderer, htmlWriter, new ScopedDataSet(myOptions, options));
             }
 
             @Override

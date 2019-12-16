@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.integration.test;
 
 import com.vladsch.flexmark.test.specs.TestSpecLocator;
-import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;

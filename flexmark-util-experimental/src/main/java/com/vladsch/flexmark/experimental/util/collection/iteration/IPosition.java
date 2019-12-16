@@ -47,10 +47,10 @@ import java.util.function.Predicate;
  * <p>
  * NOTE: Offsets are affected by span being 0 or 1 and type of anchor for the position:
  * Offset of 0 refers to the element of this position and is only available if this position span is 1.
- *
+ * <p>
  * Offset &lt;0 refer to the elements preceding the element at this position. For {@link PositionAnchor#PREVIOUS} If span is 0 then the offset is
  * increased by 1 to reflect that there is no current element at this position.
- *
+ * <p>
  * Offset &gt;0 refer to the elements following the element at this position. If span is 0 then offset is reduced by 1
  * to reflect that there is no current element.
  * <p>
@@ -61,9 +61,9 @@ import java.util.function.Predicate;
  * This is not limited to adding 1 element. Each added element before or after the current
  * position moves the previous/next element position in the list. The first addition is limited to relative offset of -1, 0 or 1
  * from current index if the addition is not to affect iteration.
- *
+ * <p>
  * The following operations can insert anywhere in the previously inserted range.
- *
+ * <p>
  * Deletions have no limitations. They can never cause new elements to be inserted after
  * the next element position of the iterator so cannot cause iteration to continue on a newly added element.
  * <p>
@@ -88,8 +88,8 @@ import java.util.function.Predicate;
 public interface IPosition<T, P extends IPosition<T, P>> extends IPositionHolder<T, P> {
     /**
      * @param offset offset to current position
-     *
-     * FIX: allow getIndex(offset) to return -1
+     *               <p>
+     *               FIX: allow getIndex(offset) to return -1
      * @return absolute index in list, even if this position is not valid, it will always be [-1, list.size()]
      */
     int getIndex(int offset);

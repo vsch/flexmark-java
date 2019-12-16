@@ -2,8 +2,8 @@ package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
-import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.formatter.Formatter;
+import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;

@@ -131,7 +131,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
             }
         }
 
-        assert nextPos <= textLength : "prevRange: " + originalPrev + ", '"+ Utils.escapeJavaString(text)+"', nextRange: " + originalNext;
+        assert nextPos <= textLength : "prevRange: " + originalPrev + ", '" + Utils.escapeJavaString(text) + "', nextRange: " + originalNext;
 
         int matchedPrev = prevPos;
         int matchedNext = textLength - nextPos;
@@ -143,7 +143,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
             // this cannot happen with one range match only. It would mean we matched more chars than are available between ranges without both ranges matching these from each end
             // overlaps can only occur when string contains sequence that can be matched by both ranges. Otherwise match ends at least one char before other range begins because there is no match
             // otherwise the range would match from the other end.
-            assert matchedNext > 0 && matchedPrev > 0 : "prevRange: " + originalPrev + ", '"+ Utils.escapeJavaString(text)+"', nextRange: " + originalNext;
+            assert matchedNext > 0 && matchedPrev > 0 : "prevRange: " + originalPrev + ", '" + Utils.escapeJavaString(text) + "', nextRange: " + originalNext;
 
             // the two positions may not overlap but the matches together may exceed the span between ranges
             switch (anchor) {

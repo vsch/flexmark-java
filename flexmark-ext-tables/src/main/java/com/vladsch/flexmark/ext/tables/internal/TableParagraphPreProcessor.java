@@ -185,7 +185,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
 
             BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL()
-                : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolEndLength());
+                    : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolEndLength());
 
             if (separatorLineNumber == -1) {
                 if (rowNumber >= options.minHeaderRows

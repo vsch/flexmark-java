@@ -37,7 +37,7 @@ public class BasedOffsetTrackerTest {
 
         SequenceBuilder builder1 = sequence.getBuilder();
         if (offset >= 0 && offset < sequence.length()) {
-            sequence.subSequence(0,offset).addSegments(builder1.getSegmentBuilder());
+            sequence.subSequence(0, offset).addSegments(builder1.getSegmentBuilder());
             builder1.append("⦙");
             sequence.subSequence(offset).addSegments(builder1.getSegmentBuilder());
         } else {

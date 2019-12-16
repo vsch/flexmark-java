@@ -290,7 +290,7 @@ public interface SequenceUtils {
      * @return true if character contents are equal
      */
     @Contract(pure = true, value = "_, null -> false")
-    static boolean equals(@NotNull CharSequence thizz,  Object o) {
+    static boolean equals(@NotNull CharSequence thizz, Object o) {
         // do quick failure of equality
         if (o == thizz) return true;
         if (!(o instanceof CharSequence)) return false;

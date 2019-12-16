@@ -24,7 +24,7 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     }
 
     public MarkdownWriterBase(int formatOptions) {
-        this(formatOptions,null);
+        this(formatOptions, null);
     }
 
     public MarkdownWriterBase(int formatOptions, @Nullable SequenceBuilder builder) {

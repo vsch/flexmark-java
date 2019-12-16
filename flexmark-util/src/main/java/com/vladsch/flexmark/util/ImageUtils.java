@@ -50,8 +50,8 @@ import java.awt.image.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.regex.Pattern;
 import java.util.Base64;
+import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.util.Utils.minLimit;
 

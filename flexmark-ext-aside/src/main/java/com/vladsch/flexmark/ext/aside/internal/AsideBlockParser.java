@@ -5,11 +5,11 @@ import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.core.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.mappers.SpecialLeadInStartsWithCharsHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -152,7 +152,6 @@ public class AsideBlockParser extends AbstractBlockParser {
         public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
             return AsideLeadInHandler.HANDLER;
         }
-
 
         @Override
         public boolean affectsGlobalScope() {

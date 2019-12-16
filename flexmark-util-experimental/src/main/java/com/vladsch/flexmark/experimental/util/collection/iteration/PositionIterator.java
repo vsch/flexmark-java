@@ -7,12 +7,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static com.vladsch.flexmark.util.sequence.PositionAnchor.*;
+import static com.vladsch.flexmark.util.sequence.PositionAnchor.CURRENT;
+import static com.vladsch.flexmark.util.sequence.PositionAnchor.PREVIOUS;
 
 /**
  * Bidirectional iterator, direction depends on the position anchor NEXT is a forward iterator, PREVIOUS is a reverse iterator
- * @param <T>  type of element held by position
- * @param <P>  type of position iterated over
+ *
+ * @param <T> type of element held by position
+ * @param <P> type of position iterated over
  */
 class PositionIterator<T, P extends IPositionHolder<T, P>> implements Iterator<P> {
     private @Nullable P myIndex;

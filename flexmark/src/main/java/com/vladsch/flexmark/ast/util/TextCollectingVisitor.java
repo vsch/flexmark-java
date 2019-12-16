@@ -37,12 +37,12 @@ public class TextCollectingVisitor {
         myLineBreakNodes = lineBreakNodes.length == 0 ? null : new HashSet<>(Arrays.asList(lineBreakNodes));
 
         myVisitor = new NodeVisitor(
-            new VisitHandler<>(Text.class, this::visit),
-            new VisitHandler<>(TextBase.class, this::visit),
-            new VisitHandler<>(HtmlEntity.class, this::visit),
-            new VisitHandler<>(SoftLineBreak.class, this::visit),
-            new VisitHandler<>(Paragraph.class, this::visit),
-            new VisitHandler<>(HardLineBreak.class, this::visit)
+                new VisitHandler<>(Text.class, this::visit),
+                new VisitHandler<>(TextBase.class, this::visit),
+                new VisitHandler<>(HtmlEntity.class, this::visit),
+                new VisitHandler<>(SoftLineBreak.class, this::visit),
+                new VisitHandler<>(Paragraph.class, this::visit),
+                new VisitHandler<>(HardLineBreak.class, this::visit)
         )
         {
             @Override

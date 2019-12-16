@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -130,6 +130,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
 
     /**
      * Get the segment tree for this sequence
+     *
      * @return segment tree
      */
     @NotNull

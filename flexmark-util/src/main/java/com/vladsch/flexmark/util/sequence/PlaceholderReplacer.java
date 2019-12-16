@@ -6,9 +6,8 @@ import java.util.function.Function;
 
 /**
  * Used to replace placeholder text in the form of open/close char such as &lt;text&gt; in a markdown document.
- *
+ * <p>
  * Used by docx conversion application to replace custom fields.
- *
  */
 public class PlaceholderReplacer {
     public static <T> void replaceAll(Collection<T> spanList, Function<String, String> mapper, char openPlaceholder, char closePlaceholder, Function<T, String> getter, BiConsumer<T, String> setter) {

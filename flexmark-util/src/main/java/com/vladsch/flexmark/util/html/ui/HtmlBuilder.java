@@ -192,7 +192,7 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
 
     public HtmlBuilder append(char[] str) { return super.append(String.valueOf(str)); }
 
-    public HtmlBuilder append(char[] str, int offset, int len) { return super.append(String.valueOf(str, offset,len)); }
+    public HtmlBuilder append(char[] str, int offset, int len) { return super.append(String.valueOf(str, offset, len)); }
 
     public HtmlBuilder append(boolean b) { return super.append(b ? "true" : "false"); }
 
