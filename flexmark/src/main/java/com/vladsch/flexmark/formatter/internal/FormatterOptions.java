@@ -15,6 +15,7 @@ public class FormatterOptions {
     public final int formatFlags;
     public final int maxBlankLines;
     public final int maxTrailingBlankLines;
+    public final int rightMargin;
     public final int minSetextMarkerLength;
     public final DiscretionaryText spaceAfterAtxMarker;
     public final EqualizeTrailingMarker atxHeaderTrailingMarker;
@@ -50,6 +51,7 @@ public class FormatterOptions {
     public final boolean keepSoftLineBreaks;
     public final boolean appendTransferredReferences;
     public final boolean optimizedInlineRendering;
+    public final boolean applySpecialLeadInHandlers;
     public final CharWidthProvider charWidthProvider;
     //public final TrailingSpaces keepTrailingSpaces;
     //public final TrailingSpaces codeKeepTrailingSpaces;
@@ -62,6 +64,7 @@ public class FormatterOptions {
         formatFlags = Formatter.FORMAT_FLAGS.get(options);
         maxBlankLines = Formatter.MAX_BLANK_LINES.get(options);
         maxTrailingBlankLines = Formatter.MAX_TRAILING_BLANK_LINES.get(options);
+        rightMargin = Formatter.RIGHT_MARGIN.get(options);
         minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
         spaceAfterAtxMarker = Formatter.SPACE_AFTER_ATX_MARKER.get(options);
         atxHeaderTrailingMarker = Formatter.ATX_HEADER_TRAILING_MARKER.get(options);
@@ -98,6 +101,7 @@ public class FormatterOptions {
         keepSoftLineBreaks = Formatter.KEEP_SOFT_LINE_BREAKS.get(options);
         appendTransferredReferences = Formatter.APPEND_TRANSFERRED_REFERENCES.get(options);
         optimizedInlineRendering = Formatter.OPTIMIZED_INLINE_RENDERING.get(options);
+        applySpecialLeadInHandlers = Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS.get(options);
         //keepTrailingSpaces = Formatter.KEEP_TRAILING_SPACES.getFrom(options);
         //codeKeepTrailingSpaces = Formatter.CODE_KEEP_TRAILING_SPACES.getFrom(options);
     }

@@ -9,7 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.72](#next-05972)
+- [0.59.72](#05972)
 - [0.59.70](#05970)
 - [0.59.68](#05968)
 - [0.59.66](#05966)
@@ -190,19 +190,14 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 ## Next 0.59.xx
 
 + [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with non builder
-      arguments to use `SequenceBuilder` throughout library code. This happens anyway in
-      `SegmentedSequence.create` for non-builder arg, should make it explicit.
+      arguments to use `SequenceBuilder` throughout library code, except where
+      `PrefixedSubSequence` is used as is without immediately wrapping in `SegmentedSequence`.
+      This happens anyway in `SegmentedSequence.create` for non-builder arg, should make it
+      explicit.
 + [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
       implementation.
 + [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
       extension add order
-* [ ] Add: `Formatter` Paragraph wrapping options and code.
-* [ ] Fix: Document docx form controls in wiki
-* [ ] Fix: spec files no longer render HTML when option selected.
-- [ ] Add: position tracking resolver based on original sequence tracked and final result.
-
-## Next 0.59.72
-
 + [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
   + [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `SequenceBuilder` can optimize
@@ -212,6 +207,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   + [ ] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
+* [ ] Fix: Document docx form controls in wiki
+
+## 0.59.72
+
+* Add: `Formatter` Paragraph wrapping options and code.
+  * Add: `Formatter.RIGHT_MARGIN`, default `0`, if >0 then text will be wrapped to given margin
+  * Add: `Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS`, default `true`, when true will escape
+    special lead-in characters which wrap to beginning of line and un-escape any which wrap from
+    beginning of line. Used to prevent special characters inside paragraph body from starting a
+    new element when wrapped to beginning of line.
 * Add: `CustomBlockParserFactory.getLeadInHandler(DataHolder)` and handle escaping/unescaping
   special lead in characters for the block elements. Add escape/unescape to:
   * `BlockQuoteParser`

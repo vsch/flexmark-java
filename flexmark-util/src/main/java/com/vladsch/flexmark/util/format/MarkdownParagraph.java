@@ -104,7 +104,7 @@ public class MarkdownParagraph {
         return keepLineBreaks;
     }
 
-    public void setKeepLineBreaks(boolean keepLineBreaks) {
+    public void setKeepSoftLineBreaks(boolean keepLineBreaks) {
         this.keepLineBreaks = keepLineBreaks;
     }
 

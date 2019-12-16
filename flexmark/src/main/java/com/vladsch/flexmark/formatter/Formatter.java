@@ -58,6 +58,8 @@ public class Formatter implements IRender {
 
     public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_BLANK_LINES;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_TRAILING_BLANK_LINES;
+    public static final DataKey<Integer> RIGHT_MARGIN = new DataKey<>("RIGHT_MARGIN", 0);
+    public static final DataKey<Boolean> APPLY_SPECIAL_LEAD_IN_HANDLERS = new DataKey<>("APPLY_SPECIAL_LEAD_IN_HANDLERS", true);
     public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER = new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
     public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER = new DataKey<>("SETEXT_HEADER_EQUALIZE_MARKER", true);
     public static final DataKey<EqualizeTrailingMarker> ATX_HEADER_TRAILING_MARKER = new DataKey<>("ATX_HEADER_TRAILING_MARKER", EqualizeTrailingMarker.AS_IS);
@@ -818,7 +820,15 @@ public class Formatter implements IRender {
             MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions());
             writer.setContext(this);
             //noinspection ReturnOfInnerClass
-            return new SubNodeFormatter(this, writer);
+            return new SubNodeFormatter(this, writer, null);
+        }
+
+        @Override
+        public NodeFormatterContext getSubContext(DataHolder options) {
+            MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions());
+            writer.setContext(this);
+            //noinspection ReturnOfInnerClass
+            return new SubNodeFormatter(this, writer, options);
         }
 
         void renderNode(Node node, NodeFormatterSubContext subContext) {
@@ -886,10 +896,14 @@ public class Formatter implements IRender {
         @SuppressWarnings("WeakerAccess")
         private class SubNodeFormatter extends NodeFormatterSubContext implements NodeFormatterContext {
             private final MainNodeFormatter myMainNodeRenderer;
+            private final DataHolder myOptions;
+            private final FormatterOptions myFormatterOptions;
 
-            public SubNodeFormatter(MainNodeFormatter mainNodeRenderer, MarkdownWriter out) {
+            public SubNodeFormatter(MainNodeFormatter mainNodeRenderer, MarkdownWriter out, @Nullable DataHolder options) {
                 super(out);
                 myMainNodeRenderer = mainNodeRenderer;
+                myOptions = options == null ? myMainNodeRenderer.getOptions() : new ScopedDataSet(myMainNodeRenderer.getOptions(), options);
+                myFormatterOptions = new FormatterOptions(myOptions);
             }
 
             @NotNull
@@ -924,11 +938,11 @@ public class Formatter implements IRender {
 
             @NotNull
             @Override
-            public DataHolder getOptions() {return myMainNodeRenderer.getOptions();}
+            public DataHolder getOptions() {return myOptions;}
 
             @NotNull
             @Override
-            public FormatterOptions getFormatterOptions() {return myMainNodeRenderer.getFormatterOptions();}
+            public FormatterOptions getFormatterOptions() {return myFormatterOptions;}
 
             @NotNull
             @Override
@@ -954,7 +968,15 @@ public class Formatter implements IRender {
                 MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
-                return new SubNodeFormatter(myMainNodeRenderer, htmlWriter);
+                return new SubNodeFormatter(myMainNodeRenderer, htmlWriter, myOptions);
+            }
+
+            @Override
+            public NodeFormatterContext getSubContext(DataHolder options) {
+                MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions());
+                htmlWriter.setContext(this);
+                //noinspection ReturnOfInnerClass
+                return new SubNodeFormatter(myMainNodeRenderer, htmlWriter, new ScopedDataSet(myOptions,options));
             }
 
             @Override

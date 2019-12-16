@@ -24,6 +24,7 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
     HtmlMarkdownWriter getMarkdown();
 
     void delegateRender();
+
     /**
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
      * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
@@ -31,6 +32,14 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      * @return a new rendering context with a given appendable for its output
      */
     HtmlNodeConverterContext getSubContext();
+
+    /**
+     * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
+     * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
+     *
+     * @return a new rendering context with a given appendable for its output
+     */
+    HtmlNodeConverterContext getSubContext(DataHolder options);
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child

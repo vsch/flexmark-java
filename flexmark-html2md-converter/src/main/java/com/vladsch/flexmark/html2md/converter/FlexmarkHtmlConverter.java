@@ -24,6 +24,7 @@ import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.html.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -829,7 +830,14 @@ public class FlexmarkHtmlConverter {
         public HtmlNodeConverterContext getSubContext() {
             HtmlMarkdownWriter writer = new HtmlMarkdownWriter(getMarkdown().getOptions());
             //writer.setContext(this); // set this temporarily
-            return new SubHtmlNodeConverter(this, writer);
+            return new SubHtmlNodeConverter(this, writer, null);
+        }
+
+        @Override
+        public HtmlNodeConverterContext getSubContext(DataHolder options) {
+            HtmlMarkdownWriter writer = new HtmlMarkdownWriter(getMarkdown().getOptions());
+            //writer.setContext(this); // set this temporarily
+            return new SubHtmlNodeConverter(this, writer, options);
         }
 
         void renderNode(Node node, HtmlNodeConverterSubContext subContext) {
@@ -1273,14 +1281,16 @@ public class FlexmarkHtmlConverter {
         @SuppressWarnings("WeakerAccess")
         private class SubHtmlNodeConverter extends HtmlNodeConverterSubContext implements HtmlNodeConverterContext {
             private final MainHtmlConverter myMainNodeRenderer;
+            private final DataHolder myOptions;
 
-            public SubHtmlNodeConverter(MainHtmlConverter mainNodeRenderer, HtmlMarkdownWriter out) {
+            public SubHtmlNodeConverter(MainHtmlConverter mainNodeRenderer, HtmlMarkdownWriter out, @Nullable DataHolder options) {
                 super(out);
                 myMainNodeRenderer = mainNodeRenderer;
+                myOptions = options == null ? myMainNodeRenderer.getOptions() : new ScopedDataSet(myMainNodeRenderer.getOptions(), options);
             }
 
             @Override
-            public DataHolder getOptions() {return myMainNodeRenderer.getOptions();}
+            public DataHolder getOptions() {return myOptions;}
 
             @Override
             public HtmlConverterOptions getHtmlConverterOptions() {return myMainNodeRenderer.getHtmlConverterOptions();}
@@ -1306,7 +1316,15 @@ public class FlexmarkHtmlConverter {
                 HtmlMarkdownWriter htmlWriter = new HtmlMarkdownWriter(this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
-                return new SubHtmlNodeConverter(myMainNodeRenderer, htmlWriter);
+                return new SubHtmlNodeConverter(myMainNodeRenderer, htmlWriter, null);
+            }
+
+            @Override
+            public HtmlNodeConverterContext getSubContext(DataHolder options) {
+                HtmlMarkdownWriter htmlWriter = new HtmlMarkdownWriter(this.markdown.getOptions());
+                htmlWriter.setContext(this);
+                //noinspection ReturnOfInnerClass
+                return new SubHtmlNodeConverter(myMainNodeRenderer, htmlWriter, new ScopedDataSet(myOptions, options));
             }
 
             @Override

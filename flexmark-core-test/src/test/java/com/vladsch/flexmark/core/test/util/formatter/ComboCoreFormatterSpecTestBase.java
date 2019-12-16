@@ -62,6 +62,15 @@ public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
         optionsMap.put("remove-empty-items", new MutableDataSet().set(Formatter.LIST_REMOVE_EMPTY_ITEMS, true));
         optionsMap.put("no-hard-breaks", new MutableDataSet().set(Formatter.KEEP_HARD_LINE_BREAKS, false));
         optionsMap.put("no-soft-breaks", new MutableDataSet().set(Formatter.KEEP_SOFT_LINE_BREAKS, false));
+        optionsMap.put("right-margin-30", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 30));
+        optionsMap.put("right-margin-40", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 40));
+        optionsMap.put("right-margin-50", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 50));
+        optionsMap.put("right-margin-60", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 60));
+        optionsMap.put("right-margin-70", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 70));
+        optionsMap.put("right-margin-80", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 80));
+        optionsMap.put("right-margin-90", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 90));
+        optionsMap.put("apply-escapers", new MutableDataSet().set(Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS, true));
+        optionsMap.put("no-apply-escapers", new MutableDataSet().set(Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS, false));
     }
     public ComboCoreFormatterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), defaultOptions);

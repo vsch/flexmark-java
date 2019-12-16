@@ -163,6 +163,10 @@ public class LineFormattingAppendableImpl implements LineAppendable {
         return this;
     }
 
+    public int getAfterEolPrefixDelta() {
+        return SequenceUtils.equals(prefixAfterEol, prefix) ? 0 : prefixAfterEol.length() - prefix.length();
+    }
+
     @NotNull
     @Override
     public LineAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol) {
@@ -705,7 +709,6 @@ public class LineFormattingAppendableImpl implements LineAppendable {
         return result;
     }
 
-
     @Override
     public void setLinePrefixIndex(int lineIndex, int prefixEndIndex) {
 
@@ -956,8 +959,6 @@ public class LineFormattingAppendableImpl implements LineAppendable {
 
     @Override
     public void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines) {
-        if (this.builder == null) return;
-
         line();
         int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
 

@@ -31,7 +31,7 @@ public class BasedOffsetTrackerTest {
         formatter.setFirstIndent(0);
         formatter.setWidth(66);
         formatter.setFirstWidthOffset(0);
-        formatter.setKeepLineBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepSoftLineBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
         BasedSequence actual = formatter.wrapText();

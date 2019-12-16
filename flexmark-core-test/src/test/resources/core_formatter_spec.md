@@ -2489,11 +2489,177 @@ Document[0, 132]
 ````````````````````````````````
 
 
-## Issue 243
+## Wrap
+
+```````````````````````````````` example(Wrap: 1) options(right-margin-30)
+Paragraph with hard break and more text.
+
+Paragraph with soft break and more text.
+
+Paragraph with hard break and more text.
+
+.
+Paragraph with hard break and
+more text.
+
+Paragraph with soft break and
+more text.
+
+Paragraph with hard break and
+more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 2) options(right-margin-30)
+Paragraph with hard break and # more text.
+
+Paragraph with soft break and * more text.
+                               
+Paragraph with hard break and 1. more text.
+
+.
+Paragraph with hard break and
+\# more text.
+
+Paragraph with soft break and
+\* more text.
+
+Paragraph with hard break and
+1\. more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 3) options(right-margin-30, no-apply-escapers)
+Paragraph with hard break and # more text.
+
+Paragraph with soft break and * more text.
+                               
+Paragraph with hard break and 1. more text.
+
+.
+Paragraph with hard break and
+# more text.
+
+Paragraph with soft break and
+* more text.
+
+Paragraph with hard break and
+1. more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 4) options(right-margin-60, no-soft-breaks)
+Paragraph with hard break and
+\# more text.
+
+Paragraph with soft break and
+\* more text.
+
+Paragraph with hard break and
+1\. more text.
+
+.
+Paragraph with hard break and # more text.
+
+Paragraph with soft break and * more text.
+
+Paragraph with hard break and 1. more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 5) options(right-margin-60, no-apply-escapers, no-soft-breaks)
+Paragraph with hard break and
+\# more text.
+
+Paragraph with soft break and
+\* more text.
+
+Paragraph with hard break and
+1\. more text.
+
+.
+Paragraph with hard break and \# more text.
+
+Paragraph with soft break and \* more text.
+
+Paragraph with hard break and 1\. more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 6) options(right-margin-30)
+* Paragraph with hard break and more text.
+
+1. Paragraph with soft break and more text.
+                               
+.
+* Paragraph with hard break and
+  more text.
+
+1. Paragraph with soft break and
+   more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 7) options(right-margin-30, explicit-links-at-start)
+* Paragraph with hard break and more text. [Test](test) text. 
+    
+1. Paragraph with soft break and more text. ![Test](test) text. 
+                               
+.
+* Paragraph with hard break and
+  more text.
+  [Test](test) text.
+
+1. Paragraph with soft break and
+   more text. ![Test](test) text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 8) options(right-margin-30)
+* Paragraph with hard break and more text. [Test](test) text. 
+    
+1. Paragraph with soft break and more text. ![Test](test) text. 
+                               
+.
+* Paragraph with hard break and
+  more text. [Test](test) text.
+
+1. Paragraph with soft break and
+   more text. ![Test](test) text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 9) options(right-margin-30, image-links-at-start)
+* Paragraph with hard break and more text. [Test](test) text. 
+    
+1. Paragraph with soft break and more text. ![Test](test) text. 
+                               
+.
+* Paragraph with hard break and
+  more text. [Test](test) text.
+
+1. Paragraph with soft break and
+   more text.
+   ![Test](test) text.
+
+````````````````````````````````
+
+
+## Issue
+
+### 243
 
 Issue #243
 
-```````````````````````````````` example Issue 243: 1
+```````````````````````````````` example Issue - 243: 1
 ![Alt text][id]
 
 [id]: https://www.example.com/img.png "test"
@@ -2514,7 +2680,7 @@ Document[0, 61]
 
 bare image
 
-```````````````````````````````` example Issue 243: 2
+```````````````````````````````` example Issue - 243: 2
 ![id][]
 
 [id]: https://www.example.com/img.png "test"
@@ -2533,11 +2699,11 @@ Document[0, 53]
 ````````````````````````````````
 
 
-## Issue 271
+### 271
 
 Issue #271, Regression? Comments are presereved in 0.26.4 but removed in 0.34.40
 
-```````````````````````````````` example Issue 271: 1
+```````````````````````````````` example Issue - 271: 1
 Table of contents:
 
 <!-- TOC depthFrom:2 -->

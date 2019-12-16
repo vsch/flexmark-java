@@ -3,6 +3,7 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
@@ -12,6 +13,7 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
@@ -19,6 +21,7 @@ import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +50,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
     }
 
-    private final FormatterOptions formatterOptions;
+    final FormatterOptions formatterOptions;
     private final ListOptions listOptions;
     private final String myHtmlBlockPrefix;
     private final String myHtmlInlinePrefix;
@@ -59,12 +62,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     public CoreNodeFormatter(DataHolder options) {
         super(options, null, UNIQUIFICATION_MAP);
-        this.formatterOptions = new FormatterOptions(options);
+        formatterOptions = new FormatterOptions(options);
         this.listOptions = ListOptions.get(options);
         blankLines = 0;
-        myHtmlBlockPrefix = "<" + this.formatterOptions.translationHtmlBlockPrefix;
-        myHtmlInlinePrefix = this.formatterOptions.translationHtmlInlinePrefix;
-        myTranslationAutolinkPrefix = this.formatterOptions.translationAutolinkPrefix;
+        myHtmlBlockPrefix = "<" + formatterOptions.translationHtmlBlockPrefix;
+        myHtmlInlinePrefix = formatterOptions.translationHtmlInlinePrefix;
+        myTranslationAutolinkPrefix = formatterOptions.translationAutolinkPrefix;
     }
 
     @Nullable
@@ -260,7 +263,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 }
             }
         } else {
-            if (formatterOptions.keepSoftLineBreaks) {
+            if (context.getFormatterOptions().keepSoftLineBreaks) {
                 markdown.append(chars);
             } else {
                 markdown.append(stripSoftLineBreak(chars));
@@ -288,7 +291,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 blankLines = 0;
             }
             blankLines++;
-            if (blankLines <= formatterOptions.maxBlankLines) markdown.blankLine(blankLines);
+            if (blankLines <= context.getFormatterOptions().maxBlankLines) markdown.blankLine(blankLines);
         }
     }
 
@@ -302,14 +305,14 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.blankLine();
         if (node.isAtxHeading()) {
             markdown.append(node.getOpeningMarker());
-            boolean spaceAfterAtx = formatterOptions.spaceAfterAtxMarker == ADD
-                    || formatterOptions.spaceAfterAtxMarker == AS_IS && node.getOpeningMarker().getEndOffset() < node.getText().getStartOffset();
+            boolean spaceAfterAtx = context.getFormatterOptions().spaceAfterAtxMarker == ADD
+                    || context.getFormatterOptions().spaceAfterAtxMarker == AS_IS && node.getOpeningMarker().getEndOffset() < node.getText().getStartOffset();
 
             if (spaceAfterAtx) markdown.append(' ');
 
             context.translatingRefTargetSpan(node, (context12, writer) -> context12.renderChildren(node));
 
-            switch (formatterOptions.atxHeaderTrailingMarker) {
+            switch (context.getFormatterOptions().atxHeaderTrailingMarker) {
                 case EQUALIZE:
                     if (node.getOpeningMarker().isNull()) break;
                     // fall through
@@ -349,8 +352,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             markdown.line();
 
-            if (formatterOptions.setextHeaderEqualizeMarker) {
-                markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
+            if (context.getFormatterOptions().setextHeaderEqualizeMarker) {
+                markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, context.getFormatterOptions().minSetextMarkerLength));
             } else {
                 markdown.append(node.getClosingMarker());
             }
@@ -362,7 +365,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         String prefix = node.getOpeningMarker().toString();
         boolean compactPrefix = false;
 
-        switch (formatterOptions.blockQuoteMarkers) {
+        switch (context.getFormatterOptions().blockQuoteMarkers) {
             case AS_IS:
                 prefix = node.baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
                 break;
@@ -378,7 +381,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 break;
         }
 
-        if (formatterOptions.blockQuoteBlankLines) markdown.blankLine();
+        if (context.getFormatterOptions().blockQuoteBlankLines) markdown.blankLine();
         markdown.pushPrefix();
 
         // create combined prefix, compact if needed
@@ -392,13 +395,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.setPrefix(combinedPrefix, false);
         context.renderChildren(node);
         markdown.popPrefix();
-        if (formatterOptions.blockQuoteBlankLines) markdown.blankLine();
+        if (context.getFormatterOptions().blockQuoteBlankLines) markdown.blankLine();
     }
 
     private void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
-        if (formatterOptions.thematicBreak != null) {
-            markdown.append(formatterOptions.thematicBreak);
+        if (context.getFormatterOptions().thematicBreak != null) {
+            markdown.append(context.getFormatterOptions().thematicBreak);
         } else {
             markdown.append(node.getChars());
         }
@@ -415,7 +418,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         int openingMarkerLen = openingMarker.length();
         int closingMarkerLen = closingMarker.length();
 
-        switch (formatterOptions.fencedCodeMarkerType) {
+        switch (context.getFormatterOptions().fencedCodeMarkerType) {
             case ANY:
                 break;
             case BACK_TICK:
@@ -428,14 +431,14 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 break;
         }
 
-        if (openingMarkerLen < formatterOptions.fencedCodeMarkerLength) openingMarkerLen = formatterOptions.fencedCodeMarkerLength;
-        if (closingMarkerLen < formatterOptions.fencedCodeMarkerLength) closingMarkerLen = formatterOptions.fencedCodeMarkerLength;
+        if (openingMarkerLen < context.getFormatterOptions().fencedCodeMarkerLength) openingMarkerLen = context.getFormatterOptions().fencedCodeMarkerLength;
+        if (closingMarkerLen < context.getFormatterOptions().fencedCodeMarkerLength) closingMarkerLen = context.getFormatterOptions().fencedCodeMarkerLength;
 
         openingMarker = RepeatedSequence.repeatOf(String.valueOf(openingMarkerChar), openingMarkerLen);
-        if (formatterOptions.fencedCodeMatchClosingMarker || closingMarkerChar == SequenceUtils.NUL) { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.repeatOf(String.valueOf(closingMarkerChar), closingMarkerLen);
+        if (context.getFormatterOptions().fencedCodeMatchClosingMarker || closingMarkerChar == SequenceUtils.NUL) { closingMarker = openingMarker; } else closingMarker = RepeatedSequence.repeatOf(String.valueOf(closingMarkerChar), closingMarkerLen);
 
         markdown.append(openingMarker);
-        if (formatterOptions.fencedCodeSpaceBeforeInfo) markdown.append(' ');
+        if (context.getFormatterOptions().fencedCodeSpaceBeforeInfo) markdown.append(' ');
         markdown.appendNonTranslating(node.getInfo());
         markdown.line();
 
@@ -443,7 +446,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (context.isTransformingText()) {
             markdown.appendNonTranslating(node.getContentChars());
         } else {
-            if (formatterOptions.fencedCodeMinimizeIndent) {
+            if (context.getFormatterOptions().fencedCodeMinimizeIndent) {
                 List<BasedSequence> lines = node.getContentLines();
                 int[] leadColumns = new int[lines.size()];
                 int minSpaces = Integer.MAX_VALUE;
@@ -499,7 +502,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         } else {
             String prefix = RepeatedSequence.repeatOf(" ", listOptions.getCodeIndent()).toString();
 
-            if (formatterOptions.emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
+            if (context.getFormatterOptions().emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
                 if (node.getParent() instanceof ListItem) {
                     BasedSequence marker = ((ListItem) node.getParent()).getOpeningMarker();
                     prefix = RepeatedSequence.repeatOf(" ", Utils.minLimit(8 - marker.length() - 1, 4)).toString();
@@ -509,7 +512,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.pushPrefix().addPrefix(prefix);
             markdown.openPreFormatted(true);
 
-            if (formatterOptions.indentedCodeMinimizeIndent) {
+            if (context.getFormatterOptions().indentedCodeMinimizeIndent) {
                 List<BasedSequence> lines = node.getContentLines();
                 int[] leadColumns = new int[lines.size()];
                 int minSpaces = Integer.MAX_VALUE;
@@ -791,7 +794,37 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     @SuppressWarnings("WeakerAccess")
     public static void renderTextBlockParagraphLines(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
-        context.translatingSpan((context1, writer) -> context1.renderChildren(node));
+        if (context.isTransformingText()) {
+            context.translatingSpan((context1, writer) -> context1.renderChildren(node));
+        } else {
+            FormatterOptions formatterOptions = context.getFormatterOptions();
+            if (formatterOptions.rightMargin > 0) {
+                NodeFormatterContext subContext = context.getSubContext(context.getOptions().toMutable().set(Formatter.KEEP_SOFT_LINE_BREAKS, true).set(Formatter.KEEP_HARD_LINE_BREAKS, true));
+                subContext.renderChildren(node);
+
+                SequenceBuilder builder = node.getChars().getBuilder();
+                MarkdownWriter subContextMarkdown = subContext.getMarkdown();
+                String text = subContextMarkdown.toString(0);
+                subContextMarkdown.toBuilder(builder, 0);
+
+                MarkdownParagraph formatter = new MarkdownParagraph(builder.toSequence(), formatterOptions.charWidthProvider);
+                formatter.setWidth(formatterOptions.rightMargin);
+                formatter.setKeepSoftLineBreaks(formatterOptions.keepSoftLineBreaks);
+                formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
+                formatter.setFirstIndent(0);
+                formatter.setIndent(0);
+
+                // adjust first line width, based on change in prefix after the first line EOL
+                formatter.setFirstWidthOffset(markdown.getAfterEolPrefixDelta());
+
+                if (formatterOptions.applySpecialLeadInHandlers) {
+                    formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
+                }
+                markdown.append(formatter.wrapText());
+            } else {
+                context.renderChildren(node);
+            }
+        }
         markdown.line();
     }
 
@@ -875,7 +908,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(SoftLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (formatterOptions.keepSoftLineBreaks) {
+        if (context.getFormatterOptions().keepSoftLineBreaks) {
             markdown.append(node.getChars());
         } else if (!markdown.isPendingSpace()) {
             // need to add a space
@@ -884,7 +917,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(HardLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (formatterOptions.keepHardLineBreaks) {
+        if (context.getFormatterOptions().keepHardLineBreaks) {
             if (context.getRenderPurpose() == FORMAT) {
                 markdown.append(node.getChars());
             } else {
@@ -907,7 +940,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (formatterOptions.keepSoftLineBreaks) {
+        if (context.getFormatterOptions().keepSoftLineBreaks) {
             markdown.append(node.getChars());
         } else {
             markdown.append(stripSoftLineBreak(node.getChars()));
@@ -920,7 +953,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(Code node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append(node.getOpeningMarker());
-        if (formatterOptions.keepSoftLineBreaks) {
+        if (context.getFormatterOptions().keepSoftLineBreaks) {
             markdown.appendNonTranslating(node.getText());
         } else {
             markdown.append(stripSoftLineBreak(node.getText()));
@@ -1125,8 +1158,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(Image node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.lineIf(formatterOptions.keepImageLinksAtStart);
-        if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
+        if (!context.isTransformingText() && context.getFormatterOptions().rightMargin > 0 && context.getFormatterOptions().keepImageLinksAtStart) {
+            markdown.append(SequenceUtils.LS);
+        } else {
+            markdown.lineIf(context.getFormatterOptions().keepImageLinksAtStart);
+        }
+
+        if (!context.getFormatterOptions().optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
             if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
                 context.renderChildren(node);
@@ -1163,8 +1201,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(Link node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.lineIf(formatterOptions.keepExplicitLinksAtStart);
-        if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
+        if (!context.isTransformingText() && context.getFormatterOptions().rightMargin > 0 && context.getFormatterOptions().keepExplicitLinksAtStart) {
+            markdown.append(SequenceUtils.LS);
+        } else {
+            markdown.lineIf(context.getFormatterOptions().keepExplicitLinksAtStart);
+        }
+
+        if (!context.getFormatterOptions().optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
             if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
                 context.renderChildren(node);
@@ -1221,7 +1264,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(ImageRef node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
+        if (!context.getFormatterOptions().optimizedInlineRendering || context.isTransformingText()) {
             if (node.isReferenceTextCombined()) {
                 markdown.append(node.getReferenceOpeningMarker());
                 markdown.appendTranslating(node.getReference());
@@ -1248,7 +1291,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(LinkRef node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (!formatterOptions.optimizedInlineRendering || context.isTransformingText()) {
+        if (!context.getFormatterOptions().optimizedInlineRendering || context.isTransformingText()) {
             if (node.isReferenceTextCombined()) {
                 markdown.append(node.getReferenceOpeningMarker());
                 appendWhiteSpaceBetween(markdown, node.getReferenceOpeningMarker(), node.getReference(), true, false, false);

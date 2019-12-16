@@ -581,6 +581,12 @@ public interface LineAppendable extends Appendable {
     @NotNull LineAppendable addPrefix(@NotNull CharSequence prefix, boolean afterEol);
 
     /**
+     * Get pending prefix after EOL
+     * @return change in prefix length after next eol
+     */
+    int getAfterEolPrefixDelta();
+
+    /**
      * Set prefix appended after a new line character for every line
      * and after a new line in pre-formatted sections
      * <p>

@@ -163,6 +163,10 @@ public class LineAppendableImpl implements LineAppendable {
         return this;
     }
 
+    public int getAfterEolPrefixDelta() {
+        return SequenceUtils.equals(prefixAfterEol, prefix) ? 0 : prefixAfterEol.length() - prefix.length();
+    }
+
     @NotNull
     @Override
     public LineAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol) {
