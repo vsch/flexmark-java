@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.aside.AsideBlock;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.core.*;
 import com.vladsch.flexmark.util.ast.Block;
@@ -144,6 +145,25 @@ public class AsideBlockParser extends AbstractBlockParser {
                     ListBlockParser.Factory.class,
                     IndentedCodeBlockParser.Factory.class
             ));
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
+            return (sequence, consumer) -> {
+                if (sequence.length() >= 1 && sequence.charAt(0) == '|') {
+                    consumer.accept("\\");
+                    consumer.accept(sequence);
+                }
+            };
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
+            return (sequence, consumer) -> {
+                if (sequence.length() >= 2 && sequence.charAt(0) == '\\' && sequence.charAt(1) == '|') {
+                    consumer.accept(sequence.subSequence(1));
+                }
+            };
         }
 
         @Override

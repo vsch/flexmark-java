@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ComboAsideSpecTest.class,
+        AsideParserTest.class,
         // JiraExtAsideSpecTest.class,
 })
 public class ExtAsideTestSuite {

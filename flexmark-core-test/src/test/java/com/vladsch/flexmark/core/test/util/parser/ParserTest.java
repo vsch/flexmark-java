@@ -3,9 +3,9 @@ package com.vladsch.flexmark.core.test.util.parser;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.test.specs.TestSpecLocator;
-import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -307,6 +308,199 @@ final public class ParserTest {
         assertEquals(37, node.getEndOffset());
 
         assertFalse(it.hasNext());
+    }
+
+    String escape(String input, Parser parser) {
+        BasedSequence baseSeq = BasedSequence.of(input);
+        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_ESCAPER_LIST.get(parser.getOptions());
+        StringBuilder sb = new StringBuilder();
+
+        for (SpecialLeadInHandler handler : handlers) {
+            handler.accept(baseSeq, sb::append);
+            if (sb.length() > 0) return sb.toString();
+        }
+        return input;
+    }
+
+    String unEscape(String input, Parser parser) {
+        BasedSequence baseSeq = BasedSequence.of(input);
+        List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_UN_ESCAPER_LIST.get(parser.getOptions());
+        StringBuilder sb = new StringBuilder();
+
+        for (SpecialLeadInHandler handler : handlers) {
+            handler.accept(baseSeq, sb::append);
+            if (sb.length() > 0) return sb.toString();
+        }
+        return input;
+    }
+
+    @Test
+    public void test_escapeBlockQuote() {
+        Parser parser = Parser.builder().build();
+
+        assertEquals("abc", escape("abc", parser));
+        assertEquals("\\>", escape(">", parser));
+        assertEquals("\\>abc", escape(">abc", parser));
+
+        assertEquals("abc", unEscape("abc", parser));
+        assertEquals(">", unEscape("\\>", parser));
+        assertEquals(">abc", unEscape("\\>abc", parser));
+    }
+
+    @Test
+    public void test_escapeHeading() {
+        Parser parser = Parser.builder().build();
+
+        assertEquals("abc", escape("abc", parser));
+        assertEquals("\\#", escape("#", parser));
+        assertEquals("#abc", escape("#abc", parser));
+
+        assertEquals("abc", unEscape("abc", parser));
+        assertEquals("#", unEscape("\\#", parser));
+        assertEquals("\\#abc", unEscape("\\#abc", parser));
+    }
+
+    @Test
+    public void test_escapeHeadingNoAtxSpace() {
+        Parser parser = Parser.builder(new MutableDataSet().set(Parser.HEADING_NO_ATX_SPACE, true)).build();
+
+        assertEquals("abc", escape("abc", parser));
+        assertEquals("\\#", escape("#", parser));
+        assertEquals("\\#abc", escape("#abc", parser));
+
+        assertEquals("abc", unEscape("abc", parser));
+        assertEquals("#", unEscape("\\#", parser));
+        assertEquals("#abc", unEscape("\\#abc", parser));
+    }
+
+    @Test
+    public void test_escapeUnorderedList() {
+        Parser parser = Parser.builder().build();
+
+        assertEquals("abc", escape("abc", parser));
+
+        assertEquals("\\+", escape("+", parser));
+        assertEquals("+abc", escape("+abc", parser));
+
+        assertEquals("\\-", escape("-", parser));
+        assertEquals("-abc", escape("-abc", parser));
+
+        assertEquals("\\*", escape("*", parser));
+        assertEquals("*abc", escape("*abc", parser));
+
+        assertEquals("+", unEscape("\\+", parser));
+        assertEquals("\\+abc", unEscape("\\+abc", parser));
+
+        assertEquals("-", unEscape("\\-", parser));
+        assertEquals("\\-abc", unEscape("\\-abc", parser));
+
+        assertEquals("*", unEscape("\\*", parser));
+        assertEquals("\\*abc", unEscape("\\*abc", parser));
+    }
+
+    @Test
+    public void test_escapeUnorderedListCustom() {
+        Parser parser = Parser.builder(new MutableDataSet().set(Parser.LISTS_ITEM_PREFIX_CHARS, "$")).build();
+
+        assertEquals("abc", escape("abc", parser));
+
+        assertEquals("\\$", escape("$", parser));
+        assertEquals("$abc", escape("$abc", parser));
+
+        assertEquals("$", unEscape("\\$", parser));
+        assertEquals("\\$abc", unEscape("\\$abc", parser));
+
+        assertEquals("+", escape("+", parser));
+        assertEquals("+abc", escape("+abc", parser));
+
+        assertEquals("-", escape("-", parser));
+        assertEquals("-abc", escape("-abc", parser));
+
+        assertEquals("*", escape("*", parser));
+        assertEquals("*abc", escape("*abc", parser));
+
+        assertEquals("\\+", unEscape("\\+", parser));
+        assertEquals("\\+abc", unEscape("\\+abc", parser));
+
+        assertEquals("\\-", unEscape("\\-", parser));
+        assertEquals("\\-abc", unEscape("\\-abc", parser));
+
+        assertEquals("\\*", unEscape("\\*", parser));
+        assertEquals("\\*abc", unEscape("\\*abc", parser));
+    }
+
+    @Test
+    public void test_escapeOrderedList() {
+        Parser parser = Parser.builder().build();
+
+        assertEquals("1", escape("1", parser));
+        assertEquals("2", escape("2", parser));
+        assertEquals("3", escape("3", parser));
+
+        assertEquals("1\\.", escape("1.", parser));
+        assertEquals("1.abc", escape("1.abc", parser));
+
+        assertEquals("2\\.", escape("2.", parser));
+        assertEquals("2.abc", escape("2.abc", parser));
+
+        assertEquals("1\\)", escape("1)", parser));
+        assertEquals("1)abc", escape("1)abc", parser));
+
+        assertEquals("2\\)", escape("2)", parser));
+        assertEquals("2)abc", escape("2)abc", parser));
+
+        assertEquals("1\\", unEscape("1\\", parser));
+        assertEquals("2\\", unEscape("2\\", parser));
+        assertEquals("3\\", unEscape("3\\", parser));
+
+        assertEquals("1.", unEscape("1\\.", parser));
+        assertEquals("1\\.abc", unEscape("1\\.abc", parser));
+
+        assertEquals("2.", unEscape("2\\.", parser));
+        assertEquals("2\\.abc", unEscape("2\\.abc", parser));
+
+        assertEquals("1)", unEscape("1\\)", parser));
+        assertEquals("1\\)abc", unEscape("1\\)abc", parser));
+
+        assertEquals("2)", unEscape("2\\)", parser));
+        assertEquals("2\\)abc", unEscape("2\\)abc", parser));
+    }
+
+    @Test
+    public void test_escapeOrderedListDotOnly() {
+        Parser parser = Parser.builder(new MutableDataSet().set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, true)).build();
+
+        assertEquals("1", escape("1", parser));
+        assertEquals("2", escape("2", parser));
+        assertEquals("3", escape("3", parser));
+
+        assertEquals("1\\.", escape("1.", parser));
+        assertEquals("1.abc", escape("1.abc", parser));
+
+        assertEquals("2\\.", escape("2.", parser));
+        assertEquals("2.abc", escape("2.abc", parser));
+
+        assertEquals("1)", escape("1)", parser));
+        assertEquals("1)abc", escape("1)abc", parser));
+
+        assertEquals("2)", escape("2)", parser));
+        assertEquals("2)abc", escape("2)abc", parser));
+
+        assertEquals("1\\", unEscape("1\\", parser));
+        assertEquals("2\\", unEscape("2\\", parser));
+        assertEquals("3\\", unEscape("3\\", parser));
+
+        assertEquals("1.", unEscape("1\\.", parser));
+        assertEquals("1\\.abc", unEscape("1\\.abc", parser));
+
+        assertEquals("2.", unEscape("2\\.", parser));
+        assertEquals("2\\.abc", unEscape("2\\.abc", parser));
+
+        assertEquals("1\\)", unEscape("1\\)", parser));
+        assertEquals("1\\)abc", unEscape("1\\)abc", parser));
+
+        assertEquals("2\\)", unEscape("2\\)", parser));
+        assertEquals("2\\)abc", unEscape("2\\)abc", parser));
     }
 
     private String firstText(Node n) {

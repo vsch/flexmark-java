@@ -1,10 +1,11 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MarkdownParagraphTest {
 
@@ -27,7 +28,7 @@ public class MarkdownParagraphTest {
         formatter.setKeepLineBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
-        BasedSequence actual = formatter.computeLeftAlignedSequence();
+        BasedSequence actual = formatter.wrapText();
         assertEquals(expected, actual.toString());
     }
 
@@ -48,18 +49,18 @@ public class MarkdownParagraphTest {
         formatter.setKeepLineBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
-        BasedSequence actual = formatter.computeLeftAlignedSequence();
+        BasedSequence actual = formatter.wrapText();
         assertEquals(expected, actual.toString());
     }
 
     @Test
-    public void test_wrapIndentedLines3() {
-        BasedSequence input = BasedSequence.of("Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only task\n" +
+    public void test_leadInEscaper() {
+        BasedSequence input = BasedSequence.of("Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only #\n" +
                 "    item prefix or adding to only list items. Test is done.");
 
         String expected = "" +
                 "Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only\n" +
-                "task item prefix or adding to only list items. Test is done." +
+                "\\# item prefix or adding to only list items. Test is done." +
                 "";
 
         BasedSequence basedInput = BasedSequence.of(input);
@@ -70,14 +71,22 @@ public class MarkdownParagraphTest {
         formatter.setKeepLineBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
-        BasedSequence actual = formatter.computeLeftAlignedSequence();
+        CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");
+        formatter.setLeadInEscaper((sequence, consumer) -> {
+            if (sequence.length() == 1 && specialChars.test(sequence.charAt(0))) {
+                consumer.accept("\\");
+            }
+            consumer.accept(sequence);
+        });
+
+        BasedSequence actual = formatter.wrapText();
         assertEquals(expected, actual.toString());
 
         SequenceBuilder builder = SequenceBuilder.emptyBuilder(basedInput);
         actual.addSegments(builder.getSegmentBuilder());
         assertEquals("" +
                 "⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\n" +
-                "⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧" +
+                "\\⟦#⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧" +
                 "", builder.getSegmentBuilder().toStringWithRanges());
 
         BasedSequence sequence = actual.toSpc().trimEnd(BasedSequence.WHITESPACE_SET).appendEOL();
@@ -86,7 +95,57 @@ public class MarkdownParagraphTest {
         sequence.addSegments(builder2.getSegmentBuilder());
         assertEquals("" +
                 "⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧\n" +
-                "⟦task⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧\n" +
+                "\\⟦#⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧\n" +
+                "⟦⟧" +
+                "", builder2.getSegmentBuilder().toStringWithRanges());
+    }
+
+    @Test
+    public void test_leadInUnEscaper() {
+        BasedSequence input = BasedSequence.of("" +
+                "Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only\n" +
+                "      \\# item prefix or adding to only list items. Test is done." +
+                "");
+
+        String expected = "" +
+                "Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only #\n" +
+                "item prefix or adding to only list items. Test is done." +
+                "";
+
+        BasedSequence basedInput = BasedSequence.of(input);
+        MarkdownParagraph formatter = new MarkdownParagraph(basedInput, CharWidthProvider.NULL);
+        formatter.setFirstIndent(0);
+        formatter.setWidth(92);
+        formatter.setFirstWidthOffset(0);
+        formatter.setKeepLineBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepHardBreaks(true);
+
+        CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");
+        formatter.setLeadInUnEscaper((sequence, consumer) -> {
+            if (sequence.length() == 2 && sequence.charAt(0) == '\\' && specialChars.test(sequence.charAt(1))) {
+                consumer.accept(sequence.subSequence(1));
+            } else {
+                consumer.accept(sequence);
+            }
+        });
+
+        BasedSequence actual = formatter.wrapText();
+        assertEquals(expected, actual.toString());
+
+        SequenceBuilder builder = SequenceBuilder.emptyBuilder(basedInput);
+        actual.addSegments(builder.getSegmentBuilder());
+        assertEquals("" +
+                "⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧⟦ ⟧⟦#⟧\n" +
+                "⟦item prefix or adding to only list items. Test is done.⟧" +
+                "", builder.getSegmentBuilder().toStringWithRanges());
+
+        BasedSequence sequence = actual.toSpc().trimEnd(BasedSequence.WHITESPACE_SET).appendEOL();
+
+        SequenceBuilder builder2 = SequenceBuilder.emptyBuilder(basedInput);
+        sequence.addSegments(builder2.getSegmentBuilder());
+        assertEquals("" +
+                "⟦Fix: mixed task and non-task items, toggle prefix adds it to all instead of removing only⟧⟦ ⟧⟦#⟧\n" +
+                "⟦item prefix or adding to only list items. Test is done.⟧\n" +
                 "⟦⟧" +
                 "", builder2.getSegmentBuilder().toStringWithRanges());
     }

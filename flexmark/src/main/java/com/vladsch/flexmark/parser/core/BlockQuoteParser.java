@@ -4,10 +4,12 @@ import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -135,6 +137,25 @@ public class BlockQuoteParser extends AbstractBlockParser {
                     ListBlockParser.Factory.class,
                     IndentedCodeBlockParser.Factory.class
             ));
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
+            return (sequence, consumer) -> {
+                if (sequence.length() >= 1 && sequence.charAt(0) == '>') {
+                    consumer.accept("\\");
+                    consumer.accept(sequence);
+                }
+            };
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
+            return (sequence, consumer) -> {
+                if (sequence.length() >= 2 && sequence.charAt(0) == '\\' && sequence.charAt(1) == '>') {
+                    consumer.accept(sequence.subSequence(1));
+                }
+            };
         }
 
         @Override

@@ -2,9 +2,11 @@ package com.vladsch.flexmark.ext.definition.internal;
 
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.Parsing;
+import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.parser.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.core.DocumentBlockParser;
 import com.vladsch.flexmark.parser.core.ParagraphParser;
@@ -225,6 +227,29 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
             //        ListBlockParser.Factory.class,
             //        IndentedCodeBlockParser.Factory.class
             //));
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
+            boolean colon = DefinitionExtension.COLON_MARKER.get(options);
+            boolean tilde = DefinitionExtension.TILDE_MARKER.get(options);
+            return (sequence, consumer) -> {
+                if (sequence.length() == 1 && (colon && sequence.charAt(0) == ':' || tilde && sequence.charAt(0) == '~')) {
+                    consumer.accept("\\");
+                    consumer.accept(sequence);
+                }
+            };
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
+            boolean colon = DefinitionExtension.COLON_MARKER.get(options);
+            boolean tilde = DefinitionExtension.TILDE_MARKER.get(options);
+            return (sequence, consumer) -> {
+                if (sequence.length() == 2 && sequence.charAt(0) == '\\' && (colon && sequence.charAt(1) == ':' || tilde && sequence.charAt(1) == '~')) {
+                    consumer.accept(sequence.subSequence(1));
+                }
+            };
         }
 
         @Override

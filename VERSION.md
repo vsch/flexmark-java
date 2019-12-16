@@ -194,21 +194,15 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `SegmentedSequence.create` for non-builder arg, should make it explicit.
 + [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
       implementation.
++ [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
+      extension add order
 * [ ] Add: `Formatter` Paragraph wrapping options and code.
 * [ ] Fix: Document docx form controls in wiki
 * [ ] Fix: spec files no longer render HTML when option selected.
 - [ ] Add: position tracking resolver based on original sequence tracked and final result.
-+ [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
-      extension add order
 
 ## Next 0.59.72
 
-* Add: `SegmentOffsetTree` for binary search on offset in base sequence for conversion to index
-  in result sequence.
-* Fix: `BitFieldSet.toString()` to output field values when fields are more than one bit long.
-+ [ ] Add: `BasedOffsetTracker` to take `BasedSequence` result (could be segmented, offset in
-      based sequence, `PositionAnchor` and return index of this offset in the resulting based
-      sequence.
 + [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
   + [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `SequenceBuilder` can optimize
@@ -218,6 +212,24 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   + [ ] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
+* Add: `CustomBlockParserFactory.getLeadInEscaper(DataHolder)` and
+  `CustomBlockParserFactory.getLeadInUnEscaper(DataHolder)` to handle escaping/unescaping
+  special lead in characters for the block elements. Add escape/unescape to:
+  * `BlockQuoteParser`
+  * `ListBlockParser`
+  * `HeadingParser`
+  * `AdmonitionBlockParser`
+  * `AsideBlockParser`
+  * `DefinitionItemBlockParser`
+* Add: `Parser.Builder.specialLeadInEscaper(SpecialLeadInHandler)` and
+  `Parser.Builder.specialLeadInUnEscaper(SpecialLeadInHandler)` to allow parser extensions to
+  register special lead in escaper/unescaper handlers for parser extension block elements if
+  they do not have any custom block parser factories but do create extensions.
+* Add: `SegmentOffsetTree` for binary search on offset in base sequence for conversion to index
+  in result sequence.
+* Fix: `BitFieldSet.toString()` to output field values when fields are more than one bit long.
+* Add: `BasedOffsetTracker` to take `BasedSequence` result (could be segmented, offset in based
+  sequence, `PositionAnchor` and return index of this offset in the resulting based sequence.
 
 ## 0.59.70
 

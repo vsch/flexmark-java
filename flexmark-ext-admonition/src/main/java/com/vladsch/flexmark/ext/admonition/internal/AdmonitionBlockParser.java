@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.admonition.internal;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
+import com.vladsch.flexmark.parser.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -80,6 +81,25 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         @Override
         public Set<Class<?>> getBeforeDependents() {
             return null;
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
+            return (sequence, consumer) -> {
+                if ((sequence.length() == 3 || sequence.length() == 4 && sequence.charAt(3) == '+') && (sequence.startsWith("???") || sequence.startsWith("!!!"))) {
+                    consumer.accept("\\");
+                    consumer.accept(sequence);
+                }
+            };
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
+            return (sequence, consumer) -> {
+                if ((sequence.length() == 4 || sequence.length() == 5 && sequence.charAt(4) == '+') && (sequence.startsWith("\\???") || sequence.startsWith("\\!!!"))) {
+                    consumer.accept(sequence.subSequence(1));
+                }
+            };
         }
 
         @Override

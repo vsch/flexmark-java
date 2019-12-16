@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -35,7 +34,7 @@ public class BasedOffsetTrackerTest {
         formatter.setKeepLineBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
-        BasedSequence actual = formatter.computeLeftAlignedSequence();
+        BasedSequence actual = formatter.wrapText();
         BasedOffsetTracker tracker = BasedOffsetTracker.create(actual);
         int index = tracker.getOffsetIndex(offset, anchor);
         return getResult(actual.toString(), index);

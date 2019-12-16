@@ -223,7 +223,7 @@ public class DocumentParser implements ParserState {
     }
 
     public static class CustomBlockParserDependencyStage {
-        private final List<CustomBlockParserFactory> dependents;
+        final List<CustomBlockParserFactory> dependents;
 
         public CustomBlockParserDependencyStage(List<CustomBlockParserFactory> dependents) {
             // compute mappings
@@ -232,6 +232,8 @@ public class DocumentParser implements ParserState {
     }
 
     private static class CustomBlockParserDependencyHandler extends DependencyHandler<CustomBlockParserFactory, CustomBlockParserDependencyStage, CustomBlockParserDependencies> {
+        CustomBlockParserDependencyHandler() {}
+
         @NotNull
         @Override
         protected Class<?> getDependentClass(CustomBlockParserFactory dependent) {

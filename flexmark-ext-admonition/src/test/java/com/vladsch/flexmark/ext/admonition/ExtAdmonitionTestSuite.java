@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
         ComboAdmonitionSpecTest.class,
         ComboAdmonitionFormatterSpecTest.class,
         ComboAdmonitionTranslationFormatterSpecTest.class,
+        AdmonitionParserTest.class,
 })
 public class ExtAdmonitionTestSuite {
 }

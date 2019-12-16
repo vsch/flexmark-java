@@ -14,11 +14,8 @@ import com.vladsch.flexmark.util.SharedDataKeys;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -280,6 +277,10 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH", false);
     public static final DataKey<String> LISTS_ITEM_PREFIX_CHARS = new DataKey<>("LISTS_ITEM_PREFIX_CHARS", "*-+");
 
+    // these are set by the parser for the loaded extensions
+    public static final DataKey<List<SpecialLeadInHandler>> SPECIAL_LEAD_IN_ESCAPER_LIST = new DataKey<>("SPECIAL_LEAD_IN_ESCAPER_LIST", Collections.emptyList());
+    public static final DataKey<List<SpecialLeadInHandler>> SPECIAL_LEAD_IN_UN_ESCAPER_LIST = new DataKey<>("SPECIAL_LEAD_IN_UN_ESCAPER_LIST", Collections.emptyList());
+
     // separate setting for CODE_BLOCK_INDENT
     public static final DataKey<Integer> CODE_BLOCK_INDENT = new DataKey<>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
     private final List<CustomBlockParserFactory> blockParserFactories;
@@ -295,16 +296,36 @@ public class Parser implements IParse {
     private final DataHolder options;
 
     Parser(Builder builder) {
-        this.options = builder.toImmutable();
-        this.blockParserFactories = DocumentParser.calculateBlockParserFactories(this.options, builder.blockParserFactories);
+        DataSet options = builder.toImmutable();
+        this.blockParserFactories = DocumentParser.calculateBlockParserFactories(options, builder.blockParserFactories);
+
+        List<SpecialLeadInHandler> specialLeadInEscapers = new ArrayList<>(builder.specialLeadInEscaperList);
+        List<SpecialLeadInHandler> specialLeadInUnEscapers = new ArrayList<>(builder.specialLeadInUnEscaperList);
+
+        for (CustomBlockParserFactory factory : this.blockParserFactories) {
+            SpecialLeadInHandler escaper = factory.getLeadInEscaper(options);
+            if (escaper != null) {
+                specialLeadInEscapers.add(escaper);
+            }
+            SpecialLeadInHandler unEscaper = factory.getLeadInUnEscaper(options);
+            if (unEscaper != null) {
+                specialLeadInUnEscapers.add(unEscaper);
+            }
+        }
+
+        MutableDataSet optionsWithSpecialLeadInHandlers = new MutableDataSet(builder);
+        optionsWithSpecialLeadInHandlers.set(SPECIAL_LEAD_IN_ESCAPER_LIST, specialLeadInEscapers);
+        optionsWithSpecialLeadInHandlers.set(SPECIAL_LEAD_IN_UN_ESCAPER_LIST, specialLeadInUnEscapers);
+
+        this.options = optionsWithSpecialLeadInHandlers.toImmutable();
         this.inlineParserFactory = builder.inlineParserFactory == null ? DocumentParser.INLINE_PARSER_FACTORY : builder.inlineParserFactory;
-        this.paragraphPreProcessorFactories = DocumentParser.calculateParagraphPreProcessors(this.options, builder.paragraphPreProcessorFactories, this.inlineParserFactory);
-        this.blockPreProcessorDependencies = DocumentParser.calculateBlockPreProcessors(this.options, builder.blockPreProcessorFactories, this.inlineParserFactory);
-        this.delimiterProcessors = InlineParserImpl.calculateDelimiterProcessors(this.options, builder.delimiterProcessors);
-        this.delimiterCharacters = InlineParserImpl.calculateDelimiterCharacters(this.options, delimiterProcessors.keySet());
-        this.linkRefProcessors = InlineParserImpl.calculateLinkRefProcessors(this.options, builder.linkRefProcessors);
-        this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(this.options, delimiterCharacters);
-        this.postProcessorDependencies = PostProcessorManager.calculatePostProcessors(this.options, builder.postProcessorFactories);
+        this.paragraphPreProcessorFactories = DocumentParser.calculateParagraphPreProcessors(options, builder.paragraphPreProcessorFactories, this.inlineParserFactory);
+        this.blockPreProcessorDependencies = DocumentParser.calculateBlockPreProcessors(options, builder.blockPreProcessorFactories, this.inlineParserFactory);
+        this.delimiterProcessors = InlineParserImpl.calculateDelimiterProcessors(options, builder.delimiterProcessors);
+        this.delimiterCharacters = InlineParserImpl.calculateDelimiterCharacters(options, delimiterProcessors.keySet());
+        this.linkRefProcessors = InlineParserImpl.calculateLinkRefProcessors(options, builder.linkRefProcessors);
+        this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(options, delimiterCharacters);
+        this.postProcessorDependencies = PostProcessorManager.calculatePostProcessors(options, builder.postProcessorFactories);
         this.inlineParserExtensionFactories = builder.inlineParserExtensionFactories;
     }
 
@@ -330,8 +351,11 @@ public class Parser implements IParse {
      * @return the root node
      */
     public @NotNull Document parse(@NotNull BasedSequence input) {
-        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
-                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
+        DocumentParser documentParser = new DocumentParser(options
+                , blockParserFactories
+                , paragraphPreProcessorFactories
+                , blockPreProcessorDependencies
+                , inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -345,8 +369,11 @@ public class Parser implements IParse {
      * @return the root node
      */
     public @NotNull Document parse(@NotNull String input) {
-        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
-                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
+        DocumentParser documentParser = new DocumentParser(options
+                , blockParserFactories
+                , paragraphPreProcessorFactories
+                , blockPreProcessorDependencies
+                , inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(BasedSequence.of(input));
         return postProcess(document);
     }
@@ -361,8 +388,11 @@ public class Parser implements IParse {
      * @throws IOException when reading throws an exception
      */
     public @NotNull Document parseReader(@NotNull Reader input) throws IOException {
-        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
-                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
+        DocumentParser documentParser = new DocumentParser(options
+                , blockParserFactories
+                , paragraphPreProcessorFactories
+                , blockPreProcessorDependencies
+                , inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -423,6 +453,8 @@ public class Parser implements IParse {
         final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
         final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<>();
         InlineParserFactory inlineParserFactory = null;
+        final List<SpecialLeadInHandler> specialLeadInEscaperList = new ArrayList<>();
+        final List<SpecialLeadInHandler> specialLeadInUnEscaperList = new ArrayList<>();
 
         public Builder(DataHolder options) {
             super(options);
@@ -443,7 +475,26 @@ public class Parser implements IParse {
 
         @Override
         protected void removeApiPoint(@NotNull Object apiPoint) {
-            if (apiPoint instanceof CustomBlockParserFactory) { this.blockParserFactories.remove(apiPoint); } else if (apiPoint instanceof DelimiterProcessor) { this.delimiterProcessors.remove(apiPoint); } else if (apiPoint instanceof PostProcessorFactory) { this.postProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof ParagraphPreProcessorFactory) { this.paragraphPreProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof BlockPreProcessorFactory) { this.blockPreProcessorFactories.remove(apiPoint); } else if (apiPoint instanceof LinkRefProcessorFactory) { this.linkRefProcessors.remove(apiPoint); } else if (apiPoint instanceof InlineParserExtensionFactory) { this.inlineParserExtensionFactories.remove(apiPoint); } else if (apiPoint instanceof InlineParserFactory) { this.inlineParserFactory = null; } else {
+            if (apiPoint instanceof CustomBlockParserFactory) {
+                this.blockParserFactories.remove(apiPoint);
+            } else if (apiPoint instanceof DelimiterProcessor) {
+                this.delimiterProcessors.remove(apiPoint);
+            } else if (apiPoint instanceof PostProcessorFactory) {
+                this.postProcessorFactories.remove(apiPoint);
+            } else if (apiPoint instanceof ParagraphPreProcessorFactory) {
+                this.paragraphPreProcessorFactories.remove(apiPoint);
+            } else if (apiPoint instanceof BlockPreProcessorFactory) {
+                this.blockPreProcessorFactories.remove(apiPoint);
+            } else if (apiPoint instanceof LinkRefProcessorFactory) {
+                this.linkRefProcessors.remove(apiPoint);
+            } else if (apiPoint instanceof SpecialLeadInHandler) {
+                this.specialLeadInEscaperList.remove(apiPoint);
+                this.specialLeadInUnEscaperList.remove(apiPoint);
+            } else if (apiPoint instanceof InlineParserExtensionFactory) {
+                this.inlineParserExtensionFactories.remove(apiPoint);
+            } else if (apiPoint instanceof InlineParserFactory) {
+                this.inlineParserFactory = null;
+            } else {
                 throw new IllegalStateException("Unknown data point type: " + apiPoint.getClass().getName());
             }
         }
@@ -526,6 +577,18 @@ public class Parser implements IParse {
             addExtensionApiPoint(linkRefProcessor);
             return this;
         }
+
+        public Builder specialLeadInEscaper(SpecialLeadInHandler specialLeadInEscaper) {
+            specialLeadInEscaperList.add(specialLeadInEscaper);
+            addExtensionApiPoint(specialLeadInEscaper);
+            return this;
+        }
+
+        public Builder specialLeadInUnEscaper(SpecialLeadInHandler specialLeadInUnEscaper) {
+            specialLeadInEscaperList.add(specialLeadInUnEscaper);
+            addExtensionApiPoint(specialLeadInUnEscaper);
+            return this;
+        }
     }
 
     /**
@@ -556,6 +619,8 @@ public class Parser implements IParse {
          * @see Builder#paragraphPreProcessorFactory(ParagraphPreProcessorFactory)
          * @see Builder#blockPreProcessorFactory(BlockPreProcessorFactory)
          * @see Builder#linkRefProcessorFactory(LinkRefProcessorFactory)
+         * @see Builder#specialLeadInEscaper(SpecialLeadInHandler)
+         * @see Builder#specialLeadInUnEscaper(SpecialLeadInHandler)
          */
         void extend(Builder parserBuilder);
     }

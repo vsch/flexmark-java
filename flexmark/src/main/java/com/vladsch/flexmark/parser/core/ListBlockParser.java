@@ -6,7 +6,9 @@ import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.OrderedList;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.parser.SpecialLeadInHandler;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
@@ -14,6 +16,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -450,6 +453,42 @@ public class ListBlockParser extends AbstractBlockParser {
         @Override
         public BlockParserFactory apply(@NotNull DataHolder options) {
             return new BlockFactory(options);
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInEscaper(@NotNull DataHolder options) {
+            CharPredicate orderedDelims = CharPredicate.anyOf(Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options) ? "." : ".)");
+            CharPredicate listItemDelims = CharPredicate.anyOf(Parser.LISTS_ITEM_PREFIX_CHARS.get(options));
+            return (sequence, consumer) -> {
+                if (sequence.length() == 1 && listItemDelims.test(sequence.charAt(0))) {
+                    consumer.accept("\\");
+                    consumer.accept(sequence);
+                } else {
+                    int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
+                    if (nonDigit + 1 == sequence.length() && orderedDelims.test(sequence.charAt(nonDigit))) {
+                        consumer.accept(sequence.subSequence(0, nonDigit));
+                        consumer.accept("\\");
+                        consumer.accept(sequence.subSequence(nonDigit));
+                    }
+                }
+            };
+        }
+
+        @Override
+        public @Nullable SpecialLeadInHandler getLeadInUnEscaper(@NotNull DataHolder options) {
+            CharPredicate orderedDelims = CharPredicate.anyOf(Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options) ? "." : ".)");
+            CharPredicate unorderedDelims = CharPredicate.anyOf(Parser.LISTS_ITEM_PREFIX_CHARS.get(options));
+            return (sequence, consumer) -> {
+                if (sequence.length() == 2 && sequence.charAt(0) == '\\' && unorderedDelims.test(sequence.charAt(1))) {
+                    consumer.accept(sequence.subSequence(1));
+                } else {
+                    int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
+                    if (nonDigit + 2 == sequence.length() && sequence.charAt(nonDigit) == '\\' && orderedDelims.test(sequence.charAt(nonDigit + 1))) {
+                        consumer.accept(sequence.subSequence(0, nonDigit));
+                        consumer.accept(sequence.subSequence(nonDigit + 1));
+                    }
+                }
+            };
         }
     }
 
