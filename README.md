@@ -180,6 +180,7 @@ custom node renderer if you need to override the generated link HTML.
 
 * Major reorganization and code cleanup of implementation for next version 0.60.0
   * Formatter implementation is now part of core implementation in `flexmark` module
+  * Formatter includes option for wrapping paragraph text to margin.
   * Tests cleaned up to eliminate duplication and hacks
   * `flexmark-test-util` made reusable for other projects. Having markdown as the source code
     for tests is too convenient to have it only used for `flexmark-java` tests.
