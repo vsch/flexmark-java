@@ -299,34 +299,8 @@ public class MarkdownParagraph {
                             }
 
                             if (firstNonBlank) {
-                                // Fix: may need to escape lead-in special char sequences
-//                                // NOTE: this can be done with regex match and replace
-//                                // special chars needing whitespace or eol after
-//                                String needEolOrSpaceAfter = "*+-:~#"; // # if !isSpaceAfterAtxMarker
-//                                String regEx1 = "^([" + needEolOrSpaceAfter + "])$";
-
-//                                String needNoSpaceAfter = ">|#"; // the | only if aside extension is used, # only if isSpaceAfterAtxMarker
-//                                String regEx2 = "^([" + needEolOrSpaceAfter + "])";
-
-                                // numbered list
-//                                String regex3 = "^\\d+([\\.)])$"; // this one is only if isEscapeNumberedLeadIn, the ) only if isCommonMarkLists
-                                // replace match with \\ added before group 1
-//                                addToken(token);
                                 processLeadInList(leadInEscaperList, baseSeq.subSequence(token.range));
                             } else if (token.isFirstWord) {
-                                // Fix: may need to un-escape lead-in special char sequences
-//                                // NOTE: this can be done with regex match and replace
-//                                // special chars needing whitespace or eol after, then the sequence must be the whole lead-in
-//                                String needEolOrSpaceAfter = "*+-:~#"; // # if !isSpaceAfterAtxMarker
-//                                String regEx1 = "^\\([" + needEolOrSpaceAfter + "])$";
-
-//                                String needNoSpaceAfter = ">|#"; // the | only if aside extension is used, # only if isSpaceAfterAtxMarker
-//                                String regEx2 = "^\\([" + needEolOrSpaceAfter + "])";
-
-                                // numbered list
-//                                String regex3 = "^\\d+\\([\\.)])$"; // this one is only if isEscapeNumberedLeadIn, the ) only if isCommonMarkLists
-                                // replace with \\ before group 1 removed and add token
-//                                addToken(token);
                                 processLeadInList(leadInUnEscaperList, baseSeq.subSequence(token.range));
                             } else {
                                 addToken(token);
