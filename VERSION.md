@@ -9,7 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.74](#next-05974)
+- [0.59.74](#05974)
 - [0.59.72](#05972)
 - [0.59.70](#05970)
 - [0.59.68](#05968)
@@ -210,11 +210,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         for context tests.
 * [ ] Fix: Document docx form controls in wiki
 
-## Next 0.59.74
+## 0.59.74
 
 * Fix: `MarkdownParagraph` line break getter/setter names.
-* Fix: `BasedOffsetTracker` to if segment end offset equals offset and no segment containing
-  offset is found, then use segment for index calculation.
+* Fix: `BasedOffsetTracker`
+  * if segment end offset equals offset and no segment containing
+    offset is found, then use segment for index calculation.
+  * assertion conditions when search returns null, offset can be >= end offset
 
 ## 0.59.72
 

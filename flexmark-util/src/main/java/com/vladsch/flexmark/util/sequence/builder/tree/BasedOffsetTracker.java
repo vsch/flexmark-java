@@ -34,7 +34,7 @@ public class BasedOffsetTracker {
     public int getOffsetIndex(int offset, @NotNull PositionAnchor anchor) {
         Segment seg = segmentOffsetTree.findSegmentByOffset(offset, sequence.getBaseSequence(), lastSegment);
         if (seg == null) {
-            assert offset < sequence.getStartOffset() || offset > sequence.getEndOffset();
+            assert offset < sequence.getStartOffset() || offset >= sequence.getEndOffset();
             return offset < sequence.getStartOffset() ? 0 : sequence.length();
         }
 
