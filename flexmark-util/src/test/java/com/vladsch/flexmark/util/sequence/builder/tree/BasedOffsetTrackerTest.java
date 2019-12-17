@@ -174,4 +174,34 @@ public class BasedOffsetTrackerTest {
 
         assertEquals(expected, wrapText(input, PositionAnchor.PREVIOUS, 30));
     }
+
+    @Test
+    public void test_getOffsetIndexTypedText3() {
+        String input = "" +
+                "text should wrap onto the next\n" +
+                "     ⦙ line at right margin of 30" +
+                "";
+
+        String expected = "" +
+                "text should wrap onto the next⦙\n" +
+                "line at right margin of 30" +
+                "";
+
+        assertEquals(expected, wrapText(input, PositionAnchor.PREVIOUS, 30));
+    }
+
+    @Test
+    public void test_getOffsetIndexTypedText4() {
+        String input = "" +
+                "text should wrap onto the next\n" +
+                "     ⦙ line at right margin of 30" +
+                "";
+
+        String expected = "" +
+                "text should wrap onto the next\n" +
+                "⦙line at right margin of 30" +
+                "";
+
+        assertEquals(expected, wrapText(input, PositionAnchor.NEXT, 30));
+    }
 }

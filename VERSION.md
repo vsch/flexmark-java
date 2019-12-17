@@ -208,7 +208,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   + [ ] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
-* [ ] Fix: Document docx form controls in wiki
+* [ ] Fix: Document docx form controls in wiki.
 
 ## 0.59.74
 
