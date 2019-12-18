@@ -2,18 +2,21 @@ package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
+import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
+    public static final List<SpecialLeadInHandler> EMPTY_LEAD_IN_HANDLERS = Collections.emptyList();
+    public static final Map<TrackedOffset, Integer> EMPTY_OFFSET_MAP = Collections.emptyMap();
 
     final @NotNull BasedSequence baseSeq;
     final @NotNull CharWidthProvider charWidthProvider;
@@ -27,7 +30,8 @@ public class MarkdownParagraph {
     boolean unEscapeSpecialLeadInChars = true;
     boolean escapeSpecialLeadInChars = true;
 
-    @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = Collections.emptyList();
+    @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = EMPTY_LEAD_IN_HANDLERS;
+    private Map<TrackedOffset, Integer> trackedOffsets = EMPTY_OFFSET_MAP;
 
     public MarkdownParagraph(CharSequence chars) {
         this(BasedSequence.of(chars), CharWidthProvider.NULL);
@@ -40,6 +44,85 @@ public class MarkdownParagraph {
     public MarkdownParagraph(@NotNull BasedSequence chars, @NotNull CharWidthProvider charWidthProvider) {
         baseSeq = chars;
         this.charWidthProvider = charWidthProvider;
+    }
+
+    public BasedSequence wrapTextNotTracked() {
+        if (getFirstWidth() <= 0) return baseSeq;
+
+        LeftAlignedWrapping wrapping = new LeftAlignedWrapping(baseSeq);
+        return wrapping.wrapText();
+    }
+
+    @NotNull
+    public Range getContinuationStartSplice(int offset, boolean afterSpace, boolean afterDelete) {
+        BasedSequence baseSequence = baseSeq.getBaseSequence();
+        assert offset >= 0 && offset <= baseSequence.length();
+        if (afterSpace && afterDelete) {
+            BasedOffsetTracker preFormatTracker = BasedOffsetTracker.create(baseSeq);
+            int startOfLine = baseSequence.startOfLine(offset);
+            if (startOfLine > baseSeq.getStartOffset() && baseSequence.safeCharAt(offset) != ' ') {
+                int previousNonBlank = baseSequence.lastIndexOfAnyNot(CharPredicate.SPACE_TAB_EOL, offset - 1);
+                if (previousNonBlank < startOfLine) {
+                    // delete range between last non-blank and offset index
+                    @NotNull OffsetInfo offsetInfo = preFormatTracker.getOffsetInfo(offset, true);
+                    int offsetIndex = offsetInfo.endIndex;
+                    int previousNonBlankIndex = baseSeq.lastIndexOfAnyNot(CharPredicate.SPACE_TAB_EOL, offsetIndex - 1);
+                    return Range.of(previousNonBlankIndex + 1, offsetIndex);
+                }
+            }
+        }
+        return Range.NULL;
+    }
+
+    public BasedSequence wrapText() {
+        if (getFirstWidth() <= 0) return baseSeq;
+        if (trackedOffsets.isEmpty()) return wrapTextNotTracked();
+
+        TrackedOffset[] offsets = new TrackedOffset[trackedOffsets.size()];
+        int iMax = 0;
+        for (TrackedOffset trackedOffset : trackedOffsets.keySet()) {
+            offsets[iMax++] = trackedOffset;
+        }
+
+        Arrays.sort(offsets);
+
+        // Adjust input text for wrapping by removing any continuation splice regions
+        BasedSequence input = baseSeq;
+        Range lastRange = Range.NULL;
+
+        for (int i = iMax; i-- > 0; ) {
+            TrackedOffset trackedOffset = offsets[i];
+            if (lastRange.isEmpty() || !lastRange.contains(trackedOffset.getOffset())) {
+                lastRange = getContinuationStartSplice(trackedOffset.getOffset(), trackedOffset.isAfterSpaceEdit(), trackedOffset.isAfterDelete());
+                if (lastRange.isNotEmpty()) {
+                    input = input.delete(lastRange.getStart(), lastRange.getEnd());
+                }
+            }
+        }
+
+        LeftAlignedWrapping wrapping = new LeftAlignedWrapping(input);
+        BasedSequence wrapped = wrapping.wrapText();
+
+        return wrapped;
+    }
+
+    public boolean addTrackedOffset(int offset) {
+        return addTrackedOffset(offset, null, false);
+    }
+
+    public boolean addTrackedOffset(int offset, @Nullable Character c, boolean afterDelete) {
+        return addTrackedOffset(offset, c != null && c == ' ', afterDelete);
+    }
+
+    public boolean addTrackedOffset(int offset, boolean afterSpace, boolean afterDelete) {
+        if (trackedOffsets == EMPTY_OFFSET_MAP) trackedOffsets = new LinkedHashMap<>();
+        assert offset >= 0 && offset <= baseSeq.getBaseSequence().length();
+        trackedOffsets.put(new TrackedOffset(offset, afterSpace, afterDelete), null);
+        return true;
+    }
+
+    public Map<TrackedOffset, Integer> getTrackedOffsets() {
+        return trackedOffsets;
     }
 
     public List<? extends SpecialLeadInHandler> getLeadInHandlers() {
@@ -181,18 +264,12 @@ public class MarkdownParagraph {
         }
     }
 
-    public BasedSequence wrapText() {
-        if (getFirstWidth() <= 0) return baseSeq;
-
-        LeftAlignedWrapping wrapping = new LeftAlignedWrapping();
-        return wrapping.wrapText();
-    }
-
     class LeftAlignedWrapping {
-        final String lineBreak = SequenceUtils.EOL;
+        final @NotNull BasedSequence baseSeq;
+        final SequenceBuilder result;
+        final TextTokenizer tokenizer;
         int col = 0;
         int lineCount = 0;
-        final SequenceBuilder result = SequenceBuilder.emptyBuilder(baseSeq);
         final int spaceWidth = charWidthProvider.spaceWidth();
         int lineIndent = spaceWidth * getFirstIndent();
         final int nextIndent = spaceWidth * getIndent();
@@ -201,13 +278,14 @@ public class MarkdownParagraph {
         int wordsOnLine = 0;
         BasedSequence leadingIndent = null;
         BasedSequence lastSpace = null;
-        final TextTokenizer tokenizer = new TextTokenizer(baseSeq);
         @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = MarkdownParagraph.this.leadInHandlers;
         boolean unEscapeSpecialLeadInChars = MarkdownParagraph.this.unEscapeSpecialLeadInChars;
         boolean escapeSpecialLeadInChars = MarkdownParagraph.this.escapeSpecialLeadInChars;
 
-        LeftAlignedWrapping() {
-
+        LeftAlignedWrapping(@NotNull BasedSequence baseSeq) {
+            this.baseSeq = baseSeq;
+            result = SequenceBuilder.emptyBuilder(baseSeq);
+            tokenizer = new TextTokenizer(baseSeq);
         }
 
         void advance() {
@@ -318,7 +396,7 @@ public class MarkdownParagraph {
                             wordsOnLine++;
                         } else {
                             // need to insert a line break and repeat
-                            addChars(lineBreak);
+                            addChars(SequenceUtils.EOL);
                             afterLineBreak();
                         }
                         break;
@@ -327,7 +405,7 @@ public class MarkdownParagraph {
                     case MARKDOWN_START_LINE: {
                         // start a new line if not already new
                         if (col > 0) {
-                            addChars(lineBreak);
+                            addChars(SequenceUtils.EOL);
                             afterLineBreak();
                         }
                         advance();

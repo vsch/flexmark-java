@@ -9,10 +9,8 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.RichSequenceImpl;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
@@ -26,6 +24,15 @@ import java.util.function.Function;
 import static com.vladsch.flexmark.util.Utils.*;
 
 public class TestUtils {
+    public static final char MARKUP_CARET_CHAR = '⦙';
+    public static final char MARKUP_SELECTION_START_CHAR = '⟦';
+    public static final char MARKUP_SELECTION_END_CHAR = '⟧';
+    public static final String MARKUP_CARET = Character.toString(MARKUP_CARET_CHAR);
+    public static final String MARKUP_SELECTION_START = Character.toString(MARKUP_SELECTION_START_CHAR);
+    public static final String MARKUP_SELECTION_END = Character.toString(MARKUP_SELECTION_END_CHAR);
+    public static final @NotNull CharPredicate CARET_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR);
+    public static final @NotNull CharPredicate MARKUP_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR, MARKUP_SELECTION_START_CHAR, MARKUP_SELECTION_END_CHAR);
+    public static final int[] EMPTY_OFFSETS = new int[0];
     static {
         // CAUTION: need to register our url resolvers
         FlexmarkResourceUrlResolver.registerUrlResolvers();
@@ -509,5 +516,118 @@ public class TestUtils {
         }
 
         return resolver.apply(value);
+    }
+
+    public static SequenceBuilder insertCaretMarkup(BasedSequence sequence, int[] offsets) {
+        SequenceBuilder builder = sequence.getBuilder();
+        Arrays.sort(offsets);
+
+        int iMax = offsets.length;
+        int lastOffset = 0;
+        for (int offset : offsets) {
+            if (offset > lastOffset) {
+                sequence.subSequence(lastOffset, offset).addSegments(builder.getSegmentBuilder());
+            }
+            builder.append("⦙");
+            lastOffset = offset;
+        }
+
+        int offset = sequence.length();
+        if (offset > lastOffset) {
+            sequence.subSequence(lastOffset, offset).addSegments(builder.getSegmentBuilder());
+        }
+
+        return builder;
+    }
+
+    public static Pair<BasedSequence, int[]> extractMarkup(BasedSequence input) {
+        int markup = input.countOfAny(MARKUP_PREDICATE);
+
+        if (markup > 0) {
+            int carets = input.countOfAny(CARET_PREDICATE);
+            int[] offsets = new int[carets];
+
+            int selections = markup - carets;
+            assert selections % 2 == 0;
+
+            int indents = selections/2;
+
+            int[] starts = new int[indents];
+            int[] ends = new int[indents];
+
+            int lastPos = input.length();
+            int c = carets;
+            int m = markup;
+            int i = indents;
+
+            String toWrap = input.toString();
+            int endIndent = -1;
+
+            while (lastPos >= 0) {
+                int pos = input.lastIndexOfAny(MARKUP_PREDICATE, lastPos);
+                if (pos == -1) break;
+
+                char ch = input.charAt(pos);
+                m--;
+                switch (ch) {
+                    case MARKUP_CARET_CHAR:
+                        c--;
+                        offsets[c] = pos - m; // reduce by number of markups ahead
+                        break;
+
+                    case MARKUP_SELECTION_START_CHAR:
+                        assert endIndent != -1;
+                        i--;
+                        starts[i] = pos - m; // reduce by number of markups ahead
+                        ends[i] = endIndent; // reduce by number of markups ahead
+                        endIndent = -1;
+                        break;
+
+                    case MARKUP_SELECTION_END_CHAR:
+                        assert endIndent == -1;
+                        endIndent = pos - m; // reduce by number of markups ahead
+                        break;
+
+                    default:
+                        throw new IllegalStateException("Unexpected predicate match");
+                }
+
+                toWrap = toWrap.substring(0, pos) + toWrap.substring(pos + 1);
+                lastPos = pos - 1;
+            }
+
+            assert endIndent == -1;
+            assert c == 0:"Unused caret pos: " + c;
+            assert i == 0:"Unused indent pos: " + i;
+
+//            System.out.println("After markup removal: " + SequenceUtils.toVisibleWhitespaceString(toWrap));
+
+            BasedSequence sequence = BasedSequence.of(toWrap);
+
+            // now we delete the indents to simulate prefix removal
+            SequenceBuilder builder = sequence.getBuilder();
+            int jMax = starts.length;
+            int lastOffset = 0;
+            for (int j = 0; j < jMax; j++) {
+                int start = starts[j];
+                int end = ends[j];
+
+                if (start > lastOffset) {
+                    sequence.subSequence(lastOffset, start).addSegments(builder.getSegmentBuilder());
+                }
+                lastOffset = end;
+            }
+
+            int offset = sequence.length();
+            if (offset > lastOffset) {
+                sequence.subSequence(lastOffset, offset).addSegments(builder.getSegmentBuilder());
+            }
+
+//            System.out.println("After removal: " + builder.toStringWithRanges());
+
+            return Pair.of(builder.toSequence(), offsets);
+        }
+
+        return Pair.of(input, EMPTY_OFFSETS);
     }
 }

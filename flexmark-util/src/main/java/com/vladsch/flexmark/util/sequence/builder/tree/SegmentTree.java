@@ -72,6 +72,11 @@ public class SegmentTree {
         return findSegmentPos(index, treeData, 0, size());
     }
 
+    @NotNull
+    public Segment getSegment(int byteOffset, int pos, int startIndex, @NotNull BasedSequence baseSeq) {
+        return Segment.getSegment(segmentBytes, byteOffset, pos, startIndex, baseSeq);
+    }
+
     @Nullable
     public Segment findSegment(int index, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
         return findSegment(index, 0, size(), baseSeq, hint);
@@ -546,9 +551,15 @@ public class SegmentTree {
             } else {
                 startIndices[pos] = aggrLength;
 
+                if (pos > 0) {
+                    // set it to the correct value
+                    treeData[(pos - 1) << 1] = seg.getStart();
+                }
+
                 aggrLength += seg.length();
 
                 if (segType == BASE || segType == ANCHOR) {
+                    // the use of getEnd() here is temporary for all but the last base segment, it will be overwritten by getStart() by next segment
                     setTreeData(pos, treeData, seg.getEnd(), segOffset, 0);
                     pos++;
                 }
@@ -591,7 +602,13 @@ public class SegmentTree {
 
 //            System.out.println(String.format("%s[%d]: seg: %s, segOffset: %d, bytes: %d", "offset", pos, seg, segOffset, seg.getByteLength()));
 
+            if (pos > 0) {
+                // set it to the correct value
+                treeData[(pos - 1) << 1] = seg.getStartOffset();
+            }
+
             if (seg.isBase()) {
+                // the use of getEnd() here is temporary for all but the last base segment, it will be overwritten by getStart() by next segment
                 setTreeData(pos, treeData, seg.getEndOffset(), segOffset, 0);
                 startIndices[pos] = length;
 

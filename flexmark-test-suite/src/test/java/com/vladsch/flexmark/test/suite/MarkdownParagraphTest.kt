@@ -148,7 +148,7 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
     @Test
     fun test_align() {
         val par = MarkdownParagraph(simplePar)
-        assertEquals(simplePar, par.wrapText().toString())
+        assertEquals(simplePar, par.wrapTextNotTracked().toString())
 
         for (ind in 0..4 step 4) {
             par.indent = ind
@@ -158,10 +158,10 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
                     par.width = i
                     if (logOutput || par.indent == 4 && par.firstIndent == 8 && par.width == 50) {
                         println("reformat simplePar to $i, first: ${par.firstIndent} ind: ${par.indent}")
-                        println(par.wrapText())
+                        println(par.wrapTextNotTracked())
                         println()
                     }
-                    if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapText(), par.firstIndent, par.indent, i, par.keepHardBreaks)
+                    if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent, par.indent, i, par.keepHardBreaks)
                 }
             }
         }
@@ -170,7 +170,7 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
     @Test
     fun test_alignMultiLine() {
         val par = MarkdownParagraph(multiLinePar)
-        assertEquals(multiLinePar, par.wrapText().toString())
+        assertEquals(multiLinePar, par.wrapTextNotTracked().toString())
 
             for (ind in 0..4 step 4) {
                 par.indent = ind
@@ -180,10 +180,10 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
                         par.width = i
                         if (logOutput || par.indent == 4 && par.firstIndent == 8 && par.width == 50) {
                             println("reformat multiLinePar to $i, first: ${par.firstIndent} ind: ${par.indent}")
-                            println(par.wrapText())
+                            println(par.wrapTextNotTracked())
                             println()
                         }
-                        if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapText(), par.firstIndent, par.indent, i, par.keepHardBreaks)
+                        if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent, par.indent, i, par.keepHardBreaks)
                     }
                 }
         }
@@ -192,7 +192,7 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
     @Test
     fun test_alignIndentedMultiLine() {
         val par = MarkdownParagraph(indentedMultiLinePar)
-        assertEquals(indentedMultiLinePar, par.wrapText().toString())
+        assertEquals(indentedMultiLinePar, par.wrapTextNotTracked().toString())
 
             for (ind in 0..4 step 4) {
                 par.indent = ind
@@ -202,10 +202,10 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
                         par.width = i
                         if (logOutput || par.indent == 4 && par.firstIndent == 8 && par.width == 50) {
                             println("reformat indentedMultiLinePar to $i, first: ${par.firstIndent} ind: ${par.indent}")
-                            println(par.wrapText())
+                            println(par.wrapTextNotTracked())
                             println()
                         }
-                        if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapText(), par.firstIndent, par.indent, i, par.keepHardBreaks)
+                        if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent, par.indent, i, par.keepHardBreaks)
                     }
                 }
         }

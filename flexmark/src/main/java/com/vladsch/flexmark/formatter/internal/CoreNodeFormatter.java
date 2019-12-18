@@ -820,7 +820,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 if (formatterOptions.applySpecialLeadInHandlers) {
                     formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
                 }
-                markdown.append(formatter.wrapText());
+                markdown.append(formatter.wrapTextNotTracked());
             } else {
                 context.renderChildren(node);
             }

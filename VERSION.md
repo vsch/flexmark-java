@@ -9,6 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.76](#next-05976)
 - [0.59.74](#05974)
 - [0.59.72](#05972)
 - [0.59.70](#05970)
@@ -210,12 +211,20 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         for context tests.
 * [ ] Fix: Document docx form controls in wiki.
 
+## Next 0.59.76
+
+* Fix: `SegmentOffsetTree` aggregated length replacement to contain `startOffset` of next
+  segment instead of `endOffset` of segment at position, to mimic equivalent aggregated length
+  of `SegmentTree`.
+* Fix: `BasedOffsetTracker` to handle 0 span and 1 span offset ranges and return info for the
+  requested offset.
+
 ## 0.59.74
 
 * Fix: `MarkdownParagraph` line break getter/setter names.
 * Fix: `BasedOffsetTracker`
-  * if segment end offset equals offset and no segment containing
-    offset is found, then use segment for index calculation.
+  * if segment end offset equals offset and no segment containing offset is found, then use
+    segment for index calculation.
   * assertion conditions when search returns null, offset can be >= end offset
 
 ## 0.59.72

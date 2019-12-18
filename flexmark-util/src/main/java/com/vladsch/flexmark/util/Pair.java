@@ -31,14 +31,12 @@ public class Pair<K, V> implements Paired<K, V> {
         out.append('(');
 
         if (first == null) out.append("null");
-        else
-            out.append(first.getClass().getName().substring(first.getClass().getPackage().getName().length() + 1)).append(' ').append(first);
+        else out.append(first);
 
         out.append(", ");
 
         if (second == null) out.append("null");
-        else
-            out.append(second.getClass().getName().substring(second.getClass().getPackage().getName().length() + 1)).append(' ').append(second);
+        else out.append(second);
 
         out.append(')');
         return out.toString();

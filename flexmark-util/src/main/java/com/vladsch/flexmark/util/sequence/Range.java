@@ -91,7 +91,7 @@ public class Range {
     public boolean doesContain(@NotNull Range other) { return end >= other.end && start <= other.start; }
 
     public boolean contains(int index) { return start <= index && index < end;}
-    public boolean doesContain(int index) { return index >= start && index < end; }
+    public boolean doesContain(int index) { return start <= index && index < end; }
 
     public boolean contains(int start, int end) { return this.start <= start && end <= this.end;}
     public boolean doesContain(int start, int end) { return this.start <= start && end <= this.end;}

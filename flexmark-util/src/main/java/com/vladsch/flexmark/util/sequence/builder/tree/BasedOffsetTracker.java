@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BasedOffsetTracker {
-    protected final @NotNull BasedSequence sequence;
+    protected final @NotNull BasedSequence sequence;   // sequence on which this tracker is based, not the base sequence of original sequence
     protected final @NotNull SegmentOffsetTree segmentOffsetTree;
     private @Nullable Segment lastSegment;
 
@@ -16,71 +15,82 @@ public class BasedOffsetTracker {
     }
 
     /**
-     * Return the index in the sequence of this based offset tracker that corresponds
+     * Return the range of indices in the sequence of this based offset tracker that correspond
      * to the given offset in the base sequence from which this sequence was derived.
      * <p>
      * NOTE: indented use is the recover the editing caret position from original text after some text
      * transformation such as formatting, rendering HTML or paragraph wrapping.
      *
-     * @param offset offset in base sequence
-     * @param anchor position anchor for resolving index when original offset is in a missing
-     *               range of the base sequence or offset may or may not correctly reflect
-     *               the desired index position
-     *               {@link PositionAnchor#CURRENT} no editing was performed around offset
-     *               {@link PositionAnchor#PREVIOUS} caret offset is the result of removing characters by backspacing
-     *               {@link PositionAnchor#NEXT} caret offset is the result of inserting characters
-     * @return index in sequence that corresponds to the offset in base sequence
+     * @param offset      offset in base sequence
+     * @param isEndOffset if true then offset represents the range [offset, offset) so it is located between character at offset-1 and character at offset
+     *                    if false then offset represents the character at offset and the range [offset, offset+1)
+     * @return information about the offset in this sequence
      */
-    public int getOffsetIndex(int offset, @NotNull PositionAnchor anchor) {
-        Segment seg = segmentOffsetTree.findSegmentByOffset(offset, sequence.getBaseSequence(), lastSegment);
-        if (seg == null) {
-            assert offset < sequence.getStartOffset() || offset >= sequence.getEndOffset();
-            return offset < sequence.getStartOffset() ? 0 : sequence.length();
-        }
+    @NotNull
+    public OffsetInfo getOffsetInfo(int offset, boolean isEndOffset) {
+        // if is end offset then will not
+        int offsetEnd = isEndOffset ? offset : offset + 1;
 
-        lastSegment = seg;
+        // if offsetEnd <= firstSegment.startOffset then indexRange is [0,0)
+        // if offset >= lastSegment.endOffset then indexRange is [sequence.length, sequence.length)
 
-        if (seg.offsetNotInSegment(offset)) {
-            // offset in missing segment, need to check the context of the offset in original sequence
-            // and compare to result sequence index
-            if (offset < seg.getStartOffset()) {
-                if (seg.getPos() > 0) {
-                    Segment prevSeg = segmentOffsetTree.getSegment(seg.getPos() - 1, sequence.getBaseSequence());
-                    int indexInPrev = offset == prevSeg.getEndOffset() ? prevSeg.length() : prevSeg.length() - (seg.getStartOffset() - offset);
-                    assert indexInPrev >= 0 && indexInPrev <= prevSeg.length();
+        // otherwise, find segment for the offset in the segmentOffsetTree:
 
-                    switch (anchor) {
-                        case CURRENT:
-                        case NEXT:
-                            return seg.getStartIndex();
+        // if offsetEnd > segment.startOffset && offset < segment.endOffset then
+        //      indexRange.start = segment.startIndex + offset - segment.startOffset, indexRange.length = offsetEnd-offset
 
-                        default:
-                        case PREVIOUS:
-                            return prevSeg.getStartIndex() + indexInPrev;
-                    }
+        // if offsetEnd == segment.startOffset
+        //      indexRange is preceding TEXT segment indexRange or if none then [segment.startIndex, segment.startIndex)
+
+        // if offset == segment.endOffset
+        //      indexRange is preceding TEXT segment indexRange or if none then [segment.startIndex, segment.startIndex)
+
+        OffsetInfo lastResult;
+
+        if (offsetEnd <= sequence.getStartOffset()) {
+            // before sequence
+            lastResult = new OffsetInfo(offset, true, 0);
+        } else if (offset >= sequence.getEndOffset()) {
+            // after sequence
+            lastResult = new OffsetInfo(offset, true, sequence.length());
+        } else {
+            Segment seg = segmentOffsetTree.findSegmentByOffset(offset, sequence.getBaseSequence(), lastSegment);
+            assert seg != null;
+            lastSegment = seg;
+
+            if (offsetEnd > seg.getStartOffset() && offset < seg.getEndOffset()) {
+                // inside base segment
+                int startIndex = seg.getStartIndex() + offset - seg.getStartOffset();
+                int endIndex = seg.getStartIndex() + offsetEnd - seg.getStartOffset();
+                lastResult = new OffsetInfo(offset, isEndOffset, startIndex, endIndex);
+            } else if (offsetEnd <= seg.getStartOffset()) {
+                int startIndex;
+                int endIndex;
+                Segment textSegment = segmentOffsetTree.getPreviousText(seg, sequence);
+                if (textSegment != null) {
+                    startIndex = textSegment.getStartIndex();
+                    endIndex = textSegment.getEndIndex();
+                } else {
+                    endIndex = startIndex = seg.getStartIndex();
                 }
+                lastResult = new OffsetInfo(offset, true, startIndex, endIndex);
+            } else if (offset >= seg.getEndOffset()) {
+                int startIndex;
+                int endIndex;
+                Segment textSegment = segmentOffsetTree.getNextText(seg, sequence);
+                if (textSegment != null) {
+                    startIndex = textSegment.getStartIndex();
+                    endIndex = textSegment.getEndIndex();
+                } else {
+                    endIndex = startIndex = seg.getEndIndex();
+                }
+                lastResult = new OffsetInfo(offset, true, startIndex, endIndex);
             } else {
-                if (offset == seg.getEndOffset()) {
-                    return seg.getStartIndex() + seg.length();
-                } else if (seg.getPos() + 1 < segmentOffsetTree.size()) {
-                    Segment nextSeg = segmentOffsetTree.getSegment(seg.getPos() + 1, sequence.getBaseSequence());
-                    int indexInNext = offset - seg.getEndOffset();
-                    assert indexInNext >= 0 && indexInNext <= nextSeg.length();
-
-                    switch (anchor) {
-                        case PREVIOUS:
-                            return seg.getStartIndex();
-
-                        default:
-                        case NEXT:
-                        case CURRENT:
-                            return nextSeg.getStartIndex() + indexInNext;
-                    }
-                }
+                throw new IllegalStateException(String.format("Unexpected offset: [%d, %d), seg: %s, not inside nor at start nor at end", offset, offsetEnd, seg.toString()));
             }
         }
 
-        return offset - seg.getStartOffset() + seg.getStartIndex();
+        return lastResult;
     }
 
     /**

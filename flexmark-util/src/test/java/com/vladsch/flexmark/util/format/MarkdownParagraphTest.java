@@ -31,7 +31,7 @@ public class MarkdownParagraphTest {
         formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
-        BasedSequence actual = formatter.wrapText();
+        BasedSequence actual = formatter.wrapTextNotTracked();
         assertEquals(expected, actual.toString());
     }
 
@@ -52,7 +52,7 @@ public class MarkdownParagraphTest {
         formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
         formatter.setKeepHardBreaks(true);
 
-        BasedSequence actual = formatter.wrapText();
+        BasedSequence actual = formatter.wrapTextNotTracked();
         assertEquals(expected, actual.toString());
     }
 
@@ -76,7 +76,7 @@ public class MarkdownParagraphTest {
 
         formatter.setLeadInHandlers(Collections.singletonList(SpecialLeadInCharsHandler.create('#')));
 
-        BasedSequence actual = formatter.wrapText();
+        BasedSequence actual = formatter.wrapTextNotTracked();
         assertEquals(expected, actual.toString());
 
         SequenceBuilder builder = SequenceBuilder.emptyBuilder(basedInput);
@@ -120,7 +120,7 @@ public class MarkdownParagraphTest {
         CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");
         formatter.setLeadInHandlers(Collections.singletonList(SpecialLeadInCharsHandler.create('#')));
 
-        BasedSequence actual = formatter.wrapText();
+        BasedSequence actual = formatter.wrapTextNotTracked();
         assertEquals(expected, actual.toString());
 
         SequenceBuilder builder = SequenceBuilder.emptyBuilder(basedInput);

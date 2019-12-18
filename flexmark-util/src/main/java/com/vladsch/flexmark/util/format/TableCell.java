@@ -113,8 +113,8 @@ public class TableCell {
     public TableCell withTrackedOffset(
             int trackedTextOffset,
             boolean afterSpace,
-            boolean afterSpaceDelete
-    ) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterSpaceDelete); }
+            boolean afterDelete
+    ) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
     public TableCell withSpanTrackedOffset(int spanTrackedOffset) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset, trackedTextAdjust, afterSpace, afterDelete); }
 
