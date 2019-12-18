@@ -90,7 +90,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         for (int i = 1; i < iterations; i++) exampleRenderer.getHtml();
         long render = System.nanoTime();
 
-        String ast = expectedAst == null ? "" : exampleRenderer.getAst();
+        String ast = expectedAst == null ? null : exampleRenderer.getAst();
         boolean embedTimed = TestUtils.EMBED_TIMED.get(exampleRenderer.getOptions());
 
         String formattedTimingInfo = TestUtils.getFormattedTimingInfo(iterations, specExampleParse.getStartTime(), specExampleParse.getParseTime(), render);
@@ -110,7 +110,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
                 outExpected.append(formattedTimingInfo);
             }
 
-            TestUtils.addSpecExample(true, outExpected, source, expectedHtml, expectedAst == null ? "" : expectedAst, optionsSet, true, example.getSection(), example.getExampleNumber());
+            TestUtils.addSpecExample(true, outExpected, source, expectedHtml, expectedAst, optionsSet, true, example.getSection(), example.getExampleNumber());
             expected = outExpected.toString();
 
             StringBuilder outActual = new StringBuilder();
@@ -119,7 +119,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         } else {
             if (embedTimed) {
                 expected = formattedTimingInfo +
-                        TestUtils.addSpecExample(true, source, expectedHtml, expectedAst == null ? "" : expectedAst, optionsSet);
+                        TestUtils.addSpecExample(true, source, expectedHtml, expectedAst, optionsSet);
             } else {
                 expected = TestUtils.addSpecExample(true, source, expectedHtml, ast, optionsSet);
             }

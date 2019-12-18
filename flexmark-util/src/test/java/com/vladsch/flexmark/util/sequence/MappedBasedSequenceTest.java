@@ -158,7 +158,7 @@ public class MappedBasedSequenceTest {
 
         BasedSequence sequence = BasedSequence.of(input);
         MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
-        formatter.setFirstIndent(0);
+        formatter.setFirstIndent("");
         formatter.setWidth(90);
         formatter.setFirstWidthOffset(0);
         formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type

@@ -811,8 +811,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 formatter.setWidth(formatterOptions.rightMargin);
                 formatter.setKeepSoftBreaks(formatterOptions.keepSoftLineBreaks);
                 formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
-                formatter.setFirstIndent(0);
-                formatter.setIndent(0);
+                formatter.setFirstIndent("");
+                formatter.setIndent("");
 
                 // adjust first line width, based on change in prefix after the first line EOL
                 formatter.setFirstWidthOffset(markdown.getAfterEolPrefixDelta());

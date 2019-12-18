@@ -9,7 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.76](#next-05976)
+- [0.59.76](#05976)
 - [0.59.74](#05974)
 - [0.59.72](#05972)
 - [0.59.70](#05970)
@@ -211,8 +211,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         for context tests.
 * [ ] Fix: Document docx form controls in wiki.
 
-## Next 0.59.76
+## 0.59.76
 
+* Fix: `MarkdownParagraph`
+  * Add: tracked offsets handling to prepare and resolve tracked offsets in wrapped text
+    * handle inserting a space when tracked offset is followed by a space to allow two spaces at
+      tracked offset
+    * handle tracked offset followed by `LS` to resolve offset to end of previous line
+    * handle backspace on first character of continuation line to splice word to last word of
+      previous line.
+  * Fix: To take `CharSequence` for indent properties instead of `int` for number of spaces to
+    allow arbitrary indentation characters.
 * Fix: `SegmentOffsetTree` aggregated length replacement to contain `startOffset` of next
   segment instead of `endOffset` of segment at position, to mimic equivalent aggregated length
   of `SegmentTree`.

@@ -53,7 +53,7 @@
       <option name="TOC_GENERATE_TEXT_ONLY" value="true" />
       <option name="TOC_TITLE_LEVEL" value="3" />
       <option name="RIGHT_MARGIN" value="96" />
-      <option name="WRAP_ON_TYPING" value="1" />
+      <option name="WRAP_ON_TYPING" value="0" />
     </MarkdownNavigatorCodeStyleSettings>
     <MarkdownNavigatorEnhCodeStyleSettings>
       <option name="RIGHT_MARGIN" value="72" />

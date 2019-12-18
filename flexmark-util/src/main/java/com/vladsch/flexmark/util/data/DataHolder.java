@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.Map;
 
 public interface DataHolder {
+    DataHolder NULL = new DataSet();
+
     @NotNull Map<? extends DataKeyBase<?>, Object> getAll();
     @NotNull Collection<? extends DataKeyBase<?>> getKeys();
 

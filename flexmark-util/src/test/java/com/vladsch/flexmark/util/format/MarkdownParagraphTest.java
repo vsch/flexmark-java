@@ -25,7 +25,7 @@ public class MarkdownParagraphTest {
                 "would be automatically copied.";
 
         MarkdownParagraph formatter = new MarkdownParagraph(input, CharWidthProvider.NULL);
-        formatter.setFirstIndent(0);
+        formatter.setFirstIndent("");
         formatter.setWidth(66);
         formatter.setFirstWidthOffset(0);
         formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
@@ -46,7 +46,7 @@ public class MarkdownParagraphTest {
                 "";
 
         MarkdownParagraph formatter = new MarkdownParagraph(input, CharWidthProvider.NULL);
-        formatter.setFirstIndent(0);
+        formatter.setFirstIndent("");
         formatter.setWidth(90);
         formatter.setFirstWidthOffset(0);
         formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
@@ -68,7 +68,7 @@ public class MarkdownParagraphTest {
 
         BasedSequence basedInput = BasedSequence.of(input);
         MarkdownParagraph formatter = new MarkdownParagraph(basedInput, CharWidthProvider.NULL);
-        formatter.setFirstIndent(0);
+        formatter.setFirstIndent("");
         formatter.setWidth(90);
         formatter.setFirstWidthOffset(0);
         formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
@@ -111,7 +111,7 @@ public class MarkdownParagraphTest {
 
         BasedSequence basedInput = BasedSequence.of(input);
         MarkdownParagraph formatter = new MarkdownParagraph(basedInput, CharWidthProvider.NULL);
-        formatter.setFirstIndent(0);
+        formatter.setFirstIndent("");
         formatter.setWidth(92);
         formatter.setFirstWidthOffset(0);
         formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type

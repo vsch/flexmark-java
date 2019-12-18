@@ -151,17 +151,17 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
         assertEquals(simplePar, par.wrapTextNotTracked().toString())
 
         for (ind in 0..4 step 4) {
-            par.indent = ind
+            par.indent = " ".repeat(ind)
             for (fInd in 0..8 step 4) {
-                par.firstIndent = fInd
+                par.firstIndent = " ".repeat(fInd)
                 for (i in 0..50 step 10) {
                     par.width = i
-                    if (logOutput || par.indent == 4 && par.firstIndent == 8 && par.width == 50) {
+                    if (logOutput || par.indent == " ".repeat(4) && par.firstIndent == " ".repeat(8) && par.width == 50) {
                         println("reformat simplePar to $i, first: ${par.firstIndent} ind: ${par.indent}")
                         println(par.wrapTextNotTracked())
                         println()
                     }
-                    if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent, par.indent, i, par.keepHardBreaks)
+                    if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent.length, par.indent.length, i, par.keepHardBreaks)
                 }
             }
         }
@@ -173,17 +173,17 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
         assertEquals(multiLinePar, par.wrapTextNotTracked().toString())
 
             for (ind in 0..4 step 4) {
-                par.indent = ind
+                par.indent = " ".repeat(ind)
                 for (fInd in 0..8 step 4) {
-                    par.firstIndent = fInd
+                    par.firstIndent = " ".repeat(fInd)
                     for (i in 0..50 step 10) {
                         par.width = i
-                        if (logOutput || par.indent == 4 && par.firstIndent == 8 && par.width == 50) {
+                        if (logOutput || par.indent == " ".repeat(4) && par.firstIndent == " ".repeat(8) && par.width == 50) {
                             println("reformat multiLinePar to $i, first: ${par.firstIndent} ind: ${par.indent}")
                             println(par.wrapTextNotTracked())
                             println()
                         }
-                        if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent, par.indent, i, par.keepHardBreaks)
+                        if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent.length, par.indent.length, i, par.keepHardBreaks)
                     }
                 }
         }
@@ -195,17 +195,17 @@ Duis aute in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""
         assertEquals(indentedMultiLinePar, par.wrapTextNotTracked().toString())
 
             for (ind in 0..4 step 4) {
-                par.indent = ind
+                par.indent = " ".repeat(ind)
                 for (fInd in 0..8 step 4) {
-                    par.firstIndent = fInd
+                    par.firstIndent = " ".repeat(fInd)
                     for (i in 0..50 step 10) {
                         par.width = i
-                        if (logOutput || par.indent == 4 && par.firstIndent == 8 && par.width == 50) {
+                        if (logOutput || par.indent == " ".repeat(4) && par.firstIndent == " ".repeat(8) && par.width == 50) {
                             println("reformat indentedMultiLinePar to $i, first: ${par.firstIndent} ind: ${par.indent}")
                             println(par.wrapTextNotTracked())
                             println()
                         }
-                        if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent, par.indent, i, par.keepHardBreaks)
+                        if (i > 0) ensureAligned(TextAlignment.LEFT, par.wrapTextNotTracked(), par.firstIndent.length, par.indent.length, i, par.keepHardBreaks)
                     }
                 }
         }

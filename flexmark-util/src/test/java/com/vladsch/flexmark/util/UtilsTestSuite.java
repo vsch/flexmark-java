@@ -30,6 +30,7 @@ import org.junit.runners.Suite;
         OrderedSetTest.class,
         ClassificationBagTest.class,
         CharPredicateTest.class,
+        SequenceUtilsTest.class,
         MaxAggregatorTest.class,
         MinAggregatorTest.class,
         MutableAttributeTest.class,

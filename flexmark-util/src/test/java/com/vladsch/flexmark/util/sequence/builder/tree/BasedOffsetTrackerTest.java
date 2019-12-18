@@ -36,7 +36,7 @@ public class BasedOffsetTrackerTest {
         BasedSequence sequence = BasedSequence.of(info.getFirst());
 
         MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
-        formatter.setFirstIndent(0);
+        formatter.setFirstIndent("");
         formatter.setWidth(margin);
         formatter.setFirstWidthOffset(0);
         formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type

@@ -12,19 +12,22 @@ import org.jetbrains.annotations.NotNull;
 public class TrackedOffset implements Comparable<TrackedOffset> {
     private enum Flags {
         AFTER_SPACE_EDIT,
+        AFTER_INSERT,
         AFTER_DELETE,
     }
 
     final private static int F_AFTER_SPACE_EDIT = BitFieldSet.intMask(Flags.AFTER_SPACE_EDIT);
+    final private static int F_AFTER_INSERT = BitFieldSet.intMask(Flags.AFTER_INSERT);
     final private static int F_AFTER_DELETE = BitFieldSet.intMask(Flags.AFTER_DELETE);
 
     final private int offset;
     final private int flags;
 
-    public TrackedOffset(int offset, boolean afterSpaceEdit, boolean afterDelete) {
+    public TrackedOffset(int offset, boolean afterSpaceEdit, boolean afterInsert, boolean afterDelete) {
         this.offset = offset;
         int flags = 0;
         if (afterSpaceEdit) flags |= F_AFTER_SPACE_EDIT;
+        if (afterInsert) flags |= F_AFTER_INSERT;
         if (afterDelete) flags |= F_AFTER_DELETE;
         this.flags = flags;
     }
@@ -35,6 +38,10 @@ public class TrackedOffset implements Comparable<TrackedOffset> {
 
     public boolean isAfterSpaceEdit() {
         return BitFieldSet.any(flags, F_AFTER_SPACE_EDIT);
+    }
+
+    public boolean isAfterInsert() {
+        return BitFieldSet.any(flags, F_AFTER_INSERT);
     }
 
     public boolean isAfterDelete() {
@@ -75,6 +82,6 @@ public class TrackedOffset implements Comparable<TrackedOffset> {
 
     @Override
     public String toString() {
-        return "{ [" + offset + (BitFieldSet.any(flags, F_AFTER_SPACE_EDIT | F_AFTER_DELETE) ? (isAfterSpaceEdit() ? ", s" : "") + (isAfterDelete() ? ", d" : "") : "") + " }";
+        return "{ [" + offset + (BitFieldSet.any(flags, F_AFTER_SPACE_EDIT | F_AFTER_DELETE) ? (isAfterSpaceEdit() ? ", s" : "") + (isAfterDelete() ? ", d" : "") : "") + ") }";
     }
 }

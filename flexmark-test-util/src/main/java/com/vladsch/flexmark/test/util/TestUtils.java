@@ -340,8 +340,13 @@ public class TestUtils {
      */
     public static String toVisibleSpecText(String s) {
         if (s == null) return "";
-        // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as ⎮23ae, CR ⏎ 23ce
-        return s.replace("\u2192", "&#2192;").replace("\t", "\u2192").replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae").replace("\u23ce", "&#23ce").replace("\r", "\u23ce");
+        // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as ⎮23ae, CR ⏎ 23ce, LS to U+27A5 ➥
+        return s
+                .replace("\u2192", "&#2192;").replace("\t", "\u2192")
+                .replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae")
+                .replace("\u23ce", "&#23ce").replace("\r", "\u23ce")
+                .replace("\u27a5", "&#27a5").replace(SequenceUtils.LINE_SEP, "\u27a5")
+                ;
     }
 
     /**
@@ -361,7 +366,12 @@ public class TestUtils {
     public static String fromVisibleSpecText(String s) {
         if (s == null) return "";
         // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⎮
-        return s.replace("\u23ce", "\r").replace("&#23ce", "\u23ce").replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae").replace('\u2192', '\t').replace("&#2192;", "\u2192");
+        return s
+                .replace("\u27a5", SequenceUtils.LINE_SEP).replace("&#27a5", "\u27a5")
+                .replace("\u23ce", "\r").replace("&#23ce", "\u23ce")
+                .replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae")
+                .replace('\u2192', '\t').replace("&#2192;", "\u2192")
+                ;
     }
 
     public static String trimTrailingEOL(String parseSource) {
@@ -522,14 +532,16 @@ public class TestUtils {
         SequenceBuilder builder = sequence.getBuilder();
         Arrays.sort(offsets);
 
-        int iMax = offsets.length;
+        int length = sequence.length();
         int lastOffset = 0;
         for (int offset : offsets) {
-            if (offset > lastOffset) {
-                sequence.subSequence(lastOffset, offset).addSegments(builder.getSegmentBuilder());
+            int useOffset = Math.min(length, offset);
+
+            if (useOffset > lastOffset) {
+                sequence.subSequence(lastOffset, useOffset).addSegments(builder.getSegmentBuilder());
             }
-            builder.append("⦙");
-            lastOffset = offset;
+            if (useOffset == offset) builder.append("⦙");
+            lastOffset = useOffset;
         }
 
         int offset = sequence.length();
@@ -550,7 +562,7 @@ public class TestUtils {
             int selections = markup - carets;
             assert selections % 2 == 0;
 
-            int indents = selections/2;
+            int indents = selections / 2;
 
             int[] starts = new int[indents];
             int[] ends = new int[indents];
@@ -597,8 +609,8 @@ public class TestUtils {
             }
 
             assert endIndent == -1;
-            assert c == 0:"Unused caret pos: " + c;
-            assert i == 0:"Unused indent pos: " + i;
+            assert c == 0 : "Unused caret pos: " + c;
+            assert i == 0 : "Unused indent pos: " + i;
 
 //            System.out.println("After markup removal: " + SequenceUtils.toVisibleWhitespaceString(toWrap));
 
@@ -629,5 +641,30 @@ public class TestUtils {
         }
 
         return Pair.of(input, EMPTY_OFFSETS);
+    }
+
+    final public static String BANNER_PADDING = "------------------------------------------------------------------------";
+    final public static int BANNER_LENGTH = BANNER_PADDING.length();
+
+    @NotNull
+    public static String bannerText(@NotNull String message) {
+        int leftPadding = 4; //(BANNER_LENGTH - message.length() - 2) >> 4;
+        int rightPadding = BANNER_LENGTH - message.length() - 2 - leftPadding;
+        return BANNER_PADDING.substring(0, leftPadding) + " " + message + " " + BANNER_PADDING.substring(0, rightPadding) + "\n";
+    }
+
+    public static void appendBanner(@NotNull StringBuilder out, @NotNull String banner) {
+        if (out.length() > 0) {
+            out.append("\n");
+        }
+
+        out.append(banner);
+    }
+
+    public static void appendBannerIfNeeded(@NotNull StringBuilder out, @NotNull String banner) {
+        if (out.length() > 0) {
+            out.append("\n");
+            out.append(banner);
+        }
     }
 }
