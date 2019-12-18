@@ -130,8 +130,8 @@ public class MarkdownParagraph {
                 int offsetSpaces = baseSeq.countTrailing(CharPredicate.SPACE, offset);
                 boolean needSpace = baseSeq.countTrailing(CharPredicate.SPACE_TAB_EOL, offset) > 0;
 
-                if (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete()) {
-                    // need to keep it at the previous character
+                if (!trackedOffset.isAfterSpaceEdit() && (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete())) {
+                    // need to keep it at the previous character but not when inserting as space
                     index = info.startIndex;
                     if (trackedOffset.isAfterDelete()) offsetSpacesAfter = 0;
                     offsetSpaces = 0;
@@ -149,7 +149,7 @@ public class MarkdownParagraph {
                         int baseSeqIndex = offsetInfo.startIndex - 1;  // adjust by -1 because the first nonblank in wrapped is the character after LS with LS having been removed.
                         boolean isLineSep = baseSeq.safeCharAt(baseSeqIndex) == SequenceUtils.LS;
 
-                        if (isLineSep || trackedOffset.isAfterDelete() || trackedOffset.isAfterSpaceEdit()) {
+                        if (isLineSep || trackedOffset.isAfterDelete() || (trackedOffset.isAfterSpaceEdit() && offsetSpacesAfter > 0)) {
                             // tracked offset is followed by Line Separator, move the offset to end of previous line
                             index = wrapped.endOfLine(wrapped.startOfLine(index) - 1);
 

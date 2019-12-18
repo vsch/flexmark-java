@@ -9,6 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.78](#next-05978)
 - [0.59.76](#05976)
 - [0.59.74](#05974)
 - [0.59.72](#05972)
@@ -210,6 +211,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
 * [ ] Fix: Document docx form controls in wiki.
+
+## Next 0.59.78
+
+* Fix: `MarkdownParagraph` on typing space in middle of word with second word becoming first non
+  blank on a continuation line.
 
 ## 0.59.76
 

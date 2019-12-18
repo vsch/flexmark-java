@@ -420,3 +420,20 @@ line at right margin of 30
 ````````````````````````````````
 
 
+```````````````````````````````` example(Wrap: 21) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
+⟦* ⟧Fix: conversion from Smart to based to extract more source information from segmented
+⟦  ⟧sequence ⦙and mapped sequence.
+.
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [99, s) } --> 99
+
+---- Ranges ------------------------------------------------------------
+⟦* Fix: conversion from Smart to based to extract more source information from segmented⟧⟦ sequence⟧
+ ⟦ and mapped sequence.⟧
+
+---- Result ------------------------------------------------------------
+* Fix: conversion from Smart to based to extract more source information from segmented sequence
+  ⦙and mapped sequence.
+````````````````````````````````
+
+
