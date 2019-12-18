@@ -116,6 +116,9 @@ public class MarkdownParagraph {
                 OffsetInfo baseInfo = baseSeqTracker.getOffsetInfo(trackedOffset.getOffset(), true);
                 int offset = baseInfo.endIndex;
                 boolean noBeforeSpaces = false;
+                int offsetSpaces = baseSeq.countTrailing(CharPredicate.SPACE, offset);
+                int offsetSpacesAfter = baseSeq.countLeading(CharPredicate.SPACE, offset);
+                boolean needSpace = baseSeq.countTrailing(CharPredicate.SPACE_TAB_EOL, offset) > 0;
 
                 int endLine = baseSeq.endOfLine(offset);
                 int startLine = baseSeq.startOfLine(offset);
@@ -123,12 +126,6 @@ public class MarkdownParagraph {
 
                 OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
                 int index = info.endIndex;
-                int startLineWrapped = wrapped.startOfLine(index);
-                int endLineWrapped = wrapped.endOfLine(index);
-                int firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
-                int offsetSpacesAfter = baseSeq.countLeading(CharPredicate.SPACE, offset);
-                int offsetSpaces = baseSeq.countTrailing(CharPredicate.SPACE, offset);
-                boolean needSpace = baseSeq.countTrailing(CharPredicate.SPACE_TAB_EOL, offset) > 0;
 
                 if (!trackedOffset.isAfterSpaceEdit() && (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete())) {
                     // need to keep it at the previous character but not when inserting as space
@@ -137,19 +134,23 @@ public class MarkdownParagraph {
                     offsetSpaces = 0;
                 }
 
+                int startLineWrapped = wrapped.startOfLine(index);
+                int endLineWrapped = wrapped.endOfLine(index);
+                int firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
+
                 // NOTE: if typing space before or on start of continuation line, then do not move tracked offset to previous line
-                if (offset <= firstNonBlank && trackedOffset.isAfterSpaceEdit() && !trackedOffset.isAfterDelete()) {
-                    offsetSpaces = 0;
-                    offsetSpacesAfter = 0;
-                } else if (index <= firstNonBlankWrapped) {
+                if (index <= firstNonBlankWrapped) {
                     int unwrappedOffset = wrapped.getIndexOffset(firstNonBlankWrapped);
 
                     if (unwrappedOffset >= 0) {
                         OffsetInfo offsetInfo = baseSeqTracker.getOffsetInfo(unwrappedOffset, true);
-                        int baseSeqIndex = offsetInfo.startIndex - 1;  // adjust by -1 because the first nonblank in wrapped is the character after LS with LS having been removed.
+                        int baseSeqIndex = offsetInfo.endIndex - 1;  // adjust by -1 because the first nonblank in wrapped is the character after LS with LS having been removed.
                         boolean isLineSep = baseSeq.safeCharAt(baseSeqIndex) == SequenceUtils.LS;
 
-                        if (isLineSep || trackedOffset.isAfterDelete() || (trackedOffset.isAfterSpaceEdit() && offsetSpacesAfter > 0)) {
+                        if (!isLineSep && offset <= firstNonBlank && trackedOffset.isAfterSpaceEdit() && !trackedOffset.isAfterDelete()) {
+                            offsetSpaces = 0;
+                            offsetSpacesAfter = 0;
+                        } else if (isLineSep || trackedOffset.isAfterDelete() || (trackedOffset.isAfterSpaceEdit() && offsetSpacesAfter > 0)) {
                             // tracked offset is followed by Line Separator, move the offset to end of previous line
                             index = wrapped.endOfLine(wrapped.startOfLine(index) - 1);
 
@@ -157,7 +158,7 @@ public class MarkdownParagraph {
                             endLine = baseSeq.startOfLine(offset);
                             startLine = baseSeq.startOfLine(offset);
                             firstNonBlank = baseSeq.indexOfAnyNot(CharPredicate.SPACE, startLine, endLine);
-                            offsetSpaces = needSpace ? 1 : Math.min(1, offsetSpaces);
+                            offsetSpaces = needSpace || isLineSep ? 1 : Math.min(1, offsetSpaces);
                             offsetSpacesAfter = 0;
                         }
                     }

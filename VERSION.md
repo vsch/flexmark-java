@@ -214,8 +214,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.78
 
-* Fix: `MarkdownParagraph` on typing space in middle of word with second word becoming first non
-  blank on a continuation line.
+* Fix: `MarkdownParagraph`
+  * on typing space in middle of word with second word becoming first non
+    blank on a continuation line.
+  * on typing space at start of continuation line with `LS` ahead of position.
+  * on typing space after non-space at start of continuation line with `LS` ahead of position.
 
 ## 0.59.76
 
