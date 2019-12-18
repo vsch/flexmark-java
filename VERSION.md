@@ -219,6 +219,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     blank on a continuation line.
   * on typing space at start of continuation line with `LS` ahead of position.
   * on typing space after non-space at start of continuation line with `LS` ahead of position.
+  * on typing space after end of paragraph after the right margin.
 
 ## 0.59.76
 
