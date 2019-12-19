@@ -136,7 +136,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         return lastBracket;
     }
 
-    @NotNull
+    @Nullable
     @Override
     public List<Node> parseCustom(@NotNull BasedSequence input, @NotNull Node node, @NotNull BitSet customCharacters, @NotNull Map<Character, CharacterNodeFactory> nodeFactoryMap) {
         this.customCharacters = customCharacters;

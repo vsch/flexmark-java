@@ -9,6 +9,8 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.82](#next-05982)
+- [0.59.80](#05980)
 - [0.59.78](#05978)
 - [0.59.76](#05976)
 - [0.59.74](#05974)
@@ -212,9 +214,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         for context tests.
 * [ ] Fix: Document docx form controls in wiki.
 
+## Next 0.59.82
+
+
+## 0.59.80
+
+* Fix: erroneous not-null annotation on nullable return in
+  `InlineParser.parseCustom(BasedSequence, Node, BitSet, Map<Character, CharacterNodeFactory>)`
+
 ## 0.59.78
 
-* Fix: `MarkdownParagraph`
+* Fix: `MarkdownParagraph` wrap tracked offset adjustment:
   * on typing space in middle of word with second word becoming first non
     blank on a continuation line.
   * on typing space at start of continuation line with `LS` ahead of position.
@@ -968,9 +978,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   for typed class values
 * Fix: clean up all tests to eliminate duplication and unnecessary interface methods.
 
-| Metric | Before | After | |---------------|--------:|--------:| | Files | 1264 | 1297 | |
-Lines | 124,192 | 118,755 | | Source Lines | 96,669 | 92,145 | | Comment Lines | 9,878 | 9,597 |
-| Blank Lines | 17,646 | 17,013 |
+  |    Metric     |  Before |   After |
+  |---------------|--------:|--------:|
+  | Files         |    1264 |    1297 |
+  | Lines         | 124,192 | 118,755 |
+  | Source Lines  |  96,669 |  92,145 |
+  | Comment Lines |   9,878 |   9,597 |
+  | Blank Lines   |  17,646 |  17,013 |
 
 ### 0.59.11
 
@@ -996,7 +1010,7 @@ Lines | 124,192 | 118,755 | | Source Lines | 96,669 | 92,145 | | Comment Lines |
 * Fix: `NO_EOL` option for tests was applied inconsistently.
 * Fix: add `SpecExample` argument to `getSpecExampleRenderer`
 * Fix: add `SpecExampleParse` argument to `addSpecExample`
-* Fix: regression bug
+* Fix: regression bug #372
   [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
   * Add: `AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES`, default
     `FencedCodeAddType.ADD_TO_PRE_CODE` for backward compatibility with 0.42, but if this is

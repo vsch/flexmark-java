@@ -31,7 +31,7 @@ public interface InlineParser extends LightInlineParser {
 
     @Nullable Delimiter getLastDelimiter();
     @Nullable Bracket getLastBracket();
-    @NotNull List<Node> parseCustom(@NotNull BasedSequence input, @NotNull Node node, @NotNull BitSet customCharacters, @NotNull Map<Character, CharacterNodeFactory> nodeFactoryMap);
+    @Nullable List<Node> parseCustom(@NotNull BasedSequence input, @NotNull Node node, @NotNull BitSet customCharacters, @NotNull Map<Character, CharacterNodeFactory> nodeFactoryMap);
     void mergeTextNodes(@Nullable Node fromNode, @Nullable Node toNode);
     void mergeIfNeeded(@Nullable Text first, @Nullable Text last);
     @Nullable BasedSequence toEOL();
