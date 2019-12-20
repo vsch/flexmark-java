@@ -209,12 +209,12 @@ public class LinkDestinationParser {
                             lastMatch = nextIndex;
                             break;
                         } else if (c == '(') {
-                            if (openJekyllState != 2)           {
+                            if (openJekyllState != 2) {
                                 if (allowMatchedParentheses) {
                                     openParenCount++;
                                 } else {
                                     if (openParenCount == 0) {
-                                         openParenCount++;
+                                        openParenCount++;
                                     } else {
                                         // invalid, parentheses need escaping beyond 1
                                         lastMatch = startIndex;
