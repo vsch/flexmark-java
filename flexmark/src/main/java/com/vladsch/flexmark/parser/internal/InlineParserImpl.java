@@ -75,7 +75,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         this.inlineParserExtensionFactories = !inlineParserExtensionFactories.isEmpty() ? inlineParserExtensionFactories : null;
 
         if (this.options.useHardcodedLinkAddressParser && true) {
-            this.linkDestinationParser = new LinkDestinationParser(this.options.spaceInLinkUrls, this.options.parseJekyllMacrosInUrls, this.options.intellijDummyIdentifier);
+            this.linkDestinationParser = new LinkDestinationParser(this.options.linksAllowMatchedParentheses, this.options.spaceInLinkUrls, this.options.parseJekyllMacrosInUrls, this.options.intellijDummyIdentifier);
         }
     }
 
@@ -1164,15 +1164,15 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         if (res != null) {
             return res;
         } else {
-            boolean spaceInUrls = options.spaceInLinkUrls;
-            if (options.linksAllowMatchedParentheses) {
-                // allow matched parenthesis
-                // fix for issue of stack overflow when parsing long input lines, by implementing non-recursive scan
-                if (linkDestinationParser != null) {
-                    BasedSequence match = linkDestinationParser.parseLinkDestination(input, index);
-                    index += match.length();
-                    return match;
-                } else {
+            if (linkDestinationParser != null) {
+                BasedSequence match = linkDestinationParser.parseLinkDestination(input, index);
+                index += match.length();
+                return match;
+            } else {
+                boolean spaceInUrls = options.spaceInLinkUrls;
+                if (options.linksAllowMatchedParentheses) {
+                    // allow matched parenthesis
+                    // fix for issue of stack overflow when parsing long input lines, by implementing non-recursive scan
                     BasedSequence matched = match(myParsing.LINK_DESTINATION_MATCHED_PARENS);
                     if (matched != null) {
                         int openCount = 0;
@@ -1199,13 +1199,13 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
 
                         return spaceInUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
                     }
-                }
 
-                return null;
-            } else {
-                // spec 0.27 compatibility
-                BasedSequence matched = match(myParsing.LINK_DESTINATION);
-                return matched != null && spaceInUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+                    return null;
+                } else {
+                    // spec 0.27 compatibility
+                    BasedSequence matched = match(myParsing.LINK_DESTINATION);
+                    return matched != null && spaceInUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+                }
             }
         }
     }

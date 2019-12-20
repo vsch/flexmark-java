@@ -30,13 +30,13 @@ public class Pair<K, V> implements Paired<K, V> {
 
         if (myFirst == null) out.append("null");
         else
-            out.append(myFirst.getClass().getName().substring(myFirst.getClass().getPackage().getName().length() + 1)).append(' ').append(myFirst);
+            out.append(myFirst.getClass().getSimpleName()).append(' ').append(myFirst);
 
         out.append(", ");
 
         if (mySecond == null) out.append("null");
         else
-            out.append(mySecond.getClass().getName().substring(mySecond.getClass().getPackage().getName().length() + 1)).append(' ').append(mySecond);
+            out.append(mySecond.getClass().getSimpleName()).append(' ').append(mySecond);
 
         out.append(')');
         return out.toString();

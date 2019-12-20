@@ -1,11 +1,9 @@
-flexmark-java
-=============
+# flexmark-java
 
 &nbsp;<details id="version-history"><summary>**Version History**</summary>
 
 [TOC]: # " "
 
-- [To Do](#to-do)
 - [0.50.46](#05046)
 - [0.50.44](#05044)
 - [0.50.42](#05042)
@@ -104,28 +102,22 @@ flexmark-java
 
 &nbsp;</details>
 
-### To Do
+## 0.50.46
 
-* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:on -->` tags to `Formatter` for
-      controlling non-formatting regions.
-* [ ] Convert anonymous classes to lambda where possible.
-* [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
-      attributes node text.
-
-0.50.46
--------
-
+* Fix:
+  [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled],
+  `USE_HARDCODED_LINK_ADDRESS_PARSER` was not used if matched parentheses were disabled causing
+  stack overflow in regex evaluation.
 * Fix: docx conversion renders mail link text with `mailto:` prefix
 
-0.50.44
--------
+## 0.50.44
 
 * Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
 
-0.50.42
--------
+## 0.50.42
 
-* Fix: regression bug [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
+* Fix: regression bug
+  [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]
   * Add: `AttributesExtension.FENCED_CODE_ADD_ATTRIBUTES`, default
     `FencedCodeAddType.ADD_TO_PRE_CODE` for backward compatibility with 0.42, but if this is
     option is not set and `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` is set to `true`,
@@ -150,8 +142,7 @@ flexmark-java
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
 
-0.50.40
--------
+## 0.50.40
 
 * Add: `BasedSequence.emptyPrefix()` and `BasedSequence.emptySuffix()` to return empty sequence
   at start or end of the current sequence. Useful for `PrefixedSubSequence.of(String,
@@ -160,8 +151,7 @@ flexmark-java
 * Fix: link URL parser not handling char escaping, nested parenthesis tracking and other edge
   cases in jekyll URL macro parsing.
 
-0.50.38
--------
+## 0.50.38
 
 * Fix: real fix for Stack Overflow when parsing long URLs, by hand rolling parsing of link
   destination.
@@ -172,31 +162,27 @@ flexmark-java
 * Add: `BasedSequence.safeBaseCharAt(int)` will return character from the base sequence if index
   out of range for sequence or `\0` if out of base sequence range.
 
-0.50.36
--------
+## 0.50.36
 
 * Fix: `SegmentedSequence` would return sequence with start > end if ending with
   `PrefixedSubSequence` whose position was > end of real sequences before.
 * Add: `BitIntegerSet.toArray(int[], int)` for easy `int[]` creation from bit set.
 * Add: `BitIntegerSet.addAll(int[], int, int)` for setting from `int[]`
 
-0.50.34
--------
+## 0.50.34
 
 * Add: source `Node` to `com.vladsch.flexmark.util.format.TableCell`
 * Fix: Stack overflow when parsing large embedded images with space in URL enabled. Now link
   urls starting with `data:image/png;base64,` do not allow spaces in the link.
 
-0.50.32
--------
+## 0.50.32
 
 * Add: `DocxRenderer` image max-width tests
 * Add: `DocxRenderer` image max-height attribute processing and tests
 * Fix: refactor `DocxRenderer` tests to extract common code to base class
 * Fix: heading rendering to work with styles using numbering
 
-0.50.30
--------
+## 0.50.30
 
 * Fix: `DocxRenderer`
   * Add: page break via empty paragraph with only `{.pagebreak}` attributes
@@ -229,8 +215,7 @@ flexmark-java
     Does not affect result but reduces xml noise.
 * Fix: `Formatter` translation and merge rendering
 
-0.50.28
--------
+## 0.50.28
 
 * Fix: [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]
 * Add: `DocxRenderer.BULLET_LIST_STYLE` default `"BulletList"`, numbering style to use for
@@ -271,27 +256,23 @@ flexmark-java
 * Fix: `Formatter` attributes would eliminate separator space before or after following text
   possibly changing the applicable node for the attribute.
 
-0.50.26
--------
+## 0.50.26
 
 * Fix: docx converter to use `BulletList` and `NumberedList` numbering list styles for list
   conversions to allow easy list item styling for multi-level lists
   * Add: `DocxConverterEmpty` to samples for generating `flexmark-empty-template.docx` from
     `empty.md` and `empty.xml`
 
-0.50.24
--------
+## 0.50.24
 
 * Fix: update docx4j to version 8.1.2
 * Fix: update jsoup to version 1.11.3
 
-0.50.22
--------
+## 0.50.22
 
 * Fix: Attributes with spaces after `{` generated wrong previous text offsets
 
-0.50.20
--------
+## 0.50.20
 
 * Fix: [#357, HTML to markdown and removed nested list]
 * Remove: `FlexmarkHtmlConverter.EXT_TABLES` unused conversion option.
@@ -300,8 +281,7 @@ flexmark-java
   * Add: `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` default `true`, if false will not
     parse attributes after the fenced code info string
 
-0.50.18
--------
+## 0.50.18
 
 * Add: `flexmark-html2md-converter` module which implements HTML to Markdown conversion with an
   extension API to allow customizing the conversion process. Sample:
@@ -309,8 +289,7 @@ flexmark-java
   * Fix: [#313, Ability to override tags processing in FlexmarkHtmlParser]
 * Fix: deprecate the old `flexmark-html-parser` classes
 
-0.50.16
--------
+## 0.50.16
 
 * Fix: GitLab block quotes should have `>>>` as termination, not `<<<`, macros are still
   terminated by `>>>` to allow nested block quotes in macros. Affects:
@@ -406,26 +385,22 @@ flexmark-java
   abstract implementation in `RichCharSequenceBase` and implementation in
   `RichCharSequenceImpl`.
 
-0.42.14
--------
+## 0.42.14
 
 * Fix: [#351, Is there any special format requirement for processing html data to markdown]
 * Fix: HTML parser converts `a` tags in preformatted text to links, should convert to URL only
 
-0.42.12
--------
+## 0.42.12
 
 * Fix: [#349, Translation Helper bugs], mix-up between anchors and other non-translating
   elements after translation.
 
-0.42.10
--------
+## 0.42.10
 
 * Fix: [#349, Translation Helper bugs]
 * Fix: [#348, WRAP\_AUTO\_LINKS defaults to false, Markdown loses a potential useful link]
 
-0.42.8
-------
+## 0.42.8
 
 * Add: PDF converter landscape sample [PdfLandscapeConverter.java]
 * Fix: revert to OpenHtmlToPDF version 0.0.1-RC15 which is the last Java 7 byte code version
@@ -434,25 +409,21 @@ flexmark-java
 * Fix: add explicit `Locale.US` to `String.format()` when using `%d` for integers to prevent
   conversion to arabic on Java 11.
 
-0.42.6
-------
+## 0.42.6
 
 * Fix: [#338, getLineNumber incorrect with Windows end of line separators]
   * merge: [#339, PR: Fix to line number when using Windows EOL characters.] thanks to
 
-0.42.4
-------
+## 0.42.4
 
 * Fix: Trailing URI prefix only auto-links do not get parsed
 
-0.42.2
-------
+## 0.42.2
 
 * Fix: [#334, CR line separators don't produce line break nodes],
   * merge: [#335, PR: Fix CR-only line separator handling] thanks to **[Kijimuna]**
 
-0.42.0
-------
+## 0.42.0
 
 * Fix: [#332, withOptions forgets about old link resolvers]
   * Break: move `com.vladsch.flexmark.Extension` to
@@ -485,8 +456,7 @@ flexmark-java
     list will be removed. Used only when using `withOptions()` and providing new options with
     this key set. Used during testing to remove default extensions.
 
-0.40.34
--------
+## 0.40.34
 
 * Fix: [#328, Html2mark - missing newline when paragraph followed by div]
 * Fix: [#331, Ability to replace empty \<p\> with \<br\> during html2mark conversion]
@@ -494,37 +464,32 @@ flexmark-java
 * Fix: `AutolinkNodePostProcessor` processing links out of order causing sequence end/start
   reversal.
 
-0.40.32
--------
+## 0.40.32
 
 * Fix: compound enumerated references in attributes ids and outside of headings to output with
   last enumerated reference ordinal.
 
-0.40.30
--------
+## 0.40.30
 
 * Fix: limit `EnumeratedReferenceBlock` to single line of text without processing other block
   elements.
 * Fix: change `Abbreviations` to custom block parser from paragraph pre-processor. Allows
   abbreviation definitions without preceding blank line.
 
-0.40.28
--------
+## 0.40.28
 
 * Add: enumerated reference text in heading to be used with only a format reference, the id is
   taken from the heading attributes.
 * Add: compound enumerated references for creating legal numbering for enumerated references.
 
-0.40.26
--------
+## 0.40.26
 
 * Fix: upgrade dependencies
   * OpenHtmlToPdf -> 0.0.1-RC19
   * docx4j -> 6.1.2
 * Add: parse int or default to `Utils.java`
 
-0.40.24
--------
+## 0.40.24
 
 * Break: test case related classes changed to allow providing URL string for the file resource
   used in the text instead of relying on heuristic conversion of resource URL to file path.
@@ -567,14 +532,12 @@ flexmark-java
 * Deprecate: `IParse.transferReferences(Document, Document)`, in favour of
   `IParse.transferReferences(Document, Document, Boolean)`
 
-0.40.22
--------
+## 0.40.22
 
 * Fix: merge util tests from [@James-Adam](https://github.com/James-Adam) and fix bugs
 * Fix: change to `MutableDataSet.set(DataKey<? extends T>, T)`
 
-0.40.20
--------
+## 0.40.20
 
 * Fix: [#316, Github user extension incorrectly formats some text]
   * Add: test to make sure previous character to `@` is not `isUnicodeIdentifierPart()`, `-` nor
@@ -608,8 +571,7 @@ flexmark-java
 * This will print the source location of the test in the console. Clicking the link goes right
   to the spec source file and line of the failed test if [Awesome Console] plugin is installed.
 
-0.40.18
--------
+## 0.40.18
 
 * Add: `EmbeddedAttributeProvider` documentation and add it to the provider's list by default
   unless `HtmlRenderer.EMBEDDED_NODE_PROVIDER` is set to false. Add attributes to nodes in the
@@ -678,8 +640,7 @@ flexmark-java
   tag processing. For now only `MARKDOWN` does nothing useful. Later it will be used to convert
   math ml to GitLab math inline element.
 
-0.40.16
--------
+## 0.40.16
 
 * Fix: `EnumeratedReferenceExtension` would process GitHub issue link text as enumerated
   reference. Now enumerated `reference` must start with a non-digit character to be interpreted
@@ -695,16 +656,14 @@ flexmark-java
     [#305, PR: add new youtube link style support to flexmark-ext-youtube-embedded for youtu.be/xyz(?t=123)],
     send appreciations to **[jjYBdx4IL](https://github.com/jjYBdx4IL)**
 
-0.40.14
--------
+## 0.40.14
 
 * Fix: `AutolinkExtension` removing leading `Typographic` nodes when the first link occurs in
   text following the typographic node.
 * Add: PDF converter sample with non-latin character set rendering information.
 * Fix: missing `simple_smile` emoji cheat sheet shortcut
 
-0.40.12
--------
+## 0.40.12
 
 * Fix: [#300, Typography extension breaks some auto links]
 * Add: `TypographicText` interface to mark nodes which hold text which is replaced with
@@ -712,24 +671,21 @@ flexmark-java
   `AutolinkExtension` is the only one making use of it to prevent typographic smarts from
   breaking up a link and causing part of it to be left out of the URL.
 
-0.40.10
--------
+## 0.40.10
 
 * Fix: GitLab inline math parser to allow multi-line inline math elements
 * Fix: [#295, CoreNodeFormatter does not descend into children on Link nodes] , more like
   kludge, `Formatter.OPTIMIZED_INLINE_RENDERING` when `false` and not translating to always
   render children of link text.
 
-0.40.8
-------
+## 0.40.8
 
 * Fix: change `AttributeProviderFactory` extensions to eliminate duplicate registrations of
   factories.
 * Fix: `AttributesExtension` to assign attributes to explicit/refs links/images
 * Fix: [#299, FlexmarkHtmlParser produces extra empty list item for eclosing \</p\> element]
 
-0.40.6
-------
+## 0.40.6
 
 * Fix: `MarkdownTable.appendTable(FormattingAppendable)` to set
   `FormattingAppendable.ALLOW_LEADING_WHITESPACE` so indentation prefix is not eliminated.
@@ -753,8 +709,7 @@ flexmark-java
   to mark start of attribute assignment to text between `{.}` or `{#}` and the matching
   attributes element.
 
-0.40.4
-------
+## 0.40.4
 
 * Fix: [#295, CoreNodeFormatter does not descend into children on Link nodes]
   * `Link`, `LinkRef`, `Image` and `ImageRef` node formatter renderer now descends into child
@@ -763,8 +718,7 @@ flexmark-java
   previous rendering for links and images which appends the node characters without descending
   into child nodes.
 
-0.40.2
-------
+## 0.40.2
 
 * Fix: [#294, BlankLine nodes within BlockQuote change in behaviour]
   * remove blank lines from AST for `BlockQuote` and `AsideBlock` nodes if
@@ -780,8 +734,7 @@ flexmark-java
   * Add: code to return `List<String>` from child nodes of `YamlFrontMatterNode`
   * Fix: resolve offsets in `YamlFrontMatterNode` and `YamlFrontMatterValue` nodes.
 
-0.40.0
-------
+## 0.40.0
 
 * Fix: Java9+ Compatibility, IntelliJ Migration contained in [migrate 0_35_x to 0_40_0.xml], to
   use:
@@ -897,18 +850,16 @@ flexmark-java
       * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
       * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
-0.35.10
--------
+
+## 0.35.10
 
 * Add: compound enum refs and enum refs in headings without element reference.
 
-0.35.8
-------
+## 0.35.8
 
 * Fix: missing test scope on flexmark-test-utils
 
-0.35.6
-------
+## 0.35.6
 
 * Fix: `MarkdownTable.fillMissingColumns()` would add empty columns not setting the proper
   source offset, causing later `MarkdownTable.addTrackedOffset(int)` to fail
@@ -920,13 +871,11 @@ flexmark-java
 * Add: `FlexmarkHtmlParser.SKIP_CHAR_ESCAPE`, default `false`. When enabled will not escape
   special characters.
 
-0.35.4
-------
+## 0.35.4
 
 * Add: html/ui helpers flexmark-util for use with Swing UI HTML generation
 
-0.35.2
-------
+## 0.35.2
 
 * Fix: base64 encoding function in `ImageUtils` to remove `\n` from encoded string.
 
@@ -973,8 +922,7 @@ flexmark-java
   `Parser.BLANK_LINES_IN_AST` is `false` to force block quote to span the blank lines as the
   only way to extend the block quote enclosed characters.
 
-0.35.0
-------
+## 0.35.0
 
 * Test: navigation
   * Next/Prev Tab
@@ -1032,8 +980,7 @@ flexmark-java
 * Fix: Jira and YouTrack converters ignored `HtmlRenderer.RECHECK_UNDEFINED_REFERENCES`
 * Add: Base64 conversion to image utils
 
-0.34.58
--------
+## 0.34.58
 
 * Fix: possible index out of bounds on segmented sequences
 * Add: HTML parser option to modify id attribute before output. Used to strip prefix
@@ -1049,69 +996,58 @@ flexmark-java
   allows `[TOC]` and `[TOC]: #` to be matched without case sensitivity. The syntax for toc
   options is still case sensitive.
 
-0.34.56
--------
+## 0.34.56
 
 * Fix: [#274, FlexmarkHtmlParser can not handle escaped tags correctly], now `<`, `>` and `&`
   are also escaped.
 
-0.34.53
--------
+## 0.34.53
 
 * Change: revert docx4j to 3.3.4 in docx4j-3 branch
 
-0.34.52
--------
+## 0.34.52
 
 * Fix: intermittent NPE when including macro with table in table
 
-0.34.51
--------
+## 0.34.51
 
 * Fix: intermittent NPE when including macro with table in table in docx4j-3 branch
 
-0.34.50
--------
+## 0.34.50
 
 * Add: `HtmlRenderer.NO_P_TAGS_USE_BR`, default `false`. When enabled instead of wrapping loose
   paragraphs in `<p>` tag adds 2 x `<br />` after paragraph.
 * Fix: extension auto links would not be processed if paragraph had inline parser processed auto
   links before.
 
-0.34.49
--------
+## 0.34.49
 
 * Change: revert docx4j to 3.3.6 in docx4j-3 branch
 
-0.34.48
--------
+## 0.34.48
 
 * Add: `Macros` extension handling to docx converter. Macros allow nesting of block elements
   inside tables.
 
-0.34.46
--------
+## 0.34.46
 
 * Add: `flexmark-ext-macros` extension to allow macro definition and inclusion in inline
   contexts. [Extensions: Macros](../../wiki/Extensions#macros)
 * Fix: `Link.setTextChars(BasedSequence)` was trimming the string before setting `Link.text`.
   Now the full untrimmed text is used.
 
-0.34.44
--------
+## 0.34.44
 
 * Fix: [#271, Regression? Comments are preserved in 0.26.4 but removed in 0.34.40]
   * Fix: formatter HTML comments in non-translating mode did not output comment markers
 * Fix: treat protocol prefix at the end of line as a valid link.
 
-0.34.42
--------
+## 0.34.42
 
 * Add: url parsing to `AutoLink` to set other link parts of the node like: pageref, anchor
   marker and anchor
 
-0.34.40
--------
+## 0.34.40
 
 * Fix: add `HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE`, default `true`. When set
   to `false` changes the default header id generator to not convert non-ascii alphabetic
@@ -1119,26 +1055,22 @@ flexmark-java
 * Fix: add `HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE` set to `false` to `GitHub`
   and `GitHubDoc` parser profiles.
 
-0.34.38
--------
+## 0.34.38
 
 * Fix: docx conversion of hyperlinks did not take relationship part into account when optimizing
   rel references causing invalid rel ids to be used if the same link was included in multiple
   contexts.
 
-0.34.36
--------
+## 0.34.36
 
 * Fix: docx conversion of footnote refs in tables to footnotes which contained links generated
   invalid docx.
 
-0.34.34
--------
+## 0.34.34
 
 * Change: docx4j library version to 6.0.1
 
-0.34.32
--------
+## 0.34.32
 
 * Fix: change anonymous classes to static classes in `CoreNodeDocxRenderer`
 * Add: test case for `Parser.SPACE_IN_LINK_URLS` to validate allowing spaces in URLs
@@ -1147,8 +1079,7 @@ flexmark-java
 * Fix: Docx Converter remove hardcoded "CENTER" alignment for table headings overriding the
   `Table Heading` style provided alignment.
 
-0.34.30
--------
+## 0.34.30
 
 * Fix: [#268, Pipe characters are not escaped in Table (FlexmarkHtmlParser)]
   * Fix: escape pipe characters in text (to avoid accidental use as table or other markup) when
@@ -1165,8 +1096,7 @@ flexmark-java
   are output for formatting/rendering with respect to blank line before/after control.
 * Fix: `GitLab` block quote parser bug for terminating sequence.
 
-0.34.28
--------
+## 0.34.28
 
 * Add: html parser options to specify how to generate some markdown formatting elements, default
   for all is `ExtensionConversion.MARKDOWN`:
@@ -1187,8 +1117,7 @@ flexmark-java
 * Corresponding `SKIP_` options have been deprecated since their function is duplicated by new
   options.
 
-0.34.26
--------
+## 0.34.26
 
 * Fix: Add `DoNotLinkDecorate` to `Code` for preventing AutoLink extension from decorating
   inline code with autolinks.
@@ -1196,8 +1125,7 @@ flexmark-java
   `BasedSequenceImpl.lastIndexOfAnyNot(CharSequence)` were using `indexOf...` instead of
   `lastIndexOf...`
 
-0.34.24
--------
+## 0.34.24
 
 * Fix: `BasedSequenceImpl.countCharsReversed(char, int, int)` and
   `BasedSequenceImpl.countNotCharsReversed(char, int, int)` to not return -1, should return 0
@@ -1205,13 +1133,11 @@ flexmark-java
 * Add: `GitLabExtension`, Documented in
   [Extensions: Gitlab Flavoured Markdown](../../wiki/Extensions#gitlab-flavoured-markdown)
 
-0.34.22
--------
+## 0.34.22
 
 * Add: OSGi module support thanks to [@klcodanr](https://github.com/klcodanr)
 
-0.34.20
--------
+## 0.34.20
 
 * Add: renderer type equivalences for allowing new renderer types which override existing ones.
   Now "YOUTRACK" is defined as an override of "JIRA" by `YouTrackConverterExtension`
@@ -1224,8 +1150,7 @@ flexmark-java
   * `HtmlRenderer.addRenderTypeEquivalence(MutableDataHolder, String, String)` add new to old
     renderer type mapping.
 
-0.34.18
--------
+## 0.34.18
 
 * Add: html parser options to suppress generating some markdown formatting elements, default for
   all is false:
@@ -1247,25 +1172,21 @@ flexmark-java
   generated markdown text.
 * Fix: html parser did not add a blank line before first list item of the first list
 
-0.34.16
--------
+## 0.34.16
 
 * Fix: [#254, customized HTML\_BLOCK\_TAGS Parser option seems not taken into account]
 
-0.34.14
--------
+## 0.34.14
 
 * Fix:
   [#252, GfmUser and GfmIssue are not recognized if immediately followed by non-space character]
   character, change regex to allow word break after user and issue
 
-0.34.12
--------
+## 0.34.12
 
 * Fix: merge [#249, support Jira links titles] thanks to @qwazer
 
-0.34.10
--------
+## 0.34.10
 
 * Fix: [#247, Admonition Expression may lack a part of the text.]
 * Add: `TocExtension.TOC_CONTENT`, `TocExtension.TOC_LIST`, `SimTocExtension.TOC_CONTENT`,
@@ -1279,31 +1200,27 @@ flexmark-java
   * Add: `TocExtension.LIST_CLASS` default `""`, class attribute to use on table of content `ul`
     or `ol` element, duplicated as `SimTocExtension.LIST_CLASS`
 
-0.34.8
-------
+## 0.34.8
 
 * Fix: [#220, Jekyll Tag "include"]
 * Fix: [#245, Markdown output of multiple Definition Lists has a problem that list items merge.]
   Blank lines were removed if `Parser.BLANK_LINES_IN_AST` is `false`
 
-0.34.6
-------
+## 0.34.6
 
 * Fix: [#243, Markdown output of ImageRef syntax referencing ID is incorrect]
 * Fix: [#244, Duplicate footnotes have the problem of HTML ID collision conflict.] Now each
   footnote reference adds a back references and the id of the back reference has `-#` suffix
   added except for the first back-reference, where `#` is an integer from 1..N
 
-0.34.4
-------
+## 0.34.4
 
 * Add: media tags extension thanks to Cornelia Schultz (GitHub @CorneliaXaos)
 * Change: convert class methods to static when possible
 * Fix: [#239, flexmark-ext-youtube-embedded missing test case for '@' usage.]
 * Fix: add ability to escape `@` for youtube links.
 
-0.34.2
-------
+## 0.34.2
 
 * Fix: update nexus staging plugin to 1.6.7
 * Fix: move nexus-staging plugin to deploy profile so it is not needed for ci test build
@@ -1311,8 +1228,7 @@ flexmark-java
 * Fix: for matched parenthesis destination link parsing, only treat backslash as escape if
   followed by characters which can be escaped.
 
-0.34.0
-------
+## 0.34.0
 
 * Fix: table formatter for translations to insert a space if the translated text is empty.
 * Add: changed regex for parsing unquoted HTML attribute value to exclude `{}`.
@@ -1333,8 +1249,7 @@ flexmark-java
 * Add: to html parser recognition that `<img alt="emoji category:shortcut" src="">` is an emoji
   shortcut generated by flexmark-java emoji extension and convert it to such.
 
-0.32.24
--------
+## 0.32.24
 
 * Fix: [#232, List continuation], add `Formatter.LIST_REMOVE_EMPTY_ITEMS`, default `false`. If
   `true` then empty list items or list items which only contain a `BlankLine` node are removed
@@ -1342,8 +1257,7 @@ flexmark-java
 * Fix: formatter output of empty list items
 * Fix: formatter output of empty loose task list items
 
-0.32.22
--------
+## 0.32.22
 
 * Fix: [#229, gfm-tasklist extension - add state class to list item]
   * Add: `TaskListExtension.ITEM_DONE_CLASS` and `TaskListExtension.ITEM_NOT_DONE_CLASS` `li`
@@ -1382,18 +1296,15 @@ flexmark-java
   including wildcard match patterns. Any recognized auto-link which matches the expression will
   be rendered as text.
 
-0.32.20
--------
+## 0.32.20
 
 * Fix: [#225, BlankLine nodes within IndentedCodeBlock]
 
-0.32.18
--------
+## 0.32.18
 
 * Fix: [#216, Wrong source positions for Tables with empty TableHead/TableBody]
 
-0.32.16
--------
+## 0.32.16
 
 * Fix: change all javadoc/overview.html to be generated from javadoc/overview.md files.
 * Fix: admonition.css remove non-existent `horiz-align` property.
@@ -1406,8 +1317,7 @@ flexmark-java
   `HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS` to `"_"` to match current GitHub heading id
   generation rules.
 
-0.32.14
--------
+## 0.32.14
 
 * Change: `AdmonitionExtension.WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH` to
   `AdmonitionExtension.WITH_SPACES_INTERRUPTS_ITEM_PARAGRAPH`
@@ -1417,8 +1327,7 @@ flexmark-java
 * Fix: [#213, Attributes element does not allow spaces before closing }]
 * Fix: update to open html to pdf 0.0.1-RC12
 
-0.32.12
--------
+## 0.32.12
 
 * Add: `DocxRenderer.TABLE_PREFERRED_WIDTH_PCT` default `0`, if `0` then table width is `auto`,
   otherwise specifies percent of page width.
@@ -1426,8 +1335,7 @@ flexmark-java
 * Add: `DocxRenderer.TABLE_STYLE` default `""`, if not empty then table then table style will be
   set to this value and default cell borders will not be generated.
 
-0.32.10
--------
+## 0.32.10
 
 * Add: `AdmonitionBlock` getters/setters for `titleOpeningMarker`, `title`, `titleClosingMarker`
 * Fix: `AdmonitionNodeRenderer` remove erroneous, extra `</div>`
@@ -1438,15 +1346,13 @@ flexmark-java
   * ADMONITION_TITLE_PART - heading title span
   * ADMONITION_BODY_PART - admonition body div
 
-0.32.8
-------
+## 0.32.8
 
 * Add: [Admonition Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#admonition)
   To create block-styled side content. For complete documentation please see the
   [Admonition Extension, Material for MkDocs] documentation.
 
-0.32.6
-------
+## 0.32.6
 
 * Add: `DocxRenderer.PREFIX_WWW_LINKS`, default `true`, when true adds `http://` to link
   addresses which start with `www.`
@@ -1454,13 +1360,11 @@ flexmark-java
 * Fix: `DocxRenderer` some images would not be embedded and generate a CRC Error when loaded via
   URL vs file.
 
-0.32.4
-------
+## 0.32.4
 
 * Fix: [#207, Issue extension doesn't support windows new lines], same for Gfm User extension.
 
-0.32.2
-------
+## 0.32.2
 
 * Add: `EmojiExtension.ATTR_IMAGE_CLASS`, default `""`, if not empty will set the image tag
   class attribute to this value.
@@ -1470,8 +1374,7 @@ flexmark-java
 
 * Fix: update to docx4j version 3.3.6
 
-0.32.0
-------
+## 0.32.0
 
 * **API Change**: removed `EmojiCheatSheet` class to replace with `EmojiShortcuts` which has
   better referencing for GitHub shortcuts and unicode chars for all emojis from
@@ -1555,8 +1458,7 @@ flexmark-java
   * Add: `DocxRenderer.DOC_EMOJI_IMAGE_VERT_SIZE`, default `1.05`, size of emoji image as a
     factor of line height at point of insertion.
 
-0.30.0
-------
+## 0.30.0
 
 * Fix: [#198, StringIndexOutOfBoundsException] in `AbbreviationExtension` if abbreviation
   definition had an empty abbreviation.
@@ -1710,6 +1612,9 @@ setting either will affect both keys. For information on these keys see
 [#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
 [#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
 [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
+[#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
+[#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
+[#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled]: https://github.com/vsch/flexmark-java/issues/381
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
@@ -1721,7 +1626,3 @@ setting either will affect both keys. For information on these keys see
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 
-
-[#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
-
-[#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376

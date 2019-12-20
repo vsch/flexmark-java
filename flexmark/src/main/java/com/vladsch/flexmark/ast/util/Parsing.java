@@ -142,8 +142,8 @@ public class Parsing {
                         (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
                         ESCAPED_CHAR + "|\\\\|" + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? IN_PARENS_W_SP : IN_PARENS_NOSP) + ")*");
         this.LINK_DESTINATION_MATCHED_PARENS = Pattern.compile(
-                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")
-                        + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
+                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "") +
+                        (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
                         ESCAPED_CHAR + "|\\\\|\\(|\\))*");
         this.LINK_DESTINATION_MATCHED_PARENS_NOSP = Pattern.compile(
                 "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")
