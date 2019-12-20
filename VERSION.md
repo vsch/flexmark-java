@@ -230,6 +230,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
           derived from their descendant items.
     * [ ] `ORDERED_TASK_ITEM_PRIORITY`: `Integer`, priority to use for parent item. Ordered task
           items do not not sort on priority since they are already ordered by number.
+* Fix: `ListBlockParser` escape/unEscape handler not checking if returned index == -1 and not
+  handling empty char sequence.
+* Fix: `MarkdownParagraph` not checking if passed sequence is empty before invoking special
+  lead-in escape/unEscape handlers, which is not part of the API contract.
 * Fix: make `Paired` extend `Map.Entry`
 * Fix:
   [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled],

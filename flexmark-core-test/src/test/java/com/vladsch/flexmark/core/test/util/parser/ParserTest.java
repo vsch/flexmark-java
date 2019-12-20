@@ -449,6 +449,12 @@ final public class ParserTest {
         assertEquals("2", escape("2", parser));
         assertEquals("3", escape("3", parser));
 
+        assertEquals("", escape("", parser));
+
+        assertEquals("1 ", escape("1 ", parser));
+        assertEquals("2 ", escape("2 ", parser));
+        assertEquals("3 ", escape("3 ", parser));
+
         assertEquals("1\\.", escape("1.", parser));
         assertEquals("1.abc", escape("1.abc", parser));
 

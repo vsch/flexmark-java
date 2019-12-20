@@ -467,7 +467,7 @@ public class MarkdownParagraph {
         }
 
         void processLeadInEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
-            if (escapeSpecialLeadInChars) {
+            if (sequence.isNotEmpty() && escapeSpecialLeadInChars) {
                 for (SpecialLeadInHandler handler : handlers) {
                     if (handler.escape(sequence, this::addChars)) return;
                 }
@@ -476,7 +476,7 @@ public class MarkdownParagraph {
         }
 
         void processLeadInUnEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
-            if (unEscapeSpecialLeadInChars) {
+            if (sequence.isNotEmpty() && unEscapeSpecialLeadInChars) {
                 for (SpecialLeadInHandler handler : handlers) {
                     if (handler.unEscape(sequence, this::addChars)) return;
                 }

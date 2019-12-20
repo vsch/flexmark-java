@@ -35,11 +35,11 @@ public class ListBlockParser extends AbstractBlockParser {
     private final ListBlock myBlock;
     private final ListOptions myOptions;
     private final ListData myListData;
-    private ListItemParser myLastChild = null;
-    private BasedSequence myItemHandledLine = null;
-    private boolean myItemHandledNewListLine;
-    private boolean myItemHandledNewItemLine;
-    private boolean myItemHandledSkipActiveLine;
+    ListItemParser myLastChild = null;
+    BasedSequence myItemHandledLine = null;
+    boolean myItemHandledNewListLine;
+    boolean myItemHandledNewItemLine;
+    boolean myItemHandledSkipActiveLine;
 
     public ListBlockParser(ListOptions options, ListData listData, ListItemParser listItemParser) {
         myOptions = options;
@@ -488,7 +488,7 @@ public class ListBlockParser extends AbstractBlockParser {
         public boolean escape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
             if (super.escape(sequence, consumer)) return true;
             int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
-            if (nonDigit + 1 == sequence.length() && orderedDelims.test(sequence.charAt(nonDigit))) {
+            if (nonDigit != -1 && nonDigit + 1 == sequence.length() && orderedDelims.test(sequence.charAt(nonDigit))) {
                 consumer.accept(sequence.subSequence(0, nonDigit));
                 consumer.accept("\\");
                 consumer.accept(sequence.subSequence(nonDigit));
@@ -501,7 +501,7 @@ public class ListBlockParser extends AbstractBlockParser {
         public boolean unEscape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
             if (super.unEscape(sequence, consumer)) return true;
             int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
-            if (nonDigit + 2 == sequence.length() && sequence.charAt(nonDigit) == '\\' && orderedDelims.test(sequence.charAt(nonDigit + 1))) {
+            if (nonDigit != -1 && nonDigit + 2 == sequence.length() && sequence.charAt(nonDigit) == '\\' && orderedDelims.test(sequence.charAt(nonDigit + 1))) {
                 consumer.accept(sequence.subSequence(0, nonDigit));
                 consumer.accept(sequence.subSequence(nonDigit + 1));
                 return true;
