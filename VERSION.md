@@ -44,12 +44,13 @@
 - [0.59.17](#05917)
 - [0.59.15](#05915)
 - [0.59.13](#05913)
-    - [0.59.11](#05911)
-    - [0.59.9](#0599)
-    - [0.59.7](#0597)
-    - [0.59.5](#0595)
-    - [0.59.1](#0591)
-- [Next 0.50.44](#next-05044)
+- [0.59.11](#05911)
+- [0.59.9](#0599)
+- [0.59.7](#0597)
+- [0.59.5](#0595)
+- [0.59.1](#0591)
+- [0.50.46](#05046)
+- [0.50.44](#05044)
 - [0.50.42](#05042)
 - [0.50.40](#05040)
 - [0.50.38](#05038)
@@ -213,7 +214,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.82
 
-* Fix: make `Paired` extend `Map.Entry`
 * [ ] Add: missing formatter options:
   * [ ] Add: Formatter control for controlling non-formatting regions.
     * [ ] `<!-- @formatter:on -->` and `<!-- @formatter:off -->` tags
@@ -230,6 +230,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
           derived from their descendant items.
     * [ ] `ORDERED_TASK_ITEM_PRIORITY`: `Integer`, priority to use for parent item. Ordered task
           items do not not sort on priority since they are already ordered by number.
+* Fix: make `Paired` extend `Map.Entry`
+* Fix:
+  [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled],
+  `USE_HARDCODED_LINK_ADDRESS_PARSER` was not used if matched parentheses were disabled causing
+  stack overflow in regex evaluation.
 
 ## 0.59.80
 
@@ -1000,7 +1005,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   | Comment Lines |   9,878 |   9,597 |
   | Blank Lines   |  17,646 |  17,013 |
 
-### 0.59.11
+## 0.59.11
 
 * Fix: remove need to load/unload extensions. Properly handle removal from `EXTENSIONS` property
   for those tests that need it by implementing `LOAD_EXTENSIONS` property and
@@ -1019,7 +1024,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   formats as it was in original markdown to allow preserving format as is when it is not
   significant or confusing.
 
-### 0.59.9
+## 0.59.9
 
 * Fix: `NO_EOL` option for tests was applied inconsistently.
 * Fix: add `SpecExample` argument to `getSpecExampleRenderer`
@@ -1032,7 +1037,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     default will change to `FencedCodeAddType.ADD_TO_PRE` since attributes after info are used
     to add to the `code` tag.
 
-### 0.59.7
+## 0.59.7
 
 * Add: `SpecExampleRenderer.finalizeRender()` to allow tests and others to clean up after each
   rendering
@@ -1043,12 +1048,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   apply changes to options.
 * Fix: add dual argument constructor to `MutableDataSet`
 
-### 0.59.5
+## 0.59.5
 
 * Fix: change `AttributesExtension.FENCED_CODE_INFO_ATTRIBUTES` to default `false` to match
   previous versions.
 
-### 0.59.1
+## 0.59.1
 
 * Fix: MarkdownTable index out of bounds in some functions when table has no rows
 * Fix: `DataSet` copy constructors to accept `null`
@@ -1070,7 +1075,15 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
 
-## Next 0.50.44
+## 0.50.46
+
+* Fix:
+  [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled],
+  `USE_HARDCODED_LINK_ADDRESS_PARSER` was not used if matched parentheses were disabled causing
+  stack overflow in regex evaluation.
+* Fix: docx conversion renders mail link text with `mailto:` prefix
+
+## 0.50.44
 
 * Fix: [#376, convert markdown to html], delimiters are not allowed to span table cells.
 
@@ -1841,6 +1854,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#362, ArrayIndexOutOfBoundsException in BasedSequence.indexOfAll]: https://github.com/vsch/flexmark-java/issues/362
 [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
 [#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
+[#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled]: https://github.com/vsch/flexmark-java/issues/381
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna

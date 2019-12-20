@@ -8,6 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class LinkDestinationParserTest {
+    LinkDestinationParser noParenParser;
     LinkDestinationParser normalParser;
     LinkDestinationParser spacesParser;
     LinkDestinationParser jekyllParser;
@@ -15,10 +16,11 @@ public class LinkDestinationParserTest {
 
     @Before
     public void setUp() throws Exception {
-        normalParser = new LinkDestinationParser(false, false, false);
-        spacesParser = new LinkDestinationParser(true, false, false);
-        jekyllParser = new LinkDestinationParser(false, true, false);
-        jekyllSpacesParser = new LinkDestinationParser(true, true, false);
+        normalParser = new LinkDestinationParser(true, false, false, false);
+        noParenParser = new LinkDestinationParser(false, false, false, false);
+        spacesParser = new LinkDestinationParser(true, true, false, false);
+        jekyllParser = new LinkDestinationParser(true, false, true, false);
+        jekyllSpacesParser = new LinkDestinationParser(true, true, true, false);
     }
 
     // @formatter:off
@@ -31,6 +33,20 @@ public class LinkDestinationParserTest {
     @Test public void test_Normal7() { assertEquals("(abc)", normalParser.parseLinkDestination(CharSubSequence.of("(abc)"), 0).toString()); }
     @Test public void test_Normal8() { assertEquals("\\(abc", normalParser.parseLinkDestination(CharSubSequence.of("\\(abc)"), 0).toString()); }
     @Test public void test_Normal9() { assertEquals("abc\\", normalParser.parseLinkDestination(CharSubSequence.of("abc\\ "), 0).toString()); }
+    @Test public void test_Normal10() { assertEquals("((abc))", normalParser.parseLinkDestination(CharSubSequence.of("((abc))"), 0).toString()); }
+
+    @Test public void test_NoParen1() { assertEquals("", noParenParser.parseLinkDestination(CharSubSequence.of(""), 0).toString()); }
+    @Test public void test_NoParen2() { assertEquals("abc", noParenParser.parseLinkDestination(CharSubSequence.of("abc"), 0).toString()); }
+    @Test public void test_NoParen3() { assertEquals("bc", noParenParser.parseLinkDestination(CharSubSequence.of("abc"), 1).toString()); }
+    @Test public void test_NoParen4() { assertEquals("bc", noParenParser.parseLinkDestination(CharSubSequence.of("abc \""), 1).toString()); }
+    @Test public void test_NoParen5() { assertEquals("bc", noParenParser.parseLinkDestination(CharSubSequence.of("abc '"), 1).toString()); }
+    @Test public void test_NoParen6() { assertEquals("abc", noParenParser.parseLinkDestination(CharSubSequence.of("abc)"), 0).toString()); }
+    @Test public void test_NoParen7() { assertEquals("(abc)", noParenParser.parseLinkDestination(CharSubSequence.of("(abc)"), 0).toString()); }
+    @Test public void test_NoParen8() { assertEquals("\\(abc", noParenParser.parseLinkDestination(CharSubSequence.of("\\(abc)"), 0).toString()); }
+    @Test public void test_NoParen9() { assertEquals("abc\\", noParenParser.parseLinkDestination(CharSubSequence.of("abc\\ "), 0).toString()); }
+    @Test public void test_NoParen10() {assertEquals("", noParenParser.parseLinkDestination(CharSubSequence.of("((abc))"), 0).toString()); }
+    @Test public void test_NoParen11() { assertEquals("", noParenParser.parseLinkDestination(CharSubSequence.of("(abc()"), 0).toString()); }
+    @Test public void test_NoParen12() { assertEquals("", noParenParser.parseLinkDestination(CharSubSequence.of("(abc(())"), 0).toString()); }
 
     @Test public void test_Spaces1() { assertEquals("ab c", spacesParser.parseLinkDestination(CharSubSequence.of("ab c"), 0).toString()); }
     @Test public void test_Spaces2() { assertEquals("b c", spacesParser.parseLinkDestination(CharSubSequence.of("ab c"), 1).toString()); }

@@ -63,11 +63,21 @@ public class LinkDestinationParser {
     public final BitSet PAREN_EXCLUDED_CHARS;
     public final BitSet PAREN_ESCAPABLE_CHARS;
     public final BitSet PAREN_QUOTE_CHARS;
+    public final boolean allowMatchedParentheses;
     public final boolean spaceInUrls;
     public final boolean parseJekyllMacrosInUrls;
     public final boolean intellijDummyIdentifier;
 
-    public LinkDestinationParser(boolean spaceInUrls, boolean parseJekyllMacrosInUrls, boolean intellijDummyIdentifier) {
+    /**
+     * Parse Link Destination
+     *
+     * @param allowMatchedParentheses allow matched parentheses in link address. NOTE: if jekyll macros option is enabled, them matched parentheses will be enabled even if not selected.
+     * @param spaceInUrls             allow space in address
+     * @param parseJekyllMacrosInUrls allow jekyll macros, matched {{ and }}
+     * @param intellijDummyIdentifier allow intellij dummy identifier character
+     */
+    public LinkDestinationParser(boolean allowMatchedParentheses, boolean spaceInUrls, boolean parseJekyllMacrosInUrls, boolean intellijDummyIdentifier) {
+        this.allowMatchedParentheses = allowMatchedParentheses || parseJekyllMacrosInUrls;
         this.spaceInUrls = spaceInUrls;
         this.parseJekyllMacrosInUrls = parseJekyllMacrosInUrls;
         this.intellijDummyIdentifier = intellijDummyIdentifier;
@@ -199,7 +209,20 @@ public class LinkDestinationParser {
                             lastMatch = nextIndex;
                             break;
                         } else if (c == '(') {
-                            if (openJekyllState != 2) openParenCount++;
+                            if (openJekyllState != 2) {
+                                if (allowMatchedParentheses) {
+                                    openParenCount++;
+                                } else {
+                                    if (openParenCount == 0) {
+                                        openParenCount++;
+                                    } else {
+                                        // invalid, parentheses need escaping beyond 1
+                                        lastMatch = startIndex;
+                                        openParenState = -1;
+                                        break;
+                                    }
+                                }
+                            }
                             lastMatch = nextIndex;
                             break;
                         } else if (c == ')') {
@@ -210,6 +233,9 @@ public class LinkDestinationParser {
                             if (openParenCount > 0) {
                                 openParenCount--;
                                 lastMatch = nextIndex;
+                                break;
+                            } else if (!allowMatchedParentheses) {
+                                openParenState = -1;
                                 break;
                             }
                         } else {

@@ -63,20 +63,20 @@ public class PegdownOptionsAdapter {
     }
 
     /**
-     * Test if any given extensions are set
+     * Test if any of the given extensions are in the mask
      *
      * @param mask extension flag mask
-     * @return true if any of the extensions given by the mask are set
+     * @return true if any of the extensions given by the mask
      */
     public boolean haveAnyExtensions(int mask) {
         return ParserEmulationProfile.haveAny(myPegdownExtensions, mask);
     }
 
     /**
-     * Test if all given extensions are set
+     * Test if all given extensions are in the mask
      *
      * @param mask extension flag mask
-     * @return true if any of the extensions given by the mask are set
+     * @return true if any of the extensions given by the mask
      */
     public boolean haveAllExtensions(int mask) {
         return ParserEmulationProfile.haveAll(myPegdownExtensions, mask);
