@@ -127,15 +127,18 @@ public class MarkdownParagraph {
                 OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
                 int index = info.endIndex;
 
+                int endLineWrapped = wrapped.endOfLine(index);
+
                 if (!trackedOffset.isAfterSpaceEdit() && (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete())) {
-                    // need to keep it at the previous character but not when inserting as space
+                    // need to keep it at the previous character but not when inserting as space or deleting 1 char surrounded by spaces,
+                    // except when offset is at end of line
                     index = info.startIndex;
-                    if (trackedOffset.isAfterDelete()) offsetSpacesAfter = 0;
+                    endLineWrapped = wrapped.endOfLine(index);
+                    if (trackedOffset.isAfterDelete() && index == endLineWrapped) offsetSpacesAfter = 0;
                     offsetSpaces = 0;
                 }
 
                 int startLineWrapped = wrapped.startOfLine(index);
-                int endLineWrapped = wrapped.endOfLine(index);
                 int firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
 
                 // NOTE: if typing space before or on start of continuation line, then do not move tracked offset to previous line

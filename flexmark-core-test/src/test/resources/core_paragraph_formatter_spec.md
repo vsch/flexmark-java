@@ -303,7 +303,23 @@ Add: configuration ⦙ for repeated.  ⦙  ⦙
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 14) options(margin[66], restore-tracked-spaces)
+backspace after typing 1 char should preserve surrounding spaces
+
+```````````````````````````````` example(Wrap: 14) options(margin[66], delete-char, restore-tracked-spaces)
+Add: configuration ⦙ for repeated.
+.
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [19, d) } --> 19
+
+---- Ranges ------------------------------------------------------------
+⟦Add: configuration  for repeated.⟧
+
+---- Result ------------------------------------------------------------
+Add: configuration ⦙ for repeated.
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 15) options(margin[66], restore-tracked-spaces)
 Add: configuration for repeated. ⦙ ➥[simLink](simLink.md)
 .
 ---- Tracked Offsets ---------------------------------------------------
@@ -319,7 +335,7 @@ Add: configuration for repeated. ⦙
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 15) options(margin[66], insert-space, restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 16) options(margin[66], insert-space, restore-tracked-spaces)
 Add: configuration for repeated.
  ⦙➥[simLink](simLink.md)
 .
@@ -336,7 +352,7 @@ Add: configuration for repeated. ⦙
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 16) options(margin[66], insert-char, restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 17) options(margin[66], insert-char, restore-tracked-spaces)
 Add: configuration for repeated.
 t⦙➥[simLink](simLink.md)
 .
@@ -353,7 +369,7 @@ Add: configuration for repeated. t⦙
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 17) options(margin[30], insert-char, restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 18) options(margin[30], insert-char, restore-tracked-spaces)
 text should wrap onto the next t⦙
 line at right margin of 30
 .
@@ -370,7 +386,7 @@ t⦙ line at right margin of 30
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 18) options(margin[32], insert-char, restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 19) options(margin[32], insert-char, restore-tracked-spaces)
 text should wrap onto the next tt⦙
 line at right margin of 30
 .
@@ -387,7 +403,7 @@ tt⦙ line at right margin of 30
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 19) options(margin[32], delete-char, restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 20) options(margin[32], delete-char, restore-tracked-spaces)
 text should wrap onto the next
 t⦙ line at right margin of 30
 .
@@ -404,7 +420,7 @@ line at right margin of 30
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 20) options(margin[96], delete-char, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
+```````````````````````````````` example(Wrap: 21) options(margin[96], delete-char, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧⦙ keep duplicate code.
 .
@@ -421,7 +437,7 @@ line at right margin of 30
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 21) options(margin[96], insert-space, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
+```````````````````````````````` example(Wrap: 22) options(margin[96], insert-space, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧ ⦙to keep duplicate code.
 .
@@ -438,7 +454,7 @@ line at right margin of 30
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 22) options(margin[96], insert-space, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
+```````````````````````````````` example(Wrap: 23) options(margin[96], insert-space, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙ to keep duplicate code.
 .
 ---- Tracked Offsets ---------------------------------------------------
@@ -454,7 +470,7 @@ line at right margin of 30
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 23) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
+```````````````````````````````` example(Wrap: 24) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
 ⟦* ⟧Fix: conversion from Smart to based to extract more source information from segmented
 ⟦  ⟧sequence ⦙and mapped sequence.
 .
@@ -471,7 +487,7 @@ line at right margin of 30
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 24) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
+```````````````````````````````` example(Wrap: 25) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
 ⟦* ⟧Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
 .
 ---- Tracked Offsets ---------------------------------------------------
