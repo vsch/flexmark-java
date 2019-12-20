@@ -4,7 +4,6 @@
 
 [TOC]: # " "
 
-- [To Do](#to-do)
 - [Release 0.60.0](#release-0600)
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
@@ -95,14 +94,6 @@
 
 &nbsp;</details>
 
-### To Do
-
-* [ ] Add: `<!-- @formatter:on -->` and `<!-- @formatter:off -->` tags to `Formatter` for
-      controlling non-formatting regions.
-* [ ] Convert anonymous classes to lambda where possible.
-* [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
-      attributes node text.
-
 ## Release 0.60.0
 
 ### API Refactoring
@@ -145,6 +136,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * [ ] `TemplateUtil.java` to `flexmark-util-misc`
     * [ ] `Utils.java` to `flexmark-util-misc`
 * [ ] Break: delete deprecated properties, methods and classes
+* [ ] Convert anonymous classes to lambda where possible.
 * [x] Add: `org.jetbrains:annotations:18.0` dependency to have `@Nullable`/`@NotNull`
       annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
       have these annotations for analysis of potential problems and use with Kotlin.
@@ -213,9 +205,31 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
 * [ ] Fix: Document docx form controls in wiki.
+* [ ] Add: table recovery utility to restore table after it was wrapped as plain text paragraph.
+      Needed when formatting is applied without a table extension. If not noticed will result in
+      a table which is tedious to recover manually. Handle only tables with leading and trailing
+      `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
+      ends and another begins.
 
 ## Next 0.59.82
 
+* Fix: make `Paired` extend `Map.Entry`
+* [ ] Add: missing formatter options:
+  * [ ] Add: Formatter control for controlling non-formatting regions.
+    * [ ] `<!-- @formatter:on -->` and `<!-- @formatter:off -->` tags
+    * [ ] `FORMAT_CONTROL_ON`: `String`
+    * [ ] `FORMAT_CONTROL_OFF`: `String`
+    * [ ] `FORMAT_CONTROL_REGEX`: `Boolean` to treat control on/off strings as regex pattern.
+  * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping
+        the attributes node text.
+  * [ ] prioritized task items: `flexmark-ext-gfm-tasklist`
+    * [ ] `TASK_ITEM_PRIORITY`: `int[]`, specifies integer priority for item marker characters
+          corresponding to `LISTS_ITEM_PREFIX_CHARS` used for list items. Higher number is
+          higher priority. A parent item's priority is the max priority of itself and any of its
+          descendant task items. Non-task items do not have their own priority, only priority
+          derived from their descendant items.
+    * [ ] `ORDERED_TASK_ITEM_PRIORITY`: `Integer`, priority to use for parent item. Ordered task
+          items do not not sort on priority since they are already ordered by number.
 
 ## 0.59.80
 
@@ -225,8 +239,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 ## 0.59.78
 
 * Fix: `MarkdownParagraph` wrap tracked offset adjustment:
-  * on typing space in middle of word with second word becoming first non
-    blank on a continuation line.
+  * on typing space in middle of word with second word becoming first non blank on a
+    continuation line.
   * on typing space at start of continuation line with `LS` ahead of position.
   * on typing space after non-space at start of continuation line with `LS` ahead of position.
   * on typing space after end of paragraph after the right margin.

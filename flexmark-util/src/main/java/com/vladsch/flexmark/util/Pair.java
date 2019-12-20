@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.util;
 
+import java.util.Map;
 import java.util.Objects;
 
-public class Pair<K, V> implements Paired<K, V> {
+final public class Pair<K, V> implements Paired<K, V> {
     public static <K1, V1> Pair<K1, V1> of(K1 first, V1 second) {
         return new Pair<>(first, second);
     }
@@ -26,6 +27,21 @@ public class Pair<K, V> implements Paired<K, V> {
     }
 
     @Override
+    public K getKey() {
+        return first;
+    }
+
+    @Override
+    public V getValue() {
+        return second;
+    }
+
+    @Override
+    public V setValue(V value) {
+        throw new IllegalStateException("setValue not supported");
+    }
+
+    @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
         out.append('(');
@@ -45,12 +61,13 @@ public class Pair<K, V> implements Paired<K, V> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        if (!(o instanceof Map.Entry<?, ?>)) return false;
 
-        Pair<?, ?> pair = (Pair<?, ?>) o;
+        Map.Entry<?, ?> pair = (Map.Entry<?, ?>) o;
 
-        if (!Objects.equals(first, pair.first)) return false;
-        return Objects.equals(second, pair.second);
+        if (!Objects.equals(first, pair.getKey())) return false;
+        return Objects.equals(second, pair.getValue());
     }
 
     @Override

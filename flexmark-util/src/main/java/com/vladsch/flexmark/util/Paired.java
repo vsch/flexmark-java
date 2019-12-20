@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util;
 
-public interface Paired<K, V> {
+import java.util.Map;
+
+public interface Paired<K, V> extends Map.Entry<K, V> {
     K getFirst();
     V getSecond();
 
