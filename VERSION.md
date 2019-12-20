@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.50.46](#05046)
 - [0.50.44](#05044)
 - [0.50.42](#05042)
 - [0.50.40](#05040)
@@ -110,6 +111,11 @@ flexmark-java
 * [ ] Convert anonymous classes to lambda where possible.
 * [ ] Add: `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
       attributes node text.
+
+0.50.46
+-------
+
+* Fix: docx conversion renders mail link text with `mailto:` prefix
 
 0.50.44
 -------

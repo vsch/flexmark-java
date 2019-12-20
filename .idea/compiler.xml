@@ -69,8 +69,7 @@
         <module name="flexmark-ext-footnotes" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="PREFER_TARGET_JDK_COMPILER" value="false" />

@@ -908,7 +908,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     private void render(MailLink node, DocxRendererContext docx) {
         addRunAttributeFormatting(node, docx);
-        renderURL(node.getChars(), docx, "mailto:" + node.getChars().unescape());
+        String text = node.getChars().unescape();
+        renderURL(node.getChars(), docx, "mailto:" + text, text);
     }
 
     private void render(Link node, DocxRendererContext docx) {
