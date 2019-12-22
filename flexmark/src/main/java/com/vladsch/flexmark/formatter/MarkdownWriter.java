@@ -82,6 +82,7 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
             if (prefix != null) append(prefix);
             append(csq);
             if (suffix != null) append(suffix);
+            if (suffix2 != null) append(suffix2);
         }
         return this;
     }

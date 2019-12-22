@@ -219,34 +219,35 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * [ ] `SORT_DELETE_UNUSED`
     * [ ] `DELETE_UNUSED`
   * [ ] `HeadingStyle`
-  * [ ] `CONTINUATION_ALIGNMENT`
   * [ ] `BLOCK_QUOTE_CONTINUATION_MARKERS`
   * [ ] `LIST_ALIGN_FIRST_LINE_TEXT`
   * [ ] `LIST_ALIGN_CHILD_BLOCKS`
   * [ ] `LIST_ALIGN_NUMERIC`
   * [ ] `LIST_RESET_FIRST_ITEM_NUMBER`
-  * [ ] Add: Formatter control for controlling non-formatting regions.
-    * [ ] `<!-- @formatter:on -->` and `<!-- @formatter:off -->` tags
-    * [ ] `FORMAT_CONTROL_ON`: `String`
-    * [ ] `FORMAT_CONTROL_OFF`: `String`
-    * [ ] `FORMAT_CONTROL_REGEX`: `Boolean` to treat control on/off strings as regex pattern.
   * [ ] `flexmark-ext-spec-example`
     * `KEEP_TRAILING_SPACES` option
-  * [ ] `flexmark-ext-attributes` formatting of individual attributes instead of dumping
-        the attributes node text.
+  * [ ] `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
+        attributes node text.
     * `FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE`
     * `FORMAT_ATTRIBUTES_SPACES`
     * `FORMAT_ATTRIBUTE_EQUAL_SPACE`
     * `FORMAT_ATTRIBUTE_VALUE_QUOTES`
   * prioritized task items: `flexmark-ext-gfm-tasklist`
     * [ ] Test:
-    * `FORMAT_ORDERED_TASK_ITEM_PRIORITY`: `Integer`, priority to use for parent item. Ordered task
-          items do not not sort on priority since they are already ordered by number.
-    * `FORMAT_TASK_ITEM_PRIORITIES`: `int[]`, specifies integer priority for item marker characters
-          corresponding to `LISTS_ITEM_PREFIX_CHARS` used for list items. Higher number is
-          higher priority. A parent item's priority is the max priority of itself and any of its
-          descendant task items. Non-task items do not have their own priority, only priority
-          derived from their descendant items.
+    * `FORMAT_ORDERED_TASK_ITEM_PRIORITY`: `Integer`, priority to use for parent item. Ordered
+      task items do not not sort on priority since they are already ordered by number.
+    * `FORMAT_TASK_ITEM_PRIORITIES`: `int[]`, specifies integer priority for item marker
+      characters corresponding to `LISTS_ITEM_PREFIX_CHARS` used for list items. Higher number
+      is higher priority. A parent item's priority is the max priority of itself and any of its
+      descendant task items. Non-task items do not have their own priority, only priority
+      derived from their descendant items.
+  * [x] `LINK_MARKER_COMMENT_PATTERN`
+  * [x] `CONTINUATION_ALIGNMENT`
+  * [x] Add: Formatter control for controlling non-formatting regions.
+    * `<!-- @formatter:on -->` and `<!-- @formatter:off -->` tags
+    * [x] `FORMAT_CONTROL_ON`: `String`
+    * [x] `FORMAT_CONTROL_OFF`: `String`
+    * [x] `FORMAT_CONTROL_REGEX`: `Boolean` to treat control on/off strings as regex pattern.
   * implement `SimTocExtension.FORMAT_UPDATE_ON_FORMAT` option
 * Break: rename `CharWidthProvider` methods and change `zeroWidth` argument to `CharPredicate`
 * Fix: `TestUtils.getOptions(SpecExample, String, Function<String, DataHolder>)` to return
@@ -255,8 +256,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: `ListBlockParser` escape/unEscape handler not checking if returned index == -1 and not
   handling empty char sequence.
 * Fix: `MarkdownParagraph`
-  * not checking if passed sequence is empty before invoking special
-    lead-in escape/unEscape handlers, which is not part of the API contract.
+  * not checking if passed sequence is empty before invoking special lead-in escape/unEscape
+    handlers, which is not part of the API contract.
   * backspace after typing a char should not remove spaces which surrounded the char
 * Fix: make `Paired` extend `Map.Entry`
 * Fix:

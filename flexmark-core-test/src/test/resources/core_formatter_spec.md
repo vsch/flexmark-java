@@ -2597,57 +2597,121 @@ Paragraph with hard break and 1\. more text.
 1. Paragraph with soft break and more text.
                                
 .
-* Paragraph with hard break and
-  more text.
+* Paragraph with hard break
+  and more text.
 
-1. Paragraph with soft break and
-   more text.
+1. Paragraph with soft break
+   and more text.
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 7) options(right-margin-30, explicit-links-at-start)
+```````````````````````````````` example(Wrap: 7) options(right-margin-30, continuation-indent-none)
+* Paragraph with hard break and more text.
+
+1. Paragraph with soft break and more text.
+                               
+.
+* Paragraph with hard break
+and more text.
+
+1. Paragraph with soft break
+and more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 8) options(right-margin-30, continuation-indent-indent-1)
+* Paragraph with hard break and more text.
+
+1. Paragraph with soft break and more text.
+                               
+.
+* Paragraph with hard break
+    and more text.
+
+1. Paragraph with soft break
+    and more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 9) options(right-margin-30, continuation-indent-indent-2)
+* Paragraph with hard break and more text.
+
+1. Paragraph with soft break and more text.
+                               
+.
+* Paragraph with hard break
+        and more text.
+
+1. Paragraph with soft break
+        and more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 10) options(right-margin-30, continuation-indent-indent-3)
+* Paragraph with hard break and more text.
+
+1. Paragraph with soft break and more text.
+                               
+.
+* Paragraph with hard break
+            and more text.
+
+1. Paragraph with soft break
+            and more text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 11) options(right-margin-30, explicit-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
                                
 .
-* Paragraph with hard break and
-  more text.
+* Paragraph with hard break
+  and more text.
   [Test](test) text.
 
-1. Paragraph with soft break and
-   more text. ![Test](test) text.
+1. Paragraph with soft break
+   and more text.
+   ![Test](test) text.
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 8) options(right-margin-30)
+```````````````````````````````` example(Wrap: 12) options(right-margin-30)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
                                
 .
-* Paragraph with hard break and
-  more text. [Test](test) text.
+* Paragraph with hard break
+  and more text. [Test](test)
+  text.
 
-1. Paragraph with soft break and
-   more text. ![Test](test) text.
+1. Paragraph with soft break
+   and more text.
+   ![Test](test) text.
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 9) options(right-margin-30, image-links-at-start)
+```````````````````````````````` example(Wrap: 13) options(right-margin-30, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
                                
 .
-* Paragraph with hard break and
-  more text. [Test](test) text.
+* Paragraph with hard break
+  and more text. [Test](test)
+  text.
 
-1. Paragraph with soft break and
-   more text.
+1. Paragraph with soft break
+   and more text.
    ![Test](test) text.
 
 ````````````````````````````````
@@ -2752,6 +2816,212 @@ Document[0, 162]
           Text[135, 139] chars:[135, 139, "Team"]
   BlankLine[148, 149]
   HtmlCommentBlock[149, 162]
+````````````````````````````````
+
+
+### MdNav
+
+#### 770
+
+```````````````````````````````` example Issue - MdNav - 770: 1
+1. a
+  * b
+
+    ```bash
+    foo.code
+    ```
+
+  * c
+.
+1. a
+
+* b
+
+  ```bash
+  foo.code
+  ```
+
+* c
+
+````````````````````````````````
+
+
+## Format Control
+
+```````````````````````````````` example(Format Control: 1) options(formatter-tags-enabled, margin[72])
+
+<!-- @formatter:off -->
+
+<!-- @formatter:on -->
+.
+<!-- @formatter:off -->
+
+<!-- @formatter:on -->
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Control: 2) options(formatter-tags-enabled, margin[72])
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+
+<!-- @formatter:off -->
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+
+<!-- @formatter:on -->
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At
+
+<!-- @formatter:off -->
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+
+<!-- @formatter:on -->
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Control: 3) options(formatter-tags-enabled, fenced-code-minimize, margin[72])
+<!-- @formatter:off -->
+
+* `fun appendListQuery(out: Appendable, params: Array<out Pair<String, Any?>>, alias: String? = null): Appendable`
+
+<!-- @formatter:on -->
+
+* `fun appendListQuery(out: Appendable, params: Array<out Pair<String, Any?>>, alias: String? = null): Appendable`
+
+```kotlin
+   data class ValidData(
+      val processId: Int,
+   )
+```
+.
+<!-- @formatter:off -->
+
+* `fun appendListQuery(out: Appendable, params: Array<out Pair<String, Any?>>, alias: String? = null): Appendable`
+
+<!-- @formatter:on -->
+
+* `fun appendListQuery(out: Appendable, params: Array<out Pair<String,
+  Any?>>, alias: String? = null): Appendable`
+
+```kotlin
+data class ValidData(
+   val processId: Int,
+)
+```
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Control: 4) options(formatter-tags-enabled, margin[72])
+* Add: to `BasedSequence`
+  <!-- @formatter:off -->
+  * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+  <!-- @formatter:on -->
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+.
+* Add: to `BasedSequence`
+  <!-- @formatter:off -->
+  * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+  <!-- @formatter:on -->
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars,
+    boolean includeEol)` - extend start to start of line in
+    basedSequence
+
+````````````````````````````````
+
+
+## Links
+
+### Annotations
+
+```````````````````````````````` example(Links - Annotations: 1) options(margin[72], link-address-pattern)
+[link2](https://vladsch.com#adsfasdfasdf)<!-- @IGNORE PREVIOUS: anchor -->
+[link1](https://test)<!-- @IGNORE PREVIOUS: link -->
+
+
+[link1]: https://test 
+<!-- @IGNORE PREVIOUS: link -->
+[link2]: https://vladsch.com#adsfasdfasdf 
+<!-- @IGNORE PREVIOUS: anchor -->
+
+[example]: https://example.com#asdfsdaf
+.
+[link2](https://vladsch.com#adsfasdfasdf)<!-- @IGNORE PREVIOUS: anchor -->
+[link1](https://test)<!-- @IGNORE PREVIOUS: link -->
+
+
+[link1]: https://test
+<!-- @IGNORE PREVIOUS: link -->
+
+[link2]: https://vladsch.com#adsfasdfasdf
+<!-- @IGNORE PREVIOUS: anchor -->
+
+[example]: https://example.com#asdfsdaf
+
+````````````````````````````````
+
+
+## Attributes
+
+* [ ] Add attribute formatting options
+
+```````````````````````````````` example Attributes: 1
+# Heading Formatting {#provided-id}
+.
+# Heading Formatting {#provided-id}
+
+````````````````````````````````
+
+
+```````````````````````````````` example Attributes: 2
+Heading Formatting {#provided-id}
+====
+.
+Heading Formatting {#provided-id}
+=================================
+
+````````````````````````````````
+
+
+```````````````````````````````` example Attributes: 3
+# Sample Attributes
+
+Heading Formatting {#provided-id}
+====
+
+Setext heading marker equalization
+-----
+{#provided-id2}
+
+### Heading with trailing{style='color:red'} markers #
+
+.
+# Sample Attributes
+
+Heading Formatting {#provided-id}
+=================================
+
+Setext heading marker equalization
+----------------------------------
+
+{#provided-id2}
+
+### Heading with trailing{style='color:red'} markers #
+
 ````````````````````````````````
 
 

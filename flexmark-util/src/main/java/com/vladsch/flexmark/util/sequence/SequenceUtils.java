@@ -39,6 +39,7 @@ public interface SequenceUtils {
     String US_CHARS = Character.toString(US);
     String MARKER_CHARS = US_CHARS;  // same as US_CHARS but use in code signals it being related to offset marker handling
     String WHITESPACE = " \t\r\n";
+    String NBSP_CHARS = Character.toString(NBSP);
 
     @Deprecated
     String WHITESPACE_CHARS = WHITESPACE;

@@ -33,7 +33,13 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("max-blank-lines-2", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 2));
         optionsMap.put("max-blank-lines-3", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 3));
         optionsMap.put("no-tailing-blanks", new MutableDataSet().set(Formatter.MAX_TRAILING_BLANK_LINES, 0));
+        optionsMap.put("margin", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, FormatterTranslationSpecTestBase::marginOption)));
     }
+    static DataHolder marginOption(@Nullable Integer params) {
+        int value = params != null ? params : -1;
+        return new MutableDataSet().set(Formatter.RIGHT_MARGIN, value);
+    }
+
     public FormatterTranslationSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
     }

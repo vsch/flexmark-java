@@ -14,10 +14,12 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
+import com.vladsch.flexmark.util.format.options.ContinuationIndent;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
@@ -197,6 +199,15 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.append(node.getUrlClosingMarker()).line();
         } else {
             markdown.append(node.getChars()).line();
+            Node next = node.getNext();
+            if (next instanceof HtmlCommentBlock || next instanceof HtmlInnerBlockComment) {
+                BasedSequence text = next.getChars().trim().midSequence(4, -3);
+                if (formatterOptions.linkMarkerCommentPattern != null && formatterOptions.linkMarkerCommentPattern.matcher(text).matches()) {
+                    // if after ref then output nothing, the ref takes care of this
+                    markdown.append("<!--").append(String.valueOf(text)).append("-->");
+                }
+            }
+            markdown.line();
         }
     }
 
@@ -217,7 +228,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     }
                 }
 
-                Collections.sort(keys, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+                keys.sort(Comparator.comparing(DataKeyBase::getName));
 
                 boolean firstAppend = true;
 
@@ -266,17 +277,18 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             if (context.getFormatterOptions().keepSoftLineBreaks) {
                 markdown.append(chars);
             } else {
-                markdown.append(stripSoftLineBreak(chars));
+                markdown.append(stripSoftLineBreak(chars, " "));
             }
         }
     }
 
-    private static CharSequence stripSoftLineBreak(CharSequence chars) {
+    @SuppressWarnings("SameParameterValue")
+    private static CharSequence stripSoftLineBreak(CharSequence chars, CharSequence spaceChar) {
         StringBuffer sb = null;
         Matcher matcher = Pattern.compile("\\s*(?:\r\n|\r|\n)\\s*").matcher(chars);
         while (matcher.find()) {
             if (sb == null) sb = new StringBuffer();
-            matcher.appendReplacement(sb, " ");
+            matcher.appendReplacement(sb, spaceChar.toString());
         }
         if (sb != null) {
             matcher.appendTail(sb);
@@ -798,6 +810,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     public static void renderTextBlockParagraphLines(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.isTransformingText()) {
             context.translatingSpan((context1, writer) -> context1.renderChildren(node));
+            markdown.line();
         } else {
             FormatterOptions formatterOptions = context.getFormatterOptions();
             if (formatterOptions.rightMargin > 0) {
@@ -806,28 +819,67 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 SequenceBuilder builder = node.getChars().getBuilder();
                 MarkdownWriter subContextMarkdown = subContext.getMarkdown();
-                String text = subContextMarkdown.toString(0);
                 subContextMarkdown.toBuilder(builder, 0);
 
                 MarkdownParagraph formatter = new MarkdownParagraph(builder.toSequence(), formatterOptions.charWidthProvider);
-                formatter.setWidth(formatterOptions.rightMargin);
-                formatter.setKeepSoftBreaks(formatterOptions.keepSoftLineBreaks);
-                formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
-                formatter.setFirstIndent("");
-                formatter.setIndent("");
 
-                // adjust first line width, based on change in prefix after the first line EOL
-                formatter.setFirstWidthOffset(markdown.getAfterEolPrefixDelta());
+                if (formatterOptions.paragraphContinuationIndent == ContinuationIndent.ALIGN_TO_FIRST) {
+                    formatter.setWidth(formatterOptions.rightMargin - markdown.getPrefix().length());
+                    formatter.setKeepSoftBreaks(false);
+                    formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
+                    formatter.setFirstIndent("");
+                    formatter.setIndent("");
+                    // adjust first line width, based on change in prefix after the first line EOL
+                    formatter.setFirstWidthOffset(markdown.column() - markdown.getAfterEolPrefixDelta());
 
-                if (formatterOptions.applySpecialLeadInHandlers) {
-                    formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
+                    if (formatterOptions.applySpecialLeadInHandlers) {
+                        formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
+                    }
+
+                    markdown.append(formatter.wrapTextNotTracked().toMapped(SpaceMapper.fromNonBreakSpace));
+                    markdown.line();
+                } else {
+                    int indent;
+
+                    switch (formatterOptions.paragraphContinuationIndent) {
+                        // @formatter:off
+                        case INDENT_1: indent = 4; break;
+                        case INDENT_2: indent = 8; break;
+                        case INDENT_3: indent = 12; break;
+
+                        default:
+                        case NONE: indent = 0; break;
+                        // @formatter:on
+                    }
+
+                    formatter.setWidth(formatterOptions.rightMargin);
+                    formatter.setKeepSoftBreaks(false);
+                    formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
+                    CharSequence firstIndent = markdown.getPrefix().subSequence(0, Math.max(0, markdown.getPrefix().length() - markdown.getAfterEolPrefixDelta()));
+                    formatter.setFirstIndent(firstIndent);
+                    formatter.setIndent(RepeatedSequence.ofSpaces(indent));
+
+                    // adjust first line width, based on change in prefix after the first line EOL
+                    formatter.setFirstWidthOffset(-markdown.column());
+
+                    if (formatterOptions.applySpecialLeadInHandlers) {
+                        formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
+                    }
+
+                    markdown.openPreFormatted(false);
+                    markdown.pushPrefix();
+                    markdown.setPrefix("", false);
+                    BasedSequence wrapped = formatter.wrapTextNotTracked().toMapped(SpaceMapper.fromNonBreakSpace);
+                    markdown.append(wrapped);
+                    markdown.line();
+                    markdown.popPrefix();
+                    markdown.closePreFormatted();
                 }
-                markdown.append(formatter.wrapTextNotTracked());
             } else {
                 context.renderChildren(node);
+                markdown.line();
             }
         }
-        markdown.line();
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -945,7 +997,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (context.getFormatterOptions().keepSoftLineBreaks) {
             markdown.append(node.getChars());
         } else {
-            markdown.append(stripSoftLineBreak(node.getChars()));
+            markdown.append(stripSoftLineBreak(node.getChars(), " "));
         }
     }
 
@@ -955,12 +1007,21 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(Code node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append(node.getOpeningMarker());
-        if (context.getFormatterOptions().keepSoftLineBreaks) {
-            markdown.appendNonTranslating(node.getText());
+        if (context.isTransformingText() || formatterOptions.rightMargin == 0) {
+            if (context.getFormatterOptions().keepSoftLineBreaks) {
+                markdown.appendNonTranslating(node.getText());
+            } else {
+                markdown.appendNonTranslating(stripSoftLineBreak(node.getText(), " "));
+            }
         } else {
-            markdown.append(stripSoftLineBreak(node.getText()));
+            // wrapping text
+            if (context.getFormatterOptions().keepSoftLineBreaks) {
+                markdown.append(node.getText());
+            } else {
+                markdown.append(stripSoftLineBreak(node.getText(), " "));
+            }
         }
-        markdown.append(node.getOpeningMarker());
+        markdown.append(node.getClosingMarker());
     }
 
     private void render(HtmlBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -992,10 +1053,18 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(HtmlCommentBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         // here we need to make it translating, it is a comment
-        BasedSequence trimmed = node.getChars().trimEOL();
-        BasedSequence text = trimmed.subSequence(4, trimmed.length() - 3);
+        BasedSequence text = node.getChars().trim().midSequence(4, -3);
         BasedSequence trimmedEOL = BasedSequence.EOL;
-        markdown.appendTranslating("<!--", text, "-->", trimmedEOL);
+
+        if (!context.isTransformingText() && formatterOptions.linkMarkerCommentPattern != null && formatterOptions.linkMarkerCommentPattern.matcher(text).matches()) {
+            // if after ref then output nothing, the ref takes care of this
+            if (!(node.getPrevious() instanceof Reference)) {
+                markdown.append("<!--").append(String.valueOf(text.toMapped(SpaceMapper.toNonBreakSpace))).append("-->");
+            }
+        } else {
+            markdown.appendTranslating("<!--", text, "-->", trimmedEOL);
+        }
+
         //markdown.append(node.getChars());
     }
 
@@ -1020,8 +1089,15 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(HtmlInnerBlockComment node, NodeFormatterContext context, MarkdownWriter markdown) {
         // here we need to make it translating, it is a comment
-        BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 3);
-        markdown.appendTranslating("<!--", text, "-->");
+        BasedSequence text = node.getChars().trim().midSequence(4, -3);
+        if (!context.isTransformingText() && formatterOptions.linkMarkerCommentPattern != null && formatterOptions.linkMarkerCommentPattern.matcher(text).matches()) {
+            // if after ref then output nothing, the ref takes care of this
+            if (!(node.getPrevious() instanceof Reference)) {
+                markdown.append("<!--").append(String.valueOf(text.toMapped(SpaceMapper.toNonBreakSpace))).append("-->");
+            }
+        } else {
+            markdown.appendTranslating("<!--", text, "-->");
+        }
         //markdown.append(node.getChars());
     }
 
@@ -1046,8 +1122,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(HtmlInlineComment node, NodeFormatterContext context, MarkdownWriter markdown) {
         // TODO: this really needs to be parsed but we won't do it
-        BasedSequence text = node.getChars().subSequence(4, node.getChars().length() - 3);
-        markdown.appendTranslating("<!--", text, "-->");
+        BasedSequence text = node.getChars().trim().midSequence(4, -3);
+        if (!context.isTransformingText() && formatterOptions.linkMarkerCommentPattern != null && formatterOptions.linkMarkerCommentPattern.matcher(text).matches()) {
+            markdown.append("<!--").append(String.valueOf(text.toMapped(SpaceMapper.toNonBreakSpace))).append("-->");
+        } else {
+            markdown.appendTranslating("<!--", text, "-->");
+        }
     }
 
     private void render(Reference node, NodeFormatterContext context, MarkdownWriter markdown) {

@@ -6,6 +6,9 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.options.*;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.regex.Pattern;
 
 public class FormatterOptions {
     public final boolean itemContentIndent;
@@ -58,11 +61,16 @@ public class FormatterOptions {
     public final CharWidthProvider charWidthProvider;
     public final TrailingSpaces keepTrailingSpaces;
     public final TrailingSpaces codeKeepTrailingSpaces;
-    public final ContinuationIndent paragraphContinuationAlignment;
+    public final ContinuationIndent paragraphContinuationIndent;
     public final boolean listAlignFirstLineText;
     public final boolean listAlignChildBlocks;
     public final ElementAlignment listAlignNumeric;
     public final boolean listResetFirstItemNumber;
+    public final String formatterOnTag;
+    public final String formatterOffTag;
+    public final boolean formatterTagsEnabled;
+    public final boolean formatterTagsAcceptRegexp;
+    public final @Nullable Pattern linkMarkerCommentPattern;
 
     public FormatterOptions(DataHolder options) {
         emulationProfile = Formatter.FORMATTER_EMULATION_PROFILE.get(options);
@@ -75,7 +83,7 @@ public class FormatterOptions {
         rightMargin = Formatter.RIGHT_MARGIN.get(options);
         minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
         spaceAfterAtxMarker = Formatter.SPACE_AFTER_ATX_MARKER.get(options);
-        paragraphContinuationAlignment = Formatter.CONTINUATION_ALIGNMENT.get(options);
+        paragraphContinuationIndent = Formatter.CONTINUATION_INDENT.get(options);
         atxHeaderTrailingMarker = Formatter.ATX_HEADER_TRAILING_MARKER.get(options);
         headingPreference = Formatter.HEADING_PREFERENCE.get(options);
         thematicBreak = Formatter.THEMATIC_BREAK.get(options);
@@ -112,6 +120,11 @@ public class FormatterOptions {
         charWidthProvider = Formatter.FORMAT_CHAR_WIDTH_PROVIDER.get(options);
         keepHardLineBreaks = Formatter.KEEP_HARD_LINE_BREAKS.get(options);
         keepSoftLineBreaks = Formatter.KEEP_SOFT_LINE_BREAKS.get(options);
+        formatterOnTag = Formatter.FORMATTER_ON_TAG.get(options);
+        formatterOffTag = Formatter.FORMATTER_OFF_TAG.get(options);
+        formatterTagsEnabled = Formatter.FORMATTER_TAGS_ENABLED.get(options);
+        formatterTagsAcceptRegexp = Formatter.FORMATTER_TAGS_ACCEPT_REGEXP.get(options);
+        linkMarkerCommentPattern = Formatter.LINK_MARKER_COMMENT_PATTERN.get(options);
         appendTransferredReferences = Formatter.APPEND_TRANSFERRED_REFERENCES.get(options);
         optimizedInlineRendering = Formatter.OPTIMIZED_INLINE_RENDERING.get(options);
         applySpecialLeadInHandlers = Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS.get(options);

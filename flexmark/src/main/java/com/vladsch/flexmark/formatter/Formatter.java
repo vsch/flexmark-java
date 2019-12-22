@@ -8,10 +8,7 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.SharedDataKeys;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.IRender;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.NodeCollectingVisitor;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
@@ -32,8 +29,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
-
-import static com.vladsch.flexmark.html.renderer.HtmlIdGenerator.NULL;
+import java.util.regex.Pattern;
 
 /**
  * Renders a tree of nodes to Markdown.
@@ -69,7 +65,7 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> ESCAPE_SPECIAL_CHARS = SharedDataKeys.ESCAPE_SPECIAL_CHARS;
     public static final DataKey<Boolean> ESCAPE_NUMBERED_LEAD_IN = SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
     public static final DataKey<Boolean> UNESCAPE_SPECIAL_CHARS = SharedDataKeys.UNESCAPE_SPECIAL_CHARS;
-    public static final DataKey<ContinuationIndent> CONTINUATION_ALIGNMENT = new DataKey<>("CONTINUATION_ALIGNMENT", ContinuationIndent.ALIGN_TO_FIRST);  // IMPORTANT: implement
+    public static final DataKey<ContinuationIndent> CONTINUATION_INDENT = new DataKey<>("CONTINUATION_INDENT", ContinuationIndent.ALIGN_TO_FIRST);
 
     public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER = new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
     public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER = new DataKey<>("SETEXT_HEADER_EQUALIZE_MARKER", true);
@@ -105,6 +101,11 @@ public class Formatter implements IRender {
     public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
     public static final DataKey<Boolean> KEEP_HARD_LINE_BREAKS = new DataKey<>("KEEP_HARD_LINE_BREAKS", true);
     public static final DataKey<Boolean> KEEP_SOFT_LINE_BREAKS = new DataKey<>("KEEP_SOFT_LINE_BREAKS", true);
+    public static final DataKey<String> FORMATTER_ON_TAG = new DataKey<>("FORMATTER_ON_TAG", "@formatter" + ":on");
+    public static final DataKey<String> FORMATTER_OFF_TAG = new DataKey<>("FORMATTER_OFF_TAG", "@formatter" + ":off");
+    public static final DataKey<Boolean> FORMATTER_TAGS_ENABLED = new DataKey<>("FORMATTER_TAGS_ENABLED", false);
+    public static final DataKey<Boolean> FORMATTER_TAGS_ACCEPT_REGEXP = new DataKey<>("FORMATTER_TAGS_ACCEPT_REGEXP", false);
+    public static final NullableDataKey<Pattern> LINK_MARKER_COMMENT_PATTERN = new NullableDataKey<>("FORMATTER_TAGS_ACCEPT_REGEXP", (Pattern) null);
 
     public static final DataKey<Boolean> APPEND_TRANSFERRED_REFERENCES = new DataKey<>("APPEND_TRANSFERRED_REFERENCES", false);
 
@@ -352,7 +353,8 @@ public class Formatter implements IRender {
 
     /**
      * Render a node to the appendable
-     *  @param documents node to render
+     *
+     * @param documents node to render
      * @param output    appendable to use for the output
      */
     public void mergeRender(Document[] documents, Appendable output) {
@@ -381,7 +383,8 @@ public class Formatter implements IRender {
 
     /**
      * Render a node to the appendable
-     *  @param documents nodes to merge render
+     *
+     * @param documents nodes to merge render
      * @param output    appendable to use for the output
      */
     public void mergeRender(List<Document> documents, Appendable output, int maxTrailingBlankLines) {
@@ -572,16 +575,18 @@ public class Formatter implements IRender {
         private final List<PhasedNodeFormatter> phasedFormatters;
         private final Set<FormattingPhase> renderingPhases;
         private final DataHolder options;
+        private @NotNull final Boolean isFormatControlEnabled;
         private FormattingPhase phase;
-        final TranslationHandler myTranslationHandler;
-        private final LinkResolver[] myLinkResolvers;
+        final TranslationHandler translationHandler;
+        private final LinkResolver[] linkResolvers;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
-        private final ExplicitAttributeIdProvider myExplicitAttributeIdProvider;
+        private final ExplicitAttributeIdProvider explicitAttributeIdProvider;
         private final HtmlIdGenerator idGenerator;
+        private @Nullable FormatControlProcessor controlProcessor;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
-            this.myTranslationHandler = translationHandler;
+            this.translationHandler = translationHandler;
             this.options = new ScopedDataSet(document, options);
             this.document = document;
             this.renderers = new HashMap<>(32);
@@ -589,15 +594,17 @@ public class Formatter implements IRender {
             Set<Class<?>> collectNodeTypes = new HashSet<>(100);
 
             Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options);
-            this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
+            this.linkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
+
+            isFormatControlEnabled = FORMATTER_TAGS_ENABLED.get(this.options);
 
             for (int i = 0; i < linkResolverFactories.size(); i++) {
-                myLinkResolvers[i] = linkResolverFactories.get(i).apply(this);
+                linkResolvers[i] = linkResolverFactories.get(i).apply(this);
             }
 
             if (defaultLinkResolver) {
                 // add the default link resolver
-                myLinkResolvers[linkResolverFactories.size()] = new MergeLinkResolver.Factory().apply(this);
+                linkResolvers[linkResolverFactories.size()] = new MergeLinkResolver.Factory().apply(this);
             }
 
             out.setContext(this);
@@ -648,7 +655,7 @@ public class Formatter implements IRender {
                 idGenerator.generateIds(document);
             }
 
-            myExplicitAttributeIdProvider = explicitAttributeIdProvider;
+            this.explicitAttributeIdProvider = explicitAttributeIdProvider;
 
             // collect nodes of interest from document
             if (!collectNodeTypes.isEmpty()) {
@@ -689,7 +696,7 @@ public class Formatter implements IRender {
                 if (!urlSeq.isEmpty()) {
                     Node currentNode = context.renderingNode;
 
-                    for (LinkResolver linkResolver : myLinkResolvers) {
+                    for (LinkResolver linkResolver : linkResolvers) {
                         resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
                         if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
                     }
@@ -704,72 +711,72 @@ public class Formatter implements IRender {
 
         @Override
         public void addExplicitId(@NotNull Node node, @NotNull String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
-            if (myExplicitAttributeIdProvider != null) {
-                myExplicitAttributeIdProvider.addExplicitId(node, id, context, markdown);
+            if (explicitAttributeIdProvider != null) {
+                explicitAttributeIdProvider.addExplicitId(node, id, context, markdown);
             }
         }
 
         @NotNull
         @Override
         public RenderPurpose getRenderPurpose() {
-            return myTranslationHandler == null ? RenderPurpose.FORMAT : myTranslationHandler.getRenderPurpose();
+            return translationHandler == null ? RenderPurpose.FORMAT : translationHandler.getRenderPurpose();
         }
 
         @Override
         public boolean isTransformingText() {
-            return myTranslationHandler != null && myTranslationHandler.isTransformingText();
+            return translationHandler != null && translationHandler.isTransformingText();
         }
 
         @NotNull
         @Override
         public CharSequence transformNonTranslating(CharSequence prefix, @NotNull CharSequence nonTranslatingText, CharSequence suffix, CharSequence suffix2) {
-            return myTranslationHandler == null ? nonTranslatingText : myTranslationHandler.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
+            return translationHandler == null ? nonTranslatingText : translationHandler.transformNonTranslating(prefix, nonTranslatingText, suffix, suffix2);
         }
 
         @NotNull
         @Override
         public CharSequence transformTranslating(CharSequence prefix, @NotNull CharSequence translatingText, CharSequence suffix, CharSequence suffix2) {
-            return myTranslationHandler == null ? translatingText : myTranslationHandler.transformTranslating(prefix, translatingText, suffix, suffix2);
+            return translationHandler == null ? translatingText : translationHandler.transformTranslating(prefix, translatingText, suffix, suffix2);
         }
 
         @NotNull
         @Override
         public CharSequence transformAnchorRef(@NotNull CharSequence pageRef, @NotNull CharSequence anchorRef) {
-            return myTranslationHandler == null ? anchorRef : myTranslationHandler.transformAnchorRef(pageRef, anchorRef);
+            return translationHandler == null ? anchorRef : translationHandler.transformAnchorRef(pageRef, anchorRef);
         }
 
         @Override
         public void postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Runnable scope) {
-            if (myTranslationHandler != null) myTranslationHandler.postProcessNonTranslating(postProcessor, scope);
+            if (translationHandler != null) translationHandler.postProcessNonTranslating(postProcessor, scope);
             else scope.run();
         }
 
         @NotNull
         @Override
         public <T> T postProcessNonTranslating(@NotNull Function<String, CharSequence> postProcessor, @NotNull Supplier<T> scope) {
-            if (myTranslationHandler != null) return myTranslationHandler.postProcessNonTranslating(postProcessor, scope);
+            if (translationHandler != null) return translationHandler.postProcessNonTranslating(postProcessor, scope);
             else return scope.get();
         }
 
         @Override
         public boolean isPostProcessingNonTranslating() {
-            return myTranslationHandler != null && myTranslationHandler.isPostProcessingNonTranslating();
+            return translationHandler != null && translationHandler.isPostProcessingNonTranslating();
         }
 
         @Override
         public MergeContext getMergeContext() {
-            return myTranslationHandler == null ? null : myTranslationHandler.getMergeContext();
+            return translationHandler == null ? null : translationHandler.getMergeContext();
         }
 
         @Override
         public HtmlIdGenerator getIdGenerator() {
-            return myTranslationHandler == null ? idGenerator : myTranslationHandler.getIdGenerator();
+            return translationHandler == null ? idGenerator : translationHandler.getIdGenerator();
         }
 
         @Override
         public void translatingSpan(@NotNull TranslatingSpanRender render) {
-            if (myTranslationHandler != null) {
-                myTranslationHandler.translatingSpan(render);
+            if (translationHandler != null) {
+                translationHandler.translatingSpan(render);
             } else {
                 render.render(this, markdown);
             }
@@ -777,8 +784,8 @@ public class Formatter implements IRender {
 
         @Override
         public void nonTranslatingSpan(@NotNull TranslatingSpanRender render) {
-            if (myTranslationHandler != null) {
-                myTranslationHandler.nonTranslatingSpan(render);
+            if (translationHandler != null) {
+                translationHandler.nonTranslatingSpan(render);
             } else {
                 render.render(this, markdown);
             }
@@ -786,8 +793,8 @@ public class Formatter implements IRender {
 
         @Override
         public void translatingRefTargetSpan(@Nullable Node target, @NotNull TranslatingSpanRender render) {
-            if (myTranslationHandler != null) {
-                myTranslationHandler.translatingRefTargetSpan(target, render);
+            if (translationHandler != null) {
+                translationHandler.translatingRefTargetSpan(target, render);
             } else {
                 render.render(this, markdown);
             }
@@ -796,8 +803,8 @@ public class Formatter implements IRender {
         @NotNull
         @Override
         public MutableDataHolder getTranslationStore() {
-            if (myTranslationHandler != null) {
-                return myTranslationHandler.getTranslationStore();
+            if (translationHandler != null) {
+                return translationHandler.getTranslationStore();
             } else {
                 return document;
             }
@@ -805,8 +812,8 @@ public class Formatter implements IRender {
 
         @Override
         public void customPlaceholderFormat(@NotNull TranslationPlaceholderGenerator generator, @NotNull TranslatingSpanRender render) {
-            if (myTranslationHandler != null) {
-                myTranslationHandler.customPlaceholderFormat(generator, render);
+            if (translationHandler != null) {
+                translationHandler.customPlaceholderFormat(generator, render);
             } else {
                 render.render(this, markdown);
             }
@@ -890,8 +897,8 @@ public class Formatter implements IRender {
         void renderNode(Node node, NodeFormatterSubContext subContext) {
             if (node instanceof Document) {
                 // here we render multiple phases
-                if (myTranslationHandler != null) {
-                    myTranslationHandler.beginRendering((Document) node, subContext, subContext.markdown);
+                if (translationHandler != null) {
+                    translationHandler.beginRendering((Document) node, subContext, subContext.markdown);
                 }
 
                 for (FormattingPhase phase : FormattingPhase.values()) {
@@ -899,7 +906,7 @@ public class Formatter implements IRender {
                     this.phase = phase;
                     // here we render multiple phases
                     if (this.phase == FormattingPhase.DOCUMENT) {
-                        NodeFormattingHandler nodeRenderer = renderers.get(node.getClass());
+                        NodeFormattingHandler<?> nodeRenderer = renderers.get(node.getClass());
                         if (nodeRenderer != null) {
                             subContext.renderingNode = node;
                             nodeRenderer.render(node, subContext, subContext.markdown);
@@ -917,20 +924,34 @@ public class Formatter implements IRender {
                     }
                 }
             } else {
-                NodeFormattingHandler nodeRenderer = renderers.get(node.getClass());
-
-                if (nodeRenderer == null) {
-                    nodeRenderer = renderers.get(Node.class);
+                if (isFormatControlEnabled) {
+                    if (controlProcessor == null) {
+                        controlProcessor = new FormatControlProcessor(document, this.options);
+                        controlProcessor.initializeFrom(node);
+                    } else {
+                        controlProcessor.processFormatControl(node);
+                    }
                 }
 
-                if (nodeRenderer != null) {
-                    Node oldNode = this.renderingNode;
-                    subContext.renderingNode = node;
-                    nodeRenderer.render(node, subContext, subContext.markdown);
-                    subContext.renderingNode = oldNode;
+                if (isFormatControlEnabled && controlProcessor.isFormattingOff()) {
+                    if (node instanceof BlankLine) subContext.markdown.blankLine();
+                    else subContext.markdown.append(node.getChars());
                 } else {
-                    // default behavior is controlled by generic Node.class that is implemented in CoreNodeFormatter
-                    throw new IllegalStateException("Core Node Formatter should implement generic Node renderer");
+                    NodeFormattingHandler<?> nodeRenderer = renderers.get(node.getClass());
+
+                    if (nodeRenderer == null) {
+                        nodeRenderer = renderers.get(Node.class);
+                    }
+
+                    if (nodeRenderer != null) {
+                        Node oldNode = this.renderingNode;
+                        subContext.renderingNode = node;
+                        nodeRenderer.render(node, subContext, subContext.markdown);
+                        subContext.renderingNode = oldNode;
+                    } else {
+                        // default behavior is controlled by generic Node.class that is implemented in CoreNodeFormatter
+                        throw new IllegalStateException("Core Node Formatter should implement generic Node renderer");
+                    }
                 }
             }
         }
