@@ -216,11 +216,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * [ ] Add: missing formatter options:
   * `HeadingStyle`
-  * [ ] `BLOCK_QUOTE_CONTINUATION_MARKERS`
+  * `BLOCK_QUOTE_CONTINUATION_MARKERS`
+  * [ ] `LIST_RESET_FIRST_ITEM_NUMBER`
   * [ ] `LIST_ALIGN_FIRST_LINE_TEXT`
   * [ ] `LIST_ALIGN_CHILD_BLOCKS`
   * [ ] `LIST_ALIGN_NUMERIC`
-  * [ ] `LIST_RESET_FIRST_ITEM_NUMBER`
   * [ ] `flexmark-ext-spec-example`
     * `KEEP_TRAILING_SPACES` option
   * [ ] `flexmark-ext-attributes` formatting of individual attributes instead of dumping the

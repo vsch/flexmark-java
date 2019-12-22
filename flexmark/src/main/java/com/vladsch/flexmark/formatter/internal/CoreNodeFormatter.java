@@ -415,8 +415,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     private void render(BlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
         String prefix = node.getOpeningMarker().toString();
         boolean compactPrefix = false;
+        boolean compactContinuationPrefix = false;
 
-        switch (context.getFormatterOptions().blockQuoteMarkers) {
+        FormatterOptions formatterOptions = context.getFormatterOptions();
+        switch (formatterOptions.blockQuoteMarkers) {
             case AS_IS:
                 if (node.getFirstChild() != null) {
                     prefix = node.baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
@@ -432,9 +434,33 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             case ADD_SPACED:
                 prefix = "> ";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + formatterOptions.blockQuoteMarkers);
         }
 
-        if (context.getFormatterOptions().blockQuoteBlankLines) markdown.blankLine();
+        String continuationPrefix = prefix;
+        switch (formatterOptions.blockQuoteContinuationMarkers) {
+            case ADD_AS_FIRST:
+                continuationPrefix = prefix;
+                break;
+            case ADD_COMPACT:
+                continuationPrefix = ">";
+                break;
+            case ADD_COMPACT_WITH_SPACE:
+                continuationPrefix = "> ";
+                compactContinuationPrefix = true;
+                break;
+            case ADD_SPACED:
+                continuationPrefix = "> ";
+                break;
+            case REMOVE:
+                continuationPrefix = "";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + formatterOptions.blockQuoteContinuationMarkers);
+        }
+
+        if (formatterOptions.blockQuoteBlankLines) markdown.blankLine();
         markdown.pushPrefix();
 
         // create combined prefix, compact if needed
@@ -445,10 +471,18 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             combinedPrefix += prefix;
         }
 
+        String combinedContinuationPrefix = markdown.getPrefix().toString();
+        if (compactContinuationPrefix && combinedContinuationPrefix.endsWith("> ")) {
+            combinedContinuationPrefix = combinedContinuationPrefix.substring(0, combinedContinuationPrefix.length() - 1) + continuationPrefix;
+        } else {
+            combinedContinuationPrefix += continuationPrefix;
+        }
+
         markdown.setPrefix(combinedPrefix, false);
+        markdown.setPrefix(combinedContinuationPrefix, true);
         context.renderChildren(node);
         markdown.popPrefix();
-        if (context.getFormatterOptions().blockQuoteBlankLines) markdown.blankLine();
+        if (formatterOptions.blockQuoteBlankLines) markdown.blankLine();
     }
 
     private void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
