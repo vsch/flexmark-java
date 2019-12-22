@@ -45,7 +45,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     private CharSequence indentPrefix;
     final private Stack<CharSequence> prefixStack;
     final private Stack<Boolean> indentPrefixStack;
-    final private SequenceBuilder builder;
+    final private @Nullable SequenceBuilder builder;
 
     // current line being accumulated
     private int lineStart;                                  // start of line

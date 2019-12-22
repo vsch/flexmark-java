@@ -8,16 +8,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-    ```java
-    class dummy {
-    //    `String test = "SimTocContent"`;
-    }
-    ```
-
-    ```markdown
-    String test = "SimTocContent";
-    ```
-
 ## SimToc
 
 The Sim TOC tag has the following format: `[TOC style]: # "Title"` and includes all following

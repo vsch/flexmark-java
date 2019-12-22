@@ -19,8 +19,10 @@ public class FormatterOptions {
     public final int minSetextMarkerLength;
     public final DiscretionaryText spaceAfterAtxMarker;
     public final EqualizeTrailingMarker atxHeaderTrailingMarker;
+    public final HeadingStyle headingPreference;
     public final boolean blockQuoteBlankLines;
     public final BlockQuoteMarker blockQuoteMarkers;
+    public final BlockQuoteContinuationMarker blockQuoteContinuationMarkers;
     public final String thematicBreak;
     public final String translationIdFormat;
     public final String translationHtmlBlockPrefix;
@@ -36,8 +38,6 @@ public class FormatterOptions {
     public final int fencedCodeMarkerLength;
     public final CodeFenceMarker fencedCodeMarkerType;
     public final boolean listAddBlankLineBefore;
-    //public final boolean listAlignFirstLineText;
-    //public final boolean listAlignChildBlocks;
     public final boolean listRenumberItems;
     public final boolean listRemoveEmptyItems;
     public final ListBulletMarker listBulletMarker;
@@ -52,9 +52,17 @@ public class FormatterOptions {
     public final boolean appendTransferredReferences;
     public final boolean optimizedInlineRendering;
     public final boolean applySpecialLeadInHandlers;
+    public final boolean escapeSpecialCharsOnWrap;
+    public final boolean escapeNumberedLeadInOnWrap;
+    public final boolean unescapeSpecialCharsOnWrap;
     public final CharWidthProvider charWidthProvider;
-    //public final TrailingSpaces keepTrailingSpaces;
-    //public final TrailingSpaces codeKeepTrailingSpaces;
+    public final TrailingSpaces keepTrailingSpaces;
+    public final TrailingSpaces codeKeepTrailingSpaces;
+    public final ContinuationIndent paragraphContinuationAlignment;
+    public final boolean listAlignFirstLineText;
+    public final boolean listAlignChildBlocks;
+    public final ElementAlignment listAlignNumeric;
+    public final boolean listResetFirstItemNumber;
 
     public FormatterOptions(DataHolder options) {
         emulationProfile = Formatter.FORMATTER_EMULATION_PROFILE.get(options);
@@ -67,7 +75,9 @@ public class FormatterOptions {
         rightMargin = Formatter.RIGHT_MARGIN.get(options);
         minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
         spaceAfterAtxMarker = Formatter.SPACE_AFTER_ATX_MARKER.get(options);
+        paragraphContinuationAlignment = Formatter.CONTINUATION_ALIGNMENT.get(options);
         atxHeaderTrailingMarker = Formatter.ATX_HEADER_TRAILING_MARKER.get(options);
+        headingPreference = Formatter.HEADING_PREFERENCE.get(options);
         thematicBreak = Formatter.THEMATIC_BREAK.get(options);
         translationIdFormat = Formatter.TRANSLATION_ID_FORMAT.get(options);
         translationHtmlBlockPrefix = Formatter.TRANSLATION_HTML_BLOCK_PREFIX.get(options);
@@ -78,6 +88,7 @@ public class FormatterOptions {
         translationHtmlInlineTagPattern = Formatter.TRANSLATION_HTML_INLINE_TAG_PATTERN.get(options);
         blockQuoteBlankLines = Formatter.BLOCK_QUOTE_BLANK_LINES.get(options);
         blockQuoteMarkers = Formatter.BLOCK_QUOTE_MARKERS.get(options);
+        blockQuoteContinuationMarkers = Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS.get(options);
         indentedCodeMinimizeIndent = Formatter.INDENTED_CODE_MINIMIZE_INDENT.get(options);
         fencedCodeMinimizeIndent = Formatter.FENCED_CODE_MINIMIZE_INDENT.get(options);
         fencedCodeMatchClosingMarker = Formatter.FENCED_CODE_MATCH_CLOSING_MARKER.get(options);
@@ -85,8 +96,10 @@ public class FormatterOptions {
         fencedCodeMarkerLength = Formatter.FENCED_CODE_MARKER_LENGTH.get(options);
         fencedCodeMarkerType = Formatter.FENCED_CODE_MARKER_TYPE.get(options);
         listAddBlankLineBefore = Formatter.LIST_ADD_BLANK_LINE_BEFORE.get(options);
-        //listAlignFirstLineText = Formatter.LIST_ALIGN_FIRST_LINE_TEXT.getFrom(options);
-        //listAlignChildBlocks = Formatter.LIST_ALIGN_CHILD_BLOCKS.getFrom(options);
+        listAlignFirstLineText = Formatter.LIST_ALIGN_FIRST_LINE_TEXT.get(options);
+        listAlignChildBlocks = Formatter.LIST_ALIGN_CHILD_BLOCKS.get(options);
+        listAlignNumeric = Formatter.LIST_ALIGN_NUMERIC.get(options);
+        listResetFirstItemNumber = Formatter.LIST_RESET_FIRST_ITEM_NUMBER.get(options);
         listRenumberItems = Formatter.LIST_RENUMBER_ITEMS.get(options);
         listRemoveEmptyItems = Formatter.LIST_REMOVE_EMPTY_ITEMS.get(options);
         listBulletMarker = Formatter.LIST_BULLET_MARKER.get(options);
@@ -102,7 +115,10 @@ public class FormatterOptions {
         appendTransferredReferences = Formatter.APPEND_TRANSFERRED_REFERENCES.get(options);
         optimizedInlineRendering = Formatter.OPTIMIZED_INLINE_RENDERING.get(options);
         applySpecialLeadInHandlers = Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS.get(options);
-        //keepTrailingSpaces = Formatter.KEEP_TRAILING_SPACES.getFrom(options);
-        //codeKeepTrailingSpaces = Formatter.CODE_KEEP_TRAILING_SPACES.getFrom(options);
+        escapeSpecialCharsOnWrap = Formatter.ESCAPE_SPECIAL_CHARS.get(options);
+        escapeNumberedLeadInOnWrap = Formatter.ESCAPE_NUMBERED_LEAD_IN.get(options);
+        unescapeSpecialCharsOnWrap = Formatter.UNESCAPE_SPECIAL_CHARS.get(options);
+        keepTrailingSpaces = Formatter.KEEP_TRAILING_SPACES.get(options);
+        codeKeepTrailingSpaces = Formatter.CODE_KEEP_TRAILING_SPACES.get(options);
     }
 }

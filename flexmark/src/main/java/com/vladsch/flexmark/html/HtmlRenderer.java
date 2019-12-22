@@ -184,12 +184,15 @@ public class HtmlRenderer implements IRender {
     /**
      * Render a node to the appendable
      *
-     * @param document node to render
+     * @param node node to render
      * @param output   appendable to use for the output
      */
-    public void render(@NotNull Node document, @NotNull Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), document.getDocument());
-        renderer.render(document);
+    public void render(@NotNull Node node, @NotNull Appendable output) {
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
+        if (renderer.htmlIdGenerator != HtmlIdGenerator.NULL && !(node instanceof Document)) {
+            renderer.htmlIdGenerator.generateIds(node.getDocument());
+        }
+        renderer.render(node);
         renderer.flushTo(output, htmlOptions.maxTrailingBlankLines);
         renderer.dispose();
     }
@@ -202,6 +205,9 @@ public class HtmlRenderer implements IRender {
      */
     public void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
         MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
+        if (renderer.htmlIdGenerator != HtmlIdGenerator.NULL && !(node instanceof Document)) {
+            renderer.htmlIdGenerator.generateIds(node.getDocument());
+        }
         renderer.render(node);
         renderer.flushTo(output, maxTrailingBlankLines);
         renderer.dispose();
@@ -210,13 +216,13 @@ public class HtmlRenderer implements IRender {
     /**
      * Render the tree of nodes to HTML.
      *
-     * @param document the root node
+     * @param node the root node
      * @return the rendered HTML
      */
     @NotNull
-    public String render(@NotNull Node document) {
+    public String render(@NotNull Node node) {
         StringBuilder sb = new StringBuilder();
-        render(document, sb);
+        render(node, sb);
         return sb.toString();
     }
 
@@ -527,7 +533,7 @@ public class HtmlRenderer implements IRender {
         private Set<RenderingPhase> renderingPhases;
         private DataHolder options;
         private RenderingPhase phase;
-        private HtmlIdGenerator htmlIdGenerator;
+        HtmlIdGenerator htmlIdGenerator;
         private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
         private AttributeProvider[] attributeProviders;
 
@@ -646,7 +652,6 @@ public class HtmlRenderer implements IRender {
         public String getNodeId(@NotNull Node node) {
             String id = htmlIdGenerator.getId(node);
             if (attributeProviderFactories.size() != 0) {
-
                 Attributes attributes = new Attributes();
                 if (id != null) attributes.replaceValue("id", id);
 

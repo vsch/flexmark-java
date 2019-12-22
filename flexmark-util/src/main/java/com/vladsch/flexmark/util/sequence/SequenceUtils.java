@@ -140,6 +140,12 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
+    static boolean containsAny(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                        { return indexOfAny(thizz, s, 0, Integer.MAX_VALUE) != -1; }
+    static boolean containsAny(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index)                             { return indexOfAny(thizz, s, index, Integer.MAX_VALUE) != -1; }
+    static boolean containsAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s)                                     { return indexOfAny(thizz, s.negate(), 0, Integer.MAX_VALUE) != -1; }
+    static boolean containsAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex)                      { return indexOfAny(thizz, s.negate(), fromIndex, Integer.MAX_VALUE) != -1; }
+    static boolean containsAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex)        { return indexOfAny(thizz, s.negate(), fromIndex, endIndex) != -1; }
+
     static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s)                                                 { return indexOf(thizz, s, 0, Integer.MAX_VALUE); }
     static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s, int fromIndex)                                  { return indexOf(thizz, s, fromIndex, Integer.MAX_VALUE); }
     static int indexOf(@NotNull CharSequence thizz, char c)                                                                  { return indexOf(thizz, c, 0, Integer.MAX_VALUE); }

@@ -19,9 +19,7 @@ import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK
 import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.MAX_VALUE;
 import static org.junit.Assert.assertEquals;
 
-// IMPORTANT: change for SegmentOffsetTree tests
 public class SegmentOffsetTreeTest {
-
     static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
         int iMaxStart = start + span;
         int iMinEnd = end - span;

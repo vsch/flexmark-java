@@ -132,7 +132,7 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         public void render(@NotNull Node node, @NotNull Appendable output) {
             Document document = (Document) node;
 
-            TranslationHandler handler = myFormatter.getTranslationHandler(new HeaderIdGenerator.Factory());
+            TranslationHandler handler = myFormatter.getTranslationHandler();
             String formattedOutput = myFormatter.translationRender(document, handler, RenderPurpose.TRANSLATION_SPANS);
 
             // now need to output translation strings, delimited

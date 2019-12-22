@@ -60,7 +60,7 @@ public class FormatterMergeSample {
 
         Document[] documents = new Document[] { document1, document2 };
 
-        String mergedMarkdown = RENDERER.mergeRender(documents, 1, null);
+        String mergedMarkdown = RENDERER.mergeRender(documents, 1);
 
         System.out.println("\n\nMerged:\n");
         System.out.println(mergedMarkdown);

@@ -31,7 +31,7 @@ public class MergeEnumeratedReferenceTest {
             documents[i] = PARSER.parse(markdownSources[i]);
         }
 
-        String mergedOutput = FORMATTER.mergeRender(documents, 1, null);
+        String mergedOutput = FORMATTER.mergeRender(documents, 1);
         assertEquals("Merged results differ", expected, mergedOutput);
     }
 

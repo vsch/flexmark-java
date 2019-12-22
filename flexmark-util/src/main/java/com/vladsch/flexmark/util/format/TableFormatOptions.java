@@ -78,11 +78,11 @@ public class TableFormatOptions implements MutableDataSetter {
         tableManipulator = FORMAT_TABLE_MANIPULATOR.get(options);
         dumpIntellijOffsets = FORMAT_TABLE_DUMP_TRACKING_OFFSETS.get(options);
 
-        spaceWidth = charWidthProvider.spaceWidth();
+        spaceWidth = charWidthProvider.getSpaceWidth();
         spacePad = spaceAroundPipes ? 2 * spaceWidth : 0;
-        pipeWidth = charWidthProvider.charWidth('|');
-        colonWidth = charWidthProvider.charWidth(':');
-        dashWidth = charWidthProvider.charWidth('-');
+        pipeWidth = charWidthProvider.getCharWidth('|');
+        colonWidth = charWidthProvider.getCharWidth(':');
+        dashWidth = charWidthProvider.getCharWidth('-');
     }
 
     @NotNull

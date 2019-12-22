@@ -38,4 +38,9 @@ public class SharedDataKeys {
     // Formatter
     public static final DataKey<Integer> FORMATTER_MAX_BLANK_LINES = new DataKey<>("FORMATTER_MAX_BLANK_LINES", 2);
     public static final DataKey<Integer> FORMATTER_MAX_TRAILING_BLANK_LINES = new DataKey<>("FORMATTER_MAX_TRAILING_BLANK_LINES", 1);
+
+    public static final DataKey<Boolean> APPLY_SPECIAL_LEAD_IN_HANDLERS = new DataKey<>("APPLY_SPECIAL_LEAD_IN_HANDLERS", true);
+    public static final DataKey<Boolean> ESCAPE_SPECIAL_CHARS = new DataKey<>("ESCAPE_SPECIAL_CHARS", true, APPLY_SPECIAL_LEAD_IN_HANDLERS::get);
+    public static final DataKey<Boolean> ESCAPE_NUMBERED_LEAD_IN = new DataKey<>("ESCAPE_NUMBERED_LEAD_IN", true, APPLY_SPECIAL_LEAD_IN_HANDLERS::get);
+    public static final DataKey<Boolean> UNESCAPE_SPECIAL_CHARS = new DataKey<>("UNESCAPE_SPECIAL_CHARS", true, APPLY_SPECIAL_LEAD_IN_HANDLERS::get);
 }

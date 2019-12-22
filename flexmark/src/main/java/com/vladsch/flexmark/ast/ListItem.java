@@ -17,6 +17,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
     private boolean tight = true;
     private boolean hadBlankAfterItemParagraph = false;
     private boolean containsBlankLine = false;
+    private int priority = Integer.MIN_VALUE;
 
     public ListItem() {
     }
@@ -58,6 +59,18 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, markerSuffix };
+    }
+
+    public boolean canChangeMarker() {
+        return true;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
     public BasedSequence getOpeningMarker() {

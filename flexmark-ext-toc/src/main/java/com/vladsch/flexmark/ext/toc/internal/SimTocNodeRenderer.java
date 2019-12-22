@@ -2,10 +2,7 @@ package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.util.HeadingCollectingVisitor;
-import com.vladsch.flexmark.ext.toc.SimTocBlock;
-import com.vladsch.flexmark.ext.toc.SimTocContent;
-import com.vladsch.flexmark.ext.toc.SimTocOption;
-import com.vladsch.flexmark.ext.toc.SimTocOptionList;
+import com.vladsch.flexmark.ext.toc.*;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;

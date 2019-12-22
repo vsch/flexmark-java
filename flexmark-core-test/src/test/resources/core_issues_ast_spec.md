@@ -1619,6 +1619,7 @@ Document[4, 499]
         Text[137, 490] chars:[137, 490, "7. El … ion,\n"]
 ````````````````````````````````
 
+Add prefix/suffix to text so document ast shifts by 14 chars
 
 ```````````````````````````````` example(Issues xxx - 5: 3) options(sub-parse, strip-indent)
 > > * Fix: back tab changes indent to wrong prefix, causing to mess up the list, caret marked by
@@ -1655,17 +1656,17 @@ Document[4, 499]
   </li>
 </ul>
 .
-Document[4, 499]
-  BulletList[4, 499] isLoose
-    BulletListItem[4, 499] open:[4, 5, "*"] isLoose hadBlankLineAfter
-      Paragraph[6, 108] isTrailingBlankLine
-        Text[6, 96] chars:[6, 96, "Fix:  … ed by"]
-        SoftLineBreak[96, 97]
-        Code[103, 106] textOpen:[103, 104, "`"] text:[104, 105, "|"] textClose:[105, 106, "`"]
-          Text[104, 105] chars:[104, 105, "|"]
-        Text[106, 107] chars:[106, 107, ":"]
-      FencedCodeBlock[119, 499] open:[119, 122, "```"] info:[122, 130, "markdown"] content:[137, 490] lines[10] close:[496, 499, "```"]
-        Text[137, 490] chars:[137, 490, "7. El … ion,\n"]
+Document[18, 514]
+  BulletList[18, 513] isLoose
+    BulletListItem[18, 513] open:[18, 19, "*"] isLoose hadBlankLineAfter
+      Paragraph[20, 122] isTrailingBlankLine
+        Text[20, 110] chars:[20, 110, "Fix:  … ed by"]
+        SoftLineBreak[110, 111]
+        Code[117, 120] textOpen:[117, 118, "`"] text:[118, 119, "|"] textClose:[119, 120, "`"]
+          Text[118, 119] chars:[118, 119, "|"]
+        Text[120, 121] chars:[120, 121, ":"]
+      FencedCodeBlock[133, 513] open:[133, 136, "```"] info:[136, 144, "markdown"] content:[151, 504] lines[10] close:[510, 513, "```"]
+        Text[151, 504] chars:[151, 504, "7. El … ion,\n"]
 ````````````````````````````````
 
 

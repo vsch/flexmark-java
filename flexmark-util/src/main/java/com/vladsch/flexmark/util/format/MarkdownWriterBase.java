@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @SuppressWarnings("unchecked")
 public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, N, C extends NodeContext<N, C>> implements LineAppendable {
-    protected final LineAppendable appendable;
+    protected final LineFormattingAppendableImpl appendable;
     protected C context;
 
     public MarkdownWriterBase() {

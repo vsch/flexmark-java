@@ -739,20 +739,22 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     openingMarker = String.format("%s%c", number, delimiter);
                 }
             } else {
-                switch (options.listBulletMarker) {
-                    case ANY:
-                        break;
-                    case DASH:
-                        openingMarker = "-";
-                        break;
-                    case ASTERISK:
-                        openingMarker = "*";
-                        break;
-                    case PLUS:
-                        openingMarker = "+";
-                        break;
-                    default:
-                        throw new IllegalStateException("Missing case for ListBulletMarker " + options.listBulletMarker.name());
+                if (node.canChangeMarker()) {
+                    switch (options.listBulletMarker) {
+                        case ANY:
+                            break;
+                        case DASH:
+                            openingMarker = "-";
+                            break;
+                        case ASTERISK:
+                            openingMarker = "*";
+                            break;
+                        case PLUS:
+                            openingMarker = "+";
+                            break;
+                        default:
+                            throw new IllegalStateException("Missing case for ListBulletMarker " + options.listBulletMarker.name());
+                    }
                 }
             }
 

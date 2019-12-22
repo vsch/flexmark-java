@@ -619,7 +619,7 @@ public class MarkdownTable {
                     }
 
                     BasedSequence cellText = cellText(row.cells, k, false, true, 0, null, delta);
-                    int width = options.charWidthProvider.charWidth(cellText) + options.spacePad + options.pipeWidth * cell.columnSpan;
+                    int width = options.charWidthProvider.getStringWidth(cellText) + options.spacePad + options.pipeWidth * cell.columnSpan;
                     if (cell.columnSpan > 1) {
                         columnSpans.add(new ColumnSpan(j, cell.columnSpan, width));
                     } else {
@@ -643,7 +643,7 @@ public class MarkdownTable {
                 for (int k = 0; k < kMax; k++) {
                     TableCell cell = row.cells.get(k);
                     BasedSequence cellText = cellText(row.cells, k, false, false, 0, null, delta);
-                    int width = options.charWidthProvider.charWidth(cellText) + options.spacePad + options.pipeWidth * cell.columnSpan;
+                    int width = options.charWidthProvider.getStringWidth(cellText) + options.spacePad + options.pipeWidth * cell.columnSpan;
                     if (cell.columnSpan > 1) {
                         columnSpans.add(new ColumnSpan(jSpan, cell.columnSpan, width));
                     } else {
@@ -1185,7 +1185,7 @@ public class MarkdownTable {
             }
         }
 
-        int length = options.charWidthProvider.charWidth(text);
+        int length = options.charWidthProvider.getStringWidth(text);
         if (options.adjustColumnWidth && (length < width || cell.trackedTextOffset > cell.text.length())) {
             if (!options.applyColumnAlignment || alignment == null || alignment == CellAlignment.NONE) {
                 alignment = isHeader && options.leftAlignMarker != ADD ? CellAlignment.CENTER : CellAlignment.LEFT;

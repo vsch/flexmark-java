@@ -25,7 +25,7 @@ import java.util.function.BiConsumer;
  * Document doc;
  * myVisitor.visit(doc);
  * <p>
- * IMPORTANT: This class replaces the old NodeVisitor derived from NodeAdaptedVisitor.
+ * NOTE: This class replaces the old NodeVisitor derived from NodeAdaptedVisitor.
  * <p>
  * If you were overriding {@link #visit(Node)} to provide your own handling of child visits, in the current implementation,
  * it only starts the visiting process and is no longer called for processing every child node.

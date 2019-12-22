@@ -63,7 +63,7 @@ public class TranslationSample {
         Document node = PARSER.parse(markdown);
 
         // 2. Format the document to get markdown strings for translation
-        TranslationHandler handler = FORMATTER.getTranslationHandler(new HeaderIdGenerator.Factory());
+        TranslationHandler handler = FORMATTER.getTranslationHandler();
         String formattedOutput = FORMATTER.translationRender(node, handler, RenderPurpose.TRANSLATION_SPANS);
 
         // 3. Get the strings to be translated from translation handler

@@ -27,6 +27,7 @@ import com.vladsch.flexmark.ext.macros.ComboMacrosTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.macros.MergeMacrosTest;
 import com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableTranslationFormatterSpecTest;
+import com.vladsch.flexmark.ext.toc.ExtTocFormatterTestSuite;
 import com.vladsch.flexmark.ext.yaml.front.matter.ComboYamlFrontMatterFormatterSpecTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -56,6 +57,7 @@ import org.junit.runners.Suite;
         ComboCoreTranslationFormatterSpecTest.class,
         ComboFormatterTestSpecTest.class,
         ComboFormatterIssueSpecTest.class,
+        ExtTocFormatterTestSuite.class,
         MergeAbbreviationsTest.class,
         MergeAttributesTest.class,
         MergeEnumeratedReferenceTest.class,

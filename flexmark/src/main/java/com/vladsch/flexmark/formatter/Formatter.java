@@ -44,6 +44,7 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("WeakerAccess")
 public class Formatter implements IRender {
+    public static final Document[] EMPTY_DOCUMENTS = new Document[0];
     /**
      * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
@@ -59,13 +60,21 @@ public class Formatter implements IRender {
     public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_BLANK_LINES;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_TRAILING_BLANK_LINES;
     public static final DataKey<Integer> RIGHT_MARGIN = new DataKey<>("RIGHT_MARGIN", 0);
-    public static final DataKey<Boolean> APPLY_SPECIAL_LEAD_IN_HANDLERS = new DataKey<>("APPLY_SPECIAL_LEAD_IN_HANDLERS", true);
+
+    public static final DataKey<Boolean> APPLY_SPECIAL_LEAD_IN_HANDLERS = SharedDataKeys.APPLY_SPECIAL_LEAD_IN_HANDLERS;
+    public static final DataKey<Boolean> ESCAPE_SPECIAL_CHARS = SharedDataKeys.ESCAPE_SPECIAL_CHARS;
+    public static final DataKey<Boolean> ESCAPE_NUMBERED_LEAD_IN = SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
+    public static final DataKey<Boolean> UNESCAPE_SPECIAL_CHARS = SharedDataKeys.UNESCAPE_SPECIAL_CHARS;
+    public static final DataKey<ContinuationIndent> CONTINUATION_ALIGNMENT = new DataKey<>("CONTINUATION_ALIGNMENT", ContinuationIndent.ALIGN_TO_FIRST);  // IMPORTANT: implement
+
     public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER = new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
     public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER = new DataKey<>("SETEXT_HEADER_EQUALIZE_MARKER", true);
     public static final DataKey<EqualizeTrailingMarker> ATX_HEADER_TRAILING_MARKER = new DataKey<>("ATX_HEADER_TRAILING_MARKER", EqualizeTrailingMarker.AS_IS);
+    public static final DataKey<HeadingStyle> HEADING_PREFERENCE = new DataKey<>("HEADING_PREFERENCE", HeadingStyle.AS_IS);
     public static final NullableDataKey<String> THEMATIC_BREAK = new NullableDataKey<>("THEMATIC_BREAK");
     public static final DataKey<Boolean> BLOCK_QUOTE_BLANK_LINES = new DataKey<>("BLOCK_QUOTE_BLANK_LINES", true);
     public static final DataKey<BlockQuoteMarker> BLOCK_QUOTE_MARKERS = new DataKey<>("BLOCK_QUOTE_MARKERS", BlockQuoteMarker.ADD_COMPACT_WITH_SPACE);
+    public static final DataKey<BlockQuoteContinuationMarker> BLOCK_QUOTE_CONTINUATION_MARKERS = new DataKey<>("BLOCK_QUOTE_CONTINUATION_MARKERS", BlockQuoteContinuationMarker.ADD_AS_FIRST);  // IMPORTANT: implement
     public static final DataKey<Boolean> INDENTED_CODE_MINIMIZE_INDENT = new DataKey<>("INDENTED_CODE_MINIMIZE_INDENT", true);
     public static final DataKey<Boolean> FENCED_CODE_MINIMIZE_INDENT = new DataKey<>("FENCED_CODE_MINIMIZE_INDENT", true);
     public static final DataKey<Boolean> FENCED_CODE_MATCH_CLOSING_MARKER = new DataKey<>("FENCED_CODE_MATCH_CLOSING_MARKER", true);
@@ -75,6 +84,10 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> LIST_ADD_BLANK_LINE_BEFORE = new DataKey<>("LIST_ADD_BLANK_LINE_BEFORE", false);
     public static final DataKey<Boolean> LIST_RENUMBER_ITEMS = new DataKey<>("LIST_RENUMBER_ITEMS", true);
     public static final DataKey<Boolean> LIST_REMOVE_EMPTY_ITEMS = new DataKey<>("LIST_REMOVE_EMPTY_ITEMS", false);
+    public static final DataKey<Boolean> LIST_ALIGN_FIRST_LINE_TEXT = new DataKey<>("LIST_ALIGN_FIRST_LINE_TEXT", false); // IMPORTANT: implement
+    public static final DataKey<Boolean> LIST_ALIGN_CHILD_BLOCKS = new DataKey<>("LIST_ALIGN_CHILD_BLOCKS", false); // IMPORTANT: implement
+    public static final DataKey<ElementAlignment> LIST_ALIGN_NUMERIC = new DataKey<>("LIST_ALIGN_NUMERIC", ElementAlignment.NONE); // IMPORTANT: implement
+    public static final DataKey<Boolean> LIST_RESET_FIRST_ITEM_NUMBER = new DataKey<>("LIST_RESET_FIRST_ITEM_NUMBER", false); // IMPORTANT: implement
     public static final DataKey<ListBulletMarker> LIST_BULLET_MARKER = new DataKey<>("LIST_BULLET_MARKER", ListBulletMarker.ANY);
     public static final DataKey<ListNumberedMarker> LIST_NUMBERED_MARKER = new DataKey<>("LIST_NUMBERED_MARKER", ListNumberedMarker.ANY);
     public static final DataKey<ListSpacing> LIST_SPACING = new DataKey<>("LIST_SPACING", ListSpacing.AS_IS);
@@ -84,14 +97,8 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> KEEP_EXPLICIT_LINKS_AT_START = new DataKey<>("KEEP_EXPLICIT_LINKS_AT_START", false);
     public static final DataKey<Boolean> OPTIMIZED_INLINE_RENDERING = new DataKey<>("OPTIMIZED_INLINE_RENDERING", false);
     public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER = TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER;
-
-    // formatter family override
-    public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DataKey<>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
-
-    public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
-    public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES = TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
-    public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
-
+    public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
+    public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
     public static final DataKey<Boolean> KEEP_HARD_LINE_BREAKS = new DataKey<>("KEEP_HARD_LINE_BREAKS", true);
     public static final DataKey<Boolean> KEEP_SOFT_LINE_BREAKS = new DataKey<>("KEEP_SOFT_LINE_BREAKS", true);
 
@@ -110,22 +117,42 @@ public class Formatter implements IRender {
     public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
     public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
     public static final DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<>("DEFAULT_LINK_RESOLVER", false);
-    public static final Document[] EMPTY_DOCUMENTS = new Document[0];
+
+    // formatter family override
+    public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DataKey<>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
+
+    /**
+     * use TableFormatOptions instead
+     */
+    @Deprecated
+    public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
+    /**
+     * use TableFormatOptions instead
+     */
+    @Deprecated
+    public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES = TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
+    /**
+     * use TableFormatOptions instead
+     */
+    @Deprecated
+    public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
 
     final FormatterOptions formatterOptions;
     private final DataHolder options;
     final List<LinkResolverFactory> linkResolverFactories;
     private final NodeFormatterDependencies nodeFormatterFactories;
+    final HeaderIdGeneratorFactory idGeneratorFactory;
 
     Formatter(Builder builder) {
         this.options = builder.toImmutable();
         this.formatterOptions = new FormatterOptions(this.options);
+        this.idGeneratorFactory = builder.htmlIdGeneratorFactory == null ? new HeaderIdGenerator.Factory() : builder.htmlIdGeneratorFactory;
 
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
-        this.nodeFormatterFactories = calculateBlockPreProcessors(this.options, builder.nodeFormatterFactories);
+        this.nodeFormatterFactories = calculateNodeFormatterFactories(this.options, builder.nodeFormatterFactories);
     }
 
-    public static class NodeFormatterDependencyStage {
+    private static class NodeFormatterDependencyStage {
         final List<NodeFormatterFactory> dependents;
 
         public NodeFormatterDependencyStage(List<NodeFormatterFactory> dependents) {
@@ -156,7 +183,7 @@ public class Formatter implements IRender {
         }
     }
 
-    public static class NodeFormatterDependencies extends ResolvedDependencies<NodeFormatterDependencyStage> {
+    private static class NodeFormatterDependencies extends ResolvedDependencies<NodeFormatterDependencyStage> {
         private final List<NodeFormatterFactory> nodeFactories;
 
         public NodeFormatterDependencies(List<NodeFormatterDependencyStage> dependentStages) {
@@ -175,7 +202,7 @@ public class Formatter implements IRender {
         }
     }
 
-    public static NodeFormatterDependencies calculateBlockPreProcessors(
+    private static NodeFormatterDependencies calculateNodeFormatterFactories(
             DataHolder options,
             List<NodeFormatterFactory> formatterFactories
     ) {
@@ -196,7 +223,7 @@ public class Formatter implements IRender {
     }
 
     public TranslationHandler getTranslationHandler() {
-        return new TranslationHandlerImpl(options, formatterOptions, new HeaderIdGenerator.Factory());
+        return new TranslationHandlerImpl(options, formatterOptions, idGeneratorFactory);
     }
 
     @NotNull
@@ -218,7 +245,7 @@ public class Formatter implements IRender {
      * Create a new builder for configuring an {@link Formatter}.
      *
      * @param options initialization options
-     * @return a builder
+     * @return a builder.
      */
     public static Builder builder(DataHolder options) {
         return new Builder(options);
@@ -321,16 +348,15 @@ public class Formatter implements IRender {
 
     /**
      * Render a node to the appendable
-     *
-     * @param documents node to render
+     *  @param documents node to render
      * @param output    appendable to use for the output
      */
-    public void mergeRender(Document[] documents, Appendable output, HtmlIdGeneratorFactory idGeneratorFactory) {
-        mergeRender(documents, output, formatterOptions.maxTrailingBlankLines, idGeneratorFactory);
+    public void mergeRender(Document[] documents, Appendable output) {
+        mergeRender(documents, output, formatterOptions.maxTrailingBlankLines);
     }
 
-    public void mergeRender(List<Document> documents, Appendable output, HtmlIdGeneratorFactory idGeneratorFactory) {
-        mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), output, idGeneratorFactory);
+    public void mergeRender(List<Document> documents, Appendable output) {
+        mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), output);
     }
 
     /**
@@ -339,27 +365,26 @@ public class Formatter implements IRender {
      * @param documents the root node
      * @return the formatted markdown
      */
-    public String mergeRender(Document[] documents, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
+    public String mergeRender(Document[] documents, int maxTrailingBlankLines) {
         StringBuilder sb = new StringBuilder();
-        mergeRender(documents, sb, maxTrailingBlankLines, idGeneratorFactory);
+        mergeRender(documents, sb, maxTrailingBlankLines);
         return sb.toString();
     }
 
-    public String mergeRender(List<Document> documents, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
-        return mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), maxTrailingBlankLines, idGeneratorFactory);
+    public String mergeRender(List<Document> documents, int maxTrailingBlankLines) {
+        return mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), maxTrailingBlankLines);
     }
 
     /**
      * Render a node to the appendable
-     *
-     * @param documents nodes to merge render
+     *  @param documents nodes to merge render
      * @param output    appendable to use for the output
      */
-    public void mergeRender(List<Document> documents, Appendable output, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
-        mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), output, maxTrailingBlankLines, idGeneratorFactory);
+    public void mergeRender(List<Document> documents, Appendable output, int maxTrailingBlankLines) {
+        mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), output, maxTrailingBlankLines);
     }
 
-    public void mergeRender(Document[] documents, Appendable output, int maxTrailingBlankLines, HtmlIdGeneratorFactory idGeneratorFactory) {
+    public void mergeRender(Document[] documents, Appendable output, int maxTrailingBlankLines) {
         MutableDataSet mergeOptions = new MutableDataSet(options);
         mergeOptions.set(Parser.HTML_FOR_TRANSLATOR, true);
 
@@ -483,6 +508,23 @@ public class Formatter implements IRender {
             this.nodeFormatterFactories.add(nodeFormatterFactory);
             return this;
         }
+
+        /**
+         * Add a factory for generating the header id attribute from the header's text
+         *
+         * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
+         * @return {@code this}
+         */
+        @NotNull
+        public Builder htmlIdGeneratorFactory(@NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
+            //noinspection VariableNotUsedInsideIf
+            if (this.htmlIdGeneratorFactory != null) {
+                throw new IllegalStateException("custom header id factory is already set to " + htmlIdGeneratorFactory.getClass().getName());
+            }
+            this.htmlIdGeneratorFactory = htmlIdGeneratorFactory;
+            addExtensionApiPoint(htmlIdGeneratorFactory);
+            return this;
+        }
     }
 
     /**
@@ -530,6 +572,7 @@ public class Formatter implements IRender {
         private final LinkResolver[] myLinkResolvers;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
         private final ExplicitAttributeIdProvider myExplicitAttributeIdProvider;
+        private HtmlIdGenerator myIdGenerator;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
@@ -592,6 +635,10 @@ public class Formatter implements IRender {
                     }
                 }
             }
+
+            // generate ids by default even if they are not going to be used
+            myIdGenerator = idGeneratorFactory.create();
+            myIdGenerator.generateIds(document);
 
             myExplicitAttributeIdProvider = explicitAttributeIdProvider;
 
@@ -708,7 +755,7 @@ public class Formatter implements IRender {
 
         @Override
         public HtmlIdGenerator getIdGenerator() {
-            return myTranslationHandler == null ? null : myTranslationHandler.getIdGenerator();
+            return myTranslationHandler == null ? myIdGenerator : myTranslationHandler.getIdGenerator();
         }
 
         @Override

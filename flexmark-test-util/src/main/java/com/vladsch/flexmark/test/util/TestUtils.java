@@ -216,24 +216,26 @@ public class TestUtils {
                         if (options == null) {
                             throwIllegalStateException(example, option);
                         }
+
+                        options = options.toImmutable();
                     } else {
                         DataHolder dataSet = optionsProvider.apply(option);
 
                         if (dataSet != null) {
                             // CAUTION: have to only aggregate actions here
-                            options = DataSet.aggregateActions(options, dataSet);
+                            options = DataSet.aggregateActions(options.toImmutable(), dataSet);
                         } else {
                             throwIllegalStateException(example, option);
                         }
                     }
 
-                    if (options != null && options.contains(IGNORE) && IGNORE.get(options)) {
+                    if (options.contains(IGNORE) && IGNORE.get(options)) {
                         throwIgnoredOption(example, optionSets, option);
                     }
                     break;
             }
         }
-        return options;
+        return options == null ? null : options.toImmutable();
     }
 
     public static <T> MutableDataSet addOption(DataHolder options, DataKey<T> key, T value) {

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.core.test.util.RendererSpecTest;
+import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -15,12 +15,13 @@ import org.junit.runners.Parameterized;
 
 import java.util.*;
 
-public class ComboSimTocSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_simtoc_ast_spec.md";
+public class ComboSimTocMdFormatterSpecTest extends FormatterSpecTest {
+    private static final String SPEC_RESOURCE = "/ext_simtoc_formatter_markdown_spec.md";
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
             .set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()))
+            .set(TocExtension.IS_HTML, false)
             .toImmutable();
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
@@ -33,17 +34,17 @@ public class ComboSimTocSpecTest extends RendererSpecTest {
         optionsMap.put("sorted", new MutableDataSet().set(TocExtension.LIST_TYPE, TocOptions.ListType.SORTED));
         optionsMap.put("sorted-reversed", new MutableDataSet().set(TocExtension.LIST_TYPE, TocOptions.ListType.SORTED_REVERSED));
         optionsMap.put("with-option-list", new MutableDataSet().set(TocExtension.AST_INCLUDE_OPTIONS, true));
-        optionsMap.put("blank-line-spacer", new MutableDataSet().set(TocExtension.BLANK_LINE_SPACER, true));
         optionsMap.put("typographic", new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(SimTocExtension.create(), TypographicExtension.create())));
+        optionsMap.put("numbered", new MutableDataSet().set(TocExtension.IS_NUMBERED, true));
+        optionsMap.put("spacer", new MutableDataSet().set(TocExtension.BLANK_LINE_SPACER, true));
         optionsMap.put("github", new MutableDataSet().setFrom(ParserEmulationProfile.GITHUB_DOC));
         optionsMap.put("div-class", new MutableDataSet().set(TocExtension.DIV_CLASS, "content-class"));
         optionsMap.put("list-class", new MutableDataSet().set(TocExtension.LIST_CLASS, "list-class"));
-        optionsMap.put("not-case-sensitive", new MutableDataSet().set(TocExtension.CASE_SENSITIVE_TOC_TAG, false));
         optionsMap.put("on-format-as-is", new MutableDataSet().set(TocExtension.FORMAT_UPDATE_ON_FORMAT, SimTocGenerateOnFormat.AS_IS));
         optionsMap.put("on-format-remove", new MutableDataSet().set(TocExtension.FORMAT_UPDATE_ON_FORMAT, SimTocGenerateOnFormat.REMOVE));
         optionsMap.put("on-format-update", new MutableDataSet().set(TocExtension.FORMAT_UPDATE_ON_FORMAT, SimTocGenerateOnFormat.UPDATE));
     }
-    public ComboSimTocSpecTest(@NotNull SpecExample example) {
+    public ComboSimTocMdFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

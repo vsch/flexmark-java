@@ -4,11 +4,8 @@
 
 [TOC]: # " "
 
-- [Release 0.60.0](#release-0600)
+- [Release 0.60.0 Changes](#release-0600-changes)
     - [API Refactoring](#api-refactoring)
-    - [Features](#features)
-- [Next 0.59.xx](#next-059xx)
-- [Next 0.59.82](#next-05982)
 - [0.59.80](#05980)
 - [0.59.78](#05978)
 - [0.59.76](#05976)
@@ -95,7 +92,7 @@
 
 &nbsp;</details>
 
-## Release 0.60.0
+## Release 0.60.0 Changes
 
 ### API Refactoring
 
@@ -168,101 +165,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
-
-### Features
-
-* [ ] Fix: Change spec example to variable number of sections
-* [ ] Add: yaml front matter configurator for modules. See:
-      [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
-* [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
-      just formatting. Need to keep track of whether format after typing or just format. Then
-      caret position should only track but not force spaces behind it to be preserved. See
-      failed tests in `com.vladsch.flexmark.ext.tables.MarkdownTableTest`
-* [ ] Fix: Add `TextContainer` node type to allow extracting text nodes without having to know
-      all of the node types. The text container should implement ability to append to
-      `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
-      be visited.
-* Add: spec example language per section options and rendering in HTML.
-  * [ ] Add: Tests for section name options
-
-## Next 0.59.xx
-
-+ [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with non builder
-      arguments to use `SequenceBuilder` throughout library code, except where
-      `PrefixedSubSequence` is used as is without immediately wrapping in `SegmentedSequence`.
-      This happens anyway in `SegmentedSequence.create` for non-builder arg, should make it
-      explicit.
-+ [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
-      implementation.
-+ [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
-      extension add order
-+ [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
-  + [ ] optimize by not processing one char at a time. Split the sequence into regions of
-        interest and process the regions as one piece which the `SequenceBuilder` can optimize
-        to base sequence.
-  + [ ] do not construct temporary `StringBuilder` but only keep the last line under
-        construction temporary, with all previously constructed lines used for prior content.
-  + [ ] use separate instance of sequence builder for the line under construction.
-        `SegmentedSequence` construction is fast enough to not need a parallel string builder
-        for context tests.
-* [ ] Fix: Document docx form controls in wiki.
-* [ ] Add: table recovery utility to restore table after it was wrapped as plain text paragraph.
-      Needed when formatting is applied without a table extension. If not noticed will result in
-      a table which is tedious to recover manually. Handle only tables with leading and trailing
-      `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
-      ends and another begins.
-
-## Next 0.59.82
-
-* [ ] Add: missing formatter options:
-  * [ ] `ElementPlacementSort`
-    * [ ] `SORT_DELETE_UNUSED`
-    * [ ] `DELETE_UNUSED`
-  * [ ] `HeadingStyle`
-  * [ ] `CONTINUATION_ALIGNMENT`
-  * [ ] `BLOCK_QUOTE_CONTINUATION_MARKERS`
-  * [ ] `LIST_ALIGN_FIRST_LINE_TEXT`
-  * [ ] `LIST_ALIGN_CHILD_BLOCKS`
-  * [ ] `LIST_ALIGN_NUMERIC`
-  * [ ] `LIST_RESET_FIRST_ITEM_NUMBER`
-  * [ ] Add: Formatter control for controlling non-formatting regions.
-    * [ ] `<!-- @formatter:on -->` and `<!-- @formatter:off -->` tags
-    * [ ] `FORMAT_CONTROL_ON`: `String`
-    * [ ] `FORMAT_CONTROL_OFF`: `String`
-    * [ ] `FORMAT_CONTROL_REGEX`: `Boolean` to treat control on/off strings as regex pattern.
-  * [ ] `flexmark-ext-spec-example`
-    * `KEEP_TRAILING_SPACES` option
-  * [ ] `flexmark-ext-attributes` formatting of individual attributes instead of dumping
-        the attributes node text.
-    * `FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE`
-    * `FORMAT_ATTRIBUTES_SPACES`
-    * `FORMAT_ATTRIBUTE_EQUAL_SPACE`
-    * `FORMAT_ATTRIBUTE_VALUE_QUOTES`
-  * prioritized task items: `flexmark-ext-gfm-tasklist`
-    * [ ] Test:
-    * `FORMAT_ORDERED_TASK_ITEM_PRIORITY`: `Integer`, priority to use for parent item. Ordered task
-          items do not not sort on priority since they are already ordered by number.
-    * `FORMAT_TASK_ITEM_PRIORITIES`: `int[]`, specifies integer priority for item marker characters
-          corresponding to `LISTS_ITEM_PREFIX_CHARS` used for list items. Higher number is
-          higher priority. A parent item's priority is the max priority of itself and any of its
-          descendant task items. Non-task items do not have their own priority, only priority
-          derived from their descendant items.
-  * implement `SimTocExtension.FORMAT_UPDATE_ON_FORMAT` option
-* Break: rename `CharWidthProvider` methods and change `zeroWidth` argument to `CharPredicate`
-* Fix: `TestUtils.getOptions(SpecExample, String, Function<String, DataHolder>)` to return
-  immutable data holder to prevent leak of options between spec examples
-* Fix: escape of plain `.` at start of continuation.
-* Fix: `ListBlockParser` escape/unEscape handler not checking if returned index == -1 and not
-  handling empty char sequence.
-* Fix: `MarkdownParagraph`
-  * not checking if passed sequence is empty before invoking special
-    lead-in escape/unEscape handlers, which is not part of the API contract.
-  * backspace after typing a char should not remove spaces which surrounded the char
-* Fix: make `Paired` extend `Map.Entry`
-* Fix:
-  [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled],
-  `USE_HARDCODED_LINK_ADDRESS_PARSER` was not used if matched parentheses were disabled causing
-  stack overflow in regex evaluation. szxvalsdfj lasdf jffdddd
 
 ## 0.59.80
 

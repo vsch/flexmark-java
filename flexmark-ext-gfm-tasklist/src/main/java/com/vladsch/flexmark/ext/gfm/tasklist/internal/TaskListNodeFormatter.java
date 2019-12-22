@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
-import com.vladsch.flexmark.ast.BulletList;
-import com.vladsch.flexmark.ast.ListBlock;
-import com.vladsch.flexmark.ast.OrderedList;
-import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
 import com.vladsch.flexmark.formatter.*;
@@ -24,11 +21,11 @@ import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class TaskListNodeFormatter implements NodeFormatter {
-    private final FormatOptions myOptions;
+    private final FormatOptions formatOptions;
     private final ListOptions listOptions;
 
     public TaskListNodeFormatter(DataHolder options) {
-        myOptions = new FormatOptions(options);
+        formatOptions = new FormatOptions(options);
         listOptions = ListOptions.get(options);
     }
 
@@ -53,7 +50,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
             CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
         } else {
             BasedSequence markerSuffix = node.getMarkerSuffix();
-            switch (myOptions.taskListItemCase) {
+            switch (formatOptions.taskListItemCase) {
                 case AS_IS:
                     break;
                 case LOWERCASE:
@@ -63,11 +60,11 @@ public class TaskListNodeFormatter implements NodeFormatter {
                     markerSuffix = markerSuffix.toUpperCase();
                     break;
                 default:
-                    throw new IllegalStateException("Missing case for TaskListItemCase " + myOptions.taskListItemCase.name());
+                    throw new IllegalStateException("Missing case for TaskListItemCase " + formatOptions.taskListItemCase.name());
             }
 
             if (node.isItemDoneMarker()) {
-                switch (myOptions.taskListItemPlacement) {
+                switch (formatOptions.taskListItemPlacement) {
                     case AS_IS:
                     case INCOMPLETE_FIRST:
                     case INCOMPLETE_NESTED_FIRST:
@@ -77,8 +74,12 @@ public class TaskListNodeFormatter implements NodeFormatter {
                         markerSuffix = BasedSequence.NULL;
                         break;
                     default:
-                        throw new IllegalStateException("Missing case for ListItemPlacement " + myOptions.taskListItemPlacement.name());
+                        throw new IllegalStateException("Missing case for ListItemPlacement " + formatOptions.taskListItemPlacement.name());
                 }
+            }
+
+            if (markerSuffix.isNotNull() && formatOptions.formatTaskItemPriorities.length > 0) {
+                node.setCanChangeMarker(false);
             }
 
             // task list item node overrides isParagraphWrappingDisabled which affects empty list item blank line rendering
@@ -88,11 +89,11 @@ public class TaskListNodeFormatter implements NodeFormatter {
     }
 
     private void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderList(node, context, markdown, myOptions);
+        renderList(node, context, markdown);
     }
 
     private void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderList(node, context, markdown, myOptions);
+        renderList(node, context, markdown);
     }
 
     public static boolean hasIncompleteDescendants(Node node) {
@@ -112,11 +113,47 @@ public class TaskListNodeFormatter implements NodeFormatter {
         return false;
     }
 
-    public static void renderList(
+    public int taskItemPriority(Node node) {
+        if (node instanceof TaskListItem) {
+            if (((TaskListItem) node).isOrderedItem()) {
+                return formatOptions.formatOrderedTaskItemPriority;
+            } else {
+                BasedSequence openingMarker = ((ListItem) node).getOpeningMarker();
+                if (openingMarker.length() > 0) {
+                    int markerIndex = listOptions.getItemPrefixChars().indexOf(openingMarker.charAt(0));
+                    if (markerIndex < formatOptions.formatTaskItemPriorities.length) {
+                        return formatOptions.formatTaskItemPriorities[markerIndex];
+                    } else {
+                        return formatOptions.formatDefaultTaskItemPriority;
+                    }
+                }
+            }
+        }
+        return Integer.MIN_VALUE;
+    }
+
+    public int itemPriority(Node node) {
+        Node item = node.getFirstChild();
+        int priority = Integer.MIN_VALUE;
+        while (item != null) {
+            if (item instanceof TaskListItem) {
+                if (!((TaskListItem) item).isItemDoneMarker()) {
+                    priority = Math.max(priority, taskItemPriority(item));
+                }
+            }
+            if (item instanceof Block && !(item instanceof Paragraph)) {
+                priority = Math.max(priority, itemPriority(item));
+            }
+            item = item.getNext();
+        }
+
+        return priority;
+    }
+
+    public void renderList(
             ListBlock node,
             NodeFormatterContext context,
-            MarkdownWriter markdown,
-            FormatOptions formatOptions
+            MarkdownWriter markdown
     ) {
         if (context.isTransformingText()) {
             context.renderChildren(node);
@@ -125,8 +162,8 @@ public class TaskListNodeFormatter implements NodeFormatter {
 
             TaskListItemPlacement taskListItemPlacement = formatOptions.taskListItemPlacement;
             if (taskListItemPlacement != TaskListItemPlacement.AS_IS) {
-                ArrayList<Node> incompleteTasks = new ArrayList<>();
-                ArrayList<Node> completeItems = new ArrayList<>();
+                ArrayList<ListItem> incompleteTasks = new ArrayList<>();
+                ArrayList<ListItem> completeItems = new ArrayList<>();
                 boolean incompleteDescendants = taskListItemPlacement == TaskListItemPlacement.INCOMPLETE_NESTED_FIRST || taskListItemPlacement == TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK;
 
                 Node item = node.getFirstChild();
@@ -134,21 +171,32 @@ public class TaskListNodeFormatter implements NodeFormatter {
                     if (item instanceof TaskListItem) {
                         TaskListItem taskItem = (TaskListItem) item;
                         if (!taskItem.isItemDoneMarker() || (incompleteDescendants && hasIncompleteDescendants(item))) {
-                            incompleteTasks.add(item);
+                            incompleteTasks.add((ListItem) item);
                         } else {
-                            completeItems.add(item);
+                            completeItems.add((ListItem) item);
                         }
-                    } else {
+                    } else if (item instanceof ListItem) {
                         if (incompleteDescendants && hasIncompleteDescendants(item)) {
-                            incompleteTasks.add(item);
+                            incompleteTasks.add((ListItem) item);
                         } else {
-                            completeItems.add(item);
+                            completeItems.add((ListItem) item);
                         }
                     }
                     item = item.getNext();
                 }
 
-                itemList.addAll(incompleteTasks);
+                if (formatOptions.formatTaskItemPriorities.length > 0) {
+                    // have prioritized tasks
+                    for (ListItem listItem : incompleteTasks) {
+                        listItem.setPriority(itemPriority(listItem));
+                    }
+
+                    incompleteTasks.sort((o1, o2) -> Integer.compare(o2.getPriority(), o1.getPriority()));
+                    itemList.addAll(incompleteTasks);
+                } else {
+                    itemList.addAll(incompleteTasks);
+                }
+
                 itemList.addAll(completeItems);
             } else {
                 Node item = node.getFirstChild();

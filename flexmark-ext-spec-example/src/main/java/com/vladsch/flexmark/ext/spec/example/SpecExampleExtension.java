@@ -9,6 +9,7 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.format.options.TrailingSpaces;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -45,6 +46,9 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     public static final DataKey<Boolean> SPEC_OPTION_NODES = new DataKey<>("SPEC_OPTION_NODES", true);
     public static final DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_LANGUAGES = new DataKey<>("SPEC_EXAMPLE_SECTION_LANGUAGES", DEFAULT_LANGUAGE_MAPPING);
     public static final DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_NAMES = new DataKey<>("SPEC_EXAMPLE_SECTION_NAMES", DEFAULT_SECTION_MAPPING);
+
+    // IMPORTANT: implement node formatter and this option
+    public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
 
     private SpecExampleExtension() {
     }

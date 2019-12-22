@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.toc;
 import com.vladsch.flexmark.ext.toc.internal.SimTocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
-import com.vladsch.flexmark.ext.toc.internal.TocUtils;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;

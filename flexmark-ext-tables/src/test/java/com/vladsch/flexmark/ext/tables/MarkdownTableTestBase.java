@@ -95,18 +95,13 @@ public class MarkdownTableTestBase {
                 .set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, true)
                 .set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, new CharWidthProvider() {
                     @Override
-                    public int spaceWidth() {
+                    public int getSpaceWidth() {
                         return 1;
                     }
 
                     @Override
-                    public int charWidth(char c) {
+                    public int getCharWidth(char c) {
                         return c == INTELLIJ_DUMMY_IDENTIFIER_CHAR ? 0 : 1;
-                    }
-
-                    @Override
-                    public int charWidth(@NotNull CharSequence s) {
-                        return BasedSequence.of(s).countLeadingNot(INTELLIJ_DUMMY_IDENTIFIER_SET);
                     }
                 });
         return useOptions;

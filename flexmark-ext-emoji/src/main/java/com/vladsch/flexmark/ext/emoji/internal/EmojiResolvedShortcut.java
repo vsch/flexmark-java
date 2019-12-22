@@ -56,7 +56,7 @@ public class EmojiResolvedShortcut {
                     emojiText = imageText;
                 }
 
-                // IMPORTANT: this exact string is used by html parser to convert emoji from Apple Mail HTML
+                // CAUTION: this exact string is used by html parser to convert emoji from Apple Mail HTML
                 alt = "emoji " + emoji.category + ":" + emoji.shortcut;
             }
         }

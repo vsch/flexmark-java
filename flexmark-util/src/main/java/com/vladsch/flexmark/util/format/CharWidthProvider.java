@@ -1,26 +1,24 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface CharWidthProvider {
-    int spaceWidth();
-    int charWidth(char c);
-    int charWidth(@NotNull CharSequence s);
+    int getSpaceWidth();
+    int getCharWidth(char c);
 
     default int getStringWidth(@NotNull CharSequence chars) {
-        return getStringWidth(chars, null);
+        return getStringWidth(chars, CharPredicate.FALSE);
     }
 
-    default int getStringWidth(@NotNull CharSequence chars, @Nullable CharSequence zeroWidth) {
+    default int getStringWidth(@NotNull CharSequence chars, @NotNull CharPredicate zeroWidthChars) {
         int iMax = chars.length();
         int width = 0;
 
         for (int i = 0; i < iMax; i++) {
             char c = chars.charAt(i);
-            if (zeroWidth == null || SequenceUtils.indexOf(zeroWidth, c) == -1) {
-                width += charWidth(c);
+            if (!zeroWidthChars.test(c)) {
+                width += getCharWidth(c);
             }
         }
         return width;
@@ -28,18 +26,13 @@ public interface CharWidthProvider {
 
     CharWidthProvider NULL = new CharWidthProvider() {
         @Override
-        public int spaceWidth() {
+        public int getSpaceWidth() {
             return 1;
         }
 
         @Override
-        public int charWidth(char c) {
+        public int getCharWidth(char c) {
             return 1;
-        }
-
-        @Override
-        public int charWidth(@NotNull CharSequence s) {
-            return s.length();
         }
     };
 }

@@ -19,6 +19,8 @@ import org.jetbrains.annotations.NotNull;
  * The bullet list items that begin with [ ], [x] or [X] are turned into TaskListItem nodes
  */
 public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
+    public static final int[] EMPTY_PRIORITIES = new int[0];
+
     public static final DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" readonly=\"readonly\" />&nbsp;");
     public static final DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" readonly=\"readonly\" />&nbsp;");
     public static final DataKey<String> TIGHT_ITEM_CLASS = new DataKey<>("TIGHT_ITEM_CLASS", "task-list-item");
@@ -31,6 +33,13 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     // formatting options
     public static final DataKey<TaskListItemCase> FORMAT_LIST_ITEM_CASE = new DataKey<>("FORMAT_LIST_ITEM_CASE", TaskListItemCase.AS_IS);
     public static final DataKey<TaskListItemPlacement> FORMAT_LIST_ITEM_PLACEMENT = new DataKey<>("FORMAT_LIST_ITEM_PLACEMENT", TaskListItemPlacement.AS_IS);
+    public static final DataKey<Integer> FORMAT_ORDERED_TASK_ITEM_PRIORITY = new DataKey<>("FORMAT_ORDERED_TASK_ITEM_PRIORITY", 0);  // IMPORTANT: implement
+    public static final DataKey<Integer> FORMAT_DEFAULT_TASK_ITEM_PRIORITY = new DataKey<>("FORMAT_DEFAULT_TASK_ITEM_PRIORITY", 0);  // IMPORTANT: implement
+    /**
+     * Priorities corresponding to {@link Parser#LISTS_ITEM_PREFIX_CHARS}
+     * If shorter than item prefix chars then any missing priorities are set to 0
+     */
+    public static final DataKey<int[]> FORMAT_TASK_ITEM_PRIORITIES = new DataKey<>("FORMAT_TASK_ITEM_PRIORITIES", EMPTY_PRIORITIES);   // IMPORTANT: implement
 
     private TaskListExtension() {
     }

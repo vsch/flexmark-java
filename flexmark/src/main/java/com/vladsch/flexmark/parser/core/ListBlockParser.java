@@ -30,6 +30,7 @@ import java.util.regex.Matcher;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
+import static com.vladsch.flexmark.util.SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
 
 public class ListBlockParser extends AbstractBlockParser {
     private final ListBlock myBlock;
@@ -485,23 +486,25 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public boolean escape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
-            if (super.escape(sequence, consumer)) return true;
-            int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
-            if (nonDigit != -1 && nonDigit + 1 == sequence.length() && orderedDelims.test(sequence.charAt(nonDigit))) {
-                consumer.accept(sequence.subSequence(0, nonDigit));
-                consumer.accept("\\");
-                consumer.accept(sequence.subSequence(nonDigit));
-                return true;
+        public boolean escape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
+            if (super.escape(sequence, options, consumer)) return true;
+            if (ESCAPE_NUMBERED_LEAD_IN.get(options)) {
+                int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
+                if (nonDigit > 0 && nonDigit + 1 == sequence.length() && orderedDelims.test(sequence.charAt(nonDigit))) {
+                    consumer.accept(sequence.subSequence(0, nonDigit));
+                    consumer.accept("\\");
+                    consumer.accept(sequence.subSequence(nonDigit));
+                    return true;
+                }
             }
             return false;
         }
 
         @Override
-        public boolean unEscape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
-            if (super.unEscape(sequence, consumer)) return true;
+        public boolean unEscape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
+            if (super.unEscape(sequence, options, consumer)) return true;
             int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
-            if (nonDigit != -1 && nonDigit + 2 == sequence.length() && sequence.charAt(nonDigit) == '\\' && orderedDelims.test(sequence.charAt(nonDigit + 1))) {
+            if (nonDigit > 0 && nonDigit + 2 == sequence.length() && sequence.charAt(nonDigit) == '\\' && orderedDelims.test(sequence.charAt(nonDigit + 1))) {
                 consumer.accept(sequence.subSequence(0, nonDigit));
                 consumer.accept(sequence.subSequence(nonDigit + 1));
                 return true;

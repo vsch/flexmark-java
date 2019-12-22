@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.util.HeadingCollectingVisitor;
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.ext.toc.TocExtension;
+import com.vladsch.flexmark.ext.toc.TocUtils;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;

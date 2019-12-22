@@ -105,7 +105,7 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         final static SpecialLeadInHandler HANDLER = new AdmonitionLeadInHandler();
 
         @Override
-        public boolean escape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
+        public boolean escape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
             if ((sequence.length() == 3 || sequence.length() == 4 && sequence.charAt(3) == '+') && (sequence.startsWith("???") || sequence.startsWith("!!!"))) {
                 consumer.accept("\\");
                 consumer.accept(sequence);
@@ -115,7 +115,7 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
         }
 
         @Override
-        public boolean unEscape(@NotNull BasedSequence sequence, @NotNull Consumer<CharSequence> consumer) {
+        public boolean unEscape(@NotNull BasedSequence sequence, @Nullable DataHolder options, @NotNull Consumer<CharSequence> consumer) {
             if ((sequence.length() == 4 || sequence.length() == 5 && sequence.charAt(4) == '+') && (sequence.startsWith("\\???") || sequence.startsWith("\\!!!"))) {
                 consumer.accept(sequence.subSequence(1));
                 return true;

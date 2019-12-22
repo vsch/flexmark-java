@@ -121,7 +121,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
                 (1 << Character.LETTER_NUMBER)) >> Character.getType((int) c)) & 1) != 0);
     }
 
-    public static class Factory implements HeaderIdGeneratorFactory, HtmlIdGeneratorFactory {
+    public static class Factory implements HeaderIdGeneratorFactory {
         @NotNull
         @Override
         public HeaderIdGenerator create(LinkResolverContext context) {

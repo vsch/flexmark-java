@@ -40,9 +40,10 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     private Map<String, String> attributeUniquificationIdMap;
     private Map<String, String> attributeCategoryUniquificationMap;
     private int attributeOriginalId;
+    final private AttributesFormatOptions formatOptions;
 
     public AttributesNodeFormatter(DataHolder options) {
-
+        formatOptions = new AttributesFormatOptions(options);
     }
 
     @Nullable
@@ -440,6 +441,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
             }
             markdown.append(node.getClosingMarker());
         } else {
+            // IMPORTANT: implement formatting options
             markdown.append(node.getChars());
         }
 

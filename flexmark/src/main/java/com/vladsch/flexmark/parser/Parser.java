@@ -223,7 +223,7 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> LISTS_ITEM_MARKER_SPACE = new DataKey<>("LISTS_ITEM_MARKER_SPACE", false);
 
     // strings for list marker suffixes which offset the content, to properly support gfm task lists with content offset matching the suffix end
-    // LIST_ITEM_MARKER_SPACE is applied after the suffix if it is present, and before. Spaces around the suffix are implicitly allowed
+    // LIST_ITEM_MARKER_SPACE is applied after the suffix if it is present, and before. Spaces around the suffix are implicitly allowed.
     public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES = new DataKey<>("LISTS_ITEM_MARKER_SUFFIXES", new String[] { });
     public static final DataKey<Boolean> LISTS_NUMBERED_ITEM_MARKER_SUFFIXED = new DataKey<>("LISTS_NUMBERED_ITEM_MARKER_SUFFIXED", true);
 
@@ -283,6 +283,7 @@ public class Parser implements IParse {
 
     // separate setting for CODE_BLOCK_INDENT
     public static final DataKey<Integer> CODE_BLOCK_INDENT = new DataKey<>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
+
     private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
     private final BitSet delimiterCharacters;

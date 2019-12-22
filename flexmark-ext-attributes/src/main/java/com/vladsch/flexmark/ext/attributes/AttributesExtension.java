@@ -9,6 +9,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -31,6 +32,11 @@ public class AttributesExtension implements Parser.ParserExtension
     public static final DataKey<FencedCodeAddType> FENCED_CODE_ADD_ATTRIBUTES = new DataKey<>("FENCED_CODE_ADD_ATTRIBUTES", FencedCodeAddType.ADD_TO_PRE_CODE); // assign attributes to pre/code tag
     public static final DataKey<Boolean> WRAP_NON_ATTRIBUTE_TEXT = new DataKey<>("WRAP_NON_ATTRIBUTE_TEXT", true);
     public static final DataKey<Boolean> USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER = new DataKey<>("USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER", false);
+
+    public static final DataKey<Boolean> FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE = new DataKey<>("FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE", false); // IMPORTANT: implement node formatter
+    public static final DataKey<DiscretionaryText> FORMAT_ATTRIBUTES_SPACES = new DataKey<>("FORMAT_ATTRIBUTES_SPACES", DiscretionaryText.AS_IS); // IMPORTANT: implement node formatter
+    public static final DataKey<DiscretionaryText> FORMAT_ATTRIBUTE_EQUAL_SPACE = new DataKey<>("FORMAT_ATTRIBUTE_EQUAL_SPACE", DiscretionaryText.AS_IS); // IMPORTANT: implement node formatter
+    public static final DataKey<AttributeValueQuotes> FORMAT_ATTRIBUTE_VALUE_QUOTES = new DataKey<>("FORMAT_ATTRIBUTE_VALUE_QUOTES", AttributeValueQuotes.AS_IS); // IMPORTANT: implement node formatter
 
     private AttributesExtension() {
     }

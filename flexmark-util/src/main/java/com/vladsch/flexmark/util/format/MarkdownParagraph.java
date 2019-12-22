@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
+import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
@@ -27,6 +28,7 @@ public class MarkdownParagraph {
     boolean unEscapeSpecialLeadInChars = true;
     boolean escapeSpecialLeadInChars = true;
     boolean restoreTrackedSpaces = false;
+    @Nullable DataHolder options = null;
 
     @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = EMPTY_LEAD_IN_HANDLERS;
     private Map<TrackedOffset, Integer> trackedOffsets = EMPTY_OFFSET_MAP;
@@ -128,18 +130,21 @@ public class MarkdownParagraph {
                 int index = info.endIndex;
 
                 int endLineWrapped = wrapped.endOfLine(index);
-
-                if (!trackedOffset.isAfterSpaceEdit() && (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete())) {
-                    // need to keep it at the previous character but not when inserting as space or deleting 1 char surrounded by spaces,
-                    // except when offset is at end of line
-                    index = info.startIndex;
-                    endLineWrapped = wrapped.endOfLine(index);
-                    if (trackedOffset.isAfterDelete() && index == endLineWrapped) offsetSpacesAfter = 0;
-                    offsetSpaces = 0;
-                }
-
                 int startLineWrapped = wrapped.startOfLine(index);
                 int firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
+
+                if (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete()) {
+                    // need to keep it at the previous character but not when inserting as space or deleting 1 char surrounded by spaces,
+                    // except when offset is at end of line
+                    if (!trackedOffset.isAfterSpaceEdit()) {
+                        index = info.startIndex;
+                        endLineWrapped = wrapped.endOfLine(index);
+                        startLineWrapped = wrapped.startOfLine(index);
+                        firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
+                        if (trackedOffset.isAfterDelete() && index == endLineWrapped) offsetSpacesAfter = 0;
+                        offsetSpaces = 0;
+                    } else if (index == firstNonBlankWrapped) offsetSpaces = 0;
+                }
 
                 // NOTE: if typing space before or on start of continuation line, then do not move tracked offset to previous line
                 if (index <= firstNonBlankWrapped) {
@@ -247,6 +252,15 @@ public class MarkdownParagraph {
 
     public List<? extends SpecialLeadInHandler> getLeadInHandlers() {
         return leadInHandlers;
+    }
+
+    @Nullable
+    public DataHolder getOptions() {
+        return options;
+    }
+
+    public void setOptions(@Nullable DataHolder options) {
+        this.options = options;
     }
 
     public void setLeadInHandlers(List<? extends SpecialLeadInHandler> leadInHandlers) {
@@ -399,7 +413,7 @@ public class MarkdownParagraph {
         final TextTokenizer tokenizer;
         int col = 0;
         int lineCount = 0;
-        final int spaceWidth = charWidthProvider.spaceWidth();
+        final int spaceWidth = charWidthProvider.getSpaceWidth();
         CharSequence lineIndent = getFirstIndent();
         final CharSequence nextIndent = getIndent();
         int lineWidth = spaceWidth * getFirstWidth();
@@ -432,7 +446,7 @@ public class MarkdownParagraph {
 
         void addSpaces(int count) {
             result.append(' ', count);
-            col += charWidthProvider.spaceWidth() * count;
+            col += charWidthProvider.getSpaceWidth() * count;
         }
 
         BasedSequence addSpaces(BasedSequence sequence, int count) {
@@ -472,7 +486,7 @@ public class MarkdownParagraph {
         void processLeadInEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
             if (sequence.isNotEmpty() && escapeSpecialLeadInChars) {
                 for (SpecialLeadInHandler handler : handlers) {
-                    if (handler.escape(sequence, this::addChars)) return;
+                    if (handler.escape(sequence, options, this::addChars)) return;
                 }
             }
             addChars(sequence);
@@ -481,7 +495,7 @@ public class MarkdownParagraph {
         void processLeadInUnEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
             if (sequence.isNotEmpty() && unEscapeSpecialLeadInChars) {
                 for (SpecialLeadInHandler handler : handlers) {
-                    if (handler.unEscape(sequence, this::addChars)) return;
+                    if (handler.unEscape(sequence, options, this::addChars)) return;
                 }
             }
             addChars(sequence);

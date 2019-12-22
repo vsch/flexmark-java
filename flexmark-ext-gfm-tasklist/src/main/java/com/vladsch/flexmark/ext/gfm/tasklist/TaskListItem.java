@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class TaskListItem extends ListItem {
     protected boolean isOrderedItem = false;
+    protected boolean canChangeMarker = true;
 
     @Override
     public void getAstExtra(@NotNull StringBuilder out) {
@@ -70,5 +71,13 @@ public class TaskListItem extends ListItem {
 
     public void setOrderedItem(boolean orderedItem) {
         isOrderedItem = orderedItem;
+    }
+
+    public boolean isCanChangeMarker() {
+        return canChangeMarker;
+    }
+
+    public void setCanChangeMarker(boolean canChangeMarker) {
+        this.canChangeMarker = canChangeMarker;
     }
 }

@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.toc;
 import com.vladsch.flexmark.ext.toc.internal.TocBlockParser;
 import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
-import com.vladsch.flexmark.ext.toc.internal.TocUtils;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
