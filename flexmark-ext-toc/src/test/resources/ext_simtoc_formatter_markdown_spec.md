@@ -25,6 +25,7 @@ Default rendering with emphasis
 ### Heading 1.1.2  **_some bold italic_**
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -51,6 +52,7 @@ Default rendering with div class
 ### Heading 1.1.2  **_some bold italic_**
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -77,6 +79,7 @@ Default rendering with div class, list class
 ### Heading 1.1.2  **_some bold italic_**
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -103,6 +106,7 @@ Default rendering with list class
 ### Heading 1.1.2  **_some bold italic_**
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -131,6 +135,7 @@ start with missing first level
 # Header 5
 .
 [TOC levels=1-6]: #
+# Table of Contents
 - [Header 1](#header-1)
 - [Header 2](#header-2)
   - [Header 3](#header-3)
@@ -163,6 +168,7 @@ start with missing first 2 levels
 # Header 4
 .
 [TOC levels=1-6]: #
+# Table of Contents
 - [Header 1](#header-1)
 - [Header 2](#header-2)
   - [Header 3](#header-3)
@@ -193,6 +199,7 @@ Text only style
 
 .
 [TOC text]: #
+# Table of Contents
 - [Heading 1.1 some italic](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -222,6 +229,7 @@ Text and inlines style
 
 .
 [TOC formatted]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -251,6 +259,7 @@ Text only, flat
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 some italic](#heading-11-some-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -280,6 +289,7 @@ Text and inlines, flat
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -309,6 +319,7 @@ Text and inlines, hierarchy
 
 .
 [TOC hierarchy]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -338,6 +349,7 @@ Text and inlines, flat
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
@@ -367,6 +379,7 @@ Text and inlines, flat-reversed
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 - [Heading 1.1.1](#heading-111)
@@ -396,6 +409,7 @@ Text only, sorted
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 some italic](#heading-11-some-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -425,6 +439,7 @@ Text and inlines, sorted
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -454,6 +469,7 @@ Text only, sorted
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1 some italic](#heading-11-some-italic)
@@ -483,6 +499,7 @@ Text and inlines, sorted reversed
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
@@ -512,6 +529,7 @@ Text and inlines, unsorted
 
 .
 [TOC hierarchy]: #
+# Table of Contents
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
@@ -541,6 +559,7 @@ Typographic chars included
 
 .
 [TOC hierarchy]: #
+# Table of Contents
 - [Heading's 1.1.2  **_some bold italic_**](#headings-112--some-bold-italic)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
@@ -570,6 +589,7 @@ With Typographic extension included
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading's 1.1.2  **_some bold italic_**](#headings-112--some-bold-italic)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
@@ -595,6 +615,7 @@ With Typographic extension included
 
 .
 [TOC]: #
+# Table of Contents
 - [Heading_add](#heading_add)
 - [Heading2_add_more](#heading2_add_more)
 
@@ -619,6 +640,7 @@ Default rendering with emphasis
 ### Heading 1.1.2  **_some bold italic_**
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -645,6 +667,7 @@ Default rendering with div class
 ### Heading 1.1.2  **_some bold italic_**
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -671,6 +694,7 @@ Default rendering with div class, list class
 ### Heading 1.1.2  **_some bold italic_**
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -697,6 +721,7 @@ Default rendering with list class
 ### Heading 1.1.2  **_some bold italic_**
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -725,6 +750,7 @@ start with missing first level
 # Header 5
 .
 [TOC levels=1-6]: #
+# Table of Contents
 1. [Header 1](#header-1)
 1. [Header 2](#header-2)
    1. [Header 3](#header-3)
@@ -757,6 +783,7 @@ start with missing first 2 levels
 # Header 4
 .
 [TOC levels=1-6]: #
+# Table of Contents
 1. [Header 1](#header-1)
 1. [Header 2](#header-2)
    1. [Header 3](#header-3)
@@ -787,6 +814,7 @@ Text only style
 
 .
 [TOC text]: #
+# Table of Contents
 1. [Heading 1.1 some italic](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -816,6 +844,7 @@ Text and inlines style
 
 .
 [TOC formatted]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -845,6 +874,7 @@ Text only, flat
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 some italic](#heading-11-some-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -874,6 +904,7 @@ Text and inlines, flat
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -903,6 +934,7 @@ Text and inlines, hierarchy
 
 .
 [TOC hierarchy]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -932,6 +964,7 @@ Text and inlines, flat
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
@@ -961,6 +994,7 @@ Text and inlines, flat-reversed
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 1. [Heading 1.1.1](#heading-111)
@@ -990,6 +1024,7 @@ Text only, sorted
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 some italic](#heading-11-some-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -1019,6 +1054,7 @@ Text and inlines, sorted
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1048,6 +1084,7 @@ Text only, sorted
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1 some italic](#heading-11-some-italic)
@@ -1077,6 +1114,7 @@ Text and inlines, sorted reversed
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
@@ -1106,6 +1144,7 @@ Text and inlines, unsorted
 
 .
 [TOC hierarchy]: #
+# Table of Contents
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
@@ -1135,6 +1174,7 @@ Typographic chars included
 
 .
 [TOC hierarchy]: #
+# Table of Contents
 1. [Heading's 1.1.2  **_some bold italic_**](#headings-112--some-bold-italic)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
@@ -1164,6 +1204,7 @@ With Typographic extension included
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading's 1.1.2  **_some bold italic_**](#headings-112--some-bold-italic)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
@@ -1189,6 +1230,7 @@ With Typographic extension included
 
 .
 [TOC]: #
+# Table of Contents
 1. [Heading_add](#heading_add)
 1. [Heading2_add_more](#heading2_add_more)
 
@@ -1217,6 +1259,7 @@ Default rendering with emphasis
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1246,6 +1289,7 @@ Default rendering with div class
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1275,6 +1319,7 @@ Default rendering with div class, list class
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1304,6 +1349,7 @@ Default rendering with list class
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1334,6 +1380,7 @@ start with missing first level
 .
 [TOC levels=1-6]: #
 
+# Table of Contents
 - [Header 1](#header-1)
 - [Header 2](#header-2)
   - [Header 3](#header-3)
@@ -1367,6 +1414,7 @@ start with missing first 2 levels
 .
 [TOC levels=1-6]: #
 
+# Table of Contents
 - [Header 1](#header-1)
 - [Header 2](#header-2)
   - [Header 3](#header-3)
@@ -1398,6 +1446,7 @@ Text only style
 .
 [TOC text]: #
 
+# Table of Contents
 - [Heading 1.1 some italic](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -1428,6 +1477,7 @@ Text and inlines style
 .
 [TOC formatted]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1458,6 +1508,7 @@ Text only, flat
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 some italic](#heading-11-some-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -1488,6 +1539,7 @@ Text and inlines, flat
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1518,6 +1570,7 @@ Text and inlines, hierarchy
 .
 [TOC hierarchy]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
   - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1548,6 +1601,7 @@ Text and inlines, flat
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
@@ -1578,6 +1632,7 @@ Text and inlines, flat-reversed
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 - [Heading 1.1.1](#heading-111)
@@ -1608,6 +1663,7 @@ Text only, sorted
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 some italic](#heading-11-some-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -1638,6 +1694,7 @@ Text and inlines, sorted
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1668,6 +1725,7 @@ Text only, sorted
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1 some italic](#heading-11-some-italic)
@@ -1698,6 +1756,7 @@ Text and inlines, sorted reversed
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 - [Heading 1.1.1](#heading-111)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
@@ -1728,6 +1787,7 @@ Text and inlines, unsorted
 .
 [TOC hierarchy]: #
 
+# Table of Contents
 - [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
@@ -1758,6 +1818,7 @@ Typographic chars included
 .
 [TOC hierarchy]: #
 
+# Table of Contents
 - [Heading's 1.1.2  **_some bold italic_**](#headings-112--some-bold-italic)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
@@ -1788,6 +1849,7 @@ With Typographic extension included
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading's 1.1.2  **_some bold italic_**](#headings-112--some-bold-italic)
 - [Heading 1.1 _some italic_](#heading-11-some-italic)
   - [Heading 1.1.1](#heading-111)
@@ -1814,6 +1876,7 @@ With Typographic extension included
 .
 [TOC]: #
 
+# Table of Contents
 - [Heading_add](#heading_add)
 - [Heading2_add_more](#heading2_add_more)
 
@@ -1840,6 +1903,7 @@ Default rendering with emphasis
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1869,6 +1933,7 @@ Default rendering with div class
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1898,6 +1963,7 @@ Default rendering with div class, list class
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1927,6 +1993,7 @@ Default rendering with list class
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -1957,6 +2024,7 @@ start with missing first level
 .
 [TOC levels=1-6]: #
 
+# Table of Contents
 1. [Header 1](#header-1)
 1. [Header 2](#header-2)
    1. [Header 3](#header-3)
@@ -1990,6 +2058,7 @@ start with missing first 2 levels
 .
 [TOC levels=1-6]: #
 
+# Table of Contents
 1. [Header 1](#header-1)
 1. [Header 2](#header-2)
    1. [Header 3](#header-3)
@@ -2021,6 +2090,7 @@ Text only style
 .
 [TOC text]: #
 
+# Table of Contents
 1. [Heading 1.1 some italic](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -2051,6 +2121,7 @@ Text and inlines style
 .
 [TOC formatted]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -2081,6 +2152,7 @@ Text only, flat
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 some italic](#heading-11-some-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -2111,6 +2183,7 @@ Text and inlines, flat
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -2141,6 +2214,7 @@ Text and inlines, hierarchy
 .
 [TOC hierarchy]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
    1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -2171,6 +2245,7 @@ Text and inlines, flat
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
@@ -2201,6 +2276,7 @@ Text and inlines, flat-reversed
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 1. [Heading 1.1.1](#heading-111)
@@ -2231,6 +2307,7 @@ Text only, sorted
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 some italic](#heading-11-some-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
@@ -2261,6 +2338,7 @@ Text and inlines, sorted
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
@@ -2291,6 +2369,7 @@ Text only, sorted
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1.2  some bold italic](#heading-112--some-bold-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1 some italic](#heading-11-some-italic)
@@ -2321,6 +2400,7 @@ Text and inlines, sorted reversed
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 1. [Heading 1.1.1](#heading-111)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
@@ -2351,6 +2431,7 @@ Text and inlines, unsorted
 .
 [TOC hierarchy]: #
 
+# Table of Contents
 1. [Heading 1.1.2  **_some bold italic_**](#heading-112--some-bold-italic)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
@@ -2381,6 +2462,7 @@ Typographic chars included
 .
 [TOC hierarchy]: #
 
+# Table of Contents
 1. [Heading's 1.1.2  **_some bold italic_**](#headings-112--some-bold-italic)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
@@ -2411,6 +2493,7 @@ With Typographic extension included
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading's 1.1.2  **_some bold italic_**](#headings-112--some-bold-italic)
 1. [Heading 1.1 _some italic_](#heading-11-some-italic)
    1. [Heading 1.1.1](#heading-111)
@@ -2437,6 +2520,7 @@ With Typographic extension included
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading_add](#heading_add)
 1. [Heading2_add_more](#heading2_add_more)
 
@@ -2489,6 +2573,7 @@ With Typographic extension included
 .
 [TOC]: #
 
+# Table of Contents
 1. [Heading_add](#heading_add)
 1. [Heading2_add_more](#heading2_add_more)
 
@@ -2520,6 +2605,32 @@ With Typographic extension included
 
 ## Heading2_add_more
 
+````````````````````````````````
+
+
+## Issue
+
+### xxx-01
+
+```````````````````````````````` example(Issue - xxx-01: 1) options(spacer)
+## Header 2
+### Header 3
+
+[TOC levels=1-3]:# "title\"s"
+
+### title"s
+- [Header 2](#header-2)
+    - [Header 3](#header-3)
+.
+## Header 2
+
+### Header 3
+
+[TOC levels=1-3]: # "title\"s"
+
+# title"s
+- [Header 2](#header-2)
+  - [Header 3](#header-3)
 ````````````````````````````````
 
 

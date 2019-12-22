@@ -60,9 +60,9 @@ public class TocUtils {
             if (!optionTitle.isEmpty()) {
                 out.append('"');
                 if (defaultOptions == null || options.titleLevel != defaultOptions.titleLevel) {
-                    out.append(optionTitleHeading);
+                    out.append(optionTitleHeading.replace("\\", "\\\\").replace("\"", "\\\""));
                 } else {
-                    out.append(optionTitle);
+                    out.append(optionTitle.replace("\\", "\\\\").replace("\"", "\\\""));
                 }
                 out.append('"').mark();
             } else {
@@ -118,6 +118,10 @@ public class TocUtils {
             htmlRenderer.render(toc, markdown);
             markdown.closePreFormatted();
         } else {
+            String heading = options.getTitleHeading();
+            if (!heading.isEmpty()) {
+                markdown.append(heading);
+            }
             renderMarkdownToc(markdown, headings, headingTexts, options);
         }
     }

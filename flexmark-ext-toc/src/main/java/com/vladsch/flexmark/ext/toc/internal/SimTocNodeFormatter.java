@@ -66,6 +66,7 @@ public class SimTocNodeFormatter implements NodeFormatter {
                     String simTocPrefix = TocUtils.getSimTocPrefix(options, this.options);
                     markdown.append(simTocPrefix);
                     if (options.isBlankLineSpacer) markdown.blankLine();
+
                     renderTocHeaders(markdown, headings, options);
                 }
                 break;
@@ -83,7 +84,6 @@ public class SimTocNodeFormatter implements NodeFormatter {
     private void renderTocHeaders(MarkdownWriter markdown, List<Heading> headings, TocOptions options) {
         List<Heading> filteredHeadings = TocUtils.filteredHeadings(headings, options);
         Paired<List<Heading>, List<String>> paired = TocUtils.markdownHeaderTexts(filteredHeadings, options);
-
         TocUtils.renderTocContent(markdown, options, this.options, paired.getFirst(), paired.getSecond());
     }
 
