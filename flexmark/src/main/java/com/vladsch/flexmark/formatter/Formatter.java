@@ -33,6 +33,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static com.vladsch.flexmark.html.renderer.HtmlIdGenerator.NULL;
+
 /**
  * Renders a tree of nodes to Markdown.
  * <p>
@@ -56,6 +58,8 @@ public class Formatter implements IRender {
     @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
     @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_TRIM_TRAILING_WHITESPACE;
     @Deprecated public static final int FORMAT_ALL_OPTIONS = LineAppendable.F_FORMAT_ALL;
+
+    public static final DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", false);
 
     public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_BLANK_LINES;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_TRAILING_BLANK_LINES;
@@ -140,7 +144,7 @@ public class Formatter implements IRender {
     final FormatterOptions formatterOptions;
     private final DataHolder options;
     final List<LinkResolverFactory> linkResolverFactories;
-    private final NodeFormatterDependencies nodeFormatterFactories;
+    final NodeFormatterDependencies nodeFormatterFactories;
     final HeaderIdGeneratorFactory idGeneratorFactory;
 
     Formatter(Builder builder) {
@@ -389,6 +393,7 @@ public class Formatter implements IRender {
         mergeOptions.set(Parser.HTML_FOR_TRANSLATOR, true);
 
         TranslationHandler[] translationHandlers = new TranslationHandler[documents.length];
+        //noinspection unchecked
         List<String>[] translationHandlersTexts = new List[documents.length];
 
         int iMax = documents.length;
@@ -572,7 +577,7 @@ public class Formatter implements IRender {
         private final LinkResolver[] myLinkResolvers;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
         private final ExplicitAttributeIdProvider myExplicitAttributeIdProvider;
-        private HtmlIdGenerator myIdGenerator;
+        private final HtmlIdGenerator idGenerator;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
@@ -637,8 +642,11 @@ public class Formatter implements IRender {
             }
 
             // generate ids by default even if they are not going to be used
-            myIdGenerator = idGeneratorFactory.create();
-            myIdGenerator.generateIds(document);
+            this.idGenerator = GENERATE_HEADER_ID.get(options) ? idGeneratorFactory != null ? idGeneratorFactory.create(this) : new HeaderIdGenerator.Factory().create(this) : null;
+
+            if (idGenerator != null) {
+                idGenerator.generateIds(document);
+            }
 
             myExplicitAttributeIdProvider = explicitAttributeIdProvider;
 
@@ -755,7 +763,7 @@ public class Formatter implements IRender {
 
         @Override
         public HtmlIdGenerator getIdGenerator() {
-            return myTranslationHandler == null ? myIdGenerator : myTranslationHandler.getIdGenerator();
+            return myTranslationHandler == null ? idGenerator : myTranslationHandler.getIdGenerator();
         }
 
         @Override

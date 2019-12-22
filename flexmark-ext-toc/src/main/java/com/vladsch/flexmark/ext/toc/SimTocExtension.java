@@ -53,6 +53,11 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
         if (!options.contains(HtmlRenderer.GENERATE_HEADER_ID)) {
             options.set(HtmlRenderer.GENERATE_HEADER_ID, true);
         }
+
+        if (!options.contains(Formatter.GENERATE_HEADER_ID)) {
+            options.set(Formatter.GENERATE_HEADER_ID, true);
+        }
+
         if (!options.contains(HtmlRenderer.RENDER_HEADER_ID)) {
             options.set(HtmlRenderer.RENDER_HEADER_ID, true);
         }
