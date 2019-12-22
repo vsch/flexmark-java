@@ -23,6 +23,9 @@ public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
         optionsMap.put("atx-space-as-is", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.AS_IS));
         optionsMap.put("atx-space-add", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.ADD));
         optionsMap.put("atx-space-remove", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.REMOVE));
+        optionsMap.put("heading-any", new MutableDataSet().set(Formatter.HEADING_PREFERENCE, HeadingStyle.AS_IS));
+        optionsMap.put("heading-atx", new MutableDataSet().set(Formatter.HEADING_PREFERENCE, HeadingStyle.ATX_PREFERRED));
+        optionsMap.put("heading-setext", new MutableDataSet().set(Formatter.HEADING_PREFERENCE, HeadingStyle.SETEXT_PREFERRED));
         optionsMap.put("setext-no-equalize", new MutableDataSet().set(Formatter.SETEXT_HEADER_EQUALIZE_MARKER, false));
         optionsMap.put("atx-trailing-as-is", new MutableDataSet().set(Formatter.ATX_HEADER_TRAILING_MARKER, EqualizeTrailingMarker.AS_IS));
         optionsMap.put("atx-trailing-add", new MutableDataSet().set(Formatter.ATX_HEADER_TRAILING_MARKER, EqualizeTrailingMarker.ADD));

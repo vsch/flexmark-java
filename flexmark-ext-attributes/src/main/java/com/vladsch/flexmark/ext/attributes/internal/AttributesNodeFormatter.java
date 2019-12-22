@@ -59,8 +59,8 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     }
 
     @Override
-    public void addExplicitId(@NotNull Node node, @NotNull String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
-        if (node instanceof Heading) {
+    public void addExplicitId(@NotNull Node node, @Nullable String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
+        if (id != null && node instanceof Heading) {
             // if our id != generated id we add explicit attributes if none are found already
             if (context.getRenderPurpose() == TRANSLATED) {
                 if (hasNoIdAttribute(node) && attributeUniquificationIdMap != null) {

@@ -1200,6 +1200,213 @@ Heading
 ````````````````````````````````
 
 
+### Prefer ATX
+
+```````````````````````````````` example(Headings - Prefer ATX: 1) options(atx-space-remove, heading-atx)
+# Heading
+.
+#Heading
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 2) options(atx-space-remove, atx-trailing-equalize, heading-atx)
+# Heading ####
+.
+#Heading#
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 3) options(atx-space-as-is, atx-trailing-equalize, heading-atx)
+# Heading ####
+.
+# Heading #
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 4) options(atx-space-add, atx-trailing-equalize, heading-atx)
+# Heading ####
+.
+# Heading #
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 5) options(atx-space-remove, atx-trailing-as-is, heading-atx)
+# Heading ####
+.
+#Heading####
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 6) options(atx-space-add, atx-trailing-equalize, heading-atx)
+#Heading####
+.
+# Heading #
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 7) options(atx-space-add, atx-trailing-remove, heading-atx)
+#Heading####
+.
+# Heading
+
+.
+Document[0, 12]
+  Heading[0, 12] textOpen:[0, 1, "#"] text:[1, 8, "Heading"] textClose:[8, 12, "####"]
+    Text[1, 8] chars:[1, 8, "Heading"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 8) options(heading-atx)
+Heading
+==
+.
+# Heading
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 9) options(heading-atx)
+Heading
+---
+.
+## Heading
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 10) options(atx-trailing-add, heading-atx)
+Heading
+==
+.
+# Heading #
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer ATX: 11) options(atx-trailing-add, heading-atx)
+Heading
+---
+.
+## Heading ##
+
+````````````````````````````````
+
+
+### Prefer Setext
+
+```````````````````````````````` example(Headings - Prefer Setext: 1) options(setext-no-equalize, heading-setext)
+# Heading
+.
+Heading
+=
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 2) options(setext-no-equalize, heading-setext)
+# Heading ####
+.
+Heading
+=
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 3) options(heading-setext)
+# Heading ####
+.
+Heading
+=======
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 4) options(setext-no-equalize, heading-setext)
+## Heading ####
+.
+Heading
+-
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 5) options(setext-no-equalize, heading-setext)
+# Heading ####
+.
+Heading
+=
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 6) options(atx-space-add, atx-trailing-equalize, heading-setext)
+#Heading####
+.
+Heading
+=======
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 7) options(atx-space-add, atx-trailing-remove, heading-setext)
+#Heading####
+.
+Heading
+=======
+
+.
+Document[0, 12]
+  Heading[0, 12] textOpen:[0, 1, "#"] text:[1, 8, "Heading"] textClose:[8, 12, "####"]
+    Text[1, 8] chars:[1, 8, "Heading"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 8) options(heading-setext)
+Heading
+==
+.
+Heading
+=======
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 9) options(heading-setext)
+Heading
+---
+.
+Heading
+-------
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 10) options(setext-no-equalize, heading-setext)
+Heading
+==
+.
+Heading
+==
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Prefer Setext: 11) options(setext-no-equalize, heading-setext)
+Heading
+---
+.
+Heading
+---
+
+````````````````````````````````
+
+
 ## Thematic Break
 
 ```````````````````````````````` example Thematic Break: 1

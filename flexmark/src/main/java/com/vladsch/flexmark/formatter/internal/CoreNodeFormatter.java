@@ -14,10 +14,7 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
-import com.vladsch.flexmark.util.format.options.ContinuationIndent;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import com.vladsch.flexmark.util.format.options.ListSpacing;
+import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -60,7 +57,6 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     private int blankLines;
     MutableDataHolder myTranslationStore;
     private Map<String, String> attributeUniquificationIdMap;
-    private Map<String, String> headingOriginalTextMap;
 
     public CoreNodeFormatter(DataHolder options) {
         super(options, null, UNIQUIFICATION_MAP);
@@ -315,61 +311,104 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(Heading node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
-        if (node.isAtxHeading()) {
-            markdown.append(node.getOpeningMarker());
-            boolean spaceAfterAtx = context.getFormatterOptions().spaceAfterAtxMarker == ADD
-                    || context.getFormatterOptions().spaceAfterAtxMarker == AS_IS && node.getOpeningMarker().getEndOffset() < node.getText().getStartOffset();
+        HeadingStyle headingPreference = formatterOptions.headingPreference;
+        FormatterOptions formatterOptions = context.getFormatterOptions();
+        if (context.isTransformingText() || headingPreference.isNoChange(node.isSetextHeading(), node.getLevel())) {
+            if (node.isAtxHeading()) {
+                markdown.append(node.getOpeningMarker());
+                boolean spaceAfterAtx = formatterOptions.spaceAfterAtxMarker == ADD
+                        || formatterOptions.spaceAfterAtxMarker == AS_IS && node.getOpeningMarker().getEndOffset() < node.getText().getStartOffset();
+
+                if (spaceAfterAtx) markdown.append(' ');
+
+                context.translatingRefTargetSpan(node, (context12, writer) -> context12.renderChildren(node));
+
+                switch (formatterOptions.atxHeaderTrailingMarker) {
+                    case EQUALIZE:
+                        if (node.getOpeningMarker().isNull()) break;
+                        // fall through
+                    case ADD:
+                        if (spaceAfterAtx) markdown.append(' ');
+                        markdown.append(node.getOpeningMarker());
+                        break;
+
+                    case REMOVE:
+                        break;
+
+                    case AS_IS:
+                    default:
+                        if (node.getClosingMarker().isNotNull()) {
+                            if (spaceAfterAtx) markdown.append(' ');
+                            markdown.append(node.getClosingMarker());
+                        }
+                        break;
+                }
+
+                // add uniquification id attribute if needed
+                HtmlIdGenerator generator = context.getIdGenerator();
+                if (generator != null) {
+                    context.addExplicitId(node, generator.getId(node), context, markdown);
+                }
+            } else {
+                int lastOffset = markdown.offsetWithPending() + 1;
+                context.translatingRefTargetSpan(node, (context1, writer) -> context1.renderChildren(node));
+
+                // add uniquification id attribute if needed
+                HtmlIdGenerator generator = context.getIdGenerator();
+                int extraText = 0;
+
+                if (generator != null) {
+                    context.addExplicitId(node, generator.getId(node), context, markdown);
+                }
+
+                markdown.line();
+
+                if (formatterOptions.setextHeaderEqualizeMarker) {
+                    markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
+                } else {
+                    markdown.append(node.getClosingMarker());
+                }
+            }
+        } else if (headingPreference.isSetext()) {
+            // change to setext
+            int lastOffset = markdown.offsetWithPending() + 1;
+            context.renderChildren(node);
+            markdown.line();
+            char closingMarker = node.getLevel() == 1 ? '=' : '-';
+
+            if (formatterOptions.setextHeaderEqualizeMarker) {
+                markdown.append(closingMarker, Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
+            } else {
+                markdown.append(RepeatedSequence.repeatOf(closingMarker, formatterOptions.minSetextMarkerLength));
+            }
+        } else {
+            // change to atx
+            assert headingPreference.isAtx();
+
+            CharSequence openingMarker = RepeatedSequence.repeatOf('#', node.getLevel());
+            markdown.append(openingMarker);
+
+            boolean spaceAfterAtx = formatterOptions.spaceAfterAtxMarker == ADD
+                    || formatterOptions.spaceAfterAtxMarker == AS_IS && !Parser.HEADING_NO_ATX_SPACE.get(context.getOptions());
 
             if (spaceAfterAtx) markdown.append(' ');
 
-            context.translatingRefTargetSpan(node, (context12, writer) -> context12.renderChildren(node));
+            context.renderChildren(node);
 
-            switch (context.getFormatterOptions().atxHeaderTrailingMarker) {
+            switch (formatterOptions.atxHeaderTrailingMarker) {
                 case EQUALIZE:
-                    if (node.getOpeningMarker().isNull()) break;
-                    // fall through
                 case ADD:
                     if (spaceAfterAtx) markdown.append(' ');
-                    markdown.append(node.getOpeningMarker());
+                    markdown.append(openingMarker);
                     break;
 
+                default:
+                case AS_IS:
                 case REMOVE:
                     break;
-
-                case AS_IS:
-                default:
-                    if (node.getClosingMarker().isNotNull()) {
-                        if (spaceAfterAtx) markdown.append(' ');
-                        markdown.append(node.getClosingMarker());
-                    }
-                    break;
-            }
-
-            // add uniquification id attribute if needed
-            HtmlIdGenerator generator = context.getIdGenerator();
-            if (generator != null) {
-                context.addExplicitId(node, generator.getId(node), context, markdown);
-            }
-        } else {
-            int lastOffset = markdown.offsetWithPending() + 1;
-            context.translatingRefTargetSpan(node, (context1, writer) -> context1.renderChildren(node));
-
-            // add uniquification id attribute if needed
-            HtmlIdGenerator generator = context.getIdGenerator();
-            int extraText = 0;
-
-            if (generator != null) {
-                context.addExplicitId(node, generator.getId(node), context, markdown);
-            }
-
-            markdown.line();
-
-            if (context.getFormatterOptions().setextHeaderEqualizeMarker) {
-                markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, context.getFormatterOptions().minSetextMarkerLength));
-            } else {
-                markdown.append(node.getClosingMarker());
             }
         }
+
         markdown.tailBlankLine();
     }
 
@@ -379,7 +418,9 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
         switch (context.getFormatterOptions().blockQuoteMarkers) {
             case AS_IS:
-                prefix = node.baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
+                if (node.getFirstChild() != null) {
+                    prefix = node.baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
+                }
                 break;
             case ADD_COMPACT:
                 prefix = ">";

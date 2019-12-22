@@ -710,8 +710,8 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public void addExplicitId(@NotNull Node node, @NotNull String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
-            if (explicitAttributeIdProvider != null) {
+        public void addExplicitId(@NotNull Node node, @Nullable String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
+            if (id != null && explicitAttributeIdProvider != null) {
                 explicitAttributeIdProvider.addExplicitId(node, id, context, markdown);
             }
         }
@@ -1154,7 +1154,7 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public void addExplicitId(@NotNull Node node, @NotNull String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
+            public void addExplicitId(@NotNull Node node, @Nullable String id, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
                 myMainNodeRenderer.addExplicitId(node, id, context, markdown);
             }
 

@@ -215,7 +215,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 ## Next 0.59.82
 
 * [ ] Add: missing formatter options:
-  * [ ] `HeadingStyle`
+  * `HeadingStyle`
   * [ ] `BLOCK_QUOTE_CONTINUATION_MARKERS`
   * [ ] `LIST_ALIGN_FIRST_LINE_TEXT`
   * [ ] `LIST_ALIGN_CHILD_BLOCKS`
