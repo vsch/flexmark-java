@@ -83,7 +83,7 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
     @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
-        if (options.abbreviationsPlacement != ElementPlacement.AS_IS && options.abbreviationsSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
+        if (options.abbreviationsPlacement.isNoChange() || !options.abbreviationsSort.isUnused()) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<>(Arrays.asList(
                 Abbreviation.class

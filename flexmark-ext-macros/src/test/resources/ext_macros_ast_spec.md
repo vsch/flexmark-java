@@ -434,6 +434,62 @@ Document[0, 83]
 ````````````````````````````````
 
 
+## Keep Type
+
+```````````````````````````````` example(Keep Type: 1) options(references-keep-first)
+>>>macro1
+simple 1/1 text
+<<<
+
+Plain text <<<macro3>>>
+
+>>>macro2
+simple 2 text
+<<<
+
+Plain text <<<macro1>>>
+
+>>>macro3
+simple 3 text
+<<<
+
+>>>macro1
+simple 1/2 text
+<<<
+
+.
+<p>Plain text simple 3 text</p>
+<p>Plain text simple 1/1 text</p>
+````````````````````````````````
+
+
+```````````````````````````````` example(Keep Type: 2) options(references-keep-last)
+>>>macro1
+simple 1/1 text
+<<<
+
+Plain text <<<macro3>>>
+
+>>>macro2
+simple 2 text
+<<<
+
+Plain text <<<macro1>>>
+
+>>>macro3
+simple 3 text
+<<<
+
+>>>macro1
+simple 1/2 text
+<<<
+
+.
+<p>Plain text simple 3 text</p>
+<p>Plain text simple 1/2 text</p>
+````````````````````````````````
+
+
 ## Recursive
 
 Recursion cut short

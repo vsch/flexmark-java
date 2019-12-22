@@ -28,7 +28,11 @@ public class ComboMacrosFormatterSpecTest extends FormatterSpecTest {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(MacrosExtension.MACRO_DEFINITIONS_PLACEMENT, MacrosExtension.MACRO_DEFINITIONS_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            MacrosExtension.MACRO_DEFINITIONS_KEEP,
+            MacrosExtension.MACRO_DEFINITIONS_PLACEMENT,
+            MacrosExtension.MACRO_DEFINITIONS_SORT
+    );
 
     public ComboMacrosFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

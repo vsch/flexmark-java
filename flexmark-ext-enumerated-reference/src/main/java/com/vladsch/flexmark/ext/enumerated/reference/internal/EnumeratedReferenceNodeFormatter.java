@@ -60,7 +60,7 @@ public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<En
     @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
-        if (options.enumeratedReferencePlacement != ElementPlacement.AS_IS && options.enumeratedReferenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
+        if (options.enumeratedReferencePlacement.isNoChange() || !options.enumeratedReferenceSort.isUnused()) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<>(Arrays.asList(
                 EnumeratedReferenceBlock.class

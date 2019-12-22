@@ -21,7 +21,11 @@ public class ComboFootnotesFormatterSpecTest extends FormatterSpecTest {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(FootnoteExtension.FOOTNOTE_PLACEMENT, FootnoteExtension.FOOTNOTE_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            FootnoteExtension.FOOTNOTES_KEEP,
+            FootnoteExtension.FOOTNOTE_PLACEMENT,
+            FootnoteExtension.FOOTNOTE_SORT
+    );
 
     public ComboFootnotesFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

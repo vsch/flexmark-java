@@ -20,7 +20,11 @@ public class ComboFootnotesTranslationFormatterSpecTest extends TranslationForma
             .set(Parser.EXTENSIONS, Collections.singleton(FootnoteExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(FootnoteExtension.FOOTNOTE_PLACEMENT, FootnoteExtension.FOOTNOTE_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            FootnoteExtension.FOOTNOTES_KEEP,
+            FootnoteExtension.FOOTNOTE_PLACEMENT,
+            FootnoteExtension.FOOTNOTE_SORT
+    );
 
     public ComboFootnotesTranslationFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

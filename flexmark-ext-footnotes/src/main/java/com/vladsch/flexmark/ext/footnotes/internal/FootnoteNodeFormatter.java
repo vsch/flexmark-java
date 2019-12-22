@@ -61,7 +61,7 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
     @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
-        if (options.footnotePlacement != ElementPlacement.AS_IS && options.footnoteSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
+        if (options.footnotePlacement.isNoChange() || !options.footnoteSort.isUnused()) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<>(Arrays.asList(
                 Footnote.class

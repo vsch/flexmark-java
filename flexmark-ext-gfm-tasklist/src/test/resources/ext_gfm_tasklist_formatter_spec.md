@@ -926,3 +926,99 @@ Document[0, 65]
 ````````````````````````````````
 
 
+## Prioritized
+
+```````````````````````````````` example(Prioritized: 1) options(prioritized-tasks, task-placement-incomplete-nested-first, list-bullet-asterisk)
+* Add: 
++ [ ] Add: 
++ [ ] Fix: 
+  + [ ] do not 
+
+.
++ [ ] Add:
++ [ ] Fix:
+  + [ ] do not
+* Add:
+
+````````````````````````````````
+
+
+do add blank line if blank line is after sub-list in middle of list
+
+```````````````````````````````` example(Prioritized: 2) options(prioritized-tasks, task-placement-incomplete-nested-first, list-bullet-asterisk)
+* Add: 
++ [ ] Add: 
++ [ ] Fix: 
+  + [ ] do not 
+
++ [ ] Fix2: 
+  + [ ] do not2 
+    
+.
++ [ ] Add:
++ [ ] Fix:
+  + [ ] do not
+
++ [ ] Fix2:
+  + [ ] do not2
+* Add:
+
+````````````````````````````````
+
+
+ordered item priority high
+
+```````````````````````````````` example(Prioritized: 3) options(prioritized-tasks, ordered-task-item-priority-high, task-placement-incomplete-nested-first, list-bullet-asterisk)
+* item 
+  1. [ ] Add: 
+* Add: 
+* [ ] Add: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* item
+  1. [ ] Add:
+* [ ] Fix:
+  + [ ] do not
+* [ ] Add:
+* Add:
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized: 4) options(prioritized-tasks, ordered-task-item-priority-normal, task-placement-incomplete-nested-first, list-bullet-asterisk)
+* item
+  1. [ ] Add: 
+* Add: 
+* [ ] Add: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* [ ] Fix:
+  + [ ] do not
+* item
+  1. [ ] Add:
+* [ ] Add:
+* Add:
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized: 5) options(prioritized-tasks, ordered-task-item-priority-low, task-placement-incomplete-nested-first, list-bullet-asterisk)
+* item
+  1. [ ] Add: 
+* Add: 
+* [ ] Add: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* [ ] Fix:
+  + [ ] do not
+* [ ] Add:
+* item
+  1. [ ] Add:
+* Add:
+
+````````````````````````````````
+
+

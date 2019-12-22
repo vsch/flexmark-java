@@ -69,4 +69,5 @@ See [@tbl:test]
 
 ````````````````````````````````
 
+* [ ] Test: Sort and placement
 

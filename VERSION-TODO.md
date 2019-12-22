@@ -215,9 +215,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 ## Next 0.59.82
 
 * [ ] Add: missing formatter options:
-  * [ ] `ElementPlacementSort`
-    * [ ] `SORT_DELETE_UNUSED`
-    * [ ] `DELETE_UNUSED`
   * [ ] `HeadingStyle`
   * [ ] `BLOCK_QUOTE_CONTINUATION_MARKERS`
   * [ ] `LIST_ALIGN_FIRST_LINE_TEXT`
@@ -233,7 +230,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `FORMAT_ATTRIBUTE_EQUAL_SPACE`
     * `FORMAT_ATTRIBUTE_VALUE_QUOTES`
   * prioritized task items: `flexmark-ext-gfm-tasklist`
-    * [ ] Test:
+    * `FORMAT_ORDERED_TASK_ITEM_PRIORITY`: `Integer`, priority to use for parent item. Ordered
+      task items do not not sort on priority since they are already ordered by number.
     * `FORMAT_ORDERED_TASK_ITEM_PRIORITY`: `Integer`, priority to use for parent item. Ordered
       task items do not not sort on priority since they are already ordered by number.
     * `FORMAT_TASK_ITEM_PRIORITIES`: `int[]`, specifies integer priority for item marker
@@ -241,13 +239,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       is higher priority. A parent item's priority is the max priority of itself and any of its
       descendant task items. Non-task items do not have their own priority, only priority
       derived from their descendant items.
-  * [x] `LINK_MARKER_COMMENT_PATTERN`
-  * [x] `CONTINUATION_ALIGNMENT`
-  * [x] Add: Formatter control for controlling non-formatting regions.
+  * `ElementPlacementSort`
+    * `SORT_DELETE_UNUSED`
+    * `DELETE_UNUSED`
+  * `LINK_MARKER_COMMENT_PATTERN`
+  * `CONTINUATION_ALIGNMENT`
+  * Add: Formatter control for controlling non-formatting regions.
     * `<!-- @formatter:on -->` and `<!-- @formatter:off -->` tags
-    * [x] `FORMAT_CONTROL_ON`: `String`
-    * [x] `FORMAT_CONTROL_OFF`: `String`
-    * [x] `FORMAT_CONTROL_REGEX`: `Boolean` to treat control on/off strings as regex pattern.
+    * `FORMAT_CONTROL_ON`: `String`
+    * `FORMAT_CONTROL_OFF`: `String`
+    * `FORMAT_CONTROL_REGEX`: `Boolean` to treat control on/off strings as regex pattern.
   * implement `SimTocExtension.FORMAT_UPDATE_ON_FORMAT` option
 * Break: rename `CharWidthProvider` methods and change `zeroWidth` argument to `CharPredicate`
 * Fix: `TestUtils.getOptions(SpecExample, String, Function<String, DataHolder>)` to return

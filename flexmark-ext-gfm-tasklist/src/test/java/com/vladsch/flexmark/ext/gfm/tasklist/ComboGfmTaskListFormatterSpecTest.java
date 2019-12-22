@@ -7,6 +7,7 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.format.options.ListBulletMarker;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
@@ -34,6 +35,18 @@ public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
         optionsMap.put("task-placement-complete-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_TO_NON_TASK));
         optionsMap.put("task-placement-complete-nested-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK));
         optionsMap.put("remove-empty-items", new MutableDataSet().set(Formatter.LIST_REMOVE_EMPTY_ITEMS, true));
+        optionsMap.put("prioritized-tasks", new MutableDataSet()
+                .set(TaskListExtension.FORMAT_PRIORITIZED_TASK_ITEMS, true)
+                .set(Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST, false)
+                .set(Parser.LISTS_AUTO_LOOSE, false)
+        );
+        optionsMap.put("ordered-task-item-priority-high", new MutableDataSet().set(TaskListExtension.FORMAT_ORDERED_TASK_ITEM_PRIORITY, 1));
+        optionsMap.put("ordered-task-item-priority-normal", new MutableDataSet().set(TaskListExtension.FORMAT_ORDERED_TASK_ITEM_PRIORITY, 0));
+        optionsMap.put("ordered-task-item-priority-low", new MutableDataSet().set(TaskListExtension.FORMAT_ORDERED_TASK_ITEM_PRIORITY, -1));
+        optionsMap.put("list-bullet-any", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.ANY));
+        optionsMap.put("list-bullet-dash", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.DASH));
+        optionsMap.put("list-bullet-asterisk", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.ASTERISK));
+        optionsMap.put("list-bullet-plus", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.PLUS));
     }
     public ComboGfmTaskListFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

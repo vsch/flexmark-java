@@ -119,7 +119,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
-        if (formatterOptions.referencePlacement != ElementPlacement.AS_IS && formatterOptions.referenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
+        if (formatterOptions.referencePlacement.isNoChange() || !formatterOptions.referenceSort.isUnused()) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<>(Arrays.asList(
                 RefNode.class

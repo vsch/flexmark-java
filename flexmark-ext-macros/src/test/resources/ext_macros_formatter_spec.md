@@ -200,7 +200,7 @@ Nested GitLab multi-line block quotes
 >>>
 Block Quote
 >>>
-Nested Block Quote
+Text
 <<<
 <<<
 <<<
@@ -211,7 +211,7 @@ Plain text <<<macro>>>
 >>>
 Block Quote
 >>>
-Nested Block Quote
+Text
 <<<
 
 <<<
@@ -219,21 +219,169 @@ Nested Block Quote
 
 Plain text <<<macro>>>
 .
-Document[0, 83]
-  MacroDefinitionBlock[0, 52] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[48, 51, "<<<"] closeTrail:[51, 52, "\n"]
+Document[0, 69]
+  MacroDefinitionBlock[0, 38] open:[0, 3, ">>>"] name:[3, 8, "macro"] openTrail:[8, 8] close:[34, 37, "<<<"] closeTrail:[37, 38, "\n"]
     GitLabBlockQuote[9, 29] open:[9, 12, ">>>"] openTrail:[12, 13, "\n"] close:[25, 28, ">>>"] closeTrail:[28, 29, "\n"]
       Paragraph[13, 25]
         Text[13, 24] chars:[13, 24, "Block … Quote"]
-    Paragraph[29, 48]
-      Text[29, 47] chars:[29, 47, "Neste … Quote"]
-  Paragraph[52, 60] isTrailingBlankLine
-    Text[52, 55] chars:[52, 55, "<<<"]
-    SoftLineBreak[55, 56]
-    Text[56, 59] chars:[56, 59, "<<<"]
-  BlankLine[60, 61]
-  Paragraph[61, 83]
-    Text[61, 72] chars:[61, 72, "Plain … text "]
-    MacroReference[72, 83] textOpen:[72, 75, "<<<"] text:[75, 80, "macro"] textClose:[80, 83, ">>>"]
+    Paragraph[29, 34]
+      Text[29, 33] chars:[29, 33, "Text"]
+  Paragraph[38, 46] isTrailingBlankLine
+    Text[38, 41] chars:[38, 41, "<<<"]
+    SoftLineBreak[41, 42]
+    Text[42, 45] chars:[42, 45, "<<<"]
+  BlankLine[46, 47]
+  Paragraph[47, 69]
+    Text[47, 58] chars:[47, 58, "Plain … text "]
+    MacroReference[58, 69] textOpen:[58, 61, "<<<"] text:[61, 66, "macro"] textClose:[66, 69, ">>>"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Macros: 9) options(references-document-bottom, references-keep-first, references-sort-delete-unused)
+>>>macro1
+simple 1/1 text
+<<<
+
+Plain text <<<macro3>>>
+
+>>>macro2
+simple 2 text
+<<<
+
+Plain text <<<macro1>>>
+
+>>>macro3
+simple 3 text
+<<<
+
+>>>macro1
+simple 1/2 text
+<<<
+
+.
+Plain text <<<macro3>>>
+
+Plain text <<<macro1>>>
+
+>>>macro1
+simple 1/1 text
+<<<
+
+>>>macro3
+simple 3 text
+<<<
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Macros: 10) options(references-document-bottom, references-keep-last, references-sort-delete-unused)
+>>>macro1
+simple 1/1 text
+<<<
+
+Plain text <<<macro3>>>
+
+>>>macro2
+simple 2 text
+<<<
+
+Plain text <<<macro1>>>
+
+>>>macro3
+simple 3 text
+<<<
+
+>>>macro1
+simple 1/2 text
+<<<
+
+.
+Plain text <<<macro3>>>
+
+Plain text <<<macro1>>>
+
+>>>macro1
+simple 1/2 text
+<<<
+
+>>>macro3
+simple 3 text
+<<<
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Macros: 11) options(references-document-bottom, references-keep-first, references-delete-unused)
+>>>macro1
+simple 1/1 text
+<<<
+
+Plain text <<<macro3>>>
+
+>>>macro2
+simple 2 text
+<<<
+
+Plain text <<<macro1>>>
+
+>>>macro3
+simple 3 text
+<<<
+
+>>>macro1
+simple 1/2 text
+<<<
+
+.
+Plain text <<<macro3>>>
+
+Plain text <<<macro1>>>
+
+>>>macro1
+simple 1/1 text
+<<<
+
+>>>macro3
+simple 3 text
+<<<
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Macros: 12) options(references-document-bottom, references-keep-last, references-delete-unused)
+>>>macro1
+simple 1/1 text
+<<<
+
+Plain text <<<macro3>>>
+
+>>>macro2
+simple 2 text
+<<<
+
+Plain text <<<macro1>>>
+
+>>>macro3
+simple 3 text
+<<<
+
+>>>macro1
+simple 1/2 text
+<<<
+
+.
+Plain text <<<macro3>>>
+
+Plain text <<<macro1>>>
+
+>>>macro3
+simple 3 text
+<<<
+
+>>>macro1
+simple 1/2 text
+<<<
+
 ````````````````````````````````
 
 

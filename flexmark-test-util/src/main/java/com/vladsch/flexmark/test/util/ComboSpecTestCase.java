@@ -2,6 +2,7 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
+import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
@@ -34,14 +35,32 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
 
     public static @NotNull Map<String, DataHolder> placementAndSortOptions(DataKey<ElementPlacement> placementDataKey, DataKey<ElementPlacementSort> sortDataKey) {
+        return placementAndSortOptions(null, placementDataKey, sortDataKey);
+    }
+
+    public static @NotNull Map<String, DataHolder> placementAndSortOptions(@Nullable DataKey<KeepType> keepTypeDataKey, @Nullable DataKey<ElementPlacement> placementDataKey, @Nullable DataKey<ElementPlacementSort> sortDataKey) {
         Map<String, DataHolder> optionsMap = new HashMap<>();
-        optionsMap.put("references-as-is", new MutableDataSet().set(placementDataKey, ElementPlacement.AS_IS));
-        optionsMap.put("references-document-top", new MutableDataSet().set(placementDataKey, ElementPlacement.DOCUMENT_TOP));
-        optionsMap.put("references-group-with-first", new MutableDataSet().set(placementDataKey, ElementPlacement.GROUP_WITH_FIRST));
-        optionsMap.put("references-group-with-last", new MutableDataSet().set(placementDataKey, ElementPlacement.GROUP_WITH_LAST));
-        optionsMap.put("references-document-bottom", new MutableDataSet().set(placementDataKey, ElementPlacement.DOCUMENT_BOTTOM));
-        optionsMap.put("references-sort", new MutableDataSet().set(sortDataKey, ElementPlacementSort.SORT));
-        optionsMap.put("references-sort-unused-last", new MutableDataSet().set(sortDataKey, ElementPlacementSort.SORT_UNUSED_LAST));
+        if (keepTypeDataKey != null) {
+            optionsMap.put("references-keep-last", new MutableDataSet().set(keepTypeDataKey, KeepType.LAST));
+            optionsMap.put("references-keep-first", new MutableDataSet().set(keepTypeDataKey, KeepType.FIRST));
+            optionsMap.put("references-keep-fail", new MutableDataSet().set(keepTypeDataKey, KeepType.FAIL));
+            optionsMap.put("references-keep-locked", new MutableDataSet().set(keepTypeDataKey, KeepType.LOCKED));
+        }
+
+        if (placementDataKey != null) {
+            optionsMap.put("references-as-is", new MutableDataSet().set(placementDataKey, ElementPlacement.AS_IS));
+            optionsMap.put("references-document-top", new MutableDataSet().set(placementDataKey, ElementPlacement.DOCUMENT_TOP));
+            optionsMap.put("references-group-with-first", new MutableDataSet().set(placementDataKey, ElementPlacement.GROUP_WITH_FIRST));
+            optionsMap.put("references-group-with-last", new MutableDataSet().set(placementDataKey, ElementPlacement.GROUP_WITH_LAST));
+            optionsMap.put("references-document-bottom", new MutableDataSet().set(placementDataKey, ElementPlacement.DOCUMENT_BOTTOM));
+        }
+
+        if (sortDataKey != null) {
+            optionsMap.put("references-sort", new MutableDataSet().set(sortDataKey, ElementPlacementSort.SORT));
+            optionsMap.put("references-sort-unused-last", new MutableDataSet().set(sortDataKey, ElementPlacementSort.SORT_UNUSED_LAST));
+            optionsMap.put("references-sort-delete-unused", new MutableDataSet().set(sortDataKey, ElementPlacementSort.SORT_DELETE_UNUSED));
+            optionsMap.put("references-delete-unused", new MutableDataSet().set(sortDataKey, ElementPlacementSort.DELETE_UNUSED));
+        }
         return optionsMap;
     }
 

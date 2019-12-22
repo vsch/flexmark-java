@@ -337,3 +337,53 @@ text with abbr1 embedded
 ````````````````````````````````
 
 
+```````````````````````````````` example(Abbreviation: 19) options(references-document-bottom, references-sort-delete-unused)
+text with abbr1 embedded
+
+*[abbr3]: abbreviation3
+
+text with abbr3 embedded
+
+*[abbr2]: abbreviation2
+
+text with abbr1 embedded
+
+*[abbr1]: abbreviation1
+.
+text with abbr1 embedded
+
+text with abbr3 embedded
+
+text with abbr1 embedded
+
+*[abbr1]: abbreviation1
+*[abbr3]: abbreviation3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Abbreviation: 20) options(references-document-bottom, references-delete-unused)
+text with abbr1 embedded
+
+*[abbr3]: abbreviation3
+
+text with abbr3 embedded
+
+*[abbr2]: abbreviation2
+
+text with abbr1 embedded
+
+*[abbr1]: abbreviation1
+.
+text with abbr1 embedded
+
+text with abbr3 embedded
+
+text with abbr1 embedded
+
+*[abbr3]: abbreviation3
+*[abbr1]: abbreviation1
+
+````````````````````````````````
+
+

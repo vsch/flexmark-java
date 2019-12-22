@@ -33,7 +33,11 @@ public class ComboAbbreviationSpecTest extends RendererSpecTest {
             )
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(AbbreviationExtension.ABBREVIATIONS_PLACEMENT, AbbreviationExtension.ABBREVIATIONS_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            AbbreviationExtension.ABBREVIATIONS_KEEP,
+            AbbreviationExtension.ABBREVIATIONS_PLACEMENT,
+            AbbreviationExtension.ABBREVIATIONS_SORT
+    );
     static {
         optionsMap.put("links", new MutableDataSet().set(AbbreviationExtension.USE_LINKS, true));
         optionsMap.put("no-abbr", new MutableDataSet().set(UNLOAD_EXTENSIONS, Collections.singletonList(AbbreviationExtension.class)));

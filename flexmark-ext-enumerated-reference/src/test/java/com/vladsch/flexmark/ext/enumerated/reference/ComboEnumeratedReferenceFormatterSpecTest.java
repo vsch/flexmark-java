@@ -21,7 +21,11 @@ public class ComboEnumeratedReferenceFormatterSpecTest extends FormatterSpecTest
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(EnumeratedReferenceExtension.ENUMERATED_REFERENCE_PLACEMENT, EnumeratedReferenceExtension.ENUMERATED_REFERENCE_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            EnumeratedReferenceExtension.ENUMERATED_REFERENCES_KEEP,
+            EnumeratedReferenceExtension.ENUMERATED_REFERENCE_PLACEMENT,
+            EnumeratedReferenceExtension.ENUMERATED_REFERENCE_SORT
+    );
 
     public ComboEnumeratedReferenceFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

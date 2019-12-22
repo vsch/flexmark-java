@@ -166,16 +166,19 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                     referenceUniqificationMap = myReferenceUniqificationMapKey.get(context.getTranslationStore());
                 }
 
-                if (getTranslationReferencePlacement(context) != ElementPlacement.AS_IS && getReferenceSort() == ElementPlacementSort.SORT_UNUSED_LAST) {
+                if (getTranslationReferencePlacement(context).isChange() && getReferenceSort().isUnused()) {
                     // get all ref nodes and figure out which ones are unused
                     unusedReferences.addAll(referenceList);
-                    Iterable<? extends Node> nodes = context.nodesOfType(getNodeClasses());
-                    for (Node node : nodes) {
-                        N referencingNode = lastReference == null ? null : lastReference.getReferencingNode(node);
-                        if (referencingNode != null) {
-                            B referenceBlock = referencingNode.getReferenceNode(referenceRepository);
-                            if (referenceBlock != null) {
-                                unusedReferences.remove(referenceBlock);
+                    Set<Class<?>> nodeClasses = getNodeClasses();
+                    if (nodeClasses != null) {
+                        Iterable<? extends Node> nodes = context.nodesOfType(nodeClasses);
+                        for (Node node : nodes) {
+                            N referencingNode = lastReference == null ? null : lastReference.getReferencingNode(node);
+                            if (referencingNode != null) {
+                                B referenceBlock = referencingNode.getReferenceNode(referenceRepository);
+                                if (referenceBlock != null) {
+                                    unusedReferences.remove(referenceBlock);
+                                }
                             }
                         }
                     }
@@ -204,30 +207,46 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     private void formatReferences(NodeFormatterContext context, MarkdownWriter markdown) {
         ArrayList<B> references = new ArrayList<>(referenceList);
 
-        switch (getReferenceSort()) {
+        ElementPlacementSort referenceSort = getReferenceSort();
+        switch (referenceSort) {
             case AS_IS:
                 break;
 
             case SORT:
-                Collections.sort(references, getReferenceComparator());
+                references.sort(getReferenceComparator());
                 break;
 
             case SORT_UNUSED_LAST:
+            case SORT_DELETE_UNUSED:
+            case DELETE_UNUSED:
                 ArrayList<B> used = new ArrayList<>();
                 ArrayList<B> unused = new ArrayList<>();
-                for (B footnote : references) {
-                    if (unusedReferences.contains(footnote)) {
-                        unused.add(footnote);
-                    } else {
-                        used.add(footnote);
+                for (B reference : references) {
+                    if (!unusedReferences.contains(reference)) {
+                        used.add(reference);
+                    } else if (!referenceSort.isDeleteUnused()) {
+                        unused.add(reference);
                     }
                 }
-                Collections.sort(used, getReferenceComparator());
-                Collections.sort(unused, getReferenceComparator());
+
+                if (referenceSort.isSort()) {
+                    used.sort(getReferenceComparator());
+
+                    if (!referenceSort.isDeleteUnused()) {
+                        unused.sort(getReferenceComparator());
+                    }
+                }
+
                 references.clear();
                 references.addAll(used);
-                references.addAll(unused);
+
+                if (!referenceSort.isDeleteUnused()) {
+                    references.addAll(unused);
+                }
                 break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + referenceSort);
         }
 
         markdown.blankLine();

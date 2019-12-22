@@ -20,7 +20,11 @@ public class ComboAbbreviationTranslationFormatterSpecTest extends TranslationFo
             .set(Parser.EXTENSIONS, Collections.singleton(AbbreviationExtension.create()))
             .set(Parser.UNDERSCORE_DELIMITER_PROCESSOR, false);
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(AbbreviationExtension.ABBREVIATIONS_PLACEMENT, AbbreviationExtension.ABBREVIATIONS_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            AbbreviationExtension.ABBREVIATIONS_KEEP,
+            AbbreviationExtension.ABBREVIATIONS_PLACEMENT,
+            AbbreviationExtension.ABBREVIATIONS_SORT
+    );
 
     public ComboAbbreviationTranslationFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

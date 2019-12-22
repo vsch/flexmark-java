@@ -26,7 +26,11 @@ public class ComboMacrosTranslationFormatterSpecTest extends TranslationFormatte
             .set(GitLabExtension.INS_PARSER, false)
             .set(GitLabExtension.RENDER_VIDEO_IMAGES, false);
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(MacrosExtension.MACRO_DEFINITIONS_PLACEMENT, MacrosExtension.MACRO_DEFINITIONS_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            MacrosExtension.MACRO_DEFINITIONS_KEEP,
+            MacrosExtension.MACRO_DEFINITIONS_PLACEMENT,
+            MacrosExtension.MACRO_DEFINITIONS_SORT
+    );
 
     public ComboMacrosTranslationFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

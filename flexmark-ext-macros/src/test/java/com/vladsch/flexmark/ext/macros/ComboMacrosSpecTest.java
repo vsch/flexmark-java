@@ -6,13 +6,16 @@ import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
+import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ComboMacrosSpecTest extends RendererSpecTest {
     private static final String SPEC_RESOURCE = "/ext_macros_ast_spec.md";
@@ -25,8 +28,14 @@ public class ComboMacrosSpecTest extends RendererSpecTest {
             .set(GitLabExtension.INS_PARSER, false)
             .set(GitLabExtension.RENDER_VIDEO_IMAGES, false);
 
+    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    static {
+        optionsMap.put("references-keep-first", new MutableDataSet().set(MacrosExtension.MACRO_DEFINITIONS_KEEP, KeepType.FIRST));
+        optionsMap.put("references-keep-last", new MutableDataSet().set(MacrosExtension.MACRO_DEFINITIONS_KEEP, KeepType.LAST));
+    }
+
     public ComboMacrosSpecTest(@NotNull SpecExample example) {
-        super(example, null, OPTIONS);
+        super(example, optionsMap, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")

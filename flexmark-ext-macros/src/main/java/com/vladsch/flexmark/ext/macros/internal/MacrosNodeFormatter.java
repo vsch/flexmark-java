@@ -65,7 +65,7 @@ public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinition
     @Nullable
     @Override
     public Set<Class<?>> getNodeClasses() {
-        if (options.macrosPlacement != ElementPlacement.AS_IS && options.macrosSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
+        if (options.macrosPlacement.isNoChange() || !options.macrosSort.isUnused()) return null;
         // noinspection ArraysAsListWithZeroOrOneArgument
         return new HashSet<>(Arrays.asList(
                 MacroReference.class

@@ -78,7 +78,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
                 }
             }
 
-            if (markerSuffix.isNotNull() && formatOptions.formatTaskItemPriorities.length > 0) {
+            if (markerSuffix.isNotNull() && formatOptions.formatPrioritizedTaskItems) {
                 node.setCanChangeMarker(false);
             }
 
@@ -120,9 +120,9 @@ public class TaskListNodeFormatter implements NodeFormatter {
             } else {
                 BasedSequence openingMarker = ((ListItem) node).getOpeningMarker();
                 if (openingMarker.length() > 0) {
-                    int markerIndex = listOptions.getItemPrefixChars().indexOf(openingMarker.charAt(0));
-                    if (markerIndex < formatOptions.formatTaskItemPriorities.length) {
-                        return formatOptions.formatTaskItemPriorities[markerIndex];
+                    Integer priority = formatOptions.formatTaskItemPriorities.get(openingMarker.charAt(0));
+                    if (priority != null) {
+                        return priority;
                     } else {
                         return formatOptions.formatDefaultTaskItemPriority;
                     }
@@ -135,6 +135,13 @@ public class TaskListNodeFormatter implements NodeFormatter {
     public int itemPriority(Node node) {
         Node item = node.getFirstChild();
         int priority = Integer.MIN_VALUE;
+
+        if (node instanceof TaskListItem) {
+            if (!((TaskListItem) node).isItemDoneMarker()) {
+                priority = Math.max(priority, taskItemPriority(node));
+            }
+        }
+
         while (item != null) {
             if (item instanceof TaskListItem) {
                 if (!((TaskListItem) item).isItemDoneMarker()) {
@@ -185,7 +192,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
                     item = item.getNext();
                 }
 
-                if (formatOptions.formatTaskItemPriorities.length > 0) {
+                if (formatOptions.formatPrioritizedTaskItems) {
                     // have prioritized tasks
                     for (ListItem listItem : incompleteTasks) {
                         listItem.setPriority(itemPriority(listItem));

@@ -1660,6 +1660,118 @@ paragraph 3
 ````````````````````````````````
 
 
+```````````````````````````````` example(Reference Placement: 9) options(references-document-bottom, references-sort-delete-unused)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2 [ref1]
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2 [ref1]
+
+paragraph 3
+
+[ref1]: /ref1
+[ref2]: /ref2/1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 10) options(references-document-bottom, references-sort-delete-unused, references-keep-last)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2 [ref1]
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2 [ref1]
+
+paragraph 3
+
+[ref1]: /ref1
+[ref2]: /ref2/2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 11) options(references-document-bottom, references-delete-unused)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2 [ref1]
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2 [ref1]
+
+paragraph 3
+
+[ref2]: /ref2/1
+[ref1]: /ref1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 12) options(references-document-bottom, references-delete-unused, references-keep-last)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2 [ref1]
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2 [ref1]
+
+paragraph 3
+
+[ref2]: /ref2/2
+[ref1]: /ref1
+
+````````````````````````````````
+
+
 ## Images and links at start of line
 
 ```````````````````````````````` example Images and links at start of line: 1

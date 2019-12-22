@@ -19,7 +19,11 @@ public class ComboCoreTranslationFormatterSpecTest extends TranslationFormatterS
     private static final String SPEC_RESOURCE = "/core_translation_formatter_spec.md";
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(Formatter.REFERENCE_PLACEMENT, Formatter.REFERENCE_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            Parser.REFERENCES_KEEP,
+            Formatter.REFERENCE_PLACEMENT,
+            Formatter.REFERENCE_SORT
+    );
     static {
         optionsMap.put("atx-space-as-is", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.AS_IS));
         optionsMap.put("atx-space-add", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.ADD));

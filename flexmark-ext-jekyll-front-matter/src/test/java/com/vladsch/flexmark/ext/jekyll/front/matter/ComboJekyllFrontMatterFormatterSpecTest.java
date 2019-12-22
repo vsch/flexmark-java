@@ -22,7 +22,11 @@ public class ComboJekyllFrontMatterFormatterSpecTest extends FormatterSpecTest {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(Formatter.REFERENCE_PLACEMENT, Formatter.REFERENCE_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            Parser.REFERENCES_KEEP,
+            Formatter.REFERENCE_PLACEMENT,
+            Formatter.REFERENCE_SORT
+    );
 
     public ComboJekyllFrontMatterFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

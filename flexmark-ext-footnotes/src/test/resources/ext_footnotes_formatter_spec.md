@@ -888,6 +888,122 @@ Not a paragraph of the footnote
 ````````````````````````````````
 
 
+```````````````````````````````` example(Placement Options: 8) options(references-document-bottom, references-sort-delete-unused)
+This paragraph has a footnote[^1].  
+
+[^2]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+    
+            indented code of the footnote
+      
+Not a paragraph of the footnote
+       
+This paragraph has a footnote[^1].  
+
+[^3]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+    
+            indented code of the footnote
+      
+Not a paragraph of the footnote
+       
+This paragraph has a footnote[^3].  
+
+[^1]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+    
+            indented code of the footnote
+      
+Not a paragraph of the footnote
+.
+This paragraph has a footnote[^1].
+
+Not a paragraph of the footnote
+
+This paragraph has a footnote[^1].
+
+Not a paragraph of the footnote
+
+This paragraph has a footnote[^3].
+
+Not a paragraph of the footnote
+
+[^1]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+
+            indented code of the footnote
+
+[^3]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+
+            indented code of the footnote
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Placement Options: 9) options(references-document-bottom, references-delete-unused)
+This paragraph has a footnote[^1].  
+
+[^2]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+    
+            indented code of the footnote
+      
+Not a paragraph of the footnote
+       
+This paragraph has a footnote[^1].  
+
+[^3]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+    
+            indented code of the footnote
+      
+Not a paragraph of the footnote
+       
+This paragraph has a footnote[^3].  
+
+[^1]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+    
+            indented code of the footnote
+      
+Not a paragraph of the footnote
+.
+This paragraph has a footnote[^1].
+
+Not a paragraph of the footnote
+
+This paragraph has a footnote[^1].
+
+Not a paragraph of the footnote
+
+This paragraph has a footnote[^3].
+
+Not a paragraph of the footnote
+
+[^3]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+
+            indented code of the footnote
+
+[^1]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+
+            indented code of the footnote
+
+````````````````````````````````
+
+
 ## Issue 244
 
 Issue #244

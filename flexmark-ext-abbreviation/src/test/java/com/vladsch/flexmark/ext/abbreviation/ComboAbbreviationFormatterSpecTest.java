@@ -21,7 +21,11 @@ public class ComboAbbreviationFormatterSpecTest extends FormatterSpecTest {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(AbbreviationExtension.ABBREVIATIONS_PLACEMENT, AbbreviationExtension.ABBREVIATIONS_SORT);
+    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+            AbbreviationExtension.ABBREVIATIONS_KEEP,
+            AbbreviationExtension.ABBREVIATIONS_PLACEMENT,
+            AbbreviationExtension.ABBREVIATIONS_SORT
+    );
 
     public ComboAbbreviationFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

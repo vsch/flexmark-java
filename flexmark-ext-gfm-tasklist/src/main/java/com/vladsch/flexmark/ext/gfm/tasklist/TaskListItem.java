@@ -73,7 +73,8 @@ public class TaskListItem extends ListItem {
         isOrderedItem = orderedItem;
     }
 
-    public boolean isCanChangeMarker() {
+    @Override
+    public boolean canChangeMarker() {
         return canChangeMarker;
     }
 
