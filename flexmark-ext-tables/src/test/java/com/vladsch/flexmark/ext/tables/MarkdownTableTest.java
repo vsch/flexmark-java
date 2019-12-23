@@ -7,8 +7,6 @@ import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
 
-import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -466,8 +464,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Header 1.1     | Header 1.2 |\n" +
@@ -511,8 +508,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Header 1.1     | Header 1.2 |\n" +
@@ -554,8 +550,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("| Features                                                                         | Basic | Enhanced |    |\n" +
                 "|:---------------------------------------------------------------------------------|:-----:|:--------:|:---|\n" +
@@ -590,8 +585,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("|                                    Features                                     | Basic | Enhanced |    |\n" +
                 "|:-------------------------------------------------------------------------------:|:-----:|:--------:|:---|\n" +
@@ -626,8 +620,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|                                    Features                                     | Basic | Enhanced |    |\n" +
@@ -664,8 +657,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|                                    Features                                     | Basic | Enhanced |    |\n" +
@@ -702,8 +694,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|                                    Features                                     | Basic | Enhanced |    | d  |\n" +
@@ -740,8 +731,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -778,8 +768,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                           | Basic | Enhanced |    |\n" +
@@ -816,8 +805,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                         | Basic | Enhanced |\n" +
@@ -854,8 +842,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -891,8 +878,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|  tex   | abcd | efg |\n" +
@@ -929,8 +915,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         //System.out.println("pos " + pos + " -> " + offset);
         //System.out.println("Table after: " + table.toString());
@@ -970,8 +955,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         //System.out.println("pos " + pos + " -> " + offset);
         //System.out.println("Table after: " + table.toString());
@@ -1008,8 +992,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|  tex   | abcd | efg |\n" +
@@ -1044,8 +1027,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        |     Basic | Enhanced |    |\n" +
@@ -1082,8 +1064,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1120,8 +1101,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1158,8 +1138,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1196,8 +1175,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1234,8 +1212,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1272,8 +1249,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1310,8 +1286,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1349,8 +1324,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic  | Enhanced |    |\n" +
@@ -1388,8 +1362,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1426,8 +1399,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1464,8 +1436,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1502,8 +1473,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1540,8 +1510,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1578,8 +1547,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1616,8 +1584,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1654,8 +1621,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1692,8 +1658,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1731,8 +1696,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1770,8 +1734,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1809,8 +1772,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1848,8 +1810,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1887,8 +1848,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -1925,8 +1885,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                         "|                                    Features                                     | Basic | Enhanced |    |\n" +
@@ -1963,8 +1922,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2001,8 +1959,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|                                                                        Features | Basic | Enhanced |    |\n" +
@@ -2040,8 +1997,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2079,8 +2035,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|                                    Features                                     | Basic | Enhanced |   |\n" +
@@ -2118,8 +2073,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2158,8 +2112,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2199,8 +2152,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2240,8 +2192,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2281,8 +2232,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2322,8 +2272,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2363,8 +2312,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2404,8 +2352,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2445,8 +2392,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2486,8 +2432,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2527,8 +2472,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| Features                                                                        | Basic | Enhanced |    |\n" +
@@ -2569,8 +2513,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "| c                     | d  |\n" +
@@ -2609,8 +2552,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "    | c                     | d  |\n" +
@@ -2645,8 +2587,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|       names       |\n" +
@@ -2677,8 +2618,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|       names       |\n" +
@@ -2709,8 +2649,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|       names       |\n" +
@@ -2741,8 +2680,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
-        Map<Integer, Integer> offsets = table.getTrackedOffsets();
-        int offset = offsets.get(pos);
+        int offset = table.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
                 "|       names       |\n" +

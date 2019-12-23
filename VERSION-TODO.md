@@ -215,6 +215,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.84
 
+* Fix: convert `MarkdownTable` to use common `TrackedOffset` for offset tracking API
+* Fix: convert `MarkdownParagraph` to use common `TrackedOffset` for offset tracking API
+* Fix: deprecate old `addTrackedOffset` methods.
 * Fix: rename formatter `HEADER` options to `HEADING`
 * Fix: deprecate old header named options
 * Fix: delete unused formatter option `KEEP_TRAILING_SPACES`

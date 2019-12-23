@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -83,14 +84,14 @@ public class TableNodeFormatter implements NodeFormatter {
                     myTable.appendTable(markdown);
                     markdown.tailBlankLine();
                     if (options.dumpIntellijOffsets) {
-                        Map<Integer, Integer> offsets = myTable.getTrackedOffsets();
-                        if (offsets.size() > 0) {
+                        List<TrackedOffset> trackedOffsets = myTable.getTrackedOffsets();
+                        if (trackedOffsets.size() > 0) {
                             markdown.append("\nTracked Offsets").line();  // simulate flex example ast dump
                             String sep = "  ";
                             int i = 0;
-                            for (Map.Entry<Integer, Integer> offset : offsets.entrySet()) {
+                            for (TrackedOffset trackedOffset : trackedOffsets) {
                                 i++;
-                                markdown.append(sep).append(String.format(Locale.US, "%d:[%d,%d] was:[%d,%d]", i, offset.getValue(), offset.getValue() + 1, offset.getKey(), offset.getKey() + 1));
+                                markdown.append(sep).append(String.format(Locale.US, "%d:[%d,%d] was:[%d,%d]", i, trackedOffset.getIndex(), trackedOffset.getIndex() + 1, trackedOffset.getOffset(), trackedOffset.getOffset() + 1));
                                 sep = " ";
                             }
                             markdown.append("\n");

@@ -9,12 +9,15 @@ import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
     public static final List<SpecialLeadInHandler> EMPTY_LEAD_IN_HANDLERS = Collections.emptyList();
-    public static final Map<TrackedOffset, Integer> EMPTY_OFFSET_MAP = Collections.emptyMap();
+    public static final List<TrackedOffset> EMPTY_OFFSET_LIST = Collections.emptyList();
 
     final @NotNull BasedSequence baseSeq;
     final @NotNull CharWidthProvider charWidthProvider;
@@ -31,7 +34,8 @@ public class MarkdownParagraph {
     @Nullable DataHolder options = null;
 
     @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = EMPTY_LEAD_IN_HANDLERS;
-    private Map<TrackedOffset, Integer> trackedOffsets = EMPTY_OFFSET_MAP;
+    private List<TrackedOffset> trackedOffsets = EMPTY_OFFSET_LIST;
+    private boolean trackedOffsetsSorted = true;
 
     public MarkdownParagraph(CharSequence chars) {
         this(BasedSequence.of(chars), CharWidthProvider.NULL);
@@ -78,20 +82,14 @@ public class MarkdownParagraph {
         if (getFirstWidth() <= 0) return baseSeq;
         if (trackedOffsets.isEmpty()) return wrapTextNotTracked();
 
-        TrackedOffset[] offsets = new TrackedOffset[trackedOffsets.size()];
-        int iMax = 0;
-        for (TrackedOffset trackedOffset : trackedOffsets.keySet()) {
-            offsets[iMax++] = trackedOffset;
-        }
-
-        Arrays.sort(offsets);
-
         // Adjust input text for wrapping by removing any continuation splice regions
         BasedSequence input = baseSeq;
         Range lastRange = Range.NULL;
 
+        sortedTrackedOffsets();
+        int iMax = trackedOffsets.size();
         for (int i = iMax; i-- > 0; ) {
-            TrackedOffset trackedOffset = offsets[i];
+            TrackedOffset trackedOffset = trackedOffsets.get(i);
             if (lastRange.isEmpty() || !lastRange.contains(trackedOffset.getOffset())) {
                 lastRange = getContinuationStartSplice(trackedOffset.getOffset(), trackedOffset.isAfterSpaceEdit(), trackedOffset.isAfterDelete());
                 if (lastRange.isNotEmpty()) {
@@ -114,7 +112,7 @@ public class MarkdownParagraph {
             int baseSeqLastNonBlank = baseSeq.lastIndexOfAnyNot(CharPredicate.WHITESPACE) + 1;
 
             for (int i = iMax; i-- > 0; ) {
-                TrackedOffset trackedOffset = offsets[i];
+                TrackedOffset trackedOffset = trackedOffsets.get(i);
                 OffsetInfo baseInfo = baseSeqTracker.getOffsetInfo(trackedOffset.getOffset(), true);
                 int offset = baseInfo.endIndex;
                 boolean noBeforeSpaces = false;
@@ -196,16 +194,16 @@ public class MarkdownParagraph {
                         wrapped = wrapped.insert(index, RepeatedSequence.ofSpaces(offsetSpaces + offsetSpacesAfter));
                         // need to adjust all following offsets by the amount inserted
                         for (int j = i + 1; j < iMax; j++) {
-                            TrackedOffset trackedOffset1 = offsets[j];
-                            int indexJ = trackedOffsets.get(trackedOffset1);
-                            trackedOffsets.put(trackedOffset1, indexJ + offsetSpaces + offsetSpacesAfter);
+                            TrackedOffset trackedOffset1 = trackedOffsets.get(j);
+                            int indexJ = trackedOffset1.getIndex();
+                            trackedOffset1.setIndex(indexJ + offsetSpaces + offsetSpacesAfter);
                         }
                     }
                 } else {
                     restoredAppendSpaces = Math.max(restoredAppendSpaces, offsetSpaces);
                 }
 
-                trackedOffsets.put(trackedOffset, index + offsetSpaces);
+                trackedOffset.setIndex(index + offsetSpaces);
             }
 
             // append any trailing spaces
@@ -216,42 +214,53 @@ public class MarkdownParagraph {
             BasedOffsetTracker tracker = BasedOffsetTracker.create(wrapped);
             // Now we map the tracked offsets to indexes in the resulting text
             for (int i = iMax; i-- > 0; ) {
-                TrackedOffset trackedOffset = offsets[i];
+                TrackedOffset trackedOffset = trackedOffsets.get(i);
                 OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
-                trackedOffsets.put(trackedOffset, info.endIndex);
+                trackedOffset.setIndex(info.endIndex);
             }
         }
 
         return wrapped;
     }
 
-    public boolean addTrackedOffset(int offset) {
-        return addTrackedOffset(offset, false, false, false);
+    public void addTrackedOffset(@NotNull TrackedOffset trackedOffset) {
+        if (trackedOffsets == EMPTY_OFFSET_LIST) trackedOffsets = new ArrayList<>();
+        assert trackedOffset.getOffset() >= 0 && trackedOffset.getOffset() <= baseSeq.getBaseSequence().length();
+        trackedOffsets.removeIf(it -> it.getOffset() == trackedOffset.getOffset());
+        trackedOffsets.add(trackedOffset);
+        trackedOffsetsSorted = false;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public boolean addTrackedOffset(int offset, @Nullable Character c, boolean afterDelete) {
-        return addTrackedOffset(offset, c != null && c == ' ', c != null && !afterDelete, afterDelete);
+    public List<TrackedOffset> getTrackedOffsets() {
+        return sortedTrackedOffsets();
     }
 
-    public boolean addTrackedOffset(int offset, boolean afterSpace, boolean afterInsert, boolean afterDelete) {
-        if (trackedOffsets == EMPTY_OFFSET_MAP) trackedOffsets = new LinkedHashMap<>();
-        assert offset >= 0 && offset <= baseSeq.getBaseSequence().length();
-        trackedOffsets.put(new TrackedOffset(offset, afterSpace, afterInsert, afterDelete), null);
-        return true;
-    }
-
-    public Map<TrackedOffset, Integer> getTrackedOffsets() {
+    private List<TrackedOffset> sortedTrackedOffsets() {
+        if (!trackedOffsetsSorted) {
+            trackedOffsets.sort(Comparator.comparing(TrackedOffset::getOffset));
+            trackedOffsetsSorted = true;
+        }
         return trackedOffsets;
     }
 
-    public int getTrackedOffsetIndex(int offset) {
-        Integer index = trackedOffsets.get(new TrackedOffset(offset, false, false, false));
-        return index == null ? offset : index;
+    @Nullable
+    public TrackedOffset getTrackedOffset(int offset) {
+        sortedTrackedOffsets();
+
+        for (TrackedOffset trackedOffset : trackedOffsets) {
+            if (trackedOffset.getOffset() == offset) return trackedOffset;
+            if (trackedOffset.getOffset() > offset) break;
+        }
+        return null;
     }
 
+    @NotNull
     public List<? extends SpecialLeadInHandler> getLeadInHandlers() {
         return leadInHandlers;
+    }
+
+    public void setLeadInHandlers(@NotNull List<? extends SpecialLeadInHandler> leadInHandlers) {
+        this.leadInHandlers = leadInHandlers;
     }
 
     @Nullable
@@ -261,10 +270,6 @@ public class MarkdownParagraph {
 
     public void setOptions(@Nullable DataHolder options) {
         this.options = options;
-    }
-
-    public void setLeadInHandlers(List<? extends SpecialLeadInHandler> leadInHandlers) {
-        this.leadInHandlers = leadInHandlers;
     }
 
     public boolean isRestoreTrackedSpaces() {

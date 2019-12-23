@@ -146,7 +146,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             for (int offset : offsets) {
                 char c = EDIT_OP_CHAR.get(options);
                 int editOp = EDIT_OP.get(options);
-                formatter.addTrackedOffset(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0);
+                formatter.addTrackedOffset(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0));
             }
 
             BasedSequence actual = formatter.wrapText();
@@ -156,17 +156,17 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
 
             System.out.println(builder.toStringWithRanges());
 
-            Map<TrackedOffset, Integer> trackedOffsets = formatter.getTrackedOffsets();
+            List<TrackedOffset> trackedOffsets = formatter.getTrackedOffsets();
             assert trackedOffsets.size() == offsets.length;
             int[] resultOffsets = new int[offsets.length];
 
             if (!trackedOffsets.isEmpty()) {
                 TestUtils.appendBanner(out, BANNER_TRACKED_OFFSETS);
                 int r = 0;
-                for (TrackedOffset trackedOffset : trackedOffsets.keySet()) {
-                    Integer offset = trackedOffsets.get(trackedOffset);
-                    assert offset != null;
-                    out.append("[").append(Integer.toString(r)).append("]: ").append(trackedOffset.toString()).append(" --> ").append(offset.toString()).append("\n");
+                for (TrackedOffset trackedOffset : trackedOffsets) {
+                    int offset = trackedOffset.getIndex();
+                    assert offset != -1;
+                    out.append("[").append(Integer.toString(r)).append("]: ").append(trackedOffset.toString()).append(" --> ").append(offset).append("\n");
                     resultOffsets[r++] = offset;
                 }
             }
