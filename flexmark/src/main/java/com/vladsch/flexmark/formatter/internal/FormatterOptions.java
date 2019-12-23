@@ -14,15 +14,15 @@ public class FormatterOptions {
     public final boolean itemContentIndent;
 
     public final ParserEmulationProfile emulationProfile;
-    public final boolean setextHeaderEqualizeMarker;
+    public final boolean setextHeadingEqualizeMarker;
     public final int formatFlags;
     public final int maxBlankLines;
     public final int maxTrailingBlankLines;
     public final int rightMargin;
     public final int minSetextMarkerLength;
     public final DiscretionaryText spaceAfterAtxMarker;
-    public final EqualizeTrailingMarker atxHeaderTrailingMarker;
-    public final HeadingStyle headingPreference;
+    public final EqualizeTrailingMarker atxHeadingTrailingMarker;
+    public final HeadingStyle headingStyle;
     public final boolean blockQuoteBlankLines;
     public final BlockQuoteMarker blockQuoteMarkers;
     public final BlockQuoteContinuationMarker blockQuoteContinuationMarkers;
@@ -59,8 +59,6 @@ public class FormatterOptions {
     public final boolean escapeNumberedLeadInOnWrap;
     public final boolean unescapeSpecialCharsOnWrap;
     public final CharWidthProvider charWidthProvider;
-    public final TrailingSpaces keepTrailingSpaces;
-    public final TrailingSpaces codeKeepTrailingSpaces;
     public final ContinuationIndent paragraphContinuationIndent;
     public final ElementAlignment listAlignNumeric;
     public final boolean listResetFirstItemNumber;
@@ -74,7 +72,7 @@ public class FormatterOptions {
         emulationProfile = Formatter.FORMATTER_EMULATION_PROFILE.get(options);
         itemContentIndent = emulationProfile.family != ParserEmulationProfile.FIXED_INDENT;
 
-        setextHeaderEqualizeMarker = Formatter.SETEXT_HEADER_EQUALIZE_MARKER.get(options);
+        setextHeadingEqualizeMarker = Formatter.SETEXT_HEADING_EQUALIZE_MARKER.get(options);
         formatFlags = Formatter.FORMAT_FLAGS.get(options);
         maxBlankLines = Formatter.MAX_BLANK_LINES.get(options);
         maxTrailingBlankLines = Formatter.MAX_TRAILING_BLANK_LINES.get(options);
@@ -82,8 +80,8 @@ public class FormatterOptions {
         minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
         spaceAfterAtxMarker = Formatter.SPACE_AFTER_ATX_MARKER.get(options);
         paragraphContinuationIndent = Formatter.CONTINUATION_INDENT.get(options);
-        atxHeaderTrailingMarker = Formatter.ATX_HEADER_TRAILING_MARKER.get(options);
-        headingPreference = Formatter.HEADING_PREFERENCE.get(options);
+        atxHeadingTrailingMarker = Formatter.ATX_HEADING_TRAILING_MARKER.get(options);
+        headingStyle = Formatter.HEADING_STYLE.get(options);
         thematicBreak = Formatter.THEMATIC_BREAK.get(options);
         translationIdFormat = Formatter.TRANSLATION_ID_FORMAT.get(options);
         translationHtmlBlockPrefix = Formatter.TRANSLATION_HTML_BLOCK_PREFIX.get(options);
@@ -127,7 +125,5 @@ public class FormatterOptions {
         escapeSpecialCharsOnWrap = Formatter.ESCAPE_SPECIAL_CHARS.get(options);
         escapeNumberedLeadInOnWrap = Formatter.ESCAPE_NUMBERED_LEAD_IN.get(options);
         unescapeSpecialCharsOnWrap = Formatter.UNESCAPE_SPECIAL_CHARS.get(options);
-        keepTrailingSpaces = Formatter.KEEP_TRAILING_SPACES.get(options);
-        codeKeepTrailingSpaces = Formatter.CODE_KEEP_TRAILING_SPACES.get(options);
     }
 }

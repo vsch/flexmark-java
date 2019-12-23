@@ -501,7 +501,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
             }
 
             Collection<AttributeNode> childNodes;
-            if (formatOptions.formatSortAttributes) {
+            if (formatOptions.attributesSort) {
                 ArrayList<Map.Entry<String, AttributeNode>> entries = new ArrayList<>(attributeNodes.entrySet());
                 entries.sort((o1, o2) -> {
                     if (o1.getValue().isId()) return -1;
@@ -552,17 +552,17 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                 String needQuote = AttributeValueQuotes.NO_QUOTES_DOUBLE_PREFERRED.quotesFor(value, "");
 
                 if (attributeNode.isId()) {
-                    switch (needQuote.isEmpty() ? formatOptions.formatIdAttribute : AttributeImplicitName.EXPLICIT_PREFERED) {
+                    switch (needQuote.isEmpty() ? formatOptions.attributeIdFormat : AttributeImplicitName.EXPLICIT_PREFERRED) {
                         case AS_IS:
                             break;
-                        case IMPLICIT_PREFERED:
+                        case IMPLICIT_PREFERRED:
                             if (!attributeNode.isImplicitName()) {
                                 name = PrefixedSubSequence.prefixOf("#", name.getEmptyPrefix());
                                 sep = BasedSequence.NULL;
                             }
                             break;
 
-                        case EXPLICIT_PREFERED:
+                        case EXPLICIT_PREFERRED:
                             if (attributeNode.isImplicitName()) {
                                 name = PrefixedSubSequence.prefixOf("id", name.getEmptyPrefix());
                                 sep = PrefixedSubSequence.prefixOf("=", name.getEmptySuffix());
@@ -570,20 +570,20 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                             }
                             break;
                         default:
-                            throw new IllegalStateException("Unexpected value: " + formatOptions.formatIdAttribute);
+                            throw new IllegalStateException("Unexpected value: " + formatOptions.attributeIdFormat);
                     }
                 } else if (attributeNode.isClass()) {
-                    switch (needQuote.isEmpty() ? formatOptions.formatClassAttribute : AttributeImplicitName.EXPLICIT_PREFERED) {
+                    switch (needQuote.isEmpty() ? formatOptions.attributeClassFormat : AttributeImplicitName.EXPLICIT_PREFERRED) {
                         case AS_IS:
                             break;
-                        case IMPLICIT_PREFERED:
+                        case IMPLICIT_PREFERRED:
                             if (!attributeNode.isImplicitName()) {
                                 name = PrefixedSubSequence.prefixOf(".", name.getEmptyPrefix());
                                 sep = BasedSequence.NULL;
                             }
                             break;
 
-                        case EXPLICIT_PREFERED:
+                        case EXPLICIT_PREFERRED:
                             if (attributeNode.isImplicitName()) {
                                 name = PrefixedSubSequence.prefixOf("class", name.getEmptyPrefix());
                                 sep = PrefixedSubSequence.prefixOf("=", name.getEmptySuffix());
@@ -591,7 +591,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                             }
                             break;
                         default:
-                            throw new IllegalStateException("Unexpected value: " + formatOptions.formatIdAttribute);
+                            throw new IllegalStateException("Unexpected value: " + formatOptions.attributeIdFormat);
                     }
                 }
 

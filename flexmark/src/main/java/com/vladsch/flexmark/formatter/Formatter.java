@@ -48,7 +48,7 @@ public class Formatter implements IRender {
      */
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineAppendable.F_TRIM_LEADING_WHITESPACE);
 
-    // Use LineFormattingAppendable values instead
+    // Use LineAppendable values instead
     // NOTE: F_ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
     @Deprecated public static final int FORMAT_CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
     @Deprecated public static final int FORMAT_COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
@@ -68,9 +68,9 @@ public class Formatter implements IRender {
     public static final DataKey<ContinuationIndent> CONTINUATION_INDENT = new DataKey<>("CONTINUATION_INDENT", ContinuationIndent.ALIGN_TO_FIRST);
 
     public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER = new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
-    public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER = new DataKey<>("SETEXT_HEADER_EQUALIZE_MARKER", true);
-    public static final DataKey<EqualizeTrailingMarker> ATX_HEADER_TRAILING_MARKER = new DataKey<>("ATX_HEADER_TRAILING_MARKER", EqualizeTrailingMarker.AS_IS);
-    public static final DataKey<HeadingStyle> HEADING_PREFERENCE = new DataKey<>("HEADING_PREFERENCE", HeadingStyle.AS_IS);
+    public static final DataKey<Boolean> SETEXT_HEADING_EQUALIZE_MARKER = new DataKey<>("SETEXT_HEADING_EQUALIZE_MARKER", true);
+    public static final DataKey<EqualizeTrailingMarker> ATX_HEADING_TRAILING_MARKER = new DataKey<>("ATX_HEADING_TRAILING_MARKER", EqualizeTrailingMarker.AS_IS);
+    public static final DataKey<HeadingStyle> HEADING_STYLE = new DataKey<>("HEADING_STYLE", HeadingStyle.AS_IS);
     public static final NullableDataKey<String> THEMATIC_BREAK = new NullableDataKey<>("THEMATIC_BREAK");
     public static final DataKey<Boolean> BLOCK_QUOTE_BLANK_LINES = new DataKey<>("BLOCK_QUOTE_BLANK_LINES", true);
     public static final DataKey<BlockQuoteMarker> BLOCK_QUOTE_MARKERS = new DataKey<>("BLOCK_QUOTE_MARKERS", BlockQuoteMarker.ADD_COMPACT_WITH_SPACE);
@@ -95,8 +95,6 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> KEEP_EXPLICIT_LINKS_AT_START = new DataKey<>("KEEP_EXPLICIT_LINKS_AT_START", false);
     public static final DataKey<Boolean> OPTIMIZED_INLINE_RENDERING = new DataKey<>("OPTIMIZED_INLINE_RENDERING", false);
     public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER = TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER;
-    public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
-    public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
     public static final DataKey<Boolean> KEEP_HARD_LINE_BREAKS = new DataKey<>("KEEP_HARD_LINE_BREAKS", true);
     public static final DataKey<Boolean> KEEP_SOFT_LINE_BREAKS = new DataKey<>("KEEP_SOFT_LINE_BREAKS", true);
     public static final DataKey<String> FORMATTER_ON_TAG = new DataKey<>("FORMATTER_ON_TAG", "@formatter" + ":on");
@@ -123,6 +121,17 @@ public class Formatter implements IRender {
 
     // formatter family override
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DataKey<>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
+
+    /**
+     * use corrected name
+     */
+    @Deprecated
+    public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER = SETEXT_HEADING_EQUALIZE_MARKER;
+    /**
+     * use corrected name
+     */
+    @Deprecated
+    public static final DataKey<EqualizeTrailingMarker> ATX_HEADER_TRAILING_MARKER = ATX_HEADING_TRAILING_MARKER;
 
     /**
      * use TableFormatOptions instead

@@ -2,8 +2,8 @@ package com.vladsch.flexmark.ext.attributes;
 
 public enum AttributeImplicitName {
     AS_IS,
-    IMPLICIT_PREFERED,
-    EXPLICIT_PREFERED,
+    IMPLICIT_PREFERRED,
+    EXPLICIT_PREFERRED,
     ;
 
     public boolean isNoChange() {
@@ -11,10 +11,10 @@ public enum AttributeImplicitName {
     }
 
     public boolean isImplicit() {
-        return this == IMPLICIT_PREFERED;
+        return this == IMPLICIT_PREFERRED;
     }
 
     public boolean isExplicit() {
-        return this == EXPLICIT_PREFERED;
+        return this == EXPLICIT_PREFERRED;
     }
 }

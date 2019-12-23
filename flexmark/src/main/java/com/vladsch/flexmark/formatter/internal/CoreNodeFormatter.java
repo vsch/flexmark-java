@@ -315,7 +315,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(Heading node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
-        HeadingStyle headingPreference = formatterOptions.headingPreference;
+        HeadingStyle headingPreference = formatterOptions.headingStyle;
         FormatterOptions formatterOptions = context.getFormatterOptions();
         if (context.isTransformingText() || headingPreference.isNoChange(node.isSetextHeading(), node.getLevel())) {
             if (node.isAtxHeading()) {
@@ -327,7 +327,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 context.translatingRefTargetSpan(node, (context12, writer) -> context12.renderChildren(node));
 
-                switch (formatterOptions.atxHeaderTrailingMarker) {
+                switch (formatterOptions.atxHeadingTrailingMarker) {
                     case EQUALIZE:
                         if (node.getOpeningMarker().isNull()) break;
                         // fall through
@@ -367,7 +367,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 markdown.line();
 
-                if (formatterOptions.setextHeaderEqualizeMarker) {
+                if (formatterOptions.setextHeadingEqualizeMarker) {
                     markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
                 } else {
                     markdown.append(node.getClosingMarker());
@@ -380,7 +380,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.line();
             char closingMarker = node.getLevel() == 1 ? '=' : '-';
 
-            if (formatterOptions.setextHeaderEqualizeMarker) {
+            if (formatterOptions.setextHeadingEqualizeMarker) {
                 markdown.append(closingMarker, Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
             } else {
                 markdown.append(RepeatedSequence.repeatOf(closingMarker, formatterOptions.minSetextMarkerLength));
@@ -399,7 +399,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             context.renderChildren(node);
 
-            switch (formatterOptions.atxHeaderTrailingMarker) {
+            switch (formatterOptions.atxHeadingTrailingMarker) {
                 case EQUALIZE:
                 case ADD:
                     if (spaceAfterAtx) markdown.append(' ');

@@ -11,33 +11,33 @@ import org.jetbrains.annotations.NotNull;
 
 class AttributesFormatOptions implements MutableDataSetter {
     public final boolean attributesCombineConsecutive;
-    public final boolean formatSortAttributes;
+    public final boolean attributesSort;
     public final DiscretionaryText attributesSpaces;
     public final DiscretionaryText attributeEqualSpace;
     public final AttributeValueQuotes attributeValueQuotes;
-    public final AttributeImplicitName formatIdAttribute;
-    public final AttributeImplicitName formatClassAttribute;
+    public final AttributeImplicitName attributeIdFormat;
+    public final AttributeImplicitName attributeClassFormat;
 
     public AttributesFormatOptions(DataHolder options) {
         attributesCombineConsecutive = AttributesExtension.FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE.get(options);
-        formatSortAttributes = AttributesExtension.FORMAT_SORT_ATTRIBUTES.get(options);
+        attributesSort = AttributesExtension.FORMAT_ATTRIBUTES_SORT.get(options);
         attributesSpaces = AttributesExtension.FORMAT_ATTRIBUTES_SPACES.get(options);
         attributeEqualSpace = AttributesExtension.FORMAT_ATTRIBUTE_EQUAL_SPACE.get(options);
         attributeValueQuotes = AttributesExtension.FORMAT_ATTRIBUTE_VALUE_QUOTES.get(options);
-        formatIdAttribute = AttributesExtension.FORMAT_ID_ATTRIBUTE.get(options);
-        formatClassAttribute = AttributesExtension.FORMAT_CLASS_ATTRIBUTE.get(options);
+        attributeIdFormat = AttributesExtension.FORMAT_ATTRIBUTE_ID.get(options);
+        attributeClassFormat = AttributesExtension.FORMAT_ATTRIBUTE_CLASS.get(options);
     }
 
     @NotNull
     @Override
     public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE, attributesCombineConsecutive);
-        dataHolder.set(AttributesExtension.FORMAT_SORT_ATTRIBUTES, formatSortAttributes);
+        dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTES_SORT, attributesSort);
         dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTES_SPACES, attributesSpaces);
         dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTE_EQUAL_SPACE, attributeEqualSpace);
         dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTE_VALUE_QUOTES, attributeValueQuotes);
-        dataHolder.set(AttributesExtension.FORMAT_ID_ATTRIBUTE, formatIdAttribute);
-        dataHolder.set(AttributesExtension.FORMAT_CLASS_ATTRIBUTE, formatClassAttribute);
+        dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTE_ID, attributeIdFormat);
+        dataHolder.set(AttributesExtension.FORMAT_ATTRIBUTE_CLASS, attributeClassFormat);
         return dataHolder;
     }
 }

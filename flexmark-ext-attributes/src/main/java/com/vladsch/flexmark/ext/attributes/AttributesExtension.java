@@ -34,12 +34,12 @@ public class AttributesExtension implements Parser.ParserExtension
     public static final DataKey<Boolean> USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER = new DataKey<>("USE_EMPTY_IMPLICIT_AS_SPAN_DELIMITER", false);
 
     public static final DataKey<Boolean> FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE = new DataKey<>("FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE", false);
-    public static final DataKey<Boolean> FORMAT_SORT_ATTRIBUTES = new DataKey<>("FORMAT_SORT_ATTRIBUTES", false);
+    public static final DataKey<Boolean> FORMAT_ATTRIBUTES_SORT = new DataKey<>("FORMAT_ATTRIBUTES_SORT", false);
     public static final DataKey<DiscretionaryText> FORMAT_ATTRIBUTES_SPACES = new DataKey<>("FORMAT_ATTRIBUTES_SPACES", DiscretionaryText.AS_IS); // add spaces after { and before }
     public static final DataKey<DiscretionaryText> FORMAT_ATTRIBUTE_EQUAL_SPACE = new DataKey<>("FORMAT_ATTRIBUTE_EQUAL_SPACE", DiscretionaryText.AS_IS);
     public static final DataKey<AttributeValueQuotes> FORMAT_ATTRIBUTE_VALUE_QUOTES = new DataKey<>("FORMAT_ATTRIBUTE_VALUE_QUOTES", AttributeValueQuotes.AS_IS);
-    public static final DataKey<AttributeImplicitName> FORMAT_ID_ATTRIBUTE = new DataKey<>("FORMAT_ID_ATTRIBUTE", AttributeImplicitName.AS_IS);
-    public static final DataKey<AttributeImplicitName> FORMAT_CLASS_ATTRIBUTE = new DataKey<>("FORMAT_CLASS_ATTRIBUTE", AttributeImplicitName.AS_IS);
+    public static final DataKey<AttributeImplicitName> FORMAT_ATTRIBUTE_ID = new DataKey<>("FORMAT_ATTRIBUTE_ID", AttributeImplicitName.AS_IS);
+    public static final DataKey<AttributeImplicitName> FORMAT_ATTRIBUTE_CLASS = new DataKey<>("FORMAT_ATTRIBUTE_CLASS", AttributeImplicitName.AS_IS);
 
     private AttributesExtension() {
     }

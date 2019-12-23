@@ -48,13 +48,13 @@ public class ComboAttributesFormatterSpecTest extends FormatterSpecTest {
         optionsMap.put("value-quotes-single-quotes", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_VALUE_QUOTES, AttributeValueQuotes.SINGLE_QUOTES));
         optionsMap.put("value-quotes-double-quotes", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_VALUE_QUOTES, AttributeValueQuotes.DOUBLE_QUOTES));
         optionsMap.put("combine-consecutive", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE, true));
-        optionsMap.put("sort-attributes", new MutableDataSet().set(AttributesExtension.FORMAT_SORT_ATTRIBUTES, true));
-        optionsMap.put("id-as-is", new MutableDataSet().set(AttributesExtension.FORMAT_ID_ATTRIBUTE, AttributeImplicitName.AS_IS));
-        optionsMap.put("id-implicit", new MutableDataSet().set(AttributesExtension.FORMAT_ID_ATTRIBUTE, AttributeImplicitName.IMPLICIT_PREFERED));
-        optionsMap.put("id-explicit", new MutableDataSet().set(AttributesExtension.FORMAT_ID_ATTRIBUTE, AttributeImplicitName.EXPLICIT_PREFERED));
-        optionsMap.put("class-as-is", new MutableDataSet().set(AttributesExtension.FORMAT_CLASS_ATTRIBUTE, AttributeImplicitName.AS_IS));
-        optionsMap.put("class-implicit", new MutableDataSet().set(AttributesExtension.FORMAT_CLASS_ATTRIBUTE, AttributeImplicitName.IMPLICIT_PREFERED));
-        optionsMap.put("class-explicit", new MutableDataSet().set(AttributesExtension.FORMAT_CLASS_ATTRIBUTE, AttributeImplicitName.EXPLICIT_PREFERED));
+        optionsMap.put("sort-attributes", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTES_SORT, true));
+        optionsMap.put("id-as-is", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_ID, AttributeImplicitName.AS_IS));
+        optionsMap.put("id-implicit", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_ID, AttributeImplicitName.IMPLICIT_PREFERRED));
+        optionsMap.put("id-explicit", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_ID, AttributeImplicitName.EXPLICIT_PREFERRED));
+        optionsMap.put("class-as-is", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_CLASS, AttributeImplicitName.AS_IS));
+        optionsMap.put("class-implicit", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_CLASS, AttributeImplicitName.IMPLICIT_PREFERRED));
+        optionsMap.put("class-explicit", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_CLASS, AttributeImplicitName.EXPLICIT_PREFERRED));
     }
 
     public ComboAttributesFormatterSpecTest(@NotNull SpecExample example) {

@@ -8,6 +8,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.84](#next-05984)
 - [0.59.82](#05982)
 - [0.59.80](#05980)
 - [0.59.78](#05978)
@@ -211,6 +212,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.84
+
+* Fix: rename formatter `HEADER` options to `HEADING`
+* Fix: deprecate old header named options
+* Fix: delete unused formatter option `KEEP_TRAILING_SPACES`
+* Fix: delete unused formatter option `CODE_KEEP_TRAILING_SPACES`
 
 ## 0.59.82
 
