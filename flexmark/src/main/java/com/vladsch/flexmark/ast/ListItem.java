@@ -28,6 +28,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
         this.tight = other.tight;
         this.hadBlankAfterItemParagraph = other.hadBlankAfterItemParagraph;
         this.containsBlankLine = other.containsBlankLine;
+        this.priority = other.priority;
 
         takeChildren(other);
         setCharsFromContent();
@@ -43,6 +44,10 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
 
     public ListItem(BlockContent blockContent) {
         super(blockContent);
+    }
+
+    public boolean isOrderedItem() {
+        return false;
     }
 
     @Override

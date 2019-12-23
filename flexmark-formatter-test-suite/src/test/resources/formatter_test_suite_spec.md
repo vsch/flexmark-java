@@ -176,6 +176,16 @@ indented code
 ## Block Quotes
 
 ```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space)
+> > block quote
+> lazy continuation
+.
+>> block quote
+>> lazy continuation
+>
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes: 2) options(block-quote-compact-with-space)
 > #Heading
 > -----
 > paragraph text 

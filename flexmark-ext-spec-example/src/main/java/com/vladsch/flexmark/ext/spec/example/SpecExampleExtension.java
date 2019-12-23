@@ -47,9 +47,6 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     public static final DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_LANGUAGES = new DataKey<>("SPEC_EXAMPLE_SECTION_LANGUAGES", DEFAULT_LANGUAGE_MAPPING);
     public static final DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_NAMES = new DataKey<>("SPEC_EXAMPLE_SECTION_NAMES", DEFAULT_SECTION_MAPPING);
 
-    // IMPORTANT: implement node formatter and this option
-    public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
-
     private SpecExampleExtension() {
     }
 

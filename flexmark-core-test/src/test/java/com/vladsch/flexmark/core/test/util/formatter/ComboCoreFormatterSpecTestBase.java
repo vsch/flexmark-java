@@ -50,6 +50,7 @@ public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
         optionsMap.put("fenced-code-marker-tilde", new MutableDataSet().set(Formatter.FENCED_CODE_MARKER_TYPE, CodeFenceMarker.TILDE));
         optionsMap.put("list-add-blank-line-before", new MutableDataSet().set(Formatter.LIST_ADD_BLANK_LINE_BEFORE, true));
         optionsMap.put("list-no-renumber-items", new MutableDataSet().set(Formatter.LIST_RENUMBER_ITEMS, false));
+        optionsMap.put("list-reset-first-item", new MutableDataSet().set(Formatter.LIST_RESET_FIRST_ITEM_NUMBER, true));
         optionsMap.put("list-bullet-dash", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.DASH));
         optionsMap.put("list-bullet-asterisk", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.ASTERISK));
         optionsMap.put("list-bullet-plus", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.PLUS));
@@ -84,11 +85,7 @@ public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
         optionsMap.put("apply-escapers", new MutableDataSet().set(Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS, true));
         optionsMap.put("no-apply-escapers", new MutableDataSet().set(Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS, false));
 
-        optionsMap.put("no-list-align-first-line-text", new MutableDataSet().set(Formatter.LIST_ALIGN_FIRST_LINE_TEXT, false));
-        optionsMap.put("no-list-align-child-blocks", new MutableDataSet().set(Formatter.LIST_ALIGN_CHILD_BLOCKS, false));
         optionsMap.put("no-list-reset-first-item-number", new MutableDataSet().set(Formatter.LIST_RESET_FIRST_ITEM_NUMBER, false));
-        optionsMap.put("list-align-first-line-text", new MutableDataSet().set(Formatter.LIST_ALIGN_FIRST_LINE_TEXT, true));
-        optionsMap.put("list-align-child-blocks", new MutableDataSet().set(Formatter.LIST_ALIGN_CHILD_BLOCKS, true));
         optionsMap.put("list-reset-first-item-number", new MutableDataSet().set(Formatter.LIST_RESET_FIRST_ITEM_NUMBER, true));
 
         optionsMap.put("formatter-tags-enabled", new MutableDataSet().set(Formatter.FORMATTER_TAGS_ENABLED, true));
@@ -111,8 +108,8 @@ public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
         optionsMap.put("block-quote-continuation-markers-remove", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.REMOVE));
 
         optionsMap.put("list-align-numeric-none", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.NONE));
-        optionsMap.put("list-align-numeric-left-align", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.LEFT_ALIGN));
-        optionsMap.put("list-align-numeric-right-align", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.RIGHT_ALIGN));
+        optionsMap.put("list-align-numeric-left", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.LEFT_ALIGN));
+        optionsMap.put("list-align-numeric-right", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.RIGHT_ALIGN));
         optionsMap.put("link-address-pattern", new MutableDataSet().set(Formatter.LINK_MARKER_COMMENT_PATTERN, Pattern.compile("^\\s*@IGNORE PREVIOUS:.*$")));
 
         optionsMap.put("margin", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, ComboCoreFormatterSpecTestBase::marginOption)));

@@ -48,11 +48,15 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     public abstract M tailBlankLine(int count);
 
     // @formatter:off
+    @Override @NotNull public LineAppendable pushOptions()                                                                                                      { return appendable.pushOptions(); }
+    @Override @NotNull public LineAppendable popOptions()                                                                                                       { return appendable.popOptions(); }
+    @Override @NotNull public LineAppendable changeOptions(int addFlags, int removeFlags)                                                                       { return appendable.changeOptions(addFlags, removeFlags); }
     @Override public boolean isPendingSpace()                                                                                                                   { return appendable.isPendingSpace(); }
     @Override public boolean isPreFormatted()                                                                                                                   { return appendable.isPreFormatted(); }
     @Override public boolean isPreFormattedLine(int line)                                                                                                       { return appendable.isPreFormattedLine(line); }
     @NotNull @Override public CharSequence getIndentPrefix()                                                                                                    { return appendable.getIndentPrefix(); }
     @Override public CharSequence getPrefix()                                                                                                                   { return appendable.getPrefix(); }
+    @Override public CharSequence getBeforeEolPrefix()                                                                                                          { return appendable.getBeforeEolPrefix(); }
     @Override public int column()                                                                                                                               { return appendable.column(); }
     @Override public int getLineCount()                                                                                                                         { return appendable.getLineCount(); }
     @Override public int getOptions()                                                                                                                           { return appendable.getOptions(); }

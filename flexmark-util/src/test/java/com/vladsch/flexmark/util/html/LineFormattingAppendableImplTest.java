@@ -379,4 +379,23 @@ public class LineFormattingAppendableImplTest {
         fa.append("a");
         assertEquals("  abc\n     def\na\n", fa.toString(0));
     }
+
+    @Test
+    public void test_leadingSpaceVaries() {
+        String indent = "";
+        LineAppendable fa = new LineFormattingAppendableImpl(LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
+        fa.setIndentPrefix(indent);
+
+        int saved = fa.getOptions();
+        fa.setOptions(saved & ~(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE));
+        fa.append("  abc");
+        fa.setOptions(saved);
+//        assertEquals("  abc\n", fa.toString(0));
+
+        fa.append("     def\n");
+        assertEquals("  abc def\n", fa.toString(0));
+
+        fa.append("a");
+        assertEquals("  abc def\na\n", fa.toString(0));
+    }
 }

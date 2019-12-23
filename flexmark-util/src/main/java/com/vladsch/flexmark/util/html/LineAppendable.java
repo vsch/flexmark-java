@@ -90,6 +90,45 @@ public interface LineAppendable extends Appendable {
     @NotNull
     BitFieldSet<Options> getOptionSet();
 
+    @NotNull
+    LineAppendable pushOptions();
+
+    @NotNull
+    LineAppendable popOptions();
+
+    @NotNull
+    default LineAppendable noTrimLeading() {
+        return changeOptions(0, F_TRIM_LEADING_WHITESPACE);
+    }
+
+    @NotNull
+    default LineAppendable trimLeading() {
+        return changeOptions(F_TRIM_LEADING_WHITESPACE, 0);
+    }
+
+    @NotNull
+    default LineAppendable preserveSpaces() {
+        return changeOptions(0, F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE);
+    }
+
+    @NotNull
+    default LineAppendable noPreserveSpaces() {
+        return changeOptions(F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE, 0);
+    }
+
+    @NotNull
+    default LineAppendable removeOptions(int flags) {
+        return changeOptions(0, flags);
+    }
+
+    @NotNull
+    default LineAppendable addOptions(int flags) {
+        return changeOptions(flags, 0);
+    }
+
+    @NotNull
+    LineAppendable changeOptions(int addFlags, int removeFlags);
+
     /**
      * Set options on processing text
      *
@@ -535,10 +574,18 @@ public interface LineAppendable extends Appendable {
 
     /**
      * Get prefix being applied to all lines, even in pre-formatted sections
+     * This is the prefix that will be set after EOL
      *
      * @return char sequence of the current prefix
      */
     CharSequence getPrefix();
+
+    /**
+     * Get prefix used before EOL
+     *
+     * @return char sequence of the current prefix
+     */
+    CharSequence getBeforeEolPrefix();
 
     /**
      * Add to prefix appended after a new line character for every line

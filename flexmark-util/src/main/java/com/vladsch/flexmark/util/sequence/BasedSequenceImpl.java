@@ -95,10 +95,10 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
     @Override
     public char safeBaseCharAt(int index) {
-        if (index >= 0 && index < length()) return charAt(index);
+        int startOffset = getStartOffset();
+        if (index >= startOffset && index < startOffset + length()) return charAt(index - startOffset);
         else {
-            int baseIndex = getStartOffset() + index;
-            return getBaseSequence().safeCharAt(baseIndex);
+            return getBaseSequence().safeCharAt(index);
         }
     }
 

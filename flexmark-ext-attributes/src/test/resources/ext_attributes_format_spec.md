@@ -1011,35 +1011,610 @@ Default rendering with emphasis
 ````````````````````````````````
 
 
-## Trailing Spaces
+## Spaces
 
-```````````````````````````````` example(Trailing Spaces: 1) options(IGNORED)
-text {attribute=value   }
-.
-text {attribute=value}
-````````````````````````````````
+### Named
 
-
-## Original preserved
-
-```````````````````````````````` example(Original preserved: 1) options(IGNORED)
-text {id=value   }
+```````````````````````````````` example Spaces - Named: 1
+text {id=value}
 .
 text {id=value}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Original preserved: 2) options(IGNORED)
-text {id="value"   }
+```````````````````````````````` example Spaces - Named: 2
+text {id=value }
 .
-text {id="value"}
+text {id=value }
 ````````````````````````````````
 
 
-```````````````````````````````` example(Original preserved: 3) options(IGNORED)
-text {#value }
+```````````````````````````````` example Spaces - Named: 3
+text {id=value      }
+.
+text {id=value }
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Named: 4
+text { id=value}
+.
+text { id=value}
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Named: 5
+text {         id=value}
+.
+text { id=value}
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Named: 6
+text { id="value" }
+.
+text { id="value" }
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Named: 7
+text {        id="value"       }
+.
+text { id="value" }
+````````````````````````````````
+
+
+### Id
+
+```````````````````````````````` example Spaces - Id: 1
+text {#value}
 .
 text {#value}
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Id: 2
+text {#value }
+.
+text {#value }
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Id: 3
+text {#value   }
+.
+text {#value }
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Id: 4
+text { #value}
+.
+text { #value}
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Id: 5
+text {     #value}
+.
+text { #value}
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Id: 6
+text { #value }
+.
+text { #value }
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Id: 7
+text {   #value  }
+.
+text { #value }
+````````````````````````````````
+
+
+### Class
+
+```````````````````````````````` example Spaces - Class: 1
+text {.value}
+.
+text {.value}
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Class: 2
+text {.value }
+.
+text {.value }
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Class: 3
+text {.value   }
+.
+text {.value }
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Class: 4
+text { .value}
+.
+text { .value}
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Class: 5
+text {     .value}
+.
+text { .value}
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Class: 6
+text { .value }
+.
+text { .value }
+````````````````````````````````
+
+
+```````````````````````````````` example Spaces - Class: 7
+text {   .value  }
+.
+text { .value }
+````````````````````````````````
+
+
+## Format
+
+### Brace Spaces
+
+#### As Is
+
+```````````````````````````````` example(Format - Brace Spaces - As Is: 1) options(attributes-spaces-as-is)
+text {id=value}
+text {id=value }
+text { id=value}
+text { id=value }
+.
+text {id=value}
+text {id=value }
+text { id=value}
+text { id=value }
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Brace Spaces - As Is: 2) options(attributes-spaces-as-is)
+text {#value}
+text {#value }
+text { #value}
+text { #value }
+.
+text {#value}
+text {#value }
+text { #value}
+text { #value }
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Brace Spaces - As Is: 3) options(attributes-spaces-as-is)
+text {.value}
+text {.value }
+text { .value}
+text { .value }
+.
+text {.value}
+text {.value }
+text { .value}
+text { .value }
+````````````````````````````````
+
+
+### Brace Spaces
+
+#### Add
+
+```````````````````````````````` example(Format - Brace Spaces - Add: 1) options(attributes-spaces-add)
+text {id=value}
+text {id=value }
+text { id=value}
+text { id=value }
+.
+text { id=value }
+text { id=value }
+text { id=value }
+text { id=value }
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Brace Spaces - Add: 2) options(attributes-spaces-add)
+text {#value}
+text {#value }
+text { #value}
+text { #value }
+.
+text { #value }
+text { #value }
+text { #value }
+text { #value }
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Brace Spaces - Add: 3) options(attributes-spaces-add)
+text {.value}
+text {.value }
+text { .value}
+text { .value }
+.
+text { .value }
+text { .value }
+text { .value }
+text { .value }
+````````````````````````````````
+
+
+### Brace Spaces
+
+#### Remove
+
+```````````````````````````````` example(Format - Brace Spaces - Remove: 1) options(attributes-spaces-remove)
+text {id=value}
+text {id=value }
+text { id=value}
+text { id=value }
+.
+text {id=value}
+text {id=value}
+text {id=value}
+text {id=value}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Brace Spaces - Remove: 2) options(attributes-spaces-remove)
+text {#value}
+text {#value }
+text { #value}
+text { #value }
+.
+text {#value}
+text {#value}
+text {#value}
+text {#value}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Brace Spaces - Remove: 3) options(attributes-spaces-remove)
+text {.value}
+text {.value }
+text { .value}
+text { .value }
+.
+text {.value}
+text {.value}
+text {.value}
+text {.value}
+````````````````````````````````
+
+
+### Equals Spaces
+
+#### As Is
+
+```````````````````````````````` example(Format - Equals Spaces - As Is: 1) options(sep-spaces-as-is)
+text {id=value}
+text {id =value }
+text { id= value}
+text { id = value }
+.
+text {id=value}
+text {id =value }
+text { id= value}
+text { id = value }
+````````````````````````````````
+
+
+#### Add
+
+```````````````````````````````` example(Format - Equals Spaces - Add: 1) options(sep-spaces-add)
+text {id=value}
+text {id =value }
+text { id= value}
+text { id = value }
+.
+text {id = value}
+text {id = value }
+text { id = value}
+text { id = value }
+````````````````````````````````
+
+
+#### Remove
+
+```````````````````````````````` example(Format - Equals Spaces - Remove: 1) options(sep-spaces-remove)
+text {id=value}
+text {id =value }
+text { id= value}
+text { id = value }
+.
+text {id=value}
+text {id=value }
+text { id=value}
+text { id=value }
+````````````````````````````````
+
+
+### Quotes
+
+#### AsIs
+
+```````````````````````````````` example(Format - Quotes - AsIs: 1) options(value-quotes-as-is)
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+.
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+````````````````````````````````
+
+
+#### AsIs
+
+```````````````````````````````` example(Format - Quotes - AsIs: 1) options(value-quotes-as-is)
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+.
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+````````````````````````````````
+
+
+#### NoQuotesSinglePreferred
+
+```````````````````````````````` example(Format - Quotes - NoQuotesSinglePreferred: 1) options(value-quotes-no-quotes-single-preferred)
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+.
+text {id=value}
+text {id=value}
+text {id=value}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id='value spaced'}
+````````````````````````````````
+
+
+#### NoQuotesDoublePreferred
+
+```````````````````````````````` example(Format - Quotes - NoQuotesDoublePreferred: 1) options(value-quotes-no-quotes-double-preferred)
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+.
+text {id=value}
+text {id=value}
+text {id=value}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id="value spaced"}
+text {id="value spaced"}
+````````````````````````````````
+
+
+#### SinglePreferred
+
+```````````````````````````````` example(Format - Quotes - SinglePreferred: 1) options(value-quotes-single-preferred)
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+.
+text {id='value'}
+text {id='value'}
+text {id='value'}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id='value spaced'}
+````````````````````````````````
+
+
+#### DoublePreferred
+
+```````````````````````````````` example(Format - Quotes - DoublePreferred: 1) options(value-quotes-double-preferred)
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+.
+text {id="value"}
+text {id="value"}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id="value spaced"}
+text {id="value spaced"}
+````````````````````````````````
+
+
+#### SingleQuotes
+
+```````````````````````````````` example(Format - Quotes - SingleQuotes: 1) options(value-quotes-single-quotes)
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+.
+text {id='value'}
+text {id='value'}
+text {id='value'}
+text {id='va&apos;lue'}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id='value spaced'}
+````````````````````````````````
+
+
+#### DoubleQuotes
+
+```````````````````````````````` example(Format - Quotes - DoubleQuotes: 1) options(value-quotes-double-quotes)
+text {id=value}
+text {id='value'}
+text {id="value"}
+text {id="va'lue"}
+text {id='va"lue'}
+text {id='value spaced'}
+text {id="value spaced"}
+.
+text {id="value"}
+text {id="value"}
+text {id="value"}
+text {id="va'lue"}
+text {id="va&quot;lue"}
+text {id="value spaced"}
+text {id="value spaced"}
+````````````````````````````````
+
+
+### Combine Consecutive
+
+```````````````````````````````` example(Format - Combine Consecutive: 1) options(combine-consecutive)
+text {id=value}{id=value2 .test}
+.
+text {id=value2 .test}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Combine Consecutive: 2) options(combine-consecutive)
+text {id=value}{.test}{#text}
+.
+text {.test #text}
+````````````````````````````````
+
+
+### Sort Attributes
+
+```````````````````````````````` example(Format - Sort Attributes: 1) options(sort-attributes)
+text {style="color" .text id=value}
+.
+text {id=value .text style="color"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Sort Attributes: 2) options(sort-attributes)
+text {.text class="more" #value0 style="color:red" style="back:blue" id=value}
+.
+text {id=value class="text more" style="color:red;back:blue"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Sort Attributes: 3) options(combine-consecutive, sort-attributes)
+text {.text}{class="more"}{#value0}{style="color:red"}{style="back:blue"}{id=value}
+.
+text {id=value class="text more" style="color:red;back:blue"}
+````````````````````````````````
+
+
+### Id-Class
+
+```````````````````````````````` example(Format - Id-Class: 1) options(sort-attributes, id-implicit, class-implicit)
+text {style="color" class=text id=value}
+.
+text {#value .text style="color"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Id-Class: 2) options(sort-attributes, id-implicit, class-implicit)
+text {.text .more id=value0 style="color:red" style="back:blue" id=value}
+.
+text {#value class="text more" style="color:red;back:blue"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Id-Class: 3) options(combine-consecutive, sort-attributes, id-implicit, class-implicit)
+text {.text}{class="more"}{#value0}{style="color:red"}{style="back:blue"}{id=value}
+.
+text {#value class="text more" style="color:red;back:blue"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Id-Class: 4) options(sort-attributes, id-explicit, class-implicit)
+text {style="color" class=text #value}
+.
+text {id=value .text style="color"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Id-Class: 5) options(sort-attributes, id-explicit, class-implicit)
+text {.text class="more" #value0 style="color:red" style="back:blue" id=value}
+.
+text {id=value class="text more" style="color:red;back:blue"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Id-Class: 6) options(combine-consecutive, sort-attributes, id-explicit, class-implicit)
+text {.text}{class="more"}{#value0}{style="color:red"}{style="back:blue"}{id=value}
+.
+text {id=value class="text more" style="color:red;back:blue"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Id-Class: 7) options(sort-attributes, id-explicit, class-explicit)
+text {style="color" .text #value}
+.
+text {id=value class=text style="color"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Id-Class: 8) options(sort-attributes, id-explicit, class-explicit)
+text {.text class="more" #value0 style="color:red" style="back:blue" id=value}
+.
+text {id=value class="text more" style="color:red;back:blue"}
+````````````````````````````````
+
+
+```````````````````````````````` example(Format - Id-Class: 9) options(combine-consecutive, sort-attributes, id-explicit, class-explicit)
+text {.text}{class="more"}{#value0}{style="color:red"}{style="back:blue"}{#value}
+.
+text {id=value class="text more" style="color:red;back:blue"}
 ````````````````````````````````
 
 

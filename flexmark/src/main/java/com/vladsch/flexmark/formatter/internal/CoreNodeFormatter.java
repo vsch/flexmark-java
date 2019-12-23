@@ -10,12 +10,12 @@ import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.format.options.*;
-import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,11 +33,14 @@ import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
 import static com.vladsch.flexmark.formatter.RenderPurpose.*;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
+import static com.vladsch.flexmark.util.html.LineAppendable.F_TRIM_LEADING_WHITESPACE;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
+    public static final Function<CharSequence, Pair<Integer, Integer>> NULL_PADDING = sequence -> Pair.of(0, 0);
+    public static final DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC = new DataKey<>("LIST_ITEM_NUMBER", NULL_PADDING); // function takes ordered marker and returns Pair LeftPad,RightPad
     public static final NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
     public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", HashMap::new);
     public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", HashMap::new);
@@ -439,9 +443,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
 
         String continuationPrefix = prefix;
+        compactContinuationPrefix = compactPrefix;
+
         switch (formatterOptions.blockQuoteContinuationMarkers) {
             case ADD_AS_FIRST:
                 continuationPrefix = prefix;
+                compactContinuationPrefix = compactPrefix;
                 break;
             case ADD_COMPACT:
                 continuationPrefix = ">";
@@ -471,7 +478,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             combinedPrefix += prefix;
         }
 
-        String combinedContinuationPrefix = markdown.getPrefix().toString();
+        String combinedContinuationPrefix = markdown.getBeforeEolPrefix().toString();
         if (compactContinuationPrefix && combinedContinuationPrefix.endsWith("> ")) {
             combinedContinuationPrefix = combinedContinuationPrefix.substring(0, combinedContinuationPrefix.length() - 1) + continuationPrefix;
         } else {
@@ -668,17 +675,20 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     public static void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown, List<Node> itemList) {
-        if (context.getFormatterOptions().listAddBlankLineBefore && !node.isOrDescendantOfType(ListItem.class)) {
+        FormatterOptions formatterOptions = context.getFormatterOptions();
+        if (formatterOptions.listAddBlankLineBefore && !node.isOrDescendantOfType(ListItem.class)) {
             markdown.blankLine();
         }
 
         Document document = context.getDocument();
         ListSpacing listSpacing = LIST_ITEM_SPACING.get(document);
         int listItemNumber = LIST_ITEM_NUMBER.get(document);
-        document.set(LIST_ITEM_NUMBER, node instanceof OrderedList ? ((OrderedList) node).getStartNumber() : 1);
+        int startingNumber = node instanceof OrderedList ? formatterOptions.listRenumberItems && formatterOptions.listResetFirstItemNumber ? 1 : ((OrderedList) node).getStartNumber() : 1;
+        Function<CharSequence, Pair<Integer, Integer>> listAlignNumeric = LIST_ALIGN_NUMERIC.get(document);
+        document.set(LIST_ITEM_NUMBER, startingNumber);
 
         ListSpacing itemSpacing = null;
-        switch (context.getFormatterOptions().listSpacing) {
+        switch (formatterOptions.listSpacing) {
             case AS_IS:
                 break;
             case LOOSE:
@@ -704,6 +714,30 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
         }
 
+        document.remove(LIST_ALIGN_NUMERIC);
+
+        if (!formatterOptions.listAlignNumeric.isNoChange() && node instanceof OrderedList) {
+            int maxLen = Integer.MIN_VALUE;
+            int minLen = Integer.MAX_VALUE;
+            int i = startingNumber;
+            for (Node item : itemList) {
+                if (!formatterOptions.listRemoveEmptyItems || item.hasChildren() && item.getFirstChildAnyNot(BlankLine.class) != null) {
+                    int length = formatterOptions.listRenumberItems ? Integer.toString(i).length() + 1 : ((ListItem) item).getOpeningMarker().length();
+                    maxLen = Math.max(maxLen, length);
+                    minLen = Math.min(minLen, length);
+                    i++;
+                }
+            }
+
+            if (maxLen != minLen) {
+                int finalMaxLen = maxLen;
+                document.set(LIST_ALIGN_NUMERIC, formatterOptions.listAlignNumeric.isLeft()
+                        ? sequence -> Pair.of(0, Math.min(4, Math.max(0, finalMaxLen - sequence.length())))
+                        : sequence -> Pair.of(Math.min(4, Math.max(0, finalMaxLen - sequence.length())), 0)
+                );
+            }
+        }
+
         document.set(LIST_ITEM_SPACING, itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE) ? ListSpacing.LOOSE : itemSpacing);
         for (Node item : itemList) {
             if (itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE)) markdown.blankLine();
@@ -711,6 +745,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
         document.set(LIST_ITEM_SPACING, listSpacing);
         document.set(LIST_ITEM_NUMBER, listItemNumber);
+        document.set(LIST_ALIGN_NUMERIC, listAlignNumeric);
 
         if (!node.isOrDescendantOfType(ListItem.class)) {
             markdown.tailBlankLine();
@@ -800,7 +835,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
 
             CharSequence openingMarker = node.getOpeningMarker();
-            if (node instanceof OrderedListItem) {
+            if (node.isOrderedItem()) {
                 char delimiter = openingMarker.charAt(openingMarker.length() - 1);
                 CharSequence number = openingMarker.subSequence(0, openingMarker.length() - 1);
 
@@ -817,14 +852,19 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         throw new IllegalStateException("Missing case for ListNumberedMarker " + options.listNumberedMarker.name());
                 }
 
+                Document document = context.getDocument();
+
                 if (options.listRenumberItems) {
-                    Document document = context.getDocument();
                     Integer itemNumber = LIST_ITEM_NUMBER.get(document);
                     openingMarker = String.format(Locale.US, "%d%c", itemNumber++, delimiter);
                     document.set(LIST_ITEM_NUMBER, itemNumber);
                 } else {
                     openingMarker = String.format("%s%c", number, delimiter);
                 }
+
+                Pair<Integer, Integer> padding = LIST_ALIGN_NUMERIC.get(document).apply(openingMarker);
+                if (padding.getFirst() > 0) openingMarker = RepeatedSequence.ofSpaces(padding.getFirst()).toString() + openingMarker.toString();
+                if (padding.getSecond() > 0) openingMarker = openingMarker.toString() + RepeatedSequence.ofSpaces(padding.getSecond()).toString();
             } else {
                 if (node.canChangeMarker()) {
                     switch (options.listBulletMarker) {
@@ -851,7 +891,9 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             markdown.pushPrefix().addPrefix(prefix, true);
 
-            markdown.append(openingMarker).append(' ').append(markerSuffix);
+            markdown.pushOptions()
+                    .preserveSpaces().append(openingMarker).append(' ').append(markerSuffix)
+                    .popOptions();
 
             if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
                 context.renderChildren(node);
@@ -941,14 +983,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
                     }
 
-                    markdown.openPreFormatted(false);
-                    markdown.pushPrefix();
-                    markdown.setPrefix("", false);
                     BasedSequence wrapped = formatter.wrapTextNotTracked().toMapped(SpaceMapper.fromNonBreakSpace);
-                    markdown.append(wrapped);
-                    markdown.line();
-                    markdown.popPrefix();
-                    markdown.closePreFormatted();
+
+                    markdown.openPreFormatted(false).pushPrefix().setPrefix("", false)
+                            .append(wrapped).line()
+                            .popPrefix().closePreFormatted();
                 }
             } else {
                 context.renderChildren(node);
@@ -1303,7 +1342,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     } else {
                         // need to set pre-formatted or spaces after eol are ignored assuming prefixes are used
                         int saved = markdown.getOptions();
-                        markdown.setOptions(saved & ~LineAppendable.F_TRIM_LEADING_WHITESPACE);
+                        markdown.setOptions(saved & ~F_TRIM_LEADING_WHITESPACE);
                         markdown.append(sequence);
                         markdown.setOptions(saved);
                     }

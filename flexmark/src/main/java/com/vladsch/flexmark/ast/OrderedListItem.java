@@ -20,4 +20,9 @@ public class OrderedListItem extends ListItem {
     public OrderedListItem(BlockContent blockContent) {
         super(blockContent);
     }
+
+    @Override
+    public boolean isOrderedItem() {
+        return true;
+    }
 }

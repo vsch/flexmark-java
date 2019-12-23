@@ -62,8 +62,6 @@ public class FormatterOptions {
     public final TrailingSpaces keepTrailingSpaces;
     public final TrailingSpaces codeKeepTrailingSpaces;
     public final ContinuationIndent paragraphContinuationIndent;
-    public final boolean listAlignFirstLineText;
-    public final boolean listAlignChildBlocks;
     public final ElementAlignment listAlignNumeric;
     public final boolean listResetFirstItemNumber;
     public final String formatterOnTag;
@@ -104,8 +102,6 @@ public class FormatterOptions {
         fencedCodeMarkerLength = Formatter.FENCED_CODE_MARKER_LENGTH.get(options);
         fencedCodeMarkerType = Formatter.FENCED_CODE_MARKER_TYPE.get(options);
         listAddBlankLineBefore = Formatter.LIST_ADD_BLANK_LINE_BEFORE.get(options);
-        listAlignFirstLineText = Formatter.LIST_ALIGN_FIRST_LINE_TEXT.get(options);
-        listAlignChildBlocks = Formatter.LIST_ALIGN_CHILD_BLOCKS.get(options);
         listAlignNumeric = Formatter.LIST_ALIGN_NUMERIC.get(options);
         listResetFirstItemNumber = Formatter.LIST_RESET_FIRST_ITEM_NUMBER.get(options);
         listRenumberItems = Formatter.LIST_RENUMBER_ITEMS.get(options);

@@ -8,7 +8,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.82](#next-05982)
+- [0.59.82](#05982)
 - [0.59.80](#05980)
 - [0.59.78](#05978)
 - [0.59.76](#05976)
@@ -212,20 +212,21 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.82
+## 0.59.82
 
-* [ ] Add: missing formatter options:
+* Add: missing formatter options:
   * `HeadingStyle`
   * `BLOCK_QUOTE_CONTINUATION_MARKERS`
-  * [ ] `LIST_RESET_FIRST_ITEM_NUMBER`
-  * [ ] `LIST_ALIGN_FIRST_LINE_TEXT`
-  * [ ] `LIST_ALIGN_CHILD_BLOCKS`
-  * [ ] `LIST_ALIGN_NUMERIC`
-  * [ ] `flexmark-ext-spec-example`
-    * `KEEP_TRAILING_SPACES` option
-  * [ ] `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
-        attributes node text.
+  * `LIST_RESET_FIRST_ITEM_NUMBER` applies if renumbering items
+  * `LIST_ALIGN_NUMERIC`
+  * `flexmark-ext-attributes` formatting of individual attributes instead of dumping the
+    attributes node text.
     * `FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE`
+    * `FORMAT_SORT_ATTRIBUTES`
+    * `FORMAT_ID_ATTRIBUTE`, `AttributeImplicitName` enum, as is, implicit preferred, explicit
+      preferred
+    * `FORMAT_CLASS_ATTRIBUTE`, `AttributeImplicitName` enum, as is, implicit preferred,
+      explicit preferred
     * `FORMAT_ATTRIBUTES_SPACES`
     * `FORMAT_ATTRIBUTE_EQUAL_SPACE`
     * `FORMAT_ATTRIBUTE_VALUE_QUOTES`

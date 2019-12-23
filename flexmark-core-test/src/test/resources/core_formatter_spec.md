@@ -499,51 +499,9 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 16) options(list-no-renumber-items)
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-.
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 17) options(list-no-renumber-items, list-numbered-paren)
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-.
-1) item 1
-1) item 2
-   1) item 2.1
-   1) item 2.2
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 18) options(list-no-renumber-items, list-numbered-dot)
-1) item 1
-1) item 2
-   1) item 2.1
-   1) item 2.2
-.
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-
-````````````````````````````````
-
-
 list spacing
 
-```````````````````````````````` example Lists: 19
+```````````````````````````````` example Lists: 16
 * item 1
 * item 2
   * item 2.1
@@ -565,7 +523,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 20) options(list-spacing-loose)
+```````````````````````````````` example(Lists: 17) options(list-spacing-loose)
 * item 1
 * item 2
   * item 2.1
@@ -587,7 +545,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 21) options(list-spacing-tight)
+```````````````````````````````` example(Lists: 18) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -605,7 +563,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 22) options(list-spacing-loosen)
+```````````````````````````````` example(Lists: 19) options(list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
@@ -627,7 +585,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 23) options(list-spacing-tighten)
+```````````````````````````````` example(Lists: 20) options(list-spacing-tighten)
 * item 1
 * item 2
   * item 2.1
@@ -646,7 +604,7 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 24) options(list-spacing-tighten)
+```````````````````````````````` example(Lists: 21) options(list-spacing-tighten)
 * item 1
 * item 2
   * item 2.1
@@ -668,7 +626,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 25) options(list-spacing-tight)
+```````````````````````````````` example(Lists: 22) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -691,7 +649,7 @@ paragraph
 
 list family changing
 
-```````````````````````````````` example(Lists: 26) options(format-fixed-indent)
+```````````````````````````````` example(Lists: 23) options(format-fixed-indent)
 * item 1
 * item 2
   * item 2.1
@@ -713,7 +671,7 @@ list family changing
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 27
+```````````````````````````````` example Lists: 24
 - [link](link.txt)
 
 next line
@@ -724,7 +682,7 @@ next line
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 28
+```````````````````````````````` example Lists: 25
 - [link](link.txt)
 
 next line
@@ -732,6 +690,282 @@ next line
 - [link](link.txt)
 
 next line
+````````````````````````````````
+
+
+### Ordered
+
+```````````````````````````````` example(Lists - Ordered: 1) options(list-no-renumber-items)
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+.
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Ordered: 2) options(list-no-renumber-items, list-numbered-paren)
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+.
+1) item 1
+1) item 2
+   1) item 2.1
+   1) item 2.2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Ordered: 3) options(list-no-renumber-items, list-numbered-dot)
+1) item 1
+1) item 2
+   1) item 2.1
+   1) item 2.2
+.
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Ordered: 4) options(list-reset-first-item)
+2. item 1
+3. item 2
+   4. item 2.1
+   1. item 2.2
+.
+1. item 1
+2. item 2
+   1. item 2.1
+   2. item 2.2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Ordered: 5) options(list-no-renumber-items, list-reset-first-item)
+2. item 1
+3. item 2
+   4. item 2.1
+   1. item 2.2
+.
+2. item 1
+3. item 2
+   4. item 2.1
+   1. item 2.2
+
+````````````````````````````````
+
+
+#### Align Left
+
+```````````````````````````````` example(Lists - Ordered - Align Left: 1) options(list-reset-first-item, list-align-numeric-left)
+2. item 1
+3. item 2
+   10. item 2.1
+   1. item 2.2
+   1. item 2.2
+   1. item 2.2
+   1. item 2.2
+   100. item 2.2
+   1. item 2.2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+300. item 2
+3. item 2
+30. item 2
+3. item 2
+.
+1.  item 1
+2.  item 2
+    1. item 2.1
+    2. item 2.2
+    3. item 2.2
+    4. item 2.2
+    5. item 2.2
+    6. item 2.2
+    7. item 2.2
+3.  item 2
+4.  item 2
+5.  item 2
+6.  item 2
+7.  item 2
+8.  item 2
+9.  item 2
+10. item 2
+11. item 2
+12. item 2
+13. item 2
+14. item 2
+15. item 2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Ordered - Align Left: 2) options(list-no-renumber-items, list-reset-first-item, list-align-numeric-left)
+2. item 1
+3. item 2
+   10. item 2.1
+   1. item 2.2
+   1. item 2.2
+   1. item 2.2
+   1. item 2.2
+   100. item 2.2
+   1. item 2.2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+300. item 2
+3. item 2
+30. item 2
+3. item 2
+.
+2.   item 1
+3.   item 2
+     10.  item 2.1
+     1.   item 2.2
+     1.   item 2.2
+     1.   item 2.2
+     1.   item 2.2
+     100. item 2.2
+     1.   item 2.2
+3.   item 2
+3.   item 2
+3.   item 2
+3.   item 2
+3.   item 2
+3.   item 2
+3.   item 2
+3.   item 2
+3.   item 2
+300. item 2
+3.   item 2
+30.  item 2
+3.   item 2
+
+````````````````````````````````
+
+
+#### Right Left
+
+```````````````````````````````` example(Lists - Ordered - Right Left: 1) options(list-reset-first-item, list-align-numeric-right)
+2. item 1
+3. item 2
+   10. item 2.1
+   1. item 2.2
+   1. item 2.2
+   1. item 2.2
+   1. item 2.2
+   100. item 2.2
+   1. item 2.2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+300. item 2
+3. item 2
+30. item 2
+3. item 2
+.
+ 1. item 1
+ 2. item 2
+    1. item 2.1
+    2. item 2.2
+    3. item 2.2
+    4. item 2.2
+    5. item 2.2
+    6. item 2.2
+    7. item 2.2
+ 3. item 2
+ 4. item 2
+ 5. item 2
+ 6. item 2
+ 7. item 2
+ 8. item 2
+ 9. item 2
+10. item 2
+11. item 2
+12. item 2
+13. item 2
+14. item 2
+15. item 2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Ordered - Right Left: 2) options(list-no-renumber-items, list-reset-first-item, list-align-numeric-right)
+2. item 1
+3. item 2
+   10. item 2.1
+   1. item 2.2
+   1. item 2.2
+   1. item 2.2
+   1. item 2.2
+   100. item 2.2
+   1. item 2.2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+3. item 2
+300. item 2
+3. item 2
+30. item 2
+3. item 2
+.
+  2. item 1
+  3. item 2
+      10. item 2.1
+       1. item 2.2
+       1. item 2.2
+       1. item 2.2
+       1. item 2.2
+     100. item 2.2
+       1. item 2.2
+  3. item 2
+  3. item 2
+  3. item 2
+  3. item 2
+  3. item 2
+  3. item 2
+  3. item 2
+  3. item 2
+  3. item 2
+300. item 2
+  3. item 2
+ 30. item 2
+  3. item 2
+
 ````````````````````````````````
 
 
@@ -799,7 +1033,7 @@ Document[0, 22]
 > 1. numbered item 1
 .
 >> block quote
-> > lazy continuation
+>> lazy continuation
 >
 > ~~~info
 >   indented code
@@ -860,7 +1094,7 @@ Document[0, 131]
 > * list item
 >
 >> block quote
-> > lazy continuation
+>> lazy continuation
 >
 > ~~~info
 >    with uneven indent

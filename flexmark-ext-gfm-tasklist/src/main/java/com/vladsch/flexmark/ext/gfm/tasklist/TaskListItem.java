@@ -65,6 +65,7 @@ public class TaskListItem extends ListItem {
         return !markerSuffix.matches("[ ]");
     }
 
+    @Override
     public boolean isOrderedItem() {
         return isOrderedItem;
     }

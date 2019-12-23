@@ -293,11 +293,15 @@ public class TestUtils {
     }
 
     public static void addSpecExample(boolean includeExampleStart, boolean toVisibleSpecText, StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
+        addSpecExample(false, includeExampleStart, toVisibleSpecText, sb, source, html, ast, optionsSet, includeExampleCoords, section, number);
+    }
+
+    public static void addSpecExample(boolean useTestExample, boolean includeExampleStart, boolean toVisibleSpecText, StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
         // include source so that diff can be used to update spec
         StringBuilder header = new StringBuilder();
 
         if (includeExampleStart) {
-            header.append(SpecReader.EXAMPLE_START);
+            header.append(useTestExample ? SpecReader.EXAMPLE_TEST_START : SpecReader.EXAMPLE_START);
             if (includeExampleCoords) {
                 if (optionsSet != null) {
                     header.append("(").append(section == null ? "" : section.trim()).append(": ").append(number).append(")");
@@ -317,13 +321,13 @@ public class TestUtils {
         sb.append(header);
 
         // FIX: When multi-sections are implemented need a way to specify per section visibleSpecText
-        String sourceAndHtml = suffixWithEol(source) + SpecReader.TYPE_BREAK + "\n" + suffixWithEol(html);
+        String sourceAndHtml = suffixWithEol(source) + (useTestExample ? SpecReader.TYPE_TEST_BREAK : SpecReader.TYPE_BREAK) + "\n" + suffixWithEol(html);
         sb.append(toVisibleSpecText ? toVisibleSpecText(sourceAndHtml) : sourceAndHtml);
         if (ast != null) {
-            sb.append(SpecReader.TYPE_BREAK).append("\n");
+            sb.append(useTestExample ? SpecReader.TYPE_TEST_BREAK : SpecReader.TYPE_BREAK).append("\n");
             sb.append(ast);
         }
-        sb.append(SpecReader.EXAMPLE_BREAK).append("\n");
+        sb.append(useTestExample ? SpecReader.EXAMPLE_TEST_BREAK : SpecReader.EXAMPLE_BREAK).append("\n");
     }
 
     /**

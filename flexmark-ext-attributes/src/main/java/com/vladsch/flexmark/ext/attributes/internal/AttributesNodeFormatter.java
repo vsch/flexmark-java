@@ -3,10 +3,7 @@ package com.vladsch.flexmark.ext.attributes.internal;
 import com.vladsch.flexmark.ast.AnchorRefTarget;
 import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockVisitor;
-import com.vladsch.flexmark.ext.attributes.AttributeNode;
-import com.vladsch.flexmark.ext.attributes.AttributesDelimiter;
-import com.vladsch.flexmark.ext.attributes.AttributesExtension;
-import com.vladsch.flexmark.ext.attributes.AttributesNode;
+import com.vladsch.flexmark.ext.attributes.*;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
@@ -14,7 +11,10 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.html.Attribute;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,6 +27,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATION_MAP = new DataKey<>("ATTRIBUTE_TRANSLATION_MAP", HashMap::new);
     public static final DataKey<Map<String, String>> ATTRIBUTE_TRANSLATED_MAP = new DataKey<>("ATTRIBUTE_TRANSLATED_MAP", HashMap::new);
     public static final DataKey<Map<String, String>> ATTRIBUTE_ORIGINAL_ID_MAP = new DataKey<>("ATTRIBUTE_ORIGINAL_ID_MAP", HashMap::new);
+    public static final DataKey<Set<Node>> PROCESSED_ATTRIBUTES = new DataKey<>("PROCESSED_ATTRIBUTES", HashSet::new);
 
     // need to have this one available in core formatter
     public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = CoreNodeFormatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP;
@@ -38,7 +39,6 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     private Map<String, String> attributeTranslatedMap;
     private Map<String, String> attributeOriginalIdMap;
     private Map<String, String> attributeUniquificationIdMap;
-    private Map<String, String> attributeCategoryUniquificationMap;
     private int attributeOriginalId;
     final private AttributesFormatOptions formatOptions;
 
@@ -103,6 +103,9 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
             attributeOriginalId = 0;
 
             if (phase == FormattingPhase.COLLECT) {
+                // NOTE: clear processed attributes set
+                context.getDocument().remove(PROCESSED_ATTRIBUTES);
+
                 if (context.getRenderPurpose() == TRANSLATION_SPANS) {
                     context.getTranslationStore().set(ATTRIBUTE_TRANSLATION_MAP, new HashMap<String, String>());
                     context.getTranslationStore().set(ATTRIBUTE_TRANSLATED_MAP, new HashMap<String, String>());
@@ -441,13 +444,217 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
             }
             markdown.append(node.getClosingMarker());
         } else {
-            // IMPORTANT: implement formatting options
-            markdown.append(node.getChars());
+            Set<Node> processedNodes = PROCESSED_ATTRIBUTES.get(context.getDocument());
+            if (processedNodes.contains(node)) return;
+
+            BasedSequence chars = node.getChars();
+            BasedSequence openMarker = node.getOpeningMarker();
+            BasedSequence closeMarker = node.getClosingMarker();
+            BasedSequence spaceAfterOpenMarker = chars.safeBaseCharAt(openMarker.getEndOffset()) == ' ' ? chars.baseSubSequence(openMarker.getEndOffset(), openMarker.getEndOffset() + 1) : BasedSequence.NULL;
+            BasedSequence spaceBeforeCloseMarker = chars.safeBaseCharAt(closeMarker.getStartOffset() - 1) == ' ' ? chars.baseSubSequence(closeMarker.getStartOffset() - 1, closeMarker.getStartOffset()) : BasedSequence.NULL;
+
+            switch (formatOptions.attributesSpaces) {
+                case AS_IS:
+                    break;
+                case ADD:
+                    spaceAfterOpenMarker = BasedSequence.SPACE;
+                    spaceBeforeCloseMarker = BasedSequence.SPACE;
+                    break;
+                case REMOVE:
+                    spaceAfterOpenMarker = BasedSequence.NULL;
+                    spaceBeforeCloseMarker = BasedSequence.NULL;
+                    break;
+            }
+
+            markdown.append(node.getOpeningMarker());
+            markdown.append(spaceAfterOpenMarker);
+            AttributeValueQuotes valueQuotes = formatOptions.attributeValueQuotes;
+
+            boolean firstChild = true;
+
+            LinkedHashMap<String, AttributeNode> attributeNodes = new LinkedHashMap<>();
+
+            if (formatOptions.attributesCombineConsecutive) {
+                // see if there are attributes applicable to the same owner as this node
+                NodeAttributeRepository nodeAttributeRepository = AttributesExtension.NODE_ATTRIBUTES.get(context.getDocument());
+                for (Map.Entry<Node, ArrayList<AttributesNode>> entry : nodeAttributeRepository.entrySet()) {
+                    if (entry.getValue().contains(node)) {
+                        // have our list
+                        for (AttributesNode attributesNode : entry.getValue()) {
+                            processedNodes.add(attributesNode);
+
+                            for (Node child : attributesNode.getChildren()) {
+                                AttributeNode attributeNode = (AttributeNode) child;
+                                attributeNodes.put(attributeNode.getName().toString(), combineAttributes(attributeNodes, attributeNode));
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (attributeNodes.isEmpty()) {
+                for (Node child : node.getChildren()) {
+                    AttributeNode attributeNode = (AttributeNode) child;
+                    attributeNodes.put(attributeNode.getName().toString(), combineAttributes(attributeNodes, attributeNode));
+                }
+            }
+
+            Collection<AttributeNode> childNodes;
+            if (formatOptions.formatSortAttributes) {
+                ArrayList<Map.Entry<String, AttributeNode>> entries = new ArrayList<>(attributeNodes.entrySet());
+                entries.sort((o1, o2) -> {
+                    if (o1.getValue().isId()) return -1;
+                    if (o2.getValue().isId()) return 1;
+                    if (o1.getValue().isClass()) return -1;
+                    if (o2.getValue().isClass()) return 1;
+                    return o1.getValue().getName().compareTo(o2.getValue().getName());
+                });
+
+                ArrayList<AttributeNode> nodes = new ArrayList<>(entries.size());
+                for (Map.Entry<String, AttributeNode> entry : entries) {
+                    nodes.add(entry.getValue());
+                }
+                childNodes = nodes;
+            } else {
+                childNodes = attributeNodes.values();
+            }
+
+            for (Node child : childNodes) {
+                AttributeNode attributeNode = (AttributeNode) child;
+
+                if (!firstChild) markdown.append(' ');
+
+                // has name and value
+                BasedSequence attrChars = attributeNode.getChars();
+
+                BasedSequence name = attributeNode.getName();
+                BasedSequence value = attributeNode.getValue();
+                BasedSequence sep = attributeNode.getAttributeSeparator();
+
+                BasedSequence spaceBeforeSep = attrChars.safeBaseCharAt(sep.getStartOffset() - 1) == ' ' ? attrChars.baseSubSequence(sep.getStartOffset() - 1, sep.getStartOffset()) : BasedSequence.NULL;
+                BasedSequence spaceAfterSep = attrChars.safeBaseCharAt(sep.getEndOffset()) == ' ' ? attrChars.baseSubSequence(sep.getEndOffset(), sep.getEndOffset() + 1) : BasedSequence.NULL;
+
+                switch (formatOptions.attributeEqualSpace) {
+                    case AS_IS:
+                        break;
+                    case ADD:
+                        spaceBeforeSep = BasedSequence.SPACE;
+                        spaceAfterSep = BasedSequence.SPACE;
+                        break;
+                    case REMOVE:
+                        spaceBeforeSep = BasedSequence.NULL;
+                        spaceAfterSep = BasedSequence.NULL;
+                        break;
+                }
+
+                String quote = valueQuotes.quotesFor(value, attributeNode.getOpeningMarker());
+                String needQuote = AttributeValueQuotes.NO_QUOTES_DOUBLE_PREFERRED.quotesFor(value, "");
+
+                if (attributeNode.isId()) {
+                    switch (needQuote.isEmpty() ? formatOptions.formatIdAttribute : AttributeImplicitName.EXPLICIT_PREFERED) {
+                        case AS_IS:
+                            break;
+                        case IMPLICIT_PREFERED:
+                            if (!attributeNode.isImplicitName()) {
+                                name = PrefixedSubSequence.prefixOf("#", name.getEmptyPrefix());
+                                sep = BasedSequence.NULL;
+                            }
+                            break;
+
+                        case EXPLICIT_PREFERED:
+                            if (attributeNode.isImplicitName()) {
+                                name = PrefixedSubSequence.prefixOf("id", name.getEmptyPrefix());
+                                sep = PrefixedSubSequence.prefixOf("=", name.getEmptySuffix());
+                                if (quote.isEmpty() && !needQuote.isEmpty()) quote = needQuote;
+                            }
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + formatOptions.formatIdAttribute);
+                    }
+                } else if (attributeNode.isClass()) {
+                    switch (needQuote.isEmpty() ? formatOptions.formatClassAttribute : AttributeImplicitName.EXPLICIT_PREFERED) {
+                        case AS_IS:
+                            break;
+                        case IMPLICIT_PREFERED:
+                            if (!attributeNode.isImplicitName()) {
+                                name = PrefixedSubSequence.prefixOf(".", name.getEmptyPrefix());
+                                sep = BasedSequence.NULL;
+                            }
+                            break;
+
+                        case EXPLICIT_PREFERED:
+                            if (attributeNode.isImplicitName()) {
+                                name = PrefixedSubSequence.prefixOf("class", name.getEmptyPrefix());
+                                sep = PrefixedSubSequence.prefixOf("=", name.getEmptySuffix());
+                                if (quote.isEmpty() && !needQuote.isEmpty()) quote = needQuote;
+                            }
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + formatOptions.formatIdAttribute);
+                    }
+                }
+
+                markdown.append(name);
+                if (!sep.isEmpty()) markdown.append(spaceBeforeSep).append(sep).append(spaceAfterSep);
+
+                if (!quote.isEmpty()) {
+                    String replaceQuote = quote.equals("'") ? "&apos;" : quote.equals("\"") ? "&quot;" : "";
+                    markdown.append(quote);
+                    markdown.append(value.replace(quote, replaceQuote));
+                    markdown.append(quote);
+                } else {
+                    markdown.append(value);
+                }
+
+                firstChild = false;
+            }
+
+            markdown.append(spaceBeforeCloseMarker);
+            markdown.append(node.getClosingMarker());
         }
 
         Node next = node.getNext();
         if (next != null && !(next instanceof AttributesNode) && !node.getChars().isContinuedBy(next.getChars()) && !node.getChars().endsWith(" ") && !next.getChars().startsWith(" ")) {
             markdown.append(' ');
+        }
+    }
+
+    static AttributeNode combineAttributes(LinkedHashMap<String, AttributeNode> attributeNodes, AttributeNode attributeNode) {
+        if (attributeNode.isId()) {
+            attributeNodes.remove("id");
+            attributeNodes.remove("#");
+            return attributeNode;
+        } else if (attributeNode.isClass()) {
+            AttributeNode newNode = attributeNode;
+            AttributeNode removed1 = attributeNodes.remove(Attribute.CLASS_ATTR);
+            AttributeNode removed2 = attributeNodes.remove(".");
+            if (removed1 != null || removed2 != null) {
+                Attributes attributes = new Attributes();
+                if (removed1 != null) attributes.addValue(Attribute.CLASS_ATTR, removed1.getValue());
+                if (removed2 != null) attributes.addValue(Attribute.CLASS_ATTR, removed2.getValue());
+                String value = attributes.getValue(Attribute.CLASS_ATTR);
+                if (!attributeNode.getValue().equals(value)) {
+                    BasedSequence newValue = PrefixedSubSequence.prefixOf(value + " ", attributeNode.getValue());
+                    newNode = new AttributeNode(attributeNode.getName(), attributeNode.getAttributeSeparator(), attributeNode.getOpeningMarker(), newValue, attributeNode.getClosingMarker());
+                }
+            }
+            return newNode;
+        } else if (attributeNode.getName().equals(Attribute.STYLE_ATTR)) {
+            AttributeNode newNode = attributeNode;
+            AttributeNode removed1 = attributeNodes.remove(Attribute.STYLE_ATTR);
+            if (removed1 != null) {
+                Attributes attributes = new Attributes();
+                attributes.addValue(Attribute.STYLE_ATTR, removed1.getValue());
+                String value = attributes.getValue(Attribute.STYLE_ATTR);
+                if (!attributeNode.getValue().equals(value)) {
+                    BasedSequence newValue = PrefixedSubSequence.prefixOf(value + ";", attributeNode.getValue());
+                    newNode = new AttributeNode(attributeNode.getName(), attributeNode.getAttributeSeparator(), attributeNode.getOpeningMarker(), newValue, attributeNode.getClosingMarker());
+                }
+            }
+            return newNode;
+        } else {
+            return attributeNode;
         }
     }
 

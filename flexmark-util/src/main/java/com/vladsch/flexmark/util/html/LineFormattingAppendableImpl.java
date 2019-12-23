@@ -53,6 +53,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     private boolean lastWasWhitespace;                      // last char was whitespace
     private int lineOnFirstText;                            // append EOL on first text
     final private ArrayList<Runnable> indentsOnFirstEol;    // append indents on first eol
+    final private Stack<Integer> optionStack = new Stack<>();
 
     public LineFormattingAppendableImpl(Options... formatOptions) {
         this(null, LineAppendable.toOptionSet(formatOptions));
@@ -111,6 +112,31 @@ public class LineFormattingAppendableImpl implements LineAppendable {
         return this;
     }
 
+    @Override
+    public @NotNull LineAppendable pushOptions() {
+        optionStack.push(options.toInt());
+        return this;
+    }
+
+    @Override
+    public @NotNull LineAppendable popOptions() {
+        if (optionStack.isEmpty()) {
+            throw new IllegalStateException("Option stack is empty");
+        }
+        options.set(optionStack.pop());
+        return this;
+    }
+
+    @Override
+    public @NotNull LineAppendable changeOptions(int addFlags, int removeFlags) {
+        if ((addFlags & removeFlags) != 0) {
+            throw new IllegalStateException(String.format("Add flags:%d and remove flags:%d overlap:%d", addFlags, removeFlags, addFlags & removeFlags));
+        }
+        options.set(removeFlags);
+        options.clear(removeFlags);
+        return this;
+    }
+
     private boolean any(int flags) {
         return options.any(flags);
     }
@@ -147,6 +173,11 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     @Override
     public CharSequence getPrefix() {
         return prefixAfterEol;
+    }
+
+    @Override
+    public CharSequence getBeforeEolPrefix() {
+        return prefix;
     }
 
     @NotNull
@@ -363,18 +394,18 @@ public class LineFormattingAppendableImpl implements LineAppendable {
                 }
             } else {
                 // apply options other than convert tabs which is done at time of appending
-                if (isTrimLeadingWhitespace() &&
-                        (preFormattedNesting == 0 || preFormattedFirstLine == currentLine) &&
-                        preFormattedNesting == 0 && preFormattedLastLine != currentLine
-                ) {
-                    if (allWhitespace) {
-                        startOffset = endOffset - 1;
-                    } else {
-                        while (startOffset < endOffset && appendable.charAt(startOffset) == ' ') {
-                            startOffset++;
-                        }
-                    }
-                }
+//                if (isTrimLeadingWhitespace() &&
+//                        (preFormattedNesting == 0 || preFormattedFirstLine == currentLine) &&
+//                        preFormattedNesting == 0 && preFormattedLastLine != currentLine
+//                ) {
+//                    if (allWhitespace) {
+//                        startOffset = endOffset - 1;
+//                    } else {
+//                        while (startOffset < endOffset && appendable.charAt(startOffset) == ' ') {
+//                            startOffset++;
+//                        }
+//                    }
+//                }
 
                 if (isTrimTrailingWhitespace() && preFormattedNesting == 0) {
                     if (allWhitespace) {
@@ -513,10 +544,17 @@ public class LineFormattingAppendableImpl implements LineAppendable {
                     }
                 } else {
                     if (c == ' ') {
-                        if (preFormattedNesting == 0 && any(F_COLLAPSE_WHITESPACE)) {
-                            if (!lastWasWhitespace) {
-                                appendable.append(' ');
-                                appendBuilder(' ');
+                        if (preFormattedNesting == 0) {
+                            if (!any(F_TRIM_LEADING_WHITESPACE) || (lineStart != appendable.length() && !allWhitespace)) {
+                                if (any(F_COLLAPSE_WHITESPACE)) {
+                                    if (!lastWasWhitespace) {
+                                        appendable.append(' ');
+                                        appendBuilder(' ');
+                                    }
+                                } else {
+                                    appendable.append(' ');
+                                    appendBuilder(' ');
+                                }
                             }
                         } else {
                             appendable.append(' ');
