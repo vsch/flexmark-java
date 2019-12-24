@@ -2228,7 +2228,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, false));
+        assertTrue(table.addTrackedOffset(pos, true));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0);
