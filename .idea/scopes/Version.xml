@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Version" pattern="file:src/main/javadoc/overview.md||file[flexmark-java]:VERSION-TODO.md||file[flexmark-java]:VERSION.md" />
+</component>
