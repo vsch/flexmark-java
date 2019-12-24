@@ -77,7 +77,7 @@
       </directories>
       <filenames />
     </CopyImageHistory>
-    <PasteLinkHistory onPasteImageTargetRef="2" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteWikiElement="1" onPasteReferenceElement="1" hideInapplicableOperations="false" preserveLinkFormat="false" useHeadingForLinkText="false" saveAsDefaultOnOK="false" linkFormat="2" />
+    <PasteLinkHistory onPasteImageTargetRef="2" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteWikiElement="1" onPasteReferenceElement="1" hideInapplicableOperations="false" preserveLinkFormat="false" useHeadingForLinkText="false" linkFormat="2" saveAsDefaultOnOK="false" />
     <TableToJsonHistory>
       <entries />
     </TableToJsonHistory>

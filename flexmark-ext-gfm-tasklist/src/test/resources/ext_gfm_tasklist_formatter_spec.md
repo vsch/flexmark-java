@@ -1022,3 +1022,43 @@ ordered item priority high
 ````````````````````````````````
 
 
+do not add blank line if blank line is after end of list
+
+```````````````````````````````` example(Prioritized: 6) options(prioritized-tasks, ordered-task-item-priority-low, task-placement-incomplete-nested-first, list-bullet-asterisk)
+* Add: 
++ [ ] Add: 
++ [ ] Fix: 
+  + [ ] do not 
+
+.
++ [ ] Add:
++ [ ] Fix:
+  + [ ] do not
+* Add:
+
+````````````````````````````````
+
+
+do add blank line if blank line is after sub-list in middle of list
+
+```````````````````````````````` example(Prioritized: 7) options(prioritized-tasks, ordered-task-item-priority-low, task-placement-incomplete-nested-first, list-bullet-asterisk)
+* Add: 
++ [ ] Add: 
++ [ ] Fix: 
+  + [ ] do not 
+
++ [ ] Fix2: 
+  + [ ] do not2 
+    
+.
++ [ ] Add:
++ [ ] Fix:
+  + [ ] do not
+
++ [ ] Fix2:
+  + [ ] do not2
+* Add:
+
+````````````````````````````````
+
+

@@ -31,8 +31,8 @@
         <option name="HARDWRAPS" value="false" />
         <option name="HTML_DEEP_PARSER" value="false" />
         <option name="INSERTED" value="false" />
-        <option name="INTELLIJ_DUMMY_IDENTIFIER" value="false" />
-        <option name="MULTI_LINE_IMAGE_URLS" value="false" />
+        <option name="INTELLIJ_DUMMY_IDENTIFIER" value="true" />
+        <option name="MULTI_LINE_IMAGE_URLS" value="true" />
         <option name="QUOTES" value="false" />
         <option name="RELAXEDHRULES" value="true" />
         <option name="SMARTS" value="true" />
