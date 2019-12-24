@@ -19,7 +19,7 @@
           <option name="EXTANCHORLINKS_WRAP" value="false" />
           <option name="FENCED_CODE_BLOCKS" value="true" />
           <option name="FOOTNOTES" value="false" />
-          <option name="HARDWRAPS" value="true" />
+          <option name="HARDWRAPS" value="false" />
           <option name="HTML_DEEP_PARSER" value="false" />
           <option name="INSERTED" value="false" />
           <option name="INTELLIJ_DUMMY_IDENTIFIER" value="false" />
