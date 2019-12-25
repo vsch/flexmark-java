@@ -10,6 +10,7 @@ import org.junit.runners.Suite;
         ComboTableManipulationSpecTest.class,
         TableTextCollectingVisitorTest.class,
         MarkdownTableTest.class,
+        MarkdownTransposeTableTest.class,
         TableCellOffsetInfoTest.class,
         //JiraTablesSpecTest.class,
 })

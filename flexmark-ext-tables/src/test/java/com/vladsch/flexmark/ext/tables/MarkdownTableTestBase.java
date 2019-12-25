@@ -72,6 +72,32 @@ public class MarkdownTableTestBase {
         return getTable(markdown, null);
     }
 
+    protected String getTransposedTable(MarkdownTable table) {
+        return getTransposedTable(table, 1);
+    }
+
+    protected String getTransposedTable(
+            MarkdownTable table,
+            int columnHeaders
+    ) {
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable transposed = table.transpose(columnHeaders);
+        transposed.appendTable(out);
+        return out.toString(0);
+    }
+
+    protected String[] getTransposedTables(MarkdownTable[] tables) {
+        List<String> formatted = new ArrayList<>();
+
+        for (MarkdownTable table : tables) {
+            MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+            MarkdownTable transposed = table.transpose(1);
+            transposed.appendTable(out);
+            formatted.add(out.toString(0));
+        }
+        return formatted.toArray(new String[0]);
+    }
+
     protected MarkdownTable getTable(CharSequence markdown, DataHolder options) {
         MarkdownTable table = getTables(markdown, options)[0];
         table.normalize();

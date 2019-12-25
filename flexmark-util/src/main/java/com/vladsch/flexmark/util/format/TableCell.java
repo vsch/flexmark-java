@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.Utils.*;
 
@@ -92,6 +93,22 @@ public class TableCell {
         this.trackedTextAdjust = trackedTextAdjust;
         this.afterSpace = afterSpace;
         this.afterDelete = afterDelete;
+    }
+
+    public TableCell(@NotNull TableCell other, boolean copyNode, int rowSpan, int columnSpan, CellAlignment alignment) {
+        this.tableCellNode = copyNode ? other.tableCellNode : null;
+        this.openMarker = other.openMarker;
+        this.closeMarker = other.closeMarker;
+        BasedSequence useMarker = this.openMarker.isEmpty() ? this.closeMarker.subSequence(0, 0) : this.openMarker.subSequence(this.openMarker.length());
+        this.text = other.text == BasedSequence.NULL ? PrefixedSubSequence.prefixOf(" ", useMarker) : other.text;
+        this.rowSpan = rowSpan;
+        this.columnSpan = columnSpan;
+        this.alignment = alignment != null ? alignment : CellAlignment.NONE;
+        this.trackedTextOffset = other.trackedTextOffset;
+        this.spanTrackedOffset = other.spanTrackedOffset;
+        this.trackedTextAdjust = other.trackedTextAdjust;
+        this.afterSpace = other.afterSpace;
+        this.afterDelete = other.afterDelete;
     }
 
     public TableCell withColumnSpan(int columnSpan) { return new TableCell(tableCellNode, openMarker, text, closeMarker, rowSpan, columnSpan, alignment, trackedTextOffset, spanTrackedOffset == NOT_TRACKED ? NOT_TRACKED : min(spanTrackedOffset, columnSpan), trackedTextAdjust, afterSpace, afterDelete); }

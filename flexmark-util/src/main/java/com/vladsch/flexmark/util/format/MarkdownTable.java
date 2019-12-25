@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.ArrayUtils;
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.Node;
@@ -23,7 +24,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import static com.vladsch.flexmark.util.Utils.*;
+import static com.vladsch.flexmark.util.Utils.max;
+import static com.vladsch.flexmark.util.Utils.maxLimit;
+import static com.vladsch.flexmark.util.Utils.min;
+import static com.vladsch.flexmark.util.Utils.minLimit;
+import static com.vladsch.flexmark.util.Utils.rangeLimit;
+import static com.vladsch.flexmark.util.format.TableCell.DEFAULT_CELL;
 import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 
@@ -507,6 +513,7 @@ public class MarkdownTable {
      * empty
      *
      * @param column index in allRows list
+     *
      * @return true if column is empty for all rows, separator row excluded
      */
     public boolean isEmptyColumn(int column) {
@@ -526,6 +533,7 @@ public class MarkdownTable {
      * Test a row for having all empty columns
      *
      * @param rowIndex index in allRows list
+     *
      * @return true if row is empty or is a separator row
      */
     public boolean isAllRowsEmptyAt(int rowIndex) {
@@ -536,6 +544,7 @@ public class MarkdownTable {
      * Test a row for having all empty columns
      *
      * @param rowIndex index in allRows list
+     *
      * @return true if row is empty or is a separator row
      */
     public boolean isContentRowsEmptyAt(int rowIndex) {
@@ -547,6 +556,7 @@ public class MarkdownTable {
      *
      * @param rowIndex index in allRows list
      * @param sections sections to use for rows array generation
+     *
      * @return true if row is empty or is a separator row
      */
     private boolean isEmptyRowAt(int rowIndex, TableSection[] sections) {
@@ -583,6 +593,21 @@ public class MarkdownTable {
         isSeparator = separator;
     }
 
+    public void setHeader() {
+        isHeading = true;
+        isSeparator = false;
+    }
+
+    public void setSeparator() {
+        isSeparator = true;
+        isHeading = false;
+    }
+
+    public void setBody() {
+        isSeparator = false;
+        isHeading = false;
+    }
+
     public void nextRow() {
         if (isSeparator) throw new IllegalStateException("Only one separator row allowed");
         if (isHeading) {
@@ -595,7 +620,7 @@ public class MarkdownTable {
     /**
      * @param cell cell to add
      */
-    public void addCell(TableCell cell) {
+    public void addCell(@NotNull TableCell cell) {
         TableSection tableSection = isSeparator ? separator : isHeading ? header : body;
 
         if (isSeparator && (cell.columnSpan != 1 || cell.rowSpan != 1)) { throw new IllegalStateException("Separator columns cannot span rows/columns"); }
@@ -843,6 +868,240 @@ public class MarkdownTable {
         throw new IllegalStateException(String.format("offset: %d not in tracked offsets: %s", offset, trackedOffsets));
     }
 
+    /**
+     * Transpose table
+     *
+     * @param columnHeaders number of first columns to use as header rows, 0..maxColumns
+     *
+     * @return transposed table
+     */
+    public MarkdownTable transpose(int columnHeaders) {
+        MarkdownTable transposed = new MarkdownTable(options);
+        transposed.trackedOffsets.addAll(trackedOffsets);
+
+        int maxRows = getAllRowsCount() - 1; // don't count separator rows
+        int maxCols = getMaxColumns();
+        TableCell[][] tableCells = new TableCell[maxRows][];
+        for (int i = 0; i < maxRows; i++) {
+            tableCells[i] = new TableCell[maxCols];
+        }
+
+        // get a matrix of all cells
+        forAllSectionsRows(0, Integer.MAX_VALUE, ALL_CONTENT_ROWS, (row, allRowsIndex, sectionRows, sectionRowIndex) -> {
+            TableCell[] tableCellRow = tableCells[allRowsIndex];
+            int iMax = row.cells.size();
+            int col = 0;
+            for (int i = 0; i < iMax; i++) {
+                TableCell cell = row.cells.get(i);
+                for (int span = 0; span < cell.columnSpan; span++) {
+                    tableCellRow[col++] = new TableCell(cell, span == 0, 1, 1, null);
+                }
+            }
+            return 0;
+        });
+
+        transposed.setHeader();
+        int colHdrs = Math.min(Math.max(0, columnHeaders), maxCols);
+        for (int c = 0; c < colHdrs; c++) {
+            for (int r = 0; r < maxRows; r++) {
+                TableCell cell = tableCells[r][c];
+                transposed.addCell(cell == null ? DEFAULT_CELL : cell);
+            }
+            transposed.nextRow();
+        }
+
+        TableRow sepRow = separator.rows.get(0);
+        transposed.setSeparator();
+        int iMax = sepRow.cells.size();
+        for (int i = 0; i < maxRows; i++) {
+            if (i < iMax) {
+                transposed.addCell(new TableCell(sepRow.cells.get(i), true, 1, 1, null));
+            } else {
+                transposed.addCell(new TableCell("---", 1, 1));
+            }
+        }
+
+        transposed.setBody();
+        for (int c = colHdrs; c < maxCols; c++) {
+            for (int r = 0; r < maxRows; r++) {
+                TableCell cell = tableCells[r][c];
+                transposed.addCell(cell == null ? DEFAULT_CELL : cell);
+            }
+            transposed.nextRow();
+        }
+
+        transposed.setCaptionCell(getCaptionCell());
+
+        return transposed;
+    }
+
+    /**
+     * Sort table
+     *
+     * @param columnSorts column sorting to apply to column given by {@link Pair#getFirst()} and sort order by {@link Pair#getSecond()}
+     *
+     * @return sorted table
+     */
+    // TEST:
+    public MarkdownTable sorted(Pair<Integer, ColumnSort>[] columnSorts) {
+        MarkdownTable sorted = new MarkdownTable(options);
+        sorted.trackedOffsets.addAll(trackedOffsets);
+
+        sorted.setHeader();
+        forAllSectionsRows(0, Integer.MAX_VALUE, ALL_HEADER_ROWS, (row, allRowsIndex, sectionRows, sectionRowIndex) -> {
+            int iMax = row.cells.size();
+            for (int i = 0; i < iMax; i++) {
+                TableCell cell = row.cells.get(i);
+                sorted.addCell(cell == DEFAULT_CELL ? cell : new TableCell(cell, true, cell.rowSpan, cell.columnSpan, cell.alignment));
+            }
+            sorted.nextRow();
+            return 0;
+        });
+
+        sorted.setSeparator();
+        TableRow sepRow = separator.rows.get(0);
+        int iMax = sepRow.cells.size();
+        CellAlignment[] alignments = new CellAlignment[iMax];
+
+        for (int i = 0; i < iMax; i++) {
+            TableCell cell = sepRow.cells.get(i);
+            sorted.addCell(cell == DEFAULT_CELL ? cell : new TableCell(cell, true, cell.rowSpan, cell.columnSpan, cell.alignment));
+            alignments[i] = cell.alignment;
+        }
+
+        sorted.setBody();
+
+        List<TableRow> rows = getAllSectionsRows(body);
+        int[] cellSizes = new int[iMax];
+
+        int rMax = rows.size();
+        int cMax = getMaxBodyColumns();
+
+        for (int r = 0; r < rMax; r++) {
+            for (Pair<Integer, ColumnSort> columnSortPair : columnSorts) {
+                int c = columnSortPair.getFirst();
+                if (c < cMax) {
+                    IndexSpanOffset spanIndex = rows.get(r).indexOf(c);
+                    TableCell cell = rows.get(r).cells.get(spanIndex.index);
+                    if (spanIndex.index == c && cell != null) {
+                        // not in span
+                        cellSizes[c] = Math.max(cellSizes[c], cell.text.length());
+                    }
+                }
+            }
+        }
+
+        Comparator<TableRow> rowComparator = (o1, o2) -> {
+            for (Pair<Integer, ColumnSort> columnSortPair : columnSorts) {
+                int c = columnSortPair.getFirst();
+                if (c < cMax) {
+                    int cellSize = cellSizes[c];
+                    if (cellSize > 0) {
+                        // sorting on this column
+                        ColumnSort columnSort = columnSortPair.getSecond();
+                        boolean descending = columnSort.isDescending();
+                        boolean numeric = columnSort.isNumeric();
+                        boolean numericLast = columnSort.isNumericLast();
+
+                        IndexSpanOffset spanIndex1 = o1.indexOf(c);
+                        TableCell cell1 = o1.cells.get(spanIndex1.index);
+
+                        IndexSpanOffset spanIndex2 = o2.indexOf(c);
+                        TableCell cell2 = o2.cells.get(spanIndex2.index);
+                        int result;
+
+                        if (spanIndex1.index == c && cell1 != null && spanIndex2.index == c && cell2 != null) {
+                            // not in span, compare them by padding and aligning then comparing strings
+                            int padLeft1 = 0;
+                            int padLeft2 = 0;
+                            int padRight1 = 0;
+                            int padRight2 = 0;
+                            int diff1 = cellSize - cell1.text.length();
+                            int diff2 = cellSize - cell2.text.length();
+
+                            switch (alignments[c]) {
+                                case CENTER:
+                                    padLeft1 = diff1 >> 1;
+                                    padRight1 = cellSize - padLeft1;
+                                    padLeft2 = diff2 >> 1;
+                                    padRight2 = cellSize - padLeft2;
+                                    break;
+
+                                case RIGHT:
+                                    padLeft1 = diff1;
+                                    padLeft2 = diff2;
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
+                            if (numeric) {
+                                Double cell1Numeric = null;
+                                Double cell2Numeric = null;
+                                try {
+                                    // FIX: allow long if prefix 0x or 0b or starts with 0 and will parse as octal, else as decimal, else double
+                                    cell1Numeric = Double.parseDouble(cell1.text.toString());
+                                } catch (Throwable ignored) {}
+                                try {
+                                    // FIX: allow long if prefix 0x or 0b or starts with 0 and will parse as octal, else as decimal, else double
+                                    cell2Numeric = Double.parseDouble(cell2.text.toString());
+                                } catch (Throwable ignored) {}
+
+                                if (cell1Numeric != null && cell2Numeric != null) {
+                                    result = cell1Numeric.compareTo(cell2Numeric);
+                                } else if (cell1Numeric != null) {
+                                    result = numericLast ? 1 : -1;
+                                } else if (cell2Numeric != null) {
+                                    result = numericLast ? -1 : 1;
+                                } else {
+                                    // compare as text
+                                    String cell1Text = RepeatedSequence.ofSpaces(padLeft1).toString() + cell1.text.toString() + RepeatedSequence.ofSpaces(padRight1);
+                                    String cell2Text = RepeatedSequence.ofSpaces(padLeft2).toString() + cell2.text.toString() + RepeatedSequence.ofSpaces(padRight2);
+                                    result = cell1Text.compareTo(cell2Text);
+                                }
+                            } else {
+                                String cell1Text = RepeatedSequence.ofSpaces(padLeft1).toString() + cell1.text.toString() + RepeatedSequence.ofSpaces(padRight1);
+                                String cell2Text = RepeatedSequence.ofSpaces(padLeft2).toString() + cell2.text.toString() + RepeatedSequence.ofSpaces(padRight2);
+                                result = cell1Text.compareTo(cell2Text);
+                            }
+                        } else if (spanIndex1.index == c && cell1 != null) {
+                            // second in spanned column, so it is first
+                            result = 1;
+                        } else if (spanIndex2.index == c && cell2 != null) {
+                            // first in spanned column, so it is first
+                            result = -1;
+                        } else {
+                            result = 0;
+                        }
+
+                        if (result != 0) {
+                            return descending ? -result : result;
+                        }
+                    }
+                }
+            }
+            return 0;
+        };
+
+        rows.sort(rowComparator);
+
+        sorted.setBody();
+        rMax = rows.size();
+        for (int r = 0; r < rMax; r++) {
+            TableRow row = rows.get(r);
+            iMax = row.cells.size();
+            for (int i = 0; i < iMax; i++) {
+                TableCell cell = row.cells.get(i);
+                sorted.addCell(cell == DEFAULT_CELL ? cell : new TableCell(cell, true, cell.rowSpan, cell.columnSpan, cell.alignment));
+            }
+            sorted.nextRow();
+        }
+
+        sorted.setCaptionCell(getCaptionCell());
+        return sorted;
+    }
+
     public void appendTable(LineAppendable out) {
         // we will prepare the separator based on max columns
         Ref<Integer> delta = new Ref<>(0);
@@ -992,7 +1251,7 @@ public class MarkdownTable {
 
                     out.line();
 
-                    if (row != null && row.beforeOffset != NOT_TRACKED) {
+                    if (row.beforeOffset != NOT_TRACKED) {
                         setTrackedOffsetIndex(row.beforeOffset, out.offsetWithPending());
                     }
 
@@ -1049,7 +1308,7 @@ public class MarkdownTable {
                     if (addCloseCaptionSpace) out.append(' ');
                     out.append(']');
 
-                    if (row != null && row.afterOffset != NOT_TRACKED) {
+                    if (row.afterOffset != NOT_TRACKED) {
                         setTrackedOffsetIndex(row.afterOffset, out.offsetWithPending());
                     }
                     out.line();

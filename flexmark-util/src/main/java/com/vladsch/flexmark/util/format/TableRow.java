@@ -266,7 +266,7 @@ public class TableRow {
         if (fromColumn >= maxColumn) return;
         if (toColumn >= maxColumn) toColumn = maxColumn - 1;
 
-        if (fromColumn != toColumn && fromColumn < maxColumn && toColumn < maxColumn) {
+        if (fromColumn != toColumn && toColumn < maxColumn) {
             MarkdownTable.IndexSpanOffset fromIndexSpan = indexOf(fromColumn);
             int fromIndex = fromIndexSpan.index;
             int fromSpanOffset = fromIndexSpan.spanOffset;
@@ -323,7 +323,7 @@ public class TableRow {
                 // diagnostic/3095, text is not the right source for the sequence if closeMarker is not empty
                 empty = empty.withText(PrefixedSubSequence.prefixOf(" ", prevCell.getLastSegment().getBaseSequence(), endOffset, endOffset));
 
-                cells.add(columnIndex <= cells.size() ? columnIndex : cells.size(), empty);
+                cells.add(Math.min(columnIndex, cells.size()), empty);
                 prevCell = empty;
                 columnIndex++;
             }
