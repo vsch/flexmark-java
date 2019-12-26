@@ -9,6 +9,7 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -24,7 +25,7 @@ public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor 
     private final AbbreviationOptions options;
     private final AbbreviationRepository abbreviationMap;
 
-    private AbbreviationParagraphPreProcessor(DataHolder options) {
+    AbbreviationParagraphPreProcessor(DataHolder options) {
         this.options = new AbbreviationOptions(options);
         abbreviationMap = AbbreviationExtension.ABBREVIATIONS.get(options);
     }
@@ -75,7 +76,7 @@ public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor 
                 return null;
             }
 
-            @Nullable
+            @NotNull
             @Override
             public Set<Class<?>> getBeforeDependents() {
                 HashSet<Class<?>> set = new HashSet<>();

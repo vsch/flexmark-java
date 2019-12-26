@@ -2,12 +2,14 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
+import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class Paragraph extends Block {
+public class Paragraph extends Block implements TextContainer {
     private static int[] EMPTY_INDENTS = new int[0];
     private int[] lineIndents = EMPTY_INDENTS;
     private boolean trailingBlankLine = false;
@@ -128,5 +130,13 @@ public class Paragraph extends Block {
 
     public boolean hasTableSeparator() {
         return hasTableSeparator;
+    }
+
+    @Override
+    public boolean collectText(@NotNull SequenceBuilder out, int flags) {
+        if (!out.isEmpty()) {
+            out.add("\n\n");
+        }
+        return true;
     }
 }

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.java.samples;
 
-import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profile.pegdown.Extensions;
 import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;

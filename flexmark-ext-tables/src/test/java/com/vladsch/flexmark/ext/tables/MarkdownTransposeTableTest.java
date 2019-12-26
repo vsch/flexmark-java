@@ -92,7 +92,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 "");
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = tables[0].transpose(1);
+        MarkdownTable transposed = tables[0].transposed(1);
         transposed.appendTable(out);
 
         assertEquals("", "" +
@@ -113,7 +113,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 "");
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = tables[0].transpose(1);
+        MarkdownTable transposed = tables[0].transposed(1);
         transposed.appendTable(out);
 
         assertEquals("", "" +
@@ -137,7 +137,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 "");
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = tables[0].transpose(0);
+        MarkdownTable transposed = tables[0].transposed(0);
         transposed.appendTable(out);
 
         assertEquals("", "" +
@@ -163,7 +163,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 "");
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = tables[0].transpose(1);
+        MarkdownTable transposed = tables[0].transposed(1);
         transposed.appendTable(out);
 
         assertEquals("", "" +
@@ -188,7 +188,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 "");
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = tables[0].transpose(2);
+        MarkdownTable transposed = tables[0].transposed(2);
         transposed.appendTable(out);
 
         assertEquals("", "" +
@@ -213,7 +213,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 "");
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = tables[0].transpose(3);
+        MarkdownTable transposed = tables[0].transposed(3);
         transposed.appendTable(out);
 
         assertEquals("", "" +
@@ -238,7 +238,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 "");
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = tables[0].transpose(4);
+        MarkdownTable transposed = tables[0].transposed(4);
         transposed.appendTable(out);
 
         assertEquals("", "" +
@@ -266,7 +266,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = table.transpose(1);
+        MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);
         String transposedTable = out.toString(0);
         int offset = transposed.getTrackedOffsetIndex(pos);
@@ -309,7 +309,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = table.transpose(1);
+        MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);
         String transposedTable = out.toString(0);
         int offset = transposed.getTrackedOffsetIndex(pos);
@@ -352,7 +352,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
-        MarkdownTable transposed = table.transpose(1);
+        MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);
         String transposedTable = out.toString(0);
         int offset = transposed.getTrackedOffsetIndex(pos);

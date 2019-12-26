@@ -11,6 +11,7 @@ import org.junit.runners.Suite;
         TableTextCollectingVisitorTest.class,
         MarkdownTableTest.class,
         MarkdownTransposeTableTest.class,
+        MarkdownSortTableTest.class,
         TableCellOffsetInfoTest.class,
         //JiraTablesSpecTest.class,
 })

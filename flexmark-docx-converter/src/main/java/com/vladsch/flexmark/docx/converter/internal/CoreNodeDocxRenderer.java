@@ -3,7 +3,7 @@ package com.vladsch.flexmark.docx.converter.internal;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
-import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.docx.converter.*;
 import com.vladsch.flexmark.docx.converter.util.*;
 import com.vladsch.flexmark.ext.aside.AsideBlock;

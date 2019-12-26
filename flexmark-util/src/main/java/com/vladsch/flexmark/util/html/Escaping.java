@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.html;
 
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
@@ -51,6 +52,9 @@ public class Escaping {
     // From RFC 3986 (see "reserved", "unreserved") except don't escape '[' or ']' to be compatible with JS encodeURI
     private static final Pattern ESCAPE_IN_URI =
             Pattern.compile("(%[a-fA-F0-9]{0,2}|[^:/?#@!$&'()*+,;=a-zA-Z0-9\\-._~])");
+
+    private static final Pattern ESCAPE_URI_DECODE =
+            Pattern.compile("(%[a-fA-F0-9]{2})");
 
     static final char[] HEX_DIGITS =
             new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
@@ -148,7 +152,7 @@ public class Escaping {
         }
     };
 
-    private static final Replacer URI_REPLACER = new Replacer() {
+    private static final Replacer URL_ENCODE_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
             if (s.startsWith("%")) {
@@ -195,6 +199,22 @@ public class Escaping {
             }
         }
     };
+
+    private static final Replacer URL_DECODE_REPLACER = new Replacer() {
+        @Override
+        public void replace(@NotNull String s, @NotNull StringBuilder sb) {
+            String urlDecoded = Utils.urlDecode(s, null);
+            sb.append(urlDecoded);
+        }
+
+        @Override
+        public void replace(@NotNull BasedSequence original, int startIndex, int endIndex, @NotNull ReplacedTextMapper textMapper) {
+            BasedSequence s = original.subSequence(startIndex, endIndex);
+            String decoded = Utils.urlDecode(s.toString(), null);
+            textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf(decoded, BasedSequence.NULL));
+        }
+    };
+
     public static final @NotNull CharPredicate AMP_BACKSLASH_SET = CharPredicate.anyOf('\\', '&');
 
     public static String escapeHtml(@NotNull CharSequence s, boolean preserveEntities) {
@@ -212,6 +232,7 @@ public class Escaping {
      * Replace entities and backslash escapes with literal characters.
      *
      * @param s string to un-escape
+     *
      * @return un-escaped string
      */
     @NotNull
@@ -228,6 +249,7 @@ public class Escaping {
      *
      * @param s                string to un-escape
      * @param unescapeEntities true if HTML entities are to be unescaped
+     *
      * @return un-escaped string
      */
     @NotNull
@@ -252,6 +274,7 @@ public class Escaping {
      *
      * @param s          based sequence to un-escape
      * @param textMapper replaced text mapper to update for the changed text
+     *
      * @return un-escaped sequence
      */
     @NotNull
@@ -270,6 +293,7 @@ public class Escaping {
      * @param s          sequence being changed
      * @param remove     string to remove
      * @param textMapper replaced text mapper to update for the changed text
+     *
      * @return un-escaped sequence
      */
     @NotNull
@@ -286,6 +310,7 @@ public class Escaping {
      * Replace entities and backslash escapes with literal characters.
      *
      * @param s string to un-escape
+     *
      * @return un-escaped string
      */
     @NotNull
@@ -302,6 +327,7 @@ public class Escaping {
      *
      * @param s          based sequence to un-escape
      * @param textMapper replaced text mapper to update for the changed text
+     *
      * @return un-escaped sequence
      */
     @NotNull
@@ -320,6 +346,7 @@ public class Escaping {
      * Append EOL sequence if sequence does not already end in EOL
      *
      * @param s sequence to convert
+     *
      * @return converted sequence
      */
     @NotNull
@@ -331,6 +358,7 @@ public class Escaping {
      * Normalize eol: embedded \r and \r\n are converted to \n
      *
      * @param s sequence to convert
+     *
      * @return converted sequence
      */
     @NotNull
@@ -343,6 +371,7 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param endWithEOL true if an EOL is to be appended to the end of the sequence if not already ending with one.
+     *
      * @return converted sequence
      */
     @NotNull
@@ -378,6 +407,7 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
+     *
      * @return converted sequence
      */
     @NotNull
@@ -390,6 +420,7 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
+     *
      * @return converted sequence
      */
     @NotNull
@@ -405,6 +436,7 @@ public class Escaping {
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @param endWithEOL whether an EOL is to be appended to the end of the sequence if it does not already end with one.
+     *
      * @return converted sequence
      */
     @NotNull
@@ -453,11 +485,42 @@ public class Escaping {
 
     /**
      * @param s string to encode
+     *
      * @return encoded string
      */
     @NotNull
     public static String percentEncodeUrl(@NotNull CharSequence s) {
-        return replaceAll(ESCAPE_IN_URI, s, URI_REPLACER);
+        return replaceAll(ESCAPE_IN_URI, s, URL_ENCODE_REPLACER);
+    }
+
+    /**
+     * @param s string to encode
+     *
+     * @return encoded string
+     */
+    @NotNull
+    public static BasedSequence percentEncodeUrl(@NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper) {
+        return replaceAll(ESCAPE_IN_URI, s, URL_ENCODE_REPLACER, textMapper);
+    }
+
+    /**
+     * @param s string to encode
+     *
+     * @return encoded string
+     */
+    @NotNull
+    public static String percentDecodeUrl(@NotNull CharSequence s) {
+        return replaceAll(ESCAPE_URI_DECODE, s, URL_DECODE_REPLACER);
+    }
+
+    /**
+     * @param s string to encode
+     *
+     * @return encoded string
+     */
+    @NotNull
+    public static BasedSequence percentDecodeUrl(@NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper) {
+        return replaceAll(ESCAPE_URI_DECODE, s, URL_DECODE_REPLACER, textMapper);
     }
 
     /**
@@ -465,6 +528,7 @@ public class Escaping {
      *
      * @param s          sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
+     *
      * @return normalized link reference id
      */
     @NotNull
@@ -497,6 +561,7 @@ public class Escaping {
      *
      * @param email     e-mail url
      * @param randomize true to randomize, false for testing
+     *
      * @return obfuscated e-mail url
      */
     @NotNull
@@ -531,6 +596,7 @@ public class Escaping {
      *
      * @param s          sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
+     *
      * @return normalized link reference id
      */
     @NotNull
@@ -549,6 +615,7 @@ public class Escaping {
      *
      * @param s    sequence to process
      * @param trim true if the sequence should also be trimmed
+     *
      * @return processed sequence
      */
     @NotNull
@@ -627,6 +694,7 @@ public class Escaping {
 
     interface Replacer {
         void replace(@NotNull String s, @NotNull StringBuilder sb);
+
         void replace(@NotNull BasedSequence s, int startIndex, int endIndex, @NotNull ReplacedTextMapper replacedTextMapper);
     }
 }

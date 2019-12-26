@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
@@ -21,6 +22,10 @@ public class TableFormatOptions implements MutableDataSetter {
     public static final DataKey<Boolean> FORMAT_TABLE_ADJUST_COLUMN_WIDTH = new DataKey<>("FORMAT_TABLE_ADJUST_COLUMN_WIDTH", true);
     public static final DataKey<Boolean> FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT = new DataKey<>("FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT", true);
     public static final DataKey<Boolean> FORMAT_TABLE_FILL_MISSING_COLUMNS = new DataKey<>("FORMAT_TABLE_FILL_MISSING_COLUMNS", false);
+    /**
+     * Used by table formatting to set min column from which to add missing columns, null to use default
+     */
+    public static final NullableDataKey<Integer> FORMAT_TABLE_FILL_MISSING_MIN_COLUMN = new NullableDataKey<>("FORMAT_TABLE_FILL_MISSING_MIN_COLUMN", (Integer) null);
 
     public static final DataKey<DiscretionaryText> FORMAT_TABLE_LEFT_ALIGN_MARKER = new DataKey<>("FORMAT_TABLE_LEFT_ALIGN_MARKER", DiscretionaryText.AS_IS);
     public static final DataKey<Integer> FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH = new DataKey<>("FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH", 3);
@@ -39,6 +44,7 @@ public class TableFormatOptions implements MutableDataSetter {
     public final boolean adjustColumnWidth;
     public final boolean applyColumnAlignment;
     public final boolean fillMissingColumns;
+    public final Integer formatTableFillMissingMinColumn;
 
     public final boolean trimCellWhitespace;
     public final boolean dumpIntellijOffsets;
@@ -67,6 +73,7 @@ public class TableFormatOptions implements MutableDataSetter {
         adjustColumnWidth = FORMAT_TABLE_ADJUST_COLUMN_WIDTH.get(options);
         applyColumnAlignment = FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT.get(options);
         fillMissingColumns = FORMAT_TABLE_FILL_MISSING_COLUMNS.get(options);
+        formatTableFillMissingMinColumn = FORMAT_TABLE_FILL_MISSING_MIN_COLUMN.get(options);
         leftAlignMarker = FORMAT_TABLE_LEFT_ALIGN_MARKER.get(options);
         minSeparatorColumnWidth = FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH.get(options);
         minSeparatorDashes = FORMAT_TABLE_MIN_SEPARATOR_DASHES.get(options);
@@ -93,6 +100,7 @@ public class TableFormatOptions implements MutableDataSetter {
         dataHolder.set(FORMAT_TABLE_ADJUST_COLUMN_WIDTH, adjustColumnWidth);
         dataHolder.set(FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, applyColumnAlignment);
         dataHolder.set(FORMAT_TABLE_FILL_MISSING_COLUMNS, fillMissingColumns);
+        dataHolder.set(FORMAT_TABLE_FILL_MISSING_MIN_COLUMN, formatTableFillMissingMinColumn);
         dataHolder.set(FORMAT_TABLE_LEFT_ALIGN_MARKER, leftAlignMarker);
         dataHolder.set(FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, minSeparatorColumnWidth);
         dataHolder.set(FORMAT_TABLE_MIN_SEPARATOR_DASHES, minSeparatorDashes);

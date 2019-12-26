@@ -8,14 +8,22 @@ import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,21 +48,23 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
 
             // sort reverse alphabetical order so longer ones match first. for sdk7
             ArrayList<String> abbreviations = new ArrayList<>(abbrRepository.keySet());
-            Collections.sort(abbreviations, Comparator.reverseOrder());
+            abbreviations.sort(Comparator.reverseOrder());
 
             for (String abbr : abbreviations) {
-                AbbreviationBlock abbreviationBlock = abbrRepository.get(abbr);
                 // Issue #198, test for empty abbr
                 if (!abbr.isEmpty()) {
-                    BasedSequence abbreviation = abbreviationBlock.getAbbreviation();
-                    if (!abbreviation.isEmpty()) {
-                        abbreviationMap.put(abbr, abbreviation);
+                    AbbreviationBlock abbreviationBlock = abbrRepository.get(abbr);
+                    if (abbreviationBlock != null) {
+                        BasedSequence abbreviation = abbreviationBlock.getAbbreviation();
+                        if (!abbreviation.isEmpty()) {
+                            abbreviationMap.put(abbr, abbreviation);
 
-                        if (sb.length() > 0) sb.append("|");
+                            if (sb.length() > 0) sb.append("|");
 
-                        if (Character.isLetterOrDigit(abbr.charAt(0))) sb.append("\\b");
-                        sb.append("\\Q").append(abbr).append("\\E");
-                        if (Character.isLetterOrDigit(abbr.charAt(abbr.length() - 1))) sb.append("\\b");
+                            if (Character.isLetterOrDigit(abbr.charAt(0))) sb.append("\\b");
+                            sb.append("\\Q").append(abbr).append("\\E");
+                            if (Character.isLetterOrDigit(abbr.charAt(abbr.length() - 1))) sb.append("\\b");
+                        }
                     }
                 }
             }
@@ -78,10 +88,9 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
 
         while (m.find()) {
             //String found = m.group();
-            if (abbreviationMap.containsKey(m.group(0))) {
-                BasedSequence abbreviation = abbreviationMap.get(m.group(0));
+            BasedSequence abbreviation = abbreviationMap.get(m.group(0));
+            if (abbreviation != null) {
 
-                BasedSequence toDecorateText = literal.subSequence(m.start(0), m.end(0));
                 int startOffset = textMapper.originalOffset(m.start(0));
                 int endOffset = textMapper.originalOffset(m.end(0));
 
@@ -102,9 +111,6 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                 BasedSequence origToDecorateText = original.subSequence(startOffset, endOffset);
                 Abbreviation decorationNode = new Abbreviation(origToDecorateText, abbreviation);
                 textBase.appendChild(decorationNode);
-                //Text undecoratedTextNode = new Text(origToDecorateText);
-                //decorationNode.appendChild(undecoratedTextNode);
-                //state.nodeAddedWithChildren(decorationNode);
                 state.nodeAdded(decorationNode);
 
                 lastEscaped = endOffset;

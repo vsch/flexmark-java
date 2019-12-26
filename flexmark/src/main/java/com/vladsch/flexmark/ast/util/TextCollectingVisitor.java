@@ -10,7 +10,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.function.BiConsumer;
 
+/**
+ * @deprecated  use {@link com.vladsch.flexmark.util.ast.TextCollectingVisitor} from the utils library
+ */
 @SuppressWarnings("WeakerAccess")
+@Deprecated
 public class TextCollectingVisitor {
     SequenceBuilder out;
     private final NodeVisitor myVisitor;

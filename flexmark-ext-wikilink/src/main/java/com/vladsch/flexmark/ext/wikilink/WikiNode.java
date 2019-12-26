@@ -2,11 +2,16 @@ package com.vladsch.flexmark.ext.wikilink;
 
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.TextContainer;
+import com.vladsch.flexmark.util.collection.BitFieldSet;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
-public class WikiNode extends Node implements DoNotDecorate {
+public class WikiNode extends Node implements DoNotDecorate, TextContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence link = BasedSequence.NULL;
     protected BasedSequence pageRef = BasedSequence.NULL;
@@ -203,5 +208,38 @@ public class WikiNode extends Node implements DoNotDecorate {
             // have anchor ref, remove it from text
             text = pageRef;
         }
+    }
+
+    @Override
+    public boolean collectText(@NotNull SequenceBuilder out, int flags) {
+        int urlType = flags & F_LINK_TEXT_TYPE;
+
+        BasedSequence text;
+
+        switch (urlType) {
+            case F_LINK_PAGE_REF:
+                text = getPageRef();
+                break;
+            case F_LINK_ANCHOR:
+                text = getAnchorRef();
+                break;
+            case F_LINK_URL:
+                text = getLink();
+                break;
+
+            default:
+            case F_LINK_TEXT:
+                return true;
+        }
+
+        if (BitFieldSet.any(flags, F_NODE_TEXT)) {
+            out.append(text);
+        } else {
+            ReplacedTextMapper textMapper = new ReplacedTextMapper(text);
+            BasedSequence unescaped = Escaping.unescape(text, textMapper);
+            out.append(unescaped);
+        }
+
+        return false;
     }
 }

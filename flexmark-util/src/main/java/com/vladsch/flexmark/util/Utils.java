@@ -5,10 +5,22 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.*;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -392,6 +404,7 @@ public class Utils {
      * Longest Common Prefix for a set of strings
      *
      * @param s array of strings or null
+     *
      * @return longest common prefix
      */
     public static String getLongestCommonPrefix(String... s) {
@@ -561,6 +574,18 @@ public class Utils {
         }
     }
 
+    public static Long parseLongOrNull(String text) {
+        return parseLongOrNull(text, 10);
+    }
+
+    public static Long parseLongOrNull(String text, int radix) {
+        try {
+            return Long.parseLong(text, radix);
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
+    }
+
     public static int parseUnsignedIntOrDefault(String text, int defaultValue) {
         return parseUnsignedIntOrDefault(text, defaultValue, 10);
     }
@@ -584,6 +609,42 @@ public class Utils {
         } catch (NumberFormatException ignored) {
             return defaultValue;
         }
+    }
+
+    /**
+     * Parse number from text
+     *
+     * Will parse 0x, 0b, octal if starts with 0, decimal
+     *
+     * @param text text containing the number to parse
+     *
+     * @return null or parsed number
+     */
+    @Nullable
+    public static Number parseNumberOrNull(@Nullable String text) {
+        if (text == null) return null;
+
+        if (text.startsWith("0x")) {
+            return parseLongOrNull(text.substring(2), 16);
+        } else if (text.startsWith("0b")) {
+            return parseLongOrNull(text.substring(2), 2);
+        } else if (text.startsWith("0")) {
+            Number octal = parseLongOrNull(text.substring(1), 8);
+            if (octal != null) return octal;
+        }
+
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        ParsePosition pos = new ParsePosition(0);
+        Number number = numberFormat.parse(text, pos);
+        return pos.getIndex() == text.length() ? number : null;
+    }
+
+    public static int compare(@Nullable Number n1, @Nullable Number n2) {
+        if (n1 == null && n2 == null) return 0;
+        else if (n1 == null) return -1;
+        else if (n2 == null) return 1;
+        else if (n1 instanceof Double || n2 instanceof Double || n1 instanceof Float || n2 instanceof Float) return Double.compare(n1.doubleValue(), n2.doubleValue());
+        else return Long.compare(n1.longValue(), n2.longValue());
     }
 
     static public <T extends Comparable<T>> int compareNullable(T i1, T i2) {

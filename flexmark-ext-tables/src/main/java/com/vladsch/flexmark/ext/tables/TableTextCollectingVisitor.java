@@ -2,6 +2,10 @@ package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 
+/**
+ * @deprecated  use {@link com.vladsch.flexmark.util.ast.TextCollectingVisitor} from the utils library
+ */
+@Deprecated
 public class TableTextCollectingVisitor extends TextCollectingVisitor {
     public static final Class<?>[] TABLE_LINE_BREAK_CLASSES = { TableBlock.class, TableRow.class, TableCaption.class };
 

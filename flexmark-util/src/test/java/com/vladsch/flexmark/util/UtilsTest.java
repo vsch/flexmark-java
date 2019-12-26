@@ -252,4 +252,18 @@ public class UtilsTest {
         assertEquals("", Utils.wrapWith(null, "", ""));
         assertEquals("prefixreceiversuffix", Utils.wrapWith("receiver", "prefix", "suffix"));
     }
+
+    @Test
+    public void test_parseNumberOrNull() {
+        assertEquals(null, Utils.parseNumberOrNull("0x0001."));
+        assertEquals(null, Utils.parseNumberOrNull("01234567 "));
+        assertEquals(null, Utils.parseNumberOrNull("012345678 "));
+        assertEquals(null, Utils.parseNumberOrNull("0b0001."));
+
+        assertEquals(0x0001L, Utils.parseNumberOrNull("0x0001"));
+        assertEquals(342391L, Utils.parseNumberOrNull("01234567"));
+        assertEquals(12345678L, Utils.parseNumberOrNull("012345678"));
+        assertEquals(0b0001L, Utils.parseNumberOrNull("0b0001"));
+        assertEquals(0.5, Utils.parseNumberOrNull("0.5"));
+    }
 }

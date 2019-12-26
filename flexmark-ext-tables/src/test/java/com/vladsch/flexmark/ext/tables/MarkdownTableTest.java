@@ -2533,6 +2533,85 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     }
 
     @Test
+    public void test_EmbeddedPipe0() {
+        String markdown = "" +
+                "| c | d |\n" +
+                "| --- | --- |\n" +
+                "| ^*a | b* |\n" +
+                "| `e | f` |\n" +
+                "| [g | h](http://a.com) |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
+        BasedSequence source = BasedSequence.of(charSequence);
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
+        table.fillMissingColumns(0);
+
+        assertTrue(table.addTrackedOffset(pos, true, true));
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.toString(0);
+        int offset = table.getTrackedOffsetIndex(pos);
+
+        assertEquals("" +
+                "| c  | d                     |\n" +
+                "|:---|:----------------------|\n" +
+                "| *a | b*                    |\n" +
+                "|    | `e | f`               |\n" +
+                "|    | [g | h](http://a.com) |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| c  | d                     |\n" +
+                "|:---|:----------------------|\n" +
+                "| ^*a | b*                    |\n" +
+                "|    | `e | f`               |\n" +
+                "|    | [g | h](http://a.com) |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos + 38, offset);
+    }
+
+
+    @Test
+    public void test_EmbeddedPipe0Options() {
+        String markdown = "" +
+                "| c | d |\n" +
+                "| --- | --- |\n" +
+                "| ^*a | b* |\n" +
+                "| `e | f` |\n" +
+                "| [g | h](http://a.com) |\n" +
+                "";
+
+        int pos = markdown.indexOf("^");
+        CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
+        BasedSequence source = BasedSequence.of(charSequence);
+        MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true).set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_MIN_COLUMN, 0));
+//        table.fillMissingColumns(0);
+
+        assertTrue(table.addTrackedOffset(pos, true, true));
+        HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+        table.appendTable(out);
+        String formattedTable = out.toString(0);
+        int offset = table.getTrackedOffsetIndex(pos);
+
+        assertEquals("" +
+                "| c  | d                     |\n" +
+                "|:---|:----------------------|\n" +
+                "| *a | b*                    |\n" +
+                "|    | `e | f`               |\n" +
+                "|    | [g | h](http://a.com) |\n" +
+                "", formattedTable);
+        assertEquals("" +
+                "| c  | d                     |\n" +
+                "|:---|:----------------------|\n" +
+                "| ^*a | b*                    |\n" +
+                "|    | `e | f`               |\n" +
+                "|    | [g | h](http://a.com) |\n" +
+                "", formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
+        assertEquals(pos + 38, offset);
+    }
+
+    @Test
     public void test_indentPrefix() {
         String markdown = "" +
                 "| c | d |\n" +

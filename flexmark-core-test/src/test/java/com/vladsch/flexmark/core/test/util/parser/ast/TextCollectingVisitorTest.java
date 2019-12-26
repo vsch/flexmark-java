@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.core.test.util.parser.ast;
 
-import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

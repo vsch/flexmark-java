@@ -1,24 +1,31 @@
 package com.vladsch.flexmark.util.format;
 
-public enum ColumnSort {
-    NONE,
-    ASCENDING,
-    DESCENDING,
-    ASCENDING_NUMERIC,
-    DESCENDING_NUMERIC,
-    ASCENDING_NUMERIC_LAST,
-    DESCENDING_NUMERIC_LAST,
-    ;
+import org.jetbrains.annotations.NotNull;
 
-    public boolean isDescending() {
-        return this == DESCENDING || this == DESCENDING_NUMERIC || this == DESCENDING_NUMERIC_LAST;
+final public class ColumnSort {
+    final public int column;
+    final public @NotNull Sort sort;
+
+    private ColumnSort(int column, @NotNull Sort sort) {
+        this.column = column;
+        this.sort = sort;
     }
 
-    public boolean isNumeric() {
-        return this == ASCENDING_NUMERIC || this == ASCENDING_NUMERIC_LAST || this == DESCENDING_NUMERIC || this == DESCENDING_NUMERIC_LAST;
+    @NotNull
+    public static ColumnSort columnSort(int column, @NotNull Sort sort) {
+        return new ColumnSort(column, sort);
     }
 
-    public boolean isNumericLast() {
-        return this == ASCENDING_NUMERIC_LAST || this == DESCENDING_NUMERIC_LAST;
+    @NotNull
+    public static ColumnSort columnSort(int column, boolean descending, boolean numeric, boolean numericLast) {
+        if (numeric) {
+            if (numericLast) {
+                return new ColumnSort(column, descending ? Sort.DESCENDING_NUMERIC_LAST : Sort.ASCENDING_NUMERIC_LAST);
+            } else {
+                return new ColumnSort(column, descending ? Sort.DESCENDING_NUMERIC : Sort.ASCENDING_NUMERIC);
+            }
+        } else {
+            return new ColumnSort(column, descending ? Sort.DESCENDING : Sort.ASCENDING);
+        }
     }
 }

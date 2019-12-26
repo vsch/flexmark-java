@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
-import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
@@ -9,6 +9,7 @@ import com.vladsch.flexmark.parser.LinkRefProcessor;
 import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -70,7 +71,7 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
         if (node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.get(document)) {
             // need to update link and pageRef with plain text versions
             if (wikiNode.getText().isNull()) {
-                BasedSequence link = new TextCollectingVisitor().collectAndGetSequence(node);
+                BasedSequence link = new TextCollectingVisitor().collectAndGetSequence(node, TextContainer.F_NODE_TEXT);
                 wikiNode.setLink(link, WikiLinkExtension.ALLOW_ANCHORS.get(document), WikiLinkExtension.ALLOW_ANCHOR_ESCAPE.get(document));
             }
         }

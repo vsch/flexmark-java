@@ -1,6 +1,11 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.collection.BitFieldSet;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import org.jetbrains.annotations.NotNull;
 
 public class LinkRef extends RefNode {
     public LinkRef() {

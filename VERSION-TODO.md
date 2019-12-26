@@ -8,7 +8,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.86](#next-05986)
+- [0.59.86](#05986)
 - [0.59.84](#05984)
 - [0.59.82](#05982)
 - [0.59.80](#05980)
@@ -214,10 +214,25 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.86
+## 0.59.86
 
-* Add: `MarkdownTable.transpose(int)` to get a transposed version of the table
-* [ ] Add: `MarkdownTable.sort()` to get a sorted version of a table by given column/sort direction
+* Fix: replace old `TextCollectingVisitor` implementation with new one independent of specific
+  nodes.
+* Add: `TextContainer` interface to allow text collection without knowing implementation node
+  class.
+* Add: `TextCollectingVisitor` to utils which does not require specific node classes. Takes
+  option flags:
+  * `F_LINK_TEXT` - link text or image alt for link/image nodes
+  * `F_LINK_PAGE_REF` - link page ref for link/image nodes
+  * `F_LINK_ANCHOR` - link anchor for link/image nodes
+  * `F_LINK_URL` - link url for link/image nodes
+  * `F_NODE_TEXT` - collect node text without unescaping or percent url decoding
+* Add: `MarkdownTable.transposed(int)` to get a transposed version of the table
+* Add: `MarkdownTable.sorted(ColumnSort[], int flags))` to get a sorted version of a table by
+  given columns/sort type. Columns sorted by text extracted by `TextCollectingVisitor` using
+  given collection `flags`
+* Add: `TableFormatOptions.FORMAT_TABLE_FILL_MISSING_MIN_COLUMN`, default `null`, to control min
+  column where filling of missing columns begins when formatting table.
 
 ## 0.59.84
 

@@ -2,12 +2,17 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
 import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
+import com.vladsch.flexmark.util.ast.TextContainer;
+import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class RefNode extends LinkNode implements LinkRefDerived, ReferencingNode<ReferenceRepository, Reference> {
+public abstract class RefNode extends Node implements LinkRefDerived, ReferencingNode<ReferenceRepository, Reference>, DoNotLinkDecorate, TextContainer {
     protected BasedSequence textOpeningMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence textClosingMarker = BasedSequence.NULL;
@@ -205,6 +210,17 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived, Refere
 
     public void setReferenceClosingMarker(BasedSequence referenceClosingMarker) {
         this.referenceClosingMarker = referenceClosingMarker;
+    }
+
+    @Override
+    public boolean collectText(@NotNull SequenceBuilder out, int flags) {
+        if (BitFieldSet.any(flags, F_NODE_TEXT)) {
+            BasedSequence chars = isReferenceTextCombined() ? reference : text;
+            out.append(chars);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @NotNull

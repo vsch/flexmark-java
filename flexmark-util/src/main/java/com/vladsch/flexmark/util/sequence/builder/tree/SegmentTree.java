@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence.builder.tree;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
 import org.jetbrains.annotations.NotNull;
@@ -490,6 +491,12 @@ public class SegmentTree {
     @NotNull
     public static SegmentTree build(@NotNull Iterable<Seg> segments, @NotNull CharSequence allText) {
         @NotNull SegmentTreeData segmentTreeData = buildTreeData(segments, allText, true);
+        return new SegmentTree(segmentTreeData.treeData, segmentTreeData.segmentBytes);
+    }
+
+    @NotNull
+    public static SegmentTree build(@NotNull BasedSegmentBuilder builder) {
+        @NotNull SegmentTreeData segmentTreeData = buildTreeData(builder.getSegments(), builder.getText(), true);
         return new SegmentTree(segmentTreeData.treeData, segmentTreeData.segmentBytes);
     }
 

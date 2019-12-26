@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence.builder.tree;
 
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +30,12 @@ public class SegmentOffsetTree extends SegmentTree {
         SegmentTreeData segmentTreeData = buildTreeData(segments, allText, false);
         assert segmentTreeData.startIndices != null;
         return new SegmentOffsetTree(segmentTreeData.treeData, segmentTreeData.segmentBytes, segmentTreeData.startIndices);
+    }
+
+    @NotNull
+    public static SegmentOffsetTree build(@NotNull BasedSegmentBuilder builder) {
+        @NotNull SegmentTreeData segmentTreeData = buildTreeData(builder.getSegments(), builder.getText(), true);
+        return new SegmentTree(segmentTreeData.treeData, segmentTreeData.segmentBytes).getSegmentOffsetTree(builder.getBaseSequence());
     }
 
     public int endOffset(int pos) {

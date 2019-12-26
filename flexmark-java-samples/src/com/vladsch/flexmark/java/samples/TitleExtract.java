@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.java.samples;
 
 import com.vladsch.flexmark.ast.Heading;
-import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;

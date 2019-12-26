@@ -1,6 +1,11 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Image;
+import com.vladsch.flexmark.ast.ImageRef;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.LinkNode;
+import com.vladsch.flexmark.ast.LinkRef;
+import com.vladsch.flexmark.ast.RefNode;
 import com.vladsch.flexmark.ast.util.AttributeProviderAdapter;
 import com.vladsch.flexmark.ast.util.AttributeProvidingHandler;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
@@ -41,6 +46,10 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
     }
 
     private void setLinkAttributes(LinkNode node, AttributablePart part, Attributes attributes) {
+        setLinkAttributes(part, attributes);
+    }
+
+    private void setLinkAttributes(RefNode node, AttributablePart part, Attributes attributes) {
         setLinkAttributes(part, attributes);
     }
 

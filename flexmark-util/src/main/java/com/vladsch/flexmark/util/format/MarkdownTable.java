@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.ArrayUtils;
-import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.collection.MaxAggregator;
 import com.vladsch.flexmark.util.collection.MinAggregator;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 
+import static com.vladsch.flexmark.util.Utils.compare;
 import static com.vladsch.flexmark.util.Utils.max;
 import static com.vladsch.flexmark.util.Utils.maxLimit;
 import static com.vladsch.flexmark.util.Utils.min;
@@ -660,7 +661,7 @@ public class MarkdownTable {
         normalize();
 
         if (options.fillMissingColumns) {
-            fillMissingColumns();
+            fillMissingColumns(options.formatTableFillMissingMinColumn);
         }
 
         int sepColumns = getMaxColumns();
@@ -875,7 +876,7 @@ public class MarkdownTable {
      *
      * @return transposed table
      */
-    public MarkdownTable transpose(int columnHeaders) {
+    public MarkdownTable transposed(int columnHeaders) {
         MarkdownTable transposed = new MarkdownTable(options);
         transposed.trackedOffsets.addAll(trackedOffsets);
 
@@ -938,12 +939,12 @@ public class MarkdownTable {
     /**
      * Sort table
      *
-     * @param columnSorts column sorting to apply to column given by {@link Pair#getFirst()} and sort order by {@link Pair#getSecond()}
+     * @param columnSorts column sort information
+     * @param textCollectionFlags collection flags to use for collecting cell text
      *
      * @return sorted table
      */
-    // TEST:
-    public MarkdownTable sorted(Pair<Integer, ColumnSort>[] columnSorts) {
+    public MarkdownTable sorted(ColumnSort[] columnSorts, int textCollectionFlags) {
         MarkdownTable sorted = new MarkdownTable(options);
         sorted.trackedOffsets.addAll(trackedOffsets);
 
@@ -969,8 +970,6 @@ public class MarkdownTable {
             alignments[i] = cell.alignment;
         }
 
-        sorted.setBody();
-
         List<TableRow> rows = getAllSectionsRows(body);
         int[] cellSizes = new int[iMax];
 
@@ -978,9 +977,9 @@ public class MarkdownTable {
         int cMax = getMaxBodyColumns();
 
         for (int r = 0; r < rMax; r++) {
-            for (Pair<Integer, ColumnSort> columnSortPair : columnSorts) {
-                int c = columnSortPair.getFirst();
-                if (c < cMax) {
+            for (ColumnSort columnSort : columnSorts) {
+                int c = columnSort.column;
+                if (c >= 0 && c < cMax) {
                     IndexSpanOffset spanIndex = rows.get(r).indexOf(c);
                     TableCell cell = rows.get(r).cells.get(spanIndex.index);
                     if (spanIndex.index == c && cell != null) {
@@ -991,17 +990,19 @@ public class MarkdownTable {
             }
         }
 
+        TextCollectingVisitor visitor = new TextCollectingVisitor();
+
         Comparator<TableRow> rowComparator = (o1, o2) -> {
-            for (Pair<Integer, ColumnSort> columnSortPair : columnSorts) {
-                int c = columnSortPair.getFirst();
-                if (c < cMax) {
+            for (ColumnSort columnSort : columnSorts) {
+                int c = columnSort.column;
+                if (c >= 0 && c < cMax) {
                     int cellSize = cellSizes[c];
                     if (cellSize > 0) {
                         // sorting on this column
-                        ColumnSort columnSort = columnSortPair.getSecond();
-                        boolean descending = columnSort.isDescending();
-                        boolean numeric = columnSort.isNumeric();
-                        boolean numericLast = columnSort.isNumericLast();
+                        Sort sort = columnSort.sort;
+                        boolean descending = sort.isDescending();
+                        boolean numeric = sort.isNumeric();
+                        boolean numericLast = sort.isNumericLast();
 
                         IndexSpanOffset spanIndex1 = o1.indexOf(c);
                         TableCell cell1 = o1.cells.get(spanIndex1.index);
@@ -1016,8 +1017,10 @@ public class MarkdownTable {
                             int padLeft2 = 0;
                             int padRight1 = 0;
                             int padRight2 = 0;
-                            int diff1 = cellSize - cell1.text.length();
-                            int diff2 = cellSize - cell2.text.length();
+                            String cellText1 = cell1.tableCellNode == null ? cell1.text.toString() : visitor.collectAndGetText(cell1.tableCellNode, textCollectionFlags);
+                            String cellText2 = cell2.tableCellNode == null ? cell2.text.toString() : visitor.collectAndGetText(cell2.tableCellNode, textCollectionFlags);
+                            int diff1 = cellSize - cellText1.length();
+                            int diff2 = cellSize - cellText2.length();
 
                             switch (alignments[c]) {
                                 case CENTER:
@@ -1037,32 +1040,26 @@ public class MarkdownTable {
                             }
 
                             if (numeric) {
-                                Double cell1Numeric = null;
-                                Double cell2Numeric = null;
-                                try {
-                                    // FIX: allow long if prefix 0x or 0b or starts with 0 and will parse as octal, else as decimal, else double
-                                    cell1Numeric = Double.parseDouble(cell1.text.toString());
-                                } catch (Throwable ignored) {}
-                                try {
-                                    // FIX: allow long if prefix 0x or 0b or starts with 0 and will parse as octal, else as decimal, else double
-                                    cell2Numeric = Double.parseDouble(cell2.text.toString());
-                                } catch (Throwable ignored) {}
+                                Number cellNumeric1 = Utils.parseNumberOrNull(cellText1);
+                                Number cellNumeric2 = Utils.parseNumberOrNull(cellText2);
 
-                                if (cell1Numeric != null && cell2Numeric != null) {
-                                    result = cell1Numeric.compareTo(cell2Numeric);
-                                } else if (cell1Numeric != null) {
+                                if (cellNumeric1 != null && cellNumeric2 != null) {
+                                    result = compare(cellNumeric1, cellNumeric2);
+                                } else if (cellNumeric1 != null) {
                                     result = numericLast ? 1 : -1;
-                                } else if (cell2Numeric != null) {
+                                    descending = false; // do not reverse, numbers first/last are not inverted
+                                } else if (cellNumeric2 != null) {
                                     result = numericLast ? -1 : 1;
+                                    descending = false; // do not reverse, numbers first/last are not inverted
                                 } else {
                                     // compare as text
-                                    String cell1Text = RepeatedSequence.ofSpaces(padLeft1).toString() + cell1.text.toString() + RepeatedSequence.ofSpaces(padRight1);
-                                    String cell2Text = RepeatedSequence.ofSpaces(padLeft2).toString() + cell2.text.toString() + RepeatedSequence.ofSpaces(padRight2);
+                                    String cell1Text = RepeatedSequence.ofSpaces(padLeft1).toString() + cellText1 + RepeatedSequence.ofSpaces(padRight1);
+                                    String cell2Text = RepeatedSequence.ofSpaces(padLeft2).toString() + cellText2 + RepeatedSequence.ofSpaces(padRight2);
                                     result = cell1Text.compareTo(cell2Text);
                                 }
                             } else {
-                                String cell1Text = RepeatedSequence.ofSpaces(padLeft1).toString() + cell1.text.toString() + RepeatedSequence.ofSpaces(padRight1);
-                                String cell2Text = RepeatedSequence.ofSpaces(padLeft2).toString() + cell2.text.toString() + RepeatedSequence.ofSpaces(padRight2);
+                                String cell1Text = RepeatedSequence.ofSpaces(padLeft1).toString() + cellText1 + RepeatedSequence.ofSpaces(padRight1);
+                                String cell2Text = RepeatedSequence.ofSpaces(padLeft2).toString() + cellText2 + RepeatedSequence.ofSpaces(padRight2);
                                 result = cell1Text.compareTo(cell2Text);
                             }
                         } else if (spanIndex1.index == c && cell1 != null) {

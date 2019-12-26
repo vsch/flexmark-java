@@ -175,15 +175,18 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
             if (part instanceof Range) {
                 BasedSequence s = baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
 
-                if (last != null && last.getEndOffset() < s.getStartOffset()
-                        && (BasedSequence.WHITESPACE.indexOf(last.charAt(last.length() - 1)) == -1)
-                        && BasedSequence.WHITESPACE.indexOf(s.charAt(0)) == -1
-                        && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
-                ) {
-                    sb.append(' ');
+                if (s.isNotEmpty()) {
+                    if (last != null && last.getEndOffset() < s.getStartOffset()
+                            && (BasedSequence.WHITESPACE.indexOf(last.charAt(last.length() - 1)) == -1)
+                            && BasedSequence.WHITESPACE.indexOf(s.charAt(0)) == -1
+                            && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
+                    ) {
+                        sb.append(' ');
+                    }
+
+                    s.appendTo(sb);
                 }
 
-                s.appendTo(sb);
                 last = s;
             } else if (part instanceof CharSequence) {
                 sb.append(part);

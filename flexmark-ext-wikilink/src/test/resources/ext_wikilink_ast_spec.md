@@ -10,7 +10,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## WikiLinks
 
-Converts wikilink of the forms: [[link]], [[link|text]] and [[text|link]] to links in the HTML
+Converts wikilink of the forms: `[[link]]`, `[[link|text]]` and `[[text|link]]` to links in the HTML
 page.
 
 no spaces between brackets
@@ -2095,7 +2095,7 @@ Document[0, 23]
 
 ## WikiImages
 
-Converts wiki image of the forms: ![[image]], ![[image|text]] and ![[text|image]] to image
+Converts wiki image of the forms: `![[image]]`, `![[image|text]]` and `![[text|image]]` to image
 images in the HTML page.
 
 no spaces between brackets
