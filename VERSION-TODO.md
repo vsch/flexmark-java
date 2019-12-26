@@ -8,6 +8,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [0.59.88](#05988)
 - [0.59.86](#05986)
 - [0.59.84](#05984)
 - [0.59.82](#05982)
@@ -213,6 +214,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## 0.59.88
+
+* Fix: change `RefNode` text collection to resolve reference if link url collection is
+  requested.
 
 ## 0.59.86
 

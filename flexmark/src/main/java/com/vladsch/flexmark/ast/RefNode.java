@@ -8,7 +8,9 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.collection.BitFieldSet;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -219,7 +221,42 @@ public abstract class RefNode extends Node implements LinkRefDerived, Referencin
             out.append(chars);
             return false;
         } else {
-            return true;
+            int urlType = flags & F_LINK_TEXT_TYPE;
+
+            if (urlType == F_LINK_TEXT) {
+                return true;
+            } else {
+                Reference reference = getReferenceNode(getDocument());
+                if (reference == null) {
+                    return true;
+                } else {
+                    BasedSequence url;
+
+                    switch (urlType) {
+                        case F_LINK_PAGE_REF:
+                            url = reference.getPageRef();
+                            break;
+
+                        case F_LINK_ANCHOR:
+                            url = reference.getAnchorRef();
+                            break;
+
+                        case F_LINK_URL:
+                            url = reference.getUrl();
+                            break;
+
+                        default:
+                            return true;
+                    }
+
+                    ReplacedTextMapper textMapper = new ReplacedTextMapper(url);
+                    BasedSequence unescaped = Escaping.unescape(url, textMapper);
+                    BasedSequence percentDecoded = Escaping.percentEncodeUrl(unescaped, textMapper);
+                    out.append(percentDecoded);
+
+                    return false;
+                }
+            }
         }
     }
 
