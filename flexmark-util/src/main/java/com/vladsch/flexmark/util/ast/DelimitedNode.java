@@ -1,11 +1,14 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
+
+import static com.vladsch.flexmark.util.collection.BitFieldSet.any;
 
 public interface DelimitedNode extends TextContainer {
     BasedSequence getOpeningMarker();
+
+    BasedSequence getChars();
 
     void setOpeningMarker(BasedSequence openingMarker);
 
@@ -18,7 +21,12 @@ public interface DelimitedNode extends TextContainer {
     void setClosingMarker(BasedSequence closingMarker);
 
     @Override
-    default boolean collectText(@NotNull SequenceBuilder out, int flags) {
-        return true;
+    default boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
+        if (any(flags, F_NODE_TEXT)) {
+            out.append(getText());
+            return false;
+        } else {
+            return true;
+        }
     }
 }

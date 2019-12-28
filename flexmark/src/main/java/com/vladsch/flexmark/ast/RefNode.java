@@ -7,11 +7,10 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.ast.TextContainer;
-import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class RefNode extends Node implements LinkRefDerived, ReferencingNode<ReferenceRepository, Reference>, DoNotLinkDecorate, TextContainer {
@@ -215,18 +214,16 @@ public abstract class RefNode extends Node implements LinkRefDerived, Referencin
     }
 
     @Override
-    public boolean collectText(@NotNull SequenceBuilder out, int flags) {
-        if (BitFieldSet.any(flags, F_NODE_TEXT)) {
-            BasedSequence chars = isReferenceTextCombined() ? reference : text;
-            out.append(chars);
-            return false;
-        } else {
-            int urlType = flags & F_LINK_TEXT_TYPE;
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
+        int urlType = flags & F_LINK_TEXT_TYPE;
 
-            if (urlType == F_LINK_TEXT) {
-                return true;
+        if (urlType == F_LINK_TEXT) {
+            return true;
+        } else {
+            Reference reference = getReferenceNode(getDocument());
+            if (urlType == F_LINK_NODE_TEXT) {
+                out.append(getChars());
             } else {
-                Reference reference = getReferenceNode(getDocument());
                 if (reference == null) {
                     return true;
                 } else {
@@ -251,12 +248,12 @@ public abstract class RefNode extends Node implements LinkRefDerived, Referencin
 
                     ReplacedTextMapper textMapper = new ReplacedTextMapper(url);
                     BasedSequence unescaped = Escaping.unescape(url, textMapper);
-                    BasedSequence percentDecoded = Escaping.percentEncodeUrl(unescaped, textMapper);
+                    BasedSequence percentDecoded = Escaping.percentDecodeUrl(unescaped, textMapper);
                     out.append(percentDecoded);
-
-                    return false;
                 }
             }
+
+            return false;
         }
     }
 

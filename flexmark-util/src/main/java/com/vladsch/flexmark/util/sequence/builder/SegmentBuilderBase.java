@@ -268,8 +268,13 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         return i + 1 >= parts.length ? Seg.NULL : Seg.segOf(parts[i], parts[i + 1]);
     }
 
+    @Override
+    public Object getLastPart() {
+        return getPart(partsSize);
+    }
+
     @NotNull
-    Object getPart(int index) {
+    public Object getPart(int index) {
         if (index == partsSize && haveDanglingText()) {
             // return dangling text
             return text.subSequence(immutableOffset, text.length());

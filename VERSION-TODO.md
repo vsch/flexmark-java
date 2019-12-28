@@ -8,6 +8,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.92](#next-05992)
 - [0.59.90](#05990)
 - [0.59.88](#05988)
 - [0.59.86](#05986)
@@ -215,6 +216,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.92
+
+* Add: separate `TextContainer.F_LINK_NODE_TEXT` collection type to allow link element text to
+  be collected separate from `TextContainer.F_NODE_TEXT` flag.
+* Fix: `TextCollectingVisitor` to add intervening spaces to match old implementation.
 
 ## 0.59.90
 

@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.collection.BitFieldSet.any;
@@ -34,7 +34,7 @@ public class TextBase extends Node implements TextContainer {
     }
 
     @Override
-    public boolean collectText(@NotNull SequenceBuilder out, int flags) {
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
         if (any(flags, F_NODE_TEXT)) {
             out.append(getChars());
         } else {

@@ -2,12 +2,10 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
 import com.vladsch.flexmark.util.ast.TextContainer;
-import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 
 public abstract class LinkNode extends LinkNodeBase implements DoNotLinkDecorate, TextContainer {
 
@@ -19,7 +17,7 @@ public abstract class LinkNode extends LinkNodeBase implements DoNotLinkDecorate
     }
 
     @Override
-    public boolean collectText(@NotNull SequenceBuilder out, int flags) {
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
         int urlType = flags & F_LINK_TEXT_TYPE;
 
         BasedSequence url;
@@ -35,17 +33,21 @@ public abstract class LinkNode extends LinkNodeBase implements DoNotLinkDecorate
                 url = getUrl();
                 break;
 
+            case F_LINK_NODE_TEXT:
+                url = BasedSequence.NULL; // not used
+                break;
+
             default:
             case F_LINK_TEXT:
                 return true;
         }
 
-        if (BitFieldSet.any(flags, F_NODE_TEXT)) {
-            out.append(url);
+        if (urlType == F_LINK_NODE_TEXT) {
+            out.append(getChars());
         } else {
             ReplacedTextMapper textMapper = new ReplacedTextMapper(url);
             BasedSequence unescaped = Escaping.unescape(url, textMapper);
-            BasedSequence percentDecoded = Escaping.percentEncodeUrl(unescaped, textMapper);
+            BasedSequence percentDecoded = Escaping.percentDecodeUrl(unescaped, textMapper);
             out.append(percentDecoded);
         }
 

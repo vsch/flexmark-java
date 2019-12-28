@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public class Code extends DelimitedNodeImpl implements DoNotLinkDecorate {
@@ -23,7 +23,7 @@ public class Code extends DelimitedNodeImpl implements DoNotLinkDecorate {
     }
 
     @Override
-    public boolean collectText(@NotNull SequenceBuilder out, int flags) {
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
         out.append(getText());
         return false;
     }

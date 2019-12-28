@@ -29,6 +29,8 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
         this.optimizer = optimizer;
     }
 
+
+
     @Override
     public @NotNull BasedSequence getBaseSequence() {
         return baseSeq;

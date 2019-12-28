@@ -3,12 +3,11 @@ package com.vladsch.flexmark.ext.wikilink;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextContainer;
-import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public class WikiNode extends Node implements DoNotDecorate, TextContainer {
@@ -211,7 +210,7 @@ public class WikiNode extends Node implements DoNotDecorate, TextContainer {
     }
 
     @Override
-    public boolean collectText(@NotNull SequenceBuilder out, int flags) {
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
         int urlType = flags & F_LINK_TEXT_TYPE;
 
         BasedSequence text;
@@ -227,13 +226,17 @@ public class WikiNode extends Node implements DoNotDecorate, TextContainer {
                 text = getLink();
                 break;
 
+            case F_LINK_NODE_TEXT:
+                text = BasedSequence.NULL; // not used
+                break;
+
             default:
             case F_LINK_TEXT:
                 return true;
         }
 
-        if (BitFieldSet.any(flags, F_NODE_TEXT)) {
-            out.append(text);
+        if (urlType == F_LINK_NODE_TEXT) {
+            out.append(getChars());
         } else {
             ReplacedTextMapper textMapper = new ReplacedTextMapper(text);
             BasedSequence unescaped = Escaping.unescape(text, textMapper);
