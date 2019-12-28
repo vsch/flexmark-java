@@ -13,8 +13,12 @@ import static com.vladsch.flexmark.util.sequence.SequenceUtils.indexOf;
  * Can be used for code points since the argument is int
  */
 public interface CharPredicate extends IntPredicate {
-    CharPredicate FALSE = value -> false;
-    CharPredicate TRUE = value -> true;
+    CharPredicate NONE = value -> false;
+    CharPredicate ALL = value -> true;
+    @Deprecated
+    CharPredicate FALSE = NONE;
+    @Deprecated
+    CharPredicate TRUE = ALL;
     CharPredicate SPACE = value -> value == ' ';
     CharPredicate TAB = value -> value == '\t';
     CharPredicate EOL = value -> value == '\n';
@@ -27,9 +31,10 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate ANY_EOL = value -> value == '\n' || value == '\r';
     CharPredicate WHITESPACE = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r';
     CharPredicate WHITESPACE_NBSP = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\u00A0';
-    CharPredicate DECIMAL_DIGITS = value -> value >= '0' && value <= '9';
     CharPredicate HEXADECIMAL_DIGITS = value -> value >= '0' && value <= '9' || value >= 'a' && value <= 'f' || value >= 'A' && value <= 'F';
+    CharPredicate DECIMAL_DIGITS = value -> value >= '0' && value <= '9';
     CharPredicate OCTAL_DIGITS = value -> value >= '0' && value <= '7';
+    CharPredicate BINARY_DIGITS = value -> value >= '0' && value <= '1';
 
     @Override
     boolean test(int value);
@@ -46,14 +51,16 @@ public interface CharPredicate extends IntPredicate {
      *
      * @param other a predicate that will be logically-ANDed with this
      *              predicate
+     *
      * @return a composed predicate that represents the short-circuiting logical
      *         AND of this predicate and the {@code other} predicate
+     *
      * @throws NullPointerException if other is null
      */
     @NotNull
     default CharPredicate and(@NotNull CharPredicate other) {
         Objects.requireNonNull(other);
-        return this == FALSE || other == FALSE ? FALSE : this == TRUE ? other : other == TRUE ? this : (value) -> test(value) && other.test(value);
+        return this == NONE || other == NONE ? NONE : this == ALL ? other : other == ALL ? this : (value) -> test(value) && other.test(value);
     }
 
     /**
@@ -65,7 +72,7 @@ public interface CharPredicate extends IntPredicate {
      */
     @NotNull
     default CharPredicate negate() {
-        return this == FALSE ? TRUE : this == TRUE ? FALSE : (value) -> !test(value);
+        return this == NONE ? ALL : this == ALL ? NONE : (value) -> !test(value);
     }
 
     /**
@@ -80,14 +87,16 @@ public interface CharPredicate extends IntPredicate {
      *
      * @param other a predicate that will be logically-ORed with this
      *              predicate
+     *
      * @return a composed predicate that represents the short-circuiting logical
      *         OR of this predicate and the {@code other} predicate
+     *
      * @throws NullPointerException if other is null
      */
     @NotNull
     default CharPredicate or(@NotNull CharPredicate other) {
         Objects.requireNonNull(other);
-        return this == TRUE || other == TRUE ? TRUE : this == FALSE ? other : other == FALSE ? this : (value) -> test(value) || other.test(value);
+        return this == ALL || other == ALL ? ALL : this == NONE ? other : other == NONE ? this : (value) -> test(value) || other.test(value);
     }
 
     @NotNull
@@ -128,7 +137,7 @@ public interface CharPredicate extends IntPredicate {
     static CharPredicate anyOf(char... chars) {
         switch (chars.length) {
             case 0:
-                return FALSE;
+                return NONE;
             case 1:
                 return standardOrAnyOf(chars[0]);
             case 2:
@@ -147,7 +156,7 @@ public interface CharPredicate extends IntPredicate {
         int maxFixed = 4;
         switch (chars.length()) {
             case 0:
-                return FALSE;
+                return NONE;
             case 1:
                 return standardOrAnyOf(chars.charAt(0));
             case 2:

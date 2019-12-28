@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.ArrayUtils;
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.Node;
@@ -23,6 +24,7 @@ import java.util.BitSet;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Predicate;
 
 import static com.vladsch.flexmark.util.Utils.compare;
 import static com.vladsch.flexmark.util.Utils.max;
@@ -59,12 +61,28 @@ public class MarkdownTable {
     final private TableSection[] ALL_HEADER_ROWS;   // header
     final private TableSection[] ALL_BODY_ROWS;     // body
     final public static CharPredicate COLON_TRIM_CHARS = CharPredicate.anyOf(':');
+    final private CharSequence tableChars;
 
-    public MarkdownTable(DataHolder options) {
-        this(new TableFormatOptions(options));
+    public static final NumericSuffixPredicate NO_SUFFIXES = s -> false;
+    public static final NumericSuffixPredicate ALL_SUFFIXES_SORT = s -> true;
+    public static final NumericSuffixPredicate ALL_SUFFIXES_NO_SORT = new NumericSuffixPredicate() {
+        @Override
+        public boolean test(String s) {
+            return true;
+        }
+
+        @Override
+        public boolean sortSuffix(@NotNull String suffix) {
+            return false;
+        }
+    };
+
+    public MarkdownTable(@NotNull CharSequence tableChars, DataHolder options) {
+        this(tableChars, new TableFormatOptions(options));
     }
 
-    public MarkdownTable(TableFormatOptions options) {
+    public MarkdownTable(@NotNull CharSequence tableChars, TableFormatOptions options) {
+        this.tableChars = tableChars;
         header = new TableSection(TableSectionType.HEADER);
         separator = new TableSeparatorSection(TableSectionType.SEPARATOR);
         body = new TableSection(TableSectionType.BODY);
@@ -78,6 +96,10 @@ public class MarkdownTable {
         ALL_CONTENT_ROWS = new TableSection[] { header, body };
         ALL_HEADER_ROWS = new TableSection[] { header };
         ALL_BODY_ROWS = new TableSection[] { body };
+    }
+
+    public CharSequence getTableChars() {
+        return tableChars;
     }
 
     public TableCell getCaptionCell() {
@@ -877,7 +899,7 @@ public class MarkdownTable {
      * @return transposed table
      */
     public MarkdownTable transposed(int columnHeaders) {
-        MarkdownTable transposed = new MarkdownTable(options);
+        MarkdownTable transposed = new MarkdownTable(tableChars, options);
         transposed.trackedOffsets.addAll(trackedOffsets);
 
         int maxRows = getAllRowsCount() - 1; // don't count separator rows
@@ -939,13 +961,14 @@ public class MarkdownTable {
     /**
      * Sort table
      *
-     * @param columnSorts column sort information
+     * @param columnSorts         column sort information
      * @param textCollectionFlags collection flags to use for collecting cell text
+     * @param numericSuffixTester predicate to test non-numeric suffix of numeric column content, return true if suffix is acceptable, null will result in all suffixes being accepted
      *
      * @return sorted table
      */
-    public MarkdownTable sorted(ColumnSort[] columnSorts, int textCollectionFlags) {
-        MarkdownTable sorted = new MarkdownTable(options);
+    public MarkdownTable sorted(ColumnSort[] columnSorts, int textCollectionFlags, @Nullable NumericSuffixPredicate numericSuffixTester) {
+        MarkdownTable sorted = new MarkdownTable(tableChars, options);
         sorted.trackedOffsets.addAll(trackedOffsets);
 
         sorted.setHeader();
@@ -992,6 +1015,7 @@ public class MarkdownTable {
 
         TextCollectingVisitor visitor = new TextCollectingVisitor();
 
+        NumericSuffixPredicate numericSuffixPredicate = numericSuffixTester == null ? ALL_SUFFIXES_SORT : numericSuffixTester;
         Comparator<TableRow> rowComparator = (o1, o2) -> {
             for (ColumnSort columnSort : columnSorts) {
                 int c = columnSort.column;
@@ -1017,8 +1041,8 @@ public class MarkdownTable {
                             int padLeft2 = 0;
                             int padRight1 = 0;
                             int padRight2 = 0;
-                            String cellText1 = cell1.tableCellNode == null ? cell1.text.toString() : visitor.collectAndGetText(cell1.tableCellNode, textCollectionFlags);
-                            String cellText2 = cell2.tableCellNode == null ? cell2.text.toString() : visitor.collectAndGetText(cell2.tableCellNode, textCollectionFlags);
+                            String cellText1 = cell1.tableCellNode == null ? cell1.text.toString() : visitor.collectAndGetText(cell1.tableCellNode, textCollectionFlags).trim();
+                            String cellText2 = cell2.tableCellNode == null ? cell2.text.toString() : visitor.collectAndGetText(cell2.tableCellNode, textCollectionFlags).trim();
                             int diff1 = cellSize - cellText1.length();
                             int diff2 = cellSize - cellText2.length();
 
@@ -1040,11 +1064,25 @@ public class MarkdownTable {
                             }
 
                             if (numeric) {
-                                Number cellNumeric1 = Utils.parseNumberOrNull(cellText1);
-                                Number cellNumeric2 = Utils.parseNumberOrNull(cellText2);
+                                Pair<Number, String> cellNumeric1 = Utils.parseNumberPrefixOrNull(cellText1, numericSuffixPredicate);
+                                Pair<Number, String> cellNumeric2 = Utils.parseNumberPrefixOrNull(cellText2, numericSuffixPredicate);
 
                                 if (cellNumeric1 != null && cellNumeric2 != null) {
-                                    result = compare(cellNumeric1, cellNumeric2);
+                                    result = compare(cellNumeric1.getFirst(), cellNumeric2.getFirst());
+                                    String numericSuffix1 = cellNumeric1.getSecond();
+                                    String numericSuffix2 = cellNumeric2.getSecond();
+
+                                    if (result == 0 && (numericSuffixPredicate.sortSuffix(numericSuffix1) || numericSuffixPredicate.sortSuffix(numericSuffix2))) {
+                                        if (!numericSuffix1.isEmpty() && numericSuffixPredicate.sortSuffix(numericSuffix1) && !numericSuffix2.isEmpty() && numericSuffixPredicate.sortSuffix(numericSuffix2)) {
+                                            result = numericSuffix1.compareTo(cellNumeric2.getSecond());
+                                        } else if (!numericSuffix1.isEmpty() && numericSuffixPredicate.sortSuffix(numericSuffix1)) {
+                                            result = numericLast ? -1 : 1;
+                                            descending = false;
+                                        } else if (!numericSuffix2.isEmpty() && numericSuffixPredicate.sortSuffix(numericSuffix2)) {
+                                            result = numericLast ? 1 : -1;
+                                            descending = false;
+                                        }
+                                    }
                                 } else if (cellNumeric1 != null) {
                                     result = numericLast ? 1 : -1;
                                     descending = false; // do not reverse, numbers first/last are not inverted
@@ -1099,6 +1137,31 @@ public class MarkdownTable {
         return sorted;
     }
 
+    int appendDashes(LineAppendable out, int dashCount, BasedSequence sepDashes, int dashOffset) {
+        int sepDashesLength = sepDashes.length();
+        int remainingDashes = Math.max(0, sepDashesLength - dashOffset);
+
+        if (remainingDashes >= dashCount) {
+            out.append(sepDashes.subSequence(dashOffset, dashOffset + dashCount));
+            remainingDashes -= dashCount;
+        } else {
+            int usedUpDashes = 0;
+            if (remainingDashes > 1) {
+                out.append(sepDashes.subSequence(dashOffset, dashOffset + 1));
+                remainingDashes--;
+                usedUpDashes++;
+            }
+
+            out.append('-', dashCount - Math.max(0, remainingDashes + usedUpDashes));
+
+            if (remainingDashes > 0) {
+                out.append(sepDashes.subSequence(dashOffset, dashOffset + remainingDashes));
+                remainingDashes = 0;
+            }
+        }
+        return sepDashesLength - remainingDashes;
+    }
+
     public void appendTable(LineAppendable out) {
         // we will prepare the separator based on max columns
         Ref<Integer> delta = new Ref<>(0);
@@ -1151,6 +1214,8 @@ public class MarkdownTable {
                 }
 
                 trackedPos = cell == null ? NOT_TRACKED : minLimit(cell.trackedTextOffset, 0);
+                BasedSequence sepText = cell == null ? BasedSequence.NULL : cell.text.trim(COLON_TRIM_CHARS);
+                int sepDashOffset = 0;
 
                 if (trackedPos != NOT_TRACKED) {
                     if (options.leadTrailPipes && j == 0) out.append('|');
@@ -1181,19 +1246,19 @@ public class MarkdownTable {
                         if (trackedPos == 0) {
                             setTrackedOffsetIndex(cell.trackedTextOffset + cell.getInsideStartOffset(previousCell), out.offsetWithPending());
                             trackedPos = NOT_TRACKED;
-                            out.append('-', dashCount);
+                            sepDashOffset = appendDashes(out, dashCount, sepText, sepDashOffset);
                         } else if (!afterLastDash && trackedPos < dashCount) {
-                            out.append('-', trackedPos);
+                            sepDashOffset = appendDashes(out, trackedPos, sepText, sepDashOffset);
                             setTrackedOffsetIndex(cell.trackedTextOffset + cell.getInsideStartOffset(previousCell), out.offsetWithPending());
-                            out.append('-', dashCount - trackedPos);
+                            sepDashOffset = appendDashes(out, dashCount - trackedPos, sepText, sepDashOffset);
                             trackedPos = NOT_TRACKED;
                         } else {
-                            out.append('-', dashCount);
+                            sepDashOffset = appendDashes(out, dashCount, sepText, sepDashOffset);
                             setTrackedOffsetIndex(cell.trackedTextOffset + cell.getInsideStartOffset(previousCell), out.offsetWithPending());
                             trackedPos = NOT_TRACKED;
                         }
                     } else {
-                        out.append('-', dashCount);
+                        sepDashOffset = appendDashes(out, dashCount, sepText, sepDashOffset);
                     }
 
                     if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) {
@@ -1218,7 +1283,8 @@ public class MarkdownTable {
                     if (options.leadTrailPipes && j == 0) out.append('|');
                     if (alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.CENTER) { out.append(':'); }
 
-                    out.append('-', dashCount);
+                    sepDashOffset = appendDashes(out, dashCount, sepText, sepDashOffset);
+
                     if (alignment1 == CellAlignment.RIGHT || alignment1 == CellAlignment.CENTER) { out.append(':'); }
                 }
 

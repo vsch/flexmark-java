@@ -28,7 +28,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -61,7 +61,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -83,7 +83,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable("" +
                 "| Header1  | Header2  | Header3  | Numeric1 | Numeric2 | Numeric3 |\n" +
                 "|----------|----------|----------|----------|----------|----------|\n" +
-                "| column11 | column28 | column31 | 11       | 028      | 31       |\n" +
+                "| column11 | column28 | column31 |     11 |      028  |       31 |\n" +
                 "| [column12](url12#anchor12) | column27 | column32 | 12       | column27 | 32       |\n" +
                 "| column13 | column26 | column33 | 0xD      | column26 | 0x21     |\n" +
                 "| column14 | column25 | column34 | 0b1110   | 031      | 0x100010 |\n" +
@@ -94,7 +94,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, TextContainer.F_LINK_PAGE_REF);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, TextContainer.F_LINK_PAGE_REF, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -127,7 +127,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, TextContainer.F_LINK_ANCHOR);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, TextContainer.F_LINK_ANCHOR, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -160,7 +160,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, TextContainer.F_LINK_URL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, false, false) }, TextContainer.F_LINK_URL, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -193,7 +193,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, true, false, false) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, true, false, false) }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -226,7 +226,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(1, false, false, false) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(1, false, false, false) }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -259,7 +259,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(1, true, false, false) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(1, true, false, false) }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -292,7 +292,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(3, false, true, false) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(3, false, true, false) }, 0, MarkdownTable.ALL_SUFFIXES_SORT);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -306,6 +306,270 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "| column18 | column21 | column35 | 018      | 21       | 043      |\n" +
                 "| column16 | column23 | column37 | column16 | 0x17     | column37 |\n" +
                 "| column17 | column22 | column36 | column17 | 22       | column36 |\n" +
+                "", out.toString());
+    }
+
+    @Test
+    public void test_basicN1AFSuffix() {
+        MarkdownTable table = getTable("" +
+                "| Header1  |\n" +
+                "|----------|\n" +
+                "| 11 |\n" +
+                "| 11Another |\n" +
+                "| 11NonNum |\n" +
+                "| 12 |\n" +
+                "| column15 |\n" +
+                "| 16 |\n" +
+                "| column17 |\n" +
+                "| column18 |\n" +
+                "", formatOptionsAsIs("", null));
+
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, true, false) }, 0, MarkdownTable.ALL_SUFFIXES_SORT);
+        sorted.appendTable(out);
+
+        assertEquals("", "" +
+                "|  Header1  |\n" +
+                "|-----------|\n" +
+                "| 11        |\n" +
+                "| 11Another |\n" +
+                "| 11NonNum  |\n" +
+                "| 12        |\n" +
+                "| 16        |\n" +
+                "| column15  |\n" +
+                "| column17  |\n" +
+                "| column18  |\n" +
+                "", out.toString());
+    }
+
+    @Test
+    public void test_basicN1DFSuffix() {
+        MarkdownTable table = getTable("" +
+                "| Header1  |\n" +
+                "|----------|\n" +
+                "| 11 |\n" +
+                "| 11Another |\n" +
+                "| 11NonNum |\n" +
+                "| 12 |\n" +
+                "| column15 |\n" +
+                "| 16 |\n" +
+                "| column17 |\n" +
+                "| column18 |\n" +
+                "", formatOptionsAsIs("", null));
+
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, true, true, false) }, 0, MarkdownTable.ALL_SUFFIXES_SORT);
+        sorted.appendTable(out);
+
+        assertEquals("", "" +
+                "|  Header1  |\n" +
+                "|-----------|\n" +
+                "| 16        |\n" +
+                "| 12        |\n" +
+                "| 11        |\n" +
+                "| 11NonNum  |\n" +
+                "| 11Another |\n" +
+                "| column18  |\n" +
+                "| column17  |\n" +
+                "| column15  |\n" +
+                "", out.toString());
+    }
+
+    @Test
+    public void test_basicN1ALSuffix() {
+        MarkdownTable table = getTable("" +
+                "| Header1  |\n" +
+                "|----------|\n" +
+                "| 11 |\n" +
+                "| 11Another |\n" +
+                "| 11NonNum |\n" +
+                "| 12 |\n" +
+                "| column15 |\n" +
+                "| 16 |\n" +
+                "| column17 |\n" +
+                "| column18 |\n" +
+                "", formatOptionsAsIs("", null));
+
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, true, true) }, 0, MarkdownTable.ALL_SUFFIXES_SORT);
+        sorted.appendTable(out);
+
+        assertEquals("", "" +
+                "|  Header1  |\n" +
+                "|-----------|\n" +
+                "| column15  |\n" +
+                "| column17  |\n" +
+                "| column18  |\n" +
+                "| 11Another |\n" +
+                "| 11NonNum  |\n" +
+                "| 11        |\n" +
+                "| 12        |\n" +
+                "| 16        |\n" +
+                "", out.toString());
+    }
+
+    @Test
+    public void test_basicN1DLSuffix() {
+        MarkdownTable table = getTable("" +
+                "| Header1  |\n" +
+                "|----------|\n" +
+                "| 11 |\n" +
+                "| 11Another |\n" +
+                "| 11NonNum |\n" +
+                "| 12 |\n" +
+                "| column15 |\n" +
+                "| 16 |\n" +
+                "| column17 |\n" +
+                "| column18 |\n" +
+                "", formatOptionsAsIs("", null));
+
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, true, true, true) }, 0, MarkdownTable.ALL_SUFFIXES_SORT);
+        sorted.appendTable(out);
+
+        assertEquals("", "" +
+                "|  Header1  |\n" +
+                "|-----------|\n" +
+                "| column18  |\n" +
+                "| column17  |\n" +
+                "| column15  |\n" +
+                "| 16        |\n" +
+                "| 12        |\n" +
+                "| 11NonNum  |\n" +
+                "| 11Another |\n" +
+                "| 11        |\n" +
+                "", out.toString());
+    }
+
+    @Test
+    public void test_basicN1AFSuffixNoSort() {
+        MarkdownTable table = getTable("" +
+                "| Header1  |\n" +
+                "|----------|\n" +
+                "| 11NonNum |\n" +
+                "| 11 |\n" +
+                "| 11Another |\n" +
+                "| 12 |\n" +
+                "| column15 |\n" +
+                "| 16 |\n" +
+                "| column17 |\n" +
+                "| column18 |\n" +
+                "", formatOptionsAsIs("", null));
+
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, true, false) }, 0, MarkdownTable.ALL_SUFFIXES_NO_SORT);
+        sorted.appendTable(out);
+
+        assertEquals("", "" +
+                "|  Header1  |\n" +
+                "|-----------|\n" +
+                "| 11NonNum  |\n" +
+                "| 11        |\n" +
+                "| 11Another |\n" +
+                "| 12        |\n" +
+                "| 16        |\n" +
+                "| column15  |\n" +
+                "| column17  |\n" +
+                "| column18  |\n" +
+                "", out.toString());
+    }
+
+    @Test
+    public void test_basicN1DFSuffixNoSort() {
+        MarkdownTable table = getTable("" +
+                "| Header1  |\n" +
+                "|----------|\n" +
+                "| 11NonNum |\n" +
+                "| 11 |\n" +
+                "| 11Another |\n" +
+                "| 12 |\n" +
+                "| column15 |\n" +
+                "| 16 |\n" +
+                "| column17 |\n" +
+                "| column18 |\n" +
+                "", formatOptionsAsIs("", null));
+
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, true, true, false) }, 0, MarkdownTable.ALL_SUFFIXES_NO_SORT);
+        sorted.appendTable(out);
+
+        assertEquals("", "" +
+                "|  Header1  |\n" +
+                "|-----------|\n" +
+                "| 16        |\n" +
+                "| 12        |\n" +
+                "| 11NonNum  |\n" +
+                "| 11        |\n" +
+                "| 11Another |\n" +
+                "| column18  |\n" +
+                "| column17  |\n" +
+                "| column15  |\n" +
+                "", out.toString());
+    }
+
+    @Test
+    public void test_basicN1ALSuffixNoSort() {
+        MarkdownTable table = getTable("" +
+                "| Header1  |\n" +
+                "|----------|\n" +
+                "| 11NonNum |\n" +
+                "| 11 |\n" +
+                "| 11Another |\n" +
+                "| 12 |\n" +
+                "| column15 |\n" +
+                "| 16 |\n" +
+                "| column17 |\n" +
+                "| column18 |\n" +
+                "", formatOptionsAsIs("", null));
+
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, false, true, true) }, 0, MarkdownTable.ALL_SUFFIXES_NO_SORT);
+        sorted.appendTable(out);
+
+        assertEquals("", "" +
+                "|  Header1  |\n" +
+                "|-----------|\n" +
+                "| column15  |\n" +
+                "| column17  |\n" +
+                "| column18  |\n" +
+                "| 11NonNum  |\n" +
+                "| 11        |\n" +
+                "| 11Another |\n" +
+                "| 12        |\n" +
+                "| 16        |\n" +
+                "", out.toString());
+    }
+
+    @Test
+    public void test_basicN1DLSuffixNoSort() {
+        MarkdownTable table = getTable("" +
+                "| Header1  |\n" +
+                "|----------|\n" +
+                "| 11NonNum |\n" +
+                "| 11 |\n" +
+                "| 11Another |\n" +
+                "| 12 |\n" +
+                "| column15 |\n" +
+                "| 16 |\n" +
+                "| column17 |\n" +
+                "| column18 |\n" +
+                "", formatOptionsAsIs("", null));
+
+        MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(0, true, true, true) }, 0, MarkdownTable.ALL_SUFFIXES_NO_SORT);
+        sorted.appendTable(out);
+
+        assertEquals("", "" +
+                "|  Header1  |\n" +
+                "|-----------|\n" +
+                "| column18  |\n" +
+                "| column17  |\n" +
+                "| column15  |\n" +
+                "| 16        |\n" +
+                "| 12        |\n" +
+                "| 11NonNum  |\n" +
+                "| 11        |\n" +
+                "| 11Another |\n" +
                 "", out.toString());
     }
 
@@ -325,7 +589,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(3, false, true, true) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(3, false, true, true) }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -358,7 +622,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(3, true, true, false) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(3, true, true, false) }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -391,7 +655,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", formatOptionsAsIs("", null));
 
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(3, true, true, true) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(3, true, true, true) }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -428,7 +692,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 ColumnSort.columnSort(0, false, false, false),
                 ColumnSort.columnSort(1, false, false, false),
                 ColumnSort.columnSort(2, false, false, false),
-        }, 0);
+        }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -465,7 +729,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 ColumnSort.columnSort(0, true, false, false),
                 ColumnSort.columnSort(1, true, false, false),
                 ColumnSort.columnSort(2, true, false, false),
-        }, 0);
+        }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -502,7 +766,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 ColumnSort.columnSort(0, false, false, false),
                 ColumnSort.columnSort(1, true, false, false),
                 ColumnSort.columnSort(2, false, false, false),
-        }, 0);
+        }, 0, null);
         sorted.appendTable(out);
 
         assertEquals("", "" +
@@ -540,7 +804,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptionsAsIs("", null));
         assertTrue(table.addTrackedOffset(pos));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
-        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(1, false, false, false) }, 0);
+        MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(1, false, false, false) }, 0, null);
         sorted.appendTable(out);
         String sortedTable = out.toString(0);
         int offset = sorted.getTrackedOffsetIndex(pos);

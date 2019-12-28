@@ -57,7 +57,7 @@ public class TableNodeFormatter implements NodeFormatter {
     }
 
     private void render(TableBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        myTable = new MarkdownTable(options);
+        myTable = new MarkdownTable(node.getChars(), options);
 
         switch (context.getRenderPurpose()) {
             case TRANSLATION_SPANS:

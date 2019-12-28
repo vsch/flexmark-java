@@ -11,17 +11,17 @@ public class CharPredicateTest {
         CharPredicate test1 = value -> value == 'a';
         CharPredicate test2 = value -> value == 'b';
 
-        assertSame(FALSE, FALSE.and(TRUE));
-        assertSame(FALSE, TRUE.and(FALSE));
-        assertSame(FALSE, test1.and(FALSE));
-        assertSame(FALSE, FALSE.and(test1));
+        assertSame(NONE, NONE.and(ALL));
+        assertSame(NONE, ALL.and(NONE));
+        assertSame(NONE, test1.and(NONE));
+        assertSame(NONE, NONE.and(test1));
 
-        assertSame(TRUE, TRUE.and(TRUE));
-        assertSame(test1, test1.and(TRUE));
-        assertSame(test1, TRUE.and(test1));
+        assertSame(ALL, ALL.and(ALL));
+        assertSame(test1, test1.and(ALL));
+        assertSame(test1, ALL.and(test1));
 
-        assertSame(test2, TRUE.and(test2));
-        assertSame(test2, test2.and(TRUE));
+        assertSame(test2, ALL.and(test2));
+        assertSame(test2, test2.and(ALL));
 
         assertFalse(test1.and(test2).test('a'));
         assertFalse(test1.and(test2).test('b'));
@@ -39,8 +39,8 @@ public class CharPredicateTest {
         CharPredicate test1 = value -> value == 'a';
         CharPredicate test2 = value -> value == 'b';
 
-        assertSame(TRUE, FALSE.negate());
-        assertSame(FALSE, TRUE.negate());
+        assertSame(ALL, NONE.negate());
+        assertSame(NONE, ALL.negate());
 
         assertFalse(test1.negate().test('a'));
         assertFalse(test2.negate().test('b'));
@@ -54,17 +54,17 @@ public class CharPredicateTest {
         CharPredicate test1 = value -> value == 'a';
         CharPredicate test2 = value -> value == '0';
 
-        assertSame(TRUE, FALSE.or(TRUE));
-        assertSame(TRUE, TRUE.or(FALSE));
-        assertSame(TRUE, test1.or(TRUE));
-        assertSame(TRUE, TRUE.or(test1));
+        assertSame(ALL, NONE.or(ALL));
+        assertSame(ALL, ALL.or(NONE));
+        assertSame(ALL, test1.or(ALL));
+        assertSame(ALL, ALL.or(test1));
 
-        assertSame(FALSE, FALSE.or(FALSE));
-        assertSame(test1, test1.or(FALSE));
-        assertSame(test1, FALSE.or(test1));
+        assertSame(NONE, NONE.or(NONE));
+        assertSame(test1, test1.or(NONE));
+        assertSame(test1, NONE.or(test1));
 
-        assertSame(test2, FALSE.or(test2));
-        assertSame(test2, test2.or(FALSE));
+        assertSame(test2, NONE.or(test2));
+        assertSame(test2, test2.or(NONE));
 
         assertFalse(test1.or(test2).test('c'));
         assertFalse(test1.or(test2).test('c'));
@@ -237,8 +237,8 @@ public class CharPredicateTest {
 
     @Test
     public void anyOfChars() {
-        assertSame(FALSE, anyOf());
-        assertSame(FALSE, anyOf(""));
+        assertSame(NONE, anyOf());
+        assertSame(NONE, anyOf(""));
         assertSame(SPACE, anyOf(' '));
         assertSame(SPACE, anyOf(' ', ' '));
         assertSame(SPACE, anyOf(' ', ' ', ' ', ' '));

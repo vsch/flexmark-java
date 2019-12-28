@@ -2,6 +2,8 @@ package com.vladsch.flexmark.util;
 
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class Utils {
@@ -637,6 +640,53 @@ public class Utils {
         ParsePosition pos = new ParsePosition(0);
         Number number = numberFormat.parse(text, pos);
         return pos.getIndex() == text.length() ? number : null;
+    }
+
+    /**
+     * Parse number from text
+     *
+     * Will parse 0x, 0b, octal if starts with 0, decimal
+     *
+     * @param text text containing the number to parse
+     *
+     * @return null or parsed number with unparsed suffix
+     */
+    @Nullable
+    public static Pair<Number, String> parseNumberPrefixOrNull(@Nullable String text, @Nullable Predicate<String> suffixTester) {
+        if (text == null) return null;
+
+        if (text.startsWith("0x")) {
+            int digits = SequenceUtils.countLeading(text.substring(2), CharPredicate.HEXADECIMAL_DIGITS);
+            String suffix = text.substring(2 + digits);
+            if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
+                return Pair.of(parseLongOrNull(text.substring(2, 2 + digits), 16), suffix);
+            }
+        } else if (text.startsWith("0b")) {
+            int digits = SequenceUtils.countLeading(text.substring(2), CharPredicate.BINARY_DIGITS);
+            String suffix = text.substring(2 + digits);
+            if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
+                return Pair.of(parseLongOrNull(text.substring(2, 2 + digits), 2), suffix);
+            }
+        } else if (text.startsWith("0")) {
+            int digits = SequenceUtils.countLeading(text.substring(1), CharPredicate.OCTAL_DIGITS);
+            int decimalDigits = SequenceUtils.countLeading(text.substring(1), CharPredicate.DECIMAL_DIGITS);
+            if (digits == decimalDigits) {
+                String suffix = text.substring(1 + digits);
+                if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
+                    return Pair.of(parseLongOrNull(text.substring(1, 1 + digits), 8), suffix);
+                }
+            }
+        }
+
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        ParsePosition pos = new ParsePosition(0);
+        Number number = numberFormat.parse(text, pos);
+        String suffix = text.substring(pos.getIndex());
+        if (pos.getIndex() > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
+            return Pair.of(number, suffix);
+        }
+
+        return null;
     }
 
     public static int compare(@Nullable Number n1, @Nullable Number n2) {

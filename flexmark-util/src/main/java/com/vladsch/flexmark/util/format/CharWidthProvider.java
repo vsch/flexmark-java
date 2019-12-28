@@ -8,7 +8,7 @@ public interface CharWidthProvider {
     int getCharWidth(char c);
 
     default int getStringWidth(@NotNull CharSequence chars) {
-        return getStringWidth(chars, CharPredicate.FALSE);
+        return getStringWidth(chars, CharPredicate.NONE);
     }
 
     default int getStringWidth(@NotNull CharSequence chars, @NotNull CharPredicate zeroWidthChars) {

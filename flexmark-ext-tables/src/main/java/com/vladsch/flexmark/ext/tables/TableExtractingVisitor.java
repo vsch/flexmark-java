@@ -40,7 +40,7 @@ public class TableExtractingVisitor {
     }
 
     private void visit(TableBlock node) {
-        myTable = new MarkdownTable(options);
+        myTable = new MarkdownTable(node.getChars(), options);
         myVisitor.visitChildren(node);
         myTables.add(myTable);
 

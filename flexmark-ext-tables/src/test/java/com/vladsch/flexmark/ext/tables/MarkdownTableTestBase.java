@@ -76,7 +76,7 @@ public class MarkdownTableTestBase {
 
     protected MarkdownTable getSortedTable(MarkdownTable table, ColumnSort[] columnSorts) {
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
-        return table.sorted(columnSorts, 0);
+        return table.sorted(columnSorts, 0, null);
     }
 
     protected MarkdownTable getTable(CharSequence markdown, DataHolder options) {

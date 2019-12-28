@@ -93,6 +93,23 @@ public class BasedOffsetTracker {
         return lastResult;
     }
 
+    @NotNull
+    public BasedSequence getSequence() {
+        return sequence;
+    }
+
+    @NotNull
+    public SegmentOffsetTree getSegmentOffsetTree() {
+        return segmentOffsetTree;
+    }
+
+    @Override
+    public String toString() {
+        return "BasedOffsetTracker{" +
+                "tree=" + segmentOffsetTree +
+                '}';
+    }
+
     /**
      * Create a based offset tracker for the given sequence
      *
