@@ -37,8 +37,6 @@ public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<
     int noAnchorsSize();
     int length();
 
-    Object getLastPart();
-
     boolean isTrackTextFirst256();
     int getTextLength();
     int getTextSegments();

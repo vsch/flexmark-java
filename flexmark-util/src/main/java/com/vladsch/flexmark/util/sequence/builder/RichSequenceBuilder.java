@@ -64,11 +64,6 @@ public final class RichSequenceBuilder implements ISequenceBuilder<RichSequenceB
     }
 
     @Override
-    public boolean isEmpty() {
-        return segments.length() > 0;
-    }
-
-    @Override
     public String toString() {
         return segments.toString();
     }

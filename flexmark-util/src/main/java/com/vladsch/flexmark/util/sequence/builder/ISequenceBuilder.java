@@ -56,9 +56,12 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends IR
     @NotNull S toSequence();
 
     int length();
-    boolean isEmpty();
+
+    default boolean isEmpty() {
+        return length() <= 0;
+    }
 
     default boolean isNotEmpty() {
-        return !isEmpty();
+        return length() > 0;
     }
 }

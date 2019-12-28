@@ -158,16 +158,12 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         return segments.length();
     }
 
-    @Override
-    public boolean isEmpty() {
-        return segments.length() == 0;
-    }
-
     @NotNull
     public String toStringWithRanges() {
         return segments.toStringWithRangesVisibleWhitespace(baseSeq);
     }
 
+    @NotNull
     public String toString() {
         StringBuilder sb = new StringBuilder();
         BasedSequence last = null;
@@ -198,6 +194,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         return sb.toString();
     }
 
+    @NotNull
     public String toStringNoAddedSpaces() {
         StringBuilder sb = new StringBuilder();
         for (Object part : segments) {
@@ -212,18 +209,22 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         return sb.toString();
     }
 
+    @NotNull
     public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base) {
         return new SequenceBuilder(base, null);
     }
 
+    @NotNull
     public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer) {
         return new SequenceBuilder(base, optimizer);
     }
 
+    @NotNull
     public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options) {
         return new SequenceBuilder(base, options, null);
     }
 
+    @NotNull
     public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options, @NotNull SegmentOptimizer optimizer) {
         return new SequenceBuilder(base, options, optimizer);
     }

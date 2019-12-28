@@ -97,7 +97,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
     @Override
     public boolean isEmpty() {
-        return partsSize == 0;
+        return length == 0;
     }
 
     @Override
@@ -266,11 +266,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     private Seg getSeg(int index) {
         int i = index * 2;
         return i + 1 >= parts.length ? Seg.NULL : Seg.segOf(parts[i], parts[i + 1]);
-    }
-
-    @Override
-    public Object getLastPart() {
-        return getPart(partsSize);
     }
 
     @NotNull
