@@ -20,6 +20,8 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     protected SegmentedSequence(BasedSequence baseSeq, int startOffset, int endOffset, int length) {
         super(0);
         assert baseSeq == baseSeq.getBaseSequence();
+        assert startOffset >= 0;
+        assert endOffset >= startOffset && endOffset <= baseSeq.length();
 
         this.baseSeq = baseSeq;
         this.startOffset = startOffset;

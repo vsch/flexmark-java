@@ -24,7 +24,6 @@ import java.util.BitSet;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Predicate;
 
 import static com.vladsch.flexmark.util.Utils.compare;
 import static com.vladsch.flexmark.util.Utils.max;
@@ -47,6 +46,7 @@ public class MarkdownTable {
 
     private boolean isHeading;
     private boolean isSeparator;
+    CharSequence formatTableIndentPrefix;
 
     // used by finalization and conversion to text
     private CellAlignment[] alignments;
@@ -77,12 +77,13 @@ public class MarkdownTable {
         }
     };
 
-    public MarkdownTable(@NotNull CharSequence tableChars, DataHolder options) {
+    public MarkdownTable(@NotNull CharSequence tableChars, @Nullable DataHolder options) {
         this(tableChars, new TableFormatOptions(options));
     }
 
-    public MarkdownTable(@NotNull CharSequence tableChars, TableFormatOptions options) {
+    public MarkdownTable(@NotNull CharSequence tableChars, @Nullable TableFormatOptions options) {
         this.tableChars = tableChars;
+        this.formatTableIndentPrefix = options.formatTableIndentPrefix;
         header = new TableSection(TableSectionType.HEADER);
         separator = new TableSeparatorSection(TableSectionType.SEPARATOR);
         body = new TableSection(TableSectionType.BODY);
@@ -104,6 +105,14 @@ public class MarkdownTable {
 
     public TableCell getCaptionCell() {
         return caption.rows.size() > 0 && caption.rows.get(0).cells.size() > 0 ? caption.rows.get(0).cells.get(0) : TableCaptionSection.NULL_CELL;
+    }
+
+    public CharSequence getFormatTableIndentPrefix() {
+        return formatTableIndentPrefix;
+    }
+
+    public void setFormatTableIndentPrefix(CharSequence formatTableIndentPrefix) {
+        this.formatTableIndentPrefix = formatTableIndentPrefix;
     }
 
     public void setCaptionCell(TableCell captionCell) {
@@ -1165,12 +1174,12 @@ public class MarkdownTable {
     public void appendTable(LineAppendable out) {
         // we will prepare the separator based on max columns
         Ref<Integer> delta = new Ref<>(0);
-        String linePrefix = options.formatTableIndentPrefix;
+        CharSequence linePrefix = formatTableIndentPrefix;
 
         trackedOffsets.sort(Comparator.comparing(TrackedOffset::getOffset));
 
-        int formatterOptions = out.getOptions();
-        out.setOptions(formatterOptions & ~(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE));
+        out.pushOptions();
+        out.removeOptions(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE);
 
         finalizeTable();
 
@@ -1381,11 +1390,11 @@ public class MarkdownTable {
             }
 
             if (!handled) {
-                out.setOptions(formatterOptions);
+                out.popOptions().pushOptions();
                 out.line().append('[').append(formattedCaption).append(']').line();
             }
         }
-        out.setOptions(formatterOptions);
+        out.popOptions();
     }
 
     public static void appendFormattedCaption(
@@ -1461,7 +1470,7 @@ public class MarkdownTable {
             LineAppendable out,
             List<TableRow> rows,
             boolean isHeader,
-            String linePrefix,
+            CharSequence linePrefix,
             Ref<Integer> delta
     ) {
         for (TableRow row : rows) {

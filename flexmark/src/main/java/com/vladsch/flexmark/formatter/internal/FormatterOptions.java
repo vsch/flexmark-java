@@ -5,9 +5,11 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
+import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.options.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class FormatterOptions {

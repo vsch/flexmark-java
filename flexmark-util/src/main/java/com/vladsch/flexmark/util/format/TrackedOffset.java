@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
  * Tracked Offset information
  *
  * NOTE: purposefully equals compares the offset only and will equal an integer of the same value
- *   to allow use of TrackedOffset as a key but lookup to be done by offset
+ * to allow use of TrackedOffset as a key but lookup to be done by offset
  */
 final public class TrackedOffset implements Comparable<TrackedOffset> {
     private enum Flags {
@@ -41,6 +41,12 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
         this.index = -1;
     }
 
+    private TrackedOffset(@NotNull TrackedOffset other, int offset) {
+        this.offset = offset;
+        this.flags = other.flags;
+        this.index = -1;
+    }
+
     public int getOffset() {
         return offset;
     }
@@ -67,6 +73,11 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
 
     public boolean isAfterDelete() {
         return BitFieldSet.any(flags, F_AFTER_DELETE);
+    }
+
+    @NotNull
+    public TrackedOffset plusOffsetDelta(int delta) {
+        return new TrackedOffset(this, offset + delta);
     }
 
     @Override

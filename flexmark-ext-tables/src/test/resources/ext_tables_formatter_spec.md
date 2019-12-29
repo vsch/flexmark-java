@@ -1225,3 +1225,301 @@ Exception in fill table columns when cell text is empty
 ````````````````````````````````
 
 
+## Tracked Offset
+
+```````````````````````````````` example Tracked Offset: 1
+⦙Abc|Def
+---|---
+Uvw|Xyz
+.
+| ⦙Abc | Def |
+|-----|-----|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 2
+some prefix text
+
+⦙Abc|Def
+---|---
+Uvw|Xyz
+.
+some prefix text
+
+| ⦙Abc | Def |
+|-----|-----|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 3
+Abc⦙|Def
+---|---
+Uvw|Xyz
+.
+| Abc⦙ | Def |
+|-----|-----|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 4
+Abc|⦙Def
+---|---
+Uvw|Xyz
+.
+| Abc | ⦙Def |
+|-----|-----|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 5
+Abc|Def⦙
+---|---
+Uvw|Xyz
+.
+| Abc | Def⦙ |
+|-----|-----|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 6
+Abc|Def
+⦙---|---
+Uvw|Xyz
+.
+| Abc | Def |
+|⦙-----|-----|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 7
+Abc|Def
+---⦙|---
+Uvw|Xyz
+.
+| Abc | Def |
+|-----⦙|-----|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 8
+Abc|Def
+---|⦙---
+Uvw|Xyz
+.
+| Abc | Def |
+|-----|⦙-----|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 9
+Abc|Def
+---|---⦙
+Uvw|Xyz
+.
+| Abc | Def |
+|-----|-----⦙|
+| Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 10
+Abc|Def
+---|---
+⦙Uvw|Xyz
+.
+| Abc | Def |
+|-----|-----|
+| ⦙Uvw | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 11
+Abc|Def
+---|---
+Uvw⦙|Xyz
+.
+| Abc | Def |
+|-----|-----|
+| Uvw⦙ | Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 12
+Abc|Def
+---|---
+Uvw|⦙Xyz
+.
+| Abc | Def |
+|-----|-----|
+| Uvw | ⦙Xyz |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 13
+Abc|Def
+---|---
+Uvw|Xyz⦙
+.
+| Abc | Def |
+|-----|-----|
+| Uvw | Xyz⦙ |
+
+````````````````````````````````
+
+
+### Indented
+
+```````````````````````````````` example Tracked Offset - Indented: 1
+* item
+    
+⦙Abc|Def
+---|---
+.
+* item
+
+| ⦙Abc | Def |
+|-----|-----|
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset - Indented: 2
+* item
+    
+  Abc⦙|Def
+  ---|---
+.
+* item
+
+  | Abc⦙ | Def |
+  |-----|-----|
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset - Indented: 3
+* item
+    
+  Abc|⦙Def
+  ---|---
+.
+* item
+
+  | Abc | ⦙Def |
+  |-----|-----|
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset - Indented: 4
+* item
+    
+  Abc|Def⦙
+  ---|---
+.
+* item
+
+  | Abc | Def⦙ |
+  |-----|-----|
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset - Indented: 5
+* item
+    
+  Abc|Def
+  ⦙---|---
+.
+* item
+
+  | Abc | Def |
+  |⦙-----|-----|
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset - Indented: 6
+* item
+    
+  Abc|Def
+  ---⦙|---
+.
+* item
+
+  | Abc | Def |
+  |-----⦙|-----|
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset - Indented: 7
+* item
+    
+  Abc|Def
+  ---|⦙---
+.
+* item
+
+  | Abc | Def |
+  |-----|⦙-----|
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset - Indented: 8
+* item
+    
+  Abc|Def
+  ---|---⦙
+.
+* item
+
+  | Abc | Def |
+  |-----|-----⦙|
+
+````````````````````````````````
+
+
+in item
+
+```````````````````````````````` example Tracked Offset - Indented: 9
+- Add: live templates starting with `.`    
+                                        
+  | Element       | Abbreviation    | Expansion                                               |
+  |---------------|-----------------|---------------------------------------------------------|
+  | Abbreviation  | `.abbreviation` | `*[]: `                                                 |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`                                       |
+  | Explicit link | `.link`         | `[]()`                                                  |
+.
+- Add: live templates starting with `.`
+
+  |    Element    |  Abbreviation   |     Expansion     |
+  |---------------|-----------------|-------------------|
+  | Abbreviation  | `.abbreviation` | `*[]: `           |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
+  | Explicit link | `.link`         | `[]()`            |
+
+````````````````````````````````
+
+

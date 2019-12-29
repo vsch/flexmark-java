@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
@@ -11,6 +13,10 @@ public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, N
 
     public HtmlMarkdownWriter(int formatOptions) {
         super(formatOptions);
+    }
+
+    public HtmlMarkdownWriter(int formatOptions, @NotNull SequenceBuilder builder) {
+        super(formatOptions, builder);
     }
 
     @Override

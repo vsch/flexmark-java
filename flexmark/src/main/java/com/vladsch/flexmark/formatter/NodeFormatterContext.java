@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;

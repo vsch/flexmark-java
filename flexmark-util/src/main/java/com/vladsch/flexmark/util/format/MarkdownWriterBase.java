@@ -45,12 +45,10 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     }
 
     public abstract boolean isLastBlockQuoteChild();
+
     public abstract M tailBlankLine(int count);
 
     // @formatter:off
-    @Override @NotNull public LineAppendable pushOptions()                                                                                                      { return appendable.pushOptions(); }
-    @Override @NotNull public LineAppendable popOptions()                                                                                                       { return appendable.popOptions(); }
-    @Override @NotNull public LineAppendable changeOptions(int addFlags, int removeFlags)                                                                       { return appendable.changeOptions(addFlags, removeFlags); }
     @Override public boolean isPendingSpace()                                                                                                                   { return appendable.isPendingSpace(); }
     @Override public boolean isPreFormatted()                                                                                                                   { return appendable.isPreFormatted(); }
     @Override public boolean isPreFormattedLine(int line)                                                                                                       { return appendable.isPreFormattedLine(line); }
@@ -74,10 +72,13 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @NotNull @Override public CharSequence[] getLinesContent(int startLine, int endLine)                                                                        { return appendable.getLinesContent(startLine, endLine); }
     @NotNull @Override public CharSequence[] getLines(int startLine, int endLine)                                                                               { return appendable.getLines(startLine, endLine); }
     @Override @NotNull public BitFieldSet<Options> getOptionSet()                                                                                               { return appendable.getOptionSet();}
+    @Override public int getAfterEolPrefixDelta()                                                                                                               { return appendable.getAfterEolPrefixDelta(); }
+    @Override @NotNull public M pushOptions()                                                                                                                   { appendable.pushOptions(); return (M) this;}
+    @Override @NotNull public M popOptions()                                                                                                                    { appendable.popOptions(); return (M) this;}
+    @Override @NotNull public M changeOptions(int addFlags, int removeFlags)                                                                                    { appendable.changeOptions(addFlags, removeFlags); return (M) this;}
     @NotNull @Override public M addIndentOnFirstEOL(@NotNull Runnable runnable)                                                                                 { appendable.addIndentOnFirstEOL(runnable); return (M)this; }
     @NotNull @Override public M addPrefix(@NotNull CharSequence prefix)                                                                                         { appendable.addPrefix(prefix); return (M)this; }
     @NotNull @Override public M addPrefix(@NotNull CharSequence prefix, boolean afterEol)                                                                       { appendable.addPrefix(prefix, afterEol); return (M)this; }
-    @Override public int getAfterEolPrefixDelta()                                                                                                               { return appendable.getAfterEolPrefixDelta(); }
     @NotNull @Override public M append(char c)                                                                                                                  { appendable.append(c); return (M)this; }
     @NotNull @Override public M append(@NotNull CharSequence csq)                                                                                               { appendable.append(csq); return (M)this; }
     @NotNull @Override public M append(@NotNull CharSequence csq, int start, int end)                                                                           { appendable.append(csq, start, end); return (M)this; }

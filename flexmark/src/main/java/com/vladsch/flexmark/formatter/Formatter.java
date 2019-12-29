@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineAppendable;
@@ -121,6 +122,9 @@ public class Formatter implements IRender {
 
     // formatter family override
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DataKey<>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
+
+    // these are used by table and paragraph wrapping
+    public static final DataKey<List<TrackedOffset>> TRACKED_OFFSETS = new DataKey<>("TRACKED_OFFSETS", Collections.emptyList());
 
     /**
      * use corrected name
@@ -901,6 +905,14 @@ public class Formatter implements IRender {
             return new SubNodeFormatter(this, writer, options);
         }
 
+        @Override
+        public NodeFormatterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder) {
+            MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions(), builder);
+            writer.setContext(this);
+            //noinspection ReturnOfInnerClass
+            return new SubNodeFormatter(this, writer, options);
+        }
+
         void renderNode(Node node, NodeFormatterSubContext subContext) {
             if (node instanceof Document) {
                 // here we render multiple phases
@@ -1057,7 +1069,15 @@ public class Formatter implements IRender {
 
             @Override
             public NodeFormatterContext getSubContext(DataHolder options) {
-                MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions());
+                MarkdownWriter writer = new MarkdownWriter(this.markdown.getOptions());
+                writer.setContext(this);
+                //noinspection ReturnOfInnerClass
+                return new SubNodeFormatter(myMainNodeRenderer, writer, new ScopedDataSet(myOptions, options));
+            }
+
+            @Override
+            public NodeFormatterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder) {
+                MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions(), builder);
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
                 return new SubNodeFormatter(myMainNodeRenderer, htmlWriter, new ScopedDataSet(myOptions, options));

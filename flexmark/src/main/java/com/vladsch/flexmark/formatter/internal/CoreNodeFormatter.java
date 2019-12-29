@@ -3,7 +3,14 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.Formatter;
-import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.formatter.FormattingPhase;
+import com.vladsch.flexmark.formatter.MarkdownWriter;
+import com.vladsch.flexmark.formatter.NodeFormatter;
+import com.vladsch.flexmark.formatter.NodeFormatterContext;
+import com.vladsch.flexmark.formatter.NodeFormatterFactory;
+import com.vladsch.flexmark.formatter.NodeFormattingHandler;
+import com.vladsch.flexmark.formatter.NodeRepositoryFormatter;
+import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
@@ -12,25 +19,49 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.ast.*;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeRepository;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataKeyBase;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
-import com.vladsch.flexmark.util.format.options.*;
+import com.vladsch.flexmark.util.format.TrackedOffset;
+import com.vladsch.flexmark.util.format.options.ContinuationIndent;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.format.options.HeadingStyle;
+import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
-import static com.vladsch.flexmark.formatter.RenderPurpose.*;
+import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.html.LineAppendable.F_TRIM_LEADING_WHITESPACE;
@@ -54,10 +85,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     final FormatterOptions formatterOptions;
-    private final ListOptions listOptions;
-    private final String myHtmlBlockPrefix;
-    private final String myHtmlInlinePrefix;
-    private final String myTranslationAutolinkPrefix;
+    final private ListOptions listOptions;
+    final private String myHtmlBlockPrefix;
+    final private String myHtmlInlinePrefix;
+    final private String myTranslationAutolinkPrefix;
     private int blankLines;
     MutableDataHolder myTranslationStore;
     private Map<String, String> attributeUniquificationIdMap;
@@ -931,21 +962,25 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         } else {
             FormatterOptions formatterOptions = context.getFormatterOptions();
             if (formatterOptions.rightMargin > 0) {
-                NodeFormatterContext subContext = context.getSubContext(context.getOptions().toMutable().set(Formatter.KEEP_SOFT_LINE_BREAKS, true).set(Formatter.KEEP_HARD_LINE_BREAKS, true));
+                MutableDataHolder subContextOptions = context.getOptions().toMutable().set(Formatter.KEEP_SOFT_LINE_BREAKS, true).set(Formatter.KEEP_HARD_LINE_BREAKS, true);
+                SequenceBuilder builder = node.getChars().getBuilder();
+                NodeFormatterContext subContext = context.getSubContext(subContextOptions, builder.getBuilder());
                 subContext.renderChildren(node);
 
-                SequenceBuilder builder = node.getChars().getBuilder();
                 MarkdownWriter subContextMarkdown = subContext.getMarkdown();
                 subContextMarkdown.toBuilder(builder, 0);
 
                 MarkdownParagraph formatter = new MarkdownParagraph(builder.toSequence(), formatterOptions.charWidthProvider);
+                List<TrackedOffset> trackedOffsets = Formatter.TRACKED_OFFSETS.get(context.getDocument());
 
                 if (formatterOptions.paragraphContinuationIndent == ContinuationIndent.ALIGN_TO_FIRST) {
                     formatter.setWidth(formatterOptions.rightMargin - markdown.getPrefix().length());
                     formatter.setKeepSoftBreaks(false);
                     formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
+                    formatter.setRestoreTrackedSpaces(false);
                     formatter.setFirstIndent("");
                     formatter.setIndent("");
+
                     // adjust first line width, based on change in prefix after the first line EOL
                     formatter.setFirstWidthOffset(markdown.column() - markdown.getAfterEolPrefixDelta());
 
@@ -953,7 +988,27 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
                     }
 
-                    markdown.append(formatter.wrapTextNotTracked().toMapped(SpaceMapper.fromNonBreakSpace));
+                    for (TrackedOffset trackedOffset : trackedOffsets) {
+                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
+                            formatter.addTrackedOffset(trackedOffset);
+                        }
+                    }
+
+                    int paragraphOffset = markdown.offsetWithPending();
+                    BasedSequence wrappedText = formatter.wrapText();
+                    markdown.append(wrappedText.toMapped(SpaceMapper.fromNonBreakSpace));
+
+                    // get the indent used for new lines so that index can be adjusted by added indent
+                    int lineIndent = markdown.getPrefix().length();
+                    for (TrackedOffset trackedOffset : trackedOffsets) {
+                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
+                            if (trackedOffset.isResolved()) {
+                                int interveningLines = wrappedText.countOfAny(CharPredicate.EOL, 0, trackedOffset.getIndex());
+                                trackedOffset.setIndex(trackedOffset.getIndex() + paragraphOffset + interveningLines * lineIndent);
+                            }
+                        }
+                    }
+
                     markdown.line();
                 } else {
                     int indent;
@@ -975,6 +1030,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     CharSequence firstIndent = markdown.getPrefix().subSequence(0, Math.max(0, markdown.getPrefix().length() - markdown.getAfterEolPrefixDelta()));
                     formatter.setFirstIndent(firstIndent);
                     formatter.setIndent(RepeatedSequence.ofSpaces(indent));
+                    formatter.setRestoreTrackedSpaces(false);
 
                     // adjust first line width, based on change in prefix after the first line EOL
                     formatter.setFirstWidthOffset(-markdown.column());
@@ -983,7 +1039,22 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
                     }
 
-                    BasedSequence wrapped = formatter.wrapTextNotTracked().toMapped(SpaceMapper.fromNonBreakSpace);
+                    for (TrackedOffset trackedOffset : trackedOffsets) {
+                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
+                            formatter.addTrackedOffset(trackedOffset);
+                        }
+                    }
+
+                    BasedSequence wrapped = formatter.wrapText().toMapped(SpaceMapper.fromNonBreakSpace);
+
+                    int paragraphOffset = markdown.offset();
+                    for (TrackedOffset trackedOffset : trackedOffsets) {
+                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
+                            if (trackedOffset.isResolved()) {
+                                trackedOffset.setIndex(trackedOffset.getIndex() + paragraphOffset);
+                            }
+                        }
+                    }
 
                     markdown.openPreFormatted(false).pushPrefix().setPrefix("", false)
                             .append(wrapped).line()

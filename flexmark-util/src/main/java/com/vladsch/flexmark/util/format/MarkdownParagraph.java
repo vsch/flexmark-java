@@ -2,7 +2,11 @@ package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.sequence.Range;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
@@ -102,20 +106,20 @@ public class MarkdownParagraph {
         BasedSequence wrapped = wrapping.wrapText();
 
         // FIX: apply after wrapping fixes
+        BasedOffsetTracker tracker = BasedOffsetTracker.create(wrapped);
+
         if (restoreTrackedSpaces) {
             // NOTE: Restore trailing spaces at end of line if it has tracked offset on it
 //                int endOffset = baseSeq.getEndOffset();
             int restoredAppendSpaces = 0;
 
-            BasedOffsetTracker tracker = BasedOffsetTracker.create(wrapped);
-            BasedOffsetTracker baseSeqTracker = BasedOffsetTracker.create(baseSeq);
             int baseSeqLastNonBlank = baseSeq.lastIndexOfAnyNot(CharPredicate.WHITESPACE) + 1;
+            BasedOffsetTracker baseSeqTracker = BasedOffsetTracker.create(baseSeq);
 
             for (int i = iMax; i-- > 0; ) {
                 TrackedOffset trackedOffset = trackedOffsets.get(i);
                 OffsetInfo baseInfo = baseSeqTracker.getOffsetInfo(trackedOffset.getOffset(), true);
                 int offset = baseInfo.endIndex;
-                boolean noBeforeSpaces = false;
                 int offsetSpaces = baseSeq.countTrailing(CharPredicate.SPACE, offset);
                 int offsetSpacesAfter = baseSeq.countLeading(CharPredicate.SPACE, offset);
                 boolean needSpace = baseSeq.countTrailing(CharPredicate.SPACE_TAB_EOL, offset) > 0;
@@ -211,12 +215,17 @@ public class MarkdownParagraph {
                 wrapped = wrapped.appendSpaces(restoredAppendSpaces);
             }
         } else {
-            BasedOffsetTracker tracker = BasedOffsetTracker.create(wrapped);
             // Now we map the tracked offsets to indexes in the resulting text
             for (int i = iMax; i-- > 0; ) {
                 TrackedOffset trackedOffset = trackedOffsets.get(i);
-                OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
-                trackedOffset.setIndex(info.endIndex);
+                if (baseSeq.safeBaseCharAt(trackedOffset.getOffset()) == ' ' && baseSeq.safeBaseCharAt(trackedOffset.getOffset() - 1) != ' ') {
+                    // we need to use previous non-blank and use that offset
+                    OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset() - 1, false);
+                    trackedOffset.setIndex(info.endIndex);
+                } else {
+                    OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
+                    trackedOffset.setIndex(info.endIndex);
+                }
             }
         }
 

@@ -7,6 +7,8 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 
@@ -37,9 +39,22 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
      * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
      *
+     * @param options options to use for the context (only options which do not affect the context construction will be used)
+     *
      * @return a new rendering context with a given appendable for its output
      */
     HtmlNodeConverterContext getSubContext(DataHolder options);
+
+    /**
+     * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
+     * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
+     *
+     * @param options options to use for the context (only options which do not affect the context construction will be used)
+     * @param builder sequence builder to user for appended text for tracking original base offsets
+     *
+     * @return a new rendering context with a given appendable for its output
+     */
+    HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder);
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child
@@ -87,14 +102,23 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
     com.vladsch.flexmark.util.ast.Document getForDocument();
 
     HtmlConverterState getState();
+
     HashMap<String, Reference> getReferenceUrlToReferenceMap();
+
     HashSet<Reference> getExternalReferences();
+
     boolean isTrace();
+
     Stack<HtmlConverterState> getStateStack();
+
     void setTrace(boolean trace);
+
     com.vladsch.flexmark.util.ast.Node parseMarkdown(String markdown);
+
     Reference getOrCreateReference(String url, String text, String title);
+
     ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode);
+
     ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode);
 
     /**
@@ -103,48 +127,72 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
     Node getCurrentNode();
 
     void pushState(Node parent);
+
     void popState(LineAppendable out);
 
     void excludeAttributes(String... excludes);
+
     void processAttributes(Node node);
+
     int outputAttributes(LineAppendable out, String initialSep);
+
     void transferIdToParent();
+
     void transferToParentExcept(String... excludes);
+
     void transferToParentOnly(String... includes);
 
     Node peek();
+
     Node peek(int skip);
+
     Node next();
+
     void skip();
+
     Node next(int skip);
+
     void skip(int skip);
 
     // processing related helpers
     void processUnwrapped(Node element);
+
     void processWrapped(Node node, Boolean isBlock, boolean escapeMarkdown);
 
     void processTextNodes(Node node, boolean stripIdAttribute);
+
     void processTextNodes(Node node, boolean stripIdAttribute, CharSequence wrapText);
+
     void processTextNodes(
             Node node,
             boolean stripIdAttribute,
             CharSequence textPrefix,
             CharSequence textSuffix
     );
+
     void wrapTextNodes(
             Node node,
             CharSequence wrapText,
             boolean needSpaceAround
     );
+
     String processTextNodes(Node node);
+
     void appendOuterHtml(Node node);
+
     boolean isInlineCode();
+
     void setInlineCode(boolean inlineCode);
+
     String escapeSpecialChars(String text);
+
     String prepareText(String text);
+
     String prepareText(String text, boolean inCode);
 
     void inlineCode(Runnable inlineRunnable);
+
     void processConditional(ExtensionConversion extensionConversion, Node node, Runnable processNode);
+
     void renderDefault(Node node);
 }

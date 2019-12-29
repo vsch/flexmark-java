@@ -518,18 +518,22 @@ public class SegmentTree {
     public static SegmentTreeData buildTreeData(@NotNull Iterable<Seg> segments, @NotNull CharSequence allText, boolean buildIndexData) {
         int byteLength = 0;
         int nonAnchors = 0;
+        int lastEndOffset = 0;
 
         for (Seg seg : segments) {
             Segment.SegType segType = Segment.getSegType(seg, allText);
 //            int byteOffset = byteLength;
             byteLength += Segment.getSegByteLength(segType, seg.getSegStart(), seg.length());
             if (buildIndexData ? segType != ANCHOR : segType == BASE || segType == ANCHOR) nonAnchors++;
+            lastEndOffset = seg.getEnd();
 //            System.out.println(String.format("type: %s, seg: %s, segOffset: %d, bytes: %d, totalBytes: %d, nonAnchors: %d, len: %d", buildIndexData ? "index" : "offset", seg, byteOffset, byteLength - byteOffset, byteLength, nonAnchors, seg.length()));
         }
 
         int[] treeData = new int[nonAnchors * 2];
         byte[] segmentBytes = new byte[byteLength];
         int[] startIndices = buildIndexData ? null : new int[nonAnchors];
+        int[] posNeedingAdjustment = buildIndexData ? null: new int[2];  // up to 2 segment adjustments, one for BASE sequence and one for TEXT since it has no offsets
+        int posNeedingAdjustmentIndex = 0;
 
         int prevAnchorOffset = -1;
 
@@ -558,9 +562,13 @@ public class SegmentTree {
             } else {
                 startIndices[pos] = aggrLength;
 
-                if (pos > 0) {
+                if (posNeedingAdjustmentIndex > 0 && seg.getStart() >= 0) {
                     // set it to the correct value
-                    treeData[(pos - 1) << 1] = seg.getStart();
+                    int iMax = posNeedingAdjustmentIndex;
+                    for (int i = 0; i < iMax; i++) {
+                        treeData[posNeedingAdjustment[i] << 1] = seg.getStart();
+                    }
+                    posNeedingAdjustmentIndex = 0;
                 }
 
                 aggrLength += seg.length();
@@ -568,8 +576,16 @@ public class SegmentTree {
                 if (segType == BASE || segType == ANCHOR) {
                     // the use of getEnd() here is temporary for all but the last base segment, it will be overwritten by getStart() by next segment
                     setTreeData(pos, treeData, seg.getEnd(), segOffset, 0);
+                    posNeedingAdjustment[posNeedingAdjustmentIndex++] = pos;
                     pos++;
                 }
+            }
+        }
+
+        // NOTE: need to fix-up start/end offsets of the tree data since text has no start/end except as previous node end and next node start correspondingly
+        if (!buildIndexData) {
+            for (int i = 0; i < posNeedingAdjustmentIndex; i++) {
+                treeData[posNeedingAdjustment[i] << 1] = lastEndOffset;
             }
         }
 
@@ -589,12 +605,15 @@ public class SegmentTree {
         int nonAnchors = 0;
         int byteLength = segmentBytes.length;
         int segOffset = 0;
+        int lastEndOffset = 0;
 
         while (segOffset < byteLength) {
             Segment seg = Segment.getSegment(segmentBytes, segOffset, nonAnchors, 0, baseSeq);
             segOffset += seg.getByteLength();
-            if (seg.isBase()) nonAnchors++;
-
+            if (seg.isBase()) {
+                nonAnchors++;
+                lastEndOffset = seg.getEndOffset();
+            }
 //            System.out.println(String.format("%s[%d]:, seg: %s, segOffset: %d, bytes: %d", "offset", nonAnchors, seg, segOffset, seg.length()));
         }
 
@@ -604,19 +623,27 @@ public class SegmentTree {
         int pos = 0;
         segOffset = 0;
         int length = 0;
+        int[] posNeedingAdjustment = new int[2];  // up to 2 segment adjustments, one for BASE sequence and one for TEXT since it has no offsets
+        int posNeedingAdjustmentIndex = 0;
+
         while (segOffset < byteLength) {
             Segment seg = Segment.getSegment(segmentBytes, segOffset, nonAnchors, length, baseSeq);
 
 //            System.out.println(String.format("%s[%d]: seg: %s, segOffset: %d, bytes: %d", "offset", pos, seg, segOffset, seg.getByteLength()));
 
-            if (pos > 0) {
+            if (posNeedingAdjustmentIndex > 0 && seg.getStartOffset() >= 0) {
                 // set it to the correct value
-                treeData[(pos - 1) << 1] = seg.getStartOffset();
+                int iMax = posNeedingAdjustmentIndex;
+                for (int i = 0; i < iMax; i++) {
+                    treeData[posNeedingAdjustment[i] << 1] = seg.getStartOffset();
+                }
+                posNeedingAdjustmentIndex = 0;
             }
 
             if (seg.isBase()) {
                 // the use of getEnd() here is temporary for all but the last base segment, it will be overwritten by getStart() by next segment
                 setTreeData(pos, treeData, seg.getEndOffset(), segOffset, 0);
+                posNeedingAdjustment[posNeedingAdjustmentIndex++] = pos;
                 startIndices[pos] = length;
 
                 pos++;
@@ -624,6 +651,11 @@ public class SegmentTree {
 
             segOffset += seg.getByteLength();
             length += seg.length();
+        }
+
+        // NOTE: need to fix-up start/end offsets of the tree data since text has no start/end except as previous node end and next node start correspondingly
+        for (int i = 0; i < posNeedingAdjustmentIndex; i++) {
+            treeData[posNeedingAdjustment[i] << 1] = lastEndOffset;
         }
 
         return new SegmentOffsetTree(treeData, segmentBytes, startIndices);

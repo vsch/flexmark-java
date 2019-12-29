@@ -11,10 +11,18 @@ import com.vladsch.flexmark.parser.internal.InlineParserImpl;
 import com.vladsch.flexmark.parser.internal.LinkRefProcessorData;
 import com.vladsch.flexmark.parser.internal.PostProcessorManager;
 import com.vladsch.flexmark.util.SharedDataKeys;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IParse;
+import com.vladsch.flexmark.util.ast.KeepType;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataSet;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +30,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.BitSet;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Parses input text to a tree of nodes.
@@ -343,6 +358,7 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the text to parse
+     *
      * @return the root node
      */
     public @NotNull Document parse(@NotNull BasedSequence input) {
@@ -361,6 +377,7 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the text to parse
+     *
      * @return the root node
      */
     public @NotNull Document parse(@NotNull String input) {
@@ -379,7 +396,9 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the reader to parse
+     *
      * @return the root node
+     *
      * @throws IOException when reading throws an exception
      */
     public @NotNull Document parseReader(@NotNull Reader input) throws IOException {
@@ -518,6 +537,7 @@ public class Parser implements IParse {
          * "With great power comes great responsibility."
          *
          * @param blockParserFactory a block parser factory implementation
+         *
          * @return {@code this}
          */
         public Builder customBlockParserFactory(CustomBlockParserFactory blockParserFactory) {
@@ -598,6 +618,7 @@ public class Parser implements IParse {
          * This method is called on all extensions so that they can register their custom processors
          *
          * @param parserBuilder parser builder with which to register extensions
+         *
          * @see Builder#customBlockParserFactory(CustomBlockParserFactory)
          * @see Builder#customInlineParserExtensionFactory(InlineParserExtensionFactory)
          * @see Builder#customInlineParserFactory(InlineParserFactory)
@@ -625,6 +646,7 @@ public class Parser implements IParse {
          *
          * @param document destination document for references
          * @param included source document for references
+         *
          * @return true if there were references to transfer
          */
         boolean transferReferences(MutableDataHolder document, DataHolder included);
@@ -635,6 +657,7 @@ public class Parser implements IParse {
      *
      * @param options    mutable options holding existing extensions
      * @param extensions extension to add
+     *
      * @return mutable options
      */
     public static MutableDataHolder addExtensions(MutableDataHolder options, Extension... extensions) {
@@ -654,6 +677,7 @@ public class Parser implements IParse {
      *
      * @param options    mutable options holding existing extensions
      * @param extensions extension classes to remove
+     *
      * @return mutable options
      */
     public static MutableDataHolder removeExtensions(MutableDataHolder options, Class... extensions) {

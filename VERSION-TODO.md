@@ -224,6 +224,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Add: `SpaceInsertingSequenceBuilder` to track intervening spaces between nodes and insert on
   non-space.
 * Fix: `TextCollectingVisitor` to add intervening spaces to match old implementation.
+* Add: `Formatter.TRACKED_OFFSETS` default empty list, to provide which offsets into the base
+  sequence being formatted should be tracked so their index can be resolved in the formatted
+  result.
+  * Add: tracked offset use to `Paragraph` formatting wrapping code
+  * Add: tracked offset use to `TableBlock` formatting code
 
 ## 0.59.90
 
