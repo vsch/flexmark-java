@@ -586,6 +586,11 @@ public class LineFormattingAppendableImpl implements LineAppendable {
         return this;
     }
 
+    @Override
+    public @Nullable SequenceBuilder getBuilder() {
+        return builder;
+    }
+
     @NotNull
     @Override
     public LineAppendable append(@NotNull CharSequence csq, int start, int end) {

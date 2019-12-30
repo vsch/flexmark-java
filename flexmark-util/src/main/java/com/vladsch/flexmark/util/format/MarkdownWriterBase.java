@@ -49,6 +49,8 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     public abstract M tailBlankLine(int count);
 
     // @formatter:off
+    @Override public void setLinePrefixIndex(int lineIndex, int prefixEndIndex)                                                                                 { appendable.setLinePrefixIndex(lineIndex, prefixEndIndex); }
+    @Override public void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content)                                        { appendable.setLinePrefixIndex(lineIndex, prefix, content); }
     @Override public boolean isPendingSpace()                                                                                                                   { return appendable.isPendingSpace(); }
     @Override public boolean isPreFormatted()                                                                                                                   { return appendable.isPreFormatted(); }
     @Override public boolean isPreFormattedLine(int line)                                                                                                       { return appendable.isPreFormattedLine(line); }
@@ -65,14 +67,13 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @Override public int textOnlyOffset()                                                                                                                       { return appendable.textOnlyOffset(); }
     @Override public int textOnlyOffsetWithPending()                                                                                                            { return appendable.textOnlyOffsetWithPending(); }
     @Override public int getLinePrefixIndex(int lineIndex)                                                                                                      { return appendable.getLinePrefixIndex(lineIndex); }
-    @Override public void setLinePrefixIndex(int lineIndex, int prefixEndIndex)                                                                                 { appendable.setLinePrefixIndex(lineIndex, prefixEndIndex); }
-    @Override public void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content)                                        { appendable.setLinePrefixIndex(lineIndex, prefix, content); }
     @NotNull @Override public int[] getLinesPrefixIndex(int startLine, int endLine)                                                                             { return appendable.getLinesPrefixIndex(startLine, endLine); }
     @NotNull @Override public CharSequence[] getLinesPrefix(int startLine, int endLine)                                                                         { return appendable.getLinesPrefix(startLine, endLine); }
     @NotNull @Override public CharSequence[] getLinesContent(int startLine, int endLine)                                                                        { return appendable.getLinesContent(startLine, endLine); }
     @NotNull @Override public CharSequence[] getLines(int startLine, int endLine)                                                                               { return appendable.getLines(startLine, endLine); }
     @Override @NotNull public BitFieldSet<Options> getOptionSet()                                                                                               { return appendable.getOptionSet();}
     @Override public int getAfterEolPrefixDelta()                                                                                                               { return appendable.getAfterEolPrefixDelta(); }
+    @Override @Nullable public SequenceBuilder getBuilder()                                                                                                     { return appendable.getBuilder(); }
     @Override @NotNull public M pushOptions()                                                                                                                   { appendable.pushOptions(); return (M) this;}
     @Override @NotNull public M popOptions()                                                                                                                    { appendable.popOptions(); return (M) this;}
     @Override @NotNull public M changeOptions(int addFlags, int removeFlags)                                                                                    { appendable.changeOptions(addFlags, removeFlags); return (M) this;}

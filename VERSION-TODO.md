@@ -219,10 +219,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.92
 
-* [ ] Fix: multi-caret mode caret extraction seems to mess up
-* [ ] Fix: formatter tracking offset adjustment when tracking offset is not in table or
-      paragraph, ie. not resolved after formatting then resolve in Formatter.render when using
-      builder.
+* [ ] Fix: add item/child and first/rest continuation prefix tracking to allow separate prefix
+      style to be used on item paragraph (item) and following child elements (child). The
+      first/rest distinction applies to first line of item with rest being the continuation
+      lines.
+* Fix: formatter tracking offset adjustment when tracking offset is not in table or paragraph,
+  ie. not resolved after formatting then resolve in Formatter.render when using builder.
 * Add: `SpecExampleExtension` formatting for spec test files.
 * Add: `NodeFormatterContext.delegateRender()` method to delegate to format handler registered
   after the current one. If none then will delegate to `Node` renderer, with

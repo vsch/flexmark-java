@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,11 +48,10 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
 
             @Override
             protected @NotNull String renderHtml() {
-                String html = super.renderHtml();
-
                 if (trackedOffsets == null) {
-                    return html;
+                    return getRenderer().render(getDocument());
                 } else {
+                    String html = ((Formatter)getRenderer()).render(getDocument(), getDocument().getDocument().getChars().getBuilder());
                     List<TrackedOffset> trackedOffsetList = Formatter.TRACKED_OFFSETS.get(getDocument().getDocument());
                     assert trackedOffsetList == trackedOffsets;
 

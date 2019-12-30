@@ -158,6 +158,13 @@ public interface LineAppendable extends Appendable {
         return setOptions(options.toInt());
     }
 
+    /**
+     * Get builder used for accumulation or null if none
+     * @return builder used for accumulation or null if none
+     */
+    @Nullable
+    SequenceBuilder getBuilder();
+
     // these methods are monitored for content and formatting applied
     @Override
     @NotNull LineAppendable append(@NotNull CharSequence csq);

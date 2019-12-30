@@ -1547,9 +1547,23 @@ fails in md nav
 ````````````````````````````````
 
 
+```````````````````````````````` example(Tracked Offset - Indented: 11) options(left-align-marker-add, NO_FILE_EOL)
+|name⦙|display|title_en|title_de|
+|---|---|---|---|
+|no⦙ne| | | |
+|Prof⦙.|Prof.⦙|Prof.|Prof.|
+.
+| name⦙  | display | title_en | title_de |
+|:------|:--------|:---------|:---------|
+| no⦙ne  |         |          |          |
+| Prof⦙. | Prof.⦙   | Prof.    | Prof.    |
+
+````````````````````````````````
+
+
 in item
 
-```````````````````````````````` example Tracked Offset - Indented: 11
+```````````````````````````````` example Tracked Offset - Indented: 12
 - Add: live templates starting with `.`
 
   | Element       | Abbreviation    | Expansion                                               |

@@ -42,7 +42,10 @@ import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
+import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -61,6 +64,7 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT;
+import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
 
 /**
  * Renders a tree of nodes to Markdown.
@@ -337,6 +341,30 @@ public class Formatter implements IRender {
         MainNodeFormatter renderer = new MainNodeFormatter(options, out, document.getDocument(), null);
         renderer.render(document);
         out.toBuilder(builder, maxTailBlankLines);
+
+        // NOTE: resolve any unresolved tracked offsets that are outside elements which resolve their own
+        List<TrackedOffset> trackedOffsets = TRACKED_OFFSETS.get(document.getDocument());
+        if (!trackedOffsets.isEmpty()) {
+            // need to resolve any unresolved offsets
+            BasedOffsetTracker tracker = null;
+            BasedSequence baseSeq = document.getChars();
+            for (TrackedOffset trackedOffset : trackedOffsets) {
+                if (!trackedOffset.isResolved()) {
+                    if (tracker == null) {
+                        tracker = BasedOffsetTracker.create(builder.toSequence());
+                    }
+
+                    if (baseSeq.safeBaseCharAt(trackedOffset.getOffset()) == ' ' && baseSeq.safeBaseCharAt(trackedOffset.getOffset() - 1) != ' ') {
+                        // we need to use previous non-blank and use that offset
+                        OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset() - 1, false);
+                        trackedOffset.setIndex(info.endIndex);
+                    } else {
+                        OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
+                        trackedOffset.setIndex(info.endIndex);
+                    }
+                }
+            }
+        }
 
         StringBuilder sb = new StringBuilder();
         try {

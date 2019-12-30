@@ -3456,9 +3456,9 @@ and more text.
 ````````````````````````````````
 
 
-### Tracked Offset
+## Tracked Offset
 
-```````````````````````````````` example(Wrap - Tracked Offset: 1) options(margin[31])
+```````````````````````````````` example(Tracked Offset: 1) options(margin[31])
 * Paragraph with hard break ⦙and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3474,7 +3474,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 2) options(margin[31])
+```````````````````````````````` example(Tracked Offset: 2) options(margin[31])
 * Paragraph with hard break⦙ and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3490,7 +3490,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 3) options(margin[31])
+```````````````````````````````` example(Tracked Offset: 3) options(margin[31])
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break ⦙and more text. ![Test](test) text. 
@@ -3506,7 +3506,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 4) options(margin[31])
+```````````````````````````````` example(Tracked Offset: 4) options(margin[31])
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break⦙ and more text. ![Test](test) text. 
@@ -3522,7 +3522,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 5) options(margin[31], explicit-links-at-start)
+```````````````````````````````` example(Tracked Offset: 5) options(margin[31], explicit-links-at-start)
 * Paragraph with hard break and more text.⦙ [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3539,7 +3539,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 6) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Tracked Offset: 6) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text.⦙ [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3556,7 +3556,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 7) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Tracked Offset: 7) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. ⦙[Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3573,7 +3573,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 8) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Tracked Offset: 8) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text.⦙ 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3590,7 +3590,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 9) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Tracked Offset: 9) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text.⦙ ![Test](test) text. 
@@ -3607,7 +3607,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 10) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Tracked Offset: 10) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ⦙![Test](test) text. 
@@ -3624,7 +3624,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 11) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Tracked Offset: 11) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text.⦙ 
@@ -3641,7 +3641,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Tracked Offset: 12) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Tracked Offset: 12) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and⦙ ⦙more text.⦙ ⦙[Test](test) text.⦙ 
     
 1. Paragraph with soft break⦙ ⦙and more text.⦙ ⦙![Test](test) text.⦙ 
@@ -3652,6 +3652,45 @@ and more text.
   ⦙[Test](test) text.⦙
 
 1. Paragraph with soft break⦙
+   ⦙and more text.⦙
+   ⦙![Test](test) text.⦙
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Tracked Offset: 13) options(margin[31], explicit-links-at-start, image-links-at-start)
+⦙* Paragraph with hard break and more text. [Test](test) text. 
+    
+.
+⦙* Paragraph with hard break and
+  more text.
+  [Test](test) text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Tracked Offset: 14) options(margin[31], explicit-links-at-start, image-links-at-start)
+*⦙ Paragraph with hard break and more text. [Test](test) text. 
+    
+.
+*⦙ Paragraph with hard break and
+  more text.
+  [Test](test) text.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Tracked Offset: 15) options(margin[31], explicit-links-at-start, image-links-at-start)
+⦙*⦙ ⦙Paragraph with hard break and⦙ ⦙more text.⦙ ⦙[Test](test) text.⦙ 
+    
+⦙1⦙.⦙ ⦙Paragraph with soft break⦙ ⦙and more text.⦙ ⦙![Test](test) text.⦙ 
+                               
+.
+⦙*⦙ ⦙Paragraph with hard break and⦙
+  ⦙more text.⦙
+  ⦙[Test](test) text.⦙
+
+⦙1⦙.⦙ ⦙Paragraph with soft break⦙
    ⦙and more text.⦙
    ⦙![Test](test) text.⦙
 
