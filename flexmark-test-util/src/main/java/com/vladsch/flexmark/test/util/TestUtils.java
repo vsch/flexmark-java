@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.test.util.spec.*;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.ResourceResolverManager;
+import com.vladsch.flexmark.test.util.spec.ResourceUrlResolver;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.DelimitedBuilder;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.Node;
@@ -9,7 +13,11 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.sequence.RichSequenceImpl;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,11 +25,22 @@ import org.junit.AssumptionViolatedException;
 
 import java.io.File;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import static com.vladsch.flexmark.util.Utils.*;
+import static com.vladsch.flexmark.test.util.spec.SpecReader.EXAMPLE_KEYWORD;
+import static com.vladsch.flexmark.util.Utils.removePrefix;
+import static com.vladsch.flexmark.util.Utils.removeSuffix;
+import static com.vladsch.flexmark.util.Utils.suffixWith;
+import static com.vladsch.flexmark.util.Utils.suffixWithEol;
+import static com.vladsch.flexmark.util.Utils.wrapWith;
 
 public class TestUtils {
     public static final char MARKUP_CARET_CHAR = '⦙';
@@ -117,6 +136,7 @@ public class TestUtils {
      *                                Each row is passed to factory to allow creating custom options.
      * @param factory                 factory creating a type from ExampleOption and given row of parameters
      * @param <T>                     type of value in the map
+     *
      * @return constructed hash map of option name
      */
     @NotNull
@@ -180,6 +200,7 @@ public class TestUtils {
      * @param example         spec example instance for which options are being processed
      * @param optionSets      comma separate list of option set names
      * @param optionsProvider function to take a string option name and provide settings based on it
+     *
      * @return combined set from applying these options together
      */
     public static DataHolder getOptions(@NotNull SpecExample example, @Nullable String optionSets, @NotNull Function<String, DataHolder> optionsProvider) {
@@ -297,11 +318,41 @@ public class TestUtils {
     }
 
     public static void addSpecExample(boolean useTestExample, boolean includeExampleStart, boolean toVisibleSpecText, StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
+        addSpecExample(
+                useTestExample ? SpecReader.EXAMPLE_TEST_BREAK : SpecReader.EXAMPLE_BREAK,
+                useTestExample ? SpecReader.SECTION_TEST_BREAK : SpecReader.SECTION_BREAK,
+                includeExampleStart,
+                toVisibleSpecText,
+                sb,
+                source,
+                html,
+                ast,
+                optionsSet,
+                includeExampleCoords,
+                section,
+                number
+        );
+    }
+
+    public static void addSpecExample(
+            String exampleBreak,
+            String sectionBreak,
+            boolean includeExampleStart,
+            boolean toVisibleSpecText,
+            StringBuilder sb,
+            String source,
+            String html,
+            String ast,
+            String optionsSet,
+            boolean includeExampleCoords,
+            String section,
+            int number
+    ) {
         // include source so that diff can be used to update spec
         StringBuilder header = new StringBuilder();
 
         if (includeExampleStart) {
-            header.append(useTestExample ? SpecReader.EXAMPLE_TEST_START : SpecReader.EXAMPLE_START);
+            header.append(exampleBreak).append(' ').append(EXAMPLE_KEYWORD);
             if (includeExampleCoords) {
                 if (optionsSet != null) {
                     header.append("(").append(section == null ? "" : section.trim()).append(": ").append(number).append(")");
@@ -321,18 +372,20 @@ public class TestUtils {
         sb.append(header);
 
         // FIX: When multi-sections are implemented need a way to specify per section visibleSpecText
-        String sourceAndHtml = suffixWithEol(source) + (useTestExample ? SpecReader.TYPE_TEST_BREAK : SpecReader.TYPE_BREAK) + "\n" + suffixWithEol(html);
+        String sourceAndHtml = suffixWithEol(source) + (sectionBreak) + "\n" + suffixWithEol(html);
         sb.append(toVisibleSpecText ? toVisibleSpecText(sourceAndHtml) : sourceAndHtml);
         if (ast != null) {
-            sb.append(useTestExample ? SpecReader.TYPE_TEST_BREAK : SpecReader.TYPE_BREAK).append("\n");
+            sb.append(sectionBreak).append("\n");
             sb.append(ast);
         }
-        sb.append(useTestExample ? SpecReader.EXAMPLE_TEST_BREAK : SpecReader.EXAMPLE_BREAK).append("\n");
+        sb.append(exampleBreak).append("\n");
     }
 
     /**
      * @param s text to convert to visible chars
+     *
      * @return spec test special chars converted to visible
+     *
      * @deprecated use {@link #toVisibleSpecText(String)}
      */
     @Deprecated
@@ -342,6 +395,7 @@ public class TestUtils {
 
     /**
      * @param s text to convert to visible chars
+     *
      * @return spec test special chars converted to visible
      */
     public static String toVisibleSpecText(String s) {
@@ -357,7 +411,9 @@ public class TestUtils {
 
     /**
      * @param s text to convert to from visible chars to normal
+     *
      * @return spec test special visible chars converted to normal
+     *
      * @deprecated use {@link #fromVisibleSpecText(String)}
      */
     @Deprecated
@@ -367,6 +423,7 @@ public class TestUtils {
 
     /**
      * @param s text to convert to from visible chars to normal
+     *
      * @return spec test special visible chars converted to normal
      */
     public static String fromVisibleSpecText(String s) {

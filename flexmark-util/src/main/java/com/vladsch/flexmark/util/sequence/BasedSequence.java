@@ -212,6 +212,13 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     BasedSequence getEmptySuffix();
 
     /**
+     * Return string or null if BaseSequence.NULL
+     * @return string or null if BaseSequence.NULL
+     */
+    @Nullable
+    String toStringOrNull();
+
+    /**
      * Get the unescaped string of this sequence content
      *
      * @return unescaped text

@@ -26,8 +26,8 @@ public class SpecReader {
     public static final String OPTIONS_KEYWORD = "options";
     public static final String OPTIONS_STRING = " " + OPTIONS_KEYWORD;
     public static final Pattern OPTIONS_PATTERN = Pattern.compile(".*(?:\\s|\u00A0)\\Q" + OPTIONS_KEYWORD + "\\E(?:\\s|\u00A0)*\\((?:\\s|\u00A0)*(.*)(?:\\s|\u00A0)*\\)(?:\\s|\u00A0)*");
-    public static final String TYPE_BREAK = ".";
-    public static final String TYPE_TEST_BREAK = "…";
+    public static final String SECTION_BREAK = ".";
+    public static final String SECTION_TEST_BREAK = "…";
     protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} +(.*)");
 
     protected final @NotNull InputStream inputStream;
@@ -188,7 +188,7 @@ public class SpecReader {
             }
             break;
             case SOURCE:
-                if (line.equals(TYPE_BREAK)) {
+                if (line.equals(SECTION_BREAK)) {
                     state = State.HTML;
                 } else {
                     // examples use "rightwards arrow" to show tab
@@ -203,7 +203,7 @@ public class SpecReader {
                     addSpecExample(new SpecExample(resourceLocation, contentLineNumber, optionsSet, section, exampleNumber, source.toString(), html.toString(), null, comment == null ? null : comment.toString()));
                     resetContents();
                     lineAbsorbed = true;
-                } else if (line.equals(TYPE_BREAK)) {
+                } else if (line.equals(SECTION_BREAK)) {
                     state = State.AST;
                     lineAbsorbed = true;
                 } else {

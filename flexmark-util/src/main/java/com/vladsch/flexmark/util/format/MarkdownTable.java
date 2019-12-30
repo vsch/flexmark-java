@@ -1179,7 +1179,7 @@ public class MarkdownTable {
         trackedOffsets.sort(Comparator.comparing(TrackedOffset::getOffset));
 
         out.pushOptions();
-        out.removeOptions(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE);
+        out.removeOptions(LineAppendable.F_WHITESPACE_REMOVAL);
 
         finalizeTable();
 

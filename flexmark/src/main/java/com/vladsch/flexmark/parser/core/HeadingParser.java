@@ -106,7 +106,7 @@ public class HeadingParser extends AbstractBlockParser {
 
         @Override
         public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
-            boolean noAtxSpace = Parser.HEADING_NO_ATX_SPACE.get(options);
+            boolean noAtxSpace = Parser.ESCAPE_HEADING_NO_ATX_SPACE.get(options) || Parser.HEADING_NO_ATX_SPACE.get(options);
             return noAtxSpace ? HeadingLeadInHandler.HANDLER_NO_SPACE : HeadingLeadInHandler.HANDLER_SPACE;
         }
 

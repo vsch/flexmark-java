@@ -1,18 +1,38 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
+import com.vladsch.flexmark.formatter.internal.FormatControlProcessor;
+import com.vladsch.flexmark.formatter.internal.FormatterOptions;
+import com.vladsch.flexmark.formatter.internal.MergeContextImpl;
+import com.vladsch.flexmark.formatter.internal.MergeLinkResolver;
+import com.vladsch.flexmark.formatter.internal.TranslationHandlerImpl;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
+import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
+import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
+import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
+import com.vladsch.flexmark.html.renderer.LinkStatus;
+import com.vladsch.flexmark.html.renderer.LinkType;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.SharedDataKeys;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IRender;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.NullableDataKey;
+import com.vladsch.flexmark.util.data.ScopedDataSet;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
@@ -27,10 +47,20 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+
+import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT;
 
 /**
  * Renders a tree of nodes to Markdown.
@@ -261,6 +291,7 @@ public class Formatter implements IRender {
      * Create a new builder for configuring an {@link Formatter}.
      *
      * @param options initialization options
+     *
      * @return a builder.
      */
     public static Builder builder(DataHolder options) {
@@ -286,12 +317,25 @@ public class Formatter implements IRender {
      * @param builder  sequence builder
      */
     public String render(@NotNull Node document, @NotNull SequenceBuilder builder) {
+        return render(document, builder, 1);
+    }
+
+    /**
+     * Render a node to the appendable
+     *
+     * @param document          node to render
+     * @param builder           sequence builder
+     * @param maxTailBlankLines maximum tail blank lines
+     *
+     * @return string of formatted markdown (same as in builder) to be used for validation
+     */
+    public String render(@NotNull Node document, @NotNull SequenceBuilder builder, int maxTailBlankLines) {
         SequenceBuilder subBuilder = builder.getBuilder();
 
         MarkdownWriter out = new MarkdownWriter(formatterOptions.formatFlags, subBuilder);
         MainNodeFormatter renderer = new MainNodeFormatter(options, out, document.getDocument(), null);
         renderer.render(document);
-        out.toBuilder(builder, 1);
+        out.toBuilder(builder, maxTailBlankLines);
 
         StringBuilder sb = new StringBuilder();
         try {
@@ -318,6 +362,7 @@ public class Formatter implements IRender {
      * Render the tree of nodes to markdown
      *
      * @param document the root node
+     *
      * @return the formatted markdown
      */
     @NotNull
@@ -341,6 +386,7 @@ public class Formatter implements IRender {
      * Render the tree of nodes to markdown
      *
      * @param document the root node
+     *
      * @return the formatted markdown
      */
     public String translationRender(Node document, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
@@ -380,6 +426,7 @@ public class Formatter implements IRender {
      * Render the tree of nodes to markdown
      *
      * @param documents the root node
+     *
      * @return the formatted markdown
      */
     public String mergeRender(Document[] documents, int maxTrailingBlankLines) {
@@ -520,6 +567,7 @@ public class Formatter implements IRender {
          * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
          *
          * @param nodeFormatterFactory the factory for creating a node renderer
+         *
          * @return {@code this}
          */
         @SuppressWarnings("UnusedReturnValue")
@@ -532,6 +580,7 @@ public class Formatter implements IRender {
          * Add a factory for generating the header id attribute from the header's text
          *
          * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
+         *
          * @return {@code this}
          */
         @NotNull
@@ -580,7 +629,7 @@ public class Formatter implements IRender {
 
     private class MainNodeFormatter extends NodeFormatterSubContext {
         private final Document document;
-        private final Map<Class<?>, NodeFormattingHandler<?>> renderers;
+        private final Map<Class<?>, List<NodeFormattingHandler<?>>> renderers;
         private final SubClassingBag<Node> collectedNodes;
 
         private final List<PhasedNodeFormatter> phasedFormatters;
@@ -638,10 +687,12 @@ public class Formatter implements IRender {
 
                 for (NodeFormattingHandler<?> nodeType : formattingHandlers) {
                     // Overwrite existing renderer
-                    renderers.put(nodeType.getNodeType(), nodeType);
+                    List<NodeFormattingHandler<?>> rendererList = renderers.computeIfAbsent(nodeType.getNodeType(), key -> new ArrayList<>());
+                    rendererList.add(0, nodeType);
+//                    renderers.put(nodeType.getNodeType(), nodeType);
                 }
 
-                // get nodes of interest
+                // get nodes of interest,
                 Set<Class<?>> nodeClasses = nodeFormatter.getNodeClasses();
                 if (nodeClasses != null) {
                     collectNodeTypes.addAll(nodeClasses);
@@ -921,15 +972,19 @@ public class Formatter implements IRender {
                 }
 
                 for (FormattingPhase phase : FormattingPhase.values()) {
-                    if (phase != FormattingPhase.DOCUMENT && !renderingPhases.contains(phase)) { continue; }
+                    if (phase != DOCUMENT && !renderingPhases.contains(phase)) { continue; }
                     this.phase = phase;
                     // here we render multiple phases
-                    if (this.phase == FormattingPhase.DOCUMENT) {
-                        NodeFormattingHandler<?> nodeRenderer = renderers.get(node.getClass());
-                        if (nodeRenderer != null) {
+                    if (this.phase == DOCUMENT) {
+                        List<NodeFormattingHandler<?>> nodeRendererList = renderers.get(node.getClass());
+                        if (nodeRendererList != null) {
+                            subContext.rendererList = nodeRendererList;
+                            subContext.rendererIndex = 0;
                             subContext.renderingNode = node;
-                            nodeRenderer.render(node, subContext, subContext.markdown);
+                            nodeRendererList.get(0).render(node, subContext, subContext.markdown);
                             subContext.renderingNode = null;
+                            subContext.rendererList = null;
+                            subContext.rendererIndex = -1;
                         }
                     } else {
                         // go through all renderers that want this phase
@@ -956,17 +1011,24 @@ public class Formatter implements IRender {
                     if (node instanceof BlankLine) subContext.markdown.blankLine();
                     else subContext.markdown.append(node.getChars());
                 } else {
-                    NodeFormattingHandler<?> nodeRenderer = renderers.get(node.getClass());
+                    List<NodeFormattingHandler<?>> nodeRendererList = renderers.get(node.getClass());
 
-                    if (nodeRenderer == null) {
-                        nodeRenderer = renderers.get(Node.class);
+                    if (nodeRendererList == null) {
+                        nodeRendererList = renderers.get(Node.class);
                     }
 
-                    if (nodeRenderer != null) {
-                        Node oldNode = this.renderingNode;
+                    if (nodeRendererList != null) {
+                        List<NodeFormattingHandler<?>> oldRendererList = subContext.rendererList;
+                        int oldRendererIndex = subContext.rendererIndex;
+                        Node oldRenderingNode = subContext.renderingNode;
+
+                        subContext.rendererList = nodeRendererList;
+                        subContext.rendererIndex = 0;
                         subContext.renderingNode = node;
-                        nodeRenderer.render(node, subContext, subContext.markdown);
-                        subContext.renderingNode = oldNode;
+                        nodeRendererList.get(0).render(node, subContext, subContext.markdown);
+                        subContext.renderingNode = oldRenderingNode;
+                        subContext.rendererList = oldRendererList;
+                        subContext.rendererIndex = oldRendererIndex;
                     } else {
                         // default behavior is controlled by generic Node.class that is implemented in CoreNodeFormatter
                         throw new IllegalStateException("Core Node Formatter should implement generic Node renderer");
@@ -977,6 +1039,51 @@ public class Formatter implements IRender {
 
         public void renderChildren(@NotNull Node parent) {
             renderChildrenNode(parent, this);
+        }
+
+        @Override
+        public void delegateRender() {
+            delegateRender(this);
+        }
+
+        protected void delegateRender(NodeFormatterSubContext subContext) {
+            if (subContext.getFormattingPhase() != DOCUMENT) {
+                throw new IllegalStateException("Delegate rendering only supported in document rendering phase");
+            }
+
+            if (subContext.rendererList == null || subContext.renderingNode == null) {
+                throw new IllegalStateException("Delegate rendering can only be called from node render handler");
+            }
+
+            Node node = subContext.renderingNode;
+            List<NodeFormattingHandler<?>> oldRendererList = subContext.rendererList;
+            List<NodeFormattingHandler<?>> rendererList = oldRendererList;
+            int oldRendererIndex = subContext.rendererIndex;
+            int rendererIndex = oldRendererIndex + 1;
+
+            if (rendererIndex >= rendererList.size()) {
+                if (node instanceof Document) {
+                    // no default needed, just ignore
+                    return;
+                } else {
+                    // see if there is a default node renderer list
+                    List<NodeFormattingHandler<?>> nodeRendererList = renderers.get(Node.class);
+                    if (nodeRendererList == null) {
+                        throw new IllegalStateException("Core Node Formatter should implement generic Node renderer");
+                    } else if (oldRendererList == nodeRendererList) {
+                        throw new IllegalStateException("Core Node Formatter should not delegate generic Node renderer");
+                    }
+
+                    rendererList = nodeRendererList;
+                    rendererIndex = 0;
+                }
+            }
+
+            subContext.rendererList = rendererList;
+            subContext.rendererIndex = rendererIndex;
+            rendererList.get(rendererIndex).render(node, subContext, subContext.markdown);
+            subContext.rendererIndex = oldRendererIndex;
+            subContext.rendererList = oldRendererList;
         }
 
         @SuppressWarnings("WeakerAccess")
@@ -1056,7 +1163,12 @@ public class Formatter implements IRender {
             @NotNull
             @Override
             public Node getCurrentNode() {
-                return myMainNodeRenderer.getCurrentNode();
+                return this.renderingNode;
+            }
+
+            @Override
+            public void delegateRender() {
+                myMainNodeRenderer.delegateRender(this);
             }
 
             @Override

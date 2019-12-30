@@ -43,6 +43,11 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
     @NotNull FormattingPhase getFormattingPhase();
 
     /**
+     * pass node rendering to previously registered handler
+     */
+    void delegateRender();
+
+    /**
      * Get the current rendering context {@link DataHolder}. These are the options passed or set on the {@link Formatter#builder()} or passed to {@link Formatter#builder(DataHolder)}.
      * To get the document options you should use {@link #getDocument()} as the data holder.
      *

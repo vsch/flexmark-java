@@ -114,6 +114,11 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return subSequence(length());
     }
 
+    @Override
+    public @Nullable String toStringOrNull() {
+        return isNull() ? null : toString();
+    }
+
     @NotNull
     @Override
     public String unescape() {

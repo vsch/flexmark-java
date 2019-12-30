@@ -25,6 +25,7 @@ import com.vladsch.flexmark.ext.jekyll.front.matter.ComboJekyllFrontMatterFormat
 import com.vladsch.flexmark.ext.macros.ComboMacrosFormatterSpecTest;
 import com.vladsch.flexmark.ext.macros.ComboMacrosTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.macros.MergeMacrosTest;
+import com.vladsch.flexmark.ext.spec.example.ComboSpecExampleFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.toc.ExtTocFormatterTestSuite;
@@ -50,6 +51,7 @@ import org.junit.runners.Suite;
         ComboJekyllFrontMatterFormatterSpecTest.class,
         ComboMacrosFormatterSpecTest.class,
         ComboMacrosTranslationFormatterSpecTest.class,
+        ComboSpecExampleFormatterSpecTest.class,
         ComboTableFormatterSpecTest.class,
         ComboTableTranslationFormatterSpecTest.class,
         ComboYamlFrontMatterFormatterSpecTest.class,

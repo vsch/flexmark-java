@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.core.test.util.RendererSpecTest;
-import com.vladsch.flexmark.ext.spec.example.internal.RenderAs;
-import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
+import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterExtension;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
@@ -12,29 +11,26 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboSpecExampleSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_spec_example_ast_spec.md";
+public class ComboSpecExampleFormatterSpecTest extends FormatterSpecTest {
+    private static final String SPEC_RESOURCE = "/ext_spec_example_formatter_spec.md";
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
+            .set(Parser.EXTENSIONS, Arrays.asList(JekyllFrontMatterExtension.create(), SpecExampleExtension.create()))
+            .set(Parser.LISTS_AUTO_LOOSE, false)
             .set(SpecExampleExtension.SPEC_EXAMPLE_BREAK, SpecReader.EXAMPLE_TEST_BREAK)
             .set(SpecExampleExtension.SPEC_SECTION_BREAK, SpecReader.SECTION_TEST_BREAK)
-            .set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.SECTIONS)
-            .set(Parser.EXTENSIONS, Collections.singleton(SpecExampleExtension.create()))
             .toImmutable();
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("no-language-prefix", new MutableDataSet().set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, ""));
-        optionsMap.put("no-option-nodes", new MutableDataSet().set(SpecExampleExtension.SPEC_OPTION_NODES, false));
-        optionsMap.put("as-def-list", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.DEFINITION_LIST));
-        optionsMap.put("as-fenced-code", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.FENCED_CODE));
+//        optionsMap.put("class-explicit", new MutableDataSet().set(AttributesExtension.FORMAT_ATTRIBUTE_CLASS, AttributeImplicitName.EXPLICIT_PREFERRED));
     }
-    public ComboSpecExampleSpecTest(@NotNull SpecExample example) {
+    public ComboSpecExampleFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 

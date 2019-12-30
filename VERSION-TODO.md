@@ -219,6 +219,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.92
 
+* Add: `SpecExampleExtension` formatting for spec test files.
+* Add: `NodeFormatterContext.delegateRender()` method to delegate to format handler registered
+  after the current one. If none then will delegate to `Node` renderer, with
+  `CoreNodeFormatter.render(Node)` being the last in line.
 * Add: separate `TextContainer.F_LINK_NODE_TEXT` collection type to allow link element text to
   be collected separate from `TextContainer.F_NODE_TEXT` flag.
 * Add: `SpaceInsertingSequenceBuilder` to track intervening spaces between nodes and insert on

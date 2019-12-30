@@ -22,7 +22,7 @@ public class FormatControlProcessor {
     final private String formatterOffTag;
     final private boolean formatterTagsEnabled;
 
-    private Boolean myFormatterOff = false;
+    private boolean myFormatterOff = false;
     private boolean justTurnedOffFormatting = false;
     private boolean justTurnedOnFormatting = false;
     private boolean formatterTagsAcceptRegexp;
@@ -132,8 +132,10 @@ public class FormatControlProcessor {
         if ((node instanceof HtmlCommentBlock || node instanceof HtmlInnerBlockComment) && formatterTagsEnabled) {
             // could be formatter control
             boolean formatterOff = myFormatterOff;
-            myFormatterOff = isFormatterOffTag(node.getChars());
-            if (myFormatterOff == null) return;
+            Boolean isFormatterOff = isFormatterOffTag(node.getChars());
+            if (isFormatterOff == null) return;
+
+            myFormatterOff = isFormatterOff;
 
             if (!formatterOff && myFormatterOff) justTurnedOffFormatting = true;
             if (formatterOff && !myFormatterOff) justTurnedOnFormatting = true;

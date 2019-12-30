@@ -4,10 +4,13 @@ import com.vladsch.flexmark.util.ast.Node;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 
 public abstract class NodeFormatterSubContext implements NodeFormatterContext {
     final protected MarkdownWriter markdown;
     Node renderingNode;
+    List<NodeFormattingHandler<?>> rendererList = null;
+    int rendererIndex = -1;
 
     public NodeFormatterSubContext(@NotNull MarkdownWriter markdown) {
         this.markdown = markdown;

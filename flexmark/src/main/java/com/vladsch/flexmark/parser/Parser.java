@@ -76,6 +76,8 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
     public static final DataKey<Integer> HEADING_SETEXT_MARKER_LENGTH = new DataKey<>("HEADING_SETEXT_MARKER_LENGTH", 1);
     public static final DataKey<Boolean> HEADING_NO_ATX_SPACE = SharedDataKeys.HEADING_NO_ATX_SPACE;
+    // used to set escaping of # at start independent of HEADING_NO_ATX_SPACE setting if desired
+    public static final DataKey<Boolean> ESCAPE_HEADING_NO_ATX_SPACE = SharedDataKeys.ESCAPE_HEADING_NO_ATX_SPACE;
     public static final DataKey<Boolean> HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE = new DataKey<>("HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE", false);
     public static final DataKey<Boolean> HEADING_NO_LEAD_SPACE = new DataKey<>("HEADING_NO_LEAD_SPACE", false);
     public static final DataKey<Boolean> HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH = new DataKey<>("HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH", true);

@@ -20,11 +20,21 @@ public interface NodeFormatterFactory extends Dependent<NodeFormatterFactory> {
      */
     @NotNull NodeFormatter create(@NotNull DataHolder options);
 
+    /**
+     * @return null or a list of processors that must be executed before calling this one
+     *         if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
+     *         before this pre processor is called.
+     */
     @Override
     default @Nullable Set<Class<?>> getAfterDependents() {
         return null;
     }
 
+    /**
+     * @return null or a list of processors before which this has to be run
+     *         if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
+     *         before this pre processor is called.
+     */
     @Override
     default @Nullable Set<Class<?>> getBeforeDependents() {
         return null;

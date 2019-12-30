@@ -29,5 +29,10 @@
             <artifactId>flexmark-core-test</artifactId>
             <scope>test</scope>
         </dependency>
-        </dependencies>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-jekyll-front-matter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

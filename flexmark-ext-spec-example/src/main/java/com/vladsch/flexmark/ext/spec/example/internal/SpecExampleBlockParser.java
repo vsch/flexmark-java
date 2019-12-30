@@ -176,7 +176,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                 int sectionStart = -1;
                 BasedSequence prevLine = NULL;
                 BasedSequence lastLine = lines.get(lines.size() - 1);
-                String typeBreak = myOptions.typeBreak;
+                String typeBreak = myOptions.sectionBreak;
                 int typeBreakLength = typeBreak.length();
 
                 for (BasedSequence line : lines.subList(1, lines.size())) {

@@ -54,6 +54,8 @@ public interface LineAppendable extends Appendable {
     int F_PREFIX_PRE_FORMATTED = BitFieldSet.intMask(O_PREFIX_PRE_FORMATTED);                    // when prefixing lines, prefix pre-formatted lines
     int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_TRIM_TRAILING_WHITESPACE;     // select all formatting options
 
+    int F_WHITESPACE_REMOVAL = LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE;
+
     // Use F_ prefixed constants
     @Deprecated int CONVERT_TABS = F_CONVERT_TABS;
     @Deprecated int COLLAPSE_WHITESPACE = F_COLLAPSE_WHITESPACE;

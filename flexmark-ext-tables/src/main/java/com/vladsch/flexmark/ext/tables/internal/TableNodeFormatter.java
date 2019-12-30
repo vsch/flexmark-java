@@ -122,7 +122,7 @@ public class TableNodeFormatter implements NodeFormatter {
                     myTable.appendTable(formattedTable);
 
                     markdown.pushOptions()
-                            .removeOptions(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE)
+                            .removeOptions(LineAppendable.F_WHITESPACE_REMOVAL)
                             .append(formattedTable)
                             .popOptions()
                             .popPrefix(false);

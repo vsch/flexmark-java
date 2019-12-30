@@ -13,6 +13,8 @@ public class SharedDataKeys {
 
     // Parser
     public static final DataKey<Boolean> HEADING_NO_ATX_SPACE = new DataKey<>("HEADING_NO_ATX_SPACE", false);
+    // used to set escaping of # at start independent of HEADING_NO_ATX_SPACE setting if desired
+    public static final DataKey<Boolean> ESCAPE_HEADING_NO_ATX_SPACE = new DataKey<>("ESCAPE_HEADING_NO_ATX_SPACE", false, HEADING_NO_ATX_SPACE::get);
     public static final DataKey<Boolean> HTML_FOR_TRANSLATOR = new DataKey<>("HTML_FOR_TRANSLATOR", false);
     public static final DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER = new DataKey<>("INTELLIJ_DUMMY_IDENTIFIER", false);
     public static final DataKey<Boolean> PARSE_INNER_HTML_COMMENTS = new DataKey<>("PARSE_INNER_HTML_COMMENTS", false);
