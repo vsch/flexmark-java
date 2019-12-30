@@ -20,9 +20,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import com.vladsch.flexmark.util.format.MarkdownParagraph;
-import com.vladsch.flexmark.util.format.TrackedOffset;
-import com.vladsch.flexmark.util.format.options.ContinuationIndent;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.HeadingStyle;
@@ -30,10 +27,8 @@ import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,7 +41,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
 import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
@@ -599,289 +593,19 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderList(node, context, markdown);
+        FormatterUtils.renderList(node, context, markdown);
     }
 
     private void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderList(node, context, markdown);
+        FormatterUtils.renderList(node, context, markdown);
     }
 
     private void render(BulletListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
+        FormatterUtils.renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
     }
 
     private void render(OrderedListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
-    }
-
-    public static void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (context.isTransformingText()) {
-            // CAUTION: during translation no formatting should be done
-            context.renderChildren(node);
-        } else {
-            ArrayList<Node> itemList = new ArrayList<>();
-            Node item = node.getFirstChild();
-            while (item != null) {
-                itemList.add(item);
-                item = item.getNext();
-            }
-            renderList(node, context, markdown, itemList);
-        }
-    }
-
-    public static void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown, List<Node> itemList) {
-        FormatterOptions formatterOptions = context.getFormatterOptions();
-        if (formatterOptions.listAddBlankLineBefore && !node.isOrDescendantOfType(ListItem.class)) {
-            markdown.blankLine();
-        }
-
-        Document document = context.getDocument();
-        ListSpacing listSpacing = FormatterUtils.LIST_ITEM_SPACING.get(document);
-        int listItemNumber = FormatterUtils.LIST_ITEM_NUMBER.get(document);
-        int startingNumber = node instanceof OrderedList ? formatterOptions.listRenumberItems && formatterOptions.listResetFirstItemNumber ? 1 : ((OrderedList) node).getStartNumber() : 1;
-        Function<CharSequence, Pair<Integer, Integer>> listAlignNumeric = FormatterUtils.LIST_ALIGN_NUMERIC.get(document);
-        document.set(FormatterUtils.LIST_ITEM_NUMBER, startingNumber);
-
-        ListSpacing itemSpacing = null;
-        switch (formatterOptions.listSpacing) {
-            case AS_IS:
-                break;
-            case LOOSE:
-                itemSpacing = ListSpacing.LOOSE;
-                break;
-            case TIGHT:
-                itemSpacing = ListSpacing.TIGHT;
-                break;
-            case LOOSEN:
-                itemSpacing = node.isLoose() ? ListSpacing.LOOSE : ListSpacing.TIGHT;
-                break;
-            case TIGHTEN: {
-                itemSpacing = ListSpacing.LOOSE;
-                for (Node item : itemList) {
-                    if (item instanceof ListItem) {
-                        if (((ListItem) item).isOwnTight() && item.getNext() != null) {
-                            itemSpacing = ListSpacing.TIGHT;
-                            break;
-                        }
-                    }
-                }
-                break;
-            }
-        }
-
-        document.remove(FormatterUtils.LIST_ALIGN_NUMERIC);
-
-        if (!formatterOptions.listAlignNumeric.isNoChange() && node instanceof OrderedList) {
-            int maxLen = Integer.MIN_VALUE;
-            int minLen = Integer.MAX_VALUE;
-            int i = startingNumber;
-            for (Node item : itemList) {
-                if (!formatterOptions.listRemoveEmptyItems || item.hasChildren() && item.getFirstChildAnyNot(BlankLine.class) != null) {
-                    int length = formatterOptions.listRenumberItems ? Integer.toString(i).length() + 1 : ((ListItem) item).getOpeningMarker().length();
-                    maxLen = Math.max(maxLen, length);
-                    minLen = Math.min(minLen, length);
-                    i++;
-                }
-            }
-
-            if (maxLen != minLen) {
-                int finalMaxLen = maxLen;
-                document.set(FormatterUtils.LIST_ALIGN_NUMERIC, formatterOptions.listAlignNumeric.isLeft()
-                        ? sequence -> Pair.of(0, Math.min(4, Math.max(0, finalMaxLen - sequence.length())))
-                        : sequence -> Pair.of(Math.min(4, Math.max(0, finalMaxLen - sequence.length())), 0)
-                );
-            }
-        }
-
-        document.set(FormatterUtils.LIST_ITEM_SPACING, itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE) ? ListSpacing.LOOSE : itemSpacing);
-        for (Node item : itemList) {
-            if (itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE)) markdown.blankLine();
-            context.render(item);
-        }
-        document.set(FormatterUtils.LIST_ITEM_SPACING, listSpacing);
-        document.set(FormatterUtils.LIST_ITEM_NUMBER, listItemNumber);
-        document.set(FormatterUtils.LIST_ALIGN_NUMERIC, listAlignNumeric);
-
-        if (!node.isOrDescendantOfType(ListItem.class)) {
-            markdown.tailBlankLine();
-        }
-    }
-
-    public static void renderListItem(
-            ListItem node,
-            NodeFormatterContext context,
-            MarkdownWriter markdown,
-            ListOptions listOptions,
-            BasedSequence markerSuffix,
-            boolean addBlankLineLooseItems
-    ) {
-        FormatterOptions options = context.getFormatterOptions();
-        boolean savedFirstListItemChild = FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument());
-
-        if (context.isTransformingText()) {
-            BasedSequence openingMarker = node.getOpeningMarker();
-            String itemContentPrefix;
-            String itemContentSpacer;
-            String prefix;
-            String additionalPrefix = FormatterUtils.getActualAdditionalPrefix(openingMarker, markdown);
-
-            if (node.getFirstChild() == null) {
-                // TEST: not sure if this works, need an empty list item with no children to test
-                int count = openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1;
-                itemContentPrefix = RepeatedSequence.repeatOf(' ', count).toString();
-                prefix = additionalPrefix + itemContentPrefix;
-
-                itemContentSpacer = " ";
-            } else {
-                BasedSequence childContent = node.getFirstChild().getChars();
-                itemContentPrefix = FormatterUtils.getAdditionalPrefix(markerSuffix.isEmpty() ? openingMarker : markerSuffix, childContent);
-                prefix = additionalPrefix + itemContentPrefix;
-
-                itemContentSpacer = FormatterUtils.getAdditionalPrefix(markerSuffix.isEmpty() ? openingMarker.getEmptySuffix() : markerSuffix.getEmptySuffix(), childContent);
-            }
-
-            markdown.pushPrefix().addPrefix(prefix, true);
-            markdown.append(additionalPrefix).append(openingMarker);
-
-            if (!markerSuffix.isEmpty()) {
-                String markerSuffixIndent = FormatterUtils.getAdditionalPrefix(openingMarker.getEmptySuffix(), markerSuffix);
-                markdown.append(markerSuffixIndent).append(markerSuffix);
-            }
-
-            markdown.append(itemContentSpacer);
-
-            // if have no item text and followed by eol then add EOL
-            if (!(node.getFirstChild() instanceof Paragraph)) {
-                if (node.getFirstChild() == null) {
-                    if (!savedFirstListItemChild) {
-                        markdown.append("\n");
-                    }
-                } else {
-                    int posEOL = node.endOfLine(openingMarker.getEndOffset());
-                    if (posEOL < node.getFirstChild().getStartOffset()) {
-                        // output EOL
-                        markdown.append("\n");
-                    }
-                }
-            }
-
-            context.renderChildren(node);
-            markdown.popPrefix();
-        } else {
-            if (options.listRemoveEmptyItems && !(node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null)) {
-                return;
-            }
-
-            CharSequence openingMarker = node.getOpeningMarker();
-            if (node.isOrderedItem()) {
-                char delimiter = openingMarker.charAt(openingMarker.length() - 1);
-                CharSequence number = openingMarker.subSequence(0, openingMarker.length() - 1);
-
-                switch (options.listNumberedMarker) {
-                    case ANY:
-                        break;
-                    case DOT:
-                        delimiter = '.';
-                        break;
-                    case PAREN:
-                        delimiter = ')';
-                        break;
-                    default:
-                        throw new IllegalStateException("Missing case for ListNumberedMarker " + options.listNumberedMarker.name());
-                }
-
-                Document document = context.getDocument();
-
-                if (options.listRenumberItems) {
-                    Integer itemNumber = FormatterUtils.LIST_ITEM_NUMBER.get(document);
-                    openingMarker = String.format(Locale.US, "%d%c", itemNumber++, delimiter);
-                    document.set(FormatterUtils.LIST_ITEM_NUMBER, itemNumber);
-                } else {
-                    openingMarker = String.format("%s%c", number, delimiter);
-                }
-
-                Pair<Integer, Integer> padding = FormatterUtils.LIST_ALIGN_NUMERIC.get(document).apply(openingMarker);
-                if (padding.getFirst() > 0) openingMarker = RepeatedSequence.ofSpaces(padding.getFirst()).toString() + openingMarker.toString();
-                if (padding.getSecond() > 0) openingMarker = openingMarker.toString() + RepeatedSequence.ofSpaces(padding.getSecond()).toString();
-            } else {
-                if (node.canChangeMarker()) {
-                    switch (options.listBulletMarker) {
-                        case ANY:
-                            break;
-                        case DASH:
-                            openingMarker = "-";
-                            break;
-                        case ASTERISK:
-                            openingMarker = "*";
-                            break;
-                        case PLUS:
-                            openingMarker = "+";
-                            break;
-                        default:
-                            throw new IllegalStateException("Missing case for ListBulletMarker " + options.listBulletMarker.name());
-                    }
-                }
-            }
-
-            // NOTE: if list item content after suffix is set in the parser, then sub-items are indented after suffix
-            //    otherwise only the item's lazy continuation for the paragraph can be indented after suffix, child items are normally indented
-            int itemContinuationCount = (listOptions.isItemContentAfterSuffix() || options.listsItemContentAfterSuffix ? markerSuffix.length() : 0);
-            int continuationCount = openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1;
-            CharSequence itemPrefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', itemContinuationCount)
-                    : "";
-
-            CharSequence childPrefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', continuationCount)
-                    : RepeatedSequence.repeatOf(" ", listOptions.getItemIndent()).toString();
-
-            markdown.pushPrefix().addPrefix(childPrefix, true);
-
-            markdown.pushOptions()
-                    .preserveSpaces().append(openingMarker).append(' ').append(markerSuffix)
-                    .popOptions();
-
-            if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
-                // NOTE: depends on first child
-                Node childNode = node.getFirstChild();
-
-                if (childNode instanceof Paragraph) {
-                    markdown.pushPrefix().addPrefix(itemPrefix, true);
-                    context.render(childNode);
-                    markdown.popPrefix();
-                } else if (childNode != null) {
-                    // NOTE: item is empty, followed immediately by child block element
-                    FormatterUtils.FIRST_LIST_ITEM_CHILD.set(node.getDocument(), true);
-                    markdown.pushPrefix().addPrefix(itemPrefix, true);
-                    context.render(childNode);
-                    markdown.popPrefix();
-                }
-
-                FormatterUtils.FIRST_LIST_ITEM_CHILD.set(node.getDocument(), false);
-
-                while (childNode != null) {
-                    childNode = childNode.getNext();
-                    if (childNode == null) {
-                        break;
-                    }
-                    context.render(childNode);
-                }
-
-                if (addBlankLineLooseItems && (node.isLoose() || FormatterUtils.LIST_ITEM_SPACING.get(node.getDocument()) == ListSpacing.LOOSE)) {
-                    markdown.tailBlankLine();
-                }
-            } else {
-                // NOTE: empty list item
-                if (node.isLoose()) {
-                    markdown.tailBlankLine();
-                } else {
-                    if (!savedFirstListItemChild) {
-                        markdown.line();
-                    }
-                }
-            }
-            markdown.popPrefix();
-        }
-
-        FormatterUtils.FIRST_LIST_ITEM_CHILD.set(node.getDocument(), savedFirstListItemChild);
+        FormatterUtils.renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
     }
 
     private void render(Emphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -896,136 +620,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         markdown.append(node.getOpeningMarker());
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public static void renderTextBlockParagraphLines(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (context.isTransformingText()) {
-            context.translatingSpan((context1, writer) -> context1.renderChildren(node));
-            markdown.line();
-        } else {
-            FormatterOptions formatterOptions = context.getFormatterOptions();
-            if (formatterOptions.rightMargin > 0) {
-                MutableDataHolder subContextOptions = context.getOptions().toMutable().set(Formatter.KEEP_SOFT_LINE_BREAKS, true).set(Formatter.KEEP_HARD_LINE_BREAKS, true);
-                SequenceBuilder builder = node.getChars().getBuilder();
-                NodeFormatterContext subContext = context.getSubContext(subContextOptions, builder.getBuilder());
-                subContext.renderChildren(node);
-
-                MarkdownWriter subContextMarkdown = subContext.getMarkdown();
-                subContextMarkdown.toBuilder(builder, 0);
-
-                MarkdownParagraph formatter = new MarkdownParagraph(builder.toSequence(), formatterOptions.charWidthProvider);
-                List<TrackedOffset> trackedOffsets = Formatter.TRACKED_OFFSETS.get(context.getDocument());
-
-                if (formatterOptions.paragraphContinuationIndent == ContinuationIndent.ALIGN_TO_FIRST) {
-                    formatter.setWidth(formatterOptions.rightMargin - markdown.getPrefix().length());
-                    formatter.setKeepSoftBreaks(false);
-                    formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
-                    formatter.setRestoreTrackedSpaces(false);
-                    formatter.setFirstIndent("");
-                    formatter.setIndent("");
-
-                    // adjust first line width, based on change in prefix after the first line EOL
-                    formatter.setFirstWidthOffset(markdown.column() - markdown.getAfterEolPrefixDelta());
-
-                    if (formatterOptions.applySpecialLeadInHandlers) {
-                        formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
-                    }
-
-                    for (TrackedOffset trackedOffset : trackedOffsets) {
-                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
-                            formatter.addTrackedOffset(trackedOffset);
-                        }
-                    }
-
-                    int paragraphOffset = markdown.offsetWithPending();
-                    BasedSequence wrappedText = formatter.wrapText();
-                    markdown.append(wrappedText.toMapped(SpaceMapper.fromNonBreakSpace));
-
-                    // get the indent used for new lines so that index can be adjusted by added indent
-                    int lineIndent = markdown.getPrefix().length();
-                    for (TrackedOffset trackedOffset : trackedOffsets) {
-                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
-                            if (trackedOffset.isResolved()) {
-                                int interveningLines = wrappedText.countOfAny(CharPredicate.EOL, 0, trackedOffset.getIndex());
-                                trackedOffset.setIndex(trackedOffset.getIndex() + paragraphOffset + interveningLines * lineIndent);
-                            }
-                        }
-                    }
-
-                    markdown.line();
-                } else {
-                    int indent;
-
-                    switch (formatterOptions.paragraphContinuationIndent) {
-                        // @formatter:off
-                        case INDENT_1: indent = 4; break;
-                        case INDENT_2: indent = 8; break;
-                        case INDENT_3: indent = 12; break;
-
-                        default:
-                        case NONE: indent = 0; break;
-                        // @formatter:on
-                    }
-
-                    formatter.setWidth(formatterOptions.rightMargin);
-                    formatter.setKeepSoftBreaks(false);
-                    formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
-                    CharSequence firstIndent = markdown.getPrefix().subSequence(0, Math.max(0, markdown.getPrefix().length() - markdown.getAfterEolPrefixDelta()));
-                    formatter.setFirstIndent(firstIndent);
-                    formatter.setIndent(RepeatedSequence.ofSpaces(indent));
-                    formatter.setRestoreTrackedSpaces(false);
-
-                    // adjust first line width, based on change in prefix after the first line EOL
-                    formatter.setFirstWidthOffset(-markdown.column());
-
-                    if (formatterOptions.applySpecialLeadInHandlers) {
-                        formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
-                    }
-
-                    for (TrackedOffset trackedOffset : trackedOffsets) {
-                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
-                            formatter.addTrackedOffset(trackedOffset);
-                        }
-                    }
-
-                    BasedSequence wrapped = formatter.wrapText().toMapped(SpaceMapper.fromNonBreakSpace);
-
-                    int paragraphOffset = markdown.offset();
-                    for (TrackedOffset trackedOffset : trackedOffsets) {
-                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
-                            if (trackedOffset.isResolved()) {
-                                trackedOffset.setIndex(trackedOffset.getIndex() + paragraphOffset);
-                            }
-                        }
-                    }
-
-                    markdown.openPreFormatted(false).pushPrefix().setPrefix("", false)
-                            .append(wrapped).line()
-                            .popPrefix().closePreFormatted();
-                }
-            } else {
-                context.renderChildren(node);
-                markdown.line();
-            }
-        }
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public static void renderLooseParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.blankLine();
-        renderTextBlockParagraphLines(node, context, markdown);
-        markdown.tailBlankLine();
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public static void renderLooseItemParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderTextBlockParagraphLines(node, context, markdown);
-        markdown.tailBlankLine();
-    }
-
     private void render(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.isTransformingText()) {
             // leave all as is
-            renderTextBlockParagraphLines(node, context, markdown);
+            FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
             if (node.isTrailingBlankLine()) {
                 markdown.tailBlankLine();
             }
@@ -1035,39 +633,39 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 boolean endWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphEndWrappingDisabled(node);
                 if (startWrappingDisabled || endWrappingDisabled) {
                     if (!startWrappingDisabled) markdown.blankLine();
-                    renderTextBlockParagraphLines(node, context, markdown);
+                    FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
                     if (!endWrappingDisabled) markdown.blankLine();
                 } else {
-                    renderLooseParagraph(node, context, markdown);
+                    FormatterUtils.renderLooseParagraph(node, context, markdown);
                 }
             } else {
                 if (!(node.getParent() instanceof ParagraphItemContainer)) {
                     if (!node.isTrailingBlankLine() && (node.getNext() == null || node.getNext() instanceof ListBlock)) {
-                        renderTextBlockParagraphLines(node, context, markdown);
+                        FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
                     } else {
-                        renderLooseParagraph(node, context, markdown);
+                        FormatterUtils.renderLooseParagraph(node, context, markdown);
                     }
                 } else {
                     boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
                     if (isItemParagraph) {
                         ListSpacing itemSpacing = FormatterUtils.LIST_ITEM_SPACING.get(context.getDocument());
                         if (itemSpacing == ListSpacing.TIGHT) {
-                            renderTextBlockParagraphLines(node, context, markdown);
+                            FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
                         } else if (itemSpacing == ListSpacing.LOOSE) {
                             if (node.getParent().getNextAnyNot(BlankLine.class) == null) {
-                                renderTextBlockParagraphLines(node, context, markdown);
+                                FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
                             } else {
-                                renderLooseItemParagraph(node, context, markdown);
+                                FormatterUtils.renderLooseItemParagraph(node, context, markdown);
                             }
                         } else {
                             if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
-                                renderLooseItemParagraph(node, context, markdown);
+                                FormatterUtils.renderLooseItemParagraph(node, context, markdown);
                             } else {
-                                renderTextBlockParagraphLines(node, context, markdown);
+                                FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
                             }
                         }
                     } else {
-                        renderLooseParagraph(node, context, markdown);
+                        FormatterUtils.renderLooseParagraph(node, context, markdown);
                     }
                 }
             }

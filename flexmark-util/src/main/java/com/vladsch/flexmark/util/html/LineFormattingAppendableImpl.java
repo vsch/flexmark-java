@@ -3,6 +3,8 @@ package com.vladsch.flexmark.util.html;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.BitFieldSet;
+import com.vladsch.flexmark.util.format.TrackedOffset;
+import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
@@ -13,9 +15,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
+import java.util.function.BiConsumer;
 
-import static com.vladsch.flexmark.util.Utils.*;
+import static com.vladsch.flexmark.util.Utils.maxLimit;
+import static com.vladsch.flexmark.util.Utils.min;
+import static com.vladsch.flexmark.util.Utils.minLimit;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.trimEnd;
 
@@ -45,7 +51,8 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     private CharSequence indentPrefix;
     final private Stack<CharSequence> prefixStack;
     final private Stack<Boolean> indentPrefixStack;
-    final private @Nullable SequenceBuilder builder;
+    private @Nullable SequenceBuilder builder;              // this builder is used for line construction, fresh builder for each line so offsets are preserved
+    private @Nullable TrackedOffsetList trackedOffsets = TrackedOffsetList.EMPTY_LIST;
 
     // current line being accumulated
     private int lineStart;                                  // start of line
@@ -76,7 +83,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     }
 
     public LineFormattingAppendableImpl(@Nullable SequenceBuilder builder, BitFieldSet<Options> formatOptions) {
-        this.builder = builder;
+        this.builder = builder == null ? null : builder.getBuilder();
         options = formatOptions;
         passThrough = any(F_PASS_THROUGH);
         preFormattedNesting = 0;
@@ -114,6 +121,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
 
     @Override
     public @NotNull LineAppendable pushOptions() {
+//        System.out.println(String.format("%6x: Pushing options %s", hashCode(), Long.toBinaryString(options.toInt())));
         optionStack.push(options.toInt());
         return this;
     }
@@ -123,7 +131,9 @@ public class LineFormattingAppendableImpl implements LineAppendable {
         if (optionStack.isEmpty()) {
             throw new IllegalStateException("Option stack is empty");
         }
-        options.set(optionStack.pop());
+        Integer mask = optionStack.pop();
+        options.setAll(mask);
+//        System.out.println(String.format("%6x: Popped options %s, %s", hashCode(), Long.toBinaryString(options.toInt()), Long.toBinaryString(mask)));
         return this;
     }
 
@@ -132,8 +142,9 @@ public class LineFormattingAppendableImpl implements LineAppendable {
         if ((addFlags & removeFlags) != 0) {
             throw new IllegalStateException(String.format("Add flags:%d and remove flags:%d overlap:%d", addFlags, removeFlags, addFlags & removeFlags));
         }
-        options.set(removeFlags);
-        options.clear(removeFlags);
+        options.orMask(addFlags);
+        options.andNotMask(removeFlags);
+//        System.out.println(String.format("%6x: Changed options %s, added: %s, removed:%s ", hashCode(), Long.toBinaryString(options.toInt()), Long.toBinaryString(addFlags), Long.toBinaryString(removeFlags)));
         return this;
     }
 
@@ -143,6 +154,10 @@ public class LineFormattingAppendableImpl implements LineAppendable {
 
     private boolean isConvertingTabs() {
         return any(F_CONVERT_TABS | F_COLLAPSE_WHITESPACE);
+    }
+
+    private boolean isResolvingTrackedOffsets() {
+        return !any(F_NO_TRACKED_OFFSETS);
     }
 
     private boolean isTrimTrailingWhitespace() {
@@ -323,25 +338,48 @@ public class LineFormattingAppendableImpl implements LineAppendable {
         assert range.getStart() <= range.getEnd();
 
         if (builder != null) {
-            lines.add(range.isNull() ? BasedSequence.NULL : builder.toSequence().subSequence(range.getStart(), range.getEnd()));
+            BasedSequence line = builder.toSequence();
+            resetBuilder();
+
+            assert !line.endsWithEOL():"Eol on line";
+            if (line.safeCharAt(line.length() - 1) == '\n') {
+                int tmp = 0;
+            }
+            lines.add(line);
+
+            if (line.isBlank() && prefix.length() != 0) {
+                prefix = SequenceUtils.trimEnd(prefix);
+            }
+            prefixes.add(prefix);
+            textLength += line.length() + 1;
+            prefixLength += prefix.length();
         } else {
-            lines.add(range.isNull() ? BasedSequence.NULL : range.basedSubSequence(appendable));
+            BasedSequence line = range.isNull() ? BasedSequence.NULL : range.basedSubSequence(appendable);
+            assert !line.endsWithEOL():"Eol on line";
+            if (line.safeCharAt(line.length() - 1) == '\n') {
+                int tmp = 0;
+            }
+            lines.add(line);
+            if (range.isEmpty() && prefix.length() != 0) {
+                prefix = SequenceUtils.trimEnd(prefix);
+            }
+
+            prefixes.add(prefix);
+            textLength += range.getSpan() + 1;
         }
 
-        if (range.isEmpty() && prefix.length() != 0) {
-            prefix = SequenceUtils.trimEnd(prefix);
-            prefixes.add(prefix);
-        } else {
-            prefixes.add(prefix);
-        }
-
-        textLength += range.getSpan() + 1;
         prefixLength += prefix.length();
+    }
+
+    private void resetBuilder() {
+        if (builder != null && builder.isNotEmpty()) {
+            // start a new line
+            builder = builder.getBuilder();
+        }
     }
 
     private void appendEol() {
         appendable.append(EOL);
-        appendBuilder(SequenceUtils.EOL);
 
         int startOffset = lineStart;
         lineStart = appendable.length();
@@ -492,7 +530,6 @@ public class LineFormattingAppendableImpl implements LineAppendable {
 
                 if (c != '\t' && c != ' ') allWhitespace = false;
                 appendable.append(c);
-                appendBuilder(s, index, index + 1);
             }
         } else {
             if (c == EOL) {
@@ -501,7 +538,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
                     // nothing, add EOL and don't add line
                     // add the EOL so as not to mess up the text but do not add the line
                     appendable.append(c);
-                    appendBuilder(s, index, index + 1);
+                    resetBuilder();
 
                     lineStart = appendable.length();
                     allWhitespace = true;
@@ -510,8 +547,6 @@ public class LineFormattingAppendableImpl implements LineAppendable {
                 } else {
                     // add EOL and line
                     appendable.append(c);
-                    appendBuilder(s, index, index + 1);
-
                     lineStart = appendable.length();
                     addLineRange(rangePrefixAfterEol.getFirst(), rangePrefixAfterEol.getSecond());
                     allWhitespace = true;
@@ -573,9 +608,49 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     }
 
     private void appendImpl(CharSequence csq, int start, int end) {
+        int startIndex = -1;
+
         int i = start;
+
+        if (false && builder != null && csq instanceof BasedSequence) {
+            startIndex = offsetAfterEol(true);
+        }
+
         while (i < end) {
             appendImpl(csq, i++);
+        }
+
+        if (false && isResolvingTrackedOffsets() && builder != null && csq instanceof BasedSequence) {
+            if (trackedOffsets != null) {
+                if (this.trackedOffsets.isEmpty()) {
+                    // NOTE: not initialized since tracked offsets are added to builder after creating appendable
+                    if (!builder.getTrackedOffsets().isEmpty()) {
+                        this.trackedOffsets = builder.getTrackedOffsets();
+                    } else {
+                        this.trackedOffsets = null;
+                        return;
+                    }
+                }
+
+                int endIndex = -1;
+                BasedSequence subSequence = ((BasedSequence) csq).subSequence(start, end);
+                int startOffset = subSequence.getStartOffset();
+                int endOffset = subSequence.getEndOffset();
+
+                List<TrackedOffset> trackedOffsets = this.trackedOffsets.getTrackedOffsets(startOffset, Math.max(startOffset, endOffset));
+                if (!trackedOffsets.isEmpty()) {
+                    for (TrackedOffset trackedOffset : trackedOffsets) {
+                        if (!trackedOffset.isResolved()) {
+                            if (endIndex == -1) endIndex = offsetAfterEol(true);
+                            int index = trackedOffset.getOffset() - startOffset;
+                            trackedOffset.setIndex(Math.min(endIndex, index + startIndex));
+                            System.out.println(String.format("Resolved %d to %d, startIndex: %d, endIndex: %d, in '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), startIndex, endIndex, SequenceUtils.toVisibleWhitespaceString(subSequence)));
+                        } else {
+                            System.out.println(String.format("Resolved offset %d to %d at '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), SequenceUtils.toVisibleWhitespaceString(subSequence)));
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -608,25 +683,18 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     @NotNull
     public LineAppendable append(char c, int count) {
         append(RepeatedSequence.repeatOf(c, count));
-//        int i = count;
-//        String s = Character.toString(c);
-//        while (i-- > 0) appendImpl(s, 0);
         return this;
     }
 
     @NotNull
     public LineAppendable repeat(@NotNull CharSequence csq, int count) {
         append(RepeatedSequence.repeatOf(csq, count));
-//        int i = count;
-//        while (i-- > 0) append(csq);
         return this;
     }
 
     @NotNull
     public LineAppendable repeat(@NotNull CharSequence csq, int start, int end, int count) {
         append(RepeatedSequence.repeatOf(csq.subSequence(start, end), count));
-//        int i = count;
-//        while (i-- > 0) append(csq, start, end);
         return this;
     }
 
@@ -664,7 +732,8 @@ public class LineFormattingAppendableImpl implements LineAppendable {
             appendBuilder(line);
 
             appendable.append(EOL);
-            appendBuilder(EOL);
+            // NOTE: builder lines do not have EOL added
+//            appendBuilder(EOL);
 
             int endOffset = appendable.length();
 
@@ -865,7 +934,7 @@ public class LineFormattingAppendableImpl implements LineAppendable {
     public LineAppendable lineWithTrailingSpaces(int count) {
         if (preFormattedNesting > 0 || lineStart < appendable.length() || any(F_ALLOW_LEADING_EOL)) {
             int options = this.options.toInt();
-            this.options.clear(F_TRIM_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
+            this.options.andNotMask(F_TRIM_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
             if (count > 0) append(' ', count);
             appendImpl(SequenceUtils.EOL, 0);
             this.options.replaceAll(options);
@@ -1015,6 +1084,27 @@ public class LineFormattingAppendableImpl implements LineAppendable {
             if (maxBlankLines != -1 || i + 1 != iMax) {
                 builder.append(SequenceUtils.EOL);
             }
+        }
+    }
+
+    @Override
+    public void forAllLines(@NotNull SequenceBuilder builder, int maxBlankLines, @NotNull BiConsumer<BasedSequence, Integer> consumer) {
+        line();
+        int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
+
+        int iMax = lines.size() - removeBlankLines;
+        for (int i = 0; i < iMax; i++) {
+            CharSequence prefix = prefixes.get(i);
+            CharSequence line = lines.get(i);
+            SequenceBuilder subBuilder = builder.getBuilder();
+            subBuilder.append(prefix);
+            subBuilder.append(line);
+
+            if (maxBlankLines != -1 || i + 1 != iMax) {
+                subBuilder.append(SequenceUtils.EOL);
+            }
+
+            consumer.accept(subBuilder.toSequence(), i);
         }
     }
 

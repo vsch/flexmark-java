@@ -59,7 +59,7 @@ public class BasedOffsetTracker {
 
         if (offsetEnd <= sequence.getStartOffset()) {
             // before sequence
-            lastResult = new OffsetInfo(0, offset, true, 0);
+            lastResult = new OffsetInfo(-1, offset, true, 0);
         } else if (offset >= sequence.getEndOffset()) {
             // after sequence
             lastResult = new OffsetInfo(segmentOffsetTree.size(), offset, true, sequence.length());
@@ -70,7 +70,7 @@ public class BasedOffsetTracker {
                 if (offset < segmentOffsetTree.getSegment(0, sequence).getStartOffset()) {
                     lastResult = new OffsetInfo(-1, offset, true, 0);
                 } else {
-                    if (offset <= segmentOffsetTree.getSegment(segmentOffsetTree.size() - 1, sequence).getEndOffset()) {
+                    if (offset < segmentOffsetTree.getSegment(segmentOffsetTree.size() - 1, sequence).getEndOffset()) {
                         // RELEASE: remove exception
                         throw new IllegalStateException("Unexpected");
                     }

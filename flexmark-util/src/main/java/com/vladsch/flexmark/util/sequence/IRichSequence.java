@@ -1309,4 +1309,19 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     default int getColumnAtIndex(int index) {
         return columnAtIndex(index);
     }
+
+    /**
+     * Safe, if index out of range returns '\0'
+     *
+     * @param index index in string
+     * @return true if character at index tests true
+     */
+    boolean isCharAt(int index, @NotNull CharPredicate predicate);
+
+    /**
+     * Return string or null if BaseSequence.NULL
+     * @return string or null if BaseSequence.NULL
+     */
+    @Nullable
+    String toStringOrNull();
 }

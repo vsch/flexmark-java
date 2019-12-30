@@ -98,20 +98,20 @@ public class BitFieldSetTest {
             int iMin = -(1 << fields.getBits() / 2);
             int iMax = (1 << fields.getBits() / 2) - 1;
             for (int i = iMin; i < iMax; i++) {
-                bitFields.set(fields, i);
+                bitFields.orMask(fields, i);
                 assertEquals("field: " + fields.name() + " value: " + i, (i & mask), bitFields.get(fields));
 
-                bitFields.set(fields, i);
+                bitFields.orMask(fields, i);
                 assertEquals("field: " + fields.name() + " value: " + i, i, bitFields.getSigned(fields));
 
-                bitFields.setInt(fields, i);
+                bitFields.intOr(fields, i);
                 assertEquals("field: " + fields.name() + " value: " + i, i, bitFields.getInt(fields));
 
-                bitFields.setShort(fields, (short) i);
+                bitFields.shortOr(fields, (short) i);
                 assertEquals("field: " + fields.name() + " value: " + i, i, bitFields.getShort(fields));
 
                 if (fields.getBits() <= 8) {
-                    bitFields.setByte(fields, (byte) i);
+                    bitFields.byteOr(fields, (byte) i);
                     assertEquals("field: " + fields.name() + " value: " + i, i, bitFields.getByte(fields));
                 }
             }
@@ -122,10 +122,10 @@ public class BitFieldSetTest {
     public void test_BitFieldIterator() {
         BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
         bitFields.add(BitFields.FIELD_1);
-        bitFields.set(BitFields.FIELD_3, 2);
-        bitFields.set(BitFields.FIELD_5, -10);
-        bitFields.set(BitFields.FIELD_10, 381);
-        bitFields.set(BitFields.FIELD_11, -6);
+        bitFields.orMask(BitFields.FIELD_3, 2);
+        bitFields.orMask(BitFields.FIELD_5, -10);
+        bitFields.orMask(BitFields.FIELD_10, 381);
+        bitFields.orMask(BitFields.FIELD_11, -6);
         int[] expected = { -1, 2, -10, 381, -6 };
         ArrayList<Integer> actualList = new ArrayList<>();
 
@@ -147,10 +147,10 @@ public class BitFieldSetTest {
     public void test_BitFieldToString() {
         BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
         bitFields.add(BitFields.FIELD_1);
-        bitFields.set(BitFields.FIELD_3, 2);
-        bitFields.set(BitFields.FIELD_5, -10);
-        bitFields.set(BitFields.FIELD_10, 381);
-        bitFields.set(BitFields.FIELD_11, -6);
+        bitFields.orMask(BitFields.FIELD_3, 2);
+        bitFields.orMask(BitFields.FIELD_5, -10);
+        bitFields.orMask(BitFields.FIELD_10, 381);
+        bitFields.orMask(BitFields.FIELD_11, -6);
         assertEquals("BitFields: { FIELD_1, FIELD_3(2), FIELD_5(-10), FIELD_10(381), FIELD_11(-6) }", bitFields.toString());
     }
 
@@ -190,11 +190,11 @@ public class BitFieldSetTest {
     public void test_BitFieldIteratorRemove() {
         BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
         bitFields.add(BitFields.FIELD_1);
-        bitFields.set(BitFields.FIELD_3, 2);
-        bitFields.set(BitFields.FIELD_5, -10);
-        bitFields.set(BitFields.FIELD_10, 381);
-        bitFields.set(BitFields.FIELD_11, -6);
-        bitFields.set(BitFields.FIELD_7, 57);
+        bitFields.orMask(BitFields.FIELD_3, 2);
+        bitFields.orMask(BitFields.FIELD_5, -10);
+        bitFields.orMask(BitFields.FIELD_10, 381);
+        bitFields.orMask(BitFields.FIELD_11, -6);
+        bitFields.orMask(BitFields.FIELD_7, 57);
 
         int[] expected = { -1, 2, -10, 381, -6 };
         ArrayList<Integer> actualList = new ArrayList<>();
@@ -227,28 +227,28 @@ public class BitFieldSetTest {
     public void test_bitSetGetErr() {
         BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
         thrown.expect(ExceptionMatcher.match(IllegalArgumentException.class, "Enum field BitFields.FIELD_11 is 4 bits, value range is [-8, 7], cannot be set to 16"));
-        bitFields.set(BitFields.FIELD_11, 16);
+        bitFields.orMask(BitFields.FIELD_11, 16);
     }
 
     @Test
     public void test_bitSetGetErr2() {
         BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
         thrown.expect(ExceptionMatcher.match(IllegalArgumentException.class, "Enum field BitFields.FIELD_11 is 4 bits, value range is [-8, 7], cannot be set to -9"));
-        bitFields.set(BitFields.FIELD_11, -9);
+        bitFields.orMask(BitFields.FIELD_11, -9);
     }
 
     @Test
     public void test_bitSetGetErr3() {
         BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
         thrown.expect(ExceptionMatcher.match(IllegalArgumentException.class, "Enum field BitFields.FIELD_1 is 1 bit, value range is [-1, 0], cannot be set to -2"));
-        bitFields.set(BitFields.FIELD_1, -2);
+        bitFields.orMask(BitFields.FIELD_1, -2);
     }
 
     @Test
     public void test_bitSetGetErr4() {
         BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
         thrown.expect(ExceptionMatcher.match(IllegalArgumentException.class, "Enum field BitFields.FIELD_1 is 1 bit, value range is [-1, 0], cannot be set to 1"));
-        bitFields.set(BitFields.FIELD_1, 1);
+        bitFields.orMask(BitFields.FIELD_1, 1);
     }
 
     @Test

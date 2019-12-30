@@ -10,10 +10,10 @@ import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,10 +48,11 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
 
             @Override
             protected @NotNull String renderHtml() {
-                if (trackedOffsets == null) {
+                if (trackedOffsets == null && !SHOW_LINE_RANGES.get(myOptions)) {
                     return getRenderer().render(getDocument());
                 } else {
-                    String html = ((Formatter)getRenderer()).render(getDocument(), getDocument().getDocument().getChars().getBuilder());
+                    SequenceBuilder builder = getDocument().getDocument().getChars().getBuilder();
+                    String html = ((Formatter) getRenderer()).render(getDocument(), builder);
                     List<TrackedOffset> trackedOffsetList = Formatter.TRACKED_OFFSETS.get(getDocument().getDocument());
                     assert trackedOffsetList == trackedOffsets;
 
@@ -61,6 +62,8 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                     for (TrackedOffset trackedOffset : trackedOffsets) {
                         if (trackedOffset.isResolved()) {
                             offsets[i++] = trackedOffset.getIndex();
+                        } else {
+                            System.out.println(String.format("Offset %s is not resolved", trackedOffset.toString()));
                         }
                     }
 
@@ -68,7 +71,16 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                         offsets = Arrays.copyOf(offsets, i);
                     }
 
-                    return TestUtils.insertCaretMarkup(BasedSequence.of(html), offsets).toString();
+                    String result = TestUtils.insertCaretMarkup(BasedSequence.of(html), offsets).toString();
+
+                    if (SHOW_LINE_RANGES.get(myOptions)) {
+                        StringBuilder out = new StringBuilder();
+                        out.append(result);
+                        TestUtils.appendBanner(out, TestUtils.bannerText("Ranges"), false);
+                        out.append(builder.toStringWithRanges(false));
+                        result = out.toString();
+                    }
+                    return result;
                 }
             }
         };

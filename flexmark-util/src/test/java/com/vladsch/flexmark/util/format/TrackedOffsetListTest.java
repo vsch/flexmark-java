@@ -25,7 +25,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { });
 
         int[] expected = { };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 10));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 10));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -35,7 +35,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 0 });
 
         int[] expected = { };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(2, 10));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(2, 10));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -44,8 +44,8 @@ public class TrackedOffsetListTest {
         BasedSequence input = BasedSequence.of("  234567  ");
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 0 });
 
-        int[] expected = { 0 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(1, 10));
+        int[] expected = { };
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(1, 10));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -55,7 +55,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 8 });
 
         int[] expected = { };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 7));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 7));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -65,7 +65,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 8 });
 
         int[] expected = { 8 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 8));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 8));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -75,7 +75,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 0 });
 
         int[] expected = { 0 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 10));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 10));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -85,7 +85,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 2 });
 
         int[] expected = { 2 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 10));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 10));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -94,8 +94,8 @@ public class TrackedOffsetListTest {
         BasedSequence input = BasedSequence.of("  234567  ");
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 0, 2, 3, 1 });
 
-        int[] expected = { 0 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 2));
+        int[] expected = { };
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 2));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -105,7 +105,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 0, 2, 3, 1 });
 
         int[] expected = { 0, 1 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 2));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 2));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -115,7 +115,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 0, 2, 3, 1, 4, 5, 6 });
 
         int[] expected = { 0, 1 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 2));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 2));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -125,7 +125,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 0, 2, 3, 1, 4, 5, 6 });
 
         int[] expected = { 2, 3, 4, 5 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(2, 6));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(2, 6));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -135,7 +135,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 8 });
 
         int[] expected = { 8 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 10));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 10));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 
@@ -145,7 +145,7 @@ public class TrackedOffsetListTest {
         TrackedOffsetList trackedOffsets = TrackedOffsetList.create(input.trim(), new int[] { 9 });
 
         int[] expected = { 9 };
-        int[] actual = offsets(trackedOffsets.findTrackedOffset(0, 10));
+        int[] actual = offsets(trackedOffsets.getTrackedOffsets(0, 10));
         assertArrayEquals("\nexpected: " + Arrays.toString(expected) + "\nactual: " + Arrays.toString(actual) + "\n", expected, actual);
     }
 }

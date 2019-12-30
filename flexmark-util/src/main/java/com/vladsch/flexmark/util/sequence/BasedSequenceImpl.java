@@ -102,6 +102,11 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         }
     }
 
+    @Override
+    public boolean isBaseCharAt(int index, @NotNull CharPredicate predicate) {
+        return predicate.test(safeBaseCharAt(index));
+    }
+
     @NotNull
     @Override
     public BasedSequence getEmptyPrefix() {

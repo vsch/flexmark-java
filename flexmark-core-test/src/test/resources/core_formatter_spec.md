@@ -3693,7 +3693,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 15) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Tracked Offset: 15) options(margin[31], explicit-links-at-start, image-links-at-start, show-ranges)
 ⦙*⦙ ⦙Paragraph with hard break and⦙ ⦙more text.⦙ ⦙[Test](test) text.⦙ 
     
 ⦙1⦙.⦙ ⦙Paragraph with soft break⦙ ⦙and more text.⦙ ⦙![Test](test) text.⦙ 
@@ -3707,6 +3707,16 @@ and more text.
    ⦙and more text.⦙
    ⦙![Test](test) text.⦙
 
+---- Ranges ------------------------------------------------------------
+⟦* Paragraph with hard break and⟧
+ ⟦ more text.⟧
+ ⟦ [Test](test) text.⟧⟦
+⟧⟦
+1. Paragraph with soft break⟧
+  ⟦ and more text.⟧
+  ⟦ ![Test](test) text.⟧⟦
+⟧
+⟦⟧
 ````````````````````````````````
 
 

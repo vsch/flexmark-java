@@ -1,11 +1,14 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.collection.BitFieldSet;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * Used to collect line text for further processing
@@ -28,11 +31,12 @@ public interface LineAppendable extends Appendable {
     enum Options {
         CONVERT_TABS,                       // expand tabs on column multiples of 4
         COLLAPSE_WHITESPACE,                // collapse multiple tabs and spaces to single space, implies CONVERT_TABS
-        TRIM_TRAILING_WHITESPACE,       // don't output trailing whitespace
+        TRIM_TRAILING_WHITESPACE,           // don't output trailing whitespace
         PASS_THROUGH,                       // just pass everything through to appendable with no formatting
         TRIM_LEADING_WHITESPACE,            // allow leading spaces on a line, else remove
         ALLOW_LEADING_EOL,                  // allow EOL at offset 0
         PREFIX_PRE_FORMATTED,               // when prefixing lines, prefix pre-formatted lines
+        NO_TRACKED_OFFSETS,                 // ignore tracked offsets in builder and do not adjust them
     }
 
     Options O_CONVERT_TABS = Options.CONVERT_TABS;
@@ -42,6 +46,7 @@ public interface LineAppendable extends Appendable {
     Options O_TRIM_LEADING_WHITESPACE = Options.TRIM_LEADING_WHITESPACE;
     Options O_ALLOW_LEADING_EOL = Options.ALLOW_LEADING_EOL;
     Options O_PREFIX_PRE_FORMATTED = Options.PREFIX_PRE_FORMATTED;
+    Options O_NO_TRACKED_OFFSETS = Options.NO_TRACKED_OFFSETS;
     BitFieldSet<Options> O_FORMAT_ALL = BitFieldSet.of(O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_TRIM_TRAILING_WHITESPACE, O_TRIM_LEADING_WHITESPACE);
 
     int F_CONVERT_TABS = BitFieldSet.intMask(O_CONVERT_TABS);                                    // expand tabs on column multiples of 4
@@ -52,6 +57,7 @@ public interface LineAppendable extends Appendable {
     int F_TRIM_LEADING_WHITESPACE = BitFieldSet.intMask(O_TRIM_LEADING_WHITESPACE);              // allow leading spaces on a line, else remove
     int F_ALLOW_LEADING_EOL = BitFieldSet.intMask(O_ALLOW_LEADING_EOL);                          // allow EOL at offset 0
     int F_PREFIX_PRE_FORMATTED = BitFieldSet.intMask(O_PREFIX_PRE_FORMATTED);                    // when prefixing lines, prefix pre-formatted lines
+    int F_NO_TRACKED_OFFSETS = BitFieldSet.intMask(O_NO_TRACKED_OFFSETS);                    // when prefixing lines, prefix pre-formatted lines
     int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_TRIM_TRAILING_WHITESPACE;     // select all formatting options
 
     int F_WHITESPACE_REMOVAL = LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE;
@@ -691,6 +697,15 @@ public interface LineAppendable extends Appendable {
     }
 
     void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines);
+
+    /**
+     * Iterate over individual lines
+     * @param builder builder
+     * @param maxBlankLines max blank lines
+     * @param consumer consumer for lines
+     */
+    void forAllLines(@NotNull SequenceBuilder builder, int maxBlankLines, @NotNull BiConsumer<BasedSequence, Integer> consumer);
+
     @NotNull LineAppendable lineOnFirstText(boolean value);
 
     /**

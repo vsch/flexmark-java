@@ -30,6 +30,7 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate SPACE_TAB_EOL = value -> value == ' ' || value == '\t' || value == '\n';
     CharPredicate ANY_EOL = value -> value == '\n' || value == '\r';
     CharPredicate WHITESPACE = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r';
+    CharPredicate WHITESPACE_OR_NUL = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\0';
     CharPredicate WHITESPACE_NBSP = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\u00A0';
     CharPredicate HEXADECIMAL_DIGITS = value -> value >= '0' && value <= '9' || value >= 'a' && value <= 'f' || value >= 'A' && value <= 'F';
     CharPredicate DECIMAL_DIGITS = value -> value >= '0' && value <= '9';

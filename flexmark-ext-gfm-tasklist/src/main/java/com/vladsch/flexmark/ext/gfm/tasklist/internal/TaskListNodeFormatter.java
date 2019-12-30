@@ -1,10 +1,18 @@
 package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.BulletList;
+import com.vladsch.flexmark.ast.ListBlock;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedList;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
-import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
+import com.vladsch.flexmark.formatter.FormatterUtils;
+import com.vladsch.flexmark.formatter.MarkdownWriter;
+import com.vladsch.flexmark.formatter.NodeFormatter;
+import com.vladsch.flexmark.formatter.NodeFormatterContext;
+import com.vladsch.flexmark.formatter.NodeFormatterFactory;
+import com.vladsch.flexmark.formatter.NodeFormattingHandler;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
@@ -47,18 +55,21 @@ public class TaskListNodeFormatter implements NodeFormatter {
 
     private void render(TaskListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.isTransformingText()) {
-            CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
+            FormatterUtils.renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
         } else {
             BasedSequence markerSuffix = node.getMarkerSuffix();
             switch (formatOptions.taskListItemCase) {
                 case AS_IS:
                     break;
+
                 case LOWERCASE:
                     markerSuffix = markerSuffix.toLowerCase();
                     break;
+
                 case UPPERCASE:
                     markerSuffix = markerSuffix.toUpperCase();
                     break;
+
                 default:
                     throw new IllegalStateException("Missing case for TaskListItemCase " + formatOptions.taskListItemCase.name());
             }
@@ -69,10 +80,12 @@ public class TaskListNodeFormatter implements NodeFormatter {
                     case INCOMPLETE_FIRST:
                     case INCOMPLETE_NESTED_FIRST:
                         break;
+
                     case COMPLETE_TO_NON_TASK:
                     case COMPLETE_NESTED_TO_NON_TASK:
-                        markerSuffix = BasedSequence.NULL;
+                        markerSuffix = markerSuffix.getEmptySuffix();
                         break;
+
                     default:
                         throw new IllegalStateException("Missing case for ListItemPlacement " + formatOptions.taskListItemPlacement.name());
                 }
@@ -84,7 +97,8 @@ public class TaskListNodeFormatter implements NodeFormatter {
 
             // task list item node overrides isParagraphWrappingDisabled which affects empty list item blank line rendering
             boolean forceLooseItem = node.isLoose() && (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null);
-            CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, markerSuffix.isEmpty() ? markerSuffix : markerSuffix.append(" "), forceLooseItem);
+            FormatterUtils.renderListItem(node, context, markdown, listOptions, markerSuffix.isEmpty() ? markerSuffix
+                    : markerSuffix.getBuilder().append(markerSuffix).append(" ").append(markerSuffix.baseSubSequence(markerSuffix.getEndOffset() + 1, markerSuffix.getEndOffset() + 1)).toSequence(), forceLooseItem);
         }
     }
 
@@ -213,7 +227,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
                 }
             }
 
-            CoreNodeFormatter.renderList(node, context, markdown, itemList);
+            FormatterUtils.renderList(node, context, markdown, itemList);
         }
     }
 

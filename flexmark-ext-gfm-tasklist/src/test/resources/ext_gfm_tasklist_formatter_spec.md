@@ -1092,9 +1092,9 @@ do add blank line if blank line is after sub-list in middle of list
 .
 * [ ] Fix:
   [StackTraces_ToDo.txt](https://github.com/vsch/idea-multimarkdown2/blob/master/StackTraces_ToDo.txt)
-* [ ] Fix: Move preview settings which are Monitor specific (Grey scale font
-  smoothing) to Application settings. Review others that may need moving
-  to IDE shared settings from project settings.
+* [ ] Fix: Move preview settings which are Monitor specific (Grey scale
+  font smoothing) to Application settings. Review others that may need
+  moving to IDE shared settings from project settings.
 
 ````````````````````````````````
 
@@ -1118,44 +1118,80 @@ do add blank line if blank line is after sub-list in middle of list
 ### Offset Tracking
 
 ```````````````````````````````` example(Prioritized - Offset Tracking: 1) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
-* item 
-  1. [ ] Add: 
-⦙*⦙ ⦙Add:⦙ 
-* [ ] Add: 
-* [ ] Fix: 
-  + [ ] do not 
+⦙*⦙ ⦙Item 3⦙ 
+* item 1
++ [ ] Item 4 
 .
-* item
-  1. [ ] Add:
-* [ ] Fix:
-  + [ ] do not
-* [ ] Add:
-⦙*⦙ ⦙Add:⦙
++ [ ] Item 4
+⦙*⦙ ⦙Item 3⦙
+* item 1
 
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Prioritized - Offset Tracking: 2) options(prioritized-tasks, ordered-task-item-priority-normal, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
-* item
-  1. [ ] Add: 
+⦙*⦙ ⦙Item 3⦙ 
+- item 1
++ [ ] Item 4 
+.
++ [ ] Item 4
+⦙*⦙ ⦙Item 3⦙
+* item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 3) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+⦙*⦙ ⦙Item 3⦙ 
++ item 1
++ [ ] Item 4 
+.
++ [ ] Item 4
+⦙*⦙ ⦙Item 3⦙
+* item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 4) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+* item 
+  ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add:⦙ 
 ⦙*⦙ ⦙Add:⦙ 
 * [ ] Add: 
 * [ ] Fix: 
   + [ ] do not 
 .
+* item
+  ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add:⦙
 * [ ] Fix:
   + [ ] do not
-* item
-  1. [ ] Add:
 * [ ] Add:
 ⦙*⦙ ⦙Add:⦙
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Prioritized - Offset Tracking: 3) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
-* item
+```````````````````````````````` example(Prioritized - Offset Tracking: 5) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+* item 
   1. [ ] Add: 
+* ⦙Add: 
+* [ ] Add: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* item
+  1. [ ] Add:
+* [ ] Fix:
+  + [ ] do not
+* [ ] Add:
+* ⦙Add:
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 6) options(prioritized-tasks, ordered-task-item-priority-normal, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+* item
+  ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add:⦙ 
 ⦙*⦙ ⦙Add:⦙ 
 * [ ] Add: 
 * [ ] Fix: 
@@ -1163,10 +1199,46 @@ do add blank line if blank line is after sub-list in middle of list
 .
 * [ ] Fix:
   + [ ] do not
-* [ ] Add:
 * item
-  1. [ ] Add:
+  ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add:⦙
+* [ ] Add:
 ⦙*⦙ ⦙Add:⦙
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 7) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+* item
+  1. [ ] ⦙Add1: 
+* Add2: 
+* [ ] Add3: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* [ ] Fix:
+  + [ ] do not
+* [ ] Add3:
+* item
+  1. [ ] ⦙Add1:
+* Add2:
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 8) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+* item
+  ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add1:⦙ 
+⦙*⦙ ⦙Add2:⦙ 
+* [ ] Add3: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* [ ] Fix:
+  + [ ] do not
+* [ ] Add3:
+* item
+  ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add1:⦙
+⦙*⦙ ⦙Add2:⦙
 
 ````````````````````````````````
 

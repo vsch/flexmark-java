@@ -184,7 +184,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         return -1L >>> -totalBits;
     }
 
-    public boolean set(long mask) {
+    public boolean orMask(long mask) {
         long allValues = allValues();
         if ((mask & ~allValues) != 0) {
             throw new IllegalArgumentException(String.format("bitMask %d value contains elements outside the universe %s", mask, Long.toBinaryString(mask & ~allValues)));
@@ -193,6 +193,11 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         long oldElements = elements;
         elements |= mask;
         return oldElements != elements;
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public boolean setAll(long mask) {
+        return replaceAll(mask);
     }
 
     @SuppressWarnings("UnusedReturnValue")
@@ -229,7 +234,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         }
     }
 
-    public boolean clear(long mask) {
+    public boolean andNotMask(long mask) {
         long oldElements = elements;
         elements &= ~mask;
         return oldElements != elements;
@@ -283,7 +288,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param e1    field
      * @param value value to set
      */
-    public boolean set(E e1, long value) {
+    public boolean orMask(E e1, long value) {
         long bitMask = bitMasks[e1.ordinal()];
 
         int bitCount = Long.bitCount(bitMask);
@@ -298,16 +303,16 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         return oldElements != elements;
     }
 
-    public void setInt(E e1, int value) {
-        set(e1, value);
+    public void intOr(E e1, int value) {
+        orMask(e1, value);
     }
 
-    public void setShort(E e1, short value) {
-        set(e1, value);
+    public void shortOr(E e1, short value) {
+        orMask(e1, value);
     }
 
-    public void setByte(E e1, byte value) {
-        set(e1, value);
+    public void byteOr(E e1, byte value) {
+        orMask(e1, value);
     }
 
     public long getSigned(E e1, int maxBits, String typeName) {
@@ -343,11 +348,11 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         return (byte) getSigned(e1, 8, "byte");
     }
 
-    public static long set(long flags, long mask) {
+    public static long orMask(long flags, long mask) {
         return flags | mask;
     }
 
-    public static long clear(long flags, long mask) {
+    public static long andNotMask(long flags, long mask) {
         return flags & ~mask;
     }
 
@@ -382,31 +387,31 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         return mask;
     }
 
-    public boolean set(E e1) { return set(mask(e1)); }
+    public boolean orMask(E e1) { return orMask(mask(e1)); }
 
-    public boolean set(E e1, E e2) { return set(mask(e1, e2));}
+    public boolean orMask(E e1, E e2) { return orMask(mask(e1, e2));}
 
-    public boolean set(E e1, E e2, E e3) { return set(mask(e1, e2, e3));}
+    public boolean orMask(E e1, E e2, E e3) { return orMask(mask(e1, e2, e3));}
 
-    public boolean set(E e1, E e2, E e3, E e4) { return set(mask(e1, e2, e3, e4));}
+    public boolean orMask(E e1, E e2, E e3, E e4) { return orMask(mask(e1, e2, e3, e4));}
 
-    public boolean set(E e1, E e2, E e3, E e4, E e5) { return set(mask(e1, e2, e3, e4, e5));}
-
-    @SafeVarargs
-    final public boolean set(E... rest) { return set(mask(rest));}
-
-    public boolean clear(E e1) { return clear(mask(e1)); }
-
-    public boolean clear(E e1, E e2) { return clear(mask(e1, e2));}
-
-    public boolean clear(E e1, E e2, E e3) { return clear(mask(e1, e2, e3));}
-
-    public boolean clear(E e1, E e2, E e3, E e4) { return clear(mask(e1, e2, e3, e4));}
-
-    public boolean clear(E e1, E e2, E e3, E e4, E e5) { return clear(mask(e1, e2, e3, e4, e5));}
+    public boolean orMask(E e1, E e2, E e3, E e4, E e5) { return orMask(mask(e1, e2, e3, e4, e5));}
 
     @SafeVarargs
-    final public boolean clear(E... rest) { return clear(mask(rest));}
+    final public boolean orMask(E... rest) { return orMask(mask(rest));}
+
+    public boolean andNotMask(E e1) { return andNotMask(mask(e1)); }
+
+    public boolean andNotMask(E e1, E e2) { return andNotMask(mask(e1, e2));}
+
+    public boolean andNotMask(E e1, E e2, E e3) { return andNotMask(mask(e1, e2, e3));}
+
+    public boolean andNotMask(E e1, E e2, E e3, E e4) { return andNotMask(mask(e1, e2, e3, e4));}
+
+    public boolean andNotMask(E e1, E e2, E e3, E e4, E e5) { return andNotMask(mask(e1, e2, e3, e4, e5));}
+
+    @SafeVarargs
+    final public boolean andNotMask(E... rest) { return andNotMask(mask(rest));}
 
     public boolean any(E e1) { return any(mask(e1)); }
 
@@ -733,7 +738,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      */
     public static <T extends Enum<T>> BitFieldSet<T> of(@NotNull Class<T> enumClass, long mask) {
         BitFieldSet<T> optionSet = BitFieldSet.noneOf(enumClass);
-        optionSet.set(mask);
+        optionSet.orMask(mask);
         return optionSet;
     }
 
@@ -792,7 +797,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
 
         private Object readResolve() {
             BitFieldSet<E> result = BitFieldSet.noneOf(elementType);
-            result.set(bits);
+            result.orMask(bits);
             return result;
         }
 
@@ -880,15 +885,15 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         return setBitSet(elements, e1, value, 64, "long");
     }
 
-    public static <E extends Enum<E>> int setInt(int elements, E e1, int value) {
+    public static <E extends Enum<E>> int intOr(int elements, E e1, int value) {
         return (int) setBitSet(elements, e1, value, 16, "int");
     }
 
-    public static <E extends Enum<E>> short setShort(short elements, E e1, short value) {
+    public static <E extends Enum<E>> short shortOr(short elements, E e1, short value) {
         return (short) setBitSet(elements, e1, value, 16, "short");
     }
 
-    public static <E extends Enum<E>> byte setByte(byte elements, E e1, byte value) {
+    public static <E extends Enum<E>> byte byteOr(byte elements, E e1, byte value) {
         return (byte) setBitSet(elements, e1, value, 8, "byte");
     }
 

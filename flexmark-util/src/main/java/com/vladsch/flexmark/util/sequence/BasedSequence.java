@@ -178,14 +178,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     BasedSequence baseSubSequence(int startIndex);
 
     /**
-     * Safe, if index out of range returns '\0'
-     *
-     * @param index index in string
-     * @return character or '\0' if index out of sequence range
-     */
-    char safeCharAt(int index);
-
-    /**
      * Safe, if index out of range but based sequence has characters will return those, else returns '\0'
      * <p>
      * Allows peeking into preceding/following characters to the ones contained in this sequence
@@ -194,6 +186,16 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
      * @return character or '\0' if index out of base sequence
      */
     char safeBaseCharAt(int index);
+
+    /**
+     * Safe, if index out of range but based sequence has characters will return those, else returns '\0'
+     * <p>
+     * Allows peeking into preceding/following characters to the ones contained in this sequence
+     *
+     * @param index index in string
+     * @return true if character at index tests true
+     */
+    boolean isBaseCharAt(int index, @NotNull CharPredicate predicate);
 
     /**
      * Get empty prefix to this sequence
@@ -210,13 +212,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
      */
     @NotNull
     BasedSequence getEmptySuffix();
-
-    /**
-     * Return string or null if BaseSequence.NULL
-     * @return string or null if BaseSequence.NULL
-     */
-    @Nullable
-    String toStringOrNull();
 
     /**
      * Get the unescaped string of this sequence content

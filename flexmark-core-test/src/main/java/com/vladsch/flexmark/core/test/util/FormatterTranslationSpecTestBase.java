@@ -8,6 +8,7 @@ import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.*;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +20,7 @@ import java.util.regex.Pattern;
 
 public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase {
     static final boolean SKIP_IGNORED_TESTS = true;
+    final public static DataKey<Boolean> SHOW_LINE_RANGES = new DataKey<>("SHOW_LINE_RANGES", false);
 
     private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.BLANK_LINES_IN_AST, true)
@@ -28,6 +30,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
+        optionsMap.put("show-ranges", new MutableDataSet().set(SHOW_LINE_RANGES, true));
         optionsMap.put("format-fixed-indent", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("parse-fixed-indent", new MutableDataSet().set(Parser.PARSER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("format-github", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.GITHUB_DOC));

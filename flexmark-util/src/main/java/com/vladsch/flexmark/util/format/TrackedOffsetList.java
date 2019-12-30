@@ -18,6 +18,8 @@ import java.util.Spliterator;
 import java.util.function.UnaryOperator;
 
 public class TrackedOffsetList implements List<TrackedOffset> {
+    public static TrackedOffsetList EMPTY_LIST = new TrackedOffsetList(BasedSequence.NULL, Collections.emptyList());
+
     @NotNull
     public static TrackedOffsetList create(@NotNull BasedSequence baseSeq, @NotNull List<TrackedOffset> trackedOffsets) {
         return new TrackedOffsetList(baseSeq, trackedOffsets);
@@ -50,6 +52,23 @@ public class TrackedOffsetList implements List<TrackedOffset> {
     }
 
     @NotNull
+    public TrackedOffsetList getUnresolvedOffsets() {
+        ArrayList<TrackedOffset> unresolved = new ArrayList<>();
+
+        for (TrackedOffset trackedOffset : myTrackedOffsets) {
+            if (!trackedOffset.isResolved()) unresolved.add(trackedOffset);
+        }
+        return unresolved.isEmpty() ? EMPTY_LIST : new TrackedOffsetList(myBaseSeq, unresolved);
+    }
+
+    public boolean haveUnresolved() {
+        for (TrackedOffset trackedOffset : myTrackedOffsets) {
+            if (!trackedOffset.isResolved()) return true;
+        }
+        return false;
+    }
+
+    @NotNull
     public BasedSequence getBaseSeq() {
         return myBaseSeq;
     }
@@ -65,14 +84,35 @@ public class TrackedOffsetList implements List<TrackedOffset> {
     }
 
     @NotNull
-    List<TrackedOffset> findTrackedOffset(int startOffset, int endOffset) {
+    public List<TrackedOffset> getTrackedOffsets(int startOffset, int endOffset) {
         OffsetInfo startInfo = myBasedOffsetTracker.getOffsetInfo(startOffset, startOffset == endOffset);
         OffsetInfo endInfo = myBasedOffsetTracker.getOffsetInfo(endOffset, true);
-        int startSeg = Math.max(0, startInfo.pos);
-        int endSeg = Math.max(startSeg, Math.min(myTrackedOffsets.size(), endInfo.pos + 1));
+        int startSeg = startInfo.pos;
+        int endSeg = endInfo.pos;
+
+        if (startSeg < 0 && endSeg >= 0) {
+            startSeg = 0;
+            endSeg++;
+        } else if (startSeg >= 0 && endSeg >= 0) {
+            endSeg++;
+        } else {
+            return Collections.emptyList();
+        }
+
+        endSeg = Math.min(myBasedOffsetTracker.size(), endSeg);
 
         if (startSeg >= endSeg) return Collections.emptyList();
-        else return myTrackedOffsets.subList(startSeg, endSeg);
+        else {
+
+            if (myTrackedOffsets.get(startSeg).getOffset() < startOffset) startSeg++;
+            if (myTrackedOffsets.get(endSeg - 1).getOffset() > endOffset) endSeg--;
+
+            if (startSeg >= endSeg) return Collections.emptyList();
+            else {
+
+                return myTrackedOffsets.subList(startSeg, endSeg);
+            }
+        }
     }
 
 // @formatter:off

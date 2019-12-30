@@ -43,6 +43,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * resorting to content comparison only if length and hashCodes are equal
      *
      * @param o any char sequence
+     *
      * @return true if character contents are equal
      */
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
@@ -109,6 +110,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
     @NotNull
@@ -120,6 +122,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence before one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come before the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
@@ -131,6 +134,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
@@ -142,6 +146,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portions of this sequence before and after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come before and after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     final public Pair<T, T> subSequenceBeforeAfter(Range range) {
@@ -223,6 +228,16 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override
     public char safeCharAt(int index) {
         return index < 0 || index >= length() ? SequenceUtils.NUL : charAt(index);
+    }
+
+    @Override
+    public boolean isCharAt(int index, @NotNull CharPredicate predicate) {
+        return predicate.test(safeCharAt(index));
+    }
+
+    @Override
+    public @Nullable String toStringOrNull() {
+        return isNull() ? null : toString();
     }
 
     // @formatter:off

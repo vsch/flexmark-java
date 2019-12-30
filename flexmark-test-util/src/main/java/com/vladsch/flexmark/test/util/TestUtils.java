@@ -717,7 +717,11 @@ public class TestUtils {
     }
 
     public static void appendBanner(@NotNull StringBuilder out, @NotNull String banner) {
-        if (out.length() > 0) {
+        appendBanner(out, banner, true);
+    }
+
+    public static void appendBanner(@NotNull StringBuilder out, @NotNull String banner, boolean addBlankLine) {
+        if (out.length() > 0 && addBlankLine) {
             out.append("\n");
         }
 

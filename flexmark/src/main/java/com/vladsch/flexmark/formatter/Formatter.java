@@ -39,6 +39,7 @@ import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TrackedOffset;
+import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineAppendable;
@@ -66,7 +67,7 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT;
-import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
+import static com.vladsch.flexmark.util.sequence.CharPredicate.WHITESPACE;
 
 /**
  * Renders a tree of nodes to Markdown.
@@ -345,27 +346,39 @@ public class Formatter implements IRender {
         out.toBuilder(builder, maxTailBlankLines);
 
         // NOTE: resolve any unresolved tracked offsets that are outside elements which resolve their own
-        List<TrackedOffset> trackedOffsets = TRACKED_OFFSETS.get(document.getDocument());
+        TrackedOffsetList trackedOffsets = renderer.getTrackedOffsets().getUnresolvedOffsets();
         if (!trackedOffsets.isEmpty()) {
             // need to resolve any unresolved offsets
-            BasedOffsetTracker tracker = null;
             BasedSequence baseSeq = document.getChars();
-            for (TrackedOffset trackedOffset : trackedOffsets) {
-                if (!trackedOffset.isResolved()) {
-                    if (tracker == null) {
-                        tracker = BasedOffsetTracker.create(builder.toSequence());
-                    }
+            int[] length = { 0 };
 
-                    if (baseSeq.safeBaseCharAt(trackedOffset.getOffset()) == ' ' && baseSeq.safeBaseCharAt(trackedOffset.getOffset() - 1) != ' ') {
-                        // we need to use previous non-blank and use that offset
-                        OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset() - 1, false);
-                        trackedOffset.setIndex(info.endIndex);
-                    } else {
-                        OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
-                        trackedOffset.setIndex(info.endIndex);
+            out.forAllLines(builder, maxTailBlankLines, (line, index) -> {
+                BasedSequence useLine = line.trimEOL();
+                List<TrackedOffset> lineTrackedOffsets = trackedOffsets.getTrackedOffsets(useLine.getStartOffset(), useLine.getEndOffset());
+                if (!lineTrackedOffsets.isEmpty()) {
+                    for (TrackedOffset trackedOffset : lineTrackedOffsets) {
+                        BasedOffsetTracker tracker = BasedOffsetTracker.create(line);
+
+                        if (!trackedOffset.isResolved()) {
+                            if (baseSeq.isBaseCharAt(trackedOffset.getOffset(), WHITESPACE) && !baseSeq.isBaseCharAt(trackedOffset.getOffset() - 1, WHITESPACE)) {
+                                // we need to use previous non-blank and use that offset
+                                OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset() - 1, false);
+                                trackedOffset.setIndex(info.endIndex + length[0]);
+                            } else if (baseSeq.isBaseCharAt(trackedOffset.getOffset() + 1, WHITESPACE) && !baseSeq.isBaseCharAt(trackedOffset.getOffset(), WHITESPACE)) {
+                                // we need to use this non-blank and use that offset
+                                OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), false);
+                                trackedOffset.setIndex(info.startIndex + length[0]);
+                            } else {
+                                OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
+                                trackedOffset.setIndex(info.endIndex + length[0]);
+                            }
+                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), length[0], index, SequenceUtils.toVisibleWhitespaceString(line)));
+                        }
                     }
                 }
-            }
+
+                length[0] += line.length();
+            });
         }
 
         StringBuilder sb = new StringBuilder();
@@ -676,6 +689,7 @@ public class Formatter implements IRender {
         private @Nullable FormatControlProcessor controlProcessor;
         final private CharPredicate blockQuoteLikePredicate;
         final private BasedSequence blockQuoteLikeChars;
+        final TrackedOffsetList trackedOffsets;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
@@ -747,6 +761,12 @@ public class Formatter implements IRender {
                         throw new IllegalStateException("PhasedNodeFormatter with null Phases");
                     }
                 }
+            }
+
+            List<TrackedOffset> offsets = TRACKED_OFFSETS.get(document);
+            trackedOffsets = offsets.isEmpty() ? TrackedOffsetList.EMPTY_LIST : TrackedOffsetList.create(document.getChars(), offsets);
+            if (!trackedOffsets.isEmpty() && out.getBuilder() != null) {
+                out.getBuilder().setTrackedOffsets(trackedOffsets);
             }
 
             String charSequence = blockLikePrefixChars.toString();
@@ -958,6 +978,11 @@ public class Formatter implements IRender {
             return blockQuoteLikeChars;
         }
 
+        @Override
+        public @NotNull TrackedOffsetList getTrackedOffsets() {
+            return trackedOffsets;
+        }
+
         @NotNull
         @Override
         public FormattingPhase getFormattingPhase() {
@@ -995,22 +1020,20 @@ public class Formatter implements IRender {
 
         @Override
         public NodeFormatterContext getSubContext() {
-            MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions());
-            writer.setContext(this);
-            //noinspection ReturnOfInnerClass
-            return new SubNodeFormatter(this, writer, null);
+            return getSubContextRaw(null, null);
         }
 
         @Override
         public NodeFormatterContext getSubContext(DataHolder options) {
-            MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions());
-            writer.setContext(this);
-            //noinspection ReturnOfInnerClass
-            return new SubNodeFormatter(this, writer, options);
+            return getSubContextRaw(options, null);
         }
 
         @Override
         public NodeFormatterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder) {
+            return getSubContextRaw(options, builder);
+        }
+
+        NodeFormatterContext getSubContextRaw(DataHolder options, @Nullable SequenceBuilder builder) {
             MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions(), builder);
             writer.setContext(this);
             //noinspection ReturnOfInnerClass
@@ -1160,6 +1183,9 @@ public class Formatter implements IRender {
                 myMainNodeRenderer = mainNodeRenderer;
                 myOptions = options == null ? myMainNodeRenderer.getOptions() : new ScopedDataSet(myMainNodeRenderer.getOptions(), options);
                 myFormatterOptions = new FormatterOptions(myOptions);
+                if (!myMainNodeRenderer.trackedOffsets.isEmpty() && out.getBuilder() != null) {
+                    out.getBuilder().setTrackedOffsets(myMainNodeRenderer.trackedOffsets);
+                }
             }
 
             @NotNull
@@ -1211,6 +1237,11 @@ public class Formatter implements IRender {
             @Override
             @NotNull
             public BasedSequence getBlockQuoteLikePrefixChars() {return myMainNodeRenderer.getBlockQuoteLikePrefixChars();}
+
+            @Override
+            public @NotNull TrackedOffsetList getTrackedOffsets() {
+                return markdown.getBuilder() == null ? TrackedOffsetList.EMPTY_LIST : markdown.getBuilder().getTrackedOffsets();
+            }
 
             @NotNull
             @Override

@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.NodeContext;
+import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
@@ -75,6 +76,11 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * @return char sequence of all prefix chars which compact like block quote prefix char
      */
     @NotNull BasedSequence getBlockQuoteLikePrefixChars();
+
+    /**
+     * @return tracked offset list
+     */
+    @NotNull TrackedOffsetList getTrackedOffsets();
 
     /**
      * Get iterable of nodes of given types, in order of their appearance in the document tree, depth first traversal.

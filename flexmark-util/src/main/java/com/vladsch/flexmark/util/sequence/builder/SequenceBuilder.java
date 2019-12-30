@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
+import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
@@ -13,6 +14,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     private final BasedSegmentBuilder segments;
     private final @NotNull BasedSequence baseSeq;
     private @Nullable BasedSequence resultSeq;
+    private @NotNull TrackedOffsetList trackedOffsets = TrackedOffsetList.EMPTY_LIST;     // only used as property to pass to LineAppendable
 
     /**
      * Construct a base sequence builder for given base sequence with default options.
@@ -62,6 +64,21 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     @NotNull
     public BasedSegmentBuilder getSegmentBuilder() {
         return segments;
+    }
+
+    @Nullable
+    public Range getLastRangeOrNull() {
+        Object part = segments.getPart(segments.size());
+        return part instanceof Range && ((Range) part).isNotNull() ? (Range) part : null;
+    }
+
+    @NotNull
+    public TrackedOffsetList getTrackedOffsets() {
+        return trackedOffsets;
+    }
+
+    public void setTrackedOffsets(@NotNull TrackedOffsetList trackedOffsets) {
+        this.trackedOffsets = trackedOffsets;
     }
 
     @Nullable
@@ -161,6 +178,11 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     @NotNull
     public String toStringWithRanges() {
         return segments.toStringWithRangesVisibleWhitespace(baseSeq);
+    }
+
+    @NotNull
+    public String toStringWithRanges(boolean toVisibleWhiteSpace) {
+        return toVisibleWhiteSpace ? segments.toStringWithRangesVisibleWhitespace(baseSeq) : segments.toStringWithRanges(baseSeq);
     }
 
     @NotNull

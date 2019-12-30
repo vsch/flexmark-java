@@ -10,7 +10,6 @@ import com.vladsch.flexmark.ext.tables.TableHead;
 import com.vladsch.flexmark.ext.tables.TableRow;
 import com.vladsch.flexmark.ext.tables.TableSeparator;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
-import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.formatter.MarkdownWriter;
 import com.vladsch.flexmark.formatter.NodeFormatter;
 import com.vladsch.flexmark.formatter.NodeFormatterContext;
@@ -22,15 +21,14 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TrackedOffset;
+import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -91,15 +89,13 @@ public class TableNodeFormatter implements NodeFormatter {
             default:
                 context.renderChildren(node);
 
-                List<TrackedOffset> formatTrackedOffsets = Formatter.TRACKED_OFFSETS.get(context.getDocument());
-                int tableOffsetCount = 0;
+                TrackedOffsetList trackedOffsets = context.getTrackedOffsets();
+                List<TrackedOffset> tableTrackedOffsets = trackedOffsets.getTrackedOffsets(node.getStartOffset(), node.getEndOffset());
 
-                if (!formatTrackedOffsets.isEmpty()) {
-                    for (TrackedOffset trackedOffset : formatTrackedOffsets) {
-                        if (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset()) {
-                            tableOffsetCount++;
-                            myTable.addTrackedOffset(trackedOffset);
-                        }
+                if (!trackedOffsets.isEmpty()) {
+                    for (TrackedOffset trackedOffset : tableTrackedOffsets) {
+                        assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
+                        myTable.addTrackedOffset(trackedOffset);
                     }
                 }
 
@@ -121,6 +117,20 @@ public class TableNodeFormatter implements NodeFormatter {
                     MarkdownWriter formattedTable = new MarkdownWriter(markdown.getOptions());
                     myTable.appendTable(formattedTable);
 
+                    List<TrackedOffset> tableOffsets = myTable.getTrackedOffsets();
+                    if (!tableTrackedOffsets.isEmpty()) {
+                        assert tableTrackedOffsets.size() == tableOffsets.size();
+
+                        // get the indent used for new lines so that index can be adjusted by added indent
+                        for (TrackedOffset trackedOffset : tableTrackedOffsets) {
+                            assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
+
+                            if (trackedOffset.isResolved()) {
+                                trackedOffset.setIndex(trackedOffset.getIndex() + startOffset);
+                            }
+                        }
+                    }
+
                     markdown.pushOptions()
                             .removeOptions(LineAppendable.F_WHITESPACE_REMOVAL)
                             .append(formattedTable)
@@ -128,18 +138,7 @@ public class TableNodeFormatter implements NodeFormatter {
                             .popPrefix(false);
                     markdown.tailBlankLine();
 
-                    List<TrackedOffset> tableOffsets = myTable.getTrackedOffsets();
-
-                    if (tableOffsetCount > 0) {
-                        assert tableOffsetCount == tableOffsets.size();
-
-                        // get the indent used for new lines so that index can be adjusted by added indent
-                        for (TrackedOffset trackedOffset:tableOffsets) {
-                            if (trackedOffset.isResolved()) {
-                                trackedOffset.setIndex(trackedOffset.getIndex() + startOffset);
-                            }
-                        }
-
+                    if (myTable.getMaxColumns() > 0 && !tableTrackedOffsets.isEmpty()) {
                         if (options.dumpIntellijOffsets) {
                             markdown.append("\nTracked Offsets").line();  // simulate flex example ast dump
                             String sep = "  ";
