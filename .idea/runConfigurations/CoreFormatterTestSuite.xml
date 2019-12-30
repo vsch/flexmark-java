@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="CoreFormatterTestSuite" type="JUnit" factoryName="JUnit" folderName="Format" singleton="true">
     <module name="flexmark-core-test" />
+    <useClassPathOnly />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.vladsch.flexmark.util.ast.*" />
@@ -11,7 +12,6 @@
     <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.core.test.util.formatter.CoreFormatterTestSuite" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
-    <option name="VM_PARAMETERS" />
     <option name="PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="" />
     <method v="2">

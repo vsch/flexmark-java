@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="PdfConverterTestSuite" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
     <module name="flexmark-pdf-converter" />
+    <useClassPathOnly />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.vladsch.flexmark.pdf.converter.*" />
@@ -11,7 +12,6 @@
     <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.pdf.converter.PdfConverterTestSuite" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
-    <option name="VM_PARAMETERS" value="" />
     <option name="PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="" />
     <method v="2">
