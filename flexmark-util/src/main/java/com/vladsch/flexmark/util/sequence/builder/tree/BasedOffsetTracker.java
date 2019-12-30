@@ -14,6 +14,15 @@ public class BasedOffsetTracker {
         this.segmentOffsetTree = segmentTree.getSegmentOffsetTree(sequence.getBaseSequence());
     }
 
+    protected BasedOffsetTracker(@NotNull BasedSequence sequence, @NotNull SegmentOffsetTree segmentOffsetTree) {
+        this.sequence = sequence;
+        this.segmentOffsetTree = segmentOffsetTree;
+    }
+
+    public int size() {
+        return segmentOffsetTree.size();
+    }
+
     /**
      * Return the range of indices in the sequence of this based offset tracker that correspond
      * to the given offset in the base sequence from which this sequence was derived.
@@ -24,6 +33,7 @@ public class BasedOffsetTracker {
      * @param offset      offset in base sequence
      * @param isEndOffset if true then offset represents the range [offset, offset) so it is located between character at offset-1 and character at offset
      *                    if false then offset represents the character at offset and the range [offset, offset+1)
+     *
      * @return information about the offset in this sequence
      */
     @NotNull
@@ -49,44 +59,56 @@ public class BasedOffsetTracker {
 
         if (offsetEnd <= sequence.getStartOffset()) {
             // before sequence
-            lastResult = new OffsetInfo(offset, true, 0);
+            lastResult = new OffsetInfo(0, offset, true, 0);
         } else if (offset >= sequence.getEndOffset()) {
             // after sequence
-            lastResult = new OffsetInfo(offset, true, sequence.length());
+            lastResult = new OffsetInfo(segmentOffsetTree.size(), offset, true, sequence.length());
         } else {
             Segment seg = segmentOffsetTree.findSegmentByOffset(offset, sequence.getBaseSequence(), lastSegment);
-            assert seg != null;
-            lastSegment = seg;
-
-            if (offsetEnd > seg.getStartOffset() && offset < seg.getEndOffset()) {
-                // inside base segment
-                int startIndex = seg.getStartIndex() + offset - seg.getStartOffset();
-                int endIndex = seg.getStartIndex() + offsetEnd - seg.getStartOffset();
-                lastResult = new OffsetInfo(offset, isEndOffset, startIndex, endIndex);
-            } else if (offsetEnd <= seg.getStartOffset()) {
-                int startIndex;
-                int endIndex;
-                Segment textSegment = segmentOffsetTree.getPreviousText(seg, sequence);
-                if (textSegment != null) {
-                    startIndex = textSegment.getStartIndex();
-                    endIndex = textSegment.getEndIndex();
+            if (seg == null) {
+                // outside the sequence
+                if (offset < segmentOffsetTree.getSegment(0, sequence).getStartOffset()) {
+                    lastResult = new OffsetInfo(-1, offset, true, 0);
                 } else {
-                    endIndex = startIndex = seg.getStartIndex();
+                    if (offset <= segmentOffsetTree.getSegment(segmentOffsetTree.size() - 1, sequence).getEndOffset()) {
+                        // RELEASE: remove exception
+                        throw new IllegalStateException("Unexpected");
+                    }
+                    lastResult = new OffsetInfo(segmentOffsetTree.size(), offset, true, sequence.length());
                 }
-                lastResult = new OffsetInfo(offset, true, startIndex, endIndex);
-            } else if (offset >= seg.getEndOffset()) {
-                int startIndex;
-                int endIndex;
-                Segment textSegment = segmentOffsetTree.getNextText(seg, sequence);
-                if (textSegment != null) {
-                    startIndex = textSegment.getStartIndex();
-                    endIndex = textSegment.getEndIndex();
-                } else {
-                    endIndex = startIndex = seg.getEndIndex();
-                }
-                lastResult = new OffsetInfo(offset, true, startIndex, endIndex);
             } else {
-                throw new IllegalStateException(String.format("Unexpected offset: [%d, %d), seg: %s, not inside nor at start nor at end", offset, offsetEnd, seg.toString()));
+                lastSegment = seg;
+
+                if (offsetEnd > seg.getStartOffset() && offset < seg.getEndOffset()) {
+                    // inside base segment
+                    int startIndex = seg.getStartIndex() + offset - seg.getStartOffset();
+                    int endIndex = seg.getStartIndex() + offsetEnd - seg.getStartOffset();
+                    lastResult = new OffsetInfo(seg.getPos(), offset, isEndOffset, startIndex, endIndex);
+                } else if (offsetEnd <= seg.getStartOffset()) {
+                    int startIndex;
+                    int endIndex;
+                    Segment textSegment = segmentOffsetTree.getPreviousText(seg, sequence);
+                    if (textSegment != null) {
+                        startIndex = textSegment.getStartIndex();
+                        endIndex = textSegment.getEndIndex();
+                    } else {
+                        endIndex = startIndex = seg.getStartIndex();
+                    }
+                    lastResult = new OffsetInfo(seg.getPos() - 1, offset, true, startIndex, endIndex);
+                } else if (offset >= seg.getEndOffset()) {
+                    int startIndex;
+                    int endIndex;
+                    Segment textSegment = segmentOffsetTree.getNextText(seg, sequence);
+                    if (textSegment != null) {
+                        startIndex = textSegment.getStartIndex();
+                        endIndex = textSegment.getEndIndex();
+                    } else {
+                        endIndex = startIndex = seg.getEndIndex();
+                    }
+                    lastResult = new OffsetInfo(seg.getPos() + 1, offset, true, startIndex, endIndex);
+                } else {
+                    throw new IllegalStateException(String.format("Unexpected offset: [%d, %d), seg: %s, not inside nor at start nor at end", offset, offsetEnd, seg.toString()));
+                }
             }
         }
 
@@ -114,11 +136,24 @@ public class BasedOffsetTracker {
      * Create a based offset tracker for the given sequence
      *
      * @param sequence sequence which to create offset tracker
+     *
      * @return based offset tracker
      */
     @NotNull
     public static BasedOffsetTracker create(@NotNull BasedSequence sequence) {
         SegmentTree segmentTree = sequence.getSegmentTree();
         return new BasedOffsetTracker(sequence, segmentTree);
+    }
+
+    /**
+     * Create a based offset tracker for the given sequence
+     *
+     * @param sequence sequence which to create offset tracker
+     *
+     * @return based offset tracker
+     */
+    @NotNull
+    public static BasedOffsetTracker create(@NotNull BasedSequence sequence, @NotNull SegmentOffsetTree segmentOffsetTree) {
+        return new BasedOffsetTracker(sequence, segmentOffsetTree);
     }
 }

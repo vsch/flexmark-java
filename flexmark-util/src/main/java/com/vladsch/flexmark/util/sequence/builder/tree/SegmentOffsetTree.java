@@ -38,6 +38,11 @@ public class SegmentOffsetTree extends SegmentTree {
         return new SegmentTree(segmentTreeData.treeData, segmentTreeData.segmentBytes).getSegmentOffsetTree(builder.getBaseSequence());
     }
 
+    @NotNull
+    public static SegmentOffsetTree build(@NotNull BasedSequence baseSeq) {
+        return baseSeq.getSegmentTree().getSegmentOffsetTree(baseSeq);
+    }
+
     public int endOffset(int pos) {
         return super.aggrLength(pos);
     }

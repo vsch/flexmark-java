@@ -1115,3 +1115,59 @@ do add blank line if blank line is after sub-list in middle of list
 ````````````````````````````````
 
 
+### Offset Tracking
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 1) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+* item 
+  1. [ ] Add: 
+⦙*⦙ ⦙Add:⦙ 
+* [ ] Add: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* item
+  1. [ ] Add:
+* [ ] Fix:
+  + [ ] do not
+* [ ] Add:
+⦙*⦙ ⦙Add:⦙
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 2) options(prioritized-tasks, ordered-task-item-priority-normal, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+* item
+  1. [ ] Add: 
+⦙*⦙ ⦙Add:⦙ 
+* [ ] Add: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* [ ] Fix:
+  + [ ] do not
+* item
+  1. [ ] Add:
+* [ ] Add:
+⦙*⦙ ⦙Add:⦙
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 3) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+* item
+  1. [ ] Add: 
+⦙*⦙ ⦙Add:⦙ 
+* [ ] Add: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* [ ] Fix:
+  + [ ] do not
+* [ ] Add:
+* item
+  1. [ ] Add:
+⦙*⦙ ⦙Add:⦙
+
+````````````````````````````````
+
+

@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util;
 import com.vladsch.flexmark.util.ast.DocumentTest;
 import com.vladsch.flexmark.util.collection.*;
 import com.vladsch.flexmark.util.format.MarkdownParagraphTest;
+import com.vladsch.flexmark.util.format.TrackedOffsetListTest;
 import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBaseTest;
 import com.vladsch.flexmark.util.html.LineFormattingAppendableImplTest;
 import com.vladsch.flexmark.util.html.ui.HtmlBuilderTest;
@@ -53,6 +54,7 @@ import org.junit.runners.Suite;
         BasedSequenceTreeImplTest.class,
         SegmentOffsetTreeTest.class,
         BasedOffsetTrackerTest.class,
+        TrackedOffsetListTest.class,
         BaseSequenceManagerTest.class,
         MarkdownParagraphTest.class,
         TemplateUtilTest.class,

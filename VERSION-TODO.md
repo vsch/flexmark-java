@@ -219,6 +219,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.92
 
+* Add: `TrackedOffsetList` for efficient tracked offset location
 * Fix: add formatter tracking when formatting first block element child of an empty list item to
   allow having block element on same line as list item prefix.
 * Add: `AsideExtension` custom formatter

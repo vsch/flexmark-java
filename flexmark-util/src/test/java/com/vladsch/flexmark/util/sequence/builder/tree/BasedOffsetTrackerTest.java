@@ -91,7 +91,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[83, 84), i=[83, 84) }\n" +
+                "OffsetInfo{ p=1, o=[83, 84), i=[83, 84) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦Add: configuration for repeated prefixes in items, which would `be⟧\n" +
                 "⟦#2` copied when adding/splitting an item. In other words they\n" +
@@ -118,7 +118,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[83), i=[83, 83) }\n" +
+                "OffsetInfo{ p=1, o=[83), i=[83, 83) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦Add: configuration for repeated prefixes in items, which would `be⟧\n" +
                 "⟦#2` copied when adding/splitting an item. In other words they\n" +
@@ -145,7 +145,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[83), i=[83, 83) }\n" +
+                "OffsetInfo{ p=2, o=[83), i=[83, 83) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦Add: configuration for repeated prefixes in items, which would `be⟧\n" +
                 "⟦#2` copied when ⟧⟦adding/splitting an item. In other words they\n" +
@@ -172,7 +172,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[83), i=[83, 83) }\n" +
+                "OffsetInfo{ p=2, o=[83), i=[83, 83) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦Add: configuration for repeated prefixes in items, which would `be⟧\n" +
                 "⟦#2` copied when ⟧⟦adding/splitting an item. In other words they\n" +
@@ -198,7 +198,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[32), i=[32, 33) }\n" +
+                "OffsetInfo{ p=1, o=[32), i=[32, 33) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦text should wrap onto the next t⟧ ⟦line at right margin of 30⟧\n" +
                 "-----------------------------------------------------\n" +
@@ -216,7 +216,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[32), i=[32, 33) }\n" +
+                "OffsetInfo{ p=1, o=[32), i=[32, 33) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦text should wrap onto the next t⟧ ⟦line at right margin of 30⟧\n" +
                 "-----------------------------------------------------\n" +
@@ -234,7 +234,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[32), i=[32, 33) }\n" +
+                "OffsetInfo{ p=2, o=[32), i=[32, 33) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦text should wrap onto the next⟧\n" +
                 "⟦t⟧ ⟦line at right margin of 30⟧\n" +
@@ -254,7 +254,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[32), i=[32, 33) }\n" +
+                "OffsetInfo{ p=2, o=[32), i=[32, 33) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦text should wrap onto the next⟧\n" +
                 "⟦t⟧ ⟦line at right margin of 30⟧\n" +
@@ -274,7 +274,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[36), i=[31, 31) }\n" +
+                "OffsetInfo{ p=1, o=[36), i=[31, 31) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦text should wrap onto the next\n" +
                 "⟧⟦line at right margin of 30⟧\n" +
@@ -294,7 +294,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[36), i=[31, 31) }\n" +
+                "OffsetInfo{ p=1, o=[36), i=[31, 31) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦text should wrap onto the next\n" +
                 "⟧⟦line at right margin of 30⟧\n" +
@@ -314,7 +314,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[36, 37), i=[38, 39) }\n" +
+                "OffsetInfo{ p=1, o=[36, 37), i=[38, 39) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦⟧    ⟦text should wrap onto the next\n" +
                 "  ⟧⟦  line at right margin of 30⟧\n" +
@@ -341,7 +341,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[36), i=[38, 38) }\n" +
+                "OffsetInfo{ p=1, o=[36), i=[38, 38) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦⟧    ⟦text should wrap onto the next\n" +
                 "  ⟧⟦  line at right margin of 30⟧\n" +
@@ -367,7 +367,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[30), i=[34, 35) }\n" +
+                "OffsetInfo{ p=1, o=[30), i=[34, 35) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦⟧    ⟦text should wrap onto the next⟧\n" +
                 "⟦⟧    ⟦line at right margin of 30⟧\n" +
@@ -393,7 +393,7 @@ public class BasedOffsetTrackerTest {
                 "";
 
         String expected = "" +
-                "OffsetInfo{ o=[30), i=[34, 35) }\n" +
+                "OffsetInfo{ p=1, o=[30), i=[34, 35) }\n" +
                 "-----------------------------------------------------\n" +
                 "⟦⟧    ⟦text should wrap onto the next⟧\n" +
                 "⟦⟧    ⟦line at right margin of 30⟧\n" +
