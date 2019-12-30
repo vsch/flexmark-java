@@ -3448,6 +3448,14 @@ and more text.
 ````````````````````````````````
 
 
+```````````````````````````````` example(Wrap: 14) options(margin[72])
+* [#697, Autoscroll from source does not work in simplified structure view]
+.
+* [#697, Autoscroll from source does not work in simplified structure view]
+
+````````````````````````````````
+
+
 ### Tracked Offset
 
 ```````````````````````````````` example(Wrap - Tracked Offset: 1) options(margin[31])

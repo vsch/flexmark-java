@@ -916,18 +916,39 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 }
             }
 
-            int count = openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1;
-            CharSequence prefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', count)
+            // NOTE: if list item content after suffix is set in the parser, then sub-items are indented after suffix
+            //    otherwise only the item's lazy continuation for the paragraph can be indented after suffix, child items are normally indented
+            int itemContinuationCount = (listOptions.isItemContentAfterSuffix() || options.listsItemContentAfterSuffix ? markerSuffix.length() : 0);
+            int continuationCount = openingMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1;
+            CharSequence itemPrefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', itemContinuationCount)
+                    : "";
+
+            CharSequence childPrefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', continuationCount)
                     : RepeatedSequence.repeatOf(" ", listOptions.getItemIndent()).toString();
 
-            markdown.pushPrefix().addPrefix(prefix, true);
+            markdown.pushPrefix().addPrefix(childPrefix, true);
 
             markdown.pushOptions()
                     .preserveSpaces().append(openingMarker).append(' ').append(markerSuffix)
                     .popOptions();
 
             if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
-                context.renderChildren(node);
+                // NOTE: depends on first child
+                Node childNode = node.getFirstChild();
+                if (childNode instanceof Paragraph) {
+                    markdown.pushPrefix().addPrefix(itemPrefix, true);
+                    context.render(childNode);
+                    markdown.popPrefix();
+                }
+
+                while (childNode != null) {
+                    childNode = childNode.getNext();
+                    if (childNode == null) {
+                        break;
+                    }
+                    context.render(childNode);
+                }
+
                 if (addBlankLineLooseItems && (node.isLoose() || LIST_ITEM_SPACING.get(node.getDocument()) == ListSpacing.LOOSE)) {
                     markdown.tailBlankLine();
                 }
@@ -1532,25 +1553,40 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(ImageRef node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (!context.getFormatterOptions().optimizedInlineRendering || context.isTransformingText()) {
-            if (node.isReferenceTextCombined()) {
-                markdown.append(node.getReferenceOpeningMarker());
-                markdown.appendTranslating(node.getReference());
-                markdown.append(node.getReferenceClosingMarker());
+            if (context.isTransformingText() || formatterOptions.rightMargin == 0) {
+                if (node.isReferenceTextCombined()) {
+                    markdown.append(node.getReferenceOpeningMarker());
+                    markdown.appendTranslating(node.getReference());
+                    markdown.append(node.getReferenceClosingMarker());
 
-                markdown.append(node.getTextOpeningMarker());
-                markdown.append(node.getTextClosingMarker());
-            } else {
-                markdown.append(node.getTextOpeningMarker());
-                if (!context.isTransformingText()) {
-                    context.renderChildren(node);
+                    markdown.append(node.getTextOpeningMarker());
+                    markdown.append(node.getTextClosingMarker());
                 } else {
+                    markdown.append(node.getTextOpeningMarker());
                     appendReference(node.getText(), context, markdown);
-                }
-                markdown.append(node.getTextClosingMarker());
+                    markdown.append(node.getTextClosingMarker());
 
-                markdown.append(node.getReferenceOpeningMarker());
-                markdown.appendTranslating(node.getReference());
-                markdown.append(node.getReferenceClosingMarker());
+                    markdown.append(node.getReferenceOpeningMarker());
+                    markdown.appendTranslating(node.getReference());
+                    markdown.append(node.getReferenceClosingMarker());
+                }
+            } else {
+                if (node.isReferenceTextCombined()) {
+                    markdown.append(node.getReferenceOpeningMarker());
+                    markdown.append(node.getReference().toMapped(SpaceMapper.toNonBreakSpace));
+                    markdown.append(node.getReferenceClosingMarker());
+
+                    markdown.append(node.getTextOpeningMarker());
+                    markdown.append(node.getTextClosingMarker());
+                } else {
+                    markdown.append(node.getTextOpeningMarker());
+                    context.renderChildren(node);
+                    markdown.append(node.getTextClosingMarker());
+
+                    markdown.append(node.getReferenceOpeningMarker());
+                    markdown.append(node.getReference());
+                    markdown.append(node.getReferenceClosingMarker());
+                }
             }
         } else {
             markdown.append(node.getChars());
@@ -1559,27 +1595,46 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(LinkRef node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (!context.getFormatterOptions().optimizedInlineRendering || context.isTransformingText()) {
-            if (node.isReferenceTextCombined()) {
-                markdown.append(node.getReferenceOpeningMarker());
-                appendWhiteSpaceBetween(markdown, node.getReferenceOpeningMarker(), node.getReference(), true, false, false);
-                appendReference(node.getReference(), context, markdown);
-                markdown.append(node.getReferenceClosingMarker());
+            if (context.isTransformingText() || formatterOptions.rightMargin == 0) {
+                if (node.isReferenceTextCombined()) {
+                    markdown.append(node.getReferenceOpeningMarker());
+                    appendWhiteSpaceBetween(markdown, node.getReferenceOpeningMarker(), node.getReference(), true, false, false);
+                    appendReference(node.getReference(), context, markdown);
+                    markdown.append(node.getReferenceClosingMarker());
 
-                markdown.append(node.getTextOpeningMarker());
-                markdown.append(node.getTextClosingMarker());
-            } else {
-                markdown.append(node.getTextOpeningMarker());
-                if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
-                    context.renderChildren(node);
+                    markdown.append(node.getTextOpeningMarker());
+                    markdown.append(node.getTextClosingMarker());
                 } else {
-                    appendReference(node.getText(), context, markdown);
-                }
-                markdown.append(node.getTextClosingMarker());
+                    markdown.append(node.getTextOpeningMarker());
+                    if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
+                        context.renderChildren(node);
+                    } else {
+                        appendReference(node.getText(), context, markdown);
+                    }
+                    markdown.append(node.getTextClosingMarker());
 
-                markdown.append(node.getReferenceOpeningMarker());
-                appendWhiteSpaceBetween(markdown, node.getReferenceOpeningMarker(), node.getReference(), true, false, false);
-                markdown.appendTranslating(node.getReference());
-                markdown.append(node.getReferenceClosingMarker());
+                    markdown.append(node.getReferenceOpeningMarker());
+                    appendWhiteSpaceBetween(markdown, node.getReferenceOpeningMarker(), node.getReference(), true, false, false);
+                    markdown.appendTranslating(node.getReference());
+                    markdown.append(node.getReferenceClosingMarker());
+                }
+            } else {
+                if (node.isReferenceTextCombined()) {
+                    markdown.append(node.getReferenceOpeningMarker());
+                    markdown.append(node.getReference().toMapped(SpaceMapper.toNonBreakSpace));
+                    markdown.append(node.getReferenceClosingMarker());
+
+                    markdown.append(node.getTextOpeningMarker());
+                    markdown.append(node.getTextClosingMarker());
+                } else {
+                    markdown.append(node.getTextOpeningMarker());
+                    context.renderChildren(node);
+                    markdown.append(node.getTextClosingMarker());
+
+                    markdown.append(node.getReferenceOpeningMarker());
+                    markdown.append(node.getReference());
+                    markdown.append(node.getReferenceClosingMarker());
+                }
             }
         } else {
             markdown.append(node.getChars());

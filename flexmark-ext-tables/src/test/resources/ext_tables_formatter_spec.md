@@ -1501,11 +1501,57 @@ Uvw|Xyz⦙
 ````````````````````````````````
 
 
+fails in md nav
+
+```````````````````````````````` example(Tracked Offset - Indented: 9) options(left-align-marker-add)
+⦙|name|display|title_en|title_de|
+|---|---|---|---|
+|none| | | |
+|Prof.|Prof.|Prof.|Prof.|
+|Prof.Dr.|Prof.Dr.|Prof.Dr.|Prof.Dr.|
+|Prof.Dr.Dr.|Prof.Dr.Dr.|Prof.Dr.Dr.|Prof.Dr.Dr.|
+|Dr.|Dr.|Dr.|Dr.|
+|Dr.Dr.|Dr.Dr.|Dr.Dr.|Dr.Dr.|
+.
+⦙| name        | display     | title_en    | title_de    |
+|:------------|:------------|:------------|:------------|
+| none        |             |             |             |
+| Prof.       | Prof.       | Prof.       | Prof.       |
+| Prof.Dr.    | Prof.Dr.    | Prof.Dr.    | Prof.Dr.    |
+| Prof.Dr.Dr. | Prof.Dr.Dr. | Prof.Dr.Dr. | Prof.Dr.Dr. |
+| Dr.         | Dr.         | Dr.         | Dr.         |
+| Dr.Dr.      | Dr.Dr.      | Dr.Dr.      | Dr.Dr.      |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Tracked Offset - Indented: 10) options(left-align-marker-add, NO_FILE_EOL)
+|name⦙|display|title_en|title_de|
+|---|---|---|---|
+|none| | | |
+|Prof.|Prof.|Prof.|Prof.|
+|Prof.Dr.|Prof.Dr.|Prof.Dr.|Prof.Dr.|
+|Prof.Dr.Dr.|Prof.Dr.Dr.|Prof.Dr.Dr.|Prof.Dr.Dr.|
+|Dr.|Dr.|Dr.|Dr.|
+|Dr.Dr.|Dr.Dr.|Dr.Dr.|Dr.Dr.|
+.
+| name⦙        | display     | title_en    | title_de    |
+|:------------|:------------|:------------|:------------|
+| none        |             |             |             |
+| Prof.       | Prof.       | Prof.       | Prof.       |
+| Prof.Dr.    | Prof.Dr.    | Prof.Dr.    | Prof.Dr.    |
+| Prof.Dr.Dr. | Prof.Dr.Dr. | Prof.Dr.Dr. | Prof.Dr.Dr. |
+| Dr.         | Dr.         | Dr.         | Dr.         |
+| Dr.Dr.      | Dr.Dr.      | Dr.Dr.      | Dr.Dr.      |
+
+````````````````````````````````
+
+
 in item
 
-```````````````````````````````` example Tracked Offset - Indented: 9
-- Add: live templates starting with `.`    
-                                        
+```````````````````````````````` example Tracked Offset - Indented: 11
+- Add: live templates starting with `.`
+
   | Element       | Abbreviation    | Expansion                                               |
   |---------------|-----------------|---------------------------------------------------------|
   | Abbreviation  | `.abbreviation` | `*[]: `                                                 |

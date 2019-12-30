@@ -45,6 +45,7 @@ public class FormatterOptions {
     public final boolean listAddBlankLineBefore;
     public final boolean listRenumberItems;
     public final boolean listRemoveEmptyItems;
+    public final boolean listsItemContentAfterSuffix;
     public final ListBulletMarker listBulletMarker;
     public final ListNumberedMarker listNumberedMarker;
     public final ListSpacing listSpacing;
@@ -109,6 +110,7 @@ public class FormatterOptions {
         listBulletMarker = Formatter.LIST_BULLET_MARKER.get(options);
         listNumberedMarker = Formatter.LIST_NUMBERED_MARKER.get(options);
         listSpacing = Formatter.LIST_SPACING.get(options);
+        listsItemContentAfterSuffix = Formatter.LISTS_ITEM_CONTENT_AFTER_SUFFIX.get(options);
         referencePlacement = Formatter.REFERENCE_PLACEMENT.get(options);
         referenceSort = Formatter.REFERENCE_SORT.get(options);
         keepImageLinksAtStart = Formatter.KEEP_IMAGE_LINKS_AT_START.get(options);

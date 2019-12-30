@@ -1062,3 +1062,56 @@ do add blank line if blank line is after sub-list in middle of list
 ````````````````````````````````
 
 
+```````````````````````````````` example(Prioritized: 8) options(prioritized-tasks, ordered-task-item-priority-low, task-placement-incomplete-nested-first, list-bullet-asterisk, list-content-after-suffix)
+* Add: 
++ [ ] Add: 
++ [ ] Fix: 
+  + [ ] do not 
+
++ [ ] Fix2: 
+  + [ ] do not2 
+    
+.
++ [ ] Add:
++ [ ] Fix:
+  + [ ] do not
+
++ [ ] Fix2:
+  + [ ] do not2
+* Add:
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized: 9) options(margin[72])
+* [ ] Fix: [StackTraces_ToDo.txt](https://github.com/vsch/idea-multimarkdown2/blob/master/StackTraces_ToDo.txt)
+* [ ] Fix: Move preview settings which are Monitor specific (Grey scale font smoothing) to
+      Application settings. Review others that may need moving to IDE shared settings from
+      project settings.
+    
+.
+* [ ] Fix:
+  [StackTraces_ToDo.txt](https://github.com/vsch/idea-multimarkdown2/blob/master/StackTraces_ToDo.txt)
+* [ ] Fix: Move preview settings which are Monitor specific (Grey scale font
+  smoothing) to Application settings. Review others that may need moving
+  to IDE shared settings from project settings.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized: 10) options(margin[72], list-content-after-suffix)
+* [ ] Fix: [StackTraces_ToDo.txt](https://github.com/vsch/idea-multimarkdown2/blob/master/StackTraces_ToDo.txt)
+* [ ] Fix: Move preview settings which are Monitor specific (Grey scale font smoothing) to
+      Application settings. Review others that may need moving to IDE shared settings from
+      project settings.
+    
+.
+* [ ] Fix:
+      [StackTraces_ToDo.txt](https://github.com/vsch/idea-multimarkdown2/blob/master/StackTraces_ToDo.txt)
+* [ ] Fix: Move preview settings which are Monitor specific (Grey scale
+      font smoothing) to Application settings. Review others that may
+      need moving to IDE shared settings from project settings.
+
+````````````````````````````````
+
+
