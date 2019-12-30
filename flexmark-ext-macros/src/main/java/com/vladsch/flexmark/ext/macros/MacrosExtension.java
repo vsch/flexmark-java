@@ -63,8 +63,8 @@ public class MacrosExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(new MacrosNodeFormatter.Factory());
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(new MacrosNodeFormatter.Factory());
     }
 
     @Override
@@ -74,10 +74,10 @@ public class MacrosExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("HTML")) {
-            rendererBuilder.nodeRendererFactory(new MacrosNodeRenderer.Factory());
-        } else if (rendererBuilder.isRendererType("JIRA")) {
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("HTML")) {
+            htmlRendererBuilder.nodeRendererFactory(new MacrosNodeRenderer.Factory());
+        } else if (htmlRendererBuilder.isRendererType("JIRA")) {
         }
     }
 }

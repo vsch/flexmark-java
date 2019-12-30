@@ -469,14 +469,14 @@ public class HtmlRenderer implements IRender {
         /**
          * Called to give each extension to register extension points that it contains
          *
-         * @param rendererBuilder builder to call back for extension point registration
+         * @param htmlRendererBuilder builder to call back for extension point registration
          * @param rendererType    type of rendering being performed. For now "HTML", "JIRA" or "YOUTRACK"
          * @see Builder#attributeProviderFactory(AttributeProviderFactory)
          * @see Builder#nodeRendererFactory(NodeRendererFactory)
          * @see Builder#linkResolverFactory(LinkResolverFactory)
          * @see Builder#htmlIdGeneratorFactory(HeaderIdGeneratorFactory)
          */
-        void extend(@NotNull Builder rendererBuilder, @NotNull String rendererType);
+        void extend(@NotNull Builder htmlRendererBuilder, @NotNull String rendererType);
     }
 
     public static class RendererDependencyStage {

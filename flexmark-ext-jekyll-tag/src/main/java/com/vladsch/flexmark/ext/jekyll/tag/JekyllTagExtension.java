@@ -53,9 +53,9 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
         if ("HTML".equals(rendererType)) {
-            rendererBuilder.nodeRendererFactory(new JekyllTagNodeRenderer.Factory());
+            htmlRendererBuilder.nodeRendererFactory(new JekyllTagNodeRenderer.Factory());
         }
     }
 }

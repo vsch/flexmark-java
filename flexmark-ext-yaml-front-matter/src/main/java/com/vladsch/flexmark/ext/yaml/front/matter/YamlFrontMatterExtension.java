@@ -23,8 +23,8 @@ public class YamlFrontMatterExtension implements Parser.ParserExtension, Formatt
     }
 
     @Override
-    public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(new YamlFrontMatterNodeFormatter.Factory());
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(new YamlFrontMatterNodeFormatter.Factory());
     }
 
     @Override

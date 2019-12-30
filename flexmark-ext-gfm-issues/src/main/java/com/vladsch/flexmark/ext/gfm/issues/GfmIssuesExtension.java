@@ -48,11 +48,11 @@ public class GfmIssuesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("HTML")) {
-            rendererBuilder.nodeRendererFactory(new GfmIssuesNodeRenderer.Factory());
-        } else if (rendererBuilder.isRendererType("JIRA")) {
-            rendererBuilder.nodeRendererFactory(new GfmIssuesJiraRenderer.Factory());
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("HTML")) {
+            htmlRendererBuilder.nodeRendererFactory(new GfmIssuesNodeRenderer.Factory());
+        } else if (htmlRendererBuilder.isRendererType("JIRA")) {
+            htmlRendererBuilder.nodeRendererFactory(new GfmIssuesJiraRenderer.Factory());
         }
     }
 }

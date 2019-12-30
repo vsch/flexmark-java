@@ -151,10 +151,10 @@ public class YouTubeLinkSample {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-            if (rendererBuilder.isRendererType("HTML")) {
-                rendererBuilder.nodeRendererFactory(new YouTubeLinkNodeRenderer.Factory());
-            } else if (rendererBuilder.isRendererType("JIRA")) {
+        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+            if (htmlRendererBuilder.isRendererType("HTML")) {
+                htmlRendererBuilder.nodeRendererFactory(new YouTubeLinkNodeRenderer.Factory());
+            } else if (htmlRendererBuilder.isRendererType("JIRA")) {
             }
         }
     }

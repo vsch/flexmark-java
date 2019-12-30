@@ -25,8 +25,8 @@ public class AttributeProviderSample2 {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.attributeProviderFactory(SampleAttributeProvider.Factory());
+        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.attributeProviderFactory(SampleAttributeProvider.Factory());
         }
 
         static SampleExtension create() {

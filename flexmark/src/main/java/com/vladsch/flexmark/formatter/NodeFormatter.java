@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.formatter;
 
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -20,4 +21,13 @@ public interface NodeFormatter {
      * @return the nodes of interest to this formatter during formatting.
      */
     @Nullable Set<Class<?>> getNodeClasses();
+
+    /**
+     * Return character which compacts like block quote prefix
+     *
+     * @return character or NUL if none
+     */
+    default char getBlockQuoteLikePrefixChar() {
+        return SequenceUtils.NUL;
+    }
 }

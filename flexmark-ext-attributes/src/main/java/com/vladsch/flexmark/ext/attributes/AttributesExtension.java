@@ -63,8 +63,8 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(new AttributesNodeFormatter.Factory());
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(new AttributesNodeFormatter.Factory());
     }
 
     @Override
@@ -73,11 +73,11 @@ public class AttributesExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (ASSIGN_TEXT_ATTRIBUTES.get(rendererBuilder)) {
-            rendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (ASSIGN_TEXT_ATTRIBUTES.get(htmlRendererBuilder)) {
+            htmlRendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
         }
-        rendererBuilder.attributeProviderFactory(new AttributesAttributeProvider.Factory());
+        htmlRendererBuilder.attributeProviderFactory(new AttributesAttributeProvider.Factory());
     }
 
     @Override

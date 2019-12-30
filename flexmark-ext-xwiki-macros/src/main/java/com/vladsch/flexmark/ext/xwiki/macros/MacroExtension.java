@@ -32,8 +32,8 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        rendererBuilder.nodeRendererFactory(new MacroNodeRenderer.Factory());
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        htmlRendererBuilder.nodeRendererFactory(new MacroNodeRenderer.Factory());
     }
 
     public static MacroExtension create() {

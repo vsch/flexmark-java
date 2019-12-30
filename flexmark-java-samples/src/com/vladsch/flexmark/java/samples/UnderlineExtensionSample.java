@@ -191,8 +191,8 @@ public class UnderlineExtensionSample {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.nodeRendererFactory(new UnderlineNodeRenderer.Factory());
+        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.nodeRendererFactory(new UnderlineNodeRenderer.Factory());
         }
 
         public static UnderlineExtension create() {

@@ -169,9 +169,9 @@ public class CustomLinkResolverSample {
         }
 
         @Override
-        public void extend(@NotNull Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.linkResolverFactory(new DocxLinkResolver.Factory());
-            rendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
+        public void extend(@NotNull Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.linkResolverFactory(new DocxLinkResolver.Factory());
+            htmlRendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
 
         static CustomExtension create() {

@@ -1193,6 +1193,19 @@ lazy continuation
 ````````````````````````````````
 
 
+as first child of empty item
+
+```````````````````````````````` example Block Quotes: 9
+* > block quote
+1. > block quote  
+.
+* > block quote
+
+1. > block quote
+
+````````````````````````````````
+
+
 ### Continuation
 
 #### As First

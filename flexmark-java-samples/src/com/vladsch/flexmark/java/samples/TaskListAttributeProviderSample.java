@@ -26,8 +26,8 @@ public class TaskListAttributeProviderSample {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.attributeProviderFactory(TaskListAttributeProvider.Factory());
+        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.attributeProviderFactory(TaskListAttributeProvider.Factory());
         }
 
         static SampleExtension create() {

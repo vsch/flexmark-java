@@ -59,8 +59,8 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(new TableNodeFormatter.Factory());
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(new TableNodeFormatter.Factory());
     }
 
     @Override
@@ -79,11 +79,11 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("HTML")) {
-            rendererBuilder.nodeRendererFactory(new TableNodeRenderer.Factory());
-        } else if (rendererBuilder.isRendererType("JIRA")) {
-            rendererBuilder.nodeRendererFactory(new TableJiraRenderer.Factory());
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("HTML")) {
+            htmlRendererBuilder.nodeRendererFactory(new TableNodeRenderer.Factory());
+        } else if (htmlRendererBuilder.isRendererType("JIRA")) {
+            htmlRendererBuilder.nodeRendererFactory(new TableJiraRenderer.Factory());
         }
     }
 }

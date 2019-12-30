@@ -125,8 +125,8 @@ public class SyntheticLinkFormatterSample {
         }
 
         @Override
-        public void extend(Formatter.Builder builder) {
-            builder.nodeFormatterFactory(new SyntheticLinkNodeFormatter.Factory());
+        public void extend(Formatter.Builder formatterBuilder) {
+            formatterBuilder.nodeFormatterFactory(new SyntheticLinkNodeFormatter.Factory());
         }
     }
 

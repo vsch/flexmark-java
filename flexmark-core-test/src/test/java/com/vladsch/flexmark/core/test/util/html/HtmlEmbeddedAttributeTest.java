@@ -98,8 +98,8 @@ final public class HtmlEmbeddedAttributeTest {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.attributeProviderFactory(EmbeddedAttributeProvider.Factory);
+        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.attributeProviderFactory(EmbeddedAttributeProvider.Factory);
         }
 
         @Override

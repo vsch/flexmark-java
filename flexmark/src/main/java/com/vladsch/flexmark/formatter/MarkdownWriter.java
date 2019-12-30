@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.ast.BlockQuote;
+import com.vladsch.flexmark.util.ast.BlockQuoteLike;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
@@ -25,7 +26,7 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
     public boolean isLastBlockQuoteChild() {
         Node node = context.getCurrentNode();
         Node parent = node.getParent();
-        return parent instanceof BlockQuote && parent.getLastChild() == node;
+        return parent instanceof BlockQuoteLike && parent.getLastChild() == node;
     }
 
     public @NotNull MarkdownWriter tailBlankLine(int count) {

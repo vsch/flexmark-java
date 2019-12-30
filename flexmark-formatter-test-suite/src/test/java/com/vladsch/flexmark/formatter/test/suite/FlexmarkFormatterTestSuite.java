@@ -8,6 +8,7 @@ import com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationTranslationFormatt
 import com.vladsch.flexmark.ext.abbreviation.MergeAbbreviationsTest;
 import com.vladsch.flexmark.ext.admonition.ComboAdmonitionFormatterSpecTest;
 import com.vladsch.flexmark.ext.admonition.ComboAdmonitionTranslationFormatterSpecTest;
+import com.vladsch.flexmark.ext.aside.ComboAsideFormatterSpecTest;
 import com.vladsch.flexmark.ext.attributes.ComboAttributesFormatterSpecTest;
 import com.vladsch.flexmark.ext.attributes.ComboAttributesTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.attributes.MergeAttributesTest;
@@ -40,6 +41,7 @@ import org.junit.runners.Suite;
         ComboAbbreviationFormatterSpecTest.class,
         ComboAbbreviationTranslationFormatterSpecTest.class,
         ComboAttributesFormatterSpecTest.class,
+        ComboAsideFormatterSpecTest.class,
         ComboAttributesTranslationFormatterSpecTest.class,
         ComboDefinitionFormatterSpecTest.class,
         ComboEmojiTranslationFormatterSpecTest.class,

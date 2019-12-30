@@ -34,8 +34,8 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
-    public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(new DefinitionNodeFormatter.Factory());
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(new DefinitionNodeFormatter.Factory());
     }
 
     @Override
@@ -56,10 +56,10 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("HTML")) {
-            rendererBuilder.nodeRendererFactory(new DefinitionNodeRenderer.Factory());
-        } else if (rendererBuilder.isRendererType("JIRA")) {
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("HTML")) {
+            htmlRendererBuilder.nodeRendererFactory(new DefinitionNodeRenderer.Factory());
+        } else if (htmlRendererBuilder.isRendererType("JIRA")) {
         }
     }
 }

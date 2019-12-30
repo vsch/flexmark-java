@@ -81,15 +81,15 @@ public class ZzzzzzExtension implements Parser.ParserExtension
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("HTML")) {
-            rendererBuilder.nodeRendererFactory(new ZzzzzzNodeRenderer.Factory());// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
-        } else if (rendererBuilder.isRendererType("JIRA")) {
-            rendererBuilder.nodeRendererFactory(new ZzzzzzJiraRenderer.Factory());// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("HTML")) {
+            htmlRendererBuilder.nodeRendererFactory(new ZzzzzzNodeRenderer.Factory());// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+            htmlRendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
+            htmlRendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
+        } else if (htmlRendererBuilder.isRendererType("JIRA")) {
+            htmlRendererBuilder.nodeRendererFactory(new ZzzzzzJiraRenderer.Factory());// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+            htmlRendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
+            htmlRendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
         }
     }
 }

@@ -44,8 +44,8 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(new EmojiNodeFormatter.Factory());
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(new EmojiNodeFormatter.Factory());
     }
 
     @Override
@@ -54,11 +54,11 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("HTML")) {
-            rendererBuilder.nodeRendererFactory(new EmojiNodeRenderer.Factory());
-        } else if (rendererBuilder.isRendererType("JIRA")) {
-            rendererBuilder.nodeRendererFactory(new EmojiJiraRenderer.Factory());
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("HTML")) {
+            htmlRendererBuilder.nodeRendererFactory(new EmojiNodeRenderer.Factory());
+        } else if (htmlRendererBuilder.isRendererType("JIRA")) {
+            htmlRendererBuilder.nodeRendererFactory(new EmojiJiraRenderer.Factory());
         }
     }
 }

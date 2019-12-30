@@ -58,8 +58,8 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
-    public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(TaskListNodeFormatter::new);
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(TaskListNodeFormatter::new);
     }
 
     @Override
@@ -78,10 +78,10 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("HTML")) {
-            rendererBuilder.nodeRendererFactory(new TaskListNodeRenderer.Factory());
-        } else if (rendererBuilder.isRendererType("JIRA")) {
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("HTML")) {
+            htmlRendererBuilder.nodeRendererFactory(new TaskListNodeRenderer.Factory());
+        } else if (htmlRendererBuilder.isRendererType("JIRA")) {
         }
     }
 }

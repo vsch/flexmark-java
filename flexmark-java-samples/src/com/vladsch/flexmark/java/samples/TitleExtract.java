@@ -38,8 +38,8 @@ public class TitleExtract {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.nodeRendererFactory(new HeadingNodeRenderer.Factory());
+        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.nodeRendererFactory(new HeadingNodeRenderer.Factory());
         }
 
         static HeadingExtension create() {

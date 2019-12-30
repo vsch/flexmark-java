@@ -96,8 +96,8 @@ public class InlineCodeCustomRenderingSample {
         }
 
         @Override
-        public void extend(@NotNull Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
+        public void extend(@NotNull Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.nodeRendererFactory(new CustomNodeRenderer.Factory());
         }
 
         static CustomExtension create() {

@@ -32,9 +32,9 @@ public class PegdownCustomLinkResolverOptions {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.linkResolverFactory(new CustomLinkResolver.Factory());
-            rendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
+        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.linkResolverFactory(new CustomLinkResolver.Factory());
+            htmlRendererBuilder.nodeRendererFactory(new CustomLinkRenderer.Factory());
         }
 
         static CustomExtension create() {

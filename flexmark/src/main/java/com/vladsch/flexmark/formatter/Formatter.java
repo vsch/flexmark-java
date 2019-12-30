@@ -43,6 +43,8 @@ import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
@@ -189,7 +191,7 @@ public class Formatter implements IRender {
     public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
 
     final FormatterOptions formatterOptions;
-    private final DataHolder options;
+    final private DataHolder options;
     final List<LinkResolverFactory> linkResolverFactories;
     final NodeFormatterDependencies nodeFormatterFactories;
     final HeaderIdGeneratorFactory idGeneratorFactory;
@@ -235,7 +237,7 @@ public class Formatter implements IRender {
     }
 
     private static class NodeFormatterDependencies extends ResolvedDependencies<NodeFormatterDependencyStage> {
-        private final List<NodeFormatterFactory> nodeFactories;
+        final private List<NodeFormatterFactory> nodeFactories;
 
         public NodeFormatterDependencies(List<NodeFormatterDependencyStage> dependentStages) {
             super(dependentStages);
@@ -635,10 +637,10 @@ public class Formatter implements IRender {
          */
         void rendererOptions(MutableDataHolder options);
 
-        void extend(Builder builder);
+        void extend(Builder formatterBuilder);
     }
 
-    private final static Iterator<? extends Node> NULL_ITERATOR = new Iterator<Node>() {
+    final private static Iterator<? extends Node> NULL_ITERATOR = new Iterator<Node>() {
         @Override
         public boolean hasNext() {
             return false;
@@ -657,21 +659,23 @@ public class Formatter implements IRender {
     final public static Iterable<? extends Node> NULL_ITERABLE = (Iterable<Node>) () -> null;
 
     private class MainNodeFormatter extends NodeFormatterSubContext {
-        private final Document document;
-        private final Map<Class<?>, List<NodeFormattingHandler<?>>> renderers;
-        private final SubClassingBag<Node> collectedNodes;
+        final private Document document;
+        final private Map<Class<?>, List<NodeFormattingHandler<?>>> renderers;
+        final private SubClassingBag<Node> collectedNodes;
 
-        private final List<PhasedNodeFormatter> phasedFormatters;
-        private final Set<FormattingPhase> renderingPhases;
-        private final DataHolder options;
+        final private List<PhasedNodeFormatter> phasedFormatters;
+        final private Set<FormattingPhase> renderingPhases;
+        final private DataHolder options;
         private @NotNull final Boolean isFormatControlEnabled;
         private FormattingPhase phase;
         final TranslationHandler translationHandler;
-        private final LinkResolver[] linkResolvers;
-        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
-        private final ExplicitAttributeIdProvider explicitAttributeIdProvider;
-        private final HtmlIdGenerator idGenerator;
+        final private LinkResolver[] linkResolvers;
+        final private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
+        final private ExplicitAttributeIdProvider explicitAttributeIdProvider;
+        final private HtmlIdGenerator idGenerator;
         private @Nullable FormatControlProcessor controlProcessor;
+        final private CharPredicate blockQuoteLikePredicate;
+        final private BasedSequence blockQuoteLikeChars;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
@@ -701,6 +705,7 @@ public class Formatter implements IRender {
             List<NodeFormatterFactory> formatterFactories = nodeFormatterFactories.getNodeFactories();
             this.phasedFormatters = new ArrayList<>(formatterFactories.size());
             ExplicitAttributeIdProvider explicitAttributeIdProvider = null;
+            StringBuilder blockLikePrefixChars = new StringBuilder();
 
             for (int i = formatterFactories.size() - 1; i >= 0; i--) {
                 NodeFormatterFactory nodeFormatterFactory = formatterFactories.get(i);
@@ -711,13 +716,18 @@ public class Formatter implements IRender {
                     explicitAttributeIdProvider = (ExplicitAttributeIdProvider) nodeFormatter;
                 }
 
+                char blockLikePrefixChar = nodeFormatter.getBlockQuoteLikePrefixChar();
+                if (blockLikePrefixChar != SequenceUtils.NUL) {
+                    blockLikePrefixChars.append(Character.toString(blockLikePrefixChar));
+                }
+
                 Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
                 if (formattingHandlers == null) continue;
 
-                for (NodeFormattingHandler<?> nodeType : formattingHandlers) {
+                for (NodeFormattingHandler<?> formattingHandler : formattingHandlers) {
                     // Overwrite existing renderer
-                    List<NodeFormattingHandler<?>> rendererList = renderers.computeIfAbsent(nodeType.getNodeType(), key -> new ArrayList<>());
-                    rendererList.add(0, nodeType);
+                    List<NodeFormattingHandler<?>> rendererList = renderers.computeIfAbsent(formattingHandler.getNodeType(), key -> new ArrayList<>());
+                    rendererList.add(0, formattingHandler);
 //                    renderers.put(nodeType.getNodeType(), nodeType);
                 }
 
@@ -738,6 +748,10 @@ public class Formatter implements IRender {
                     }
                 }
             }
+
+            String charSequence = blockLikePrefixChars.toString();
+            this.blockQuoteLikeChars = BasedSequence.of(charSequence);
+            this.blockQuoteLikePredicate = CharPredicate.anyOf(charSequence);
 
             // generate ids by default even if they are not going to be used
             this.idGenerator = GENERATE_HEADER_ID.get(options) ? idGeneratorFactory != null ? idGeneratorFactory.create(this) : new HeaderIdGenerator.Factory().create(this) : null;
@@ -934,6 +948,16 @@ public class Formatter implements IRender {
             return document;
         }
 
+        @Override
+        public @NotNull CharPredicate getBlockQuoteLikePrefixPredicate() {
+            return blockQuoteLikePredicate;
+        }
+
+        @Override
+        public @NotNull BasedSequence getBlockQuoteLikePrefixChars() {
+            return blockQuoteLikeChars;
+        }
+
         @NotNull
         @Override
         public FormattingPhase getFormattingPhase() {
@@ -1127,9 +1151,9 @@ public class Formatter implements IRender {
 
         @SuppressWarnings("WeakerAccess")
         private class SubNodeFormatter extends NodeFormatterSubContext implements NodeFormatterContext {
-            private final MainNodeFormatter myMainNodeRenderer;
-            private final DataHolder myOptions;
-            private final FormatterOptions myFormatterOptions;
+            final private MainNodeFormatter myMainNodeRenderer;
+            final private DataHolder myOptions;
+            final private FormatterOptions myFormatterOptions;
 
             public SubNodeFormatter(MainNodeFormatter mainNodeRenderer, MarkdownWriter out, @Nullable DataHolder options) {
                 super(out);
@@ -1179,6 +1203,14 @@ public class Formatter implements IRender {
             @NotNull
             @Override
             public Document getDocument() {return myMainNodeRenderer.getDocument();}
+
+            @Override
+            @NotNull
+            public CharPredicate getBlockQuoteLikePrefixPredicate() {return myMainNodeRenderer.getBlockQuoteLikePrefixPredicate();}
+
+            @Override
+            @NotNull
+            public BasedSequence getBlockQuoteLikePrefixChars() {return myMainNodeRenderer.getBlockQuoteLikePrefixChars();}
 
             @NotNull
             @Override

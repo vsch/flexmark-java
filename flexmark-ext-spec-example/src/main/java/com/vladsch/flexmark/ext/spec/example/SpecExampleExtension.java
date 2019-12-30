@@ -69,8 +69,8 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
-    public void extend(Formatter.Builder builder) {
-        builder.nodeFormatterFactory(new SpecExampleNodeFormatter.Factory());
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(new SpecExampleNodeFormatter.Factory());
     }
 
     @Override
@@ -79,10 +79,10 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("HTML")) {
-            rendererBuilder.nodeRendererFactory(new SpecExampleNodeRenderer.Factory());
-        } else if (rendererBuilder.isRendererType("JIRA")) {
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("HTML")) {
+            htmlRendererBuilder.nodeRendererFactory(new SpecExampleNodeRenderer.Factory());
+        } else if (htmlRendererBuilder.isRendererType("JIRA")) {
         }
     }
 }

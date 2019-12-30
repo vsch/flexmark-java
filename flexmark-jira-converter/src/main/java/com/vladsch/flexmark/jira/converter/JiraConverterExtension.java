@@ -44,9 +44,9 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
     }
 
     @Override
-    public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-        if (rendererBuilder.isRendererType("JIRA")) {
-            rendererBuilder.nodeRendererFactory(new JiraConverterNodeRenderer.Factory());
+    public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+        if (htmlRendererBuilder.isRendererType("JIRA")) {
+            htmlRendererBuilder.nodeRendererFactory(new JiraConverterNodeRenderer.Factory());
         } else {
             throw new IllegalStateException("Jira Converter Extension used with non Jira Renderer " + rendererType);
         }

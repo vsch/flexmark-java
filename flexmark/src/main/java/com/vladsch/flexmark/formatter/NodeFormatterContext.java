@@ -8,7 +8,8 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -66,6 +67,16 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
     @NotNull Document getDocument();
 
     /**
+     * @return predicate for prefix chars which compact like block quote prefix char
+     */
+    @NotNull CharPredicate getBlockQuoteLikePrefixPredicate();
+
+    /**
+     * @return char sequence of all prefix chars which compact like block quote prefix char
+     */
+    @NotNull BasedSequence getBlockQuoteLikePrefixChars();
+
+    /**
      * Get iterable of nodes of given types, in order of their appearance in the document tree, depth first traversal.
      * Only node classes returned by {@link NodeFormatter#getNodeClasses()} of all loaded extensions
      * will be available to formatters.
@@ -75,10 +86,13 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * {@link ElementPlacementSort#SORT_UNUSED_LAST} so that
      *
      * @param classes node classes to return
+     *
      * @return iterable
      */
     @NotNull Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes);
+
     @NotNull Iterable<? extends Node> nodesOfType(@NotNull Collection<Class<?>> classes);
+
     /**
      * Get iterable of nodes of given types, in reverse order of their appearance in the document tree, depth first traversal.
      * Only node classes returned by {@link NodeFormatter#getNodeClasses()} of all loaded extensions
@@ -89,8 +103,10 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * {@link ElementPlacementSort#SORT_UNUSED_LAST} so that
      *
      * @param classes node classes to return
+     *
      * @return iterable
      */
     @NotNull Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes);
+
     @NotNull Iterable<? extends Node> reversedNodesOfType(@NotNull Collection<Class<?>> classes);
 }

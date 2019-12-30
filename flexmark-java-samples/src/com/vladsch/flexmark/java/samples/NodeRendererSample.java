@@ -25,8 +25,8 @@ public class NodeRendererSample {
         }
 
         @Override
-        public void extend(@NotNull HtmlRenderer.Builder rendererBuilder, @NotNull String rendererType) {
-            rendererBuilder.nodeRendererFactory(new SampleNodeRenderer.Factory());
+        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+            htmlRendererBuilder.nodeRendererFactory(new SampleNodeRenderer.Factory());
         }
 
         static SampleExtension create() {
