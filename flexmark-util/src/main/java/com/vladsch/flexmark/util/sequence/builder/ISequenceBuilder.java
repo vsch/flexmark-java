@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.IRichSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends IRichSequence<S>> {
+public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends CharSequence> {
     /**
      * NOTE: returns non-null value if the underlying {@link IBasedSegmentBuilder#getBaseSubSequenceRange()} returns non-null value
      *

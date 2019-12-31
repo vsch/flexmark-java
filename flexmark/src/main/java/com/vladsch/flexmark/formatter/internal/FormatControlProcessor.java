@@ -3,6 +3,7 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.HtmlCommentBlock;
 import com.vladsch.flexmark.ast.HtmlInnerBlockComment;
 import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.formatter.FormatterOptions;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;

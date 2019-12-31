@@ -14,7 +14,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     private final BasedSegmentBuilder segments;
     private final @NotNull BasedSequence baseSeq;
     private @Nullable BasedSequence resultSeq;
-    private @NotNull TrackedOffsetList trackedOffsets = TrackedOffsetList.EMPTY_LIST;     // only used as property to pass to LineAppendable
 
     /**
      * Construct a base sequence builder for given base sequence with default options.
@@ -70,15 +69,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     public Range getLastRangeOrNull() {
         Object part = segments.getPart(segments.size());
         return part instanceof Range && ((Range) part).isNotNull() ? (Range) part : null;
-    }
-
-    @NotNull
-    public TrackedOffsetList getTrackedOffsets() {
-        return trackedOffsets;
-    }
-
-    public void setTrackedOffsets(@NotNull TrackedOffsetList trackedOffsets) {
-        this.trackedOffsets = trackedOffsets;
     }
 
     @Nullable

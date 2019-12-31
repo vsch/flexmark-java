@@ -2,7 +2,6 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.FormatControlProcessor;
-import com.vladsch.flexmark.formatter.internal.FormatterOptions;
 import com.vladsch.flexmark.formatter.internal.MergeContextImpl;
 import com.vladsch.flexmark.formatter.internal.MergeLinkResolver;
 import com.vladsch.flexmark.formatter.internal.TranslationHandlerImpl;
@@ -103,7 +102,6 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> ESCAPE_SPECIAL_CHARS = SharedDataKeys.ESCAPE_SPECIAL_CHARS;
     public static final DataKey<Boolean> ESCAPE_NUMBERED_LEAD_IN = SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
     public static final DataKey<Boolean> UNESCAPE_SPECIAL_CHARS = SharedDataKeys.UNESCAPE_SPECIAL_CHARS;
-    public static final DataKey<ContinuationIndent> CONTINUATION_INDENT = new DataKey<>("CONTINUATION_INDENT", ContinuationIndent.ALIGN_TO_FIRST);
 
     public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER = new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
     public static final DataKey<Boolean> SETEXT_HEADING_EQUALIZE_MARKER = new DataKey<>("SETEXT_HEADING_EQUALIZE_MARKER", true);
@@ -203,7 +201,7 @@ public class Formatter implements IRender {
         this.idGeneratorFactory = builder.htmlIdGeneratorFactory == null ? new HeaderIdGenerator.Factory() : builder.htmlIdGeneratorFactory;
 
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
-        this.nodeFormatterFactories = calculateNodeFormatterFactories(this.options, builder.nodeFormatterFactories);
+        this.nodeFormatterFactories = calculateNodeFormatterFactories(builder.nodeFormatterFactories);
     }
 
     private static class NodeFormatterDependencyStage {
@@ -256,10 +254,7 @@ public class Formatter implements IRender {
         }
     }
 
-    private static NodeFormatterDependencies calculateNodeFormatterFactories(
-            DataHolder options,
-            List<NodeFormatterFactory> formatterFactories
-    ) {
+    private static NodeFormatterDependencies calculateNodeFormatterFactories(List<NodeFormatterFactory> formatterFactories) {
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         List<NodeFormatterFactory> list = new ArrayList<>(formatterFactories);
         list.add(new CoreNodeFormatter.Factory());
@@ -351,8 +346,9 @@ public class Formatter implements IRender {
             // need to resolve any unresolved offsets
             BasedSequence baseSeq = document.getChars();
             int[] length = { 0 };
+            final int[] unresolved = { trackedOffsets.size() };
 
-            out.forAllLines(builder, maxTailBlankLines, (line, index) -> {
+            out.forAllLines(maxTailBlankLines, (line, index, textStart, textEnd, sumPrefix, sumText, lineStartDelta) -> {
                 BasedSequence useLine = line.trimEOL();
                 List<TrackedOffset> lineTrackedOffsets = trackedOffsets.getTrackedOffsets(useLine.getStartOffset(), useLine.getEndOffset());
                 if (!lineTrackedOffsets.isEmpty()) {
@@ -372,12 +368,15 @@ public class Formatter implements IRender {
                                 OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
                                 trackedOffset.setIndex(info.endIndex + length[0]);
                             }
-                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), length[0], index, SequenceUtils.toVisibleWhitespaceString(line)));
+                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), length[0], index, line.getBuilder().append(line).toStringWithRanges(true)));
+                            unresolved[0]--;
                         }
                     }
                 }
 
                 length[0] += line.length();
+
+                return unresolved[0] > 0;
             });
         }
 
@@ -765,9 +764,6 @@ public class Formatter implements IRender {
 
             List<TrackedOffset> offsets = TRACKED_OFFSETS.get(document);
             trackedOffsets = offsets.isEmpty() ? TrackedOffsetList.EMPTY_LIST : TrackedOffsetList.create(document.getChars(), offsets);
-            if (!trackedOffsets.isEmpty() && out.getBuilder() != null) {
-                out.getBuilder().setTrackedOffsets(trackedOffsets);
-            }
 
             String charSequence = blockLikePrefixChars.toString();
             this.blockQuoteLikeChars = BasedSequence.of(charSequence);
@@ -810,7 +806,7 @@ public class Formatter implements IRender {
             return resolveLink(this, linkType, url, attributes, urlEncode);
         }
 
-        private ResolvedLink resolveLink(NodeFormatterSubContext context, LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
+        ResolvedLink resolveLink(NodeFormatterSubContext context, LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
             String urlSeq = String.valueOf(url);
@@ -1183,9 +1179,6 @@ public class Formatter implements IRender {
                 myMainNodeRenderer = mainNodeRenderer;
                 myOptions = options == null ? myMainNodeRenderer.getOptions() : new ScopedDataSet(myMainNodeRenderer.getOptions(), options);
                 myFormatterOptions = new FormatterOptions(myOptions);
-                if (!myMainNodeRenderer.trackedOffsets.isEmpty() && out.getBuilder() != null) {
-                    out.getBuilder().setTrackedOffsets(myMainNodeRenderer.trackedOffsets);
-                }
             }
 
             @NotNull
@@ -1240,7 +1233,7 @@ public class Formatter implements IRender {
 
             @Override
             public @NotNull TrackedOffsetList getTrackedOffsets() {
-                return markdown.getBuilder() == null ? TrackedOffsetList.EMPTY_LIST : markdown.getBuilder().getTrackedOffsets();
+                return TrackedOffsetList.EMPTY_LIST;
             }
 
             @NotNull

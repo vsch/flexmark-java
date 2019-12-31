@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
+import com.vladsch.flexmark.util.html.LineProcessor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +11,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 @SuppressWarnings("unchecked")
 public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, N, C extends NodeContext<N, C>> implements LineAppendable {
@@ -113,7 +113,7 @@ public abstract class MarkdownWriterBase<M extends MarkdownWriterBase<M, N, C>, 
     @NotNull @Override public M unIndentNoEol()                                                                                                                 { appendable.unIndentNoEol(); return (M)this; }
     @Override public String toString(int maxBlankLines)                                                                                                         { return appendable.toString(maxBlankLines); }
     @Override public void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines)                                                                        { appendable.toBuilder(builder,maxBlankLines);}
-    @Override public void forAllLines(@NotNull SequenceBuilder builder, int maxBlankLines, @NotNull BiConsumer<BasedSequence, Integer> consumer)                         { appendable.forAllLines(builder,maxBlankLines,consumer);}
+    @Override public void forAllLines(int maxBlankLines, @NotNull LineProcessor processor)                                                                      { appendable.forAllLines( maxBlankLines,processor);}
     // @formatter:on
 }
 

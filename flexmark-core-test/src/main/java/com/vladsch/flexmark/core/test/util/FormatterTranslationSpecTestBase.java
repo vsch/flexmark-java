@@ -19,15 +19,15 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase {
-    static final boolean SKIP_IGNORED_TESTS = true;
+    final static boolean SKIP_IGNORED_TESTS = true;
     final public static DataKey<Boolean> SHOW_LINE_RANGES = new DataKey<>("SHOW_LINE_RANGES", false);
 
-    private static DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
         optionsMap.put("show-ranges", new MutableDataSet().set(SHOW_LINE_RANGES, true));
@@ -40,7 +40,6 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("max-blank-lines-3", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 3));
         optionsMap.put("no-tailing-blanks", new MutableDataSet().set(Formatter.MAX_TRAILING_BLANK_LINES, 0));
         optionsMap.put("list-content-after-suffix", new MutableDataSet().set(Formatter.LISTS_ITEM_CONTENT_AFTER_SUFFIX, true));
-        optionsMap.put("margin", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, FormatterTranslationSpecTestBase::marginOption)));
         optionsMap.put("atx-space-as-is", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.AS_IS));
         optionsMap.put("atx-space-add", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.ADD));
         optionsMap.put("atx-space-remove", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.REMOVE));
@@ -96,13 +95,6 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("remove-empty-items", new MutableDataSet().set(Formatter.LIST_REMOVE_EMPTY_ITEMS, true));
         optionsMap.put("no-hard-breaks", new MutableDataSet().set(Formatter.KEEP_HARD_LINE_BREAKS, false));
         optionsMap.put("no-soft-breaks", new MutableDataSet().set(Formatter.KEEP_SOFT_LINE_BREAKS, false));
-        optionsMap.put("right-margin-30", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 30));
-        optionsMap.put("right-margin-40", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 40));
-        optionsMap.put("right-margin-50", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 50));
-        optionsMap.put("right-margin-60", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 60));
-        optionsMap.put("right-margin-70", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 70));
-        optionsMap.put("right-margin-80", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 80));
-        optionsMap.put("right-margin-90", new MutableDataSet().set(Formatter.RIGHT_MARGIN, 90));
         optionsMap.put("apply-escapers", new MutableDataSet().set(Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS, true));
         optionsMap.put("no-apply-escapers", new MutableDataSet().set(Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS, false));
 
@@ -116,11 +108,11 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("formatter-on-tag-regex", new MutableDataSet().set(Formatter.FORMATTER_ON_TAG, "^@format:(?:yes|on|true)$").set(Formatter.FORMATTER_TAGS_ACCEPT_REGEXP, true));
         optionsMap.put("formatter-off-tag-regex", new MutableDataSet().set(Formatter.FORMATTER_OFF_TAG, "^@format:(?:no|off|false)$").set(Formatter.FORMATTER_TAGS_ACCEPT_REGEXP, true));
 
-        optionsMap.put("continuation-indent-align-to-first", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.ALIGN_TO_FIRST));
-        optionsMap.put("continuation-indent-none", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.NONE));
-        optionsMap.put("continuation-indent-indent-1", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_1));
-        optionsMap.put("continuation-indent-indent-2", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_2));
-        optionsMap.put("continuation-indent-indent-3", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_3));
+//        optionsMap.put("continuation-indent-align-to-first", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.ALIGN_TO_FIRST));
+//        optionsMap.put("continuation-indent-none", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.NONE));
+//        optionsMap.put("continuation-indent-indent-1", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_1));
+//        optionsMap.put("continuation-indent-indent-2", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_2));
+//        optionsMap.put("continuation-indent-indent-3", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_3));
 
         optionsMap.put("block-quote-continuation-markers-add-as-first", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_AS_FIRST));
         optionsMap.put("block-quote-continuation-markers-add-compact", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_COMPACT));
@@ -132,6 +124,8 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("list-align-numeric-left", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.LEFT_ALIGN));
         optionsMap.put("list-align-numeric-right", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.RIGHT_ALIGN));
         optionsMap.put("link-address-pattern", new MutableDataSet().set(Formatter.LINK_MARKER_COMMENT_PATTERN, Pattern.compile("^\\s*@IGNORE PREVIOUS:.*$")));
+
+        optionsMap.put("margin", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, FormatterTranslationSpecTestBase::marginOption)));
     }
     static DataHolder marginOption(@Nullable Integer params) {
         int value = params != null ? params : -1;

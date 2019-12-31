@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.OrderedList;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.SoftLineBreak;
-import com.vladsch.flexmark.formatter.internal.FormatterOptions;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Pair;
@@ -22,7 +21,6 @@ import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.format.options.BlockQuoteContinuationMarker;
 import com.vladsch.flexmark.util.format.options.BlockQuoteMarker;
-import com.vladsch.flexmark.util.format.options.ContinuationIndent;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -38,7 +36,6 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.util.html.LineAppendable.F_NO_TRACKED_OFFSETS;
 import static com.vladsch.flexmark.util.html.LineAppendable.F_TRIM_LEADING_WHITESPACE;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
@@ -513,7 +510,6 @@ public class FormatterUtils {
                 MutableDataHolder subContextOptions = context.getOptions().toMutable().set(Formatter.KEEP_SOFT_LINE_BREAKS, true).set(Formatter.KEEP_HARD_LINE_BREAKS, true);
                 SequenceBuilder builder = node.getChars().getBuilder();
                 NodeFormatterContext subContext = context.getSubContext(subContextOptions, builder.getBuilder());
-                subContext.getMarkdown().addOptions(F_NO_TRACKED_OFFSETS);
                 subContext.renderChildren(node);
 
                 MarkdownWriter subContextMarkdown = subContext.getMarkdown();
@@ -523,114 +519,67 @@ public class FormatterUtils {
                 TrackedOffsetList trackedOffsets = context.getTrackedOffsets();
 
                 BasedSequence nodeLessEol = node.getChars().trimEOL();
-                List<TrackedOffset> paragraphTrackedOffsets = trackedOffsets.getTrackedOffsets(nodeLessEol.getStartOffset(), nodeLessEol.getEndOffset());
+                TrackedOffsetList paragraphTrackedOffsets = trackedOffsets.getTrackedOffsets(nodeLessEol.getStartOffset(), nodeLessEol.getEndOffset());
 
-                if (false && formatterOptions.paragraphContinuationIndent == ContinuationIndent.ALIGN_TO_FIRST) {
-                    System.out.println(String.format("Wrapping align to first '%s'", node.getChars()));
+                formatter.setWidth(formatterOptions.rightMargin - markdown.getPrefix().length());
+                formatter.setKeepSoftBreaks(false);
+                formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
+                formatter.setRestoreTrackedSpaces(false);
+                formatter.setFirstIndent("");
+                formatter.setIndent("");
 
-//                    formatter.setWidth(formatterOptions.rightMargin - markdown.getPrefix().length());
-                    formatter.setWidth(formatterOptions.rightMargin);
-                    formatter.setKeepSoftBreaks(false);
-                    formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
-                    formatter.setRestoreTrackedSpaces(false);
-                    CharSequence firstIndent = markdown.getPrefix().subSequence(0, Math.max(0, markdown.getPrefix().length() - markdown.getAfterEolPrefixDelta()));
-                    formatter.setFirstIndent(firstIndent);
-                    formatter.setIndent(markdown.getPrefix());
+                // adjust first line width, based on change in prefix after the first line EOL
+                formatter.setFirstWidthOffset(-markdown.column() + markdown.getAfterEolPrefixDelta());
 
-                    // adjust first line width, based on change in prefix after the first line EOL
-//                    formatter.setFirstWidthOffset(markdown.column() - markdown.getAfterEolPrefixDelta());
-                    formatter.setFirstWidthOffset(-markdown.column() + firstIndent.length());
+                if (formatterOptions.applySpecialLeadInHandlers) {
+                    formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
+                }
 
-                    if (formatterOptions.applySpecialLeadInHandlers) {
-                        formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
-                    }
+                for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
+                    assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
+                    formatter.addTrackedOffset(trackedOffset);
+                }
 
-                    for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
-                        assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
-                        formatter.addTrackedOffset(trackedOffset);
-                    }
+                BasedSequence wrappedText = formatter.wrapText().toMapped(SpaceMapper.fromNonBreakSpace);
+                int startLine = markdown.getLineCount();
+                int firstLineOffset = markdown.column();
+                markdown.append(wrappedText).line();
 
-                    int paragraphOffset = markdown.offsetWithPending();// - (markdown.getPrefix().length()-markdown.getAfterEolPrefixDelta());
-                    BasedSequence wrappedText = formatter.wrapText();
+                if (!paragraphTrackedOffsets.isEmpty()) {
+                    final int[] trackedOffsetCount = { paragraphTrackedOffsets.size() };
+                    final int[] length = { 0 };
+                    final int[] startLineSumLength = { 0 };
+                    final int[] startLineSumPrefix = { 0 };
+                    final int[] startLineSumText = { 0 };
+                    markdown.forAllLines(0, (line, index, textStart, textEnd, sumPrefix, sumText, sumLength) -> {
+                        System.out.println(String.format("Line[%d] textStart: %d, textEnd: %d, sumPrefix: %d, sumText: %d, sumLength: %d in '%s'", index+1, textStart, textEnd, sumPrefix, sumText, sumLength, line.getBuilder().append(line).toStringWithRanges(true)));
+                        assert length[0] == sumLength;
+                        if (index >= startLine) {
+                            if (index == startLine) {
+                                startLineSumLength[0] = sumLength;
+                                startLineSumPrefix[0] = sumPrefix;
+                                startLineSumText[0] = sumText;
+                            }
 
-                    // get the indent used for new lines so that index can be adjusted by added indent
-                    int lineIndent = markdown.getPrefix().length();
-                    for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
-                        assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
+                            BasedSequence lineText = line.subSequence(0, textEnd);
+                            int startIndex = sumText - startLineSumText[0];
+                            int endIndex = startIndex + textEnd - textStart;
+                            for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
+                                int offsetIndex = trackedOffset.getIndex();
+                                if (trackedOffset.isResolved() && offsetIndex >= startIndex && offsetIndex <= endIndex) {
+                                    int delta = sumLength + textStart + sumPrefix;
+                                    trackedOffset.setIndex(offsetIndex + delta);
+                                    System.out.println(String.format("Wrap Resolved %d to %d, delta: %d in line[%d]: '%s'", trackedOffset.getOffset(), offsetIndex, delta, index + 1, lineText.getBuilder().append(lineText).toStringWithRanges(true)));
+                                } else {
+                                    System.out.println(String.format("Wrap Unresolved %d in line[%d]: '%s'", trackedOffset.getOffset(), index + 1, lineText.getBuilder().append(lineText).toStringWithRanges(true)));
+                                }
 
-                        if (trackedOffset.isResolved()) {
-                            int interveningLines = wrappedText.countOfAny(CharPredicate.EOL, 0, trackedOffset.getIndex());
-                            trackedOffset.setIndex(trackedOffset.getIndex() + paragraphOffset + interveningLines * lineIndent);
-                            System.out.println(String.format("Wrap Resolved %d to %d in '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), wrappedText));
-                        } else {
-                            System.out.println(String.format("Wrap Unresolved %d in '%s'", trackedOffset.getOffset(), wrappedText));
+                                trackedOffsetCount[0]--;
+                            }
                         }
-                    }
-
-                    markdown.openPreFormatted(false).pushPrefix().setPrefix("", false)
-                            .pushOptions().addOptions(F_NO_TRACKED_OFFSETS)
-                            .append(wrappedText).line()
-                            .popOptions()
-                            .popPrefix().closePreFormatted();
-
-//                    markdown.pushOptions().addOptions(F_NO_TRACKED_OFFSETS).append(wrappedText.toMapped(SpaceMapper.fromNonBreakSpace)).popOptions();
-//                    markdown.line();
-                } else {
-                    CharSequence indent;
-                    CharSequence firstIndent = "";
-
-                    switch (formatterOptions.paragraphContinuationIndent) {
-                        // @formatter:off
-                        case ALIGN_TO_FIRST: indent = markdown.getPrefix(); break;
-                        case INDENT_1: indent = RepeatedSequence.ofSpaces(4); break;
-                        case INDENT_2: indent = RepeatedSequence.ofSpaces(8); break;
-                        case INDENT_3: indent = RepeatedSequence.ofSpaces(12); break;
-
-                        default:
-                        case NONE: indent = ""; break;
-                        // @formatter:on
-                    }
-
-                    System.out.println(String.format("Wrapping indent '%s' '%s'", indent, node.getChars()));
-
-                    formatter.setWidth(formatterOptions.rightMargin);
-                    formatter.setKeepSoftBreaks(false);
-                    formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
-                    formatter.setFirstIndent(firstIndent);
-                    formatter.setIndent(indent);
-                    formatter.setRestoreTrackedSpaces(false);
-
-                    // adjust first line width, based on change in prefix after the first line EOL
-                    formatter.setFirstWidthOffset(-markdown.column());
-
-                    if (formatterOptions.applySpecialLeadInHandlers) {
-                        formatter.setLeadInHandlers(Parser.SPECIAL_LEAD_IN_HANDLERS.get(context.getDocument()));
-                    }
-
-                    for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
-                        assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
-                        formatter.addTrackedOffset(trackedOffset);
-                    }
-
-                    BasedSequence wrappedText = formatter.wrapText().toMapped(SpaceMapper.fromNonBreakSpace);
-
-                    int paragraphOffset = markdown.offset();
-                    for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
-                        assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
-
-                        if (trackedOffset.isResolved()) {
-                            trackedOffset.setIndex(trackedOffset.getIndex() + paragraphOffset);
-                            System.out.println(String.format("Wrap Resolved %d to %d in '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), wrappedText));
-                        } else {
-                            System.out.println(String.format("Wrap Unresolved %d in '%s'", trackedOffset.getOffset(), wrappedText));
-                        }
-                    }
-
-                    markdown.openPreFormatted(false).pushPrefix().setPrefix("", false)
-                            .pushOptions().addOptions(F_NO_TRACKED_OFFSETS)
-                            .append(wrappedText).line()
-                            .popOptions()
-                            .popPrefix().closePreFormatted();
+                        length[0] += line.length();
+                        return trackedOffsetCount[0] > 0;
+                    });
                 }
             } else {
                 context.renderChildren(node);

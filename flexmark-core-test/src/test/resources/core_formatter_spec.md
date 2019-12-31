@@ -3235,7 +3235,7 @@ Document[0, 132]
 
 ## Wrap
 
-```````````````````````````````` example(Wrap: 1) options(right-margin-30)
+```````````````````````````````` example(Wrap: 1) options(margin[30])
 Paragraph with hard break and more text.
 
 Paragraph with soft break and more text.
@@ -3255,7 +3255,7 @@ more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 2) options(right-margin-30)
+```````````````````````````````` example(Wrap: 2) options(margin[30])
 Paragraph with hard break and # more text.
 
 Paragraph with soft break and * more text.
@@ -3275,7 +3275,7 @@ Paragraph with hard break and
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 3) options(right-margin-30, no-apply-escapers)
+```````````````````````````````` example(Wrap: 3) options(margin[30], no-apply-escapers)
 Paragraph with hard break and # more text.
 
 Paragraph with soft break and * more text.
@@ -3295,7 +3295,7 @@ Paragraph with hard break and
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 4) options(right-margin-60, no-soft-breaks)
+```````````````````````````````` example(Wrap: 4) options(margin[60], no-soft-breaks)
 Paragraph with hard break and
 \# more text.
 
@@ -3315,7 +3315,7 @@ Paragraph with hard break and 1. more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 5) options(right-margin-60, no-apply-escapers, no-soft-breaks)
+```````````````````````````````` example(Wrap: 5) options(margin[60], no-apply-escapers, no-soft-breaks)
 Paragraph with hard break and
 \# more text.
 
@@ -3335,7 +3335,7 @@ Paragraph with hard break and 1\. more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 6) options(right-margin-30)
+```````````````````````````````` example(Wrap: 6) options(margin[30])
 * Paragraph with hard break and more text.
 
 1. Paragraph with soft break and more text.
@@ -3350,7 +3350,7 @@ Paragraph with hard break and 1\. more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 7) options(right-margin-30, continuation-indent-none)
+```````````````````````````````` example(Wrap: 7) options(IGNORE, margin[30], -continuation-indent-none)
 * Paragraph with hard break and more text.
 
 1. Paragraph with soft break and more text.
@@ -3365,7 +3365,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 8) options(right-margin-30, continuation-indent-indent-1)
+```````````````````````````````` example(Wrap: 8) options(IGNORE, margin[30], -continuation-indent-indent-1)
 * Paragraph with hard break and more text.
 
 1. Paragraph with soft break and more text.
@@ -3380,7 +3380,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 9) options(right-margin-30, continuation-indent-indent-2)
+```````````````````````````````` example(Wrap: 9) options(IGNORE, margin[30], -continuation-indent-indent-2)
 * Paragraph with hard break and more text.
 
 1. Paragraph with soft break and more text.
@@ -3395,7 +3395,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 10) options(right-margin-30, continuation-indent-indent-3)
+```````````````````````````````` example(Wrap: 10) options(IGNORE, margin[30], -continuation-indent-indent-3)
 * Paragraph with hard break and more text.
 
 1. Paragraph with soft break and more text.
@@ -3410,7 +3410,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 11) options(right-margin-30, explicit-links-at-start)
+```````````````````````````````` example(Wrap: 11) options(margin[30], explicit-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3427,7 +3427,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 12) options(right-margin-30)
+```````````````````````````````` example(Wrap: 12) options(margin[30])
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3444,7 +3444,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 13) options(right-margin-30, image-links-at-start)
+```````````````````````````````` example(Wrap: 13) options(margin[30], image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3505,6 +3505,8 @@ and more text.
 
 ```````````````````````````````` example(Tracked Offset: 3) options(margin[31])
 * Paragraph with hard break and more text. [Test](test) text. 
+
+some text
     
 1. Paragraph with soft break ⦙and more text. ![Test](test) text. 
                                
@@ -3512,6 +3514,8 @@ and more text.
 * Paragraph with hard break and
   more text. [Test](test) text.
 
+some text
+    
 1. Paragraph with soft break
    ⦙and more text. ![Test](test)
    text.

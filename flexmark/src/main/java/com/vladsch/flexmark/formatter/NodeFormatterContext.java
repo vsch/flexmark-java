@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
-import com.vladsch.flexmark.formatter.internal.FormatterOptions;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;

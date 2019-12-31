@@ -84,7 +84,7 @@ public class TrackedOffsetList implements List<TrackedOffset> {
     }
 
     @NotNull
-    public List<TrackedOffset> getTrackedOffsets(int startOffset, int endOffset) {
+    public TrackedOffsetList getTrackedOffsets(int startOffset, int endOffset) {
         OffsetInfo startInfo = myBasedOffsetTracker.getOffsetInfo(startOffset, startOffset == endOffset);
         OffsetInfo endInfo = myBasedOffsetTracker.getOffsetInfo(endOffset, true);
         int startSeg = startInfo.pos;
@@ -96,21 +96,21 @@ public class TrackedOffsetList implements List<TrackedOffset> {
         } else if (startSeg >= 0 && endSeg >= 0) {
             endSeg++;
         } else {
-            return Collections.emptyList();
+            return EMPTY_LIST;
         }
 
         endSeg = Math.min(myBasedOffsetTracker.size(), endSeg);
 
-        if (startSeg >= endSeg) return Collections.emptyList();
+        if (startSeg >= endSeg) return EMPTY_LIST;
         else {
 
             if (myTrackedOffsets.get(startSeg).getOffset() < startOffset) startSeg++;
             if (myTrackedOffsets.get(endSeg - 1).getOffset() > endOffset) endSeg--;
 
-            if (startSeg >= endSeg) return Collections.emptyList();
+            if (startSeg >= endSeg) return EMPTY_LIST;
             else {
 
-                return myTrackedOffsets.subList(startSeg, endSeg);
+                return new TrackedOffsetList(myBaseSeq, myTrackedOffsets.subList(startSeg, endSeg));
             }
         }
     }

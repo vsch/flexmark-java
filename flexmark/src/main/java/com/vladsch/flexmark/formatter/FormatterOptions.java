@@ -1,15 +1,12 @@
-package com.vladsch.flexmark.formatter.internal;
+package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
-import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.options.*;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class FormatterOptions {
@@ -62,7 +59,6 @@ public class FormatterOptions {
     public final boolean escapeNumberedLeadInOnWrap;
     public final boolean unescapeSpecialCharsOnWrap;
     public final CharWidthProvider charWidthProvider;
-    public final ContinuationIndent paragraphContinuationIndent;
     public final ElementAlignment listAlignNumeric;
     public final boolean listResetFirstItemNumber;
     public final String formatterOnTag;
@@ -82,7 +78,6 @@ public class FormatterOptions {
         rightMargin = Formatter.RIGHT_MARGIN.get(options);
         minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
         spaceAfterAtxMarker = Formatter.SPACE_AFTER_ATX_MARKER.get(options);
-        paragraphContinuationIndent = Formatter.CONTINUATION_INDENT.get(options);
         atxHeadingTrailingMarker = Formatter.ATX_HEADING_TRAILING_MARKER.get(options);
         headingStyle = Formatter.HEADING_STYLE.get(options);
         thematicBreak = Formatter.THEMATIC_BREAK.get(options);

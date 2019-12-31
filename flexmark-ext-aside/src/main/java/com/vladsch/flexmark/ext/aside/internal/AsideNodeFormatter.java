@@ -7,7 +7,7 @@ import com.vladsch.flexmark.formatter.NodeFormatter;
 import com.vladsch.flexmark.formatter.NodeFormatterContext;
 import com.vladsch.flexmark.formatter.NodeFormatterFactory;
 import com.vladsch.flexmark.formatter.NodeFormattingHandler;
-import com.vladsch.flexmark.formatter.internal.FormatterOptions;
+import com.vladsch.flexmark.formatter.FormatterOptions;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.LineAppendable;

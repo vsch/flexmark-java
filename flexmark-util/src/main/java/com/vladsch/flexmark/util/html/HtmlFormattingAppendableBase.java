@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 @SuppressWarnings("unchecked")
 public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase<T>> implements HtmlFormattingAppendable {
@@ -477,6 +476,6 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @NotNull @Override public T setPrefix(@Nullable CharSequence prefix, boolean afterEol)                                                                      { appendable.setPrefix(prefix, afterEol); return (T)this; }
     @NotNull @Override public T unIndent()                                                                                                                      { appendable.unIndent(); return (T)this; }
     @NotNull @Override public T unIndentNoEol()                                                                                                                 { appendable.unIndentNoEol();  return (T)this; }
-    @Override public void forAllLines(@NotNull SequenceBuilder builder, int maxBlankLines, @NotNull BiConsumer<BasedSequence, Integer> consumer)                { appendable.forAllLines(builder,maxBlankLines,consumer);}
+    @Override public void forAllLines(int maxBlankLines, @NotNull LineProcessor processor)                                                                      { appendable.forAllLines( maxBlankLines,processor);}
 // @formatter:on
 }
