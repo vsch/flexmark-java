@@ -22,6 +22,7 @@ import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.format.options.BlockQuoteContinuationMarker;
 import com.vladsch.flexmark.util.format.options.BlockQuoteMarker;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
+import com.vladsch.flexmark.util.html.LineInfo;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
@@ -513,7 +514,7 @@ public class FormatterUtils {
                 subContext.renderChildren(node);
 
                 MarkdownWriter subContextMarkdown = subContext.getMarkdown();
-                subContextMarkdown.toBuilder(builder, 0);
+                subContextMarkdown.appendToSilently(builder, 0, 0);
 
                 MarkdownParagraph formatter = new MarkdownParagraph(builder.toSequence(), formatterOptions.charWidthProvider);
                 TrackedOffsetList trackedOffsets = context.getTrackedOffsets();
@@ -547,37 +548,38 @@ public class FormatterUtils {
 
                 if (!paragraphTrackedOffsets.isEmpty()) {
                     final int[] trackedOffsetCount = { paragraphTrackedOffsets.size() };
-                    final int[] length = { 0 };
-                    final int[] startLineSumLength = { 0 };
-                    final int[] startLineSumPrefix = { 0 };
-                    final int[] startLineSumText = { 0 };
-                    markdown.forAllLines(0, (line, index, textStart, textEnd, sumPrefix, sumText, sumLength) -> {
-                        System.out.println(String.format("Line[%d] textStart: %d, textEnd: %d, sumPrefix: %d, sumText: %d, sumLength: %d in '%s'", index+1, textStart, textEnd, sumPrefix, sumText, sumLength, line.getBuilder().append(line).toStringWithRanges(true)));
-                        assert length[0] == sumLength;
-                        if (index >= startLine) {
-                            if (index == startLine) {
-                                startLineSumLength[0] = sumLength;
-                                startLineSumPrefix[0] = sumPrefix;
-                                startLineSumText[0] = sumText;
-                            }
+                    LineInfo startLineInfo = markdown.getLineInfo(startLine);
 
+                    markdown.forAllLines(0, startLine, Integer.MAX_VALUE, (line, lineInfo) -> {
+                        int index = lineInfo.index;
+                        int textStart = lineInfo.prefixLength;
+                        int textEnd = lineInfo.getTextEnd();
+                        int sumPrefix = (lineInfo.sumPrefixLength) - startLineInfo.sumPrefixLength;
+                        int sumText = (lineInfo.sumTextLength) - (startLineInfo.sumTextLength);
+                        int sumLength = (lineInfo.sumLength - lineInfo.length);
+
+                        System.out.println(String.format("Line[%d] textStart: %d, textEnd: %d, firstLine: %d, sumPrefix: %d, sumText: %d, sumLength: %d in '%s'", index + 1, textStart, textEnd, firstLineOffset, sumPrefix, sumText, sumLength, line.getBuilder().append(line).toStringWithRanges(true)));
+                        if (index >= startLine) {
                             BasedSequence lineText = line.subSequence(0, textEnd);
-                            int startIndex = sumText - startLineSumText[0];
-                            int endIndex = startIndex + textEnd - textStart;
+                            int startIndex = sumText - sumPrefix;
+                            int endIndex = startIndex + lineInfo.textLength - (index == startLine ? firstLineOffset : 0);
+
                             for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
                                 int offsetIndex = trackedOffset.getIndex();
-                                if (trackedOffset.isResolved() && offsetIndex >= startIndex && offsetIndex <= endIndex) {
-                                    int delta = sumLength + textStart + sumPrefix;
-                                    trackedOffset.setIndex(offsetIndex + delta);
-                                    System.out.println(String.format("Wrap Resolved %d to %d, delta: %d in line[%d]: '%s'", trackedOffset.getOffset(), offsetIndex, delta, index + 1, lineText.getBuilder().append(lineText).toStringWithRanges(true)));
-                                } else {
-                                    System.out.println(String.format("Wrap Unresolved %d in line[%d]: '%s'", trackedOffset.getOffset(), index + 1, lineText.getBuilder().append(lineText).toStringWithRanges(true)));
-                                }
 
-                                trackedOffsetCount[0]--;
+                                if (startIndex >= 0 && offsetIndex >= startIndex && offsetIndex <= endIndex) {
+                                    if (trackedOffset.isResolved()) {
+                                        int delta = startLineInfo.sumLength - startLineInfo.length + sumPrefix + textStart + (index == startLine ? firstLineOffset : 0);
+                                        trackedOffset.setIndex(offsetIndex + delta);
+                                        System.out.println(String.format("Wrap Resolved %d to %d, delta: %d in line[%d]: '%s'", trackedOffset.getOffset(), offsetIndex, delta, index + 1, lineText.getBuilder().append(lineText).toStringWithRanges(true)));
+                                    } else {
+                                        System.out.println(String.format("Wrap Unresolved %d in line[%d]: '%s'", trackedOffset.getOffset(), index + 1, lineText.getBuilder().append(lineText).toStringWithRanges(true)));
+                                    }
+
+                                    trackedOffsetCount[0]--;
+                                }
                             }
                         }
-                        length[0] += line.length();
                         return trackedOffsetCount[0] > 0;
                     });
                 }
