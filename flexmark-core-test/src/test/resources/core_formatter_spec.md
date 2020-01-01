@@ -3855,11 +3855,10 @@ Document[0, 162]
 ```````````````````````````````` example(Issue - MdNav - 770: 2) options(list-no-item-mismatch-to-new-list)
 1. a
   * b
-
+  
     ```bash
     foo.code
     ```
-
   * c
 .
 1. a
