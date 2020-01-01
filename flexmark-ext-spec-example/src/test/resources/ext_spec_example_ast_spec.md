@@ -88,15 +88,16 @@ Extra spacer
 .
 <hr />
 <hr />
-<pre><code class="language-text">…</code></pre>
+<pre><code class="language-text">…
+</code></pre>
 .
 Document[0, 47]
-  SpecExampleBlock[0, 47] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 27] astSeparator:[27, 29] ast:[29, 30] closingMarker:[31, 47]
+  SpecExampleBlock[0, 47] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 27] astSeparator:[27, 29] ast:[29, 31] closingMarker:[31, 47]
     SpecExampleSource[25, 25]
     SpecExampleSeparator[25, 27] chars:[25, 27, "…\n"]
     SpecExampleHtml[27, 27]
     SpecExampleSeparator[27, 29] chars:[27, 29, "…\n"]
-    SpecExampleAst[29, 30] chars:[29, 30, "…"]
+    SpecExampleAst[29, 31] chars:[29, 31, "…\n"]
 ````````````````````````````````
 
 
@@ -109,11 +110,12 @@ Markdown only
 .
 <hr />
 <hr />
-<pre><code class="language-markdown">Markdown only</code></pre>
+<pre><code class="language-markdown">Markdown only
+</code></pre>
 .
 Document[0, 55]
-  SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
-    SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
+  SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 39] closingMarker:[39, 55]
+    SpecExampleSource[25, 39] chars:[25, 39, "Markd … only\n"]
 ````````````````````````````````
 
 
@@ -176,18 +178,20 @@ Html Only, no AST
 <pre><code class="language-html">&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;Markdown only&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
   &lt;li&gt;List item&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
+&lt;/ul&gt;
+</code></pre>
 <hr />
 <div style="border:solid #cccccc 1px;padding:0 20px 10px 20px;"><pre><code class="language-markdown">Markdown only</code></pre>
 <ul>
   <li>List item</li>
-</ul></div>
+</ul>
+</div>
 .
 Document[0, 139]
-  SpecExampleBlock[0, 139] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 122] closingMarker:[123, 139]
+  SpecExampleBlock[0, 139] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 123] closingMarker:[123, 139]
     SpecExampleSource[25, 25]
     SpecExampleSeparator[25, 27] chars:[25, 27, "…\n"]
-    SpecExampleHtml[27, 122] chars:[27, 122, "<pre> … </ul>"]
+    SpecExampleHtml[27, 123] chars:[27, 123, "<pre> … /ul>\n"]
 ````````````````````````````````
 
 
@@ -240,15 +244,16 @@ Document[0, 56]
 <hr />
 <pre><code class="language-text">Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
-    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
+</code></pre>
 .
 Document[0, 236]
-  SpecExampleBlock[0, 236] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 27] astSeparator:[27, 29] ast:[29, 219] closingMarker:[220, 236]
+  SpecExampleBlock[0, 236] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 27] astSeparator:[27, 29] ast:[29, 220] closingMarker:[220, 236]
     SpecExampleSource[25, 25]
     SpecExampleSeparator[25, 27] chars:[25, 27, "…\n"]
     SpecExampleHtml[27, 27]
     SpecExampleSeparator[27, 29] chars:[27, 29, "…\n"]
-    SpecExampleAst[29, 219] chars:[29, 219, "Docum … nly\"]"]
+    SpecExampleAst[29, 220] chars:[29, 220, "Docum … ly\"]\n"]
 ````````````````````````````````
 
 
@@ -271,18 +276,20 @@ Markdown only
 <pre><code class="language-html">&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;Markdown only&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
   &lt;li&gt;List item&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
+&lt;/ul&gt;
+</code></pre>
 <hr />
 <div style="border:solid #cccccc 1px;padding:0 20px 10px 20px;"><pre><code class="language-markdown">Markdown only</code></pre>
 <ul>
   <li>List item</li>
-</ul></div>
+</ul>
+</div>
 .
 Document[0, 153]
-  SpecExampleBlock[0, 153] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] closingMarker:[137, 153]
+  SpecExampleBlock[0, 153] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 137] closingMarker:[137, 153]
     SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
-    SpecExampleHtml[41, 136] chars:[41, 136, "<pre> … </ul>"]
+    SpecExampleHtml[41, 137] chars:[41, 137, "<pre> … /ul>\n"]
 ````````````````````````````````
 
 
@@ -355,15 +362,16 @@ Document[0, 56]
 <hr />
 <pre><code class="language-text">Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
-    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
+</code></pre>
 .
 Document[0, 346]
-  SpecExampleBlock[0, 346] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 329] closingMarker:[330, 346]
+  SpecExampleBlock[0, 346] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 330] closingMarker:[330, 346]
     SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
     SpecExampleHtml[41, 136] chars:[41, 136, "<pre> … </ul>"]
     SpecExampleSeparator[137, 139] chars:[137, 139, "…\n"]
-    SpecExampleAst[139, 329] chars:[139, 329, "Docum … nly\"]"]
+    SpecExampleAst[139, 330] chars:[139, 330, "Docum … ly\"]\n"]
 ````````````````````````````````
 
 
@@ -399,15 +407,16 @@ Document[0, 56]
 <hr />
 <pre><code class="text">Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
-    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
+</code></pre>
 .
 Document[0, 346]
-  SpecExampleBlock[0, 346] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 329] closingMarker:[330, 346]
+  SpecExampleBlock[0, 346] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 330] closingMarker:[330, 346]
     SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
     SpecExampleHtml[41, 136] chars:[41, 136, "<pre> … </ul>"]
     SpecExampleSeparator[137, 139] chars:[137, 139, "…\n"]
-    SpecExampleAst[139, 329] chars:[139, 329, "Docum … nly\"]"]
+    SpecExampleAst[139, 330] chars:[139, 330, "Docum … ly\"]\n"]
 ````````````````````````````````
 
 
@@ -878,19 +887,20 @@ Document[0, 56]
   <dd>
   <pre><code class="language-text">Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
-    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
+</code></pre>
   </dd>
 </dl>
 .
 Document[0, 349]
-  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
+  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 333] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
     SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
     SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
     SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
     SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
-    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
+    SpecExampleAst[142, 333] chars:[142, 333, "Docum … ly\"]\n"]
 ````````````````````````````````
 
 
@@ -927,14 +937,14 @@ Document[0, 56]
 </code></pre>
 .
 Document[0, 349]
-  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
+  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 333] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
     SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
     SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
     SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
     SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
-    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
+    SpecExampleAst[142, 333] chars:[142, 333, "Docum … ly\"]\n"]
 ````````````````````````````````
 
 
@@ -991,17 +1001,18 @@ Document[0, 56]
 <hr />
 <pre><code class="language-text" md-pos="142-332">Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
-    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
+</code></pre>
 .
 Document[0, 349]
-  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
+  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 333] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
     SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
     SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
     SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
     SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
-    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
+    SpecExampleAst[142, 333] chars:[142, 333, "Docum … ly\"]\n"]
 ````````````````````````````````
 
 
@@ -1038,14 +1049,14 @@ Document[0, 56]
 </code></pre>
 .
 Document[0, 349]
-  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
+  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 333] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
     SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
     SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
     SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
     SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
-    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
+    SpecExampleAst[142, 333] chars:[142, 333, "Docum … ly\"]\n"]
 ````````````````````````````````
 
 
@@ -1093,19 +1104,20 @@ Document[0, 56]
   <dd>
   <pre><code class="language-text" md-pos="142-332">Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
-    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
+</code></pre>
   </dd>
 </dl>
 .
 Document[0, 349]
-  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
+  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 333] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
     SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
     SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
     SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
     SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
-    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
+    SpecExampleAst[142, 333] chars:[142, 333, "Docum … ly\"]\n"]
 ````````````````````````````````
 
 
