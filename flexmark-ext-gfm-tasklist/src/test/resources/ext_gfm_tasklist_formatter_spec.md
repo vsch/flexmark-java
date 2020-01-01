@@ -1352,7 +1352,27 @@ do add blank line if blank line is after sub-list in middle of list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Prioritized - Offset Tracking: 15) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+```````````````````````````````` example(Prioritized - Offset Tracking: 15) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[31])
+* item 
+  1. [ ] Add: this text should wrap and resolve caret and even on the third line.⦙ 
+* Add: 
+* [ ] Add: 
+* [ ] Fix: 
+  + [ ] do not 
+.
+* item
+  1. [ ] Add: this text should
+     wrap and resolve caret and
+     even on the third line.⦙
+* [ ] Fix:
+  + [ ] do not
+* [ ] Add:
+* Add:
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Prioritized - Offset Tracking: 16) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
 * item 
   ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add:⦙ 
 ⦙*⦙ ⦙Add:⦙ 
@@ -1370,7 +1390,7 @@ do add blank line if blank line is after sub-list in middle of list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Prioritized - Offset Tracking: 16) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+```````````````````````````````` example(Prioritized - Offset Tracking: 17) options(prioritized-tasks, ordered-task-item-priority-high, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
 * item 
   1. [ ] Add: 
 * ⦙Add: 
@@ -1388,7 +1408,7 @@ do add blank line if blank line is after sub-list in middle of list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Prioritized - Offset Tracking: 17) options(prioritized-tasks, ordered-task-item-priority-normal, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+```````````````````````````````` example(Prioritized - Offset Tracking: 18) options(prioritized-tasks, ordered-task-item-priority-normal, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
 * item
   ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add:⦙ 
 ⦙*⦙ ⦙Add:⦙ 
@@ -1406,7 +1426,7 @@ do add blank line if blank line is after sub-list in middle of list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Prioritized - Offset Tracking: 18) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+```````````````````````````````` example(Prioritized - Offset Tracking: 19) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
 * item
   1. [ ] ⦙Add1: 
 * Add2: 
@@ -1424,7 +1444,7 @@ do add blank line if blank line is after sub-list in middle of list
 ````````````````````````````````
 
 
-```````````````````````````````` example(Prioritized - Offset Tracking: 19) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
+```````````````````````````````` example(Prioritized - Offset Tracking: 20) options(prioritized-tasks, ordered-task-item-priority-low, list-bullet-asterisk, task-placement-incomplete-nested-first, margin[96])
 * item
   ⦙1⦙.⦙ ⦙[⦙ ⦙]⦙ ⦙Add1:⦙ 
 ⦙*⦙ ⦙Add2:⦙ 
