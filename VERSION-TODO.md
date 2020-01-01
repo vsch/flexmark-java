@@ -217,7 +217,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.92
+## 0.59.92
 
 * Fix: `LineAppendableImpl.appendTo` and all context rendering methods `flushTo()` now take a
   separate arguments for `maxBlankLines` which applies to body of text.
