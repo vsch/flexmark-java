@@ -91,7 +91,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
                 }
             }
 
-            if (markerSuffix.isNotNull() && formatOptions.formatPrioritizedTaskItems) {
+            if (markerSuffix.isNotEmpty() && formatOptions.formatPrioritizedTaskItems) {
                 node.setCanChangeMarker(false);
             }
 

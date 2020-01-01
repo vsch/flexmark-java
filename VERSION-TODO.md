@@ -8,6 +8,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.94](#next-05994)
 - [0.59.92](#05992)
 - [0.59.90](#05990)
 - [0.59.88](#05988)
@@ -217,11 +218,18 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
+## Next 0.59.94
+
+* Fix: task bullet marker would not be changed if complete task changed to non-task during
+  formatting.
+
 ## 0.59.92
 
+* Break: rename `SpecReader.TYPE_TEST_BREAK` and `SpecReader.TYPE_BREAK` to
+  `SpecReader.SECTION_TEST_BREAK` and `SpecReader.SECTION_BREAK` respectively.
 * Fix: `LineAppendableImpl.appendTo` and all context rendering methods `flushTo()` now take a
-  separate arguments for `maxBlankLines` which applies to body of text.
-  `maxTrailingBlankLines` which applies to trailing blank lines in appendable.
+  separate arguments for `maxBlankLines` which applies to body of text. `maxTrailingBlankLines`
+  which applies to trailing blank lines in appendable.
 * Fix: `LineAppendableImpl` re-implement and clean up using a more consistent model for
   accumulating and manipulating lines of output.
   * Add: separate arguments for `maxBlankLines` which applies to body of text and

@@ -926,6 +926,26 @@ Document[0, 65]
 ````````````````````````````````
 
 
+## To Non-Task
+
+```````````````````````````````` example(To Non-Task: 1) options(prioritized-tasks, list-bullet-asterisk, task-placement-complete-nested-to-non-task, margin[72])
+⦙- [x] Was complete low Fix: nasty bug introducing typing delay with preview enabled.
+.
+⦙* Was complete low Fix: nasty bug introducing typing delay with preview
+  enabled.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(To Non-Task: 2) options(prioritized-tasks, list-bullet-asterisk, task-placement-complete-to-non-task, margin[72])
+⦙- [x] Was complete low Fix: nasty bug introducing typing delay with preview enabled.
+.
+⦙* Was complete low Fix: nasty bug introducing typing delay with preview
+  enabled.
+
+````````````````````````````````
+
+
 ## Prioritized
 
 ```````````````````````````````` example(Prioritized: 1) options(prioritized-tasks, task-placement-incomplete-nested-first, list-bullet-asterisk)
