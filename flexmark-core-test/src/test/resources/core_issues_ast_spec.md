@@ -2462,7 +2462,7 @@ Issue #770
 
 blank line before fenced code is not signal of a loose list
 
-```````````````````````````````` example MdNav - 770: 1
+```````````````````````````````` example(MdNav - 770: 1) options(FAIL)
 * b
 
   ```bash

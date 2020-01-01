@@ -229,6 +229,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * Fix: add extra blank line after spec example
   * Fix: parser to not remove trailing EOLs in spec example sections
   * Fix: formatter to preserve all whitespace in spec examples
+  * Fix: format options by spacing commas and removing any repeated commas
 * Fix: `Formatter` tracked offset at EOL resolving for any offsets not handled by elements.
 
 ## 0.59.92

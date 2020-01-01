@@ -91,7 +91,7 @@ public class SpecExampleNodeFormatter implements NodeFormatter {
                     node.getSource(),
                     node.getHtml(),
                     node.getAst(),
-                    node.getOptions(),
+                    optionsSet,
                     true,
                     node.getSection().equals(mySection) ? node.getSection() : builder.getBuilder().append(node.getSection().getEmptyPrefix()).append(mySection).append(node.getSection().getEmptySuffix()).toSequence(),
                     node.getNumber().equals(exampleNumber) ? node.getNumber() : builder.getBuilder().append(node.getNumber().getEmptyPrefix()).append(exampleNumber).append(node.getNumber().getEmptySuffix()).toSequence(),

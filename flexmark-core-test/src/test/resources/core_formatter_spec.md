@@ -3830,7 +3830,7 @@ Document[0, 162]
 
 #### 770
 
-```````````````````````````````` example(Issue - MdNav - 770: 1) options(list-no-delimiter-mismatch-to-new-list)
+```````````````````````````````` example(Issue - MdNav - 770: 1) options(FAIL, list-no-delimiter-mismatch-to-new-list)
 1. a
   * b
 
@@ -3852,7 +3852,7 @@ Document[0, 162]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue - MdNav - 770: 2) options(list-no-item-mismatch-to-new-list)
+```````````````````````````````` example(Issue - MdNav - 770: 2) options(FAIL, list-no-item-mismatch-to-new-list)
 1. a
   * b
   

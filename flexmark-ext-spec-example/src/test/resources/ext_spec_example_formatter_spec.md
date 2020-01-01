@@ -8,11 +8,13 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## Spec Example
+# Spec Example
+
+## Empty Sections
 
 empty sections should be preserved
 
-```````````````````````````````` example Spec Example: 1
+```````````````````````````````` example Empty Sections: 1
 ---
 title: Intentions Spec
 author:
@@ -41,7 +43,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 2
+```````````````````````````````` example Empty Sections: 2
 ---
 title: Intentions Spec
 author:
@@ -72,7 +74,10 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 3
+## Basic
+
+
+```````````````````````````````` example Basic: 1
 ---
 title: Intentions Spec
 author:
@@ -102,7 +107,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 4
+```````````````````````````````` example Basic: 2
 ---
 title: Intentions Spec
 author:
@@ -139,7 +144,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 5
+```````````````````````````````` example Basic: 3
 ---
 title: Intentions Spec
 author:
@@ -175,7 +180,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 6
+```````````````````````````````` example Basic: 4
 ---
 title: Intentions Spec
 author:
@@ -209,7 +214,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 7
+```````````````````````````````` example Basic: 5
 ---
 title: Intentions Spec
 author:
@@ -246,7 +251,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 8
+```````````````````````````````` example Basic: 6
 ---
 title: Intentions Spec
 author:
@@ -280,9 +285,11 @@ Markdown only
 ````````````````````````````````
 
 
+## Preserve Whitespace
+
 preserve blank lines and spaces
 
-```````````````````````````````` example Spec Example: 9
+```````````````````````````````` example Preserve Whitespace: 1
 ---
 title: Intentions Spec
 author:
@@ -346,7 +353,7 @@ Document[0, 246]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 10
+```````````````````````````````` example Preserve Whitespace: 2
 ---
 title: Intentions Spec
 author:
@@ -422,6 +429,80 @@ Document[0, 53]
   Paragraph[0, 53]
     Link[0, 53] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] url:[21, 43, "link\" with spaces.html"] pageRef:[21, 43, "link\" with spaces.html"] titleOpen:[45, 46, "'"] title:[46, 51, "title"] titleClose:[51, 52, "'"] linkClose:[52, 53, ")"]
       Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````
+
+
+````````````````````````````````
+
+
+## Options
+
+```````````````````````````````` example Options: 1
+## Section    
+    
+```````````````` example options test
+Markdown only
+````````````````
+.
+## Section
+
+```````````````` example(Section: 1) options(test)
+Markdown only
+…
+````````````````
+
+
+````````````````````````````````
+
+
+```````````````````````````````` example Options: 2
+## Section    
+    
+```````````````` example options test,option2
+Markdown only
+````````````````
+.
+## Section
+
+```````````````` example(Section: 1) options(test, option2)
+Markdown only
+…
+````````````````
+
+
+````````````````````````````````
+
+
+```````````````````````````````` example Options: 3
+## Section    
+    
+```````````````` example options test,   option2
+Markdown only
+````````````````
+.
+## Section
+
+```````````````` example(Section: 1) options(test, option2)
+Markdown only
+…
+````````````````
+
+
+````````````````````````````````
+
+
+```````````````````````````````` example Options: 4
+## Section    
+    
+```````````````` example options test, , ,,  ,   option2
+Markdown only
+````````````````
+.
+## Section
+
+```````````````` example(Section: 1) options(test, option2)
+Markdown only
+…
 ````````````````
 
 
