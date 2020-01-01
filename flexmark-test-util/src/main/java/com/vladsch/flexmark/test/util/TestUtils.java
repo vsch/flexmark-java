@@ -15,7 +15,7 @@ import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
-import com.vladsch.flexmark.util.sequence.RichSequenceImpl;
+import com.vladsch.flexmark.util.sequence.RichSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.AssumptionViolatedException;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,8 +40,11 @@ import static com.vladsch.flexmark.test.util.spec.SpecReader.EXAMPLE_KEYWORD;
 import static com.vladsch.flexmark.util.Utils.removePrefix;
 import static com.vladsch.flexmark.util.Utils.removeSuffix;
 import static com.vladsch.flexmark.util.Utils.suffixWith;
-import static com.vladsch.flexmark.util.Utils.suffixWithEol;
 import static com.vladsch.flexmark.util.Utils.wrapWith;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.endsWithEOL;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.isEmpty;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.trim;
 
 public class TestUtils {
     public static final char MARKUP_CARET_CHAR = '⦙';
@@ -170,7 +174,7 @@ public class TestUtils {
     @NotNull
     public static Pair<String, Integer> addSpecSection(@NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
         assert sectionHeadings.length == 7;
-        int lastSectionLevel = Math.max(1, Math.min(6, RichSequenceImpl.of(headingLine).countLeading(SequenceUtils.HASH_SET)));
+        int lastSectionLevel = Math.max(1, Math.min(6, RichSequence.of(headingLine).countLeading(SequenceUtils.HASH_SET)));
         sectionHeadings[lastSectionLevel] = headingText;
         int iMax = 7;
         for (int i = lastSectionLevel + 1; i < iMax; i++) {
@@ -335,50 +339,122 @@ public class TestUtils {
     }
 
     public static void addSpecExample(
-            String exampleBreak,
-            String sectionBreak,
+            CharSequence exampleBreak,
+            CharSequence sectionBreak,
             boolean includeExampleStart,
             boolean toVisibleSpecText,
-            StringBuilder sb,
-            String source,
-            String html,
-            String ast,
-            String optionsSet,
+            Appendable out,
+            CharSequence source,
+            CharSequence html,
+            CharSequence ast,
+            CharSequence optionsSet,
             boolean includeExampleCoords,
-            String section,
+            CharSequence section,
             int number
     ) {
-        // include source so that diff can be used to update spec
-        StringBuilder header = new StringBuilder();
+        addSpecExample(
+                (CharSequence) exampleBreak,
+                (CharSequence) sectionBreak,
+                (CharSequence) sectionBreak,
+                (CharSequence) exampleBreak,
+                includeExampleStart,
+                toVisibleSpecText,
+                out,
+                (CharSequence) source,
+                (CharSequence) html,
+                (CharSequence) ast,
+                (CharSequence) optionsSet,
+                includeExampleCoords,
+                (CharSequence) section,
+                Integer.toString(number),
+                EXAMPLE_KEYWORD,
+                SpecReader.OPTIONS_KEYWORD);
+    }
 
-        if (includeExampleStart) {
-            header.append(exampleBreak).append(' ').append(EXAMPLE_KEYWORD);
-            if (includeExampleCoords) {
-                if (optionsSet != null) {
-                    header.append("(").append(section == null ? "" : section.trim()).append(": ").append(number).append(")");
-                } else {
-                    header.append(" ").append(section == null ? "" : section.trim()).append(": ").append(number);
+    public static void addSpecExample(
+            CharSequence exampleBreakOpen,
+            CharSequence htmlBreak,
+            CharSequence astBreak,
+            CharSequence exampleBreakClose,
+            boolean includeExampleStart,
+            boolean toVisibleSpecText,
+            Appendable out,
+            CharSequence source,
+            CharSequence html,
+            CharSequence ast,
+            CharSequence optionsSet,
+            boolean includeExampleCoords,
+            CharSequence section,
+            CharSequence number,
+            CharSequence exampleKeyword,
+            CharSequence optionsKeyword
+    ) {
+        // include source so that diff can be used to update spec
+//        StringBuilder header = new StringBuilder();
+
+        try {
+            if (includeExampleStart) {
+                out.append(exampleBreakOpen).append(' ').append(exampleKeyword);
+                if (includeExampleCoords) {
+                    if (optionsSet != null && !isBlank(optionsSet)) {
+                        out.append("(").append(section == null || section == BasedSequence.NULL ? "" : trim(section)).append(": ").append(number).append(")");
+                    } else {
+                        out.append(" ").append(section == null || section == BasedSequence.NULL ? "" : trim(section)).append(": ").append(number);
+                    }
+                }
+                if (optionsSet != null && !isBlank(optionsSet)) {
+                    out.append(' ').append(optionsKeyword).append("(").append(optionsSet).append(")");
+                }
+                out.append("\n");
+            }
+
+            // NOTE: replacing spaces so GitHub can display example as code fence, but not for original spec which has no coords
+            //   is no longer an issue since GitHub switched to CommonMark parser a while back
+//        if (includeExampleCoords) { sb.append(header.toString().replace(' ', '\u00A0')); } else sb.append(header.toString());
+//            out.append(header);
+
+            // FIX: When multi-sections are implemented need a way to specify per section visibleSpecText
+            if (toVisibleSpecText) {
+                if (!isEmpty(source)) {
+                    out.append(toVisibleSpecText(source));
+                    if (!endsWithEOL(source)) out.append("\n");
+                }
+
+                out.append(htmlBreak);
+                if (!endsWithEOL(htmlBreak)) out.append("\n");
+
+                if (html != null && !isEmpty(html)) {
+                    out.append(toVisibleSpecText(html));
+                    if (!endsWithEOL(html)) out.append("\n");
+                }
+            } else {
+                if (!isEmpty(source)) {
+                    out.append(source);
+                    if (!endsWithEOL(source)) out.append("\n");
+                }
+
+                out.append(htmlBreak);
+                if (!endsWithEOL(htmlBreak)) out.append("\n");
+
+                if (html != null && !isEmpty(html)) {
+                    out.append(html);
+                    if (!endsWithEOL(html)) out.append("\n");
                 }
             }
-            if (optionsSet != null) {
-                header.append(SpecReader.OPTIONS_STRING + "(").append(optionsSet).append(")");
+            if (ast != null && ast != BasedSequence.NULL) {
+                out.append(astBreak);
+                if (!endsWithEOL(htmlBreak)) out.append("\n");
+
+                if (!isEmpty(ast)) {
+                    out.append(ast);
+                    if (!endsWithEOL(ast)) out.append("\n");
+                }
             }
-            header.append("\n");
+            out.append(exampleBreakClose);
+            if (!endsWithEOL(exampleBreakClose)) out.append("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        // NOTE: replacing spaces so GitHub can display example as code fence, but not for original spec which has no coords
-        //   is no longer an issue since GitHub switched to CommonMark parser a while back
-//        if (includeExampleCoords) { sb.append(header.toString().replace(' ', '\u00A0')); } else sb.append(header.toString());
-        sb.append(header);
-
-        // FIX: When multi-sections are implemented need a way to specify per section visibleSpecText
-        String sourceAndHtml = suffixWithEol(source) + (sectionBreak) + "\n" + suffixWithEol(html);
-        sb.append(toVisibleSpecText ? toVisibleSpecText(sourceAndHtml) : sourceAndHtml);
-        if (ast != null) {
-            sb.append(sectionBreak).append("\n");
-            sb.append(suffixWithEol(ast));
-        }
-        sb.append(exampleBreak).append("\n");
     }
 
     /**
@@ -401,7 +477,19 @@ public class TestUtils {
     public static String toVisibleSpecText(String s) {
         if (s == null) return "";
         // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as ⎮23ae, CR ⏎ 23ce, LS to U+27A5 ➥
-        return s
+        return toVisibleSpecText((CharSequence) s).toString();
+    }
+
+    /**
+     * @param s text to convert to visible chars
+     *
+     * @return spec test special chars converted to visible
+     */
+    public static CharSequence toVisibleSpecText(CharSequence s) {
+        if (s == null) return "";
+        // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as ⎮23ae, CR ⏎ 23ce, LS to U+27A5 ➥
+        BasedSequence sequence = BasedSequence.of(s);
+        return sequence
                 .replace("\u2192", "&#2192;").replace("\t", "\u2192")
                 .replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae")
                 .replace("\u23ce", "&#23ce").replace("\r", "\u23ce")

@@ -762,6 +762,18 @@ public class LineAppendableImpl implements LineAppendable {
         return out.toString();
     }
 
+    @NotNull
+    @Override
+    public CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines) {
+        ISequenceBuilder<?,?> out = getBuilder();
+        try {
+            appendTo(out, maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
+        } catch (IOException ignored) {
+
+        }
+        return out.toSequence();
+    }
+
     @Override
     public <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException {
         line();

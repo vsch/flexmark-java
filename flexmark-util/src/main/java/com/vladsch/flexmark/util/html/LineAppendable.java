@@ -582,6 +582,17 @@ public interface LineAppendable extends Appendable {
     String toString(int maxBlankLines, int maxTrailingBlankLines);
 
     /**
+     * get the resulting text for all lines
+     *
+     * @param maxBlankLines         maximum blank lines to allow in the text
+     * @param maxTrailingBlankLines maximum trailing blank lines
+     *
+     * @return resulting text
+     */
+    @NotNull
+    CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines);
+
+    /**
      * append lines to appendable with given maximum trailing blank lines
      *
      * @param out                   appendable to output the resulting lines

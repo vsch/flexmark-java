@@ -428,8 +428,9 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @NotNull @Override public CharSequence getPrefix()                                                                          { return appendable.getPrefix(); }
     @NotNull @Override public CharSequence getBeforeEolPrefix()                                                                 { return appendable.getBeforeEolPrefix(); }
     @NotNull @Override public LineInfo getLineInfo(int lineIndex)                                                               { return appendable.getLineInfo(lineIndex); }
-    @Override public@NotNull  BasedSequence getLine(int lineIndex)                                                               { return appendable.getLine(lineIndex); }
+    @Override public@NotNull  BasedSequence getLine(int lineIndex)                                                              { return appendable.getLine(lineIndex); }
     @NotNull @Override public CharSequence getIndentPrefix()                                                                    { return appendable.getIndentPrefix(); }
+    @NotNull @Override public CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines)                             { return appendable.toSequence(maxBlankLines, maxTrailingBlankLines); }
     @NotNull @Override public String toString(int maxBlankLines, int maxTrailingBlankLines)                                     { return appendable.toString(maxBlankLines, maxTrailingBlankLines); }
     @NotNull @Override public BitFieldSet<Options> getOptionSet()                                                               { return appendable.getOptionSet();}
     @NotNull @Override public T normalizeTo(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine)           { appendable.normalizeTo(maxBlankLines, maxTrailingBlankLines, startLine, endLine); return (T) this; }

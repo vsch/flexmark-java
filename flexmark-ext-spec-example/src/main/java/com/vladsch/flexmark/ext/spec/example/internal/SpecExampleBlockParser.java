@@ -1,8 +1,29 @@
 package com.vladsch.flexmark.ext.spec.example.internal;
 
-import com.vladsch.flexmark.ext.spec.example.*;
-import com.vladsch.flexmark.parser.block.*;
-import com.vladsch.flexmark.parser.core.*;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleAst;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleBlock;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleHtml;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleOption;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleOptionSeparator;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleOptionsList;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleSeparator;
+import com.vladsch.flexmark.ext.spec.example.SpecExampleSource;
+import com.vladsch.flexmark.parser.block.AbstractBlockParser;
+import com.vladsch.flexmark.parser.block.AbstractBlockParserFactory;
+import com.vladsch.flexmark.parser.block.BlockContinue;
+import com.vladsch.flexmark.parser.block.BlockParser;
+import com.vladsch.flexmark.parser.block.BlockParserFactory;
+import com.vladsch.flexmark.parser.block.BlockStart;
+import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
+import com.vladsch.flexmark.parser.block.MatchedBlockParser;
+import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.parser.core.BlockQuoteParser;
+import com.vladsch.flexmark.parser.core.FencedCodeBlockParser;
+import com.vladsch.flexmark.parser.core.HeadingParser;
+import com.vladsch.flexmark.parser.core.HtmlBlockParser;
+import com.vladsch.flexmark.parser.core.IndentedCodeBlockParser;
+import com.vladsch.flexmark.parser.core.ListBlockParser;
+import com.vladsch.flexmark.parser.core.ThematicBreakParser;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
@@ -20,11 +41,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.test.util.spec.SpecReader.EXAMPLE_KEYWORD;
-import static com.vladsch.flexmark.test.util.spec.SpecReader.OPTIONS_KEYWORD;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 public class SpecExampleBlockParser extends AbstractBlockParser {
-    private static final Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:()]*)(?:(:)\\s*([^\\s()]+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^()\\n\\r]*)(\\))?)?\\s*$".replace("options", OPTIONS_KEYWORD));
+    private static final Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:()]*)(?:(:)\\s*([^\\s()]+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^()\\n\\r]*)(\\))?)?\\s*$");
     private static final int GROUP_COORD_OPEN = 1;
     private static final int GROUP_SECTION = 2;
     private static final int GROUP_NUMBER_SEPARATOR = 3;
@@ -60,7 +80,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
 
     @Override
     public void addLine(ParserState state, BasedSequence line) {
-        content.add(line, state.getIndent());
+        content.add(line, 0);
     }
 
     @Override
@@ -184,7 +204,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                         if (inSource) {
                             inSource = false;
                             if (sectionStart != -1) {
-                                block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(SequenceUtils.ANY_EOL_SET)));
+                                block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset()));
                             } else {
                                 block.setSource(line.subSequence(0, 0));
                             }
@@ -194,7 +214,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                         } else if (inHtml) {
                             inHtml = false;
                             if (sectionStart != -1) {
-                                block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(SequenceUtils.ANY_EOL_SET)));
+                                block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset()));
                             } else {
                                 block.setHtml(line.subSequence(0, 0));
                             }
@@ -212,25 +232,23 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                         }
                     }
 
-                    prevLine = line;
-
                     if (line == lastLine) {
                         // done
                         if (inSource) {
                             if (sectionStart != -1) {
-                                block.setSource(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(SequenceUtils.ANY_EOL_SET)));
+                                block.setSource(line.baseSubSequence(sectionStart, line.getEndOffset()));
                             } else {
                                 block.setSource(line.subSequence(line.length(), line.length()));
                             }
                         } else if (inHtml) {
                             if (sectionStart != -1) {
-                                block.setHtml(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(SequenceUtils.ANY_EOL_SET)));
+                                block.setHtml(line.baseSubSequence(sectionStart, line.getEndOffset()));
                             } else {
                                 block.setHtml(line.subSequence(line.length(), line.length()));
                             }
                         } else if (inAst) {
                             if (sectionStart != -1) {
-                                block.setAst(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(SequenceUtils.ANY_EOL_SET)));
+                                block.setAst(line.baseSubSequence(sectionStart, line.getEndOffset()));
                             } else {
                                 block.setAst(line.subSequence(line.length(), line.length()));
                             }
@@ -238,6 +256,8 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
 
                         break;
                     }
+
+                    prevLine = line;
                 }
 
                 // here if we create section nodes

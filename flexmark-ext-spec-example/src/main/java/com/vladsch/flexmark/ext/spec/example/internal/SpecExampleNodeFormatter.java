@@ -7,16 +7,19 @@ import com.vladsch.flexmark.formatter.NodeFormatter;
 import com.vladsch.flexmark.formatter.NodeFormatterContext;
 import com.vladsch.flexmark.formatter.NodeFormatterFactory;
 import com.vladsch.flexmark.formatter.NodeFormattingHandler;
-import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
 import com.vladsch.flexmark.test.util.TestUtils;
+import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SpecExampleNodeFormatter implements NodeFormatter {
@@ -60,25 +63,54 @@ public class SpecExampleNodeFormatter implements NodeFormatter {
     void render(SpecExampleBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (!context.isTransformingText()) {
             markdown.blankLine();
-            StringBuilder out = new StringBuilder();
+
+            BasedSequence optionsSet = node.getOptions();
+            @NotNull List<BasedSequence> optionsList = optionsSet.splitList(",", 0, BasedSequence.SPLIT_INCLUDE_DELIM_PARTS | BasedSequence.SPLIT_TRIM_SKIP_EMPTY, CharPredicate.SPACE_TAB);
+            SequenceBuilder builder = node.getChars().getBuilder();
+            if (optionsList.isEmpty()) optionsSet = BasedSequence.NULL;
+            else {
+                for (BasedSequence option : optionsList) {
+                    builder.append(option);
+                    if (option.equals(",")) builder.append(' ');
+                }
+                optionsSet = builder.toSequence();
+            }
+
+            MarkdownWriter out = new MarkdownWriter(builder.getBuilder(), markdown.getOptions());
+            out.openPreFormatted(false).removeOptions(LineAppendable.F_WHITESPACE_REMOVAL);
+
+            String exampleNumber = Integer.toString(++myFlexMarkExampleCount);
             TestUtils.addSpecExample(
-                    formatOptions.exampleBreak,
-                    formatOptions.sectionBreak,
+                    node.getOpeningMarker().equals(formatOptions.exampleBreak) ? node.getOpeningMarker() : formatOptions.exampleBreak,
+                    node.getHtmlSeparator().equals(formatOptions.sectionBreak + "\n") ? node.getHtmlSeparator() : formatOptions.sectionBreak,
+                    node.getAstSeparator().equals(formatOptions.sectionBreak + "\n") ? node.getAstSeparator() : formatOptions.sectionBreak,
+                    node.getClosingMarker().equals(formatOptions.exampleBreak) ? node.getClosingMarker() : formatOptions.exampleBreak,
                     true,
                     false,
                     out,
-                    node.getSource().toStringOrNull(),
-                    node.getHtml().toStringOrNull(),
-                    node.getAst().toStringOrNull(),
-                    node.getOptions().trim().nullIfBlank().toStringOrNull(),
+                    node.getSource(),
+                    node.getHtml(),
+                    node.getAst(),
+                    node.getOptions(),
                     true,
-                    mySection,
-                    myFlexMarkExampleCount + 1
-            );
+                    node.getSection().equals(mySection) ? node.getSection() : builder.getBuilder().append(node.getSection().getEmptyPrefix()).append(mySection).append(node.getSection().getEmptySuffix()).toSequence(),
+                    node.getNumber().equals(exampleNumber) ? node.getNumber() : builder.getBuilder().append(node.getNumber().getEmptyPrefix()).append(exampleNumber).append(node.getNumber().getEmptySuffix()).toSequence(),
+                    node.getExampleKeyword(),
+                    node.getOptionsKeyword().equals(SpecReader.OPTIONS_KEYWORD) ? node.getOptionsKeyword() : SpecReader.OPTIONS_KEYWORD);
+
+            out.line().closePreFormatted();
+
+            BasedSequence result = BasedSequence.of(out.toSequence(Integer.MAX_VALUE, Integer.MAX_VALUE));
+//            SequenceBuilder resultBuilder = builder.getBuilder();
+//            result.addSegments(resultBuilder.getSegmentBuilder());
+//            System.out.println(resultBuilder.getSegmentBuilder().toStringWithRanges());
 
             markdown.pushOptions()
+                    .openPreFormatted(false)
                     .removeOptions(LineAppendable.F_WHITESPACE_REMOVAL)
-                    .append(out.toString()).line()
+                    .append(result).line()
+                    .closePreFormatted()
+                    .blankLine(2)
                     .popOptions();
         } else {
             context.delegateRender();

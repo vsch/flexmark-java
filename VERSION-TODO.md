@@ -222,8 +222,14 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: task bullet marker would not be changed if complete task changed to non-task during
   formatting.
-* Fix: `TestUtils.addSpecExample()` to add EOL after ast if not already terminated. This was
-  causing spec example formatting to mess up.
+* Fix: Spec test file formatting
+  * not incrementing example count
+  * Fix: `TestUtils.addSpecExample()` to add EOL after ast if not already terminated. This was
+    causing spec example formatting to mess up.
+  * Fix: add extra blank line after spec example
+  * Fix: parser to not remove trailing EOLs in spec example sections
+  * Fix: formatter to preserve all whitespace in spec examples
+* Fix: `Formatter` tracked offset at EOL resolving for any offsets not handled by elements.
 
 ## 0.59.92
 

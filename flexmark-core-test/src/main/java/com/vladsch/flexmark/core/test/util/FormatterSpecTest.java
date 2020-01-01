@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +54,10 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                 } else {
                     SequenceBuilder builder = getDocument().getDocument().getChars().getBuilder();
                     String html = ((Formatter) getRenderer()).render(getDocument(), builder);
+                    String builderHtml = builder.toSequence().toString();
+
+                    Assert.assertEquals(html, builderHtml);
+
                     List<TrackedOffset> trackedOffsetList = Formatter.TRACKED_OFFSETS.get(getDocument().getDocument());
                     assert trackedOffsetList == trackedOffsets;
 

@@ -72,10 +72,10 @@ public interface SequenceUtils {
     @Deprecated
     char LSEP = LS;
 
-    int SPLIT_INCLUDE_DELIMS = 1;
-    int SPLIT_TRIM_PARTS = 2;
-    int SPLIT_SKIP_EMPTY = 4;
-    int SPLIT_INCLUDE_DELIM_PARTS = 8;
+    int SPLIT_INCLUDE_DELIMS = 1;    // include delimiters as part of the split out part
+    int SPLIT_TRIM_PARTS = 2;        // trim split parts
+    int SPLIT_SKIP_EMPTY = 4;        // skip empty trimmed parts
+    int SPLIT_INCLUDE_DELIM_PARTS = 8; // include split out delimiters as parts themselves
     int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY;
 
     static Map<Character, String> getVisibleSpacesMap() {
@@ -100,6 +100,7 @@ public interface SequenceUtils {
      * Get a portion of this sequence selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
     @NotNull
@@ -111,6 +112,7 @@ public interface SequenceUtils {
      * Get a portion of this sequence before one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come before the selected range, if range.isNull() then null
      */
     @Nullable
@@ -122,6 +124,7 @@ public interface SequenceUtils {
      * Get a portion of this sequence after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come after the selected range, if range.isNull() then null
      */
     @Nullable
@@ -133,6 +136,7 @@ public interface SequenceUtils {
      * Get a portions of this sequence before and after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
+     *
      * @return sequence whose contents come before and after the selected range, if range.isNull() then pair of nulls
      */
     @NotNull
@@ -294,6 +298,7 @@ public interface SequenceUtils {
      * resorting to content comparison only if length and hashCodes are equal
      *
      * @param o any char sequence
+     *
      * @return true if character contents are equal
      */
     @Contract(pure = true, value = "_, null -> false")

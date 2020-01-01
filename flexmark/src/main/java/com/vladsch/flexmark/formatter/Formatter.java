@@ -329,17 +329,17 @@ public class Formatter implements IRender {
      *
      * @param document          node to render
      * @param builder           sequence builder
-     * @param maxTailBlankLines maximum tail blank lines
+     * @param maxTrailingBlankLines maximum tail blank lines
      *
      * @return string of formatted markdown (same as in builder) to be used for validation
      */
-    public String render(@NotNull Node document, @NotNull SequenceBuilder builder, int maxTailBlankLines) {
+    public String render(@NotNull Node document, @NotNull SequenceBuilder builder, int maxTrailingBlankLines) {
         SequenceBuilder subBuilder = builder.getBuilder();
 
         MarkdownWriter out = new MarkdownWriter(subBuilder, formatterOptions.formatFlags);
         MainNodeFormatter renderer = new MainNodeFormatter(options, out, document.getDocument(), null);
         renderer.render(document);
-        out.appendToSilently(builder, maxTailBlankLines, maxTailBlankLines);
+        out.appendToSilently(builder, formatterOptions.maxBlankLines, maxTrailingBlankLines);
 
         // NOTE: resolve any unresolved tracked offsets that are outside elements which resolve their own
         TrackedOffsetList trackedOffsets = renderer.getTrackedOffsets().getUnresolvedOffsets();
@@ -349,9 +349,8 @@ public class Formatter implements IRender {
             int[] length = { 0 };
             final int[] unresolved = { trackedOffsets.size() };
 
-            out.forAllLines(maxTailBlankLines, 0, Integer.MAX_VALUE, (line, lineInfo) -> {
-                BasedSequence useLine = line.trimEOL();
-                List<TrackedOffset> lineTrackedOffsets = trackedOffsets.getTrackedOffsets(useLine.getStartOffset(), useLine.getEndOffset());
+            out.forAllLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, (line, lineInfo) -> {
+                List<TrackedOffset> lineTrackedOffsets = trackedOffsets.getTrackedOffsets(line.getStartOffset(), line.getEndOffset());
                 if (!lineTrackedOffsets.isEmpty()) {
                     for (TrackedOffset trackedOffset : lineTrackedOffsets) {
                         BasedOffsetTracker tracker = BasedOffsetTracker.create(line);
