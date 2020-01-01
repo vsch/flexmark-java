@@ -72,7 +72,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 1
+```````````````````````````````` example Spec Example: 3
 ---
 title: Intentions Spec
 author:
@@ -102,7 +102,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 2
+```````````````````````````````` example Spec Example: 4
 ---
 title: Intentions Spec
 author:
@@ -139,7 +139,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 3
+```````````````````````````````` example Spec Example: 5
 ---
 title: Intentions Spec
 author:
@@ -175,7 +175,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 4
+```````````````````````````````` example Spec Example: 6
 ---
 title: Intentions Spec
 author:
@@ -209,7 +209,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 5
+```````````````````````````````` example Spec Example: 7
 ---
 title: Intentions Spec
 author:
@@ -246,7 +246,7 @@ Markdown only
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 6
+```````````````````````````````` example Spec Example: 8
 ---
 title: Intentions Spec
 author:
@@ -282,7 +282,7 @@ Markdown only
 
 preserve blank lines and spaces
 
-```````````````````````````````` example Spec Example: 7
+```````````````````````````````` example Spec Example: 9
 ---
 title: Intentions Spec
 author:
@@ -346,7 +346,7 @@ Document[0, 246]
 ````````````````````````````````
 
 
-```````````````````````````````` example Spec Example: 8
+```````````````````````````````` example Spec Example: 10
 ---
 title: Intentions Spec
 author:
