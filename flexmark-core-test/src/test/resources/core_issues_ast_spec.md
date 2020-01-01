@@ -2328,39 +2328,6 @@ Document[0, 16]
 ````````````````````````````````
 
 
-### 13
-
-blank line before fenced code is not signal of a loose list
-
-```````````````````````````````` example
-* b
-
-  ```bash
-  foo.code
-  ```
-* c
-
-.
-<ul>
-  <li>b<pre><code class="language-bash">foo.code
-</code></pre>
-  </li>
-  <li>c</li>
-</ul>
-.
-Document[0, 37]
-  BulletList[0, 36] isLoose
-    BulletListItem[0, 31] open:[0, 1, "*"] hadBlankLineAfter
-      Paragraph[2, 4] isTrailingBlankLine
-        Text[2, 3] chars:[2, 3, "b"]
-      FencedCodeBlock[7, 31] open:[7, 10, "```"] info:[10, 14, "bash"] content:[17, 26] lines[1] close:[28, 31, "```"]
-        Text[17, 26] chars:[17, 26, "foo.code\n"]
-    BulletListItem[32, 36] open:[32, 33, "*"] hadBlankLineAfter
-      Paragraph[34, 36] isTrailingBlankLine
-        Text[34, 35] chars:[34, 35, "c"]
-````````````````````````````````
-
-
 ## StackOverflow
 
 spurious, cannot duplicate
@@ -2491,6 +2458,37 @@ Document[0, 36]
 ### 770
 
 Issue #770
+
+blank line before fenced code is not signal of a loose list
+
+```````````````````````````````` example
+* b
+
+  ```bash
+  foo.code
+  ```
+* c
+
+.
+<ul>
+  <li>b<pre><code class="language-bash">foo.code
+</code></pre>
+  </li>
+  <li>c</li>
+</ul>
+.
+Document[0, 37]
+  BulletList[0, 36] isLoose
+    BulletListItem[0, 31] open:[0, 1, "*"] hadBlankLineAfter
+      Paragraph[2, 4] isTrailingBlankLine
+        Text[2, 3] chars:[2, 3, "b"]
+      FencedCodeBlock[7, 31] open:[7, 10, "```"] info:[10, 14, "bash"] content:[17, 26] lines[1] close:[28, 31, "```"]
+        Text[17, 26] chars:[17, 26, "foo.code\n"]
+    BulletListItem[32, 36] open:[32, 33, "*"] hadBlankLineAfter
+      Paragraph[34, 36] isTrailingBlankLine
+        Text[34, 35] chars:[34, 35, "c"]
+````````````````````````````````
+
 
 ```````````````````````````````` example(MdNav - 770: 1) options(keep-blank-lines)
 * stuff
