@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineAppendable;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
@@ -54,7 +54,7 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      *
      * @return a new rendering context with a given appendable for its output
      */
-    HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder);
+    HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder);
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child

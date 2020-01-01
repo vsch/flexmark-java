@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
@@ -84,12 +83,21 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         return new SequenceBuilder(baseSeq, segments.options, segments.optimizer);
     }
 
+    @Override
+    public char charAt(int index) {
+        return toSequence().charAt(index);
+    }
+
     @NotNull
     @Override
     public SequenceBuilder append(@Nullable CharSequence chars, int startIndex, int endIndex) {
         if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == baseSeq.getBase()) {
             if (((BasedSequence) chars).isNotNull()) {
-                ((BasedSequence) chars).addSegments(segments);
+                if (startIndex == 0 && endIndex == chars.length()) {
+                    ((BasedSequence) chars).addSegments(segments);
+                } else {
+                    ((BasedSequence) chars).subSequence(startIndex, endIndex).addSegments(segments);
+                }
                 resultSeq = null;
             }
         } else if (chars != null && startIndex < endIndex) {

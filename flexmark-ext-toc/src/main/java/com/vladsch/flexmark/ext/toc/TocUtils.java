@@ -21,6 +21,7 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Escaping;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 
@@ -290,7 +291,7 @@ public class TocUtils {
         NodeRendererContext subContext = context.getSubContext(false);
         subContext.doNotRenderLinks();
         subContext.renderChildren(header);
-        return subContext.getHtmlWriter().toString(-1);
+        return ((LineAppendable) subContext.getHtmlWriter()).toString(-1, -1);
     }
 
     public static Pair<List<Heading>, List<String>> markdownHeaderTexts(List<Heading> headings, TocOptions tocOptions) {

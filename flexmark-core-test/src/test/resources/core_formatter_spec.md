@@ -3515,7 +3515,7 @@ some text
   more text. [Test](test) text.
 
 some text
-    
+
 1. Paragraph with soft break
    ⦙and more text. ![Test](test)
    text.
@@ -3713,12 +3713,12 @@ some text
 
 ---- Ranges ------------------------------------------------------------
 ⟦* Paragraph with hard break and⟧
- ⟦ more text.⟧
- ⟦ [Test](test) text.⟧⟦
+⟦⟧ ⟦ more text.⟧
+⟦⟧ ⟦ [Test](test) text.⟧⟦
 ⟧⟦
 1. Paragraph with soft break⟧
-  ⟦ and more text.⟧
-  ⟦ ![Test](test) text.⟧⟦
+⟦⟧  ⟦ and more text.⟧
+⟦⟧  ⟦ ![Test](test) text.⟧⟦
 ⟧
 ⟦⟧
 ````````````````````````````````

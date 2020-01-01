@@ -806,7 +806,7 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         MarkdownTable sorted = table.sorted(new ColumnSort[] { ColumnSort.columnSort(1, false, false, false) }, 0, null);
         sorted.appendTable(out);
-        String sortedTable = out.toString(0);
+        String sortedTable = out.toString(0, 0);
         int offset = sorted.getTrackedOffsetIndex(pos);
 
         assertEquals("" +

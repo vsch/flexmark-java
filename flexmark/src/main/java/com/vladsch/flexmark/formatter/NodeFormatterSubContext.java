@@ -30,10 +30,14 @@ public abstract class NodeFormatterSubContext implements NodeFormatterContext {
         return markdown;
     }
 
-    public void flushTo(@NotNull Appendable out, int maxBlankLines) {
+    public void flushTo(@NotNull Appendable out, int maxTrailingBlankLines) {
+        flushTo(out, getFormatterOptions().maxBlankLines, maxTrailingBlankLines);
+    }
+
+    public void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
         markdown.line();
         try {
-            markdown.appendTo(out, maxBlankLines);
+            markdown.appendTo(out, maxBlankLines, maxTrailingBlankLines);
         } catch (IOException e) {
             e.printStackTrace();
         }

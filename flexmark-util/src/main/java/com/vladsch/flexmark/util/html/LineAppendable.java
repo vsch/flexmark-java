@@ -2,12 +2,11 @@ package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.function.BiConsumer;
 
 /**
  * Used to collect line text for further processing
@@ -137,6 +136,7 @@ public interface LineAppendable extends Appendable {
      * Set options on processing text
      *
      * @param flags option flags
+     *
      * @return this
      */
     @NotNull
@@ -153,6 +153,7 @@ public interface LineAppendable extends Appendable {
      * Set options on processing text
      *
      * @param options option set
+     *
      * @return this
      */
     @NotNull
@@ -161,11 +162,12 @@ public interface LineAppendable extends Appendable {
     }
 
     /**
-     * Get builder used for accumulation or null if none
-     * @return builder used for accumulation or null if none
+     * Get builder used for accumulation
+     *
+     * @return builder used for accumulation
      */
-    @Nullable
-    SequenceBuilder getBuilder();
+    @NotNull
+    ISequenceBuilder<?, ?> getBuilder();
 
     // these methods are monitored for content and formatting applied
     @Override
@@ -176,6 +178,7 @@ public interface LineAppendable extends Appendable {
 
     @Override
     @NotNull LineAppendable append(char c);
+
     @NotNull LineAppendable append(char c, int count);
 
     /**
@@ -186,6 +189,7 @@ public interface LineAppendable extends Appendable {
      * If there is an accumulating line, it will be terminated by an EOL before appending lines
      *
      * @param lineAppendable lines to append
+     *
      * @return this
      */
     @NotNull
@@ -203,271 +207,10 @@ public interface LineAppendable extends Appendable {
      * @param lineAppendable lines to append
      * @param startLine      start line to append
      * @param endLine        end line to append
+     *
      * @return this
      */
     @NotNull LineAppendable append(@NotNull LineAppendable lineAppendable, int startLine, int endLine);
-
-    /**
-     * Test if given line is part of pre-formatted text
-     *
-     * @param line line
-     * @return true if line is inside pre-formatted text
-     */
-    boolean isPreFormattedLine(int line);
-
-    /**
-     * Get the number of lines appended
-     *
-     * @return number of lines appended
-     */
-    int getLineCount();
-
-    /**
-     * Add prefix to selected lines either before the line prefix or after it
-     *
-     * @param prefix             prefix to add
-     * @param addAfterLinePrefix if true add given prefix after the line prefix, else before
-     * @param startLine          starting line offset
-     * @param endLine            end line offset
-     * @return this
-     */
-    @NotNull LineAppendable prefixLinesWith(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine);
-
-    /**
-     * Get Lines with EOL
-     * <p>
-     * NOTE: if the last line is not complete it will be returned without an EOL
-     *
-     * @return array of line char sequences
-     */
-    @NotNull
-    default CharSequence[] getLines() {
-        return getLines(0, Integer.MAX_VALUE);
-    }
-
-    /**
-     * Get Lines with EOL
-     * <p>
-     * NOTE: if the last line is not complete it will be returned without an EOL
-     *
-     * @param startLine starting line offset
-     * @param endLine   end line offset
-     * @return array of line char sequences
-     */
-    @NotNull CharSequence[] getLines(int startLine, int endLine);
-
-    /**
-     * Get Lines without prefix but with EOL
-     * <p>
-     * NOTE: if the last line is not complete it will be returned without an EOL
-     *
-     * @return list of lines
-     */
-    @NotNull
-    default CharSequence[] getLinesContent() {
-        return getLinesContent(0, Integer.MAX_VALUE);
-    }
-
-    /**
-     * Get Lines without prefixes or EOL
-     *
-     * @param startLine starting line offset
-     * @param endLine   end line offset
-     * @return list of lines
-     */
-    @NotNull CharSequence[] getLinesContent(int startLine, int endLine);
-
-    /**
-     * Get Line prefixes
-     *
-     * @param startLine starting line offset
-     * @param endLine   end line offset
-     * @return list of lines
-     */
-    @NotNull CharSequence[] getLinesPrefix(int startLine, int endLine);
-
-    /**
-     * Get Line prefix index for selected lines
-     *
-     * @param startLine starting line offset
-     * @param endLine   end line offset
-     * @return array of prefix end indices for the selected lines
-     */
-    @NotNull int[] getLinesPrefixIndex(int startLine, int endLine);
-
-    /**
-     * Get Line with EOL
-     * <p>
-     * NOTE: if the last line is not complete it will be returned without an EOL
-     *
-     * @return array of line char sequences
-     */
-    @NotNull
-    default CharSequence getLine(int lineIndex) {
-        return getLines(lineIndex, lineIndex + 1)[0];
-    }
-
-    /**
-     * Get Line content of given line
-     *
-     * @return char sequence for the line
-     */
-    @NotNull
-    default CharSequence getLineContent(int lineIndex) {
-        return getLinesContent(lineIndex, lineIndex + 1)[0];
-    }
-
-    /**
-     * Get prefix of given line
-     *
-     * @return line prefix char sequence
-     */
-    @NotNull
-    default CharSequence getLinePrefix(int lineIndex) {
-        return getLinesPrefix(lineIndex, lineIndex + 1)[0];
-    }
-
-    /**
-     * Get prefix of given line
-     *
-     * @return index of the end of prefix of the line
-     */
-    default int getLinePrefixIndex(int lineIndex) {
-        return getLinesPrefixIndex(lineIndex, lineIndex + 1)[0];
-    }
-
-    /**
-     * Set prefix index for a given line
-     *
-     * @param lineIndex      index of the line
-     * @param prefixEndIndex index where the prefix for the line ends
-     */
-    void setLinePrefixIndex(int lineIndex, int prefixEndIndex);
-
-    /**
-     * Set content and prefix for a line
-     *
-     * @param lineIndex index of the line
-     * @param prefix    prefix of the line
-     * @param content   content text of the line
-     */
-    void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content);
-
-    /**
-     * Remove line range from result set
-     *
-     * @param startLine starting line offset
-     * @param endLine   end line offset
-     * @return this
-     */
-    @NotNull LineAppendable removeLines(int startLine, int endLine);
-
-    /**
-     * Get column offset after last append
-     *
-     * @return column offset after last append
-     */
-    int column();
-
-    /**
-     * Get text offset of all output lines, excluding any text for the last line being accumulated
-     * <p>
-     * NOTE: this includes prefixes
-     *
-     * @return offset of text as would be returned if all lines
-     */
-    int offset();
-
-    /**
-     * Get offset after last append
-     * <p>
-     * NOTE: this includes prefixes
-     *
-     * @return offset as would be returned by {@link #offset()} after line() call less 1 for EOL
-     */
-    int offsetWithPending();
-
-    /**
-     * Get text offset of all output lines (not including any text not included because it is not yet terminated by line() call)
-     * NOTE: this does not include prefixes
-     *
-     * @return offset of text as would be returned if all current lines were taken (without prefixes)
-     */
-    int textOnlyOffset();
-
-    /**
-     * Get column offset after last append
-     * NOTE: this does not include prefixes
-     *
-     * @return offset as would be returned by {@link #offset()} after line() call less 1 for EOL
-     */
-    int textOnlyOffsetWithPending();
-
-    /**
-     * Test if trailing text ends in space or tab
-     *
-     * @return true if ending in space or tab
-     */
-    boolean isPendingSpace();
-
-    /**
-     * Get trailing spaces or tabs of trailing text
-     *
-     * @return trailing spaces or tabs
-     */
-    int getPendingSpace();
-
-    /**
-     * Get number of EOLs at end of text (including pending text)
-     *
-     * @return number of eols at end of text
-     */
-    int getPendingEOL();
-
-    /**
-     * get the resulting text for all lines
-     *
-     * @param maxBlankLines maximum blank lines to allow at end, if -1 then no trailing EOL will be generated
-     * @return resulting text
-     */
-    String toString(int maxBlankLines);
-
-    /**
-     * append lines to appendable with no trailing blank lines, if these are desired at the end of the output use {@link #appendTo(Appendable, int)}.
-     *
-     * @param out appendable to output the resulting lines
-     * @return this
-     * @throws IOException if thrown by appendable
-     */
-    @NotNull
-    default LineAppendable appendTo(@NotNull Appendable out) throws IOException {
-        return appendTo(out, 0, null, 0, Integer.MAX_VALUE);
-    }
-
-    /**
-     * append lines to appendable with given maximum trailing blank lines
-     *
-     * @param out           appendable to output the resulting lines
-     * @param maxBlankLines maximum blank lines to allow at end
-     * @return this
-     * @throws IOException if thrown by appendable
-     */
-    @NotNull
-    default LineAppendable appendTo(@NotNull Appendable out, int maxBlankLines) throws IOException {
-        return appendTo(out, maxBlankLines, null, 0, Integer.MAX_VALUE);
-    }
-
-    /**
-     * append lines to appendable with given maximum trailing blank lines and given prefix to add to all lines
-     *
-     * @param out           appendable to output the resulting lines
-     * @param maxBlankLines maximum blank lines to allow at end, if -1 then no trailing EOL will be generated
-     * @param prefix        prefix to add before each line
-     * @param startLine     line from which to start output
-     * @return this
-     * @throws IOException if thrown by appendable
-     */
-    @NotNull LineAppendable appendTo(@NotNull Appendable out, int maxBlankLines, @Nullable CharSequence prefix, int startLine, int endLine) throws IOException;
 
     /**
      * Add a new line, if there was any unterminated text appended
@@ -480,6 +223,7 @@ public interface LineAppendable extends Appendable {
      * Add a new line, keep trailing spaces if there was any unterminated text appended
      *
      * @param count number of trailing spaces to add
+     *
      * @return this
      */
     @NotNull LineAppendable lineWithTrailingSpaces(int count);
@@ -488,6 +232,7 @@ public interface LineAppendable extends Appendable {
      * Add a new line, if predicate is true and there was any unterminated text appended
      *
      * @param predicate if true then new line will be started
+     *
      * @return this
      */
     @NotNull LineAppendable lineIf(boolean predicate);
@@ -503,6 +248,7 @@ public interface LineAppendable extends Appendable {
      * Add a blank line, if predicate is true and there isn't already blank lines appended.
      *
      * @param predicate when true append blank line
+     *
      * @return this
      */
     @NotNull LineAppendable blankLineIf(boolean predicate);
@@ -512,6 +258,7 @@ public interface LineAppendable extends Appendable {
      * Will append only enough blank lines to increase it to given level. If more are already in the wings then nothing is done.
      *
      * @param count number of blank lines to append
+     *
      * @return this
      */
     @NotNull LineAppendable blankLine(int count);
@@ -525,6 +272,7 @@ public interface LineAppendable extends Appendable {
      * Open preformatted section and suspend content modification
      *
      * @param addPrefixToFirstLine if true will add current prefix to first line
+     *
      * @return this
      */
     @NotNull LineAppendable openPreFormatted(boolean addPrefixToFirstLine);
@@ -579,6 +327,7 @@ public interface LineAppendable extends Appendable {
      * Set prefix to append after a new line character for every indent level
      *
      * @param prefix prefix characters for new lines appended after this is set
+     *
      * @return this
      */
     @NotNull LineAppendable setIndentPrefix(@Nullable CharSequence prefix);
@@ -589,6 +338,7 @@ public interface LineAppendable extends Appendable {
      *
      * @return char sequence of the current prefix
      */
+    @NotNull
     CharSequence getPrefix();
 
     /**
@@ -596,6 +346,7 @@ public interface LineAppendable extends Appendable {
      *
      * @return char sequence of the current prefix
      */
+    @NotNull
     CharSequence getBeforeEolPrefix();
 
     /**
@@ -605,6 +356,7 @@ public interface LineAppendable extends Appendable {
      * This appends the sequence to current prefix
      *
      * @param prefix prefix characters to add to current prefix for new lines appended after this is set
+     *
      * @return this
      */
     @NotNull
@@ -619,6 +371,7 @@ public interface LineAppendable extends Appendable {
      * This appends the sequence to current prefix
      *
      * @param prefix prefix characters to add to current prefix for new lines appended after this is set
+     *
      * @return this
      */
     @NotNull
@@ -634,6 +387,7 @@ public interface LineAppendable extends Appendable {
      *
      * @param prefix   prefix characters to add to current prefix for new lines appended after this is set
      * @param afterEol if true prefix will take effect after EOL
+     *
      * @return this
      */
     @NotNull LineAppendable addPrefix(@NotNull CharSequence prefix, boolean afterEol);
@@ -653,6 +407,7 @@ public interface LineAppendable extends Appendable {
      *
      * @param prefix   prefix characters to add to current prefix for new lines appended after this is set
      * @param afterEol if true prefix will take effect after EOL
+     *
      * @return this
      */
     @NotNull LineAppendable setPrefix(@Nullable CharSequence prefix, boolean afterEol);
@@ -678,6 +433,7 @@ public interface LineAppendable extends Appendable {
      * Pop a prefix from the stack and set the current prefix
      *
      * @param afterEol if true prefix will take effect after EOL
+     *
      * @return this
      */
     @NotNull LineAppendable popPrefix(boolean afterEol);
@@ -692,14 +448,228 @@ public interface LineAppendable extends Appendable {
         return lineOnFirstText(false);
     }
 
-    void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines);
+    /**
+     * Get the number of lines appended
+     *
+     * @return number of lines appended
+     */
+    int getLineCount();
+
+    /**
+     * Get completed Line information at given line index
+     *
+     * @return line info
+     */
+    @NotNull
+    LineInfo getLineInfo(int lineIndex);
+
+    /**
+     * Get completed Line at given line index
+     *
+     * @return line char sequence
+     */
+    @NotNull BasedSequence getLine(int lineIndex);
+
+    /**
+     * Get Line content of given line
+     *
+     * @return char sequence for the line
+     */
+    @NotNull
+    default CharSequence getLineContent(int lineIndex) {
+        LineInfo lineInfo = getLineInfo(lineIndex);
+        CharSequence line = getLine(lineIndex);
+        return line.subSequence(lineInfo.prefixLength, lineInfo.prefixLength + lineInfo.textLength);
+    }
+
+    /**
+     * Get prefix of given line
+     *
+     * @return line prefix char sequence
+     */
+    @NotNull
+    default CharSequence getLinePrefix(int lineIndex) {
+        LineInfo lineInfo = getLineInfo(lineIndex);
+        CharSequence line = getLine(lineIndex);
+        return line.subSequence(0, lineInfo.prefixLength);
+    }
+
+//    /**
+//     * Set prefix index for a given line
+//     *
+//     * @param lineIndex      index of the line
+//     * @param prefixEndIndex index where the prefix for the line ends
+//     */
+//    void setLinePrefixIndex(int lineIndex, int prefixEndIndex);
+//
+//    /**
+//     * Set content and prefix for a line
+//     *
+//     * @param lineIndex index of the line
+//     * @param prefix    prefix of the line
+//     * @param content   content text of the line
+//     */
+//    void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content);
+
+    /**
+     * Get column offset after last append
+     *
+     * @return column offset after last append
+     */
+    int column();
+
+    /**
+     * Get text offset of all output lines, excluding any text for the last line being accumulated
+     *
+     * @return offset of text as would be returned for all
+     */
+    int offset();
+
+    /**
+     * Get offset after last append as if EOL was added but without the EOL itself
+     *
+     * @return offset as would be returned by {@link #offset()} after line() call less 1 for EOL
+     */
+    int offsetWithPending();
+
+    /**
+     * Test if trailing text ends in space or tab
+     *
+     * @return true if ending in space or tab
+     */
+    boolean isPendingSpace();
+
+    /**
+     * Get number of spaces at end of pending text
+     *
+     * @return number of eols at end of text
+     */
+    int getPendingSpace();
+
+    /**
+     * Get number of EOLs at end of appendable, this is actually number of tail blank lines
+     *
+     * @return number of eols at end of text
+     */
+    int getPendingEOL();
+
+    @NotNull LineAppendable removeLines(int startLine, int endLine);
+
+    /**
+     * get the resulting text for all lines
+     *
+     * @param maxTrailingBlankLines maximum blank lines to allow, if -1 then no trailing EOL will be generated
+     *
+     * @return resulting text
+     *
+     * @deprecated use the two argument toString()
+     */
+    @NotNull
+    @Deprecated
+    default String toString(int maxTrailingBlankLines) {
+        return toString(Integer.MAX_VALUE, maxTrailingBlankLines);
+    }
+
+    /**
+     * get the resulting text for all lines
+     *
+     * @param maxBlankLines         maximum blank lines to allow in the text
+     * @param maxTrailingBlankLines maximum trailing blank lines
+     *
+     * @return resulting text
+     */
+    @NotNull
+    String toString(int maxBlankLines, int maxTrailingBlankLines);
+
+    /**
+     * append lines to appendable with given maximum trailing blank lines
+     *
+     * @param out                   appendable to output the resulting lines
+     * @param maxTrailingBlankLines maximum trailing blank lines, if -1 then no EOL will be generated on the last line
+     *
+     * @throws IOException if thrown by appendable
+     * @deprecated use {@link #appendTo(T, int, int)} with separate in body and trailing blank line arguments
+     */
+    @Deprecated
+    default <T extends Appendable> T appendTo(@NotNull T out, int maxTrailingBlankLines) throws IOException {
+        return appendTo(out, Integer.MAX_VALUE, maxTrailingBlankLines);
+    }
+
+    /**
+     * append lines to appendable with given maximum trailing blank lines and given prefix to add to all lines
+     *
+     * NOTE:
+     *
+     * @param out                   appendable to output the resulting lines
+     * @param maxBlankLines         maximum blank lines to allow in the body,
+     * @param maxTrailingBlankLines maximum trailing blank lines at the end, if &lt;maxBlankLines then maxBlankLines will be used, if -1 then no trailing EOL will be added
+     * @param startLine             line from which to start output
+     * @param endLine               line at which to stop output
+     *
+     * @return out
+     *
+     * @throws IOException if thrown by appendable
+     */
+    <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException;
+
+    default <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines) throws IOException {
+        return appendTo(out, maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
+    }
+
+    /**
+     * append lines to appendable with 0 blank lines, if these are desired at the end of the output use {@link #appendTo(Appendable, int, int)}.
+     *
+     * @param out appendable to output the resulting lines
+     *
+     * @throws IOException if thrown by appendable
+     */
+    default <T extends Appendable> T appendTo(@NotNull T out) throws IOException {
+        return appendTo(out, 0, 0, 0, Integer.MAX_VALUE);
+    }
+
+    default <T extends Appendable> T appendToSilently(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
+        try {
+            appendTo(out, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
+        } catch (IOException ignored) {
+
+        }
+        return out;
+    }
+
+    default <T extends Appendable> T appendToSilently(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines) {
+        appendToSilently(out, maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
+        return out;
+    }
+
+    default <T extends Appendable> T appendToSilently(@NotNull T out) {
+        return appendToSilently(out, 0, 0, 0, Integer.MAX_VALUE);
+    }
+
+    /**
+     * Normalize the appendable by removing extra blank lines in the body or at the end of given line range
+     *
+     * @param maxBlankLines         maximum blank lines to allow in the body
+     * @param maxTrailingBlankLines maximum trailing blank lines ending on endLine, if &lt;maxBlankLines then maxBlankLines will be used
+     * @param startLine             line from which to start output
+     * @param endLine               line at which to stop output
+     *
+     * @return this
+     */
+    LineAppendable normalizeTo(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine);
+
+    default LineAppendable normalizeTo(int maxBlankLines, int maxTrailingBlankLines) {
+        return normalizeTo(maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
+    }
 
     /**
      * Iterate over individual lines
-     * @param maxBlankLines max blank lines
-     * @param processor consumer for lines
+     *
+     * @param maxTrailingBlankLines max blank lines
+     * @param startLine             start line
+     * @param endLine               end line
+     * @param processor             consumer for lines
      */
-    void forAllLines(int maxBlankLines, @NotNull LineProcessor processor);
+    void forAllLines(int maxTrailingBlankLines, int startLine, int endLine, @NotNull LineProcessor processor);
 
     @NotNull LineAppendable lineOnFirstText(boolean value);
 
@@ -707,13 +677,16 @@ public interface LineAppendable extends Appendable {
      * Add indent on first EOL appended and run runnable
      *
      * @param runnable runnable to run if adding indent on first EOL
+     *
      * @return this
      */
     @NotNull LineAppendable addIndentOnFirstEOL(@NotNull Runnable runnable);
+
     /**
      * Remove runnable, has no effect if EOL was already appended and runnable was run
      *
      * @param runnable runnable added with addIndentOnFirstEOL
+     *
      * @return this
      */
     @NotNull LineAppendable removeIndentOnFirstEOL(@NotNull Runnable runnable);

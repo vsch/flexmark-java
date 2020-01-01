@@ -75,7 +75,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
 
         markdown.line().append(openMarker).append(openMarkerSpaces);
         int count = context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent();
-        CharSequence prefix = RepeatedSequence.repeatOf(' ', count);
+        CharSequence prefix = RepeatedSequence.ofSpaces(count);
         markdown.pushPrefix().addPrefix(prefix);
         context.renderChildren(node);
         markdown.popPrefix();

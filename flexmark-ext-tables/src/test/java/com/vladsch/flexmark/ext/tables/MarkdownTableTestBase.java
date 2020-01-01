@@ -45,7 +45,7 @@ public class MarkdownTableTestBase {
     protected String getFormattedTable(MarkdownTable table) {
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
         table.appendTable(out);
-        return out.toString(0);
+        return out.toString(0, 0);
     }
 
     protected String[] getFormattedTables(MarkdownTable[] tables) {
@@ -54,7 +54,7 @@ public class MarkdownTableTestBase {
         for (MarkdownTable table : tables) {
             MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
             table.appendTable(out);
-            formatted.add(out.toString(0));
+            formatted.add(out.toString(0, 0));
         }
         return formatted.toArray(new String[0]);
     }
@@ -71,7 +71,7 @@ public class MarkdownTableTestBase {
         MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
         MarkdownTable transposed = table.transposed(columnHeaders);
         transposed.appendTable(out);
-        return out.toString(0);
+        return out.toString(0, 0);
     }
 
     protected MarkdownTable getSortedTable(MarkdownTable table, ColumnSort[] columnSorts) {

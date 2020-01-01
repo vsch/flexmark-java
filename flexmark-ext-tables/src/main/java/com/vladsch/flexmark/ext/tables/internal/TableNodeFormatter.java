@@ -110,14 +110,12 @@ public class TableNodeFormatter implements NodeFormatter {
                     markdown.blankLine();
 
                     CharSequence prefix = markdown.getPrefix();
-                    int startOffset = markdown.offsetWithPending();
-                    markdown.pushPrefix().setPrefix("", false);
-
                     myTable.setFormatTableIndentPrefix(prefix);
                     MarkdownWriter formattedTable = new MarkdownWriter(markdown.getOptions());
                     myTable.appendTable(formattedTable);
 
                     List<TrackedOffset> tableOffsets = myTable.getTrackedOffsets();
+                    int startOffset = markdown.offsetWithPending();
                     if (!tableTrackedOffsets.isEmpty()) {
                         assert tableTrackedOffsets.size() == tableOffsets.size();
 
@@ -131,11 +129,14 @@ public class TableNodeFormatter implements NodeFormatter {
                         }
                     }
 
-                    markdown.pushOptions()
+                    markdown.pushPrefix().setPrefix("", false)
+                            .pushOptions()
                             .removeOptions(LineAppendable.F_WHITESPACE_REMOVAL)
                             .append(formattedTable)
                             .popOptions()
-                            .popPrefix(false);
+                            .popPrefix(false)
+                    ;
+
                     markdown.tailBlankLine();
 
                     if (myTable.getMaxColumns() > 0 && !tableTrackedOffsets.isEmpty()) {
@@ -224,7 +225,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
             context.translatingSpan((context1, writer) -> {
                 context1.renderChildren(node);
-                childText[0] = writer.toString(-1);
+                childText[0] = writer.toString(-1, -1);
             });
 
             if (!myTable.isSeparator() && options.spaceAroundPipes && (!childText[0].endsWith(" ") || parserTrimCellWhiteSpace)) markdown.append(' ');

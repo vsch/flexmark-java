@@ -268,7 +268,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);
-        String transposedTable = out.toString(0);
+        String transposedTable = out.toString(0, 0);
         int offset = transposed.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
@@ -311,7 +311,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);
-        String transposedTable = out.toString(0);
+        String transposedTable = out.toString(0, 0);
         int offset = transposed.getTrackedOffsetIndex(pos);
 
         assertEquals("" +
@@ -354,7 +354,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);
-        String transposedTable = out.toString(0);
+        String transposedTable = out.toString(0, 0);
         int offset = transposed.getTrackedOffsetIndex(pos);
 
         assertEquals("" +

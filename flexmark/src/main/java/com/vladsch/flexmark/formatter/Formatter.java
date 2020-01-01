@@ -45,6 +45,7 @@ import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
@@ -310,7 +311,7 @@ public class Formatter implements IRender {
     public void render(@NotNull Node document, @NotNull Appendable output) {
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), document.getDocument(), null);
         renderer.render(document);
-        renderer.flushTo(output, formatterOptions.maxTrailingBlankLines);
+        renderer.flushTo(output, formatterOptions.maxBlankLines, formatterOptions.maxTrailingBlankLines);
     }
 
     /**
@@ -335,10 +336,10 @@ public class Formatter implements IRender {
     public String render(@NotNull Node document, @NotNull SequenceBuilder builder, int maxTailBlankLines) {
         SequenceBuilder subBuilder = builder.getBuilder();
 
-        MarkdownWriter out = new MarkdownWriter(formatterOptions.formatFlags, subBuilder);
+        MarkdownWriter out = new MarkdownWriter(subBuilder, formatterOptions.formatFlags);
         MainNodeFormatter renderer = new MainNodeFormatter(options, out, document.getDocument(), null);
         renderer.render(document);
-        out.toBuilder(builder, maxTailBlankLines);
+        out.appendToSilently(builder, maxTailBlankLines, maxTailBlankLines);
 
         // NOTE: resolve any unresolved tracked offsets that are outside elements which resolve their own
         TrackedOffsetList trackedOffsets = renderer.getTrackedOffsets().getUnresolvedOffsets();
@@ -348,7 +349,7 @@ public class Formatter implements IRender {
             int[] length = { 0 };
             final int[] unresolved = { trackedOffsets.size() };
 
-            out.forAllLines(maxTailBlankLines, (line, index, textStart, textEnd, sumPrefix, sumText, lineStartDelta) -> {
+            out.forAllLines(maxTailBlankLines, 0, Integer.MAX_VALUE, (line, lineInfo) -> {
                 BasedSequence useLine = line.trimEOL();
                 List<TrackedOffset> lineTrackedOffsets = trackedOffsets.getTrackedOffsets(useLine.getStartOffset(), useLine.getEndOffset());
                 if (!lineTrackedOffsets.isEmpty()) {
@@ -368,7 +369,7 @@ public class Formatter implements IRender {
                                 OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
                                 trackedOffset.setIndex(info.endIndex + length[0]);
                             }
-                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), length[0], index, line.getBuilder().append(line).toStringWithRanges(true)));
+                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), length[0], lineInfo.index, line.getBuilder().append(line).toStringWithRanges(true)));
                             unresolved[0]--;
                         }
                     }
@@ -382,7 +383,7 @@ public class Formatter implements IRender {
 
         StringBuilder sb = new StringBuilder();
         try {
-            out.appendTo(sb, 1);
+            out.appendTo(sb, 1, 1);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -398,7 +399,7 @@ public class Formatter implements IRender {
     public void render(Node node, Appendable output, int maxTrailingBlankLines) {
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), node.getDocument(), null);
         renderer.render(node);
-        renderer.flushTo(output, maxTrailingBlankLines);
+        renderer.flushTo(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
     }
 
     /**
@@ -448,7 +449,7 @@ public class Formatter implements IRender {
         translationHandler.setRenderPurpose(renderPurpose);
         MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags & ~LineAppendable.F_TRIM_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
         renderer.render(document);
-        renderer.flushTo(output, maxTrailingBlankLines);
+        renderer.flushTo(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
     }
 
     /**
@@ -527,7 +528,7 @@ public class Formatter implements IRender {
             MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatterOptions.formatFlags), document, translationHandler);
             renderer.render(document);
             StringBuilder sb = new StringBuilder();
-            renderer.flushTo(sb, maxTrailingBlankLines);
+            renderer.flushTo(sb, formatterOptions.maxBlankLines, maxTrailingBlankLines);
 
             translatedDocuments[index] = Parser.builder(mergeOptions).build().parse(sb.toString());
         });
@@ -543,7 +544,7 @@ public class Formatter implements IRender {
             MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, markdownWriter, document, translationHandler);
             renderer.render(document);
             markdownWriter.blankLine();
-            renderer.flushTo(output, maxTrailingBlankLines);
+            renderer.flushTo(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
         });
     }
 
@@ -1016,21 +1017,21 @@ public class Formatter implements IRender {
 
         @Override
         public NodeFormatterContext getSubContext() {
-            return getSubContextRaw(null, null);
+            return getSubContextRaw(null, markdown.getBuilder());
         }
 
         @Override
         public NodeFormatterContext getSubContext(DataHolder options) {
-            return getSubContextRaw(options, null);
+            return getSubContextRaw(options, markdown.getBuilder());
         }
 
         @Override
-        public NodeFormatterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder) {
+        public NodeFormatterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
             return getSubContextRaw(options, builder);
         }
 
-        NodeFormatterContext getSubContextRaw(DataHolder options, @Nullable SequenceBuilder builder) {
-            MarkdownWriter writer = new MarkdownWriter(getMarkdown().getOptions(), builder);
+        NodeFormatterContext getSubContextRaw(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
+            MarkdownWriter writer = new MarkdownWriter(builder, getMarkdown().getOptions());
             writer.setContext(this);
             //noinspection ReturnOfInnerClass
             return new SubNodeFormatter(this, writer, options);
@@ -1177,7 +1178,7 @@ public class Formatter implements IRender {
             public SubNodeFormatter(MainNodeFormatter mainNodeRenderer, MarkdownWriter out, @Nullable DataHolder options) {
                 super(out);
                 myMainNodeRenderer = mainNodeRenderer;
-                myOptions = options == null ? myMainNodeRenderer.getOptions() : new ScopedDataSet(myMainNodeRenderer.getOptions(), options);
+                myOptions = options == null || options == myMainNodeRenderer.getOptions() ? myMainNodeRenderer.getOptions() : new ScopedDataSet(myMainNodeRenderer.getOptions(), options);
                 myFormatterOptions = new FormatterOptions(myOptions);
             }
 
@@ -1258,26 +1259,20 @@ public class Formatter implements IRender {
 
             @Override
             public NodeFormatterContext getSubContext() {
-                MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions());
-                htmlWriter.setContext(this);
-                //noinspection ReturnOfInnerClass
-                return new SubNodeFormatter(myMainNodeRenderer, htmlWriter, myOptions);
+                return getSubContext(null, markdown.getBuilder());
             }
 
             @Override
             public NodeFormatterContext getSubContext(DataHolder options) {
-                MarkdownWriter writer = new MarkdownWriter(this.markdown.getOptions());
-                writer.setContext(this);
-                //noinspection ReturnOfInnerClass
-                return new SubNodeFormatter(myMainNodeRenderer, writer, new ScopedDataSet(myOptions, options));
+                return getSubContext(options, markdown.getBuilder());
             }
 
             @Override
-            public NodeFormatterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder) {
-                MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown.getOptions(), builder);
+            public NodeFormatterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
+                MarkdownWriter htmlWriter = new MarkdownWriter(builder, this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
-                return new SubNodeFormatter(myMainNodeRenderer, htmlWriter, new ScopedDataSet(myOptions, options));
+                return new SubNodeFormatter(myMainNodeRenderer, htmlWriter, options == null || options == myOptions ? myOptions : new ScopedDataSet(myOptions, options));
             }
 
             @Override

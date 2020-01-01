@@ -547,41 +547,28 @@ public class FormatterUtils {
                 markdown.append(wrappedText).line();
 
                 if (!paragraphTrackedOffsets.isEmpty()) {
-                    final int[] trackedOffsetCount = { paragraphTrackedOffsets.size() };
                     LineInfo startLineInfo = markdown.getLineInfo(startLine);
 
-                    markdown.forAllLines(0, startLine, Integer.MAX_VALUE, (line, lineInfo) -> {
-                        int index = lineInfo.index;
-                        int textStart = lineInfo.prefixLength;
-                        int textEnd = lineInfo.getTextEnd();
-                        int sumPrefix = (lineInfo.sumPrefixLength) - startLineInfo.sumPrefixLength;
-                        int sumText = (lineInfo.sumTextLength) - (startLineInfo.sumTextLength);
-                        int sumLength = (lineInfo.sumLength - lineInfo.length);
+                    for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
+                        if (trackedOffset.isResolved()) {
+                            int offsetIndex = trackedOffset.getIndex();
+                            @NotNull Pair<Integer, Integer> lineColumn = wrappedText.lineColumnAtIndex(offsetIndex);
+                            int trackedLine = lineColumn.getFirst();
+                            LineInfo lineInfo = markdown.getLineInfo(startLine + trackedLine);
+                            BasedSequence line = markdown.getLine(startLine + trackedLine);
 
-                        System.out.println(String.format("Line[%d] textStart: %d, textEnd: %d, firstLine: %d, sumPrefix: %d, sumText: %d, sumLength: %d in '%s'", index + 1, textStart, textEnd, firstLineOffset, sumPrefix, sumText, sumLength, line.getBuilder().append(line).toStringWithRanges(true)));
-                        if (index >= startLine) {
-                            BasedSequence lineText = line.subSequence(0, textEnd);
-                            int startIndex = sumText - sumPrefix;
-                            int endIndex = startIndex + lineInfo.textLength - (index == startLine ? firstLineOffset : 0);
-
-                            for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
-                                int offsetIndex = trackedOffset.getIndex();
-
-                                if (startIndex >= 0 && offsetIndex >= startIndex && offsetIndex <= endIndex) {
-                                    if (trackedOffset.isResolved()) {
-                                        int delta = startLineInfo.sumLength - startLineInfo.length + sumPrefix + textStart + (index == startLine ? firstLineOffset : 0);
-                                        trackedOffset.setIndex(offsetIndex + delta);
-                                        System.out.println(String.format("Wrap Resolved %d to %d, delta: %d in line[%d]: '%s'", trackedOffset.getOffset(), offsetIndex, delta, index + 1, lineText.getBuilder().append(lineText).toStringWithRanges(true)));
-                                    } else {
-                                        System.out.println(String.format("Wrap Unresolved %d in line[%d]: '%s'", trackedOffset.getOffset(), index + 1, lineText.getBuilder().append(lineText).toStringWithRanges(true)));
-                                    }
-
-                                    trackedOffsetCount[0]--;
-                                }
-                            }
+                            int lengthOffset = startLineInfo.sumLength - startLineInfo.length;
+                            int prefixDelta = lineInfo.sumPrefixLength - startLineInfo.sumPrefixLength + startLineInfo.prefixLength;
+                            int delta = firstLineOffset + lengthOffset + prefixDelta;
+                            trackedOffset.setIndex(offsetIndex + delta);
+//                            System.out.println(String.format("Wrap Resolved %d -> %d + %d = %d in line[%d]: '%s'", trackedOffset.getOffset(), offsetIndex, delta, offsetIndex + delta, lineInfo.index + 1, line.getBuilder().append(line).toStringWithRanges(true)));
+//                            System.out.println(String.format("      delta: %d = firstLineOffset: %d + lengthOffset: %d + prefixDelta: %d", delta, firstLineOffset, lengthOffset, prefixDelta));
+//                            System.out.println(String.format("      startLineInfo: %s", lineInfo));
+//                            System.out.println(String.format("      lineInfo: %s", lineInfo));
+//                        } else {
+//                            System.out.println(String.format("Wrap Unresolved %d", trackedOffset.getOffset()));
                         }
-                        return trackedOffsetCount[0] > 0;
-                    });
+                    }
                 }
             } else {
                 context.renderChildren(node);

@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.ast.BlockQuote;
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.BlockQuoteLike;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,8 +18,8 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         super(formatOptions);
     }
 
-    public MarkdownWriter(int formatOptions, @Nullable SequenceBuilder builder) {
-        super(formatOptions, builder);
+    public MarkdownWriter(@NotNull ISequenceBuilder<?, ?> builder, int formatOptions) {
+        super(builder, formatOptions);
     }
 
     @Override
@@ -32,13 +32,13 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
     public @NotNull MarkdownWriter tailBlankLine(int count) {
         if (isLastBlockQuoteChild()) {
             // Needed to not add block quote prefix to trailing blank lines
-            CharSequence prefix = getPrefix();
-            popPrefix();
-            blankLine(count);
-            pushPrefix();
-            setPrefix(prefix, false);
+            CharSequence prefix = appendable.getPrefix();
+            appendable.popPrefix(false);
+            appendable.blankLine(count);
+            appendable.pushPrefix();
+            appendable.setPrefix(prefix, false);
         } else {
-            blankLine(count);
+            appendable.blankLine(count);
         }
         return this;
     }

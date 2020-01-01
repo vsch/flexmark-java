@@ -47,7 +47,7 @@ public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
     public String toFinalizedString() {
         //if (!openTags.isEmpty()) throw new IllegalStateException("Unclosed tags on toHtml call: " + tagStack());
         closeAllTags();
-        return toString(0);
+        return toString(0, 0);
     }
 
     @SuppressWarnings("WeakerAccess")

@@ -353,12 +353,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     context.addExplicitId(node, generator.getId(node), context, markdown);
                 }
             } else {
-                int lastOffset = markdown.offsetWithPending() + 1;
                 context.translatingRefTargetSpan(node, (context1, writer) -> context1.renderChildren(node));
 
                 // add uniquification id attribute if needed
                 HtmlIdGenerator generator = context.getIdGenerator();
-                int extraText = 0;
 
                 if (generator != null) {
                     context.addExplicitId(node, generator.getId(node), context, markdown);
@@ -367,20 +365,19 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.line();
 
                 if (formatterOptions.setextHeadingEqualizeMarker) {
-                    markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
+                    markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.getLineInfo(markdown.getLineCount() - 1).textLength, formatterOptions.minSetextMarkerLength));
                 } else {
                     markdown.append(node.getClosingMarker());
                 }
             }
         } else if (headingPreference.isSetext()) {
             // change to setext
-            int lastOffset = markdown.offsetWithPending() + 1;
             context.renderChildren(node);
             markdown.line();
             char closingMarker = node.getLevel() == 1 ? '=' : '-';
 
             if (formatterOptions.setextHeadingEqualizeMarker) {
-                markdown.append(closingMarker, Utils.minLimit(markdown.offset() - lastOffset, formatterOptions.minSetextMarkerLength));
+                markdown.append(closingMarker, Utils.minLimit(markdown.getLineInfo(markdown.getLineCount() - 1).textLength, formatterOptions.minSetextMarkerLength));
             } else {
                 markdown.append(RepeatedSequence.repeatOf(closingMarker, formatterOptions.minSetextMarkerLength));
             }
@@ -438,7 +435,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         int lines = markdown.getLineCount();
         context.renderChildren(node);
         markdown.popPrefix();
-        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCount() || !FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument()))) markdown.blankLine();
+        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCount() && !FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument())))
+            markdown.blankLine();
     }
 
     private void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {

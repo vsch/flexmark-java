@@ -22,10 +22,14 @@ public abstract class NodeRendererSubContext implements NodeRendererContext {
         return htmlWriter;
     }
 
-    public void flushTo(@NotNull Appendable out, int maxBlankLines) {
+    public void flushTo(@NotNull Appendable out, int maxTrailingBlankLines) {
+        flushTo(out, getHtmlOptions().maxBlankLines, maxTrailingBlankLines);
+    }
+
+    public void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
         htmlWriter.line();
         try {
-            htmlWriter.appendTo(out, maxBlankLines);
+            htmlWriter.appendTo(out, maxBlankLines, maxTrailingBlankLines);
         } catch (IOException e) {
             e.printStackTrace();
         }

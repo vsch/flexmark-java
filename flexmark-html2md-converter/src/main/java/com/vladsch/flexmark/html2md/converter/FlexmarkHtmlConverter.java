@@ -8,7 +8,6 @@ import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.html2md.converter.internal.HtmlConverterCoreNodeRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Ref;
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.builder.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -25,9 +24,10 @@ import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.LineAppendable;
-import com.vladsch.flexmark.util.html.LineFormattingAppendableImpl;
+import com.vladsch.flexmark.util.html.LineAppendableImpl;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.StringSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.Jsoup;
@@ -143,7 +143,7 @@ public class FlexmarkHtmlConverter {
 
     public static final DataKey<LinkConversion> EXT_INLINE_LINK = new DataKey<>("EXT_INLINE_LINK", LinkConversion.MARKDOWN_EXPLICIT);
     public static final DataKey<LinkConversion> EXT_INLINE_IMAGE = new DataKey<>("EXT_INLINE_IMAGE", LinkConversion.MARKDOWN_EXPLICIT);
-    public static final DataKey<Ref<com.vladsch.flexmark.util.ast.Document>> FOR_DOCUMENT = new DataKey<>("FOR_DOCUMENT", new Ref<>((com.vladsch.flexmark.util.ast.Document) null));
+    public static final DataKey<Ref<com.vladsch.flexmark.util.ast.Document>> FOR_DOCUMENT = new DataKey<>("FOR_DOCUMENT", new Ref<>(null));
     public static final DataKey<Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<>());
 
     /**
@@ -222,7 +222,7 @@ public class FlexmarkHtmlConverter {
         TABLE_CELL_ALIGNMENTS.put("text-right", CellAlignment.RIGHT);
     }
 
-    private static final Map<String, String> SPECIAL_CHARS_MAP = new HashMap<>();
+    static final Map<String, String> SPECIAL_CHARS_MAP = new HashMap<>();
     private static final String TYPOGRAPHIC_QUOTES_PIPED = "“|”|‘|’|«|»|&ldquo;|&rdquo;|&lsquo;|&rsquo;|&apos;|&laquo;|&raquo;";
     private static final String TYPOGRAPHIC_SMARTS_PIPED = "…|–|—|&hellip;|&endash;|&emdash;";
     static {
@@ -273,8 +273,6 @@ public class FlexmarkHtmlConverter {
 
         for (int i = builder.nodeRendererFactories.size() - 1; i >= 0; i--) {
             HtmlNodeRendererFactory nodeRendererFactory = builder.nodeRendererFactories.get(i);
-            Set<Class<? extends DelegatingNodeRendererFactoryWrapper>>[] myDelegates = new Set[] { null };
-
             nodeRenderers.add(new DelegatingNodeRendererFactoryWrapper(nodeRenderers, nodeRendererFactory));
         }
 
@@ -325,15 +323,15 @@ public class FlexmarkHtmlConverter {
         Document document = Jsoup.parse(html);
 
         if (DUMP_HTML_TREE.get(getOptions())) {
-            LineFormattingAppendableImpl trace = new LineFormattingAppendableImpl(0);
+            LineAppendableImpl trace = new LineAppendableImpl(0);
             trace.setIndentPrefix("  ");
             dumpHtmlTree(trace, document.body());
-            System.out.println(trace.toString(0));
+            System.out.println(trace.toString(0, 0));
         }
 
         MainHtmlConverter converter = new MainHtmlConverter(options, new HtmlMarkdownWriter(htmlConverterOptions.formatFlags), document, null);
         converter.render(document);
-        converter.flushTo(output, htmlConverterOptions.maxTrailingBlankLines);
+        converter.flushTo(output, htmlConverterOptions.maxBlankLines, htmlConverterOptions.maxTrailingBlankLines);
     }
 
     /**
@@ -350,27 +348,25 @@ public class FlexmarkHtmlConverter {
     /**
      * Parse HTML with given options and max trailing blank lines
      *
-     * @param html          html to be parsed
-     * @param maxBlankLines max trailing blank lines, -1 will suppress trailing EOL
+     * @param html                  html to be parsed
+     * @param maxTrailingBlankLines max trailing blank lines, -1 will suppress trailing EOL
      *
      * @return resulting markdown string
      */
-    public String convert(String html, int maxBlankLines) {
+    public String convert(String html, int maxTrailingBlankLines) {
         Document document = Jsoup.parse(html);
 
         if (DUMP_HTML_TREE.get(getOptions())) {
-            LineFormattingAppendableImpl trace = new LineFormattingAppendableImpl(0);
+            LineAppendableImpl trace = new LineAppendableImpl(0);
             trace.setIndentPrefix("  ");
             dumpHtmlTree(trace, document.body());
-            System.out.println(trace.toString(0));
+            System.out.println(trace.toString(0, 0));
         }
 
         MainHtmlConverter converter = new MainHtmlConverter(options, new HtmlMarkdownWriter(htmlConverterOptions.formatFlags), document, null);
         converter.render(document);
 
-        boolean eolEnd = maxBlankLines >= 0 && converter.getMarkdown().getPendingEOL() > 0;
-        String s = converter.getMarkdown().toString(maxBlankLines);
-        return eolEnd ? s : Utils.removeSuffix(s, "\n");
+        return ((LineAppendable) converter.getMarkdown()).toString(htmlConverterOptions.maxBlankLines, maxTrailingBlankLines);
     }
 
     public static void dumpHtmlTree(LineAppendable out, Node node) {
@@ -398,7 +394,7 @@ public class FlexmarkHtmlConverter {
     public void convert(Node node, Appendable output, int maxTrailingBlankLines) {
         MainHtmlConverter renderer = new MainHtmlConverter(options, new HtmlMarkdownWriter(htmlConverterOptions.formatFlags), node.ownerDocument(), null);
         renderer.render(node);
-        renderer.flushTo(output, maxTrailingBlankLines);
+        renderer.flushTo(output, htmlConverterOptions.maxBlankLines, maxTrailingBlankLines);
     }
 
     /**
@@ -495,6 +491,7 @@ public class FlexmarkHtmlConverter {
          *
          * @return {@code this}
          */
+        @SuppressWarnings("UnusedReturnValue")
         public Builder linkResolverFactory(HtmlLinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
             addExtensionApiPoint(linkResolverFactory);
@@ -516,7 +513,7 @@ public class FlexmarkHtmlConverter {
         void extend(Builder builder);
     }
 
-    private final static Iterator<? extends Node> NULL_ITERATOR = new Iterator<Node>() {
+    private final static Iterator<Node> NULL_ITERATOR = new Iterator<Node>() {
         @Override
         public boolean hasNext() {
             return false;
@@ -532,10 +529,10 @@ public class FlexmarkHtmlConverter {
         }
     };
 
-    final public static Iterable<? extends Node> NULL_ITERABLE = (Iterable<Node>) () -> null;
+    final public static Iterable<Node> NULL_ITERABLE = (Iterable<Node>) () -> NULL_ITERATOR;
 
     public static class RendererDependencyStage {
-        private final List<DelegatingNodeRendererFactoryWrapper> dependents;
+        final List<DelegatingNodeRendererFactoryWrapper> dependents;
 
         public RendererDependencyStage(List<DelegatingNodeRendererFactoryWrapper> dependents) {
             this.dependents = dependents;
@@ -560,6 +557,8 @@ public class FlexmarkHtmlConverter {
     }
 
     private static class RendererDependencyHandler extends DependencyHandler<DelegatingNodeRendererFactoryWrapper, RendererDependencyStage, RendererDependencies> {
+        RendererDependencyHandler() {}
+
         @NotNull
         @Override
         protected Class<?> getDependentClass(DelegatingNodeRendererFactoryWrapper dependent) {
@@ -582,7 +581,7 @@ public class FlexmarkHtmlConverter {
     private class MainHtmlConverter extends HtmlNodeConverterSubContext {
         private final Document document;
         private final com.vladsch.flexmark.util.ast.Document myForDocument;
-        private final Map<String, HtmlNodeRendererHandler> renderers;
+        private final Map<String, HtmlNodeRendererHandler<?>> renderers;
 
         private final List<PhasedHtmlNodeRenderer> phasedFormatters;
         private final Set<HtmlConverterPhase> renderingPhases;
@@ -592,8 +591,8 @@ public class FlexmarkHtmlConverter {
         private final HtmlConverterOptions myHtmlConverterOptions;
         private final Pattern specialCharsPattern;
 
-        private Stack<HtmlConverterState> myStateStack;
-        private Map<String, String> mySpecialCharsMap;
+        private final Stack<HtmlConverterState> myStateStack;
+        private final Map<String, String> mySpecialCharsMap;
         private HtmlConverterState myState;
         private boolean myTrace;
         private boolean myInlineCode;
@@ -651,7 +650,7 @@ public class FlexmarkHtmlConverter {
                 Set<HtmlNodeRendererHandler<?>> formattingHandlers = htmlNodeRenderer.getHtmlNodeRendererHandlers();
                 if (formattingHandlers == null) continue;
 
-                for (HtmlNodeRendererHandler nodeType : formattingHandlers) {
+                for (HtmlNodeRendererHandler<?> nodeType : formattingHandlers) {
                     // Overwrite existing renderer
                     renderers.put(nodeType.getTagName(), nodeType);
                 }
@@ -684,7 +683,7 @@ public class FlexmarkHtmlConverter {
             SubHtmlNodeConverter(MainHtmlConverter mainNodeRenderer, HtmlMarkdownWriter out, @Nullable DataHolder options) {
                 super(out);
                 myMainNodeRenderer = mainNodeRenderer;
-                myOptions = options == null ? myMainNodeRenderer.getOptions() : new ScopedDataSet(myMainNodeRenderer.getOptions(), options);
+                myOptions = options == null || options == myMainNodeRenderer.getOptions() ? myMainNodeRenderer.getOptions() : new ScopedDataSet(myMainNodeRenderer.getOptions(), options);
             }
 
             @Override
@@ -711,26 +710,20 @@ public class FlexmarkHtmlConverter {
 
             @Override
             public HtmlNodeConverterContext getSubContext() {
-                HtmlMarkdownWriter htmlWriter = new HtmlMarkdownWriter(this.markdown.getOptions());
-                htmlWriter.setContext(this);
-                //noinspection ReturnOfInnerClass
-                return new SubHtmlNodeConverter(myMainNodeRenderer, htmlWriter, null);
+                return getSubContext(myOptions, StringSequenceBuilder.emptyBuilder());
             }
 
             @Override
             public HtmlNodeConverterContext getSubContext(DataHolder options) {
-                HtmlMarkdownWriter htmlWriter = new HtmlMarkdownWriter(this.markdown.getOptions());
-                htmlWriter.setContext(this);
-                //noinspection ReturnOfInnerClass
-                return new SubHtmlNodeConverter(myMainNodeRenderer, htmlWriter, new ScopedDataSet(myOptions, options));
+                return getSubContext(options, StringSequenceBuilder.emptyBuilder());
             }
 
             @Override
-            public HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder) {
+            public HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
                 HtmlMarkdownWriter writer = new HtmlMarkdownWriter(this.markdown.getOptions(), builder);
                 writer.setContext(this);
                 //noinspection ReturnOfInnerClass
-                return new SubHtmlNodeConverter(myMainNodeRenderer, writer, new ScopedDataSet(myOptions, options));
+                return new SubHtmlNodeConverter(myMainNodeRenderer, writer, options == null || options == myOptions ? myOptions : new ScopedDataSet(myOptions, options));
             }
 
             @Override
@@ -1028,7 +1021,7 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
-            return resolveLink(linkType, url, (Attributes) null, urlEncode);
+            return resolveLink(linkType, url, null, urlEncode);
         }
 
         @Override
@@ -1100,11 +1093,11 @@ public class FlexmarkHtmlConverter {
 
         void renderByPreviousHandler(HtmlNodeConverterSubContext subContext) {
             if (subContext.getRenderingNode() != null) {
-                NodeRenderingHandlerWrapper nodeRenderer = subContext.renderingHandlerWrapper.myPreviousRenderingHandler;
+                NodeRenderingHandlerWrapper<?> nodeRenderer = subContext.renderingHandlerWrapper.myPreviousRenderingHandler;
 
                 if (nodeRenderer != null) {
                     Node oldNode = subContext.getRenderingNode();
-                    NodeRenderingHandlerWrapper prevWrapper = subContext.renderingHandlerWrapper;
+                    NodeRenderingHandlerWrapper<?> prevWrapper = subContext.renderingHandlerWrapper;
                     try {
                         subContext.renderingHandlerWrapper = nodeRenderer;
                         nodeRenderer.myRenderingHandler.render(oldNode, subContext, subContext.getMarkdown());
@@ -1120,23 +1113,20 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public HtmlNodeConverterContext getSubContext() {
-            HtmlMarkdownWriter writer = new HtmlMarkdownWriter(getMarkdown().getOptions());
-            //writer.setContext(this); // set this temporarily
-            return new SubHtmlNodeConverter(this, writer, null);
+            return getSubContext(null);
         }
 
         @Override
         public HtmlNodeConverterContext getSubContext(DataHolder options) {
-            HtmlMarkdownWriter writer = new HtmlMarkdownWriter(getMarkdown().getOptions());
-            //writer.setContext(this); // set this temporarily
-            return new SubHtmlNodeConverter(this, writer, options);
+            return getSubContext(options, markdown.getBuilder());
         }
 
         @Override
-        public HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull SequenceBuilder builder) {
+        public HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
             HtmlMarkdownWriter writer = new HtmlMarkdownWriter(this.markdown.getOptions(), builder);
             writer.setContext(this);
-            return new SubHtmlNodeConverter(this, writer, new ScopedDataSet(myOptions, options));
+            //noinspection ReturnOfInnerClass
+            return new SubHtmlNodeConverter(this, writer, options == null || options == myOptions ? myOptions : new ScopedDataSet(myOptions, options));
         }
 
         void renderNode(Node node, HtmlNodeConverterSubContext subContext) {
@@ -1169,7 +1159,7 @@ public class FlexmarkHtmlConverter {
                     }
                 }
             } else {
-                HtmlNodeRendererHandler nodeRenderer = renderers.get(node.nodeName().toLowerCase());
+                HtmlNodeRendererHandler<?> nodeRenderer = renderers.get(node.nodeName().toLowerCase());
 
                 if (nodeRenderer == null) {
                     nodeRenderer = renderers.get(DEFAULT_NODE); // get default renderer
@@ -1283,7 +1273,7 @@ public class FlexmarkHtmlConverter {
 
                         if (!value.contains("\"")) {
                             out.append('"').append(value).append('"');
-                        } else if (!value.contains("\'")) {
+                        } else if (!value.contains("'")) {
                             out.append('\'').append(value).append('\'');
                         } else {
                             out.append('"').append(value.replace("\"", "\\\"")).append('"');
@@ -1477,7 +1467,7 @@ public class FlexmarkHtmlConverter {
 
             transferIdToParent();
             popState(null);
-            return subContext.getMarkdown().toString(-1);
+            return ((LineAppendable) subContext.getMarkdown()).toString(-1, -1);
         }
 
         @Override

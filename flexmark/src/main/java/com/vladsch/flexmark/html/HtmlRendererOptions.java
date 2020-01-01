@@ -38,6 +38,7 @@ public class HtmlRendererOptions {
     public final boolean sourceWrapHtmlBlocks;
     public final int formatFlags;
     public final int maxTrailingBlankLines;
+    public final int maxBlankLines;
     public final boolean htmlBlockOpenTagEol;
     public final boolean htmlBlockCloseTagEol;
     public final boolean unescapeHtmlEntities;
@@ -76,6 +77,7 @@ public class HtmlRendererOptions {
         sourceWrapHtmlBlocks = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS.get(options);
         formatFlags = HtmlRenderer.FORMAT_FLAGS.get(options);
         maxTrailingBlankLines = HtmlRenderer.MAX_TRAILING_BLANK_LINES.get(options);
+        maxBlankLines = HtmlRenderer.MAX_BLANK_LINES.get(options);
         htmlBlockOpenTagEol = HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL.get(options);
         htmlBlockCloseTagEol = HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL.get(options);
         unescapeHtmlEntities = HtmlRenderer.UNESCAPE_HTML_ENTITIES.get(options);

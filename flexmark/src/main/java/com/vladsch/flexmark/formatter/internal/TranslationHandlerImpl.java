@@ -272,11 +272,11 @@ public class TranslationHandlerImpl implements TranslationHandler {
         int pendingEOL = writer.offsetWithPending();
 
         // trim off eol added by toString(0)
-        String toString = writer.toString(0);
-        if (pendingEOL > 0 && pendingEOL == toString.length() && toString.charAt(pendingEOL - 1) == '\n') {
-            pendingEOL--;
-        }
-        String spanText = toString.substring(0, pendingEOL);
+        String toString = writer.toString(2, -1);
+//        if (pendingEOL > 0 && pendingEOL == toString.length() && toString.charAt(pendingEOL - 1) == '\n') {
+//            pendingEOL--;
+//        }
+        String spanText = toString;
 
         myWriter = savedMarkdown;
         if (copyToMain) {

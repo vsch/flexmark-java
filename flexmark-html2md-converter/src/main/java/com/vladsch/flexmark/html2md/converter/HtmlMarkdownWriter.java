@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
@@ -15,8 +15,8 @@ public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, N
         super(formatOptions);
     }
 
-    public HtmlMarkdownWriter(int formatOptions, @NotNull SequenceBuilder builder) {
-        super(formatOptions, builder);
+    public HtmlMarkdownWriter(int formatOptions, @NotNull ISequenceBuilder<?, ?> builder) {
+        super(builder, formatOptions);
     }
 
     @Override
@@ -36,6 +36,7 @@ public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, N
         return false;
     }
 
+    @NotNull
     @Override
     public HtmlMarkdownWriter tailBlankLine(int count) {
         if (isLastBlockQuoteChild()) {

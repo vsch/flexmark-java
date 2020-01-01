@@ -318,7 +318,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         return partsSize == 0 ? null : getSegOrNull(partsSize - 1);
     }
 
-    private boolean haveDanglingText() {
+    protected boolean haveDanglingText() {
         return text.length() > immutableOffset;
     }
 

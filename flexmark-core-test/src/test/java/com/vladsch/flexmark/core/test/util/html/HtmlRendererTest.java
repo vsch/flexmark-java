@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
@@ -180,7 +181,7 @@ final public class HtmlRendererTest {
                         subContext.doNotRenderLinks();
                     }
                     subContext.delegateRender();
-                    String s = subContext.getHtmlWriter().toString(-1);
+                    String s = ((LineAppendable) subContext.getHtmlWriter()).toString(-1, -1);
                     html.raw(s);
                 }
             }));

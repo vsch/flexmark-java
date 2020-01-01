@@ -7,9 +7,14 @@ import org.jetbrains.annotations.Nullable;
  * A Builder for non based strings. Just a string builder wrapped in a sequence builder interface
  */
 public final class StringSequenceBuilder implements ISequenceBuilder<StringSequenceBuilder, CharSequence> {
+    @NotNull
+    public static StringSequenceBuilder emptyBuilder() {
+        return new StringSequenceBuilder();
+    }
+
     private final StringBuilder segments;
 
-    public StringSequenceBuilder() {
+    private StringSequenceBuilder() {
         this.segments = new StringBuilder();
     }
 
@@ -20,6 +25,11 @@ public final class StringSequenceBuilder implements ISequenceBuilder<StringSeque
     @NotNull
     public StringSequenceBuilder getBuilder() {
         return new StringSequenceBuilder();
+    }
+
+    @Override
+    public char charAt(int index) {
+        return segments.charAt(index);
     }
 
     @NotNull

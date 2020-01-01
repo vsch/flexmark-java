@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.collection.*;
 import com.vladsch.flexmark.util.format.MarkdownParagraphTest;
 import com.vladsch.flexmark.util.format.TrackedOffsetListTest;
 import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBaseTest;
-import com.vladsch.flexmark.util.html.LineFormattingAppendableImplTest;
+import com.vladsch.flexmark.util.html.LineAppendableImplTest;
 import com.vladsch.flexmark.util.html.ui.HtmlBuilderTest;
 import com.vladsch.flexmark.util.html.ui.HtmlHelpersTest;
 import com.vladsch.flexmark.util.options.AttributeTest;
@@ -64,7 +64,7 @@ import org.junit.runners.Suite;
         HtmlBuilderTest.class,
         HtmlFormattingAppendableBaseTest.class,
         HtmlHelpersTest.class,
-        LineFormattingAppendableImplTest.class,
+        LineAppendableImplTest.class,
 //        LineAppendableImplTest.class,
 })
 public class UtilsTestSuite {

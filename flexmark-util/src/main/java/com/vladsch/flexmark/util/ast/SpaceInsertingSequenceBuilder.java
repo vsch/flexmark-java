@@ -49,6 +49,11 @@ public class SpaceInsertingSequenceBuilder implements ISequenceBuilder<SpaceInse
         return out;
     }
 
+    @Override
+    public char charAt(int index) {
+        return out.charAt(index);
+    }
+
     public boolean isAddSpaceOnNonBlank() {
         return addSpaceOnNonBlank;
     }

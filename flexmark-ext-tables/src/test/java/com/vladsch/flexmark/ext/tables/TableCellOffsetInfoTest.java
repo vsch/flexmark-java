@@ -31,7 +31,7 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
-        String formattedTable = out.toString(0);
+        String formattedTable = out.toString(0, 0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
 
         assertEquals("" +
@@ -75,7 +75,7 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
-        String formattedTable = out.toString(0);
+        String formattedTable = out.toString(0, 0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
 
         assertEquals("" +
@@ -365,7 +365,7 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
-        String formattedTable = out.toString(0);
+        String formattedTable = out.toString(0, 0);
         TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
 
         assertEquals("" +

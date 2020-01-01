@@ -219,6 +219,14 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.92
 
+* Fix: `LineAppendableImpl.appendTo` and all context rendering methods `flushTo()` now take a
+  separate arguments for `maxBlankLines` which applies to body of text.
+  `maxTrailingBlankLines` which applies to trailing blank lines in appendable.
+* Fix: `LineAppendableImpl` re-implement and clean up using a more consistent model for
+  accumulating and manipulating lines of output.
+  * Add: separate arguments for `maxBlankLines` which applies to body of text and
+    `maxTrailingBlankLines` which applies to trailing blank lines in appendable.
+  * Change: accumulation now done as full lines with information on prefix, and eol
 * Add: `TrackedOffsetList` for efficient tracked offset location
 * Fix: add formatter tracking when formatting first block element child of an empty list item to
   allow having block element on same line as list item prefix.

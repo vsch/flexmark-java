@@ -229,7 +229,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             RenderingVisitor visitor = new RenderingVisitor(html, tocOptions);
             visitor.render(document);
             try {
-                html.appendTo(output, 0);
+                html.appendTo(output, 0, 0);
             } catch (IOException e) {
                 e.printStackTrace();
             }

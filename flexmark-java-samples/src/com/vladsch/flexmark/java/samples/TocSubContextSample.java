@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -58,7 +59,7 @@ public class TocSubContextSample {
                 // test the node to see if it needs overriding
                 NodeRendererContext subContext = context.getDelegatedSubContext(true);
                 subContext.delegateRender();
-                String tocText = subContext.getHtmlWriter().toString(0);
+                String tocText = ((LineAppendable) subContext.getHtmlWriter()).toString(0, 0);
 
                 // output to separate stream
                 System.out.println("---- TOC HTML --------------------");

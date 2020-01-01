@@ -536,6 +536,7 @@ public interface SequenceUtils {
     // @formatter:off
     static int countLeadingSpaceTab(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
     static int countTrailingSpaceTab(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz, int fromIndex)                                            { return countTrailing(thizz, SPACE_TAB_SET, 0, fromIndex); }
     static int countLeadingNotSpaceTab(@NotNull CharSequence thizz)                                                         { return countLeading(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
     static int countTrailingNotSpaceTab(@NotNull CharSequence thizz)                                                        { return countTrailing(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
 

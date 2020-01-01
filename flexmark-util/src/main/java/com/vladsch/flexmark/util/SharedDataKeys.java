@@ -26,6 +26,7 @@ public class SharedDataKeys {
     // HtmlRenderer
     public static final DataKey<Integer> RENDERER_FORMAT_FLAGS = new DataKey<>("RENDERER_FORMAT_FLAGS", LineAppendable.F_TRIM_LEADING_WHITESPACE);
     public static final DataKey<Integer> RENDERER_MAX_TRAILING_BLANK_LINES = new DataKey<>("RENDERER_MAX_TRAILING_BLANK_LINES", 1);
+    public static final DataKey<Integer> RENDERER_MAX_BLANK_LINES = new DataKey<>("RENDERER_MAX_BLANK_LINES", 1);
     public static final DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT_SIZE", 0);
     public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("PERCENT_ENCODE_URLS", false);
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = new DataKey<>("HEADER_ID_GENERATOR_RESOLVE_DUPES", true);

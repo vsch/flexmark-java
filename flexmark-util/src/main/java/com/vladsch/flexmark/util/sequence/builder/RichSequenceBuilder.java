@@ -8,9 +8,14 @@ import org.jetbrains.annotations.Nullable;
  * A Builder for non based strings. Just a string builder wrapped in a sequence builder interface and wrapping result in RichSequence
  */
 public final class RichSequenceBuilder implements ISequenceBuilder<RichSequenceBuilder, RichSequence> {
+    @NotNull
+    public static RichSequenceBuilder emptyBuilder() {
+        return new RichSequenceBuilder();
+    }
+
     private final StringBuilder segments;
 
-    public RichSequenceBuilder() {
+    private RichSequenceBuilder() {
         this.segments = new StringBuilder();
     }
 
@@ -21,6 +26,11 @@ public final class RichSequenceBuilder implements ISequenceBuilder<RichSequenceB
     @NotNull
     public RichSequenceBuilder getBuilder() {
         return new RichSequenceBuilder();
+    }
+
+    @Override
+    public char charAt(int index) {
+        return segments.charAt(index);
     }
 
     @NotNull

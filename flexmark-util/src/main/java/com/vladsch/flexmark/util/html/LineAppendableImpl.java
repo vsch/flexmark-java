@@ -1,14 +1,13 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.StringSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,8 +18,11 @@ import java.util.Stack;
 import static com.vladsch.flexmark.util.Utils.maxLimit;
 import static com.vladsch.flexmark.util.Utils.min;
 import static com.vladsch.flexmark.util.Utils.minLimit;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.countTrailingSpaceTab;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.endsWithEOL;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.trimEnd;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.trimmedEOL;
 
 public class LineAppendableImpl implements LineAppendable {
     final private static char EOL = '\n';
@@ -36,7 +38,7 @@ public class LineAppendableImpl implements LineAppendable {
     private int preFormattedLastLineOffset;   // last line end of preformatted offset
 
     // accumulated text and line information
-    final private ISequenceBuilder<?, ?> appendable;
+    private ISequenceBuilder<?, ?> appendable;
     final private ArrayList<LineInfo> linesInfo;     // line contents
     final private ArrayList<CharSequence> lines;     // line contents
 
@@ -48,6 +50,7 @@ public class LineAppendableImpl implements LineAppendable {
     final private Stack<Boolean> indentPrefixStack;
 
     // current line being accumulated
+    private int linePrefixLength;                           // prefix length of the current line
     private boolean allWhitespace;                          // all chars were whitespace
     private boolean lastWasWhitespace;                      // last char was whitespace
     private int eolOnFirstText;                             // append EOLs on first text
@@ -55,7 +58,7 @@ public class LineAppendableImpl implements LineAppendable {
     final private Stack<Integer> optionStack = new Stack<>();
 
     public LineAppendableImpl(int formatOptions) {
-        this(null, LineAppendable.toOptionSet(formatOptions));
+        this(StringSequenceBuilder.emptyBuilder(), LineAppendable.toOptionSet(formatOptions));
     }
 
     public LineAppendableImpl(@NotNull ISequenceBuilder<?, ?> builder, int formatOptions) {
@@ -83,6 +86,7 @@ public class LineAppendableImpl implements LineAppendable {
         prefixAfterEol = BasedSequence.EMPTY;
         indentPrefix = BasedSequence.EMPTY;
         eolOnFirstText = 0;
+        linePrefixLength = 0;
         indentsOnFirstEol = new ArrayList<>();
     }
 
@@ -158,14 +162,28 @@ public class LineAppendableImpl implements LineAppendable {
         return this;
     }
 
+    @NotNull
     @Override
     public CharSequence getPrefix() {
         return prefixAfterEol;
     }
 
+    @NotNull
     @Override
     public CharSequence getBeforeEolPrefix() {
         return prefix;
+    }
+
+    private CharSequence combinedPrefix(@Nullable CharSequence prefix, @Nullable CharSequence suffix) {
+        if (prefix != null && prefix.length() > 0 && suffix != null && suffix.length() > 0) {
+            return String.valueOf(prefix) + suffix;
+        } else if (prefix != null && prefix.length() > 0) {
+            return prefix;
+        } else if (suffix != null && suffix.length() > 0) {
+            return suffix;
+        } else {
+            return BasedSequence.NULL;
+        }
     }
 
     @NotNull
@@ -183,7 +201,7 @@ public class LineAppendableImpl implements LineAppendable {
     }
 
     public int getAfterEolPrefixDelta() {
-        return SequenceUtils.equals(prefixAfterEol, prefix) ? 0 : prefixAfterEol.length() - prefix.length();
+        return prefixAfterEol.length() - prefix.length();
     }
 
     @NotNull
@@ -287,77 +305,65 @@ public class LineAppendableImpl implements LineAppendable {
         return appendable.length() == 0 && getLastLineInfo().isBlankText();
     }
 
-    private int lastNonBlankLine() {
-        int i = lines.size();
-        while (i-- > 0) {
-            CharSequence line = lines.get(i);
-            if (!isBlank(line)) break;
+    private int lastNonBlankLine(int endLine) {
+        if (endLine > lines.size() && appendable.length() > 0 && !allWhitespace) {
+            // have dangling text
+            return lines.size();
         }
-        return i + 1;
+
+        int i = Math.min(lines.size(), endLine);
+        while (i-- > 0) {
+            LineInfo lineInfo = linesInfo.get(i);
+            if (!lineInfo.isBlankText()) break;
+        }
+        return i;
     }
 
     private int trailingBlankLines() {
-        return lines.size() - lastNonBlankLine();
+        return lines.size() - lastNonBlankLine(lines.size()) - 1;
     }
 
     private boolean isLastEol() {
-        return appendable.length() > 0 && appendable.charAt(appendable.length() - 1) == EOL;
+        return appendable.length() == 0 && getLastLineInfo().endsWithEOL();
     }
 
-    private void addLineRange(Range range, CharSequence prefix) {
-        //if (range.getStart() > range.getEnd()) {
-        //    int tmp = 0;
-        //}
-        assert range.getStart() <= range.getEnd();
+    private void addLineRange(Range textRange, CharSequence prefix) {
+        assert textRange.getStart() <= textRange.getEnd();
 
-        if (builder != null) {
-            BasedSequence line = builder.toSequence();
-            resetBuilder();
+        CharSequence sequence = appendable.toSequence();
+        CharSequence text = textRange.isNull() ? BasedSequence.NULL : sequence.subSequence(textRange.getStart(), textRange.getEnd());
+        CharSequence eol = trimmedEOL(sequence);
 
-            assert !line.endsWithEOL() : "Eol on line";
-            if (line.safeCharAt(line.length() - 1) == '\n') {
-                int tmp = 0;
-            }
-            lines.add(line);
-
-            if (line.isBlank() && prefix.length() != 0) {
-                prefix = SequenceUtils.trimEnd(prefix);
-            }
-            prefixes.add(prefix);
-            textLength += line.length() + 1;
-            prefixLength += prefix.length();
-        } else {
-            BasedSequence line = range.isNull() ? BasedSequence.NULL : range.basedSubSequence(appendable);
-            assert !line.endsWithEOL() : "Eol on line";
-            if (line.safeCharAt(line.length() - 1) == '\n') {
-                int tmp = 0;
-            }
-            lines.add(line);
-            if (range.isEmpty() && prefix.length() != 0) {
-                prefix = SequenceUtils.trimEnd(prefix);
-            }
-
-            prefixes.add(prefix);
-            textLength += range.getSpan() + 1;
+        if (textRange.isEmpty()) {
+            prefix = SequenceUtils.trimEnd(prefix);
         }
 
-        prefixLength += prefix.length();
+        assert !endsWithEOL(text);
+
+        CharSequence line = appendable.getBuilder().append(prefix).append(text).append(eol).toSequence();
+
+        LineInfo.Preformatted preformatted;
+
+        if (preFormattedNesting > 0) {
+            preformatted = preFormattedFirstLine == lines.size() ? LineInfo.Preformatted.FIRST : LineInfo.Preformatted.BODY;
+        } else {
+            preformatted = preFormattedFirstLine == lines.size() ? LineInfo.Preformatted.LAST : LineInfo.Preformatted.NONE;
+        }
+
+        linesInfo.add(LineInfo.create(getLastLineInfo(), prefix.length(), text.length(), line.length(), isBlank(prefix), allWhitespace || text.length() == 0, preformatted));
+        lines.add(line);
+
+        resetBuilder();
     }
 
     private void resetBuilder() {
-        if (builder != null && builder.isNotEmpty()) {
-            // start a new line
-            builder = builder.getBuilder();
-        }
+        appendable = appendable.getBuilder();
     }
 
     private void appendEol() {
         appendable.append(EOL);
-
-        int startOffset = lineStart;
-        lineStart = appendable.length();
-        int endOffset = lineStart;
-        addLineRange(Range.of(startOffset, endOffset - 1), prefix);
+        int endOffset = appendable.length();
+        addLineRange(Range.of(linePrefixLength, endOffset - 1), prefix);
         allWhitespace = true;
         lastWasWhitespace = false;
         eolOnFirstText = 0;
@@ -381,6 +387,10 @@ public class LineAppendableImpl implements LineAppendable {
         }
     }
 
+    private boolean isPrefixed(int currentLine) {
+        return any(F_PREFIX_PRE_FORMATTED) || (preFormattedFirstLine == currentLine || preFormattedNesting == 0 && preFormattedLastLine != currentLine);
+    }
+
     /**
      * Returns text range if EOL was appended
      * <p>
@@ -389,42 +399,27 @@ public class LineAppendableImpl implements LineAppendable {
      * @return pair of line text range if EOL was added and prefix
      */
     private Pair<Range, CharSequence> getRangePrefixAfterEol() {
-        int startOffset = lineStart;
+        int startOffset = 0;
         int endOffset = appendable.length() + 1;
         int currentLine = getLineCount();
-        boolean needPrefix = any(F_PREFIX_PRE_FORMATTED) || (preFormattedNesting == 0 && preFormattedLastLine != currentLine || preFormattedFirstLine == currentLine);
+        boolean needPrefix = isPrefixed(currentLine);
 
         if (passThrough) {
             return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? prefix : BasedSequence.NULL);
         } else {
             if (allWhitespace && (preFormattedNesting == 0 && !(preFormattedFirstLine == currentLine || preFormattedLastLine == currentLine))) {
-                if (any(F_ALLOW_LEADING_EOL) && appendable.length() == 0) {
+                if (any(F_ALLOW_LEADING_EOL) || !lines.isEmpty()) {
                     return new Pair<>(Range.of(startOffset, endOffset - 1), prefix);
                 } else {
                     return new Pair<>(Range.NULL, BasedSequence.NULL);
                 }
             } else {
                 // apply options other than convert tabs which is done at time of appending
-//                if (isTrimLeadingWhitespace() &&
-//                        (preFormattedNesting == 0 || preFormattedFirstLine == currentLine) &&
-//                        preFormattedNesting == 0 && preFormattedLastLine != currentLine
-//                ) {
-//                    if (allWhitespace) {
-//                        startOffset = endOffset - 1;
-//                    } else {
-//                        while (startOffset < endOffset && appendable.charAt(startOffset) == ' ') {
-//                            startOffset++;
-//                        }
-//                    }
-//                }
-
                 if (isTrimTrailingWhitespace() && preFormattedNesting == 0) {
                     if (allWhitespace) {
                         startOffset = endOffset - 1;
                     } else {
-                        while (startOffset < endOffset - 1 && appendable.charAt(endOffset - 2) == ' ') {
-                            endOffset--;
-                        }
+                        endOffset -= countTrailingSpaceTab(appendable.toSequence(), endOffset - 1);
                     }
                 }
 
@@ -446,10 +441,12 @@ public class LineAppendableImpl implements LineAppendable {
      *
      * @return would be offset after adding EOL - 1
      */
-    private int offsetAfterEol(boolean includePrefixes) {
+    private int offsetAfterEol() {
         Pair<Range, CharSequence> rangePrefixAfterEol = getRangePrefixAfterEol();
+        LineInfo lastLineInfo = getLastLineInfo();
+
         if (rangePrefixAfterEol.getFirst().isNull()) {
-            return includePrefixes ? textLength + prefixLength : textLength;
+            return lastLineInfo.sumLength;
         } else {
             Range range = rangePrefixAfterEol.getFirst();
             CharSequence prefix = rangePrefixAfterEol.getSecond();
@@ -458,34 +455,14 @@ public class LineAppendableImpl implements LineAppendable {
                 prefix = trimEnd(prefix);
             }
 
-            return includePrefixes ? textLength + rangePrefixAfterEol.getFirst().getSpan() + prefixLength + prefix.length()
-                    : textLength + rangePrefixAfterEol.getFirst().getSpan();
+            return lastLineInfo.sumLength + rangePrefixAfterEol.getFirst().getSpan() + prefix.length();
         }
     }
 
-    private void appendBuilder(CharSequence s) {
-        appendBuilder(s, 0, s.length());
-    }
-
-    private void appendBuilder(CharSequence s, int start, int end) {
-        if (builder != null) {
-            if (start == 0 && end == s.length()) {
-                builder.append(s);
-            } else {
-                builder.append(s.subSequence(start, end));
-            }
-        }
-    }
-
-    private void appendBuilder(char c) {
-        if (builder != null) {
-            builder.append(c);
-        }
-    }
-
-    private void appendBuilder(char c, int count) {
-        if (builder != null) {
-            builder.append(c, count);
+    private void doEolOnFirstTest() {
+        if (eolOnFirstText > 0) {
+            eolOnFirstText = 0;
+            appendEol();
         }
     }
 
@@ -507,73 +484,57 @@ public class LineAppendableImpl implements LineAppendable {
         } else {
             if (c == EOL) {
                 Pair<Range, CharSequence> rangePrefixAfterEol = getRangePrefixAfterEol();
-                if (rangePrefixAfterEol.getFirst().isNull()) {
-                    // nothing, add EOL and don't add line
-                    // add the EOL so as not to mess up the text but do not add the line
-                    appendable.append(c);
+                Range textRange = rangePrefixAfterEol.getFirst();
+                if (textRange.isNull()) {
+                    // nothing to add, just add EOL
                     resetBuilder();
-
-                    lineStart = appendable.length();
-                    allWhitespace = true;
-                    lastWasWhitespace = false;
-                    rawIndentsOnFirstEol();
                 } else {
                     // add EOL and line
                     appendable.append(c);
-                    lineStart = appendable.length();
-                    addLineRange(rangePrefixAfterEol.getFirst(), rangePrefixAfterEol.getSecond());
-                    allWhitespace = true;
-                    lastWasWhitespace = false;
-                    rawIndentsOnFirstEol();
+                    addLineRange(textRange, rangePrefixAfterEol.getSecond());
                 }
+
+                allWhitespace = true;
+                lastWasWhitespace = false;
+                rawIndentsOnFirstEol();
             } else {
-                if (eolOnFirstText > 0) {
-                    eolOnFirstText = 0;
-                    appendEol();
-                }
+                doEolOnFirstTest();
 
                 if (c == '\t') {
                     if (preFormattedNesting == 0 && any(F_COLLAPSE_WHITESPACE)) {
                         if (!lastWasWhitespace) {
                             appendable.append(' ');
-                            appendBuilder(' ');
                             lastWasWhitespace = true;
                         }
                     } else {
                         if (any(F_CONVERT_TABS)) {
-                            int column = appendable.length() - lineStart;
+                            int column = appendable.length();
                             int spaces = 4 - (column % 4);
-                            appendable.append("    ", 0, spaces);
-                            appendBuilder(' ', spaces);
+                            appendable.append(' ', spaces);
                         } else {
-                            appendable.append(c);
-                            appendBuilder(s, index, index + 1);
+                            appendable.append(s, index, index + 1);
                         }
                     }
                 } else {
                     if (c == ' ') {
                         if (preFormattedNesting == 0) {
-                            if (!any(F_TRIM_LEADING_WHITESPACE) || (lineStart != appendable.length() && !allWhitespace)) {
+                            if (!any(F_TRIM_LEADING_WHITESPACE) || (appendable.length() != 0 && !allWhitespace)) {
                                 if (any(F_COLLAPSE_WHITESPACE)) {
                                     if (!lastWasWhitespace) {
                                         appendable.append(' ');
-                                        appendBuilder(' ');
                                     }
                                 } else {
                                     appendable.append(' ');
-                                    appendBuilder(' ');
                                 }
                             }
                         } else {
                             appendable.append(' ');
-                            appendBuilder(' ');
                         }
                         lastWasWhitespace = true;
                     } else {
                         allWhitespace = false;
                         lastWasWhitespace = false;
-                        appendable.append(c);
-                        appendBuilder(s, index, index + 1);
+                        appendable.append(s, index, index + 1);
                     }
                 }
             }
@@ -597,9 +558,10 @@ public class LineAppendableImpl implements LineAppendable {
         return this;
     }
 
+    @NotNull
     @Override
-    public @Nullable SequenceBuilder getBuilder() {
-        return builder;
+    public ISequenceBuilder<?, ?> getBuilder() {
+        return appendable.getBuilder();
     }
 
     @NotNull
@@ -634,230 +596,10 @@ public class LineAppendableImpl implements LineAppendable {
         return this;
     }
 
-    private CharSequence combinedPrefix(@Nullable CharSequence prefix, @Nullable CharSequence suffix) {
-        if (prefix != null && prefix.length() > 0 && suffix != null && suffix.length() > 0) {
-            return String.valueOf(prefix) + suffix;
-        } else if (prefix != null && prefix.length() > 0) {
-            return prefix;
-        } else if (suffix != null && suffix.length() > 0) {
-            return suffix;
-        } else {
-            return BasedSequence.NULL;
-        }
-    }
-
-    @Override
-    public boolean isPreFormattedLine(int line) {
-        return getLinePrefix(line) == BasedSequence.NULL;
-    }
-
-    @NotNull
-    @Override
-    public LineAppendable append(@NotNull LineAppendable lineAppendable, int startLine, int endLine) {
-        CharSequence[] lines = lineAppendable.getLinesContent(startLine, endLine);
-        CharSequence[] prefixes = lineAppendable.getLinesPrefix(startLine, endLine);
-
-        int iMax = lines.length;
-        for (int i = 0; i < iMax; i++) {
-            CharSequence line = lines[i];
-            CharSequence prefix = prefixes[i];
-
-            int startOffset = appendable.length();
-
-            appendable.append(line);
-            appendBuilder(line);
-
-            appendable.append(EOL);
-            // NOTE: builder lines do not have EOL added
-//            appendBuilder(EOL);
-
-            int endOffset = appendable.length();
-
-            CharSequence combinedPrefix = any(F_PREFIX_PRE_FORMATTED) || !lineAppendable.isPreFormattedLine(startLine + i) ? combinedPrefix(this.prefix, prefix) : BasedSequence.NULL;
-            addLineRange(Range.of(startOffset, endOffset - 1), combinedPrefix);
-            lineStart = endOffset;
-        }
-        return this;
-    }
-
-    @NotNull
-    @Override
-    public LineAppendable prefixLinesWith(@NotNull CharSequence prefix, boolean addAfterLinePrefix, int startLine, int endLine) {
-        int useStartLine = minLimit(startLine, 0);
-        int useEndLine = maxLimit(endLine, getLineCount());
-
-        if (prefix.length() > 0 && useStartLine < useEndLine) {
-            // now need to add prefix to line contents
-            CharSequence lastLinePrefix = BasedSequence.NULL;
-            CharSequence lastPrefix = addAfterLinePrefix ? combinedPrefix(lastLinePrefix, prefix) : combinedPrefix(prefix, lastLinePrefix);
-
-            for (int i = useStartLine; i < useEndLine; i++) {
-                CharSequence linePrefix = prefixes.get(i);
-                if (any(F_PREFIX_PRE_FORMATTED) || !isPreFormattedLine(i)) {
-                    // need prefix
-                    if (!linePrefix.equals(lastLinePrefix)) {
-                        lastLinePrefix = linePrefix;
-                        lastPrefix = addAfterLinePrefix ? combinedPrefix(lastLinePrefix, prefix) : combinedPrefix(prefix, lastLinePrefix);
-                    }
-                    prefixes.set(i, lastPrefix);
-                } else {
-                    prefixes.set(i, BasedSequence.NULL);
-                }
-            }
-        }
-        return this;
-    }
-
-    @NotNull
-    @Override
-    public LineAppendable removeLines(int startLine, int endLine) {
-        int useStartLine = minLimit(startLine, 0);
-        int useEndLine = maxLimit(endLine, getLineCount());
-
-        if (useStartLine < useEndLine) {
-            int count = useEndLine - useStartLine;
-            while (count-- > 0) {
-                CharSequence line = lines.remove(startLine);
-                CharSequence prefix = prefixes.remove(startLine);
-                textLength -= line.length() + 1;
-                prefixLength -= prefix.length();
-            }
-        }
-        return this;
-    }
-
-    @Override
-    public String toString(int maxBlankLines) {
-        if (passThrough) {
-            line();
-            return appendable.toString();
-        } else {
-            StringBuilder out = new StringBuilder();
-            try {
-                appendTo(out, maxBlankLines);
-            } catch (IOException ignored) {
-
-            }
-            return out.toString();
-        }
-    }
-
-    @NotNull
-    @Override
-    public CharSequence[] getLinesContent(int startOffset, int endOffset) {
-        line();
-
-        int iMax = Utils.maxLimit(endOffset, lines.size());
-        CharSequence[] result = new CharSequence[Math.max(0, iMax - startOffset)];
-
-        for (int i = startOffset; i < iMax; i++) {
-            CharSequence line = lines.get(i);
-            result[i - startOffset] = line;
-        }
-        return result;
-    }
-
-    @Override
-    public void setLinePrefixIndex(int lineIndex, int prefixEndIndex) {
-
-    }
-
-    @Override
-    public void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content) {
-
-    }
-
-    @NotNull
-    @Override
-    public int[] getLinesPrefixIndex(int startLine, int endLine) {
-        line();
-
-        int iMax = maxLimit(endLine, lines.size());
-        int[] result = new int[Math.max(0, iMax - startLine)];
-
-        for (int i = startLine; i < iMax; i++) {
-            CharSequence prefix = prefixes.get(i);
-            result[i - startLine] = prefix.length();
-        }
-        return result;
-    }
-
-    @NotNull
-    @Override
-    public CharSequence[] getLinesPrefix(int startOffset, int endOffset) {
-        line();
-
-        int iMax = Utils.maxLimit(endOffset, lines.size());
-        CharSequence[] result = new CharSequence[Math.max(0, iMax - startOffset)];
-
-        for (int i = startOffset; i < iMax; i++) {
-            result[i - startOffset] = prefixes.get(i);
-        }
-        return result;
-    }
-
-    @NotNull
-    @Override
-    public CharSequence[] getLines(int startOffset, int endOffset) {
-        line();
-
-        int iMax = Utils.maxLimit(endOffset, lines.size());
-        CharSequence[] result = new CharSequence[Math.max(0, iMax - startOffset)];
-
-        if (builder != null) {
-            for (int i = startOffset; i < iMax; i++) {
-                CharSequence line = lines.get(i);
-                CharSequence linePrefix = prefixes.get(i);
-
-                if (linePrefix.length() != 0) {
-                    CharSequence basedSequence = builder.getBuilder().append(linePrefix).append(line).toSequence();
-                    result[i - startOffset] = basedSequence;
-                } else {
-                    result[i - startOffset] = line;
-                }
-            }
-        } else {
-            for (int i = startOffset; i < iMax; i++) {
-                CharSequence line = lines.get(i);
-                CharSequence linePrefix = prefixes.get(i);
-
-                if (linePrefix.length() != 0) {
-                    result[i - startOffset] = linePrefix.toString() + line;
-                } else {
-                    result[i - startOffset] = line;
-                }
-            }
-        }
-
-        return result;
-    }
-
-    @NotNull
-    @Override
-    public LineAppendable appendTo(@NotNull Appendable out, int maxBlankLines, CharSequence prefix, int startLine, int endLine) throws IOException {
-        line();
-        int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
-
-        int iMax = min(endLine, lines.size() - removeBlankLines);
-
-        for (int i = startLine; i < iMax; i++) {
-            CharSequence line = lines.get(i);
-            CharSequence linePrefix = prefixes.get(i);
-            if (linePrefix.length() != 0) out.append(linePrefix);
-            if (prefix != null && prefix.length() > 0) out.append(prefix);
-            out.append(line);
-
-            if (maxBlankLines != -1 || i + 1 != iMax) {
-                out.append(EOL);
-            }
-        }
-        return this;
-    }
-
     @NotNull
     @Override
     public LineAppendable line() {
-        if (preFormattedNesting > 0 || lineStart < appendable.length() || any(F_ALLOW_LEADING_EOL)) {
+        if (preFormattedNesting > 0 || appendable.length() != 0 || any(F_ALLOW_LEADING_EOL)) {
             appendImpl(SequenceUtils.EOL, 0);
         } else {
             rawIndentsOnFirstEol();
@@ -868,7 +610,7 @@ public class LineAppendableImpl implements LineAppendable {
     @NotNull
     @Override
     public LineAppendable lineWithTrailingSpaces(int count) {
-        if (preFormattedNesting > 0 || lineStart < appendable.length() || any(F_ALLOW_LEADING_EOL)) {
+        if (preFormattedNesting > 0 || appendable.length() != 0 || any(F_ALLOW_LEADING_EOL)) {
             int options = this.options.toInt();
             this.options.andNotMask(F_TRIM_TRAILING_WHITESPACE | F_COLLAPSE_WHITESPACE);
             if (count > 0) append(' ', count);
@@ -916,50 +658,46 @@ public class LineAppendableImpl implements LineAppendable {
 
     @Override
     public int column() {
-        return appendable.length() - lineStart;
+        return appendable.length();
+    }
+
+    @NotNull
+    @Override
+    public LineInfo getLineInfo(int lineIndex) {
+        return linesInfo.get(lineIndex);
+    }
+
+    @Override
+    public @NotNull BasedSequence getLine(int lineIndex) {
+        return BasedSequence.of(lines.get(lineIndex));
     }
 
     @Override
     public int offset() {
-        return textLength + prefixLength;
+        return getLastLineInfo().sumLength;
     }
 
     @Override
     public int offsetWithPending() {
-        return offsetAfterEol(true);
-    }
-
-    @Override
-    public int textOnlyOffset() {
-        return textLength;
-    }
-
-    @Override
-    public int textOnlyOffsetWithPending() {
-        return offsetAfterEol(false);
+        return offsetAfterEol();
     }
 
     @Override
     public boolean isPendingSpace() {
-        return appendable.length() > 0 && " \t".indexOf(appendable.charAt(appendable.length() - 1)) != -1;
+        return appendable.length() > 0 && lastWasWhitespace;
     }
 
     @Override
     public int getPendingSpace() {
-        int length = appendable.length();
-        if (length == 0) return 0;
-        int spaces = 0;
-        while (length-- > 0 && " \t".indexOf(appendable.charAt(length)) != -1) {
-            spaces++;
+        if (lastWasWhitespace && appendable.length() != 0) {
+            return SequenceUtils.countTrailingSpaceTab(appendable.toSequence());
         }
-        return spaces;
+        return 0;
     }
 
     @Override
     public int getPendingEOL() {
-        int withPending = textOnlyOffsetWithPending();
-
-        if (withPending == textLength) {
+        if (appendable.length() == 0) {
             // use count of blank lines+1
             return trailingBlankLines() + 1;
         } else {
@@ -1002,78 +740,197 @@ public class LineAppendableImpl implements LineAppendable {
 
     @Override
     public String toString() {
-        return appendable.toString();
+        StringBuilder out = new StringBuilder();
+        try {
+            appendToNoLine(out, Integer.MAX_VALUE, Integer.MAX_VALUE, 0, Integer.MAX_VALUE);
+            out.append(appendable);
+        } catch (IOException ignored) {
+
+        }
+        return out.toString();
+    }
+
+    @NotNull
+    @Override
+    public String toString(int maxBlankLines, int maxTrailingBlankLines) {
+        StringBuilder out = new StringBuilder();
+        try {
+            appendTo(out, maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
+        } catch (IOException ignored) {
+
+        }
+        return out.toString();
     }
 
     @Override
-    public void toBuilder(@NotNull SequenceBuilder builder, int maxBlankLines) {
+    public <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException {
         line();
-        int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
+        return appendToNoLine(out, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
+    }
 
-        int iMax = lines.size() - removeBlankLines;
-        for (int i = 0; i < iMax; i++) {
-            CharSequence prefix = prefixes.get(i);
+    public <T extends Appendable> T appendToNoLine(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException {
+        boolean tailEOL = maxTrailingBlankLines >= 0;
+        maxBlankLines = Math.max(0, maxBlankLines);
+        maxTrailingBlankLines = Math.max(0, maxTrailingBlankLines);
+
+        int iMax = min(lines.size(), endLine);
+        int lastNonBlankLine = lastNonBlankLine(endLine);
+        int consecutiveBlankLines = 0;
+
+        for (int i = startLine; i < iMax; i++) {
+            LineInfo info = linesInfo.get(i);
             CharSequence line = lines.get(i);
-            builder.append(prefix);
-            builder.append(line);
 
-            if (maxBlankLines != -1 || i + 1 != iMax) {
-                builder.append(SequenceUtils.EOL);
+            if (info.isBlankText() && !info.isPreformatted()) {
+                if (i > lastNonBlankLine) {
+                    // NOTE: these are tail blank lines
+                    if (consecutiveBlankLines < maxTrailingBlankLines) {
+                        consecutiveBlankLines++;
+                        out.append(trimEnd(line.subSequence(0, info.prefixLength)));
+                        if (tailEOL || consecutiveBlankLines != maxTrailingBlankLines) {
+                            out.append(EOL);
+                        }
+                    }
+                } else {
+                    if (consecutiveBlankLines < maxBlankLines) {
+                        consecutiveBlankLines++;
+                        out.append(trimEnd(line.subSequence(0, info.prefixLength)));
+                        out.append(EOL);
+                    }
+                }
+            } else {
+                consecutiveBlankLines = 0;
+                if (tailEOL || i < lastNonBlankLine || info.isPreformatted() && info.getPreformatted() != LineInfo.Preformatted.LAST) {
+                    out.append(line);
+                } else {
+                    out.append(line.subSequence(0, line.length() - 1));
+                }
+            }
+        }
+        return out;
+    }
+
+    @NotNull
+    @Override
+    public LineAppendable append(@NotNull LineAppendable lineAppendable, int startLine, int endLine) {
+        int iMax = lineAppendable.getLineCount();
+        for (int i = 0; i < iMax; i++) {
+            CharSequence fullLine = lineAppendable.getLine(i);
+            LineInfo lineInfo = lineAppendable.getLineInfo(i);
+            CharSequence line = fullLine.subSequence(lineInfo.getTextStart(), lineInfo.getTextEnd());
+            CharSequence prefix = fullLine.subSequence(0, lineInfo.prefixLength);
+
+            appendable.append(line);
+            appendable.append(EOL);
+            allWhitespace = lineInfo.isBlankText();
+
+            int endOffset = appendable.length();
+            CharSequence combinedPrefix = any(F_PREFIX_PRE_FORMATTED) || !lineInfo.isPreformatted() || lineInfo.getPreformatted() == LineInfo.Preformatted.FIRST ? combinedPrefix(this.prefix, prefix) : BasedSequence.NULL;
+            addLineRange(Range.of(0, endOffset - 1), combinedPrefix);
+        }
+        return this;
+    }
+
+    /**
+     * Remove lines and return index from which line info must be recomputed
+     *
+     * @param startLine start line index to remove
+     * @param endLine   end line index to remove
+     *
+     * @return index from which line info must be recomputed
+     */
+    private int removeLinesRaw(int startLine, int endLine) {
+        int useStartLine = minLimit(startLine, 0);
+        int useEndLine = maxLimit(endLine, getLineCount());
+
+        if (useStartLine < useEndLine) {
+            linesInfo.subList(useStartLine, useEndLine).clear();
+            lines.subList(useStartLine, useEndLine).clear();
+
+            // recompute lineInfo for lines at or after the delete lines
+            return useStartLine;
+        }
+        return lines.size();
+    }
+
+    private void recomputeLineInfo(int startLine) {
+        // recompute lineInfo for lines at or after the delete lines
+        int iMax = lines.size();
+        startLine = Math.max(0, startLine);
+
+        if (startLine < iMax) {
+            LineInfo lastInfo = startLine - 1 >= 0 ? linesInfo.get(startLine - 1) : LineInfo.NULL;
+            for (int i = startLine; i < iMax; i++) {
+                LineInfo lineInfo = linesInfo.get(i);
+                lastInfo = LineInfo.create(lastInfo, lineInfo);
             }
         }
     }
 
+    @NotNull
     @Override
-    public void forAllLines(int maxBlankLines, @NotNull LineProcessor processor) {
+    public LineAppendable removeLines(int startLine, int endLine) {
+        int useStartLine = removeLinesRaw(startLine, endLine);
+        recomputeLineInfo(useStartLine);
+        return this;
+    }
+
+    @Override
+    public LineAppendable normalizeTo(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
         line();
-        int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxBlankLines, 0), 0);
+
+        maxBlankLines = Math.max(0, maxBlankLines);
+        maxTrailingBlankLines = Math.max(0, maxTrailingBlankLines);
+
+        int iMax = min(endLine, lines.size());
+
+        int consecutiveBlankLines = 0;
+        int maxConsecutiveBlankLines = maxTrailingBlankLines;
+        int minRemovedLine = lines.size();
+
+        for (int i = iMax; i-- > 0; ) {
+            LineInfo info = linesInfo.get(i);
+            CharSequence line = lines.get(i);
+
+            if (info.isBlankText() && !info.isPreformatted()) {
+                consecutiveBlankLines++;
+                if (consecutiveBlankLines > maxConsecutiveBlankLines) {
+                    linesInfo.remove(i);
+                    lines.remove(i);
+                    minRemovedLine = i;
+                }
+            } else {
+                consecutiveBlankLines = 0;
+                maxConsecutiveBlankLines = maxBlankLines;
+            }
+        }
+
+        recomputeLineInfo(minRemovedLine);
+        return this;
+    }
+
+//    @Override
+//    public void setLinePrefixIndex(int lineIndex, int prefixEndIndex) {
+//
+//    }
+//
+//    @Override
+//    public void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content) {
+//        // FIX: implement this
+//
+//    }
+
+    @Override
+    public void forAllLines(int maxTrailingBlankLines, int startLine, int endLine, @NotNull LineProcessor processor) {
+        line();
+        int removeBlankLines = minLimit(trailingBlankLines() - minLimit(maxTrailingBlankLines, 0), 0);
 
         int iMax = lines.size() - removeBlankLines;
-        int sumLength = 0;
-        int sumPrefix = 0;
-        int sumText = 0;
-        if (builder != null) {
-            for (int i = 0; i < iMax; i++) {
-                SequenceBuilder subBuilder = builder.getBuilder();
-                CharSequence prefix = prefixes.get(i);
-                CharSequence line = lines.get(i);
-                subBuilder.append(prefix);
-                int textStart = subBuilder.length();
+        startLine = Math.max(0, startLine);
+        endLine = Math.max(startLine, Math.min(iMax, endLine));
 
-                subBuilder.append(line);
-                int textEnd = subBuilder.length();
-
-                if (maxBlankLines != -1 || i + 1 != iMax) {
-                    subBuilder.append(SequenceUtils.EOL);
-                }
-
-                BasedSequence useLine = subBuilder.toSequence();
-                if (!processor.processLine(useLine, i, textStart, textEnd, sumPrefix, sumText, sumLength)) break;
-                sumLength += useLine.length();
-                sumPrefix += prefix.length();
-                sumText += line.length();
-            }
-        } else {
-            for (int i = 0; i < iMax; i++) {
-                CharSequence prefix = prefixes.get(i);
-                CharSequence line = lines.get(i);
-                StringBuilder subBuilder = new StringBuilder();
-                subBuilder.append(subBuilder);
-                int textStart = prefix.length();
-
-                subBuilder.append(line);
-                int textEnd = subBuilder.length();
-
-                if (maxBlankLines != -1 || i + 1 != iMax) {
-                    subBuilder.append(SequenceUtils.EOL);
-                }
-
-                BasedSequence useLine = BasedSequence.of(subBuilder.toString());
-                processor.processLine(useLine, i, textStart, textEnd, sumPrefix, sumText, sumLength);
-                sumLength += useLine.length();
-                sumPrefix += prefix.length();
-                sumText += line.length();
-            }
+        for (int i = startLine; i < endLine; i++) {
+            if (!processor.processLine(BasedSequence.of(lines.get(i)), linesInfo.get(i))) break;
         }
     }
 

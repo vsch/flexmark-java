@@ -92,6 +92,7 @@ public class HtmlRenderer implements IRender {
      */
     public static final DataKey<Integer> FORMAT_FLAGS = SharedDataKeys.RENDERER_FORMAT_FLAGS;
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.RENDERER_MAX_TRAILING_BLANK_LINES;
+    public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.RENDERER_MAX_BLANK_LINES;
 
     // Use LineFormattingAppendable values instead,
     // NOTE: ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE

@@ -55,8 +55,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
 
     public static HashSet<String> explicitLinkTextTags = new HashSet<>(Arrays.asList(FlexmarkHtmlConverter.EXPLICIT_LINK_TEXT_TAGS));
 
-    private HashMap<String, String> myAbbreviations;
-    private HashMap<String, String> myMacrosMap;               // macro name to macro content
+    private final HashMap<String, String> myAbbreviations;
+    private final HashMap<String, String> myMacrosMap;               // macro name to macro content
     final private HtmlConverterOptions myHtmlConverterOptions;
     private MarkdownTable myTable;
     private boolean myTableSuppressColumns = false;
@@ -803,7 +803,6 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 listState.itemCount = i - 1; // it will be pre-incremented before output
             } catch (NumberFormatException ignored) {
             }
-        } else {
         }
 
         Node item = element;
@@ -941,24 +940,22 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 break;
         }
 
-        if (level >= 1 && level <= 6) {
-            String headingText = context.processTextNodes(element).trim();
-            if (!headingText.isEmpty()) {
-                out.blankLine();
-                if (skipHeading) {
+        String headingText = context.processTextNodes(element).trim();
+        if (!headingText.isEmpty()) {
+            out.blankLine();
+            if (skipHeading) {
+                out.append(headingText);
+            } else {
+                if (myHtmlConverterOptions.setextHeadings && level <= 2) {
                     out.append(headingText);
+                    int extraChars = context.outputAttributes(out, " ");
+                    out.line().append(level == 1 ? '=' : '-', minLimit(headingText.length() + extraChars, myHtmlConverterOptions.minSetextHeadingMarkerLength));
                 } else {
-                    if (myHtmlConverterOptions.setextHeadings && level <= 2) {
-                        out.append(headingText);
-                        int extraChars = context.outputAttributes(out, " ");
-                        out.line().append(level == 1 ? '=' : '-', minLimit(headingText.length() + extraChars, myHtmlConverterOptions.minSetextHeadingMarkerLength));
-                    } else {
-                        out.append('#', level).append(' ');
-                        out.append(headingText);
-                        context.outputAttributes(out, " ");
-                    }
-                    out.blankLine();
+                    out.append('#', level).append(' ');
+                    out.append(headingText);
+                    context.outputAttributes(out, " ");
                 }
+                out.blankLine();
             }
         }
     }
@@ -992,7 +989,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         }
 
         preText.getMarkdown().closePreFormatted();
-        text = preText.getMarkdown().toString(2);
+        text = preText.getMarkdown().toString(Integer.MAX_VALUE, 2);
 
         //int start = text.indexOf('>');
         //int end = text.lastIndexOf('<');
