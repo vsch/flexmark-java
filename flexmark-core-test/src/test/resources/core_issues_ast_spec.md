@@ -1619,6 +1619,7 @@ Document[4, 499]
         Text[137, 490] chars:[137, 490, "7. El … ion,\n"]
 ````````````````````````````````
 
+
 Add prefix/suffix to text so document ast shifts by 14 chars
 
 ```````````````````````````````` example(Issues xxx - 5: 3) options(sub-parse, strip-indent)
@@ -2461,7 +2462,7 @@ Issue #770
 
 blank line before fenced code is not signal of a loose list
 
-```````````````````````````````` example
+```````````````````````````````` example MdNav - 770: 1
 * b
 
   ```bash
@@ -2490,7 +2491,7 @@ Document[0, 37]
 ````````````````````````````````
 
 
-```````````````````````````````` example(MdNav - 770: 1) options(keep-blank-lines)
+```````````````````````````````` example(MdNav - 770: 2) options(keep-blank-lines)
 * stuff
   * more stuff
     ```bash
@@ -2527,7 +2528,7 @@ Document[0, 62]
 ````````````````````````````````
 
 
-```````````````````````````````` example(MdNav - 770: 2) options(keep-blank-lines)
+```````````````````````````````` example(MdNav - 770: 3) options(keep-blank-lines)
 * stuff
   * more stuff
  
@@ -2567,7 +2568,7 @@ Document[0, 64]
 ````````````````````````````````
 
 
-```````````````````````````````` example(MdNav - 770: 3) options(keep-blank-lines)
+```````````````````````````````` example(MdNav - 770: 4) options(keep-blank-lines)
 * stuff
   * more stuff
  
