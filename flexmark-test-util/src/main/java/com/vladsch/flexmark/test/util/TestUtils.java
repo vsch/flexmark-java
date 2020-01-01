@@ -376,7 +376,7 @@ public class TestUtils {
         sb.append(toVisibleSpecText ? toVisibleSpecText(sourceAndHtml) : sourceAndHtml);
         if (ast != null) {
             sb.append(sectionBreak).append("\n");
-            sb.append(ast);
+            sb.append(suffixWithEol(ast));
         }
         sb.append(exampleBreak).append("\n");
     }

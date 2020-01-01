@@ -222,6 +222,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: task bullet marker would not be changed if complete task changed to non-task during
   formatting.
+* Fix: `TestUtils.addSpecExample()` to add EOL after ast if not already terminated. This was
+  causing spec example formatting to mess up.
 
 ## 0.59.92
 
