@@ -8,7 +8,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.92](#next-05992)
+- [0.59.92](#05992)
 - [0.59.90](#05990)
 - [0.59.88](#05988)
 - [0.59.86](#05986)
