@@ -368,7 +368,7 @@ public class Formatter implements IRender {
                                 OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
                                 trackedOffset.setIndex(info.endIndex + length[0]);
                             }
-                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), length[0], lineInfo.index, line.getBuilder().append(line).toStringWithRanges(true)));
+//                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), length[0], lineInfo.index, line.getBuilder().append(line).toStringWithRanges(true)));
                             unresolved[0]--;
                         }
                     }
