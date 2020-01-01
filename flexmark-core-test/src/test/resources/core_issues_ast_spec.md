@@ -2328,6 +2328,24 @@ Document[0, 16]
 ````````````````````````````````
 
 
+### 13
+
+blank line before fenced code is not signal of a loose list
+
+```````````````````````````````` example
+* b
+
+  ```bash
+  foo.code
+  ```
+* c
+
+.
+````````````````````````````````
+
+
+
+
 ## StackOverflow
 
 spurious, cannot duplicate
