@@ -170,7 +170,7 @@ public class TestUtils {
     @NotNull
     public static Pair<String, Integer> addSpecSection(@NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
         assert sectionHeadings.length == 7;
-        int lastSectionLevel = RichSequenceImpl.of(headingLine).countLeading(SequenceUtils.HASH_SET);
+        int lastSectionLevel = Math.max(1, Math.min(6, RichSequenceImpl.of(headingLine).countLeading(SequenceUtils.HASH_SET)));
         sectionHeadings[lastSectionLevel] = headingText;
         int iMax = 7;
         for (int i = lastSectionLevel + 1; i < iMax; i++) {
