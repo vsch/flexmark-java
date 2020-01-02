@@ -9,7 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.96](#next-05996)
+- [0.59.96](#05996)
 - [0.59.94](#05994)
 - [0.59.92](#05992)
 - [0.59.90](#05990)
@@ -220,7 +220,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.96
+## 0.59.96
 
 * Add: `LineAppendable`
   * Add: `LineAppendable.setPrefixLength(int, int)` to change prefix/line content split for lines
