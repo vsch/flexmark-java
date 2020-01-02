@@ -34,7 +34,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
                 dependentItemMap.put(dependentClass, item);
             }
 
-            for (Map.Entry<Class, DependentItem<D>> entry : dependentItemMap) {
+            for (Map.Entry<Class<?>, DependentItem<D>> entry : dependentItemMap) {
                 DependentItem<D> item = entry.getValue();
                 Set<Class<?>> afterDependencies = item.dependent.getAfterDependents();
 

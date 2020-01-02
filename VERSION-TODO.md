@@ -222,12 +222,21 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.96
 
-* Add: `LineAppendable` ability to change prefix/line content position for lines
+* Add: `LineAppendable`
+  * Add: `LineAppendable.setPrefixLength(int, int)` to change prefix/line content split for lines
+  * Add: `LineAppendable.setLine(int, CharSequence, CharSequence)` to change prefix/line content split for lines
   * Add: appendTo without prefixes to allow extracting content only.
   * Add: `LineAppendable.setLine(int, CharSequence, CharSequence)` to set prefix and text of
     line.
   * Add: `LineAppendable.setPrefixLength(int, int)` to change the prefix/text index for the line
     without changing actual line content.
+  * Break: `LineAppendable.append(LineAppendable, int, int)` does not add a `line()` call before
+    appending, which means if there is an unterminated line, the first line of appended
+    appendable will be added to it. This allows adding text before the first line of appendable.
+  * Break: `LineAppendable.line()` and variants no longer allow adding a blank line at the top
+    of the text if allow leading EOL is enabled. Use `blankLine()` for this.
+  * Break: `LineAppendable.blankLine()` and variants no longer allow adding a blank line at the
+    top of the text if allow leading EOL is not enabled.
 * Break: clean up `BitFieldSet`:
   * method names, ones adding/removing enum fields are now `add`/`remove`, ones taking bit mask
     are `orMask`/`andNotMask`.
@@ -461,9 +470,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: remove unused overloads and methods from `LineFormattingAppendable`
 * Add: new methods to `LineFormattingAppendable` for prefix changes and combined prefix/line
   manipulation.
-* Break: rename `LineAppendable.F_SUPPRESS_TRAILING_WHITESPACE` to
+* Break: rename `LineAppendable.SUPPRESS_TRAILING_WHITESPACE` to
   `LineAppendable.F_TRIM_TRAILING_WHITESPACE`
-* Break: rename and **invert** `LineAppendable.F_ALLOW_LEADING_WHITESPACE` to
+* Break: rename and **invert** `LineAppendable.ALLOW_LEADING_WHITESPACE` to
   `LineAppendable.F_TRIM_LEADING_WHITESPACE`
 * Deprecate: convenience copies of `LineAppendable` flags in `Formatter` and `HtmlRenderer`. Use
   `LineAppendable` directly.

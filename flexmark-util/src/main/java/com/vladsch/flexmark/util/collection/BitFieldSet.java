@@ -133,10 +133,18 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     final Class<E> elementType;
 
     /**
-     * All of the values comprising T.  (Cached for performance.)
+     * All values comprising T
      */
     final E[] universe;
-    final long[] bitMasks;  // bit masks for each field since some can span more than one
+
+    /**
+     * All bit masks for each field since some can span more than one
+     */
+    final long[] bitMasks;
+
+    /**
+     * total number of bits used by all fields
+     */
     final int totalBits;     // total bits used by all fields
 
     final static Enum<?>[] ZERO_LENGTH_ENUM_ARRAY = new Enum<?>[0];
@@ -176,16 +184,29 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
 
     public int toInt() {
         if (totalBits > 32)
-            throw new IllegalArgumentException(String.format("Enum fields use %d, which is more than 32 available in int", totalBits));
+            throw new IllegalArgumentException(String.format("Enum fields use %d bits, which is more than 32 bits available in an int", totalBits));
         return (int) elements;
     }
 
-    public long allValues() {
+    public short toShort() {
+        if (totalBits > 16)
+            throw new IllegalArgumentException(String.format("Enum fields use %d bits, which is more than 16 bits available in a short", totalBits));
+        return (short) elements;
+    }
+
+
+    public byte toByte() {
+        if (totalBits > 8)
+            throw new IllegalArgumentException(String.format("Enum fields use %d bits, which is more than 8 bits available in a byte", totalBits));
+        return (byte) elements;
+    }
+
+    public long allBitsMask() {
         return -1L >>> -totalBits;
     }
 
     public boolean orMask(long mask) {
-        long allValues = allValues();
+        long allValues = -1L >>> -totalBits;
         if ((mask & ~allValues) != 0) {
             throw new IllegalArgumentException(String.format("bitMask %d value contains elements outside the universe %s", mask, Long.toBinaryString(mask & ~allValues)));
         }
@@ -195,14 +216,21 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         return oldElements != elements;
     }
 
+    /**
+     * Set all bit fields to values in mask
+     * @param mask bit fields values
+     * @return true if any field values were modified
+     * @deprecated use {@link #setAll(long)}
+     */
     @SuppressWarnings("UnusedReturnValue")
-    public boolean setAll(long mask) {
-        return replaceAll(mask);
+    @Deprecated
+    public boolean replaceAll(long mask) {
+        return setAll(mask);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public boolean replaceAll(long mask) {
-        long allValues = allValues();
+    public boolean setAll(long mask) {
+        long allValues = -1L >>> -totalBits;
         if ((mask & ~allValues) != 0) {
             throw new IllegalArgumentException(String.format("mask %d(0b%s) value contains elements outside the universe 0b%s", mask, Long.toBinaryString(mask), Long.toBinaryString(mask & ~allValues)));
         }
@@ -249,7 +277,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     }
 
     public boolean all(long mask) {
-        long allValues = allValues();
+        long allValues = -1L >>> -totalBits;
         if ((mask & ~allValues) != 0) {
             throw new IllegalArgumentException(String.format("mask %d(0b%s) value contains elements outside the universe 0b%s", mask, Long.toBinaryString(mask), Long.toBinaryString(mask & ~allValues)));
         }

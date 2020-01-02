@@ -12,7 +12,6 @@ public class LineInfo {
         PREFORMATTED(2),
         BLANK_PREFIX,
         BLANK_TEXT,
-        HAS_EOL,
         ;
 
         final int bits;
@@ -53,12 +52,10 @@ public class LineInfo {
     final public static Flags BLANK_PREFIX = Flags.BLANK_PREFIX;
     final public static Flags BLANK_TEXT = Flags.BLANK_TEXT;
     final public static Flags PREFORMATTED = Flags.PREFORMATTED;
-    final public static Flags HAS_EOL = Flags.HAS_EOL;
 
     final public static int F_PREFORMATTED = BitFieldSet.intMask(Flags.PREFORMATTED);
     final public static int F_BLANK_PREFIX = BitFieldSet.intMask(Flags.BLANK_PREFIX);
     final public static int F_BLANK_TEXT = BitFieldSet.intMask(Flags.BLANK_TEXT);
-    final public static int F_HAS_EOL = BitFieldSet.intMask(Flags.HAS_EOL);
 
     final public static LineInfo NULL = new LineInfo(-1, 0, 0, 0, 0, 0, 0, true, true, Preformatted.NONE);
 
@@ -72,6 +69,8 @@ public class LineInfo {
     final public int flags;
 
     private LineInfo(int index, int prefixLength, int textLength, int length, int sumPrefixLength, int sumTextLength, int sumLength, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
+        assert index == -1 || prefixLength + textLength < length : "Line must be terminated by an EOL";
+
         this.index = index;
         this.prefixLength = prefixLength;
         this.textLength = textLength;
@@ -79,12 +78,14 @@ public class LineInfo {
         this.sumPrefixLength = sumPrefixLength + prefixLength;
         this.sumTextLength = sumTextLength + textLength;
         this.sumLength = sumLength + length;
-        this.flags = (isBlankPrefix || prefixLength == 0 ? F_BLANK_PREFIX : 0) | (isBlankText || textLength == 0 ? F_BLANK_TEXT : 0) | (preformatted.ordinal()) | (prefixLength + textLength < length ? F_HAS_EOL : 0);
+        this.flags = (isBlankPrefix || prefixLength == 0 ? F_BLANK_PREFIX : 0) | (isBlankText || textLength == 0 ? F_BLANK_TEXT : 0) | (preformatted.ordinal());
     }
 
     /**
      * See if replacing this line info with another requires updating all following line info because of aggregation change
+     *
      * @param other line info
+     *
      * @return true if need to update
      */
     public boolean needAggregateUpdate(LineInfo other) {
@@ -125,16 +126,42 @@ public class LineInfo {
         return BitFieldSet.all(flags, F_BLANK_PREFIX | F_BLANK_TEXT);
     }
 
-    public boolean endsWithEOL() {
-        return BitFieldSet.any(flags, F_HAS_EOL);
-    }
-
     public int getTextStart() {
         return prefixLength;
     }
 
     public int getTextEnd() {
         return prefixLength + textLength;
+    }
+
+    @NotNull
+    public <T extends CharSequence> T getPrefix(@NotNull T line) {
+        //noinspection unchecked
+        return (T) line.subSequence(0, prefixLength);
+    }
+
+    @NotNull
+    public <T extends CharSequence> T getTextNoEOL(@NotNull T line) {
+        //noinspection unchecked
+        return (T) line.subSequence(prefixLength, prefixLength + textLength);
+    }
+
+    @NotNull
+    public <T extends CharSequence> T getText(@NotNull T line) {
+        //noinspection unchecked
+        return (T) line.subSequence(prefixLength, length);
+    }
+
+    @NotNull
+    public <T extends CharSequence> T getLineNoEOL(@NotNull T line) {
+        //noinspection unchecked
+        return (T) line.subSequence(0, prefixLength + textLength);
+    }
+
+    @NotNull
+    public <T extends CharSequence> T getEOL(@NotNull T line) {
+        //noinspection unchecked
+        return (T) line.subSequence(prefixLength + textLength, length);
     }
 
     @Override
@@ -147,7 +174,7 @@ public class LineInfo {
                 ", sumPl=" + sumPrefixLength +
                 ", sumTl=" + sumTextLength +
                 ", sumL=" + sumLength +
-                (flags != 0 ? ", f=" + (isBlankPrefix() ? "bp " : "") + (isBlankText() ? "bt " : "") + (isPreformatted() ? "p " : ""):"") +
+                (flags != 0 ? ", " + (isBlankPrefix() ? "bp " : "") + (isBlankText() ? "bt " : "") + (isPreformatted() ? "p " : "") : "") +
                 '}';
     }
 

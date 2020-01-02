@@ -8,14 +8,14 @@ public interface Dependent<S> {
     /**
      * @return null or a list of processors that must be executed before calling this one
      *         if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
-     *         before this pre processor is called.
+     *         before this preprocessor is called.
      */
     @Nullable Set<Class<?>> getAfterDependents();
 
     /**
      * @return null or a list of processors before which this has to be run
      *         if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
-     *         before this pre processor is called.
+     *         before this preprocessor is called.
      */
     @Nullable Set<Class<?>> getBeforeDependents();
 

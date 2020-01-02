@@ -332,7 +332,7 @@ public class BitFieldSetTest {
 
         assertEquals(BitFieldSet.noneOf(OverIntSet.class), BitFieldSet.of(OverIntSet.class, 0));
         for (int i = 0; i < OverIntSet.values().length; i++) {
-            thrown.expect(ExceptionMatcher.match(IllegalArgumentException.class, "Enum fields use 33, which is more than 32 available in int"));
+            thrown.expect(ExceptionMatcher.match(IllegalArgumentException.class, "Enum fields use 33 bits, which is more than 32 bits available in an int"));
             assertEquals((int) (1L << i), BitFieldSet.of(OverIntSet.values()[i]).toInt());
         }
     }

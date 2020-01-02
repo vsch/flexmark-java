@@ -79,12 +79,12 @@ public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, 
     @NotNull @Override public CharSequence toSequence(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines)       { return appendable.toSequence(withPrefixes, maxBlankLines, maxTrailingBlankLines); }
     @NotNull @Override public String toString(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines)               { return appendable.toString(withPrefixes, maxBlankLines, maxTrailingBlankLines); }
     @NotNull @Override public BitFieldSet<Options> getOptionSet()                                                               { return appendable.getOptionSet();}
-    @NotNull @Override public T normalizeTo(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine)           { appendable.normalizeTo(maxBlankLines, maxTrailingBlankLines, startLine, endLine); return (T) this; }
+    @NotNull @Override public T removeExtraBlankLines(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine)           { appendable.removeExtraBlankLines(maxBlankLines, maxTrailingBlankLines, startLine, endLine); return (T) this; }
     @NotNull @Override public T removeLines(int startLine, int endLine)                                                         { appendable.removeLines(startLine, endLine); return (T) this; }
     @NotNull @Override public T pushOptions()                                                                                   { appendable.pushOptions();  return (T) this; }
     @NotNull @Override public T popOptions()                                                                                    { appendable.popOptions();  return (T) this; }
     @NotNull @Override public T changeOptions(int addFlags, int removeFlags)                                                    { appendable.changeOptions(addFlags, removeFlags);  return (T) this; }
-    @NotNull @Override public T addIndentOnFirstEOL(@NotNull Runnable runnable)                                                 { appendable.addIndentOnFirstEOL(runnable);  return (T)this; }
+    @NotNull @Override public T addIndentOnFirstEOL(@NotNull Runnable listener)                                                 { appendable.addIndentOnFirstEOL(listener);  return (T)this; }
     @NotNull @Override public T addPrefix(@NotNull CharSequence prefix)                                                         { appendable.addPrefix(prefix); return (T)this; }
     @NotNull @Override public T addPrefix(@NotNull CharSequence prefix, boolean afterEol)                                       { appendable.addPrefix(prefix, afterEol);  return (T)this; }
     @NotNull @Override public T append(char c)                                                                                  { appendable.append(c); return (T)this; }
@@ -104,7 +104,7 @@ public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, 
     @NotNull @Override public T popPrefix()                                                                                     { appendable.popPrefix(); return (T)this; }
     @NotNull @Override public T popPrefix(boolean afterEol)                                                                     { appendable.popPrefix(afterEol); return (T)this; }
     @NotNull @Override public T pushPrefix()                                                                                    { appendable.pushPrefix(); return (T)this; }
-    @NotNull @Override public T removeIndentOnFirstEOL(@NotNull Runnable runnable)                                              { appendable.removeIndentOnFirstEOL(runnable);  return (T)this; }
+    @NotNull @Override public T removeIndentOnFirstEOL(@NotNull Runnable listener)                                              { appendable.removeIndentOnFirstEOL(listener);  return (T)this; }
     @NotNull @Override public T append(char c, int count)                                                                       { appendable.append(c, count); return (T)this; }
     @NotNull @Override public T setIndentPrefix(@Nullable CharSequence prefix)                                                  { appendable.setIndentPrefix(prefix); return (T)this; }
     @NotNull @Override public T setOptions(int flags)                                                                           { appendable.setOptions(flags); return (T)this; }
