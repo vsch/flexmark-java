@@ -105,9 +105,8 @@ public class Formatter implements IRender {
     public static final DataKey<EqualizeTrailingMarker> ATX_HEADING_TRAILING_MARKER = new DataKey<>("ATX_HEADING_TRAILING_MARKER", EqualizeTrailingMarker.AS_IS);
     public static final DataKey<HeadingStyle> HEADING_STYLE = new DataKey<>("HEADING_STYLE", HeadingStyle.AS_IS);
     public static final NullableDataKey<String> THEMATIC_BREAK = new NullableDataKey<>("THEMATIC_BREAK");
-    public static final DataKey<Boolean> BLOCK_QUOTE_BLANK_LINES = new DataKey<>("BLOCK_QUOTE_BLANK_LINES", true);
+    public static final DataKey<Boolean> BLOCK_QUOTE_BLANK_LINES = SharedDataKeys.BLOCK_QUOTE_BLANK_LINES;
     public static final DataKey<BlockQuoteMarker> BLOCK_QUOTE_MARKERS = new DataKey<>("BLOCK_QUOTE_MARKERS", BlockQuoteMarker.ADD_COMPACT_WITH_SPACE);
-    public static final DataKey<BlockQuoteContinuationMarker> BLOCK_QUOTE_CONTINUATION_MARKERS = new DataKey<>("BLOCK_QUOTE_CONTINUATION_MARKERS", BlockQuoteContinuationMarker.ADD_AS_FIRST);
     public static final DataKey<Boolean> INDENTED_CODE_MINIMIZE_INDENT = new DataKey<>("INDENTED_CODE_MINIMIZE_INDENT", true);
     public static final DataKey<Boolean> FENCED_CODE_MINIMIZE_INDENT = new DataKey<>("FENCED_CODE_MINIMIZE_INDENT", true);
     public static final DataKey<Boolean> FENCED_CODE_MATCH_CLOSING_MARKER = new DataKey<>("FENCED_CODE_MATCH_CLOSING_MARKER", true);

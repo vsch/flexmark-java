@@ -50,7 +50,7 @@ Document[0, 20]
 |
 .
 | 1. numbered item 1
-|
+
 .
 Document[0, 22]
   AsideBlock[0, 22] marker:[0, 1, "|"]
@@ -63,7 +63,7 @@ Document[0, 22]
 
 
 ```````````````````````````````` example(Aside: 4) options(block-quote-compact-with-space, fenced-code-minimize)
-| | aside block
+| | block quote
 | lazy continuation
 | 
 | ~~~info
@@ -74,7 +74,7 @@ Document[0, 22]
 |      indented code
 | 1. numbered item 1
 .
-|| aside block
+|| block quote
 || lazy continuation
 |
 | ~~~info
@@ -91,7 +91,7 @@ Document[0, 131]
   AsideBlock[0, 131] marker:[0, 1, "|"]
     AsideBlock[2, 36] marker:[2, 3, "|"]
       Paragraph[4, 36]
-        Text[4, 15] chars:[4, 15, "aside … block"]
+        Text[4, 15] chars:[4, 15, "block … quote"]
         SoftLineBreak[15, 16]
         Text[18, 35] chars:[18, 35, "lazy  … ation"]
     BlankLine[36, 39]
@@ -112,7 +112,7 @@ Document[0, 131]
 | paragraph text 
 | lazy continuation
 | * list item
-| | aside block
+| | block quote
 | lazy continuation
 | 
 | ~~~info
@@ -135,7 +135,7 @@ Document[0, 131]
 | lazy continuation
 | * list item
 |
-|| aside block
+|| block quote
 || lazy continuation
 |
 | ~~~info
@@ -160,7 +160,7 @@ Document[0, 131]
 | paragraph text 
 | lazy continuation
 | * list item
-| | aside block
+| | block quote
 | lazy continuation
 | 
 | ~~~info
@@ -183,7 +183,7 @@ Document[0, 131]
 | lazy continuation
 | * list item
 |
-| | aside block
+| | block quote
 | | lazy continuation
 |
 | ~~~info
@@ -206,14 +206,14 @@ Document[0, 131]
 paragraph text 
 lazy continuation
 * list item
-  | aside block
+  | block quote
   lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
 
-  | aside block
+  | block quote
   | lazy continuation
 
 ````````````````````````````````
@@ -223,13 +223,13 @@ lazy continuation
 paragraph text 
 lazy continuation
 * list item
-  | aside block
+  | block quote
   lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
-  | aside block
+  | block quote
   | lazy continuation
 
 ````````````````````````````````
@@ -238,190 +238,417 @@ lazy continuation
 as first child of empty item
 
 ```````````````````````````````` example Aside: 9
-* | aside block
-1. | aside block  
+* | block quote
+1. | block quote  
 .
-* | aside block
+* | block quote
 
-1. | aside block
-
-````````````````````````````````
-
-
-### Continuation
-
-#### As First
-
-```````````````````````````````` example(Aside - Continuation - As First: 1) options(block-quote-compact-with-space, block-quote-cont-as-first)
-| 1. numbered item 1
-|
-.
-| 1. numbered item 1
-|
-````````````````````````````````
-
-
-```````````````````````````````` example(Aside - Continuation - As First: 2) options(block-quote-cont-as-first)
-paragraph text 
-lazy continuation
-* list item
-  | aside block
-  lazy continuation
-.
-paragraph text
-lazy continuation
-* list item
-
-  | aside block
-  | lazy continuation
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Aside - Continuation - As First: 3) options(no-block-quote-blank-lines, block-quote-cont-as-first)
-paragraph text 
-lazy continuation
-* list item
-  | aside block
-  lazy continuation
-.
-paragraph text
-lazy continuation
-* list item
-  | aside block
-  | lazy continuation
-
-````````````````````````````````
-
-
-#### Compact
-
-```````````````````````````````` example(Aside - Continuation - Compact: 1) options(block-quote-compact-with-space, block-quote-cont-compact)
-| 1. numbered item 1
-|
-.
-| 1. numbered item 1
-|
-````````````````````````````````
-
-
-```````````````````````````````` example(Aside - Continuation - Compact: 2) options(block-quote-cont-compact)
-paragraph text 
-lazy continuation
-* list item
-  | aside block
-  lazy continuation
-.
-paragraph text
-lazy continuation
-* list item
-
-  | aside block
-  |lazy continuation
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Aside - Continuation - Compact: 3) options(no-block-quote-blank-lines, block-quote-cont-compact)
-paragraph text 
-lazy continuation
-* list item
-  | aside block
-  lazy continuation
-.
-paragraph text
-lazy continuation
-* list item
-  | aside block
-  |lazy continuation
+1. | block quote
 
 ````````````````````````````````
 
 
 #### Compact Space
 
-```````````````````````````````` example(Aside - Continuation - Compact Space: 1) options(block-quote-compact-with-space, block-quote-cont-compact-with-space)
-| 1. numbered item 1
-|
+```````````````````````````````` example(Aside - Compact Space: 1) options(block-quote-compact-with-space)
+|| 1. numbered item 1 
+||    numbered item 1 
+||
 .
-| 1. numbered item 1
-|
+|| 1. numbered item 1
+||    numbered item 1
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(Aside - Continuation - Compact Space: 2) options(block-quote-cont-compact-with-space)
+```````````````````````````````` example(Aside - Compact Space: 2) options(block-quote-compact-with-space)
+|| numbered item 1 
+|| continuation
+||
+.
+|| numbered item 1
+|| continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Aside - Compact Space: 3) options(block-quote-compact-with-space)
+|| block quote
+lazy continuation
+.
+|| block quote
+|| lazy continuation
+
+````````````````````````````````
+
+
+#### Compact
+
+```````````````````````````````` example(Aside - Compact: 1) options(block-quote-compact)
+|| 1. numbered item 1 
+||    numbered item 1 
+||
+.
+||1. numbered item 1
+||   numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Aside - Compact: 2) options(block-quote-compact)
+|| numbered item 1 
+|| continuation
+||
+.
+||numbered item 1
+||continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Aside - Compact: 3) options(block-quote-compact)
 paragraph text 
 lazy continuation
 * list item
-  | aside block
+  || block quote
   lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
 
-  | aside block
-  | lazy continuation
+  ||block quote
+  ||lazy continuation
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Aside - Continuation - Compact Space: 3) options(no-block-quote-blank-lines, block-quote-cont-compact-with-space)
+#### Spaced
+
+```````````````````````````````` example(Aside - Spaced: 1) options(block-quote-spaced)
+|| 1. numbered item 1 
+||    numbered item 1 
+||
+.
+| | 1. numbered item 1
+| |    numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Aside - Spaced: 2) options(block-quote-spaced)
+|| numbered item 1 
+|| continuation
+||
+.
+| | numbered item 1
+| | continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Aside - Spaced: 3) options(block-quote-spaced)
 paragraph text 
 lazy continuation
 * list item
-  | aside block
+  || block quote
   lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
-  | aside block
-  | lazy continuation
+
+  | | block quote
+  | | lazy continuation
 
 ````````````````````````````````
 
 
-#### Remove
-
-```````````````````````````````` example(Aside - Continuation - Remove: 1) options(block-quote-compact-with-space, block-quote-cont-remove)
-| 1. numbered item 1
-|
-.
-| 1. numbered item 1
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Aside - Continuation - Remove: 2) options(block-quote-cont-remove)
+```````````````````````````````` example(Aside - Spaced: 4) options(block-quote-spaced)
 paragraph text 
 lazy continuation
 * list item
-  | aside block
-  | lazy continuation
+  || block quote
+  lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
 
-  | aside block
-  lazy continuation
+  | | block quote
+  | | lazy continuation
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Aside - Continuation - Remove: 3) options(no-block-quote-blank-lines, block-quote-cont-remove)
+## Combined
+
+### Quote Aside
+
+#### Compact Space
+
+```````````````````````````````` example(Combined - Quote Aside - Compact Space: 1) options(block-quote-compact-with-space)
+>| 1. numbered item 1 
+>|    numbered item 1 
+>|
+.
+>| 1. numbered item 1
+>|    numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Quote Aside - Compact Space: 2) options(block-quote-compact-with-space)
+>| numbered item 1 
+>| continuation
+>|
+.
+>| numbered item 1
+>| continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Quote Aside - Compact Space: 3) options(block-quote-compact-with-space)
+>| block quote
+lazy continuation
+.
+>| block quote
+>| lazy continuation
+
+````````````````````````````````
+
+
+#### Compact
+
+```````````````````````````````` example(Combined - Quote Aside - Compact: 1) options(block-quote-compact)
+>| 1. numbered item 1 
+>|    numbered item 1 
+>|
+.
+>|1. numbered item 1
+>|   numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Quote Aside - Compact: 2) options(block-quote-compact)
+>| numbered item 1 
+>| continuation
+>|
+.
+>|numbered item 1
+>|continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Quote Aside - Compact: 3) options(block-quote-compact)
 paragraph text 
 lazy continuation
 * list item
-  | aside block
-  | lazy continuation
+  >| block quote
+  lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
-  | aside block
+
+  >|block quote
+  >|lazy continuation
+
+````````````````````````````````
+
+
+#### Spaced
+
+```````````````````````````````` example(Combined - Quote Aside - Spaced: 1) options(block-quote-spaced)
+>| 1. numbered item 1 
+>|    numbered item 1 
+>|
+.
+> | 1. numbered item 1
+> |    numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Quote Aside - Spaced: 2) options(block-quote-spaced)
+>| numbered item 1 
+>| continuation
+>|
+.
+> | numbered item 1
+> | continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Quote Aside - Spaced: 3) options(block-quote-spaced)
+paragraph text 
+lazy continuation
+* list item
+  >| block quote
   lazy continuation
+.
+paragraph text
+lazy continuation
+* list item
+
+  > | block quote
+  > | lazy continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Quote Aside - Spaced: 4) options(block-quote-spaced)
+paragraph text 
+lazy continuation
+* list item
+  >| block quote
+  lazy continuation
+.
+paragraph text
+lazy continuation
+* list item
+
+  > | block quote
+  > | lazy continuation
+
+````````````````````````````````
+
+
+### Aside Quote
+
+#### Compact Space
+
+```````````````````````````````` example(Combined - Aside Quote - Compact Space: 1) options(block-quote-compact-with-space)
+|> 1. numbered item 1 
+|>    numbered item 1 
+|>
+.
+|> 1. numbered item 1
+|>    numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Aside Quote - Compact Space: 2) options(block-quote-compact-with-space)
+|> numbered item 1 
+|> continuation
+|>
+.
+|> numbered item 1
+|> continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Aside Quote - Compact Space: 3) options(block-quote-compact-with-space)
+|> block quote
+lazy continuation
+.
+|> block quote
+|> lazy continuation
+
+````````````````````````````````
+
+
+#### Compact
+
+```````````````````````````````` example(Combined - Aside Quote - Compact: 1) options(block-quote-compact)
+|> 1. numbered item 1 
+|>    numbered item 1 
+|>
+.
+|>1. numbered item 1
+|>   numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Aside Quote - Compact: 2) options(block-quote-compact)
+|> numbered item 1 
+|> continuation
+|>
+.
+|>numbered item 1
+|>continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Aside Quote - Compact: 3) options(block-quote-compact)
+paragraph text 
+lazy continuation
+* list item
+  |> block quote
+  lazy continuation
+.
+paragraph text
+lazy continuation
+* list item
+
+  |>block quote
+  |>lazy continuation
+
+````````````````````````````````
+
+
+#### Spaced
+
+```````````````````````````````` example(Combined - Aside Quote - Spaced: 1) options(block-quote-spaced)
+|> 1. numbered item 1 
+|>    numbered item 1 
+|>
+.
+| > 1. numbered item 1
+| >    numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Aside Quote - Spaced: 2) options(block-quote-spaced)
+|> numbered item 1 
+|> continuation
+|>
+.
+| > numbered item 1
+| > continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Aside Quote - Spaced: 3) options(block-quote-spaced)
+paragraph text 
+lazy continuation
+* list item
+  |> block quote
+  lazy continuation
+.
+paragraph text
+lazy continuation
+* list item
+
+  | > block quote
+  | > lazy continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Aside Quote - Spaced: 4) options(block-quote-spaced)
+paragraph text 
+lazy continuation
+* list item
+  |> block quote
+  lazy continuation
+.
+paragraph text
+lazy continuation
+* list item
+
+  | > block quote
+  | > lazy continuation
 
 ````````````````````````````````
 

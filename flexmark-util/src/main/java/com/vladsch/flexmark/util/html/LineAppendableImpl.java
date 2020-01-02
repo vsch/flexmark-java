@@ -159,16 +159,14 @@ public class LineAppendableImpl implements LineAppendable {
         return this;
     }
 
-    @NotNull
     @Override
-    public CharSequence getPrefix() {
-        return prefixAfterEol;
+    public @NotNull BasedSequence getPrefix() {
+        return BasedSequence.of(prefixAfterEol);
     }
 
-    @NotNull
     @Override
-    public CharSequence getBeforeEolPrefix() {
-        return prefix;
+    public @NotNull BasedSequence getBeforeEolPrefix() {
+        return BasedSequence.of(prefix);
     }
 
     private CharSequence combinedPrefix(@Nullable CharSequence prefix, @Nullable CharSequence suffix) {

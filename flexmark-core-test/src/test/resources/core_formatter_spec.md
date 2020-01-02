@@ -1008,7 +1008,7 @@ Document[0, 20]
 >
 .
 > 1. numbered item 1
->
+
 .
 Document[0, 22]
   BlockQuote[0, 22] marker:[0, 1, ">"]
@@ -1206,180 +1206,135 @@ as first child of empty item
 ````````````````````````````````
 
 
-### Continuation
+#### Compact Space
 
-#### As First
-
-```````````````````````````````` example(Block Quotes - Continuation - As First: 1) options(block-quote-compact-with-space, block-quote-cont-as-first)
-> 1. numbered item 1
->
+```````````````````````````````` example(Block Quotes - Compact Space: 1) options(block-quote-compact-with-space)
+>> 1. numbered item 1 
+>>    numbered item 1 
+>>
 .
-> 1. numbered item 1
->
-````````````````````````````````
-
-
-```````````````````````````````` example(Block Quotes - Continuation - As First: 2) options(block-quote-cont-as-first)
-paragraph text 
-lazy continuation
-* list item
-  > block quote
-  lazy continuation
-.
-paragraph text
-lazy continuation
-* list item
-
-  > block quote
-  > lazy continuation
+>> 1. numbered item 1
+>>    numbered item 1
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes - Continuation - As First: 3) options(no-block-quote-blank-lines, block-quote-cont-as-first)
-paragraph text 
-lazy continuation
-* list item
-  > block quote
-  lazy continuation
+```````````````````````````````` example(Block Quotes - Compact Space: 2) options(block-quote-compact-with-space)
+>> numbered item 1 
+>> continuation
+>>
 .
-paragraph text
+>> numbered item 1
+>> continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes - Compact Space: 3) options(block-quote-compact-with-space)
+>> block quote
 lazy continuation
-* list item
-  > block quote
-  > lazy continuation
+.
+>> block quote
+>> lazy continuation
 
 ````````````````````````````````
 
 
 #### Compact
 
-```````````````````````````````` example(Block Quotes - Continuation - Compact: 1) options(block-quote-compact-with-space, block-quote-cont-compact)
-> 1. numbered item 1
->
+```````````````````````````````` example(Block Quotes - Compact: 1) options(block-quote-compact)
+>> 1. numbered item 1 
+>>    numbered item 1 
+>>
 .
-> 1. numbered item 1
->
+>>1. numbered item 1
+>>   numbered item 1
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes - Continuation - Compact: 2) options(block-quote-cont-compact)
+```````````````````````````````` example(Block Quotes - Compact: 2) options(block-quote-compact)
+>> numbered item 1 
+>> continuation
+>>
+.
+>>numbered item 1
+>>continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes - Compact: 3) options(block-quote-compact)
 paragraph text 
 lazy continuation
 * list item
-  > block quote
+  >> block quote
   lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
 
-  > block quote
-  >lazy continuation
+  >>block quote
+  >>lazy continuation
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes - Continuation - Compact: 3) options(no-block-quote-blank-lines, block-quote-cont-compact)
+#### Spaced
+
+```````````````````````````````` example(Block Quotes - Spaced: 1) options(block-quote-spaced)
+>> 1. numbered item 1 
+>>    numbered item 1 
+>>
+.
+> > 1. numbered item 1
+> >    numbered item 1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes - Spaced: 2) options(block-quote-spaced)
+>> numbered item 1 
+>> continuation
+>>
+.
+> > numbered item 1
+> > continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes - Spaced: 3) options(block-quote-spaced)
 paragraph text 
 lazy continuation
 * list item
-  > block quote
+  >> block quote
   lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
-  > block quote
-  >lazy continuation
+
+  > > block quote
+  > > lazy continuation
 
 ````````````````````````````````
 
 
-#### Compact Space
-
-```````````````````````````````` example(Block Quotes - Continuation - Compact Space: 1) options(block-quote-compact-with-space, block-quote-cont-compact-with-space)
-> 1. numbered item 1
->
-.
-> 1. numbered item 1
->
-````````````````````````````````
-
-
-```````````````````````````````` example(Block Quotes - Continuation - Compact Space: 2) options(block-quote-cont-compact-with-space)
+```````````````````````````````` example(Block Quotes - Spaced: 4) options(block-quote-spaced)
 paragraph text 
 lazy continuation
 * list item
-  > block quote
+  >> block quote
   lazy continuation
 .
 paragraph text
 lazy continuation
 * list item
 
-  > block quote
-  > lazy continuation
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Block Quotes - Continuation - Compact Space: 3) options(no-block-quote-blank-lines, block-quote-cont-compact-with-space)
-paragraph text 
-lazy continuation
-* list item
-  > block quote
-  lazy continuation
-.
-paragraph text
-lazy continuation
-* list item
-  > block quote
-  > lazy continuation
-
-````````````````````````````````
-
-
-#### Remove
-
-```````````````````````````````` example(Block Quotes - Continuation - Remove: 1) options(block-quote-compact-with-space, block-quote-cont-remove)
-> 1. numbered item 1
->
-.
-> 1. numbered item 1
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Block Quotes - Continuation - Remove: 2) options(block-quote-cont-remove)
-paragraph text 
-lazy continuation
-* list item
-  > block quote
-  > lazy continuation
-.
-paragraph text
-lazy continuation
-* list item
-
-  > block quote
-  lazy continuation
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Block Quotes - Continuation - Remove: 3) options(no-block-quote-blank-lines, block-quote-cont-remove)
-paragraph text 
-lazy continuation
-* list item
-  > block quote
-  > lazy continuation
-.
-paragraph text
-lazy continuation
-* list item
-  > block quote
-  lazy continuation
+  > > block quote
+  > > lazy continuation
 
 ````````````````````````````````
 

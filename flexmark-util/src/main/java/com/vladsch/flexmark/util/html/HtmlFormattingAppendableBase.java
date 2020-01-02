@@ -428,8 +428,8 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override public int offsetWithPending()                                                                                    { return appendable.offsetWithPending(); }
     @Override public int getAfterEolPrefixDelta()                                                                               { return appendable.getAfterEolPrefixDelta(); }
     @NotNull @Override public ISequenceBuilder<?,?> getBuilder()                                                                { return appendable.getBuilder(); }
-    @NotNull @Override public CharSequence getPrefix()                                                                          { return appendable.getPrefix(); }
-    @NotNull @Override public CharSequence getBeforeEolPrefix()                                                                 { return appendable.getBeforeEolPrefix(); }
+    @Override public@NotNull  BasedSequence getPrefix()                                                                          { return appendable.getPrefix(); }
+    @Override public@NotNull  BasedSequence getBeforeEolPrefix()                                                                 { return appendable.getBeforeEolPrefix(); }
     @NotNull @Override public LineInfo getLineInfo(int lineIndex)                                                               { return appendable.getLineInfo(lineIndex); }
     @Override public @NotNull  BasedSequence getLine(int lineIndex)                                                             { return appendable.getLine(lineIndex); }
     @NotNull @Override public CharSequence getIndentPrefix()                                                                    { return appendable.getIndentPrefix(); }

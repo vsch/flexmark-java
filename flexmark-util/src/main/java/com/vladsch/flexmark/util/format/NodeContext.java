@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface NodeContext<N, C extends NodeContext<N, C>> {
     /**
@@ -38,4 +39,10 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
      * @return the current node being rendered
      */
     N getCurrentNode();
+
+    /**
+     * Get options for the context
+     * @return data holder
+     */
+    @Nullable DataHolder getOptions();
 }

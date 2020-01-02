@@ -56,11 +56,6 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("block-quote-compact", new MutableDataSet().set(Formatter.BLOCK_QUOTE_MARKERS, BlockQuoteMarker.ADD_COMPACT));
         optionsMap.put("block-quote-compact-with-space", new MutableDataSet().set(Formatter.BLOCK_QUOTE_MARKERS, BlockQuoteMarker.ADD_COMPACT_WITH_SPACE));
         optionsMap.put("block-quote-spaced", new MutableDataSet().set(Formatter.BLOCK_QUOTE_MARKERS, BlockQuoteMarker.ADD_SPACED));
-        optionsMap.put("block-quote-cont-as-first", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_AS_FIRST));
-        optionsMap.put("block-quote-cont-compact", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_COMPACT));
-        optionsMap.put("block-quote-cont-compact-with-space", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_COMPACT_WITH_SPACE));
-        optionsMap.put("block-quote-cont-spaced", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_SPACED));
-        optionsMap.put("block-quote-cont-remove", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.REMOVE));
         optionsMap.put("indented-code-minimize", new MutableDataSet().set(Formatter.INDENTED_CODE_MINIMIZE_INDENT, true));
         optionsMap.put("fenced-code-minimize", new MutableDataSet().set(Formatter.FENCED_CODE_MINIMIZE_INDENT, true));
         optionsMap.put("fenced-code-match-closing", new MutableDataSet().set(Formatter.FENCED_CODE_MATCH_CLOSING_MARKER, true));
@@ -115,12 +110,6 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
 //        optionsMap.put("continuation-indent-indent-1", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_1));
 //        optionsMap.put("continuation-indent-indent-2", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_2));
 //        optionsMap.put("continuation-indent-indent-3", new MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_3));
-
-        optionsMap.put("block-quote-continuation-markers-add-as-first", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_AS_FIRST));
-        optionsMap.put("block-quote-continuation-markers-add-compact", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_COMPACT));
-        optionsMap.put("block-quote-continuation-markers-add-compact-with-space", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_COMPACT_WITH_SPACE));
-        optionsMap.put("block-quote-continuation-markers-add-spaced", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.ADD_SPACED));
-        optionsMap.put("block-quote-continuation-markers-remove", new MutableDataSet().set(Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS, BlockQuoteContinuationMarker.REMOVE));
 
         optionsMap.put("list-align-numeric-none", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.NONE));
         optionsMap.put("list-align-numeric-left", new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.LEFT_ALIGN));

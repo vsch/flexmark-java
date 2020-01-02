@@ -24,7 +24,6 @@ public class FormatterOptions {
     public final HeadingStyle headingStyle;
     public final boolean blockQuoteBlankLines;
     public final BlockQuoteMarker blockQuoteMarkers;
-    public final BlockQuoteContinuationMarker blockQuoteContinuationMarkers;
     public final String thematicBreak;
     public final String translationIdFormat;
     public final String translationHtmlBlockPrefix;
@@ -90,7 +89,6 @@ public class FormatterOptions {
         translationHtmlInlineTagPattern = Formatter.TRANSLATION_HTML_INLINE_TAG_PATTERN.get(options);
         blockQuoteBlankLines = Formatter.BLOCK_QUOTE_BLANK_LINES.get(options);
         blockQuoteMarkers = Formatter.BLOCK_QUOTE_MARKERS.get(options);
-        blockQuoteContinuationMarkers = Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS.get(options);
         indentedCodeMinimizeIndent = Formatter.INDENTED_CODE_MINIMIZE_INDENT.get(options);
         fencedCodeMinimizeIndent = Formatter.FENCED_CODE_MINIMIZE_INDENT.get(options);
         fencedCodeMatchClosingMarker = Formatter.FENCED_CODE_MATCH_CLOSING_MARKER.get(options);

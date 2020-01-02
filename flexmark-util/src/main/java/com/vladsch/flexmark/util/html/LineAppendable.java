@@ -353,7 +353,7 @@ public interface LineAppendable extends Appendable {
      * @return char sequence of the current prefix
      */
     @NotNull
-    CharSequence getPrefix();
+    BasedSequence getPrefix();
 
     /**
      * Get prefix used before EOL
@@ -361,7 +361,7 @@ public interface LineAppendable extends Appendable {
      * @return char sequence of the current prefix
      */
     @NotNull
-    CharSequence getBeforeEolPrefix();
+    BasedSequence getBeforeEolPrefix();
 
     /**
      * Add to prefix appended after a new line character for every line

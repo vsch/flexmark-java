@@ -1,9 +1,12 @@
 package com.vladsch.flexmark.formatter;
 
+import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.BlockQuoteLike;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
-import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
+import com.vladsch.flexmark.util.mappers.SpaceMapper;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,24 +25,22 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
     }
 
     @Override
-    public boolean isLastBlockQuoteChild() {
+    public @NotNull BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix) {
         Node node = context.getCurrentNode();
-        Node parent = node.getParent();
-        return parent instanceof BlockQuoteLike && parent.getLastChild() == node;
-    }
-
-    public @NotNull MarkdownWriter tailBlankLine(int count) {
-        if (isLastBlockQuoteChild()) {
-            // Needed to not add block quote prefix to trailing blank lines
-            CharSequence prefix = appendable.getPrefix();
-            appendable.popPrefix(false);
-            appendable.blankLine(count);
-            appendable.pushPrefix();
-            appendable.setPrefix(prefix, false);
-        } else {
-            appendable.blankLine(count);
+        while (node != null && node.getNextAnyNot(BlankLine.class) == null) {
+            Node parent = node.getParent();
+            if (parent == null || parent instanceof Document) break;
+            if (parent instanceof BlockQuoteLike) {
+                int pos = prefix.lastIndexOfAny(context.getBlockQuoteLikePrefixPredicate());
+                if (pos >= 0) {
+                    prefix = prefix.getBuilder().append(prefix.subSequence(0, pos)).append(' ').append(prefix.subSequence(pos + 1)).toSequence();
+//                } else {
+//                    // NOTE: occurs if continuation block prefix is remove
+                }
+            }
+            node = parent;
         }
-        return this;
+        return prefix;
     }
 
     public @NotNull MarkdownWriter appendNonTranslating(@NotNull CharSequence csq) {

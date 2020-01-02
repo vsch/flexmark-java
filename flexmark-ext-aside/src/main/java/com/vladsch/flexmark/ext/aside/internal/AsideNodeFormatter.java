@@ -46,9 +46,7 @@ public class AsideNodeFormatter implements NodeFormatter {
     private void render(AsideBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         FormatterOptions formatterOptions = context.getFormatterOptions();
 
-        Pair<String, String> blockLikePrefix = FormatterUtils.getBlockLikePrefix(node, context, markdown, formatterOptions.blockQuoteMarkers, formatterOptions.blockQuoteContinuationMarkers);
-        String combinedPrefix = blockLikePrefix.getFirst();
-        String combinedContinuationPrefix = blockLikePrefix.getSecond();
+        String combinedPrefix = FormatterUtils.getBlockLikePrefix(node, context, markdown, formatterOptions.blockQuoteMarkers);
 
         markdown.pushPrefix();
 
@@ -62,11 +60,11 @@ public class AsideNodeFormatter implements NodeFormatter {
             markdown.pushOptions().removeOptions(LineAppendable.F_WHITESPACE_REMOVAL).append(combinedPrefix).popOptions();
         }
 
-        markdown.setPrefix(combinedContinuationPrefix, true);
         int lines = markdown.getLineCount();
         context.renderChildren(node);
         markdown.popPrefix();
-        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCount() || !FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument()))) markdown.blankLine();
+        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCount() || !FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument())))
+            markdown.tailBlankLine();
     }
 
     public static class Factory implements NodeFormatterFactory {

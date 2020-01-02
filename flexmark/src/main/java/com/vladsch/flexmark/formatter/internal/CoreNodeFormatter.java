@@ -415,9 +415,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     private void render(BlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
         FormatterOptions formatterOptions = context.getFormatterOptions();
 
-        Pair<String, String> blockLikePrefix = FormatterUtils.getBlockLikePrefix(node, context, markdown, formatterOptions.blockQuoteMarkers, formatterOptions.blockQuoteContinuationMarkers);
-        String combinedPrefix = blockLikePrefix.getFirst();
-        String combinedContinuationPrefix = blockLikePrefix.getSecond();
+        String combinedPrefix = FormatterUtils.getBlockLikePrefix(node, context, markdown, formatterOptions.blockQuoteMarkers);
 
         markdown.pushPrefix();
 
@@ -431,12 +429,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             markdown.pushOptions().removeOptions(LineAppendable.F_WHITESPACE_REMOVAL).append(combinedPrefix).popOptions();
         }
 
-        markdown.setPrefix(combinedContinuationPrefix, true);
         int lines = markdown.getLineCount();
         context.renderChildren(node);
         markdown.popPrefix();
+
         if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCount() && !FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument())))
-            markdown.blankLine();
+            markdown.tailBlankLine();
     }
 
     private void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {

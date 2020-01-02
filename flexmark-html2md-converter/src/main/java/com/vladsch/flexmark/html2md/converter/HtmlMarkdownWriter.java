@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.html2md.converter;
 
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.BlockQuoteLike;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Element;
@@ -20,7 +24,7 @@ public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, N
     }
 
     @Override
-    public boolean isLastBlockQuoteChild() {
+    public @NotNull BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix) {
         Node node = context.getCurrentNode();
 
         if (node instanceof Element) {
@@ -29,31 +33,18 @@ public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, N
             while (element.nextElementSibling() == null) {
                 Element parent = element.parent();
                 if (parent == null) break;
-                if (parent.nodeName().toLowerCase().equals(FlexmarkHtmlConverter.BLOCKQUOTE_NODE)) return true;
+                if (parent.nodeName().toLowerCase().equals(FlexmarkHtmlConverter.BLOCKQUOTE_NODE)) {
+                    int pos = prefix.lastIndexOf('>');
+                    if (pos >= 0) {
+                        prefix = prefix.getBuilder().append(prefix.subSequence(0, pos)).append(' ').append(prefix.subSequence(pos + 1)).toSequence();
+//                } else {
+//                    // NOTE: occurs if continuation block prefix is remove
+                    }
+                }
                 element = parent;
             }
         }
-        return false;
-    }
-
-    @NotNull
-    @Override
-    public HtmlMarkdownWriter tailBlankLine(int count) {
-        if (isLastBlockQuoteChild()) {
-            // Needed to not add block quote prefix to trailing blank lines
-            CharSequence prefix = getPrefix();
-            int pos = prefix.toString().lastIndexOf('>');
-            if (pos != -1) {
-                setPrefix(prefix.subSequence(0, pos));
-            } else {
-                setPrefix("");
-            }
-            blankLine(count);
-            setPrefix(prefix, false);
-        } else {
-            blankLine(count);
-        }
-        return this;
+        return prefix;
     }
 }
 

@@ -222,6 +222,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## 0.59.96
 
+* Break: remove `Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS` and related. It was never properly
+  implemented and even if it would be it can mess up the document for compound prefixes
+  depending on selected settings.
 * Fix: `AttributesNodeFormatter` adding quotes around implicit attribute values: `#` and `.`
   prefixed ones.
 * Fix: `FormatterUtils` using `node.getDocument()` instead of `context.getDocument()`
@@ -232,8 +235,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: `LineAppendable`
   * Break: replace `ISequenceBuilder` arguments with `Appendable`, if `LineAppendable` or
     `ISequenceBuilder` then will use its builder, otherwise will use `StringSequenceBuilder`
-  * Add: `LineAppendable.setPrefixLength(int, int)` to change prefix/line content split for lines
-  * Add: `LineAppendable.setLine(int, CharSequence, CharSequence)` to change prefix/line content split for lines
+  * Add: `LineAppendable.setPrefixLength(int, int)` to change prefix/line content split for
+    lines
+  * Add: `LineAppendable.setLine(int, CharSequence, CharSequence)` to change prefix/line content
+    split for lines
   * Add: appendTo without prefixes to allow extracting content only.
   * Add: `LineAppendable.setLine(int, CharSequence, CharSequence)` to set prefix and text of
     line.

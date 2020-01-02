@@ -49,10 +49,23 @@ public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, 
         return tailBlankLine(1);
     }
 
-    abstract public boolean isLastBlockQuoteChild();
+    abstract public @NotNull BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix);
 
     @NotNull
-    abstract public T tailBlankLine(int count);
+    public T tailBlankLine(int count) {
+        BasedSequence prefix = appendable.getPrefix();
+        BasedSequence replacedPrefix = lastBlockQuoteChildPrefix(prefix);
+        if (!replacedPrefix.equals(prefix)) {
+            // Needed to not add block quote prefix to trailing blank lines
+            appendable.setPrefix(replacedPrefix, false);
+            appendable.blankLine(count);
+            appendable.setPrefix(prefix, false);
+        } else {
+            appendable.blankLine(count);
+        }
+
+        return (T) this;
+    }
 
     // @formatter:off
     @Override public void setPrefixLength(int lineIndex, int prefixEndIndex)                                                    { appendable.setPrefixLength(lineIndex, prefixEndIndex); }
@@ -70,8 +83,8 @@ public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, 
     @Override public int offsetWithPending()                                                                                    { return appendable.offsetWithPending(); }
     @Override public int getAfterEolPrefixDelta()                                                                               { return appendable.getAfterEolPrefixDelta(); }
     @NotNull @Override public ISequenceBuilder<?,?> getBuilder()                                                                { return appendable.getBuilder(); }
-    @NotNull @Override public CharSequence getPrefix()                                                                          { return appendable.getPrefix(); }
-    @NotNull @Override public CharSequence getBeforeEolPrefix()                                                                 { return appendable.getBeforeEolPrefix(); }
+    @Override public@NotNull  BasedSequence getPrefix()                                                                          { return appendable.getPrefix(); }
+    @Override public@NotNull  BasedSequence getBeforeEolPrefix()                                                                 { return appendable.getBeforeEolPrefix(); }
     @NotNull @Override public LineInfo getLineInfo(int lineIndex)                                                               { return appendable.getLineInfo(lineIndex); }
     @NotNull @Override public  BasedSequence getLine(int lineIndex)                                                             { return appendable.getLine(lineIndex); }
     @NotNull @Override public CharSequence getIndentPrefix()                                                                    { return appendable.getIndentPrefix(); }

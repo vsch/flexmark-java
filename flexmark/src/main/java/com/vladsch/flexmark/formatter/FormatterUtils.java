@@ -19,9 +19,9 @@ import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.TrackedOffsetList;
-import com.vladsch.flexmark.util.format.options.BlockQuoteContinuationMarker;
 import com.vladsch.flexmark.util.format.options.BlockQuoteMarker;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
+import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.html.LineInfo;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -48,11 +48,10 @@ public class FormatterUtils {
     public static final DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC = new DataKey<>("LIST_ITEM_NUMBER", NULL_PADDING); // function takes ordered marker and returns Pair LeftPad,RightPad
     public static final NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
 
-    public static Pair<String, String> getBlockLikePrefix(BlockQuoteLike node, NodeFormatterContext context, MarkdownWriter markdown, BlockQuoteMarker blockQuoteMarkers, BlockQuoteContinuationMarker blockQuoteContinuationMarkers) {
+    public static String getBlockLikePrefix(BlockQuoteLike node, NodeFormatterContext context, LineAppendable appendable, BlockQuoteMarker blockQuoteMarkers) {
         String prefixChars = node.getOpeningMarker().toString();
         String prefix;
         boolean compactPrefix = false;
-        boolean compactContinuationPrefix = false;
 
         switch (blockQuoteMarkers) {
             case AS_IS:
@@ -80,52 +79,17 @@ public class FormatterUtils {
                 throw new IllegalStateException("Unexpected value: " + blockQuoteMarkers);
         }
 
-        String continuationPrefix;
-        compactContinuationPrefix = compactPrefix;
-
-        switch (blockQuoteContinuationMarkers) {
-            case ADD_AS_FIRST:
-                continuationPrefix = prefix;
-                compactContinuationPrefix = compactPrefix;
-                break;
-
-            case ADD_COMPACT:
-                continuationPrefix = prefixChars.trim();
-                break;
-
-            case ADD_COMPACT_WITH_SPACE:
-                continuationPrefix = prefixChars.trim() + " ";
-                compactContinuationPrefix = true;
-                break;
-            case ADD_SPACED:
-                continuationPrefix = prefixChars.trim() + " ";
-                break;
-
-            case REMOVE:
-                continuationPrefix = "";
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + blockQuoteContinuationMarkers);
-        }
-
-        // create combined prefix, compact if needed
+        // create a combined prefix, compact if needed
         CharPredicate quoteLikePrefixPredicate = context.getBlockQuoteLikePrefixPredicate();
 
-        String combinedPrefix = FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument()) ? "" : markdown.getPrefix().toString();
+        String combinedPrefix = FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument()) ? "" : appendable.getPrefix().toString();
         if (compactPrefix && combinedPrefix.endsWith(" ") && combinedPrefix.length() >= 2 && quoteLikePrefixPredicate.test(combinedPrefix.charAt(combinedPrefix.length() - 2))) {
             combinedPrefix = combinedPrefix.substring(0, combinedPrefix.length() - 1) + prefix;
         } else {
             combinedPrefix += prefix;
         }
 
-        String combinedContinuationPrefix = markdown.getBeforeEolPrefix().toString();
-        if (compactContinuationPrefix && combinedContinuationPrefix.endsWith(" ") && combinedContinuationPrefix.length() >= 2 && quoteLikePrefixPredicate.test(combinedContinuationPrefix.charAt(combinedContinuationPrefix.length() - 2))) {
-            combinedContinuationPrefix = combinedContinuationPrefix.substring(0, combinedContinuationPrefix.length() - 1) + continuationPrefix;
-        } else {
-            combinedContinuationPrefix += continuationPrefix;
-        }
-
-        return Pair.of(combinedPrefix, combinedContinuationPrefix);
+        return combinedPrefix;
     }
 
     @SuppressWarnings("SameParameterValue")
