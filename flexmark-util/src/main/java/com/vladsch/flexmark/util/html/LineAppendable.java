@@ -494,22 +494,22 @@ public interface LineAppendable extends Appendable {
         return line.subSequence(0, lineInfo.prefixLength);
     }
 
-//    /**
-//     * Set prefix index for a given line
-//     *
-//     * @param lineIndex      index of the line
-//     * @param prefixEndIndex index where the prefix for the line ends
-//     */
-//    void setLinePrefixIndex(int lineIndex, int prefixEndIndex);
-//
-//    /**
-//     * Set content and prefix for a line
-//     *
-//     * @param lineIndex index of the line
-//     * @param prefix    prefix of the line
-//     * @param content   content text of the line
-//     */
-//    void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content);
+    /**
+     * Change prefix length for a given line without changing the line content
+     *
+     * @param lineIndex    index of the line
+     * @param prefixLength new prefix length
+     */
+    void setPrefixLength(int lineIndex, int prefixLength);
+
+    /**
+     * Set content and prefix for a line
+     *
+     * @param lineIndex index of the line
+     * @param prefix    prefix of the line
+     * @param text   content text of the line
+     */
+    void setLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text);
 
     /**
      * Get column offset after last append
@@ -573,24 +573,36 @@ public interface LineAppendable extends Appendable {
     /**
      * get the resulting text for all lines
      *
+     * @param withPrefixes          true if to include prefixes
      * @param maxBlankLines         maximum blank lines to allow in the text
      * @param maxTrailingBlankLines maximum trailing blank lines
      *
      * @return resulting text
      */
     @NotNull
-    String toString(int maxBlankLines, int maxTrailingBlankLines);
+    String toString(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines);
+
+    @NotNull
+    default String toString(int maxBlankLines, int maxTrailingBlankLines) {
+        return toString(true, maxBlankLines, maxTrailingBlankLines);
+    }
 
     /**
      * get the resulting text for all lines
      *
+     * @param withPrefixes          true if to include prefixes
      * @param maxBlankLines         maximum blank lines to allow in the text
      * @param maxTrailingBlankLines maximum trailing blank lines
      *
      * @return resulting text
      */
     @NotNull
-    CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines);
+    CharSequence toSequence(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines);
+
+    @NotNull
+    default CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines) {
+        return toSequence(true, maxBlankLines, maxTrailingBlankLines);
+    }
 
     /**
      * append lines to appendable with given maximum trailing blank lines
@@ -612,6 +624,7 @@ public interface LineAppendable extends Appendable {
      * NOTE:
      *
      * @param out                   appendable to output the resulting lines
+     * @param withPrefixes          true if to include prefixes
      * @param maxBlankLines         maximum blank lines to allow in the body,
      * @param maxTrailingBlankLines maximum trailing blank lines at the end, if &lt;maxBlankLines then maxBlankLines will be used, if -1 then no trailing EOL will be added
      * @param startLine             line from which to start output
@@ -621,7 +634,11 @@ public interface LineAppendable extends Appendable {
      *
      * @throws IOException if thrown by appendable
      */
-    <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException;
+    <T extends Appendable> T appendTo(@NotNull T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException;
+
+    default <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException {
+        return appendTo(out, true, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
+    }
 
     default <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines) throws IOException {
         return appendTo(out, maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
@@ -638,12 +655,17 @@ public interface LineAppendable extends Appendable {
         return appendTo(out, 0, 0, 0, Integer.MAX_VALUE);
     }
 
-    default <T extends Appendable> T appendToSilently(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
+    default <T extends Appendable> T appendToSilently(@NotNull T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
         try {
-            appendTo(out, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
+            appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
         } catch (IOException ignored) {
 
         }
+        return out;
+    }
+
+    default <T extends Appendable> T appendToSilently(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) {
+        appendToSilently(out, true, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
         return out;
     }
 

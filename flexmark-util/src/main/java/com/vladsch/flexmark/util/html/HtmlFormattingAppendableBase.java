@@ -410,10 +410,10 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     // delegated to LineFormattingAppendable
     // @formatter:off
-//    @Override public void setLinePrefixIndex(int lineIndex, int prefixEndIndex)                                                 { appendable.setLinePrefixIndex(lineIndex, prefixEndIndex); }
-//    @Override public void setLinePrefixIndex(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence content)        { appendable.setLinePrefixIndex(lineIndex, prefix, content); }
-    @Override public void forAllLines(int maxTrailingBlankLines, int startLine, int endLine, @NotNull LineProcessor processor)          { appendable.forAllLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, processor ); }
-    @Override public <T extends Appendable> T appendTo(@NotNull T out, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException { return appendable.appendTo(out, maxBlankLines, maxTrailingBlankLines, startLine, endLine); }
+    @Override public void setPrefixLength(int lineIndex, int prefixEndIndex)                                                    { appendable.setPrefixLength(lineIndex, prefixEndIndex); }
+    @Override public void setLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text)                   { appendable.setLine(lineIndex, prefix, text); }
+    @Override public void forAllLines(int maxTrailingBlankLines, int startLine, int endLine, @NotNull LineProcessor processor)  { appendable.forAllLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, processor ); }
+    @Override public <T extends Appendable> T appendTo(@NotNull T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException { return appendable.appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, startLine, endLine); }
     @Override public boolean isPendingSpace()                                                                                   { return appendable.isPendingSpace(); }
     @Override public boolean isPreFormatted()                                                                                   { return appendable.isPreFormatted(); }
     @Override public int column()                                                                                               { return appendable.column(); }
@@ -428,10 +428,10 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @NotNull @Override public CharSequence getPrefix()                                                                          { return appendable.getPrefix(); }
     @NotNull @Override public CharSequence getBeforeEolPrefix()                                                                 { return appendable.getBeforeEolPrefix(); }
     @NotNull @Override public LineInfo getLineInfo(int lineIndex)                                                               { return appendable.getLineInfo(lineIndex); }
-    @Override public@NotNull  BasedSequence getLine(int lineIndex)                                                              { return appendable.getLine(lineIndex); }
+    @Override public @NotNull  BasedSequence getLine(int lineIndex)                                                             { return appendable.getLine(lineIndex); }
     @NotNull @Override public CharSequence getIndentPrefix()                                                                    { return appendable.getIndentPrefix(); }
-    @NotNull @Override public CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines)                             { return appendable.toSequence(maxBlankLines, maxTrailingBlankLines); }
-    @NotNull @Override public String toString(int maxBlankLines, int maxTrailingBlankLines)                                     { return appendable.toString(maxBlankLines, maxTrailingBlankLines); }
+    @NotNull @Override public CharSequence toSequence(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines)       { return appendable.toSequence(withPrefixes, maxBlankLines, maxTrailingBlankLines); }
+    @NotNull @Override public String toString(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines)               { return appendable.toString(withPrefixes, maxBlankLines, maxTrailingBlankLines); }
     @NotNull @Override public BitFieldSet<Options> getOptionSet()                                                               { return appendable.getOptionSet();}
     @NotNull @Override public T normalizeTo(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine)           { appendable.normalizeTo(maxBlankLines, maxTrailingBlankLines, startLine, endLine); return (T) this; }
     @NotNull @Override public T removeLines(int startLine, int endLine)                                                         { appendable.removeLines(startLine, endLine); return (T) this; }

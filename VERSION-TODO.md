@@ -2,8 +2,9 @@
 
 &nbsp;<details id="version-history"><summary>**Version History**</summary>
 
-[TOC]: # ""
+[TOC]: #
 
+### Table of Contents
 - [Release 0.60.0](#release-0600)
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
@@ -221,6 +222,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.96
 
+* Add: `LineAppendable` ability to change prefix/line content position for lines
+  * Add: appendTo without prefixes to allow extracting content only.
+  * Add: `LineAppendable.setLine(int, CharSequence, CharSequence)` to set prefix and text of
+    line.
+  * Add: `LineAppendable.setPrefixLength(int, int)` to change the prefix/text index for the line
+    without changing actual line content.
 * Break: clean up `BitFieldSet`:
   * method names, ones adding/removing enum fields are now `add`/`remove`, ones taking bit mask
     are `orMask`/`andNotMask`.

@@ -82,6 +82,15 @@ public class LineInfo {
         this.flags = (isBlankPrefix || prefixLength == 0 ? F_BLANK_PREFIX : 0) | (isBlankText || textLength == 0 ? F_BLANK_TEXT : 0) | (preformatted.ordinal()) | (prefixLength + textLength < length ? F_HAS_EOL : 0);
     }
 
+    /**
+     * See if replacing this line info with another requires updating all following line info because of aggregation change
+     * @param other line info
+     * @return true if need to update
+     */
+    public boolean needAggregateUpdate(LineInfo other) {
+        return this.sumPrefixLength != other.sumPrefixLength || this.sumTextLength != other.sumTextLength || this.sumLength != other.sumLength;
+    }
+
     public boolean isNull() {
         return this == NULL;
     }
@@ -138,7 +147,7 @@ public class LineInfo {
                 ", sumPl=" + sumPrefixLength +
                 ", sumTl=" + sumTextLength +
                 ", sumL=" + sumLength +
-                ", f=" + (isBlankPrefix() ? "bp " : "") + (isBlankText() ? "bt " : "") + (isPreformatted() ? "p " : "") +
+                (flags != 0 ? ", f=" + (isBlankPrefix() ? "bp " : "") + (isBlankText() ? "bt " : "") + (isPreformatted() ? "p " : ""):"") +
                 '}';
     }
 
