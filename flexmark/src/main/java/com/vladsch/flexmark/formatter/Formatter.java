@@ -39,6 +39,7 @@ import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.TrackedOffsetList;
+import com.vladsch.flexmark.util.format.TrackedOffsetUtils;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.LineAppendable;
@@ -46,13 +47,9 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
-import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -67,7 +64,6 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT;
-import static com.vladsch.flexmark.util.sequence.CharPredicate.WHITESPACE;
 
 /**
  * Renders a tree of nodes to Markdown.
@@ -304,101 +300,34 @@ public class Formatter implements IRender {
 
     /**
      * Render a node to the appendable
-     *
-     * @param document node to render
-     * @param output   appendable to use for the output
-     */
-    public void render(@NotNull Node document, @NotNull Appendable output) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), document.getDocument(), null);
-        renderer.render(document);
-        renderer.flushTo(output, formatterOptions.maxBlankLines, formatterOptions.maxTrailingBlankLines);
-    }
-
-    /**
-     * Render a node to the appendable
-     *
-     * @param document node to render
-     * @param builder  sequence builder
-     */
-    public String render(@NotNull Node document, @NotNull SequenceBuilder builder) {
-        return render(document, builder, 1);
-    }
-
-    /**
-     * Render a node to the appendable
-     *
-     * @param document          node to render
-     * @param builder           sequence builder
-     * @param maxTrailingBlankLines maximum tail blank lines
-     *
-     * @return string of formatted markdown (same as in builder) to be used for validation
-     */
-    public String render(@NotNull Node document, @NotNull SequenceBuilder builder, int maxTrailingBlankLines) {
-        SequenceBuilder subBuilder = builder.getBuilder();
-
-        MarkdownWriter out = new MarkdownWriter(subBuilder, formatterOptions.formatFlags);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, out, document.getDocument(), null);
-        renderer.render(document);
-        out.appendToSilently(builder, formatterOptions.maxBlankLines, maxTrailingBlankLines);
-
-        // NOTE: resolve any unresolved tracked offsets that are outside elements which resolve their own
-        TrackedOffsetList trackedOffsets = renderer.getTrackedOffsets().getUnresolvedOffsets();
-        if (!trackedOffsets.isEmpty()) {
-            // need to resolve any unresolved offsets
-            BasedSequence baseSeq = document.getChars();
-            int[] length = { 0 };
-            final int[] unresolved = { trackedOffsets.size() };
-
-            out.forAllLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, (line, lineInfo) -> {
-                List<TrackedOffset> lineTrackedOffsets = trackedOffsets.getTrackedOffsets(line.getStartOffset(), line.getEndOffset());
-                if (!lineTrackedOffsets.isEmpty()) {
-                    for (TrackedOffset trackedOffset : lineTrackedOffsets) {
-                        BasedOffsetTracker tracker = BasedOffsetTracker.create(line);
-
-                        if (!trackedOffset.isResolved()) {
-                            if (baseSeq.isBaseCharAt(trackedOffset.getOffset(), WHITESPACE) && !baseSeq.isBaseCharAt(trackedOffset.getOffset() - 1, WHITESPACE)) {
-                                // we need to use previous non-blank and use that offset
-                                OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset() - 1, false);
-                                trackedOffset.setIndex(info.endIndex + length[0]);
-                            } else if (baseSeq.isBaseCharAt(trackedOffset.getOffset() + 1, WHITESPACE) && !baseSeq.isBaseCharAt(trackedOffset.getOffset(), WHITESPACE)) {
-                                // we need to use this non-blank and use that offset
-                                OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), false);
-                                trackedOffset.setIndex(info.startIndex + length[0]);
-                            } else {
-                                OffsetInfo info = tracker.getOffsetInfo(trackedOffset.getOffset(), true);
-                                trackedOffset.setIndex(info.endIndex + length[0]);
-                            }
-//                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", trackedOffset.getOffset(), trackedOffset.getIndex(), length[0], lineInfo.index, line.getBuilder().append(line).toStringWithRanges(true)));
-                            unresolved[0]--;
-                        }
-                    }
-                }
-
-                length[0] += line.length();
-
-                return unresolved[0] > 0;
-            });
-        }
-
-        StringBuilder sb = new StringBuilder();
-        try {
-            out.appendTo(sb, 1, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Render a node to the appendable
+     * <p>
+     * NOTE: if Appendable is LineAppendable then its builder will be used as builder for the markdown text, else string sequence builder will be used
      *
      * @param node   node to render
      * @param output appendable to use for the output
      */
-    public void render(Node node, Appendable output, int maxTrailingBlankLines) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags), node.getDocument(), null);
+    public void render(@NotNull Node node, @NotNull Appendable output) {
+        render(node, output, formatterOptions.maxTrailingBlankLines);
+    }
+
+    /**
+     * Render node
+     * <p>
+     * NOTE: if Appendable is LineAppendable then its builder will be used as builder for the markdown text, else string sequence builder will be used
+     *
+     * @param node                  node to render
+     * @param output                appendable to which to render the resulting text
+     * @param maxTrailingBlankLines max trailing blank lines in output, -1 means no last line EOL
+     */
+    public void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
+        // NOTE: output to MarkdownWriter is only used to get builder if output is LineAppendable or ISequenceBuilder
+        MarkdownWriter markdown = new MarkdownWriter(output, formatterOptions.formatFlags);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, markdown, node.getDocument(), null);
         renderer.render(node);
-        renderer.flushTo(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
+        markdown.appendToSilently(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
+
+        // resolve any unresolved tracked offsets that are outside elements which resolve their own
+        TrackedOffsetUtils.resolveTrackedOffsets(node.getChars(), markdown, renderer.getTrackedOffsets().getUnresolvedOffsets(), maxTrailingBlankLines);
     }
 
     /**

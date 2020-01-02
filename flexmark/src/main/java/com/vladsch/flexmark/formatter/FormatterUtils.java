@@ -324,7 +324,7 @@ public class FormatterUtils {
             boolean addBlankLineLooseItems
     ) {
         FormatterOptions options = context.getFormatterOptions();
-        boolean savedFirstListItemChild = FIRST_LIST_ITEM_CHILD.get(node.getDocument());
+        boolean savedFirstListItemChild = FIRST_LIST_ITEM_CHILD.get(context.getDocument());
 
         if (context.isTransformingText()) {
             BasedSequence openingMarker = node.getOpeningMarker();
@@ -465,13 +465,13 @@ public class FormatterUtils {
                     markdown.popPrefix();
                 } else if (childNode != null) {
                     // NOTE: item is empty, followed immediately by child block element
-                    FIRST_LIST_ITEM_CHILD.set(node.getDocument(), true);
+                    FIRST_LIST_ITEM_CHILD.set(context.getDocument(), true);
                     markdown.pushPrefix().addPrefix(itemPrefix, true);
                     context.render(childNode);
                     markdown.popPrefix();
                 }
 
-                FIRST_LIST_ITEM_CHILD.set(node.getDocument(), false);
+                FIRST_LIST_ITEM_CHILD.set(context.getDocument(), false);
 
                 while (childNode != null) {
                     childNode = childNode.getNext();
@@ -497,7 +497,7 @@ public class FormatterUtils {
             markdown.popPrefix();
         }
 
-        FIRST_LIST_ITEM_CHILD.set(node.getDocument(), savedFirstListItemChild);
+        FIRST_LIST_ITEM_CHILD.set(context.getDocument(), savedFirstListItemChild);
     }
 
     @SuppressWarnings("WeakerAccess")

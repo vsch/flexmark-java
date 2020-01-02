@@ -548,7 +548,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                         break;
                 }
 
-                String quote = valueQuotes.quotesFor(value, attributeNode.getOpeningMarker());
+                String quote = attributeNode.isImplicitName() ? "" : valueQuotes.quotesFor(value, attributeNode.getOpeningMarker());
                 String needQuote = AttributeValueQuotes.NO_QUOTES_DOUBLE_PREFERRED.quotesFor(value, "");
 
                 if (attributeNode.isId()) {
@@ -559,6 +559,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                             if (!attributeNode.isImplicitName()) {
                                 name = PrefixedSubSequence.prefixOf("#", name.getEmptyPrefix());
                                 sep = BasedSequence.NULL;
+                                quote = "";
                             }
                             break;
 
@@ -566,7 +567,10 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                             if (attributeNode.isImplicitName()) {
                                 name = PrefixedSubSequence.prefixOf("id", name.getEmptyPrefix());
                                 sep = PrefixedSubSequence.prefixOf("=", name.getEmptySuffix());
-                                if (quote.isEmpty() && !needQuote.isEmpty()) quote = needQuote;
+                                if (quote.isEmpty()) {
+                                    quote = valueQuotes.quotesFor(value, attributeNode.getOpeningMarker());
+                                    if (quote.isEmpty()) quote = needQuote;
+                                }
                             }
                             break;
                         default:
@@ -580,6 +584,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                             if (!attributeNode.isImplicitName()) {
                                 name = PrefixedSubSequence.prefixOf(".", name.getEmptyPrefix());
                                 sep = BasedSequence.NULL;
+                                quote = "";
                             }
                             break;
 
@@ -587,7 +592,10 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
                             if (attributeNode.isImplicitName()) {
                                 name = PrefixedSubSequence.prefixOf("class", name.getEmptyPrefix());
                                 sep = PrefixedSubSequence.prefixOf("=", name.getEmptySuffix());
-                                if (quote.isEmpty() && !needQuote.isEmpty()) quote = needQuote;
+                                if (quote.isEmpty()) {
+                                    quote = valueQuotes.quotesFor(value, attributeNode.getOpeningMarker());
+                                    if (quote.isEmpty()) quote = needQuote;
+                                }
                             }
                             break;
                         default:

@@ -720,7 +720,7 @@ public class FlexmarkHtmlConverter {
 
             @Override
             public HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
-                HtmlMarkdownWriter writer = new HtmlMarkdownWriter(this.markdown.getOptions(), builder);
+                HtmlMarkdownWriter writer = new HtmlMarkdownWriter(builder, this.markdown.getOptions());
                 writer.setContext(this);
                 //noinspection ReturnOfInnerClass
                 return new SubHtmlNodeConverter(myMainNodeRenderer, writer, options == null || options == myOptions ? myOptions : new ScopedDataSet(myOptions, options));
@@ -1123,7 +1123,7 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
-            HtmlMarkdownWriter writer = new HtmlMarkdownWriter(this.markdown.getOptions(), builder);
+            HtmlMarkdownWriter writer = new HtmlMarkdownWriter(builder, this.markdown.getOptions());
             writer.setContext(this);
             //noinspection ReturnOfInnerClass
             return new SubHtmlNodeConverter(this, writer, options == null || options == myOptions ? myOptions : new ScopedDataSet(myOptions, options));

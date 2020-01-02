@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.TagRange;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,11 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
     }
 
     public HtmlWriter(int indentSize, int formatOptions, boolean suppressOpenTagLine, boolean suppressCloseTagLine) {
-        super(indentSize, formatOptions);
+         this(null, indentSize, formatOptions, suppressOpenTagLine, suppressCloseTagLine);
+    }
+
+    public HtmlWriter(@Nullable Appendable appendable, int indentSize, int formatOptions, boolean suppressOpenTagLine, boolean suppressCloseTagLine) {
+        super(appendable, indentSize, formatOptions);
         setSuppressOpenTagLine(suppressOpenTagLine);
         setSuppressCloseTagLine(suppressCloseTagLine);
     }

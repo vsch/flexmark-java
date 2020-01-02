@@ -50,7 +50,6 @@ public class LineAppendableImpl implements LineAppendable {
     final private Stack<Boolean> indentPrefixStack;
 
     // current line being accumulated
-    private int linePrefixLength;                           // prefix length of the current line
     private boolean allWhitespace;                          // all chars were whitespace
     private boolean lastWasWhitespace;                      // last char was whitespace
     private int eolOnFirstText;                             // append EOLs on first text
@@ -58,19 +57,18 @@ public class LineAppendableImpl implements LineAppendable {
     final private Stack<Integer> optionStack = new Stack<>();
 
     public LineAppendableImpl(int formatOptions) {
-        this(StringSequenceBuilder.emptyBuilder(), LineAppendable.toOptionSet(formatOptions));
+        this(null, LineAppendable.toOptionSet(formatOptions));
     }
 
-    public LineAppendableImpl(@NotNull ISequenceBuilder<?, ?> builder, int formatOptions) {
+    public LineAppendableImpl(@Nullable Appendable builder, int formatOptions) {
         this(builder, LineAppendable.toOptionSet(formatOptions));
     }
 
-    public LineAppendableImpl(@NotNull ISequenceBuilder<?, ?> builder, Options... formatOptions) {
-        this(builder, LineAppendable.toOptionSet(formatOptions));
-    }
+    public LineAppendableImpl(@Nullable Appendable appendable, BitFieldSet<Options> formatOptions) {
+        this.appendable = appendable instanceof ISequenceBuilder<?, ?> ? ((ISequenceBuilder<?, ?>) appendable).getBuilder()
+                : appendable instanceof LineAppendable ? ((LineAppendable) appendable).getBuilder()
+                : StringSequenceBuilder.emptyBuilder();
 
-    public LineAppendableImpl(@NotNull ISequenceBuilder<?, ?> builder, BitFieldSet<Options> formatOptions) {
-        this.appendable = builder.getBuilder();
         options = formatOptions;
         passThrough = any(F_PASS_THROUGH);
         preFormattedNesting = 0;
@@ -86,7 +84,6 @@ public class LineAppendableImpl implements LineAppendable {
         prefixAfterEol = BasedSequence.EMPTY;
         indentPrefix = BasedSequence.EMPTY;
         eolOnFirstText = 0;
-        linePrefixLength = 0;
         indentsOnFirstEol = new ArrayList<>();
     }
 
@@ -363,7 +360,7 @@ public class LineAppendableImpl implements LineAppendable {
     private void appendEol() {
         appendable.append(EOL);
         int endOffset = appendable.length();
-        addLineRange(Range.of(linePrefixLength, endOffset - 1), prefix);
+        addLineRange(Range.of(0, endOffset - 1), prefix);
         allWhitespace = true;
         lastWasWhitespace = false;
         eolOnFirstText = 0;
@@ -631,7 +628,7 @@ public class LineAppendableImpl implements LineAppendable {
     @Override
     public LineAppendable blankLine() {
         line();
-        if (!lines.isEmpty()&& !isTrailingBlankLine() || lines.isEmpty() && any(F_ALLOW_LEADING_EOL)) appendEol();
+        if (!lines.isEmpty() && !isTrailingBlankLine() || lines.isEmpty() && any(F_ALLOW_LEADING_EOL)) appendEol();
         return this;
     }
 

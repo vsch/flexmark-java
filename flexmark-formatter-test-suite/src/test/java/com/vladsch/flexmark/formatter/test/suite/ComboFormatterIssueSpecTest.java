@@ -146,10 +146,8 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
                 @Override
                 protected @NotNull String renderHtml() {
                     SequenceBuilder builder = SequenceBuilder.emptyBuilder(getDocument().getChars());
-                    String formatted = ((Formatter) getRenderer()).render(getDocument(), builder);
-                    BasedSequence basedFormatted = builder.toSequence();
-
-                    return basedFormatted.toString();
+                    getRenderer().render(getDocument(), builder);
+                    return builder.toString();
                 }
 
                 @Override

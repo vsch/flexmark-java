@@ -1,21 +1,21 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
-import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
 public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, Node, HtmlNodeConverterContext> {
     public HtmlMarkdownWriter() {
-        this(0);
+        this(null, 0);
     }
 
     public HtmlMarkdownWriter(int formatOptions) {
-        super(formatOptions);
+        this(null, formatOptions);
     }
 
-    public HtmlMarkdownWriter(int formatOptions, @NotNull ISequenceBuilder<?, ?> builder) {
+    public HtmlMarkdownWriter(@Nullable Appendable builder, int formatOptions) {
         super(builder, formatOptions);
     }
 

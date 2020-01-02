@@ -14,6 +14,8 @@ import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.util.format.TrackedOffset;
+import com.vladsch.flexmark.util.format.TrackedOffsetUtils;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.html.LineAppendable;
@@ -116,6 +118,9 @@ public class HtmlRenderer implements IRender {
     @Deprecated public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_TRIM_TRAILING_WHITESPACE;
     @Deprecated public static final int FORMAT_ALL_OPTIONS = LineAppendable.F_FORMAT_ALL;
 
+    // Experimental, not tested
+    public static final DataKey<List<TrackedOffset>> TRACKED_OFFSETS = new DataKey<>("TRACKED_OFFSETS", Collections.emptyList());
+
     // now not final only to allow disposal of resources
     final List<AttributeProviderFactory> attributeProviderFactories;
     final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
@@ -189,13 +194,7 @@ public class HtmlRenderer implements IRender {
      * @param output   appendable to use for the output
      */
     public void render(@NotNull Node node, @NotNull Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
-        if (renderer.htmlIdGenerator != HtmlIdGenerator.NULL && !(node instanceof Document)) {
-            renderer.htmlIdGenerator.generateIds(node.getDocument());
-        }
-        renderer.render(node);
-        renderer.flushTo(output, htmlOptions.maxTrailingBlankLines);
-        renderer.dispose();
+        render(node, output, htmlOptions.maxTrailingBlankLines);
     }
 
     /**
@@ -205,12 +204,17 @@ public class HtmlRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
+        HtmlWriter htmlWriter = new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol);
+        MainNodeRenderer renderer = new MainNodeRenderer(options, htmlWriter, node.getDocument());
         if (renderer.htmlIdGenerator != HtmlIdGenerator.NULL && !(node instanceof Document)) {
             renderer.htmlIdGenerator.generateIds(node.getDocument());
         }
+
         renderer.render(node);
-        renderer.flushTo(output, maxTrailingBlankLines);
+        htmlWriter.appendToSilently(output, htmlOptions.maxBlankLines, maxTrailingBlankLines);
+
+        // resolve any unresolved tracked offsets that are outside elements which resolve their own
+        TrackedOffsetUtils.resolveTrackedOffsets(node.getChars(), htmlWriter, TRACKED_OFFSETS.get(renderer.getDocument()), maxTrailingBlankLines);
         renderer.dispose();
     }
 
@@ -218,7 +222,7 @@ public class HtmlRenderer implements IRender {
      * Render the tree of nodes to HTML.
      *
      * @param node the root node
-     * @return the rendered HTML
+     * @return the rendered HTML.
      */
     @NotNull
     public String render(@NotNull Node node) {

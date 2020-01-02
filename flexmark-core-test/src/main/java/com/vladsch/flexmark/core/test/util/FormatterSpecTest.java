@@ -53,10 +53,8 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                     return getRenderer().render(getDocument());
                 } else {
                     SequenceBuilder builder = getDocument().getDocument().getChars().getBuilder();
-                    String html = ((Formatter) getRenderer()).render(getDocument(), builder);
-                    String builderHtml = builder.toSequence().toString();
-
-                    Assert.assertEquals(html, builderHtml);
+                    getRenderer().render(getDocument(), builder);
+                    String html = builder.toString();
 
                     List<TrackedOffset> trackedOffsetList = Formatter.TRACKED_OFFSETS.get(getDocument().getDocument());
                     assert trackedOffsetList == trackedOffsets;

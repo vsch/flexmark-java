@@ -22,7 +22,7 @@ public class TrackedOffsetList implements List<TrackedOffset> {
 
     @NotNull
     public static TrackedOffsetList create(@NotNull BasedSequence baseSeq, @NotNull List<TrackedOffset> trackedOffsets) {
-        return new TrackedOffsetList(baseSeq, trackedOffsets);
+        return trackedOffsets instanceof TrackedOffsetList ? (TrackedOffsetList) trackedOffsets : new TrackedOffsetList(baseSeq, trackedOffsets);
     }
 
     @NotNull

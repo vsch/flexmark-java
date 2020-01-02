@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.html.LineInfo;
 import com.vladsch.flexmark.util.html.LineProcessor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import com.vladsch.flexmark.util.sequence.builder.StringSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,10 +27,10 @@ public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, 
     }
 
     public MarkdownWriterBase(int formatOptions) {
-        this(StringSequenceBuilder.emptyBuilder(), formatOptions);
+        this(null, formatOptions);
     }
 
-    public MarkdownWriterBase(@NotNull ISequenceBuilder<?, ?> builder, int formatOptions) {
+    public MarkdownWriterBase(@Nullable Appendable builder, int formatOptions) {
         appendable = new LineAppendableImpl(builder, formatOptions);
         appendable.setOptions(appendable.getOptions() | LineAppendable.F_PREFIX_PRE_FORMATTED);
     }

@@ -222,7 +222,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## 0.59.96
 
-* Add: `LineAppendable`
+* Fix: `AttributesNodeFormatter` adding quotes around implicit attribute values: `#` and `.`
+  prefixed ones.
+* Fix: `FormatterUtils` using `node.getDocument()` instead of `context.getDocument()`
+* Add: `TrackedOffsetUtils` for common tracked offset resolving code
+* Add: tracked offset option to `HtmlRenderer`, NOT TESTED, Experimental
+* Break: remove kludged `Formatter.render` builder arguments and only use `Appendable`, pass
+  builder since builder interface is extending appendable.
+* Fix: `LineAppendable`
+  * Break: replace `ISequenceBuilder` arguments with `Appendable`, if `LineAppendable` or
+    `ISequenceBuilder` then will use its builder, otherwise will use `StringSequenceBuilder`
   * Add: `LineAppendable.setPrefixLength(int, int)` to change prefix/line content split for lines
   * Add: `LineAppendable.setLine(int, CharSequence, CharSequence)` to change prefix/line content split for lines
   * Add: appendTo without prefixes to allow extracting content only.

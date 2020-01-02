@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.ast.BlockQuoteLike;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
@@ -11,15 +10,15 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("UnusedReturnValue")
 public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, NodeFormatterContext> {
     public MarkdownWriter() {
-        this(0);
+        this(null, 0);
     }
 
     public MarkdownWriter(int formatOptions) {
-        super(formatOptions);
+        this(null, formatOptions);
     }
 
-    public MarkdownWriter(@NotNull ISequenceBuilder<?, ?> builder, int formatOptions) {
-        super(builder, formatOptions);
+    public MarkdownWriter(@Nullable Appendable appendable, int formatOptions) {
+        super(appendable, formatOptions);
     }
 
     @Override

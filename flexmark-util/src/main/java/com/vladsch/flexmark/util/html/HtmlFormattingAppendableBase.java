@@ -27,12 +27,15 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     private final @NotNull Stack<String> openTags = new Stack<>();
 
     public HtmlFormattingAppendableBase(LineAppendable other, boolean inheritIndent) {
-        this.appendable = new LineAppendableImpl(other.getOptions());
-        if (inheritIndent) this.appendable.setIndentPrefix(other.getIndentPrefix());
+        this(other, inheritIndent ? other.getIndentPrefix().length() : 0, other.getOptions());
     }
 
     public HtmlFormattingAppendableBase(int indentSize, int formatOptions) {
-        this.appendable = new LineAppendableImpl(formatOptions);
+        this(null, indentSize, formatOptions);
+    }
+
+    public HtmlFormattingAppendableBase(@Nullable Appendable other, int indentSize, int formatOptions) {
+        this.appendable = new LineAppendableImpl(other, formatOptions);
         this.appendable.setIndentPrefix(RepeatedSequence.repeatOf(" ", indentSize).toString());
     }
 

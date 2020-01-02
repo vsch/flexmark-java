@@ -23,7 +23,8 @@ The attributes is a space separated list of attribute syntax of one of the follo
 
 <!--
 * `:attr=value` : equivalent to `style="attr: value"`
- -->
+-->
+
 **NOTE**: Handling of multiple value assignment for attributes depends on its name:
 
 * `class` values are accumulated as a space (` `) separated list.
@@ -1503,6 +1504,8 @@ text {id="va'lue"}
 text {id='va"lue'}
 text {id='value spaced'}
 text {id="value spaced"}
+text {#noQuotes}
+text {.noQuotes}
 .
 text {id="value"}
 text {id="value"}
@@ -1511,6 +1514,8 @@ text {id="va'lue"}
 text {id="va&quot;lue"}
 text {id="value spaced"}
 text {id="value spaced"}
+text {#noQuotes}
+text {.noQuotes}
 ````````````````````````````````
 
 
@@ -1555,66 +1560,66 @@ text {id=value class="text more" style="color:red;back:blue"}
 
 ### Id-Class
 
-```````````````````````````````` example(Format - Id-Class: 1) options(sort-attributes, id-implicit, class-implicit)
+```````````````````````````````` example(Format - Id-Class: 1) options(sort-attributes, id-implicit, class-implicit, value-quotes-double-quotes)
 text {style="color" class=text id=value}
 .
 text {#value .text style="color"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format - Id-Class: 2) options(sort-attributes, id-implicit, class-implicit)
+```````````````````````````````` example(Format - Id-Class: 2) options(sort-attributes, id-implicit, class-implicit, value-quotes-double-quotes)
 text {.text .more id=value0 style="color:red" style="back:blue" id=value}
 .
 text {#value class="text more" style="color:red;back:blue"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format - Id-Class: 3) options(combine-consecutive, sort-attributes, id-implicit, class-implicit)
+```````````````````````````````` example(Format - Id-Class: 3) options(combine-consecutive, sort-attributes, id-implicit, class-implicit, value-quotes-double-quotes)
 text {.text}{class="more"}{#value0}{style="color:red"}{style="back:blue"}{id=value}
 .
 text {#value class="text more" style="color:red;back:blue"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format - Id-Class: 4) options(sort-attributes, id-explicit, class-implicit)
+```````````````````````````````` example(Format - Id-Class: 4) options(sort-attributes, id-explicit, class-implicit, value-quotes-double-quotes)
 text {style="color" class=text #value}
 .
-text {id=value .text style="color"}
+text {id="value" .text style="color"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format - Id-Class: 5) options(sort-attributes, id-explicit, class-implicit)
+```````````````````````````````` example(Format - Id-Class: 5) options(sort-attributes, id-explicit, class-implicit, value-quotes-double-quotes)
 text {.text class="more" #value0 style="color:red" style="back:blue" id=value}
 .
-text {id=value class="text more" style="color:red;back:blue"}
+text {id="value" class="text more" style="color:red;back:blue"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format - Id-Class: 6) options(combine-consecutive, sort-attributes, id-explicit, class-implicit)
+```````````````````````````````` example(Format - Id-Class: 6) options(combine-consecutive, sort-attributes, id-explicit, class-implicit, value-quotes-double-quotes)
 text {.text}{class="more"}{#value0}{style="color:red"}{style="back:blue"}{id=value}
 .
-text {id=value class="text more" style="color:red;back:blue"}
+text {id="value" class="text more" style="color:red;back:blue"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format - Id-Class: 7) options(sort-attributes, id-explicit, class-explicit)
+```````````````````````````````` example(Format - Id-Class: 7) options(sort-attributes, id-explicit, class-explicit, value-quotes-double-quotes)
 text {style="color" .text #value}
 .
-text {id=value class=text style="color"}
+text {id="value" class="text" style="color"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format - Id-Class: 8) options(sort-attributes, id-explicit, class-explicit)
+```````````````````````````````` example(Format - Id-Class: 8) options(sort-attributes, id-explicit, class-explicit, value-quotes-double-quotes)
 text {.text class="more" #value0 style="color:red" style="back:blue" id=value}
 .
-text {id=value class="text more" style="color:red;back:blue"}
+text {id="value" class="text more" style="color:red;back:blue"}
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format - Id-Class: 9) options(combine-consecutive, sort-attributes, id-explicit, class-explicit)
+```````````````````````````````` example(Format - Id-Class: 9) options(combine-consecutive, sort-attributes, id-explicit, class-explicit, value-quotes-double-quotes)
 text {.text}{class="more"}{#value0}{style="color:red"}{style="back:blue"}{#value}
 .
-text {id=value class="text more" style="color:red;back:blue"}
+text {id="value" class="text more" style="color:red;back:blue"}
 ````````````````````````````````
 
 

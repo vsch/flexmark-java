@@ -36,6 +36,7 @@ public interface LineAppendable extends Appendable {
         TRIM_LEADING_WHITESPACE,            // allow leading spaces on a line, else remove
         ALLOW_LEADING_EOL,                  // allow EOL at offset 0
         PREFIX_PRE_FORMATTED,               // when prefixing lines, prefix pre-formatted lines
+        TRACK_OFFSETS,                      // formatter/renderer flags to signal needing a SequenceBuilder to track offsets
     }
 
     Options O_CONVERT_TABS = Options.CONVERT_TABS;
@@ -45,6 +46,7 @@ public interface LineAppendable extends Appendable {
     Options O_TRIM_LEADING_WHITESPACE = Options.TRIM_LEADING_WHITESPACE;
     Options O_ALLOW_LEADING_EOL = Options.ALLOW_LEADING_EOL;
     Options O_PREFIX_PRE_FORMATTED = Options.PREFIX_PRE_FORMATTED;
+    Options O_TRACK_OFFSETS = Options.TRACK_OFFSETS;
     BitFieldSet<Options> O_FORMAT_ALL = BitFieldSet.of(O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_TRIM_TRAILING_WHITESPACE, O_TRIM_LEADING_WHITESPACE);
 
     int F_CONVERT_TABS = BitFieldSet.intMask(O_CONVERT_TABS);                                    // expand tabs on column multiples of 4
@@ -56,6 +58,7 @@ public interface LineAppendable extends Appendable {
     int F_TRIM_LEADING_WHITESPACE = BitFieldSet.intMask(O_TRIM_LEADING_WHITESPACE);              // allow leading spaces on a line, else remove
     int F_ALLOW_LEADING_EOL = BitFieldSet.intMask(O_ALLOW_LEADING_EOL);                          // allow EOL at offset 0
     int F_PREFIX_PRE_FORMATTED = BitFieldSet.intMask(O_PREFIX_PRE_FORMATTED);                    // when prefixing lines, prefix pre-formatted lines
+    int F_TRACK_OFFSETS = BitFieldSet.intMask(O_TRACK_OFFSETS);                    // when prefixing lines, prefix pre-formatted lines
     int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_TRIM_TRAILING_WHITESPACE;     // select all formatting options
 
     int F_WHITESPACE_REMOVAL = LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE;
