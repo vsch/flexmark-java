@@ -224,7 +224,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
                 if (any(mask(e))) {
                     out.append(e.name());
                     if (e instanceof BitField && ((BitField) e).getBits() > 1) {
-                        out.append("(").append(getSigned(e)).append(")");
+                        out.append("(").append(getLong(e)).append(")");
                     }
                     out.mark();
                 }
@@ -284,45 +284,67 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
 
     /**
      * Set a signed value for the field
-     *
-     * @param e1    field
+     *  @param e1    field
      * @param value value to set
      */
-    public boolean orMask(E e1, long value) {
-        long bitMask = bitMasks[e1.ordinal()];
-
-        int bitCount = Long.bitCount(bitMask);
-        long halfValue = 1L << bitCount - 1;
-
-        if (value < -halfValue || value > halfValue - 1)
-            throw new IllegalArgumentException(String.format("Enum field %s.%s is %d bit%s, value range is [%d, %d], cannot be set to %d", elementType.getSimpleName(), e1.name(), bitCount, bitCount > 1 ? "s" : "", -halfValue, halfValue - 1, value));
-
-        long shiftedValue = value << Long.numberOfTrailingZeros(bitMask);
+    @SuppressWarnings("UnusedReturnValue")
+    public boolean setUnsigned(E e1, long value) {
         long oldElements = elements;
-        elements ^= (elements ^ shiftedValue) & bitMask;
+        elements = setUnsigned(elementType, bitMasks, elements, e1, value);
         return oldElements != elements;
     }
 
-    public void intOr(E e1, int value) {
-        orMask(e1, value);
+    /**
+     * Set a signed value for the field
+     *  @param e1    field
+     * @param value value to set
+     */
+    @SuppressWarnings("UnusedReturnValue")
+    public boolean setSigned(E e1, long value) {
+        long oldElements = elements;
+        elements = setSigned(elementType, bitMasks, elements, e1, value);
+        return oldElements != elements;
     }
 
-    public void shortOr(E e1, short value) {
-        orMask(e1, value);
+    public void setBitField(E e1, long value) {
+        setSigned(e1, (long) value);
     }
 
-    public void byteOr(E e1, byte value) {
-        orMask(e1, value);
+
+    public void setBitField(E e1, int value) {
+        setSigned(e1, (long) value);
+    }
+
+    public void setBitField(E e1, short value) {
+        setSigned(e1, (long) value);
+    }
+
+    public void setBitField(E e1, byte value) {
+        setSigned(e1, (long) value);
+    }
+
+    public void setUnsignedField(E e1, long value) {
+        setUnsigned(e1, (long) value);
+    }
+
+    public void setUnsignedField(E e1, int value) {
+        setUnsigned(e1, (long) value);
+    }
+
+    public void setUnsignedField(E e1, short value) {
+        setUnsigned(e1, (long) value);
+    }
+
+    public void setUnsignedField(E e1, byte value) {
+        setUnsigned(e1, (long) value);
+    }
+
+    public long getUnsigned(E e1, int maxBits, String typeName) {
+        return getUnsignedBitField(elements, e1, maxBits, typeName);
     }
 
     public long getSigned(E e1, int maxBits, String typeName) {
-        long bitMask = bitMasks[e1.ordinal()];
-        int bitCount = Long.bitCount(bitMask);
-
-        if (bitCount > maxBits)
-            throw new IllegalArgumentException(String.format("Enum field %s.%s uses %d, which is more than %d available in %s", elementType.getSimpleName(), e1.name(), bitCount, maxBits, typeName));
-
-        return elements << Long.numberOfLeadingZeros(bitMask) >> 64 - bitCount;
+        return getSignedBitField(elements, e1, maxBits, typeName);
     }
 
     /**
@@ -332,7 +354,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      *
      * @return unsigned value
      */
-    public long getSigned(E e1) {
+    public long getLong(E e1) {
         return getSigned(e1, 64, "long");
     }
 
@@ -345,6 +367,18 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     }
 
     public byte getByte(E e1) {
+        return (byte) getSigned(e1, 8, "byte");
+    }
+
+    public int getUInt(E e1) {
+        return (int) getSigned(e1, 32, "int");
+    }
+
+    public short getUShort(E e1) {
+        return (short) getSigned(e1, 16, "short");
+    }
+
+    public byte getUByte(E e1) {
         return (byte) getSigned(e1, 8, "byte");
     }
 
@@ -387,31 +421,27 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
         return mask;
     }
 
-    public boolean orMask(E e1) { return orMask(mask(e1)); }
+    public boolean add(E e1, E e2) { return orMask(mask(e1, e2));}
 
-    public boolean orMask(E e1, E e2) { return orMask(mask(e1, e2));}
+    public boolean add(E e1, E e2, E e3) { return orMask(mask(e1, e2, e3));}
 
-    public boolean orMask(E e1, E e2, E e3) { return orMask(mask(e1, e2, e3));}
+    public boolean add(E e1, E e2, E e3, E e4) { return orMask(mask(e1, e2, e3, e4));}
 
-    public boolean orMask(E e1, E e2, E e3, E e4) { return orMask(mask(e1, e2, e3, e4));}
-
-    public boolean orMask(E e1, E e2, E e3, E e4, E e5) { return orMask(mask(e1, e2, e3, e4, e5));}
+    public boolean add(E e1, E e2, E e3, E e4, E e5) { return orMask(mask(e1, e2, e3, e4, e5));}
 
     @SafeVarargs
-    final public boolean orMask(E... rest) { return orMask(mask(rest));}
+    final public boolean add(E... rest) { return orMask(mask(rest));}
 
-    public boolean andNotMask(E e1) { return andNotMask(mask(e1)); }
+    public boolean remove(E e1, E e2) { return andNotMask(mask(e1, e2));}
 
-    public boolean andNotMask(E e1, E e2) { return andNotMask(mask(e1, e2));}
+    public boolean remove(E e1, E e2, E e3) { return andNotMask(mask(e1, e2, e3));}
 
-    public boolean andNotMask(E e1, E e2, E e3) { return andNotMask(mask(e1, e2, e3));}
+    public boolean remove(E e1, E e2, E e3, E e4) { return andNotMask(mask(e1, e2, e3, e4));}
 
-    public boolean andNotMask(E e1, E e2, E e3, E e4) { return andNotMask(mask(e1, e2, e3, e4));}
-
-    public boolean andNotMask(E e1, E e2, E e3, E e4, E e5) { return andNotMask(mask(e1, e2, e3, e4, e5));}
+    public boolean remove(E e1, E e2, E e3, E e4, E e5) { return andNotMask(mask(e1, e2, e3, e4, e5));}
 
     @SafeVarargs
-    final public boolean andNotMask(E... rest) { return andNotMask(mask(rest));}
+    final public boolean remove(E... rest) { return andNotMask(mask(rest));}
 
     public boolean any(E e1) { return any(mask(e1)); }
 
@@ -856,25 +886,61 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     }
 
     /**
-     * Set an unsigned value for the field
-     *
-     * @param e1    field
+     * Set a signed value for the field
+     *  @param e1    field
      * @param value value to set
      */
-    static <E extends Enum<E>> long setUnsignedBitField(long elements, E e1, long value, long maxBits, String typeName) {
+    static <E extends Enum<E>> long setSigned(long elements, E e1, long value) {
         Class<E> elementType = e1.getDeclaringClass();
         long[] bitMasks = getBitMasks(elementType);
+        return setSigned(elementType, bitMasks, elements, e1, value);
+    }
+
+    /**
+     * Set a signed value for the field
+     *  @param e1    field
+     * @param value value to set
+     */
+    static <E extends Enum<E>> long setSigned(Class<E> elementType, long[] bitMasks, long elements, E e1, long value) {
+        long bitMask = bitMasks[e1.ordinal()];
+
+        int bitCount = Long.bitCount(bitMask);
+        long halfValue = 1L << bitCount - 1;
+
+        if (bitCount < 64) {
+            if (value < -halfValue || value > halfValue - 1)
+                throw new IllegalArgumentException(String.format("Enum field %s.%s is %d bit%s, value range is [%d, %d], cannot be set to %d", elementType.getSimpleName(), e1.name(), bitCount, bitCount > 1 ? "s" : "", -halfValue, halfValue - 1, value));
+        }
+
+        long shiftedValue = value << Long.numberOfTrailingZeros(bitMask);
+        return elements ^ ((elements ^ shiftedValue) & bitMask);
+    }
+
+    /**
+     * Set an unsigned value for the field
+     *  @param e1    field
+     * @param value value to set
+     */
+    static <E extends Enum<E>> long setUnsigned(long elements, E e1, long value) {
+        Class<E> elementType = e1.getDeclaringClass();
+        long[] bitMasks = getBitMasks(elementType);
+        return setUnsigned(elementType, bitMasks, elements, e1, value);
+    }
+
+    /**
+     * Set an unsigned value for the field
+     *  @param e1    field
+     * @param value value to set
+     */
+    static <E extends Enum<E>> long setUnsigned(Class<E> elementType, long[] bitMasks, long elements, E e1, long value) {
         long bitMask = bitMasks[e1.ordinal()];
 
         int bitCount = Long.bitCount(bitMask);
         long maxValue = 1L << bitCount;
 
-        if (maxBits < 64) {
+        if (bitCount < 64) {
             if (!(value >= 0 && value < maxValue))
                 throw new IllegalArgumentException(String.format("Enum field %s.%s is %d bit%s, value range is [0, %d), cannot be set to %d", elementType.getSimpleName(), e1.name(), bitCount, bitCount > 1 ? "s" : "", maxValue - 1, value));
-
-            if ((bitMask & -(1L << maxBits)) != 0)
-                throw new IllegalArgumentException(String.format("Enum field %s.%s bits(%s) are outside %s range", elementType.getSimpleName(), e1.name(), Long.toBinaryString(bitMask), typeName));
         }
 
         long shiftedValue = value << Long.numberOfTrailingZeros(bitMask);
@@ -882,19 +948,19 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     }
 
     public static <E extends Enum<E>> long setBitField(long elements, E e1, int value) {
-        return setUnsignedBitField(elements, e1, value, 64, "long");
+        return setUnsigned(elements, e1, value);
     }
 
     public static <E extends Enum<E>> int setBitField(int elements, E e1, int value) {
-        return (int) setUnsignedBitField(elements, e1, value, 32, "int");
+        return (int) setUnsigned(elements, e1, value);
     }
 
     public static <E extends Enum<E>> short setBitField(short elements, E e1, short value) {
-        return (short) setUnsignedBitField(elements, e1, value, 16, "short");
+        return (short) setUnsigned(elements, e1, value);
     }
 
     public static <E extends Enum<E>> byte setBitField(byte elements, E e1, byte value) {
-        return (byte) setUnsignedBitField(elements, e1, value, 8, "byte");
+        return (byte) setUnsigned(elements, e1, value);
     }
 
     /**

@@ -26,7 +26,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
-Empty with nbsp for space on first line
+Empty with `&nbsp;` for space on first line
 
 ```````````````````````````````` example SpecExample: 2
 ```````````````` example

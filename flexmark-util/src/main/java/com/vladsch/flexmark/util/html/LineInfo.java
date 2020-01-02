@@ -17,18 +17,12 @@ public class LineInfo {
 
         final int bits;
 
-        Flags() {
-            this(1);
-        }
+        Flags() { this(1); }
 
-        Flags(int bits) {
-            this.bits = bits;
-        }
+        Flags(int bits) { this.bits = bits; }
 
         @Override
-        public int getBits() {
-            return bits;
-        }
+        public int getBits() { return bits; }
     }
 
     public enum Preformatted {
