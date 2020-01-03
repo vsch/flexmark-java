@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 

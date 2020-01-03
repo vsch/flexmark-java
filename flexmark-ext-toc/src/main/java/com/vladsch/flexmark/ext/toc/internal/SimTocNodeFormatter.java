@@ -6,9 +6,9 @@ import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.ext.toc.TocUtils;
 import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.util.misc.Paired;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
+import com.vladsch.flexmark.util.misc.Paired;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

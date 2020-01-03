@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.aside;
 
 import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
-import com.vladsch.flexmark.core.test.util.TranslationFormatterSpecTest;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;

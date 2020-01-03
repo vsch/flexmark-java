@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
-import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
+import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;

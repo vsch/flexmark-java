@@ -5,9 +5,9 @@ import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.vladsch.flexmark.util.format.TableCellManipulator.BREAK;
 import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
 import static com.vladsch.flexmark.util.misc.Utils.minLimit;
-import static com.vladsch.flexmark.util.format.TableCellManipulator.BREAK;
 
 @SuppressWarnings("WeakerAccess")
 public class TableRow {

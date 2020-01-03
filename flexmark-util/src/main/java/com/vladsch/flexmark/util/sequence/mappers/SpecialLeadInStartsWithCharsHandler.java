@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence.mappers;
 
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

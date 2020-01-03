@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;

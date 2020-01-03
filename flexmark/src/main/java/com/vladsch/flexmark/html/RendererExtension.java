@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
-import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.misc.Extension;
 import org.jetbrains.annotations.NotNull;
 
 public interface RendererExtension extends Extension {

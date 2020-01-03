@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.builder;
 
-import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.misc.Extension;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.RichSequenceBuilder;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
+import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.StringSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -11,14 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
-import static com.vladsch.flexmark.util.misc.Utils.min;
-import static com.vladsch.flexmark.util.misc.Utils.minLimit;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.countTrailingSpaceTab;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.endsWithEOL;
+import static com.vladsch.flexmark.util.misc.Utils.*;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.trimEnd;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.trimmedEOL;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
 
 public class LineAppendableImpl implements LineAppendable {
     final private static char EOL = '\n';

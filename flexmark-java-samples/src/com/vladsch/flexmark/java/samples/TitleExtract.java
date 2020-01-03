@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.java.samples;
 
 import com.vladsch.flexmark.ast.Heading;
-import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -17,6 +16,7 @@ import com.vladsch.flexmark.profile.pegdown.Extensions;
 import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import org.jetbrains.annotations.NotNull;

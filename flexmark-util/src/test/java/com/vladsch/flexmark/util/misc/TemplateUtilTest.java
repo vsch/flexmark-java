@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.misc;
 
-import com.vladsch.flexmark.util.misc.TemplateUtil;
 import org.junit.Test;
 
 import java.util.regex.Pattern;

@@ -3,7 +3,6 @@ package com.vladsch.flexmark.core.test.util;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.formatter.RenderPurpose;
 import com.vladsch.flexmark.formatter.TranslationHandler;
-import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;

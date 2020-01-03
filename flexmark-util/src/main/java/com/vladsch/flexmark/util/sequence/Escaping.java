@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

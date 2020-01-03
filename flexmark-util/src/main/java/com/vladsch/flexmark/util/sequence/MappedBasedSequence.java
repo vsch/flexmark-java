@@ -2,8 +2,8 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
-import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

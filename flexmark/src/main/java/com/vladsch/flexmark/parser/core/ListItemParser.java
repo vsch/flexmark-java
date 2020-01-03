@@ -8,9 +8,9 @@ import com.vladsch.flexmark.parser.block.AbstractBlockParser;
 import com.vladsch.flexmark.parser.block.BlockContinue;
 import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.ParserState;
-import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.misc.Utils;
 
 import static com.vladsch.flexmark.parser.Parser.PARSER_EMULATION_PROFILE;
 import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;

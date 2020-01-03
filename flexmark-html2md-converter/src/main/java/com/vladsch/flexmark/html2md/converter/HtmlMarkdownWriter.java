@@ -1,8 +1,5 @@
 package com.vladsch.flexmark.html2md.converter;
 
-import com.vladsch.flexmark.util.ast.BlankLine;
-import com.vladsch.flexmark.util.ast.BlockQuoteLike;
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;

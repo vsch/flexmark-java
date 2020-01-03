@@ -1,9 +1,5 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.LineAppendable;
-import com.vladsch.flexmark.util.sequence.LineAppendableImpl;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.junit.Test;
 

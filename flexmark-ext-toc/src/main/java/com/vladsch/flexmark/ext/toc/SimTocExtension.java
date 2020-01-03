@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.ext.toc.internal.*;
+import com.vladsch.flexmark.ext.toc.internal.SimTocBlockParser;
+import com.vladsch.flexmark.ext.toc.internal.SimTocNodeFormatter;
+import com.vladsch.flexmark.ext.toc.internal.SimTocNodeRenderer;
+import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.AttributablePart;

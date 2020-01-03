@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.ast.Heading;
-import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.toc.internal.SimTocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
@@ -11,18 +10,19 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.misc.DelimitedBuilder;
-import com.vladsch.flexmark.util.misc.Pair;
-import com.vladsch.flexmark.util.misc.Paired;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.misc.Extension;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.Attribute;
+import com.vladsch.flexmark.util.misc.DelimitedBuilder;
+import com.vladsch.flexmark.util.misc.Extension;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Paired;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 
 import java.util.ArrayList;

@@ -1,11 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.misc.BitFieldSet;
-import com.vladsch.flexmark.util.sequence.LineAppendable;
-import com.vladsch.flexmark.util.sequence.LineAppendableImpl;
-import com.vladsch.flexmark.util.sequence.LineInfo;
-import com.vladsch.flexmark.util.sequence.LineProcessor;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

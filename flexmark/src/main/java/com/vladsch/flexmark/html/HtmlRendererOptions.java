@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html;
 
-import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

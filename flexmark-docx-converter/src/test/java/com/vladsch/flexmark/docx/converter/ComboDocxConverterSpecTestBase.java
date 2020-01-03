@@ -51,7 +51,7 @@ import java.util.Map;
 import static com.vladsch.flexmark.util.misc.Utils.*;
 
 public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
-    // RELEASE: change to true for release
+    // RELEASE : change to true for release
     static final boolean SKIP_IGNORED_TESTS = true;
     static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;

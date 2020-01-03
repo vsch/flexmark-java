@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.misc.CharPredicate;
-import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
+import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree;

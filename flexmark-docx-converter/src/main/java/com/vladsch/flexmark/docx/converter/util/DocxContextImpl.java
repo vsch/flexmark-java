@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.docx.converter.DocxRendererOptions;
-import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;

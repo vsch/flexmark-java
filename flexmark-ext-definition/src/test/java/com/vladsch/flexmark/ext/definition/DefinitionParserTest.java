@@ -2,8 +2,8 @@ package com.vladsch.flexmark.ext.definition;
 
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import org.junit.Test;
 
 import java.util.Collections;

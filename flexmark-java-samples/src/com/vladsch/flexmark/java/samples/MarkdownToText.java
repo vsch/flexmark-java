@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.java.samples;
 
-import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profile.pegdown.Extensions;
 import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 

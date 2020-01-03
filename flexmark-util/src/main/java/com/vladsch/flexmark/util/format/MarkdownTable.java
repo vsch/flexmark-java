@@ -1,9 +1,5 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.misc.ArrayUtils;
-import com.vladsch.flexmark.util.misc.Pair;
-import com.vladsch.flexmark.util.misc.Ref;
-import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.collection.MaxAggregator;
@@ -11,8 +7,8 @@ import com.vladsch.flexmark.util.collection.MinAggregator;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
+import com.vladsch.flexmark.util.misc.*;
 import com.vladsch.flexmark.util.sequence.*;
-import com.vladsch.flexmark.util.misc.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,15 +18,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import static com.vladsch.flexmark.util.misc.Utils.compare;
-import static com.vladsch.flexmark.util.misc.Utils.max;
-import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
-import static com.vladsch.flexmark.util.misc.Utils.min;
-import static com.vladsch.flexmark.util.misc.Utils.minLimit;
-import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
 import static com.vladsch.flexmark.util.format.TableCell.DEFAULT_CELL;
 import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
+import static com.vladsch.flexmark.util.misc.Utils.*;
 
 @SuppressWarnings("WeakerAccess")
 public class MarkdownTable {

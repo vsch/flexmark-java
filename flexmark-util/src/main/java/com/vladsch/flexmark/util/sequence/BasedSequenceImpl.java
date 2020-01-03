@@ -3,11 +3,11 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.misc.Utils;
-import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

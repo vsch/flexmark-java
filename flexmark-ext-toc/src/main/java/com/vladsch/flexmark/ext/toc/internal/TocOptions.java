@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ext.toc.TocExtension;
-import com.vladsch.flexmark.util.misc.Immutable;
-import com.vladsch.flexmark.util.misc.Mutable;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import com.vladsch.flexmark.util.misc.Immutable;
+import com.vladsch.flexmark.util.misc.Mutable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;

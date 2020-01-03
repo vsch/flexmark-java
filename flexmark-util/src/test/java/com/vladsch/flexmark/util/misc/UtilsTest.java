@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.misc;
 
-import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.junit.Assert;
 import org.junit.Rule;

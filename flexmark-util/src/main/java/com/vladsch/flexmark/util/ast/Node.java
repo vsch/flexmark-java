@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.misc.Pair;
-import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;

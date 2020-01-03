@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
+import com.vladsch.flexmark.util.misc.BitFieldSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

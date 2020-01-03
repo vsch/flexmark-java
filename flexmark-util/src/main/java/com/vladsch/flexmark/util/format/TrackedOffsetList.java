@@ -7,14 +7,7 @@ import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTree;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.UnaryOperator;
 
 public class TrackedOffsetList implements List<TrackedOffset> {
