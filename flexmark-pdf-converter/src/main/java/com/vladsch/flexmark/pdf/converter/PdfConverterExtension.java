@@ -6,7 +6,7 @@ import com.openhtmltopdf.bidi.support.ICUBidiSplitter;
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfBoxRenderer;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.NullableDataKey;

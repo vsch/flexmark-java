@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
 
 public class FormattedCounter {
     private final NumberFormat numberFormat;

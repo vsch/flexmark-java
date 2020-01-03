@@ -6,7 +6,7 @@ import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.Document;

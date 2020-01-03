@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.mappers.CharMapper;
+import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Utils;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import org.junit.Test;
 
-import static com.vladsch.flexmark.util.sequence.CharPredicate.SPACE;
+import static com.vladsch.flexmark.util.misc.CharPredicate.SPACE;
 import static org.junit.Assert.assertEquals;
 
 public class SequenceUtilsTest {

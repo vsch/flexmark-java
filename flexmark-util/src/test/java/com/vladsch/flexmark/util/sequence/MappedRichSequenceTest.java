@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.mappers.ChangeCase;
-import com.vladsch.flexmark.util.mappers.NullEncoder;
-import com.vladsch.flexmark.util.mappers.SpaceMapper;
+import com.vladsch.flexmark.util.sequence.mappers.ChangeCase;
+import com.vladsch.flexmark.util.sequence.mappers.NullEncoder;
+import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

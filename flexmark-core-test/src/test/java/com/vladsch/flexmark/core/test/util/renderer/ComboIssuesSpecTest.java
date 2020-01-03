@@ -8,7 +8,7 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 

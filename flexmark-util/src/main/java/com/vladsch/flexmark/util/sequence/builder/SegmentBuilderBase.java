@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.DelimitedBuilder;
+import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;

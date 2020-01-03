@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.mappers.CharMapper;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import org.jetbrains.annotations.NotNull;
 
 /**

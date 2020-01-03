@@ -42,7 +42,7 @@ import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
 import com.vladsch.flexmark.pdf.converter.PdfConverterTestSuite;
 import com.vladsch.flexmark.profile.pegdown.PegdownProfileTestSuite;
 import com.vladsch.flexmark.test.util.TestUtilsTestSuite;
-import com.vladsch.flexmark.util.UtilsTestSuite;
+import com.vladsch.flexmark.util.UtilTestSuite;
 import com.vladsch.flexmark.youtrack.converter.YouTrackConverterTestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -90,7 +90,7 @@ import org.junit.runners.Suite;
         JiraConverterTestSuite.class,
         PdfConverterTestSuite.class,
         PegdownProfileTestSuite.class,
-        UtilsTestSuite.class,
+        UtilTestSuite.class,
         TestUtilsTestSuite.class,
         YouTrackConverterTestSuite.class,
         ExperimentalUtilsTestSuite.class,

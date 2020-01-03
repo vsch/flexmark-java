@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.MinMaxAvgLong;
+import com.vladsch.flexmark.util.misc.MinMaxAvgLong;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

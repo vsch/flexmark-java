@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Paired;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Paired;
 import com.vladsch.flexmark.util.collection.iteration.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

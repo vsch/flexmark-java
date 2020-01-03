@@ -471,7 +471,41 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 24) options(margin[96], insert-space, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
+```````````````````````````````` example(Wrap: 24) options(margin[96], delete-char, restore-tracked-spaces, indent[        ], first-indent[  * [ ] ])
+⟦  * [ ] ⟧d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+⟦        ⟧dependencies on classes in other directories.
+.
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [10, d) } --> 10
+
+---- Ranges ------------------------------------------------------------
+⟦  * [ ] d  classes contained in `util` directory to `misc` sub-directory and not have any
+        dependencies on classes in other directories.⟧
+
+---- Result ------------------------------------------------------------
+  * [ ] d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+        dependencies on classes in other directories.
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 25) options(margin[96], delete-char, restore-tracked-spaces, indent[        ], first-indent[  * [ ] ])
+⟦  * [ ] ⟧ ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+⟦        ⟧dependencies on classes in other directories.
+.
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [9, d) } --> 8
+
+---- Ranges ------------------------------------------------------------
+⟦⟧  * [ ] ⟦⟧ ⟦classes contained in `util` directory to `misc` sub-directory and not have any
+        dependencies on classes in other directories.⟧
+
+---- Result ------------------------------------------------------------
+  * [ ] ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+        dependencies on classes in other directories.
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 26) options(margin[96], insert-space, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧ ⦙to keep duplicate code.
 .
@@ -488,7 +522,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 25) options(margin[96], insert-space, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
+```````````````````````````````` example(Wrap: 27) options(margin[96], insert-space, restore-tracked-spaces, indent[      ], first-indent[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙ to keep duplicate code.
 .
 ---- Tracked Offsets ---------------------------------------------------
@@ -504,7 +538,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 26) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
+```````````````````````````````` example(Wrap: 28) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
 ⟦* ⟧Fix: conversion from Smart to based to extract more source information from segmented
 ⟦  ⟧sequence ⦙and mapped sequence.
 .
@@ -521,7 +555,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 27) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
+```````````````````````````````` example(Wrap: 29) options(margin[96], insert-space, restore-tracked-spaces, indent[  ], first-indent[* ])
 ⟦* ⟧Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
 .
 ---- Tracked Offsets ---------------------------------------------------

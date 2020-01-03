@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;

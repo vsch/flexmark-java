@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.Immutable;
+import com.vladsch.flexmark.util.misc.Immutable;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 
 import java.util.Arrays;

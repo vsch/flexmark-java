@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.mappers.CharMapper;
+import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +14,7 @@ import java.util.function.Predicate;
 /**
  * A CharSequence that provides a rich set of manipulation methods.
  * <p>
- * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
+ * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null chars.
  * <p>
  * safe access methods return '\0' for no char response.
  */

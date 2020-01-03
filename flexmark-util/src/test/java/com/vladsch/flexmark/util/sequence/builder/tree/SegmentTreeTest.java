@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-import static com.vladsch.flexmark.util.Utils.escapeJavaString;
+import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
 import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.*;

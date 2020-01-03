@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart;
@@ -145,7 +145,7 @@ public class DocxRendererOptions {
         logImageProcessing = DocxRenderer.LOG_IMAGE_PROCESSING.get(options);
         noCharacterStyles = DocxRenderer.NO_CHARACTER_STYLES.get(options);
         formControls = DocxRenderer.FORM_CONTROLS.get(options).trim();
-        runningTests = Utils.RUNNING_TESTS.get(options);
+        runningTests = SharedDataKeys.RUNNING_TESTS.get(options);
         codeHighlightShading = DocxRenderer.CODE_HIGHLIGHT_SHADING.get(options);
         localHyperlinkSuffix = DocxRenderer.LOCAL_HYPERLINK_SUFFIX.get(options);
         localHyperlinkMissingHighlight = DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT.get(options);

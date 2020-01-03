@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.collection.BitFieldSet;
+import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

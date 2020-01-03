@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;

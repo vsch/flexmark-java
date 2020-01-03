@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.collection.BitField;
-import com.vladsch.flexmark.util.collection.BitFieldSet;
+import com.vladsch.flexmark.util.misc.BitField;
+import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 

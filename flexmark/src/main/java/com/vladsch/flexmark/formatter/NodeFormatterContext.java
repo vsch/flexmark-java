@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.format.NodeContext;
 import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;

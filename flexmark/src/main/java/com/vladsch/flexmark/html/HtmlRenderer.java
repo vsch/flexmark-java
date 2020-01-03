@@ -3,13 +3,13 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.ast.HtmlBlock;
 import com.vladsch.flexmark.ast.HtmlInline;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.SharedDataKeys;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.builder.BuilderBase;
-import com.vladsch.flexmark.util.builder.Extension;
+import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
@@ -17,8 +17,8 @@ import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.TrackedOffsetUtils;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.sequence.Escaping;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.TagRange;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -92,7 +92,7 @@ public class HtmlRenderer implements IRender {
     /**
      * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = SharedDataKeys.RENDERER_FORMAT_FLAGS;
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("RENDERER_FORMAT_FLAGS", LineAppendable.F_TRIM_LEADING_WHITESPACE);
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = SharedDataKeys.RENDERER_MAX_TRAILING_BLANK_LINES;
     public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.RENDERER_MAX_BLANK_LINES;
 

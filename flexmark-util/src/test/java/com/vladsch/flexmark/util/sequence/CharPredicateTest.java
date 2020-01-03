@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import org.junit.Test;
 
-import static com.vladsch.flexmark.util.sequence.CharPredicate.*;
+import static com.vladsch.flexmark.util.misc.CharPredicate.*;
 import static org.junit.Assert.*;
 
 public class CharPredicateTest {

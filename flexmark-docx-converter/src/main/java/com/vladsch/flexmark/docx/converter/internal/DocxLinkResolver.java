@@ -9,7 +9,7 @@ import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import org.jetbrains.annotations.NotNull;

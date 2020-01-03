@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.ast;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 
-import static com.vladsch.flexmark.util.collection.BitFieldSet.any;
+import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
 public interface DelimitedNode extends TextContainer {
     BasedSequence getOpeningMarker();

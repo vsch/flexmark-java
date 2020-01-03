@@ -8,7 +8,7 @@ import com.vladsch.flexmark.parser.block.AbstractBlockParser;
 import com.vladsch.flexmark.parser.block.BlockContinue;
 import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.ParserState;
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 

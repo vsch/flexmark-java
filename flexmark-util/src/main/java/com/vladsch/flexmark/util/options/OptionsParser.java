@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.options;
 
-import com.vladsch.flexmark.util.DelimitedBuilder;
-import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.misc.DelimitedBuilder;
+import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;

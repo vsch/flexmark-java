@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
-import com.vladsch.flexmark.util.DelimitedBuilder;
+import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;

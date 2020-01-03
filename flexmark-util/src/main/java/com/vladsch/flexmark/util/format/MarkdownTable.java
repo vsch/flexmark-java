@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.ArrayUtils;
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Ref;
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.ArrayUtils;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Ref;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.collection.MaxAggregator;
@@ -11,11 +11,8 @@ import com.vladsch.flexmark.util.collection.MinAggregator;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.html.LineAppendable;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.RepeatedSequence;
+import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,12 +22,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import static com.vladsch.flexmark.util.Utils.compare;
-import static com.vladsch.flexmark.util.Utils.max;
-import static com.vladsch.flexmark.util.Utils.maxLimit;
-import static com.vladsch.flexmark.util.Utils.min;
-import static com.vladsch.flexmark.util.Utils.minLimit;
-import static com.vladsch.flexmark.util.Utils.rangeLimit;
+import static com.vladsch.flexmark.util.misc.Utils.compare;
+import static com.vladsch.flexmark.util.misc.Utils.max;
+import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
+import static com.vladsch.flexmark.util.misc.Utils.min;
+import static com.vladsch.flexmark.util.misc.Utils.minLimit;
+import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
 import static com.vladsch.flexmark.util.format.TableCell.DEFAULT_CELL;
 import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
@@ -1073,8 +1070,8 @@ public class MarkdownTable {
                             }
 
                             if (numeric) {
-                                Pair<Number, String> cellNumeric1 = Utils.parseNumberPrefixOrNull(cellText1, numericSuffixPredicate);
-                                Pair<Number, String> cellNumeric2 = Utils.parseNumberPrefixOrNull(cellText2, numericSuffixPredicate);
+                                Pair<Number, String> cellNumeric1 = SequenceUtils.parseNumberPrefixOrNull(cellText1, numericSuffixPredicate);
+                                Pair<Number, String> cellNumeric2 = SequenceUtils.parseNumberPrefixOrNull(cellText2, numericSuffixPredicate);
 
                                 if (cellNumeric1 != null && cellNumeric2 != null) {
                                     result = compare(cellNumeric1.getFirst(), cellNumeric2.getFirst());

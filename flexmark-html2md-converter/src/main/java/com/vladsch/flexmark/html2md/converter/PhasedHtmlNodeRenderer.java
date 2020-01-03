@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html2md.converter;
 
-import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.jsoup.nodes.Document;
 
 import java.util.Set;

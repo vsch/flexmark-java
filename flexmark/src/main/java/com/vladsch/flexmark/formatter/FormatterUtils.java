@@ -7,8 +7,8 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.SoftLineBreak;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.BlockQuoteLike;
 import com.vladsch.flexmark.util.ast.Document;
@@ -21,11 +21,11 @@ import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.format.options.BlockQuoteMarker;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
-import com.vladsch.flexmark.util.html.LineAppendable;
-import com.vladsch.flexmark.util.html.LineInfo;
-import com.vladsch.flexmark.util.mappers.SpaceMapper;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
+import com.vladsch.flexmark.util.sequence.LineInfo;
+import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +37,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.util.html.LineAppendable.F_TRIM_LEADING_WHITESPACE;
+import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_LEADING_WHITESPACE;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 public class FormatterUtils {

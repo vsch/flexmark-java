@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.BlockParserTracker;
-import com.vladsch.flexmark.util.Paired;
+import com.vladsch.flexmark.util.misc.Paired;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockTracker;
 import com.vladsch.flexmark.util.ast.Node;

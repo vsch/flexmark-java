@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.junit.Test;
 
 import java.util.List;

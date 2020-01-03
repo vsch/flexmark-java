@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.mappers.CharMapper;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.RichSequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A RichSequence implementation
  * <p>
- * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.mappers.NullEncoder#decodeNull} mapper to get original null chars.
+ * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null chars.
  */
 public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSequence {
     final CharSequence charSequence;

@@ -9,6 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [0.59.98](#05998)
 - [0.59.96](#05996)
 - [0.59.94](#05994)
 - [0.59.92](#05992)
@@ -99,7 +100,6 @@
 - [0.40.4](#0404)
 - [0.40.2](#0402)
 - [0.40.0](#0400)
-
 
 &nbsp;</details>
 
@@ -220,6 +220,58 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
+## 0.59.98
+
+* Fix: create `TestSuite` for each util module subdirectory
+* Fix: change `UtilTestSuite` to run other module test suites.
+* Fix: refactor `flexmark-util` to allow separate modules:
+  * `visitor` has no dependencies
+  * `misc`: classes contained in `util` directory to `misc`, has no dependencies
+  * `collection` depends on `misc` only
+  * `dependency` depends on `misc`, `collection`
+  * `data` depends on `misc` only
+  * `builder` depends on `misc`, `data`
+  * `sequence` depends on `misc`, `collection`, `data`
+  * `options` depends on `misc`, `sequence`
+  * `html` depends on `misc`, `sequence`
+  * `ast` depends on `misc`, `collection`, `data`, `sequence`
+  * `format` depends on `misc`, `collection`, `data`, `sequence`, `html`, `ast`
+* Fix: refactor `flexmark-util` to eliminate cyclic dependencies between future util modules
+  * Break: delete deprecated classes contained in `mappers`
+    * `LowerCaseMapper`
+    * `UpperCaseMapper`
+  * Break: move classes contained in `mappers` directory to `sequence/mappers` subdirectory
+  * Break: move classes contained in `util` directory:
+    * `SharedDataKeys`  to `data`
+    * the rest to `misc`
+  * Break: move from `html` to `sequence` to eliminate dependency cycle
+    * `Escaping`
+    * `Html5Entities`
+    * `LineAppendable`
+    * `LineAppendableImpl`
+  * Break: move from `sequence` to `misc` to eliminate dependency cycle
+    * `CharPredicate`
+  * Break: move from `Utils` to `BasedUtils` to eliminate dependency cycle
+    * `asBased`
+  * Break: move from `Utils` to `SharedDataKeys` to eliminate dependency cycle
+    * `runningTests`
+  * Break: move from `Utils` to `SequenceUtils` to eliminate dependency cycle
+    * `parseUnsignedIntOrNull`
+    * `parseUnsignedIntOrNull`
+    * `parseIntOrNull`
+    * `parseIntOrNull`
+    * `parseLongOrNull`
+    * `parseLongOrNull`
+    * `parseUnsignedIntOrDefault`
+    * `parseUnsignedIntOrDefault`
+    * `parseIntOrDefault`
+    * `parseIntOrDefault`
+    * `parseNumberOrNull`
+    * `parseNumberPrefixOrNull`
+* Fix: `MarkdownParagraph` tracked offset correction when deleting first non-blank char
+  surrounded by spaces, index would be 0 instead of at first non-blank of wrapped with space
+  inserted after index.
+
 ## 0.59.96
 
 * Fix: disable wrapping of link and image text if wrapping enabled.
@@ -261,7 +313,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     `setUnsignedField()` versions for all field types, signed ones are a PITA to deal with when
     encoding bit mask values. For signed values use the `setBitField` and `getLong()`,
     `getInt()`, `getShort()`, `getByte()`.
-
 
 ## 0.59.94
 

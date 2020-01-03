@@ -1,15 +1,15 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
+import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -136,16 +136,22 @@ public class MarkdownParagraph {
                 int firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
 
                 if (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete()) {
-                    // need to keep it at the previous character but not when inserting as space or deleting 1 char surrounded by spaces,
-                    // except when offset is at end of line
+                    // need to keep it at the previous character but not when inserting space or deleting 1 char surrounded by spaces,
+                    // except when offset is at the end of line
                     if (!trackedOffset.isAfterSpaceEdit()) {
-                        index = info.startIndex;
-                        endLineWrapped = wrapped.endOfLine(index);
-                        startLineWrapped = wrapped.startOfLine(index);
-                        firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
-                        if (trackedOffset.isAfterDelete() && index == endLineWrapped) offsetSpacesAfter = 0;
+                        // if deleting non-space surrounded by spaces at the beginning of a paragraph then the preceding space is deleted so need to keep at position and insert spaces before
+                        if (index == 0 && offsetSpaces > 0 && offsetSpacesAfter > 0) {
+                        } else {
+                            index = info.startIndex;
+                            endLineWrapped = wrapped.endOfLine(index);
+                            startLineWrapped = wrapped.startOfLine(index);
+                            firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
+                            if (trackedOffset.isAfterDelete() && index == endLineWrapped) offsetSpacesAfter = 0;
+                            offsetSpaces = 0;
+                        }
+                    } else if (index == firstNonBlankWrapped) {
                         offsetSpaces = 0;
-                    } else if (index == firstNonBlankWrapped) offsetSpaces = 0;
+                    }
                 }
 
                 // NOTE: if typing space before or on start of continuation line, then do not move tracked offset to previous line
@@ -187,6 +193,12 @@ public class MarkdownParagraph {
                     offsetSpaces = Math.max(0, Math.min(1, offsetSpaces - spacesBefore));
                     int spacesAfter = wrapped.countLeading(CharPredicate.SPACE, index);
                     offsetSpacesAfter = Math.max(0, Math.min(1, offsetSpacesAfter - spacesAfter));
+                } else if (offset < firstNonBlank && trackedOffset.isAfterDelete() && !trackedOffset.isAfterSpaceEdit() && offsetSpaces > 0 && offsetSpacesAfter > 0) {
+                    // spaces before caret, see if need to add max 1
+                    info = tracker.getOffsetInfo(baseSeq.getIndexOffset(firstNonBlank), true);
+                    index = info.endIndex;
+                    offsetSpaces = 0;
+                    offsetSpacesAfter = 1;
                 } else {
                     offsetSpaces = 0;
                     offsetSpacesAfter = 0;

@@ -18,6 +18,7 @@
 package com.vladsch.flexmark.util.html.ui;
 
 import com.vladsch.flexmark.util.html.*;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

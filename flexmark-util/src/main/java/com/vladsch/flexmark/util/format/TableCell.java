@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
 
-import static com.vladsch.flexmark.util.Utils.*;
+import static com.vladsch.flexmark.util.misc.Utils.*;
 
 @SuppressWarnings("WeakerAccess")
 public class TableCell {

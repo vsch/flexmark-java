@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 

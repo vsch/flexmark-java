@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.vladsch.flexmark.util.Utils.escapeJavaString;
+import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder.F_TRACK_FIRST256;
 import static org.junit.Assert.assertEquals;

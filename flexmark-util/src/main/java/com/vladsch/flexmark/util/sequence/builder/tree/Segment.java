@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
 import org.jetbrains.annotations.NotNull;
 
-import static com.vladsch.flexmark.util.Utils.escapeJavaString;
+import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 
 /**
  * SegmentedSequence Segment stored in byte[] in serialized format

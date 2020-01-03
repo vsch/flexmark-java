@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser.internal;
 
 import com.vladsch.flexmark.util.format.TableFormatOptions;
-import com.vladsch.flexmark.util.html.Escaping;
+import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.BitSet;

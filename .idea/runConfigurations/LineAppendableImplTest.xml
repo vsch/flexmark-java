@@ -7,8 +7,8 @@
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.util.html" />
-    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.util.html.LineAppendableImplTest" />
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.util.sequence" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.util.sequence.LineAppendableImplTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <option name="PARAMETERS" value="" />

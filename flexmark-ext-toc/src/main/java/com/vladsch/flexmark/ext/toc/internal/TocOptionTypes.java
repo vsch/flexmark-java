@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.options.BooleanOptionParser;
 import com.vladsch.flexmark.util.options.MessageProvider;
 import com.vladsch.flexmark.util.options.OptionParser;

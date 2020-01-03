@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
+import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.junit.Test;
 

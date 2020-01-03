@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.junit.Test;

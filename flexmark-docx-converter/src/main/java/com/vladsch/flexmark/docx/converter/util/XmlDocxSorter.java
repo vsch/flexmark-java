@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.misc.Pair;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

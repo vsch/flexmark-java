@@ -1,16 +1,20 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.misc.Pair;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
-import static com.vladsch.flexmark.util.Utils.rangeLimit;
+import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
 
 @SuppressWarnings("unchecked")
 public interface SequenceUtils {
@@ -20,6 +24,7 @@ public interface SequenceUtils {
 
     @Deprecated
     String EOL_CHARS = ANY_EOL;
+
     char EOL_CHAR = ANY_EOL.charAt(1);
     char EOL_CHAR1 = ANY_EOL.charAt(0);
     char EOL_CHAR2 = ANY_EOL.charAt(1);
@@ -100,7 +105,6 @@ public interface SequenceUtils {
      * Get a portion of this sequence selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
     @NotNull
@@ -112,7 +116,6 @@ public interface SequenceUtils {
      * Get a portion of this sequence before one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come before the selected range, if range.isNull() then null
      */
     @Nullable
@@ -124,7 +127,6 @@ public interface SequenceUtils {
      * Get a portion of this sequence after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come after the selected range, if range.isNull() then null
      */
     @Nullable
@@ -136,7 +138,6 @@ public interface SequenceUtils {
      * Get a portions of this sequence before and after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come before and after the selected range, if range.isNull() then pair of nulls
      */
     @NotNull
@@ -298,7 +299,6 @@ public interface SequenceUtils {
      * resorting to content comparison only if length and hashCodes are equal
      *
      * @param o any char sequence
-     *
      * @return true if character contents are equal
      */
     @Contract(pure = true, value = "_, null -> false")
@@ -1079,5 +1079,140 @@ public interface SequenceUtils {
         if (endIndex < startIndex || endIndex > length) {
             throw new StringIndexOutOfBoundsException("endIndex: " + endIndex + " out of range: [" + startIndex + ", " + length + "]");
         }
+    }
+
+    static Integer parseUnsignedIntOrNull(String text) {
+        return parseUnsignedIntOrNull(text, 10);
+    }
+
+    static Integer parseUnsignedIntOrNull(String text, int radix) {
+        try {
+            int value = Integer.parseInt(text, radix);
+            return value >= 0 ? value : null;
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
+    }
+
+    static Integer parseIntOrNull(String text) {
+        return parseIntOrNull(text, 10);
+    }
+
+    static Integer parseIntOrNull(String text, int radix) {
+        try {
+            return Integer.parseInt(text, radix);
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
+    }
+
+    static Long parseLongOrNull(String text) {
+        return parseLongOrNull(text, 10);
+    }
+
+    static Long parseLongOrNull(String text, int radix) {
+        try {
+            return Long.parseLong(text, radix);
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
+    }
+
+    static int parseUnsignedIntOrDefault(String text, int defaultValue) {
+        return parseUnsignedIntOrDefault(text, defaultValue, 10);
+    }
+
+    static int parseUnsignedIntOrDefault(String text, int defaultValue, int radix) {
+        try {
+            int value = Integer.parseInt(text, radix);
+            return value >= 0 ? value : defaultValue;
+        } catch (NumberFormatException ignored) {
+            return defaultValue;
+        }
+    }
+
+    static int parseIntOrDefault(String text, int defaultValue) {
+        return parseIntOrDefault(text, defaultValue, 10);
+    }
+
+    static int parseIntOrDefault(String text, int defaultValue, int radix) {
+        try {
+            return Integer.parseInt(text, radix);
+        } catch (NumberFormatException ignored) {
+            return defaultValue;
+        }
+    }
+    /**
+     * Parse number from text
+     * <p>
+     * Will parse 0x, 0b, octal if starts with 0, decimal
+     *
+     * @param text text containing the number to parse
+     * @return null or parsed number
+     */
+    @Nullable
+
+    static Number parseNumberOrNull(@Nullable String text) {
+        if (text == null) return null;
+
+        if (text.startsWith("0x")) {
+            return parseLongOrNull(text.substring(2), 16);
+        } else if (text.startsWith("0b")) {
+            return parseLongOrNull(text.substring(2), 2);
+        } else if (text.startsWith("0")) {
+            Number octal = parseLongOrNull(text.substring(1), 8);
+            if (octal != null) return octal;
+        }
+
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        ParsePosition pos = new ParsePosition(0);
+        Number number = numberFormat.parse(text, pos);
+        return pos.getIndex() == text.length() ? number : null;
+    }
+    /**
+     * Parse number from text
+     * <p>
+     * Will parse 0x, 0b, octal if starts with 0, decimal
+     *
+     * @param text text containing the number to parse
+     * @return null or parsed number with unparsed suffix
+     */
+    @Nullable
+
+    static Pair<Number, String> parseNumberPrefixOrNull(@Nullable String text, @Nullable Predicate<String> suffixTester) {
+        if (text == null) return null;
+
+        if (text.startsWith("0x")) {
+            int digits = countLeading(text.substring(2), CharPredicate.HEXADECIMAL_DIGITS);
+            String suffix = text.substring(2 + digits);
+            if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
+                return Pair.of(parseLongOrNull(text.substring(2, 2 + digits), 16), suffix);
+            }
+        } else if (text.startsWith("0b")) {
+            int digits = countLeading(text.substring(2), CharPredicate.BINARY_DIGITS);
+            String suffix = text.substring(2 + digits);
+            if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
+                return Pair.of(parseLongOrNull(text.substring(2, 2 + digits), 2), suffix);
+            }
+        } else if (text.startsWith("0")) {
+            int digits = countLeading(text.substring(1), CharPredicate.OCTAL_DIGITS);
+            int decimalDigits = countLeading(text.substring(1), CharPredicate.DECIMAL_DIGITS);
+            if (digits == decimalDigits) {
+                String suffix = text.substring(1 + digits);
+                if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
+                    return Pair.of(parseLongOrNull(text.substring(1, 1 + digits), 8), suffix);
+                }
+            }
+        }
+
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        ParsePosition pos = new ParsePosition(0);
+        Number number = numberFormat.parse(text, pos);
+        String suffix = text.substring(pos.getIndex());
+        if (pos.getIndex() > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
+            return Pair.of(number, suffix);
+        }
+
+        return null;
     }
 }

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
-import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
+import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

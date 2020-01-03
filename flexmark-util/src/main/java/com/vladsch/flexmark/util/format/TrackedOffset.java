@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.collection.BitFieldSet;
+import com.vladsch.flexmark.util.misc.BitFieldSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

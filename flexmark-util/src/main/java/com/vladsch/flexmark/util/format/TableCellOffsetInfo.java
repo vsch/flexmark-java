@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static com.vladsch.flexmark.util.Utils.maxLimit;
-import static com.vladsch.flexmark.util.Utils.minLimit;
+import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
+import static com.vladsch.flexmark.util.misc.Utils.minLimit;
 
 public class TableCellOffsetInfo {
 

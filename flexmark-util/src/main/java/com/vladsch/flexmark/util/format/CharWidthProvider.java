@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 
 public interface CharWidthProvider {

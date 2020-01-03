@@ -16,13 +16,13 @@ import com.vladsch.flexmark.html2md.converter.LinkConversion;
 import com.vladsch.flexmark.html2md.converter.ListState;
 import com.vladsch.flexmark.html2md.converter.PhasedHtmlNodeRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.RomanNumeral;
 import com.vladsch.flexmark.util.format.TableCell;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.html.LineAppendable;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import org.jsoup.nodes.Comment;
@@ -41,7 +41,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.util.Utils.minLimit;
+import static com.vladsch.flexmark.util.misc.Utils.minLimit;
 
 public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
     public static final String EMOJI_ALT_PREFIX = "emoji ";

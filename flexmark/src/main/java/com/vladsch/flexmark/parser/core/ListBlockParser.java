@@ -14,10 +14,10 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.mappers.SpecialLeadInCharsHandler;
-import com.vladsch.flexmark.util.mappers.SpecialLeadInHandler;
+import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
+import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +30,7 @@ import java.util.regex.Matcher;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
-import static com.vladsch.flexmark.util.SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
+import static com.vladsch.flexmark.util.data.SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
 
 public class ListBlockParser extends AbstractBlockParser {
     private final ListBlock myBlock;

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Paired;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Paired;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

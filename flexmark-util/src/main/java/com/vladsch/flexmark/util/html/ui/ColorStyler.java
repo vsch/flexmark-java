@@ -17,7 +17,7 @@
 
 package com.vladsch.flexmark.util.html.ui;
 
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class ColorStyler extends HtmlStylerBase<Color> {
     public static Color getNamedColor(String colorName) {
         if (colorName.startsWith("#")) {
             // extract rgb from it
-            Integer color = Utils.parseIntOrNull(colorName.substring(1), 16);
+            Integer color = SequenceUtils.parseIntOrNull(colorName.substring(1), 16);
             if (color == null) return null;
             String colorText = colorName.substring(1);
             String r = "";

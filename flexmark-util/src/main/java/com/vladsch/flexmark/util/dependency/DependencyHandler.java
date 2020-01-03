@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.dependency;
 
-import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.misc.Ref;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
 import org.jetbrains.annotations.NotNull;
 

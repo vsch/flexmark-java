@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.DelimitedBuilder;
+import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 
 public class SegmentStats {
     public static final int NULL_REPEATED_CHAR = -1;

@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;

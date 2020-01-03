@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.util.DelimitedBuilder;
-import com.vladsch.flexmark.util.Pair;
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.DelimitedBuilder;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 

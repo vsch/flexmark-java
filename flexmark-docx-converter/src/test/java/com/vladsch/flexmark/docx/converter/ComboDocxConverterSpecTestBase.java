@@ -30,6 +30,7 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.html.Attributes;
 import org.apache.log4j.Logger;
 import org.apache.log4j.varia.NullAppender;
@@ -47,7 +48,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.vladsch.flexmark.util.Utils.*;
+import static com.vladsch.flexmark.util.misc.Utils.*;
 
 public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     // RELEASE: change to true for release
@@ -87,7 +88,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
             .set(DocxRenderer.RENDER_BODY_ONLY, true)
             .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
             .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
-            .set(RUNNING_TESTS, SKIP_IGNORED_TESTS)
+            .set(SharedDataKeys.RUNNING_TESTS, SKIP_IGNORED_TESTS)
             .set(DocxRenderer.SUPPRESS_HTML, true);
 
     private static HashMap<String, DataHolder> optionsMap = new HashMap<>();

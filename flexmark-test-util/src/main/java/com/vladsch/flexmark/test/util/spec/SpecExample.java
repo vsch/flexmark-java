@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

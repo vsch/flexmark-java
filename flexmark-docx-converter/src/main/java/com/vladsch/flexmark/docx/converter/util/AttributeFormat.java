@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.docx4j.wml.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,7 +79,7 @@ public class AttributeFormat {
 
             default:
                 // convert to numeric then round up/down to 700/400
-                int weight = Utils.parseIntOrDefault(s, -1);
+                int weight = SequenceUtils.parseIntOrDefault(s, -1);
                 if (weight != -1) return weight >= 550;
         }
 
@@ -101,7 +101,7 @@ public class AttributeFormat {
             default:
                 // convert to numeric then round up/down to 700/400
                 if (s.startsWith("oblique ")) {
-                    int angle = Utils.parseIntOrDefault(s.substring("oblique ".length()).trim(), -1);
+                    int angle = SequenceUtils.parseIntOrDefault(s.substring("oblique ".length()).trim(), -1);
                     if (angle != -1) return angle >= 14;
                 }
         }

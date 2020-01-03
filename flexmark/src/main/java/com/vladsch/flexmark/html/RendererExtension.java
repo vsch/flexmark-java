@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
-import com.vladsch.flexmark.util.builder.Extension;
+import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import org.jetbrains.annotations.NotNull;
 

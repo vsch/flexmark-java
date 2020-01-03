@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.util.SharedDataKeys;
-import com.vladsch.flexmark.util.builder.Extension;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
+import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataKeyAggregator;

@@ -2,13 +2,13 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextContainer;
-import com.vladsch.flexmark.util.html.Escaping;
+import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
-import static com.vladsch.flexmark.util.collection.BitFieldSet.any;
+import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
 public class TextBase extends Node implements TextContainer {
     public TextBase() {

@@ -10,7 +10,7 @@ import com.vladsch.flexmark.ext.toc.SimTocOption;
 import com.vladsch.flexmark.ext.toc.SimTocOptionList;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
-import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;

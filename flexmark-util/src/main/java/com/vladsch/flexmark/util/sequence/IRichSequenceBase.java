@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.collection.iteration.ArrayIterable;
-import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.mappers.ChangeCase;
-import com.vladsch.flexmark.util.mappers.CharMapper;
-import com.vladsch.flexmark.util.mappers.SpaceMapper;
+import com.vladsch.flexmark.util.sequence.mappers.ChangeCase;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
+import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-import static com.vladsch.flexmark.util.Utils.rangeLimit;
+import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
 
 /**
  * An abstract base for RichSequence which implements most of the methods allowing subclasses to

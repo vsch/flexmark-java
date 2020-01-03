@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

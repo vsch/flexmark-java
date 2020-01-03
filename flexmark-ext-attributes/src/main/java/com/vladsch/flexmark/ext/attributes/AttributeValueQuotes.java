@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.attributes;
 
-import com.vladsch.flexmark.util.sequence.CharPredicate;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.containsAny;
