@@ -7,10 +7,7 @@ import com.vladsch.flexmark.formatter.NodeFormatter;
 import com.vladsch.flexmark.formatter.NodeFormatterContext;
 import com.vladsch.flexmark.formatter.NodeFormatterFactory;
 import com.vladsch.flexmark.formatter.NodeFormattingHandler;
-import com.vladsch.flexmark.formatter.FormatterOptions;
-import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.html.LineAppendable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,27 +41,7 @@ public class AsideNodeFormatter implements NodeFormatter {
     }
 
     private void render(AsideBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        FormatterOptions formatterOptions = context.getFormatterOptions();
-
-        String combinedPrefix = FormatterUtils.getBlockLikePrefix(node, context, markdown, formatterOptions.blockQuoteMarkers);
-
-        markdown.pushPrefix();
-
-        if (!FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument())) {
-            if (formatterOptions.blockQuoteBlankLines) {
-                markdown.blankLine();
-            }
-
-            markdown.setPrefix(combinedPrefix, false);
-        } else {
-            markdown.pushOptions().removeOptions(LineAppendable.F_WHITESPACE_REMOVAL).append(combinedPrefix).popOptions();
-        }
-
-        int lines = markdown.getLineCount();
-        context.renderChildren(node);
-        markdown.popPrefix();
-        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCount() || !FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument())))
-            markdown.tailBlankLine();
+        FormatterUtils.renderBlockQuoteLike(node, context, markdown);
     }
 
     public static class Factory implements NodeFormatterFactory {

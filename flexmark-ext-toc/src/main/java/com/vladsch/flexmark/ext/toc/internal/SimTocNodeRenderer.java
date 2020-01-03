@@ -50,7 +50,7 @@ public class SimTocNodeRenderer implements NodeRenderer {
 
     private void render(SimTocBlock node, NodeRendererContext context, HtmlWriter html) {
         HeadingCollectingVisitor visitor = new HeadingCollectingVisitor();
-        List<Heading> headings = visitor.collectAndGetHeadings(node.getDocument());
+        List<Heading> headings = visitor.collectAndGetHeadings(context.getDocument());
         if (headings != null) {
             SimTocOptionsParser optionsParser = new SimTocOptionsParser();
             TocOptions options = optionsParser.parseOption(node.getStyle(), this.options, null).getFirst();

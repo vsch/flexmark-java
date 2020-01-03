@@ -9,7 +9,6 @@ import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
@@ -24,7 +23,6 @@ import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.HeadingStyle;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
-import com.vladsch.flexmark.util.html.LineAppendable;
 import com.vladsch.flexmark.util.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
@@ -254,6 +252,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                         for (Object value : nodes) {
                             if (value instanceof Node) {
                                 Node node = (Node) value;
+                                // NOTE: here the node.getDocument() is necessary to test if this was appended reference
                                 if (node.getDocument() != document) {
                                     // need to add this one
                                     if (firstAppend) {
@@ -413,28 +412,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(BlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
-        FormatterOptions formatterOptions = context.getFormatterOptions();
-
-        String combinedPrefix = FormatterUtils.getBlockLikePrefix(node, context, markdown, formatterOptions.blockQuoteMarkers);
-
-        markdown.pushPrefix();
-
-        if (!FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument())) {
-            if (formatterOptions.blockQuoteBlankLines) {
-                markdown.blankLine();
-            }
-
-            markdown.setPrefix(combinedPrefix, false);
-        } else {
-            markdown.pushOptions().removeOptions(LineAppendable.F_WHITESPACE_REMOVAL).append(combinedPrefix).popOptions();
-        }
-
-        int lines = markdown.getLineCount();
-        context.renderChildren(node);
-        markdown.popPrefix();
-
-        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCount() && !FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument())))
-            markdown.tailBlankLine();
+        FormatterUtils.renderBlockQuoteLike(node, context, markdown);
     }
 
     private void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -911,7 +889,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (!context.getFormatterOptions().optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
             if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
-                context.renderChildren(node);
+                if (formatterOptions.rightMargin > 0) {
+                    // no wrapping of link text
+                    markdown.append(node.getText().toMapped(SpaceMapper.toNonBreakSpace));
+                } else {
+                    context.renderChildren(node);
+                }
             } else {
                 markdown.appendTranslating(node.getText());
             }
@@ -954,7 +937,12 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         if (!context.getFormatterOptions().optimizedInlineRendering || context.isTransformingText()) {
             markdown.append(node.getTextOpeningMarker());
             if (!context.isTransformingText() || node.getFirstChildAny(HtmlInline.class) != null) {
-                context.renderChildren(node);
+                if (formatterOptions.rightMargin > 0) {
+                    // no wrapping of link text
+                    markdown.append(node.getText().toMapped(SpaceMapper.toNonBreakSpace));
+                } else {
+                    context.renderChildren(node);
+                }
             } else {
                 markdown.appendTranslating(node.getText());
             }

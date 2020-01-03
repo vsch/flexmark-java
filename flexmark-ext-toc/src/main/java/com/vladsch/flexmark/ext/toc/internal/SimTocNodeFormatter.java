@@ -54,7 +54,7 @@ public class SimTocNodeFormatter implements NodeFormatter {
 
             case UPDATE: {
                 HeadingCollectingVisitor visitor = new HeadingCollectingVisitor();
-                List<Heading> headings = visitor.collectAndGetHeadings(node.getDocument());
+                List<Heading> headings = visitor.collectAndGetHeadings(context.getDocument());
                 if (headings != null) {
                     SimTocOptionsParser optionsParser = new SimTocOptionsParser();
                     TocOptions options = optionsParser.parseOption(node.getStyle(), this.options, null).getFirst();

@@ -60,7 +60,7 @@ public class CustomLinkResolverSample {
         @NotNull
         @Override
         public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
-            Document document = node.getDocument();
+            Document document = context.getDocument();
 
             if (node instanceof Image || node instanceof Link || node instanceof Reference) {
                 // resolve wiki image link

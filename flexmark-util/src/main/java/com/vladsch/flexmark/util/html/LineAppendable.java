@@ -335,7 +335,7 @@ public interface LineAppendable extends Appendable {
      *
      * @return char sequence of the current indent prefix used for each indent level
      */
-    @NotNull CharSequence getIndentPrefix();
+    @NotNull BasedSequence getIndentPrefix();
 
     /**
      * Set prefix to append after a new line character for every indent level
@@ -352,16 +352,14 @@ public interface LineAppendable extends Appendable {
      *
      * @return char sequence of the current prefix
      */
-    @NotNull
-    BasedSequence getPrefix();
+    @NotNull BasedSequence getPrefix();
 
     /**
      * Get prefix used before EOL
      *
      * @return char sequence of the current prefix
      */
-    @NotNull
-    BasedSequence getBeforeEolPrefix();
+    @NotNull BasedSequence getBeforeEolPrefix();
 
     /**
      * Add to prefix appended after a new line character for every line
@@ -552,9 +550,9 @@ public interface LineAppendable extends Appendable {
      * @return char sequence for the line
      */
     @NotNull
-    default CharSequence getLineContent(int lineIndex) {
+    default BasedSequence getLineContent(int lineIndex) {
         LineInfo lineInfo = getLineInfo(lineIndex);
-        CharSequence line = getLine(lineIndex);
+        BasedSequence line = getLine(lineIndex);
         return line.subSequence(lineInfo.prefixLength, lineInfo.prefixLength + lineInfo.textLength);
     }
 
@@ -564,9 +562,9 @@ public interface LineAppendable extends Appendable {
      * @return line prefix char sequence
      */
     @NotNull
-    default CharSequence getLinePrefix(int lineIndex) {
+    default BasedSequence getLinePrefix(int lineIndex) {
         LineInfo lineInfo = getLineInfo(lineIndex);
-        CharSequence line = getLine(lineIndex);
+        BasedSequence line = getLine(lineIndex);
         return line.subSequence(0, lineInfo.prefixLength);
     }
 

@@ -222,6 +222,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## 0.59.96
 
+* Fix: disable wrapping of link and image text if wrapping enabled.
+* Break: remove unused `ContinuationIndent`
 * Break: remove `Formatter.BLOCK_QUOTE_CONTINUATION_MARKERS` and related. It was never properly
   implemented and even if it would be it can mess up the document for compound prefixes
   depending on selected settings.

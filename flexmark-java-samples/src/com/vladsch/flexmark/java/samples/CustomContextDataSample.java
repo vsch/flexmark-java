@@ -55,7 +55,7 @@ public class CustomContextDataSample {
         @NotNull
         @Override
         public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
-            Document document = node.getDocument();
+            Document document = context.getDocument();
             XhtmlContent xhtmlContent = XHTML_CONTENT.get(document);
 
             if (node instanceof WikiImage) {

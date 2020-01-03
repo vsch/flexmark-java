@@ -148,8 +148,8 @@ public class LineAppendableImpl implements LineAppendable {
 
     @NotNull
     @Override
-    public CharSequence getIndentPrefix() {
-        return indentPrefix;
+    public BasedSequence getIndentPrefix() {
+        return BasedSequence.of(indentPrefix);
     }
 
     @NotNull

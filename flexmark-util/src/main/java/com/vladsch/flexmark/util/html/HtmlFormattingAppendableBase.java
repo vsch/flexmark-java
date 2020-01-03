@@ -428,15 +428,15 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override public int offsetWithPending()                                                                                    { return appendable.offsetWithPending(); }
     @Override public int getAfterEolPrefixDelta()                                                                               { return appendable.getAfterEolPrefixDelta(); }
     @NotNull @Override public ISequenceBuilder<?,?> getBuilder()                                                                { return appendable.getBuilder(); }
-    @Override public@NotNull  BasedSequence getPrefix()                                                                          { return appendable.getPrefix(); }
-    @Override public@NotNull  BasedSequence getBeforeEolPrefix()                                                                 { return appendable.getBeforeEolPrefix(); }
+    @Override public@NotNull  BasedSequence getPrefix()                                                                         { return appendable.getPrefix(); }
+    @Override public@NotNull  BasedSequence getBeforeEolPrefix()                                                                { return appendable.getBeforeEolPrefix(); }
     @NotNull @Override public LineInfo getLineInfo(int lineIndex)                                                               { return appendable.getLineInfo(lineIndex); }
     @Override public @NotNull  BasedSequence getLine(int lineIndex)                                                             { return appendable.getLine(lineIndex); }
-    @NotNull @Override public CharSequence getIndentPrefix()                                                                    { return appendable.getIndentPrefix(); }
+    @NotNull @Override public BasedSequence getIndentPrefix()                                                                   { return appendable.getIndentPrefix(); }
     @NotNull @Override public CharSequence toSequence(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines)       { return appendable.toSequence(withPrefixes, maxBlankLines, maxTrailingBlankLines); }
     @NotNull @Override public String toString(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines)               { return appendable.toString(withPrefixes, maxBlankLines, maxTrailingBlankLines); }
     @NotNull @Override public BitFieldSet<Options> getOptionSet()                                                               { return appendable.getOptionSet();}
-    @NotNull @Override public T removeExtraBlankLines(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine)           { appendable.removeExtraBlankLines(maxBlankLines, maxTrailingBlankLines, startLine, endLine); return (T) this; }
+    @NotNull @Override public T removeExtraBlankLines(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) { appendable.removeExtraBlankLines(maxBlankLines, maxTrailingBlankLines, startLine, endLine); return (T) this; }
     @NotNull @Override public T removeLines(int startLine, int endLine)                                                         { appendable.removeLines(startLine, endLine); return (T) this; }
     @NotNull @Override public T pushOptions()                                                                                   { appendable.pushOptions();  return (T) this; }
     @NotNull @Override public T popOptions()                                                                                    { appendable.popOptions();  return (T) this; }

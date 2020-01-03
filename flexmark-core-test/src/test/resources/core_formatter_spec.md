@@ -1021,6 +1021,30 @@ Document[0, 22]
 
 
 ```````````````````````````````` example(Block Quotes: 4) options(block-quote-compact-with-space, fenced-code-minimize)
+1. > 1. asdfasdf
+   > 2. asdfdsaf
+
+.
+1. > 1. asdfasdf
+   > 2. asdfdsaf
+
+.
+Document[0, 35]
+  OrderedList[0, 34] isTight delimiter:'.'
+    OrderedListItem[0, 34] open:[0, 2, "1."] isTight hadBlankLineAfter
+      BlockQuote[3, 34] marker:[3, 4, ">"]
+        OrderedList[5, 34] isTight delimiter:'.'
+          OrderedListItem[5, 17] open:[5, 7, "1."] isTight
+            Paragraph[8, 17]
+              Text[8, 16] chars:[8, 16, "asdfasdf"]
+          OrderedListItem[22, 34] open:[22, 24, "2."] isTight
+            Paragraph[25, 34]
+              Text[25, 33] chars:[25, 33, "asdfdsaf"]
+  BlankLine[34, 35]
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes: 5) options(block-quote-compact-with-space, fenced-code-minimize)
 > > block quote
 > lazy continuation
 > 
@@ -1064,7 +1088,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 5) options(block-quote-compact-with-space)
+```````````````````````````````` example(Block Quotes: 6) options(block-quote-compact-with-space)
 > #Heading
 > -----
 > paragraph text 
@@ -1112,7 +1136,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 6) options(block-quote-spaced)
+```````````````````````````````` example(Block Quotes: 7) options(block-quote-spaced)
 > #Heading
 > -----
 > paragraph text 
@@ -1160,7 +1184,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block Quotes: 7
+```````````````````````````````` example Block Quotes: 8
 paragraph text 
 lazy continuation
 * list item
@@ -1177,7 +1201,7 @@ lazy continuation
 ````````````````````````````````
 
 
-```````````````````````````````` example(Block Quotes: 8) options(no-block-quote-blank-lines)
+```````````````````````````````` example(Block Quotes: 9) options(no-block-quote-blank-lines)
 paragraph text 
 lazy continuation
 * list item
@@ -1195,7 +1219,7 @@ lazy continuation
 
 as first child of empty item
 
-```````````````````````````````` example Block Quotes: 9
+```````````````````````````````` example Block Quotes: 10
 * > block quote
 1. > block quote  
 .
@@ -3305,67 +3329,23 @@ Paragraph with hard break and 1\. more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 7) options(IGNORE, margin[30], -continuation-indent-none)
-* Paragraph with hard break and more text.
+do not wrap links
 
-1. Paragraph with soft break and more text.
-                               
+```````````````````````````````` example(Wrap: 7) options(margin[30])
+[Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
 .
-* Paragraph with hard break
-and more text.
-
-1. Paragraph with soft break
-and more text.
-
+[Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 8) options(IGNORE, margin[30], -continuation-indent-indent-1)
-* Paragraph with hard break and more text.
-
-1. Paragraph with soft break and more text.
-                               
+```````````````````````````````` example(Wrap: 8) options(margin[30])
+![Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
 .
-* Paragraph with hard break
-    and more text.
-
-1. Paragraph with soft break
-    and more text.
-
+![Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 9) options(IGNORE, margin[30], -continuation-indent-indent-2)
-* Paragraph with hard break and more text.
-
-1. Paragraph with soft break and more text.
-                               
-.
-* Paragraph with hard break
-        and more text.
-
-1. Paragraph with soft break
-        and more text.
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Wrap: 10) options(IGNORE, margin[30], -continuation-indent-indent-3)
-* Paragraph with hard break and more text.
-
-1. Paragraph with soft break and more text.
-                               
-.
-* Paragraph with hard break
-            and more text.
-
-1. Paragraph with soft break
-            and more text.
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Wrap: 11) options(margin[30], explicit-links-at-start)
+```````````````````````````````` example(Wrap: 9) options(margin[30], explicit-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3382,7 +3362,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 12) options(margin[30])
+```````````````````````````````` example(Wrap: 10) options(margin[30])
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3399,7 +3379,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 13) options(margin[30], image-links-at-start)
+```````````````````````````````` example(Wrap: 11) options(margin[30], image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3416,7 +3396,7 @@ and more text.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 14) options(margin[72])
+```````````````````````````````` example(Wrap: 12) options(margin[72])
 * [#697, Autoscroll from source does not work in simplified structure view]
 .
 * [#697, Autoscroll from source does not work in simplified structure view]

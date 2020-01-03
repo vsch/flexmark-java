@@ -38,7 +38,7 @@ public class TocNodeRenderer implements NodeRenderer {
 
     private void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
         HeadingCollectingVisitor visitor = new HeadingCollectingVisitor();
-        List<Heading> headings = visitor.collectAndGetHeadings(node.getDocument());
+        List<Heading> headings = visitor.collectAndGetHeadings(context.getDocument());
         if (headings != null) {
             TocOptionsParser optionsParser = new TocOptionsParser();
             TocOptions titleOptions = haveTitle ? this.options : this.options.withTitle("");

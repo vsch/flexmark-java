@@ -48,31 +48,31 @@ public class FormatterUtils {
     public static final DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC = new DataKey<>("LIST_ITEM_NUMBER", NULL_PADDING); // function takes ordered marker and returns Pair LeftPad,RightPad
     public static final NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
 
-    public static String getBlockLikePrefix(BlockQuoteLike node, NodeFormatterContext context, LineAppendable appendable, BlockQuoteMarker blockQuoteMarkers) {
+    public static String getBlockLikePrefix(BlockQuoteLike node, NodeFormatterContext context, BlockQuoteMarker blockQuoteMarkers, @NotNull BasedSequence prefix) {
         String prefixChars = node.getOpeningMarker().toString();
-        String prefix;
+        String usePrefix;
         boolean compactPrefix = false;
 
         switch (blockQuoteMarkers) {
             case AS_IS:
                 if (node.getFirstChild() != null) {
-                    prefix = node.getChars().baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
+                    usePrefix = node.getChars().baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
                 } else {
-                    prefix = prefixChars;
+                    usePrefix = prefixChars;
                 }
                 break;
 
             case ADD_COMPACT:
-                prefix = prefixChars.trim();
+                usePrefix = prefixChars.trim();
                 break;
 
             case ADD_COMPACT_WITH_SPACE:
                 compactPrefix = true;
-                prefix = prefixChars.trim() + " ";
+                usePrefix = prefixChars.trim() + " ";
                 break;
 
             case ADD_SPACED:
-                prefix = prefixChars.trim() + " ";
+                usePrefix = prefixChars.trim() + " ";
                 break;
 
             default:
@@ -82,11 +82,11 @@ public class FormatterUtils {
         // create a combined prefix, compact if needed
         CharPredicate quoteLikePrefixPredicate = context.getBlockQuoteLikePrefixPredicate();
 
-        String combinedPrefix = FormatterUtils.FIRST_LIST_ITEM_CHILD.get(node.getDocument()) ? "" : appendable.getPrefix().toString();
+        String combinedPrefix = prefix.toString();
         if (compactPrefix && combinedPrefix.endsWith(" ") && combinedPrefix.length() >= 2 && quoteLikePrefixPredicate.test(combinedPrefix.charAt(combinedPrefix.length() - 2))) {
-            combinedPrefix = combinedPrefix.substring(0, combinedPrefix.length() - 1) + prefix;
+            combinedPrefix = combinedPrefix.substring(0, combinedPrefix.length() - 1) + usePrefix;
         } else {
-            combinedPrefix += prefix;
+            combinedPrefix += usePrefix;
         }
 
         return combinedPrefix;
@@ -399,17 +399,13 @@ public class FormatterUtils {
             //    otherwise only the item's lazy continuation for the paragraph can be indented after suffix, child items are normally indented
             int itemContinuationCount = (listOptions.isItemContentAfterSuffix() || options.listsItemContentAfterSuffix ? markerSuffix.length() : 0);
             int continuationCount = useOpeningMarker.length() + (listOptions.isItemContentAfterSuffix() ? markerSuffix.length() : 0) + 1;
-            CharSequence itemPrefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', itemContinuationCount)
+            CharSequence additionalItemPrefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', itemContinuationCount)
                     : "";
 
             CharSequence childPrefix = options.itemContentIndent ? RepeatedSequence.repeatOf(' ', continuationCount)
                     : RepeatedSequence.repeatOf(" ", listOptions.getItemIndent()).toString();
 
-            markdown.pushPrefix().addPrefix(childPrefix, true);
-
             BasedSequence openingMarker = node.getOpeningMarker();
-//            BasedSequence openingMarkerSpace = openingMarker.baseSubSequence(openingMarker.getEndOffset(), openingMarker.getEndOffset() + 1);
-//            BasedSequence replacedOpenMarker = openingMarker.getBuilder().append(openingMarker.getEmptyPrefix()).append(useOpeningMarker).append(' ').append(openingMarker.getEmptySuffix()).toSequence();
             BasedSequence replacedOpenMarker = openingMarker.getBuilder().append(openingMarker.getEmptyPrefix()).append(useOpeningMarker).append(openingMarker.getEmptySuffix()).toSequence();
 
             markdown.pushOptions()
@@ -419,33 +415,24 @@ public class FormatterUtils {
                     .append(markerSuffix)
                     .popOptions();
 
-            if (node.hasChildren() && node.getFirstChildAnyNot(BlankLine.class) != null) {
+            markdown.pushPrefix().addPrefix(childPrefix, true);
+
+            Node childNode = node.getFirstChild();
+            if (childNode != null && node.getFirstChildAnyNot(BlankLine.class) != null) {
+                markdown.pushPrefix().addPrefix(additionalItemPrefix, true);
                 // NOTE: depends on first child
-                Node childNode = node.getFirstChild();
-
-                if (childNode instanceof Paragraph) {
-                    markdown.pushPrefix().addPrefix(itemPrefix, true);
-                    context.render(childNode);
-                    markdown.popPrefix();
-                } else if (childNode != null) {
-                    // NOTE: item is empty, followed immediately by child block element
-                    FIRST_LIST_ITEM_CHILD.set(context.getDocument(), true);
-                    markdown.pushPrefix().addPrefix(itemPrefix, true);
-                    context.render(childNode);
-                    markdown.popPrefix();
-                }
-
+                FIRST_LIST_ITEM_CHILD.set(context.getDocument(), true);
+                context.render(childNode);
                 FIRST_LIST_ITEM_CHILD.set(context.getDocument(), false);
+                markdown.popPrefix();
 
-                while (childNode != null) {
+                while (true) {
                     childNode = childNode.getNext();
-                    if (childNode == null) {
-                        break;
-                    }
+                    if (childNode == null) break;
                     context.render(childNode);
                 }
 
-                if (addBlankLineLooseItems && (node.isLoose() || LIST_ITEM_SPACING.get(node.getDocument()) == ListSpacing.LOOSE)) {
+                if (addBlankLineLooseItems && (node.isLoose() || LIST_ITEM_SPACING.get(context.getDocument()) == ListSpacing.LOOSE)) {
                     markdown.tailBlankLine();
                 }
             } else {
@@ -552,5 +539,31 @@ public class FormatterUtils {
     public static void renderLooseItemParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderTextBlockParagraphLines(node, context, markdown);
         markdown.tailBlankLine();
+    }
+
+    public static void renderBlockQuoteLike(BlockQuoteLike node, NodeFormatterContext context, MarkdownWriter markdown) {
+        FormatterOptions formatterOptions = context.getFormatterOptions();
+
+        String combinedPrefix = getBlockLikePrefix(node, context, formatterOptions.blockQuoteMarkers, markdown.getPrefix());
+
+        markdown.pushPrefix();
+
+        if (!FIRST_LIST_ITEM_CHILD.get(context.getDocument())) {
+            if (formatterOptions.blockQuoteBlankLines) {
+                markdown.blankLine();
+            }
+            markdown.setPrefix(combinedPrefix, false);
+        } else {
+            String firstPrefix = getBlockLikePrefix(node, context, formatterOptions.blockQuoteMarkers, NULL);
+            markdown.pushOptions().removeOptions(LineAppendable.F_WHITESPACE_REMOVAL).append(firstPrefix).popOptions();
+            markdown.setPrefix(combinedPrefix, true);
+        }
+
+        int lines = markdown.getLineCount();
+        context.renderChildren((Node) node);
+        markdown.popPrefix();
+
+        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCount() && !FIRST_LIST_ITEM_CHILD.get(context.getDocument())))
+            markdown.tailBlankLine();
     }
 }

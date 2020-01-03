@@ -383,11 +383,63 @@ lazy continuation
 
 ## Combined
 
+
 ### Quote Aside
 
 #### Compact Space
 
+
 ```````````````````````````````` example(Combined - Quote Aside - Compact Space: 1) options(block-quote-compact-with-space)
+* item
+| 1. asdlf asdfl fdsa
+|
+| 2. > 1. asdfasdf
+|    > 2. asdfdsaf
+|    > 3. asdfsadf
+|    > 4. asdfasdfsdfsdafdsflsadfkjlsdfkj lsafdj l;sajfd ;lsajfd
+|    >    ;lsajkdf ;lajsfd ;lsajdf ;lsjkfd
+|    > 5. 
+|    > 6. sdasdfsa df;lasj df;lksjdf ;asldfj
+|    > 7. alsdfkj al;sdfj las;kdfj l;asdfj l;asjfdl;asjkdf l;asjkdf
+|    >    l;asjf d;lasjdf ;lasj fd;lasj df;lasj dfl;asj dfla;sj dfl;asj
+|    >    dfl;saj dfla;sdfj
+|    >    1. asdfdsf
+|    >    2. asdfasdf
+|    >       1. asdfasfd >|Test
+|    >       2. asdfasfd >|Test
+|    >    3. asdfasdf
+|    >    4. asdfsdf
+|    > 8. asdfdsf
+|    >    1. asdfdsf
+|    > 9. asdfasdfdsaf
+.
+* item
+
+| 1. asdlf asdfl fdsa
+|
+| 2. > 1. asdfasdf
+|    > 2. asdfdsaf
+|    > 3. asdfsadf
+|    > 4. asdfasdfsdfsdafdsflsadfkjlsdfkj lsafdj l;sajfd ;lsajfd
+|    >    ;lsajkdf ;lajsfd ;lsajdf ;lsjkfd
+|    > 5. 6. sdasdfsa df;lasj df;lksjdf ;asldfj
+|    > 7. alsdfkj al;sdfj las;kdfj l;asdfj l;asjfdl;asjkdf l;asjkdf
+|    >    l;asjf d;lasjdf ;lasj fd;lasj df;lasj dfl;asj dfla;sj dfl;asj
+|    >    dfl;saj dfla;sdfj
+|    >    1. asdfdsf
+|    >    2. asdfasdf
+|    >       1. asdfasfd >|Test
+|    >       2. asdfasfd >|Test
+|    >    3. asdfasdf
+|    >    4. asdfsdf
+|    > 8. asdfdsf
+|    >    1. asdfdsf
+|    > 9. asdfasdfdsaf
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Combined - Quote Aside - Compact Space: 2) options(block-quote-compact-with-space)
 >| 1. numbered item 1 
 >|    numbered item 1 
 >|
@@ -398,7 +450,7 @@ lazy continuation
 ````````````````````````````````
 
 
-```````````````````````````````` example(Combined - Quote Aside - Compact Space: 2) options(block-quote-compact-with-space)
+```````````````````````````````` example(Combined - Quote Aside - Compact Space: 3) options(block-quote-compact-with-space)
 >| numbered item 1 
 >| continuation
 >|
@@ -409,7 +461,7 @@ lazy continuation
 ````````````````````````````````
 
 
-```````````````````````````````` example(Combined - Quote Aside - Compact Space: 3) options(block-quote-compact-with-space)
+```````````````````````````````` example(Combined - Quote Aside - Compact Space: 4) options(block-quote-compact-with-space)
 >| block quote
 lazy continuation
 .
