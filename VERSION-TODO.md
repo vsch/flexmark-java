@@ -118,33 +118,18 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       longer contain any files but will contain the separate utilities modules with
       `flexmark-utils` module being an aggregation of all utilities modules, similar to
       `flexmark-all`
-  * [ ] `ast/` classes to `flexmark-util-ast`, any other classes which depend on `Node` will
-        most likely be moved here.
+  * [ ] `ast/` classes to `flexmark-util-ast`
   * [ ] `builder/` classes to `flexmark-util-builder`
   * [ ] `collection/` classes to `flexmark-util-collection`
   * [ ] `data/` classes to `flexmark-util-data`
   * [ ] `dependency/` classes to `flexmark-util-dependency`
-  * [ ] `format/` classes to `flexmark-util-format`, with dependency on `Node` changed to type
-        parameter.
+  * [ ] `format/` classes to `flexmark-util-format`
   * [ ] `html/` classes to `flexmark-util-html`
-  * [ ] `mappers/` classes to `flexmark-util-mappers`, classes with dependency on `Node` will
-        move to `flexmark-util-node`
-  * [ ] `mappers/` classes to `flexmark-util-mappers`
+  * [ ] `mappers/` classes to `flexmark-util-sequence`
   * [ ] `options/` classes to `flexmark-util-options`
   * [ ] `sequence/` classes to `flexmark-util-sequence`
   * [ ] `visitor/` classes to `flexmark-util-visitor`
-  * Generic helper classes from module root:
-    * [ ] `DelimitedBuilder.java` to `flexmark-util-misc`
-    * [ ] `FileUtil.java` to `flexmark-util-misc`
-    * [ ] `ImageUtils.java` to `flexmark-util-misc`
-    * [ ] `Immutable.java` to `flexmark-util-misc`
-    * [ ] `Mutable.java` to `flexmark-util-misc`
-    * [ ] `Pair.java` to `flexmark-util-misc`
-    * [ ] `Paired.java` to `flexmark-util-misc`
-    * [ ] `Ref.java` to `flexmark-util-misc`
-    * [ ] `TemplateUtil.java` to `flexmark-util-misc`
-    * [ ] `Utils.java` to `flexmark-util-misc`
-* [ ] Break: delete deprecated properties, methods and classes
+* [x] Break: delete deprecated properties, methods and classes
 * [ ] Convert anonymous classes to lambda where possible.
 * [x] Add: `org.jetbrains:annotations:18.0` dependency to have `@Nullable`/`@NotNull`
       annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
