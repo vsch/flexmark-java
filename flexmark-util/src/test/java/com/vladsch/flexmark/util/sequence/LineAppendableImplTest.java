@@ -86,7 +86,6 @@ public class LineAppendableImplTest {
         sb.delete(0, sb.length());
     }
 
-
     @Test
     public void test_noLeadingEOL() throws Exception {
         StringBuilder sb = new StringBuilder();
@@ -402,7 +401,7 @@ public class LineAppendableImplTest {
                 .unIndent();
         assertEquals("  <pre>abc\ndef \n\nhij\n</pre>\n", fa.toString(0, 0));
         assertEquals("  <pre>abc\ndef \n\nhij\n</pre>\n", fa.toString(1, 0));
-        assertEquals(5, fa.getLineCount());
+        assertEquals(5, fa.size());
 
         fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
         fa.append("ab")
@@ -410,7 +409,7 @@ public class LineAppendableImplTest {
                 .append("c")
                 .unIndent();
         assertEquals("ab\n  c\n", fa.toString(0, 0));
-        assertEquals(2, fa.getLineCount());
+        assertEquals(2, fa.size());
 
         fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
         fa.append("ab\n    \t \n\t   \n\n")
@@ -418,21 +417,21 @@ public class LineAppendableImplTest {
                 .append("c")
                 .unIndent();
         assertEquals("ab\n  c\n", fa.toString(0, 0));
-        assertEquals(5, fa.getLineCount());
+        assertEquals(5, fa.size());
 
         fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
         fa.indent().append("<p>this is a paragraph ").openPreFormatted(false).append("<div style=''>    some text\n    some more text\n")
                 .closePreFormatted().append("</div>").unIndent();
         //assertEquals("  <p>this is a paragraph <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0));
-        assertEquals(3, fa.getLineCount());
+        assertEquals(3, fa.size());
 
         fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
         fa.indent().append("<p>this is a paragraph ").line().openPreFormatted(false).append("<div style=''>    some text\n    some more text\n")
                 .closePreFormatted().append("</div>").unIndent();
         //assertEquals("  <p>this is a paragraph\n  <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0));
-        assertEquals(4, fa.getLineCount());
+        assertEquals(4, fa.size());
 
         fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
 
@@ -446,7 +445,7 @@ public class LineAppendableImplTest {
                 .append("</div>")
                 .unIndent();
         assertEquals("  <p>this is a paragraph\n    <div style=''>    some text\n    some more text\n  </div>\n", fa.toString(0, 0));
-        assertEquals(4, fa.getLineCount());
+        assertEquals(4, fa.size());
     }
 
     @Test
@@ -508,11 +507,11 @@ public class LineAppendableImplTest {
         assertEquals("Line: " + 3, sequence.subSequence(3 * 10, 3 * 10 + 10), fa.getLine(3));
         assertEquals("Line: " + 4, sequence.subSequence(4 * 10, 4 * 10 + 10), fa.getLine(4));
 
-        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp }", fa.getLineInfo(0).toString());
-        assertEquals("Line: " + 1, "LineInfo{i=1, pl=0, tl=9, l=10, sumPl=0, sumTl=18, sumL=20, bp }", fa.getLineInfo(1).toString());
-        assertEquals("Line: " + 2, "LineInfo{i=2, pl=0, tl=9, l=10, sumPl=0, sumTl=27, sumL=30, bp }", fa.getLineInfo(2).toString());
-        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=0, sumTl=36, sumL=40, bp }", fa.getLineInfo(3).toString());
-        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=0, sumTl=45, sumL=50, bp }", fa.getLineInfo(4).toString());
+        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp, '0:2343568\\n'}", fa.getLineInfo(0).toString());
+        assertEquals("Line: " + 1, "LineInfo{i=1, pl=0, tl=9, l=10, sumPl=0, sumTl=18, sumL=20, bp, '1:2343568\\n'}", fa.getLineInfo(1).toString());
+        assertEquals("Line: " + 2, "LineInfo{i=2, pl=0, tl=9, l=10, sumPl=0, sumTl=27, sumL=30, bp, '2:2343568\\n'}", fa.getLineInfo(2).toString());
+        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=0, sumTl=36, sumL=40, bp, '3:2343568\\n'}", fa.getLineInfo(3).toString());
+        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=0, sumTl=45, sumL=50, bp, '4:2343568\\n'}", fa.getLineInfo(4).toString());
     }
 
     @Test
@@ -541,11 +540,11 @@ public class LineAppendableImplTest {
         assertEquals("Line: " + 3, PrefixedSubSequence.prefixOf("  ", sequence.subSequence(3 * 10, 3 * 10 + 10)), fa.getLine(3));
         assertEquals("Line: " + 4, sequence.subSequence(4 * 10, 4 * 10 + 10), fa.getLine(4));
 
-        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp }", fa.getLineInfo(0).toString());
-        assertEquals("Line: " + 1, "LineInfo{i=1, pl=0, tl=9, l=10, sumPl=0, sumTl=18, sumL=20, bp }", fa.getLineInfo(1).toString());
-        assertEquals("Line: " + 2, "LineInfo{i=2, pl=2, tl=9, l=12, sumPl=2, sumTl=27, sumL=32, bp }", fa.getLineInfo(2).toString());
-        assertEquals("Line: " + 3, "LineInfo{i=3, pl=2, tl=9, l=12, sumPl=4, sumTl=36, sumL=44, bp }", fa.getLineInfo(3).toString());
-        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=4, sumTl=45, sumL=54, bp }", fa.getLineInfo(4).toString());
+        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp, '0:2343568\\n'}", fa.getLineInfo(0).toString());
+        assertEquals("Line: " + 1, "LineInfo{i=1, pl=0, tl=9, l=10, sumPl=0, sumTl=18, sumL=20, bp, '1:2343568\\n'}", fa.getLineInfo(1).toString());
+        assertEquals("Line: " + 2, "LineInfo{i=2, pl=2, tl=9, l=12, sumPl=2, sumTl=27, sumL=32, bp, '  2:2343568\\n'}", fa.getLineInfo(2).toString());
+        assertEquals("Line: " + 3, "LineInfo{i=3, pl=2, tl=9, l=12, sumPl=4, sumTl=36, sumL=44, bp, '  3:2343568\\n'}", fa.getLineInfo(3).toString());
+        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=4, sumTl=45, sumL=54, bp, '4:2343568\\n'}", fa.getLineInfo(4).toString());
 
         assertEquals("" +
                 "0:2343568\n" +
@@ -590,11 +589,11 @@ public class LineAppendableImplTest {
         assertEquals("Line: " + 3, sequence.subSequence(3 * 10, 3 * 10 + 10), fa.getLine(3));
         assertEquals("Line: " + 4, sequence.subSequence(4 * 10, 4 * 10 + 10), fa.getLine(4));
 
-        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp }", fa.getLineInfo(0).toString());
-        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp }", fa.getLineInfo(1).toString());
-        assertEquals("Line: " + 2, "LineInfo{i=2, pl=2, tl=9, l=12, sumPl=4, sumTl=27, sumL=34, bp }", fa.getLineInfo(2).toString());
-        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=4, sumTl=36, sumL=44, bp }", fa.getLineInfo(3).toString());
-        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=4, sumTl=45, sumL=54, bp }", fa.getLineInfo(4).toString());
+        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp, '0:2343568\\n'}", fa.getLineInfo(0).toString());
+        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp, '  1:2343568\\n'}", fa.getLineInfo(1).toString());
+        assertEquals("Line: " + 2, "LineInfo{i=2, pl=2, tl=9, l=12, sumPl=4, sumTl=27, sumL=34, bp, '  2:2343568\\n'}", fa.getLineInfo(2).toString());
+        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=4, sumTl=36, sumL=44, bp, '3:2343568\\n'}", fa.getLineInfo(3).toString());
+        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=4, sumTl=45, sumL=54, bp, '4:2343568\\n'}", fa.getLineInfo(4).toString());
 
         assertEquals("" +
                 "0:2343568\n" +
@@ -639,19 +638,19 @@ public class LineAppendableImplTest {
         assertEquals("Line: " + 3, sequence.subSequence(3 * 10, 3 * 10 + 10), fa.getLine(3));
         assertEquals("Line: " + 4, sequence.subSequence(4 * 10, 4 * 10 + 10), fa.getLine(4));
 
-        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp }", fa.getLineInfo(0).toString());
-        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp }", fa.getLineInfo(1).toString());
-        assertEquals("Line: " + 2, "LineInfo{i=2, pl=2, tl=9, l=12, sumPl=4, sumTl=27, sumL=34, bp }", fa.getLineInfo(2).toString());
-        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=4, sumTl=36, sumL=44, bp }", fa.getLineInfo(3).toString());
-        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=4, sumTl=45, sumL=54, bp }", fa.getLineInfo(4).toString());
+        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp, '0:2343568\\n'}", fa.getLineInfo(0).toString());
+        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp, '  1:2343568\\n'}", fa.getLineInfo(1).toString());
+        assertEquals("Line: " + 2, "LineInfo{i=2, pl=2, tl=9, l=12, sumPl=4, sumTl=27, sumL=34, bp, '  2:2343568\\n'}", fa.getLineInfo(2).toString());
+        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=4, sumTl=36, sumL=44, bp, '3:2343568\\n'}", fa.getLineInfo(3).toString());
+        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=4, sumTl=45, sumL=54, bp, '4:2343568\\n'}", fa.getLineInfo(4).toString());
 
         fa.setPrefixLength(2, 4);
 
-        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp }", fa.getLineInfo(0).toString());
-        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp }", fa.getLineInfo(1).toString());
-        assertEquals("Line: " + 2, "LineInfo{i=2, pl=4, tl=7, l=12, sumPl=6, sumTl=25, sumL=34}", fa.getLineInfo(2).toString());
-        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=6, sumTl=34, sumL=44, bp }", fa.getLineInfo(3).toString());
-        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=6, sumTl=43, sumL=54, bp }", fa.getLineInfo(4).toString());
+        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp, '0:2343568\\n'}", fa.getLineInfo(0).toString());
+        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp, '  1:2343568\\n'}", fa.getLineInfo(1).toString());
+        assertEquals("Line: " + 2, "LineInfo{i=2, pl=4, tl=7, l=12, sumPl=6, sumTl=25, sumL=34, '  2:2343568\\n'}", fa.getLineInfo(2).toString());
+        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=6, sumTl=34, sumL=44, bp, '3:2343568\\n'}", fa.getLineInfo(3).toString());
+        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=6, sumTl=43, sumL=54, bp, '4:2343568\\n'}", fa.getLineInfo(4).toString());
 
         assertEquals("" +
                 "0:2343568\n" +
@@ -696,18 +695,18 @@ public class LineAppendableImplTest {
         assertEquals("Line: " + 3, sequence.subSequence(3 * 10, 3 * 10 + 10), fa.getLine(3));
         assertEquals("Line: " + 4, sequence.subSequence(4 * 10, 4 * 10 + 10), fa.getLine(4));
 
-        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp }", fa.getLineInfo(0).toString());
-        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp }", fa.getLineInfo(1).toString());
-        assertEquals("Line: " + 2, "LineInfo{i=2, pl=2, tl=9, l=12, sumPl=4, sumTl=27, sumL=34, bp }", fa.getLineInfo(2).toString());
-        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=4, sumTl=36, sumL=44, bp }", fa.getLineInfo(3).toString());
-        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=4, sumTl=45, sumL=54, bp }", fa.getLineInfo(4).toString());
+        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp, '0:2343568\\n'}", fa.getLineInfo(0).toString());
+        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp, '  1:2343568\\n'}", fa.getLineInfo(1).toString());
+        assertEquals("Line: " + 2, "LineInfo{i=2, pl=2, tl=9, l=12, sumPl=4, sumTl=27, sumL=34, bp, '  2:2343568\\n'}", fa.getLineInfo(2).toString());
+        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=4, sumTl=36, sumL=44, bp, '3:2343568\\n'}", fa.getLineInfo(3).toString());
+        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=4, sumTl=45, sumL=54, bp, '4:2343568\\n'}", fa.getLineInfo(4).toString());
 
         fa.setLine(2, "", "0123456");
-        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp }", fa.getLineInfo(0).toString());
-        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp }", fa.getLineInfo(1).toString());
-        assertEquals("Line: " + 2, "LineInfo{i=2, pl=0, tl=7, l=8, sumPl=2, sumTl=25, sumL=30, bp }", fa.getLineInfo(2).toString());
-        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=2, sumTl=34, sumL=40, bp }", fa.getLineInfo(3).toString());
-        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=2, sumTl=43, sumL=50, bp }", fa.getLineInfo(4).toString());
+        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp, '0:2343568\\n'}", fa.getLineInfo(0).toString());
+        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp, '  1:2343568\\n'}", fa.getLineInfo(1).toString());
+        assertEquals("Line: " + 2, "LineInfo{i=2, pl=0, tl=7, l=8, sumPl=2, sumTl=25, sumL=30, bp, '0123456\\n'}", fa.getLineInfo(2).toString());
+        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=2, sumTl=34, sumL=40, bp, '3:2343568\\n'}", fa.getLineInfo(3).toString());
+        assertEquals("Line: " + 4, "LineInfo{i=4, pl=0, tl=9, l=10, sumPl=2, sumTl=43, sumL=50, bp, '4:2343568\\n'}", fa.getLineInfo(4).toString());
 
         assertEquals("" +
                 "0:2343568\n" +
@@ -726,11 +725,11 @@ public class LineAppendableImplTest {
                 "", fa.toString(false, 2, 2));
 
         fa.setLine(4, "  ", "4:01234");
-        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp }", fa.getLineInfo(0).toString());
-        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp }", fa.getLineInfo(1).toString());
-        assertEquals("Line: " + 2, "LineInfo{i=2, pl=0, tl=7, l=8, sumPl=2, sumTl=25, sumL=30, bp }", fa.getLineInfo(2).toString());
-        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=2, sumTl=34, sumL=40, bp }", fa.getLineInfo(3).toString());
-        assertEquals("Line: " + 4, "LineInfo{i=4, pl=2, tl=7, l=10, sumPl=4, sumTl=41, sumL=50, bp }", fa.getLineInfo(4).toString());
+        assertEquals("Line: " + 0, "LineInfo{i=0, pl=0, tl=9, l=10, sumPl=0, sumTl=9, sumL=10, bp, '0:2343568\\n'}", fa.getLineInfo(0).toString());
+        assertEquals("Line: " + 1, "LineInfo{i=1, pl=2, tl=9, l=12, sumPl=2, sumTl=18, sumL=22, bp, '  1:2343568\\n'}", fa.getLineInfo(1).toString());
+        assertEquals("Line: " + 2, "LineInfo{i=2, pl=0, tl=7, l=8, sumPl=2, sumTl=25, sumL=30, bp, '0123456\\n'}", fa.getLineInfo(2).toString());
+        assertEquals("Line: " + 3, "LineInfo{i=3, pl=0, tl=9, l=10, sumPl=2, sumTl=34, sumL=40, bp, '3:2343568\\n'}", fa.getLineInfo(3).toString());
+        assertEquals("Line: " + 4, "LineInfo{i=4, pl=2, tl=7, l=10, sumPl=4, sumTl=41, sumL=50, bp, '  4:01234\\n'}", fa.getLineInfo(4).toString());
 
         assertEquals("" +
                 "0:2343568\n" +
@@ -1115,6 +1114,44 @@ public class LineAppendableImplTest {
 
         fa.appendToSilently(builder, -1, -1);
         assertEquals("-1", "0:2343568", builder.toString());
+    }
+
+    @Test
+    public void test_iterateMaxTailBlankLines() {
+        String input = "" +
+                "0:2343568\n" +
+                "1:2343568\n" +
+                "2:2343568\n" +
+                "3:2343568\n" +
+                "4:2343568\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        LineAppendable fa = new LineAppendableImpl(SequenceBuilder.emptyBuilder(sequence), LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
+        SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
+
+        fa.append(sequence.subSequence(0, 9)).line();
+        fa.append(sequence.subSequence(10, 19)).blankLine();
+        fa.append(sequence.subSequence(20, 29)).blankLine(2);
+        fa.append(sequence.subSequence(30, 39)).blankLine(3);
+
+        {
+            int i = 2;
+            StringBuilder out = new StringBuilder();
+            for (LineInfo info : fa.getLinesInfo(i)) {
+//                System.out.println(info.getLine().toVisibleWhitespaceString());
+                out.append(info.line);
+            }
+            assertEquals("" + i, fa.toString(4, i), out.toString());
+        }
+
+        for (int i = 5; i-- > 0; ) {
+            StringBuilder out = new StringBuilder();
+            for (LineInfo info : fa.getLinesInfo(i)) {
+//                System.out.println(info.getLine().toVisibleWhitespaceString());
+                out.append(info.line);
+            }
+            assertEquals("" + i, fa.toString(4, i), out.toString());
+        }
     }
 
     @Test

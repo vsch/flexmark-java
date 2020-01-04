@@ -2,12 +2,13 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.misc.BitField;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
+import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Line information in LineAppendable
  */
-public class LineInfo {
+final public class LineInfo {
     public enum Flags implements BitField {
         PREFORMATTED(2),
         BLANK_PREFIX,
@@ -57,8 +58,9 @@ public class LineInfo {
     final public static int F_BLANK_PREFIX = BitFieldSet.intMask(Flags.BLANK_PREFIX);
     final public static int F_BLANK_TEXT = BitFieldSet.intMask(Flags.BLANK_TEXT);
 
-    final public static LineInfo NULL = new LineInfo(-1, 0, 0, 0, 0, 0, 0, true, true, Preformatted.NONE);
+    final public static LineInfo NULL = new LineInfo(BasedSequence.NULL, -1, 0, 0, 0, 0, 0, 0, true, true, Preformatted.NONE);
 
+    final public CharSequence line;    // line content
     final public int index;             // line index
     final public int prefixLength;      // line's prefix length
     final public int textLength;        // line's text length
@@ -68,9 +70,11 @@ public class LineInfo {
     final public int sumLength;         // total length of previous lines
     final public int flags;
 
-    private LineInfo(int index, int prefixLength, int textLength, int length, int sumPrefixLength, int sumTextLength, int sumLength, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
-        assert index == -1 || prefixLength + textLength < length : "Line must be terminated by an EOL";
+    private LineInfo(@NotNull CharSequence line, int index, int prefixLength, int textLength, int length, int sumPrefixLength, int sumTextLength, int sumLength, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
+        assert line == BasedSequence.NULL && index == -1 || prefixLength + textLength < length : "Line must be terminated by an EOL";
+        assert line.length() == length;
 
+        this.line = line;
         this.index = index;
         this.prefixLength = prefixLength;
         this.textLength = textLength;
@@ -85,7 +89,6 @@ public class LineInfo {
      * See if replacing this line info with another requires updating all following line info because of aggregation change
      *
      * @param other line info
-     *
      * @return true if need to update
      */
     public boolean needAggregateUpdate(LineInfo other) {
@@ -135,33 +138,33 @@ public class LineInfo {
     }
 
     @NotNull
-    public <T extends CharSequence> T getPrefix(@NotNull T line) {
-        //noinspection unchecked
-        return (T) line.subSequence(0, prefixLength);
+    public BasedSequence getLine() {
+        return line instanceof BasedSequence ? (BasedSequence) line :BasedSequence.of(line);
     }
 
     @NotNull
-    public <T extends CharSequence> T getTextNoEOL(@NotNull T line) {
-        //noinspection unchecked
-        return (T) line.subSequence(prefixLength, prefixLength + textLength);
+    public BasedSequence getPrefix() {
+        return getLine().subSequence(0, prefixLength);
     }
 
     @NotNull
-    public <T extends CharSequence> T getText(@NotNull T line) {
-        //noinspection unchecked
-        return (T) line.subSequence(prefixLength, length);
+    public BasedSequence getTextNoEOL() {
+        return getLine().subSequence(prefixLength, prefixLength + textLength);
     }
 
     @NotNull
-    public <T extends CharSequence> T getLineNoEOL(@NotNull T line) {
-        //noinspection unchecked
-        return (T) line.subSequence(0, prefixLength + textLength);
+    public BasedSequence getText() {
+        return getLine().subSequence(prefixLength, length);
     }
 
     @NotNull
-    public <T extends CharSequence> T getEOL(@NotNull T line) {
-        //noinspection unchecked
-        return (T) line.subSequence(prefixLength + textLength, length);
+    public BasedSequence getLineNoEOL() {
+        return getLine().subSequence(0, prefixLength + textLength);
+    }
+
+    @NotNull
+    public BasedSequence getEOL() {
+        return getLine().subSequence(prefixLength + textLength, length);
     }
 
     @Override
@@ -174,18 +177,20 @@ public class LineInfo {
                 ", sumPl=" + sumPrefixLength +
                 ", sumTl=" + sumTextLength +
                 ", sumL=" + sumLength +
-                (flags != 0 ? ", " + (isBlankPrefix() ? "bp " : "") + (isBlankText() ? "bt " : "") + (isPreformatted() ? "p " : "") : "") +
+                (flags != 0 ? "," + (isBlankPrefix() ? " bp" : "") + (isBlankText() ? " bt" : "") + (isPreformatted() ? " p" : "") : "") +
+                ", '" + Utils.escapeJavaString(line) + "'" +
                 '}';
     }
 
     @NotNull
-    public static LineInfo create(int prefixLength, int textLength, int length, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
-        return new LineInfo(0, prefixLength, textLength, length, 0, 0, 0, isBlankPrefix, isBlankText, preformatted);
+    public static LineInfo create(@NotNull CharSequence line, int prefixLength, int textLength, int length, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
+        return new LineInfo(line, 0, prefixLength, textLength, length, 0, 0, 0, isBlankPrefix, isBlankText, preformatted);
     }
 
     @NotNull
-    public static LineInfo create(@NotNull LineInfo prevInfo, int prefixLength, int textLength, int length, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
+    public static LineInfo create(@NotNull CharSequence line, @NotNull LineInfo prevInfo, int prefixLength, int textLength, int length, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
         return new LineInfo(
+                line,
                 prevInfo.index + 1,
                 prefixLength,
                 textLength,
@@ -202,6 +207,7 @@ public class LineInfo {
     @NotNull
     public static LineInfo create(@NotNull LineInfo prevInfo, @NotNull LineInfo info) {
         return new LineInfo(
+                info.line,
                 prevInfo.index + 1,
                 info.prefixLength,
                 info.textLength,

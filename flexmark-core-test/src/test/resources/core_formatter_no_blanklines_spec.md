@@ -1985,7 +1985,7 @@ line 2
 .
 line 1
 
-<img src="i.jpg">
+  <img src="i.jpg">
 
 line 2
 .
@@ -2017,6 +2017,56 @@ Document[0, 33]
   HtmlBlock[8, 26]
   Paragraph[27, 33]
     Text[27, 33] chars:[27, 33, "line 2"]
+````````````````````````````````
+
+
+```````````````````````````````` example HTML Blocks: 3
+* [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
+  [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with
+  column width and alignment of markdown tables:
+
+  <table>
+      <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+      <tr><td>
+      <pre><code class="language-markdown">day|time|spent
+  :---|:---:|--:
+  nov. 2. tue|10:00|4h 40m
+  nov. 3. thu|11:00|4h
+  nov. 7. mon|10:20|4h 20m
+  total:|| 13h</code></pre>
+      </td><td>
+      <pre><code class="language-markdown">| day         | time  |   spent |
+  |:------------|:-----:|--------:|
+  | nov. 2. tue | 10:00 |  4h 40m |
+  | nov. 3. thu | 11:00 |      4h |
+  | nov. 7. mon | 10:20 |  4h 20m |
+  | total:             ||     13h |</code></pre>
+      </td></tr>
+  </table>
+.
+* [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
+  [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with
+  column width and alignment of markdown tables:
+
+  <table>
+      <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+      <tr><td>
+      <pre><code class="language-markdown">day|time|spent
+  :---|:---:|--:
+  nov. 2. tue|10:00|4h 40m
+  nov. 3. thu|11:00|4h
+  nov. 7. mon|10:20|4h 20m
+  total:|| 13h</code></pre>
+      </td><td>
+      <pre><code class="language-markdown">| day         | time  |   spent |
+  |:------------|:-----:|--------:|
+  | nov. 2. tue | 10:00 |  4h 40m |
+  | nov. 3. thu | 11:00 |      4h |
+  | nov. 7. mon | 10:20 |  4h 20m |
+  | total:             ||     13h |</code></pre>
+      </td></tr>
+  </table>
+
 ````````````````````````````````
 
 

@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 public class BitSetIterator implements ReversibleIterator<Integer> {
     private final @NotNull BitSet bitSet;
-    private final boolean isReversed;
+    private final boolean reversed;
     private int next;
     private int last;
 
@@ -18,14 +18,14 @@ public class BitSetIterator implements ReversibleIterator<Integer> {
 
     public BitSetIterator(@NotNull BitSet bitSet, boolean reversed) {
         this.bitSet = bitSet;
-        isReversed = reversed;
+        this.reversed = reversed;
         next = reversed ? bitSet.previousSetBit(bitSet.length()) : bitSet.nextSetBit(0);
         last = -1;
     }
 
     @Override
     public boolean isReversed() {
-        return isReversed;
+        return reversed;
     }
 
     @Override
@@ -35,20 +35,18 @@ public class BitSetIterator implements ReversibleIterator<Integer> {
 
     @Override
     public Integer next() {
-        if (next == -1) {
+        if (next == -1)
             throw new NoSuchElementException();
-        }
 
         last = next;
-        next = isReversed ? (next == 0 ? -1 : bitSet.previousSetBit(next - 1)) : bitSet.nextSetBit(next + 1);
+        next = reversed ? (next == 0 ? -1 : bitSet.previousSetBit(next - 1)) : bitSet.nextSetBit(next + 1);
         return last;
     }
 
     @Override
     public void remove() {
-        if (last == -1) {
+        if (last == -1)
             throw new NoSuchElementException();
-        }
 
         bitSet.clear(last);
     }

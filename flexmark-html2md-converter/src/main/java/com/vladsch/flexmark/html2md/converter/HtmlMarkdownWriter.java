@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.html2md.converter;
 
+import com.vladsch.flexmark.formatter.MarkdownWriter;
 import com.vladsch.flexmark.util.format.MarkdownWriterBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +19,12 @@ public class HtmlMarkdownWriter extends MarkdownWriterBase<HtmlMarkdownWriter, N
 
     public HtmlMarkdownWriter(@Nullable Appendable builder, int formatOptions) {
         super(builder, formatOptions);
+    }
+
+    @NotNull
+    @Override
+    public HtmlMarkdownWriter getEmptyAppendable() {
+        return new HtmlMarkdownWriter(appendable, appendable.getOptions());
     }
 
     @Override

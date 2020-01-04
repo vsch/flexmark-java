@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,8 +25,8 @@ public class AbbreviationBlock extends Block implements ReferenceNode<Abbreviati
     }
 
     @Override
-    public int compareTo(AbbreviationBlock o) {
-        return text.compareTo(o.getText());
+    public int compareTo(AbbreviationBlock other) {
+        return SequenceUtils.compare(text, other.text, true);
     }
 
     @Override

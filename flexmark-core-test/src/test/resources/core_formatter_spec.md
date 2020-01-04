@@ -2211,7 +2211,39 @@ paragraph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 7) options(references-document-bottom, references-sort-unused-last)
+sort should not be case sensitive
+
+```````````````````````````````` example(Reference Placement: 7) options(references-document-bottom, references-sort)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[Ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[reF1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2
+
+paragraph 3
+
+[reF1]: /ref1
+[Ref2]: /ref2/1
+[ref2]: /ref2/2
+[ref3]: /ref3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 8) options(references-document-bottom, references-sort-unused-last)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -2241,7 +2273,7 @@ paragraph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 8) options(references-document-bottom, references-sort-unused-last, references-keep-last)
+```````````````````````````````` example(Reference Placement: 9) options(references-document-bottom, references-sort-unused-last, references-keep-last)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -2271,7 +2303,7 @@ paragraph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 9) options(references-document-bottom, references-sort-delete-unused)
+```````````````````````````````` example(Reference Placement: 10) options(references-document-bottom, references-sort-delete-unused)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -2299,7 +2331,7 @@ paragraph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 10) options(references-document-bottom, references-sort-delete-unused, references-keep-last)
+```````````````````````````````` example(Reference Placement: 11) options(references-document-bottom, references-sort-delete-unused, references-keep-last)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -2327,7 +2359,7 @@ paragraph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 11) options(references-document-bottom, references-delete-unused)
+```````````````````````````````` example(Reference Placement: 12) options(references-document-bottom, references-delete-unused)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -2355,7 +2387,7 @@ paragraph 3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Reference Placement: 12) options(references-document-bottom, references-delete-unused, references-keep-last)
+```````````````````````````````` example(Reference Placement: 13) options(references-document-bottom, references-delete-unused, references-keep-last)
 paragraph 1 [ref2]
 
 [ref3]: /ref3
@@ -2838,7 +2870,7 @@ line 2
 .
 line 1
 
-<img src="i.jpg">
+  <img src="i.jpg">
 
 line 2
 .
@@ -2874,6 +2906,98 @@ Document[0, 33]
   BlankLine[26, 27]
   Paragraph[27, 33]
     Text[27, 33] chars:[27, 33, "line 2"]
+````````````````````````````````
+
+
+```````````````````````````````` example HTML Blocks: 3
+* [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
+  [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with
+  column width and alignment of markdown tables:
+
+  <table>
+      <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+      <tr><td>
+      <pre><code class="language-markdown">day|time|spent
+  :---|:---:|--:
+  nov. 2. tue|10:00|4h 40m
+  nov. 3. thu|11:00|4h
+  nov. 7. mon|10:20|4h 20m
+  total:|| 13h</code></pre>
+      </td><td>
+      <pre><code class="language-markdown">| day         | time  |   spent |
+  |:------------|:-----:|--------:|
+  | nov. 2. tue | 10:00 |  4h 40m |
+  | nov. 3. thu | 11:00 |      4h |
+  | nov. 7. mon | 10:20 |  4h 20m |
+  | total:             ||     13h |</code></pre>
+      </td></tr>
+  </table>
+.
+* [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
+  [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with
+  column width and alignment of markdown tables:
+
+  <table>
+      <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+      <tr><td>
+      <pre><code class="language-markdown">day|time|spent
+  :---|:---:|--:
+  nov. 2. tue|10:00|4h 40m
+  nov. 3. thu|11:00|4h
+  nov. 7. mon|10:20|4h 20m
+  total:|| 13h</code></pre>
+      </td><td>
+      <pre><code class="language-markdown">| day         | time  |   spent |
+  |:------------|:-----:|--------:|
+  | nov. 2. tue | 10:00 |  4h 40m |
+  | nov. 3. thu | 11:00 |      4h |
+  | nov. 7. mon | 10:20 |  4h 20m |
+  | total:             ||     13h |</code></pre>
+      </td></tr>
+  </table>
+
+````````````````````````````````
+
+
+```````````````````````````````` example HTML Blocks: 4
+>  <table>
+>      <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+>      <tr><td>
+>      <pre><code class="language-markdown">day|time|spent
+>  :---|:---:|--:
+>  nov. 2. tue|10:00|4h 40m
+>  nov. 3. thu|11:00|4h
+>  nov. 7. mon|10:20|4h 20m
+>  total:|| 13h</code></pre>
+>      </td><td>
+>      <pre><code class="language-markdown">| day         | time  |   spent |
+>  |:------------|:-----:|--------:|
+>  | nov. 2. tue | 10:00 |  4h 40m |
+>  | nov. 3. thu | 11:00 |      4h |
+>  | nov. 7. mon | 10:20 |  4h 20m |
+>  | total:             ||     13h |</code></pre>
+>      </td></tr>
+>  </table>
+.
+>  <table>
+>      <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+>      <tr><td>
+>      <pre><code class="language-markdown">day|time|spent
+>  :---|:---:|--:
+>  nov. 2. tue|10:00|4h 40m
+>  nov. 3. thu|11:00|4h
+>  nov. 7. mon|10:20|4h 20m
+>  total:|| 13h</code></pre>
+>      </td><td>
+>      <pre><code class="language-markdown">| day         | time  |   spent |
+>  |:------------|:-----:|--------:|
+>  | nov. 2. tue | 10:00 |  4h 40m |
+>  | nov. 3. thu | 11:00 |      4h |
+>  | nov. 7. mon | 10:20 |  4h 20m |
+>  | total:             ||     13h |</code></pre>
+>      </td></tr>
+>  </table>
+
 ````````````````````````````````
 
 

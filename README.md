@@ -1,4 +1,4 @@
-![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
+![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
 ===============================================================================
 
 **flexmark-java** is a Java implementation of **[CommonMark (spec 0.28)]** parser using the
@@ -18,11 +18,12 @@ Motivation for this project was the need to replace [pegdown] parser in my [Mark
 plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in general is less
 than ideal and for pathological input either hangs or practically hangs during parsing.
 
-### master [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
+### master [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
 
-### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.50.44)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
+### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.50.44)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
 
 <!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
+
 [![GitQ](https://gitq.com/badge.svg)](https://gitq.com/vsch/flexmark-java)
 
 :information_source: Thanks to [Alex Karezin](mailto:javadiagrams@gmail.com) for setting up
@@ -199,9 +200,9 @@ custom node renderer if you need to override the generated link HTML.
       tracking from Source -> AST -> Formatted Source -> Source throughout the library.
 
       As an added bonus using the appendable makes formatting to it **40% faster** than previous
-      implementation and **160 times** (yes times) more efficient in memory use. For the test below,
-      old implementation allocated 6GB worth of segmented sequences, new implementation 37MB.
-      The % overhead is four times greater but that is after a 43 fold reduction in total
+      implementation and **160 times** (yes times) more efficient in memory use. For the test
+      below, old implementation allocated 6GB worth of segmented sequences, new implementation
+      37MB. The % overhead is four times greater but that is after a 43 fold reduction in total
       overhead bytes, old implementation needed 342MB of overhead, new implementation 8MB.
 
       As a result of increased efficiency, two additional files of about 600kB each can be
@@ -227,6 +228,7 @@ custom node renderer if you need to override the generated link HTML.
     | Bytes for characters of all segmented sequences |    917,016 |  6,029,774,526 |    917,016 | 6,029,774,526 |         37,663,196 |
     | Bytes for overhead of all segmented sequences   |  1,845,048 | 12,060,276,408 |     93,628 |   342,351,155 |          8,204,796 |
     | Overhead %                                      |     201.2% |         200.0% |      10.2% |          5.7% |              21.8% |
+
 * [Flexmark Architecture and Dependencies Diagrams](https://sourcespy.com/github/flexmark/)
   thanks to great work by [Alex Karezin](mailto:javadiagrams@gmail.com) you can get an overview
   of module dependencies with ability to drill down to packages and classes.
@@ -268,6 +270,7 @@ custom node renderer if you need to override the generated link HTML.
 
   Development of this module was sponsored by
   [Johner Institut GmbH](https://www.johner-institut.de).
+
 * Update library to be [CommonMark (spec 0.28)] compliant and add
   `ParserEmulationProfile.COMMONMARK_0_27` and `ParserEmulationProfile.COMMONMARK_0_28` to allow
   selecting a specific spec version options.
@@ -493,6 +496,7 @@ earlier versions of this project.
 |--|:----|:----|:----|
 |  | :x: | :x: | :x: |
 -->
+
 ###### (1)
 
 flexmark-java pathological input of 100,000 `[` parses in 68ms, 100,000 `]` in 57ms, 100,000
@@ -665,32 +669,32 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [CommonMark]: https://commonmark.org
 [CommonMark (spec 0.27)]: https://spec.commonmark.org/0.27
 [CommonMark (spec 0.28)]: https://spec.commonmark.org/0.28
-[commonmark-java]: https://github.com/atlassian/commonmark-java
-[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
-[docx4j]: https://www.docx4java.org/trac/docx4j
 [DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/DocxConverterCommonMark.java
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profile/pegdown/Extensions.java
-[flexmark-java]: https://github.com/vsch/flexmark-java
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Issues page]: ../../issues
-[hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
-[hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
-[intellij-markdown]: https://github.com/valich/intellij-markdown
 [Jekyll]: https://jekyllrb.com
 [Kramdown]: https://kramdown.gettalong.org
-[League/CommonMark]: https://github.com/thephpleague/commonmark
 [LICENSE.txt]: LICENSE.txt
+[League/CommonMark]: https://github.com/thephpleague/commonmark
 [Markdown]: https://daringfireball.net/projects/markdown/
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [MultiMarkdown]: https://fletcherpenney.net/multimarkdown
 [Open HTML To PDF]: https://github.com/danfickle/openhtmltopdf
-[pegdown]: http://pegdown.org
+[PHP Markdown Extra]: https://michelf.ca/projects/php-markdown/extra/#abbr
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profile/pegdown/PegdownOptionsAdapter.java
-[PHP Markdown Extra]: https://michelf.ca/projects/php-markdown/extra/#abbr
-[spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
+[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
+[commonmark-java]: https://github.com/atlassian/commonmark-java
+[docx4j]: https://www.docx4java.org/trac/docx4j
+[flexmark-java]: https://github.com/vsch/flexmark-java
+[hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
+[hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
+[intellij-markdown]: https://github.com/valich/intellij-markdown
+[pegdown]: http://pegdown.org
+[spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
 [wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
 

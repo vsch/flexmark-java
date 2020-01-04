@@ -29,7 +29,6 @@ public class Range {
      *
      * @param start start
      * @param end   end
-     *              use {@link Range#of(int, int)}
      */
     protected Range(int start, int end) {
         this.start = start;

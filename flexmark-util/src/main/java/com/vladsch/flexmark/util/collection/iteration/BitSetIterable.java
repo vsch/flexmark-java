@@ -6,7 +6,7 @@ import java.util.BitSet;
 
 public class BitSetIterable implements ReversibleIterable<Integer> {
     private final @NotNull BitSet bitSet;
-    private final boolean isReversed;
+    private final boolean reversed;
 
     public BitSetIterable(@NotNull BitSet bitSet) {
         this(bitSet, false);
@@ -14,29 +14,29 @@ public class BitSetIterable implements ReversibleIterable<Integer> {
 
     public BitSetIterable(@NotNull BitSet bitSet, boolean reversed) {
         this.bitSet = bitSet;
-        isReversed = reversed;
+        this.reversed = reversed;
     }
 
     @Override
     public boolean isReversed() {
-        return isReversed;
+        return reversed;
     }
 
     @NotNull
     @Override
     public ReversibleIterator<Integer> iterator() {
-        return new BitSetIterator(bitSet, isReversed);
+        return new BitSetIterator(bitSet, reversed);
     }
 
     @NotNull
     @Override
     public ReversibleIterable<Integer> reversed() {
-        return new BitSetIterable(bitSet, !isReversed);
+        return new BitSetIterable(bitSet, !reversed);
     }
 
     @NotNull
     @Override
     public ReversibleIterator<Integer> reversedIterator() {
-        return new BitSetIterator(bitSet, !isReversed);
+        return new BitSetIterator(bitSet, !reversed);
     }
 }

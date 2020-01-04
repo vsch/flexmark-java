@@ -6,7 +6,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBase;
+import com.vladsch.flexmark.util.html.HtmlAppendableBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.TagRange;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
+public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     private NodeRendererContext context;
     private AttributablePart useAttributes;
 

@@ -8,13 +8,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
-public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase<T>> implements HtmlFormattingAppendable {
+public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements HtmlAppendable {
     final private LineAppendable appendable;
 
     private @Nullable Attributes currentAttributes;
@@ -25,17 +22,23 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     private boolean suppressCloseTagLine = false;
     private final @NotNull Stack<String> openTags = new Stack<>();
 
-    public HtmlFormattingAppendableBase(LineAppendable other, boolean inheritIndent) {
+    public HtmlAppendableBase(LineAppendable other, boolean inheritIndent) {
         this(other, inheritIndent ? other.getIndentPrefix().length() : 0, other.getOptions());
     }
 
-    public HtmlFormattingAppendableBase(int indentSize, int formatOptions) {
+    public HtmlAppendableBase(int indentSize, int formatOptions) {
         this(null, indentSize, formatOptions);
     }
 
-    public HtmlFormattingAppendableBase(@Nullable Appendable other, int indentSize, int formatOptions) {
+    public HtmlAppendableBase(@Nullable Appendable other, int indentSize, int formatOptions) {
         this.appendable = new LineAppendableImpl(other, formatOptions);
         this.appendable.setIndentPrefix(RepeatedSequence.repeatOf(" ", indentSize).toString());
+    }
+
+    @NotNull
+    @Override
+    public HtmlAppendable getEmptyAppendable() {
+        return new HtmlAppendableBase<>(appendable, appendable.getIndentPrefix().length(), appendable.getOptions());
     }
 
     public boolean isSuppressOpenTagLine() {
@@ -412,14 +415,17 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     // delegated to LineFormattingAppendable
     // @formatter:off
+    @Override @NotNull public Iterator<LineInfo> iterator()                                                                     {return appendable.iterator();}
+    @Override @NotNull public Iterable<BasedSequence> getLines(int maxTrailingBlankLines, int startLine, int endLine)           {return appendable.getLines(maxTrailingBlankLines, startLine, endLine);}
+    @Override @NotNull public Iterable<LineInfo> getLinesInfo(int maxTrailingBlankLines, int startLine, int endLine)             {return appendable.getLinesInfo(maxTrailingBlankLines, startLine, endLine);}
     @Override public void setPrefixLength(int lineIndex, int prefixEndIndex)                                                    { appendable.setPrefixLength(lineIndex, prefixEndIndex); }
-    @Override public void setLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text)                   { appendable.setLine(lineIndex, prefix, text); }
-    @Override public void forAllLines(int maxTrailingBlankLines, int startLine, int endLine, @NotNull LineProcessor processor)  { appendable.forAllLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, processor ); }
+    @Override public void setLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text)                      { appendable.setLine(lineIndex, prefix, text); }
     @Override public <T extends Appendable> T appendTo(@NotNull T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException { return appendable.appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, startLine, endLine); }
     @Override public boolean isPendingSpace()                                                                                   { return appendable.isPendingSpace(); }
     @Override public boolean isPreFormatted()                                                                                   { return appendable.isPreFormatted(); }
     @Override public int column()                                                                                               { return appendable.column(); }
     @Override public int getLineCount()                                                                                         { return appendable.getLineCount(); }
+    @Override public int size()                                                                                                 { return appendable.size(); }
     @Override public int getOptions()                                                                                           { return appendable.getOptions(); }
     @Override public int getPendingSpace()                                                                                      { return appendable.getPendingSpace(); }
     @Override public int getPendingEOL()                                                                                        { return appendable.getPendingEOL(); }

@@ -350,7 +350,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.line();
 
                 if (formatterOptions.setextHeadingEqualizeMarker) {
-                    markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.getLineInfo(markdown.getLineCount() - 1).textLength, formatterOptions.minSetextMarkerLength));
+                    markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.getLineInfo(markdown.size() - 1).textLength, formatterOptions.minSetextMarkerLength));
                 } else {
                     markdown.append(node.getClosingMarker());
                 }
@@ -362,7 +362,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             char closingMarker = node.getLevel() == 1 ? '=' : '-';
 
             if (formatterOptions.setextHeadingEqualizeMarker) {
-                markdown.append(closingMarker, Utils.minLimit(markdown.getLineInfo(markdown.getLineCount() - 1).textLength, formatterOptions.minSetextMarkerLength));
+                markdown.append(closingMarker, Utils.minLimit(markdown.getLineInfo(markdown.size() - 1).textLength, formatterOptions.minSetextMarkerLength));
             } else {
                 markdown.append(RepeatedSequence.repeatOf(closingMarker, formatterOptions.minSetextMarkerLength));
             }
@@ -594,7 +594,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 if (startWrappingDisabled || endWrappingDisabled) {
                     if (!startWrappingDisabled) markdown.blankLine();
                     FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
-                    if (!endWrappingDisabled) markdown.blankLine();
+                    if (!endWrappingDisabled) markdown.tailBlankLine();
                 } else {
                     FormatterUtils.renderLooseParagraph(node, context, markdown);
                 }
@@ -701,24 +701,9 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             context.renderChildren(node);
         } else {
             markdown.blankLine();
-            // FIX: this really needs to be parsed but we won't do it
-            switch (context.getRenderPurpose()) {
-                case TRANSLATION_SPANS:
-                case TRANSLATED_SPANS:
-                    markdown.appendNonTranslating(myHtmlBlockPrefix, node.getChars().trimEOL(), ">", node.getChars().trimmedEOL());
-                    break;
-
-                case TRANSLATED:
-                    markdown.openPreFormatted(true);
-                    markdown.appendNonTranslating(node.getChars());
-                    markdown.closePreFormatted();
-                    break;
-
-                case FORMAT:
-                default:
-                    markdown.append(node.getChars());
-            }
-            markdown.blankLine();
+            // FIX: this really needs to be parsed, but it is not done in the parser
+            render((HtmlBlockBase)node, context, markdown);
+            markdown.tailBlankLine();
         }
     }
 
@@ -739,7 +724,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         //markdown.append(node.getChars());
     }
 
-    private void render(HtmlInnerBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
+    private void render(HtmlBlockBase node, NodeFormatterContext context, MarkdownWriter markdown) {
         switch (context.getRenderPurpose()) {
             case TRANSLATION_SPANS:
             case TRANSLATED_SPANS:
@@ -754,7 +739,17 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
             case FORMAT:
             default:
-                markdown.append(node.getChars());
+                // NOTE: to allow changing node chars before formatting, need to make sure the node's chars were not changed before using content lines
+                markdown.openPreFormatted(true);
+                BasedSequence spanningChars = node.getSpanningChars();
+                if (spanningChars.equals(node.getChars())) {
+                    for (BasedSequence line : node.getContentLines()) {
+                        markdown.append(line);
+                    }
+                } else {
+                    markdown.append(node.getChars());
+                }
+                markdown.line().closePreFormatted();
         }
     }
 

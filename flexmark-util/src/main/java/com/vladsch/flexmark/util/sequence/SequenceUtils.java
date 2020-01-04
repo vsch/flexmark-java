@@ -330,16 +330,42 @@ public interface SequenceUtils {
     }
 
     static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2) {
+        return compare(o1, o2, false);
+    }
+
+    static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2, boolean ignoreCase) {
         if (o1 == null || o2 == null) return o1 == null && o2 == null ? 0 : o1 == null ? -1 : 1;
 
         int len1 = o1.length();
         int len2 = o2.length();
         int iMax = Math.min(len1, len2);
-        for (int i = 0; i < iMax; i++) {
-            char c1 = o1.charAt(i);
-            char c2 = o2.charAt(i);
-            if (c1 != c2) {
-                return c1 - c2;
+        if (ignoreCase) {
+            for (int i = 0; i < iMax; i++) {
+                char c1 = o1.charAt(i);
+                char c2 = o2.charAt(i);
+                if (c1 != c2) {
+                    char u1 = Character.toUpperCase(c1);
+                    char u2 = Character.toUpperCase(c2);
+                    if (u1 == u2) {
+                        continue;
+                    }
+
+                    // Unfortunately, conversion to uppercase does not work properly
+                    // for the Georgian alphabet, which has strange rules about case
+                    // conversion. So we need to make one last check before exiting.
+                    if (Character.toLowerCase(u1) == Character.toLowerCase(u2)) {
+                        continue;
+                    }
+                    return c1 - c2;
+                }
+            }
+        } else {
+            for (int i = 0; i < iMax; i++) {
+                char c1 = o1.charAt(i);
+                char c2 = o2.charAt(i);
+                if (c1 != c2) {
+                    return c1 - c2;
+                }
             }
         }
         return len1 - len2;

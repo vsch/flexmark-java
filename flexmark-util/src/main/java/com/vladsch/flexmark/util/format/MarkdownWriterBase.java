@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 @SuppressWarnings("unchecked")
 public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, N, C extends NodeContext<N, C>> implements LineAppendable {
@@ -64,14 +65,17 @@ public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, 
     }
 
     // @formatter:off
+    @Override @NotNull public Iterator<LineInfo> iterator()                                                                     {return appendable.iterator();}
+    @Override @NotNull public Iterable<BasedSequence> getLines(int maxTrailingBlankLines, int startLine, int endLine)           {return appendable.getLines(maxTrailingBlankLines, startLine, endLine);}
+    @Override @NotNull public Iterable<LineInfo> getLinesInfo(int maxTrailingBlankLines, int startLine, int endLine)             {return appendable.getLinesInfo(maxTrailingBlankLines, startLine, endLine);}
     @Override public void setPrefixLength(int lineIndex, int prefixEndIndex)                                                    { appendable.setPrefixLength(lineIndex, prefixEndIndex); }
-    @Override public void setLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text)                   { appendable.setLine(lineIndex, prefix, text); }
-    @Override public void forAllLines(int maxTrailingBlankLines, int startLine, int endLine, @NotNull LineProcessor processor)  { appendable.forAllLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, processor ); }
+    @Override public void setLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text)                      { appendable.setLine(lineIndex, prefix, text); }
     @Override public <T extends Appendable> T appendTo(@NotNull T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException { return appendable.appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, startLine, endLine); }
     @Override public boolean isPendingSpace()                                                                                   { return appendable.isPendingSpace(); }
     @Override public boolean isPreFormatted()                                                                                   { return appendable.isPreFormatted(); }
     @Override public int column()                                                                                               { return appendable.column(); }
     @Override public int getLineCount()                                                                                         { return appendable.getLineCount(); }
+    @Override public int size()                                                                                                 { return appendable.size(); }
     @Override public int getOptions()                                                                                           { return appendable.getOptions(); }
     @Override public int getPendingSpace()                                                                                      { return appendable.getPendingSpace(); }
     @Override public int getPendingEOL()                                                                                        { return appendable.getPendingEOL(); }

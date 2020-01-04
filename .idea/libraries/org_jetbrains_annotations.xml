@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="org.jetbrains:annotations" type="repository">
-    <properties maven-id="org.jetbrains:annotations:18.0.0" />
+    <properties maven-id="org.jetbrains:annotations:15.0" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/annotations-18.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/annotations-15.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

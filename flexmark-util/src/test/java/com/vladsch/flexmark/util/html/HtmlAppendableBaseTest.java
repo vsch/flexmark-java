@@ -8,11 +8,11 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class HtmlFormattingAppendableBaseTest {
+public class HtmlAppendableBaseTest {
 
     @Test
     public void test_basic() throws Exception {
-        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(2, LineAppendable.F_FORMAT_ALL);
+        final HtmlAppendableBase fa = new HtmlAppendableBase(2, LineAppendable.F_FORMAT_ALL);
 
         fa.tagIndent("ul", () -> fa.withCondIndent().tagLine("li", () -> fa.text("item1")));
         assertEquals("<ul>\n  <li>item1</li>\n</ul>\n", fa.toString(0, 0));
@@ -20,7 +20,7 @@ public class HtmlFormattingAppendableBaseTest {
 
     @Test
     public void test_basic1() throws Exception {
-        final HtmlFormattingAppendableBase fa1 = new HtmlFormattingAppendableBase(2, LineAppendable.F_FORMAT_ALL);
+        final HtmlAppendableBase fa1 = new HtmlAppendableBase(2, LineAppendable.F_FORMAT_ALL);
 
         fa1.tagIndent("ul", () -> fa1.withCondIndent().tagLine("li", () -> {
             fa1.text("item1");
@@ -32,7 +32,7 @@ public class HtmlFormattingAppendableBaseTest {
 
     @Test
     public void test_basic2() throws Exception {
-        final HtmlFormattingAppendableBase fa2 = new HtmlFormattingAppendableBase(2, LineAppendable.F_FORMAT_ALL);
+        final HtmlAppendableBase fa2 = new HtmlAppendableBase(2, LineAppendable.F_FORMAT_ALL);
 
         fa2.withCondLineOnChildText().withCondIndent().tag("tbody", () -> {
         });
@@ -42,7 +42,7 @@ public class HtmlFormattingAppendableBaseTest {
 
     @Test
     public void test_basic3() throws Exception {
-        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(2, LineAppendable.F_FORMAT_ALL);
+        final HtmlAppendableBase fa = new HtmlAppendableBase(2, LineAppendable.F_FORMAT_ALL);
 
         fa.tagIndent("ul", () -> fa.withCondIndent().tagLine("li", () -> fa.text("item1\ntwo line text")));
         assertEquals("" +
@@ -55,7 +55,7 @@ public class HtmlFormattingAppendableBaseTest {
 
     @Test
     public void test_basic4() throws Exception {
-        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(2, LineAppendable.F_FORMAT_ALL);
+        final HtmlAppendableBase fa = new HtmlAppendableBase(2, LineAppendable.F_FORMAT_ALL);
 
         fa.tagIndent("ul", () -> {
             fa.withCondIndent().tagLine("li", () -> fa.text("item1\ntwo line text"));
@@ -75,7 +75,7 @@ public class HtmlFormattingAppendableBaseTest {
 
     @Test
     public void test_tagList() throws Exception {
-        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(2, LineAppendable.F_FORMAT_ALL);
+        final HtmlAppendableBase fa = new HtmlAppendableBase(2, LineAppendable.F_FORMAT_ALL);
 
         fa.tag("span", false);
         fa.tagIndent("ul", () -> fa.withCondIndent().tagLine("li", () -> {
@@ -89,7 +89,7 @@ public class HtmlFormattingAppendableBaseTest {
 
         assertEquals("<span>\n<ul>\n  <li>item1</li>\n</ul>\n</span>\n", fa.toString(0, 0));
 
-        final HtmlFormattingAppendableBase fa1 = new HtmlFormattingAppendableBase(2, LineAppendable.F_FORMAT_ALL);
+        final HtmlAppendableBase fa1 = new HtmlAppendableBase(2, LineAppendable.F_FORMAT_ALL);
 
         fa1.tagIndent("ul", () -> fa1.withCondIndent().tagLine("li", () -> {
             final List<String> tagsAfterLast = fa.getOpenTagsAfterLast("span");

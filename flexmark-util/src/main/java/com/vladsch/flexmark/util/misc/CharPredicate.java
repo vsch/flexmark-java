@@ -38,6 +38,10 @@ public interface CharPredicate extends IntPredicate {
     @Override
     boolean test(int value);
 
+    default boolean test(char value) {
+        return test((int)value);
+    }
+
     /**
      * Returns a composed predicate that represents a short-circuiting logical
      * AND of this predicate and another.  When evaluating the composed

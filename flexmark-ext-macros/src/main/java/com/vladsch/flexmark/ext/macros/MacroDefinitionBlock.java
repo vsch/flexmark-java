@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -87,8 +88,8 @@ public class MacroDefinitionBlock extends Block implements ReferenceNode<MacroDe
     }
 
     @Override
-    public int compareTo(MacroDefinitionBlock o) {
-        return name.compareTo(o.name);
+    public int compareTo(MacroDefinitionBlock other) {
+        return SequenceUtils.compare(name, other.name, true);
     }
 
     public MacroDefinitionBlock() {

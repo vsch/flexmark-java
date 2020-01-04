@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +27,7 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
 
     @Override
     public int compareTo(FootnoteBlock other) {
-        return text.compareTo(other.text);
+        return SequenceUtils.compare(text, other.text, true);
     }
 
     public int getFootnoteReferences() {

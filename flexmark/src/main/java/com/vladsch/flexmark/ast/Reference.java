@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,7 +54,7 @@ public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRe
 
     @Override
     public int compareTo(Reference other) {
-        return getReference().compareTo(other.getReference());
+        return SequenceUtils.compare(getReference(), other.getReference(), true);
     }
 
     @Nullable

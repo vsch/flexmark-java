@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.ReferenceNode;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +23,7 @@ public class EnumeratedReferenceBlock extends Block implements ReferenceNode<Enu
 
     @Override
     public int compareTo(EnumeratedReferenceBlock other) {
-        return getText().compareTo(other.getText());
+        return SequenceUtils.compare(text, other.text, true);
     }
 
     @Nullable

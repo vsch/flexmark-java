@@ -20,7 +20,7 @@ package com.vladsch.flexmark.util.html.ui;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.AttributeImpl;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBase;
+import com.vladsch.flexmark.util.html.HtmlAppendableBase;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,7 +30,7 @@ import java.awt.Font;
 import java.util.HashMap;
 
 @SuppressWarnings("WeakerAccess")
-public class HtmlBuilder extends HtmlFormattingAppendableBase<HtmlBuilder> {
+public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
     public HtmlBuilder() {
         super(0, LineAppendable.F_PASS_THROUGH);
     }

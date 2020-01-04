@@ -9,6 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.100](#next-059100)
 - [0.59.98](#05998)
 - [0.59.96](#05996)
 - [0.59.94](#05994)
@@ -129,8 +130,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * [ ] `options/` classes to `flexmark-util-options`
   * [ ] `sequence/` classes to `flexmark-util-sequence`
   * [ ] `visitor/` classes to `flexmark-util-visitor`
-* [x] Break: delete deprecated properties, methods and classes
 * [ ] Convert anonymous classes to lambda where possible.
+* [x] refactor `flexmark-util` to eliminate dependency cycles between classes in different
+      subdirectories.
+* [x] Break: delete deprecated properties, methods and classes
 * [x] Add: `org.jetbrains:annotations:18.0` dependency to have `@Nullable`/`@NotNull`
       annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
       have these annotations for analysis of potential problems and use with Kotlin.
@@ -155,9 +158,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   of `NodeVisitor` and `VisitHandler`. If you convert all anonymous implementations of
   `VisitHandler` to lambdas you can remove all imports for `Visitor`.
 
-  * Fix: remove old visitor like adapters and implement ones based on generic classes not linked
-    to flexmark AST node.
-  * Deprecate old base classes:
+  * [x] Fix: remove old visitor like adapters and implement ones based on generic classes not
+        linked to flexmark AST node.
+  * [x] Deprecate old base classes:
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
@@ -192,10 +195,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 + [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
   + [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `SequenceBuilder` can optimize
-        to base sequence.
-  + [ ] do not construct temporary `StringBuilder` but only keep the last line under
+        to base sequence quicker.
+  + [x] do not construct temporary `StringBuilder` but only keep the last line under
         construction temporary, with all previously constructed lines used for prior content.
-  + [ ] use separate instance of sequence builder for the line under construction.
+  + [x] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
 * [ ] Fix: Document docx form controls in wiki.
@@ -204,6 +207,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.100
+
+* Fix: make all reference nodes `compareTo()` not case sensitive
+* Fix: change back to `jetbrains.annotations:15.0`
+* Fix: formatter to not change HTML block indentations by
+* Break: rename `HtmlFormattingAppendable` to `HtmlAppendable`
+* Break: rename `HtmlFormattingAppendableBase` to `HtmlAppendableBase`
+* Add: `LineInfo` to have the line `CharSequence`
+* Add: `LineAppendable` extend `Iterable<LineInfo>`
 
 ## 0.59.98
 
@@ -227,14 +240,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `UpperCaseMapper`
   * Break: move classes contained in `mappers` directory to `sequence/mappers` subdirectory
   * Break: move classes contained in `util` directory:
-    * `SharedDataKeys`  to `data`
+    * `SharedDataKeys` to `data`
     * the rest to `misc`
   * Break: move from `html` to `sequence` to eliminate dependency cycle
     * `Escaping`
     * `Html5Entities`
     * `LineAppendable`
     * `LineAppendableImpl`
-  * Break: move from `sequence` to `misc` to eliminate dependency cycle
+  * Break: move from `builder` to `misc` to eliminate dependency cycle
+    * `Extension`
+  * Break: move `from `sequence` to `misc` to eliminate dependency cycle
     * `CharPredicate`
   * Break: move from `Utils` to `BasedUtils` to eliminate dependency cycle
     * `asBased`

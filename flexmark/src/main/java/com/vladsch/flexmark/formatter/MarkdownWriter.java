@@ -23,6 +23,12 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         super(appendable, formatOptions);
     }
 
+    @NotNull
+    @Override
+    public MarkdownWriter getEmptyAppendable() {
+        return new MarkdownWriter(appendable, appendable.getOptions());
+    }
+
     @Override
     public @NotNull BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix) {
         Node node = context.getCurrentNode();

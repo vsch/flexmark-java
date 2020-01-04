@@ -8,7 +8,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         HtmlBuilderTest.class,
-        HtmlFormattingAppendableBaseTest.class,
+        HtmlAppendableBaseTest.class,
         HtmlHelpersTest.class,
 })
 public class HtmlTestSuite {
