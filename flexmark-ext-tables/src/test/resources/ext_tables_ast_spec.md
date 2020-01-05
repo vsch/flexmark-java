@@ -3968,6 +3968,55 @@ Document[14, 449]
 ````````````````````````````````
 
 
+### xxx-2
+
+Table does not parse properly if no EOL at end of base sequence
+
+```````````````````````````````` example(Issue - xxx-1: 1) options(NO_FILE_EOL)
+|name|display|title_en|title_de|
+|---|---|---|---|
+|none| |
+.
+<table>
+  <thead>
+    <tr><th>name</th><th>display</th><th>title_en</th><th>title_de</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>none</td><td> </td></tr>
+  </tbody>
+</table>
+.
+Document[0, 59]
+  TableBlock[0, 59]
+    TableHead[0, 32]
+      TableRow[0, 32] rowNumber=1
+        TableCell[0, 6] header textOpen:[0, 1, "|"] text:[1, 5, "name"] textClose:[5, 6, "|"]
+          Text[1, 5] chars:[1, 5, "name"]
+        TableCell[6, 14] header text:[6, 13, "display"] textClose:[13, 14, "|"]
+          Text[6, 13] chars:[6, 13, "display"]
+        TableCell[14, 23] header text:[14, 22, "title_en"] textClose:[22, 23, "|"]
+          Text[14, 22] chars:[14, 22, "title_en"]
+        TableCell[23, 32] header text:[23, 31, "title_de"] textClose:[31, 32, "|"]
+          Text[23, 31] chars:[23, 31, "title_de"]
+    TableSeparator[33, 50]
+      TableRow[33, 50]
+        TableCell[33, 38] textOpen:[33, 34, "|"] text:[34, 37, "---"] textClose:[37, 38, "|"]
+          Text[34, 37] chars:[34, 37, "---"]
+        TableCell[38, 42] text:[38, 41, "---"] textClose:[41, 42, "|"]
+          Text[38, 41] chars:[38, 41, "---"]
+        TableCell[42, 46] text:[42, 45, "---"] textClose:[45, 46, "|"]
+          Text[42, 45] chars:[42, 45, "---"]
+        TableCell[46, 50] text:[46, 49, "---"] textClose:[49, 50, "|"]
+          Text[46, 49] chars:[46, 49, "---"]
+    TableBody[51, 59]
+      TableRow[51, 59] rowNumber=1
+        TableCell[51, 57] textOpen:[51, 52, "|"] text:[52, 56, "none"] textClose:[56, 57, "|"]
+          Text[52, 56] chars:[52, 56, "none"]
+        TableCell[57, 59] text:[57, 58, " "] textClose:[58, 59, "|"]
+          Text[57, 58] chars:[57, 58, " "]
+````````````````````````````````
+
+
 Parse sub sequences
 
 ```````````````````````````````` example(Issue - xxx-1: 2) options(strip-indent)

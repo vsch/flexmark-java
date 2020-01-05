@@ -216,7 +216,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Break: rename `HtmlFormattingAppendable` to `HtmlAppendable`
 * Break: rename `HtmlFormattingAppendableBase` to `HtmlAppendableBase`
 * Add: `LineInfo` to have the line `CharSequence`
-* Add: `LineAppendable` extend `Iterable<LineInfo>`
+* Add: to `LineAppendable`
+  * extend `Iterable<LineInfo>`
+  * Add: `LineAppendable.append(LineAppendable, int, int, boolean)` to append another line
+    appendable without prefixes
+  * Add: `LineAppendable.copyAppendable(LineAppendable, int, int, boolean)` to make a copy and
+    append selected content with or without prefixes
+  * Add: `LineAppendable.insertLine(int, CharSequence, CharSequence)` to insert lines
 
 ## 0.59.98
 

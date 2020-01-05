@@ -60,7 +60,7 @@ final public class LineInfo {
 
     final public static LineInfo NULL = new LineInfo(BasedSequence.NULL, -1, 0, 0, 0, 0, 0, 0, true, true, Preformatted.NONE);
 
-    final public CharSequence line;    // line content
+    final public CharSequence lineSeq;    // line content
     final public int index;             // line index
     final public int prefixLength;      // line's prefix length
     final public int textLength;        // line's text length
@@ -70,11 +70,11 @@ final public class LineInfo {
     final public int sumLength;         // total length of previous lines
     final public int flags;
 
-    private LineInfo(@NotNull CharSequence line, int index, int prefixLength, int textLength, int length, int sumPrefixLength, int sumTextLength, int sumLength, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
-        assert line == BasedSequence.NULL && index == -1 || prefixLength + textLength < length : "Line must be terminated by an EOL";
-        assert line.length() == length;
+    private LineInfo(@NotNull CharSequence lineSeq, int index, int prefixLength, int textLength, int length, int sumPrefixLength, int sumTextLength, int sumLength, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
+        assert lineSeq == BasedSequence.NULL && index == -1 || prefixLength + textLength < length : "Line must be terminated by an EOL";
+        assert lineSeq.length() == length;
 
-        this.line = line;
+        this.lineSeq = lineSeq;
         this.index = index;
         this.prefixLength = prefixLength;
         this.textLength = textLength;
@@ -139,7 +139,7 @@ final public class LineInfo {
 
     @NotNull
     public BasedSequence getLine() {
-        return line instanceof BasedSequence ? (BasedSequence) line :BasedSequence.of(line);
+        return lineSeq instanceof BasedSequence ? (BasedSequence) lineSeq :BasedSequence.of(lineSeq);
     }
 
     @NotNull
@@ -178,7 +178,7 @@ final public class LineInfo {
                 ", sumTl=" + sumTextLength +
                 ", sumL=" + sumLength +
                 (flags != 0 ? "," + (isBlankPrefix() ? " bp" : "") + (isBlankText() ? " bt" : "") + (isPreformatted() ? " p" : "") : "") +
-                ", '" + Utils.escapeJavaString(line) + "'" +
+                ", '" + Utils.escapeJavaString(lineSeq) + "'" +
                 '}';
     }
 
@@ -207,7 +207,7 @@ final public class LineInfo {
     @NotNull
     public static LineInfo create(@NotNull LineInfo prevInfo, @NotNull LineInfo info) {
         return new LineInfo(
-                info.line,
+                info.lineSeq,
                 prevInfo.index + 1,
                 info.prefixLength,
                 info.textLength,

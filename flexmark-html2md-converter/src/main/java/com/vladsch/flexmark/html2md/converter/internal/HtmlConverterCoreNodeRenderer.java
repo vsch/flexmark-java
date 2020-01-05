@@ -426,7 +426,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     out.lineWithTrailingSpaces(minLimit(0, 2 - pendingSpace));
                 } else if (pendingEOL == 1) {
                     // may need to replace last line to add trailing break spaces
-                    int lineCount = out.size();
+                    int lineCount = out.getLineCountWithPending();
                     if (lineCount > 0) {
                         CharSequence lineContent = out.getLineContent(lineCount - 1);
                         int pendingSpace = BasedSequence.of(lineContent).countTrailing(BasedSequence.SPACE_TAB_SET);

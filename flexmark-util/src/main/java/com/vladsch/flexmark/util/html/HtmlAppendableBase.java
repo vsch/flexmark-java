@@ -416,16 +416,19 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     // delegated to LineFormattingAppendable
     // @formatter:off
     @Override @NotNull public Iterator<LineInfo> iterator()                                                                     {return appendable.iterator();}
-    @Override @NotNull public Iterable<BasedSequence> getLines(int maxTrailingBlankLines, int startLine, int endLine)           {return appendable.getLines(maxTrailingBlankLines, startLine, endLine);}
-    @Override @NotNull public Iterable<LineInfo> getLinesInfo(int maxTrailingBlankLines, int startLine, int endLine)             {return appendable.getLinesInfo(maxTrailingBlankLines, startLine, endLine);}
+    @Override @NotNull public Iterable<BasedSequence> getLines(int maxTrailingBlankLines, int startLine, int endLine, boolean withPrefixes)           {return appendable.getLines(maxTrailingBlankLines, startLine, endLine, true);}
+    @Override @NotNull public Iterable<LineInfo> getLinesInfo(int maxTrailingBlankLines, int startLine, int endLine)            {return appendable.getLinesInfo(maxTrailingBlankLines, startLine, endLine);}
     @Override public void setPrefixLength(int lineIndex, int prefixEndIndex)                                                    { appendable.setPrefixLength(lineIndex, prefixEndIndex); }
+    @Override public void insertLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text)                   { appendable.insertLine(lineIndex, prefix, text); }
     @Override public void setLine(int lineIndex, @NotNull CharSequence prefix, @NotNull CharSequence text)                      { appendable.setLine(lineIndex, prefix, text); }
     @Override public <T extends Appendable> T appendTo(@NotNull T out, boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) throws IOException { return appendable.appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, startLine, endLine); }
+    @Override public boolean endsWithEOL()                                                                                      { return appendable.endsWithEOL();    }
     @Override public boolean isPendingSpace()                                                                                   { return appendable.isPendingSpace(); }
     @Override public boolean isPreFormatted()                                                                                   { return appendable.isPreFormatted(); }
+    @Override public int getTrailingBlankLines(int endLine)                                                                     { return appendable.getTrailingBlankLines(endLine); }
     @Override public int column()                                                                                               { return appendable.column(); }
     @Override public int getLineCount()                                                                                         { return appendable.getLineCount(); }
-    @Override public int size()                                                                                                 { return appendable.size(); }
+    @Override public int getLineCountWithPending()                                                                                                 { return appendable.getLineCountWithPending(); }
     @Override public int getOptions()                                                                                           { return appendable.getOptions(); }
     @Override public int getPendingSpace()                                                                                      { return appendable.getPendingSpace(); }
     @Override public int getPendingEOL()                                                                                        { return appendable.getPendingEOL(); }
@@ -438,8 +441,8 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     @NotNull @Override public LineInfo getLineInfo(int lineIndex)                                                               { return appendable.getLineInfo(lineIndex); }
     @Override public @NotNull  BasedSequence getLine(int lineIndex)                                                             { return appendable.getLine(lineIndex); }
     @NotNull @Override public BasedSequence getIndentPrefix()                                                                   { return appendable.getIndentPrefix(); }
-    @NotNull @Override public CharSequence toSequence(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines)       { return appendable.toSequence(withPrefixes, maxBlankLines, maxTrailingBlankLines); }
-    @NotNull @Override public String toString(boolean withPrefixes, int maxBlankLines, int maxTrailingBlankLines)               { return appendable.toString(withPrefixes, maxBlankLines, maxTrailingBlankLines); }
+    @NotNull @Override public CharSequence toSequence(int maxBlankLines, int maxTrailingBlankLines, boolean withPrefixes)       { return appendable.toSequence(maxBlankLines, maxTrailingBlankLines, withPrefixes  ); }
+    @NotNull @Override public String toString(int maxBlankLines, int maxTrailingBlankLines, boolean withPrefixes)               { return appendable.toString(maxBlankLines, maxTrailingBlankLines, withPrefixes  ); }
     @NotNull @Override public BitFieldSet<Options> getOptionSet()                                                               { return appendable.getOptionSet();}
     @NotNull @Override public T removeExtraBlankLines(int maxBlankLines, int maxTrailingBlankLines, int startLine, int endLine) { appendable.removeExtraBlankLines(maxBlankLines, maxTrailingBlankLines, startLine, endLine); return (T) this; }
     @NotNull @Override public T removeLines(int startLine, int endLine)                                                         { appendable.removeLines(startLine, endLine); return (T) this; }
@@ -452,7 +455,7 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     @NotNull @Override public T append(char c)                                                                                  { appendable.append(c); return (T)this; }
     @NotNull @Override public T append(@NotNull CharSequence csq)                                                               { appendable.append(csq); return (T)this; }
     @NotNull @Override public T append(@NotNull CharSequence csq, int start, int end)                                           { appendable.append(csq, start, end); return (T)this; }
-    @NotNull @Override public T append(@NotNull LineAppendable lines, int startLine, int endLine)                               { appendable.append(lines, startLine, endLine);  return (T)this; }
+    @NotNull @Override public T append(@NotNull LineAppendable lines, int startLine, int endLine, boolean withPrefixes)                               { appendable.append(lines, startLine, endLine, true);  return (T)this; }
     @NotNull @Override public T blankLine()                                                                                     { appendable.blankLine(); return (T)this; }
     @NotNull @Override public T blankLine(int count)                                                                            { appendable.blankLine(count); return (T)this; }
     @NotNull @Override public T blankLineIf(boolean predicate)                                                                  { appendable.blankLineIf(predicate); return (T)this; }

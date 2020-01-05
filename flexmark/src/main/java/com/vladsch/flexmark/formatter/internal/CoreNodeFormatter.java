@@ -350,7 +350,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.line();
 
                 if (formatterOptions.setextHeadingEqualizeMarker) {
-                    markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.getLineInfo(markdown.size() - 1).textLength, formatterOptions.minSetextMarkerLength));
+                    markdown.append(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.getLineInfo(markdown.getLineCountWithPending() - 1).textLength, formatterOptions.minSetextMarkerLength));
                 } else {
                     markdown.append(node.getClosingMarker());
                 }
@@ -362,7 +362,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             char closingMarker = node.getLevel() == 1 ? '=' : '-';
 
             if (formatterOptions.setextHeadingEqualizeMarker) {
-                markdown.append(closingMarker, Utils.minLimit(markdown.getLineInfo(markdown.size() - 1).textLength, formatterOptions.minSetextMarkerLength));
+                markdown.append(closingMarker, Utils.minLimit(markdown.getLineInfo(markdown.getLineCountWithPending() - 1).textLength, formatterOptions.minSetextMarkerLength));
             } else {
                 markdown.append(RepeatedSequence.repeatOf(closingMarker, formatterOptions.minSetextMarkerLength));
             }

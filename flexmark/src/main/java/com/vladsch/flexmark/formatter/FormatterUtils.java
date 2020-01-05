@@ -555,11 +555,11 @@ public class FormatterUtils {
             markdown.setPrefix(combinedPrefix, true);
         }
 
-        int lines = markdown.size();
+        int lines = markdown.getLineCountWithPending();
         context.renderChildren((Node) node);
         markdown.popPrefix();
 
-        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.size() && !FIRST_LIST_ITEM_CHILD.get(context.getDocument())))
+        if (formatterOptions.blockQuoteBlankLines && (lines < markdown.getLineCountWithPending() && !FIRST_LIST_ITEM_CHILD.get(context.getDocument())))
             markdown.tailBlankLine();
     }
 }

@@ -23,6 +23,7 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate BACKSLASH = value -> value == '\\';
     CharPredicate HASH = value -> value == '#';
     CharPredicate SPACE_TAB = value -> value == ' ' || value == '\t';
+    CharPredicate SPACE_TAB_OR_NUL = value -> value == ' ' || value == '\t' || value == '\0';
     CharPredicate SPACE_EOL = value -> value == ' ' || value == '\n';
     CharPredicate SPACE_TAB_NBSP = value -> value == ' ' || value == '\t' || value == '\u00A0';
     CharPredicate SPACE_TAB_EOL = value -> value == ' ' || value == '\t' || value == '\n';

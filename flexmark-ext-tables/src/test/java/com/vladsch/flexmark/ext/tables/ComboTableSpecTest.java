@@ -46,6 +46,11 @@ public class ComboTableSpecTest extends RendererSpecTest {
                         "Source Suffix\n" +
                         "")
         );
+        optionsMap.put("sub-parse2", new MutableDataSet()
+                .set(TestUtils.SOURCE_SUFFIX, "" +
+                        "\n" +
+                        "")
+        );
     }
     public ComboTableSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);
