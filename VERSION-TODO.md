@@ -9,7 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.100](#next-059100)
+- [0.59.100](#059100)
 - [0.59.98](#05998)
 - [0.59.96](#05996)
 - [0.59.94](#05994)
@@ -208,7 +208,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.100
+## 0.59.100
 
 * Fix: make all reference nodes `compareTo()` not case sensitive
 * Fix: change back to `jetbrains.annotations:15.0`
