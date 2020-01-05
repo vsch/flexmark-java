@@ -3972,7 +3972,7 @@ Document[14, 449]
 
 Table does not parse properly if no EOL at end of base sequence
 
-```````````````````````````````` example(Issue - xxx-1: 1) options(NO_FILE_EOL)
+```````````````````````````````` example(Issue - xxx-2: 1) options(NO_FILE_EOL)
 |name|display|title_en|title_de|
 |---|---|---|---|
 |none| |
@@ -4019,7 +4019,7 @@ Document[0, 59]
 
 Parse sub sequences
 
-```````````````````````````````` example(Issue - xxx-1: 2) options(strip-indent)
+```````````````````````````````` example(Issue - xxx-2: 2) options(strip-indent)
 > > | Left                                   |  Right | Center  |
 > > | Left                                   |  Right | Center  |
 > > |:---------------------------------------|-------:|:-------:|
@@ -4101,7 +4101,7 @@ Parse sub sequences
 
 Add prefix/suffix to text so document ast shifts by 14 chars
 
-```````````````````````````````` example(Issue - xxx-1: 3) options(sub-parse, strip-indent)
+```````````````````````````````` example(Issue - xxx-2: 3) options(sub-parse, strip-indent)
 > > | Left                                   |  Right | Center  |
 > > | Left                                   |  Right | Center  |
 > > |:---------------------------------------|-------:|:-------:|
