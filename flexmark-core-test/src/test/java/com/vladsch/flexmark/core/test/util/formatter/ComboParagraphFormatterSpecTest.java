@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.core.test.util.formatter;
 
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
@@ -16,7 +17,6 @@ import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -33,32 +33,17 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     private static final String SPEC_RESOURCE = "/core_paragraph_formatter_spec.md";
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    public static final DataKey<Integer> RIGHT_MARGIN = new DataKey<>("RIGHT_MARGIN", 0);
     public static final DataKey<String> FIRST_INDENT = new DataKey<>("FIRST_INDENT", "");
     public static final DataKey<String> INDENT = new DataKey<>("INDENT", "");
     public static final DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
-    public static final DataKey<Character> EDIT_OP_CHAR = new DataKey<>("EDIT_OP_CHAR", SequenceUtils.NUL);
-    public static final DataKey<Integer> EDIT_OP = new DataKey<>("EDIT_OP", 0);
-    public static final DataKey<Boolean> RESTORE_TRACKED_SPACES = new DataKey<>("RESTORE_END_SPACES", false);
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("margin", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, ComboParagraphFormatterSpecTest::rightMarginOption)));
         optionsMap.put("first-indent", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customStringOption(option, params, ComboParagraphFormatterSpecTest::firstIndentOption)));
         optionsMap.put("indent", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customStringOption(option, params, ComboParagraphFormatterSpecTest::indentOption)));
         optionsMap.put("first-width-delta", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, ComboParagraphFormatterSpecTest::firstWidthDeltaOption)));
-        optionsMap.put("insert-char", new MutableDataSet().set(EDIT_OP, 1).set(EDIT_OP_CHAR, '\0'));
-        optionsMap.put("insert-space", new MutableDataSet().set(EDIT_OP, 1).set(EDIT_OP_CHAR, ' '));
-        optionsMap.put("delete-char", new MutableDataSet().set(EDIT_OP, -1).set(EDIT_OP_CHAR, '\0'));
-        optionsMap.put("delete-space", new MutableDataSet().set(EDIT_OP, -1).set(EDIT_OP_CHAR, ' '));
-        optionsMap.put("restore-tracked-spaces", new MutableDataSet().set(RESTORE_TRACKED_SPACES, true));
     }
     public ComboParagraphFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap);
-    }
-
-    static DataHolder rightMarginOption(@Nullable Integer params) {
-        int value = params != null ? params : -1;
-        return new MutableDataSet().set(RIGHT_MARGIN, value);
     }
 
     static DataHolder firstIndentOption(@Nullable String params) {
@@ -133,8 +118,8 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             if (options.contains(INDENT)) formatter.setIndent(INDENT.get(options));
             if (options.contains(FIRST_INDENT)) formatter.setFirstIndent(FIRST_INDENT.get(options));
             if (options.contains(FIRST_WIDTH_DELTA)) formatter.setFirstWidthOffset(FIRST_WIDTH_DELTA.get(options));
-            if (options.contains(RIGHT_MARGIN)) formatter.setWidth(RIGHT_MARGIN.get(options));
-            if (options.contains(RESTORE_TRACKED_SPACES)) formatter.setRestoreTrackedSpaces(RESTORE_TRACKED_SPACES.get(options));
+            if (options.contains(Formatter.RIGHT_MARGIN)) formatter.setWidth(Formatter.RIGHT_MARGIN.get(options));
+            if (options.contains(Formatter.RESTORE_TRACKED_SPACES)) formatter.setRestoreTrackedSpaces(Formatter.RESTORE_TRACKED_SPACES.get(options));
             formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
             formatter.setKeepHardBreaks(true);
 

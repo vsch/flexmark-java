@@ -7,14 +7,14 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * A BasedSequence implementation which wraps original CharSequence to provide a BasedSequence for
- * all its sub sequences, a subSequence() returns a SubSequence from the original base sequence.
+ * all its subsequences, a subSequence() returns a SubSequence from the original base sequence.
  * <p>
  * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null chars.
  * <p>
  */
 public final class SubSequence extends BasedSequenceImpl {
     private final @NotNull CharSequence baseSeq;
-    private final SubSequence base;
+    private final @NotNull SubSequence base;
     private final int startOffset;
     private final int endOffset;
 
@@ -40,7 +40,7 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public <T> T getOption(DataKeyBase<T> dataKey) {
+    public <T> T getOption(@NotNull DataKeyBase<T> dataKey) {
         return baseSeq instanceof BasedOptionsHolder ? ((BasedOptionsHolder) baseSeq).getOption(dataKey) : dataKey.get(null);
     }
 
@@ -63,8 +63,8 @@ public final class SubSequence extends BasedSequenceImpl {
         return endOffset;
     }
 
-    private SubSequence(CharSequence charSequence) {
-        super(charSequence.hashCode());
+    private SubSequence(@NotNull CharSequence charSequence) {
+        super(charSequence instanceof String ? charSequence.hashCode() : 0);
         assert !(charSequence instanceof BasedSequence);
         base = this;
         baseSeq = charSequence;
@@ -72,7 +72,7 @@ public final class SubSequence extends BasedSequenceImpl {
         endOffset = charSequence.length();
     }
 
-    private SubSequence(SubSequence subSequence, int startIndex, int endIndex) {
+    private SubSequence(@NotNull SubSequence subSequence, int startIndex, int endIndex) {
         super(0);
 
         assert startIndex >= 0 && endIndex >= startIndex && endIndex <= subSequence.length() : String.format("SubSequence must have startIndex >= 0 && endIndex >= startIndex && endIndex <= %d, got startIndex:%d, endIndex: %d", subSequence.length(), startIndex, endIndex);
@@ -132,7 +132,7 @@ public final class SubSequence extends BasedSequenceImpl {
      * @deprecated use {@link BasedSequence#of(CharSequence)} instead
      */
     @Deprecated
-    public static BasedSequence of(CharSequence charSequence) {
+    public static BasedSequence of(@Nullable CharSequence charSequence) {
         return BasedSequence.of(charSequence);
     }
 
@@ -140,15 +140,15 @@ public final class SubSequence extends BasedSequenceImpl {
      * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
      */
     @Deprecated
-    public static BasedSequence of(CharSequence charSequence, int startIndex) {
-        return BasedSequence.of(charSequence).subSequence(startIndex, charSequence.length());
+    public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
+        return BasedSequence.of(charSequence).subSequence(startIndex, charSequence == null ? 0 : charSequence.length());
     }
 
     /**
      * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
      */
     @Deprecated
-    public static BasedSequence of(CharSequence charSequence, int startIndex, int endIndex) {
+    public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         return BasedSequence.of(charSequence).subSequence(startIndex, endIndex);
     }
 }

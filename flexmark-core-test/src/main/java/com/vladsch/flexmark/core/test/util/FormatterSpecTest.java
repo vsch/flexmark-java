@@ -27,22 +27,31 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
+
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
             ArrayList<TrackedOffset> trackedOffsets;
+            BasedSequence trackedSequence;
+            BasedSequence originalSequence;
 
             @Override
             public void parse(CharSequence input) {
-                Pair<BasedSequence, int[]> extractMarkup = TestUtils.extractMarkup(BasedSequence.of(input));
-                super.parse(extractMarkup.getFirst());
+                originalSequence = BasedSequence.of(input);
+                Pair<BasedSequence, int[]> extractMarkup = TestUtils.extractMarkup(originalSequence);
+                trackedSequence = extractMarkup.getFirst();
+                super.parse(trackedSequence.toString());
 
                 if (extractMarkup.getSecond().length > 0) {
                     trackedOffsets = new ArrayList<>(extractMarkup.getSecond().length);
+                    char c = EDIT_OP_CHAR.get(myOptions);
+                    int editOp = EDIT_OP.get(myOptions);
 
                     for (int offset : extractMarkup.getSecond()) {
-                        trackedOffsets.add(TrackedOffset.track(offset));
+                        trackedOffsets.add(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0));
                     }
 
+                    Formatter.TRACKED_SEQUENCE.set(getDocument().getDocument(), trackedSequence);
                     Formatter.TRACKED_OFFSETS.set(getDocument().getDocument(), trackedOffsets);
+                    Formatter.RESTORE_TRACKED_SPACES.set(getDocument().getDocument(), Formatter.RESTORE_TRACKED_SPACES.get(myOptions));
                 }
             }
 
@@ -51,7 +60,8 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                 if (trackedOffsets == null && !SHOW_LINE_RANGES.get(myOptions)) {
                     return getRenderer().render(getDocument());
                 } else {
-                    SequenceBuilder builder = getDocument().getDocument().getChars().getBuilder();
+//                    SequenceBuilder builder = trackedSequence.getBuilder();
+                    SequenceBuilder builder = getDocument().getChars().getBuilder();
                     getRenderer().render(getDocument(), builder);
                     String html = builder.toString();
 

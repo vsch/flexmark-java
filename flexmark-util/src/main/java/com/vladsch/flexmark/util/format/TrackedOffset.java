@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Tracked Offset information
- *
+ * <p>
  * NOTE: purposefully equals compares the offset only and will equal an integer of the same value
  * to allow use of TrackedOffset as a key but lookup to be done by offset
  */
@@ -21,11 +21,13 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
     final private static int F_AFTER_INSERT = BitFieldSet.intMask(Flags.AFTER_INSERT);
     final private static int F_AFTER_DELETE = BitFieldSet.intMask(Flags.AFTER_DELETE);
 
+    final private @Nullable TrackedOffset original;
     final private int offset;
     final private int flags;
     private int index;
 
     private TrackedOffset(int offset, boolean afterSpaceEdit, boolean afterInsert, boolean afterDelete) {
+        this.original = null;
         this.offset = offset;
         int flags = 0;
         if (afterSpaceEdit) flags |= F_AFTER_SPACE_EDIT;
@@ -36,12 +38,14 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
     }
 
     private TrackedOffset(@NotNull TrackedOffset other) {
+        this.original = other.original;
         this.offset = other.offset;
         this.flags = other.flags;
         this.index = -1;
     }
 
     private TrackedOffset(@NotNull TrackedOffset other, int offset) {
+        this.original = other;
         this.offset = offset;
         this.flags = other.flags;
         this.index = -1;
@@ -60,6 +64,7 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
     }
 
     public void setIndex(int index) {
+        if (this.original != null) this.original.index = index;
         this.index = index;
     }
 
@@ -78,6 +83,11 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
     @NotNull
     public TrackedOffset plusOffsetDelta(int delta) {
         return new TrackedOffset(this, offset + delta);
+    }
+
+    @NotNull
+    public TrackedOffset withOffset(int offset) {
+        return new TrackedOffset(this, offset);
     }
 
     @Override
@@ -103,7 +113,6 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
         }
 
         TrackedOffset offset = (TrackedOffset) o;
-
         return this.offset == offset.offset;
     }
 

@@ -353,8 +353,9 @@ public class LineAppendableImpl implements LineAppendable {
         resetBuilder();
     }
 
-    private void appendEol() {
-        appendable.append(EOL);
+    private void appendEol(@NotNull CharSequence eol) {
+        appendable.append(eol);
+
         int endOffset = appendable.length();
         addLineRange(0, endOffset - 1, prefix);
         eolOnFirstText = 0;
@@ -374,7 +375,7 @@ public class LineAppendableImpl implements LineAppendable {
 
     private void appendEol(int count) {
         while (count-- > 0) {
-            appendEol();
+            appendEol(BasedSequence.EOL);
         }
     }
 
@@ -453,7 +454,7 @@ public class LineAppendableImpl implements LineAppendable {
     private void doEolOnFirstTest() {
         if (eolOnFirstText > 0) {
             eolOnFirstText = 0;
-            appendEol();
+            appendEol(BasedSequence.EOL);
         }
     }
 
@@ -462,11 +463,11 @@ public class LineAppendableImpl implements LineAppendable {
 
         if (passThrough) {
             if (c == EOL) {
-                appendEol();
+                appendEol(BasedSequence.EOL);
             } else {
                 if (eolOnFirstText > 0) {
                     eolOnFirstText = 0;
-                    appendEol();
+                    appendEol(BasedSequence.EOL);
                 }
 
                 if (c != '\t' && c != ' ') allWhitespace = false;
@@ -517,7 +518,7 @@ public class LineAppendableImpl implements LineAppendable {
                                 }
                             }
                         } else {
-                            appendable.append(' ');
+                            appendable.append(s.subSequence(index, index + 1));
                         }
                         lastWasWhitespace = true;
                     } else {
@@ -542,6 +543,8 @@ public class LineAppendableImpl implements LineAppendable {
     public LineAppendable append(@NotNull CharSequence csq) {
         if (csq.length() > 0) {
             appendImpl(csq, 0, csq.length());
+        } else {
+            appendable.append(csq);
         }
         return this;
     }
@@ -621,7 +624,7 @@ public class LineAppendableImpl implements LineAppendable {
     @Override
     public LineAppendable blankLine() {
         line();
-        if (!lines.isEmpty() && !isTrailingBlankLine() || lines.isEmpty() && any(F_ALLOW_LEADING_EOL)) appendEol();
+        if (!lines.isEmpty() && !isTrailingBlankLine() || lines.isEmpty() && any(F_ALLOW_LEADING_EOL)) appendEol(BasedSequence.EOL);
         return this;
     }
 

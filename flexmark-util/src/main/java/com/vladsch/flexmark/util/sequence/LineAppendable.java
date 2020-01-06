@@ -593,7 +593,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @return true if have no terminated lines
      */
     default boolean isEmpty() {
-        return getLineCount() == 0;
+        return getLineCountWithPending() == 0;
     }
 
     /**
@@ -602,7 +602,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @return true if have terminated lines
      */
     default boolean isNotEmpty() {
-        return getLineCount() != 0;
+        return getLineCountWithPending() != 0;
     }
 
     /**

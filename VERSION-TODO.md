@@ -9,6 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.102](#next-059102)
 - [0.59.100](#059100)
 - [0.59.98](#05998)
 - [0.59.96](#05996)
@@ -207,6 +208,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.102
+
+* Fix: `LineAppendable.isEmpty()` return true only if no lines or pending lines
+* Fix: `SubSequence` constructor to only use the base `CharSequence` hash code if it is `String`
+* Add: `Formatter.TRACKED_SEQUENCE` option to allow formatting of document based on
+  `SegmentedSequence` which cannot be used for parsing without converting to contiguous
+  sequence. Used to construct offset tracker used for index conversion.
+  * Fix: `Formatter` paragraph wrapping to use trackedSequence.
+  * Fix: tracked offset resolution to use trackedSequence.
 
 ## 0.59.100
 

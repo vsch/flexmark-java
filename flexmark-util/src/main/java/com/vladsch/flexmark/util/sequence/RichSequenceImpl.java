@@ -16,7 +16,6 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
 
     private RichSequenceImpl(CharSequence charSequence) {
         super(charSequence instanceof String ? charSequence.hashCode() : 0);
-
         this.charSequence = charSequence;
     }
 

@@ -30,7 +30,12 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     /**
      * Constructor with pre-computed hash if available, 0 for lazy computation if length() not 0
      *
-     * @param hash hash code for the char sequence
+     * NOTE: the hash code computed for this class is equivalent to the string hash of the same characters
+     * to ensure that equals can use the hash code for quick failure. CharSequence hash code is not specified
+     * therefore when in doubt about how it is computed then 0 should be passed to this constructor to compute
+     * one that is equal to the string content.
+     *
+     * @param hash hash code for the char sequence.
      */
     public IRichSequenceBase(int hash) {
         this.hash = hash;
@@ -63,9 +68,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     final public int hashCode() {
         int h = hash;
         if (h == 0 && length() > 0) {
-            for (int i = 0; i < length(); i++) {
-                h = 31 * h + charAt(i);
-            }
+            h = SequenceUtils.hashCode(this);
             hash = h;
         }
         return h;

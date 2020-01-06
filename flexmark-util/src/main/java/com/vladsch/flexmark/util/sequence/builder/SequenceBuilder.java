@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedSequence> {
     private final BasedSegmentBuilder segments;
     private final @NotNull BasedSequence baseSeq;
+    private final @NotNull BasedSequence altBase;   // sequence used for creating the builder, needed for validation for alt sequence creation
     private @Nullable BasedSequence resultSeq;
 
     /**
@@ -26,6 +27,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      * @param optimizer optimizer for based segment builder, or default {@link CharRecoveryOptimizer}
      */
     private SequenceBuilder(@NotNull BasedSequence base, @Nullable SegmentOptimizer optimizer) {
+        altBase = base;
         baseSeq = base.getBaseSequence();
         int options = PlainSegmentBuilder.F_DEFAULT;
         // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
@@ -47,6 +49,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      * @param optimizer optimizer for based segment builder, or default {@link CharRecoveryOptimizer}
      */
     private SequenceBuilder(@NotNull BasedSequence base, int options, @Nullable SegmentOptimizer optimizer) {
+        altBase = base;
         baseSeq = base.getBaseSequence();
         // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
         if (!baseSeq.anyOptions(BasedSequence.F_FULL_SEGMENTED_SEQUENCES) || baseSeq.anyOptions(BasedSequence.F_COLLECT_FIRST256_STATS)) options |= PlainSegmentBuilder.F_TRACK_FIRST256;
@@ -80,7 +83,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     @NotNull
     @Override
     public SequenceBuilder getBuilder() {
-        return new SequenceBuilder(baseSeq, segments.options, segments.optimizer);
+        return new SequenceBuilder(altBase, segments.options, segments.optimizer);
     }
 
     @Override
@@ -166,6 +169,91 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
             resultSeq = SegmentedSequence.create(this);
         }
         return resultSeq;
+    }
+
+    /**
+     * Construct sequence from this builder using another based sequence which is character identical to this builder's baseSeq
+     *
+     * @param altSequence based sequence which is character identical to this builder's baseSeq
+     * @return builder with offsets mapped to altSequence
+     */
+    @NotNull
+    public BasedSequence toSequence(@NotNull BasedSequence altSequence) {
+        if (altSequence == altBase) {
+            return toSequence();
+        }
+
+//        if (!altSequence.equals(baseSeq)) {
+//           int tmp = 0;
+//        }
+        assert altSequence.equals(altBase) : String.format("altSequence must be character identical to builder.altBase\n" +
+                "altBase: '%s'\n" +
+                " altSeq: '%s'\n" +
+                "", altBase.toVisibleWhitespaceString(), altSequence.toVisibleWhitespaceString());
+
+        // this is an identical but different base sequence, need to map to it. Ranges are indices into altSequence and must be converted to offsets.
+        SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer);
+
+        for (Object part : segments) {
+            if (part instanceof Range) {
+                BasedSequence s = altSequence.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
+                altBuilder.append(s);
+            } else if (part instanceof CharSequence) {
+                altBuilder.append((CharSequence) part);
+            } else if (part != null) {
+                throw new IllegalStateException("Invalid part type " + part.getClass());
+            }
+        }
+
+//        altBuilder.append(altSequence.getEmptySuffix());
+
+        BasedSequence sequence = SegmentedSequence.create(altBuilder);
+        assert sequence.equals(toSequence());
+        return sequence;
+    }
+
+    /**
+     * Construct sequence from this builder using another based sequence which is character identical to this builder's baseSeq
+     * but is contiguous as opposed to this builders base sequence.
+     *
+     * @param altSequence based sequence which is character identical to this builder's baseSeq but its base sequence is contiguous,
+     *                    so index of segment should be used in conversion
+     * @return builder with offsets mapped to altSequence
+     */
+    @NotNull
+    public BasedSequence fromSequence(@NotNull BasedSequence altSequence) {
+        if (altSequence == altBase) {
+            return toSequence();
+        }
+
+//        if (!altSequence.equals(baseSeq)) {
+//           int tmp = 0;
+//        }
+        assert altSequence.equals(altBase) : String.format("altSequence must be character identical to builder.altBase\n" +
+                "altBase: '%s'\n" +
+                " altSeq: '%s'\n" +
+                "", altBase.toVisibleWhitespaceString(), altSequence.toVisibleWhitespaceString());
+
+        // this is an identical but different base sequence, need to map to it. Ranges are indices into altSequence and must be converted to offsets.
+        SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer);
+        int length = 0;
+        for (Object part : segments) {
+            if (part instanceof Range) {
+                int span = ((Range) part).getSpan();
+                BasedSequence s = altSequence.subSequence(length, length + span);
+                altBuilder.append(s);
+                length += span;
+            } else if (part instanceof CharSequence) {
+                altBuilder.append((CharSequence) part);
+                length += ((CharSequence) part).length();
+            } else if (part != null) {
+                throw new IllegalStateException("Invalid part type " + part.getClass());
+            }
+        }
+
+        BasedSequence sequence = SegmentedSequence.create(altBuilder);
+        assert sequence.equals(toSequence());
+        return sequence;
     }
 
     @Override

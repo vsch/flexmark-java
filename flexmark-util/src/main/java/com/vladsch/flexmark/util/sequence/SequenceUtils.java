@@ -325,6 +325,18 @@ public interface SequenceUtils {
         return matchChars(thizz, chars, 0, false);
     }
 
+    @Contract(pure = true)
+    static public int hashCode(@NotNull CharSequence thizz) {
+        int h = 0;
+        int length = thizz.length();
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                h = 31 * h + thizz.charAt(i);
+            }
+        }
+        return h;
+    }
+
     static int compareReversed(@Nullable CharSequence o1, @Nullable CharSequence o2) {
         return compare(o2, o1);
     }

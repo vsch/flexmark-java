@@ -11,6 +11,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.*;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,6 +22,8 @@ import java.util.regex.Pattern;
 public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase {
     final static boolean SKIP_IGNORED_TESTS = true;
     final public static DataKey<Boolean> SHOW_LINE_RANGES = new DataKey<>("SHOW_LINE_RANGES", false);
+    public static final DataKey<Character> EDIT_OP_CHAR = new DataKey<>("EDIT_OP_CHAR", SequenceUtils.NUL);
+    public static final DataKey<Integer> EDIT_OP = new DataKey<>("EDIT_OP", 0);
 
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.BLANK_LINES_IN_AST, true)
@@ -31,6 +34,13 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
     static {
         optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
         optionsMap.put("show-ranges", new MutableDataSet().set(SHOW_LINE_RANGES, true));
+
+        optionsMap.put("insert-char", new MutableDataSet().set(EDIT_OP, 1).set(EDIT_OP_CHAR, '\0'));
+        optionsMap.put("insert-space", new MutableDataSet().set(EDIT_OP, 1).set(EDIT_OP_CHAR, ' '));
+        optionsMap.put("delete-char", new MutableDataSet().set(EDIT_OP, -1).set(EDIT_OP_CHAR, '\0'));
+        optionsMap.put("delete-space", new MutableDataSet().set(EDIT_OP, -1).set(EDIT_OP_CHAR, ' '));
+        optionsMap.put("restore-tracked-spaces", new MutableDataSet().set(Formatter.RESTORE_TRACKED_SPACES, true));
+
         optionsMap.put("format-fixed-indent", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("parse-fixed-indent", new MutableDataSet().set(Parser.PARSER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
         optionsMap.put("format-github", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.GITHUB_DOC));

@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_LEADING_WHITESPACE;
+import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_TRAILING_WHITESPACE;
 
 public class FormatterUtils {
 
@@ -456,23 +457,46 @@ public class FormatterUtils {
             FormatterOptions formatterOptions = context.getFormatterOptions();
             if (formatterOptions.rightMargin > 0) {
                 MutableDataHolder subContextOptions = context.getOptions().toMutable().set(Formatter.KEEP_SOFT_LINE_BREAKS, true).set(Formatter.KEEP_HARD_LINE_BREAKS, true);
-                SequenceBuilder builder = node.getChars().getBuilder();
+                SequenceBuilder builder = context.getDocument().getChars().getBuilder();
                 NodeFormatterContext subContext = context.getSubContext(subContextOptions, builder.getBuilder());
+                MarkdownWriter subContextMarkdown = subContext.getMarkdown();
+                subContextMarkdown.removeOptions(F_TRIM_TRAILING_WHITESPACE);
                 subContext.renderChildren(node);
 
-                MarkdownWriter subContextMarkdown = subContext.getMarkdown();
-                subContextMarkdown.appendToSilently(builder, 0, 0);
-
-                MarkdownParagraph formatter = new MarkdownParagraph(builder.toSequence(), formatterOptions.charWidthProvider);
-                TrackedOffsetList trackedOffsets = context.getTrackedOffsets();
-
                 BasedSequence nodeLessEol = node.getChars().trimEOL();
-                TrackedOffsetList paragraphTrackedOffsets = trackedOffsets.getTrackedOffsets(nodeLessEol.getStartOffset(), nodeLessEol.getEndOffset());
+                BasedSequence trailingSpaces = node.getChars().trimmedEnd();
+                if (trailingSpaces.isNotEmpty() && !subContextMarkdown.endsWithEOL()) {
+                    // add these so our tracked offsets at end of paragraph after whitespaces are not outside the sequence
+                    subContextMarkdown.append(trailingSpaces);
+                }
+                subContextMarkdown.line();
+                subContextMarkdown.appendToSilently(builder, 0, -1);
 
+                BasedSequence paragraphChars = builder.toSequence();
+                BasedSequence altParagraphChars = builder.toSequence(context.getTrackedSequence());
+                boolean haveAltSequence = paragraphChars != altParagraphChars;
+                int startOffset;
+                int endOffset;
+
+                TrackedOffsetList trackedOffsets = context.getTrackedOffsets();
+                if (haveAltSequence) {
+                    // NOTE: this is only needed to find offset in trackedOffsets for the paragraph
+                    BasedSequence charsLessEol = altParagraphChars.trimEnd();
+                    startOffset = charsLessEol.getStartOffset();
+                    int endOffsetDelta = nodeLessEol.countTrailingWhitespace() - charsLessEol.countTrailingWhitespace();
+                    endOffset = charsLessEol.getEndOffset() + endOffsetDelta;
+                } else {
+                    startOffset = nodeLessEol.getStartOffset();
+                    endOffset = nodeLessEol.getEndOffset();
+                }
+
+                TrackedOffsetList paragraphTrackedOffsets = trackedOffsets.getTrackedOffsets(startOffset, endOffset);
+
+                MarkdownParagraph formatter = new MarkdownParagraph(paragraphChars, altParagraphChars, formatterOptions.charWidthProvider);
                 formatter.setWidth(formatterOptions.rightMargin - markdown.getPrefix().length());
                 formatter.setKeepSoftBreaks(false);
                 formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
-                formatter.setRestoreTrackedSpaces(false);
+                formatter.setRestoreTrackedSpaces(context.isRestoreTrackedSpaces());
                 formatter.setFirstIndent("");
                 formatter.setIndent("");
 
@@ -484,7 +508,6 @@ public class FormatterUtils {
                 }
 
                 for (TrackedOffset trackedOffset : paragraphTrackedOffsets) {
-                    assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
                     formatter.addTrackedOffset(trackedOffset);
                 }
 

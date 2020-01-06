@@ -12,6 +12,8 @@ import java.util.Map;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
 
 public class Document extends Block implements MutableDataHolder {
+    public static final Document NULL = new Document(null, BasedSequence.NULL);
+
     private final MutableDataSet dataSet;
 
     @Override

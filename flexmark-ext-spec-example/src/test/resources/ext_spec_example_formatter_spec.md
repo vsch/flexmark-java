@@ -547,6 +547,40 @@ Markdown only
 
 ```````````````````````````````` example Tracked Offset: 2
 ---
+title: Intentions Spec
+author:
+version:
+date: '2019-10-14'
+license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
+...
+
+## Section    
+    
+```````````````` example options⦙ test
+Markdown only
+````````````````
+.
+---
+title: Intentions Spec
+author:
+version:
+date: '2019-10-14'
+license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
+...
+
+## Section
+
+```````````````` example(Section: 1) options⦙(test)
+Markdown only
+…
+````````````````
+
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tracked Offset: 3
+---
 title⦙: Intentions Spec
 author:
 version:
@@ -579,7 +613,7 @@ Markdown⦙ only
 ````````````````````````````````
 
 
-```````````````````````````````` example Tracked Offset: 3
+```````````````````````````````` example Tracked Offset: 4
 ---
 title⦙: Intentions Spec
 author:
@@ -614,7 +648,7 @@ Markdown⦙ only
 ````````````````````````````````
 
 
-```````````````````````````````` example Tracked Offset: 4
+```````````````````````````````` example Tracked Offset: 5
 ---
 title⦙: Intentions Spec
 author:

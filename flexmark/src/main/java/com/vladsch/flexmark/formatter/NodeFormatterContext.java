@@ -81,6 +81,19 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      */
     @NotNull TrackedOffsetList getTrackedOffsets();
 
+    boolean isRestoreTrackedSpaces();
+
+    /**
+     * NOTE: parser can only use a contiguous sequence, not segmented. Therefore, the AST offsets and base sequence
+     *    from AST nodes has always an index into sequence equal to the offset. This sequence is set to not {@link BasedSequence#NULL}
+     *    when the format sequence used for tracked offsets is not contiguous and TrackedOffset.offset is an offset
+     *    from this sequence and need to be converted to index into this sequence to be used as an offset into AST sequence
+     *    for offset conversion
+     * @return original sequence used for tracked offsets.
+     */
+    @NotNull
+    BasedSequence getTrackedSequence();
+
     /**
      * Get iterable of nodes of given types, in order of their appearance in the document tree, depth first traversal.
      * Only node classes returned by {@link NodeFormatter#getNodeClasses()} of all loaded extensions

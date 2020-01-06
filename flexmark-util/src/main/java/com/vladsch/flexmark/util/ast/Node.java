@@ -17,6 +17,7 @@ import java.util.Arrays;
 public abstract class Node {
     public static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
     public static final String SPLICE = " … ";
+
     public static final AstNode<Node> AST_ADAPTER = new AstNode<Node>() {
         @Override
         public @Nullable Node getFirstChild(@NotNull Node node) {
@@ -494,13 +495,16 @@ public abstract class Node {
         }
     }
 
-    protected @NotNull String toStringAttributes() {
+    @NotNull
+    protected String toStringAttributes() {
         return "";
     }
 
-    public abstract @NotNull BasedSequence[] getSegments();
+    @NotNull
+    public abstract BasedSequence[] getSegments();
 
-    public static @NotNull BasedSequence getLeadSegment(@NotNull BasedSequence[] segments) {
+    @NotNull
+    public static BasedSequence getLeadSegment(@NotNull BasedSequence[] segments) {
         for (BasedSequence segment : segments) {
             if (segment != BasedSequence.NULL) return segment;
         }
@@ -508,7 +512,8 @@ public abstract class Node {
         return BasedSequence.NULL;
     }
 
-    public static @NotNull BasedSequence getTrailSegment(@NotNull BasedSequence[] segments) {
+    @NotNull
+    public static BasedSequence getTrailSegment(@NotNull BasedSequence[] segments) {
         int iMax = segments.length;
 
         for (int i = iMax; i-- > 0; ) {
@@ -519,7 +524,8 @@ public abstract class Node {
         return BasedSequence.NULL;
     }
 
-    public static @NotNull BasedSequence spanningChars(@NotNull BasedSequence... segments) {
+    @NotNull
+    public static BasedSequence spanningChars(@NotNull BasedSequence... segments) {
         int startOffset = Integer.MAX_VALUE;
         int endOffset = -1;
         BasedSequence firstSequence = null;

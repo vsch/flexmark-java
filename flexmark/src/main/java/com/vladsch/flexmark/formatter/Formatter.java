@@ -23,6 +23,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -123,8 +124,18 @@ public class Formatter implements IRender {
     // formatter family override
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DataKey<>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
 
+    // CAUTION: these keys must be set on the Document node being formatted NOT the formatter
+    //  because a formatter instance can be used to format multiple documents while these are document specific.
+    // {{
     // these are used by table and paragraph wrapping
     public static final DataKey<List<TrackedOffset>> TRACKED_OFFSETS = new DataKey<>("TRACKED_OFFSETS", Collections.emptyList());
+
+    // original sequence to use for tracked offset resolution since parser takes a contiguous sequence this is the equivalent sequence
+    public static final DataKey<BasedSequence> TRACKED_SEQUENCE = new DataKey<>("TRACKED_SEQUENCE", BasedSequence.NULL);
+
+    // used during paragraph wrapping to determine whether spaces are re-inserted if offsets are edit op flagged
+    public static final DataKey<Boolean> RESTORE_TRACKED_SPACES = new DataKey<>("RESTORE_END_SPACES", false);
+    // }}
 
     /**
      * use corrected name
@@ -258,7 +269,6 @@ public class Formatter implements IRender {
      * Create a new builder for configuring an {@link Formatter}.
      *
      * @param options initialization options
-     *
      * @return a builder.
      */
     public static Builder builder(DataHolder options) {
@@ -294,14 +304,19 @@ public class Formatter implements IRender {
         markdown.appendToSilently(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
 
         // resolve any unresolved tracked offsets that are outside elements which resolve their own
-        TrackedOffsetUtils.resolveTrackedOffsets(node.getChars(), markdown, renderer.getTrackedOffsets().getUnresolvedOffsets(), maxTrailingBlankLines);
+        BasedSequence sequence = node.getDocument().getChars();
+        if (output instanceof SequenceBuilder && node.getDocument().getChars() != renderer.trackedSequence) {
+            // have to alternate builder sequence mapping
+            sequence = ((SequenceBuilder) output).toSequence(renderer.trackedSequence);
+        }
+
+        TrackedOffsetUtils.resolveTrackedOffsets(sequence, markdown, renderer.trackedOffsets.getUnresolvedOffsets(), maxTrailingBlankLines);
     }
 
     /**
      * Render the tree of nodes to markdown
      *
      * @param document the root node
-     *
      * @return the formatted markdown
      */
     @NotNull
@@ -325,7 +340,6 @@ public class Formatter implements IRender {
      * Render the tree of nodes to markdown
      *
      * @param document the root node
-     *
      * @return the formatted markdown
      */
     public String translationRender(Node document, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
@@ -365,7 +379,6 @@ public class Formatter implements IRender {
      * Render the tree of nodes to markdown
      *
      * @param documents the root node
-     *
      * @return the formatted markdown
      */
     public String mergeRender(Document[] documents, int maxTrailingBlankLines) {
@@ -506,7 +519,6 @@ public class Formatter implements IRender {
          * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
          *
          * @param nodeFormatterFactory the factory for creating a node renderer
-         *
          * @return {@code this}
          */
         @SuppressWarnings("UnusedReturnValue")
@@ -519,7 +531,6 @@ public class Formatter implements IRender {
          * Add a factory for generating the header id attribute from the header's text
          *
          * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
-         *
          * @return {@code this}
          */
         @NotNull
@@ -548,7 +559,7 @@ public class Formatter implements IRender {
         void extend(Builder formatterBuilder);
     }
 
-    final private static Iterator<? extends Node> NULL_ITERATOR = new Iterator<Node>() {
+    final private static Iterator<Node> NULL_ITERATOR = new Iterator<Node>() {
         @Override
         public boolean hasNext() {
             return false;
@@ -564,7 +575,7 @@ public class Formatter implements IRender {
         }
     };
 
-    final public static Iterable<? extends Node> NULL_ITERABLE = (Iterable<Node>) () -> null;
+    final public static Iterable<Node> NULL_ITERABLE = () -> NULL_ITERATOR;
 
     private class MainNodeFormatter extends NodeFormatterSubContext {
         final private Document document;
@@ -585,6 +596,8 @@ public class Formatter implements IRender {
         final private CharPredicate blockQuoteLikePredicate;
         final private BasedSequence blockQuoteLikeChars;
         final TrackedOffsetList trackedOffsets;
+        final BasedSequence trackedSequence;
+        final boolean restoreTrackedSpaces;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
@@ -627,7 +640,7 @@ public class Formatter implements IRender {
 
                 char blockLikePrefixChar = nodeFormatter.getBlockQuoteLikePrefixChar();
                 if (blockLikePrefixChar != SequenceUtils.NUL) {
-                    blockLikePrefixChars.append(Character.toString(blockLikePrefixChar));
+                    blockLikePrefixChars.append(blockLikePrefixChar);
                 }
 
                 Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
@@ -658,8 +671,13 @@ public class Formatter implements IRender {
                 }
             }
 
+            restoreTrackedSpaces = RESTORE_TRACKED_SPACES.get(document);
+            BasedSequence sequence = TRACKED_SEQUENCE.get(document);
             List<TrackedOffset> offsets = TRACKED_OFFSETS.get(document);
-            trackedOffsets = offsets.isEmpty() ? TrackedOffsetList.EMPTY_LIST : TrackedOffsetList.create(document.getChars(), offsets);
+            trackedSequence = sequence.isEmpty() ? document.getChars() : sequence;
+            trackedOffsets = offsets.isEmpty() ? TrackedOffsetList.EMPTY_LIST : TrackedOffsetList.create(trackedSequence, offsets);
+
+            assert trackedSequence.equals(document.getChars()) : "Tracked sequence must be character identical to document.getChars()";
 
             String charSequence = blockLikePrefixChars.toString();
             this.blockQuoteLikeChars = BasedSequence.of(charSequence);
@@ -693,7 +711,7 @@ public class Formatter implements IRender {
         @NotNull
         @Override
         public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
-            return resolveLink(this, linkType, url, (Attributes) null, urlEncode);
+            return resolveLink(this, linkType, url, null, urlEncode);
         }
 
         @NotNull
@@ -873,6 +891,16 @@ public class Formatter implements IRender {
         @Override
         public @NotNull TrackedOffsetList getTrackedOffsets() {
             return trackedOffsets;
+        }
+
+        @Override
+        public boolean isRestoreTrackedSpaces() {
+            return restoreTrackedSpaces;
+        }
+
+        @Override
+        public @NotNull BasedSequence getTrackedSequence() {
+            return trackedSequence;
         }
 
         @NotNull
@@ -1127,9 +1155,24 @@ public class Formatter implements IRender {
             @NotNull
             public BasedSequence getBlockQuoteLikePrefixChars() {return myMainNodeRenderer.getBlockQuoteLikePrefixChars();}
 
+            /**
+             * Sub-context does not have offset tracking
+             *
+             * @return empty lise
+             */
             @Override
             public @NotNull TrackedOffsetList getTrackedOffsets() {
                 return TrackedOffsetList.EMPTY_LIST;
+            }
+
+            @Override
+            public boolean isRestoreTrackedSpaces() {
+                return false;
+            }
+
+            @Override
+            public @NotNull BasedSequence getTrackedSequence() {
+                return myMainNodeRenderer.getTrackedSequence();
             }
 
             @NotNull
@@ -1237,7 +1280,7 @@ public class Formatter implements IRender {
             @NotNull
             @Override
             public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
-                return myMainNodeRenderer.resolveLink(this, linkType, url, (Attributes) null, urlEncode);
+                return myMainNodeRenderer.resolveLink(this, linkType, url, null, urlEncode);
             }
 
             @NotNull
