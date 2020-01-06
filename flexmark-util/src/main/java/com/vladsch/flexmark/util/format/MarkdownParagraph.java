@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
+import com.vladsch.flexmark.util.sequence.builder.tree.Segment;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -131,17 +132,46 @@ public class MarkdownParagraph {
                 OffsetInfo baseInfo = baseSeqTracker.getOffsetInfo(trackedOffset.getOffset() - startDelta, startDelta == 0);
 
                 int baseIndex = baseInfo.endIndex;
-                int baseIndexSpaces = baseSeq.countTrailing(CharPredicate.SPACE_TAB_EOL, baseIndex);
-                int baseIndexSpacesAfter = baseSeq.countLeading(CharPredicate.SPACE, baseIndex);
-                boolean needSpace = baseSeq.countTrailing(CharPredicate.SPACE_TAB_EOL, baseIndex) > 0;
+                final int indexSpacesBefore = baseSeq.countTrailing(CharPredicate.SPACE_TAB_EOL, baseIndex);
+                final int indexSpacesAfter = baseSeq.countLeading(CharPredicate.SPACE, baseIndex);
+                int baseIndexSpaces = indexSpacesBefore;
+                int baseIndexSpacesAfter = indexSpacesAfter;
+                boolean needSpace = baseIndexSpaces > 0;
 
                 int endLine = baseSeq.endOfLine(baseIndex);
                 int startLine = baseSeq.startOfLine(baseIndex);
                 int firstNonBlank = baseSeq.indexOfAnyNot(CharPredicate.SPACE, startLine, endLine);
 
                 // NOTE: if have alternate base sequence then mapping is done using the computed baseSeq offset
-                OffsetInfo info = haveAltBaseSeq ? tracker.getOffsetInfo(baseIndex + startDelta, startDelta == 0) : tracker.getOffsetInfo(trackedOffset.getOffset(), true);
+                OffsetInfo info = haveAltBaseSeq ? tracker.getOffsetInfo(baseIndex, startDelta == 0) : tracker.getOffsetInfo(trackedOffset.getOffset(), true);
                 int index = info.endIndex;
+
+                if (info.pos >= 0 && info.pos < tracker.size() && isAfterSpaceInsert) {
+                    Segment segment = tracker.getSegmentOffsetTree().getSegment(info.pos, tracker.getSequence());
+                    if (segment.getStartOffset() == baseIndex) {
+                        // at start of segment after space need to move it after prev segment
+                        info = tracker.getOffsetInfo(baseIndex - baseIndexSpaces, false);
+                        index = info.endIndex;
+                    } else if (wrapped.isCharAt(index + 1, CharPredicate.EOL)) {
+                        // EOL inserted in between, move it to next char
+                        info = tracker.getOffsetInfo(baseIndex + 1, false);
+                        index = info.endIndex;
+                    }
+
+//                    System.out.println(String.format("startDelta: %d, spacesBefore: %d, spacesAfter: %d, prevCharAt: %d, charAt: %d, nextCharAt: %d, prevBaseAt: %d, baseAt: %d, nextBaseAt: %d, baseIndex: %d, info: %s, segment: %s",
+//                            startDelta,
+//                            baseIndexSpaces,
+//                            baseIndexSpacesAfter,
+//                            (int) wrapped.safeCharAt(index - 1),
+//                            (int) wrapped.safeCharAt(index),
+//                            (int) wrapped.safeCharAt(index + 1),
+//                            (int) baseSeq.safeCharAt(baseIndex - 1),
+//                            (int) baseSeq.safeCharAt(baseIndex),
+//                            (int) baseSeq.safeCharAt(baseIndex + 1),
+//                            baseIndex,
+//                            info.toString(),
+//                            segment.toString()));
+                }
 
                 int endLineWrapped = wrapped.endOfLine(index);
                 int startLineWrapped = wrapped.startOfLine(index);
@@ -172,8 +202,7 @@ public class MarkdownParagraph {
                     int unwrappedOffset = wrapped.getIndexOffset(firstNonBlankWrapped);
 
                     if (unwrappedOffset >= 0) {
-                        OffsetInfo offsetInfo = baseSeqTracker.getOffsetInfo(unwrappedOffset, true);
-                        int basePrevIndex = offsetInfo.endIndex - 1;  // adjust by -1 because the first nonblank in wrapped is the character after LS with LS having been removed.
+                        int basePrevIndex = baseIndex+indexSpacesAfter;
                         boolean isLineSep = baseSeq.safeCharAt(basePrevIndex) == SequenceUtils.LS;
 
                         if (!isLineSep && baseIndex <= firstNonBlank && trackedOffset.isAfterSpaceEdit() && !trackedOffset.isAfterDelete()) {
