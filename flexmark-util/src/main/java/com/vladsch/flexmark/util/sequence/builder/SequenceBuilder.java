@@ -6,6 +6,8 @@ import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+
 /**
  * A Builder for Segmented BasedSequences
  */
@@ -13,6 +15,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     private final BasedSegmentBuilder segments;
     private final @NotNull BasedSequence baseSeq;
     private final @NotNull BasedSequence altBase;   // sequence used for creating the builder, needed for validation for alt sequence creation
+    private final @NotNull HashMap<BasedSequence, Boolean> equivalentBases;
     private @Nullable BasedSequence resultSeq;
 
     /**
@@ -27,8 +30,13 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      * @param optimizer optimizer for based segment builder, or default {@link CharRecoveryOptimizer}
      */
     private SequenceBuilder(@NotNull BasedSequence base, @Nullable SegmentOptimizer optimizer) {
+        this(base, optimizer, new HashMap<>());
+    }
+
+    private SequenceBuilder(@NotNull BasedSequence base, @Nullable SegmentOptimizer optimizer, @NotNull HashMap<BasedSequence, Boolean> equivalentBases) {
         altBase = base;
         baseSeq = base.getBaseSequence();
+        this.equivalentBases = equivalentBases;
         int options = PlainSegmentBuilder.F_DEFAULT;
         // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
         if (!baseSeq.anyOptions(BasedSequence.F_FULL_SEGMENTED_SEQUENCES) || baseSeq.anyOptions(BasedSequence.F_COLLECT_FIRST256_STATS)) options |= PlainSegmentBuilder.F_TRACK_FIRST256;
@@ -48,9 +56,10 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      * @param options   builder options
      * @param optimizer optimizer for based segment builder, or default {@link CharRecoveryOptimizer}
      */
-    private SequenceBuilder(@NotNull BasedSequence base, int options, @Nullable SegmentOptimizer optimizer) {
+    private SequenceBuilder(@NotNull BasedSequence base, int options, @Nullable SegmentOptimizer optimizer, @NotNull HashMap<BasedSequence, Boolean> equivalentBases) {
         altBase = base;
         baseSeq = base.getBaseSequence();
+        this.equivalentBases = equivalentBases;
         // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
         if (!baseSeq.anyOptions(BasedSequence.F_FULL_SEGMENTED_SEQUENCES) || baseSeq.anyOptions(BasedSequence.F_COLLECT_FIRST256_STATS)) options |= PlainSegmentBuilder.F_TRACK_FIRST256;
         if (baseSeq.anyOptions(BasedSequence.F_NO_ANCHORS)) options &= ~PlainSegmentBuilder.F_INCLUDE_ANCHORS;
@@ -83,7 +92,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     @NotNull
     @Override
     public SequenceBuilder getBuilder() {
-        return new SequenceBuilder(altBase, segments.options, segments.optimizer);
+        return new SequenceBuilder(altBase, segments.options, segments.optimizer, equivalentBases);
     }
 
     @Override
@@ -91,10 +100,25 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         return toSequence().charAt(index);
     }
 
+    boolean isCommonBaseSequence(@NotNull BasedSequence chars) {
+        if (chars.isNull()) return false;
+
+        BasedSequence charsBaseSequence = chars.getBaseSequence();
+        if (charsBaseSequence == baseSeq) return true;
+
+        // see if it is known to be equivalent or not equivalent
+        Boolean inCommon = equivalentBases.get(charsBaseSequence);
+        if (inCommon != null) return inCommon;
+
+        boolean equivalent = baseSeq.equals(charsBaseSequence);
+        equivalentBases.put(charsBaseSequence, equivalent);
+        return equivalent;
+    }
+
     @NotNull
     @Override
     public SequenceBuilder append(@Nullable CharSequence chars, int startIndex, int endIndex) {
-        if (chars instanceof BasedSequence && ((BasedSequence) chars).getBase() == baseSeq.getBase()) {
+        if (chars instanceof BasedSequence && isCommonBaseSequence((BasedSequence) chars)) {
             if (((BasedSequence) chars).isNotNull()) {
                 if (startIndex == 0 && endIndex == chars.length()) {
                     ((BasedSequence) chars).addSegments(segments);
@@ -192,7 +216,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
                 "", altBase.toVisibleWhitespaceString(), altSequence.toVisibleWhitespaceString());
 
         // this is an identical but different base sequence, need to map to it. Ranges are indices into altSequence and must be converted to offsets.
-        SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer);
+        SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer, new HashMap<>());
 
         for (Object part : segments) {
             if (part instanceof Range) {
@@ -206,50 +230,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         }
 
 //        altBuilder.append(altSequence.getEmptySuffix());
-
-        BasedSequence sequence = SegmentedSequence.create(altBuilder);
-        assert sequence.equals(toSequence());
-        return sequence;
-    }
-
-    /**
-     * Construct sequence from this builder using another based sequence which is character identical to this builder's baseSeq
-     * but is contiguous as opposed to this builders base sequence.
-     *
-     * @param altSequence based sequence which is character identical to this builder's baseSeq but its base sequence is contiguous,
-     *                    so index of segment should be used in conversion
-     * @return builder with offsets mapped to altSequence
-     */
-    @NotNull
-    public BasedSequence fromSequence(@NotNull BasedSequence altSequence) {
-        if (altSequence == altBase) {
-            return toSequence();
-        }
-
-//        if (!altSequence.equals(baseSeq)) {
-//           int tmp = 0;
-//        }
-        assert altSequence.equals(altBase) : String.format("altSequence must be character identical to builder.altBase\n" +
-                "altBase: '%s'\n" +
-                " altSeq: '%s'\n" +
-                "", altBase.toVisibleWhitespaceString(), altSequence.toVisibleWhitespaceString());
-
-        // this is an identical but different base sequence, need to map to it. Ranges are indices into altSequence and must be converted to offsets.
-        SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer);
-        int length = 0;
-        for (Object part : segments) {
-            if (part instanceof Range) {
-                int span = ((Range) part).getSpan();
-                BasedSequence s = altSequence.subSequence(length, length + span);
-                altBuilder.append(s);
-                length += span;
-            } else if (part instanceof CharSequence) {
-                altBuilder.append((CharSequence) part);
-                length += ((CharSequence) part).length();
-            } else if (part != null) {
-                throw new IllegalStateException("Invalid part type " + part.getClass());
-            }
-        }
 
         BasedSequence sequence = SegmentedSequence.create(altBuilder);
         assert sequence.equals(toSequence());
@@ -329,11 +309,11 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
 
     @NotNull
     public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options) {
-        return new SequenceBuilder(base, options, null);
+        return new SequenceBuilder(base, options, null, new HashMap<>());
     }
 
     @NotNull
     public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options, @NotNull SegmentOptimizer optimizer) {
-        return new SequenceBuilder(base, options, optimizer);
+        return new SequenceBuilder(base, options, optimizer, new HashMap<>());
     }
 }

@@ -3469,7 +3469,7 @@ do not wrap links
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 9) options(margin[30], explicit-links-at-start)
+```````````````````````````````` example(Wrap: 9) options(margin[30], explicit-links-at-start, show-ranges)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3483,10 +3483,20 @@ do not wrap links
    and more text.
    ![Test](test) text.
 
+---- Ranges ------------------------------------------------------------
+⟦* Paragraph with hard break⟧
+⟦⟧ ⟦ and more text.⟧
+⟦⟧ ⟦ [Test](test) text.⟧⟦
+⟧⟦
+1. Paragraph with soft break⟧
+⟦⟧  ⟦ and more text.⟧
+⟦⟧  ⟦ ![Test](test) text.⟧⟦
+⟧
+⟦⟧
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 10) options(margin[96], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap: 10) options(margin[96], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 ⟧* Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
@@ -3494,10 +3504,15 @@ do not wrap links
 * Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line
   elements. ⦙
 
+---- Ranges ------------------------------------------------------------
+⟦* Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line⟧
+⟦⟧ ⟦ elements.⟧ ⟦⟧
+⟦⟧
+⟦⟧
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 11) options(margin[34], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap: 11) options(margin[34], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
 ⟦* Paragraph with hard break and more text. [Test](test) text. 
     
 ⟧1. Paragraph with soft break and more text. ⦙![Test](testing) text. 
@@ -3507,10 +3522,40 @@ do not wrap links
    more text. ⦙
    ![Test](testing) text.
 
+---- Ranges ------------------------------------------------------------
+⟦1. Paragraph with soft break and⟧
+⟦⟧  ⟦ more text.⟧ ⟦⟧
+⟦⟧  ⟦ ![Test](testing) text.⟧⟦
+⟧
+⟦⟧
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 12) options(margin[30])
+```````````````````````````````` example(Wrap: 12) options(margin[34], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
+⟦* Paragraph with hard break and more text. [Test](test) text. 
+    
+1. ⟧Paragraph with soft break and more text. ⦙![Test](testing) text. 
+⟦    ⟧with lazy continuation so we can attempt to duplicate md nav.
+                               
+.
+Paragraph with soft break and more
+text. ⦙
+![Test](testing) text. with lazy
+continuation so we can attempt to
+duplicate md nav.
+
+---- Ranges ------------------------------------------------------------
+⟦Paragraph with soft break and more⟧
+⟦⟧⟦text.⟧ ⟦⟧
+⟦⟧⟦![Test](testing) text. ⟧⟦with lazy⟧
+⟦⟧⟦continuation so we can attempt to⟧
+⟦⟧⟦duplicate md nav.
+⟧
+⟦⟧
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 13) options(margin[30], show-ranges)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3524,10 +3569,20 @@ do not wrap links
    and more text.
    ![Test](test) text.
 
+---- Ranges ------------------------------------------------------------
+⟦* Paragraph with hard break⟧
+⟦⟧ ⟦ and more text. [Test](test)⟧
+⟦⟧ ⟦ text.⟧⟦
+⟧⟦
+1. Paragraph with soft break⟧
+⟦⟧  ⟦ and more text.⟧
+⟦⟧  ⟦ ![Test](test) text.⟧⟦
+⟧
+⟦⟧
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 13) options(margin[30], image-links-at-start)
+```````````````````````````````` example(Wrap: 14) options(margin[30], image-links-at-start, show-ranges)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -3541,10 +3596,20 @@ do not wrap links
    and more text.
    ![Test](test) text.
 
+---- Ranges ------------------------------------------------------------
+⟦* Paragraph with hard break⟧
+⟦⟧ ⟦ and more text. [Test](test)⟧
+⟦⟧ ⟦ text.⟧⟦
+⟧⟦
+1. Paragraph with soft break⟧
+⟦⟧  ⟦ and more text.⟧
+⟦⟧  ⟦ ![Test](test) text.⟧⟦
+⟧
+⟦⟧
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 14) options(margin[72])
+```````````````````````````````` example(Wrap: 15) options(margin[72])
 * [#697, Autoscroll from source does not work in simplified structure view]
 .
 * [#697, Autoscroll from source does not work in simplified structure view]

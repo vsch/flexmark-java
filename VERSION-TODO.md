@@ -211,11 +211,14 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.102
 
+* [ ] Fix: removal of all prefixes messes up format tracked offset resolution
+* Add: `SequenceBuilder` treating of any based sequence whose base is equal in characters to its
+  own as equivalent since offsets will match.
 * Fix: `LineAppendable.isEmpty()` return true only if no lines or pending lines
 * Fix: `SubSequence` constructor to only use the base `CharSequence` hash code if it is `String`
 * Add: `Formatter.TRACKED_SEQUENCE` option to allow formatting of document based on
   `SegmentedSequence` which cannot be used for parsing without converting to contiguous
-  sequence. Used to construct offset tracker used for index conversion.
+  sequence. Used to construct offset tracker for tracked offset resolution.
   * Fix: `Formatter` paragraph wrapping to use trackedSequence.
   * Fix: tracked offset resolution to use trackedSequence.
 

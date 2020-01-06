@@ -1,20 +1,44 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
+import com.vladsch.flexmark.formatter.internal.FormatControlProcessor;
+import com.vladsch.flexmark.formatter.internal.MergeContextImpl;
+import com.vladsch.flexmark.formatter.internal.MergeLinkResolver;
+import com.vladsch.flexmark.formatter.internal.TranslationHandlerImpl;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.html.renderer.HeaderIdGenerator;
+import com.vladsch.flexmark.html.renderer.HeaderIdGeneratorFactory;
+import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
+import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
+import com.vladsch.flexmark.html.renderer.LinkStatus;
+import com.vladsch.flexmark.html.renderer.LinkType;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.IRender;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.NullableDataKey;
+import com.vladsch.flexmark.util.data.ScopedDataSet;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
-import com.vladsch.flexmark.util.format.*;
+import com.vladsch.flexmark.util.format.CharWidthProvider;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.format.TrackedOffset;
+import com.vladsch.flexmark.util.format.TrackedOffsetList;
+import com.vladsch.flexmark.util.format.TrackedOffsetUtils;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.misc.CharPredicate;
@@ -27,7 +51,15 @@ import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
@@ -269,6 +301,7 @@ public class Formatter implements IRender {
      * Create a new builder for configuring an {@link Formatter}.
      *
      * @param options initialization options
+     *
      * @return a builder.
      */
     public static Builder builder(DataHolder options) {
@@ -306,7 +339,7 @@ public class Formatter implements IRender {
         // resolve any unresolved tracked offsets that are outside elements which resolve their own
         BasedSequence sequence = node.getDocument().getChars();
         if (output instanceof SequenceBuilder && node.getDocument().getChars() != renderer.trackedSequence) {
-            // have to alternate builder sequence mapping
+            // have to use alternate builder sequence for tracked offset resolution
             sequence = ((SequenceBuilder) output).toSequence(renderer.trackedSequence);
         }
 
@@ -317,6 +350,7 @@ public class Formatter implements IRender {
      * Render the tree of nodes to markdown
      *
      * @param document the root node
+     *
      * @return the formatted markdown
      */
     @NotNull
@@ -340,6 +374,7 @@ public class Formatter implements IRender {
      * Render the tree of nodes to markdown
      *
      * @param document the root node
+     *
      * @return the formatted markdown
      */
     public String translationRender(Node document, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
@@ -379,6 +414,7 @@ public class Formatter implements IRender {
      * Render the tree of nodes to markdown
      *
      * @param documents the root node
+     *
      * @return the formatted markdown
      */
     public String mergeRender(Document[] documents, int maxTrailingBlankLines) {
@@ -519,6 +555,7 @@ public class Formatter implements IRender {
          * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
          *
          * @param nodeFormatterFactory the factory for creating a node renderer
+         *
          * @return {@code this}
          */
         @SuppressWarnings("UnusedReturnValue")
@@ -531,6 +568,7 @@ public class Formatter implements IRender {
          * Add a factory for generating the header id attribute from the header's text
          *
          * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
+         *
          * @return {@code this}
          */
         @NotNull

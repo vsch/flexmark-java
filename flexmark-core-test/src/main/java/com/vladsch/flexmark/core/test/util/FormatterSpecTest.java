@@ -14,10 +14,7 @@ import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase {
     public FormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
@@ -29,7 +26,7 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
         DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
 
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), Formatter.builder(combinedOptions).build(), true) {
-            ArrayList<TrackedOffset> trackedOffsets;
+            @NotNull List<TrackedOffset> trackedOffsets = Collections.emptyList();
             BasedSequence trackedSequence;
             BasedSequence originalSequence;
 
@@ -57,7 +54,7 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
 
             @Override
             protected @NotNull String renderHtml() {
-                if (trackedOffsets == null && !SHOW_LINE_RANGES.get(myOptions)) {
+                if (trackedOffsets.isEmpty() && !SHOW_LINE_RANGES.get(myOptions)) {
                     return getRenderer().render(getDocument());
                 } else {
 //                    SequenceBuilder builder = trackedSequence.getBuilder();
@@ -65,8 +62,9 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                     getRenderer().render(getDocument(), builder);
                     String html = builder.toString();
 
+                    // NOTE: need to get document since the top node is not guaranteed to be a document for generic renderer
                     List<TrackedOffset> trackedOffsetList = Formatter.TRACKED_OFFSETS.get(getDocument().getDocument());
-                    assert trackedOffsetList == trackedOffsets;
+                    assert trackedOffsetList.isEmpty() || trackedOffsetList == trackedOffsets;
 
                     int[] offsets = new int[trackedOffsets.size()];
                     int i = 0;
