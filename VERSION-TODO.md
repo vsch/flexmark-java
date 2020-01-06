@@ -211,7 +211,14 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.102
 
-* [ ] Fix: removal of all prefixes messes up format tracked offset resolution
+* Fix: removal of all prefixes messes up format tracked offset resolution
+* Fix: `SegmentTree.getSegmentRange(int, int, int, int, BasedSequence, Segment)` was not
+  computing startOffset correctly if first segment was text and had no previous `ANCHOR`
+  segment.
+  * Fix: `SegmentedSequenceTree.subSequence()` was not computing correct start offset due to
+    `SegmentTree` bug.
+* Add: `Formatter.DOCUMENT_FIRST_PREFIX` and `Formatter.DOCUMENT_PREFIX` to allow setting
+  prefixes for the whole document.
 * Add: `SequenceBuilder` treating of any based sequence whose base is equal in characters to its
   own as equivalent since offsets will match.
 * Fix: `LineAppendable.isEmpty()` return true only if no lines or pending lines

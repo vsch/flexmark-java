@@ -123,7 +123,7 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
 
     @Override
     public String toString() {
-        return "{ [" + offset + (BitFieldSet.any(flags, F_AFTER_SPACE_EDIT | F_AFTER_DELETE) ? (isAfterSpaceEdit() ? ", s" : "") + (isAfterDelete() ? ", d" : "") : "") + ") }";
+        return "{ [" + offset + (BitFieldSet.any(flags, F_AFTER_SPACE_EDIT | F_AFTER_INSERT | F_AFTER_DELETE) ? ", " + (isAfterSpaceEdit() ? "s" : "") + (isAfterInsert() ? "i" : "")  + (isAfterDelete() ? "d" : "") : "") + ") }";
     }
 
     public static TrackedOffset track(@NotNull TrackedOffset other) {
@@ -140,6 +140,7 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
     }
 
     public static TrackedOffset track(int offset, boolean afterSpaceEdit, boolean afterInsert, boolean afterDelete) {
+        assert !afterInsert && !afterDelete || afterInsert != afterDelete : "Cannot have both afterInsert and afterDelete true";
         return new TrackedOffset(offset, afterSpaceEdit, afterInsert, afterDelete);
     }
 }

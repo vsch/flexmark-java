@@ -179,4 +179,44 @@ public class MappedBasedSequenceTest {
         assertEquals(expected, mapEncoded.toString());
         assertEquals(expected + "\n", eolAdded.toString());
     }
+
+    // preserve segmented sequence segments
+    @Test
+    public void test_segmentedNbsp() {
+        String input = "[simLink](simLink.md)";
+        String expected = "[simLink](simLink.md)";
+
+        BasedSequence sequence = BasedSequence.of(input).toMapped(SpaceMapper.toNonBreakSpace);
+        MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
+        formatter.setFirstIndent("");
+        formatter.setWidth(90);
+        formatter.setFirstWidthOffset(0);
+        formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepHardBreaks(true);
+        BasedSequence wrapped = formatter.wrapTextNotTracked();
+        assertEquals(expected, wrapped.toString());
+
+        BasedSegmentBuilder builder = BasedSegmentBuilder.emptyBuilder(sequence);
+        wrapped.addSegments(builder);
+        assertEquals("⟦[simLink](simLink.md)⟧", builder.toStringWithRangesVisibleWhitespace());
+    }
+    @Test
+    public void test_segmentedNbsp2() {
+        String input = "[simLink spaced](simLink.md)";
+        String expected = "[simLink spaced](simLink.md)";
+
+        BasedSequence sequence = BasedSequence.of(input).toMapped(SpaceMapper.toNonBreakSpace);
+        MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
+        formatter.setFirstIndent("");
+        formatter.setWidth(90);
+        formatter.setFirstWidthOffset(0);
+        formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
+        formatter.setKeepHardBreaks(true);
+        BasedSequence wrapped = formatter.wrapTextNotTracked();
+        assertEquals(expected.replace(" ", "\u00A0"), wrapped.toString());
+
+        BasedSegmentBuilder builder = BasedSegmentBuilder.emptyBuilder(sequence);
+        wrapped.toMapped(SpaceMapper.fromNonBreakSpace).addSegments(builder);
+        assertEquals("⟦[simLink spaced](simLink.md)⟧", builder.toStringWithRangesVisibleWhitespace());
+    }
 }

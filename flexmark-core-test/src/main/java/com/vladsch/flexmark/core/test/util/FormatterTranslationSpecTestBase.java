@@ -127,7 +127,20 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("link-address-pattern", new MutableDataSet().set(Formatter.LINK_MARKER_COMMENT_PATTERN, Pattern.compile("^\\s*@IGNORE PREVIOUS:.*$")));
 
         optionsMap.put("margin", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, FormatterTranslationSpecTestBase::marginOption)));
+        optionsMap.put("first-prefix", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customStringOption(option, params, FormatterTranslationSpecTestBase::firstIndentOption)));
+        optionsMap.put("prefix", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customStringOption(option, params, FormatterTranslationSpecTestBase::indentOption)));
     }
+
+    static DataHolder firstIndentOption(@Nullable String params) {
+        String value = params != null ? params : "";
+        return new MutableDataSet().set(Formatter.DOCUMENT_FIRST_PREFIX, value);
+    }
+
+    static DataHolder indentOption(@Nullable String params) {
+        String value = params != null ? params : "";
+        return new MutableDataSet().set(Formatter.DOCUMENT_PREFIX, value);
+    }
+
     static DataHolder marginOption(@Nullable Integer params) {
         int value = params != null ? params : -1;
         return new MutableDataSet().set(Formatter.RIGHT_MARGIN, value);

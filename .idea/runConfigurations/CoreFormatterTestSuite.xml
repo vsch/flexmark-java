@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="CoreFormatterTestSuite" type="JUnit" factoryName="JUnit" folderName="Format" singleton="true">
+  <configuration default="false" name="CoreFormatterTestSuite" type="JUnit" factoryName="JUnit" singleton="true">
     <module name="flexmark-core-test" />
     <useClassPathOnly />
     <extension name="coverage">

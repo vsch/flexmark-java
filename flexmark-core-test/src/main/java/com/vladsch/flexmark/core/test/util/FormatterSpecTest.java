@@ -50,6 +50,9 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                     Formatter.TRACKED_OFFSETS.set(getDocument().getDocument(), trackedOffsets);
                     Formatter.RESTORE_TRACKED_SPACES.set(getDocument().getDocument(), Formatter.RESTORE_TRACKED_SPACES.get(myOptions));
                 }
+
+                Formatter.DOCUMENT_FIRST_PREFIX.set(getDocument().getDocument(), Formatter.DOCUMENT_FIRST_PREFIX.get(myOptions));
+                Formatter.DOCUMENT_PREFIX.set(getDocument().getDocument(), Formatter.DOCUMENT_PREFIX.get(myOptions));
             }
 
             @Override
@@ -87,7 +90,14 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                         StringBuilder out = new StringBuilder();
                         out.append(result);
                         TestUtils.appendBanner(out, TestUtils.bannerText("Ranges"), false);
-                        out.append(builder.toStringWithRanges(false));
+                        if (trackedSequence == getDocument().getDocument().getChars()) {
+                            out.append(builder.toStringWithRanges(false));
+                        } else {
+                            BasedSequence sequence = builder.toSequence(trackedSequence);
+                            out.append(sequence.getBuilder().append(sequence).toStringWithRanges(false)).append("\n");
+                            TestUtils.appendBanner(out, TestUtils.bannerText("Segments"), false);
+                            out.append(sequence.getBuilder().append(sequence).getSegmentBuilder().toString());
+                        }
                         result = out.toString();
                     }
                     return result;

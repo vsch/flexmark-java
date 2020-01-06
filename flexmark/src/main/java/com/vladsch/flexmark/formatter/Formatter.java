@@ -167,6 +167,11 @@ public class Formatter implements IRender {
 
     // used during paragraph wrapping to determine whether spaces are re-inserted if offsets are edit op flagged
     public static final DataKey<Boolean> RESTORE_TRACKED_SPACES = new DataKey<>("RESTORE_END_SPACES", false);
+
+    // can be used to set indent for the document, useful when formatting a single paragraph that is extracted from another document
+    //  and formatted paragraph will be re-inserted into that document
+    final public static DataKey<CharSequence> DOCUMENT_FIRST_PREFIX = new DataKey<>("DOCUMENT_FIRST_PREFIX", "");
+    final public static DataKey<CharSequence> DOCUMENT_PREFIX = new DataKey<>("DOCUMENT_PREFIX", "");
     // }}
 
     /**
@@ -1010,6 +1015,8 @@ public class Formatter implements IRender {
                     this.phase = phase;
                     // here we render multiple phases
                     if (this.phase == DOCUMENT) {
+                        // pre-indent document
+                        markdown.pushPrefix().setPrefix(DOCUMENT_FIRST_PREFIX.get((Document)node), false).setPrefix(DOCUMENT_PREFIX.get((Document)node), true);
                         List<NodeFormattingHandler<?>> nodeRendererList = renderers.get(node.getClass());
                         if (nodeRendererList != null) {
                             subContext.rendererList = nodeRendererList;
@@ -1020,6 +1027,7 @@ public class Formatter implements IRender {
                             subContext.rendererList = null;
                             subContext.rendererIndex = -1;
                         }
+                        markdown.popPrefix();
                     } else {
                         // go through all renderers that want this phase
                         for (PhasedNodeFormatter phasedFormatter : phasedFormatters) {

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -1861,6 +1862,33 @@ public class LineAppendableImplTest {
                 "  0:2343568\n" +
                 "\n" +
                 "", fa2.toString(2, 2));
+    }
+
+    @Test
+    public void test_appendLineAppendableMapped() {
+        String input = "[simLink spaced](simLink.md)";
+        BasedSequence sequence = BasedSequence.of(input);
+        LineAppendableImpl fa = new LineAppendableImpl(SequenceBuilder.emptyBuilder(sequence), LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
+
+        fa.setPrefix("> ", false);
+        BasedSequence mapped = sequence.toMapped(SpaceMapper.toNonBreakSpace);
+        fa.append(mapped);
+        LineInfo info = fa.getLineInfo(0);
+        SequenceBuilder lineBuilder = sequence.getBuilder().append(info.getLine());
+        assertEquals("⟦⟧> ⟦[simLink⟧ ⟦spaced](simLink.md)⟧\\n⟦⟧", lineBuilder.toStringWithRanges(true));
+
+        SequenceBuilder lineBuilder2 = sequence.getBuilder().append(info.getLineNoEOL());
+        assertEquals("⟦⟧> ⟦[simLink⟧ ⟦spaced](simLink.md)⟧", lineBuilder2.toStringWithRanges(true));
+
+        BasedSequence actual = BasedSequence.of(fa.toSequence(0, -1));
+        assertEquals("> [simLink\u00A0spaced](simLink.md)", actual.toString());
+        SequenceBuilder actualBuilder = sequence.getBuilder().append(actual);
+        assertEquals("⟦⟧> ⟦[simLink⟧\u00A0⟦spaced](simLink.md)⟧", actualBuilder.toStringWithRanges(true));
+
+        BasedSequence actualSpc = actual.toMapped(SpaceMapper.fromNonBreakSpace);
+        assertEquals("> [simLink spaced](simLink.md)", actualSpc.toString());
+        SequenceBuilder actualSpcBuilder = sequence.getBuilder().append(actualSpc);
+        assertEquals("⟦⟧> ⟦[simLink spaced](simLink.md)⟧", actualSpcBuilder.toStringWithRanges(true));
     }
 }
 

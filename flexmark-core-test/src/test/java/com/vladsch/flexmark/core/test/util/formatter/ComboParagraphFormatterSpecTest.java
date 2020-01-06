@@ -33,27 +33,13 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     private static final String SPEC_RESOURCE = "/core_paragraph_formatter_spec.md";
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    public static final DataKey<String> FIRST_INDENT = new DataKey<>("FIRST_INDENT", "");
-    public static final DataKey<String> INDENT = new DataKey<>("INDENT", "");
     public static final DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("first-indent", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customStringOption(option, params, ComboParagraphFormatterSpecTest::firstIndentOption)));
-        optionsMap.put("indent", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customStringOption(option, params, ComboParagraphFormatterSpecTest::indentOption)));
         optionsMap.put("first-width-delta", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, ComboParagraphFormatterSpecTest::firstWidthDeltaOption)));
     }
     public ComboParagraphFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap);
-    }
-
-    static DataHolder firstIndentOption(@Nullable String params) {
-        String value = params != null ? params : "";
-        return new MutableDataSet().set(FIRST_INDENT, value);
-    }
-
-    static DataHolder indentOption(@Nullable String params) {
-        String value = params != null ? params : "";
-        return new MutableDataSet().set(INDENT, value);
     }
 
     static DataHolder firstWidthDeltaOption(@Nullable Integer params) {
@@ -115,8 +101,8 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
             DataHolder options = getOptions() == null ? DataHolder.NULL : getOptions();
 
-            if (options.contains(INDENT)) formatter.setIndent(INDENT.get(options));
-            if (options.contains(FIRST_INDENT)) formatter.setFirstIndent(FIRST_INDENT.get(options));
+            if (options.contains(Formatter.DOCUMENT_PREFIX)) formatter.setIndent(Formatter.DOCUMENT_PREFIX.get(options));
+            if (options.contains(Formatter.DOCUMENT_FIRST_PREFIX)) formatter.setFirstIndent(Formatter.DOCUMENT_FIRST_PREFIX.get(options));
             if (options.contains(FIRST_WIDTH_DELTA)) formatter.setFirstWidthOffset(FIRST_WIDTH_DELTA.get(options));
             if (options.contains(Formatter.RIGHT_MARGIN)) formatter.setWidth(Formatter.RIGHT_MARGIN.get(options));
             if (options.contains(Formatter.RESTORE_TRACKED_SPACES)) formatter.setRestoreTrackedSpaces(Formatter.RESTORE_TRACKED_SPACES.get(options));
