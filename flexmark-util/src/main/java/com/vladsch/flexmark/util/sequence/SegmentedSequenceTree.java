@@ -50,7 +50,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
     }
 
     private SegmentedSequenceTree(BasedSequence baseSeq, @NotNull SegmentTree segmentTree, @NotNull SegmentTreeRange subSequenceRange) {
-        super(baseSeq, Math.max(0, subSequenceRange.startOffset), Math.max(0, subSequenceRange.endOffset), subSequenceRange.length);
+        super(baseSeq, subSequenceRange.startOffset, subSequenceRange.endOffset, subSequenceRange.length);
         this.segmentTree = segmentTree;
         startIndex = subSequenceRange.startIndex;
         startPos = subSequenceRange.startPos;
@@ -144,6 +144,6 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
             }
         }
 
-        return new SegmentedSequenceTree(baseSeq.getBaseSequence(), Math.max(0, builder.getStartOffset()), Math.max(0, builder.getEndOffset()), builder.length(), segmentTree);
+        return new SegmentedSequenceTree(baseSeq.getBaseSequence(), builder.getStartOffset(), builder.getEndOffset(), builder.length(), segmentTree);
     }
 }

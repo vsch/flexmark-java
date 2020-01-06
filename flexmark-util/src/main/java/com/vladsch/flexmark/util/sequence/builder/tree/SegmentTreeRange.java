@@ -21,4 +21,17 @@ public class SegmentTreeRange {
         this.endPos = endPos;
         this.length = endIndex - startIndex;
     }
+
+    @Override
+    public String toString() {
+        return "SegmentTreeRange{" +
+                "startIndex=" + startIndex +
+                ", endIndex=" + endIndex +
+                ", startOffset=" + startOffset +
+                ", endOffset=" + endOffset +
+                ", startPos=" + startPos +
+                ", endPos=" + endPos +
+                ", length=" + length +
+                '}';
+    }
 }

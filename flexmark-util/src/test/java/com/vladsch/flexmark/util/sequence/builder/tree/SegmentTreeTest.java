@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -275,6 +276,54 @@ public class SegmentTreeTest {
         SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
         assertEquals("SegmentTree{aggr: {[3, 1:, 0:], [7, 4:], [10, 9:] }, seg: { 0:[0), 1:[2, 5), 4:a:'abcd', 9:[6, 9), 12:[10) } }", segTree.toString(sequence));
         assertCharAt(sequence, segments, segTree);
+    }
+
+    @Test
+    public void test_buildSubSequence() {
+        String input = "0123456789";
+        String expected = "> 0123456789\n";
+        BasedSequence sequence = BasedSequence.of(input);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+
+        segments.append("> ");
+        segments.append(0, 10);
+        segments.append("\n");
+        assertEquals("PlainSegmentBuilder{[0, 10), s=0:1, u=2:3, t=2:3, l=13, sz=4, na=3: a:'> ', [0, 10), a:'\\n', [10) }", segments.toStringPrep());
+
+        SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
+        assertEquals("SegmentTree{aggr: {[2, 0:], [12, 3:], [13, 6:] }, seg: { 0:a:'> ', 3:[0, 10), 6:a:'\\n', 7:[10) } }", segTree.toString(sequence));
+        assertCharAt(sequence, segments, segTree);
+
+        SegmentTreeRange segRange = segTree.getSegmentRange(0, 12, 0, segTree.size(), sequence, null);
+        assertEquals("SegmentTreeRange{startIndex=0, endIndex=12, startOffset=0, endOffset=10, startPos=0, endPos=2, length=12}", segRange.toString());
+
+        SequenceBuilder builder = sequence.getBuilder();
+        segTree.addSegments(builder.getSegmentBuilder(), segRange.startIndex, segRange.startIndex + segRange.length, segRange.startOffset, segRange.endOffset, segRange.startPos, segRange.endPos);
+        assertEquals("⟦⟧> ⟦0123456789⟧", builder.toStringWithRanges(true));
+    }
+
+    @Test
+    public void test_buildSubSequence2() {
+        String input = "0123456789";
+        String expected = "> 0123456789\n";
+        BasedSequence sequence = BasedSequence.of(input);
+        PlainSegmentBuilder segments = PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
+
+        segments.append("> ");
+        segments.append(0, 10);
+        segments.append("\n");
+        assertEquals("PlainSegmentBuilder{[0, 10), s=0:1, u=2:3, t=2:3, l=13, sz=4, na=3: a:'> ', [0, 10), a:'\\n', [10) }", segments.toStringPrep());
+
+        SegmentTree segTree = SegmentTree.build(segments.getSegments(), segments.getText());
+        assertEquals("SegmentTree{aggr: {[2, 0:], [12, 3:], [13, 6:] }, seg: { 0:a:'> ', 3:[0, 10), 6:a:'\\n', 7:[10) } }", segTree.toString(sequence));
+        assertCharAt(sequence, segments, segTree);
+
+        SegmentTreeRange segRange = segTree.getSegmentRange(0, 13, 0, segTree.size(), sequence, null);
+        assertEquals("SegmentTreeRange{startIndex=0, endIndex=13, startOffset=0, endOffset=0, startPos=0, endPos=3, length=13}", segRange.toString());
+
+        SequenceBuilder builder = sequence.getBuilder();
+        segTree.addSegments(builder.getSegmentBuilder(), segRange.startIndex, segRange.startIndex + segRange.length, segRange.startOffset, segRange.endOffset, segRange.startPos, segRange.endPos);
+        assertEquals("⟦⟧> ⟦0123456789⟧\\n⟦⟧", builder.toStringWithRanges(true));
     }
 
     // ************************************************************************

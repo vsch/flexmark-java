@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class BasedSequenceTreeImplTest {
+public class SegmentedSequenceTreeTest {
     // TEST: need to complete tests here
 
     static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
@@ -1607,5 +1608,22 @@ public class BasedSequenceTreeImplTest {
         assertEquals(1, sequence.matchedCharCountReversed("ABCDE9", 0, 10, false));
         assertEquals(0, sequence.matchedCharCountReversed("ABCDEF", 0, 10, false));
         assertEquals(0, sequence.matchedCharCountReversed("ABCDEF", 0, 10, false));
+    }
+
+    @Test
+    public void test_treeSubSequence() {
+        String input = "[simLink spaced](simLink.md)";
+        BasedSequence sequence = BasedSequence.of(input);
+        BasedSequence mapped = sequence.toMapped(SpaceMapper.toNonBreakSpace);
+        BasedSequence appended = sequence.getBuilder().append("> ").append(mapped).append("\n").toSequence();
+        assertEquals("> [simLink spaced](simLink.md)\n", appended.toString());
+        SequenceBuilder appendedBuilder = sequence.getBuilder().append(appended);
+        assertEquals("⟦⟧> ⟦[simLink⟧ ⟦spaced](simLink.md)⟧\\n⟦⟧", appendedBuilder.toStringWithRanges(true));
+
+        BasedSequence appendedSub = appended.trimEOL();
+        assertEquals("> [simLink spaced](simLink.md)", appendedSub.toString());
+
+        SequenceBuilder appendedSubBuilder = sequence.getBuilder().append(appendedSub);
+        assertEquals("⟦⟧> ⟦[simLink⟧ ⟦spaced](simLink.md)⟧", appendedSubBuilder.toStringWithRanges(true));
     }
 }

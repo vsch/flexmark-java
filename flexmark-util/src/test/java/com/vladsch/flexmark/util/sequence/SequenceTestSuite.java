@@ -30,7 +30,7 @@ import org.junit.runners.Suite;
         SequenceBuilderTest.class,
         SegmentedSequenceStatsTest.class,
         BasedSequenceFullImplTest.class,
-        BasedSequenceTreeImplTest.class,
+        SegmentedSequenceTreeTest.class,
         SegmentOffsetTreeTest.class,
         BasedOffsetTrackerTest.class,
         BaseSequenceManagerTest.class,

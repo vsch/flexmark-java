@@ -207,7 +207,16 @@ public class SegmentTree {
             endOffset = endSegment.getStartOffset() + endIndex - endSegment.getStartIndex();
         }
 
-        if (startOffset < 0) startOffset = endOffset;
+        if (startOffset < 0) {
+            if (startSegment.pos + 1 < size()) {
+                Segment nextSegment = getSegment(startSegment.pos + 1, baseSequence);
+                startOffset = nextSegment.getStartOffset();
+                if (startOffset > endOffset && endOffset != -1) startOffset = endOffset;
+            } else {
+                startOffset = endOffset;
+            }
+        }
+
         if (endOffset < startOffset) endOffset = startOffset;
 
         if (startOffset > baseSequence.length()) {
@@ -532,7 +541,7 @@ public class SegmentTree {
         int[] treeData = new int[nonAnchors * 2];
         byte[] segmentBytes = new byte[byteLength];
         int[] startIndices = buildIndexData ? null : new int[nonAnchors];
-        int[] posNeedingAdjustment = buildIndexData ? null: new int[2];  // up to 2 segment adjustments, one for BASE sequence and one for TEXT since it has no offsets
+        int[] posNeedingAdjustment = buildIndexData ? null : new int[2];  // up to 2 segment adjustments, one for BASE sequence and one for TEXT since it has no offsets
         int posNeedingAdjustmentIndex = 0;
 
         int prevAnchorOffset = -1;
