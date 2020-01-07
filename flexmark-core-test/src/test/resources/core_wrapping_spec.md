@@ -456,6 +456,12 @@ BasedSegmentBuilder{[50, 201), s=1:8, u=4:13, t=4:13, l=159, sz=10, na=7: [50), 
 ````````````````````````````````
 
 
+This makes the caret jump to previous word because of the kludged way paragraphs resolve
+offsets. There is no way to fix it in the current implementation without more kludges which will
+break other kludges. This is the reason for needing to rewrite it using more algorithmic
+approach by processing all unwrapped and wrapped segments to get tracked offset context for
+determining its index in the wrapped sequence.
+
 ```````````````````````````````` example(Wrap - Delete Indent: 3) options(FAIL, margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   

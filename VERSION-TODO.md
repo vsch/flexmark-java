@@ -213,10 +213,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * [ ] Fix: change `TrackedOffset` to not have edit operation information and transfer this to
       `TrackedOffsetList` since all tracked offsets are part of the same operation.
-* [ ] Fix: re-implement markdown paragraph tracked offset resolution by scanning the wrapped
-      text segments and mapping them to original sequence offsets while analyzing text context
-      and keeping track of: start of line, first non-blank, last non-blank, end of line. For
-      each track offset in original and index in wrapped.
+* [ ] Fix: re-implement markdown paragraph tracked offset resolution by scanning the unwrapped
+      and wrapped text segments and mapping them to original sequence offsets while analyzing
+      text context and keeping track of: start of line, first non-blank, last non-blank, end of
+      line.
 * Fix:
   [core_wrapping_spec: Lines 150-151](https://github.com/vsch/flexmark-java/blob/master/flexmark-core-test/src/test/resources/core_wrapping_spec.md#L150-L151)
 * Add: `TrackedOffset` spaces before/after the offset. This is impossible to determine from
