@@ -152,7 +152,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 7) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 7) options(IGNORE, margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
@@ -176,7 +176,7 @@ would be automatically copied.   ⦙
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 8) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 8) options(IGNORE, margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
@@ -201,7 +201,7 @@ would be automatically copied.   ⦙
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 9) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 9) options(IGNORE, margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
@@ -227,7 +227,7 @@ would be automatically copied.   ⦙   ⦙
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 10) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 10) options(IGNORE, margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.         
@@ -251,7 +251,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 11) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 11) options(IGNORE, margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
@@ -277,8 +277,9 @@ standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙   ⦙
 ````````````````````````````````
 
+Leading space not handled for tracking for now
 
-```````````````````````````````` example(Wrap: 12) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 12) options(IGNORE, margin[66], restore-tracked-spaces)
    Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent ⦙ to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.
@@ -326,7 +327,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 14) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 14) options(IGNORE, margin[66], restore-tracked-spaces)
   ⦙ Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent ⦙ to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
@@ -550,7 +551,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 27) options(margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap: 27) options(FAIL, margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧⦙ keep duplicate code.
 .
@@ -567,7 +568,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 28) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
+```````````````````````````````` example(Wrap: 28) options(IGNORE, margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
 ⟦  * [ ] ⟧d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
 ⟦        ⟧dependencies on classes in other directories.
 .
@@ -584,7 +585,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 29) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
+```````````````````````````````` example(Wrap: 29) options(IGNORE, margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
 ⟦  * [ ] ⟧ ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
 ⟦        ⟧dependencies on classes in other directories.
 .
@@ -601,7 +602,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 30) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
+```````````````````````````````` example(Wrap: 30) options(IGNORE, margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
 ⟦* item 1
   * [ ] ⟧ ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
 ⟦        ⟧dependencies on classes in other directories.
@@ -619,7 +620,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 31) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap: 31) options(IGNORE, margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧ ⦙to keep duplicate code.
 .
@@ -636,7 +637,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 32) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap: 32) options(IGNORE, margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙ to keep duplicate code.
 .
 ---- Tracked Offsets ---------------------------------------------------
@@ -652,7 +653,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 33) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
+```````````````````````````````` example(Wrap: 33) options(IGNORE, margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
 ⟦* ⟧Fix: conversion from Smart to based to extract more source information from segmented
 ⟦  ⟧sequence ⦙and mapped sequence.
 .
@@ -669,7 +670,7 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 34) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
+```````````````````````````````` example(Wrap: 34) options(IGNORE, margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
 ⟦* ⟧Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
 .
 ---- Tracked Offsets ---------------------------------------------------

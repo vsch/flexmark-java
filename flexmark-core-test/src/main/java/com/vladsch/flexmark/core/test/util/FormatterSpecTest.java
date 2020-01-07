@@ -41,8 +41,10 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                     trackedOffsets = new ArrayList<>(extractMarkup.getSecond().length);
                     char c = EDIT_OP_CHAR.get(myOptions);
                     int editOp = EDIT_OP.get(myOptions);
+//                    boolean editIndent = EDIT_INDENT.get(myOptions);
 
                     for (int offset : extractMarkup.getSecond()) {
+//                        trackedOffsets.add(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0, editIndent));
                         trackedOffsets.add(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0));
                     }
 

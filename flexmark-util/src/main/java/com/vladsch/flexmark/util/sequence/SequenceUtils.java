@@ -577,16 +577,47 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
-    static int countLeadingSpaceTab(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
-    static int countTrailingSpaceTab(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
-    static int countTrailingSpaceTab(@NotNull CharSequence thizz, int fromIndex)                                            { return countTrailing(thizz, SPACE_TAB_SET, 0, fromIndex); }
-    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz)                                                         { return countLeading(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
-    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz)                                                        { return countTrailing(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countLeadingSpace(@NotNull CharSequence thizz)                                                               { return countLeading(thizz, SPACE_SET, 0, Integer.MAX_VALUE); }
+    static int countLeadingSpace(@NotNull CharSequence thizz, int startIndex)                                               { return countLeading(thizz, SPACE_SET, startIndex, Integer.MAX_VALUE); }
+    static int countLeadingSpace(@NotNull CharSequence thizz, int startIndex, int endIndex)                                 { return countLeading(thizz, SPACE_SET, startIndex, endIndex); }
+    static int countLeadingNotSpace(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, SPACE_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countLeadingNotSpace(@NotNull CharSequence thizz, int startIndex)                                            { return countLeading(thizz, SPACE_SET.negate(), startIndex, Integer.MAX_VALUE); }
+    static int countLeadingNotSpace(@NotNull CharSequence thizz, int startIndex, int endIndex)                              { return countLeading(thizz, SPACE_SET.negate(), startIndex, endIndex); }
 
-    static int countLeadingWhitespace(@NotNull CharSequence thizz)                                                          { return countLeading(thizz, WHITESPACE_SET, 0, Integer.MAX_VALUE); }
-    static int countTrailingWhitespace(@NotNull CharSequence thizz)                                                         { return countTrailing(thizz, WHITESPACE_SET, 0, Integer.MAX_VALUE); }
-    static int countLeadingNotWhitespace(@NotNull CharSequence thizz)                                                       { return countLeading(thizz, WHITESPACE_SET.negate(), 0, Integer.MAX_VALUE); }
-    static int countTrailingNotWhitespace(@NotNull CharSequence thizz)                                                      { return countTrailing(thizz, WHITESPACE_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countTrailingSpace(@NotNull CharSequence thizz)                                                              { return countTrailing(thizz, SPACE_SET, 0, Integer.MAX_VALUE); }
+    static int countTrailingSpace(@NotNull CharSequence thizz, int fromIndex)                                               { return countTrailing(thizz, SPACE_SET, 0, fromIndex); }
+    static int countTrailingSpace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                               { return countTrailing(thizz, SPACE_SET, startIndex, fromIndex); }
+    static int countTrailingNotSpace(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, SPACE_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countTrailingNotSpace(@NotNull CharSequence thizz, int fromIndex)                                            { return countTrailing(thizz, SPACE_SET.negate(), 0, fromIndex); }
+    static int countTrailingNotSpace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                            { return countTrailing(thizz, SPACE_SET.negate(), startIndex, fromIndex); }
+
+    static int countLeadingSpaceTab(@NotNull CharSequence thizz)                                                             { return countLeading(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
+    static int countLeadingSpaceTab(@NotNull CharSequence thizz, int startIndex)                                             { return countLeading(thizz, SPACE_TAB_SET, startIndex, Integer.MAX_VALUE); }
+    static int countLeadingSpaceTab(@NotNull CharSequence thizz, int startIndex, int endIndex)                               { return countLeading(thizz, SPACE_TAB_SET, startIndex, endIndex); }
+    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz)                                                          { return countLeading(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz, int startIndex)                                          { return countLeading(thizz, SPACE_TAB_SET.negate(), startIndex, Integer.MAX_VALUE); }
+    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz, int startIndex, int endIndex)                            { return countLeading(thizz, SPACE_TAB_SET.negate(), startIndex, endIndex); }
+
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz)                                                            { return countTrailing(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz, int fromIndex)                                             { return countTrailing(thizz, SPACE_TAB_SET, 0, fromIndex); }
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz, int startIndex, int fromIndex)                             { return countTrailing(thizz, SPACE_TAB_SET, startIndex, fromIndex); }
+    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz)                                                         { return countTrailing(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz, int fromIndex)                                          { return countTrailing(thizz, SPACE_TAB_SET.negate(), 0, fromIndex); }
+    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz, int startIndex, int fromIndex)                          { return countTrailing(thizz, SPACE_TAB_SET.negate(), startIndex, fromIndex); }
+
+    static int countLeadingWhitespace(@NotNull CharSequence thizz)                                                           { return countLeading(thizz, WHITESPACE_SET, 0, Integer.MAX_VALUE); }
+    static int countLeadingWhitespace(@NotNull CharSequence thizz, int startIndex)                                           { return countLeading(thizz, WHITESPACE_SET, startIndex, Integer.MAX_VALUE); }
+    static int countLeadingWhitespace(@NotNull CharSequence thizz, int startIndex, int endIndex)                             { return countLeading(thizz, WHITESPACE_SET, startIndex, endIndex); }
+    static int countLeadingNotWhitespace(@NotNull CharSequence thizz)                                                        { return countLeading(thizz, WHITESPACE_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countLeadingNotWhitespace(@NotNull CharSequence thizz, int startIndex)                                        { return countLeading(thizz, WHITESPACE_SET.negate(), startIndex, Integer.MAX_VALUE); }
+    static int countLeadingNotWhitespace(@NotNull CharSequence thizz, int startIndex, int endIndex)                          { return countLeading(thizz, WHITESPACE_SET.negate(), startIndex, endIndex); }
+
+    static int countTrailingWhitespace(@NotNull CharSequence thizz)                                                          { return countTrailing(thizz, WHITESPACE_SET, 0, Integer.MAX_VALUE); }
+    static int countTrailingWhitespace(@NotNull CharSequence thizz, int fromIndex)                                           { return countTrailing(thizz, WHITESPACE_SET, 0, fromIndex); }
+    static int countTrailingWhitespace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                           { return countTrailing(thizz, WHITESPACE_SET, startIndex, fromIndex); }
+    static int countTrailingNotWhitespace(@NotNull CharSequence thizz)                                                       { return countTrailing(thizz, WHITESPACE_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countTrailingNotWhitespace(@NotNull CharSequence thizz, int fromIndex)                                        { return countTrailing(thizz, WHITESPACE_SET.negate(), 0, fromIndex); }
+    static int countTrailingNotWhitespace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                        { return countTrailing(thizz, WHITESPACE_SET.negate(), startIndex, fromIndex); }
 
     static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                      { return countLeading(thizz, chars, 0, Integer.MAX_VALUE); }
     static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                       { return countLeading(thizz, chars, fromIndex, Integer.MAX_VALUE); }

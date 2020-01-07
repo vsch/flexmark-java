@@ -256,7 +256,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int indexOfAnyNot(@NotNull CharPredicate s, int fromIndex, int endIndex)         { return SequenceUtils.indexOfAnyNot(this, s,fromIndex, endIndex);}
     @Override final public int indexOfNot(char c)                                                           { return SequenceUtils.indexOfNot(this, c); }
     @Override final public int indexOfNot(char c, int fromIndex)                                            { return SequenceUtils.indexOfNot(this, c, fromIndex); }
-    @Override final public int lastIndexOf(char c)                                                  { return SequenceUtils.lastIndexOf(this, c); }
+    @Override final public int lastIndexOf(char c)                                                          { return SequenceUtils.lastIndexOf(this, c); }
     @Override final public int lastIndexOf(char c, int fromIndex)                                           { return SequenceUtils.lastIndexOf(this, c, fromIndex); }
     @Override final public int lastIndexOfNot(char c)                                                       { return SequenceUtils.lastIndexOfNot(this, c); }
     @Override final public int lastIndexOfNot(char c, int fromIndex)                                        { return SequenceUtils.lastIndexOfNot(this, c, fromIndex); }
@@ -281,6 +281,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int countOfNotSpaceTab()                                                         { return SequenceUtils.countOfNotSpaceTab(this); }
     @Override final public int countOfWhitespace()                                                          { return SequenceUtils.countOfWhitespace(this); }
     @Override final public int countOfNotWhitespace()                                                       { return SequenceUtils.countOfNotWhitespace(this); }
+
     @Override final public int countOfAny(@NotNull CharPredicate chars, int fromIndex)                      { return SequenceUtils.countOfAny(this, chars, fromIndex); }
     @Override final public int countOfAny(@NotNull CharPredicate chars)                                     { return SequenceUtils.countOfAny(this, chars); }
     @Override final public int countOfAnyNot(@NotNull CharPredicate chars, int fromIndex)                   { return SequenceUtils.countOfAnyNot(this, chars, fromIndex); }
@@ -290,16 +291,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     // @formatter:on
 
     // @formatter:off
-    @Override final public int countLeadingSpaceTab()                                                       { return SequenceUtils.countLeadingSpaceTab(this); }
-    @Override final public int countTrailingSpaceTab()                                                      { return SequenceUtils.countTrailingSpaceTab(this); }
-    @Override final public int countLeadingNotSpaceTab()                                                    { return SequenceUtils.countLeadingNotSpaceTab(this); }
-    @Override final public int countTrailingNotSpaceTab()                                                   { return SequenceUtils.countTrailingNotSpaceTab(this); }
-
-    @Override final public int countLeadingWhitespace()                                                     { return SequenceUtils.countLeadingWhitespace(this); }
-    @Override final public int countTrailingWhitespace()                                                    { return SequenceUtils.countTrailingWhitespace(this); }
-    @Override final public int countLeadingNotWhitespace()                                                  { return SequenceUtils.countLeadingNotWhitespace(this); }
-    @Override final public int countTrailingNotWhitespace()                                                 { return SequenceUtils.countTrailingNotWhitespace(this); }
-
     @Override final public int countLeading(@NotNull CharPredicate chars)                                   { return SequenceUtils.countLeading(this, chars); }
     @Override final public int countLeading(@NotNull CharPredicate chars, int fromIndex)                    { return SequenceUtils.countLeading(this, chars, fromIndex); }
     @Override final public int countLeadingNot(@NotNull CharPredicate chars)                                { return SequenceUtils.countLeadingNot(this, chars); }
@@ -316,48 +307,91 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @Override final public int countLeadingColumns(int startColumn, @NotNull CharPredicate chars)           { return SequenceUtils.countLeadingColumns(this, startColumn, chars); }
     @Override final public int countTrailing(@NotNull CharPredicate chars, int startIndex, int fromIndex)   { return SequenceUtils.countTrailing(this, chars, startIndex, fromIndex); }
+
+    @Override final public int countLeadingSpace()                                                          { return SequenceUtils.countLeadingSpace(this); }
+    @Override final public int countLeadingNotSpace()                                                       { return SequenceUtils.countLeadingNotSpace(this); }
+    @Override final public int countLeadingSpace(int startIndex)                                            { return SequenceUtils.countLeadingSpace(this, startIndex); }
+    @Override final public int countLeadingNotSpace(int startIndex)                                         { return SequenceUtils.countLeadingNotSpace(this, startIndex); }
+    @Override final public int countLeadingSpace(int startIndex, int endIndex)                              { return SequenceUtils.countLeadingSpace(this, startIndex, endIndex); }
+    @Override final public int countLeadingNotSpace(int startIndex, int endIndex)                           { return SequenceUtils.countLeadingNotSpace(this, startIndex, endIndex); }
+
+    @Override final public int countTrailingSpace()                                                         { return SequenceUtils.countTrailingSpace(this); }
+    @Override final public int countTrailingNotSpace()                                                      { return SequenceUtils.countTrailingNotSpace(this); }
+    @Override final public int countTrailingSpace(int fromIndex)                                            { return SequenceUtils.countTrailingSpace(this, fromIndex); }
+    @Override final public int countTrailingNotSpace(int fromIndex)                                         { return SequenceUtils.countTrailingNotSpace(this, fromIndex); }
+    @Override final public int countTrailingSpace(int startIndex, int fromIndex)                            { return SequenceUtils.countTrailingSpace(this, startIndex, fromIndex); }
+    @Override final public int countTrailingNotSpace(int startIndex, int fromIndex)                         { return SequenceUtils.countTrailingNotSpace(this, startIndex, fromIndex); }
+
+    @Override final public int countLeadingSpaceTab()                                                       { return SequenceUtils.countLeadingSpaceTab(this); }
+    @Override final public int countLeadingNotSpaceTab()                                                    { return SequenceUtils.countLeadingNotSpaceTab(this); }
+    @Override final public int countLeadingSpaceTab(int startIndex)                                         { return SequenceUtils.countLeadingSpaceTab(this, startIndex); }
+    @Override final public int countLeadingNotSpaceTab(int startIndex)                                      { return SequenceUtils.countLeadingNotSpaceTab(this, startIndex); }
+    @Override final public int countLeadingSpaceTab(int startIndex, int endIndex)                           { return SequenceUtils.countLeadingSpaceTab(this, startIndex, endIndex); }
+    @Override final public int countLeadingNotSpaceTab(int startIndex, int endIndex)                        { return SequenceUtils.countLeadingNotSpaceTab(this, startIndex, endIndex); }
+
+    @Override final public int countTrailingSpaceTab()                                                      { return SequenceUtils.countTrailingSpaceTab(this); }
+    @Override final public int countTrailingNotSpaceTab()                                                   { return SequenceUtils.countTrailingNotSpaceTab(this); }
+    @Override final public int countTrailingSpaceTab(int fromIndex)                                         { return SequenceUtils.countTrailingSpaceTab(this, fromIndex); }
+    @Override final public int countTrailingNotSpaceTab(int fromIndex)                                      { return SequenceUtils.countTrailingNotSpaceTab(this, fromIndex); }
+    @Override final public int countTrailingSpaceTab(int startIndex, int fromIndex)                         { return SequenceUtils.countTrailingSpaceTab(this, startIndex, fromIndex); }
+    @Override final public int countTrailingNotSpaceTab(int startIndex, int fromIndex)                      { return SequenceUtils.countTrailingNotSpaceTab(this, startIndex, fromIndex); }
+
+    @Override final public int countLeadingWhitespace()                                                     { return SequenceUtils.countLeadingWhitespace(this); }
+    @Override final public int countLeadingNotWhitespace()                                                  { return SequenceUtils.countLeadingNotWhitespace(this); }
+    @Override final public int countLeadingWhitespace(int startIndex)                                       { return SequenceUtils.countLeadingWhitespace(this, startIndex); }
+    @Override final public int countLeadingNotWhitespace(int startIndex)                                    { return SequenceUtils.countLeadingNotWhitespace(this, startIndex); }
+    @Override final public int countLeadingWhitespace(int startIndex, int endIndex)                         { return SequenceUtils.countLeadingWhitespace(this, startIndex, endIndex); }
+    @Override final public int countLeadingNotWhitespace(int startIndex, int endIndex)                      { return SequenceUtils.countLeadingNotWhitespace(this, startIndex, endIndex); }
+
+    @Override final public int countTrailingWhitespace()                                                    { return SequenceUtils.countTrailingWhitespace(this); }
+    @Override final public int countTrailingNotWhitespace()                                                 { return SequenceUtils.countTrailingNotWhitespace(this); }
+    @Override final public int countTrailingWhitespace(int fromIndex)                                       { return SequenceUtils.countTrailingWhitespace(this, fromIndex); }
+    @Override final public int countTrailingNotWhitespace(int fromIndex)                                    { return SequenceUtils.countTrailingNotWhitespace(this, fromIndex); }
+    @Override final public int countTrailingWhitespace(int startIndex, int fromIndex)                       { return SequenceUtils.countTrailingWhitespace(this, startIndex, fromIndex); }
+    @Override final public int countTrailingNotWhitespace(int startIndex, int fromIndex)                    { return SequenceUtils.countTrailingNotWhitespace(this, startIndex, fromIndex); }
+
     // @formatter:on
 
     // @formatter:off
-    @NotNull @Override final public T trimStart(@NotNull CharPredicate chars)                       { return subSequence(trimStartRange(0, chars)); }
-    @NotNull @Override final public T trimmedStart(@NotNull CharPredicate chars)                    { return trimmedStart(0, chars); }
-    @NotNull @Override final public T trimEnd(@NotNull CharPredicate chars)                         { return trimEnd(0, chars); }
-    @NotNull @Override final public T trimmedEnd(@NotNull CharPredicate chars)                      { return trimmedEnd(0, chars); }
-    @NotNull @Override final public T trim(@NotNull CharPredicate chars)                            { return trim(0, chars); }
-    @NotNull @Override final public Pair<T, T> trimmed(@NotNull CharPredicate chars)                { return trimmed(0, chars); }
-    @NotNull @Override final public T trimStart(int keep)                                           { return trimStart(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trimmedStart(int keep)                                        { return trimmedStart(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trimEnd(int keep)                                             { return trimEnd(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trimmedEnd(int keep)                                          { return trimmedEnd(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trim(int keep)                                                { return trim(keep, WHITESPACE_SET); }
-    @NotNull @Override final public Pair<T, T> trimmed(int keep)                                    { return trimmed(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trimStart()                                                   { return trimStart(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trimmedStart()                                                { return trimmedStart(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trimEnd()                                                     { return trimEnd(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trimmedEnd()                                                  { return trimmedEnd(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trim()                                                        { return trim(0, WHITESPACE_SET); }
-    @NotNull @Override final public Pair<T, T> trimmed()                                            { return trimmed(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trimStart(int keep, @NotNull CharPredicate chars)             { return subSequence(trimStartRange(keep, chars)); }
-    @NotNull @Override final public T trimmedStart(int keep, @NotNull CharPredicate chars)          { return subSequenceBefore(trimStartRange(keep, chars)); }
-    @NotNull @Override final public T trimEnd(int keep, @NotNull CharPredicate chars)               { return subSequence(trimEndRange(keep, chars)); }
-    @NotNull @Override final public T trimmedEnd(int keep, @NotNull CharPredicate chars)            { return subSequenceAfter(trimEndRange(keep, chars)); }
-    @NotNull @Override final public T trim(int keep, @NotNull CharPredicate chars)                  { return subSequence(trimRange(keep, chars)); }
-    @NotNull @Override final public Pair<T, T> trimmed(int keep, @NotNull CharPredicate chars)      { return subSequenceBeforeAfter(trimRange(keep, chars)); }
+    @NotNull @Override final public T trimStart(@NotNull CharPredicate chars)                               { return subSequence(trimStartRange(0, chars)); }
+    @NotNull @Override final public T trimmedStart(@NotNull CharPredicate chars)                            { return trimmedStart(0, chars); }
+    @NotNull @Override final public T trimEnd(@NotNull CharPredicate chars)                                 { return trimEnd(0, chars); }
+    @NotNull @Override final public T trimmedEnd(@NotNull CharPredicate chars)                              { return trimmedEnd(0, chars); }
+    @NotNull @Override final public T trim(@NotNull CharPredicate chars)                                    { return trim(0, chars); }
+    @NotNull @Override final public Pair<T, T> trimmed(@NotNull CharPredicate chars)                        { return trimmed(0, chars); }
+    @NotNull @Override final public T trimStart(int keep)                                                   { return trimStart(keep, WHITESPACE_SET); }
+    @NotNull @Override final public T trimmedStart(int keep)                                                { return trimmedStart(keep, WHITESPACE_SET); }
+    @NotNull @Override final public T trimEnd(int keep)                                                     { return trimEnd(keep, WHITESPACE_SET); }
+    @NotNull @Override final public T trimmedEnd(int keep)                                                  { return trimmedEnd(keep, WHITESPACE_SET); }
+    @NotNull @Override final public T trim(int keep)                                                        { return trim(keep, WHITESPACE_SET); }
+    @NotNull @Override final public Pair<T, T> trimmed(int keep)                                            { return trimmed(keep, WHITESPACE_SET); }
+    @NotNull @Override final public T trimStart()                                                           { return trimStart(0, WHITESPACE_SET); }
+    @NotNull @Override final public T trimmedStart()                                                        { return trimmedStart(0, WHITESPACE_SET); }
+    @NotNull @Override final public T trimEnd()                                                             { return trimEnd(0, WHITESPACE_SET); }
+    @NotNull @Override final public T trimmedEnd()                                                          { return trimmedEnd(0, WHITESPACE_SET); }
+    @NotNull @Override final public T trim()                                                                { return trim(0, WHITESPACE_SET); }
+    @NotNull @Override final public Pair<T, T> trimmed()                                                    { return trimmed(0, WHITESPACE_SET); }
+    @NotNull @Override final public T trimStart(int keep, @NotNull CharPredicate chars)                     { return subSequence(trimStartRange(keep, chars)); }
+    @NotNull @Override final public T trimmedStart(int keep, @NotNull CharPredicate chars)                  { return subSequenceBefore(trimStartRange(keep, chars)); }
+    @NotNull @Override final public T trimEnd(int keep, @NotNull CharPredicate chars)                       { return subSequence(trimEndRange(keep, chars)); }
+    @NotNull @Override final public T trimmedEnd(int keep, @NotNull CharPredicate chars)                    { return subSequenceAfter(trimEndRange(keep, chars)); }
+    @NotNull @Override final public T trim(int keep, @NotNull CharPredicate chars)                          { return subSequence(trimRange(keep, chars)); }
+    @NotNull @Override final public Pair<T, T> trimmed(int keep, @NotNull CharPredicate chars)              { return subSequenceBeforeAfter(trimRange(keep, chars)); }
     // @formatter:on
 
     // @formatter:off
-    @NotNull @Override final public Range trimStartRange(int keep, @NotNull CharPredicate chars)    { return SequenceUtils.trimStartRange(this, keep, chars); }
-    @NotNull @Override final public Range trimEndRange(int keep, @NotNull CharPredicate chars)      { return SequenceUtils.trimEndRange(this, keep, chars); }
-    @NotNull @Override final public Range trimRange(int keep, @NotNull CharPredicate chars)         { return SequenceUtils.trimRange(this, keep, chars); }
-    @NotNull @Override final public Range trimStartRange(@NotNull CharPredicate chars)              { return SequenceUtils.trimStartRange(this, chars); }
-    @NotNull @Override final public Range trimEndRange(@NotNull CharPredicate chars)                { return SequenceUtils.trimEndRange(this, chars); }
-    @NotNull @Override final public Range trimRange(@NotNull CharPredicate chars)                   { return SequenceUtils.trimRange(this, chars); }
-    @NotNull @Override final public Range trimStartRange(int keep)                                  { return SequenceUtils.trimStartRange(this, keep); }
-    @NotNull @Override final public Range trimEndRange(int keep)                                    { return SequenceUtils.trimEndRange(this, keep); }
-    @NotNull @Override final public Range trimRange(int keep)                                       { return SequenceUtils.trimRange(this, keep); }
-    @NotNull @Override final public Range trimStartRange()                                          { return SequenceUtils.trimStartRange(this); }
-    @NotNull @Override final public Range trimEndRange()                                            { return SequenceUtils.trimEndRange(this); }
-    @NotNull @Override final public Range trimRange()                                               { return SequenceUtils.trimRange(this); }
+    @NotNull @Override final public Range trimStartRange(int keep, @NotNull CharPredicate chars)            { return SequenceUtils.trimStartRange(this, keep, chars); }
+    @NotNull @Override final public Range trimEndRange(int keep, @NotNull CharPredicate chars)              { return SequenceUtils.trimEndRange(this, keep, chars); }
+    @NotNull @Override final public Range trimRange(int keep, @NotNull CharPredicate chars)                 { return SequenceUtils.trimRange(this, keep, chars); }
+    @NotNull @Override final public Range trimStartRange(@NotNull CharPredicate chars)                      { return SequenceUtils.trimStartRange(this, chars); }
+    @NotNull @Override final public Range trimEndRange(@NotNull CharPredicate chars)                        { return SequenceUtils.trimEndRange(this, chars); }
+    @NotNull @Override final public Range trimRange(@NotNull CharPredicate chars)                           { return SequenceUtils.trimRange(this, chars); }
+    @NotNull @Override final public Range trimStartRange(int keep)                                          { return SequenceUtils.trimStartRange(this, keep); }
+    @NotNull @Override final public Range trimEndRange(int keep)                                            { return SequenceUtils.trimEndRange(this, keep); }
+    @NotNull @Override final public Range trimRange(int keep)                                               { return SequenceUtils.trimRange(this, keep); }
+    @NotNull @Override final public Range trimStartRange()                                                  { return SequenceUtils.trimStartRange(this); }
+    @NotNull @Override final public Range trimEndRange()                                                    { return SequenceUtils.trimEndRange(this); }
+    @NotNull @Override final public Range trimRange()                                                       { return SequenceUtils.trimRange(this); }
     // @formatter:on
 
     @NotNull

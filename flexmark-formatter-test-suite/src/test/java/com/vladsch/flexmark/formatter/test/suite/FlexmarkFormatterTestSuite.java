@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.formatter.test.suite;
 
-import com.vladsch.flexmark.core.test.util.formatter.ComboCoreFormatterSpecTest;
-import com.vladsch.flexmark.core.test.util.formatter.ComboCoreTranslationFormatterSpecTest;
-import com.vladsch.flexmark.core.test.util.formatter.MergeFormatterCoreTest;
+import com.vladsch.flexmark.core.test.util.formatter.*;
 import com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationFormatterSpecTest;
 import com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.abbreviation.MergeAbbreviationsTest;
@@ -58,9 +56,11 @@ import org.junit.runners.Suite;
         ComboTableTranslationFormatterSpecTest.class,
         ComboYamlFrontMatterFormatterSpecTest.class,
         ComboCoreFormatterSpecTest.class,
+        ComboCoreWrappingSpecTest.class,
         ComboCoreTranslationFormatterSpecTest.class,
         ComboFormatterTestSpecTest.class,
         ComboFormatterIssueSpecTest.class,
+        CoreFormatterTestSuite.class,
         ExtTocFormatterTestSuite.class,
         MergeAbbreviationsTest.class,
         MergeAttributesTest.class,

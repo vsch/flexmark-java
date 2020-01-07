@@ -298,29 +298,61 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int countTrailing(@NotNull CharPredicate chars, int startIndex, int endIndex);
     int countTrailingNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
 
+    int countLeadingSpace();
+    int countLeadingNotSpace();
+    int countLeadingSpace(int startIndex);
+    int countLeadingNotSpace(int startIndex);
+    int countLeadingSpace(int startIndex, int endIndex);
+    int countLeadingNotSpace(int startIndex, int endIndex);
+
+    int countTrailingSpace();
+    int countTrailingNotSpace();
+    int countTrailingSpace(int fromIndex);
+    int countTrailingNotSpace(int fromIndex);
+    int countTrailingSpace(int startIndex, int fromIndex);
+    int countTrailingNotSpace(int startIndex, int fromIndex);
+
     int countLeadingSpaceTab();
+    int countLeadingNotSpaceTab();
+    int countLeadingSpaceTab(int startIndex);
+    int countLeadingNotSpaceTab(int startIndex);
+    int countLeadingSpaceTab(int startIndex, int endIndex);
+    int countLeadingNotSpaceTab(int startIndex, int endIndex);
+
+    int countTrailingSpaceTab();
+    int countTrailingNotSpaceTab();
+    int countTrailingSpaceTab(int fromIndex);
+    int countTrailingNotSpaceTab(int fromIndex);
+    int countTrailingSpaceTab(int startIndex, int fromIndex);
+    int countTrailingNotSpaceTab(int startIndex, int fromIndex);
+
+    int countLeadingWhitespace();
+    int countLeadingNotWhitespace();
+    int countLeadingWhitespace(int startIndex);
+    int countLeadingNotWhitespace(int startIndex);
+    int countLeadingWhitespace(int startIndex, int endIndex);
+    int countLeadingNotWhitespace(int startIndex, int endIndex);
+
+    int countTrailingWhitespace();
+    int countTrailingNotWhitespace();
+    int countTrailingWhitespace(int fromIndex);
+    int countTrailingNotWhitespace(int fromIndex);
+    int countTrailingWhitespace(int startIndex, int fromIndex);
+    int countTrailingNotWhitespace(int startIndex, int fromIndex);
 
     @Deprecated
     default int countLeading() {
         return countLeadingSpaceTab();
     }
 
-    int countLeadingNotSpaceTab();
-    int countTrailingSpaceTab();
-
     @Deprecated
     default int countTrailing() {
         return countLeadingSpaceTab();
     }
 
-    int countTrailingNotSpaceTab();
     int countOfSpaceTab();
     int countOfNotSpaceTab();
 
-    int countLeadingWhitespace();
-    int countLeadingNotWhitespace();
-    int countTrailingWhitespace();
-    int countTrailingNotWhitespace();
     int countOfWhitespace();
     int countOfNotWhitespace();
 
@@ -1321,6 +1353,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     /**
      * Return string or null if BaseSequence.NULL
+     *
      * @return string or null if BaseSequence.NULL
      */
     @Nullable

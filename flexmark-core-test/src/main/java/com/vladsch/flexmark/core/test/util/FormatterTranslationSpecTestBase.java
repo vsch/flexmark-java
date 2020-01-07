@@ -24,6 +24,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
     final public static DataKey<Boolean> SHOW_LINE_RANGES = new DataKey<>("SHOW_LINE_RANGES", false);
     public static final DataKey<Character> EDIT_OP_CHAR = new DataKey<>("EDIT_OP_CHAR", SequenceUtils.NUL);
     public static final DataKey<Integer> EDIT_OP = new DataKey<>("EDIT_OP", 0);
+//    public static final DataKey<Boolean> EDIT_INDENT = new DataKey<>("EDIT_INDENT", false);
 
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.BLANK_LINES_IN_AST, true)
@@ -39,6 +40,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("insert-space", new MutableDataSet().set(EDIT_OP, 1).set(EDIT_OP_CHAR, ' '));
         optionsMap.put("delete-char", new MutableDataSet().set(EDIT_OP, -1).set(EDIT_OP_CHAR, '\0'));
         optionsMap.put("delete-space", new MutableDataSet().set(EDIT_OP, -1).set(EDIT_OP_CHAR, ' '));
+//        optionsMap.put("indent-edit", new MutableDataSet().set(EDIT_INDENT, true));
         optionsMap.put("restore-tracked-spaces", new MutableDataSet().set(Formatter.RESTORE_TRACKED_SPACES, true));
 
         optionsMap.put("format-fixed-indent", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
