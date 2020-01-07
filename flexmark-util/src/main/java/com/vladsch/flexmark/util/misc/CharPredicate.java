@@ -13,17 +13,16 @@ import java.util.function.IntPredicate;
 public interface CharPredicate extends IntPredicate {
     CharPredicate NONE = value -> false;
     CharPredicate ALL = value -> true;
-    @Deprecated
-    CharPredicate FALSE = NONE;
-    @Deprecated
-    CharPredicate TRUE = ALL;
     CharPredicate SPACE = value -> value == ' ';
     CharPredicate TAB = value -> value == '\t';
     CharPredicate EOL = value -> value == '\n';
     CharPredicate BACKSLASH = value -> value == '\\';
+    CharPredicate SLASH = value -> value == '/';
+    CharPredicate LINE_SEP = value -> value == '\u2028';
     CharPredicate HASH = value -> value == '#';
     CharPredicate SPACE_TAB = value -> value == ' ' || value == '\t';
-    CharPredicate SPACE_TAB_OR_NUL = value -> value == ' ' || value == '\t' || value == '\0';
+    CharPredicate SPACE_TAB_NUL = value -> value == ' ' || value == '\t' || value == '\0';
+    CharPredicate SPACE_TAB_LINE_SEP = value -> value == ' ' || value == '\t' || value == '\u2028';
     CharPredicate SPACE_EOL = value -> value == ' ' || value == '\n';
     CharPredicate SPACE_TAB_NBSP = value -> value == ' ' || value == '\t' || value == '\u00A0';
     CharPredicate SPACE_TAB_EOL = value -> value == ' ' || value == '\t' || value == '\n';
@@ -35,6 +34,13 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate DECIMAL_DIGITS = value -> value >= '0' && value <= '9';
     CharPredicate OCTAL_DIGITS = value -> value >= '0' && value <= '7';
     CharPredicate BINARY_DIGITS = value -> value >= '0' && value <= '1';
+
+    @Deprecated
+    CharPredicate FALSE = NONE;
+    @Deprecated
+    CharPredicate TRUE = ALL;
+    @Deprecated
+    CharPredicate SPACE_TAB_OR_NUL = SPACE_TAB_NUL;
 
     @Override
     boolean test(int value);

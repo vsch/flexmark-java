@@ -62,7 +62,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: {133 sd -> 128}
+[0]: {133 >< sd -> 128}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -86,7 +86,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: {133 sd -> 136}
+[0]: {133 >< sd -> 136}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -110,7 +110,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: {133 sd -> 146}
+[0]: {133 >< sd -> 146}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧    > ⟦Add: configuration for repeated prefixes in items, which⟧

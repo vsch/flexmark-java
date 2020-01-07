@@ -78,7 +78,7 @@ public class MarkdownParagraph {
         if (afterSpace && afterDelete) {
             BasedOffsetTracker preFormatTracker = BasedOffsetTracker.create(altSeq);
             int startOfLine = baseSequence.startOfLine(offset);
-            if (startOfLine > altSeq.getStartOffset() && baseSequence.safeCharAt(offset) != ' ') {
+            if (startOfLine > altSeq.getStartOffset() && !baseSequence.isCharAt(offset, CharPredicate.SPACE_TAB_LINE_SEP)) {
                 int previousNonBlank = baseSequence.lastIndexOfAnyNot(CharPredicate.SPACE_TAB_EOL, offset - 1);
                 if (previousNonBlank < startOfLine) {
                     // delete range between last non-blank and offset index
