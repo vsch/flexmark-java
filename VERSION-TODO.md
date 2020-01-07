@@ -211,6 +211,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.102
 
+* Fix:
+  [core_wrapping_spec: Lines 150-151](https://github.com/vsch/flexmark-java/blob/master/flexmark-core-test/src/test/resources/core_wrapping_spec.md#L150-L151)
 * Add: `TrackedOffset` spaces before/after the offset. This is impossible to determine from
   segmented sequence in edge cases. Best to have it provided from original sequence where it is
   easy to determine and combined with what is in the final sequence since some spaces could have
