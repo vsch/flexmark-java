@@ -110,6 +110,7 @@ public class MarkdownParagraph {
             if (lastRange.isEmpty() || !lastRange.contains(trackedOffset.getOffset())) {
                 lastRange = getContinuationStartSplice(trackedOffset.getOffset(), trackedOffset.isAfterSpaceEdit(), trackedOffset.isAfterDelete());
                 if (lastRange.isNotEmpty()) {
+                    trackedOffset.setSpliced(true);
                     input = input.delete(lastRange.getStart(), lastRange.getEnd());
                     altInput = altInput.delete(lastRange.getStart(), lastRange.getEnd());
                 }
@@ -137,8 +138,18 @@ public class MarkdownParagraph {
                 boolean isLineSepPrev = input.safeCharAt(baseInfo.startIndex) == SequenceUtils.LS;
 
                 int baseIndex = isLineSepPrev ? baseInfo.startIndex : baseInfo.endIndex;
-                final int indexSpacesBefore = input.countTrailing(CharPredicate.SPACE_TAB, baseIndex);
-                final int indexSpacesAfter = input.countLeading(CharPredicate.SPACE_TAB, baseIndex);
+                int countedSpacesBefore = input.countTrailing(CharPredicate.SPACE_TAB, baseIndex);
+                int countedSpacesAfter = input.countLeading(CharPredicate.SPACE_TAB, baseIndex);
+                int remainingSpacesBefore = countedSpacesBefore;
+
+                int indexSpacesBefore = trackedOffset.getSpacesBefore() >= 0 ? Math.min(countedSpacesBefore, trackedOffset.getSpacesBefore()) : countedSpacesBefore;
+                remainingSpacesBefore -= indexSpacesBefore;
+
+                if (trackedOffset.isSpliced()) {
+                    indexSpacesBefore = 0;
+                }
+                final int indexSpacesAfter = trackedOffset.getSpacesAfter() >= 0 ? Math.min(countedSpacesAfter + remainingSpacesBefore, trackedOffset.getSpacesAfter()) : countedSpacesAfter;
+
                 int baseIndexSpacesBefore = indexSpacesBefore;
                 int baseIndexSpacesAfter = indexSpacesAfter;
                 boolean needSpace = baseIndexSpacesBefore > 0;

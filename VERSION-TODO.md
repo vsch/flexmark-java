@@ -211,6 +211,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.102
 
+* Add: `TrackedOffset` spaces before/after the offset. This is impossible to determine from
+  segmented sequence in edge cases. Best to have it provided from original sequence where it is
+  easy to determine and combined with what is in the final sequence since some spaces could have
+  been removed when parent prefixes are removed.
 * Fix: removal of all prefixes messes up format tracked offset resolution
 * Fix: `SegmentTree.getSegmentRange(int, int, int, int, BasedSequence, Segment)` was not
   computing startOffset correctly if first segment was text and had no previous `ANCHOR`

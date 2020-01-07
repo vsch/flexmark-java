@@ -117,7 +117,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             for (int offset : offsets) {
                 char c = EDIT_OP_CHAR.get(options);
                 int editOp = EDIT_OP.get(options);
-                formatter.addTrackedOffset(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0));
+                formatter.addTrackedOffset(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0, -1, -1));
             }
 
             BasedSequence actual = formatter.wrapText();

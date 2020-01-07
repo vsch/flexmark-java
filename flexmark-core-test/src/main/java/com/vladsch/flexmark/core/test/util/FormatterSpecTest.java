@@ -45,7 +45,9 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
 
                     for (int offset : extractMarkup.getSecond()) {
 //                        trackedOffsets.add(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0, editIndent));
-                        trackedOffsets.add(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0));
+                        int spacesBefore = trackedSequence.getBaseSequence().countTrailingSpaceTab(offset);
+                        int spacesAfter = trackedSequence.getBaseSequence().countLeadingSpaceTab(offset);
+                        trackedOffsets.add(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0, spacesBefore, spacesAfter));
                     }
 
                     Formatter.TRACKED_SEQUENCE.set(getDocument().getDocument(), trackedSequence);

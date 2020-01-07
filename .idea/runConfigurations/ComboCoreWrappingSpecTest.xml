@@ -1,0 +1,24 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ComboCoreWrappingSpecTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="flexmark-test-suite" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.vladsch.flexmark.core.test.util.formatter.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.core.test.util.formatter" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.core.test.util.formatter.ComboCoreWrappingSpecTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <option name="PARAMETERS" value="" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+    <option name="TEST_SEARCH_SCOPE">
+      <value defaultName="wholeProject" />
+    </option>
+    <dir value="$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -746,26 +746,20 @@ BasedSegmentBuilder{[0, 133), s=4:6, u=9:11, t=9:11, l=138, sz=22, na=17: [0, 31
 ### Paragraph
 
 ```````````````````````````````` example(Tracked Offset - Paragraph: 1) options(margin[66], restore-tracked-spaces)
-Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
-⟦    ⟧would be treated equivalent to task item marker prefix. That way
-⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
+⟦    ⟧configuration.   ⦙  
 .
-Add: configuration for repeated prefixes in items, which would `be
-#2` copied when adding/splitting an item. In other words they
-would be treated equivalent to task item marker prefix. That way
-standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
-would be automatically copied.   ⦙
+configuration.   ⦙
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Tracked Offset - Paragraph: 2) options(margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
-⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
+⟦    ⟧would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
 .
 Add: configuration for repeated prefixes in items, which would `be
-#2` copied when adding/splitting an item. In other words they
-⦙would be treated equivalent to task item marker prefix. That way
+\#2` copied when adding/splitting an item. In other words they
+would be treated equivalent to task item marker prefix. That way
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙
 ````````````````````````````````
@@ -774,45 +768,58 @@ would be automatically copied.   ⦙
 ```````````````````````````````` example(Tracked Offset - Paragraph: 3) options(margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
+⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
+.
+Add: configuration for repeated prefixes in items, which would `be
+\#2` copied when adding/splitting an item. In other words they
+⦙would be treated equivalent to task item marker prefix. That way
+standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
+would be automatically copied.   ⦙
+````````````````````````````````
+
+
+```````````````````````````````` example(Tracked Offset - Paragraph: 4) options(margin[66], restore-tracked-spaces)
+Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
+⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
 .
 Add: configuration for repeated prefixes in items, which would `be
-#2` copied when adding/splitting an item. In other words they
+\#2` copied when adding/splitting an item. In other words they
 ⦙would be treated equivalent to task item marker prefix. That way
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙   ⦙
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 4) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 5) options(margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.         
 .
 Add: configuration for repeated prefixes in items, which would `be
-#2` copied when adding/splitting an item. In other words they
+\#2` copied when adding/splitting an item. In other words they
 would be treated equivalent to task item marker prefix. That way  ⦙
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 5) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 6) options(margin[66], restore-tracked-spaces)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
 .
 Add: configuration for repeated prefixes in items, which would `be
-#2` copied when adding/splitting an item. In other words they
+\#2` copied when adding/splitting an item. In other words they
 ⦙would be treated equivalent to task item marker prefix. That way  ⦙
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙   ⦙
 ````````````````````````````````
 
 
-Leading space not handled for tracking for now
+Leading space on first line not handled for now.
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 6) options(IGNORE, margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 7) options(IGNORE, margin[66], restore-tracked-spaces)
    Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent ⦙ to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.
@@ -825,7 +832,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 7) options(margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Tracked Offset - Paragraph: 8) options(margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧⦙ keep duplicate code.
 .
@@ -834,7 +841,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 8) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
+```````````````````````````````` example(Tracked Offset - Paragraph: 9) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
 ⟦  * [ ] ⟧d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
 ⟦        ⟧dependencies on classes in other directories.
 .
@@ -843,7 +850,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 9) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Tracked Offset - Paragraph: 10) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧ ⦙to keep duplicate code.
 .
@@ -852,7 +859,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 10) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Tracked Offset - Paragraph: 11) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙ to keep duplicate code.
 .
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
@@ -860,7 +867,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 11) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
+```````````````````````````````` example(Tracked Offset - Paragraph: 12) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
 ⟦* ⟧Fix: conversion from Smart to based to extract more source information from segmented
 ⟦  ⟧sequence ⦙and mapped sequence.
 .
@@ -869,7 +876,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 12) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
+```````````````````````````````` example(Tracked Offset - Paragraph: 13) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
 ⟦* ⟧Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
 .
 * Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line
