@@ -38,7 +38,7 @@ Add: configuration for repeated prefixes in items, which would `be #2`        �
     standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [78) } --> 71
+[0]: {78 -> 71}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -62,7 +62,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [133, sd) } --> 128
+[0]: {133 sd -> 128}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -86,7 +86,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [133, sd) } --> 136
+[0]: {133 sd -> 136}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -110,7 +110,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [133, sd) } --> 146
+[0]: {133 sd -> 146}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧    > ⟦Add: configuration for repeated prefixes in items, which⟧
@@ -134,7 +134,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [133, d) } --> 129
+[0]: {133 d -> 129}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -309,7 +309,7 @@ would be automatically copied.
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.         
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [2) } --> 0
+[0]: {2 -> 0}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -360,7 +360,7 @@ would be automatically copied.   ⦙   ⦙
 Add: configuration ⦙ for repeated
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [19) } --> 19
+[0]: {19 -> 19}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration ⟧⟦for repeated⟧
@@ -374,7 +374,7 @@ Add: configuration ⦙for repeated
 Add: configuration ⦙ for repeated
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [19) } --> 19
+[0]: {19 -> 19}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration  for repeated⟧
@@ -388,9 +388,9 @@ Add: configuration ⦙ for repeated
 Add: configuration ⦙ for repeated.  ⦙  ⦙  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [19) } --> 19
-[1]: { [35) } --> 35
-[2]: { [37) } --> 37
+[0]: {19 -> 19}
+[1]: {35 -> 35}
+[2]: {37 -> 37}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration  for repeated.⟧    ⟦⟧
@@ -406,7 +406,7 @@ backspace after typing 1 char should preserve surrounding spaces
 Add: configuration ⦙ for repeated.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [19, d) } --> 19
+[0]: {19 d -> 19}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration  for repeated.⟧
@@ -420,7 +420,7 @@ Add: configuration ⦙ for repeated.
 Add: configuration for repeated. ⦙ ➥[simLink](simLink.md)
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [33) } --> 33
+[0]: {33 -> 33}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦⟧
@@ -437,7 +437,7 @@ Add: configuration for repeated.
  ⦙➥[simLink](simLink.md)
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [34, si) } --> 33
+[0]: {34 si -> 33}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦
@@ -454,7 +454,7 @@ Add: configuration for repeated.
 t⦙➥[simLink](simLink.md)
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [34, i) } --> 34
+[0]: {34 i -> 34}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦t⟧
@@ -471,7 +471,7 @@ text should wrap onto the next t⦙
 line at right margin of 30
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [32, i) } --> 32
+[0]: {32 i -> 32}
 
 ---- Ranges ------------------------------------------------------------
 ⟦text should wrap onto the next⟧
@@ -488,7 +488,7 @@ text should wrap onto the next tt⦙
 line at right margin of 30
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [33, i) } --> 33
+[0]: {33 i -> 33}
 
 ---- Ranges ------------------------------------------------------------
 ⟦text should wrap onto the next⟧
@@ -505,7 +505,7 @@ text should wrap onto the next
 t⦙ line at right margin of 30
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [32, d) } --> 32
+[0]: {32 d -> 32}
 
 ---- Ranges ------------------------------------------------------------
 ⟦text should wrap onto the next⟧ ⟦t⟧
@@ -522,7 +522,7 @@ text should wrap onto the next ⦙.
 line at right margin of 30
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [31, si) } --> 31
+[0]: {31 si -> 31}
 
 ---- Ranges ------------------------------------------------------------
 ⟦text should wrap onto the next⟧
@@ -539,7 +539,7 @@ text should wrap onto the next ⦙\\.
 line at right margin of 30
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [31, si) } --> 31
+[0]: {31 si -> 31}
 
 ---- Ranges ------------------------------------------------------------
 ⟦text should wrap onto the next⟧

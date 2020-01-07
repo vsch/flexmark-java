@@ -101,8 +101,7 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                                 TestUtils.appendBanner(out, TestUtils.bannerText("Tracked Offsets"), false);
                                 int i1 = 0;
                                 for (TrackedOffset trackedOffset1 : trackedOffsets){
-                                    int  offset = trackedOffset1.getIndex();
-                                    out.append("[").append(i1).append("]: ").append(trackedOffset1.toString()).append(" --> ").append(offset).append("\n");
+                                    out.append("[").append(i1).append("]: ").append(trackedOffset1.toString()).append("\n");
                                     i1++;
                                 }
                             }

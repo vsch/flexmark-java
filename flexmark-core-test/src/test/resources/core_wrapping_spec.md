@@ -136,7 +136,7 @@ Paragraph with hard break and 1\. more text.
 * Fix: for ⦙#651, Drop image with dialog issues
 
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [138, si) } --> 11
+[0]: {138 1|0 si -> 11}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* ⟦Fix: for #651, Drop image with dialog issues
@@ -246,7 +246,7 @@ BasedSegmentBuilder{[0, 133), s=4:6, u=9:11, t=9:11, l=138, sz=22, na=17: [0, 27
   elements. ⦙
 
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [151, si) } --> 109
+[0]: {151 1|0 si -> 109}
 
 ---- Ranges ------------------------------------------------------------
 ⟦* Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line⟧
@@ -269,7 +269,7 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
    ![Test](testing) text.
 
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [112, si) } --> 47
+[0]: {112 1|0 si -> 47}
 
 ---- Ranges ------------------------------------------------------------
 ⟦1. Paragraph with soft break and⟧
@@ -296,7 +296,7 @@ continuation so we can attempt to
 duplicate md nav.
 
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [112, si) } --> 41
+[0]: {112 1|0 si -> 41}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Paragraph with soft break and more⟧
@@ -324,7 +324,7 @@ Text to shift offset
   extension between the strings. a;lsdfj ladsfj dlsf; jlasdfj l;asdfj lads;fj lasdfj l;dsaj
   fladd⦙ asdfasfdsaffdsa
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [233, i) } --> 187
+[0]: {233 0|0 i -> 187}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* ⟦Fix: Jekyll `{% include "" %}` completions would not work unless there was an `.html`
@@ -347,7 +347,7 @@ delete space to previous non-blank
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the
       need⦙keep duplicate code.
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [147, sd) } --> 102
+[0]: {147 6|0 sd -> 102}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the⟧
@@ -367,7 +367,7 @@ BasedSegmentBuilder{[50, 167), s=1:8, u=4:13, t=4:13, l=123, sz=10, na=7: [50), 
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
       keep duplicate code.
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [147, d) } --> 97
+[0]: {147 6|1 d -> 97}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need⟧ ⟦
@@ -400,7 +400,7 @@ would be automatically copied.
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need
       ⦙to keep duplicate code.
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [147, si) } --> 103
+[0]: {147 6|0 si -> 103}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -423,7 +423,7 @@ splice when deleting at indent
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need
       keep duplicate code.⦙keep duplicate code.
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [174, sd) } --> 123
+[0]: {174 6|0 sd -> 123}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -441,7 +441,7 @@ BasedSegmentBuilder{[50, 194), s=0:3, u=2:7, t=2:7, l=144, sz=6, na=4: [50), a:'
 next line at right margin of
 30
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [1, si) } --> 0
+[0]: {1 1|0 si -> 0}
 
 ---- Ranges ------------------------------------------------------------
 ⟦text should wrap onto the⟧
@@ -459,7 +459,7 @@ Add: configuration for repeated. ⦙ [simLink](simLink.md)
 Add: configuration for repeated. ⦙
 [simLink](simLink.md)
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [33) } --> 33
+[0]: {33 1|1 -> 33}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦⟧
@@ -477,7 +477,7 @@ Add: configuration for repeated.
 Add: configuration for repeated. ⦙
 [simLink](simLink.md)
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [34, si) } --> 33
+[0]: {34 1|0 si -> 33}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦
@@ -495,7 +495,7 @@ Add: configuration for repeated.
 Add: configuration for repeated. ⦙
 [simLink](simLink.md)
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [33, si) } --> 33
+[0]: {33 0|0 si -> 33}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦
@@ -513,7 +513,7 @@ t⦙[simLink](simLink.md)
 Add: configuration for repeated. t⦙
 [simLink](simLink.md)
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [34, i) } --> 34
+[0]: {34 0|0 i -> 34}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦t⟧
@@ -833,23 +833,23 @@ some text
    ⦙![Test](test) text.⦙
 
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [0) } --> 0
-[1]: { [1) } --> 1
-[2]: { [2) } --> 2
-[3]: { [31) } --> 31
-[4]: { [32) } --> 34
-[5]: { [42) } --> 44
-[6]: { [43) } --> 47
-[7]: { [61) } --> 65
-[8]: { [68) } --> 67
-[9]: { [69) } --> 68
-[10]: { [70) } --> 69
-[11]: { [71) } --> 70
-[12]: { [96) } --> 95
-[13]: { [97) } --> 99
-[14]: { [111) } --> 113
-[15]: { [112) } --> 117
-[16]: { [131) } --> 136
+[0]: {0 0|0 -> 0}
+[1]: {1 0|1 -> 1}
+[2]: {2 1|0 -> 2}
+[3]: {31 0|1 -> 31}
+[4]: {32 1|0 -> 34}
+[5]: {42 0|1 -> 44}
+[6]: {43 1|0 -> 47}
+[7]: {61 0|1 -> 65}
+[8]: {68 0|0 -> 67}
+[9]: {69 0|0 -> 68}
+[10]: {70 0|1 -> 69}
+[11]: {71 1|0 -> 70}
+[12]: {96 0|1 -> 95}
+[13]: {97 1|0 -> 99}
+[14]: {111 0|1 -> 113}
+[15]: {112 1|0 -> 117}
+[16]: {131 0|1 -> 136}
 
 ---- Ranges ------------------------------------------------------------
 ⟦* Paragraph with hard break and⟧
@@ -868,14 +868,22 @@ BasedSegmentBuilder{[0, 133), s=4:6, u=9:11, t=9:11, l=138, sz=22, na=17: [0, 31
 
 ### Paragraph
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 1) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 1) options(margin[66], restore-tracked-spaces, show-ranges)
 ⟦    ⟧configuration.   ⦙  
 .
 configuration.   ⦙
+---- Tracked Offsets ---------------------------------------------------
+[0]: {21 3|2 -> 17}
+
+---- Ranges ------------------------------------------------------------
+⟦configuration.⟧   ⟦⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[4, 18), s=1:3, u=2:4, t=2:4, l=18, sz=5, na=3: [4, 18), a:3x' ', [18), a:'\n', [18) }
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 2) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 2) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
@@ -885,10 +893,22 @@ Add: configuration for repeated prefixes in items, which would `be
 would be treated equivalent to task item marker prefix. That way
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙
+---- Tracked Offsets ---------------------------------------------------
+[0]: {300 3|2 -> 293}
+
+---- Ranges ------------------------------------------------------------
+⟦Add: configuration for repeated prefixes in items, which would `be⟧
+⟦⟧\⟦#2` copied when adding/splitting an item. In other words they
+⟧⟦would be treated equivalent to task item marker prefix. That way
+⟧⟦standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes⟧
+⟦⟧⟦would be automatically copied.⟧   ⟦⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 297), s=1:3, u=5:7, t=5:7, l=294, sz=14, na=10: [0, 66), a:'\n', [66), a:'\', [67, 129), [133, 198), [202, 266), a:'\n', [266), [267, 297), a:3x' ', [297), a:'\n', [297) }
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 3) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 3) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
@@ -898,10 +918,23 @@ Add: configuration for repeated prefixes in items, which would `be
 ⦙would be treated equivalent to task item marker prefix. That way
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙
+---- Tracked Offsets ---------------------------------------------------
+[0]: {133 4|0 -> 130}
+[1]: {300 3|2 -> 293}
+
+---- Ranges ------------------------------------------------------------
+⟦Add: configuration for repeated prefixes in items, which would `be⟧
+⟦⟧\⟦#2` copied when adding/splitting an item. In other words they
+⟧⟦would be treated equivalent to task item marker prefix. That way
+⟧⟦standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes⟧
+⟦⟧⟦would be automatically copied.⟧   ⟦⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 297), s=1:3, u=5:7, t=5:7, l=294, sz=14, na=10: [0, 66), a:'\n', [66), a:'\', [67, 129), [133, 198), [202, 266), a:'\n', [266), [267, 297), a:3x' ', [297), a:'\n', [297) }
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 4) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 4) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
@@ -911,10 +944,24 @@ Add: configuration for repeated prefixes in items, which would `be
 ⦙would be treated equivalent to task item marker prefix. That way
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙   ⦙
+---- Tracked Offsets ---------------------------------------------------
+[0]: {133 4|0 -> 130}
+[1]: {300 3|6 -> 293}
+[2]: {303 6|3 -> 296}
+
+---- Ranges ------------------------------------------------------------
+⟦Add: configuration for repeated prefixes in items, which would `be⟧
+⟦⟧\⟦#2` copied when adding/splitting an item. In other words they
+⟧⟦would be treated equivalent to task item marker prefix. That way
+⟧⟦standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes⟧
+⟦⟧⟦would be automatically copied.⟧      ⟦⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 297), s=1:6, u=5:10, t=5:10, l=297, sz=14, na=10: [0, 66), a:'\n', [66), a:'\', [67, 129), [133, 198), [202, 266), a:'\n', [266), [267, 297), a:6x' ', [297), a:'\n', [297) }
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 5) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 5) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.         
@@ -924,10 +971,22 @@ Add: configuration for repeated prefixes in items, which would `be
 would be treated equivalent to task item marker prefix. That way  ⦙
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.
+---- Tracked Offsets ---------------------------------------------------
+[0]: {199 2|0 -> 196}
+
+---- Ranges ------------------------------------------------------------
+⟦Add: configuration for repeated prefixes in items, which would `be⟧
+⟦⟧\⟦#2` copied when adding/splitting an item. In other words they
+⟧⟦would be treated equivalent to task item marker prefix. That way⟧  ⟦⟧⟦
+⟧⟦standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes⟧
+⟦⟧⟦would be automatically copied.⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 299), s=1:2, u=5:6, t=5:6, l=293, sz=15, na=11: [0, 66), a:'\n', [66), a:'\', [67, 129), [133, 197), a:2x' ', [197), [199, 200), [204, 268), a:'\n', [268), [269, 299), a:'\n', [299) }
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 6) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Tracked Offset - Paragraph: 6) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
@@ -937,6 +996,21 @@ Add: configuration for repeated prefixes in items, which would `be
 ⦙would be treated equivalent to task item marker prefix. That way  ⦙
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙   ⦙
+---- Tracked Offsets ---------------------------------------------------
+[0]: {133 4|0 -> 130}
+[1]: {199 2|0 -> 196}
+[2]: {302 3|6 -> 295}
+[3]: {305 6|3 -> 298}
+
+---- Ranges ------------------------------------------------------------
+⟦Add: configuration for repeated prefixes in items, which would `be⟧
+⟦⟧\⟦#2` copied when adding/splitting an item. In other words they
+⟧⟦would be treated equivalent to task item marker prefix. That way⟧  ⟦⟧⟦
+⟧⟦standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes⟧
+⟦⟧⟦would be automatically copied.⟧      ⟦⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 299), s=2:8, u=6:12, t=6:12, l=299, sz=17, na=12: [0, 66), a:'\n', [66), a:'\', [67, 129), [133, 197), a:2x' ', [197), [199, 200), [204, 268), a:'\n', [268), [269, 299), a:6x' ', [299), a:'\n', [299) }
 ````````````````````````````````
 
 

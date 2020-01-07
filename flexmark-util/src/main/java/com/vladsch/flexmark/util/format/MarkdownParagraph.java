@@ -166,8 +166,8 @@ public class MarkdownParagraph {
                 int index = isLineSepPrev ? info.startIndex : info.endIndex;
 
                 if (isAfterSpaceInsert && startDelta > 0 && indexSpacesAfter == 0 && wrapped.safeCharAt(index) != baseSeq.safeCharAt(baseIndex)
-                        && wrapped.safeCharAt(index-1) == baseSeq.safeCharAt(baseIndex) && wrapped.safeCharAt(info.startIndex-1) == ' ') {
-                    index = index-1;
+                        && wrapped.safeCharAt(index - 1) == baseSeq.safeCharAt(baseIndex) && wrapped.safeCharAt(info.startIndex - 1) == ' ') {
+                    index = index - 1;
                 }
 
                 if (info.pos >= 0 && info.pos < tracker.size() && isAfterSpaceInsert) {
@@ -545,7 +545,7 @@ public class MarkdownParagraph {
         }
 
         void addToken(Token token) {
-            addChars(baseSeq.subSequence(token.range));
+            addChars(baseSeq.subSequence(token.range.getStart(), token.range.getEnd()));
         }
 
         void addChars(CharSequence charSequence) {
@@ -683,6 +683,7 @@ public class MarkdownParagraph {
 
                     case BREAK: {
                         if (col > 0 && keepSoftLineBreaks) {
+                            // only use the EOL
                             addToken(token);
                             afterLineBreak();
                         }
@@ -774,7 +775,11 @@ public class MarkdownParagraph {
                         }
                     } else {
                         if (c == '\n') {
-                            token = Token.of(lastConsecutiveSpaces >= 2 ? TextType.MARKDOWN_BREAK : TextType.BREAK, index - lastConsecutiveSpaces, index + 1);
+                            if (lastConsecutiveSpaces >= 2) {
+                                token = Token.of(TextType.MARKDOWN_BREAK, index - lastConsecutiveSpaces, index + 1);
+                            } else {
+                                token = Token.of(TextType.BREAK, index, index + 1);
+                            }
 
                             lastPos = index + 1;
                             lastConsecutiveSpaces = 0;

@@ -148,7 +148,11 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
 
     @Override
     public String toString() {
-        return "{ [" + offset + (BitFieldSet.any(flags, F_AFTER_SPACE_EDIT | F_AFTER_INSERT | F_AFTER_DELETE) ? ", " + (isAfterSpaceEdit() ? "s" : "") + (isAfterInsert() ? "i" : "")  + (isAfterDelete() ? "d" : "") : "") + ") }";
+        return "{" + offset +
+                (spacesBefore >= 0 || spacesAfter >= 0 ? " " + (spacesBefore >= 0 ? Integer.toString(spacesBefore) : "?") + "|" + (spacesAfter >= 0 ? Integer.toString(spacesAfter) : "?") : "") +
+                (BitFieldSet.any(flags, F_AFTER_SPACE_EDIT | F_AFTER_INSERT | F_AFTER_DELETE) ? " " + (isAfterSpaceEdit() ? "s" : "") + (isAfterInsert() ? "i" : "") + (isAfterDelete() ? "d" : "") : "") +
+                (isResolved() ? " -> " + index : "") +
+                "}";
     }
 
     public static TrackedOffset track(@NotNull TrackedOffset other) {

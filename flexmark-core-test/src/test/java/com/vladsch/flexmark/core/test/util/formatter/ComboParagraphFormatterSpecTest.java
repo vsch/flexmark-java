@@ -137,7 +137,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
                 for (TrackedOffset trackedOffset : trackedOffsets) {
                     int offset = trackedOffset.getIndex();
                     assert offset != -1;
-                    out.append("[").append(Integer.toString(r)).append("]: ").append(trackedOffset.toString()).append(" --> ").append(offset).append("\n");
+                    out.append("[").append(r).append("]: ").append(trackedOffset.toString()).append("\n");
                     resultOffsets[r++] = offset;
                 }
             }
