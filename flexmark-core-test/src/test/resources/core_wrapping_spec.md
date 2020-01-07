@@ -127,23 +127,43 @@ Paragraph with hard break and 1\. more text.
 ````````````````````````````````
 
 
+```````````````````````````````` example(Wrap: 7) options(margin[96], insert-space, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
+⟦* Fix: copy fixed utils from Arduino Support plugin.
+* Fix: Paste Image: old crop settings out of bounds for new image caused 
+⟧⟦* ⟧Fix: for ⦙#651, Drop image with dialog issues
+    
+.
+* Fix: for ⦙#651, Drop image with dialog issues
+
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [138, si) } --> 11
+
+---- Ranges ------------------------------------------------------------
+⟦⟧* ⟦Fix: for #651, Drop image with dialog issues
+⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[129, 174), s=0:1, u=2:3, t=2:3, l=48, sz=5, na=3: [129), a:'* ', [129, 174), a:'\n', [174) }
+````````````````````````````````
+
+
 do not wrap links
 
-```````````````````````````````` example(Wrap: 7) options(margin[30])
-[Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
-.
-[Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
-````````````````````````````````
-
-
 ```````````````````````````````` example(Wrap: 8) options(margin[30])
+[Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
+.
+[Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap: 9) options(margin[30])
 ![Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
 .
 ![Issue #Tests-Fail-JavaSwingTimers](https://github.com/vsch/idea-multimarkdown/issues/Tests-Fail-JavaSwingTimers)
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 9) options(margin[30], explicit-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 10) options(margin[30], explicit-links-at-start, show-ranges)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -172,13 +192,16 @@ BasedSegmentBuilder{[0, 133), s=4:6, u=9:11, t=9:11, l=138, sz=22, na=17: [0, 27
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 10) options(margin[96], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 11) options(margin[96], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 ⟧* Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
 .
 * Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line
   elements. ⦙
+
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [151, si) } --> 109
 
 ---- Ranges ------------------------------------------------------------
 ⟦* Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line⟧
@@ -190,7 +213,7 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 11) options(margin[34], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 12) options(margin[34], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
 ⟦* Paragraph with hard break and more text. [Test](test) text. 
     
 ⟧1. Paragraph with soft break and more text. ⦙![Test](testing) text. 
@@ -199,6 +222,9 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
 1. Paragraph with soft break and
    more text. ⦙
    ![Test](testing) text.
+
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [112, si) } --> 47
 
 ---- Ranges ------------------------------------------------------------
 ⟦1. Paragraph with soft break and⟧
@@ -211,7 +237,7 @@ BasedSegmentBuilder{[68, 136), s=3:5, u=6:8, t=6:8, l=75, sz=14, na=10: [68, 100
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 12) options(margin[34], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 13) options(margin[34], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
 ⟦* Paragraph with hard break and more text. [Test](test) text. 
     
 1. ⟧Paragraph with soft break and more text. ⦙![Test](testing) text. 
@@ -223,6 +249,9 @@ text. ⦙
 ![Test](testing) text. with lazy
 continuation so we can attempt to
 duplicate md nav.
+
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [112, si) } --> 41
 
 ---- Ranges ------------------------------------------------------------
 ⟦Paragraph with soft break and more⟧
@@ -237,7 +266,7 @@ BasedSegmentBuilder{[71, 202), s=1:1, u=6:6, t=6:6, l=128, sz=18, na=12: [71, 10
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 13) options(margin[96], insert-char, restore-tracked-spaces, first-prefix[* ], prefix[  ], show-ranges)
+```````````````````````````````` example(Wrap: 14) options(margin[96], insert-char, restore-tracked-spaces, first-prefix[* ], prefix[  ], show-ranges)
 ⟦## Some Heading
     
 Text to shift offset 
@@ -249,6 +278,9 @@ Text to shift offset
 * Fix: Jekyll `{% include "" %}` completions would not work unless there was an `.html`
   extension between the strings. a;lsdfj ladsfj dlsf; jlasdfj l;asdfj lads;fj lasdfj l;dsaj
   fladd⦙ asdfasfdsaffdsa
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [233, i) } --> 187
+
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* ⟦Fix: Jekyll `{% include "" %}` completions would not work unless there was an `.html`
   extension between the strings. a;lsdfj ladsfj dlsf; jlasdfj l;asdfj lads;fj lasdfj l;dsaj⟧
@@ -261,7 +293,7 @@ BasedSegmentBuilder{[50, 251), s=1:2, u=4:5, t=4:5, l=204, sz=10, na=7: [50), a:
 
 delete space to previous non-blank
 
-```````````````````````````````` example(Wrap: 14) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
+```````````````````````````````` example(Wrap: 15) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -269,6 +301,9 @@ delete space to previous non-blank
 .
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the
       need⦙keep duplicate code.
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [147, sd) } --> 102
+
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the⟧
 ⟦⟧     ⟦ need⟧⟦keep duplicate code.⟧
@@ -278,7 +313,7 @@ BasedSegmentBuilder{[50, 167), s=1:8, u=4:13, t=4:13, l=123, sz=10, na=7: [50), 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 15) options(margin[96], delete-char, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
+```````````````````````````````` example(Wrap: 16) options(margin[96], delete-char, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -286,6 +321,9 @@ BasedSegmentBuilder{[50, 167), s=1:8, u=4:13, t=4:13, l=123, sz=10, na=7: [50), 
 .
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
       keep duplicate code.
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [147, d) } --> 97
+
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need⟧ ⟦
    ⟧⟦   keep duplicate code.⟧
@@ -295,7 +333,7 @@ BasedSegmentBuilder{[50, 168), s=1:4, u=3:8, t=3:8, l=125, sz=8, na=6: [50), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 16) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 17) options(margin[66], restore-tracked-spaces)
 ⟦   ⟧Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent ⦙ to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.
@@ -308,7 +346,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 17) options(margin[96], insert-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
+```````````````````````````````` example(Wrap: 18) options(margin[96], insert-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -316,6 +354,9 @@ would be automatically copied.
 .
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need
       ⦙to keep duplicate code.
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [147, si) } --> 103
+
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need
       to keep duplicate code.⟧
@@ -327,7 +368,7 @@ BasedSegmentBuilder{[50, 170), s=0:3, u=2:7, t=2:7, l=127, sz=5, na=3: [50), a:'
 
 splice when deleting at indent
 
-```````````````````````````````` example(Wrap: 18) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
+```````````````````````````````` example(Wrap: 19) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -336,6 +377,9 @@ splice when deleting at indent
 .
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need
       keep duplicate code.⦙keep duplicate code.
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [174, sd) } --> 123
+
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need
       keep duplicate code.⟧⟦keep duplicate code.⟧
@@ -345,12 +389,15 @@ BasedSegmentBuilder{[50, 194), s=0:3, u=2:7, t=2:7, l=144, sz=6, na=4: [50), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 19) options(margin[29], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 20) options(margin[29], insert-space, restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
  ⦙text should wrap onto the next line at right margin of 30
 .
 ⦙text should wrap onto the
 next line at right margin of
 30
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [1, si) } --> 0
+
 ---- Ranges ------------------------------------------------------------
 ⟦text should wrap onto the⟧
 ⟦⟧⟦next line at right margin of⟧
@@ -361,11 +408,14 @@ BasedSegmentBuilder{[1, 58), s=0:0, u=3:3, t=3:3, l=58, sz=9, na=6: [1, 26), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 20) options(margin[66], restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 21) options(margin[66], restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
 Add: configuration for repeated. ⦙ [simLink](simLink.md)
 .
 Add: configuration for repeated. ⦙
 [simLink](simLink.md)
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [33) } --> 33
+
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦⟧
 ⟦⟧⟦[simLink](simLink.md)⟧
@@ -375,12 +425,15 @@ BasedSegmentBuilder{[0, 55), s=1:1, u=3:3, t=3:3, l=56, sz=8, na=5: [0, 32), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 21) options(margin[66], restore-tracked-spaces, insert-space, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 22) options(margin[66], restore-tracked-spaces, insert-space, explicit-links-at-start, image-links-at-start, show-ranges)
 Add: configuration for repeated.
  ⦙[simLink](simLink.md)
 .
 Add: configuration for repeated. ⦙
 [simLink](simLink.md)
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [34, si) } --> 33
+
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦
 ⟧⟦[simLink](simLink.md)⟧
@@ -390,12 +443,15 @@ BasedSegmentBuilder{[0, 55), s=1:1, u=2:2, t=2:2, l=56, sz=6, na=5: [0, 32), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 22) options(margin[66], restore-tracked-spaces, insert-space, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 23) options(margin[66], restore-tracked-spaces, insert-space, explicit-links-at-start, image-links-at-start, show-ranges)
 Add: configuration for repeated.
 ⦙[simLink](simLink.md)
 .
 Add: configuration for repeated. ⦙
 [simLink](simLink.md)
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [33, si) } --> 33
+
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦
 [simLink](simLink.md)⟧
@@ -405,12 +461,15 @@ BasedSegmentBuilder{[0, 54), s=1:1, u=2:2, t=2:2, l=56, sz=5, na=4: [0, 32), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 23) options(margin[66], restore-tracked-spaces, insert-char, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 24) options(margin[66], restore-tracked-spaces, insert-char, explicit-links-at-start, image-links-at-start, show-ranges)
 Add: configuration for repeated.
 t⦙[simLink](simLink.md)
 .
 Add: configuration for repeated. t⦙
 [simLink](simLink.md)
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [34, i) } --> 34
+
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated.⟧ ⟦t⟧
 ⟦[simLink](simLink.md)⟧
@@ -420,7 +479,7 @@ BasedSegmentBuilder{[0, 55), s=1:1, u=3:3, t=3:3, l=57, sz=7, na=6: [0, 32), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 24) options(margin[30], show-ranges)
+```````````````````````````````` example(Wrap: 25) options(margin[30], show-ranges)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -449,7 +508,7 @@ BasedSegmentBuilder{[0, 133), s=4:6, u=9:11, t=9:11, l=138, sz=22, na=17: [0, 27
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 25) options(margin[30], image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap: 26) options(margin[30], image-links-at-start, show-ranges)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -478,7 +537,7 @@ BasedSegmentBuilder{[0, 133), s=4:6, u=9:11, t=9:11, l=138, sz=22, na=17: [0, 27
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 26) options(margin[72])
+```````````````````````````````` example(Wrap: 27) options(margin[72])
 * [#697, Autoscroll from source does not work in simplified structure view]
 .
 * [#697, Autoscroll from source does not work in simplified structure view]
@@ -727,6 +786,25 @@ some text
 ⦙1⦙.⦙ ⦙Paragraph with soft break⦙
    ⦙and more text.⦙
    ⦙![Test](test) text.⦙
+
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [0) } --> 0
+[1]: { [1) } --> 1
+[2]: { [2) } --> 2
+[3]: { [31) } --> 31
+[4]: { [32) } --> 34
+[5]: { [42) } --> 44
+[6]: { [43) } --> 47
+[7]: { [61) } --> 65
+[8]: { [68) } --> 67
+[9]: { [69) } --> 68
+[10]: { [70) } --> 69
+[11]: { [71) } --> 70
+[12]: { [96) } --> 95
+[13]: { [97) } --> 99
+[14]: { [111) } --> 113
+[15]: { [112) } --> 117
+[16]: { [131) } --> 136
 
 ---- Ranges ------------------------------------------------------------
 ⟦* Paragraph with hard break and⟧

@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.ListBlock;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedList;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.SoftLineBreak;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.BlankLine;
@@ -484,7 +488,7 @@ public class FormatterUtils {
                     BasedSequence charsLessEol = altParagraphChars.trimEnd();
                     startOffset = charsLessEol.getStartOffset();
                     int endOffsetDelta = nodeLessEol.countTrailingWhitespace() - charsLessEol.countTrailingWhitespace();
-                    endOffset = charsLessEol.getEndOffset() + endOffsetDelta;
+                    endOffset = charsLessEol.getEndOffset() + endOffsetDelta + 1;
                 } else {
                     startOffset = nodeLessEol.getStartOffset();
                     endOffset = nodeLessEol.getEndOffset();

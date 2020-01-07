@@ -93,10 +93,20 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                     if (SHOW_LINE_RANGES.get(myOptions)) {
                         StringBuilder out = new StringBuilder();
                         out.append(result);
-                        TestUtils.appendBanner(out, TestUtils.bannerText("Ranges"), false);
                         if (trackedSequence == getDocument().getDocument().getChars()) {
+                            TestUtils.appendBanner(out, TestUtils.bannerText("Ranges"), false);
                             out.append(builder.toStringWithRanges(false));
                         } else {
+                            if (!trackedOffsets.isEmpty()) {
+                                TestUtils.appendBanner(out, TestUtils.bannerText("Tracked Offsets"), false);
+                                int i1 = 0;
+                                for (TrackedOffset trackedOffset1 : trackedOffsets){
+                                    int  offset = trackedOffset1.getIndex();
+                                    out.append("[").append(i1).append("]: ").append(trackedOffset1.toString()).append(" --> ").append(offset).append("\n");
+                                    i1++;
+                                }
+                            }
+                            TestUtils.appendBanner(out, TestUtils.bannerText("Ranges"), !trackedOffsets.isEmpty());
                             BasedSequence sequence = builder.toSequence(trackedSequence);
                             out.append(sequence.getBuilder().append(sequence).toStringWithRanges(false)).append("\n");
                             TestUtils.appendBanner(out, TestUtils.bannerText("Segments"), false);

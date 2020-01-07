@@ -165,6 +165,11 @@ public class MarkdownParagraph {
                 OffsetInfo info = tracker.getOffsetInfo(baseIndex, startDelta == 0 && !isLineSepPrev);
                 int index = isLineSepPrev ? info.startIndex : info.endIndex;
 
+                if (isAfterSpaceInsert && startDelta > 0 && indexSpacesAfter == 0 && wrapped.safeCharAt(index) != baseSeq.safeCharAt(baseIndex)
+                        && wrapped.safeCharAt(index-1) == baseSeq.safeCharAt(baseIndex) && wrapped.safeCharAt(info.startIndex-1) == ' ') {
+                    index = index-1;
+                }
+
                 if (info.pos >= 0 && info.pos < tracker.size() && isAfterSpaceInsert) {
                     Segment segment = tracker.getSegmentOffsetTree().getSegment(info.pos, tracker.getSequence());
                     if (segment.getStartOffset() == baseIndex) {

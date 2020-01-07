@@ -173,7 +173,7 @@ public class LineAppendableImpl implements LineAppendable {
     @NotNull
     @Override
     public LineAppendable addPrefix(@NotNull CharSequence prefix, boolean afterEol) {
-        if (!passThrough) {
+        if (!passThrough && prefix.length() != 0) {
             if (afterEol) {
                 prefixAfterEol = LineAppendable.combinedPrefix(prefixAfterEol, prefix);
             } else {
@@ -595,7 +595,17 @@ public class LineAppendableImpl implements LineAppendable {
         if (preFormattedNesting > 0 || appendable.length() != 0) {
             appendImpl(SequenceUtils.EOL, 0);
         } else {
+            CharSequence savedPrefix = this.prefix;
+            boolean hadRawIndents = !indentsOnFirstEol.isEmpty();
+
             rawIndentsOnFirstEol();
+
+            if (hadRawIndents || savedPrefix.length() > 0 && this.prefix.length() == 0) {
+                // IMPORTANT: add an option for behaviour of empty EOL and prefix reset
+                // HACK: html converter expects prefix reset on empty EOL for indentation
+                //   formatter wants to preserve first indent, until real text is output
+                this.prefix = savedPrefix;
+            }
         }
         return this;
     }

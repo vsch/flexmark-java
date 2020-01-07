@@ -1666,6 +1666,33 @@ public class LineAppendableImplTest {
         assertEquals("", fa.toString());
     }
 
+
+    @Test
+    public void test_prefixAfterEOL() {
+        String input = "" +
+                "0:2343568\n" +
+                "1:2343568\n" +
+                "2:2343568\n" +
+                "3:2343568\n" +
+                "4:2343568\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        LineAppendable fa = new LineAppendableImpl(SequenceBuilder.emptyBuilder(sequence), LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
+
+        fa.setPrefix("* ", false);
+        fa.setPrefix("", true);
+        assertEquals("* ", fa.getBeforeEolPrefix().toString());
+        fa.line();
+        assertEquals("* ", fa.getBeforeEolPrefix().toString());
+        fa.blankLine();
+        assertEquals("* ", fa.getBeforeEolPrefix().toString());
+        fa.append("abc");
+        assertEquals("* ", fa.getBeforeEolPrefix().toString());
+        fa.line();
+        assertEquals("", fa.getBeforeEolPrefix().toString());
+        assertEquals("* abc\n", fa.toString());
+    }
+
     @Test
     public void test_getOffsetWithPending() {
         String input = "" +

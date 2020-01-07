@@ -1016,7 +1016,8 @@ public class Formatter implements IRender {
                     // here we render multiple phases
                     if (this.phase == DOCUMENT) {
                         // pre-indent document
-                        markdown.pushPrefix().setPrefix(DOCUMENT_FIRST_PREFIX.get((Document)node), false).setPrefix(DOCUMENT_PREFIX.get((Document)node), true);
+                        subContext.markdown.pushPrefix().setPrefix(DOCUMENT_FIRST_PREFIX.get((Document)node), false).setPrefix(DOCUMENT_PREFIX.get((Document)node), true);
+
                         List<NodeFormattingHandler<?>> nodeRendererList = renderers.get(node.getClass());
                         if (nodeRendererList != null) {
                             subContext.rendererList = nodeRendererList;
@@ -1027,7 +1028,8 @@ public class Formatter implements IRender {
                             subContext.rendererList = null;
                             subContext.rendererIndex = -1;
                         }
-                        markdown.popPrefix();
+
+                        subContext.markdown.popPrefix();
                     } else {
                         // go through all renderers that want this phase
                         for (PhasedNodeFormatter phasedFormatter : phasedFormatters) {
