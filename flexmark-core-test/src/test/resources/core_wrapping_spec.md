@@ -8,8 +8,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-# Formatter Spec Tests
-
 ## Wrap
 
 ```````````````````````````````` example(Wrap: 1) options(margin[30])
@@ -144,51 +142,6 @@ Paragraph with hard break and 1\. more text.
 ⟦⟧
 ---- Segments ----------------------------------------------------------
 BasedSegmentBuilder{[129, 174), s=0:1, u=2:3, t=2:3, l=48, sz=5, na=3: [129), a:'* ', [129, 174), a:'\n', [174) }
-````````````````````````````````
-
-
-* [ ] complete this. Space at end of previous line affect how character backspace and character
-      typing reacts at the first non-blank of the next line.
-
-```````````````````````````````` example(Wrap: 8) options(FAIL, margin[96], insert-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
-⟦* ⟧Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd 
-⟦   ⟧d⦙as this is the end. 
-    
-.
-* Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd
-d⦙as this is the end.
-
----- Tracked Offsets ---------------------------------------------------
-[0]: { [100, i) } --> 96
-
----- Ranges ------------------------------------------------------------
-⟦⟧* ⟦Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd⟧⟦
-⟧⟦das this is the end.⟧⟦
-⟧
-⟦⟧
----- Segments ----------------------------------------------------------
-BasedSegmentBuilder{[2, 121), s=0:1, u=2:3, t=2:3, l=117, sz=8, na=6: [2), a:'* ', [2, 94), [95, 96), [99, 119), [120, 121), a:'\n', [121) }
-````````````````````````````````
-
-
-```````````````````````````````` example(Wrap: 9) options(FAIL, margin[96], delete-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
-⟦* ⟧Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd 
-⟦   ⟧⦙as this is the end. 
-    
-.
-* Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adf
-⦙as this is the end.
-
----- Tracked Offsets ---------------------------------------------------
-[0]: { [99, si) } --> 95
-
----- Ranges ------------------------------------------------------------
-⟦⟧* ⟦Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd⟧⟦
-⟧⟦as this is the end.⟧⟦
-⟧
-⟦⟧
----- Segments ----------------------------------------------------------
-BasedSegmentBuilder{[2, 120), s=0:1, u=2:3, t=2:3, l=116, sz=8, na=6: [2), a:'* ', [2, 94), [95, 96), [99, 118), [119, 120), a:'\n', [120) }
 ````````````````````````````````
 
 
@@ -436,6 +389,8 @@ BasedSegmentBuilder{[50, 167), s=1:8, u=4:13, t=4:13, l=123, sz=10, na=7: [50), 
 ````````````````````````````````
 
 
+* [ ] Fix: should preserve space since one existed after edit
+
 ```````````````````````````````` example(Wrap - Delete Indent: 2) options(FAIL, margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
@@ -456,11 +411,11 @@ BasedSegmentBuilder{[50, 201), s=1:8, u=4:13, t=4:13, l=159, sz=10, na=7: [50), 
 ````````````````````````````````
 
 
-This makes the caret jump to previous word because of the kludged way paragraphs resolve
-offsets. There is no way to fix it in the current implementation without more kludges which will
-break other kludges. This is the reason for needing to rewrite it using more algorithmic
-approach by processing all unwrapped and wrapped segments to get tracked offset context for
-determining its index in the wrapped sequence.
+* [ ] Fix: This makes the caret jump to previous word because of the kludged way paragraphs
+      resolve offsets. There is no way to fix it in the current implementation without more
+      kludges which will break other kludges. This is the reason for needing to rewrite it using
+      more algorithmic approach by processing all unwrapped and wrapped segments to get tracked
+      offset context for determining its index in the wrapped sequence.
 
 ```````````````````````````````` example(Wrap - Delete Indent: 3) options(FAIL, margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
@@ -660,9 +615,71 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
 ````````````````````````````````
 
 
-## Tracked Offset
+* [ ] Fix: should preserve space at end of line
 
-```````````````````````````````` example(Tracked Offset: 1) options(margin[31])
+```````````````````````````````` example(Wrap - Restore Spaces: 7) options(FAIL, margin[96], delete-char, first-prefix[* [ ] ], restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
+⟦* [ ] ⟧Add: validation to `Formatter.render` for ⦙
+.
+* [ ] Add: validation to `Formatter.render` for ⦙
+---- Tracked Offsets ---------------------------------------------------
+[0]: {48 1|0 d -> 48}
+
+---- Ranges ------------------------------------------------------------
+⟦⟧* [ ] ⟦Add: validation to `Formatter.render` for ⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[6, 47), s=0:3, u=2:7, t=2:7, l=48, sz=5, na=3: [6), a:'* [ ] ', [6, 48), a:'\n', [48) }
+````````````````````````````````
+
+
+* [ ] complete this. Space at end of previous line affect how character backspace and character
+      typing reacts at the first non-blank of the next line.
+
+```````````````````````````````` example(Wrap - Restore Spaces: 8) options(FAIL, margin[96], insert-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
+⟦* ⟧Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd 
+⟦   ⟧d⦙as this is the end. 
+    
+.
+* Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd
+d⦙as this is the end.
+
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [100, i) } --> 96
+
+---- Ranges ------------------------------------------------------------
+⟦⟧* ⟦Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd⟧⟦
+⟧⟦das this is the end.⟧⟦
+⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[2, 121), s=0:1, u=2:3, t=2:3, l=117, sz=8, na=6: [2), a:'* ', [2, 94), [95, 96), [99, 119), [120, 121), a:'\n', [121) }
+````````````````````````````````
+
+
+* [ ] Fix: should not splice or move caret to previous line
+
+```````````````````````````````` example(Wrap - Restore Spaces: 9) options(FAIL, margin[96], delete-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
+⟦* ⟧Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd 
+⟦   ⟧⦙as this is the end. 
+    
+.
+* Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adf
+⦙as this is the end.
+
+---- Tracked Offsets ---------------------------------------------------
+[0]: { [99, si) } --> 95
+
+---- Ranges ------------------------------------------------------------
+⟦⟧* ⟦Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd⟧⟦
+⟧⟦as this is the end.⟧⟦
+⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[2, 120), s=0:1, u=2:3, t=2:3, l=116, sz=8, na=6: [2), a:'* ', [2, 94), [95, 96), [99, 118), [119, 120), a:'\n', [120) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 10) options(margin[31])
 * Paragraph with hard break ⦙and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -678,7 +695,7 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 2) options(margin[31])
+```````````````````````````````` example(Wrap - Restore Spaces: 11) options(margin[31])
 * Paragraph with hard break⦙ and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -694,7 +711,7 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 3) options(margin[31])
+```````````````````````````````` example(Wrap - Restore Spaces: 12) options(margin[31])
 * Paragraph with hard break and more text. [Test](test) text. 
 
 some text
@@ -714,7 +731,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 4) options(margin[31])
+```````````````````````````````` example(Wrap - Restore Spaces: 13) options(margin[31])
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break⦙ and more text. ![Test](test) text. 
@@ -730,7 +747,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 5) options(margin[31], explicit-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 14) options(margin[31], explicit-links-at-start)
 * Paragraph with hard break and more text.⦙ [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -747,7 +764,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 6) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 15) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text.⦙ [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -764,7 +781,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 7) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 16) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. ⦙[Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -781,7 +798,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 8) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 17) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text.⦙ 
     
 1. Paragraph with soft break and more text. ![Test](test) text. 
@@ -798,7 +815,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 9) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 18) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text.⦙ ![Test](test) text. 
@@ -815,7 +832,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 10) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 19) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ⦙![Test](test) text. 
@@ -832,7 +849,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 11) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 20) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and more text. [Test](test) text. 
     
 1. Paragraph with soft break and more text. ![Test](test) text.⦙ 
@@ -849,7 +866,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 12) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 21) options(margin[31], explicit-links-at-start, image-links-at-start)
 * Paragraph with hard break and⦙ ⦙more text.⦙ ⦙[Test](test) text.⦙ 
     
 1. Paragraph with soft break⦙ ⦙and more text.⦙ ⦙![Test](test) text.⦙ 
@@ -866,7 +883,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 13) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 22) options(margin[31], explicit-links-at-start, image-links-at-start)
 ⦙* Paragraph with hard break and more text. [Test](test) text. 
     
 .
@@ -877,7 +894,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 14) options(margin[31], explicit-links-at-start, image-links-at-start)
+```````````````````````````````` example(Wrap - Restore Spaces: 23) options(margin[31], explicit-links-at-start, image-links-at-start)
 *⦙ Paragraph with hard break and more text. [Test](test) text. 
     
 .
@@ -888,7 +905,7 @@ some text
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset: 15) options(margin[31], explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 24) options(margin[31], explicit-links-at-start, image-links-at-start, show-ranges)
 ⦙*⦙ ⦙Paragraph with hard break and⦙ ⦙more text.⦙ ⦙[Test](test) text.⦙ 
     
 ⦙1⦙.⦙ ⦙Paragraph with soft break⦙ ⦙and more text.⦙ ⦙![Test](test) text.⦙ 
@@ -936,9 +953,7 @@ BasedSegmentBuilder{[0, 133), s=4:6, u=9:11, t=9:11, l=138, sz=22, na=17: [0, 31
 ````````````````````````````````
 
 
-### Paragraph
-
-```````````````````````````````` example(Tracked Offset - Paragraph: 1) options(margin[66], restore-tracked-spaces, show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 25) options(margin[66], restore-tracked-spaces, show-ranges)
 ⟦    ⟧configuration.   ⦙  
 .
 configuration.   ⦙
@@ -953,7 +968,7 @@ BasedSegmentBuilder{[4, 18), s=1:3, u=2:4, t=2:4, l=18, sz=5, na=3: [4, 18), a:3
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 2) options(margin[66], restore-tracked-spaces, show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 26) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
@@ -978,7 +993,7 @@ BasedSegmentBuilder{[0, 297), s=1:3, u=5:7, t=5:7, l=294, sz=14, na=10: [0, 66),
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 3) options(margin[66], restore-tracked-spaces, show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 27) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
@@ -1004,7 +1019,7 @@ BasedSegmentBuilder{[0, 297), s=1:3, u=5:7, t=5:7, l=294, sz=14, na=10: [0, 66),
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 4) options(margin[66], restore-tracked-spaces, show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 28) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
@@ -1031,7 +1046,7 @@ BasedSegmentBuilder{[0, 297), s=1:6, u=5:10, t=5:10, l=297, sz=14, na=10: [0, 66
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 5) options(margin[66], restore-tracked-spaces, show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 29) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.         
@@ -1056,7 +1071,7 @@ BasedSegmentBuilder{[0, 299), s=1:2, u=5:6, t=5:6, l=293, sz=15, na=11: [0, 66),
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 6) options(margin[66], restore-tracked-spaces, show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 30) options(margin[66], restore-tracked-spaces, show-ranges)
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way  ⦙
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
@@ -1086,7 +1101,7 @@ BasedSegmentBuilder{[0, 299), s=2:8, u=6:12, t=6:12, l=299, sz=17, na=12: [0, 66
 
 Leading space on first line not handled for now.
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 7) options(IGNORE, margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap - Restore Spaces: 31) options(IGNORE, margin[66], restore-tracked-spaces)
    Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent ⦙ to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.
@@ -1099,7 +1114,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 8) options(margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap - Restore Spaces: 32) options(margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧⦙ keep duplicate code.
 .
@@ -1108,7 +1123,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 9) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
+```````````````````````````````` example(Wrap - Restore Spaces: 33) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
 ⟦  * [ ] ⟧d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
 ⟦        ⟧dependencies on classes in other directories.
 .
@@ -1117,7 +1132,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 10) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap - Restore Spaces: 34) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧ ⦙to keep duplicate code.
 .
@@ -1126,7 +1141,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 11) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap - Restore Spaces: 35) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙ to keep duplicate code.
 .
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
@@ -1134,7 +1149,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 12) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
+```````````````````````````````` example(Wrap - Restore Spaces: 36) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
 ⟦* ⟧Fix: conversion from Smart to based to extract more source information from segmented
 ⟦  ⟧sequence ⦙and mapped sequence.
 .
@@ -1143,7 +1158,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Tracked Offset - Paragraph: 13) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
+```````````````````````````````` example(Wrap - Restore Spaces: 37) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
 ⟦* ⟧Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
 .
 * Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line
