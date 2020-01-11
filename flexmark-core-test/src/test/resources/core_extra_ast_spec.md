@@ -826,6 +826,17 @@ Document[0, 96]
 ````````````````````````````````
 
 
+```````````````````````````````` example List - No Auto Loose: 3
+* item
+      text or code
+.
+<ul>
+  <li>item
+    text or code</li>
+</ul>
+````````````````````````````````
+
+
 ### No Auto Loose, Loose Item if Previous Loose
 
 Without auto loose setting for list with loose if previous loose item

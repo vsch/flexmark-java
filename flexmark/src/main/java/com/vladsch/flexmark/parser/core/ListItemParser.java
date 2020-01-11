@@ -207,7 +207,8 @@ public class ListItemParser extends AbstractBlockParser {
                 // advance by item indent
                 int newColumn = state.getColumn() + itemIndent;
 
-                if (currentIndent >= myOptions.getCodeIndent()) {
+                // NOTE: was missing adding item indent to code indent
+                if (currentIndent >= itemIndent + myOptions.getCodeIndent()) {
                     // our indented code child
                     listBlockParser.setItemHandledLine(state.getLine());
                     return continueAtColumn(newColumn);
@@ -221,7 +222,8 @@ public class ListItemParser extends AbstractBlockParser {
                             boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
 
                             if (inParagraphListItem
-                                    && (!myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)
+                                    && (currentIndent >= itemIndent + myOptions.getItemIndent() // NOTE: indent > item indent becomes lazy continuation
+                                    || !myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)
                                     || !myOptions.canStartSubList(listData.listBlock, listData.isEmpty))) {
                                 // just a lazy continuation of us
                                 listBlockParser.setItemHandledLineSkipActive(state.getLine());

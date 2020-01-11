@@ -2852,12 +2852,12 @@ Document[0, 1096]
 ````````````````````````````````
 
 
-## Issue #70
+### 70
 
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return
 
-```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
+```````````````````````````````` example(Issues - 70: 1) options(FILE_EOL)
 <<test>>
 .
 <p>&lt;<test>&gt;</p>
@@ -2870,7 +2870,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
+```````````````````````````````` example(Issues - 70: 2) options(NO_FILE_EOL)
 <<test>>⏎
 .
 <p>&lt;<test>&gt;</p>
@@ -2883,7 +2883,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
+```````````````````````````````` example(Issues - 70: 3) options(FILE_EOL)
 <<test>>⏎
 .
 <p>&lt;<test>&gt;</p>
@@ -2896,7 +2896,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
+```````````````````````````````` example(Issues - 70: 4) options(FILE_EOL)
 <<test>>
 
 .
@@ -2910,12 +2910,12 @@ Document[0, 10]
 ````````````````````````````````
 
 
-## Issue 108
+### 108
 
 Issue #108, problem of the list of some Space in front, misunderstanding of
 `Parser.LISTS_ITEM_INDENT` setting to 2
 
-```````````````````````````````` example(Issue 108: 1) options(lists-item-indent)
+```````````````````````````````` example(Issues - 108: 1) options(lists-item-indent)
   1. **download**  
   2. **abc**  →→
   3. **999**
@@ -2948,7 +2948,7 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue 108: 2
+```````````````````````````````` example Issues - 108: 2
   1. **download**  
   2. **abc**  →→
   3. **999**
@@ -3232,4 +3232,6 @@ Document[0, 40]
         Text[34, 40] chars:[34, 40, " task2"]
 ````````````````````````````````
 
+
+[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
 

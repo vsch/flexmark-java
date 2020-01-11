@@ -3023,9 +3023,11 @@ option</p>
 
 ## Issues
 
+### xxx
+
 options for plain text rendering
 
-```````````````````````````````` example Issues: 1
+```````````````````````````````` example Issues - xxx: 1
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
 * Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
@@ -3159,12 +3161,12 @@ Document[0, 1096]
 ````````````````````````````````
 
 
-## Issue #70
+### 70
 
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return
 
-```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
+```````````````````````````````` example(Issues - 70: 1) options(FILE_EOL)
 <<test>>
 .
 <p>&laquo;test&raquo;</p>
@@ -3176,7 +3178,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
+```````````````````````````````` example(Issues - 70: 2) options(NO_FILE_EOL)
 <<test>>⏎
 .
 <p>&laquo;test&raquo;</p>
@@ -3188,7 +3190,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
+```````````````````````````````` example(Issues - 70: 3) options(FILE_EOL)
 <<test>>⏎
 .
 <p>&laquo;test&raquo;</p>
@@ -3200,7 +3202,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
+```````````````````````````````` example(Issues - 70: 4) options(FILE_EOL)
 <<test>>
 
 .
@@ -3213,11 +3215,11 @@ Document[0, 10]
 ````````````````````````````````
 
 
-## Issue 136
+### 136
 
 Issue #136, Tasklist display issue
 
-```````````````````````````````` example(Issue 136: 1) options(no-anchor-links)
+```````````````````````````````` example(Issues - 136: 1) options(no-anchor-links)
 Task List
 
 - [x] Task 1
@@ -3247,7 +3249,7 @@ Document[0, 49]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 136: 2) options(no-anchor-links)
+```````````````````````````````` example(Issues - 136: 2) options(no-anchor-links)
 # Task List
 - [x] Task 1
 - [ ] Task 2
@@ -3273,29 +3275,6 @@ Document[0, 50]
     TaskListItem[38, 50] open:[38, 39, "-"] openSuffix:[40, 43, "[x]"] isTight isDone
       Paragraph[44, 50]
         Text[44, 50] chars:[44, 50, "Task 3"]
-````````````````````````````````
-
-
-## Issues
-
-### xxx
-
-Issue markdown page generator
-
-```````````````````````````````` example Issues - xxx: 1
-### hello `<html>` and `<body>`
-.
-<h3><a href="#hello-html-and-body" id="hello-html-and-body"></a>hello <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code></h3>
-.
-Document[0, 31]
-  Heading[0, 31] textOpen:[0, 3, "###"] text:[4, 31, "hello `<html>` and `<body>`"]
-    AnchorLink[4, 4]
-    Text[4, 10] chars:[4, 10, "hello "]
-    Code[10, 18] textOpen:[10, 11, "`"] text:[11, 17, "<html>"] textClose:[17, 18, "`"]
-      Text[11, 17] chars:[11, 17, "<html>"]
-    Text[18, 23] chars:[18, 23, " and "]
-    Code[23, 31] textOpen:[23, 24, "`"] text:[24, 30, "<body>"] textClose:[30, 31, "`"]
-      Text[24, 30] chars:[24, 30, "<body>"]
 ````````````````````````````````
 
 
@@ -3382,4 +3361,122 @@ Document[0, 164]
           Text[158, 164] chars:[158, 164, "1134.1"]
 ````````````````````````````````
 
+
+### 382
+
+Issue [#382, Is there an option for number of whitespaces needed to create sub-lists?]
+
+```````````````````````````````` example Issues - 382: 1
+* [ ] First item
+* [ ] Second item
+
+
+* [ ] Third item separated by 2 newlines
+
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Second item</li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Third item separated by 2 newlines</p>
+  </li>
+</ul>
+````````````````````````````````
+
+
+pegdown converts second item to lazy continuation,
+
+```````````````````````````````` example Issues - 382: 2
+* [ ] First item
+        * [ ] Second item
+
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item * [ ] Second item</li>
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Issues - 382: 3
+* [ ] First item
+            * [ ] Second item
+
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item * [ ] Second item</li>
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Issues - 382: 4
+* [ ] First item
+
+        * [ ] Second item
+
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item
+    <ul>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Second item</li>
+    </ul>
+  </li>
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Issues - 382: 5
+* [ ] First item
+
+           * [ ] Second item
+
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item
+    <ul>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Second item</li>
+    </ul>
+  </li>
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Issues - 382: 6
+* [ ] First item
+
+            * [ ] Second item
+
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item
+    <pre><code>    * [ ] Second item
+</code></pre>
+  </li>
+</ul>
+````````````````````````````````
+
+
+## Issues-xxx
+
+### 001
+
+Issue markdown page generator
+
+```````````````````````````````` example Issues-xxx - 001: 1
+### hello `<html>` and `<body>`
+.
+<h3><a href="#hello-html-and-body" id="hello-html-and-body"></a>hello <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code></h3>
+.
+Document[0, 31]
+  Heading[0, 31] textOpen:[0, 3, "###"] text:[4, 31, "hello `<html>` and `<body>`"]
+    AnchorLink[4, 4]
+    Text[4, 10] chars:[4, 10, "hello "]
+    Code[10, 18] textOpen:[10, 11, "`"] text:[11, 17, "<html>"] textClose:[17, 18, "`"]
+      Text[11, 17] chars:[11, 17, "<html>"]
+    Text[18, 23] chars:[18, 23, " and "]
+    Code[23, 31] textOpen:[23, 24, "`"] text:[24, 30, "<body>"] textClose:[30, 31, "`"]
+      Text[24, 30] chars:[24, 30, "<body>"]
+````````````````````````````````
+
+
+[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
 

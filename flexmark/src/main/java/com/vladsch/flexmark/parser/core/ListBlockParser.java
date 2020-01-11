@@ -249,16 +249,14 @@ public class ListBlockParser extends AbstractBlockParser {
                 if (subItem instanceof ListBlock) {
                     haveNestedList = true;
                     if (!thisItemLoose && myOptions.isLooseWhenHasLooseSubItem()) {
-                        if (subItem instanceof ListBlock) {
-                            ReversiblePeekingIterator<Node> iterator = subItem.getChildIterator();
-                            while (iterator.hasNext()) {
-                                ListItem item1 = (ListItem) iterator.next();
-                                if (!item1.isTight()) {
-                                    thisItemLoose = true;
-                                    isTight = false;
-                                    ((ListItem) item).setLoose(true);
-                                    break;
-                                }
+                        ReversiblePeekingIterator<Node> iterator = subItem.getChildIterator();
+                        while (iterator.hasNext()) {
+                            ListItem item1 = (ListItem) iterator.next();
+                            if (!item1.isTight()) {
+                                thisItemLoose = true;
+                                isTight = false;
+                                ((ListItem) item).setLoose(true);
+                                break;
                             }
                         }
                     }

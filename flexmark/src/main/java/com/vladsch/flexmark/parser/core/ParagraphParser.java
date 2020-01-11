@@ -23,6 +23,7 @@ public class ParagraphParser extends AbstractBlockParser {
     @Override
     public BlockContinue tryContinue(ParserState state) {
         if (!state.isBlank()) {
+            // NOTE: here we can continue with any indent, unless the parent is a list item and the indent is >= code indent
             return BlockContinue.atIndex(state.getIndex());
         } else {
             boolean blankLine = state.isBlankLine();

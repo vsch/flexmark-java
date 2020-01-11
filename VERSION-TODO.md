@@ -9,6 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.104](#next-059104)
 - [0.59.102](#059102)
 - [0.59.100](#059100)
 - [0.59.98](#05998)
@@ -208,6 +209,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.104
+
+* Fix: [#382, Is there an option for number of whitespaces needed to create sub-lists?]
+  * `FIXED_INDENT` list parser did not convert list item looking text with >= 4 spaces to
+    lazy continuation.
 
 ## 0.59.102
 
@@ -2117,4 +2124,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
+[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
+
 
