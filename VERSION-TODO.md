@@ -9,7 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.104](#next-059104)
+- [0.59.104](#059104)
 - [0.59.102](#059102)
 - [0.59.100](#059100)
 - [0.59.98](#05998)
@@ -211,7 +211,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.104
+## 0.59.104
 
 * Fix: [#382, Is there an option for number of whitespaces needed to create sub-lists?]
   * `FIXED_INDENT` list parser did not convert list item looking text with >= 4 spaces to
