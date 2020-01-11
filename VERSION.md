@@ -2,8 +2,9 @@
 
 &nbsp;<details id="version-history"><summary>**Version History**</summary>
 
-[TOC]: # " "
+[TOC]: # ""
 
+- [0.50.48](#05048)
 - [0.50.46](#05046)
 - [0.50.44](#05044)
 - [0.50.42](#05042)
@@ -99,8 +100,13 @@
 - [0.32.0](#0320)
 - [0.30.0](#0300)
 
-
 &nbsp;</details>
+
+## 0.50.48
+
+* Fix: [#382, Is there an option for number of whitespaces needed to create sub-lists?]
+  * `FIXED_INDENT` list parser did not convert list item looking text with >= 4 spaces to lazy
+    continuation.
 
 ## 0.50.46
 
@@ -518,6 +524,7 @@
   `PdfConverterExtension.exportToPdf(OutputStream, String, String, DataHolder)` is used to
   provide options. For all other calls you need to embed the default css into your HTML string
   before exporting to PDF.
+
 * Fix: HTML parser link/image conversion to ref link and reference when cannot create a valid
   reference fallback to generating explicit link instead.
 * Fix: HTML parser ignoring `NONE` for `FlexmarkHtmlParser.EXT_INLINE_LINK` and
@@ -542,7 +549,6 @@
 * Fix: [#316, Github user extension incorrectly formats some text]
   * Add: test to make sure previous character to `@` is not `isUnicodeIdentifierPart()`, `-` nor
     `.`
-
 * Add: `FlexmarkHtmlParser` options:
   * Fix: [#318, Ability to disable table caption in FlexmarkHtmlParser],
     * Add: `TABLE_CAPTION` option as a convenience alias for `Formatter.FORMAT_TABLE_CAPTION`.
@@ -563,11 +569,9 @@
   * `EXT_INLINE_LINK` and `EXT_INLINE_IMAGE` option default `LinkConversion.MARKDOWN_EXPLICIT`,
     specifies type of link and image conversion to apply: `NONE`, `MARKDOWN_EXPLICIT`,
     `MARKDOWN_REFERENCE`, `TEXT`, `HTML`
-
 * Add: Remove reliance on [YouTrack: IDEA-207453] and instead change resource file URL to path
   in `SpecReader` and add a message to all example tests with the file URL with `:xxx` where
   `xxx` is the line number of the spec example in the file.
-
 * This will print the source location of the test in the console. Clicking the link goes right
   to the spec source file and line of the failed test if [Awesome Console] plugin is installed.
 
@@ -577,27 +581,20 @@
   unless `HtmlRenderer.EMBEDDED_NODE_PROVIDER` is set to false. Add attributes to nodes in the
   AST by inserting a `EmbeddedAttributeProvider.EmbeddedNodeAttributes` node with the desired
   attributes. See: [NodeInsertingPostProcessorSample.java] for example.
-
 * Add: document that `DocxRenderer` emoji with GitHub preferred is not able to download images,
   compiling `ImageUtils` library with Java 8 eliminates the problem.
-
 * Add: resource file URL to `SpecReader` and add a message to all example tests with the file
   URL with `:xxx` where `xxx` is the line number of the spec example in the file.
-
 * This will print the source location of the test in the console. Clicking the link goes right
   to the spec source file and line of the failed test. Unfortunately this URL will only work in
   IntelliJ when JetBrains add this to console to handle such `file://` URLs:
   [YouTrack: IDEA-207453]
-
 * Fix: [#310, PR: Change URL of GitHub CDN] thanks to @benelog
-
 * Fix: `AsideExtension` option keys to be dynamic data keys dependent on corresponding Parser
   block quote options for their defaults.
-
 * :warning: This can potentially break code relying on versions of the extension before
   `0.40.18` because parsing rules can change depending on which block quote options are changed
   from their default values.
-
 * To ensure independent options for aside blocks and block quotes, set aside options explicitly.
   The following will set all aside options to default values, independent from block quote
   options:
@@ -611,31 +608,23 @@
 
 * Deprecate: `Parser.BLOCK_QUOTE_TO_BLANK_LINE`, use more mnemonic
   `Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE`
-
 * Deprecate: `CustomNode` and `CustomBlock`. `Block` and `Node` should be used directly. The
   library aims to make no distinction between core and extension implementations, these classes
   add no useful information.
-
 * Deprecate: BaseSequence had old named functions which were misleading and duplicated under
   proper names:
   * `countChars()` -> `countLeading()`
   * `countCharsNot()` -> `countLeadingNot()`
   * `countCharsReversed()` -> `countTrailing()`
   * `countNotCharsReversed()` -> `countTrailingNot()`
-
 * First of all they only counted leading characters which the name did not imply. Second they
   were duplicated.
-
 * Add character counting functions:
-
   * `countOfAny()`
   * `countOfAnyNot()`
-
 * Fix: `DefinitionExtension` does not correctly set the child parse column, causing list items
   to be expecting 1 extra space for child item recognition.
-
 * Add: `ExtensionConversion.NONE` to suppress any output from corresponding element
-
 * Add: `FlexmarkHtmlParser.EXT_MATH`, default `ExtensionConversion.HTML`, for selecting `<math>`
   tag processing. For now only `MARKDOWN` does nothing useful. Later it will be used to convert
   math ml to GitLab math inline element.
@@ -738,7 +727,6 @@
 
 * Fix: Java9+ Compatibility, IntelliJ Migration contained in [migrate 0_35_x to 0_40_0.xml], to
   use:
-
   * copy to IntelliJ application settings to `migrations` subdirectory
   * if you have the project which you want to migrate open, then close it
   * open the project in IntelliJ Ultimate or Community
@@ -748,107 +736,104 @@
   * select `migrate flexmark-java 0.35.x to 0.40.0`
   * press `Run`
   * in the refactoring preview tool window that opens hit `Do Refactor`
-
 * :warning: In my projects, the IDE can miss some class migrations, especially on files which
   are not open. Re-running the migration tends to apply the migration. In cases where migration
   is not applied manual editing will be needed. In my projects `Document`, `Node` and
   `Formatter` were the problem classes:
-
   * `com.vladsch.flexmark.ast.Document` to `com.vladsch.flexmark.util.ast.Document`
   * `com.vladsch.flexmark.ast.Node` to `com.vladsch.flexmark.util.ast.Node`
   * `com.vladsch.flexmark.formatter.internal.Formatter` to
     `com.vladsch.flexmark.formatter.Formatter`
-
 * :warning: `flexmark-docx-converter` and `flexmark-pdf-converter` cannot be used with Java 9+
   modules because the underlying libraries used have package load conflicts that will be
   resolved in a later release.
 
 <!--@formatter:off-->
-  * Fix: overlapping packages in different modules, change:
-    * `com.vladsch.flexmark.ast.AllNodesVisitor` to `com.vladsch.flexmark.util.ast.AllNodesVisitor`
-    * `com.vladsch.flexmark.ast.BlankLine` to `com.vladsch.flexmark.util.ast.BlankLine`
-    * `com.vladsch.flexmark.ast.BlankLineContainer` to `com.vladsch.flexmark.util.ast.BlankLineContainer`
-    * `com.vladsch.flexmark.ast.Block` to `com.vladsch.flexmark.util.ast.Block`
-    * `com.vladsch.flexmark.ast.BlockContent` to `com.vladsch.flexmark.util.ast.BlockContent`
-    * `com.vladsch.flexmark.ast.BlockNodeVisitor` to `com.vladsch.flexmark.util.ast.BlockNodeVisitor`
-    * `com.vladsch.flexmark.ast.Content` to `com.vladsch.flexmark.util.ast.Content`
-    * `com.vladsch.flexmark.ast.ContentNode` to `com.vladsch.flexmark.util.ast.ContentNode`
-    * `com.vladsch.flexmark.ast.CustomBlock` to `com.vladsch.flexmark.util.ast.CustomBlock`
-    * `com.vladsch.flexmark.ast.CustomNode` to `com.vladsch.flexmark.util.ast.CustomNode`
-    * `com.vladsch.flexmark.ast.DescendantNodeIterable` to `com.vladsch.flexmark.util.ast.DescendantNodeIterable`
-    * `com.vladsch.flexmark.ast.DescendantNodeIterator` to `com.vladsch.flexmark.util.ast.DescendantNodeIterator`
-    * `com.vladsch.flexmark.ast.Node` to `com.vladsch.flexmark.util.ast.Node`
-    * `com.vladsch.flexmark.ast.Document` to `com.vladsch.flexmark.util.ast.Document`
-    * `com.vladsch.flexmark.ast.DoNotCollectText` to `com.vladsch.flexmark.util.ast.DoNotCollectText`
-    * `com.vladsch.flexmark.ast.DoNotDecorate` to `com.vladsch.flexmark.util.ast.DoNotDecorate`
-    * `com.vladsch.flexmark.ast.DoNotLinkDecorate` to `com.vladsch.flexmark.util.ast.DoNotLinkDecorate`
-    * `com.vladsch.flexmark.ast.KeepTrailingBlankLineContainer` to `com.vladsch.flexmark.util.ast.KeepTrailingBlankLineContainer`
-    * `com.vladsch.flexmark.ast.NodeAdaptedVisitor` to `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor`
-    * `com.vladsch.flexmark.ast.NodeAdaptingVisitHandler` to `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
-    * `com.vladsch.flexmark.ast.NodeAdaptingVisitor` to `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
-    * `com.vladsch.flexmark.ast.NodeIterable` to `com.vladsch.flexmark.util.ast.NodeIterable`
-    * `com.vladsch.flexmark.ast.NodeIterator` to `com.vladsch.flexmark.util.ast.NodeIterator`
-    * `com.vladsch.flexmark.ast.NodeRepository` to `com.vladsch.flexmark.util.ast.NodeRepository`
-    * `com.vladsch.flexmark.ast.NodeVisitor` to `com.vladsch.flexmark.util.ast.NodeVisitor`
-    * `com.vladsch.flexmark.ast.NodeVisitorBase` to `com.vladsch.flexmark.util.ast.NodeVisitorBase`
-    * `com.vladsch.flexmark.ast.NonRenderingInline` to `com.vladsch.flexmark.util.ast.NonRenderingInline`
-    * `com.vladsch.flexmark.ast.Package` to `com.vladsch.flexmark.util.ast.Package`
-    * `com.vladsch.flexmark.ast.ReferenceNode` to `com.vladsch.flexmark.util.ast.ReferenceNode`
-    * `com.vladsch.flexmark.ast.ReferencingNode` to `com.vladsch.flexmark.util.ast.ReferencingNode`
-    * `com.vladsch.flexmark.ast.VisitHandler` to `com.vladsch.flexmark.util.ast.VisitHandler`
-    * `com.vladsch.flexmark.ast.Visitor` to `com.vladsch.flexmark.util.ast.Visitor`
-    * `com.vladsch.flexmark.IParse` to `com.vladsch.flexmark.util.IParse`
-    * `com.vladsch.flexmark.IRender` to `com.vladsch.flexmark.util.IRender`
+* Fix: overlapping packages in different modules, change:
+* `com.vladsch.flexmark.ast.AllNodesVisitor` to `com.vladsch.flexmark.util.ast.AllNodesVisitor`
+* `com.vladsch.flexmark.ast.BlankLine` to `com.vladsch.flexmark.util.ast.BlankLine`
+* `com.vladsch.flexmark.ast.BlankLineContainer` to `com.vladsch.flexmark.util.ast.BlankLineContainer`
+* `com.vladsch.flexmark.ast.Block` to `com.vladsch.flexmark.util.ast.Block`
+* `com.vladsch.flexmark.ast.BlockContent` to `com.vladsch.flexmark.util.ast.BlockContent`
+* `com.vladsch.flexmark.ast.BlockNodeVisitor` to `com.vladsch.flexmark.util.ast.BlockNodeVisitor`
+* `com.vladsch.flexmark.ast.Content` to `com.vladsch.flexmark.util.ast.Content`
+* `com.vladsch.flexmark.ast.ContentNode` to `com.vladsch.flexmark.util.ast.ContentNode`
+* `com.vladsch.flexmark.ast.CustomBlock` to `com.vladsch.flexmark.util.ast.CustomBlock`
+* `com.vladsch.flexmark.ast.CustomNode` to `com.vladsch.flexmark.util.ast.CustomNode`
+* `com.vladsch.flexmark.ast.DescendantNodeIterable` to `com.vladsch.flexmark.util.ast.DescendantNodeIterable`
+* `com.vladsch.flexmark.ast.DescendantNodeIterator` to `com.vladsch.flexmark.util.ast.DescendantNodeIterator`
+* `com.vladsch.flexmark.ast.Node` to `com.vladsch.flexmark.util.ast.Node`
+* `com.vladsch.flexmark.ast.Document` to `com.vladsch.flexmark.util.ast.Document`
+* `com.vladsch.flexmark.ast.DoNotCollectText` to `com.vladsch.flexmark.util.ast.DoNotCollectText`
+* `com.vladsch.flexmark.ast.DoNotDecorate` to `com.vladsch.flexmark.util.ast.DoNotDecorate`
+* `com.vladsch.flexmark.ast.DoNotLinkDecorate` to `com.vladsch.flexmark.util.ast.DoNotLinkDecorate`
+* `com.vladsch.flexmark.ast.KeepTrailingBlankLineContainer` to `com.vladsch.flexmark.util.ast.KeepTrailingBlankLineContainer`
+* `com.vladsch.flexmark.ast.NodeAdaptedVisitor` to `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor`
+* `com.vladsch.flexmark.ast.NodeAdaptingVisitHandler` to `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
+* `com.vladsch.flexmark.ast.NodeAdaptingVisitor` to `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+* `com.vladsch.flexmark.ast.NodeIterable` to `com.vladsch.flexmark.util.ast.NodeIterable`
+* `com.vladsch.flexmark.ast.NodeIterator` to `com.vladsch.flexmark.util.ast.NodeIterator`
+* `com.vladsch.flexmark.ast.NodeRepository` to `com.vladsch.flexmark.util.ast.NodeRepository`
+* `com.vladsch.flexmark.ast.NodeVisitor` to `com.vladsch.flexmark.util.ast.NodeVisitor`
+* `com.vladsch.flexmark.ast.NodeVisitorBase` to `com.vladsch.flexmark.util.ast.NodeVisitorBase`
+* `com.vladsch.flexmark.ast.NonRenderingInline` to `com.vladsch.flexmark.util.ast.NonRenderingInline`
+* `com.vladsch.flexmark.ast.Package` to `com.vladsch.flexmark.util.ast.Package`
+* `com.vladsch.flexmark.ast.ReferenceNode` to `com.vladsch.flexmark.util.ast.ReferenceNode`
+* `com.vladsch.flexmark.ast.ReferencingNode` to `com.vladsch.flexmark.util.ast.ReferencingNode`
+* `com.vladsch.flexmark.ast.VisitHandler` to `com.vladsch.flexmark.util.ast.VisitHandler`
+* `com.vladsch.flexmark.ast.Visitor` to `com.vladsch.flexmark.util.ast.Visitor`
+* `com.vladsch.flexmark.IParse` to `com.vladsch.flexmark.util.IParse`
+* `com.vladsch.flexmark.IRender` to `com.vladsch.flexmark.util.IRender`
 
-  * Fix: API classes under `internal` package:
-    * `flexmark`:
-      * `com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.AsteriskDelimiterProcessor`
-      * `com.vladsch.flexmark.internal.inline.EmphasisDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.EmphasisDelimiterProcessor`
-      * `com.vladsch.flexmark.internal.Bracket` to `com.vladsch.flexmark.parser.core.delimiter.Bracket`
-      * `com.vladsch.flexmark.internal.Delimiter` to `com.vladsch.flexmark.parser.core.delimiter.Delimiter`
-      * `com.vladsch.flexmark.internal.ThematicBreakOptions` to `com.vladsch.flexmark.internal.ThematicBreakParser.ThematicBreakOptions`
-      * `com.vladsch.flexmark.internal.HeadingOptions` to `com.vladsch.flexmark.internal.HeadingParser.HeadingOptions`
-      * `com.vladsch.flexmark.internal.BlockParserTracker` to `com.vladsch.flexmark.parser.block.BlockParserTracker`
-      * `com.vladsch.flexmark.internal.BlockQuoteParser` to `com.vladsch.flexmark.parser.core.BlockQuoteParser`
-      * `com.vladsch.flexmark.internal.DocumentBlockParser` to `com.vladsch.flexmark.parser.core.DocumentBlockParser`
-      * `com.vladsch.flexmark.internal.FencedCodeBlockParser` to `com.vladsch.flexmark.parser.core.FencedCodeBlockParser`
-      * `com.vladsch.flexmark.internal.HeadingParser` to `com.vladsch.flexmark.parser.core.HeadingParser`
-      * `com.vladsch.flexmark.internal.IndentedCodeBlockParser` to `com.vladsch.flexmark.parser.core.IndentedCodeBlockParser`
-      * `com.vladsch.flexmark.internal.ListBlockParser` to `com.vladsch.flexmark.parser.core.ListBlockParser`
-      * `com.vladsch.flexmark.internal.ListItemParser` to `com.vladsch.flexmark.parser.core.ListItemParser`
-      * `com.vladsch.flexmark.internal.ParagraphParser` to `com.vladsch.flexmark.parser.core.ParagraphParser`
-      * `com.vladsch.flexmark.internal.ThematicBreakParser` to `com.vladsch.flexmark.parser.core.ThematicBreakParser`
-      * `com.vladsch.flexmark.internal.HtmlBlockParser` to `com.vladsch.flexmark.parser.core.HtmlBlockParser`
-      * `com.vladsch.flexmark.internal.ReferencePreProcessorFactory` to `com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory`
-      * `com.vladsch.flexmark.internal.InlineParserImpl` to `com.vladsch.flexmark.parser.internal.InlineParserImpl`
-      * `com.vladsch.flexmark.internal.BlockStartImpl` to `com.vladsch.flexmark.parser.internal.BlockStartImpl`
-      * `com.vladsch.flexmark.internal.BlockContinueImpl` to `com.vladsch.flexmark.parser.internal.BlockContinueImpl`
-      * `com.vladsch.flexmark.internal.LinkRefProcessorData` to `com.vladsch.flexmark.parser.internal.LinkRefProcessorData`
-      * `com.vladsch.flexmark.internal.CommonmarkInlineParser` to `com.vladsch.flexmark.parser.internal.CommonmarkInlineParser`
-      * `com.vladsch.flexmark.internal.MatchedBlockParserImpl` to `com.vladsch.flexmark.parser.internal.MatchedBlockParserImpl`
-      * `com.vladsch.flexmark.internal.PostProcessorManager` to `com.vladsch.flexmark.parser.internal.PostProcessorManager`
-      * `com.vladsch.flexmark.internal.DocumentParser` to `com.vladsch.flexmark.parser.internal.DocumentParser`
-      * `com.vladsch.flexmark.internal.HtmlDeepParser` to `com.vladsch.flexmark.parser.internal.HtmlDeepParser`
+* Fix: API classes under `internal` package:
+* `flexmark`:
+* `com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.AsteriskDelimiterProcessor`
+* `com.vladsch.flexmark.internal.inline.EmphasisDelimiterProcessor` to `com.vladsch.flexmark.parser.core.delimiter.EmphasisDelimiterProcessor`
+* `com.vladsch.flexmark.internal.Bracket` to `com.vladsch.flexmark.parser.core.delimiter.Bracket`
+* `com.vladsch.flexmark.internal.Delimiter` to `com.vladsch.flexmark.parser.core.delimiter.Delimiter`
+* `com.vladsch.flexmark.internal.ThematicBreakOptions` to `com.vladsch.flexmark.internal.ThematicBreakParser.ThematicBreakOptions`
+* `com.vladsch.flexmark.internal.HeadingOptions` to `com.vladsch.flexmark.internal.HeadingParser.HeadingOptions`
+* `com.vladsch.flexmark.internal.BlockParserTracker` to `com.vladsch.flexmark.parser.block.BlockParserTracker`
+* `com.vladsch.flexmark.internal.BlockQuoteParser` to `com.vladsch.flexmark.parser.core.BlockQuoteParser`
+* `com.vladsch.flexmark.internal.DocumentBlockParser` to `com.vladsch.flexmark.parser.core.DocumentBlockParser`
+* `com.vladsch.flexmark.internal.FencedCodeBlockParser` to `com.vladsch.flexmark.parser.core.FencedCodeBlockParser`
+* `com.vladsch.flexmark.internal.HeadingParser` to `com.vladsch.flexmark.parser.core.HeadingParser`
+* `com.vladsch.flexmark.internal.IndentedCodeBlockParser` to `com.vladsch.flexmark.parser.core.IndentedCodeBlockParser`
+* `com.vladsch.flexmark.internal.ListBlockParser` to `com.vladsch.flexmark.parser.core.ListBlockParser`
+* `com.vladsch.flexmark.internal.ListItemParser` to `com.vladsch.flexmark.parser.core.ListItemParser`
+* `com.vladsch.flexmark.internal.ParagraphParser` to `com.vladsch.flexmark.parser.core.ParagraphParser`
+* `com.vladsch.flexmark.internal.ThematicBreakParser` to `com.vladsch.flexmark.parser.core.ThematicBreakParser`
+* `com.vladsch.flexmark.internal.HtmlBlockParser` to `com.vladsch.flexmark.parser.core.HtmlBlockParser`
+* `com.vladsch.flexmark.internal.ReferencePreProcessorFactory` to `com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory`
+* `com.vladsch.flexmark.internal.InlineParserImpl` to `com.vladsch.flexmark.parser.internal.InlineParserImpl`
+* `com.vladsch.flexmark.internal.BlockStartImpl` to `com.vladsch.flexmark.parser.internal.BlockStartImpl`
+* `com.vladsch.flexmark.internal.BlockContinueImpl` to `com.vladsch.flexmark.parser.internal.BlockContinueImpl`
+* `com.vladsch.flexmark.internal.LinkRefProcessorData` to `com.vladsch.flexmark.parser.internal.LinkRefProcessorData`
+* `com.vladsch.flexmark.internal.CommonmarkInlineParser` to `com.vladsch.flexmark.parser.internal.CommonmarkInlineParser`
+* `com.vladsch.flexmark.internal.MatchedBlockParserImpl` to `com.vladsch.flexmark.parser.internal.MatchedBlockParserImpl`
+* `com.vladsch.flexmark.internal.PostProcessorManager` to `com.vladsch.flexmark.parser.internal.PostProcessorManager`
+* `com.vladsch.flexmark.internal.DocumentParser` to `com.vladsch.flexmark.parser.internal.DocumentParser`
+* `com.vladsch.flexmark.internal.HtmlDeepParser` to `com.vladsch.flexmark.parser.internal.HtmlDeepParser`
 
-      * resource `/com/vladsch/flexmark/internal/util/entities.properties` to `/com/vladsch/flexmark/util/html/entities.properties` in `flexmark-util` module
+* resource `/com/vladsch/flexmark/internal/util/entities.properties` to `/com/vladsch/flexmark/util/html/entities.properties` in `flexmark-util` module
 
-    * `flexmark-docx-converter`
-      * `com.vladsch.flexmark.docx.converter.internal.DocxRenderer` to `com.vladsch.flexmark.docx.converter.DocxRenderer`
-      * `com.vladsch.flexmark.docx.converter.internal.DocxRendererPhase` to `com.vladsch.flexmark.docx.converter.DocxRendererPhase`
-      * `com.vladsch.flexmark.docx.converter.internal.NodeDocxRendererHandler` to `com.vladsch.flexmark.docx.converter.NodeDocxRendererHandler`
-      * `com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions` to `com.vladsch.flexmark.docx.converter.DocxRendererOptions`
+* `flexmark-docx-converter`
+* `com.vladsch.flexmark.docx.converter.internal.DocxRenderer` to `com.vladsch.flexmark.docx.converter.DocxRenderer`
+* `com.vladsch.flexmark.docx.converter.internal.DocxRendererPhase` to `com.vladsch.flexmark.docx.converter.DocxRendererPhase`
+* `com.vladsch.flexmark.docx.converter.internal.NodeDocxRendererHandler` to `com.vladsch.flexmark.docx.converter.NodeDocxRendererHandler`
+* `com.vladsch.flexmark.docx.converter.internal.DocxRendererOptions` to `com.vladsch.flexmark.docx.converter.DocxRendererOptions`
 
-    * `flexmark-formatter`
-      * `com.vladsch.flexmark.formatter.internal.Formatter` to `com.vladsch.flexmark.formatter.Formatter`
-      * `com.vladsch.flexmark.formatter.internal.FormattingPhase` to `com.vladsch.flexmark.formatter.FormattingPhase`
-      * `com.vladsch.flexmark.formatter.internal.MarkdownWriter` to `com.vladsch.flexmark.formatter.MarkdownWriter`
-      * `com.vladsch.flexmark.formatter.internal.NodeFormatter` to `com.vladsch.flexmark.formatter.NodeFormatter`
-      * `com.vladsch.flexmark.formatter.internal.NodeFormatterContext` to `com.vladsch.flexmark.formatter.NodeFormatterContext`
-      * `com.vladsch.flexmark.formatter.internal.NodeFormatterFactory` to `com.vladsch.flexmark.formatter.NodeFormatterFactory`
-      * `com.vladsch.flexmark.formatter.internal.NodeFormattingHandler` to `com.vladsch.flexmark.formatter.NodeFormattingHandler`
-      * `com.vladsch.flexmark.formatter.internal.NodeRepositoryFormatter` to `com.vladsch.flexmark.formatter.NodeRepositoryFormatter`
-      * `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
-      * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
+* `flexmark-formatter`
+* `com.vladsch.flexmark.formatter.internal.Formatter` to `com.vladsch.flexmark.formatter.Formatter`
+* `com.vladsch.flexmark.formatter.internal.FormattingPhase` to `com.vladsch.flexmark.formatter.FormattingPhase`
+* `com.vladsch.flexmark.formatter.internal.MarkdownWriter` to `com.vladsch.flexmark.formatter.MarkdownWriter`
+* `com.vladsch.flexmark.formatter.internal.NodeFormatter` to `com.vladsch.flexmark.formatter.NodeFormatter`
+* `com.vladsch.flexmark.formatter.internal.NodeFormatterContext` to `com.vladsch.flexmark.formatter.NodeFormatterContext`
+* `com.vladsch.flexmark.formatter.internal.NodeFormatterFactory` to `com.vladsch.flexmark.formatter.NodeFormatterFactory`
+* `com.vladsch.flexmark.formatter.internal.NodeFormattingHandler` to `com.vladsch.flexmark.formatter.NodeFormattingHandler`
+* `com.vladsch.flexmark.formatter.internal.NodeRepositoryFormatter` to `com.vladsch.flexmark.formatter.NodeRepositoryFormatter`
+* `com.vladsch.flexmark.formatter.internal.PhasedNodeFormatter` to `com.vladsch.flexmark.formatter.PhasedNodeFormatter`
+* `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
 
 ## 0.35.10
@@ -878,46 +863,35 @@
 ## 0.35.2
 
 * Fix: base64 encoding function in `ImageUtils` to remove `\n` from encoded string.
-
 * Fix: Aside extension to use new `KeepTrailingBlankLineContainer` marker for blocks which have
   a prefix which allows attribution of blank lines to the block.
-
 * Add: sample for converting inline nodes to text nodes in node post processor. Thanks to
   **[@markkolich](https://github.com/markkolich)**.
   * Merged [#288, PR: Adding TokenReplacingPostProcessorSample and UnderlineExtensionSample]
-
 * Fix: `ReplacedTextMapper` can only handle a single replacement set, while AutoLinkExtension
   was applying a replacement on top of already replaced text.
-
 * :warning: Now any functions which perform replacements using `ReplacedTextMapper` need to
   check if the passed in text mapper `isModified()` and if this is the case invoke
   `startNestedReplacement(BasedSequence)`.
-
 * Add: log4j logging to `DocumentParser`, when debug is enabled parser will log resulting AST
   after parsing, paragraph pre-processing, block pre-processing and inline processing to isolate
   where a problem is introduced by an extension into the AST.
-
 * Breaking: :warning: Potentially breaking change for some code if parsing with
   `Parser.BLANK_LINES_IN_AST` enabled. Last blank line of blocks is now moved out to the parent
   block. Greatest effect is on list items which previously held on to their last blank line,
   except for the last item in the list. Now all trailing blank lines are moved out to the parent
   list. Therefore children of lists can be list items or blank lines, not just list items. This
   makes blank line attribution more consistent.
-
 * Fix: [#287, ''flexmark-html-parser' The module has an mistake]
-
 * Fix: empty table cells now contain a space so that the position of the cell's text in the file
   is not lost.
-
 * Fix: Formatter inline elements leaving embedded EOL sequences when
   `Formatter.KEEP_SOFT_LINE_BREAKS` is false.
-
 * Fix: trailing blank lines in block quotes are now left inside the block quote instead of
   moving them up to the document level if these blank lines are unambiguously attributable to
   the block quote by having a block quote prefix on the line. Unlike other block elements where
   a trailing blank line is not attributable to the block element, block quotes have explicit
   prefix which identifies the blank line as part of the block quote.
-
 * :warning: trailing blank line nodes will be appended to the block quote even if
   `Parser.BLANK_LINES_IN_AST` is `false` to force block quote to span the blank lines as the
   only way to extend the block quote enclosed characters.
@@ -1107,13 +1081,10 @@
   * `EXT_INLINE_INS` - ins
   * `EXT_INLINE_SUB` - sub
   * `EXT_INLINE_SUP` - sup
-
 * Available settings:
-
   * `ExtensionConversion.MARKDOWN` - convert to markdown
   * `ExtensionConversion.TEXT` - convert to inner text
   * `ExtensionConversion.HTML` - leave HTML as is
-
 * Corresponding `SKIP_` options have been deprecated since their function is duplicated by new
   options.
 
@@ -1267,30 +1238,22 @@
     `TaskListExtension.ITEM_CLASS`
   * Add: depreciation of `TaskListExtension.ITEM_CLASS` in favour of
     `TaskListExtension.TIGHT_ITEM_CLASS`
-
 * Fix: merge [#231, PR: Fix two small bugs in ext-toc]
   [@BlueBoxWare](https://github.com/BlueBoxWare)
-
 * Add: `TaskListAttributeProviderSample` to `flexmark-java-samples` module.
-
 * Add: `GitHubParsingSample` to `flexmark-java-samples` module to show GitHub compatible parser
   setup.
-
 * Add: `ParserEmulationProfile.GITHUB` to reflect current GitHub profile, effectively it is
   `ParserEmulationProfile.COMMONMARK_0_28` with GitHub compatible id generator settings.
-
 * Fix: [#221, XSS: Javascript execution through links], add `HtmlRenderer.SUPPRESSED_LINKS`
   default `"javascript:.*"`, a regular expression to suppress any links that match. The test
   occurs before the link is resolved using a link resolver. Therefore any link matching will be
   suppressed before it is resolved. Likewise, a link resolver returning a suppressed link will
   not be suppressed since this is up to the custom link resolver to handle.
-
 * Suppressed links will render only the child nodes, effectively `[Something
   New](javascript:alert(1))` will render as if it was `Something New`.
-
 * Link suppression based on URL prefixes does not apply to HTML inline or block elements. Use
   HTML suppression options for this.
-
 * Add: `AutolinkExtension.IGNORE_LINKS` default `""`, a regex expression to match link text
   which should not be auto-linked. This can include full urls like `www.google.com` or parts by
   including wildcard match patterns. Any recognized auto-link which matches the expression will
@@ -1356,7 +1319,6 @@
 
 * Add: `DocxRenderer.PREFIX_WWW_LINKS`, default `true`, when true adds `http://` to link
   addresses which start with `www.`
-
 * Fix: `DocxRenderer` some images would not be embedded and generate a CRC Error when loaded via
   URL vs file.
 
@@ -1368,10 +1330,8 @@
 
 * Add: `EmojiExtension.ATTR_IMAGE_CLASS`, default `""`, if not empty will set the image tag
   class attribute to this value.
-
 * Fix: when image type was set to unicode then unicode char would be used for a shortcut even
   when that shortcut was not defined for requested shortcut type: github or ecs.
-
 * Fix: update to docx4j version 3.3.6
 
 ## 0.32.0
@@ -1379,7 +1339,6 @@
 * **API Change**: removed `EmojiCheatSheet` class to replace with `EmojiShortcuts` which has
   better referencing for GitHub shortcuts and unicode chars for all emojis from
   [emoji-cross-reference](https://github.com/vsch/emoji-cross-reference)
-
   * Removed: `EmojiExtension.USE_IMAGE_URL`
   * Add: `EmojiExtension.USE_SHORTCUT_TYPE`, default `EmojiShortcutType.EMOJI_CHEAT_SHEET`,
     select type of shortcuts:
@@ -1397,14 +1356,11 @@
     * `EmojiImageType.UNICODE_ONLY` convert to unicode and if there is no unicode treat as
       invalid emoji shortcut
     * `EmojiImageType.UNICODE_FALLBACK_TO_IMAGE` convert to unicode and if no unicode use image.
-
 * **API Change**: removed `HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN`, it was only needed
   to have somewhere to set attributes for tight item text for `Attributes` which now implement
   intelligent span wrapping of text.
-
 * **Change**: `AttributesExtension.ASSIGN_TEXT_ATTRIBUTES`, default `true`. Set to `false` for
   backward compatibility.
-
 * When `true` attribute assignment rules to nodes are changed to allow text elements to get
   attributes. If an attribute element is spaced from the previous plain text element `some text
   {attributes}` then attributes are for the parent of the text. If they are attached to the text
@@ -1412,20 +1368,15 @@
   span. Within an inline element same rules apply: `**bold text {attr}**` are for the strong
   emphasis span, while `**bold text{attr}**` will wrap the text between the strong emphasis
   tags, in a span with given attributes.
-
 * If a plain text span is interrupted by an HTML comment then it is considered as two separate
   plain text spans. ie. `some <!---->text{attr}` will result in `some <!----><span
   attr>text</span>` rendering.
-
 * Full spec:
   [ext_attributes_ast_spec](flexmark-ext-attributes/src/test/resources/ext_attributes_ast_spec.md)
-
 * Fix: Attributes, when they are first child then delete leading spaces of following node first
   rendered child will have leading spaces.
-
 * Add: Attribute syntax option allows `Attributes` on reference definition so that all elements
   referencing it, inherit the attributes.
-
 * To assign attributes to a reference definition you need to leave a blank line between the
   reference definition and the attributes element, placed by itself and followed by a blank
   line.
@@ -1448,7 +1399,6 @@
       output attributes extension syntax for attribute names that are matched by the regex.
   * did not output a line end at start of `<div>`, this tended to splice text in div to previous
     element.
-
 * Add: Emoji Extension support to DocxRenderer.
   * Add: Emoji Cheat Sheet images to resources in DocxRender jar, default configuration will
     resolve emoji image files to the files in the jar.
@@ -1462,76 +1412,58 @@
 
 * Fix: [#198, StringIndexOutOfBoundsException] in `AbbreviationExtension` if abbreviation
   definition had an empty abbreviation.
-
 * API Change: Refactoring of Interfaces to allow extensions only providing link resolver,
   attribute provider and html id generator to be re-used by the `DocxRenderer` and
   `HtmlRenderer` without modifications other than changing the `implemented` extension from
   `HtmlRenderer.HtmlRendererExtension` to `RendererExtension`
-
   * `AttributesProviderFactory` pass only `LinkResolverContext` instead of
     `NodeRenderingContext` to allow for attribute provider extensions to be re-used with
     `DocxRender`
-
   * `HeadIdGenerator` pass only `LinkResolverContext` instead of `NodeRenderingContext` to allow
     for header id generator provider extensions to be re-used with `DocxRender`
-
   * new `RendererExtension` with only ability to register html id generator, link resolver and
     attribute provider. Such an extension can be used as is with `HtmlRenderer` and
     `DocxRenderer`
-
   * `RendererExtension.extend(RendererBuilder, String)` method of these gets passed
     `RendererBuilder` instead of `HtmlRenderer.Builder`
-
   * extensions that implement both `RendererExtension` and `HtmlRendererExtension` will have
     only have the html renderer extension `extend` method called.
-
 * Add: `flexmark-ext-aside` handling to DocxConverter
-
 * Fix: DocxConverter formatting around footnote reference would be applied to footnote text
-
 * Add: `DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT`, default `"red"` to highlight in
   document hyperlinks with missing targets. Set to `""` to disable this. NOTE: must be one of
   the 8 named colors used by Word or it might complain.
-
 * Add: `DocxRenderer.LOCAL_HYPERLINK_MISSING_FORMAT`, default `"Missing target id: #%s"` to
   change the tooltip text of the missing hyperlink. `%s` will be replaced with the reference id
   of the link.
-
 * Fix: DocxConverter self referencing ref anchors should be converted to bookmark references in
   the docx
-
 * Add: DocxConverter now supports `AttributesExtension` and `EnumeratedReferenceExtension` by
   converting id attributes to bookmarks and enumerated reference links to hyperlinks to
   bookmarks.
-
 * Change: Enumerated references which are missing the definition for their type now default to
   `type #` where # is the reference ordinal instead of just `#`.
-
 * Add: Enumerated links now have title set to the text value of the reference.
-
 * Add: DocxConverter options to control heading id generation to resolve anchor refs to document
   anchors
   * `DocxRenderer.HTML_ID_GENERATOR`, default `HtmlIdGenerator instance`, the id generator to
     use for generating heading ids.
-
   * `DocxRenderer.LOCAL_HYPERLINK_SUFFIX`, default `""`, used to add a suffix to hyperlink
     bookmark names, except ones linking to first heading in a document. Only needed if you have
     some post processor on the docx adding suffixes to bookmark names.
 
 <!--
-  * `DocxRenderer.FIRST_HEADING_ID_SUFFIX`, default `""`, used to add a suffix to the id of the
-    first heading of the document and any hyperlinks to it.
- -->
+* `DocxRenderer.FIRST_HEADING_ID_SUFFIX`, default `""`, used to add a suffix to the id of the
+first heading of the document and any hyperlinks to it.
+-->
+
 For convenience these `HtmlRenderer` keys are aliased through `DocxRenderer`, keep in mind that
 setting either will affect both keys. For information on these keys see
 [`HtmlRenderer` options](https://github.com/vsch/flexmark-java/wiki/Extensions#renderer)
 
 * `DocxRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES`, default `true`,
-
 * `DocxRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS`, default `" -_"`
-
 * `DocxRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES`, default `false`
-
 * Add: DocxConverter options to re-map standard style names to user defined ones.
   * `DocxRenderer.DEFAULT_STYLE`, default "Normal"
   * `DocxRenderer.LOOSE_PARAGRAPH_STYLE`, default "ParagraphTextBody"
@@ -1546,11 +1478,11 @@ setting either will affect both keys. For information on these keys see
   * `DocxRenderer.FOOTNOTE_STYLE`, default "Footnote"
 
 <!--
-  * `DocxRenderer.BULLET_LIST_STYLE`, default "BulletList"
-  * `DocxRenderer.BLOCK_QUOTE_BULLET_LIST_STYLE`, default "QuotationsBulletList"
-  * `DocxRenderer.NUMBERED_LIST_STYLE`, default "NumberedList"
-  * `DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE`, default "QuotationsNumberedList"
- -->
+* `DocxRenderer.BULLET_LIST_STYLE`, default "BulletList"
+* `DocxRenderer.BLOCK_QUOTE_BULLET_LIST_STYLE`, default "QuotationsBulletList"
+* `DocxRenderer.NUMBERED_LIST_STYLE`, default "NumberedList"
+* `DocxRenderer.BLOCK_QUOTE_NUMBERED_LIST_STYLE`, default "QuotationsNumberedList"
+-->
 * `DocxRenderer.BOLD_STYLE`, default "StrongEmphasis"
 * `DocxRenderer.ITALIC_STYLE`, default "Emphasis"
 * `DocxRenderer.STRIKE_THROUGH_STYLE`, default "Strikethrough"
@@ -1615,14 +1547,15 @@ setting either will affect both keys. For information on these keys see
 [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
 [#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
 [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled]: https://github.com/vsch/flexmark-java/issues/381
+[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
 [Admonition Extension, Material for MkDocs]: https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
-[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
-[migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
-[migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
+[migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
+[migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 

@@ -1361,3 +1361,45 @@ Document[0, 43]
 ````````````````````````````````
 
 
+## Issues
+
+### 382
+
+Issue [#382, Is there an option for number of whitespaces needed to create sub-lists?]
+
+```````````````````````````````` example 382: 1
+* [ ] First item
+* [ ] Second item
+
+
+* [ ] Third item separated by 2 newlines
+
+.
+<ul>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Second item</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Third item separated by 2 newlines</p>
+  </li>
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example 382: 2
+* [ ] First item
+                * [ ] Second item
+
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item
+    * [ ] Second item</li>
+</ul>
+````````````````````````````````
+
+
+[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
+

@@ -208,7 +208,19 @@ public class ListItemParser extends AbstractBlockParser {
                 int newColumn = state.getColumn() + itemIndent;
 
                 if (currentIndent >= myOptions.getCodeIndent()) {
-                    // our indented code child
+                    // our indented code child but if it starts with an item prefix and parsing this list's paragraph item then this is a lazy continuation
+                    if (myBlock.getFirstChild() != null && myBlock.getFirstChild() == myBlock.getLastChild()) {
+                        BlockParser matched = state.getActiveBlockParser();
+                        if (matched.isParagraphParser() && matched.getBlock() == myBlock.getFirstChild()) {
+                            ListBlockParser.ListData listData = ListBlockParser.parseListMarker(myOptions, -1, state);
+                            if (listData != null) {
+                                // just a lazy continuation of us
+                                listBlockParser.setItemHandledLineSkipActive(state.getLine());
+                                return continueAtColumn(newColumn);
+                            }
+                        }
+                    }
+
                     listBlockParser.setItemHandledLine(state.getLine());
                     return continueAtColumn(newColumn);
                 } else {
@@ -220,8 +232,7 @@ public class ListItemParser extends AbstractBlockParser {
                             boolean inParagraph = matched.isParagraphParser();
                             boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
 
-                            if (inParagraphListItem
-                                    && (!myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)
+                            if (inParagraphListItem && (!myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)
                                     || !myOptions.canStartSubList(listData.listBlock, listData.isEmpty))) {
                                 // just a lazy continuation of us
                                 listBlockParser.setItemHandledLineSkipActive(state.getLine());

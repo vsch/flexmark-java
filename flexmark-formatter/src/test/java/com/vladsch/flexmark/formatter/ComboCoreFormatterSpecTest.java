@@ -25,12 +25,15 @@ public class ComboCoreFormatterSpecTest extends ComboSpecTestCase {
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true);
 
+    private static final DataHolder FIXED_INDENT_OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.FIXED_INDENT)
+            .toMutable();
+
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(FormatterExtension.FORMATTER_OPTION1, true));
         optionsMap.put("format-fixed-indent", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
-        optionsMap.put("parse-fixed-indent", new MutableDataSet().set(Parser.PARSER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
+        optionsMap.put("parse-fixed-indent", FIXED_INDENT_OPTIONS);
         optionsMap.put("format-github", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.GITHUB_DOC));
         optionsMap.put("parse-github", new MutableDataSet().set(Parser.PARSER_EMULATION_PROFILE, ParserEmulationProfile.GITHUB_DOC));
         optionsMap.put("max-blank-lines-1", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 1));

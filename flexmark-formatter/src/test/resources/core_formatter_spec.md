@@ -1882,7 +1882,6 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
-
 * Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
   match case and style of identifier at destination when you paste, undo to get results before
   MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
@@ -1899,15 +1898,11 @@ Adds missing editor actions for end of word navigation but that is just the begi
   moving the caret to the start of line when selecting or pasting. **Choose** whether you want
   to **paste full line** selections: **above** or **below** the current line regardless of the
   caret's column.
-
 * Toggle between selection and multiple carets on selected lines to save time re-selecting the
   same text again.
-
 * Filter multiple carets saves you time when creating multiple carets by removing carets on
   blank or comment lines so you can edit only code lines.
-
 * Enhanced Paste from History dialog:
-
   * **combine**, **arrange** and **reverse** the order of content entries
   * **combine multiple** clipboard contents **with caret information intact**
   * **paste and re-create multiple carets** from information already stored on the clipboard
