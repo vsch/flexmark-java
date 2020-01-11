@@ -36,7 +36,6 @@ public class ComboPegdownExtensionCompatibilitySpecTest extends RendererSpecTest
                 .toMutable().set(TestUtils.UNLOAD_EXTENSIONS, Collections.singleton(AnchorLinkExtension.class)));
         optionsMap.put("code-soft-breaks", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, "\n"));
         optionsMap.put("code-soft-break-spaces", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, " \t"));
-        optionsMap.put("list-item-code-indent", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, " \t"));
     }
     public ComboPegdownExtensionCompatibilitySpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);
