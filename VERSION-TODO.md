@@ -220,7 +220,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * Fix: implement generic code for resolving index in wrapped sequence based on tracking offset
     in base sequence without inexplicable fudge factor adjustments.
 * Fix: validate that `MarkdownParagraph` can properly compute spaces before/after at offset from
-  `altSeq.getBaseSequence()` and remove these fields from `TrackedOffset`.
+  `altSeq.getBaseSequence()` and remove these fields from `TrackedOffset.create`.
 * Fix: `LineAppendableImpl.appendTo` would trim spaces on blank lines. Lines should be appended
   as is since formatting is done during accumulation not when output to sequence or appendable.
 * Break: invert `LineAppendable.F_ALLOW_LEADING_EOL` to `LineAppendable.F_TRIM_LEADING_EOL` to

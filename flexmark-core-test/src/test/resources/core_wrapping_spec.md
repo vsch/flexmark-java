@@ -1177,3 +1177,92 @@ would be automatically copied.
 ````````````````````````````````
 
 
+```````````````````````````````` example(Wrap - Restore Spaces: 38) options(margin[96], insert-char, restore-tracked-spaces, prefix[    ], first-prefix[  * ], show-ranges)
+⟦## Markdown Navigator
+
+[TOC levels=3,4]: # "Version History"
+
+# Version History
+- [2.7.0.8 - Bug Fix & Enhancement Release](#2708---bug-fix--enhancement-release)
+- [2.7.0 - Bug Fix & Enhancement Release](#270---bug-fix--enhancement-release)
+- [2.6.0 - Bug Fix & Enhancement Release](#260---bug-fix--enhancement-release)
+- [2.5.4 - Bug Fix Release](#254---bug-fix-release)
+- [2.5.2 - Bug Fix & Enhancement Release](#252---bug-fix--enhancement-release)
+- [2.4.0 - Bug Fix & Enhancement Release](#240---bug-fix--enhancement-release)
+- [2.3.8 - Bug Fix Release](#238---bug-fix-release)
+- [2.3.7 - Bug Fix Release](#237---bug-fix-release)
+- [2.3.6 - Bug Fix & Enhancement Release](#236---bug-fix--enhancement-release)
+- [2.3.5 - Bug Fix & Enhancement Release](#235---bug-fix--enhancement-release)
+
+### 2.7.0.8 - Bug Fix & Enhancement Release
+
+* Fix: copy fixed utils from Arduino Support plugin.
+* item <http://> text https://
+* Fix: nasty bug introducing typing delay with preview enabled.
+* Fix: diagnostic-2012, kotlins NPE.
+* Fix: Paste Image: old crop settings out of bounds for new image caused exception
+* Fix: for #651, Drop image with dialog issues
+  * Spaces in file name were url encoded
+  * ⟧Copy dragging a file leaves its original directory instead of setting it to the closest or best⦙ 
+    guess based on the destination file. Should be the same
+    as if the image was pasted into the file. If the destination directory is
+    the same as the source then a new name should be generated to uniquify it.
+.
+  * Copy dragging a file leaves its original directory instead of setting it to the closest or
+    best⦙ guess based on the destination file. Should be the same as if the image was pasted into
+    the file. If the destination directory is the same as the source then a new name should be
+    generated to uniquify it.
+---- Tracked Offsets ---------------------------------------------------
+[0]: {1293 0|1 i -> 103}
+
+---- Ranges ------------------------------------------------------------
+⟦⟧  * ⟦Copy dragging a file leaves its original directory instead of setting it to the closest or⟧
+⟦⟧   ⟦ best ⟧⟦guess based on the destination file. Should be the same⟧⟦ as if the image was pasted into⟧
+⟦⟧   ⟦ the file. If the destination directory is⟧⟦ the same as the source then a new name should be⟧
+⟦⟧   ⟦ generated to uniquify it.⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[1198, 1511), s=3:12, u=8:17, t=8:17, l=317, sz=20, na=15: [1198), a:'  * ', [1198, 1288), a:'\n', [1288), a:3x' ', [1288, 1294), [1299, 1354), [1358, 1390), a:'\n', [1390), a:3x' ', [1390, 1432), [1436, 1485), a:'\n', [1485), a:3x' ', [1485, 1511), a:'\n', [1511) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 39) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ], show-ranges)
+⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
+  
+* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
+⟦      ⟧⦙to keep duplicate code.
+.
+* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need
+      ⦙to keep duplicate code.
+---- Tracked Offsets ---------------------------------------------------
+[0]: {147 6|0 si -> 103}
+
+---- Ranges ------------------------------------------------------------
+⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need
+      to keep duplicate code.⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[50, 170), s=0:3, u=2:7, t=2:7, l=127, sz=5, na=3: [50), a:'* [ ] ', [50, 170), a:'\n', [170) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 40) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ], show-ranges)
+⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
+  
+* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
+⟦      ⟧ ⦙to keep duplicate code.
+.
+* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need
+      ⦙to keep duplicate code.
+---- Tracked Offsets ---------------------------------------------------
+[0]: {148 7|0 si -> 103}
+
+---- Ranges ------------------------------------------------------------
+⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need
+   ⟧⟦   to keep duplicate code.⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[50, 171), s=0:3, u=2:7, t=2:7, l=127, sz=6, na=4: [50), a:'* [ ] ', [50, 144), [145, 171), a:'\n', [171) }
+````````````````````````````````
+
+

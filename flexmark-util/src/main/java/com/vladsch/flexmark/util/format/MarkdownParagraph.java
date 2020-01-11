@@ -237,6 +237,8 @@ public class MarkdownParagraph {
             }
 
             assert baseSequence.safeCharAt(anchorOffset) == altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
+                    // NOTE: alt sequence could have spaces removed which would result in space in base sequence and EOL in alt sequence
+                    || baseSequence.isCharAt(anchorOffset, WHITESPACE) && altUnwrapped.isCharAt(anchorIndex + anchorDelta, WHITESPACE)
                     : String.format("baseSeq.charAt: %d != altUnwrapped.charAt: %d"
                     , (int) baseSequence.safeCharAt(anchorOffset)
                     , (int) altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
@@ -273,6 +275,7 @@ public class MarkdownParagraph {
             char wrappedCharAt = wrapped.safeCharAt(wrappedIndex + wrappedAdjusted);
 
             assert altUnwrappedCharAt == wrappedCharAt
+                    || WHITESPACE.test(altUnwrappedCharAt) && WHITESPACE.test(wrappedCharAt)
                     : String.format("altUnwrapped.charAt: %s != wrapped.charAt: %s"
                     , SequenceUtils.toVisibleWhitespaceString(Character.toString(altUnwrappedCharAt))
                     , SequenceUtils.toVisibleWhitespaceString(Character.toString(wrappedCharAt))
