@@ -9,7 +9,7 @@
     - [API Refactoring](#api-refactoring)
     - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.102](#next-059102)
+- [0.59.102](#059102)
 - [0.59.100](#059100)
 - [0.59.98](#05998)
 - [0.59.96](#05996)
@@ -209,7 +209,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.102
+## 0.59.102
 
 * Break: Add validation to parser that passed `BasedSequence` is contiguous with no out of base
   parts and throw descriptive `IllegalArgumentException` if it is not. Otherwise, it is possible
@@ -228,8 +228,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * Fix: `Formatter.FORMAT_FLAGS` to add `LineAppendable.F_TRIM_LEADING_EOL` to defaults used
     for formatting if none specified.
 * Fix: `LineAppendableImpl` empty forward iterator had next instead of none.
-* Fix:
-  [core_wrapping_spec: Lines 150-151](https://github.com/vsch/flexmark-java/blob/master/flexmark-core-test/src/test/resources/core_wrapping_spec.md#L150-L151)
 * Add: `TrackedOffset` spaces before/after the offset. This is impossible to determine from
   segmented sequence in edge cases. Best to have it provided from original sequence where it is
   easy to determine and combined with what is in the final sequence since some spaces could have
