@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.ReplacedBasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -348,6 +349,14 @@ public class Parser implements IParse {
      * @return the root node
      */
     public @NotNull Document parse(@NotNull BasedSequence input) {
+        // NOTE: parser can only handle contiguous sequences with no out of base characters
+        if (input instanceof ReplacedBasedSequence) {
+            throw new IllegalArgumentException("" +
+                    "Parser.parse() does not support BasedSequences with replaced or non-contiguous segments.\n" +
+                    "Use BasedSequence.of(input.toString()) to convert to contiguous based sequence." +
+                    "");
+        }
+
         DocumentParser documentParser = new DocumentParser(options
                 , blockParserFactories
                 , paragraphPreProcessorFactories

@@ -1557,17 +1557,17 @@ Parsing a sub-sequence as the document input
   </li>
 </ul>
 .
-Document[14, 454]
-  BulletList[14, 453] isLoose
-    BulletListItem[14, 453] open:[14, 15, "*"] isLoose hadBlankLineAfter
-      Paragraph[16, 114] isTrailingBlankLine
-        Text[16, 106] chars:[16, 106, "Fix:  … ed by"]
-        SoftLineBreak[106, 107]
-        Code[109, 112] textOpen:[109, 110, "`"] text:[110, 111, "|"] textClose:[111, 112, "`"]
-          Text[110, 111] chars:[110, 111, "|"]
-        Text[112, 113] chars:[112, 113, ":"]
-      FencedCodeBlock[117, 453] open:[117, 120, "```"] info:[120, 128, "markdown"] content:[131, 448] lines[10] close:[450, 453, "```"]
-        Text[131, 448] chars:[131, 448, "7. El … ion,\n"]
+Document[0, 440]
+  BulletList[0, 439] isLoose
+    BulletListItem[0, 439] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 100] isTrailingBlankLine
+        Text[2, 92] chars:[2, 92, "Fix:  … ed by"]
+        SoftLineBreak[92, 93]
+        Code[95, 98] textOpen:[95, 96, "`"] text:[96, 97, "|"] textClose:[97, 98, "`"]
+          Text[96, 97] chars:[96, 97, "|"]
+        Text[98, 99] chars:[98, 99, ":"]
+      FencedCodeBlock[103, 439] open:[103, 106, "```"] info:[106, 114, "markdown"] content:[117, 434] lines[10] close:[436, 439, "```"]
+        Text[117, 434] chars:[117, 434, "7. El … ion,\n"]
 ````````````````````````````````
 
 
@@ -1606,17 +1606,17 @@ Document[14, 454]
   </li>
 </ul>
 .
-Document[4, 499]
-  BulletList[4, 499] isLoose
-    BulletListItem[4, 499] open:[4, 5, "*"] isLoose hadBlankLineAfter
-      Paragraph[6, 108] isTrailingBlankLine
-        Text[6, 96] chars:[6, 96, "Fix:  … ed by"]
-        SoftLineBreak[96, 97]
-        Code[103, 106] textOpen:[103, 104, "`"] text:[104, 105, "|"] textClose:[105, 106, "`"]
-          Text[104, 105] chars:[104, 105, "|"]
-        Text[106, 107] chars:[106, 107, ":"]
-      FencedCodeBlock[119, 499] open:[119, 122, "```"] info:[122, 130, "markdown"] content:[137, 490] lines[10] close:[496, 499, "```"]
-        Text[137, 490] chars:[137, 490, "7. El … ion,\n"]
+Document[0, 439]
+  BulletList[0, 439] isLoose
+    BulletListItem[0, 439] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 100] isTrailingBlankLine
+        Text[2, 92] chars:[2, 92, "Fix:  … ed by"]
+        SoftLineBreak[92, 93]
+        Code[95, 98] textOpen:[95, 96, "`"] text:[96, 97, "|"] textClose:[97, 98, "`"]
+          Text[96, 97] chars:[96, 97, "|"]
+        Text[98, 99] chars:[98, 99, ":"]
+      FencedCodeBlock[103, 439] open:[103, 106, "```"] info:[106, 114, "markdown"] content:[117, 434] lines[10] close:[436, 439, "```"]
+        Text[117, 434] chars:[117, 434, "7. El … ion,\n"]
 ````````````````````````````````
 
 
@@ -1657,17 +1657,17 @@ Add prefix/suffix to text so document ast shifts by 14 chars
   </li>
 </ul>
 .
-Document[18, 514]
-  BulletList[18, 513] isLoose
-    BulletListItem[18, 513] open:[18, 19, "*"] isLoose hadBlankLineAfter
-      Paragraph[20, 122] isTrailingBlankLine
-        Text[20, 110] chars:[20, 110, "Fix:  … ed by"]
-        SoftLineBreak[110, 111]
-        Code[117, 120] textOpen:[117, 118, "`"] text:[118, 119, "|"] textClose:[119, 120, "`"]
-          Text[118, 119] chars:[118, 119, "|"]
-        Text[120, 121] chars:[120, 121, ":"]
-      FencedCodeBlock[133, 513] open:[133, 136, "```"] info:[136, 144, "markdown"] content:[151, 504] lines[10] close:[510, 513, "```"]
-        Text[151, 504] chars:[151, 504, "7. El … ion,\n"]
+Document[0, 440]
+  BulletList[0, 439] isLoose
+    BulletListItem[0, 439] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 100] isTrailingBlankLine
+        Text[2, 92] chars:[2, 92, "Fix:  … ed by"]
+        SoftLineBreak[92, 93]
+        Code[95, 98] textOpen:[95, 96, "`"] text:[96, 97, "|"] textClose:[97, 98, "`"]
+          Text[96, 97] chars:[96, 97, "|"]
+        Text[98, 99] chars:[98, 99, ":"]
+      FencedCodeBlock[103, 439] open:[103, 106, "```"] info:[106, 114, "markdown"] content:[117, 434] lines[10] close:[436, 439, "```"]
+        Text[117, 434] chars:[117, 434, "7. El … ion,\n"]
 ````````````````````````````````
 
 

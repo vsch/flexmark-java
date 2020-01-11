@@ -84,7 +84,7 @@ public class SpecExampleParse {
 
         myStartTime = System.nanoTime();
 
-        myRenderer.parse(input);
+        myRenderer.parse(input.toString());
         for (int i = 1; i < myIterations; i++) myRenderer.parse(input);
         myParseTime = System.nanoTime();
 

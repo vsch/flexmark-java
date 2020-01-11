@@ -720,7 +720,10 @@ public class Formatter implements IRender {
             trackedSequence = sequence.isEmpty() ? document.getChars() : sequence;
             trackedOffsets = offsets.isEmpty() ? TrackedOffsetList.EMPTY_LIST : TrackedOffsetList.create(trackedSequence, offsets);
 
-            assert trackedSequence.equals(document.getChars()) : "Tracked sequence must be character identical to document.getChars()";
+            assert trackedSequence.equals(document.getChars()) : String.format("TRACKED_SEQUENCE must be character identical to document.getChars()\n" +
+                    "TRACKED_SEQUENCE: '%s'\n" +
+                    " altSeq: '%s'\n" +
+                    "", trackedSequence.toVisibleWhitespaceString(), document.getChars().toVisibleWhitespaceString());
 
             String charSequence = blockLikePrefixChars.toString();
             this.blockQuoteLikeChars = BasedSequence.of(charSequence);

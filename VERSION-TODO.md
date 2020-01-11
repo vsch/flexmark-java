@@ -211,13 +211,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.102
 
-* [ ] Fix: Add validation to parser that passed `BasedSequence` is contiguous with no out of
-      base parts and throw descriptive `IllegalArgumentException` if it is not.
-* [ ] Add: validation to `Formatter.render` for
-* Fix: re-implement markdown paragraph tracked offset resolution by scanning the unwrapped
-      and wrapped text segments and mapping them to original sequence offsets while analyzing
-      text context and keeping track of: start of line, first non-blank, last non-blank, end of
-      line.
+* Break: Add validation to parser that passed `BasedSequence` is contiguous with no out of base
+  parts and throw descriptive `IllegalArgumentException` if it is not. Otherwise, it is possible
+  to provide sequences which will cause exceptions during parser.
+* Fix: re-implement markdown paragraph tracked offset resolution by scanning the unwrapped and
+  wrapped text segments and mapping them to original sequence offsets while analyzing text
+  context and keeping track of: start of line, first non-blank, last non-blank, end of line.
   * Fix: implement generic code for resolving index in wrapped sequence based on tracking offset
     in base sequence without inexplicable fudge factor adjustments.
 * Fix: validate that `MarkdownParagraph` can properly compute spaces before/after at offset from
