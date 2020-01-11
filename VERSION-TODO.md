@@ -61,6 +61,7 @@
 - [0.59.7](#0597)
 - [0.59.5](#0595)
 - [0.59.1](#0591)
+- [0.50.48](#05048)
 - [0.50.46](#05046)
 - [0.50.44](#05044)
 - [0.50.42](#05042)
@@ -1355,6 +1356,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Break: make `NodeAdaptedVisitor.myCustomHandlersMap` private. Use
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
+
+## 0.50.48
+
+* Fix: [#382, Is there an option for number of whitespaces needed to create sub-lists?]
+  * `FIXED_INDENT` list parser did not convert list item looking text with >= 4 spaces to lazy
+    continuation.
 
 ## 0.50.46
 
