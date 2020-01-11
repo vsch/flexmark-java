@@ -104,7 +104,7 @@ Add: configuration for repeated prefixes in items, which would `be
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 5) options(margin[66], delete-space, prefix[    > ], first-width-delta[0])
+```````````````````````````````` example(Wrap: 5) options(margin[66], delete-space, prefix[    > ], first-prefix[    > ])
 Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧⦙would be treated equivalent to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.  
@@ -158,7 +158,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [300) } --> 292
+[0]: {300 3|2 -> 292}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -182,8 +182,8 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙  
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [133) } --> 129
-[1]: { [300) } --> 292
+[0]: {133 4|0 -> 129}
+[1]: {300 3|2 -> 292}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -207,9 +207,9 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [133) } --> 129
-[1]: { [300) } --> 292
-[2]: { [303) } --> 295
+[0]: {133 4|0 -> 129}
+[1]: {300 3|6 -> 292}
+[2]: {303 6|3 -> 295}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -233,7 +233,7 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.         
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [199) } --> 195
+[0]: {199 2|0 -> 195}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -257,10 +257,10 @@ Add: configuration for repeated prefixes in items, which would `be #2` copied wh
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [133) } --> 129
-[1]: { [199) } --> 195
-[2]: { [302) } --> 294
-[3]: { [305) } --> 297
+[0]: {133 4|0 -> 129}
+[1]: {199 2|0 -> 195}
+[2]: {302 3|6 -> 294}
+[3]: {305 6|3 -> 297}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
@@ -277,6 +277,7 @@ standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.   ⦙   ⦙
 ````````````````````````````````
 
+
 Leading space not handled for tracking for now
 
 ```````````````````````````````` example(Wrap: 12) options(margin[66], restore-tracked-spaces)
@@ -285,12 +286,12 @@ Leading space not handled for tracking for now
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [164) } --> 157
+[0]: {164 1|1 -> 157}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
 ⟦#2` copied when adding/splitting an item. In other words they
-⟧⟦would be treated equivalent  to task item marker prefix. That way
+⟧⟦would be treated equivalent⟧ ⟦ ⟧⟦to task item marker prefix. That way
 ⟧⟦standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes⟧
 ⟦would be automatically copied.⟧
 
@@ -333,17 +334,17 @@ would be automatically copied.
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.   ⦙   ⦙   
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [2) } --> 0
-[1]: { [136) } --> 129
-[2]: { [164) } --> 157
-[3]: { [203) } --> 196
-[4]: { [306) } --> 295
-[5]: { [309) } --> 298
+[0]: {2 2|1 -> 0}
+[1]: {136 4|0 -> 129}
+[2]: {164 1|1 -> 157}
+[3]: {203 2|0 -> 196}
+[4]: {306 3|6 -> 295}
+[5]: {309 6|3 -> 298}
 
 ---- Ranges ------------------------------------------------------------
 ⟦Add: configuration for repeated prefixes in items, which would `be⟧
 ⟦#2` copied when adding/splitting an item. In other words they
-⟧⟦would be treated equivalent  to task item marker prefix. That way  
+⟧⟦would be treated equivalent⟧ ⟦ ⟧⟦to task item marker prefix. That way  
 ⟧⟦standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes⟧
 ⟦would be automatically copied.⟧      ⟦⟧
 
@@ -377,7 +378,7 @@ Add: configuration ⦙ for repeated
 [0]: {19 1|1 -> 19}
 
 ---- Ranges ------------------------------------------------------------
-⟦Add: configuration  for repeated⟧
+⟦Add: configuration⟧ ⟦ ⟧⟦for repeated⟧
 
 ---- Result ------------------------------------------------------------
 Add: configuration ⦙ for repeated
@@ -393,7 +394,7 @@ Add: configuration ⦙ for repeated.  ⦙  ⦙
 [2]: {37 4|2 -> 37}
 
 ---- Ranges ------------------------------------------------------------
-⟦Add: configuration  for repeated.⟧    ⟦⟧
+⟦Add: configuration⟧ ⟦ ⟧⟦for repeated.⟧    ⟦⟧
 
 ---- Result ------------------------------------------------------------
 Add: configuration ⦙ for repeated.  ⦙  ⦙
@@ -409,7 +410,7 @@ Add: configuration ⦙ for repeated.
 [0]: {19 1|1 d -> 19}
 
 ---- Ranges ------------------------------------------------------------
-⟦Add: configuration  for repeated.⟧
+⟦Add: configuration⟧ ⟦ ⟧⟦for repeated.⟧
 
 ---- Result ------------------------------------------------------------
 Add: configuration ⦙ for repeated.
@@ -551,37 +552,40 @@ text should wrap onto the next
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 27) options(FAIL, margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap: 27) options(margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧⦙ keep duplicate code.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [103, d) } --> 97
+[0]: {103 6|1 d -> 91}
 
 ---- Ranges ------------------------------------------------------------
-⟦* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need⟧ ⟦
-⟧⟦      keep duplicate code.⟧
+⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need⟧ ⟦
+⟧⟦keep duplicate code.⟧
 
 ---- Result ------------------------------------------------------------
-* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
-      keep duplicate code.
+Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
+keep duplicate code.
 ````````````````````````````````
 
+
+In tests, `prefix` and `first-prefix` with `restore-tracked-spaces` is only used to adjust right
+margin on first/following lines. Not to add actual prefix to result.
 
 ```````````````````````````````` example(Wrap: 28) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
 ⟦  * [ ] ⟧d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
 ⟦        ⟧dependencies on classes in other directories.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [10, d) } --> 10
+[0]: {10 1|1 d -> 2}
 
 ---- Ranges ------------------------------------------------------------
-⟦  * [ ] d  classes contained in `util` directory to `misc` sub-directory and not have any
-        dependencies on classes in other directories.⟧
+⟦d⟧ ⟦ ⟧⟦classes contained in `util` directory to `misc` sub-directory and not have any
+⟧⟦dependencies on classes in other directories.⟧
 
 ---- Result ------------------------------------------------------------
-  * [ ] d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
-        dependencies on classes in other directories.
+d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+dependencies on classes in other directories.
 ````````````````````````````````
 
 
@@ -590,15 +594,15 @@ text should wrap onto the next
 ⟦        ⟧dependencies on classes in other directories.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [9, d) } --> 8
+[0]: {9 2|1 d -> 0}
 
 ---- Ranges ------------------------------------------------------------
-⟦⟧  * [ ]⟦ ⟧ ⟦classes contained in `util` directory to `misc` sub-directory and not have any
-        dependencies on classes in other directories.⟧
+⟦⟧ ⟦classes contained in `util` directory to `misc` sub-directory and not have any
+⟧⟦dependencies on classes in other directories.⟧
 
 ---- Result ------------------------------------------------------------
-  * [ ] ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
-        dependencies on classes in other directories.
+⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+dependencies on classes in other directories.
 ````````````````````````````````
 
 
@@ -608,15 +612,15 @@ text should wrap onto the next
 ⟦        ⟧dependencies on classes in other directories.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [18, d) } --> 8
+[0]: {18 2|1 d -> 0}
 
 ---- Ranges ------------------------------------------------------------
-⟦⟧  * [ ]⟦ ⟧ ⟦classes contained in `util` directory to `misc` sub-directory and not have any
-        dependencies on classes in other directories.⟧
+⟦⟧ ⟦classes contained in `util` directory to `misc` sub-directory and not have any
+⟧⟦dependencies on classes in other directories.⟧
 
 ---- Result ------------------------------------------------------------
-  * [ ] ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
-        dependencies on classes in other directories.
+⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+dependencies on classes in other directories.
 ````````````````````````````````
 
 
@@ -625,15 +629,15 @@ text should wrap onto the next
 ⟦      ⟧ ⦙to keep duplicate code.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [104, si) } --> 103
+[0]: {104 7|0 si -> 91}
 
 ---- Ranges ------------------------------------------------------------
-⟦* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need
-⟧⟦      to keep duplicate code.⟧
+⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need
+⟧⟦to keep duplicate code.⟧
 
 ---- Result ------------------------------------------------------------
-* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need
-      ⦙to keep duplicate code.
+Fix: remove formatter and use flexmark formatter for document format to eliminate the need
+⦙to keep duplicate code.
 ````````````````````````````````
 
 
@@ -641,15 +645,15 @@ text should wrap onto the next
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙ to keep duplicate code.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [97, si) } --> 97
+[0]: {97 1|1 si -> 91}
 
 ---- Ranges ------------------------------------------------------------
-⟦* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need⟧ ⟦⟧
-    ⟦  to keep duplicate code.⟧
+⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the need⟧ ⟦⟧
+⟦to keep duplicate code.⟧
 
 ---- Result ------------------------------------------------------------
-* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
-      to keep duplicate code.
+Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
+to keep duplicate code.
 ````````````````````````````````
 
 
@@ -658,15 +662,15 @@ text should wrap onto the next
 ⟦  ⟧sequence ⦙and mapped sequence.
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [99, si) } --> 99
+[0]: {99 1|0 si -> 95}
 
 ---- Ranges ------------------------------------------------------------
-⟦* Fix: conversion from Smart to based to extract more source information from segmented⟧⟦ sequence⟧
- ⟦ and mapped sequence.⟧
+⟦Fix: conversion from Smart to based to extract more source information from segmented⟧⟦ sequence⟧
+⟦and mapped sequence.⟧
 
 ---- Result ------------------------------------------------------------
-* Fix: conversion from Smart to based to extract more source information from segmented sequence
-  ⦙and mapped sequence.
+Fix: conversion from Smart to based to extract more source information from segmented sequence
+⦙and mapped sequence.
 ````````````````````````````````
 
 
@@ -674,15 +678,15 @@ text should wrap onto the next
 ⟦* ⟧Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
 .
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [107, si) } --> 109
+[0]: {107 1|0 si -> 105}
 
 ---- Ranges ------------------------------------------------------------
-⟦* Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line⟧
- ⟦ elements.⟧ ⟦⟧
+⟦Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line⟧
+⟦elements.⟧ ⟦⟧
 
 ---- Result ------------------------------------------------------------
-* Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line
-  elements. ⦙
+Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line
+elements. ⦙
 ````````````````````````````````
 
 

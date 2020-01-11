@@ -170,8 +170,8 @@ public class Formatter implements IRender {
 
     // can be used to set indent for the document, useful when formatting a single paragraph that is extracted from another document
     //  and formatted paragraph will be re-inserted into that document
-    final public static DataKey<CharSequence> DOCUMENT_FIRST_PREFIX = new DataKey<>("DOCUMENT_FIRST_PREFIX", "");
-    final public static DataKey<CharSequence> DOCUMENT_PREFIX = new DataKey<>("DOCUMENT_PREFIX", "");
+    final public static DataKey<CharSequence> DOCUMENT_FIRST_PREFIX = new DataKey<>("DOCUMENT_FIRST_PREFIX", BasedSequence.NULL);
+    final public static DataKey<CharSequence> DOCUMENT_PREFIX = new DataKey<>("DOCUMENT_PREFIX", BasedSequence.NULL);
     // }}
 
     /**

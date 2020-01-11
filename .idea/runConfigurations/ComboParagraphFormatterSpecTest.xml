@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ComboParagraphFormatterSpecTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="flexmark-core-test" />
+    <useClassPathOnly />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.vladsch.flexmark.core.test.util.formatter.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.core.test.util.formatter" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.core.test.util.formatter.ComboParagraphFormatterSpecTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <option name="PARAMETERS" value="" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -16,6 +16,8 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate SPACE = value -> value == ' ';
     CharPredicate TAB = value -> value == '\t';
     CharPredicate EOL = value -> value == '\n';
+    CharPredicate ANY_EOL = value -> value == '\n' || value == '\r';
+    CharPredicate ANY_EOL_NUL = value -> value == '\n' || value == '\r' || value == '\0';
     CharPredicate BACKSLASH = value -> value == '\\';
     CharPredicate SLASH = value -> value == '/';
     CharPredicate LINE_SEP = value -> value == '\u2028';
@@ -24,9 +26,9 @@ public interface CharPredicate extends IntPredicate {
     CharPredicate SPACE_TAB_NUL = value -> value == ' ' || value == '\t' || value == '\0';
     CharPredicate SPACE_TAB_LINE_SEP = value -> value == ' ' || value == '\t' || value == '\u2028';
     CharPredicate SPACE_EOL = value -> value == ' ' || value == '\n';
+    CharPredicate SPACE_ANY_EOL = value -> value == ' ' || value == '\r' || value == '\n';
     CharPredicate SPACE_TAB_NBSP = value -> value == ' ' || value == '\t' || value == '\u00A0';
     CharPredicate SPACE_TAB_EOL = value -> value == ' ' || value == '\t' || value == '\n';
-    CharPredicate ANY_EOL = value -> value == '\n' || value == '\r';
     CharPredicate WHITESPACE = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r';
     CharPredicate WHITESPACE_OR_NUL = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\0';
     CharPredicate WHITESPACE_NBSP = value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\u00A0';

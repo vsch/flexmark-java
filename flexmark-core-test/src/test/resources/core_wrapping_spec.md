@@ -389,9 +389,31 @@ BasedSegmentBuilder{[50, 167), s=1:8, u=4:13, t=4:13, l=123, sz=10, na=7: [50), 
 ````````````````````````````````
 
 
-* [ ] Fix: should preserve space since one existed after edit
+Should not preserve space since there was more than one in middle of paragraph
 
 ```````````````````````````````` example(Wrap - Delete Indent: 2) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
+⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
+  
+* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the
+      need ⦙[example.com](http://example.com) keep duplicate code.
+.
+* [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need⦙
+      [example.com](http://example.com) keep duplicate code.
+---- Tracked Offsets ---------------------------------------------------
+[0]: {147 1|0 sd -> 96}
+
+---- Ranges ------------------------------------------------------------
+⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the⟧⟦ need⟧
+⟦⟧     ⟦ [example.com](http://example.com) keep duplicate code.⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[50, 201), s=1:8, u=4:13, t=4:13, l=158, sz=10, na=7: [50), a:'* [ ] ', [50, 135), [141, 146), a:'\n', [146), a:5x' ', [146, 201), a:'\n', [201) }
+````````````````````````````````
+
+
+Should preserve space since there was a non-space char in middle
+
+```````````````````````````````` example(Wrap - Delete Indent: 3) options(margin[96], delete-char, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the
@@ -400,24 +422,18 @@ BasedSegmentBuilder{[50, 167), s=1:8, u=4:13, t=4:13, l=123, sz=10, na=7: [50), 
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
       [example.com](http://example.com) keep duplicate code.
 ---- Tracked Offsets ---------------------------------------------------
-[0]: {147 1|0 sd -> 97}
+[0]: {147 1|0 d -> 97}
 
 ---- Ranges ------------------------------------------------------------
-⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the⟧⟦ need ⟧
+⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the⟧⟦ need⟧ ⟦⟧
 ⟦⟧     ⟦ [example.com](http://example.com) keep duplicate code.⟧
 ⟦⟧
 ---- Segments ----------------------------------------------------------
-BasedSegmentBuilder{[50, 201), s=1:8, u=4:13, t=4:13, l=159, sz=10, na=7: [50), a:'* [ ] ', [50, 135), [140, 146), a:'\n', [146), a:5x' ', [146, 201), a:'\n', [201) }
+BasedSegmentBuilder{[50, 201), s=2:9, u=5:14, t=5:14, l=159, sz=12, na=8: [50), a:'* [ ] ', [50, 135), [141, 146), a:' ', [146), a:'\n', [146), a:5x' ', [146, 201), a:'\n', [201) }
 ````````````````````````````````
 
 
-* [ ] Fix: This makes the caret jump to previous word because of the kludged way paragraphs
-      resolve offsets. There is no way to fix it in the current implementation without more
-      kludges which will break other kludges. This is the reason for needing to rewrite it using
-      more algorithmic approach by processing all unwrapped and wrapped segments to get tracked
-      offset context for determining its index in the wrapped sequence.
-
-```````````````````````````````` example(Wrap - Delete Indent: 3) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
+```````````````````````````````` example(Wrap - Delete Indent: 4) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the
@@ -430,14 +446,14 @@ BasedSegmentBuilder{[50, 201), s=1:8, u=4:13, t=4:13, l=159, sz=10, na=7: [50), 
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* [ ] ⟦Fix: remove formatter and use flexmark formatter for document format to eliminate the⟧⟦ need⟧
-⟦⟧     ⟦ [example.com](http://example.com) keep duplicate code.⟧
+⟦⟧      ⟦[example.com](http://example.com) keep duplicate code.⟧
 ⟦⟧
 ---- Segments ----------------------------------------------------------
-BasedSegmentBuilder{[50, 201), s=1:8, u=4:13, t=4:13, l=159, sz=10, na=7: [50), a:'* [ ] ', [50, 135), [140, 146), a:'\n', [146), a:5x' ', [146, 201), a:'\n', [201) }
+BasedSegmentBuilder{[50, 200), s=1:9, u=4:14, t=4:14, l=158, sz=10, na=7: [50), a:'* [ ] ', [50, 135), [141, 146), a:'\n', [146), a:6x' ', [146, 200), a:'\n', [200) }
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Delete Indent: 4) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
+```````````````````````````````` example(Wrap - Delete Indent: 5) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the
@@ -457,7 +473,7 @@ BasedSegmentBuilder{[50, 196), s=0:3, u=2:7, t=2:7, l=153, sz=5, na=3: [50), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Delete Indent: 5) options(margin[96], delete-char, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
+```````````````````````````````` example(Wrap - Delete Indent: 6) options(margin[96], delete-char, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -477,7 +493,7 @@ BasedSegmentBuilder{[50, 168), s=1:4, u=3:8, t=3:8, l=125, sz=8, na=6: [50), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Delete Indent: 6) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
+```````````````````````````````` example(Wrap - Delete Indent: 7) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -615,7 +631,7 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
 ````````````````````````````````
 
 
-* [ ] Fix: should preserve space at end of line
+Should preserve space at end of line
 
 ```````````````````````````````` example(Wrap - Restore Spaces: 7) options(margin[96], delete-char, first-prefix[* [ ] ], restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
 ⟦* [ ] ⟧Add: validation to `Formatter.render` for ⦙
@@ -625,15 +641,12 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
 [0]: {48 1|0 d -> 48}
 
 ---- Ranges ------------------------------------------------------------
-⟦⟧* [ ] ⟦Add: validation to `Formatter.render` for ⟧
+⟦⟧* [ ] ⟦Add: validation to `Formatter.render` for⟧ ⟦⟧
 ⟦⟧
 ---- Segments ----------------------------------------------------------
-BasedSegmentBuilder{[6, 47), s=0:3, u=2:7, t=2:7, l=48, sz=5, na=3: [6), a:'* [ ] ', [6, 48), a:'\n', [48) }
+BasedSegmentBuilder{[6, 47), s=1:4, u=3:8, t=3:8, l=49, sz=7, na=4: [6), a:'* [ ] ', [6, 47), a:' ', [47), a:'\n', [47) }
 ````````````````````````````````
 
-
-* [ ] complete this. Space at end of previous line affect how character backspace and character
-      typing reacts at the first non-blank of the next line.
 
 ```````````````````````````````` example(Wrap - Restore Spaces: 8) options(margin[96], insert-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
 ⟦* ⟧Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd 
@@ -644,7 +657,7 @@ BasedSegmentBuilder{[6, 47), s=0:3, u=2:7, t=2:7, l=48, sz=5, na=3: [6), a:'* [ 
 d⦙as this is the end.
 
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [100, i) } --> 96
+[0]: {100 0|0 i -> 96}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* ⟦Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd⟧⟦
@@ -656,18 +669,18 @@ BasedSegmentBuilder{[2, 121), s=0:1, u=2:3, t=2:3, l=117, sz=8, na=6: [2), a:'* 
 ````````````````````````````````
 
 
-* [ ] Fix: should not splice or move caret to previous line
+Should not splice or move caret to previous line
 
 ```````````````````````````````` example(Wrap - Restore Spaces: 9) options(margin[96], delete-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
 ⟦* ⟧Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd 
 ⟦   ⟧⦙as this is the end. 
     
 .
-* Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adf
+* Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd
 ⦙as this is the end.
 
 ---- Tracked Offsets ---------------------------------------------------
-[0]: { [99, si) } --> 95
+[0]: {99 3|0 d -> 95}
 
 ---- Ranges ------------------------------------------------------------
 ⟦⟧* ⟦Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd⟧⟦
@@ -1099,16 +1112,13 @@ BasedSegmentBuilder{[0, 299), s=2:8, u=6:12, t=6:12, l=299, sz=17, na=12: [0, 66
 ````````````````````````````````
 
 
-* [ ] Leading space on first line not handled
-* [ ] Do not escape character in inline code.
-
 ```````````````````````````````` example(Wrap - Restore Spaces: 31) options(margin[66], restore-tracked-spaces)
    Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent ⦙ to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.
 .
 Add: configuration for repeated prefixes in items, which would `be
-#2` copied when adding/splitting an item. In other words they
+\#2` copied when adding/splitting an item. In other words they
 would be treated equivalent ⦙ to task item marker prefix. That way
 standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes
 would be automatically copied.

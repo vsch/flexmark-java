@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.core.test.util.formatter;
 
-import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
@@ -28,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.vladsch.flexmark.formatter.Formatter.*;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.EOL;
 
 public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
@@ -108,11 +108,23 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
             formatter.setOptions(options);
 
-            if (options.contains(Formatter.DOCUMENT_PREFIX)) formatter.setIndent(Formatter.DOCUMENT_PREFIX.get(options));
-            if (options.contains(Formatter.DOCUMENT_FIRST_PREFIX)) formatter.setFirstIndent(Formatter.DOCUMENT_FIRST_PREFIX.get(options));
-            if (options.contains(FIRST_WIDTH_DELTA)) formatter.setFirstWidthOffset(FIRST_WIDTH_DELTA.get(options));
-            if (options.contains(Formatter.RIGHT_MARGIN)) formatter.setWidth(Formatter.RIGHT_MARGIN.get(options));
-            if (options.contains(Formatter.RESTORE_TRACKED_SPACES)) formatter.setRestoreTrackedSpaces(Formatter.RESTORE_TRACKED_SPACES.get(options));
+            boolean restoreTrackedSpaces = RESTORE_TRACKED_SPACES.get(options);
+            int rightMargin = RIGHT_MARGIN.get(options);
+            CharSequence prefix = DOCUMENT_PREFIX.get(options);
+            CharSequence firstIndent = DOCUMENT_FIRST_PREFIX.get(options);
+
+            if (restoreTrackedSpaces && (prefix.length() > 0 || firstIndent.length() > 0)) {
+                formatter.setRestoreTrackedSpaces(true);
+                formatter.setFirstWidthOffset(firstIndent.length() - prefix.length());
+                formatter.setWidth(rightMargin - prefix.length());
+            } else {
+                formatter.setRestoreTrackedSpaces(restoreTrackedSpaces);
+                formatter.setWidth(rightMargin);
+                formatter.setFirstWidthOffset(FIRST_WIDTH_DELTA.get(options));
+                formatter.setIndent(prefix);
+                formatter.setFirstIndent(firstIndent);
+            }
+
             formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
             formatter.setKeepHardBreaks(true);
 

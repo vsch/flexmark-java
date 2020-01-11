@@ -214,9 +214,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: Add validation to parser that passed `BasedSequence` is contiguous with no out of
       base parts and throw descriptive `IllegalArgumentException` if it is not.
 * [ ] Add: validation to `Formatter.render` for
-* [ ] Fix: change `TrackedOffset` to not have edit operation information and transfer this to
-      `TrackedOffsetList` since all tracked offsets are part of the same operation.
-* [ ] Fix: re-implement markdown paragraph tracked offset resolution by scanning the unwrapped
+* Fix: re-implement markdown paragraph tracked offset resolution by scanning the unwrapped
       and wrapped text segments and mapping them to original sequence offsets while analyzing
       text context and keeping track of: start of line, first non-blank, last non-blank, end of
       line.

@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.vladsch.flexmark.util.misc.CharPredicate.ANY_EOL_NUL;
 import static com.vladsch.flexmark.util.misc.CharPredicate.WHITESPACE;
 
 public class MarkdownParagraph {
@@ -152,8 +153,10 @@ public class MarkdownParagraph {
         BasedSequence wrapped = textWrapper.wrapText();
 
         if (restoreTrackedSpaces) {
-            BasedSequence wrapped2 = resolveTrackedOffsetsEdit1(baseSpliced, altSpliced, wrapped);
-            wrapped = resolveTrackedOffsetsEdit(baseSeq, wrapped);
+            if (indent.isNotEmpty() || firstIndent.isNotEmpty()) throw new IllegalStateException("restoreTrackedSpaces is not supported with indentation applied by MarkdownParagraph");
+
+            wrapped = resolveTrackedOffsetsEdit1(baseSpliced, altSpliced, wrapped);
+//            wrapped = resolveTrackedOffsetsEdit(baseSeq, wrapped);
         } else {
             wrapped = resolveTrackedOffsets(baseSeq, wrapped);
         }
@@ -174,12 +177,16 @@ public class MarkdownParagraph {
         BasedSequence baseSequence = altSeq.getBaseSequence();
         BasedSequence altUnwrapped = altSeq;
 
+        // NOTE: Restore trailing spaces at end of line if it has tracked offset on it
+        int restoredAppendSpaces = 0;
+
+        // determine in reverse offset order
         for (int i = iMax; i-- > 0; ) {
             TrackedOffset trackedOffset = trackedOffsets.get(i);
 
             int offset = trackedOffset.getOffset();
-            int countedSpacesBefore = baseSequence.countTrailing(CharPredicate.SPACE_TAB, offset);
-            int countedSpacesAfter = baseSequence.countLeading(CharPredicate.SPACE_TAB, offset);
+            int countedSpacesBefore = baseSequence.countTrailingSpaceTab(offset);
+            int countedSpacesAfter = baseSequence.countLeadingSpaceTab(offset);
 
             if (inTest) {
                 assert trackedOffset.getSpacesBefore() == countedSpacesBefore;
@@ -246,14 +253,7 @@ public class MarkdownParagraph {
             int wrappedAdjusted = 0;
             // take char start but if at whitespace, use previous for validation
             if (WHITESPACE.test(altUnwrapped.safeCharAt(anchorIndex + anchorDelta))) {
-                if (!WHITESPACE.test(wrapped.safeCharAt(wrappedIndex + anchorDelta))) {
-                    wrappedAdjusted = -1;
-//                } else {
-                    // CAUTION: this occurs when MarkdownParagraph is used by itself with indentation
-                    //  provided so the computed index is in the middle of indentation this test added
-                    //  to keep asserts passing. Using indentations on markdown paragraph messes up
-                    //  tracked offset resolution. Indentations should not be used with tracked offsets.
-                }
+                wrappedAdjusted = -1;
             } else if (altUnwrapped.safeCharAt(anchorIndex + anchorDelta) == SequenceUtils.LS) {
                 // have line sep at anchor, if prev is not whitespace, use it for validation
                 if (!WHITESPACE.test(altUnwrapped.safeCharAt(anchorIndex + anchorDelta - 1))) {
@@ -272,8 +272,7 @@ public class MarkdownParagraph {
             char altUnwrappedCharAt = altUnwrapped.safeCharAt(anchorIndex + anchorDelta + wrappedAdjusted);
             char wrappedCharAt = wrapped.safeCharAt(wrappedIndex + wrappedAdjusted);
 
-            // CAUTION: the whitespace test kludge is also for MarkdownParagraph with indentations
-            assert altUnwrappedCharAt == wrappedCharAt || WHITESPACE.test(altUnwrappedCharAt) && WHITESPACE.test(wrappedCharAt)
+            assert altUnwrappedCharAt == wrappedCharAt
                     : String.format("altUnwrapped.charAt: %s != wrapped.charAt: %s"
                     , SequenceUtils.toVisibleWhitespaceString(Character.toString(altUnwrappedCharAt))
                     , SequenceUtils.toVisibleWhitespaceString(Character.toString(wrappedCharAt))
@@ -287,9 +286,75 @@ public class MarkdownParagraph {
                 }
             }
 
+            if (wrapped.isCharAt(wrappedIndex - 1, CharPredicate.ANY_EOL) && countedSpacesAfter > 0) {
+                // at start of line with spaces to be inserted after, move to before prev EOL
+                wrappedIndex -= wrapped.eolEndLength(wrappedIndex);
+            }
+
+            int wrappedSpacesBefore = wrapped.countTrailingSpaceTab(wrappedIndex);
+            int wrappedSpacesAfter = wrapped.countLeadingSpaceTab(wrappedIndex);
+
+            if (trackedOffset.isAfterSpaceEdit()) {
+                if (trackedOffset.isAfterInsert()) {
+                    // need at least one space before
+                    countedSpacesBefore = Math.max(1, countedSpacesBefore);
+                } else if (trackedOffset.isAfterDelete()) {
+                    countedSpacesBefore = 0;
+                }
+            }
+
+            int addSpacesBefore = trackedOffset.isSpliced() ? 0 : Math.max(0, countedSpacesBefore - wrappedSpacesBefore);
+            int addSpacesAfter = Math.max(0, countedSpacesAfter - wrappedSpacesAfter);
+
+            if (wrapped.isCharAt(wrappedIndex, ANY_EOL_NUL)) {
+                // at end of line add only before, nothing after
+                addSpacesAfter = 0;
+                if (trackedOffset.isAfterDelete()) addSpacesBefore = Math.min(1, addSpacesBefore);
+            } else if (!wrapped.isCharAt(wrappedIndex - 1, ANY_EOL_NUL)) {
+                // not at start of line
+                // spaces before caret, see if need to add max 1, and all spaces after
+                addSpacesBefore = Math.min(1, addSpacesBefore);
+            } else if (trackedOffset.isAfterDelete() && !trackedOffset.isAfterSpaceEdit()) {
+                // at start of line, add max 1 space after
+                // spaces before caret, see if need to add max 1
+                addSpacesBefore = 0;
+                addSpacesAfter = Math.min(1, addSpacesAfter);
+            } else {
+                // at start of line, not after delete or after space edit
+                if (!trackedOffset.isAfterInsert() && !trackedOffset.isAfterDelete()) addSpacesAfter = 0;
+                addSpacesBefore = 0;
+            }
+
+            if (addSpacesBefore + addSpacesAfter > 0) {
+                int lastNonBlank = wrapped.lastIndexOfAnyNot(WHITESPACE);
+                if (wrappedIndex < lastNonBlank) {
+                    // insert in middle
+                    wrapped = wrapped.insert(wrappedIndex, RepeatedSequence.ofSpaces(addSpacesBefore + addSpacesAfter));
+
+                    // need to adjust all following indices by the amount inserted
+                    for (int j = i + 1; j < iMax; j++) {
+                        TrackedOffset trackedOffset1 = trackedOffsets.get(j);
+                        int indexJ = trackedOffset1.getIndex();
+                        trackedOffset1.setIndex(indexJ + addSpacesBefore + addSpacesAfter);
+                    }
+                } else {
+                    restoredAppendSpaces = Math.max(restoredAppendSpaces, addSpacesBefore);
+                }
+
+                wrappedIndex += addSpacesBefore;
+            }
+
+            trackedOffset.setIndex(wrappedIndex);
+
             if (inTest) {
+                System.out.println(String.format("Adj wrapped anchor: `%s`", wrapped.safeSubSequence(wrappedIndex - 20, wrappedIndex).toVisibleWhitespaceString() + "|" + wrapped.safeSubSequence(wrappedIndex, wrappedIndex + 20).toVisibleWhitespaceString()));
                 System.out.println();
             }
+        }
+
+        // append any trailing spaces
+        if (restoredAppendSpaces > 0) {
+            wrapped = wrapped.appendSpaces(restoredAppendSpaces);
         }
 
         return wrapped;

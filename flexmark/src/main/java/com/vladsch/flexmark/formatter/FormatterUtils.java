@@ -503,8 +503,8 @@ public class FormatterUtils {
                 formatter.setKeepSoftBreaks(false);
                 formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);
                 formatter.setRestoreTrackedSpaces(context.isRestoreTrackedSpaces());
-                formatter.setFirstIndent("");
-                formatter.setIndent("");
+                formatter.setFirstIndent(NULL);
+                formatter.setIndent(NULL);
 
                 // adjust first line width, based on change in prefix after the first line EOL
                 formatter.setFirstWidthOffset(-markdown.column() + markdown.getAfterEolPrefixDelta());
