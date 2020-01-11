@@ -212,12 +212,9 @@ public class ListItemParser extends AbstractBlockParser {
                     if (myBlock.getFirstChild() != null && myBlock.getFirstChild() == myBlock.getLastChild()) {
                         BlockParser matched = state.getActiveBlockParser();
                         if (matched.isParagraphParser() && matched.getBlock() == myBlock.getFirstChild()) {
-                            ListBlockParser.ListData listData = ListBlockParser.parseListMarker(myOptions, -1, state);
-                            if (listData != null) {
-                                // just a lazy continuation of us
-                                listBlockParser.setItemHandledLineSkipActive(state.getLine());
-                                return continueAtColumn(newColumn);
-                            }
+                            // just a lazy continuation of this item paragraph
+                            listBlockParser.setItemHandledLineSkipActive(state.getLine());
+                            return continueAtColumn(newColumn);
                         }
                     }
 
