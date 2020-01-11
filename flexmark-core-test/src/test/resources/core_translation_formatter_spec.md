@@ -1937,45 +1937,45 @@ Handle proper GitHub indented code in list items
 .
 - Original ----------------
 Document[0, 95]
-  BulletList[0, 95] isLoose
-    BulletListItem[0, 95] open:[0, 1, "*"] isLoose hadBlankLineAfter
+  BulletList[0, 95] isTight
+    BulletListItem[0, 95] open:[0, 1, "*"] isTight hadBlankLineAfter
       Paragraph[2, 8] isTrailingBlankLine
         Text[2, 6] chars:[2, 6, "item"]
       BlankLine[8, 9]
       IndentedCodeBlock[17, 31]
       BlankLine[31, 40]
-      BulletList[44, 95] isLoose
-        BulletListItem[44, 95] open:[44, 45, "*"] isLoose hadBlankLineAfter
+      BulletList[44, 95] isTight
+        BulletListItem[44, 95] open:[44, 45, "*"] isTight hadBlankLineAfter
           Paragraph[46, 56] isTrailingBlankLine
             Text[46, 54] chars:[46, 54, "sub-item"]
           BlankLine[56, 61]
           IndentedCodeBlock[73, 95]
 - Partial ----------------
 Document[0, 58]
-  BulletList[0, 58] isLoose
-    BulletListItem[0, 58] open:[0, 1, "*"] isLoose hadBlankLineAfter
+  BulletList[0, 58] isTight
+    BulletListItem[0, 58] open:[0, 1, "*"] isTight hadBlankLineAfter
       Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "iIteEm"]
       BlankLine[9, 10]
       IndentedCodeBlock[18, 22]
       BlankLine[22, 23]
-      BulletList[27, 58] isLoose
-        BulletListItem[27, 58] open:[27, 28, "*"] isLoose hadBlankLineAfter
+      BulletList[27, 58] isTight
+        BulletListItem[27, 58] open:[27, 28, "*"] isTight hadBlankLineAfter
           Paragraph[29, 41] isTrailingBlankLine
             Text[29, 40] chars:[29, 40, "SuUB- … IteEm"]
           BlankLine[41, 42]
           IndentedCodeBlock[54, 58]
 - Translated -------------
 Document[0, 87]
-  BulletList[0, 87] isLoose
-    BulletListItem[0, 87] open:[0, 1, "*"] isLoose hadBlankLineAfter
+  BulletList[0, 87] isTight
+    BulletListItem[0, 87] open:[0, 1, "*"] isTight hadBlankLineAfter
       Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "iIteEm"]
       BlankLine[9, 10]
       IndentedCodeBlock[18, 32]
       BlankLine[32, 33]
-      BulletList[37, 87] isLoose
-        BulletListItem[37, 87] open:[37, 38, "*"] isLoose hadBlankLineAfter
+      BulletList[37, 87] isTight
+        BulletListItem[37, 87] open:[37, 38, "*"] isTight hadBlankLineAfter
           Paragraph[39, 51] isTrailingBlankLine
             Text[39, 50] chars:[39, 50, "SuUB- … IteEm"]
           BlankLine[51, 52]

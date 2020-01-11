@@ -83,6 +83,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                         .setOrderedListManualStart(false)
                         ;
             }
+
             if (this == PEGDOWN || this == PEGDOWN_STRICT) {
                 int pegdownExtensions = PEGDOWN_EXTENSIONS.get(dataHolder);
 
@@ -125,6 +126,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                                 .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(true)
                         );
             }
+
             return new MutableListOptions().setParserEmulationFamily(this)
                     .setAutoLoose(false)
                     .setAutoLooseOneLevelLists(false)
@@ -165,6 +167,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                             .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(true)
                     );
         }
+
         if (family == KRAMDOWN) {
             return new MutableListOptions()
                     .setParserEmulationFamily(this)

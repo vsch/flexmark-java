@@ -3384,7 +3384,7 @@ Issue [#382, Is there an option for number of whitespaces needed to create sub-l
 ````````````````````````````````
 
 
-pegdown converts second item to lazy continuation,
+pegdown converts second item to lazy continuation because it is indented by more than 4 spaces
 
 ```````````````````````````````` example Issues - 382: 2
 * [ ] First item

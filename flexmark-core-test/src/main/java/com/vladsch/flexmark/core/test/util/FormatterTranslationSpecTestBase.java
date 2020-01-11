@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.core.test.util;
 
 import com.vladsch.flexmark.formatter.Formatter;
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
@@ -32,6 +33,9 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .toImmutable();
 
+    private static final DataHolder FIXED_INDENT_OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.FIXED_INDENT)
+            .toMutable();
+
     final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
@@ -46,7 +50,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("restore-tracked-spaces", new MutableDataSet().set(Formatter.RESTORE_TRACKED_SPACES, true));
 
         optionsMap.put("format-fixed-indent", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
-        optionsMap.put("parse-fixed-indent", new MutableDataSet().set(Parser.PARSER_EMULATION_PROFILE, ParserEmulationProfile.FIXED_INDENT));
+        optionsMap.put("parse-fixed-indent", FIXED_INDENT_OPTIONS);
         optionsMap.put("format-github", new MutableDataSet().set(Formatter.FORMATTER_EMULATION_PROFILE, ParserEmulationProfile.GITHUB_DOC));
         optionsMap.put("parse-github", new MutableDataSet().set(Parser.PARSER_EMULATION_PROFILE, ParserEmulationProfile.GITHUB_DOC));
         optionsMap.put("max-blank-lines-1", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 1));

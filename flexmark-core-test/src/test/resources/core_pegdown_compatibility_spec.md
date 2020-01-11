@@ -2083,6 +2083,72 @@ Document[0, 374]
 ````````````````````````````````
 
 
+```````````````````````````````` example List Item Indent Handling: 9
+* Enhanced Paste from History dialog:
+    * **combine**, **arrange** and **reverse** the order of content entries
+    * **combine multiple** clipboard contents **with caret information intact**
+    * **paste and re-create multiple carets** from information already stored on the clipboard
+    * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+        first line** of the block, ready for multi-caret select and paste
+    * see caret information stored on the clipboard for each content entry
+.
+<ul>
+  <li>Enhanced Paste from History dialog:
+    <ul>
+      <li><strong>combine</strong>, <strong>arrange</strong> and <strong>reverse</strong> the order of content entries</li>
+      <li><strong>combine multiple</strong> clipboard contents <strong>with caret information intact</strong></li>
+      <li><strong>paste and re-create multiple carets</strong> from information already stored on the clipboard</li>
+      <li><strong>duplicate line/block for each caret</strong> in the clipboard content and <strong>put a caret on the first line</strong> of the block, ready for multi-caret select and paste</li>
+      <li>see caret information stored on the clipboard for each content entry</li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 533]
+  BulletList[0, 533] isTight
+    BulletListItem[0, 533] open:[0, 1, "*"] isTight
+      Paragraph[2, 38]
+        Text[2, 37] chars:[2, 37, "Enhan … alog:"]
+      BulletList[42, 533] isTight
+        BulletListItem[42, 114] open:[42, 43, "*"] isTight
+          Paragraph[44, 114]
+            StrongEmphasis[44, 55] textOpen:[44, 46, "**"] text:[46, 53, "combine"] textClose:[53, 55, "**"]
+              Text[46, 53] chars:[46, 53, "combine"]
+            Text[55, 57] chars:[55, 57, ", "]
+            StrongEmphasis[57, 68] textOpen:[57, 59, "**"] text:[59, 66, "arrange"] textClose:[66, 68, "**"]
+              Text[59, 66] chars:[59, 66, "arrange"]
+            Text[68, 73] chars:[68, 73, " and "]
+            StrongEmphasis[73, 84] textOpen:[73, 75, "**"] text:[75, 82, "reverse"] textClose:[82, 84, "**"]
+              Text[75, 82] chars:[75, 82, "reverse"]
+            Text[84, 113] chars:[84, 113, " the  … tries"]
+        BulletListItem[118, 194] open:[118, 119, "*"] isTight
+          Paragraph[120, 194]
+            StrongEmphasis[120, 140] textOpen:[120, 122, "**"] text:[122, 138, "combine multiple"] textClose:[138, 140, "**"]
+              Text[122, 138] chars:[122, 138, "combi … tiple"]
+            Text[140, 160] chars:[140, 160, " clip … ents "]
+            StrongEmphasis[160, 193] textOpen:[160, 162, "**"] text:[162, 191, "with caret information intact"] textClose:[191, 193, "**"]
+              Text[162, 191] chars:[162, 191, "with  … ntact"]
+        BulletListItem[198, 289] open:[198, 199, "*"] isTight
+          Paragraph[200, 289]
+            StrongEmphasis[200, 239] textOpen:[200, 202, "**"] text:[202, 237, "paste and re-create multiple carets"] textClose:[237, 239, "**"]
+              Text[202, 237] chars:[202, 237, "paste … arets"]
+            Text[239, 288] chars:[239, 288, " from … board"]
+        BulletListItem[293, 459] open:[293, 294, "*"] isTight
+          Paragraph[295, 459]
+            StrongEmphasis[295, 334] textOpen:[295, 297, "**"] text:[297, 332, "duplicate line/block for each caret"] textClose:[332, 334, "**"]
+              Text[297, 332] chars:[297, 332, "dupli … caret"]
+            Text[334, 364] chars:[334, 364, " in t …  and "]
+            StrongEmphasis[364, 405] textOpen:[364, 366, "**"] text:[366, 403, "put a caret on the\nfirst line"] textClose:[403, 405, "**"]
+              Text[366, 384] chars:[366, 384, "put a … n the"]
+              SoftLineBreak[384, 385]
+              Text[393, 403] chars:[393, 403, "first line"]
+            Text[405, 458] chars:[405, 458, " of t … paste"]
+        BulletListItem[463, 533] open:[463, 464, "*"] isTight
+          Paragraph[465, 533]
+            Text[465, 533] chars:[465, 533, "see c … entry"]
+````````````````````````````````
+
+
 ## Block quote parsing
 
 Whether blank lines are required to start a block quote

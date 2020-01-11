@@ -2616,6 +2616,74 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
 
 ```````````````````````````````` example(Format Conversion: 3) options(parse-fixed-indent, format-github)
+* Enhanced Paste from History dialog:
+    * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+        first line** of the block, ready for multi-caret select and paste
+    * see caret information stored on the clipboard for each content entry
+.
+* Enhanced Paste from History dialog:
+  * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+    first line** of the block, ready for multi-caret select and paste
+  * see caret information stored on the clipboard for each content entry
+
+.
+Document[0, 282]
+  BulletList[0, 282] isTight
+    BulletListItem[0, 282] open:[0, 1, "*"] isTight
+      Paragraph[2, 38]
+        Text[2, 37] chars:[2, 37, "Enhan … alog:"]
+      BulletList[42, 282] isTight
+        BulletListItem[42, 208] open:[42, 43, "*"] isTight
+          Paragraph[44, 208]
+            StrongEmphasis[44, 83] textOpen:[44, 46, "**"] text:[46, 81, "duplicate line/block for each caret"] textClose:[81, 83, "**"]
+              Text[46, 81] chars:[46, 81, "dupli … caret"]
+            Text[83, 113] chars:[83, 113, " in t …  and "]
+            StrongEmphasis[113, 154] textOpen:[113, 115, "**"] text:[115, 152, "put a caret on the\nfirst line"] textClose:[152, 154, "**"]
+              Text[115, 133] chars:[115, 133, "put a … n the"]
+              SoftLineBreak[133, 134]
+              Text[142, 152] chars:[142, 152, "first line"]
+            Text[154, 207] chars:[154, 207, " of t … paste"]
+        BulletListItem[212, 282] open:[212, 213, "*"] isTight
+          Paragraph[214, 282]
+            Text[214, 282] chars:[214, 282, "see c … entry"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Conversion: 4) options(parse-fixed-indent, format-github)
+* Enhanced Paste from History dialog:
+    * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+        first line** of the block, ready for multi-caret select and paste
+    * see caret information stored on the clipboard for each content entry
+.
+* Enhanced Paste from History dialog:
+  * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+    first line** of the block, ready for multi-caret select and paste
+  * see caret information stored on the clipboard for each content entry
+
+.
+Document[0, 282]
+  BulletList[0, 282] isTight
+    BulletListItem[0, 282] open:[0, 1, "*"] isTight
+      Paragraph[2, 38]
+        Text[2, 37] chars:[2, 37, "Enhan … alog:"]
+      BulletList[42, 282] isTight
+        BulletListItem[42, 208] open:[42, 43, "*"] isTight
+          Paragraph[44, 208]
+            StrongEmphasis[44, 83] textOpen:[44, 46, "**"] text:[46, 81, "duplicate line/block for each caret"] textClose:[81, 83, "**"]
+              Text[46, 81] chars:[46, 81, "dupli … caret"]
+            Text[83, 113] chars:[83, 113, " in t …  and "]
+            StrongEmphasis[113, 154] textOpen:[113, 115, "**"] text:[115, 152, "put a caret on the\nfirst line"] textClose:[152, 154, "**"]
+              Text[115, 133] chars:[115, 133, "put a … n the"]
+              SoftLineBreak[133, 134]
+              Text[142, 152] chars:[142, 152, "first line"]
+            Text[154, 207] chars:[154, 207, " of t … paste"]
+        BulletListItem[212, 282] open:[212, 213, "*"] isTight
+          Paragraph[214, 282]
+            Text[214, 282] chars:[214, 282, "see c … entry"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Conversion: 5) options(parse-fixed-indent, format-github)
 Adds missing editor actions for end of word navigation but that is just the beginning:
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
@@ -2656,7 +2724,6 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
-
 * Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
   match case and style of identifier at destination when you paste, undo to get results before
   MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
@@ -2673,15 +2740,11 @@ Adds missing editor actions for end of word navigation but that is just the begi
   moving the caret to the start of line when selecting or pasting. **Choose** whether you want
   to **paste full line** selections: **above** or **below** the current line regardless of the
   caret's column.
-
 * Toggle between selection and multiple carets on selected lines to save time re-selecting the
   same text again.
-
 * Filter multiple carets saves you time when creating multiple carets by removing carets on
   blank or comment lines so you can edit only code lines.
-
 * Enhanced Paste from History dialog:
-
   * **combine**, **arrange** and **reverse** the order of content entries
   * **combine multiple** clipboard contents **with caret information intact**
   * **paste and re-create multiple carets** from information already stored on the clipboard
@@ -2697,7 +2760,7 @@ Adds missing editor actions for end of word navigation but that is just the begi
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format Conversion: 4) options(parse-fixed-indent, format-github, references-as-is)
+```````````````````````````````` example(Format Conversion: 6) options(parse-fixed-indent, format-github, references-as-is)
 ![Screenshot](https://raw.githubusercontent.com/vsch/idea-multimarkdown/master/assets/images/plugin_description_img.png)
 
 <img src="https://github.com/vsch/idea-multimarkdown/raw/master/assets/images/MNLogo.png?" height="20" width="20" border="0" style="padding-left:10px;">Markdown Navigator 2.0
@@ -2819,7 +2882,7 @@ for:
 
 Handle proper GitHub indented code in list items
 
-```````````````````````````````` example(Format Conversion: 5) options(parse-fixed-indent, format-github)
+```````````````````````````````` example(Format Conversion: 7) options(parse-fixed-indent, format-github)
 * item 
 
         indented code
@@ -2839,7 +2902,7 @@ Handle proper GitHub indented code in list items
 ````````````````````````````````
 
 
-```````````````````````````````` example(Format Conversion: 6) options(parse-fixed-indent, format-github)
+```````````````````````````````` example(Format Conversion: 8) options(parse-fixed-indent, format-github)
 1. item 
 
         indented code
