@@ -34,7 +34,6 @@
       <option name="WRAP_ON_TYPING" value="1" />
       <option name="KEEP_BLANK_LINES" value="1" />
       <option name="FORMAT_WITH_SOFT_WRAP" value="2" />
-      <option name="LIST_ALIGN_FIRST_LINE_TEXT" value="true" />
       <option name="TASK_LIST_ITEM_CASE" value="1" />
       <option name="BULLET_LIST_ITEM_MARKER" value="2" />
       <option name="NEW_BULLET_LIST_ITEM_MARKER" value="2" />
@@ -42,7 +41,6 @@
       <option name="VERBATIM_MINIMIZE_INDENT" value="true" />
       <option name="CODE_FENCE_MINIMIZE_INDENT" value="true" />
       <option name="CODE_FENCE_MATCH_CLOSING_MARKER" value="true" />
-      <option name="BLOCK_QUOTE_FIRST_LINE_MARKERS" value="3" />
       <option name="ABBREVIATIONS_PLACEMENT" value="4" />
       <option name="FOOTNOTE_PLACEMENT" value="4" />
       <option name="REFERENCE_PLACEMENT" value="4" />
