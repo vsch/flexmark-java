@@ -277,7 +277,7 @@ public class MarkdownTable {
      */
     @Deprecated
     public boolean addTrackedOffset(int offset) {
-        return addTrackedOffset(TrackedOffset.track(offset, null, false, -1, -1));
+        return addTrackedOffset(TrackedOffset.track(offset, null, false));
     }
 
     /**
@@ -286,7 +286,7 @@ public class MarkdownTable {
      */
     @Deprecated
     public boolean addTrackedOffset(int offset, boolean afterSpace) {
-        return addTrackedOffset(TrackedOffset.track(offset, afterSpace ? ' ' : null, false, -1, -1));
+        return addTrackedOffset(TrackedOffset.track(offset, afterSpace ? ' ' : null, false));
     }
 
     /**
@@ -295,7 +295,7 @@ public class MarkdownTable {
      */
     @Deprecated
     public boolean addTrackedOffset(int offset, boolean afterSpace, boolean afterDelete) {
-        return addTrackedOffset(TrackedOffset.track(offset, afterSpace ? ' ' : null, afterDelete, -1, -1));
+        return addTrackedOffset(TrackedOffset.track(offset, afterSpace ? ' ' : null, afterDelete));
     }
 
     /**
@@ -304,7 +304,7 @@ public class MarkdownTable {
      */
     @Deprecated
     public boolean addTrackedOffset(int offset, Character c, boolean afterDelete) {
-        return addTrackedOffset(TrackedOffset.track(offset, c, afterDelete, -1, -1));
+        return addTrackedOffset(TrackedOffset.track(offset, c, afterDelete));
     }
 
     public boolean addTrackedOffset(@NotNull TrackedOffset trackedOffset) {

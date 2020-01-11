@@ -24,12 +24,12 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
     final private @Nullable TrackedOffset original;
     final private int offset;
     final private int flags;
-    final private int spacesBefore;   // these are hard to determine after the fact
-    final private int spacesAfter;    // these are hard to determine after the fact
+    private int spacesBefore;
+    private int spacesAfter;
     private boolean isSpliced;         // spaces reset to 0
     private int index;
 
-    private TrackedOffset(int offset, boolean afterSpaceEdit, boolean afterInsert, boolean afterDelete, int spacesBefore, int spacesAfter) {
+    private TrackedOffset(int offset, boolean afterSpaceEdit, boolean afterInsert, boolean afterDelete) {
         this.original = null;
         this.offset = offset;
         int flags = 0;
@@ -38,8 +38,8 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
         if (afterDelete) flags |= F_AFTER_DELETE;
         this.flags = flags;
         this.index = -1;
-        this.spacesBefore = spacesBefore;
-        this.spacesAfter = spacesAfter;
+        this.spacesBefore = -1;
+        this.spacesAfter = -1;
     }
 
     private TrackedOffset(@NotNull TrackedOffset other) {
@@ -68,8 +68,16 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
         return spacesBefore;
     }
 
+    public void setSpacesBefore(int spacesBefore) {
+        this.spacesBefore = spacesBefore;
+    }
+
     public int getSpacesAfter() {
         return spacesAfter;
+    }
+
+    public void setSpacesAfter(int spacesAfter) {
+        this.spacesAfter = spacesAfter;
     }
 
     public boolean isSpliced() {
@@ -161,16 +169,16 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
     }
 
     public static TrackedOffset track(int offset) {
-        return track(offset, false, false, false, -1, -1);
+        return track(offset, false, false, false);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public static TrackedOffset track(int offset, @Nullable Character c, boolean afterDelete, int spacesBefore, int spacesAfter) {
-        return track(offset, c != null && c == ' ', c != null && !afterDelete, afterDelete, spacesBefore, spacesAfter);
+    public static TrackedOffset track(int offset, @Nullable Character c, boolean afterDelete) {
+        return track(offset, c != null && c == ' ', c != null && !afterDelete, afterDelete);
     }
 
-    public static TrackedOffset track(int offset, boolean afterSpaceEdit, boolean afterInsert, boolean afterDelete, int spacesBefore, int spacesAfter) {
+    public static TrackedOffset track(int offset, boolean afterSpaceEdit, boolean afterInsert, boolean afterDelete) {
         assert !afterInsert && !afterDelete || afterInsert != afterDelete : "Cannot have both afterInsert and afterDelete true";
-        return new TrackedOffset(offset, afterSpaceEdit, afterInsert, afterDelete, spacesBefore, spacesAfter);
+        return new TrackedOffset(offset, afterSpaceEdit, afterInsert, afterDelete);
     }
 }

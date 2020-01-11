@@ -7,6 +7,7 @@ import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -15,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+
+import static com.vladsch.flexmark.formatter.Formatter.RESTORE_TRACKED_SPACES;
 
 public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase {
     public FormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
@@ -41,18 +44,19 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                     trackedOffsets = new ArrayList<>(extractMarkup.getSecond().length);
                     char c = EDIT_OP_CHAR.get(myOptions);
                     int editOp = EDIT_OP.get(myOptions);
-//                    boolean editIndent = EDIT_INDENT.get(myOptions);
 
                     for (int offset : extractMarkup.getSecond()) {
-//                        trackedOffsets.add(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0, editIndent));
-                        int spacesBefore = trackedSequence.getBaseSequence().countTrailingSpaceTab(offset);
-                        int spacesAfter = trackedSequence.getBaseSequence().countLeadingSpaceTab(offset);
-                        trackedOffsets.add(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0, spacesBefore, spacesAfter));
+                        TrackedOffset trackedOffset = TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0);
+
+                        trackedOffset.setSpacesBefore(trackedSequence.getBaseSequence().countTrailingSpaceTab(offset));
+                        trackedOffset.setSpacesAfter(trackedSequence.getBaseSequence().countLeadingSpaceTab(offset));
+
+                        trackedOffsets.add(trackedOffset);
                     }
 
                     Formatter.TRACKED_SEQUENCE.set(getDocument().getDocument(), trackedSequence);
                     Formatter.TRACKED_OFFSETS.set(getDocument().getDocument(), trackedOffsets);
-                    Formatter.RESTORE_TRACKED_SPACES.set(getDocument().getDocument(), Formatter.RESTORE_TRACKED_SPACES.get(myOptions));
+                    RESTORE_TRACKED_SPACES.set(getDocument().getDocument(), RESTORE_TRACKED_SPACES.get(myOptions));
                 }
 
                 Formatter.DOCUMENT_FIRST_PREFIX.set(getDocument().getDocument(), Formatter.DOCUMENT_FIRST_PREFIX.get(myOptions));
@@ -64,7 +68,10 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                 if (trackedOffsets.isEmpty() && !SHOW_LINE_RANGES.get(myOptions)) {
                     return getRenderer().render(getDocument());
                 } else {
-//                    SequenceBuilder builder = trackedSequence.getBuilder();
+                    if (SharedDataKeys.RUNNING_TESTS.get(myOptions)) {
+                        System.out.printf("%s:%d%n", myExample.getSection(), myExample.getExampleNumber());
+                    }
+
                     SequenceBuilder builder = getDocument().getChars().getBuilder();
                     getRenderer().render(getDocument(), builder);
                     String html = builder.toString();

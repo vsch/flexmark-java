@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Map;
 
-public interface DataHolder {
+public interface DataHolder extends MutableDataSetter {
     DataHolder NULL = new DataSet();
 
     @NotNull Map<? extends DataKeyBase<?>, Object> getAll();
@@ -23,6 +23,11 @@ public interface DataHolder {
     @Nullable
     default <T> T get(@NotNull DataKey<T> key) {
         return key.get(this);
+    }
+
+    @Override
+    default  @NotNull MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+        return dataHolder.setAll(this);
     }
 
     /**

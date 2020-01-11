@@ -2,6 +2,9 @@ package com.vladsch.flexmark.core.test.util.formatter;
 
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
@@ -11,8 +14,12 @@ public class ComboCoreWrappingSpecTest extends ComboCoreFormatterSpecTestBase {
     private static final String SPEC_RESOURCE = "/core_wrapping_spec.md";
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
+    final private static DataHolder OPTIONS = new MutableDataSet()
+            .set(SharedDataKeys.RUNNING_TESTS, true)
+            .toImmutable();
+
     public ComboCoreWrappingSpecTest(@NotNull SpecExample example) {
-        super(example, null);
+        super(example, null, OPTIONS);
     }
 
     @Parameterized.Parameters(name = "{0}")

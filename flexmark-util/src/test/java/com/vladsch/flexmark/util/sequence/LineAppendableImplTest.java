@@ -8,6 +8,38 @@ import static org.junit.Assert.*;
 
 @SuppressWarnings("PointlessArithmeticExpression")
 public class LineAppendableImplTest {
+
+    @Test
+    public void test_emptyAppendableIterator() {
+        String input = "[simLink spaced](simLink.md)";
+        BasedSequence sequence = BasedSequence.of(input);
+        LineAppendableImpl fa = new LineAppendableImpl(SequenceBuilder.emptyBuilder(sequence), LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
+
+        for (LineInfo info : fa) {
+            fail();
+        }
+    }
+
+
+    @Test
+    public void test_defaultAppendsAll1() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+
+        fa.append("\n");
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("\n", sequence1.toString());
+    }
+
+
+    @Test
+    public void test_defaultAppendsAll2() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+
+        fa.append("    \n");
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("    \n", sequence1.toString());
+    }
+
     @Test
     public void test_appendCharSb() throws Exception {
         StringBuilder sb = new StringBuilder();
@@ -69,7 +101,7 @@ public class LineAppendableImplTest {
     @Test
     public void test_leadingEOL() throws Exception {
         StringBuilder sb = new StringBuilder();
-        LineAppendable fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL | LineAppendable.F_ALLOW_LEADING_EOL);
+        LineAppendable fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL & ~LineAppendable.F_TRIM_LEADING_EOL);
 
         fa.line().appendTo(sb);
         assertEquals("", sb.toString());

@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -203,6 +205,18 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      */
     @NotNull
     public BasedSequence toSequence(@NotNull BasedSequence altSequence) {
+        return toSequence(altSequence, null, null);
+    }
+
+    /**
+     * Construct sequence from this builder using another based sequence which is character identical to this builder's baseSeq
+     *
+     * @param altSequence    based sequence which is character identical to this builder's baseSeq
+     * @param ignoreCharDiff chars which should be treated as equivalent for verification purposes (Space, Tab, EOL, usually)
+     * @return builder with offsets mapped to altSequence
+     */
+    @NotNull
+    public BasedSequence toSequence(@NotNull BasedSequence altSequence, @Nullable CharPredicate trimStart, @Nullable CharPredicate ignoreCharDiff) {
         if (altSequence == altBase) {
             return toSequence();
         }
@@ -218,9 +232,21 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         // this is an identical but different base sequence, need to map to it. Ranges are indices into altSequence and must be converted to offsets.
         SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer, new HashMap<>());
 
+        int deleted = 0;
         for (Object part : segments) {
             if (part instanceof Range) {
-                BasedSequence s = altSequence.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
+                BasedSequence s = altSequence.subSequence(deleted + ((Range) part).getStart(), deleted + ((Range) part).getEnd());
+                int startTrimmed = trimStart == null ? 0 : s.countLeading(trimStart);
+
+                if (startTrimmed > 0) {
+                    deleted += startTrimmed;
+                    s = altSequence.subSequence(deleted + ((Range) part).getStart(), deleted + ((Range) part).getEnd());
+                    // NOTE: here there could be differences in space vs tab vs EOL due to shift and wrapping
+                }
+
+//                if (SequenceUtils.compare(s, baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd()), false, ignoreCharDiff) != 0) {
+//                    int tmp = 0;
+//                }
                 altBuilder.append(s);
             } else if (part instanceof CharSequence) {
                 altBuilder.append((CharSequence) part);
@@ -229,11 +255,75 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
             }
         }
 
-//        altBuilder.append(altSequence.getEmptySuffix());
+        BasedSequence result = SegmentedSequence.create(altBuilder);
+        BasedSequence sequence = toSequence();
+        assert SequenceUtils.compare(result, sequence, false, ignoreCharDiff) == 0 : String.format("result must be character identical to builder.toSequence()\n" +
+                "result: '%s'\n" +
+                " sequence: '%s'\n" +
+                "", result.toVisibleWhitespaceString(), sequence.toVisibleWhitespaceString());
+        return result;
+    }
 
-        BasedSequence sequence = SegmentedSequence.create(altBuilder);
-        assert sequence.equals(toSequence());
-        return sequence;
+    /**
+     * Construct sequence from this builder using another based sequence which is character identical to this builder's baseSeq by length
+     *
+     * @param altSequence    based sequence which is character identical to this builder's baseSeq
+     * @param ignoreCharDiff chars which should be treated as equivalent for verification purposes (Space, Tab, EOL, usually)
+     * @return builder with offsets mapped to altSequence
+     */
+    @NotNull
+    public BasedSequence toSequenceByIndex(@NotNull BasedSequence altSequence, @Nullable CharPredicate trimStart, @Nullable CharPredicate ignoreCharDiff) {
+        if (altSequence == altBase) {
+            return toSequence();
+        }
+
+//        if (!altSequence.equals(baseSeq)) {
+//           int tmp = 0;
+//        }
+        assert altSequence.equals(altBase) : String.format("altSequence must be character identical to builder.altBase\n" +
+                "altBase: '%s'\n" +
+                " altSeq: '%s'\n" +
+                "", altBase.toVisibleWhitespaceString(), altSequence.toVisibleWhitespaceString());
+
+        // this is an identical but different base sequence, need to map to it. Ranges are indices into altSequence and must be converted to offsets.
+        SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer, new HashMap<>());
+
+        int length = 0;
+        int deleted = 0;
+        for (Object part : segments) {
+            if (part instanceof Range) {
+                BasedSequence s = altSequence.subSequence(length + deleted, length + deleted + ((Range) part).getSpan());
+                int startTrimmed = trimStart == null ? 0 : s.countLeading(trimStart);
+
+                if (startTrimmed > 0) {
+                    // NOTE: here there could be differences in space vs tab vs EOL due to shift and remapping
+                    deleted += startTrimmed;
+                    s = altSequence.subSequence(length + deleted, length + deleted + ((Range) part).getSpan());
+                }
+
+//                if (SequenceUtils.compare(s, baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd()), false, ignoreCharDiff) != 0) {
+//                    int tmp = 0;
+//                }
+                altBuilder.append(s);
+                length += ((Range) part).getSpan();
+            } else if (part instanceof CharSequence) {
+                altBuilder.append((CharSequence) part);
+                length += ((CharSequence) part).length();
+            } else if (part != null) {
+                throw new IllegalStateException("Invalid part type " + part.getClass());
+            }
+        }
+
+        BasedSequence result = SegmentedSequence.create(altBuilder);
+        BasedSequence sequence = toSequence();
+//        if (SequenceUtils.compare(result, sequence, false, ignoreCharDiff) != 0) {
+//            int tmp = 0;
+//        }
+        assert SequenceUtils.compare(result, sequence, false, ignoreCharDiff) == 0 : String.format("result must be character identical to builder.toSequence()\n" +
+                "result: '%s'\n" +
+                " sequence: '%s'\n" +
+                "", result.toVisibleWhitespaceString(), sequence.toVisibleWhitespaceString());
+        return result;
     }
 
     @Override

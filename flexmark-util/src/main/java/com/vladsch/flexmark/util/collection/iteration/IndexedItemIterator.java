@@ -21,6 +21,10 @@ public class IndexedItemIterator<R> implements ReversibleIndexedIterator<R> {
         this.items = items;
         reversed = isReversed;
         next = reversed ? items.size() - 1 : 0;
+
+        // empty forward iterator has no next
+        if (next >= items.size()) next = -1;
+
         last = -1;
         this.modificationCount = items.modificationCount();
     }

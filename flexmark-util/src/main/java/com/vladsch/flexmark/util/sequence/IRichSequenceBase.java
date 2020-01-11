@@ -29,7 +29,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     /**
      * Constructor with pre-computed hash if available, 0 for lazy computation if length() not 0
-     *
+     * <p>
      * NOTE: the hash code computed for this class is equivalent to the string hash of the same characters
      * to ensure that equals can use the hash code for quick failure. CharSequence hash code is not specified
      * therefore when in doubt about how it is computed then 0 should be passed to this constructor to compute
@@ -48,7 +48,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * resorting to content comparison only if length and hashCodes are equal
      *
      * @param o any char sequence
-     *
      * @return true if character contents are equal
      */
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
@@ -113,7 +112,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
     @NotNull
@@ -125,7 +123,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence before one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come before the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
@@ -137,7 +134,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portion of this sequence after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     @NotNull
@@ -149,7 +145,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * Get a portions of this sequence before and after one selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence
-     *
      * @return sequence whose contents come before and after the selected range, if range.isNull() then {@link #nullSequence()}
      */
     final public Pair<T, T> subSequenceBeforeAfter(Range range) {
@@ -231,6 +226,23 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override
     public char safeCharAt(int index) {
         return index < 0 || index >= length() ? SequenceUtils.NUL : charAt(index);
+    }
+
+    @NotNull
+    @Override
+    public T safeSubSequence(int startIndex, int endIndex) {
+        int length = length();
+        startIndex = Math.max(0, Math.min(length, startIndex));
+        endIndex = Math.max(startIndex, Math.min(length, endIndex));
+        return subSequence(startIndex, endIndex);
+    }
+
+    @NotNull
+    @Override
+    public T safeSubSequence(int startIndex) {
+        int length = length();
+        startIndex = Math.max(0, Math.min(length, startIndex));
+        return subSequence(startIndex, length);
     }
 
     @Override

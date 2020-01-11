@@ -391,7 +391,7 @@ BasedSegmentBuilder{[50, 167), s=1:8, u=4:13, t=4:13, l=123, sz=10, na=7: [50), 
 
 * [ ] Fix: should preserve space since one existed after edit
 
-```````````````````````````````` example(Wrap - Delete Indent: 2) options(FAIL, margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
+```````````````````````````````` example(Wrap - Delete Indent: 2) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the
@@ -417,7 +417,7 @@ BasedSegmentBuilder{[50, 201), s=1:8, u=4:13, t=4:13, l=159, sz=10, na=7: [50), 
       more algorithmic approach by processing all unwrapped and wrapped segments to get tracked
       offset context for determining its index in the wrapped sequence.
 
-```````````````````````````````` example(Wrap - Delete Indent: 3) options(FAIL, margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
+```````````````````````````````` example(Wrap - Delete Indent: 3) options(margin[96], delete-space, restore-tracked-spaces, first-prefix[* [ ] ], prefix[      ], show-ranges, explicit-links-at-start)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the
@@ -617,7 +617,7 @@ BasedSegmentBuilder{[44, 150), s=2:2, u=5:5, t=5:5, l=111, sz=11, na=7: [44, 140
 
 * [ ] Fix: should preserve space at end of line
 
-```````````````````````````````` example(Wrap - Restore Spaces: 7) options(FAIL, margin[96], delete-char, first-prefix[* [ ] ], restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 7) options(margin[96], delete-char, first-prefix[* [ ] ], restore-tracked-spaces, explicit-links-at-start, image-links-at-start, show-ranges)
 ⟦* [ ] ⟧Add: validation to `Formatter.render` for ⦙
 .
 * [ ] Add: validation to `Formatter.render` for ⦙
@@ -635,7 +635,7 @@ BasedSegmentBuilder{[6, 47), s=0:3, u=2:7, t=2:7, l=48, sz=5, na=3: [6), a:'* [ 
 * [ ] complete this. Space at end of previous line affect how character backspace and character
       typing reacts at the first non-blank of the next line.
 
-```````````````````````````````` example(Wrap - Restore Spaces: 8) options(FAIL, margin[96], insert-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
+```````````````````````````````` example(Wrap - Restore Spaces: 8) options(margin[96], insert-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
 ⟦* ⟧Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd 
 ⟦   ⟧d⦙as this is the end. 
     
@@ -658,7 +658,7 @@ BasedSegmentBuilder{[2, 121), s=0:1, u=2:3, t=2:3, l=117, sz=8, na=6: [2), a:'* 
 
 * [ ] Fix: should not splice or move caret to previous line
 
-```````````````````````````````` example(Wrap - Restore Spaces: 9) options(FAIL, margin[96], delete-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
+```````````````````````````````` example(Wrap - Restore Spaces: 9) options(margin[96], delete-char, first-prefix[* ], prefix[], show-ranges, restore-tracked-spaces)
 ⟦* ⟧Fix: for #651, Drop image with dialog issues alsdf jals;df jl;as dfjl;saj fdlaskjdf ;ls adfd 
 ⟦   ⟧⦙as this is the end. 
     
@@ -1099,9 +1099,10 @@ BasedSegmentBuilder{[0, 299), s=2:8, u=6:12, t=6:12, l=299, sz=17, na=12: [0, 66
 ````````````````````````````````
 
 
-Leading space on first line not handled for now.
+* [ ] Leading space on first line not handled
+* [ ] Do not escape character in inline code.
 
-```````````````````````````````` example(Wrap - Restore Spaces: 31) options(IGNORE, margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap - Restore Spaces: 31) options(margin[66], restore-tracked-spaces)
    Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent ⦙ to task item marker prefix. That way
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.

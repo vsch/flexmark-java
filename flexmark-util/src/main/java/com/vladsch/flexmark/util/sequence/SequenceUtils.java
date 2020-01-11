@@ -89,6 +89,7 @@ public interface SequenceUtils {
         charMap.put('\r', "\\r");
         charMap.put('\f', "\\f");
         charMap.put('\t', "\\u2192");
+        charMap.put(LS, "\u27a5");
         return charMap;
     }
 
@@ -346,6 +347,10 @@ public interface SequenceUtils {
     }
 
     static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2, boolean ignoreCase) {
+        return compare(o1, o2, ignoreCase, null);
+    }
+
+    static int compare(@Nullable CharSequence o1, @Nullable CharSequence o2, boolean ignoreCase, @Nullable CharPredicate ignoreChars) {
         if (o1 == null || o2 == null) return o1 == null && o2 == null ? 0 : o1 == null ? -1 : 1;
 
         int len1 = o1.length();
@@ -368,7 +373,11 @@ public interface SequenceUtils {
                     if (Character.toLowerCase(u1) == Character.toLowerCase(u2)) {
                         continue;
                     }
-                    return c1 - c2;
+
+                    // NOTE: if both chars are in the ignore set, then it is a match
+                    if (ignoreChars == null || !(ignoreChars.test(c1) && ignoreChars.test(c2))) {
+                        return c1 - c2;
+                    }
                 }
             }
         } else {
@@ -376,7 +385,10 @@ public interface SequenceUtils {
                 char c1 = o1.charAt(i);
                 char c2 = o2.charAt(i);
                 if (c1 != c2) {
-                    return c1 - c2;
+                    // NOTE: if both chars are in the ignore set, then it is a match
+                    if (ignoreChars == null || !(ignoreChars.test(c1) && ignoreChars.test(c2))) {
+                        return c1 - c2;
+                    }
                 }
             }
         }

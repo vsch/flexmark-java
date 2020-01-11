@@ -400,7 +400,7 @@ public class LineAppendableImpl implements LineAppendable {
             return new Pair<>(Range.of(startOffset, endOffset - 1), needPrefix ? prefix : BasedSequence.NULL);
         } else {
             if (allWhitespace && (preFormattedNesting == 0 && !(preFormattedFirstLine == currentLine || preFormattedLastLine == currentLine))) {
-                if (any(F_ALLOW_LEADING_EOL) || !lines.isEmpty()) {
+                if (!any(F_TRIM_LEADING_EOL) || !lines.isEmpty()) {
                     return new Pair<>(Range.of(startOffset, endOffset - 1), prefix);
                 } else {
                     return new Pair<>(Range.NULL, BasedSequence.NULL);
@@ -634,7 +634,7 @@ public class LineAppendableImpl implements LineAppendable {
     @Override
     public LineAppendable blankLine() {
         line();
-        if (!lines.isEmpty() && !isTrailingBlankLine() || lines.isEmpty() && any(F_ALLOW_LEADING_EOL)) appendEol(BasedSequence.EOL);
+        if (!lines.isEmpty() && !isTrailingBlankLine() || lines.isEmpty() && !any(F_TRIM_LEADING_EOL)) appendEol(BasedSequence.EOL);
         return this;
     }
 
@@ -649,7 +649,7 @@ public class LineAppendableImpl implements LineAppendable {
     @Override
     public LineAppendable blankLine(int count) {
         line();
-        if ((any(F_ALLOW_LEADING_EOL) || !lines.isEmpty())) {
+        if ((!any(F_TRIM_LEADING_EOL) || !lines.isEmpty())) {
             int addBlankLines = count - getTrailingBlankLines(lines.size());
             appendEol(addBlankLines);
         }
@@ -841,7 +841,7 @@ public class LineAppendableImpl implements LineAppendable {
             LineInfo info = getLineInfo(i);
             boolean notDanglingLine = i < endLinePending;
 
-            if (info.isBlankText() && !info.isPreformatted()) {
+            if (info.textLength == 0 && !info.isPreformatted()) {
                 if (i > lastNonBlankLine) {
                     // NOTE: these are tail blank lines
                     if (consecutiveBlankLines < maxTrailingBlankLines) {

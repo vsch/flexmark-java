@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +36,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
     static {
         optionsMap.put("IGNORED", new MutableDataSet().set(TestUtils.IGNORE, SKIP_IGNORED_TESTS));
         optionsMap.put("show-ranges", new MutableDataSet().set(SHOW_LINE_RANGES, true));
+        optionsMap.put("running-tests", new MutableDataSet().set(SharedDataKeys.RUNNING_TESTS, true));
 
         optionsMap.put("insert-char", new MutableDataSet().set(EDIT_OP, 1).set(EDIT_OP_CHAR, '\0'));
         optionsMap.put("insert-space", new MutableDataSet().set(EDIT_OP, 1).set(EDIT_OP_CHAR, ' '));

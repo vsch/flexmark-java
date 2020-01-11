@@ -497,6 +497,8 @@ public class FormatterUtils {
                 TrackedOffsetList paragraphTrackedOffsets = trackedOffsets.getTrackedOffsets(startOffset, endOffset);
 
                 MarkdownParagraph formatter = new MarkdownParagraph(paragraphChars, altParagraphChars, formatterOptions.charWidthProvider);
+                formatter.setOptions(context.getOptions());
+
                 formatter.setWidth(formatterOptions.rightMargin - markdown.getPrefix().length());
                 formatter.setKeepSoftBreaks(false);
                 formatter.setKeepHardBreaks(formatterOptions.keepHardLineBreaks);

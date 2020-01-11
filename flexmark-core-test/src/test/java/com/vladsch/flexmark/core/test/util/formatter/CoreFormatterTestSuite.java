@@ -10,7 +10,6 @@ import org.junit.runners.Suite;
         ComboCoreFormatterNoBlankLinesSpecTest.class,
         FormatterModifiedAST.class,
         MergeFormatterCoreTest.class,
-        ComboParagraphFormatterSpecTest.class,
 })
 public class CoreFormatterTestSuite {
 }

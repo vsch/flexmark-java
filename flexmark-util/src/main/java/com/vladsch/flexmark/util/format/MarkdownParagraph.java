@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
@@ -67,7 +68,7 @@ public class MarkdownParagraph {
     public BasedSequence wrapTextNotTracked() {
         if (getFirstWidth() <= 0) return baseSeq;
 
-        LeftAlignedWrapping wrapping = new LeftAlignedWrapping(baseSeq, baseSeq, null);
+        LeftAlignedWrapping wrapping = new LeftAlignedWrapping(baseSeq, null);
         return wrapping.wrapText();
     }
 
@@ -92,96 +93,269 @@ public class MarkdownParagraph {
         return Range.NULL;
     }
 
+    @NotNull
+    BasedSequence resolveTrackedOffsets(@NotNull BasedSequence unwrapped, @NotNull BasedSequence wrapped) {
+        // Now we map the tracked offsets to indexes in the resulting text
+        BasedOffsetTracker tracker = BasedOffsetTracker.create(wrapped);
+        int iMax = trackedOffsets.size();
+        for (int i = iMax; i-- > 0; ) {
+            TrackedOffset trackedOffset = trackedOffsets.get(i);
+            int offset = trackedOffset.getOffset();
+            boolean baseIsWhiteSpaceAtOffset = unwrapped.isBaseCharAt(offset, WHITESPACE);
+
+            if (baseIsWhiteSpaceAtOffset && !(unwrapped.isBaseCharAt(offset - 1, WHITESPACE))) {
+                // we need to use previous non-blank and use that offset
+                OffsetInfo info = tracker.getOffsetInfo(offset - 1, false);
+                trackedOffset.setIndex(info.endIndex);
+            } else if (!baseIsWhiteSpaceAtOffset && unwrapped.isBaseCharAt(offset + 1, WHITESPACE)) {
+                // we need to use this non-blank and use that offset
+                OffsetInfo info = tracker.getOffsetInfo(offset, false);
+                trackedOffset.setIndex(info.startIndex);
+            } else {
+                OffsetInfo info = tracker.getOffsetInfo(offset, true);
+                trackedOffset.setIndex(info.endIndex);
+            }
+        }
+        return wrapped;
+    }
+
     public BasedSequence wrapText() {
         if (getFirstWidth() <= 0) return baseSeq;
         if (trackedOffsets.isEmpty()) return wrapTextNotTracked();
 
         // Adjust input text for wrapping by removing any continuation splice regions
-        BasedSequence input = baseSeq;
-        BasedSequence altInput = altSeq;
-        Range lastRange = Range.NULL;
-
         sortedTrackedOffsets();
 
         // delete any space ranges that need to be spliced
-        int iMax = trackedOffsets.size();
-        for (int i = iMax; i-- > 0; ) {
-            TrackedOffset trackedOffset = trackedOffsets.get(i);
-            if (lastRange.isEmpty() || !lastRange.contains(trackedOffset.getOffset())) {
-                lastRange = getContinuationStartSplice(trackedOffset.getOffset(), trackedOffset.isAfterSpaceEdit(), trackedOffset.isAfterDelete());
-                if (lastRange.isNotEmpty()) {
-                    trackedOffset.setSpliced(true);
-                    input = input.delete(lastRange.getStart(), lastRange.getEnd());
-                    altInput = altInput.delete(lastRange.getStart(), lastRange.getEnd());
+        BasedSequence baseSpliced = baseSeq;
+        BasedSequence altSpliced = altSeq;
+        Range lastRange = Range.NULL;
+
+        {
+            int iMax = trackedOffsets.size();
+            for (int i = iMax; i-- > 0; ) {
+                TrackedOffset trackedOffset = trackedOffsets.get(i);
+                if (lastRange.isEmpty() || !lastRange.contains(trackedOffset.getOffset())) {
+                    lastRange = getContinuationStartSplice(trackedOffset.getOffset(), trackedOffset.isAfterSpaceEdit(), trackedOffset.isAfterDelete());
+                    if (lastRange.isNotEmpty()) {
+                        trackedOffset.setSpliced(true);
+                        baseSpliced = baseSpliced.delete(lastRange.getStart(), lastRange.getEnd());
+                        altSpliced = altSpliced.delete(lastRange.getStart(), lastRange.getEnd());
+                    }
                 }
             }
         }
 
-        LeftAlignedWrapping wrapping = new LeftAlignedWrapping(input, altInput, trackedOffsets);
-        BasedSequence wrapped = wrapping.wrapText();
+        assert baseSpliced.equals(altSpliced);
 
-        // FIX: apply after wrapping fixes
-        BasedOffsetTracker tracker = BasedOffsetTracker.create(wrapped);
-        BasedSequence unwrapped = this.baseSeq;
+        LeftAlignedWrapping textWrapper = new LeftAlignedWrapping(baseSpliced, trackedOffsets);
+        BasedSequence wrapped = textWrapper.wrapText();
 
         if (restoreTrackedSpaces) {
-            // NOTE: Restore trailing spaces at end of line if it has tracked offset on it
-            int restoredAppendSpaces = 0;
+            BasedSequence wrapped2 = resolveTrackedOffsetsEdit1(baseSpliced, altSpliced, wrapped);
+            wrapped = resolveTrackedOffsetsEdit(baseSeq, wrapped);
+        } else {
+            wrapped = resolveTrackedOffsets(baseSeq, wrapped);
+        }
 
-            int unwrappedLastNonBlank = unwrapped.lastIndexOfAnyNot(CharPredicate.WHITESPACE) + 1;
-            BasedOffsetTracker unwrappedTracker = BasedOffsetTracker.create(altSeq);
+        return wrapped;
+    }
 
-            for (int i = iMax; i-- > 0; ) {
-                TrackedOffset trackedOffset = trackedOffsets.get(i);
-                boolean isAfterSpaceInsert = trackedOffset.isAfterSpaceEdit() && trackedOffset.isAfterInsert() && trackedOffset.getOffset() > 0;
-                int startDelta = isAfterSpaceInsert ? 1 : 0;
-                OffsetInfo baseInfo = unwrappedTracker.getOffsetInfo(trackedOffset.getOffset() - startDelta, startDelta == 0);
-                boolean isLineSepPrev = unwrapped.safeCharAt(baseInfo.startIndex) == SequenceUtils.LS;
-                int unwrappedIndex = isLineSepPrev ? baseInfo.startIndex : baseInfo.endIndex;
+    BasedSequence resolveTrackedOffsetsEdit1(BasedSequence baseSpliced, BasedSequence altSpliced, BasedSequence wrapped) {
+        Boolean inTest = SharedDataKeys.RUNNING_TESTS.get(options);
+        BasedSequence spliced = BasedSequence.of(baseSpliced.toString());
+        LeftAlignedWrapping altTextWrapper = new LeftAlignedWrapping(spliced, trackedOffsets);
+        BasedSequence altWrapped = spliced.getBuilder().append(altTextWrapper.wrapText()).toSequence(altSpliced, CharPredicate.LINE_SEP, CharPredicate.SPACE_TAB_EOL);
 
-                int countedSpacesBefore = unwrapped.countTrailing(CharPredicate.SPACE_TAB, unwrappedIndex);
-                int countedSpacesAfter = unwrapped.countLeading(CharPredicate.SPACE_TAB, unwrappedIndex);
-                int remainingSpacesBefore = countedSpacesBefore;
+        BasedOffsetTracker tracker = BasedOffsetTracker.create(altSeq);
+        BasedOffsetTracker altTracker = BasedOffsetTracker.create(altWrapped);
 
-                int indexSpacesBefore = trackedOffset.getSpacesBefore() >= 0 ? Math.min(countedSpacesBefore, trackedOffset.getSpacesBefore()) : countedSpacesBefore;
-                remainingSpacesBefore -= indexSpacesBefore;
+        int iMax = trackedOffsets.size();
+        BasedSequence baseSequence = altSeq.getBaseSequence();
+        BasedSequence altUnwrapped = altSeq;
 
-                if (trackedOffset.isSpliced()) {
-                    indexSpacesBefore = 0;
+        for (int i = iMax; i-- > 0; ) {
+            TrackedOffset trackedOffset = trackedOffsets.get(i);
+
+            int offset = trackedOffset.getOffset();
+            int countedSpacesBefore = baseSequence.countTrailing(CharPredicate.SPACE_TAB, offset);
+            int countedSpacesAfter = baseSequence.countLeading(CharPredicate.SPACE_TAB, offset);
+
+            if (inTest) {
+                assert trackedOffset.getSpacesBefore() == countedSpacesBefore;
+                assert trackedOffset.getSpacesAfter() == countedSpacesAfter;
+            }
+
+            char baseCharAt = baseSequence.safeCharAt(offset);
+            char prevBaseCharAt = baseSequence.safeCharAt(offset - countedSpacesBefore - 1);
+            char nextBaseCharAt = baseSequence.safeCharAt(offset + countedSpacesAfter);
+
+            int anchorOffset;
+            int anchorDelta = 0;
+            int anchorIndex;
+            boolean isLineSep = false;
+            String anchorResolvedBy = "";
+
+            if (inTest) {
+                System.out.println(trackedOffset);
+            }
+
+            if (!CharPredicate.SPACE_TAB.test(baseCharAt)) {
+                anchorOffset = offset;
+                anchorIndex = tracker.getOffsetInfo(anchorOffset, false).startIndex;
+
+                if (altUnwrapped.safeCharAt(anchorIndex - 1) == SequenceUtils.LS) {
+                    // have line sep at anchor
+                    isLineSep = true;
+                    anchorResolvedBy = "LSep ";
                 }
-                final int indexSpacesAfter = trackedOffset.getSpacesAfter() >= 0 ? Math.min(countedSpacesAfter + remainingSpacesBefore, trackedOffset.getSpacesAfter()) : countedSpacesAfter;
-
-                int unwrappedSpacesBefore = indexSpacesBefore;
-                int unwrappedSpacesAfter = indexSpacesAfter;
-                boolean needSpace = unwrappedSpacesBefore > 0;
-                int unwrappedPrevIndex = unwrappedIndex + indexSpacesAfter;
-                boolean isLineSep = !isLineSepPrev && unwrapped.safeCharAt(unwrappedPrevIndex) == SequenceUtils.LS;
-
-                int endLine = unwrapped.endOfLine(unwrappedIndex);
-                int startLine = unwrapped.startOfLine(unwrappedIndex);
-                int firstNonBlank = unwrapped.indexOfAnyNot(CharPredicate.SPACE, startLine, endLine);
-                startDelta = Math.min(startDelta, unwrappedSpacesBefore);
-
-                // NOTE: if have alternate base sequence then mapping is done using the computed baseSeq offset
-                OffsetInfo info = tracker.getOffsetInfo(unwrappedIndex, startDelta == 0 && !isLineSepPrev);
-                int index = isLineSepPrev ? info.startIndex : info.endIndex;
-
-                if (isAfterSpaceInsert && startDelta > 0 && indexSpacesAfter == 0 && wrapped.safeCharAt(index) != this.baseSeq.safeCharAt(unwrappedIndex)
-                        && wrapped.safeCharAt(index - 1) == this.baseSeq.safeCharAt(unwrappedIndex) && wrapped.safeCharAt(info.startIndex - 1) == ' ') {
-                    index = index - 1;
+            } else {
+                if (!CharPredicate.SPACE_TAB_EOL.test(prevBaseCharAt)) {
+                    anchorOffset = offset - countedSpacesBefore;
+                    anchorIndex = tracker.getOffsetInfo(anchorOffset - 1, false).endIndex;
+                    anchorResolvedBy = "Prev ";
+                } else if (!CharPredicate.SPACE_TAB_EOL.test(nextBaseCharAt)) {
+                    anchorOffset = offset + countedSpacesAfter;
+                    anchorIndex = tracker.getOffsetInfo(anchorOffset, false).startIndex;
+                    anchorResolvedBy = "Next ";
+                } else {
+                    throw new IllegalStateException(String.format("Should not be here. altSeq: '%s'", altUnwrapped));
                 }
+            }
 
-                if (info.pos >= 0 && info.pos < tracker.size() && isAfterSpaceInsert) {
-                    Segment segment = tracker.getSegmentOffsetTree().getSegment(info.pos, tracker.getSequence());
-                    if (segment.getStartOffset() == unwrappedIndex) {
-                        // at start of segment after space need to move it after prev segment
-                        info = tracker.getOffsetInfo(unwrappedIndex - unwrappedSpacesBefore, false);
-                        index = info.endIndex;
-                    } else if (wrapped.isCharAt(index + 1, CharPredicate.EOL)) {
-                        // EOL inserted in between, move it to next char
-                        info = tracker.getOffsetInfo(unwrappedIndex + 1, false);
-                        index = info.endIndex;
-                    }
+            if (inTest) {
+                System.out.println(String.format("%sBaseSequence offset: `%s`", anchorResolvedBy, baseSequence.safeSubSequence(offset - 10, offset).toVisibleWhitespaceString() + "|" + baseSequence.safeSubSequence(offset, offset + 10).toVisibleWhitespaceString()));
+                System.out.println(String.format("%sBaseSequence anchor: `%s`", anchorResolvedBy, baseSequence.safeSubSequence(anchorOffset - 10, anchorOffset).toVisibleWhitespaceString() + "|" + baseSequence.safeSubSequence(anchorOffset, anchorOffset + 10).toVisibleWhitespaceString()));
+                System.out.println(String.format("%saltUnwrapped anchor: `%s`", anchorResolvedBy, altUnwrapped.safeSubSequence(anchorIndex - 10, anchorIndex).toVisibleWhitespaceString() + "|" + altUnwrapped.safeSubSequence(anchorIndex, anchorIndex + 10).toVisibleWhitespaceString()));
+            }
+
+            assert baseSequence.safeCharAt(anchorOffset) == altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
+                    : String.format("baseSeq.charAt: %d != altUnwrapped.charAt: %d"
+                    , (int) baseSequence.safeCharAt(anchorOffset)
+                    , (int) altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
+            );
+
+            // now see where it is in the wrapped sequence
+            int wrappedIndex = altTracker.getOffsetInfo(anchorOffset, false).startIndex;
+
+            if (inTest) {
+                System.out.println(String.format("altWrapped anchor: `%s`", altWrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + altWrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()));
+                System.out.println(String.format("wrapped anchor: `%s`", wrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + wrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()));
+            }
+
+            int wrappedAdjusted = 0;
+            // take char start but if at whitespace, use previous for validation
+            if (WHITESPACE.test(altUnwrapped.safeCharAt(anchorIndex + anchorDelta))) {
+                if (!WHITESPACE.test(wrapped.safeCharAt(wrappedIndex + anchorDelta))) {
+                    wrappedAdjusted = -1;
+//                } else {
+                    // CAUTION: this occurs when MarkdownParagraph is used by itself with indentation
+                    //  provided so the computed index is in the middle of indentation this test added
+                    //  to keep asserts passing. Using indentations on markdown paragraph messes up
+                    //  tracked offset resolution. Indentations should not be used with tracked offsets.
+                }
+            } else if (altUnwrapped.safeCharAt(anchorIndex + anchorDelta) == SequenceUtils.LS) {
+                // have line sep at anchor, if prev is not whitespace, use it for validation
+                if (!WHITESPACE.test(altUnwrapped.safeCharAt(anchorIndex + anchorDelta - 1))) {
+                    wrappedAdjusted--;
+                } else {
+                    // use next char, it should not be whitespace
+                    anchorDelta++;
+                    assert !WHITESPACE.test(altUnwrapped.safeCharAt(anchorIndex + anchorDelta)) :
+                            String.format("Character(%s) after LS should not be whitespace.",
+                                    SequenceUtils.toVisibleWhitespaceString(Character.toString(altUnwrapped.safeCharAt(anchorIndex + anchorDelta)))
+                            );
+                    isLineSep = true;
+                }
+            }
+
+            char altUnwrappedCharAt = altUnwrapped.safeCharAt(anchorIndex + anchorDelta + wrappedAdjusted);
+            char wrappedCharAt = wrapped.safeCharAt(wrappedIndex + wrappedAdjusted);
+
+            // CAUTION: the whitespace test kludge is also for MarkdownParagraph with indentations
+            assert altUnwrappedCharAt == wrappedCharAt || WHITESPACE.test(altUnwrappedCharAt) && WHITESPACE.test(wrappedCharAt)
+                    : String.format("altUnwrapped.charAt: %s != wrapped.charAt: %s"
+                    , SequenceUtils.toVisibleWhitespaceString(Character.toString(altUnwrappedCharAt))
+                    , SequenceUtils.toVisibleWhitespaceString(Character.toString(wrappedCharAt))
+            );
+
+            // Adjust index position and restore spaces if needed
+            if (isLineSep) {
+                wrappedIndex = Math.max(0, wrappedIndex - 1);
+                if (inTest) {
+                    System.out.println(String.format("LSep Adj wrapped anchor: `%s`", wrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + wrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()));
+                }
+            }
+
+            if (inTest) {
+                System.out.println();
+            }
+        }
+
+        return wrapped;
+    }
+
+    @NotNull
+    BasedSequence resolveTrackedOffsetsEdit(@NotNull BasedSequence unwrapped, @NotNull BasedSequence wrapped) {
+        // NOTE: Restore trailing spaces at end of line if it has tracked offset on it
+        int restoredAppendSpaces = 0;
+
+        int unwrappedLastNonBlank = unwrapped.lastIndexOfAnyNot(WHITESPACE) + 1;
+        BasedOffsetTracker unwrappedTracker = BasedOffsetTracker.create(altSeq);
+        BasedOffsetTracker tracker = BasedOffsetTracker.create(wrapped);
+
+        int iMax = trackedOffsets.size();
+        for (int i = iMax; i-- > 0; ) {
+            TrackedOffset trackedOffset = trackedOffsets.get(i);
+            boolean isAfterSpaceInsert = trackedOffset.isAfterSpaceEdit() && trackedOffset.isAfterInsert() && trackedOffset.getOffset() > 0;
+            int startDelta = isAfterSpaceInsert ? 1 : 0;
+            OffsetInfo baseInfo = unwrappedTracker.getOffsetInfo(trackedOffset.getOffset() - startDelta, startDelta == 0);
+            boolean isLineSepPrev = unwrapped.safeCharAt(baseInfo.startIndex) == SequenceUtils.LS;
+            int unwrappedIndex = isLineSepPrev ? baseInfo.startIndex : baseInfo.endIndex;
+
+            int countedSpacesBefore = unwrapped.countTrailing(CharPredicate.SPACE_TAB, unwrappedIndex);
+            int countedSpacesAfter = unwrapped.countLeading(CharPredicate.SPACE_TAB, unwrappedIndex);
+            int remainingSpacesBefore = countedSpacesBefore;
+
+            int indexSpacesBefore = trackedOffset.getSpacesBefore() >= 0 ? Math.min(countedSpacesBefore, trackedOffset.getSpacesBefore()) : countedSpacesBefore;
+            remainingSpacesBefore -= indexSpacesBefore;
+
+            if (trackedOffset.isSpliced()) {
+                indexSpacesBefore = 0;
+            }
+            final int indexSpacesAfter = trackedOffset.getSpacesAfter() >= 0 ? Math.min(countedSpacesAfter + remainingSpacesBefore, trackedOffset.getSpacesAfter()) : countedSpacesAfter;
+
+            int unwrappedSpacesBefore = indexSpacesBefore;
+            int unwrappedSpacesAfter = indexSpacesAfter;
+            boolean needSpace = unwrappedSpacesBefore > 0;
+            int unwrappedPrevIndex = unwrappedIndex + indexSpacesAfter;
+            boolean isLineSep = !isLineSepPrev && unwrapped.safeCharAt(unwrappedPrevIndex) == SequenceUtils.LS;
+
+            int endLine = unwrapped.endOfLine(unwrappedIndex);
+            int startLine = unwrapped.startOfLine(unwrappedIndex);
+            int firstNonBlank = unwrapped.indexOfAnyNot(CharPredicate.SPACE, startLine, endLine);
+            startDelta = Math.min(startDelta, unwrappedSpacesBefore);
+
+            // NOTE: if have alternate base sequence then mapping is done using the computed baseSeq offset
+            OffsetInfo info = tracker.getOffsetInfo(unwrappedIndex, startDelta == 0 && !isLineSepPrev);
+            int index = isLineSepPrev ? info.startIndex : info.endIndex;
+
+            if (isAfterSpaceInsert && startDelta > 0 && indexSpacesAfter == 0 && wrapped.safeCharAt(index) != this.baseSeq.safeCharAt(unwrappedIndex)
+                    && wrapped.safeCharAt(index - 1) == this.baseSeq.safeCharAt(unwrappedIndex) && wrapped.safeCharAt(info.startIndex - 1) == ' ') {
+                index = index - 1;
+            }
+
+            if (info.pos >= 0 && info.pos < tracker.size() && isAfterSpaceInsert) {
+                Segment segment = tracker.getSegmentOffsetTree().getSegment(info.pos, tracker.getSequence());
+                if (segment.getStartOffset() == unwrappedIndex) {
+                    // at start of segment after space need to move it after prev segment
+                    info = tracker.getOffsetInfo(unwrappedIndex - unwrappedSpacesBefore, false);
+                    index = info.endIndex;
+                } else if (wrapped.isCharAt(index + 1, CharPredicate.EOL)) {
+                    // EOL inserted in between, move it to next char
+                    info = tracker.getOffsetInfo(unwrappedIndex + 1, false);
+                    index = info.endIndex;
+                }
 
 //                    System.out.println(String.format("startDelta: %d, spacesBefore: %d, spacesAfter: %d, prevCharAt: %d, charAt: %d, nextCharAt: %d, prevBaseAt: %d, baseAt: %d, nextBaseAt: %d, baseIndex: %d, info: %s, segment: %s",
 //                            startDelta,
@@ -196,129 +370,107 @@ public class MarkdownParagraph {
 //                            baseIndex,
 //                            info.toString(),
 //                            segment.toString()));
-                }
+            }
 
-                int endLineWrapped = wrapped.endOfLine(index);
-                int startLineWrapped = wrapped.startOfLine(index);
-                int firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
+            int endLineWrapped = wrapped.endOfLine(index);
+            int startLineWrapped = wrapped.startOfLine(index);
+            int firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
 
-                if (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete()) {
-                    // need to keep it at the previous character but not when inserting space or deleting 1 char surrounded by spaces,
-                    // except when offset is at the end of line
-                    if (!trackedOffset.isAfterSpaceEdit()) {
-                        // if deleting non-space surrounded by spaces at the beginning of a paragraph then the preceding space is deleted so need to keep at position and insert spaces before
-                        if (index == 0 && unwrappedSpacesBefore > 0 && unwrappedSpacesAfter > 0) {
+            if (trackedOffset.isAfterInsert() || trackedOffset.isAfterDelete()) {
+                // need to keep it at the previous character but not when inserting space or deleting 1 char surrounded by spaces,
+                // except when offset is at the end of line
+                if (!trackedOffset.isAfterSpaceEdit()) {
+                    // if deleting non-space surrounded by spaces at the beginning of a paragraph then the preceding space is deleted so need to keep at position and insert spaces before
+                    if (index == 0 && unwrappedSpacesBefore > 0 && unwrappedSpacesAfter > 0) {
 
-                        } else {
+                    } else {
 //                            int basePrevIndex = baseIndex - 1;
 //                            boolean isLineSep = baseSeq.safeCharAt(baseIndex) == SequenceUtils.LS;
 //                            if (isLineSep) {
 //                                info = tracker.getOffsetInfo(baseIndex - 1, true);
 //                            }
-                            index = info.startIndex;
-                            endLineWrapped = wrapped.endOfLine(index);
-                            startLineWrapped = wrapped.startOfLine(index);
-                            firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
-                            if (trackedOffset.isAfterDelete() && index == endLineWrapped) unwrappedSpacesAfter = 0;
-                            unwrappedSpacesBefore = 0;
-                        }
-                    } else if (index == firstNonBlankWrapped) {
+                        index = info.startIndex;
+                        endLineWrapped = wrapped.endOfLine(index);
+                        startLineWrapped = wrapped.startOfLine(index);
+                        firstNonBlankWrapped = wrapped.indexOfAnyNot(CharPredicate.SPACE, startLineWrapped, endLineWrapped);
+                        if (trackedOffset.isAfterDelete() && index == endLineWrapped) unwrappedSpacesAfter = 0;
                         unwrappedSpacesBefore = 0;
                     }
+                } else if (index == firstNonBlankWrapped) {
+                    unwrappedSpacesBefore = 0;
                 }
+            }
 
-                // NOTE: if typing space before or on start of continuation line, then do not move tracked offset to previous line
-                if (index <= firstNonBlankWrapped) {
-                    int unwrappedOffset = wrapped.getIndexOffset(firstNonBlankWrapped);
+            // NOTE: if typing space before or on start of continuation line, then do not move tracked offset to previous line
+            if (index <= firstNonBlankWrapped) {
+                int unwrappedOffset = wrapped.getIndexOffset(firstNonBlankWrapped);
 
-                    if (unwrappedOffset >= 0) {
-                        if (!(isLineSep || isLineSepPrev) && unwrappedIndex <= firstNonBlank && trackedOffset.isAfterSpaceEdit() && !trackedOffset.isAfterDelete()) {
-                            unwrappedSpacesBefore = 0;
-                            unwrappedSpacesAfter = 0;
-                        } else if (isLineSep || isLineSepPrev || trackedOffset.isAfterDelete() || (trackedOffset.isAfterSpaceEdit() && unwrappedSpacesAfter > 0)) {
-                            // tracked offset is followed by Line Separator, move the offset to end of previous line
-                            index = wrapped.endOfLine(wrapped.startOfLine(index) - 1);
+                if (unwrappedOffset >= 0) {
+                    if (!(isLineSep || isLineSepPrev) && unwrappedIndex <= firstNonBlank && trackedOffset.isAfterSpaceEdit() && !trackedOffset.isAfterDelete()) {
+                        unwrappedSpacesBefore = 0;
+                        unwrappedSpacesAfter = 0;
+                    } else if (isLineSep || isLineSepPrev || trackedOffset.isAfterDelete() || (trackedOffset.isAfterSpaceEdit() && unwrappedSpacesAfter > 0)) {
+                        // tracked offset is followed by Line Separator, move the offset to end of previous line
+                        index = wrapped.endOfLine(wrapped.startOfLine(index) - 1);
 
-                            unwrappedIndex = unwrappedPrevIndex;
-                            endLine = unwrapped.startOfLine(unwrappedIndex);
-                            startLine = unwrapped.startOfLine(unwrappedIndex);
-                            firstNonBlank = unwrapped.indexOfAnyNot(CharPredicate.SPACE, startLine, endLine);
-                            unwrappedSpacesBefore = (needSpace || isLineSep
-                                    || trackedOffset.isAfterInsert() && trackedOffset.isAfterSpaceEdit()
-                                    || trackedOffset.isAfterDelete() && !trackedOffset.isAfterSpaceEdit()) ? 1 : Math.min(1, unwrappedSpacesBefore);
-                            unwrappedSpacesAfter = 0;
-                        }
+                        unwrappedIndex = unwrappedPrevIndex;
+                        endLine = unwrapped.startOfLine(unwrappedIndex);
+                        startLine = unwrapped.startOfLine(unwrappedIndex);
+                        firstNonBlank = unwrapped.indexOfAnyNot(CharPredicate.SPACE, startLine, endLine);
+                        unwrappedSpacesBefore = (needSpace || isLineSep
+                                || trackedOffset.isAfterInsert() && trackedOffset.isAfterSpaceEdit()
+                                || trackedOffset.isAfterDelete() && !trackedOffset.isAfterSpaceEdit()) ? 1 : Math.min(1, unwrappedSpacesBefore);
+                        unwrappedSpacesAfter = 0;
                     }
                 }
+            }
 
-                int lastNonBlank = unwrapped.lastIndexOfAnyNot(CharPredicate.SPACE, endLine);
-                int wrappedOffsetSpaces = wrapped.countTrailing(CharPredicate.SPACE, index);
+            int lastNonBlank = unwrapped.lastIndexOfAnyNot(CharPredicate.SPACE, endLine);
+            int wrappedOffsetSpaces = wrapped.countTrailing(CharPredicate.SPACE, index);
 
-                if (unwrappedIndex >= lastNonBlank) {
-                    // add only what is missing
-                    unwrappedSpacesBefore = Math.max(0, unwrappedSpacesBefore - wrappedOffsetSpaces);
-                    unwrappedSpacesAfter = 0;
-                } else if (unwrappedIndex > firstNonBlank) {
-                    // spaces before caret, see if need to add max 1
-                    int spacesBefore = wrapped.countTrailing(CharPredicate.SPACE, index);
-                    unwrappedSpacesBefore = Math.max(0, Math.min(1, unwrappedSpacesBefore - spacesBefore));
-                    int spacesAfter = wrapped.countLeading(CharPredicate.SPACE, index);
-                    unwrappedSpacesAfter = Math.max(0, Math.min(1, unwrappedSpacesAfter - spacesAfter));
-                } else if (unwrappedIndex < firstNonBlank && trackedOffset.isAfterDelete() && !trackedOffset.isAfterSpaceEdit() && unwrappedSpacesBefore > 0 && unwrappedSpacesAfter > 0) {
-                    // spaces before caret, see if need to add max 1
-                    info = tracker.getOffsetInfo(unwrapped.getIndexOffset(firstNonBlank), true);
-                    index = info.endIndex;
-                    unwrappedSpacesBefore = 0;
-                    unwrappedSpacesAfter = 1;
-                } else {
-                    unwrappedSpacesBefore = 0;
-                    unwrappedSpacesAfter = 0;
-                }
+            if (unwrappedIndex >= lastNonBlank) {
+                // add only what is missing
+                unwrappedSpacesBefore = Math.max(0, unwrappedSpacesBefore - wrappedOffsetSpaces);
+                unwrappedSpacesAfter = 0;
+            } else if (unwrappedIndex > firstNonBlank) {
+                // spaces before caret, see if need to add max 1
+                int spacesBefore = wrapped.countTrailing(CharPredicate.SPACE, index);
+                unwrappedSpacesBefore = Math.max(0, Math.min(1, unwrappedSpacesBefore - spacesBefore));
+                int spacesAfter = wrapped.countLeading(CharPredicate.SPACE, index);
+                unwrappedSpacesAfter = Math.max(0, Math.min(1, unwrappedSpacesAfter - spacesAfter));
+            } else if (unwrappedIndex < firstNonBlank && trackedOffset.isAfterDelete() && !trackedOffset.isAfterSpaceEdit() && unwrappedSpacesBefore > 0 && unwrappedSpacesAfter > 0) {
+                // spaces before caret, see if need to add max 1
+                info = tracker.getOffsetInfo(unwrapped.getIndexOffset(firstNonBlank), true);
+                index = info.endIndex;
+                unwrappedSpacesBefore = 0;
+                unwrappedSpacesAfter = 1;
+            } else {
+                unwrappedSpacesBefore = 0;
+                unwrappedSpacesAfter = 0;
+            }
 
-                if (unwrappedIndex < unwrappedLastNonBlank) {
-                    // insert in middle
-                    if (unwrappedSpacesBefore + unwrappedSpacesAfter > 0) {
-                        wrapped = wrapped.insert(index, RepeatedSequence.ofSpaces(unwrappedSpacesBefore + unwrappedSpacesAfter));
-                        // need to adjust all following offsets by the amount inserted
-                        for (int j = i + 1; j < iMax; j++) {
-                            TrackedOffset trackedOffset1 = trackedOffsets.get(j);
-                            int indexJ = trackedOffset1.getIndex();
-                            trackedOffset1.setIndex(indexJ + unwrappedSpacesBefore + unwrappedSpacesAfter);
-                        }
+            if (unwrappedIndex < unwrappedLastNonBlank) {
+                // insert in middle
+                if (unwrappedSpacesBefore + unwrappedSpacesAfter > 0) {
+                    wrapped = wrapped.insert(index, RepeatedSequence.ofSpaces(unwrappedSpacesBefore + unwrappedSpacesAfter));
+                    // need to adjust all following offsets by the amount inserted
+                    for (int j = i + 1; j < iMax; j++) {
+                        TrackedOffset trackedOffset1 = trackedOffsets.get(j);
+                        int indexJ = trackedOffset1.getIndex();
+                        trackedOffset1.setIndex(indexJ + unwrappedSpacesBefore + unwrappedSpacesAfter);
                     }
-                } else {
-                    restoredAppendSpaces = Math.max(restoredAppendSpaces, unwrappedSpacesBefore);
                 }
-
-                trackedOffset.setIndex(index + unwrappedSpacesBefore);
+            } else {
+                restoredAppendSpaces = Math.max(restoredAppendSpaces, unwrappedSpacesBefore);
             }
 
-            // append any trailing spaces
-            if (restoredAppendSpaces > 0) {
-                wrapped = wrapped.appendSpaces(restoredAppendSpaces);
-            }
-        } else {
-            // Now we map the tracked offsets to indexes in the resulting text
-            for (int i = iMax; i-- > 0; ) {
-                TrackedOffset trackedOffset = trackedOffsets.get(i);
-                int offset = trackedOffset.getOffset();
-                boolean baseIsWhiteSpaceAtOffset = unwrapped.isBaseCharAt(offset, WHITESPACE);
-
-                if (baseIsWhiteSpaceAtOffset && !(unwrapped.isBaseCharAt(offset - 1, WHITESPACE))) {
-                    // we need to use previous non-blank and use that offset
-                    OffsetInfo info = tracker.getOffsetInfo(offset - 1, false);
-                    trackedOffset.setIndex(info.endIndex);
-                } else if (!baseIsWhiteSpaceAtOffset && unwrapped.isBaseCharAt(offset + 1, WHITESPACE)) {
-                    // we need to use this non-blank and use that offset
-                    OffsetInfo info = tracker.getOffsetInfo(offset, false);
-                    trackedOffset.setIndex(info.startIndex);
-                } else {
-                    OffsetInfo info = tracker.getOffsetInfo(offset, true);
-                    trackedOffset.setIndex(info.endIndex);
-                }
-            }
+            trackedOffset.setIndex(index + unwrappedSpacesBefore);
         }
 
+        // append any trailing spaces
+        if (restoredAppendSpaces > 0) {
+            wrapped = wrapped.appendSpaces(restoredAppendSpaces);
+        }
         return wrapped;
     }
 
@@ -513,7 +665,6 @@ public class MarkdownParagraph {
 
     class LeftAlignedWrapping {
         final @NotNull BasedSequence baseSeq;
-        final @NotNull BasedSequence altSeq;
         final @Nullable List<TrackedOffset> trackedOffsets;
         final SequenceBuilder result;
         final TextTokenizer tokenizer;
@@ -531,11 +682,8 @@ public class MarkdownParagraph {
         boolean unEscapeSpecialLeadInChars = MarkdownParagraph.this.unEscapeSpecialLeadInChars;
         boolean escapeSpecialLeadInChars = MarkdownParagraph.this.escapeSpecialLeadInChars;
 
-        LeftAlignedWrapping(@NotNull BasedSequence baseSeq, @NotNull BasedSequence altSeq, @Nullable List<TrackedOffset> trackedOffsets) {
-            assert altSeq.equals(baseSeq) : "altSeq must be character identical to baseSeq";
-
+        LeftAlignedWrapping(@NotNull BasedSequence baseSeq, @Nullable List<TrackedOffset> trackedOffsets) {
             this.baseSeq = baseSeq;
-            this.altSeq = altSeq;
             this.trackedOffsets = trackedOffsets;
             result = SequenceBuilder.emptyBuilder(baseSeq);
             tokenizer = new TextTokenizer(baseSeq);

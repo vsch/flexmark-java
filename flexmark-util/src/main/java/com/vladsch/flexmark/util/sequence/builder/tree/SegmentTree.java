@@ -117,7 +117,7 @@ public class SegmentTree {
         }
 
         // NOTE: most of the time char sequence access starts at 0, so we try the start pos
-        if (startPos >= 0) {
+        if (startPos >= 0 && startPos < size()) {
             int firstLength = aggrLength(startPos);
             if (index < firstLength) {
                 int prevLength = aggrLength(startPos - 1);

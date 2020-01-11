@@ -12,6 +12,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.format.TrackedOffset;
@@ -34,12 +35,17 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     public static final DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
+
+    final private static DataHolder OPTIONS = new MutableDataSet()
+            .set(SharedDataKeys.RUNNING_TESTS, true)
+            .toImmutable();
+
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("first-width-delta", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customIntOption(option, params, ComboParagraphFormatterSpecTest::firstWidthDeltaOption)));
     }
     public ComboParagraphFormatterSpecTest(@NotNull SpecExample example) {
-        super(example, optionsMap);
+        super(example, optionsMap, OPTIONS);
     }
 
     static DataHolder firstWidthDeltaOption(@Nullable Integer params) {
@@ -98,8 +104,9 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             Pair<BasedSequence, int[]> info = TestUtils.extractMarkup(input);
             BasedSequence sequence = BasedSequence.of(info.getFirst());
 
-            MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
             DataHolder options = getOptions() == null ? DataHolder.NULL : getOptions();
+            MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
+            formatter.setOptions(options);
 
             if (options.contains(Formatter.DOCUMENT_PREFIX)) formatter.setIndent(Formatter.DOCUMENT_PREFIX.get(options));
             if (options.contains(Formatter.DOCUMENT_FIRST_PREFIX)) formatter.setFirstIndent(Formatter.DOCUMENT_FIRST_PREFIX.get(options));
@@ -117,7 +124,13 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             for (int offset : offsets) {
                 char c = EDIT_OP_CHAR.get(options);
                 int editOp = EDIT_OP.get(options);
-                formatter.addTrackedOffset(TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0, -1, -1));
+
+                TrackedOffset trackedOffset = TrackedOffset.track(offset, editOp != 0 && c == ' ', editOp > 0, editOp < 0);
+
+                trackedOffset.setSpacesBefore(sequence.getBaseSequence().countTrailingSpaceTab(offset));
+                trackedOffset.setSpacesAfter(sequence.getBaseSequence().countLeadingSpaceTab(offset));
+
+                formatter.addTrackedOffset(trackedOffset);
             }
 
             BasedSequence actual = formatter.wrapText();
@@ -162,6 +175,10 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
 
             @Override
             protected @NotNull String renderHtml() {
+                if (SharedDataKeys.RUNNING_TESTS.get(myOptions)) {
+                    System.out.printf("%s:%d%n", myExample.getSection(), myExample.getExampleNumber());
+                }
+
                 return super.renderHtml();
             }
 

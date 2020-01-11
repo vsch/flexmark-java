@@ -40,6 +40,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.util.sequence.LineAppendable.*;
+
 /**
  * Renders a tree of nodes to HTML.
  * <p>
@@ -54,7 +56,7 @@ public class FlexmarkHtmlConverter {
     /**
      * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE | LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_PREFIX_PRE_FORMATTED);
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", F_TRIM_TRAILING_WHITESPACE | F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE | F_TRIM_LEADING_EOL | F_PREFIX_PRE_FORMATTED);
     public static final DataKey<Integer> MAX_BLANK_LINES = new DataKey<>("MAX_BLANK_LINES", 2);
     public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
 
@@ -315,7 +317,7 @@ public class FlexmarkHtmlConverter {
         Document document = Jsoup.parse(html);
 
         if (DUMP_HTML_TREE.get(getOptions())) {
-            LineAppendableImpl trace = new LineAppendableImpl(0);
+            LineAppendableImpl trace = new LineAppendableImpl(LineAppendable.F_TRIM_LEADING_EOL);
             trace.setIndentPrefix("  ");
             dumpHtmlTree(trace, document.body());
             System.out.println(trace.toString(0, 0));
@@ -349,7 +351,7 @@ public class FlexmarkHtmlConverter {
         Document document = Jsoup.parse(html);
 
         if (DUMP_HTML_TREE.get(getOptions())) {
-            LineAppendableImpl trace = new LineAppendableImpl(0);
+            LineAppendableImpl trace = new LineAppendableImpl(LineAppendable.F_TRIM_LEADING_EOL);
             trace.setIndentPrefix("  ");
             dumpHtmlTree(trace, document.body());
             System.out.println(trace.toString(0, 0));

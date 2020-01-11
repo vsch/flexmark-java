@@ -34,7 +34,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
         TRIM_TRAILING_WHITESPACE,           // don't output trailing whitespace
         PASS_THROUGH,                       // just pass everything through to appendable with no formatting
         TRIM_LEADING_WHITESPACE,            // allow leading spaces on a line, else remove
-        ALLOW_LEADING_EOL,                  // allow EOL at offset 0
+        TRIM_LEADING_EOL,                  // allow EOL at offset 0
         PREFIX_PRE_FORMATTED,               // when prefixing lines, prefix pre-formatted lines
     }
 
@@ -43,7 +43,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
     Options O_TRIM_TRAILING_WHITESPACE = Options.TRIM_TRAILING_WHITESPACE;
     Options O_PASS_THROUGH = Options.PASS_THROUGH;
     Options O_TRIM_LEADING_WHITESPACE = Options.TRIM_LEADING_WHITESPACE;
-    Options O_ALLOW_LEADING_EOL = Options.ALLOW_LEADING_EOL;
+    Options O_TRIM_LEADING_EOL = Options.TRIM_LEADING_EOL;
     Options O_PREFIX_PRE_FORMATTED = Options.PREFIX_PRE_FORMATTED;
     BitFieldSet<Options> O_FORMAT_ALL = BitFieldSet.of(O_CONVERT_TABS, O_COLLAPSE_WHITESPACE, O_TRIM_TRAILING_WHITESPACE, O_TRIM_LEADING_WHITESPACE);
 
@@ -54,9 +54,10 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
 
     // NOTE: ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
     int F_TRIM_LEADING_WHITESPACE = BitFieldSet.intMask(O_TRIM_LEADING_WHITESPACE);              // allow leading spaces on a line, else remove
-    int F_ALLOW_LEADING_EOL = BitFieldSet.intMask(O_ALLOW_LEADING_EOL);                          // allow EOL at offset 0
+    // NOTE: ALLOW_LEADING_EOL is now inverted and named F_TRIM_LEADING_EOL
+    int F_TRIM_LEADING_EOL = BitFieldSet.intMask(O_TRIM_LEADING_EOL);                          // allow EOL at offset 0
     int F_PREFIX_PRE_FORMATTED = BitFieldSet.intMask(O_PREFIX_PRE_FORMATTED);                    // when prefixing lines, prefix pre-formatted lines
-    int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_TRIM_TRAILING_WHITESPACE | F_TRIM_LEADING_WHITESPACE;     // select all formatting options
+    int F_FORMAT_ALL = F_CONVERT_TABS | F_COLLAPSE_WHITESPACE | F_TRIM_TRAILING_WHITESPACE | F_TRIM_LEADING_WHITESPACE | F_TRIM_LEADING_EOL;     // select all formatting options
 
     int F_WHITESPACE_REMOVAL = LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_TRAILING_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE;
 
@@ -70,9 +71,13 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * @deprecated ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
      */
     @Deprecated int ALLOW_LEADING_WHITESPACE = 0;
-
     @Deprecated int TRIM_LEADING_WHITESPACE = F_TRIM_LEADING_WHITESPACE;
-    @Deprecated int ALLOW_LEADING_EOL = F_ALLOW_LEADING_EOL;
+
+    /**
+     * @deprecated ALLOW_LEADING_EOL is now inverted and named F_TRIM_LEADING_EOL
+     */
+    @Deprecated int ALLOW_LEADING_EOL = 0;
+
     @Deprecated int PREFIX_PRE_FORMATTED = F_PREFIX_PRE_FORMATTED;
     @Deprecated int FORMAT_ALL = F_FORMAT_ALL;
 

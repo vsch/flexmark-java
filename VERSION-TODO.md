@@ -211,12 +211,26 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.102
 
+* [ ] Fix: Add validation to parser that passed `BasedSequence` is contiguous with no out of
+      base parts and throw descriptive `IllegalArgumentException` if it is not.
+* [ ] Add: validation to `Formatter.render` for
 * [ ] Fix: change `TrackedOffset` to not have edit operation information and transfer this to
       `TrackedOffsetList` since all tracked offsets are part of the same operation.
 * [ ] Fix: re-implement markdown paragraph tracked offset resolution by scanning the unwrapped
       and wrapped text segments and mapping them to original sequence offsets while analyzing
       text context and keeping track of: start of line, first non-blank, last non-blank, end of
       line.
+  * Fix: implement generic code for resolving index in wrapped sequence based on tracking offset
+    in base sequence without inexplicable fudge factor adjustments.
+* Fix: validate that `MarkdownParagraph` can properly compute spaces before/after at offset from
+  `altSeq.getBaseSequence()` and remove these fields from `TrackedOffset`.
+* Fix: `LineAppendableImpl.appendTo` would trim spaces on blank lines. Lines should be appended
+  as is since formatting is done during accumulation not when output to sequence or appendable.
+* Break: invert `LineAppendable.F_ALLOW_LEADING_EOL` to `LineAppendable.F_TRIM_LEADING_EOL` to
+  ensure that flags of 0 do no trimming.
+  * Fix: `Formatter.FORMAT_FLAGS` to add `LineAppendable.F_TRIM_LEADING_EOL` to defaults used
+    for formatting if none specified.
+* Fix: `LineAppendableImpl` empty forward iterator had next instead of none.
 * Fix:
   [core_wrapping_spec: Lines 150-151](https://github.com/vsch/flexmark-java/blob/master/flexmark-core-test/src/test/resources/core_wrapping_spec.md#L150-L151)
 * Add: `TrackedOffset` spaces before/after the offset. This is impossible to determine from

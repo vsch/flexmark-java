@@ -71,6 +71,27 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     @NotNull T subSequence(int startIndex, int endIndex);
 
     /**
+     * Get a portion of this sequence, if index &lt; 0 use 0, if &gt; length() use length
+     * <p>
+     * NOTE: the returned value should only depend on start/end indices. If a subsequence of this sequence with matching start/end should equal (using equals()) all such subsequences of this sequence.
+     *
+     * @param startIndex offset from startIndex of this sequence
+     * @param endIndex   offset from startIndex of this sequence
+     * @return based sequence whose contents reflect the selected portion
+     */
+    @NotNull T safeSubSequence(int startIndex, int endIndex);
+
+    /**
+     * Get a portion of this sequence, if index &lt; 0 use 0, if &gt; length() use length
+     * <p>
+     * NOTE: the returned value should only depend on start/end indices. If a subsequence of this sequence with matching start/end should equal (using equals()) all such subsequences of this sequence.
+     *
+     * @param startIndex offset from startIndex of this sequence
+     * @return based sequence whose contents reflect the selected portion
+     */
+    @NotNull T safeSubSequence(int startIndex);
+
+    /**
      * Get a portion of this sequence selected by range
      *
      * @param range range to get, coordinates offset form start of this sequence

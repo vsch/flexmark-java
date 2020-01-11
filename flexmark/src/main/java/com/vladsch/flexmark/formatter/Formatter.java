@@ -81,7 +81,7 @@ public class Formatter implements IRender {
     /**
      * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineAppendable.F_TRIM_LEADING_WHITESPACE);
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", LineAppendable.F_TRIM_LEADING_WHITESPACE | LineAppendable.F_TRIM_LEADING_EOL);
 
     // Use LineAppendable values instead
     // NOTE: F_ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
