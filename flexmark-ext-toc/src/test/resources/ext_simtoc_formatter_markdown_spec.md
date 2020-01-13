@@ -2516,6 +2516,7 @@ With Typographic extension included
 
 ### Heading_add
 ## Heading2_add_more
+### Heading2_add
 
 .
 [TOC]: #
@@ -2523,11 +2524,14 @@ With Typographic extension included
 # Table of Contents
 1. [Heading_add](#heading_add)
 1. [Heading2_add_more](#heading2_add_more)
+   1. [Heading2_add](#heading2_add)
 
 
 ### Heading_add
 
 ## Heading2_add_more
+
+### Heading2_add
 
 ````````````````````````````````
 
@@ -2543,6 +2547,7 @@ With Typographic extension included
 
 ### Heading_add
 ## Heading2_add_more
+### Heading2_add
 
 .
 [TOC hierarchy]:#
@@ -2554,6 +2559,8 @@ With Typographic extension included
 ### Heading_add
 
 ## Heading2_add_more
+
+### Heading2_add
 
 ````````````````````````````````
 
@@ -2569,6 +2576,7 @@ With Typographic extension included
     
 ### Heading_add
 ## Heading2_add_more
+### Heading2_add
 
 .
 [TOC]: #
@@ -2576,11 +2584,101 @@ With Typographic extension included
 # Table of Contents
 1. [Heading_add](#heading_add)
 1. [Heading2_add_more](#heading2_add_more)
+   1. [Heading2_add](#heading2_add)
 
 
 ### Heading_add
 
 ## Heading2_add_more
+
+### Heading2_add
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Update: 2) options(github, spacer, on-format-update)
+[TOC hierarchy]:#
+
+* [Heading_add](#heading_add)
+* [Heading2_add_more](#heading2_add_more)
+
+    
+### Heading_add
+## Heading2_add_more
+### Heading2_add
+
+.
+[TOC]: #
+
+# Table of Contents
+- [Heading_add](#heading_add)
+- [Heading2_add_more](#heading2_add_more)
+  - [Heading2_add](#heading2_add)
+
+
+### Heading_add
+
+## Heading2_add_more
+
+### Heading2_add
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Update: 3) options(parse-fixed-indent, spacer, on-format-update)
+[TOC hierarchy]:#
+
+* [Heading_add](#heading_add)
+* [Heading2_add_more](#heading2_add_more)
+
+    
+### Heading_add
+## Heading2_add_more
+### Heading2_add
+
+.
+[TOC]: #
+
+# Table of Contents
+- [Heading_add](#heading-add)
+- [Heading2_add_more](#heading2-add-more)
+    - [Heading2_add](#heading2-add)
+
+
+### Heading_add
+
+## Heading2_add_more
+
+### Heading2_add
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Update: 4) options(parse-fixed-indent, numbered, spacer, on-format-update)
+[TOC hierarchy]:#
+
+* [Heading_add](#heading_add)
+* [Heading2_add_more](#heading2_add_more)
+
+    
+### Heading_add
+## Heading2_add_more
+### Heading2_add
+
+.
+[TOC]: #
+
+# Table of Contents
+1. [Heading_add](#heading-add)
+1. [Heading2_add_more](#heading2-add-more)
+    1. [Heading2_add](#heading2-add)
+
+
+### Heading_add
+
+## Heading2_add_more
+
+### Heading2_add
 
 ````````````````````````````````
 
@@ -2596,6 +2694,7 @@ With Typographic extension included
 
 ### Heading_add
 ## Heading2_add_more
+### Heading2_add
 
 .
 [TOC]: #
@@ -2604,6 +2703,8 @@ With Typographic extension included
 ### Heading_add
 
 ## Heading2_add_more
+
+### Heading2_add
 
 ````````````````````````````````
 
@@ -2631,6 +2732,93 @@ With Typographic extension included
 # title"s
 - [Header 2](#header-2)
   - [Header 3](#header-3)
+````````````````````````````````
+
+
+### xxx-02
+
+Loosing empty title
+
+```````````````````````````````` example(Issue - xxx-02: 1) options(spacer, default-toc)
+## Header 2
+### Header 3
+
+[TOC levels=2,3,4]:# " "
+
+### title"s
+- [Header 2](#header-2)
+    - [Header 3](#header-3)
+.
+## Header 2
+
+### Header 3
+
+[TOC]: # ""
+
+- [Header 2](#header-2)
+  - [Header 3](#header-3)
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue - xxx-02: 2) options(spacer, default-toc)
+## Header 2
+### Header 3
+
+[TOC levels=2,3,4]: # ""
+
+### title"s
+- [Header 2](#header-2)
+    - [Header 3](#header-3)
+.
+## Header 2
+
+### Header 3
+
+[TOC]: # ""
+
+- [Header 2](#header-2)
+  - [Header 3](#header-3)
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue - xxx-02: 3) options(spacer, default-empty-toc)
+## Header 2
+### Header 3
+
+[TOC]: # ""
+
+### title"s
+- [Header 2](#header-2)
+    - [Header 3](#header-3)
+.
+## Header 2
+
+### Header 3
+
+[TOC]: #
+
+- [Header 2](#header-2)
+  - [Header 3](#header-3)
+.
+Document[0, 102]
+  Heading[0, 11] textOpen:[0, 2, "##"] text:[3, 11, "Header 2"]
+    Text[3, 11] chars:[3, 11, "Header 2"]
+  Heading[12, 24] textOpen:[12, 15, "###"] text:[16, 24, "Header 3"]
+    Text[16, 24] chars:[16, 24, "Header 3"]
+  BlankLine[25, 26]
+  SimTocBlock[26, 102] openingMarker:[26, 27] tocKeyword:[27, 30] closingMarker:[30, 32] anchorMarker:[33, 34, "#"] openingTitleMarker:[35, 36, "\""] title:[36, 36] closingTitleMarker:[36, 37, "\""]
+    SimTocContent[38, 102]
+      Heading[39, 50] textOpen:[39, 42, "###"] text:[43, 50, "title\"s"]
+      BulletList[51, 102] isTight
+        BulletListItem[51, 102] open:[51, 52, "-"] isTight
+          Paragraph[53, 75]
+            Link[53, 74] textOpen:[53, 54, "["] text:[54, 62, "Header 2"] textClose:[62, 63, "]"] linkOpen:[63, 64, "("] url:[64, 73, "#header-2"] pageRef:[64, 64] anchorMarker:[64, 65, "#"] anchorRef:[65, 73, "header-2"] linkClose:[73, 74, ")"]
+              Text[54, 62] chars:[54, 62, "Header 2"]
+          BulletList[79, 102] isTight
+            BulletListItem[79, 102] open:[79, 80, "-"] isTight
+              Paragraph[81, 102]
+                Link[81, 102] textOpen:[81, 82, "["] text:[82, 90, "Header 3"] textClose:[90, 91, "]"] linkOpen:[91, 92, "("] url:[92, 101, "#header-3"] pageRef:[92, 92] anchorMarker:[92, 93, "#"] anchorRef:[93, 101, "header-3"] linkClose:[101, 102, ")"]
+                  Text[82, 90] chars:[82, 90, "Header 3"]
 ````````````````````````````````
 
 

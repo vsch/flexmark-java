@@ -875,8 +875,10 @@ public class LineAppendableImpl implements LineAppendable {
     @NotNull
     @Override
     public LineAppendable append(@NotNull LineAppendable lineAppendable, int startLine, int endLine, boolean withPrefixes) {
-        int iMax = lineAppendable.getLineCountWithPending();
-        for (int i = 0; i < iMax; i++) {
+        int iMax = Math.min(endLine, lineAppendable.getLineCountWithPending());
+        startLine = Math.max(0, startLine);
+
+        for (int i = startLine; i < iMax; i++) {
             LineInfo info = lineAppendable.getLineInfo(i);
             BasedSequence text = info.getTextNoEOL();
             BasedSequence prefix = withPrefixes ? info.getPrefix() : BasedSequence.NULL;
@@ -1026,6 +1028,9 @@ public class LineAppendableImpl implements LineAppendable {
             prefix = SequenceUtils.trimEnd(prefix);
         }
 
+        assert !containsAny(text, CharPredicate.ANY_EOL)
+                : String.format("Line text should not contain any EOL, text: %s", toVisibleWhitespaceString(text));
+
         CharSequence line = appendable.getBuilder().append(prefix).append(text).append(eol).toSequence();
 
         LineInfo.Preformatted preformatted = info.isNotNull()
@@ -1126,7 +1131,11 @@ public class LineAppendableImpl implements LineAppendable {
 
         @Override
         public BasedSequence get(int index) {
-            return withPrefixes ? proxy.get(index).getLine() : proxy.get(index).getText();
+            if (proxy.maxTrailingBlankLines == -1 && index + 1 == proxy.size()) {
+                return withPrefixes ? proxy.get(index).getLineNoEOL() : proxy.get(index).getTextNoEOL();
+            } else {
+                return withPrefixes ? proxy.get(index).getLine() : proxy.get(index).getText();
+            }
         }
 
         @Override

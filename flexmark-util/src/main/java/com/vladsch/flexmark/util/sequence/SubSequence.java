@@ -87,7 +87,8 @@ public final class SubSequence extends BasedSequenceImpl {
 
     @Override
     public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
-        assert builder.getBaseSequence() == baseSeq;
+        assert builder.getBaseSequence() == baseSeq || builder.getBaseSequence().equals(baseSeq);
+
         builder.append(startOffset, endOffset);
     }
 

@@ -1127,8 +1127,8 @@ options, empty title
 .
 .
 Document[0, 39]
-  SimTocBlock[0, 20] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] closingTitleMarker:[18, 19, "\""]
-  SimTocBlock[20, 39] openingMarker:[20, 21] tocKeyword:[21, 24] style:[25, 33] closingMarker:[33, 35] anchorMarker:[35, 36, "#"] openingTitleMarker:[37, 38, "'"] closingTitleMarker:[38, 39, "'"]
+  SimTocBlock[0, 20] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 18] closingTitleMarker:[18, 19, "\""]
+  SimTocBlock[20, 39] openingMarker:[20, 21] tocKeyword:[21, 24] style:[25, 33] closingMarker:[33, 35] anchorMarker:[35, 36, "#"] openingTitleMarker:[37, 38, "'"] title:[38, 38] closingTitleMarker:[38, 39, "'"]
 ````````````````````````````````
 
 

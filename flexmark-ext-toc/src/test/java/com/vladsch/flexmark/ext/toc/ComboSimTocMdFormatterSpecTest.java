@@ -24,6 +24,25 @@ public class ComboSimTocMdFormatterSpecTest extends FormatterSpecTest {
             .set(TocExtension.IS_HTML, false)
             .toImmutable();
 
+    final private static DataHolder TOC_OPTIONS;
+    final private static DataHolder EMPTY_TOC_OPTIONS;
+
+    static {
+        TocOptions.AsMutable tocOptions = new TocOptions().toMutable();
+        tocOptions.setLevelList(2,3,4);
+        tocOptions.title = "Table of Contents";
+        tocOptions.isTextOnly = false;
+        tocOptions.isHtml = false;
+
+        MutableDataSet Options = new MutableDataSet();
+        tocOptions.setIn(Options);
+        TOC_OPTIONS = Options.toImmutable();
+
+        tocOptions.title = "";
+        tocOptions.setIn(Options);
+        EMPTY_TOC_OPTIONS = Options.toImmutable();
+    }
+
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("text-only", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, true));
@@ -43,7 +62,10 @@ public class ComboSimTocMdFormatterSpecTest extends FormatterSpecTest {
         optionsMap.put("on-format-as-is", new MutableDataSet().set(TocExtension.FORMAT_UPDATE_ON_FORMAT, SimTocGenerateOnFormat.AS_IS));
         optionsMap.put("on-format-remove", new MutableDataSet().set(TocExtension.FORMAT_UPDATE_ON_FORMAT, SimTocGenerateOnFormat.REMOVE));
         optionsMap.put("on-format-update", new MutableDataSet().set(TocExtension.FORMAT_UPDATE_ON_FORMAT, SimTocGenerateOnFormat.UPDATE));
+        optionsMap.put("default-toc", TOC_OPTIONS);
+        optionsMap.put("default-empty-toc", EMPTY_TOC_OPTIONS);
     }
+
     public ComboSimTocMdFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }

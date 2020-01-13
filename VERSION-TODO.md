@@ -2,13 +2,13 @@
 
 &nbsp;<details id="version-history"><summary>**Version History**</summary>
 
-[TOC]: #
+[TOC]: # ""
 
-### Table of Contents
 - [Release 0.60.0](#release-0600)
-    - [API Refactoring](#api-refactoring)
-    - [Features](#features)
+  - [API Refactoring](#api-refactoring)
+  - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [0.59.106](#059106)
 - [0.59.104](#059104)
 - [0.59.102](#059102)
 - [0.59.100](#059100)
@@ -211,11 +211,26 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
+## 0.59.106
+
+* Fix: `LineAppendableImpl.getLines()` when requested with `maxTrailingBlankLines` of -1 then
+  last line should not have and EOL.
+* Fix: `SimToc` formatting:
+  * allow empty title string in parser
+  * blank title should not add TOC heading
+  * empty title string should be converted to empty string and not removed
+  * change no title `TocOptions` to be empty title and if an empty title string is specified
+    then title string will be blank (`" "`).
+* Break: `TocUtils.renderMarkdownToc(MarkdownWriter, List<Integer>, List<String>, TocOptions)`
+  and `TocUtils.renderTocContent(MarkdownWriter, TocOptions, TocOptions, List<Heading>,
+  List<String>)` to not have `Heading` arguments but only relevant heading information to allow
+  reuse.
+
 ## 0.59.104
 
 * Fix: [#382, Is there an option for number of whitespaces needed to create sub-lists?]
-  * `FIXED_INDENT` list parser did not convert list item looking text with >= 4 spaces to
-    lazy continuation.
+  * `FIXED_INDENT` list parser did not convert list item looking text with >= 4 spaces to lazy
+    continuation.
 
 ## 0.59.102
 
@@ -2122,6 +2137,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#372, \[Regression?\] Attributes extension not applied to \`code\` tag of code blocks]: https://github.com/vsch/flexmark-java/issues/372
 [#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
 [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled]: https://github.com/vsch/flexmark-java/issues/381
+[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
@@ -2131,6 +2147,4 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
-[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
-
 

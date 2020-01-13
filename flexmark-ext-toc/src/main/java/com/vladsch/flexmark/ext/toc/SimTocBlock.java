@@ -50,7 +50,7 @@ public class SimTocBlock extends TocBlockBase {
             }
 
             openingTitleMarker = titleChars.subSequence(0, 1);
-            title = titleChars.midSequence(1, -1).nullIfEmpty();
+            title = titleChars.midSequence(1, -1);
             closingTitleMarker = titleChars.endSequence(1);
         }
     }

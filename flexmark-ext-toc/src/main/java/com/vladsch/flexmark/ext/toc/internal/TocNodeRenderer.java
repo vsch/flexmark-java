@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TocNodeRenderer implements NodeRenderer {
     private final TocOptions options;
@@ -50,7 +51,9 @@ public class TocNodeRenderer implements NodeRenderer {
     private void renderTocHeaders(NodeRendererContext context, HtmlWriter html, Node node, List<Heading> headings, TocOptions options) {
         List<Heading> filteredHeadings = TocUtils.filteredHeadings(headings, options);
         final Paired<List<Heading>, List<String>> paired = TocUtils.htmlHeadingTexts(context, filteredHeadings, options);
-        TocUtils.renderHtmlToc(html, context.getHtmlOptions().sourcePositionAttribute.isEmpty() ? BasedSequence.NULL : node.getChars(), paired.getFirst(), paired.getSecond(), options);
+        List<Integer> headingLevels = paired.getFirst().stream().map(Heading::getLevel).collect(Collectors.toList());
+        List<String> headingRefIds = paired.getFirst().stream().map(Heading::getAnchorRefId).collect(Collectors.toList());
+        TocUtils.renderHtmlToc(html, context.getHtmlOptions().sourcePositionAttribute.isEmpty() ? BasedSequence.NULL : node.getChars(), headingLevels, paired.getSecond(), headingRefIds, options);
     }
 
     public static class Factory implements NodeRendererFactory {

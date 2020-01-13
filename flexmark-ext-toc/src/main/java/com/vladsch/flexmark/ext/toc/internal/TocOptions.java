@@ -154,16 +154,19 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         this.isHtml = isHtml;
         this.rawTitle = title == null ? "" : String.valueOf(title);
         this.rawTitleLevel = titleLevel;
-        if (!rawTitle.isEmpty()) {
+
+
+        if (title != null) {
             CharSequence charSequence = rawTitle.trim();
             int markers = BasedSequence.of(charSequence).countLeading(SequenceUtils.HASH_SET);
             if (markers >= 1 && markers <= 6) titleLevel = markers;
-            this.title = rawTitle.substring(markers).trim();
+            String useTitle = rawTitle.substring(markers).trim();
+            this.title = useTitle.isEmpty() ? " " : useTitle;
         } else {
             this.title = "";
         }
-        this.titleLevel = titleLevel <= 1 ? 1 : titleLevel >= 6 ? 6 : titleLevel;
 
+        this.titleLevel = Math.max(1, Math.min(titleLevel, 6));
         this.isAstAddOptions = isAstAddOptions;
         this.isBlankLineSpacer = isBlankLineSpacer;
         this.divClass = divClass instanceof String ? (String) divClass : String.valueOf(divClass);
@@ -209,7 +212,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
     public String getTitleHeading() {
         String title = this.title;
 
-        if (!title.isEmpty()) {
+        if (!title.trim().isEmpty()) {
             StringBuilder out = new StringBuilder();
 
             int level = titleLevel;

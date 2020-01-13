@@ -1249,7 +1249,6 @@ Document[0, 129]
 <h2 id="header-2" md-pos="3-11">Header 2</h2>
 <h3 id="header-3" md-pos="16-24">Header 3</h3>
 <div md-pos="26-40">
-  <h1></h1>
   <ul>
     <li><a href="#header-3">Header 3</a></li>
   </ul>

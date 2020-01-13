@@ -4,6 +4,8 @@ import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 @SuppressWarnings("PointlessArithmeticExpression")
@@ -20,7 +22,6 @@ public class LineAppendableImplTest {
         }
     }
 
-
     @Test
     public void test_defaultAppendsAll1() {
         LineAppendableImpl fa = new LineAppendableImpl(0);
@@ -30,7 +31,6 @@ public class LineAppendableImplTest {
         assertEquals("\n", sequence1.toString());
     }
 
-
     @Test
     public void test_defaultAppendsAll2() {
         LineAppendableImpl fa = new LineAppendableImpl(0);
@@ -38,6 +38,120 @@ public class LineAppendableImplTest {
         fa.append("    \n");
         CharSequence sequence1 = fa.toSequence();
         assertEquals("    \n", sequence1.toString());
+    }
+
+    @Test
+    public void test_defaultAppendsOther03() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+        LineAppendableImpl fa2 = new LineAppendableImpl(0);
+
+        fa2.append("line 1\n");
+        fa2.append("line 2\n");
+        fa2.append("line 3\n");
+        fa.append(fa2, 0, 3, true);
+
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("" +
+                "line 1\n" +
+                "line 2\n" +
+                "line 3\n" +
+                "", sequence1.toString());
+    }
+
+    @Test
+    public void test_defaultAppendsOther13() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+        LineAppendableImpl fa2 = new LineAppendableImpl(0);
+
+        fa2.append("line 1\n");
+        fa2.append("line 2\n");
+        fa2.append("line 3\n");
+        fa.append(fa2, 1, 3, true);
+
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("" +
+                "line 2\n" +
+                "line 3\n" +
+                "", sequence1.toString());
+    }
+
+    @Test
+    public void test_defaultAppendsOther23() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+        LineAppendableImpl fa2 = new LineAppendableImpl(0);
+
+        fa2.append("line 1\n");
+        fa2.append("line 2\n");
+        fa2.append("line 3\n");
+        fa.append(fa2, 2, 3, true);
+
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("" +
+                "line 3\n" +
+                "", sequence1.toString());
+    }
+
+    @Test
+    public void test_defaultAppendsOther33() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+        LineAppendableImpl fa2 = new LineAppendableImpl(0);
+
+        fa2.append("line 1\n");
+        fa2.append("line 2\n");
+        fa2.append("line 3\n");
+        fa.append(fa2, 3, 3, true);
+
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("" +
+                "", sequence1.toString());
+    }
+
+    @Test
+    public void test_defaultAppendsOther01() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+        LineAppendableImpl fa2 = new LineAppendableImpl(0);
+
+        fa2.append("line 1\n");
+        fa2.append("line 2\n");
+        fa2.append("line 3\n");
+        fa.append(fa2, 0, 1, true);
+
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("" +
+                "line 1\n" +
+                "", sequence1.toString());
+    }
+
+    @Test
+    public void test_defaultAppendsOther02() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+        LineAppendableImpl fa2 = new LineAppendableImpl(0);
+
+        fa2.append("line 1\n");
+        fa2.append("line 2\n");
+        fa2.append("line 3\n");
+        fa.append(fa2, 0, 2, true);
+
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("" +
+                "line 1\n" +
+                "line 2\n" +
+                "", sequence1.toString());
+    }
+
+    @Test
+    public void test_defaultAppendsOther00() {
+        LineAppendableImpl fa = new LineAppendableImpl(0);
+        LineAppendableImpl fa2 = new LineAppendableImpl(0);
+
+        fa2.append("line 1\n");
+        fa2.append("line 2\n");
+        fa2.append("line 3\n");
+        fa.append(fa2, 0, 0, true);
+
+        CharSequence sequence1 = fa.toSequence();
+        assertEquals("" +
+                "", sequence1.toString());
     }
 
     @Test
@@ -73,11 +187,9 @@ public class LineAppendableImplTest {
         fa.append('a');
         assertEquals("a", fa.toString());
 
-
         fa.line();
         assertEquals("a\n", fa.toString());
     }
-
 
     @Test
     public void test_appendChar() {
@@ -1643,6 +1755,37 @@ public class LineAppendableImplTest {
         }
     }
 
+    @Test
+    public void test_iterateMaxTailBlankLinesLinesNoEOL() {
+        String input = "" +
+                "0:2343568\n" +
+                "1:2343568\n" +
+                "2:2343568\n" +
+                "3:2343568\n" +
+                "4:2343568\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        LineAppendable fa = new LineAppendableImpl(SequenceBuilder.emptyBuilder(sequence), LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
+        SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
+
+        fa.append(sequence.subSequence(0, 10)).line();
+        fa.append(sequence.subSequence(10, 19)).line();
+        fa.append(sequence.subSequence(20, 29)).line();
+        fa.append(sequence.subSequence(30, 39)).line();
+        fa.append(sequence.subSequence(40, 49)).line();
+
+        ArrayList<BasedSequence> lines = new ArrayList<>();
+        Iterable<BasedSequence> faLines = fa.getLines(-1, true);
+        for (BasedSequence line : faLines) {
+            lines.add(line);
+        }
+
+        assertEquals("0", "0:2343568\n", lines.get(0).toString());
+        assertEquals("1", "1:2343568\n", lines.get(1).toString());
+        assertEquals("2", "2:2343568\n", lines.get(2).toString());
+        assertEquals("3", "3:2343568\n", lines.get(3).toString());
+        assertEquals("4", "4:2343568", lines.get(4).toString());
+    }
 
     @Test
     public void test_iterateMaxTailBlankLinesLinesNoPrefix() {
@@ -1697,7 +1840,6 @@ public class LineAppendableImplTest {
 
         assertEquals("", fa.toString());
     }
-
 
     @Test
     public void test_prefixAfterEOL() {

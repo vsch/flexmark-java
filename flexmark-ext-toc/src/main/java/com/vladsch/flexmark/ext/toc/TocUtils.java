@@ -9,7 +9,9 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
 public class TocUtils {
@@ -61,9 +64,9 @@ public class TocUtils {
             if (!optionTitle.isEmpty()) {
                 out.append('"');
                 if (defaultOptions == null || options.titleLevel != defaultOptions.titleLevel) {
-                    out.append(optionTitleHeading.replace("\\", "\\\\").replace("\"", "\\\""));
+                    out.append(optionTitleHeading.trim().replace("\\", "\\\\").replace("\"", "\\\""));
                 } else {
-                    out.append(optionTitle.replace("\\", "\\\\").replace("\"", "\\\""));
+                    out.append(optionTitle.trim().replace("\\", "\\\\").replace("\"", "\\\""));
                 }
                 out.append('"').mark();
             } else {
@@ -78,6 +81,8 @@ public class TocUtils {
     public static void renderTocContent(MarkdownWriter markdown, TocOptions options, TocOptions defaultOptions, List<Heading> headings, List<String> headingTexts) {
         if (headings.isEmpty()) return;
 
+        Document document = headings.get(0).getDocument();
+
         if (options.isHtml) {
             MarkdownWriter out = new MarkdownWriter(markdown.getOptions());
             for (Heading heading : headings) {
@@ -85,7 +90,7 @@ public class TocUtils {
             }
             out.append(getTocPrefix(options, defaultOptions));
 
-            MutableDataHolder options1 = new MutableDataSet(headings.get(0).getDocument());
+            MutableDataHolder options1 = new MutableDataSet(document);
             defaultOptions.setIn(options1);
             options.setIn(options1);
 
@@ -101,18 +106,17 @@ public class TocUtils {
             Parser parser = Parser.builder(options1).build();
             HtmlRenderer htmlRenderer = HtmlRenderer.builder(options1).build();
 
-            Document document = parser.parse(out.toString());
-
+            Document tocDocument = parser.parse(out.toString());
             // copy ref ids to make sure they are the same
             int i = 0;
-            for (Node node : document.getChildren()) {
+            for (Node node : tocDocument.getChildren()) {
                 if (node instanceof Heading) {
                     ((Heading) node).setAnchorRefId(headings.get(i).getAnchorRefId());
                     i++;
                 }
             }
 
-            Node toc = document.getFirstChildAny(TocBlock.class);
+            Node toc = tocDocument.getFirstChildAny(TocBlock.class);
             assert toc != null;
 
             markdown.openPreFormatted(false);
@@ -123,15 +127,24 @@ public class TocUtils {
             if (!heading.isEmpty()) {
                 markdown.append(heading);
             }
-            renderMarkdownToc(markdown, headings, headingTexts, options);
+
+            if (Parser.PARSER_EMULATION_PROFILE.get(document).family== ParserEmulationProfile.FIXED_INDENT) {
+                markdown.setIndentPrefix(RepeatedSequence.ofSpaces(4));
+            } else {
+                markdown.setIndentPrefix(RepeatedSequence.ofSpaces(options.isNumbered ? 3 : 2));
+            }
+
+            renderMarkdownToc(markdown, headings.stream().map(Heading::getLevel).collect(Collectors.toList()), headingTexts, options);
         }
     }
 
-    public static void renderHtmlToc(HtmlWriter out, BasedSequence sourceText, List<Heading> headings, List<String> headingTexts, TocOptions tocOptions) {
-        if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.isEmpty())) {
+    public static void renderHtmlToc(HtmlWriter out, BasedSequence sourceText, List<Integer> headings, List<String> headingTexts, List<String> headingRefIds, TocOptions tocOptions) {
+        if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.trim().isEmpty())) {
             if (sourceText.isNotNull()) out.srcPos(sourceText);
             out.attr(Attribute.CLASS_ATTR, tocOptions.divClass).withAttr(TOC_CONTENT).tag("div").line().indent();
-            out.tag("h" + tocOptions.titleLevel).text(tocOptions.title).tag("/h" + tocOptions.titleLevel).line();
+            if (!tocOptions.title.trim().isEmpty()) {
+                out.tag("h" + tocOptions.titleLevel).text(tocOptions.title).tag("/h" + tocOptions.titleLevel).line();
+            }
         }
 
         int initLevel = -1;
@@ -143,9 +156,8 @@ public class TocUtils {
         int[] openedItemAppendCount = new int[7];
 
         for (int i = 0; i < headings.size(); i++) {
-            Heading header = headings.get(i);
             String headerText = headingTexts.get(i);
-            int headerLevel = tocOptions.listType != TocOptions.ListType.HIERARCHY ? 1 : header.getLevel();
+            int headerLevel = tocOptions.listType != TocOptions.ListType.HIERARCHY ? 1 : headings.get(i);
 
             if (initLevel == -1) {
                 initLevel = headerLevel;
@@ -185,7 +197,7 @@ public class TocUtils {
 
             out.line().tag("li");
             openedItems[headerLevel] = true;
-            String headerId = header.getAnchorRefId();
+            String headerId = headingRefIds.get(i);
             if (headerId == null || headerId.isEmpty()) {
                 out.raw(headerText);
             } else {
@@ -208,7 +220,7 @@ public class TocUtils {
         // close original list
         if (openedList[0]) out.unIndent().tag(listClose).line();
 
-        if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.isEmpty())) {
+        if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.trim().isEmpty())) {
             out.line().unIndent().tag("/div");
         }
 
@@ -357,19 +369,16 @@ public class TocUtils {
         return Pair.of(headings, headingContents);
     }
 
-    public static void renderMarkdownToc(MarkdownWriter out, List<Heading> headings, List<String> headingTexts, final TocOptions tocOptions) {
+    public static void renderMarkdownToc(MarkdownWriter out, List<Integer> headings, List<String> headingTexts, final TocOptions tocOptions) {
         int initLevel = -1;
         int lastLevel = -1;
         boolean[] openedItems = new boolean[7];
         boolean[] openedList = new boolean[7];
         int[] openedItemAppendCount = new int[7];
 
-        out.setIndentPrefix(RepeatedSequence.ofSpaces(tocOptions.isNumbered ? 3 : 2));
-
         for (int i = 0; i < headings.size(); i++) {
-            Heading header = headings.get(i);
             String headerText = headingTexts.get(i);
-            int headerLevel = tocOptions.listType != TocOptions.ListType.HIERARCHY ? 1 : header.getLevel();
+            int headerLevel = tocOptions.listType != TocOptions.ListType.HIERARCHY ? 1 : headings.get(i);
 
             if (initLevel == -1) {
                 initLevel = headerLevel;
