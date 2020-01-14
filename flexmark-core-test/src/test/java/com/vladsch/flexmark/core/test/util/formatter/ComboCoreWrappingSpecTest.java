@@ -15,7 +15,7 @@ public class ComboCoreWrappingSpecTest extends ComboCoreFormatterSpecTestBase {
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(SharedDataKeys.RUNNING_TESTS, true)
+            .set(SharedDataKeys.RUNNING_TESTS, false)  // Set to true to get stdout printout of intermediate wrapping information
             .toImmutable();
 
     public ComboCoreWrappingSpecTest(@NotNull SpecExample example) {

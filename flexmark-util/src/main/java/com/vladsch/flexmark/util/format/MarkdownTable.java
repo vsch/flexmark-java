@@ -533,7 +533,6 @@ public class MarkdownTable {
      * empty
      *
      * @param column index in allRows list
-     *
      * @return true if column is empty for all rows, separator row excluded
      */
     public boolean isEmptyColumn(int column) {
@@ -553,7 +552,6 @@ public class MarkdownTable {
      * Test a row for having all empty columns
      *
      * @param rowIndex index in allRows list
-     *
      * @return true if row is empty or is a separator row
      */
     public boolean isAllRowsEmptyAt(int rowIndex) {
@@ -564,7 +562,6 @@ public class MarkdownTable {
      * Test a row for having all empty columns
      *
      * @param rowIndex index in allRows list
-     *
      * @return true if row is empty or is a separator row
      */
     public boolean isContentRowsEmptyAt(int rowIndex) {
@@ -576,7 +573,6 @@ public class MarkdownTable {
      *
      * @param rowIndex index in allRows list
      * @param sections sections to use for rows array generation
-     *
      * @return true if row is empty or is a separator row
      */
     private boolean isEmptyRowAt(int rowIndex, TableSection[] sections) {
@@ -877,22 +873,23 @@ public class MarkdownTable {
         }
     }
 
-    private void setTrackedOffsetIndex(int offset, int index) {
+    private boolean setTrackedOffsetIndex(int offset, int index) {
         TrackedOffset trackedOffset = findTrackedOffset(offset);
         if (trackedOffset != null) {
             trackedOffset.setIndex(index);
-            return;
+            return true;
         }
 
-        // RELEASE: remove exception throwing
-        throw new IllegalStateException(String.format("offset: %d not in tracked offsets: %s", offset, trackedOffsets));
+        // QUERY: Triggered after sort table
+        // RELEASE : remove exception throwing
+        //throw new IllegalStateException(String.format("offset: %d not in tracked offsets: %s", offset, trackedOffsets));
+        return false;
     }
 
     /**
      * Transpose table
      *
      * @param columnHeaders number of first columns to use as header rows, 0..maxColumns
-     *
      * @return transposed table
      */
     public MarkdownTable transposed(int columnHeaders) {
@@ -961,7 +958,6 @@ public class MarkdownTable {
      * @param columnSorts         column sort information
      * @param textCollectionFlags collection flags to use for collecting cell text
      * @param numericSuffixTester predicate to test non-numeric suffix of numeric column content, return true if suffix is acceptable, null will result in all suffixes being accepted
-     *
      * @return sorted table
      */
     public MarkdownTable sorted(ColumnSort[] columnSorts, int textCollectionFlags, @Nullable NumericSuffixPredicate numericSuffixTester) {
@@ -1496,7 +1492,14 @@ public class MarkdownTable {
                     if (adjustedCell.trackedTextOffset != NOT_TRACKED) {
                         int cellOffset = out.offsetWithPending();
                         int adjustForBlank = cell.text.isBlank() ? -1 : 0;
-                        setTrackedOffsetIndex(cell.trackedTextOffset + cell.getTextStartOffset(i == 0 ? null : row.cells.get(i - 1)), cellOffset + minLimit(adjustedCell.trackedTextOffset + adjustForBlank, 0) + adjustedCell.trackedTextAdjust);
+                        if (!setTrackedOffsetIndex(cell.trackedTextOffset + cell.getTextStartOffset(i == 0 ? null : row.cells.get(i - 1)), cellOffset + minLimit(adjustedCell.trackedTextOffset + adjustForBlank, 0) + adjustedCell.trackedTextAdjust)) {
+                            // QUERY: Triggered after sort table in MdNav for header row
+                            System.out.println(String.format("Offset not found: cell.trackedTextOffset: %d, adjusted trackedOffset: %d in offsets: %s"
+                                    , cell.trackedTextOffset
+                                    , cell.trackedTextOffset + cell.getTextStartOffset(i == 0 ? null : row.cells.get(i - 1))
+                                    , trackedOffsets
+                            ));
+                        }
                     }
                 }
 

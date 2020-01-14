@@ -17,12 +17,13 @@ public class TrackedOffsetUtils {
     /**
      * Resolve any unresolved tracked offsets
      *
-     * @param sequence               original sequence for tracked offsets
+     * @param sequence              original sequence for tracked offsets
      * @param appendable            line appendable containing resulting lines
      * @param offsets               tracked offsets
      * @param maxTrailingBlankLines max trailing blank lines to use in resolving offsets
+     * @param traceDetails  true if running tests and want detail printout to stdout
      */
-    public static void resolveTrackedOffsets(BasedSequence sequence, LineAppendable appendable, List<TrackedOffset> offsets, int maxTrailingBlankLines) {
+    public static void resolveTrackedOffsets(BasedSequence sequence, LineAppendable appendable, List<TrackedOffset> offsets, int maxTrailingBlankLines, boolean traceDetails) {
         if (!offsets.isEmpty()) {
             TrackedOffsetList trackedOffsets = TrackedOffsetList.create(sequence, offsets);
 
@@ -56,7 +57,9 @@ public class TrackedOffsetUtils {
                                 OffsetInfo info = tracker.getOffsetInfo(offset, true);
                                 trackedOffset.setIndex(info.endIndex + length);
                             }
-                            System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", offset, trackedOffset.getIndex(), length, lineInfo.index, line.getBuilder().append(line).toStringWithRanges(true)));
+                            if (traceDetails) {
+                                System.out.println(String.format("Resolved %d to %d, start: %d, in line[%d]: '%s'", offset, trackedOffset.getIndex(), length, lineInfo.index, line.getBuilder().append(line).toStringWithRanges(true)));
+                            }
                             unresolved--;
                         }
                     }

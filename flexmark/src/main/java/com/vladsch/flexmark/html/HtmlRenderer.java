@@ -213,7 +213,7 @@ public class HtmlRenderer implements IRender {
         htmlWriter.appendToSilently(output, htmlOptions.maxBlankLines, maxTrailingBlankLines);
 
         // resolve any unresolved tracked offsets that are outside elements which resolve their own
-        TrackedOffsetUtils.resolveTrackedOffsets(node.getChars(), htmlWriter, TRACKED_OFFSETS.get(renderer.getDocument()), maxTrailingBlankLines);
+        TrackedOffsetUtils.resolveTrackedOffsets(node.getChars(), htmlWriter, TRACKED_OFFSETS.get(renderer.getDocument()), maxTrailingBlankLines, SharedDataKeys.RUNNING_TESTS.get(options));
         renderer.dispose();
     }
 

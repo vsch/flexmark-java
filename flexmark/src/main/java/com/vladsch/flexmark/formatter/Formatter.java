@@ -348,7 +348,7 @@ public class Formatter implements IRender {
             sequence = ((SequenceBuilder) output).toSequence(renderer.trackedSequence);
         }
 
-        TrackedOffsetUtils.resolveTrackedOffsets(sequence, markdown, renderer.trackedOffsets.getUnresolvedOffsets(), maxTrailingBlankLines);
+        TrackedOffsetUtils.resolveTrackedOffsets(sequence, markdown, renderer.trackedOffsets.getUnresolvedOffsets(), maxTrailingBlankLines, SharedDataKeys.RUNNING_TESTS.get(options));
     }
 
     /**

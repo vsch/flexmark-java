@@ -37,7 +37,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     public static final DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
 
     final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(SharedDataKeys.RUNNING_TESTS, true)
+            .set(SharedDataKeys.RUNNING_TESTS, false)  // Set to true to get stdout printout of intermediate wrapping information
             .toImmutable();
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
@@ -100,6 +100,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
         public void render(@NotNull Node document, @NotNull Appendable output) {
             BasedSequence input = document.getChars();
             StringBuilder out = new StringBuilder();
+            Boolean inTest = SharedDataKeys.RUNNING_TESTS.get(getOptions());
 
             Pair<BasedSequence, int[]> info = TestUtils.extractMarkup(input);
             BasedSequence sequence = BasedSequence.of(info.getFirst());
@@ -131,7 +132,9 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             int[] offsets = info.getSecond();
             SequenceBuilder builder1 = TestUtils.insertCaretMarkup(sequence, offsets);
 
-            System.out.println(builder1.toStringWithRanges());
+            if (inTest) {
+                System.out.println(builder1.toStringWithRanges());
+            }
 
             for (int offset : offsets) {
                 char c = EDIT_OP_CHAR.get(options);
@@ -150,7 +153,9 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             SequenceBuilder builder = sequence.getBuilder();
             actual.addSegments(builder.getSegmentBuilder());
 
-            System.out.println(builder.toStringWithRanges());
+            if (inTest) {
+                System.out.println(builder.toStringWithRanges());
+            }
 
             List<TrackedOffset> trackedOffsets = formatter.getTrackedOffsets();
             assert trackedOffsets.size() == offsets.length;
