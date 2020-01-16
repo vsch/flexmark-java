@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public abstract class ListItem extends Block implements ParagraphItemContainer, BlankLineContainer {
+public abstract class ListItem extends Block implements ParagraphItemContainer, BlankLineContainer, ParagraphContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence markerSuffix = BasedSequence.NULL;
     private boolean tight = true;
@@ -116,6 +116,17 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
         return !isTight();
     }
 
+    @Override
+    public boolean isParagraphEndWrappingDisabled(Paragraph node) {
+        return getFirstChild() != node && getLastChild() == node || getFirstChild() == node && (getParent() == null || getParent().getLastChildAny(ListItem.class) == this);
+    }
+
+    @Override
+    public boolean isParagraphStartWrappingDisabled(Paragraph node) {
+        return isItemParagraph(node);
+    }
+
+    @Override
     public boolean isParagraphInTightListItem(Paragraph node) {
         if (!isTight()) return false;
 

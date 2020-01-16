@@ -768,7 +768,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example No Suffix Content: 3
+```````````````````````````````` example(No Suffix Content: 3) options(list-spacing-loosen)
 * [ ] task
     * item 2
     
@@ -776,6 +776,7 @@ Document[0, 23]
 * [ ] task
 .
 * [ ] task
+
   * item 2
 
 * [ ] task
@@ -804,7 +805,7 @@ Document[0, 50]
 
 ## Empty List Items
 
-```````````````````````````````` example Empty List Items: 1
+```````````````````````````````` example(Empty List Items: 1) options(list-spacing-loosen)
 * [ ] list item 1
 * [ ] 
 

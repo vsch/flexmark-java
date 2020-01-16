@@ -156,8 +156,9 @@ public class Formatter implements IRender {
     // formatter family override
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DataKey<>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
 
-    // CAUTION: these keys must be set on the Document node being formatted NOT the formatter
-    //  because a formatter instance can be used to format multiple documents while these are document specific.
+    // CAUTION: these keys should be set on the Document node being formatted or the formatter
+    //  however a formatter instance can be used to format multiple documents while these are document specific so unless
+    //  only a single document will be formatted by a formatter instance set them on the document only.
     // {{
     // these are used by table and paragraph wrapping
     public static final DataKey<List<TrackedOffset>> TRACKED_OFFSETS = new DataKey<>("TRACKED_OFFSETS", Collections.emptyList());
@@ -201,7 +202,6 @@ public class Formatter implements IRender {
     @Deprecated
     public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
 
-    final FormatterOptions formatterOptions;
     final private DataHolder options;
     final List<LinkResolverFactory> linkResolverFactories;
     final NodeFormatterDependencies nodeFormatterFactories;
@@ -209,7 +209,6 @@ public class Formatter implements IRender {
 
     Formatter(Builder builder) {
         this.options = builder.toImmutable();
-        this.formatterOptions = new FormatterOptions(this.options);
         this.idGeneratorFactory = builder.htmlIdGeneratorFactory == null ? new HeaderIdGenerator.Factory() : builder.htmlIdGeneratorFactory;
 
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
@@ -276,15 +275,15 @@ public class Formatter implements IRender {
     }
 
     public TranslationHandler getTranslationHandler(TranslationHandlerFactory translationHandlerFactory, HtmlIdGeneratorFactory idGeneratorFactory) {
-        return translationHandlerFactory.create(options, formatterOptions, idGeneratorFactory);
+        return translationHandlerFactory.create(options, idGeneratorFactory);
     }
 
     public TranslationHandler getTranslationHandler(HtmlIdGeneratorFactory idGeneratorFactory) {
-        return new TranslationHandlerImpl(options, formatterOptions, idGeneratorFactory);
+        return new TranslationHandlerImpl(options, idGeneratorFactory);
     }
 
     public TranslationHandler getTranslationHandler() {
-        return new TranslationHandlerImpl(options, formatterOptions, idGeneratorFactory);
+        return new TranslationHandlerImpl(options, idGeneratorFactory);
     }
 
     @NotNull
@@ -322,7 +321,7 @@ public class Formatter implements IRender {
      * @param output appendable to use for the output
      */
     public void render(@NotNull Node node, @NotNull Appendable output) {
-        render(node, output, formatterOptions.maxTrailingBlankLines);
+        render(node, output, MAX_TRAILING_BLANK_LINES.get(options));
     }
 
     /**
@@ -336,10 +335,10 @@ public class Formatter implements IRender {
      */
     public void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
         // NOTE: output to MarkdownWriter is only used to get builder if output is LineAppendable or ISequenceBuilder
-        MarkdownWriter markdown = new MarkdownWriter(output, formatterOptions.formatFlags);
+        MarkdownWriter markdown = new MarkdownWriter(output, FORMAT_FLAGS.get(options));
         MainNodeFormatter renderer = new MainNodeFormatter(options, markdown, node.getDocument(), null);
         renderer.render(node);
-        markdown.appendToSilently(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
+        markdown.appendToSilently(output, MAX_BLANK_LINES.get(options), maxTrailingBlankLines);
 
         // resolve any unresolved tracked offsets that are outside elements which resolve their own
         BasedSequence sequence = node.getDocument().getChars();
@@ -372,7 +371,7 @@ public class Formatter implements IRender {
      * @param output   appendable to use for the output
      */
     public void translationRender(Node document, Appendable output, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
-        translationRender(document, output, formatterOptions.maxTrailingBlankLines, translationHandler, renderPurpose);
+        translationRender(document, output, MAX_TRAILING_BLANK_LINES.get(options), translationHandler, renderPurpose);
     }
 
     /**
@@ -396,9 +395,9 @@ public class Formatter implements IRender {
      */
     public void translationRender(Node document, Appendable output, int maxTrailingBlankLines, TranslationHandler translationHandler, RenderPurpose renderPurpose) {
         translationHandler.setRenderPurpose(renderPurpose);
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(formatterOptions.formatFlags & ~LineAppendable.F_TRIM_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(FORMAT_FLAGS.get(options) & ~LineAppendable.F_TRIM_LEADING_WHITESPACE /*| FormattingAppendable.PASS_THROUGH*/), document.getDocument(), translationHandler);
         renderer.render(document);
-        renderer.flushTo(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
+        renderer.flushTo(output, MAX_BLANK_LINES.get(options), maxTrailingBlankLines);
     }
 
     /**
@@ -408,7 +407,7 @@ public class Formatter implements IRender {
      * @param output    appendable to use for the output
      */
     public void mergeRender(Document[] documents, Appendable output) {
-        mergeRender(documents, output, formatterOptions.maxTrailingBlankLines);
+        mergeRender(documents, output, MAX_TRAILING_BLANK_LINES.get(options));
     }
 
     public void mergeRender(List<Document> documents, Appendable output) {
@@ -456,12 +455,14 @@ public class Formatter implements IRender {
         }
 
         MergeContextImpl mergeContext = new MergeContextImpl(documents, translationHandlers);
+        int formatFlags = FORMAT_FLAGS.get(this.options);
+        int maxBlankLines = MAX_BLANK_LINES.get(this.options);
 
         mergeContext.forEachPrecedingDocument(null, (context, document, index) -> {
             TranslationHandler translationHandler = (TranslationHandler) context;
 
             translationHandler.setRenderPurpose(RenderPurpose.TRANSLATION_SPANS);
-            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatterOptions.formatFlags), document, translationHandler);
+            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatFlags), document, translationHandler);
             renderer.render(document);
             translationHandlersTexts[index] = translationHandler.getTranslatingTexts();
         });
@@ -474,10 +475,10 @@ public class Formatter implements IRender {
             translationHandler.setRenderPurpose(RenderPurpose.TRANSLATED_SPANS);
             translationHandler.setTranslatedTexts(translationHandlersTexts[index]);
 
-            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatterOptions.formatFlags), document, translationHandler);
+            MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, new MarkdownWriter(formatFlags), document, translationHandler);
             renderer.render(document);
             StringBuilder sb = new StringBuilder();
-            renderer.flushTo(sb, formatterOptions.maxBlankLines, maxTrailingBlankLines);
+            renderer.flushTo(sb, maxBlankLines, maxTrailingBlankLines);
 
             translatedDocuments[index] = Parser.builder(mergeOptions).build().parse(sb.toString());
         });
@@ -489,11 +490,11 @@ public class Formatter implements IRender {
 
             translationHandler.setRenderPurpose(RenderPurpose.TRANSLATED);
 
-            MarkdownWriter markdownWriter = new MarkdownWriter(formatterOptions.formatFlags);
+            MarkdownWriter markdownWriter = new MarkdownWriter(formatFlags);
             MainNodeFormatter renderer = new MainNodeFormatter(mergeOptions, markdownWriter, document, translationHandler);
             renderer.render(document);
             markdownWriter.blankLine();
-            renderer.flushTo(output, formatterOptions.maxBlankLines, maxTrailingBlankLines);
+            renderer.flushTo(output, maxBlankLines, maxTrailingBlankLines);
         });
     }
 
@@ -641,17 +642,19 @@ public class Formatter implements IRender {
         final TrackedOffsetList trackedOffsets;
         final BasedSequence trackedSequence;
         final boolean restoreTrackedSpaces;
+        final FormatterOptions formatterOptions;
 
         MainNodeFormatter(DataHolder options, MarkdownWriter out, Document document, TranslationHandler translationHandler) {
             super(out);
             this.translationHandler = translationHandler;
             this.options = new ScopedDataSet(document, options);
+            this.formatterOptions = new FormatterOptions(this.options);
             this.document = document;
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(FormattingPhase.values().length);
             Set<Class<?>> collectNodeTypes = new HashSet<>(100);
 
-            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options);
+            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(this.options);
             this.linkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
 
             isFormatControlEnabled = FORMATTER_TAGS_ENABLED.get(this.options);
@@ -714,9 +717,10 @@ public class Formatter implements IRender {
                 }
             }
 
-            restoreTrackedSpaces = RESTORE_TRACKED_SPACES.get(document);
-            BasedSequence sequence = TRACKED_SEQUENCE.get(document);
-            List<TrackedOffset> offsets = TRACKED_OFFSETS.get(document);
+            restoreTrackedSpaces = RESTORE_TRACKED_SPACES.get(this.options);
+            BasedSequence sequence = TRACKED_SEQUENCE.get(this.options);
+            List<TrackedOffset> offsets = TRACKED_OFFSETS.get(this.options);
+
             trackedSequence = sequence.isEmpty() ? document.getChars() : sequence;
             trackedOffsets = offsets.isEmpty() ? TrackedOffsetList.EMPTY_LIST : TrackedOffsetList.create(trackedSequence, offsets);
 
@@ -730,7 +734,7 @@ public class Formatter implements IRender {
             this.blockQuoteLikePredicate = CharPredicate.anyOf(charSequence);
 
             // generate ids by default even if they are not going to be used
-            this.idGenerator = GENERATE_HEADER_ID.get(options) ? idGeneratorFactory != null ? idGeneratorFactory.create(this) : new HeaderIdGenerator.Factory().create(this) : null;
+            this.idGenerator = GENERATE_HEADER_ID.get(this.options) ? idGeneratorFactory != null ? idGeneratorFactory.create(this) : new HeaderIdGenerator.Factory().create(this) : null;
 
             if (idGenerator != null) {
                 idGenerator.generateIds(document);

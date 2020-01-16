@@ -593,10 +593,10 @@ list spacing
 ```````````````````````````````` example(Lists: 22) options(list-spacing-tighten)
 * item 1
 * item 2
+
   * item 2.1
   
   * item 2.2
-  
 * item 3
 .
 * item 1
@@ -612,10 +612,10 @@ list spacing
 ```````````````````````````````` example(Lists: 23) options(list-spacing-tighten)
 * item 1
 * item 2
+
   * item 2.1
   
   * item 2.2
-  
 * item 3
 
 paragraph
@@ -633,7 +633,9 @@ paragraph
 
 ```````````````````````````````` example(Lists: 24) options(list-spacing-tight)
 * item 1
+
 * item 2
+
   * item 2.1
   
   * item 2.2
@@ -2240,6 +2242,97 @@ Document[0, 53]
     OrderedListItem[34, 36] open:[34, 36, "1."] isTight
   Paragraph[38, 53]
     Text[38, 53] chars:[38, 53, "not a …  item"]
+````````````````````````````````
+
+
+## Format Control
+
+```````````````````````````````` example(Format Control: 1) options(formatter-tags-enabled, margin[72])
+
+<!-- @formatter:off -->
+
+<!-- @formatter:on -->
+.
+<!-- @formatter:off -->
+<!-- @formatter:on -->
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Control: 2) options(formatter-tags-enabled, margin[72])
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+
+<!-- @formatter:off -->
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+
+<!-- @formatter:on -->
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At
+
+<!-- @formatter:off -->
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+<!-- @formatter:on -->
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Control: 3) options(formatter-tags-enabled, fenced-code-minimize, margin[72])
+<!-- @formatter:off -->
+
+* `fun appendListQuery(out: Appendable, params: Array<out Pair<String, Any?>>, alias: String? = null): Appendable`
+
+<!-- @formatter:on -->
+
+* `fun appendListQuery(out: Appendable, params: Array<out Pair<String, Any?>>, alias: String? = null): Appendable`
+
+```kotlin
+   data class ValidData(
+      val processId: Int,
+   )
+```
+.
+<!-- @formatter:off -->
+* `fun appendListQuery(out: Appendable, params: Array<out Pair<String, Any?>>, alias: String? = null): Appendable`
+<!-- @formatter:on -->
+* `fun appendListQuery(out: Appendable, params: Array<out Pair<String,
+  Any?>>, alias: String? = null): Appendable`
+
+```kotlin
+data class ValidData(
+   val processId: Int,
+)
+```
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Control: 4) options(formatter-tags-enabled, margin[72])
+* Add: to `BasedSequence`
+  <!-- @formatter:off -->
+  * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+  <!-- @formatter:on -->
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+.
+* Add: to `BasedSequence`
+  <!-- @formatter:off -->
+  * Add: `BasedSequence.extendToEndOfLine(CharSequence eolChars, boolean includeEol)` - extend end to end of line in basedSequence
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars, boolean includeEol)` - extend start to start of line in basedSequence
+  <!-- @formatter:on -->
+  * Add: `BasedSequence.extendToStartOfLine(CharSequence eolChars,
+    boolean includeEol)` - extend start to start of line in
+    basedSequence
+
 ````````````````````````````````
 
 

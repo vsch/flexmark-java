@@ -153,7 +153,6 @@ indented code
 1. numbered item 1
 
 2. numbered item 2
-
     1. numbered item 2
 
                with uneven indent
@@ -182,6 +181,98 @@ lazy continuation
            with uneven indent
      indented code
 1. numbered item 1   
+   1. numbered item 2   
+   
+   ~~~info
+           with uneven indent
+              with uneven indent
+        indented code
+   ~~~ 
+   
+           with uneven indent
+              with uneven indent
+        indented code
+.
+# Heading #
+
+-----
+
+paragraph text
+lazy continuation
++ list item
+
+    > block quote
+    > lazy continuation
+
+`````` info
+   with uneven indent
+      with uneven indent
+indented code
+``````
+
+       with uneven indent
+          with uneven indent
+    indented code
+
+1. numbered item 1
+    1. numbered item 2
+
+    `````` info
+       with uneven indent
+          with uneven indent
+    indented code
+    ``````
+
+           with uneven indent
+              with uneven indent
+        indented code
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Formatter: 5) options(list-spacing-loosen, format-fixed-indent, atx-space-add, atx-trailing-add, list-no-renumber-items, block-quote-compact-with-space, fenced-code-spaced-info, list-bullet-plus, fenced-code-marker-backtick, fenced-code-marker-length, fenced-code-minimize, indented-code-minimize)
+1. numbered item 1   
+    
+2. numbered item 2
+   1. numbered item 2   
+   
+             with uneven indent
+                with uneven indent
+          indented code
+.
+1. numbered item 1
+
+2. numbered item 2
+
+    1. numbered item 2
+
+               with uneven indent
+                  with uneven indent
+            indented code
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Formatter: 6) options(format-fixed-indent, atx-space-add, atx-trailing-add, list-no-renumber-items, block-quote-compact-with-space, fenced-code-spaced-info, list-bullet-plus, fenced-code-marker-backtick, fenced-code-marker-length, fenced-code-minimize, indented-code-minimize)
+#Heading
+-----
+paragraph text 
+lazy continuation
+* list item
+  > block quote
+  lazy continuation
+
+~~~info
+        with uneven indent
+           with uneven indent
+     indented code
+~~~ 
+
+        with uneven indent
+           with uneven indent
+     indented code
+1. numbered item 1   
+
    1. numbered item 2   
    
    ~~~info
@@ -499,7 +590,7 @@ paragraph
 ````````````````````````````````
 
 
-list spacing
+list spacing as is
 
 ```````````````````````````````` example Lists: 16
 * item 1
@@ -511,9 +602,7 @@ list spacing
 * item 3
 .
 * item 1
-
 * item 2
-
   * item 2.1
 
   * item 2.2
@@ -523,29 +612,30 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 17) options(list-spacing-loose)
+```````````````````````````````` example(Lists: 17) options(list-spacing-loosen)
 * item 1
 * item 2
+  <!--comment-->  
+    
   * item 2.1
   
   * item 2.2
-  
 * item 3
 .
 * item 1
-
 * item 2
-
+  <!--comment-->
   * item 2.1
 
   * item 2.2
-
 * item 3
 
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 18) options(list-spacing-tight)
+list spacing tighten
+
+```````````````````````````````` example(Lists: 18) options(list-spacing-tighten)
 * item 1
 * item 2
   * item 2.1
@@ -557,6 +647,7 @@ list spacing
 * item 1
 * item 2
   * item 2.1
+
   * item 2.2
 * item 3
 
@@ -585,13 +676,12 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 20) options(list-spacing-tighten)
+```````````````````````````````` example(Lists: 20) options(list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
   
   * item 2.2
-  
 * item 3
 .
 * item 1
@@ -604,29 +694,109 @@ list spacing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 21) options(list-spacing-tighten)
+```````````````````````````````` example(Lists: 21) options(list-spacing-loose)
 * item 1
 * item 2
   * item 2.1
-  
-  * item 2.2
-  
-* item 3
 
-paragraph
+  * item 2.2
+* item 3
 .
 * item 1
+
 * item 2
+
   * item 2.1
 
   * item 2.2
+
 * item 3
 
-paragraph
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Lists: 22) options(list-spacing-tight)
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+.
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+* item 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 23) options(list-spacing-loosen)
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+.
+* item 1
+
+* item 2
+
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 24) options(list-spacing-tighten)
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+.
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+* item 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 25) options(list-spacing-tighten)
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+
+paragraph
+.
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+* item 3
+
+paragraph
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 26) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -649,7 +819,27 @@ paragraph
 
 list family changing
 
-```````````````````````````````` example(Lists: 23) options(format-fixed-indent)
+```````````````````````````````` example(Lists: 27) options(format-fixed-indent)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+* item 2
+    * item 2.1
+
+    * item 2.2
+
+* item 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 28) options(format-fixed-indent, list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
@@ -671,7 +861,7 @@ list family changing
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 24
+```````````````````````````````` example Lists: 29
 - [link](link.txt)
 
 next line
@@ -682,7 +872,7 @@ next line
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 25
+```````````````````````````````` example Lists: 30
 - [link](link.txt)
 
 next line
@@ -690,6 +880,123 @@ next line
 - [link](link.txt)
 
 next line
+````````````````````````````````
+
+
+Should not add blank line after last child of list item.
+
+```````````````````````````````` example(Lists: 31) options(list-spacing-as-is, margin[72])
+1. List item with paragraph child item without blank line after is a tight list.
+
+   Paragraph child item.
+2. Following list item.
+3. Another list item.
+
+.
+1. List item with paragraph child item without blank line after is a
+   tight list.
+
+   Paragraph child item.
+2. Following list item.
+3. Another list item.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 32) options(list-spacing-tight, margin[72])
+1. List item with paragraph child item without blank line after is a tight list.
+
+   Paragraph child item.
+2. Following list item.
+3. Another list item.
+
+.
+1. List item with paragraph child item without blank line after is a
+   tight list.
+
+   Paragraph child item.
+2. Following list item.
+3. Another list item.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 33) options(list-spacing-tight, margin[72])
+1. List item with paragraph child item without blank line after is a tight list.
+
+   Paragraph child item.
+
+2. Following list item.
+
+3. Another list item.
+
+.
+1. List item with paragraph child item without blank line after is a
+   tight list.
+
+   Paragraph child item.
+2. Following list item.
+3. Another list item.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 34) options(list-spacing-loosen, margin[72])
+1. List item with paragraph child item without blank line after is a tight list.
+
+   Paragraph child item.
+2. Following list item.
+3. Another list item.
+
+.
+1. List item with paragraph child item without blank line after is a
+   tight list.
+
+   Paragraph child item.
+2. Following list item.
+3. Another list item.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 35) options(list-spacing-loosen, margin[72])
+1. List item with paragraph child item without blank line after is a tight list.
+
+   Paragraph child item.
+
+2. Following list item.
+3. Another list item.
+
+.
+1. List item with paragraph child item without blank line after is a
+   tight list.
+
+   Paragraph child item.
+
+2. Following list item.
+
+3. Another list item.
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 36) options(list-spacing-loose, margin[72])
+1. List item with paragraph child item without blank line after is a tight list.
+
+   Paragraph child item.
+2. Following list item.
+3. Another list item.
+
+.
+1. List item with paragraph child item without blank line after is a
+   tight list.
+
+   Paragraph child item.
+
+2. Following list item.
+
+3. Another list item.
+
 ````````````````````````````````
 
 
@@ -2451,7 +2758,7 @@ text with
 
 ## Format Conversion
 
-```````````````````````````````` example Format Conversion: 1
+```````````````````````````````` example(Format Conversion: 1) options(list-spacing-loosen)
 Adds missing editor actions for end of word navigation but that is just the beginning:
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
@@ -2492,7 +2799,6 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
   automatically.
-
 * Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
   match case and style of identifier at destination when you paste, undo to get results before
   MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
@@ -2504,20 +2810,15 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
   Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
   fields, getters and setters.
-
 * Enable Auto Line Selections and select full lines without loosing time or column position by
   moving the caret to the start of line when selecting or pasting. **Choose** whether you want
   to **paste full line** selections: **above** or **below** the current line regardless of the
   caret's column.
-
 * Toggle between selection and multiple carets on selected lines to save time re-selecting the
   same text again.
-
 * Filter multiple carets saves you time when creating multiple carets by removing carets on
   blank or comment lines so you can edit only code lines.
-
 * Enhanced Paste from History dialog:
-
   * **combine**, **arrange** and **reverse** the order of content entries
   * **combine multiple** clipboard contents **with caret information intact**
   * **paste and re-create multiple carets** from information already stored on the clipboard
@@ -2574,7 +2875,6 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
 * Enable Auto Indent Lines after move line/selection up or down actions to have them indented
     automatically.
-
 * Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
     match case and style of identifier at destination when you paste, undo to get results before
     MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
@@ -2586,20 +2886,15 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
     Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
     fields, getters and setters.
-
 * Enable Auto Line Selections and select full lines without loosing time or column position by
     moving the caret to the start of line when selecting or pasting. **Choose** whether you want
     to **paste full line** selections: **above** or **below** the current line regardless of the
     caret's column.
-
 * Toggle between selection and multiple carets on selected lines to save time re-selecting the
     same text again.
-
 * Filter multiple carets saves you time when creating multiple carets by removing carets on
     blank or comment lines so you can edit only code lines.
-
 * Enhanced Paste from History dialog:
-
     * **combine**, **arrange** and **reverse** the order of content entries
     * **combine multiple** clipboard contents **with caret information intact**
     * **paste and re-create multiple carets** from information already stored on the clipboard
@@ -2735,7 +3030,6 @@ Adds missing editor actions for end of word navigation but that is just the begi
 
   Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
   fields, getters and setters.
-
 * Enable Auto Line Selections and select full lines without loosing time or column position by
   moving the caret to the start of line when selecting or pasting. **Choose** whether you want
   to **paste full line** selections: **above** or **below** the current line regardless of the
@@ -3066,7 +3360,7 @@ Document[0, 33]
 
 ## Empty List Items
 
-```````````````````````````````` example Empty List Items: 1
+```````````````````````````````` example(Empty List Items: 1) options(list-spacing-loosen)
 * list item 1
 * 
 

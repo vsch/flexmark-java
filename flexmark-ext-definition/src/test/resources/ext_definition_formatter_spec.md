@@ -371,7 +371,7 @@ Term 2
 
 A mix:
 
-```````````````````````````````` example Definition List Extension: 15
+```````````````````````````````` example(Definition List Extension: 15) options(list-spacing-loosen)
 Term 1
 Term 2
 
@@ -425,7 +425,6 @@ Term 3
 
 :   Definition 6 paragraph 1 line 1 ...
     Definition 6 paragraph 1 line 2
-
 :   Definition 7 (no paragraph)
 :   Definition 8 paragraph 1 line 1 (forced paragraph) ...
     Definition 8 paragraph 1 line 2
@@ -437,7 +436,6 @@ Term 4
     Definition 9 paragraph 1 line 2
 
     Definition 9 paragraph 2 line 1
-
 :   Definition 10 (no paragraph)
 ````````````````````````````````
 
@@ -591,7 +589,7 @@ Definition Term
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 24
+```````````````````````````````` example(Definition List Extension: 24) options(list-spacing-loosen)
 Term 1
 Term 2
 
@@ -645,7 +643,6 @@ Term 3
 
 :   Definition 6 paragraph 1 line 1 ...
     Definition 6 paragraph 1 line 2
-
 :   Definition 7 (no paragraph)
 :   Definition 8 paragraph 1 line 1 (forced paragraph) ...
     Definition 8 paragraph 1 line 2
@@ -657,7 +654,6 @@ Term 4
     Definition 9 paragraph 1 line 2
 
     Definition 9 paragraph 2 line 1
-
 :   Definition 10 (no paragraph)
 ````````````````````````````````
 

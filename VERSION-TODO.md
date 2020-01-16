@@ -8,7 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.108](#next-059108)
+- [0.59.108](#059108)
 - [0.59.106](#059106)
 - [0.59.104](#059104)
 - [0.59.102](#059102)
@@ -212,8 +212,20 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.108
+## 0.59.108
 
+* Fix: Change the meaning of `ListSpacing.LOOSEN` and `ListSpacing.TIGHTEN` for formatter with
+  `Parser.BLANK_LINES_IN_AST` set to true:
+  * `ListSpacing.LOOSEN` adds blank lines only if list is loose because it has items in the list
+    followed by blank lines.
+
+    :warning: This will work as expected only if `Parser.LISTS_AUTO_LOOSE` is `true`. Otherwise,
+    a blank line will only be inserted if there is already a blank line after the item, same as
+    selecting `ListSpacing.AS_IS`.
+  * `ListSpacing.TIGHTEN` removes blank lines which are not significant in determining whether
+    the list is loose so as to make the list as tight as possible.
+* Add: `ParagraphItemContainer.isParagraphInTightListItem(Paragraph)` to allow testing for
+  paragraph items not wrapped without having list options.
 * Fix: remove debug exception in `MarkdownTable` when an offset is not found in tracked offsets.
 * Fix: clean up output to stdout in tests for `MarkdownParagraph`
 

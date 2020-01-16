@@ -94,4 +94,9 @@ public class EnumeratedReferenceBlock extends Block implements ReferenceNode<Enu
     public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
         return true;
     }
+
+    @Override
+    public boolean isParagraphInTightListItem(Paragraph node) {
+        return true;
+    }
 }

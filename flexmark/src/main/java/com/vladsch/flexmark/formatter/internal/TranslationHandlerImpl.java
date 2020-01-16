@@ -54,8 +54,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
     private Function<String, CharSequence> myNonTranslatingPostProcessor = null;
     private MergeContext myMergeContext = null;
 
-    public TranslationHandlerImpl(DataHolder options, FormatterOptions formatterOptions, HtmlIdGeneratorFactory idGeneratorFactory) {
-        myFormatterOptions = formatterOptions;
+    public TranslationHandlerImpl(DataHolder options, HtmlIdGeneratorFactory idGeneratorFactory) {
+        myFormatterOptions = new FormatterOptions(options);
         myIdGeneratorFactory = idGeneratorFactory;
         myNonTranslatingTexts = new HashMap<>();
         myAnchorTexts = new HashMap<>();
@@ -69,7 +69,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         myTranslatedSpans = new ArrayList<>();
         myTranslatingPlaceholders = new ArrayList<>();
         myNonTranslatingSpans = new ArrayList<>();
-        myPlaceHolderMarkerPattern = Pattern.compile(formatterOptions.translationExcludePattern); //Pattern.compile("^[\\[\\](){}<>]*_{1,2}\\d+_[\\[\\](){}<>]*$");
+        myPlaceHolderMarkerPattern = Pattern.compile(myFormatterOptions.translationExcludePattern); //Pattern.compile("^[\\[\\](){}<>]*_{1,2}\\d+_[\\[\\](){}<>]*$");
         myTranslationStore = new MutableDataSet();
     }
 

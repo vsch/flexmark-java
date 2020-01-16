@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Factory for instantiating an HTML id generator
@@ -12,5 +13,5 @@ public interface HeaderIdGeneratorFactory extends HtmlIdGeneratorFactory {
      * @param context the context for link resolution
      * @return an HTML id generator.
      */
-    @NotNull HtmlIdGenerator create(LinkResolverContext context);
+    @NotNull HtmlIdGenerator create(@NotNull LinkResolverContext context);
 }

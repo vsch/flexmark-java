@@ -4,7 +4,9 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
+import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.format.options.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Pattern;
@@ -64,6 +66,7 @@ public class FormatterOptions {
     public final String formatterOffTag;
     public final boolean formatterTagsEnabled;
     public final boolean formatterTagsAcceptRegexp;
+    public final boolean blankLinesInAst;
     public final @Nullable Pattern linkMarkerCommentPattern;
 
     public FormatterOptions(DataHolder options) {
@@ -122,5 +125,6 @@ public class FormatterOptions {
         escapeSpecialCharsOnWrap = Formatter.ESCAPE_SPECIAL_CHARS.get(options);
         escapeNumberedLeadInOnWrap = Formatter.ESCAPE_NUMBERED_LEAD_IN.get(options);
         unescapeSpecialCharsOnWrap = Formatter.UNESCAPE_SPECIAL_CHARS.get(options);
+        blankLinesInAst = Parser.BLANK_LINES_IN_AST.get(options);
     }
 }

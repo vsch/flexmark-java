@@ -131,4 +131,9 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
     public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
         return false;
     }
+
+    @Override
+    public boolean isParagraphInTightListItem(Paragraph node) {
+        return false;
+    }
 }

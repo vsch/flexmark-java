@@ -21,6 +21,7 @@ public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
     public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
+            .set(Parser.BLANK_LINES_IN_AST, true)
             .toImmutable();
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();

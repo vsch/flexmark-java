@@ -1,16 +1,9 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.ast.ListBlock;
-import com.vladsch.flexmark.ast.ListItem;
-import com.vladsch.flexmark.ast.OrderedList;
-import com.vladsch.flexmark.ast.Paragraph;
-import com.vladsch.flexmark.ast.SoftLineBreak;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.BlankLine;
-import com.vladsch.flexmark.util.ast.BlockQuoteLike;
-import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
@@ -29,6 +22,7 @@ import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +31,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.util.format.options.ListSpacing.*;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_LEADING_WHITESPACE;
 import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_TRAILING_WHITESPACE;
@@ -220,26 +215,17 @@ public class FormatterUtils {
             case AS_IS:
                 break;
             case LOOSE:
-                itemSpacing = ListSpacing.LOOSE;
+                itemSpacing = LOOSE;
                 break;
             case TIGHT:
                 itemSpacing = ListSpacing.TIGHT;
                 break;
             case LOOSEN:
-                itemSpacing = node.isLoose() ? ListSpacing.LOOSE : ListSpacing.TIGHT;
+                itemSpacing = hasLooseItems(itemList) ? LOOSE : ListSpacing.TIGHT;
                 break;
-            case TIGHTEN: {
-                itemSpacing = ListSpacing.LOOSE;
-                for (Node item : itemList) {
-                    if (item instanceof ListItem) {
-                        if (((ListItem) item).isOwnTight() && item.getNext() != null) {
-                            itemSpacing = ListSpacing.TIGHT;
-                            break;
-                        }
-                    }
-                }
+            case TIGHTEN:
+                itemSpacing = hasLooseItems(itemList) ? AS_IS : ListSpacing.TIGHT;
                 break;
-            }
         }
 
         document.remove(LIST_ALIGN_NUMERIC);
@@ -266,9 +252,10 @@ public class FormatterUtils {
             }
         }
 
-        document.set(LIST_ITEM_SPACING, itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE) ? ListSpacing.LOOSE : itemSpacing);
+        document.set(LIST_ITEM_SPACING, itemSpacing == LOOSE && (listSpacing == null || listSpacing == LOOSE) ? LOOSE : itemSpacing);
         for (Node item : itemList) {
-            if (itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE)) markdown.blankLine();
+            if (itemSpacing == LOOSE && (listSpacing == null || listSpacing == LOOSE))
+                markdown.blankLine();
             context.render(item);
         }
         document.set(LIST_ITEM_SPACING, listSpacing);
@@ -278,6 +265,89 @@ public class FormatterUtils {
         if (!node.isOrDescendantOfType(ListItem.class)) {
             markdown.tailBlankLine();
         }
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public static void renderLooseParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
+        markdown.blankLine();
+        renderLooseItemParagraph(node, context, markdown);
+    }
+
+    public static boolean isFollowedByBlankLine(@Nullable Node node) {
+        while (node != null) {
+            if (node.getNextAnyNot(HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) instanceof BlankLine) return true;
+            if (node.getNextAnyNot(BlankLine.class, HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) != null) return false;
+            node = node.getParent();
+        }
+        return false;
+    }
+
+    public static boolean isNotLastItem(@Nullable Node node) {
+        while (node != null && !(node instanceof Document)) {
+            if (node.getNextAnyNot(BlankLine.class, HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) != null) return true;
+            node = node.getParent();
+        }
+        return false;
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public static void renderLooseItemParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
+        renderTextBlockParagraphLines(node, context, markdown);
+        Block parent = node.getParent();
+        if (parent instanceof ListItem) {
+            if (context.getFormatterOptions().blankLinesInAst) {
+                boolean addBlankLine;
+                boolean canAddTailBlankLine = !((ParagraphContainer) parent).isParagraphEndWrappingDisabled(node);
+
+                switch (context.getFormatterOptions().listSpacing) {
+                    case LOOSEN:
+                        addBlankLine = parent.getParent() instanceof ListBlock && ((ListBlock) parent.getParent()).isLoose() && hasLooseItems(parent.getParent().getChildren())
+                                && (isFollowedByBlankLine(node) && isNotLastItem(parent)
+                                || !((ListItem) parent).isOwnTight()
+                                || ((ListItem) parent).isItemParagraph(node) && parent.getFirstChild() != null && parent.getFirstChild().getNext() != null)
+                        ;
+                        break;
+
+                    case LOOSE:
+                        addBlankLine = true;
+                        break;
+
+                    case TIGHTEN:
+                        addBlankLine = canAddTailBlankLine && (isFollowedByBlankLine(node) && isNotLastItem(node));
+                        break;
+
+                    case AS_IS:
+                        addBlankLine = isFollowedByBlankLine(node) && isNotLastItem(parent);
+                        break;
+
+                    case TIGHT:
+                    default:
+                        addBlankLine = false;
+                        break;
+                }
+
+                if (addBlankLine) {
+                    markdown.tailBlankLine();
+                }
+            } else {
+                if (context.getFormatterOptions().listSpacing != TIGHTEN || parent.getNext() != null) {
+                    markdown.tailBlankLine();
+                }
+            }
+        } else {
+            markdown.tailBlankLine();
+        }
+    }
+
+    static boolean hasLooseItems(Iterable<Node> itemList) {
+        for (Node item : itemList) {
+            if (item instanceof ListItem) {
+                if (!((ListItem) item).isOwnTight() && item.getNext() != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static void renderListItem(
@@ -433,7 +503,7 @@ public class FormatterUtils {
                     context.render(childNode);
                 }
 
-                if (addBlankLineLooseItems && (node.isLoose() || LIST_ITEM_SPACING.get(context.getDocument()) == ListSpacing.LOOSE)) {
+                if (addBlankLineLooseItems && (node.isLoose() && context.getFormatterOptions().listSpacing != AS_IS || context.getFormatterOptions().listSpacing == LOOSE)) {
                     markdown.tailBlankLine();
                 }
             } else {
@@ -551,19 +621,6 @@ public class FormatterUtils {
                 markdown.line();
             }
         }
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public static void renderLooseParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.blankLine();
-        renderTextBlockParagraphLines(node, context, markdown);
-        markdown.tailBlankLine();
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public static void renderLooseItemParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderTextBlockParagraphLines(node, context, markdown);
-        markdown.tailBlankLine();
     }
 
     public static void renderBlockQuoteLike(BlockQuoteLike node, NodeFormatterContext context, MarkdownWriter markdown) {

@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.Disposable;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,13 +20,68 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     boolean noDupedDashes;
     boolean nonAsciiToLowercase;
 
+    public HeaderIdGenerator() {
+        this(null);
+    }
+
+
+    public HeaderIdGenerator(@Nullable DataHolder options) {
+        resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.get(options);
+        toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.get(options);
+        nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.get(options);
+        noDupedDashes = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES.get(options);
+        nonAsciiToLowercase = HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE.get(options);
+    }
+
     @Override
     public void dispose() {
         headerBaseIds = null;
     }
 
+    public boolean isResolveDupes() {
+        return resolveDupes;
+    }
+
+    public void setResolveDupes(boolean resolveDupes) {
+        this.resolveDupes = resolveDupes;
+    }
+
+    public String getToDashChars() {
+        return toDashChars;
+    }
+
+    public void setToDashChars(String toDashChars) {
+        this.toDashChars = toDashChars;
+    }
+
+    public String getNonDashChars() {
+        return nonDashChars;
+    }
+
+    public void setNonDashChars(String nonDashChars) {
+        this.nonDashChars = nonDashChars;
+    }
+
+    public boolean isNoDupedDashes() {
+        return noDupedDashes;
+    }
+
+    public void setNoDupedDashes(boolean noDupedDashes) {
+        this.noDupedDashes = noDupedDashes;
+    }
+
+    public boolean isNonAsciiToLowercase() {
+        return nonAsciiToLowercase;
+    }
+
+    public void setNonAsciiToLowercase(boolean nonAsciiToLowercase) {
+        this.nonAsciiToLowercase = nonAsciiToLowercase;
+    }
+
     @Override
     public void generateIds(Document document) {
+        headerBaseIds.clear();
+
         resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.get(document);
         toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.get(document);
         nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.get(document);
@@ -124,7 +180,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     public static class Factory implements HeaderIdGeneratorFactory {
         @NotNull
         @Override
-        public HeaderIdGenerator create(LinkResolverContext context) {
+        public HeaderIdGenerator create(@NotNull LinkResolverContext context) {
             return new HeaderIdGenerator();
         }
 

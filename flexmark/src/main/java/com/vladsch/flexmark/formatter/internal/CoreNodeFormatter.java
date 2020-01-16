@@ -588,26 +588,30 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 markdown.tailBlankLine();
             }
         } else {
-            if (node.getParent() instanceof ParagraphContainer) {
-                boolean startWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphStartWrappingDisabled(node);
-                boolean endWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphEndWrappingDisabled(node);
-                if (startWrappingDisabled || endWrappingDisabled) {
-                    if (!startWrappingDisabled) markdown.blankLine();
-                    FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
-                    if (!endWrappingDisabled) markdown.tailBlankLine();
+            if (!(node.getParent() instanceof ParagraphItemContainer)) {
+                if (node.getParent() instanceof ParagraphContainer) {
+                    boolean startWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphStartWrappingDisabled(node);
+                    boolean endWrappingDisabled = ((ParagraphContainer) node.getParent()).isParagraphEndWrappingDisabled(node);
+                    if (startWrappingDisabled || endWrappingDisabled) {
+                        if (!startWrappingDisabled) markdown.blankLine();
+                        FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
+                        if (!endWrappingDisabled) markdown.tailBlankLine();
+                    } else {
+                        FormatterUtils.renderLooseParagraph(node, context, markdown);
+                    }
                 } else {
-                    FormatterUtils.renderLooseParagraph(node, context, markdown);
-                }
-            } else {
-                if (!(node.getParent() instanceof ParagraphItemContainer)) {
                     if (!node.isTrailingBlankLine() && (node.getNext() == null || node.getNext() instanceof ListBlock)) {
                         FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
                     } else {
                         FormatterUtils.renderLooseParagraph(node, context, markdown);
                     }
-                } else {
-                    boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
-                    if (isItemParagraph) {
+                }
+            } else {
+                boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
+                if (isItemParagraph) {
+                    if (formatterOptions.blankLinesInAst) {
+                        FormatterUtils.renderLooseItemParagraph(node, context, markdown);
+                    } else {
                         ListSpacing itemSpacing = FormatterUtils.LIST_ITEM_SPACING.get(context.getDocument());
                         if (itemSpacing == ListSpacing.TIGHT) {
                             FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
@@ -624,9 +628,9 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                                 FormatterUtils.renderTextBlockParagraphLines(node, context, markdown);
                             }
                         }
-                    } else {
-                        FormatterUtils.renderLooseParagraph(node, context, markdown);
                     }
+                } else {
+                    FormatterUtils.renderLooseParagraph(node, context, markdown);
                 }
             }
         }
@@ -702,7 +706,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         } else {
             markdown.blankLine();
             // FIX: this really needs to be parsed, but it is not done in the parser
-            render((HtmlBlockBase)node, context, markdown);
+            render((HtmlBlockBase) node, context, markdown);
             markdown.tailBlankLine();
         }
     }
