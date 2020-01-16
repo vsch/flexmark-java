@@ -21,6 +21,7 @@ import org.junit.runners.Suite;
         PlainSegmentBuilderTest.class,
         MappedRichSequenceTest.class,
         RepeatedSequenceTest.class,
+        IRichSequenceBaseTest.class,
         BaseSequenceEntryTest.class,
         MappedBasedSequenceTest.class,
         PrefixedSubSequenceTest.class,

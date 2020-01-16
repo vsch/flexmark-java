@@ -8,6 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.110](#next-059110)
 - [0.59.108](#059108)
 - [0.59.106](#059106)
 - [0.59.104](#059104)
@@ -211,6 +212,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.110
+
+* Add: `IRichSequence.padding` to return the required padding sequence.
+* Fix: `IRichSequence.padStart` was not padding the sequence but only returned the required
+  padding.
 
 ## 0.59.108
 

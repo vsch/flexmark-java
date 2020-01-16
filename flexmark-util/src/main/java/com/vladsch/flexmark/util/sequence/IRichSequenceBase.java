@@ -408,25 +408,39 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull
     @Override
-    final public T padStart(int length, char pad) {
-        return length <= length() ? (T) this : sequenceOf(RepeatedSequence.repeatOf(pad, length - length()));
+    final public T padding(int length, char pad) {
+        return length <= length() ? nullSequence() : sequenceOf(RepeatedSequence.repeatOf(pad, length - length()));
     }
 
     @NotNull
     @Override
-    final public T padEnd(int length, char pad) {
-        return length <= length() ? (T) this : append(RepeatedSequence.repeatOf(pad, length - length()));
-    }
-
-    @NotNull
-    @Override
-    final public T padStart(int length) {
+    final public T padding(int length) {
         return padStart(length, ' ');
     }
 
     @NotNull
     @Override
-    final public T padEnd(int length) {
+    public T padStart(int length, char pad) {
+        T padding = padding(length, pad);
+        return padding.isEmpty() ? (T) this : getBuilder().append(padding).append(this).toSequence();
+    }
+
+    @NotNull
+    @Override
+    public T padEnd(int length, char pad) {
+        T padding = padding(length, pad);
+        return padding.isEmpty() ? (T) this : getBuilder().append(this).append(padding).toSequence();
+    }
+
+    @NotNull
+    @Override
+    public T padStart(int length) {
+        return padStart(length, ' ');
+    }
+
+    @NotNull
+    @Override
+    public T padEnd(int length) {
         return padEnd(length, ' ');
     }
 
