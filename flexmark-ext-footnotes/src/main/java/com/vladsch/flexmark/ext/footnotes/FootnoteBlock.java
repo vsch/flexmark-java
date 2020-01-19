@@ -70,7 +70,7 @@ public class FootnoteBlock extends Block implements ReferenceNode<FootnoteReposi
 
     @Override
     public void getAstExtra(@NotNull StringBuilder out) {
-        out.append(" ordinal: " + footnoteOrdinal + " ");
+        out.append(" ordinal: ").append(footnoteOrdinal).append(" ");
         segmentSpan(out, openingMarker, "open");
         segmentSpan(out, text, "text");
         segmentSpan(out, closingMarker, "close");

@@ -3,7 +3,7 @@
     <option name="myName" value="OVERVIEW" profileName="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveStyleSettings="false" haveRightMargin="false" rightMargin="96" haveHtmlExportSettings="true" haveLinkMapSettings="true">
       <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" lastLayoutSetsDefault="false">
         <PanelProvider>
-          <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
+          <provider providerId="com.vladsch.md.nav.editor.javafx.html.panel" providerName="JavaFX WebView" />
         </PanelProvider>
       </PreviewSettings>
       <ParserSettings gitHubSyntaxChange="false" correctedInvalidSettings="false" emojiShortcuts="3" emojiImages="0">
@@ -44,7 +44,7 @@
       </ParserSettings>
       <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="false" imageUriSerials="false" addDocTypeHtml="false" noParaTags="false" plantUmlConversion="0">
         <GeneratorProvider>
-          <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
+          <provider providerId="com.vladsch.md.nav.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
         </GeneratorProvider>
         <headerTop />
         <headerBottom />
@@ -53,7 +53,7 @@
       </HtmlSettings>
       <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
         <StylesheetProvider>
-          <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
+          <provider providerId="com.vladsch.md.nav.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
         </StylesheetProvider>
         <ScriptProviders />
         <cssText>.markdown-body,

@@ -513,7 +513,7 @@ public abstract class Node {
     }
 
     @NotNull
-    public static BasedSequence getTrailSegment(@NotNull BasedSequence[] segments) {
+    public static BasedSequence getTrailSegment(BasedSequence[] segments) {
         int iMax = segments.length;
 
         for (int i = iMax; i-- > 0; ) {
@@ -525,7 +525,7 @@ public abstract class Node {
     }
 
     @NotNull
-    public static BasedSequence spanningChars(@NotNull BasedSequence... segments) {
+    public static BasedSequence spanningChars(BasedSequence... segments) {
         int startOffset = Integer.MAX_VALUE;
         int endOffset = -1;
         BasedSequence firstSequence = null;

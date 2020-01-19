@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * An Attribute node representing a single attribute name and value in attributes node
@@ -40,7 +41,7 @@ public class AttributeNode extends Node implements DoNotDecorate {
         super(chars);
     }
 
-    public AttributeNode(BasedSequence name, BasedSequence attributeSeparator, BasedSequence openingMarker, BasedSequence value, BasedSequence closingMarker) {
+    public AttributeNode(@Nullable BasedSequence name, @Nullable BasedSequence attributeSeparator, @Nullable BasedSequence openingMarker, @Nullable BasedSequence value, @Nullable BasedSequence closingMarker) {
         super(spanningChars(name, attributeSeparator, openingMarker, value, closingMarker));
         this.name = name != null ? name : BasedSequence.NULL;
         this.attributeSeparator = attributeSeparator != null ? attributeSeparator : BasedSequence.NULL;
