@@ -5,7 +5,8 @@
 [TOC]: # " "
 
 - [Release 0.60.0 Changes](#release-0600-changes)
-    - [API Refactoring](#api-refactoring)
+  - [API Refactoring](#api-refactoring)
+- [Next 0.59.86](#next-05986)
 - [0.59.84](#05984)
 - [0.59.82](#05982)
 - [0.59.80](#05980)
@@ -48,6 +49,8 @@
 - [0.59.7](#0597)
 - [0.59.5](#0595)
 - [0.59.1](#0591)
+- [0.50.50](#05050)
+- [0.50.48](#05048)
 - [0.50.46](#05046)
 - [0.50.44](#05044)
 - [0.50.42](#05042)
@@ -167,6 +170,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## Next 0.59.86
+
+* Fix: change docx converter to not include `<>` around auto and mail links in generated code.
+* Fix: [#384, Markdown parser produces invalid HTML]
 
 ## 0.59.84
 
@@ -1072,6 +1080,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   `NodeAdaptedVisitor.getHandler(Node)`, `NodeAdaptedVisitor.getHandler(Class<?>)`, and
   `NodeAdaptedVisitor.getNodeClasses()` to get access to contained data.
 
+## 0.50.50
+
+* Fix: change docx converter to not include `<>` around auto and mail links in generated code.
+* Fix: [#384, Markdown parser produces invalid HTML]
+
+## 0.50.48
+
+* Fix: [#382, Is there an option for number of whitespaces needed to create sub-lists?]
+  * `FIXED_INDENT` list parser did not convert list item looking text with >= 4 spaces to lazy
+    continuation.
+
 ## 0.50.46
 
 * Fix:
@@ -1357,8 +1376,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## 0.42.14
 
-* Fix: [#351, Is there any special format requirement for processing html data to markdown]
 * Fix: HTML parser converts `a` tags in preformatted text to links, should convert to URL only
+* Fix: HTML deep parser to interrupt paragraph if HTML starts with a block tag
+* Fix: Docx converter mail link conversion
+* Fix: [#351, Is there any special format requirement for processing html data to markdown]
 
 ## 0.42.12
 
@@ -1862,3 +1883,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
 
+
+[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
+[#384, Markdown parser produces invalid HTML]: https://github.com/vsch/flexmark-java/issues/384

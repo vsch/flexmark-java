@@ -311,7 +311,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
                     deepParser.parseHtmlChunk(line.subSequence(nextNonSpace, line.length()), myHtmlBlockStartOnlyOnBlockTags, myHtmlBlockDeepParseNonBlock, myHtmlBlockDeepParseFirstOpenTagOnOneLine);
                     if (deepParser.hadHtml()) {
                         // have our html block start
-                        if (((deepParser.getHtmlMatch() == OPEN_TAG || (!myHtmlCommentBlocksInterruptParagraph && deepParser.getHtmlMatch() == COMMENT)) && matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph)) {
+                        if ((deepParser.getHtmlMatch() == OPEN_TAG || (!myHtmlCommentBlocksInterruptParagraph && deepParser.getHtmlMatch() == COMMENT))
+                                && (!deepParser.isFirstBlockTag() && matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph)) {
                         } else {
                             // not paragraph or can interrupt paragraph
                             return BlockStart.of(new HtmlBlockParser(state.getProperties(), null, deepParser.getHtmlMatch() == COMMENT, deepParser)).atIndex(state.getIndex());
@@ -319,7 +320,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
                     }
                 } else {
                     for (int blockType = 1; blockType <= 7; blockType++) {
-                        // Type 7 can not interrupt a paragraph or may not start a block altogether
+                        // Type 7 cannot interrupt a paragraph or may not start a block altogether
                         if (blockType == 7 && (myHtmlBlockStartOnlyOnBlockTags || matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph)) {
                             continue;
                         }

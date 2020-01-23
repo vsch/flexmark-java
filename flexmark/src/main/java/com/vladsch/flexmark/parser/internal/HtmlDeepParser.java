@@ -58,21 +58,21 @@ public class HtmlDeepParser {
         VOID_TAGS.addAll(Arrays.asList(voidTags));
 
         OPTIONAL_TAGS = new HashMap<>();
-        OPTIONAL_TAGS.put("li", new HashSet<>(Arrays.asList(new String[] { "li" })));
-        OPTIONAL_TAGS.put("dt", new HashSet<>(Arrays.asList(new String[] { "dt", "dd" })));
-        OPTIONAL_TAGS.put("dd", new HashSet<>(Arrays.asList(new String[] { "dd", "dt" })));
-        OPTIONAL_TAGS.put("p", new HashSet<>(Arrays.asList(new String[] { "address", "article", "aside", "blockquote", "details", "div", "dl", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "main", "menu", "nav", "ol", "p", "pre", "section", "table", "ul" })));
-        OPTIONAL_TAGS.put("rt", new HashSet<>(Arrays.asList(new String[] { "rt", "rp" })));
-        OPTIONAL_TAGS.put("rp", new HashSet<>(Arrays.asList(new String[] { "rt", "rp" })));
-        OPTIONAL_TAGS.put("optgroup", new HashSet<>(Arrays.asList(new String[] { "optgroup" })));
-        OPTIONAL_TAGS.put("option", new HashSet<>(Arrays.asList(new String[] { "option", "optgroup" })));
-        OPTIONAL_TAGS.put("colgroup", new HashSet<>(Arrays.asList(new String[] { "colgroup" })));
-        OPTIONAL_TAGS.put("thead", new HashSet<>(Arrays.asList(new String[] { "tbody", "tfoot" })));
-        OPTIONAL_TAGS.put("tbody", new HashSet<>(Arrays.asList(new String[] { "tbody", "tfoot" })));
-        OPTIONAL_TAGS.put("tfoot", new HashSet<>(Arrays.asList(new String[] { "tbody" })));
-        OPTIONAL_TAGS.put("tr", new HashSet<>(Arrays.asList(new String[] { "tr" })));
-        OPTIONAL_TAGS.put("td", new HashSet<>(Arrays.asList(new String[] { "td", "th" })));
-        OPTIONAL_TAGS.put("th", new HashSet<>(Arrays.asList(new String[] { "td", "th" })));
+        OPTIONAL_TAGS.put("li", new HashSet<>(Arrays.asList("li")));
+        OPTIONAL_TAGS.put("dt", new HashSet<>(Arrays.asList("dt", "dd")));
+        OPTIONAL_TAGS.put("dd", new HashSet<>(Arrays.asList("dd", "dt")));
+        OPTIONAL_TAGS.put("p", new HashSet<>(Arrays.asList("address", "article", "aside", "blockquote", "details", "div", "dl", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "main", "menu", "nav", "ol", "p", "pre", "section", "table", "ul")));
+        OPTIONAL_TAGS.put("rt", new HashSet<>(Arrays.asList("rt", "rp")));
+        OPTIONAL_TAGS.put("rp", new HashSet<>(Arrays.asList("rt", "rp")));
+        OPTIONAL_TAGS.put("optgroup", new HashSet<>(Arrays.asList("optgroup")));
+        OPTIONAL_TAGS.put("option", new HashSet<>(Arrays.asList("option", "optgroup")));
+        OPTIONAL_TAGS.put("colgroup", new HashSet<>(Arrays.asList("colgroup")));
+        OPTIONAL_TAGS.put("thead", new HashSet<>(Arrays.asList("tbody", "tfoot")));
+        OPTIONAL_TAGS.put("tbody", new HashSet<>(Arrays.asList("tbody", "tfoot")));
+        OPTIONAL_TAGS.put("tfoot", new HashSet<>(Arrays.asList("tbody")));
+        OPTIONAL_TAGS.put("tr", new HashSet<>(Arrays.asList("tr")));
+        OPTIONAL_TAGS.put("td", new HashSet<>(Arrays.asList("td", "th")));
+        OPTIONAL_TAGS.put("th", new HashSet<>(Arrays.asList("td", "th")));
 
         // combine all patterns and create map by pattern number
         PATTERN_MAP = new HtmlMatch[HtmlMatch.values().length];
@@ -101,9 +101,10 @@ public class HtmlDeepParser {
     private HtmlMatch myHtmlMatch;
     private int myHtmlCount;
     final private HashSet<String> myBlockTags;
+    private boolean myFirstBlockTag;
 
     public HtmlDeepParser() {
-        this(Collections.<String>emptyList());
+        this(Collections.emptyList());
     }
 
     public HtmlDeepParser(List<String> customTags) {
@@ -111,6 +112,7 @@ public class HtmlDeepParser {
         myClosingPattern = null;
         myHtmlMatch = null;
         myHtmlCount = 0;
+        myFirstBlockTag = false;
 
         myBlockTags = new HashSet<>(BLOCK_TAGS);
         myBlockTags.addAll(customTags);
@@ -132,6 +134,10 @@ public class HtmlDeepParser {
         return myHtmlCount;
     }
 
+    public boolean isFirstBlockTag() {
+        return myFirstBlockTag;
+    }
+
     public boolean isHtmlClosed() {
         return myClosingPattern == null && myOpenTags.isEmpty();
     }
@@ -142,6 +148,17 @@ public class HtmlDeepParser {
 
     public boolean haveOpenRawTag() {
         return myClosingPattern != null && myHtmlMatch != HtmlMatch.OPEN_TAG;
+    }
+
+    public boolean haveOpenBlockTag() {
+        if (!myOpenTags.isEmpty()) {
+            for (String openTag : myOpenTags) {
+                if (myBlockTags.contains(openTag)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean hadHtml() {
@@ -161,6 +178,7 @@ public class HtmlDeepParser {
             }
         }
         myOpenTags.add(tagName);
+        myFirstBlockTag = myBlockTags.contains(tagName);
     }
 
     public void parseHtmlChunk(CharSequence html, boolean blockTagsOnly, boolean parseNonBlock, boolean firstOpenTagOnOneLine) {
