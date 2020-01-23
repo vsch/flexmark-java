@@ -59,13 +59,13 @@
     line-height: 1.6;
 }
 
-code { 
+code {
     background-color:#f0f0f0;
     border-radius:2px;
     padding:1px 0 0 0;
     border:1px solid #e0e0e0;
     font-family:Consolas,Inconsolata,Courier,monospace;
-    font-size:0.9em;color:#b00042; 
+    font-size:0.9em;color:#b00042;
 }
 
 .search-highlight {
