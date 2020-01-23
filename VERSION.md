@@ -4,7 +4,7 @@
 
 [TOC]: # ""
 
-- [Next 0.50.50](#next-05050)
+- [0.50.50](#05050)
 - [0.50.48](#05048)
 - [0.50.46](#05046)
 - [0.50.44](#05044)
@@ -103,7 +103,7 @@
 
 &nbsp;</details>
 
-## Next 0.50.50
+## 0.50.50
 
 * Fix: change docx converter to not include `<>` around auto and mail links in generated code.
 * Fix: [#384, Markdown parser produces invalid HTML]
