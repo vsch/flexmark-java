@@ -2,11 +2,10 @@
 
 &nbsp;<details id="version-history"><summary>**Version History**</summary>
 
-[TOC]: # " "
+[TOC]: # ""
 
 - [Release 0.60.0 Changes](#release-0600-changes)
   - [API Refactoring](#api-refactoring)
-- [Next 0.59.86](#next-05986)
 - [0.59.84](#05984)
 - [0.59.82](#05982)
 - [0.59.80](#05980)
@@ -170,11 +169,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
-
-## Next 0.59.86
-
-* Fix: change docx converter to not include `<>` around auto and mail links in generated code.
-* Fix: [#384, Markdown parser produces invalid HTML]
 
 ## 0.59.84
 

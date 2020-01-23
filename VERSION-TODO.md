@@ -8,6 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [Next 0.59.114](#next-059114)
 - [0.59.112](#059112)
 - [0.59.110](#059110)
 - [0.59.108](#059108)
@@ -212,6 +213,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.114
+
+* Fix: change docx converter to not include `<>` around auto and mail links in generated code.
+* Fix: [#384, Markdown parser produces invalid HTML]
+* Fix: render ref link and image as text if resolve URL after link resolver is empty
 
 ## 0.59.112
 
@@ -2216,3 +2223,5 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 
+
+[#384, Markdown parser produces invalid HTML]: https://github.com/vsch/flexmark-java/issues/384

@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.core.test.util.html;
 
-import com.vladsch.flexmark.ast.FencedCodeBlock;
-import com.vladsch.flexmark.ast.Image;
-import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
@@ -347,7 +345,7 @@ final public class HtmlRendererTest {
                     return link.withUrl("www.url.com" + docUrl);
                 }
             }
-            return null;
+            return link;
         }
 
         static class Factory extends IndependentLinkResolverFactory {
@@ -361,6 +359,42 @@ final public class HtmlRendererTest {
 
     @Test
     public void withOptions_customLinkResolver() {
+        // make sure custom link resolver is preserved when using withOptions() on HTML builder
+        HtmlRenderer renderer = HtmlRenderer.builder().linkResolverFactory(new CustomRefLinkResolverImpl.Factory()).build();
+        String rendered = renderer.render(parse("foo [:bar]"));
+
+        assertEquals("<p>foo [:bar]</p>\n", rendered);
+    }
+
+
+    static class CustomRefLinkResolverImpl implements LinkResolver {
+        public CustomRefLinkResolverImpl(LinkResolverContext context) {
+
+        }
+
+        @NotNull
+        @Override
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
+            if (node instanceof LinkRef || node instanceof ImageRef) {
+                RefNode linkNode = (RefNode) node;
+                if (linkNode.getReference().startsWith(":")) {
+                    return link.withUrl("");
+                }
+            }
+            return link;
+        }
+
+        static class Factory extends IndependentLinkResolverFactory {
+            @NotNull
+            @Override
+            public LinkResolver apply(@NotNull LinkResolverContext context) {
+                return new CustomLinkResolverImpl(context);
+            }
+        }
+    }
+
+    @Test
+    public void withOptions_linkRefCustomLinkResolver() {
         // make sure custom link resolver is preserved when using withOptions() on HTML builder
         DataHolder OPTIONS = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url");
         DataHolder OPTIONS1 = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url1");

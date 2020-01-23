@@ -708,7 +708,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             // see if have reference resolver and this is resolved
             String normalizeRef = referenceRepository.normalizeKey(node.getReference());
             resolvedLink = context.resolveLink(LinkType.IMAGE_REF, normalizeRef, null, null);
-            if (resolvedLink.getStatus() == UNKNOWN) {
+            if (resolvedLink.getStatus() == UNKNOWN || resolvedLink.getUrl().isEmpty()) {
                 resolvedLink = null;
             }
         }
@@ -761,7 +761,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             // see if have reference resolver and this is resolved
             String normalizeRef = node.getReference().unescape();
             resolvedLink = context.resolveLink(LinkType.LINK_REF, normalizeRef, null, null);
-            if (resolvedLink.getStatus() == UNKNOWN) {
+            if (resolvedLink.getStatus() == UNKNOWN || resolvedLink.getUrl().isEmpty()) {
                 resolvedLink = null;
             }
         }
