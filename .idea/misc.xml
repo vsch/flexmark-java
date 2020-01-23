@@ -5,21 +5,6 @@
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/out/javadoc" />
-    <option name="OPTION_SCOPE" value="protected" />
-    <option name="OPTION_HIERARCHY" value="true" />
-    <option name="OPTION_NAVIGATOR" value="true" />
-    <option name="OPTION_INDEX" value="true" />
-    <option name="OPTION_SEPARATE_INDEX" value="true" />
-    <option name="OPTION_DOCUMENT_TAG_USE" value="false" />
-    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="false" />
-    <option name="OPTION_DOCUMENT_TAG_VERSION" value="false" />
-    <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="true" />
-    <option name="OPTION_DEPRECATED_LIST" value="true" />
-    <option name="OTHER_OPTIONS" />
-    <option name="HEAP_SIZE" />
-    <option name="LOCALE" />
-    <option name="OPEN_IN_BROWSER" value="true" />
-    <option name="OPTION_INCLUDE_LIBS" value="false" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -32,6 +17,7 @@
         <option value="$PROJECT_DIR$/flexmark-all/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-docx-converter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-admonition/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-aside/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-attributes/pom.xml" />
@@ -46,10 +32,12 @@
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-tables/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-users/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-gitlab/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-ins/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-jekyll-tag/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-macros/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-media-tags/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-spec-example/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-superscript/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-tables/pom.xml" />
@@ -64,6 +52,7 @@
         <option value="$PROJECT_DIR$/flexmark-html-parser/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-integration-test/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-osgi/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-pdf-converter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-profile-pegdown/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-test-util/pom.xml" />

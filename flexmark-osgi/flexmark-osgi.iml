@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="flexmark-ext-admonition" />
+    <orderEntry type="library" name="Maven: org.nibor.autolink:autolink:0.6.0" level="project" />
+    <orderEntry type="module" module-name="flexmark-ext-gitlab" />
+    <orderEntry type="module" module-name="flexmark-ext-media-tags" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.10.2" level="project" />
+  </component>
+</module>

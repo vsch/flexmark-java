@@ -5,7 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
-- [Next 0.42.14](#next-04214)
+- [0.42.14](#04214)
 - [0.42.12](#04212)
 - [0.42.10](#04210)
 - [0.42.8](#0428)
@@ -87,10 +87,11 @@ flexmark-java
 
 &nbsp;</details>
 
-Next 0.42.14
-------------
+0.42.14
+-------
 
 * Fix: HTML parser converts `a` tags in preformatted text to links, should convert to URL only
+* Fix: HTML deep parser to interrupt paragraph if HTML starts with a block tag
 
 0.42.12
 -------
