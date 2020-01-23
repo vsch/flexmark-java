@@ -101,6 +101,7 @@ public class HtmlDeepParser {
     private HtmlMatch myHtmlMatch;
     private int myHtmlCount;
     final private HashSet<String> myBlockTags;
+    private boolean myFirstBlockTag;
 
     public HtmlDeepParser() {
         this(Collections.<String>emptyList());
@@ -111,6 +112,7 @@ public class HtmlDeepParser {
         myClosingPattern = null;
         myHtmlMatch = null;
         myHtmlCount = 0;
+        myFirstBlockTag = false;
 
         myBlockTags = new HashSet<>(BLOCK_TAGS);
         myBlockTags.addAll(customTags);
@@ -132,6 +134,10 @@ public class HtmlDeepParser {
         return myHtmlCount;
     }
 
+    public boolean isFirstBlockTag() {
+        return myFirstBlockTag;
+    }
+
     public boolean isHtmlClosed() {
         return myClosingPattern == null && myOpenTags.isEmpty();
     }
@@ -142,6 +148,17 @@ public class HtmlDeepParser {
 
     public boolean haveOpenRawTag() {
         return myClosingPattern != null && myHtmlMatch != HtmlMatch.OPEN_TAG;
+    }
+
+    public boolean haveOpenBlockTag() {
+        if (!myOpenTags.isEmpty()) {
+            for (String openTag : myOpenTags) {
+                if (myBlockTags.contains(openTag)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean hadHtml() {
@@ -161,6 +178,7 @@ public class HtmlDeepParser {
             }
         }
         myOpenTags.add(tagName);
+        myFirstBlockTag = myBlockTags.contains(tagName);
     }
 
     public void parseHtmlChunk(CharSequence html, boolean blockTagsOnly, final boolean parseNonBlock, final boolean firstOpenTagOnOneLine) {
