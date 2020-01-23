@@ -949,6 +949,38 @@ with some text
 </w:body>
 ````````````````````````````````
 
+### Mail
+
+Mail link
+
+```````````````````````````````` example Links - Mail: 1
+prefix vladimir@vladsch.com suffix 
+    
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">prefix </w:t>
+        </w:r>
+        <w:hyperlink r:id="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Hyperlink"/>
+                </w:rPr>
+                <w:t>vladimir@vladsch.com</w:t>
+            </w:r>
+        </w:hyperlink>
+        <w:r>
+            <w:t xml:space="preserve"> suffix</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
 
 ## Images
 
