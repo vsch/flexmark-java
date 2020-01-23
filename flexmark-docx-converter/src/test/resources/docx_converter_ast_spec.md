@@ -1148,7 +1148,7 @@ with some text
                                 <w:rPr>
                                     <w:rStyle w:val="Hyperlink"/>
                                 </w:rPr>
-                                <w:t>&lt;http://example.com&gt;</w:t>
+                                <w:t>http://example.com</w:t>
                             </w:r>
                         </w:hyperlink>
                     </w:p>

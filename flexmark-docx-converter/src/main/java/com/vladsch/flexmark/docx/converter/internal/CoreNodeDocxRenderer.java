@@ -901,14 +901,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(AutoLink node, DocxRendererContext docx) {
-        String url = node.getChars().unescape();
+        String url = node.getText().unescape();
         addRunAttributeFormatting(node, docx);
         renderURL(node.getChars(), docx, url);
     }
 
     private void render(MailLink node, DocxRendererContext docx) {
         addRunAttributeFormatting(node, docx);
-        String text = node.getChars().unescape();
+        String text = node.getText().unescape();
         renderURL(node.getChars(), docx, "mailto:" + text, text);
     }
 

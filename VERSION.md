@@ -4,6 +4,7 @@
 
 [TOC]: # ""
 
+- [Next 0.50.50](#next-05050)
 - [0.50.48](#05048)
 - [0.50.46](#05046)
 - [0.50.44](#05044)
@@ -101,6 +102,11 @@
 - [0.30.0](#0300)
 
 &nbsp;</details>
+
+## Next 0.50.50
+
+* Fix: change docx converter to not include `<>` around auto and mail links in generated code.
+* Fix: [#384, Markdown parser produces invalid HTML]
 
 ## 0.50.48
 
@@ -1558,4 +1564,6 @@ setting either will affect both keys. For information on these keys see
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
+[#384, Markdown parser produces invalid HTML]: https://github.com/vsch/flexmark-java/issues/384
+
 
