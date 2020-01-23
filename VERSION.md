@@ -92,6 +92,7 @@ flexmark-java
 
 * Fix: HTML parser converts `a` tags in preformatted text to links, should convert to URL only
 * Fix: HTML deep parser to interrupt paragraph if HTML starts with a block tag
+* Fix: Docx converter mail link conversion
 
 0.42.12
 -------

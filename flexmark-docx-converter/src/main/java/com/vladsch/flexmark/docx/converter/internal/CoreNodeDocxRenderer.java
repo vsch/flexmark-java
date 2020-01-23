@@ -1039,7 +1039,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final MailLink node, final DocxRendererContext docx) {
-        renderURL(node.getChars(), docx, "mailto:" + node.getChars().unescape());
+        String unescaped = node.getText().unescape();
+        renderURL(node.getChars(), docx, "mailto:" + unescaped, unescaped);
     }
 
     private void render(final Link node, final DocxRendererContext docx) {
