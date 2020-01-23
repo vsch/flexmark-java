@@ -798,9 +798,45 @@ in item
 ````````````````````````````````
 
 
+### Block Quote
+
+```````````````````````````````` example Tables Extension - Block Quote: 1
+> | Element       | Abbreviation    | Expansion                                               |
+> |---------------|-----------------|---------------------------------------------------------|
+> | Abbreviation  | `.abbreviation` | `*[]: `                                                 |
+> | Code fence    | `.codefence`    | \`\`\` ... \`\`\`                                       |
+> | Explicit link | `.link`         | `[]()`                                                  |
+.
+> |    Element    |  Abbreviation   |     Expansion     |
+> |---------------|-----------------|-------------------|
+> | Abbreviation  | `.abbreviation` | `*[]: `           |
+> | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
+> | Explicit link | `.link`         | `[]()`            |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Tables Extension - Block Quote: 2
+> | Element       | Abbreviation    | Expansion                                               |
+> |---------------|-----------------|---------------------------------------------------------|
+> | Abbreviation  | `.abbreviation` | `*[]: `                                                 |
+> | Code fence    | `.codefence`    | \`\`\` ... \`\`\`                                       |
+> | Explicit link | `.link`         | `[]()`                                                  |
+> [caption]
+.
+> |    Element    |  Abbreviation   |     Expansion     |
+> |---------------|-----------------|-------------------|
+> | Abbreviation  | `.abbreviation` | `*[]: `           |
+> | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
+> | Explicit link | `.link`         | `[]()`            |
+> [caption]
+
+````````````````````````````````
+
+
 real life table
 
-```````````````````````````````` example Tables Extension: 62
+```````````````````````````````` example Tables Extension - Block Quote: 3
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |

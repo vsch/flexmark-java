@@ -8,6 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
+- [0.59.112](#059112)
 - [0.59.110](#059110)
 - [0.59.108](#059108)
 - [0.59.106](#059106)
@@ -162,7 +163,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   :information_source: `com.vladsch.flexmark.util.ast.Visitor` is only needed for implementation
   of `NodeVisitor` and `VisitHandler`. If you convert all anonymous implementations of
   `VisitHandler` to lambdas you can remove all imports for `Visitor`.
-
   * [x] Fix: remove old visitor like adapters and implement ones based on generic classes not
         linked to flexmark AST node.
   * [x] Deprecate old base classes:
@@ -212,6 +212,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## 0.59.112
+
+* Fix: `MarkdownTable` not prefixing caption line with requested line prefix.
 
 ## 0.59.110
 
@@ -808,7 +812,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     positions created between open/close frame being detached. Frames can be nested and are
     validated for double closing, unclosed nested, and other common errors. Positions will throw
     an exception if used after frame is closed.
-
   * Add: `IPreviewPositionListener` to `PositionList` so changes can be previewed and changed.
     Useful for `SegmentBuilder` to keep invariants and tracked counts updated when these are
     changed by optimizers so optimizers do not need to concern themselves about these.
@@ -888,14 +891,19 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 ## 0.59.48
 
 * Fix: `SegmentBuilder` to not add empty text.
+
 * Add: `SegmentOptimizer` for `SegmentBuilder` segment optimization
+
 * Add: `CharMatchingSegmentOptimizer` to change replaced text to range in sequence when the
   replacement text matches sequence characters. Eliminates out of base unnecessary characters.
+
 * Fix: add quick fail/success test for equality of base object. base strings through delete
   range/insert string operations.
+
 * Fix: make all based sequence test for same base use `getBase()` instead of
   `getBaseSequence()`. It is the underlying base object that is important not the based sequence
   used to wrap it.
+
 * Add: `BasedSequenceManager` to allow re-use of equivalent base sequences to eliminate the
   problem of having different base sequences for the same text content. Only implemented for
   `SubSequence` not `CharSubSequence`
@@ -915,13 +923,18 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   eliminate use of mutable sequences as bases the same way `CharSubSequence` did for
   `StringBuilder`. It is important not to use mutable `CharSequences` for `BasedSequence.of()`
   argument. If not sure `toString()` on the argument is the best option.
+
 * Fix: change all possible uses of `CharSubSequence` to `SubSequence`
+
 * Add: `SegmentBuilder` to track offset ranges in original or base sequence and inserted out of
+
 * Fix: `BasedSequenceBuilder.add(CharSequence)` now does not complain when adding a
   `BasedSequence` which is from a different base than the builder. It simply treats it as it
   does any other non-based sequence and adds it as out of base chars.
+
 * Fix: `SequenceBuilder.addAll(Collection<? extends CharSequence>)` now takes list of anything
   extending `CharSequence`
+
 * Add: javadoc to `BasedSequence.baseSubSequence(int, int)` that it should return sequence equal
   to base sequence without any modifications or additions. This should really be implemented
   only in real base sequences like `CharSubSequence` and `SubSequence` the rest should rely on
@@ -1192,15 +1205,19 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Add: now if test option `DataHolder` with `TestUtils.CUSTOM_OPTION` set then it will be
   invoked even when no `[]` present to allow handling of empty params, which will be `null` in
   this case.
+
 * Add: before checking for parameterized option the full option with params and `[]` is tried.
   If present then its results are used, but also checked if `TestUtils.CUSTOM_OPTION` is
   present.
+
 * Add: `ResourceUrlResolver`, registered via
   `ResourceLocation.registerUrlResolver(Function<String, String>)` to allow resource URL
   conversion to URL used in example messages to be adjusted by project. Must register resolvers
   before trying to get an instance of `ResourceLocation` since resolution of file url is done in
   constructor.
+
 * Add: example's URL in exceptions when processing undefined example option.
+
 * Add: HTML comment handling to `SpecReader`, start/end comment tags must be the first non-blank
   on the line and outside of spec example.
 
@@ -1794,19 +1811,26 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Break: test case related classes changed to allow providing URL string for the file resource
   used in the text instead of relying on heuristic conversion of resource URL to file path.
+
 * Fix: [#326, flexmark-html-parser - multiple \<code\> inside \<pre\> bug]
+
 * Fix: `EscapedCharacterExtension` disabled for `DoNotLinkDecorate` nodes if another extension
   specified its `NodePostProcessorFactory` as dependent on `Text` with `DoNotDecorate` and
   `DoNotLinkDecorate` and the extension was added after `EscapedCharacterExtension`
+
 * Add: `Parser.WWW_AUTO_LINK_ELEMENT`, default `false`. If `true` then strings of the form
   `<www.someurl>` will be parsed as auto-links
+
 * Fix: copy `Extensions` from `flexmark-profile-pegdown` module to `PegdownExtensions` in core
   parser. Old class still available and extends the new named class.
+
 * Add: `ParserEmulationProfile.getOptions(DataHolder)` to `ParserEmulationProfile` to allow
   using current option values in deciding what the settings should be for the profile. Used by
   `ParserEmulationProfile.PEGDOWN`
+
 * Fix: [#323, TOC generation improvement], profile setting HeaderId generation to `false` even
   though `PegdownExtensions.ANCHORLINKS` is not used
+
 * Add: css option to PDF export and use as default css from [#323, TOC generation improvement],
   thanks to @jvdvegt
   * Add: `PdfConverterExtension.DEFAULT_CSS` data key with default value of embedded CSS.
@@ -1822,15 +1846,20 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: HTML parser link/image conversion to ref link and reference when cannot create a valid
   reference fallback to generating explicit link instead.
+
 * Fix: HTML parser ignoring `NONE` for `FlexmarkHtmlParser.EXT_INLINE_LINK` and
   `FlexmarkHtmlParser.EXT_INLINE_IMAGE` options
+
 * Fix: HTML parser to add blank line before block quote and aside if they are not the first
   child of their parent.
+
 * Fix: HTML parser, divs always generated line before and after, instead of before if not first
   child element and after if not last child element.
+
 * Add: `IParse.transferReferences(Document, Document, Boolean)`, to allow overriding repository
   `KeepType` selected copying behaviour for references already defined in the destination
   document.
+
 * Deprecate: `IParse.transferReferences(Document, Document)`, in favour of
   `IParse.transferReferences(Document, Document, Boolean)`
 
@@ -1876,20 +1905,27 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   unless `HtmlRenderer.EMBEDDED_NODE_PROVIDER` is set to false. Add attributes to nodes in the
   AST by inserting a `EmbeddedAttributeProvider.EmbeddedNodeAttributes` node with the desired
   attributes. See: [NodeInsertingPostProcessorSample.java] for example.
+
 * Add: document that `DocxRenderer` emoji with GitHub preferred is not able to download images,
   compiling `ImageUtils` library with Java 8 eliminates the problem.
+
 * Add: resource file URL to `SpecReader` and add a message to all example tests with the file
   URL with `:xxx` where `xxx` is the line number of the spec example in the file.
+
 * This will print the source location of the test in the console. Clicking the link goes right
   to the spec source file and line of the failed test. Unfortunately this URL will only work in
   IntelliJ when JetBrains add this to console to handle such `file://` URLs:
   [YouTrack: IDEA-207453]
+
 * Fix: [#310, PR: Change URL of GitHub CDN] thanks to @benelog
+
 * Fix: `AsideExtension` option keys to be dynamic data keys dependent on corresponding Parser
   block quote options for their defaults.
+
 * :warning: This can potentially break code relying on versions of the extension before
   `0.40.18` because parsing rules can change depending on which block quote options are changed
   from their default values.
+
 * To ensure independent options for aside blocks and block quotes, set aside options explicitly.
   The following will set all aside options to default values, independent from block quote
   options:
@@ -1903,23 +1939,30 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Deprecate: `Parser.BLOCK_QUOTE_TO_BLANK_LINE`, use more mnemonic
   `Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE`
+
 * Deprecate: `CustomNode` and `CustomBlock`. `Block` and `Node` should be used directly. The
   library aims to make no distinction between core and extension implementations, these classes
   add no useful information.
+
 * Deprecate: BaseSequence had old named functions which were misleading and duplicated under
   proper names:
   * `countChars()` -> `countLeading()`
   * `countCharsNot()` -> `countLeadingNot()`
   * `countCharsReversed()` -> `countTrailing()`
   * `countNotCharsReversed()` -> `countTrailingNot()`
+
 * First of all they only counted leading characters which the name did not imply. Second they
   were duplicated.
+
 * Add character counting functions:
   * `countOfAny()`
   * `countOfAnyNot()`
+
 * Fix: `DefinitionExtension` does not correctly set the child parse column, causing list items
   to be expecting 1 extra space for child item recognition.
+
 * Add: `ExtensionConversion.NONE` to suppress any output from corresponding element
+
 * Add: `FlexmarkHtmlParser.EXT_MATH`, default `ExtensionConversion.HTML`, for selecting `<math>`
   tag processing. For now only `MARKDOWN` does nothing useful. Later it will be used to convert
   math ml to GitLab math inline element.

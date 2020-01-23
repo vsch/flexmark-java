@@ -1269,6 +1269,60 @@ Document[0, 73]
 ````````````````````````````````
 
 
+### 384
+
+Issue #384,
+
+```````````````````````````````` example(Core Issues Tests - 384: 1) options(keep-blank-lines)
+<!-- 
+# Licensed under the Apache License, Version 2.0 (the "License") http://www.apache.org/licenses/LICENSE-2.0 -->
+
+# Media Server Installation
+
+## Install Kurento Media server
+
+<a href="https://doc-kurento.readthedocs.io/en/stable/user/installation.html">Install Kurento Media server</a>
+<div class="bd-callout bd-callout-danger">
+	It should be run under same user as OM
+</div>
+
+## Specify/Install Turn server
+
+<div class="bd-callout bd-callout-info">Optional step</div>
+.
+<!-- 
+# Licensed under the Apache License, Version 2.0 (the "License") http://www.apache.org/licenses/LICENSE-2.0 -->
+<h1>Media Server Installation</h1>
+<h2>Install Kurento Media server</h2>
+<p><a href="https://doc-kurento.readthedocs.io/en/stable/user/installation.html">Install Kurento Media server</a></p>
+<div class="bd-callout bd-callout-danger">
+→It should be run under same user as OM
+</div>
+<h2>Specify/Install Turn server</h2>
+<div class="bd-callout bd-callout-info">Optional step</div>
+.
+Document[0, 474]
+  HtmlCommentBlock[0, 118]
+  BlankLine[118, 119]
+  Heading[119, 146] textOpen:[119, 120, "#"] text:[121, 146, "Media Server Installation"]
+    Text[121, 146] chars:[121, 146, "Media … ation"]
+  BlankLine[147, 148]
+  Heading[148, 179] textOpen:[148, 150, "##"] text:[151, 179, "Install Kurento Media server"]
+    Text[151, 179] chars:[151, 179, "Insta … erver"]
+  BlankLine[180, 181]
+  Paragraph[181, 292]
+    HtmlInline[181, 259] chars:[181, 259, "<a hr … tml\">"]
+    Text[259, 287] chars:[259, 287, "Insta … erver"]
+    HtmlInline[287, 291] chars:[287, 291, "</a>"]
+  HtmlBlock[292, 382]
+  BlankLine[382, 383]
+  Heading[383, 413] textOpen:[383, 385, "##"] text:[386, 413, "Specify/Install Turn server"]
+    Text[386, 413] chars:[386, 413, "Speci … erver"]
+  BlankLine[414, 415]
+  HtmlBlock[415, 474]
+````````````````````````````````
+
+
 ## Issues xxx
 
 ### 1

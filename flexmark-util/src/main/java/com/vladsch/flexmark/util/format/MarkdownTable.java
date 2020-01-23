@@ -1337,6 +1337,7 @@ public class MarkdownTable {
                         }
                     }
 
+                    out.append(linePrefix);
                     out.append('[');
                     if (addOpenCaptionSpace) out.append(' ');
 
@@ -1375,7 +1376,7 @@ public class MarkdownTable {
 
             if (!handled) {
                 out.popOptions().pushOptions();
-                out.line().append('[').append(formattedCaption).append(']').line();
+                out.line().append(linePrefix).append('[').append(formattedCaption).append(']').line();
             }
         }
         out.popOptions();
