@@ -98,6 +98,6 @@ public class DataKey<T> extends DataKeyBase<T> {
     public String toString() {
         // factory applied to null in constructor, no sense doing it again here
         T defaultValue = getDefaultValue();
-        return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + getName();
+        return "DataKey<" + defaultValue.getClass().getSimpleName() + "> " + getName();
     }
 }

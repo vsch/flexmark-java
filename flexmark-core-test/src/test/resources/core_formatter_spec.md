@@ -325,7 +325,9 @@ indented code
 
 ## Lists
 
-```````````````````````````````` example Lists: 1
+### Items
+
+```````````````````````````````` example Lists - Items: 1
 * list item 1
   * list item 1.1
     * list item 1.1.1
@@ -337,7 +339,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 2
+```````````````````````````````` example Lists - Items: 2
 * list item 1
   * list item 1.1
   * list item 1.2
@@ -367,7 +369,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 3
+```````````````````````````````` example Lists - Items: 3
 1. list item 1
    1. list item 1.1
    1. list item 1.2
@@ -397,7 +399,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 4
+```````````````````````````````` example Lists - Items: 4
 1. list item 1
    1. list item 1.1
    1. list item 1.2
@@ -428,7 +430,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 5
+```````````````````````````````` example Lists - Items: 5
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -440,7 +442,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 6) options(list-numbered-dot)
+```````````````````````````````` example(Lists - Items: 6) options(list-numbered-dot)
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -452,7 +454,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 7) options(list-numbered-paren)
+```````````````````````````````` example(Lists - Items: 7) options(list-numbered-paren)
 1. list item 1
    1. list item 1.1
    1) list item 1.2
@@ -464,7 +466,7 @@ indented code
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 8
+```````````````````````````````` example Lists - Items: 8
 paragraph
 * item 1
 * item 2
@@ -480,7 +482,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 9
+```````````````````````````````` example Lists - Items: 9
 paragraph
 
 * item 1
@@ -498,7 +500,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 10
+```````````````````````````````` example Lists - Items: 10
 paragraph
 1. item 1
 1. item 2
@@ -514,7 +516,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 11) options(list-add-blank-line-before)
+```````````````````````````````` example(Lists - Items: 11) options(list-add-blank-line-before)
 paragraph
 * item 1
 * item 2
@@ -531,7 +533,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 12) options(list-add-blank-line-before)
+```````````````````````````````` example(Lists - Items: 12) options(list-add-blank-line-before)
 paragraph
 1. item 1
 1. item 2
@@ -548,7 +550,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 13) options(list-bullet-asterisk)
+```````````````````````````````` example(Lists - Items: 13) options(list-bullet-asterisk)
 + item 1
 + item 2
   + item 2.1
@@ -562,7 +564,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 14) options(list-bullet-plus)
+```````````````````````````````` example(Lists - Items: 14) options(list-bullet-plus)
 * item 1
 * item 2
   * item 2.1
@@ -576,7 +578,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 15) options(list-bullet-dash)
+```````````````````````````````` example(Lists - Items: 15) options(list-bullet-dash)
 * item 1
 * item 2
   * item 2.1
@@ -592,7 +594,7 @@ paragraph
 
 list spacing as is
 
-```````````````````````````````` example Lists: 16
+```````````````````````````````` example Lists - Items: 16
 * item 1
 * item 2
   * item 2.1
@@ -612,7 +614,7 @@ list spacing as is
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 17) options(list-spacing-loosen)
+```````````````````````````````` example(Lists - Items: 17) options(list-spacing-loosen)
 * item 1
 * item 2
   <!--comment-->  
@@ -635,7 +637,7 @@ list spacing as is
 
 list spacing tighten
 
-```````````````````````````````` example(Lists: 18) options(list-spacing-tighten)
+```````````````````````````````` example(Lists - Items: 18) options(list-spacing-tighten)
 * item 1
 * item 2
   * item 2.1
@@ -654,7 +656,7 @@ list spacing tighten
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 19) options(list-spacing-loosen)
+```````````````````````````````` example(Lists - Items: 19) options(list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
@@ -676,7 +678,7 @@ list spacing tighten
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 20) options(list-spacing-loosen)
+```````````````````````````````` example(Lists - Items: 20) options(list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
@@ -694,7 +696,7 @@ list spacing tighten
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 21) options(list-spacing-loose)
+```````````````````````````````` example(Lists - Items: 21) options(list-spacing-loose)
 * item 1
 * item 2
   * item 2.1
@@ -715,7 +717,7 @@ list spacing tighten
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 22) options(list-spacing-tight)
+```````````````````````````````` example(Lists - Items: 22) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -733,7 +735,7 @@ list spacing tighten
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 23) options(list-spacing-loosen)
+```````````````````````````````` example(Lists - Items: 23) options(list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
@@ -755,7 +757,7 @@ list spacing tighten
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 24) options(list-spacing-tighten)
+```````````````````````````````` example(Lists - Items: 24) options(list-spacing-tighten)
 * item 1
 * item 2
   * item 2.1
@@ -774,7 +776,7 @@ list spacing tighten
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 25) options(list-spacing-tighten)
+```````````````````````````````` example(Lists - Items: 25) options(list-spacing-tighten)
 * item 1
 * item 2
   * item 2.1
@@ -796,7 +798,7 @@ paragraph
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 26) options(list-spacing-tight)
+```````````````````````````````` example(Lists - Items: 26) options(list-spacing-tight)
 * item 1
 * item 2
   * item 2.1
@@ -819,7 +821,7 @@ paragraph
 
 list family changing
 
-```````````````````````````````` example(Lists: 27) options(format-fixed-indent)
+```````````````````````````````` example(Lists - Items: 27) options(format-fixed-indent)
 * item 1
 * item 2
   * item 2.1
@@ -839,7 +841,7 @@ list family changing
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 28) options(format-fixed-indent, list-spacing-loosen)
+```````````````````````````````` example(Lists - Items: 28) options(format-fixed-indent, list-spacing-loosen)
 * item 1
 * item 2
   * item 2.1
@@ -861,7 +863,7 @@ list family changing
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 29
+```````````````````````````````` example Lists - Items: 29
 - [link](link.txt)
 
 next line
@@ -872,7 +874,7 @@ next line
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 30
+```````````````````````````````` example Lists - Items: 30
 - [link](link.txt)
 
 next line
@@ -885,7 +887,7 @@ next line
 
 Should not add blank line after last child of list item.
 
-```````````````````````````````` example(Lists: 31) options(list-spacing-as-is, margin[72])
+```````````````````````````````` example(Lists - Items: 31) options(list-spacing-as-is, margin[72])
 1. List item with paragraph child item without blank line after is a tight list.
 
    Paragraph child item.
@@ -903,7 +905,7 @@ Should not add blank line after last child of list item.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 32) options(list-spacing-tight, margin[72])
+```````````````````````````````` example(Lists - Items: 32) options(list-spacing-tight, margin[72])
 1. List item with paragraph child item without blank line after is a tight list.
 
    Paragraph child item.
@@ -921,7 +923,7 @@ Should not add blank line after last child of list item.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 33) options(list-spacing-tight, margin[72])
+```````````````````````````````` example(Lists - Items: 33) options(list-spacing-tight, margin[72])
 1. List item with paragraph child item without blank line after is a tight list.
 
    Paragraph child item.
@@ -941,7 +943,7 @@ Should not add blank line after last child of list item.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 34) options(list-spacing-loosen, margin[72])
+```````````````````````````````` example(Lists - Items: 34) options(list-spacing-loosen, margin[72])
 1. List item with paragraph child item without blank line after is a tight list.
 
    Paragraph child item.
@@ -959,7 +961,7 @@ Should not add blank line after last child of list item.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 35) options(list-spacing-loosen, margin[72])
+```````````````````````````````` example(Lists - Items: 35) options(list-spacing-loosen, margin[72])
 1. List item with paragraph child item without blank line after is a tight list.
 
    Paragraph child item.
@@ -980,7 +982,7 @@ Should not add blank line after last child of list item.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Lists: 36) options(list-spacing-loose, margin[72])
+```````````````````````````````` example(Lists - Items: 36) options(list-spacing-loose, margin[72])
 1. List item with paragraph child item without blank line after is a tight list.
 
    Paragraph child item.
@@ -1272,6 +1274,315 @@ Should not add blank line after last child of list item.
   3. item 2
  30. item 2
   3. item 2
+
+````````````````````````````````
+
+
+### Empty Items
+
+```````````````````````````````` example(Lists - Empty Items: 1) options(list-spacing-loosen)
+* list item 1
+* 
+
+* list item 2
+* 
+not a list item
+.
+* list item 1
+
+* 
+
+* list item 2
+
+* 
+
+not a list item
+.
+Document[0, 50]
+  BulletList[0, 33] isLoose
+    BulletListItem[0, 14] open:[0, 1, "*"] isLoose
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "list  … tem 1"]
+    BulletListItem[14, 15] open:[14, 15, "*"] isLoose hadBlankLineAfter
+    BlankLine[17, 18]
+    BulletListItem[18, 32] open:[18, 19, "*"] isLoose
+      Paragraph[20, 32]
+        Text[20, 31] chars:[20, 31, "list  … tem 2"]
+    BulletListItem[32, 33] open:[32, 33, "*"] isLoose
+  Paragraph[35, 50]
+    Text[35, 50] chars:[35, 50, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example Lists - Empty Items: 2
+* list item 1
+* 
+* list item 2
+* 
+not a list item
+.
+* list item 1
+* 
+* list item 2
+* 
+
+not a list item
+.
+Document[0, 49]
+  BulletList[0, 32] isTight
+    BulletListItem[0, 14] open:[0, 1, "*"] isTight
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "list  … tem 1"]
+    BulletListItem[14, 15] open:[14, 15, "*"] isTight
+    BulletListItem[17, 31] open:[17, 18, "*"] isTight
+      Paragraph[19, 31]
+        Text[19, 30] chars:[19, 30, "list  … tem 2"]
+    BulletListItem[31, 32] open:[31, 32, "*"] isTight
+  Paragraph[34, 49]
+    Text[34, 49] chars:[34, 49, "not a …  item"]
+````````````````````````````````
+
+
+With removal of empty list items
+
+```````````````````````````````` example(Lists - Empty Items: 3) options(remove-empty-items)
+* list item 1
+* 
+
+* list item 2
+* 
+not a list item
+.
+* list item 1
+
+* list item 2
+
+not a list item
+.
+Document[0, 50]
+  BulletList[0, 33] isLoose
+    BulletListItem[0, 14] open:[0, 1, "*"] isLoose
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "list  … tem 1"]
+    BulletListItem[14, 15] open:[14, 15, "*"] isLoose hadBlankLineAfter
+    BlankLine[17, 18]
+    BulletListItem[18, 32] open:[18, 19, "*"] isLoose
+      Paragraph[20, 32]
+        Text[20, 31] chars:[20, 31, "list  … tem 2"]
+    BulletListItem[32, 33] open:[32, 33, "*"] isLoose
+  Paragraph[35, 50]
+    Text[35, 50] chars:[35, 50, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Empty Items: 4) options(remove-empty-items)
+* list item 1
+* 
+* list item 2
+* 
+not a list item
+.
+* list item 1
+* list item 2
+
+not a list item
+.
+Document[0, 49]
+  BulletList[0, 32] isTight
+    BulletListItem[0, 14] open:[0, 1, "*"] isTight
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "list  … tem 1"]
+    BulletListItem[14, 15] open:[14, 15, "*"] isTight
+    BulletListItem[17, 31] open:[17, 18, "*"] isTight
+      Paragraph[19, 31]
+        Text[19, 30] chars:[19, 30, "list  … tem 2"]
+    BulletListItem[31, 32] open:[31, 32, "*"] isTight
+  Paragraph[34, 49]
+    Text[34, 49] chars:[34, 49, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Empty Items: 5) options(remove-empty-items)
+1. list item 1
+1. 
+
+1. list item 2
+1. 
+not a list item
+.
+1. list item 1
+
+2. list item 2
+
+not a list item
+.
+Document[0, 54]
+  OrderedList[0, 37] isLoose delimiter:'.'
+    OrderedListItem[0, 15] open:[0, 2, "1."] isLoose
+      Paragraph[3, 15]
+        Text[3, 14] chars:[3, 14, "list  … tem 1"]
+    OrderedListItem[15, 17] open:[15, 17, "1."] isLoose hadBlankLineAfter
+    BlankLine[19, 20]
+    OrderedListItem[20, 35] open:[20, 22, "1."] isLoose
+      Paragraph[23, 35]
+        Text[23, 34] chars:[23, 34, "list  … tem 2"]
+    OrderedListItem[35, 37] open:[35, 37, "1."] isLoose
+  Paragraph[39, 54]
+    Text[39, 54] chars:[39, 54, "not a …  item"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Empty Items: 6) options(remove-empty-items)
+1. list item 1
+1. 
+1. list item 2
+1. 
+not a list item
+.
+1. list item 1
+2. list item 2
+
+not a list item
+.
+Document[0, 53]
+  OrderedList[0, 36] isTight delimiter:'.'
+    OrderedListItem[0, 15] open:[0, 2, "1."] isTight
+      Paragraph[3, 15]
+        Text[3, 14] chars:[3, 14, "list  … tem 1"]
+    OrderedListItem[15, 17] open:[15, 17, "1."] isTight
+    OrderedListItem[19, 34] open:[19, 21, "1."] isTight
+      Paragraph[22, 34]
+        Text[22, 33] chars:[22, 33, "list  … tem 2"]
+    OrderedListItem[34, 36] open:[34, 36, "1."] isTight
+  Paragraph[38, 53]
+    Text[38, 53] chars:[38, 53, "not a …  item"]
+````````````````````````````````
+
+
+### Issues
+
+```````````````````````````````` example(Lists - Issues: 1) options(list-spacing-as-is)
+* Fix: Add Markdown file templates as per
+      [fileTemplates.j2ee](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=fileTemplates.j2ee)
+      and
+      [DevKitFileTemplatesFactory](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=org.jetbrains.idea.devkit.DevKitFileTemplatesFactory)
+
+  ```xml
+  <fileTemplateGroup implementation="org.jetbrains.idea.devkit.DevKitFileTemplatesFactory"/>
+  ```
+* Next Item
+.
+* Fix: Add Markdown file templates as per
+  [fileTemplates.j2ee](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=fileTemplates.j2ee)
+  and
+  [DevKitFileTemplatesFactory](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=org.jetbrains.idea.devkit.DevKitFileTemplatesFactory)
+
+  ```xml
+  <fileTemplateGroup implementation="org.jetbrains.idea.devkit.DevKitFileTemplatesFactory"/>
+  ```
+* Next Item
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Issues: 2) options(list-spacing-tighten)
+* Fix: Add Markdown file templates as per
+      [fileTemplates.j2ee](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=fileTemplates.j2ee)
+      and
+      [DevKitFileTemplatesFactory](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=org.jetbrains.idea.devkit.DevKitFileTemplatesFactory)
+
+  ```xml
+  <fileTemplateGroup implementation="org.jetbrains.idea.devkit.DevKitFileTemplatesFactory"/>
+  ```
+* Next Item
+.
+* Fix: Add Markdown file templates as per
+  [fileTemplates.j2ee](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=fileTemplates.j2ee)
+  and
+  [DevKitFileTemplatesFactory](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=org.jetbrains.idea.devkit.DevKitFileTemplatesFactory)
+
+  ```xml
+  <fileTemplateGroup implementation="org.jetbrains.idea.devkit.DevKitFileTemplatesFactory"/>
+  ```
+* Next Item
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Issues: 3) options(list-spacing-tighten)
+* [ ] task item
+  * sub item
+
+    sub item paragraph with Abbr1
+    
+* list item 1 list item 1 lazy
+  continuation text  
+  with hard break spaces
+
+  Contained child text block of bullet
+  list item
+.
+* [ ] task item
+  * sub item
+
+    sub item paragraph with Abbr1
+* list item 1 list item 1 lazy
+  continuation text  
+  with hard break spaces
+
+  Contained child text block of bullet
+  list item
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists - Issues: 4) options(list-spacing-tighten)
+* * task sub item with long
+        paragraph text to wrap around to
+        next line.
+    * sub item
+
+    task sub item paragraph with
+    overflow wrapping text
+    
+  * sub item
+* task item
+  * sub item
+
+    sub item paragraph with Abbr1
+
+* list item 1 list item 1 lazy
+  continuation text  
+  with hard break spaces
+
+  Contained child text block of bullet
+  list item
+
+* list item 2
+* [x] task item
+* [x] task item
+.
+* * task sub item with long
+    paragraph text to wrap around to
+    next line.
+    * sub item
+
+    task sub item paragraph with
+    overflow wrapping text
+  * sub item
+* task item
+  * sub item
+
+    sub item paragraph with Abbr1
+* list item 1 list item 1 lazy
+  continuation text  
+  with hard break spaces
+
+  Contained child text block of bullet
+  list item
+* list item 2
+* [x] task item
+* [x] task item
 
 ````````````````````````````````
 
@@ -3355,187 +3666,6 @@ Document[0, 33]
 >      </td></tr>
 >  </table>
 
-````````````````````````````````
-
-
-## Empty List Items
-
-```````````````````````````````` example(Empty List Items: 1) options(list-spacing-loosen)
-* list item 1
-* 
-
-* list item 2
-* 
-not a list item
-.
-* list item 1
-
-* 
-
-* list item 2
-
-* 
-
-not a list item
-.
-Document[0, 50]
-  BulletList[0, 33] isLoose
-    BulletListItem[0, 14] open:[0, 1, "*"] isLoose
-      Paragraph[2, 14]
-        Text[2, 13] chars:[2, 13, "list  … tem 1"]
-    BulletListItem[14, 15] open:[14, 15, "*"] isLoose hadBlankLineAfter
-    BlankLine[17, 18]
-    BulletListItem[18, 32] open:[18, 19, "*"] isLoose
-      Paragraph[20, 32]
-        Text[20, 31] chars:[20, 31, "list  … tem 2"]
-    BulletListItem[32, 33] open:[32, 33, "*"] isLoose
-  Paragraph[35, 50]
-    Text[35, 50] chars:[35, 50, "not a …  item"]
-````````````````````````````````
-
-
-```````````````````````````````` example Empty List Items: 2
-* list item 1
-* 
-* list item 2
-* 
-not a list item
-.
-* list item 1
-* 
-* list item 2
-* 
-
-not a list item
-.
-Document[0, 49]
-  BulletList[0, 32] isTight
-    BulletListItem[0, 14] open:[0, 1, "*"] isTight
-      Paragraph[2, 14]
-        Text[2, 13] chars:[2, 13, "list  … tem 1"]
-    BulletListItem[14, 15] open:[14, 15, "*"] isTight
-    BulletListItem[17, 31] open:[17, 18, "*"] isTight
-      Paragraph[19, 31]
-        Text[19, 30] chars:[19, 30, "list  … tem 2"]
-    BulletListItem[31, 32] open:[31, 32, "*"] isTight
-  Paragraph[34, 49]
-    Text[34, 49] chars:[34, 49, "not a …  item"]
-````````````````````````````````
-
-
-With removal of empty list items
-
-```````````````````````````````` example(Empty List Items: 3) options(remove-empty-items)
-* list item 1
-* 
-
-* list item 2
-* 
-not a list item
-.
-* list item 1
-
-* list item 2
-
-not a list item
-.
-Document[0, 50]
-  BulletList[0, 33] isLoose
-    BulletListItem[0, 14] open:[0, 1, "*"] isLoose
-      Paragraph[2, 14]
-        Text[2, 13] chars:[2, 13, "list  … tem 1"]
-    BulletListItem[14, 15] open:[14, 15, "*"] isLoose hadBlankLineAfter
-    BlankLine[17, 18]
-    BulletListItem[18, 32] open:[18, 19, "*"] isLoose
-      Paragraph[20, 32]
-        Text[20, 31] chars:[20, 31, "list  … tem 2"]
-    BulletListItem[32, 33] open:[32, 33, "*"] isLoose
-  Paragraph[35, 50]
-    Text[35, 50] chars:[35, 50, "not a …  item"]
-````````````````````````````````
-
-
-```````````````````````````````` example(Empty List Items: 4) options(remove-empty-items)
-* list item 1
-* 
-* list item 2
-* 
-not a list item
-.
-* list item 1
-* list item 2
-
-not a list item
-.
-Document[0, 49]
-  BulletList[0, 32] isTight
-    BulletListItem[0, 14] open:[0, 1, "*"] isTight
-      Paragraph[2, 14]
-        Text[2, 13] chars:[2, 13, "list  … tem 1"]
-    BulletListItem[14, 15] open:[14, 15, "*"] isTight
-    BulletListItem[17, 31] open:[17, 18, "*"] isTight
-      Paragraph[19, 31]
-        Text[19, 30] chars:[19, 30, "list  … tem 2"]
-    BulletListItem[31, 32] open:[31, 32, "*"] isTight
-  Paragraph[34, 49]
-    Text[34, 49] chars:[34, 49, "not a …  item"]
-````````````````````````````````
-
-
-```````````````````````````````` example(Empty List Items: 5) options(remove-empty-items)
-1. list item 1
-1. 
-
-1. list item 2
-1. 
-not a list item
-.
-1. list item 1
-
-2. list item 2
-
-not a list item
-.
-Document[0, 54]
-  OrderedList[0, 37] isLoose delimiter:'.'
-    OrderedListItem[0, 15] open:[0, 2, "1."] isLoose
-      Paragraph[3, 15]
-        Text[3, 14] chars:[3, 14, "list  … tem 1"]
-    OrderedListItem[15, 17] open:[15, 17, "1."] isLoose hadBlankLineAfter
-    BlankLine[19, 20]
-    OrderedListItem[20, 35] open:[20, 22, "1."] isLoose
-      Paragraph[23, 35]
-        Text[23, 34] chars:[23, 34, "list  … tem 2"]
-    OrderedListItem[35, 37] open:[35, 37, "1."] isLoose
-  Paragraph[39, 54]
-    Text[39, 54] chars:[39, 54, "not a …  item"]
-````````````````````````````````
-
-
-```````````````````````````````` example(Empty List Items: 6) options(remove-empty-items)
-1. list item 1
-1. 
-1. list item 2
-1. 
-not a list item
-.
-1. list item 1
-2. list item 2
-
-not a list item
-.
-Document[0, 53]
-  OrderedList[0, 36] isTight delimiter:'.'
-    OrderedListItem[0, 15] open:[0, 2, "1."] isTight
-      Paragraph[3, 15]
-        Text[3, 14] chars:[3, 14, "list  … tem 1"]
-    OrderedListItem[15, 17] open:[15, 17, "1."] isTight
-    OrderedListItem[19, 34] open:[19, 21, "1."] isTight
-      Paragraph[22, 34]
-        Text[22, 33] chars:[22, 33, "list  … tem 2"]
-    OrderedListItem[34, 36] open:[34, 36, "1."] isTight
-  Paragraph[38, 53]
-    Text[38, 53] chars:[38, 53, "not a …  item"]
 ````````````````````````````````
 
 

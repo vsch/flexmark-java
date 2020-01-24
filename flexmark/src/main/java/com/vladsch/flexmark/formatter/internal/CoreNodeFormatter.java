@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+import static com.vladsch.flexmark.formatter.FormatterUtils.*;
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
 import static com.vladsch.flexmark.formatter.RenderPurpose.*;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
@@ -483,7 +484,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
         markdown.closePreFormatted();
         markdown.line().append(closingMarker).line();
-        markdown.tailBlankLine();
+
+        if (!(node.getParent() instanceof ListItem) || !isLastOfItem(node) || LIST_ITEM_SPACING.get(context.getDocument()) == ListSpacing.LOOSE) {
+            markdown.tailBlankLine();
+        }
     }
 
     private void render(IndentedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {

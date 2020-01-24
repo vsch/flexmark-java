@@ -1483,3 +1483,28 @@ do add blank line if blank line is after sub-list in middle of list
 ````````````````````````````````
 
 
+```````````````````````````````` example(Prioritized - Offset Tracking: 21) options(prioritized-tasks, list-bullet-asterisk, task-placement-incomplete-nested-first, no-list-auto-loose, format-content-after-prefix, margin[96], list-spacing-tighten)
++ [ ] Fix: alternative GitHub raw link format shows as undefined:
+* [ ] Fix: list item context for easy list modifications which always result in correct list:
+* [ ] Fix: Add Markdown file templates as per
+      [fileTemplates.j2ee](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=fileTemplates.j2ee)
+      and
+      [DevKitFileTemplatesFactory](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=org.jetbrains.idea.devkit.DevKitFileTemplatesFactory)
+
+  ```xml
+  <fileTemplateGroup implementation="org.jetbrains.idea.devkit.DevKitFileTemplatesFactory"/>
+  ```
+.
++ [ ] Fix: alternative GitHub raw link format shows as undefined:
+* [ ] Fix: list item context for easy list modifications which always result in correct list:
+* [ ] Fix: Add Markdown file templates as per
+      [fileTemplates.j2ee](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=fileTemplates.j2ee)
+      and
+      [DevKitFileTemplatesFactory](jetbrains://idea/navigate/reference?project=intellij-community.master&fqn=org.jetbrains.idea.devkit.DevKitFileTemplatesFactory)
+
+  ```xml
+  <fileTemplateGroup implementation="org.jetbrains.idea.devkit.DevKitFileTemplatesFactory"/>
+  ```
+
+````````````````````````````````
+

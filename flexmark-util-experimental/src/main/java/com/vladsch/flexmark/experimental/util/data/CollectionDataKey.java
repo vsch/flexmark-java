@@ -25,6 +25,6 @@ public class CollectionDataKey<T> extends DataKey<Collection<T>> {
     @Override
     public String toString() {
         Collection<T> defaultValue = getDefaultValue();
-        return "CollectionDataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + getName();
+        return "CollectionDataKey<" + defaultValue.getClass().getSimpleName() + "> " + getName();
     }
 }

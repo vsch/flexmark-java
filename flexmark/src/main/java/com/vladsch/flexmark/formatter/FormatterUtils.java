@@ -254,8 +254,9 @@ public class FormatterUtils {
 
         document.set(LIST_ITEM_SPACING, itemSpacing == LOOSE && (listSpacing == null || listSpacing == LOOSE) ? LOOSE : itemSpacing);
         for (Node item : itemList) {
-            if (itemSpacing == LOOSE && (listSpacing == null || listSpacing == LOOSE))
+            if (itemSpacing == LOOSE && (listSpacing == null || listSpacing == LOOSE)) {
                 markdown.blankLine();
+            }
             context.render(item);
         }
         document.set(LIST_ITEM_SPACING, listSpacing);
@@ -283,11 +284,17 @@ public class FormatterUtils {
     }
 
     public static boolean isNotLastItem(@Nullable Node node) {
+        Node originalNode = node;
+
         while (node != null && !(node instanceof Document)) {
             if (node.getNextAnyNot(BlankLine.class, HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) != null) return true;
             node = node.getParent();
         }
         return false;
+    }
+
+    public static boolean isLastOfItem(@Nullable Node node) {
+        return node.getNextAnyNot(BlankLine.class, HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) == null;
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -503,7 +510,7 @@ public class FormatterUtils {
                     context.render(childNode);
                 }
 
-                if (addBlankLineLooseItems && (node.isLoose() && context.getFormatterOptions().listSpacing != AS_IS || context.getFormatterOptions().listSpacing == LOOSE)) {
+                if (addBlankLineLooseItems && (node.isLoose() && context.getFormatterOptions().listSpacing == LOOSEN || context.getFormatterOptions().listSpacing == LOOSE)) {
                     markdown.tailBlankLine();
                 }
             } else {

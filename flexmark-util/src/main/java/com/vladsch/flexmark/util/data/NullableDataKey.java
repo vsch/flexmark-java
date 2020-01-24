@@ -94,7 +94,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
         // factory applied to null in constructor, no sense doing it again here
         T defaultValue = getDefaultValue();
         if (defaultValue != null) {
-            return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + getName();
+            return "DataKey<" + defaultValue.getClass().getSimpleName() + "> " + getName();
         } else {
             return "DataKey<null> " + getName();
         }

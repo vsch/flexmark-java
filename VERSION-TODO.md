@@ -218,7 +218,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: change docx converter to not include `<>` around auto and mail links in generated code.
 * Fix: [#384, Markdown parser produces invalid HTML]
-* Fix: render ref link and image as text if resolve URL after link resolver is empty
+* Fix: render ref link and image as text if link resolved to empty URL
+* Fix: formatter to not output tail blank line after fenced code if it is last child of list
+  item and current list spacing is not LOOSE.
+* Fix: data key `toString()` to use `Class.getSimpleName()`
 
 ## 0.59.112
 
