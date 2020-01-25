@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.HeadingStyle;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
@@ -456,7 +457,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 int minSpaces = Integer.MAX_VALUE;
                 int i = 0;
                 for (BasedSequence line : lines) {
-                    leadColumns[i] = line.countLeadingColumns(0, SequenceUtils.SPACE_TAB_SET);
+                    leadColumns[i] = line.countLeadingColumns(0, CharPredicate.SPACE_TAB);
                     minSpaces = Utils.min(minSpaces, leadColumns[i]);
                     i++;
                 }
@@ -525,7 +526,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 int minSpaces = Integer.MAX_VALUE;
                 int i = 0;
                 for (BasedSequence line : lines) {
-                    leadColumns[i] = line.countLeadingColumns(0, SequenceUtils.SPACE_TAB_SET);
+                    leadColumns[i] = line.countLeadingColumns(0, CharPredicate.SPACE_TAB);
                     minSpaces = Utils.min(minSpaces, leadColumns[i]);
                     i++;
                 }

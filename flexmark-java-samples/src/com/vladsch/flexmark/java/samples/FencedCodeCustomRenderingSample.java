@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
@@ -70,7 +71,7 @@ public class FencedCodeCustomRenderingSample {
                     html.srcPosWithTrailingEOL(node.getChars()).withAttr().tag("pre").openPre();
 
                     if (info.isNotNull() && !info.isBlank()) {
-                        BasedSequence language = node.getInfoDelimitedByAny(BasedSequence.SPACE_TAB_SET);
+                        BasedSequence language = node.getInfoDelimitedByAny(CharPredicate.SPACE_TAB);
                         // CUSTOMIZATION: uppercase the code tag class string
                         html.attr("class", (context.getHtmlOptions().languageClassPrefix + language.unescape()).toUpperCase());
                     } else {

@@ -4,10 +4,10 @@ import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Immutable;
 import com.vladsch.flexmark.util.misc.Mutable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -158,7 +158,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
 
         if (title != null) {
             CharSequence charSequence = rawTitle.trim();
-            int markers = BasedSequence.of(charSequence).countLeading(SequenceUtils.HASH_SET);
+            int markers = BasedSequence.of(charSequence).countLeading(CharPredicate.HASH);
             if (markers >= 1 && markers <= 6) titleLevel = markers;
             String useTitle = rawTitle.substring(markers).trim();
             this.title = useTitle.isEmpty() ? " " : useTitle;

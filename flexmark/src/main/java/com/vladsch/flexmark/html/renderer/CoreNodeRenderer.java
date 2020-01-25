@@ -15,10 +15,10 @@ import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.Range;
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -144,7 +144,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
-            BasedSequence language = node.getInfoDelimitedByAny(SequenceUtils.SPACE_TAB_SET);
+            BasedSequence language = node.getInfoDelimitedByAny(CharPredicate.SPACE_TAB);
             html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
         } else {
             String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();
@@ -265,10 +265,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (range.getEnd() <= endOffset) {
             endOffset = range.getEnd();
             endOffset -= eolLength;
-            endOffset -= parentNode.baseSubSequence(startOffset, endOffset).countTrailing(SequenceUtils.SPACE_TAB_SET);
+            endOffset -= parentNode.baseSubSequence(startOffset, endOffset).countTrailing(CharPredicate.SPACE_TAB);
             myNextLine++;
             nextLineStartOffset = range.getEnd();
-            nextLineStartOffset += parentNode.baseSubSequence(nextLineStartOffset, parentNode.getEndOffset()).countLeading(SequenceUtils.SPACE_TAB_SET);
+            nextLineStartOffset += parentNode.baseSubSequence(nextLineStartOffset, parentNode.getEndOffset()).countLeading(CharPredicate.SPACE_TAB);
         }
 
         if (range.getStart() > startOffset) {
@@ -284,7 +284,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         myNextLine++;
 
         // remove trailing spaces from text
-        int countTrailing = node.baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(SequenceUtils.SPACE_TAB_SET);
+        int countTrailing = node.baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(CharPredicate.SPACE_TAB);
         if (!outputBreakText && countTrailing > 0) {
             countTrailing--;
         }
@@ -294,7 +294,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         nextLineStartOffset = range.getEnd();
 
         // remove leading spaces
-        nextLineStartOffset += node.baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(SequenceUtils.SPACE_TAB_SET);
+        nextLineStartOffset += node.baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(CharPredicate.SPACE_TAB);
     }
 
     private void renderLooseParagraph(Paragraph node, NodeRendererContext context, HtmlWriter html) {
@@ -668,7 +668,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             HtmlWriter html
     ) {
         // if have SOFT BREAK or HARD BREAK as child then we open our own span
-        if (context.getHtmlOptions().sourcePositionParagraphLines && nodeChildText.indexOfAny(SequenceUtils.ANY_EOL_SET) >= 0) {
+        if (context.getHtmlOptions().sourcePositionParagraphLines && nodeChildText.indexOfAny(CharPredicate.ANY_EOL) >= 0) {
             if (myNextLine > 0) {
                 myNextLine--;
             }

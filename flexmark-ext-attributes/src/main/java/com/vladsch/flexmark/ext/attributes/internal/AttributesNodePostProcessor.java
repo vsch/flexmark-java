@@ -10,6 +10,7 @@ import com.vladsch.flexmark.parser.LightInlineParserImpl;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
@@ -291,7 +292,7 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
             FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
 
             BasedSequence info = fencedCodeBlock.getInfo();
-            BasedSequence language = fencedCodeBlock.getInfoDelimitedByAny(BasedSequence.SPACE_TAB_SET);
+            BasedSequence language = fencedCodeBlock.getInfoDelimitedByAny(CharPredicate.SPACE_TAB);
             BasedSequence infoTail = info.subSequence(language.length()).trimStart();
 
             int pos = infoTail.indexOf('{');

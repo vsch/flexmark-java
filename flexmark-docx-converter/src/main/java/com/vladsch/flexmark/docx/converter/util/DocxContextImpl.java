@@ -2,6 +2,7 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import com.vladsch.flexmark.docx.converter.DocxRendererOptions;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.docx4j.model.styles.StyleUtil;
@@ -702,7 +703,7 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
             int minSpaces = Integer.MAX_VALUE;
             int i = 0;
             for (CharSequence line : lines) {
-                leadColumns[i] = BasedSequence.of(line).countLeadingColumns(0, BasedSequence.SPACE_TAB_SET);
+                leadColumns[i] = BasedSequence.of(line).countLeadingColumns(0, CharPredicate.SPACE_TAB);
                 minSpaces = Utils.min(minSpaces, leadColumns[i]);
                 i++;
             }

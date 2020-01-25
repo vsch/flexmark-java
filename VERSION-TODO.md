@@ -218,6 +218,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 ## Next 0.59.116
 
 * Fix: add missing semi in convert to visual test functions HTML entities.
+* Fix: remove static char predicate fields from `SequenceUtils`
+* Deprecate: static char predicate fields in `SequenceUtils`
 
 ## 0.59.114
 

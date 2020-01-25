@@ -163,7 +163,7 @@ public class FormatterUtils {
                 BasedSequence sequence = prev.baseSubSequence(prev.getEndOffset(), next.getStartOffset());
                 if (!sequence.isEmpty() && sequence.isBlank()) {
                     if (!preserve) {
-                        if (collapseToEOL && sequence.indexOfAny(BasedSequence.ANY_EOL_SET) != -1) {
+                        if (collapseToEOL && sequence.indexOfAny(CharPredicate.ANY_EOL) != -1) {
                             markdown.append('\n');
                         } else {
                             markdown.append(' ');

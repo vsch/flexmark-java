@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.RomanNumeral;
 import com.vladsch.flexmark.util.format.TableCell;
 import com.vladsch.flexmark.util.html.CellAlignment;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
@@ -429,7 +430,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     int lineCount = out.getLineCountWithPending();
                     if (lineCount > 0) {
                         CharSequence lineContent = out.getLineContent(lineCount - 1);
-                        int pendingSpace = BasedSequence.of(lineContent).countTrailing(BasedSequence.SPACE_TAB_SET);
+                        int pendingSpace = BasedSequence.of(lineContent).countTrailing(CharPredicate.SPACE_TAB);
                         if (pendingSpace < 2) {
                             // replace last line
                             out.removeLines(lineCount - 1, lineCount);

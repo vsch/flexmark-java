@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
@@ -94,19 +95,19 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                 BasedSequence optionsText = NULL;
                 BasedSequence optionsClosingMarker = NULL;
                 // @formatter:off
-                if (options.group(GROUP_COORD_OPEN) != null && !options.group(GROUP_COORD_OPEN).trim().isEmpty()){coordOpeningMarker = optionsChars.subSequence(options.start(GROUP_COORD_OPEN), options.end(GROUP_COORD_OPEN)).trim(SequenceUtils.WHITESPACE_NBSP_SET);}
-                if (options.group(GROUP_SECTION) != null && !options.group(GROUP_SECTION).trim().isEmpty()){section = optionsChars.subSequence(options.start(GROUP_SECTION), options.end(GROUP_SECTION)).trim(SequenceUtils.WHITESPACE_NBSP_SET);}
-                if (options.group(GROUP_NUMBER_SEPARATOR) != null && !options.group(GROUP_NUMBER_SEPARATOR).trim().isEmpty()){numberSeparator = optionsChars.subSequence(options.start(GROUP_NUMBER_SEPARATOR), options.end(GROUP_NUMBER_SEPARATOR)).trim(SequenceUtils.WHITESPACE_NBSP_SET);}
-                if (options.group(GROUP_NUMBER) != null && !options.group(GROUP_NUMBER).trim().isEmpty()){number = optionsChars.subSequence(options.start(GROUP_NUMBER), options.end(GROUP_NUMBER)).trim(SequenceUtils.WHITESPACE_NBSP_SET);}
-                if (options.group(GROUP_COORD_CLOSE) != null && !options.group(GROUP_COORD_CLOSE).trim().isEmpty()){coordClosingMarker = optionsChars.subSequence(options.start(GROUP_COORD_CLOSE), options.end(GROUP_COORD_CLOSE)).trim(SequenceUtils.WHITESPACE_NBSP_SET);}
-                if (options.group(GROUP_OPTION_KEYWORD) != null && !options.group(GROUP_OPTION_KEYWORD).trim().isEmpty()){optionsKeyword = optionsChars.subSequence(options.start(GROUP_OPTION_KEYWORD), options.end(GROUP_OPTION_KEYWORD)).trim(SequenceUtils.WHITESPACE_NBSP_SET);}
-                if (options.group(GROUP_OPTIONS_OPEN) != null && !options.group(GROUP_OPTIONS_OPEN).trim().isEmpty()){optionsOpeningMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_OPEN), options.end(GROUP_OPTIONS_OPEN)).trim(SequenceUtils.WHITESPACE_NBSP_SET);}
+                if (options.group(GROUP_COORD_OPEN) != null && !options.group(GROUP_COORD_OPEN).trim().isEmpty()){coordOpeningMarker = optionsChars.subSequence(options.start(GROUP_COORD_OPEN), options.end(GROUP_COORD_OPEN)).trim(CharPredicate.WHITESPACE_NBSP);}
+                if (options.group(GROUP_SECTION) != null && !options.group(GROUP_SECTION).trim().isEmpty()){section = optionsChars.subSequence(options.start(GROUP_SECTION), options.end(GROUP_SECTION)).trim(CharPredicate.WHITESPACE_NBSP);}
+                if (options.group(GROUP_NUMBER_SEPARATOR) != null && !options.group(GROUP_NUMBER_SEPARATOR).trim().isEmpty()){numberSeparator = optionsChars.subSequence(options.start(GROUP_NUMBER_SEPARATOR), options.end(GROUP_NUMBER_SEPARATOR)).trim(CharPredicate.WHITESPACE_NBSP);}
+                if (options.group(GROUP_NUMBER) != null && !options.group(GROUP_NUMBER).trim().isEmpty()){number = optionsChars.subSequence(options.start(GROUP_NUMBER), options.end(GROUP_NUMBER)).trim(CharPredicate.WHITESPACE_NBSP);}
+                if (options.group(GROUP_COORD_CLOSE) != null && !options.group(GROUP_COORD_CLOSE).trim().isEmpty()){coordClosingMarker = optionsChars.subSequence(options.start(GROUP_COORD_CLOSE), options.end(GROUP_COORD_CLOSE)).trim(CharPredicate.WHITESPACE_NBSP);}
+                if (options.group(GROUP_OPTION_KEYWORD) != null && !options.group(GROUP_OPTION_KEYWORD).trim().isEmpty()){optionsKeyword = optionsChars.subSequence(options.start(GROUP_OPTION_KEYWORD), options.end(GROUP_OPTION_KEYWORD)).trim(CharPredicate.WHITESPACE_NBSP);}
+                if (options.group(GROUP_OPTIONS_OPEN) != null && !options.group(GROUP_OPTIONS_OPEN).trim().isEmpty()){optionsOpeningMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_OPEN), options.end(GROUP_OPTIONS_OPEN)).trim(CharPredicate.WHITESPACE_NBSP);}
                 if (options.group(GROUP_OPTIONS) != null){optionsText = optionsChars.subSequence(options.start(GROUP_OPTIONS), options.end(GROUP_OPTIONS));}
-                if (options.group(GROUP_OPTIONS_CLOSE) != null && !options.group(GROUP_OPTIONS_CLOSE).trim().isEmpty()){optionsClosingMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_CLOSE), options.end(GROUP_OPTIONS_CLOSE)).trim(SequenceUtils.WHITESPACE_NBSP_SET);}
+                if (options.group(GROUP_OPTIONS_CLOSE) != null && !options.group(GROUP_OPTIONS_CLOSE).trim().isEmpty()){optionsClosingMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_CLOSE), options.end(GROUP_OPTIONS_CLOSE)).trim(CharPredicate.WHITESPACE_NBSP);}
                 // @formatter:on
                 if (section.isNotNull() && optionsKeyword.isNull() && numberSeparator.isNull() && coordOpeningMarker.isNull() && section.matchChars("options")) {
                     // move all from section to options
-                    int pos = section.indexOfAny(SequenceUtils.SPACE_TAB_NBSP_SET);
+                    int pos = section.indexOfAny(CharPredicate.SPACE_TAB_NBSP);
                     if (pos < 0) {
                         optionsKeyword = section;
                     } else {
@@ -143,11 +144,11 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
             if (myOptions.optionNodes && block.getOptionsKeyword().isNotNull()) {
                 Node optionsList = new SpecExampleOptionsList(block.getOptions());
                 block.appendChild(optionsList);
-                BasedSequence trimmedOptionsList = block.getOptions().trim(SequenceUtils.WHITESPACE_NBSP_SET);
+                BasedSequence trimmedOptionsList = block.getOptions().trim(CharPredicate.WHITESPACE_NBSP);
                 if (!trimmedOptionsList.isEmpty()) {
                     BasedSequence[] list = trimmedOptionsList.split(",", 0, SequenceUtils.SPLIT_INCLUDE_DELIM_PARTS);
                     for (BasedSequence item : list) {
-                        BasedSequence option = item.trim(SequenceUtils.WHITESPACE_NBSP_SET);
+                        BasedSequence option = item.trim(CharPredicate.WHITESPACE_NBSP);
                         if (!option.isEmpty()) {
                             if (option.matches(",")) {
                                 Node optionNode = new SpecExampleOptionSeparator(option);
@@ -179,7 +180,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                 int typeBreakLength = typeBreak.length();
 
                 for (BasedSequence line : lines.subList(1, lines.size())) {
-                    if (line.length() == typeBreakLength + line.countTrailing(SequenceUtils.ANY_EOL_SET) && line.matchChars(typeBreak)) {
+                    if (line.length() == typeBreakLength + line.countTrailing(CharPredicate.ANY_EOL) && line.matchChars(typeBreak)) {
                         if (inSource) {
                             inSource = false;
                             if (sectionStart != -1) {

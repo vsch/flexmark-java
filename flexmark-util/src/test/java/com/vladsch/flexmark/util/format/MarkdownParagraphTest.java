@@ -86,7 +86,7 @@ public class MarkdownParagraphTest {
                 "\\⟦#⟧⟦ ⟧⟦item prefix or adding to only list items. Test is done.⟧" +
                 "", builder.getSegmentBuilder().toStringWithRanges());
 
-        BasedSequence sequence = actual.toSpc().trimEnd(BasedSequence.WHITESPACE_SET).appendEOL();
+        BasedSequence sequence = actual.toSpc().trimEnd(CharPredicate.WHITESPACE).appendEOL();
 
         SequenceBuilder builder2 = SequenceBuilder.emptyBuilder(basedInput);
         sequence.addSegments(builder2.getSegmentBuilder());
@@ -130,7 +130,7 @@ public class MarkdownParagraphTest {
                 "⟦item prefix or adding to only list items. Test is done.⟧" +
                 "", builder.getSegmentBuilder().toStringWithRanges());
 
-        BasedSequence sequence = actual.toSpc().trimEnd(BasedSequence.WHITESPACE_SET).appendEOL();
+        BasedSequence sequence = actual.toSpc().trimEnd(CharPredicate.WHITESPACE).appendEOL();
 
         SequenceBuilder builder2 = SequenceBuilder.emptyBuilder(basedInput);
         sequence.addSegments(builder2.getSegmentBuilder());

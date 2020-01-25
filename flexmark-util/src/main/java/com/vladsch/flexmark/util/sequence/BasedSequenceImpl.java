@@ -229,11 +229,11 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
     // @formatter:off
     @NotNull@Override final public BasedSequence extendToEndOfLine(@NotNull CharPredicate eolChars) { return extendToEndOfLine(eolChars, false);}
-    @NotNull@Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(SequenceUtils.EOL_SET, includeEol);}
-    @NotNull@Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(SequenceUtils.EOL_SET, false);}
+    @NotNull@Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(CharPredicate.EOL, includeEol);}
+    @NotNull@Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(CharPredicate.EOL, false);}
     @NotNull@Override final public BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars) { return extendToStartOfLine(eolChars, false);}
-    @NotNull@Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(SequenceUtils.EOL_SET, includeEol);}
-    @NotNull@Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(SequenceUtils.EOL_SET, false);}
+    @NotNull@Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(CharPredicate.EOL, includeEol);}
+    @NotNull@Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(CharPredicate.EOL, false);}
     // @formatter:on
 
     @NotNull

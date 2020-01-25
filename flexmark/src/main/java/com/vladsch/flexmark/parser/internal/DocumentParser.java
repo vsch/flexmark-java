@@ -16,6 +16,7 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
@@ -1056,7 +1057,7 @@ public class DocumentParser implements ParserState {
 
                     // skip leading blanks
                     BasedSequence blockChars = block.getChars();
-                    BasedSequence contentChars = blockChars.subSequence(pos + blockChars.countLeading(BasedSequence.WHITESPACE_SET, pos, blockChars.length()));
+                    BasedSequence contentChars = blockChars.subSequence(pos + blockChars.countLeading(CharPredicate.WHITESPACE, pos, blockChars.length()));
 
                     if (contentChars.isBlank()) {
                         // all used up

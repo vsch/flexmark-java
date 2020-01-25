@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -140,7 +141,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 }
                 if (node.getOptionsKeyword().isNotNull() || node.getOptionsOpeningMarker().isNotNull() || node.getOptions().isNotNull() || node.getOptionsClosingMarker().isNotNull()) {
                     String optionsText = "";
-                    BasedSequence trimmed = node.getOptions().trim(BasedSequence.WHITESPACE_NBSP_SET);
+                    BasedSequence trimmed = node.getOptions().trim(CharPredicate.WHITESPACE_NBSP);
                     if (!trimmed.isEmpty()) {
                         BasedSequence[] optionsList = trimmed.split(",", 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
                         DelimitedBuilder out = new DelimitedBuilder(", ");

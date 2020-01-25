@@ -9,8 +9,8 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
@@ -26,7 +26,7 @@ public class YouTubeLinkNodePostProcessor extends NodePostProcessor {
             if (previous instanceof Text) {
                 BasedSequence chars = previous.getChars();
                 if (chars.endsWith("@") && chars.isContinuedBy(node.getChars())) {
-                    int prevBackslash = chars.subSequence(0, chars.length() - 1).countTrailing(SequenceUtils.BACKSLASH_SET);
+                    int prevBackslash = chars.subSequence(0, chars.length() - 1).countTrailing(CharPredicate.BACKSLASH);
                     if ((prevBackslash & 1) == 0) {
                         // trim previous chars to remove '@'
                         previous.setChars(chars.subSequence(0, chars.length() - 1));

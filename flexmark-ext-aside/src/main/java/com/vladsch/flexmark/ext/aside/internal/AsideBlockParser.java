@@ -9,6 +9,7 @@ import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.core.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInStartsWithCharsHandler;
@@ -120,7 +121,7 @@ public class AsideBlockParser extends AbstractBlockParser {
     }
 
     static boolean endsWithMarker(BasedSequence line) {
-        int tailBlanks = line.countTrailing(BasedSequence.WHITESPACE_NBSP_SET);
+        int tailBlanks = line.countTrailing(CharPredicate.WHITESPACE_NBSP);
         return tailBlanks + 1 < line.length() && line.charAt(line.length() - tailBlanks - 1) == MARKER_CHAR;
     }
 

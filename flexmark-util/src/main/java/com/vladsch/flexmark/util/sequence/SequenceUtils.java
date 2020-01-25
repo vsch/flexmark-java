@@ -22,9 +22,6 @@ public interface SequenceUtils {
     String SPACE = " ";
     String ANY_EOL = "\r\n";
 
-    @Deprecated
-    String EOL_CHARS = ANY_EOL;
-
     char EOL_CHAR = ANY_EOL.charAt(1);
     char EOL_CHAR1 = ANY_EOL.charAt(0);
     char EOL_CHAR2 = ANY_EOL.charAt(1);
@@ -34,48 +31,43 @@ public interface SequenceUtils {
     char NBSP = '\u00A0';
     char LS = '\u2028'; // line separator
     char US = '\u001f';  // US or USEP - Unit Separator, also used as IntelliJDummyIdentifier in Parsings, used as a tracked offset marker in the sequence
-    char MRK = US;       // same as US but use in code signals it being related to offset marker handling
+
     String LINE_SEP = Character.toString(LS);
     String SPACE_TAB = " \t";
     String SPACE_EOL = " \n";
-
-    @Deprecated
-    String WHITESPACE_NO_EOL_CHARS = SPACE_TAB;
     String US_CHARS = Character.toString(US);
-    String MARKER_CHARS = US_CHARS;  // same as US_CHARS but use in code signals it being related to offset marker handling
     String WHITESPACE = " \t\r\n";
     String NBSP_CHARS = Character.toString(NBSP);
-
-    @Deprecated
-    String WHITESPACE_CHARS = WHITESPACE;
     String WHITESPACE_NBSP = " \t\r\n\u00A0";
 
-    @Deprecated
-    String WHITESPACE_NBSP_CHARS = WHITESPACE_NBSP;
-    CharPredicate SPACE_SET = CharPredicate.SPACE;
-    CharPredicate TAB_SET = CharPredicate.TAB;
-    CharPredicate EOL_SET = CharPredicate.EOL;
-    CharPredicate SPACE_TAB_SET = CharPredicate.SPACE_TAB;
-    CharPredicate SPACE_TAB_NBSP_SET = CharPredicate.SPACE_TAB_NBSP;
-    CharPredicate SPACE_TAB_EOL_SET = CharPredicate.SPACE_TAB_EOL;
-    CharPredicate SPACE_EOL_SET = CharPredicate.WHITESPACE;
-    CharPredicate ANY_EOL_SET = CharPredicate.ANY_EOL;
-    CharPredicate WHITESPACE_SET = CharPredicate.WHITESPACE;
-    CharPredicate WHITESPACE_NBSP_SET = CharPredicate.WHITESPACE_NBSP;
-    CharPredicate BACKSLASH_SET = CharPredicate.BACKSLASH;
-    CharPredicate US_SET = value -> value == US;
-    CharPredicate HASH_SET = CharPredicate.HASH;
-    CharPredicate DECIMAL_DIGITS = CharPredicate.HASH;
-    CharPredicate HEXADECIMAL_DIGITS = CharPredicate.HASH;
-    CharPredicate OCTAL_DIGITS = CharPredicate.HASH;
+    /**
+     * @deprecated use CharPredicate fields directly
+     */
+    @Deprecated CharPredicate SPACE_SET = CharPredicate.SPACE;
+    @Deprecated CharPredicate TAB_SET = CharPredicate.TAB;
+    @Deprecated CharPredicate EOL_SET = CharPredicate.EOL;
+    @Deprecated CharPredicate SPACE_TAB_SET = CharPredicate.SPACE_TAB;
+    @Deprecated CharPredicate SPACE_TAB_NBSP_SET = CharPredicate.SPACE_TAB_NBSP;
+    @Deprecated CharPredicate SPACE_TAB_EOL_SET = CharPredicate.SPACE_TAB_EOL;
+    @Deprecated CharPredicate SPACE_EOL_SET = CharPredicate.WHITESPACE;
+    @Deprecated CharPredicate ANY_EOL_SET = CharPredicate.ANY_EOL;
+    @Deprecated CharPredicate WHITESPACE_SET = CharPredicate.WHITESPACE;
+    @Deprecated CharPredicate WHITESPACE_NBSP_SET = CharPredicate.WHITESPACE_NBSP;
+    @Deprecated CharPredicate BACKSLASH_SET = CharPredicate.BACKSLASH;
+    @Deprecated CharPredicate US_SET = value -> value == US;
+    @Deprecated CharPredicate HASH_SET = CharPredicate.HASH;
+    @Deprecated CharPredicate DECIMAL_DIGITS = CharPredicate.HASH;
+    @Deprecated CharPredicate HEXADECIMAL_DIGITS = CharPredicate.HASH;
+    @Deprecated CharPredicate OCTAL_DIGITS = CharPredicate.HASH;
 
     /**
-     * Line Separator, used in paragraph wrapping to force start of new line
-     *
-     * @deprecated use {@link #LS} instead as it is named in Unicode
+     * @deprecated use new names instead
      */
-    @Deprecated
-    char LSEP = LS;
+    @Deprecated char LSEP = LS;
+    @Deprecated String EOL_CHARS = ANY_EOL;
+    @Deprecated String WHITESPACE_NO_EOL_CHARS = SPACE_TAB;
+    @Deprecated String WHITESPACE_CHARS = WHITESPACE;
+    @Deprecated String WHITESPACE_NBSP_CHARS = WHITESPACE_NBSP;
 
     int SPLIT_INCLUDE_DELIMS = 1;    // include delimiters as part of the split out part
     int SPLIT_TRIM_PARTS = 2;        // trim split parts
@@ -562,11 +554,11 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
-    static int countOfSpaceTab(@NotNull CharSequence thizz)                                                                     { return countOfAny(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
-    static int countOfNotSpaceTab(@NotNull CharSequence thizz)                                                                  { return countOfAny(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countOfSpaceTab(@NotNull CharSequence thizz)                                                                     { return countOfAny(thizz, CharPredicate.SPACE_TAB, 0, Integer.MAX_VALUE); }
+    static int countOfNotSpaceTab(@NotNull CharSequence thizz)                                                                  { return countOfAny(thizz, CharPredicate.SPACE_TAB.negate(), 0, Integer.MAX_VALUE); }
 
-    static int countOfWhitespace(@NotNull CharSequence thizz)                                                                   { return countOfAny(thizz, WHITESPACE_SET, Integer.MAX_VALUE); }
-    static int countOfNotWhitespace(@NotNull CharSequence thizz)                                                                { return countOfAny(thizz, WHITESPACE_SET.negate(), 0, Integer.MAX_VALUE); }
+    static int countOfWhitespace(@NotNull CharSequence thizz)                                                                   { return countOfAny(thizz, CharPredicate.WHITESPACE, Integer.MAX_VALUE); }
+    static int countOfNotWhitespace(@NotNull CharSequence thizz)                                                                { return countOfAny(thizz, CharPredicate.WHITESPACE.negate(), 0, Integer.MAX_VALUE); }
 
     static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                             { return countOfAny(thizz, chars, fromIndex, Integer.MAX_VALUE); }
     static int countOfAny(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                            { return countOfAny(thizz, chars, 0, Integer.MAX_VALUE); }
@@ -589,47 +581,47 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
-    static int countLeadingSpace(@NotNull CharSequence thizz)                                                               { return countLeading(thizz, SPACE_SET, 0, Integer.MAX_VALUE); }
-    static int countLeadingSpace(@NotNull CharSequence thizz, int startIndex)                                               { return countLeading(thizz, SPACE_SET, startIndex, Integer.MAX_VALUE); }
-    static int countLeadingSpace(@NotNull CharSequence thizz, int startIndex, int endIndex)                                 { return countLeading(thizz, SPACE_SET, startIndex, endIndex); }
-    static int countLeadingNotSpace(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, SPACE_SET.negate(), 0, Integer.MAX_VALUE); }
-    static int countLeadingNotSpace(@NotNull CharSequence thizz, int startIndex)                                            { return countLeading(thizz, SPACE_SET.negate(), startIndex, Integer.MAX_VALUE); }
-    static int countLeadingNotSpace(@NotNull CharSequence thizz, int startIndex, int endIndex)                              { return countLeading(thizz, SPACE_SET.negate(), startIndex, endIndex); }
+    static int countLeadingSpace(@NotNull CharSequence thizz)                                                               { return countLeading(thizz, CharPredicate.SPACE, 0, Integer.MAX_VALUE); }
+    static int countLeadingSpace(@NotNull CharSequence thizz, int startIndex)                                               { return countLeading(thizz, CharPredicate.SPACE, startIndex, Integer.MAX_VALUE); }
+    static int countLeadingSpace(@NotNull CharSequence thizz, int startIndex, int endIndex)                                 { return countLeading(thizz, CharPredicate.SPACE, startIndex, endIndex); }
+    static int countLeadingNotSpace(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, CharPredicate.SPACE.negate(), 0, Integer.MAX_VALUE); }
+    static int countLeadingNotSpace(@NotNull CharSequence thizz, int startIndex)                                            { return countLeading(thizz, CharPredicate.SPACE.negate(), startIndex, Integer.MAX_VALUE); }
+    static int countLeadingNotSpace(@NotNull CharSequence thizz, int startIndex, int endIndex)                              { return countLeading(thizz, CharPredicate.SPACE.negate(), startIndex, endIndex); }
 
-    static int countTrailingSpace(@NotNull CharSequence thizz)                                                              { return countTrailing(thizz, SPACE_SET, 0, Integer.MAX_VALUE); }
-    static int countTrailingSpace(@NotNull CharSequence thizz, int fromIndex)                                               { return countTrailing(thizz, SPACE_SET, 0, fromIndex); }
-    static int countTrailingSpace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                               { return countTrailing(thizz, SPACE_SET, startIndex, fromIndex); }
-    static int countTrailingNotSpace(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, SPACE_SET.negate(), 0, Integer.MAX_VALUE); }
-    static int countTrailingNotSpace(@NotNull CharSequence thizz, int fromIndex)                                            { return countTrailing(thizz, SPACE_SET.negate(), 0, fromIndex); }
-    static int countTrailingNotSpace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                            { return countTrailing(thizz, SPACE_SET.negate(), startIndex, fromIndex); }
+    static int countTrailingSpace(@NotNull CharSequence thizz)                                                              { return countTrailing(thizz, CharPredicate.SPACE, 0, Integer.MAX_VALUE); }
+    static int countTrailingSpace(@NotNull CharSequence thizz, int fromIndex)                                               { return countTrailing(thizz, CharPredicate.SPACE, 0, fromIndex); }
+    static int countTrailingSpace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                               { return countTrailing(thizz, CharPredicate.SPACE, startIndex, fromIndex); }
+    static int countTrailingNotSpace(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, CharPredicate.SPACE.negate(), 0, Integer.MAX_VALUE); }
+    static int countTrailingNotSpace(@NotNull CharSequence thizz, int fromIndex)                                            { return countTrailing(thizz, CharPredicate.SPACE.negate(), 0, fromIndex); }
+    static int countTrailingNotSpace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                            { return countTrailing(thizz, CharPredicate.SPACE.negate(), startIndex, fromIndex); }
 
-    static int countLeadingSpaceTab(@NotNull CharSequence thizz)                                                             { return countLeading(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
-    static int countLeadingSpaceTab(@NotNull CharSequence thizz, int startIndex)                                             { return countLeading(thizz, SPACE_TAB_SET, startIndex, Integer.MAX_VALUE); }
-    static int countLeadingSpaceTab(@NotNull CharSequence thizz, int startIndex, int endIndex)                               { return countLeading(thizz, SPACE_TAB_SET, startIndex, endIndex); }
-    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz)                                                          { return countLeading(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
-    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz, int startIndex)                                          { return countLeading(thizz, SPACE_TAB_SET.negate(), startIndex, Integer.MAX_VALUE); }
-    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz, int startIndex, int endIndex)                            { return countLeading(thizz, SPACE_TAB_SET.negate(), startIndex, endIndex); }
+    static int countLeadingSpaceTab(@NotNull CharSequence thizz)                                                            { return countLeading(thizz, CharPredicate.SPACE_TAB, 0, Integer.MAX_VALUE); }
+    static int countLeadingSpaceTab(@NotNull CharSequence thizz, int startIndex)                                            { return countLeading(thizz, CharPredicate.SPACE_TAB, startIndex, Integer.MAX_VALUE); }
+    static int countLeadingSpaceTab(@NotNull CharSequence thizz, int startIndex, int endIndex)                              { return countLeading(thizz, CharPredicate.SPACE_TAB, startIndex, endIndex); }
+    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz)                                                         { return countLeading(thizz, CharPredicate.SPACE_TAB.negate(), 0, Integer.MAX_VALUE); }
+    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz, int startIndex)                                         { return countLeading(thizz, CharPredicate.SPACE_TAB.negate(), startIndex, Integer.MAX_VALUE); }
+    static int countLeadingNotSpaceTab(@NotNull CharSequence thizz, int startIndex, int endIndex)                           { return countLeading(thizz, CharPredicate.SPACE_TAB.negate(), startIndex, endIndex); }
 
-    static int countTrailingSpaceTab(@NotNull CharSequence thizz)                                                            { return countTrailing(thizz, SPACE_TAB_SET, 0, Integer.MAX_VALUE); }
-    static int countTrailingSpaceTab(@NotNull CharSequence thizz, int fromIndex)                                             { return countTrailing(thizz, SPACE_TAB_SET, 0, fromIndex); }
-    static int countTrailingSpaceTab(@NotNull CharSequence thizz, int startIndex, int fromIndex)                             { return countTrailing(thizz, SPACE_TAB_SET, startIndex, fromIndex); }
-    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz)                                                         { return countTrailing(thizz, SPACE_TAB_SET.negate(), 0, Integer.MAX_VALUE); }
-    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz, int fromIndex)                                          { return countTrailing(thizz, SPACE_TAB_SET.negate(), 0, fromIndex); }
-    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz, int startIndex, int fromIndex)                          { return countTrailing(thizz, SPACE_TAB_SET.negate(), startIndex, fromIndex); }
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz)                                                           { return countTrailing(thizz, CharPredicate.SPACE_TAB, 0, Integer.MAX_VALUE); }
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz, int fromIndex)                                            { return countTrailing(thizz, CharPredicate.SPACE_TAB, 0, fromIndex); }
+    static int countTrailingSpaceTab(@NotNull CharSequence thizz, int startIndex, int fromIndex)                            { return countTrailing(thizz, CharPredicate.SPACE_TAB, startIndex, fromIndex); }
+    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz)                                                        { return countTrailing(thizz, CharPredicate.SPACE_TAB.negate(), 0, Integer.MAX_VALUE); }
+    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz, int fromIndex)                                         { return countTrailing(thizz, CharPredicate.SPACE_TAB.negate(), 0, fromIndex); }
+    static int countTrailingNotSpaceTab(@NotNull CharSequence thizz, int startIndex, int fromIndex)                         { return countTrailing(thizz, CharPredicate.SPACE_TAB.negate(), startIndex, fromIndex); }
 
-    static int countLeadingWhitespace(@NotNull CharSequence thizz)                                                           { return countLeading(thizz, WHITESPACE_SET, 0, Integer.MAX_VALUE); }
-    static int countLeadingWhitespace(@NotNull CharSequence thizz, int startIndex)                                           { return countLeading(thizz, WHITESPACE_SET, startIndex, Integer.MAX_VALUE); }
-    static int countLeadingWhitespace(@NotNull CharSequence thizz, int startIndex, int endIndex)                             { return countLeading(thizz, WHITESPACE_SET, startIndex, endIndex); }
-    static int countLeadingNotWhitespace(@NotNull CharSequence thizz)                                                        { return countLeading(thizz, WHITESPACE_SET.negate(), 0, Integer.MAX_VALUE); }
-    static int countLeadingNotWhitespace(@NotNull CharSequence thizz, int startIndex)                                        { return countLeading(thizz, WHITESPACE_SET.negate(), startIndex, Integer.MAX_VALUE); }
-    static int countLeadingNotWhitespace(@NotNull CharSequence thizz, int startIndex, int endIndex)                          { return countLeading(thizz, WHITESPACE_SET.negate(), startIndex, endIndex); }
+    static int countLeadingWhitespace(@NotNull CharSequence thizz)                                                          { return countLeading(thizz, CharPredicate.WHITESPACE, 0, Integer.MAX_VALUE); }
+    static int countLeadingWhitespace(@NotNull CharSequence thizz, int startIndex)                                          { return countLeading(thizz, CharPredicate.WHITESPACE, startIndex, Integer.MAX_VALUE); }
+    static int countLeadingWhitespace(@NotNull CharSequence thizz, int startIndex, int endIndex)                            { return countLeading(thizz, CharPredicate.WHITESPACE, startIndex, endIndex); }
+    static int countLeadingNotWhitespace(@NotNull CharSequence thizz)                                                       { return countLeading(thizz, CharPredicate.WHITESPACE.negate(), 0, Integer.MAX_VALUE); }
+    static int countLeadingNotWhitespace(@NotNull CharSequence thizz, int startIndex)                                       { return countLeading(thizz, CharPredicate.WHITESPACE.negate(), startIndex, Integer.MAX_VALUE); }
+    static int countLeadingNotWhitespace(@NotNull CharSequence thizz, int startIndex, int endIndex)                         { return countLeading(thizz, CharPredicate.WHITESPACE.negate(), startIndex, endIndex); }
 
-    static int countTrailingWhitespace(@NotNull CharSequence thizz)                                                          { return countTrailing(thizz, WHITESPACE_SET, 0, Integer.MAX_VALUE); }
-    static int countTrailingWhitespace(@NotNull CharSequence thizz, int fromIndex)                                           { return countTrailing(thizz, WHITESPACE_SET, 0, fromIndex); }
-    static int countTrailingWhitespace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                           { return countTrailing(thizz, WHITESPACE_SET, startIndex, fromIndex); }
-    static int countTrailingNotWhitespace(@NotNull CharSequence thizz)                                                       { return countTrailing(thizz, WHITESPACE_SET.negate(), 0, Integer.MAX_VALUE); }
-    static int countTrailingNotWhitespace(@NotNull CharSequence thizz, int fromIndex)                                        { return countTrailing(thizz, WHITESPACE_SET.negate(), 0, fromIndex); }
-    static int countTrailingNotWhitespace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                        { return countTrailing(thizz, WHITESPACE_SET.negate(), startIndex, fromIndex); }
+    static int countTrailingWhitespace(@NotNull CharSequence thizz)                                                         { return countTrailing(thizz, CharPredicate.WHITESPACE, 0, Integer.MAX_VALUE); }
+    static int countTrailingWhitespace(@NotNull CharSequence thizz, int fromIndex)                                          { return countTrailing(thizz, CharPredicate.WHITESPACE, 0, fromIndex); }
+    static int countTrailingWhitespace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                          { return countTrailing(thizz, CharPredicate.WHITESPACE, startIndex, fromIndex); }
+    static int countTrailingNotWhitespace(@NotNull CharSequence thizz)                                                      { return countTrailing(thizz, CharPredicate.WHITESPACE.negate(), 0, Integer.MAX_VALUE); }
+    static int countTrailingNotWhitespace(@NotNull CharSequence thizz, int fromIndex)                                       { return countTrailing(thizz, CharPredicate.WHITESPACE.negate(), 0, fromIndex); }
+    static int countTrailingNotWhitespace(@NotNull CharSequence thizz, int startIndex, int fromIndex)                       { return countTrailing(thizz, CharPredicate.WHITESPACE.negate(), startIndex, fromIndex); }
 
     static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                      { return countLeading(thizz, chars, 0, Integer.MAX_VALUE); }
     static int countLeading(@NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex)                       { return countLeading(thizz, chars, fromIndex, Integer.MAX_VALUE); }
@@ -683,42 +675,42 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
-    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, @NotNull CharPredicate chars)                         { return subSequence(thizz, trimStartRange(thizz, 0, chars)); }
-    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, @NotNull CharPredicate chars)                     { return trimmedStart(thizz, 0, chars); }
-    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, @NotNull CharPredicate chars)                           { return trimEnd(thizz, 0, chars); }
-    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, @NotNull CharPredicate chars)                       { return trimmedEnd(thizz, 0, chars); }
-    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, @NotNull CharPredicate chars)                              { return trim(thizz, 0, chars); }
-    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, @NotNull CharPredicate chars)                  { return trimmed(thizz, 0, chars); }
-    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, int keep)                                             { return trimStart(thizz, keep, WHITESPACE_SET); }
-    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, int keep)                                         { return trimmedStart(thizz, keep, WHITESPACE_SET); }
-    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, int keep)                                               { return trimEnd(thizz, keep, WHITESPACE_SET); }
-    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, int keep)                                           { return trimmedEnd(thizz, keep, WHITESPACE_SET); }
-    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, int keep)                                                  { return trim(thizz, keep, WHITESPACE_SET); }
-    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, int keep)                                      { return trimmed(thizz, keep, WHITESPACE_SET); }
-    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz)                                                       { return trimStart(thizz, 0, WHITESPACE_SET); }
-    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz)                                                   { return trimmedStart(thizz, 0, WHITESPACE_SET); }
-    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz)                                                         { return trimEnd(thizz, 0, WHITESPACE_SET); }
-    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz)                                                     { return trimmedEnd(thizz, 0, WHITESPACE_SET); }
-    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz)                                                            { return trim(thizz, 0, WHITESPACE_SET); }
-    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz)                                                { return trimmed(thizz, 0, WHITESPACE_SET); }
-    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, int keep, @NotNull CharPredicate chars)               { return subSequence(thizz, trimStartRange(thizz, keep, chars)); }
-    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, int keep, @NotNull CharPredicate chars)           { return subSequenceBefore(thizz, trimStartRange(thizz, keep, chars)); }
-    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, int keep, @NotNull CharPredicate chars)                 { return subSequence(thizz, trimEndRange(thizz, keep, chars)); }
-    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, int keep, @NotNull CharPredicate chars)             { return subSequenceAfter(thizz, trimEndRange(thizz, keep, chars)); }
-    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, int keep, @NotNull CharPredicate chars)                    { return subSequence(thizz, trimRange(thizz, keep, chars)); }
-    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, int keep, @NotNull CharPredicate chars)        { return subSequenceBeforeAfter(thizz, trimRange(thizz, keep, chars)); }
+    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, @NotNull CharPredicate chars)                        { return subSequence(thizz, trimStartRange(thizz, 0, chars)); }
+    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, @NotNull CharPredicate chars)                    { return trimmedStart(thizz, 0, chars); }
+    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, @NotNull CharPredicate chars)                          { return trimEnd(thizz, 0, chars); }
+    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, @NotNull CharPredicate chars)                      { return trimmedEnd(thizz, 0, chars); }
+    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, @NotNull CharPredicate chars)                             { return trim(thizz, 0, chars); }
+    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, @NotNull CharPredicate chars)                 { return trimmed(thizz, 0, chars); }
+    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, int keep)                                            { return trimStart(thizz, keep, CharPredicate.WHITESPACE); }
+    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, int keep)                                        { return trimmedStart(thizz, keep, CharPredicate.WHITESPACE); }
+    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, int keep)                                              { return trimEnd(thizz, keep, CharPredicate.WHITESPACE); }
+    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, int keep)                                          { return trimmedEnd(thizz, keep, CharPredicate.WHITESPACE); }
+    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, int keep)                                                 { return trim(thizz, keep, CharPredicate.WHITESPACE); }
+    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, int keep)                                     { return trimmed(thizz, keep, CharPredicate.WHITESPACE); }
+    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz)                                                      { return trimStart(thizz, 0, CharPredicate.WHITESPACE); }
+    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz)                                                  { return trimmedStart(thizz, 0, CharPredicate.WHITESPACE); }
+    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz)                                                        { return trimEnd(thizz, 0, CharPredicate.WHITESPACE); }
+    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz)                                                    { return trimmedEnd(thizz, 0, CharPredicate.WHITESPACE); }
+    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz)                                                           { return trim(thizz, 0, CharPredicate.WHITESPACE); }
+    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz)                                               { return trimmed(thizz, 0, CharPredicate.WHITESPACE); }
+    @NotNull static <T extends CharSequence> T trimStart(@NotNull T thizz, int keep, @NotNull CharPredicate chars)              { return subSequence(thizz, trimStartRange(thizz, keep, chars)); }
+    @Nullable static <T extends CharSequence> T trimmedStart(@NotNull T thizz, int keep, @NotNull CharPredicate chars)          { return subSequenceBefore(thizz, trimStartRange(thizz, keep, chars)); }
+    @NotNull static <T extends CharSequence> T trimEnd(@NotNull T thizz, int keep, @NotNull CharPredicate chars)                { return subSequence(thizz, trimEndRange(thizz, keep, chars)); }
+    @Nullable static <T extends CharSequence> T trimmedEnd(@NotNull T thizz, int keep, @NotNull CharPredicate chars)            { return subSequenceAfter(thizz, trimEndRange(thizz, keep, chars)); }
+    @NotNull static <T extends CharSequence> T trim(@NotNull T thizz, int keep, @NotNull CharPredicate chars)                   { return subSequence(thizz, trimRange(thizz, keep, chars)); }
+    @NotNull static <T extends CharSequence> Pair<T, T> trimmed(@NotNull T thizz, int keep, @NotNull CharPredicate chars)       { return subSequenceBeforeAfter(thizz, trimRange(thizz, keep, chars)); }
     // @formatter:on
 
     // @formatter:off
-    static Range trimStartRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)  { return trimStartRange(thizz, 0, chars);}
-    static Range trimEndRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)    { return trimEndRange(thizz, 0, chars);}
-    static Range trimRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)       { return trimRange(thizz, 0, chars);}
-    static Range trimStartRange(@NotNull CharSequence thizz, int keep)                      { return trimStartRange(thizz, keep, WHITESPACE_SET);}
-    static Range trimEndRange(@NotNull CharSequence thizz, int keep)                        { return trimEndRange(thizz, keep, WHITESPACE_SET);}
-    static Range trimRange(@NotNull CharSequence thizz, int keep)                           { return trimRange(thizz, keep, WHITESPACE_SET);}
-    static Range trimStartRange(@NotNull CharSequence thizz)                                { return trimStartRange(thizz, 0, WHITESPACE_SET);}
-    static Range trimEndRange(@NotNull CharSequence thizz)                                  { return trimEndRange(thizz, 0, WHITESPACE_SET);}
-    static Range trimRange(@NotNull CharSequence thizz)                                     { return trimRange(thizz, 0, WHITESPACE_SET);}
+    static Range trimStartRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                      { return trimStartRange(thizz, 0, chars);}
+    static Range trimEndRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                        { return trimEndRange(thizz, 0, chars);}
+    static Range trimRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                                           { return trimRange(thizz, 0, chars);}
+    static Range trimStartRange(@NotNull CharSequence thizz, int keep)                                                          { return trimStartRange(thizz, keep, CharPredicate.WHITESPACE);}
+    static Range trimEndRange(@NotNull CharSequence thizz, int keep)                                                            { return trimEndRange(thizz, keep, CharPredicate.WHITESPACE);}
+    static Range trimRange(@NotNull CharSequence thizz, int keep)                                                               { return trimRange(thizz, keep, CharPredicate.WHITESPACE);}
+    static Range trimStartRange(@NotNull CharSequence thizz)                                                                    { return trimStartRange(thizz, 0, CharPredicate.WHITESPACE);}
+    static Range trimEndRange(@NotNull CharSequence thizz)                                                                      { return trimEndRange(thizz, 0, CharPredicate.WHITESPACE);}
+    static Range trimRange(@NotNull CharSequence thizz)                                                                         { return trimRange(thizz, 0, CharPredicate.WHITESPACE);}
     // @formatter:on
 
     @NotNull
@@ -853,9 +845,9 @@ public interface SequenceUtils {
 
     // @formatter:off
     static int endOfLine(@NotNull CharSequence thizz, int index)                                            { return endOfDelimitedBy(thizz, SequenceUtils.EOL, index); }
-    static int endOfLineAnyEOL(@NotNull CharSequence thizz, int index)                                      { return endOfDelimitedByAny(thizz, SequenceUtils.ANY_EOL_SET, index); }
+    static int endOfLineAnyEOL(@NotNull CharSequence thizz, int index)                                      { return endOfDelimitedByAny(thizz, CharPredicate.ANY_EOL, index); }
     static int startOfLine(@NotNull CharSequence thizz, int index)                                          { return startOfDelimitedBy(thizz, SequenceUtils.EOL, index); }
-    static int startOfLineAnyEOL(@NotNull CharSequence thizz, int index)                                    { return startOfDelimitedByAny(thizz, SequenceUtils.ANY_EOL_SET, index); }
+    static int startOfLineAnyEOL(@NotNull CharSequence thizz, int index)                                    { return startOfDelimitedByAny(thizz, CharPredicate.ANY_EOL, index); }
 
     static int startOfDelimitedByAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index)   { return startOfDelimitedByAny(thizz, s.negate(),index); }
     static int endOfDelimitedByAnyNot(@NotNull CharSequence thizz, @NotNull CharPredicate s, int index)     { return endOfDelimitedByAny(thizz, s.negate(),index); }
@@ -934,12 +926,12 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
-    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz)                                   { return leadingBlankLinesRange(thizz, SequenceUtils.EOL_SET, 0, Integer.MAX_VALUE); }
-    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int startIndex)                   { return leadingBlankLinesRange(thizz, SequenceUtils.EOL_SET, startIndex, Integer.MAX_VALUE); }
-    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int fromIndex, int endIndex)      { return leadingBlankLinesRange(thizz, SequenceUtils.EOL_SET, fromIndex, endIndex); }
-    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz)                                  { return trailingBlankLinesRange(thizz, SequenceUtils.EOL_SET, 0, Integer.MAX_VALUE); }
-    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int fromIndex)                   { return trailingBlankLinesRange(thizz, SequenceUtils.EOL_SET, fromIndex, Integer.MAX_VALUE); }
-    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int startIndex, int fromIndex)   { return trailingBlankLinesRange(thizz, SequenceUtils.EOL_SET, startIndex,fromIndex); }
+    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz)                                   { return leadingBlankLinesRange(thizz, CharPredicate.EOL, 0, Integer.MAX_VALUE); }
+    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int startIndex)                   { return leadingBlankLinesRange(thizz, CharPredicate.EOL, startIndex, Integer.MAX_VALUE); }
+    @NotNull static Range leadingBlankLinesRange(@NotNull CharSequence thizz, int fromIndex, int endIndex)      { return leadingBlankLinesRange(thizz, CharPredicate.EOL, fromIndex, endIndex); }
+    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz)                                  { return trailingBlankLinesRange(thizz, CharPredicate.EOL, 0, Integer.MAX_VALUE); }
+    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int fromIndex)                   { return trailingBlankLinesRange(thizz, CharPredicate.EOL, fromIndex, Integer.MAX_VALUE); }
+    @NotNull static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int startIndex, int fromIndex)   { return trailingBlankLinesRange(thizz, CharPredicate.EOL, startIndex,fromIndex); }
     // @formatter:on
 
     @NotNull
@@ -983,9 +975,9 @@ public interface SequenceUtils {
     }
 
     // @formatter:off
-    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz)                                { return blankLinesRemovedRanges(thizz, SequenceUtils.EOL_SET, 0, Integer.MAX_VALUE); }
-    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz, int fromIndex)                 { return blankLinesRemovedRanges(thizz, SequenceUtils.EOL_SET, fromIndex, Integer.MAX_VALUE); }
-    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz, int fromIndex, int endIndex)   { return blankLinesRemovedRanges(thizz, SequenceUtils.EOL_SET, fromIndex, endIndex); }
+    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz)                                { return blankLinesRemovedRanges(thizz, CharPredicate.EOL, 0, Integer.MAX_VALUE); }
+    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz, int fromIndex)                 { return blankLinesRemovedRanges(thizz, CharPredicate.EOL, fromIndex, Integer.MAX_VALUE); }
+    @NotNull static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz, int fromIndex, int endIndex)   { return blankLinesRemovedRanges(thizz, CharPredicate.EOL, fromIndex, endIndex); }
     // @formatter:on
 
     @NotNull
@@ -1011,7 +1003,7 @@ public interface SequenceUtils {
 
     // @formatter:off
     static boolean isEmpty(@NotNull CharSequence thizz)                                                         { return thizz.length() == 0; }
-    static boolean isBlank(@NotNull CharSequence thizz)                                                         { return isEmpty(thizz) || countLeading(thizz, SequenceUtils.WHITESPACE_SET, 0, Integer.MAX_VALUE) == thizz.length(); }
+    static boolean isBlank(@NotNull CharSequence thizz)                                                         { return isEmpty(thizz) || countLeading(thizz, CharPredicate.WHITESPACE, 0, Integer.MAX_VALUE) == thizz.length(); }
     static boolean isNotEmpty(@NotNull CharSequence thizz)                                                      { return thizz.length() != 0; }
     static boolean isNotBlank(@NotNull CharSequence thizz)                                                      { return !isBlank(thizz); }
 
@@ -1023,43 +1015,43 @@ public interface SequenceUtils {
     static boolean endsWith(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                          { return countTrailing(thizz, chars) > 0; }
     static boolean startsWith(@NotNull CharSequence thizz, @NotNull CharPredicate chars)                        { return countLeading(thizz, chars) > 0; }
 
-    static boolean endsWithEOL(@NotNull CharSequence thizz)                                                     { return endsWith(thizz, SequenceUtils.EOL_SET); }
-    static boolean endsWithAnyEOL(@NotNull CharSequence thizz)                                                  { return endsWith(thizz, SequenceUtils.ANY_EOL_SET); }
-    static boolean endsWithSpace(@NotNull CharSequence thizz)                                                   { return endsWith(thizz, SequenceUtils.SPACE_SET); }
-    static boolean endsWithSpaceTab(@NotNull CharSequence thizz)                                                { return endsWith(thizz, SequenceUtils.SPACE_TAB_SET); }
-    static boolean endsWithWhitespace(@NotNull CharSequence thizz)                                              { return endsWith(thizz, SequenceUtils.WHITESPACE_SET); }
+    static boolean endsWithEOL(@NotNull CharSequence thizz)                                                     { return endsWith(thizz, CharPredicate.EOL); }
+    static boolean endsWithAnyEOL(@NotNull CharSequence thizz)                                                  { return endsWith(thizz, CharPredicate.ANY_EOL); }
+    static boolean endsWithSpace(@NotNull CharSequence thizz)                                                   { return endsWith(thizz, CharPredicate.SPACE); }
+    static boolean endsWithSpaceTab(@NotNull CharSequence thizz)                                                { return endsWith(thizz, CharPredicate.SPACE_TAB); }
+    static boolean endsWithWhitespace(@NotNull CharSequence thizz)                                              { return endsWith(thizz, CharPredicate.WHITESPACE); }
 
-    static boolean startsWithEOL(@NotNull CharSequence thizz)                                                   { return startsWith(thizz, SequenceUtils.EOL_SET); }
-    static boolean startsWithAnyEOL(@NotNull CharSequence thizz)                                                { return startsWith(thizz, SequenceUtils.ANY_EOL_SET); }
-    static boolean startsWithSpace(@NotNull CharSequence thizz)                                                 { return startsWith(thizz, SequenceUtils.SPACE_SET); }
-    static boolean startsWithSpaceTab(@NotNull CharSequence thizz)                                              { return startsWith(thizz, SequenceUtils.SPACE_TAB_SET); }
-    static boolean startsWithWhitespace(@NotNull CharSequence thizz)                                            { return startsWith(thizz, SequenceUtils.WHITESPACE_SET); }
+    static boolean startsWithEOL(@NotNull CharSequence thizz)                                                   { return startsWith(thizz, CharPredicate.EOL); }
+    static boolean startsWithAnyEOL(@NotNull CharSequence thizz)                                                { return startsWith(thizz, CharPredicate.ANY_EOL); }
+    static boolean startsWithSpace(@NotNull CharSequence thizz)                                                 { return startsWith(thizz, CharPredicate.SPACE); }
+    static boolean startsWithSpaceTab(@NotNull CharSequence thizz)                                              { return startsWith(thizz, CharPredicate.SPACE_TAB); }
+    static boolean startsWithWhitespace(@NotNull CharSequence thizz)                                            { return startsWith(thizz, CharPredicate.WHITESPACE); }
     // @formatter:on
 
     // @formatter:off
-    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter)                                                                       { return splitList(thizz, delimiter, 0, 0, null); }
-    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)  { return splitList(thizz, delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
-    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags)                                                 { return splitList(thizz, delimiter, limit, flags, null); }
-    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)             { return splitList(thizz, delimiter, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter)                                                                                       { return splitList(thizz, delimiter, 0, 0, null); }
+    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)                  { return splitList(thizz, delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags)                                                                 { return splitList(thizz, delimiter, limit, flags, null); }
+    static <T extends CharSequence> @NotNull List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                             { return splitList(thizz, delimiter, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
 
     // NOTE: these default to including delimiters as part of split item
-    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz)                                                                                                     { return splitList(thizz, SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS, null); }
-    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz, boolean includeDelims)                                                                              { return splitList(thizz, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
-    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz, boolean includeDelims, @Nullable CharPredicate trimChars)                                           { return splitList(thizz, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz)                                                                                                                     { return splitList(thizz, SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS, null); }
+    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz, boolean includeDelims)                                                                                              { return splitList(thizz, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
+    static <T extends CharSequence> @NotNull List<T> splitListEOL(@NotNull T thizz, boolean includeDelims, @Nullable CharPredicate trimChars)                                                           { return splitList(thizz, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
 
-    static <T extends CharSequence> @NotNull T[] splitEOL(@NotNull T thizz, T[] emptyArray)                                                                                                           { return split(thizz, emptyArray, SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS,null); }
-    static <T extends CharSequence> @NotNull T[] splitEOL(@NotNull T thizz, T[] emptyArray, boolean includeDelims)                                                                                    { return split(thizz, emptyArray, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
-    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                   { return split(thizz, emptyArray, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
-    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter)                                                                             { return split(thizz, emptyArray, delimiter, 0, 0, null); }
-    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)        { return split(thizz, emptyArray, delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
-    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, int flags)                                                       { return split(thizz, emptyArray, delimiter, limit, flags, null); }
-    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars)                    { return splitList((T)thizz, delimiter, limit, flags, trimChars).toArray(emptyArray);}
+    static <T extends CharSequence> @NotNull T[] splitEOL(@NotNull T thizz, T[] emptyArray)                                                                                                             { return split(thizz, emptyArray, SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS,null); }
+    static <T extends CharSequence> @NotNull T[] splitEOL(@NotNull T thizz, T[] emptyArray, boolean includeDelims)                                                                                      { return split(thizz, emptyArray, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                     { return split(thizz, emptyArray, SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter)                                                                               { return split(thizz, emptyArray, delimiter, 0, 0, null); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)          { return split(thizz, emptyArray, delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, int flags)                                                         { return split(thizz, emptyArray, delimiter, limit, flags, null); }
+    static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars)                      { return splitList((T)thizz, delimiter, limit, flags, trimChars).toArray(emptyArray);}
     // @formatter:on
 
     @SuppressWarnings("unchecked")
     @NotNull
     static <T extends CharSequence> List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
-        if (trimChars == null) trimChars = WHITESPACE_SET;
+        if (trimChars == null) trimChars = CharPredicate.WHITESPACE;
         else flags |= SPLIT_TRIM_PARTS;
 
         if (limit < 1) limit = Integer.MAX_VALUE;
@@ -1106,7 +1098,7 @@ public interface SequenceUtils {
     }
 
     static int columnAtIndex(@NotNull CharSequence thizz, int index) {
-        int lineStart = lastIndexOfAny(thizz, SequenceUtils.ANY_EOL_SET, index);
+        int lineStart = lastIndexOfAny(thizz, CharPredicate.ANY_EOL, index);
         return index - (lineStart == -1 ? 0 : lineStart + eolStartLength(thizz, lineStart));
     }
 

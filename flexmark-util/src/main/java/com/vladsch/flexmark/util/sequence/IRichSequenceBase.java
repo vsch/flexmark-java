@@ -371,18 +371,18 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @NotNull @Override final public T trimmedEnd(@NotNull CharPredicate chars)                              { return trimmedEnd(0, chars); }
     @NotNull @Override final public T trim(@NotNull CharPredicate chars)                                    { return trim(0, chars); }
     @NotNull @Override final public Pair<T, T> trimmed(@NotNull CharPredicate chars)                        { return trimmed(0, chars); }
-    @NotNull @Override final public T trimStart(int keep)                                                   { return trimStart(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trimmedStart(int keep)                                                { return trimmedStart(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trimEnd(int keep)                                                     { return trimEnd(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trimmedEnd(int keep)                                                  { return trimmedEnd(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trim(int keep)                                                        { return trim(keep, WHITESPACE_SET); }
-    @NotNull @Override final public Pair<T, T> trimmed(int keep)                                            { return trimmed(keep, WHITESPACE_SET); }
-    @NotNull @Override final public T trimStart()                                                           { return trimStart(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trimmedStart()                                                        { return trimmedStart(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trimEnd()                                                             { return trimEnd(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trimmedEnd()                                                          { return trimmedEnd(0, WHITESPACE_SET); }
-    @NotNull @Override final public T trim()                                                                { return trim(0, WHITESPACE_SET); }
-    @NotNull @Override final public Pair<T, T> trimmed()                                                    { return trimmed(0, WHITESPACE_SET); }
+    @NotNull @Override final public T trimStart(int keep)                                                   { return trimStart(keep, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trimmedStart(int keep)                                                { return trimmedStart(keep, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trimEnd(int keep)                                                     { return trimEnd(keep, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trimmedEnd(int keep)                                                  { return trimmedEnd(keep, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trim(int keep)                                                        { return trim(keep, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public Pair<T, T> trimmed(int keep)                                            { return trimmed(keep, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trimStart()                                                           { return trimStart(0, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trimmedStart()                                                        { return trimmedStart(0, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trimEnd()                                                             { return trimEnd(0, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trimmedEnd()                                                          { return trimmedEnd(0, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public T trim()                                                                { return trim(0, CharPredicate.WHITESPACE); }
+    @NotNull @Override final public Pair<T, T> trimmed()                                                    { return trimmed(0, CharPredicate.WHITESPACE); }
     @NotNull @Override final public T trimStart(int keep, @NotNull CharPredicate chars)                     { return subSequence(trimStartRange(keep, chars)); }
     @NotNull @Override final public T trimmedStart(int keep, @NotNull CharPredicate chars)                  { return subSequenceBefore(trimStartRange(keep, chars)); }
     @NotNull @Override final public T trimEnd(int keep, @NotNull CharPredicate chars)                       { return subSequence(trimEndRange(keep, chars)); }
@@ -524,15 +524,15 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     // @formatter:on
 
     // @formatter:off
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol)                                                                     { return trimToEndOfLine(SequenceUtils.EOL_SET, includeEol, 0); }
-    @NotNull @Override public T trimToEndOfLine(int index)                                                                              { return trimToEndOfLine(SequenceUtils.EOL_SET, false, 0); }
-    @NotNull @Override public T trimToEndOfLine()                                                                                       { return trimToEndOfLine(SequenceUtils.EOL_SET, false, 0); }
-    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index)                                                          { return trimToEndOfLine(SequenceUtils.EOL_SET, includeEol, index); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol)                                                                     { return trimToEndOfLine(CharPredicate.EOL, includeEol, 0); }
+    @NotNull @Override public T trimToEndOfLine(int index)                                                                              { return trimToEndOfLine(CharPredicate.EOL, false, 0); }
+    @NotNull @Override public T trimToEndOfLine()                                                                                       { return trimToEndOfLine(CharPredicate.EOL, false, 0); }
+    @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index)                                                          { return trimToEndOfLine(CharPredicate.EOL, includeEol, index); }
 
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol)                                                                   { return trimToStartOfLine(SequenceUtils.EOL_SET, includeEol, 0); }
-    @NotNull @Override public T trimToStartOfLine(int index)                                                                            { return trimToStartOfLine(SequenceUtils.EOL_SET, false, 0); }
-    @NotNull @Override public T trimToStartOfLine()                                                                                     { return trimToStartOfLine(SequenceUtils.EOL_SET, false, 0); }
-    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index)                                                        { return trimToStartOfLine(SequenceUtils.EOL_SET, includeEol, index); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol)                                                                   { return trimToStartOfLine(CharPredicate.EOL, includeEol, 0); }
+    @NotNull @Override public T trimToStartOfLine(int index)                                                                            { return trimToStartOfLine(CharPredicate.EOL, false, 0); }
+    @NotNull @Override public T trimToStartOfLine()                                                                                     { return trimToStartOfLine(CharPredicate.EOL, false, 0); }
+    @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index)                                                        { return trimToStartOfLine(CharPredicate.EOL, includeEol, index); }
     // @formatter:on
 
     @NotNull
