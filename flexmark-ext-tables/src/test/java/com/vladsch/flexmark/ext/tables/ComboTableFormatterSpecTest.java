@@ -26,6 +26,8 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .toImmutable();
 
+    private static CharWidthProvider WIDTH_PROVIDER = new WidthProvider();
+
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("gfm", new MutableDataSet()
@@ -78,9 +80,22 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
                     }
                 })
         );
+        optionsMap.put("width-provider", new MutableDataSet().set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, WIDTH_PROVIDER));
     }
     public ComboTableFormatterSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);
+    }
+
+    static class WidthProvider implements CharWidthProvider {
+        @Override
+        public int getSpaceWidth() {
+            return 8;
+        }
+
+        @Override
+        public int getCharWidth(char c) {
+            return c <= 255 ? 8 : 13;
+        }
     }
 
     @Parameterized.Parameters(name = "{0}")

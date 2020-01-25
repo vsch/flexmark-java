@@ -707,7 +707,6 @@ public class MarkdownTable {
             for (TableRow row : header.rows) {
                 int j = 0;
                 int jSpan = 0;
-                delta.value = 0;
                 int kMax = row.cells.size();
                 for (int k = 0; k < kMax; k++) {
                     TableCell cell = row.cells.get(k);
@@ -718,6 +717,7 @@ public class MarkdownTable {
                         if (cell.columnSpan > 1) spanAlignment.set(jSpan);
                     }
 
+                    delta.value = 0;
                     BasedSequence cellText = cellText(row.cells, k, false, true, 0, null, delta);
                     int width = options.charWidthProvider.getStringWidth(cellText) + options.spacePad + options.pipeWidth * cell.columnSpan;
                     if (cell.columnSpan > 1) {
@@ -735,13 +735,13 @@ public class MarkdownTable {
 
         if (body.rows.size() > 0) {
             int i = 0;
-            delta.value = 0;
             for (TableRow row : body.rows) {
                 int j = 0;
                 int jSpan = 0;
                 int kMax = row.cells.size();
                 for (int k = 0; k < kMax; k++) {
                     TableCell cell = row.cells.get(k);
+                    delta.value = 0;
                     BasedSequence cellText = cellText(row.cells, k, false, false, 0, null, delta);
                     int width = options.charWidthProvider.getStringWidth(cellText) + options.spacePad + options.pipeWidth * cell.columnSpan;
                     if (cell.columnSpan > 1) {
@@ -1157,7 +1157,6 @@ public class MarkdownTable {
 
     public void appendTable(LineAppendable out) {
         // we will prepare the separator based on max columns
-        Ref<Integer> delta = new Ref<>(0);
         CharSequence linePrefix = formatTableIndentPrefix;
 
         trackedOffsets.sort(Comparator.comparing(TrackedOffset::getOffset));
@@ -1167,7 +1166,7 @@ public class MarkdownTable {
 
         finalizeTable();
 
-        appendRows(out, header.rows, true, linePrefix, delta);
+        appendRows(out, header.rows, true, linePrefix);
 
         {
             out.append(linePrefix);
@@ -1179,25 +1178,26 @@ public class MarkdownTable {
             }
 
             int j = 0;
-            delta.value = 0;
+            Ref<Integer> delta = new Ref<>(0);
             for (CellAlignment alignment : alignments) {
                 CellAlignment alignment1 = adjustCellAlignment(alignment);
+
                 int colonCount = alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.RIGHT ? 1 : alignment1 == CellAlignment.CENTER ? 2 : 0;
-                int dashCount = (columnWidths[j] - colonCount * options.colonWidth - options.pipeWidth) / options.dashWidth;
+                int diff = columnWidths[j] - colonCount * options.colonWidth - options.pipeWidth;
+                int dashCount = (delta.value + diff) / options.dashWidth;
                 int dashesOnly = Utils.minLimit(dashCount, options.minSeparatorColumnWidth - colonCount, options.minSeparatorDashes);
                 if (dashCount < dashesOnly) dashCount = dashesOnly;
 
-                if (delta.value * 2 >= options.dashWidth) {
+                if (Math.abs(delta.value + diff - (dashCount + 1) * options.dashWidth) < Math.abs(delta.value + diff - dashCount * options.dashWidth)) {
                     dashCount++;
-                    delta.value -= options.dashWidth;
                 }
 
-                boolean handled = false;
+                delta.value += diff - dashCount * options.dashWidth;
 
-                int trackedPos = NOT_TRACKED;
+                int trackedPos;
                 TableCell cell = null;
-
                 TableCell previousCell = null;
+
                 if (row != null) {
                     List<TableCell> cells = row.cells;
                     if (j < cells.size()) {
@@ -1292,7 +1292,7 @@ public class MarkdownTable {
             out.line();
         }
 
-        appendRows(out, body.rows, false, linePrefix, delta);
+        appendRows(out, body.rows, false, linePrefix);
 
         TableCell captionCell = getCaptionCell();
         String captionText = formattedCaption(captionCell.text, options);
@@ -1344,7 +1344,7 @@ public class MarkdownTable {
                     int cellOffset = out.offsetWithPending();
 
                     row.cells.set(0, captionCell);
-                    delta.value = 0;
+                    Ref<Integer> delta = new Ref<>(0);
                     BasedSequence cellText = cellText(row.cells, 0, true, false, 0, CellAlignment.LEFT, delta);
                     int captionOffset = out.offsetWithPending();
 
@@ -1455,13 +1455,12 @@ public class MarkdownTable {
             LineAppendable out,
             List<TableRow> rows,
             boolean isHeader,
-            CharSequence linePrefix,
-            Ref<Integer> delta
+            CharSequence linePrefix
     ) {
         for (TableRow row : rows) {
             int j = 0;
             int jSpan = 0;
-            delta.value = 0;
+            Ref<Integer> delta = new Ref<>(0);
 
             out.append(linePrefix);
 
@@ -1559,19 +1558,18 @@ public class MarkdownTable {
             boolean isHeader,
             int width,
             CellAlignment alignment,
-            Ref<Integer> accumulatedDelta
+            Ref<Integer> delta
     ) {
         TableCell cell = cells.get(index);
         TableCell adjustedCell = cell;
         BasedSequence text = cell.text;
         boolean needsPadding = cell.trackedTextOffset != NOT_TRACKED && cell.trackedTextOffset >= cell.text.length();
-        int suffixed = 0;
         boolean neededPrefix = false;
 
         if (cell.trackedTextOffset != NOT_TRACKED) {
             if (cell.trackedTextOffset > cell.text.length()) {
                 // add padding spaces
-                suffixed = cell.trackedTextOffset - cell.text.length() - 1;
+                int suffixed = cell.trackedTextOffset - cell.text.length() - 1;
                 text = text.append(RepeatedSequence.repeatOf(' ', suffixed));
             } else if (cell.trackedTextOffset < 0) {
                 neededPrefix = true;
@@ -1587,11 +1585,13 @@ public class MarkdownTable {
             }
 
             int diff = width - length;
-            int spaceCount = diff / options.spaceWidth;
-            if (accumulatedDelta.value * 2 >= options.spaceWidth) {
+            int spaceCount = (delta.value + diff) / options.spaceWidth;
+            // NOTE: add extra space if accumulated adding extra space gives smaller abs error
+            if (width > 0 && Math.abs(delta.value + diff - (spaceCount + 1) * options.spaceWidth) < Math.abs(delta.value + diff - spaceCount * options.spaceWidth)) {
                 spaceCount++;
-                accumulatedDelta.value -= options.spaceWidth;
             }
+
+            delta.value += diff - spaceCount * options.spaceWidth;
 
             switch (alignment) {
                 case LEFT:
@@ -1678,7 +1678,7 @@ public class MarkdownTable {
             }
             return width;
         } else {
-            return columnWidths[col];
+            return unfixedColumns.get(col) ? 0 : columnWidths[col];
         }
     }
 
