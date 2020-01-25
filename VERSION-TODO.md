@@ -8,7 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.59.xx](#next-059xx)
-- [Next 0.59.116](#next-059116)
+- [0.59.116](#059116)
 - [0.59.114](#059114)
 - [0.59.112](#059112)
 - [0.59.110](#059110)
@@ -215,7 +215,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.116
+## 0.59.116
 
 * Fix: add missing semi in convert to visual test functions HTML entities.
 * Fix: remove static char predicate fields from `SequenceUtils`
