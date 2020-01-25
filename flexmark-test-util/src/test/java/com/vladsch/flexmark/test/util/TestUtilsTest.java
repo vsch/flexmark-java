@@ -34,4 +34,30 @@ public class TestUtilsTest {
         assertEquals(pairToString(Pair.of("With markups", new int[] { 7, 11, 14 })), pairToString(TestUtils.extractMarkup(BasedSequence.of("⟦  ⟧With ⦙mark⦙ups⦙"))));
         assertEquals(pairToString(Pair.of("With markups\nMore markups", new int[] { 7, 11, 14, 22, 26, 29 })), pairToString(TestUtils.extractMarkup(BasedSequence.of("⟦  ⟧With ⦙mark⦙ups⦙\n⟦  ⟧More ⦙mark⦙ups⦙"))));
     }
+
+    @Test
+    public void test_toVisibleSpace() {
+        assertEquals("\u2192", TestUtils.toVisibleSpecText("\t"));
+        assertEquals("\u23ae", TestUtils.toVisibleSpecText("\u001f"));
+        assertEquals("\u23ce", TestUtils.toVisibleSpecText("\r"));
+        assertEquals("\u27a5", TestUtils.toVisibleSpecText("\u2028"));
+
+        assertEquals("&#2192;", TestUtils.toVisibleSpecText("\u2192"));
+        assertEquals("&#23ae;", TestUtils.toVisibleSpecText("\u23ae"));
+        assertEquals("&#23ce;", TestUtils.toVisibleSpecText("\u23ce"));
+        assertEquals("&#27a5;", TestUtils.toVisibleSpecText("\u27a5"));
+    }
+
+    @Test
+    public void test_fromVisibleSpace() {
+        assertEquals("\t", TestUtils.fromVisibleSpecText("\u2192"));
+        assertEquals("\u001f", TestUtils.fromVisibleSpecText("\u23ae"));
+        assertEquals("\r", TestUtils.fromVisibleSpecText("\u23ce"));
+        assertEquals("\u2028", TestUtils.fromVisibleSpecText("\u27a5"));
+
+        assertEquals("\u2192", TestUtils.fromVisibleSpecText("&#2192;"));
+        assertEquals("\u23ae", TestUtils.fromVisibleSpecText("&#23ae;"));
+        assertEquals("\u23ce", TestUtils.fromVisibleSpecText("&#23ce;"));
+        assertEquals("\u27a5", TestUtils.fromVisibleSpecText("&#27a5;"));
+    }
 }

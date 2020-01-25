@@ -501,12 +501,22 @@ public class TestUtils {
      */
     public static String fromVisibleSpecText(String s) {
         if (s == null) return "";
-        // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⎮
-        return s
+        return fromVisibleSpecText((CharSequence)s).toString();
+    }
+
+    /**
+     * @param s text to convert to from visible chars to normal
+     *
+     * @return spec test special visible chars converted to normal
+     */
+    public static CharSequence fromVisibleSpecText(CharSequence s) {
+        if (s == null) return "";
+        BasedSequence sequence = BasedSequence.of(s);
+        return sequence
                 .replace("\u27a5", SequenceUtils.LINE_SEP).replace("&#27a5;", "\u27a5")
                 .replace("\u23ce", "\r").replace("&#23ce;", "\u23ce")
                 .replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae")
-                .replace('\u2192', '\t').replace("&#2192;", "\u2192")
+                .replace("\u2192", "\t").replace("&#2192;", "\u2192")
                 ;
     }
 
