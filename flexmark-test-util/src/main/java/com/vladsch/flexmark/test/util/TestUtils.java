@@ -477,8 +477,8 @@ public class TestUtils {
         return sequence
                 .replace("\u2192", "&#2192;").replace("\t", "\u2192")
                 .replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae")
-                .replace("\u23ce", "&#23ce").replace("\r", "\u23ce")
-                .replace("\u27a5", "&#27a5").replace(SequenceUtils.LINE_SEP, "\u27a5")
+                .replace("\u23ce", "&#23ce;").replace("\r", "\u23ce")
+                .replace("\u27a5", "&#27a5;").replace(SequenceUtils.LINE_SEP, "\u27a5")
                 ;
     }
 
@@ -503,8 +503,8 @@ public class TestUtils {
         if (s == null) return "";
         // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⎮
         return s
-                .replace("\u27a5", SequenceUtils.LINE_SEP).replace("&#27a5", "\u27a5")
-                .replace("\u23ce", "\r").replace("&#23ce", "\u23ce")
+                .replace("\u27a5", SequenceUtils.LINE_SEP).replace("&#27a5;", "\u27a5")
+                .replace("\u23ce", "\r").replace("&#23ce;", "\u23ce")
                 .replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae")
                 .replace('\u2192', '\t').replace("&#2192;", "\u2192")
                 ;
