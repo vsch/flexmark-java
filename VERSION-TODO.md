@@ -7,7 +7,8 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
-- [Next 0.59.xx](#next-059xx)
+- [Next 0.60.xx](#next-060xx)
+- [0.59.118](#059118)
 - [0.59.116](#059116)
 - [0.59.114](#059114)
 - [0.59.112](#059112)
@@ -188,7 +189,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Add: spec example language per section options and rendering in HTML.
   * [ ] Add: Tests for section name options
 
-## Next 0.59.xx
+## Next 0.60.xx
 
 + [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with non builder
       arguments to use `SequenceBuilder` throughout library code, except where
@@ -214,6 +215,21 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## 0.59.118
+
+* Fix: split `flexmark-util` module sub-directories into separate modules
+  * `ast/` classes to `flexmark-util-ast`
+  * `builder/` classes to `flexmark-util-builder`
+  * `collection/` classes to `flexmark-util-collection`
+  * `data/` classes to `flexmark-util-data`
+  * `dependency/` classes to `flexmark-util-dependency`
+  * `format/` classes to `flexmark-util-format`
+  * `html/` classes to `flexmark-util-html`
+  * `mappers/` classes to `flexmark-util-sequence`
+  * `options/` classes to `flexmark-util-options`
+  * `sequence/` classes to `flexmark-util-sequence`
+  * `visitor/` classes to `flexmark-util-visitor`
 
 ## 0.59.116
 
