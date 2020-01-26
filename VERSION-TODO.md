@@ -121,43 +121,43 @@ renaming and clean up of some implementation classes.
 
 Please give feedback on the upcoming changes if you have concerns about breaking your code:
 
-* [ ] Break: split out generic AST utilities from `flexmark-util` module into separate smaller
+* Break: split out generic AST utilities from `flexmark-util` module into separate smaller
       modules. IntelliJ IDEA migration to help with migration from 0.50.40 will be provided
       where needed if the package or class is changed. `com.vladsch.flexmark.util` will no
       longer contain any files but will contain the separate utilities modules with
       `flexmark-utils` module being an aggregation of all utilities modules, similar to
       `flexmark-all`
-  * [ ] `ast/` classes to `flexmark-util-ast`
-  * [ ] `builder/` classes to `flexmark-util-builder`
-  * [ ] `collection/` classes to `flexmark-util-collection`
-  * [ ] `data/` classes to `flexmark-util-data`
-  * [ ] `dependency/` classes to `flexmark-util-dependency`
-  * [ ] `format/` classes to `flexmark-util-format`
-  * [ ] `html/` classes to `flexmark-util-html`
-  * [ ] `mappers/` classes to `flexmark-util-sequence`
-  * [ ] `options/` classes to `flexmark-util-options`
-  * [ ] `sequence/` classes to `flexmark-util-sequence`
-  * [ ] `visitor/` classes to `flexmark-util-visitor`
-* [ ] Convert anonymous classes to lambda where possible.
-* [x] refactor `flexmark-util` to eliminate dependency cycles between classes in different
+  * `ast/` classes to `flexmark-util-ast`
+  * `builder/` classes to `flexmark-util-builder`
+  * `collection/` classes to `flexmark-util-collection`
+  * `data/` classes to `flexmark-util-data`
+  * `dependency/` classes to `flexmark-util-dependency`
+  * `format/` classes to `flexmark-util-format`
+  * `html/` classes to `flexmark-util-html`
+  * `mappers/` classes to `flexmark-util-sequence`
+  * `options/` classes to `flexmark-util-options`
+  * `sequence/` classes to `flexmark-util-sequence`
+  * `visitor/` classes to `flexmark-util-visitor`
+* Convert anonymous classes to lambda where possible.
+* refactor `flexmark-util` to eliminate dependency cycles between classes in different
       subdirectories.
-* [x] Break: delete deprecated properties, methods and classes
-* [x] Add: `org.jetbrains:annotations:18.0` dependency to have `@Nullable`/`@NotNull`
+* Break: delete deprecated properties, methods and classes
+* Add: `org.jetbrains:annotations:18.0` dependency to have `@Nullable`/`@NotNull`
       annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
       have these annotations for analysis of potential problems and use with Kotlin.
-* [x] Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of
+* Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of
       test cases with spec example data.
-* [x] Break: move formatter tests to `flexmark-core-test` module to allow sharing of formatter
+* Break: move formatter tests to `flexmark-core-test` module to allow sharing of formatter
       base classes in extensions without causing dependency cycles in formatter module.
-* [x] Break: move formatter module into `flexmark` core. this module is almost always included
+* Break: move formatter module into `flexmark` core. this module is almost always included
       anyway because most extension have a dependency on formatter for their custom formatting
       implementations. Having it as part of the core allows relying on its functionality in all
       modules.
-* [x] Break: move `com.vladsch.flexmark.spec` and `com.vladsch.flexmark.util` in
+* Break: move `com.vladsch.flexmark.spec` and `com.vladsch.flexmark.util` in
       `flexmark-test-util` to `com.vladsch.flexmark.test.spec` and
       `com.vladsch.flexmark.test.util` respectively to respect the naming convention between
       modules and their packages.
-* [x] Break: `NodeVisitor` implementation details have changed. If you were overriding
+* Break: `NodeVisitor` implementation details have changed. If you were overriding
       `NodeVisitor.visit(Node)` in the previous version it is now `final` to ensure compile time
       error is generated. You will need to change your implementation. See comment in the class
       for instructions.
@@ -165,9 +165,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   :information_source: `com.vladsch.flexmark.util.ast.Visitor` is only needed for implementation
   of `NodeVisitor` and `VisitHandler`. If you convert all anonymous implementations of
   `VisitHandler` to lambdas you can remove all imports for `Visitor`.
-  * [x] Fix: remove old visitor like adapters and implement ones based on generic classes not
+  * Fix: remove old visitor like adapters and implement ones based on generic classes not
         linked to flexmark AST node.
-  * [x] Deprecate old base classes:
+  * Deprecate old base classes:
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`

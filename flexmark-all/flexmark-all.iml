@@ -54,7 +54,17 @@
     <orderEntry type="module" module-name="flexmark-jira-converter" />
     <orderEntry type="module" module-name="flexmark-pdf-converter" />
     <orderEntry type="module" module-name="flexmark-profile-pegdown" />
-    <orderEntry type="module" module-name="flexmark-util" />
+    <orderEntry type="module" module-name="flexmark-util-ast" />
+    <orderEntry type="module" module-name="flexmark-util-builder" />
+    <orderEntry type="module" module-name="flexmark-util-collection" />
+    <orderEntry type="module" module-name="flexmark-util-data" />
+    <orderEntry type="module" module-name="flexmark-util-dependency" />
+    <orderEntry type="module" module-name="flexmark-util-format" />
+    <orderEntry type="module" module-name="flexmark-util-html" />
+    <orderEntry type="module" module-name="flexmark-util-misc" />
+    <orderEntry type="module" module-name="flexmark-util-options" />
+    <orderEntry type="module" module-name="flexmark-util-sequence" />
+    <orderEntry type="module" module-name="flexmark-util-visitor" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-issues" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-users" />
