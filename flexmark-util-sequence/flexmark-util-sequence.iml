@@ -2,7 +2,7 @@
 <module type="JAVA_MODULE" version="4">
   <component name="FlexmarkExt.ModuleBuildProperties">
     <option name="extensionName" value="Util" />
-    <option name="extensionPackage" value="com.vladsch.flexmark.util" />
+    <option name="extensionPackage" value="com.vladsch.flexmark.util.sequence" />
     <option name="delimiterProcessor" value="false" />
     <option name="blockParser" value="false" />
     <option name="blockPreProcessor" value="false" />
@@ -21,7 +21,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -32,5 +31,5 @@
     <orderEntry type="module" module-name="flexmark-util-collection" />
     <orderEntry type="module" module-name="flexmark-util-data" />
     <orderEntry type="module" module-name="flexmark-util-misc" />
-  </component>
+</component>
 </module>

@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util;
+package com.vladsch.flexmark.util.misc;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;

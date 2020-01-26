@@ -7,9 +7,9 @@
         <version>0.59.116</version>
     </parent>
 
-    <artifactId>flexmark-util</artifactId>
-    <name>flexmark-java utilities</name>
-    <description>flexmark-java utility classes</description>
+    <artifactId>flexmark-util-sequence</artifactId>
+    <name>flexmark-java sequence utilities</name>
+    <description>flexmark-java sequence utility classes</description>
 
     <dependencies>
         <dependency>

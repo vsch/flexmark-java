@@ -52,7 +52,12 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" filepath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-tree-iteration/flexmark-tree-iteration.iml" filepath="$PROJECT_DIR$/flexmark-tree-iteration/flexmark-tree-iteration.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-util/flexmark-util.iml" filepath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-util-collection/flexmark-util-collection.iml" filepath="$PROJECT_DIR$/flexmark-util-collection/flexmark-util-collection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-util-data/flexmark-util-data.iml" filepath="$PROJECT_DIR$/flexmark-util-data/flexmark-util-data.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-util-experimental/flexmark-util-experimental.iml" filepath="$PROJECT_DIR$/flexmark-util-experimental/flexmark-util-experimental.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-util-misc/flexmark-util-misc.iml" filepath="$PROJECT_DIR$/flexmark-util-misc/flexmark-util-misc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-util-sequence/flexmark-util-sequence.iml" filepath="$PROJECT_DIR$/flexmark-util-sequence/flexmark-util-sequence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-util-zzzz/flexmark-util-zzzz.iml" filepath="$PROJECT_DIR$/flexmark-util-zzzz/flexmark-util-zzzz.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" filepath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" />
     </modules>
   </component>

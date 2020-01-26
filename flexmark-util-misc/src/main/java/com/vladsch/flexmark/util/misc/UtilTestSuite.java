@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util;
+package com.vladsch.flexmark.util.misc;
 
 import com.vladsch.flexmark.util.ast.AstTestSuite;
 import com.vladsch.flexmark.util.collection.CollectionTestSuite;

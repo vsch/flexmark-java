@@ -9,6 +9,7 @@
   </component>
   <component name="MarkdownExportedFiles">
     <htmlFiles>
+      <exportedFile path="$PROJECT_DIR$/flexmark-util-misc/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-toc/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-users/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-attributes/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
@@ -40,6 +41,7 @@
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
+      <exportedFile path="$PROJECT_DIR$/flexmark-util-data/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-aside/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
       <exportedFile path="$PROJECT_DIR$/flexmark/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />
       <exportedFile path="$PROJECT_DIR$/flexmark-ext-gitlab/src/main/javadoc/overview.html" settingsVersion="ED6B5B75-94B944E7" />

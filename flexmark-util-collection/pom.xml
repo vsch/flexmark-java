@@ -7,26 +7,11 @@
         <version>0.59.116</version>
     </parent>
 
-    <artifactId>flexmark-util</artifactId>
-    <name>flexmark-java utilities</name>
-    <description>flexmark-java utility classes</description>
+    <artifactId>flexmark-util-collection</artifactId>
+    <name>flexmark-java collection utilities</name>
+    <description>flexmark-java collection utility classes</description>
 
     <dependencies>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-util-collection</artifactId>
-            <version>0.59.116</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-util-data</artifactId>
-            <version>0.59.116</version>
-        </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-util-misc</artifactId>
-            <version>0.59.116</version>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
