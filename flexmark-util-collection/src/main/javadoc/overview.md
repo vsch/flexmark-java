@@ -1,3 +1,3 @@
-**flexmark-java data utility classes**
+**flexmark-java collection utility classes**
 
-flexmark-java data utility classes.
+flexmark-java collection utility classes.

@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.59.116</version>
+        <version>0.59.118</version>
     </parent>
 
     <artifactId>flexmark-util-sequence</artifactId>
@@ -15,17 +15,17 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-util-collection</artifactId>
-            <version>0.59.116</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-util-data</artifactId>
-            <version>0.59.116</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-util-misc</artifactId>
-            <version>0.59.116</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -1,0 +1,33 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+    <id>lib</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <moduleSets>
+        <moduleSet>
+            <useAllReactorProjects>true</useAllReactorProjects>
+            <!-- Now, select which projects to include in this module-set. -->
+            <includes>
+                <include>com.vladsch.flexmark:flexmark-util-ast</include>
+                <include>com.vladsch.flexmark:flexmark-util-builder</include>
+                <include>com.vladsch.flexmark:flexmark-util-collection</include>
+                <include>com.vladsch.flexmark:flexmark-util-data</include>
+                <include>com.vladsch.flexmark:flexmark-util-dependency</include>
+                <include>com.vladsch.flexmark:flexmark-util-format</include>
+                <include>com.vladsch.flexmark:flexmark-util-html</include>
+                <include>com.vladsch.flexmark:flexmark-util-misc</include>
+                <include>com.vladsch.flexmark:flexmark-util-options</include>
+                <include>com.vladsch.flexmark:flexmark-util-sequence</include>
+                <include>com.vladsch.flexmark:flexmark-util-visitor</include>
+            </includes>
+            <binaries>
+                <includeDependencies>false</includeDependencies>
+                <outputDirectory>./</outputDirectory>
+                <unpack>true</unpack>
+            </binaries>
+        </moduleSet>
+    </moduleSets>
+</assembly>

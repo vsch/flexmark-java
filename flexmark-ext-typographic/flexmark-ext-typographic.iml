@@ -22,7 +22,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="flexmark-util" />
+    <orderEntry type="module" module-name="flexmark-util-ast" />
+    <orderEntry type="module" module-name="flexmark-util-builder" />
+    <orderEntry type="module" module-name="flexmark-util-data" />
+    <orderEntry type="module" module-name="flexmark-util-dependency" />
+    <orderEntry type="module" module-name="flexmark-util-html" />
+    <orderEntry type="module" module-name="flexmark-util-misc" />
+    <orderEntry type="module" module-name="flexmark-util-sequence" />
+    <orderEntry type="module" module-name="flexmark-util-visitor" />
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
