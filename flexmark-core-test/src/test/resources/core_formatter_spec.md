@@ -1587,6 +1587,29 @@ Document[0, 53]
 ````````````````````````````````
 
 
+Should add blank line after paragraph before sub-item
+
+```````````````````````````````` example(Lists - Issues: 5) options(list-spacing-tighten)
+* task sub item with long
+  paragraph text to wrap around to
+  next line.
+
+  task sub item paragraph with
+  overflow wrapping text
+  * sub item
+.
+* task sub item with long
+  paragraph text to wrap around to
+  next line.
+
+  task sub item paragraph with
+  overflow wrapping text
+
+  * sub item
+
+````````````````````````````````
+
+
 ## Block Quotes
 
 ```````````````````````````````` example(Block Quotes: 1) options(block-quote-compact-with-space, fenced-code-minimize)

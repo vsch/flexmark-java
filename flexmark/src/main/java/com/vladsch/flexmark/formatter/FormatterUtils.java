@@ -294,7 +294,7 @@ public class FormatterUtils {
     }
 
     public static boolean isLastOfItem(@Nullable Node node) {
-        return node.getNextAnyNot(BlankLine.class, HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) == null;
+        return node != null && node.getNextAnyNot(BlankLine.class, HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) == null;
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -306,12 +306,13 @@ public class FormatterUtils {
                 boolean addBlankLine;
                 boolean canAddTailBlankLine = !((ParagraphContainer) parent).isParagraphEndWrappingDisabled(node);
 
+                ListItem listItem = (ListItem) parent;
                 switch (context.getFormatterOptions().listSpacing) {
                     case LOOSEN:
                         addBlankLine = parent.getParent() instanceof ListBlock && ((ListBlock) parent.getParent()).isLoose() && hasLooseItems(parent.getParent().getChildren())
                                 && (isFollowedByBlankLine(node) && isNotLastItem(parent)
-                                || !((ListItem) parent).isOwnTight()
-                                || ((ListItem) parent).isItemParagraph(node) && parent.getFirstChild() != null && parent.getFirstChild().getNext() != null)
+                                || !listItem.isOwnTight()
+                                || listItem.isItemParagraph(node) && parent.getFirstChild() != null && parent.getFirstChild().getNext() != null)
                         ;
                         break;
 
@@ -320,7 +321,7 @@ public class FormatterUtils {
                         break;
 
                     case TIGHTEN:
-                        addBlankLine = canAddTailBlankLine && (isFollowedByBlankLine(node) && isNotLastItem(node));
+                        addBlankLine = canAddTailBlankLine && (listItem.isItemParagraph(node) ? isFollowedByBlankLine(node) && isNotLastItem(node) : isNotLastItem(node));
                         break;
 
                     case AS_IS:

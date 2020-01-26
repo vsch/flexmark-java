@@ -8,6 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.60.xx](#next-060xx)
+- [0.59.120](#059120)
 - [0.59.118](#059118)
 - [0.59.116](#059116)
 - [0.59.114](#059114)
@@ -123,11 +124,10 @@ renaming and clean up of some implementation classes.
 Please give feedback on the upcoming changes if you have concerns about breaking your code:
 
 * Break: split out generic AST utilities from `flexmark-util` module into separate smaller
-      modules. IntelliJ IDEA migration to help with migration from 0.50.40 will be provided
-      where needed if the package or class is changed. `com.vladsch.flexmark.util` will no
-      longer contain any files but will contain the separate utilities modules with
-      `flexmark-utils` module being an aggregation of all utilities modules, similar to
-      `flexmark-all`
+  modules. IntelliJ IDEA migration to help with migration from 0.50.40 will be provided where
+  needed if the package or class is changed. `com.vladsch.flexmark.util` will no longer contain
+  any files but will contain the separate utilities modules with `flexmark-utils` module being
+  an aggregate of all utilities modules, similar to `flexmark-all`
   * `ast/` classes to `flexmark-util-ast`
   * `builder/` classes to `flexmark-util-builder`
   * `collection/` classes to `flexmark-util-collection`
@@ -141,33 +141,33 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * `visitor/` classes to `flexmark-util-visitor`
 * Convert anonymous classes to lambda where possible.
 * refactor `flexmark-util` to eliminate dependency cycles between classes in different
-      subdirectories.
+  subdirectories.
 * Break: delete deprecated properties, methods and classes
-* Add: `org.jetbrains:annotations:18.0` dependency to have `@Nullable`/`@NotNull`
-      annotations added for all parameters. I use IntelliJ IDEA for development and it helps to
-      have these annotations for analysis of potential problems and use with Kotlin.
-* Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of
-      test cases with spec example data.
-* Break: move formatter tests to `flexmark-core-test` module to allow sharing of formatter
-      base classes in extensions without causing dependency cycles in formatter module.
+* Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull` annotations
+  added for all parameters. I use IntelliJ IDEA for development and it helps to have these
+  annotations for analysis of potential problems and use with Kotlin.
+* Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of test
+  cases with spec example data.
+* Break: move formatter tests to `flexmark-core-test` module to allow sharing of formatter base
+  classes in extensions without causing dependency cycles in formatter module.
 * Break: move formatter module into `flexmark` core. this module is almost always included
-      anyway because most extension have a dependency on formatter for their custom formatting
-      implementations. Having it as part of the core allows relying on its functionality in all
-      modules.
+  anyway because most extension have a dependency on formatter for their custom formatting
+  implementations. Having it as part of the core allows relying on its functionality in all
+  modules.
 * Break: move `com.vladsch.flexmark.spec` and `com.vladsch.flexmark.util` in
-      `flexmark-test-util` to `com.vladsch.flexmark.test.spec` and
-      `com.vladsch.flexmark.test.util` respectively to respect the naming convention between
-      modules and their packages.
+  `flexmark-test-util` to `com.vladsch.flexmark.test.spec` and `com.vladsch.flexmark.test.util`
+  respectively to respect the naming convention between modules and their packages.
 * Break: `NodeVisitor` implementation details have changed. If you were overriding
-      `NodeVisitor.visit(Node)` in the previous version it is now `final` to ensure compile time
-      error is generated. You will need to change your implementation. See comment in the class
-      for instructions.
+  `NodeVisitor.visit(Node)` in the previous version it is now `final` to ensure compile time
+  error is generated. You will need to change your implementation. See comment in the class for
+  instructions.
 
   :information_source: `com.vladsch.flexmark.util.ast.Visitor` is only needed for implementation
   of `NodeVisitor` and `VisitHandler`. If you convert all anonymous implementations of
   `VisitHandler` to lambdas you can remove all imports for `Visitor`.
-  * Fix: remove old visitor like adapters and implement ones based on generic classes not
-        linked to flexmark AST node.
+
+  * Fix: remove old visitor like adapters and implement ones based on generic classes not linked
+    to flexmark AST node.
   * Deprecate old base classes:
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
@@ -215,6 +215,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## 0.59.120
+
+* Fix: `Formatter` not inserting blank line after paragraph when followed by list item in
+  tighten mode.
 
 ## 0.59.118
 
@@ -2239,6 +2244,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#376, convert markdown to html]: https://github.com/vsch/flexmark-java/issues/376
 [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled]: https://github.com/vsch/flexmark-java/issues/381
 [#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
+[#384, Markdown parser produces invalid HTML]: https://github.com/vsch/flexmark-java/issues/384
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
@@ -2249,5 +2255,3 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 
-
-[#384, Markdown parser produces invalid HTML]: https://github.com/vsch/flexmark-java/issues/384
