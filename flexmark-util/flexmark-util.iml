@@ -32,5 +32,6 @@
     <orderEntry type="module" module-name="flexmark-util-collection" />
     <orderEntry type="module" module-name="flexmark-util-data" />
     <orderEntry type="module" module-name="flexmark-util-misc" />
+    <orderEntry type="module" module-name="flexmark-util-sequence" />
   </component>
 </module>
