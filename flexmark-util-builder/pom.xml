@@ -15,7 +15,6 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-util-misc</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
