@@ -64,7 +64,6 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-util-options/flexmark-util-options.iml" filepath="$PROJECT_DIR$/flexmark-util-options/flexmark-util-options.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-util-sequence/flexmark-util-sequence.iml" filepath="$PROJECT_DIR$/flexmark-util-sequence/flexmark-util-sequence.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-util-visitor/flexmark-util-visitor.iml" filepath="$PROJECT_DIR$/flexmark-util-visitor/flexmark-util-visitor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flexmark-util-zzzz/flexmark-util-zzzz.iml" filepath="$PROJECT_DIR$/flexmark-util-zzzz/flexmark-util-zzzz.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" filepath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" />
     </modules>
   </component>

@@ -8,7 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.60.xx](#next-060xx)
-- [Next 0.59.120](#next-059120)
+- [0.59.120](#059120)
 - [0.59.118](#059118)
 - [0.59.116](#059116)
 - [0.59.114](#059114)
@@ -215,7 +215,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.120
+## 0.59.120
 
 * Fix: `Formatter` not inserting blank line after paragraph when followed by list item in
   tighten mode.
@@ -2250,7 +2250,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
-[migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
+[migrate 0_35_x to 0_40_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
+<!-- @IGNORE PREVIOUS: link -->
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
+<!-- @IGNORE PREVIOUS: link -->
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
+<!-- @IGNORE PREVIOUS: link -->
 
