@@ -175,19 +175,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.60.xx
 
-* [ ] Fix: Change spec example to variable number of sections
-* [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
-      Configuration](../../wiki/Yaml-Front-Matter-Configuration)
-* [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
-      just formatting. Need to keep track of whether format after typing or just format. Then
-      caret position should only track but not force spaces behind it to be preserved. See
-      failed tests in `com.vladsch.flexmark.ext.tables.MarkdownTableTest`
-* [ ] Fix: Add `TextContainer` node type to allow extracting text nodes without having to know
-      all of the node types. The text container should implement ability to append to
-      `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
-      be visited.
-* Add: spec example language per section options and rendering in HTML.
-  * [ ] Add: Tests for section name options
 + [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with non builder
       arguments to use `SequenceBuilder` throughout library code, except where
       `PrefixedSubSequence` is used as is without immediately wrapping in `SegmentedSequence`.
@@ -204,6 +191,19 @@ Please give feedback on the upcoming changes if you have concerns about breaking
         for context tests.
 + [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
       extension add order
+* [ ] Fix: Change spec example to variable number of sections
+* [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
+      Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+* [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
+      just formatting. Need to keep track of whether format after typing or just format. Then
+      caret position should only track but not force spaces behind it to be preserved. See
+      failed tests in `com.vladsch.flexmark.ext.tables.MarkdownTableTest`
+* [ ] Fix: Add `TextContainer` node type to allow extracting text nodes without having to know
+      all of the node types. The text container should implement ability to append to
+      `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
+      be visited.
+* Add: spec example language per section options and rendering in HTML.
+  * [ ] Add: Tests for section name options
 * [ ] Fix: Document docx form controls in wiki.
 * [ ] Add: table recovery utility to restore table after it was wrapped as plain text paragraph.
       Needed when formatting is applied without a table extension. If not noticed will result in
@@ -214,7 +214,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 ## Next 0.59.124
 
 * Fix: restore `IRenderBase.NullRenderer` and `IRenderBase.TextRenderer` static classes
-
 
 ## 0.59.122
 
