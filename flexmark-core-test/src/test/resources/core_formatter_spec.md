@@ -2452,6 +2452,34 @@ Heading
 ````````````````````````````````
 
 
+### Trailing Marker
+
+```````````````````````````````` example(Headings - Trailing Marker: 1) options(heading-any, atx-trailing-equalize)
+# Heading 1
+
+## Heading 2
+
+.
+# Heading 1
+
+## Heading 2
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings - Trailing Marker: 2) options(heading-any, atx-trailing-equalize)
+# Heading 1
+
+## Heading 2 #
+
+.
+# Heading 1
+
+## Heading 2 ##
+
+````````````````````````````````
+
+
 ## Thematic Break
 
 ```````````````````````````````` example Thematic Break: 1

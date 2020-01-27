@@ -316,7 +316,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
                 switch (formatterOptions.atxHeadingTrailingMarker) {
                     case EQUALIZE:
-                        if (node.getOpeningMarker().isNull()) break;
+                        if (node.getClosingMarker().isNull()) break;
                         // fall through
                     case ADD:
                         if (spaceAfterAtx) markdown.append(' ');
