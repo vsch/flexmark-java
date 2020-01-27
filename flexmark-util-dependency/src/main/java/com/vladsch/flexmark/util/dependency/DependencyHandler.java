@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 @SuppressWarnings("rawtypes")
-public abstract class DependencyHandler<D extends Dependent<D>, S, R extends ResolvedDependencies<S>> {
+public abstract class DependencyHandler<D extends Dependent, S, R extends ResolvedDependencies<S>> {
     protected abstract @NotNull S createStage(List<D> dependents);
     protected abstract @NotNull Class getDependentClass(D dependent);
     protected abstract @NotNull R createResolvedDependencies(List<S> stages);
@@ -30,6 +30,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
                 if (dependentItemMap.containsKey(dependentClass)) {
                     throw new IllegalStateException("Dependent class " + dependentClass + " is duplicated. Only one instance can be present in the list");
                 }
+                //noinspection unchecked
                 DependentItem<D> item = new DependentItem<D>(dependentItemMap.size(), dependent, getDependentClass(dependent), dependent.affectsGlobalScope());
                 dependentItemMap.put(dependentClass, item);
             }
@@ -90,6 +91,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
 
                     newReady.clear(i);
                     DependentItem<D> item = dependentItemMap.getValue(i);
+                    assert item != null;
 
                     stageDependents.add(item.dependent);
                     dependents.clear(i);
@@ -102,6 +104,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
 
                             item.dependents.clear(j);
                             DependentItem<D> dependentItem = dependentItemMap.getValue(j);
+                            assert dependentItem != null;
 
                             if (!dependentItem.removeDependency(item)) {
                                 if (item.isGlobalScope) {

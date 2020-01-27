@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Factory for instantiating new node renderers when rendering is done.
  */
-public interface NodeFormatterFactory extends Dependent<NodeFormatterFactory> {
+public interface NodeFormatterFactory extends Dependent {
 
     /**
      * Create a new node renderer for the specified rendering context.

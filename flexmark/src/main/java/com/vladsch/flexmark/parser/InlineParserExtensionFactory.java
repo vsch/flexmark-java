@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
-public interface InlineParserExtensionFactory extends Function<LightInlineParser, InlineParserExtension>, Dependent<InlineParserExtensionFactory> {
+public interface InlineParserExtensionFactory extends Function<LightInlineParser, InlineParserExtension>, Dependent {
     /**
      * Starting Characters for this inline processor
      *

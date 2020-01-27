@@ -4,16 +4,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
-public interface Dependent<S> {
+public interface Dependent {
     /**
-     * @return null or a list of processors that must be executed before calling this one
+     * @return null or a list of dependents that must be executed before calling this one
      *         if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
      *         before this preprocessor is called.
      */
     @Nullable Set<Class<?>> getAfterDependents();
 
     /**
-     * @return null or a list of processors before which this has to be run
+     * @return null or a list of dependents that must be executed after calling this one
      *         if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
      *         before this preprocessor is called.
      */

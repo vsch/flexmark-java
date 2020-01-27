@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Factory for instantiating new node renderers with dependencies
  */
-class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, HtmlNodeRenderer>, Dependent<DelegatingNodeRendererFactoryWrapper>, DelegatingNodeRendererFactory {
+class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, HtmlNodeRenderer>, Dependent, DelegatingNodeRendererFactory {
     private final HtmlNodeRendererFactory nodeRendererFactory;
     private List<DelegatingNodeRendererFactoryWrapper> nodeRenderers;
     private Set<Class<?>> myDelegates = null;

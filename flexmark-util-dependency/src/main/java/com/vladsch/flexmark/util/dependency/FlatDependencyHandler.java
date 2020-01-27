@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class FlatDependencyHandler<T extends Dependent<T>> extends DependencyHandler<T, FlatDependencyStage<T>, FlatDependencies<T>> {
+public class FlatDependencyHandler<T extends Dependent> extends DependencyHandler<T, FlatDependencyStage<T>, FlatDependencies<T>> {
     public List<T> resolvedDependencies(List<T> dependentsList) {
         FlatDependencies<T> dependencies = resolveDependencies(dependentsList);
         return dependencies.dependencies;
@@ -29,7 +29,7 @@ public class FlatDependencyHandler<T extends Dependent<T>> extends DependencyHan
         return new FlatDependencies<>(stages);
     }
 
-    public static <T extends Dependent<T>> List<T> computeDependencies(List<T> dependentsList) {
+    public static <T extends Dependent> List<T> computeDependencies(List<T> dependentsList) {
         FlatDependencyHandler<T> resolver = new FlatDependencyHandler<>();
         return resolver.resolvedDependencies(dependentsList);
     }

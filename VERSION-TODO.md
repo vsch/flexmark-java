@@ -8,6 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.60.xx](#next-060xx)
+- [Next 0.59.122](#next-059122)
 - [0.59.120](#059120)
 - [0.59.118](#059118)
 - [0.59.116](#059116)
@@ -195,10 +196,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `PrefixedSubSequence` is used as is without immediately wrapping in `SegmentedSequence`.
       This happens anyway in `SegmentedSequence.create` for non-builder arg, should make it
       explicit.
-+ [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
-      implementation.
-+ [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
-      extension add order
 + [ ] Fix: rewrite `LineAppendableImpl` to be compatible with `SequenceBuilder`
   + [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `SequenceBuilder` can optimize
@@ -215,9 +212,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
+## Next 0.59.122
+
++ [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
+      implementation.
++ [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
+      extension add order
+
 ## 0.59.120
 
-* Fix: `Formatter` not inserting blank line after paragraph when followed by list item in
+* Fix: `Formatter` not inserting blank line after paragraph when followed by list sub-item in
   tighten mode.
 
 ## 0.59.118

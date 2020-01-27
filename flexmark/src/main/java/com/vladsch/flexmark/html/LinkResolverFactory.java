@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.function.Function;
 
-public interface LinkResolverFactory extends Function<LinkResolverContext, LinkResolver>, Dependent<LinkResolverFactory> {
+public interface LinkResolverFactory extends Function<LinkResolverContext, LinkResolver>, Dependent {
     @Override
     @Nullable Set<Class<?>> getAfterDependents();
 

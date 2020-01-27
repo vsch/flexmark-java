@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 
-public interface PostProcessorFactory extends Function<Document, PostProcessor>, Dependent<PostProcessorFactory> {
+public interface PostProcessorFactory extends Function<Document, PostProcessor>, Dependent {
     /**
      * A map of nodes of interest as keys and values a set of classes, if implemented by an ancestors then the node should be excluded from processing by this processor
      * i.e. DoNotDecorate.class if the processor adds links so that existing links will be ignored.

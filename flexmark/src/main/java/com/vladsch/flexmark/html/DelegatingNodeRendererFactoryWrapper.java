@@ -16,7 +16,7 @@ import java.util.function.Function;
 /**
  * Factory for instantiating new node renderers with dependencies
  */
-class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeRenderer>, Dependent<DelegatingNodeRendererFactoryWrapper>, DelegatingNodeRendererFactory {
+class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeRenderer>, Dependent, DelegatingNodeRendererFactory {
     private final NodeRendererFactory nodeRendererFactory;
     private List<DelegatingNodeRendererFactoryWrapper> nodeRenderers;
     private Set<Class<?>> myDelegates = null;

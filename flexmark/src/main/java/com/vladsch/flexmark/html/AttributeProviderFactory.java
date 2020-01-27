@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.function.Function;
 
-public interface AttributeProviderFactory extends Function<LinkResolverContext, AttributeProvider>, Dependent<AttributeProviderFactory> {
+public interface AttributeProviderFactory extends Function<LinkResolverContext, AttributeProvider>, Dependent {
     @Override
     @Nullable Set<Class<?>> getAfterDependents();
 

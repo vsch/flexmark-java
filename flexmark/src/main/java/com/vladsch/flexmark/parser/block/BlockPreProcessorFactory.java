@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.dependency.Dependent;
 import java.util.Set;
 import java.util.function.Function;
 
-public interface BlockPreProcessorFactory extends Function<ParserState, BlockPreProcessor>, Dependent<BlockPreProcessorFactory> {
+public interface BlockPreProcessorFactory extends Function<ParserState, BlockPreProcessor>, Dependent {
     /**
      * Block types that this pre-processors processes
      *
