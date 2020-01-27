@@ -16,7 +16,7 @@ public class NodeRenderingHandler<N extends Node> extends AstHandler<N, NodeRend
         getAdapter().render((N) node, context, html);
     }
 
-    public static interface CustomNodeRenderer<N extends Node> extends AstAction<N> {
+    public interface CustomNodeRenderer<N extends Node> extends AstAction<N> {
         void render(@NotNull N node, @NotNull NodeRendererContext context, @NotNull HtmlWriter html);
     }
 }

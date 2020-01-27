@@ -8,7 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.60.xx](#next-060xx)
-- [Next 0.59.122](#next-059122)
+- [0.59.122](#059122)
 - [0.59.120](#059120)
 - [0.59.118](#059118)
 - [0.59.116](#059116)
@@ -205,6 +205,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   + [x] use separate instance of sequence builder for the line under construction.
         `SegmentedSequence` construction is fast enough to not need a parallel string builder
         for context tests.
++ [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
+      extension add order
 * [ ] Fix: Document docx form controls in wiki.
 * [ ] Add: table recovery utility to restore table after it was wrapped as plain text paragraph.
       Needed when formatting is applied without a table extension. If not noticed will result in
@@ -212,12 +214,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.59.122
+## 0.59.122
 
-+ [ ] Fix: cleanup and simplify dependency handler use. Too convoluted in the current
-      implementation.
-+ [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
-      extension add order
+* Fix: cleanup and simplify dependency handler use. Too convoluted in the current
+  implementation.
 
 ## 0.59.120
 
