@@ -10,13 +10,13 @@ import java.util.List;
 
 public class EmojiReference {
     public static class Emoji {
-        public final String shortcut;
-        public final String category;
-        public final String emojiCheatSheetFile; // name part of the file no extension
-        public final String githubFile; // name part of the file no extension
-        public final String unicodeChars; // unicode char codes space separated list
-        public final String unicodeSampleFile; // name part of the file no extension
-        public final String unicodeCldr;
+        final public String shortcut;
+        final public String category;
+        final public String emojiCheatSheetFile; // name part of the file no extension
+        final public String githubFile; // name part of the file no extension
+        final public String unicodeChars; // unicode char codes space separated list
+        final public String unicodeSampleFile; // name part of the file no extension
+        final public String unicodeCldr;
 
         public Emoji(String shortcut, String category, String emojiCheatSheetFile, String githubFile, String unicodeChars, String unicodeSampleFile, String unicodeCldr) {
             this.shortcut = shortcut;
@@ -29,7 +29,7 @@ public class EmojiReference {
         }
     }
 
-    public static final String githubUrl = "https://github.githubassets.com/images/icons/emoji/";
+    final public static String githubUrl = "https://github.githubassets.com/images/icons/emoji/";
 
     private static ArrayList<Emoji> emojiList = null;
 

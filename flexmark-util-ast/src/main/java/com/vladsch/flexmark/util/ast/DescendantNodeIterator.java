@@ -8,7 +8,7 @@ import java.util.Stack;
 import java.util.function.Consumer;
 
 public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
-    private final boolean isReversed;
+    final private boolean isReversed;
     private @NotNull ReversiblePeekingIterator<Node> iterator;
     private @Nullable Stack<ReversiblePeekingIterator<Node>> iteratorStack;
     private Node result;

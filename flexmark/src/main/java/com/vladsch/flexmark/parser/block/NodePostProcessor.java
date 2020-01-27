@@ -11,7 +11,7 @@ public abstract class NodePostProcessor implements PostProcessor {
      */
     @NotNull
     @Override
-    public final Document processDocument(@NotNull Document document) {
+    final public Document processDocument(@NotNull Document document) {
         return document;
     }
 }

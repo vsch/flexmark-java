@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboTocSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_toc_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_toc_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singletonList(TocExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("text-only", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, true));
         optionsMap.put("formatted", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, false));

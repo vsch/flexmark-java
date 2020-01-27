@@ -3,9 +3,9 @@ package com.vladsch.flexmark.ext.emoji;
 import java.util.HashMap;
 
 public class EmojiCheatSheetRaw {
-    public static final HashMap<String, String> aliasMap = new HashMap<>();
-    public static final HashMap<String, String> urlMap = new HashMap<>();
-    public static final HashMap<String, String> categoryMap = new HashMap<>();
+    final public static HashMap<String, String> aliasMap = new HashMap<>();
+    final public static HashMap<String, String> urlMap = new HashMap<>();
+    final public static HashMap<String, String> categoryMap = new HashMap<>();
     static {
         aliasMap.put("+1", "plus1.png");
         aliasMap.put("-1", "-1.png");

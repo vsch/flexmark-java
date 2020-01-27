@@ -24,20 +24,20 @@ import static com.vladsch.flexmark.test.util.spec.SpecReader.EXAMPLE_KEYWORD;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 public class SpecExampleBlockParser extends AbstractBlockParser {
-    private static final Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:()]*)(?:(:)\\s*([^\\s()]+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^()\\n\\r]*)(\\))?)?\\s*$");
-    private static final int GROUP_COORD_OPEN = 1;
-    private static final int GROUP_SECTION = 2;
-    private static final int GROUP_NUMBER_SEPARATOR = 3;
-    private static final int GROUP_NUMBER = 4;
-    private static final int GROUP_COORD_CLOSE = 5;
-    private static final int GROUP_OPTION_KEYWORD = 6;
-    private static final int GROUP_OPTIONS_OPEN = 7;
-    private static final int GROUP_OPTIONS = 8;
-    private static final int GROUP_OPTIONS_CLOSE = 9;
+    final private static Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:()]*)(?:(:)\\s*([^\\s()]+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^()\\n\\r]*)(\\))?)?\\s*$");
+    final private static int GROUP_COORD_OPEN = 1;
+    final private static int GROUP_SECTION = 2;
+    final private static int GROUP_NUMBER_SEPARATOR = 3;
+    final private static int GROUP_NUMBER = 4;
+    final private static int GROUP_COORD_CLOSE = 5;
+    final private static int GROUP_OPTION_KEYWORD = 6;
+    final private static int GROUP_OPTIONS_OPEN = 7;
+    final private static int GROUP_OPTIONS = 8;
+    final private static int GROUP_OPTIONS_CLOSE = 9;
 
-    private final SpecExampleBlock block = new SpecExampleBlock();
+    final SpecExampleBlock block = new SpecExampleBlock();
     private BlockContent content = new BlockContent();
-    private final SpecExampleOptions myOptions;
+    final private SpecExampleOptions myOptions;
 
     public SpecExampleBlockParser(DataHolder options) {
         myOptions = new SpecExampleOptions(options);
@@ -172,9 +172,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                 // need to find the parts
                 boolean inSource = true;
                 boolean inHtml = false;
-                boolean inAst = false;
                 int sectionStart = -1;
-                BasedSequence prevLine = NULL;
                 BasedSequence lastLine = lines.get(lines.size() - 1);
                 String typeBreak = myOptions.sectionBreak;
                 int typeBreakLength = typeBreak.length();
@@ -199,7 +197,6 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                                 block.setHtml(line.subSequence(0, 0));
                             }
                             block.setAstSeparator(line);
-                            inAst = true;
                             sectionStart = -1;
                         } else {
                             if (sectionStart == -1) {
@@ -226,7 +223,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                             } else {
                                 block.setHtml(line.subSequence(line.length(), line.length()));
                             }
-                        } else if (inAst) {
+                        } else {
                             if (sectionStart != -1) {
                                 block.setAst(line.baseSubSequence(sectionStart, line.getEndOffset()));
                             } else {
@@ -236,8 +233,6 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
 
                         break;
                     }
-
-                    prevLine = line;
                 }
 
                 // here if we create section nodes
@@ -286,11 +281,6 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
             return new HashSet<>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class
-                    //FencedCodeBlockParser.Factory.class
-                    //HtmlBlockParser.Factory.class,
-                    //ThematicBreakParser.Factory.class,
-                    //ListBlockParser.Factory.class,
-                    //IndentedCodeBlockParser.Factory.class
             ));
         }
 
@@ -298,8 +288,6 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
         @Override
         public Set<Class<?>> getBeforeDependents() {
             return new HashSet<>(Arrays.asList(
-                    //BlockQuoteParser.Factory.class,
-                    //HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class,
                     HtmlBlockParser.Factory.class,
                     ThematicBreakParser.Factory.class,
@@ -321,9 +309,9 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final SpecExampleOptions myOptions;
+        final private SpecExampleOptions myOptions;
 
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
             myOptions = new SpecExampleOptions(options);
         }

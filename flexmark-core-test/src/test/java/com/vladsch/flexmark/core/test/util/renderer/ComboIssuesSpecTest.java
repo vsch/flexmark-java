@@ -18,15 +18,15 @@ import java.util.List;
 import java.util.Map;
 
 final public class ComboIssuesSpecTest extends CoreRendererSpecTest {
-    private static final String SPEC_RESOURCE = "/core_issues_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static String SPEC_RESOURCE = "/core_issues_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("block-no-interrupt-paragraph", new MutableDataSet().set(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH, false));
         optionsMap.put("fixed-indent", new MutableDataSet().setFrom(ParserEmulationProfile.FIXED_INDENT));

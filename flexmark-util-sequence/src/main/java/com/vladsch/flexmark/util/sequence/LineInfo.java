@@ -139,7 +139,7 @@ final public class LineInfo {
 
     @NotNull
     public BasedSequence getLine() {
-        return lineSeq instanceof BasedSequence ? (BasedSequence) lineSeq :BasedSequence.of(lineSeq);
+        return lineSeq instanceof BasedSequence ? (BasedSequence) lineSeq : BasedSequence.of(lineSeq);
     }
 
     @NotNull

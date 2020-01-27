@@ -15,7 +15,7 @@ import static java.lang.Integer.MIN_VALUE;
 
 @SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISegmentBuilder<S> {
-    public static final int MIN_PART_CAPACITY = 8;
+    final public static int MIN_PART_CAPACITY = 8;
 
     final public static int[] EMPTY_PARTS = { };
 

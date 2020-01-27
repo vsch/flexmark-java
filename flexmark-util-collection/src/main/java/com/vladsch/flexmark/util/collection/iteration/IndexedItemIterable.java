@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.collection.iteration;
 import org.jetbrains.annotations.NotNull;
 
 public class IndexedItemIterable<R> implements ReversibleIndexedIterable<R> {
-    private final @NotNull Indexed<R> items;
-    private final boolean reversed;
+    final private @NotNull Indexed<R> items;
+    final private boolean reversed;
 
     public IndexedItemIterable(@NotNull Indexed<R> items) {
         this(items, false);

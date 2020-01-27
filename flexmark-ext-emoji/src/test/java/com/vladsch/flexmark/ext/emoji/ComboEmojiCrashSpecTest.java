@@ -16,13 +16,13 @@ import java.util.Map;
 
 public class ComboEmojiCrashSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_emoji_crash_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()))
             .set(EmojiExtension.ROOT_IMAGE_PATH, "/img/")
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("use-github", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.GITHUB));
         optionsMap.put("use-cheat", new MutableDataSet().set(EmojiExtension.USE_SHORTCUT_TYPE, EmojiShortcutType.ANY_GITHUB_PREFERRED));

@@ -23,25 +23,25 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     // duplicated here for convenience
-    public static final AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;        // div element wrapping TOC list
-    public static final AttributablePart TOC_LIST = TocUtils.TOC_LIST;              // ul/ol element of TOC list
+    final public static AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;        // div element wrapping TOC list
+    final public static AttributablePart TOC_LIST = TocUtils.TOC_LIST;              // ul/ol element of TOC list
 
-    public static final DataKey<Integer> LEVELS = TocExtension.LEVELS;
-    public static final DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
-    public static final DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
-    public static final DataKey<TocOptions.ListType> LIST_TYPE = TocExtension.LIST_TYPE;
-    public static final DataKey<Boolean> IS_HTML = TocExtension.IS_HTML;
-    public static final DataKey<Integer> TITLE_LEVEL = TocExtension.TITLE_LEVEL;
-    public static final NullableDataKey<String> TITLE = TocExtension.TITLE;
-    public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = TocExtension.AST_INCLUDE_OPTIONS;
-    public static final DataKey<Boolean> BLANK_LINE_SPACER = TocExtension.BLANK_LINE_SPACER;
-    public static final DataKey<String> DIV_CLASS = TocExtension.DIV_CLASS;
-    public static final DataKey<String> LIST_CLASS = TocExtension.LIST_CLASS;
-    public static final DataKey<Boolean> CASE_SENSITIVE_TOC_TAG = TocExtension.CASE_SENSITIVE_TOC_TAG;
+    final public static DataKey<Integer> LEVELS = TocExtension.LEVELS;
+    final public static DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
+    final public static DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
+    final public static DataKey<TocOptions.ListType> LIST_TYPE = TocExtension.LIST_TYPE;
+    final public static DataKey<Boolean> IS_HTML = TocExtension.IS_HTML;
+    final public static DataKey<Integer> TITLE_LEVEL = TocExtension.TITLE_LEVEL;
+    final public static NullableDataKey<String> TITLE = TocExtension.TITLE;
+    final public static DataKey<Boolean> AST_INCLUDE_OPTIONS = TocExtension.AST_INCLUDE_OPTIONS;
+    final public static DataKey<Boolean> BLANK_LINE_SPACER = TocExtension.BLANK_LINE_SPACER;
+    final public static DataKey<String> DIV_CLASS = TocExtension.DIV_CLASS;
+    final public static DataKey<String> LIST_CLASS = TocExtension.LIST_CLASS;
+    final public static DataKey<Boolean> CASE_SENSITIVE_TOC_TAG = TocExtension.CASE_SENSITIVE_TOC_TAG;
 
     // format options
-    public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = TocExtension.FORMAT_UPDATE_ON_FORMAT;
-    public static final DataKey<TocOptions> FORMAT_OPTIONS = TocExtension.FORMAT_OPTIONS;
+    final public static DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = TocExtension.FORMAT_UPDATE_ON_FORMAT;
+    final public static DataKey<TocOptions> FORMAT_OPTIONS = TocExtension.FORMAT_OPTIONS;
 
     private SimTocExtension() {
     }

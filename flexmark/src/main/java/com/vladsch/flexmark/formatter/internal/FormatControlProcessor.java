@@ -15,10 +15,9 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 public class FormatControlProcessor {
-    public static final String OPEN_COMMENT = "<!--";
-    public static final String CLOSE_COMMENT = "-->";
+    final public static String OPEN_COMMENT = "<!--";
+    final public static String CLOSE_COMMENT = "-->";
 
-    final private @NotNull Document document;
     final private String formatterOnTag;
     final private String formatterOffTag;
     final private boolean formatterTagsEnabled;
@@ -31,7 +30,6 @@ public class FormatControlProcessor {
     private volatile Pattern formatterOnPattern;
 
     public FormatControlProcessor(@NotNull Document document, @Nullable DataHolder options) {
-        this.document = document;
         FormatterOptions formatterOptions = new FormatterOptions(options);
         this.formatterOnTag = formatterOptions.formatterOnTag;
         this.formatterOffTag = formatterOptions.formatterOffTag;

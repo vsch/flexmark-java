@@ -24,7 +24,6 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
         this(null);
     }
 
-
     public HeaderIdGenerator(@Nullable DataHolder options) {
         resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.get(options);
         toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.get(options);

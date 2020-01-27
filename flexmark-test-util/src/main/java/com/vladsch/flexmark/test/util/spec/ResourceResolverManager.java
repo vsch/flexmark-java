@@ -11,7 +11,7 @@ import java.util.function.Function;
 import static com.vladsch.flexmark.test.util.spec.ResourceUrlResolver.hasProtocol;
 
 public class ResourceResolverManager {
-    private final static ArrayList<Function<String, String>> urlResolvers = new ArrayList<>();
+    final private static ArrayList<Function<String, String>> urlResolvers = new ArrayList<>();
 
     public static void registerUrlResolver(@NotNull Function<String, String> resolver) {
         ResourceResolverManager.urlResolvers.add(resolver);

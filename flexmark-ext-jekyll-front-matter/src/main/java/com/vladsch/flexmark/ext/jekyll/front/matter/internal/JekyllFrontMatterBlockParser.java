@@ -16,18 +16,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
-    private static String COL = "\\s*:?-{3,}:?\\s*";
-    static Pattern JEKYLL_FRONT_MATTER_BLOCK_START = Pattern.compile("^-{3}(\\s.*)?");
-    private static Pattern JEKYLL_FRONT_MATTER_BLOCK_END = Pattern.compile("^(-{3}|\\.{3})(\\s.*)?");
-    //private static Pattern JEKYLL_FRONT_MATTER_BLOCK_END = Pattern.compile("^(-{3})(\\s.*)?");
+    final static Pattern JEKYLL_FRONT_MATTER_BLOCK_START = Pattern.compile("^-{3}(\\s.*)?");
+    final static Pattern JEKYLL_FRONT_MATTER_BLOCK_END = Pattern.compile("^(-{3}|\\.{3})(\\s.*)?");
 
-    private final JekyllFrontMatterBlock block = new JekyllFrontMatterBlock();
+    final private JekyllFrontMatterBlock block = new JekyllFrontMatterBlock();
     private BlockContent content = new BlockContent();
-    private final JekyllFrontMatterOptions options;
     private boolean inYAMLBlock;
 
     JekyllFrontMatterBlockParser(DataHolder options, BasedSequence openingMarker) {
-        this.options = new JekyllFrontMatterOptions(options);
         inYAMLBlock = true;
         block.setOpeningMarker(openingMarker);
     }
@@ -75,31 +71,12 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
         @Override
         public Set<Class<?>> getAfterDependents() {
             return null;
-            //return new HashSet<>(Arrays.asList(
-            //        BlockQuoteParser.Factory.class,
-            //        HeadingParser.Factory.class,
-            //        FencedCodeBlockParser.Factory.class,
-            //        HtmlBlockParser.Factory.class,
-            //        ThematicBreakParser.Factory.class,
-            //        ListBlockParser.Factory.class,
-            //        IndentedCodeBlockParser.Factory.class
-            //));
         }
 
         @Nullable
         @Override
         public Set<Class<?>> getBeforeDependents() {
             return null;
-            //return new HashSet<>(Arrays.asList(
-            //        YamlFrontMatterBlockParser.Factory.class
-            //        //        BlockQuoteParser.Factory.class,
-            //        //        HeadingParser.Factory.class,
-            //        //        FencedCodeBlockParser.Factory.class,
-            //        //        HtmlBlockParser.Factory.class,
-            //        //        ThematicBreakParser.Factory.class,
-            //        //        ListBlockParser.Factory.class,
-            //        //        IndentedCodeBlockParser.Factory.class
-            //));
         }
 
         @Override
@@ -115,11 +92,8 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final JekyllFrontMatterOptions options;
-
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
-            this.options = new JekyllFrontMatterOptions(options);
         }
 
         @Override

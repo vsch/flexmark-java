@@ -18,8 +18,8 @@ import java.util.function.BiFunction;
  * @param <H> handler to invoke the functionality during AST traversal for specific node
  */
 public abstract class AstActionHandler<C extends AstActionHandler<C, N, A, H>, N, A extends AstAction<N>, H extends AstHandler<N, A>> {
-    private final @NotNull Map<Class<? extends N>, H> customHandlersMap = new HashMap<>();
-    private final @NotNull AstNode<N> astAdapter;
+    final private @NotNull Map<Class<? extends N>, H> customHandlersMap = new HashMap<>();
+    final private @NotNull AstNode<N> astAdapter;
 
     public AstActionHandler(@NotNull AstNode<N> astAdapter) {
         this.astAdapter = astAdapter;

@@ -6,15 +6,15 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.Map;
 
 class SpecExampleOptions {
-    public final boolean renderHtml;
-    public final RenderAs renderAs;
-    public final String exampleBreak;
-    public final String sectionBreak;
-    public final boolean optionNodes;
-    public final String renderedHtmlPrefix;
-    public final String renderedHtmlSuffix;
-    public final Map<Integer, String> sectionLanguages;
-    public final Map<Integer, String> sectionNames;
+    final public boolean renderHtml;
+    final public RenderAs renderAs;
+    final public String exampleBreak;
+    final public String sectionBreak;
+    final public boolean optionNodes;
+    final public String renderedHtmlPrefix;
+    final public String renderedHtmlSuffix;
+    final public Map<Integer, String> sectionLanguages;
+    final public Map<Integer, String> sectionNames;
 
     public SpecExampleOptions(DataHolder options) {
         this.renderHtml = SpecExampleExtension.SPEC_EXAMPLE_RENDER_RAW_HTML.get(options);

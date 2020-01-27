@@ -33,11 +33,11 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 final public class DelimiterProcessorTest extends RenderingTestCase {
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .toImmutable();
-    private static final Parser PARSER = Parser.builder(OPTIONS).customDelimiterProcessor(new AsymmetricDelimiterProcessor()).build();
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).nodeRendererFactory(new UpperCaseNodeRendererFactory()).build();
+    final private static Parser PARSER = Parser.builder(OPTIONS).customDelimiterProcessor(new AsymmetricDelimiterProcessor()).build();
+    final private static HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).nodeRendererFactory(new UpperCaseNodeRendererFactory()).build();
 
     @Test
     public void delimiterProcessorWithInvalidDelimiterUse() {
@@ -75,8 +75,8 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     private static class CustomDelimiterProcessor implements DelimiterProcessor {
-        private final char delimiterChar;
-        private final int delimiterUse;
+        final private char delimiterChar;
+        final private int delimiterUse;
 
         CustomDelimiterProcessor(char delimiterChar, int delimiterUse) {
             this.delimiterChar = delimiterChar;

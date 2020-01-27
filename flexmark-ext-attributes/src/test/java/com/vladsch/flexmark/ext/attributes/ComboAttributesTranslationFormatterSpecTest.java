@@ -16,13 +16,13 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 public class ComboAttributesTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_attributes_translation_format_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_attributes_translation_format_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AttributesExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("anchors", new MutableDataSet()
                 .set(Parser.EXTENSIONS, Arrays.asList(AnchorLinkExtension.create(), AttributesExtension.create(), TocExtension.create(), EmojiExtension.create()))

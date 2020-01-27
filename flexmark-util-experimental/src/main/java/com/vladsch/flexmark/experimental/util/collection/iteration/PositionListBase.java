@@ -67,10 +67,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
                 count++;
             }
         }
-
-        if (count != myListeners.size()) {
-            int tmp = 0;
-        }
         return count;
     }
 
@@ -87,10 +83,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
                 if (position != null) {
                     count++;
                 }
-            }
-
-            if (count != myPreviewListeners.size()) {
-                int tmp = 0;
             }
 
             if (count == 0) {

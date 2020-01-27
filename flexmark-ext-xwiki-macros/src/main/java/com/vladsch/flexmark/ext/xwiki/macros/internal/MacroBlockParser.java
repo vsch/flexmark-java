@@ -22,16 +22,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 public class MacroBlockParser extends AbstractBlockParser {
-    private final MacroBlock block = new MacroBlock();
+    final private MacroBlock block = new MacroBlock();
     private BlockContent content = new BlockContent();
-    private final MacroOptions options;
-    private final MacroParsing parsing;
-    private final BasedSequence macroName;
-    private final boolean oneLine;
+    final private MacroParsing parsing;
+    final private BasedSequence macroName;
+    final private boolean oneLine;
     private boolean hadClose;
 
     MacroBlockParser(DataHolder options, MacroParsing parsing, BasedSequence macroName, boolean oneLine) {
-        this.options = new MacroOptions(options);
         this.parsing = parsing;
         this.macroName = macroName;
         this.oneLine = oneLine;
@@ -186,12 +184,10 @@ public class MacroBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final MacroOptions options;
-        private final MacroParsing parsing;
+        final private MacroParsing parsing;
 
         BlockFactory(DataHolder options) {
             super(options);
-            this.options = new MacroOptions(options);
             this.parsing = new MacroParsing(new Parsing(options));
         }
 

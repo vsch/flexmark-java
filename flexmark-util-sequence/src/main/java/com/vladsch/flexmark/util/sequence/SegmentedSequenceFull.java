@@ -8,10 +8,10 @@ import org.jetbrains.annotations.NotNull;
  * NOTE: very efficient for random access but extremely wasteful with space by allocating 4 bytes per character in the sequence with corresponding construction penalty
  * use SegmentedSequenceTree which is binary tree based segmented sequence with minimal overhead and optimized to give penalty free random access for most applications.
  */
-public final class SegmentedSequenceFull extends SegmentedSequence {
-    private final boolean nonBaseChars;     // true if contains non-base chars
-    private final int[] baseOffsets;        // list of base offsets, offset by baseStartOffset
-    private final int baseStartOffset;      // start offset for baseOffsets of this sequence, offset from baseSeq for all chars, including non-base chars
+final public class SegmentedSequenceFull extends SegmentedSequence {
+    final private boolean nonBaseChars;     // true if contains non-base chars
+    final private int[] baseOffsets;        // list of base offsets, offset by baseStartOffset
+    final private int baseStartOffset;      // start offset for baseOffsets of this sequence, offset from baseSeq for all chars, including non-base chars
 
     private SegmentedSequenceFull(BasedSequence baseSeq, int startOffset, int endOffset, int length, boolean nonBaseChars, int[] baseOffsets, int baseStartOffset) {
         super(baseSeq, startOffset, endOffset, length);

@@ -5,10 +5,10 @@ import com.vladsch.flexmark.ext.emoji.EmojiImageType;
 import com.vladsch.flexmark.ext.emoji.EmojiShortcutType;
 
 public class EmojiResolvedShortcut {
-    public final EmojiReference.Emoji emoji;
-    public final String emojiText;
-    public final boolean isUnicode;
-    public final String alt;
+    final public EmojiReference.Emoji emoji;
+    final public String emojiText;
+    final public boolean isUnicode;
+    final public String alt;
 
     public EmojiResolvedShortcut(EmojiReference.Emoji emoji, String emojiText, boolean isUnicode, String alt) {
         this.emoji = emoji;

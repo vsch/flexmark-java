@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboCoreTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
-    private static final String SPEC_RESOURCE = "/core_translation_formatter_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static String SPEC_RESOURCE = "/core_translation_formatter_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+    final private static Map<String, DataHolder> optionsMap = placementAndSortOptions(
             Parser.REFERENCES_KEEP,
             Formatter.REFERENCE_PLACEMENT,
             Formatter.REFERENCE_SORT

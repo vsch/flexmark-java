@@ -7,8 +7,8 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 @SuppressWarnings("WeakerAccess")
 public class FormatOptions {
-    public final ElementPlacement abbreviationsPlacement;
-    public final ElementPlacementSort abbreviationsSort;
+    final public ElementPlacement abbreviationsPlacement;
+    final public ElementPlacementSort abbreviationsSort;
 
     public FormatOptions(DataHolder options) {
         abbreviationsPlacement = AbbreviationExtension.ABBREVIATIONS_PLACEMENT.get(options);

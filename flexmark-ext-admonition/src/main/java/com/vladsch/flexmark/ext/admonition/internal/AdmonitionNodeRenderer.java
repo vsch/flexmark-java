@@ -21,7 +21,7 @@ public class AdmonitionNodeRenderer implements PhasedNodeRenderer {
     public static AttributablePart ADMONITION_TITLE_PART = new AttributablePart("ADMONITION_TITLE_PART");
     public static AttributablePart ADMONITION_BODY_PART = new AttributablePart("ADMONITION_BODY_PART");
 
-    private final AdmonitionOptions options;
+    final private AdmonitionOptions options;
 
     public AdmonitionNodeRenderer(DataHolder options) {
         this.options = new AdmonitionOptions(options);

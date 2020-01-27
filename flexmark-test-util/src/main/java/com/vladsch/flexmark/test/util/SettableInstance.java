@@ -19,8 +19,8 @@ import java.util.function.Consumer;
  * @param <T> type for the setting
  */
 final public class SettableInstance<T> {
-    private final @NotNull DataKey<Consumer<T>> myConsumerKey;
-    private final @Nullable Collection<SettableExtractedInstance<T, ?>> myExtractedInstanceSetters;
+    final private @NotNull DataKey<Consumer<T>> myConsumerKey;
+    final private @Nullable Collection<SettableExtractedInstance<T, ?>> myExtractedInstanceSetters;
 
     public SettableInstance(@NotNull DataKey<Consumer<T>> consumerKey, @NotNull Collection<SettableExtractedInstance<T, ?>> extractedInstanceSetters) {
         myConsumerKey = consumerKey;

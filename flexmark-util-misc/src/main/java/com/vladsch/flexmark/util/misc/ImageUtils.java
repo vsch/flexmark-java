@@ -113,10 +113,8 @@ public class ImageUtils {
 
         int type = BufferedImage.TYPE_INT_ARGB;  // other options
         BufferedImage dest = new BufferedImage(w, h, type);
-        //BufferedImage dest = UIUtil.createImage(w, h, type);
         Graphics2D g2 = dest.createGraphics();
         g2.drawImage(src, 0, 0, null);
-        //UIUtil.drawImage(g2, src, 0, 0, null);
         g2.dispose();
 
         return dest;
@@ -174,7 +172,6 @@ public class ImageUtils {
             byte[] imageBytes = bos.toByteArray();
             // diagnostic/2553 on windows its \r\n
             imageString = Base64.getEncoder().encodeToString(imageBytes).replace("\r", "").replace("\n", "");
-            //imageString = javax.xml.bind.DatatypeConverter.printBase64Binary(imageBytes);
             bos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -194,7 +191,6 @@ public class ImageUtils {
             if (fileInputStreamReader.read(imageBytes) != -1) {
                 // diagnostic/2553 on windows its \r\n
                 return "data:image/png;base64," + Base64.getEncoder().encodeToString(imageBytes).replace("\r", "").replace("\n", "");
-                //return "data:image/png;base64," + javax.xml.bind.DatatypeConverter.printBase64Binary(imageBytes);
             }
             return null;
         } catch (Throwable e) {
@@ -229,7 +225,7 @@ public class ImageUtils {
         }
     }
 
-    private static final Pattern BASE64_ENCODING_PATTERN = Pattern.compile("^data:image/[a-z0-9_-]+;base64,", Pattern.CASE_INSENSITIVE);
+    final private static Pattern BASE64_ENCODING_PATTERN = Pattern.compile("^data:image/[a-z0-9_-]+;base64,", Pattern.CASE_INSENSITIVE);
 
     public static boolean isEncodedImage(String encoded) {
         return encoded != null && encoded.startsWith("data:image/") && BASE64_ENCODING_PATTERN.matcher(encoded).find();
@@ -327,12 +323,10 @@ public class ImageUtils {
         int w = image.getWidth() + borderWidth * 2;
         int h = image.getHeight() + borderWidth * 2;
         BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = output.createGraphics();
         g2.setColor(borderColor);
         g2.drawImage(image, borderWidth, borderWidth, image.getWidth(), image.getHeight(), null);
-        //UIUtil.drawImage(g2, image, 0, 0, null);
         g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth));
         g2.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING,
@@ -348,7 +342,6 @@ public class ImageUtils {
             g2.drawRect(halfBorder, halfBorder, width, height);
         }
         g2.dispose();
-        //output.setRGB(3, 3, 123);
         return output;
     }
 
@@ -359,7 +352,6 @@ public class ImageUtils {
 
     public static BufferedImage drawRectangle(BufferedImage image, int x, int y, int w, int h, Color borderColor, int borderWidth, int cornerRadius, float[] dash, float dashPhase) {
         BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = output.createGraphics();
         boolean invert = borderColor == null;
@@ -371,7 +363,6 @@ public class ImageUtils {
         }
 
         g2.drawImage(image, 0, 0, null);
-        //UIUtil.drawImage(g2, image, 0, 0, null);
         if (dash != null) {
             g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth, dash, dashPhase));
         } else {
@@ -382,10 +373,6 @@ public class ImageUtils {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON
         );
-
-        if (invert) {
-            //g2.setXORMode(Color.WHITE);
-        }
 
         g2.setColor(borderColor);
         if (cornerRadius > 0) {
@@ -394,13 +381,11 @@ public class ImageUtils {
             g2.drawRect(x, y, w, h);
         }
         g2.dispose();
-        //output.setRGB(3, 3, 123);
         return output;
     }
 
     public static BufferedImage drawOval(BufferedImage image, int x, int y, int w, int h, Color borderColor, int borderWidth, float[] dash, float dashPhase) {
         BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = output.createGraphics();
         boolean invert = borderColor == null;
@@ -412,7 +397,6 @@ public class ImageUtils {
         }
 
         g2.drawImage(image, 0, 0, null);
-        //UIUtil.drawImage(g2, image, 0, 0, null);
         if (dash != null) {
             g2.setStroke(new BasicStroke(borderWidth, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, borderWidth, dash, dashPhase));
         } else {
@@ -423,10 +407,6 @@ public class ImageUtils {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON
         );
-
-        if (invert) {
-            //g2.setXORMode(Color.WHITE);
-        }
 
         g2.setColor(borderColor);
         g2.drawOval(x, y, w, h);
@@ -442,8 +422,6 @@ public class ImageUtils {
     ) {
         //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
         BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        int imgW = image.getWidth();
-        int imgH = image.getHeight();
 
         Graphics2D g2 = output.createGraphics();
 
@@ -490,10 +468,7 @@ public class ImageUtils {
             Color borderColor, int borderWidth,
             Color innerFillColor
     ) {
-        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
         BufferedImage output = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        int imgW = image.getWidth();
-        int imgH = image.getHeight();
 
         Graphics2D g2 = output.createGraphics();
 
@@ -531,7 +506,6 @@ public class ImageUtils {
             int outerCornerRadius,
             boolean applyToImage
     ) {
-        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
         boolean outerFilled = outerFillColor.getAlpha() != 0;
         if (!outerFilled) {
             return outerImage;
@@ -588,7 +562,6 @@ public class ImageUtils {
             int outerCornerRadius,
             boolean applyToImage
     ) {
-        //BufferedImage output = UIUtil.createImage(w, h, BufferedImage.TYPE_INT_ARGB);
         boolean outerFilled = outerFillColor.getAlpha() != 0;
         if (!outerFilled) {
             return outerImage;
@@ -642,9 +615,7 @@ public class ImageUtils {
      */
     public static BufferedImage removeAlpha(BufferedImage image) {
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
-        //BufferedImage bufferedImage = UIUtil.createImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
         Graphics g = bufferedImage.createGraphics();
-        //Color.WHITE estes the background to white. You can use any other color
         g.drawImage(image, 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), Color.WHITE, null);
         g.dispose();
 
@@ -655,21 +626,13 @@ public class ImageUtils {
      * http://stackoverflow.com/questions/665406/how-to-make-a-color-transparent-in-a-bufferedimage-and-save-as-png
      */
     public static Image toTransparent(BufferedImage image, Color color, int tolerance) {
-        //        ImageFilter filter = new RGBImageFilter() {
-        //            public final int filterRGB(int x, int y, int rgb) {
-        //                return (rgb << 8) & 0xFF000000;
-        //            }
-        //        };
-        //
-        //        ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
-        //        return toBufferedImage(Toolkit.getDefaultToolkit().createImage(ip));
         ImageFilter filter = new RGBImageFilter() {
 
             // the color we are looking for... Alpha bits are set to opaque
-            public int markerRGB = color.getRGB() | 0xFF000000;
-            int radius = tolerance * tolerance * 3;
+            final public int markerRGB = color.getRGB() | 0xFF000000;
+            final int radius = tolerance * tolerance * 3;
 
-            public final int filterRGB(int x, int y, int rgb) {
+            final public int filterRGB(int x, int y, int rgb) {
                 if (tolerance == 0 && (rgb | 0xFF000000) == markerRGB) {
                     // Mark the alpha bits as zero - transparent
                     return 0x00FFFFFF & rgb;
@@ -696,7 +659,6 @@ public class ImageUtils {
     }
 
     public static byte[] getImageBytes(BufferedImage image) {
-        String imageString = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         try {

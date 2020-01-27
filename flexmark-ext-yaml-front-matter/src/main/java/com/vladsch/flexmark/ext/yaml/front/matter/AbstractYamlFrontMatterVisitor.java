@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class AbstractYamlFrontMatterVisitor implements YamlFrontMatterVisitor {
-    private Map<String, List<String>> data;
-
-    private final NodeVisitor myVisitor;
+    final private Map<String, List<String>> data;
+    final private NodeVisitor myVisitor;
 
     public AbstractYamlFrontMatterVisitor() {
         //myVisitor = new NodeVisitor(

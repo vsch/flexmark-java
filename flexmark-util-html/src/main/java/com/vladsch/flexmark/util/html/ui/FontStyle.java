@@ -21,12 +21,12 @@ import java.awt.Font;
 
 @SuppressWarnings("WeakerAccess")
 public class FontStyle {
-    public static final FontStyle PLAIN = new FontStyle(0);
-    public static final FontStyle BOLD = new FontStyle(Font.BOLD);
-    public static final FontStyle ITALIC = new FontStyle(Font.ITALIC);
-    public static final FontStyle BOLD_ITALIC = new FontStyle(Font.ITALIC | Font.BOLD);
+    final public static FontStyle PLAIN = new FontStyle(0);
+    final public static FontStyle BOLD = new FontStyle(Font.BOLD);
+    final public static FontStyle ITALIC = new FontStyle(Font.ITALIC);
+    final public static FontStyle BOLD_ITALIC = new FontStyle(Font.ITALIC | Font.BOLD);
 
-    public final int fontStyle;
+    final public int fontStyle;
 
     private FontStyle(int fontStyle) {
         this.fontStyle = fontStyle;

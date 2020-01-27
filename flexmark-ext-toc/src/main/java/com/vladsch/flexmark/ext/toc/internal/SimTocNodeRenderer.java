@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SimTocNodeRenderer implements NodeRenderer {
-    private final TocOptions options;
+    final private TocOptions options;
 
     public SimTocNodeRenderer(DataHolder options) {
         this.options = new TocOptions(options, true);

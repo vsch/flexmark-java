@@ -7,7 +7,7 @@ public enum ParsedOptionStatus {
     WARNING(3),
     ERROR(4);
 
-    private final int level;
+    final private int level;
 
     ParsedOptionStatus(int level) {
         this.level = level;

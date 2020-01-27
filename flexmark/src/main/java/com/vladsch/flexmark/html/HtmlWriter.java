@@ -28,7 +28,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     }
 
     public HtmlWriter(int indentSize, int formatOptions, boolean suppressOpenTagLine, boolean suppressCloseTagLine) {
-         this(null, indentSize, formatOptions, suppressOpenTagLine, suppressCloseTagLine);
+        this(null, indentSize, formatOptions, suppressOpenTagLine, suppressCloseTagLine);
     }
 
     public HtmlWriter(@Nullable Appendable appendable, int indentSize, int formatOptions, boolean suppressOpenTagLine, boolean suppressCloseTagLine) {

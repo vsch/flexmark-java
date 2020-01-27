@@ -20,10 +20,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AbbreviationNodePostProcessor extends NodePostProcessor {
-    //public static final String SINGLE_QUOTES = "'’‘";
-    //public static final String DOUBLE_QUOTES = "\"“”";
-    //private static final Pattern QUOTES = Pattern.compile("(?:[" + SINGLE_QUOTES + DOUBLE_QUOTES + "])");
-
     private Pattern abbreviations = null;
     private HashMap<String, BasedSequence> abbreviationMap = null;
 

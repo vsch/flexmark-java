@@ -8,11 +8,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class ValueIterationAdapterImpl<N, T> implements ValueIterationAdapter<N, T> {
-    private final @NotNull ValueIterationConsumerAdapter<N, T> myConsumerAdapter;
+    final private @NotNull ValueIterationConsumerAdapter<N, T> myConsumerAdapter;
 
     static class ConsumerAdapter<P, T> implements ValueIterationConsumerAdapter<P, T> {
-        private final @NotNull Function<? super P, ? extends T> myFunction;
-        private final @Nullable ValueIterationFilter<? super T> myFilter;
+        final private @NotNull Function<? super P, ? extends T> myFunction;
+        final private @Nullable ValueIterationFilter<? super T> myFilter;
 
         public ConsumerAdapter(@NotNull Function<? super P, ? extends T> function, @Nullable ValueIterationFilter<? super T> filter) {
             myFunction = function;
@@ -33,9 +33,9 @@ public class ValueIterationAdapterImpl<N, T> implements ValueIterationAdapter<N,
     }
 
     private static class MyValueIterationConsumer<P, T, R> implements ValueIterationConsumer<P, R> {
-        private final ValueIterationConsumer<? super T, R> myConsumer;
-        private final Function<? super P, ? extends T> myFunction;
-        private final @Nullable ValueIterationFilter<? super T> myFilter;
+        final private ValueIterationConsumer<? super T, R> myConsumer;
+        final private Function<? super P, ? extends T> myFunction;
+        final private @Nullable ValueIterationFilter<? super T> myFilter;
 
         public MyValueIterationConsumer(@NotNull Function<? super P, ? extends T> function, @Nullable ValueIterationFilter<? super T> filter, ValueIterationConsumer<? super T, R> consumer) {
             myFunction = function;
@@ -75,8 +75,8 @@ public class ValueIterationAdapterImpl<N, T> implements ValueIterationAdapter<N,
     }
 
     static class ChainedConsumerAdapter<P, T, V> implements ValueIterationConsumerAdapter<P, V> {
-        private final ValueIterationConsumerAdapter<? super P, T> myBeforeAdapter;
-        private final ValueIterationConsumerAdapter<? super T, V> myAfterAdapter;
+        final private ValueIterationConsumerAdapter<? super P, T> myBeforeAdapter;
+        final private ValueIterationConsumerAdapter<? super T, V> myAfterAdapter;
 
         public ChainedConsumerAdapter(ValueIterationConsumerAdapter<? super P, T> beforeAdapter, ValueIterationConsumerAdapter<? super T, V> afterAdapter) {
             myBeforeAdapter = beforeAdapter;

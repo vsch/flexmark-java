@@ -53,7 +53,6 @@ public class XmlFormatter {
             NodeList bodies = document.getElementsByTagName("w:body");
             NodeList sections = document.getElementsByTagName("w:sectPr");
             NodeList footnotes = document.getElementsByTagName("w:footnote");
-            Boolean keepDeclaration = Boolean.valueOf(xml.startsWith("<?xml"));
 
             DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
             DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");

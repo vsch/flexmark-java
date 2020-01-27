@@ -328,7 +328,7 @@ final public class HtmlRendererTest {
     }
 
     static class CustomLinkResolverImpl implements LinkResolver {
-        public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
+        final public static DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
 
         final String docUrl;
 
@@ -365,7 +365,6 @@ final public class HtmlRendererTest {
 
         assertEquals("<p>foo [:bar]</p>\n", rendered);
     }
-
 
     static class CustomRefLinkResolverImpl implements LinkResolver {
         public CustomRefLinkResolverImpl(LinkResolverContext context) {

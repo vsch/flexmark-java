@@ -5,8 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 class NodeRenderingHandlerWrapper {
-    public final @NotNull NodeRenderingHandler<?> myRenderingHandler;
-    public final @Nullable NodeRenderingHandlerWrapper myPreviousRenderingHandler;
+    final public @NotNull NodeRenderingHandler<?> myRenderingHandler;
+    final public @Nullable NodeRenderingHandlerWrapper myPreviousRenderingHandler;
 
     public NodeRenderingHandlerWrapper(@NotNull NodeRenderingHandler<?> renderingHandler, @Nullable NodeRenderingHandlerWrapper previousRenderingHandler) {
         myRenderingHandler = renderingHandler;

@@ -44,102 +44,102 @@ import java.util.*;
  */
 @SuppressWarnings("WeakerAccess")
 public class DocxRenderer implements IRender {
-    public static final DataKey<String> STYLES_XML = new DataKey<>("STYLES_XML", getResourceString("/styles.xml"));
-    public static final DataKey<String> NUMBERING_XML = new DataKey<>("NUMBERING_XML", getResourceString("/numbering.xml"));
+    final public static DataKey<String> STYLES_XML = new DataKey<>("STYLES_XML", getResourceString("/styles.xml"));
+    final public static DataKey<String> NUMBERING_XML = new DataKey<>("NUMBERING_XML", getResourceString("/numbering.xml"));
 
-    public static final DataKey<Boolean> RENDER_BODY_ONLY = new DataKey<>("RENDER_BODY_ONLY", false);
-    public static final DataKey<Integer> MAX_IMAGE_WIDTH = new DataKey<>("MAX_IMAGE_WIDTH", 0);
+    final public static DataKey<Boolean> RENDER_BODY_ONLY = new DataKey<>("RENDER_BODY_ONLY", false);
+    final public static DataKey<Integer> MAX_IMAGE_WIDTH = new DataKey<>("MAX_IMAGE_WIDTH", 0);
 
-    public static final DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<>("DEFAULT_LINK_RESOLVER", true);
-    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
-    public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
-    public static final DataKey<Boolean> PREFIX_WWW_LINKS = new DataKey<>("PREFIX_WWW_LINKS", true);
+    final public static DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<>("DEFAULT_LINK_RESOLVER", true);
+    final public static DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
+    final public static DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
+    final public static DataKey<Boolean> PREFIX_WWW_LINKS = new DataKey<>("PREFIX_WWW_LINKS", true);
 
     // same keys, same function also available here for convenience
-    public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES;
-    public static final DataKey<Boolean> PERCENT_ENCODE_URLS = HtmlRenderer.PERCENT_ENCODE_URLS;
-    public static final DataKey<Boolean> ESCAPE_HTML = HtmlRenderer.ESCAPE_HTML;
-    public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = HtmlRenderer.ESCAPE_HTML_BLOCKS;
-    public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = HtmlRenderer.ESCAPE_HTML_COMMENT_BLOCKS;
-    public static final DataKey<Boolean> ESCAPE_INLINE_HTML = HtmlRenderer.ESCAPE_INLINE_HTML;
-    public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = HtmlRenderer.ESCAPE_INLINE_HTML_COMMENTS;
-    public static final DataKey<Boolean> SUPPRESS_HTML = HtmlRenderer.SUPPRESS_HTML;
-    public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = HtmlRenderer.SUPPRESS_HTML_BLOCKS;
-    public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS;
-    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = HtmlRenderer.SUPPRESS_INLINE_HTML;
-    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS;
-    public static final DataKey<Boolean> LINEBREAK_ON_INLINE_HTML_BR = new DataKey<>("LINEBREAK_ON_INLINE_HTML_BR", true);
-    public static final DataKey<Boolean> TABLE_CAPTION_TO_PARAGRAPH = new DataKey<>("TABLE_CAPTION_TO_PARAGRAPH", true);
-    public static final DataKey<Boolean> TABLE_CAPTION_BEFORE_TABLE = new DataKey<>("TABLE_CAPTION_BEFORE_TABLE", false);
-    public static final DataKey<Integer> TABLE_PREFERRED_WIDTH_PCT = new DataKey<>("TABLE_PREFERRED_WIDTH_PCT", 0);
-    public static final DataKey<Integer> TABLE_LEFT_INDENT = new DataKey<>("TABLE_LEFT_INDENT", 120);
-    public static final DataKey<String> TABLE_STYLE = new DataKey<>("TABLE_STYLE", "");
-    public static final DataKey<Boolean> TOC_GENERATE = new DataKey<>("TOC_GENERATE", false);
-    public static final DataKey<String> TOC_INSTRUCTION = new DataKey<>("TOC_INSTRUCTION", "TOC \\o \"1-3\" \\h \\z \\u ");
-    public static final DataKey<Boolean> LOG_IMAGE_PROCESSING = new DataKey<>("LOG_IMAGE_PROCESSING", false);
-    public static final DataKey<Boolean> NO_CHARACTER_STYLES = new DataKey<>("NO_CHARACTER_STYLES", false);
-    public static final DataKey<String> CODE_HIGHLIGHT_SHADING = new DataKey<>("CODE_HIGHLIGHT_SHADING", "");
-    public static final DataKey<Boolean> ERRORS_TO_STDERR = new DataKey<>("ERRORS_TO_STDERR", false);
-    public static final DataKey<String> ERROR_SOURCE_FILE = new DataKey<>("ERROR_SOURCE_FILE", "");
-    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_OFFSET = new DataKey<>("DOC_EMOJI_IMAGE_VERT_OFFSET", -0.10);  // offset emoji images down by 10% of the line height, final value rounded to nearest pt so can create jumps in position
-    public static final DataKey<Double> DOC_EMOJI_IMAGE_VERT_SIZE = new DataKey<>("DOC_EMOJI_IMAGE_VERT_SIZE", 0.9);  // size of image as factor of line height range >0
-    public static final DataKey<String> FORM_CONTROLS = new DataKey<>("FORM_CONTROLS", ""); // enable form controls with name given by this key [name]{.type attributes}
+    final public static DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES;
+    final public static DataKey<Boolean> PERCENT_ENCODE_URLS = HtmlRenderer.PERCENT_ENCODE_URLS;
+    final public static DataKey<Boolean> ESCAPE_HTML = HtmlRenderer.ESCAPE_HTML;
+    final public static DataKey<Boolean> ESCAPE_HTML_BLOCKS = HtmlRenderer.ESCAPE_HTML_BLOCKS;
+    final public static DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = HtmlRenderer.ESCAPE_HTML_COMMENT_BLOCKS;
+    final public static DataKey<Boolean> ESCAPE_INLINE_HTML = HtmlRenderer.ESCAPE_INLINE_HTML;
+    final public static DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = HtmlRenderer.ESCAPE_INLINE_HTML_COMMENTS;
+    final public static DataKey<Boolean> SUPPRESS_HTML = HtmlRenderer.SUPPRESS_HTML;
+    final public static DataKey<Boolean> SUPPRESS_HTML_BLOCKS = HtmlRenderer.SUPPRESS_HTML_BLOCKS;
+    final public static DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS;
+    final public static DataKey<Boolean> SUPPRESS_INLINE_HTML = HtmlRenderer.SUPPRESS_INLINE_HTML;
+    final public static DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS;
+    final public static DataKey<Boolean> LINEBREAK_ON_INLINE_HTML_BR = new DataKey<>("LINEBREAK_ON_INLINE_HTML_BR", true);
+    final public static DataKey<Boolean> TABLE_CAPTION_TO_PARAGRAPH = new DataKey<>("TABLE_CAPTION_TO_PARAGRAPH", true);
+    final public static DataKey<Boolean> TABLE_CAPTION_BEFORE_TABLE = new DataKey<>("TABLE_CAPTION_BEFORE_TABLE", false);
+    final public static DataKey<Integer> TABLE_PREFERRED_WIDTH_PCT = new DataKey<>("TABLE_PREFERRED_WIDTH_PCT", 0);
+    final public static DataKey<Integer> TABLE_LEFT_INDENT = new DataKey<>("TABLE_LEFT_INDENT", 120);
+    final public static DataKey<String> TABLE_STYLE = new DataKey<>("TABLE_STYLE", "");
+    final public static DataKey<Boolean> TOC_GENERATE = new DataKey<>("TOC_GENERATE", false);
+    final public static DataKey<String> TOC_INSTRUCTION = new DataKey<>("TOC_INSTRUCTION", "TOC \\o \"1-3\" \\h \\z \\u ");
+    final public static DataKey<Boolean> LOG_IMAGE_PROCESSING = new DataKey<>("LOG_IMAGE_PROCESSING", false);
+    final public static DataKey<Boolean> NO_CHARACTER_STYLES = new DataKey<>("NO_CHARACTER_STYLES", false);
+    final public static DataKey<String> CODE_HIGHLIGHT_SHADING = new DataKey<>("CODE_HIGHLIGHT_SHADING", "");
+    final public static DataKey<Boolean> ERRORS_TO_STDERR = new DataKey<>("ERRORS_TO_STDERR", false);
+    final public static DataKey<String> ERROR_SOURCE_FILE = new DataKey<>("ERROR_SOURCE_FILE", "");
+    final public static DataKey<Double> DOC_EMOJI_IMAGE_VERT_OFFSET = new DataKey<>("DOC_EMOJI_IMAGE_VERT_OFFSET", -0.10);  // offset emoji images down by 10% of the line height, final value rounded to nearest pt so can create jumps in position
+    final public static DataKey<Double> DOC_EMOJI_IMAGE_VERT_SIZE = new DataKey<>("DOC_EMOJI_IMAGE_VERT_SIZE", 0.9);  // size of image as factor of line height range >0
+    final public static DataKey<String> FORM_CONTROLS = new DataKey<>("FORM_CONTROLS", ""); // enable form controls with name given by this key [name]{.type attributes}
 
     // for compatibility with HtmlIdGenerator these are placed here
-    public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES;
-    public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS;
-    public static final DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES;
-    public static final DataKey<Boolean> RENDER_HEADER_ID = HtmlRenderer.RENDER_HEADER_ID;
-    public static final DataKey<String> LOCAL_HYPERLINK_SUFFIX = new DataKey<>("LOCAL_HYPERLINK_SUFFIX", "");
-    public static final DataKey<String> LOCAL_HYPERLINK_MISSING_HIGHLIGHT = new DataKey<>("LOCAL_HYPERLINK_MISSING_HIGHLIGHT", "red");
-    public static final DataKey<String> LOCAL_HYPERLINK_MISSING_FORMAT = new DataKey<>("LOCAL_HYPERLINK_MISSING_FORMAT", "Missing target id: #%s");
-    //public static final DataKey<String> FIRST_HEADING_ID_SUFFIX = new DataKey<>("FIRST_HEADING_ID_SUFFIX", "");
+    final public static DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES;
+    final public static DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS;
+    final public static DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES;
+    final public static DataKey<Boolean> RENDER_HEADER_ID = HtmlRenderer.RENDER_HEADER_ID;
+    final public static DataKey<String> LOCAL_HYPERLINK_SUFFIX = new DataKey<>("LOCAL_HYPERLINK_SUFFIX", "");
+    final public static DataKey<String> LOCAL_HYPERLINK_MISSING_HIGHLIGHT = new DataKey<>("LOCAL_HYPERLINK_MISSING_HIGHLIGHT", "red");
+    final public static DataKey<String> LOCAL_HYPERLINK_MISSING_FORMAT = new DataKey<>("LOCAL_HYPERLINK_MISSING_FORMAT", "Missing target id: #%s");
+    //final public static DataKey<String> FIRST_HEADING_ID_SUFFIX = new DataKey<>("FIRST_HEADING_ID_SUFFIX", "");
 
-    public static final DataKey<String> ASIDE_BLOCK_STYLE = new DataKey<>("ASIDE_BLOCK_STYLE", "AsideBlock");
-    public static final DataKey<String> BLOCK_QUOTE_STYLE = new DataKey<>("BLOCK_QUOTE_STYLE", "Quotations");
-    public static final DataKey<String> BOLD_STYLE = new DataKey<>("BOLD_STYLE", "StrongEmphasis");
-    public static final DataKey<String> DEFAULT_STYLE = new DataKey<>("DEFAULT_STYLE", "Normal");
-    public static final DataKey<String> ENDNOTE_ANCHOR_STYLE = new DataKey<>("ENDNOTE_ANCHOR_STYLE", "EndnoteReference");
-    public static final DataKey<String> FOOTER = new DataKey<>("FOOTER", "Footer");
-    public static final DataKey<String> FOOTNOTE_ANCHOR_STYLE = new DataKey<>("FOOTNOTE_ANCHOR_STYLE", "FootnoteReference");
-    public static final DataKey<String> FOOTNOTE_STYLE = new DataKey<>("FOOTNOTE_STYLE", "Footnote");
-    public static final DataKey<String> FOOTNOTE_TEXT = new DataKey<>("FOOTNOTE_TEXT", "FootnoteText");
-    public static final DataKey<String> HEADER = new DataKey<>("HEADER", "Header");
-    public static final DataKey<String> HEADING_1 = new DataKey<>("HEADING_1", "Heading1");
-    public static final DataKey<String> HEADING_2 = new DataKey<>("HEADING_2", "Heading2");
-    public static final DataKey<String> HEADING_3 = new DataKey<>("HEADING_3", "Heading3");
-    public static final DataKey<String> HEADING_4 = new DataKey<>("HEADING_4", "Heading4");
-    public static final DataKey<String> HEADING_5 = new DataKey<>("HEADING_5", "Heading5");
-    public static final DataKey<String> HEADING_6 = new DataKey<>("HEADING_6", "Heading6");
-    public static final DataKey<String> HORIZONTAL_LINE_STYLE = new DataKey<>("HORIZONTAL_LINE_STYLE", "HorizontalLine");
-    public static final DataKey<String> HYPERLINK_STYLE = new DataKey<>("HYPERLINK_STYLE", "Hyperlink");
-    public static final DataKey<String> INLINE_CODE_STYLE = new DataKey<>("INLINE_CODE_STYLE", "SourceText");
-    public static final DataKey<String> INS_STYLE = new DataKey<>("INS_STYLE", "Underlined");
-    public static final DataKey<String> ITALIC_STYLE = new DataKey<>("ITALIC_STYLE", "Emphasis");
-    public static final DataKey<String> LOOSE_PARAGRAPH_STYLE = new DataKey<>("LOOSE_PARAGRAPH_STYLE", "ParagraphTextBody");
-    public static final DataKey<String> PREFORMATTED_TEXT_STYLE = new DataKey<>("PREFORMATTED_TEXT_STYLE", "PreformattedText");
-    public static final DataKey<String> STRIKE_THROUGH_STYLE = new DataKey<>("STRIKE_THROUGH_STYLE", "Strikethrough");
-    public static final DataKey<String> SUBSCRIPT_STYLE = new DataKey<>("SUBSCRIPT_STYLE", "Subscript");
-    public static final DataKey<String> SUPERSCRIPT_STYLE = new DataKey<>("SUPERSCRIPT_STYLE", "Superscript");
-    public static final DataKey<String> TABLE_CAPTION = new DataKey<>("TABLE_CAPTION", "TableCaption");
-    public static final DataKey<String> TABLE_CONTENTS = new DataKey<>("TABLE_CONTENTS", "TableContents");
-    public static final DataKey<String> TABLE_GRID = new DataKey<>("TABLE_GRID", "TableGrid");
-    public static final DataKey<String> TABLE_HEADING = new DataKey<>("TABLE_HEADING", "TableHeading");
-    public static final DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "BodyText");
+    final public static DataKey<String> ASIDE_BLOCK_STYLE = new DataKey<>("ASIDE_BLOCK_STYLE", "AsideBlock");
+    final public static DataKey<String> BLOCK_QUOTE_STYLE = new DataKey<>("BLOCK_QUOTE_STYLE", "Quotations");
+    final public static DataKey<String> BOLD_STYLE = new DataKey<>("BOLD_STYLE", "StrongEmphasis");
+    final public static DataKey<String> DEFAULT_STYLE = new DataKey<>("DEFAULT_STYLE", "Normal");
+    final public static DataKey<String> ENDNOTE_ANCHOR_STYLE = new DataKey<>("ENDNOTE_ANCHOR_STYLE", "EndnoteReference");
+    final public static DataKey<String> FOOTER = new DataKey<>("FOOTER", "Footer");
+    final public static DataKey<String> FOOTNOTE_ANCHOR_STYLE = new DataKey<>("FOOTNOTE_ANCHOR_STYLE", "FootnoteReference");
+    final public static DataKey<String> FOOTNOTE_STYLE = new DataKey<>("FOOTNOTE_STYLE", "Footnote");
+    final public static DataKey<String> FOOTNOTE_TEXT = new DataKey<>("FOOTNOTE_TEXT", "FootnoteText");
+    final public static DataKey<String> HEADER = new DataKey<>("HEADER", "Header");
+    final public static DataKey<String> HEADING_1 = new DataKey<>("HEADING_1", "Heading1");
+    final public static DataKey<String> HEADING_2 = new DataKey<>("HEADING_2", "Heading2");
+    final public static DataKey<String> HEADING_3 = new DataKey<>("HEADING_3", "Heading3");
+    final public static DataKey<String> HEADING_4 = new DataKey<>("HEADING_4", "Heading4");
+    final public static DataKey<String> HEADING_5 = new DataKey<>("HEADING_5", "Heading5");
+    final public static DataKey<String> HEADING_6 = new DataKey<>("HEADING_6", "Heading6");
+    final public static DataKey<String> HORIZONTAL_LINE_STYLE = new DataKey<>("HORIZONTAL_LINE_STYLE", "HorizontalLine");
+    final public static DataKey<String> HYPERLINK_STYLE = new DataKey<>("HYPERLINK_STYLE", "Hyperlink");
+    final public static DataKey<String> INLINE_CODE_STYLE = new DataKey<>("INLINE_CODE_STYLE", "SourceText");
+    final public static DataKey<String> INS_STYLE = new DataKey<>("INS_STYLE", "Underlined");
+    final public static DataKey<String> ITALIC_STYLE = new DataKey<>("ITALIC_STYLE", "Emphasis");
+    final public static DataKey<String> LOOSE_PARAGRAPH_STYLE = new DataKey<>("LOOSE_PARAGRAPH_STYLE", "ParagraphTextBody");
+    final public static DataKey<String> PREFORMATTED_TEXT_STYLE = new DataKey<>("PREFORMATTED_TEXT_STYLE", "PreformattedText");
+    final public static DataKey<String> STRIKE_THROUGH_STYLE = new DataKey<>("STRIKE_THROUGH_STYLE", "Strikethrough");
+    final public static DataKey<String> SUBSCRIPT_STYLE = new DataKey<>("SUBSCRIPT_STYLE", "Subscript");
+    final public static DataKey<String> SUPERSCRIPT_STYLE = new DataKey<>("SUPERSCRIPT_STYLE", "Superscript");
+    final public static DataKey<String> TABLE_CAPTION = new DataKey<>("TABLE_CAPTION", "TableCaption");
+    final public static DataKey<String> TABLE_CONTENTS = new DataKey<>("TABLE_CONTENTS", "TableContents");
+    final public static DataKey<String> TABLE_GRID = new DataKey<>("TABLE_GRID", "TableGrid");
+    final public static DataKey<String> TABLE_HEADING = new DataKey<>("TABLE_HEADING", "TableHeading");
+    final public static DataKey<String> TIGHT_PARAGRAPH_STYLE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "BodyText");
 
-    public static final DataKey<String> DEFAULT_TEMPLATE_RESOURCE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "/empty.xml");
+    final public static DataKey<String> DEFAULT_TEMPLATE_RESOURCE = new DataKey<>("TIGHT_PARAGRAPH_STYLE", "/empty.xml");
 
     // Now Used. These are numbering styles
-    public static final DataKey<String> BULLET_LIST_STYLE = new DataKey<>("BULLET_LIST_STYLE", "BulletList");
-    public static final DataKey<String> NUMBERED_LIST_STYLE = new DataKey<>("NUMBERED_LIST_STYLE", "NumberedList");
+    final public static DataKey<String> BULLET_LIST_STYLE = new DataKey<>("BULLET_LIST_STYLE", "BulletList");
+    final public static DataKey<String> NUMBERED_LIST_STYLE = new DataKey<>("NUMBERED_LIST_STYLE", "NumberedList");
 
-    public static final DataKey<String> PARAGRAPH_BULLET_LIST_STYLE = new DataKey<>("PARAGRAPH_BULLET_LIST_STYLE", "ListBullet");
-    public static final DataKey<String> PARAGRAPH_NUMBERED_LIST_STYLE = new DataKey<>("PARAGRAPH_NUMBERED_LIST_STYLE", "ListNumber");
+    final public static DataKey<String> PARAGRAPH_BULLET_LIST_STYLE = new DataKey<>("PARAGRAPH_BULLET_LIST_STYLE", "ListBullet");
+    final public static DataKey<String> PARAGRAPH_NUMBERED_LIST_STYLE = new DataKey<>("PARAGRAPH_NUMBERED_LIST_STYLE", "ListNumber");
 
     // internal stuff
-    public static final String EMOJI_RESOURCE_PREFIX = "emoji:";
+    final public static String EMOJI_RESOURCE_PREFIX = "emoji:";
 
-    public static final DataKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DataKey<>("DOC_EMOJI_ROOT_IMAGE_PATH", EMOJI_RESOURCE_PREFIX, options -> {
+    final public static DataKey<String> DOC_EMOJI_ROOT_IMAGE_PATH = new DataKey<>("DOC_EMOJI_ROOT_IMAGE_PATH", EMOJI_RESOURCE_PREFIX, options -> {
         if (options.contains(EmojiExtension.ROOT_IMAGE_PATH)) {
             return EmojiExtension.ROOT_IMAGE_PATH.get(options);
         }
@@ -150,7 +150,7 @@ public class DocxRenderer implements IRender {
 
     final List<NodeDocxRendererFactory> nodeFormatterFactories;
     //final DocxRendererOptions rendererOptions;
-    private final DataHolder options;
+    final private DataHolder options;
     final List<LinkResolverFactory> linkResolverFactories;
     final List<AttributeProviderFactory> attributeProviderFactories;
     final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
@@ -464,7 +464,7 @@ public class DocxRenderer implements IRender {
         void extend(Builder builder);
     }
 
-    private final static Iterator<? extends Node> NULL_ITERATOR = new Iterator<Node>() {
+    final private static Iterator<? extends Node> NULL_ITERATOR = new Iterator<Node>() {
         @Override
         public boolean hasNext() {
             return false;
@@ -483,20 +483,20 @@ public class DocxRenderer implements IRender {
     final static Iterable<? extends Node> NULL_ITERABLE = (Iterable<Node>) () -> null;
 
     private class MainDocxRenderer extends DocxContextImpl<Node> implements DocxRendererContext {
-        private final Document document;
-        private final Map<Class<?>, NodeDocxRendererHandler<?>> renderers;
-        private final SubClassingBag<Node> collectedNodes;
+        final private Document document;
+        final private Map<Class<?>, NodeDocxRendererHandler<?>> renderers;
+        final private SubClassingBag<Node> collectedNodes;
         final HashSet<Class<?>> bookmarkWrapsChildren;
 
-        private final List<PhasedNodeDocxRenderer> phasedFormatters;
-        private final Set<DocxRendererPhase> renderingPhases;
+        final private List<PhasedNodeDocxRenderer> phasedFormatters;
+        final private Set<DocxRendererPhase> renderingPhases;
         private DocxRendererPhase phase;
         Node renderingNode;
-        private final LinkResolver[] myLinkResolvers;
-        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
-        private final AttributeProvider[] myAttributeProviders;
-        private final HtmlIdGenerator htmlIdGenerator;
-        //private final Node firstHeadingNode;
+        final private LinkResolver[] myLinkResolvers;
+        final private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
+        final private AttributeProvider[] myAttributeProviders;
+        final private HtmlIdGenerator htmlIdGenerator;
+        //final private Node firstHeadingNode;
         final TwoWayHashMap<Node, String> nodeIdMap;
         final HashMap<String, Integer> baseIdToSerial;
         final HashMap<String, String> idToValidBookmark;
@@ -708,22 +708,22 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public final Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
+        final public Iterable<? extends Node> nodesOfType(Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
+        final public Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
+        final public Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
         @Override
-        public final Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
+        final public Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes) {
             return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 

@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
  * NOTE: very efficient for random access but extremely wasteful with space by allocating 4 bytes per character in the sequence with corresponding construction penalty
  * use SegmentedSequenceTree which is binary tree based segmented sequence with minimal overhead and optimized to give penalty free random access for most applications.
  */
-public final class SegmentedSequenceTree extends SegmentedSequence {
+final public class SegmentedSequenceTree extends SegmentedSequence {
     final private SegmentTree segmentTree;   // segment tree
     final private int startIndex;               // start index of this sub-sequence in the segment tree, 0 for original
     final private int startPos;                 // start position for segments of this sequence in the tree

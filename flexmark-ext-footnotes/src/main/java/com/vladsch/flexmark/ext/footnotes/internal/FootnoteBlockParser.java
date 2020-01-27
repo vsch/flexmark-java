@@ -19,9 +19,9 @@ public class FootnoteBlockParser extends AbstractBlockParser {
     static Pattern FOOTNOTE_ID_PATTERN = Pattern.compile("\\[\\^\\s*(" + FOOTNOTE_ID + ")\\s*\\]");
     static Pattern FOOTNOTE_DEF_PATTERN = Pattern.compile("^\\[\\^\\s*(" + FOOTNOTE_ID + ")\\s*\\]:");
 
-    private final FootnoteBlock block = new FootnoteBlock();
-    private final FootnoteOptions options;
-    private final int contentOffset;
+    final private FootnoteBlock block = new FootnoteBlock();
+    final private FootnoteOptions options;
+    final private int contentOffset;
     private BlockContent content = new BlockContent();
 
     public FootnoteBlockParser(FootnoteOptions options, int contentOffset) {
@@ -110,7 +110,7 @@ public class FootnoteBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final FootnoteOptions options;
+        final private FootnoteOptions options;
 
         private BlockFactory(DataHolder options) {
             super(options);

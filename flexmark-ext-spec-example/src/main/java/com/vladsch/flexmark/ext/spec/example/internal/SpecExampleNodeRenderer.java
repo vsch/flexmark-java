@@ -17,13 +17,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SpecExampleNodeRenderer implements NodeRenderer
-        // , PhasedNodeRenderer
-{
-    private static String fromChars = " +/<>";
-    private static String toChars = "-----";
-
-    private final SpecExampleOptions options;
+public class SpecExampleNodeRenderer implements NodeRenderer {
+    final private SpecExampleOptions options;
 
     public SpecExampleNodeRenderer(DataHolder options) {
         this.options = new SpecExampleOptions(options);

@@ -21,8 +21,8 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
 
     final AdmonitionBlock block;
     //private BlockContent content = new BlockContent();
-    private final AdmonitionOptions options;
-    private final int contentIndent;
+    final private AdmonitionOptions options;
+    final private int contentIndent;
     private boolean hadBlankLine;
 
     AdmonitionBlockParser(AdmonitionOptions options, int contentIndent) {
@@ -149,7 +149,7 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final AdmonitionOptions options;
+        final private AdmonitionOptions options;
 
         BlockFactory(DataHolder options) {
             super(options);

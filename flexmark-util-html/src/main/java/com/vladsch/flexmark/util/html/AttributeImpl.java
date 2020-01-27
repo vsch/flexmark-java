@@ -4,10 +4,10 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 
 public class AttributeImpl implements Attribute {
-    private final String name;
-    private final char valueListDelimiter;
-    private final char valueNameDelimiter;
-    private final String value;
+    final private String name;
+    final private char valueListDelimiter;
+    final private char valueNameDelimiter;
+    final private String value;
 
     private AttributeImpl(CharSequence name, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
         this.name = String.valueOf(name);

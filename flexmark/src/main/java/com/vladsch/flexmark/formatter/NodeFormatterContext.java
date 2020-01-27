@@ -85,10 +85,11 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
 
     /**
      * NOTE: parser can only use a contiguous sequence, not segmented. Therefore, the AST offsets and base sequence
-     *    from AST nodes has always an index into sequence equal to the offset. This sequence is set to not {@link BasedSequence#NULL}
-     *    when the format sequence used for tracked offsets is not contiguous and TrackedOffset.offset is an offset
-     *    from this sequence and need to be converted to index into this sequence to be used as an offset into AST sequence
-     *    for offset conversion
+     * from AST nodes has always an index into sequence equal to the offset. This sequence is set to not {@link BasedSequence#NULL}
+     * when the format sequence used for tracked offsets is not contiguous and TrackedOffset.offset is an offset
+     * from this sequence and need to be converted to index into this sequence to be used as an offset into AST sequence
+     * for offset conversion
+     *
      * @return original sequence used for tracked offsets.
      */
     @NotNull
@@ -104,7 +105,6 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * {@link ElementPlacementSort#SORT_UNUSED_LAST} so that
      *
      * @param classes node classes to return
-     *
      * @return iterable
      */
     @NotNull Iterable<? extends Node> nodesOfType(@NotNull Class<?>[] classes);
@@ -121,7 +121,6 @@ public interface NodeFormatterContext extends NodeContext<Node, NodeFormatterCon
      * {@link ElementPlacementSort#SORT_UNUSED_LAST} so that
      *
      * @param classes node classes to return
-     *
      * @return iterable
      */
     @NotNull Iterable<? extends Node> reversedNodesOfType(@NotNull Class<?>[] classes);

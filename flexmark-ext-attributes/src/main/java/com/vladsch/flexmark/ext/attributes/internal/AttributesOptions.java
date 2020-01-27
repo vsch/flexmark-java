@@ -8,11 +8,11 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import org.jetbrains.annotations.NotNull;
 
 class AttributesOptions implements MutableDataSetter {
-    public final boolean assignTextAttributes;
-    public final boolean wrapNonAttributeText;
-    public final boolean useEmptyImplicitAsSpanDelimiter;
-    public final boolean fencedCodeInfoAttributes;
-    public final FencedCodeAddType fencedCodeAddAttributes;
+    final public boolean assignTextAttributes;
+    final public boolean wrapNonAttributeText;
+    final public boolean useEmptyImplicitAsSpanDelimiter;
+    final public boolean fencedCodeInfoAttributes;
+    final public FencedCodeAddType fencedCodeAddAttributes;
 
     public AttributesOptions(DataHolder options) {
         assignTextAttributes = AttributesExtension.ASSIGN_TEXT_ATTRIBUTES.get(options);

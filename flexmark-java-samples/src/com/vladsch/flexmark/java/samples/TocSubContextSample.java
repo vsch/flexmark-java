@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TocSubContextSample {
-    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+    final private static DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
             TocExtension.create(),
             CustomExtension.create()
     ));

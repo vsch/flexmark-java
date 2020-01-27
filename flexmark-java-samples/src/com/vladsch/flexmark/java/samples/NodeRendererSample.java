@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.java.samples;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationOptions;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
@@ -35,10 +34,8 @@ public class NodeRendererSample {
     }
 
     static class SampleNodeRenderer implements NodeRenderer {
-        private final AbbreviationOptions options;
-
         public SampleNodeRenderer(DataHolder options) {
-            this.options = new AbbreviationOptions(options);
+
         }
 
         @Override

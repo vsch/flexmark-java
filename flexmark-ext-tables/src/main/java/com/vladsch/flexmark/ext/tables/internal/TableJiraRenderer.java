@@ -17,8 +17,6 @@ import java.util.Set;
 
 public class TableJiraRenderer implements NodeRenderer {
 
-    //private final TableParserOptions options;
-
     public TableJiraRenderer(DataHolder options) {
         //this.options = new TableParserOptions(options);
     }

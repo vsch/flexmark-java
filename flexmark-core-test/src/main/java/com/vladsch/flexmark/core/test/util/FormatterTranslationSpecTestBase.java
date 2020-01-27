@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.core.test.util;
 
 import com.vladsch.flexmark.formatter.Formatter;
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
@@ -24,16 +23,15 @@ import java.util.regex.Pattern;
 public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase {
     final static boolean SKIP_IGNORED_TESTS = true;
     final public static DataKey<Boolean> SHOW_LINE_RANGES = new DataKey<>("SHOW_LINE_RANGES", false);
-    public static final DataKey<Character> EDIT_OP_CHAR = new DataKey<>("EDIT_OP_CHAR", SequenceUtils.NUL);
-    public static final DataKey<Integer> EDIT_OP = new DataKey<>("EDIT_OP", 0);
-//    public static final DataKey<Boolean> EDIT_INDENT = new DataKey<>("EDIT_INDENT", false);
+    final public static DataKey<Character> EDIT_OP_CHAR = new DataKey<>("EDIT_OP_CHAR", SequenceUtils.NUL);
+    final public static DataKey<Integer> EDIT_OP = new DataKey<>("EDIT_OP", 0);
 
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .toImmutable();
 
-    private static final DataHolder FIXED_INDENT_OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.FIXED_INDENT)
+    final private static DataHolder FIXED_INDENT_OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.FIXED_INDENT)
             .toMutable();
 
     final private static Map<String, DataHolder> optionsMap = new HashMap<>();
@@ -141,7 +139,6 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
         optionsMap.put("first-prefix", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customStringOption(option, params, FormatterTranslationSpecTestBase::firstIndentOption)));
         optionsMap.put("prefix", new MutableDataSet().set(TestUtils.CUSTOM_OPTION, (option, params) -> TestUtils.customStringOption(option, params, FormatterTranslationSpecTestBase::indentOption)));
     }
-
     static DataHolder firstIndentOption(@Nullable String params) {
         String value = params != null ? params : "";
         return new MutableDataSet().set(Formatter.DOCUMENT_FIRST_PREFIX, value);

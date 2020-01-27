@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MacroNodeRenderer implements NodeRenderer {
-    private final MacroOptions options;
+    final private MacroOptions options;
 
     public MacroNodeRenderer(DataHolder options) {
         this.options = new MacroOptions(options);

@@ -23,14 +23,11 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
     static Pattern ENUM_REF_ID_PATTERN = Pattern.compile("\\[[\\@|#]\\s*(" + ENUM_REF_ID + ")\\s*\\]");
     static Pattern ENUM_REF_DEF_PATTERN = Pattern.compile("^(\\[[\\@]\\s*(" + ENUM_REF_ID + ")\\s*\\]:)\\s+");
 
-    private final EnumeratedReferenceBlock block = new EnumeratedReferenceBlock();
-    private final EnumeratedReferenceOptions options;
-    private final int contentOffset;
+    final EnumeratedReferenceBlock block = new EnumeratedReferenceBlock();
     private BlockContent content = new BlockContent();
 
     public EnumeratedReferenceBlockParser(EnumeratedReferenceOptions options, int contentOffset) {
-        this.options = options;
-        this.contentOffset = contentOffset;
+
     }
 
     public BlockContent getBlockContent() {
@@ -108,9 +105,9 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final EnumeratedReferenceOptions options;
+        final private EnumeratedReferenceOptions options;
 
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
             this.options = new EnumeratedReferenceOptions(options);
         }

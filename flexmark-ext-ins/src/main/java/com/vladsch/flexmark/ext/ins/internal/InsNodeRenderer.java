@@ -14,8 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class InsNodeRenderer implements NodeRenderer {
-    private final String insStyleHtmlOpen;
-    private final String insStyleHtmlClose;
+    final private String insStyleHtmlOpen;
+    final private String insStyleHtmlClose;
 
     public InsNodeRenderer(DataHolder options) {
         insStyleHtmlOpen = InsExtension.INS_STYLE_HTML_OPEN.get(options);

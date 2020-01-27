@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<EnumeratedReferenceRepository, EnumeratedReferenceBlock, EnumeratedReferenceText> {
 
-    private final EnumeratedReferenceFormatOptions options;
+    final private EnumeratedReferenceFormatOptions options;
 
     public EnumeratedReferenceNodeFormatter(DataHolder options) {
         super(options, null, AttributesNodeFormatter.ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP);

@@ -58,15 +58,15 @@ nestedStrongEmphasis(com.vladsch.flexmark.test.PathologicalSpcUrlTest) took 5 ms
  * `
  */
 public class LinkDestinationParser {
-    public final BitSet EXCLUDED_0_TO_SPACE_CHARS;
-    public final BitSet JEKYLL_EXCLUDED_CHARS;
-    public final BitSet PAREN_EXCLUDED_CHARS;
-    public final BitSet PAREN_ESCAPABLE_CHARS;
-    public final BitSet PAREN_QUOTE_CHARS;
-    public final boolean allowMatchedParentheses;
-    public final boolean spaceInUrls;
-    public final boolean parseJekyllMacrosInUrls;
-    public final boolean intellijDummyIdentifier;
+    final public BitSet EXCLUDED_0_TO_SPACE_CHARS;
+    final public BitSet JEKYLL_EXCLUDED_CHARS;
+    final public BitSet PAREN_EXCLUDED_CHARS;
+    final public BitSet PAREN_ESCAPABLE_CHARS;
+    final public BitSet PAREN_QUOTE_CHARS;
+    final public boolean allowMatchedParentheses;
+    final public boolean spaceInUrls;
+    final public boolean parseJekyllMacrosInUrls;
+    final public boolean intellijDummyIdentifier;
 
     /**
      * Parse Link Destination
@@ -96,14 +96,6 @@ public class LinkDestinationParser {
 
         PAREN_ESCAPABLE_CHARS = getCharSet(Escaping.ESCAPABLE_CHARS);
         PAREN_QUOTE_CHARS = getCharSet("\"'");
-    }
-
-    private enum State {
-        NORMAL,
-        ESCAPED,
-        JEKYLL_MACRO_START, // looking for second {
-        JEKYLL_MACRO, // accumulating
-        JEKYLL_MACRO_END, // accumulating, looking for second }
     }
 
     public BasedSequence parseLinkDestination(BasedSequence input, int startIndex) {

@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SubClassingBag<T> {
-    private final @NotNull ClassificationBag<Class<?>, T> items;
-    private final @NotNull HashMap<Class<?>, BitSet> subClassMap;
+    final private @NotNull ClassificationBag<Class<?>, T> items;
+    final private @NotNull HashMap<Class<?>, BitSet> subClassMap;
 
     public SubClassingBag(@NotNull ClassificationBag<Class<?>, T> items, HashMap<Class<?>, @NotNull List<Class<?>>> subClassMap) {
         this.items = items;
@@ -47,24 +47,24 @@ public class SubClassingBag<T> {
         return bitSet == null ? 0 : bitSet.cardinality();
     }
 
-    public final <X> @NotNull ReversibleIterable<X> itemsOfType(@NotNull Class<X> xClass, @NotNull Class<?>... categories) {
+    final public <X> @NotNull ReversibleIterable<X> itemsOfType(@NotNull Class<X> xClass, @NotNull Class<?>... categories) {
         return items.getCategoryItems(xClass, typeBitSet(xClass, categories));
     }
 
-    public final <X> @NotNull ReversibleIterable<X> itemsOfType(@NotNull Class<X> xClass, @NotNull Collection<Class<?>> categories) {
+    final public <X> @NotNull ReversibleIterable<X> itemsOfType(@NotNull Class<X> xClass, @NotNull Collection<Class<?>> categories) {
         return items.getCategoryItems(xClass, typeBitSet(xClass, categories));
     }
 
-    public final <X> @NotNull ReversibleIterable<X> reversedItemsOfType(@NotNull Class<X> xClass, @NotNull Class<?>... categories) {
+    final public <X> @NotNull ReversibleIterable<X> reversedItemsOfType(@NotNull Class<X> xClass, @NotNull Class<?>... categories) {
         return items.getCategoryItemsReversed(xClass, typeBitSet(xClass, categories));
     }
 
-    public final <X> @NotNull ReversibleIterable<X> reversedItemsOfType(@NotNull Class<X> xClass, @NotNull Collection<Class<?>> categories) {
+    final public <X> @NotNull ReversibleIterable<X> reversedItemsOfType(@NotNull Class<X> xClass, @NotNull Collection<Class<?>> categories) {
         return items.getCategoryItemsReversed(xClass, typeBitSet(xClass, categories));
     }
 
     @SuppressWarnings("WeakerAccess")
-    public final @NotNull BitSet typeBitSet(@NotNull Class<?> xClass, @NotNull Class<?>... categories) {
+    final public @NotNull BitSet typeBitSet(@NotNull Class<?> xClass, @NotNull Class<?>... categories) {
         BitSet bitSet = new BitSet();
         for (Class<?> category : categories) {
             if (xClass.isAssignableFrom(category) && subClassMap.containsKey(category)) {
@@ -75,7 +75,7 @@ public class SubClassingBag<T> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public final @NotNull BitSet typeBitSet(@NotNull Class<?> xClass, @NotNull Collection<Class<?>> categories) {
+    final public @NotNull BitSet typeBitSet(@NotNull Class<?> xClass, @NotNull Collection<Class<?>> categories) {
         BitSet bitSet = new BitSet();
         for (Class<?> category : categories) {
             if (xClass.isAssignableFrom(category) && subClassMap.containsKey(category)) {

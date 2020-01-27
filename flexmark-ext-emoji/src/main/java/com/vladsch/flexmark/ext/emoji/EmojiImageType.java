@@ -6,8 +6,8 @@ public enum EmojiImageType {
     UNICODE_ONLY(true, false),
     ;
 
-    public final boolean isUnicode;
-    public final boolean isImage;
+    final public boolean isUnicode;
+    final public boolean isImage;
 
     EmojiImageType(boolean isUnicode, boolean isImage) {
         this.isUnicode = isUnicode;

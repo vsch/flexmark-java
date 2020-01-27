@@ -12,7 +12,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
 public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
-    private final NodeVisitor myVisitor;
+    final private NodeVisitor myVisitor;
 
     public ZzzzzzDocumentPostProcessor(Document document) {
         myVisitor = new NodeVisitor(

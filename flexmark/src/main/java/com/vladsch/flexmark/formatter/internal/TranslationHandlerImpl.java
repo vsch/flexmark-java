@@ -102,12 +102,12 @@ public class TranslationHandlerImpl implements TranslationHandler {
         myIdGenerator.generateIds(node);
     }
 
-    static boolean isBlank(CharSequence csq) {
+    static boolean isNotBlank(CharSequence csq) {
         int iMax = csq.length();
         for (int i = 0; i < iMax; i++) {
-            if (!isWhitespace(csq.charAt(i))) return false;
+            if (!isWhitespace(csq.charAt(i))) return true;
         }
-        return true;
+        return false;
     }
 
     @NotNull
@@ -120,7 +120,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
         // collect all the translating snippets first
         for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
-            if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
+            if (isNotBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
                 // see if it is repeating
                 if (!repeatedTranslatingIndices.containsKey(entry.getValue())) {
                     // new, index
@@ -132,7 +132,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         }
 
         for (CharSequence text : myTranslatingSpans) {
-            if (!isBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
+            if (isNotBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
                 translatingSnippets.add(text.toString());
             }
         }
@@ -154,7 +154,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
         for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
-            if (!isBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
+            if (isNotBlank(entry.getValue()) && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
                 Integer index = repeatedTranslatingIndices.get(entry.getValue());
                 if (index == null) {
                     if (i >= placeholderSize) break;
@@ -165,13 +165,13 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 } else {
                     myTranslatedTexts.put(entry.getKey(), translatedTexts.get(index).toString());
                 }
-            } else {
-                // already has the same value
+//            } else {
+//                // already has the same value
             }
         }
 
         for (CharSequence text : myTranslatingSpans) {
-            if (!isBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
+            if (isNotBlank(text) && !myPlaceHolderMarkerPattern.matcher(text).matches()) {
                 myTranslatedSpans.add(translatedTexts.get(i).toString());
                 i++;
             } else {
@@ -269,14 +269,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
         render.render(subContext, writer);
 
-        int pendingEOL = writer.offsetWithPending();
-
         // trim off eol added by toString(0)
-        String toString = writer.toString(2, -1);
-//        if (pendingEOL > 0 && pendingEOL == toString.length() && toString.charAt(pendingEOL - 1) == '\n') {
-//            pendingEOL--;
-//        }
-        String spanText = toString;
+        String spanText = writer.toString(2, -1);
 
         myWriter = savedMarkdown;
         if (copyToMain) {
@@ -303,7 +297,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
             case TRANSLATED_SPANS: {
                 // we output translated text instead of render
-                String spanText = renderInSubContext(render, false);
+                renderInSubContext(render, false);
 
                 String translated = myTranslatedSpans.get(myTranslatingSpanId);
 
@@ -335,7 +329,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 }
 
                 myTranslatingSpanId++;
-                String spanText = renderInSubContext(render, true);
+                renderInSubContext(render, true);
                 return;
 
             case FORMAT:
@@ -359,7 +353,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
             case TRANSLATED_SPANS: {
                 // we output translated text instead of render
-                String spanText = renderInSubContext(render, false);
+                renderInSubContext(render, false);
+
                 String translated = myNonTranslatingSpans.get(myNonTranslatingSpanId);
                 myNonTranslatingSpanId++;
                 myWriter.append(translated);
@@ -368,7 +363,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
             case TRANSLATED: {
                 // we output translated text instead of render
-                String spanText = renderInSubContext(render, true);
+                renderInSubContext(render, true);
                 myNonTranslatingSpanId++;
                 return;
             }
@@ -414,8 +409,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
         Function<String, CharSequence> savedValue = myNonTranslatingPostProcessor;
         try {
             myNonTranslatingPostProcessor = postProcessor;
-            T retVal = scope.get();
-            return retVal;
+            return scope.get();
         } finally {
             myNonTranslatingPostProcessor = savedValue;
         }
@@ -492,7 +486,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
             case TRANSLATED:
                 CharSequence replacedText = prefix == null && suffix == null && suffix2 == null ? translatingText : addPrefixSuffix(translatingText, prefix, suffix, suffix2);
-                CharSequence text = myTranslatedTexts.get(replacedText);
+                CharSequence text = myTranslatedTexts.get(replacedText.toString());
                 if (text != null && !(prefix == null && suffix == null && suffix2 == null)) {
                     return addPrefixSuffix(text, prefix, suffix, suffix2);
                 }

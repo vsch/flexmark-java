@@ -28,9 +28,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class ComboJekyllFrontMatterSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_jekyll_front_matter_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_jekyll_front_matter_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(JekyllFrontMatterExtension.create()))
             .toImmutable();
 

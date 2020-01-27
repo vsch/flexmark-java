@@ -6,7 +6,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class BitIntegerSetTest {
-    private static final int[] EMPTY = new int[0];
+    final private static int[] EMPTY = new int[0];
 
     @Test
     public void test_toArrayNull0() {

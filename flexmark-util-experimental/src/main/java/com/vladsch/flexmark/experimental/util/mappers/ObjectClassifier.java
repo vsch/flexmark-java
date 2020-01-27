@@ -3,7 +3,7 @@ package com.vladsch.flexmark.experimental.util.mappers;
 import java.util.function.Function;
 
 public class ObjectClassifier implements Function<Object, Class<?>> {
-    public static final ObjectClassifier INSTANCE = new ObjectClassifier();
+    final public static ObjectClassifier INSTANCE = new ObjectClassifier();
 
     private ObjectClassifier() {
     }

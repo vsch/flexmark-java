@@ -10,7 +10,6 @@ public class Bracket {
     final private Text node;
     final private int index;
     final private boolean image;
-    final private BasedSequence input;
 
     /**
      * Previous bracket.
@@ -87,7 +86,6 @@ public class Bracket {
         this.image = image;
         this.previous = previous;
         this.previousDelimiter = previousDelimiter;
-        this.input = input;
     }
 
     public boolean isStraddling(BasedSequence nodeChars) {

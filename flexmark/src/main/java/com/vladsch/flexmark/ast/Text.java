@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
-public final class Text extends Node implements TextContainer {
+final public class Text extends Node implements TextContainer {
     public Text() {
     }
 

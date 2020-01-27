@@ -113,7 +113,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         };
     }
 
-    private final TableParserOptions options;
+    final private TableParserOptions options;
     Pattern TABLE_HEADER_SEPARATOR;
 
     public static Pattern getTableHeaderSeparator(int minColumnDashes, String intellijDummyIdentifier) {

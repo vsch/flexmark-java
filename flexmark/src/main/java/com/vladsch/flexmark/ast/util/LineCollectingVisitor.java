@@ -12,7 +12,7 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class LineCollectingVisitor {
-    private final NodeVisitor myVisitor;
+    final private NodeVisitor myVisitor;
     private List<Range> myLines;
     private List<Integer> myEOLs;
     private int myStartOffset;

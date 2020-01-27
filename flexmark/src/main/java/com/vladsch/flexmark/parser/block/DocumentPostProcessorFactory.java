@@ -13,7 +13,7 @@ public abstract class DocumentPostProcessorFactory implements PostProcessorFacto
      * @return set of block node types
      */
     @Override
-    public final Map<Class<?>, Set<Class<?>>> getNodeTypes() {
+    final public Map<Class<?>, Set<Class<?>>> getNodeTypes() {
         return null;
     }
 
@@ -30,7 +30,7 @@ public abstract class DocumentPostProcessorFactory implements PostProcessorFacto
     }
 
     @Override
-    public final boolean affectsGlobalScope() {
+    final public boolean affectsGlobalScope() {
         return true;
     }
 }

@@ -4,9 +4,9 @@ import com.vladsch.flexmark.parser.block.BlockContinue;
 
 public class BlockContinueImpl extends BlockContinue {
 
-    private final int newIndex;
-    private final int newColumn;
-    private final boolean finalize;
+    final private int newIndex;
+    final private int newColumn;
+    final private boolean finalize;
 
     public BlockContinueImpl(int newIndex, int newColumn, boolean finalize) {
         this.newIndex = newIndex;

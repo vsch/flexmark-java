@@ -21,20 +21,20 @@ import java.awt.Color;
 
 @SuppressWarnings({ "WeakerAccess" })
 public class BackgroundColor extends Color {
-    public static final BackgroundColor NULL = new BackgroundColor(new Color(0, true));
-    public final static BackgroundColor WHITE = new BackgroundColor(Color.WHITE);
-    public final static BackgroundColor LIGHT_GRAY = new BackgroundColor(Color.LIGHT_GRAY);
-    public final static BackgroundColor GRAY = new BackgroundColor(Color.GRAY);
-    public final static BackgroundColor DARK_GRAY = new BackgroundColor(Color.DARK_GRAY);
-    public final static BackgroundColor BLACK = new BackgroundColor(Color.BLACK);
-    public final static BackgroundColor RED = new BackgroundColor(Color.RED);
-    public final static BackgroundColor PINK = new BackgroundColor(Color.PINK);
-    public final static BackgroundColor ORANGE = new BackgroundColor(Color.ORANGE);
-    public final static BackgroundColor YELLOW = new BackgroundColor(Color.YELLOW);
-    public final static BackgroundColor GREEN = new BackgroundColor(Color.GREEN);
-    public final static BackgroundColor MAGENTA = new BackgroundColor(Color.MAGENTA);
-    public final static BackgroundColor CYAN = new BackgroundColor(Color.CYAN);
-    public final static BackgroundColor BLUE = new BackgroundColor(Color.BLUE);
+    final public static BackgroundColor NULL = new BackgroundColor(new Color(0, true));
+    final public static BackgroundColor WHITE = new BackgroundColor(Color.WHITE);
+    final public static BackgroundColor LIGHT_GRAY = new BackgroundColor(Color.LIGHT_GRAY);
+    final public static BackgroundColor GRAY = new BackgroundColor(Color.GRAY);
+    final public static BackgroundColor DARK_GRAY = new BackgroundColor(Color.DARK_GRAY);
+    final public static BackgroundColor BLACK = new BackgroundColor(Color.BLACK);
+    final public static BackgroundColor RED = new BackgroundColor(Color.RED);
+    final public static BackgroundColor PINK = new BackgroundColor(Color.PINK);
+    final public static BackgroundColor ORANGE = new BackgroundColor(Color.ORANGE);
+    final public static BackgroundColor YELLOW = new BackgroundColor(Color.YELLOW);
+    final public static BackgroundColor GREEN = new BackgroundColor(Color.GREEN);
+    final public static BackgroundColor MAGENTA = new BackgroundColor(Color.MAGENTA);
+    final public static BackgroundColor CYAN = new BackgroundColor(Color.CYAN);
+    final public static BackgroundColor BLUE = new BackgroundColor(Color.BLUE);
 
     protected BackgroundColor(Color other) { super(other.getRGB()); }
 

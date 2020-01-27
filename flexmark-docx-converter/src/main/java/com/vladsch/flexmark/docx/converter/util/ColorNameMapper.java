@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ColorNameMapper {
-    private final static Map<String, Color> colors = new HashMap<>();
+    final private static Map<String, Color> colors = new HashMap<>();
     static {
         colors.put("black", new Color(0x000000));
         colors.put("blue", new Color(0x0000FF));
@@ -29,7 +29,7 @@ public class ColorNameMapper {
     }
     ;
 
-    private static final String hexPattern = "^[0-9a-fA-F]{6}$";
+    final private static String hexPattern = "^[0-9a-fA-F]{6}$";
 
     /**
      * from: https://stackoverflow.com/questions/6334311/whats-the-best-way-to-round-a-color-object-to-the-nearest-color-constant

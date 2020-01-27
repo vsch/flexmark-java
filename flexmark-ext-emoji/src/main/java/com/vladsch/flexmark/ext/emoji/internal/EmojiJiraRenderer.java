@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class EmojiJiraRenderer implements NodeRenderer {
-    public static final HashMap<String, String> shortCutMap = new HashMap<>();
+    final public static HashMap<String, String> shortCutMap = new HashMap<>();
     static {
         shortCutMap.put("smile", ":)");
         shortCutMap.put("frowning", ":(");

@@ -28,8 +28,8 @@ import java.util.Map;
 
 @RunWith(Parameterized.class)
 public class SpecIntegrationTest extends RendererSpecTest {
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(TestSpecLocator.DEFAULT_SPEC_RESOURCE);
-    private static DataHolder OPTIONS = new MutableDataSet()
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(TestSpecLocator.DEFAULT_SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AutolinkExtension.create(),
                     StrikethroughExtension.create(),
@@ -41,7 +41,7 @@ public class SpecIntegrationTest extends RendererSpecTest {
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .toImmutable();
 
-    private static final Map<String, String> OVERRIDDEN_EXAMPLES = getOverriddenExamples();
+    final private static Map<String, String> OVERRIDDEN_EXAMPLES = getOverriddenExamples();
 
     public SpecIntegrationTest(@NotNull SpecExample example) {
         super(example, null, OPTIONS);

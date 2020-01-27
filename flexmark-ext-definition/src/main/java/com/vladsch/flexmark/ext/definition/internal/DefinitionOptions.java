@@ -7,20 +7,20 @@ import com.vladsch.flexmark.util.data.DataHolder;
 
 @SuppressWarnings("WeakerAccess")
 class DefinitionOptions {
-    public final int markerSpaces;
-    public final boolean tildeMarker;
-    public final boolean colonMarker;
-    public final ParserEmulationProfile myParserEmulationProfile;
-    public final boolean autoLoose;
-    public final boolean autoLooseOneLevelLists;
-    public final boolean looseOnPrevLooseItem;
-    public final boolean looseWhenHasLooseSubItem;
-    public final boolean looseWhenHasTrailingBlankLine;
-    public final boolean looseWhenBlankFollowsItemParagraph;
-    public final boolean doubleBlankLineBreaksList;
-    public final int codeIndent;
-    public final int itemIndent;
-    public final int newItemCodeIndent;
+    final public int markerSpaces;
+    final public boolean tildeMarker;
+    final public boolean colonMarker;
+    final public ParserEmulationProfile myParserEmulationProfile;
+    final public boolean autoLoose;
+    final public boolean autoLooseOneLevelLists;
+    final public boolean looseOnPrevLooseItem;
+    final public boolean looseWhenHasLooseSubItem;
+    final public boolean looseWhenHasTrailingBlankLine;
+    final public boolean looseWhenBlankFollowsItemParagraph;
+    final public boolean doubleBlankLineBreaksList;
+    final public int codeIndent;
+    final public int itemIndent;
+    final public int newItemCodeIndent;
 
     public DefinitionOptions(DataHolder options) {
         markerSpaces = DefinitionExtension.MARKER_SPACES.get(options);

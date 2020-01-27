@@ -23,10 +23,10 @@ import java.util.regex.Pattern;
 public class AutolinkNodePostProcessor extends NodePostProcessor {
     final static private Pattern URI_PREFIX = Pattern.compile("\\b([a-z][a-z0-9+.-]*://)(?:\\s|$)");
 
-    private final Pattern ignoredLinks;
-    private final boolean intellijDummyIdentifier;
+    final private Pattern ignoredLinks;
+    final private boolean intellijDummyIdentifier;
 
-    private LinkExtractor linkExtractor = LinkExtractor.builder()
+    final private LinkExtractor linkExtractor = LinkExtractor.builder()
             .linkTypes(EnumSet.of(LinkType.URL, LinkType.WWW, LinkType.EMAIL))
             .build();
 
@@ -45,9 +45,9 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
     }
 
     private static class DummyLinkSpan implements LinkSpan {
-        private final LinkType linkType;
-        private final int beginIndex;
-        private final int endIndex;
+        final private LinkType linkType;
+        final private int beginIndex;
+        final private int endIndex;
 
         public DummyLinkSpan(LinkType linkType, int beginIndex, int endIndex) {
             this.linkType = linkType;

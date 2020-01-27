@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
 
 public class CharRecoveryOptimizer implements SegmentOptimizer {
-    private final PositionAnchor anchor;
+    final private PositionAnchor anchor;
 
     public CharRecoveryOptimizer(PositionAnchor anchor) {
         this.anchor = anchor;

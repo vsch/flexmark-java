@@ -21,25 +21,25 @@ import org.jetbrains.annotations.NotNull;
  */
 public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     // duplicated here for convenience
-    public static final AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;        // div element wrapping TOC list
-    public static final AttributablePart TOC_LIST = TocUtils.TOC_LIST;              // ul/ol element of TOC list
+    final public static AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;        // div element wrapping TOC list
+    final public static AttributablePart TOC_LIST = TocUtils.TOC_LIST;              // ul/ol element of TOC list
 
-    public static final DataKey<Integer> LEVELS = new DataKey<>("LEVELS", TocOptions.DEFAULT_LEVELS);
-    public static final DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
-    public static final DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
-    public static final DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
-    public static final DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
-    public static final DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
-    public static final NullableDataKey<String> TITLE = new NullableDataKey<>("TITLE");
-    public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
-    public static final DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<>("BLANK_LINE_SPACER", false);
-    public static final DataKey<String> DIV_CLASS = new DataKey<>("DIV_CLASS", "");
-    public static final DataKey<String> LIST_CLASS = new DataKey<>("LIST_CLASS", "");
-    public static final DataKey<Boolean> CASE_SENSITIVE_TOC_TAG = new DataKey<>("CASE_SENSITIVE_TOC_TAG", true);
+    final public static DataKey<Integer> LEVELS = new DataKey<>("LEVELS", TocOptions.DEFAULT_LEVELS);
+    final public static DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
+    final public static DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
+    final public static DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
+    final public static DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
+    final public static DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
+    final public static NullableDataKey<String> TITLE = new NullableDataKey<>("TITLE");
+    final public static DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
+    final public static DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<>("BLANK_LINE_SPACER", false);
+    final public static DataKey<String> DIV_CLASS = new DataKey<>("DIV_CLASS", "");
+    final public static DataKey<String> LIST_CLASS = new DataKey<>("LIST_CLASS", "");
+    final public static DataKey<Boolean> CASE_SENSITIVE_TOC_TAG = new DataKey<>("CASE_SENSITIVE_TOC_TAG", true);
 
     // format options
-    public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = new DataKey<>("FORMAT_UPDATE_ON_FORMAT", SimTocGenerateOnFormat.UPDATE);
-    public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<>("FORMAT_OPTIONS", new TocOptions(null, false), options -> new TocOptions(options, false));
+    final public static DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = new DataKey<>("FORMAT_UPDATE_ON_FORMAT", SimTocGenerateOnFormat.UPDATE);
+    final public static DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<>("FORMAT_OPTIONS", new TocOptions(null, false), options -> new TocOptions(options, false));
 
     private TocExtension() {
     }

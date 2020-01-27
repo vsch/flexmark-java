@@ -6,12 +6,12 @@ import org.jetbrains.annotations.NotNull;
  * Specifies the node part for which attributes can be provided
  */
 public class AttributablePart {
-    public static final AttributablePart NODE = new AttributablePart("NODE");
-    public static final AttributablePart NODE_POSITION = new AttributablePart("NODE_POSITION");
-    public static final AttributablePart LINK = new AttributablePart("LINK");
-    public static final AttributablePart ID = new AttributablePart("ID");
+    final public static AttributablePart NODE = new AttributablePart("NODE");
+    final public static AttributablePart NODE_POSITION = new AttributablePart("NODE_POSITION");
+    final public static AttributablePart LINK = new AttributablePart("LINK");
+    final public static AttributablePart ID = new AttributablePart("ID");
 
-    private final String myName;
+    final private String myName;
 
     public AttributablePart(@NotNull String name) {
         this.myName = name;

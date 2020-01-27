@@ -20,7 +20,6 @@ public abstract class NodeRepository<T> implements Map<String, T> {
 
     @SafeVarargs
     protected final void visitNodes(@NotNull Node parent, @NotNull Consumer<Node> runnable, @NotNull Class<? extends Node>... classes) {
-        ArrayList<VisitHandler<?>> handlers = new ArrayList<>();
         NodeVisitor visitor = new NodeVisitor();
         for (Class<? extends Node> clazz : classes) {
             visitor.addHandler(new VisitHandler<>(clazz, runnable::accept));

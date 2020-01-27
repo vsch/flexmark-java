@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class OrigSpecCoreTest extends FullSpecTestCase {
-    static private final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(TestUtils.NO_FILE_EOL, false)
             .toImmutable();

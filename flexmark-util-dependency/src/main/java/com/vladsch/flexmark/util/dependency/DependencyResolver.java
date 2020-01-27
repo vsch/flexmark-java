@@ -3,38 +3,49 @@ package com.vladsch.flexmark.util.dependency;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
 import com.vladsch.flexmark.util.misc.Ref;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Function;
 
-/**
- * @deprecated use DependencyResolver instead
- */
-@SuppressWarnings("rawtypes")
-@Deprecated
-public abstract class DependencyHandler<D extends Dependent, S, R extends ResolvedDependencies<S>> {
-    protected abstract @NotNull S createStage(List<D> dependents);
-    protected abstract @NotNull Class getDependentClass(D dependent);
-    protected abstract @NotNull R createResolvedDependencies(List<S> stages);
+public class DependencyResolver {
+    public static <D extends Dependent> @NotNull List<D> resolveFlatDependencies(@NotNull List<D> dependentsList, @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter, @Nullable Function<? super D, Class<?>> classExtractor) {
+        List<List<D>> list = resolveDependencies(dependentsList, itemSorter, classExtractor);
+        if (list.isEmpty()) {
+            return Collections.emptyList();
+        } else if (list.size() == 1) {
+            return list.get(0);
+        } else {
+            int totalSize = 0;
+            for (List<D> subList : list) {
+                totalSize += subList.size();
+            }
 
-    public R resolveDependencies(List<D> dependentsList) {
+            ArrayList<D> flatList = new ArrayList<>(totalSize);
+            for (List<D> subList : list) {
+                flatList.addAll(subList);
+            }
+            return flatList;
+        }
+    }
+
+    public static <D extends Dependent> @NotNull List<List<D>> resolveDependencies(@NotNull List<D> dependentsList, @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter, @Nullable Function<? super D, Class<?>> classExtractor) {
         if (dependentsList.size() == 0) {
-            //noinspection unchecked
-            return createResolvedDependencies((List<S>) Collections.EMPTY_LIST);
+            return Collections.emptyList();
         } else if (dependentsList.size() == 1) {
-            D dependent = dependentsList.get(0);
-            List<D> dependents = Collections.singletonList(dependent);
-            return createResolvedDependencies(Collections.singletonList(createStage(dependents)));
+            return Collections.singletonList(dependentsList);
         } else {
             // resolve dependencies and processing lists
             int dependentCount = dependentsList.size();
             DependentItemMap<D> dependentItemMap = new DependentItemMap<>(dependentCount);
+            if (classExtractor == null) classExtractor = D::getClass;
 
             for (D dependent : dependentsList) {
-                Class dependentClass = getDependentClass(dependent);
+                Class<?> dependentClass = classExtractor.apply(dependent);
                 if (dependentItemMap.containsKey(dependentClass)) {
                     throw new IllegalStateException("Dependent class " + dependentClass + " is duplicated. Only one instance can be present in the list");
                 }
-                DependentItem<D> item = new DependentItem<D>(dependentItemMap.size(), dependent, getDependentClass(dependent), dependent.affectsGlobalScope());
+                DependentItem<D> item = new DependentItem<D>(dependentItemMap.size(), dependent, classExtractor.apply(dependent), dependent.affectsGlobalScope());
                 dependentItemMap.put(dependentClass, item);
             }
 
@@ -64,7 +75,9 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
                 }
             }
 
-            dependentItemMap = prioritize(dependentItemMap);
+            if (itemSorter != null) {
+                dependentItemMap = itemSorter.apply(dependentItemMap);
+            }
             dependentCount = dependentItemMap.size();
 
             BitSet newReady = new BitSet(dependentCount);
@@ -80,7 +93,7 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
             BitSet dependents = new BitSet(dependentCount);
             dependents.set(0, dependentItemMap.size());
 
-            ArrayList<S> dependencyStages = new ArrayList<>();
+            ArrayList<List<D>> dependencyStages = new ArrayList<>();
 
             while (newReady.nextSetBit(0) != -1) {
                 // process these independents in unspecified order since they do not have dependencies
@@ -126,18 +139,14 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
 
                 // can process these in parallel since it will only contain non-globals or globals not dependent on other globals
                 newReady = nextDependents;
-                dependencyStages.add(createStage(stageDependents));
+                dependencyStages.add(stageDependents);
             }
 
             if (dependents.nextSetBit(0) != -1) {
                 throw new IllegalStateException("have dependents with dependency cycles" + dependents);
             }
 
-            return createResolvedDependencies(dependencyStages);
+            return dependencyStages;
         }
-    }
-
-    protected DependentItemMap<D> prioritize(DependentItemMap<D> dependentMap) {
-        return dependentMap;
     }
 }

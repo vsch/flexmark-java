@@ -4,12 +4,12 @@ import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 class AsideOptions {
-    public final boolean extendToBlankLine;
-    public final boolean ignoreBlankLine;
-    public final boolean allowLeadingSpace;
-    public final boolean interruptsParagraph;
-    public final boolean interruptsItemParagraph;
-    public final boolean withLeadSpacesInterruptsItemParagraph;
+    final public boolean extendToBlankLine;
+    final public boolean ignoreBlankLine;
+    final public boolean allowLeadingSpace;
+    final public boolean interruptsParagraph;
+    final public boolean interruptsItemParagraph;
+    final public boolean withLeadSpacesInterruptsItemParagraph;
 
     public AsideOptions(DataHolder options) {
         this.extendToBlankLine = AsideExtension.EXTEND_TO_BLANK_LINE.get(options);

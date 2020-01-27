@@ -4,13 +4,13 @@ import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 class AnchorLinkOptions {
-    public final boolean wrapText;
-    public final String textPrefix;
-    public final String textSuffix;
-    public final String anchorClass;
-    public final boolean setName;
-    public final boolean setId;
-    public final boolean noBlockQuotes;
+    final public boolean wrapText;
+    final public String textPrefix;
+    final public String textSuffix;
+    final public String anchorClass;
+    final public boolean setName;
+    final public boolean setId;
+    final public boolean noBlockQuotes;
 
     public AnchorLinkOptions(DataHolder options) {
         this.wrapText = AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT.get(options);

@@ -6,9 +6,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.Objects;
 
-public final class MapEntry<K, V> implements Map.Entry<K, V> {
-    private final @NotNull K key;
-    private final @Nullable V value;
+final public class MapEntry<K, V> implements Map.Entry<K, V> {
+    final private @NotNull K key;
+    final private @Nullable V value;
 
     public MapEntry(@NotNull K key, @Nullable V value) {
         this.key = key;

@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class MutableAttributeImpl implements MutableAttribute {
-    private final String name;
-    private final char valueListDelimiter;
-    private final char valueNameDelimiter;
+    final private String name;
+    final private char valueListDelimiter;
+    final private char valueNameDelimiter;
 
     private String value;
     private LinkedHashMap<String, String> values;

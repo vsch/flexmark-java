@@ -18,7 +18,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
 
     static Pattern PATTERN = Pattern.compile("^(?:(?:\\*[ \t]*){3,}|(?:_[ \t]*){3,}|(?:-[ \t]*){3,})[ \t]*$");
 
-    private final ThematicBreak block = new ThematicBreak();
+    final private ThematicBreak block = new ThematicBreak();
 
     public ThematicBreakParser(BasedSequence line) {
         block.setChars(line);
@@ -82,7 +82,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final ThematicBreakOptions options;
+        final private ThematicBreakOptions options;
 
         BlockFactory(DataHolder options) {
             super(options);

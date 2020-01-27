@@ -20,14 +20,14 @@ import java.util.Set;
 
 public class BlockQuoteParser extends AbstractBlockParser {
 
-    public static final char MARKER_CHAR = '>';
-    private final BlockQuote block = new BlockQuote();
-    private final boolean allowLeadingSpace;
-    private final boolean continueToBlankLine;
-    private final boolean ignoreBlankLine;
-    private final boolean interruptsParagraph;
-    private final boolean interruptsItemParagraph;
-    private final boolean withLeadSpacesInterruptsItemParagraph;
+    final public static char MARKER_CHAR = '>';
+    final private BlockQuote block = new BlockQuote();
+    final private boolean allowLeadingSpace;
+    final private boolean continueToBlankLine;
+    final private boolean ignoreBlankLine;
+    final private boolean interruptsParagraph;
+    final private boolean interruptsItemParagraph;
+    final private boolean withLeadSpacesInterruptsItemParagraph;
     private int lastWasBlankLine = 0;
 
     public BlockQuoteParser(DataHolder options, BasedSequence marker) {
@@ -161,10 +161,10 @@ public class BlockQuoteParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final boolean allowLeadingSpace;
-        private final boolean interruptsParagraph;
-        private final boolean interruptsItemParagraph;
-        private final boolean withLeadSpacesInterruptsItemParagraph;
+        final private boolean allowLeadingSpace;
+        final private boolean interruptsParagraph;
+        final private boolean interruptsItemParagraph;
+        final private boolean withLeadSpacesInterruptsItemParagraph;
 
         BlockFactory(DataHolder options) {
             super(options);

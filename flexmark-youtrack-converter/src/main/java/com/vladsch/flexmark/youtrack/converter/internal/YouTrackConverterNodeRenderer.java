@@ -9,7 +9,6 @@ import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
@@ -24,10 +23,10 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 public class YouTrackConverterNodeRenderer implements NodeRenderer
         // , PhasedNodeRenderer
 {
-    private final ReferenceRepository referenceRepository;
-    private final ListOptions listOptions;
+    final private ReferenceRepository referenceRepository;
+    final private ListOptions listOptions;
     private int inBlockQuote = 0;
-    private final boolean recheckUndefinedReferences;
+    final private boolean recheckUndefinedReferences;
 
     public YouTrackConverterNodeRenderer(DataHolder options) {
         this.referenceRepository = Parser.REFERENCES.get(options);
@@ -361,8 +360,6 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
 
     private void render(Image node, NodeRendererContext context, HtmlWriter html) {
         if (!context.isDoNotRenderLinks()) {
-            String altText = new TextCollectingVisitor().collectAndGetText(node);
-
             ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null);
             html.raw("!").raw(resolvedLink.getUrl()).raw("!");
         }
@@ -394,8 +391,6 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
             if (!context.isDoNotRenderLinks()) {
                 Reference reference = node.getReferenceNode(referenceRepository);
                 assert reference != null;
-                String altText = new TextCollectingVisitor().collectAndGetText(node);
-
                 ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, reference.getUrl().unescape(), null);
                 html.raw("!").raw(resolvedLink.getUrl()).raw("!");
             }

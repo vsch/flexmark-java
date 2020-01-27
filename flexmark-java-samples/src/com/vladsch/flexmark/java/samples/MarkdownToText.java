@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
 public class MarkdownToText {
-    private static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+    final private static DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL
     );
 

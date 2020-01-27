@@ -35,12 +35,12 @@ import java.io.OutputStream;
  * </p>
  */
 public class PdfConverterExtension {
-    public static final NullableDataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new NullableDataKey<>("DEFAULT_TEXT_DIRECTION");
-    public static final NullableDataKey<ProtectionPolicy> PROTECTION_POLICY = new NullableDataKey<>("PROTECTION_POLICY");
-    public static final String DEFAULT_CSS_RESOURCE_PATH = "/default.css";
-    public static final String DEFAULT_TOC_LIST_CLASS = "toc";
+    final public static NullableDataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new NullableDataKey<>("DEFAULT_TEXT_DIRECTION");
+    final public static NullableDataKey<ProtectionPolicy> PROTECTION_POLICY = new NullableDataKey<>("PROTECTION_POLICY");
+    final public static String DEFAULT_CSS_RESOURCE_PATH = "/default.css";
+    final public static String DEFAULT_TOC_LIST_CLASS = "toc";
 
-    public static final DataKey<String> DEFAULT_CSS = new DataKey<>("DEFAULT_CSS", () -> Utils.getResourceAsString(PdfConverterExtension.class, DEFAULT_CSS_RESOURCE_PATH));
+    final public static DataKey<String> DEFAULT_CSS = new DataKey<>("DEFAULT_CSS", () -> Utils.getResourceAsString(PdfConverterExtension.class, DEFAULT_CSS_RESOURCE_PATH));
 
     public static String embedCss(String html, String css) {
         if (css != null && !css.isEmpty()) {

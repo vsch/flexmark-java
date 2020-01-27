@@ -12,9 +12,9 @@ import org.junit.runners.Parameterized;
 import java.util.List;
 
 final public class ComboCommonMarkCompatibilitySpecTest extends CoreRendererSpecTest {
-    private static final String SPEC_RESOURCE = "/core_commonmark_compatibility_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/core_commonmark_compatibility_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .setFrom(ParserEmulationProfile.COMMONMARK.getOptions())
             .set(HtmlRenderer.INDENT_SIZE, 4)
             .set(HtmlRenderer.RENDER_HEADER_ID, true)

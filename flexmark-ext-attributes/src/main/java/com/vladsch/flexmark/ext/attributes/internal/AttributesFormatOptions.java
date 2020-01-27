@@ -10,13 +10,13 @@ import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import org.jetbrains.annotations.NotNull;
 
 class AttributesFormatOptions implements MutableDataSetter {
-    public final boolean attributesCombineConsecutive;
-    public final boolean attributesSort;
-    public final DiscretionaryText attributesSpaces;
-    public final DiscretionaryText attributeEqualSpace;
-    public final AttributeValueQuotes attributeValueQuotes;
-    public final AttributeImplicitName attributeIdFormat;
-    public final AttributeImplicitName attributeClassFormat;
+    final public boolean attributesCombineConsecutive;
+    final public boolean attributesSort;
+    final public DiscretionaryText attributesSpaces;
+    final public DiscretionaryText attributeEqualSpace;
+    final public AttributeValueQuotes attributeValueQuotes;
+    final public AttributeImplicitName attributeIdFormat;
+    final public AttributeImplicitName attributeClassFormat;
 
     public AttributesFormatOptions(DataHolder options) {
         attributesCombineConsecutive = AttributesExtension.FORMAT_ATTRIBUTES_COMBINE_CONSECUTIVE.get(options);

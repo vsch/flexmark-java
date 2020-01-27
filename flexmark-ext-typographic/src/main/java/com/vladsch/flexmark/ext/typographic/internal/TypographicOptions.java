@@ -4,21 +4,21 @@ import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 public class TypographicOptions {
-    public final boolean typographicQuotes;
-    public final boolean typographicSmarts;
-    public final String ellipsis;
-    public final String ellipsisSpaced;
-    public final String enDash;
-    public final String emDash;
-    public final String singleQuoteOpen;
-    public final String singleQuoteClose;
-    public final String singleQuoteUnmatched;
-    public final String doubleQuoteOpen;
-    public final String doubleQuoteClose;
-    public final String doubleQuoteUnmatched;
-    public final String angleQuoteOpen;
-    public final String angleQuoteClose;
-    public final String angleQuoteUnmatched;
+    final public boolean typographicQuotes;
+    final public boolean typographicSmarts;
+    final public String ellipsis;
+    final public String ellipsisSpaced;
+    final public String enDash;
+    final public String emDash;
+    final public String singleQuoteOpen;
+    final public String singleQuoteClose;
+    final public String singleQuoteUnmatched;
+    final public String doubleQuoteOpen;
+    final public String doubleQuoteClose;
+    final public String doubleQuoteUnmatched;
+    final public String angleQuoteOpen;
+    final public String angleQuoteClose;
+    final public String angleQuoteUnmatched;
 
     public TypographicOptions(DataHolder options) {
         this.typographicQuotes = TypographicExtension.ENABLE_QUOTES.get(options);

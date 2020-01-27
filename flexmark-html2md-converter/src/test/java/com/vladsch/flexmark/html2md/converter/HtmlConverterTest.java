@@ -19,12 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class HtmlConverterTest extends ComboSpecTestCase {
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(FlexmarkHtmlConverter.OUTPUT_ATTRIBUTES_ID, false)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("output-unknown", new MutableDataSet().set(FlexmarkHtmlConverter.OUTPUT_UNKNOWN_TAGS, true));
         optionsMap.put("nbsp", new MutableDataSet().set(FlexmarkHtmlConverter.NBSP_TEXT, "&nbsp;"));

@@ -3,9 +3,9 @@ package com.vladsch.flexmark.util.format;
 import com.vladsch.flexmark.util.misc.Utils;
 
 public class FormattedCounter {
-    private final NumberFormat numberFormat;
-    private final Boolean isLowercase;
-    private final String delimiter;
+    final private NumberFormat numberFormat;
+    final private Boolean isLowercase;
+    final private String delimiter;
     private int count;
 
     public FormattedCounter(NumberFormat format, Boolean lowercase, String delimiter) {

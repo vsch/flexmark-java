@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public abstract class NodePostProcessorFactory implements PostProcessorFactory {
-    private final HashMap<Class<?>, Set<Class<?>>> NODE_MAP = new HashMap<>();
+    final private HashMap<Class<?>, Set<Class<?>>> NODE_MAP = new HashMap<>();
 
     // added to force constructor
     public NodePostProcessorFactory(boolean ignored) {
@@ -28,7 +28,7 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     }
 
     @Override
-    public final boolean affectsGlobalScope() {
+    final public boolean affectsGlobalScope() {
         return false;
     }
 
@@ -48,7 +48,7 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     }
 
     @Override
-    public final Map<Class<?>, Set<Class<?>>> getNodeTypes() {
+    final public Map<Class<?>, Set<Class<?>>> getNodeTypes() {
         return NODE_MAP;
     }
 

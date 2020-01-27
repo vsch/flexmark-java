@@ -11,8 +11,8 @@ import java.util.function.Function;
 @SuppressWarnings("WeakerAccess")
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     final @NotNull OrderedSet<K> keySet;
-    private final @NotNull ArrayList<V> valueList;
-    private final @Nullable CollectionHost<K> host;
+    final private @NotNull ArrayList<V> valueList;
+    final private @Nullable CollectionHost<K> host;
     boolean inUpdate;
     private @Nullable Indexed<Entry<K, V>> indexedEntryProxy;
     private @Nullable Indexed<V> indexedValueProxy;

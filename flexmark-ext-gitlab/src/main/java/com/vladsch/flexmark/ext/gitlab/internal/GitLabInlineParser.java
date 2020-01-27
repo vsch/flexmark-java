@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Set;
 
 public class GitLabInlineParser implements InlineParserExtension {
-    private final List<GitLabInline> openInlines;
-    private final GitLabOptions options;
+    final private List<GitLabInline> openInlines;
+    final private GitLabOptions options;
 
     public GitLabInlineParser(LightInlineParser inlineParser) {
         openInlines = new ArrayList<>();

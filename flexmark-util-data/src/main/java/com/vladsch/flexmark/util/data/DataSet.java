@@ -119,7 +119,7 @@ public class DataSet implements DataHolder {
         return this;
     }
 
-    private static final ArrayList<DataKeyAggregator> ourDataKeyAggregators = new ArrayList<>();
+    final private static ArrayList<DataKeyAggregator> ourDataKeyAggregators = new ArrayList<>();
 
     public static void registerDataKeyAggregator(@NotNull DataKeyAggregator keyAggregator) {
         if (isAggregatorRegistered(keyAggregator)) {

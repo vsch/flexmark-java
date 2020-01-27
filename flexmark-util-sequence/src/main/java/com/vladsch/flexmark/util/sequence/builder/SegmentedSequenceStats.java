@@ -177,10 +177,6 @@ public class SegmentedSequenceStats {
                     assert currentBucket >= 0;
                 }
 
-                if (entry.segments < currentBucketSegments) {
-                    int tmp = 0;
-                }
-
                 assert (entry.segments >= currentBucketSegments);
 
                 StatsEntry aggrEntry = aggregatedStats.get(currentBucket);

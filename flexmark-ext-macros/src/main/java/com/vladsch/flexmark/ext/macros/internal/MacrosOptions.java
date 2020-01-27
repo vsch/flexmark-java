@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import org.jetbrains.annotations.NotNull;
 
 class MacrosOptions implements MutableDataSetter {
-    public final boolean sourceWrapMacroReferences;
+    final public boolean sourceWrapMacroReferences;
 
     public MacrosOptions(DataHolder options) {
         sourceWrapMacroReferences = MacrosExtension.SOURCE_WRAP_MACRO_REFERENCES.get(options);

@@ -16,21 +16,21 @@ import org.jetbrains.annotations.NotNull;
  * The parsed typographic text is turned into {@link TypographicQuotes} and {@link TypographicSmarts} nodes.
  */
 public class TypographicExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<Boolean> ENABLE_QUOTES = new DataKey<>("ENABLE_QUOTES", true);
-    public static final DataKey<Boolean> ENABLE_SMARTS = new DataKey<>("ENABLE_SMARTS", true);
-    public static final DataKey<String> ANGLE_QUOTE_CLOSE = new DataKey<>("ANGLE_QUOTE_CLOSE", "&raquo;");
-    public static final DataKey<String> ANGLE_QUOTE_OPEN = new DataKey<>("ANGLE_QUOTE_OPEN", "&laquo;");
-    public static final NullableDataKey<String> ANGLE_QUOTE_UNMATCHED = new NullableDataKey<>("ANGLE_QUOTE_UNMATCHED");
-    public static final DataKey<String> DOUBLE_QUOTE_CLOSE = new DataKey<>("DOUBLE_QUOTE_CLOSE", "&rdquo;");
-    public static final DataKey<String> DOUBLE_QUOTE_OPEN = new DataKey<>("DOUBLE_QUOTE_OPEN", "&ldquo;");
-    public static final NullableDataKey<String> DOUBLE_QUOTE_UNMATCHED = new NullableDataKey<>("DOUBLE_QUOTE_UNMATCHED");
-    public static final DataKey<String> ELLIPSIS = new DataKey<>("ELLIPSIS", "&hellip;");
-    public static final DataKey<String> ELLIPSIS_SPACED = new DataKey<>("ELLIPSIS_SPACED", "&hellip;");
-    public static final DataKey<String> EM_DASH = new DataKey<>("EM_DASH", "&mdash;");
-    public static final DataKey<String> EN_DASH = new DataKey<>("EN_DASH", "&ndash;");
-    public static final DataKey<String> SINGLE_QUOTE_CLOSE = new DataKey<>("SINGLE_QUOTE_CLOSE", "&rsquo;");
-    public static final DataKey<String> SINGLE_QUOTE_OPEN = new DataKey<>("SINGLE_QUOTE_OPEN", "&lsquo;");
-    public static final DataKey<String> SINGLE_QUOTE_UNMATCHED = new DataKey<>("SINGLE_QUOTE_UNMATCHED", "&rsquo;");
+    final public static DataKey<Boolean> ENABLE_QUOTES = new DataKey<>("ENABLE_QUOTES", true);
+    final public static DataKey<Boolean> ENABLE_SMARTS = new DataKey<>("ENABLE_SMARTS", true);
+    final public static DataKey<String> ANGLE_QUOTE_CLOSE = new DataKey<>("ANGLE_QUOTE_CLOSE", "&raquo;");
+    final public static DataKey<String> ANGLE_QUOTE_OPEN = new DataKey<>("ANGLE_QUOTE_OPEN", "&laquo;");
+    final public static NullableDataKey<String> ANGLE_QUOTE_UNMATCHED = new NullableDataKey<>("ANGLE_QUOTE_UNMATCHED");
+    final public static DataKey<String> DOUBLE_QUOTE_CLOSE = new DataKey<>("DOUBLE_QUOTE_CLOSE", "&rdquo;");
+    final public static DataKey<String> DOUBLE_QUOTE_OPEN = new DataKey<>("DOUBLE_QUOTE_OPEN", "&ldquo;");
+    final public static NullableDataKey<String> DOUBLE_QUOTE_UNMATCHED = new NullableDataKey<>("DOUBLE_QUOTE_UNMATCHED");
+    final public static DataKey<String> ELLIPSIS = new DataKey<>("ELLIPSIS", "&hellip;");
+    final public static DataKey<String> ELLIPSIS_SPACED = new DataKey<>("ELLIPSIS_SPACED", "&hellip;");
+    final public static DataKey<String> EM_DASH = new DataKey<>("EM_DASH", "&mdash;");
+    final public static DataKey<String> EN_DASH = new DataKey<>("EN_DASH", "&ndash;");
+    final public static DataKey<String> SINGLE_QUOTE_CLOSE = new DataKey<>("SINGLE_QUOTE_CLOSE", "&rsquo;");
+    final public static DataKey<String> SINGLE_QUOTE_OPEN = new DataKey<>("SINGLE_QUOTE_OPEN", "&lsquo;");
+    final public static DataKey<String> SINGLE_QUOTE_UNMATCHED = new DataKey<>("SINGLE_QUOTE_UNMATCHED", "&rsquo;");
 
     private TypographicExtension() {
     }

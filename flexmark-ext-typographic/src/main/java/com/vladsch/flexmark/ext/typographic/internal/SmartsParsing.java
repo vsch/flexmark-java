@@ -8,7 +8,6 @@ class SmartsParsing {
     final String ELIPSIS_SPACED;
     final String EN_DASH;
     final String EM_DASH;
-//    final Pattern SMARTS;
 
     public SmartsParsing(Parsing parsing) {
         this.myParsing = parsing;
@@ -16,6 +15,5 @@ class SmartsParsing {
         this.ELIPSIS_SPACED = ". . .";
         this.EN_DASH = "--";
         this.EM_DASH = "---";
-//        this.SMARTS = Pattern.compile("(^\\Q" + ELIPSIS_SPACED + "\\E|^\\Q" + ELIPSIS + "\\E|^\\Q" + EM_DASH + "\\E|^\\Q" + EN_DASH + "\\E)");
     }
 }

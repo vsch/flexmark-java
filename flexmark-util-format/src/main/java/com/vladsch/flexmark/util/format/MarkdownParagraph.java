@@ -23,9 +23,8 @@ import static com.vladsch.flexmark.util.misc.CharPredicate.*;
 
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
-    public static final List<SpecialLeadInHandler> EMPTY_LEAD_IN_HANDLERS = Collections.emptyList();
-    public static final List<TrackedOffset> EMPTY_OFFSET_LIST = Collections.emptyList();
-    public static final TrackedOffset[] EMPTY_OFFSETS = new TrackedOffset[0];
+    final public static List<SpecialLeadInHandler> EMPTY_LEAD_IN_HANDLERS = Collections.emptyList();
+    final public static List<TrackedOffset> EMPTY_OFFSET_LIST = Collections.emptyList();
 
     final @NotNull BasedSequence baseSeq;
     final @NotNull BasedSequence altSeq;
@@ -67,7 +66,7 @@ public class MarkdownParagraph {
     public BasedSequence wrapTextNotTracked() {
         if (getFirstWidth() <= 0) return baseSeq;
 
-        LeftAlignedWrapping wrapping = new LeftAlignedWrapping(baseSeq, null);
+        LeftAlignedWrapping wrapping = new LeftAlignedWrapping(baseSeq);
         return wrapping.wrapText();
     }
 
@@ -147,7 +146,7 @@ public class MarkdownParagraph {
 
         assert baseSpliced.equals(altSpliced);
 
-        LeftAlignedWrapping textWrapper = new LeftAlignedWrapping(baseSpliced, trackedOffsets);
+        LeftAlignedWrapping textWrapper = new LeftAlignedWrapping(baseSpliced);
         BasedSequence wrapped = textWrapper.wrapText();
 
         if (restoreTrackedSpaces) {
@@ -165,7 +164,7 @@ public class MarkdownParagraph {
     BasedSequence resolveTrackedOffsetsEdit(BasedSequence baseSpliced, BasedSequence altSpliced, BasedSequence wrapped) {
         Boolean inTest = SharedDataKeys.RUNNING_TESTS.get(options);
         BasedSequence spliced = BasedSequence.of(baseSpliced.toString());
-        LeftAlignedWrapping altTextWrapper = new LeftAlignedWrapping(spliced, trackedOffsets);
+        LeftAlignedWrapping altTextWrapper = new LeftAlignedWrapping(spliced);
         BasedSequence altWrapped = spliced.getBuilder().append(altTextWrapper.wrapText()).toSequence(altSpliced, CharPredicate.LINE_SEP, CharPredicate.SPACE_TAB_EOL);
 
         BasedOffsetTracker tracker = BasedOffsetTracker.create(altSeq);
@@ -506,9 +505,9 @@ public class MarkdownParagraph {
     }
 
     public static class Token {
-        public final @NotNull TextType type;
-        public final @NotNull Range range;
-        public final boolean isFirstWord;
+        final public @NotNull TextType type;
+        final public @NotNull Range range;
+        final public boolean isFirstWord;
 
         private Token(@NotNull TextType type, @NotNull Range range, boolean isFirstWord) {
             this.type = type;
@@ -552,7 +551,6 @@ public class MarkdownParagraph {
 
     class LeftAlignedWrapping {
         final @NotNull BasedSequence baseSeq;
-        final @Nullable List<TrackedOffset> trackedOffsets;
         final SequenceBuilder result;
         final TextTokenizer tokenizer;
         int col = 0;
@@ -563,15 +561,13 @@ public class MarkdownParagraph {
         int lineWidth = spaceWidth * getFirstWidth();
         final int nextWidth = width <= 0 ? Integer.MAX_VALUE : spaceWidth * width;
         int wordsOnLine = 0;
-        BasedSequence leadingIndent = null;
         BasedSequence lastSpace = null;
         @NotNull List<? extends SpecialLeadInHandler> leadInHandlers = MarkdownParagraph.this.leadInHandlers;
         boolean unEscapeSpecialLeadInChars = MarkdownParagraph.this.unEscapeSpecialLeadInChars;
         boolean escapeSpecialLeadInChars = MarkdownParagraph.this.escapeSpecialLeadInChars;
 
-        LeftAlignedWrapping(@NotNull BasedSequence baseSeq, @Nullable List<TrackedOffset> trackedOffsets) {
+        LeftAlignedWrapping(@NotNull BasedSequence baseSeq) {
             this.baseSeq = baseSeq;
-            this.trackedOffsets = trackedOffsets;
             result = SequenceBuilder.emptyBuilder(baseSeq);
             tokenizer = new TextTokenizer(baseSeq);
         }
@@ -625,7 +621,6 @@ public class MarkdownParagraph {
             lineIndent = nextIndent;
             lineWidth = nextWidth;
             lastSpace = null;
-            leadingIndent = null;
         }
 
         void processLeadInEscape(List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
@@ -653,8 +648,7 @@ public class MarkdownParagraph {
                 if (token == null) break;
                 switch (token.type) {
                     case SPACE: {
-                        if (col == 0) leadingIndent = baseSeq.subSequence(token.range);
-                        else lastSpace = baseSeq.subSequence(token.range);
+                        if (col != 0) lastSpace = baseSeq.subSequence(token.range);
                         advance();
                         break;
                     }
@@ -671,7 +665,6 @@ public class MarkdownParagraph {
                                 if (!SequenceUtils.isEmpty(lineIndent)) {
                                     addChars(lineIndent);
                                 }
-                                leadingIndent = null;
                             }
 
                             if (firstNonBlank && !token.isFirstWord) {
@@ -735,7 +728,7 @@ public class MarkdownParagraph {
 
     public static class TextTokenizer {
         final private CharSequence chars;
-        private final int maxIndex;
+        final private int maxIndex;
         private int index = 0;
         private int lastPos = 0;
         private boolean isInWord = false;
@@ -766,7 +759,7 @@ public class MarkdownParagraph {
 
         @NotNull
         public List<Token> asList() {
-            ArrayList<Token> tokens = new ArrayList<Token>();
+            ArrayList<Token> tokens = new ArrayList<>();
             reset();
 
             while (token != null) {

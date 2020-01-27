@@ -23,12 +23,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class YamlFrontMatterTest extends RenderingTestCase {
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .set(Parser.EXTENSIONS, Collections.singleton(YamlFrontMatterExtension.create()))
             .toImmutable();
-    private static final @NotNull Parser PARSER = Parser.builder(OPTIONS).build();
-    private static final @NotNull HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+    final private static @NotNull Parser PARSER = Parser.builder(OPTIONS).build();
+    final private static @NotNull HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     @Override
     public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {

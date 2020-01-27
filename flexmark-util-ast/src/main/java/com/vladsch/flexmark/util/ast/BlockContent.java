@@ -9,8 +9,8 @@ import java.util.List;
 
 public class BlockContent {
     // list of line text
-    private final ArrayList<BasedSequence> lines = new ArrayList<>();
-    private final ArrayList<Integer> lineIndents = new ArrayList<>();
+    final private ArrayList<BasedSequence> lines = new ArrayList<>();
+    final private ArrayList<Integer> lineIndents = new ArrayList<>();
 
     public @NotNull BasedSequence getLine(int line) {
         return lines.get(line);

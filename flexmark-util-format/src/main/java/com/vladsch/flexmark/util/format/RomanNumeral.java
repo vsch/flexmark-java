@@ -13,7 +13,7 @@ package com.vladsch.flexmark.util.format;
 import java.util.regex.Pattern;
 
 public class RomanNumeral {
-    private final int num;   // The number represented by this Roman numeral.
+    final private int num;   // The number represented by this Roman numeral.
 
     /*
        The following arrays are used by the toString() function to construct
@@ -22,14 +22,14 @@ public class RomanNumeral {
     */
 
     // @formatter:off
-    private static final int[] numbers =    { 1000, 900,  500, 400,  100, 90,   50,  40,   10,  9,    5,   4,    1 };
-    private static final String[] letters = { "M",  "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+    final private static int[] numbers =    { 1000, 900,  500, 400,  100, 90,   50,  40,   10,  9,    5,   4,    1 };
+    final private static String[] letters = { "M",  "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
     // @formatter:on
 
-    public static final Pattern ROMAN_NUMERAL = Pattern.compile("M{0,3}(?:CM|DC{0,3}|CD|C{1,3})?(?:XC|LX{0,3}|XL|X{1,3})?(?:IX|VI{0,3}|IV|I{1,3})?");
-    public static final Pattern LOWERCASE_ROMAN_NUMERAL = Pattern.compile("m{0,3}(?:cm|dc{0,3}|cd|c{1,3})?(?:xc|lx{0,3}|xl|x{1,3})?(?:ix|vi{0,3}|iv|i{1,3})?");
-    public static final Pattern LIMITED_ROMAN_NUMERAL = Pattern.compile("(?:X{1,3})?(?:IX|VI{0,3}|IV|I{1,3})?");
-    public static final Pattern LIMITED_LOWERCASE_ROMAN_NUMERAL = Pattern.compile("(?:x{1,3})?(?:ix|vi{0,3}|iv|i{1,3})?");
+    final public static Pattern ROMAN_NUMERAL = Pattern.compile("M{0,3}(?:CM|DC{0,3}|CD|C{1,3})?(?:XC|LX{0,3}|XL|X{1,3})?(?:IX|VI{0,3}|IV|I{1,3})?");
+    final public static Pattern LOWERCASE_ROMAN_NUMERAL = Pattern.compile("m{0,3}(?:cm|dc{0,3}|cd|c{1,3})?(?:xc|lx{0,3}|xl|x{1,3})?(?:ix|vi{0,3}|iv|i{1,3})?");
+    final public static Pattern LIMITED_ROMAN_NUMERAL = Pattern.compile("(?:X{1,3})?(?:IX|VI{0,3}|IV|I{1,3})?");
+    final public static Pattern LIMITED_LOWERCASE_ROMAN_NUMERAL = Pattern.compile("(?:x{1,3})?(?:ix|vi{0,3}|iv|i{1,3})?");
 
     public RomanNumeral(int arabic) {
         // Constructor.  Creates the Roman number with the int value specified

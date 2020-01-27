@@ -6,10 +6,10 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public abstract class AbstractMediaLink extends InlineLinkNode {
 
-    private static final String INVALID_SEQUENCE = "%s Link's CharSequence MUST start with an '%s'!";
+    final private static String INVALID_SEQUENCE = "%s Link's CharSequence MUST start with an '%s'!";
 
-    private final String PREFIX;
-    private final String TYPE;
+    final private String PREFIX;
+    final private String TYPE;
 
     public AbstractMediaLink(String prefix, String type) {
         this.PREFIX = prefix;
@@ -35,7 +35,7 @@ public abstract class AbstractMediaLink extends InlineLinkNode {
         verifyBasedSequence(other.getChars(), other.getStartOffset() - prefix.length());
     }
 
-    public final String getPrefix() {
+    final public String getPrefix() {
         return PREFIX;
     }
 

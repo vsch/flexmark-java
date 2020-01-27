@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.sequence.builder;
 import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 
 public class SegmentStats {
-    public static final int NULL_REPEATED_CHAR = -1;
-    public static final int NOT_REPEATED_CHAR = -2;
+    final public static int NULL_REPEATED_CHAR = -1;
+    final public static int NOT_REPEATED_CHAR = -2;
 
     protected int textLength = 0;                 // length of all text in stats
     protected int textSegments = 0;               // total disjoint text segments
@@ -157,7 +157,6 @@ public class SegmentStats {
     }
 
     public boolean isRepeatedText() {
-        int segmentLength = textLength - textSegmentLength;
         return repeatedChar >= 0;
     }
 

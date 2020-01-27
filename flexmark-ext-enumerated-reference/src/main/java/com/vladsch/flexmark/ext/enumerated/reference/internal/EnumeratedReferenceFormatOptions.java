@@ -7,8 +7,8 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 public class EnumeratedReferenceFormatOptions {
 
-    public final ElementPlacement enumeratedReferencePlacement;
-    public final ElementPlacementSort enumeratedReferenceSort;
+    final public ElementPlacement enumeratedReferencePlacement;
+    final public ElementPlacementSort enumeratedReferenceSort;
 
     public EnumeratedReferenceFormatOptions(DataHolder options) {
         enumeratedReferencePlacement = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_PLACEMENT.get(options);

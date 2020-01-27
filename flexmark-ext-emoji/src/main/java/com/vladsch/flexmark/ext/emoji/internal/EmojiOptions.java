@@ -6,12 +6,12 @@ import com.vladsch.flexmark.ext.emoji.EmojiShortcutType;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 public class EmojiOptions {
-    public final String rootImagePath;
-    public final EmojiShortcutType useShortcutType;
-    public final EmojiImageType useImageType;
-    public final String attrImageSize;
-    public final String attrAlign;
-    public final String attrImageClass;
+    final public String rootImagePath;
+    final public EmojiShortcutType useShortcutType;
+    final public EmojiImageType useImageType;
+    final public String attrImageSize;
+    final public String attrAlign;
+    final public String attrImageClass;
 
     public EmojiOptions(DataHolder options) {
         this.useShortcutType = EmojiExtension.USE_SHORTCUT_TYPE.get(options);

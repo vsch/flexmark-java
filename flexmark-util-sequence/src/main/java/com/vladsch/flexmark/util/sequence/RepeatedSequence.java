@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 public class RepeatedSequence implements CharSequence {
     public static RepeatedSequence NULL = new RepeatedSequence(BasedSequence.NULL, 0, 0);
 
-    private final CharSequence chars;
-    private final int startIndex;
-    private final int endIndex;
+    final private CharSequence chars;
+    final private int startIndex;
+    final private int endIndex;
     private int hashCode;
 
     private RepeatedSequence(CharSequence chars, int startIndex, int endIndex) {

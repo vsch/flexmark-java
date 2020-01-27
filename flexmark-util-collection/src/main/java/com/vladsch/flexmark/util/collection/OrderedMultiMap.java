@@ -10,9 +10,9 @@ import java.util.*;
 import java.util.function.Consumer;
 
 public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
-    private final @NotNull OrderedSet<K> keySet;
-    private final @NotNull OrderedSet<V> valueSet;
-    private final @Nullable CollectionHost<Paired<K, V>> host;
+    final private @NotNull OrderedSet<K> keySet;
+    final private @NotNull OrderedSet<V> valueSet;
+    final private @Nullable CollectionHost<Paired<K, V>> host;
     boolean isInKeyUpdate;
     boolean isInValueUpdate;
     private @Nullable Indexed<Entry<K, V>> indexedProxy;

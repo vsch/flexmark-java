@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Set;
 
 public class SimTocNodeFormatter implements NodeFormatter {
-    private final TocOptions options;
-    private final TocFormatOptions formatOptions;
+    final private TocOptions options;
+    final private TocFormatOptions formatOptions;
 
     private MarkdownTable myTable;
 

@@ -51,9 +51,9 @@ public class MarkdownTable {
     final public static CharPredicate COLON_TRIM_CHARS = CharPredicate.anyOf(':');
     final private CharSequence tableChars;
 
-    public static final NumericSuffixPredicate NO_SUFFIXES = s -> false;
-    public static final NumericSuffixPredicate ALL_SUFFIXES_SORT = s -> true;
-    public static final NumericSuffixPredicate ALL_SUFFIXES_NO_SORT = new NumericSuffixPredicate() {
+    final public static NumericSuffixPredicate NO_SUFFIXES = s -> false;
+    final public static NumericSuffixPredicate ALL_SUFFIXES_SORT = s -> true;
+    final public static NumericSuffixPredicate ALL_SUFFIXES_NO_SORT = new NumericSuffixPredicate() {
         @Override
         public boolean test(String s) {
             return true;
@@ -71,7 +71,7 @@ public class MarkdownTable {
 
     public MarkdownTable(@NotNull CharSequence tableChars, @Nullable TableFormatOptions options) {
         this.tableChars = tableChars;
-        this.formatTableIndentPrefix = options.formatTableIndentPrefix;
+        this.formatTableIndentPrefix = options == null ? "" : options.formatTableIndentPrefix;
         header = new TableSection(TableSectionType.HEADER);
         separator = new TableSeparatorSection(TableSectionType.SEPARATOR);
         body = new TableSection(TableSectionType.BODY);
@@ -448,8 +448,6 @@ public class MarkdownTable {
     }
 
     public void deleteRows(int rowIndex, int count) {
-        int maxColumns = getMaxColumns();
-        boolean[] handled = new boolean[] { false };
         if (rowIndex <= header.rows.size()) {
             int i = count;
             while (i-- > 0 && rowIndex < header.rows.size()) {
@@ -466,7 +464,6 @@ public class MarkdownTable {
 
     public void insertRows(int rowIndex, int count) {
         int maxColumns = getMaxColumns();
-        boolean[] handled = new boolean[] { false };
         if (rowIndex <= header.rows.size()) {
             insertRows(header.rows, rowIndex, count, maxColumns);
         } else {
@@ -790,7 +787,6 @@ public class MarkdownTable {
 
         if (!columnSpans.isEmpty()) {
             // now need to distribute extra width from spans to contained columns
-            int[] additionalWidths = new int[sepColumns];
             BitSet unfixedColumns = new BitSet(sepColumns);
             List<ColumnSpan> newColumnSpans = new ArrayList<>(columnSpans.size());
 
@@ -1419,16 +1415,13 @@ public class MarkdownTable {
 
         if (append) {
             String captionSpaces = "";
-            BasedSequence useCaption = caption;
 
             switch (options.formatTableCaptionSpaces) {
                 case ADD:
                     captionSpaces = " ";
-                    useCaption = caption.trim();
                     break;
 
                 case REMOVE:
-                    useCaption = caption.trim();
                     break;
 
                 default:

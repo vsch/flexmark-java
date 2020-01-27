@@ -4,21 +4,21 @@ import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 public class WikiLinkOptions {
-    public final boolean allowInlines;
-    public final boolean allowAnchors;
-    public final boolean disableRendering;
-    public final boolean imageLinks;
-    public final boolean linkFirstSyntax;
-    public final boolean allowAnchorEscape;
-    public final boolean allowPipeEscape;
-    public final String imageFileExtension;
-    public final String imagePrefix;
-    public final String imagePrefixAbsolute;
-    public final String linkFileExtension;
-    public final String linkPrefix;
-    public final String linkPrefixAbsolute;
-    public final String linkReplaceChars;
-    public final String linkEscapeChars;
+    final public boolean allowInlines;
+    final public boolean allowAnchors;
+    final public boolean disableRendering;
+    final public boolean imageLinks;
+    final public boolean linkFirstSyntax;
+    final public boolean allowAnchorEscape;
+    final public boolean allowPipeEscape;
+    final public String imageFileExtension;
+    final public String imagePrefix;
+    final public String imagePrefixAbsolute;
+    final public String linkFileExtension;
+    final public String linkPrefix;
+    final public String linkPrefixAbsolute;
+    final public String linkReplaceChars;
+    final public String linkEscapeChars;
 
     public WikiLinkOptions(DataHolder options) {
         this.allowInlines = WikiLinkExtension.ALLOW_INLINES.get(options);

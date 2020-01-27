@@ -3,12 +3,12 @@ package com.vladsch.flexmark.html.renderer;
 import org.jetbrains.annotations.NotNull;
 
 public class LinkType {
-    public static final LinkType LINK = new LinkType("LINK");
-    public static final LinkType IMAGE = new LinkType("IMAGE");
-    public static final LinkType LINK_REF = new LinkType("LINK_REF");
-    public static final LinkType IMAGE_REF = new LinkType("IMAGE_REF");
+    final public static LinkType LINK = new LinkType("LINK");
+    final public static LinkType IMAGE = new LinkType("IMAGE");
+    final public static LinkType LINK_REF = new LinkType("LINK_REF");
+    final public static LinkType IMAGE_REF = new LinkType("IMAGE_REF");
 
-    private final @NotNull String myName;
+    final private @NotNull String myName;
 
     public LinkType(@NotNull String name) {
         this.myName = name;

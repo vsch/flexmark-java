@@ -8,8 +8,8 @@ import org.junit.runners.Parameterized;
 import java.util.List;
 
 public class ComboEnDocxConverterSpec2Test extends ComboDocxConverterSpecTestBase {
-    private static final String SPEC_RESOURCE = "/docx_converter_ast_spec2.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static String SPEC_RESOURCE = "/docx_converter_ast_spec2.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     public ComboEnDocxConverterSpec2Test(@NotNull SpecExample example) {
         super(example, null);

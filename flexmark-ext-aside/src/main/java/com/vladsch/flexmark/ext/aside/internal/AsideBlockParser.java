@@ -22,14 +22,14 @@ import java.util.Set;
 
 public class AsideBlockParser extends AbstractBlockParser {
 
-    public static final char MARKER_CHAR = '|';
-    private final AsideBlock block = new AsideBlock();
-    private final boolean allowLeadingSpace;
-    private final boolean continueToBlankLine;
-    private final boolean ignoreBlankLine;
-    private final boolean interruptsParagraph;
-    private final boolean interruptsItemParagraph;
-    private final boolean withLeadSpacesInterruptsItemParagraph;
+    final public static char MARKER_CHAR = '|';
+    final private AsideBlock block = new AsideBlock();
+    final private boolean allowLeadingSpace;
+    final private boolean continueToBlankLine;
+    final private boolean ignoreBlankLine;
+    final private boolean interruptsParagraph;
+    final private boolean interruptsItemParagraph;
+    final private boolean withLeadSpacesInterruptsItemParagraph;
     private int lastWasBlankLine = 0;
 
     public AsideBlockParser(DataHolder options, BasedSequence marker) {
@@ -171,10 +171,10 @@ public class AsideBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final boolean allowLeadingSpace;
-        private final boolean interruptsParagraph;
-        private final boolean interruptsItemParagraph;
-        private final boolean withLeadSpacesInterruptsItemParagraph;
+        final private boolean allowLeadingSpace;
+        final private boolean interruptsParagraph;
+        final private boolean interruptsItemParagraph;
+        final private boolean withLeadSpacesInterruptsItemParagraph;
 
         BlockFactory(DataHolder options) {
             super(options);

@@ -21,8 +21,8 @@ import java.util.Iterator;
 import java.util.function.Function;
 
 public class MappingIterable<T, R> implements Iterable<R> {
-    private final @NotNull Iterable<T> myIterable;
-    private final @NotNull Function<T, R> myFunction;
+    final private @NotNull Iterable<T> myIterable;
+    final private @NotNull Function<T, R> myFunction;
 
     public MappingIterable(@NotNull Iterable<T> iterable, @NotNull Function<T, R> function) {
         myIterable = iterable;
@@ -36,8 +36,8 @@ public class MappingIterable<T, R> implements Iterable<R> {
     }
 
     private static class MyIterator<E, V> implements Iterator<V> {
-        private final @NotNull Iterator<E> myIterator;
-        private final @NotNull Function<E, V> myFunction;
+        final private @NotNull Iterator<E> myIterator;
+        final private @NotNull Function<E, V> myFunction;
 
         public MyIterator(@NotNull Iterator<E> iterator, @NotNull Function<E, V> function) {
             myIterator = iterator;

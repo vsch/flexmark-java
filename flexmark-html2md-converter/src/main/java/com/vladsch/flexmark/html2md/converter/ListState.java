@@ -3,7 +3,7 @@ package com.vladsch.flexmark.html2md.converter;
 import java.util.Locale;
 
 public class ListState {
-    public final boolean isNumbered;
+    final public boolean isNumbered;
     public int itemCount;
 
     public ListState(boolean isNumbered) {

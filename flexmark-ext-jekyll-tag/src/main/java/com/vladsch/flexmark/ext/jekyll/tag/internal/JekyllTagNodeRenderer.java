@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class JekyllTagNodeRenderer implements NodeRenderer {
-    private final boolean enabledRendering;
-    private final Map<String, String> includeContent;
+    final private boolean enabledRendering;
+    final private Map<String, String> includeContent;
 
     public JekyllTagNodeRenderer(DataHolder options) {
         enabledRendering = JekyllTagExtension.ENABLE_RENDERING.get(options);

@@ -113,8 +113,8 @@ public class ColorStyler extends HtmlStylerBase<Color> {
         return "";
     }
 
-    public static final HashMap<Integer, String> colorNameMap = new HashMap<>();
-    public static final HashMap<String, Integer> nameColorMap = new HashMap<>();
+    final public static HashMap<Integer, String> colorNameMap = new HashMap<>();
+    final public static HashMap<String, Integer> nameColorMap = new HashMap<>();
 
     private static void addColorName(int rgb, String name) {
         colorNameMap.put(rgb, name);

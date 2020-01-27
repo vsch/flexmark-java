@@ -21,7 +21,7 @@ public class TrackedOffsetUtils {
      * @param appendable            line appendable containing resulting lines
      * @param offsets               tracked offsets
      * @param maxTrailingBlankLines max trailing blank lines to use in resolving offsets
-     * @param traceDetails  true if running tests and want detail printout to stdout
+     * @param traceDetails          true if running tests and want detail printout to stdout
      */
     public static void resolveTrackedOffsets(BasedSequence sequence, LineAppendable appendable, List<TrackedOffset> offsets, int maxTrailingBlankLines, boolean traceDetails) {
         if (!offsets.isEmpty()) {

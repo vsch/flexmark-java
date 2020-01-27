@@ -19,20 +19,20 @@ package com.vladsch.flexmark.util.html.ui;
 
 @SuppressWarnings({ "WeakerAccess" })
 public class Color extends java.awt.Color {
-    public static final Color NULL = new Color(new java.awt.Color(0, true));
-    public final static Color WHITE = new Color(java.awt.Color.WHITE);
-    public final static Color LIGHT_GRAY = new Color(java.awt.Color.LIGHT_GRAY);
-    public final static Color GRAY = new Color(java.awt.Color.GRAY);
-    public final static Color DARK_GRAY = new Color(java.awt.Color.DARK_GRAY);
-    public final static Color BLACK = new Color(java.awt.Color.BLACK);
-    public final static Color RED = new Color(java.awt.Color.RED);
-    public final static Color PINK = new Color(java.awt.Color.PINK);
-    public final static Color ORANGE = new Color(java.awt.Color.ORANGE);
-    public final static Color YELLOW = new Color(java.awt.Color.YELLOW);
-    public final static Color GREEN = new Color(java.awt.Color.GREEN);
-    public final static Color MAGENTA = new Color(java.awt.Color.MAGENTA);
-    public final static Color CYAN = new Color(java.awt.Color.CYAN);
-    public final static Color BLUE = new Color(java.awt.Color.BLUE);
+    final public static Color NULL = new Color(new java.awt.Color(0, true));
+    final public static Color WHITE = new Color(java.awt.Color.WHITE);
+    final public static Color LIGHT_GRAY = new Color(java.awt.Color.LIGHT_GRAY);
+    final public static Color GRAY = new Color(java.awt.Color.GRAY);
+    final public static Color DARK_GRAY = new Color(java.awt.Color.DARK_GRAY);
+    final public static Color BLACK = new Color(java.awt.Color.BLACK);
+    final public static Color RED = new Color(java.awt.Color.RED);
+    final public static Color PINK = new Color(java.awt.Color.PINK);
+    final public static Color ORANGE = new Color(java.awt.Color.ORANGE);
+    final public static Color YELLOW = new Color(java.awt.Color.YELLOW);
+    final public static Color GREEN = new Color(java.awt.Color.GREEN);
+    final public static Color MAGENTA = new Color(java.awt.Color.MAGENTA);
+    final public static Color CYAN = new Color(java.awt.Color.CYAN);
+    final public static Color BLUE = new Color(java.awt.Color.BLUE);
 
     protected Color(java.awt.Color other) { super(other.getRGB()); }
 

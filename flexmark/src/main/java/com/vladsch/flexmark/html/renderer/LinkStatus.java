@@ -3,13 +3,13 @@ package com.vladsch.flexmark.html.renderer;
 import org.jetbrains.annotations.NotNull;
 
 public class LinkStatus {
-    public static final LinkStatus UNKNOWN = new LinkStatus("UNKNOWN");
-    public static final LinkStatus VALID = new LinkStatus("VALID");
-    public static final LinkStatus INVALID = new LinkStatus("INVALID");
-    public static final LinkStatus UNCHECKED = new LinkStatus("UNCHECKED");
-    public static final LinkStatus NOT_FOUND = new LinkStatus("NOT_FOUND");
+    final public static LinkStatus UNKNOWN = new LinkStatus("UNKNOWN");
+    final public static LinkStatus VALID = new LinkStatus("VALID");
+    final public static LinkStatus INVALID = new LinkStatus("INVALID");
+    final public static LinkStatus UNCHECKED = new LinkStatus("UNCHECKED");
+    final public static LinkStatus NOT_FOUND = new LinkStatus("NOT_FOUND");
 
-    private final String myName;
+    final private String myName;
 
     public LinkStatus(@NotNull String name) {
         this.myName = name;

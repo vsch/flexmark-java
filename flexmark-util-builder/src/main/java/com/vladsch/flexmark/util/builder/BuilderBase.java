@@ -15,10 +15,10 @@ import static com.vladsch.flexmark.util.data.SharedDataKeys.EXTENSIONS;
 public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
 
     // loaded extensions
-    private final HashSet<Class<?>> loadedExtensions = new HashSet<>();
+    final private HashSet<Class<?>> loadedExtensions = new HashSet<>();
 
     // map of which api points were loaded by which extensions
-    private final HashMap<Class<?>, HashSet<Object>> extensionApiPoints = new HashMap<>();
+    final private HashMap<Class<?>, HashSet<Object>> extensionApiPoints = new HashMap<>();
     private Extension currentExtension;
 
     /**

@@ -19,9 +19,9 @@ import java.util.Set;
 
 public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
-    private final FootnoteRepository footnoteRepository;
-    private final FootnoteOptions options;
-    private boolean recheckUndefinedReferences;
+    final private FootnoteRepository footnoteRepository;
+    final private FootnoteOptions options;
+    final private boolean recheckUndefinedReferences;
 
     public FootnoteNodeRenderer(DataHolder options) {
         this.options = new FootnoteOptions(options);

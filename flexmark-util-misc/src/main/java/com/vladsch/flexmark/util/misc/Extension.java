@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.misc;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 
 /**
  * Base interface for a parser/renderer extension.
@@ -16,6 +15,5 @@ import java.util.Set;
  * also have a static create() method that returns an instance of the extension.
  */
 public interface Extension {
-    Set<Extension> EMPTY_SET = Collections.emptySet();
     Collection<Extension> EMPTY_LIST = Collections.emptyList();
 }

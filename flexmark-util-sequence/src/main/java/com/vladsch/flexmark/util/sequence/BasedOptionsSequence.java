@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
  * <p>
  * a subSequence() returns a sub-sequence from the original base sequence with updated offset tracking
  */
-public final class BasedOptionsSequence implements CharSequence, BasedOptionsHolder {
+final public class BasedOptionsSequence implements CharSequence, BasedOptionsHolder {
     final private @NotNull CharSequence chars;
     final private int optionFlags;
     final private @Nullable DataHolder options;

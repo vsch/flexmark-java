@@ -40,7 +40,6 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
      *
      * @param options options to use for the context (only options which do not affect the context construction will be used)
-     *
      * @return a new rendering context with a given appendable for its output
      */
     HtmlNodeConverterContext getSubContext(DataHolder options);
@@ -51,7 +50,6 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      *
      * @param options options to use for the context (only options which do not affect the context construction will be used)
      * @param builder sequence builder to user for appended text for tracking original base offsets
-     *
      * @return a new rendering context with a given appendable for its output
      */
     HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder);

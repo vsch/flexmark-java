@@ -10,15 +10,15 @@ import java.util.Stack;
 import java.util.function.Predicate;
 
 final public class IteratorInstance<N, R> implements ValueIteration<R> {
-    final static private Logger LOG = TreeIterator.LOG;
+    //    final static private Logger LOG = TreeIterator.LOG;
     final static private Logger LOG_INFO = TreeIterator.LOG_INFO;
     final static private Logger LOG_TRACE = TreeIterator.LOG_TRACE;
 
     private Iteration<N> myIteration;               // current iteration information
     private @Nullable Stack<Iteration<N>> myRecursions;       // recursion frames
-    final @NotNull private IterationConditions<N> myIterationConditions;
-    final @NotNull private Predicate<? super N> myRecursionPredicate;
-    final @NotNull private Predicate<? super N> myFilterPredicate;
+    final private @NotNull IterationConditions<N> myIterationConditions;
+    final private @NotNull Predicate<? super N> myRecursionPredicate;
+    final private @NotNull Predicate<? super N> myFilterPredicate;
     private int myTotalLoopCount = 0;                        // total looping count across all nesting levels, including filtered out elements
     private int myTotalAcceptCount = 0;                            // total looping count across all nesting levels, only consumed elements
     private @Nullable N myMatch;
@@ -173,7 +173,6 @@ final public class IteratorInstance<N, R> implements ValueIteration<R> {
     }
 
     private void dropRecursions(int iteration, boolean inclusive) {
-        int iterationIndex = iteration < 0 ? getRecursionLevel() + iteration : iteration;
         if (inclusive) iteration++;
 
         if (iteration > 0) {

@@ -57,7 +57,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
     static final String PROJECT_ROOT_DIRECTORY = TestUtils.getRootDirectoryForModule(ComboDocxConverterSpecTestBase.class, "flexmark-docx-converter");
     static final String TEST_ROOT_DIRECTORY = TestUtils.getTestResourceRootDirectoryForModule(ComboDocxConverterSpecTestBase.class, "com.vladsch.flexmark.docx.converter");
-    public static final String[] EMPTY_STRINGS = new String[0];
+    final public static String[] EMPTY_STRINGS = new String[0];
     static {
         // Set up a simple configuration that logs on the console.
         Logger root = Logger.getRootLogger();
@@ -65,7 +65,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     }
 
     // standard options
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AsideExtension.create(),

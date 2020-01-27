@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.List;
 
 public class MatchedBlockParserImpl implements MatchedBlockParser {
-    private final BlockParser matchedBlockParser;
+    final private BlockParser matchedBlockParser;
 
     @Override
     public List<BasedSequence> getParagraphLines() {

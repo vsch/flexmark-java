@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboJiraConverterSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/jira_converter_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/jira_converter_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     JiraConverterExtension.create()
                     , StrikethroughSubscriptExtension.create()
@@ -32,7 +32,7 @@ public class ComboJiraConverterSpecTest extends RendererSpecTest {
             )
             .set(WikiLinkExtension.ALLOW_ANCHORS, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("list-no-auto-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
         optionsMap.put("links-first", new MutableDataSet().set(WikiLinkExtension.LINK_FIRST_SYNTAX, true));

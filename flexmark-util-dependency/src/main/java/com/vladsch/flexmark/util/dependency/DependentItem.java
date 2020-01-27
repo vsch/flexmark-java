@@ -3,14 +3,14 @@ package com.vladsch.flexmark.util.dependency;
 import java.util.BitSet;
 
 public class DependentItem<D> {
-    public final int index;
-    public final D dependent;
-    public final Class<? extends D> dependentClass;
-    public final boolean isGlobalScope;
+    final public int index;
+    final public D dependent;
+    final public Class<?> dependentClass;
+    final public boolean isGlobalScope;
     BitSet dependencies;
     BitSet dependents;
 
-    public DependentItem(int index, D dependent, Class<? extends D> dependentClass, boolean isGlobalScope) {
+    public DependentItem(int index, D dependent, Class<?> dependentClass, boolean isGlobalScope) {
         this.index = index;
         this.dependent = dependent;
         this.dependentClass = dependentClass;

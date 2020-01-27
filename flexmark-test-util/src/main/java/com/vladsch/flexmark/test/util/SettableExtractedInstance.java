@@ -19,8 +19,8 @@ import java.util.function.Function;
  * @param <S> type for the setting
  */
 final public class SettableExtractedInstance<T, S> {
-    private final @NotNull DataKey<Consumer<S>> myConsumerKey;
-    private final @NotNull Function<T, S> myDataExtractor;
+    final private @NotNull DataKey<Consumer<S>> myConsumerKey;
+    final private @NotNull Function<T, S> myDataExtractor;
 
     public SettableExtractedInstance(@NotNull DataKey<Consumer<S>> consumerKey, @NotNull Function<T, S> dataExtractor) {
         myConsumerKey = consumerKey;

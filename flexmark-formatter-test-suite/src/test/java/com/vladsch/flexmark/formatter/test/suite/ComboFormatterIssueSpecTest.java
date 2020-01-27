@@ -52,9 +52,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/formatter_issue_test_suite_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = ParserEmulationProfile.FIXED_INDENT.getProfileOptions()
+    final private static String SPEC_RESOURCE = "/formatter_issue_test_suite_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = ParserEmulationProfile.FIXED_INDENT.getProfileOptions()
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AbbreviationExtension.create(),
@@ -83,9 +83,9 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
                     YamlFrontMatterExtension.create()
             ));
 
-    private static final DataKey<Boolean> USE_BUILDER = new DataKey<>("USE_BUILDER", false);
+    final private static DataKey<Boolean> USE_BUILDER = new DataKey<>("USE_BUILDER", false);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("item-indent-1", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 1));
         optionsMap.put("item-indent-2", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 2));

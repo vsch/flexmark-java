@@ -7,8 +7,8 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 public class MacroFormatOptions {
 
-    public final ElementPlacement macrosPlacement;
-    public final ElementPlacementSort macrosSort;
+    final public ElementPlacement macrosPlacement;
+    final public ElementPlacementSort macrosSort;
 
     public MacroFormatOptions(DataHolder options) {
         macrosPlacement = MacrosExtension.MACRO_DEFINITIONS_PLACEMENT.get(options);

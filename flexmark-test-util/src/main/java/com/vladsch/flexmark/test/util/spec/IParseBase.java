@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 public abstract class IParseBase implements IParse {
-    private final DataHolder myOptions;
+    final private DataHolder myOptions;
 
     public IParseBase() {
         this(null);

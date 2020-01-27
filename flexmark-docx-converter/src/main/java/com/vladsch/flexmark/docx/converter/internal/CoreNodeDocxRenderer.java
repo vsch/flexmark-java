@@ -79,26 +79,26 @@ import static com.vladsch.flexmark.util.html.Attribute.CLASS_ATTR;
 
 @SuppressWarnings({ "WeakerAccess", "MethodMayBeStatic", "OverlyCoupledClass" })
 public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
-    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
-    public static final NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
-    public static final HashSet<DocxRendererPhase> RENDERING_PHASES = new HashSet<>(Arrays.asList(
+    final public static DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
+    final public static NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
+    final public static HashSet<DocxRendererPhase> RENDERING_PHASES = new HashSet<>(Arrays.asList(
             DocxRendererPhase.COLLECT,
             DocxRendererPhase.DOCUMENT_TOP,
             DocxRendererPhase.DOCUMENT_BOTTOM
     ));
-    public static final String INPUT_TYPE_DROPDOWN = "dropdown";
-    public static final String INPUT_TYPE_CHECKBOX = "checkbox";
-    public static final String INPUT_TYPE_TEXT = "text";
+    final public static String INPUT_TYPE_DROPDOWN = "dropdown";
+    final public static String INPUT_TYPE_CHECKBOX = "checkbox";
+    final public static String INPUT_TYPE_TEXT = "text";
 
-    public static final String INPUT_CLASS_TEXT = "text";  // class name for input type
-    public static final String INPUT_CLASS_DROPDOWN = "dropdown";  // class name for input type
-    public static final String INPUT_CLASS_CHECKBOX = "checkbox";  // class name for input type
+    final public static String INPUT_CLASS_TEXT = "text";  // class name for input type
+    final public static String INPUT_CLASS_DROPDOWN = "dropdown";  // class name for input type
+    final public static String INPUT_CLASS_CHECKBOX = "checkbox";  // class name for input type
 
     protected final ReferenceRepository referenceRepository;
 
     DocxRendererOptions options;
     final EmojiOptions emojiOptions;
-    private final ListOptions listOptions;
+    final private ListOptions listOptions;
     protected boolean recheckUndefinedReferences;
     protected boolean repositoryNodesDone;
     protected final boolean linebreakOnInlineHtmlBr;
@@ -108,15 +108,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     protected final int tableLeftIndent;
     protected final String tableStyle;
     private int imageId;
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-    private final HashMap<Node, BigInteger> footnoteIDs; // cannot re-use footnote ids, so this is dead code, left in for future if needed
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection") final private HashMap<Node, BigInteger> footnoteIDs; // cannot re-use footnote ids, so this is dead code, left in for future if needed
     private TocBlockBase lastTocBlock;
     private long[] numberedLists = new long[128];
     private long[] bulletLists = new long[128];
     private EnumeratedReferences enumeratedOrdinals;
     Runnable ordinalRunnable;
-    private final HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
-    private HashMap<String, Integer> formControlCounts = new HashMap<>();
+    final private HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
+    final private HashMap<String, Integer> formControlCounts = new HashMap<>();
 
     private void ensureNumberedListLength(int level) {
         if (numberedLists.length < level) {
@@ -2247,9 +2246,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private static class UrlRenderer implements Runnable {
-        private final DocxRendererContext myDocx;
-        private final String myLinkText;
-        private final String myLinkUrl;
+        final private DocxRendererContext myDocx;
+        final private String myLinkText;
+        final private String myLinkUrl;
 
         public UrlRenderer(DocxRendererContext docx, String linkText, String linkUrl) {
             myDocx = docx;
@@ -2265,7 +2264,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private static class UrlRunContainer implements RunContainer {
-        private final P.Hyperlink myHyperlink;
+        final private P.Hyperlink myHyperlink;
 
         public UrlRunContainer(P.Hyperlink hyperlink) {myHyperlink = hyperlink;}
 
@@ -2284,8 +2283,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private static class ChildRenderer implements Runnable {
-        private final DocxRendererContext myDocx;
-        private final Node myNode;
+        final private DocxRendererContext myDocx;
+        final private Node myNode;
 
         public ChildRenderer(DocxRendererContext docx, Node node) {
             myDocx = docx;
@@ -2301,7 +2300,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private static class FootnoteFrame implements Runnable {
         final DocxRendererContext myDocx;
         final CTFtnEdn myFtnEdn;
-        private final FootnoteBlock myFootnoteBlock;
+        final private FootnoteBlock myFootnoteBlock;
 
         public FootnoteFrame(DocxRendererContext docx, CTFtnEdn ftnEdn, FootnoteBlock footnoteBlock) {
             myDocx = docx;
@@ -2370,8 +2369,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private static class TableCaptionRenderer implements Runnable {
-        private final DocxRendererContext myDocx;
-        private final TableCaption myNode;
+        final private DocxRendererContext myDocx;
+        final private TableCaption myNode;
 
         public TableCaptionRenderer(DocxRendererContext docx, TableCaption node) {
             myDocx = docx;
@@ -2387,10 +2386,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private static class TableCellContentContainer implements ContentContainer {
-        private final Tc myTc;
-        private final DocxRendererContext myDocx;
-        private final Part myContainerPart;
-        private final boolean[] myFirstP;
+        final private Tc myTc;
+        final private DocxRendererContext myDocx;
+        final private Part myContainerPart;
+        final private boolean[] myFirstP;
 
         public TableCellContentContainer(Tc tc, DocxRendererContext docx, boolean[] firstP) {
             myTc = tc;
@@ -2428,10 +2427,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private static class TableCellParaContainer implements ParaContainer {
-        private final TableCell myNode;
-        private final Tc myTc;
-        private final DocxRendererContext myDocx;
-        private final boolean[] myFirstP;
+        final private TableCell myNode;
+        final private Tc myTc;
+        final private DocxRendererContext myDocx;
+        final private boolean[] myFirstP;
 
         public TableCellParaContainer(TableCell node, Tc tc, DocxRendererContext docx, boolean[] firstP) {
             myNode = node;

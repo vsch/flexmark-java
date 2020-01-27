@@ -10,7 +10,6 @@ import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
@@ -25,19 +24,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CustomLinkResolverSample {
-    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(CustomExtension.create()));
+    final private static DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(CustomExtension.create()));
 
-    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
-    public static final DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
+    final public static DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
+    final public static DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     public static class DocxLinkResolver implements LinkResolver {
         protected static final String[] EMPTY_STRINGS = new String[0];
-        private final String docRelativeURL;
-        private final String docRootURL;
-        private final String[] relativeParts;
+        final private String docRelativeURL;
+        final private String docRootURL;
+        final private String[] relativeParts;
 
         public DocxLinkResolver(LinkResolverContext context) {
             // can use context for custom settings
@@ -60,8 +59,6 @@ public class CustomLinkResolverSample {
         @NotNull
         @Override
         public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
-            Document document = context.getDocument();
-
             if (node instanceof Image || node instanceof Link || node instanceof Reference) {
                 // resolve wiki image link
                 String url = link.getUrl();

@@ -10,6 +10,7 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.core.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -26,11 +27,10 @@ public class EnumeratedReferenceParagraphPreProcessor implements ParagraphPrePro
     static String ENUM_REF_ID = "(?:[^0-9].*)?";
     static Pattern ENUM_REF_DEF_PARAGRAPH_PATTERN = Pattern.compile("\\s{0,3}(\\[[\\@]\\s*(" + ENUM_REF_ID + ")\\s*\\]:)\\s+(.*\n)");
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private final EnumeratedReferenceOptions options;
-    private final EnumeratedReferenceRepository enumeratedReferences;
+    @SuppressWarnings("FieldCanBeLocal") final private EnumeratedReferenceOptions options;
+    final private EnumeratedReferenceRepository enumeratedReferences;
 
-    private EnumeratedReferenceParagraphPreProcessor(DataHolder options) {
+    EnumeratedReferenceParagraphPreProcessor(DataHolder options) {
         this.options = new EnumeratedReferenceOptions(options);
         enumeratedReferences = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.get(options);
     }
@@ -47,7 +47,6 @@ public class EnumeratedReferenceParagraphPreProcessor implements ParagraphPrePro
 
             int openingStart = matcher.start(1);
             int openingEnd = matcher.end(1);
-            int textEnd = lastFound;
             BasedSequence openingMarker = trySequence.subSequence(openingStart, openingStart + 2);
             BasedSequence text = trySequence.subSequence(openingStart + 2, openingEnd - 2).trim();
             BasedSequence closingMarker = trySequence.subSequence(openingEnd - 2, openingEnd);
@@ -84,7 +83,7 @@ public class EnumeratedReferenceParagraphPreProcessor implements ParagraphPrePro
                 return null;
             }
 
-            @Nullable
+            @NotNull
             @Override
             public Set<Class<?>> getBeforeDependents() {
                 HashSet<Class<?>> set = new HashSet<>();

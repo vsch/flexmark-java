@@ -28,13 +28,13 @@ public class EnumeratedReferenceExtension implements Parser.ParserExtension
         , Parser.ReferenceHoldingExtension
         , Formatter.FormatterExtension
 {
-    public static final DataKey<KeepType> ENUMERATED_REFERENCES_KEEP = new DataKey<>("ENUMERATED_REFERENCES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    public static final DataKey<EnumeratedReferenceRepository> ENUMERATED_REFERENCES = new DataKey<>("ENUMERATED_REFERENCES", new EnumeratedReferenceRepository(null), EnumeratedReferenceRepository::new);
-    public static final DataKey<EnumeratedReferences> ENUMERATED_REFERENCE_ORDINALS = new DataKey<>("ENUMERATED_REFERENCE_ORDINALS", new EnumeratedReferences(null), EnumeratedReferences::new);
+    final public static DataKey<KeepType> ENUMERATED_REFERENCES_KEEP = new DataKey<>("ENUMERATED_REFERENCES_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    final public static DataKey<EnumeratedReferenceRepository> ENUMERATED_REFERENCES = new DataKey<>("ENUMERATED_REFERENCES", new EnumeratedReferenceRepository(null), EnumeratedReferenceRepository::new);
+    final public static DataKey<EnumeratedReferences> ENUMERATED_REFERENCE_ORDINALS = new DataKey<>("ENUMERATED_REFERENCE_ORDINALS", new EnumeratedReferences(null), EnumeratedReferences::new);
 
     // formatter options
-    public static final DataKey<ElementPlacement> ENUMERATED_REFERENCE_PLACEMENT = new DataKey<>("ENUMERATED_REFERENCE_PLACEMENT", ElementPlacement.AS_IS);
-    public static final DataKey<ElementPlacementSort> ENUMERATED_REFERENCE_SORT = new DataKey<>("ENUMERATED_REFERENCE_SORT", ElementPlacementSort.AS_IS);
+    final public static DataKey<ElementPlacement> ENUMERATED_REFERENCE_PLACEMENT = new DataKey<>("ENUMERATED_REFERENCE_PLACEMENT", ElementPlacement.AS_IS);
+    final public static DataKey<ElementPlacementSort> ENUMERATED_REFERENCE_SORT = new DataKey<>("ENUMERATED_REFERENCE_SORT", ElementPlacementSort.AS_IS);
 
     private EnumeratedReferenceExtension() {
     }

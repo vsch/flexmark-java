@@ -16,15 +16,15 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 public class ComboSimTocHtmlFormatterSpecTest extends FormatterSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_simtoc_formatter_html_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_simtoc_formatter_html_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
             .set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()))
             .set(TocExtension.IS_HTML, true)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("text-only", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, true));
         optionsMap.put("formatted", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, false));

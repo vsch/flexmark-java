@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
     static final int BRACKET_NESTING_LEVEL = 1;
 
-    private final WikiLinkOptions options;
+    final private WikiLinkOptions options;
 
     public WikiLinkLinkRefProcessor(Document document) {
         this.options = new WikiLinkOptions(document);

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableExtractingVisitor {
-    private final TableFormatOptions options;
+    final private TableFormatOptions options;
 
-    private NodeVisitor myVisitor = new NodeVisitor(
+    final private NodeVisitor myVisitor = new NodeVisitor(
             new VisitHandler<>(TableBlock.class, this::visit),
             new VisitHandler<>(TableHead.class, this::visit),
             new VisitHandler<>(TableSeparator.class, this::visit),
@@ -26,7 +26,7 @@ public class TableExtractingVisitor {
     );
 
     private MarkdownTable myTable;
-    private final List<MarkdownTable> myTables;
+    final private List<MarkdownTable> myTables;
 
     public TableExtractingVisitor(DataHolder options) {
         this.options = new TableFormatOptions(options);

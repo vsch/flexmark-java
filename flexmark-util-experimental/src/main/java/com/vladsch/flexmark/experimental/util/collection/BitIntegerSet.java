@@ -16,10 +16,10 @@ import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> {
-    public static final int[] EMPTY_INT = new int[0];
+    final public static int[] EMPTY_INT = new int[0];
 
-    private final @NotNull BitSet myBits;
-    private final boolean myReversed;
+    final private @NotNull BitSet myBits;
+    final private boolean myReversed;
 
     public BitIntegerSet() {
         this(0);

@@ -17,7 +17,7 @@ import java.util.function.Function;
  * Factory for instantiating new node renderers with dependencies
  */
 class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeRenderer>, Dependent, DelegatingNodeRendererFactory {
-    private final NodeRendererFactory nodeRendererFactory;
+    final private NodeRendererFactory nodeRendererFactory;
     private List<DelegatingNodeRendererFactoryWrapper> nodeRenderers;
     private Set<Class<?>> myDelegates = null;
 
@@ -41,7 +41,7 @@ class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeR
     }
 
     @Override
-    public final @Nullable Set<Class<?>> getAfterDependents() {
+    final public @Nullable Set<Class<?>> getAfterDependents() {
         return null;
     }
 
@@ -65,7 +65,7 @@ class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeR
     }
 
     @Override
-    public final boolean affectsGlobalScope() {
+    final public boolean affectsGlobalScope() {
         return false;
     }
 }

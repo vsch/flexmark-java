@@ -17,10 +17,10 @@ import java.util.*;
 
 public class IndentedCodeBlockParser extends AbstractBlockParser {
 
-    private final IndentedCodeBlock block = new IndentedCodeBlock();
+    final private IndentedCodeBlock block = new IndentedCodeBlock();
     private BlockContent content = new BlockContent();
-    private boolean trimTrailingBlankLines;
-    private final boolean codeContentBlock;
+    final private boolean trimTrailingBlankLines;
+    final private boolean codeContentBlock;
 
     public IndentedCodeBlockParser(DataHolder options) {
         trimTrailingBlankLines = Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES.get(options);

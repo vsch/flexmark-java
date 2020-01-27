@@ -49,7 +49,7 @@ class PegdownParser extends IParseBase {
     }
 
     public static class PegdownRootNode extends Node {
-        public final RootNode myRootNode;
+        final public RootNode myRootNode;
 
         public PegdownRootNode(RootNode rootNode) {
             myRootNode = rootNode;

@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GfmIssuesJiraRenderer implements NodeRenderer {
-    private final GfmIssuesOptions options;
+    final private GfmIssuesOptions options;
 
     public GfmIssuesJiraRenderer(DataHolder options) {
         this.options = new GfmIssuesOptions(options);

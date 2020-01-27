@@ -8,8 +8,8 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import org.jetbrains.annotations.NotNull;
 
 public class TocFormatOptions implements MutableDataSetter {
-    public final SimTocGenerateOnFormat updateOnFormat;
-    public final TocOptions options;
+    final public SimTocGenerateOnFormat updateOnFormat;
+    final public TocOptions options;
 
     public TocFormatOptions() {
         this(null);

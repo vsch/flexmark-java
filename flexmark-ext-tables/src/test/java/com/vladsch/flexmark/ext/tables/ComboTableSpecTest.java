@@ -17,12 +17,12 @@ import java.util.*;
 
 public class ComboTableSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_tables_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("class-name", new MutableDataSet().set(TablesExtension.CLASS_NAME, "table-class"));
         optionsMap.put("no-caption", new MutableDataSet().set(TablesExtension.WITH_CAPTION, false));

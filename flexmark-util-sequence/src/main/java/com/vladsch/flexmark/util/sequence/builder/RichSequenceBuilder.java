@@ -7,13 +7,13 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A Builder for non based strings. Just a string builder wrapped in a sequence builder interface and wrapping result in RichSequence
  */
-public final class RichSequenceBuilder implements ISequenceBuilder<RichSequenceBuilder, RichSequence> {
+final public class RichSequenceBuilder implements ISequenceBuilder<RichSequenceBuilder, RichSequence> {
     @NotNull
     public static RichSequenceBuilder emptyBuilder() {
         return new RichSequenceBuilder();
     }
 
-    private final StringBuilder segments;
+    final private StringBuilder segments;
 
     private RichSequenceBuilder() {
         this.segments = new StringBuilder();

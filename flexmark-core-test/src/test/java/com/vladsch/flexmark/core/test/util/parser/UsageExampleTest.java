@@ -33,7 +33,7 @@ final public class UsageExampleTest {
     static class WordCountVisitor {
         int wordCount = 0;
 
-        private final NodeVisitor myVisitor;
+        final private NodeVisitor myVisitor;
 
         public WordCountVisitor() {
             myVisitor = new NodeVisitor(

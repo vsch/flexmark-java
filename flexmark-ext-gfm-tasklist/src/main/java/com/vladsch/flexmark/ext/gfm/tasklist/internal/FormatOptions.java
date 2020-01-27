@@ -12,12 +12,12 @@ import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
 public class FormatOptions implements MutableDataSetter {
-    public final TaskListItemCase taskListItemCase;
-    public final TaskListItemPlacement taskListItemPlacement;
-    public final int formatOrderedTaskItemPriority;
-    public final int formatDefaultTaskItemPriority;
-    public final boolean formatPrioritizedTaskItems;
-    public final Map<Character, Integer> formatTaskItemPriorities;
+    final public TaskListItemCase taskListItemCase;
+    final public TaskListItemPlacement taskListItemPlacement;
+    final public int formatOrderedTaskItemPriority;
+    final public int formatDefaultTaskItemPriority;
+    final public boolean formatPrioritizedTaskItems;
+    final public Map<Character, Integer> formatTaskItemPriorities;
 
     public FormatOptions() {
         this(null);

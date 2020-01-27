@@ -11,11 +11,11 @@ import org.jetbrains.annotations.Nullable;
  * <p>
  * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null chars.
  */
-public final class CharSubSequence extends BasedSequenceImpl {
-    private final char[] baseChars;
-    private final CharSubSequence base;
-    private final int startOffset;
-    private final int endOffset;
+final public class CharSubSequence extends BasedSequenceImpl {
+    final private char[] baseChars;
+    final private CharSubSequence base;
+    final private int startOffset;
+    final private int endOffset;
 
     private CharSubSequence(char[] chars, int hash) {
         super(hash);

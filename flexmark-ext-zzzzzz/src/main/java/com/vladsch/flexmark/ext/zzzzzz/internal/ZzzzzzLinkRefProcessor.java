@@ -13,7 +13,7 @@ public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
     static final boolean WANT_EXCLAMATION_PREFIX = false;
     static final int BRACKET_NESTING_LEVEL = 1;
 
-    private final ZzzzzzOptions options;
+    final private ZzzzzzOptions options;
 
     public ZzzzzzLinkRefProcessor(Document document) {
         this.options = new ZzzzzzOptions(document);

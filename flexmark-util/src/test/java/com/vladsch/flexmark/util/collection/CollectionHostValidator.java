@@ -8,7 +8,7 @@ import org.junit.Assert;
 import java.util.ArrayList;
 
 public class CollectionHostValidator<T> {
-    private final ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();
+    final private ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();
     private int nextCallbackIndex;
     private int modificationCount;
 

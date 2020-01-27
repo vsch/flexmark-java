@@ -200,6 +200,7 @@ public class MappedBasedSequenceTest {
         wrapped.addSegments(builder);
         assertEquals("⟦[simLink](simLink.md)⟧", builder.toStringWithRangesVisibleWhitespace());
     }
+
     @Test
     public void test_segmentedNbsp2() {
         String input = "[simLink spaced](simLink.md)";

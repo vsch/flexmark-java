@@ -33,12 +33,9 @@ public class TocBlockParser extends AbstractBlockParser {
         }
     }
 
-    private final TocBlock block;
-    //private BlockContent content = new BlockContent();
-    private final TocOptions options;
+    final private TocBlock block;
 
-    private TocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars) {
-        this.options = new TocOptions(options, false);
+    TocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars) {
         block = new TocBlock(tocChars, styleChars);
     }
 
@@ -93,12 +90,10 @@ public class TocBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final TocOptions options;
-        private final TocParsing myParsing;
+        final private TocParsing myParsing;
 
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
-            this.options = new TocOptions(options, false);
             this.myParsing = new TocParsing(options);
         }
 
@@ -114,7 +109,6 @@ public class TocBlockParser extends AbstractBlockParser {
             if (matcher.matches()) {
                 BasedSequence tocChars = state.getLineWithEOL();
                 BasedSequence styleChars = null;
-                BasedSequence titleChars = null;
                 if (matcher.start(1) != -1) {
                     int styleStart = matcher.start(1);
                     int styleEnd = matcher.end(1);

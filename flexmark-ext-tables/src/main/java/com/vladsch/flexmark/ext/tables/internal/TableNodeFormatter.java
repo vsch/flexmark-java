@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.MarkdownTable;
@@ -23,17 +22,13 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
 import static com.vladsch.flexmark.util.format.TableManipulator.NULL;
 
 public class TableNodeFormatter implements NodeFormatter {
-    private final TableFormatOptions options;
-    private final boolean isIntellijDummyIdentifier;
-    private final String intellijDummyIdentifier;
-    private final boolean parserTrimCellWhiteSpace;
+    final private TableFormatOptions options;
+    final private boolean parserTrimCellWhiteSpace;
 
     private MarkdownTable myTable;
 
     public TableNodeFormatter(DataHolder options) {
         this.options = new TableFormatOptions(options);
-        isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(options);
-        intellijDummyIdentifier = isIntellijDummyIdentifier ? TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER : "";
         parserTrimCellWhiteSpace = TablesExtension.TRIM_CELL_WHITESPACE.get(options);
     }
 

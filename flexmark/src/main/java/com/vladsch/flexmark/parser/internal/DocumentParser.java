@@ -14,8 +14,7 @@ import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import com.vladsch.flexmark.util.dependency.DependencyHandler;
-import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
@@ -25,16 +24,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
-import java.util.function.Function;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
 
 public class DocumentParser implements ParserState {
 
-    public static final InlineParserFactory INLINE_PARSER_FACTORY = CommonmarkInlineParser::new;
+    final public static InlineParserFactory INLINE_PARSER_FACTORY = CommonmarkInlineParser::new;
 
-    private static final HashMap<CustomBlockParserFactory, DataKey<Boolean>> CORE_FACTORIES_DATA_KEYS = new HashMap<>();
+    final private static HashMap<CustomBlockParserFactory, DataKey<Boolean>> CORE_FACTORIES_DATA_KEYS = new HashMap<>();
     static {
         CORE_FACTORIES_DATA_KEYS.put(new BlockQuoteParser.Factory(), Parser.BLOCK_QUOTE_PARSER);
         CORE_FACTORIES_DATA_KEYS.put(new HeadingParser.Factory(), Parser.HEADING_PARSER);
@@ -56,15 +54,15 @@ public class DocumentParser implements ParserState {
     //    CORE_FACTORIES.add(new IndentedCodeBlockParser.Factory());
     //}
 
-    private static final HashMap<DataKey<Boolean>, ParagraphPreProcessorFactory> CORE_PARAGRAPH_PRE_PROCESSORS = new HashMap<>();
+    final private static HashMap<DataKey<Boolean>, ParagraphPreProcessorFactory> CORE_PARAGRAPH_PRE_PROCESSORS = new HashMap<>();
     static {
         CORE_PARAGRAPH_PRE_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
     }
 
-    private static final HashMap<DataKey<Boolean>, BlockPreProcessorFactory> CORE_BLOCK_PRE_PROCESSORS = new HashMap<>();
-    static {
-        //CORE_BLOCK_PRE_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
-    }
+//    final private static HashMap<DataKey<Boolean>, BlockPreProcessorFactory> CORE_BLOCK_PRE_PROCESSORS = new HashMap<>();
+//    static {
+//        //CORE_BLOCK_PRE_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
+//    }
 
     private BasedSequence line;
     private BasedSequence lineWithEOL;
@@ -109,20 +107,17 @@ public class DocumentParser implements ParserState {
     private int indent = 0;
     private boolean blank;
     private boolean isBlankLine;
-    private BlankLine blankLine = null;
 
-    private final List<BlockParserFactory> blockParserFactories;
-    private final ParagraphPreProcessorDependencies paragraphPreProcessorDependencies;
-    private final BlockPreProcessorDependencies blockPreProcessorDependencies;
-    private final InlineParser inlineParser;
-    private final DocumentBlockParser documentBlockParser;
-    private final boolean blankLinesInAst;
-    private final boolean trackDocumentLines;
-    private final List<BasedSequence> lineSegments = new ArrayList<>();
-
-    private List<BlockParser> activeBlockParsers = new ArrayList<>();
-
-    private final ClassifyingBlockTracker blockTracker = new ClassifyingBlockTracker();
+    final private List<BlockParserFactory> blockParserFactories;
+    final private List<List<ParagraphPreProcessorFactory>> paragraphPreProcessorDependencies;
+    final private List<List<BlockPreProcessorFactory>> blockPreProcessorDependencies;
+    final private InlineParser inlineParser;
+    final private DocumentBlockParser documentBlockParser;
+    final private boolean blankLinesInAst;
+    final private boolean trackDocumentLines;
+    final private List<BasedSequence> lineSegments = new ArrayList<>();
+    final private List<BlockParser> activeBlockParsers = new ArrayList<>();
+    final private ClassifyingBlockTracker blockTracker = new ClassifyingBlockTracker();
 
     @Override
     public List<BasedSequence> getLineSegments() {
@@ -161,168 +156,22 @@ public class DocumentParser implements ParserState {
         blockTracker.blockRemovedWithDescendants(node);
     }
 
-    private static class BlockParserMapper implements Function<BlockParser, Block> {
-        public static final BlockParserMapper INSTANCE = new BlockParserMapper();
-
-        private BlockParserMapper() {
-        }
-
-        @Override
-        public Block apply(BlockParser value) {
-            return value.getBlock();
-        }
-    }
-
-    private Map<Node, Boolean> lastLineBlank = new HashMap<>();
-    private final DataHolder options;
-    private ParserPhase currentPhase = ParserPhase.NONE;
+    final private Map<Node, Boolean> lastLineBlank = new HashMap<>();
+    final private DataHolder options;
+    private ParserPhase currentPhase;
 
     @Override
     public ParserPhase getParserPhase() {
         return currentPhase;
     }
 
-    public static class ParagraphPreProcessorDependencies extends ResolvedDependencies<ParagraphPreProcessorDependencyStage> {
-        public ParagraphPreProcessorDependencies(List<ParagraphPreProcessorDependencyStage> dependentStages) {
-            super(dependentStages);
-        }
-    }
-
-    public static class ParagraphPreProcessorDependencyStage {
-        private final List<ParagraphPreProcessorFactory> dependents;
-
-        public ParagraphPreProcessorDependencyStage(List<ParagraphPreProcessorFactory> dependents) {
-            // compute mappings
-            this.dependents = dependents;
-        }
-    }
-
-    private static class ParagraphDependencyHandler extends DependencyHandler<ParagraphPreProcessorFactory, ParagraphPreProcessorDependencyStage, ParagraphPreProcessorDependencies> {
-        @NotNull
-        @Override
-        protected Class<?> getDependentClass(ParagraphPreProcessorFactory dependent) {
-            return dependent.getClass();
-        }
-
-        @NotNull
-        @Override
-        protected ParagraphPreProcessorDependencies createResolvedDependencies(List<ParagraphPreProcessorDependencyStage> stages) {
-            return new ParagraphPreProcessorDependencies(stages);
-        }
-
-        @NotNull
-        @Override
-        protected ParagraphPreProcessorDependencyStage createStage(List<ParagraphPreProcessorFactory> dependents) {
-            return new ParagraphPreProcessorDependencyStage(dependents);
-        }
-    }
-
-    public static class CustomBlockParserDependencies extends ResolvedDependencies<CustomBlockParserDependencyStage> {
-        public CustomBlockParserDependencies(List<CustomBlockParserDependencyStage> dependentStages) {
-            super(dependentStages);
-        }
-    }
-
-    public static class CustomBlockParserDependencyStage {
-        final List<CustomBlockParserFactory> dependents;
-
-        public CustomBlockParserDependencyStage(List<CustomBlockParserFactory> dependents) {
-            // compute mappings
-            this.dependents = dependents;
-        }
-    }
-
-    private static class CustomBlockParserDependencyHandler extends DependencyHandler<CustomBlockParserFactory, CustomBlockParserDependencyStage, CustomBlockParserDependencies> {
-        CustomBlockParserDependencyHandler() {}
-
-        @NotNull
-        @Override
-        protected Class<?> getDependentClass(CustomBlockParserFactory dependent) {
-            return dependent.getClass();
-        }
-
-        @NotNull
-        @Override
-        protected CustomBlockParserDependencies createResolvedDependencies(List<CustomBlockParserDependencyStage> stages) {
-            return new CustomBlockParserDependencies(stages);
-        }
-
-        @NotNull
-        @Override
-        protected CustomBlockParserDependencyStage createStage(List<CustomBlockParserFactory> dependents) {
-            return new CustomBlockParserDependencyStage(dependents);
-        }
-    }
-
-    public static class BlockPreProcessorDependencyStage {
-        private final Set<Class<? extends Block>> blockTypes;
-        private final List<BlockPreProcessorFactory> dependents;
-
-        public BlockPreProcessorDependencyStage(List<BlockPreProcessorFactory> dependents) {
-            // compute mappings
-            HashSet<Class<? extends Block>> set = new HashSet<>();
-
-            for (BlockPreProcessorFactory dependent : dependents) {
-                set.addAll(dependent.getBlockTypes());
-            }
-
-            this.dependents = dependents;
-            this.blockTypes = set;
-        }
-    }
-
-    public static class BlockPreProcessorDependencies extends ResolvedDependencies<BlockPreProcessorDependencyStage> {
-        private final Set<Class<? extends Block>> blockTypes;
-        private final Set<BlockPreProcessorFactory> blockPreProcessorFactories;
-
-        public BlockPreProcessorDependencies(List<BlockPreProcessorDependencyStage> dependentStages) {
-            super(dependentStages);
-            Set<Class<? extends Block>> blockTypes = new HashSet<>();
-            Set<BlockPreProcessorFactory> blockPreProcessorFactories = new HashSet<>();
-            for (BlockPreProcessorDependencyStage stage : dependentStages) {
-                blockTypes.addAll(stage.blockTypes);
-                blockPreProcessorFactories.addAll(stage.dependents);
-            }
-            this.blockPreProcessorFactories = blockPreProcessorFactories;
-            this.blockTypes = blockTypes;
-        }
-
-        public Set<Class<? extends Block>> getBlockTypes() {
-            return blockTypes;
-        }
-
-        public Set<BlockPreProcessorFactory> getBlockPreProcessorFactories() {
-            return blockPreProcessorFactories;
-        }
-    }
-
-    private static class BlockDependencyHandler extends DependencyHandler<BlockPreProcessorFactory, BlockPreProcessorDependencyStage, BlockPreProcessorDependencies> {
-        @NotNull
-        @Override
-        protected Class<?> getDependentClass(BlockPreProcessorFactory dependent) {
-            return dependent.getClass();
-        }
-
-        @NotNull
-        @Override
-        protected BlockPreProcessorDependencies createResolvedDependencies(List<BlockPreProcessorDependencyStage> stages) {
-            return new BlockPreProcessorDependencies(stages);
-        }
-
-        @NotNull
-        @Override
-        protected BlockPreProcessorDependencyStage createStage(List<BlockPreProcessorFactory> dependents) {
-            return new BlockPreProcessorDependencyStage(dependents);
-        }
-    }
-
-    private final Parsing myParsing;
+    final private Parsing myParsing;
 
     public DocumentParser(
             DataHolder options,
             List<CustomBlockParserFactory> customBlockParserFactories,
-            ParagraphPreProcessorDependencies paragraphPreProcessorDependencies,
-            BlockPreProcessorDependencies blockPreProcessorDependencies,
+            List<List<ParagraphPreProcessorFactory>> paragraphPreProcessorDependencies,
+            List<List<BlockPreProcessorFactory>> blockPreProcessorDependencies,
             InlineParser inlineParser
     ) {
         this.options = options;
@@ -366,17 +215,10 @@ public class DocumentParser implements ParserState {
             }
         }
 
-        //return list;
-        CustomBlockParserDependencyHandler resolver = new CustomBlockParserDependencyHandler();
-        CustomBlockParserDependencies dependencies = resolver.resolveDependencies(list);
-        ArrayList<CustomBlockParserFactory> factories = new ArrayList<>();
-        for (CustomBlockParserDependencyStage stage : dependencies.getDependentStages()) {
-            factories.addAll(stage.dependents);
-        }
-        return factories;
+        return DependencyResolver.resolveFlatDependencies(list, null, null);
     }
 
-    public static ParagraphPreProcessorDependencies calculateParagraphPreProcessors(
+    public static List<List<ParagraphPreProcessorFactory>> calculateParagraphPreProcessors(
             DataHolder options,
             List<ParagraphPreProcessorFactory> blockPreProcessors,
             InlineParserFactory inlineParserFactory
@@ -394,29 +236,26 @@ public class DocumentParser implements ParserState {
             }
         }
 
-        ParagraphDependencyHandler resolver = new ParagraphDependencyHandler();
-        return resolver.resolveDependencies(list);
+        return DependencyResolver.resolveDependencies(list, null, null);
     }
 
-    public static BlockPreProcessorDependencies calculateBlockPreProcessors(
+    public static List<List<BlockPreProcessorFactory>> calculateBlockPreProcessors(
             DataHolder options,
-            List<BlockPreProcessorFactory> blockPreProcessors,
-            InlineParserFactory inlineParserFactory
+            List<BlockPreProcessorFactory> blockPreProcessors
     ) {
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        List<BlockPreProcessorFactory> list = new ArrayList<>(blockPreProcessors);
-
-        // add core block preprocessors
-        //list.addAll(CORE_BLOCK_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_BLOCK_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
-        for (DataKey<Boolean> preProcessorDataKey : CORE_BLOCK_PRE_PROCESSORS.keySet()) {
-            if (preProcessorDataKey.get(options)) {
-                BlockPreProcessorFactory preProcessorFactory = CORE_BLOCK_PRE_PROCESSORS.get(preProcessorDataKey);
-                list.add(preProcessorFactory);
-            }
-        }
-
-        BlockDependencyHandler resolver = new BlockDependencyHandler();
-        return resolver.resolveDependencies(list);
+//        List<BlockPreProcessorFactory> list = new ArrayList<>(blockPreProcessors);
+//
+//        // add core block preprocessors
+//        for (DataKey<Boolean> preProcessorDataKey : CORE_BLOCK_PRE_PROCESSORS.keySet()) {
+//            if (preProcessorDataKey.get(options)) {
+//                BlockPreProcessorFactory preProcessorFactory = CORE_BLOCK_PRE_PROCESSORS.get(preProcessorDataKey);
+//                list.add(preProcessorFactory);
+//            }
+//        }
+//
+//        return DependencyResolver.resolveDependencies(list, null, null);
+        return DependencyResolver.resolveDependencies(blockPreProcessors, null, null);
     }
 
     @Override
@@ -591,7 +430,7 @@ public class DocumentParser implements ParserState {
         // Set all_matched to false if not all containers match.
         // The document will always match, can be skipped
         int matches = 1;
-        blankLine = null;
+        BlankLine blankLine = null;
 
         findNextNonSpace();
 
@@ -1030,10 +869,6 @@ public class DocumentParser implements ParserState {
         ParagraphPreProcessorCache(ParserState param) {
             super(param);
         }
-
-        public ParagraphPreProcessorCache(ParserState param, int capacity) {
-            super(param, capacity);
-        }
     }
 
     /**
@@ -1043,11 +878,11 @@ public class DocumentParser implements ParserState {
      * @param stage        paragraph pre-processor dependency stage
      * @param processorMap paragraph pre-processor cache
      */
-    private void preProcessParagraph(Paragraph block, ParagraphPreProcessorDependencyStage stage, ParagraphPreProcessorCache processorMap) {
+    private void preProcessParagraph(Paragraph block, List<ParagraphPreProcessorFactory> stage, ParagraphPreProcessorCache processorMap) {
         while (true) {
             boolean hadChanges = false;
 
-            for (ParagraphPreProcessorFactory factory : stage.dependents) {
+            for (ParagraphPreProcessorFactory factory : stage) {
                 ParagraphPreProcessor processor = processorMap.getItem(factory);
 
                 int pos = processor.preProcessBlock(block, this);
@@ -1100,7 +935,7 @@ public class DocumentParser implements ParserState {
                 }
             }
 
-            if (!hadChanges || stage.dependents.size() < 2) break;
+            if (!hadChanges || stage.size() < 2) break;
         }
     }
 
@@ -1108,7 +943,7 @@ public class DocumentParser implements ParserState {
         // here we run preProcessing stages
         if (blockTracker.getNodeClassifier().containsCategory(Paragraph.class)) {
             ParagraphPreProcessorCache processorMap = new ParagraphPreProcessorCache(this);
-            for (ParagraphPreProcessorDependencyStage factoryStage : paragraphPreProcessorDependencies.getDependentStages()) {
+            for (List<ParagraphPreProcessorFactory> factoryStage : paragraphPreProcessorDependencies) {
 
                 for (Paragraph paragraph : blockTracker.getNodeClassifier().getCategoryItems(Paragraph.class, Paragraph.class)) {
                     preProcessParagraph(paragraph, factoryStage, processorMap);
@@ -1119,10 +954,18 @@ public class DocumentParser implements ParserState {
 
     private void preProcessBlocks() {
         // here we run preProcessing stages
-        BitSet preProcessBitSet = blockTracker.getNodeClassifier().categoriesBitSet(blockPreProcessorDependencies.blockTypes);
+        HashSet<Class<?>> blockTypes = new HashSet<>();
+        for (List<BlockPreProcessorFactory> dependents : blockPreProcessorDependencies) {
+            for (BlockPreProcessorFactory factory : dependents) {
+                blockTypes.addAll(factory.getBlockTypes());
+            }
+        }
+
+        BitSet preProcessBitSet = blockTracker.getNodeClassifier().categoriesBitSet(blockTypes);
+
         if (!preProcessBitSet.isEmpty()) {
-            for (BlockPreProcessorDependencyStage preProcessorStage : blockPreProcessorDependencies.getDependentStages()) {
-                for (BlockPreProcessorFactory factory : preProcessorStage.dependents) {
+            for (List<BlockPreProcessorFactory> dependents : blockPreProcessorDependencies) {
+                for (BlockPreProcessorFactory factory : dependents) {
                     ReversibleIterable<Block> blockList = blockTracker.getNodeClassifier().getCategoryItems(Block.class, factory.getBlockTypes());
                     BlockPreProcessor blockPreProcessor = factory.apply(this);
 

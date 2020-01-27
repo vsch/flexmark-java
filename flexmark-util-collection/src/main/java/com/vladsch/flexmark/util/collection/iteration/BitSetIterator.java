@@ -7,8 +7,8 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
 public class BitSetIterator implements ReversibleIterator<Integer> {
-    private final @NotNull BitSet bitSet;
-    private final boolean reversed;
+    final private @NotNull BitSet bitSet;
+    final private boolean reversed;
     private int next;
     private int last;
 

@@ -17,8 +17,8 @@ public class Seg {
     final public static int MAX_TEXT_OFFSET = Integer.MAX_VALUE >> 1;
     final public static int F_TEXT_OPTION = Integer.MAX_VALUE & ~(MAX_TEXT_OFFSET);
 
-    private final int start;
-    private final int end;
+    final private int start;
+    final private int end;
 
     private Seg(int start, int end) {
         this.start = start;

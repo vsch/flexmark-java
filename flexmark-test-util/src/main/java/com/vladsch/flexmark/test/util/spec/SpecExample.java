@@ -12,18 +12,18 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class SpecExample {
-    public static final SpecExample NULL = new SpecExample(ResourceLocation.NULL, 0, null, "", 0, "", "", null, null, true);
+    final public static SpecExample NULL = new SpecExample(ResourceLocation.NULL, 0, null, "", 0, "", "", null, null, true);
 
-    private final @NotNull ResourceLocation resourceLocation;
-    private final int lineNumber;
-    private final @Nullable String optionsSet;
-    private final @Nullable String section;
-    private final int exampleNumber;
-    private final @NotNull String source;
-    private final @NotNull String html;
-    private final @Nullable String ast;
-    private final @Nullable String comment;
-    private final boolean isNull;
+    final private @NotNull ResourceLocation resourceLocation;
+    final private int lineNumber;
+    final private @Nullable String optionsSet;
+    final private @Nullable String section;
+    final private int exampleNumber;
+    final private @NotNull String source;
+    final private @NotNull String html;
+    final private @Nullable String ast;
+    final private @Nullable String comment;
+    final private boolean isNull;
 
     public SpecExample(@NotNull ResourceLocation resourceLocation, int lineNumber, @Nullable String optionsSet, @Nullable String section, int exampleNumber, @NotNull String source, @NotNull String html, @Nullable String ast, String comment) {
         this(resourceLocation, lineNumber, optionsSet, section, exampleNumber, source, html, ast, comment, false);

@@ -33,9 +33,9 @@ import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 import static com.vladsch.flexmark.util.data.SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
 
 public class ListBlockParser extends AbstractBlockParser {
-    private final ListBlock myBlock;
-    private final ListOptions myOptions;
-    private final ListData myListData;
+    final private ListBlock myBlock;
+    final private ListOptions myOptions;
+    final private ListData myListData;
     ListItemParser myLastChild = null;
     BasedSequence myItemHandledLine = null;
     boolean myItemHandledNewListLine;
@@ -170,12 +170,7 @@ public class ListBlockParser extends AbstractBlockParser {
     private void finalizeListTight(ParserState parserState) {
         Node item = getBlock().getFirstChild();
         boolean isTight = true;
-        boolean prevItemHadBlankAfterItemPara = false;
-        boolean prevItemHadTrailingBlankLine = false;
         boolean prevItemHadTrueTrailingBlankLine = false;
-        boolean prevItemContainsBlankLine = false;
-        boolean prevItemHadChildren = false;
-        boolean prevItemLoose = false;
         boolean haveNestedList = false;
 
         while (item != null) {
@@ -271,12 +266,7 @@ public class ListBlockParser extends AbstractBlockParser {
             }
 
             if (item instanceof ListItem) {
-                prevItemLoose = thisItemLoose;
-                prevItemHadBlankAfterItemPara = thisItemHadBlankAfterItemPara;
-                prevItemHadTrailingBlankLine = thisItemHadTrailingBlankLine;
                 prevItemHadTrueTrailingBlankLine = thisItemHadTrueTrailingBlankLine;
-                prevItemContainsBlankLine = thisItemContainsBlankLine;
-                prevItemHadChildren = thisItemHadChildren;
             }
 
             item = item.getNext();
@@ -424,8 +414,6 @@ public class ListBlockParser extends AbstractBlockParser {
                     FencedCodeBlockParser.Factory.class,
                     HtmlBlockParser.Factory.class,
                     ThematicBreakParser.Factory.class
-                    //ListBlockParser.Factory.class,
-                    //IndentedCodeBlockParser.Factory.class
             ));
         }
 
@@ -435,15 +423,6 @@ public class ListBlockParser extends AbstractBlockParser {
             HashSet<Class<?>> set = new HashSet<>();
             set.add(IndentedCodeBlockParser.Factory.class);
             return set;
-            //return new HashSet<>(Arrays.asList(
-            //        //BlockQuoteParser.Factory.class,
-            //        //HeadingParser.Factory.class,
-            //        //FencedCodeBlockParser.Factory.class,
-            //        //HtmlBlockParser.Factory.class,
-            //        //ThematicBreakParser.Factory.class,
-            //        //ListBlockParser.Factory.class,
-            //        IndentedCodeBlockParser.Factory.class
-            //));
         }
 
         @Override
@@ -512,7 +491,7 @@ public class ListBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final ListOptions myOptions;
+        final private ListOptions myOptions;
 
         BlockFactory(DataHolder options) {
             super(options);

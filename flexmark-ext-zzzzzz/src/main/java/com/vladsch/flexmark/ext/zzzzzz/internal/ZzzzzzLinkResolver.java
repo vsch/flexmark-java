@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
 public class ZzzzzzLinkResolver implements LinkResolver {
-    private final LinkResolverAdapter nodeAdapter;
+    final private LinkResolverAdapter nodeAdapter;
 
     public ZzzzzzLinkResolver(LinkResolverContext context) {
         nodeAdapter = new LinkResolverAdapter(

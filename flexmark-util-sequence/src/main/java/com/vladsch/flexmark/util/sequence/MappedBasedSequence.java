@@ -11,8 +11,8 @@ import org.jetbrains.annotations.Nullable;
  * A BasedSequence which maps characters according to CharMapper
  */
 final public class MappedBasedSequence extends BasedSequenceImpl implements MappedSequence<BasedSequence>, ReplacedBasedSequence {
-    private final CharMapper mapper;
-    private final BasedSequence baseSeq;
+    final private CharMapper mapper;
+    final private BasedSequence baseSeq;
 
     private MappedBasedSequence(BasedSequence baseSeq, CharMapper mapper) {
         super(0);

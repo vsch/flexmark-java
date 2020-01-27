@@ -13,16 +13,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TaskListNodeRenderer implements NodeRenderer {
-    public static final AttributablePart TASK_ITEM_PARAGRAPH = new AttributablePart("TASK_ITEM_PARAGRAPH");
+    final public static AttributablePart TASK_ITEM_PARAGRAPH = new AttributablePart("TASK_ITEM_PARAGRAPH");
 
     final String doneMarker;
     final String notDoneMarker;
-    private final String tightItemClass;
-    private final String looseItemClass;
-    private final String itemDoneClass;
-    private final String itemNotDoneClass;
+    final private String tightItemClass;
+    final private String looseItemClass;
+    final private String itemDoneClass;
+    final private String itemNotDoneClass;
     final String paragraphClass;
-    private final ListOptions listOptions;
+    final private ListOptions listOptions;
 
     public TaskListNodeRenderer(DataHolder options) {
         doneMarker = TaskListExtension.ITEM_DONE_MARKER.get(options);

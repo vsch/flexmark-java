@@ -22,7 +22,6 @@ public class SpecExampleNodeFormatter implements NodeFormatter {
     final private SpecExampleOptions formatOptions;
     final private String[] mySections = new String[7];// 0 is not used and signals no section when indexed by lastSectionLevel
     private String mySection = "";
-    private int myLastSectionLevel = 1;
     private int myFlexMarkExampleCount = 0;
 
     public SpecExampleNodeFormatter(DataHolder options) {
@@ -49,7 +48,6 @@ public class SpecExampleNodeFormatter implements NodeFormatter {
         if (!context.isTransformingText() && node.isAtxHeading()) {
             Pair<String, Integer> pair = TestUtils.addSpecSection(node.getChars().toString(), node.getText().toString(), mySections);
             mySection = pair.getFirst();
-            myLastSectionLevel = pair.getSecond();
             myFlexMarkExampleCount = 0;
         }
 
@@ -97,9 +95,6 @@ public class SpecExampleNodeFormatter implements NodeFormatter {
             out.line().closePreFormatted();
 
             BasedSequence result = BasedSequence.of(out.toSequence(Integer.MAX_VALUE, Integer.MAX_VALUE));
-//            SequenceBuilder resultBuilder = builder.getBuilder();
-//            result.addSegments(resultBuilder.getSegmentBuilder());
-//            System.out.println(resultBuilder.getSegmentBuilder().toStringWithRanges());
 
             markdown.pushOptions()
                     .openPreFormatted(false)

@@ -26,7 +26,7 @@ public interface DataHolder extends MutableDataSetter {
     }
 
     @Override
-    default  @NotNull MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+    default @NotNull MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
         return dataHolder.setAll(this);
     }
 

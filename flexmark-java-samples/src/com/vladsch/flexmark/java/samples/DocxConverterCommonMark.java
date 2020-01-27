@@ -28,7 +28,7 @@ import java.util.Arrays;
 
 public class DocxConverterCommonMark {
     // don't need to use pegdown options adapter. You can setup the options as you like. I find this is a quick way to add all the fixings
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     DefinitionExtension.create(),
                     EmojiExtension.create(),

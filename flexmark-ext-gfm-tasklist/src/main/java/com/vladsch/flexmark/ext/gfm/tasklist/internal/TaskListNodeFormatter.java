@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -20,8 +19,8 @@ import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class TaskListNodeFormatter implements NodeFormatter {
-    private final FormatOptions formatOptions;
-    private final ListOptions listOptions;
+    final private FormatOptions formatOptions;
+    final private ListOptions listOptions;
 
     public TaskListNodeFormatter(DataHolder options) {
         formatOptions = new FormatOptions(options);
@@ -219,14 +218,6 @@ public class TaskListNodeFormatter implements NodeFormatter {
             }
 
             FormatterUtils.renderList(node, context, markdown, itemList);
-        }
-    }
-
-    public static class Factory implements NodeFormatterFactory {
-        @NotNull
-        @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
-            return new TaskListNodeFormatter(options);
         }
     }
 }

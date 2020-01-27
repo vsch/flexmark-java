@@ -35,18 +35,18 @@ import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
  */
 @SuppressWarnings({ "WeakerAccess", "OverlyCoupledClass" })
 public class CoreNodeRenderer implements NodeRenderer {
-    public static final AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");
-    public static final AttributablePart TIGHT_LIST_ITEM = new AttributablePart("TIGHT_LIST_ITEM");
-    public static final AttributablePart PARAGRAPH_LINE = new AttributablePart("PARAGRAPH_LINE");
-    public static final AttributablePart CODE_CONTENT = new AttributablePart("FENCED_CODE_CONTENT");
+    final public static AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");
+    final public static AttributablePart TIGHT_LIST_ITEM = new AttributablePart("TIGHT_LIST_ITEM");
+    final public static AttributablePart PARAGRAPH_LINE = new AttributablePart("PARAGRAPH_LINE");
+    final public static AttributablePart CODE_CONTENT = new AttributablePart("FENCED_CODE_CONTENT");
 
-    private final ListOptions listOptions;
-    private final boolean obfuscateEmail;
-    private final boolean obfuscateEmailRandom;
-    private final ReferenceRepository referenceRepository;
-    private final boolean recheckUndefinedReferences;
-    private final boolean codeContentBlock;
-    private final boolean codeSoftLineBreaks;
+    final private ListOptions listOptions;
+    final private boolean obfuscateEmail;
+    final private boolean obfuscateEmailRandom;
+    final private ReferenceRepository referenceRepository;
+    final private boolean recheckUndefinedReferences;
+    final private boolean codeContentBlock;
+    final private boolean codeSoftLineBreaks;
 
     private List<Range> myLines;
     private List<Integer> myEOLs;

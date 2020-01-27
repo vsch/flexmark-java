@@ -47,9 +47,8 @@ public class SimTocBlockParser extends AbstractBlockParser {
     static int HAVE_LIST = 4;
     static int HAVE_BLANK_LINE = 8;
 
-    private final SimTocBlock block;
-    //private BlockContent content = new BlockContent();
-    private final TocOptions options;
+    final private SimTocBlock block;
+    final private TocOptions options;
     private int haveChildren = 0;
     private BasedSequence blankLineSpacer = BasedSequence.NULL;
 
@@ -105,19 +104,11 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
     @Override
     public void addLine(ParserState state, BasedSequence line) {
-        //content.add(line, state.getIndent());
+
     }
 
     @Override
     public void closeBlock(ParserState state) {
-        //block.setContent(content);
-        //if (block.getLineCount() > 1) {
-        //    BasedSequence contentChars = SegmentedSequence.of(block.getContentLines(1, block.getLineCount()), block.getChars());
-        //    if (!contentChars.isEmpty()) {
-        //        SimTocContent node = new SimTocContent(contentChars);
-        //        block.appendChild(node);
-        //    }
-        //}
         if (block.hasChildren()) {
             // move the children to a SimTocContent node
             SimTocContent tocContent = new SimTocContent();
@@ -186,12 +177,10 @@ public class SimTocBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final TocOptions options;
-        private final TocParsing myParsing;
+        final private TocParsing myParsing;
 
         BlockFactory(DataHolder options) {
             super(options);
-            this.options = new TocOptions(options, true);
             this.myParsing = new TocParsing(options);
         }
 

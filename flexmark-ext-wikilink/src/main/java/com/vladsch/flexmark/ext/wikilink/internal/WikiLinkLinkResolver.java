@@ -16,7 +16,7 @@ import java.util.Set;
 import static com.vladsch.flexmark.ext.wikilink.WikiLinkExtension.WIKI_LINK;
 
 public class WikiLinkLinkResolver implements LinkResolver {
-    private final WikiLinkOptions options;
+    final private WikiLinkOptions options;
 
     public WikiLinkLinkResolver(LinkResolverContext context) {
         this.options = new WikiLinkOptions(context.getOptions());

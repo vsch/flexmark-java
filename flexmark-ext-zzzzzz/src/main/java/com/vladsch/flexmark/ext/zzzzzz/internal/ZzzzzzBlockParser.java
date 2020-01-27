@@ -18,9 +18,9 @@ public class ZzzzzzBlockParser extends AbstractBlockParser {
     static Pattern ZZZZZZ_BLOCK_START = Pattern.compile("ZzzzzzNoWayzzzzzZ");
     private static Pattern ZZZZZZ_BLOCK_CONTINUE = Pattern.compile("");
 
-    private final ZzzzzzBlock block = new ZzzzzzBlock();
+    final private ZzzzzzBlock block = new ZzzzzzBlock();
     private BlockContent content = new BlockContent();
-    private final ZzzzzzOptions options;
+    final private ZzzzzzOptions options;
 
     ZzzzzzBlockParser(DataHolder options) {
         this.options = new ZzzzzzOptions(options);
@@ -99,7 +99,7 @@ public class ZzzzzzBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final ZzzzzzOptions options;
+        final private ZzzzzzOptions options;
 
         BlockFactory(DataHolder options) {
             super(options);

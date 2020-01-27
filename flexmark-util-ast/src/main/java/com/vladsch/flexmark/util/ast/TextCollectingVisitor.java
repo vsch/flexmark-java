@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiConsumer;
 
 public class TextCollectingVisitor {
-    private final NodeVisitor myVisitor;
+    final private NodeVisitor myVisitor;
     SpaceInsertingSequenceBuilder out;
     int flags;
 
@@ -63,9 +62,7 @@ public class TextCollectingVisitor {
     }
 
     public void collect(Node node, int flags) {
-        SequenceBuilder builder = SequenceBuilder.emptyBuilder(node.getChars());
         out = SpaceInsertingSequenceBuilder.emptyBuilder(node.getChars());
-
         this.flags = flags;
         myVisitor.visit(node);
     }

@@ -14,10 +14,10 @@ import java.util.HashMap;
  * A Builder for Segmented BasedSequences
  */
 public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedSequence> {
-    private final BasedSegmentBuilder segments;
-    private final @NotNull BasedSequence baseSeq;
-    private final @NotNull BasedSequence altBase;   // sequence used for creating the builder, needed for validation for alt sequence creation
-    private final @NotNull HashMap<BasedSequence, Boolean> equivalentBases;
+    final private BasedSegmentBuilder segments;
+    final private @NotNull BasedSequence baseSeq;
+    final private @NotNull BasedSequence altBase;   // sequence used for creating the builder, needed for validation for alt sequence creation
+    final private @NotNull HashMap<BasedSequence, Boolean> equivalentBases;
     private @Nullable BasedSequence resultSeq;
 
     /**
@@ -221,9 +221,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
             return toSequence();
         }
 
-//        if (!altSequence.equals(baseSeq)) {
-//           int tmp = 0;
-//        }
         assert altSequence.equals(altBase) : String.format("altSequence must be character identical to builder.altBase\n" +
                 "altBase: '%s'\n" +
                 " altSeq: '%s'\n" +
@@ -243,10 +240,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
                     s = altSequence.subSequence(deleted + ((Range) part).getStart(), deleted + ((Range) part).getEnd());
                     // NOTE: here there could be differences in space vs tab vs EOL due to shift and wrapping
                 }
-
-//                if (SequenceUtils.compare(s, baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd()), false, ignoreCharDiff) != 0) {
-//                    int tmp = 0;
-//                }
                 altBuilder.append(s);
             } else if (part instanceof CharSequence) {
                 altBuilder.append((CharSequence) part);
@@ -277,9 +270,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
             return toSequence();
         }
 
-//        if (!altSequence.equals(baseSeq)) {
-//           int tmp = 0;
-//        }
         assert altSequence.equals(altBase) : String.format("altSequence must be character identical to builder.altBase\n" +
                 "altBase: '%s'\n" +
                 " altSeq: '%s'\n" +
@@ -301,9 +291,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
                     s = altSequence.subSequence(length + deleted, length + deleted + ((Range) part).getSpan());
                 }
 
-//                if (SequenceUtils.compare(s, baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd()), false, ignoreCharDiff) != 0) {
-//                    int tmp = 0;
-//                }
                 altBuilder.append(s);
                 length += ((Range) part).getSpan();
             } else if (part instanceof CharSequence) {
@@ -316,9 +303,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
 
         BasedSequence result = SegmentedSequence.create(altBuilder);
         BasedSequence sequence = toSequence();
-//        if (SequenceUtils.compare(result, sequence, false, ignoreCharDiff) != 0) {
-//            int tmp = 0;
-//        }
+
         assert SequenceUtils.compare(result, sequence, false, ignoreCharDiff) == 0 : String.format("result must be character identical to builder.toSequence()\n" +
                 "result: '%s'\n" +
                 " sequence: '%s'\n" +

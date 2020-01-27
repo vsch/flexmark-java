@@ -17,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class AttributesNodePostProcessor extends NodePostProcessor {
-    private final NodeAttributeRepository nodeAttributeRepository;
-    private final AttributesOptions myOptions;
+    final private NodeAttributeRepository nodeAttributeRepository;
+    final private AttributesOptions myOptions;
     private LightInlineParser myLightInlineParser;
     private AttributesInlineParserExtension myParserExtension;
 
@@ -29,7 +29,6 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
 
     public Node getAttributeOwner(NodeTracker state, AttributesNode attributesNode) {
         Node previous = attributesNode.getPreviousAnyNot(BlankLine.class, DoNotAttributeDecorate.class);
-        Node next = attributesNode.getNext();
         Node attributeOwner;
         Node parent = attributesNode.getParent();
 

@@ -14,8 +14,7 @@ import com.vladsch.flexmark.parser.core.delimiter.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.dependency.DependencyHandler;
-import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
@@ -566,7 +565,6 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         while ((matched = match(myParsing.TICKS)) != null) {
             if (matched.equals(ticks)) {
                 int ticksLength = ticks.length();
-                BasedSequence content = input.subSequence(afterOpenTicks - ticksLength, index - ticksLength);
                 BasedSequence codeText = input.subSequence(afterOpenTicks, index - ticksLength);
                 Code node = new Code(input.subSequence(afterOpenTicks - ticksLength, afterOpenTicks), codeText, input.subSequence(index - ticksLength, index));
 
@@ -577,7 +575,6 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                     while (lastPos < length) {
                         int softBreak = codeText.indexOfAny(CharPredicate.ANY_EOL, lastPos);
                         int pos = softBreak == -1 ? length : softBreak;
-                        int lineBreak = pos;
 
                         Text textNode = new Text(codeText.subSequence(lastPos, pos));
                         node.appendChild(textNode);
@@ -594,7 +591,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
 
                         if (lastPos >= length) break;
 
-                        if (lineBreak < lastPos) {
+                        if (pos < lastPos) {
                             SoftLineBreak softLineBreak = new SoftLineBreak(codeText.subSequence(softBreak, lastPos));
                             node.appendChild(softLineBreak);
                         }
@@ -704,9 +701,9 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     }
 
     static class ReferenceProcessorMatch {
-        public final LinkRefProcessor processor;
-        public final BasedSequence nodeChars;
-        public final boolean wantExclamation;
+        final public LinkRefProcessor processor;
+        final public BasedSequence nodeChars;
+        final public boolean wantExclamation;
 
         public ReferenceProcessorMatch(LinkRefProcessor processor, boolean wantExclamation, BasedSequence nodeChars) {
             this.processor = processor;
@@ -937,7 +934,6 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                             // it is the innermost ref and is bare, if not bare then we treat it as a ref
 
                             if (!refIsBare && peek() == '[') {
-                                int beforeNext = index;
                                 int nextLength = parseLinkLabel();
                                 if (nextLength > 0) {
                                     // not bare and not defined and followed by another [], roll back to before the label and make it just text
@@ -1586,41 +1582,6 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         }
     }
 
-    static class InlineParserDependencyStage {
-        final List<InlineParserExtensionFactory> dependents;
-
-        public InlineParserDependencyStage(List<InlineParserExtensionFactory> dependents) {
-            // compute mappings
-            this.dependents = dependents;
-        }
-    }
-
-    static class InlineParserExtensionDependencies extends ResolvedDependencies<InlineParserDependencyStage> {
-        public InlineParserExtensionDependencies(List<InlineParserDependencyStage> dependentStages) {
-            super(dependentStages);
-        }
-    }
-
-    static class InlineParserExtensionDependencyHandler extends DependencyHandler<InlineParserExtensionFactory, InlineParserDependencyStage, InlineParserExtensionDependencies> {
-        @NotNull
-        @Override
-        protected Class<?> getDependentClass(InlineParserExtensionFactory dependent) {
-            return dependent.getClass();
-        }
-
-        @NotNull
-        @Override
-        protected InlineParserExtensionDependencies createResolvedDependencies(List<InlineParserDependencyStage> stages) {
-            return new InlineParserExtensionDependencies(stages);
-        }
-
-        @NotNull
-        @Override
-        protected InlineParserDependencyStage createStage(List<InlineParserExtensionFactory> dependents) {
-            return new InlineParserDependencyStage(dependents);
-        }
-    }
-
     static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(DataHolder options, List<InlineParserExtensionFactory> extensionFactories) {
         Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<>();
 
@@ -1633,20 +1594,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             }
         }
 
-        InlineParserExtensionDependencyHandler resolver = new InlineParserExtensionDependencyHandler();
         Map<Character, List<InlineParserExtensionFactory>> extensions = new HashMap<>();
         for (Character c : extensionMap.keySet()) {
             List<InlineParserExtensionFactory> list = extensionMap.get(c);
-            List<InlineParserExtensionFactory> resolvedList = list;
-
-            if (list.size() > 1) {
-                InlineParserExtensionDependencies dependencies = resolver.resolveDependencies(list);
-                resolvedList = new ArrayList<>(list.size());
-                for (InlineParserDependencyStage stage : dependencies.getDependentStages()) {
-                    resolvedList.addAll(stage.dependents);
-                }
-            }
-
+            List<InlineParserExtensionFactory> resolvedList = DependencyResolver.resolveFlatDependencies(list, null, null);
             extensions.put(c, resolvedList);
         }
 

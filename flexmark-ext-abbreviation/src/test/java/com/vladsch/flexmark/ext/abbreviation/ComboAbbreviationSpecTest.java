@@ -21,8 +21,8 @@ import java.util.Map;
 
 public class ComboAbbreviationSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_abbreviation_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     EscapedCharacterExtension.create(),
                     AbbreviationExtension.create(),
@@ -33,7 +33,7 @@ public class ComboAbbreviationSpecTest extends RendererSpecTest {
             )
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+    final private static Map<String, DataHolder> optionsMap = placementAndSortOptions(
             AbbreviationExtension.ABBREVIATIONS_KEEP,
             AbbreviationExtension.ABBREVIATIONS_PLACEMENT,
             AbbreviationExtension.ABBREVIATIONS_SORT

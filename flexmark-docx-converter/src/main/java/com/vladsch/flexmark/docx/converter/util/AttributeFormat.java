@@ -42,13 +42,15 @@ public class AttributeFormat {
                 fillColor == null;
     }
 
-    @Nullable String getValidHexColor(@Nullable String s) {
+    @Nullable
+    String getValidHexColor(@Nullable String s) {
         if (s == null) return null;
 
         return ColorNameMapper.getValidHexColor(s);
     }
 
-    @Nullable String getValidNamedOrHexColor(@Nullable String s) {
+    @Nullable
+    String getValidNamedOrHexColor(@Nullable String s) {
         if (s == null) return null;
 
         return ColorNameMapper.getValidNamedOrHexColor(s);

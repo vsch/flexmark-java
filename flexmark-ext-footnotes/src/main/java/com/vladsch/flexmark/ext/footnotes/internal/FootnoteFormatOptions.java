@@ -7,8 +7,8 @@ import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 public class FootnoteFormatOptions {
 
-    public final ElementPlacement footnotePlacement;
-    public final ElementPlacementSort footnoteSort;
+    final public ElementPlacement footnotePlacement;
+    final public ElementPlacementSort footnoteSort;
 
     public FootnoteFormatOptions(DataHolder options) {
         footnotePlacement = FootnoteExtension.FOOTNOTE_PLACEMENT.get(options);

@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboAbbreviationTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_abbreviation_translation_formatter_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_abbreviation_translation_formatter_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AbbreviationExtension.create()))
             .set(Parser.UNDERSCORE_DELIMITER_PROCESSOR, false);
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+    final private static Map<String, DataHolder> optionsMap = placementAndSortOptions(
             AbbreviationExtension.ABBREVIATIONS_KEEP,
             AbbreviationExtension.ABBREVIATIONS_PLACEMENT,
             AbbreviationExtension.ABBREVIATIONS_SORT

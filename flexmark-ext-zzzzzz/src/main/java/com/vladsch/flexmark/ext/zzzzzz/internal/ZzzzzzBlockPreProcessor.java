@@ -6,13 +6,14 @@ import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class ZzzzzzBlockPreProcessor implements BlockPreProcessor {
-    private final ZzzzzzOptions options;
+    final private ZzzzzzOptions options;
 
     public ZzzzzzBlockPreProcessor(DataHolder options) {
         this.options = new ZzzzzzOptions(options);
@@ -23,6 +24,7 @@ public class ZzzzzzBlockPreProcessor implements BlockPreProcessor {
     }
 
     public static class Factory implements BlockPreProcessorFactory {
+        @NotNull
         @Override
         public Set<Class<? extends Block>> getBlockTypes() {
             HashSet<Class<? extends Block>> set = new HashSet<>();
@@ -47,8 +49,9 @@ public class ZzzzzzBlockPreProcessor implements BlockPreProcessor {
             return true;
         }
 
+        @NotNull
         @Override
-        public BlockPreProcessor apply(ParserState state) {
+        public BlockPreProcessor apply(@NotNull ParserState state) {
             return new ZzzzzzBlockPreProcessor(state.getProperties());
         }
     }

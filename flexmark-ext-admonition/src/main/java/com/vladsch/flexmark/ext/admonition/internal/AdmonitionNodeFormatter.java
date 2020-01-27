@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AdmonitionNodeFormatter implements NodeFormatter {
-    private final AdmonitionOptions options;
+    final private AdmonitionOptions options;
 
     public AdmonitionNodeFormatter(DataHolder options) {
         this.options = new AdmonitionOptions(options);

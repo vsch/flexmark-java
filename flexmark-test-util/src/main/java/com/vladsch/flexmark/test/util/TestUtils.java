@@ -32,51 +32,51 @@ import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
 
 public class TestUtils {
-    public static final char MARKUP_CARET_CHAR = '⦙';
-    public static final char MARKUP_SELECTION_START_CHAR = '⟦';
-    public static final char MARKUP_SELECTION_END_CHAR = '⟧';
-    public static final String MARKUP_CARET = Character.toString(MARKUP_CARET_CHAR);
-    public static final String MARKUP_SELECTION_START = Character.toString(MARKUP_SELECTION_START_CHAR);
-    public static final String MARKUP_SELECTION_END = Character.toString(MARKUP_SELECTION_END_CHAR);
-    public static final @NotNull CharPredicate CARET_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR);
-    public static final @NotNull CharPredicate MARKUP_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR, MARKUP_SELECTION_START_CHAR, MARKUP_SELECTION_END_CHAR);
-    public static final int[] EMPTY_OFFSETS = new int[0];
+    final public static char MARKUP_CARET_CHAR = '⦙';
+    final public static char MARKUP_SELECTION_START_CHAR = '⟦';
+    final public static char MARKUP_SELECTION_END_CHAR = '⟧';
+    final public static String MARKUP_CARET = Character.toString(MARKUP_CARET_CHAR);
+    final public static String MARKUP_SELECTION_START = Character.toString(MARKUP_SELECTION_START_CHAR);
+    final public static String MARKUP_SELECTION_END = Character.toString(MARKUP_SELECTION_END_CHAR);
+    final public static @NotNull CharPredicate CARET_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR);
+    final public static @NotNull CharPredicate MARKUP_PREDICATE = CharPredicate.anyOf(MARKUP_CARET_CHAR, MARKUP_SELECTION_START_CHAR, MARKUP_SELECTION_END_CHAR);
+    final public static int[] EMPTY_OFFSETS = new int[0];
     static {
         // CAUTION: need to register our url resolvers
         FlexmarkResourceUrlResolver.registerUrlResolvers();
     }
 
-    public static final char DISABLED_OPTION_PREFIX_CHAR = '-';
-    public static final String DISABLED_OPTION_PREFIX = String.valueOf(DISABLED_OPTION_PREFIX_CHAR);
+    final public static char DISABLED_OPTION_PREFIX_CHAR = '-';
+    final public static String DISABLED_OPTION_PREFIX = String.valueOf(DISABLED_OPTION_PREFIX_CHAR);
 
-    public static final String EMBED_TIMED_OPTION_NAME = "EMBED_TIMED";
-    public static final String FAIL_OPTION_NAME = "FAIL";
-    public static final String FILE_EOL_OPTION_NAME = "FILE_EOL";
-    public static final String IGNORE_OPTION_NAME = "IGNORE";
-    public static final String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
-    public static final String TIMED_ITERATIONS_OPTION_NAME = "TIMED_ITERATIONS";
-    public static final String TIMED_OPTION_NAME = "TIMED";
+    final public static String EMBED_TIMED_OPTION_NAME = "EMBED_TIMED";
+    final public static String FAIL_OPTION_NAME = "FAIL";
+    final public static String FILE_EOL_OPTION_NAME = "FILE_EOL";
+    final public static String IGNORE_OPTION_NAME = "IGNORE";
+    final public static String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
+    final public static String TIMED_ITERATIONS_OPTION_NAME = "TIMED_ITERATIONS";
+    final public static String TIMED_OPTION_NAME = "TIMED";
 
-    public static final DataKey<Boolean> EMBED_TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
-    public static final DataKey<Boolean> FAIL = new DataKey<>(FAIL_OPTION_NAME, false);
-    public static final DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
-    public static final DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, true);
-    public static final DataKey<Boolean> TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
-    public static final DataKey<Integer> TIMED_ITERATIONS = new DataKey<>(TIMED_ITERATIONS_OPTION_NAME, 100);
+    final public static DataKey<Boolean> EMBED_TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
+    final public static DataKey<Boolean> FAIL = new DataKey<>(FAIL_OPTION_NAME, false);
+    final public static DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
+    final public static DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, true);
+    final public static DataKey<Boolean> TIMED = new DataKey<>(TIMED_OPTION_NAME, false);
+    final public static DataKey<Integer> TIMED_ITERATIONS = new DataKey<>(TIMED_ITERATIONS_OPTION_NAME, 100);
 
-    public static final String TIMED_FORMAT_STRING = "Timing %s: parse %.3f ms, render %.3f ms, total %.3f\n";
+    final public static String TIMED_FORMAT_STRING = "Timing %s: parse %.3f ms, render %.3f ms, total %.3f\n";
 
-    public static final DataKey<String> INCLUDED_DOCUMENT = new DataKey<>("INCLUDED_DOCUMENT", "");
-    public static final DataKey<String> SOURCE_PREFIX = new DataKey<>("SOURCE_PREFIX", "");
-    public static final DataKey<String> SOURCE_SUFFIX = new DataKey<>("SOURCE_SUFFIX", "");
-    public static final DataKey<String> SOURCE_INDENT = new DataKey<>("SOURCE_INDENT", "");
+    final public static DataKey<String> INCLUDED_DOCUMENT = new DataKey<>("INCLUDED_DOCUMENT", "");
+    final public static DataKey<String> SOURCE_PREFIX = new DataKey<>("SOURCE_PREFIX", "");
+    final public static DataKey<String> SOURCE_SUFFIX = new DataKey<>("SOURCE_SUFFIX", "");
+    final public static DataKey<String> SOURCE_INDENT = new DataKey<>("SOURCE_INDENT", "");
 
-    public static final DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
-    public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.UNLOAD_EXTENSIONS;
-    public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.LOAD_EXTENSIONS;
+    final public static DataHolder NO_FILE_EOL_FALSE = new MutableDataSet().set(NO_FILE_EOL, false).toImmutable();
+    final public static DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.UNLOAD_EXTENSIONS;
+    final public static DataKey<Collection<Extension>> LOAD_EXTENSIONS = LoadUnloadDataKeyAggregator.LOAD_EXTENSIONS;
     final private static DataHolder EMPTY_OPTIONS = new DataSet();
     final public static DataKey<BiFunction<String, String, DataHolder>> CUSTOM_OPTION = new DataKey<>("CUSTOM_OPTION", (option, params) -> EMPTY_OPTIONS);
-    public static final String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
+    final public static String FILE_PROTOCOL = ResourceUrlResolver.FILE_PROTOCOL;
 
     public static DataHolder processOption(@NotNull Map<String, ? extends DataHolder> optionsMap, @NotNull String option) {
         DataHolder dataHolder = null;
@@ -125,7 +125,6 @@ public class TestUtils {
      *                                Each row is passed to factory to allow creating custom options.
      * @param factory                 factory creating a type from ExampleOption and given row of parameters
      * @param <T>                     type of value in the map
-     *
      * @return constructed hash map of option name
      */
     @NotNull
@@ -189,7 +188,6 @@ public class TestUtils {
      * @param example         spec example instance for which options are being processed
      * @param optionSets      comma separate list of option set names
      * @param optionsProvider function to take a string option name and provide settings based on it
-     *
      * @return combined set from applying these options together
      */
     public static DataHolder getOptions(@NotNull SpecExample example, @Nullable String optionSets, @NotNull Function<String, DataHolder> optionsProvider) {
@@ -444,9 +442,7 @@ public class TestUtils {
 
     /**
      * @param s text to convert to visible chars
-     *
      * @return spec test special chars converted to visible
-     *
      * @deprecated use {@link #toVisibleSpecText(String)}
      */
     @Deprecated
@@ -456,7 +452,6 @@ public class TestUtils {
 
     /**
      * @param s text to convert to visible chars
-     *
      * @return spec test special chars converted to visible
      */
     public static String toVisibleSpecText(String s) {
@@ -467,7 +462,6 @@ public class TestUtils {
 
     /**
      * @param s text to convert to visible chars
-     *
      * @return spec test special chars converted to visible
      */
     public static CharSequence toVisibleSpecText(CharSequence s) {
@@ -484,9 +478,7 @@ public class TestUtils {
 
     /**
      * @param s text to convert to from visible chars to normal
-     *
      * @return spec test special visible chars converted to normal
-     *
      * @deprecated use {@link #fromVisibleSpecText(String)}
      */
     @Deprecated
@@ -496,17 +488,15 @@ public class TestUtils {
 
     /**
      * @param s text to convert to from visible chars to normal
-     *
      * @return spec test special visible chars converted to normal
      */
     public static String fromVisibleSpecText(String s) {
         if (s == null) return "";
-        return fromVisibleSpecText((CharSequence)s).toString();
+        return fromVisibleSpecText((CharSequence) s).toString();
     }
 
     /**
      * @param s text to convert to from visible chars to normal
-     *
      * @return spec test special visible chars converted to normal
      */
     public static CharSequence fromVisibleSpecText(CharSequence s) {

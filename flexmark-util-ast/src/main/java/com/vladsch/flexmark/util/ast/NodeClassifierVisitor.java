@@ -8,16 +8,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracker {
-    private final OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
-    private final OrderedSet<Class<?>> exclusionSet;
-    private final HashMap<Integer, BitSet> nodeAncestryMap;
-    private final Stack<BitSet> nodeAncestryBitSetStack = new Stack<>();
-    private final CopyOnWriteRef<BitSet> nodeAncestryBitSet = new CopyOnWriteRef<>(new BitSet(), value -> value != null ? (BitSet) value.clone() : new BitSet());
+    final private OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
+    final private OrderedSet<Class<?>> exclusionSet;
+    final private HashMap<Integer, BitSet> nodeAncestryMap;
+    final private Stack<BitSet> nodeAncestryBitSetStack = new Stack<>();
+    final private CopyOnWriteRef<BitSet> nodeAncestryBitSet = new CopyOnWriteRef<>(new BitSet(), value -> value != null ? (BitSet) value.clone() : new BitSet());
 
-    private static final BitSet EMPTY_SET = new BitSet();
+    final private static BitSet EMPTY_SET = new BitSet();
     private boolean isClassificationDone = false;
 
-    private final ClassifyingNodeTracker classifyingNodeTracker;
+    final private ClassifyingNodeTracker classifyingNodeTracker;
 
     public NodeClassifierVisitor(Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
         classifyingNodeTracker = new ClassifyingNodeTracker(this, exclusionMap);
@@ -81,10 +81,10 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     }
 
     boolean updateNodeAncestry(Node node, CopyOnWriteRef<BitSet> nodeAncestryBitSet) {
-        Node parent = node.getParent();
         if (!exclusionMap.isEmpty() && !(node instanceof Document)) {
             // add flags if needed
             BitSet bitSet = nodeAncestryBitSet.getPeek();
+            assert bitSet != null;
 
             int index = classifyingNodeTracker.getItems().indexOf(node);
             if (index == -1) {
@@ -102,6 +102,8 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
                         assert i != -1;
                         if (!bitSet.get(i)) {
                             bitSet = nodeAncestryBitSet.getMutable();
+                            assert bitSet != null;
+
                             bitSet.set(i);
                         }
                     }
@@ -138,8 +140,6 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
             if (!(parent instanceof Document)) {
                 classifyingNodeTracker.nodeAdded(parent);
             }
-        } else {
-            // postProcessor modification update phase
         }
 
         if (parent.getFirstChild() != null) {

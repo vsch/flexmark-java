@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 public class AttributesInlineParserExtension implements InlineParserExtension {
-    private final AttributeParsing parsing;
+    final private AttributeParsing parsing;
 
     public AttributesInlineParserExtension(LightInlineParser inlineParser) {
         this.parsing = new AttributeParsing(inlineParser.getParsing());

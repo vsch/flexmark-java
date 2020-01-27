@@ -19,7 +19,6 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
      * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
      *
      * @param options options to use for the context (only options which do not affect the context construction will be used)
-     *
      * @return a new rendering context with a given appendable for its output
      */
     C getSubContext(DataHolder options);
@@ -30,7 +29,6 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
      *
      * @param options options to use for the context (only options which do not affect the context construction will be used)
      * @param builder sequence builder to user for appended text for tracking original base offsets
-     *
      * @return a new rendering context with a given appendable for its output
      */
     C getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder);
@@ -42,6 +40,7 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
 
     /**
      * Get options for the context
+     *
      * @return data holder
      */
     @Nullable DataHolder getOptions();

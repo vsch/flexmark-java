@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FencedCodeCustomRenderingSample {
-    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+    final private static DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
             TocExtension.create(),
             CustomExtension.create()
     ));
@@ -32,7 +32,7 @@ public class FencedCodeCustomRenderingSample {
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
 
     static class CustomNodeRenderer implements NodeRenderer {
-        private final boolean codeContentBlock;
+        final private boolean codeContentBlock;
 
         public CustomNodeRenderer(DataHolder options) {
             codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.get(options);

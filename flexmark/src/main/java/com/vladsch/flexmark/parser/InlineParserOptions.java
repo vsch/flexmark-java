@@ -3,18 +3,18 @@ package com.vladsch.flexmark.parser;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 public class InlineParserOptions {
-    public final boolean matchLookaheadFirst;
-    public final boolean parseMultiLineImageUrls;
-    public final boolean hardLineBreakLimit;
-    public final boolean spaceInLinkUrls;
-    public final boolean spaceInLinkElements;
-    public final boolean codeSoftLineBreaks;
-    public final boolean inlineDelimiterDirectionalPunctuations;
-    public final boolean linksAllowMatchedParentheses;
-    public final boolean wwwAutoLinkElement;
-    public final boolean intellijDummyIdentifier;
-    public final boolean parseJekyllMacrosInUrls;
-    public final boolean useHardcodedLinkAddressParser;
+    final public boolean matchLookaheadFirst;
+    final public boolean parseMultiLineImageUrls;
+    final public boolean hardLineBreakLimit;
+    final public boolean spaceInLinkUrls;
+    final public boolean spaceInLinkElements;
+    final public boolean codeSoftLineBreaks;
+    final public boolean inlineDelimiterDirectionalPunctuations;
+    final public boolean linksAllowMatchedParentheses;
+    final public boolean wwwAutoLinkElement;
+    final public boolean intellijDummyIdentifier;
+    final public boolean parseJekyllMacrosInUrls;
+    final public boolean useHardcodedLinkAddressParser;
 
     public InlineParserOptions(DataHolder options) {
         matchLookaheadFirst = Parser.MATCH_NESTED_LINK_REFS_FIRST.get(options);

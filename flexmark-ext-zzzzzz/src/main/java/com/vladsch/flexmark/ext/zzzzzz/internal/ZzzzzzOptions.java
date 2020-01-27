@@ -7,9 +7,9 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import org.jetbrains.annotations.NotNull;
 
 class ZzzzzzOptions implements MutableDataSetter {
-    public final boolean zzzzzzOption1;
-    public final String zzzzzzOption2;
-    public final int zzzzzzOption3;
+    final public boolean zzzzzzOption1;
+    final public String zzzzzzOption2;
+    final public int zzzzzzOption3;
 
     public ZzzzzzOptions(DataHolder options) {
         zzzzzzOption1 = ZzzzzzExtension.ZZZZZZ_OPTION1.get(options);

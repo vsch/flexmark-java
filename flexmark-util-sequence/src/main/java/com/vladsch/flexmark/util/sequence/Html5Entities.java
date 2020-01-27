@@ -14,9 +14,9 @@ import java.util.regex.Pattern;
 
 public class Html5Entities {
 
-    private static final Map<String, String> NAMED_CHARACTER_REFERENCES = readEntities();
-    private static final Pattern NUMERIC_PATTERN = Pattern.compile("^&#[Xx]?");
-    private static final String ENTITY_PATH = "/com/vladsch/flexmark/util/html/entities.properties";
+    final private static Map<String, String> NAMED_CHARACTER_REFERENCES = readEntities();
+    final private static Pattern NUMERIC_PATTERN = Pattern.compile("^&#[Xx]?");
+    final private static String ENTITY_PATH = "/com/vladsch/flexmark/util/html/entities.properties";
 
     public static String entityToString(String input) {
         Matcher matcher = NUMERIC_PATTERN.matcher(input);

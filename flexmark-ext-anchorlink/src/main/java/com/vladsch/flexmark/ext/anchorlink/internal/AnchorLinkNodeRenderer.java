@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AnchorLinkNodeRenderer implements NodeRenderer {
-    private final AnchorLinkOptions options;
+    final private AnchorLinkOptions options;
 
     public AnchorLinkNodeRenderer(DataHolder options) {
         this.options = new AnchorLinkOptions(options);

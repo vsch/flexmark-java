@@ -17,14 +17,13 @@ import org.jetbrains.annotations.NotNull;
  * The parsed definition text is turned into {@link DefinitionList}, {@link DefinitionTerm} and {@link DefinitionItem} nodes.
  */
 public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
-    public static final DataKey<Boolean> COLON_MARKER = new DataKey<>("COLON_MARKER", true);
-    public static final DataKey<Integer> MARKER_SPACES = new DataKey<>("MARKER_SPACE", 1);
-    public static final DataKey<Boolean> TILDE_MARKER = new DataKey<>("TILDE_MARKER", true);
-    public static final DataKey<Boolean> DOUBLE_BLANK_LINE_BREAKS_LIST = new DataKey<>("DOUBLE_BLANK_LINE_BREAKS_LIST", false);
+    final public static DataKey<Boolean> COLON_MARKER = new DataKey<>("COLON_MARKER", true);
+    final public static DataKey<Integer> MARKER_SPACES = new DataKey<>("MARKER_SPACE", 1);
+    final public static DataKey<Boolean> TILDE_MARKER = new DataKey<>("TILDE_MARKER", true);
+    final public static DataKey<Boolean> DOUBLE_BLANK_LINE_BREAKS_LIST = new DataKey<>("DOUBLE_BLANK_LINE_BREAKS_LIST", false);
 
-    // TODO: implement formatter for this extension
-    public static final DataKey<Integer> FORMAT_MARKER_SPACES = new DataKey<>("MARKER_SPACE", 3);
-    public static final DataKey<DefinitionMarker> FORMAT_MARKER_TYPE = new DataKey<>("FORMAT_MARKER_TYPE", DefinitionMarker.ANY);
+    final public static DataKey<Integer> FORMAT_MARKER_SPACES = new DataKey<>("MARKER_SPACE", 3);
+    final public static DataKey<DefinitionMarker> FORMAT_MARKER_TYPE = new DataKey<>("FORMAT_MARKER_TYPE", DefinitionMarker.ANY);
 
     private DefinitionExtension() {
     }

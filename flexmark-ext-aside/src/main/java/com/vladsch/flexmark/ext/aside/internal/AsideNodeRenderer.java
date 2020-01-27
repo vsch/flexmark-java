@@ -13,10 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AsideNodeRenderer implements NodeRenderer {
-    private final AsideOptions options;
-
     public AsideNodeRenderer(DataHolder options) {
-        this.options = new AsideOptions(options);
+
     }
 
     @Override

@@ -14,9 +14,9 @@ import java.util.List;
 
 final public class ComboCoreSpecTest extends CoreRendererSpecTest {
     static final String SPEC_RESOURCE = "/ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 0)
             .set(Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS, false)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)

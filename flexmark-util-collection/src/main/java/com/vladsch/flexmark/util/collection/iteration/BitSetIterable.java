@@ -5,8 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.BitSet;
 
 public class BitSetIterable implements ReversibleIterable<Integer> {
-    private final @NotNull BitSet bitSet;
-    private final boolean reversed;
+    final private @NotNull BitSet bitSet;
+    final private boolean reversed;
 
     public BitSetIterable(@NotNull BitSet bitSet) {
         this(bitSet, false);

@@ -1,9 +1,14 @@
 package com.vladsch.flexmark.util.dependency;
 
 import java.util.List;
+import java.util.function.Function;
 
+/**
+ * @deprecated use {@link DependencyResolver#resolveDependencies(List, Function, Function)}
+ */
+@Deprecated
 public class ResolvedDependencies<T> {
-    private final List<T> dependentStages;
+    final private List<T> dependentStages;
 
     public ResolvedDependencies(List<T> dependentStages) {
         this.dependentStages = dependentStages;

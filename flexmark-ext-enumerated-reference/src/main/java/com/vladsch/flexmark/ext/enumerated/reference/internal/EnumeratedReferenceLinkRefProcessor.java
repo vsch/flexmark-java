@@ -13,7 +13,7 @@ public class EnumeratedReferenceLinkRefProcessor implements LinkRefProcessor {
     static final boolean WANT_EXCLAMATION_PREFIX = false;
     static final int BRACKET_NESTING_LEVEL = 0;
 
-    private final EnumeratedReferenceRepository enumeratedReferenceRepository;
+    final private EnumeratedReferenceRepository enumeratedReferenceRepository;
 
     public EnumeratedReferenceLinkRefProcessor(Document document) {
         this.enumeratedReferenceRepository = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.get(document);

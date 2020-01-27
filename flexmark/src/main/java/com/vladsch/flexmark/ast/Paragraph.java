@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class Paragraph extends Block implements TextContainer {
-    private static final int[] EMPTY_INDENTS = new int[0];
+    final private static int[] EMPTY_INDENTS = new int[0];
     private int[] lineIndents = EMPTY_INDENTS;
     private boolean trailingBlankLine = false;
     private boolean hasTableSeparator;

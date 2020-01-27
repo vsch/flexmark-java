@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class WikiLinkNodeRenderer implements NodeRenderer {
-    private final WikiLinkOptions options;
+    final private WikiLinkOptions options;
 
     public WikiLinkNodeRenderer(DataHolder options) {
         this.options = new WikiLinkOptions(options);

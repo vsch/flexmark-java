@@ -107,7 +107,7 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
                             if (!trackedOffsets.isEmpty()) {
                                 TestUtils.appendBanner(out, TestUtils.bannerText("Tracked Offsets"), false);
                                 int i1 = 0;
-                                for (TrackedOffset trackedOffset1 : trackedOffsets){
+                                for (TrackedOffset trackedOffset1 : trackedOffsets) {
                                     out.append("[").append(i1).append("]: ").append(trackedOffset1.toString()).append("\n");
                                     i1++;
                                 }

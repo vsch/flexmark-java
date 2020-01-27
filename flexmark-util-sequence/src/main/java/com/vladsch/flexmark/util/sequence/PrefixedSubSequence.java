@@ -11,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
  * <p>
  * a subSequence() returns a sub-sequence from the original base sequence, possibly with a prefix if it falls in range
  */
-public final class PrefixedSubSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
-    private final CharSequence prefix;
-    private final BasedSequence base;
+final public class PrefixedSubSequence extends BasedSequenceImpl implements ReplacedBasedSequence {
+    final private CharSequence prefix;
+    final private BasedSequence base;
 
     private PrefixedSubSequence(CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
         super(0);

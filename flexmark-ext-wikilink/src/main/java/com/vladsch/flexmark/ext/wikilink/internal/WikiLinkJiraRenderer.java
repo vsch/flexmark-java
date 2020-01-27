@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class WikiLinkJiraRenderer implements NodeRenderer {
-    private final WikiLinkOptions options;
+    final private WikiLinkOptions options;
 
     public WikiLinkJiraRenderer(DataHolder options) {
         this.options = new WikiLinkOptions(options);

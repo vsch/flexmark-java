@@ -4,9 +4,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
-    private final @NotNull String name;
-    private final @NotNull DataValueFactory<T> factory;
-    private final T defaultValue;
+    final private @NotNull String name;
+    final private @NotNull DataValueFactory<T> factory;
+    final private T defaultValue;
 
     /**
      * Creates a NullableDataKey with a computed default value and a provided default value when data holder is null.

@@ -23,24 +23,23 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     /**
      * A {@link DataKey} that is used to set the behavior of the abbreviations repository when duplicates are defined. {@link KeepType}
      */
-    public static final DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<>("ABBREVIATIONS_KEEP", KeepType.FIRST);
+    final public static DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<>("ABBREVIATIONS_KEEP", KeepType.FIRST);
 
     /**
      * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
      */
-    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", new AbbreviationRepository(null), AbbreviationRepository::new);
+    final public static DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", new AbbreviationRepository(null), AbbreviationRepository::new);
 
     /**
      * A {@link DataKey} that is used to set the use links option when true, default is false and abbr tag will be used in the rendered HTML.
      */
-    public static final DataKey<Boolean> USE_LINKS = new DataKey<>("USE_LINKS", false);
+    final public static DataKey<Boolean> USE_LINKS = new DataKey<>("USE_LINKS", false);
 
     // format options
-    public static final DataKey<ElementPlacement> ABBREVIATIONS_PLACEMENT = new DataKey<>("ABBREVIATIONS_PLACEMENT", ElementPlacement.AS_IS);
-    public static final DataKey<ElementPlacementSort> ABBREVIATIONS_SORT = new DataKey<>("ABBREVIATIONS_SORT", ElementPlacementSort.AS_IS);
+    final public static DataKey<ElementPlacement> ABBREVIATIONS_PLACEMENT = new DataKey<>("ABBREVIATIONS_PLACEMENT", ElementPlacement.AS_IS);
+    final public static DataKey<ElementPlacementSort> ABBREVIATIONS_SORT = new DataKey<>("ABBREVIATIONS_SORT", ElementPlacementSort.AS_IS);
 
-    public static final DataKey<Boolean> RECOMPUTE_ABBREVIATIONS_MAP = new DataKey<>("RECOMPUTE_ABBREVIATIONS_MAP", false);
-    public static final DataKey<Boolean> MAKE_MERGED_ABBREVIATIONS_UNIQUE = new DataKey<>("MERGE_MAKE_ABBREVIATIONS_UNIQUE", false);
+    final public static DataKey<Boolean> MAKE_MERGED_ABBREVIATIONS_UNIQUE = new DataKey<>("MERGE_MAKE_ABBREVIATIONS_UNIQUE", false);
 
     public static AbbreviationExtension create() {
         return new AbbreviationExtension();

@@ -16,14 +16,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboGitLabSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_gitlab_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_gitlab_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
             .set(Parser.EXTENSIONS, Collections.singletonList(GitLabExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("no-del", new MutableDataSet().set(GitLabExtension.DEL_PARSER, false));
         optionsMap.put("no-ins", new MutableDataSet().set(GitLabExtension.INS_PARSER, false));

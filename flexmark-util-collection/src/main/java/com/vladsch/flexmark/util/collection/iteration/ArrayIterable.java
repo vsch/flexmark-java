@@ -22,9 +22,9 @@ public class ArrayIterable<T> implements ReversibleIterable<T> {
         return new ArrayIterable<>(items);
     }
 
-    private final T[] array;
-    private final int startIndex;
-    private final int endIndex;
+    final private T[] array;
+    final private int startIndex;
+    final private int endIndex;
     final private boolean isReversed;
 
     public ArrayIterable(T[] array) {
@@ -69,7 +69,7 @@ public class ArrayIterable<T> implements ReversibleIterable<T> {
 
     private static class MyIterator<E> implements ReversibleIterator<E> {
         final private E[] array;
-        private final int startIndex;
+        final private int startIndex;
         final private int endIndex;
         final private boolean isReversed;
         private int index;

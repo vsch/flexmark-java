@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
  * A CharSequence that maps characters according to CharMapper
  */
 public class MappedRichSequence extends IRichSequenceBase<RichSequence> implements RichSequence, MappedSequence<RichSequence> {
-    private final CharMapper mapper;
-    private final RichSequence base;
+    final private CharMapper mapper;
+    final private RichSequence base;
 
     private MappedRichSequence(CharMapper mapper, RichSequence baseSeq) {
         super(0);

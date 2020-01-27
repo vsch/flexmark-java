@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextNodeConverter {
-    private final BasedSequence nodeChars;
+    final private BasedSequence nodeChars;
     private BasedSequence remainingChars;
-    private ArrayList<Node> list = new ArrayList<>();
+    final private ArrayList<Node> list = new ArrayList<>();
 
     public TextNodeConverter(BasedSequence nodeChars) {
         this.nodeChars = nodeChars;

@@ -41,7 +41,6 @@ public interface TextContainer {
      *
      * @param out   sequence build to which to append text
      * @param flags collection flags
-     *
      * @return true if child nodes should be visited
      */
     boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags);

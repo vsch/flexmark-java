@@ -10,9 +10,9 @@ import org.junit.runners.Parameterized;
 import java.util.List;
 
 public class ComboFlexmarkHtmlAttributesConverterTest extends HtmlConverterTest {
-    private static final String SPEC_RESOURCE = "/flexmark_html_attributes_converter_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/flexmark_html_attributes_converter_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(FlexmarkHtmlConverter.OUTPUT_ATTRIBUTES_ID, true)
             .toImmutable();
 

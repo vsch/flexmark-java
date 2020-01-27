@@ -26,7 +26,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TitleExtract {
-    private static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+    final private static DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL & ~(Extensions.HARDWRAPS)
             , HeadingExtension.create()).toMutable()
             .set(HtmlRenderer.INDENT_SIZE, 2);

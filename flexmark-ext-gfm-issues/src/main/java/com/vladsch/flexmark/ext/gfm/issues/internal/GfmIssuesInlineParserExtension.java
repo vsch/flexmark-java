@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class GfmIssuesInlineParserExtension implements InlineParserExtension {
-    public static final Pattern GITHUB_ISSUE = Pattern.compile("^(#)(\\d+)\\b");
+    final public static Pattern GITHUB_ISSUE = Pattern.compile("^(#)(\\d+)\\b");
 
     public GfmIssuesInlineParserExtension(LightInlineParser inlineParser) {
 
@@ -33,7 +33,6 @@ public class GfmIssuesInlineParserExtension implements InlineParserExtension {
     public boolean parse(@NotNull LightInlineParser inlineParser) {
         BasedSequence[] matches = inlineParser.matchWithGroups(GITHUB_ISSUE);
         if (matches != null) {
-            BasedSequence input = inlineParser.getInput();
             inlineParser.flushTextNode();
 
             BasedSequence openMarker = matches[1];

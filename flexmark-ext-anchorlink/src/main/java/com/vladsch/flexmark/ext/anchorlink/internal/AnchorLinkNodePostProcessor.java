@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE;
 
 public class AnchorLinkNodePostProcessor extends NodePostProcessor {
-    private final AnchorLinkOptions options;
+    final private AnchorLinkOptions options;
 
     public AnchorLinkNodePostProcessor(DataHolder options) {
         this.options = new AnchorLinkOptions(options);
@@ -23,9 +23,6 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
     @Override
     public void process(@NotNull NodeTracker state, @NotNull Node node) {
         if (node instanceof Heading) {
-            //if (node.isOrDescendantOfType(BlockQuote.class)) {
-            //    int tmp = 0;
-            //}
             Heading heading = (Heading) node;
             if (heading.getText().isNotNull()) {
                 Node anchor = new AnchorLink();

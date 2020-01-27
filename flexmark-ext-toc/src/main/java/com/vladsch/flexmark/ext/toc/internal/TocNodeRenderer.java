@@ -22,8 +22,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TocNodeRenderer implements NodeRenderer {
-    private final TocOptions options;
-    private final boolean haveTitle;
+    final private TocOptions options;
+    final private boolean haveTitle;
 
     public TocNodeRenderer(DataHolder options) {
         this.haveTitle = options != null && options.contains(TocExtension.TITLE);

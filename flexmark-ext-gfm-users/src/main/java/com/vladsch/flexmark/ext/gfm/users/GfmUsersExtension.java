@@ -19,11 +19,11 @@ import org.jetbrains.annotations.NotNull;
 public class GfmUsersExtension implements Parser.ParserExtension
         , HtmlRenderer.HtmlRendererExtension
 {
-    public static final DataKey<String> GIT_HUB_USERS_URL_ROOT = new DataKey<>("GIT_HUB_USERS_URL_ROOT", "https://github.com");
-    public static final DataKey<String> GIT_HUB_USER_URL_PREFIX = new DataKey<>("GIT_HUB_USER_URL_PREFIX", "/");
-    public static final DataKey<String> GIT_HUB_USER_URL_SUFFIX = new DataKey<>("GIT_HUB_USER_URL_SUFFIX", "");
-    public static final DataKey<String> GIT_HUB_USER_HTML_PREFIX = new DataKey<>("GIT_HUB_USER_HTML_PREFIX", "<strong>");
-    public static final DataKey<String> GIT_HUB_USER_HTML_SUFFIX = new DataKey<>("GIT_HUB_USER_HTML_SUFFIX", "</strong>");
+    final public static DataKey<String> GIT_HUB_USERS_URL_ROOT = new DataKey<>("GIT_HUB_USERS_URL_ROOT", "https://github.com");
+    final public static DataKey<String> GIT_HUB_USER_URL_PREFIX = new DataKey<>("GIT_HUB_USER_URL_PREFIX", "/");
+    final public static DataKey<String> GIT_HUB_USER_URL_SUFFIX = new DataKey<>("GIT_HUB_USER_URL_SUFFIX", "");
+    final public static DataKey<String> GIT_HUB_USER_HTML_PREFIX = new DataKey<>("GIT_HUB_USER_HTML_PREFIX", "<strong>");
+    final public static DataKey<String> GIT_HUB_USER_HTML_SUFFIX = new DataKey<>("GIT_HUB_USER_HTML_SUFFIX", "</strong>");
 
     private GfmUsersExtension() {
     }

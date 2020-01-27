@@ -25,7 +25,8 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
     public void process(@NotNull NodeTracker state, @NotNull Node node) {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
-        BasedSequence literal = Escaping.unescape(original, textMapper);
+        // NOTE: needed for its side-effects
+        Escaping.unescape(original, textMapper);
 
         int lastEscaped = 0;
         boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
@@ -48,9 +49,6 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
                 }
 
                 if (startOffset != lastEscaped) {
-                    //if (startOffset > original.length() || lastEscaped > original.length()) {
-                    //    int tmp = 0;
-                    //}
                     BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
                     Node node1 = new Text(escapedChars);
                     textBase.appendChild(node1);
@@ -61,9 +59,6 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
                 BasedSequence text = origToDecorateText.subSequence(1);
                 EscapedCharacter decorationNode = new EscapedCharacter(origToDecorateText.subSequence(0, 1), text);
                 textBase.appendChild(decorationNode);
-                //Text undecoratedTextNode = new Text(origToDecorateText);
-                //decorationNode.appendChild(undecoratedTextNode);
-                //state.nodeAddedWithChildren(decorationNode);
                 state.nodeAdded(decorationNode);
 
                 lastEscaped = endOffset;

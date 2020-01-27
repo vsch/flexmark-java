@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.ast.NodeVisitorBase;
 import org.jetbrains.annotations.NotNull;
 
 public class AstCollectingVisitor extends NodeVisitorBase {
-    public static final String EOL = "\n";
+    final public static String EOL = "\n";
     protected StringBuilder output = new StringBuilder();
     protected int indent = 0;
     protected boolean eolPending = false;

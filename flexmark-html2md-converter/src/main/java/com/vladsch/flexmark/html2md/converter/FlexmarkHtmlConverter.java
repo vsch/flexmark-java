@@ -12,9 +12,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.ScopedDataSet;
-import com.vladsch.flexmark.util.dependency.DependencyHandler;
-import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
-import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.format.RomanNumeral;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
@@ -56,34 +54,34 @@ public class FlexmarkHtmlConverter {
     /**
      * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
      */
-    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", F_TRIM_TRAILING_WHITESPACE | F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE | F_TRIM_LEADING_EOL | F_PREFIX_PRE_FORMATTED);
-    public static final DataKey<Integer> MAX_BLANK_LINES = new DataKey<>("MAX_BLANK_LINES", 2);
-    public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
+    final public static DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", F_TRIM_TRAILING_WHITESPACE | F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE | F_TRIM_LEADING_EOL | F_PREFIX_PRE_FORMATTED);
+    final public static DataKey<Integer> MAX_BLANK_LINES = new DataKey<>("MAX_BLANK_LINES", 2);
+    final public static DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
 
-    public static final DataKey<Boolean> LIST_CONTENT_INDENT = new DataKey<>("LIST_CONTENT_INDENT", true);
-    public static final DataKey<Boolean> SETEXT_HEADINGS = new DataKey<>("SETEXT_HEADINGS", true);
-    public static final DataKey<Boolean> OUTPUT_UNKNOWN_TAGS = new DataKey<>("OUTPUT_UNKNOWN_TAGS", false);
-    public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = new DataKey<>("TYPOGRAPHIC_QUOTES", true);
-    public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<>("TYPOGRAPHIC_SMARTS", true);
-    public static final DataKey<Boolean> EXTRACT_AUTO_LINKS = new DataKey<>("EXTRACT_AUTO_LINKS", true);
-    public static final DataKey<Boolean> OUTPUT_ATTRIBUTES_ID = new DataKey<>("OUTPUT_ATTRIBUTES_ID", true);
-    public static final DataKey<String> OUTPUT_ATTRIBUTES_NAMES_REGEX = new DataKey<>("OUTPUT_ATTRIBUTES_NAMES_REGEX", "");
-    public static final DataKey<Boolean> WRAP_AUTO_LINKS = new DataKey<>("WRAP_AUTO_LINKS", true);
-    public static final DataKey<Boolean> RENDER_COMMENTS = new DataKey<>("RENDER_COMMENTS", false);
-    public static final DataKey<Boolean> DOT_ONLY_NUMERIC_LISTS = new DataKey<>("DOT_ONLY_NUMERIC_LISTS", true);
-    public static final DataKey<Boolean> COMMENT_ORIGINAL_NON_NUMERIC_LIST_ITEM = new DataKey<>("COMMENT_ORIGINAL_NON_NUMERIC_LIST_ITEM", false);
-    public static final DataKey<Boolean> PRE_CODE_PRESERVE_EMPHASIS = new DataKey<>("PRE_CODE_PRESERVE_EMPHASIS", false);
-    public static final DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<>("ORDERED_LIST_DELIMITER", '.');
-    public static final DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<>("UNORDERED_LIST_DELIMITER", '*');
-    public static final DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<>("DEFINITION_MARKER_SPACES", 3);
-    public static final DataKey<Integer> MIN_SETEXT_HEADING_MARKER_LENGTH = new DataKey<>("MIN_SETEXT_HEADING_MARKER_LENGTH", 3);
-    public static final DataKey<String> CODE_INDENT = new DataKey<>("CODE_INDENT", "    ");
-    public static final DataKey<String> NBSP_TEXT = new DataKey<>("NBSP_TEXT", " ");
-    public static final DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<>("EOL_IN_TITLE_ATTRIBUTE", " ");
-    public static final DataKey<String> THEMATIC_BREAK = new DataKey<>("THEMATIC_BREAK", "*** ** * ** ***");
+    final public static DataKey<Boolean> LIST_CONTENT_INDENT = new DataKey<>("LIST_CONTENT_INDENT", true);
+    final public static DataKey<Boolean> SETEXT_HEADINGS = new DataKey<>("SETEXT_HEADINGS", true);
+    final public static DataKey<Boolean> OUTPUT_UNKNOWN_TAGS = new DataKey<>("OUTPUT_UNKNOWN_TAGS", false);
+    final public static DataKey<Boolean> TYPOGRAPHIC_QUOTES = new DataKey<>("TYPOGRAPHIC_QUOTES", true);
+    final public static DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<>("TYPOGRAPHIC_SMARTS", true);
+    final public static DataKey<Boolean> EXTRACT_AUTO_LINKS = new DataKey<>("EXTRACT_AUTO_LINKS", true);
+    final public static DataKey<Boolean> OUTPUT_ATTRIBUTES_ID = new DataKey<>("OUTPUT_ATTRIBUTES_ID", true);
+    final public static DataKey<String> OUTPUT_ATTRIBUTES_NAMES_REGEX = new DataKey<>("OUTPUT_ATTRIBUTES_NAMES_REGEX", "");
+    final public static DataKey<Boolean> WRAP_AUTO_LINKS = new DataKey<>("WRAP_AUTO_LINKS", true);
+    final public static DataKey<Boolean> RENDER_COMMENTS = new DataKey<>("RENDER_COMMENTS", false);
+    final public static DataKey<Boolean> DOT_ONLY_NUMERIC_LISTS = new DataKey<>("DOT_ONLY_NUMERIC_LISTS", true);
+    final public static DataKey<Boolean> COMMENT_ORIGINAL_NON_NUMERIC_LIST_ITEM = new DataKey<>("COMMENT_ORIGINAL_NON_NUMERIC_LIST_ITEM", false);
+    final public static DataKey<Boolean> PRE_CODE_PRESERVE_EMPHASIS = new DataKey<>("PRE_CODE_PRESERVE_EMPHASIS", false);
+    final public static DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<>("ORDERED_LIST_DELIMITER", '.');
+    final public static DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<>("UNORDERED_LIST_DELIMITER", '*');
+    final public static DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<>("DEFINITION_MARKER_SPACES", 3);
+    final public static DataKey<Integer> MIN_SETEXT_HEADING_MARKER_LENGTH = new DataKey<>("MIN_SETEXT_HEADING_MARKER_LENGTH", 3);
+    final public static DataKey<String> CODE_INDENT = new DataKey<>("CODE_INDENT", "    ");
+    final public static DataKey<String> NBSP_TEXT = new DataKey<>("NBSP_TEXT", " ");
+    final public static DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<>("EOL_IN_TITLE_ATTRIBUTE", " ");
+    final public static DataKey<String> THEMATIC_BREAK = new DataKey<>("THEMATIC_BREAK", "*** ** * ** ***");
 
     // Render HTML contents - UNWRAPPED
-    public static final DataKey<String[]> UNWRAPPED_TAGS = new DataKey<>("UNWRAPPED_TAGS", new String[] {
+    final public static DataKey<String[]> UNWRAPPED_TAGS = new DataKey<>("UNWRAPPED_TAGS", new String[] {
             "article",
             "address",
             "frameset",
@@ -93,57 +91,58 @@ public class FlexmarkHtmlConverter {
     });
 
     // Render HTML contents - WRAPPED in original HTML tag
-    public static final DataKey<String[]> WRAPPED_TAGS = new DataKey<>("WRAPPED_TAGS", new String[] {
+    final public static DataKey<String[]> WRAPPED_TAGS = new DataKey<>("WRAPPED_TAGS", new String[] {
             "kbd",
             "var",
     });
 
     // regex to use for processing id attributes, if matched then will concatenate all groups which are not empty, if result string is empty after trimming then no id will be generated
     // if value empty then no processing is done
-    public static final DataKey<String> OUTPUT_ID_ATTRIBUTE_REGEX = new DataKey<>("OUTPUT_ID_ATTRIBUTE_REGEX", "^user-content-(.*)$");
+    final public static DataKey<String> OUTPUT_ID_ATTRIBUTE_REGEX = new DataKey<>("OUTPUT_ID_ATTRIBUTE_REGEX", "^user-content-(.*)$");
 
-    public static final DataKey<Integer> TABLE_MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH;
-    public static final DataKey<Integer> TABLE_MIN_SEPARATOR_DASHES = TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_DASHES;
-    public static final DataKey<Boolean> TABLE_LEAD_TRAIL_PIPES = TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES;
-    public static final DataKey<Boolean> TABLE_SPACE_AROUND_PIPES = TableFormatOptions.FORMAT_TABLE_SPACE_AROUND_PIPES;
-    public static final DataKey<TableCaptionHandling> TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
-    public static final DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<>("LISTS_END_ON_DOUBLE_BLANK", false);
-    public static final DataKey<Boolean> DIV_AS_PARAGRAPH = new DataKey<>("DIV_AS_PARAGRAPH", false);
-    public static final DataKey<Boolean> BR_AS_PARA_BREAKS = new DataKey<>("BR_AS_PARA_BREAKS", true);
-    public static final DataKey<Boolean> BR_AS_EXTRA_BLANK_LINES = new DataKey<>("BR_AS_EXTRA_BLANK_LINES", true);
+    @Deprecated final public static DataKey<Integer> TABLE_MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH;
+    @Deprecated final public static DataKey<Integer> TABLE_MIN_SEPARATOR_DASHES = TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_DASHES;
+    @Deprecated final public static DataKey<Boolean> TABLE_LEAD_TRAIL_PIPES = TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES;
+    @Deprecated final public static DataKey<Boolean> TABLE_SPACE_AROUND_PIPES = TableFormatOptions.FORMAT_TABLE_SPACE_AROUND_PIPES;
+    @Deprecated final public static DataKey<TableCaptionHandling> TABLE_CAPTION = TableFormatOptions.FORMAT_TABLE_CAPTION;
 
-    public static final DataKey<Boolean> ADD_TRAILING_EOL = new DataKey<>("ADD_TRAILING_EOL", true);
+    final public static DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<>("LISTS_END_ON_DOUBLE_BLANK", false);
+    final public static DataKey<Boolean> DIV_AS_PARAGRAPH = new DataKey<>("DIV_AS_PARAGRAPH", false);
+    final public static DataKey<Boolean> BR_AS_PARA_BREAKS = new DataKey<>("BR_AS_PARA_BREAKS", true);
+    final public static DataKey<Boolean> BR_AS_EXTRA_BLANK_LINES = new DataKey<>("BR_AS_EXTRA_BLANK_LINES", true);
 
-    public static final DataKey<Boolean> SKIP_HEADING_1 = new DataKey<>("SKIP_HEADING_1", false);
-    public static final DataKey<Boolean> SKIP_HEADING_2 = new DataKey<>("SKIP_HEADING_2", false);
-    public static final DataKey<Boolean> SKIP_HEADING_3 = new DataKey<>("SKIP_HEADING_3", false);
-    public static final DataKey<Boolean> SKIP_HEADING_4 = new DataKey<>("SKIP_HEADING_4", false);
-    public static final DataKey<Boolean> SKIP_HEADING_5 = new DataKey<>("SKIP_HEADING_5", false);
-    public static final DataKey<Boolean> SKIP_HEADING_6 = new DataKey<>("SKIP_HEADING_6", false);
-    public static final DataKey<Boolean> SKIP_ATTRIBUTES = new DataKey<>("SKIP_ATTRIBUTES", false);
-    public static final DataKey<Boolean> SKIP_FENCED_CODE = new DataKey<>("SKIP_FENCED_CODE", false);
-    public static final DataKey<Boolean> SKIP_CHAR_ESCAPE = new DataKey<>("SKIP_CHAR_ESCAPE", false);
+    final public static DataKey<Boolean> ADD_TRAILING_EOL = new DataKey<>("ADD_TRAILING_EOL", true);
 
-    public static final DataKey<ExtensionConversion> EXT_INLINE_STRONG = new DataKey<>("EXT_INLINE_STRONG", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_INLINE_EMPHASIS = new DataKey<>("EXT_INLINE_EMPHASIS", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_INLINE_CODE = new DataKey<>("EXT_INLINE_CODE", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_INLINE_DEL = new DataKey<>("EXT_INLINE_DEL", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_INLINE_INS = new DataKey<>("EXT_INLINE_INS", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_INLINE_SUB = new DataKey<>("EXT_INLINE_SUB", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_INLINE_SUP = new DataKey<>("EXT_INLINE_SUP", ExtensionConversion.MARKDOWN);
-    public static final DataKey<ExtensionConversion> EXT_MATH = new DataKey<>("EXT_MATH", ExtensionConversion.HTML);
+    final public static DataKey<Boolean> SKIP_HEADING_1 = new DataKey<>("SKIP_HEADING_1", false);
+    final public static DataKey<Boolean> SKIP_HEADING_2 = new DataKey<>("SKIP_HEADING_2", false);
+    final public static DataKey<Boolean> SKIP_HEADING_3 = new DataKey<>("SKIP_HEADING_3", false);
+    final public static DataKey<Boolean> SKIP_HEADING_4 = new DataKey<>("SKIP_HEADING_4", false);
+    final public static DataKey<Boolean> SKIP_HEADING_5 = new DataKey<>("SKIP_HEADING_5", false);
+    final public static DataKey<Boolean> SKIP_HEADING_6 = new DataKey<>("SKIP_HEADING_6", false);
+    final public static DataKey<Boolean> SKIP_ATTRIBUTES = new DataKey<>("SKIP_ATTRIBUTES", false);
+    final public static DataKey<Boolean> SKIP_FENCED_CODE = new DataKey<>("SKIP_FENCED_CODE", false);
+    final public static DataKey<Boolean> SKIP_CHAR_ESCAPE = new DataKey<>("SKIP_CHAR_ESCAPE", false);
 
-    public static final DataKey<ExtensionConversion> EXT_TABLES = new DataKey<>("EXT_TABLES", ExtensionConversion.MARKDOWN);
+    final public static DataKey<ExtensionConversion> EXT_INLINE_STRONG = new DataKey<>("EXT_INLINE_STRONG", ExtensionConversion.MARKDOWN);
+    final public static DataKey<ExtensionConversion> EXT_INLINE_EMPHASIS = new DataKey<>("EXT_INLINE_EMPHASIS", ExtensionConversion.MARKDOWN);
+    final public static DataKey<ExtensionConversion> EXT_INLINE_CODE = new DataKey<>("EXT_INLINE_CODE", ExtensionConversion.MARKDOWN);
+    final public static DataKey<ExtensionConversion> EXT_INLINE_DEL = new DataKey<>("EXT_INLINE_DEL", ExtensionConversion.MARKDOWN);
+    final public static DataKey<ExtensionConversion> EXT_INLINE_INS = new DataKey<>("EXT_INLINE_INS", ExtensionConversion.MARKDOWN);
+    final public static DataKey<ExtensionConversion> EXT_INLINE_SUB = new DataKey<>("EXT_INLINE_SUB", ExtensionConversion.MARKDOWN);
+    final public static DataKey<ExtensionConversion> EXT_INLINE_SUP = new DataKey<>("EXT_INLINE_SUP", ExtensionConversion.MARKDOWN);
+    final public static DataKey<ExtensionConversion> EXT_MATH = new DataKey<>("EXT_MATH", ExtensionConversion.HTML);
 
-    public static final DataKey<LinkConversion> EXT_INLINE_LINK = new DataKey<>("EXT_INLINE_LINK", LinkConversion.MARKDOWN_EXPLICIT);
-    public static final DataKey<LinkConversion> EXT_INLINE_IMAGE = new DataKey<>("EXT_INLINE_IMAGE", LinkConversion.MARKDOWN_EXPLICIT);
-    public static final DataKey<Ref<com.vladsch.flexmark.util.ast.Document>> FOR_DOCUMENT = new DataKey<>("FOR_DOCUMENT", new Ref<>(null));
-    public static final DataKey<Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<>());
+    final public static DataKey<ExtensionConversion> EXT_TABLES = new DataKey<>("EXT_TABLES", ExtensionConversion.MARKDOWN);
+
+    final public static DataKey<LinkConversion> EXT_INLINE_LINK = new DataKey<>("EXT_INLINE_LINK", LinkConversion.MARKDOWN_EXPLICIT);
+    final public static DataKey<LinkConversion> EXT_INLINE_IMAGE = new DataKey<>("EXT_INLINE_IMAGE", LinkConversion.MARKDOWN_EXPLICIT);
+    final public static DataKey<Ref<com.vladsch.flexmark.util.ast.Document>> FOR_DOCUMENT = new DataKey<>("FOR_DOCUMENT", new Ref<>(null));
+    final public static DataKey<Map<String, String>> TYPOGRAPHIC_REPLACEMENT_MAP = new DataKey<>("TYPOGRAPHIC_REPLACEMENT_MAP", new HashMap<>());
 
     /**
      * if true then will dump HTML tree of body element to console when using {@link #convert(String, Appendable)}(String)
      */
-    public static final DataKey<Boolean> DUMP_HTML_TREE = new DataKey<>("DUMP_HTML_TREE", false);
+    final public static DataKey<Boolean> DUMP_HTML_TREE = new DataKey<>("DUMP_HTML_TREE", false);
 
     /**
      * If true then will ignore rows with th columns after rows with td columns have been
@@ -151,62 +150,62 @@ public class FlexmarkHtmlConverter {
      * <p>
      * If false then will convert these to regular columns.
      */
-    public static final DataKey<Boolean> IGNORE_TABLE_HEADING_AFTER_ROWS = new DataKey<>("IGNORE_TABLE_HEADING_AFTER_ROWS", true);
+    final public static DataKey<Boolean> IGNORE_TABLE_HEADING_AFTER_ROWS = new DataKey<>("IGNORE_TABLE_HEADING_AFTER_ROWS", true);
 
     // HTML node names (all lowercase)
-    public static final String A_NODE = "a";
-    public static final String ABBR_NODE = "abbr";
-    public static final String ASIDE_NODE = "aside";
-    public static final String BR_NODE = "br";
-    public static final String BLOCKQUOTE_NODE = "blockquote";
-    public static final String CODE_NODE = "code";
-    public static final String IMG_NODE = "img";
-    public static final String DEL_NODE = "del";
-    public static final String STRIKE_NODE = "strike";
-    public static final String DIV_NODE = "div";
-    public static final String DD_NODE = "dd";
-    public static final String DL_NODE = "dl";
-    public static final String DT_NODE = "dt";
-    public static final String I_NODE = "i";
-    public static final String EM_NODE = "em";
-    public static final String B_NODE = "b";
-    public static final String STRONG_NODE = "strong";
-    public static final String EMOJI_NODE = "g-emoji";
-    public static final String INPUT_NODE = "input";
-    public static final String INS_NODE = "ins";
-    public static final String U_NODE = "u";
-    public static final String SUB_NODE = "sub";
-    public static final String SUP_NODE = "sup";
-    public static final String HR_NODE = "hr";
-    public static final String OL_NODE = "ol";
-    public static final String UL_NODE = "ul";
-    public static final String LI_NODE = "li";
-    public static final String TABLE_NODE = "table";
-    public static final String TBODY_NODE = "tbody";
-    public static final String TD_NODE = "td";
-    public static final String TH_NODE = "th";
-    public static final String THEAD_NODE = "thead";
-    public static final String TR_NODE = "tr";
-    public static final String CAPTION_NODE = "caption";
-    public static final String SVG_NODE = "svg";
-    public static final String P_NODE = "p";
-    public static final String PRE_NODE = "pre";
-    public static final String MATH_NODE = "math";
-    public static final String SPAN_NODE = "span";
-    public static final String TEXT_NODE = "#text";
-    public static final String COMMENT_NODE = "#comment";
-    public static final String H1_NODE = "h1";
-    public static final String H2_NODE = "h2";
-    public static final String H3_NODE = "h3";
-    public static final String H4_NODE = "h4";
-    public static final String H5_NODE = "h5";
-    public static final String H6_NODE = "h6";
-    public static final String DEFAULT_NODE = "";
+    final public static String A_NODE = "a";
+    final public static String ABBR_NODE = "abbr";
+    final public static String ASIDE_NODE = "aside";
+    final public static String BR_NODE = "br";
+    final public static String BLOCKQUOTE_NODE = "blockquote";
+    final public static String CODE_NODE = "code";
+    final public static String IMG_NODE = "img";
+    final public static String DEL_NODE = "del";
+    final public static String STRIKE_NODE = "strike";
+    final public static String DIV_NODE = "div";
+    final public static String DD_NODE = "dd";
+    final public static String DL_NODE = "dl";
+    final public static String DT_NODE = "dt";
+    final public static String I_NODE = "i";
+    final public static String EM_NODE = "em";
+    final public static String B_NODE = "b";
+    final public static String STRONG_NODE = "strong";
+    final public static String EMOJI_NODE = "g-emoji";
+    final public static String INPUT_NODE = "input";
+    final public static String INS_NODE = "ins";
+    final public static String U_NODE = "u";
+    final public static String SUB_NODE = "sub";
+    final public static String SUP_NODE = "sup";
+    final public static String HR_NODE = "hr";
+    final public static String OL_NODE = "ol";
+    final public static String UL_NODE = "ul";
+    final public static String LI_NODE = "li";
+    final public static String TABLE_NODE = "table";
+    final public static String TBODY_NODE = "tbody";
+    final public static String TD_NODE = "td";
+    final public static String TH_NODE = "th";
+    final public static String THEAD_NODE = "thead";
+    final public static String TR_NODE = "tr";
+    final public static String CAPTION_NODE = "caption";
+    final public static String SVG_NODE = "svg";
+    final public static String P_NODE = "p";
+    final public static String PRE_NODE = "pre";
+    final public static String MATH_NODE = "math";
+    final public static String SPAN_NODE = "span";
+    final public static String TEXT_NODE = "#text";
+    final public static String COMMENT_NODE = "#comment";
+    final public static String H1_NODE = "h1";
+    final public static String H2_NODE = "h2";
+    final public static String H3_NODE = "h3";
+    final public static String H4_NODE = "h4";
+    final public static String H5_NODE = "h5";
+    final public static String H6_NODE = "h6";
+    final public static String DEFAULT_NODE = "";
 
     public static String[] EXPLICIT_LINK_TEXT_TAGS = new String[] { IMG_NODE };
 
-    private static final Map<Object, CellAlignment> TABLE_CELL_ALIGNMENTS = new LinkedHashMap<>();
-    private static final String EMOJI_ALT_PREFIX = "emoji ";
+    final private static Map<Object, CellAlignment> TABLE_CELL_ALIGNMENTS = new LinkedHashMap<>();
+    final private static String EMOJI_ALT_PREFIX = "emoji ";
     static {
         TABLE_CELL_ALIGNMENTS.put(Pattern.compile("\\bleft\\b"), CellAlignment.LEFT);
         TABLE_CELL_ALIGNMENTS.put(Pattern.compile("\\bcenter\\b"), CellAlignment.CENTER);
@@ -217,8 +216,8 @@ public class FlexmarkHtmlConverter {
     }
 
     static final Map<String, String> SPECIAL_CHARS_MAP = new HashMap<>();
-    private static final String TYPOGRAPHIC_QUOTES_PIPED = "“|”|‘|’|«|»|&ldquo;|&rdquo;|&lsquo;|&rsquo;|&apos;|&laquo;|&raquo;";
-    private static final String TYPOGRAPHIC_SMARTS_PIPED = "…|–|—|&hellip;|&endash;|&emdash;";
+    final private static String TYPOGRAPHIC_QUOTES_PIPED = "“|”|‘|’|«|»|&ldquo;|&rdquo;|&lsquo;|&rsquo;|&apos;|&laquo;|&raquo;";
+    final private static String TYPOGRAPHIC_SMARTS_PIPED = "…|–|—|&hellip;|&endash;|&emdash;";
     static {
         SPECIAL_CHARS_MAP.put("“", "\"");
         SPECIAL_CHARS_MAP.put("”", "\"");
@@ -241,19 +240,19 @@ public class FlexmarkHtmlConverter {
         SPECIAL_CHARS_MAP.put("&emdash;", "---");
     }
 
-    private static final Pattern NUMERIC_DOT_LIST = Pattern.compile("^(\\d+)\\.\\s*$");
-    private static final Pattern NUMERIC_PAREN_LIST = Pattern.compile("^(\\d+)\\)\\s*$");
-    private static final Pattern NON_NUMERIC_DOT_LIST = Pattern.compile("^((?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern() + ")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern() + ")|[a-z]+|[A-Z]+))\\.\\s*$");
-    private static final Pattern NON_NUMERIC_PAREN_LIST = Pattern.compile("^((?:[a-z]+|[A-Z]+))\\)\\s*$");
-    private static final Pattern BULLET_LIST = Pattern.compile("^([·])\\s*$");
-    private static final Pattern ALPHA_NUMERAL = Pattern.compile("^[a-z]+|[A-Z]+$");
+    final private static Pattern NUMERIC_DOT_LIST = Pattern.compile("^(\\d+)\\.\\s*$");
+    final private static Pattern NUMERIC_PAREN_LIST = Pattern.compile("^(\\d+)\\)\\s*$");
+    final private static Pattern NON_NUMERIC_DOT_LIST = Pattern.compile("^((?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern() + ")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern() + ")|[a-z]+|[A-Z]+))\\.\\s*$");
+    final private static Pattern NON_NUMERIC_PAREN_LIST = Pattern.compile("^((?:[a-z]+|[A-Z]+))\\)\\s*$");
+    final private static Pattern BULLET_LIST = Pattern.compile("^([·])\\s*$");
+    final private static Pattern ALPHA_NUMERAL = Pattern.compile("^[a-z]+|[A-Z]+$");
 
-    public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<>("TABLE_CELL_ALIGNMENT_MAP", TABLE_CELL_ALIGNMENTS);
+    final public static DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<>("TABLE_CELL_ALIGNMENT_MAP", TABLE_CELL_ALIGNMENTS);
 
     final List<HtmlNodeRendererFactory> nodeConverterFactories;
     final HtmlConverterOptions htmlConverterOptions;
-    private final DataHolder options;
-    private final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
+    final private DataHolder options;
+    final private List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
     final List<HtmlLinkResolverFactory> linkResolverFactories;
 
     FlexmarkHtmlConverter(Builder builder) {
@@ -274,13 +273,12 @@ public class FlexmarkHtmlConverter {
         HtmlConverterCoreNodeRendererFactory nodeRendererFactory = new HtmlConverterCoreNodeRendererFactory();
         nodeRenderers.add(new DelegatingNodeRendererFactoryWrapper(nodeRenderers, nodeRendererFactory));
 
-        FlexmarkHtmlConverter.RendererDependencyHandler resolver = new FlexmarkHtmlConverter.RendererDependencyHandler();
-        nodeRendererFactories = resolver.resolveDependencies(nodeRenderers).getNodeRendererFactories();
+        nodeRendererFactories = DependencyResolver.resolveFlatDependencies(nodeRenderers, null, dependent -> dependent.getFactory().getClass());
 
         // Add as last. This means clients can override the rendering of core nodes if they want.
-        this.nodeConverterFactories.add(HtmlConverterCoreNodeRenderer::new);
+        nodeConverterFactories.add(HtmlConverterCoreNodeRenderer::new);
 
-        this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
+        linkResolverFactories = DependencyResolver.resolveFlatDependencies(builder.linkResolverFactories, null, null);
     }
 
     public DataHolder getOptions() {
@@ -300,7 +298,6 @@ public class FlexmarkHtmlConverter {
      * Create a new builder for configuring an {@link FlexmarkHtmlConverter}.
      *
      * @param options initialization options
-     *
      * @return a builder
      */
     public static Builder builder(DataHolder options) {
@@ -332,7 +329,6 @@ public class FlexmarkHtmlConverter {
      * Parse HTML with default options
      *
      * @param html html to be parsed
-     *
      * @return resulting markdown string
      */
     public String convert(String html) {
@@ -344,7 +340,6 @@ public class FlexmarkHtmlConverter {
      *
      * @param html                  html to be parsed
      * @param maxTrailingBlankLines max trailing blank lines, -1 will suppress trailing EOL
-     *
      * @return resulting markdown string
      */
     public String convert(String html, int maxTrailingBlankLines) {
@@ -395,7 +390,6 @@ public class FlexmarkHtmlConverter {
      * Render the tree of nodes to markdown
      *
      * @param node the root node
-     *
      * @return the formatted markdown
      */
     public String convert(Node node) {
@@ -465,7 +459,6 @@ public class FlexmarkHtmlConverter {
          * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
          *
          * @param htmlNodeRendererFactory the factory for creating a node renderer
-         *
          * @return {@code this}
          */
         @SuppressWarnings("UnusedReturnValue")
@@ -482,7 +475,6 @@ public class FlexmarkHtmlConverter {
          * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
          *
          * @param linkResolverFactory the factory for creating a node renderer
-         *
          * @return {@code this}
          */
         @SuppressWarnings("UnusedReturnValue")
@@ -507,7 +499,7 @@ public class FlexmarkHtmlConverter {
         void extend(Builder builder);
     }
 
-    private final static Iterator<Node> NULL_ITERATOR = new Iterator<Node>() {
+    final private static Iterator<Node> NULL_ITERATOR = new Iterator<Node>() {
         @Override
         public boolean hasNext() {
             return false;
@@ -525,76 +517,28 @@ public class FlexmarkHtmlConverter {
 
     final public static Iterable<Node> NULL_ITERABLE = (Iterable<Node>) () -> NULL_ITERATOR;
 
-    public static class RendererDependencyStage {
-        final List<DelegatingNodeRendererFactoryWrapper> dependents;
-
-        public RendererDependencyStage(List<DelegatingNodeRendererFactoryWrapper> dependents) {
-            this.dependents = dependents;
-        }
-    }
-
-    public static class RendererDependencies extends ResolvedDependencies<RendererDependencyStage> {
-        private final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
-
-        public RendererDependencies(List<RendererDependencyStage> dependentStages) {
-            super(dependentStages);
-            List<DelegatingNodeRendererFactoryWrapper> blockPreProcessorFactories = new ArrayList<>();
-            for (RendererDependencyStage stage : dependentStages) {
-                blockPreProcessorFactories.addAll(stage.dependents);
-            }
-            this.nodeRendererFactories = blockPreProcessorFactories;
-        }
-
-        public List<DelegatingNodeRendererFactoryWrapper> getNodeRendererFactories() {
-            return nodeRendererFactories;
-        }
-    }
-
-    private static class RendererDependencyHandler extends DependencyHandler<DelegatingNodeRendererFactoryWrapper, RendererDependencyStage, RendererDependencies> {
-        RendererDependencyHandler() {}
-
-        @NotNull
-        @Override
-        protected Class<?> getDependentClass(DelegatingNodeRendererFactoryWrapper dependent) {
-            return dependent.getFactory().getClass();
-        }
-
-        @NotNull
-        @Override
-        protected RendererDependencies createResolvedDependencies(List<RendererDependencyStage> stages) {
-            return new RendererDependencies(stages);
-        }
-
-        @NotNull
-        @Override
-        protected RendererDependencyStage createStage(List<DelegatingNodeRendererFactoryWrapper> dependents) {
-            return new RendererDependencyStage(dependents);
-        }
-    }
-
     private class MainHtmlConverter extends HtmlNodeConverterSubContext {
-        private final Document document;
-        private final com.vladsch.flexmark.util.ast.Document myForDocument;
-        private final Map<String, HtmlNodeRendererHandler<?>> renderers;
+        final private Document document;
+        final private com.vladsch.flexmark.util.ast.Document myForDocument;
+        final private Map<String, HtmlNodeRendererHandler<?>> renderers;
 
-        private final List<PhasedHtmlNodeRenderer> phasedFormatters;
-        private final Set<HtmlConverterPhase> renderingPhases;
-        private final DataHolder myOptions;
+        final private List<PhasedHtmlNodeRenderer> phasedFormatters;
+        final private Set<HtmlConverterPhase> renderingPhases;
+        final private DataHolder myOptions;
         private HtmlConverterPhase phase;
 
-        private final HtmlConverterOptions myHtmlConverterOptions;
-        private final Pattern specialCharsPattern;
+        final private HtmlConverterOptions myHtmlConverterOptions;
+        final private Pattern specialCharsPattern;
 
-        private final Stack<HtmlConverterState> myStateStack;
-        private final Map<String, String> mySpecialCharsMap;
+        final private Stack<HtmlConverterState> myStateStack;
+        final private Map<String, String> mySpecialCharsMap;
         private HtmlConverterState myState;
         private boolean myTrace;
         private boolean myInlineCode;
         private Parser myParser = null;
-        private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
-        private final HtmlLinkResolver[] myHtmlLinkResolvers;
-        private final HashMap<String, Reference> myReferenceUrlToReferenceMap;  // map of URL to reference node
-        private final HashSet<Reference> myExternalReferences;  // map of URL to reference node
+        final private HtmlLinkResolver[] myHtmlLinkResolvers;
+        final private HashMap<String, Reference> myReferenceUrlToReferenceMap;  // map of URL to reference node
+        final private HashSet<Reference> myExternalReferences;  // map of URL to reference node
 
         @Override
         public HtmlConverterState getState() {
@@ -607,7 +551,6 @@ public class FlexmarkHtmlConverter {
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(HtmlConverterPhase.values().length);
             this.phasedFormatters = new ArrayList<>(nodeConverterFactories.size());
-            this.resolvedLinkMap = null;
             this.myHtmlLinkResolvers = new HtmlLinkResolver[linkResolverFactories.size()];
 
             out.setContext(this);
@@ -671,8 +614,8 @@ public class FlexmarkHtmlConverter {
 
         @SuppressWarnings("WeakerAccess")
         private class SubHtmlNodeConverter extends HtmlNodeConverterSubContext implements HtmlNodeConverterContext {
-            private final MainHtmlConverter myMainNodeRenderer;
-            private final DataHolder myOptions;
+            final private MainHtmlConverter myMainNodeRenderer;
+            final private DataHolder myOptions;
 
             SubHtmlNodeConverter(MainHtmlConverter mainNodeRenderer, HtmlMarkdownWriter out, @Nullable DataHolder options) {
                 super(out);

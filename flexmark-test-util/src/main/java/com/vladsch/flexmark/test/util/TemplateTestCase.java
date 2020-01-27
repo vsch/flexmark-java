@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.io.InputStream;
 
 public abstract class TemplateTestCase implements TemplateReaderFactory {
-    public static final String SPEC_RESOURCE = "/template.txt";
+    final public static String SPEC_RESOURCE = "/template.txt";
 
     private DumpTemplateReader dumpTemplateReader;
 

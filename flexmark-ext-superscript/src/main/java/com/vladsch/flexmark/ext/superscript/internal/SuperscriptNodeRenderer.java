@@ -14,8 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SuperscriptNodeRenderer implements NodeRenderer {
-    private final String superscriptStyleHtmlOpen;
-    private final String superscriptStyleHtmlClose;
+    final private String superscriptStyleHtmlOpen;
+    final private String superscriptStyleHtmlClose;
 
     public SuperscriptNodeRenderer(DataHolder options) {
         superscriptStyleHtmlOpen = SuperscriptExtension.SUPERSCRIPT_STYLE_HTML_OPEN.get(options);

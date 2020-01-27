@@ -15,8 +15,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 public class JekyllTagInlineParserExtension implements InlineParserExtension {
-    private final JekyllTagParsing parsing;
-    private final boolean listIncludesOnly;
+    final private JekyllTagParsing parsing;
+    final private boolean listIncludesOnly;
 
     public JekyllTagInlineParserExtension(LightInlineParser lightInlineParser) {
         this.parsing = new JekyllTagParsing(lightInlineParser.getParsing());

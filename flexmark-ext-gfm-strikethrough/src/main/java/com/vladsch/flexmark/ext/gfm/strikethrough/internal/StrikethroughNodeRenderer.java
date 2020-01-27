@@ -16,10 +16,10 @@ import java.util.Set;
 
 public class StrikethroughNodeRenderer implements NodeRenderer {
 
-    private final String strikethroughStyleHtmlOpen;
-    private final String strikethroughStyleHtmlClose;
-    private final String subscriptStyleHtmlOpen;
-    private final String subscriptStyleHtmlClose;
+    final private String strikethroughStyleHtmlOpen;
+    final private String strikethroughStyleHtmlClose;
+    final private String subscriptStyleHtmlOpen;
+    final private String subscriptStyleHtmlClose;
 
     public StrikethroughNodeRenderer(DataHolder options) {
         strikethroughStyleHtmlOpen = StrikethroughSubscriptExtension.STRIKETHROUGH_STYLE_HTML_OPEN.get(options);

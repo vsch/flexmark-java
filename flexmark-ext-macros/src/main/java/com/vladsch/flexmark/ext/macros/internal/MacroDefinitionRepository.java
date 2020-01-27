@@ -14,7 +14,7 @@ import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlock> {
-    private ArrayList<MacroDefinitionBlock> myReferencedMacroDefinitionBlocks = new ArrayList<>();
+    final private ArrayList<MacroDefinitionBlock> myReferencedMacroDefinitionBlocks = new ArrayList<>();
 
     public void addMacrosReference(MacroDefinitionBlock macroDefinitionBlock, MacroReference macros) {
         if (!macroDefinitionBlock.isReferenced()) {
@@ -26,7 +26,7 @@ public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlo
 
     public void resolveMacrosOrdinals() {
         // need to sort by first referenced offset then set each to its ordinal position in the array+1
-        Collections.sort(myReferencedMacroDefinitionBlocks, new MacroDefinitionBlockComparator());
+        myReferencedMacroDefinitionBlocks.sort(Comparator.comparing(MacroDefinitionBlock::getFirstReferenceOffset));
         int ordinal = 0;
         for (MacroDefinitionBlock macroDefinitionBlock : myReferencedMacroDefinitionBlocks) {
             macroDefinitionBlock.setOrdinal(++ordinal);
@@ -51,13 +51,6 @@ public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlo
     @Override
     public DataKey<KeepType> getKeepDataKey() {
         return MacrosExtension.MACRO_DEFINITIONS_KEEP;
-    }
-
-    private static class MacroDefinitionBlockComparator implements Comparator<MacroDefinitionBlock> {
-        @Override
-        public int compare(MacroDefinitionBlock f1, MacroDefinitionBlock f2) {
-            return Integer.compare(f1.getFirstReferenceOffset(), f2.getFirstReferenceOffset());
-        }
     }
 
     @NotNull

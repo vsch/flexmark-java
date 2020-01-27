@@ -14,11 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DefinitionNodeRenderer implements NodeRenderer {
-    private final DefinitionOptions options;
-    private final ListOptions listOptions;
+    final private ListOptions listOptions;
 
     public DefinitionNodeRenderer(DataHolder options) {
-        this.options = new DefinitionOptions(options);
         this.listOptions = ListOptions.get(options);
     }
 
@@ -45,12 +43,6 @@ public class DefinitionNodeRenderer implements NodeRenderer {
                 html.text(node.getMarkerSuffix().unescape());
                 context.renderChildren(node);
             });
-            //html.srcPosWithEOL(childText.getChars()).withAttr().withCondIndent().tagLine("dt", new Runnable() {
-            //    @Override
-            //    public void run() {
-            //        context.renderChildren(node);
-            //    }
-            //});
         }
     }
 
@@ -66,12 +58,6 @@ public class DefinitionNodeRenderer implements NodeRenderer {
                 context.renderChildren(node);
             });
         }
-        //html.srcPosWithEOL(node.getChars()).withAttr().withCondIndent().tagLine("dd", new Runnable() {
-        //    @Override
-        //    public void run() {
-        //        context.renderChildren(node);
-        //    }
-        //});
     }
 
     public static class Factory implements NodeRendererFactory {

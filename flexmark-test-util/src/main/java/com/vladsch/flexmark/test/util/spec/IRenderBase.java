@@ -6,28 +6,8 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-
 public abstract class IRenderBase implements IRender {
-    public static final IRender NullRenderer = new IRenderBase() {
-        @Override
-        public void render(@NotNull Node document, @NotNull Appendable output) {
-
-        }
-    };
-
-    public static final IRender TextRenderer = new IRenderBase() {
-        @Override
-        public void render(@NotNull Node document, @NotNull Appendable output) {
-            try {
-                output.append(document.getChars());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    private final DataHolder myOptions;
+    final private DataHolder myOptions;
 
     public IRenderBase() {
         this(null);

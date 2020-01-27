@@ -13,17 +13,17 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class TocLevelsOptionParser implements OptionParser<TocOptions> {
-    public static final String OPTION_0_VALUE_1_NOT_IN_RANGE = "{0} option value {1} is not an integer in the range [1, 6]";
-    public static final String KEY_OPTION_0_VALUE_1_NOT_IN_RANGE = "options.parser.toc-levels-option.not-in-range";
-    public static final String OPTION_0_VALUE_1_NOT_INTEGER = "{0} option value {1} is not an integer";
-    public static final String KEY_OPTION_0_VALUE_1_NOT_INTEGER = "options.parser.toc-levels-option.not-integer";
-    public static final String OPTION_0_VALUE_1_TRUNCATED_TO_RANGE_2 = "{0} option value {1} truncated to range [{2}]";
-    public static final String KEY_OPTION_0_VALUE_1_TRUNCATED_TO_RANGE_2 = "options.parser.toc-levels-option.truncated-to-range";
-    public static final String OPTION_0_VALUE_1_TRUNCATED_TO_EMPTY_RANGE = "{0} option value {1} truncated to empty range []";
-    public static final String KEY_OPTION_0_VALUE_1_TRUNCATED_TO_EMPTY_RANGE = "options.parser.toc-levels-option.truncated-to-empty";
-    private final String myOptionName;
+    final public static String OPTION_0_VALUE_1_NOT_IN_RANGE = "{0} option value {1} is not an integer in the range [1, 6]";
+    final public static String KEY_OPTION_0_VALUE_1_NOT_IN_RANGE = "options.parser.toc-levels-option.not-in-range";
+    final public static String OPTION_0_VALUE_1_NOT_INTEGER = "{0} option value {1} is not an integer";
+    final public static String KEY_OPTION_0_VALUE_1_NOT_INTEGER = "options.parser.toc-levels-option.not-integer";
+    final public static String OPTION_0_VALUE_1_TRUNCATED_TO_RANGE_2 = "{0} option value {1} truncated to range [{2}]";
+    final public static String KEY_OPTION_0_VALUE_1_TRUNCATED_TO_RANGE_2 = "options.parser.toc-levels-option.truncated-to-range";
+    final public static String OPTION_0_VALUE_1_TRUNCATED_TO_EMPTY_RANGE = "{0} option value {1} truncated to empty range []";
+    final public static String KEY_OPTION_0_VALUE_1_TRUNCATED_TO_EMPTY_RANGE = "options.parser.toc-levels-option.truncated-to-empty";
+    final private String myOptionName;
 
-    private static final Map<Integer, String> TOC_LEVELS_MAP = new HashMap<>();
+    final private static Map<Integer, String> TOC_LEVELS_MAP = new HashMap<>();
     static {
         TOC_LEVELS_MAP.put(0x04, "2");
         TOC_LEVELS_MAP.put(0x0C, "3");

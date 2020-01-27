@@ -56,7 +56,7 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
             }
         });
     }
-    private final ZzzzzzOptions options;
+    final private ZzzzzzOptions options;
 
     ZzzzzzParagraphPreProcessor(DataHolder options) {
         this.options = new ZzzzzzOptions(options);

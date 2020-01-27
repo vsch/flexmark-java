@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OptionsParser<T> implements OptionParser<T> {
-    public static final String OPTION_0_IS_AMBIGUOUS = "Option {0} matches: ";
-    public static final String KEY_OPTION_0_IS_AMBIGUOUS = "options.parser.option.ambiguous";
-    public static final String OPTION_0_DOES_NOT_MATCH = "Option {0} does not match any of: ";
-    public static final String KEY_OPTION_0_DOES_NOT_MATCH = "options.parser.option.unknown";
+    final public static String OPTION_0_IS_AMBIGUOUS = "Option {0} matches: ";
+    final public static String KEY_OPTION_0_IS_AMBIGUOUS = "options.parser.option.ambiguous";
+    final public static String OPTION_0_DOES_NOT_MATCH = "Option {0} does not match any of: ";
+    final public static String KEY_OPTION_0_DOES_NOT_MATCH = "options.parser.option.unknown";
 
-    private final String optionName;
-    private final OptionParser<T>[] parseableOptions;
-    private final String optionDelimiter;
-    private final String optionValueDelimiter;
+    final private String optionName;
+    final private OptionParser<T>[] parseableOptions;
+    final private String optionDelimiter;
+    final private String optionValueDelimiter;
 
     public OptionsParser(String optionName, OptionParser<T>[] parseableOptions, char optionDelimiter, char optionValueDelimiter) {
         this.optionName = optionName;
@@ -32,7 +32,6 @@ public class OptionsParser<T> implements OptionParser<T> {
 
     @Override
     public Pair<T, List<ParsedOption<T>>> parseOption(BasedSequence optionsText, T options, MessageProvider provider) {
-        ArrayList<ParserMessage> messages = null;
         BasedSequence[] optionsList = optionsText.split(optionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY, null);
         T result = options;
         if (provider == null) provider = MessageProvider.DEFAULT;

@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class GfmUsersInlineParserExtension implements InlineParserExtension {
-    public static final Pattern GITHUB_USER = Pattern.compile("^(@)([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})\\b", Pattern.CASE_INSENSITIVE);
+    final public static Pattern GITHUB_USER = Pattern.compile("^(@)([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})\\b", Pattern.CASE_INSENSITIVE);
 
     public GfmUsersInlineParserExtension(LightInlineParser inlineParser) {
 
@@ -42,7 +42,6 @@ public class GfmUsersInlineParserExtension implements InlineParserExtension {
         if (isPossible) {
             BasedSequence[] matches = inlineParser.matchWithGroups(GITHUB_USER);
             if (matches != null) {
-                BasedSequence input = inlineParser.getInput();
                 inlineParser.flushTextNode();
 
                 BasedSequence openMarker = matches[1];

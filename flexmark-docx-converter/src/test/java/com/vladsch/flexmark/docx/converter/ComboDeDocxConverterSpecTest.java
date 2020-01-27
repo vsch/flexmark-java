@@ -10,11 +10,11 @@ import org.junit.runners.Parameterized;
 import java.util.List;
 
 public class ComboDeDocxConverterSpecTest extends ComboDocxConverterSpecTestBase {
-    private static final String SPEC_RESOURCE = "/docx_converter_de_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final String TEMPLATE_XML = "/DE-Template.xml";
+    final private static String SPEC_RESOURCE = "/docx_converter_de_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static String TEMPLATE_XML = "/DE-Template.xml";
 
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(DocxRenderer.DEFAULT_TEMPLATE_RESOURCE, TEMPLATE_XML)
             .toImmutable();
 

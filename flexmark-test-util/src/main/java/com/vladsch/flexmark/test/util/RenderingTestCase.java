@@ -16,21 +16,21 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
 public abstract class RenderingTestCase implements SpecExampleProcessor {
-    public static final DataKey<Boolean> IGNORE = TestUtils.IGNORE;
-    public static final DataKey<Boolean> FAIL = TestUtils.FAIL;
-    public static final DataKey<Boolean> NO_FILE_EOL = TestUtils.NO_FILE_EOL;
-    public static final DataKey<Integer> TIMED_ITERATIONS = TestUtils.TIMED_ITERATIONS;
-    public static final DataKey<Boolean> EMBED_TIMED = TestUtils.EMBED_TIMED;
-    public static final DataKey<Boolean> TIMED = TestUtils.TIMED;
-    public static final DataKey<String> INCLUDED_DOCUMENT = TestUtils.INCLUDED_DOCUMENT;
-    public static final DataKey<String> SOURCE_PREFIX = TestUtils.SOURCE_PREFIX;
-    public static final DataKey<String> SOURCE_SUFFIX = TestUtils.SOURCE_SUFFIX;
-    public static final DataKey<String> SOURCE_INDENT = TestUtils.SOURCE_INDENT;
+    final public static DataKey<Boolean> IGNORE = TestUtils.IGNORE;
+    final public static DataKey<Boolean> FAIL = TestUtils.FAIL;
+    final public static DataKey<Boolean> NO_FILE_EOL = TestUtils.NO_FILE_EOL;
+    final public static DataKey<Integer> TIMED_ITERATIONS = TestUtils.TIMED_ITERATIONS;
+    final public static DataKey<Boolean> EMBED_TIMED = TestUtils.EMBED_TIMED;
+    final public static DataKey<Boolean> TIMED = TestUtils.TIMED;
+    final public static DataKey<String> INCLUDED_DOCUMENT = TestUtils.INCLUDED_DOCUMENT;
+    final public static DataKey<String> SOURCE_PREFIX = TestUtils.SOURCE_PREFIX;
+    final public static DataKey<String> SOURCE_SUFFIX = TestUtils.SOURCE_SUFFIX;
+    final public static DataKey<String> SOURCE_INDENT = TestUtils.SOURCE_INDENT;
 
-    public static final DataHolder NO_FILE_EOL_FALSE = TestUtils.NO_FILE_EOL_FALSE;
-    public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = TestUtils.UNLOAD_EXTENSIONS;
-    public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = TestUtils.LOAD_EXTENSIONS;
-    public static final DataKey<Collection<Extension>> EXTENSIONS = SharedDataKeys.EXTENSIONS;
+    final public static DataHolder NO_FILE_EOL_FALSE = TestUtils.NO_FILE_EOL_FALSE;
+    final public static DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = TestUtils.UNLOAD_EXTENSIONS;
+    final public static DataKey<Collection<Extension>> LOAD_EXTENSIONS = TestUtils.LOAD_EXTENSIONS;
+    final public static DataKey<Collection<Extension>> EXTENSIONS = SharedDataKeys.EXTENSIONS;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

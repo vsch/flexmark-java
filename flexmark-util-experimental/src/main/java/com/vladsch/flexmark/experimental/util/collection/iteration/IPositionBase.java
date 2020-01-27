@@ -11,12 +11,12 @@ import java.util.function.Predicate;
 import static com.vladsch.flexmark.util.sequence.PositionAnchor.*;
 
 public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T, P> {
-    private static final int F_CURRENT = 0;
-    private static final int F_NEXT = 1;
-    private static final int F_PREVIOUS = 2;
-    private static final int F_VALID = 4;
-    private static final int F_DETACHED = 8;
-    private static final int F_SETTING = 16;  // setting element, index will not be updated
+    final private static int F_CURRENT = 0;
+    final private static int F_NEXT = 1;
+    final private static int F_PREVIOUS = 2;
+    final private static int F_VALID = 4;
+    final private static int F_DETACHED = 8;
+    final private static int F_SETTING = 16;  // setting element, index will not be updated
 
     final private @NotNull IPositionUpdater<T, P> myParent;
     final private @NotNull List<T> myList;

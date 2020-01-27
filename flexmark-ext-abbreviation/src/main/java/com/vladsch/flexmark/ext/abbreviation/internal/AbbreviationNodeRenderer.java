@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AbbreviationNodeRenderer implements NodeRenderer {
-    private final AbbreviationOptions options;
+    final private AbbreviationOptions options;
 
     public AbbreviationNodeRenderer(DataHolder options) {
         this.options = new AbbreviationOptions(options);

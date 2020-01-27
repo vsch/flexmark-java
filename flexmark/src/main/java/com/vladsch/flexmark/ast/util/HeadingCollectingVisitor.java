@@ -9,8 +9,8 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import java.util.ArrayList;
 
 public class HeadingCollectingVisitor {
-    private final ArrayList<Heading> headings = new ArrayList<>();
-    private final NodeVisitor myVisitor;
+    final private ArrayList<Heading> headings = new ArrayList<>();
+    final private NodeVisitor myVisitor;
 
     public HeadingCollectingVisitor() {
         myVisitor = new BlockNodeVisitor(

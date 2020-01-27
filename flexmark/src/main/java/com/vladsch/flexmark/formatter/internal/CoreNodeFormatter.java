@@ -29,7 +29,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static com.vladsch.flexmark.formatter.FormatterUtils.*;
+import static com.vladsch.flexmark.formatter.FormatterUtils.LIST_ITEM_SPACING;
+import static com.vladsch.flexmark.formatter.FormatterUtils.isLastOfItem;
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
 import static com.vladsch.flexmark.formatter.RenderPurpose.*;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
@@ -37,8 +38,8 @@ import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
-    public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", HashMap::new);
-    public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", HashMap::new);
+    final public static DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", HashMap::new);
+    final public static DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", HashMap::new);
 
     public static class Factory implements NodeFormatterFactory {
         @NotNull
@@ -461,16 +462,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     minSpaces = Utils.min(minSpaces, leadColumns[i]);
                     i++;
                 }
-                ArrayList<BasedSequence> trimmedLines = new ArrayList<>();
                 if (minSpaces > 0) {
                     i = 0;
-                    //StringBuilder out = new StringBuilder();
-                    //for (BasedSequence line : lines) {
-                    //    if (leadColumns[i] > minSpaces) out.append(RepeatedCharSequence.of(' ', leadColumns[i] - minSpaces));
-                    //    out.append(line.trimStart());
-                    //    i++;
-                    //}
-                    //markdown.append(out);
                     for (BasedSequence line : lines) {
                         if (leadColumns[i] > minSpaces) markdown.append(' ', leadColumns[i] - minSpaces);
                         markdown.append(line.trimStart());
@@ -809,8 +802,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         renderReference(node, context, markdown);
     }
 
-    public static final DataKey<Boolean> UNWRAPPED_AUTO_LINKS = new DataKey<>("UNWRAPPED_AUTO_LINKS", false);
-    public static final DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP = new DataKey<>("UNWRAPPED_AUTO_LINKS_MAP", HashSet::new);
+    final public static DataKey<Boolean> UNWRAPPED_AUTO_LINKS = new DataKey<>("UNWRAPPED_AUTO_LINKS", false);
+    final public static DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP = new DataKey<>("UNWRAPPED_AUTO_LINKS_MAP", HashSet::new);
 
     private void render(AutoLink node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderAutoLink(node, context, markdown, myTranslationAutolinkPrefix, null);

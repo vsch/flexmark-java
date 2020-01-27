@@ -11,7 +11,7 @@ public class ThreadLocalOptionsExtension implements
         Parser.ParserExtension,
         RendererExtension
 {
-    private static final ThreadLocal<MutableDataHolder> threadOptions = new ThreadLocal<>();
+    final private static ThreadLocal<MutableDataHolder> threadOptions = new ThreadLocal<>();
 
     private ThreadLocalOptionsExtension() {
     }

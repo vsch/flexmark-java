@@ -15,9 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ComboEmojiJiraTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_emoji_jira_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_emoji_jira_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.RENDER_HEADER_ID, false)
             .set(HtmlRenderer.GENERATE_HEADER_ID, true)
             .set(Parser.EXTENSIONS, Arrays.asList(JiraConverterExtension.create(), EmojiExtension.create()))

@@ -21,7 +21,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.Arrays;
 
 public class FormatConverterCommonMark {
-    private static final DataHolder OPTIONS = ParserEmulationProfile.FIXED_INDENT.getProfileOptions()
+    final private static DataHolder OPTIONS = ParserEmulationProfile.FIXED_INDENT.getProfileOptions()
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.LISTS_ITEM_INDENT, 1)
             .set(Parser.EXTENSIONS, Arrays.asList(
@@ -38,7 +38,7 @@ public class FormatConverterCommonMark {
             ));
     ;
 
-    private static final DataHolder FORMATTER_OPTIONS = new MutableDataSet(OPTIONS)
+    final private static DataHolder FORMATTER_OPTIONS = new MutableDataSet(OPTIONS)
             .set(Parser.LISTS_ITEM_INDENT, 4);
 
     public static void main(String[] args) {

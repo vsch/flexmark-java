@@ -131,7 +131,7 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
     }
 
     // statics
-    public static final HashMap<Class, HtmlStyler> stylerMap = new HashMap<>();
+    final public static HashMap<Class, HtmlStyler> stylerMap = new HashMap<>();
     static {
         ColorStyler colorStyler = new ColorStyler();
         stylerMap.put(BackgroundColor.class, colorStyler);

@@ -12,7 +12,7 @@ import static com.vladsch.flexmark.test.util.LoadUnloadDataKeyAggregator.UNLOAD_
 import static org.junit.Assert.assertEquals;
 
 public class LoadUnloadDataKeyAggregatorTest {
-    public static final DataKey<Collection<Class<? extends Extension>>> LOAD_EXTENSION_CLASSES = new DataKey<>("LOAD_EXTENSION_CLASSES", Collections.emptyList());
+    final public static DataKey<Collection<Class<? extends Extension>>> LOAD_EXTENSION_CLASSES = new DataKey<>("LOAD_EXTENSION_CLASSES", Collections.emptyList());
 
     final static HashMap<String, DataHolder> optionsMap = new HashMap<>();
     static {

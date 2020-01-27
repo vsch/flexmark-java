@@ -4,7 +4,7 @@ import org.docx4j.wml.CTShd;
 import org.docx4j.wml.PPr;
 
 public class AttributeBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
-    public final AttributeFormat myAttributeFormat;
+    final public AttributeFormat myAttributeFormat;
 
     public AttributeBlockFormatProvider(DocxContext<T> docx, String fontFamily, String fontSize, String fontWeight, String fontStyle, String textColor, String fillColor) {
         super(docx, null);

@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class EmbeddedAttributeProvider implements AttributeProvider {
 
-    public static final IndependentAttributeProviderFactory Factory = new IndependentAttributeProviderFactory() {
+    final public static IndependentAttributeProviderFactory Factory = new IndependentAttributeProviderFactory() {
         @NotNull
         @Override
         public AttributeProvider apply(@NotNull LinkResolverContext context) {

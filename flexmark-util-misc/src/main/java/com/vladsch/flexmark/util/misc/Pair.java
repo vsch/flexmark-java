@@ -8,8 +8,8 @@ final public class Pair<K, V> implements Paired<K, V> {
         return new Pair<>(first, second);
     }
 
-    private final K first;
-    private final V second;
+    final private K first;
+    final private V second;
 
     public Pair(K first, V second) {
         this.first = first;

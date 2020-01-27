@@ -15,10 +15,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 
 public abstract class Node {
-    public static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
-    public static final String SPLICE = " … ";
+    final public static BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
+    final public static String SPLICE = " … ";
 
-    public static final AstNode<Node> AST_ADAPTER = new AstNode<Node>() {
+    final public static AstNode<Node> AST_ADAPTER = new AstNode<Node>() {
         @Override
         public @Nullable Node getFirstChild(@NotNull Node node) {
             return node.firstChild;

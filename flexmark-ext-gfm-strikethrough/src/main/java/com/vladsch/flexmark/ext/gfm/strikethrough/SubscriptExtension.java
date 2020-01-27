@@ -20,8 +20,8 @@ import org.jetbrains.annotations.NotNull;
  * </p>
  */
 public class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_OPEN;
-    public static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE;
+    final public static NullableDataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_OPEN;
+    final public static NullableDataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE;
 
     private SubscriptExtension() {
     }

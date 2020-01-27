@@ -7,11 +7,11 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import org.jetbrains.annotations.NotNull;
 
 class GfmIssuesOptions implements MutableDataSetter {
-    public final String gitHubIssuesUrlRoot;
-    public final String gitHubIssueUrlPrefix;
-    public final String gitHubIssueUrlSuffix;
-    public final String gitHubIssueTextPrefix;
-    public final String gitHubIssueTextSuffix;
+    final public String gitHubIssuesUrlRoot;
+    final public String gitHubIssueUrlPrefix;
+    final public String gitHubIssueUrlSuffix;
+    final public String gitHubIssueTextPrefix;
+    final public String gitHubIssueTextSuffix;
 
     public GfmIssuesOptions(DataHolder options) {
         gitHubIssuesUrlRoot = GfmIssuesExtension.GIT_HUB_ISSUES_URL_ROOT.get(options);

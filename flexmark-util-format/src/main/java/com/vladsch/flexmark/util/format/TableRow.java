@@ -206,8 +206,6 @@ public class TableRow {
                     cells.add(index + 1, tableCell.withColumnSpan(minLimit(1, cell.columnSpan - spanOffset + 1)));
                 }
             } else {
-                TableCell cell = cells.get(index);
-                //if (cell.columnSpan == 0) throw new IllegalStateException("TableRow.insertColumns must be called only after 0-span dummy columns have been removed by calling normalize() on table, section or row");
                 for (int i = 0; i < count; i++) {
                     cells.add(index, tableCell);
                 }
@@ -232,8 +230,6 @@ public class TableRow {
         while (index < cells.size() && remaining > 0) {
             TableCell cell = cells.get(index);
             cells.remove(index);
-
-            //if (cell.columnSpan == 0) throw new IllegalStateException("TableRow.deleteColumns must be called only after 0-span dummy columns have been removed by calling normalize() on table, section or row");
 
             if (spanOffset > 0) {
                 // inside the first partial span, truncate it to offset or reduce by remaining
@@ -274,19 +270,17 @@ public class TableRow {
 
             MarkdownTable.IndexSpanOffset toIndexSpan = indexOf(toColumn);
             int toIndex = toIndexSpan.index;
-            int toSpanOffset = toIndexSpan.spanOffset;
 
-            if (toIndex == fromIndex) {
-                // moving within a span, do nothing
-            } else {
+            if (toIndex != fromIndex) {
                 if (fromSpanOffset > 0) {
                     // from inside the span is same as a blank column
                     insertColumns(toColumn + (fromColumn <= toColumn ? 1 : 0), 1, defaultCell());
-                    deleteColumns(fromColumn + (toColumn <= fromColumn ? 1 : 0), 1);
                 } else {
                     insertColumns(toColumn + (fromColumn <= toColumn ? 1 : 0), 1, cell.withColumnSpan(1));
-                    deleteColumns(fromColumn + (toColumn <= fromColumn ? 1 : 0), 1);
                 }
+                deleteColumns(fromColumn + (toColumn <= fromColumn ? 1 : 0), 1);
+//            } else {
+//                // moving within a span, do nothing
             }
         }
     }
@@ -359,8 +353,7 @@ public class TableRow {
 
         for (TableCell cell : cells) {
             if (cell.columnSpan > remainingColumns) {
-                int spanOffset = remainingColumns;
-                return new MarkdownTable.IndexSpanOffset(index, spanOffset);
+                return new MarkdownTable.IndexSpanOffset(index, remainingColumns);
             }
 
             remainingColumns -= cell.columnSpan;

@@ -11,7 +11,7 @@ import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 @SuppressWarnings("WeakerAccess")
 public class EnumRefTextCollectingVisitor {
     private SequenceBuilder out;
-    private final NodeVisitor visitor;
+    final private NodeVisitor visitor;
     private Runnable ordinalRunnable;
 
     public EnumRefTextCollectingVisitor() {

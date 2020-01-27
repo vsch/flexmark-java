@@ -12,9 +12,9 @@ import java.util.Map;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
 
 public class Document extends Block implements MutableDataHolder {
-    public static final Document NULL = new Document(null, BasedSequence.NULL);
+    final public static Document NULL = new Document(null, BasedSequence.NULL);
 
-    private final MutableDataSet dataSet;
+    final private MutableDataSet dataSet;
 
     @Override
     public @NotNull BasedSequence[] getSegments() {
@@ -121,9 +121,6 @@ public class Document extends Block implements MutableDataHolder {
             int nextLineEnd = preText.endOfLineAnyEOL(0);
             int length = preText.length();
             while (nextLineEnd < length) {
-                if (preText.endOfLineAnyEOL(nextLineEnd) == 0) {
-                    int tmp = 0;
-                }
                 int eolLength = preText.eolStartLength(nextLineEnd);
                 int lengthWithEOL = nextLineEnd + eolLength;
                 if (offset >= lengthWithEOL) lineNumber++; // do not treat offset between \r and \n as complete line

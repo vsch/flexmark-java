@@ -17,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
  * The parsed superscript text is turned into {@link Superscript} nodes.
  */
 public class SuperscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final NullableDataKey<String> SUPERSCRIPT_STYLE_HTML_OPEN = new NullableDataKey<>("SUPERSCRIPT_STYLE_HTML_OPEN");
-    public static final NullableDataKey<String> SUPERSCRIPT_STYLE_HTML_CLOSE = new NullableDataKey<>("SUPERSCRIPT_STYLE_HTML_CLOSE");
+    final public static NullableDataKey<String> SUPERSCRIPT_STYLE_HTML_OPEN = new NullableDataKey<>("SUPERSCRIPT_STYLE_HTML_OPEN");
+    final public static NullableDataKey<String> SUPERSCRIPT_STYLE_HTML_CLOSE = new NullableDataKey<>("SUPERSCRIPT_STYLE_HTML_CLOSE");
 
     private SuperscriptExtension() {
     }

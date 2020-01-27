@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EnumeratedReferences {
-    public static final String EMPTY_TYPE = "";
-    public static final int[] EMPTY_ORDINALS = new int[0];
+    final public static String EMPTY_TYPE = "";
+    final public static int[] EMPTY_ORDINALS = new int[0];
 
-    private final EnumeratedReferenceRepository referenceRepository;
-    private final HashMap<String, Integer> enumerationCounters;
-    private final HashMap<String, int[]> enumeratedReferenceOrdinals;
+    final private EnumeratedReferenceRepository referenceRepository;
+    final private HashMap<String, Integer> enumerationCounters;
+    final private HashMap<String, int[]> enumeratedReferenceOrdinals;
 
     public EnumeratedReferences(DataHolder options) {
         referenceRepository = EnumeratedReferenceExtension.ENUMERATED_REFERENCES.get(options);

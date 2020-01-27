@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
 public class SmartsInlineParser implements InlineParserExtension {
-    private final SmartsParsing parsing;
+    final private SmartsParsing parsing;
 
     public SmartsInlineParser(LightInlineParser inlineParser) {
         this.parsing = new SmartsParsing(inlineParser.getParsing());
@@ -32,7 +32,6 @@ public class SmartsInlineParser implements InlineParserExtension {
     public boolean parse(@NotNull LightInlineParser inlineParser) {
         // hard coding implementation because pattern matching can be very slow for large files
         BasedSequence input = inlineParser.getInput();
-        int iMax = input.length();
         String typographicSmarts = null;
         BasedSequence match = null;
 
@@ -64,22 +63,6 @@ public class SmartsInlineParser implements InlineParserExtension {
             inlineParser.getBlock().appendChild(smarts);
             return true;
         }
-//        BasedSequence match = inlineParser.match(parsing.SMARTS);
-//        if (match != null) {
-//            inlineParser.flushTextNode();
-//
-//            String typographicSmarts;
-//
-//            if (match.matches(parsing.ELIPSIS)) typographicSmarts = "&hellip;";
-//            else if (match.matches(parsing.ELIPSIS_SPACED)) typographicSmarts = "&hellip;";
-//            else if (match.matches(parsing.EN_DASH)) typographicSmarts = "&ndash;";
-//            else if (match.matches(parsing.EM_DASH)) typographicSmarts = "&mdash;";
-//            else return false;
-//
-//            TypographicSmarts smarts = new TypographicSmarts(match, typographicSmarts);
-//            inlineParser.getBlock().appendChild(smarts);
-//            return true;
-//        }
         return false;
     }
 

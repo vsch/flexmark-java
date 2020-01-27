@@ -47,7 +47,7 @@ class HtmlConverter extends IParseBase {
     }
 
     public static class RootNode extends Node {
-        public final String myRootNode;
+        final public String myRootNode;
 
         public RootNode(String rootNode) {
             myRootNode = rootNode;

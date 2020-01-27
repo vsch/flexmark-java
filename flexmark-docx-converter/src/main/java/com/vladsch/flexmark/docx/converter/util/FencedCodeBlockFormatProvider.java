@@ -7,9 +7,9 @@ import org.docx4j.wml.Style;
 import java.math.BigInteger;
 
 public class FencedCodeBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
-    private final DocxContext<T> myDocx;
-    private final BigInteger myBefore;
-    private final BigInteger myAfter;
+    final private DocxContext<T> myDocx;
+    final private BigInteger myBefore;
+    final private BigInteger myAfter;
 
     public FencedCodeBlockFormatProvider(DocxContext<T> docx) {
         super(docx, docx.getRenderingOptions().PREFORMATTED_TEXT_STYLE);

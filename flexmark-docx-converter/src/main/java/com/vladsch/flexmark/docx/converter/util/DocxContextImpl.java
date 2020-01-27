@@ -68,7 +68,8 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     // must be the first thing called after creation
-    public void setParent(DocxContext parent) {
+    public void setParent(DocxContext<?> parent) {
+
     }
 
     @Override
@@ -628,8 +629,8 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     }
 
     public void createHorizontalLine() {
-        P p = createP(myRendererOptions.HORIZONTAL_LINE_STYLE);
-        R r = createR();
+        createP(myRendererOptions.HORIZONTAL_LINE_STYLE);
+        createR();
     }
 
     @Override

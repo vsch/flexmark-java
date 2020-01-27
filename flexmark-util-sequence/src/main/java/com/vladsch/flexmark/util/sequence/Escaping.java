@@ -13,54 +13,54 @@ import java.util.regex.Pattern;
 public class Escaping {
 
     // pure chars not for pattern
-    public static final String ESCAPABLE_CHARS = "\"#$%&'()*+,./:;<=>?@[]\\^_`{|}~-";
+    final public static String ESCAPABLE_CHARS = "\"#$%&'()*+,./:;<=>?@[]\\^_`{|}~-";
 
-    public static final String ESCAPABLE = "[!" +
+    final public static String ESCAPABLE = "[!" +
             ESCAPABLE_CHARS
                     .replace("\\", "\\\\")
                     .replace("[", "\\[")
                     .replace("]", "\\]") +
             "]";
 
-    private static final String ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
+    final private static String ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
 
-    private static final Pattern BACKSLASH_ONLY = Pattern.compile("[\\\\]");
+    final private static Pattern BACKSLASH_ONLY = Pattern.compile("[\\\\]");
 
-    private static final Pattern ESCAPED_CHAR =
+    final private static Pattern ESCAPED_CHAR =
             Pattern.compile("\\\\" + ESCAPABLE, Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern BACKSLASH_OR_AMP = Pattern.compile("[\\\\&]");
+    final private static Pattern BACKSLASH_OR_AMP = Pattern.compile("[\\\\&]");
 
-    private static final Pattern AMP_ONLY = Pattern.compile("[\\&]");
+    final private static Pattern AMP_ONLY = Pattern.compile("[\\&]");
 
-    private static final Pattern ENTITY_OR_ESCAPED_CHAR =
+    final private static Pattern ENTITY_OR_ESCAPED_CHAR =
             Pattern.compile("\\\\" + ESCAPABLE + '|' + ENTITY, Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern ENTITY_ONLY =
+    final private static Pattern ENTITY_ONLY =
             Pattern.compile(ENTITY, Pattern.CASE_INSENSITIVE);
 
-    private static final String XML_SPECIAL = "[&<>\"]";
+    final private static String XML_SPECIAL = "[&<>\"]";
 
-    private static final Pattern XML_SPECIAL_RE = Pattern.compile(XML_SPECIAL);
+    final private static Pattern XML_SPECIAL_RE = Pattern.compile(XML_SPECIAL);
 
-    private static final Pattern XML_SPECIAL_OR_ENTITY =
+    final private static Pattern XML_SPECIAL_OR_ENTITY =
             Pattern.compile(ENTITY + '|' + XML_SPECIAL, Pattern.CASE_INSENSITIVE);
 
     // From RFC 3986 (see "reserved", "unreserved") except don't escape '[' or ']' to be compatible with JS encodeURI
-    private static final Pattern ESCAPE_IN_URI =
+    final private static Pattern ESCAPE_IN_URI =
             Pattern.compile("(%[a-fA-F0-9]{0,2}|[^:/?#@!$&'()*+,;=a-zA-Z0-9\\-._~])");
 
-    private static final Pattern ESCAPE_URI_DECODE =
+    final private static Pattern ESCAPE_URI_DECODE =
             Pattern.compile("(%[a-fA-F0-9]{2})");
 
     static final char[] HEX_DIGITS =
             new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
-    private static final Pattern WHITESPACE = Pattern.compile("[ \t\r\n]+");
+    final private static Pattern WHITESPACE = Pattern.compile("[ \t\r\n]+");
 
-    private static final Pattern COLLAPSE_WHITESPACE = Pattern.compile("[ \t]{2,}");
+    final private static Pattern COLLAPSE_WHITESPACE = Pattern.compile("[ \t]{2,}");
 
-    private static final Replacer UNSAFE_CHAR_REPLACER = new Replacer() {
+    final private static Replacer UNSAFE_CHAR_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
             if (s.equals("&")) {
@@ -93,7 +93,7 @@ public class Escaping {
         }
     };
 
-    private static final Replacer COLLAPSE_WHITESPACE_REPLACER = new Replacer() {
+    final private static Replacer COLLAPSE_WHITESPACE_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
             sb.append(" ");
@@ -105,7 +105,7 @@ public class Escaping {
         }
     };
 
-    private static final Replacer UNESCAPE_REPLACER = new Replacer() {
+    final private static Replacer UNESCAPE_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
             if (s.charAt(0) == '\\') {
@@ -125,7 +125,7 @@ public class Escaping {
         }
     };
 
-    private static final Replacer REMOVE_REPLACER = new Replacer() {
+    final private static Replacer REMOVE_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
 
@@ -137,7 +137,7 @@ public class Escaping {
         }
     };
 
-    private static final Replacer ENTITY_REPLACER = new Replacer() {
+    final private static Replacer ENTITY_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
             sb.append(Html5Entities.entityToString(s));
@@ -149,7 +149,7 @@ public class Escaping {
         }
     };
 
-    private static final Replacer URL_ENCODE_REPLACER = new Replacer() {
+    final private static Replacer URL_ENCODE_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
             if (s.startsWith("%")) {
@@ -197,7 +197,7 @@ public class Escaping {
         }
     };
 
-    private static final Replacer URL_DECODE_REPLACER = new Replacer() {
+    final private static Replacer URL_DECODE_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
             String urlDecoded = Utils.urlDecode(s, null);
@@ -212,7 +212,7 @@ public class Escaping {
         }
     };
 
-    public static final @NotNull CharPredicate AMP_BACKSLASH_SET = CharPredicate.anyOf('\\', '&');
+    final public static @NotNull CharPredicate AMP_BACKSLASH_SET = CharPredicate.anyOf('\\', '&');
 
     public static String escapeHtml(@NotNull CharSequence s, boolean preserveEntities) {
         Pattern p = preserveEntities ? XML_SPECIAL_OR_ENTITY : XML_SPECIAL_RE;
@@ -229,7 +229,6 @@ public class Escaping {
      * Replace entities and backslash escapes with literal characters.
      *
      * @param s string to un-escape
-     *
      * @return un-escaped string
      */
     @NotNull
@@ -246,7 +245,6 @@ public class Escaping {
      *
      * @param s                string to un-escape
      * @param unescapeEntities true if HTML entities are to be unescaped
-     *
      * @return un-escaped string
      */
     @NotNull
@@ -271,7 +269,6 @@ public class Escaping {
      *
      * @param s          based sequence to un-escape
      * @param textMapper replaced text mapper to update for the changed text
-     *
      * @return un-escaped sequence
      */
     @NotNull
@@ -290,7 +287,6 @@ public class Escaping {
      * @param s          sequence being changed
      * @param remove     string to remove
      * @param textMapper replaced text mapper to update for the changed text
-     *
      * @return un-escaped sequence
      */
     @NotNull
@@ -307,7 +303,6 @@ public class Escaping {
      * Replace entities and backslash escapes with literal characters.
      *
      * @param s string to un-escape
-     *
      * @return un-escaped string
      */
     @NotNull
@@ -324,7 +319,6 @@ public class Escaping {
      *
      * @param s          based sequence to un-escape
      * @param textMapper replaced text mapper to update for the changed text
-     *
      * @return un-escaped sequence
      */
     @NotNull
@@ -343,7 +337,6 @@ public class Escaping {
      * Append EOL sequence if sequence does not already end in EOL
      *
      * @param s sequence to convert
-     *
      * @return converted sequence
      */
     @NotNull
@@ -355,7 +348,6 @@ public class Escaping {
      * Normalize eol: embedded \r and \r\n are converted to \n
      *
      * @param s sequence to convert
-     *
      * @return converted sequence
      */
     @NotNull
@@ -368,7 +360,6 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param endWithEOL true if an EOL is to be appended to the end of the sequence if not already ending with one.
-     *
      * @return converted sequence
      */
     @NotNull
@@ -404,7 +395,6 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
-     *
      * @return converted sequence
      */
     @NotNull
@@ -417,7 +407,6 @@ public class Escaping {
      *
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
-     *
      * @return converted sequence
      */
     @NotNull
@@ -433,7 +422,6 @@ public class Escaping {
      * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @param endWithEOL whether an EOL is to be appended to the end of the sequence if it does not already end with one.
-     *
      * @return converted sequence
      */
     @NotNull
@@ -482,7 +470,6 @@ public class Escaping {
 
     /**
      * @param s string to encode
-     *
      * @return encoded string
      */
     @NotNull
@@ -492,7 +479,6 @@ public class Escaping {
 
     /**
      * @param s string to encode
-     *
      * @return encoded string
      */
     @NotNull
@@ -502,7 +488,6 @@ public class Escaping {
 
     /**
      * @param s string to encode
-     *
      * @return encoded string
      */
     @NotNull
@@ -512,7 +497,6 @@ public class Escaping {
 
     /**
      * @param s string to encode
-     *
      * @return encoded string
      */
     @NotNull
@@ -525,7 +509,6 @@ public class Escaping {
      *
      * @param s          sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
-     *
      * @return normalized link reference id
      */
     @NotNull
@@ -558,7 +541,6 @@ public class Escaping {
      *
      * @param email     e-mail url
      * @param randomize true to randomize, false for testing
-     *
      * @return obfuscated e-mail url
      */
     @NotNull
@@ -593,7 +575,6 @@ public class Escaping {
      *
      * @param s          sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
-     *
      * @return normalized link reference id
      */
     @NotNull
@@ -612,7 +593,6 @@ public class Escaping {
      *
      * @param s    sequence to process
      * @param trim true if the sequence should also be trimmed
-     *
      * @return processed sequence
      */
     @NotNull

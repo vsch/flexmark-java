@@ -41,9 +41,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboFormatterTestSpecTest extends FormatterSpecTest {
-    private static final String SPEC_RESOURCE = "/formatter_test_suite_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/formatter_test_suite_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AbbreviationExtension.create(),
                     AnchorLinkExtension.create(),
@@ -72,7 +72,7 @@ public class ComboFormatterTestSpecTest extends FormatterSpecTest {
             .set(SimTocExtension.BLANK_LINE_SPACER, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("no-tailing-blanks", new MutableDataSet().set(Formatter.MAX_TRAILING_BLANK_LINES, 0));
         optionsMap.put("atx-space-as-is", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.AS_IS));

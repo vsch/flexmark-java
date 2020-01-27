@@ -24,32 +24,31 @@ import java.util.Map;
  * The parsed spec_example text is turned into {@link SpecExample} nodes.
  */
 public class SpecExampleExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
-    private static final Map<Integer, String> DEFAULT_LANGUAGE_MAPPING = new HashMap<>();
+    final private static Map<Integer, String> DEFAULT_LANGUAGE_MAPPING = new HashMap<>();
     static {
         DEFAULT_LANGUAGE_MAPPING.put(1, "markdown");
         DEFAULT_LANGUAGE_MAPPING.put(2, "html");
         DEFAULT_LANGUAGE_MAPPING.put(3, "text");
     }
 
-    private static final Map<Integer, String> DEFAULT_SECTION_MAPPING = new HashMap<>();
+    final private static Map<Integer, String> DEFAULT_SECTION_MAPPING = new HashMap<>();
     static {
         DEFAULT_SECTION_MAPPING.put(1, "Source");
         DEFAULT_SECTION_MAPPING.put(2, "Html");
         DEFAULT_SECTION_MAPPING.put(3, "AST");
     }
 
-    public static final DataKey<Boolean> SPEC_EXAMPLE_RENDER_RAW_HTML = new DataKey<>("SPEC_EXAMPLE_RENDER_RAW_HTML", true);
-    public static final DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_PREFIX = new DataKey<>("SPEC_EXAMPLE_RENDERED_HTML_PREFIX", "<div style=\"border:solid #cccccc 1px;padding:0 20px 10px 20px;\">");
-    public static final DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_SUFFIX = new DataKey<>("SPEC_EXAMPLE_RENDERED_HTML_SUFFIX", "</div>");
-    public static final DataKey<RenderAs> SPEC_EXAMPLE_RENDER_AS = new DataKey<>("SPEC_EXAMPLE_RENDER_AS", RenderAs.FENCED_CODE);
-    public static final DataKey<String> SPEC_EXAMPLE_BREAK = new DataKey<>("SPEC_EXAMPLE_BREAK", SpecReader.EXAMPLE_BREAK);
-    public static final DataKey<String> SPEC_SECTION_BREAK = new DataKey<>("SPEC_SECTION_BREAK", SpecReader.SECTION_BREAK);
-    public static final DataKey<Boolean> SPEC_OPTION_NODES = new DataKey<>("SPEC_OPTION_NODES", true);
-    public static final DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_LANGUAGES = new DataKey<>("SPEC_EXAMPLE_SECTION_LANGUAGES", DEFAULT_LANGUAGE_MAPPING);
-    public static final DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_NAMES = new DataKey<>("SPEC_EXAMPLE_SECTION_NAMES", DEFAULT_SECTION_MAPPING);
+    final public static DataKey<Boolean> SPEC_EXAMPLE_RENDER_RAW_HTML = new DataKey<>("SPEC_EXAMPLE_RENDER_RAW_HTML", true);
+    final public static DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_PREFIX = new DataKey<>("SPEC_EXAMPLE_RENDERED_HTML_PREFIX", "<div style=\"border:solid #cccccc 1px;padding:0 20px 10px 20px;\">");
+    final public static DataKey<String> SPEC_EXAMPLE_RENDERED_HTML_SUFFIX = new DataKey<>("SPEC_EXAMPLE_RENDERED_HTML_SUFFIX", "</div>");
+    final public static DataKey<RenderAs> SPEC_EXAMPLE_RENDER_AS = new DataKey<>("SPEC_EXAMPLE_RENDER_AS", RenderAs.FENCED_CODE);
+    final public static DataKey<String> SPEC_EXAMPLE_BREAK = new DataKey<>("SPEC_EXAMPLE_BREAK", SpecReader.EXAMPLE_BREAK);
+    final public static DataKey<String> SPEC_SECTION_BREAK = new DataKey<>("SPEC_SECTION_BREAK", SpecReader.SECTION_BREAK);
+    final public static DataKey<Boolean> SPEC_OPTION_NODES = new DataKey<>("SPEC_OPTION_NODES", true);
+    final public static DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_LANGUAGES = new DataKey<>("SPEC_EXAMPLE_SECTION_LANGUAGES", DEFAULT_LANGUAGE_MAPPING);
+    final public static DataKey<Map<Integer, String>> SPEC_EXAMPLE_SECTION_NAMES = new DataKey<>("SPEC_EXAMPLE_SECTION_NAMES", DEFAULT_SECTION_MAPPING);
 
-    @Deprecated
-    public static final DataKey<String> SPEC_TYPE_BREAK = SPEC_SECTION_BREAK;
+    @Deprecated final public static DataKey<String> SPEC_TYPE_BREAK = SPEC_SECTION_BREAK;
 
     private SpecExampleExtension() {
     }

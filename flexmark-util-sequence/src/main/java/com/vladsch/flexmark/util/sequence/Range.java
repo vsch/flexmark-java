@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.sequence;
 import org.jetbrains.annotations.NotNull;
 
 public class Range {
-    public static final Range NULL = new Range(Integer.MAX_VALUE, Integer.MIN_VALUE);
-    public static final Range EMPTY = new Range(0, 0);
+    final public static Range NULL = new Range(Integer.MAX_VALUE, Integer.MIN_VALUE);
+    final public static Range EMPTY = new Range(0, 0);
 
     @NotNull
     public static Range of(int start, int end) {
@@ -21,8 +21,8 @@ public class Range {
         return new Range(start, start + length);
     }
 
-    private final int start;
-    private final int end;
+    final private int start;
+    final private int end;
 
     /**
      * Create range

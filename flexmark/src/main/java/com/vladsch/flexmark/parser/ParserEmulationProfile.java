@@ -20,7 +20,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     PEGDOWN_STRICT(FIXED_INDENT),
     ;
 
-    public final ParserEmulationProfile family;
+    final public ParserEmulationProfile family;
 
     ParserEmulationProfile(ParserEmulationProfile family) {
         this.family = family == null ? this : family;
@@ -39,7 +39,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     /**
      * Key used to hold user pegdown extension selection
      */
-    public static final DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", PegdownExtensions.ALL);
+    final public static DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", PegdownExtensions.ALL);
 
     public MutableListOptions getOptions(DataHolder dataHolder) {
         if (family == FIXED_INDENT) {
@@ -85,8 +85,6 @@ public enum ParserEmulationProfile implements MutableDataSetter {
             }
 
             if (this == PEGDOWN || this == PEGDOWN_STRICT) {
-                int pegdownExtensions = PEGDOWN_EXTENSIONS.get(dataHolder);
-
                 return new MutableListOptions().setParserEmulationFamily(this)
                         .setAutoLoose(false)
                         .setAutoLooseOneLevelLists(false)

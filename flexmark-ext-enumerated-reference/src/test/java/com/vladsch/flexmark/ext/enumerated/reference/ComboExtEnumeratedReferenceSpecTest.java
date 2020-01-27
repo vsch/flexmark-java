@@ -15,9 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ComboExtEnumeratedReferenceSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_enumerated_reference_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_enumerated_reference_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(TablesExtension.WITH_CAPTION, true)
             .set(Parser.EXTENSIONS, Arrays.asList(EnumeratedReferenceExtension.create(), AttributesExtension.create(), TablesExtension.create()))
             .toImmutable();

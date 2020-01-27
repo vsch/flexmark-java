@@ -8,14 +8,14 @@ import java.util.*;
 import java.util.function.Function;
 
 public class NodeCollectingVisitor {
-    public static final Function<Node, Class<?>> NODE_CLASSIFIER = Node::getClass;
-    private static final Class<?>[] EMPTY_CLASSES = new Class<?>[0];
+    final public static Function<Node, Class<?>> NODE_CLASSIFIER = Node::getClass;
+    final private static Class<?>[] EMPTY_CLASSES = new Class<?>[0];
 
-    private final @NotNull HashMap<Class<?>, List<Class<?>>> subClassMap;
-    private final @NotNull HashSet<Class<?>> included;
-    private final @NotNull HashSet<Class<?>> excluded;
-    private final @NotNull ClassificationBag<Class<?>, Node> nodes;
-    private final @NotNull Class<?>[] classes;
+    final private @NotNull HashMap<Class<?>, List<Class<?>>> subClassMap;
+    final private @NotNull HashSet<Class<?>> included;
+    final private @NotNull HashSet<Class<?>> excluded;
+    final private @NotNull ClassificationBag<Class<?>, Node> nodes;
+    final private @NotNull Class<?>[] classes;
 
     public NodeCollectingVisitor(@NotNull Set<Class<?>> classes) {
         this.classes = classes.toArray(EMPTY_CLASSES);

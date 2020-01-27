@@ -58,12 +58,12 @@ import java.util.regex.Pattern;
 public class XmlDocxSorter {
 
     static class DocxPartEntry {
-        public final int ordinal;
-        public final String contentType;
-        public final String name;
-        public final Pattern regex;
+        final public int ordinal;
+        final public String contentType;
+        final public String name;
+        final public Pattern regex;
         public Node node;
-        public final int index;
+        final public int index;
 
         public DocxPartEntry(int ordinal, String contentType, String name) {
             this.ordinal = ordinal;
@@ -325,8 +325,8 @@ public class XmlDocxSorter {
 
 /*
     static  class Pair<F, S> {
-        private final F first;
-        private final S second;
+        final private F first;
+        final private S second;
 
         public F getFirst() {
             return first;

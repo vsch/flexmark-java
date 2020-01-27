@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.function.BiConsumer;
 
 public class Attributes {
-    public static final Attributes EMPTY = new Attributes();
+    final public static Attributes EMPTY = new Attributes();
 
     private LinkedHashMap<String, Attribute> attributes;
 

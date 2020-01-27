@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class EscapedCharacterNodeRenderer implements NodeRenderer {
-    private final EscapedCharacterOptions options;
+    final private EscapedCharacterOptions options;
 
     public EscapedCharacterNodeRenderer(DataHolder options) {
         this.options = new EscapedCharacterOptions(options);

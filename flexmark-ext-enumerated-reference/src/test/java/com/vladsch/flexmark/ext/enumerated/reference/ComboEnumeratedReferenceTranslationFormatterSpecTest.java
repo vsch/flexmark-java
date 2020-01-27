@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_enumerated_reference_translation_formatter_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_enumerated_reference_translation_formatter_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(EnumeratedReferenceExtension.create(), AttributesExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+    final private static Map<String, DataHolder> optionsMap = placementAndSortOptions(
             EnumeratedReferenceExtension.ENUMERATED_REFERENCES_KEEP,
             EnumeratedReferenceExtension.ENUMERATED_REFERENCE_PLACEMENT,
             EnumeratedReferenceExtension.ENUMERATED_REFERENCE_SORT

@@ -26,10 +26,10 @@ import java.util.Set;
 import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
 public class DefinitionItemBlockParser extends AbstractBlockParser {
-    private final DefinitionItem block;
+    final private DefinitionItem block;
     //private BlockContent content = new BlockContent();
-    private final DefinitionOptions options;
-    private final ItemData itemData;
+    final private DefinitionOptions options;
+    final private ItemData itemData;
     private boolean hadBlankLine;
 
     DefinitionItemBlockParser(DataHolder options, ItemData itemData) {
@@ -257,7 +257,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final DefinitionOptions options;
+        final private DefinitionOptions options;
 
         BlockFactory(DataHolder options) {
             super(options);

@@ -7,11 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TemplateEntry {
-    private final int entryNumber;
-    private final String source;
-    private final HashSet<String> params = new HashSet<>();
+    final private int entryNumber;
+    final private String source;
+    final private HashSet<String> params = new HashSet<>();
 
-    private static final Pattern PARAMETER_PATTERN = Pattern.compile("\\$[a-zA-Z_]+\\$");
+    final private static Pattern PARAMETER_PATTERN = Pattern.compile("\\$[a-zA-Z_]+\\$");
 
     public TemplateEntry(int entryNumber, String source) {
         this.entryNumber = entryNumber;

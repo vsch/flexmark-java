@@ -5,8 +5,8 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class SpaceMapper {
-    public static final CharMapper toNonBreakSpace = new ToNonBreakSpace();
-    public static final CharMapper fromNonBreakSpace = new FromNonBreakSpace();
+    final public static CharMapper toNonBreakSpace = new ToNonBreakSpace();
+    final public static CharMapper fromNonBreakSpace = new FromNonBreakSpace();
 
     public static @NotNull CharMapper toSpaces(@NotNull CharPredicate predicate) {
         return new FromPredicate(predicate);

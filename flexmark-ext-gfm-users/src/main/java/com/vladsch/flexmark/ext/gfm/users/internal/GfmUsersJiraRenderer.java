@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GfmUsersJiraRenderer implements NodeRenderer {
-    private final GfmUsersOptions options;
+    final private GfmUsersOptions options;
 
     public GfmUsersJiraRenderer(DataHolder options) {
         this.options = new GfmUsersOptions(options);

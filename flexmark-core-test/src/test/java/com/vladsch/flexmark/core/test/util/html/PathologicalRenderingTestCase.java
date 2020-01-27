@@ -21,7 +21,7 @@ import org.junit.runner.Description;
 import java.util.concurrent.TimeUnit;
 
 public abstract class PathologicalRenderingTestCase extends RenderingTestCase {
-    private final DataHolder OPTIONS;
+    final private DataHolder OPTIONS;
 
     public PathologicalRenderingTestCase(boolean spcInLinkUrls) {
         OPTIONS = new MutableDataSet()

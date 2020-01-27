@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 public class MacroInlineParser implements InlineParserExtension {
-    private final MacroParsing parsing;
+    final private MacroParsing parsing;
     private List<Macro> openMacros;
 
     public MacroInlineParser(LightInlineParser inlineParser) {

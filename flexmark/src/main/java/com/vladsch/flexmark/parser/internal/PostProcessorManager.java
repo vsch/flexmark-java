@@ -9,47 +9,48 @@ import com.vladsch.flexmark.util.ast.NodeClassifierVisitor;
 import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.dependency.DependencyHandler;
+import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.dependency.DependentItem;
 import com.vladsch.flexmark.util.dependency.DependentItemMap;
-import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 public class PostProcessorManager {
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-    private static final HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
-    static {
-        //CORE_POST_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
-    }
+//    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+//    final private static HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
+//    static {
+//        //CORE_POST_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
+//    }
 
-    private final PostProcessorDependencies postProcessorDependencies;
-    private OrderedSet<Node> allPostProcessNodes = new OrderedSet<>();
+    final private List<PostProcessorDependencyStage> postProcessorDependencies;
+    final private OrderedSet<Node> allPostProcessNodes = new OrderedSet<>();
 
-    public PostProcessorManager(PostProcessorDependencies postProcessorDependencies) {
+    public PostProcessorManager(List<PostProcessorDependencyStage> postProcessorDependencies) {
         this.postProcessorDependencies = postProcessorDependencies;
     }
 
-    public static PostProcessorDependencies calculatePostProcessors(DataHolder options, List<PostProcessorFactory> postProcessorFactories) {
+    public static List<PostProcessorDependencyStage> calculatePostProcessors(DataHolder options, List<PostProcessorFactory> postProcessorFactories) {
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        List<PostProcessorFactory> list = new ArrayList<>(postProcessorFactories);
+//        List<PostProcessorFactory> list = new ArrayList<>(postProcessorFactories);
+//
+//        // add core block preprocessors
+//        for (DataKey<Boolean> processorDataKey : CORE_POST_PROCESSORS.keySet()) {
+//            if (processorDataKey.get(options)) {
+//                PostProcessorFactory preProcessorFactory = CORE_POST_PROCESSORS.get(processorDataKey);
+//                list.add(preProcessorFactory);
+//            }
+//        }
 
-        // add core block preprocessors
-        //list.addAll(CORE_POST_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_POST_PROCESSORS.get(key)).collect(Collectors.toList()));
-        for (DataKey<Boolean> processorDataKey : CORE_POST_PROCESSORS.keySet()) {
-            if (processorDataKey.get(options)) {
-                PostProcessorFactory preProcessorFactory = CORE_POST_PROCESSORS.get(processorDataKey);
-                list.add(preProcessorFactory);
-            }
+        List<List<PostProcessorFactory>> resolveDependencies = DependencyResolver.resolveDependencies(postProcessorFactories, PostProcessorManager::prioritizePostProcessors, null);
+        ArrayList<PostProcessorDependencyStage> dependencyStages = new ArrayList<>(resolveDependencies.size());
+        for (List<PostProcessorFactory> dependencies : resolveDependencies) {
+            dependencyStages.add(new PostProcessorDependencyStage(dependencies));
         }
 
-        PostProcessDependencyHandler resolver = new PostProcessDependencyHandler();
-        return resolver.resolveDependencies(list);
+        return dependencyStages;
     }
 
-    public static Document processDocument(Document document, PostProcessorDependencies processorDependencies) {
+    public static Document processDocument(Document document, List<PostProcessorDependencyStage> processorDependencies) {
         if (!processorDependencies.isEmpty()) {
             PostProcessorManager manager = new PostProcessorManager(processorDependencies);
             document = manager.postProcess(document);
@@ -62,7 +63,7 @@ public class PostProcessorManager {
         ClassifyingNodeTracker classifyingNodeTracker;
 
         classifyingNodeTracker = null;
-        for (PostProcessorDependencyStage stage : postProcessorDependencies.getDependentStages()) {
+        for (PostProcessorDependencyStage stage : postProcessorDependencies) {
             // idiosyncrasy of post processors the last dependency can be global, in which case it processes the whole document and no ancestry info is
             // provided
             //new ClassifyingNodeTracker()
@@ -84,34 +85,36 @@ public class PostProcessorManager {
                     Map<Class<?>, Set<Class<?>>> dependentNodeTypes = dependent.getNodeTypes();
                     PostProcessor postProcessor = dependent.apply(document);
                     BitSet exclusionSet = new BitSet();
-                    for (Set<Class<?>> excluded : dependentNodeTypes.values()) {
-                        BitSet mapped = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
-                        exclusionSet.or(mapped);
-                    }
+                    if (dependentNodeTypes != null) {
+                        for (Set<Class<?>> excluded : dependentNodeTypes.values()) {
+                            BitSet mapped = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
+                            exclusionSet.or(mapped);
+                        }
 
-                    ReversibleIterable<Node> nodes = classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
-                    for (Node node : nodes) {
-                        if (node.getParent() == null) continue; // was already removed
-                        // now we need to get the bitset for the excluded ancestors of the node, then intersect it with the actual ancestors of this factory
-                        int index;
-                        BitSet nodeAncestors;
-                        BitSet nodeExclusions;
-                        Set<Class<?>> excluded = dependentNodeTypes.get(node.getClass());
-                        if (excluded != null) {
-                            index = classifyingNodeTracker.getItems().indexOf(node);
-                            if (index != -1) {
-                                nodeAncestors = classifyingNodeTracker.getNodeAncestryMap().get(index);
-                                if (nodeAncestors != null) {
-                                    nodeExclusions = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
-                                    nodeExclusions.and(nodeAncestors);
-                                    if (!nodeExclusions.isEmpty()) {
-                                        // has excluded ancestor
-                                        continue;
+                        ReversibleIterable<Node> nodes = classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
+                        for (Node node : nodes) {
+                            if (node.getParent() == null) continue; // was already removed
+                            // now we need to get the bitset for the excluded ancestors of the node, then intersect it with the actual ancestors of this factory
+                            int index;
+                            BitSet nodeAncestors;
+                            BitSet nodeExclusions;
+                            Set<Class<?>> excluded = dependentNodeTypes.get(node.getClass());
+                            if (excluded != null) {
+                                index = classifyingNodeTracker.getItems().indexOf(node);
+                                if (index != -1) {
+                                    nodeAncestors = classifyingNodeTracker.getNodeAncestryMap().get(index);
+                                    if (nodeAncestors != null) {
+                                        nodeExclusions = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
+                                        nodeExclusions.and(nodeAncestors);
+                                        if (!nodeExclusions.isEmpty()) {
+                                            // has excluded ancestor
+                                            continue;
+                                        }
                                     }
                                 }
                             }
+                            postProcessor.process(classifyingNodeTracker, node);
                         }
-                        postProcessor.process(classifyingNodeTracker, node);
                     }
                 }
             }
@@ -120,15 +123,33 @@ public class PostProcessorManager {
         return document;
     }
 
+    static DependentItemMap<PostProcessorFactory> prioritizePostProcessors(DependentItemMap<PostProcessorFactory> dependentMap) {
+        // put globals last
+        List<DependentItemMap.Entry<Class<?>, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries();
+        prioritized.sort((e1, e2) -> {
+            int g1 = e1.getValue().isGlobalScope ? 1 : 0;
+            int g2 = e2.getValue().isGlobalScope ? 1 : 0;
+            return g1 - g2;
+        });
+
+        BitSet dependentMapSet = dependentMap.keySet().keyDifferenceBitSet(prioritized);
+        if (dependentMapSet.isEmpty()) {
+            return dependentMap;
+        }
+
+        DependentItemMap<PostProcessorFactory> prioritizedMap = new DependentItemMap<>(prioritized.size());
+        prioritizedMap.addAll(prioritized);
+
+        return prioritizedMap;
+    }
+
     public static class PostProcessorDependencyStage {
         final Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
-        final boolean myWithExclusions;
         final List<PostProcessorFactory> dependents;
 
         public PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
             // compute mappings
             HashMap<Class<? extends Node>, Set<Class<?>>> nodeMap = new HashMap<>();
-            boolean[] haveExclusions = { false };
 
             for (PostProcessorFactory dependent : dependents) {
                 Map<Class<?>, Set<Class<?>>> types = dependent.getNodeTypes();
@@ -154,8 +175,6 @@ public class PostProcessorManager {
                                     classes.addAll(value);
                                 }
                             }
-
-                            if (!classes.isEmpty()) haveExclusions[0] = true;
                         }
                     }
                 }
@@ -163,70 +182,6 @@ public class PostProcessorManager {
 
             this.dependents = dependents;
             this.myNodeMap = nodeMap;
-            this.myWithExclusions = haveExclusions[0];
-        }
-    }
-
-    public static class PostProcessorDependencies extends ResolvedDependencies<PostProcessorDependencyStage> {
-        private final boolean myWithExclusions;
-
-        public PostProcessorDependencies(List<PostProcessorDependencyStage> dependentStages) {
-            super(dependentStages);
-            boolean haveExclusions = false;
-            for (PostProcessorDependencyStage stage : dependentStages) {
-                if (stage.myWithExclusions) {
-                    haveExclusions = true;
-                    break;
-                }
-            }
-            myWithExclusions = haveExclusions;
-        }
-
-        public boolean isWithExclusions() {
-            return myWithExclusions;
-        }
-    }
-
-    private static class PostProcessDependencyHandler extends DependencyHandler<PostProcessorFactory, PostProcessorDependencyStage, PostProcessorDependencies> {
-        PostProcessDependencyHandler() {}
-
-        @NotNull
-        @Override
-        protected Class<?> getDependentClass(PostProcessorFactory dependent) {
-            return dependent.getClass();
-        }
-
-        @NotNull
-        @Override
-        protected PostProcessorDependencies createResolvedDependencies(List<PostProcessorDependencyStage> stages) {
-            return new PostProcessorDependencies(stages);
-        }
-
-        @NotNull
-        @Override
-        protected PostProcessorDependencyStage createStage(List<PostProcessorFactory> dependents) {
-            return new PostProcessorDependencyStage(dependents);
-        }
-
-        @Override
-        protected DependentItemMap<PostProcessorFactory> prioritize(DependentItemMap<PostProcessorFactory> dependentMap) {
-            // put globals last
-            List<DependentItemMap.Entry<Class<?>, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries();
-            prioritized.sort((e1, e2) -> {
-                int g1 = e1.getValue().isGlobalScope ? 1 : 0;
-                int g2 = e2.getValue().isGlobalScope ? 1 : 0;
-                return g1 - g2;
-            });
-
-            BitSet dependentMapSet = dependentMap.keySet().keyDifferenceBitSet(prioritized);
-            if (dependentMapSet.isEmpty()) {
-                return dependentMap;
-            }
-
-            DependentItemMap<PostProcessorFactory> prioritizedMap = new DependentItemMap<>(prioritized.size());
-            prioritizedMap.addAll(prioritized);
-
-            return prioritizedMap;
         }
     }
 }

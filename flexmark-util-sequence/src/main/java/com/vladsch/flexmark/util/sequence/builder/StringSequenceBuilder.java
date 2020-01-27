@@ -6,13 +6,13 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A Builder for non based strings. Just a string builder wrapped in a sequence builder interface
  */
-public final class StringSequenceBuilder implements ISequenceBuilder<StringSequenceBuilder, CharSequence> {
+final public class StringSequenceBuilder implements ISequenceBuilder<StringSequenceBuilder, CharSequence> {
     @NotNull
     public static StringSequenceBuilder emptyBuilder() {
         return new StringSequenceBuilder();
     }
 
-    private final StringBuilder segments;
+    final private StringBuilder segments;
 
     private StringSequenceBuilder() {
         this.segments = new StringBuilder();

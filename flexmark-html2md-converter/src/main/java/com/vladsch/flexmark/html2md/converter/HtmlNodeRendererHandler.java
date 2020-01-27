@@ -16,7 +16,7 @@ public class HtmlNodeRendererHandler<N extends Node> implements CustomHtmlNodeRe
     @Override
     public void render(Node node, HtmlNodeConverterContext context, HtmlMarkdownWriter markdown) {
         //noinspection unchecked
-        myAdapter.render((N)node, context, markdown);
+        myAdapter.render((N) node, context, markdown);
     }
 
     public Class<? extends N> getNodeType() {

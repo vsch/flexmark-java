@@ -17,9 +17,9 @@ public class HtmlDeepParser {
         CDATA("<!\\[(CDATA)\\[", "\\]\\]>", false),
         ;
 
-        public final Pattern open;
-        public final Pattern close;
-        public final boolean caseInsentive;
+        final public Pattern open;
+        final public Pattern close;
+        final public boolean caseInsentive;
 
         HtmlMatch(String open, String close, boolean caseInsentive) {
             this.open = open == null ? null : Pattern.compile(open, caseInsentive ? Pattern.CASE_INSENSITIVE : 0);
@@ -28,11 +28,11 @@ public class HtmlDeepParser {
         }
     }
 
-    public static final Set<String> BLOCK_TAGS;
-    public static final Set<String> VOID_TAGS;
-    public static final Map<String, Set<String>> OPTIONAL_TAGS;
-    public static final Pattern START_PATTERN;
-    private static final HtmlMatch[] PATTERN_MAP;
+    final public static Set<String> BLOCK_TAGS;
+    final public static Set<String> VOID_TAGS;
+    final public static Map<String, Set<String>> OPTIONAL_TAGS;
+    final public static Pattern START_PATTERN;
+    final private static HtmlMatch[] PATTERN_MAP;
     static {
         BLOCK_TAGS = new HashSet<>();
         VOID_TAGS = new HashSet<>();
@@ -96,7 +96,7 @@ public class HtmlDeepParser {
         START_PATTERN = Pattern.compile(startPattern.toString());
     }
 
-    private final ArrayList<String> myOpenTags;
+    final private ArrayList<String> myOpenTags;
     private Pattern myClosingPattern;
     private HtmlMatch myHtmlMatch;
     private int myHtmlCount;
@@ -239,7 +239,6 @@ public class HtmlDeepParser {
                 if (!matcher.find()) break;
 
                 CharSequence nextHtml = html.subSequence(matcher.end(), html.length());
-                String match = matcher.group();
                 int iMax = PATTERN_MAP.length;
                 myClosingPattern = null;
 

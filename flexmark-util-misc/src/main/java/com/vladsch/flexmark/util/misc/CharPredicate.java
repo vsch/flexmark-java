@@ -48,7 +48,7 @@ public interface CharPredicate extends IntPredicate {
     boolean test(int value);
 
     default boolean test(char value) {
-        return test((int)value);
+        return test((int) value);
     }
 
     /**

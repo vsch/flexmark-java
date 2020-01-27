@@ -16,11 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class CoreRendererSpecTest extends RendererSpecTest {
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.get(null));
         userTags.add("tag");

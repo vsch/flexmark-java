@@ -6,8 +6,8 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class Reverse<T> implements ReversibleIterable<T> {
-    private final @NotNull List<T> list;
-    private final boolean isReversed;
+    final private @NotNull List<T> list;
+    final private boolean isReversed;
 
     public Reverse(@NotNull List<T> list) {
         this(list, true);
@@ -19,13 +19,9 @@ public class Reverse<T> implements ReversibleIterable<T> {
     }
 
     static class ReversedListIterator<T> implements ReversibleIterator<T> {
-        private final @NotNull List<T> list;
-        private final boolean isReversed;
+        final private @NotNull List<T> list;
+        final private boolean isReversed;
         private int index;
-
-        public ReversedListIterator(List<T> list) {
-            this(list, true);
-        }
 
         ReversedListIterator(@NotNull List<T> list, boolean isReversed) {
             this.list = list;

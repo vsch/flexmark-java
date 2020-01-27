@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TemplateReader {
-    public static final String ENTRY_START = "```````````````````````````````` template";
-    public static final String ENTRY_BREAK = "````````````````````````````````";
+    final public static String ENTRY_START = "```````````````````````````````` template";
+    final public static String ENTRY_BREAK = "````````````````````````````````";
 
     protected final InputStream inputStream;
 

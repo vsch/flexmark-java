@@ -24,14 +24,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TocSubContextSample2 {
-    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
+    final private static DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Arrays.asList(
             TocExtension.create(),
             CustomExtension.create()
     ));
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
-    public static final DataKey<String> TOC_HTML = new DataKey<>("TOC_HTML", "");
+    final public static DataKey<String> TOC_HTML = new DataKey<>("TOC_HTML", "");
 
     static class CustomNodeRenderer implements NodeRenderer {
         public static class Factory implements DelegatingNodeRendererFactory {

@@ -33,9 +33,9 @@ import java.util.Arrays;
 import static com.vladsch.flexmark.profile.pegdown.Extensions.*;
 
 public class PegdownOptionsAdapter {
-    public static final DataKey<Integer> PEGDOWN_EXTENSIONS = ParserEmulationProfile.PEGDOWN_EXTENSIONS;
+    final public static DataKey<Integer> PEGDOWN_EXTENSIONS = ParserEmulationProfile.PEGDOWN_EXTENSIONS;
 
-    private final MutableDataSet myOptions;
+    final private MutableDataSet myOptions;
     private int myPegdownExtensions = 0;
     private boolean myIsUpdateNeeded = false;
 

@@ -8,9 +8,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
-    public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Collections.emptyList());
-    public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = new DataKey<>("LOAD_EXTENSIONS", Extension.EMPTY_LIST);
-    private static final LoadUnloadDataKeyAggregator INSTANCE = new LoadUnloadDataKeyAggregator();
+    final public static DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Collections.emptyList());
+    final public static DataKey<Collection<Extension>> LOAD_EXTENSIONS = new DataKey<>("LOAD_EXTENSIONS", Extension.EMPTY_LIST);
+    final private static LoadUnloadDataKeyAggregator INSTANCE = new LoadUnloadDataKeyAggregator();
     static {
         DataSet.registerDataKeyAggregator(INSTANCE);
     }

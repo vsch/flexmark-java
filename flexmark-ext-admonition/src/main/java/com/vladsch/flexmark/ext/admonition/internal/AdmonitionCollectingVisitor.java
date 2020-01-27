@@ -11,7 +11,7 @@ import java.util.Set;
 @SuppressWarnings("WeakerAccess")
 public class AdmonitionCollectingVisitor {
     private LinkedHashSet<String> qualifiers;
-    private final NodeVisitor myVisitor;
+    final private NodeVisitor myVisitor;
 
     public AdmonitionCollectingVisitor() {
         myVisitor = new NodeVisitor(

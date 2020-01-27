@@ -1733,7 +1733,7 @@ Blank line at end of block quote not included in block quote
 > - Item
 >
 >       class Dummy {
->           private final int intValue;
+>           final private int intValue;
 > 
 >           public Dummy(int intValue) {
 >               this.intValue = intValue;
@@ -1751,7 +1751,7 @@ Blank line at end of block quote not included in block quote
     <li>
       <p>Item</p>
       <pre><code>class Dummy {
-    private final int intValue;
+    final private int intValue;
 
     public Dummy(int intValue) {
         this.intValue = intValue;

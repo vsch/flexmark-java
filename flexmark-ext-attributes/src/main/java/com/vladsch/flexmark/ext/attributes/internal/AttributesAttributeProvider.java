@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import static com.vladsch.flexmark.util.html.Attribute.CLASS_ATTR;
 
 public class AttributesAttributeProvider implements AttributeProvider {
-    private final NodeAttributeRepository nodeAttributeRepository;
-    private final AttributesOptions attributeOptions;
+    final private NodeAttributeRepository nodeAttributeRepository;
+    final private AttributesOptions attributeOptions;
 
     public AttributesAttributeProvider(LinkResolverContext context) {
         DataHolder options = context.getOptions();

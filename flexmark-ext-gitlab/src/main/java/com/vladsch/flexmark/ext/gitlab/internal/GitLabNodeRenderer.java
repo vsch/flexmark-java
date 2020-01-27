@@ -27,13 +27,13 @@ import java.util.Set;
 public class GitLabNodeRenderer implements NodeRenderer
         // , PhasedNodeRenderer
 {
-    public static final AttributablePart VIDEO = new AttributablePart("VIDEO");
-    public static final AttributablePart VIDEO_LINK = new AttributablePart("VIDEO_LINK");
+    final public static AttributablePart VIDEO = new AttributablePart("VIDEO");
+    final public static AttributablePart VIDEO_LINK = new AttributablePart("VIDEO_LINK");
 
     final GitLabOptions options;
-    private final boolean codeContentBlock;
-    private final ReferenceRepository referenceRepository;
-    private final boolean recheckUndefinedReferences;
+    final private boolean codeContentBlock;
+    final private ReferenceRepository referenceRepository;
+    final private boolean recheckUndefinedReferences;
 
     public GitLabNodeRenderer(DataHolder options) {
         this.options = new GitLabOptions(options);

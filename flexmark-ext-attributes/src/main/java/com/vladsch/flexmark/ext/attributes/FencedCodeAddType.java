@@ -6,8 +6,8 @@ public enum FencedCodeAddType {
     ADD_TO_CODE(false, true),
     ;
 
-    public final boolean addToPre;
-    public final boolean addToCode;
+    final public boolean addToPre;
+    final public boolean addToCode;
 
     FencedCodeAddType(boolean isEmojiCheatSheet, boolean addToCode) {
         this.addToPre = isEmojiCheatSheet;

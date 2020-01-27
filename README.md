@@ -131,7 +131,7 @@ import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 public class PegdownOptions {
-     private static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+     final private static DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL
     );
 
@@ -157,7 +157,7 @@ import com.vladsch.flexmark.profile.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 public class PegdownOptions {
-     private static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(true,
+     final private static DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(true,
             Extensions.ALL
     );
 

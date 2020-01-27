@@ -19,14 +19,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboTableManipulationSpecTest extends FormatterSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_tables_manipulation_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_tables_manipulation_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .set(Parser.BLANK_LINES_IN_AST, true);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("gfm", new MutableDataSet()
                 .set(TablesExtension.COLUMN_SPANS, false)

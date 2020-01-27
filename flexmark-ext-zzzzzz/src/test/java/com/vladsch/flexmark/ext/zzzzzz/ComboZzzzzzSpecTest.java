@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboZzzzzzSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_zzzzzz_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_zzzzzz_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(ZzzzzzExtension.create(), TablesExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("option1", new MutableDataSet().set(ZzzzzzExtension.ZZZZZZ_OPTION1, true));//zzzoptionszzz(CUSTOM_PROPERTIES)
     }

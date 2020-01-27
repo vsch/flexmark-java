@@ -34,9 +34,9 @@ import java.util.List;
 import java.util.Map;
 
 public class TocOptionsParserTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/toc_options_parser_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/toc_options_parser_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             //.set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.RENDER_HEADER_ID, true)
             //.set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()))
@@ -45,7 +45,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     static DataKey<TocOptions> TOC_OPTIONS = new DataKey<>("TOC_OPTIONS", TocOptions.DEFAULT);
     static DataKey<Boolean> SIM_TOC = new DataKey<>("SIM_TOC", false);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("sim-toc", new MutableDataSet().set(SIM_TOC, true));
         //optionsMap.put("text-only", new MutableDataSet().set(SimTocExtension.HEADER_TEXT_ONLY, true));
@@ -64,10 +64,10 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     }
 
     private static class ParserNode extends Node {
-        private final String nodeType;
-        private final ParsedOptionStatus status;
-        private final String message;
-        private final MutableDataHolder options = new MutableDataSet();
+        final private String nodeType;
+        final private ParsedOptionStatus status;
+        final private String message;
+        final private MutableDataHolder options = new MutableDataSet();
         private TocOptions tocOptions = null;
 
         public TocOptions getTocOptions() {
@@ -129,7 +129,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     }
 
     private static class Parser extends IParseBase {
-        private final OptionsParser<TocOptions> myParser;
+        final private OptionsParser<TocOptions> myParser;
 
         public Parser() {
             this(null);

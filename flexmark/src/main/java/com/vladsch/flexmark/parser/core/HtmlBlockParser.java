@@ -23,12 +23,12 @@ import static com.vladsch.flexmark.parser.internal.HtmlDeepParser.HtmlMatch.OPEN
 
 public class HtmlBlockParser extends AbstractBlockParser {
 
-    public static final String HTML_COMMENT_OPEN = "<!--";
-    public static final String HTML_COMMENT_CLOSE = "-->";
+    final public static String HTML_COMMENT_OPEN = "<!--";
+    final public static String HTML_COMMENT_CLOSE = "-->";
 
     private static class Patterns {
-        public final int COMMENT_PATTERN_INDEX;
-        public final Pattern[][] BLOCK_PATTERNS;
+        final public int COMMENT_PATTERN_INDEX;
+        final public Pattern[][] BLOCK_PATTERNS;
 
         public Patterns(Parsing parsing, DataHolder options) {
             this.COMMENT_PATTERN_INDEX = 2;
@@ -87,20 +87,18 @@ public class HtmlBlockParser extends AbstractBlockParser {
         }
     }
 
-    private final HtmlBlockBase block;
-    private final Pattern closingPattern;
-    private final HtmlDeepParser deepParser;
+    final private HtmlBlockBase block;
+    final private Pattern closingPattern;
+    final private HtmlDeepParser deepParser;
 
     private boolean finished = false;
     private BlockContent content = new BlockContent();
-    private final boolean parseInnerHtmlComments;
-    //private final boolean htmlBlockDeepParser;
-    private final boolean myHtmlBlockDeepParseNonBlock;
-    private final boolean myHtmlBlockDeepParseBlankLineInterrupts;
-    private final boolean myHtmlBlockDeepParseMarkdownInterruptsClosed;
-    private final boolean myHtmlBlockDeepParseBlankLineInterruptsPartialTag;
-    private final boolean myHtmlBlockDeepParseIndentedCodeInterrupts;
-    //private final boolean myHtmlBlockDeepParseFirstOpenTagOnOneLine;
+    final private boolean parseInnerHtmlComments;
+    final private boolean myHtmlBlockDeepParseNonBlock;
+    final private boolean myHtmlBlockDeepParseBlankLineInterrupts;
+    final private boolean myHtmlBlockDeepParseMarkdownInterruptsClosed;
+    final private boolean myHtmlBlockDeepParseBlankLineInterruptsPartialTag;
+    final private boolean myHtmlBlockDeepParseIndentedCodeInterrupts;
 
     HtmlBlockParser(DataHolder options, Pattern closingPattern, boolean isComment, HtmlDeepParser deepParser) {
         this.closingPattern = closingPattern;
@@ -283,12 +281,12 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     private static class BlockFactory extends AbstractBlockParserFactory {
         private Patterns myPatterns = null;
-        private final boolean myHtmlCommentBlocksInterruptParagraph;
-        private final boolean myHtmlBlockDeepParser;
-        private final boolean myHtmlBlockDeepParseNonBlock;
-        private final boolean myHtmlBlockDeepParseFirstOpenTagOnOneLine;
-        private final boolean myHtmlBlockCommentOnlyFullLine;
-        private final boolean myHtmlBlockStartOnlyOnBlockTags;
+        final private boolean myHtmlCommentBlocksInterruptParagraph;
+        final private boolean myHtmlBlockDeepParser;
+        final private boolean myHtmlBlockDeepParseNonBlock;
+        final private boolean myHtmlBlockDeepParseFirstOpenTagOnOneLine;
+        final private boolean myHtmlBlockCommentOnlyFullLine;
+        final private boolean myHtmlBlockStartOnlyOnBlockTags;
 
         private BlockFactory(DataHolder options) {
             super(options);

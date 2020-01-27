@@ -15,7 +15,7 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
     static final boolean WANT_EXCLAMATION_PREFIX = false;
     static final int BRACKET_NESTING_LEVEL = 0;
 
-    private final FootnoteRepository footnoteRepository;
+    final private FootnoteRepository footnoteRepository;
 
     public FootnoteLinkRefProcessor(Document document) {
         this.footnoteRepository = FootnoteExtension.FOOTNOTES.get(document);

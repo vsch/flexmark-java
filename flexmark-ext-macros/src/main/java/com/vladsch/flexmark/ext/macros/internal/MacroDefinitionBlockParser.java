@@ -26,13 +26,11 @@ public class MacroDefinitionBlockParser extends AbstractBlockParser {
     static Pattern MACRO_BLOCK_START_INTELLIJ = Pattern.compile(">>>([\u001f\\w_-]+)(\\s*$)");
     static Pattern MACRO_BLOCK_END = Pattern.compile("<<<(\\s*$)");
 
-    private final MacroDefinitionBlock block = new MacroDefinitionBlock();
+    final private MacroDefinitionBlock block = new MacroDefinitionBlock();
     private BlockContent content = new BlockContent();
-    private final MacrosOptions options;
     private boolean hadClose = false;
 
     MacroDefinitionBlockParser(DataHolder options, BasedSequence openMarker, BasedSequence name, BasedSequence openTrailing) {
-        this.options = new MacrosOptions(options);
         this.block.setOpeningMarker(openMarker);
         this.block.setName(name);
         this.block.setOpeningTrailing(openTrailing);
@@ -110,15 +108,6 @@ public class MacroDefinitionBlockParser extends AbstractBlockParser {
         @Override
         public Set<Class<?>> getAfterDependents() {
             return null;
-            //return new HashSet<>(Arrays.asList(
-            //        BlockQuoteParser.Factory.class,
-            //        HeadingParser.Factory.class,
-            //        FencedCodeBlockParser.Factory.class,
-            //        HtmlBlockParser.Factory.class,
-            //        ThematicBreakParser.Factory.class,
-            //        ListBlockParser.Factory.class,
-            //        IndentedCodeBlockParser.Factory.class
-            //));
         }
 
         @Nullable
@@ -142,11 +131,8 @@ public class MacroDefinitionBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final MacrosOptions options;
-
         BlockFactory(DataHolder options) {
             super(options);
-            this.options = new MacrosOptions(options);
         }
 
         boolean haveBlockQuoteParser(ParserState state) {

@@ -27,12 +27,12 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
     }
 
     @Override
-    public final char getOpeningCharacter() {
+    final public char getOpeningCharacter() {
         return myOpenDelimiter;
     }
 
     @Override
-    public final char getClosingCharacter() {
+    final public char getClosingCharacter() {
         return myCloseDelimiter;
     }
 

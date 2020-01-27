@@ -33,7 +33,6 @@ public class BasedOffsetTracker {
      * @param offset      offset in base sequence
      * @param isEndOffset if true then offset represents the range [offset, offset) so it is located between character at offset-1 and character at offset
      *                    if false then offset represents the character at offset and the range [offset, offset+1)
-     *
      * @return information about the offset in this sequence
      */
     @NotNull
@@ -136,7 +135,6 @@ public class BasedOffsetTracker {
      * Create a based offset tracker for the given sequence
      *
      * @param sequence sequence which to create offset tracker
-     *
      * @return based offset tracker
      */
     @NotNull
@@ -149,7 +147,6 @@ public class BasedOffsetTracker {
      * Create a based offset tracker for the given sequence
      *
      * @param sequence sequence which to create offset tracker
-     *
      * @return based offset tracker
      */
     @NotNull

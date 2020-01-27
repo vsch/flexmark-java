@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ParagraphCustomRenderingSample {
-    private static final DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(
+    final private static DataHolder OPTIONS = new MutableDataSet().set(Parser.EXTENSIONS, Collections.singletonList(
             CustomExtension.create()
     ));
 
@@ -27,7 +27,7 @@ public class ParagraphCustomRenderingSample {
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).indentSize(2).build();
 
     static class CustomNodeRenderer implements NodeRenderer {
-        private final boolean codeSoftLineBreaks;
+        final private boolean codeSoftLineBreaks;
 
         public CustomNodeRenderer(DataHolder options) {
             codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.get(options);

@@ -19,11 +19,11 @@ import org.jetbrains.annotations.NotNull;
 public class GfmIssuesExtension implements Parser.ParserExtension
         , HtmlRenderer.HtmlRendererExtension
 {
-    public static final DataKey<String> GIT_HUB_ISSUES_URL_ROOT = new DataKey<>("GIT_HUB_ISSUES_URL_ROOT", "issues");
-    public static final DataKey<String> GIT_HUB_ISSUE_URL_PREFIX = new DataKey<>("GIT_HUB_ISSUE_URL_PREFIX", "/");
-    public static final DataKey<String> GIT_HUB_ISSUE_URL_SUFFIX = new DataKey<>("GIT_HUB_ISSUE_URL_SUFFIX", "");
-    public static final DataKey<String> GIT_HUB_ISSUE_HTML_PREFIX = new DataKey<>("GIT_HUB_ISSUE_HTML_PREFIX", "");
-    public static final DataKey<String> GIT_HUB_ISSUE_HTML_SUFFIX = new DataKey<>("GIT_HUB_ISSUE_HTML_SUFFIX", "");
+    final public static DataKey<String> GIT_HUB_ISSUES_URL_ROOT = new DataKey<>("GIT_HUB_ISSUES_URL_ROOT", "issues");
+    final public static DataKey<String> GIT_HUB_ISSUE_URL_PREFIX = new DataKey<>("GIT_HUB_ISSUE_URL_PREFIX", "/");
+    final public static DataKey<String> GIT_HUB_ISSUE_URL_SUFFIX = new DataKey<>("GIT_HUB_ISSUE_URL_SUFFIX", "");
+    final public static DataKey<String> GIT_HUB_ISSUE_HTML_PREFIX = new DataKey<>("GIT_HUB_ISSUE_HTML_PREFIX", "");
+    final public static DataKey<String> GIT_HUB_ISSUE_HTML_SUFFIX = new DataKey<>("GIT_HUB_ISSUE_HTML_SUFFIX", "");
 
     private GfmIssuesExtension() {
     }

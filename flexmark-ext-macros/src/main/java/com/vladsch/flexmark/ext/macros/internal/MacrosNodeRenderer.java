@@ -18,9 +18,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MacrosNodeRenderer implements PhasedNodeRenderer {
-    private final MacrosOptions options;
+    final private MacrosOptions options;
     final MacroDefinitionRepository repository;
-    private boolean recheckUndefinedReferences;
+    final private boolean recheckUndefinedReferences;
 
     public MacrosNodeRenderer(DataHolder options) {
         this.options = new MacrosOptions(options);

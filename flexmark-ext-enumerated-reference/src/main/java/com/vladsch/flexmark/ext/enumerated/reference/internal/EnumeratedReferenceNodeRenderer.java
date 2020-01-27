@@ -16,10 +16,10 @@ import java.util.Set;
 public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
         // , PhasedNodeRenderer
 {
-    private final EnumeratedReferenceOptions options;
+    final private EnumeratedReferenceOptions options;
     private EnumeratedReferences enumeratedOrdinals;
     private Runnable ordinalRunnable;
-    private final HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
+    final private HtmlIdGenerator headerIdGenerator; // used for enumerated text reference
 
     public EnumeratedReferenceNodeRenderer(DataHolder options) {
         this.options = new EnumeratedReferenceOptions(options);

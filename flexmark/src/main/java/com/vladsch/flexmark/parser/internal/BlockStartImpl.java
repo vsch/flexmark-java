@@ -5,7 +5,7 @@ import com.vladsch.flexmark.parser.block.BlockStart;
 
 public class BlockStartImpl extends BlockStart {
 
-    private final BlockParser[] blockParsers;
+    final private BlockParser[] blockParsers;
     private int newIndex = -1;
     private int newColumn = -1;
     private boolean replaceActiveBlockParser = false;

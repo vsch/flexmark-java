@@ -6,9 +6,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ResolvedLink {
-    private final @NotNull LinkType myLinkType;
-    private final @NotNull String myUrl;
-    private final @NotNull LinkStatus myStatus;
+    final private @NotNull LinkType myLinkType;
+    final private @NotNull String myUrl;
+    final private @NotNull LinkStatus myStatus;
     private @Nullable Attributes myAttributes;
 
     public ResolvedLink(@NotNull LinkType linkType, @NotNull CharSequence url) {

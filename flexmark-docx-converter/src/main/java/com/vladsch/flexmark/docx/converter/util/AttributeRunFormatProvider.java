@@ -18,7 +18,6 @@ public class AttributeRunFormatProvider<T> extends RunFormatProviderBase<T> {
 
     @Override
     public void getRPr(RPr rPr) {
-        //super.getRPr(rPr);
         RunFormatProvider<T> parent = myParent;
         if (parent != null) {
             RPr rpr1 = myDocx.getFactory().createRPr();
@@ -30,10 +29,6 @@ public class AttributeRunFormatProvider<T> extends RunFormatProviderBase<T> {
         ParaRPr paraRPr = myDocx.getP().getPPr().getRPr();
 
         myAttributeFormat.setFormatRPr(rPr, myDocx);
-
-        // TODO: fontFamily
-        // TODO: fontSize
-
         myDocx.getHelper().keepDiff(rPr, paraRPr);
     }
 }

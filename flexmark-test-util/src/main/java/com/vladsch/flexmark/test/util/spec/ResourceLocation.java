@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class ResourceLocation {
-    public static final ResourceLocation NULL = of(Object.class, "", "");
+    final public static ResourceLocation NULL = of(Object.class, "", "");
 
     final private @NotNull Class<?> resourceClass;
     final private @NotNull String resourcePath;

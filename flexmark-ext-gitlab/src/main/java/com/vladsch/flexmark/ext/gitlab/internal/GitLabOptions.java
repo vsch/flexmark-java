@@ -10,24 +10,24 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 
 public class GitLabOptions implements MutableDataSetter {
-    public final boolean insParser;
-    public final boolean delParser;
-    public final boolean inlineMathParser;
-    public final boolean blockQuoteParser;
-    public final boolean nestedBlockQuotes;
-    public final boolean renderBlockMath;
-    public final boolean renderBlockMermaid;
-    public final boolean renderVideoImages;
-    public final boolean renderVideoLink;
-    public final String inlineMathClass;
-    public final String blockMathClass;
-    public final String blockMermaidClass;
-    public final String blockInfoDelimiters;
-    public final CharPredicate blockInfoDelimiterSet;
-    public final String videoImageClass;
-    public final String videoImageLinkTextFormat;
-    public final String videoImageExtensions;
-    public final HashSet<String> videoImageExtensionSet;
+    final public boolean insParser;
+    final public boolean delParser;
+    final public boolean inlineMathParser;
+    final public boolean blockQuoteParser;
+    final public boolean nestedBlockQuotes;
+    final public boolean renderBlockMath;
+    final public boolean renderBlockMermaid;
+    final public boolean renderVideoImages;
+    final public boolean renderVideoLink;
+    final public String inlineMathClass;
+    final public String blockMathClass;
+    final public String blockMermaidClass;
+    final public String blockInfoDelimiters;
+    final public CharPredicate blockInfoDelimiterSet;
+    final public String videoImageClass;
+    final public String videoImageLinkTextFormat;
+    final public String videoImageExtensions;
+    final public HashSet<String> videoImageExtensionSet;
 
     public GitLabOptions(DataHolder options) {
         insParser = GitLabExtension.INS_PARSER.get(options);

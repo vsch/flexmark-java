@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.html.renderer;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Factory for instantiating an HTML id generator

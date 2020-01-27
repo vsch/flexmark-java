@@ -16,7 +16,7 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B extends Node & ReferenceNode<R, B, N>, N extends Node & ReferencingNode<R, B>> implements PhasedNodeFormatter {
-    public static final HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<>(Arrays.asList(
+    final public static HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<>(Arrays.asList(
             FormattingPhase.COLLECT,
             FormattingPhase.DOCUMENT_TOP,
             FormattingPhase.DOCUMENT_BOTTOM
@@ -50,8 +50,8 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
 
     private Map<String, String> referenceTranslationMap;
     protected Map<String, String> referenceUniqificationMap;
-    private final DataKey<Map<String, String>> myReferenceMapKey;
-    private final DataKey<Map<String, String>> myReferenceUniqificationMapKey;
+    final private DataKey<Map<String, String>> myReferenceMapKey;
+    final private DataKey<Map<String, String>> myReferenceUniqificationMapKey;
 
     protected ElementPlacement getTranslationReferencePlacement(NodeFormatterContext context) {
         if (context.isTransformingText()) {

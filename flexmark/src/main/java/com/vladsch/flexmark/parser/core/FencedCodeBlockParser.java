@@ -22,17 +22,17 @@ import java.util.regex.Pattern;
 
 public class FencedCodeBlockParser extends AbstractBlockParser {
 
-    private static final Pattern OPENING_FENCE = Pattern.compile("^`{3,}(?!.*`)|^~{3,}(?!.*~)");
-    private static final Pattern CLOSING_FENCE = Pattern.compile("^(?:`{3,}|~{3,})(?=[ \t]*$)");
+    final private static Pattern OPENING_FENCE = Pattern.compile("^`{3,}(?!.*`)|^~{3,}(?!.*~)");
+    final private static Pattern CLOSING_FENCE = Pattern.compile("^(?:`{3,}|~{3,})(?=[ \t]*$)");
 
-    private final FencedCodeBlock block = new FencedCodeBlock();
+    final private FencedCodeBlock block = new FencedCodeBlock();
     private BlockContent content = new BlockContent();
-    private char fenceChar;
-    private int fenceLength;
-    private int fenceIndent;
-    private int fenceMarkerIndent;
-    private final boolean matchingCloser;
-    private final boolean codeContentBlock;
+    final private char fenceChar;
+    final private int fenceLength;
+    final private int fenceIndent;
+    final private int fenceMarkerIndent;
+    final private boolean matchingCloser;
+    final private boolean codeContentBlock;
 
     public FencedCodeBlockParser(DataHolder options, char fenceChar, int fenceLength, int fenceIndent, int fenceMarkerIndent) {
         this.fenceChar = fenceChar;

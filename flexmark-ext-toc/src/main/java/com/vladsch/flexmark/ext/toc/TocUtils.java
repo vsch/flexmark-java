@@ -9,7 +9,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.ast.Document;
@@ -35,8 +34,8 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("WeakerAccess")
 public class TocUtils {
-    public static final AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
-    public static final AttributablePart TOC_LIST = new AttributablePart("TOC_LIST");
+    final public static AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
+    final public static AttributablePart TOC_LIST = new AttributablePart("TOC_LIST");
 
     public static String getTocPrefix(TocOptions options, TocOptions defaultOptions) {
         DelimitedBuilder out = new DelimitedBuilder(" ");
@@ -128,7 +127,7 @@ public class TocUtils {
                 markdown.append(heading);
             }
 
-            if (Parser.PARSER_EMULATION_PROFILE.get(document).family== ParserEmulationProfile.FIXED_INDENT) {
+            if (Parser.PARSER_EMULATION_PROFILE.get(document).family == ParserEmulationProfile.FIXED_INDENT) {
                 markdown.setIndentPrefix(RepeatedSequence.ofSpaces(4));
             } else {
                 markdown.setIndentPrefix(RepeatedSequence.ofSpaces(options.isNumbered ? 3 : 2));

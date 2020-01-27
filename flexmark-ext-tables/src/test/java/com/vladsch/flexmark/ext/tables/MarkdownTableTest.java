@@ -2571,7 +2571,6 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         assertEquals(pos + 38, offset);
     }
 
-
     @Test
     public void test_EmbeddedPipe0Options() {
         String markdown = "" +

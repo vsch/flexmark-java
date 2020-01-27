@@ -7,9 +7,9 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class BooleanOptionParser<T> implements OptionParser<T> {
-    public static final String OPTION_0_PARAMETERS_1_IGNORED = "Option {0} does not have any parameters. {1} was ignored";
-    public static final String KEY_OPTION_0_PARAMETERS_1_IGNORED = "options.parser.boolean-option.ignored";
-    private final String optionName;
+    final public static String OPTION_0_PARAMETERS_1_IGNORED = "Option {0} does not have any parameters. {1} was ignored";
+    final public static String KEY_OPTION_0_PARAMETERS_1_IGNORED = "options.parser.boolean-option.ignored";
+    final private String optionName;
 
     public BooleanOptionParser(String optionName) {
         this.optionName = optionName;

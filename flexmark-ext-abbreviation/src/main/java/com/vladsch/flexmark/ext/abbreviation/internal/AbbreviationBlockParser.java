@@ -15,9 +15,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AbbreviationBlockParser extends AbstractBlockParser {
-    private static Pattern ABBREVIATION_BLOCK = Pattern.compile("^\\*\\[\\s*.*\\s*\\]:");
+    static Pattern ABBREVIATION_BLOCK = Pattern.compile("^\\*\\[\\s*.*\\s*\\]:");
 
-    private final AbbreviationBlock block = new AbbreviationBlock();
+    final AbbreviationBlock block = new AbbreviationBlock();
 
     @Override
     public Block getBlock() {
@@ -77,11 +77,8 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final AbbreviationOptions options;
-
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
-            this.options = new AbbreviationOptions(options);
         }
 
         @Override

@@ -481,8 +481,9 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     /**
      * Get the chars needed for padding to length
+     *
      * @param length length
-     * @param pad char to use for padding
+     * @param pad    char to use for padding
      * @return padding chars
      */
     @NotNull T padding(int length, char pad);
@@ -490,8 +491,9 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
 
     /**
      * Pad this sequence to given length
+     *
      * @param length length to pad
-     * @param pad char to use for padding
+     * @param pad    char to use for padding
      * @return sequence padded
      */
     @NotNull T padStart(int length, char pad);

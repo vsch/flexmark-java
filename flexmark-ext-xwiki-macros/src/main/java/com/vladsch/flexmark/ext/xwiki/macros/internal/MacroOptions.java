@@ -4,9 +4,9 @@ import com.vladsch.flexmark.ext.xwiki.macros.MacroExtension;
 import com.vladsch.flexmark.util.data.DataHolder;
 
 class MacroOptions {
-    public final boolean enableInlineMacros;
-    public final boolean enableBlockMacros;
-    public final boolean enableRendering;
+    final public boolean enableInlineMacros;
+    final public boolean enableBlockMacros;
+    final public boolean enableRendering;
 
     public MacroOptions(DataHolder options) {
         enableInlineMacros = MacroExtension.ENABLE_INLINE_MACROS.get(options);

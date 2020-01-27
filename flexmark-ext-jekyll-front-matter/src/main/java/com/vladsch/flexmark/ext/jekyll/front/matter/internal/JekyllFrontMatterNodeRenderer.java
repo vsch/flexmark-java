@@ -13,10 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class JekyllFrontMatterNodeRenderer implements NodeRenderer {
-    private final JekyllFrontMatterOptions options;
-
     public JekyllFrontMatterNodeRenderer(DataHolder options) {
-        this.options = new JekyllFrontMatterOptions(options);
+
     }
 
     @Override

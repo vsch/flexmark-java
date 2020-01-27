@@ -38,11 +38,11 @@ import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_TRAILING_
 
 public class FormatterUtils {
 
-    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
-    public static final DataKey<Boolean> FIRST_LIST_ITEM_CHILD = new DataKey<>("FIRST_LIST_ITEM_CHILD", false); // Set to true for first block list item child of an empty list item
-    public static final Function<CharSequence, Pair<Integer, Integer>> NULL_PADDING = sequence -> Pair.of(0, 0);
-    public static final DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC = new DataKey<>("LIST_ITEM_NUMBER", NULL_PADDING); // function takes ordered marker and returns Pair LeftPad,RightPad
-    public static final NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
+    final public static DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
+    final public static DataKey<Boolean> FIRST_LIST_ITEM_CHILD = new DataKey<>("FIRST_LIST_ITEM_CHILD", false); // Set to true for first block list item child of an empty list item
+    final public static Function<CharSequence, Pair<Integer, Integer>> NULL_PADDING = sequence -> Pair.of(0, 0);
+    final public static DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC = new DataKey<>("LIST_ITEM_NUMBER", NULL_PADDING); // function takes ordered marker and returns Pair LeftPad,RightPad
+    final public static NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
 
     public static String getBlockLikePrefix(BlockQuoteLike node, NodeFormatterContext context, BlockQuoteMarker blockQuoteMarkers, @NotNull BasedSequence prefix) {
         String prefixChars = node.getOpeningMarker().toString();
@@ -284,8 +284,6 @@ public class FormatterUtils {
     }
 
     public static boolean isNotLastItem(@Nullable Node node) {
-        Node originalNode = node;
-
         while (node != null && !(node instanceof Document)) {
             if (node.getNextAnyNot(BlankLine.class, HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) != null) return true;
             node = node.getParent();
@@ -609,7 +607,6 @@ public class FormatterUtils {
                             @NotNull Pair<Integer, Integer> lineColumn = wrappedText.lineColumnAtIndex(offsetIndex);
                             int trackedLine = lineColumn.getFirst();
                             LineInfo lineInfo = markdown.getLineInfo(startLine + trackedLine);
-                            BasedSequence line = markdown.getLine(startLine + trackedLine);
 
                             int lengthOffset = startLineInfo.sumLength - startLineInfo.length;
                             int prefixDelta = lineInfo.sumPrefixLength - startLineInfo.sumPrefixLength + startLineInfo.prefixLength;

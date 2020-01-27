@@ -8,8 +8,8 @@ import org.junit.runners.Parameterized;
 import java.util.List;
 
 public class ComboHtmlConverterIssueTest extends HtmlConverterTest {
-    private static final String SPEC_RESOURCE = "/html_converter_issue_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static String SPEC_RESOURCE = "/html_converter_issue_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     public ComboHtmlConverterIssueTest(@NotNull SpecExample example) {
         super(example, null);

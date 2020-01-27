@@ -8,16 +8,16 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class TreeIterator<N> {
-    public final static Logger LOG = LoggerFactory.getILoggerFactory().getLogger("com.vladsch.treeIteration.util.looping");
-    public final static Logger LOG_INFO = LoggerFactory.getILoggerFactory().getLogger("com.vladsch.treeIteration.util.looping-summary");
-    public final static Logger LOG_TRACE = LoggerFactory.getILoggerFactory().getLogger("com.vladsch.treeIteration.util.looping-detailed");
+    final public static Logger LOG = LoggerFactory.getILoggerFactory().getLogger("com.vladsch.treeIteration.util.looping");
+    final public static Logger LOG_INFO = LoggerFactory.getILoggerFactory().getLogger("com.vladsch.treeIteration.util.looping-summary");
+    final public static Logger LOG_TRACE = LoggerFactory.getILoggerFactory().getLogger("com.vladsch.treeIteration.util.looping-detailed");
 
-    public static final Predicate<Object> TRUE = o -> true;
-    public static final Predicate<Object> FALSE = o -> false;
-    public static final Predicate<Object> NOT_NULL = Objects::nonNull;
+    final public static Predicate<Object> TRUE = o -> true;
+    final public static Predicate<Object> FALSE = o -> false;
+    final public static Predicate<Object> NOT_NULL = Objects::nonNull;
 
-    private final IterationConditions<N> myConstraints;
-    private final Predicate<? super N> myRecursion;
+    final private IterationConditions<N> myConstraints;
+    final private Predicate<? super N> myRecursion;
     protected final Predicate<? super N> myFilter;
 
     public TreeIterator(IterationConditions<N> constraints, Predicate<? super N> filter) {

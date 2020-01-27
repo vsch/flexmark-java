@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 @SuppressWarnings("WeakerAccess")
 public class TableSection {
-    public final TableSectionType sectionType;
-    public final ArrayList<TableRow> rows = new ArrayList<>();
+    final public TableSectionType sectionType;
+    final public ArrayList<TableRow> rows = new ArrayList<>();
     protected int row;
     protected int column;
 

@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.sequence.mappers;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 
 public class NullEncoder {
-    public static final CharMapper encodeNull = new EncodeNull();
-    public static final CharMapper decodeNull = new DecodeNull();
+    final public static CharMapper encodeNull = new EncodeNull();
+    final public static CharMapper decodeNull = new DecodeNull();
 
     private static class DecodeNull implements CharMapper {
         DecodeNull() {}

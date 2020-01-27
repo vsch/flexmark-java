@@ -25,19 +25,19 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class TranslationFormatterSpecTest extends FormatterTranslationSpecTestBase {
-    private static final boolean SHOW_INTERMEDIATE = false;
-    private static final boolean SHOW_INTERMEDIATE_AST = false;
+    final private static boolean SHOW_INTERMEDIATE = false;
+    final private static boolean SHOW_INTERMEDIATE_AST = false;
 
-    public static final DataKey<Boolean> DETAILS = new DataKey<>("DETAILS", SHOW_INTERMEDIATE);
-    public static final DataKey<Boolean> AST_DETAILS = new DataKey<>("AST_DETAILS", SHOW_INTERMEDIATE_AST);
+    final public static DataKey<Boolean> DETAILS = new DataKey<>("DETAILS", SHOW_INTERMEDIATE);
+    final public static DataKey<Boolean> AST_DETAILS = new DataKey<>("AST_DETAILS", SHOW_INTERMEDIATE_AST);
 
-    private static DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.HTML_FOR_TRANSLATOR, true)
             .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
             .set(Formatter.MAX_TRAILING_BLANK_LINES, 0)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("details", new MutableDataSet().set(DETAILS, true));
         optionsMap.put("ast-details", new MutableDataSet().set(AST_DETAILS, true));

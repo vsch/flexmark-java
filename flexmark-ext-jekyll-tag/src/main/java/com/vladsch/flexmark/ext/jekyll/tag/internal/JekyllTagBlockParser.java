@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 public class JekyllTagBlockParser extends AbstractBlockParser {
-    public static final String INCLUDE_TAG = "include";
+    final public static String INCLUDE_TAG = "include";
     final JekyllTagBlock block = new JekyllTagBlock();
     private BlockContent content = new BlockContent();
 
@@ -97,8 +97,8 @@ public class JekyllTagBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final JekyllTagParsing parsing;
-        private final boolean listIncludesOnly;
+        final private JekyllTagParsing parsing;
+        final private boolean listIncludesOnly;
 
         BlockFactory(DataHolder options) {
             super(options);

@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboInsSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ins_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ins_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(InsExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("style-ins", new MutableDataSet().set(InsExtension.INS_STYLE_HTML_OPEN, "<span class=\"text-ins\">").set(InsExtension.INS_STYLE_HTML_CLOSE, "</span>"));
     }

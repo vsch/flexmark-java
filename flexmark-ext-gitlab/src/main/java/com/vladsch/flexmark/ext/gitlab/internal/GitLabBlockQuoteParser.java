@@ -20,13 +20,11 @@ public class GitLabBlockQuoteParser extends AbstractBlockParser {
     static Pattern GIT_LAB_BLOCK_START = Pattern.compile(">>>(\\s*$)");
     static Pattern GIT_LAB_BLOCK_END = Pattern.compile(">>>(\\s*$)");
 
-    private final GitLabBlockQuote block = new GitLabBlockQuote();
+    final private GitLabBlockQuote block = new GitLabBlockQuote();
     private BlockContent content = new BlockContent();
-    private final GitLabOptions options;
     private boolean hadClose = false;
 
     GitLabBlockQuoteParser(DataHolder options, BasedSequence openMarker, BasedSequence openTrailing) {
-        this.options = new GitLabOptions(options);
         this.block.setOpeningMarker(openMarker);
         this.block.setOpeningTrailing(openTrailing);
     }
@@ -135,7 +133,7 @@ public class GitLabBlockQuoteParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final GitLabOptions options;
+        final private GitLabOptions options;
 
         BlockFactory(DataHolder options) {
             super(options);

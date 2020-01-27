@@ -18,8 +18,8 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
 public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
-    private final EnumeratedReferences enumeratedReferences;
-    private final HtmlIdGenerator headerIdGenerator;
+    final private EnumeratedReferences enumeratedReferences;
+    final private HtmlIdGenerator headerIdGenerator;
 
     public EnumeratedReferenceNodePostProcessor(Document document) {
         enumeratedReferences = EnumeratedReferenceExtension.ENUMERATED_REFERENCE_ORDINALS.get(document);

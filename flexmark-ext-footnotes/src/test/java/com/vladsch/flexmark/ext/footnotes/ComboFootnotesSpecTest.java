@@ -16,12 +16,12 @@ import java.util.Map;
 
 public class ComboFootnotesSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_footnotes_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(FootnoteExtension.create()))
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("custom", new MutableDataSet()
                 .set(FootnoteExtension.FOOTNOTE_REF_PREFIX, "[")

@@ -28,19 +28,19 @@ import java.util.regex.Pattern;
 import static com.vladsch.flexmark.util.misc.Utils.minLimit;
 
 public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
-    public static final String EMOJI_ALT_PREFIX = "emoji ";
+    final public static String EMOJI_ALT_PREFIX = "emoji ";
 
-    public static final Pattern NUMERIC_DOT_LIST_PAT = Pattern.compile("^(\\d+)\\.\\s*$");
-    public static final Pattern NUMERIC_PAREN_LIST_PAT = Pattern.compile("^(\\d+)\\)\\s*$");
-    public static final Pattern NON_NUMERIC_DOT_LIST_PAT = Pattern.compile("^((?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern() + ")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern() + ")|[a-z]+|[A-Z]+))\\.\\s*$");
-    public static final Pattern NON_NUMERIC_PAREN_LIST_PAT = Pattern.compile("^((?:[a-z]+|[A-Z]+))\\)\\s*$");
-    public static final Pattern BULLET_LIST_PAT = Pattern.compile("^([·])\\s*$");
-    public static final Pattern ALPHA_NUMERAL_PAT = Pattern.compile("^[a-z]+|[A-Z]+$");
+    final public static Pattern NUMERIC_DOT_LIST_PAT = Pattern.compile("^(\\d+)\\.\\s*$");
+    final public static Pattern NUMERIC_PAREN_LIST_PAT = Pattern.compile("^(\\d+)\\)\\s*$");
+    final public static Pattern NON_NUMERIC_DOT_LIST_PAT = Pattern.compile("^((?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern() + ")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern() + ")|[a-z]+|[A-Z]+))\\.\\s*$");
+    final public static Pattern NON_NUMERIC_PAREN_LIST_PAT = Pattern.compile("^((?:[a-z]+|[A-Z]+))\\)\\s*$");
+    final public static Pattern BULLET_LIST_PAT = Pattern.compile("^([·])\\s*$");
+    final public static Pattern ALPHA_NUMERAL_PAT = Pattern.compile("^[a-z]+|[A-Z]+$");
 
     public static HashSet<String> explicitLinkTextTags = new HashSet<>(Arrays.asList(FlexmarkHtmlConverter.EXPLICIT_LINK_TEXT_TAGS));
 
-    private final HashMap<String, String> myAbbreviations;
-    private final HashMap<String, String> myMacrosMap;               // macro name to macro content
+    final private HashMap<String, String> myAbbreviations;
+    final private HashMap<String, String> myMacrosMap;               // macro name to macro content
     final private HtmlConverterOptions myHtmlConverterOptions;
     private MarkdownTable myTable;
     private boolean myTableSuppressColumns = false;
@@ -556,7 +556,6 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 String emojiAlt = element.attr("alt");
                 if (emojiAlt.startsWith(EMOJI_ALT_PREFIX)) {
                     // see if the full attribute is emoji
-                    List<EmojiReference.Emoji> emojiList = EmojiReference.getEmojiList();
                     int pos = emojiAlt.indexOf(":", EMOJI_ALT_PREFIX.length());
                     if (pos > 0) {
                         String category = emojiAlt.substring(EMOJI_ALT_PREFIX.length(), pos);

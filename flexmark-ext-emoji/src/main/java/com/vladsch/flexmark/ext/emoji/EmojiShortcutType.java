@@ -7,8 +7,8 @@ public enum EmojiShortcutType {
     ANY_GITHUB_PREFERRED(true, true),
     ;
 
-    public final boolean isEmojiCheatSheet;
-    public final boolean isGitHub;
+    final public boolean isEmojiCheatSheet;
+    final public boolean isGitHub;
 
     EmojiShortcutType(boolean isEmojiCheatSheet, boolean isGitHub) {
         this.isEmojiCheatSheet = isEmojiCheatSheet;

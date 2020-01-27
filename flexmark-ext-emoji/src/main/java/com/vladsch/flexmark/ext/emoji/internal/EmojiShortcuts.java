@@ -12,11 +12,11 @@ import java.io.File;
 import java.util.HashMap;
 
 public class EmojiShortcuts {
-    public static final String gitHubUrlPrefix = EmojiReference.githubUrl;
+    final public static String gitHubUrlPrefix = EmojiReference.githubUrl;
 
-    private static final HashMap<String, Emoji> emojiShortcuts = new HashMap<>();
-    private static final HashMap<String, Emoji> emojiURIs = new HashMap<>();
-    private static final HashMap<Emoji, String> emojiUnicodeChars = new HashMap<>();
+    final private static HashMap<String, Emoji> emojiShortcuts = new HashMap<>();
+    final private static HashMap<String, Emoji> emojiURIs = new HashMap<>();
+    final private static HashMap<Emoji, String> emojiUnicodeChars = new HashMap<>();
 
     synchronized public static String getUnicodeChars(Emoji emoji) {
         if (emoji == null || emoji.unicodeChars == null) {

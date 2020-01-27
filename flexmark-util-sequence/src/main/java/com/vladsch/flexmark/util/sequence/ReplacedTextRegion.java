@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
 public class ReplacedTextRegion {
-    private final Range base;
-    private final Range original;
-    private final Range replaced;
+    final private Range base;
+    final private Range original;
+    final private Range replaced;
 
     public ReplacedTextRegion(Range base, Range original, Range replaced) {
         this.base = base;

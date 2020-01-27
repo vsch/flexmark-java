@@ -15,11 +15,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
-    public static final DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<>("ABBREVIATION_TRANSLATION_MAP", new HashMap<>()); //
-    public static final DataKey<Map<String, String>> ABBREVIATION_UNIQUIFICATION_MAP = new DataKey<>("ABBREVIATION_UNIQUIFICATION_MAP", new HashMap<>()); // uniquified references
-    private final FormatOptions options;
-    private final boolean transformUnderscores;
-    private final boolean makeMergedAbbreviationsUnique;
+    final public static DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<>("ABBREVIATION_TRANSLATION_MAP", new HashMap<>()); //
+    final public static DataKey<Map<String, String>> ABBREVIATION_UNIQUIFICATION_MAP = new DataKey<>("ABBREVIATION_UNIQUIFICATION_MAP", new HashMap<>()); // uniquified references
+    final private FormatOptions options;
+    final private boolean transformUnderscores;
+    final private boolean makeMergedAbbreviationsUnique;
 
     public AbbreviationNodeFormatter(DataHolder options) {
         super(options, ABBREVIATION_TRANSLATION_MAP, ABBREVIATION_UNIQUIFICATION_MAP);

@@ -16,10 +16,10 @@ import java.util.Set;
 
 public class ClassifyingNodeTracker implements NodeTracker {
     protected final @NotNull ClassificationBag<Class<?>, Node> nodeClassifier;
-    private final @Nullable NodeTracker host;
-    private final @NotNull OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
-    private final @NotNull OrderedSet<Class<?>> exclusionSet;
-    private final @NotNull HashMap<Integer, BitSet> nodeAncestryMap;
+    final private @Nullable NodeTracker host;
+    final private @NotNull OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
+    final private @NotNull OrderedSet<Class<?>> exclusionSet;
+    final private @NotNull HashMap<Integer, BitSet> nodeAncestryMap;
 
     public ClassifyingNodeTracker(@Nullable NodeTracker host, @NotNull Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
         this.host = host;

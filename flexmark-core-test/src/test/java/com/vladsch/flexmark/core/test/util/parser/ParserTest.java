@@ -659,7 +659,7 @@ final public class ParserTest {
     }
 
     private static class DashBlockParser extends AbstractBlockParser {
-        private final DashBlock dash;
+        final private DashBlock dash;
 
         public DashBlockParser(BasedSequence line) {
             dash = new DashBlock();

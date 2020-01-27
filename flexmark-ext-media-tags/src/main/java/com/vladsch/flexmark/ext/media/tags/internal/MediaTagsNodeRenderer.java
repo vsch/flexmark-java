@@ -34,7 +34,7 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), false);
             String[] sources = resolvedLink.getUrl().split("\\|");
             html.attr("title", node.getText())
-                    .attr("controls", null)
+                    .attr("controls", "")
                     .withAttr()
                     .tag("audio");
             for (String source : sources) {
@@ -96,7 +96,7 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), false);
             String[] sources = resolvedLink.getUrl().split("\\|");
             html.attr("title", node.getText())
-                    .attr("controls", null)
+                    .attr("controls", "")
                     .withAttr()
                     .tag("video");
             for (String source : sources) {

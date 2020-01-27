@@ -16,9 +16,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class MacrosNodeFormatter extends NodeRepositoryFormatter<MacroDefinitionRepository, MacroDefinitionBlock, MacroReference> {
-    public static final DataKey<Map<String, String>> MACROS_TRANSLATION_MAP = new DataKey<>("MACROS_TRANSLATION_MAP", new HashMap<>());
-    public static final DataKey<Map<String, String>> MACROS_UNIQUIFICATION_MAP = new DataKey<>("MACROS_UNIQUIFICATION_MAP", new HashMap<>()); // uniquified references
-    private final MacroFormatOptions options;
+    final public static DataKey<Map<String, String>> MACROS_TRANSLATION_MAP = new DataKey<>("MACROS_TRANSLATION_MAP", new HashMap<>());
+    final public static DataKey<Map<String, String>> MACROS_UNIQUIFICATION_MAP = new DataKey<>("MACROS_UNIQUIFICATION_MAP", new HashMap<>()); // uniquified references
+    final private MacroFormatOptions options;
 
     public MacrosNodeFormatter(DataHolder options) {
         super(options, MACROS_TRANSLATION_MAP, MACROS_UNIQUIFICATION_MAP);

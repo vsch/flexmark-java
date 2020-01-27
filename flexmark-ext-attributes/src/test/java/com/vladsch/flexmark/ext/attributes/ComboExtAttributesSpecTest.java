@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboExtAttributesSpecTest extends RendererSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_attributes_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_attributes_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
             .set(AttributesExtension.ASSIGN_TEXT_ATTRIBUTES, true)
             .set(Parser.EXTENSIONS, Arrays.asList(
@@ -40,7 +40,7 @@ public class ComboExtAttributesSpecTest extends RendererSpecTest {
             ))
             .toImmutable();
 
-    private static final Map<String, MutableDataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, MutableDataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("anchors", new MutableDataSet()
                 .set(Parser.EXTENSIONS, Arrays.asList(AnchorLinkExtension.create(), AttributesExtension.create(), TocExtension.create(), EmojiExtension.create()))

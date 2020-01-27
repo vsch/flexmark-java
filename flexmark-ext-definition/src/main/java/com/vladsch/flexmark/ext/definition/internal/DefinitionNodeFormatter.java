@@ -20,8 +20,8 @@ import java.util.Set;
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 
 public class DefinitionNodeFormatter implements NodeFormatter {
-    private final FormatOptions options;
-    private final ListOptions listOptions;
+    final private FormatOptions options;
+    final private ListOptions listOptions;
 
     public DefinitionNodeFormatter(DataHolder options) {
         this.options = new FormatOptions(options);

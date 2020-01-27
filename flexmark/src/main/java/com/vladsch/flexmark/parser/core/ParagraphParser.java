@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ParagraphParser extends AbstractBlockParser {
 
-    private final Paragraph block = new Paragraph();
+    final private Paragraph block = new Paragraph();
     private BlockContent content = new BlockContent();
 
     public BlockContent getBlockContent() {
@@ -27,9 +27,6 @@ public class ParagraphParser extends AbstractBlockParser {
             return BlockContinue.atIndex(state.getIndex());
         } else {
             boolean blankLine = state.isBlankLine();
-            if (!blankLine) {
-                int tmp = 0;
-            }
             block.setTrailingBlankLine(blankLine);
             return BlockContinue.none();
         }

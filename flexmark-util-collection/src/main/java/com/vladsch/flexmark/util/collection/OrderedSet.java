@@ -105,7 +105,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     }
 
     private class IndexedProxy implements Indexed<E> {
-        private final boolean allowConcurrentMods;
+        final private boolean allowConcurrentMods;
 
         public IndexedProxy(boolean allowConcurrentMods) {
             this.allowConcurrentMods = allowConcurrentMods;
@@ -262,7 +262,6 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
             host.addingNulls(index);
         }
 
-        int start = valueList.size();
         ++modificationCount;
 
         // no need they are 0's by default

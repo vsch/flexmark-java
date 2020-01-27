@@ -10,22 +10,22 @@ import static com.vladsch.flexmark.util.misc.Utils.*;
 
 @SuppressWarnings("WeakerAccess")
 public class TableCell {
-    public final static TableCell NULL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
-    public final static TableCell DEFAULT_CELL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);
-    public static final int NOT_TRACKED = Integer.MAX_VALUE;
+    final public static TableCell NULL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
+    final public static TableCell DEFAULT_CELL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);
+    final public static int NOT_TRACKED = Integer.MAX_VALUE;
 
-    public final Node tableCellNode;   // node if needed for finer text manipulation
-    public final BasedSequence openMarker;
-    public final BasedSequence text;
-    public final BasedSequence closeMarker;
-    public final int columnSpan;
-    public final int rowSpan;
-    public final CellAlignment alignment;
-    public final int trackedTextOffset; // offset in the text
-    public final int spanTrackedOffset; // offset in the span if span > 1
-    public final int trackedTextAdjust; // adjustment to the resulting tracked position due to alignment
-    public final boolean afterSpace; // if adjustment should be done after space
-    public final boolean afterDelete; // if adjustment should be done as if after delete
+    final public Node tableCellNode;   // node if needed for finer text manipulation
+    final public BasedSequence openMarker;
+    final public BasedSequence text;
+    final public BasedSequence closeMarker;
+    final public int columnSpan;
+    final public int rowSpan;
+    final public CellAlignment alignment;
+    final public int trackedTextOffset; // offset in the text
+    final public int spanTrackedOffset; // offset in the span if span > 1
+    final public int trackedTextAdjust; // adjustment to the resulting tracked position due to alignment
+    final public boolean afterSpace; // if adjustment should be done after space
+    final public boolean afterDelete; // if adjustment should be done as if after delete
 
     public TableCell(CharSequence text, int rowSpan, int columnSpan) {
         this(null, BasedSequence.NULL, text, BasedSequence.NULL, rowSpan, columnSpan, CellAlignment.NONE);

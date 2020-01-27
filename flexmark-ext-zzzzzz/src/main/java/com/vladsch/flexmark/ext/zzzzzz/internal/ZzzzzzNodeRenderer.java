@@ -18,7 +18,7 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
     private static String fromChars = " +/<>";
     private static String toChars = "-----";
 
-    private final ZzzzzzOptions options;// zzzoptionszzz(CUSTOM_PROPERTIES)
+    final private ZzzzzzOptions options;// zzzoptionszzz(CUSTOM_PROPERTIES)
 
     public ZzzzzzNodeRenderer(DataHolder options) {
         this.options = new ZzzzzzOptions(options);// zzzoptionszzz(CUSTOM_PROPERTIES)

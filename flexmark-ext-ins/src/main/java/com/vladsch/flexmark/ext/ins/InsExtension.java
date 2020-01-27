@@ -17,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
  * The parsed ins text is turned into {@link Ins} nodes.
  */
 public class InsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final NullableDataKey<String> INS_STYLE_HTML_OPEN = new NullableDataKey<>("INS_STYLE_HTML_OPEN");
-    public static final NullableDataKey<String> INS_STYLE_HTML_CLOSE = new NullableDataKey<>("INS_STYLE_HTML_CLOSE");
+    final public static NullableDataKey<String> INS_STYLE_HTML_OPEN = new NullableDataKey<>("INS_STYLE_HTML_OPEN");
+    final public static NullableDataKey<String> INS_STYLE_HTML_CLOSE = new NullableDataKey<>("INS_STYLE_HTML_CLOSE");
 
     private InsExtension() {
     }

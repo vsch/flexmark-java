@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.sequence.mappers;
 
 public class ChangeCase {
-    public static final char NonBreakSpaceChar = '\u00A0';
-    public static final CharMapper toUpperCase = new ToUpperCase();
-    public static final CharMapper toLowerCase = new ToLowerCase();
+    final public static CharMapper toUpperCase = new ToUpperCase();
+    final public static CharMapper toLowerCase = new ToLowerCase();
 
     private static class ToLowerCase implements CharMapper {
         ToLowerCase() {}

@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboMacrosFormatterSpecTest extends FormatterSpecTest {
-    private static final String SPEC_RESOURCE = "/ext_macros_formatter_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static String SPEC_RESOURCE = "/ext_macros_formatter_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(MacrosExtension.create(), GitLabExtension.create(), TablesExtension.create()))
             .set(GitLabExtension.RENDER_BLOCK_MATH, false)
             .set(GitLabExtension.RENDER_BLOCK_MERMAID, false)
@@ -28,7 +28,7 @@ public class ComboMacrosFormatterSpecTest extends FormatterSpecTest {
             .set(Parser.LISTS_AUTO_LOOSE, false)
             .toImmutable();
 
-    private static final Map<String, DataHolder> optionsMap = placementAndSortOptions(
+    final private static Map<String, DataHolder> optionsMap = placementAndSortOptions(
             MacrosExtension.MACRO_DEFINITIONS_KEEP,
             MacrosExtension.MACRO_DEFINITIONS_PLACEMENT,
             MacrosExtension.MACRO_DEFINITIONS_SORT

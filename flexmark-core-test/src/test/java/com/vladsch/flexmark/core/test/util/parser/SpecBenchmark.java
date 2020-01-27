@@ -17,12 +17,12 @@ import java.util.List;
 
 @State(Scope.Benchmark)
 public class SpecBenchmark {
-    private static final String SPEC = TestSpecLocator.DEFAULT_RESOURCE_LOCATION.getResourceText();
-    private static final List<String> SPEC_EXAMPLES =
+    final private static String SPEC = TestSpecLocator.DEFAULT_RESOURCE_LOCATION.getResourceText();
+    final private static List<String> SPEC_EXAMPLES =
             SpecReader.createAndReadExamples(TestSpecLocator.DEFAULT_RESOURCE_LOCATION, false)
                     .getExamplesSourceAsString();
-    private static final Parser PARSER = Parser.builder().build();
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
+    final private static Parser PARSER = Parser.builder().build();
+    final private static HtmlRenderer RENDERER = HtmlRenderer.builder().build();
 
     public static void main(String[] args) throws Exception {
         Options options = new OptionsBuilder()

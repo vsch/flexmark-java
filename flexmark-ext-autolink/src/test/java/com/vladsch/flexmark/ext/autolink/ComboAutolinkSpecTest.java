@@ -17,13 +17,13 @@ import java.util.*;
 @RunWith(Parameterized.class)
 public class ComboAutolinkSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_autolink_ast_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Collections.singleton(AutolinkExtension.create()))
             .toImmutable();
     ;
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("no-autolink", new MutableDataSet().set(TestUtils.UNLOAD_EXTENSIONS, Collections.singletonList(AutolinkExtension.class)));
         optionsMap.put("ignore-google", new MutableDataSet().set(AutolinkExtension.IGNORE_LINKS, "www.google.com"));

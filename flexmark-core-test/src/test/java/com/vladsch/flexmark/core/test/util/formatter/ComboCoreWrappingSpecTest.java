@@ -11,8 +11,8 @@ import org.junit.runners.Parameterized;
 import java.util.List;
 
 public class ComboCoreWrappingSpecTest extends ComboCoreFormatterSpecTestBase {
-    private static final String SPEC_RESOURCE = "/core_wrapping_spec.md";
-    public static final @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+    final private static String SPEC_RESOURCE = "/core_wrapping_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(SharedDataKeys.RUNNING_TESTS, false)  // Set to true to get stdout printout of intermediate wrapping information

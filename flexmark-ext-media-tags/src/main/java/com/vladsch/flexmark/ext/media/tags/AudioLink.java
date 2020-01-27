@@ -5,8 +5,8 @@ import com.vladsch.flexmark.ext.media.tags.internal.AbstractMediaLink;
 
 public class AudioLink extends AbstractMediaLink {
 
-    public static final String PREFIX = "!A";
-    private static final String TYPE = "Audio";
+    final public static String PREFIX = "!A";
+    final private static String TYPE = "Audio";
 
     public AudioLink() {
         super(PREFIX, TYPE);

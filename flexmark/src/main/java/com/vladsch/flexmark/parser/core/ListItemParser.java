@@ -16,10 +16,10 @@ import static com.vladsch.flexmark.parser.Parser.PARSER_EMULATION_PROFILE;
 import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
 public class ListItemParser extends AbstractBlockParser {
-    private final ListItem myBlock;
-    private final ListOptions myOptions;
-    private final ListBlockParser.ListData myListData;
-    private final Parsing myParsing;
+    final private ListItem myBlock;
+    final private ListOptions myOptions;
+    final private ListBlockParser.ListData myListData;
+    final private Parsing myParsing;
     private boolean myHadBlankLine = false;
     private boolean myIsEmpty = false;
 
@@ -277,7 +277,6 @@ public class ListItemParser extends AbstractBlockParser {
                 }
             } else {
                 final int markerIndent = listBlockParser.getListData().markerIndent;
-                final int markerIndex = listBlockParser.getListData().markerIndex;
                 if (emulationFamily == KRAMDOWN) {
                     // - Kramdown:
                     //     - Definitions/Defaults:
@@ -379,7 +378,6 @@ public class ListItemParser extends AbstractBlockParser {
                     int currentIndent = state.getIndent();
                     int currentIndex = state.getIndex() + currentIndent;
                     int listIndent = markerIndent;
-                    int listIndex = markerIndent;
                     final int contentIndentRemoval = Utils.maxLimit(currentIndent, contentIndent, listIndent + 4);
 
                     if (currentIndent >= myOptions.getCodeIndent()) {

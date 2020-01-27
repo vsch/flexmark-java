@@ -15,7 +15,7 @@ import java.util.Set;
 public class GfmUsersNodeRenderer implements NodeRenderer
         // , PhasedNodeRenderer
 {
-    private final GfmUsersOptions options;
+    final private GfmUsersOptions options;
 
     public GfmUsersNodeRenderer(DataHolder options) {
         this.options = new GfmUsersOptions(options);

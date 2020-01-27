@@ -14,10 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TypographicNodeRenderer implements NodeRenderer {
-    private final TypographicOptions options;
-
     public TypographicNodeRenderer(DataHolder options) {
-        this.options = new TypographicOptions(options);
+
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
 //    static {
 //        optionsMap.put("atx-space-as-is", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.AS_IS));
 //    }

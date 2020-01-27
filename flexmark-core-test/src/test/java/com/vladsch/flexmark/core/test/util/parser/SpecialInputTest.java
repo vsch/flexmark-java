@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 final public class SpecialInputTest extends RenderingTestCase {
-    private static final DataHolder OPTIONS = new MutableDataSet()
+    final private static DataHolder OPTIONS = new MutableDataSet()
             .set(TestUtils.NO_FILE_EOL, false)
             .toImmutable();
 

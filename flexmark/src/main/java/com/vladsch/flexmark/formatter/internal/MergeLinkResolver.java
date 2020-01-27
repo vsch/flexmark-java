@@ -9,7 +9,6 @@ import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
@@ -18,9 +17,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 
 public class MergeLinkResolver implements LinkResolver {
-    private final String docRelativeURL;
-    private final String docRootURL;
-    private final String[] relativeParts;
+    final private String docRelativeURL;
+    final private String docRootURL;
+    final private String[] relativeParts;
 
     public MergeLinkResolver(LinkResolverContext context) {
         // can use context for custom settings
@@ -44,8 +43,6 @@ public class MergeLinkResolver implements LinkResolver {
     @NotNull
     @Override
     public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
-        Document document = context.getDocument();
-
         if (node instanceof Image || node instanceof Link || node instanceof Reference) {
             // resolve link
             String url = link.getUrl();

@@ -10,6 +10,7 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -41,6 +42,7 @@ public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
     }
 
     public static class Factory implements BlockPreProcessorFactory {
+        @NotNull
         @Override
         public Set<Class<? extends Block>> getBlockTypes() {
             HashSet<Class<? extends Block>> set = new HashSet<>();
@@ -66,8 +68,9 @@ public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
             return true;
         }
 
+        @NotNull
         @Override
-        public BlockPreProcessor apply(ParserState state) {
+        public BlockPreProcessor apply(@NotNull ParserState state) {
             return new TaskListItemBlockPreProcessor(state.getProperties());
         }
     }

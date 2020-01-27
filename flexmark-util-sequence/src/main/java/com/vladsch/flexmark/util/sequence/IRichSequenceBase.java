@@ -525,12 +525,12 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     // @formatter:off
     @NotNull @Override public T trimToEndOfLine(boolean includeEol)                                                                     { return trimToEndOfLine(CharPredicate.EOL, includeEol, 0); }
-    @NotNull @Override public T trimToEndOfLine(int index)                                                                              { return trimToEndOfLine(CharPredicate.EOL, false, 0); }
+    @NotNull @Override public T trimToEndOfLine(int index)                                                                              { return trimToEndOfLine(CharPredicate.EOL, false, index); }
     @NotNull @Override public T trimToEndOfLine()                                                                                       { return trimToEndOfLine(CharPredicate.EOL, false, 0); }
     @NotNull @Override public T trimToEndOfLine(boolean includeEol, int index)                                                          { return trimToEndOfLine(CharPredicate.EOL, includeEol, index); }
 
     @NotNull @Override public T trimToStartOfLine(boolean includeEol)                                                                   { return trimToStartOfLine(CharPredicate.EOL, includeEol, 0); }
-    @NotNull @Override public T trimToStartOfLine(int index)                                                                            { return trimToStartOfLine(CharPredicate.EOL, false, 0); }
+    @NotNull @Override public T trimToStartOfLine(int index)                                                                            { return trimToStartOfLine(CharPredicate.EOL, false, index); }
     @NotNull @Override public T trimToStartOfLine()                                                                                     { return trimToStartOfLine(CharPredicate.EOL, false, 0); }
     @NotNull @Override public T trimToStartOfLine(boolean includeEol, int index)                                                        { return trimToStartOfLine(CharPredicate.EOL, includeEol, index); }
     // @formatter:on
@@ -744,7 +744,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
 
     @NotNull @Override final public T[] splitEOL()                                                                                                              { return split(SequenceUtils.EOL, 0, SequenceUtils.SPLIT_INCLUDE_DELIMS,null); }
     @NotNull @Override final public T[] splitEOL(boolean includeDelims)                                                                                         { return split(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, null); }
-    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                        { return split(SequenceUtils.EOL, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
+    @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, boolean includeDelims, @Nullable CharPredicate trimChars)                        { return split(delimiter, 0, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter)                                                                                  { return split(delimiter, 0, 0, null); }
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, boolean includeDelims, @Nullable CharPredicate trimChars)             { return split(delimiter, limit, includeDelims ? SequenceUtils.SPLIT_INCLUDE_DELIMS : 0, trimChars); }
     @NotNull @Override final public T[] split(@NotNull CharSequence delimiter, int limit, int flags)                                                            { return split(delimiter, limit, flags, null); }

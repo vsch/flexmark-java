@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class AttributesNodeRenderer implements NodeRenderer {
 
-    private final AttributesOptions myOptions;
+    final private AttributesOptions myOptions;
 
     public AttributesNodeRenderer(DataHolder options) {
         myOptions = new AttributesOptions(options);

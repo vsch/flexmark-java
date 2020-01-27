@@ -6,16 +6,16 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import java.util.Map;
 
 public class AdmonitionOptions {
-    public final int contentIndent;
-    public final boolean allowLeadingSpace;
-    public final boolean interruptsParagraph;
-    public final boolean interruptsItemParagraph;
-    public final boolean withSpacesInterruptsItemParagraph;
-    public final boolean allowLazyContinuation;
-    public final String unresolvedQualifier;
-    public final Map<String, String> qualifierTypeMap;
-    public final Map<String, String> qualifierTitleMap;
-    public final Map<String, String> typeSvgMap;
+    final public int contentIndent;
+    final public boolean allowLeadingSpace;
+    final public boolean interruptsParagraph;
+    final public boolean interruptsItemParagraph;
+    final public boolean withSpacesInterruptsItemParagraph;
+    final public boolean allowLazyContinuation;
+    final public String unresolvedQualifier;
+    final public Map<String, String> qualifierTypeMap;
+    final public Map<String, String> qualifierTitleMap;
+    final public Map<String, String> typeSvgMap;
 
     public AdmonitionOptions(DataHolder options) {
         contentIndent = AdmonitionExtension.CONTENT_INDENT.get(options);

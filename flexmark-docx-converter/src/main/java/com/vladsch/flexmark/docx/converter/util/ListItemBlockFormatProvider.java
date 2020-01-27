@@ -9,11 +9,11 @@ import org.docx4j.wml.Style;
 import java.math.BigInteger;
 
 public class ListItemBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
-    private final DocxContext<T> myDocx;
-    private final String mySpacingStyleId;
-    private final long myIdNum;
-    private final int myListLevel;
-    private final Class[] mySkipContextFrameClasses;
+    final private DocxContext<T> myDocx;
+    final private String mySpacingStyleId;
+    final private long myIdNum;
+    final private int myListLevel;
+    final private Class[] mySkipContextFrameClasses;
 
     public ListItemBlockFormatProvider(DocxContext<T> docx, String listStyle, String listSpacingStyle, long idNum, int listLevel, Class... skipContextFrameClasses) {
         super(docx, listStyle);
