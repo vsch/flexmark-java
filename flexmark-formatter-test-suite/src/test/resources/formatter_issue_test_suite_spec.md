@@ -307,3 +307,60 @@ Overlapping transformed range when using SegmentBuilder appending
 ````````````````````````````````
 
 
+### xxx-04
+
+missing apostrophe from heading text
+
+```````````````````````````````` example(Issue - xxx-04: 1) options(spacer, text-only)
+## Header 2
+### Header 3
+### What you didn't know you were missing
+
+[TOC]: # ""
+
+### title"s
+- [Header 2](#header-2)
+    - [Header 3](#header-3)
+.
+## Header 2
+
+### Header 3
+
+### What you didn't know you were missing
+
+[TOC]: # ""
+
+- [Header 2](#header-2)
+    - [Header 3](#header-3)
+    - [What you didn't know you were missing](#what-you-didnt-know-you-were-missing)
+.
+Document[0, 144]
+  Heading[0, 11] textOpen:[0, 2, "##"] text:[3, 11, "Header 2"]
+    AnchorLink[3, 11]
+      Text[3, 11] chars:[3, 11, "Header 2"]
+  Heading[12, 24] textOpen:[12, 15, "###"] text:[16, 24, "Header 3"]
+    AnchorLink[16, 24]
+      Text[16, 24] chars:[16, 24, "Header 3"]
+  Heading[25, 66] textOpen:[25, 28, "###"] text:[29, 66, "What you didn't know you were missing"]
+    AnchorLink[29, 66]
+      Text[29, 42] chars:[29, 42, "What  …  didn"]
+      TypographicSmarts[42, 43] typographic: &rsquo; 
+      Text[43, 66] chars:[43, 66, "t kno … ssing"]
+  BlankLine[67, 68]
+  SimTocBlock[68, 144] openingMarker:[68, 69] tocKeyword:[69, 72] closingMarker:[72, 74] anchorMarker:[75, 76, "#"] openingTitleMarker:[77, 78, "\""] title:[78, 78] closingTitleMarker:[78, 79, "\""]
+    SimTocContent[80, 144]
+      Heading[81, 92] textOpen:[81, 84, "###"] text:[85, 92, "title\"s"]
+        AnchorLink[0, 0]
+      BulletList[93, 144] isTight
+        BulletListItem[93, 144] open:[93, 94, "-"] isTight
+          Paragraph[95, 117]
+            Link[95, 116] textOpen:[95, 96, "["] text:[96, 104, "Header 2"] textClose:[104, 105, "]"] linkOpen:[105, 106, "("] url:[106, 115, "#header-2"] pageRef:[106, 106] anchorMarker:[106, 107, "#"] anchorRef:[107, 115, "header-2"] linkClose:[115, 116, ")"]
+              Text[96, 104] chars:[96, 104, "Header 2"]
+          BulletList[121, 144] isTight
+            BulletListItem[121, 144] open:[121, 122, "-"] isTight
+              Paragraph[123, 144]
+                Link[123, 144] textOpen:[123, 124, "["] text:[124, 132, "Header 3"] textClose:[132, 133, "]"] linkOpen:[133, 134, "("] url:[134, 143, "#header-3"] pageRef:[134, 134] anchorMarker:[134, 135, "#"] anchorRef:[135, 143, "header-3"] linkClose:[143, 144, ")"]
+                  Text[124, 132] chars:[124, 132, "Header 3"]
+````````````````````````````````
+
+

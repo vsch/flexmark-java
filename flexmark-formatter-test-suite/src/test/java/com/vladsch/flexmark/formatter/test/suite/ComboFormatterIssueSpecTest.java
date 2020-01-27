@@ -91,6 +91,8 @@ public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
         optionsMap.put("item-indent-2", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 2));
         optionsMap.put("no-soft-breaks", new MutableDataSet().set(Formatter.KEEP_SOFT_LINE_BREAKS, false));
         optionsMap.put("use-builder", new MutableDataSet().set(USE_BUILDER, true));
+        optionsMap.put("spacer", new MutableDataSet().set(TocExtension.BLANK_LINE_SPACER, true));
+        optionsMap.put("text-only", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, true));
 
         optionsMap.put("no-append-references", new MutableDataSet().set(Formatter.APPEND_TRANSFERRED_REFERENCES, false)
                 .set(TestUtils.INCLUDED_DOCUMENT, "" +
