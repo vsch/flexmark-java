@@ -4,6 +4,7 @@
       <element scope="Flexmark Ext Overview" profile="OVERVIEW" />
       <element scope="GitHub Templates" profile="GitHub Templates" />
       <element scope="Comms" profile="Comms" />
+      <element scope="Wiki" profile="Wiki" />
     </scope-profiles>
   </settings>
 </component>

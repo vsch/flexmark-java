@@ -8,7 +8,7 @@
   - [API Refactoring](#api-refactoring)
   - [Features](#features)
 - [Next 0.60.xx](#next-060xx)
-- [0.59.120](#059120)
+- [Next 0.59.120](#next-059120)
 - [0.59.118](#059118)
 - [0.59.116](#059116)
 - [0.59.114](#059114)
@@ -165,7 +165,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   :information_source: `com.vladsch.flexmark.util.ast.Visitor` is only needed for implementation
   of `NodeVisitor` and `VisitHandler`. If you convert all anonymous implementations of
   `VisitHandler` to lambdas you can remove all imports for `Visitor`.
-
   * Fix: remove old visitor like adapters and implement ones based on generic classes not linked
     to flexmark AST node.
   * Deprecate old base classes:
@@ -200,7 +199,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       implementation.
 + [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
       extension add order
-+ [ ] Fix: rewrite `LineFormattingAppendableImpl` to be compatible with `SequenceBuilder`
++ [ ] Fix: rewrite `LineAppendableImpl` to be compatible with `SequenceBuilder`
   + [ ] optimize by not processing one char at a time. Split the sequence into regions of
         interest and process the regions as one piece which the `SequenceBuilder` can optimize
         to base sequence quicker.
@@ -216,7 +215,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## 0.59.120
+## Next 0.59.120
 
 * Fix: `Formatter` not inserting blank line after paragraph when followed by list item in
   tighten mode.
