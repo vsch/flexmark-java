@@ -34,8 +34,8 @@
     <entry oldName="com.vladsch.flexmark.ast.ReferencingNode" newName="com.vladsch.flexmark.util.ast.ReferencingNode" type="class"/>
     <entry oldName="com.vladsch.flexmark.ast.VisitHandler" newName="com.vladsch.flexmark.util.ast.VisitHandler" type="class"/>
     <entry oldName="com.vladsch.flexmark.ast.Visitor" newName="com.vladsch.flexmark.util.ast.Visitor" type="class"/>
-    <entry oldName="com.vladsch.flexmark.IParse" newName="com.vladsch.flexmark.util.ast.IParse" type="class"/>
-    <entry oldName="com.vladsch.flexmark.IRender" newName="com.vladsch.flexmark.util.ast.IRender" type="class"/>
+    <entry oldName="com.vladsch.flexmark.IParse" newName="com.vladsch.flexmark.util.IParse" type="class"/>
+    <entry oldName="com.vladsch.flexmark.IRender" newName="com.vladsch.flexmark.util.IRender" type="class"/>
     <entry oldName="com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor" newName="com.vladsch.flexmark.parser.core.delimiter.AsteriskDelimiterProcessor" type="class"/>
     <entry oldName="com.vladsch.flexmark.internal.inline.EmphasisDelimiterProcessor" newName="com.vladsch.flexmark.parser.core.delimiter.EmphasisDelimiterProcessor" type="class"/>
     <entry oldName="com.vladsch.flexmark.internal.Bracket" newName="com.vladsch.flexmark.parser.core.delimiter.Bracket" type="class"/>
