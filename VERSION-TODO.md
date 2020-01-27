@@ -6,8 +6,8 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
-  - [Features](#features)
 - [Next 0.60.xx](#next-060xx)
+- [Next 0.59.124](#next-059124)
 - [0.59.122](#059122)
 - [0.59.120](#059120)
 - [0.59.118](#059118)
@@ -173,7 +173,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-### Features
+## Next 0.60.xx
 
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
@@ -188,9 +188,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       be visited.
 * Add: spec example language per section options and rendering in HTML.
   * [ ] Add: Tests for section name options
-
-## Next 0.60.xx
-
 + [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with non builder
       arguments to use `SequenceBuilder` throughout library code, except where
       `PrefixedSubSequence` is used as is without immediately wrapping in `SegmentedSequence`.
@@ -213,6 +210,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.124
+
+* Fix: restore `IRenderBase.NullRenderer` and `IRenderBase.TextRenderer` static classes
+
 
 ## 0.59.122
 
