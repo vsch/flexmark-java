@@ -97,7 +97,26 @@
     </CopyImageHistory>
     <PasteLinkHistory onPasteImageTargetRef="2" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteWikiElement="1" onPasteReferenceElement="1" hideInapplicableOperations="false" preserveLinkFormat="false" useHeadingForLinkText="false" linkFormat="2" saveAsDefaultOnOK="false" />
     <TableToJsonHistory>
-      <entries />
+      <entries>
+        <TableToJsonHistoryEntry jsonType="0" name="" keyColumn="1: Class">
+          <columns>
+            <TableToJsonColumn index="0" isIncluded="true" isIncludeNull="false" isIncludeEmpty="false" isExtractUrl="false" headerText="Class" jsonProperty="Class" />
+            <TableToJsonColumn index="1" isIncluded="true" isIncludeNull="false" isIncludeEmpty="false" isExtractUrl="false" headerText="Package (0.60.0)" jsonProperty="Package (0.60.0)" />
+          </columns>
+          <usedInFiles>
+            <option name="Library-Classes-0-60-0.md" />
+          </usedInFiles>
+        </TableToJsonHistoryEntry>
+        <TableToJsonHistoryEntry jsonType="1" name="" keyColumn="1: Class">
+          <columns>
+            <TableToJsonColumn index="0" isIncluded="true" isIncludeNull="false" isIncludeEmpty="false" isExtractUrl="false" headerText="Class" jsonProperty="Class" />
+            <TableToJsonColumn index="1" isIncluded="true" isIncludeNull="false" isIncludeEmpty="false" isExtractUrl="false" headerText="Package (0.60.0)" jsonProperty="Package (0.60.0)" />
+          </columns>
+          <usedInFiles>
+            <option name="Library-Classes-0-60-0.md" />
+          </usedInFiles>
+        </TableToJsonHistoryEntry>
+      </entries>
     </TableToJsonHistory>
     <TableSortHistory>
       <entries />

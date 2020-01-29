@@ -213,6 +213,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## 0.59.124
 
+* Add: `migrate flexmark-java 0_50_x to 0_60_0.xml` IntelliJ Migration
+* Fix: rename abbreviation `FormatOptions` `AbbreviationFormatOptions`
+* Fix: rename definition `FormatOptions` `DefinitionFormatOptions`
+* Fix: rename task list `FormatOptions` `TaskListFormatOptions`
 * Fix: formatter core test for invalid indentation
 * Fix: formatter `EqualizeTrailingMarker.EQUALIZE` adding marker when there is none.
 * Fix: missing `TextContainer` implementation by `TypographicSmarts`

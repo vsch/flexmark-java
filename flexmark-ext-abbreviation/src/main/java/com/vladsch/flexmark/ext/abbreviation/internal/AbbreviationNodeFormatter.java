@@ -17,13 +17,13 @@ import java.util.*;
 public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
     final public static DataKey<Map<String, String>> ABBREVIATION_TRANSLATION_MAP = new DataKey<>("ABBREVIATION_TRANSLATION_MAP", new HashMap<>()); //
     final public static DataKey<Map<String, String>> ABBREVIATION_UNIQUIFICATION_MAP = new DataKey<>("ABBREVIATION_UNIQUIFICATION_MAP", new HashMap<>()); // uniquified references
-    final private FormatOptions options;
+    final private AbbreviationFormatOptions options;
     final private boolean transformUnderscores;
     final private boolean makeMergedAbbreviationsUnique;
 
     public AbbreviationNodeFormatter(DataHolder options) {
         super(options, ABBREVIATION_TRANSLATION_MAP, ABBREVIATION_UNIQUIFICATION_MAP);
-        this.options = new FormatOptions(options);
+        this.options = new AbbreviationFormatOptions(options);
 
         String transformedId = String.format(Formatter.TRANSLATION_ID_FORMAT.get(options), 1);
         transformUnderscores = transformedId.startsWith("_") && transformedId.endsWith("_");

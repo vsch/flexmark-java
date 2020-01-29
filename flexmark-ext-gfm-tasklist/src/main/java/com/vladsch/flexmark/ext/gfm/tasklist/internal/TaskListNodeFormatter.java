@@ -19,11 +19,11 @@ import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class TaskListNodeFormatter implements NodeFormatter {
-    final private FormatOptions formatOptions;
+    final private TaskListFormatOptions taskListFormatOptions;
     final private ListOptions listOptions;
 
     public TaskListNodeFormatter(DataHolder options) {
-        formatOptions = new FormatOptions(options);
+        taskListFormatOptions = new TaskListFormatOptions(options);
         listOptions = ListOptions.get(options);
     }
 
@@ -48,7 +48,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
             FormatterUtils.renderListItem(node, context, markdown, listOptions, node.getMarkerSuffix(), false);
         } else {
             BasedSequence markerSuffix = node.getMarkerSuffix();
-            switch (formatOptions.taskListItemCase) {
+            switch (taskListFormatOptions.taskListItemCase) {
                 case AS_IS:
                     break;
 
@@ -61,11 +61,11 @@ public class TaskListNodeFormatter implements NodeFormatter {
                     break;
 
                 default:
-                    throw new IllegalStateException("Missing case for TaskListItemCase " + formatOptions.taskListItemCase.name());
+                    throw new IllegalStateException("Missing case for TaskListItemCase " + taskListFormatOptions.taskListItemCase.name());
             }
 
             if (node.isItemDoneMarker()) {
-                switch (formatOptions.taskListItemPlacement) {
+                switch (taskListFormatOptions.taskListItemPlacement) {
                     case AS_IS:
                     case INCOMPLETE_FIRST:
                     case INCOMPLETE_NESTED_FIRST:
@@ -77,11 +77,11 @@ public class TaskListNodeFormatter implements NodeFormatter {
                         break;
 
                     default:
-                        throw new IllegalStateException("Missing case for ListItemPlacement " + formatOptions.taskListItemPlacement.name());
+                        throw new IllegalStateException("Missing case for ListItemPlacement " + taskListFormatOptions.taskListItemPlacement.name());
                 }
             }
 
-            if (markerSuffix.isNotEmpty() && formatOptions.formatPrioritizedTaskItems) {
+            if (markerSuffix.isNotEmpty() && taskListFormatOptions.formatPrioritizedTaskItems) {
                 node.setCanChangeMarker(false);
             }
 
@@ -120,15 +120,15 @@ public class TaskListNodeFormatter implements NodeFormatter {
     public int taskItemPriority(Node node) {
         if (node instanceof TaskListItem) {
             if (((TaskListItem) node).isOrderedItem()) {
-                return formatOptions.formatOrderedTaskItemPriority;
+                return taskListFormatOptions.formatOrderedTaskItemPriority;
             } else {
                 BasedSequence openingMarker = ((ListItem) node).getOpeningMarker();
                 if (openingMarker.length() > 0) {
-                    Integer priority = formatOptions.formatTaskItemPriorities.get(openingMarker.charAt(0));
+                    Integer priority = taskListFormatOptions.formatTaskItemPriorities.get(openingMarker.charAt(0));
                     if (priority != null) {
                         return priority;
                     } else {
-                        return formatOptions.formatDefaultTaskItemPriority;
+                        return taskListFormatOptions.formatDefaultTaskItemPriority;
                     }
                 }
             }
@@ -171,7 +171,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
         } else {
             ArrayList<Node> itemList = new ArrayList<>();
 
-            TaskListItemPlacement taskListItemPlacement = formatOptions.taskListItemPlacement;
+            TaskListItemPlacement taskListItemPlacement = taskListFormatOptions.taskListItemPlacement;
             if (taskListItemPlacement != TaskListItemPlacement.AS_IS) {
                 ArrayList<ListItem> incompleteTasks = new ArrayList<>();
                 ArrayList<ListItem> completeItems = new ArrayList<>();
@@ -196,7 +196,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
                     item = item.getNext();
                 }
 
-                if (formatOptions.formatPrioritizedTaskItems) {
+                if (taskListFormatOptions.formatPrioritizedTaskItems) {
                     // have prioritized tasks
                     for (ListItem listItem : incompleteTasks) {
                         listItem.setPriority(itemPriority(listItem));

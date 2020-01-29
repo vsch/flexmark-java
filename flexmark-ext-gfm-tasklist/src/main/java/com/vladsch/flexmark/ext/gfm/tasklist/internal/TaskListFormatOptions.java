@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
-public class FormatOptions implements MutableDataSetter {
+public class TaskListFormatOptions implements MutableDataSetter {
     final public TaskListItemCase taskListItemCase;
     final public TaskListItemPlacement taskListItemPlacement;
     final public int formatOrderedTaskItemPriority;
@@ -19,11 +19,11 @@ public class FormatOptions implements MutableDataSetter {
     final public boolean formatPrioritizedTaskItems;
     final public Map<Character, Integer> formatTaskItemPriorities;
 
-    public FormatOptions() {
+    public TaskListFormatOptions() {
         this(null);
     }
 
-    public FormatOptions(DataHolder options) {
+    public TaskListFormatOptions(DataHolder options) {
         taskListItemCase = TaskListExtension.FORMAT_LIST_ITEM_CASE.get(options);
         taskListItemPlacement = TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT.get(options);
         formatOrderedTaskItemPriority = TaskListExtension.FORMAT_ORDERED_TASK_ITEM_PRIORITY.get(options);
