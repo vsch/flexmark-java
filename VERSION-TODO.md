@@ -213,6 +213,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.124
 
+* Fix: formatter core test for invalid indentation
 * Fix: formatter `EqualizeTrailingMarker.EQUALIZE` adding marker when there is none.
 * Fix: missing `TextContainer` implementation by `TypographicSmarts`
 * Fix: restore `IRenderBase.NullRenderer` and `IRenderBase.TextRenderer` static classes

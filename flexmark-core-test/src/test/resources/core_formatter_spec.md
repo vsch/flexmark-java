@@ -3976,11 +3976,11 @@ Document[0, 162]
 ````````````````````````````````
 
 
-### MdNav
+## MdNav
 
-#### 770
+### 770
 
-```````````````````````````````` example(Issue - MdNav - 770: 1) options(FAIL, list-no-delimiter-mismatch-to-new-list)
+```````````````````````````````` example(MdNav - 770: 1) options(list-no-delimiter-mismatch-to-new-list)
 1. a
   * b
 
@@ -3991,6 +3991,7 @@ Document[0, 162]
   * c
 .
 1. a
+
 * b
 
   ```bash
@@ -3998,11 +3999,33 @@ Document[0, 162]
   ```
 
 * c
-.
+
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue - MdNav - 770: 2) options(FAIL, list-no-item-mismatch-to-new-list)
+```````````````````````````````` example(MdNav - 770: 2) options(list-no-delimiter-mismatch-to-new-list, list-spacing-tighten)
+1. a
+  * b
+
+    ```bash
+    foo.code
+    ```
+
+  * c
+.
+1. a
+
+* b
+
+  ```bash
+  foo.code
+  ```
+* c
+
+````````````````````````````````
+
+
+```````````````````````````````` example(MdNav - 770: 3) options(list-no-item-mismatch-to-new-list)
 1. a
   * b
   
@@ -4017,9 +4040,8 @@ Document[0, 162]
   ```bash
   foo.code
   ```
-
 * c
-.
+
 ````````````````````````````````
 
 
