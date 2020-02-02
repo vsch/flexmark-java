@@ -364,3 +364,15 @@ Document[0, 144]
 ````````````````````````````````
 
 
+### xxx-05
+
+with aside enabled pipe should be escaped
+
+```````````````````````````````` example(Issue - xxx-05: 1) options(margin[46])
+Text wrapping pipe `|` should be escaped when | is wrapped to start of line.
+.
+Text wrapping pipe `|` should be escaped when
+\| is wrapped to start of line.
+````````````````````````````````
+
+

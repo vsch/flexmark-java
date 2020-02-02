@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.formatter.test.suite;
 
+import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
@@ -51,7 +52,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboFormatterIssueSpecTest extends ComboSpecTestCase {
+public class ComboFormatterIssueSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/formatter_issue_test_suite_spec.md";
     final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
     final private static DataHolder OPTIONS = ParserEmulationProfile.FIXED_INDENT.getProfileOptions()
