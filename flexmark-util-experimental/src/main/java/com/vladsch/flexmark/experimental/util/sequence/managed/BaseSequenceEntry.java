@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.sequence.managed;
+package com.vladsch.flexmark.experimental.util.sequence.managed;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.IRichSequence;
@@ -20,6 +20,7 @@ public class BaseSequenceEntry {
      * Compare object to equality of entry's base sequence
      * NOTE: if not char sequence or base of this entry's base sequence then will return false, so do not expect to pass a new instance of char[] and to get true for equivalent CharSubSequence
      *
+     * @param baseSeq    base sequence
      * @param o          object to compare
      * @param equalsCall 1 element array where to return type of equals test done
      *                   equality type used, 0 - quick class and/or length, 1 - hash, 2 - quick lookup, 3 - string content comparison, 4 - char sequence comparison

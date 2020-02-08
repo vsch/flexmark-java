@@ -624,6 +624,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * <p>
      * NOTE: if there is an unterminated line it will be available as the last line, without being terminated explicitly
      *
+     * @param lineIndex line index for the info to get
      * @return line info
      */
     @NotNull
@@ -645,6 +646,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * <p>
      * NOTE: if there is an unterminated line it will be available as the last line, without being terminated explicitly
      *
+     * @param lineIndex line index
      * @return line char sequence
      */
     @NotNull BasedSequence getLine(int lineIndex);
@@ -664,6 +666,10 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * <p>
      * NOTE: will issue line() to terminate any unterminated lines before iteration
      *
+     * @param maxTrailingBlankLines maximum trailing blank lines, -1 if trailing EOL should be removed
+     * @param startLine start line index
+     * @param endLine end line index, exclusive
+     * @param withPrefixes true if prefixes should be included, else only non-prefix line text
      * @return iterator over lines
      */
     @NotNull
@@ -694,6 +700,9 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * <p>
      * NOTE: will issue line() to terminate any unterminated lines before iteration
      *
+     * @param maxTrailingBlankLines maximum trailing blank lines, -1 if trailing EOL should be removed
+     * @param startLine start line index
+     * @param endLine end line index, exclusive
      * @return iterator over lines
      */
     @NotNull
@@ -712,6 +721,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
     /**
      * Get Line content of given line
      *
+     * @param lineIndex line index
      * @return char sequence for the line
      */
     @NotNull
@@ -724,6 +734,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
     /**
      * Get prefix of given line
      *
+     * @param lineIndex line index
      * @return line prefix char sequence
      */
     @NotNull
@@ -829,14 +840,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
         return toSequence(Integer.MAX_VALUE, Integer.MAX_VALUE, true);
     }
 
-    /**
-     * append lines to appendable with given maximum trailing blank lines
-     *
-     * @param out                   appendable to output the resulting lines
-     * @param maxTrailingBlankLines maximum trailing blank lines, if -1 then no EOL will be generated on the last line
-     * @throws IOException if thrown by appendable
-     * @deprecated use {@link #appendTo(T, int, int)} with separate in body and trailing blank line arguments
-     */
     @Deprecated
     default <T extends Appendable> T appendTo(@NotNull T out, int maxTrailingBlankLines) throws IOException {
         return appendTo(out, Integer.MAX_VALUE, maxTrailingBlankLines);
@@ -847,6 +850,7 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
      * <p>
      * NOTE:
      *
+     * @param <T>                   type of out
      * @param out                   appendable to output the resulting lines
      * @param withPrefixes          true if to include prefixes
      * @param maxBlankLines         maximum blank lines to allow in the body,
@@ -869,7 +873,9 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
     /**
      * append lines to appendable with 0 blank lines, if these are desired at the end of the output use {@link #appendTo(Appendable, int, int)}.
      *
+     * @param <T> type of out
      * @param out appendable to output the resulting lines
+     * @return out
      * @throws IOException thrown by {@code out}.
      */
     default <T extends Appendable> T appendTo(@NotNull T out) throws IOException {

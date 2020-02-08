@@ -40,18 +40,12 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
         return BasedSequenceImpl.create(charSequence);
     }
 
-    /**
-     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
-     */
     @NotNull
     @Deprecated
     static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
         return of(charSequence).subSequence(startIndex);
     }
 
-    /**
-     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
-     */
     @NotNull
     @Deprecated
     static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
@@ -194,6 +188,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
      * Allows peeking into preceding/following characters to the ones contained in this sequence
      *
      * @param index index in string
+     * @param predicate character set predicate
      * @return true if character at index tests true
      */
     boolean isBaseCharAt(int index, @NotNull CharPredicate predicate);
@@ -376,7 +371,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     /**
      * Extend in contained based sequence
      *
-     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
+     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length &gt; 1
      * @param includeEol if to include the eol in the string
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
      *         if the last character of this sequence are found in eolChars then no extension will be performed since it already includes the line end
@@ -389,7 +384,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     /**
      * Extend in contained based sequence
      *
-     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length > 1
+     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} {@link #eolEndLength(int)} should report length of EOL found if length &gt; 1
      * @param includeEol if to include the eol in the string
      * @return resulting sequence after extension. If already spanning the line then this sequence is returned.
      *         if the first character of this sequence are found in eolChars then no extension will be performed since it already includes the line end

@@ -81,6 +81,7 @@ public interface BasedOptionsHolder {
     /**
      * Options holder, default has none, only available on BasedSequenceWithOptions
      *
+     * @param <T> type of value held by key
      * @param dataKey in options
      * @return true if data key is available
      */

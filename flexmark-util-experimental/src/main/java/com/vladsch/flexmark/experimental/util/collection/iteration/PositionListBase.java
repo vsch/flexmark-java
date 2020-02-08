@@ -14,7 +14,9 @@ import java.util.*;
  * <p>
  * elements inserted at current position or at current + 1 position will skipped in the iteration allowing adding new elements which will not be part of the iteration
  *
- * @param <T>
+ * @param <T>  type of position
+ * @param <P>  type of position holder
+ *
  */
 public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> implements Iterable<P>, IPositionUpdater<T, P> {
 

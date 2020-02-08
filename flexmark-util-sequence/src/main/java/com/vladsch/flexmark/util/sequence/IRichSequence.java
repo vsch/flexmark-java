@@ -219,6 +219,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     /**
      * Get a sequence builder for this sequence type
      *
+     * @param <B> type of builder
      * @return builder which can build this type of sequence
      */
     @NotNull <B extends ISequenceBuilder<B, T>> B getBuilder();
@@ -304,13 +305,14 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
 
     /**
-     * @ param c char
-     * @ return leading count
-     * @ \deprecated consider using built-in sets of characters, ..._SET, or Use CharPredicate.anyOf(...)
+     * @param c char
+     * @return leading count
+     * @deprecated consider using built-in sets of characters, ..._SET, or Use CharPredicate.anyOf(...)
      */
-//    @ \Deprecated
-//     RELEASE: uncomment for release
-//    default int countLeading(char c) { return countLeading(CharPredicate.anyOf(c)); }
+    @Deprecated
+    default int countLeading(char c) {
+        return countLeading(CharPredicate.anyOf(c));
+    }
 
     int countTrailing(@NotNull CharPredicate chars);
     int countTrailingNot(@NotNull CharPredicate chars);
@@ -570,7 +572,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     /**
      * If predicate returns true for one of given sequences return nullSequence() otherwise returns this sequence.
      *
-     * @param matches match sequence list
+     * @param predicate sequence predicate
+     * @param matches   match sequence list
      * @return this or nullSequence()
      */
     @NotNull T nullIf(@NotNull Predicate<? super CharSequence> predicate, CharSequence... matches);
@@ -637,7 +640,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * \r\n - 2
      *
      * @param eolEnd index where the EOL ends, if any, any value can be passed for this
-     *               argument. If > length of this sequence then it is the same as passing length(),
+     *               argument. If &gt; length of this sequence then it is the same as passing length(),
      *               if 0 or less then 0 is returned.
      * @return 0 if no EOL, 1, or 2 depending on the EOL suffix of this sequence
      */
@@ -651,7 +654,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * \r\n - 2
      *
      * @param eolStart index where the EOL starts, if any, any value can be passed for this
-     *                 argument. If >= length of this sequence then 0 is returned
+     *                 argument. If &gt;= length of this sequence then 0 is returned
      *                 if 0 or less then it is the same as 0
      * @return 0 if no EOL, 1, or 2 depending on the EOL suffix of this sequence
      */
@@ -666,7 +669,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * Return Range of eol at given index
      *
      * @param eolEnd index where the EOL ends, if any, any value can be passed for this
-     *               argument. If > length of this sequence then it is the same as passing length(),
+     *               argument. If &gt; length of this sequence then it is the same as passing length(),
      *               if 0 or less then 0 is returned.
      * @return range of eol given by index of its end or Range.NULL if no eol ends at index
      */
@@ -676,7 +679,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * Return Range of eol at given index
      *
      * @param eolStart index where the EOL starts, if any, any value can be passed for this
-     *                 argument. If >= length of this sequence then 0 is returned
+     *                 argument. If &gt;= length of this sequence then 0 is returned
      *                 if 0 or less then it is the same as 0
      * @return range of eol given by index of its end or Range.NULL if no eol starts at index
      */
@@ -787,7 +790,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     /**
      * Get Range of leading blank lines at given index offsets in sequence
      *
-     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param eolChars  characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length &gt; 1
      * @param fromIndex minimum index in sequence to check and include in range of blank lines
      *                  can be any value, if less than 0 it is the same as 0,
      *                  if greater than length() it is the same as length()
@@ -799,10 +802,11 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      *         even if contains no EOL characters
      */
     @NotNull Range leadingBlankLinesRange(@NotNull CharPredicate eolChars, int fromIndex, int endIndex);
+
     /**
      * Get Range of trailing blank lines at given index offsets in sequence
      *
-     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param eolChars   characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length &gt; 1
      * @param startIndex index in sequence from which to start blank line search, also maximum index to include in blank lines range
      *                   can be any value, if less than 0 it is the same as 0,
      *                   if greater than length() it is the same as length()
@@ -830,7 +834,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     /**
      * Trim end to end of line containing index
      *
-     * @param eolChars characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param eolChars characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length &gt; 1
+     * @param includeEol true if EOL is to be included in the line
      * @param index    index for offset contained by the line
      *                 can be any value, if less than 0 it is the same as 0,
      *                 if greater than length() it is the same as length()
@@ -845,7 +850,8 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
     /**
      * Trim start to start of line containing index
      *
-     * @param eolChars characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length > 1
+     * @param eolChars characters to consider as EOL, note {@link #eolStartLength(int)} should report length of EOL found if length &gt; 1
+     * @param includeEol true if EOL is to be included in the line
      * @param index    index for offset contained by the line
      *                 can be any value, if less than 0 it is the same as 0,
      *                 if greater than length() it is the same as length()
@@ -1385,6 +1391,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      * Safe, if index out of range returns '\0'
      *
      * @param index index in string
+     * @param predicate character set predicate
      * @return true if character at index tests true
      */
     boolean isCharAt(int index, @NotNull CharPredicate predicate);

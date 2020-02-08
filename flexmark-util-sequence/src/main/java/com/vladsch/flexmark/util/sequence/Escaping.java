@@ -479,6 +479,7 @@ public class Escaping {
 
     /**
      * @param s string to encode
+     * @param textMapper text mapper to update for the replaced text
      * @return encoded string
      */
     @NotNull
@@ -497,6 +498,7 @@ public class Escaping {
 
     /**
      * @param s string to encode
+     * @param textMapper text mapper to update for the replaced text
      * @return encoded string
      */
     @NotNull

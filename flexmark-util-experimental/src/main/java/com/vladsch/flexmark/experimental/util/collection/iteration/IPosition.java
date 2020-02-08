@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.experimental.util.collection.iteration;
 
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +44,7 @@ import java.util.function.Predicate;
  * insertions into the list immediately after the current position.
  * <p>
  * All offset based operations on this position are operations on the list at index relative to this position's index and span,
- * so offsets may be -ve or +ve as long as absolute index is &gt;>=0 and &lt;list.size()
+ * so offsets may be -ve or +ve as long as absolute index is &gt;=0 and &lt;list.size()
  * <p>
  * NOTE: Offsets are affected by span being 0 or 1 and type of anchor for the position:
  * Offset of 0 refers to the element of this position and is only available if this position span is 1.
@@ -175,6 +176,7 @@ public interface IPosition<T, P extends IPosition<T, P>> extends IPositionHolder
      * Set element at given index
      *
      * @param offset relative to this position, absolute index [0, size()], if absolute index == size() then element is added at the end of the list. The latter is considered an insert at the index.
+     * @param element value to set at offset
      * @return element value at that position before. If adding at end of list then null is always returned.
      */
     T set(int offset, T element);

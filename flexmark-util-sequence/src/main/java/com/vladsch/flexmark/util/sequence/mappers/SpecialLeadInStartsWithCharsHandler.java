@@ -22,7 +22,7 @@ public class SpecialLeadInStartsWithCharsHandler implements SpecialLeadInHandler
      * then test if it starts with the special sequence, otherwise test if it equals the special sequence
      *
      * @param sequence char sequence appearing as first non-whitespace on a line
-     * @param options
+     * @param options  options
      * @param consumer consumer of char sequences to be called for the leadIn if it is changed by this handler
      * @return true if sequence was a lead in for the handler
      */
@@ -43,7 +43,7 @@ public class SpecialLeadInStartsWithCharsHandler implements SpecialLeadInHandler
      * then test if it starts with the special sequence, otherwise test if it equals the special sequence
      *
      * @param sequence char sequence appearing as first non-whitespace on a line
-     * @param options
+     * @param options  options
      * @param consumer consumer of char sequences to be called for the leadIn if it is changed by this handler
      * @return true if sequence was a lead in for the handler
      */

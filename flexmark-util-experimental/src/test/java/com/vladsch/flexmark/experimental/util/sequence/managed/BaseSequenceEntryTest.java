@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.sequence.managed;
+package com.vladsch.flexmark.experimental.util.sequence.managed;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;

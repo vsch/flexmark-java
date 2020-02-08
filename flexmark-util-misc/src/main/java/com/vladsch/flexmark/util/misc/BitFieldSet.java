@@ -18,8 +18,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * this class can be easily converted between long/int and BitFieldSet to use as efficient
  * option flags in implementation but convenient enum sets for manipulation.
  * <p>
- * If the Enum implements BitField then each field can have 1..N bits up to a maximum total of 64 bits per enum.
- * The class provides methods for setting and getting values from these fields as long or int values.
+ * If the Enum implements {@link BitField} then each field can have 1..N bits up to a maximum total of 64 bits per enum.
+ * The class provides methods for setting and getting values from these fields as long, int, short or byte values, either signed or unsigned.
  *
  * @author Vladimir Schneider
  * @author Josh Bloch
@@ -73,6 +73,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     /**
      * Returns all of the values comprising E.
      * The result is cloned and slower than SharedSecrets use but works in Java 11 and Java 8 because SharedSecrets are not shared publicly
+     * @param <E> type of enum
+     * @param elementType class of enum
+     * @return array of enum values
      */
     public static <E extends Enum<E>> E[] getUniverse(Class<E> elementType) {
         //noinspection unchecked
@@ -82,6 +85,10 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     /**
      * Returns all of the values comprising E.
      * The result is cloned and slower than SharedSecrets use but works in Java 11 and Java 8 because SharedSecrets are not shared publicly
+     *
+     * @param <E> type of enum
+     * @param elementType class of enum
+     * @return array of bit masks for enum values
      */
     public static <E extends Enum<E>> long[] getBitMasks(Class<E> elementType) {
         long[] bitMasks = UniverseLoader.enumBitMasksMap.get(elementType);
@@ -313,6 +320,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      *
      * @param e1    field
      * @param value value to set
+     * @return true if elements changed by operation
      */
     @SuppressWarnings("UnusedReturnValue")
     public boolean setUnsigned(E e1, long value) {
@@ -326,6 +334,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      *
      * @param e1    field
      * @param value value to set
+     * @return true if elements changed by operation
      */
     @SuppressWarnings("UnusedReturnValue")
     public boolean setSigned(E e1, long value) {
@@ -981,7 +990,11 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     /**
      * Returns unsigned value for the field, except if the field is 64 bits
      *
+     * @param <E> type of enum
+     * @param elements bit mask for elements
      * @param e1 field to get
+     * @param maxBits maximum bits for type
+     * @param typeName name of type
      * @return unsigned value
      */
     public static <E extends Enum<E>> long getUnsignedBitField(long elements, E e1, int maxBits, String typeName) {
@@ -1011,6 +1024,8 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     /**
      * Returns signed value for the field, except if the field is 64 bits
      *
+     * @param <E> type of enum
+     * @param elements bit mask for elements
      * @param e1 field to get
      * @return unsigned value
      */
@@ -1256,6 +1271,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * that do not use varargs.
      *
      * @param <E>  The class of the parameter elements and of the set
+     * @param declaringClass declaring class of enum
      * @param rest the remaining elements the set is to contain initially
      * @return an enum set initially containing the specified elements
      * @throws NullPointerException if any of the specified elements are null,

@@ -12,8 +12,6 @@ import org.jetbrains.annotations.NotNull;
  * Extension for git_labs
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link Parser.Builder#extensions(Iterable)},
- * {@link HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
  * The parsed GitLab Flavoured Markdown

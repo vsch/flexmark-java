@@ -11,7 +11,6 @@ import org.jetbrains.annotations.Nullable;
  * all its subsequences, a subSequence() returns a SubSequence from the original base sequence.
  * <p>
  * NOTE: '\0' changed to '\uFFFD' use {@link com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null chars.
- * <p>
  */
 final public class SubSequence extends BasedSequenceImpl {
     final private @NotNull CharSequence charSequence;
@@ -137,25 +136,16 @@ final public class SubSequence extends BasedSequenceImpl {
         else return new SubSequence(charSequence);
     }
 
-    /**
-     * @deprecated use {@link BasedSequence#of(CharSequence)} instead
-     */
     @Deprecated
     public static BasedSequence of(@Nullable CharSequence charSequence) {
         return BasedSequence.of(charSequence);
     }
 
-    /**
-     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
-     */
     @Deprecated
     public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
         return BasedSequence.of(charSequence).subSequence(startIndex, charSequence == null ? 0 : charSequence.length());
     }
 
-    /**
-     * @deprecated use {@link BasedSequence#of(CharSequence)} instead, followed by subSequence() to extract the range
-     */
     @Deprecated
     public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
         return BasedSequence.of(charSequence).subSequence(startIndex, endIndex);

@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.util.sequence.managed;
+package com.vladsch.flexmark.experimental.util.sequence.managed;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
@@ -27,6 +27,7 @@ public class BaseSequenceManager {
      * <p>
      * all others should delegate to these sequences for creating the base
      *
+     * @param <T>       type of base character sequence
      * @param object    object for the underlying based sequence base
      * @param callTypes one element array for type of tests done to find result
      *                  NOTE: 0 if map lookup, 10 - set search, 20 - construct and add to map/set

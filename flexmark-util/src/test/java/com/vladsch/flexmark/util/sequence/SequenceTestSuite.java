@@ -8,8 +8,6 @@ import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTrackerTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTreeTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTest;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentTreeTest;
-import com.vladsch.flexmark.util.sequence.managed.BaseSequenceEntryTest;
-import com.vladsch.flexmark.util.sequence.managed.BaseSequenceManagerTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -22,7 +20,6 @@ import org.junit.runners.Suite;
         MappedRichSequenceTest.class,
         RepeatedSequenceTest.class,
         IRichSequenceBaseTest.class,
-        BaseSequenceEntryTest.class,
         MappedBasedSequenceTest.class,
         PrefixedSubSequenceTest.class,
         SegmentTest.class,
@@ -34,7 +31,6 @@ import org.junit.runners.Suite;
         SegmentedSequenceTreeTest.class,
         SegmentOffsetTreeTest.class,
         BasedOffsetTrackerTest.class,
-        BaseSequenceManagerTest.class,
         LineAppendableImplTest.class,
 })
 public class SequenceTestSuite {

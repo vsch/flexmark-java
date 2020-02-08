@@ -97,6 +97,8 @@ public interface SequenceUtils {
     /**
      * Get a portion of this sequence selected by range
      *
+     * @param <T>   type of character sequence
+     * @param thizz char sequence
      * @param range range to get, coordinates offset form start of this sequence
      * @return sequence whose contents reflect the selected portion, if range.isNull() then this is returned
      */
@@ -108,6 +110,8 @@ public interface SequenceUtils {
     /**
      * Get a portion of this sequence before one selected by range
      *
+     * @param <T>   type of character sequence
+     * @param thizz char sequence
      * @param range range to get, coordinates offset form start of this sequence
      * @return sequence whose contents come before the selected range, if range.isNull() then null
      */
@@ -119,6 +123,8 @@ public interface SequenceUtils {
     /**
      * Get a portion of this sequence after one selected by range
      *
+     * @param <T>   type of character sequence
+     * @param thizz char sequence
      * @param range range to get, coordinates offset form start of this sequence
      * @return sequence whose contents come after the selected range, if range.isNull() then null
      */
@@ -130,6 +136,8 @@ public interface SequenceUtils {
     /**
      * Get a portions of this sequence before and after one selected by range
      *
+     * @param <T>   type of character sequence
+     * @param thizz char sequence
      * @param range range to get, coordinates offset form start of this sequence
      * @return sequence whose contents come before and after the selected range, if range.isNull() then pair of nulls
      */
@@ -291,7 +299,8 @@ public interface SequenceUtils {
      * Equality comparison based on character content of this sequence, with quick fail
      * resorting to content comparison only if length and hashCodes are equal
      *
-     * @param o any char sequence
+     * @param thizz char sequence to test for equality
+     * @param o any character sequence
      * @return true if character contents are equal
      */
     @Contract(pure = true, value = "_, null -> false")
@@ -1224,7 +1233,6 @@ public interface SequenceUtils {
      * @return null or parsed number
      */
     @Nullable
-
     static Number parseNumberOrNull(@Nullable String text) {
         if (text == null) return null;
 
@@ -1247,11 +1255,11 @@ public interface SequenceUtils {
      * <p>
      * Will parse 0x, 0b, octal if starts with 0, decimal
      *
-     * @param text text containing the number to parse
+     * @param text         text containing the number to parse
+     * @param suffixTester predicate to test number suffix, if null or predicate returns true then sequence will be accepted as valid
      * @return null or parsed number with unparsed suffix
      */
     @Nullable
-
     static Pair<Number, String> parseNumberPrefixOrNull(@Nullable String text, @Nullable Predicate<String> suffixTester) {
         if (text == null) return null;
 

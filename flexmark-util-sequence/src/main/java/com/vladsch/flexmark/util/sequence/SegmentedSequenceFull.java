@@ -67,7 +67,9 @@ final public class SegmentedSequenceFull extends SegmentedSequence {
     /**
      * Base Constructor
      *
+     * @param baseSequence base sequence for segmented sequence
      * @param builder builder for which to construct segmented sequence
+     * @return segmented sequence
      */
     public static SegmentedSequenceFull create(@NotNull BasedSequence baseSequence, ISegmentBuilder<?> builder) {
         BasedSequence baseSeq = baseSequence.getBaseSequence();

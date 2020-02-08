@@ -132,7 +132,9 @@ final public class SegmentedSequenceTree extends SegmentedSequence {
     /**
      * Base Constructor
      *
+     * @param baseSeq base sequence
      * @param builder builder containing segments for this sequence
+     * @return segmented sequence
      */
     public static SegmentedSequenceTree create(@NotNull BasedSequence baseSeq, ISegmentBuilder<?> builder) {
         SegmentTree segmentTree = SegmentTree.build(builder.getSegments(), builder.getText());

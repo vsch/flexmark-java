@@ -212,6 +212,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      * Construct sequence from this builder using another based sequence which is character identical to this builder's baseSeq
      *
      * @param altSequence    based sequence which is character identical to this builder's baseSeq
+     * @param trimStart      character set of characters to trim
      * @param ignoreCharDiff chars which should be treated as equivalent for verification purposes (Space, Tab, EOL, usually)
      * @return builder with offsets mapped to altSequence
      */
@@ -261,6 +262,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
      * Construct sequence from this builder using another based sequence which is character identical to this builder's baseSeq by length
      *
      * @param altSequence    based sequence which is character identical to this builder's baseSeq
+     * @param trimStart      character set of characters to trim
      * @param ignoreCharDiff chars which should be treated as equivalent for verification purposes (Space, Tab, EOL, usually)
      * @return builder with offsets mapped to altSequence
      */

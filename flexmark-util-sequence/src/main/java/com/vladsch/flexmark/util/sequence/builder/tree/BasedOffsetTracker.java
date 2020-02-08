@@ -147,6 +147,7 @@ public class BasedOffsetTracker {
      * Create a based offset tracker for the given sequence
      *
      * @param sequence sequence which to create offset tracker
+     * @param segmentOffsetTree segment offset tree for the sequence
      * @return based offset tracker
      */
     @NotNull

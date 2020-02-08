@@ -16,8 +16,6 @@ import org.jetbrains.annotations.NotNull;
  * Extension for enumerated_references
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
- * ({@link Parser.Builder#extensions(Iterable)},
- * {@link HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
  * The parsed enumerated_reference text is turned into {@link EnumeratedReferenceText} nodes.

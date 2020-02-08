@@ -11,7 +11,7 @@ public interface EnumeratedOrdinalRenderer {
     /**
      * Execute this runnable when empty enum text or link is encountered
      *
-     * @param runnable
+     * @param runnable runnable
      */
     void setEnumOrdinalRunnable(Runnable runnable);
 

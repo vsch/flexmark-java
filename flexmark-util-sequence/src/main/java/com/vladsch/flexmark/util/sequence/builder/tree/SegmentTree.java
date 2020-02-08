@@ -607,6 +607,7 @@ public class SegmentTree {
      * <p>
      * Efficiently reuses segmentBytes and only computes offset treeData for BASE and ANCHOR segments
      *
+     * @param baseSeq base sequence for the sequence for this segment tree
      * @return SegmentOffsetTree for this segment tree
      */
     @NotNull

@@ -76,25 +76,16 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
         } else return NULL;
     }
 
-    /**
-     * @deprecated use {@link RichSequence#of} instead
-     */
     @Deprecated
     public static RichSequence of(CharSequence charSequence) {
         return RichSequence.of(charSequence, 0, charSequence.length());
     }
 
-    /**
-     * @deprecated use {@link RichSequence#of} instead
-     */
     @Deprecated
     public static RichSequence of(CharSequence charSequence, int startIndex) {
         return RichSequence.of(charSequence, startIndex, charSequence.length());
     }
 
-    /**
-     * @deprecated use {@link RichSequence#of} instead
-     */
     @Deprecated
     public static RichSequence of(CharSequence charSequence, int startIndex, int endIndex) {
         return RichSequence.of(charSequence, startIndex, endIndex);

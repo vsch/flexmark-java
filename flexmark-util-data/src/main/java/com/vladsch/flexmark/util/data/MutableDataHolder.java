@@ -43,7 +43,6 @@ public interface MutableDataHolder extends DataHolder, MutableDataSetter {
     /**
      * Remove the stored value for the key, used to force to default or to force recompute
      *
-     * @param <T> data type of the data referred by the key
      * @param key data key to remove
      * @return mutable data holder for chained calls
      */
