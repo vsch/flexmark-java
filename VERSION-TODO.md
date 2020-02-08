@@ -7,7 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.60.xx](#next-060xx)
-- [Next 0.60.0](#next-0600)
+- [0.60.0](#0600)
 - [0.59.124](#059124)
 - [0.59.122](#059122)
 - [0.59.120](#059120)
@@ -212,7 +212,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
-## Next 0.60.0
+## 0.60.0
 
 * Fix: rename `BaseSequence.extendToAny` to `BaseSequence.extendByAnyNot` which better reflects
   the operation of the method.
