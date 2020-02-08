@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 
@@ -416,8 +417,86 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         });
     }
 
+    private void handleDivTable(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
+        MarkdownTable oldTable = myTable;
+
+        myTable = new MarkdownTable("", myHtmlConverterOptions.tableOptions);
+        myTableSuppressColumns = false;
+
+        Node node = element;
+        do {
+            if (!node.nodeName().toLowerCase().equals(FlexmarkHtmlConverter.DIV_NODE)) {
+                if (node instanceof Element) break;
+                continue;
+            }
+
+            Set<String> classNames = ((Element) node).classNames();
+            if (!classNames.contains("wt-data-grid__row")) break;
+
+            handleDivTableRow((Element) node, context, out);
+        } while ((node = context.next()) != null);
+
+        myTable.finalizeTable();
+        int sepColumns = myTable.getMaxColumns();
+
+        if (sepColumns > 0) {
+            out.blankLine();
+            myTable.appendTable(out);
+            out.tailBlankLine();
+        }
+
+        myTable = oldTable;
+    }
+
+    private void handleDivTableRow(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
+        context.pushState(element);
+
+        myTable.setHeader(hasIntersection(element.classNames(), myHtmlConverterOptions.divTableHdrClasses));
+
+        Node node;
+        while ((node = context.next()) != null) {
+            if (!node.nodeName().toLowerCase().equals(FlexmarkHtmlConverter.DIV_NODE)) {
+                if (node instanceof Element) break;
+                continue;
+            }
+            if (!hasIntersection(((Element) node).classNames(), myHtmlConverterOptions.divTableCellClasses)) break;
+
+            handleDivTableCell((Element) node, context, out);
+        }
+
+        myTable.nextRow();
+        context.popState(out);
+    }
+
+    private void handleDivTableCell(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
+        String cellText = context.processTextNodes(element).trim().replaceAll("\\s*\n\\s*", " ");
+        int colSpan = 1;
+        int rowSpan = 1;
+        CellAlignment alignment = CellAlignment.NONE;
+
+        // skip cells defined by row spans in previous rows
+        if (!myTableSuppressColumns) {
+            myTable.addCell(new TableCell(null, BasedSequence.NULL, cellText.replace("\n", " "), BasedSequence.NULL, rowSpan, colSpan, alignment));
+        }
+    }
+
+    private boolean hasIntersection(@NotNull Set<String> stringSet1, String[] stringSet2) {
+        for (String item : stringSet2) {
+            if (stringSet1.contains(item)) return true;
+        }
+        return false;
+    }
+
     private void processDiv(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
         // unwrap and process content
+        if (myHtmlConverterOptions.divTableProcessing) {
+            // NOTE: handle class names for header, row and cell
+            if (hasIntersection(element.classNames(), myHtmlConverterOptions.divTableRowClasses)) {
+                handleDivTable(element, context, out);
+                return;
+            }
+        }
+
         if (!isFirstChild(element)) {
             if (!myHtmlConverterOptions.divAsParagraph) {
                 int pendingEOL = out.getPendingEOL();

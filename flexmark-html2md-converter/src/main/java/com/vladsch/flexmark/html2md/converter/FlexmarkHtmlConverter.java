@@ -110,6 +110,16 @@ public class FlexmarkHtmlConverter {
     final public static DataKey<Boolean> DIV_AS_PARAGRAPH = new DataKey<>("DIV_AS_PARAGRAPH", false);
     final public static DataKey<Boolean> BR_AS_PARA_BREAKS = new DataKey<>("BR_AS_PARA_BREAKS", true);
     final public static DataKey<Boolean> BR_AS_EXTRA_BLANK_LINES = new DataKey<>("BR_AS_EXTRA_BLANK_LINES", true);
+    final public static DataKey<Boolean> DIV_TABLE_PROCESSING = new DataKey<>("DIV_TABLE_PROCESSING", false);
+    final public static DataKey<String[]> DIV_TABLE_HDR_CLASSES = new DataKey<>("DIV_TABLE_HDR_CLASSES", new String[] {
+            "wt-data-grid__row_header",
+    });
+    final public static DataKey<String[]> DIV_TABLE_ROW_CLASSES = new DataKey<>("DIV_TABLE_ROW_CLASSES", new String[] {
+            "wt-data-grid__row",
+    });
+    final public static DataKey<String[]> DIV_TABLE_CELL_CLASSES = new DataKey<>("DIV_TABLE_CELL_CLASSES", new String[] {
+            "wt-data-grid__cell",
+    });
 
     final public static DataKey<Boolean> ADD_TRAILING_EOL = new DataKey<>("ADD_TRAILING_EOL", true);
 

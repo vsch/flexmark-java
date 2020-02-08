@@ -60,6 +60,7 @@ public abstract class HtmlConverterTest extends ComboSpecTestCase {
         optionsMap.put("html-ext-inline-ins", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_INS, ExtensionConversion.HTML));
         optionsMap.put("html-ext-inline-sub", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_SUB, ExtensionConversion.HTML));
         optionsMap.put("html-ext-inline-sup", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_SUP, ExtensionConversion.HTML));
+        optionsMap.put("div-tables", new MutableDataSet().set(FlexmarkHtmlConverter.DIV_TABLE_PROCESSING, true));
         optionsMap.put("no-github-id", new MutableDataSet().set(FlexmarkHtmlConverter.OUTPUT_ID_ATTRIBUTE_REGEX, ""));
 
         optionsMap.put("links-none", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_LINK, LinkConversion.NONE));

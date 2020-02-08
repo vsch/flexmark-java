@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.60.xx](#next-060xx)
+- [Next 0.59.126](#next-059126)
 - [0.59.124](#059124)
 - [0.59.122](#059122)
 - [0.59.120](#059120)
@@ -210,6 +211,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## Next 0.59.126
+
+* Add: `FlexmarkHtmlConverter` `div` to table options to allow converting `div` based table code
+  to markdown tables.
 
 ## 0.59.124
 

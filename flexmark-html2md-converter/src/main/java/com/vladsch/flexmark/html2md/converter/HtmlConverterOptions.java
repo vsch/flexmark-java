@@ -40,6 +40,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
     public boolean skipAttributes;
     public boolean skipFencedCode;
     public boolean skipCharEscape;
+    public boolean divTableProcessing;
     public ExtensionConversion extInlineStrong;
     public ExtensionConversion extInlineEmphasis;
     public ExtensionConversion extInlineCode;
@@ -69,6 +70,9 @@ public class HtmlConverterOptions implements MutableDataSetter {
     public int maxTrailingBlankLines;
     public String[] unwrappedTags;
     public String[] wrappedTags;
+    public String[] divTableRowClasses;
+    public String[] divTableCellClasses;
+    public String[] divTableHdrClasses;
 
     public HtmlConverterOptions() {
         this((DataHolder) null);
@@ -102,6 +106,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
         skipAttributes = other.skipAttributes;
         skipFencedCode = other.skipFencedCode;
         skipCharEscape = other.skipCharEscape;
+        divTableProcessing = other.divTableProcessing;
         extInlineStrong = other.extInlineStrong;
         extInlineEmphasis = other.extInlineEmphasis;
         extInlineCode = other.extInlineCode;
@@ -131,6 +136,9 @@ public class HtmlConverterOptions implements MutableDataSetter {
         maxTrailingBlankLines = other.maxTrailingBlankLines;
         unwrappedTags = other.unwrappedTags;
         wrappedTags = other.wrappedTags;
+        divTableRowClasses = other.divTableRowClasses;
+        divTableCellClasses = other.divTableCellClasses;
+        divTableHdrClasses = other.divTableHdrClasses;
     }
 
     public HtmlConverterOptions(DataHolder options) {
@@ -161,6 +169,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
         skipAttributes = FlexmarkHtmlConverter.SKIP_ATTRIBUTES.get(options);
         skipFencedCode = FlexmarkHtmlConverter.SKIP_FENCED_CODE.get(options);
         skipCharEscape = FlexmarkHtmlConverter.SKIP_CHAR_ESCAPE.get(options);
+        divTableProcessing = FlexmarkHtmlConverter.DIV_TABLE_PROCESSING.get(options);
         extInlineStrong = FlexmarkHtmlConverter.EXT_INLINE_STRONG.get(options);
         extInlineEmphasis = FlexmarkHtmlConverter.EXT_INLINE_EMPHASIS.get(options);
         extInlineCode = FlexmarkHtmlConverter.EXT_INLINE_CODE.get(options);
@@ -190,6 +199,9 @@ public class HtmlConverterOptions implements MutableDataSetter {
         maxTrailingBlankLines = FlexmarkHtmlConverter.MAX_TRAILING_BLANK_LINES.get(options);
         unwrappedTags = FlexmarkHtmlConverter.UNWRAPPED_TAGS.get(options);
         wrappedTags = FlexmarkHtmlConverter.WRAPPED_TAGS.get(options);
+        divTableRowClasses = FlexmarkHtmlConverter.DIV_TABLE_ROW_CLASSES.get(options);
+        divTableCellClasses = FlexmarkHtmlConverter.DIV_TABLE_CELL_CLASSES.get(options);
+        divTableHdrClasses = FlexmarkHtmlConverter.DIV_TABLE_HDR_CLASSES.get(options);
     }
 
     @NotNull
@@ -222,6 +234,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlConverter.SKIP_ATTRIBUTES, skipAttributes);
         dataHolder.set(FlexmarkHtmlConverter.SKIP_FENCED_CODE, skipFencedCode);
         dataHolder.set(FlexmarkHtmlConverter.SKIP_CHAR_ESCAPE, skipCharEscape);
+        dataHolder.set(FlexmarkHtmlConverter.DIV_TABLE_PROCESSING, divTableProcessing);
         dataHolder.set(FlexmarkHtmlConverter.EXT_INLINE_STRONG, extInlineStrong);
         dataHolder.set(FlexmarkHtmlConverter.EXT_INLINE_EMPHASIS, extInlineEmphasis);
         dataHolder.set(FlexmarkHtmlConverter.EXT_INLINE_CODE, extInlineCode);
@@ -249,6 +262,9 @@ public class HtmlConverterOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlConverter.MAX_TRAILING_BLANK_LINES, maxTrailingBlankLines);
         dataHolder.set(FlexmarkHtmlConverter.UNWRAPPED_TAGS, unwrappedTags);
         dataHolder.set(FlexmarkHtmlConverter.WRAPPED_TAGS, wrappedTags);
+        dataHolder.set(FlexmarkHtmlConverter.DIV_TABLE_ROW_CLASSES, divTableRowClasses);
+        dataHolder.set(FlexmarkHtmlConverter.DIV_TABLE_CELL_CLASSES, divTableCellClasses);
+        dataHolder.set(FlexmarkHtmlConverter.DIV_TABLE_HDR_CLASSES, divTableHdrClasses);
         return dataHolder;
     }
 }
