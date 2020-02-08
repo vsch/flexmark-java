@@ -195,6 +195,12 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         else return this.baseSubSequence(Utils.max(getStartOffset(), other.getStartOffset()), Utils.min(getEndOffset(), other.getEndOffset()));
     }
 
+// @formatter:off
+
+    @NotNull @Override public BasedSequence extendByAny(@NotNull CharPredicate charSet)         { return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset()); }
+    @NotNull @Override public BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet)    { return extendByAny(charSet, 1); }
+// @formatter:on
+
     @NotNull
     @Override
     public BasedSequence extendByAny(@NotNull CharPredicate charSet, int maxCount) {
@@ -202,39 +208,28 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return count == 0 ? this : baseSubSequence(getStartOffset(), getEndOffset() + count);
     }
 
-    @NotNull
-    @Override
-    public BasedSequence extendToAny(@NotNull CharPredicate charSet) {
-        return extendToAny(charSet, Integer.MAX_VALUE - getEndOffset());
-    }
+// @formatter:off
+
+    @NotNull @Override public BasedSequence extendByAnyNot(@NotNull CharPredicate charSet)          { return extendByAnyNot(charSet, Integer.MAX_VALUE - getEndOffset()); }
+    @NotNull @Override public BasedSequence extendByOneOfAnyNot(@NotNull CharPredicate charSet)     { return extendByAnyNot(charSet, 1); }
+// @formatter:on
 
     @NotNull
     @Override
-    public BasedSequence extendByAny(@NotNull CharPredicate charSet) {
-        return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset());
-    }
-
-    @NotNull
-    @Override
-    public BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet) {
-        return extendByAny(charSet, 1);
-    }
-
-    @NotNull
-    @Override
-    public BasedSequence extendToAny(@NotNull CharPredicate charSet, int maxCount) {
+    public BasedSequence extendByAnyNot(@NotNull CharPredicate charSet, int maxCount) {
         int count = getBaseSequence().countLeadingNot(charSet, getEndOffset(), getEndOffset() + maxCount);
         return count == getBaseSequence().length() - getEndOffset() ? this : baseSubSequence(getStartOffset(), getEndOffset() + count + 1);
     }
 
-    // @formatter:off
-    @NotNull@Override final public BasedSequence extendToEndOfLine(@NotNull CharPredicate eolChars) { return extendToEndOfLine(eolChars, false);}
-    @NotNull@Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(CharPredicate.EOL, includeEol);}
-    @NotNull@Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(CharPredicate.EOL, false);}
-    @NotNull@Override final public BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars) { return extendToStartOfLine(eolChars, false);}
-    @NotNull@Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(CharPredicate.EOL, includeEol);}
-    @NotNull@Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(CharPredicate.EOL, false);}
-    // @formatter:on
+// @formatter:off
+
+    @NotNull @Override final public BasedSequence extendToEndOfLine(@NotNull CharPredicate eolChars) { return extendToEndOfLine(eolChars, false);}
+    @NotNull @Override final public BasedSequence extendToEndOfLine(boolean includeEol) { return extendToEndOfLine(CharPredicate.EOL, includeEol);}
+    @NotNull @Override final public BasedSequence extendToEndOfLine() { return extendToEndOfLine(CharPredicate.EOL, false);}
+    @NotNull @Override final public BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars) { return extendToStartOfLine(eolChars, false);}
+    @NotNull @Override final public BasedSequence extendToStartOfLine(boolean includeEol) { return extendToStartOfLine(CharPredicate.EOL, includeEol);}
+    @NotNull @Override final public BasedSequence extendToStartOfLine() { return extendToStartOfLine(CharPredicate.EOL, false);}
+// @formatter:on
 
     @NotNull
     @Override
@@ -381,24 +376,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     @Override public @NotNull Range baseLineRangeAtStart() { return baseLineRangeAtIndex(getStartOffset()); }
     @Override public @NotNull Pair<Integer, Integer> baseLineColumnAtStart() {return baseLineColumnAtIndex(getStartOffset());}
     // @formatter:on
-
-    @Override
-    public @NotNull BasedSequence trackIndex(int index, @NotNull PositionAnchor positionAnchor) {
-        throw new IllegalStateException("Not implemented");
-//        return BasedTrackedSequence.trackOffset(this, index, positionAnchor);
-    }
-
-    @Override
-    public int getTrackedIndex() {
-        // if we are here then there is no tracking information
-        return -1;
-    }
-
-    @Override
-    public int getTrackedOffset(int startOffset, int maxOffset) {
-        // if we are here then there is no tracking information
-        return -1;
-    }
 
     static BasedSequence create(@Nullable CharSequence charSequence) {
         if (charSequence == null) return BasedSequence.NULL;

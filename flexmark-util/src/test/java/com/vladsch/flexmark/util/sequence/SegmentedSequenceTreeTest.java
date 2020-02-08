@@ -605,18 +605,18 @@ public class SegmentedSequenceTreeTest {
         BasedSequence b = basedSequenceOf("this;.,\n").subSequence(0, ((CharSequence) "this;.,\n").length());
         BasedSequence s = b.subSequence(0, 4);
 
-        assertEquals("this", s.extendToAny(CharPredicate.anyOf("")).toString());
-        assertEquals("this", s.extendToAny(CharPredicate.anyOf("-*")).toString());
-        assertEquals("this;", s.extendToAny(CharPredicate.anyOf(";")).toString());
-        assertEquals("this;", s.extendToAny(CharPredicate.anyOf(".;")).toString());
-        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf(".")).toString());
-        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf(".,")).toString());
-        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf(",.")).toString());
-        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf(",.")).toString());
-        assertEquals("this;.,", s.extendToAny(CharPredicate.anyOf(",")).toString());
-        assertEquals("this;", s.extendToAny(CharPredicate.anyOf("\n,.;")).toString());
-        assertEquals("this;.", s.extendToAny(CharPredicate.anyOf("\n,.")).toString());
-        assertEquals("this;.,", s.extendToAny(CharPredicate.anyOf("\n,")).toString());
+        assertEquals("this", s.extendByAnyNot(CharPredicate.anyOf("")).toString());
+        assertEquals("this", s.extendByAnyNot(CharPredicate.anyOf("-*")).toString());
+        assertEquals("this;", s.extendByAnyNot(CharPredicate.anyOf(";")).toString());
+        assertEquals("this;", s.extendByAnyNot(CharPredicate.anyOf(".;")).toString());
+        assertEquals("this;.", s.extendByAnyNot(CharPredicate.anyOf(".")).toString());
+        assertEquals("this;.", s.extendByAnyNot(CharPredicate.anyOf(".,")).toString());
+        assertEquals("this;.", s.extendByAnyNot(CharPredicate.anyOf(",.")).toString());
+        assertEquals("this;.", s.extendByAnyNot(CharPredicate.anyOf(",.")).toString());
+        assertEquals("this;.,", s.extendByAnyNot(CharPredicate.anyOf(",")).toString());
+        assertEquals("this;", s.extendByAnyNot(CharPredicate.anyOf("\n,.;")).toString());
+        assertEquals("this;.", s.extendByAnyNot(CharPredicate.anyOf("\n,.")).toString());
+        assertEquals("this;.,", s.extendByAnyNot(CharPredicate.anyOf("\n,")).toString());
     }
 
     @Test

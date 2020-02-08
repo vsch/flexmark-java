@@ -214,6 +214,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## Next 0.59.126
 
+* Fix: rename `BaseSequence.extendToAny` to `BaseSequence.extendByAnyNot` which better reflects
+  the operation of the method.
+* Deprecate: `BaseSequence.extendToAny`
 * Add: `FlexmarkHtmlConverter` `div` to table options to allow converting `div` based table code
   to markdown tables.
 

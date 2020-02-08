@@ -346,16 +346,32 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet);
 
     /**
-     * Extend this based sequence to include up to the next character from underlying based sequence
+     * Extend this based sequence to include characters from underlying based sequence not in character set
      *
      * @param charSet  set of characters to include
      * @param maxCount maximum extra characters to include
      * @return sequence which
      */
     @NotNull
-    BasedSequence extendToAny(@NotNull CharPredicate charSet, int maxCount);
+    BasedSequence extendByAnyNot(@NotNull CharPredicate charSet, int maxCount);
+
     @NotNull
-    BasedSequence extendToAny(@NotNull CharPredicate charSet);
+    BasedSequence extendByAnyNot(@NotNull CharPredicate charSet);
+
+    @NotNull
+    BasedSequence extendByOneOfAnyNot(@NotNull CharPredicate charSet);
+
+    @NotNull
+    @Deprecated
+    default BasedSequence extendToAny(@NotNull CharPredicate charSet, int maxCount) {
+        return extendByAnyNot(charSet, maxCount);
+    }
+
+    @NotNull
+    @Deprecated
+    default BasedSequence extendToAny(@NotNull CharPredicate charSet) {
+        return extendByAnyNot(charSet);
+    }
 
     /**
      * Extend in contained based sequence
@@ -414,41 +430,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     @NotNull Range baseLineRangeAtEnd();
     int baseColumnAtEnd();
     int baseColumnAtStart();
-
-    /**
-     * Track given index in this sequence with respect to base offset
-     *
-     * @param index          offset within this sequence to track
-     *                       ie. between its start and end offsets
-     * @param positionAnchor direction of interest, specifically if this sequence is the
-     *                       result of typing the direction is {@link PositionAnchor#NEXT},
-     *                       result of backspacing direction is {@link PositionAnchor#PREVIOUS},
-     *                       otherwise it is {@link PositionAnchor#CURRENT}
-     * @return based sequence which tracks offset through editing modifications
-     */
-    @NotNull
-    BasedSequence trackIndex(int index, @NotNull PositionAnchor positionAnchor);
-
-    /**
-     * Get the tracked index after editing and chopping manipulation of an offset tracking sequence
-     *
-     * @return best guess at the tracked index based on the contents of this sequence,
-     *         0 to length() or -1 if offset is
-     *         no longer part of this sequence
-     */
-    int getTrackedIndex();
-
-    /**
-     * Get tracked offset computed from the tracked index if this sequence is placed at startOffset
-     * in the destination
-     *
-     * @param startOffset new start offset at destination for this sequence
-     * @param maxOffset   max offset at destination
-     * @return best guess at the tracked index based on the contents of this sequence,
-     *         0 to maxOffset or -1 if offset is
-     *         no longer part of this sequence
-     */
-    int getTrackedOffset(int startOffset, int maxOffset);
 
     class EmptyBasedSequence extends BasedSequenceImpl {
         public EmptyBasedSequence() {
