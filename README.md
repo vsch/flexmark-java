@@ -1,5 +1,5 @@
-![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
-===============================================================================
+![Flexmark Icon Logo](assets/images/flexmark-icon-logo.png) flexmark-java
+=========================================================================
 
 **flexmark-java** is a Java implementation of **[CommonMark (spec 0.28)]** parser using the
 blocks first, inlines after Markdown parsing architecture.
@@ -18,9 +18,13 @@ Motivation for this project was the need to replace [pegdown] parser in my [Mark
 plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in general is less
 than ideal and for pathological input either hangs or practically hangs during parsing.
 
+:warning: **Version 0.60.0** has breaking changes due to re-organization, renaming, clean up and
+optimization of implementation classes. Changes are detailed in
+[Version-0.60.0-Changes](../../wiki/Version-0.60.0-Changes).
+
 ### master [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
 
-### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.60.0)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
+### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.60.0)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
 
 <!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
 
@@ -232,38 +236,53 @@ custom node renderer if you need to override the generated link HTML.
 * [Flexmark Architecture and Dependencies Diagrams](https://sourcespy.com/github/flexmark/)
   thanks to great work by [Alex Karezin](mailto:javadiagrams@gmail.com) you can get an overview
   of module dependencies with ability to drill down to packages and classes.
+
 * [Merge API](../../wiki/Markdown-Merge-API) to merge multiple markdown documents into a single
   document.
+
 * [Docx Renderer Extension: Limited Attributes Node Handling](../../wiki/Docx-Renderer-Extension#limited-attributes-node-handling)
+
 * Extensible HTML to Markdown Converter module:
   [flexmark-html2md-converter](https://github.com/vsch/flexmark-java/blob/master/flexmark-html2md-converter).
   Sample: [HtmlToMarkdownCustomizedSample.java]
+
 * Java9+ module compatibility
+
 * Compound Enumerated References
   [Enumerated References Extension](../../wiki/Enumerated-References-Extension) for creating
   legal numbering for elements and headings.
+
 * [Macros Extension](../../wiki/Macros-Extension) to allow arbitrary markdown content to be
   inserted as block or inline elements, allowing block elements to be used where only inline
   elements are allowed by syntax.
+
 * [Extensions: Gitlab Flavoured Markdown](../../wiki/Extensions#gitlab-flavoured-markdown) for
   parsing and rendering GitLab markdown extensions.
+
 * OSGi module courtesy Dan Klco (GitHub [@klcodanr](https://github.com/klcodanr))
+
 * [Extensions: Media Tags](../../wiki/Extensions#media-tags) Media link transformer extension
   courtesy Cornelia Schultz (GitHub [@CorneliaXaos](https://github.com/CorneliaXaos)) transforms
   links using custom prefixes to Audio, Embed, Picture, and Video HTML5 tags.
+
 * [Translation Helper API](../../wiki/Translation-Helper-API) to make translating markdown
   documents easier.
+
 * [Admonition Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#admonition) To
   create block-styled side content. For complete documentation please see the
   [Admonition Extension, Material for MkDocs] documentation.
+
 * [Enumerated Reference](https://github.com/vsch/flexmark-java/wiki/Extensions#enumerated-reference)
   to create enumerated references for figures, tables and other markdown elements.
+
 * [Attributes Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#attributes) to
   parse attributes of the form `{name name=value name='value' name="value" #id .class-name}`
   attributes.
+
 * [YouTube Embedded Link Transformer](https://github.com/vsch/flexmark-java/wiki/Extensions#youtube-embedded-link-transformer)
   thanks to Vyacheslav N. Boyko (GitHub @bvn13) transforms simple links to youtube videos to
   embedded video iframe HTML.
+
 * [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter)
   using the [docx4j] library. How to use: [DocxConverter Sample], how to customize:
   [Customizing Docx Rendering](https://github.com/vsch/flexmark-java/wiki/Customizing-Docx-Rendering)
@@ -274,28 +293,40 @@ custom node renderer if you need to override the generated link HTML.
 * Update library to be [CommonMark (spec 0.28)] compliant and add
   `ParserEmulationProfile.COMMONMARK_0_27` and `ParserEmulationProfile.COMMONMARK_0_28` to allow
   selecting a specific spec version options.
+
 * Custom node rendering API with ability to invoke standard rendering for an overridden node,
   allowing custom node renders that only handle special cases and let the rest be rendered as
   usual.
   [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
+
 * [Gfm Issues](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-issues) and
   [Gfm Users](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-users) extensions for
   parsing and rendering `#123` and `@user-name` respectively.
+
 * Deep HTML block parsing option for better handling of raw text tags that come after other tags
   and for [pegdown] HTML block parsing compatibility.
+
 * `flexmark-all` module that includes: core, all extensions, formatter, JIRA and YouTrack
   converters, pegdown profile module and HTML to Markdown conversion.
+
 * [PDF converter module](https://github.com/vsch/flexmark-java/wiki/Extensions#pdf-output-module)
   [Usage: PDF Output](https://github.com/vsch/flexmark-java/wiki/Usage#pdf-output) using
   [Open HTML To PDF]
+
 * [Typographic Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic)
   implemented
+
 * [XWiki Macros Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#xwiki-macro-extension)
+
 * [Jekyll tags Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#jekyll-tags)
+
 * [HTML to Markdown Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#html-to-markdown)
+
 * [Maven Markdown Page Generator Plugin](https://github.com/vsch/markdown-page-generator-plugin)
+
 * [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) module to
   output AST as markdown with formatting options.
+
 * [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
   [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with
   column width and alignment of markdown tables:
@@ -687,8 +718,8 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profile/pegdown/PegdownOptionsAdapter.java
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
-[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [commonmark-java]: https://github.com/atlassian/commonmark-java
+[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [docx4j]: https://www.docx4java.org/trac/docx4j
 [flexmark-java]: https://github.com/vsch/flexmark-java
 [hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
