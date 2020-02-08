@@ -173,7 +173,7 @@ public class PegdownOptions {
 ```
 
 A sample with a
-[custom link resolver](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
+[custom link resolver](flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
 is also available, which includes link resolver for changing URLs or attributes of links and a
 custom node renderer if you need to override the generated link HTML.
 
@@ -183,152 +183,76 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions and Changes
 
-* Major reorganization and code cleanup of implementation for next version 0.60.0
-  * Formatter implementation is now part of core implementation in `flexmark` module
-  * `Formatter` improved with more options including wrapping text to margins.
-    * added ability to tracked and map source offset(s) to their index in formatted sequence.
-      Allows to preserve editor caret position across formatting operation.
-    * Offset tracking unified using `TrackedOffset`. Used by `MarkdownParagraph` for text
-      wrapping and `MarkdownTable` for table formatting.
-  * Tests cleaned up to eliminate duplication and hacks
-  * `flexmark-test-util` made reusable for other projects. Having markdown as the source code
-    for tests is too convenient to have it only used for `flexmark-java` tests.
-  * Optimized `SegmentedSequence` implementation using binary trees for searching segments and
-    byte efficient segment packing. Parser performance is either slightly improved or not
-    affected but allows using `SegmentedSequences` for collecting `Formatter` and `HtmlRenderer`
-    output to track source location of all text with minimal overhead and double the performance
-    of old implementation.
-  * new implementation of `LineAppendable` used for text generation in rendering:
-    * can use `SequenceBuilder` to generate `BasedSequence` result with original source offsets
-      for those character segments which come from the source. This allows round trip source
-      tracking from Source -> AST -> Formatted Source -> Source throughout the library.
-
-      As an added bonus using the appendable makes formatting to it **40% faster** than previous
-      implementation and **160 times** (yes times) more efficient in memory use. For the test
-      below, old implementation allocated 6GB worth of segmented sequences, new implementation
-      37MB. The % overhead is four times greater but that is after a 43 fold reduction in total
-      overhead bytes, old implementation needed 342MB of overhead, new implementation 8MB.
-
-      As a result of increased efficiency, two additional files of about 600kB each can be
-      included in the test run and only add 0.6 sec to the formatter run time.
-
-    Tests run on 1141 markdown files from GitHub projects and some other user samples. Largest
-    was 256k bytes.
-
-    | Description                | Old SegmentedSequence | New Segmented Sequence | New LineAppendable |
-    |:---------------------------|----------------------:|-----------------------:|-------------------:|
-    | Total wall clock time      |            13.896 sec |              9.672 sec |          8.516 sec |
-    | Parse time                 |             2.402 sec |              2.335 sec |          2.319 sec |
-    | Formatter appendable       |             0.603 sec |              0.602 sec |          0.869 sec |
-    | Formatter sequence builder |             7.264 sec |              3.109 sec |          1.845 sec |
-
-    The overhead difference is significant. The totals are for all segmented sequences created
-    during the test run of 1141 files. Parser statistics show requirements during parsing and
-    formatter ones are only for formatting of them while accumulating the text as a segmented
-    sequence.
-
-    | Description                                     | Old Parser |  Old Formatter | New Parser | New Formatter | New LineAppendable |
-    |:------------------------------------------------|-----------:|---------------:|-----------:|--------------:|-------------------:|
-    | Bytes for characters of all segmented sequences |    917,016 |  6,029,774,526 |    917,016 | 6,029,774,526 |         37,676,924 |
-    | Bytes for overhead of all segmented sequences   |  1,845,048 | 12,060,276,408 |     93,628 |   342,351,155 |          8,191,810 |
-    | Overhead %                                      |     201.2% |         200.0% |      10.2% |          5.7% |              21.7% |
-
+* Major reorganization and code cleanup of implementation in version 0.60.0, see
+  [Version-0.60.0-Changes](../../wiki/Version-0.60.0-Changes)
 * [Flexmark Architecture and Dependencies Diagrams](https://sourcespy.com/github/flexmark/)
   thanks to great work by [Alex Karezin](mailto:javadiagrams@gmail.com) you can get an overview
   of module dependencies with ability to drill down to packages and classes.
-
 * [Merge API](../../wiki/Markdown-Merge-API) to merge multiple markdown documents into a single
   document.
-
 * [Docx Renderer Extension: Limited Attributes Node Handling](../../wiki/Docx-Renderer-Extension#limited-attributes-node-handling)
-
 * Extensible HTML to Markdown Converter module:
-  [flexmark-html2md-converter](https://github.com/vsch/flexmark-java/blob/master/flexmark-html2md-converter).
+  [flexmark-html2md-converter](flexmark-html2md-converter).
   Sample: [HtmlToMarkdownCustomizedSample.java]
-
 * Java9+ module compatibility
-
 * Compound Enumerated References
   [Enumerated References Extension](../../wiki/Enumerated-References-Extension) for creating
   legal numbering for elements and headings.
-
 * [Macros Extension](../../wiki/Macros-Extension) to allow arbitrary markdown content to be
   inserted as block or inline elements, allowing block elements to be used where only inline
   elements are allowed by syntax.
-
 * [Extensions: Gitlab Flavoured Markdown](../../wiki/Extensions#gitlab-flavoured-markdown) for
   parsing and rendering GitLab markdown extensions.
-
 * OSGi module courtesy Dan Klco (GitHub [@klcodanr](https://github.com/klcodanr))
-
 * [Extensions: Media Tags](../../wiki/Extensions#media-tags) Media link transformer extension
   courtesy Cornelia Schultz (GitHub [@CorneliaXaos](https://github.com/CorneliaXaos)) transforms
   links using custom prefixes to Audio, Embed, Picture, and Video HTML5 tags.
-
 * [Translation Helper API](../../wiki/Translation-Helper-API) to make translating markdown
   documents easier.
-
-* [Admonition Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#admonition) To
+* [Admonition Extension](../../wiki/Extensions#admonition) To
   create block-styled side content. For complete documentation please see the
   [Admonition Extension, Material for MkDocs] documentation.
-
-* [Enumerated Reference](https://github.com/vsch/flexmark-java/wiki/Extensions#enumerated-reference)
+* [Enumerated Reference](../../wiki/Extensions#enumerated-reference)
   to create enumerated references for figures, tables and other markdown elements.
-
-* [Attributes Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#attributes) to
+* [Attributes Extension](../../wiki/Extensions#attributes) to
   parse attributes of the form `{name name=value name='value' name="value" #id .class-name}`
   attributes.
-
-* [YouTube Embedded Link Transformer](https://github.com/vsch/flexmark-java/wiki/Extensions#youtube-embedded-link-transformer)
+* [YouTube Embedded Link Transformer](../../wiki/Extensions#youtube-embedded-link-transformer)
   thanks to Vyacheslav N. Boyko (GitHub @bvn13) transforms simple links to youtube videos to
   embedded video iframe HTML.
-
-* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter)
+* [Docx Converter Module](../../wiki/Extensions#docx-converter)
   using the [docx4j] library. How to use: [DocxConverter Sample], how to customize:
-  [Customizing Docx Rendering](https://github.com/vsch/flexmark-java/wiki/Customizing-Docx-Rendering)
+  [Customizing Docx Rendering](../../wiki/Customizing-Docx-Rendering)
 
   Development of this module was sponsored by
   [Johner Institut GmbH](https://www.johner-institut.de).
-
 * Update library to be [CommonMark (spec 0.28)] compliant and add
   `ParserEmulationProfile.COMMONMARK_0_27` and `ParserEmulationProfile.COMMONMARK_0_28` to allow
   selecting a specific spec version options.
-
 * Custom node rendering API with ability to invoke standard rendering for an overridden node,
   allowing custom node renders that only handle special cases and let the rest be rendered as
   usual.
-  [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
-
-* [Gfm Issues](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-issues) and
-  [Gfm Users](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-users) extensions for
+  [PegdownCustomLinkResolverOptions](flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PegdownCustomLinkResolverOptions.java)
+* [Gfm Issues](../../wiki/Extensions#gfm-issues) and
+  [Gfm Users](../../wiki/Extensions#gfm-users) extensions for
   parsing and rendering `#123` and `@user-name` respectively.
-
 * Deep HTML block parsing option for better handling of raw text tags that come after other tags
   and for [pegdown] HTML block parsing compatibility.
-
 * `flexmark-all` module that includes: core, all extensions, formatter, JIRA and YouTrack
   converters, pegdown profile module and HTML to Markdown conversion.
-
-* [PDF converter module](https://github.com/vsch/flexmark-java/wiki/Extensions#pdf-output-module)
-  [Usage: PDF Output](https://github.com/vsch/flexmark-java/wiki/Usage#pdf-output) using
+* [PDF converter module](../../wiki/Extensions#pdf-output-module)
+  [Usage: PDF Output](../../wiki/Usage#pdf-output) using
   [Open HTML To PDF]
-
-* [Typographic Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic)
+* [Typographic Extension Module](../../wiki/Extensions#typographic)
   implemented
-
-* [XWiki Macros Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#xwiki-macro-extension)
-
-* [Jekyll tags Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#jekyll-tags)
-
-* [HTML to Markdown Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#html-to-markdown)
-
+* [XWiki Macros Extension Module](../../wiki/Extensions#xwiki-macro-extension)
+* [Jekyll tags Extension Module](../../wiki/Extensions#jekyll-tags)
+* [HTML to Markdown Converter Module](../../wiki/Extensions#html-to-markdown)
 * [Maven Markdown Page Generator Plugin](https://github.com/vsch/markdown-page-generator-plugin)
-
-* [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) module to
+* [Markdown Formatter](../../wiki/Markdown-Formatter) module to
   output AST as markdown with formatting options.
-
-* [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
-  [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with
+* [Table Extension](../../wiki/Extensions#tables) for
+  [Markdown Formatter](../../wiki/Markdown-Formatter) with
   column width and alignment of markdown tables:
 
   <table>
@@ -362,7 +286,7 @@ accumulate thinking no one is affected by what is already fixed.
 #### Extension points in the API are many and numerous
 
 There are many extension options in the API with their intended use. A good soft-start is the
-[`flexmark-java-samples`](https://github.com/vsch/flexmark-java/tree/master/flexmark-java-samples)
+[`flexmark-java-samples`](flexmark-java-samples)
 module which has simple samples for asked for extensions. The next best place is the source of
 an existing extension that has similar syntax to what you want to add.
 
@@ -691,7 +615,7 @@ License
 
 Copyright (c) 2015-2016 Atlassian and others.
 
-Copyright (c) 2016-2018, Vladimir Schneider,
+Copyright (c) 2016-2020, Vladimir Schneider,
 
 BSD (2-clause) licensed, see [LICENSE.txt] file.
 
@@ -700,11 +624,11 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [CommonMark]: https://commonmark.org
 [CommonMark (spec 0.27)]: https://spec.commonmark.org/0.27
 [CommonMark (spec 0.28)]: https://spec.commonmark.org/0.28
-[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/DocxConverterCommonMark.java
+[DocxConverter Sample]: flexmark-java-samples/src/com/vladsch/flexmark/java/samples/DocxConverterCommonMark.java
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profile/pegdown/Extensions.java
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Issues page]: ../../issues
-[HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
+[HtmlToMarkdownCustomizedSample.java]: flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
 [Jekyll]: https://jekyllrb.com
 [Kramdown]: https://kramdown.gettalong.org

@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Markdown without VERSION.md" pattern="file[flexmark-java]:*.md/&amp;&amp;!file[flexmark-java]:VERSION.md/&amp;&amp;!file[flexmark-java]:VERSION-TODO.md" />
-</component>

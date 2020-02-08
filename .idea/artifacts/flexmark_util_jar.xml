@@ -11,7 +11,6 @@
       <element id="module-output" name="flexmark-util-visitor" />
       <element id="module-output" name="flexmark-util-builder" />
       <element id="module-output" name="flexmark-util-dependency" />
-      <element id="module-output" name="flexmark-util-experimental" />
       <element id="module-output" name="flexmark-util-format" />
       <element id="module-output" name="flexmark-util-html" />
       <element id="module-output" name="flexmark-util-options" />

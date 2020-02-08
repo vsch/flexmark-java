@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.60.xx](#next-060xx)
+- [0.60.2](#0602)
 - [0.60.0](#0600)
 - [0.59.124](#059124)
 - [0.59.122](#059122)
@@ -211,6 +212,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## 0.60.2
+
+* Fix: change formatter sub-context rendering node to nullable
 
 ## 0.60.0
 
