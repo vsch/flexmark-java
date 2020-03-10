@@ -242,4 +242,36 @@ public class FormatterModifiedAST {
         //System.out.println("\n\nFormatted\n");
         //System.out.println(formatted);
     }
+
+    @Test
+    public void test_CRLFInFencedCodeBlock() throws Exception {
+
+        final String input =
+                "following sample:\n" +
+                "\n" +
+                "```xml\n" +
+                "<dependency>\r\n" +
+                "    <groupId>com.vladsch.flexmark</groupId>\r\n" +
+                "    <artifactId>flexmark-all</artifactId>\r\n" +
+                "    <version>0.60.2</version>\r\n" +
+                "</dependency>\r\n" +
+                "```\n\n";
+
+        final String expected =
+                "following sample:\n" +
+                "\n" +
+                "```xml\n" +
+                "<dependency>\r\n" +
+                "    <groupId>com.vladsch.flexmark</groupId>\r\n" +
+                "    <artifactId>flexmark-all</artifactId>\r\n" +
+                "    <version>0.60.2</version>\r\n" +
+                "</dependency>\r\n" +
+                "```\n\n";
+
+        Node document = PARSER.parse(input);
+
+        String formatted = RENDERER.render(document);
+
+        assertEquals(expected,formatted);
+    }
 }
