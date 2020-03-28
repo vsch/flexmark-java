@@ -318,7 +318,8 @@ public class LineAppendableImpl implements LineAppendable {
         assert start <= end;
 
         CharSequence sequence = appendable.toSequence();
-        CharSequence text = start == Range.NULL.getStart() && end == Range.NULL.getEnd() ? BasedSequence.NULL : sequence.subSequence(start, end);
+        CharSequence text = start == Range.NULL.getStart() && end == Range.NULL.getEnd() ? BasedSequence.NULL :
+                (end - start) > 0 && sequence.charAt(end - 1) == '\r' ? sequence.subSequence(start, end - 1) : sequence.subSequence(start, end);
         CharSequence eol = trimmedEOL(sequence);
 
         if (eol == null || eol.length() == 0) {
