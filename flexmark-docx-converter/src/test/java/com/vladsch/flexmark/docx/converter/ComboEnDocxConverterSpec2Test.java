@@ -12,7 +12,7 @@ public class ComboEnDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
     final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
 
     public ComboEnDocxConverterSpec2Test(@NotNull SpecExample example) {
-        super(example, null);
+        super(example, null, getDefaultOptions(RESOURCE_LOCATION));
     }
 
     @Parameterized.Parameters(name = "{0}")

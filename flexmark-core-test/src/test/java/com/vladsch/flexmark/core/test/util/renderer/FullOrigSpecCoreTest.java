@@ -10,4 +10,10 @@ final public class FullOrigSpecCoreTest extends OrigSpecCoreTest {
     public FullOrigSpecCoreTest() {
         super(null);
     }
+    
+    @Override
+    @NotNull
+    protected ResourceLocation getSpecResourceLocation() {
+        return RESOURCE_LOCATION;
+    }
 }

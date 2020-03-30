@@ -58,5 +58,6 @@
     <orderEntry type="library" name="org.docx4j:docx4j-JAXB-Internal" level="project" />
     <orderEntry type="library" name="log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
+    <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
   </component>
 </module>

@@ -6,7 +6,8 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
-- [Next 0.60.xx](#next-060xx)
+- [Next 0.61.xx](#next-061xx)
+- [0.61.0](#0610)
 - [0.60.2](#0602)
 - [0.60.0](#0600)
 - [0.59.124](#059124)
@@ -175,7 +176,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-## Next 0.60.xx
+## Next 0.61.xx
 
 + [ ] Fix: replace `PrefixedSubSequence` and `SegmentedSequence.create()` with non builder
       arguments to use `SequenceBuilder` throughout library code, except where
@@ -212,6 +213,28 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## 0.61.0
+
+* Fix: enable original spec tests
+* Fix: merge [#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]
+* Fix: merge [#387, JUnit is in the compile scope]
+* Add: ability to insert anchor ref targets to `HtmlIdGenerator` when scanning a document.
+* Add: add `LinkResolverBasicContext` as base interface of `LinkResolverContext` to allow simple
+  context to pass to `LinkResolver` when resolving links without needing to implement all unused
+  methods of `LinkResolverContext`.
+* Break: change argument to `LinkResolver` and `LinkResolverFactory` to
+  `LinkResolverBasicContext`. Except for `JekyllTagExtension`, the argument is still
+  `LinkResolverContext` and passed value can be cast to this if required.
+* Add: support for `JekyllTagBlock` with `include` directive to `DocxRenderer`
+
+  Use `{% include includeFile %}` to include the file into the source document. `includeFile` is
+  resolved relative to `DocxRenderer.DOC_RELATIVE_URL` or `DocxRenderer.DOC_ROOT_URL`. The
+  latter is used if `includeFile` starts with `/`
+
+  Will only include files if `JekyllTagExtension.LINK_RESOLVER_FACTORIES` is not empty, in which
+  case the link resolvers will be used to resolve `includeFile` to full file path. Use singleton
+  list of `DocxLinkResolver.Factory` instance to resolve using doc relative and root url paths.
 
 ## 0.60.2
 
@@ -2239,6 +2262,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
 
+<!-- @IGNORE PREVIOUS: link -->
+
 [#292, 0.40.0: JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/issues/292
 [#293, YamlFrontMatterBlock rendered as markdown does not preserve nested lists]: https://github.com/vsch/flexmark-java/issues/293
 [#294, BlankLine nodes within BlockQuote change in behaviour]: https://github.com/vsch/flexmark-java/issues/294
@@ -2272,6 +2297,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled]: https://github.com/vsch/flexmark-java/issues/381
 [#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
 [#384, Markdown parser produces invalid HTML]: https://github.com/vsch/flexmark-java/issues/384
+[#387, JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/pull/387
+[#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]: https://github.com/vsch/flexmark-java/pull/391
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
@@ -2283,5 +2310,4 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 <!-- @IGNORE PREVIOUS: link -->
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
-<!-- @IGNORE PREVIOUS: link -->
 

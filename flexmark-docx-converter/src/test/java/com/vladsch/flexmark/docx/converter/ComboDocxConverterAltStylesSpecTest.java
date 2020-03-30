@@ -19,7 +19,7 @@ public class ComboDocxConverterAltStylesSpecTest extends ComboDocxConverterSpecT
             .toImmutable();
 
     public ComboDocxConverterAltStylesSpecTest(@NotNull SpecExample example) {
-        super(example, null, OPTIONS);
+        super(example, null, getDefaultOptions(RESOURCE_LOCATION, OPTIONS));
     }
 
     @Parameterized.Parameters(name = "{0}")

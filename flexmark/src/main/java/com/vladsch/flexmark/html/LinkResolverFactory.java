@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html;
 
-import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.util.dependency.Dependent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Set;
 import java.util.function.Function;
 
-public interface LinkResolverFactory extends Function<LinkResolverContext, LinkResolver>, Dependent {
+public interface LinkResolverFactory extends Function<LinkResolverBasicContext, LinkResolver>, Dependent {
     @Override
     @Nullable Set<Class<?>> getAfterDependents();
 
@@ -19,5 +19,5 @@ public interface LinkResolverFactory extends Function<LinkResolverContext, LinkR
     boolean affectsGlobalScope();
 
     @Override
-    @NotNull LinkResolver apply(@NotNull LinkResolverContext context);
+    @NotNull LinkResolver apply(@NotNull LinkResolverBasicContext context);
 }

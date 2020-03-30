@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface LinkResolverContext {
+public interface LinkResolverContext extends LinkResolverBasicContext {
 
     /**
      * Get the current rendering context {@link DataHolder}. These are the options passed or set on the {@link HtmlRenderer#builder()} or passed to {@link HtmlRenderer#builder(DataHolder)}.

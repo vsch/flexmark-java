@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ast.util;
 
-import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.visitor.AstActionHandler;
@@ -47,7 +47,7 @@ public class LinkResolverAdapter extends AstActionHandler<LinkResolverAdapter, N
     }
 
     @Override
-    public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
+    public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
         return processNodeOnly(node, link, (n, handler) -> handler.resolveLink(n, context, link));
     }
 }

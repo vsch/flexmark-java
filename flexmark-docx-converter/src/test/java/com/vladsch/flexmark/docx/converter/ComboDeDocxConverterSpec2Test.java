@@ -19,7 +19,7 @@ public class ComboDeDocxConverterSpec2Test extends ComboDocxConverterSpecTestBas
             .toImmutable();
 
     public ComboDeDocxConverterSpec2Test(@NotNull SpecExample example) {
-        super(example, null, OPTIONS);
+        super(example, null, getDefaultOptions(RESOURCE_LOCATION, OPTIONS));
     }
 
     @Parameterized.Parameters(name = "{0}")

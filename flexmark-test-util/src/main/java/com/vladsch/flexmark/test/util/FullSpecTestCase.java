@@ -17,9 +17,7 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         return false;
     }
 
-    protected @NotNull ResourceLocation getSpecResourceLocation() {
-        return ResourceLocation.NULL;
-    }
+    abstract protected @NotNull ResourceLocation getSpecResourceLocation();
 
     protected void fullTestSpecStarting() {
 

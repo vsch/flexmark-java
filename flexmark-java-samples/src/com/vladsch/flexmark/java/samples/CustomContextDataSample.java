@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.Parser;
@@ -46,7 +46,7 @@ public class CustomContextDataSample {
 
     static class CustomLinkResolver implements LinkResolver {
 
-        public CustomLinkResolver(LinkResolverContext options) {
+        public CustomLinkResolver(LinkResolverBasicContext options) {
             // can use context for custom settings
             // context.getDocument();
             // context.getHtmlOptions();
@@ -54,7 +54,7 @@ public class CustomContextDataSample {
 
         @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
             Document document = context.getDocument();
             XhtmlContent xhtmlContent = XHTML_CONTENT.get(document);
 
@@ -96,7 +96,7 @@ public class CustomContextDataSample {
 
             @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverContext context) {
+            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
                 return new CustomLinkResolver(context);
             }
         }

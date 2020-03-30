@@ -4,10 +4,7 @@ import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.TestUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class ResourceLocation {
@@ -41,6 +38,15 @@ public class ResourceLocation {
 
     @NotNull
     public String getFileUrl() {
+        return fileUrl;
+    }
+
+    @NotNull
+    public String getFileDirectoryUrl() {
+        int pos = fileUrl.lastIndexOf(File.separatorChar);
+        if (pos > 0) {
+            return fileUrl.substring(0, pos + 1);
+        }
         return fileUrl;
     }
 

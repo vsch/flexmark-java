@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.wikilink.internal;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
@@ -18,13 +18,13 @@ import static com.vladsch.flexmark.ext.wikilink.WikiLinkExtension.WIKI_LINK;
 public class WikiLinkLinkResolver implements LinkResolver {
     final private WikiLinkOptions options;
 
-    public WikiLinkLinkResolver(LinkResolverContext context) {
+    public WikiLinkLinkResolver(LinkResolverBasicContext context) {
         this.options = new WikiLinkOptions(context.getOptions());
     }
 
     @NotNull
     @Override
-    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
+    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
         if (link.getLinkType() == WIKI_LINK) {
             StringBuilder sb = new StringBuilder();
             final boolean isWikiImage = node instanceof WikiImage;
@@ -89,7 +89,7 @@ public class WikiLinkLinkResolver implements LinkResolver {
 
         @NotNull
         @Override
-        public LinkResolver apply(@NotNull LinkResolverContext context) {
+        public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
             return new WikiLinkLinkResolver(context);
         }
     }

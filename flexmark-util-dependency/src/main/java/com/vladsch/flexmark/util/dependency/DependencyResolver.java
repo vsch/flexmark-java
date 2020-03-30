@@ -55,10 +55,20 @@ public class DependencyResolver {
 
                 if (afterDependencies != null && afterDependencies.size() > 0) {
                     for (Class<?> dependentClass : afterDependencies) {
-                        DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);
-                        if (dependentItem != null) {
-                            item.addDependency(dependentItem);
-                            dependentItem.addDependent(item);
+                        if (dependentClass == LastDependent.class) {
+                            // must come after all others
+                            for (DependentItem<D> dependentItem : dependentItemMap.valueIterable()) {
+                                if (dependentItem != null && dependentItem != item) {
+                                    item.addDependency(dependentItem);
+                                    dependentItem.addDependent(item);
+                                }
+                            }
+                        } else {
+                            DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);
+                            if (dependentItem != null) {
+                                item.addDependency(dependentItem);
+                                dependentItem.addDependent(item);
+                            }
                         }
                     }
                 }
@@ -66,10 +76,20 @@ public class DependencyResolver {
                 Set<Class<?>> beforeDependents = item.dependent.getBeforeDependents();
                 if (beforeDependents != null && beforeDependents.size() > 0) {
                     for (Class<?> dependentClass : beforeDependents) {
-                        DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);
-                        if (dependentItem != null) {
-                            dependentItem.addDependency(item);
-                            item.addDependent(dependentItem);
+                        if (dependentClass == FirstDependent.class) {
+                            // must come before all others
+                            for (DependentItem<D> dependentItem : dependentItemMap.valueIterable()) {
+                                if (dependentItem != null && dependentItem != item) {
+                                    dependentItem.addDependency(item);
+                                    item.addDependent(dependentItem);
+                                }
+                            }
+                        } else {
+                            DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);
+                            if (dependentItem != null) {
+                                dependentItem.addDependency(item);
+                                item.addDependent(dependentItem);
+                            }
                         }
                     }
                 }

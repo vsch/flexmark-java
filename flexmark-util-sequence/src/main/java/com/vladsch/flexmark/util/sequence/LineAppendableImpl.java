@@ -318,13 +318,15 @@ public class LineAppendableImpl implements LineAppendable {
         assert start <= end;
 
         CharSequence sequence = appendable.toSequence();
-        CharSequence text = start == Range.NULL.getStart() && end == Range.NULL.getEnd() ? BasedSequence.NULL :
-                (end - start) > 0 && sequence.charAt(end - 1) == '\r' ? sequence.subSequence(start, end - 1) : sequence.subSequence(start, end);
         CharSequence eol = trimmedEOL(sequence);
-
+        
         if (eol == null || eol.length() == 0) {
             eol = SequenceUtils.EOL;
         }
+
+        // KLUDGE: end always has 1 EOL character removed, however, if there is a \r before \n then one more char needs to be removed from end of text
+        CharSequence text = start == Range.NULL.getStart() && end == Range.NULL.getEnd() ? BasedSequence.NULL 
+                : sequence.subSequence(start, Math.max(start, end - Math.max(0, eol.length() - 1)));
 
         if (start >= end) {
             prefix = SequenceUtils.trimEnd(prefix);
@@ -358,7 +360,7 @@ public class LineAppendableImpl implements LineAppendable {
         appendable.append(eol);
 
         int endOffset = appendable.length();
-        addLineRange(0, endOffset - 1, prefix);
+        addLineRange(0, endOffset - eol.length(), prefix);
         eolOnFirstText = 0;
 
         rawIndentsOnFirstEol();

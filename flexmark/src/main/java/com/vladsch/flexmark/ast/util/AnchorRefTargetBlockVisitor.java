@@ -14,10 +14,15 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AnchorRefTargetBlockVisitor extends NodeVisitorBase {
     protected abstract void visit(AnchorRefTarget node);
-
+    
+    protected boolean preVisit(@NotNull Node node) {
+        return true;
+    }
+    
     public void visit(@NotNull Node node) {
         if (node instanceof AnchorRefTarget) visit((AnchorRefTarget) node);
-        if (node instanceof Block) {
+        
+        if (preVisit(node) && node instanceof Block) {
             visitChildren(node);
         }
     }

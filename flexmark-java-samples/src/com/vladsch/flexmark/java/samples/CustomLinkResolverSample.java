@@ -38,7 +38,7 @@ public class CustomLinkResolverSample {
         final private String docRootURL;
         final private String[] relativeParts;
 
-        public DocxLinkResolver(LinkResolverContext context) {
+        public DocxLinkResolver(LinkResolverBasicContext context) {
             // can use context for custom settings
             // context.getDocument();
             // context.getHtmlOptions();
@@ -58,7 +58,7 @@ public class CustomLinkResolverSample {
 
         @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
             if (node instanceof Image || node instanceof Link || node instanceof Reference) {
                 // resolve wiki image link
                 String url = link.getUrl();
@@ -153,7 +153,7 @@ public class CustomLinkResolverSample {
 
             @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverContext context) {
+            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
                 return new com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver(context);
             }
         }

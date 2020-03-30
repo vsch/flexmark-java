@@ -10,6 +10,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     COMMONMARK_0_26(COMMONMARK),
     COMMONMARK_0_27(COMMONMARK),
     COMMONMARK_0_28(COMMONMARK),
+    COMMONMARK_0_29(COMMONMARK),
     FIXED_INDENT(null),
     KRAMDOWN(null),
     MARKDOWN(null),
@@ -294,6 +295,10 @@ public enum ParserEmulationProfile implements MutableDataSetter {
             if (this == COMMONMARK_0_26) {
                 return new MutableListOptions((DataHolder) null).setEndOnDoubleBlank(true);
             }
+            else if (this == COMMONMARK_0_28) {
+                // IMPORTANT: implement 0.29 as defaults with 0.28 as changes
+                //return new MutableListOptions((DataHolder) null).setEndOnDoubleBlank(true);
+            }
         }
 
         // default CommonMark
@@ -454,6 +459,9 @@ public enum ParserEmulationProfile implements MutableDataSetter {
             // set previous parsing rule options
             dataHolder.set(Parser.STRONG_WRAPS_EMPHASIS, true);
             dataHolder.set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false);
+        } else if (this == COMMONMARK_0_28) {
+            // set 0.28 parsing rule options
+            // IMPORTANT: 0.28/0.29 differences
         }
 
         return dataHolder;

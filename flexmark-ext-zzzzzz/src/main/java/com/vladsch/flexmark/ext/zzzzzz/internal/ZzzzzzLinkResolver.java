@@ -8,7 +8,7 @@ import com.vladsch.flexmark.ast.util.LinkResolverAdapter;
 import com.vladsch.flexmark.ast.util.LinkResolvingHandler;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +19,7 @@ import java.util.Set;
 public class ZzzzzzLinkResolver implements LinkResolver {
     final private LinkResolverAdapter nodeAdapter;
 
-    public ZzzzzzLinkResolver(LinkResolverContext context) {
+    public ZzzzzzLinkResolver(LinkResolverBasicContext context) {
         nodeAdapter = new LinkResolverAdapter(
                 new LinkResolvingHandler<>(Image.class, this::resolveLink),
                 new LinkResolvingHandler<>(ImageRef.class, this::resolveLink),
@@ -30,7 +30,7 @@ public class ZzzzzzLinkResolver implements LinkResolver {
 
     @NotNull
     @Override
-    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
+    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
         return nodeAdapter.resolveLink(node, context, link);
     }
 
@@ -54,7 +54,7 @@ public class ZzzzzzLinkResolver implements LinkResolver {
 
         @NotNull
         @Override
-        public LinkResolver apply(@NotNull LinkResolverContext context) {
+        public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
             return new ZzzzzzLinkResolver(context);
         }
     }

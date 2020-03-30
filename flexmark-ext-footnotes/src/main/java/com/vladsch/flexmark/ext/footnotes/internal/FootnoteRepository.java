@@ -3,9 +3,7 @@ package com.vladsch.flexmark.ext.footnotes.internal;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
-import com.vladsch.flexmark.util.ast.KeepType;
-import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.ast.NodeRepository;
+import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +13,30 @@ import java.util.*;
 @SuppressWarnings("WeakerAccess")
 public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
     private ArrayList<FootnoteBlock> referencedFootnoteBlocks = new ArrayList<>();
+
+    public static void resolveFootnotes(Document document) {
+        FootnoteRepository footnoteRepository = FootnoteExtension.FOOTNOTES.get(document);
+        
+        boolean[] hadNewFootnotes = { false };
+        NodeVisitor visitor = new NodeVisitor(
+                new VisitHandler<>(Footnote.class, node -> {
+                    if (!node.isDefined()) {
+                        FootnoteBlock footonoteBlock = node.getFootnoteBlock(footnoteRepository);
+
+                        if (footonoteBlock != null) {
+                            footnoteRepository.addFootnoteReference(footonoteBlock, node);
+                            node.setFootnoteBlock(footonoteBlock);
+                            hadNewFootnotes[0] = true;
+                        }
+                    }
+                })
+        );
+
+        visitor.visit(document);
+        if (hadNewFootnotes[0]) {
+            footnoteRepository.resolveFootnoteOrdinals();
+        }
+    }
 
     public void addFootnoteReference(FootnoteBlock footnoteBlock, Footnote footnote) {
         if (!footnoteBlock.isReferenced()) {

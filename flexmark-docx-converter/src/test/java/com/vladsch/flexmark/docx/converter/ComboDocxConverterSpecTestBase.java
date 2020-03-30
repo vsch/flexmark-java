@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.docx.converter;
 
+import com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
 import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
@@ -14,6 +15,7 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
 import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
 import com.vladsch.flexmark.ext.macros.MacrosExtension;
 import com.vladsch.flexmark.ext.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
@@ -24,6 +26,7 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.*;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Document;
@@ -45,6 +48,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,6 +80,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
                     EnumeratedReferenceExtension.create(),
                     FootnoteExtension.create(),
                     GitLabExtension.create(),
+                    JekyllTagExtension.create(),
                     InsExtension.create(),
                     MacrosExtension.create(),
                     SimTocExtension.create(),
@@ -89,6 +94,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
             .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
             .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
             .set(SharedDataKeys.RUNNING_TESTS, SKIP_IGNORED_TESTS)
+            .set(JekyllTagExtension.ENABLE_INLINE_TAGS, false)
+            .set(JekyllTagExtension.LINK_RESOLVER_FACTORIES, Collections.singletonList(new DocxLinkResolver.Factory()))
             .set(DocxRenderer.SUPPRESS_HTML, true);
 
     private static HashMap<String, DataHolder> optionsMap = new HashMap<>();
@@ -109,6 +116,16 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("form-controls-input", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "input"));
         optionsMap.put("form-controls-form", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "form"));
     }
+    protected static DataHolder getDefaultOptions(ResourceLocation resourceLocation) {
+        String fileUrl = resourceLocation.getFileDirectoryUrl();
+        return new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, fileUrl);
+    }
+
+    protected static DataHolder getDefaultOptions(ResourceLocation resourceLocation, DataHolder options) {
+        String fileUrl = resourceLocation.getFileDirectoryUrl();
+        return new MutableDataSet(options).set(DocxRenderer.DOC_RELATIVE_URL, fileUrl);
+    }
+
     public ComboDocxConverterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
         super(example, optionsMaps(optionsMap, optionMap), dataHolders(OPTIONS, defaultOptions));
     }

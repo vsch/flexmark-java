@@ -6,7 +6,7 @@ import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
@@ -21,7 +21,7 @@ public class MergeLinkResolver implements LinkResolver {
     final private String docRootURL;
     final private String[] relativeParts;
 
-    public MergeLinkResolver(LinkResolverContext context) {
+    public MergeLinkResolver(LinkResolverBasicContext context) {
         // can use context for custom settings
         // context.getDocument();
         // context.getHtmlOptions();
@@ -42,7 +42,7 @@ public class MergeLinkResolver implements LinkResolver {
 
     @NotNull
     @Override
-    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
+    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
         if (node instanceof Image || node instanceof Link || node instanceof Reference) {
             // resolve link
             String url = link.getUrl();
@@ -83,6 +83,7 @@ public class MergeLinkResolver implements LinkResolver {
                         pageRef = url.substring(0, pos);
                     } else if (url.contains("?")) {
                         // remove query
+                        pos = url.indexOf("?");
                         suffix = url.substring(pos);
                         pageRef = url.substring(0, pos);
                     }
@@ -149,7 +150,7 @@ public class MergeLinkResolver implements LinkResolver {
 
         @NotNull
         @Override
-        public LinkResolver apply(@NotNull LinkResolverContext context) {
+        public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
             return new MergeLinkResolver(context);
         }
     }

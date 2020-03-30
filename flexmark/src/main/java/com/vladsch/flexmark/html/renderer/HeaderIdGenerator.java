@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.ast.AnchorRefTarget;
+import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockPreVisitor;
 import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockVisitor;
 import com.vladsch.flexmark.html.Disposable;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -78,7 +79,12 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     }
 
     @Override
-    public void generateIds(Document document) {
+    public void generateIds(@NotNull Document document) {
+        generateIds(document, null);
+    }
+    
+    @Override
+    public void generateIds(Document document, @Nullable AnchorRefTargetBlockPreVisitor preVisitor) {
         headerBaseIds.clear();
 
         resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.get(document);
@@ -88,6 +94,11 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
         nonAsciiToLowercase = HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE.get(document);
 
         new AnchorRefTargetBlockVisitor() {
+            @Override
+            protected boolean preVisit(@NotNull Node node) {
+                return preVisitor == null || preVisitor.preVisit(node, this);
+            }
+
             @Override
             protected void visit(AnchorRefTarget node) {
                 if (node.getAnchorRefId().isEmpty()) {

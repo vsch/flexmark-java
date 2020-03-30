@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.60.2</version>
+        <version>0.61.0</version>
     </parent>
 
     <artifactId>flexmark-docx-converter</artifactId>
@@ -50,6 +50,10 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-ins</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-jekyll-tag</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>

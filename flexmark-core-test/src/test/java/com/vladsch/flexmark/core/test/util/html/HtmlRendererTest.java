@@ -332,13 +332,13 @@ final public class HtmlRendererTest {
 
         final String docUrl;
 
-        public CustomLinkResolverImpl(LinkResolverContext context) {
+        public CustomLinkResolverImpl(LinkResolverBasicContext context) {
             docUrl = DOC_RELATIVE_URL.get(context.getOptions());
         }
 
         @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
             if (node instanceof Link) {
                 Link linkNode = (Link) node;
                 if (linkNode.getUrl().equals("/url")) {
@@ -351,7 +351,7 @@ final public class HtmlRendererTest {
         static class Factory extends IndependentLinkResolverFactory {
             @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverContext context) {
+            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
                 return new CustomLinkResolverImpl(context);
             }
         }
@@ -367,13 +367,13 @@ final public class HtmlRendererTest {
     }
 
     static class CustomRefLinkResolverImpl implements LinkResolver {
-        public CustomRefLinkResolverImpl(LinkResolverContext context) {
+        public CustomRefLinkResolverImpl(LinkResolverBasicContext context) {
 
         }
 
         @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
+        public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
             if (node instanceof LinkRef || node instanceof ImageRef) {
                 RefNode linkNode = (RefNode) node;
                 if (linkNode.getReference().startsWith(":")) {
@@ -386,7 +386,7 @@ final public class HtmlRendererTest {
         static class Factory extends IndependentLinkResolverFactory {
             @NotNull
             @Override
-            public LinkResolver apply(@NotNull LinkResolverContext context) {
+            public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
                 return new CustomLinkResolverImpl(context);
             }
         }

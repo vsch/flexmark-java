@@ -4,11 +4,13 @@ import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.docx.converter.DocxRenderer;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagBlock;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +24,7 @@ public class DocxLinkResolver implements LinkResolver {
     final private String[] relativeParts;
     final private boolean prefixWwwLinks;
 
-    public DocxLinkResolver(LinkResolverContext context) {
+    public DocxLinkResolver(LinkResolverBasicContext context) {
         // can use context for custom settings
         // context.getDocument();
         // context.getHtmlOptions();
@@ -43,8 +45,9 @@ public class DocxLinkResolver implements LinkResolver {
 
     @NotNull
     @Override
-    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverContext context, @NotNull ResolvedLink link) {
-        if (node instanceof Image || node instanceof Link || node instanceof Reference) {
+    public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
+        // NOTE: node is document when resolving include urls
+        if (node instanceof Image || node instanceof Link || node instanceof Reference || node instanceof JekyllTagBlock) {
             // resolve wiki image link
             String url = link.getUrl();
 
@@ -86,6 +89,7 @@ public class DocxLinkResolver implements LinkResolver {
                         pageRef = url.substring(0, pos);
                     } else if (url.contains("?")) {
                         // remove query
+                        pos = url.indexOf("?");
                         suffix = url.substring(pos);
                         pageRef = url.substring(0, pos);
                     }
@@ -150,7 +154,7 @@ public class DocxLinkResolver implements LinkResolver {
 
         @NotNull
         @Override
-        public LinkResolver apply(@NotNull LinkResolverContext context) {
+        public LinkResolver apply(@NotNull LinkResolverBasicContext context) {
             return new DocxLinkResolver(context);
         }
     }
