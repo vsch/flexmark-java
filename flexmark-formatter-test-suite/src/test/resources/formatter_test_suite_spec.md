@@ -361,3 +361,14 @@ Term 1
 ````````````````````````````````
 
 
+## Jekyll Include
+
+```````````````````````````````` example Jekyll Include: 1
+{% include test.md %}
+    
+.
+{% include test.md %}
+
+````````````````````````````````
+
+

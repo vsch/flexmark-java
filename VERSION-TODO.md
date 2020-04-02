@@ -235,6 +235,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   Will only include files if `JekyllTagExtension.LINK_RESOLVER_FACTORIES` is not empty, in which
   case the link resolvers will be used to resolve `includeFile` to full file path. Use singleton
   list of `DocxLinkResolver.Factory` instance to resolve using doc relative and root url paths.
+* Fix: `MergeLinkResolver` and `DocxLinkResolver`
 
 ## 0.60.2
 

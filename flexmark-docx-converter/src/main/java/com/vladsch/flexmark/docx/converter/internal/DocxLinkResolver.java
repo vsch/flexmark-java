@@ -16,6 +16,7 @@ import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.Set;
 
 public class DocxLinkResolver implements LinkResolver {
@@ -26,19 +27,13 @@ public class DocxLinkResolver implements LinkResolver {
 
     public DocxLinkResolver(LinkResolverBasicContext context) {
         // can use context for custom settings
-        // context.getDocument();
-        // context.getHtmlOptions();
         String docRelativeURL = DocxRenderer.DOC_RELATIVE_URL.get(context.getOptions());
-        if (docRelativeURL != null) {
-            docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
-        }
-
         String docRootURL = DocxRenderer.DOC_ROOT_URL.get(context.getOptions());
-        if (docRootURL != null) {
-            docRootURL = Utils.removePrefix(docRootURL, '/');
-        }
         this.docRelativeURL = docRelativeURL;
         this.docRootURL = docRootURL;
+        
+        docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
+        
         relativeParts = docRelativeURL.split("/");
         prefixWwwLinks = DocxRenderer.PREFIX_WWW_LINKS.get(context.getOptions());
     }
@@ -46,10 +41,14 @@ public class DocxLinkResolver implements LinkResolver {
     @NotNull
     @Override
     public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
-        // NOTE: node is document when resolving include urls
         if (node instanceof Image || node instanceof Link || node instanceof Reference || node instanceof JekyllTagBlock) {
-            // resolve wiki image link
             String url = link.getUrl();
+
+            if (docRelativeURL.isEmpty() && docRootURL.isEmpty()) {
+                // resolve url, return one of LinkStatus other than LinkStatus.UNKNOWN
+                return link.withStatus(LinkStatus.VALID)
+                        .withUrl(url);
+            }
 
             if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("ftp://") || url.startsWith("sftp://")) {
                 // resolve url, return one of LinkStatus other than LinkStatus.UNKNOWN
@@ -67,7 +66,7 @@ public class DocxLinkResolver implements LinkResolver {
                 if (docRootURL != null && !docRootURL.isEmpty()) {
                     // this one is root url, prefix with root url, without the trailing /
                     url = docRootURL + url;
-
+                    if (!url.startsWith("file:")) url =  "file://" + url;
                     return link.withStatus(LinkStatus.VALID)
                             .withUrl(url);
                 }
@@ -117,17 +116,19 @@ public class DocxLinkResolver implements LinkResolver {
 
                     // prefix with remaining docParts
                     sep = docRelativeURL.startsWith("/") ? "/" : "";
-                    StringBuilder resolvedURL = new StringBuilder();
+                    StringBuilder resolvedPath = new StringBuilder();
                     iMax = docParts;
                     for (int i = 0; i < iMax; i++) {
-                        resolvedURL.append(sep);
-                        resolvedURL.append(relativeParts[i]);
+                        resolvedPath.append(sep);
+                        resolvedPath.append(relativeParts[i]);
                         sep = "/";
                     }
 
-                    resolvedURL.append('/').append(resolved).append(suffix);
+                    resolvedPath.append('/').append(resolved).append(suffix);
+                    String resolvedUri = resolvedPath.toString();
+                    if (!resolvedUri.startsWith("file:")) resolvedUri =  "file://" + resolvedUri;
                     return link.withStatus(LinkStatus.VALID)
-                            .withUrl(resolvedURL.toString());
+                            .withUrl(resolvedUri);
                 }
             }
         }

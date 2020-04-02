@@ -91,8 +91,8 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
                     WikiLinkExtension.create()
             ))
             .set(DocxRenderer.RENDER_BODY_ONLY, true)
-            .set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY))
-            .set(DocxRenderer.DOC_ROOT_URL, String.format("file://%s/assets", PROJECT_ROOT_DIRECTORY))
+            .set(DocxRenderer.DOC_RELATIVE_URL, String.format("%s", PROJECT_ROOT_DIRECTORY))
+            .set(DocxRenderer.DOC_ROOT_URL, String.format("%s/assets", PROJECT_ROOT_DIRECTORY))
             .set(SharedDataKeys.RUNNING_TESTS, SKIP_IGNORED_TESTS)
             .set(JekyllTagExtension.ENABLE_INLINE_TAGS, false)
             .set(JekyllTagExtension.LINK_RESOLVER_FACTORIES, Collections.singletonList(new DocxLinkResolver.Factory()))
@@ -116,14 +116,23 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("form-controls-input", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "input"));
         optionsMap.put("form-controls-form", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "form"));
     }
+    
+    private static String removeFileUri(String uri) {
+        if (uri.startsWith("file://")) return uri.substring("file://".length());
+        if (uri.startsWith("file:/")) return uri.substring("file:/".length());
+        return uri;
+    }
+    
     protected static DataHolder getDefaultOptions(ResourceLocation resourceLocation) {
         String fileUrl = resourceLocation.getFileDirectoryUrl();
-        return new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, fileUrl);
+        String filePath = removeFileUri(fileUrl);
+        return new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, filePath);
     }
 
     protected static DataHolder getDefaultOptions(ResourceLocation resourceLocation, DataHolder options) {
         String fileUrl = resourceLocation.getFileDirectoryUrl();
-        return new MutableDataSet(options).set(DocxRenderer.DOC_RELATIVE_URL, fileUrl);
+        String filePath = removeFileUri(fileUrl);
+        return new MutableDataSet(options).set(DocxRenderer.DOC_RELATIVE_URL, filePath);
     }
 
     public ComboDocxConverterSpecTestBase(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {

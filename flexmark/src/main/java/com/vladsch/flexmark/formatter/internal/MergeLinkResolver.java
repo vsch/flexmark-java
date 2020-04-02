@@ -23,20 +23,13 @@ public class MergeLinkResolver implements LinkResolver {
 
     public MergeLinkResolver(LinkResolverBasicContext context) {
         // can use context for custom settings
-        // context.getDocument();
-        // context.getHtmlOptions();
         String docRelativeURL = Formatter.DOC_RELATIVE_URL.get(context.getOptions());
-        if (docRelativeURL != null) {
-            docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
-        }
-
         String docRootURL = Formatter.DOC_ROOT_URL.get(context.getOptions());
-        if (docRootURL != null) {
-            docRootURL = Utils.removePrefix(docRootURL, '/');
-        }
-
         this.docRelativeURL = docRelativeURL;
         this.docRootURL = docRootURL;
+        
+        docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
+        
         relativeParts = docRelativeURL.split("/");
     }
 
@@ -44,7 +37,6 @@ public class MergeLinkResolver implements LinkResolver {
     @Override
     public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
         if (node instanceof Image || node instanceof Link || node instanceof Reference) {
-            // resolve link
             String url = link.getUrl();
 
             if (docRelativeURL.isEmpty() && docRootURL.isEmpty()) {
@@ -65,7 +57,6 @@ public class MergeLinkResolver implements LinkResolver {
                 if (docRootURL != null && !docRootURL.isEmpty()) {
                     // this one is root url, prefix with merged root url, without the trailing /
                     url = (!docRootURL.startsWith("/") ? "/" : "") + docRootURL + url;
-
                     return link.withStatus(LinkStatus.VALID)
                             .withUrl(url);
                 }
@@ -110,20 +101,19 @@ public class MergeLinkResolver implements LinkResolver {
                     }
 
                     // prefix with remaining docParts
-                    StringBuilder resolvedURL = new StringBuilder();
-
                     sep = docRelativeURL.startsWith("/") ? "/" : "";
-
+                    StringBuilder resolvedPath = new StringBuilder();
                     iMax = docParts;
                     for (int i = 0; i < iMax; i++) {
-                        resolvedURL.append(sep);
-                        resolvedURL.append(relativeParts[i]);
+                        resolvedPath.append(sep);
+                        resolvedPath.append(relativeParts[i]);
                         sep = "/";
                     }
 
-                    resolvedURL.append('/').append(resolved).append(suffix);
+                    resolvedPath.append('/').append(resolved).append(suffix);
+                    String resolvedUri = resolvedPath.toString();
                     return link.withStatus(LinkStatus.VALID)
-                            .withUrl(resolvedURL.toString());
+                            .withUrl(resolvedUri);
                 }
             }
         }
