@@ -47,8 +47,8 @@ public abstract class IParseBase implements IParse {
 
         while (true) {
             int charsRead = bufferedReader.read(buffer);
+            if (charsRead < 0) break;
             file.append(buffer, 0, charsRead);
-            if (charsRead < buffer.length) break;
         }
 
         BasedSequence source = BasedSequence.of(file.toString());

@@ -25,7 +25,7 @@
           <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
         </ParserOptions>
       </ParserSettings>
-      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="true" imageUriSerials="true" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0">
+      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="true" imageUriSerials="true" addDocTypeHtml="true" noParaTags="false" migratedPlantUml="false" plantUmlConversion="0">
         <GeneratorProvider>
           <provider providerId="com.vladsch.md.nav.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
         </GeneratorProvider>
@@ -33,6 +33,10 @@
         <headerBottom />
         <bodyTop />
         <bodyBottom />
+        <fencedCodeConversions>
+          <option name="latex" value="KATEX" />
+          <option name="math" value="KATEX" />
+        </fencedCodeConversions>
       </HtmlSettings>
       <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
         <StylesheetProvider>
@@ -78,7 +82,7 @@ code {
         <textMaps />
       </LinkMapSettings>
       <EnhPreviewSettings allowBrowsingInPreview="false" openRemoteLinks="true" replaceUnicodeEmoji="false" showGitHubPageIfSynced="false" />
-      <EnhHtmlSettings embedUrlContent="false" embedImages="false" embedHttpImages="false" mathConversion="-1" />
+      <EnhHtmlSettings embedUrlContent="false" embedImages="false" embedHttpImages="false" migratedMathConversion="true" mathConversion="-1" />
       <FlexmarkHtmlSettings flexmarkSpecExampleRendering="0" flexmarkSpecExampleRenderHtml="false">
         <flexmarkSectionLanguages>
           <option name="1" value="Markdown" />

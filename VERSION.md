@@ -6,6 +6,8 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.61.2](#0612)
+- [0.61.0](#0610)
 - [0.60.2](#0602)
 - [0.60.0](#0600)
 - [0.59.84](#05984)
@@ -154,6 +156,35 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## 0.61.2
+
+* Fix: `ScopedDataSet.getAll()` and `ScopedDataSet.getKeys()` would not return keys from parent
+  scope.
+* Fix: [#396, DocumentParser stops reading too early resulting in the document being cut off] 
+
+## 0.61.0
+
+* Fix: enable original spec tests
+* Fix: merge [#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]
+* Fix: merge [#387, JUnit is in the compile scope]
+* Add: ability to insert anchor ref targets to `HtmlIdGenerator` when scanning a document.
+* Add: add `LinkResolverBasicContext` as base interface of `LinkResolverContext` to allow simple
+  context to pass to `LinkResolver` when resolving links without needing to implement all unused
+  methods of `LinkResolverContext`.
+* Break: change argument to `LinkResolver` and `LinkResolverFactory` to
+  `LinkResolverBasicContext`. Except for `JekyllTagExtension`, the argument is still
+  `LinkResolverContext` and passed value can be cast to this if required.
+* Add: support for `JekyllTagBlock` with `include` directive to `DocxRenderer`
+
+  Use `{% include includeFile %}` to include the file into the source document. `includeFile` is
+  resolved relative to `DocxRenderer.DOC_RELATIVE_URL` or `DocxRenderer.DOC_ROOT_URL`. The
+  latter is used if `includeFile` starts with `/`
+
+  Will only include files if `JekyllTagExtension.LINK_RESOLVER_FACTORIES` is not empty, in which
+  case the link resolvers will be used to resolve `includeFile` to full file path. Use singleton
+  list of `DocxLinkResolver.Factory` instance to resolve using doc relative and root url paths.
+* Fix: `MergeLinkResolver` and `DocxLinkResolver`
 
 ## 0.60.2
 
@@ -1875,3 +1906,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 
+
+[#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]: https://github.com/vsch/flexmark-java/pull/391
+[#387, JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/pull/387
+[#396, DocumentParser stops reading too early resulting in the document being cut off]: https://github.com/vsch/flexmark-java/issues/396

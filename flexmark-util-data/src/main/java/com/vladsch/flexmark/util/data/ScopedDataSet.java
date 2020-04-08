@@ -3,10 +3,7 @@ package com.vladsch.flexmark.util.data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ScopedDataSet extends DataSet {
     protected final DataHolder parent;
@@ -28,15 +25,8 @@ public class ScopedDataSet extends DataSet {
     @Override
     public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
         if (parent != null) {
-
-            HashMap<DataKeyBase<?>, Object> all = new HashMap<>(super.getAll());
-
-            for (DataKeyBase<?> key : parent.getKeys()) {
-                if (!contains(key)) {
-                    all.put(key, key.get(parent));
-                }
-            }
-
+            HashMap<DataKeyBase<?>, Object> all = new HashMap<>(parent.getAll());
+            all.putAll(super.getAll());
             return all;
         } else {
             return super.getAll();
@@ -46,19 +36,19 @@ public class ScopedDataSet extends DataSet {
     @Override
     public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
         if (parent != null) {
-
-            ArrayList<DataKeyBase<?>> all = new ArrayList<>(super.getKeys());
-
-            for (DataKeyBase<?> key : parent.getKeys()) {
-                if (!contains(key)) {
-                    all.add(key);
-                }
-            }
-
+            HashSet<DataKeyBase<?>> all = new HashSet<>(parent.getKeys());
+            all.addAll(super.getKeys());
             return all;
         } else {
             return super.getKeys();
         }
+    }
+
+    @Override
+    public @NotNull MutableDataSet toMutable() {
+        MutableDataSet mutableDataSet = new MutableDataSet();
+        mutableDataSet.dataSet.putAll(super.getAll());
+        return parent != null ? new MutableScopedDataSet(parent, mutableDataSet) : mutableDataSet;
     }
 
     @Override

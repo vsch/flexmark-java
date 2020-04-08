@@ -38,7 +38,7 @@
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>
     </ParserSettings>
-    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="true" imageUriSerials="true" addDocTypeHtml="true" noParaTags="false" plantUmlConversion="0">
+    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="true" imageUriSerials="true" addDocTypeHtml="true" noParaTags="false" migratedPlantUml="false" plantUmlConversion="0">
       <GeneratorProvider>
         <provider providerId="com.vladsch.md.nav.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
       </GeneratorProvider>
@@ -46,6 +46,10 @@
       <headerBottom />
       <bodyTop />
       <bodyBottom />
+      <fencedCodeConversions>
+        <option name="latex" value="KATEX" />
+        <option name="math" value="KATEX" />
+      </fencedCodeConversions>
     </HtmlSettings>
     <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
       <StylesheetProvider>
