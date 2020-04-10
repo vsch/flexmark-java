@@ -2375,6 +2375,69 @@ with some text
 ````````````````````````````````
 
 
+Base64 encoded
+
+```````````````````````````````` example Images: 5
+![flexmark-icon-logo@2x.png](data:image/png;base64,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) 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
+                    <wp:extent cx="609600" cy="609600"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo@2x.png"
+                        id="100000" name="Image100000"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="100001" name="Image100000"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="609600" cy="609600"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t>with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
 ## Block Quotes
 
 lazy continuation

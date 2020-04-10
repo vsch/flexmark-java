@@ -220,6 +220,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * [ ] Fix: wiki links should not be wrapped during formatting.
 * Fix: merge [#397, PR: Add base64 image support with docx rendering] thanks to [@Xaelis]
+* Add: test for base64 encoded docx conversion
 
 ## 0.61.2
 

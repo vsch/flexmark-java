@@ -74,7 +74,7 @@ public class DocxLinkResolver implements LinkResolver {
                 // should be prefixed with http://, we will just add it
                 return link.withStatus(LinkStatus.INVALID)
                         .withUrl("http://" + url);
-            } else if (!url.matches("^(?:[a-z]+:|#|\\?)")) {
+            } else if (!url.startsWith("data:") && !url.matches("^(?:[a-z]+:|#|\\?)")) {
                 // relative, we will process it as a relative path to the docRelativeURL
                 String pageRef = url;
                 String suffix = "";
