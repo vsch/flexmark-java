@@ -1809,7 +1809,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             url = this.getClass().getResource("/emoji/" + url.substring(DocxRenderer.EMOJI_RESOURCE_PREFIX.length())).toString();
         }
 
-        if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
+
+        if (ImageUtils.isEncodedImage(url)) {
+            image = ImageUtils.base64Decode(url);
+        } else if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
             // hyperlinked image  or file
             if (url.startsWith("file:")) {
                 // try to load from file, from URL fails on some images while file load succeeds
