@@ -228,6 +228,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     unescape the text. **This is needed to properly handle anchor escaping.**
   * Fix: `PegdownOptionsAdapter` to set `WikiLinkExtension.ALLOW_ANCHORS` to `true` for pegdown
     compatibility
+* Fix: deprecate `CoreNodeFormatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP` and move declaration to
+  `Formatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP`
+* Fix: deprecate `CoreNodeFormatter.UNIQUIFICATION_ID_MAP` and move declaration to
+  `Formatter.UNIQUIFICATION_ID_MAP`
 * Fix: wiki links should not be wrapped during formatting.
   * Add: WikiLink formatter extension and tests
   * Add: WikiLink translating formatter functionality and tests

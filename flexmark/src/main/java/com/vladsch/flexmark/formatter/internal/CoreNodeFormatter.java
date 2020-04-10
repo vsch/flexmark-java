@@ -39,6 +39,19 @@ import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
+    /**
+     * 2020-04-10
+     * @deprecated use {@link Formatter#UNIQUIFICATION_MAP}
+     */
+    @Deprecated
+    final public static DataKey<Map<String, String>> UNIQUIFICATION_MAP = Formatter.UNIQUIFICATION_MAP;
+    /**
+     * 2020-04-10
+     * @deprecated use {@link Formatter#ATTRIBUTE_UNIQUIFICATION_ID_MAP}
+     */
+    @Deprecated
+    final public static DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = Formatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP;
+    
     public static class Factory implements NodeFormatterFactory {
         @NotNull
         @Override
