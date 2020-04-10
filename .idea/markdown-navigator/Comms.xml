@@ -56,10 +56,21 @@
         <bodyTop />
         <bodyBottom />
         <fencedCodeConversions>
+          <option name="c4plantuml" value="NONE" />
+          <option name="ditaa" value="NONE" />
+          <option name="erd" value="NONE" />
+          <option name="graphviz" value="NONE" />
           <option name="latex" value="KATEX" />
           <option name="math" value="KATEX" />
+          <option name="mermaid" value="NONE" />
+          <option name="nomnoml" value="NONE" />
           <option name="plantuml" value="EMBEDDED" />
           <option name="puml" value="EMBEDDED" />
+          <option name="svgbob" value="NONE" />
+          <option name="umlet" value="NONE" />
+          <option name="vega" value="NONE" />
+          <option name="vegalite" value="NONE" />
+          <option name="wavedrom" value="NONE" />
         </fencedCodeConversions>
       </HtmlSettings>
       <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">

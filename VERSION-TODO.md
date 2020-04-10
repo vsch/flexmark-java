@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.4](#0614)
 - [0.61.2](#0612)
 - [0.61.0](#0610)
 - [0.60.2](#0602)
@@ -215,11 +216,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
 
+## 0.61.4
+
+* [ ] Fix: wiki links should not be wrapped during formatting.
+* Fix: merge [#397, PR: Add base64 image support with docx rendering] thanks to [@Xaelis]
+
 ## 0.61.2
 
 * Fix: `ScopedDataSet.getAll()` and `ScopedDataSet.getKeys()` would not return keys from parent
   scope.
-* Fix: [#396, DocumentParser stops reading too early resulting in the document being cut off] 
+* Fix: [#396, DocumentParser stops reading too early resulting in the document being cut off]
 
 ## 0.61.0
 
@@ -2307,6 +2313,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#384, Markdown parser produces invalid HTML]: https://github.com/vsch/flexmark-java/issues/384
 [#387, JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/pull/387
 [#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]: https://github.com/vsch/flexmark-java/pull/391
+[#396, DocumentParser stops reading too early resulting in the document being cut off]: https://github.com/vsch/flexmark-java/issues/396
+[#397, PR: Add base64 image support with docx rendering]: https://github.com/vsch/flexmark-java/pull/397
+[@Xaelis]: https://github.com/Xaelis
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
@@ -2318,6 +2327,4 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 <!-- @IGNORE PREVIOUS: link -->
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
-[#396, DocumentParser stops reading too early resulting in the document being cut off]: https://github.com/vsch/flexmark-java/issues/396
-
 
