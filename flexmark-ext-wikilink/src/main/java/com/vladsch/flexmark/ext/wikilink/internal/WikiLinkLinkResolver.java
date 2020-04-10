@@ -34,27 +34,49 @@ public class WikiLinkLinkResolver implements LinkResolver {
             sb.append(isWikiImage ? options.getImagePrefix(absolute) : options.getLinkPrefix(absolute));
 
             boolean hadAnchorRef = false;
+            boolean isEscaped = false;
 
             String linkEscapeChars = options.linkEscapeChars;
             String linkReplaceChars = options.linkReplaceChars;
             for (int i = absolute ? 1 : 0; i < iMax; i++) {
                 char c = wikiLink.charAt(i);
 
-                if (c == '#') {
-                    if (hadAnchorRef) continue;
+                if (c == '#' && !hadAnchorRef && options.allowAnchors && !(isEscaped && options.allowAnchorEscape)) {
                     sb.append(isWikiImage ? options.imageFileExtension : options.linkFileExtension);
+                    sb.append(c);
                     hadAnchorRef = true;
+                    isEscaped = false;
+                    continue;
                 }
 
-                int pos = linkEscapeChars.indexOf(c);
-
-                if (pos < 0) {
-                    sb.append(c);
+                if (c == '\\') {
+                    if (isEscaped) {
+                        // need to URL encode \
+                        sb.append("%5C");
+                    }
+                    isEscaped = !isEscaped;
                 } else {
-                    sb.append(linkReplaceChars.charAt(pos));
+                    isEscaped = false;
+                    if (c == '#' && !hadAnchorRef) {
+                        // need to URL encode the #
+                        sb.append("%23");
+                    } else {
+                        int pos = linkEscapeChars.indexOf(c);
+                        
+                        if (pos < 0) {
+                            sb.append(c);
+                        } else {
+                            sb.append(linkReplaceChars.charAt(pos));
+                        }
+                    }
                 }
             }
 
+            if (isEscaped) {
+                // need to add dangling URL encoded \
+                sb.append("%5C");
+            }
+            
             if (!hadAnchorRef) {
                 sb.append(isWikiImage ? options.imageFileExtension : options.linkFileExtension);
             }

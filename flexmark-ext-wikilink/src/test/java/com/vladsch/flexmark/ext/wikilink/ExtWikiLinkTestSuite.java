@@ -6,6 +6,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ComboWikiLinkSpecTest.class,
+        ComboWikiLinkFormatterSpecTest.class,
+        ComboWikiLinkTranslationFormatterSpecTest.class,
 })
 public class ExtWikiLinkTestSuite {
 }

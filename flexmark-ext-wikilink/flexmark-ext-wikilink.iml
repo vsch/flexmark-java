@@ -26,5 +26,6 @@
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
     <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
+    <orderEntry type="module" module-name="flexmark-util-format" />
   </component>
 </module>

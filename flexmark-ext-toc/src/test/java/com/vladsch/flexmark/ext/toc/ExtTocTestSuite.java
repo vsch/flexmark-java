@@ -8,6 +8,8 @@ import org.junit.runners.Suite;
         TocOptionsParserTest.class,
         ComboTocSpecTest.class,
         ComboSimTocSpecTest.class,
+        ComboSimTocMdFormatterSpecTest.class,
+        ComboSimTocHtmlFormatterSpecTest.class,
 })
 public class ExtTocTestSuite {
 }

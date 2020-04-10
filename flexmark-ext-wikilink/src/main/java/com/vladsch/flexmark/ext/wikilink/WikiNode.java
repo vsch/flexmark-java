@@ -11,6 +11,8 @@ import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public class WikiNode extends Node implements DoNotDecorate, TextContainer {
+    final public static char SEPARATOR_CHAR = '|';
+    
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence link = BasedSequence.NULL;
     protected BasedSequence pageRef = BasedSequence.NULL;
@@ -178,12 +180,12 @@ public class WikiNode extends Node implements DoNotDecorate, TextContainer {
         if (linkIsFirst) {
             pos = linkChars.length() - 2;
             do {
-                pos = linkChars.lastIndexOf('|', pos - 1);
+                pos = linkChars.lastIndexOf(SEPARATOR_CHAR, pos - 1);
             } while (pos != -1 && canEscapePipe && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing(CharPredicate.BACKSLASH) & 1) == 1));
         } else {
             pos = -1;
             do {
-                pos = linkChars.indexOf('|', pos + 1);
+                pos = linkChars.indexOf(SEPARATOR_CHAR, pos + 1);
             } while (pos != -1 && canEscapePipe && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing(CharPredicate.BACKSLASH) & 1) == 1));
         }
 

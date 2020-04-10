@@ -1,0 +1,22 @@
+Implementations of TranslationFormatterSpecTest  (10 usages found)
+    Unclassified usage  (10 usages found)
+        ComboAbbreviationTranslationFormatterSpecTest.java  (1 usage found)
+            16 public class ComboAbbreviationTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboAdmonitionTranslationFormatterSpecTest.java  (1 usage found)
+            15 public class ComboAdmonitionTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboAttributesTranslationFormatterSpecTest.java  (1 usage found)
+            18 public class ComboAttributesTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboCoreTranslationFormatterSpecTest.java  (1 usage found)
+            18 public class ComboCoreTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboEmojiTranslationFormatterSpecTest.java  (1 usage found)
+            17 public class ComboEmojiTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboEnumeratedReferenceTranslationFormatterSpecTest.java  (1 usage found)
+            17 public class ComboEnumeratedReferenceTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboFootnotesTranslationFormatterSpecTest.java  (1 usage found)
+            16 public class ComboFootnotesTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboMacrosTranslationFormatterSpecTest.java  (1 usage found)
+            18 public class ComboMacrosTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboTableTranslationFormatterSpecTest.java  (1 usage found)
+            19 public class ComboTableTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
+        ComboWikiLinkTranslationFormatterSpecTest.java  (1 usage found)
+            17 public class ComboWikiLinkTranslationFormatterSpecTest extends TranslationFormatterSpecTest {

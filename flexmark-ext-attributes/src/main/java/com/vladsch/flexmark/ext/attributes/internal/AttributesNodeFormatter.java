@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockVisitor;
 import com.vladsch.flexmark.ext.attributes.*;
 import com.vladsch.flexmark.formatter.*;
-import com.vladsch.flexmark.formatter.internal.CoreNodeFormatter;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
@@ -30,7 +30,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
     final public static DataKey<Set<Node>> PROCESSED_ATTRIBUTES = new DataKey<>("PROCESSED_ATTRIBUTES", HashSet::new);
 
     // need to have this one available in core formatter
-    final public static DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = CoreNodeFormatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP;
+    final public static DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = Formatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP;
 
     final public static DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_CATEGORY_MAP", HashMap::new);
     final public static DataKey<Integer> ATTRIBUTE_TRANSLATION_ID = new DataKey<>("ATTRIBUTE_TRANSLATION_ID", 0); // next attribute index

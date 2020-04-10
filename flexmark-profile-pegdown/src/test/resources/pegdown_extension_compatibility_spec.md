@@ -2795,7 +2795,7 @@ With empty anchor ref
 ```````````````````````````````` example Markdown elements - WikiLink: 14
 [[wiki link#]] 
 .
-<p><a href="wiki-link#">wiki link#</a></p>
+<p><a href="wiki-link#">wiki link</a></p>
 ````````````````````````````````
 
 
@@ -2804,7 +2804,7 @@ With Anchor ref
 ```````````````````````````````` example Markdown elements - WikiLink: 15
 [[wiki link#anchor-ref]] 
 .
-<p><a href="wiki-link#anchor-ref">wiki link#anchor-ref</a></p>
+<p><a href="wiki-link#anchor-ref">wiki link</a></p>
 ````````````````````````````````
 
 
@@ -2823,6 +2823,44 @@ With text, anchor ref
 [[wiki text|wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki text</a></p>
+````````````````````````````````
+
+
+#### No Wiki Ref Anchors
+
+With empty anchor ref
+
+```````````````````````````````` example(Markdown elements - WikiLink - No Wiki Ref Anchors: 1) options(no-wiki-ref-anchors)
+[[wiki link#]] 
+.
+<p><a href="wiki-link%23">wiki link#</a></p>
+````````````````````````````````
+
+
+With Anchor ref
+
+```````````````````````````````` example(Markdown elements - WikiLink - No Wiki Ref Anchors: 2) options(no-wiki-ref-anchors)
+[[wiki link#anchor-ref]] 
+.
+<p><a href="wiki-link%23anchor-ref">wiki link#anchor-ref</a></p>
+````````````````````````````````
+
+
+With text, empty anchor ref
+
+```````````````````````````````` example(Markdown elements - WikiLink - No Wiki Ref Anchors: 3) options(no-wiki-ref-anchors)
+[[wiki text|wiki link#]] 
+.
+<p><a href="wiki-link%23">wiki text</a></p>
+````````````````````````````````
+
+
+With text, anchor ref
+
+```````````````````````````````` example(Markdown elements - WikiLink - No Wiki Ref Anchors: 4) options(no-wiki-ref-anchors)
+[[wiki text|wiki link#anchor-ref]] 
+.
+<p><a href="wiki-link%23anchor-ref">wiki text</a></p>
 ````````````````````````````````
 
 

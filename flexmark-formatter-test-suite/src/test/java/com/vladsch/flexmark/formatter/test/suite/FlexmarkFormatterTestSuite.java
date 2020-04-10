@@ -20,6 +20,7 @@ import com.vladsch.flexmark.ext.footnotes.ComboFootnotesFormatterSpecTest;
 import com.vladsch.flexmark.ext.footnotes.ComboFootnotesTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.footnotes.MergeFootnotesTest;
 import com.vladsch.flexmark.ext.gfm.tasklist.ComboGfmTaskListFormatterSpecTest;
+import com.vladsch.flexmark.ext.gitlab.ComboGitLabFormatterSpecTest;
 import com.vladsch.flexmark.ext.jekyll.front.matter.ComboJekyllFrontMatterFormatterSpecTest;
 import com.vladsch.flexmark.ext.macros.ComboMacrosFormatterSpecTest;
 import com.vladsch.flexmark.ext.macros.ComboMacrosTranslationFormatterSpecTest;
@@ -27,42 +28,49 @@ import com.vladsch.flexmark.ext.macros.MergeMacrosTest;
 import com.vladsch.flexmark.ext.spec.example.ComboSpecExampleFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableTranslationFormatterSpecTest;
-import com.vladsch.flexmark.ext.toc.ExtTocFormatterTestSuite;
+import com.vladsch.flexmark.ext.toc.ComboSimTocHtmlFormatterSpecTest;
+import com.vladsch.flexmark.ext.toc.ComboSimTocMdFormatterSpecTest;
+import com.vladsch.flexmark.ext.wikilink.ComboWikiLinkFormatterSpecTest;
+import com.vladsch.flexmark.ext.wikilink.ComboWikiLinkTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.yaml.front.matter.ComboYamlFrontMatterFormatterSpecTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ComboAdmonitionFormatterSpecTest.class,
-        ComboAdmonitionTranslationFormatterSpecTest.class,
         ComboAbbreviationFormatterSpecTest.class,
         ComboAbbreviationTranslationFormatterSpecTest.class,
-        ComboAttributesFormatterSpecTest.class,
+        ComboAdmonitionFormatterSpecTest.class,
+        ComboAdmonitionTranslationFormatterSpecTest.class,
         ComboAsideFormatterSpecTest.class,
+        ComboAttributesFormatterSpecTest.class,
         ComboAttributesTranslationFormatterSpecTest.class,
+        ComboCoreFormatterSpecTest.class,
+        ComboCoreTranslationFormatterSpecTest.class,
+        ComboCoreWrappingSpecTest.class,
         ComboDefinitionFormatterSpecTest.class,
         ComboEmojiTranslationFormatterSpecTest.class,
         ComboEnumeratedReferenceFormatterSpecTest.class,
         ComboEnumeratedReferenceTranslationFormatterSpecTest.class,
         ComboFootnotesFormatterSpecTest.class,
         ComboFootnotesTranslationFormatterSpecTest.class,
+        ComboFormatterIssueSpecTest.class,
+        ComboFormatterTestSpecTest.class,
         ComboGfmTaskListFormatterSpecTest.class,
+        ComboGitLabFormatterSpecTest.class,
         ComboJekyllFrontMatterFormatterSpecTest.class,
         ComboMacrosFormatterSpecTest.class,
         ComboMacrosTranslationFormatterSpecTest.class,
+        ComboParagraphFormatterSpecTest.class,
+        ComboSimTocHtmlFormatterSpecTest.class,
+        ComboSimTocMdFormatterSpecTest.class,
         ComboSpecExampleFormatterSpecTest.class,
         ComboTableFormatterSpecTest.class,
         ComboTableTranslationFormatterSpecTest.class,
+        ComboWikiLinkFormatterSpecTest.class,
+        ComboWikiLinkTranslationFormatterSpecTest.class,
         ComboYamlFrontMatterFormatterSpecTest.class,
-        ComboCoreFormatterSpecTest.class,
-        ComboCoreTranslationFormatterSpecTest.class,
-        ComboParagraphFormatterSpecTest.class,
-        ComboCoreWrappingSpecTest.class,
-        ComboFormatterTestSpecTest.class,
-        ComboFormatterIssueSpecTest.class,
         CoreFormatterTestSuite.class,
-        ExtTocFormatterTestSuite.class,
         MergeAbbreviationsTest.class,
         MergeAttributesTest.class,
         MergeEnumeratedReferenceTest.class,

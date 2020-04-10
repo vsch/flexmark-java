@@ -3,6 +3,7 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
@@ -38,9 +39,6 @@ import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
-    final public static DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", HashMap::new);
-    final public static DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", HashMap::new);
-
     public static class Factory implements NodeFormatterFactory {
         @NotNull
         @Override
@@ -59,7 +57,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     private Map<String, String> attributeUniquificationIdMap;
 
     public CoreNodeFormatter(DataHolder options) {
-        super(options, null, UNIQUIFICATION_MAP);
+        super(options, null, Formatter.UNIQUIFICATION_MAP);
         formatterOptions = new FormatterOptions(options);
         this.listOptions = ListOptions.get(options);
         blankLines = 0;
@@ -216,7 +214,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
         super.renderDocument(context, markdown, document, phase);
 
-        attributeUniquificationIdMap = ATTRIBUTE_UNIQUIFICATION_ID_MAP.get(context.getTranslationStore());
+        attributeUniquificationIdMap = Formatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP.get(context.getTranslationStore());
 
         if (phase == DOCUMENT_BOTTOM) {
             if (context.getFormatterOptions().appendTransferredReferences) {

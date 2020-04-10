@@ -1,0 +1,52 @@
+Implementations of FormatterSpecTest  (25 usages found)
+    Unclassified usage  (25 usages found)
+        ComboAbbreviationFormatterSpecTest.java  (1 usage found)
+            16 public class ComboAbbreviationFormatterSpecTest extends FormatterSpecTest {
+        ComboAdmonitionFormatterSpecTest.java  (1 usage found)
+            15 public class ComboAdmonitionFormatterSpecTest extends FormatterSpecTest {
+        ComboAsideFormatterSpecTest.java  (1 usage found)
+            17 public class ComboAsideFormatterSpecTest extends FormatterSpecTest {
+        ComboAttributesFormatterSpecTest.java  (1 usage found)
+            19 public class ComboAttributesFormatterSpecTest extends FormatterSpecTest {
+        ComboCoreFormatterNoBlankLinesSpecTest.java  (1 usage found)
+            14 public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboCoreFormatterSpecTestBase {
+        ComboCoreFormatterSpecTest.java  (1 usage found)
+            10 public class ComboCoreFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
+        ComboCoreFormatterSpecTestBase.java  (1 usage found)
+            13 public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
+        ComboCoreWrappingSpecTest.java  (1 usage found)
+            13 public class ComboCoreWrappingSpecTest extends ComboCoreFormatterSpecTestBase {
+        ComboDefinitionFormatterSpecTest.java  (1 usage found)
+            18 public class ComboDefinitionFormatterSpecTest extends FormatterSpecTest {
+        ComboEnumeratedReferenceFormatterSpecTest.java  (1 usage found)
+            16 public class ComboEnumeratedReferenceFormatterSpecTest extends FormatterSpecTest {
+        ComboFootnotesFormatterSpecTest.java  (1 usage found)
+            16 public class ComboFootnotesFormatterSpecTest extends FormatterSpecTest {
+        ComboFormatterIssueSpecTest.java  (1 usage found)
+            55 public class ComboFormatterIssueSpecTest extends FormatterSpecTest {
+        ComboFormatterTestSpecTest.java  (1 usage found)
+            43 public class ComboFormatterTestSpecTest extends FormatterSpecTest {
+        ComboGfmTaskListFormatterSpecTest.java  (1 usage found)
+            19 public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
+        ComboGitLabFormatterSpecTest.java  (1 usage found)
+            15 public class ComboGitLabFormatterSpecTest extends FormatterSpecTest {
+        ComboJekyllFrontMatterFormatterSpecTest.java  (1 usage found)
+            17 public class ComboJekyllFrontMatterFormatterSpecTest extends FormatterSpecTest {
+        ComboMacrosFormatterSpecTest.java  (1 usage found)
+            18 public class ComboMacrosFormatterSpecTest extends FormatterSpecTest {
+        ComboParagraphFormatterSpecTest.java  (1 usage found)
+            33 public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
+        ComboSimTocHtmlFormatterSpecTest.java  (1 usage found)
+            18 public class ComboSimTocHtmlFormatterSpecTest extends FormatterSpecTest {
+        ComboSimTocMdFormatterSpecTest.java  (1 usage found)
+            18 public class ComboSimTocMdFormatterSpecTest extends FormatterSpecTest {
+        ComboSpecExampleFormatterSpecTest.java  (1 usage found)
+            19 public class ComboSpecExampleFormatterSpecTest extends FormatterSpecTest {
+        ComboTableFormatterSpecTest.java  (1 usage found)
+            21 public class ComboTableFormatterSpecTest extends FormatterSpecTest {
+        ComboTableManipulationSpecTest.java  (1 usage found)
+            21 public class ComboTableManipulationSpecTest extends FormatterSpecTest {
+        ComboWikiLinkFormatterSpecTest.java  (1 usage found)
+            17 public class ComboWikiLinkFormatterSpecTest extends FormatterSpecTest {
+        ComboYamlFrontMatterFormatterSpecTest.java  (1 usage found)
+            17 public class ComboYamlFrontMatterFormatterSpecTest extends FormatterSpecTest {

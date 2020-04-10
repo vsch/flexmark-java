@@ -218,9 +218,19 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## 0.61.4
 
-* [ ] Fix: wiki links should not be wrapped during formatting.
 * Fix: merge [#397, PR: Add base64 image support with docx rendering] thanks to [@Xaelis]
-* Add: test for base64 encoded docx conversion
+  * Add: test for base64 encoded docx conversion
+* Break: `WikiLinkLinkResolver` to take `WikiLinkExtension.ALLOW_ANCHORS` and
+  `WikiLinkExtension.ALLOW_ANCHOR_ESCAPE` into account when extracting page ref from link.
+  * Fix: `#` or `\` included in the URL of the resolved link are now URL encoded.
+  * Fix: default `WikiLinkLinkResolver` handles its own text unescaping. When resolving wiki  
+    link with default resolver do not unescape. If replacing default resolver ensure you
+    unescape the text. **This is needed to properly handle anchor escaping.**
+  * Fix: `PegdownOptionsAdapter` to set `WikiLinkExtension.ALLOW_ANCHORS` to `true` for pegdown
+    compatibility
+* Fix: wiki links should not be wrapped during formatting.
+  * Add: WikiLink formatter extension and tests
+  * Add: WikiLink translating formatter functionality and tests
 
 ## 0.61.2
 

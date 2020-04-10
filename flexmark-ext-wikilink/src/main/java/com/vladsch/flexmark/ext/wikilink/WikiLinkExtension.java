@@ -1,9 +1,7 @@
 package com.vladsch.flexmark.ext.wikilink;
 
-import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkJiraRenderer;
-import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkRefProcessor;
-import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkResolver;
-import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkNodeRenderer;
+import com.vladsch.flexmark.ext.wikilink.internal.*;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.parser.Parser;
@@ -18,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  * <p>
  * The parsed emoji shortcuts text regions are turned into {@link WikiLink} nodes.
  */
-public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     final public static DataKey<Boolean> ALLOW_INLINES = new DataKey<>("ALLOW_INLINES", false);
     final public static DataKey<Boolean> ALLOW_ANCHORS = new DataKey<>("ALLOW_ANCHORS", false);
     final public static DataKey<Boolean> ALLOW_ANCHOR_ESCAPE = new DataKey<>("ALLOW_ANCHOR_ESCAPE", false);
@@ -86,6 +84,12 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
     @Override
     public void parserOptions(MutableDataHolder options) {
 
+    }
+
+    @Override
+    public void extend(Formatter.Builder formatterBuilder) {
+        formatterBuilder.nodeFormatterFactory(new WikiLinkNodeFormatter.Factory());
+//        formatterBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
     }
 
     @Override

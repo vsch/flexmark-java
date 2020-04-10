@@ -2,6 +2,7 @@ package com.vladsch.flexmark.profile.pegdown;
 
 import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
+import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.PegdownExtensions;
@@ -36,6 +37,7 @@ public class ComboPegdownExtensionCompatibilitySpecTest extends RendererSpecTest
                 .toMutable().set(TestUtils.UNLOAD_EXTENSIONS, Collections.singleton(AnchorLinkExtension.class)));
         optionsMap.put("code-soft-breaks", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, "\n"));
         optionsMap.put("code-soft-break-spaces", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, " \t"));
+        optionsMap.put("no-wiki-ref-anchors", new MutableDataSet().set(WikiLinkExtension.ALLOW_ANCHORS, false));
     }
     public ComboPegdownExtensionCompatibilitySpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.dependency.DependencyResolver;
-import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.util.format.*;
 import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.Attributes;
@@ -164,6 +163,10 @@ public class Formatter implements IRender {
      */
     @Deprecated final public static DataKey<String> FORMAT_TABLE_INDENT_PREFIX = TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
 
+    // used during translation
+    final public static DataKey<Map<String, String>> UNIQUIFICATION_MAP = new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", HashMap::new);
+    final public static DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP = new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", HashMap::new);
+
     final private DataHolder options;
     final List<LinkResolverFactory> linkResolverFactories;
     final List<NodeFormatterFactory> nodeFormatterFactories;
@@ -173,7 +176,7 @@ public class Formatter implements IRender {
         this.options = builder.toImmutable();
         this.idGeneratorFactory = builder.htmlIdGeneratorFactory == null ? new HeaderIdGenerator.Factory() : builder.htmlIdGeneratorFactory;
 
-        this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
+        this.linkResolverFactories = DependencyResolver.resolveFlatDependencies(builder.linkResolverFactories, null, null);
         this.nodeFormatterFactories = calculateNodeFormatterFactories(builder.nodeFormatterFactories);
     }
 
@@ -181,7 +184,6 @@ public class Formatter implements IRender {
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         List<NodeFormatterFactory> list = new ArrayList<>(formatterFactories);
         list.add(new CoreNodeFormatter.Factory());
-
         return DependencyResolver.resolveFlatDependencies(list, null, null);
     }
 
@@ -490,6 +492,22 @@ public class Formatter implements IRender {
             }
             this.htmlIdGeneratorFactory = htmlIdGeneratorFactory;
             addExtensionApiPoint(htmlIdGeneratorFactory);
+            return this;
+        }
+
+        /**
+         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
+         * of node types or define rendering for custom node types.
+         * <p>
+         * If multiple node renderers for the same node type are created, the one from the factory that was added first
+         * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
+         *
+         * @param linkResolverFactory the factory for creating a node renderer
+         * @return {@code this}
+         */
+        public @NotNull Builder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory) {
+            this.linkResolverFactories.add(linkResolverFactory);
+            addExtensionApiPoint(linkResolverFactory);
             return this;
         }
     }

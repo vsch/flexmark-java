@@ -178,6 +178,7 @@ public class PegdownOptionsAdapter {
                 extensions.add(WikiLinkExtension.create());
                 // pegdown does not have an option for selecting Creole or GitHub wiki link syntax: Creole puts page ref first, link text second, GitHub the other way around
                 options.set(WikiLinkExtension.LINK_FIRST_SYNTAX, false);
+                options.set(WikiLinkExtension.ALLOW_ANCHORS, true);
             }
 
             if (haveAnyExtensions(SUBSCRIPT) && haveAnyExtensions(STRIKETHROUGH)) {
