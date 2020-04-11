@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.6](#0616)
 - [0.61.4](#0614)
 - [0.61.2](#0612)
 - [0.61.0](#0610)
@@ -215,6 +216,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## 0.61.6
+
+* Fix: add more information to `MarkdownParagraph.resolveTrackedOffsetsEdit` assert failures to
+  allow better diagnostics in reported stack traces.
 
 ## 0.61.4
 

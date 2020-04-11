@@ -233,14 +233,6 @@ public class MarkdownParagraph {
                 System.out.println(String.format("%saltUnwrapped anchor: `%s`", anchorResolvedBy, altUnwrapped.safeSubSequence(anchorIndex - 10, anchorIndex).toVisibleWhitespaceString() + "|" + altUnwrapped.safeSubSequence(anchorIndex, anchorIndex + 10).toVisibleWhitespaceString()));
             }
 
-            assert baseSequence.safeCharAt(anchorOffset) == altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
-                    // NOTE: alt sequence could have spaces removed which would result in space in base sequence and EOL in alt sequence
-                    || baseSequence.isCharAt(anchorOffset, WHITESPACE) && altUnwrapped.isCharAt(anchorIndex + anchorDelta, WHITESPACE_OR_NUL)
-                    : String.format("baseSeq.charAt: %d != altUnwrapped.charAt: %d"
-                    , (int) baseSequence.safeCharAt(anchorOffset)
-                    , (int) altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
-            );
-
             // now see where it is in the wrapped sequence
             int wrappedIndex = altTracker.getOffsetInfo(anchorOffset, false).startIndex;
 
@@ -248,6 +240,16 @@ public class MarkdownParagraph {
                 System.out.println(String.format("altWrapped anchor: `%s`", altWrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + altWrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()));
                 System.out.println(String.format("wrapped anchor: `%s`", wrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + wrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()));
             }
+
+            assert baseSequence.safeCharAt(anchorOffset) == altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
+                    // NOTE: alt sequence could have spaces removed which would result in space in base sequence and EOL in alt sequence
+                    || baseSequence.isCharAt(anchorOffset, WHITESPACE) && altUnwrapped.isCharAt(anchorIndex + anchorDelta, WHITESPACE_OR_NUL)
+                    : String.format("baseSeq.charAt: %d != altUnwrapped.charAt: %d, altWrapped anchor: '%s', wrapped anchor: '%s'"
+                    , (int) baseSequence.safeCharAt(anchorOffset)
+                    , (int) altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
+                    , altWrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + altWrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()
+                    , wrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + wrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()
+            );
 
             int wrappedAdjusted = 0;
             // take char start but if at whitespace, use previous for validation
@@ -273,9 +275,12 @@ public class MarkdownParagraph {
 
             assert altUnwrappedCharAt == wrappedCharAt
                     || WHITESPACE.test(altUnwrappedCharAt) && WHITESPACE.test(wrappedCharAt)
-                    : String.format("altUnwrapped.charAt: %s != wrapped.charAt: %s"
+                    : String.format("altUnwrapped.charAt: '%s' != wrapped.charAt: '%s' for width=%d, unwrapped: '%s', wrapped: '%s'"
                     , SequenceUtils.toVisibleWhitespaceString(Character.toString(altUnwrappedCharAt))
                     , SequenceUtils.toVisibleWhitespaceString(Character.toString(wrappedCharAt))
+                    , width
+                    , SequenceUtils.toVisibleWhitespaceString(altUnwrapped)
+                    , SequenceUtils.toVisibleWhitespaceString(altWrapped)
             );
 
             // Adjust index position and restore spaces if needed
