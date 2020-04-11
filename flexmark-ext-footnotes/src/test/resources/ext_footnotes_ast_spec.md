@@ -896,6 +896,116 @@ Document[0, 213]
 ````````````````````````````````
 
 
+Parses indented tables
+
+```````````````````````````````` example Footnotes: 17
+Paragraph text[^1]
+
+[^1]: Footnote
+      
+      | table |
+      |-------|
+      | data  |
+
+.
+<p>Paragraph text<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>Footnote</p>
+      <table>
+        <thead>
+          <tr><th>table</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>data</td></tr>
+        </tbody>
+      </table>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 91]
+  Paragraph[0, 19] isTrailingBlankLine
+    Text[0, 14] chars:[0, 14, "Parag …  text"]
+    Footnote[14, 18] ordinal: 1  textOpen:[14, 16, "[^"] text:[16, 17, "1"] textClose:[17, 18, "]"]
+      Text[16, 17] chars:[16, 17, "1"]
+  FootnoteBlock[20, 90] ordinal: 1  open:[20, 22] text:[22, 23] close:[23, 25] footnote:[26, 90]
+    Paragraph[26, 35] isTrailingBlankLine
+      Text[26, 34] chars:[26, 34, "Footnote"]
+    TableBlock[48, 90]
+      TableHead[48, 57]
+        TableRow[48, 57] rowNumber=1
+          TableCell[48, 57] header textOpen:[48, 49, "|"] text:[50, 55, "table"] textClose:[56, 57, "|"]
+            Text[50, 55] chars:[50, 55, "table"]
+      TableSeparator[64, 73]
+        TableRow[64, 73]
+          TableCell[64, 73] textOpen:[64, 65, "|"] text:[65, 72, "-------"] textClose:[72, 73, "|"]
+            Text[65, 72] chars:[65, 72, "-------"]
+      TableBody[80, 89]
+        TableRow[80, 89] rowNumber=1
+          TableCell[80, 89] textOpen:[80, 81, "|"] text:[82, 86, "data"] textClose:[88, 89, "|"]
+            Text[82, 86] chars:[82, 86, "data"]
+````````````````````````````````
+
+
+Parses tables
+
+```````````````````````````````` example Footnotes: 18
+Paragraph text[^1]
+
+[^1]: Footnote
+      
+    | table |
+    |-------|
+    | data  |
+
+.
+<p>Paragraph text<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>Footnote</p>
+      <table>
+        <thead>
+          <tr><th>table</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>data</td></tr>
+        </tbody>
+      </table>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 85]
+  Paragraph[0, 19] isTrailingBlankLine
+    Text[0, 14] chars:[0, 14, "Parag …  text"]
+    Footnote[14, 18] ordinal: 1  textOpen:[14, 16, "[^"] text:[16, 17, "1"] textClose:[17, 18, "]"]
+      Text[16, 17] chars:[16, 17, "1"]
+  FootnoteBlock[20, 84] ordinal: 1  open:[20, 22] text:[22, 23] close:[23, 25] footnote:[26, 84]
+    Paragraph[26, 35] isTrailingBlankLine
+      Text[26, 34] chars:[26, 34, "Footnote"]
+    TableBlock[46, 84]
+      TableHead[46, 55]
+        TableRow[46, 55] rowNumber=1
+          TableCell[46, 55] header textOpen:[46, 47, "|"] text:[48, 53, "table"] textClose:[54, 55, "|"]
+            Text[48, 53] chars:[48, 53, "table"]
+      TableSeparator[60, 69]
+        TableRow[60, 69]
+          TableCell[60, 69] textOpen:[60, 61, "|"] text:[61, 68, "-------"] textClose:[68, 69, "|"]
+            Text[61, 68] chars:[61, 68, "-------"]
+      TableBody[74, 83]
+        TableRow[74, 83] rowNumber=1
+          TableCell[74, 83] textOpen:[74, 75, "|"] text:[76, 80, "data"] textClose:[82, 83, "|"]
+            Text[76, 80] chars:[76, 80, "data"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

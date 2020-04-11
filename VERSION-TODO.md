@@ -221,6 +221,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: add more information to `MarkdownParagraph.resolveTrackedOffsetsEdit` assert failures to
   allow better diagnostics in reported stack traces.
+* Fix: disable wrapping of multiline URL image links
+* Fix: `Paragraph` content node to preserve leading spaces on lines. Otherwise, multiline URL
+  image content would loose indents since these were stripped from paragraph content during
+  parsing.
+  * Fix: `TablesExtension` to accept non-indenting leading spaces on all table rows. This
+    results in previously non-table text as valid table texts:
+  
+    ```markdown
+    Abc|Def
+      |---|---
+    ```
 
 ## 0.61.4
 

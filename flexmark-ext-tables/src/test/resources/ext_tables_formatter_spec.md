@@ -59,8 +59,9 @@ paragraph lines that look like table separator should be left indented
 Abc|Def
  |---|---
 .
-Abc|Def
-|---|---
+| Abc | Def |
+|-----|-----|
+
 ````````````````````````````````
 
 

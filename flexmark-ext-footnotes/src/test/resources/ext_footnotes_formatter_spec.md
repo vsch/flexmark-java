@@ -416,9 +416,67 @@ This paragraph has a footnote[^2].
 ````````````````````````````````
 
 
-List item indent is used
+Table formatting
 
 ```````````````````````````````` example Footnotes: 16
+Paragraph text[^1]
+
+[^1]: Footnote text that will be wrapped and should have a hanging indent to align the overflow
+      to the level of the text after the footnote anchor at the left margin.
+
+    * list as part of footnote
+    * another item
+      
+    | table |
+    |-------|
+    | data  |
+.
+Paragraph text[^1]
+
+[^1]: Footnote text that will be wrapped and should have a hanging indent to align the overflow
+    to the level of the text after the footnote anchor at the left margin.
+
+    * list as part of footnote
+    * another item
+
+    | table |
+    |-------|
+    | data  |
+
+````````````````````````````````
+
+
+```````````````````````````````` example Footnotes: 17
+Paragraph text[^1]
+
+[^1]: Footnote text that will be wrapped and should have a hanging indent to align the overflow
+      to the level of the text after the footnote anchor at the left margin.
+
+      * list as part of footnote
+      * another item
+        
+      | table |
+      |-------|
+      | data  |
+.
+Paragraph text[^1]
+
+[^1]: Footnote text that will be wrapped and should have a hanging indent to align the overflow
+    to the level of the text after the footnote anchor at the left margin.
+
+    * list as part of footnote
+    * another item
+
+    | table |
+    |-------|
+    | data  |
+
+````````````````````````````````
+
+
+List item indent is used
+
+```````````````````````````````` example Footnotes: 18
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.

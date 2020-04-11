@@ -5,6 +5,7 @@ import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 
 public class ParagraphParser extends AbstractBlockParser {
 
@@ -34,7 +35,12 @@ public class ParagraphParser extends AbstractBlockParser {
 
     @Override
     public void addLine(ParserState state, BasedSequence line) {
-        content.add(line, state.getIndent());
+        int indent = state.getIndent();
+        if (indent > 0) {
+            content.add(PrefixedSubSequence.repeatOf(' ', indent, line), indent);
+        } else {
+            content.add(line, indent);
+        }
     }
 
     @Override

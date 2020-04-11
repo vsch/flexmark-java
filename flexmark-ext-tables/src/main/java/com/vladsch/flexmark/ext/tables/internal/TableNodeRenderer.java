@@ -55,11 +55,11 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(TableRow node, NodeRendererContext context, HtmlWriter html) {
-        html.srcPos(node.getChars()).withAttr().tagLine("tr", () -> context.renderChildren(node));
+        html.srcPos(node.getChars().trimStart()).withAttr().tagLine("tr", () -> context.renderChildren(node));
     }
 
     private void render(TableCaption node, NodeRendererContext context, HtmlWriter html) {
-        html.srcPos(node.getChars()).withAttr().tagLine("caption", () -> context.renderChildren(node));
+        html.srcPos(node.getChars().trimStart()).withAttr().tagLine("caption", () -> context.renderChildren(node));
     }
 
     private void render(TableCell node, NodeRendererContext context, HtmlWriter html) {

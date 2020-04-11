@@ -365,6 +365,124 @@ BasedSegmentBuilder{[0, 133), s=4:6, u=9:11, t=9:11, l=138, sz=22, na=17: [0, 27
 ````````````````````````````````
 
 
+### Images
+
+
+```````````````````````````````` example(Wrap - Images: 1) options(margin[72], multi-line-image-url, show-ranges)
+![alt](http://g.gravizo.com/g?
+digraph G {
+    aize ="4,4";
+    main [shape=box];
+    main -> parse [weight=8];
+    parse -> execute;
+    main -> init [style=dotted];
+    main -> testing [style=dashed];
+    testing -> make_string;
+    main -> cleanupMore;
+    execute -> { make_string; printf }
+    init -> make_string;
+    edge [color=red];
+    main -> printf [style=bold,label="100 times"];
+    make_string [label="make a string"];
+    node [shape=box,style=fill≤ed,color=".7 .3 1.0"];
+    execute -> compares;
+}
+"title works three!!!")
+.
+![alt](http://g.gravizo.com/g?
+digraph G {
+    aize ="4,4";
+    main [shape=box];
+    main -> parse [weight=8];
+    parse -> execute;
+    main -> init [style=dotted];
+    main -> testing [style=dashed];
+    testing -> make_string;
+    main -> cleanupMore;
+    execute -> { make_string; printf }
+    init -> make_string;
+    edge [color=red];
+    main -> printf [style=bold,label="100 times"];
+    make_string [label="make a string"];
+    node [shape=box,style=fill≤ed,color=".7 .3 1.0"];
+    execute -> compares;
+}
+"title works three!!!")
+---- Ranges ------------------------------------------------------------
+⟦![alt](http://g.gravizo.com/g?
+digraph G {
+    aize ="4,4";
+    main [shape=box];
+    main -> parse [weight=8];
+    parse -> execute;
+    main -> init [style=dotted];
+    main -> testing [style=dashed];
+    testing -> make_string;
+    main -> cleanupMore;
+    execute -> { make_string; printf }
+    init -> make_string;
+    edge [color=red];
+    main -> printf [style=bold,label="100 times"];
+    make_string [label="make a string"];
+    node [shape=box,style=fill≤ed,color=".7 .3 1.0"];
+    execute -> compares;
+}
+"title works three!!!")⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 538), s=0:0, u=1:1, t=1:1, l=539, sz=3, na=2: [0, 538), a:'\n', [538) }
+.
+Document[0, 538]
+  Paragraph[0, 538]
+    Image[0, 538] textOpen:[0, 2, "!["] text:[2, 5, "alt"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 30, "http://g.gravizo.com/g?"] pageRef:[7, 30, "http://g.gravizo.com/g?"] urlContent:[31, 515, "digraph G {\n    aize =\"4,4\";\n    main [shape=box];\n    main -> parse [weight=8];\n    parse -> execute;\n    main -> init [style=dotted];\n    main -> testing [style=dashed];\n    testing -> make_string;\n    main -> cleanupMore;\n    execute -> { make_string; printf }\n    init -> make_string;\n    edge [color=red];\n    main -> printf [style=bold,label=\"100 times\"];\n    make_string [label=\"make a string\"];\n    node [shape=box,style=fill≤ed,color=\".7 .3 1.0\"];\n    execute -> compares;\n}\n"] titleOpen:[515, 516, "\""] title:[516, 536, "title works three!!!"] titleClose:[536, 537, "\""] linkClose:[537, 538, ")"]
+      Text[2, 5] chars:[2, 5, "alt"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Images: 2) options(margin[72], multi-line-image-url)
+> ![alt](http://g.gravizo.com/g?
+> digraph G {
+>     aize ="4,4";
+>     main [shape=box];
+>     main -> parse [weight=8];
+>     parse -> execute;
+>     main -> init [style=dotted];
+>     main -> testing [style=dashed];
+>     testing -> make_string;
+>     main -> cleanupMore;
+>     execute -> { make_string; printf }
+>     init -> make_string;
+>     edge [color=red];
+>     main -> printf [style=bold,label="100 times"];
+>     make_string [label="make a string"];
+>     node [shape=box,style=fill≤ed,color=".7 .3 1.0"];
+>     execute -> compares;
+> }
+> "title works three!!!")
+.
+> ![alt](http://g.gravizo.com/g?
+> digraph G {
+>     aize ="4,4";
+>     main [shape=box];
+>     main -> parse [weight=8];
+>     parse -> execute;
+>     main -> init [style=dotted];
+>     main -> testing [style=dashed];
+>     testing -> make_string;
+>     main -> cleanupMore;
+>     execute -> { make_string; printf }
+>     init -> make_string;
+>     edge [color=red];
+>     main -> printf [style=bold,label="100 times"];
+>     make_string [label="make a string"];
+>     node [shape=box,style=fill≤ed,color=".7 .3 1.0"];
+>     execute -> compares;
+> }
+> "title works three!!!")
+
+````````````````````````````````
+
+
 ### Delete Indent
 
 delete space to previous non-blank

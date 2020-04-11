@@ -596,7 +596,7 @@ public class FormatterUtils {
                 BasedSequence wrappedText = formatter.wrapText().toMapped(SpaceMapper.fromNonBreakSpace);
                 int startLine = markdown.getLineCount();
                 int firstLineOffset = markdown.column();
-                markdown.append(wrappedText).line();
+                markdown.pushOptions().preserveSpaces().append(wrappedText).line().popOptions();
 
                 if (!paragraphTrackedOffsets.isEmpty()) {
                     LineInfo startLineInfo = markdown.getLineInfo(startLine);

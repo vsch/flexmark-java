@@ -26,5 +26,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
     <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
+    <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
   </component>
 </module>

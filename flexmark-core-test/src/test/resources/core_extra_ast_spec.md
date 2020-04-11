@@ -4159,7 +4159,64 @@ Document[0, 59]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Multi-Line Image URL: 11) options(unmatched-fence)
+encoding of embedded EOL
+
+```````````````````````````````` example(Multi-Line Image URL: 11) options(multi-line-image-url)
+![ref](/url1?
+one = 1 & line
+line two
+) trailing text
+.
+<p><img src="/url1?one%20=%201%20&amp;%20line%0Aline%20two%0A" alt="ref" /> trailing text</p>
+.
+Document[0, 53]
+  Paragraph[0, 53]
+    Image[0, 39] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 38, "one = 1 & line\nline two\n"] linkClose:[38, 39, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+    Text[39, 53] chars:[39, 53, " trai …  text"]
+````````````````````````````````
+
+
+preserve content indent
+
+```````````````````````````````` example(Multi-Line Image URL: 12) options(multi-line-image-url)
+![ref](/url1?
+    one = 1 & line
+    line two
+) trailing text
+.
+<p><img src="/url1?%20%20%20%20one%20=%201%20&amp;%20line%0A%20%20%20%20line%20two%0A" alt="ref" /> trailing text</p>
+.
+Document[0, 61]
+  Paragraph[0, 61]
+    Image[0, 47] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[18, 46, "    one = 1 & line\n    line two\n"] linkClose:[46, 47, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+    Text[47, 61] chars:[47, 61, " trai …  text"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Multi-Line Image URL: 13) options(multi-line-image-url)
+> ![ref](/url1?
+>     one = 1 & line
+>     line two
+> ) trailing text
+.
+<blockquote>
+  <p><img src="/url1?%20%20%20%20one%20=%201%20&amp;%20line%0A%20%20%20%20line%20two%0A" alt="ref" /> trailing text</p>
+</blockquote>
+.
+Document[0, 69]
+  BlockQuote[0, 69] marker:[0, 1, ">"]
+    Paragraph[2, 69]
+      Image[2, 55] textOpen:[2, 4, "!["] text:[4, 7, "ref"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 15, "/url1?"] pageRef:[9, 15, "/url1?"] urlContent:[22, 52, "    one = 1 & line\n    line two\n"] linkClose:[54, 55, ")"]
+        Text[4, 7] chars:[4, 7, "ref"]
+      Text[55, 69] chars:[55, 69, " trai …  text"]
+````````````````````````````````
+
+
+## Fenced Code
+
+```````````````````````````````` example(Fenced Code: 1) options(unmatched-fence)
 ~~~
 proper unmatched fenced code
 ```
@@ -4175,7 +4232,7 @@ Document[0, 36]
 
 non empty, info, blank line follows, unmatched
 
-```````````````````````````````` example(Multi-Line Image URL: 12) options(unmatched-fence)
+```````````````````````````````` example(Fenced Code: 2) options(unmatched-fence)
 ```info
 some text
 ~~~
@@ -5399,10 +5456,10 @@ lines*
 Document[0, 131]
   Paragraph[0, 131]
     Text[0, 10] chars:[0, 10, "paragraph "]
-    Code[10, 23] textOpen:[10, 11, "`"] text:[11, 22, "test \nwith"] textClose:[22, 23, "`"]
+    Code[10, 23] textOpen:[10, 11, "`"] text:[11, 22, "test  … \n with"] textClose:[22, 23, "`"]
       Text[11, 16] chars:[11, 16, "test "]
       SoftLineBreak[16, 17]
-      Text[18, 22] chars:[18, 22, "with"]
+      Text[18, 22] chars:[18, 22, " with"]
     Text[23, 45] chars:[23, 45, " mult … lines"]
     SoftLineBreak[45, 46]
     Text[46, 56] chars:[46, 56, "paragraph "]
@@ -5411,7 +5468,7 @@ Document[0, 131]
       SoftLineBreak[61, 62]
       Text[62, 66] chars:[62, 66, "with"]
     Text[67, 82] chars:[67, 82, " mult … lazy "]
-    StrongEmphasis[82, 97] textOpen:[82, 84, "**"] text:[84, 95, "lines\nall"] textClose:[95, 97, "**"]
+    StrongEmphasis[82, 97] textOpen:[82, 84, "**"] text:[84, 95, "lines\n  all"] textClose:[95, 97, "**"]
       Text[84, 89] chars:[84, 89, "lines"]
       SoftLineBreak[89, 90]
       Text[92, 95] chars:[92, 95, "all"]
@@ -5439,10 +5496,10 @@ lines*
 Document[0, 131]
   Paragraph[0, 131]
     Text[0, 10] chars:[0, 10, "paragraph "]
-    Code[10, 23] textOpen:[10, 11, "`"] text:[11, 22, "test \nwith"] textClose:[22, 23, "`"]
+    Code[10, 23] textOpen:[10, 11, "`"] text:[11, 22, "test  … \n with"] textClose:[22, 23, "`"]
       Text[11, 16] chars:[11, 16, "test "]
       SoftLineBreak[16, 17]
-      Text[18, 22] chars:[18, 22, "with"]
+      Text[18, 22] chars:[18, 22, " with"]
     Text[23, 45] chars:[23, 45, " mult … lines"]
     SoftLineBreak[45, 46]
     Text[46, 56] chars:[46, 56, "paragraph "]
@@ -5451,7 +5508,7 @@ Document[0, 131]
       SoftLineBreak[61, 62]
       Text[62, 66] chars:[62, 66, "with"]
     Text[67, 82] chars:[67, 82, " mult … lazy "]
-    StrongEmphasis[82, 97] textOpen:[82, 84, "**"] text:[84, 95, "lines\nall"] textClose:[95, 97, "**"]
+    StrongEmphasis[82, 97] textOpen:[82, 84, "**"] text:[84, 95, "lines\n  all"] textClose:[95, 97, "**"]
       Text[84, 89] chars:[84, 89, "lines"]
       SoftLineBreak[89, 90]
       Text[92, 95] chars:[92, 95, "all"]
@@ -6830,9 +6887,9 @@ Document[0, 20]
 .
 Document[0, 31]
   Paragraph[0, 31]
-    Link[0, 31] textOpen:[0, 1, "["] text:[1, 23, "hello **bold\nworld**"] textClose:[23, 24, "]"] linkOpen:[24, 25, "("] url:[25, 30, "#test"] pageRef:[25, 25] anchorMarker:[25, 26, "#"] anchorRef:[26, 30, "test"] linkClose:[30, 31, ")"]
+    Link[0, 31] textOpen:[0, 1, "["] text:[1, 23, "hello **bold\n  world**"] textClose:[23, 24, "]"] linkOpen:[24, 25, "("] url:[25, 30, "#test"] pageRef:[25, 25] anchorMarker:[25, 26, "#"] anchorRef:[26, 30, "test"] linkClose:[30, 31, ")"]
       Text[1, 7] chars:[1, 7, "hello "]
-      StrongEmphasis[7, 23] textOpen:[7, 9, "**"] text:[9, 21, "bold\nworld"] textClose:[21, 23, "**"]
+      StrongEmphasis[7, 23] textOpen:[7, 9, "**"] text:[9, 21, "bold\n  world"] textClose:[21, 23, "**"]
         Text[9, 13] chars:[9, 13, "bold"]
         SoftLineBreak[13, 14]
         Text[16, 21] chars:[16, 21, "world"]

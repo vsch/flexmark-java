@@ -184,23 +184,23 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 break;
             }
 
-            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL()
-                    : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolEndLength());
+            // NOTE: block lines now contain leading indent spaces which should be ignored
+            BasedSequence trimmedRowLine = rowLine.subSequence(block.getLineIndent(rowNumber));
 
             if (separatorLineNumber == -1) {
                 if (rowNumber >= options.minHeaderRows
-                        && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
+                        && TABLE_HEADER_SEPARATOR.matcher(trimmedRowLine).matches()) {
                     // must start with | or cell, whitespace means its not a separator line
-                    if (fullRowLine.charAt(0) != ' ' && fullRowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|') {
+                    if (rowLine.charAt(0) != ' ' && rowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|') {
                         separatorLineNumber = rowNumber;
-                        separatorLine = rowLine;
-                    } else if (fullRowLine.charAt(0) == ' ' || fullRowLine.charAt(0) == '\t') {
+                        separatorLine = trimmedRowLine;
+                    } else if (rowLine.charAt(0) == ' ' || rowLine.charAt(0) == '\t') {
                         block.setHasTableSeparator(true);
                     }
                 }
             }
 
-            tableLines.add(rowLine);
+            tableLines.add(trimmedRowLine);
             i++;
         }
 

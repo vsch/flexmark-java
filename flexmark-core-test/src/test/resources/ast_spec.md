@@ -12815,7 +12815,7 @@ Document[0, 14]
   Paragraph[0, 14]
     Text[0, 3] chars:[0, 3, "foo"]
     HardLineBreak[3, 5]
-    Text[10, 13] chars:[10, 13, "bar"]
+    Text[10, 13] chars:[10, 13, "     bar"]
 ````````````````````````````````
 
 
