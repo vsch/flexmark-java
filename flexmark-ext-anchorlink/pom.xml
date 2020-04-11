@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.61.4</version>
+        <version>0.61.6</version>
     </parent>
 
     <artifactId>flexmark-ext-anchorlink</artifactId>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-jira-converter</artifactId>
-            <version>0.61.4</version>
+            <version>0.61.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
