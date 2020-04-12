@@ -376,3 +376,45 @@ Text wrapping pipe `|` should be escaped when
 ````````````````````````````````
 
 
+### xxx-06
+
+Make sure `&nbsp;` is not left in heading reference links
+
+```````````````````````````````` example(Issue - xxx-06: 1) options(margin[46], no-anchor-links)
+## 2.0. References [There is a {} reference showing but is not copy-able]
+[There is a {} reference showing but is not copy-able]: https://www.example.com/0
+.
+## 2.0. References [There is a {} reference showing but is not copy-able]
+
+[There is a {} reference showing but is not copy-able]: https://www.example.com/0
+
+.
+Document[0, 155]
+  Heading[0, 73] textOpen:[0, 2, "##"] text:[3, 73, "2.0. References [There is a {} reference showing but is not copy-able]"]
+    Text[3, 19] chars:[3, 19, "2.0.  … nces "]
+    LinkRef[19, 73] referenceOpen:[19, 20, "["] reference:[20, 72, "There is a {} reference showing but is not copy-able"] referenceClose:[72, 73, "]"]
+      Text[20, 72] chars:[20, 72, "There … -able"]
+  Reference[74, 155] refOpen:[74, 75, "["] ref:[75, 127, "There is a {} reference showing but is not copy-able"] refClose:[127, 129, "]:"] url:[130, 155, "https://www.example.com/0"]
+````````````````````````````````
+
+all is fine with anchor links
+
+```````````````````````````````` example(Issue - xxx-06: 2) options(margin[46])
+## 2.0. References [There is a {} reference showing but is not copy-able]
+[There is a {} reference showing but is not copy-able]: https://www.example.com/0
+.
+## 2.0. References [There is a {} reference showing but is not copy-able]
+
+[There is a {} reference showing but is not copy-able]: https://www.example.com/0
+
+.
+Document[0, 155]
+  Heading[0, 73] textOpen:[0, 2, "##"] text:[3, 73, "2.0. References [There is a {} reference showing but is not copy-able]"]
+    AnchorLink[3, 73]
+      Text[3, 19] chars:[3, 19, "2.0.  … nces "]
+      LinkRef[19, 73] referenceOpen:[19, 20, "["] reference:[20, 72, "There is a {} reference showing but is not copy-able"] referenceClose:[72, 73, "]"]
+        Text[20, 72] chars:[20, 72, "There … -able"]
+  Reference[74, 155] refOpen:[74, 75, "["] ref:[75, 127, "There is a {} reference showing but is not copy-able"] refClose:[127, 129, "]:"] url:[130, 155, "https://www.example.com/0"]
+````````````````````````````````
+
+

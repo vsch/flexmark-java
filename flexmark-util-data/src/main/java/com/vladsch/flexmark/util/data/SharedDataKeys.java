@@ -30,6 +30,9 @@ public class SharedDataKeys {
     final public static DataKey<String> HEADER_ID_GENERATOR_NON_DASH_CHARS = new DataKey<>("HEADER_ID_GENERATOR_NON_DASH_CHARS", "");
     final public static DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = new DataKey<>("HEADER_ID_GENERATOR_NO_DUPED_DASHES", false);
     final public static DataKey<Boolean> HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE = new DataKey<>("HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE", true);
+    final public static DataKey<Boolean> HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES = new DataKey<>("HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES", true);
+    final public static DataKey<Boolean> HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES = new DataKey<>("HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES", true);
+    final public static DataKey<Boolean> HEADER_ID_ADD_EMOJI_SHORTCUT = new DataKey<>("HEADER_ID_ADD_EMOJI_SHORTCUT", false);
     final public static DataKey<Boolean> RENDER_HEADER_ID = new DataKey<>("RENDER_HEADER_ID", false);
     final public static DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", true);
     final public static DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);

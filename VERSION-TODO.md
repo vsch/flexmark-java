@@ -219,6 +219,18 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## 0.61.6
 
+* Add: `HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES` default `true` and
+  `HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES` default `true`. When `false` then
+  corresponding reference link text in heading text used for generating heading id is not
+  trimmed.
+* Add: `HtmlRenderer.HEADER_ID_ADD_EMOJI_SHORTCUT` default `false` When `true` then emjoi nodes
+  add emoji shortcut to collected text for heading id.
+* Fix: `ParserEmulationProfile.GITHUB`
+  * Set `HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES` to `false` because GitHub does
+    not trim trailing spaces for generating heading ids.
+  * `Emoji` node to generate text for heading id consisting of the emoji shortcut, for GitHub
+    compatibility.
+  * Fix: `ImageRef` not to add text to heading text for heading id generation
 * Fix: add more information to `MarkdownParagraph.resolveTrackedOffsetsEdit` assert failures to
   allow better diagnostics in reported stack traces.
 * Fix: disable wrapping of multiline URL image links
@@ -227,11 +239,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   parsing.
   * Fix: `TablesExtension` to accept non-indenting leading spaces on all table rows. This
     results in previously non-table text as valid table texts:
-  
+
     ```markdown
     Abc|Def
       |---|---
     ```
+* Fix: `LinkRef` and `ImageRef` changing spaces to `&nbsp;` for wrap formatting when not part of
+  a `Paragraph`, ie. in heading text.
 
 ## 0.61.4
 

@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
+import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,7 +31,10 @@ public class Heading extends Block implements AnchorRefTarget {
 
     @Override
     public String getAnchorRefText() {
-        return new TextCollectingVisitor().collectAndGetText(this).trim();
+        boolean trimLeadingSpaces = HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES.get(getDocument());
+        boolean trimTrailingSpaces = HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES.get(getDocument());
+
+        return new TextCollectingVisitor().collectAndGetText(this, TextContainer.F_FOR_HEADING_ID + (trimLeadingSpaces ? 0 : TextContainer.F_NO_TRIM_REF_TEXT_START) + (trimTrailingSpaces ? 0 : TextContainer.F_NO_TRIM_REF_TEXT_END));
     }
 
     @Override

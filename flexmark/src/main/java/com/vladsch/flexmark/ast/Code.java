@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +24,7 @@ public class Code extends DelimitedNodeImpl implements DoNotLinkDecorate {
     }
 
     @Override
-    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
         out.append(getText());
         return false;
     }

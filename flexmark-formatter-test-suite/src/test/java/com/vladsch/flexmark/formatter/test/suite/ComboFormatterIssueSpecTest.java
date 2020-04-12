@@ -47,10 +47,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ComboFormatterIssueSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/formatter_issue_test_suite_spec.md";
@@ -94,6 +91,7 @@ public class ComboFormatterIssueSpecTest extends FormatterSpecTest {
         optionsMap.put("use-builder", new MutableDataSet().set(USE_BUILDER, true));
         optionsMap.put("spacer", new MutableDataSet().set(TocExtension.BLANK_LINE_SPACER, true));
         optionsMap.put("text-only", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, true));
+        optionsMap.put("no-anchor-links", new MutableDataSet().set(UNLOAD_EXTENSIONS, Collections.singletonList(AnchorLinkExtension.class)));
 
         optionsMap.put("no-append-references", new MutableDataSet().set(Formatter.APPEND_TRANSFERRED_REFERENCES, false)
                 .set(TestUtils.INCLUDED_DOCUMENT, "" +

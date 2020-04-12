@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.wikilink;
 
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -212,7 +213,7 @@ public class WikiNode extends Node implements DoNotDecorate, TextContainer {
     }
 
     @Override
-    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
         int urlType = flags & F_LINK_TEXT_TYPE;
 
         BasedSequence text;

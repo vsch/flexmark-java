@@ -21,7 +21,7 @@ public interface DelimitedNode extends TextContainer {
     void setClosingMarker(BasedSequence closingMarker);
 
     @Override
-    default boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
+    default boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
         if (any(flags, F_NODE_TEXT)) {
             out.append(getText());
             return false;

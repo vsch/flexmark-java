@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.DoNotLinkDecorate;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
@@ -17,7 +18,7 @@ public abstract class LinkNode extends LinkNodeBase implements DoNotLinkDecorate
     }
 
     @Override
-    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
         int urlType = flags & F_LINK_TEXT_TYPE;
 
         BasedSequence url;

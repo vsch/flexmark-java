@@ -24,6 +24,23 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
     static {
         ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.get(null));
         userTags.add("tag");
+        optionsMap.put("heading-ids", new MutableDataSet().set(HtmlRenderer.RENDER_HEADER_ID, true));
+        optionsMap.put("heading-ids-no-dupe-dashes", new MutableDataSet().set(HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES, true));
+        optionsMap.put("heading-ids-no-non-ascii-lowercase", new MutableDataSet().set(HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE, false));
+        optionsMap.put("heading-ids-no-trim-start", new MutableDataSet().set(HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES, false));
+        optionsMap.put("heading-ids-no-trim-end", new MutableDataSet().set(HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES, false));
+        optionsMap.put("heading-ids-emoji", new MutableDataSet().set(HtmlRenderer.HEADER_ID_ADD_EMOJI_SHORTCUT, true));
+        optionsMap.put("heading-ids-github", new MutableDataSet()
+                .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, " -")
+                .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS, "_")
+                .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE, false)
+
+                // GitHub does not trim trailing spaces of Ref Links in Headings for ID generation
+                .set(HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES, false)
+                // GitHub adds emoji shortcut text to heading id
+                .set(HtmlRenderer.HEADER_ID_ADD_EMOJI_SHORTCUT, true)
+        );
+        
         optionsMap.put("user-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_TAGS, userTags));
         optionsMap.put("obfuscate-email", new MutableDataSet().set(HtmlRenderer.OBFUSCATE_EMAIL, true));
         optionsMap.put("keep-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, true));

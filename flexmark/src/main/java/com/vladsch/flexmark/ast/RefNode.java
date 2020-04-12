@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
@@ -210,11 +211,24 @@ public abstract class RefNode extends Node implements LinkRefDerived, Referencin
     }
 
     @Override
-    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags) {
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
+        // images no longer add alt text
+        
         int urlType = flags & F_LINK_TEXT_TYPE;
 
         if (urlType == F_LINK_TEXT) {
-            return true;
+            // To allow using leading/trailing spaces for generating heading ids, need to include stripped out spaces 
+            if (BitFieldSet.any(flags, F_FOR_HEADING_ID) && this instanceof ImageRef) return false;
+            
+            if (BitFieldSet.any(flags, F_FOR_HEADING_ID) && BitFieldSet.any(flags, F_NO_TRIM_REF_TEXT_START | F_NO_TRIM_REF_TEXT_END)) {
+                BasedSequence[] segments = getSegments();
+                if (BitFieldSet.any(flags, F_NO_TRIM_REF_TEXT_START)) out.append(getChars().baseSubSequence(segments[0].getEndOffset(), segments[1].getStartOffset()));
+                nodeVisitor.visitChildren(this);
+                if (BitFieldSet.any(flags, F_NO_TRIM_REF_TEXT_END)) out.append(getChars().baseSubSequence(segments[1].getEndOffset(), segments[2].getStartOffset()));
+                return false;
+            } else {
+                return true;
+            }
         } else {
             Reference reference = getReferenceNode(getDocument());
             if (urlType == F_LINK_NODE_TEXT) {

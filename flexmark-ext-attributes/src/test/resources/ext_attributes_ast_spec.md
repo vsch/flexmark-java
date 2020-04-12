@@ -23,7 +23,8 @@ The attributes is a space separated list of attribute syntax of one of the follo
 
 <!--
 * `:attr=value` : equivalent to `style="attr: value"`
- -->
+-->
+
 **NOTE**: Handling of multiple value assignment for attributes depends on its name:
 
 * `class` values are accumulated as a space (` `) separated list.
@@ -1592,7 +1593,7 @@ Document[0, 15]
 Heading with emoji :+1:
 =======================
 .
-<h1 id="heading-with-emoji">Heading with emoji <img src="/img/plus1.png" alt="emoji people:+1" height="20" width="20" align="absmiddle" /></h1>
+<h1 id="heading-with-emoji-">Heading with emoji <img src="/img/plus1.png" alt="emoji people:+1" height="20" width="20" align="absmiddle" /></h1>
 .
 Document[0, 47]
   Heading[0, 47] text:[0, 23, "Heading with emoji :+1:"] textClose:[24, 47, "======================="]
@@ -1602,7 +1603,21 @@ Document[0, 47]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings Tests: 3) options(no-text-attributes)
+```````````````````````````````` example Headings Tests: 3
+Heading with emoji :-1:
+=======================
+.
+<h1 id="heading-with-emoji-">Heading with emoji <img src="/img/-1.png" alt="emoji people:-1" height="20" width="20" align="absmiddle" /></h1>
+.
+Document[0, 47]
+  Heading[0, 47] text:[0, 23, "Heading with emoji :-1:"] textClose:[24, 47, "======================="]
+    Text[0, 19] chars:[0, 19, "Headi … moji "]
+    Emoji[19, 23] textOpen:[19, 20, ":"] text:[20, 22, "-1"] textClose:[22, 23, ":"]
+      Text[20, 22] chars:[20, 22, "-1"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Headings Tests: 4) options(no-text-attributes)
 Heading{#id1} with multiple{#id2} anchors{#id3}
 ===============================================
 .
@@ -1622,7 +1637,7 @@ Document[0, 95]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 4
+```````````````````````````````` example Headings Tests: 5
 Heading{#id1} with multiple{#id2} anchors{#id3}
 ===============================================
 .
@@ -1645,7 +1660,7 @@ Document[0, 95]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Headings Tests: 5) options(no-text-attributes)
+```````````````````````````````` example(Headings Tests: 6) options(no-text-attributes)
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 =================================================================
 .
@@ -1666,7 +1681,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 6
+```````````````````````````````` example Headings Tests: 7
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3}
 =================================================================
 .
@@ -1690,7 +1705,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 7
+```````````````````````````````` example Headings Tests: 8
 Heading{#id1} with multiple{#id2 style="color:red"} anchors{#id3} {#id4}
 ========================================================================
 .
@@ -1716,7 +1731,7 @@ Document[0, 145]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 8
+```````````````````````````````` example Headings Tests: 9
 ### Heading with trailing { style='color:red' } More Text
 .
 <h3 id="heading-with-trailing--more-text"><span style="color:red">Heading with trailing </span> More Text</h3>
@@ -1731,7 +1746,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 9
+```````````````````````````````` example Headings Tests: 10
 ### Heading with trailing{ style='color:red' } More Text
 .
 <h3 id="heading-with-trailing-more-text"><span style="color:red">Heading with trailing</span> More Text</h3>
@@ -1746,7 +1761,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 10
+```````````````````````````````` example Headings Tests: 11
 ### Heading with trailing{ style='color:red' }
 .
 <h3 id="heading-with-trailing"><span style="color:red">Heading with trailing</span></h3>
@@ -1760,7 +1775,7 @@ Document[0, 46]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 11
+```````````````````````````````` example Headings Tests: 12
 ### Heading {#explicit-id}
 .
 <h3 id="explicit-id">Heading</h3>
@@ -1773,7 +1788,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 12
+```````````````````````````````` example Headings Tests: 13
 ### Heading{#explicit-id}
 .
 <h3 id="heading"><span id="explicit-id">Heading</span></h3>
@@ -1787,7 +1802,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 13
+```````````````````````````````` example Headings Tests: 14
 Heading {#explicit-id}
 ==============
 .
@@ -1801,7 +1816,7 @@ Document[0, 37]
 ````````````````````````````````
 
 
-```````````````````````````````` example Headings Tests: 14
+```````````````````````````````` example Headings Tests: 15
 Heading{#explicit-id}
 ==============
 .
@@ -2860,12 +2875,13 @@ Document[0, 35]
 <pre caption="Caption"><code class="language-plantuml"></code></pre>
 .
 Document[0, 35]
-  FencedCodeBlock[0, 15] open:[0, 3, "```"] info:[3, 11, "plantuml"] lines[0] close:[12, 15, "```"]
-  Paragraph[16, 35]
-    AttributesNode[16, 35] textOpen:[16, 17, "{"] text:[17, 34, "caption=\"Caption\""] textClose:[34, 35, "}"]
-      AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
+FencedCodeBlock[0, 15] open:[0, 3, "```"] info:[3, 11, "plantuml"] lines[0] close:[12, 15, "```"]
+Paragraph[16, 35]
+AttributesNode[16, 35] textOpen:[16, 17, "{"] text:[17, 34, "caption=\"Caption\""] textClose:[34, 35, "}"]
+AttributeNode[17, 34] name:[17, 24, "caption"] sep:[24, 25, "="] valueOpen:[25, 26, "\""] value:[26, 33, "Caption"] valueClose:[33, 34, "\""]
 ````````````````````````````````
 -->
+
 ```````````````````````````````` example(Fenced Code: 20) options(info-attributes, fenced-code-to-code)
 ```plantuml
 ```

@@ -381,6 +381,11 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, " -")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS, "_")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE, false)
+                    
+                    // GitHub does not trim trailing spaces of Ref Links in Headings for ID generation
+                    .set(HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES, false)
+                    // GitHub adds emoji shortcut text to heading id
+                    .set(HtmlRenderer.HEADER_ID_ADD_EMOJI_SHORTCUT, true)
             ;
         } else if (this == MULTI_MARKDOWN) {
             getOptions(dataHolder).setIn(dataHolder);

@@ -1,15 +1,19 @@
 package com.vladsch.flexmark.ext.emoji;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.DelimitedNode;
-import com.vladsch.flexmark.util.ast.DoNotCollectText;
 import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.TextContainer;
+import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * An emoji node containing emoji shortcut text
  */
-public class Emoji extends Node implements DelimitedNode, DoNotCollectText {
+public class Emoji extends Node implements DelimitedNode, TextContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
@@ -61,5 +65,15 @@ public class Emoji extends Node implements DelimitedNode, DoNotCollectText {
 
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
+    }
+
+    @Override
+    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
+        if (BitFieldSet.any(flags, F_FOR_HEADING_ID)) {
+            if (HtmlRenderer.HEADER_ID_ADD_EMOJI_SHORTCUT.get(getDocument())) {
+                out.append(text);
+            }
+        }
+        return false;
     }
 }

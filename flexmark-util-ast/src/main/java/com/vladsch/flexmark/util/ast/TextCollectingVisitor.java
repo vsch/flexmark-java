@@ -8,7 +8,7 @@ import java.util.function.BiConsumer;
 public class TextCollectingVisitor {
     final private NodeVisitor myVisitor;
     SpaceInsertingSequenceBuilder out;
-    int flags;
+    int flags;  // flags defined by TextContainer
 
     public TextCollectingVisitor() {
         myVisitor = new NodeVisitor() {
@@ -17,7 +17,7 @@ public class TextCollectingVisitor {
                 if (!node.isOrDescendantOfType(DoNotCollectText.class)) {
                     if (node instanceof TextContainer) {
                         out.setLastNode(node);
-                        if (((TextContainer) node).collectText(out, flags)) {
+                        if (((TextContainer) node).collectText(out, flags, myVisitor)) {
                             if (node instanceof BlankLineBreakNode && out.isNotEmpty()) {
                                 out.appendEol();
                             }

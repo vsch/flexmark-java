@@ -910,13 +910,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             if (!node.getUrlContent().isEmpty()) {
                 markdown.openPreFormatted(true);
                 markdown.pushOptions().preserveSpaces();
-                
+
                 if (!context.isTransformingText() && formatterOptions.rightMargin > 0) {
                     CharSequence chars = node.getUrlContent();
                     int iMax = chars.length();
                     boolean hadEOL = true;
                     markdown.append('\n');
-                    
+
                     for (int i = 0; i < iMax; i++) {
                         char c = chars.charAt(i);
 
@@ -1056,7 +1056,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             } else {
                 if (node.isReferenceTextCombined()) {
                     markdown.append(node.getReferenceOpeningMarker());
-                    markdown.append(node.getReference().toMapped(SpaceMapper.toNonBreakSpace));
+                    if (node.isOrDescendantOfType(Paragraph.class)) {
+                        markdown.append(node.getReference().toMapped(SpaceMapper.toNonBreakSpace));
+                    } else {
+                        markdown.append(node.getReference());
+                    }
                     markdown.append(node.getReferenceClosingMarker());
 
                     markdown.append(node.getTextOpeningMarker());
@@ -1104,7 +1108,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             } else {
                 if (node.isReferenceTextCombined()) {
                     markdown.append(node.getReferenceOpeningMarker());
-                    markdown.append(node.getReference().toMapped(SpaceMapper.toNonBreakSpace));
+                    if (node.isOrDescendantOfType(Paragraph.class)) {
+                        markdown.append(node.getReference().toMapped(SpaceMapper.toNonBreakSpace));
+                    } else {
+                        markdown.append(node.getReference());
+                    }
                     markdown.append(node.getReferenceClosingMarker());
 
                     markdown.append(node.getTextOpeningMarker());
