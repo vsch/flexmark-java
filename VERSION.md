@@ -6,6 +6,9 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.61.8](#0618)
+- [0.61.6](#0616)
+- [0.61.4](#0614)
 - [0.61.2](#0612)
 - [0.61.0](#0610)
 - [0.60.2](#0602)
@@ -156,6 +159,66 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## 0.61.8
+
+* Fix: wrong assert conditions in `LineAppendableImpl.setPrefixLength(int, int)`
+* Fix: assert condition for `MarkdownParagraph.resolveTrackedOffsetsEdit`, space and non-break
+  space should be considered a match.
+* Fix: `MarkdownParagraph.resolveTrackedOffsetsEdit`, space and non-break space should be
+  considered a match.
+* Add: details to assert for `SegmentTree.findSegmentPos(int, int[], int, int)` to allow
+  diagnostics in reports
+
+## 0.61.6
+
+* Add: `HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES` default `true` and
+  `HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES` default `true`. When `false` then
+  corresponding reference link text in heading text used for generating heading id is not
+  trimmed.
+* Add: `HtmlRenderer.HEADER_ID_ADD_EMOJI_SHORTCUT` default `false` When `true` then emjoi nodes
+  add emoji shortcut to collected text for heading id.
+* Fix: `ParserEmulationProfile.GITHUB`
+  * Set `HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES` to `false` because GitHub does
+    not trim trailing spaces for generating heading ids.
+  * `Emoji` node to generate text for heading id consisting of the emoji shortcut, for GitHub
+    compatibility.
+  * Fix: `ImageRef` not to add text to heading text for heading id generation
+* Fix: add more information to `MarkdownParagraph.resolveTrackedOffsetsEdit` assert failures to
+  allow better diagnostics in reported stack traces.
+* Fix: disable wrapping of multiline URL image links
+* Fix: `Paragraph` content node to preserve leading spaces on lines. Otherwise, multiline URL
+  image content would loose indents since these were stripped from paragraph content during
+  parsing.
+  * Fix: `TablesExtension` to accept non-indenting leading spaces on all table rows. This
+    results in previously non-table text as valid table texts:
+
+    ```markdown
+    Abc|Def
+      |---|---
+    ```
+* Fix: `LinkRef` and `ImageRef` changing spaces to `&nbsp;` for wrap formatting when not part of
+  a `Paragraph`, ie. in heading text.
+
+## 0.61.4
+
+* Fix: merge [#397, PR: Add base64 image support with docx rendering] thanks to [@Xaelis]
+  * Add: test for base64 encoded docx conversion
+* Break: `WikiLinkLinkResolver` to take `WikiLinkExtension.ALLOW_ANCHORS` and
+  `WikiLinkExtension.ALLOW_ANCHOR_ESCAPE` into account when extracting page ref from link.
+  * Fix: `#` or `\` included in the URL of the resolved link are now URL encoded.
+  * Fix: default `WikiLinkLinkResolver` handles its own text unescaping. When resolving wiki  
+    link with default resolver do not unescape. If replacing default resolver ensure you
+    unescape the text. **This is needed to properly handle anchor escaping.**
+  * Fix: `PegdownOptionsAdapter` to set `WikiLinkExtension.ALLOW_ANCHORS` to `true` for pegdown
+    compatibility
+* Fix: deprecate `CoreNodeFormatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP` and move declaration to
+  `Formatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP`
+* Fix: deprecate `CoreNodeFormatter.UNIQUIFICATION_ID_MAP` and move declaration to
+  `Formatter.UNIQUIFICATION_ID_MAP`
+* Fix: wiki links should not be wrapped during formatting.
+  * Add: WikiLink formatter extension and tests
+  * Add: WikiLink translating formatter functionality and tests
 
 ## 0.61.2
 
@@ -1910,3 +1973,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]: https://github.com/vsch/flexmark-java/pull/391
 [#387, JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/pull/387
 [#396, DocumentParser stops reading too early resulting in the document being cut off]: https://github.com/vsch/flexmark-java/issues/396
+
+[@Xaelis]: https://github.com/Xaelis
+[#397, PR: Add base64 image support with docx rendering]: https://github.com/vsch/flexmark-java/pull/397
