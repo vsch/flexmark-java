@@ -200,7 +200,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       extension add order
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
-      Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+          Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 * [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
       just formatting. Need to keep track of whether format after typing or just format. Then
       caret position should only track but not force spaces behind it to be preserved. See
@@ -223,6 +223,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: wrong assert conditions in `LineAppendableImpl.setPrefixLength(int, int)`
 * Fix: assert condition for `MarkdownParagraph.resolveTrackedOffsetsEdit`, space and non-break
   space should be considered a match.
+* Fix: `MarkdownParagraph.resolveTrackedOffsetsEdit`, space and non-break space should be
+  considered a match.
+* Add: details to assert for `SegmentTree.findSegmentPos(int, int[], int, int)` to allow
+  diagnostics in reports
 
 ## 0.61.6
 

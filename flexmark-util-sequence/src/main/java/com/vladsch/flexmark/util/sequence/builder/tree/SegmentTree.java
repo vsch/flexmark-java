@@ -8,6 +8,8 @@ import com.vladsch.flexmark.util.sequence.builder.Seg;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 import static com.vladsch.flexmark.util.sequence.builder.tree.Segment.SegType.ANCHOR;
 import static com.vladsch.flexmark.util.sequence.builder.tree.Segment.SegType.BASE;
 
@@ -333,6 +335,7 @@ public class SegmentTree {
      * @param endIndex   end index of sub-sequence of segment tree
      * @param startPos   start pos of sub-sequence segments  in tree
      * @param endPos     end  pos of sub-sequence segments  in tree
+     *
      * @return subsequence of segment corresponding to part of it which is in the sub-sequence of the tree
      */
     @NotNull
@@ -438,6 +441,9 @@ public class SegmentTree {
         int iterations = 0;
         while (startPos < endPos) {
             int pos = (startPos + endPos) >> 1;
+            int lastStart = startPos;
+            int lastEnd = endPos;
+
             iterations++;
 //            System.out.println(String.format("Iteration[%d] pos: %d, [%d, %d)", iterations, pos, startPos, endPos));
 
@@ -453,6 +459,10 @@ public class SegmentTree {
                     return new SegmentTreePos(pos, startIndex, iterations);
                 }
             }
+
+            assert lastStart != startPos || lastEnd != endPos : "Range and position did not change after iteration: pos=" + pos + ", startPos=" + startPos + ", endPos=" + endPos
+                    + "\n" + Arrays.toString(treeData) 
+                    ;
         }
         return null;
     }
@@ -521,6 +531,7 @@ public class SegmentTree {
      * @param segments       segments of the tree
      * @param allText        all out of base text
      * @param buildIndexData true to build index search data, false to build base offset tree data
+     *
      * @return segment tree instance with the data
      */
     @NotNull
@@ -608,6 +619,7 @@ public class SegmentTree {
      * Efficiently reuses segmentBytes and only computes offset treeData for BASE and ANCHOR segments
      *
      * @param baseSeq base sequence for the sequence for this segment tree
+     *
      * @return SegmentOffsetTree for this segment tree
      */
     @NotNull
