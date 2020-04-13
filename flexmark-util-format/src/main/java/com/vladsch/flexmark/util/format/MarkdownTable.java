@@ -992,8 +992,10 @@ public class MarkdownTable {
             for (ColumnSort columnSort : columnSorts) {
                 int c = columnSort.column;
                 if (c >= 0 && c < cMax) {
-                    IndexSpanOffset spanIndex = rows.get(r).indexOf(c);
-                    TableCell cell = rows.get(r).cells.get(spanIndex.index);
+                    IndexSpanOffset spanIndex = rows.get(r)
+                            .indexOf(c);
+                    TableCell cell = rows.get(r).cells
+                            .get(spanIndex.index);
                     if (spanIndex.index == c && cell != null) {
                         // not in span
                         cellSizes[c] = Math.max(cellSizes[c], cell.text.length());
