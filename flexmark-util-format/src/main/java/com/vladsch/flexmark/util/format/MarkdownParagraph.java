@@ -78,13 +78,13 @@ public class MarkdownParagraph {
         if (afterSpace && afterDelete) {
             BasedOffsetTracker preFormatTracker = BasedOffsetTracker.create(altSeq);
             int startOfLine = baseSequence.startOfLine(offset);
-            if (startOfLine > altSeq.getStartOffset() && !baseSequence.isCharAt(offset, CharPredicate.SPACE_TAB_LINE_SEP)) {
-                int previousNonBlank = baseSequence.lastIndexOfAnyNot(CharPredicate.SPACE_TAB_EOL, offset - 1);
+            if (startOfLine > altSeq.getStartOffset() && !baseSequence.isCharAt(offset, SPACE_TAB_NBSP_LINE_SEP)) {
+                int previousNonBlank = baseSequence.lastIndexOfAnyNot(SPACE_TAB_NBSP_EOL, offset - 1);
                 if (previousNonBlank < startOfLine) {
                     // delete range between last non-blank and offset index
                     @NotNull OffsetInfo offsetInfo = preFormatTracker.getOffsetInfo(offset, true);
                     int offsetIndex = offsetInfo.endIndex;
-                    int previousNonBlankIndex = altSeq.lastIndexOfAnyNot(CharPredicate.SPACE_TAB_EOL, offsetIndex - 1);
+                    int previousNonBlankIndex = altSeq.lastIndexOfAnyNot(SPACE_TAB_NBSP_EOL, offsetIndex - 1);
                     return Range.of(previousNonBlankIndex + 1, offsetIndex);
                 }
             }
@@ -100,13 +100,13 @@ public class MarkdownParagraph {
         for (int i = iMax; i-- > 0; ) {
             TrackedOffset trackedOffset = trackedOffsets.get(i);
             int offset = trackedOffset.getOffset();
-            boolean baseIsWhiteSpaceAtOffset = unwrapped.isBaseCharAt(offset, WHITESPACE);
+            boolean baseIsWhiteSpaceAtOffset = unwrapped.isBaseCharAt(offset, WHITESPACE_NBSP);
 
-            if (baseIsWhiteSpaceAtOffset && !(unwrapped.isBaseCharAt(offset - 1, WHITESPACE))) {
+            if (baseIsWhiteSpaceAtOffset && !(unwrapped.isBaseCharAt(offset - 1, WHITESPACE_NBSP))) {
                 // we need to use previous non-blank and use that offset
                 OffsetInfo info = tracker.getOffsetInfo(offset - 1, false);
                 trackedOffset.setIndex(info.endIndex);
-            } else if (!baseIsWhiteSpaceAtOffset && unwrapped.isBaseCharAt(offset + 1, WHITESPACE)) {
+            } else if (!baseIsWhiteSpaceAtOffset && unwrapped.isBaseCharAt(offset + 1, WHITESPACE_NBSP)) {
                 // we need to use this non-blank and use that offset
                 OffsetInfo info = tracker.getOffsetInfo(offset, false);
                 trackedOffset.setIndex(info.startIndex);
@@ -205,7 +205,7 @@ public class MarkdownParagraph {
                 System.out.println(trackedOffset);
             }
 
-            if (!CharPredicate.SPACE_TAB.test(baseCharAt)) {
+            if (!SPACE_TAB_NBSP.test(baseCharAt)) {
                 anchorOffset = offset;
                 anchorIndex = tracker.getOffsetInfo(anchorOffset, false).startIndex;
 
@@ -215,11 +215,11 @@ public class MarkdownParagraph {
                     anchorResolvedBy = "LSep ";
                 }
             } else {
-                if (!CharPredicate.SPACE_TAB_EOL.test(prevBaseCharAt)) {
+                if (!SPACE_TAB_NBSP_EOL.test(prevBaseCharAt)) {
                     anchorOffset = offset - countedSpacesBefore;
                     anchorIndex = tracker.getOffsetInfo(anchorOffset - 1, false).endIndex;
                     anchorResolvedBy = "Prev ";
-                } else if (!CharPredicate.SPACE_TAB_EOL.test(nextBaseCharAt)) {
+                } else if (!SPACE_TAB_NBSP_EOL.test(nextBaseCharAt)) {
                     anchorOffset = offset + countedSpacesAfter;
                     anchorIndex = tracker.getOffsetInfo(anchorOffset, false).startIndex;
                     anchorResolvedBy = "Next ";
@@ -245,7 +245,7 @@ public class MarkdownParagraph {
             // NOTE: at this point space == &nbsp; since altUnwrapped can have &nbsp; instead of spaces
             assert SpaceMapper.areEquivalent(baseSequence.safeCharAt(anchorOffset), altUnwrapped.safeCharAt(anchorIndex + anchorDelta))
                     // NOTE: alt sequence could have spaces removed which would result in space in base sequence and EOL in alt sequence, also unwrapped can have spaces replaced with NBSP
-                    || baseSequence.isCharAt(anchorOffset, WHITESPACE) && altUnwrapped.isCharAt(anchorIndex + anchorDelta, WHITESPACE_NBSP_OR_NUL)
+                    || baseSequence.isCharAt(anchorOffset, WHITESPACE_NBSP_OR_NUL) && altUnwrapped.isCharAt(anchorIndex + anchorDelta, WHITESPACE_NBSP_OR_NUL)
                     : String.format("baseSeq.charAt: %d != altUnwrapped.charAt: %d, altWrapped anchor: '%s', wrapped anchor: '%s'"
                     , (int) baseSequence.safeCharAt(anchorOffset)
                     , (int) altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
@@ -300,8 +300,8 @@ public class MarkdownParagraph {
             }
 
             // treat NBSP as spaces
-            int wrappedSpacesBefore = wrapped.countTrailing(CharPredicate.SPACE_TAB_NBSP, wrappedIndex);
-            int wrappedSpacesAfter = wrapped.countLeading(CharPredicate.SPACE_TAB_NBSP, wrappedIndex);
+            int wrappedSpacesBefore = wrapped.countTrailing(SPACE_TAB_NBSP, wrappedIndex);
+            int wrappedSpacesAfter = wrapped.countLeading(SPACE_TAB_NBSP, wrappedIndex);
 
             if (trackedOffset.isAfterSpaceEdit()) {
                 if (trackedOffset.isAfterInsert()) {
@@ -315,11 +315,11 @@ public class MarkdownParagraph {
             int addSpacesBefore = trackedOffset.isSpliced() ? 0 : Math.max(0, countedSpacesBefore - wrappedSpacesBefore);
             int addSpacesAfter = Math.max(0, countedSpacesAfter - wrappedSpacesAfter);
 
-            if (wrapped.isCharAt(wrappedIndex, ANY_EOL_NUL)) {
+            if (wrapped.isCharAt(wrappedIndex, CharPredicate.ANY_EOL_NUL)) {
                 // at end of line add only before, nothing after
                 addSpacesAfter = 0;
                 if (trackedOffset.isAfterDelete()) addSpacesBefore = Math.min(1, addSpacesBefore);
-            } else if (!wrapped.isCharAt(wrappedIndex - 1, ANY_EOL_NUL)) {
+            } else if (!wrapped.isCharAt(wrappedIndex - 1, CharPredicate.ANY_EOL_NUL)) {
                 // not at start of line
                 // spaces before caret, see if need to add max 1, and all spaces after
                 addSpacesBefore = Math.min(1, addSpacesBefore);
