@@ -1,8 +1,11 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.ExceptionMatcher;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 
@@ -10,6 +13,9 @@ import static org.junit.Assert.*;
 
 @SuppressWarnings("PointlessArithmeticExpression")
 public class LineAppendableImplTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
 
     @Test
     public void test_emptyAppendableIterator() {
@@ -2019,6 +2025,55 @@ public class LineAppendableImplTest {
         assertEquals("0", "" +
                 "  > 0:2343568|abc\n" +
                 "", fa2.toString());
+    }
+
+    @Test
+    public void test_appendLineAppendablePrefixedUnterminated2() {
+        String input = "" +
+                "0:2343568\n" +
+                "1:2343568\n" +
+                "2:2343568\n" +
+                "3:2343568\n" +
+                "4:2343568\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        LineAppendableImpl fa = new LineAppendableImpl(SequenceBuilder.emptyBuilder(sequence), 0);
+
+        fa.append("> ");
+        assertEquals("" +
+                "> " +
+                "", fa.toString());
+
+        fa.setPrefixLength(0, 2);
+        assertEquals("" +
+                "> \n" +
+                "", fa.toString());
+
+        LineInfo info = fa.getLineInfo(0);
+        assertEquals(3, info.length);
+        assertEquals(2, info.prefixLength);
+        assertEquals(0, info.textLength);
+    }
+
+    @Test
+    public void test_appendLineAppendablePrefixedUnterminated3() {
+        String input = "" +
+                "0:2343568\n" +
+                "1:2343568\n" +
+                "2:2343568\n" +
+                "3:2343568\n" +
+                "4:2343568\n" +
+                "";
+        BasedSequence sequence = BasedSequence.of(input);
+        LineAppendableImpl fa = new LineAppendableImpl(SequenceBuilder.emptyBuilder(sequence), 0);
+
+        fa.append("> ");
+        assertEquals("" +
+                "> " +
+                "", fa.toString());
+
+        thrown.expect(ExceptionMatcher.match(IllegalArgumentException.class, "prefixLength 3 is out of valid range [0, 3) for the line"));
+        fa.setPrefixLength(0, 3);
     }
 
     @Test

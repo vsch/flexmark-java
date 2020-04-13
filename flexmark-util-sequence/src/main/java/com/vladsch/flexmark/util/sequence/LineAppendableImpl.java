@@ -319,13 +319,13 @@ public class LineAppendableImpl implements LineAppendable {
 
         CharSequence sequence = appendable.toSequence();
         CharSequence eol = trimmedEOL(sequence);
-        
+
         if (eol == null || eol.length() == 0) {
             eol = SequenceUtils.EOL;
         }
 
         // KLUDGE: end always has 1 EOL character removed, however, if there is a \r before \n then one more char needs to be removed from end of text
-        CharSequence text = start == Range.NULL.getStart() && end == Range.NULL.getEnd() ? BasedSequence.NULL 
+        CharSequence text = start == Range.NULL.getStart() && end == Range.NULL.getEnd() ? BasedSequence.NULL
                 : sequence.subSequence(start, Math.max(start, end - Math.max(0, eol.length() - 1)));
 
         if (start >= end) {
@@ -849,7 +849,7 @@ public class LineAppendableImpl implements LineAppendable {
                     // NOTE: these are tail blank lines
                     if (consecutiveBlankLines < maxTrailingBlankLines) {
                         consecutiveBlankLines++;
-                        if (withPrefixes) out.append(trimEnd(info.getPrefix()));
+                        if (withPrefixes) out.append(isTrimTrailingWhitespace() ? trimEnd(info.getPrefix()) : info.getPrefix());
                         if (notDanglingLine && (tailEOL || consecutiveBlankLines != maxTrailingBlankLines)) {
                             out.append(EOL);
                         }
@@ -857,7 +857,7 @@ public class LineAppendableImpl implements LineAppendable {
                 } else {
                     if (consecutiveBlankLines < maxBlankLines) {
                         consecutiveBlankLines++;
-                        if (withPrefixes) out.append(trimEnd(info.getPrefix()));
+                        if (withPrefixes) out.append(isTrimTrailingWhitespace() ? trimEnd(info.getPrefix()) : info.getPrefix());
                         if (notDanglingLine) out.append(EOL);
                     }
                 }
@@ -998,8 +998,8 @@ public class LineAppendableImpl implements LineAppendable {
         LineInfo info = lines.get(lineIndex);
         CharSequence line = info.lineSeq;
 
-        if (prefixLength < 0 || prefixLength >= line.length() - 1)
-            throw new IllegalArgumentException(String.format("prefixLength %d is out of valid range [0, %d) for the line", prefixLength, line.length() - 1));
+        if (prefixLength < 0 || prefixLength > info.getTextEnd())
+            throw new IllegalArgumentException(String.format("prefixLength %d is out of valid range [0, %d) for the line", prefixLength, info.getTextEnd() + 1));
 
         if (prefixLength != info.prefixLength) {
             CharSequence prefix = line.subSequence(0, prefixLength);
