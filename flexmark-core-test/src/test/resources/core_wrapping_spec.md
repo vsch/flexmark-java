@@ -1252,7 +1252,37 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Restore Spaces: 33) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
+space and `&nbsp;` are equivalent
+
+```````````````````````````````` example(Wrap - Restore Spaces: 33) options(margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+⟦* [ ] ⟧Fix: [diagnostic/4671](https://vladsch.com/admin/diagnosticdetails/4626)
+      [467⦙ Stacktrace](test/data/diagnotics/4671/stacktrace.txt)
+.
+* [ ] Fix: [diagnostic/4671](https://vladsch.com/admin/diagnosticdetails/4626)
+      [467⦙ Stacktrace](test/data/diagnotics/4671/stacktrace.txt)
+````````````````````````````````
+
+
+space and `&nbsp;` are equivalent
+
+```````````````````````````````` example(Wrap - Restore Spaces: 34) options(margin[96], delete-char, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ], NO_FILE_EOL)
+⟦* [ ] ⟧Fix: [diagnostic/4671](https://vladsch.com/admin/diagnosticdetails/4626)
+      [467⦙ 
+.
+* [ ] Fix: [diagnostic/4671](https://vladsch.com/admin/diagnosticdetails/4626) [467⦙
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 35) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
+⟦  * [ ] ⟧d⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+⟦        ⟧dependencies on classes in other directories.
+.
+  * [ ] d⦙ classes contained in `util` directory to `misc` sub-directory and not have any
+        dependencies on classes in other directories.
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 36) options(margin[96], delete-char, restore-tracked-spaces, prefix[        ], first-prefix[  * [ ] ])
 ⟦  * [ ] ⟧d ⦙ classes contained in `util` directory to `misc` sub-directory and not have any
 ⟦        ⟧dependencies on classes in other directories.
 .
@@ -1261,7 +1291,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Restore Spaces: 34) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap - Restore Spaces: 37) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
 ⟦      ⟧ ⦙to keep duplicate code.
 .
@@ -1270,7 +1300,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Restore Spaces: 35) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
+```````````````````````````````` example(Wrap - Restore Spaces: 38) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ])
 ⟦* [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙ to keep duplicate code.
 .
 * [ ] Fix: remove formatter and use flexmark formatter for document format to eliminate the need ⦙
@@ -1278,7 +1308,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Restore Spaces: 36) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
+```````````````````````````````` example(Wrap - Restore Spaces: 39) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
 ⟦* ⟧Fix: conversion from Smart to based to extract more source information from segmented
 ⟦  ⟧sequence ⦙and mapped sequence.
 .
@@ -1287,7 +1317,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Restore Spaces: 37) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
+```````````````````````````````` example(Wrap - Restore Spaces: 40) options(margin[96], insert-space, restore-tracked-spaces, prefix[  ], first-prefix[* ])
 ⟦* ⟧Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line elements. ⦙
 .
 * Fix: wrap on typing caret adjustment on space after non-space and before keep at start of line
@@ -1295,7 +1325,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Restore Spaces: 38) options(margin[96], insert-char, restore-tracked-spaces, prefix[    ], first-prefix[  * ], show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 41) options(margin[96], insert-char, restore-tracked-spaces, prefix[    ], first-prefix[  * ], show-ranges)
 ⟦## Markdown Navigator
 
 [TOC levels=3,4]: # "Version History"
@@ -1344,7 +1374,7 @@ BasedSegmentBuilder{[1198, 1511), s=3:12, u=8:17, t=8:17, l=317, sz=20, na=15: [
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Restore Spaces: 39) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ], show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 42) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ], show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need
@@ -1364,7 +1394,7 @@ BasedSegmentBuilder{[50, 170), s=0:3, u=2:7, t=2:7, l=127, sz=5, na=3: [50), a:'
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap - Restore Spaces: 40) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ], show-ranges)
+```````````````````````````````` example(Wrap - Restore Spaces: 43) options(margin[96], insert-space, restore-tracked-spaces, prefix[      ], first-prefix[* [ ] ], show-ranges)
 ⟦### Next 2.9.0.227/2.9.7.227 - Dev Build
   
 * [ ] ⟧Fix: remove formatter and use flexmark formatter for document format to eliminate the need

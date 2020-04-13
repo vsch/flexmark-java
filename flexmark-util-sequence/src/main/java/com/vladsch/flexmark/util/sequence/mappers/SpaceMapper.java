@@ -7,6 +7,10 @@ import org.jetbrains.annotations.NotNull;
 public class SpaceMapper {
     final public static CharMapper toNonBreakSpace = new ToNonBreakSpace();
     final public static CharMapper fromNonBreakSpace = new FromNonBreakSpace();
+    
+    public static boolean areEquivalent(char c1, char c2) {
+        return c1 == c2 || (c1 == ' ' && c2 == SequenceUtils.NBSP) || (c2 == ' ' && c1 == SequenceUtils.NBSP);
+    }
 
     public static @NotNull CharMapper toSpaces(@NotNull CharPredicate predicate) {
         return new FromPredicate(predicate);

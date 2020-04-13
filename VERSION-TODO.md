@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.8](#0618)
 - [0.61.6](#0616)
 - [0.61.4](#0614)
 - [0.61.2](#0612)
@@ -216,6 +217,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+
+## 0.61.8
+
+* Fix: wrong assert conditions in `LineAppendableImpl.setPrefixLength(int, int)`
+* Fix: assert condition for `MarkdownParagraph.resolveTrackedOffsetsEdit`, space and non-break
+  space should be considered a match.
 
 ## 0.61.6
 
