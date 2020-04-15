@@ -67,8 +67,10 @@ public class HtmlRenderer implements IRender {
     final public static DataKey<Boolean> RENDER_HEADER_ID = SharedDataKeys.RENDER_HEADER_ID;
     final public static DataKey<Boolean> GENERATE_HEADER_ID = SharedDataKeys.GENERATE_HEADER_ID;
     final public static DataKey<Boolean> DO_NOT_RENDER_LINKS = SharedDataKeys.DO_NOT_RENDER_LINKS;
-    final public static DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("FENCED_CODE_LANGUAGE_CLASS_PREFIX", "language-");
+    final public static DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("FENCED_CODE_LANGUAGE_CLASS_PREFIX", "language-"); // prefix to add to unmapped info strings
+    final public static DataKey<HashMap<String, String>> FENCED_CODE_LANGUAGE_CLASS_MAP = new DataKey<>("FENCED_CODE_LANGUAGE_CLASS_MAP", HashMap::new); // info to language class mapping 
     final public static DataKey<String> FENCED_CODE_NO_LANGUAGE_CLASS = new DataKey<>("FENCED_CODE_NO_LANGUAGE_CLASS", "");
+    final public static DataKey<String> FENCED_CODE_LANGUAGE_DELIMITERS = new DataKey<>("FENCED_CODE_LANGUAGE_DELIMITERS", " \t");
     final public static DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
     final public static DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
     final public static DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");

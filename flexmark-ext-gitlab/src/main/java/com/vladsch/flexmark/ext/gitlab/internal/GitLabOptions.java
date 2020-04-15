@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.ext.gitlab.internal;
 
 import com.vladsch.flexmark.ext.gitlab.GitLabExtension;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
@@ -22,13 +24,24 @@ public class GitLabOptions implements MutableDataSetter {
     final public String inlineMathClass;
     final public String blockMathClass;
     final public String blockMermaidClass;
-    final public String blockInfoDelimiters;
-    final public CharPredicate blockInfoDelimiterSet;
+    final public String[] mathLanguages;
+    final public String[] mermaidLanguages;
     final public String videoImageClass;
     final public String videoImageLinkTextFormat;
     final public String videoImageExtensions;
     final public HashSet<String> videoImageExtensionSet;
 
+    /**
+     * @deprecated use {@link NodeRendererContext#getHtmlOptions()#languageDelimiters} instead
+     */
+    @Deprecated
+    final public String blockInfoDelimiters;
+    /**
+     * @deprecated use {@link NodeRendererContext#getHtmlOptions()#languageDelimiterSet} instead
+     */
+    @Deprecated
+    final public CharPredicate blockInfoDelimiterSet;
+    
     public GitLabOptions(DataHolder options) {
         insParser = GitLabExtension.INS_PARSER.get(options);
         delParser = GitLabExtension.DEL_PARSER.get(options);
@@ -42,8 +55,10 @@ public class GitLabOptions implements MutableDataSetter {
         renderVideoLink = GitLabExtension.RENDER_VIDEO_LINK.get(options);
         blockMathClass = GitLabExtension.BLOCK_MATH_CLASS.get(options);
         blockMermaidClass = GitLabExtension.BLOCK_MERMAID_CLASS.get(options);
-        blockInfoDelimiters = GitLabExtension.BLOCK_INFO_DELIMITERS.get(options);
+        blockInfoDelimiters = HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS.get(options);
         blockInfoDelimiterSet = CharPredicate.anyOf(blockInfoDelimiters);
+        mathLanguages = GitLabExtension.MATH_LANGUAGES.get(options);
+        mermaidLanguages = GitLabExtension.MERMAID_LANGUAGES.get(options);
         videoImageClass = GitLabExtension.VIDEO_IMAGE_CLASS.get(options);
         videoImageLinkTextFormat = GitLabExtension.VIDEO_IMAGE_LINK_TEXT_FORMAT.get(options);
         videoImageExtensions = GitLabExtension.VIDEO_IMAGE_EXTENSIONS.get(options);
@@ -72,7 +87,7 @@ public class GitLabOptions implements MutableDataSetter {
         dataHolder.set(GitLabExtension.RENDER_VIDEO_LINK, renderVideoLink);
         dataHolder.set(GitLabExtension.BLOCK_MATH_CLASS, blockMathClass);
         dataHolder.set(GitLabExtension.BLOCK_MERMAID_CLASS, blockMermaidClass);
-        dataHolder.set(GitLabExtension.BLOCK_INFO_DELIMITERS, blockInfoDelimiters);
+        dataHolder.set(HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS, blockInfoDelimiters);
         dataHolder.set(GitLabExtension.VIDEO_IMAGE_CLASS, videoImageClass);
         dataHolder.set(GitLabExtension.VIDEO_IMAGE_LINK_TEXT_FORMAT, videoImageLinkTextFormat);
         dataHolder.set(GitLabExtension.VIDEO_IMAGE_EXTENSIONS, videoImageExtensions);

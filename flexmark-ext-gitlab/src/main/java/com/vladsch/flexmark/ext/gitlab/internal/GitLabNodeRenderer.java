@@ -10,6 +10,7 @@ import com.vladsch.flexmark.ext.gitlab.GitLabDel;
 import com.vladsch.flexmark.ext.gitlab.GitLabInlineMath;
 import com.vladsch.flexmark.ext.gitlab.GitLabIns;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
@@ -80,11 +81,12 @@ public class GitLabNodeRenderer implements NodeRenderer
     }
 
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
-        BasedSequence info = node.getInfoDelimitedByAny(options.blockInfoDelimiterSet);
+        HtmlRendererOptions htmlOptions = context.getHtmlOptions();
+        BasedSequence language = node.getInfoDelimitedByAny(htmlOptions.languageDelimiterSet);
 
-        if (options.renderBlockMath && info.equals("math")) {
+        if (this.options.renderBlockMath && language.isIn(options.mathLanguages)) {
             html.line();
-            html.srcPosWithTrailingEOL(node.getChars()).attr(Attribute.CLASS_ATTR, options.blockMathClass).withAttr().tag("div").line().openPre();
+            html.srcPosWithTrailingEOL(node.getChars()).attr(Attribute.CLASS_ATTR, this.options.blockMathClass).withAttr().tag("div").line().openPre();
             if (codeContentBlock) {
                 context.renderChildren(node);
             } else {
@@ -92,10 +94,10 @@ public class GitLabNodeRenderer implements NodeRenderer
             }
             html.closePre().tag("/div");
 
-            html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
-        } else if (options.renderBlockMermaid && info.equals("mermaid")) {
+            html.lineIf(htmlOptions.htmlBlockCloseTagEol);
+        } else if (this.options.renderBlockMermaid && language.isIn(options.mermaidLanguages)) {
             html.line();
-            html.srcPosWithTrailingEOL(node.getChars()).attr(Attribute.CLASS_ATTR, options.blockMermaidClass).withAttr().tag("div").line().openPre();
+            html.srcPosWithTrailingEOL(node.getChars()).attr(Attribute.CLASS_ATTR, this.options.blockMermaidClass).withAttr().tag("div").line().openPre();
             if (codeContentBlock) {
                 context.renderChildren(node);
             } else {
@@ -103,7 +105,7 @@ public class GitLabNodeRenderer implements NodeRenderer
             }
             html.closePre().tag("/div");
 
-            html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
+            html.lineIf(htmlOptions.htmlBlockCloseTagEol);
         } else {
             context.delegateRender();
         }

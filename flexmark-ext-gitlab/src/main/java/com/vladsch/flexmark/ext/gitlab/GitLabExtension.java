@@ -22,6 +22,9 @@ public class GitLabExtension implements Parser.ParserExtension
         , Formatter.FormatterExtension
         // , Parser.ReferenceHoldingExtension
 {
+    final private static String[] DEFAULT_MATH_LANGUAGES = {"math"};
+    final private static String[] DEFAULT_MERMAID_LANGUAGES = {"mermaid"};
+    
     final public static DataKey<Boolean> INS_PARSER = new DataKey<>("INS_PARSER", true);
     final public static DataKey<Boolean> DEL_PARSER = new DataKey<>("DEL_PARSER", true);
     final public static DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
@@ -32,12 +35,19 @@ public class GitLabExtension implements Parser.ParserExtension
     final public static DataKey<Boolean> RENDER_VIDEO_IMAGES = new DataKey<>("RENDER_VIDEO_IMAGES", true);
     final public static DataKey<Boolean> RENDER_VIDEO_LINK = new DataKey<>("RENDER_VIDEO_LINK", true);
 
+    final public static DataKey<String[]> MATH_LANGUAGES = new DataKey<>("MATH_LANGUAGES", DEFAULT_MATH_LANGUAGES);
+    final public static DataKey<String[]> MERMAID_LANGUAGES = new DataKey<>("MERMAID_LANGUAGES", DEFAULT_MERMAID_LANGUAGES);
     final public static DataKey<String> INLINE_MATH_CLASS = new DataKey<>("INLINE_MATH_CLASS", "katex");
     final public static DataKey<String> BLOCK_MATH_CLASS = new DataKey<>("BLOCK_MATH_CLASS", "katex");
     final public static DataKey<String> BLOCK_MERMAID_CLASS = new DataKey<>("BLOCK_MERMAID_CLASS", "mermaid");
     final public static DataKey<String> VIDEO_IMAGE_CLASS = new DataKey<>("VIDEO_IMAGE_CLASS", "video-container");
     final public static DataKey<String> VIDEO_IMAGE_LINK_TEXT_FORMAT = new DataKey<>("VIDEO_IMAGE_LINK_TEXT_FORMAT", "Download '%s'");
-    final public static DataKey<String> BLOCK_INFO_DELIMITERS = new DataKey<>("BLOCK_INFO_DELIMITERS", " ");
+
+    /**
+     * @deprecated use {@link HtmlRenderer#FENCED_CODE_LANGUAGE_DELIMITERS} instead
+     */
+    @Deprecated
+    final public static DataKey<String> BLOCK_INFO_DELIMITERS = HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS;
     final public static DataKey<String> VIDEO_IMAGE_EXTENSIONS = new DataKey<>("VIDEO_IMAGE_EXTENSIONS", "mp4,m4v,mov,webm,ogv");
 
     private GitLabExtension() {

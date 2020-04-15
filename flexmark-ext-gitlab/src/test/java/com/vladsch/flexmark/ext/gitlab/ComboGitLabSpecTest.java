@@ -33,9 +33,11 @@ public class ComboGitLabSpecTest extends RendererSpecTest {
         optionsMap.put("no-video", new MutableDataSet().set(GitLabExtension.RENDER_VIDEO_IMAGES, false));
         optionsMap.put("no-video-link", new MutableDataSet().set(GitLabExtension.RENDER_VIDEO_LINK, false));
         optionsMap.put("no-nested-quotes", new MutableDataSet().set(GitLabExtension.NESTED_BLOCK_QUOTES, false));
-        optionsMap.put("block-delimiters", new MutableDataSet().set(GitLabExtension.BLOCK_INFO_DELIMITERS, "-"));
+        optionsMap.put("block-delimiters", new MutableDataSet().set(HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS, "-"));
         optionsMap.put("math-class", new MutableDataSet().set(GitLabExtension.BLOCK_MATH_CLASS, "math-class"));
+        optionsMap.put("math-latex", new MutableDataSet().set(GitLabExtension.MATH_LANGUAGES, new String[]{"math", "latex"}));
         optionsMap.put("mermaid-class", new MutableDataSet().set(GitLabExtension.BLOCK_MERMAID_CLASS, "mermaid-class"));
+        optionsMap.put("mermaid-alias", new MutableDataSet().set(GitLabExtension.MERMAID_LANGUAGES, new String[]{"mermaid", "alias"}));
         optionsMap.put("code-content-block", new MutableDataSet().set(Parser.FENCED_CODE_CONTENT_BLOCK, true));
         optionsMap.put("video-extensions", new MutableDataSet().set(GitLabExtension.VIDEO_IMAGE_EXTENSIONS, "tst"));
         optionsMap.put("video-link-format", new MutableDataSet().set(GitLabExtension.VIDEO_IMAGE_LINK_TEXT_FORMAT, "Get Video '%s'"));

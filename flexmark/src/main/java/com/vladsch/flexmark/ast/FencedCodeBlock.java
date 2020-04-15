@@ -90,11 +90,11 @@ public class FencedCodeBlock extends Block implements DoNotDecorate {
     public BasedSequence getInfoDelimitedByAny(CharPredicate delimiters) {
         BasedSequence language = BasedSequence.NULL;
         if (info.isNotNull() && !info.isBlank()) {
-            int space = info.indexOfAny(delimiters);
-            if (space == -1) {
+            int delimiter = info.indexOfAny(delimiters);
+            if (delimiter == -1) {
                 language = info;
             } else {
-                language = info.subSequence(0, space);
+                language = info.subSequence(0, delimiter);
             }
         }
         return language;

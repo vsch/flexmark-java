@@ -15,8 +15,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 
 public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
-    private NodeRendererContext context;
-    private AttributablePart useAttributes;
+    private @Nullable NodeRendererContext context;
+    private @Nullable AttributablePart useAttributes;
 
     public HtmlWriter(int indentSize, int formatOptions) {
         super(indentSize, formatOptions);
@@ -42,19 +42,20 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     }
 
     public @NotNull NodeRendererContext getContext() {
+        assert context != null;
         return context;
     }
 
     public @NotNull HtmlWriter srcPos() {
-        return srcPos(context.getCurrentNode().getChars());
+        return context == null ? this : srcPos(context.getCurrentNode().getChars());
     }
 
     public @NotNull HtmlWriter srcPosWithEOL() {
-        return srcPosWithEOL(context.getCurrentNode().getChars());
+        return context == null ? this : srcPosWithEOL(context.getCurrentNode().getChars());
     }
 
     public @NotNull HtmlWriter srcPosWithTrailingEOL() {
-        return srcPosWithTrailingEOL(context.getCurrentNode().getChars());
+        return context == null ? this : srcPosWithTrailingEOL(context.getCurrentNode().getChars());
     }
 
     public @NotNull HtmlWriter srcPos(@NotNull BasedSequence sourceText) {
@@ -98,7 +99,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     }
 
     public @NotNull HtmlWriter srcPos(int startOffset, int endOffset) {
-        if (startOffset <= endOffset && !context.getHtmlOptions().sourcePositionAttribute.isEmpty()) {
+        if (startOffset <= endOffset && context != null && !context.getHtmlOptions().sourcePositionAttribute.isEmpty()) {
             super.attr(context.getHtmlOptions().sourcePositionAttribute, startOffset + "-" + endOffset);
         }
         return this;
@@ -128,10 +129,18 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     @Override
     public HtmlWriter tag(@NotNull CharSequence tagName, boolean voidElement) {
         if (useAttributes != null) {
-            final Attributes attributes = context.extendRenderingNodeAttributes(useAttributes, getAttributes());
-            String sourcePositionAttribute = context.getHtmlOptions().sourcePositionAttribute;
-            String attributeValue = attributes.getValue(sourcePositionAttribute);
-
+            String attributeValue;
+            final Attributes attributes;
+            
+            if (context != null) {
+                attributes = context.extendRenderingNodeAttributes(useAttributes, getAttributes());
+                String sourcePositionAttribute = context.getHtmlOptions().sourcePositionAttribute;
+                attributeValue = attributes.getValue(sourcePositionAttribute);
+            } else {
+                attributeValue = "";
+                attributes = new Attributes();
+            }
+                
             if (!attributeValue.isEmpty()) {
                 // add to tag ranges
                 int pos = attributeValue.indexOf('-');

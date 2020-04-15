@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.misc;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Array;
 import java.util.BitSet;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -10,6 +11,18 @@ import java.util.function.Predicate;
 public class ArrayUtils {
     public static <T> boolean contained(T value, T[] array) {
         return indexOf(value, array) != -1;
+    }
+
+    @SafeVarargs
+    public static <T> T[] append(Class<T> elemClass, T[] array, T... values) {
+        if (values.length > 0) {
+            //noinspection unchecked
+            T[] newInstance = (T[]) Array.newInstance(elemClass, array.length + values.length);
+            System.arraycopy(array, 0, newInstance, 0, array.length);
+            System.arraycopy(values, 0, newInstance, array.length, values.length);
+            return newInstance;
+        }
+        return array;
     }
 
     public static boolean contained(int value, int[] array) {
@@ -54,6 +67,7 @@ public class ArrayUtils {
      *                  If it is negative, it has the same effect as if it were 0: -1 is returned.
      * @param predicate condition for matching the search
      * @param <T>       type of array
+     *
      * @return the index of the next occurrence of a match in the array which is
      *         greater than or equal to {@code fromIndex}, or {@code -1}
      *         if match does not occur after that point.
@@ -109,6 +123,7 @@ public class ArrayUtils {
      *                   -1 is returned.
      * @param predicate  condition for matching the search
      * @param <T>        type of array
+     *
      * @return the index of the last occurrence of a match in the array which is
      *         less than or equal to {@code fromIndex}, or {@code -1}
      *         if match does not occur before that point.

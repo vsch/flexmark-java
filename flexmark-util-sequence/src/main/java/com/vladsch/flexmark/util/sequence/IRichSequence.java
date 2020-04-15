@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -1403,4 +1404,7 @@ public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence,
      */
     @Nullable
     String toStringOrNull();
+    
+    boolean isIn(@NotNull String[] texts);
+    boolean isIn(@NotNull Collection<? extends CharSequence> texts);
 }

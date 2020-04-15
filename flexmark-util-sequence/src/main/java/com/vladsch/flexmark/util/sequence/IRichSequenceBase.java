@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -903,4 +904,14 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     @Override final public int columnAtIndex(int index) { return SequenceUtils.columnAtIndex(this, index);}
     @NotNull @Override final public Pair<Integer, Integer> lineColumnAtIndex(int index) {return SequenceUtils.lineColumnAtIndex(this, index);}
     // @formatter:on
+
+    @Override
+    public boolean isIn(@NotNull String[] texts) {
+        return SequenceUtils.containedBy(texts, this);
+    }
+
+    @Override
+    public boolean isIn(@NotNull Collection<? extends CharSequence> texts) {
+        return SequenceUtils.containedBy(texts, this);
+    }
 }

@@ -171,7 +171,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer {
 
         if (!text.isEmpty()) {
             if (!language.isEmpty()) {
-                html.attr("class", context.getHtmlOptions().languageClassPrefix + language);
+                html.attr("class", context.getHtmlOptions().languageClassMap.getOrDefault(language, context.getHtmlOptions().languageClassPrefix + language));
             }
 
             html.line();

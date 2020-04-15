@@ -519,7 +519,37 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Math: 2) options(no-math)
+```````````````````````````````` example(Fenced Code Math: 2) options(math-latex)
+```math
+a^2+b^2=c^2
+```
+.
+<div class="katex">
+a^2+b^2=c^2
+</div>
+.
+Document[0, 23]
+  FencedCodeBlock[0, 23] open:[0, 3, "```"] info:[3, 7, "math"] content:[8, 20] lines[1] close:[20, 23, "```"]
+    Text[8, 20] chars:[8, 20, "a^2+b … =c^2\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Math: 3) options(math-latex)
+```latex
+a^2+b^2=c^2
+```
+.
+<div class="katex">
+a^2+b^2=c^2
+</div>
+.
+Document[0, 24]
+  FencedCodeBlock[0, 24] open:[0, 3, "```"] info:[3, 8, "latex"] content:[9, 21] lines[1] close:[21, 24, "```"]
+    Text[9, 21] chars:[9, 21, "a^2+b … =c^2\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Math: 4) options(no-math)
 ```math
 a^2+b^2=c^2
 ```
@@ -533,7 +563,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Math: 3) options(math-class)
+```````````````````````````````` example(Fenced Code Math: 5) options(math-class)
 ```math
 a^2+b^2=c^2
 ```
@@ -548,7 +578,37 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Math: 4) options(block-delimiters)
+```````````````````````````````` example(Fenced Code Math: 6) options(math-class, math-latex)
+```math
+a^2+b^2=c^2
+```
+.
+<div class="math-class">
+a^2+b^2=c^2
+</div>
+.
+Document[0, 23]
+  FencedCodeBlock[0, 23] open:[0, 3, "```"] info:[3, 7, "math"] content:[8, 20] lines[1] close:[20, 23, "```"]
+    Text[8, 20] chars:[8, 20, "a^2+b … =c^2\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Math: 7) options(math-class, math-latex)
+```latex
+a^2+b^2=c^2
+```
+.
+<div class="math-class">
+a^2+b^2=c^2
+</div>
+.
+Document[0, 24]
+  FencedCodeBlock[0, 24] open:[0, 3, "```"] info:[3, 8, "latex"] content:[9, 21] lines[1] close:[21, 24, "```"]
+    Text[9, 21] chars:[9, 21, "a^2+b … =c^2\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Math: 8) options(block-delimiters)
 ```math-here
 a^2+b^2=c^2
 ```
@@ -563,7 +623,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Math: 5) options(code-content-block)
+```````````````````````````````` example(Fenced Code Math: 9) options(code-content-block)
 ```math
 a^2+b^2=c^2
 ```
@@ -603,7 +663,53 @@ Document[0, 60]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Mermaid: 2) options(no-mermaid)
+```````````````````````````````` example(Fenced Code Mermaid: 2) options(mermaid-alias)
+```mermaid
+graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+```
+.
+<div class="mermaid">
+graph TD;
+  A--&gt;B;
+  A--&gt;C;
+  B--&gt;D;
+  C--&gt;D;
+</div>
+.
+Document[0, 60]
+  FencedCodeBlock[0, 60] open:[0, 3, "```"] info:[3, 10, "mermaid"] content:[11, 57] lines[5] close:[57, 60, "```"]
+    Text[11, 57] chars:[11, 57, "graph … ->D;\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Mermaid: 3) options(mermaid-alias)
+```alias
+graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+```
+.
+<div class="mermaid">
+graph TD;
+  A--&gt;B;
+  A--&gt;C;
+  B--&gt;D;
+  C--&gt;D;
+</div>
+.
+Document[0, 58]
+  FencedCodeBlock[0, 58] open:[0, 3, "```"] info:[3, 8, "alias"] content:[9, 55] lines[5] close:[55, 58, "```"]
+    Text[9, 55] chars:[9, 55, "graph … ->D;\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Mermaid: 4) options(no-mermaid)
 ```mermaid
 graph TD;
   A-->B;
@@ -625,7 +731,7 @@ Document[0, 60]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Mermaid: 3) options(mermaid-class)
+```````````````````````````````` example(Fenced Code Mermaid: 5) options(mermaid-class)
 ```mermaid
 graph TD;
   A-->B;
@@ -648,7 +754,53 @@ Document[0, 60]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Mermaid: 4) options(block-delimiters)
+```````````````````````````````` example(Fenced Code Mermaid: 6) options(mermaid-class, mermaid-alias)
+```mermaid
+graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+```
+.
+<div class="mermaid-class">
+graph TD;
+  A--&gt;B;
+  A--&gt;C;
+  B--&gt;D;
+  C--&gt;D;
+</div>
+.
+Document[0, 60]
+  FencedCodeBlock[0, 60] open:[0, 3, "```"] info:[3, 10, "mermaid"] content:[11, 57] lines[5] close:[57, 60, "```"]
+    Text[11, 57] chars:[11, 57, "graph … ->D;\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Mermaid: 7) options(mermaid-class, mermaid-alias)
+```alias
+graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
+```
+.
+<div class="mermaid-class">
+graph TD;
+  A--&gt;B;
+  A--&gt;C;
+  B--&gt;D;
+  C--&gt;D;
+</div>
+.
+Document[0, 58]
+  FencedCodeBlock[0, 58] open:[0, 3, "```"] info:[3, 8, "alias"] content:[9, 55] lines[5] close:[55, 58, "```"]
+    Text[9, 55] chars:[9, 55, "graph … ->D;\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code Mermaid: 8) options(block-delimiters)
 ```mermaid-here
 graph TD;
   A-->B;
@@ -671,7 +823,7 @@ Document[0, 65]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Mermaid: 5) options(code-content-block)
+```````````````````````````````` example(Fenced Code Mermaid: 9) options(code-content-block)
 ```mermaid
 graph TD;
   A-->B;

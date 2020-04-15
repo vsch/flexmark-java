@@ -8,10 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.text.NumberFormat;
 import java.text.ParsePosition;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
@@ -300,7 +297,7 @@ public interface SequenceUtils {
      * resorting to content comparison only if length and hashCodes are equal
      *
      * @param thizz char sequence to test for equality
-     * @param o any character sequence
+     * @param o     any character sequence
      * @return true if character contents are equal
      */
     @Contract(pure = true, value = "_, null -> false")
@@ -1295,5 +1292,19 @@ public interface SequenceUtils {
         }
 
         return null;
+    }
+
+    static <T extends CharSequence> boolean containedBy(@NotNull T[] items, @NotNull CharSequence element) {
+        for (T item : items) {
+            if (equals(element, item)) return true;
+        }
+        return false;
+    }
+
+    static boolean containedBy(@NotNull Collection<? extends CharSequence> items, @NotNull CharSequence element) {
+        for (CharSequence item : items) {
+            if (equals(element, item)) return true;
+        }
+        return false;
     }
 }

@@ -3736,9 +3736,25 @@ Document[0, 22]
 ````````````````````````````````
 
 
+Change language class map
+
+```````````````````````````````` example(Fenced Code Options: 2) options(class-map-latex)
+```latex
+text
+```
+.
+<pre><code class="math">text
+</code></pre>
+.
+Document[0, 17]
+  FencedCodeBlock[0, 17] open:[0, 3, "```"] info:[3, 8, "latex"] content:[9, 14] lines[1] close:[14, 17, "```"]
+    Text[9, 14] chars:[9, 14, "text\n"]
+````````````````````````````````
+
+
 no info with custom class
 
-```````````````````````````````` example(Fenced Code Options: 2) options(no-language-class)
+```````````````````````````````` example(Fenced Code Options: 3) options(no-language-class)
 ```
 plain text
 ```
@@ -3754,7 +3770,7 @@ Document[0, 18]
 
 indented code with custom class
 
-```````````````````````````````` example(Fenced Code Options: 3) options(no-language-class)
+```````````````````````````````` example(Fenced Code Options: 4) options(no-language-class)
     plain text
 .
 <pre><code class="nohighlight">plain text
@@ -3767,7 +3783,7 @@ Document[0, 14]
 
 empty, no info
 
-```````````````````````````````` example Fenced Code Options: 4
+```````````````````````````````` example Fenced Code Options: 5
 ```
 
 ```
@@ -3783,7 +3799,7 @@ Document[0, 8]
 
 empty, no info, blank line follows
 
-```````````````````````````````` example Fenced Code Options: 5
+```````````````````````````````` example Fenced Code Options: 6
 ```
 
 ```
@@ -3800,7 +3816,7 @@ Document[0, 10]
 
 empty, info
 
-```````````````````````````````` example Fenced Code Options: 6
+```````````````````````````````` example Fenced Code Options: 7
 ```info
 
 ```
@@ -3816,7 +3832,7 @@ Document[0, 12]
 
 empty, info, blank line follows
 
-```````````````````````````````` example Fenced Code Options: 7
+```````````````````````````````` example Fenced Code Options: 8
 ```info
 
 ```
@@ -3833,7 +3849,7 @@ Document[0, 14]
 
 Unclosed Fenced code should take all input to end
 
-```````````````````````````````` example Fenced Code Options: 8
+```````````````````````````````` example Fenced Code Options: 9
 ```
 sample 
 unclosed
@@ -3864,7 +3880,7 @@ Document[0, 38]
 
 Wrap content in CodeBlock
 
-```````````````````````````````` example(Fenced Code Options: 9) options(code-content-block)
+```````````````````````````````` example(Fenced Code Options: 10) options(code-content-block)
 ```info
 code content
    indented code line
@@ -3882,7 +3898,7 @@ Document[0, 46]
 
 Wrap content in CodeBlock
 
-```````````````````````````````` example(Fenced Code Options: 10) options(code-content-block)
+```````````````````````````````` example(Fenced Code Options: 11) options(code-content-block)
     code content
        indented code line
 .
@@ -3898,7 +3914,7 @@ Document[0, 42]
 
 Option not to match closing fence characters to opening ones
 
-```````````````````````````````` example(Fenced Code Options: 11) options(unmatched-fence)
+```````````````````````````````` example(Fenced Code Options: 12) options(unmatched-fence)
 ```
 proper unmatched fenced code
 ~~~
@@ -3912,7 +3928,7 @@ Document[0, 36]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Fenced Code Options: 12) options(unmatched-fence)
+```````````````````````````````` example(Fenced Code Options: 13) options(unmatched-fence)
 ```
 proper unmatched fenced code
 ```

@@ -1,10 +1,12 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class HtmlRendererOptions {
@@ -31,6 +33,9 @@ public class HtmlRendererOptions {
     final public boolean renderHeaderId;
     final public boolean generateHeaderIds;
     final public @NotNull String languageClassPrefix;
+    final public @NotNull HashMap<String, String> languageClassMap;
+    final public @NotNull String languageDelimiters;
+    final public CharPredicate languageDelimiterSet;
     final public @NotNull String noLanguageClass;
     final public @NotNull String sourcePositionAttribute;
     final public @Nullable String inlineCodeSpliceClass;
@@ -70,6 +75,9 @@ public class HtmlRendererOptions {
         renderHeaderId = HtmlRenderer.RENDER_HEADER_ID.get(options);
         generateHeaderIds = HtmlRenderer.GENERATE_HEADER_ID.get(options);
         languageClassPrefix = HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX.get(options);
+        languageClassMap = HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_MAP.get(options);
+        languageDelimiters = HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS.get(options);
+        languageDelimiterSet = CharPredicate.anyOf(languageDelimiters);
         noLanguageClass = HtmlRenderer.FENCED_CODE_NO_LANGUAGE_CLASS.get(options);
         sourcePositionAttribute = HtmlRenderer.SOURCE_POSITION_ATTRIBUTE.get(options);
         sourcePositionParagraphLines = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES.get(options);

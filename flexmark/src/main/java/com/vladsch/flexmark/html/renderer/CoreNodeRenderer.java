@@ -143,11 +143,13 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.srcPosWithTrailingEOL(node.getChars()).withAttr().tag("pre").openPre();
 
         BasedSequence info = node.getInfo();
+        HtmlRendererOptions htmlOptions = context.getHtmlOptions();
         if (info.isNotNull() && !info.isBlank()) {
-            BasedSequence language = node.getInfoDelimitedByAny(CharPredicate.SPACE_TAB);
-            html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
+            String language = node.getInfoDelimitedByAny(htmlOptions.languageDelimiterSet).unescape();
+            String languageClass = htmlOptions.languageClassMap.getOrDefault(language, htmlOptions.languageClassPrefix + language);
+            html.attr("class", languageClass);
         } else {
-            String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();
+            String noLanguageClass = htmlOptions.noLanguageClass.trim();
             if (!noLanguageClass.isEmpty()) {
                 html.attr("class", noLanguageClass);
             }
@@ -161,7 +163,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
         html.tag("/code");
         html.tag("/pre").closePre();
-        html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
+        html.lineIf(htmlOptions.htmlBlockCloseTagEol);
     }
 
     @SuppressWarnings("MethodMayBeStatic")
