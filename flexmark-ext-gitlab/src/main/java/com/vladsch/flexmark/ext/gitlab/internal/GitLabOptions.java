@@ -32,12 +32,12 @@ public class GitLabOptions implements MutableDataSetter {
     final public HashSet<String> videoImageExtensionSet;
 
     /**
-     * @deprecated use {@link NodeRendererContext#getHtmlOptions()#languageDelimiters} instead
+     * @deprecated use {@link com.vladsch.flexmark.html.HtmlRendererOptions#languageDelimiters} instead
      */
     @Deprecated
     final public String blockInfoDelimiters;
     /**
-     * @deprecated use {@link NodeRendererContext#getHtmlOptions()#languageDelimiterSet} instead
+     * @deprecated use {@link com.vladsch.flexmark.html.HtmlRendererOptions#languageDelimiterSet} instead
      */
     @Deprecated
     final public CharPredicate blockInfoDelimiterSet;

@@ -7,7 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
-- [Next 0.61.10](#next-06110)
+- [0.61.10](#06110)
 - [0.61.8](#0618)
 - [0.61.6](#0616)
 - [0.61.4](#0614)
@@ -201,15 +201,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       extension add order
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
-          Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+                      Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 * [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
       just formatting. Need to keep track of whether format after typing or just format. Then
       caret position should only track but not force spaces behind it to be preserved. See
       failed tests in `com.vladsch.flexmark.ext.tables.MarkdownTableTest`
-* [ ] Fix: Add `TextContainer` node type to allow extracting text nodes without having to know
-      all of the node types. The text container should implement ability to append to
-      `StringBuilder` its text equivalent. A visitor needs to be provided so child nodes could
-      be visited.
 * Add: spec example language per section options and rendering in HTML.
   * [ ] Add: Tests for section name options
 * [ ] Fix: Document docx form controls in wiki.
@@ -218,8 +214,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       a table which is tedious to recover manually. Handle only tables with leading and trailing
       `|` for each line that was wrapped. Otherwise, it is impossible to tell where each line
       ends and another begins.
+* [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
+      `.,:;`
 
-## Next 0.61.10
+## 0.61.10
 
 * Add: `HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS`, default `" \t"`, to configure which chars
   terminate the language part of info string

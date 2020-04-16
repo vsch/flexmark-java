@@ -6,6 +6,7 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.61.10](#06110)
 - [0.61.8](#0618)
 - [0.61.6](#0616)
 - [0.61.4](#0614)
@@ -159,6 +160,15 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## 0.61.10
+
+* Add: `HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS`, default `" \t"`, to configure which chars
+  terminate the language part of info string
+* Add: `HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_MAP`, default `new HashMap()`, to provide
+  individual language to class mapping string. If language string is not in the map then
+  `HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX` + language will be used. Intended to allow
+  creating alias mapping and per-language class configuration.
 
 ## 0.61.8
 
