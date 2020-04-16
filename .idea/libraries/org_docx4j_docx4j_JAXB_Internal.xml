@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="org.docx4j:docx4j-JAXB-Internal" type="repository">
-    <properties maven-id="org.docx4j:docx4j-JAXB-Internal:8.1.2" />
+    <properties maven-id="org.docx4j:docx4j-JAXB-Internal:8.1.6" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-JAXB-Internal-8.1.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-core-8.1.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-8.1.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-pml-8.1.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-sml-8.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-JAXB-Internal-8.1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-core-8.1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-8.1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-pml-8.1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-sml-8.1.6.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jaxb-svg11-1.0.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mbassador-1.3.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jcl-over-slf4j-1.7.26.jar!/" />
@@ -16,8 +16,8 @@
       <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/httpclient-4.5.8.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/httpcore-4.4.11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.9.8.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.9.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.9.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.9.9.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jackson-annotations-2.9.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/xmlgraphics-commons-2.3.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/xalan-metainf-8.0.0.jar!/" />
@@ -29,16 +29,17 @@
       <root url="jar://$PROJECT_DIR$/lib/antlr-2.7.7.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/checker-qual-2.8.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/error_prone_annotations-2.3.3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/failureaccess-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.xml.bind-api-2.3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.activation-api-1.2.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.26.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-JAXB-Internal-8.1.2-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-core-8.1.2-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-8.1.2-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-pml-8.1.2-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-sml-8.1.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-JAXB-Internal-8.1.6-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-core-8.1.6-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-8.1.6-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-pml-8.1.6-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-sml-8.1.6-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jaxb-svg11-1.0.2-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mbassador-1.3.2-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jcl-over-slf4j-1.7.26-sources.jar!/" />
@@ -48,8 +49,8 @@
       <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/httpclient-4.5.8-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/httpcore-4.4.11-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.9.8-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.9.8-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.9.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.9.9-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/jackson-annotations-2.9.0-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/xmlgraphics-commons-2.3-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/xalan-metainf-8.0.0-sources.jar!/" />
@@ -60,7 +61,8 @@
       <root url="jar://$PROJECT_DIR$/lib/stringtemplate-3.2.1-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/checker-qual-2.8.1-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/error_prone_annotations-2.3.3-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/failureaccess-1.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.xml.bind-api-2.3.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.activation-api-1.2.1-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.26-sources.jar!/" />
     </SOURCES>
   </library>

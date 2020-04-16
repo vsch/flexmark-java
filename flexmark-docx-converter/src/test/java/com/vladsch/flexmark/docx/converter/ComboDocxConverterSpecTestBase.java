@@ -2,6 +2,7 @@ package com.vladsch.flexmark.docx.converter;
 
 import com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
+import com.vladsch.flexmark.docx.converter.util.HeadingBlockFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
@@ -160,7 +161,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         if (!DUMP_TEST_CASE_FILES) return;
         Document document = (Document) ((FlexmarkSpecExampleRenderer) exampleRenderer).getDocument();
 
-        SpecExample specExample = example;
+        SpecExample specExample = exampleRenderer.getExample();
         if (!specExample.isFullSpecExample() && specExample.getSection() != null && !specExample.getSection().isEmpty()) {
             // write it out to file, hard-coded for now                    IGNORE
             File file = new File(String.format("%s%s_%d.docx", getFileTestCaseDumpLocation(), specExample.getSection(), specExample.getExampleNumber()));
@@ -200,24 +201,23 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     final public void addFullSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
         if (!DUMP_ALL_TESTS_FILES) return;
 
-        boolean failed = !ignoredTestCase && !exampleRenderer.getHtml().equals(example.getHtml());
-
+        SpecExample example = exampleRenderer.getExample();
+        boolean failed = !ignoredTestCase && !exampleRenderer.getHtml().equals(html);
+        
         // add source information
         myDocxContext.createP(myDocxContext.getRenderingOptions().HEADING_3);
 
         if (ignoredTestCase) {
-            // does not match, need more stuff
-
+            // ignored
             myDocxContext.createColor().setVal("BB002F");
             myDocxContext.addBold();
             myDocxContext.addText("Ignored ");
         } else if (failed) {
-            // does not match, need more stuff
+            // does not match
             myDocxContext.createColor().setVal("BB002F");
             myDocxContext.addBold();
             myDocxContext.addText("Failed ");
         } else {
-            // does not match, need more stuff
             myDocxContext.createColor().setVal("008000");
             myDocxContext.addBold();
             myDocxContext.addText("Passed ");
@@ -231,6 +231,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         myDocxContext.addText(header.toString());
 
         if (optionsSet != null) {
+            myDocxContext.createR();
             myDocxContext.createHpsMeasure(28);
             myDocxContext.createColor().setVal("7B56A0");
             myDocxContext.addText((SpecReader.OPTIONS_STRING + "(") + optionsSet + ")");

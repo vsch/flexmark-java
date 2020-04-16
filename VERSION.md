@@ -6,7 +6,7 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
-- [Next 0.61.12](#next-06112)
+- [0.61.12](#06112)
 - [0.61.10](#06110)
 - [0.61.8](#0618)
 - [0.61.6](#0616)
@@ -162,8 +162,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-## Next 0.61.12
+## 0.61.12
 
+* Fix: update docx4j to 8.1.6
+* Fix: docx rendering tests for full spec example
 
 ## 0.61.10
 

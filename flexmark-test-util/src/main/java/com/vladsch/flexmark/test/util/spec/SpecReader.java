@@ -227,7 +227,7 @@ public class SpecReader {
         if (!lineAbsorbed) {
             if (lineProcessed) {
                 comment = null;
-            } else if (section != null) {
+            } else if (section != null && state == State.BEFORE) {
                 if (comment == null) comment = new StringBuilder();
                 comment.append(line).append('\n');
             }
