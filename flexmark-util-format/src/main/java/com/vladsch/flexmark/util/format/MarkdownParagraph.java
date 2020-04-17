@@ -254,13 +254,28 @@ public class MarkdownParagraph {
             );
 
             int wrappedAdjusted = 0;
+            int unwrappedAdjusted = 0;
+            int addSpacesBeforeEol = 0;
             // take char start but if at whitespace, use previous for validation
             if (WHITESPACE_NBSP.test(altUnwrapped.safeCharAt(anchorIndex + anchorDelta))) {
-                wrappedAdjusted = -1;
+                // NOTE: if after wrapping caret is still on whitespace or end of string, then we adjust unwrapped and wrapped index backwards
+                if (WHITESPACE_NBSP_OR_NUL.test(altWrapped.safeCharAt(wrappedIndex))) {
+                    unwrappedAdjusted = -1;
+                    wrappedAdjusted = -1;
+                } else {
+                    // NOTE: if the insert pos is on EOL (or whitespace) but after wrapping the leading whitespace is removed 
+                    //   then need to adjust only unwrapped and add space after tracked pos: 
+                    //   altUnwrapped anchor: `en updated|\nabandoned`
+                    //   altWrapped anchor: `n\nupdated |abandoned `
+                    //   wrapped anchor: `n\nupdated |abandoned `
+                    addSpacesBeforeEol = 1;
+                    unwrappedAdjusted = altUnwrapped.countLeading(WHITESPACE_NBSP, anchorIndex + anchorDelta);
+                }
             } else if (altUnwrapped.safeCharAt(anchorIndex + anchorDelta) == SequenceUtils.LS) {
                 // have line sep at anchor, if prev is not whitespace, use it for validation
                 if (!WHITESPACE_NBSP.test(altUnwrapped.safeCharAt(anchorIndex + anchorDelta - 1))) {
                     wrappedAdjusted--;
+                    unwrappedAdjusted--;
                 } else {
                     // use next char, it should not be whitespace
                     anchorDelta++;
@@ -272,15 +287,24 @@ public class MarkdownParagraph {
                 }
             }
 
-            char altUnwrappedCharAt = altUnwrapped.safeCharAt(anchorIndex + anchorDelta + wrappedAdjusted);
+            if (inTest) {
+                int useIndex = anchorIndex + anchorDelta + unwrappedAdjusted;
+                System.out.println(String.format("adjusted altWrapped anchor: `%s`", altWrapped.safeSubSequence(useIndex - 10, useIndex).toVisibleWhitespaceString() + "|" + altWrapped.safeSubSequence(useIndex, useIndex + 10).toVisibleWhitespaceString()));
+                int useWrapIndex = wrappedIndex + wrappedAdjusted;
+                System.out.println(String.format("adjusted wrapped anchor: `%s`", wrapped.safeSubSequence(useWrapIndex - 10, useWrapIndex).toVisibleWhitespaceString() + "|" + wrapped.safeSubSequence(useWrapIndex, useWrapIndex + 10).toVisibleWhitespaceString()));
+            }
+
+            char altUnwrappedCharAt = altUnwrapped.safeCharAt(anchorIndex + anchorDelta + unwrappedAdjusted);
             char wrappedCharAt = wrapped.safeCharAt(wrappedIndex + wrappedAdjusted);
 
             // NOTE: at this point space == &nbsp; since altUnwrapped can have &nbsp; instead of spaces
             assert SpaceMapper.areEquivalent(altUnwrappedCharAt, wrappedCharAt)
                     || WHITESPACE_NBSP.test(altUnwrappedCharAt) && WHITESPACE_NBSP.test(wrappedCharAt)
-                    : String.format("altUnwrapped.charAt: '%s' != wrapped.charAt: '%s' for width=%d, unwrapped: '%s', wrapped: '%s'"
+                    : String.format("altUnwrapped.charAt: '%s'(%d) != wrapped.charAt: '%s'(%d) for width=%d, unwrapped: '%s', wrapped: '%s'"
                     , SequenceUtils.toVisibleWhitespaceString(Character.toString(altUnwrappedCharAt))
+                    , (int) altUnwrappedCharAt
                     , SequenceUtils.toVisibleWhitespaceString(Character.toString(wrappedCharAt))
+                    , (int) wrappedCharAt
                     , width
                     , SequenceUtils.toVisibleWhitespaceString(altUnwrapped)
                     , SequenceUtils.toVisibleWhitespaceString(altWrapped)
@@ -313,7 +337,8 @@ public class MarkdownParagraph {
             }
 
             int addSpacesBefore = trackedOffset.isSpliced() ? 0 : Math.max(0, countedSpacesBefore - wrappedSpacesBefore);
-            int addSpacesAfter = Math.max(0, countedSpacesAfter - wrappedSpacesAfter);
+            // add an implicit space if was followed by EOL
+            int addSpacesAfter = Math.max(addSpacesBeforeEol, countedSpacesAfter - wrappedSpacesAfter);
 
             if (wrapped.isCharAt(wrappedIndex, CharPredicate.ANY_EOL_NUL)) {
                 // at end of line add only before, nothing after

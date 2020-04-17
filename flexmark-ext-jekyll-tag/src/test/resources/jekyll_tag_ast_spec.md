@@ -143,6 +143,16 @@ include
 ```````````````````````````````` example(Jekyll Tag: 11) options(includes)
 {% include test.html %}
 .
+.
+Document[0, 23]
+  JekyllTagBlock[23, 23]
+    JekyllTag[0, 23] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[11, 20, "test.html"] close:[21, 23, "%}"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Jekyll Tag: 12) options(includes, embed-includes)
+{% include test.html %}
+.
 <h1>Heading 1</h1>
 <p>test text</p>
 .
@@ -155,7 +165,7 @@ Document[0, 23]
 
 include
 
-```````````````````````````````` example(Jekyll Tag: 12) options(includes)
+```````````````````````````````` example(Jekyll Tag: 13) options(includes)
 {% include links.html %}
 .
 .

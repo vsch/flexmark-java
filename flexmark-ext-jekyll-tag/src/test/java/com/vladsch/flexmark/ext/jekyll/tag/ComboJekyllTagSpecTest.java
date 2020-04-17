@@ -32,6 +32,7 @@ public class ComboJekyllTagSpecTest extends RendererSpecTest {
                 "");
         content.put("links.html", "");
         optionsMap.put("includes", new MutableDataSet().set(JekyllTagExtension.INCLUDED_HTML, content));
+        optionsMap.put("embed-includes", new MutableDataSet().set(JekyllTagExtension.EMBED_INCLUDED_CONTENT, true));
     }
     public ComboJekyllTagSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

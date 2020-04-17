@@ -17,12 +17,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class JekyllTagNodeRenderer implements NodeRenderer {
-    final private boolean enabledRendering;
     final private boolean embedIncludes;
     final private Map<String, String> includeContent;
 
     public JekyllTagNodeRenderer(DataHolder options) {
-        enabledRendering = JekyllTagExtension.ENABLE_RENDERING.get(options);
         includeContent = JekyllTagExtension.INCLUDED_HTML.get(options);
         embedIncludes = JekyllTagExtension.EMBED_INCLUDED_CONTENT.get(options);
     }
@@ -38,13 +36,7 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
     }
 
     private void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) {
-        if (enabledRendering) html.text(node.getChars());
-        else if (node.getTag().equals("include") && includeContent != null && !node.getParameters().isEmpty()) {
-            String content = includeContent.get(node.getParameters().toString());
-            if (content != null && !content.isEmpty()) {
-                html.rawPre(content);
-            }
-        }
+        
     }
 
     private void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) {

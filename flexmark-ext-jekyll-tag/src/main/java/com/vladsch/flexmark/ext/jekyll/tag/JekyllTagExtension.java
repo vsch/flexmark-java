@@ -22,12 +22,18 @@ import java.util.*;
 public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     final public static DataKey<Boolean> ENABLE_INLINE_TAGS = new DataKey<>("ENABLE_INLINE_TAGS", true);
     final public static DataKey<Boolean> ENABLE_BLOCK_TAGS = new DataKey<>("ENABLE_BLOCK_TAGS", true);
-    final public static DataKey<Boolean> ENABLE_RENDERING = new DataKey<>("ENABLE_RENDERING", false);
     final public static DataKey<Boolean> LIST_INCLUDES_ONLY = new DataKey<>("LIST_INCLUDES_ONLY", true);
-    final public static DataKey<Boolean> EMBED_INCLUDED_CONTENT = new DataKey<>("EMBED_INCLUDED_CONTENT", true);
+    final public static DataKey<Boolean> EMBED_INCLUDED_CONTENT = new DataKey<>("EMBED_INCLUDED_CONTENT", false);
     final public static DataKey<List<LinkResolverFactory>> LINK_RESOLVER_FACTORIES = new DataKey<>("LINK_RESOLVER_FACTORIES", Collections.emptyList());
     final public static NullableDataKey<Map<String, String>> INCLUDED_HTML = new NullableDataKey<>("INCLUDED_HTML");
     final public static DataKey<List<JekyllTag>> TAG_LIST = new DataKey<>("TAG_LIST", ArrayList::new);
+
+    /**
+     * 2020/04/17
+     * @deprecated not used nor needed
+     */
+    @Deprecated
+    final public static DataKey<Boolean> ENABLE_RENDERING = new DataKey<>("ENABLE_RENDERING", false);
 
     private JekyllTagExtension() {
     }

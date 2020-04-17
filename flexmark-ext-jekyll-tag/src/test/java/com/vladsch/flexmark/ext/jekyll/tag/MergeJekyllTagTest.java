@@ -29,6 +29,7 @@ public class MergeJekyllTagTest {
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             .set(Formatter.MAX_TRAILING_BLANK_LINES, 0)
             .set(JekyllTagExtension.INCLUDED_HTML, content)
+            .set(JekyllTagExtension.EMBED_INCLUDED_CONTENT, true)
             ;
 
     private static final DataHolder NON_EMBEDDING_OPTIONS = new MutableDataSet(OPTIONS)

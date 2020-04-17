@@ -304,7 +304,7 @@ would be automatically copied.
 ````````````````````````````````
 
 
-```````````````````````````````` example(Wrap: 13) options(margin[66], restore-tracked-spaces)
+```````````````````````````````` example(Wrap: 13) options(margin[66], restore-tracked-spaces, running-tests)
   ⦙ Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they
 ⟦    ⟧would be treated equivalent  to task item marker prefix. That way  
 ⟦    ⟧standard: `Add: `, `Fix: `, `Break: ` and `Deprecate: ` prefixes would be automatically copied.         
