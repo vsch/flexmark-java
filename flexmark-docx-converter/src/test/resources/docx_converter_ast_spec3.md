@@ -5073,3 +5073,107 @@ Plain text <<<macro2>>>
 ````````````````````````````````
 
 
+## File
+
+```````````````````````````````` example File: 1
+{% include incl_file.md %}
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="relative-heading-some-bold-1"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading1"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Relative Heading </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t>some bold</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> 1</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example File: 2
+{% include /incl_file.md %}
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="absolute-heading-some-bold-2"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading1"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Absolute Heading </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t>some bold</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> 2</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example File: 3
+{% include incl_file.md %}
+
+{% include /incl_file.md %}
+.
+<w:body>
+    <w:bookmarkStart w:id="1" w:name="relative-heading-some-bold-1"/>
+    <w:bookmarkEnd w:id="1"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading1"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Relative Heading </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t>some bold</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> 1</w:t>
+        </w:r>
+    </w:p>
+    <w:bookmarkStart w:id="2" w:name="absolute-heading-some-bold-2"/>
+    <w:bookmarkEnd w:id="2"/>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Heading1"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Absolute Heading </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t>some bold</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> 2</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+

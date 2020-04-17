@@ -166,6 +166,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: update docx4j to 8.1.6
 * Fix: docx rendering tests for full spec example
+* Add: `JekyllTagExtension.EMBED_INCLUDED_CONTENT`, default `true`. Set to `false` to prevent
+  included content from being included.
 
 ## 0.61.10
 
@@ -240,7 +242,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: `ScopedDataSet.getAll()` and `ScopedDataSet.getKeys()` would not return keys from parent
   scope.
-* Fix: [#396, DocumentParser stops reading too early resulting in the document being cut off] 
+* Fix: [#396, DocumentParser stops reading too early resulting in the document being cut off]
 
 ## 0.61.0
 
@@ -1975,6 +1977,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#381, StackOverflowError with long base64 image and LINKS\_ALLOW\_MATCHED\_PARENTHESES disabled]: https://github.com/vsch/flexmark-java/issues/381
 [#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
 [#384, Markdown parser produces invalid HTML]: https://github.com/vsch/flexmark-java/issues/384
+[#387, JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/pull/387
+[#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]: https://github.com/vsch/flexmark-java/pull/391
+[#396, DocumentParser stops reading too early resulting in the document being cut off]: https://github.com/vsch/flexmark-java/issues/396
+[#397, PR: Add base64 image support with docx rendering]: https://github.com/vsch/flexmark-java/pull/397
+[@Xaelis]: https://github.com/Xaelis
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
@@ -1985,10 +1992,3 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 
-
-[#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]: https://github.com/vsch/flexmark-java/pull/391
-[#387, JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/pull/387
-[#396, DocumentParser stops reading too early resulting in the document being cut off]: https://github.com/vsch/flexmark-java/issues/396
-
-[@Xaelis]: https://github.com/Xaelis
-[#397, PR: Add base64 image support with docx rendering]: https://github.com/vsch/flexmark-java/pull/397

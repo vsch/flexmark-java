@@ -6,6 +6,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         ComboJekyllTagSpecTest.class,
+        ComboJekyllTagFormatterSpecTest.class,
+        MergeJekyllTagTest.class,
 })
 public class ExtJekyllTagTestSuite {
 }

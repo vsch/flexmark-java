@@ -2,7 +2,6 @@ package com.vladsch.flexmark.docx.converter;
 
 import com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver;
 import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
-import com.vladsch.flexmark.docx.converter.util.HeadingBlockFormatProvider;
 import com.vladsch.flexmark.docx.converter.util.XmlDocxSorter;
 import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
@@ -117,13 +116,12 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("form-controls-input", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "input"));
         optionsMap.put("form-controls-form", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "form"));
     }
-    
     private static String removeFileUri(String uri) {
         if (uri.startsWith("file://")) return uri.substring("file://".length());
         if (uri.startsWith("file:/")) return uri.substring("file:/".length());
         return uri;
     }
-    
+
     protected static DataHolder getDefaultOptions(ResourceLocation resourceLocation) {
         String fileUrl = resourceLocation.getFileDirectoryUrl();
         String filePath = removeFileUri(fileUrl);
@@ -203,7 +201,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
 
         SpecExample example = exampleRenderer.getExample();
         boolean failed = !ignoredTestCase && !exampleRenderer.getHtml().equals(html);
-        
+
         // add source information
         myDocxContext.createP(myDocxContext.getRenderingOptions().HEADING_3);
 

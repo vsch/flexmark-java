@@ -70,7 +70,9 @@ public class ComboFormatterTestSpecTest extends FormatterSpecTest {
             ))
             .set(Parser.BLANK_LINES_IN_AST, true)
             .set(SimTocExtension.BLANK_LINE_SPACER, true)
-            .set(Parser.HEADING_NO_ATX_SPACE, true);
+            .set(Parser.HEADING_NO_ATX_SPACE, true)
+            .set(JekyllTagExtension.EMBED_INCLUDED_CONTENT, false)
+            ;
 
     final private static Map<String, DataHolder> optionsMap = new HashMap<>();
     static {

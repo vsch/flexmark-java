@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,11 +18,13 @@ import java.util.Set;
 
 public class JekyllTagNodeRenderer implements NodeRenderer {
     final private boolean enabledRendering;
+    final private boolean embedIncludes;
     final private Map<String, String> includeContent;
 
     public JekyllTagNodeRenderer(DataHolder options) {
         enabledRendering = JekyllTagExtension.ENABLE_RENDERING.get(options);
         includeContent = JekyllTagExtension.INCLUDED_HTML.get(options);
+        embedIncludes = JekyllTagExtension.EMBED_INCLUDED_CONTENT.get(options);
     }
 
     @Override
@@ -45,7 +48,25 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
     }
 
     private void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) {
-        context.renderChildren(node);
+        if (embedIncludes) {
+            // remove jekyll tag node and just leave the included content
+            Node child = node.getFirstChild();
+
+            if (child != null) child = child.getNextAnyNot(JekyllTag.class);
+
+            while (child != null) {
+                Node next = child.getNextAnyNot(JekyllTag.class);
+                context.render(child);
+                child = next;
+            }
+        } else {
+            Node child = node.getFirstChild();
+            while (child != null) {
+                Node next = child.getNextAny(JekyllTag.class);
+                context.render(child);
+                child = next;
+            }
+        }
     }
 
     public static class Factory implements NodeRendererFactory {

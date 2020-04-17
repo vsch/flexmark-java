@@ -22,6 +22,8 @@ import com.vladsch.flexmark.ext.footnotes.MergeFootnotesTest;
 import com.vladsch.flexmark.ext.gfm.tasklist.ComboGfmTaskListFormatterSpecTest;
 import com.vladsch.flexmark.ext.gitlab.ComboGitLabFormatterSpecTest;
 import com.vladsch.flexmark.ext.jekyll.front.matter.ComboJekyllFrontMatterFormatterSpecTest;
+import com.vladsch.flexmark.ext.jekyll.tag.ComboJekyllTagFormatterSpecTest;
+import com.vladsch.flexmark.ext.jekyll.tag.MergeJekyllTagTest;
 import com.vladsch.flexmark.ext.macros.ComboMacrosFormatterSpecTest;
 import com.vladsch.flexmark.ext.macros.ComboMacrosTranslationFormatterSpecTest;
 import com.vladsch.flexmark.ext.macros.MergeMacrosTest;
@@ -59,6 +61,7 @@ import org.junit.runners.Suite;
         ComboGfmTaskListFormatterSpecTest.class,
         ComboGitLabFormatterSpecTest.class,
         ComboJekyllFrontMatterFormatterSpecTest.class,
+        ComboJekyllTagFormatterSpecTest.class,
         ComboMacrosFormatterSpecTest.class,
         ComboMacrosTranslationFormatterSpecTest.class,
         ComboParagraphFormatterSpecTest.class,
@@ -73,11 +76,12 @@ import org.junit.runners.Suite;
         CoreFormatterTestSuite.class,
         MergeAbbreviationsTest.class,
         MergeAttributesTest.class,
+        MergeAutoLinkTest.class,
         MergeEnumeratedReferenceTest.class,
         MergeFootnotesTest.class,
-        MergeMacrosTest.class,
         MergeFormatterCoreTest.class,
-        MergeAutoLinkTest.class,
+        MergeJekyllTagTest.class,
+        MergeMacrosTest.class,
 })
 public class FlexmarkFormatterTestSuite {
 }

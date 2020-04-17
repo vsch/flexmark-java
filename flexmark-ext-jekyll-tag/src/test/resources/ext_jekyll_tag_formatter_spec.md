@@ -1,8 +1,8 @@
 ---
-title: JekyllTag Extension Spec
-author:
-version:
-date: '2016-06-06'
+title: Jekyll Tag Extension Formatter Spec
+author: Vladimir Schneider
+version: 1.0
+date: '2018-09-07'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
@@ -12,24 +12,11 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts jekyll tag text to JekyllTag nodes.
 
-no empty tags
 
 ```````````````````````````````` example Jekyll Tag: 1
-{% %}
-.
-<p>{% %}</p>
-.
-Document[0, 5]
-  Paragraph[0, 5]
-    Text[0, 5] chars:[0, 5, "{% %}"]
-````````````````````````````````
-
-
-some tags
-
-```````````````````````````````` example Jekyll Tag: 2
 {% tag %}
 .
+{% tag %}
 .
 Document[0, 9]
   JekyllTagBlock[9, 9]
@@ -39,9 +26,10 @@ Document[0, 9]
 
 some tags
 
-```````````````````````````````` example Jekyll Tag: 3
+```````````````````````````````` example Jekyll Tag: 2
 {% tag paramters %}
 .
+{% tag paramters %}
 .
 Document[0, 19]
   JekyllTagBlock[19, 19]
@@ -51,10 +39,10 @@ Document[0, 19]
 
 inline tags
 
-```````````````````````````````` example Jekyll Tag: 4
+```````````````````````````````` example Jekyll Tag: 3
  {% tag %}
 .
-<p></p>
+ {% tag %}
 .
 Document[0, 10]
   Paragraph[1, 10]
@@ -64,10 +52,10 @@ Document[0, 10]
 
 inline tags
 
-```````````````````````````````` example Jekyll Tag: 5
+```````````````````````````````` example Jekyll Tag: 4
  {% tag paramters %}
 .
-<p></p>
+ {% tag paramters %}
 .
 Document[0, 20]
   Paragraph[1, 20]
@@ -77,10 +65,10 @@ Document[0, 20]
 
 no blocks
 
-```````````````````````````````` example(Jekyll Tag: 6) options(no-blocks)
+```````````````````````````````` example(Jekyll Tag: 5) options(no-blocks)
 {% tag %}
 .
-<p></p>
+{% tag %}
 .
 Document[0, 9]
   Paragraph[0, 9]
@@ -90,10 +78,10 @@ Document[0, 9]
 
 no blocks no inlines
 
-```````````````````````````````` example(Jekyll Tag: 7) options(no-blocks, no-inlines)
+```````````````````````````````` example(Jekyll Tag: 6) options(no-blocks, no-inlines)
 {% tag %}
 .
-<p>{% tag %}</p>
+{% tag %}
 .
 Document[0, 9]
   Paragraph[0, 9]
@@ -103,10 +91,10 @@ Document[0, 9]
 
 no inlines
 
-```````````````````````````````` example(Jekyll Tag: 8) options(no-inlines)
+```````````````````````````````` example(Jekyll Tag: 7) options(no-inlines)
  {% tag %}
 .
-<p>{% tag %}</p>
+{% tag %}
 .
 Document[0, 10]
   Paragraph[1, 10]
@@ -116,9 +104,10 @@ Document[0, 10]
 
 include
 
-```````````````````````````````` example Jekyll Tag: 9
+```````````````````````````````` example Jekyll Tag: 8
 {% include  %}
 .
+{% include  %}
 .
 Document[0, 14]
   JekyllTagBlock[14, 14]
@@ -128,9 +117,10 @@ Document[0, 14]
 
 include
 
-```````````````````````````````` example(Jekyll Tag: 10) options(dummy-identifier)
+```````````````````````````````` example(Jekyll Tag: 9) options(dummy-identifier)
 {% include ⎮ %}
 .
+{% include ⎮ %}
 .
 Document[0, 15]
   JekyllTagBlock[15, 15]
@@ -140,11 +130,12 @@ Document[0, 15]
 
 include
 
-```````````````````````````````` example(Jekyll Tag: 11) options(includes)
+```````````````````````````````` example(Jekyll Tag: 10) options(includes, embed-includes)
 {% include test.html %}
 .
 <h1>Heading 1</h1>
 <p>test text</p>
+
 .
 Document[0, 23]
   JekyllTagBlock[23, 23]
@@ -155,13 +146,14 @@ Document[0, 23]
 
 include
 
-```````````````````````````````` example(Jekyll Tag: 12) options(includes)
-{% include links.html %}
+```````````````````````````````` example(Jekyll Tag: 11) options(includes)
+{% include test.html %}
 .
+{% include test.html %}
 .
-Document[0, 24]
-  JekyllTagBlock[24, 24]
-    JekyllTag[0, 24] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[11, 21, "links.html"] close:[22, 24, "%}"]
+Document[0, 23]
+  JekyllTagBlock[23, 23]
+    JekyllTag[0, 23] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[11, 20, "test.html"] close:[21, 23, "%}"]
 ````````````````````````````````
 
 

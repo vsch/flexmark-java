@@ -35,6 +35,8 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
     final boolean isIncluding = false;
     final Document document;
     final LinkResolverBasicContext context;
+    final private boolean embedIncludedContent;
+    final private Map<String, String> includedHtml;
 
     public IncludeNodePostProcessor(@NotNull Document document) {
         this.document = document;
@@ -51,11 +53,12 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
             }
         };
         List<LinkResolverFactory> resolverFactories = DependencyResolver.resolveFlatDependencies(JekyllTagExtension.LINK_RESOLVER_FACTORIES.get(document), null, null);
-        assert !resolverFactories.isEmpty();
         linkResolvers = new ArrayList<>(resolverFactories.size());
         for (LinkResolverFactory resolverFactory : resolverFactories) {
             linkResolvers.add(resolverFactory.apply(context));
         }
+        this.embedIncludedContent = JekyllTagExtension.EMBED_INCLUDED_CONTENT.get(document);
+        this.includedHtml = JekyllTagExtension.INCLUDED_HTML.get(document);
     }
 
     @Override
@@ -65,51 +68,60 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
                 if (tag instanceof JekyllTag) {
                     JekyllTag jekyllTag = (JekyllTag) tag;
                     //noinspection EqualsBetweenInconvertibleTypes
-                    if (jekyllTag.getTag().equals("include")) {
+                    if (embedIncludedContent && jekyllTag.getTag().equals("include")) {
                         // see if can find file
                         BasedSequence parameters = jekyllTag.getParameters();
 
                         String rawUrl = parameters.unescape();
-                        ResolvedLink resolvedLink = resolvedLinks.get(rawUrl);
+                        String fileContent = null;
 
-                        if (resolvedLink == null) {
-                            resolvedLink = new ResolvedLink(LinkType.LINK, rawUrl);
-                            for (LinkResolver linkResolver : linkResolvers) {
-                                resolvedLink = linkResolver.resolveLink(node, context, resolvedLink);
-                                if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
+                        if (includedHtml != null && includedHtml.containsKey(rawUrl)) {
+                            fileContent = includedHtml.get(rawUrl);
+                        } else {
+                            ResolvedLink resolvedLink = resolvedLinks.get(rawUrl);
+
+                            if (resolvedLink == null) {
+                                resolvedLink = new ResolvedLink(LinkType.LINK, rawUrl);
+                                for (LinkResolver linkResolver : linkResolvers) {
+                                    resolvedLink = linkResolver.resolveLink(node, context, resolvedLink);
+                                    if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
+                                }
+
+                                resolvedLinks.put(rawUrl, resolvedLink);
                             }
 
-                            resolvedLinks.put(rawUrl, resolvedLink);
-                        }
-
-                        if (resolvedLink.getStatus() == LinkStatus.VALID) {
-                            // have the file 
-                            String url = resolvedLink.getUrl();
-                            if (url.startsWith("file://")) {
-                                File includedFile = new File(url.substring("file://".length()));
-                                if (includedFile.isFile() && includedFile.exists()) {
-                                    // need to read and parse the file
-                                    String fileContent = FileUtil.getFileContent(includedFile);
-                                    includedDocuments.put((JekyllTagBlock) node, fileContent);
-
-                                    Document includedDoc = parser.parse(fileContent);
-                                    parser.transferReferences(document, includedDoc, null);
-
-                                    if (includedDoc.contains(Parser.REFERENCES)) {
-                                        // NOTE: if included doc has reference definitions then we need to re-evaluate ones which are missing
-                                        document.set(HtmlRenderer.RECHECK_UNDEFINED_REFERENCES, true);
-                                    }
-
-                                    // insert children of included documents after jekyll tag node
-                                    Node child = includedDoc.getFirstChild();
-                                    while (child != null) {
-                                        Node next = child.getNext();
-                                        node.appendChild(child);
-                                        state.nodeAddedWithDescendants(child);
-
-                                        child = next;
+                            if (resolvedLink.getStatus() == LinkStatus.VALID) {
+                                // have the file 
+                                String url = resolvedLink.getUrl();
+                                if (url.startsWith("file://")) {
+                                    File includedFile = new File(url.substring("file://".length()));
+                                    if (includedFile.isFile() && includedFile.exists()) {
+                                        // need to read and parse the file
+                                        fileContent = FileUtil.getFileContent(includedFile);
                                     }
                                 }
+                            }
+                        }
+
+                        if (fileContent != null && !fileContent.isEmpty()) {
+                            includedDocuments.put((JekyllTagBlock) node, fileContent);
+
+                            Document includedDoc = parser.parse(fileContent);
+                            parser.transferReferences(document, includedDoc, null);
+
+                            if (includedDoc.contains(Parser.REFERENCES)) {
+                                // NOTE: if included doc has reference definitions then we need to re-evaluate ones which are missing
+                                document.set(HtmlRenderer.RECHECK_UNDEFINED_REFERENCES, true);
+                            }
+
+                            // insert children of included documents after jekyll tag node
+                            Node child = includedDoc.getFirstChild();
+                            while (child != null) {
+                                Node next = child.getNext();
+                                node.appendChild(child);
+                                state.nodeAddedWithDescendants(child);
+
+                                child = next;
                             }
                         }
                     }
