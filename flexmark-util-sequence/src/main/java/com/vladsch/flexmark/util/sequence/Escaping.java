@@ -332,6 +332,23 @@ public class Escaping {
     }
 
     /**
+     * Replace entities and backslash escapes with literal characters.
+     *
+     * @param s          based sequence to un-escape
+     * @param textMapper replaced text mapper to update for the changed text
+     * @return un-escaped sequence
+     */
+    @NotNull
+    public static BasedSequence unescapeHtml(@NotNull BasedSequence s, int startOffset, int endOffset, @NotNull ReplacedTextMapper textMapper) {
+        int indexOfAny = s.indexOf('&', startOffset, endOffset);
+        if (indexOfAny != -1) {
+            return replaceAll(ENTITY_ONLY, s, startOffset, endOffset, ENTITY_REPLACER, textMapper);
+        } else {
+            return s;
+        }
+    }
+
+    /**
      * Normalize eol: embedded \r and \r\n are converted to \n
      * <p>
      * Append EOL sequence if sequence does not already end in EOL
@@ -478,7 +495,7 @@ public class Escaping {
     }
 
     /**
-     * @param s string to encode
+     * @param s          string to encode
      * @param textMapper text mapper to update for the replaced text
      * @return encoded string
      */
@@ -497,7 +514,7 @@ public class Escaping {
     }
 
     /**
-     * @param s string to encode
+     * @param s          string to encode
      * @param textMapper text mapper to update for the replaced text
      * @return encoded string
      */
@@ -646,7 +663,14 @@ public class Escaping {
 
     @NotNull
     private static BasedSequence replaceAll(Pattern p, @NotNull BasedSequence s, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
+        return replaceAll(p, s, 0, s.length(), replacer, textMapper);
+    }
+
+    @NotNull
+    private static BasedSequence replaceAll(Pattern p, @NotNull BasedSequence s, int startOffset, int endOffset, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
         Matcher matcher = p.matcher(s);
+        matcher.region(startOffset, endOffset);
+        matcher.useTransparentBounds(false);
 
         if (textMapper.isModified()) {
             textMapper.startNestedReplacement(s);
@@ -664,7 +688,7 @@ public class Escaping {
             lastEnd = matcher.end();
         } while (matcher.find());
 
-        if (lastEnd != s.length()) {
+        if (lastEnd < s.length()) {
             textMapper.addOriginalText(lastEnd, s.length());
         }
 

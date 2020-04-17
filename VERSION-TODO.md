@@ -227,6 +227,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: tracked paragraph wrapping when inserting space before EOL on a line when the word before
   caret will be wrapped to the next line. ie. the EOL will be removed. 
 * Deprecate: `JekyllTagExtension.ENABLE_RENDERING`, not used nor needed.
+* Fix: [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)] 
 
 ## 0.61.10
 
@@ -2403,4 +2404,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 <!-- @IGNORE PREVIOUS: link -->
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
+[#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]: https://github.com/vsch/flexmark-java/issues/398
+
 

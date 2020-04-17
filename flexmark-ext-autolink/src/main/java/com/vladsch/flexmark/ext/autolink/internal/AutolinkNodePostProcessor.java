@@ -6,10 +6,8 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.ast.*;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.Escaping;
-import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.sequence.*;
 import org.jetbrains.annotations.NotNull;
 import org.nibor.autolink.LinkExtractor;
 import org.nibor.autolink.LinkSpan;
@@ -80,17 +78,21 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         BasedSequence original = combined;
         Node firstNode = node;
         Node lastNode = node;
+        ArrayList<Range> htmlEntities = new ArrayList<>();
 
-        if (node.getNext() instanceof TypographicText) {
+        if (node.getNext() instanceof TypographicText || node.getNext() instanceof HtmlEntity) {
             // we absorb this, just in case it is part of the link
             if (node.getNext().getChars().isContinuationOf(combined)) {
                 Node typoGraphic = node.getNext();
                 ArrayList<BasedSequence> combinedSequences = new ArrayList<>();
                 combinedSequences.add(combined);
 
-                while (typoGraphic instanceof TypographicText || typoGraphic instanceof Text) {
+                while (typoGraphic instanceof TypographicText || typoGraphic instanceof HtmlEntity || typoGraphic instanceof Text) {
                     if (!typoGraphic.getChars().isContinuationOf(combined) || typoGraphic.getChars().startsWith(" ") || combined.endsWith(" ")) break;
                     combined = typoGraphic.getChars();
+                    if (typoGraphic instanceof HtmlEntity) {
+                        htmlEntities.add(Range.of(combined.getStartOffset(), combined.getEndOffset()));
+                    }
                     combinedSequences.add(combined);
                     lastNode = typoGraphic;
                     typoGraphic = typoGraphic.getNext();
@@ -101,7 +103,21 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         }
 
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
-        BasedSequence literal = Escaping.unescape(original, textMapper);
+
+        BasedSequence unescapedHtml = original;
+        
+        if (!htmlEntities.isEmpty()) {
+            // need to replace all HTML entities in html entity regions
+            int lastOffset = 0;
+            
+            for (Range range : htmlEntities) {
+                if (lastOffset < range.getStart()) {
+                    unescapedHtml = Escaping.unescapeHtml(original, range.getStart(), range.getEnd(), textMapper);
+                } 
+            }
+        }
+        
+        BasedSequence literal = Escaping.unescape(unescapedHtml, textMapper);
 
         if (intellijDummyIdentifier) {
             literal = Escaping.removeAll(literal, "\u001f", textMapper);

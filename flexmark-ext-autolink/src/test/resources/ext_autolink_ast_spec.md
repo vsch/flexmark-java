@@ -309,11 +309,13 @@ Document[0, 34]
 ````````````````````````````````
 
 
-## Issue 178
+## Issues
+
+### 178
 
 Issue #178, AutolinkExtension does not add http:// to simple urls starting with www.
 
-```````````````````````````````` example Issue 178: 1
+```````````````````````````````` example Issues - 178: 1
 auto link www.example.com
 .
 <p>auto link <a href="http://www.example.com">www.example.com</a></p>
@@ -327,11 +329,11 @@ Document[0, 25]
 ````````````````````````````````
 
 
-## Issue 217
+### 217
 
 Issue #217, Escape an Autolink
 
-```````````````````````````````` example(Issue 217: 1) options(ignore-google)
+```````````````````````````````` example(Issues - 217: 1) options(ignore-google)
 auto link www.google.com
 .
 <p>auto link www.google.com</p>
@@ -342,11 +344,11 @@ Document[0, 24]
 ````````````````````````````````
 
 
-## Issue 265
+### 265
 
 Issue #265, Autolink extension converts autolinks in inline code nodes in code
 
-```````````````````````````````` example Issue 265: 1
+```````````````````````````````` example Issues - 265: 1
 `http://..../wiki`
 .
 <p><code>http://..../wiki</code></p>
@@ -358,11 +360,11 @@ Document[0, 18]
 ````````````````````````````````
 
 
-## Issue 300
+### 300
 
 Issue #300, Typography extension breaks some auto links
 
-```````````````````````````````` example Issue 300: 1
+```````````````````````````````` example Issues - 300: 1
 https://youtu.be/L1--OW4j0Pw
 .
 <p><a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a></p>
@@ -375,7 +377,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 300: 2) options(typographic-ext)
+```````````````````````````````` example(Issues - 300: 2) options(typographic-ext)
 https://youtu.be/L1--OW4j0Pw
 .
 <p><a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a></p>
@@ -388,7 +390,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 300: 3) options(typographic-ext)
+```````````````````````````````` example(Issues - 300: 3) options(typographic-ext)
 Embedded in text https://youtu.be/L1--OW4j0Pw -- with typographic following
 .
 <p>Embedded in text <a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a> &ndash; with typographic following</p>
@@ -405,7 +407,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 300: 4) options(typographic-ext)
+```````````````````````````````` example(Issues - 300: 4) options(typographic-ext)
 Embedded in text https://youtu.be/L1--OW4j0Pw more text--with typographic following
 .
 <p>Embedded in text <a href="https://youtu.be/L1--OW4j0Pw">https://youtu.be/L1--OW4j0Pw</a> more text&ndash;with typographic following</p>
@@ -422,7 +424,7 @@ Document[0, 83]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue 300: 5) options(typographic-ext)
+```````````````````````````````` example(Issues - 300: 5) options(typographic-ext)
 Embedded in text with--typographic prefix https://youtu.be/L1--OW4j0Pw more text--with
 typographic following
 .
@@ -445,11 +447,28 @@ Document[0, 108]
 ````````````````````````````````
 
 
-## Issue xxx-1
+### 398
+
+Issue [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]
+
+```````````````````````````````` example Issues - 398: 1
+https://example.com/?first=hi&amp;second=hello
+.
+<p><a href="https://example.com/?first=hi&amp;second=hello">https://example.com/?first=hi&amp;amp;second=hello</a></p>
+.
+Document[0, 46]
+  Paragraph[0, 46]
+    TextBase[0, 46] chars:[0, 46, "https … hello"]
+      AutoLink[0, 46] text:[0, 46, "https://example.com/?first=hi&amp;second=hello"] pageRef:[0, 46, "https://example.com/?first=hi&amp;second=hello"]
+        Text[0, 46] chars:[0, 46, "https … hello"]
+````````````````````````````````
+
+
+### xxx-1
 
 Issue, Autolink extension does not convert URI prefix without following text
 
-```````````````````````````````` example Issue xxx-1: 1
+```````````````````````````````` example Issues - xxx-1: 1
 http://
 .
 <p><a href="http://">http://</a></p>
@@ -462,7 +481,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 2
+```````````````````````````````` example Issues - xxx-1: 2
 http://abc http://
 .
 <p><a href="http://abc">http://abc</a> <a href="http://">http://</a></p>
@@ -478,7 +497,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 3
+```````````````````````````````` example Issues - xxx-1: 3
 test http://
 .
 <p>test <a href="http://">http://</a></p>
@@ -492,7 +511,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 4
+```````````````````````````````` example Issues - xxx-1: 4
 test http://   
 .
 <p>test <a href="http://">http://</a></p>
@@ -506,7 +525,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 5
+```````````````````````````````` example Issues - xxx-1: 5
 test custom.protocol-1+2://   
 .
 <p>test <a href="custom.protocol-1+2://">custom.protocol-1+2://</a></p>
@@ -520,7 +539,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue xxx-1: 6
+```````````````````````````````` example Issues - xxx-1: 6
 test custom.protocol-1+2://abc
 .
 <p>test <a href="custom.protocol-1+2://abc">custom.protocol-1+2://abc</a></p>
@@ -534,11 +553,11 @@ Document[0, 30]
 ````````````````````````````````
 
 
-## Issue xxx.2
+### xxx.2
 
 Issue of autolinks not parsed after built in auto link
 
-```````````````````````````````` example Issue xxx.2: 1
+```````````````````````````````` example Issues - xxx.2: 1
 <http://test.com> www.vladsch.com
 .
 <p><a href="http://test.com">http://test.com</a> <a href="http://www.vladsch.com">www.vladsch.com</a></p>
@@ -553,11 +572,11 @@ Document[0, 33]
 ````````````````````````````````
 
 
-## Issue xxx.3
+### xxx.3
 
 Issue of autolinks not parsed after built in auto link
 
-```````````````````````````````` example Issue xxx.3: 1
+```````````````````````````````` example Issues - xxx.3: 1
 <http://foo.bar/baz bim>
 .
 <p>&lt;<a href="http://foo.bar/baz">http://foo.bar/baz</a> bim&gt;</p>
@@ -571,4 +590,6 @@ Document[0, 24]
       Text[19, 24] chars:[19, 24, " bim>"]
 ````````````````````````````````
 
+
+[#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]: https://github.com/vsch/flexmark-java/issues/398
 

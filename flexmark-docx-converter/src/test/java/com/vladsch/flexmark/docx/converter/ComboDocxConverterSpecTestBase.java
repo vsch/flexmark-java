@@ -96,6 +96,7 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
             .set(SharedDataKeys.RUNNING_TESTS, SKIP_IGNORED_TESTS)
             .set(JekyllTagExtension.ENABLE_INLINE_TAGS, false)
             .set(JekyllTagExtension.LINK_RESOLVER_FACTORIES, Collections.singletonList(new DocxLinkResolver.Factory()))
+            .set(JekyllTagExtension.EMBED_INCLUDED_CONTENT, true)
             .set(DocxRenderer.SUPPRESS_HTML, true);
 
     private static HashMap<String, DataHolder> optionsMap = new HashMap<>();
