@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * @deprecated use {@link DependencyResolver#resolveFlatDependencies(List, Function, Function)}
+ * @deprecated use {@link DependencyResolver#resolveFlatDependencies(List, Function, Function)} use null for functions if no need for sort or class extractor
  */
 @Deprecated
 public class FlatDependencyHandler<T extends Dependent> extends DependencyHandler<T, FlatDependencyStage<T>, FlatDependencies<T>> {

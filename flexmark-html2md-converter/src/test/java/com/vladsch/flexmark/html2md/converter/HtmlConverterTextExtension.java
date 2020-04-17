@@ -2,6 +2,7 @@ package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Node;
 
@@ -13,12 +14,12 @@ public class HtmlConverterTextExtension implements FlexmarkHtmlConverter.HtmlCon
     }
 
     @Override
-    public void rendererOptions(MutableDataHolder options) {
+    public void rendererOptions(@NotNull MutableDataHolder options) {
 
     }
 
     @Override
-    public void extend(FlexmarkHtmlConverter.Builder builder) {
+    public void extend(FlexmarkHtmlConverter.@NotNull Builder builder) {
         builder.linkResolverFactory(new CustomLinkResolver.Factory());
     }
 

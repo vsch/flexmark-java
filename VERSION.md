@@ -166,8 +166,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: update docx4j to 8.1.6
 * Fix: docx rendering tests for full spec example
-* Add: `JekyllTagExtension.EMBED_INCLUDED_CONTENT`, default `true`. Set to `false` to prevent
-  included content from being included.
+* Add: `JekyllTagExtension.EMBED_INCLUDED_CONTENT`, default `false`. Set to `true` to embed
+  included markdown content.
+* Fix: tracked paragraph wrapping when inserting space before EOL on a line when the word before
+  caret will be wrapped to the next line. ie. the EOL will be removed. 
+* Deprecate: `JekyllTagExtension.ENABLE_RENDERING`, not used nor needed.
 
 ## 0.61.10
 

@@ -833,9 +833,8 @@ public class Formatter implements IRender {
             return renderingNode;
         }
 
-        @NotNull
         @Override
-        public DataHolder getOptions() {
+        public @NotNull DataHolder getOptions() {
             return options;
         }
 
@@ -912,17 +911,17 @@ public class Formatter implements IRender {
         }
 
         @Override
-        public NodeFormatterContext getSubContext() {
+        public @NotNull NodeFormatterContext getSubContext() {
             return getSubContextRaw(null, markdown.getBuilder());
         }
 
         @Override
-        public NodeFormatterContext getSubContext(DataHolder options) {
+        public @NotNull NodeFormatterContext getSubContext(@Nullable DataHolder options) {
             return getSubContextRaw(options, markdown.getBuilder());
         }
 
         @Override
-        public NodeFormatterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
+        public @NotNull NodeFormatterContext getSubContext(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
             return getSubContextRaw(options, builder);
         }
 
@@ -1113,9 +1112,8 @@ public class Formatter implements IRender {
                 return myMainNodeRenderer.reversedNodesOfType(classes);
             }
 
-            @NotNull
             @Override
-            public DataHolder getOptions() {return myOptions;}
+            public @NotNull DataHolder getOptions() {return myOptions;}
 
             @NotNull
             @Override
@@ -1174,17 +1172,17 @@ public class Formatter implements IRender {
             }
 
             @Override
-            public NodeFormatterContext getSubContext() {
+            public @NotNull NodeFormatterContext getSubContext() {
                 return getSubContext(null, markdown.getBuilder());
             }
 
             @Override
-            public NodeFormatterContext getSubContext(DataHolder options) {
+            public @NotNull NodeFormatterContext getSubContext(@Nullable DataHolder options) {
                 return getSubContext(options, markdown.getBuilder());
             }
 
             @Override
-            public NodeFormatterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
+            public @NotNull NodeFormatterContext getSubContext(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
                 MarkdownWriter htmlWriter = new MarkdownWriter(builder, this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass

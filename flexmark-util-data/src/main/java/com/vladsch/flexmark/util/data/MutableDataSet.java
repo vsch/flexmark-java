@@ -8,7 +8,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         super();
     }
 
-    public MutableDataSet(DataHolder other) {
+    public MutableDataSet(@Nullable DataHolder other) {
         super(other);
     }
 

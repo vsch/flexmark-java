@@ -17,7 +17,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.ScopedDataSet;
-import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
+import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.sequence.Escaping;
@@ -165,8 +165,8 @@ public class DocxRenderer implements IRender {
         // Add as last. This means clients can override the rendering of core nodes if they want.
         this.nodeFormatterFactories.add(CoreNodeDocxRenderer::new);
 
-        this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(builder.attributeProviderFactories);
-        this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
+        this.attributeProviderFactories = DependencyResolver.resolveFlatDependencies(builder.attributeProviderFactories, null, null);
+        this.linkResolverFactories = DependencyResolver.resolveFlatDependencies(builder.linkResolverFactories, null, null);
     }
 
     @Nullable

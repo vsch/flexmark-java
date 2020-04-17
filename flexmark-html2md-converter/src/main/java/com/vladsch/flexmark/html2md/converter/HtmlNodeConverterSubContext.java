@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Node;
 
 import java.io.IOException;
@@ -8,23 +9,23 @@ import java.io.IOException;
 public abstract class HtmlNodeConverterSubContext implements HtmlNodeConverterContext {
     final protected HtmlMarkdownWriter markdown;
     NodeRenderingHandlerWrapper<?> renderingHandlerWrapper;
-    Node myRenderingNode;
+    @Nullable Node myRenderingNode;
 
-    public HtmlNodeConverterSubContext(HtmlMarkdownWriter markdown) {
+    public HtmlNodeConverterSubContext(@NotNull HtmlMarkdownWriter markdown) {
         this.markdown = markdown;
         this.myRenderingNode = null;
         this.markdown.setContext(this);
     }
 
-    public Node getRenderingNode() {
+    public @Nullable Node getRenderingNode() {
         return myRenderingNode;
     }
 
-    public void setRenderingNode(Node renderingNode) {
+    public void setRenderingNode(@Nullable Node renderingNode) {
         this.myRenderingNode = renderingNode;
     }
 
-    public HtmlMarkdownWriter getMarkdown() {
+    public @NotNull HtmlMarkdownWriter getMarkdown() {
         return markdown;
     }
 
@@ -32,7 +33,7 @@ public abstract class HtmlNodeConverterSubContext implements HtmlNodeConverterCo
         flushTo(out, getHtmlConverterOptions().maxBlankLines, maxTrailingBlankLines);
     }
 
-    public void flushTo(Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
+    public void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
         markdown.line();
         try {
             markdown.appendTo(out, maxBlankLines, maxTrailingBlankLines);

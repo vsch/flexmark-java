@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.tables;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
@@ -460,7 +461,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -504,7 +505,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -546,7 +547,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -581,7 +582,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -616,7 +617,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -653,7 +654,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -690,7 +691,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -727,7 +728,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -764,7 +765,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -801,7 +802,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -838,7 +839,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -874,7 +875,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        assertTrue(table.addTrackedOffset(pos, false, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -908,7 +909,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        assertTrue(table.addTrackedOffset(pos, false, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, true)));
 
         //System.out.println("Table before: " + table.toString());
 
@@ -948,7 +949,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
 
         //System.out.println("Table before: " + table.toString());
 
@@ -988,7 +989,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        assertTrue(table.addTrackedOffset(pos, false, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1023,7 +1024,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1060,7 +1061,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1097,7 +1098,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1134,7 +1135,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1171,7 +1172,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1208,7 +1209,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1245,7 +1246,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1282,7 +1283,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1320,7 +1321,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1358,7 +1359,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1395,7 +1396,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1432,7 +1433,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1469,7 +1470,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1506,7 +1507,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1543,7 +1544,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1580,7 +1581,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1617,7 +1618,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1654,7 +1655,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1692,7 +1693,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1730,7 +1731,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1768,7 +1769,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1806,7 +1807,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1844,7 +1845,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1881,7 +1882,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1918,7 +1919,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1955,7 +1956,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -1993,7 +1994,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2031,7 +2032,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2069,7 +2070,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2108,7 +2109,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, false));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2148,7 +2149,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2188,7 +2189,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2228,7 +2229,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2268,7 +2269,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2308,7 +2309,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2348,7 +2349,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2388,7 +2389,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2428,7 +2429,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2468,7 +2469,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2509,7 +2510,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
         table.fillMissingColumns();
 
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2548,7 +2549,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
         table.fillMissingColumns(0);
 
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2587,7 +2588,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true).set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_MIN_COLUMN, 0));
 //        table.fillMissingColumns(0);
 
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2626,7 +2627,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false).set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "    "));
         table.fillMissingColumns();
 
-        assertTrue(table.addTrackedOffset(pos, true, true));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2661,7 +2662,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        assertTrue(table.addTrackedOffset(pos, null, false));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2692,7 +2693,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        assertTrue(table.addTrackedOffset(pos, null, false));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2723,7 +2724,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        assertTrue(table.addTrackedOffset(pos, null, false));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);
@@ -2754,7 +2755,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null).toMutable().set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-        assertTrue(table.addTrackedOffset(pos, null, false));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         table.appendTable(out);
         String formattedTable = out.toString(0, 0);

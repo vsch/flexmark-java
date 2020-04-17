@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 public class PlaceholderReplacerTest {
     static List<String[]> spansOf(String... spans) {
@@ -41,7 +41,7 @@ public class PlaceholderReplacerTest {
         List<String[]> params = spansOf("<NAME>", "<USER>");
         PlaceholderReplacer.replaceAll(params, map::get, '<', '>', ourGetter, ourSetter);
 
-        assertEquals(new String[] { "Joe Smith", "<NAME>" }, spansOf(params));
+        assertArrayEquals(new String[] { "Joe Smith", "<NAME>" }, spansOf(params));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class PlaceholderReplacerTest {
         List<String[]> params = spansOf("<NA", "ME>");
         PlaceholderReplacer.replaceAll(params, map::get, '<', '>', ourGetter, ourSetter);
 
-        assertEquals(new String[] { "", "Joe Smith" }, spansOf(params));
+        assertArrayEquals(new String[] { "", "Joe Smith" }, spansOf(params));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class PlaceholderReplacerTest {
         List<String[]> params = spansOf("<", "USER", ">");
         PlaceholderReplacer.replaceAll(params, map::get, '<', '>', ourGetter, ourSetter);
 
-        assertEquals(new String[] { "", "", "<NAME>" }, spansOf(params));
+        assertArrayEquals(new String[] { "", "", "<NAME>" }, spansOf(params));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class PlaceholderReplacerTest {
         List<String[]> params = spansOf("<NA", "ME> <", "USER", ">");
         PlaceholderReplacer.replaceAll(params, map::get, '<', '>', ourGetter, ourSetter);
 
-        assertEquals(new String[] { "", "Joe Smith ", "", "<NAME>" }, spansOf(params));
+        assertArrayEquals(new String[] { "", "Joe Smith ", "", "<NAME>" }, spansOf(params));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class PlaceholderReplacerTest {
         List<String[]> params = spansOf("<NA", "ME> <U", "SER", ">");
         PlaceholderReplacer.replaceAll(params, map::get, '<', '>', ourGetter, ourSetter);
 
-        assertEquals(new String[] { "", "Joe Smith ", "", "<NAME>" }, spansOf(params));
+        assertArrayEquals(new String[] { "", "Joe Smith ", "", "<NAME>" }, spansOf(params));
     }
 
     @Test
@@ -101,6 +101,6 @@ public class PlaceholderReplacerTest {
         List<String[]> params = spansOf("<NA", "ME> <U", "SER", ">");
         PlaceholderReplacer.replaceAll(params, map::get, '<', '>', ourGetter, ourSetter);
 
-        assertEquals(new String[] { "", "Joe Smith ", "", "<NAME>" }, spansOf(params));
+        assertArrayEquals(new String[] { "", "Joe Smith ", "", "<NAME>" }, spansOf(params));
     }
 }

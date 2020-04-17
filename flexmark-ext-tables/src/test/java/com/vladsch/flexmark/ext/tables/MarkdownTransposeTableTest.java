@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.tables;
 import com.vladsch.flexmark.formatter.MarkdownWriter;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.format.MarkdownTable;
+import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
 
@@ -264,7 +265,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);
@@ -307,7 +308,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);
@@ -350,7 +351,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
         CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
         BasedSequence source = BasedSequence.of(charSequence);
         MarkdownTable table = getTable(source, formatOptions("", null));
-        assertTrue(table.addTrackedOffset(pos));
+        assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
         HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
         MarkdownTable transposed = table.transposed(1);
         transposed.appendTable(out);

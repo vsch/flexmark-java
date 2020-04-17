@@ -138,7 +138,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
         return key.get(this);
     }
 
-    protected BuilderBase(DataHolder options) {
+    protected BuilderBase(@Nullable DataHolder options) {
         super(options);
     }
 

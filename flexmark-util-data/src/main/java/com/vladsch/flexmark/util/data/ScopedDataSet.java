@@ -8,12 +8,12 @@ import java.util.*;
 public class ScopedDataSet extends DataSet {
     protected final DataHolder parent;
 
-    public ScopedDataSet(DataHolder parent) {
+    public ScopedDataSet(@Nullable DataHolder parent) {
         super();
         this.parent = parent;
     }
 
-    public ScopedDataSet(DataHolder parent, DataHolder other) {
+    public ScopedDataSet(@Nullable DataHolder parent, @Nullable DataHolder other) {
         super(other);
         this.parent = parent;
     }

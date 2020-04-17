@@ -12,7 +12,7 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
      *
      * @return a new rendering context with a given appendable for its output
      */
-    C getSubContext();
+    @NotNull C getSubContext();
 
     /**
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
@@ -21,7 +21,7 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
      * @param options options to use for the context (only options which do not affect the context construction will be used)
      * @return a new rendering context with a given appendable for its output
      */
-    C getSubContext(DataHolder options);
+    @NotNull C getSubContext(@Nullable DataHolder options);
 
     /**
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
@@ -31,17 +31,17 @@ public interface NodeContext<N, C extends NodeContext<N, C>> {
      * @param builder sequence builder to user for appended text for tracking original base offsets
      * @return a new rendering context with a given appendable for its output
      */
-    C getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder);
+    @NotNull C getSubContext(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder);
 
     /**
      * @return the current node being rendered
      */
-    N getCurrentNode();
+    @Nullable N getCurrentNode();
 
     /**
      * Get options for the context
      *
      * @return data holder
      */
-    @Nullable DataHolder getOptions();
+    @NotNull DataHolder getOptions();
 }

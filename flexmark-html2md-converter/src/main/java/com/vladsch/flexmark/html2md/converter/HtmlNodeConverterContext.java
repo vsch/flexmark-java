@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 
@@ -33,7 +34,7 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      *
      * @return a new rendering context with a given appendable for its output
      */
-    HtmlNodeConverterContext getSubContext();
+    @NotNull HtmlNodeConverterContext getSubContext();
 
     /**
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
@@ -42,7 +43,7 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      * @param options options to use for the context (only options which do not affect the context construction will be used)
      * @return a new rendering context with a given appendable for its output
      */
-    HtmlNodeConverterContext getSubContext(DataHolder options);
+    @NotNull HtmlNodeConverterContext getSubContext(@Nullable DataHolder options);
 
     /**
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
@@ -52,7 +53,7 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      * @param builder sequence builder to user for appended text for tracking original base offsets
      * @return a new rendering context with a given appendable for its output
      */
-    HtmlNodeConverterContext getSubContext(DataHolder options, @NotNull ISequenceBuilder<?, ?> builder);
+    @NotNull HtmlNodeConverterContext getSubContext(@Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder);
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child
@@ -60,7 +61,7 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      *
      * @param node the node to render
      */
-    void render(Node node);
+    void render(@NotNull Node node);
 
     /**
      * Render the children of the node, used by custom renderers
@@ -69,7 +70,7 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      * @param outputAttributes true if attributes should be output
      * @param prePopAction     runnable to run before popping state
      */
-    void renderChildren(Node parent, boolean outputAttributes, Runnable prePopAction);
+    void renderChildren(@NotNull Node parent, boolean outputAttributes, @Nullable Runnable prePopAction);
 
     /**
      * @return current rendering phase
@@ -82,57 +83,57 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
      *
      * @return the current renderer options {@link DataHolder}
      */
-    DataHolder getOptions();
+    @NotNull DataHolder getOptions();
 
     /**
      * @return the {@link HtmlConverterOptions} for the context.
      */
-    HtmlConverterOptions getHtmlConverterOptions();
+    @NotNull HtmlConverterOptions getHtmlConverterOptions();
 
     /**
      * @return the {@link Document} node of the current context
      */
-    Document getDocument();
+    @NotNull Document getDocument();
 
     /**
      * @return the {@link com.vladsch.flexmark.util.ast.Document} node of the current context
      */
-    com.vladsch.flexmark.util.ast.Document getForDocument();
+    @Nullable com.vladsch.flexmark.util.ast.Document getForDocument();
 
-    HtmlConverterState getState();
+    @Nullable HtmlConverterState getState();
 
-    HashMap<String, Reference> getReferenceUrlToReferenceMap();
+    @NotNull HashMap<String, Reference> getReferenceUrlToReferenceMap();
 
-    HashSet<Reference> getExternalReferences();
+    @NotNull HashSet<Reference> getExternalReferences();
 
     boolean isTrace();
 
-    Stack<HtmlConverterState> getStateStack();
+    @NotNull Stack<HtmlConverterState> getStateStack();
 
     void setTrace(boolean trace);
 
-    com.vladsch.flexmark.util.ast.Node parseMarkdown(String markdown);
+    @NotNull com.vladsch.flexmark.util.ast.Node parseMarkdown(@NotNull String markdown);
 
-    Reference getOrCreateReference(String url, String text, String title);
+    @Nullable Reference getOrCreateReference(@NotNull String url, @NotNull String text, @Nullable String title);
 
-    ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode);
+    @NotNull ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Boolean urlEncode);
 
-    ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode);
+    @NotNull ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Attributes attributes, @Nullable Boolean urlEncode);
 
     /**
      * @return the current node being rendered
      */
-    Node getCurrentNode();
+    @Nullable Node getCurrentNode();
 
-    void pushState(Node parent);
+    void pushState(@NotNull Node parent);
 
-    void popState(LineAppendable out);
+    void popState(@Nullable LineAppendable out);
 
     void excludeAttributes(String... excludes);
 
-    void processAttributes(Node node);
+    void processAttributes(@NotNull Node node);
 
-    int outputAttributes(LineAppendable out, String initialSep);
+    int outputAttributes(@NotNull LineAppendable out, @NotNull String initialSep);
 
     void transferIdToParent();
 
@@ -140,57 +141,57 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
 
     void transferToParentOnly(String... includes);
 
-    Node peek();
+    @Nullable Node peek();
 
-    Node peek(int skip);
+    @Nullable Node peek(int skip);
 
-    Node next();
+    @Nullable Node next();
 
     void skip();
 
-    Node next(int skip);
+    @Nullable Node next(int skip);
 
     void skip(int skip);
 
     // processing related helpers
-    void processUnwrapped(Node element);
+    void processUnwrapped(@NotNull Node element);
 
-    void processWrapped(Node node, Boolean isBlock, boolean escapeMarkdown);
+    void processWrapped(@NotNull Node node, @Nullable Boolean isBlock, boolean escapeMarkdown);
 
-    void processTextNodes(Node node, boolean stripIdAttribute);
+    void processTextNodes(@NotNull Node node, boolean stripIdAttribute);
 
-    void processTextNodes(Node node, boolean stripIdAttribute, CharSequence wrapText);
+    void processTextNodes(@NotNull Node node, boolean stripIdAttribute, @NotNull CharSequence wrapText);
 
     void processTextNodes(
-            Node node,
+            @NotNull Node node,
             boolean stripIdAttribute,
-            CharSequence textPrefix,
-            CharSequence textSuffix
+            @Nullable CharSequence textPrefix,
+            @Nullable CharSequence textSuffix
     );
 
     void wrapTextNodes(
-            Node node,
-            CharSequence wrapText,
+            @NotNull Node node,
+            @NotNull CharSequence wrapText,
             boolean needSpaceAround
     );
 
-    String processTextNodes(Node node);
+    @NotNull String processTextNodes(@NotNull Node node);
 
-    void appendOuterHtml(Node node);
+    void appendOuterHtml(@NotNull Node node);
 
     boolean isInlineCode();
 
     void setInlineCode(boolean inlineCode);
 
-    String escapeSpecialChars(String text);
+    @NotNull String escapeSpecialChars(@NotNull String text);
 
-    String prepareText(String text);
+    @NotNull String prepareText(@NotNull String text);
 
-    String prepareText(String text, boolean inCode);
+    @NotNull String prepareText(@NotNull String text, boolean inCode);
 
-    void inlineCode(Runnable inlineRunnable);
+    void inlineCode(@NotNull Runnable inlineRunnable);
 
-    void processConditional(ExtensionConversion extensionConversion, Node node, Runnable processNode);
+    void processConditional(@NotNull ExtensionConversion extensionConversion, @NotNull Node node, @NotNull Runnable processNode);
 
-    void renderDefault(Node node);
+    void renderDefault(@NotNull Node node);
 }

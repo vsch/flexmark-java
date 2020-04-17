@@ -1,19 +1,21 @@
 package com.vladsch.flexmark.html2md.converter;
 
 import com.vladsch.flexmark.util.html.Attributes;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Node;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class HtmlConverterState {
-    final Node myParent;
+    final @NotNull Node myParent;
     final List<Node> myElements;
     int myIndex;
-    final Attributes myAttributes;
-    private LinkedList<Runnable> myPrePopActions;
+    final @NotNull Attributes myAttributes;
+    private @Nullable LinkedList<Runnable> myPrePopActions;
 
-    HtmlConverterState(Node parent) {
+    HtmlConverterState(@NotNull Node parent) {
         myParent = parent;
         myElements = parent.childNodes();
         myIndex = 0;
