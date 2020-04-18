@@ -696,7 +696,6 @@ public class Escaping {
         return textMapper.getReplacedSequence();
     }
 
-
     @NotNull
     private static BasedSequence replaceAll(Pattern p, @NotNull BasedSequence s, @NotNull List<Range> ranges, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
         Matcher matcher = p.matcher(s);
@@ -709,15 +708,17 @@ public class Escaping {
         int lastEnd = 0;
 
         for (Range range : ranges) {
-            matcher.region(range.getStart(), range.getEnd());
-            
+            int start = Utils.rangeLimit(range.getStart(), 0, s.length());
+            int end = Utils.rangeLimit(range.getEnd(), start, s.length());
+            matcher.region(start, end);
+
             while (matcher.find()) {
                 textMapper.addOriginalText(lastEnd, matcher.start());
                 replacer.replace(s, matcher.start(), matcher.end(), textMapper);
                 lastEnd = matcher.end();
-            };
+            }
         }
-            
+
         if (lastEnd < s.length()) {
             textMapper.addOriginalText(lastEnd, s.length());
         }
