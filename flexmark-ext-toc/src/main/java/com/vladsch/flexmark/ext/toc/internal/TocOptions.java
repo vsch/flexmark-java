@@ -338,6 +338,23 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
             return new TocOptions(this);
         }
 
+        /**
+         * Used to normalize title and titleLevel after changing titleRaw or rawTitle
+         */
+        public void normalizeFromRaw() {
+            if (title != null) {
+                CharSequence charSequence = rawTitle.trim();
+                int markers = BasedSequence.of(charSequence).countLeading(CharPredicate.HASH);
+                if (markers >= 1 && markers <= 6) rawTitleLevel = markers;
+                String useTitle = rawTitle.substring(markers).trim();
+                this.title = useTitle.isEmpty() ? " " : useTitle;
+            } else {
+                this.title = "";
+            }
+
+            this.titleLevel = Math.max(1, Math.min(rawTitleLevel, 6));
+        }
+
         @NotNull
         @Override
         public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
