@@ -464,6 +464,19 @@ Document[0, 46]
 ````````````````````````````````
 
 
+```````````````````````````````` example Issues - 398: 2
+https://example.com/?first=hi&amp;second=hello&amp;third=ok
+.
+<p><a href="https://example.com/?first=hi&amp;second=hello&amp;third=ok">https://example.com/?first=hi&amp;amp;second=hello&amp;amp;third=ok</a></p>
+.
+Document[0, 59]
+  Paragraph[0, 59]
+    TextBase[0, 59] chars:[0, 59, "https … rd=ok"]
+      AutoLink[0, 59] text:[0, 59, "https://example.com/?first=hi&amp;second=hello&amp;third=ok"] pageRef:[0, 59, "https://example.com/?first=hi&amp;second=hello&amp;third=ok"]
+        Text[0, 59] chars:[0, 59, "https … rd=ok"]
+````````````````````````````````
+
+
 ### xxx-1
 
 Issue, Autolink extension does not convert URI prefix without following text

@@ -108,13 +108,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         
         if (!htmlEntities.isEmpty()) {
             // need to replace all HTML entities in html entity regions
-            int lastOffset = 0;
-            
-            for (Range range : htmlEntities) {
-                if (lastOffset < range.getStart()) {
-                    unescapedHtml = Escaping.unescapeHtml(original, range.getStart(), range.getEnd(), textMapper);
-                } 
-            }
+            unescapedHtml = Escaping.unescapeHtml(original, htmlEntities, textMapper);
         }
         
         BasedSequence literal = Escaping.unescape(unescapedHtml, textMapper);

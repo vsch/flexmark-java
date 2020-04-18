@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -339,10 +340,10 @@ public class Escaping {
      * @return un-escaped sequence
      */
     @NotNull
-    public static BasedSequence unescapeHtml(@NotNull BasedSequence s, int startOffset, int endOffset, @NotNull ReplacedTextMapper textMapper) {
-        int indexOfAny = s.indexOf('&', startOffset, endOffset);
+    public static BasedSequence unescapeHtml(@NotNull BasedSequence s, @NotNull List<Range> ranges, @NotNull ReplacedTextMapper textMapper) {
+        int indexOfAny = s.indexOf('&');
         if (indexOfAny != -1) {
-            return replaceAll(ENTITY_ONLY, s, startOffset, endOffset, ENTITY_REPLACER, textMapper);
+            return replaceAll(ENTITY_ONLY, s, ranges, ENTITY_REPLACER, textMapper);
         } else {
             return s;
         }
@@ -688,6 +689,35 @@ public class Escaping {
             lastEnd = matcher.end();
         } while (matcher.find());
 
+        if (lastEnd < s.length()) {
+            textMapper.addOriginalText(lastEnd, s.length());
+        }
+
+        return textMapper.getReplacedSequence();
+    }
+
+
+    @NotNull
+    private static BasedSequence replaceAll(Pattern p, @NotNull BasedSequence s, @NotNull List<Range> ranges, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
+        Matcher matcher = p.matcher(s);
+        matcher.useTransparentBounds(false);
+
+        if (textMapper.isModified()) {
+            textMapper.startNestedReplacement(s);
+        }
+
+        int lastEnd = 0;
+
+        for (Range range : ranges) {
+            matcher.region(range.getStart(), range.getEnd());
+            
+            while (matcher.find()) {
+                textMapper.addOriginalText(lastEnd, matcher.start());
+                replacer.replace(s, matcher.start(), matcher.end(), textMapper);
+                lastEnd = matcher.end();
+            };
+        }
+            
         if (lastEnd < s.length()) {
             textMapper.addOriginalText(lastEnd, s.length());
         }
