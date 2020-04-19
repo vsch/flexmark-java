@@ -25,15 +25,11 @@
         <option name="STRIKETHROUGH" value="true" />
         <option name="TABLES" value="true" />
         <option name="TASKLISTITEMS" value="true" />
-        <option name="TOC" value="true" />
       </PegdownExtensions>
       <ParserOptions>
-        <option name="ATTRIBUTES_EXT" value="true" />
         <option name="COMMONMARK_LISTS" value="true" />
         <option name="EMOJI_SHORTCUTS" value="true" />
-        <option name="FLEXMARK_FRONT_MATTER" value="true" />
-        <option name="GITBOOK_URL_ENCODING" value="true" />
-        <option name="JEKYLL_FRONT_MATTER" value="true" />
+        <option name="GFM_TABLE_RENDERING" value="true" />
         <option name="PRODUCTION_SPEC_PARSER" value="true" />
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>

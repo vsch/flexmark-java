@@ -92,10 +92,14 @@ public class DocxRenderer implements IRender {
     final public static DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS;
     final public static DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES;
     final public static DataKey<Boolean> RENDER_HEADER_ID = HtmlRenderer.RENDER_HEADER_ID;
+    final public static DataKey<String> HEADER_ID_GENERATOR_NON_DASH_CHARS = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS;
+    final public static DataKey<Boolean> HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE = HtmlRenderer.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE;
+    final public static DataKey<Boolean> HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES = HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES;
+    final public static DataKey<Boolean> HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES = HtmlRenderer.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES;
+    final public static DataKey<Boolean> HEADER_ID_ADD_EMOJI_SHORTCUT = HtmlRenderer.HEADER_ID_ADD_EMOJI_SHORTCUT;
     final public static DataKey<String> LOCAL_HYPERLINK_SUFFIX = new DataKey<>("LOCAL_HYPERLINK_SUFFIX", "");
     final public static DataKey<String> LOCAL_HYPERLINK_MISSING_HIGHLIGHT = new DataKey<>("LOCAL_HYPERLINK_MISSING_HIGHLIGHT", "red");
     final public static DataKey<String> LOCAL_HYPERLINK_MISSING_FORMAT = new DataKey<>("LOCAL_HYPERLINK_MISSING_FORMAT", "Missing target id: #%s");
-    //final public static DataKey<String> FIRST_HEADING_ID_SUFFIX = new DataKey<>("FIRST_HEADING_ID_SUFFIX", "");
 
     final public static DataKey<String> ASIDE_BLOCK_STYLE = new DataKey<>("ASIDE_BLOCK_STYLE", "AsideBlock");
     final public static DataKey<String> BLOCK_QUOTE_STYLE = new DataKey<>("BLOCK_QUOTE_STYLE", "Quotations");
