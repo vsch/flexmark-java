@@ -224,6 +224,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: add range limit to `Escaping.replaceAll(Pattern, BasedSequence, List<Range>, Replacer,
   ReplacedTextMapper)` when setting matcher range.
+* Add: `DocxRenderer.CUSTOM_PROPERTIES`, default `Collections.emptyMap()`, if present then
+  custom properties of the document will be set.
 
 ## 0.61.14
 

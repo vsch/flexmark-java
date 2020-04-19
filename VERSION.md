@@ -6,6 +6,7 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.61.16](#06116)
 - [0.61.14](#06114)
 - [0.61.12](#06112)
 - [0.61.10](#06110)
@@ -162,6 +163,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## 0.61.16
+
+* Fix: add range limit to `Escaping.replaceAll(Pattern, BasedSequence, List<Range>, Replacer,
+  ReplacedTextMapper)` when setting matcher range.
+* Add: `DocxRenderer.CUSTOM_PROPERTIES`, default `Collections.emptyMap()`, if present then
+  custom properties of the document will be set.
 
 ## 0.61.14
 

@@ -23,9 +23,11 @@ import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import org.docx4j.Docx4J;
 import org.docx4j.XmlUtils;
+import org.docx4j.docProps.custom.Properties;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.DocPropsCustomPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart;
@@ -147,6 +149,7 @@ public class DocxRenderer implements IRender {
         // kludge it to use our resources
         return EMOJI_RESOURCE_PREFIX;
     });
+    final public static DataKey<Map<String, String>> CUSTOM_PROPERTIES = new DataKey<>("CUSTOM_PROPERTIES", Collections.emptyMap());
 
     final List<NodeDocxRendererFactory> nodeFormatterFactories;
     //final DocxRendererOptions rendererOptions;
@@ -227,6 +230,7 @@ public class DocxRenderer implements IRender {
                     out.addTargetPart(documentPart);
                 } catch (InvalidFormatException e) {
                     e.printStackTrace();
+                    throw e;
                 }
             }
 
@@ -254,6 +258,35 @@ public class DocxRenderer implements IRender {
         }
     }
 
+    public static void setDocumentProperties(WordprocessingMLPackage out, DataHolder options) {
+        Map<String, String> properties = CUSTOM_PROPERTIES.get(options);
+        
+        if (!properties.isEmpty()) {
+            try {
+                DocPropsCustomPart customPropsPart = out.getDocPropsCustomPart();
+                if (customPropsPart == null) {
+                    try {
+                        customPropsPart = new DocPropsCustomPart();
+                        out.addTargetPart(customPropsPart);
+                    } catch (InvalidFormatException e) {
+                        e.printStackTrace();
+                        throw e;
+                    }
+                }
+
+                if (customPropsPart.getContents() == null) {
+                    customPropsPart.setContents(new Properties());
+                }
+
+                for (Map.Entry<String, String> entry : properties.entrySet()) {
+                    customPropsPart.setProperty(entry.getKey(), entry.getValue());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     /**
      * Render a node to the given word processing package
      *
@@ -263,6 +296,7 @@ public class DocxRenderer implements IRender {
     public void render(Node node, WordprocessingMLPackage output) {
         DocxRenderer.MainDocxRenderer renderer = new DocxRenderer.MainDocxRenderer(options, output, node.getDocument(), null);
         renderer.render(node);
+        setDocumentProperties(output, node.getDocument());
     }
 
     /**
@@ -270,7 +304,7 @@ public class DocxRenderer implements IRender {
      *
      * @param node             node to render
      * @param output           appendable to use for the output
-     * @param contentContainer contaner for content to use
+     * @param contentContainer container for content to use
      */
     public void render(Node node, WordprocessingMLPackage output, DocumentContentHandler contentContainer) {
         DocxRenderer.MainDocxRenderer renderer = new DocxRenderer.MainDocxRenderer(options, output, node.getDocument(), contentContainer);
@@ -296,6 +330,7 @@ public class DocxRenderer implements IRender {
         String resourcePath = DEFAULT_TEMPLATE_RESOURCE.get(getOptions());
         WordprocessingMLPackage mlPackage = getDefaultTemplate(resourcePath);
         render(document, mlPackage);
+        setDocumentProperties(mlPackage, document.getDocument());
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
@@ -730,7 +765,7 @@ public class DocxRenderer implements IRender {
         @NotNull
         @Override
         public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
-            return resolveLink(linkType, url, (Attributes) null, urlEncode);
+            return resolveLink(linkType, url, null, urlEncode);
         }
 
         @NotNull
