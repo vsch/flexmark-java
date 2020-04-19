@@ -663,12 +663,12 @@ public class Escaping {
     }
 
     @NotNull
-    private static BasedSequence replaceAll(Pattern p, @NotNull BasedSequence s, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
+    private static BasedSequence replaceAll(@NotNull Pattern p, @NotNull BasedSequence s, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
         return replaceAll(p, s, 0, s.length(), replacer, textMapper);
     }
 
     @NotNull
-    private static BasedSequence replaceAll(Pattern p, @NotNull BasedSequence s, int startOffset, int endOffset, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
+    private static BasedSequence replaceAll(@NotNull Pattern p, @NotNull BasedSequence s, int startOffset, int endOffset, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
         Matcher matcher = p.matcher(s);
         matcher.region(startOffset, endOffset);
         matcher.useTransparentBounds(false);
@@ -697,7 +697,7 @@ public class Escaping {
     }
 
     @NotNull
-    private static BasedSequence replaceAll(Pattern p, @NotNull BasedSequence s, @NotNull List<Range> ranges, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
+    private static BasedSequence replaceAll(@NotNull Pattern p, @NotNull BasedSequence s, @NotNull List<Range> ranges, @NotNull Replacer replacer, @NotNull ReplacedTextMapper textMapper) {
         Matcher matcher = p.matcher(s);
         matcher.useTransparentBounds(false);
 
@@ -708,7 +708,7 @@ public class Escaping {
         int lastEnd = 0;
 
         for (Range range : ranges) {
-            int start = Utils.rangeLimit(range.getStart(), 0, s.length());
+            int start = Utils.rangeLimit(range.getStart(), lastEnd, s.length());
             int end = Utils.rangeLimit(range.getEnd(), start, s.length());
             matcher.region(start, end);
 
