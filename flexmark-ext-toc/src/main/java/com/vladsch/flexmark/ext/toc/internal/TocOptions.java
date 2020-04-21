@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Immutable;
 import com.vladsch.flexmark.util.misc.Mutable;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,8 +36,6 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
     final public boolean isHtml;
     final public int titleLevel;
     final public String title;
-    final public int rawTitleLevel;
-    final public String rawTitle;
     final public boolean isAstAddOptions;
     final public boolean isBlankLineSpacer;
     final public String divClass;
@@ -61,37 +60,37 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
     }
 
     public TocOptions(@NotNull TocOptions.AsMutable other) {
-        levels = other.levels;
-        isTextOnly = other.isTextOnly;
-        isNumbered = other.isNumbered;
-        listType = other.listType;
-        isHtml = other.isHtml;
-        titleLevel = other.titleLevel;
-        title = other.title;
-        rawTitleLevel = other.rawTitleLevel;
-        rawTitle = other.rawTitle;
-        isAstAddOptions = other.isAstAddOptions;
-        isBlankLineSpacer = other.isBlankLineSpacer;
-        divClass = other.divClass;
-        listClass = other.listClass;
-        isCaseSensitiveTocTag = other.isCaseSensitiveTocTag;
+        this(
+                other.levels
+                , other.isHtml
+                , other.isTextOnly
+                , other.isNumbered
+                , other.titleLevel
+                , other.title
+                , other.listType
+                , other.isAstAddOptions
+                , other.isBlankLineSpacer
+                , other.divClass
+                , other.listClass
+                , other.isCaseSensitiveTocTag
+        );
     }
 
     public TocOptions(@NotNull TocOptions other) {
-        levels = other.levels;
-        isTextOnly = other.isTextOnly;
-        isNumbered = other.isNumbered;
-        listType = other.listType;
-        isHtml = other.isHtml;
-        titleLevel = other.titleLevel;
-        title = other.title;
-        rawTitleLevel = other.rawTitleLevel;
-        rawTitle = other.rawTitle;
-        isAstAddOptions = other.isAstAddOptions;
-        isBlankLineSpacer = other.isBlankLineSpacer;
-        divClass = other.divClass;
-        listClass = other.listClass;
-        isCaseSensitiveTocTag = other.isCaseSensitiveTocTag;
+        this(
+                other.levels
+                , other.isHtml
+                , other.isTextOnly
+                , other.isNumbered
+                , other.titleLevel
+                , other.title
+                , other.listType
+                , other.isAstAddOptions
+                , other.isBlankLineSpacer
+                , other.divClass
+                , other.listClass
+                , other.isCaseSensitiveTocTag
+        );
     }
 
     //public TocOptions(DataHolder options) {
@@ -152,14 +151,15 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         this.isNumbered = isNumbered;
         this.listType = listType;
         this.isHtml = isHtml;
-        this.rawTitle = title == null ? "" : String.valueOf(title);
-        this.rawTitleLevel = titleLevel;
 
         if (title != null) {
-            CharSequence charSequence = rawTitle.trim();
+            CharSequence charSequence = SequenceUtils.trim(title);
             int markers = BasedSequence.of(charSequence).countLeading(CharPredicate.HASH);
-            if (markers >= 1 && markers <= 6) titleLevel = markers;
-            String useTitle = rawTitle.substring(markers).trim();
+            if (markers >= 1) {
+                titleLevel = Math.min(markers, 6);
+                markers = titleLevel;
+            }
+            String useTitle = SequenceUtils.trim(title.subSequence(markers, title.length())).toString();
             this.title = useTitle.isEmpty() ? " " : useTitle;
         } else {
             this.title = "";
@@ -237,8 +237,6 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         if (isHtml != options.isHtml) return false;
         if (titleLevel != options.titleLevel) return false;
         if (!title.equals(options.title)) return false;
-        if (rawTitleLevel != options.rawTitleLevel) return false;
-        if (!rawTitle.equals(options.rawTitle)) return false;
         if (!divClass.equals(options.divClass)) return false;
         if (!listClass.equals(options.listClass)) return false;
         if (isAstAddOptions != options.isAstAddOptions) return false;
@@ -256,8 +254,6 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         result = 31 * result + (isHtml ? 1 : 0);
         result = 31 * result + titleLevel;
         result = 31 * result + title.hashCode();
-        result = 31 * result + rawTitleLevel;
-        result = 31 * result + rawTitle.hashCode();
         result = 31 * result + divClass.hashCode();
         result = 31 * result + listClass.hashCode();
         result = 31 * result + (isAstAddOptions ? 1 : 0);
@@ -275,9 +271,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
                 ", isNumbered=" + isNumbered +
                 ", titleLevel=" + titleLevel +
                 ", title='" + title + '\'' +
-                ", rawTitleLevel=" + rawTitleLevel +
                 ", listType=" + listType +
-                ", rawTitle='" + rawTitle + '\'' +
                 ", divClass='" + divClass + '\'' +
                 ", listClass='" + listClass + '\'' +
                 " }";
@@ -291,8 +285,6 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         public boolean isHtml;
         public int titleLevel;
         public String title;
-        public int rawTitleLevel;
-        public String rawTitle;
         public boolean isAstAddOptions;
         public boolean isBlankLineSpacer;
         public String divClass;
@@ -307,8 +299,6 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
             isHtml = other.isHtml;
             titleLevel = other.titleLevel;
             title = other.title;
-            rawTitleLevel = other.rawTitleLevel;
-            rawTitle = other.rawTitle;
             isAstAddOptions = other.isAstAddOptions;
             isBlankLineSpacer = other.isBlankLineSpacer;
             divClass = other.divClass;
@@ -316,21 +306,9 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
             isCaseSensitiveTocTag = other.isCaseSensitiveTocTag;
         }
 
+        @SuppressWarnings({ "CopyConstructorMissesField", "unused" })
         protected AsMutable(TocOptions.AsMutable other) {
-            levels = other.levels;
-            isTextOnly = other.isTextOnly;
-            isNumbered = other.isNumbered;
-            listType = other.listType;
-            isHtml = other.isHtml;
-            titleLevel = other.titleLevel;
-            title = other.title;
-            rawTitleLevel = other.rawTitleLevel;
-            rawTitle = other.rawTitle;
-            isAstAddOptions = other.isAstAddOptions;
-            isBlankLineSpacer = other.isBlankLineSpacer;
-            divClass = other.divClass;
-            listClass = other.listClass;
-            isCaseSensitiveTocTag = other.isCaseSensitiveTocTag;
+            this(other.toImmutable());
         }
 
         @Override
@@ -341,18 +319,11 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         /**
          * Used to normalize title and titleLevel after changing titleRaw or rawTitle
          */
-        public void normalizeFromRaw() {
-            if (title != null) {
-                CharSequence charSequence = rawTitle.trim();
-                int markers = BasedSequence.of(charSequence).countLeading(CharPredicate.HASH);
-                if (markers >= 1 && markers <= 6) rawTitleLevel = markers;
-                String useTitle = rawTitle.substring(markers).trim();
-                this.title = useTitle.isEmpty() ? " " : useTitle;
-            } else {
-                this.title = "";
-            }
-
-            this.titleLevel = Math.max(1, Math.min(rawTitleLevel, 6));
+        public TocOptions.AsMutable normalizeTitle() {
+            TocOptions options = toImmutable();
+            this.title = options.title;
+            this.titleLevel = options.titleLevel;
+            return this;
         }
 
         @NotNull
@@ -387,8 +358,6 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
             if (!title.equals(options.title)) return false;
             if (!divClass.equals(options.divClass)) return false;
             if (!listClass.equals(options.listClass)) return false;
-            if (rawTitleLevel != options.rawTitleLevel) return false;
-            if (!rawTitle.equals(options.rawTitle)) return false;
             if (isAstAddOptions != options.isAstAddOptions) return false;
             if (isBlankLineSpacer != options.isBlankLineSpacer) return false;
             if (isCaseSensitiveTocTag != options.isCaseSensitiveTocTag) return false;
@@ -406,8 +375,6 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
             result = 31 * result + title.hashCode();
             result = 31 * result + divClass.hashCode();
             result = 31 * result + listClass.hashCode();
-            result = 31 * result + rawTitleLevel;
-            result = 31 * result + rawTitle.hashCode();
             result = 31 * result + (isAstAddOptions ? 1 : 0);
             result = 31 * result + (isBlankLineSpacer ? 1 : 0);
             result = 31 * result + (isCaseSensitiveTocTag ? 1 : 0);
@@ -423,9 +390,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
                     ", isNumbered=" + isNumbered +
                     ", titleLevel=" + titleLevel +
                     ", title='" + title + '\'' +
-                    ", rawTitleLevel=" + rawTitleLevel +
                     ", listType=" + listType +
-                    ", rawTitle='" + rawTitle + '\'' +
                     ", divClass='" + divClass + '\'' +
                     ", listClass='" + listClass + '\'' +
                     " }";
