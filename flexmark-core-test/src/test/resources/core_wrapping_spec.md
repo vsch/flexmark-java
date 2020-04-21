@@ -1452,3 +1452,144 @@ BasedSegmentBuilder{[0, 105), s=0:0, u=2:2, t=2:2, l=105, sz=7, na=5: [0, 65), a
 ````````````````````````````````
 
 
+```````````````````````````````` example(Wrap - Restore Spaces: 46) options(margin[76], insert-space, restore-tracked-spaces, show-ranges, running-tests)
+Require `jclg/php-slack-bot` dev-master (the library has not been updated
+ ⦙abandoned there is no release
+.
+Require `jclg/php-slack-bot` dev-master (the library has not been updated
+⦙abandoned there is no release
+---- Tracked Offsets ---------------------------------------------------
+[0]: {75 1|0 si -> 74}
+
+---- Ranges ------------------------------------------------------------
+⟦Require `jclg/php-slack-bot` dev-master (the library has not been updated
+⟧⟦abandoned there is no release⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 104), s=0:0, u=1:1, t=1:1, l=104, sz=4, na=3: [0, 74), [75, 104), a:'\n', [104) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 47) options(margin[76], insert-space, restore-tracked-spaces, show-ranges, running-tests)
+Require `jclg/php-slack-bot` dev-master (the library has not been updated
+  ⦙abandoned there is no release
+.
+Require `jclg/php-slack-bot` dev-master (the library has not been updated
+⦙abandoned there is no release
+---- Tracked Offsets ---------------------------------------------------
+[0]: {76 2|0 si -> 74}
+
+---- Ranges ------------------------------------------------------------
+⟦Require `jclg/php-slack-bot` dev-master (the library has not been updated
+⟧⟦abandoned there is no release⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 105), s=0:0, u=1:1, t=1:1, l=104, sz=4, na=3: [0, 74), [76, 105), a:'\n', [105) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 48) options(margin[76], insert-space, restore-tracked-spaces, show-ranges, running-tests)
+Require `jclg/php-slack-bot` dev-master (the library has not been updated ⦙abandoned there is no release
+.
+Require `jclg/php-slack-bot` dev-master (the library has not been updated
+⦙abandoned there is no release
+---- Tracked Offsets ---------------------------------------------------
+[0]: {74 1|0 si -> 74}
+
+---- Ranges ------------------------------------------------------------
+⟦Require `jclg/php-slack-bot` dev-master (the library has not been updated⟧
+⟦⟧⟦abandoned there is no release⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 103), s=0:0, u=2:2, t=2:2, l=104, sz=6, na=4: [0, 73), a:'\n', [73), [74, 103), a:'\n', [103) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 49) options(margin[76], insert-space, restore-tracked-spaces, show-ranges, running-tests)
+Require `jclg/php-slack-bot` dev-master (the library has not been updated ⦙ abandoned there is no release
+.
+Require `jclg/php-slack-bot` dev-master (the library has not been updated ⦙
+abandoned there is no release
+---- Tracked Offsets ---------------------------------------------------
+[0]: {74 1|1 si -> 74}
+
+---- Ranges ------------------------------------------------------------
+⟦Require `jclg/php-slack-bot` dev-master (the library has not been updated⟧ ⟦⟧
+⟦⟧⟦abandoned there is no release⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 104), s=1:1, u=3:3, t=3:3, l=105, sz=8, na=5: [0, 73), a:' ', [73), a:'\n', [73), [75, 104), a:'\n', [104) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 50) options(margin[76], insert-space, restore-tracked-spaces, show-ranges, running-tests)
+Require `jclg/php-slack-bot` dev-master (the library has not been updated
+ ⦙ abandoned there is no release
+.
+Require `jclg/php-slack-bot` dev-master (the library has not been updated ⦙
+abandoned there is no release
+---- Tracked Offsets ---------------------------------------------------
+[0]: {75 1|1 si -> 74}
+
+---- Ranges ------------------------------------------------------------
+⟦Require `jclg/php-slack-bot` dev-master (the library has not been updated⟧ ⟦
+⟧⟦abandoned there is no release⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 105), s=1:1, u=2:2, t=2:2, l=105, sz=6, na=5: [0, 73), a:' ', [73, 74), [76, 105), a:'\n', [105) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 51) options(margin[76], insert-space, restore-tracked-spaces, show-ranges, running-tests)
+Require `jclg/php-slack-bot` dev-master (the library has not been updated
+  ⦙ abandoned there is no release
+.
+Require `jclg/php-slack-bot` dev-master (the library has not been updated  ⦙
+abandoned there is no release
+---- Tracked Offsets ---------------------------------------------------
+[0]: {76 2|1 si -> 75}
+
+---- Ranges ------------------------------------------------------------
+⟦Require `jclg/php-slack-bot` dev-master (the library has not been updated⟧  ⟦
+⟧⟦abandoned there is no release⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 106), s=1:2, u=2:3, t=2:3, l=106, sz=6, na=5: [0, 73), a:2x' ', [73, 74), [77, 106), a:'\n', [106) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 52) options(margin[76], insert-char, restore-tracked-spaces, show-ranges, running-tests)
+Require `jclg/php-slack-bot` dev-master (the library has not been updated.⦙ abandoned there is no release
+.
+Require `jclg/php-slack-bot` dev-master (the library has not been updated.⦙
+abandoned there is no release
+---- Tracked Offsets ---------------------------------------------------
+[0]: {74 0|1 i -> 74}
+
+---- Ranges ------------------------------------------------------------
+⟦Require `jclg/php-slack-bot` dev-master (the library has not been updated.⟧
+⟦⟧⟦abandoned there is no release⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 104), s=0:0, u=2:2, t=2:2, l=105, sz=6, na=4: [0, 74), a:'\n', [74), [75, 104), a:'\n', [104) }
+````````````````````````````````
+
+
+```````````````````````````````` example(Wrap - Restore Spaces: 53) options(margin[76], insert-char, restore-tracked-spaces, show-ranges, running-tests)
+Require `jclg/php-slack-bot` dev-master (the library has not been updated.⦙
+abandoned there is no release
+.
+Require `jclg/php-slack-bot` dev-master (the library has not been updated.⦙
+abandoned there is no release
+---- Tracked Offsets ---------------------------------------------------
+[0]: {74 0|0 i -> 74}
+
+---- Ranges ------------------------------------------------------------
+⟦Require `jclg/php-slack-bot` dev-master (the library has not been updated.
+abandoned there is no release⟧
+⟦⟧
+---- Segments ----------------------------------------------------------
+BasedSegmentBuilder{[0, 104), s=0:0, u=1:1, t=1:1, l=105, sz=3, na=2: [0, 104), a:'\n', [104) }
+````````````````````````````````
+
+

@@ -183,8 +183,10 @@ public class MarkdownParagraph {
             TrackedOffset trackedOffset = trackedOffsets.get(i);
 
             int offset = trackedOffset.getOffset();
-            int countedSpacesBefore = baseSequence.countTrailingSpaceTab(offset);
-            int countedSpacesAfter = baseSequence.countLeadingSpaceTab(offset);
+            int countedSpacesBefore = baseSequence.countTrailing(SPACE_TAB_NBSP, offset);
+            int countedSpacesAfter = baseSequence.countLeading(SPACE_TAB_NBSP, offset);
+            int countedWhitespaceBefore = baseSequence.countTrailing(SPACE_TAB_NBSP_EOL, offset);
+            int countedWhiteSpaceAfter = baseSequence.countLeading(SPACE_TAB_NBSP_EOL, offset);
 
             if (inTest) {
                 assert trackedOffset.getSpacesBefore() == countedSpacesBefore;
@@ -216,11 +218,11 @@ public class MarkdownParagraph {
                 }
             } else {
                 if (!SPACE_TAB_NBSP_EOL.test(prevBaseCharAt)) {
-                    anchorOffset = offset - countedSpacesBefore;
+                    anchorOffset = offset - countedWhitespaceBefore;
                     anchorIndex = tracker.getOffsetInfo(anchorOffset - 1, false).endIndex;
                     anchorResolvedBy = "Prev ";
                 } else if (!SPACE_TAB_NBSP_EOL.test(nextBaseCharAt)) {
-                    anchorOffset = offset + countedSpacesAfter;
+                    anchorOffset = offset + countedWhiteSpaceAfter;
                     anchorIndex = tracker.getOffsetInfo(anchorOffset, false).startIndex;
                     anchorResolvedBy = "Next ";
                 } else {
@@ -243,12 +245,20 @@ public class MarkdownParagraph {
             }
 
             // NOTE: at this point space == &nbsp; since altUnwrapped can have &nbsp; instead of spaces
-            assert SpaceMapper.areEquivalent(baseSequence.safeCharAt(anchorOffset), altUnwrapped.safeCharAt(anchorIndex + anchorDelta))
+            assert (SpaceMapper.areEquivalent(baseSequence.safeCharAt(anchorOffset), altUnwrapped.safeCharAt(anchorIndex + anchorDelta))
                     // NOTE: alt sequence could have spaces removed which would result in space in base sequence and EOL in alt sequence, also unwrapped can have spaces replaced with NBSP
-                    || baseSequence.isCharAt(anchorOffset, WHITESPACE_NBSP_OR_NUL) && altUnwrapped.isCharAt(anchorIndex + anchorDelta, WHITESPACE_NBSP_OR_NUL)
-                    : String.format("baseSeq.charAt: %d != altUnwrapped.charAt: %d, altWrapped anchor: '%s', wrapped anchor: '%s'"
+                    || baseSequence.isCharAt(anchorOffset, WHITESPACE_NBSP_OR_NUL) && altUnwrapped.isCharAt(anchorIndex + anchorDelta, WHITESPACE_NBSP_OR_NUL))
+                    : String.format("baseSeq.charAt(%d): '%s':0x%04x != altUnwrapped.charAt(%d=%d+%d): '%s':0x%04x, baseSequence anchor: '%s', altUnwrapped anchor: '%s', altWrapped anchor: '%s', wrapped anchor: '%s'"
+                    , anchorOffset
+                    , String.valueOf(baseSequence.safeCharAt(anchorOffset))
                     , (int) baseSequence.safeCharAt(anchorOffset)
+                    , anchorIndex + anchorDelta
+                    , anchorIndex
+                    , anchorDelta
+                    , String.valueOf(altUnwrapped.safeCharAt(anchorIndex + anchorDelta))
                     , (int) altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
+                    , baseSequence.safeSubSequence(anchorOffset - 10, anchorOffset).toVisibleWhitespaceString() + "|" + baseSequence.safeSubSequence(anchorOffset, anchorOffset + 10).toVisibleWhitespaceString()
+                    , altUnwrapped.safeSubSequence(anchorIndex + anchorDelta - 10, anchorIndex + anchorDelta).toVisibleWhitespaceString() + "|" + altUnwrapped.safeSubSequence(anchorIndex + anchorDelta, anchorIndex + anchorDelta + 10).toVisibleWhitespaceString()
                     , altWrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + altWrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()
                     , wrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + wrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()
             );
