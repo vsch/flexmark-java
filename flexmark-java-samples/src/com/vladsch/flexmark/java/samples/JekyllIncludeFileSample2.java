@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.java.samples;
 
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
-import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -9,13 +8,16 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JekyllIncludeFileSample2 {
     static String commonMark(String markdown, Map<String, String> included) {
         MutableDataHolder options = new MutableDataSet();
         options.set(Parser.EXTENSIONS, Arrays.asList(AutolinkExtension.create(), JekyllTagExtension.create()));
-        
+
         // change soft break to hard break
         options.set(HtmlRenderer.SOFT_BREAK, "<br/>");
 
