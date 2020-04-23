@@ -81,8 +81,7 @@ public class JekyllIncludeFileSample {
             }
         }
 
-        String html = renderer.render(document);
-        return html;
+        return renderer.render(document);
     }
 
     public static void main(String[] args) {
