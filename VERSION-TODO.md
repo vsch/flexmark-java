@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.18](#06118)
 - [0.61.16](#06116)
 - [0.61.14](#06114)
 - [0.61.12](#06112)
@@ -204,7 +205,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       extension add order
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
-                      Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+                          Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 * [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
       just formatting. Need to keep track of whether format after typing or just format. Then
       caret position should only track but not force spaces behind it to be preserved. See
@@ -219,6 +220,14 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.61.18
+
+* Break: remove from `TocOptions` confusing and error prone `rawTitle` and `rawTitleLevel`. Now
+  mutable toc options have to set `title` and `titleLevel` then call
+  `TocOptions.AsMutable.normalizeTitle()`
+* Fix: add more debug trace information to markdown wrap tracked offset mismatch.
+  
 
 ## 0.61.16
 
@@ -239,9 +248,9 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Add: `JekyllTagExtension.EMBED_INCLUDED_CONTENT`, default `false`. Set to `true` to embed
   included markdown content.
 * Fix: tracked paragraph wrapping when inserting space before EOL on a line when the word before
-  caret will be wrapped to the next line. ie. the EOL will be removed. 
+  caret will be wrapped to the next line. ie. the EOL will be removed.
 * Deprecate: `JekyllTagExtension.ENABLE_RENDERING`, not used nor needed.
-* Fix: [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)] 
+* Fix: [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]
 
 ## 0.61.10
 
@@ -2406,6 +2415,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#391, PR: Fix: CRLF line separator in fenced code blocks produce redundant CR.]: https://github.com/vsch/flexmark-java/pull/391
 [#396, DocumentParser stops reading too early resulting in the document being cut off]: https://github.com/vsch/flexmark-java/issues/396
 [#397, PR: Add base64 image support with docx rendering]: https://github.com/vsch/flexmark-java/pull/397
+[#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]: https://github.com/vsch/flexmark-java/issues/398
 [@Xaelis]: https://github.com/Xaelis
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
@@ -2418,6 +2428,4 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 <!-- @IGNORE PREVIOUS: link -->
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
-[#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]: https://github.com/vsch/flexmark-java/issues/398
-
 
