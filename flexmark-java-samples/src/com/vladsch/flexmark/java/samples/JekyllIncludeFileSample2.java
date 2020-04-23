@@ -13,6 +13,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This sample computes the html content map without examining the main document AST.
+ *
+ * This means that the main document is parsed once. 
+ *
+ * For a sample which needs to examine the document AST include tags to compute 
+ * the embedded content map, which results in the main document being parsed twice,
+ * see: {@link JekyllIncludeFileSample}
+ */
 public class JekyllIncludeFileSample2 {
     static String commonMark(String markdown, Map<String, String> included) {
         MutableDataHolder options = new MutableDataSet();

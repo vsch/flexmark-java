@@ -11,6 +11,15 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import java.util.*;
 
+/**
+ * This sample uses the parsed document to compute the embedded content. 
+ * 
+ * This means that the main document is parsed twice. 
+ * 
+ * For a sample which can compute the embedded content without needing to examine
+ * the main document AST and therefore, computes the content map before parsing 
+ * the main document, see: {@link JekyllIncludeFileSample2}
+ */
 public class JekyllIncludeFileSample {
     static String commonMark(String markdown, Map<String, String> included) {
         MutableDataHolder options = new MutableDataSet();
