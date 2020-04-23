@@ -47,6 +47,7 @@ public class JekyllIncludeFileSample2 {
             options.set(JekyllTagExtension.INCLUDED_HTML, includeHtmlMap);
             options.set(JekyllTagExtension.EMBED_INCLUDED_CONTENT, true);
 
+            // use new options for main document parsing/rendering
             parser = Parser.builder(options).build();
             renderer = HtmlRenderer.builder(options).build();
         }
