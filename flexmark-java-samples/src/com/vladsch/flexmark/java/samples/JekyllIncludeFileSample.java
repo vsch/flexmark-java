@@ -6,7 +6,6 @@ import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
@@ -26,7 +25,7 @@ public class JekyllIncludeFileSample {
         Document document = parser.parse(markdown);
 
         // see if document has includes
-        Document doc = (Document) document;
+        Document doc = document;
         if (doc.contains(JekyllTagExtension.TAG_LIST)) {
             List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.get(doc);
             Map<String, String> includeHtmlMap = new HashMap<>();
@@ -43,7 +42,7 @@ public class JekyllIncludeFileSample {
                         if (includeFile.endsWith(".md")) {
                             Document includeDoc = parser.parse(text);
                             String includeHtml = renderer.render(includeDoc);
-                            
+
                             includeHtmlMap.put(includeFile, includeHtml);
 
                             // copy any definition of reference elements from included file to our document
@@ -63,9 +62,9 @@ public class JekyllIncludeFileSample {
 
                     parser = Parser.builder(options).build();
                     renderer = HtmlRenderer.builder(options).build();
-                    
+
                     document = parser.parse(markdown);
-                    
+
                     for (Document includedDoc : includedDocs) {
                         parser.transferReferences(document, includedDoc, null);
                     }
