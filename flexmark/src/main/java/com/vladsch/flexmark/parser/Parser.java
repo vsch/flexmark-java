@@ -296,7 +296,7 @@ public class Parser implements IParse {
     final private LinkRefProcessorData linkRefProcessors;
     final private List<InlineParserExtensionFactory> inlineParserExtensionFactories;
     final private InlineParserFactory inlineParserFactory;
-    final private DataHolder options;
+    final private @NotNull DataHolder options;
 
     Parser(Builder builder) {
         DataSet options = builder.toImmutable();
@@ -407,9 +407,8 @@ public class Parser implements IParse {
         return document;
     }
 
-    @Nullable
     @Override
-    public DataHolder getOptions() {
+    public @NotNull DataHolder getOptions() {
         return options;
     }
 
