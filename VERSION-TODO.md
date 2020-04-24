@@ -227,7 +227,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: `JekyllTagExtension` handling of inline include tag. If included file contains a single
   paragraph then the paragraph is unwrapped so only the text is included. Otherwise, the
   included file AST is included as is, which may result in invalid HTML if included file has
-  block elements sincde these will be included in the `p` tag of including element.
+  block elements since these will be included in the `p` tag of including element.
+
+  Break: :information_source: when include tag embedding is enabled, the included file elements
+  will be added as child nodes of the `JekyllTag` node, not `JekyllTagBlock` node as was done in
+  previous versions.
 
 ## 0.61.18
 
