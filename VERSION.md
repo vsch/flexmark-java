@@ -6,6 +6,7 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.61.18](#06118)
 - [0.61.16](#06116)
 - [0.61.14](#06114)
 - [0.61.12](#06112)
@@ -163,6 +164,26 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## 0.61.18
+
+* Break: remove from `TocOptions` confusing and error prone `rawTitle` and `rawTitleLevel`. Now
+  mutable toc options have to set `title` and `titleLevel` then call
+  `TocOptions.AsMutable.normalizeTitle()`
+* Fix: add more debug trace information to markdown wrap tracked offset mismatch.
+* Add: `UriContentResolver` extension for unified content handling in parser and renderers by
+  extensions.
+  * Add: `JekyllTagExtension.CONTENT_RESOLVER_FACTORIES`, default `Collections.emptyList()`. If
+    this option is an empty list then a singleton list of `FileUriContentResolver.Factory`
+    instance will be used.
+  * Fix: `IncludeNodePostProcessor` to use content resolvers for getting file content instead of
+    getting file directly.
+  * Add: `DocxRenderer.DEFAULT_CONTENT_RESOLVER`, default `true`, set to `false` not to add
+    `FileUriContentResolver` to content resolvers factories.
+  * Add: `DocxRendererContext.resolvedContent(ResolvedLink)` to allow generic URI to content
+    resolution.
+  * Fix: `CoreNodeDocxRenderer` to use content resolvers for resolving image links, only
+    resolving `http://` and `https://` links if content is not resolved.
 
 ## 0.61.16
 
