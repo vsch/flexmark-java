@@ -2,7 +2,10 @@ package com.vladsch.flexmark.docx.converter;
 
 import com.vladsch.flexmark.docx.converter.util.DocxContext;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.ResolvedContent;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -41,4 +44,13 @@ public interface DocxRendererContext extends DocxContext<Node>, LinkResolverCont
      * @return the {@link DocxRendererOptions} for the context.
      */
     DocxRendererOptions getDocxRendererOptions();
+
+    /**
+     * Resolve link to content
+     *
+     * @param resolvedLink resolved link
+     * @return resolved content for the link
+     */
+    @NotNull
+    ResolvedContent resolvedContent(@NotNull ResolvedLink resolvedLink);
 }

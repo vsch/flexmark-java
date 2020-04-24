@@ -205,7 +205,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       extension add order
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
-                          Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+                              Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 * [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
       just formatting. Need to keep track of whether format after typing or just format. Then
       caret position should only track but not force spaces behind it to be preserved. See
@@ -227,7 +227,19 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   mutable toc options have to set `title` and `titleLevel` then call
   `TocOptions.AsMutable.normalizeTitle()`
 * Fix: add more debug trace information to markdown wrap tracked offset mismatch.
-  
+* Add: `UriContentResolver` extension for unified content handling in parser and renderers by
+  extensions.
+  * Add: `JekyllTagExtension.CONTENT_RESOLVER_FACTORIES`, default `Collections.emptyList()`. If
+    this option is an empty list then a singleton list of `FileUriContentResolver.Factory`
+    instance will be used.
+  * Fix: `IncludeNodePostProcessor` to use content resolvers for getting file content instead of
+    getting file directly.
+  * Add: `DocxRenderer.DEFAULT_CONTENT_RESOLVER`, default `true`, set to `false` not to add
+    `FileUriContentResolver` to content resolvers factories.
+  * Add: `DocxRendererContext.resolvedContent(ResolvedLink)` to allow generic URI to content
+    resolution.
+  * Fix: `CoreNodeDocxRenderer` to use content resolvers for resolving image links, only
+    resolving `http://` and `https://` links if content is not resolved.
 
 ## 0.61.16
 

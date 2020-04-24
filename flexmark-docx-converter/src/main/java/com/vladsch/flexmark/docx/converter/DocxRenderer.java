@@ -56,6 +56,7 @@ public class DocxRenderer implements IRender {
     final public static DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
     final public static DataKey<String> DOC_ROOT_URL = new DataKey<>("DOC_ROOT_URL", "");
     final public static DataKey<Boolean> PREFIX_WWW_LINKS = new DataKey<>("PREFIX_WWW_LINKS", true);
+    final public static DataKey<Boolean> DEFAULT_CONTENT_RESOLVER = new DataKey<>("DEFAULT_CONTENT_RESOLVER", true);
 
     // same keys, same function also available here for convenience
     final public static DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES;
@@ -159,6 +160,7 @@ public class DocxRenderer implements IRender {
     //final DocxRendererOptions rendererOptions;
     final private DataHolder options;
     final List<LinkResolverFactory> linkResolverFactories;
+    final List<UriContentResolverFactory> contentResolverFactories;
     final List<AttributeProviderFactory> attributeProviderFactories;
     final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
 
@@ -174,6 +176,7 @@ public class DocxRenderer implements IRender {
 
         this.attributeProviderFactories = DependencyResolver.resolveFlatDependencies(builder.attributeProviderFactories, null, null);
         this.linkResolverFactories = DependencyResolver.resolveFlatDependencies(builder.linkResolverFactories, null, null);
+        this.contentResolverFactories = DependencyResolver.resolveFlatDependencies(builder.contentResolverFactories, null, null);
     }
 
     @Nullable
@@ -363,9 +366,10 @@ public class DocxRenderer implements IRender {
      * Builder for configuring an {@link DocxRenderer}. See methods for default configuration.
      */
     public static class Builder extends BuilderBase<Builder> implements RendererBuilder {
-        List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
-        List<NodeDocxRendererFactory> nodeDocxRendererFactories = new ArrayList<>();
-        List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
+        final List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
+        final List<NodeDocxRendererFactory> nodeDocxRendererFactories = new ArrayList<>();
+        final List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
+        final List<UriContentResolverFactory> contentResolverFactories = new ArrayList<>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -382,6 +386,7 @@ public class DocxRenderer implements IRender {
             if (apiPoint instanceof AttributeProviderFactory) this.attributeProviderFactories.remove(apiPoint);
             else if (apiPoint instanceof NodeDocxRendererFactory) this.nodeDocxRendererFactories.remove(apiPoint);
             else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
+            else if (apiPoint instanceof UriContentResolverFactory) this.contentResolverFactories.remove(apiPoint);
             else if (apiPoint instanceof HeaderIdGeneratorFactory) this.htmlIdGeneratorFactory = null;
             else {
                 throw new IllegalStateException("Unknown data point type: " + apiPoint.getClass().getName());
@@ -422,8 +427,7 @@ public class DocxRenderer implements IRender {
         }
 
         /**
-         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
-         * of node types or define rendering for custom node types.
+         * Add a factory for resolving link text to URI
          * <p>
          * If multiple node renderers for the same node type are created, the one from the factory that was added first
          * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
@@ -439,11 +443,7 @@ public class DocxRenderer implements IRender {
         }
 
         /**
-         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
-         * of node types or define rendering for custom node types.
-         * <p>
-         * If multiple node renderers for the same node type are created, the one from the factory that was added first
-         * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
+         * Add a factory for resolving links in markdown to URI used in rendering
          *
          * @param linkResolverFactory the factory for creating a node renderer
          * @return {@code this}
@@ -453,6 +453,20 @@ public class DocxRenderer implements IRender {
         public Builder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
             addExtensionApiPoint(linkResolverFactory);
+            return this;
+        }
+
+        /**
+         * Add a factory for resolving URI to content
+         *
+         * @param contentResolverFactory the factory for creating a node renderer
+         * @return {@code this}
+         */
+        @NotNull
+        @Override
+        public Builder contentResolverFactory(@NotNull UriContentResolverFactory contentResolverFactory) {
+            this.contentResolverFactories.add(contentResolverFactory);
+            addExtensionApiPoint(contentResolverFactory);
             return this;
         }
 
@@ -532,7 +546,9 @@ public class DocxRenderer implements IRender {
         private DocxRendererPhase phase;
         Node renderingNode;
         final private LinkResolver[] myLinkResolvers;
+        final private UriContentResolver[] myContentResolvers;
         final private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
+        final private HashMap<String, ResolvedContent> resolvedContentMap = new HashMap<>();
         final private AttributeProvider[] myAttributeProviders;
         final private HtmlIdGenerator htmlIdGenerator;
         //final private Node firstHeadingNode;
@@ -549,8 +565,11 @@ public class DocxRenderer implements IRender {
             this.renderingPhases = new HashSet<>(DocxRendererPhase.values().length);
             Set<Class<?>> collectNodeTypes = new HashSet<>(100);
             this.phasedFormatters = new ArrayList<>(nodeFormatterFactories.size());
-            Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options);
+            boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options) && linkResolverFactories.stream().noneMatch(it-> it instanceof DocxLinkResolver.Factory);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
+            
+            boolean defaultContentResolver = DEFAULT_CONTENT_RESOLVER.get(options) && contentResolverFactories.stream().noneMatch(it-> it instanceof FileUriContentResolver.Factory);
+            this.myContentResolvers = new UriContentResolver[contentResolverFactories.size() + (defaultContentResolver ? 1 : 0)];
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
                     : new HeaderIdGenerator.Factory().create(this);
 
@@ -573,6 +592,15 @@ public class DocxRenderer implements IRender {
             if (defaultLinkResolver) {
                 // add the default link resolver
                 myLinkResolvers[linkResolverFactories.size()] = new DocxLinkResolver.Factory().apply(this);
+            }
+
+            for (int i = 0; i < contentResolverFactories.size(); i++) {
+                myContentResolvers[i] = contentResolverFactories.get(i).apply(this);
+            }
+
+            if (defaultContentResolver) {
+                // add the default link resolver
+                myContentResolvers[contentResolverFactories.size()] = new FileUriContentResolver.Factory().apply(this);
             }
 
             this.myAttributeProviders = new AttributeProvider[attributeProviderFactories.size()];
@@ -800,6 +828,27 @@ public class DocxRenderer implements IRender {
             }
 
             return resolvedLink;
+        }
+
+        @NotNull
+        @Override
+        public ResolvedContent resolvedContent(@NotNull ResolvedLink resolvedLink) {
+            ResolvedContent resolvedContent = resolvedContentMap.get(resolvedLink.getUrl());
+
+            if (resolvedContent == null) {
+                resolvedContent = new ResolvedContent(resolvedLink, LinkStatus.UNKNOWN, null);
+                Node currentNode = renderingNode;
+
+                for (UriContentResolver contentResolver : myContentResolvers) {
+                    resolvedContent = contentResolver.resolveContent(currentNode, this, resolvedContent);
+                    if (resolvedContent.getStatus() != LinkStatus.UNKNOWN) break;
+                }
+
+                // put it in the map
+                resolvedContentMap.put(resolvedLink.getUrl(), resolvedContent);
+            }
+
+            return resolvedContent;
         }
 
         @Override

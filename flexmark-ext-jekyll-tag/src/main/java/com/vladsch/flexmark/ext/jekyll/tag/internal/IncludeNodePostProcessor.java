@@ -3,13 +3,8 @@ package com.vladsch.flexmark.ext.jekyll.tag.internal;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagBlock;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.LinkResolver;
-import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
-import com.vladsch.flexmark.html.renderer.LinkStatus;
-import com.vladsch.flexmark.html.renderer.LinkType;
-import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.html.*;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
@@ -25,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 public class IncludeNodePostProcessor extends NodePostProcessor {
@@ -32,6 +28,7 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
     final HashMap<String, ResolvedLink> resolvedLinks = new HashMap<>();
     final Parser parser;
     final List<LinkResolver> linkResolvers;
+    final List<UriContentResolver> contentResolvers;
     final boolean isIncluding = false;
     final Document document;
     final LinkResolverBasicContext context;
@@ -52,11 +49,22 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
                 return document;
             }
         };
-        List<LinkResolverFactory> resolverFactories = DependencyResolver.resolveFlatDependencies(JekyllTagExtension.LINK_RESOLVER_FACTORIES.get(document), null, null);
-        linkResolvers = new ArrayList<>(resolverFactories.size());
-        for (LinkResolverFactory resolverFactory : resolverFactories) {
+        List<LinkResolverFactory> linkResolverFactories = DependencyResolver.resolveFlatDependencies(JekyllTagExtension.LINK_RESOLVER_FACTORIES.get(document), null, null);
+        linkResolvers = new ArrayList<>(linkResolverFactories.size());
+        for (LinkResolverFactory resolverFactory : linkResolverFactories) {
             linkResolvers.add(resolverFactory.apply(context));
         }
+
+        List<UriContentResolverFactory> resolverFactories = JekyllTagExtension.CONTENT_RESOLVER_FACTORIES.get(document);
+        if (resolverFactories.isEmpty()) {
+            resolverFactories = Collections.singletonList(new FileUriContentResolver.Factory());
+        }
+        List<UriContentResolverFactory> contentResolverFactories = DependencyResolver.resolveFlatDependencies(resolverFactories, null, null);
+        contentResolvers = new ArrayList<>(contentResolverFactories.size());
+        for (UriContentResolverFactory resolverFactory : contentResolverFactories) {
+            contentResolvers.add(resolverFactory.apply(context));
+        }
+
         this.embedIncludedContent = JekyllTagExtension.EMBED_INCLUDED_CONTENT.get(document);
         this.includedHtml = JekyllTagExtension.INCLUDED_HTML.get(document);
     }
@@ -91,13 +99,17 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
                             }
 
                             if (resolvedLink.getStatus() == LinkStatus.VALID) {
-                                // have the file 
-                                String url = resolvedLink.getUrl();
-                                if (url.startsWith("file://")) {
-                                    File includedFile = new File(url.substring("file://".length()));
-                                    if (includedFile.isFile() && includedFile.exists()) {
-                                        // need to read and parse the file
-                                        fileContent = FileUtil.getFileContent(includedFile);
+                                ResolvedContent resolvedContent = new ResolvedContent(resolvedLink, LinkStatus.UNKNOWN, null);
+                                for (UriContentResolver contentResolver : contentResolvers) {
+                                    resolvedContent = contentResolver.resolveContent(node, context, resolvedContent);
+                                    if (resolvedContent.getStatus() != LinkStatus.UNKNOWN) break;
+                                }
+
+                                if (resolvedContent.getStatus() == LinkStatus.VALID) {
+                                    try {
+                                        fileContent = new String(resolvedContent.getContent(), "UTF-8");
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
                                     }
                                 }
                             }

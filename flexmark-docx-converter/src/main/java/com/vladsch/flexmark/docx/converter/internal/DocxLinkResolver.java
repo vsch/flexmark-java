@@ -10,13 +10,11 @@ import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.LinkResolverBasicContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
-import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.Set;
 
 public class DocxLinkResolver implements LinkResolver {
@@ -31,9 +29,9 @@ public class DocxLinkResolver implements LinkResolver {
         String docRootURL = DocxRenderer.DOC_ROOT_URL.get(context.getOptions());
         this.docRelativeURL = docRelativeURL;
         this.docRootURL = docRootURL;
-        
+
         docRelativeURL = Utils.removePrefix(docRelativeURL, '/');
-        
+
         relativeParts = docRelativeURL.split("/");
         prefixWwwLinks = DocxRenderer.PREFIX_WWW_LINKS.get(context.getOptions());
     }
@@ -66,7 +64,7 @@ public class DocxLinkResolver implements LinkResolver {
                 if (docRootURL != null && !docRootURL.isEmpty()) {
                     // this one is root url, prefix with root url, without the trailing /
                     url = docRootURL + url;
-                    if (!url.startsWith("file:")) url =  "file://" + url;
+                    if (!url.startsWith("file:")) url = "file://" + url;
                     return link.withStatus(LinkStatus.VALID)
                             .withUrl(url);
                 }
@@ -126,7 +124,7 @@ public class DocxLinkResolver implements LinkResolver {
 
                     resolvedPath.append('/').append(resolved).append(suffix);
                     String resolvedUri = resolvedPath.toString();
-                    if (!resolvedUri.startsWith("file:")) resolvedUri =  "file://" + resolvedUri;
+                    if (!resolvedUri.startsWith("file:")) resolvedUri = "file://" + resolvedUri;
                     return link.withStatus(LinkStatus.VALID)
                             .withUrl(resolvedUri);
                 }

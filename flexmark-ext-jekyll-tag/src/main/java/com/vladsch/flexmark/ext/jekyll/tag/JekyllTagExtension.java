@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.jekyll.tag.internal.*;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.LinkResolverFactory;
+import com.vladsch.flexmark.html.UriContentResolverFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
@@ -25,6 +26,7 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     final public static DataKey<Boolean> LIST_INCLUDES_ONLY = new DataKey<>("LIST_INCLUDES_ONLY", true);
     final public static DataKey<Boolean> EMBED_INCLUDED_CONTENT = new DataKey<>("EMBED_INCLUDED_CONTENT", false);
     final public static DataKey<List<LinkResolverFactory>> LINK_RESOLVER_FACTORIES = new DataKey<>("LINK_RESOLVER_FACTORIES", Collections.emptyList());
+    final public static DataKey<List<UriContentResolverFactory>> CONTENT_RESOLVER_FACTORIES = new DataKey<>("LINK_RESOLVER_FACTORIES", Collections.emptyList());
     final public static NullableDataKey<Map<String, String>> INCLUDED_HTML = new NullableDataKey<>("INCLUDED_HTML");
     final public static DataKey<List<JekyllTag>> TAG_LIST = new DataKey<>("TAG_LIST", ArrayList::new);
 

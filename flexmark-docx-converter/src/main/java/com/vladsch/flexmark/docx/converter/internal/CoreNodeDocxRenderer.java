@@ -2,8 +2,6 @@ package com.vladsch.flexmark.docx.converter.internal;
 
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockPreVisitor;
-import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockVisitor;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.docx.converter.*;
 import com.vladsch.flexmark.docx.converter.util.*;
@@ -47,7 +45,6 @@ import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.misc.FileUtil;
 import com.vladsch.flexmark.util.misc.ImageUtils;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -72,10 +69,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.xml.bind.JAXBElement;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.math.BigInteger;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -1641,13 +1635,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private void render(Image node, DocxRendererContext docx) {
         String altText = new TextCollectingVisitor().collectAndGetText(node);
         ResolvedLink resolvedLink = docx.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null, null);
-        String url = resolvedLink.getUrl();
         Attributes attributes = resolvedLink.getNonNullAttributes();
 
         if (!node.getUrlContent().isEmpty()) {
             // reverse URL encoding of =, &
             String content = Escaping.percentEncodeUrl(node.getUrlContent()).replace("+", "%2B").replace("%3D", "=").replace("%26", "&amp;");
-            url += content;
+            resolvedLink = resolvedLink.withUrl(resolvedLink.getUrl() + content);
         }
 
         if (!altText.isEmpty()) {
@@ -1657,7 +1650,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
 
         //String alt = node.getText().unescape();
-        renderImage(docx, url, attributes, 1.0);
+        renderImage(docx, resolvedLink, attributes, 1.0);
     }
 
     private void render(Emoji node, DocxRendererContext docx) {
@@ -1674,7 +1667,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             } else {
                 ResolvedLink resolvedLink = docx.resolveLink(LinkType.IMAGE, shortcut.emojiText, null, null);
                 //String altText = shortcut.alt;
-                String url = resolvedLink.getUrl();
                 Attributes attributes = resolvedLink.getNonNullAttributes();
 
                 if (shortcut.alt != null) {
@@ -1718,7 +1710,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 }
 
                 attributes = docx.extendRenderingNodeAttributes(AttributablePart.NODE, attributes);
-                R r = renderImage(docx, url, attributes, 1.0);
+                R r = renderImage(docx, resolvedLink, attributes, 1.0);
 
                 // now move down by 20%
                 // <w:position w:val="-4"/>
@@ -1778,7 +1770,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
         } else {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
-            String url = resolvedLink.getUrl();
             Attributes attributes = resolvedLink.getNonNullAttributes();
 
             if (!altText.isEmpty()) {
@@ -1793,44 +1784,37 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
             addRunAttributeFormatting(getAttributeFormat(attributes, docx), docx);
 
-            renderImage(docx, url, attributes, 1.0);
+            renderImage(docx, resolvedLink, attributes, 1.0);
         }
     }
 
-    private R renderImage(DocxRendererContext docx, String url, Attributes attributes, double scale) {
+    private R renderImage(DocxRendererContext docx, ResolvedLink resolvedLink, Attributes attributes, double scale) {
         BufferedImage image = null;
         int id1 = imageId++;
         int id2 = imageId++;
         String filenameHint = String.format(Locale.US, "Image%d", id1);
         int cx;
 
-        if (url.startsWith(DocxRenderer.EMOJI_RESOURCE_PREFIX)) {
-            // we take it from resources
-            url = this.getClass().getResource("/emoji/" + url.substring(DocxRenderer.EMOJI_RESOURCE_PREFIX.length())).toString();
-        }
+        String url = resolvedLink.getUrl();
 
+        if (url.startsWith(DocxRenderer.EMOJI_RESOURCE_PREFIX)) {
+            url = this.getClass().getResource("/emoji/" + url.substring(DocxRenderer.EMOJI_RESOURCE_PREFIX.length())).toString();
+            resolvedLink = resolvedLink.withUrl(url).withStatus(LinkStatus.VALID);
+        }
 
         if (ImageUtils.isEncodedImage(url)) {
             image = ImageUtils.base64Decode(url);
-        } else if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
-            // hyperlinked image  or file
-            if (url.startsWith("file:")) {
-                // try to load from file, from URL fails on some images while file load succeeds
-                try {
-                    File imageFile = new File(new URI(url));
-                    image = ImageUtils.loadImageFromFile(imageFile);
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
-            } else {
+        } else {
+            ResolvedContent resolvedContent = docx.resolvedContent(resolvedLink);
+            if (resolvedContent.getStatus() == LinkStatus.VALID) {
+                image = ImageUtils.loadImageFromContent(resolvedContent.getContent(), resolvedLink.getUrl());
+            } else if (url.startsWith("http:") || url.startsWith("https:")) {
                 image = ImageUtils.loadImageFromURL(url, options.logImageProcessing);
             }
 
             if (image == null && options.logImageProcessing) {
                 System.out.println("loadImageFromURL(" + url + ") returned null");
             }
-        } else if (options.logImageProcessing) {
-            System.out.println("renderImage of \"" + url + "\") skipped (not file:, http: or https:)");
         }
 
         if (image != null) {

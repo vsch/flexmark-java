@@ -39,6 +39,8 @@
 
 package com.vladsch.flexmark.util.misc;
 
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -158,6 +160,34 @@ public class ImageUtils {
             //System.err.println("deleting " + cachedImageFile);
             //cachedImageFile.delete();
             return null;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param cachedImageBytes file
+     * @return Could be {@code null} if the image could not be read from the file (because of whatever strange
+     *         reason).
+     */
+    public static BufferedImage loadImageFromContent(byte[] cachedImageBytes, String idPath) {
+        if (cachedImageBytes == null) {
+            return null;
+        }
+
+        ByteInputStream inputStream = new ByteInputStream(cachedImageBytes, cachedImageBytes.length);
+        
+        try {
+            return ImageIO.read(inputStream);
+        } catch (IndexOutOfBoundsException | IOException e) {
+            System.err.print("*");
+            System.err.println("could not read from image bytes for " + idPath);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;

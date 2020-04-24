@@ -16,17 +16,22 @@ public interface RendererBuilder extends DataHolder {
      * @return {@code this}
      */
     @NotNull RendererBuilder attributeProviderFactory(@NotNull AttributeProviderFactory attributeProviderFactory);
+    
     /**
-     * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
-     * of node types or define rendering for custom node types.
-     * <p>
-     * If multiple node renderers for the same node type are created, the one from the factory that was added first
-     * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
+     * Add a factory for resolving links in markdown to URI used in rendering
      *
      * @param linkResolverFactory the factory for creating a node renderer
      * @return {@code this}
      */
     @NotNull RendererBuilder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory);
+
+    /**
+     * Add a factory for resolving URI to content
+     *
+     * @param contentResolverFactory the factory for creating a node renderer
+     * @return {@code this}
+     */
+    @NotNull RendererBuilder contentResolverFactory(@NotNull UriContentResolverFactory contentResolverFactory);
 
     /**
      * Add a factory for generating the header id attribute from the header's text

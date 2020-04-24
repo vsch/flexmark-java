@@ -436,6 +436,17 @@ public class HtmlRenderer implements IRender {
         }
 
         /**
+         * Add a factory for resolving URI to content
+         *
+         * @param contentResolverFactory the factory for creating a node renderer
+         * @return {@code this}
+         */
+        @Override
+        public @NotNull Builder contentResolverFactory(@NotNull UriContentResolverFactory contentResolverFactory) {
+            throw new IllegalStateException("Not implemented");
+        }
+
+        /**
          * Add a factory for generating the header id attribute from the header's text
          *
          * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
