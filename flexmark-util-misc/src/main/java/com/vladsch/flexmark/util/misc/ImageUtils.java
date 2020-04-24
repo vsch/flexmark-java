@@ -39,8 +39,6 @@
 
 package com.vladsch.flexmark.util.misc;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
@@ -175,7 +173,7 @@ public class ImageUtils {
             return null;
         }
 
-        ByteInputStream inputStream = new ByteInputStream(cachedImageBytes, cachedImageBytes.length);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(cachedImageBytes);
         
         try {
             return ImageIO.read(inputStream);
