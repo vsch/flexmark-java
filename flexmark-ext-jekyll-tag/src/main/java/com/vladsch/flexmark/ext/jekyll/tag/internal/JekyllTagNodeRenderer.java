@@ -36,29 +36,34 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
     }
 
     private void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) {
-        
+        if (embedIncludes) {
+            context.renderChildren(node);
+        } else {
+            // nothing to do since includes are not rendered
+        }
     }
 
     private void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) {
-        if (embedIncludes) {
-            // remove jekyll tag node and just leave the included content
-            Node child = node.getFirstChild();
-
-            if (child != null) child = child.getNextAnyNot(JekyllTag.class);
-
-            while (child != null) {
-                Node next = child.getNextAnyNot(JekyllTag.class);
-                context.render(child);
-                child = next;
-            }
-        } else {
-            Node child = node.getFirstChild();
-            while (child != null) {
-                Node next = child.getNextAny(JekyllTag.class);
-                context.render(child);
-                child = next;
-            }
-        }
+//        if (embedIncludes) {
+//            // remove jekyll tag node and just leave the included content
+//            Node child = node.getFirstChild();
+//
+//            if (child != null) child = child.getNextAnyNot(JekyllTag.class);
+//
+//            while (child != null) {
+//                Node next = child.getNextAnyNot(JekyllTag.class);
+//                context.render(child);
+//                child = next;
+//            }
+//        } else {
+//            Node child = node.getFirstChild();
+//            while (child != null) {
+//                Node next = child.getNextAny(JekyllTag.class);
+//                context.render(child);
+//                child = next;
+//            }
+//        }
+        context.renderChildren(node);
     }
 
     public static class Factory implements NodeRendererFactory {

@@ -20,6 +20,9 @@ public class MergeJekyllTagTest {
                 "Content\n" +
                 "\n" +
                 "");
+        content.put("test2.md", "" +
+                "Content\n" +
+                "");
     }
 
     private static final DataHolder OPTIONS = new MutableDataSet()
@@ -90,6 +93,25 @@ public class MergeJekyllTagTest {
                         ""
                 , "" +
                         "{% include test.md %}\n" +
+                        "\n" +
+                        "");
+    }
+    
+    @Test
+    public void testIdAttributeConflictEmbedInline() {
+        assertMerged(true
+                , "" +
+                        "text Content\n" +
+                        "\n" +
+                        "text2 Content\n" +
+                        "\n" +
+                        ""
+                , "" +
+                        "text {% include test2.md %}\n" +
+                        "\n" +
+                        ""
+                , "" +
+                        "text2 {% include test2.md %}\n" +
                         "\n" +
                         "");
     }

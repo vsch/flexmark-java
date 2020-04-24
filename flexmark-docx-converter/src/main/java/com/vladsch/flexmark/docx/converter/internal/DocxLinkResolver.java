@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.docx.converter.DocxRenderer;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagBlock;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
@@ -39,7 +40,7 @@ public class DocxLinkResolver implements LinkResolver {
     @NotNull
     @Override
     public ResolvedLink resolveLink(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedLink link) {
-        if (node instanceof Image || node instanceof Link || node instanceof Reference || node instanceof JekyllTagBlock) {
+        if (node instanceof Image || node instanceof Link || node instanceof Reference || node instanceof JekyllTag) {
             String url = link.getUrl();
 
             if (docRelativeURL.isEmpty() && docRootURL.isEmpty()) {

@@ -2249,7 +2249,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(JekyllTag node, DocxRendererContext docx) {
-        // NOTE: do nothing
+        docx.renderChildren(node);
     }
 
     private void render(JekyllTagBlock node, DocxRendererContext docx) {

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.jekyll.tag;
 
+import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
@@ -7,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A JekyllTag node
  */
-public class JekyllTag extends Node {
+public class JekyllTag extends Block {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence tag = BasedSequence.NULL;
     protected BasedSequence parameters = BasedSequence.NULL;

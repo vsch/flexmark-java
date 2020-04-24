@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.jekyll.tag.internal;
 
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagBlock;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
@@ -14,17 +15,15 @@ import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.dependency.FirstDependent;
-import com.vladsch.flexmark.util.misc.FileUtil;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 public class IncludeNodePostProcessor extends NodePostProcessor {
-    final HashMap<JekyllTagBlock, String> includedDocuments = new HashMap<>();
+    final HashMap<JekyllTag, String> includedDocuments = new HashMap<>();
     final HashMap<String, ResolvedLink> resolvedLinks = new HashMap<>();
     final Parser parser;
     final List<LinkResolver> linkResolvers;
@@ -71,71 +70,75 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
 
     @Override
     public void process(@NotNull NodeTracker state, @NotNull Node node) {
-        if (node instanceof JekyllTagBlock && !includedDocuments.containsKey(node)) {
-            for (Node tag : node.getChildren()) {
-                if (tag instanceof JekyllTag) {
-                    JekyllTag jekyllTag = (JekyllTag) tag;
-                    //noinspection EqualsBetweenInconvertibleTypes
-                    if (embedIncludedContent && jekyllTag.getTag().equals("include")) {
-                        // see if can find file
-                        BasedSequence parameters = jekyllTag.getParameters();
+        if (node instanceof JekyllTag && !includedDocuments.containsKey(node)) {
+            JekyllTag jekyllTag = (JekyllTag) node;
+            //noinspection EqualsBetweenInconvertibleTypes
+            if (embedIncludedContent && jekyllTag.getTag().equals("include")) {
+                // see if can find file
+                BasedSequence parameters = jekyllTag.getParameters();
 
-                        String rawUrl = parameters.unescape();
-                        String fileContent = null;
+                String rawUrl = parameters.unescape();
+                String fileContent = null;
 
-                        if (includedHtml != null && includedHtml.containsKey(rawUrl)) {
-                            fileContent = includedHtml.get(rawUrl);
-                        } else {
-                            ResolvedLink resolvedLink = resolvedLinks.get(rawUrl);
+                if (includedHtml != null && includedHtml.containsKey(rawUrl)) {
+                    fileContent = includedHtml.get(rawUrl);
+                } else {
+                    ResolvedLink resolvedLink = resolvedLinks.get(rawUrl);
 
-                            if (resolvedLink == null) {
-                                resolvedLink = new ResolvedLink(LinkType.LINK, rawUrl);
-                                for (LinkResolver linkResolver : linkResolvers) {
-                                    resolvedLink = linkResolver.resolveLink(node, context, resolvedLink);
-                                    if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
-                                }
-
-                                resolvedLinks.put(rawUrl, resolvedLink);
-                            }
-
-                            if (resolvedLink.getStatus() == LinkStatus.VALID) {
-                                ResolvedContent resolvedContent = new ResolvedContent(resolvedLink, LinkStatus.UNKNOWN, null);
-                                for (UriContentResolver contentResolver : contentResolvers) {
-                                    resolvedContent = contentResolver.resolveContent(node, context, resolvedContent);
-                                    if (resolvedContent.getStatus() != LinkStatus.UNKNOWN) break;
-                                }
-
-                                if (resolvedContent.getStatus() == LinkStatus.VALID) {
-                                    try {
-                                        fileContent = new String(resolvedContent.getContent(), "UTF-8");
-                                    } catch (UnsupportedEncodingException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
+                    if (resolvedLink == null) {
+                        resolvedLink = new ResolvedLink(LinkType.LINK, rawUrl);
+                        for (LinkResolver linkResolver : linkResolvers) {
+                            resolvedLink = linkResolver.resolveLink(node, context, resolvedLink);
+                            if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
                         }
 
-                        if (fileContent != null && !fileContent.isEmpty()) {
-                            includedDocuments.put((JekyllTagBlock) node, fileContent);
+                        resolvedLinks.put(rawUrl, resolvedLink);
+                    }
 
-                            Document includedDoc = parser.parse(fileContent);
-                            parser.transferReferences(document, includedDoc, null);
+                    if (resolvedLink.getStatus() == LinkStatus.VALID) {
+                        ResolvedContent resolvedContent = new ResolvedContent(resolvedLink, LinkStatus.UNKNOWN, null);
+                        for (UriContentResolver contentResolver : contentResolvers) {
+                            resolvedContent = contentResolver.resolveContent(node, context, resolvedContent);
+                            if (resolvedContent.getStatus() != LinkStatus.UNKNOWN) break;
+                        }
 
-                            if (includedDoc.contains(Parser.REFERENCES)) {
-                                // NOTE: if included doc has reference definitions then we need to re-evaluate ones which are missing
-                                document.set(HtmlRenderer.RECHECK_UNDEFINED_REFERENCES, true);
-                            }
-
-                            // insert children of included documents after jekyll tag node
-                            Node child = includedDoc.getFirstChild();
-                            while (child != null) {
-                                Node next = child.getNext();
-                                node.appendChild(child);
-                                state.nodeAddedWithDescendants(child);
-
-                                child = next;
+                        if (resolvedContent.getStatus() == LinkStatus.VALID) {
+                            try {
+                                fileContent = new String(resolvedContent.getContent(), "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
                             }
                         }
+                    }
+                }
+
+                if (fileContent != null && !fileContent.isEmpty()) {
+                    includedDocuments.put(jekyllTag, fileContent);
+
+                    Document includedDoc = parser.parse(fileContent);
+                    parser.transferReferences(document, includedDoc, null);
+
+                    if (includedDoc.contains(Parser.REFERENCES)) {
+                        // NOTE: if included doc has reference definitions then we need to re-evaluate ones which are missing
+                        document.set(HtmlRenderer.RECHECK_UNDEFINED_REFERENCES, true);
+                    }
+
+                    // insert children of included documents into jekyll tag node
+                    Node child = includedDoc.getFirstChild();
+
+                    // NOTE: if this is an inline include tag and there is only one child and it is a Paragraph then we unwrap the paragraph
+                    if (!(jekyllTag.getParent() instanceof JekyllTagBlock)) {
+                        if (child instanceof Paragraph && child.getNext() == null) {
+                            child = child.getFirstChild();
+                        }
+                    }
+
+                    while (child != null) {
+                        Node next = child.getNext();
+                        node.appendChild(child);
+                        state.nodeAddedWithDescendants(child);
+
+                        child = next;
                     }
                 }
             }
@@ -145,7 +148,7 @@ public class IncludeNodePostProcessor extends NodePostProcessor {
     public static class Factory extends NodePostProcessorFactory {
         public Factory() {
             super(false);
-            addNodes(JekyllTagBlock.class);
+            addNodes(JekyllTag.class);
         }
 
         @Override

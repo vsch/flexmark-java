@@ -30,6 +30,9 @@ public class ComboJekyllTagSpecTest extends RendererSpecTest {
         content.put("test.html", "<h1>Heading 1</h1>\n" +
                 "<p>test text</p>\n" +
                 "");
+        content.put("test2.md", "" +
+                "Included Text\n" +
+                "");
         content.put("links.html", "");
         optionsMap.put("includes", new MutableDataSet().set(JekyllTagExtension.INCLUDED_HTML, content));
         optionsMap.put("embed-includes", new MutableDataSet().set(JekyllTagExtension.EMBED_INCLUDED_CONTENT, true));

@@ -29,8 +29,12 @@ public class ComboJekyllTagFormatterSpecTest extends FormatterSpecTest {
         optionsMap.put("no-blocks", new MutableDataSet().set(JekyllTagExtension.ENABLE_BLOCK_TAGS, false));
         optionsMap.put("embed-includes", new MutableDataSet().set(JekyllTagExtension.EMBED_INCLUDED_CONTENT, true));
         Map<String, String> content = new HashMap<>();
-        content.put("test.html", "<h1>Heading 1</h1>\n" +
+        content.put("test.html", "" +
+                "<h1>Heading 1</h1>\n" +
                 "<p>test text</p>\n" +
+                "");
+        content.put("test2.md", "" +
+                "Included Text\n" +
                 "");
         content.put("links.html", "");
         optionsMap.put("includes", new MutableDataSet().set(JekyllTagExtension.INCLUDED_HTML, content));

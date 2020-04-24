@@ -48,47 +48,53 @@ public class JekyllTagNodeFormatter implements PhasedNodeFormatter {
     }
 
     private void render(JekyllTagBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (embedIncludedContent) {
-            // remove jekyll tag node and just leave the included content
-            Node child = node.getFirstChild();
-
-            if (child != null) child = child.getNextAnyNot(JekyllTag.class);
-
-            while (child != null) {
-                Node next = child.getNextAnyNot(JekyllTag.class);
-                context.render(child);
-                child = next;
-            }
-        } else {
-            Node child = node.getFirstChild();
-            while (child != null) {
-                Node next = child.getNextAny(JekyllTag.class);
-                context.render(child);
-                child = next;
-            }
-        }
+//        if (embedIncludedContent) {
+//            // remove jekyll tag node and just leave the included content
+//            Node child = node.getFirstChild();
+//
+//            if (child != null) child = child.getNextAnyNot(JekyllTag.class);
+//
+//            while (child != null) {
+//                Node next = child.getNextAnyNot(JekyllTag.class);
+//                context.render(child);
+//                child = next;
+//            }
+//        } else {
+//            Node child = node.getFirstChild();
+//            while (child != null) {
+//                Node next = child.getNextAny(JekyllTag.class);
+//                context.render(child);
+//                child = next;
+//            }
+//        }
+        context.renderChildren(node);
     }
 
     private void render(JekyllTag node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (!(node.getParent() instanceof JekyllTagBlock)) {
-            Node prev = node.getPrevious();
-            if (prev != null) {
-                BasedSequence chars = prev.getChars();
-                markdown.pushOptions().preserveSpaces()
-                        .append(chars.baseSubSequence(chars.getEndOffset(), node.getStartOffset()))
-                        .popOptions();
-            } else {
-                int startLine = node.getBaseSequence().startOfLine(node.getStartOffset());
-                if (startLine < node.getStartOffset()) {
-                    BasedSequence chars = node.baseSubSequence(startLine, node.getStartOffset());
+        if (embedIncludedContent) {
+            // remove jekyll tag node and just leave the included content
+            context.renderChildren(node);
+        } else {
+            if (!(node.getParent() instanceof JekyllTagBlock)) {
+                Node prev = node.getPrevious();
+                if (prev != null) {
+                    BasedSequence chars = prev.getChars();
                     markdown.pushOptions().preserveSpaces()
-                            .append(chars)
+                            .append(chars.baseSubSequence(chars.getEndOffset(), node.getStartOffset()))
                             .popOptions();
+                } else {
+                    int startLine = node.getBaseSequence().startOfLine(node.getStartOffset());
+                    if (startLine < node.getStartOffset()) {
+                        BasedSequence chars = node.baseSubSequence(startLine, node.getStartOffset());
+                        markdown.pushOptions().preserveSpaces()
+                                .append(chars)
+                                .popOptions();
+                    }
                 }
             }
+            
+            markdown.append(node.getChars());
         }
-
-        markdown.append(node.getChars());
     }
 
     public static class Factory implements NodeFormatterFactory {

@@ -129,9 +129,9 @@ Document[0, 53]
       Text[16, 17] chars:[16, 17, "1"]
   JekyllTagBlock[51, 52]
     JekyllTag[20, 51] open:[20, 22, "{%"] tag:[23, 30, "include"] parameters:[31, 48, "incl_footnote1.md"] close:[49, 51, "%}"]
-    FootnoteBlock[0, 20] ordinal: 1  open:[0, 2] text:[2, 3] close:[3, 5] footnote:[6, 20]
-      Paragraph[6, 20]
-        Text[6, 19] chars:[6, 19, "Footn …  text"]
+      FootnoteBlock[0, 20] ordinal: 1  open:[0, 2] text:[2, 3] close:[3, 5] footnote:[6, 20]
+        Paragraph[6, 20]
+          Text[6, 19] chars:[6, 19, "Footn …  text"]
 ````````````````````````````````
 
 

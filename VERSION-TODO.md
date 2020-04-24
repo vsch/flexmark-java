@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.20](#06120)
 - [0.61.18](#06118)
 - [0.61.16](#06116)
 - [0.61.14](#06114)
@@ -220,6 +221,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.61.20
+
+* Fix: `JekyllTagExtension` handling of inline include tag. If included file contains a single
+  paragraph then the paragraph is unwrapped so only the text is included. Otherwise, the
+  included file AST is included as is, which may result in invalid HTML if included file has
+  block elements sincde these will be included in the `p` tag of including element.
 
 ## 0.61.18
 

@@ -159,7 +159,7 @@ Document[0, 23]
 Document[0, 23]
   JekyllTagBlock[23, 23]
     JekyllTag[0, 23] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[11, 20, "test.html"] close:[21, 23, "%}"]
-    HtmlBlock[0, 36]
+      HtmlBlock[0, 36]
 ````````````````````````````````
 
 
@@ -172,6 +172,41 @@ include
 Document[0, 24]
   JekyllTagBlock[24, 24]
     JekyllTag[0, 24] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[11, 21, "links.html"] close:[22, 24, "%}"]
+````````````````````````````````
+
+
+inline includes
+
+```````````````````````````````` example(Jekyll Tag: 14) options(includes, embed-includes)
+test {% include test.html %} text
+.
+<p>test 
+<h1>Heading 1</h1>
+<p>test text</p>
+text</p>
+.
+Document[0, 33]
+  Paragraph[0, 33]
+    Text[0, 5] chars:[0, 5, "test "]
+    JekyllTag[5, 28] open:[5, 7, "{%"] tag:[8, 15, "include"] parameters:[16, 25, "test.html"] close:[26, 28, "%}"]
+      HtmlBlock[0, 36]
+    Text[28, 33] chars:[28, 33, " text"]
+````````````````````````````````
+
+
+inline includes
+
+```````````````````````````````` example(Jekyll Tag: 15) options(includes, embed-includes)
+test {% include test2.md %} text
+.
+<p>test Included Text text</p>
+.
+Document[0, 32]
+  Paragraph[0, 32]
+    Text[0, 5] chars:[0, 5, "test "]
+    JekyllTag[5, 27] open:[5, 7, "{%"] tag:[8, 15, "include"] parameters:[16, 24, "test2.md"] close:[25, 27, "%}"]
+      Text[0, 13] chars:[0, 13, "Inclu …  Text"]
+    Text[27, 32] chars:[27, 32, " text"]
 ````````````````````````````````
 
 
