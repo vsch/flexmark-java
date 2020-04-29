@@ -1083,7 +1083,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
 
                 // collapse any link refs contained in this link, they are duds, link takes precedence
                 // TODO: add a test to see if all link refs should be collapsed or just undefined ones
-                collapseLinkRefChildren(insertNode, null, true);
+                collapseLinkRefChildren(insertNode, true, true);
             } else if (insertNode instanceof RefNode) {
                 // have a link ref, collapse to text any tentative ones contained in it, they are duds
                 collapseLinkRefChildren(insertNode, true, true);

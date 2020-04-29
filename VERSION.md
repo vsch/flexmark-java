@@ -6,6 +6,7 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.61.22](#06122)
 - [0.61.20](#06120)
 - [0.61.18](#06118)
 - [0.61.16](#06116)
@@ -165,6 +166,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## 0.61.22
+
+* Fix: [#407, Link text inline content fails to parse image references], link and image refs in
+  link text would be collapsed even when they are not tentative but defined.
 
 ## 0.61.20
 
@@ -2045,3 +2051,5 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 
 [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]: https://github.com/vsch/flexmark-java/issues/398
+
+[#407, Link text inline content fails to parse image references]: https://github.com/vsch/flexmark-java/issues/407

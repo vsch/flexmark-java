@@ -1283,7 +1283,7 @@ Issue #384,
 
 <a href="https://doc-kurento.readthedocs.io/en/stable/user/installation.html">Install Kurento Media server</a>
 <div class="bd-callout bd-callout-danger">
-	It should be run under same user as OM
+→It should be run under same user as OM
 </div>
 
 ## Specify/Install Turn server
@@ -1320,6 +1320,74 @@ Document[0, 474]
     Text[386, 413] chars:[386, 413, "Speci … erver"]
   BlankLine[414, 415]
   HtmlBlock[415, 474]
+````````````````````````````````
+
+
+### 407
+
+Issue #487
+
+Wrong syntax
+
+```````````````````````````````` example Core Issues Tests - 407: 1
+[![][moon]](/uri)
+
+[moon]: moon.jpg
+.
+<p><a href="/uri"><img src="moon.jpg" alt="" /></a></p>
+.
+Document[0, 35]
+  Paragraph[0, 18] isTrailingBlankLine
+    Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, "![][moon]"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/uri"] pageRef:[12, 16, "/uri"] linkClose:[16, 17, ")"]
+      ImageRef[1, 10] textOpen:[1, 3, "!["] text:[3, 3] textClose:[3, 4, "]"] referenceOpen:[4, 5, "["] reference:[5, 9, "moon"] referenceClose:[9, 10, "]"]
+  Reference[19, 35] refOpen:[19, 20, "["] ref:[20, 24, "moon"] refClose:[24, 26, "]:"] url:[27, 35, "moon.jpg"]
+````````````````````````````````
+
+
+```````````````````````````````` example Core Issues Tests - 407: 2
+[![moon]](/uri)
+
+[moon]: moon.jpg
+.
+<p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
+.
+Document[0, 33]
+  Paragraph[0, 16] isTrailingBlankLine
+    Link[0, 15] textOpen:[0, 1, "["] text:[1, 8, "![moon]"] textClose:[8, 9, "]"] linkOpen:[9, 10, "("] url:[10, 14, "/uri"] pageRef:[10, 14, "/uri"] linkClose:[14, 15, ")"]
+      ImageRef[1, 8] referenceOpen:[1, 3, "!["] reference:[3, 7, "moon"] referenceClose:[7, 8, "]"]
+        Text[3, 7] chars:[3, 7, "moon"]
+  Reference[17, 33] refOpen:[17, 18, "["] ref:[18, 22, "moon"] refClose:[22, 24, "]:"] url:[25, 33, "moon.jpg"]
+````````````````````````````````
+
+
+```````````````````````````````` example Core Issues Tests - 407: 3
+[![moon][]](/uri)
+
+[moon]: moon.jpg
+.
+<p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
+.
+Document[0, 35]
+  Paragraph[0, 18] isTrailingBlankLine
+    Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, "![moon][]"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/uri"] pageRef:[12, 16, "/uri"] linkClose:[16, 17, ")"]
+      ImageRef[1, 10] referenceOpen:[1, 3, "!["] reference:[3, 7, "moon"] referenceClose:[7, 8, "]"] textOpen:[8, 9, "["] textClose:[9, 10, "]"]
+        Text[3, 7] chars:[3, 7, "moon"]
+  Reference[19, 35] refOpen:[19, 20, "["] ref:[20, 24, "moon"] refClose:[24, 26, "]:"] url:[27, 35, "moon.jpg"]
+````````````````````````````````
+
+
+```````````````````````````````` example Core Issues Tests - 407: 4
+![moon]
+
+[moon]: moon.jpg
+.
+<p><img src="moon.jpg" alt="moon" /></p>
+.
+Document[0, 25]
+  Paragraph[0, 8] isTrailingBlankLine
+    ImageRef[0, 7] referenceOpen:[0, 2, "!["] reference:[2, 6, "moon"] referenceClose:[6, 7, "]"]
+      Text[2, 6] chars:[2, 6, "moon"]
+  Reference[9, 25] refOpen:[9, 10, "["] ref:[10, 14, "moon"] refClose:[14, 16, "]:"] url:[17, 25, "moon.jpg"]
 ````````````````````````````````
 
 
