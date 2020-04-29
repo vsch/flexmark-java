@@ -15,6 +15,7 @@ public class InlineParserOptions {
     final public boolean intellijDummyIdentifier;
     final public boolean parseJekyllMacrosInUrls;
     final public boolean useHardcodedLinkAddressParser;
+    final public boolean linkTextPriorityOverLinkRef;
 
     public InlineParserOptions(DataHolder options) {
         matchLookaheadFirst = Parser.MATCH_NESTED_LINK_REFS_FIRST.get(options);
@@ -29,5 +30,6 @@ public class InlineParserOptions {
         codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.get(options);
         inlineDelimiterDirectionalPunctuations = Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS.get(options);
         linksAllowMatchedParentheses = Parser.LINKS_ALLOW_MATCHED_PARENTHESES.get(options);
+        linkTextPriorityOverLinkRef = Parser.LINK_TEXT_PRIORITY_OVER_LINK_REF.get(options);
     }
 }

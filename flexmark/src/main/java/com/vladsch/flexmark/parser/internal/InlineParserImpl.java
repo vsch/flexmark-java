@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 
 public class InlineParserImpl extends LightInlineParserImpl implements InlineParser, ParagraphPreProcessor {
@@ -1081,15 +1082,25 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                     bracket = bracket.getPrevious();
                 }
 
-                // collapse any link refs contained in this link, they are duds, link takes precedence
-                // TODO: add a test to see if all link refs should be collapsed or just undefined ones
-                collapseLinkRefChildren(insertNode, true, true);
+                if (options.linkTextPriorityOverLinkRef || !containsLinkRefs(insertNode, true)) {
+                    // collapse any link refs contained in this link, they are duds, link takes precedence
+                    collapseLinkRefChildren(insertNode, child -> child instanceof LinkRef || ((RefNode) child).isTentative(), true);
+                    toRemove.unlink();
+                } else {
+                    // if contains link ref then treat this as plain text
+                    // leave opener, add children as parent nodes and append closer
+                    insertNode.unlink();
+                    block.takeChildren(insertNode);
+                    appendText(insertNode.baseSubSequence(((Link) insertNode).getTextClosingMarker().getStartOffset(), insertNode.getEndOffset()));
+                }
             } else if (insertNode instanceof RefNode) {
                 // have a link ref, collapse to text any tentative ones contained in it, they are duds
-                collapseLinkRefChildren(insertNode, true, true);
+                collapseLinkRefChildren(insertNode, child -> child instanceof LinkRef || ((RefNode) child).isTentative(), true);
+                toRemove.unlink();
+            } else {
+                toRemove.unlink();
             }
 
-            toRemove.unlink();
             return true;
         } else { // no link or image
             index = startIndex;
@@ -1097,6 +1108,17 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             removeLastBracket();
             return true;
         }
+    }
+
+    protected static boolean containsLinkRefs(Node node, Boolean isDefined) {
+        Node next = node.getFirstChild();
+        while (next != null) {
+            if (next instanceof LinkRef && (isDefined == null || ((LinkRef) next).isDefined() == isDefined)) {
+                return true;
+            }
+            next = next.getNext();
+        }
+        return false;
     }
 
     protected static boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isDefined) {
@@ -1111,12 +1133,12 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         return false;
     }
 
-    protected static void collapseLinkRefChildren(Node node, Boolean isTentative, boolean trimFirstLastChild) {
+    protected static void collapseLinkRefChildren(Node node, Function<Node, Boolean> isTentative, boolean trimFirstLastChild) {
         Node child = node.getFirstChild();
         boolean hadCollapse = false;
         while (child != null) {
             Node nextChild = child.getNext();
-            if (child instanceof LinkRefDerived && (isTentative == null || isTentative == ((RefNode) child).isTentative())) {
+            if (child instanceof LinkRefDerived && (isTentative == null || isTentative.apply(child))) {
                 // need to collapse this one, moving its text contents to text
                 collapseLinkRefChildren(child, isTentative, false);
                 child.unlink();

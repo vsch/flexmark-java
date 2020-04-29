@@ -34,6 +34,7 @@ final public class ComboIssuesSpecTest extends CoreRendererSpecTest {
         optionsMap.put("allow-javascript", new MutableDataSet().set(HtmlRenderer.SUPPRESSED_LINKS, ""));
         optionsMap.put("pass-through", new MutableDataSet().set(HtmlRenderer.FORMAT_FLAGS, LineAppendable.F_PASS_THROUGH));
         optionsMap.put("strip-indent", new MutableDataSet().set(TestUtils.SOURCE_INDENT, "> > "));
+        optionsMap.put("link-over-linkref", new MutableDataSet().set(Parser.LINK_TEXT_PRIORITY_OVER_LINK_REF, true));
         optionsMap.put("no-html-blocks", new MutableDataSet().set(Parser.HTML_BLOCK_PARSER, false));
         optionsMap.put("sub-parse", new MutableDataSet()
                 .set(TestUtils.SOURCE_PREFIX, "" +

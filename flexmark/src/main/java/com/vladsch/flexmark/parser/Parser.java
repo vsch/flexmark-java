@@ -85,6 +85,7 @@ public class Parser implements IParse {
     final public static DataKey<Boolean> SPACE_IN_LINK_URLS = new DataKey<>("SPACE_IN_LINK_URLS", false);
     final public static DataKey<Boolean> SPACE_IN_LINK_ELEMENTS = new DataKey<>("SPACE_IN_LINK_ELEMENTS", false);
     final public static DataKey<Boolean> WWW_AUTO_LINK_ELEMENT = new DataKey<>("WWW_AUTO_LINK_ELEMENT", false);
+    final public static DataKey<Boolean> LINK_TEXT_PRIORITY_OVER_LINK_REF = new DataKey<>("LINK_TEXT_PRIORITY_OVER_LINK_REF", false);   // if true then link text containing link ref is treated as link text with link ref as text, else link is ignored and link ref is used
 
     final public static DataKey<Boolean> REFERENCE_PARAGRAPH_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
     final public static DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);

@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.24](#06124)
 - [0.61.22](#06122)
 - [0.61.20](#06120)
 - [0.61.18](#06118)
@@ -207,7 +208,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       extension add order
 * [ ] Fix: Change spec example to variable number of sections
 * [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
-                              Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+                                  Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 * [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
       just formatting. Need to keep track of whether format after typing or just format. Then
       caret position should only track but not force spaces behind it to be preserved. See
@@ -222,6 +223,26 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.61.24
+
+* Fix: link refs in link text should be collapsed.
+  * Add: `Parser.LINK_TEXT_PRIORITY_OVER_LINK_REF`, default `false`, commonmark spec does not
+    specify how to parse:
+
+        [[moon]](/uri)
+
+        [moon]: moon.jpg
+
+    with default implementation priority given to contained ref, renders as:
+
+        <p>[<a href="moon.jpg">moon</a>](/uri)</p>
+
+    when set to `true`, priority given to outer link and will render as:
+
+        <p><a href="/uri">[][moon]</a></p>
+
+    :information_source: Undefined reference links are always treated as text when in a link text element.
 
 ## 0.61.22
 
@@ -2446,6 +2467,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#396, DocumentParser stops reading too early resulting in the document being cut off]: https://github.com/vsch/flexmark-java/issues/396
 [#397, PR: Add base64 image support with docx rendering]: https://github.com/vsch/flexmark-java/pull/397
 [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]: https://github.com/vsch/flexmark-java/issues/398
+[#407, Link text inline content fails to parse image references]: https://github.com/vsch/flexmark-java/issues/407
 [@Xaelis]: https://github.com/Xaelis
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
@@ -2458,6 +2480,4 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 <!-- @IGNORE PREVIOUS: link -->
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
-[#407, Link text inline content fails to parse image references]: https://github.com/vsch/flexmark-java/issues/407
-
 

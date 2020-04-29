@@ -1327,7 +1327,7 @@ Document[0, 474]
 
 Issue #487
 
-Wrong syntax
+Image refs
 
 ```````````````````````````````` example Core Issues Tests - 407: 1
 [![][moon]](/uri)
@@ -1376,18 +1376,140 @@ Document[0, 35]
 ````````````````````````````````
 
 
+Link refs should be treated as text
+
 ```````````````````````````````` example Core Issues Tests - 407: 4
-![moon]
+[[][moon]](/uri)
 
 [moon]: moon.jpg
 .
-<p><img src="moon.jpg" alt="moon" /></p>
+<p>[<a href="moon.jpg"></a>](/uri)</p>
 .
-Document[0, 25]
-  Paragraph[0, 8] isTrailingBlankLine
-    ImageRef[0, 7] referenceOpen:[0, 2, "!["] reference:[2, 6, "moon"] referenceClose:[6, 7, "]"]
+Document[0, 34]
+  Paragraph[0, 17] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    LinkRef[1, 9] textOpen:[1, 2, "["] text:[2, 2] textClose:[2, 3, "]"] referenceOpen:[3, 4, "["] reference:[4, 8, "moon"] referenceClose:[8, 9, "]"]
+    Text[9, 16] chars:[9, 16, "](/uri)"]
+  Reference[18, 34] refOpen:[18, 19, "["] ref:[19, 23, "moon"] refClose:[23, 25, "]:"] url:[26, 34, "moon.jpg"]
+````````````````````````````````
+
+
+```````````````````````````````` example Core Issues Tests - 407: 5
+[[moon]](/uri)
+
+[moon]: moon.jpg
+.
+<p>[<a href="moon.jpg">moon</a>](/uri)</p>
+.
+Document[0, 32]
+  Paragraph[0, 15] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    LinkRef[1, 7] referenceOpen:[1, 2, "["] reference:[2, 6, "moon"] referenceClose:[6, 7, "]"]
       Text[2, 6] chars:[2, 6, "moon"]
-  Reference[9, 25] refOpen:[9, 10, "["] ref:[10, 14, "moon"] refClose:[14, 16, "]:"] url:[17, 25, "moon.jpg"]
+    Text[7, 14] chars:[7, 14, "](/uri)"]
+  Reference[16, 32] refOpen:[16, 17, "["] ref:[17, 21, "moon"] refClose:[21, 23, "]:"] url:[24, 32, "moon.jpg"]
+````````````````````````````````
+
+
+```````````````````````````````` example Core Issues Tests - 407: 6
+[[moon][]](/uri)
+
+[moon]: moon.jpg
+.
+<p>[<a href="moon.jpg">moon</a>](/uri)</p>
+.
+Document[0, 34]
+  Paragraph[0, 17] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    LinkRef[1, 9] referenceOpen:[1, 2, "["] reference:[2, 6, "moon"] referenceClose:[6, 7, "]"] textOpen:[7, 8, "["] textClose:[8, 9, "]"]
+      Text[2, 6] chars:[2, 6, "moon"]
+    Text[9, 16] chars:[9, 16, "](/uri)"]
+  Reference[18, 34] refOpen:[18, 19, "["] ref:[19, 23, "moon"] refClose:[23, 25, "]:"] url:[26, 34, "moon.jpg"]
+````````````````````````````````
+
+
+undefined should render the same as if link text has priority
+
+```````````````````````````````` example Core Issues Tests - 407: 7
+[[][moon]](/uri)
+.
+<p><a href="/uri">[][moon]</a></p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    Link[0, 16] textOpen:[0, 1, "["] text:[1, 9, "[][moon]"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
+      Text[1, 9] chars:[1, 9, "[][moon]"]
+````````````````````````````````
+
+
+```````````````````````````````` example Core Issues Tests - 407: 8
+[[moon]](/uri)
+.
+<p><a href="/uri">[moon]</a></p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Link[0, 14] textOpen:[0, 1, "["] text:[1, 7, "[moon]"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 13, "/uri"] pageRef:[9, 13, "/uri"] linkClose:[13, 14, ")"]
+      Text[1, 7] chars:[1, 7, "[moon]"]
+````````````````````````````````
+
+
+```````````````````````````````` example Core Issues Tests - 407: 9
+[[moon][]](/uri)
+.
+<p><a href="/uri">[moon][]</a></p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    Link[0, 16] textOpen:[0, 1, "["] text:[1, 9, "[moon][]"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
+      Text[1, 9] chars:[1, 9, "[moon][]"]
+````````````````````````````````
+
+
+Link refs should be treated as text
+
+```````````````````````````````` example(Core Issues Tests - 407: 10) options(link-over-linkref)
+[[][moon]](/uri)
+
+[moon]: moon.jpg
+.
+<p><a href="/uri">[][moon]</a></p>
+.
+Document[0, 34]
+  Paragraph[0, 17] isTrailingBlankLine
+    Link[0, 16] textOpen:[0, 1, "["] text:[1, 9, "[][moon]"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
+      Text[1, 9] chars:[1, 9, "[][moon]"]
+  Reference[18, 34] refOpen:[18, 19, "["] ref:[19, 23, "moon"] refClose:[23, 25, "]:"] url:[26, 34, "moon.jpg"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Core Issues Tests - 407: 11) options(link-over-linkref)
+[[moon]](/uri)
+
+[moon]: moon.jpg
+.
+<p><a href="/uri">[moon]</a></p>
+.
+Document[0, 32]
+  Paragraph[0, 15] isTrailingBlankLine
+    Link[0, 14] textOpen:[0, 1, "["] text:[1, 7, "[moon]"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 13, "/uri"] pageRef:[9, 13, "/uri"] linkClose:[13, 14, ")"]
+      Text[1, 7] chars:[1, 7, "[moon]"]
+  Reference[16, 32] refOpen:[16, 17, "["] ref:[17, 21, "moon"] refClose:[21, 23, "]:"] url:[24, 32, "moon.jpg"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Core Issues Tests - 407: 12) options(link-over-linkref)
+[[moon][]](/uri)
+
+[moon]: moon.jpg
+.
+<p><a href="/uri">[moon][]</a></p>
+.
+Document[0, 34]
+  Paragraph[0, 17] isTrailingBlankLine
+    Link[0, 16] textOpen:[0, 1, "["] text:[1, 9, "[moon][]"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
+      Text[1, 9] chars:[1, 9, "[moon][]"]
+  Reference[18, 34] refOpen:[18, 19, "["] ref:[19, 23, "moon"] refClose:[23, 25, "]:"] url:[26, 34, "moon.jpg"]
 ````````````````````````````````
 
 
