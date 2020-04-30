@@ -371,7 +371,7 @@ public class MarkdownParagraph {
 
             if (addSpacesBefore + addSpacesAfter > 0) {
                 int lastNonBlank = wrapped.lastIndexOfAnyNot(WHITESPACE_NBSP);
-                if (wrappedIndex < lastNonBlank) {
+                if (wrappedIndex <= lastNonBlank) {
                     // insert in middle
                     wrapped = wrapped.insert(wrappedIndex, RepeatedSequence.ofSpaces(addSpacesBefore + addSpacesAfter));
 

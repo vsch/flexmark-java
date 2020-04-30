@@ -41,7 +41,7 @@ final public class Text extends Node implements TextContainer {
         } else {
             ReplacedTextMapper textMapper = new ReplacedTextMapper(getChars());
             BasedSequence unescaped = Escaping.unescape(getChars(), textMapper);
-            out.append(unescaped);
+            if (!unescaped.isEmpty()) out.append(unescaped);
         }
         return false;
     }

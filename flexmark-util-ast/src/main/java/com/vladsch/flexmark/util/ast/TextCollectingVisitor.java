@@ -62,7 +62,7 @@ public class TextCollectingVisitor {
     }
 
     public void collect(Node node, int flags) {
-        out = SpaceInsertingSequenceBuilder.emptyBuilder(node.getChars());
+        out = SpaceInsertingSequenceBuilder.emptyBuilder(node.getChars(), flags);
         this.flags = flags;
         myVisitor.visit(node);
     }

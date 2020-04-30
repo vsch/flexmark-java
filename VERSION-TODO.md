@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.26](#06126)
 - [0.61.24](#06124)
 - [0.61.22](#06122)
 - [0.61.20](#06120)
@@ -223,6 +224,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.61.26
+
+* Fix: `SequenceBuilder.toString()` not to add space between sequence parts.
+* Break: `TextCollectingVisitor` needs `TextContainer.F_ADD_SPACES_BETWEEN_NODES` to ensure
+  there is at least one space between texts of different nodes in collected text. Previously
+  this was added automatically by sequence builder. Use one of the `getAndCollect` functions
+  taking options flags.
+* Fix: `MarkdownParagraph` wrapping with preserving tracked offsets with spaces to preserve
+  spaces right before last non-blank character.
 
 ## 0.61.24
 

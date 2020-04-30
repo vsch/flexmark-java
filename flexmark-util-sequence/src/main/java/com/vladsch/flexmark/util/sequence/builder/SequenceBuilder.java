@@ -337,14 +337,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
                 BasedSequence s = baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
 
                 if (s.isNotEmpty()) {
-                    if (last != null && last.isNotEmpty() && last.getEndOffset() < s.getStartOffset()
-                            && (BasedSequence.WHITESPACE.indexOf(last.charAt(last.length() - 1)) == -1)
-                            && BasedSequence.WHITESPACE.indexOf(s.charAt(0)) == -1
-                            && s.baseSubSequence(last.getEndOffset(), s.getStartOffset()).endsWith(" ")
-                    ) {
-                        sb.append(' ');
-                    }
-
                     s.appendTo(sb);
                 }
 

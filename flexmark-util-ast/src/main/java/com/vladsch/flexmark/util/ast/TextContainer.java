@@ -12,6 +12,7 @@ public interface TextContainer {
         FOR_HEADING_ID,  // text for heading ID
         NO_TRIM_REF_TEXT_START,  // don't trim ref text start
         NO_TRIM_REF_TEXT_END,  // don't trim ref text end
+        ADD_SPACES_BETWEEN_NODES,  // when appending text from different nodes, ensure there is at least one space
         ;
 
         final int bits;
@@ -41,6 +42,7 @@ public interface TextContainer {
     int F_FOR_HEADING_ID = BitFieldSet.intMask(Flags.FOR_HEADING_ID);
     int F_NO_TRIM_REF_TEXT_START = BitFieldSet.intMask(Flags.NO_TRIM_REF_TEXT_START);
     int F_NO_TRIM_REF_TEXT_END = BitFieldSet.intMask(Flags.NO_TRIM_REF_TEXT_END);
+    int F_ADD_SPACES_BETWEEN_NODES = BitFieldSet.intMask(Flags.ADD_SPACES_BETWEEN_NODES);
 
     /**
      * Append node's text

@@ -32,7 +32,7 @@ public class TableTextCollectingVisitorTest {
                 "";
         Node document = parser.parse(markdown);
         TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
-        final String text = collectingVisitor.collectAndGetText(document);
+        final String text = collectingVisitor.collectAndGetText(document, TextContainer.F_ADD_SPACES_BETWEEN_NODES);
         //System.out.println(text);
 
         //final String astText = new AstCollectingVisitor().collectAndGetAstText(document);
@@ -61,7 +61,7 @@ public class TableTextCollectingVisitorTest {
                 "";
         Node document = parser.parse(markdown);
         TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
-        final String text = collectingVisitor.collectAndGetText(document, TextContainer.F_LINK_URL);
+        final String text = collectingVisitor.collectAndGetText(document, TextContainer.F_LINK_URL | TextContainer.F_ADD_SPACES_BETWEEN_NODES);
         //System.out.println(text);
 
         //final String astText = new AstCollectingVisitor().collectAndGetAstText(document);
@@ -86,7 +86,7 @@ public class TableTextCollectingVisitorTest {
                 "";
         Node document = parser.parse(markdown);
         TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
-        final String text = collectingVisitor.collectAndGetText(document, TextContainer.F_LINK_NODE_TEXT);
+        final String text = collectingVisitor.collectAndGetText(document, TextContainer.F_LINK_NODE_TEXT | TextContainer.F_ADD_SPACES_BETWEEN_NODES);
         //System.out.println(text);
 
         //final String astText = new AstCollectingVisitor().collectAndGetAstText(document);
@@ -111,14 +111,14 @@ public class TableTextCollectingVisitorTest {
                 "";
         Node document = parser.parse(markdown);
         TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
-        final String text = collectingVisitor.collectAndGetText(document, TextContainer.F_LINK_URL | TextContainer.F_NODE_TEXT);
+        final String text = collectingVisitor.collectAndGetText(document, TextContainer.F_LINK_URL | TextContainer.F_ADD_SPACES_BETWEEN_NODES);
         //System.out.println(text);
 
         //final String astText = new AstCollectingVisitor().collectAndGetAstText(document);
         //System.out.println(astText);
         assertEquals("" +
                 "First Header Second Header\n" +
-                "**Content Cell** ![](image%20spaces.png)\n" +
+                "Content Cell image spaces.png\n" +
                 "", text);
     }
 }

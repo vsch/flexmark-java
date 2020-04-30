@@ -292,7 +292,9 @@ public class SegmentTree {
             builder.appendAnchor(startOffset);
         }
 
+        int currentEnd = startOffset;
         BasedSequence baseSequence = builder.getBaseSequence();
+
         for (int i = startPos; i < endPos; i++) {
             Segment segment = getSegment(i, baseSequence);
 
@@ -318,12 +320,14 @@ public class SegmentTree {
                 }
             } else {
                 assert charSequence instanceof BasedSequence;
-                builder.append(((BasedSequence) charSequence).getStartOffset(), ((BasedSequence) charSequence).getEndOffset());
+                BasedSequence basedSequence = (BasedSequence) charSequence;
+                currentEnd = Math.max(currentEnd, basedSequence.getEndOffset());
+                builder.append(basedSequence.getStartOffset(), basedSequence.getEndOffset());
             }
         }
 
         if (endOffset != -1) {
-            builder.appendAnchor(endOffset);
+            builder.appendAnchor(Math.max(currentEnd, endOffset));
         }
     }
 
@@ -335,7 +339,6 @@ public class SegmentTree {
      * @param endIndex   end index of sub-sequence of segment tree
      * @param startPos   start pos of sub-sequence segments  in tree
      * @param endPos     end  pos of sub-sequence segments  in tree
-     *
      * @return subsequence of segment corresponding to part of it which is in the sub-sequence of the tree
      */
     @NotNull
@@ -461,7 +464,7 @@ public class SegmentTree {
             }
 
             assert lastStart != startPos || lastEnd != endPos : "Range and position did not change after iteration: pos=" + pos + ", startPos=" + startPos + ", endPos=" + endPos
-                    + "\n" + Arrays.toString(treeData) 
+                    + "\n" + Arrays.toString(treeData)
                     ;
         }
         return null;
@@ -531,7 +534,6 @@ public class SegmentTree {
      * @param segments       segments of the tree
      * @param allText        all out of base text
      * @param buildIndexData true to build index search data, false to build base offset tree data
-     *
      * @return segment tree instance with the data
      */
     @NotNull
@@ -619,7 +621,6 @@ public class SegmentTree {
      * Efficiently reuses segmentBytes and only computes offset treeData for BASE and ANCHOR segments
      *
      * @param baseSeq base sequence for the sequence for this segment tree
-     *
      * @return SegmentOffsetTree for this segment tree
      */
     @NotNull

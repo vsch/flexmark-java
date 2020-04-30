@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.ast;
 
+import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
@@ -13,36 +14,38 @@ import org.jetbrains.annotations.Nullable;
 public class SpaceInsertingSequenceBuilder implements ISequenceBuilder<SpaceInsertingSequenceBuilder, BasedSequence> {
     @NotNull
     public static SpaceInsertingSequenceBuilder emptyBuilder(@NotNull BasedSequence base) {
-        return new SpaceInsertingSequenceBuilder(SequenceBuilder.emptyBuilder(base));
+        return new SpaceInsertingSequenceBuilder(SequenceBuilder.emptyBuilder(base), false);
     }
 
     @NotNull
     public static SpaceInsertingSequenceBuilder emptyBuilder(@NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer) {
-        return new SpaceInsertingSequenceBuilder(SequenceBuilder.emptyBuilder(base, optimizer));
+        return new SpaceInsertingSequenceBuilder(SequenceBuilder.emptyBuilder(base, optimizer), false);
     }
 
     @NotNull
     public static SpaceInsertingSequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options) {
-        return new SpaceInsertingSequenceBuilder(SequenceBuilder.emptyBuilder(base, options));
+        return new SpaceInsertingSequenceBuilder(SequenceBuilder.emptyBuilder(base, options), BitFieldSet.any(options, TextContainer.F_ADD_SPACES_BETWEEN_NODES));
     }
 
     @NotNull
     public static SpaceInsertingSequenceBuilder emptyBuilder(@NotNull BasedSequence base, int options, @NotNull SegmentOptimizer optimizer) {
-        return new SpaceInsertingSequenceBuilder(SequenceBuilder.emptyBuilder(base, options, optimizer));
+        return new SpaceInsertingSequenceBuilder(SequenceBuilder.emptyBuilder(base, options, optimizer), BitFieldSet.any(options, TextContainer.F_ADD_SPACES_BETWEEN_NODES));
     }
 
     @NotNull
     public static SpaceInsertingSequenceBuilder emptyBuilder(@NotNull SequenceBuilder builder) {
-        return new SpaceInsertingSequenceBuilder(builder);
+        return new SpaceInsertingSequenceBuilder(builder, false);
     }
 
     final SequenceBuilder out;
     Node lastNode;
-    boolean addSpaceOnNonBlank;
     boolean needEol;
+    final boolean addSpacesBetweenNodes;
+    boolean addSpaces;
 
-    private SpaceInsertingSequenceBuilder(SequenceBuilder out) {
+    private SpaceInsertingSequenceBuilder(SequenceBuilder out, boolean addSpacesBetweenNodes) {
         this.out = out;
+        this.addSpacesBetweenNodes = addSpacesBetweenNodes;
     }
 
     public SequenceBuilder getOut() {
@@ -52,14 +55,6 @@ public class SpaceInsertingSequenceBuilder implements ISequenceBuilder<SpaceInse
     @Override
     public char charAt(int index) {
         return out.charAt(index);
-    }
-
-    public boolean isAddSpaceOnNonBlank() {
-        return addSpaceOnNonBlank;
-    }
-
-    public void setAddSpaceOnNonBlank(boolean addSpaceOnNonBlank) {
-        this.addSpaceOnNonBlank = addSpaceOnNonBlank;
     }
 
     public boolean isNeedEol() {
@@ -79,10 +74,10 @@ public class SpaceInsertingSequenceBuilder implements ISequenceBuilder<SpaceInse
 
         if (this.lastNode != null && this.lastNode.getEndOffset() < lastNode.getStartOffset()) {
             BasedSequence sequence = getBaseSequence().subSequence(this.lastNode.getEndOffset(), lastNode.getStartOffset());
-            this.addSpaceOnNonBlank = sequence.indexOfAny(CharPredicate.SPACE_TAB_EOL) != -1;
             this.needEol = sequence.trim(CharPredicate.SPACE_TAB).length() > 0 && sequence.trim(CharPredicate.WHITESPACE).isEmpty();
         }
 
+        addSpaces = addSpacesBetweenNodes;
         this.lastNode = lastNode;
     }
 
@@ -155,14 +150,14 @@ public class SpaceInsertingSequenceBuilder implements ISequenceBuilder<SpaceInse
 
     @Override
     @NotNull
-    public SpaceInsertingSequenceBuilder getBuilder() {return new SpaceInsertingSequenceBuilder(out.getBuilder());}
+    public SpaceInsertingSequenceBuilder getBuilder() {return new SpaceInsertingSequenceBuilder(out.getBuilder(), addSpacesBetweenNodes);}
 
     @Override
     @NotNull
     public SpaceInsertingSequenceBuilder append(@Nullable CharSequence chars, int startIndex, int endIndex) {
-        if (addSpaceOnNonBlank && chars != null && startIndex < endIndex && !CharPredicate.WHITESPACE.test(chars.charAt(startIndex)) && needSpace()) {
+        if (addSpaces && chars != null && startIndex < endIndex && !CharPredicate.WHITESPACE.test(chars.charAt(startIndex)) && needSpace()) {
             out.append(' ');
-            addSpaceOnNonBlank = false;
+            addSpaces = false;
         }
         out.append(chars, startIndex, endIndex);
         return this;
@@ -171,9 +166,9 @@ public class SpaceInsertingSequenceBuilder implements ISequenceBuilder<SpaceInse
     @Override
     @NotNull
     public SpaceInsertingSequenceBuilder append(char c) {
-        if (addSpaceOnNonBlank && !CharPredicate.WHITESPACE.test(c) && needSpace()) {
+        if (addSpaces && !CharPredicate.WHITESPACE.test(c) && needSpace()) {
             out.append(' ');
-            addSpaceOnNonBlank = false;
+            addSpaces = false;
         }
         out.append(c);
         return this;
@@ -182,9 +177,9 @@ public class SpaceInsertingSequenceBuilder implements ISequenceBuilder<SpaceInse
     @Override
     @NotNull
     public SpaceInsertingSequenceBuilder append(char c, int count) {
-        if (addSpaceOnNonBlank && !CharPredicate.WHITESPACE.test(c) && needSpace()) {
+        if (addSpaces && !CharPredicate.WHITESPACE.test(c) && needSpace()) {
             out.append(' ');
-            addSpaceOnNonBlank = false;
+            addSpaces = false;
         }
         out.append(c, count);
         return this;
@@ -192,9 +187,9 @@ public class SpaceInsertingSequenceBuilder implements ISequenceBuilder<SpaceInse
 
     @NotNull
     public SpaceInsertingSequenceBuilder append(int startOffset, int endOffset) {
-        if (addSpaceOnNonBlank && startOffset < endOffset && !CharPredicate.WHITESPACE.test(out.getBaseSequence().charAt(startOffset)) && needSpace()) {
+        if (addSpaces && startOffset < endOffset && !CharPredicate.WHITESPACE.test(out.getBaseSequence().charAt(startOffset)) && needSpace()) {
             out.append(' ');
-            addSpaceOnNonBlank = false;
+            addSpaces = false;
         }
         out.append(startOffset, endOffset);
         return this;
