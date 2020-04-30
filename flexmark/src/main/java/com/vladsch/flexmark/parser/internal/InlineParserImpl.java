@@ -925,7 +925,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                     String normalizedLabel = Escaping.normalizeReferenceChars(ref, true);
                     if (referenceRepository.containsKey(normalizedLabel)) {
                         BasedSequence sequence = input.subSequence(opener.getStartIndex(), startIndex);
-                        boolean containsLinks = containsLinkRefs(refIsBare ? ref : sequence, opener.getNode().getNext(), true);
+                        boolean containsLinks = containsLinkRefs(refIsBare ? ref : sequence, opener.getNode().getNext(), false);
                         isLinkOrImage = !containsLinks;
                         refIsDefined = true;
                     } else {
@@ -1031,6 +1031,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                     }
                 }
             }
+            
             appendNode(insertNode);
 
             if (insertNode instanceof RefNode) {
@@ -1047,7 +1048,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                 }
                 insertNode.setCharsFromContent();
             } else if (insertNode instanceof InlineLinkNode) {
-                // set dest and title
+                // set url and title
                 InlineLinkNode inlineLinkNode = (InlineLinkNode) insertNode;
                 inlineLinkNode.setUrlChars(dest);
                 inlineLinkNode.setTitleChars(title);
@@ -1082,9 +1083,9 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                     bracket = bracket.getPrevious();
                 }
 
-                if (options.linkTextPriorityOverLinkRef || !containsLinkRefs(insertNode, true)) {
+                if (options.linkTextPriorityOverLinkRef || !containsLinkRefs(insertNode, false)) {
                     // collapse any link refs contained in this link, they are duds, link takes precedence
-                    collapseLinkRefChildren(insertNode, child -> child instanceof LinkRef || ((RefNode) child).isTentative(), true);
+                    collapseLinkRefChildren(insertNode, child -> child instanceof LinkRendered || child.isTentative(), true);
                     toRemove.unlink();
                 } else {
                     // if contains link ref then treat this as plain text
@@ -1095,7 +1096,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
                 }
             } else if (insertNode instanceof RefNode) {
                 // have a link ref, collapse to text any tentative ones contained in it, they are duds
-                collapseLinkRefChildren(insertNode, child -> child instanceof LinkRef || ((RefNode) child).isTentative(), true);
+                collapseLinkRefChildren(insertNode, child -> child instanceof LinkRendered || child.isTentative(), true);
                 toRemove.unlink();
             } else {
                 toRemove.unlink();
@@ -1110,10 +1111,10 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         }
     }
 
-    protected static boolean containsLinkRefs(Node node, Boolean isDefined) {
+    protected static boolean containsLinkRefs(Node node, Boolean isTentative) {
         Node next = node.getFirstChild();
         while (next != null) {
-            if (next instanceof LinkRef && (isDefined == null || ((LinkRef) next).isDefined() == isDefined)) {
+            if (next instanceof LinkRendered && (isTentative == null || ((LinkRendered) next).isTentative() == isTentative)) {
                 return true;
             }
             next = next.getNext();
@@ -1121,11 +1122,11 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         return false;
     }
 
-    protected static boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isDefined) {
+    protected static boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isTentative) {
         int startOffset = nodeChars.getStartOffset();
         int endOffset = nodeChars.getEndOffset();
         while (next != null) {
-            if (next instanceof LinkRef && (isDefined == null || ((LinkRef) next).isDefined() == isDefined) && !(next.getStartOffset() >= endOffset || next.getEndOffset() <= startOffset)) {
+            if (next instanceof LinkRefDerived && (isTentative == null || ((LinkRefDerived) next).isTentative() == isTentative) && !(next.getStartOffset() >= endOffset || next.getEndOffset() <= startOffset)) {
                 return true;
             }
             next = next.getNext();
@@ -1133,12 +1134,12 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         return false;
     }
 
-    protected static void collapseLinkRefChildren(Node node, Function<Node, Boolean> isTentative, boolean trimFirstLastChild) {
+    protected static void collapseLinkRefChildren(Node node, Function<LinkRefDerived, Boolean> isTentative, boolean trimFirstLastChild) {
         Node child = node.getFirstChild();
         boolean hadCollapse = false;
         while (child != null) {
             Node nextChild = child.getNext();
-            if (child instanceof LinkRefDerived && (isTentative == null || isTentative.apply(child))) {
+            if (child instanceof LinkRefDerived && (isTentative == null || isTentative.apply((LinkRefDerived) child))) {
                 // need to collapse this one, moving its text contents to text
                 collapseLinkRefChildren(child, isTentative, false);
                 child.unlink();
@@ -1238,12 +1239,8 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
     @Override
     public BasedSequence parseLinkTitle() {
         BasedSequence title = match(myParsing.LINK_TITLE);
-        if (title != null) {
-            // chop off quotes from title and unescape:
-            return title; //Escaping.unescapeString(title.substring(1, title.length() - 1));
-        } else {
-            return null;
-        }
+        // chop off quotes from title and unescape:
+        return title; //Escaping.unescapeString(title.substring(1, title.length() - 1));
     }
 
     /**

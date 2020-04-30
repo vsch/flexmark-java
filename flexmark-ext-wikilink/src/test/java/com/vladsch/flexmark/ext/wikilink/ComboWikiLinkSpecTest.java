@@ -37,6 +37,7 @@ public class ComboWikiLinkSpecTest extends RendererSpecTest {
         optionsMap.put("allow-pipe-escape", new MutableDataSet().set(WikiLinkExtension.ALLOW_PIPE_ESCAPE, true));
         optionsMap.put("allow-anchor-escape", new MutableDataSet().set(WikiLinkExtension.ALLOW_ANCHOR_ESCAPE, true));
         optionsMap.put("custom-link-escape", new MutableDataSet().set(WikiLinkExtension.LINK_ESCAPE_CHARS, " +<>").set(WikiLinkExtension.LINK_REPLACE_CHARS, "____"));
+        optionsMap.put("link-text-priority", new MutableDataSet().set(Parser.LINK_TEXT_PRIORITY_OVER_LINK_REF, true));
     }
     public ComboWikiLinkSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

@@ -31,6 +31,7 @@ public class ComboFootnotesSpecTest extends RendererSpecTest {
         optionsMap.put("back-link-class-none", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, ""));
         optionsMap.put("back-link-class-text", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, "text"));
         optionsMap.put("item-indent-8", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 8));
+        optionsMap.put("link-text-priority", new MutableDataSet().set(Parser.LINK_TEXT_PRIORITY_OVER_LINK_REF, true));
     }
     public ComboFootnotesSpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);

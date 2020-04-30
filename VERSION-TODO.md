@@ -234,6 +234,15 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   taking options flags.
 * Fix: `MarkdownParagraph` wrapping with preserving tracked offsets with spaces to preserve
   spaces right before last non-blank character.
+* Fix: unify handling of link generating inline element handling in link text elements.
+  * Add: `LinkRendered` interface to identify link rendering elements derived from link/image
+    ref syntax identified by implementation of `LinkRefDerived` interface
+  * Fix: `WikiNode` to implement `LinkRefDerived`
+  * Fix: `WikiLink` to implement `LinkRendered`
+  * Fix: `Footnote` to implement `LinkRendered`
+  
+  :information_source: nested link ref derived elements in link ref text have priority and
+  cannot be used to embed into link ref text using `[link ref text][ref id]` syntax.
 
 ## 0.61.24
 

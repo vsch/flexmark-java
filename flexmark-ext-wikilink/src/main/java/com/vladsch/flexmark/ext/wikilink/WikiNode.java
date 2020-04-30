@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.wikilink;
 
+import com.vladsch.flexmark.ast.LinkRefDerived;
 import com.vladsch.flexmark.util.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
@@ -11,7 +12,7 @@ import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
-public class WikiNode extends Node implements DoNotDecorate, TextContainer {
+public class WikiNode extends Node implements DoNotDecorate, TextContainer, LinkRefDerived {
     final public static char SEPARATOR_CHAR = '|';
     
     protected BasedSequence openingMarker = BasedSequence.NULL;
@@ -81,6 +82,14 @@ public class WikiNode extends Node implements DoNotDecorate, TextContainer {
 
     public WikiNode(boolean linkIsFirst) {
         this.linkIsFirst = linkIsFirst;
+    }
+
+    /**
+     * @return true if this node will be rendered as text because it depends on a reference which is not defined.
+     */
+    @Override
+    public boolean isTentative() {
+        return false;
     }
 
     public WikiNode(BasedSequence chars, boolean linkIsFirst, boolean allowAnchors, boolean canEscapePipe, boolean canEscapeAnchor) {

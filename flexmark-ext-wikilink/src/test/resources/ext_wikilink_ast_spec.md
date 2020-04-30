@@ -1247,35 +1247,72 @@ Document[0, 48]
 ````````````````````````````````
 
 
-Absolute image prefix
+### In Links
 
-```````````````````````````````` example(WikiLinks: 64) options(wiki-images, custom-link-escape, image-prefix-absolute)
-![[Img]]
 
-![[dir/Img]]
-
-![[/Img]]
-
-![[/dir/Img]]
+```````````````````````````````` example WikiLinks - In Links: 1
+[[[wiki]]](/url)
 .
-<p><img src="/relative/images/Img" alt="Img" /></p>
-<p><img src="/relative/images/dir/Img" alt="dir/Img" /></p>
-<p><img src="/absolute/images/Img" alt="/Img" /></p>
-<p><img src="/absolute/images/dir/Img" alt="/dir/Img" /></p>
+<p>[<a href="wiki">wiki</a>](/url)</p>
 .
-Document[0, 48]
-  Paragraph[0, 9] isTrailingBlankLine
-    WikiImage[0, 8] linkOpen:[0, 3, "![["] link:[3, 6, "Img"] pageRef:[3, 6, "Img"] linkClose:[6, 8, "]]"]
-      Text[3, 6] chars:[3, 6, "Img"]
-  Paragraph[10, 23] isTrailingBlankLine
-    WikiImage[10, 22] linkOpen:[10, 13, "![["] link:[13, 20, "dir/Img"] pageRef:[13, 20, "dir/Img"] linkClose:[20, 22, "]]"]
-      Text[13, 20] chars:[13, 20, "dir/Img"]
-  Paragraph[24, 34] isTrailingBlankLine
-    WikiImage[24, 33] linkOpen:[24, 27, "![["] link:[27, 31, "/Img"] pageRef:[27, 31, "/Img"] linkClose:[31, 33, "]]"]
-      Text[27, 31] chars:[27, 31, "/Img"]
-  Paragraph[35, 48]
-    WikiImage[35, 48] linkOpen:[35, 38, "![["] link:[38, 46, "/dir/Img"] pageRef:[38, 46, "/dir/Img"] linkClose:[46, 48, "]]"]
-      Text[38, 46] chars:[38, 46, "/dir/Img"]
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 1] chars:[0, 1, "["]
+    WikiLink[1, 9] linkOpen:[1, 3, "[["] link:[3, 7, "wiki"] pageRef:[3, 7, "wiki"] linkClose:[7, 9, "]]"]
+      Text[3, 7] chars:[3, 7, "wiki"]
+    Text[9, 16] chars:[9, 16, "](/url)"]
+````````````````````````````````
+
+
+no wiki in refs
+
+```````````````````````````````` example(WikiLinks - In Links: 2) options(link-text-priority)
+[[[wiki]]](/url)
+.
+<p><a href="/url">[[wiki]]</a></p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    Link[0, 16] textOpen:[0, 1, "["] text:[1, 9, "[[wiki]]"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/url"] pageRef:[11, 15, "/url"] linkClose:[15, 16, ")"]
+      Text[1, 9] chars:[1, 9, "[[wiki]]"]
+````````````````````````````````
+
+
+```````````````````````````````` example WikiLinks - In Links: 3
+[[[wiki]]][ref]
+    
+[ref]: /url
+.
+<p>[<a href="wiki">wiki</a>]<a href="/url">ref</a></p>
+.
+Document[0, 32]
+  Paragraph[0, 16] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    WikiLink[1, 9] linkOpen:[1, 3, "[["] link:[3, 7, "wiki"] pageRef:[3, 7, "wiki"] linkClose:[7, 9, "]]"]
+      Text[3, 7] chars:[3, 7, "wiki"]
+    Text[9, 10] chars:[9, 10, "]"]
+    LinkRef[10, 15] referenceOpen:[10, 11, "["] reference:[11, 14, "ref"] referenceClose:[14, 15, "]"]
+      Text[11, 14] chars:[11, 14, "ref"]
+  Reference[21, 32] refOpen:[21, 22, "["] ref:[22, 25, "ref"] refClose:[25, 27, "]:"] url:[28, 32, "/url"]
+````````````````````````````````
+
+
+```````````````````````````````` example(WikiLinks - In Links: 4) options(link-text-priority)
+[[[wiki]]][ref]
+    
+[ref]: /url
+.
+<p>[<a href="wiki">wiki</a>]<a href="/url">ref</a></p>
+.
+Document[0, 32]
+  Paragraph[0, 16] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    WikiLink[1, 9] linkOpen:[1, 3, "[["] link:[3, 7, "wiki"] pageRef:[3, 7, "wiki"] linkClose:[7, 9, "]]"]
+      Text[3, 7] chars:[3, 7, "wiki"]
+    Text[9, 10] chars:[9, 10, "]"]
+    LinkRef[10, 15] referenceOpen:[10, 11, "["] reference:[11, 14, "ref"] referenceClose:[14, 15, "]"]
+      Text[11, 14] chars:[11, 14, "ref"]
+  Reference[21, 32] refOpen:[21, 22, "["] ref:[22, 25, "ref"] refClose:[25, 27, "]:"] url:[28, 32, "/url"]
 ````````````````````````````````
 
 
@@ -2516,6 +2553,107 @@ Document[0, 26]
   Paragraph[0, 26]
     WikiImage[0, 26] linkOpen:[0, 3, "![["] link:[3, 24, "wiki image#anchor-ref"] pageRef:[3, 24, "wiki image#anchor-ref"] linkClose:[24, 26, "]]"]
       Text[3, 24] chars:[3, 24, "wiki  … r-ref"]
+````````````````````````````````
+
+
+Absolute image prefix
+
+```````````````````````````````` example(WikiImages: 27) options(wiki-images, custom-link-escape, image-prefix-absolute)
+![[Img]]
+
+![[dir/Img]]
+
+![[/Img]]
+
+![[/dir/Img]]
+.
+<p><img src="/relative/images/Img" alt="Img" /></p>
+<p><img src="/relative/images/dir/Img" alt="dir/Img" /></p>
+<p><img src="/absolute/images/Img" alt="/Img" /></p>
+<p><img src="/absolute/images/dir/Img" alt="/dir/Img" /></p>
+.
+Document[0, 48]
+  Paragraph[0, 9] isTrailingBlankLine
+    WikiImage[0, 8] linkOpen:[0, 3, "![["] link:[3, 6, "Img"] pageRef:[3, 6, "Img"] linkClose:[6, 8, "]]"]
+      Text[3, 6] chars:[3, 6, "Img"]
+  Paragraph[10, 23] isTrailingBlankLine
+    WikiImage[10, 22] linkOpen:[10, 13, "![["] link:[13, 20, "dir/Img"] pageRef:[13, 20, "dir/Img"] linkClose:[20, 22, "]]"]
+      Text[13, 20] chars:[13, 20, "dir/Img"]
+  Paragraph[24, 34] isTrailingBlankLine
+    WikiImage[24, 33] linkOpen:[24, 27, "![["] link:[27, 31, "/Img"] pageRef:[27, 31, "/Img"] linkClose:[31, 33, "]]"]
+      Text[27, 31] chars:[27, 31, "/Img"]
+  Paragraph[35, 48]
+    WikiImage[35, 48] linkOpen:[35, 38, "![["] link:[38, 46, "/dir/Img"] pageRef:[38, 46, "/dir/Img"] linkClose:[46, 48, "]]"]
+      Text[38, 46] chars:[38, 46, "/dir/Img"]
+````````````````````````````````
+
+
+### In Links
+
+
+```````````````````````````````` example(WikiImages - In Links: 1) options(wiki-images)
+[![[wiki]]](/url)
+.
+<p><a href="/url"><img src="wiki" alt="wiki" /></a></p>
+.
+Document[0, 17]
+  Paragraph[0, 17]
+    Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, "![[wiki]]"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
+      WikiImage[1, 10] linkOpen:[1, 4, "![["] link:[4, 8, "wiki"] pageRef:[4, 8, "wiki"] linkClose:[8, 10, "]]"]
+        Text[4, 8] chars:[4, 8, "wiki"]
+````````````````````````````````
+
+
+```````````````````````````````` example(WikiImages - In Links: 2) options(wiki-images, link-text-priority)
+[![[wiki]]](/url)
+.
+<p><a href="/url"><img src="wiki" alt="wiki" /></a></p>
+.
+Document[0, 17]
+  Paragraph[0, 17]
+    Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, "![[wiki]]"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
+      WikiImage[1, 10] linkOpen:[1, 4, "![["] link:[4, 8, "wiki"] pageRef:[4, 8, "wiki"] linkClose:[8, 10, "]]"]
+        Text[4, 8] chars:[4, 8, "wiki"]
+````````````````````````````````
+
+
+no wiki image in link refs
+
+```````````````````````````````` example(WikiImages - In Links: 3) options(wiki-images)
+[![[wiki]]][ref]
+    
+[ref]: /url
+.
+<p>[<img src="wiki" alt="wiki" />]<a href="/url">ref</a></p>
+.
+Document[0, 33]
+  Paragraph[0, 17] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    WikiImage[1, 10] linkOpen:[1, 4, "![["] link:[4, 8, "wiki"] pageRef:[4, 8, "wiki"] linkClose:[8, 10, "]]"]
+      Text[4, 8] chars:[4, 8, "wiki"]
+    Text[10, 11] chars:[10, 11, "]"]
+    LinkRef[11, 16] referenceOpen:[11, 12, "["] reference:[12, 15, "ref"] referenceClose:[15, 16, "]"]
+      Text[12, 15] chars:[12, 15, "ref"]
+  Reference[22, 33] refOpen:[22, 23, "["] ref:[23, 26, "ref"] refClose:[26, 28, "]:"] url:[29, 33, "/url"]
+````````````````````````````````
+
+
+```````````````````````````````` example(WikiImages - In Links: 4) options(wiki-images, link-text-priority)
+[![[wiki]]][ref]
+    
+[ref]: /url
+.
+<p>[<img src="wiki" alt="wiki" />]<a href="/url">ref</a></p>
+.
+Document[0, 33]
+  Paragraph[0, 17] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    WikiImage[1, 10] linkOpen:[1, 4, "![["] link:[4, 8, "wiki"] pageRef:[4, 8, "wiki"] linkClose:[8, 10, "]]"]
+      Text[4, 8] chars:[4, 8, "wiki"]
+    Text[10, 11] chars:[10, 11, "]"]
+    LinkRef[11, 16] referenceOpen:[11, 12, "["] reference:[12, 15, "ref"] referenceClose:[15, 16, "]"]
+      Text[12, 15] chars:[12, 15, "ref"]
+  Reference[22, 33] refOpen:[22, 23, "["] ref:[23, 26, "ref"] refClose:[26, 28, "]:"] url:[29, 33, "/url"]
 ````````````````````````````````
 
 

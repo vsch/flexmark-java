@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.footnotes;
 
+import com.vladsch.flexmark.ast.LinkRendered;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -8,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A Footnote referencing node
  */
-public class Footnote extends Node implements DelimitedNode, DoNotDecorate, ReferencingNode<FootnoteRepository, FootnoteBlock> {
+public class Footnote extends Node implements DelimitedNode, DoNotDecorate, LinkRendered, ReferencingNode<FootnoteRepository, FootnoteBlock> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
@@ -46,6 +47,14 @@ public class Footnote extends Node implements DelimitedNode, DoNotDecorate, Refe
 
     public boolean isDefined() {
         return footnoteBlock != null;
+    }
+
+    /**
+     * @return true if this node will be rendered as text because it depends on a reference which is not defined.
+     */
+    @Override
+    public boolean isTentative() {
+        return footnoteBlock == null;
     }
 
     public FootnoteBlock getFootnoteBlock(FootnoteRepository footnoteRepository) {

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-public class LinkRef extends RefNode {
+public class LinkRef extends RefNode implements LinkRendered {
     public LinkRef() {
     }
 

@@ -1006,6 +1006,185 @@ Document[0, 85]
 ````````````````````````````````
 
 
+### In Links
+
+
+```````````````````````````````` example Footnotes - In Links: 1
+[[^footnote]](/url)
+.
+<p><a href="/url">[^footnote]</a></p>
+.
+Document[0, 19]
+  Paragraph[0, 19]
+    Link[0, 19] textOpen:[0, 1, "["] text:[1, 12, "[^footnote]"] textClose:[12, 13, "]"] linkOpen:[13, 14, "("] url:[14, 18, "/url"] pageRef:[14, 18, "/url"] linkClose:[18, 19, ")"]
+      Text[1, 12] chars:[1, 12, "[^foo … note]"]
+````````````````````````````````
+
+
+```````````````````````````````` example Footnotes - In Links: 2
+[[^footnote]](/url)
+    
+[^footnote]: test footnote
+.
+<p>[<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>](/url)</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>test footnote</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 51]
+  Paragraph[0, 20] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    Footnote[1, 12] ordinal: 1  textOpen:[1, 3, "[^"] text:[3, 11, "footnote"] textClose:[11, 12, "]"]
+      Text[3, 11] chars:[3, 11, "footnote"]
+    Text[12, 19] chars:[12, 19, "](/url)"]
+  FootnoteBlock[25, 51] ordinal: 1  open:[25, 27] text:[27, 35] close:[35, 37] footnote:[38, 51]
+    Paragraph[38, 51]
+      Text[38, 51] chars:[38, 51, "test  … tnote"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Footnotes - In Links: 3) options(link-text-priority)
+[[^footnote]](/url)
+.
+<p><a href="/url">[^footnote]</a></p>
+.
+Document[0, 19]
+  Paragraph[0, 19]
+    Link[0, 19] textOpen:[0, 1, "["] text:[1, 12, "[^footnote]"] textClose:[12, 13, "]"] linkOpen:[13, 14, "("] url:[14, 18, "/url"] pageRef:[14, 18, "/url"] linkClose:[18, 19, ")"]
+      Text[1, 12] chars:[1, 12, "[^foo … note]"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Footnotes - In Links: 4) options(link-text-priority)
+[[^footnote]](/url)
+    
+[^footnote]: test footnote
+.
+<p><a href="/url">[^footnote]</a></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>test footnote</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 51]
+  Paragraph[0, 20] isTrailingBlankLine
+    Link[0, 19] textOpen:[0, 1, "["] text:[1, 12, "[^footnote]"] textClose:[12, 13, "]"] linkOpen:[13, 14, "("] url:[14, 18, "/url"] pageRef:[14, 18, "/url"] linkClose:[18, 19, ")"]
+      Text[1, 12] chars:[1, 12, "[^foo … note]"]
+  FootnoteBlock[25, 51] ordinal: 1  open:[25, 27] text:[27, 35] close:[35, 37] footnote:[38, 51]
+    Paragraph[38, 51]
+      Text[38, 51] chars:[38, 51, "test  … tnote"]
+````````````````````````````````
+
+
+defined footnote in link refs have priority
+
+```````````````````````````````` example Footnotes - In Links: 5
+[[^footnote]][ref]
+    
+[ref]: /url
+.
+<p><a href="/url">[^footnote]</a></p>
+.
+Document[0, 35]
+  Paragraph[0, 19] isTrailingBlankLine
+    LinkRef[0, 18] textOpen:[0, 1, "["] text:[1, 12, "[^footnote]"] textClose:[12, 13, "]"] referenceOpen:[13, 14, "["] reference:[14, 17, "ref"] referenceClose:[17, 18, "]"]
+      Text[1, 12] chars:[1, 12, "[^foo … note]"]
+  Reference[24, 35] refOpen:[24, 25, "["] ref:[25, 28, "ref"] refClose:[28, 30, "]:"] url:[31, 35, "/url"]
+````````````````````````````````
+
+
+```````````````````````````````` example Footnotes - In Links: 6
+[[^footnote]][ref]
+    
+[ref]: /url
+    
+[^footnote]: test footnote
+.
+<p>[<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>]<a href="/url">ref</a></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>test footnote</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 67]
+  Paragraph[0, 19] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    Footnote[1, 12] ordinal: 1  textOpen:[1, 3, "[^"] text:[3, 11, "footnote"] textClose:[11, 12, "]"]
+      Text[3, 11] chars:[3, 11, "footnote"]
+    Text[12, 13] chars:[12, 13, "]"]
+    LinkRef[13, 18] referenceOpen:[13, 14, "["] reference:[14, 17, "ref"] referenceClose:[17, 18, "]"]
+      Text[14, 17] chars:[14, 17, "ref"]
+  Reference[24, 35] refOpen:[24, 25, "["] ref:[25, 28, "ref"] refClose:[28, 30, "]:"] url:[31, 35, "/url"]
+  FootnoteBlock[41, 67] ordinal: 1  open:[41, 43] text:[43, 51] close:[51, 53] footnote:[54, 67]
+    Paragraph[54, 67]
+      Text[54, 67] chars:[54, 67, "test  … tnote"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Footnotes - In Links: 7) options(link-text-priority)
+[[^footnote]][ref]
+    
+[ref]: /url
+.
+<p><a href="/url">[^footnote]</a></p>
+.
+Document[0, 35]
+  Paragraph[0, 19] isTrailingBlankLine
+    LinkRef[0, 18] textOpen:[0, 1, "["] text:[1, 12, "[^footnote]"] textClose:[12, 13, "]"] referenceOpen:[13, 14, "["] reference:[14, 17, "ref"] referenceClose:[17, 18, "]"]
+      Text[1, 12] chars:[1, 12, "[^foo … note]"]
+  Reference[24, 35] refOpen:[24, 25, "["] ref:[25, 28, "ref"] refClose:[28, 30, "]:"] url:[31, 35, "/url"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Footnotes - In Links: 8) options(link-text-priority)
+[[^footnote]][ref]
+    
+[ref]: /url
+    
+[^footnote]: test footnote
+.
+<p>[<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>]<a href="/url">ref</a></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>test footnote</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 67]
+  Paragraph[0, 19] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "["]
+    Footnote[1, 12] ordinal: 1  textOpen:[1, 3, "[^"] text:[3, 11, "footnote"] textClose:[11, 12, "]"]
+      Text[3, 11] chars:[3, 11, "footnote"]
+    Text[12, 13] chars:[12, 13, "]"]
+    LinkRef[13, 18] referenceOpen:[13, 14, "["] reference:[14, 17, "ref"] referenceClose:[17, 18, "]"]
+      Text[14, 17] chars:[14, 17, "ref"]
+  Reference[24, 35] refOpen:[24, 25, "["] ref:[25, 28, "ref"] refClose:[28, 30, "]:"] url:[31, 35, "/url"]
+  FootnoteBlock[41, 67] ordinal: 1  open:[41, 43] text:[43, 51] close:[51, 53] footnote:[54, 67]
+    Paragraph[54, 67]
+      Text[54, 67] chars:[54, 67, "test  … tnote"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
