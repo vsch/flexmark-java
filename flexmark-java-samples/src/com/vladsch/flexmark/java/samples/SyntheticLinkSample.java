@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.LinkNode;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.TextBase;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.PostProcessor;
@@ -72,8 +73,8 @@ public class SyntheticLinkSample {
                 BasedSequence linkAddress = PrefixedSubSequence.prefixOf("http://commonmark.org", linkText.getEmptySuffix());
 
                 linkNode = new Link(BasedSequence.NULL, linkText, BasedSequence.NULL, BasedSequence.NULL, linkAddress, BasedSequence.NULL);
-
                 linkNode.setCharsFromContent();
+
                 linkNode.appendChild(contentNode);
                 textBase.appendChild(linkNode);
                 state.nodeAddedWithChildren(linkNode);
@@ -118,12 +119,13 @@ public class SyntheticLinkSample {
             // here you can append some markdown text but keep it based on original input by
             // using PrefixedSubSequence with only prefix without any characters from input string
 
-            // here we create a based sequence of "inserted" text with offset set to end of input string
-            BasedSequence insertedText = PrefixedSubSequence.prefixOf("Some inserted text with a link [flexmark-java](https://github.com/vsch/flexmark-java) in paragraph.", document.getChars().subSequence(document.getChars().length()));
-
             // parse using the same options as the document but remove the SyntheticLinkExtension to prevent infinite recursion
             MutableDataHolder options = Parser.removeExtensions(new MutableDataSet(document), SyntheticLinkExtension.class);
-            Node insertedDocument = Parser.builder(options).build().parse(insertedText);
+            
+            // here we create a based sequence of "inserted" text with offset set to end of input string
+            String insertedText = "Some inserted text with a link [flexmark-java](https://github.com/vsch/flexmark-java) in paragraph.";
+            
+            Node insertedDocument = Parser.builder(options).build().parse(document.getChars().append(insertedText).toString());
 
             // now can append nodes from inserted to document
             document.takeChildren(insertedDocument);
@@ -184,5 +186,8 @@ public class SyntheticLinkSample {
         Node document = parser.parse("Some markdown content");
         String html = renderer.render(document);
         System.out.println(html);
+        
+        String markdown = Formatter.builder(options).build().render(document);
+        System.out.println(markdown);
     }
 }
