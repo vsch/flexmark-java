@@ -208,8 +208,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 + [ ] Add: dependency resolution for Node Renderer Factories to make them independent of
       extension add order
 * [ ] Fix: Change spec example to variable number of sections
-* [ ] Add: yaml front matter configurator for modules. See: [Yaml Front Matter
-                                  Configuration](../../wiki/Yaml-Front-Matter-Configuration)
+* [ ] Add: yaml front matter configurator for modules. See:
+      [Yaml Front Matter Configuration](../../wiki/Yaml-Front-Matter-Configuration)
 * [ ] Fix: table formatting caret position tracking affects alignment even when not inserting,
       just formatting. Need to keep track of whether format after typing or just format. Then
       caret position should only track but not force spaces behind it to be preserved. See
@@ -231,7 +231,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Break: `TextCollectingVisitor` needs `TextContainer.F_ADD_SPACES_BETWEEN_NODES` to ensure
   there is at least one space between texts of different nodes in collected text. Previously
   this was added automatically by sequence builder. Use one of the `getAndCollect` functions
-  taking options flags.
+  taking options flags and pass `TextContainer.F_ADD_SPACES_BETWEEN_NODES`.
 * Fix: `MarkdownParagraph` wrapping with preserving tracked offsets with spaces to preserve
   spaces right before last non-blank character.
 * Fix: unify handling of link generating inline element handling in link text elements.
@@ -240,7 +240,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   * Fix: `WikiNode` to implement `LinkRefDerived`
   * Fix: `WikiLink` to implement `LinkRendered`
   * Fix: `Footnote` to implement `LinkRendered`
-  
+
   :information_source: nested link ref derived elements in link ref text have priority and
   cannot be used to embed into link ref text using `[link ref text][ref id]` syntax.
 
@@ -262,7 +262,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
         <p><a href="/uri">[][moon]</a></p>
 
-    :information_source: Undefined reference links are always treated as text when in a link text element.
+    :information_source: Undefined reference links are always treated as text when in a link
+    text element.
 
 ## 0.61.22
 
