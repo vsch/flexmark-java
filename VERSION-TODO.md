@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.28](#06128)
 - [0.61.26](#06126)
 - [0.61.24](#06124)
 - [0.61.22](#06122)
@@ -224,6 +225,30 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.61.28
+
+* Fix: Toc and SimToc `levels` parsing to properly handle levels as per documentation.
+  * single numeric >2 is 2-level, ie. `levels=4` should be interpreted as `levels=2-4` but was
+    `levels=4,4`.
+  * `levels=x-` to be same as `levels=x-6`, was handled as `levels=x,x`
+
+  `levels=levelList` where level list is a comma separated list of levels or ranges. Default is
+  to include heading levels 2 and 3. If a range is specified using `-` as separator between
+  numeric values then the included range is from first numeric to last numeric inclusive. If
+  first numeric is missing then 1 will be used in its place. If last numeric is missing then 6
+  will be used in its place.
+
+  Examples:
+  * `levels=1` include level 1 only, same as `levels=1,1`
+  * `levels=2` include level 2 only, same as `levels=2,2`
+  * `levels=3` include levels 2 and 3
+  * `levels=4` include levels 2,3 and 4
+  * `levels=2-4` include levels 2,3 and 4. same as `levels=4`
+  * `levels=2-4,5` include levels 2,3,4 and 5
+  * `levels=1,3` include levels 1 and 3
+  * `levels=-3` include levels 1 to 3
+  * `levels=3-` include levels 3 to 6
 
 ## 0.61.26
 

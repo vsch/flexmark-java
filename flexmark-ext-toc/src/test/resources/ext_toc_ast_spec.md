@@ -15,11 +15,21 @@ Converts `[TOC style]` text to TocBlock nodes.
 1. `style` consists of space separated list of options:
 
    * `levels=levelList` where level list is a comma separated list of levels or ranges. Default
-     is to include heading levels 2 and 3. Examples:
+     is to include heading levels 2 and 3. If a range is specified using `-` as separator
+     between numeric values then the included range is from first numeric to last numeric
+     inclusive. If first numeric is missing then 1 will be used in its place. If last numeric is
+     missing then 6 will be used in its place.
+   
+     Examples:
+     * `levels=1` include level 1 only, same as `levels=1,1`
+     * `levels=2` include level 2 only, same as `levels=2,2`
+     * `levels=3` include levels 2 and 3
      * `levels=4` include levels 2,3 and 4
      * `levels=2-4` include levels 2,3 and 4. same as `levels=4`
      * `levels=2-4,5` include levels 2,3,4 and 5
      * `levels=1,3` include levels 1 and 3
+     * `levels=-3` include levels 1 to 3
+     * `levels=3-` include levels 3 to 6
 
    * `html` generate HTML version of the TOC
 
@@ -1250,7 +1260,11 @@ Document[0, 129]
 <h3 id="header-3" md-pos="16-24">Header 3</h3>
 <div md-pos="26-40">
   <ul>
-    <li><a href="#header-3">Header 3</a></li>
+    <li><a href="#header-2">Header 2</a>
+      <ul>
+        <li><a href="#header-3">Header 3</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 .
@@ -1303,16 +1317,26 @@ Document[0, 40]
 <h4 id="test-1211">test 1.2.1.1</h4>
 <h4 id="test-1212">test 1.2.1.2</h4>
 <ul>
+  <li><a href="#test-001">test 0.0.1</a></li>
+  <li><a href="#test-002">test 0.0.2</a></li>
   <li><a href="#test-11">test 1.1</a>
     <ul>
-      <li><a href="#test-1111">test 1.1.1.1</a></li>
-      <li><a href="#test-1112">test 1.1.1.2</a></li>
+      <li><a href="#test-111">test 1.1.1</a>
+        <ul>
+          <li><a href="#test-1111">test 1.1.1.1</a></li>
+          <li><a href="#test-1112">test 1.1.1.2</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#test-12">test 1.2</a>
     <ul>
-      <li><a href="#test-1211">test 1.2.1.1</a></li>
-      <li><a href="#test-1212">test 1.2.1.2</a></li>
+      <li><a href="#test-121">test 1.2.1</a>
+        <ul>
+          <li><a href="#test-1211">test 1.2.1.1</a></li>
+          <li><a href="#test-1212">test 1.2.1.2</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>

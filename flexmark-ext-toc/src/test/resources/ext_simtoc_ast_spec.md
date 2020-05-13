@@ -21,11 +21,21 @@ document.
 1. `style` consists of space separated list of options:
 
    * `levels=levelList` where level list is a comma separated list of levels or ranges. Default
-     is to include heading levels 2 and 3. Examples:
+     is to include heading levels 2 and 3. If a range is specified using `-` as separator
+     between numeric values then the included range is from first numeric to last numeric
+     inclusive. If first numeric is missing then 1 will be used in its place. If last numeric is
+     missing then 6 will be used in its place.
+   
+     Examples:
+     * `levels=1` include level 1 only, same as `levels=1,1`
+     * `levels=2` include level 2 only, same as `levels=2,2`
+     * `levels=3` include levels 2 and 3
      * `levels=4` include levels 2,3 and 4
      * `levels=2-4` include levels 2,3 and 4. same as `levels=4`
      * `levels=2-4,5` include levels 2,3,4 and 5
      * `levels=1,3` include levels 1 and 3
+     * `levels=-3` include levels 1 to 3
+     * `levels=3-` include levels 3 to 6
 
    * `html` generate HTML version of the TOC
 
@@ -1198,13 +1208,21 @@ options, title with escaped chars
 <div>
   <h1>title&quot;s</h1>
   <ul>
-    <li><a href="#header-3">Header 3</a></li>
+    <li><a href="#header-2">Header 2</a>
+      <ul>
+        <li><a href="#header-3">Header 3</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 <div>
   <h1>title's</h1>
   <ul>
-    <li><a href="#header-3">Header 3</a></li>
+    <li><a href="#header-2">Header 2</a>
+      <ul>
+        <li><a href="#header-3">Header 3</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 .
@@ -2009,7 +2027,11 @@ Document[0, 58]
 <div md-pos="26-51">
   <h1>titles</h1>
   <ul>
-    <li><a href="#header-3">Header 3</a></li>
+    <li><a href="#header-2">Header 2</a>
+      <ul>
+        <li><a href="#header-3">Header 3</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 .

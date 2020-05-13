@@ -37,6 +37,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
         TOC_LEVELS_MAP.put(1 << 5, "5,5");
         TOC_LEVELS_MAP.put(1 << 6, "6,6");
     }
+    
     public TocLevelsOptionParser(String optionName) {
         this.myOptionName = optionName;
     }
@@ -46,7 +47,6 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
         return myOptionName;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Pair<TocOptions, List<ParsedOption<TocOptions>>> parseOption(BasedSequence optionText, TocOptions options, MessageProvider provider) {
         // may have levels
@@ -71,20 +71,27 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
         };
 
         for (BasedSequence option : levelsOptionValue) {
-            BasedSequence[] optionRange = option.split("-", 2, BasedSequence.SPLIT_TRIM_PARTS);
+            BasedSequence[] optionRange = option.split("-", 2, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_INCLUDE_DELIM_PARTS);
 
             Integer rangeStart;
             Integer rangeEnd;
             parserParams.skip = false;
 
-            if (optionRange.length == 2) {
+            if (optionRange.length >= 2) {
                 rangeStart = convertWithMessage.apply(optionRange[0]);
-                rangeEnd = convertWithMessage.apply(optionRange[1]);
+                rangeEnd = optionRange.length >= 3 ? convertWithMessage.apply(optionRange[2]) : null;
                 if (rangeStart == null) rangeStart = 1;
                 if (rangeEnd == null) rangeEnd = 6;
             } else {
-                rangeStart = convertWithMessage.apply(optionRange[0]);
-                rangeEnd = rangeStart;
+                // NOTE: 1 means heading level 1 only, 2 means 2 only, rest mean 2-x
+                Integer optionValue = convertWithMessage.apply(optionRange[0]);
+                if (optionValue != null && optionValue <= 2) {
+                    rangeStart = optionValue;
+                    rangeEnd = rangeStart;
+                } else {
+                    rangeStart = optionValue == null ? null : 2;
+                    rangeEnd = optionValue;
+                }
             }
 
             if (!parserParams.skip) {

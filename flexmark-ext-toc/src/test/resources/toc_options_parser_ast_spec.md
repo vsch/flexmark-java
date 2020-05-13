@@ -15,35 +15,23 @@ Used for parsing toc tag style options
 The TOC tag has the following format: `[TOC style]: # "Title"`
 
 1. `style` consists of space separated list of options:
-
    * `levels=levelList` where level list is a comma separated list of levels or ranges. Default
      is to include heading levels 2 and 3. Examples:
      * `levels=4` include levels 2,3 and 4
      * `levels=2-4` include levels 2,3 and 4. same as `levels=4`
      * `levels=2-4,5` include levels 2,3,4 and 5
      * `levels=1,3` include levels 1 and 3
-
    * `html` generate HTML version of the TOC
-
    * `markdown` generate Markdown version of the TOC
-
    * `text` to only include the text of the heading
-
    * `formatted` to include text and inline formatting
-
    * `hierarchy` to render as hierarchical list in order of appearance in the document
-
    * `flat` to render as a flat list in order of appearance in the document
-
    * `reversed` to render as a flat list in order of appearance in the document
-
    * `sort-up` to render as a flat list sorted alphabetically by heading text only, no inlines
-
    * `sort-down` to render as a flat list sorted reversed alphabetically by heading text only,
      no inlines
-
    * `bullet` to use a bullet list for the TOC items
-
    * `numbered` to use a numbered list for TOC items
 
 Default
@@ -59,78 +47,141 @@ Simple levels results in 2- level, or just level if < 2
 
 ```````````````````````````````` example TocOptionsParser: 2
 levels=0
-levels=1
-levels=2
-levels=3
-levels=4
-levels=5
-levels=6
-levels=7
-levels=8
-levels=9
 .
 'levels=0' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
   diff: [TOC]
   full: [TOC levels=3 bullet formatted hierarchy]
-'levels=1' => TocOptions { levels=2, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC levels=1]
-  full: [TOC levels=1 bullet formatted hierarchy]
-'levels=2' => TocOptions { levels=4, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC levels=2]
-  full: [TOC levels=2 bullet formatted hierarchy]
-'levels=3' => TocOptions { levels=8, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC levels=3,3]
-  full: [TOC levels=3,3 bullet formatted hierarchy]
-'levels=4' => TocOptions { levels=16, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC levels=4,4]
-  full: [TOC levels=4,4 bullet formatted hierarchy]
-'levels=5' => TocOptions { levels=32, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC levels=5,5]
-  full: [TOC levels=5,5 bullet formatted hierarchy]
-'levels=6' => TocOptions { levels=64, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC levels=6,6]
-  full: [TOC levels=6,6 bullet formatted hierarchy]
-'levels=7' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC]
-  full: [TOC levels=3 bullet formatted hierarchy]
-'levels=8' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC]
-  full: [TOC levels=3 bullet formatted hierarchy]
-'levels=9' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
-  diff: [TOC]
-  full: [TOC levels=3 bullet formatted hierarchy]
 .
-Example[0, 89]
+Example[0, 8]
   Style[0, 8]
     TocOptions[0, 8] status:IGNORED
       Message[7, 8] message:levels option value 0 is not an integer in the range [1, 6]
-  Style[9, 17]
-    TocOptions[9, 17] status:VALID
-  Style[18, 26]
-    TocOptions[18, 26] status:VALID
-  Style[27, 35]
-    TocOptions[27, 35] status:VALID
-  Style[36, 44]
-    TocOptions[36, 44] status:VALID
-  Style[45, 53]
-    TocOptions[45, 53] status:VALID
-  Style[54, 62]
-    TocOptions[54, 62] status:VALID
-  Style[63, 71]
-    TocOptions[63, 71] status:IGNORED
-      Message[70, 71] message:levels option value 7 is not an integer in the range [1, 6]
-  Style[72, 80]
-    TocOptions[72, 80] status:IGNORED
-      Message[79, 80] message:levels option value 8 is not an integer in the range [1, 6]
-  Style[81, 89]
-    TocOptions[81, 89] status:IGNORED
-      Message[88, 89] message:levels option value 9 is not an integer in the range [1, 6]
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 3
+levels=1
+.
+'levels=1' => TocOptions { levels=2, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=1]
+  full: [TOC levels=1 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:VALID
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 4
+levels=2
+.
+'levels=2' => TocOptions { levels=4, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=2]
+  full: [TOC levels=2 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:VALID
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 5
+levels=3
+.
+'levels=3' => TocOptions { levels=12, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:VALID
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 6
+levels=4
+.
+'levels=4' => TocOptions { levels=28, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=4]
+  full: [TOC levels=4 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:VALID
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 7
+levels=5
+.
+'levels=5' => TocOptions { levels=60, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=5]
+  full: [TOC levels=5 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:VALID
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 8
+levels=6
+.
+'levels=6' => TocOptions { levels=124, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=6]
+  full: [TOC levels=6 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:VALID
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 9
+levels=7
+.
+'levels=7' => TocOptions { levels=124, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=6]
+  full: [TOC levels=6 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:WEAK_WARNING
+      Message[7, 8] message:levels option value 7 truncated to range [2, 6]
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 10
+levels=8
+.
+'levels=8' => TocOptions { levels=124, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=6]
+  full: [TOC levels=6 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:WEAK_WARNING
+      Message[7, 8] message:levels option value 8 truncated to range [2, 6]
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 11
+levels=9
+.
+'levels=9' => TocOptions { levels=124, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=6]
+  full: [TOC levels=6 bullet formatted hierarchy]
+.
+Example[0, 8]
+  Style[0, 8]
+    TocOptions[0, 8] status:WEAK_WARNING
+      Message[7, 8] message:levels option value 9 truncated to range [2, 6]
 ````````````````````````````````
 
 
 Level ranges
 
-```````````````````````````````` example TocOptionsParser: 3
+```````````````````````````````` example TocOptionsParser: 12
 levels=1-3 
 levels=3-1 
 levels=0-9
@@ -156,9 +207,73 @@ Example[0, 34]
 ````````````````````````````````
 
 
+```````````````````````````````` example TocOptionsParser: 13
+levels=-3 
+levels=-1 
+levels=-6
+levels=-9
+.
+'levels=-3 ' => TocOptions { levels=14, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=1-3]
+  full: [TOC levels=1-3 bullet formatted hierarchy]
+'levels=-1 ' => TocOptions { levels=2, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=1]
+  full: [TOC levels=1 bullet formatted hierarchy]
+'levels=-6' => TocOptions { levels=126, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=1-6]
+  full: [TOC levels=1-6 bullet formatted hierarchy]
+'levels=-9' => TocOptions { levels=126, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=1-6]
+  full: [TOC levels=1-6 bullet formatted hierarchy]
+.
+Example[0, 41]
+  Style[0, 10]
+    TocOptions[0, 9] status:VALID
+  Style[11, 21]
+    TocOptions[11, 20] status:VALID
+  Style[22, 31]
+    TocOptions[22, 31] status:VALID
+  Style[32, 41]
+    TocOptions[32, 41] status:WEAK_WARNING
+      Message[39, 41] message:levels option value -9 truncated to range [1, 6]
+````````````````````````````````
+
+
+```````````````````````````````` example TocOptionsParser: 14
+levels=1-
+levels=3-
+levels=6-
+levels=9-
+.
+'levels=1-' => TocOptions { levels=126, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=1-6]
+  full: [TOC levels=1-6 bullet formatted hierarchy]
+'levels=3-' => TocOptions { levels=120, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=3-6]
+  full: [TOC levels=3-6 bullet formatted hierarchy]
+'levels=6-' => TocOptions { levels=64, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=6,6]
+  full: [TOC levels=6,6 bullet formatted hierarchy]
+'levels=9-' => TocOptions { levels=64, isHtml=false, isTextOnly=false, isNumbered=false, titleLevel=1, title='Table of Contents', listType=HIERARCHY, divClass='', listClass='' }
+  diff: [TOC levels=6,6]
+  full: [TOC levels=6,6 bullet formatted hierarchy]
+.
+Example[0, 39]
+  Style[0, 9]
+    TocOptions[0, 9] status:VALID
+  Style[10, 19]
+    TocOptions[10, 19] status:VALID
+  Style[20, 29]
+    TocOptions[20, 29] status:VALID
+  Style[30, 39]
+    TocOptions[30, 39] status:WEAK_WARNING
+      Message[37, 39] message:levels option value 9- truncated to range [6, 6]
+````````````````````````````````
+
+
 other options, not using sim-toc
 
-```````````````````````````````` example TocOptionsParser: 4
+```````````````````````````````` example TocOptionsParser: 15
 html
 markdown
 numbered
@@ -235,7 +350,7 @@ Example[0, 90]
 
 other options, using sim-toc
 
-```````````````````````````````` example(TocOptionsParser: 5) options(sim-toc)
+```````````````````````````````` example(TocOptionsParser: 16) options(sim-toc)
 html
 markdown
 numbered
@@ -310,7 +425,7 @@ Example[0, 90]
 
 ambiguous options don't exist yet
 
-```````````````````````````````` example(TocOptionsParser: 6) options(IGNORE)
+```````````````````````````````` example(TocOptionsParser: 17) options(IGNORE)
 html
 markdown
 numbered
@@ -324,7 +439,7 @@ formatted
 
 invalid options
 
-```````````````````````````````` example TocOptionsParser: 7
+```````````````````````````````` example TocOptionsParser: 18
 htmls
 markdowns
 snumbered

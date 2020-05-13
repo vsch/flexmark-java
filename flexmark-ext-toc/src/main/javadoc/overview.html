@@ -4,7 +4,64 @@
 </head>
 <body>
 <p><strong>flexmark-java table of contents extension</strong></p>
-<p>flexmark-java extension for converting <code>[TOC level=</code> <em><strong>#</strong></em> <code>]</code> to an HTML rendered table of contents</p>
-<p>where # is a digit specifying the highest level heading to use in the table of contents</p>
+<p>Converts <code>[TOC style]</code> text to TocBlock nodes and</p>
+<p>Or Sim TOC tag, which has the following format: <code>[TOC style]: # &quot;Title&quot;</code> and includes all
+following lines until a blank line. <!--SimTocContent--></p>
+<p>Lines after the TOC tag are added to the <code>SimTocContent</code> child node of the SimToc block.</p>
+<p>The intention for this tag is to have the <code>SimTocContent</code> updated to reflect the content of the
+document.</p>
+<ol>
+  <li>
+    <p><code>style</code> consists of space separated list of options:</p>
+    <ul>
+      <li>
+        <p><code>levels=levelList</code> where level list is a comma separated list of levels or ranges. Default
+        is to include heading levels 2 and 3. Examples:</p>
+        <ul>
+          <li><code>levels=4</code> include levels 2,3 and 4</li>
+          <li><code>levels=2-4</code> include levels 2,3 and 4. same as <code>levels=4</code></li>
+          <li><code>levels=2-4,5</code> include levels 2,3,4 and 5</li>
+          <li><code>levels=1,3</code> include levels 1 and 3</li>
+          <li><code>levels=-3</code> include levels 1 to 3</li>
+          <li><code>levels=3-</code> include levels 3 to 6</li>
+        </ul>
+      </li>
+      <li>
+        <p><code>html</code> generate HTML version of the TOC</p>
+      </li>
+      <li>
+        <p><code>markdown</code> generate Markdown version of the TOC</p>
+      </li>
+      <li>
+        <p><code>text</code> to only include the text of the heading</p>
+      </li>
+      <li>
+        <p><code>formatted</code> to include text and inline formatting</p>
+      </li>
+      <li>
+        <p><code>hierarchy</code> to render as hierarchical list in order of appearance in the document</p>
+      </li>
+      <li>
+        <p><code>flat</code> to render as a flat list in order of appearance in the document</p>
+      </li>
+      <li>
+        <p><code>reversed</code> to render as a flat list in order of appearance in the document</p>
+      </li>
+      <li>
+        <p><code>sort-up</code> to render as a flat list sorted alphabetically by heading text only, no inlines</p>
+      </li>
+      <li>
+        <p><code>sort-down</code> to render as a flat list sorted reversed alphabetically by heading text only,
+        no inlines</p>
+      </li>
+      <li>
+        <p><code>bullet</code> to use a bullet list for the TOC items</p>
+      </li>
+      <li>
+        <p><code>numbered</code> to use a numbered list for TOC items</p>
+      </li>
+    </ul>
+  </li>
+</ol>
 </body>
 </html>
