@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.30](#06130)
 - [0.61.28](#06128)
 - [0.61.26](#06126)
 - [0.61.24](#06124)
@@ -225,6 +226,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.61.30
+
+* Fix: [#402, When using PegdownOptionsAdapter indented code blocks does not work for lists] 
 
 ## 0.61.28
 
@@ -2526,4 +2531,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 <!-- @IGNORE PREVIOUS: link -->
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
+[#402, When using PegdownOptionsAdapter indented code blocks does not work for lists]: https://github.com/vsch/flexmark-java/issues/402
+
 

@@ -563,7 +563,7 @@ public class ListBlockParser extends AbstractBlockParser {
                 }
             } else if (emulationFamily == FIXED_INDENT) {
                 int currentIndent = state.getIndent();
-                if (currentIndent >= myOptions.getCodeIndent()) {
+                if (currentIndent >= myOptions.getItemIndent()) {
                     return BlockStart.none();
                 }
             } else if (emulationFamily == KRAMDOWN) {

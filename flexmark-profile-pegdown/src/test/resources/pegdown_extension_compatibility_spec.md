@@ -3454,9 +3454,8 @@ pegdown converts second item to lazy continuation because it is indented by more
 .
 <ul>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item
-    <ul>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Second item</li>
-    </ul>
+    <pre><code>* [ ] Second item
+</code></pre>
   </li>
 </ul>
 ````````````````````````````````
@@ -3470,9 +3469,8 @@ pegdown converts second item to lazy continuation because it is indented by more
 .
 <ul>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;First item
-    <ul>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Second item</li>
-    </ul>
+    <pre><code>   * [ ] Second item
+</code></pre>
   </li>
 </ul>
 ````````````````````````````````

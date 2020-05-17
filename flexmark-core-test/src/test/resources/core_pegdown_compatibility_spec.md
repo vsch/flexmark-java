@@ -2982,7 +2982,7 @@ Issue #108, problem of the list of some Space in front, misunderstanding of
 `Parser.LISTS_ITEM_INDENT` setting to 2
 
 ```````````````````````````````` example(Issues - 108: 1) options(lists-item-indent)
-  1. **download**  
+1. **download**  
   2. **abc**  →→
   3. **999**
 
@@ -2996,21 +2996,21 @@ Issue #108, problem of the list of some Space in front, misunderstanding of
   </li>
 </ol>
 .
-Document[0, 51]
-  OrderedList[2, 50] isTight delimiter:'.'
-    OrderedListItem[2, 50] open:[2, 4, "1."] isTight
-      Paragraph[5, 20]
-        StrongEmphasis[5, 17] textOpen:[5, 7, "**"] text:[7, 15, "download"] textClose:[15, 17, "**"]
-          Text[7, 15] chars:[7, 15, "download"]
-      OrderedList[22, 50] isTight start:2 delimiter:'.'
-        OrderedListItem[22, 37] open:[22, 24, "2."] isTight
-          Paragraph[25, 37]
-            StrongEmphasis[25, 32] textOpen:[25, 27, "**"] text:[27, 30, "abc"] textClose:[30, 32, "**"]
-              Text[27, 30] chars:[27, 30, "abc"]
-        OrderedListItem[39, 50] open:[39, 41, "3."] isTight hadBlankLineAfter
-          Paragraph[42, 50] isTrailingBlankLine
-            StrongEmphasis[42, 49] textOpen:[42, 44, "**"] text:[44, 47, "999"] textClose:[47, 49, "**"]
-              Text[44, 47] chars:[44, 47, "999"]
+Document[0, 49]
+  OrderedList[0, 48] isTight delimiter:'.'
+    OrderedListItem[0, 48] open:[0, 2, "1."] isTight
+      Paragraph[3, 18]
+        StrongEmphasis[3, 15] textOpen:[3, 5, "**"] text:[5, 13, "download"] textClose:[13, 15, "**"]
+          Text[5, 13] chars:[5, 13, "download"]
+      OrderedList[20, 48] isTight start:2 delimiter:'.'
+        OrderedListItem[20, 35] open:[20, 22, "2."] isTight
+          Paragraph[23, 35]
+            StrongEmphasis[23, 30] textOpen:[23, 25, "**"] text:[25, 28, "abc"] textClose:[28, 30, "**"]
+              Text[25, 28] chars:[25, 28, "abc"]
+        OrderedListItem[37, 48] open:[37, 39, "3."] isTight hadBlankLineAfter
+          Paragraph[40, 48] isTrailingBlankLine
+            StrongEmphasis[40, 47] textOpen:[40, 42, "**"] text:[42, 45, "999"] textClose:[45, 47, "**"]
+              Text[42, 45] chars:[42, 45, "999"]
 ````````````````````````````````
 
 
@@ -3299,5 +3299,18 @@ Document[0, 40]
 ````````````````````````````````
 
 
-[#382, Is there an option for number of whitespaces needed to create sub-lists?]: https://github.com/vsch/flexmark-java/issues/382
+## Issue 402
+
+Indented code block looking like list item
+
+```````````````````````````````` example Issue 402: 1
+    - this is indented code
+.
+<pre><code>- this is indented code
+</code></pre>
+.
+Document[0, 27]
+  IndentedCodeBlock[4, 27]
+````````````````````````````````
+
 
