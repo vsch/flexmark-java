@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.32](#06132)
 - [0.61.30](#06130)
 - [0.61.28](#06128)
 - [0.61.26](#06126)
@@ -226,6 +227,10 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.61.32
+
+* Fix: optimized TOC levels from erroneous `#,#` to `#-#` for single level TOC.
 
 ## 0.61.30
 

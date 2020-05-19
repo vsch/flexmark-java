@@ -31,11 +31,11 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
         TOC_LEVELS_MAP.put(0x3C, "5");
         TOC_LEVELS_MAP.put(0x7C, "6");
         TOC_LEVELS_MAP.put(1 << 1, "1");
-        //TOC_LEVELS_MAP.put(1 << 2, "2,2");
-        TOC_LEVELS_MAP.put(1 << 3, "3,3");
-        TOC_LEVELS_MAP.put(1 << 4, "4,4");
-        TOC_LEVELS_MAP.put(1 << 5, "5,5");
-        TOC_LEVELS_MAP.put(1 << 6, "6,6");
+        //TOC_LEVELS_MAP.put(1 << 2, "2-2");
+        TOC_LEVELS_MAP.put(1 << 3, "3-3");
+        TOC_LEVELS_MAP.put(1 << 4, "4-4");
+        TOC_LEVELS_MAP.put(1 << 5, "5-5");
+        TOC_LEVELS_MAP.put(1 << 6, "6-6");
     }
     
     public TocLevelsOptionParser(String optionName) {
