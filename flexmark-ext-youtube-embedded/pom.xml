@@ -4,7 +4,7 @@
     <parent>
         <artifactId>flexmark-java</artifactId>
         <groupId>com.vladsch.flexmark</groupId>
-        <version>0.61.32</version>
+        <version>0.61.34</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
