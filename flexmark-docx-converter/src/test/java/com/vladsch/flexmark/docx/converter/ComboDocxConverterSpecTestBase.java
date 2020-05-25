@@ -116,6 +116,9 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("yellow-missing-hyperlink", new MutableDataSet().set(DocxRenderer.LOCAL_HYPERLINK_MISSING_HIGHLIGHT, "yellow"));
         optionsMap.put("form-controls-input", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "input"));
         optionsMap.put("form-controls-form", new MutableDataSet().set(DocxRenderer.FORM_CONTROLS, "form"));
+        optionsMap.put("page-a4", new MutableDataSet().set(DocxRenderer.PAGE_SIZE, "a4"));
+        optionsMap.put("page-letter", new MutableDataSet().set(DocxRenderer.PAGE_SIZE, "letter"));
+        optionsMap.put("page-landscape", new MutableDataSet().set(DocxRenderer.PAGE_LANDSCAPE, true));
         
         HashMap<String, String> props = new HashMap<>();
         props.put("File Name", "TestFile"); 

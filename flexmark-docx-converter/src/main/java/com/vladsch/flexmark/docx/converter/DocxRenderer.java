@@ -9,6 +9,7 @@ import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.builder.BuilderBase;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
@@ -24,6 +25,8 @@ import com.vladsch.flexmark.util.sequence.Escaping;
 import org.docx4j.Docx4J;
 import org.docx4j.XmlUtils;
 import org.docx4j.docProps.custom.Properties;
+import org.docx4j.model.structure.PageDimensions;
+import org.docx4j.model.structure.PageSizePaper;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -31,9 +34,7 @@ import org.docx4j.openpackaging.parts.DocPropsCustomPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.StyleDefinitionsPart;
-import org.docx4j.wml.CTBookmark;
-import org.docx4j.wml.Numbering;
-import org.docx4j.wml.Styles;
+import org.docx4j.wml.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -142,6 +143,8 @@ public class DocxRenderer implements IRender {
 
     final public static DataKey<String> PARAGRAPH_BULLET_LIST_STYLE = new DataKey<>("PARAGRAPH_BULLET_LIST_STYLE", "ListBullet");
     final public static DataKey<String> PARAGRAPH_NUMBERED_LIST_STYLE = new DataKey<>("PARAGRAPH_NUMBERED_LIST_STYLE", "ListNumber");
+    final public static DataKey<String> PAGE_SIZE = new DataKey<>("PAGE_SIZE", ""); // NOTE: if not in PageSizePaper then will use default from the ML Package
+    final public static DataKey<Boolean> PAGE_LANDSCAPE = new DataKey<>("PAGE_LANDSCAPE", false); // NOTE: only used if page size is also defined
 
     // internal stuff
     final public static String EMOJI_RESOURCE_PREFIX = "emoji:";
@@ -227,6 +230,30 @@ public class DocxRenderer implements IRender {
         return null;
     }
 
+    public static void setPageSize(WordprocessingMLPackage out, PageSizePaper sz, boolean landscape) {
+        MainDocumentPart documentPart = out.getMainDocumentPart();
+        org.docx4j.wml.Document document = documentPart.getJaxbElement();
+        Body body = document.getBody();
+
+//        // Create a basic sectPr using our Page model
+//        PageDimensions page = new PageDimensions();
+//        page.setPgSize(sz, landscape);
+//
+//        SectPr sectPr = new ObjectFactory().createSectPr();
+//        body.setSectPr(sectPr);
+//        sectPr.setPgSz(page.getPgSz());
+//        // NOTE: page margins are not changed
+////        sectPr.setPgMar(page.getPgMar());
+        
+        // Change only page size
+        PageDimensions page = new PageDimensions();
+        page.setPgSize(sz, landscape);
+        SectPr sectPr = body.getSectPr();
+        sectPr.setPgSz(page.getPgSz());
+        // NOTE: page margins are not changed
+//        sectPr.setPgMar(page.getPgMar());
+    }
+
     static void setDefaultStyleAndNumbering(WordprocessingMLPackage out, DataHolder options) {
         try {
             // (main doc part it if necessary)
@@ -267,7 +294,7 @@ public class DocxRenderer implements IRender {
 
     public static void setDocumentProperties(WordprocessingMLPackage out, DataHolder options) {
         Map<String, String> properties = CUSTOM_PROPERTIES.get(options);
-        
+
         if (!properties.isEmpty()) {
             try {
                 DocPropsCustomPart customPropsPart = out.getDocPropsCustomPart();
@@ -290,6 +317,21 @@ public class DocxRenderer implements IRender {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        }
+        
+        String pageSize = PAGE_SIZE.get(options).trim().toLowerCase();
+        if (!pageSize.isEmpty()) {
+            PageSizePaper sz = null;
+            for (PageSizePaper paper : PageSizePaper.values()) {
+                if (pageSize.equalsIgnoreCase(paper.value())) {
+                    sz = paper;
+                    break;
+                }
+            }
+
+            if (sz != null) {
+                setPageSize(out, sz, PAGE_LANDSCAPE.get(options));
             }
         }
     }
@@ -565,10 +607,10 @@ public class DocxRenderer implements IRender {
             this.renderingPhases = new HashSet<>(DocxRendererPhase.values().length);
             Set<Class<?>> collectNodeTypes = new HashSet<>(100);
             this.phasedFormatters = new ArrayList<>(nodeFormatterFactories.size());
-            boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options) && linkResolverFactories.stream().noneMatch(it-> it instanceof DocxLinkResolver.Factory);
+            boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(options) && linkResolverFactories.stream().noneMatch(it -> it instanceof DocxLinkResolver.Factory);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
-            
-            boolean defaultContentResolver = DEFAULT_CONTENT_RESOLVER.get(options) && contentResolverFactories.stream().noneMatch(it-> it instanceof FileUriContentResolver.Factory);
+
+            boolean defaultContentResolver = DEFAULT_CONTENT_RESOLVER.get(options) && contentResolverFactories.stream().noneMatch(it -> it instanceof FileUriContentResolver.Factory);
             this.myContentResolvers = new UriContentResolver[contentResolverFactories.size() + (defaultContentResolver ? 1 : 0)];
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
                     : new HeaderIdGenerator.Factory().create(this);

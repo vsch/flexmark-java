@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.61.34](#06134)
 - [0.61.32](#06132)
 - [0.61.30](#06130)
 - [0.61.28](#06128)
@@ -227,6 +228,11 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.61.34
+
+* Fix: add `DocxRenderer.PAGE_SIZE` and `DocxRenderer.PAGE_LANDSCAPE` properties to allow simple
+  changes to page setup for rendered document which is different from one in the template.
 
 ## 0.61.32
 

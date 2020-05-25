@@ -6,6 +6,9 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.61.34](#06134)
+- [0.61.32](#06132)
+- [0.61.30](#06130)
 - [0.61.28](#06128)
 - [0.61.26](#06126)
 - [0.61.24](#06124)
@@ -169,6 +172,19 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## 0.61.34
+
+* Fix: add `DocxRenderer.PAGE_SIZE` and `DocxRenderer.PAGE_LANDSCAPE` properties to allow simple
+  changes to page setup for rendered document which is different from one in the template.
+
+## 0.61.32
+
+* Fix: optimized TOC levels from erroneous `#,#` to `#-#` for single level TOC.
+
+## 0.61.30
+
+* Fix: [#402, When using PegdownOptionsAdapter indented code blocks does not work for lists] 
 
 ## 0.61.28
 
@@ -2118,3 +2134,5 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 
+
+[#402, When using PegdownOptionsAdapter indented code blocks does not work for lists]: https://github.com/vsch/flexmark-java/issues/402
