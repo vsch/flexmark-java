@@ -27,6 +27,22 @@ public class HtmlConverterState {
         return myParent;
     }
 
+    public List<Node> getElements() {
+        return myElements;
+    }
+
+    public int getIndex() {
+        return myIndex;
+    }
+
+    public Attributes getAttributes() {
+        return myAttributes;
+    }
+
+    public LinkedList<Runnable> getPrePopActions() {
+        return myPrePopActions;
+    }
+
     public void addPrePopAction(Runnable action) {
         if (myPrePopActions == null) {
             myPrePopActions = new LinkedList<>();

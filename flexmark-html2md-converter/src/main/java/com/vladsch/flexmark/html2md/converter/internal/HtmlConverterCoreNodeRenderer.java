@@ -278,7 +278,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 String text = textNodes.trim();
                 String title = element.hasAttr("title") ? element.attr("title") : null;
 
-                if (!text.isEmpty() || !useHref.contains("#")) {
+                if (!text.isEmpty() || !useHref.contains("#") 
+                        || context.getState() == null || context.getState().getAttributes().get("id") == null || context.getState().getAttributes().get("id").getValue().isEmpty()) {
                     if (myHtmlConverterOptions.extractAutoLinks && href.equals(text) && (title == null || title.isEmpty())) {
                         if (myHtmlConverterOptions.wrapAutoLinks) out.append('<');
                         out.append(useHref);
