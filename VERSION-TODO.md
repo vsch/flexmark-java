@@ -233,7 +233,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 ## 0.61.36
 
 * Fix: HTML to Md converter to convert empty a tags to empty link text links. ie. `<a
-  href="#abc"></a>` to `[](#abc)`
+  href="#abc"></a>` to `[](#abc)`, except when contained in heading elements.
 
 ## 0.61.34
 

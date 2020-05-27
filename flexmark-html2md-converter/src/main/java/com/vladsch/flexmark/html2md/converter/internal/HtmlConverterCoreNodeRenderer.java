@@ -251,6 +251,16 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
         context.renderDefault(node);
     }
 
+    private boolean isHeading(Element element) {
+        if (element != null) {
+            String tagName = element.tagName().toLowerCase();
+            for (String headingTag : FlexmarkHtmlConverter.HEADING_NODES) {
+                if (tagName.equals(headingTag)) return true;
+            }
+        }
+        return false;
+    }
+
     private void processA(Element element, HtmlNodeConverterContext context, HtmlMarkdownWriter out) {
         // see if it is an anchor or a link
         if (element.hasAttr("href")) {
@@ -278,8 +288,8 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 String text = textNodes.trim();
                 String title = element.hasAttr("title") ? element.attr("title") : null;
 
-                if (!text.isEmpty() || !useHref.contains("#") 
-                        || context.getState() == null || context.getState().getAttributes().get("id") == null || context.getState().getAttributes().get("id").getValue().isEmpty()) {
+                if (!text.isEmpty() || !useHref.contains("#")
+                        || !isHeading(element.parent()) && !useHref.equals("#") && (context.getState() == null || context.getState().getAttributes().get("id") == null || context.getState().getAttributes().get("id").getValue().isEmpty())) {
                     if (myHtmlConverterOptions.extractAutoLinks && href.equals(text) && (title == null || title.isEmpty())) {
                         if (myHtmlConverterOptions.wrapAutoLinks) out.append('<');
                         out.append(useHref);

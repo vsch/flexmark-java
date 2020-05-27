@@ -209,6 +209,14 @@ public class FlexmarkHtmlConverter {
     final public static String H5_NODE = "h5";
     final public static String H6_NODE = "h6";
     final public static String DEFAULT_NODE = "";
+    final public static String[] HEADING_NODES = {
+            H1_NODE,
+            H2_NODE,
+            H3_NODE,
+            H4_NODE,
+            H5_NODE,
+            H6_NODE,
+    };
 
     public static String[] EXPLICIT_LINK_TEXT_TAGS = new String[] { IMG_NODE };
 
