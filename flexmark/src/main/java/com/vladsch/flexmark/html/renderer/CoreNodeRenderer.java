@@ -631,12 +631,10 @@ public class CoreNodeRenderer implements NodeRenderer {
 
             // we have a title part, use that
             if (node.getTitle().isNotNull()) {
-                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, node.getTitle().unescape());
-            } else {
-                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+                resolvedLink = resolvedLink.withTitle(node.getTitle().unescape());
             }
 
-            html.attr(resolvedLink.getAttributes());
+            html.attr(resolvedLink.getNonNullAttributes());
             html.srcPos(node.getChars()).withAttr(resolvedLink).tagVoid("img");
         }
     }
@@ -651,12 +649,10 @@ public class CoreNodeRenderer implements NodeRenderer {
 
             // we have a title part, use that
             if (node.getTitle().isNotNull()) {
-                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, node.getTitle().unescape());
-            } else {
-                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+                resolvedLink = resolvedLink.withTitle(node.getTitle().unescape());
             }
 
-            html.attr(resolvedLink.getAttributes());
+            html.attr(resolvedLink.getNonNullAttributes());
             html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
             renderChildrenSourceLineWrapped(node, node.getText(), context, html);
             html.tag("/a");
@@ -702,9 +698,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
             resolvedLink = context.resolveLink(LinkType.IMAGE, url, null, null);
             if (reference.getTitle().isNotNull()) {
-                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, reference.getTitle().unescape());
-            } else {
-                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+                resolvedLink = resolvedLink.withTitle(reference.getTitle().unescape());
             }
         } else {
             // see if have reference resolver and this is resolved
@@ -755,9 +749,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
             resolvedLink = context.resolveLink(LinkType.LINK, url, null, null);
             if (reference.getTitle().isNotNull()) {
-                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, reference.getTitle().unescape());
-            } else {
-                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+                resolvedLink = resolvedLink.withTitle(reference.getTitle().unescape());
             }
         } else {
             // see if have reference resolver and this is resolved

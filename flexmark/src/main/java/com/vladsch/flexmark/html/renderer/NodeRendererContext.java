@@ -4,6 +4,7 @@ import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +20,7 @@ public interface NodeRendererContext extends LinkResolverContext {
      * @param attributes the attributes that were calculated by the renderer or null, these may be modified. To preserve originals pass a copy.
      * @return the extended attributes with added/updated/removed entries
      */
-    @NotNull Attributes extendRenderingNodeAttributes(@NotNull AttributablePart part, @Nullable Attributes attributes);
+    @NotNull MutableAttributes extendRenderingNodeAttributes(@NotNull AttributablePart part, @Nullable Attributes attributes);
 
     /**
      * Extend the attributes by extensions for the node being currently rendered.
@@ -29,7 +30,7 @@ public interface NodeRendererContext extends LinkResolverContext {
      * @param attributes the attributes that were calculated by the renderer or null, these may be modified. To preserve originals pass a copy.
      * @return the extended attributes with added/updated/removed entries
      */
-    @NotNull Attributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, @Nullable Attributes attributes);
+    @NotNull MutableAttributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, @Nullable Attributes attributes);
 
     /**
      * @return the HTML writer to use

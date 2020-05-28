@@ -3,6 +3,7 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -26,11 +27,10 @@ public interface AttributeProvider {
      * Core defines LinkStatus.UNKNOWN,LinkStatus.VALID,LinkStatus.NOT_FOUND. Extensions can define more.
      * <p>
      * AttributablePart.NODE is a generic placeholder when the node did not provide a specific part for attribution.
-     *
-     * @param node       the node to set attributes for
+     *  @param node       the node to set attributes for
      * @param part       attributes for the specific part of the node being generated, Core defines AttributablePart.LINK,
      *                   AttributablePart.ID and generic AttributablePart.NODE, extensions are free to define more
      * @param attributes the attributes, with any default attributes already set in the map
      */
-    void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes);
+    void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes);
 }

@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ast.util;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.visitor.AstActionHandler;
 
 import java.util.Collection;
@@ -47,7 +48,7 @@ public class AttributeProviderAdapter extends AstActionHandler<AttributeProvider
     }
 
     @Override
-    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+    public void setAttributes(Node node, AttributablePart part, MutableAttributes attributes) {
         processNode(node, false, (n, handler) -> handler.setAttributes(n, part, attributes));
     }
 }

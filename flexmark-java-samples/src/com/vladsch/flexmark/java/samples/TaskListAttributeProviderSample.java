@@ -13,7 +13,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -37,7 +37,7 @@ public class TaskListAttributeProviderSample {
 
     static class TaskListAttributeProvider implements AttributeProvider {
         @Override
-        public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes) {
+        public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes) {
             if (node instanceof TaskListItem && (part == CoreNodeRenderer.TIGHT_LIST_ITEM || part == CoreNodeRenderer.LOOSE_LIST_ITEM)) {
                 if (((TaskListItem) node).isItemDoneMarker()) {
                     attributes.addValue("class", "closed-list-item");

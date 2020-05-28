@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
@@ -77,7 +78,7 @@ final public class HtmlEmbeddedAttributeTest {
         public void process(@NotNull NodeTracker state, @NotNull Node node) {
             BasedSequence paragraphText = BasedSequence.NULL;
             if (node instanceof Paragraph) { // [foo](http://example.com)
-                Attributes attributes = new Attributes();
+                MutableAttributes attributes = new MutableAttributes();
                 attributes.addValue("class", "caption");
 
                 node.appendChild(new EmbeddedAttributeProvider.EmbeddedNodeAttributes(node, attributes));

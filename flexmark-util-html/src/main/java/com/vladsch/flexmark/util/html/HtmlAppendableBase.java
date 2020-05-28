@@ -14,7 +14,7 @@ import java.util.*;
 public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements HtmlAppendable {
     final private LineAppendable appendable;
 
-    private @Nullable Attributes currentAttributes;
+    private @Nullable MutableAttributes currentAttributes;
     private boolean indentOnFirstEol = false;
     private boolean lineOnChildText = false;
     private boolean withAttributes = false;
@@ -133,7 +133,7 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     @Override
     public T attr(@NotNull CharSequence attrName, @NotNull CharSequence value) {
         if (currentAttributes == null) {
-            currentAttributes = new Attributes();
+            currentAttributes = new MutableAttributes();
         }
         currentAttributes.addValue(attrName, value);
         return (T) this;
@@ -143,7 +143,7 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     @Override
     public T attr(@NotNull Attribute... attribute) {
         if (currentAttributes == null) {
-            currentAttributes = new Attributes();
+            currentAttributes = new MutableAttributes();
         }
         for (Attribute attr : attribute) {
             currentAttributes.addValue(attr.getName(), attr.getValue());
@@ -156,7 +156,7 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     public T attr(@NotNull Attributes attributes) {
         if (!attributes.isEmpty()) {
             if (currentAttributes == null) {
-                currentAttributes = new Attributes(attributes);
+                currentAttributes = new MutableAttributes(attributes);
             } else {
                 currentAttributes.addValues(attributes);
             }
@@ -179,7 +179,7 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     @NotNull
     @Override
     public T setAttributes(@NotNull Attributes attributes) {
-        currentAttributes = attributes;
+        currentAttributes = attributes.toMutable();
         return (T) this;
     }
 

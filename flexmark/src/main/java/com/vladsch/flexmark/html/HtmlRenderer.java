@@ -12,6 +12,7 @@ import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.TrackedOffsetUtils;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.Escaping;
@@ -583,12 +584,6 @@ public class HtmlRenderer implements IRender {
 
         @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
-            return resolveLink(linkType, url, (Attributes) null, urlEncode);
-        }
-
-        @NotNull
-        @Override
         public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
@@ -610,7 +605,6 @@ public class HtmlRenderer implements IRender {
                     }
                 }
 
-                // put it in the map
                 resolvedLinks.put(urlSeq, resolvedLink);
             }
 
@@ -621,7 +615,7 @@ public class HtmlRenderer implements IRender {
         public String getNodeId(@NotNull Node node) {
             String id = htmlIdGenerator.getId(node);
             if (attributeProviderFactories.size() != 0) {
-                Attributes attributes = new Attributes();
+                MutableAttributes attributes = new MutableAttributes();
                 if (id != null) attributes.replaceValue("id", id);
 
                 for (AttributeProvider attributeProvider : attributeProviders) {
@@ -666,20 +660,18 @@ public class HtmlRenderer implements IRender {
             }
         }
 
-        @NotNull
         @Override
-        public Attributes extendRenderingNodeAttributes(@NotNull AttributablePart part, Attributes attributes) {
-            Attributes attr = attributes != null ? attributes : new Attributes();
+        public @NotNull MutableAttributes extendRenderingNodeAttributes(@NotNull AttributablePart part, Attributes attributes) {
+            MutableAttributes attr = attributes != null ? attributes.toMutable() : new MutableAttributes();
             for (AttributeProvider attributeProvider : attributeProviders) {
                 attributeProvider.setAttributes(this.renderingNode, part, attr);
             }
             return attr;
         }
 
-        @NotNull
         @Override
-        public Attributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, Attributes attributes) {
-            Attributes attr = attributes != null ? attributes : new Attributes();
+        public @NotNull MutableAttributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, Attributes attributes) {
+            MutableAttributes attr = attributes != null ? attributes.toMutable() : new MutableAttributes();
             for (AttributeProvider attributeProvider : attributeProviders) {
                 attributeProvider.setAttributes(node, part, attr);
             }
@@ -845,18 +837,16 @@ public class HtmlRenderer implements IRender {
             @Override
             public String encodeUrl(@NotNull CharSequence url) {return myMainNodeRenderer.encodeUrl(url);}
 
-            @NotNull
             @Override
-            public Attributes extendRenderingNodeAttributes(@NotNull AttributablePart part, Attributes attributes) {
+            public @NotNull MutableAttributes extendRenderingNodeAttributes(@NotNull AttributablePart part, Attributes attributes) {
                 return myMainNodeRenderer.extendRenderingNodeAttributes(
                         part,
                         attributes
                 );
             }
 
-            @NotNull
             @Override
-            public Attributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, Attributes attributes) {
+            public @NotNull MutableAttributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, Attributes attributes) {
                 return myMainNodeRenderer.extendRenderingNodeAttributes(
                         node,
                         part,

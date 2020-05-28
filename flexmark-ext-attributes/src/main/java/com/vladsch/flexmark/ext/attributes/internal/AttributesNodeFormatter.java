@@ -4,15 +4,15 @@ import com.vladsch.flexmark.ast.AnchorRefTarget;
 import com.vladsch.flexmark.ast.Heading;
 import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockVisitor;
 import com.vladsch.flexmark.ext.attributes.*;
-import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.formatter.Formatter;
+import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.html.Attribute;
-import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
@@ -637,7 +637,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
             AttributeNode removed1 = attributeNodes.remove(Attribute.CLASS_ATTR);
             AttributeNode removed2 = attributeNodes.remove(".");
             if (removed1 != null || removed2 != null) {
-                Attributes attributes = new Attributes();
+                MutableAttributes attributes = new MutableAttributes();
                 if (removed1 != null) attributes.addValue(Attribute.CLASS_ATTR, removed1.getValue());
                 if (removed2 != null) attributes.addValue(Attribute.CLASS_ATTR, removed2.getValue());
                 String value = attributes.getValue(Attribute.CLASS_ATTR);
@@ -651,7 +651,7 @@ public class AttributesNodeFormatter implements PhasedNodeFormatter, ExplicitAtt
             AttributeNode newNode = attributeNode;
             AttributeNode removed1 = attributeNodes.remove(Attribute.STYLE_ATTR);
             if (removed1 != null) {
-                Attributes attributes = new Attributes();
+                MutableAttributes attributes = new MutableAttributes();
                 attributes.addValue(Attribute.STYLE_ATTR, removed1.getValue());
                 String value = attributes.getValue(Attribute.STYLE_ATTR);
                 if (!attributeNode.getValue().equals(value)) {

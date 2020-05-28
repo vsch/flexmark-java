@@ -17,6 +17,7 @@ import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.CellAlignment;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.misc.Ref;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -1144,7 +1145,7 @@ public class FlexmarkHtmlConverter {
         @Override
         public void processAttributes(@NotNull Node node) {
             assert myState != null;
-            Attributes attributes = myState.myAttributes;
+            MutableAttributes attributes = myState.myAttributes;
 
             if (myHtmlConverterOptions.outputAttributesIdAttr || !myHtmlConverterOptions.outputAttributesNamesRegex.isEmpty()) {
                 org.jsoup.nodes.Attributes nodeAttributes = node.attributes();
@@ -1256,7 +1257,7 @@ public class FlexmarkHtmlConverter {
             assert myState != null;
             if (myStateStack.isEmpty())
                 throw new IllegalStateException("transferIdToParent with an empty stack");
-            Attributes attributes = new Attributes(myState.myAttributes);
+            MutableAttributes attributes = new MutableAttributes(myState.myAttributes);
             myState.myAttributes.clear();
 
             for (String exclude : excludes) {
@@ -1277,7 +1278,7 @@ public class FlexmarkHtmlConverter {
             assert myState != null;
             if (myStateStack.isEmpty())
                 throw new IllegalStateException("transferIdToParent with an empty stack");
-            Attributes attributes = new Attributes();
+            MutableAttributes attributes = new MutableAttributes();
 
             for (String include : includes) {
                 Attribute attribute = myState.myAttributes.get(include);

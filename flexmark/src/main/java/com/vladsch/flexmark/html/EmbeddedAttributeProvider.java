@@ -4,6 +4,7 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,7 +25,7 @@ public class EmbeddedAttributeProvider implements AttributeProvider {
     }
 
     @Override
-    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes) {
+    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes) {
         if (part == AttributablePart.NODE) {
             Node firstChild = node.getChildOfType(EmbeddedNodeAttributes.class);
             if (firstChild instanceof EmbeddedNodeAttributes) {

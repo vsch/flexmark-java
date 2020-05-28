@@ -2,6 +2,8 @@ package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttribute;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -9,7 +11,7 @@ public class ResolvedLink {
     final private @NotNull LinkType myLinkType;
     final private @NotNull String myUrl;
     final private @NotNull LinkStatus myStatus;
-    private @Nullable Attributes myAttributes;
+    private @Nullable MutableAttributes myAttributes;
 
     public ResolvedLink(@NotNull LinkType linkType, @NotNull CharSequence url) {
         this(linkType, url, null, LinkStatus.UNKNOWN);
@@ -21,12 +23,19 @@ public class ResolvedLink {
 
     @Nullable
     public Attributes getAttributes() {
-        return myAttributes;
+        return myAttributes == null ? null : myAttributes.toImmutable();
     }
 
-    public @NotNull Attributes getNonNullAttributes() {
+    public  @NotNull Attributes getNonNullAttributes() {
         if (myAttributes == null) {
-            myAttributes = new Attributes();
+            myAttributes = new MutableAttributes();
+        }
+        return myAttributes.toImmutable();
+    }
+
+    public  @NotNull MutableAttributes getMutableAttributes() {
+        if (myAttributes == null) {
+            myAttributes = new MutableAttributes();
         }
         return myAttributes;
     }
@@ -36,7 +45,7 @@ public class ResolvedLink {
         myUrl = String.valueOf(url);
         myStatus = status;
         if (attributes != null) {
-            getNonNullAttributes().addValues(attributes);
+            getMutableAttributes().addValues(attributes);
         }
     }
 
@@ -89,7 +98,7 @@ public class ResolvedLink {
         String haveTitle = myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
         if (title == haveTitle || haveTitle != null && title != null && haveTitle.contentEquals(title)) return this;
 
-        Attributes attributes = new Attributes(myAttributes);
+        MutableAttributes attributes = new MutableAttributes(myAttributes);
         if (title == null) {
             attributes.remove(Attribute.TITLE_ATTR);
             if (attributes.isEmpty()) attributes = null;
@@ -107,7 +116,7 @@ public class ResolvedLink {
         String haveTarget = myAttributes == null ? null : myAttributes.getValue(Attribute.TARGET_ATTR);
         if (target == haveTarget || haveTarget != null && target != null && haveTarget.contentEquals(target)) return this;
 
-        Attributes attributes = new Attributes(myAttributes);
+        MutableAttributes attributes = new MutableAttributes(myAttributes);
         if (target == null) {
             attributes.remove(Attribute.TARGET_ATTR);
             if (attributes.isEmpty()) attributes = null;

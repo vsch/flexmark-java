@@ -35,6 +35,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.apache.log4j.Logger;
 import org.apache.log4j.varia.NullAppender;
 import org.docx4j.Docx4J;
@@ -282,12 +283,12 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
 
             myDocxContext = new DocxContextImpl<Node>(myPackage, null) {
                 @Override
-                public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
+                public MutableAttributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
                     return null;
                 }
 
                 @Override
-                public Attributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
+                public MutableAttributes extendRenderingNodeAttributes(Node node, AttributablePart part, Attributes attributes) {
                     return null;
                 }
 

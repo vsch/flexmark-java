@@ -7,7 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
-- [0.61.36](#06136)
+- [0.62.0](#0620)
 - [0.61.34](#06134)
 - [0.61.32](#06132)
 - [0.61.30](#06130)
@@ -230,10 +230,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
 
-## 0.61.36
+## 0.62.0
 
 * Fix: HTML to Md converter to convert empty a tags to empty link text links. ie. `<a
   href="#abc"></a>` to `[](#abc)`, except when contained in heading elements.
+* Break: rename `Attributes` to `MutableAttributes` and create new immutable `Attributes` class.
+* Fix: do not remove `title` attribute provided by `LinkResolver` when link has no title. Allow
+  link resolver titles to be used.
 
 ## 0.61.34
 

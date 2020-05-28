@@ -17,6 +17,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +39,7 @@ public class NodeInsertingPostProcessorSample {
 
     static class NodeInsertingPostProcessor extends NodePostProcessor {
         private static class NodeInsertingFactory extends NodePostProcessorFactory {
-            private NodeInsertingFactory(DataHolder options) {
+            NodeInsertingFactory(DataHolder options) {
                 super(false);
 
                 addNodes(Image.class);
@@ -80,7 +81,7 @@ public class NodeInsertingPostProcessorSample {
                 Paragraph paragraph = new Paragraph(text.getChars());
 
                 // this will allows us add attributes in the AST without needing to modify the attribute provider
-                Attributes attributes = new Attributes();
+                MutableAttributes attributes = new MutableAttributes();
                 attributes.addValue("class", "caption");
 
                 paragraph.appendChild(new EmbeddedAttributeProvider.EmbeddedNodeAttributes(paragraph, attributes));

@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.util.options;
 
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttribute;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -8,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class AttributesTest {
     @Test
     public void testBasic() throws Exception {
-        Attributes attributes = new Attributes();
+        MutableAttributes attributes = new MutableAttributes();
 
         assertEquals("empty no attributes", false, attributes.contains("class"));
         assertEquals("empty no values", false, attributes.containsValue("class", "class1"));

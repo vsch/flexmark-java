@@ -20,6 +20,8 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.ScopedDataSet;
 import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttribute;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import org.docx4j.Docx4J;
@@ -704,7 +706,7 @@ public class DocxRenderer implements IRender {
         String calculateNodeId(Node node) {
             String id = htmlIdGenerator.getId(node);
             if (attributeProviderFactories.size() != 0) {
-                Attributes attributes = new Attributes();
+                MutableAttributes attributes = new MutableAttributes();
                 if (id != null) attributes.replaceValue("id", id);
 
                 for (AttributeProvider attributeProvider : myAttributeProviders) {
@@ -768,8 +770,8 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public Attributes extendRenderingNodeAttributes(@NotNull AttributablePart part, @Nullable Attributes attributes) {
-            Attributes attr = attributes != null ? attributes : new Attributes();
+        public MutableAttributes extendRenderingNodeAttributes(@NotNull AttributablePart part, @Nullable Attributes attributes) {
+            MutableAttributes attr = attributes != null ? attributes.toMutable() : new MutableAttributes();
             for (AttributeProvider attributeProvider : myAttributeProviders) {
                 attributeProvider.setAttributes(this.renderingNode, part, attr);
             }
@@ -777,8 +779,8 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public Attributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, @Nullable Attributes attributes) {
-            Attributes attr = attributes != null ? attributes : new Attributes();
+        public MutableAttributes extendRenderingNodeAttributes(@NotNull Node node, @NotNull AttributablePart part, @Nullable Attributes attributes) {
+            MutableAttributes attr = attributes != null ? attributes.toMutable() : new MutableAttributes();
             for (AttributeProvider attributeProvider : myAttributeProviders) {
                 attributeProvider.setAttributes(node, part, attr);
             }
@@ -838,12 +840,6 @@ public class DocxRenderer implements IRender {
 
         @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
-            return resolveLink(linkType, url, null, urlEncode);
-        }
-
-        @NotNull
-        @Override
         public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
@@ -865,7 +861,6 @@ public class DocxRenderer implements IRender {
                     }
                 }
 
-                // put it in the map
                 resolvedLinks.put(urlSeq, resolvedLink);
             }
 

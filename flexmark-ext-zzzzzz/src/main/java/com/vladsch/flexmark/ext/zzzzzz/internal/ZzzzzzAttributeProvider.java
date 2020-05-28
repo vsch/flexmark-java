@@ -12,6 +12,7 @@ import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.html.renderer.AttributablePart.LINK;
@@ -36,19 +37,19 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
     }
 
     @Override
-    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes) {
+    public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes) {
         nodeAdapter.setAttributes(node, part, attributes);
     }
 
-    private void setLinkAttributes(LinkNode node, AttributablePart part, Attributes attributes) {
+    private void setLinkAttributes(LinkNode node, AttributablePart part, MutableAttributes attributes) {
         setLinkAttributes(part, attributes);
     }
 
-    private void setLinkAttributes(RefNode node, AttributablePart part, Attributes attributes) {
+    private void setLinkAttributes(RefNode node, AttributablePart part, MutableAttributes attributes) {
         setLinkAttributes(part, attributes);
     }
 
-    private void setLinkAttributes(AttributablePart part, Attributes attributes) {
+    private void setLinkAttributes(AttributablePart part, MutableAttributes attributes) {
         if (part == LINK) {
             String linkStatus = attributes.getValue(LINK_STATUS_ATTR);
             if (LinkStatus.NOT_FOUND.isStatus(linkStatus)) {

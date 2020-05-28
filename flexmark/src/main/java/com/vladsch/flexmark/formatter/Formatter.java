@@ -31,6 +31,7 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT;
+import static com.vladsch.flexmark.util.html.Attribute.TITLE_ATTR;
 
 /**
  * Renders a tree of nodes to Markdown.
@@ -683,12 +684,6 @@ public class Formatter implements IRender {
 
         @NotNull
         @Override
-        public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Boolean urlEncode) {
-            return resolveLink(this, linkType, url, null);
-        }
-
-        @NotNull
-        @Override
         public ResolvedLink resolveLink(@NotNull LinkType linkType, @NotNull CharSequence url, Attributes attributes, Boolean urlEncode) {
             return resolveLink(this, linkType, url, attributes);
         }
@@ -710,7 +705,6 @@ public class Formatter implements IRender {
                     }
                 }
 
-                // put it in the map
                 resolvedLinks.put(urlSeq, resolvedLink);
             }
 

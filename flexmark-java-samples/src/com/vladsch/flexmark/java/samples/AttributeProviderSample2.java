@@ -11,7 +11,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.misc.Extension;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +36,7 @@ public class AttributeProviderSample2 {
 
     static class SampleAttributeProvider implements AttributeProvider {
         @Override
-        public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull Attributes attributes) {
+        public void setAttributes(@NotNull Node node, @NotNull AttributablePart part, @NotNull MutableAttributes attributes) {
             if (node instanceof Link && part == AttributablePart.LINK) {
                 Link link = (Link) node;
 

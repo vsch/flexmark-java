@@ -45,6 +45,7 @@ import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.misc.ImageUtils;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -933,7 +934,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         ResolvedLink resolvedLink = docx.resolveLink(LinkType.LINK, node.getUrl().unescape(), null, null);
 
         // we have a title part, use that
-        Attributes attributes = resolvedLink.getNonNullAttributes();
+        MutableAttributes attributes = resolvedLink.getNonNullAttributes().toMutable();
 
         if (node.getTitle().isNotNull()) {
             attributes.replaceValue(Attribute.TITLE_ATTR, node.getTitle().unescape());
@@ -1440,9 +1441,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
             resolvedLink = docx.resolveLink(LinkType.LINK, url, null, null);
             if (reference.getTitle().isNotNull()) {
-                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, reference.getTitle().unescape());
-            } else {
-                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+                resolvedLink = resolvedLink.withTitle(reference.getTitle().unescape());
             }
         } else {
             // see if have reference resolver and this is resolved
@@ -1635,7 +1634,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private void render(Image node, DocxRendererContext docx) {
         String altText = new TextCollectingVisitor().collectAndGetText(node);
         ResolvedLink resolvedLink = docx.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null, null);
-        Attributes attributes = resolvedLink.getNonNullAttributes();
+        MutableAttributes attributes = resolvedLink.getNonNullAttributes().toMutable();
 
         if (!node.getUrlContent().isEmpty()) {
             // reverse URL encoding of =, &
@@ -1667,7 +1666,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             } else {
                 ResolvedLink resolvedLink = docx.resolveLink(LinkType.IMAGE, shortcut.emojiText, null, null);
                 //String altText = shortcut.alt;
-                Attributes attributes = resolvedLink.getNonNullAttributes();
+                MutableAttributes attributes = resolvedLink.getNonNullAttributes().toMutable();
 
                 if (shortcut.alt != null) {
                     attributes.replaceValue("alt", shortcut.alt);
@@ -1748,9 +1747,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
             resolvedLink = docx.resolveLink(LinkType.IMAGE, url, null, null);
             if (reference.getTitle().isNotNull()) {
-                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, reference.getTitle().unescape());
-            } else {
-                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+                resolvedLink = resolvedLink.withTitle(reference.getTitle().unescape());
             }
         } else {
             // see if have reference resolver and this is resolved
@@ -1770,7 +1767,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
         } else {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
-            Attributes attributes = resolvedLink.getNonNullAttributes();
+            MutableAttributes attributes = resolvedLink.getNonNullAttributes().toMutable();
 
             if (!altText.isEmpty()) {
                 attributes.replaceValue("alt", altText);
@@ -1788,7 +1785,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    private R renderImage(DocxRendererContext docx, ResolvedLink resolvedLink, Attributes attributes, double scale) {
+    private R renderImage(DocxRendererContext docx, ResolvedLink resolvedLink, MutableAttributes attributes, double scale) {
         BufferedImage image = null;
         int id1 = imageId++;
         int id2 = imageId++;
@@ -2152,7 +2149,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             EnumeratedReferenceRendering[] renderings = enumeratedOrdinals.getEnumeratedReferenceOrdinals(text);
 
             String title = new EnumRefTextCollectingVisitor().collectAndGetText(node.getChars().getBaseSequence(), renderings, null);
-            Attributes attributes = new Attributes();
+            MutableAttributes attributes = new MutableAttributes();
 
             if (title != null) {
                 attributes.replaceValue(Attribute.TITLE_ATTR, title);

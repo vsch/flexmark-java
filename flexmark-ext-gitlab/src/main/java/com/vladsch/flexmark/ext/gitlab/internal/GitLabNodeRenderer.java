@@ -198,9 +198,7 @@ public class GitLabNodeRenderer implements NodeRenderer
 
             resolvedLink = context.resolveLink(LinkType.IMAGE, url, null, null);
             if (reference.getTitle().isNotNull()) {
-                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, reference.getTitle().unescape());
-            } else {
-                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+                resolvedLink = resolvedLink.withTitle(reference.getTitle().unescape());
             }
         } else {
             // see if have reference resolver and this is resolved
