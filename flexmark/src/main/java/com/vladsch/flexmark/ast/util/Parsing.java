@@ -14,6 +14,11 @@ public class Parsing {
     final public static String INTELLIJ_DUMMY_IDENTIFIER = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER;
 
     // save options for others to use when only parsing instance is available
+    final public DataHolder options;
+
+    final public String ADDITIONAL_CHARS;
+    final public String EXCLUDED_0_TO_SPACE;
+
     final private static String ST_EOL= "(?:\r\n|\r|\n)";
     final private static String ST_ESCAPED_CHAR;
     final private static Pattern ST_LINK_LABEL;
@@ -29,9 +34,6 @@ public class Parsing {
                 "\\((" + ST_ESCAPED_CHAR + "|[^)\\x00])*\\))";
         ST_LINK_TITLE = Pattern.compile("^" + ST_LINK_TITLE_STRING);
     }
-    final public DataHolder options;
-    final public String ADDITIONAL_CHARS;
-    final public String EXCLUDED_0_TO_SPACE;
     final public String EOL = ST_EOL;
     final public String ESCAPED_CHAR = ST_ESCAPED_CHAR;
     final public Pattern LINK_LABEL = ST_LINK_LABEL;
