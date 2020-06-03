@@ -19,12 +19,27 @@ public class Parsing {
     final public String ADDITIONAL_CHARS;
     final public String EXCLUDED_0_TO_SPACE;
 
-    final public String EOL;
-    final public String ESCAPED_CHAR;
-    final public Pattern LINK_LABEL;
+    final private static String ST_EOL= "(?:\r\n|\r|\n)";
+    final private static String ST_ESCAPED_CHAR;
+    final private static Pattern ST_LINK_LABEL;
+    final private static String ST_LINK_TITLE_STRING;
+    final private static Pattern ST_LINK_TITLE;
+    static {
+        ST_ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
+        ST_LINK_LABEL = Pattern.compile("^\\[(?:[^\\\\\\[\\]]|" + ST_ESCAPED_CHAR + "|\\\\){0,999}\\]");
+        ST_LINK_TITLE_STRING = "(?:\"(" + ST_ESCAPED_CHAR + "|[^\"\\x00])*\"" +
+                '|' +
+                "'(" + ST_ESCAPED_CHAR + "|[^'\\x00])*'" +
+                '|' +
+                "\\((" + ST_ESCAPED_CHAR + "|[^)\\x00])*\\))";
+        ST_LINK_TITLE = Pattern.compile("^" + ST_LINK_TITLE_STRING);
+    }
+    final public String EOL = ST_EOL;
+    final public String ESCAPED_CHAR = ST_ESCAPED_CHAR;
+    final public Pattern LINK_LABEL = ST_LINK_LABEL;
     final public Pattern LINK_DESTINATION_ANGLES;
-    final public String LINK_TITLE_STRING;
-    final public Pattern LINK_TITLE;
+    final public String LINK_TITLE_STRING = ST_LINK_TITLE_STRING;
+    final public Pattern LINK_TITLE = ST_LINK_TITLE;
     final public String REG_CHAR;
     final public String REG_CHAR_SP;
     final public String IN_PARENS_NOSP;
@@ -39,33 +54,85 @@ public class Parsing {
     final public String CDATA;
     final public String ENTITY;
 
+    final private static String ST_ASCII_PUNCTUATION;
+    final private static String ST_ASCII_OPEN_PUNCTUATION;
+    final private static String ST_ASCII_CLOSE_PUNCTUATION;
+    final private static Pattern ST_PUNCTUATION;
+    final private static Pattern ST_PUNCTUATION_OPEN;
+    final private static Pattern ST_PUNCTUATION_CLOSE;
+    final private static Pattern ST_PUNCTUATION_ONLY;
+    final private static Pattern ST_PUNCTUATION_OPEN_ONLY;
+    final private static Pattern ST_PUNCTUATION_CLOSE_ONLY;
+    static {
+        ST_ASCII_PUNCTUATION = "'!\"#\\$%&\\*\\+,\\-\\./:;=\\?@\\\\\\^_`\\|~";
+        ST_ASCII_OPEN_PUNCTUATION = "\\(<\\[\\{";
+        ST_ASCII_CLOSE_PUNCTUATION = "\\)>\\]\\}";
+        ST_PUNCTUATION = Pattern.compile(
+                "^[" + ST_ASCII_PUNCTUATION + ST_ASCII_OPEN_PUNCTUATION + ST_ASCII_CLOSE_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]");
+        ST_PUNCTUATION_OPEN = Pattern.compile(
+                "^[" + ST_ASCII_PUNCTUATION + ST_ASCII_OPEN_PUNCTUATION + "]|[\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^" + ST_ASCII_CLOSE_PUNCTUATION + "]");
+        ST_PUNCTUATION_CLOSE = Pattern.compile(
+                "^[" + ST_ASCII_PUNCTUATION + ST_ASCII_CLOSE_PUNCTUATION + "]|[\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^" + ST_ASCII_OPEN_PUNCTUATION + "]");
+        ST_PUNCTUATION_ONLY = Pattern.compile(
+                "^[" + ST_ASCII_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^" + ST_ASCII_OPEN_PUNCTUATION + ST_ASCII_CLOSE_PUNCTUATION + "]");
+        ST_PUNCTUATION_OPEN_ONLY = Pattern.compile(
+                "^[" + ST_ASCII_OPEN_PUNCTUATION + "]");
+        ST_PUNCTUATION_CLOSE_ONLY = Pattern.compile(
+                "^[" + ST_ASCII_CLOSE_PUNCTUATION + "]");
+    }
     final public Pattern ENTITY_HERE;
-    final public String ASCII_PUNCTUATION;
-    final public String ASCII_OPEN_PUNCTUATION;
-    final public String ASCII_CLOSE_PUNCTUATION;
-    final public Pattern PUNCTUATION;
-    final public Pattern PUNCTUATION_OPEN;
-    final public Pattern PUNCTUATION_CLOSE;
-    final public Pattern PUNCTUATION_ONLY;
-    final public Pattern PUNCTUATION_OPEN_ONLY;
-    final public Pattern PUNCTUATION_CLOSE_ONLY;
+    final public String ASCII_PUNCTUATION = ST_ASCII_PUNCTUATION;;
+    final public String ASCII_OPEN_PUNCTUATION = ST_ASCII_OPEN_PUNCTUATION;;
+    final public String ASCII_CLOSE_PUNCTUATION = ST_ASCII_CLOSE_PUNCTUATION;;
+    final public Pattern PUNCTUATION = ST_PUNCTUATION;
+    final public Pattern PUNCTUATION_OPEN = ST_PUNCTUATION_OPEN;
+    final public Pattern PUNCTUATION_CLOSE = ST_PUNCTUATION_CLOSE;
+    final public Pattern PUNCTUATION_ONLY = ST_PUNCTUATION_ONLY;
+    final public Pattern PUNCTUATION_OPEN_ONLY = ST_PUNCTUATION_OPEN_ONLY;
+    final public Pattern PUNCTUATION_CLOSE_ONLY = ST_PUNCTUATION_CLOSE_ONLY;
 
     //final public Pattern HTML_COMMENT;
-    final public Pattern ESCAPABLE;
-    final public Pattern TICKS;
-    final public Pattern TICKS_HERE;
+    final private static Pattern ST_ESCAPABLE;
+    final private static Pattern ST_TICKS;
+    final private static Pattern ST_TICKS_HERE;
+    final private static Pattern ST_SPNL;
+    final private static Pattern ST_SPNL_URL;
+    final private static Pattern ST_SPNI;
+    final private static Pattern ST_SP;
+    final private static Pattern ST_REST_OF_LINE;
+    final private static Pattern ST_UNICODE_WHITESPACE_CHAR;
+    final private static Pattern ST_WHITESPACE;
+    final private static Pattern ST_FINAL_SPACE;
+    final private static Pattern ST_LINE_END;
+    static {
+        ST_ESCAPABLE = Pattern.compile('^' + Escaping.ESCAPABLE);
+        ST_TICKS = Pattern.compile("`+");
+        ST_TICKS_HERE = Pattern.compile("^`+");
+        ST_SPNL = Pattern.compile("^(?:[ \t])*(?:" + ST_EOL + "(?:[ \t])*)?");
+        ST_SPNL_URL = Pattern.compile("^(?:[ \t])*" + ST_EOL);
+        ST_SPNI = Pattern.compile("^ {0,3}");
+        ST_SP = Pattern.compile("^(?:[ \t])*");
+        ST_REST_OF_LINE = Pattern.compile("^.*" + ST_EOL);
+        ST_UNICODE_WHITESPACE_CHAR = Pattern.compile("^[\\p{Zs}\t\r\n\f]");
+        ST_WHITESPACE = Pattern.compile("\\s+");
+        ST_FINAL_SPACE = Pattern.compile(" *$");
+        ST_LINE_END = Pattern.compile("^[ \t]*(?:" + ST_EOL + "|$)");
+    }
+    final public Pattern ESCAPABLE = ST_ESCAPABLE;
+    final public Pattern TICKS = ST_TICKS;
+    final public Pattern TICKS_HERE = ST_TICKS_HERE;
     final public Pattern EMAIL_AUTOLINK;
     final public Pattern AUTOLINK;
     final public Pattern WWW_AUTOLINK;
-    final public Pattern SPNL;
-    final public Pattern SPNL_URL;
-    final public Pattern SPNI;
-    final public Pattern SP;
-    final public Pattern REST_OF_LINE;
-    final public Pattern UNICODE_WHITESPACE_CHAR;
-    final public Pattern WHITESPACE;
-    final public Pattern FINAL_SPACE;
-    final public Pattern LINE_END;
+    final public Pattern SPNL = ST_SPNL;
+    final public Pattern SPNL_URL = ST_SPNL_URL;
+    final public Pattern SPNI = ST_SPNI;
+    final public Pattern SP = ST_SP;
+    final public Pattern REST_OF_LINE = ST_REST_OF_LINE;
+    final public Pattern UNICODE_WHITESPACE_CHAR = ST_UNICODE_WHITESPACE_CHAR;
+    final public Pattern WHITESPACE = ST_WHITESPACE;
+    final public Pattern FINAL_SPACE = ST_FINAL_SPACE;
+    final public Pattern LINE_END = ST_LINE_END;
     final public String TAGNAME;
     final public String ATTRIBUTENAME;
     final public String UNQUOTEDVALUE;
@@ -100,13 +167,8 @@ public class Parsing {
         this.translationHtmlInlineTagPattern = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN.get(options);
         this.translationAutolinkTagPattern = Parser.TRANSLATION_AUTOLINK_TAG_PATTERN.get(options);
 
-        this.EOL = "(?:\r\n|\r|\n)";
         this.ADDITIONAL_CHARS = ADDITIONAL_CHARS();
         this.EXCLUDED_0_TO_SPACE = EXCLUDED_0_TO_SPACE();
-
-        this.ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
-        this.LINK_LABEL = Pattern
-                .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,999}\\]");
 
         this.LINK_DESTINATION_ANGLES = Parser.SPACE_IN_LINK_URLS.get(options)
                 ? Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\| (?![\"']))*[>])")
@@ -122,12 +184,6 @@ public class Parsing {
         //        (htmlForTranslator ? "|(?:_\\d+_)" : "") +
         //        ")*[>])");
 
-        this.LINK_TITLE_STRING = "(?:\"(" + ESCAPED_CHAR + "|[^\"\\x00])*\"" +
-                '|' +
-                "'(" + ESCAPED_CHAR + "|[^'\\x00])*'" +
-                '|' +
-                "\\((" + ESCAPED_CHAR + "|[^)\\x00])*\\))";
-        this.LINK_TITLE = Pattern.compile("^" + LINK_TITLE_STRING);
         this.REG_CHAR = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]";
         this.REG_CHAR_PARENS = "[^\\\\" + EXCLUDED_0_TO_SPACE + "]";
         this.REG_CHAR_SP = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]| (?![\"'])";
@@ -156,26 +212,8 @@ public class Parsing {
         this.ENTITY = "&(?:#x[a-f0-9" + ADDITIONAL_CHARS + "]{1,8}|#[0-9]{1,8}|[a-z" + ADDITIONAL_CHARS + "][a-z0-9" + ADDITIONAL_CHARS + "]{1,31});";
 
         this.ENTITY_HERE = Pattern.compile('^' + ENTITY, Pattern.CASE_INSENSITIVE);
-        this.ASCII_PUNCTUATION = "'!\"#\\$%&\\*\\+,\\-\\./:;=\\?@\\\\\\^_`\\|~";
-        this.ASCII_OPEN_PUNCTUATION = "\\(<\\[\\{";
-        this.ASCII_CLOSE_PUNCTUATION = "\\)>\\]\\}";
-        this.PUNCTUATION = Pattern.compile(
-                "^[" + ASCII_PUNCTUATION + ASCII_OPEN_PUNCTUATION + ASCII_CLOSE_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]");
-        this.PUNCTUATION_OPEN = Pattern.compile(
-                "^[" + ASCII_PUNCTUATION + ASCII_OPEN_PUNCTUATION + "]|[\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^" + ASCII_CLOSE_PUNCTUATION + "]");
-        this.PUNCTUATION_CLOSE = Pattern.compile(
-                "^[" + ASCII_PUNCTUATION + ASCII_CLOSE_PUNCTUATION + "]|[\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^" + ASCII_OPEN_PUNCTUATION + "]");
-        this.PUNCTUATION_ONLY = Pattern.compile(
-                "^[" + ASCII_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^" + ASCII_OPEN_PUNCTUATION + ASCII_CLOSE_PUNCTUATION + "]");
-        this.PUNCTUATION_OPEN_ONLY = Pattern.compile(
-                "^[" + ASCII_OPEN_PUNCTUATION + "]");
-        this.PUNCTUATION_CLOSE_ONLY = Pattern.compile(
-                "^[" + ASCII_CLOSE_PUNCTUATION + "]");
 
         //this.HTML_COMMENT = Pattern.compile(HTMLCOMMENT);
-        this.ESCAPABLE = Pattern.compile('^' + Escaping.ESCAPABLE);
-        this.TICKS = Pattern.compile("`+");
-        this.TICKS_HERE = Pattern.compile("^`+");
         this.EMAIL_AUTOLINK = Pattern.compile(
                 "^<(" +
                         "(?:[a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)" +
@@ -194,15 +232,6 @@ public class Parsing {
                         (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
                         ")>");
 
-        this.SPNL = Pattern.compile("^(?:[ \t])*(?:" + EOL + "(?:[ \t])*)?");
-        this.SPNL_URL = Pattern.compile("^(?:[ \t])*" + EOL);
-        this.SPNI = Pattern.compile("^ {0,3}");
-        this.SP = Pattern.compile("^(?:[ \t])*");
-        this.REST_OF_LINE = Pattern.compile("^.*" + EOL);
-        this.UNICODE_WHITESPACE_CHAR = Pattern.compile("^[\\p{Zs}\t\r\n\f]");
-        this.WHITESPACE = Pattern.compile("\\s+");
-        this.FINAL_SPACE = Pattern.compile(" *$");
-        this.LINE_END = Pattern.compile("^[ \t]*(?:" + EOL + "|$)");
         this.TAGNAME = "[A-Za-z" + ADDITIONAL_CHARS + "][A-Za-z0-9" + ADDITIONAL_CHARS + "-]*";
         this.ATTRIBUTENAME = "[a-zA-Z" + ADDITIONAL_CHARS + "_:][a-zA-Z0-9" + ADDITIONAL_CHARS + ":._-]*";
         this.UNQUOTEDVALUE = "[^\"'=<>{}`" + EXCLUDED_0_TO_SPACE + "]+";
