@@ -7,6 +7,7 @@
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
 - [Next 0.61.xx](#next-061xx)
+- [0.62.2](#0622)
 - [0.62.0](#0620)
 - [0.61.34](#06134)
 - [0.61.32](#06132)
@@ -229,6 +230,12 @@ Please give feedback on the upcoming changes if you have concerns about breaking
       ends and another begins.
 * [ ] Fix: Html converter to not add spaces between end of inline marker and next punctuation:
       `.,:;`
+
+## 0.62.2
+
+* Fix: merge `Parsing` optimization by using static patterns
+* Fix: add a few more `Parsing` optimization by using static patterns for flag based dynamic
+  values.
 
 ## 0.62.0
 
