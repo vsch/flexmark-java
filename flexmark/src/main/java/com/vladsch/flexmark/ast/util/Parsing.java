@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
 
@@ -145,6 +144,7 @@ public class Parsing {
 
     final public boolean spaceInLinkUrl;
     final public boolean parseJekyllMacroInLinkUrl;
+    final String itemPrefixChars;
 
     public Parsing(DataHolder options) {
         this.options = options;
@@ -154,6 +154,8 @@ public class Parsing {
         this.translationAutolinkTagPattern = Parser.TRANSLATION_AUTOLINK_TAG_PATTERN.get(options);
         this.spaceInLinkUrl = Parser.SPACE_IN_LINK_URLS.get(options);
         this.parseJekyllMacroInLinkUrl = Parser.PARSE_JEKYLL_MACROS_IN_URLS.get(options);
+        this.itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.get(options);
+        this.CODE_BLOCK_INDENT = Parser.CODE_BLOCK_INDENT.get(options); // make sure this is consistent with lists settings
 
         this.ADDITIONAL_CHARS = ADDITIONAL_CHARS(intellijDummyIdentifier);
         this.EXCLUDED_0_TO_SPACE = EXCLUDED_0_TO_SPACE(intellijDummyIdentifier);
@@ -169,24 +171,44 @@ public class Parsing {
         this.IN_MATCHED_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
         this.IN_MATCHED_PARENS_W_SP = "\\((" + REG_CHAR_SP + '|' + ESCAPED_CHAR + ")*\\)";
         this.IN_BRACES_W_SP = "\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}";
-        this.LINK_DESTINATION = Pattern.compile(
-                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "") +
-                        (spaceInLinkUrl ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
-                        ESCAPED_CHAR + "|\\\\|" + (spaceInLinkUrl ? IN_PARENS_W_SP : IN_PARENS_NOSP) + ")*");
-        this.LINK_DESTINATION_MATCHED_PARENS = Pattern.compile(
-                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "")
-                        + (spaceInLinkUrl ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
-                        ESCAPED_CHAR + "|\\\\|\\(|\\))*");
-        this.LINK_DESTINATION_MATCHED_PARENS_NOSP = Pattern.compile(
-                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "")
-                        + (REG_CHAR + "|") +
-                        ESCAPED_CHAR + "|\\\\|\\(|\\))*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
         this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
         this.DECLARATION = "<![A-Z" + ADDITIONAL_CHARS + "]+\\s+[^>]*>";
         this.CDATA = "<!\\[CDATA\\[[\\s\\S]*?\\]\\]>";
         this.ENTITY = "&(?:#x[a-f0-9" + ADDITIONAL_CHARS + "]{1,8}|#[0-9]{1,8}|[a-z" + ADDITIONAL_CHARS + "][a-z0-9" + ADDITIONAL_CHARS + "]{1,31});";
 
+        this.TAGNAME = "[A-Za-z" + ADDITIONAL_CHARS + "][A-Za-z0-9" + ADDITIONAL_CHARS + "-]*";
+        this.ATTRIBUTENAME = "[a-zA-Z" + ADDITIONAL_CHARS + "_:][a-zA-Z0-9" + ADDITIONAL_CHARS + ":._-]*";
+        this.UNQUOTEDVALUE = "[^\"'=<>{}`" + EXCLUDED_0_TO_SPACE + "]+";
+        this.SINGLEQUOTEDVALUE = "'[^']*'";
+        this.DOUBLEQUOTEDVALUE = "\"[^\"]*\"";
+        this.ATTRIBUTEVALUE = "(?:" + UNQUOTEDVALUE + "|" + SINGLEQUOTEDVALUE
+                + "|" + DOUBLEQUOTEDVALUE + ")";
+        this.ATTRIBUTEVALUESPEC = "(?:" + "\\s*=" + "\\s*" + ATTRIBUTEVALUE + ")";
+        this.ATTRIBUTE = "(?:" + "\\s+" + ATTRIBUTENAME + ATTRIBUTEVALUESPEC + "?)";
+
+        this.OPENTAG = "<" + TAGNAME + ATTRIBUTE + "*" + "\\s*/?>";
+        this.CLOSETAG = "</" + TAGNAME + "\\s*[>]";
+        this.HTMLTAG = "(?:" + OPENTAG + "|" + CLOSETAG + "|" + HTMLCOMMENT
+                + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA +
+                (htmlForTranslator ? "|<(?:" + translationHtmlInlineTagPattern + ")>|</(?:" + translationHtmlInlineTagPattern + ")>" : "") + ")";
+
+        // init patterns
+        this.LINK_DESTINATION = Pattern.compile(
+                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "") +
+                        (spaceInLinkUrl ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
+                        ESCAPED_CHAR + "|\\\\|" + (spaceInLinkUrl ? IN_PARENS_W_SP : IN_PARENS_NOSP) + ")*");
+
+        this.LINK_DESTINATION_MATCHED_PARENS = Pattern.compile(
+                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "")
+                        + (spaceInLinkUrl ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
+                        ESCAPED_CHAR + "|\\\\|\\(|\\))*");
+
+        this.LINK_DESTINATION_MATCHED_PARENS_NOSP = Pattern.compile(
+                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "")
+                        + (REG_CHAR + "|") +
+                        ESCAPED_CHAR + "|\\\\|\\(|\\))*");
+        
         this.ENTITY_HERE = Pattern.compile('^' + ENTITY, Pattern.CASE_INSENSITIVE);
 
         this.EMAIL_AUTOLINK = Pattern.compile(
@@ -207,24 +229,8 @@ public class Parsing {
                         (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
                         ")>");
 
-        this.TAGNAME = "[A-Za-z" + ADDITIONAL_CHARS + "][A-Za-z0-9" + ADDITIONAL_CHARS + "-]*";
-        this.ATTRIBUTENAME = "[a-zA-Z" + ADDITIONAL_CHARS + "_:][a-zA-Z0-9" + ADDITIONAL_CHARS + ":._-]*";
-        this.UNQUOTEDVALUE = "[^\"'=<>{}`" + EXCLUDED_0_TO_SPACE + "]+";
-        this.SINGLEQUOTEDVALUE = "'[^']*'";
-        this.DOUBLEQUOTEDVALUE = "\"[^\"]*\"";
-        this.ATTRIBUTEVALUE = "(?:" + UNQUOTEDVALUE + "|" + SINGLEQUOTEDVALUE
-                + "|" + DOUBLEQUOTEDVALUE + ")";
-        this.ATTRIBUTEVALUESPEC = "(?:" + "\\s*=" + "\\s*" + ATTRIBUTEVALUE + ")";
-        this.ATTRIBUTE = "(?:" + "\\s+" + ATTRIBUTENAME + ATTRIBUTEVALUESPEC + "?)";
-
-        this.OPENTAG = "<" + TAGNAME + ATTRIBUTE + "*" + "\\s*/?>";
-        this.CLOSETAG = "</" + TAGNAME + "\\s*[>]";
-        this.HTMLTAG = "(?:" + OPENTAG + "|" + CLOSETAG + "|" + HTMLCOMMENT
-                + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA +
-                (htmlForTranslator ? "|<(?:" + translationHtmlInlineTagPattern + ")>|</(?:" + translationHtmlInlineTagPattern + ")>" : "") + ")";
         this.HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
-        final String itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.get(options);
         if (LISTS_ITEM_MARKER_SPACE.get(options)) {
             if (LISTS_ORDERED_ITEM_DOT_ONLY.get(options)) {
                 this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.])(?=[ \t])");
@@ -238,9 +244,6 @@ public class Parsing {
                 this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
             }
         }
-
-        // make sure this is consistent with lists settings
-        this.CODE_BLOCK_INDENT = Parser.CODE_BLOCK_INDENT.get(options);
     }
 
     /**
