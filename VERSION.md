@@ -6,6 +6,8 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.62.2](#0622)
+- [0.62.0](#0620)
 - [0.61.34](#06134)
 - [0.61.32](#06132)
 - [0.61.30](#06130)
@@ -172,6 +174,21 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+
+## 0.62.2
+
+* Fix: merge `Parsing` optimization by using static patterns
+* Fix: add a few more `Parsing` optimization by using static patterns for flag based dynamic
+  values.
+* Fix: add cache for dynamic `Parsing` patterns based on dependent options.
+
+## 0.62.0
+
+* Fix: HTML to Md converter to convert empty a tags to empty link text links. ie. `<a
+  href="#abc"></a>` to `[](#abc)`, except when contained in heading elements.
+* Break: rename `Attributes` to `MutableAttributes` and create new immutable `Attributes` class.
+* Fix: do not remove `title` attribute provided by `LinkResolver` when link has no title. Allow
+  link resolver titles to be used.
 
 ## 0.61.34
 
