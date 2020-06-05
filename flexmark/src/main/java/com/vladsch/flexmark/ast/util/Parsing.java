@@ -6,7 +6,11 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.parser.Parser.*;
@@ -17,9 +21,6 @@ public class Parsing {
 
     // save options for others to use when only parsing instance is available
     final public DataHolder options;
-
-    final public String ADDITIONAL_CHARS;
-    final public String EXCLUDED_0_TO_SPACE;
 
     final private static String ST_EOL = "(?:\r\n|\r|\n)";
     final private static String ST_ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
@@ -36,19 +37,28 @@ public class Parsing {
     final public Pattern LINK_DESTINATION_ANGLES;
     final public String LINK_TITLE_STRING = ST_LINK_TITLE_STRING;
     final public Pattern LINK_TITLE = ST_LINK_TITLE;
-    final public String REG_CHAR;
-    final public String REG_CHAR_SP;
-    final public String IN_PARENS_NOSP;
-    final public String IN_PARENS_W_SP;
-    final public String IN_BRACES_W_SP;
     final public Pattern LINK_DESTINATION;
     final public Pattern LINK_DESTINATION_MATCHED_PARENS;
     final public Pattern LINK_DESTINATION_MATCHED_PARENS_NOSP;
-    final public String HTMLCOMMENT;
-    final public String PROCESSINGINSTRUCTION;
-    final public String DECLARATION;
-    final public String CDATA;
-    final public String ENTITY;
+
+    final private static String ST_EXCLUDED_0_TO_SPACE_IDI = "\u0000-\u001e\u0020";
+    final private static String ST_EXCLUDED_0_TO_SPACE_NO_IDI = "\u0000-\u0020";
+    final private static String ST_ADDITIONAL_CHARS_IDI = "\u001f";
+    final private static String ST_ADDITIONAL_CHARS_NO_IDI = "";
+    final private static String ST_ADDITIONAL_CHARS_SET_IDI = "[\u001f]";
+    final private static String ST_ADDITIONAL_CHARS_SET_NO_IDI = "";
+
+    final public static String ST_HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
+    final public static String ST_PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
+    final public static String ST_CDATA = "<!\\[CDATA\\[[\\s\\S]*?\\]\\]>";
+    final public static String ST_SINGLEQUOTEDVALUE = "'[^']*'";
+    final public static String ST_DOUBLEQUOTEDVALUE = "\"[^\"]*\"";
+
+    final public String HTMLCOMMENT = ST_HTMLCOMMENT;
+    final public String PROCESSINGINSTRUCTION = ST_PROCESSINGINSTRUCTION;
+    final public String CDATA = ST_CDATA;
+    final public String SINGLEQUOTEDVALUE = ST_SINGLEQUOTEDVALUE;
+    final public String DOUBLEQUOTEDVALUE = ST_DOUBLEQUOTEDVALUE;
 
     final private static String ST_ASCII_PUNCTUATION = "'!\"#\\$%&\\*\\+,\\-\\./:;=\\?@\\\\\\^_`\\|~";
     final private static String ST_ASCII_OPEN_PUNCTUATION = "\\(<\\[\\{";
@@ -66,14 +76,6 @@ public class Parsing {
     final private static Pattern ST_PUNCTUATION_CLOSE_ONLY = Pattern.compile(
             "^[" + ST_ASCII_CLOSE_PUNCTUATION + "]");
 
-    final private static String ST_EXCLUDED_0_TO_SPACE_IDI = "\u0000-\u001e\u0020";
-    final private static String ST_EXCLUDED_0_TO_SPACE_NO_IDI = "\u0000-\u0020";
-    final private static String ST_ADDITIONAL_CHARS_IDI = "\u001f";
-    final private static String ST_ADDITIONAL_CHARS_NO_IDI = "";
-    final private static String ST_ADDITIONAL_CHARS_SET_IDI = "[\u001f]";
-    final private static String ST_ADDITIONAL_CHARS_SET_NO_IDI = "";
-
-    final public Pattern ENTITY_HERE;
     final public String ASCII_PUNCTUATION = ST_ASCII_PUNCTUATION;
     final public String ASCII_OPEN_PUNCTUATION = ST_ASCII_OPEN_PUNCTUATION;
     final public String ASCII_CLOSE_PUNCTUATION = ST_ASCII_CLOSE_PUNCTUATION;
@@ -115,131 +117,329 @@ public class Parsing {
     final public Pattern WHITESPACE = ST_WHITESPACE;
     final public Pattern FINAL_SPACE = ST_FINAL_SPACE;
     final public Pattern LINE_END = ST_LINE_END;
+
+    // IntelliJDummyIdentifier dependent
+    final private static String ST_TAGNAME_IDI = "[A-Za-z" + ST_ADDITIONAL_CHARS_IDI + "][A-Za-z0-9" + ST_ADDITIONAL_CHARS_IDI + "-]*";
+    final private static String ST_TAGNAME_NO_IDI = "[A-Za-z" + ST_ADDITIONAL_CHARS_NO_IDI + "][A-Za-z0-9" + ST_ADDITIONAL_CHARS_NO_IDI + "-]*";
+
+    final private static String ST_UNQUOTEDVALUE_IDI = "[^\"'=<>{}`" + ST_EXCLUDED_0_TO_SPACE_IDI + "]+";
+    final private static String ST_UNQUOTEDVALUE_NO_IDI = "[^\"'=<>{}`" + ST_EXCLUDED_0_TO_SPACE_NO_IDI + "]+";
+
+    final private static String ST_ATTRIBUTENAME_IDI = "[a-zA-Z" + ST_ADDITIONAL_CHARS_IDI + "_:][a-zA-Z0-9" + ST_ADDITIONAL_CHARS_IDI + ":._-]*";
+    final private static String ST_ATTRIBUTENAME_NO_IDI = "[a-zA-Z" + ST_ADDITIONAL_CHARS_NO_IDI + "_:][a-zA-Z0-9" + ST_ADDITIONAL_CHARS_NO_IDI + ":._-]*";
+
+    final private static String ST_ATTRIBUTEVALUE_IDI = "(?:" + ST_UNQUOTEDVALUE_IDI + "|" + ST_SINGLEQUOTEDVALUE + "|" + ST_DOUBLEQUOTEDVALUE + ")";
+    final private static String ST_ATTRIBUTEVALUE_NO_IDI = "(?:" + ST_UNQUOTEDVALUE_NO_IDI + "|" + ST_SINGLEQUOTEDVALUE + "|" + ST_DOUBLEQUOTEDVALUE + ")";
+
+    final private static String ST_ATTRIBUTEVALUESPEC_IDI = "(?:" + "\\s*=" + "\\s*" + ST_ATTRIBUTEVALUE_IDI + ")";
+    final private static String ST_ATTRIBUTEVALUESPEC_NO_IDI = "(?:" + "\\s*=" + "\\s*" + ST_ATTRIBUTEVALUE_NO_IDI + ")";
+
+    final private static String ST_CLOSETAG_IDI = "</" + ST_TAGNAME_IDI + "\\s*[>]";
+    final private static String ST_CLOSETAG_NO_IDI = "</" + ST_TAGNAME_NO_IDI + "\\s*[>]";
+
+    final private static String ST_ATTRIBUTE_IDI = "(?:" + "\\s+" + ST_ATTRIBUTENAME_IDI + ST_ATTRIBUTEVALUESPEC_IDI + "?)";
+    final private static String ST_ATTRIBUTE_NO_IDI = "(?:" + "\\s+" + ST_ATTRIBUTENAME_NO_IDI + ST_ATTRIBUTEVALUESPEC_NO_IDI + "?)";
+
+    final private static String ST_DECLARATION_IDI = "<![A-Z" + ST_ADDITIONAL_CHARS_IDI + "]+\\s+[^>]*>";
+    final private static String ST_DECLARATION_NO_IDI = "<![A-Z" + ST_ADDITIONAL_CHARS_NO_IDI + "]+\\s+[^>]*>";
+
+    final private static String ST_ENTITY_IDI = "&(?:#x[a-f0-9" + ST_ADDITIONAL_CHARS_IDI + "]{1,8}|#[0-9]{1,8}|[a-z" + ST_ADDITIONAL_CHARS_IDI + "][a-z0-9" + ST_ADDITIONAL_CHARS_IDI + "]{1,31});";
+    final private static String ST_ENTITY_NO_IDI = "&(?:#x[a-f0-9" + ST_ADDITIONAL_CHARS_NO_IDI + "]{1,8}|#[0-9]{1,8}|[a-z" + ST_ADDITIONAL_CHARS_NO_IDI + "][a-z0-9" + ST_ADDITIONAL_CHARS_NO_IDI + "]{1,31});";
+
+    final private static String ST_IN_BRACES_W_SP_IDI = "\\{\\{(?:[^{}\\\\" + ST_EXCLUDED_0_TO_SPACE_IDI + "]| |\t)*\\}\\}";
+    final private static String ST_IN_BRACES_W_SP_NO_IDI = "\\{\\{(?:[^{}\\\\" + ST_EXCLUDED_0_TO_SPACE_NO_IDI + "]| |\t)*\\}\\}";
+
+    final private static String ST_REG_CHAR_IDI = "[^\\\\()" + ST_EXCLUDED_0_TO_SPACE_IDI + "]";
+    final private static String ST_REG_CHAR_NO_IDI = "[^\\\\()" + ST_EXCLUDED_0_TO_SPACE_NO_IDI + "]";
+
+    final private static String ST_IN_MATCHED_PARENS_NOSP_IDI = "\\((" + ST_REG_CHAR_IDI + '|' + ST_ESCAPED_CHAR + ")*\\)";
+    final private static String ST_IN_MATCHED_PARENS_NOSP_NO_IDI = "\\((" + ST_REG_CHAR_NO_IDI + '|' + ST_ESCAPED_CHAR + ")*\\)";
+
+    final private static String ST_REG_CHAR_SP_IDI = "[^\\\\()" + ST_EXCLUDED_0_TO_SPACE_IDI + "]| (?![\"'])";
+    final private static String ST_REG_CHAR_SP_NO_IDI = "[^\\\\()" + ST_EXCLUDED_0_TO_SPACE_NO_IDI + "]| (?![\"'])";
+
+    final private static String ST_IN_MATCHED_PARENS_W_SP_IDI = "\\((" + ST_REG_CHAR_SP_IDI + '|' + ST_ESCAPED_CHAR + ")*\\)";
+    final private static String ST_IN_MATCHED_PARENS_W_SP_NO_IDI = "\\((" + ST_REG_CHAR_SP_NO_IDI + '|' + ST_ESCAPED_CHAR + ")*\\)";
+
+    final private static String ST_IN_PARENS_NOSP_IDI = "\\((" + ST_REG_CHAR_IDI + '|' + ST_ESCAPED_CHAR + ")*\\)";
+    final private static String ST_IN_PARENS_NOSP_NO_IDI = "\\((" + ST_REG_CHAR_NO_IDI + '|' + ST_ESCAPED_CHAR + ")*\\)";
+
+    final private static String ST_IN_PARENS_W_SP_IDI = "\\((" + ST_REG_CHAR_SP_IDI + '|' + ST_ESCAPED_CHAR + ")*\\)";
+    final private static String ST_IN_PARENS_W_SP_NO_IDI = "\\((" + ST_REG_CHAR_SP_NO_IDI + '|' + ST_ESCAPED_CHAR + ")*\\)";
+
+    final private static String ST_OPENTAG_IDI = "<" + ST_TAGNAME_IDI + ST_ATTRIBUTE_IDI + "*" + "\\s*/?>";
+    final private static String ST_OPENTAG_NO_IDI = "<" + ST_TAGNAME_NO_IDI + ST_ATTRIBUTE_NO_IDI + "*" + "\\s*/?>";
+
+    final private static String ST_REG_CHAR_PARENS_IDI = "[^\\\\" + ST_EXCLUDED_0_TO_SPACE_IDI + "]";
+    final private static String ST_REG_CHAR_PARENS_NO_IDI = "[^\\\\" + ST_EXCLUDED_0_TO_SPACE_NO_IDI + "]";
+
+    final private static String ST_REG_CHAR_SP_PARENS_IDI = "[^\\\\" + ST_EXCLUDED_0_TO_SPACE_IDI + "]| (?![\"'])";
+    final private static String ST_REG_CHAR_SP_PARENS_NO_IDI = "[^\\\\" + ST_EXCLUDED_0_TO_SPACE_NO_IDI + "]| (?![\"'])";
+
+    final private static Pattern ST_ENTITY_HERE_IDI = Pattern.compile('^' + ST_ENTITY_IDI, Pattern.CASE_INSENSITIVE);
+    final private static Pattern ST_ENTITY_HERE_NO_IDI = Pattern.compile('^' + ST_ENTITY_NO_IDI, Pattern.CASE_INSENSITIVE);
+
+    final public String ADDITIONAL_CHARS;
+    final public String EXCLUDED_0_TO_SPACE;
+    final public String REG_CHAR;
+    final public String REG_CHAR_PARENS;
+    final public String REG_CHAR_SP;
+    final public String REG_CHAR_SP_PARENS;
+    final public String IN_PARENS_NOSP;
+    final public String IN_PARENS_W_SP;
+    final public String IN_MATCHED_PARENS_NOSP;
+    final public String IN_MATCHED_PARENS_W_SP;
+    final public String IN_BRACES_W_SP;
+    final public String DECLARATION;
+    final public String ENTITY;
     final public String TAGNAME;
     final public String ATTRIBUTENAME;
     final public String UNQUOTEDVALUE;
-    final public String SINGLEQUOTEDVALUE;
-    final public String DOUBLEQUOTEDVALUE;
     final public String ATTRIBUTEVALUE;
     final public String ATTRIBUTEVALUESPEC;
     final public String ATTRIBUTE;
-
     final public String OPENTAG;
     final public String CLOSETAG;
-    final public String HTMLTAG;
-    final public Pattern HTML_TAG;
 
+    final public String HTMLTAG;
+
+    final public Pattern ENTITY_HERE;
+    final public Pattern HTML_TAG;
     final public Pattern LIST_ITEM_MARKER;
 
     final public int CODE_BLOCK_INDENT;
+
     final public boolean intellijDummyIdentifier;
     final public boolean htmlForTranslator;
     final public String translationHtmlInlineTagPattern;
     final public String translationAutolinkTagPattern;
-
-    final public String IN_MATCHED_PARENS_NOSP;
-    final public String IN_MATCHED_PARENS_W_SP;
-    final public String REG_CHAR_PARENS;
-    final public String REG_CHAR_SP_PARENS;
-
     final public boolean spaceInLinkUrl;
     final public boolean parseJekyllMacroInLinkUrl;
-    final String itemPrefixChars;
+    final public String itemPrefixChars;
+    final public boolean listsItemMarkerSpace;
+    final public boolean listsOrderedItemDotOnly;
+
+    private static class PatternTypeFlags {
+        final @Nullable Boolean intellijDummyIdentifier;
+        final @Nullable Boolean htmlForTranslator;
+        final @Nullable String translationHtmlInlineTagPattern;
+        final @Nullable String translationAutolinkTagPattern;
+        final @Nullable Boolean spaceInLinkUrl;
+        final @Nullable Boolean parseJekyllMacroInLinkUrl;
+        final @Nullable String itemPrefixChars;
+        final @Nullable Boolean listsItemMarkerSpace;
+        final @Nullable Boolean listsOrderedItemDotOnly;
+
+        PatternTypeFlags(DataHolder options) {
+            this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(options);
+            this.htmlForTranslator = Parser.HTML_FOR_TRANSLATOR.get(options);
+            this.translationHtmlInlineTagPattern = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN.get(options);
+            this.translationAutolinkTagPattern = Parser.TRANSLATION_AUTOLINK_TAG_PATTERN.get(options);
+            this.spaceInLinkUrl = Parser.SPACE_IN_LINK_URLS.get(options);
+            this.parseJekyllMacroInLinkUrl = Parser.PARSE_JEKYLL_MACROS_IN_URLS.get(options);
+            this.itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.get(options);
+            this.listsItemMarkerSpace = LISTS_ITEM_MARKER_SPACE.get(options);
+            this.listsOrderedItemDotOnly = LISTS_ORDERED_ITEM_DOT_ONLY.get(options);
+        }
+
+        public PatternTypeFlags(
+                @Nullable Boolean intellijDummyIdentifier
+                , @Nullable Boolean htmlForTranslator
+                , @Nullable String translationHtmlInlineTagPattern
+                , @Nullable String translationAutolinkTagPattern
+                , @Nullable Boolean spaceInLinkUrl
+                , @Nullable Boolean parseJekyllMacroInLinkUrl
+                , @Nullable String itemPrefixChars
+                , @Nullable Boolean listsItemMarkerSpace
+                , @Nullable Boolean listsOrderedItemDotOnly
+        ) {
+            this.intellijDummyIdentifier = intellijDummyIdentifier;
+            this.htmlForTranslator = htmlForTranslator;
+            this.translationHtmlInlineTagPattern = translationHtmlInlineTagPattern;
+            this.translationAutolinkTagPattern = translationAutolinkTagPattern;
+            this.spaceInLinkUrl = spaceInLinkUrl;
+            this.parseJekyllMacroInLinkUrl = parseJekyllMacroInLinkUrl;
+            this.itemPrefixChars = itemPrefixChars;
+            this.listsItemMarkerSpace = listsItemMarkerSpace;
+            this.listsOrderedItemDotOnly = listsOrderedItemDotOnly;
+        }
+
+        PatternTypeFlags withJekyllMacroInLinkUrl() { return new PatternTypeFlags(intellijDummyIdentifier, null, null, null, null, parseJekyllMacroInLinkUrl, null, null, null); }
+
+        PatternTypeFlags withJekyllMacroSpaceInLinkUrl() { return new PatternTypeFlags(intellijDummyIdentifier, null, null, null, spaceInLinkUrl, parseJekyllMacroInLinkUrl, null, null, null); }
+
+        PatternTypeFlags withHtmlTranslator() { return new PatternTypeFlags(intellijDummyIdentifier, htmlForTranslator, translationHtmlInlineTagPattern, translationAutolinkTagPattern, null, null, null, null, null); }
+
+        PatternTypeFlags withItemPrefixChars() { return new PatternTypeFlags(null, null, null, null, null, null, itemPrefixChars, listsItemMarkerSpace, listsOrderedItemDotOnly); }
+
+        /**
+         * Compare where null entry equals any other value
+         *
+         * @param o other
+         * @return true if equal
+         */
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            PatternTypeFlags that = (PatternTypeFlags) o;
+
+            if (intellijDummyIdentifier != null && !intellijDummyIdentifier.equals(that.intellijDummyIdentifier)) return false;
+            if (htmlForTranslator != null && !htmlForTranslator.equals(that.htmlForTranslator)) return false;
+            if (translationHtmlInlineTagPattern != null && !translationHtmlInlineTagPattern.equals(that.translationHtmlInlineTagPattern)) return false;
+            if (translationAutolinkTagPattern != null && !translationAutolinkTagPattern.equals(that.translationAutolinkTagPattern)) return false;
+            if (spaceInLinkUrl != null && !spaceInLinkUrl.equals(that.spaceInLinkUrl)) return false;
+            if (parseJekyllMacroInLinkUrl != null && !parseJekyllMacroInLinkUrl.equals(that.parseJekyllMacroInLinkUrl)) return false;
+            if (itemPrefixChars != null && !itemPrefixChars.equals(that.itemPrefixChars)) return false;
+            if (listsItemMarkerSpace != null && !listsItemMarkerSpace.equals(that.listsItemMarkerSpace)) return false;
+
+            return listsOrderedItemDotOnly == null || listsOrderedItemDotOnly.equals(that.listsOrderedItemDotOnly);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = intellijDummyIdentifier != null ? intellijDummyIdentifier.hashCode() : 0;
+            result = 31 * result + (htmlForTranslator != null ? htmlForTranslator.hashCode() : 0);
+            result = 31 * result + (translationHtmlInlineTagPattern != null ? translationHtmlInlineTagPattern.hashCode() : 0);
+            result = 31 * result + (translationAutolinkTagPattern != null ? translationAutolinkTagPattern.hashCode() : 0);
+            result = 31 * result + (spaceInLinkUrl != null ? spaceInLinkUrl.hashCode() : 0);
+            result = 31 * result + (parseJekyllMacroInLinkUrl != null ? parseJekyllMacroInLinkUrl.hashCode() : 0);
+            result = 31 * result + (itemPrefixChars != null ? itemPrefixChars.hashCode() : 0);
+            result = 31 * result + (listsItemMarkerSpace != null ? listsItemMarkerSpace.hashCode() : 0);
+            result = 31 * result + (listsOrderedItemDotOnly != null ? listsOrderedItemDotOnly.hashCode() : 0);
+            return result;
+        }
+    }
+
+    final static HashMap<String, HashMap<PatternTypeFlags, Pattern>> cachedPatterns = new HashMap<>();
+
+    static Pattern getCachedPattern(@NotNull String patternName, @NotNull PatternTypeFlags cachedTypeFlags, @NotNull Function<PatternTypeFlags, Pattern> factory) {
+        HashMap<PatternTypeFlags, Pattern> patternMap = cachedPatterns.computeIfAbsent(patternName, (key) -> new HashMap<>());
+        return patternMap.computeIfAbsent(cachedTypeFlags, factory);
+    }
 
     public Parsing(DataHolder options) {
         this.options = options;
-        this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(options);
-        this.htmlForTranslator = Parser.HTML_FOR_TRANSLATOR.get(options);
-        this.translationHtmlInlineTagPattern = Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN.get(options);
-        this.translationAutolinkTagPattern = Parser.TRANSLATION_AUTOLINK_TAG_PATTERN.get(options);
-        this.spaceInLinkUrl = Parser.SPACE_IN_LINK_URLS.get(options);
-        this.parseJekyllMacroInLinkUrl = Parser.PARSE_JEKYLL_MACROS_IN_URLS.get(options);
-        this.itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.get(options);
         this.CODE_BLOCK_INDENT = Parser.CODE_BLOCK_INDENT.get(options); // make sure this is consistent with lists settings
+        PatternTypeFlags patternTypeFlags = new PatternTypeFlags(options);
+        this.intellijDummyIdentifier = patternTypeFlags.intellijDummyIdentifier;
+        this.htmlForTranslator = patternTypeFlags.htmlForTranslator;
+        this.translationHtmlInlineTagPattern = patternTypeFlags.translationHtmlInlineTagPattern;
+        this.translationAutolinkTagPattern = patternTypeFlags.translationAutolinkTagPattern;
+        this.spaceInLinkUrl = patternTypeFlags.spaceInLinkUrl;
+        this.parseJekyllMacroInLinkUrl = patternTypeFlags.parseJekyllMacroInLinkUrl;
+        this.itemPrefixChars = patternTypeFlags.itemPrefixChars;
+        this.listsItemMarkerSpace = patternTypeFlags.listsItemMarkerSpace;
+        this.listsOrderedItemDotOnly = patternTypeFlags.listsOrderedItemDotOnly;
 
-        this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
-        this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
-        this.CDATA = "<!\\[CDATA\\[[\\s\\S]*?\\]\\]>";
-        this.SINGLEQUOTEDVALUE = "'[^']*'";
-        this.DOUBLEQUOTEDVALUE = "\"[^\"]*\"";
-
-        this.LINK_DESTINATION_ANGLES = spaceInLinkUrl ? ST_LINK_DESTINATION_ANGLES_SPC : ST_LINK_DESTINATION_ANGLES_NO_SPC;
-        this.ADDITIONAL_CHARS = ADDITIONAL_CHARS(intellijDummyIdentifier);
-        this.EXCLUDED_0_TO_SPACE = EXCLUDED_0_TO_SPACE(intellijDummyIdentifier);
-
-        this.REG_CHAR = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]";
-        this.REG_CHAR_PARENS = "[^\\\\" + EXCLUDED_0_TO_SPACE + "]";
-        this.REG_CHAR_SP = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]| (?![\"'])";
-        this.REG_CHAR_SP_PARENS = "[^\\\\" + EXCLUDED_0_TO_SPACE + "]| (?![\"'])";
-        this.IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
-        this.IN_PARENS_W_SP = "\\((" + REG_CHAR_SP + '|' + ESCAPED_CHAR + ")*\\)";
-        this.IN_MATCHED_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
-        this.IN_MATCHED_PARENS_W_SP = "\\((" + REG_CHAR_SP + '|' + ESCAPED_CHAR + ")*\\)";
-        this.IN_BRACES_W_SP = "\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}";
-        this.DECLARATION = "<![A-Z" + ADDITIONAL_CHARS + "]+\\s+[^>]*>";
-        this.ENTITY = "&(?:#x[a-f0-9" + ADDITIONAL_CHARS + "]{1,8}|#[0-9]{1,8}|[a-z" + ADDITIONAL_CHARS + "][a-z0-9" + ADDITIONAL_CHARS + "]{1,31});";
-        this.TAGNAME = "[A-Za-z" + ADDITIONAL_CHARS + "][A-Za-z0-9" + ADDITIONAL_CHARS + "-]*";
-        this.ATTRIBUTENAME = "[a-zA-Z" + ADDITIONAL_CHARS + "_:][a-zA-Z0-9" + ADDITIONAL_CHARS + ":._-]*";
-        this.UNQUOTEDVALUE = "[^\"'=<>{}`" + EXCLUDED_0_TO_SPACE + "]+";
-        this.ATTRIBUTEVALUE = "(?:" + UNQUOTEDVALUE + "|" + SINGLEQUOTEDVALUE + "|" + DOUBLEQUOTEDVALUE + ")";
-        this.ATTRIBUTEVALUESPEC = "(?:" + "\\s*=" + "\\s*" + ATTRIBUTEVALUE + ")";
-        this.ATTRIBUTE = "(?:" + "\\s+" + ATTRIBUTENAME + ATTRIBUTEVALUESPEC + "?)";
-        this.OPENTAG = "<" + TAGNAME + ATTRIBUTE + "*" + "\\s*/?>";
-        this.CLOSETAG = "</" + TAGNAME + "\\s*[>]";
-        this.ENTITY_HERE = Pattern.compile('^' + ENTITY, Pattern.CASE_INSENSITIVE);
-        this.HTMLTAG = "(?:" + OPENTAG + "|" + CLOSETAG + "|" + HTMLCOMMENT
-                + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA +
-                (htmlForTranslator ? "|<(?:" + translationHtmlInlineTagPattern + ")>|</(?:" + translationHtmlInlineTagPattern + ")>" : "") + ")";
-
-        // init patterns
-        this.HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
-
-        this.LINK_DESTINATION = Pattern.compile(
-                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "") +
-                        (spaceInLinkUrl ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
-                        ESCAPED_CHAR + "|\\\\|" + (spaceInLinkUrl ? IN_PARENS_W_SP : IN_PARENS_NOSP) + ")*");
-
-        this.LINK_DESTINATION_MATCHED_PARENS = Pattern.compile(
-                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "")
-                        + (spaceInLinkUrl ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
-                        ESCAPED_CHAR + "|\\\\|\\(|\\))*");
-
-        this.LINK_DESTINATION_MATCHED_PARENS_NOSP = Pattern.compile(
-                "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "")
-                        + (REG_CHAR + "|") +
-                        ESCAPED_CHAR + "|\\\\|\\(|\\))*");
-
-        this.EMAIL_AUTOLINK = Pattern.compile(
-                "^<(" +
-                        "(?:[a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)" +
-                        (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
-                        ")>");
-
-        this.AUTOLINK = Pattern.compile(
-                "^<(" +
-                        "(?:[a-zA-Z][a-zA-Z0-9" + ADDITIONAL_CHARS + ".+-]{1,31}:[^<>" + EXCLUDED_0_TO_SPACE + "]*)" +
-                        (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
-                        ")>");
-
-        this.WWW_AUTOLINK = Pattern.compile(
-                "^<(" +
-                        "(?:w" + ADDITIONAL_CHARS + "?){3,3}\\.[^<>" + EXCLUDED_0_TO_SPACE + "]*" +
-                        (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
-                        ")>");
-
-        if (LISTS_ITEM_MARKER_SPACE.get(options)) {
-            if (LISTS_ORDERED_ITEM_DOT_ONLY.get(options)) {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.])(?=[ \t])");
-            } else {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.)])(?=[ \t])");
-            }
+        if (intellijDummyIdentifier) {
+            this.ADDITIONAL_CHARS = ST_ADDITIONAL_CHARS_IDI;
+            this.EXCLUDED_0_TO_SPACE = ST_EXCLUDED_0_TO_SPACE_IDI;
+            this.REG_CHAR = ST_REG_CHAR_IDI;
+            this.REG_CHAR_PARENS = ST_REG_CHAR_PARENS_IDI;
+            this.REG_CHAR_SP = ST_REG_CHAR_SP_IDI;
+            this.REG_CHAR_SP_PARENS = ST_REG_CHAR_SP_PARENS_IDI;
+            this.IN_PARENS_NOSP = ST_IN_PARENS_NOSP_IDI;
+            this.IN_PARENS_W_SP = ST_IN_PARENS_W_SP_IDI;
+            this.IN_MATCHED_PARENS_NOSP = ST_IN_MATCHED_PARENS_NOSP_IDI;
+            this.IN_MATCHED_PARENS_W_SP = ST_IN_MATCHED_PARENS_W_SP_IDI;
+            this.IN_BRACES_W_SP = ST_IN_BRACES_W_SP_IDI;
+            this.DECLARATION = ST_DECLARATION_IDI;
+            this.ENTITY = ST_ENTITY_IDI;
+            this.TAGNAME = ST_TAGNAME_IDI;
+            this.ATTRIBUTENAME = ST_ATTRIBUTENAME_IDI;
+            this.UNQUOTEDVALUE = ST_UNQUOTEDVALUE_IDI;
+            this.ATTRIBUTEVALUE = ST_ATTRIBUTEVALUE_IDI;
+            this.ATTRIBUTEVALUESPEC = ST_ATTRIBUTEVALUESPEC_IDI;
+            this.ATTRIBUTE = ST_ATTRIBUTE_IDI;
+            this.OPENTAG = ST_OPENTAG_IDI;
+            this.CLOSETAG = ST_CLOSETAG_IDI;
         } else {
-            if (LISTS_ORDERED_ITEM_DOT_ONLY.get(options)) {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
-            } else {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
-            }
+            this.ADDITIONAL_CHARS = ST_ADDITIONAL_CHARS_NO_IDI;
+            this.EXCLUDED_0_TO_SPACE = ST_EXCLUDED_0_TO_SPACE_NO_IDI;
+            this.REG_CHAR = ST_REG_CHAR_NO_IDI;
+            this.REG_CHAR_PARENS = ST_REG_CHAR_PARENS_NO_IDI;
+            this.REG_CHAR_SP = ST_REG_CHAR_SP_NO_IDI;
+            this.REG_CHAR_SP_PARENS = ST_REG_CHAR_SP_PARENS_NO_IDI;
+            this.IN_PARENS_NOSP = ST_IN_PARENS_NOSP_NO_IDI;
+            this.IN_PARENS_W_SP = ST_IN_PARENS_W_SP_NO_IDI;
+            this.IN_MATCHED_PARENS_NOSP = ST_IN_MATCHED_PARENS_NOSP_NO_IDI;
+            this.IN_MATCHED_PARENS_W_SP = ST_IN_MATCHED_PARENS_W_SP_NO_IDI;
+            this.IN_BRACES_W_SP = ST_IN_BRACES_W_SP_NO_IDI;
+            this.DECLARATION = ST_DECLARATION_NO_IDI;
+            this.ENTITY = ST_ENTITY_NO_IDI;
+            this.TAGNAME = ST_TAGNAME_NO_IDI;
+            this.ATTRIBUTENAME = ST_ATTRIBUTENAME_NO_IDI;
+            this.UNQUOTEDVALUE = ST_UNQUOTEDVALUE_NO_IDI;
+            this.ATTRIBUTEVALUE = ST_ATTRIBUTEVALUE_NO_IDI;
+            this.ATTRIBUTEVALUESPEC = ST_ATTRIBUTEVALUESPEC_NO_IDI;
+            this.ATTRIBUTE = ST_ATTRIBUTE_NO_IDI;
+            this.OPENTAG = ST_OPENTAG_NO_IDI;
+            this.CLOSETAG = ST_CLOSETAG_NO_IDI;
         }
+
+        // init flag based patterns
+        this.LINK_DESTINATION_ANGLES = spaceInLinkUrl ? ST_LINK_DESTINATION_ANGLES_SPC : ST_LINK_DESTINATION_ANGLES_NO_SPC;
+        this.ENTITY_HERE = intellijDummyIdentifier ? ST_ENTITY_HERE_IDI : ST_ENTITY_HERE_NO_IDI;
+
+        // init dynamic patterns
+        synchronized (cachedPatterns) {
+            this.LINK_DESTINATION_MATCHED_PARENS_NOSP = getCachedPattern("LINK_DESTINATION_MATCHED_PARENS_NOSP", patternTypeFlags.withJekyllMacroInLinkUrl(), entry -> Pattern.compile(
+                    "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "")
+                            + (REG_CHAR + "|") +
+                            ESCAPED_CHAR + "|\\\\|\\(|\\))*"));
+
+            this.LINK_DESTINATION = getCachedPattern("LINK_DESTINATION", patternTypeFlags.withJekyllMacroSpaceInLinkUrl(), entry -> Pattern.compile(
+                    "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "") +
+                            (spaceInLinkUrl ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
+                            ESCAPED_CHAR + "|\\\\|" + (spaceInLinkUrl ? IN_PARENS_W_SP : IN_PARENS_NOSP) + ")*"));
+
+            this.LINK_DESTINATION_MATCHED_PARENS = getCachedPattern("LINK_DESTINATION_MATCHED_PARENS", patternTypeFlags.withJekyllMacroSpaceInLinkUrl(), entry -> Pattern.compile(
+                    "^(?:" + (parseJekyllMacroInLinkUrl ? IN_BRACES_W_SP + "|" : "")
+                            + (spaceInLinkUrl ? "(?:" + REG_CHAR_SP + ")|" : REG_CHAR + "|") +
+                            ESCAPED_CHAR + "|\\\\|\\(|\\))*"));
+
+            this.EMAIL_AUTOLINK = getCachedPattern("EMAIL_AUTOLINK", patternTypeFlags.withHtmlTranslator(), entry -> Pattern.compile(
+                    "^<(" +
+                            "(?:[a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)" +
+                            (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
+                            ")>"));
+
+            this.AUTOLINK = getCachedPattern("AUTOLINK", patternTypeFlags.withHtmlTranslator(), entry -> Pattern.compile(
+                    "^<(" +
+                            "(?:[a-zA-Z][a-zA-Z0-9" + ADDITIONAL_CHARS + ".+-]{1,31}:[^<>" + EXCLUDED_0_TO_SPACE + "]*)" +
+                            (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
+                            ")>"));
+
+            this.WWW_AUTOLINK = getCachedPattern("WWW_AUTOLINK", patternTypeFlags.withHtmlTranslator(), entry -> Pattern.compile(
+                    "^<(" +
+                            "(?:w" + ADDITIONAL_CHARS + "?){3,3}\\.[^<>" + EXCLUDED_0_TO_SPACE + "]*" +
+                            (htmlForTranslator ? "|(?:" + translationAutolinkTagPattern + ")" : "") +
+                            ")>"));
+
+            this.HTML_TAG = getCachedPattern("HTML_TAG", patternTypeFlags.withHtmlTranslator(), entry -> Pattern.compile('^' + ("(?:" + OPENTAG + "|" + CLOSETAG + "|" + HTMLCOMMENT
+                    + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA +
+                    (htmlForTranslator ? "|<(?:" + translationHtmlInlineTagPattern + ")>|</(?:" + translationHtmlInlineTagPattern + ")>" : "") + ")"), Pattern.CASE_INSENSITIVE));
+
+            this.LIST_ITEM_MARKER = getCachedPattern("LIST_ITEM_MARKER", patternTypeFlags.withItemPrefixChars(), entry -> {
+                if (listsItemMarkerSpace) {
+                    if (listsOrderedItemDotOnly) {
+                        return Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.])(?=[ \t])");
+                    } else {
+                        return Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.)])(?=[ \t])");
+                    }
+                } else {
+                    if (listsOrderedItemDotOnly) {
+                        return Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
+                    } else {
+                        return Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
+                    }
+                }
+            });
+        }
+
+        this.HTMLTAG = this.HTML_TAG.pattern();
     }
 
     /**

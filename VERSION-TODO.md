@@ -236,6 +236,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: merge `Parsing` optimization by using static patterns
 * Fix: add a few more `Parsing` optimization by using static patterns for flag based dynamic
   values.
+* Fix: add cache for dynamic `Parsing` patterns based on dependent options.
 
 ## 0.62.0
 
