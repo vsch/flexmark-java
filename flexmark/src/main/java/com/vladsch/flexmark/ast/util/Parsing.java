@@ -443,38 +443,26 @@ public class Parsing {
     }
 
     /**
-     * @deprecated use static version (0.62.2)
+     * @deprecated in version (0.62.2), to be removed
      */
     @Deprecated
     public String EXCLUDED_0_TO_SPACE() {
-        return EXCLUDED_0_TO_SPACE(intellijDummyIdentifier);
-    }
-
-    /**
-     * @deprecated use static version (0.62.2)
-     */
-    @Deprecated
-    public String ADDITIONAL_CHARS() {
-        return ADDITIONAL_CHARS(intellijDummyIdentifier);
-    }
-
-    /**
-     * @deprecated use static version (0.62.2)
-     */
-    @Deprecated
-    public String ADDITIONAL_CHARS_SET(String quantifier) {
-        return ADDITIONAL_CHARS_SET(intellijDummyIdentifier, quantifier);
-    }
-
-    public static String EXCLUDED_0_TO_SPACE(boolean intellijDummyIdentifier) {
         return intellijDummyIdentifier ? ST_EXCLUDED_0_TO_SPACE_IDI : ST_EXCLUDED_0_TO_SPACE_NO_IDI;
     }
 
-    public static String ADDITIONAL_CHARS(boolean intellijDummyIdentifier) {
+    /**
+     * @deprecated in version (0.62.2), to be removed
+     */
+    @Deprecated
+    public String ADDITIONAL_CHARS() {
         return intellijDummyIdentifier ? ST_ADDITIONAL_CHARS_IDI : ST_ADDITIONAL_CHARS_NO_IDI;
     }
 
-    public static String ADDITIONAL_CHARS_SET(boolean intellijDummyIdentifier, String quantifier) {
+    /**
+     * @deprecated in version (0.62.2), to be removed
+     */
+    @Deprecated
+    public String ADDITIONAL_CHARS_SET(String quantifier) {
         return intellijDummyIdentifier ? ST_ADDITIONAL_CHARS_SET_IDI + quantifier : ST_ADDITIONAL_CHARS_SET_NO_IDI;
     }
 
