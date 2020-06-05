@@ -447,7 +447,6 @@ public class Parsing {
      */
     @Deprecated
     public String EXCLUDED_0_TO_SPACE() {
-        // NOTE: hardcoded because of dependency on it being '\u001f'
         return EXCLUDED_0_TO_SPACE(intellijDummyIdentifier);
     }
 
@@ -456,7 +455,6 @@ public class Parsing {
      */
     @Deprecated
     public String ADDITIONAL_CHARS() {
-        // NOTE: hardcoded because of dependency on it being '\u001f'
         return ADDITIONAL_CHARS(intellijDummyIdentifier);
     }
 
@@ -465,22 +463,18 @@ public class Parsing {
      */
     @Deprecated
     public String ADDITIONAL_CHARS_SET(String quantifier) {
-        // NOTE: hardcoded because of dependency on it being '\u001f'
         return ADDITIONAL_CHARS_SET(intellijDummyIdentifier, quantifier);
     }
 
     public static String EXCLUDED_0_TO_SPACE(boolean intellijDummyIdentifier) {
-        // NOTE: hardcoded because of dependency on it being '\u001f'
         return intellijDummyIdentifier ? ST_EXCLUDED_0_TO_SPACE_IDI : ST_EXCLUDED_0_TO_SPACE_NO_IDI;
     }
 
     public static String ADDITIONAL_CHARS(boolean intellijDummyIdentifier) {
-        // NOTE: hardcoded because of dependency on it being '\u001f'
         return intellijDummyIdentifier ? ST_ADDITIONAL_CHARS_IDI : ST_ADDITIONAL_CHARS_NO_IDI;
     }
 
     public static String ADDITIONAL_CHARS_SET(boolean intellijDummyIdentifier, String quantifier) {
-        // NOTE: hardcoded because of dependency on it being '\u001f'
         return intellijDummyIdentifier ? ST_ADDITIONAL_CHARS_SET_IDI + quantifier : ST_ADDITIONAL_CHARS_SET_NO_IDI;
     }
 

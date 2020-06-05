@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("WeakerAccess")
 public class TableFormatOptions implements MutableDataSetter {
+    // NOTE: the value of \u001f is hardcoded in Parsing patterns
     final public static char INTELLIJ_DUMMY_IDENTIFIER_CHAR = SequenceUtils.US;
     final public static String INTELLIJ_DUMMY_IDENTIFIER = SequenceUtils.US_CHARS;
     final public static CharPredicate INTELLIJ_DUMMY_IDENTIFIER_SET = value -> value == SequenceUtils.US;
