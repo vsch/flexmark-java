@@ -13,7 +13,7 @@
 
     <properties>
         <!-- Define the version of OPEN HTML TO PDF in the properties section of your POM. -->
-        <openhtml.version>1.0.1</openhtml.version>
+        <openhtml.version>1.0.6</openhtml.version>
     </properties>
 
     <dependencies>
@@ -51,12 +51,6 @@
             <!-- Optional, leave out if you do not need right-to-left or bi-directional text support. -->
             <groupId>com.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-rtl-support</artifactId>
-            <version>${openhtml.version}</version>
-        </dependency>
-        <dependency>
-            <!-- Optional, leave out if you do not need HTML5 parsing support. -->
-            <groupId>com.openhtmltopdf</groupId>
-            <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
             <version>${openhtml.version}</version>
         </dependency>
         <!--
