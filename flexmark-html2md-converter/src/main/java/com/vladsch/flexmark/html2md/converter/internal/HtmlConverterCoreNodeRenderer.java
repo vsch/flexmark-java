@@ -799,7 +799,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
 
         listState.itemCount++;
         CharSequence itemPrefix = listState.getItemPrefix(this.myHtmlConverterOptions);
-        int count = myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : 4;
+        int count = myHtmlConverterOptions.listContentIndent ? itemPrefix.length() : myHtmlConverterOptions.listItemIndent;
         CharSequence childPrefix = RepeatedSequence.repeatOf(" ", count);
 
         out.line().append(itemPrefix);
