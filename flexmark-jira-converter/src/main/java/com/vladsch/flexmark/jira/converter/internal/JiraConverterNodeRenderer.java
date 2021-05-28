@@ -118,9 +118,9 @@ public class JiraConverterNodeRenderer implements NodeRenderer {
         StringBuilder prefix = new StringBuilder();
         while (parent instanceof ListBlock || parent instanceof ListItem) {
             if (parent instanceof BulletList) {
-                prefix.append('*');
+                prefix.insert(0, '*');
             } else if (parent instanceof OrderedList) {
-                prefix.append('#');
+                prefix.insert(0, '#');
             }
             parent = parent.getParent();
         }
