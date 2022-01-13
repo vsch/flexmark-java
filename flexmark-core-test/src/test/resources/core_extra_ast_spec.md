@@ -3943,6 +3943,104 @@ Document[0, 38]
 ````````````````````````````````
 
 
+Use info upto space
+
+```````````````````````````````` example Fenced Code Options: 14
+```java test
+proper unmatched fenced code
+```
+
+.
+<pre><code class="language-java">proper unmatched fenced code
+</code></pre>
+.
+Document[0, 47]
+  FencedCodeBlock[0, 45] open:[0, 3, "```"] info:[3, 12, "java test"] content:[13, 42] lines[1] close:[42, 45, "```"]
+    Text[13, 42] chars:[13, 42, "prope … code\n"]
+````````````````````````````````
+
+
+Use info upto tab
+
+```````````````````````````````` example Fenced Code Options: 15
+```java→test
+proper unmatched fenced code
+```
+
+.
+<pre><code class="language-java">proper unmatched fenced code
+</code></pre>
+.
+Document[0, 47]
+  FencedCodeBlock[0, 45] open:[0, 3, "```"] info:[3, 12, "java\ttest"] content:[13, 42] lines[1] close:[42, 45, "```"]
+    Text[13, 42] chars:[13, 42, "prope … code\n"]
+````````````````````````````````
+
+
+Use info up to space
+
+```````````````````````````````` example Fenced Code Options: 16
+```java test
+proper unmatched fenced code
+```
+
+.
+<pre><code class="language-java">proper unmatched fenced code
+</code></pre>
+.
+Document[0, 47]
+  FencedCodeBlock[0, 45] open:[0, 3, "```"] info:[3, 12, "java test"] content:[13, 42] lines[1] close:[42, 45, "```"]
+    Text[13, 42] chars:[13, 42, "prope … code\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example Fenced Code Options: 17
+``` java test
+proper unmatched fenced code
+```
+
+.
+<pre><code class="language-java">proper unmatched fenced code
+</code></pre>
+.
+Document[0, 48]
+  FencedCodeBlock[0, 46] open:[0, 3, "```"] info:[4, 13, "java test"] content:[14, 43] lines[1] close:[43, 46, "```"]
+    Text[14, 43] chars:[14, 43, "prope … code\n"]
+````````````````````````````````
+
+
+Use info upto tab
+
+```````````````````````````````` example Fenced Code Options: 18
+```java→test
+proper unmatched fenced code
+```
+
+.
+<pre><code class="language-java">proper unmatched fenced code
+</code></pre>
+.
+Document[0, 47]
+  FencedCodeBlock[0, 45] open:[0, 3, "```"] info:[3, 12, "java\ttest"] content:[13, 42] lines[1] close:[42, 45, "```"]
+    Text[13, 42] chars:[13, 42, "prope … code\n"]
+````````````````````````````````
+
+
+```````````````````````````````` example Fenced Code Options: 19
+```→java→test
+proper unmatched fenced code
+```
+
+.
+<pre><code class="language-java">proper unmatched fenced code
+</code></pre>
+.
+Document[0, 48]
+  FencedCodeBlock[0, 46] open:[0, 3, "```"] info:[4, 13, "java\ttest"] content:[14, 43] lines[1] close:[43, 46, "```"]
+    Text[14, 43] chars:[14, 43, "prope … code\n"]
+````````````````````````````````
+
+
 ## Anchor links option
 
 Change language class prefix

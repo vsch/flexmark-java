@@ -25,8 +25,13 @@ public class ExceptionMatcher extends BaseMatcher<Throwable> {
             }
         } else if (o instanceof Throwable) {
             if (o.toString().startsWith(prefix)) {
+                String input;
                 Throwable throwable = (Throwable) o;
-                String input = throwable.getCause().toString();
+                if (throwable.getCause() == null) {
+                    input = o.toString();
+                } else {
+                    input = throwable.getCause().toString();
+                }
                 return pattern.matcher(input).matches();
             }
         }

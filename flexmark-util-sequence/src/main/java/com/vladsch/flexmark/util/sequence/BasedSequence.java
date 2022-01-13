@@ -41,18 +41,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     }
 
     @NotNull
-    @Deprecated
-    static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
-        return of(charSequence).subSequence(startIndex);
-    }
-
-    @NotNull
-    @Deprecated
-    static BasedSequence of(@Nullable CharSequence charSequence, int startIndex, int endIndex) {
-        return of(charSequence).subSequence(startIndex, endIndex);
-    }
-
-    @NotNull
     static BasedSequence ofSpaces(int count) {
         return of(RepeatedSequence.ofSpaces(count));
     }

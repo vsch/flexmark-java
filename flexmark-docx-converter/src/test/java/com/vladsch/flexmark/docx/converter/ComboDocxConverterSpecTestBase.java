@@ -36,8 +36,6 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.MutableAttributes;
-import org.apache.log4j.Logger;
-import org.apache.log4j.varia.NullAppender;
 import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -63,11 +61,6 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
     static final String PROJECT_ROOT_DIRECTORY = TestUtils.getRootDirectoryForModule(ComboDocxConverterSpecTestBase.class, "flexmark-docx-converter");
     static final String TEST_ROOT_DIRECTORY = TestUtils.getTestResourceRootDirectoryForModule(ComboDocxConverterSpecTestBase.class, "com.vladsch.flexmark.docx.converter");
     final public static String[] EMPTY_STRINGS = new String[0];
-    static {
-        // Set up a simple configuration that logs on the console.
-        Logger root = Logger.getRootLogger();
-        root.addAppender(new NullAppender());
-    }
 
     // standard options
     final private static DataHolder OPTIONS = new MutableDataSet()
@@ -120,10 +113,10 @@ public abstract class ComboDocxConverterSpecTestBase extends ComboSpecTestCase {
         optionsMap.put("page-a4", new MutableDataSet().set(DocxRenderer.PAGE_SIZE, "a4"));
         optionsMap.put("page-letter", new MutableDataSet().set(DocxRenderer.PAGE_SIZE, "letter"));
         optionsMap.put("page-landscape", new MutableDataSet().set(DocxRenderer.PAGE_LANDSCAPE, true));
-        
+
         HashMap<String, String> props = new HashMap<>();
-        props.put("File Name", "TestFile"); 
-        props.put("Company", "Test Company Name"); 
+        props.put("File Name", "TestFile");
+        props.put("Company", "Test Company Name");
         optionsMap.put("properties", new MutableDataSet().set(DocxRenderer.CUSTOM_PROPERTIES, props));
     }
     private static String removeFileUri(String uri) {

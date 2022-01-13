@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="com.openhtmltopdf:openhtmltopdf-rtl-support" type="repository">
-    <properties maven-id="com.openhtmltopdf:openhtmltopdf-rtl-support:1.0.0" />
+    <properties maven-id="com.openhtmltopdf:openhtmltopdf-rtl-support:1.0.10" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-rtl-support-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-rtl-support-1.0.10.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/icu4j-59.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-core-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-core-1.0.10.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

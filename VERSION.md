@@ -6,6 +6,8 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
+- [0.62.6](#0626)
+- [0.62.4](#0624)
 - [0.62.2](#0622)
 - [0.62.0](#0620)
 - [0.61.34](#06134)
@@ -175,6 +177,17 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
+## 0.62.6
+
+* Fix: update OpenHtmlToPDF to 1.0.10
+* Fix: update jsoup to 1.14.3
+* Fix: Remove deprecated `of()` sequence methods.
+
+## 0.62.4
+
+* Fix: allow exceptions in `ExceptionMatcher` to have null cause, then use object.toString() for
+  text.
+
 ## 0.62.2
 
 * Fix: merge `Parsing` optimization by using static patterns
@@ -326,7 +339,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Deprecate: `JekyllTagExtension.ENABLE_RENDERING`, not used nor needed.
 * Fix: [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]
 
-## 0.61.10
+## 0.61.10           
 
 * Add: `HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS`, default `" \t"`, to configure which chars
   terminate the language part of info string

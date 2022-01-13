@@ -152,10 +152,8 @@ final public class CharSubSequence extends BasedSequenceImpl {
      * @param startIndex   start index in sequence
      * @param endIndex     end index in sequence
      * @return char based sequence
-     * @deprecated NOTE: use BasedSequence.of() for creating based sequences
      */
-    @Deprecated
-    public static CharSubSequence of(CharSequence charSequence, int startIndex, int endIndex) {
+    private static CharSubSequence of(CharSequence charSequence, int startIndex, int endIndex) {
         assert startIndex >= 0 && startIndex <= endIndex && endIndex <= charSequence.length();
 
         CharSubSequence charSubSequence;

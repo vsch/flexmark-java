@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="apache.logging.log4j.core" type="repository">
+    <properties maven-id="org.apache.logging.log4j:log4j-core:2.17.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/log4j-core-2.17.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/log4j-api-2.17.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

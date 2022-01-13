@@ -246,7 +246,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Fix: do not remove `title` attribute provided by `LinkResolver` when link has no title. Allow
   link resolver titles to be used.
 
-## 0.61.34
+## 0.61.34 
 
 * Fix: add `DocxRenderer.PAGE_SIZE` and `DocxRenderer.PAGE_LANDSCAPE` properties to allow simple
   changes to page setup for rendered document which is different from one in the template.
@@ -2506,7 +2506,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * `com.vladsch.flexmark.formatter.internal.NodeFormatterSubContext` to `com.vladsch.flexmark.formatter.NodeFormatterSubContext`
 <!--@formatter:on-->
 
-<!-- @IGNORE PREVIOUS: link -->
+<!-- @IGNORE PREVIOUS: link -->
 
 [#292, 0.40.0: JUnit is in the compile scope]: https://github.com/vsch/flexmark-java/issues/292
 [#293, YamlFrontMatterBlock rendered as markdown does not preserve nested lists]: https://github.com/vsch/flexmark-java/issues/293

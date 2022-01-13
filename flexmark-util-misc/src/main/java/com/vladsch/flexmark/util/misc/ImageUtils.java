@@ -165,6 +165,7 @@ public class ImageUtils {
 
     /**
      * @param cachedImageBytes file
+     * @param idPath image file path for error reporting
      * @return Could be {@code null} if the image could not be read from the file (because of whatever strange
      *         reason).
      */
