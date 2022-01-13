@@ -33,7 +33,7 @@
                 <include>com.vladsch.flexmark:flexmark-ext-ins</include>
                 <include>com.vladsch.flexmark:flexmark-ext-macros</include>
                 <include>com.vladsch.flexmark:flexmark-ext-media-tags</include>
-								<include>com.vladsch.flexmark:flexmark-ext-resizable-image</include>
+                <include>com.vladsch.flexmark:flexmark-ext-resizable-image</include>
                 <include>com.vladsch.flexmark:flexmark-ext-xwiki-macros</include>
                 <include>com.vladsch.flexmark:flexmark-ext-superscript</include>
                 <include>com.vladsch.flexmark:flexmark-ext-tables</include>
