@@ -35,7 +35,6 @@
     <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-macros" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-media-tags" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-resizable-image" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-spec-example" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-superscript" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
