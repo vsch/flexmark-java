@@ -1612,7 +1612,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `flexmark-ext-jekyll-tag/src/test/resources/com.vladsch.flexmark.ext.jekyll.tag.txt`
     * `flexmark-ext-macros/src/test/resources/com.vladsch.flexmark.ext.macros.txt`
     * `flexmark-ext-media-tags/src/test/resources/com.vladsch.flexmark.ext.media.tags.txt`
-    * `flexmark-ext-resizable-image/src/test/resources/com.vladsch.flexmark.ext.resizable.image.txt`
     * `flexmark-ext-spec-example/src/test/resources/com.vladsch.flexmark.ext.spec.example.txt`
     * `flexmark-ext-superscript/src/test/resources/com.vladsch.flexmark.ext.superscript.txt`
     * `flexmark-ext-tables/src/test/resources/com.vladsch.flexmark.ext.tables.txt`
