@@ -36,6 +36,7 @@
     <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" />
     <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
     <orderEntry type="module" module-name="flexmark-ext-media-tags" />
+    <orderEntry type="module" module-name="flexmark-ext-resizable-image" />
     <orderEntry type="module" module-name="flexmark-ext-spec-example" />
     <orderEntry type="module" module-name="flexmark-ext-superscript" />
     <orderEntry type="module" module-name="flexmark-ext-tables" />
