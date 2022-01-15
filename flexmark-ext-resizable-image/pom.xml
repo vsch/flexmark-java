@@ -11,7 +11,7 @@
     <name>flexmark-java extension for image's size</name>
     <description>flexmark-java extension to set the size of the images</description>
 
-    <dependencies>,
+    <dependencies>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark</artifactId>

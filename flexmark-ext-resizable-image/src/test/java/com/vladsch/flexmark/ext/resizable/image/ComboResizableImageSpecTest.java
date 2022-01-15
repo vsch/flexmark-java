@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.youtube.embedded;
+package com.vladsch.flexmark.ext.resizable.image;
 
 import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.parser.Parser;

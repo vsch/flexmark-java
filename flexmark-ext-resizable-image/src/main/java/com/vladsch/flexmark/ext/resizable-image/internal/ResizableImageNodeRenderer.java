@@ -1,6 +1,6 @@
-package com.atlassian.plugins.confluence.markdown.ext.DevOpsResizableImage.internal;
+package com.vladsch.flexmark.ext.resizable.image.internal;
 
-import com.atlassian.plugins.confluence.markdown.ext.DevOpsResizableImage.ResizableImage;
+import com.vladsch.flexmark.ext.resizable.image.ResizableImage;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
