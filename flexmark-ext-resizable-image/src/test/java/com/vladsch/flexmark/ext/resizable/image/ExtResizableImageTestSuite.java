@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ComboResizableImageSpecTest.class,
+        ComboResizableImageSpecTest.class
 })
 public class ExtResizableImageTestSuite {
 }
