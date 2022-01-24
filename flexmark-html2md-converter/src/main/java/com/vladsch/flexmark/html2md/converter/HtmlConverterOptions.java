@@ -55,6 +55,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
     public char unorderedListDelimiter;
     public int definitionMarkerSpaces;
     public int minSetextHeadingMarkerLength;
+    public int listItemIndent;
     public String codeIndent;
     public String eolInTitleAttribute;
     public String nbspText;
@@ -118,6 +119,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
         unorderedListDelimiter = other.unorderedListDelimiter;
         definitionMarkerSpaces = other.definitionMarkerSpaces;
         minSetextHeadingMarkerLength = other.minSetextHeadingMarkerLength;
+        listItemIndent = other.listItemIndent;
         codeIndent = other.codeIndent;
         eolInTitleAttribute = other.eolInTitleAttribute;
         nbspText = other.nbspText;
@@ -184,6 +186,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
         unorderedListDelimiter = FlexmarkHtmlConverter.UNORDERED_LIST_DELIMITER.get(options);
         definitionMarkerSpaces = FlexmarkHtmlConverter.DEFINITION_MARKER_SPACES.get(options);
         minSetextHeadingMarkerLength = Utils.minLimit(FlexmarkHtmlConverter.MIN_SETEXT_HEADING_MARKER_LENGTH.get(options), 3);
+        listItemIndent = FlexmarkHtmlConverter.LIST_ITEM_INDENT.get(options);
         codeIndent = FlexmarkHtmlConverter.CODE_INDENT.get(options);
         eolInTitleAttribute = FlexmarkHtmlConverter.EOL_IN_TITLE_ATTRIBUTE.get(options);
         nbspText = FlexmarkHtmlConverter.NBSP_TEXT.get(options);

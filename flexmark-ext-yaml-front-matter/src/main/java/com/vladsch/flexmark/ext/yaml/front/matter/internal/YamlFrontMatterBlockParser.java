@@ -21,7 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class YamlFrontMatterBlockParser extends AbstractBlockParser {
-    final private static Pattern REGEX_METADATA = Pattern.compile("^[ ]{0,3}([A-Za-z0-9_-]+):\\s*(.*)");
+    final private static Pattern REGEX_METADATA = Pattern.compile("^[ ]{0,3}([A-Za-z0-9_\\-.]+):\\s*(.*)");
     final private static Pattern REGEX_METADATA_LIST = Pattern.compile("^[ ]+-\\s*(.*)");
     final private static Pattern REGEX_METADATA_LITERAL = Pattern.compile("^\\s*(.*)");
     final private static Pattern REGEX_BEGIN = Pattern.compile("^-{3}(\\s.*)?");

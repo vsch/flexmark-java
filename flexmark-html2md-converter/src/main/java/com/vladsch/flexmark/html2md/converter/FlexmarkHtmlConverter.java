@@ -74,6 +74,7 @@ public class FlexmarkHtmlConverter {
     final public static DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<>("UNORDERED_LIST_DELIMITER", '*');
     final public static DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<>("DEFINITION_MARKER_SPACES", 3);
     final public static DataKey<Integer> MIN_SETEXT_HEADING_MARKER_LENGTH = new DataKey<>("MIN_SETEXT_HEADING_MARKER_LENGTH", 3);
+    final public static DataKey<Integer> LIST_ITEM_INDENT = new DataKey<>("LIST_ITEM_INDENT", 4);
     final public static DataKey<String> CODE_INDENT = new DataKey<>("CODE_INDENT", "    ");
     final public static DataKey<String> NBSP_TEXT = new DataKey<>("NBSP_TEXT", " ");
     final public static DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<>("EOL_IN_TITLE_ATTRIBUTE", " ");
