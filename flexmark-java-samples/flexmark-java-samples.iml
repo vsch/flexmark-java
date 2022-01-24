@@ -59,6 +59,7 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-issues" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-users" />
     <orderEntry type="module" module-name="flexmark-ext-media-tags" />
+    <orderEntry type="module" module-name="flexmark-ext-resizable-image" />
     <orderEntry type="module" module-name="flexmark-ext-youtube-embedded" />
     <orderEntry type="module" module-name="flexmark-html2md-converter" />
     <orderEntry type="library" name="org.docx4j:docx4j-JAXB-Internal" level="project" />
