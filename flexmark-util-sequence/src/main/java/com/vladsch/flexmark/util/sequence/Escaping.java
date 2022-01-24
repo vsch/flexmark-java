@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class Escaping {
 
     // pure chars not for pattern
-    final public static String ESCAPABLE_CHARS = "\"#$%&'()*+,./:;<=>?@[]\\^_`{|}~-";
+    final public static String ESCAPABLE_CHARS = "#$%&'()*+,./:;<=>?@[]\\^_`{|}~-";
 
     final public static String ESCAPABLE = "[!" +
             ESCAPABLE_CHARS
@@ -40,7 +40,7 @@ public class Escaping {
     final private static Pattern ENTITY_ONLY =
             Pattern.compile(ENTITY, Pattern.CASE_INSENSITIVE);
 
-    final private static String XML_SPECIAL = "[&<>\"]";
+    final private static String XML_SPECIAL = "[&<>]";
 
     final private static Pattern XML_SPECIAL_RE = Pattern.compile(XML_SPECIAL);
 
@@ -64,32 +64,38 @@ public class Escaping {
     final private static Replacer UNSAFE_CHAR_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
-            if (s.equals("&")) {
-                sb.append("&amp;");
-            } else if (s.equals("<")) {
-                sb.append("&lt;");
-            } else if (s.equals(">")) {
-                sb.append("&gt;");
-            } else if (s.equals("\"")) {
-                sb.append("&quot;");
-            } else {
-                sb.append(s);
+            switch (s) {
+                case "&":
+                    sb.append("&amp;");
+                    break;
+                case "<":
+                    sb.append("&lt;");
+                    break;
+                case ">":
+                    sb.append("&gt;");
+                    break;
+                default:
+                    sb.append(s);
+                    break;
             }
         }
 
         @Override
         public void replace(@NotNull BasedSequence original, int startIndex, int endIndex, @NotNull ReplacedTextMapper textMapper) {
             String s1 = original.subSequence(startIndex, endIndex).toString();
-            if (s1.equals("&")) {
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&amp;", BasedSequence.NULL));
-            } else if (s1.equals("<")) {
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&lt;", BasedSequence.NULL));
-            } else if (s1.equals(">")) {
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&gt;", BasedSequence.NULL));
-            } else if (s1.equals("\"")) {
-                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&quot;", BasedSequence.NULL));
-            } else {
-                textMapper.addOriginalText(startIndex, endIndex);
+            switch (s1) {
+                case "&":
+                    textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&amp;", BasedSequence.NULL));
+                    break;
+                case "<":
+                    textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&lt;", BasedSequence.NULL));
+                    break;
+                case ">":
+                    textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&gt;", BasedSequence.NULL));
+                    break;
+                default:
+                    textMapper.addOriginalText(startIndex, endIndex);
+                    break;
             }
         }
     };
