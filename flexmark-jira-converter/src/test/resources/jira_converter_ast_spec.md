@@ -463,6 +463,83 @@ Document[0, 141]
             Text[129, 139] chars:[129, 139, "sub-item 1"]
 ````````````````````````````````
 
+Mixed nested lists
+
+```````````````````````````````` example Lists: 6
+1. item 1
+   * sub-item 1a
+      1. sub-sub-item 1a.1
+   * sub-item 1b
+      1. sub-sub-item 1b.1
+2. item 2
+   1. sub-item 2.1
+
+* list 2, item a
+* list 2, item b
+* list 2, item c
+  1. item c.1
+  2. item c.2
+.
+# item 1
+#* sub-item 1a
+#*# sub-sub-item 1a.1
+#* sub-item 1b
+#*# sub-sub-item 1b.1
+# item 2
+## sub-item 2.1
+
+* list 2, item a
+* list 2, item b
+* list 2, item c
+*# item c.1
+*# item c.2
+
+.
+Document[0, 206]
+  OrderedList[0, 127] isTight delimiter:'.'
+    OrderedListItem[0, 98] open:[0, 2, "1."] isTight
+      Paragraph[3, 10]
+        Text[3, 9] chars:[3, 9, "item 1"]
+      BulletList[13, 98] isTight
+        BulletListItem[13, 54] open:[13, 14, "*"] isTight
+          Paragraph[15, 27]
+            Text[15, 26] chars:[15, 26, "sub-i … em 1a"]
+          OrderedList[33, 54] isTight delimiter:'.'
+            OrderedListItem[33, 54] open:[33, 35, "1."] isTight
+              Paragraph[36, 54]
+                Text[36, 53] chars:[36, 53, "sub-s …  1a.1"]
+        BulletListItem[57, 98] open:[57, 58, "*"] isTight
+          Paragraph[59, 71]
+            Text[59, 70] chars:[59, 70, "sub-i … em 1b"]
+          OrderedList[77, 98] isTight delimiter:'.'
+            OrderedListItem[77, 98] open:[77, 79, "1."] isTight
+              Paragraph[80, 98]
+                Text[80, 97] chars:[80, 97, "sub-s …  1b.1"]
+    OrderedListItem[98, 127] open:[98, 100, "2."] isTight
+      Paragraph[101, 108]
+        Text[101, 107] chars:[101, 107, "item 2"]
+      OrderedList[111, 127] isTight delimiter:'.'
+        OrderedListItem[111, 127] open:[111, 113, "1."] isTight hadBlankLineAfter
+          Paragraph[114, 127] isTrailingBlankLine
+            Text[114, 126] chars:[114, 126, "sub-i … m 2.1"]
+  BulletList[128, 206] isTight
+    BulletListItem[128, 145] open:[128, 129, "*"] isTight
+      Paragraph[130, 145]
+        Text[130, 144] chars:[130, 144, "list  … tem a"]
+    BulletListItem[145, 162] open:[145, 146, "*"] isTight
+      Paragraph[147, 162]
+        Text[147, 161] chars:[147, 161, "list  … tem b"]
+    BulletListItem[162, 206] open:[162, 163, "*"] isTight
+      Paragraph[164, 179]
+        Text[164, 178] chars:[164, 178, "list  … tem c"]
+      OrderedList[181, 206] isTight delimiter:'.'
+        OrderedListItem[181, 193] open:[181, 183, "1."] isTight
+          Paragraph[184, 193]
+            Text[184, 192] chars:[184, 192, "item c.1"]
+        OrderedListItem[195, 206] open:[195, 197, "2."] isTight
+          Paragraph[198, 206]
+            Text[198, 206] chars:[198, 206, "item c.2"]
+````````````````````````````````
 
 ## Fenced code
 
