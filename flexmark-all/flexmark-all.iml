@@ -72,5 +72,6 @@
     <orderEntry type="module" module-name="flexmark-ext-gitlab" />
     <orderEntry type="module" module-name="flexmark-ext-macros" />
     <orderEntry type="module" module-name="flexmark-ext-media-tags" />
+    <orderEntry type="module" module-name="flexmark-ext-resizable-image" />
   </component>
 </module>
