@@ -19,11 +19,11 @@ public class Parsing {
     final public static char INTELLIJ_DUMMY_IDENTIFIER_CHAR = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
     final public static String INTELLIJ_DUMMY_IDENTIFIER = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER;
 
-    final public static String NAME_SPACE_START = "[_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]"; // excluded  [#x10000-#xEFFFF]
-    final public static String NAME_SPACE_CHAR = NAME_SPACE_START + "|[.0-9\u00B7\u0300-\u036F\u203F-\u2040-]";
-//    final public static String NAME_SPACE_START = "[_A-Za-z]";
-//    final public static String NAME_SPACE_CHAR = NAME_SPACE_START + "|-|.|[0-9]";
-    final public static String NAME_SPACE = "(?:(?:" + NAME_SPACE_START + ")(?:" + NAME_SPACE_CHAR + ")*:)?";
+//    final public static String XML_NAMESPACE_START = "[_A-Za-z]";
+//    final public static String XML_NAMESPACE_CHAR = XML_NAME_SPACE_START + "|-|.|[0-9]";
+    final public static String XML_NAMESPACE_START = "[_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]"; // excluded  [#x10000-#xEFFFF]
+    final public static String XML_NAMESPACE_CHAR = XML_NAMESPACE_START + "|[.0-9\u00B7\u0300-\u036F\u203F-\u2040-]";
+    final public static String XML_NAMESPACE = "(?:(?:" + XML_NAMESPACE_START + ")(?:" + XML_NAMESPACE_CHAR + ")*:)?";
 
     // save options for others to use when only parsing instance is available
     final public DataHolder options;
@@ -142,8 +142,8 @@ public class Parsing {
 
     final private static String ST_CLOSETAG_IDI = "</" + ST_TAGNAME_IDI + "\\s*[>]";
     final private static String ST_CLOSETAG_NO_IDI = "</" + ST_TAGNAME_NO_IDI + "\\s*[>]";
-    final private static String ST_NS_CLOSETAG_IDI = "</" + NAME_SPACE + ST_TAGNAME_IDI + "\\s*[>]";
-    final private static String ST_NS_CLOSETAG_NO_IDI = "</" + NAME_SPACE + ST_TAGNAME_NO_IDI + "\\s*[>]";
+    final private static String ST_NS_CLOSETAG_IDI = "</" + XML_NAMESPACE + ST_TAGNAME_IDI + "\\s*[>]";
+    final private static String ST_NS_CLOSETAG_NO_IDI = "</" + XML_NAMESPACE + ST_TAGNAME_NO_IDI + "\\s*[>]";
 
     final private static String ST_ATTRIBUTE_IDI = "(?:" + "\\s+" + ST_ATTRIBUTENAME_IDI + ST_ATTRIBUTEVALUESPEC_IDI + "?)";
     final private static String ST_ATTRIBUTE_NO_IDI = "(?:" + "\\s+" + ST_ATTRIBUTENAME_NO_IDI + ST_ATTRIBUTEVALUESPEC_NO_IDI + "?)";
@@ -177,8 +177,8 @@ public class Parsing {
 
     final private static String ST_OPENTAG_IDI = "<" + ST_TAGNAME_IDI + ST_ATTRIBUTE_IDI + "*" + "\\s*/?>";
     final private static String ST_OPENTAG_NO_IDI = "<" + ST_TAGNAME_NO_IDI + ST_ATTRIBUTE_NO_IDI + "*" + "\\s*/?>";
-    final private static String ST_NS_OPENTAG_IDI = "<" + NAME_SPACE + ST_TAGNAME_IDI + ST_ATTRIBUTE_IDI + "*" + "\\s*/?>";
-    final private static String ST_NS_OPENTAG_NO_IDI = "<" + NAME_SPACE + ST_TAGNAME_NO_IDI + ST_ATTRIBUTE_NO_IDI + "*" + "\\s*/?>";
+    final private static String ST_NS_OPENTAG_IDI = "<" + XML_NAMESPACE + ST_TAGNAME_IDI + ST_ATTRIBUTE_IDI + "*" + "\\s*/?>";
+    final private static String ST_NS_OPENTAG_NO_IDI = "<" + XML_NAMESPACE + ST_TAGNAME_NO_IDI + ST_ATTRIBUTE_NO_IDI + "*" + "\\s*/?>";
 
     final private static String ST_REG_CHAR_PARENS_IDI = "[^\\\\" + ST_EXCLUDED_0_TO_SPACE_IDI + "]";
     final private static String ST_REG_CHAR_PARENS_NO_IDI = "[^\\\\" + ST_EXCLUDED_0_TO_SPACE_NO_IDI + "]";
