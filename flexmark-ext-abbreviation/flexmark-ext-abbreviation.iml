@@ -23,7 +23,7 @@
     <orderEntry type="module" module-name="flexmark-util-misc" />
     <orderEntry type="module" module-name="flexmark-util-sequence" />
     <orderEntry type="module" module-name="flexmark-util-visitor" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />

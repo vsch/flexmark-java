@@ -98,6 +98,7 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
         optionsMap.put("block-quote-extend", new MutableDataSet().set(Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE, true));
         optionsMap.put("block-ignore-blank", new MutableDataSet().set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true));
         optionsMap.put("html-block-start-only-on-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS, true));
+        optionsMap.put("no-html-block-start-only-on-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS, false));
         optionsMap.put("setext-marker-length", new MutableDataSet().set(Parser.HEADING_SETEXT_MARKER_LENGTH, 3));
         optionsMap.put("src-pos-lines", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES, true).set(Parser.CODE_SOFT_LINE_BREAKS, true));
         optionsMap.put("src-pos-lines-splice", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES, true).set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.INLINE_CODE_SPLICE_CLASS, "line-spliced"));
@@ -121,6 +122,7 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
         optionsMap.put("spec-027", new MutableDataSet().set(Parser.STRONG_WRAPS_EMPHASIS, true));
         optionsMap.put("custom-list-marker", new MutableDataSet().set(Parser.LISTS_ITEM_PREFIX_CHARS, "*/"));
         optionsMap.put("no-p-tags", new MutableDataSet().set(HtmlRenderer.NO_P_TAGS_USE_BR, true));
+        optionsMap.put("allow-name-space", new MutableDataSet().set(Parser.HTML_ALLOW_NAME_SPACE, true));
         optionsMap.put("list-markdown-navigator", new MutableDataSet()
                 .set(Parser.LISTS_AUTO_LOOSE, false)
                 .set(Parser.LISTS_AUTO_LOOSE, false)

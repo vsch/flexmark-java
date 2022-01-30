@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class Escaping {
 
     // pure chars not for pattern
-    final public static String ESCAPABLE_CHARS = "#$%&'()*+,./:;<=>?@[]\\^_`{|}~-";
+    final public static String ESCAPABLE_CHARS = "\"#$%&'()*+,./:;<=>?@[]\\^_`{|}~-";
 
     final public static String ESCAPABLE = "[!" +
             ESCAPABLE_CHARS
@@ -40,7 +40,7 @@ public class Escaping {
     final private static Pattern ENTITY_ONLY =
             Pattern.compile(ENTITY, Pattern.CASE_INSENSITIVE);
 
-    final private static String XML_SPECIAL = "[&<>]";
+    final private static String XML_SPECIAL = "[&<>\"]";
 
     final private static Pattern XML_SPECIAL_RE = Pattern.compile(XML_SPECIAL);
 
@@ -74,6 +74,9 @@ public class Escaping {
                 case ">":
                     sb.append("&gt;");
                     break;
+                case "\"":
+                    sb.append("&quot;");
+                    break;
                 default:
                     sb.append(s);
                     break;
@@ -92,6 +95,9 @@ public class Escaping {
                     break;
                 case ">":
                     textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&gt;", BasedSequence.NULL));
+                    break;
+                case "\"":
+                    textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.prefixOf("&quot;", BasedSequence.NULL));
                     break;
                 default:
                     textMapper.addOriginalText(startIndex, endIndex);

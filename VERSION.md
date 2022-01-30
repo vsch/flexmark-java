@@ -181,7 +181,16 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 * Fix: update OpenHtmlToPDF to 1.0.10
 * Fix: update jsoup to 1.14.3
+* Fix: update junit to 4.13.2
 * Fix: Remove deprecated `of()` sequence methods.
+* Fix: [#452, JiraConverter: Mixed lists rendered incorrectly], thanks to
+  **[znerd](https://github.com/znerd)**
+* Fix: merge [#489, add flexmark-ext-resizable-image] thanks to
+  **[sparksparrow](https://github.com/sparksparrow)**
+* Fix: [#482, Namespaces in embedded HTML blocks not supported?] 
+  * Add `Parser.HTML_ALLOW_NAME_SPACE`, default `false` to allow recognizing HTML elements with
+    namespace prefix. :exclamation: HTML deep parser always allows namespaces and ignores this
+    option.
 
 ## 0.62.4
 
@@ -214,7 +223,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 
 ## 0.61.30
 
-* Fix: [#402, When using PegdownOptionsAdapter indented code blocks does not work for lists] 
+* Fix: [#452, JiraConverter: Mixed lists rendered incorrectly]
 
 ## 0.61.28
 
@@ -339,7 +348,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 * Deprecate: `JekyllTagExtension.ENABLE_RENDERING`, not used nor needed.
 * Fix: [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]
 
-## 0.61.10           
+## 0.61.10
 
 * Add: `HtmlRenderer.FENCED_CODE_LANGUAGE_DELIMITERS`, default `" \t"`, to configure which chars
   terminate the language part of info string
@@ -2154,6 +2163,8 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#397, PR: Add base64 image support with docx rendering]: https://github.com/vsch/flexmark-java/pull/397
 [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]: https://github.com/vsch/flexmark-java/issues/398
 [#407, Link text inline content fails to parse image references]: https://github.com/vsch/flexmark-java/issues/407
+[#452, JiraConverter: Mixed lists rendered incorrectly]: https://github.com/vsch/flexmark-java/issues/452
+[#489, add flexmark-ext-resizable-image]: https://github.com/vsch/flexmark-java/issues/489
 [@Xaelis]: https://github.com/Xaelis
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
@@ -2164,6 +2175,6 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
+[#482, Namespaces in embedded HTML blocks not supported?]: https://github.com/vsch/flexmark-java/issues/482
 
 
-[#402, When using PegdownOptionsAdapter indented code blocks does not work for lists]: https://github.com/vsch/flexmark-java/issues/402

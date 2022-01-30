@@ -40,7 +40,7 @@
     <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-toc" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="module" module-name="flexmark-ext-definition" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />

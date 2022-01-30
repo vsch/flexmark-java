@@ -35,7 +35,7 @@
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
     <orderEntry type="library" name="org.jetbrains:annotations" level="project" />

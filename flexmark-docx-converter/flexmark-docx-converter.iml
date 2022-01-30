@@ -51,7 +51,7 @@
     <orderEntry type="module" module-name="flexmark-ext-toc" />
     <orderEntry type="module" module-name="flexmark-ext-wikilink" />
     <orderEntry type="module" module-name="flexmark-ext-autolink" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="module" module-name="flexmark-ext-gitlab" />
     <orderEntry type="module" module-name="flexmark-ext-macros" />

@@ -634,3 +634,154 @@ Document[0, 114]
 ````````````````````````````````
 
 
+## HTML Allow Name Space
+
+```````````````````````````````` example(HTML Allow Name Space: 1) options(allow-name-space)
+<ns:elem>
+</ns:elem>
+
+.
+<ns:elem>
+</ns:elem>
+.
+Document[0, 22]
+  HtmlBlock[0, 21]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 2) options(deep-html-parsing, allow-name-space)
+<ns:strong>
+</ns:strong>
+
+.
+<p><a href="ns:strong">ns:strong</a>
+&lt;/ns:strong&gt;</p>
+.
+Document[0, 26]
+  Paragraph[0, 25] isTrailingBlankLine
+    AutoLink[0, 11] open:[0, 1, "<"] text:[1, 10, "ns:strong"] pageRef:[1, 10, "ns:strong"] close:[10, 11, ">"]
+    SoftLineBreak[11, 12]
+    Text[12, 24] chars:[12, 24, "</ns: … rong>"]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 3) options(deep-html-parsing, allow-name-space, no-html-block-start-only-on-block-tags)
+<ns:strong>
+</ns:strong>
+
+.
+<ns:strong>
+</ns:strong>
+.
+Document[0, 26]
+  HtmlBlock[0, 25]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 4) options(deep-html-parsing)
+<ns:table>
+</ns:table>
+
+.
+<ns:table>
+</ns:table>
+.
+Document[0, 24]
+  HtmlBlock[0, 23]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 5) options(deep-html-parsing, allow-name-space)
+<ns:table>
+</ns:table>
+
+.
+<ns:table>
+</ns:table>
+.
+Document[0, 24]
+  HtmlBlock[0, 23]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 6) options(deep-html-parsing, allow-name-space, no-html-block-start-only-on-block-tags)
+<ns:table>
+</ns:table>
+
+.
+<ns:table>
+</ns:table>
+.
+Document[0, 24]
+  HtmlBlock[0, 23]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 7) options(allow-name-space)
+<ns:table>
+</ns:table>
+
+.
+<ns:table>
+</ns:table>
+.
+Document[0, 24]
+  HtmlBlock[0, 23]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 8) options(allow-name-space)
+<ns:table>
+</ns:table>
+
+.
+<ns:table>
+</ns:table>
+.
+Document[0, 24]
+  HtmlBlock[0, 23]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 9) options(allow-name-space, html-block-start-only-on-block-tags)
+<ns:table>
+</ns:table>
+
+.
+<ns:table>
+</ns:table>
+.
+Document[0, 24]
+  HtmlBlock[0, 23]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 10) options(allow-name-space, html-block-start-only-on-block-tags)
+<ns:strong>
+</ns:strong>
+
+.
+<p><a href="ns:strong">ns:strong</a>
+&lt;/ns:strong&gt;</p>
+.
+Document[0, 26]
+  Paragraph[0, 25] isTrailingBlankLine
+    AutoLink[0, 11] open:[0, 1, "<"] text:[1, 10, "ns:strong"] pageRef:[1, 10, "ns:strong"] close:[10, 11, ">"]
+    SoftLineBreak[11, 12]
+    Text[12, 24] chars:[12, 24, "</ns: … rong>"]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Allow Name Space: 11) options(allow-name-space, no-html-block-start-only-on-block-tags)
+<ns:strong>
+</ns:strong>
+
+.
+<ns:strong>
+</ns:strong>
+.
+Document[0, 26]
+  HtmlBlock[0, 25]
+````````````````````````````````
+
+

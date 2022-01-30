@@ -32,6 +32,7 @@
         <option name="EMOJI_SHORTCUTS" value="true" />
         <option name="FLEXMARK_FRONT_MATTER" value="true" />
         <option name="GITBOOK_URL_ENCODING" value="true" />
+        <option name="GITHUB_WIKI_LINKS" value="true" />
         <option name="JEKYLL_FRONT_MATTER" value="true" />
         <option name="PRODUCTION_SPEC_PARSER" value="true" />
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
