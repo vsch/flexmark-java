@@ -38,6 +38,7 @@
         <option value="$PROJECT_DIR$/flexmark-ext-jekyll-tag/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-macros/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-media-tags/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-resizable-image/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-spec-example/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-superscript/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-tables/pom.xml" />

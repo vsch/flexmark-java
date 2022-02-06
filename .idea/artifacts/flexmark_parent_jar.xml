@@ -39,6 +39,7 @@
       <element id="module-output" name="flexmark-ext-wikilink" />
       <element id="module-output" name="flexmark-ext-macros" />
       <element id="module-output" name="flexmark-ext-media-tags" />
+      <element id="module-output" name="flexmark-ext-resizable-image" />
       <element id="module-output" name="flexmark-ext-youtube-embedded" />
       <element id="module-output" name="flexmark-html2md-converter" />
       <element id="library" level="project" name="jsoup" />
