@@ -25,6 +25,7 @@ import com.vladsch.flexmark.ext.jekyll.front.matter.ExtJekyllFrontMatterTestSuit
 import com.vladsch.flexmark.ext.jekyll.tag.ExtJekyllTagTestSuite;
 import com.vladsch.flexmark.ext.macros.ExtMacrosTestSuite;
 import com.vladsch.flexmark.ext.media.tags.ExtMediaTagsTestSuite;
+import com.vladsch.flexmark.ext.resizable.image.ExtResizableImageTestSuite;
 import com.vladsch.flexmark.ext.spec.example.ExtSpecExampleTestSuite;
 import com.vladsch.flexmark.ext.superscript.ExtSuperscriptTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
@@ -73,6 +74,7 @@ import org.junit.runners.Suite;
         ExtJekyllTagTestSuite.class,
         ExtMacrosTestSuite.class,
         ExtMediaTagsTestSuite.class,
+        ExtResizableImageTestSuite.class,
         ExtSpecExampleTestSuite.class,
         ExtSuperscriptTestSuite.class,
         ExtTablesTestSuite.class,

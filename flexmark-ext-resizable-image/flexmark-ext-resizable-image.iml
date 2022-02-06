@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="flexmark" />
+    <orderEntry type="module" module-name="flexmark-util-ast" />
+    <orderEntry type="module" module-name="flexmark-util-builder" />
+    <orderEntry type="module" module-name="flexmark-util-data" />
+    <orderEntry type="module" module-name="flexmark-util-dependency" />
+    <orderEntry type="module" module-name="flexmark-util-html" />
+    <orderEntry type="module" module-name="flexmark-util-misc" />
+    <orderEntry type="module" module-name="flexmark-util-sequence" />
+    <orderEntry type="module" module-name="flexmark-util-visitor" />
+    <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
+  </component>
+</module>

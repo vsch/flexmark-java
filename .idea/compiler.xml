@@ -27,6 +27,7 @@
         <module name="flexmark-ext-xwiki-macros" />
         <module name="flexmark-util" />
         <module name="flexmark-ext-media-tags" />
+        <module name="flexmark-ext-resizable-image" />
         <module name="flexmark-docx-converter" />
         <module name="flexmark-jira-converter" />
         <module name="flexmark-ext-youtube-embedded" />
@@ -95,6 +96,7 @@
       <module name="flexmark-ext-jekyll-tag" target="8" />
       <module name="flexmark-ext-macros" target="8" />
       <module name="flexmark-ext-media-tags" target="8" />
+      <module name="flexmark-ext-resizable-image" target="8" />
       <module name="flexmark-ext-spec-example" target="8" />
       <module name="flexmark-ext-superscript" target="8" />
       <module name="flexmark-ext-tables" target="8" />
