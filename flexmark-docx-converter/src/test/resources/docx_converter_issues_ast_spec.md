@@ -1254,8 +1254,7 @@ Aside Block Numbered List
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -1653,8 +1652,7 @@ Aside Block Numbered List
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -1673,8 +1671,7 @@ Aside Block Numbered List
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="20" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="20" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="687" w:right="0"/>
         </w:pPr>
@@ -1693,8 +1690,7 @@ Aside Block Numbered List
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="907" w:right="0"/>
         </w:pPr>
@@ -1713,8 +1709,7 @@ Aside Block Numbered List
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="1147" w:right="0"/>
         </w:pPr>
@@ -1753,8 +1748,7 @@ Aside Block Numbered List
                 <w:numId w:val="14"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="283" w:left="523" w:right="0"/>
         </w:pPr>
@@ -1773,8 +1767,7 @@ Aside Block Numbered List
                 <w:numId w:val="15"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="23" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="23" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="283" w:left="803" w:right="0"/>
         </w:pPr>
@@ -1793,8 +1786,7 @@ Aside Block Numbered List
                 <w:numId w:val="16"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="283" w:left="1083" w:right="0"/>
         </w:pPr>
@@ -1813,8 +1805,7 @@ Aside Block Numbered List
                 <w:numId w:val="17"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="283" w:left="1363" w:right="0"/>
         </w:pPr>
@@ -1853,8 +1844,7 @@ Aside Block Numbered List
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -1870,8 +1860,7 @@ Aside Block Numbered List
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="20" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="20" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="687" w:right="0"/>
         </w:pPr>
@@ -1887,8 +1876,7 @@ Aside Block Numbered List
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="907" w:right="0"/>
         </w:pPr>
@@ -1904,8 +1892,7 @@ Aside Block Numbered List
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="1147" w:right="0"/>
         </w:pPr>
@@ -1941,8 +1928,7 @@ Aside Block Numbered List
                 <w:numId w:val="18"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="283" w:left="523" w:right="0"/>
         </w:pPr>
@@ -1958,8 +1944,7 @@ Aside Block Numbered List
                 <w:numId w:val="19"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="23" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="23" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="283" w:left="803" w:right="0"/>
         </w:pPr>
@@ -1975,8 +1960,7 @@ Aside Block Numbered List
                 <w:numId w:val="20"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="283" w:left="1083" w:right="0"/>
         </w:pPr>
@@ -1992,8 +1976,7 @@ Aside Block Numbered List
                 <w:numId w:val="21"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="283" w:left="1363" w:right="0"/>
         </w:pPr>
@@ -2377,16 +2360,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2451,16 +2434,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="279400" cy="279400"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="279400" cy="279400"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2501,16 +2484,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="241300" cy="241300"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="241300" cy="241300"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2551,16 +2534,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="203200" cy="203200"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="203200" cy="203200"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2601,16 +2584,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId6" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="177800" cy="177800"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="177800" cy="177800"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2651,16 +2634,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId7" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2701,16 +2684,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId8" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2749,16 +2732,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId9" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2805,16 +2788,16 @@ TEXT ![](https://s3.amazonaws.com/vladsch-env/images/MNLogo.png) TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="2095500" cy="2095500"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="2095500" cy="2095500"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2861,16 +2844,16 @@ TEXT ![](https://vladsch.com/images/MNLogo.png) TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="2095500" cy="2095500"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="2095500" cy="2095500"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2920,16 +2903,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -2984,16 +2967,16 @@ TEXT :basecamp: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3412,16 +3395,16 @@ TEXT ![](https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png) T
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="609600" cy="609600"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="609600" cy="609600"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3471,16 +3454,16 @@ TEXT :+1: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3545,16 +3528,16 @@ TEXT :basecamp: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="279400" cy="279400"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="279400" cy="279400"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3595,16 +3578,16 @@ TEXT :basecamp: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="241300" cy="241300"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="241300" cy="241300"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3645,16 +3628,16 @@ TEXT :basecamp: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId5" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="203200" cy="203200"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="203200" cy="203200"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3695,16 +3678,16 @@ TEXT :basecamp: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId6" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="177800" cy="177800"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="177800" cy="177800"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3745,16 +3728,16 @@ TEXT :basecamp: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId7" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3795,16 +3778,16 @@ TEXT :basecamp: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId8" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3843,16 +3826,16 @@ TEXT :basecamp: TEXT
                                 <pic:blipFill>
                                     <a:blip r:embed="rId9" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="139700" cy="139700"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="139700" cy="139700"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3896,7 +3879,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 1 </w:t>
         </w:r>
         <w:r>
-            <w:t>&#x1f44d;</w:t>
+            <w:t>👍</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="2" w:name="heading-2-"/>
@@ -3909,7 +3892,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 2 </w:t>
         </w:r>
         <w:r>
-            <w:t>&#x1f44d;</w:t>
+            <w:t>👍</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="3" w:name="heading-3-"/>
@@ -3922,7 +3905,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 3 </w:t>
         </w:r>
         <w:r>
-            <w:t>&#x1f44d;</w:t>
+            <w:t>👍</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="4" w:name="heading-4-"/>
@@ -3935,7 +3918,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 4 </w:t>
         </w:r>
         <w:r>
-            <w:t>&#x1f44d;</w:t>
+            <w:t>👍</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="5" w:name="heading-5-"/>
@@ -3948,7 +3931,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 5 </w:t>
         </w:r>
         <w:r>
-            <w:t>&#x1f44d;</w:t>
+            <w:t>👍</w:t>
         </w:r>
     </w:p>
     <w:bookmarkStart w:id="6" w:name="heading-6-"/>
@@ -3961,7 +3944,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">Heading 6 </w:t>
         </w:r>
         <w:r>
-            <w:t>&#x1f44d;</w:t>
+            <w:t>👍</w:t>
         </w:r>
     </w:p>
     <w:p>
@@ -3972,7 +3955,7 @@ TEXT :+1: TEXT
             <w:t xml:space="preserve">TEXT </w:t>
         </w:r>
         <w:r>
-            <w:t>&#x1f44d;</w:t>
+            <w:t>👍</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> TEXT</w:t>
@@ -4113,8 +4096,7 @@ invalid docx
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -4322,8 +4304,7 @@ invalid docx
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -4520,8 +4501,7 @@ invalid docx
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -4717,8 +4697,7 @@ invalid docx
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>

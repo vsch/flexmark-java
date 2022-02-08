@@ -24,7 +24,7 @@ optimization of implementation classes. Changes are detailed in
 
 ### master [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
 
-### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.62.4)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
+### latest [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/search?q=g:com.vladsch.flexmark)<!-- @IGNORE PREVIOUS: link --> [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=0.64.0)](https://travis-ci.org/vsch/flexmark-java) [![Javadocs](https://www.javadoc.io/badge/com.vladsch.flexmark/flexmark.svg)](https://www.javadoc.io/doc/com.vladsch.flexmark/flexmark)
 
 <!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
 
@@ -37,8 +37,8 @@ drill down to packages and classes, updated from the repository sources. :thumbs
 
 ### Requirements
 
-* Java 8 or above, Java 9+ compatible
-* Android compatibility to be added
+* For Versions 0.62.2 or below, Java 8 or above, Java 9+ compatible. For Versions 0.64.0 or
+  above, Java 11 or above.
 * The project is on Maven: `com.vladsch.flexmark`
 * The core has no dependencies other than `org.jetbrains:annotations:15.0`. For extensions, see
   extension description below.
@@ -54,7 +54,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.62.4</version>
+    <version>0.64.0</version>
 </dependency>
 ```
 
@@ -93,7 +93,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.62.4'
+compile 'com.vladsch.flexmark:flexmark-all:0.64.0'
 ```
 
 #### Building with Android Studio

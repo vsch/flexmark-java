@@ -195,8 +195,7 @@ Paragraph text[^1]
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -497,8 +496,7 @@ Paragraph text, repeated footnote[^1]
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -618,8 +616,7 @@ Der Hersteller[^C1-04]
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -745,8 +742,7 @@ Der Hersteller[^C1-04]
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -4774,8 +4770,7 @@ See [@fig:abc]
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -6139,8 +6134,7 @@ Plain Text <<<macro>>>
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -6210,8 +6204,7 @@ Plain Text <<<macro>>>
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -6322,8 +6315,7 @@ Plain Text <<<macro>>>
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -6440,8 +6432,7 @@ Plain Text <<<macro>>>
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -6499,16 +6490,11 @@ Plain Text <<<macro>>>
                         <w:tblInd w:type="dxa" w:w="120"/>
                         <w:tblBorders>
                             <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
-                            <w:left w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:insideH w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:insideV w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
                         </w:tblBorders>
                         <w:tblCellMar>
                             <w:top w:type="dxa" w:w="80"/>
@@ -6516,9 +6502,7 @@ Plain Text <<<macro>>>
                             <w:bottom w:type="dxa" w:w="80"/>
                             <w:right w:type="dxa" w:w="80"/>
                         </w:tblCellMar>
-                        <w:tblLook w:firstColumn="1" w:firstRow="1"
-                            w:lastColumn="0" w:lastRow="0" w:noHBand="0"
-                            w:noVBand="1" w:val="04a0"/>
+                        <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
                     </w:tblPr>
                     <w:tr>
                         <w:trPr>
@@ -6553,7 +6537,7 @@ Plain Text <<<macro>>>
                                 </w:r>
                                 <w:r>
                                     <w:rPr>
-                                    <w:rStyle w:val="SourceText"/>
+                                        <w:rStyle w:val="SourceText"/>
                                     </w:rPr>
                                     <w:t>data</w:t>
                                 </w:r>
@@ -6577,7 +6561,7 @@ Plain Text <<<macro>>>
                                 </w:r>
                                 <w:r>
                                     <w:rPr>
-                                    <w:rStyle w:val="StrongEmphasis"/>
+                                        <w:rStyle w:val="StrongEmphasis"/>
                                     </w:rPr>
                                     <w:t>data</w:t>
                                 </w:r>
@@ -6702,8 +6686,7 @@ Plain text <<<macro2>>>
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -6771,16 +6754,11 @@ Plain text <<<macro2>>>
                         <w:tblInd w:type="dxa" w:w="120"/>
                         <w:tblBorders>
                             <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
-                            <w:left w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:insideH w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:insideV w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
                         </w:tblBorders>
                         <w:tblCellMar>
                             <w:top w:type="dxa" w:w="80"/>
@@ -6788,9 +6766,7 @@ Plain text <<<macro2>>>
                             <w:bottom w:type="dxa" w:w="80"/>
                             <w:right w:type="dxa" w:w="80"/>
                         </w:tblCellMar>
-                        <w:tblLook w:firstColumn="1" w:firstRow="1"
-                            w:lastColumn="0" w:lastRow="0" w:noHBand="0"
-                            w:noVBand="1" w:val="04a0"/>
+                        <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
                     </w:tblPr>
                     <w:tr>
                         <w:trPr>

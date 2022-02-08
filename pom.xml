@@ -13,7 +13,7 @@
 
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-java</artifactId>
-    <version>0.62.6</version>
+    <version>0.64.0</version>
     <name>flexmark-java</name>
     <description>
         Java re-implementation of commonmark-java based parser, with AST reflecting source elements, full source position tracking, greater parser extensibility.
@@ -23,9 +23,7 @@
 
     <modules>
         <module>flexmark</module>
-        <module>flexmark-all</module>
-        <module>flexmark-osgi</module>
-        <module>flexmark-docx-converter</module>
+        <module>flexmark-core-test</module>
         <module>flexmark-ext-abbreviation</module>
         <module>flexmark-ext-admonition</module>
         <module>flexmark-ext-anchorlink</module>
@@ -58,13 +56,6 @@
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-ext-youtube-embedded</module>
         <module>flexmark-ext-zzzzzz</module>
-        <module>flexmark-core-test</module>
-        <module>flexmark-html2md-converter</module>
-        <module>flexmark-integration-test</module>
-        <module>flexmark-jira-converter</module>
-        <module>flexmark-pdf-converter</module>
-        <module>flexmark-profile-pegdown</module>
-        <module>flexmark-test-specs</module>
         <module>flexmark-test-util</module>
         <module>flexmark-tree-iteration</module>
         <module>flexmark-util</module>
@@ -81,6 +72,15 @@
         <module>flexmark-util-options</module>
         <module>flexmark-util-visitor</module>
         <module>flexmark-youtrack-converter</module>
+        <module>flexmark-html2md-converter</module>
+        <module>flexmark-integration-test</module>
+        <module>flexmark-jira-converter</module>
+        <module>flexmark-pdf-converter</module>
+        <module>flexmark-profile-pegdown</module>
+        <module>flexmark-test-specs</module>
+        <module>flexmark-all</module>
+        <module>flexmark-osgi</module>
+        <module>flexmark-docx-converter</module>
     </modules>
 
     <properties>
@@ -106,7 +106,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.7</version>
                 <configuration>
                     <generateBackupPoms>false</generateBackupPoms>
                 </configuration>
@@ -114,10 +114,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -185,7 +185,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.10.4</version>
+                        <version>3.2.0</version>
                         <executions>
                             <execution>
                                 <id>package-javadoc</id>
@@ -196,7 +196,8 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <excludePackageNames/>
+<!--                            <source>8</source>-->
+                            <excludePackageNames>*.internal,*.internal.*</excludePackageNames>
                             <detectOfflineLinks>false</detectOfflineLinks>
                             <offlineLinks>
                                 <offlineLink>
@@ -344,9 +345,9 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-	            <groupId>com.vladsch.flexmark</groupId>
-	            <artifactId>flexmark-ext-resizable-image</artifactId>
-	            <version>${project.version}</version>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-resizable-image</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>

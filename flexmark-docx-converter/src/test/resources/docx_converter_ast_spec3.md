@@ -248,8 +248,7 @@ Paragraph text[^1]
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -3894,16 +3893,16 @@ See [@tbl:test]
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="609600" cy="609600"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="609600" cy="609600"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -3950,16 +3949,16 @@ See [@tbl:test]
                                 <pic:blipFill>
                                     <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="609600" cy="609600"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="609600" cy="609600"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -4003,8 +4002,7 @@ See [@tbl:test]
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -4213,16 +4211,16 @@ See [@tbl:test]
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="609600" cy="609600"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="609600" cy="609600"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -4269,16 +4267,16 @@ See [@tbl:test]
                                 <pic:blipFill>
                                     <a:blip r:embed="rId4" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="609600" cy="609600"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="609600" cy="609600"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -4322,8 +4320,7 @@ See [@tbl:test]
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -4924,8 +4921,7 @@ Plain text <<<macro2>>>
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -4993,16 +4989,11 @@ Plain text <<<macro2>>>
                         <w:tblInd w:type="dxa" w:w="120"/>
                         <w:tblBorders>
                             <w:top w:color="000001" w:space="0" w:sz="2" w:val="single"/>
-                            <w:left w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:insideH w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
-                            <w:insideV w:color="000001" w:space="0"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:right w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:insideH w:color="000001" w:space="0" w:sz="2" w:val="single"/>
+                            <w:insideV w:color="000001" w:space="0" w:sz="2" w:val="single"/>
                         </w:tblBorders>
                         <w:tblCellMar>
                             <w:top w:type="dxa" w:w="80"/>
@@ -5010,9 +5001,7 @@ Plain text <<<macro2>>>
                             <w:bottom w:type="dxa" w:w="80"/>
                             <w:right w:type="dxa" w:w="80"/>
                         </w:tblCellMar>
-                        <w:tblLook w:firstColumn="1" w:firstRow="1"
-                            w:lastColumn="0" w:lastRow="0" w:noHBand="0"
-                            w:noVBand="1" w:val="04a0"/>
+                        <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
                     </w:tblPr>
                     <w:tr>
                         <w:trPr>
@@ -5184,16 +5173,14 @@ Plain text <<<macro2>>>
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId1" Target="word/document.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"/>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId2" Target="numbering.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering"/>
@@ -5201,8 +5188,7 @@ Plain text <<<macro2>>>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
             <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:body>
@@ -5219,28 +5205,23 @@ Plain text <<<macro2>>>
                     <w:sectPr>
                         <w:type w:val="nextPage"/>
                         <w:pgSz w:h="15840" w:w="12240"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:pgNumType w:fmt="decimal"/>
                         <w:formProt w:val="false"/>
                         <w:textDirection w:val="lrTb"/>
-                        <w:docGrid w:charSpace="4294961151"
-                            w:linePitch="240" w:type="default"/>
+                        <w:docGrid w:charSpace="4294961151" w:linePitch="240" w:type="default"/>
                     </w:sectPr>
                 </w:body>
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
             <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -5262,8 +5243,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
@@ -5301,8 +5281,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="240"/>
@@ -5326,8 +5305,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="200"/>
@@ -5488,12 +5466,9 @@ Plain text <<<macro2>>>
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -5501,8 +5476,7 @@ Plain text <<<macro2>>>
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="NumberingSymbols" w:type="character">
@@ -5520,8 +5494,7 @@ Plain text <<<macro2>>>
                         <w:spacing w:after="120" w:before="240"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Sans"
-                            w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
+                        <w:rFonts w:ascii="Liberation Sans" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
                         <w:sz w:val="28"/>
                         <w:szCs w:val="28"/>
                     </w:rPr>
@@ -5577,8 +5550,7 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="283" w:before="0"/>
@@ -5595,8 +5567,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -5613,8 +5584,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -5630,12 +5600,9 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:fill="EEEEEE" w:val="clear"/>
                         <w:bidi w:val="false"/>
@@ -5644,9 +5611,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -5774,15 +5739,13 @@ Plain text <<<macro2>>>
                         <w:contextualSpacing/>
                     </w:pPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
             <w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:abstractNum w:abstractNumId="1">
@@ -6160,8 +6123,7 @@ Plain text <<<macro2>>>
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId2" Target="docProps/custom.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties"/>
@@ -6169,8 +6131,7 @@ Plain text <<<macro2>>>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId2" Target="numbering.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering"/>
@@ -6178,8 +6139,7 @@ Plain text <<<macro2>>>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
             <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:body>
@@ -6196,28 +6156,23 @@ Plain text <<<macro2>>>
                     <w:sectPr>
                         <w:type w:val="nextPage"/>
                         <w:pgSz w:h="15840" w:w="12240"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:pgNumType w:fmt="decimal"/>
                         <w:formProt w:val="false"/>
                         <w:textDirection w:val="lrTb"/>
-                        <w:docGrid w:charSpace="4294961151"
-                            w:linePitch="240" w:type="default"/>
+                        <w:docGrid w:charSpace="4294961151" w:linePitch="240" w:type="default"/>
                     </w:sectPr>
                 </w:body>
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
             <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -6239,8 +6194,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
@@ -6278,8 +6232,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="240"/>
@@ -6303,8 +6256,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="200"/>
@@ -6465,12 +6417,9 @@ Plain text <<<macro2>>>
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -6478,8 +6427,7 @@ Plain text <<<macro2>>>
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="NumberingSymbols" w:type="character">
@@ -6497,8 +6445,7 @@ Plain text <<<macro2>>>
                         <w:spacing w:after="120" w:before="240"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Sans"
-                            w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
+                        <w:rFonts w:ascii="Liberation Sans" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
                         <w:sz w:val="28"/>
                         <w:szCs w:val="28"/>
                     </w:rPr>
@@ -6554,8 +6501,7 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="283" w:before="0"/>
@@ -6572,8 +6518,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -6590,8 +6535,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -6607,12 +6551,9 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:fill="EEEEEE" w:val="clear"/>
                         <w:bidi w:val="false"/>
@@ -6621,9 +6562,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -6751,15 +6690,13 @@ Plain text <<<macro2>>>
                         <w:contextualSpacing/>
                     </w:pPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
             <w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:abstractNum w:abstractNumId="1">
@@ -7128,18 +7065,13 @@ Plain text <<<macro2>>>
             </w:numbering>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.custom-properties+xml" pkg:name="/docProps/custom.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.custom-properties+xml" pkg:name="/docProps/custom.xml">
         <pkg:xmlData>
             <prop:Properties xmlns:prop="http://schemas.openxmlformats.org/officeDocument/2006/custom-properties">
-                <prop:property
-                    fmtid="{D5CDD505-2E9C-101B-9397-08002B2CF9AE}"
-                    name="Company" pid="2">
+                <prop:property fmtid="{D5CDD505-2E9C-101B-9397-08002B2CF9AE}" name="Company" pid="2">
                     <vt:lpwstr xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">Test Company Name</vt:lpwstr>
                 </prop:property>
-                <prop:property
-                    fmtid="{D5CDD505-2E9C-101B-9397-08002B2CF9AE}"
-                    name="File Name" pid="3">
+                <prop:property fmtid="{D5CDD505-2E9C-101B-9397-08002B2CF9AE}" name="File Name" pid="3">
                     <vt:lpwstr xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">TestFile</vt:lpwstr>
                 </prop:property>
             </prop:Properties>
@@ -7156,16 +7088,14 @@ Plain text <<<macro2>>>
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId1" Target="word/document.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"/>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId2" Target="numbering.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering"/>
@@ -7173,8 +7103,7 @@ Plain text <<<macro2>>>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
             <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:body>
@@ -7191,28 +7120,23 @@ Plain text <<<macro2>>>
                     <w:sectPr>
                         <w:type w:val="nextPage"/>
                         <w:pgSz w:code="9" w:h="16839" w:w="11907"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:pgNumType w:fmt="decimal"/>
                         <w:formProt w:val="false"/>
                         <w:textDirection w:val="lrTb"/>
-                        <w:docGrid w:charSpace="4294961151"
-                            w:linePitch="240" w:type="default"/>
+                        <w:docGrid w:charSpace="4294961151" w:linePitch="240" w:type="default"/>
                     </w:sectPr>
                 </w:body>
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
             <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -7234,8 +7158,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
@@ -7273,8 +7196,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="240"/>
@@ -7298,8 +7220,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="200"/>
@@ -7460,12 +7381,9 @@ Plain text <<<macro2>>>
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -7473,8 +7391,7 @@ Plain text <<<macro2>>>
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="NumberingSymbols" w:type="character">
@@ -7492,8 +7409,7 @@ Plain text <<<macro2>>>
                         <w:spacing w:after="120" w:before="240"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Sans"
-                            w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
+                        <w:rFonts w:ascii="Liberation Sans" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
                         <w:sz w:val="28"/>
                         <w:szCs w:val="28"/>
                     </w:rPr>
@@ -7549,8 +7465,7 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="283" w:before="0"/>
@@ -7567,8 +7482,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -7585,8 +7499,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -7602,12 +7515,9 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:fill="EEEEEE" w:val="clear"/>
                         <w:bidi w:val="false"/>
@@ -7616,9 +7526,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -7746,15 +7654,13 @@ Plain text <<<macro2>>>
                         <w:contextualSpacing/>
                     </w:pPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
             <w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:abstractNum w:abstractNumId="1">
@@ -8132,16 +8038,14 @@ Plain text <<<macro2>>>
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId1" Target="word/document.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"/>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId2" Target="numbering.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering"/>
@@ -8149,8 +8053,7 @@ Plain text <<<macro2>>>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
             <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:body>
@@ -8166,30 +8069,24 @@ Plain text <<<macro2>>>
                     </w:p>
                     <w:sectPr>
                         <w:type w:val="nextPage"/>
-                        <w:pgSz w:code="9" w:h="11907"
-                            w:orient="landscape" w:w="16839"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgSz w:code="9" w:h="11907" w:orient="landscape" w:w="16839"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:pgNumType w:fmt="decimal"/>
                         <w:formProt w:val="false"/>
                         <w:textDirection w:val="lrTb"/>
-                        <w:docGrid w:charSpace="4294961151"
-                            w:linePitch="240" w:type="default"/>
+                        <w:docGrid w:charSpace="4294961151" w:linePitch="240" w:type="default"/>
                     </w:sectPr>
                 </w:body>
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
             <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -8211,8 +8108,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
@@ -8250,8 +8146,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="240"/>
@@ -8275,8 +8170,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="200"/>
@@ -8437,12 +8331,9 @@ Plain text <<<macro2>>>
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -8450,8 +8341,7 @@ Plain text <<<macro2>>>
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="NumberingSymbols" w:type="character">
@@ -8469,8 +8359,7 @@ Plain text <<<macro2>>>
                         <w:spacing w:after="120" w:before="240"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Sans"
-                            w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
+                        <w:rFonts w:ascii="Liberation Sans" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
                         <w:sz w:val="28"/>
                         <w:szCs w:val="28"/>
                     </w:rPr>
@@ -8526,8 +8415,7 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="283" w:before="0"/>
@@ -8544,8 +8432,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -8562,8 +8449,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -8579,12 +8465,9 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:fill="EEEEEE" w:val="clear"/>
                         <w:bidi w:val="false"/>
@@ -8593,9 +8476,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -8723,15 +8604,13 @@ Plain text <<<macro2>>>
                         <w:contextualSpacing/>
                     </w:pPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
             <w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:abstractNum w:abstractNumId="1">
@@ -9109,16 +8988,14 @@ Plain text <<<macro2>>>
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId1" Target="word/document.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"/>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId2" Target="numbering.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering"/>
@@ -9126,8 +9003,7 @@ Plain text <<<macro2>>>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
             <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:body>
@@ -9144,28 +9020,23 @@ Plain text <<<macro2>>>
                     <w:sectPr>
                         <w:type w:val="nextPage"/>
                         <w:pgSz w:code="1" w:h="15840" w:w="12240"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:pgNumType w:fmt="decimal"/>
                         <w:formProt w:val="false"/>
                         <w:textDirection w:val="lrTb"/>
-                        <w:docGrid w:charSpace="4294961151"
-                            w:linePitch="240" w:type="default"/>
+                        <w:docGrid w:charSpace="4294961151" w:linePitch="240" w:type="default"/>
                     </w:sectPr>
                 </w:body>
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
             <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -9187,8 +9058,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
@@ -9226,8 +9096,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="240"/>
@@ -9251,8 +9120,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="200"/>
@@ -9413,12 +9281,9 @@ Plain text <<<macro2>>>
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -9426,8 +9291,7 @@ Plain text <<<macro2>>>
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="NumberingSymbols" w:type="character">
@@ -9445,8 +9309,7 @@ Plain text <<<macro2>>>
                         <w:spacing w:after="120" w:before="240"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Sans"
-                            w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
+                        <w:rFonts w:ascii="Liberation Sans" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
                         <w:sz w:val="28"/>
                         <w:szCs w:val="28"/>
                     </w:rPr>
@@ -9502,8 +9365,7 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="283" w:before="0"/>
@@ -9520,8 +9382,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -9538,8 +9399,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -9555,12 +9415,9 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:fill="EEEEEE" w:val="clear"/>
                         <w:bidi w:val="false"/>
@@ -9569,9 +9426,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -9699,15 +9554,13 @@ Plain text <<<macro2>>>
                         <w:contextualSpacing/>
                     </w:pPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
             <w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:abstractNum w:abstractNumId="1">
@@ -10085,16 +9938,14 @@ Plain text <<<macro2>>>
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId1" Target="word/document.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"/>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId2" Target="numbering.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering"/>
@@ -10102,8 +9953,7 @@ Plain text <<<macro2>>>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
             <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:body>
@@ -10119,30 +9969,24 @@ Plain text <<<macro2>>>
                     </w:p>
                     <w:sectPr>
                         <w:type w:val="nextPage"/>
-                        <w:pgSz w:code="1" w:h="12240"
-                            w:orient="landscape" w:w="15840"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgSz w:code="1" w:h="12240" w:orient="landscape" w:w="15840"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:pgNumType w:fmt="decimal"/>
                         <w:formProt w:val="false"/>
                         <w:textDirection w:val="lrTb"/>
-                        <w:docGrid w:charSpace="4294961151"
-                            w:linePitch="240" w:type="default"/>
+                        <w:docGrid w:charSpace="4294961151" w:linePitch="240" w:type="default"/>
                     </w:sectPr>
                 </w:body>
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
             <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -10164,8 +10008,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
@@ -10203,8 +10046,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="240"/>
@@ -10228,8 +10070,7 @@ Plain text <<<macro2>>>
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="200"/>
@@ -10390,12 +10231,9 @@ Plain text <<<macro2>>>
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -10403,8 +10241,7 @@ Plain text <<<macro2>>>
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="NumberingSymbols" w:type="character">
@@ -10422,8 +10259,7 @@ Plain text <<<macro2>>>
                         <w:spacing w:after="120" w:before="240"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Sans"
-                            w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
+                        <w:rFonts w:ascii="Liberation Sans" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
                         <w:sz w:val="28"/>
                         <w:szCs w:val="28"/>
                     </w:rPr>
@@ -10479,8 +10315,7 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="283" w:before="0"/>
@@ -10497,8 +10332,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -10515,8 +10349,7 @@ Plain text <<<macro2>>>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -10532,12 +10365,9 @@ Plain text <<<macro2>>>
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:fill="EEEEEE" w:val="clear"/>
                         <w:bidi w:val="false"/>
@@ -10546,9 +10376,7 @@ Plain text <<<macro2>>>
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -10676,15 +10504,13 @@ Plain text <<<macro2>>>
                         <w:contextualSpacing/>
                     </w:pPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
             <w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:abstractNum w:abstractNumId="1">

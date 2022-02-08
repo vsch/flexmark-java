@@ -6,7 +6,7 @@
 
 - [Release 0.60.0](#release-0600)
   - [API Refactoring](#api-refactoring)
-- [0.62.6](#0626)
+- [0.64.0](#0640)
 - [0.62.4](#0624)
 - [0.62.2](#0622)
 - [0.62.0](#0620)
@@ -177,11 +177,13 @@ Please give feedback on the upcoming changes if you have concerns about breaking
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
     * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
 
-## 0.62.6
+## 0.64.0
 
+* Break: Change minimum Java requirement to 11.
 * Fix: update OpenHtmlToPDF to 1.0.10
 * Fix: update jsoup to 1.14.3
 * Fix: update junit to 4.13.2
+* Fix: update Docx4j to 11.3.2
 * Fix: Remove deprecated `of()` sequence methods.
 * Fix: [#452, JiraConverter: Mixed lists rendered incorrectly], thanks to
   **[znerd](https://github.com/znerd)**

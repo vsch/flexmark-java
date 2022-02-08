@@ -35,6 +35,7 @@ added by specifying recognized style qualifiers, their aliases and image mapping
 Qualifiers are used to select the icon and the color of the block.
 
 <table>
+<caption>Qualifiers</caption>
 <tr><td>
 
 * abstract style

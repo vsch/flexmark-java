@@ -43,6 +43,7 @@
       <element id="module-output" name="flexmark-html2md-converter" />
       <element id="module-output" name="flexmark-test-util" />
       <element id="library" level="project" name="org.jsoup:jsoup:1.14.3" />
+      <element id="module-output" name="flexmark-ext-resizable-image" />
     </root>
   </artifact>
 </component>

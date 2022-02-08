@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.62.6</version>
+        <version>0.64.0</version>
     </parent>
 
     <artifactId>flexmark-pdf-converter</artifactId>
@@ -60,19 +60,5 @@
             <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
             <version>${openhtml.jsoup.version}</version>
         </dependency>
-        <!--
-                <dependency>
-                    &lt;!&ndash; Optional, leave out if you do not need logging via slf4j. &ndash;&gt;
-                    <groupId>com.openhtmltopdf</groupId>
-                    <artifactId>openhtmltopdf-slf4j</artifactId>
-                    <version>${openhtml.version}</version>
-                </dependency>
-                <dependency>
-                    &lt;!&ndash; Optional, leave out if you do not need logging via log4j. &ndash;&gt;
-                    <groupId>com.openhtmltopdf</groupId>
-                    <artifactId>openhtmltopdf-log4j</artifactId>
-                    <version>${openhtml.version}</version>
-                </dependency>
-        -->
     </dependencies>
 </project>

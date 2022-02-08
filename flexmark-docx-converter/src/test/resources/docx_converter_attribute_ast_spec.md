@@ -369,8 +369,7 @@ Document[0, 57]
         </w:r>
         <w:r>
             <w:rPr>
-                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
-                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                 <w:color w:val="FF0000"/>
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
@@ -404,8 +403,7 @@ Document[0, 57]
         </w:r>
         <w:r>
             <w:rPr>
-                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
-                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                 <w:color w:val="FF0000"/>
                 <w:highlight w:val="white"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
@@ -670,7 +668,7 @@ permutations of formatting
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t>&#x1d6d1;</w:t>
+            <w:t>𝛑</w:t>
         </w:r>
         <w:r>
             <w:rPr>
@@ -1048,8 +1046,7 @@ plain `inline code`{style="color:blue"} highlight text
         </w:r>
         <w:r>
             <w:rPr>
-                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
-                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                 <w:color w:val="0000FF"/>
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
@@ -1080,8 +1077,7 @@ plain `inline code`{style="color:blue"} highlight text
         </w:r>
         <w:r>
             <w:rPr>
-                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
-                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                 <w:color w:val="0000FF"/>
                 <w:highlight w:val="white"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
@@ -1223,7 +1219,7 @@ plain **Bold ~~Bold-strike-through~~**{style="color:blue"} text
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t>&#x1d6d1;</w:t>
+            <w:t>𝛑</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> = -1</w:t>
@@ -1649,8 +1645,7 @@ Document[0, 77]
         </w:r>
         <w:r>
             <w:rPr>
-                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
-                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                 <w:color w:val="0000FF"/>
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
@@ -1684,8 +1679,7 @@ Document[0, 77]
         </w:r>
         <w:r>
             <w:rPr>
-                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
-                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                 <w:color w:val="0000FF"/>
                 <w:highlight w:val="white"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
@@ -1862,7 +1856,7 @@ permutations of formatting
                 <w:rStyle w:val="Superscript"/>
                 <w:color w:val="FF0000"/>
             </w:rPr>
-            <w:t>&#x1d6d1;</w:t>
+            <w:t>𝛑</w:t>
         </w:r>
         <w:r>
             <w:rPr>
