@@ -208,6 +208,11 @@ public class Parser implements IParse {
     final public static DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS = new DataKey<>("HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS", false);
 
     /**
+     * Name spaces are allowed in HTML elements, default false for backward compatibility
+     */
+    final public static DataKey<Boolean> HTML_ALLOW_NAME_SPACE = new DataKey<>("HTML_ALLOW_NAME_SPACE", false);
+
+    /**
      * Used by formatter for translation parsing
      */
     final public static DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN = SharedDataKeys.TRANSLATION_HTML_BLOCK_TAG_PATTERN;

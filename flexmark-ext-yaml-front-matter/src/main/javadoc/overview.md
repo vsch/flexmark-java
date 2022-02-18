@@ -1,3 +1,3 @@
 **Extension for YAML front matter**
 
-See {@link com.vladsch.flexmark.ext.front.matter.YamlFrontMatterExtension}
+See {@link com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension}

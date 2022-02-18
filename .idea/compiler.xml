@@ -21,105 +21,56 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="flexmark-ext-gfm-tasklist" />
-        <module name="flexmark-profile-pegdown" />
-        <module name="flexmark-ext-spec-example" />
-        <module name="flexmark-ext-xwiki-macros" />
-        <module name="flexmark-util" />
-        <module name="flexmark-ext-media-tags" />
-        <module name="flexmark-ext-resizable-image" />
-        <module name="flexmark-docx-converter" />
-        <module name="flexmark-jira-converter" />
-        <module name="flexmark-ext-youtube-embedded" />
-        <module name="flexmark-ext-autolink" />
-        <module name="flexmark-ext-gfm-users" />
-        <module name="flexmark-ext-macros" />
-        <module name="flexmark-ext-jekyll-tag" />
-        <module name="flexmark-integration-test" />
-        <module name="flexmark-ext-admonition" />
-        <module name="flexmark-ext-enumerated-reference" />
-        <module name="flexmark-ext-superscript" />
-        <module name="flexmark-ext-aside" />
-        <module name="flexmark-ext-emoji" />
-        <module name="flexmark-ext-gfm-strikethrough" />
-        <module name="flexmark-ext-wikilink" />
-        <module name="flexmark-ext-definition" />
-        <module name="flexmark-ext-ins" />
-        <module name="flexmark-ext-zzzzzz" />
         <module name="flexmark-ext-abbreviation" />
-        <module name="flexmark-test-suite" />
-        <module name="flexmark-all" />
-        <module name="flexmark-test-util" />
-        <module name="flexmark-html2md-converter" />
-        <module name="flexmark-ext-toc" />
-        <module name="flexmark-pdf-converter" />
-        <module name="flexmark-youtrack-converter" />
-        <module name="flexmark-core-test" />
-        <module name="flexmark-test-specs" />
-        <module name="flexmark-ext-typographic" />
-        <module name="flexmark-tree-iteration" />
-        <module name="flexmark-ext-escaped-character" />
-        <module name="flexmark-ext-yaml-front-matter" />
-        <module name="flexmark-ext-jekyll-front-matter" />
-        <module name="flexmark-ext-gfm-issues" />
+        <module name="flexmark-ext-resizable-image" />
         <module name="flexmark-ext-attributes" />
-        <module name="flexmark-ext-anchorlink" />
-        <module name="flexmark-ext-gitlab" />
         <module name="flexmark" />
+        <module name="flexmark-ext-toc" />
+        <module name="flexmark-integration-test" />
+        <module name="flexmark-ext-jekyll-front-matter" />
+        <module name="flexmark-ext-gfm-tasklist" />
+        <module name="flexmark-test-suite" />
+        <module name="flexmark-ext-admonition" />
+        <module name="flexmark-ext-zzzzzz" />
+        <module name="flexmark-ext-macros" />
+        <module name="flexmark-ext-aside" />
+        <module name="flexmark-ext-media-tags" />
+        <module name="flexmark-ext-yaml-front-matter" />
+        <module name="flexmark-ext-gfm-users" />
+        <module name="flexmark-ext-emoji" />
+        <module name="flexmark-ext-xwiki-macros" />
+        <module name="flexmark-test-util" />
+        <module name="flexmark-jira-converter" />
+        <module name="flexmark-ext-wikilink" />
+        <module name="flexmark-ext-typographic" />
         <module name="flexmark-ext-tables" />
+        <module name="flexmark-ext-jekyll-tag" />
+        <module name="flexmark-ext-ins" />
+        <module name="flexmark-ext-superscript" />
+        <module name="flexmark-ext-spec-example" />
+        <module name="flexmark-html2md-converter" />
+        <module name="flexmark-ext-gitlab" />
+        <module name="flexmark-ext-definition" />
+        <module name="flexmark-test-specs" />
+        <module name="flexmark-ext-gfm-issues" />
+        <module name="flexmark-ext-enumerated-reference" />
+        <module name="flexmark-tree-iteration" />
+        <module name="flexmark-core-test" />
+        <module name="flexmark-profile-pegdown" />
+        <module name="flexmark-pdf-converter" />
+        <module name="flexmark-ext-escaped-character" />
+        <module name="flexmark-ext-gfm-strikethrough" />
+        <module name="flexmark-all" />
+        <module name="flexmark-docx-converter" />
+        <module name="flexmark-util" />
         <module name="flexmark-ext-footnotes" />
+        <module name="flexmark-ext-autolink" />
+        <module name="flexmark-ext-youtube-embedded" />
+        <module name="flexmark-ext-anchorlink" />
+        <module name="flexmark-youtrack-converter" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
-      <module name="flexmark" target="8" />
-      <module name="flexmark-all" target="8" />
-      <module name="flexmark-core-test" target="8" />
-      <module name="flexmark-docx-converter" target="8" />
-      <module name="flexmark-ext-abbreviation" target="8" />
-      <module name="flexmark-ext-admonition" target="8" />
-      <module name="flexmark-ext-anchorlink" target="8" />
-      <module name="flexmark-ext-aside" target="8" />
-      <module name="flexmark-ext-attributes" target="8" />
-      <module name="flexmark-ext-autolink" target="8" />
-      <module name="flexmark-ext-definition" target="8" />
-      <module name="flexmark-ext-emoji" target="8" />
-      <module name="flexmark-ext-enumerated-reference" target="8" />
-      <module name="flexmark-ext-escaped-character" target="8" />
-      <module name="flexmark-ext-footnotes" target="8" />
-      <module name="flexmark-ext-gfm-issues" target="8" />
-      <module name="flexmark-ext-gfm-strikethrough" target="8" />
-      <module name="flexmark-ext-gfm-tasklist" target="8" />
-      <module name="flexmark-ext-gfm-users" target="8" />
-      <module name="flexmark-ext-gitlab" target="8" />
-      <module name="flexmark-ext-ins" target="8" />
-      <module name="flexmark-ext-jekyll-front-matter" target="8" />
-      <module name="flexmark-ext-jekyll-tag" target="8" />
-      <module name="flexmark-ext-macros" target="8" />
-      <module name="flexmark-ext-media-tags" target="8" />
-      <module name="flexmark-ext-resizable-image" target="8" />
-      <module name="flexmark-ext-spec-example" target="8" />
-      <module name="flexmark-ext-superscript" target="8" />
-      <module name="flexmark-ext-tables" target="8" />
-      <module name="flexmark-ext-toc" target="8" />
-      <module name="flexmark-ext-typographic" target="8" />
-      <module name="flexmark-ext-wikilink" target="8" />
-      <module name="flexmark-ext-xwiki-macros" target="8" />
-      <module name="flexmark-ext-yaml-front-matter" target="8" />
-      <module name="flexmark-ext-youtube-embedded" target="8" />
-      <module name="flexmark-ext-zzzzzz" target="8" />
-      <module name="flexmark-html2md-converter" target="8" />
-      <module name="flexmark-integration-test" target="8" />
-      <module name="flexmark-java" target="8" />
-      <module name="flexmark-jira-converter" target="8" />
-      <module name="flexmark-pdf-converter" target="8" />
-      <module name="flexmark-profile-pegdown" target="8" />
-      <module name="flexmark-test-specs" target="8" />
-      <module name="flexmark-test-util" target="8" />
-      <module name="flexmark-tree-iteration" target="8" />
-      <module name="flexmark-util" target="8" />
-      <module name="flexmark-youtrack-converter" target="8" />
-      <module name="Samples" target="8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11" />
   </component>
   <component name="JavacSettings">
     <option name="PREFER_TARGET_JDK_COMPILER" value="false" />

@@ -621,19 +621,17 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     }
 
     /**
-     * Returns <tt>true</tt> if this set contains no elements.
-     *
-     * @return <tt>true</tt> if this set contains no elements
+     * @return true if this set contains no elements
      */
     public boolean isEmpty() {
         return elements == 0;
     }
 
     /**
-     * Returns <tt>true</tt> if this set contains the specified element.
+     * Returns true if this set contains the specified element.
      *
      * @param e element to be checked for containment in this collection
-     * @return <tt>true</tt> if this set contains the specified element
+     * @return true if this set contains the specified element
      */
     public boolean contains(Object e) {
         if (e == null)
@@ -651,8 +649,8 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * Adds the specified element to this set if it is not already present.
      *
      * @param e element to be added to this set
-     * @return <tt>true</tt> if the set changed as a result of the call
-     * @throws NullPointerException if <tt>e</tt> is null
+     * @return true if the set changed as a result of the call
+     * @throws NullPointerException if e is null
      */
     public boolean add(E e) {
         typeCheck(e);
@@ -666,7 +664,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * Removes the specified element from this set if it is present.
      *
      * @param e element to be removed from this set, if present
-     * @return <tt>true</tt> if the set contained the specified element
+     * @return true if the set contained the specified element
      */
     public boolean remove(Object e) {
         if (e == null)
@@ -683,11 +681,11 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
     // Bulk Operations
 
     /**
-     * Returns <tt>true</tt> if this set contains all of the elements
+     * Returns true if this set contains all of the elements
      * in the specified collection.
      *
      * @param c collection to be checked for containment in this set
-     * @return <tt>true</tt> if this set contains all of the elements
+     * @return true if this set contains all of the elements
      *         in the specified collection
      * @throws NullPointerException if the specified collection is null
      */
@@ -706,7 +704,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * Adds all of the elements in the specified collection to this set.
      *
      * @param c collection whose elements are to be added to this set
-     * @return <tt>true</tt> if this set changed as a result of the call
+     * @return true if this set changed as a result of the call
      * @throws NullPointerException if the specified collection or any
      *                              of its elements are null
      */
@@ -733,7 +731,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * the specified collection.
      *
      * @param c elements to be removed from this set
-     * @return <tt>true</tt> if this set changed as a result of the call
+     * @return true if this set changed as a result of the call
      * @throws NullPointerException if the specified collection is null
      */
     public boolean removeAll(Collection<?> c) {
@@ -754,7 +752,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * specified collection.
      *
      * @param c elements to be retained in this set
-     * @return <tt>true</tt> if this set changed as a result of the call
+     * @return true if this set changed as a result of the call
      * @throws NullPointerException if the specified collection is null
      */
     public boolean retainAll(Collection<?> c) {
@@ -870,12 +868,12 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
 
     /**
      * Compares the specified object with this set for equality.  Returns
-     * <tt>true</tt> if the given object is also a set, the two sets have
+     * true if the given object is also a set, the two sets have
      * the same size, and every member of the given set is contained in
      * this set.
      *
      * @param o object to be compared for equality with this set
-     * @return <tt>true</tt> if the specified object is equal to this set
+     * @return true if the specified object is equal to this set
      */
     public boolean equals(Object o) {
         if (!(o instanceof BitFieldSet))
@@ -894,7 +892,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param elementType the class object of the element type for this enum
      *                    set
      * @return An empty enum set of the specified type.
-     * @throws NullPointerException if <tt>elementType</tt> is null
+     * @throws NullPointerException if elementType is null
      */
     public static <E extends Enum<E>> BitFieldSet<E> noneOf(Class<E> elementType) {
         if (!elementType.isEnum())
@@ -1053,7 +1051,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param elementType the class object of the element type for this enum
      *                    set
      * @return An enum set containing all the elements in the specified type.
-     * @throws NullPointerException if <tt>elementType</tt> is null
+     * @throws NullPointerException if elementType is null
      */
     public static <E extends Enum<E>> BitFieldSet<E> allOf(Class<E> elementType) {
         BitFieldSet<E> result = noneOf(elementType);
@@ -1068,7 +1066,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param <E> The class of the elements in the set
      * @param s   the enum set from which to initialize this enum set
      * @return A copy of the specified enum set.
-     * @throws NullPointerException if <tt>s</tt> is null
+     * @throws NullPointerException if s is null
      */
     public static <E extends Enum<E>> BitFieldSet<E> copyOf(BitFieldSet<E> s) {
         return s.clone();
@@ -1076,7 +1074,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
 
     /**
      * Creates an enum set initialized from the specified collection.  If
-     * the specified collection is an <tt>BitFieldSet</tt> instance, this static
+     * the specified collection is an BitFieldSet instance, this static
      * factory method behaves identically to {@link #copyOf(BitFieldSet)}.
      * Otherwise, the specified collection must contain at least one element
      * (in order to determine the new enum set's element type).
@@ -1084,9 +1082,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param <E> The class of the elements in the collection
      * @param c   the collection from which to initialize this enum set
      * @return An enum set initialized from the given collection.
-     * @throws IllegalArgumentException if <tt>c</tt> is not an
-     *                                  <tt>BitFieldSet</tt> instance and contains no elements
-     * @throws NullPointerException     if <tt>c</tt> is null
+     * @throws IllegalArgumentException if c is not an
+     *                                  BitFieldSet instance and contains no elements
+     * @throws NullPointerException     if c is null
      */
     public static <E extends Enum<E>> BitFieldSet<E> copyOf(Collection<E> c) {
         if (c instanceof BitFieldSet) {
@@ -1110,7 +1108,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param <E> The class of the elements in the enum set
      * @param s   the enum set from whose complement to initialize this enum set
      * @return The complement of the specified set in this set
-     * @throws NullPointerException if <tt>s</tt> is null
+     * @throws NullPointerException if s is null
      */
     public static <E extends Enum<E>> BitFieldSet<E> complementOf(BitFieldSet<E> s) {
         BitFieldSet<E> result = copyOf(s);
@@ -1130,7 +1128,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param <E> The class of the specified element and of the set
      * @param e   the element that this set is to contain initially
      * @return an enum set initially containing the specified element
-     * @throws NullPointerException if <tt>e</tt> is null
+     * @throws NullPointerException if e is null
      */
     public static <E extends Enum<E>> BitFieldSet<E> of(E e) {
         BitFieldSet<E> result = noneOf(e.getDeclaringClass());
@@ -1253,7 +1251,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param rest  the remaining elements the set is to contain initially
      * @return an enum set initially containing the specified elements
      * @throws NullPointerException if any of the specified elements are null,
-     *                              or if <tt>rest</tt> is null
+     *                              or if rest is null
      */
     @SafeVarargs
     public static <E extends Enum<E>> BitFieldSet<E> of(E first, E... rest) {
@@ -1275,7 +1273,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param rest the remaining elements the set is to contain initially
      * @return an enum set initially containing the specified elements
      * @throws NullPointerException if any of the specified elements are null,
-     *                              or if <tt>rest</tt> is null
+     *                              or if rest is null
      */
     public static <E extends Enum<E>> BitFieldSet<E> of(@NotNull Class<E> declaringClass, E[] rest) {
         BitFieldSet<E> result = noneOf(declaringClass);

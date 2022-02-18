@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="com.openhtmltopdf:openhtmltopdf-pdfbox" type="repository">
-    <properties maven-id="com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.0" />
+    <properties maven-id="com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.10" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-pdfbox-1.0.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/pdfbox-2.0.16.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/fontbox-2.0.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-pdfbox-1.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/pdfbox-2.0.24.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/fontbox-2.0.24.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/xmpbox-2.0.16.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-core-1.0.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/graphics2d-0.24.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xmpbox-2.0.24.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-core-1.0.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/graphics2d-0.32.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -76,7 +76,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
                             Pattern.compile("\\]\\]>")
                     },
                     {
-                            Pattern.compile("^</?(?:" + blockTags + ")(?:\\s|[/]?[>]|$)", Pattern.CASE_INSENSITIVE),
+                            Pattern.compile("^</?(?:" + Parsing.XML_NAMESPACE + "(?:" + blockTags + "))(?:\\s|[/]?[>]|$)", Pattern.CASE_INSENSITIVE),
                             null // terminated by blank line
                     },
                     {

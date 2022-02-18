@@ -292,8 +292,7 @@ plain `inline code` highlight text
         </w:r>
         <w:r>
             <w:rPr>
-                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
-                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                 <w:color w:val="BB002F"/>
                 <w:highlight w:val="yellow"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
@@ -321,8 +320,7 @@ plain `inline code` highlight text
         </w:r>
         <w:r>
             <w:rPr>
-                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
-                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                 <w:color w:val="BB002F"/>
                 <w:highlight w:val="white"/>
                 <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
@@ -453,7 +451,7 @@ plain **Bold ~~Bold-strike-through~~** text
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
             </w:rPr>
-            <w:t>&#x1d6d1;</w:t>
+            <w:t>𝛑</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> = -1</w:t>
@@ -1117,27 +1115,23 @@ with some text
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId1" Target="word/document.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"/>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
-                <rel:Relationship Id="rId3" Target="http://example.com"
-                    TargetMode="External" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"/>
+                <rel:Relationship Id="rId3" Target="http://example.com" TargetMode="External" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"/>
                 <rel:Relationship Id="rId2" Target="numbering.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering"/>
                 <rel:Relationship Id="rId1" Target="styles.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"/>
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
             <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:body>
@@ -1157,28 +1151,23 @@ with some text
                     <w:sectPr>
                         <w:type w:val="nextPage"/>
                         <w:pgSz w:h="15840" w:w="12240"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:pgNumType w:fmt="decimal"/>
                         <w:formProt w:val="false"/>
                         <w:textDirection w:val="lrTb"/>
-                        <w:docGrid w:charSpace="4294961151"
-                            w:linePitch="240" w:type="default"/>
+                        <w:docGrid w:charSpace="4294961151" w:linePitch="240" w:type="default"/>
                     </w:sectPr>
                 </w:body>
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
             <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -1200,8 +1189,7 @@ with some text
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
@@ -1239,8 +1227,7 @@ with some text
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="240"/>
@@ -1264,8 +1251,7 @@ with some text
                             <w:numId w:val="1"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="120" w:before="200"/>
@@ -1426,12 +1412,9 @@ with some text
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -1439,8 +1422,7 @@ with some text
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="NumberingSymbols" w:type="character">
@@ -1458,8 +1440,7 @@ with some text
                         <w:spacing w:after="120" w:before="240"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Liberation Sans"
-                            w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
+                        <w:rFonts w:ascii="Liberation Sans" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Sans"/>
                         <w:sz w:val="28"/>
                         <w:szCs w:val="28"/>
                     </w:rPr>
@@ -1515,8 +1496,7 @@ with some text
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="283" w:before="0"/>
@@ -1533,8 +1513,7 @@ with some text
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -1551,8 +1530,7 @@ with some text
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
                         <w:spacing w:after="140" w:before="140"/>
@@ -1568,12 +1546,9 @@ with some text
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:fill="EEEEEE" w:val="clear"/>
                         <w:bidi w:val="false"/>
@@ -1582,9 +1557,7 @@ with some text
                         <w:jc w:val="left"/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -1712,15 +1685,13 @@ with some text
                         <w:contextualSpacing/>
                     </w:pPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
             <w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:abstractNum w:abstractNumId="1">
@@ -2392,8 +2363,7 @@ with some text
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="609600" cy="609600"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="flexmark-icon-logo@2x.png"
-                        id="100000" name="Image100000"/>
+                    <wp:docPr descr="flexmark-icon-logo@2x.png" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2407,16 +2377,16 @@ with some text
                                 <pic:blipFill>
                                     <a:blip r:embed="rId3" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/>
                                     <a:stretch>
-                                    <a:fillRect/>
+                                        <a:fillRect/>
                                     </a:stretch>
                                 </pic:blipFill>
                                 <pic:spPr>
                                     <a:xfrm>
-                                    <a:off x="0" y="0"/>
-                                    <a:ext cx="609600" cy="609600"/>
+                                        <a:off x="0" y="0"/>
+                                        <a:ext cx="609600" cy="609600"/>
                                     </a:xfrm>
                                     <a:prstGeom prst="rect">
-                                    <a:avLst/>
+                                        <a:avLst/>
                                     </a:prstGeom>
                                 </pic:spPr>
                             </pic:pic>
@@ -6172,8 +6142,7 @@ Block Quote
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:left="240" w:right="0"/>
         </w:pPr>
@@ -6215,8 +6184,7 @@ Nested Block Quote
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:left="240" w:right="0"/>
         </w:pPr>
@@ -6293,8 +6261,7 @@ All the fixings
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -6727,8 +6694,7 @@ With breaks
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -6969,8 +6935,7 @@ With breaks and caption before
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -7193,8 +7158,7 @@ With spanning columns
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -7308,8 +7272,7 @@ With spanning columns turned off
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -7428,8 +7391,7 @@ With embedded links
                 <w:bottom w:type="dxa" w:w="80"/>
                 <w:right w:type="dxa" w:w="80"/>
             </w:tblCellMar>
-            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0"
-                w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
+            <w:tblLook w:firstColumn="1" w:firstRow="1" w:lastColumn="0" w:lastRow="0" w:noHBand="0" w:noVBand="1" w:val="04a0"/>
         </w:tblPr>
         <w:tr>
             <w:trPr>
@@ -7543,8 +7505,7 @@ block quote with bullet list
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -7563,8 +7524,7 @@ block quote with bullet list
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -7617,8 +7577,7 @@ block quote with bullet nested list
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -7637,8 +7596,7 @@ block quote with bullet nested list
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="20" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="20" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="687" w:right="0"/>
         </w:pPr>
@@ -7694,8 +7652,7 @@ block quote with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -7714,8 +7671,7 @@ block quote with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="20" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="20" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="687" w:right="0"/>
         </w:pPr>
@@ -7734,8 +7690,7 @@ block quote with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="907" w:right="0"/>
         </w:pPr>
@@ -7754,8 +7709,7 @@ block quote with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="1147" w:right="0"/>
         </w:pPr>
@@ -7774,8 +7728,7 @@ block quote with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="1367" w:right="0"/>
         </w:pPr>
@@ -8644,8 +8597,7 @@ aside block with bullet list
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -8661,8 +8613,7 @@ aside block with bullet list
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -8712,8 +8663,7 @@ aside block with bullet nested list
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -8729,8 +8679,7 @@ aside block with bullet nested list
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="20" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="20" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="687" w:right="0"/>
         </w:pPr>
@@ -8783,8 +8732,7 @@ aside block with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="9" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="9" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="467" w:right="0"/>
         </w:pPr>
@@ -8800,8 +8748,7 @@ aside block with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="20" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="20" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="687" w:right="0"/>
         </w:pPr>
@@ -8817,8 +8764,7 @@ aside block with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="907" w:right="0"/>
         </w:pPr>
@@ -8834,8 +8780,7 @@ aside block with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="1147" w:right="0"/>
         </w:pPr>
@@ -8851,8 +8796,7 @@ aside block with bullet list nested beyond border space limit
                 <w:numId w:val="2"/>
             </w:numPr>
             <w:pBdr>
-                <w:left w:color="3366FF" w:frame="true" w:shadow="true"
-                    w:space="31" w:sz="16" w:val="single"/>
+                <w:left w:color="3366FF" w:frame="true" w:shadow="true" w:space="31" w:sz="16" w:val="single"/>
             </w:pBdr>
             <w:ind w:hanging="227" w:left="1367" w:right="0"/>
         </w:pPr>

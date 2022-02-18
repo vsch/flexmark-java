@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.parser.internal;
 
+import com.vladsch.flexmark.ast.util.Parsing;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,8 +11,8 @@ public class HtmlDeepParser {
         NONE(null, null, false),
         SCRIPT("<(script)(?:\\s|>|$)", "</script>", true),
         STYLE("<(style)(?:\\s|>|$)", "</style>", true),
-        OPEN_TAG("<([A-Za-z][A-Za-z0-9-]*)", "<|/>|\\s/>|>", true),
-        CLOSE_TAG("</([A-Za-z][A-Za-z0-9-]*)>", null, true),
+        OPEN_TAG("<((?:" + Parsing.XML_NAMESPACE + ")[A-Za-z][A-Za-z0-9-]*" + ")", "<|/>|\\s/>|>", true),
+        CLOSE_TAG("</((?:" + Parsing.XML_NAMESPACE + ")[A-Za-z][A-Za-z0-9-]*" + ")>", null, true),
         NON_TAG("<(![A-Z])", ">", false),
         TEMPLATE("<([?])", "\\?>", false),
         COMMENT("<(!--)", "-->", false),
@@ -81,6 +83,7 @@ public class HtmlDeepParser {
         for (HtmlMatch state : HtmlMatch.values()) {
             if (state != HtmlMatch.NONE) {
                 if (startPattern.length() != 0) startPattern.append("|");
+
                 if (state.caseInsentive) {
                     startPattern.append("(?i:");
                     startPattern.append(state.open.pattern());
@@ -88,6 +91,7 @@ public class HtmlDeepParser {
                 } else {
                     startPattern.append(state.open.pattern());
                 }
+
                 PATTERN_MAP[index] = state;
             }
             index++;
@@ -247,6 +251,14 @@ public class HtmlDeepParser {
 
                     String group = matcher.group(i).toLowerCase();
                     HtmlMatch htmlMatch = PATTERN_MAP[i];
+
+                    int pos = group.indexOf(':');
+
+                    if (pos >= 0) {
+                        // strip out the namespace
+                        group = group.substring(pos + 1);
+                    }
+
                     boolean isBlockTag = myBlockTags.contains(group);
 
                     if ((blockTagsOnly || !parseNonBlock) && matcher.start() > 0) {

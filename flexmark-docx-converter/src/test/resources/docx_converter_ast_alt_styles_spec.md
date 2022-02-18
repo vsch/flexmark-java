@@ -27,8 +27,7 @@ All headings
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId3" Target="docProps/app.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties"/>
@@ -37,8 +36,7 @@ All headings
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId5" Target="fontTable.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable"/>
@@ -50,23 +48,17 @@ All headings
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.core-properties+xml" pkg:name="/docProps/core.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.core-properties+xml" pkg:name="/docProps/core.xml">
         <pkg:xmlData>
             <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
-                <dcterms:created
-                    xmlns:dcterms="http://purl.org/dc/terms/"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="dcterms:W3CDTF">2019-08-29T17:05:00Z</dcterms:created>
+                <dcterms:created xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="dcterms:W3CDTF">2019-08-29T17:05:00Z</dcterms:created>
                 <cp:lastModifiedBy>Vladimir Schneider</cp:lastModifiedBy>
-                <dcterms:modified
-                    xmlns:dcterms="http://purl.org/dc/terms/"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="dcterms:W3CDTF">2019-08-29T20:18:00Z</dcterms:modified>
+                <dcterms:modified xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="dcterms:W3CDTF">2019-08-29T20:18:00Z</dcterms:modified>
                 <cp:revision>6</cp:revision>
             </cp:coreProperties>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" pkg:name="/docProps/app.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" pkg:name="/docProps/app.xml">
         <pkg:xmlData>
             <properties:Properties xmlns:properties="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">
                 <properties:AppVersion>16.0000</properties:AppVersion>
@@ -88,16 +80,9 @@ All headings
             </properties:Properties>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
-            <w:document mc:Ignorable="w14 w15 w16se w16cid wp14"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">
+            <w:document mc:Ignorable="w14 w15 w16se w16cid wp14" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">
                 <w:body>
                     <w:bookmarkStart w:id="1" w:name="heading-1"/>
                     <w:bookmarkEnd w:id="1"/>
@@ -161,9 +146,7 @@ All headings
                     </w:p>
                     <w:sectPr w:rsidR="00AE6612">
                         <w:pgSz w:h="15840" w:w="12240"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:cols w:space="720"/>
                         <w:formProt w:val="false"/>
                         <w:docGrid w:charSpace="-6145" w:linePitch="240"/>
@@ -172,15 +155,9 @@ All headings
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml" pkg:name="/word/settings.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml" pkg:name="/word/settings.xml">
         <pkg:xmlData>
-            <w:settings mc:Ignorable="w14 w15 w16se w16cid"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
+            <w:settings mc:Ignorable="w14 w15 w16se w16cid" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
                 <w:zoom w:percent="81"/>
                 <w:proofState w:grammar="clean" w:spelling="clean"/>
                 <w:stylePaneFormatFilter w:val="1004"/>
@@ -188,11 +165,8 @@ All headings
                 <w:characterSpacingControl w:val="doNotCompress"/>
                 <w:compat>
                     <w:useFELayout/>
-                    <w:compatSetting w:name="compatibilityMode"
-                        w:uri="http://schemas.microsoft.com/office/word" w:val="12"/>
-                    <w:compatSetting
-                        w:name="useWord2013TrackBottomHyphenation"
-                        w:uri="http://schemas.microsoft.com/office/word" w:val="1"/>
+                    <w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="12"/>
+                    <w:compatSetting w:name="useWord2013TrackBottomHyphenation" w:uri="http://schemas.microsoft.com/office/word" w:val="1"/>
                 </w:compat>
                 <w:rsids>
                     <w:rsidRoot w:val="00127E74"/>
@@ -220,12 +194,7 @@ All headings
                     <m:naryLim m:val="undOvr"/>
                 </m:mathPr>
                 <w:themeFontLang w:eastAsia="zh-CN" w:val="en-CA"/>
-                <w:clrSchemeMapping w:accent1="accent1"
-                    w:accent2="accent2" w:accent3="accent3"
-                    w:accent4="accent4" w:accent5="accent5"
-                    w:accent6="accent6" w:bg1="light1" w:bg2="light2"
-                    w:followedHyperlink="followedHyperlink"
-                    w:hyperlink="hyperlink" w:t1="dark1" w:t2="dark2"/>
+                <w:clrSchemeMapping w:accent1="accent1" w:accent2="accent2" w:accent3="accent3" w:accent4="accent4" w:accent5="accent5" w:accent6="accent6" w:bg1="light1" w:bg2="light2" w:followedHyperlink="followedHyperlink" w:hyperlink="hyperlink" w:t1="dark1" w:t2="dark2"/>
                 <w:decimalSymbol w:val="."/>
                 <w:listSeparator w:val=","/>
                 <w14:docId w14:val="0BBC9FB3"/>
@@ -233,26 +202,18 @@ All headings
             </w:settings>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml" pkg:name="/word/webSettings.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml" pkg:name="/word/webSettings.xml">
         <pkg:xmlData>
             <w:webSettings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"/>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
-            <w:styles mc:Ignorable="w14 w15 w16se w16cid"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
+            <w:styles mc:Ignorable="w14 w15 w16se w16cid" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -264,8 +225,7 @@ All headings
                     <w:name w:val="Normal"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                     </w:rPr>
                 </w:style>
@@ -281,8 +241,7 @@ All headings
                             <w:numId w:val="21"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:outlineLvl w:val="0"/>
                     </w:pPr>
@@ -308,8 +267,7 @@ All headings
                             <w:numId w:val="21"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:spacing w:before="200"/>
                         <w:ind w:hanging="431" w:left="431"/>
@@ -419,8 +377,7 @@ All headings
                         <w:color w:val="666666"/>
                     </w:rPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                     <w:uiPriority w:val="1"/>
                     <w:semiHidden/>
@@ -523,12 +480,9 @@ All headings
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -536,12 +490,10 @@ All headings
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
-                <w:style w:customStyle="true"
-                    w:styleId="NumberingSymbols" w:type="character">
+                <w:style w:customStyle="true" w:styleId="NumberingSymbols" w:type="character">
                     <w:name w:val="Numbering Symbols"/>
                     <w:qFormat/>
                 </w:style>
@@ -573,8 +525,7 @@ All headings
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:spacing w:after="283"/>
                     </w:pPr>
@@ -589,8 +540,7 @@ All headings
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:spacing w:after="140" w:before="140"/>
                         <w:ind w:left="240"/>
@@ -605,36 +555,29 @@ All headings
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:spacing w:after="140" w:before="140"/>
                         <w:ind w:left="240"/>
                     </w:pPr>
                 </w:style>
-                <w:style w:customStyle="true"
-                    w:styleId="PreformattedText" w:type="paragraph">
+                <w:style w:customStyle="true" w:styleId="PreformattedText" w:type="paragraph">
                     <w:name w:val="Preformatted Text"/>
                     <w:basedOn w:val="Normal"/>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:color="auto" w:fill="EEEEEE" w:val="clear"/>
                         <w:spacing w:after="240" w:before="240"/>
                         <w:contextualSpacing/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -671,8 +614,7 @@ All headings
                         <w:bCs/>
                     </w:rPr>
                 </w:style>
-                <w:style w:customStyle="true"
-                    w:styleId="ParagraphTextBody" w:type="paragraph">
+                <w:style w:customStyle="true" w:styleId="ParagraphTextBody" w:type="paragraph">
                     <w:name w:val="Paragraph Text Body"/>
                     <w:basedOn w:val="BodyText"/>
                     <w:qFormat/>
@@ -760,24 +702,16 @@ All headings
                     <w:link w:val="BodyText"/>
                     <w:rsid w:val="008E3D84"/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                     </w:rPr>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
-            <w:numbering mc:Ignorable="w14 w15 w16se w16cid wp14"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">
+            <w:numbering mc:Ignorable="w14 w15 w16se w16cid wp14" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">
                 <w:abstractNum w:abstractNumId="0">
                     <w:nsid w:val="FFFFFF7C"/>
                     <w:multiLevelType w:val="singleLevel"/>
@@ -1888,8 +1822,7 @@ All headings
             </w:numbering>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml" pkg:name="/word/fontTable.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml" pkg:name="/word/fontTable.xml">
         <pkg:xmlData>
             <w:fonts xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:font w:name="Symbol">
@@ -1897,18 +1830,14 @@ All headings
                     <w:charset w:val="02"/>
                     <w:family w:val="decorative"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="80000000" w:csb1="00000000"
-                        w:usb0="00000000" w:usb1="10000000"
-                        w:usb2="00000000" w:usb3="00000000"/>
+                    <w:sig w:csb0="80000000" w:csb1="00000000" w:usb0="00000000" w:usb1="10000000" w:usb2="00000000" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Times New Roman">
                     <w:panose1 w:val="02020603050405020304"/>
                     <w:charset w:val="00"/>
                     <w:family w:val="roman"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="000001FF" w:csb1="00000000"
-                        w:usb0="E0002EFF" w:usb1="C000785B"
-                        w:usb2="00000009" w:usb3="00000000"/>
+                    <w:sig w:csb0="000001FF" w:csb1="00000000" w:usb0="E0002EFF" w:usb1="C000785B" w:usb2="00000009" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="OpenSymbol">
                     <w:altName w:val="Cambria"/>
@@ -1932,36 +1861,28 @@ All headings
                     <w:charset w:val="86"/>
                     <w:family w:val="auto"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="00040001" w:csb1="00000000"
-                        w:usb0="00000003" w:usb1="288F0000"
-                        w:usb2="00000016" w:usb3="00000000"/>
+                    <w:sig w:csb0="00040001" w:csb1="00000000" w:usb0="00000003" w:usb1="288F0000" w:usb2="00000016" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Lucida Sans">
                     <w:panose1 w:val="020B0602030504020204"/>
                     <w:charset w:val="4D"/>
                     <w:family w:val="swiss"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="00000001" w:csb1="00000000"
-                        w:usb0="00000003" w:usb1="00000000"
-                        w:usb2="00000000" w:usb3="00000000"/>
+                    <w:sig w:csb0="00000001" w:csb1="00000000" w:usb0="00000003" w:usb1="00000000" w:usb2="00000000" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Calibri">
                     <w:panose1 w:val="020F0502020204030204"/>
                     <w:charset w:val="00"/>
                     <w:family w:val="swiss"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="000001FF" w:csb1="00000000"
-                        w:usb0="E0002AFF" w:usb1="C000247B"
-                        w:usb2="00000009" w:usb3="00000000"/>
+                    <w:sig w:csb0="000001FF" w:csb1="00000000" w:usb0="E0002AFF" w:usb1="C000247B" w:usb2="00000009" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Courier New">
                     <w:panose1 w:val="02070309020205020404"/>
                     <w:charset w:val="00"/>
                     <w:family w:val="modern"/>
                     <w:pitch w:val="fixed"/>
-                    <w:sig w:csb0="000001FF" w:csb1="00000000"
-                        w:usb0="E0002AFF" w:usb1="C0007843"
-                        w:usb2="00000009" w:usb3="00000000"/>
+                    <w:sig w:csb0="000001FF" w:csb1="00000000" w:usb0="E0002AFF" w:usb1="C0007843" w:usb2="00000009" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Liberation Mono">
                     <w:altName w:val="Cambria"/>
@@ -1977,18 +1898,14 @@ All headings
                     <w:charset w:val="86"/>
                     <w:family w:val="auto"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="0004000F" w:csb1="00000000"
-                        w:usb0="A00002BF" w:usb1="38CF7CFA"
-                        w:usb2="00000016" w:usb3="00000000"/>
+                    <w:sig w:csb0="0004000F" w:csb1="00000000" w:usb0="A00002BF" w:usb1="38CF7CFA" w:usb2="00000016" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Calibri Light">
                     <w:panose1 w:val="020F0302020204030204"/>
                     <w:charset w:val="00"/>
                     <w:family w:val="swiss"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="000001FF" w:csb1="00000000"
-                        w:usb0="E0002AFF" w:usb1="C000247B"
-                        w:usb2="00000009" w:usb3="00000000"/>
+                    <w:sig w:csb0="000001FF" w:csb1="00000000" w:usb0="E0002AFF" w:usb1="C000247B" w:usb2="00000009" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="DengXian">
                     <w:altName w:val="等线"/>
@@ -1996,15 +1913,12 @@ All headings
                     <w:charset w:val="86"/>
                     <w:family w:val="auto"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="0004000F" w:csb1="00000000"
-                        w:usb0="A00002BF" w:usb1="38CF7CFA"
-                        w:usb2="00000016" w:usb3="00000000"/>
+                    <w:sig w:csb0="0004000F" w:csb1="00000000" w:usb0="A00002BF" w:usb1="38CF7CFA" w:usb2="00000016" w:usb3="00000000"/>
                 </w:font>
             </w:fonts>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.theme+xml" pkg:name="/word/theme/theme1.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.theme+xml" pkg:name="/word/theme/theme1.xml">
         <pkg:xmlData>
             <a:theme name="Office Theme" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
                 <a:themeElements>
@@ -2160,25 +2074,25 @@ All headings
                             <a:gradFill rotWithShape="true">
                                 <a:gsLst>
                                     <a:gs pos="0">
-                                    <a:schemeClr val="phClr">
-                                    <a:lumMod val="110000"/>
-                                    <a:satMod val="105000"/>
-                                    <a:tint val="67000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:lumMod val="110000"/>
+                                            <a:satMod val="105000"/>
+                                            <a:tint val="67000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="50000">
-                                    <a:schemeClr val="phClr">
-                                    <a:lumMod val="105000"/>
-                                    <a:satMod val="103000"/>
-                                    <a:tint val="73000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:lumMod val="105000"/>
+                                            <a:satMod val="103000"/>
+                                            <a:tint val="73000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="100000">
-                                    <a:schemeClr val="phClr">
-                                    <a:lumMod val="105000"/>
-                                    <a:satMod val="109000"/>
-                                    <a:tint val="81000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:lumMod val="105000"/>
+                                            <a:satMod val="109000"/>
+                                            <a:tint val="81000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                 </a:gsLst>
                                 <a:lin ang="5400000" scaled="false"/>
@@ -2186,25 +2100,25 @@ All headings
                             <a:gradFill rotWithShape="true">
                                 <a:gsLst>
                                     <a:gs pos="0">
-                                    <a:schemeClr val="phClr">
-                                    <a:satMod val="103000"/>
-                                    <a:lumMod val="102000"/>
-                                    <a:tint val="94000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:satMod val="103000"/>
+                                            <a:lumMod val="102000"/>
+                                            <a:tint val="94000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="50000">
-                                    <a:schemeClr val="phClr">
-                                    <a:satMod val="110000"/>
-                                    <a:lumMod val="100000"/>
-                                    <a:shade val="100000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:satMod val="110000"/>
+                                            <a:lumMod val="100000"/>
+                                            <a:shade val="100000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="100000">
-                                    <a:schemeClr val="phClr">
-                                    <a:lumMod val="99000"/>
-                                    <a:satMod val="120000"/>
-                                    <a:shade val="78000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:lumMod val="99000"/>
+                                            <a:satMod val="120000"/>
+                                            <a:shade val="78000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                 </a:gsLst>
                                 <a:lin ang="5400000" scaled="false"/>
@@ -2242,12 +2156,10 @@ All headings
                             </a:effectStyle>
                             <a:effectStyle>
                                 <a:effectLst>
-                                    <a:outerShdw algn="ctr"
-                                    blurRad="57150" dir="5400000"
-                                    dist="19050" rotWithShape="false">
-                                    <a:srgbClr val="000000">
-                                    <a:alpha val="63000"/>
-                                    </a:srgbClr>
+                                    <a:outerShdw algn="ctr" blurRad="57150" dir="5400000" dist="19050" rotWithShape="false">
+                                        <a:srgbClr val="000000">
+                                            <a:alpha val="63000"/>
+                                        </a:srgbClr>
                                     </a:outerShdw>
                                 </a:effectLst>
                             </a:effectStyle>
@@ -2265,26 +2177,26 @@ All headings
                             <a:gradFill rotWithShape="true">
                                 <a:gsLst>
                                     <a:gs pos="0">
-                                    <a:schemeClr val="phClr">
-                                    <a:tint val="93000"/>
-                                    <a:satMod val="150000"/>
-                                    <a:shade val="98000"/>
-                                    <a:lumMod val="102000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:tint val="93000"/>
+                                            <a:satMod val="150000"/>
+                                            <a:shade val="98000"/>
+                                            <a:lumMod val="102000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="50000">
-                                    <a:schemeClr val="phClr">
-                                    <a:tint val="98000"/>
-                                    <a:satMod val="130000"/>
-                                    <a:shade val="90000"/>
-                                    <a:lumMod val="103000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:tint val="98000"/>
+                                            <a:satMod val="130000"/>
+                                            <a:shade val="90000"/>
+                                            <a:lumMod val="103000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="100000">
-                                    <a:schemeClr val="phClr">
-                                    <a:shade val="63000"/>
-                                    <a:satMod val="120000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:shade val="63000"/>
+                                            <a:satMod val="120000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                 </a:gsLst>
                                 <a:lin ang="5400000" scaled="false"/>
@@ -2296,10 +2208,7 @@ All headings
                 <a:extraClrSchemeLst/>
                 <a:extLst>
                     <a:ext uri="{05A4C25C-085E-4340-85A3-A5531E510DB2}">
-                        <thm15:themeFamily
-                            id="{62F939B6-93AF-4DB8-9C6B-D6C7DFDC589F}"
-                            name="Office Theme"
-                            vid="{4A3C46E8-61CC-4603-A589-7422A47A8E4A}" xmlns:thm15="http://schemas.microsoft.com/office/thememl/2012/main"/>
+                        <thm15:themeFamily id="{62F939B6-93AF-4DB8-9C6B-D6C7DFDC589F}" name="Office Theme" vid="{4A3C46E8-61CC-4603-A589-7422A47A8E4A}" xmlns:thm15="http://schemas.microsoft.com/office/thememl/2012/main"/>
                     </a:ext>
                 </a:extLst>
             </a:theme>
@@ -2314,8 +2223,7 @@ All headings
 .
 <?xml version="1.0" encoding="UTF-8"?>
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/_rels/.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId3" Target="docProps/app.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties"/>
@@ -2324,8 +2232,7 @@ All headings
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.relationships+xml" pkg:name="/word/_rels/document.xml.rels">
         <pkg:xmlData>
             <rel:Relationships xmlns:rel="http://schemas.openxmlformats.org/package/2006/relationships">
                 <rel:Relationship Id="rId5" Target="fontTable.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable"/>
@@ -2337,23 +2244,17 @@ All headings
             </rel:Relationships>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-package.core-properties+xml" pkg:name="/docProps/core.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-package.core-properties+xml" pkg:name="/docProps/core.xml">
         <pkg:xmlData>
             <cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
-                <dcterms:created
-                    xmlns:dcterms="http://purl.org/dc/terms/"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="dcterms:W3CDTF">2019-08-29T17:05:00Z</dcterms:created>
+                <dcterms:created xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="dcterms:W3CDTF">2019-08-29T17:05:00Z</dcterms:created>
                 <cp:lastModifiedBy>Vladimir Schneider</cp:lastModifiedBy>
-                <dcterms:modified
-                    xmlns:dcterms="http://purl.org/dc/terms/"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="dcterms:W3CDTF">2019-08-29T20:18:00Z</dcterms:modified>
+                <dcterms:modified xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="dcterms:W3CDTF">2019-08-29T20:18:00Z</dcterms:modified>
                 <cp:revision>6</cp:revision>
             </cp:coreProperties>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" pkg:name="/docProps/app.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" pkg:name="/docProps/app.xml">
         <pkg:xmlData>
             <properties:Properties xmlns:properties="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">
                 <properties:AppVersion>16.0000</properties:AppVersion>
@@ -2375,16 +2276,9 @@ All headings
             </properties:Properties>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" pkg:name="/word/document.xml">
         <pkg:xmlData>
-            <w:document mc:Ignorable="w14 w15 w16se w16cid wp14"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">
+            <w:document mc:Ignorable="w14 w15 w16se w16cid wp14" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">
                 <w:body>
                     <w:bookmarkStart w:id="1" w:name="heading"/>
                     <w:bookmarkEnd w:id="1"/>
@@ -2398,9 +2292,7 @@ All headings
                     </w:p>
                     <w:sectPr w:rsidR="00AE6612">
                         <w:pgSz w:h="15840" w:w="12240"/>
-                        <w:pgMar w:bottom="1134" w:footer="0"
-                            w:gutter="0" w:header="0" w:left="1134"
-                            w:right="1134" w:top="1134"/>
+                        <w:pgMar w:bottom="1134" w:footer="0" w:gutter="0" w:header="0" w:left="1134" w:right="1134" w:top="1134"/>
                         <w:cols w:space="720"/>
                         <w:formProt w:val="false"/>
                         <w:docGrid w:charSpace="-6145" w:linePitch="240"/>
@@ -2409,15 +2301,9 @@ All headings
             </w:document>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml" pkg:name="/word/settings.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml" pkg:name="/word/settings.xml">
         <pkg:xmlData>
-            <w:settings mc:Ignorable="w14 w15 w16se w16cid"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
+            <w:settings mc:Ignorable="w14 w15 w16se w16cid" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
                 <w:zoom w:percent="81"/>
                 <w:proofState w:grammar="clean" w:spelling="clean"/>
                 <w:stylePaneFormatFilter w:val="1004"/>
@@ -2425,11 +2311,8 @@ All headings
                 <w:characterSpacingControl w:val="doNotCompress"/>
                 <w:compat>
                     <w:useFELayout/>
-                    <w:compatSetting w:name="compatibilityMode"
-                        w:uri="http://schemas.microsoft.com/office/word" w:val="12"/>
-                    <w:compatSetting
-                        w:name="useWord2013TrackBottomHyphenation"
-                        w:uri="http://schemas.microsoft.com/office/word" w:val="1"/>
+                    <w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="12"/>
+                    <w:compatSetting w:name="useWord2013TrackBottomHyphenation" w:uri="http://schemas.microsoft.com/office/word" w:val="1"/>
                 </w:compat>
                 <w:rsids>
                     <w:rsidRoot w:val="00127E74"/>
@@ -2457,12 +2340,7 @@ All headings
                     <m:naryLim m:val="undOvr"/>
                 </m:mathPr>
                 <w:themeFontLang w:eastAsia="zh-CN" w:val="en-CA"/>
-                <w:clrSchemeMapping w:accent1="accent1"
-                    w:accent2="accent2" w:accent3="accent3"
-                    w:accent4="accent4" w:accent5="accent5"
-                    w:accent6="accent6" w:bg1="light1" w:bg2="light2"
-                    w:followedHyperlink="followedHyperlink"
-                    w:hyperlink="hyperlink" w:t1="dark1" w:t2="dark2"/>
+                <w:clrSchemeMapping w:accent1="accent1" w:accent2="accent2" w:accent3="accent3" w:accent4="accent4" w:accent5="accent5" w:accent6="accent6" w:bg1="light1" w:bg2="light2" w:followedHyperlink="followedHyperlink" w:hyperlink="hyperlink" w:t1="dark1" w:t2="dark2"/>
                 <w:decimalSymbol w:val="."/>
                 <w:listSeparator w:val=","/>
                 <w14:docId w14:val="0BBC9FB3"/>
@@ -2470,26 +2348,18 @@ All headings
             </w:settings>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml" pkg:name="/word/webSettings.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.webSettings+xml" pkg:name="/word/webSettings.xml">
         <pkg:xmlData>
             <w:webSettings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"/>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" pkg:name="/word/styles.xml">
         <pkg:xmlData>
-            <w:styles mc:Ignorable="w14 w15 w16se w16cid"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
+            <w:styles mc:Ignorable="w14 w15 w16se w16cid" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex">
                 <w:docDefaults>
                     <w:rPrDefault>
                         <w:rPr>
-                            <w:rFonts w:ascii="Liberation Serif"
-                                w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
+                            <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
                             <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
@@ -2501,8 +2371,7 @@ All headings
                     <w:name w:val="Normal"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                     </w:rPr>
                 </w:style>
@@ -2518,8 +2387,7 @@ All headings
                             <w:numId w:val="21"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:outlineLvl w:val="0"/>
                     </w:pPr>
@@ -2545,8 +2413,7 @@ All headings
                             <w:numId w:val="21"/>
                         </w:numPr>
                         <w:pBdr>
-                            <w:bottom w:color="000001" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:bottom w:color="000001" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:spacing w:before="200"/>
                         <w:ind w:hanging="431" w:left="431"/>
@@ -2656,8 +2523,7 @@ All headings
                         <w:color w:val="666666"/>
                     </w:rPr>
                 </w:style>
-                <w:style w:default="true"
-                    w:styleId="DefaultParagraphFont" w:type="character">
+                <w:style w:default="true" w:styleId="DefaultParagraphFont" w:type="character">
                     <w:name w:val="Default Paragraph Font"/>
                     <w:uiPriority w:val="1"/>
                     <w:semiHidden/>
@@ -2760,12 +2626,9 @@ All headings
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:color w:val="BB002F"/>
-                        <w:bdr w:color="EEC5E1" w:frame="true"
-                            w:space="1" w:sz="2" w:val="single"/>
+                        <w:bdr w:color="EEC5E1" w:frame="true" w:space="1" w:sz="2" w:val="single"/>
                         <w:shd w:color="auto" w:fill="FFF8E6" w:val="clear"/>
                     </w:rPr>
                 </w:style>
@@ -2773,12 +2636,10 @@ All headings
                     <w:name w:val="Bullets"/>
                     <w:qFormat/>
                     <w:rPr>
-                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol"
-                            w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
+                        <w:rFonts w:ascii="OpenSymbol" w:cs="OpenSymbol" w:eastAsia="OpenSymbol" w:hAnsi="OpenSymbol"/>
                     </w:rPr>
                 </w:style>
-                <w:style w:customStyle="true"
-                    w:styleId="NumberingSymbols" w:type="character">
+                <w:style w:customStyle="true" w:styleId="NumberingSymbols" w:type="character">
                     <w:name w:val="Numbering Symbols"/>
                     <w:qFormat/>
                 </w:style>
@@ -2810,8 +2671,7 @@ All headings
                     <w:pPr>
                         <w:suppressLineNumbers/>
                         <w:pBdr>
-                            <w:bottom w:color="808080" w:space="0"
-                                w:sz="6" w:val="single"/>
+                            <w:bottom w:color="808080" w:space="0" w:sz="6" w:val="single"/>
                         </w:pBdr>
                         <w:spacing w:after="283"/>
                     </w:pPr>
@@ -2826,8 +2686,7 @@ All headings
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="CCCCCC" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:spacing w:after="140" w:before="140"/>
                         <w:ind w:left="240"/>
@@ -2842,36 +2701,29 @@ All headings
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
-                            <w:left w:color="3366FF" w:space="9"
-                                w:sz="16" w:val="single"/>
+                            <w:left w:color="3366FF" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:spacing w:after="140" w:before="140"/>
                         <w:ind w:left="240"/>
                     </w:pPr>
                 </w:style>
-                <w:style w:customStyle="true"
-                    w:styleId="PreformattedText" w:type="paragraph">
+                <w:style w:customStyle="true" w:styleId="PreformattedText" w:type="paragraph">
                     <w:name w:val="Preformatted Text"/>
                     <w:basedOn w:val="Normal"/>
                     <w:qFormat/>
                     <w:pPr>
                         <w:pBdr>
                             <w:top w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
-                            <w:left w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:bottom w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
-                            <w:right w:color="B2B2B2" w:space="1"
-                                w:sz="2" w:val="single"/>
+                            <w:left w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:bottom w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
+                            <w:right w:color="B2B2B2" w:space="1" w:sz="2" w:val="single"/>
                         </w:pBdr>
                         <w:shd w:color="auto" w:fill="EEEEEE" w:val="clear"/>
                         <w:spacing w:after="240" w:before="240"/>
                         <w:contextualSpacing/>
                     </w:pPr>
                     <w:rPr>
-                        <w:rFonts w:ascii="Courier New"
-                            w:cs="Liberation Mono"
-                            w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                        <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono" w:eastAsia="Courier New" w:hAnsi="Courier New"/>
                         <w:sz w:val="20"/>
                         <w:szCs w:val="20"/>
                     </w:rPr>
@@ -2908,8 +2760,7 @@ All headings
                         <w:bCs/>
                     </w:rPr>
                 </w:style>
-                <w:style w:customStyle="true"
-                    w:styleId="ParagraphTextBody" w:type="paragraph">
+                <w:style w:customStyle="true" w:styleId="ParagraphTextBody" w:type="paragraph">
                     <w:name w:val="Paragraph Text Body"/>
                     <w:basedOn w:val="BodyText"/>
                     <w:qFormat/>
@@ -2997,24 +2848,16 @@ All headings
                     <w:link w:val="BodyText"/>
                     <w:rsid w:val="008E3D84"/>
                     <w:rPr>
-                        <w:rFonts w:ascii="Calibri"
-                            w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
+                        <w:rFonts w:ascii="Calibri" w:cs="Times New Roman" w:eastAsia="Calibri" w:hAnsi="Calibri"/>
                         <w:color w:val="00000A"/>
                     </w:rPr>
                 </w:style>
             </w:styles>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml" pkg:name="/word/numbering.xml">
         <pkg:xmlData>
-            <w:numbering mc:Ignorable="w14 w15 w16se w16cid wp14"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-                xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
-                xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml"
-                xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid"
-                xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">
+            <w:numbering mc:Ignorable="w14 w15 w16se w16cid wp14" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing">
                 <w:abstractNum w:abstractNumId="0">
                     <w:nsid w:val="FFFFFF7C"/>
                     <w:multiLevelType w:val="singleLevel"/>
@@ -4125,8 +3968,7 @@ All headings
             </w:numbering>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml" pkg:name="/word/fontTable.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml" pkg:name="/word/fontTable.xml">
         <pkg:xmlData>
             <w:fonts xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
                 <w:font w:name="Symbol">
@@ -4134,18 +3976,14 @@ All headings
                     <w:charset w:val="02"/>
                     <w:family w:val="decorative"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="80000000" w:csb1="00000000"
-                        w:usb0="00000000" w:usb1="10000000"
-                        w:usb2="00000000" w:usb3="00000000"/>
+                    <w:sig w:csb0="80000000" w:csb1="00000000" w:usb0="00000000" w:usb1="10000000" w:usb2="00000000" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Times New Roman">
                     <w:panose1 w:val="02020603050405020304"/>
                     <w:charset w:val="00"/>
                     <w:family w:val="roman"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="000001FF" w:csb1="00000000"
-                        w:usb0="E0002EFF" w:usb1="C000785B"
-                        w:usb2="00000009" w:usb3="00000000"/>
+                    <w:sig w:csb0="000001FF" w:csb1="00000000" w:usb0="E0002EFF" w:usb1="C000785B" w:usb2="00000009" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="OpenSymbol">
                     <w:altName w:val="Cambria"/>
@@ -4169,36 +4007,28 @@ All headings
                     <w:charset w:val="86"/>
                     <w:family w:val="auto"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="00040001" w:csb1="00000000"
-                        w:usb0="00000003" w:usb1="288F0000"
-                        w:usb2="00000016" w:usb3="00000000"/>
+                    <w:sig w:csb0="00040001" w:csb1="00000000" w:usb0="00000003" w:usb1="288F0000" w:usb2="00000016" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Lucida Sans">
                     <w:panose1 w:val="020B0602030504020204"/>
                     <w:charset w:val="4D"/>
                     <w:family w:val="swiss"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="00000001" w:csb1="00000000"
-                        w:usb0="00000003" w:usb1="00000000"
-                        w:usb2="00000000" w:usb3="00000000"/>
+                    <w:sig w:csb0="00000001" w:csb1="00000000" w:usb0="00000003" w:usb1="00000000" w:usb2="00000000" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Calibri">
                     <w:panose1 w:val="020F0502020204030204"/>
                     <w:charset w:val="00"/>
                     <w:family w:val="swiss"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="000001FF" w:csb1="00000000"
-                        w:usb0="E0002AFF" w:usb1="C000247B"
-                        w:usb2="00000009" w:usb3="00000000"/>
+                    <w:sig w:csb0="000001FF" w:csb1="00000000" w:usb0="E0002AFF" w:usb1="C000247B" w:usb2="00000009" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Courier New">
                     <w:panose1 w:val="02070309020205020404"/>
                     <w:charset w:val="00"/>
                     <w:family w:val="modern"/>
                     <w:pitch w:val="fixed"/>
-                    <w:sig w:csb0="000001FF" w:csb1="00000000"
-                        w:usb0="E0002AFF" w:usb1="C0007843"
-                        w:usb2="00000009" w:usb3="00000000"/>
+                    <w:sig w:csb0="000001FF" w:csb1="00000000" w:usb0="E0002AFF" w:usb1="C0007843" w:usb2="00000009" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Liberation Mono">
                     <w:altName w:val="Cambria"/>
@@ -4214,18 +4044,14 @@ All headings
                     <w:charset w:val="86"/>
                     <w:family w:val="auto"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="0004000F" w:csb1="00000000"
-                        w:usb0="A00002BF" w:usb1="38CF7CFA"
-                        w:usb2="00000016" w:usb3="00000000"/>
+                    <w:sig w:csb0="0004000F" w:csb1="00000000" w:usb0="A00002BF" w:usb1="38CF7CFA" w:usb2="00000016" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="Calibri Light">
                     <w:panose1 w:val="020F0302020204030204"/>
                     <w:charset w:val="00"/>
                     <w:family w:val="swiss"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="000001FF" w:csb1="00000000"
-                        w:usb0="E0002AFF" w:usb1="C000247B"
-                        w:usb2="00000009" w:usb3="00000000"/>
+                    <w:sig w:csb0="000001FF" w:csb1="00000000" w:usb0="E0002AFF" w:usb1="C000247B" w:usb2="00000009" w:usb3="00000000"/>
                 </w:font>
                 <w:font w:name="DengXian">
                     <w:altName w:val="等线"/>
@@ -4233,15 +4059,12 @@ All headings
                     <w:charset w:val="86"/>
                     <w:family w:val="auto"/>
                     <w:pitch w:val="variable"/>
-                    <w:sig w:csb0="0004000F" w:csb1="00000000"
-                        w:usb0="A00002BF" w:usb1="38CF7CFA"
-                        w:usb2="00000016" w:usb3="00000000"/>
+                    <w:sig w:csb0="0004000F" w:csb1="00000000" w:usb0="A00002BF" w:usb1="38CF7CFA" w:usb2="00000016" w:usb3="00000000"/>
                 </w:font>
             </w:fonts>
         </pkg:xmlData>
     </pkg:part>
-    <pkg:part
-        pkg:contentType="application/vnd.openxmlformats-officedocument.theme+xml" pkg:name="/word/theme/theme1.xml">
+    <pkg:part pkg:contentType="application/vnd.openxmlformats-officedocument.theme+xml" pkg:name="/word/theme/theme1.xml">
         <pkg:xmlData>
             <a:theme name="Office Theme" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
                 <a:themeElements>
@@ -4397,25 +4220,25 @@ All headings
                             <a:gradFill rotWithShape="true">
                                 <a:gsLst>
                                     <a:gs pos="0">
-                                    <a:schemeClr val="phClr">
-                                    <a:lumMod val="110000"/>
-                                    <a:satMod val="105000"/>
-                                    <a:tint val="67000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:lumMod val="110000"/>
+                                            <a:satMod val="105000"/>
+                                            <a:tint val="67000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="50000">
-                                    <a:schemeClr val="phClr">
-                                    <a:lumMod val="105000"/>
-                                    <a:satMod val="103000"/>
-                                    <a:tint val="73000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:lumMod val="105000"/>
+                                            <a:satMod val="103000"/>
+                                            <a:tint val="73000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="100000">
-                                    <a:schemeClr val="phClr">
-                                    <a:lumMod val="105000"/>
-                                    <a:satMod val="109000"/>
-                                    <a:tint val="81000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:lumMod val="105000"/>
+                                            <a:satMod val="109000"/>
+                                            <a:tint val="81000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                 </a:gsLst>
                                 <a:lin ang="5400000" scaled="false"/>
@@ -4423,25 +4246,25 @@ All headings
                             <a:gradFill rotWithShape="true">
                                 <a:gsLst>
                                     <a:gs pos="0">
-                                    <a:schemeClr val="phClr">
-                                    <a:satMod val="103000"/>
-                                    <a:lumMod val="102000"/>
-                                    <a:tint val="94000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:satMod val="103000"/>
+                                            <a:lumMod val="102000"/>
+                                            <a:tint val="94000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="50000">
-                                    <a:schemeClr val="phClr">
-                                    <a:satMod val="110000"/>
-                                    <a:lumMod val="100000"/>
-                                    <a:shade val="100000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:satMod val="110000"/>
+                                            <a:lumMod val="100000"/>
+                                            <a:shade val="100000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="100000">
-                                    <a:schemeClr val="phClr">
-                                    <a:lumMod val="99000"/>
-                                    <a:satMod val="120000"/>
-                                    <a:shade val="78000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:lumMod val="99000"/>
+                                            <a:satMod val="120000"/>
+                                            <a:shade val="78000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                 </a:gsLst>
                                 <a:lin ang="5400000" scaled="false"/>
@@ -4479,12 +4302,10 @@ All headings
                             </a:effectStyle>
                             <a:effectStyle>
                                 <a:effectLst>
-                                    <a:outerShdw algn="ctr"
-                                    blurRad="57150" dir="5400000"
-                                    dist="19050" rotWithShape="false">
-                                    <a:srgbClr val="000000">
-                                    <a:alpha val="63000"/>
-                                    </a:srgbClr>
+                                    <a:outerShdw algn="ctr" blurRad="57150" dir="5400000" dist="19050" rotWithShape="false">
+                                        <a:srgbClr val="000000">
+                                            <a:alpha val="63000"/>
+                                        </a:srgbClr>
                                     </a:outerShdw>
                                 </a:effectLst>
                             </a:effectStyle>
@@ -4502,26 +4323,26 @@ All headings
                             <a:gradFill rotWithShape="true">
                                 <a:gsLst>
                                     <a:gs pos="0">
-                                    <a:schemeClr val="phClr">
-                                    <a:tint val="93000"/>
-                                    <a:satMod val="150000"/>
-                                    <a:shade val="98000"/>
-                                    <a:lumMod val="102000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:tint val="93000"/>
+                                            <a:satMod val="150000"/>
+                                            <a:shade val="98000"/>
+                                            <a:lumMod val="102000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="50000">
-                                    <a:schemeClr val="phClr">
-                                    <a:tint val="98000"/>
-                                    <a:satMod val="130000"/>
-                                    <a:shade val="90000"/>
-                                    <a:lumMod val="103000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:tint val="98000"/>
+                                            <a:satMod val="130000"/>
+                                            <a:shade val="90000"/>
+                                            <a:lumMod val="103000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                     <a:gs pos="100000">
-                                    <a:schemeClr val="phClr">
-                                    <a:shade val="63000"/>
-                                    <a:satMod val="120000"/>
-                                    </a:schemeClr>
+                                        <a:schemeClr val="phClr">
+                                            <a:shade val="63000"/>
+                                            <a:satMod val="120000"/>
+                                        </a:schemeClr>
                                     </a:gs>
                                 </a:gsLst>
                                 <a:lin ang="5400000" scaled="false"/>
@@ -4533,10 +4354,7 @@ All headings
                 <a:extraClrSchemeLst/>
                 <a:extLst>
                     <a:ext uri="{05A4C25C-085E-4340-85A3-A5531E510DB2}">
-                        <thm15:themeFamily
-                            id="{62F939B6-93AF-4DB8-9C6B-D6C7DFDC589F}"
-                            name="Office Theme"
-                            vid="{4A3C46E8-61CC-4603-A589-7422A47A8E4A}" xmlns:thm15="http://schemas.microsoft.com/office/thememl/2012/main"/>
+                        <thm15:themeFamily id="{62F939B6-93AF-4DB8-9C6B-D6C7DFDC589F}" name="Office Theme" vid="{4A3C46E8-61CC-4603-A589-7422A47A8E4A}" xmlns:thm15="http://schemas.microsoft.com/office/thememl/2012/main"/>
                     </a:ext>
                 </a:extLst>
             </a:theme>

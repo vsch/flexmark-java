@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="slf4j.log4j.over" type="repository">
+    <properties maven-id="org.slf4j:log4j-over-slf4j:2.0.0-alpha5" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/log4j-over-slf4j-2.0.0-alpha5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-2.0.0-alpha5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/log4j-over-slf4j-2.0.0-alpha5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-2.0.0-alpha5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

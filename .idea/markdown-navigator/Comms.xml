@@ -3,7 +3,7 @@
     <option name="myName" value="Comms" profileName="Comms" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveStyleSettings="false" haveRightMargin="false" rightMargin="96" haveHtmlExportSettings="true" haveLinkMapSettings="true">
       <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="2" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" lastLayoutSetsDefault="false">
         <PanelProvider>
-          <provider providerId="com.vladsch.md.nav.editor.javafx.html.panel" providerName="JavaFX WebView" />
+          <provider providerId="com.vladsch.md.nav.editor.jbcef.html.panel" providerName="Java Chromium Embedded" />
         </PanelProvider>
       </PreviewSettings>
       <ParserSettings gitHubSyntaxChange="false" correctedInvalidSettings="false" emojiShortcuts="1" emojiImages="0">
@@ -49,7 +49,7 @@
       </ParserSettings>
       <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="true" addAnchorLinks="false" anchorLinksWrapText="false" imageUriSerials="true" addDocTypeHtml="true" noParaTags="false" defaultUrlTitle="false" migratedPlantUml="true" migratedAnchorLinks="true" plantUmlConversion="0">
         <GeneratorProvider>
-          <provider providerId="com.vladsch.md.nav.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
+          <provider providerId="com.vladsch.md.nav.editor.javafx.html.generator" providerName="JavaFx/Chromium HTML Generator" />
         </GeneratorProvider>
         <headerTop />
         <headerBottom />
@@ -75,13 +75,10 @@
       </HtmlSettings>
       <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
         <StylesheetProvider>
-          <provider providerId="com.vladsch.md.nav.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
+          <provider providerId="com.vladsch.md.nav.editor.javafx.html.css" providerName="Default JavaFx/Chromium Stylesheet" />
         </StylesheetProvider>
         <ScriptProviders>
-          <provider providerId="com.vladsch.md.nav.editor.github-collapse-in-comment.html.script" providerName="Details tag opener" />
-          <provider providerId="com.vladsch.md.nav.editor.github-collapse-markdown.html.script" providerName="GitHub Collapse Markdown" />
-          <provider providerId="com.vladsch.md.nav.editor.katex.html.script" providerName="Katex Script" />
-          <provider providerId="com.vladsch.md.nav.editor.mermaid.html.script" providerName="Mermaid Script" />
+          <provider providerId="com.vladsch.md.nav.editor.hljs.html.script" providerName="HighlightJS Script" />
         </ScriptProviders>
         <cssText>.markdown-body,
 .wiki-body {

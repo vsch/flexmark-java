@@ -2,8 +2,8 @@
 
 Parses and renders GitLab Flavoured Markdown.
 
-* [ ] Add: video link renderer to convert links to video files to embedded content. The valid
-      video extensions are `.mp4`, `.m4v`, `.mov`, `.webm`, and `.ogv`.
+* Video link renderer to convert links to video files to embedded content. The valid video
+  extensions are `.mp4`, `.m4v`, `.mov`, `.webm`, and `.ogv`.
 
   ```
   <div class="video-container">
@@ -12,18 +12,18 @@ Parses and renders GitLab Flavoured Markdown.
   </div>
   ```
 
-* [ ] Multiline Block quote delimiters `>>>`
+* Multiline Block quote delimiters `>>>`
 
-* [ ] Deleted text markers `{- -}` or `[- -]`
+* Deleted text markers `{- -}` or `[- -]`
 
-* [ ] Inserted text markers `{+ +}` or `[+ +]`
+* Inserted text markers `{+ +}` or `[+ +]`
 
-* Header ids with emoji shortcuts generate an extra `-` because of two spaces around the
-      emoji shortcut while GitLab only generates a single `-`. (via no duplicate `-` in ids)
-     
-* [ ] Math, inline via ```$``$``` or as fenced code with `math` info string requiring inclusion
-      of Katex in the rendered HTML page.
+* Header ids with emoji shortcuts generate an extra `-` because of two spaces around the emoji
+  shortcut while GitLab only generates a single `-`. (via no duplicate `-` in ids)
 
-* [ ] Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion
-      similar to Math solution above.
+* Math, inline via ```$``$``` or as fenced code with `math` info string requiring inclusion of
+  Katex in the rendered HTML page.
+
+* Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion similar
+  to Math solution above.
 

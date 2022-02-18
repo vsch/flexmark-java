@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.pdf.converter;
 
-import com.openhtmltopdf.DOMBuilder;
 import com.openhtmltopdf.bidi.support.ICUBidiReorderer;
 import com.openhtmltopdf.bidi.support.ICUBidiSplitter;
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
@@ -13,6 +12,7 @@ import com.vladsch.flexmark.util.misc.Utils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.ProtectionPolicy;
 import org.jsoup.Jsoup;
+import org.jsoup.helper.W3CDom;
 import org.w3c.dom.Document;
 
 import java.io.FileNotFoundException;
@@ -138,7 +138,7 @@ public class PdfConverterExtension {
         org.jsoup.nodes.Document doc;
         doc = Jsoup.parse(html);
 
-        Document dom = DOMBuilder.jsoup2DOM(doc);
+        Document dom = new W3CDom().fromJsoup(doc);
         builder.withW3cDocument(dom, url);
     }
 

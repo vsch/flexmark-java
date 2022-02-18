@@ -19,6 +19,12 @@ public class Parsing {
     final public static char INTELLIJ_DUMMY_IDENTIFIER_CHAR = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
     final public static String INTELLIJ_DUMMY_IDENTIFIER = TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER;
 
+//    final public static String XML_NAMESPACE_START = "[_A-Za-z]";
+//    final public static String XML_NAMESPACE_CHAR = XML_NAME_SPACE_START + "|-|.|[0-9]";
+    final public static String XML_NAMESPACE_START = "[_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]"; // excluded  [#x10000-#xEFFFF]
+    final public static String XML_NAMESPACE_CHAR = XML_NAMESPACE_START + "|[.0-9\u00B7\u0300-\u036F\u203F-\u2040-]";
+    final public static String XML_NAMESPACE = "(?:(?:" + XML_NAMESPACE_START + ")(?:" + XML_NAMESPACE_CHAR + ")*:)?";
+
     // save options for others to use when only parsing instance is available
     final public DataHolder options;
 
@@ -136,6 +142,8 @@ public class Parsing {
 
     final private static String ST_CLOSETAG_IDI = "</" + ST_TAGNAME_IDI + "\\s*[>]";
     final private static String ST_CLOSETAG_NO_IDI = "</" + ST_TAGNAME_NO_IDI + "\\s*[>]";
+    final private static String ST_NS_CLOSETAG_IDI = "</" + XML_NAMESPACE + ST_TAGNAME_IDI + "\\s*[>]";
+    final private static String ST_NS_CLOSETAG_NO_IDI = "</" + XML_NAMESPACE + ST_TAGNAME_NO_IDI + "\\s*[>]";
 
     final private static String ST_ATTRIBUTE_IDI = "(?:" + "\\s+" + ST_ATTRIBUTENAME_IDI + ST_ATTRIBUTEVALUESPEC_IDI + "?)";
     final private static String ST_ATTRIBUTE_NO_IDI = "(?:" + "\\s+" + ST_ATTRIBUTENAME_NO_IDI + ST_ATTRIBUTEVALUESPEC_NO_IDI + "?)";
@@ -169,6 +177,8 @@ public class Parsing {
 
     final private static String ST_OPENTAG_IDI = "<" + ST_TAGNAME_IDI + ST_ATTRIBUTE_IDI + "*" + "\\s*/?>";
     final private static String ST_OPENTAG_NO_IDI = "<" + ST_TAGNAME_NO_IDI + ST_ATTRIBUTE_NO_IDI + "*" + "\\s*/?>";
+    final private static String ST_NS_OPENTAG_IDI = "<" + XML_NAMESPACE + ST_TAGNAME_IDI + ST_ATTRIBUTE_IDI + "*" + "\\s*/?>";
+    final private static String ST_NS_OPENTAG_NO_IDI = "<" + XML_NAMESPACE + ST_TAGNAME_NO_IDI + ST_ATTRIBUTE_NO_IDI + "*" + "\\s*/?>";
 
     final private static String ST_REG_CHAR_PARENS_IDI = "[^\\\\" + ST_EXCLUDED_0_TO_SPACE_IDI + "]";
     final private static String ST_REG_CHAR_PARENS_NO_IDI = "[^\\\\" + ST_EXCLUDED_0_TO_SPACE_NO_IDI + "]";
@@ -218,6 +228,7 @@ public class Parsing {
     final public String itemPrefixChars;
     final public boolean listsItemMarkerSpace;
     final public boolean listsOrderedItemDotOnly;
+    final public boolean allowNameSpace;
 
     private static class PatternTypeFlags {
         final @Nullable Boolean intellijDummyIdentifier;
@@ -229,6 +240,7 @@ public class Parsing {
         final @Nullable String itemPrefixChars;
         final @Nullable Boolean listsItemMarkerSpace;
         final @Nullable Boolean listsOrderedItemDotOnly;
+        final @Nullable Boolean allowNameSpace;
 
         PatternTypeFlags(DataHolder options) {
             this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.get(options);
@@ -240,6 +252,7 @@ public class Parsing {
             this.itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.get(options);
             this.listsItemMarkerSpace = LISTS_ITEM_MARKER_SPACE.get(options);
             this.listsOrderedItemDotOnly = LISTS_ORDERED_ITEM_DOT_ONLY.get(options);
+            this.allowNameSpace = HTML_ALLOW_NAME_SPACE.get(options);
         }
 
         public PatternTypeFlags(
@@ -252,6 +265,7 @@ public class Parsing {
                 , @Nullable String itemPrefixChars
                 , @Nullable Boolean listsItemMarkerSpace
                 , @Nullable Boolean listsOrderedItemDotOnly
+                , @Nullable Boolean allowNameSpace
         ) {
             this.intellijDummyIdentifier = intellijDummyIdentifier;
             this.htmlForTranslator = htmlForTranslator;
@@ -262,15 +276,18 @@ public class Parsing {
             this.itemPrefixChars = itemPrefixChars;
             this.listsItemMarkerSpace = listsItemMarkerSpace;
             this.listsOrderedItemDotOnly = listsOrderedItemDotOnly;
+            this.allowNameSpace = allowNameSpace;
         }
 
-        PatternTypeFlags withJekyllMacroInLinkUrl() { return new PatternTypeFlags(intellijDummyIdentifier, null, null, null, null, parseJekyllMacroInLinkUrl, null, null, null); }
+        PatternTypeFlags withJekyllMacroInLinkUrl() { return new PatternTypeFlags(intellijDummyIdentifier, null, null, null, null, parseJekyllMacroInLinkUrl, null, null, null, null); }
 
-        PatternTypeFlags withJekyllMacroSpaceInLinkUrl() { return new PatternTypeFlags(intellijDummyIdentifier, null, null, null, spaceInLinkUrl, parseJekyllMacroInLinkUrl, null, null, null); }
+        PatternTypeFlags withJekyllMacroSpaceInLinkUrl() { return new PatternTypeFlags(intellijDummyIdentifier, null, null, null, spaceInLinkUrl, parseJekyllMacroInLinkUrl, null, null, null, null); }
 
-        PatternTypeFlags withHtmlTranslator() { return new PatternTypeFlags(intellijDummyIdentifier, htmlForTranslator, translationHtmlInlineTagPattern, translationAutolinkTagPattern, null, null, null, null, null); }
+        PatternTypeFlags withHtmlTranslator() { return new PatternTypeFlags(intellijDummyIdentifier, htmlForTranslator, translationHtmlInlineTagPattern, translationAutolinkTagPattern, null, null, null, null, null, null); }
 
-        PatternTypeFlags withItemPrefixChars() { return new PatternTypeFlags(null, null, null, null, null, null, itemPrefixChars, listsItemMarkerSpace, listsOrderedItemDotOnly); }
+        PatternTypeFlags withItemPrefixChars() { return new PatternTypeFlags(null, null, null, null, null, null, itemPrefixChars, listsItemMarkerSpace, listsOrderedItemDotOnly, null); }
+
+        PatternTypeFlags withAllowNameSpace() { return new PatternTypeFlags(null, null, null, null, null, null, null, null, null, allowNameSpace); }
 
         /**
          * Compare where null entry equals any other value
@@ -293,6 +310,7 @@ public class Parsing {
             if (parseJekyllMacroInLinkUrl != null && !parseJekyllMacroInLinkUrl.equals(that.parseJekyllMacroInLinkUrl)) return false;
             if (itemPrefixChars != null && !itemPrefixChars.equals(that.itemPrefixChars)) return false;
             if (listsItemMarkerSpace != null && !listsItemMarkerSpace.equals(that.listsItemMarkerSpace)) return false;
+            if (allowNameSpace != null && !allowNameSpace.equals(that.allowNameSpace)) return false;
 
             return listsOrderedItemDotOnly == null || listsOrderedItemDotOnly.equals(that.listsOrderedItemDotOnly);
         }
@@ -308,6 +326,7 @@ public class Parsing {
             result = 31 * result + (itemPrefixChars != null ? itemPrefixChars.hashCode() : 0);
             result = 31 * result + (listsItemMarkerSpace != null ? listsItemMarkerSpace.hashCode() : 0);
             result = 31 * result + (listsOrderedItemDotOnly != null ? listsOrderedItemDotOnly.hashCode() : 0);
+            result = 31 * result + (allowNameSpace != null ? allowNameSpace.hashCode() : 0);
             return result;
         }
     }
@@ -323,15 +342,16 @@ public class Parsing {
         this.options = options;
         this.CODE_BLOCK_INDENT = Parser.CODE_BLOCK_INDENT.get(options); // make sure this is consistent with lists settings
         PatternTypeFlags patternTypeFlags = new PatternTypeFlags(options);
-        this.intellijDummyIdentifier = patternTypeFlags.intellijDummyIdentifier;
-        this.htmlForTranslator = patternTypeFlags.htmlForTranslator;
+        this.intellijDummyIdentifier = Boolean.TRUE.equals(patternTypeFlags.intellijDummyIdentifier);
+        this.htmlForTranslator = Boolean.TRUE.equals(patternTypeFlags.htmlForTranslator);
         this.translationHtmlInlineTagPattern = patternTypeFlags.translationHtmlInlineTagPattern;
         this.translationAutolinkTagPattern = patternTypeFlags.translationAutolinkTagPattern;
-        this.spaceInLinkUrl = patternTypeFlags.spaceInLinkUrl;
-        this.parseJekyllMacroInLinkUrl = patternTypeFlags.parseJekyllMacroInLinkUrl;
+        this.spaceInLinkUrl = Boolean.TRUE.equals(patternTypeFlags.spaceInLinkUrl);
+        this.parseJekyllMacroInLinkUrl = Boolean.TRUE.equals(patternTypeFlags.parseJekyllMacroInLinkUrl);
         this.itemPrefixChars = patternTypeFlags.itemPrefixChars;
-        this.listsItemMarkerSpace = patternTypeFlags.listsItemMarkerSpace;
-        this.listsOrderedItemDotOnly = patternTypeFlags.listsOrderedItemDotOnly;
+        this.listsItemMarkerSpace = Boolean.TRUE.equals(patternTypeFlags.listsItemMarkerSpace);
+        this.listsOrderedItemDotOnly = Boolean.TRUE.equals(patternTypeFlags.listsOrderedItemDotOnly);
+        this.allowNameSpace = Boolean.TRUE.equals(patternTypeFlags.allowNameSpace);
 
         if (intellijDummyIdentifier) {
             this.ADDITIONAL_CHARS = ST_ADDITIONAL_CHARS_IDI;
@@ -353,8 +373,8 @@ public class Parsing {
             this.ATTRIBUTEVALUE = ST_ATTRIBUTEVALUE_IDI;
             this.ATTRIBUTEVALUESPEC = ST_ATTRIBUTEVALUESPEC_IDI;
             this.ATTRIBUTE = ST_ATTRIBUTE_IDI;
-            this.OPENTAG = ST_OPENTAG_IDI;
-            this.CLOSETAG = ST_CLOSETAG_IDI;
+            this.OPENTAG = allowNameSpace ? ST_NS_OPENTAG_IDI : ST_OPENTAG_IDI;
+            this.CLOSETAG = allowNameSpace ? ST_NS_CLOSETAG_IDI : ST_CLOSETAG_IDI;
         } else {
             this.ADDITIONAL_CHARS = ST_ADDITIONAL_CHARS_NO_IDI;
             this.EXCLUDED_0_TO_SPACE = ST_EXCLUDED_0_TO_SPACE_NO_IDI;
@@ -375,8 +395,8 @@ public class Parsing {
             this.ATTRIBUTEVALUE = ST_ATTRIBUTEVALUE_NO_IDI;
             this.ATTRIBUTEVALUESPEC = ST_ATTRIBUTEVALUESPEC_NO_IDI;
             this.ATTRIBUTE = ST_ATTRIBUTE_NO_IDI;
-            this.OPENTAG = ST_OPENTAG_NO_IDI;
-            this.CLOSETAG = ST_CLOSETAG_NO_IDI;
+            this.OPENTAG = allowNameSpace ? ST_NS_OPENTAG_NO_IDI : ST_OPENTAG_NO_IDI;
+            this.CLOSETAG = allowNameSpace ? ST_NS_CLOSETAG_NO_IDI : ST_CLOSETAG_NO_IDI;
         }
 
         // init flag based patterns

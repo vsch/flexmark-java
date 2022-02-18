@@ -42,8 +42,9 @@
       <element id="module-output" name="flexmark-ext-resizable-image" />
       <element id="module-output" name="flexmark-ext-youtube-embedded" />
       <element id="module-output" name="flexmark-html2md-converter" />
-      <element id="library" level="project" name="jsoup" />
       <element id="module-output" name="flexmark-test-util" />
+      <element id="library" level="project" name="org.jsoup:jsoup:1.14.3" />
+      <element id="module-output" name="flexmark-ext-resizable-image" />
     </root>
   </artifact>
 </component>

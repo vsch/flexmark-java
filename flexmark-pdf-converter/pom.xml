@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.62.2</version>
+        <version>0.64.0</version>
     </parent>
 
     <artifactId>flexmark-pdf-converter</artifactId>
@@ -13,7 +13,8 @@
 
     <properties>
         <!-- Define the version of OPEN HTML TO PDF in the properties section of your POM. -->
-        <openhtml.version>1.0.0</openhtml.version>
+        <openhtml.version>1.0.10</openhtml.version>
+        <openhtml.jsoup.version>1.0.0</openhtml.jsoup.version>
     </properties>
 
     <dependencies>
@@ -33,7 +34,7 @@
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.11.3</version>
+            <version>1.14.3</version>
         </dependency>
         <dependency>
             <!-- ALWAYS required. -->
@@ -57,21 +58,7 @@
             <!-- Optional, leave out if you do not need HTML5 parsing support. -->
             <groupId>com.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
-            <version>${openhtml.version}</version>
+            <version>${openhtml.jsoup.version}</version>
         </dependency>
-        <!--
-                <dependency>
-                    &lt;!&ndash; Optional, leave out if you do not need logging via slf4j. &ndash;&gt;
-                    <groupId>com.openhtmltopdf</groupId>
-                    <artifactId>openhtmltopdf-slf4j</artifactId>
-                    <version>${openhtml.version}</version>
-                </dependency>
-                <dependency>
-                    &lt;!&ndash; Optional, leave out if you do not need logging via log4j. &ndash;&gt;
-                    <groupId>com.openhtmltopdf</groupId>
-                    <artifactId>openhtmltopdf-log4j</artifactId>
-                    <version>${openhtml.version}</version>
-                </dependency>
-        -->
     </dependencies>
 </project>

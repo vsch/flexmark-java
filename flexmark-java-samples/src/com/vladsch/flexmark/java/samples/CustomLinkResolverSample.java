@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.docx.converter.DocxRenderer;
-import com.vladsch.flexmark.docx.converter.internal.DocxLinkResolver;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagBlock;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer.Builder;
@@ -82,7 +81,7 @@ public class CustomLinkResolverSample {
                     if (docRootURL != null && !docRootURL.isEmpty()) {
                         // this one is root url, prefix with root url, without the trailing /
                         url = docRootURL + url;
-                        if (!url.startsWith("file:")) url =  "file://" + url;
+                        if (!url.startsWith("file:")) url = "file://" + url;
                         return link.withStatus(LinkStatus.VALID)
                                 .withUrl(url);
                     }
@@ -142,7 +141,7 @@ public class CustomLinkResolverSample {
 
                         resolvedPath.append('/').append(resolved).append(suffix);
                         String resolvedUri = resolvedPath.toString();
-                        if (!resolvedUri.startsWith("file:")) resolvedUri =  "file://" + resolvedUri;
+                        if (!resolvedUri.startsWith("file:")) resolvedUri = "file://" + resolvedUri;
                         return link.withStatus(LinkStatus.VALID)
                                 .withUrl(resolvedUri);
                     }
@@ -176,7 +175,7 @@ public class CustomLinkResolverSample {
             }
         }
     }
-    
+
     static class CustomExtension implements HtmlRendererExtension {
         @Override
         public void rendererOptions(@NotNull MutableDataHolder options) {

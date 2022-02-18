@@ -6,36 +6,35 @@
 <p><strong>flexmark-java extension for GitLab Flavoured Markdown</strong></p>
 <p>Parses and renders GitLab Flavoured Markdown.</p>
 <ul>
-  <li class="task-list-item" task-offset="109">
-    <p><span class="task-item-open" style="cursor:hand"></span>Add: video link renderer to convert links to video files to embedded content. The valid
-    video extensions are <code>.mp4</code>, <code>.m4v</code>, <code>.mov</code>, <code>.webm</code>, and <code>.ogv</code>.
+  <li>
+    <p>Video link renderer to convert links to video files to embedded content. The valid video
+    extensions are <code>.mp4</code>, <code>.m4v</code>, <code>.mov</code>, <code>.webm</code>, and <code>.ogv</code>.</p>
     <pre><code>&lt;div class=&quot;video-container&quot;&gt;
 &lt;video src=&quot;video.mp4&quot; width=&quot;400&quot; controls=&quot;true&quot;&gt;&lt;/video&gt;
 &lt;p&gt;&lt;a href=&quot;video.mp4&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; title=&quot;Download 'Sample Video'&quot;&gt;Sample Video&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 </code></pre>
-    </p>
-  </li>
-  <li class="task-list-item" task-offset="512">
-    <p><span class="task-item-open" style="cursor:hand"></span>Multiline Block quote delimiters <code>&gt;&gt;&gt;</code></p>
-  </li>
-  <li class="task-list-item" task-offset="558">
-    <p><span class="task-item-open" style="cursor:hand"></span>Deleted text markers <code>{- -}</code> or <code>[- -]</code></p>
-  </li>
-  <li class="task-list-item" task-offset="605">
-    <p><span class="task-item-open" style="cursor:hand"></span>Inserted text markers <code>{+ +}</code> or <code>[+ +]</code></p>
   </li>
   <li>
-    <p>Header ids with emoji shortcuts generate an extra <code>-</code> because of two spaces around the
-    emoji shortcut while GitLab only generates a single <code>-</code>. (via no duplicate <code>-</code> in ids)</p>
+    <p>Multiline Block quote delimiters <code>&gt;&gt;&gt;</code></p>
   </li>
-  <li class="task-list-item" task-offset="841">
-    <p><span class="task-item-open" style="cursor:hand"></span>Math, inline via <code>$``$</code> or as fenced code with <code>math</code> info string requiring inclusion
-    of Katex in the rendered HTML page.</p>
+  <li>
+    <p>Deleted text markers <code>{- -}</code> or <code>[- -]</code></p>
   </li>
-  <li class="task-list-item" task-offset="980">
-    <p><span class="task-item-open" style="cursor:hand"></span>Graphing via Mermaid as fenced code with <code>mermaid</code> info string, via Mermaid inclusion
-    similar to Math solution above.</p>
+  <li>
+    <p>Inserted text markers <code>{+ +}</code> or <code>[+ +]</code></p>
+  </li>
+  <li>
+    <p>Header ids with emoji shortcuts generate an extra <code>-</code> because of two spaces around the emoji
+    shortcut while GitLab only generates a single <code>-</code>. (via no duplicate <code>-</code> in ids)</p>
+  </li>
+  <li>
+    <p>Math, inline via <code>$``$</code> or as fenced code with <code>math</code> info string requiring inclusion of
+    Katex in the rendered HTML page.</p>
+  </li>
+  <li>
+    <p>Graphing via Mermaid as fenced code with <code>mermaid</code> info string, via Mermaid inclusion similar
+    to Math solution above.</p>
   </li>
 </ul>
 </body>

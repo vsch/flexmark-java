@@ -3,7 +3,7 @@
     <option name="myName" value="OVERVIEW" profileName="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveStyleSettings="false" haveRightMargin="false" rightMargin="96" haveHtmlExportSettings="true" haveLinkMapSettings="true">
       <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" lastLayoutSetsDefault="false">
         <PanelProvider>
-          <provider providerId="com.vladsch.md.nav.editor.javafx.html.panel" providerName="JavaFX WebView" />
+          <provider providerId="com.vladsch.md.nav.editor.jbcef.html.panel" providerName="Java Chromium Embedded" />
         </PanelProvider>
       </PreviewSettings>
       <ParserSettings gitHubSyntaxChange="false" correctedInvalidSettings="false" emojiShortcuts="3" emojiImages="0">
@@ -44,7 +44,7 @@
       </ParserSettings>
       <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="false" addAnchorLinks="false" anchorLinksWrapText="false" imageUriSerials="false" addDocTypeHtml="false" noParaTags="false" defaultUrlTitle="false" migratedPlantUml="true" migratedAnchorLinks="true" plantUmlConversion="0">
         <GeneratorProvider>
-          <provider providerId="com.vladsch.md.nav.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
+          <provider providerId="com.vladsch.md.nav.editor.javafx.html.generator" providerName="JavaFx/Chromium HTML Generator" />
         </GeneratorProvider>
         <headerTop />
         <headerBottom />
@@ -70,7 +70,7 @@
       </HtmlSettings>
       <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
         <StylesheetProvider>
-          <provider providerId="com.vladsch.md.nav.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
+          <provider providerId="com.vladsch.md.nav.editor.javafx.html.css" providerName="Default JavaFx/Chromium Stylesheet" />
         </StylesheetProvider>
         <ScriptProviders />
         <cssText>.markdown-body,
@@ -105,7 +105,7 @@ code {
         <cssUriHistory />
       </CssSettings>
       <AnnotatorSettings targetHasSpaces="true" linkCaseMismatch="true" wikiCaseMismatch="true" wikiLinkHasDashes="true" notUnderWikiHome="true" targetNotWikiPageExt="true" notUnderSourceWikiHome="true" targetNameHasAnchor="true" targetPathHasAnchor="true" wikiLinkHasSlash="true" wikiLinkHasSubdir="true" wikiLinkHasOnlyAnchor="true" linkTargetsWikiHasExt="true" linkTargetsWikiHasBadExt="true" notUnderSameRepo="true" targetNotUnderVcs="false" linkNeedsExt="true" linkHasBadExt="true" linkTargetNeedsExt="true" linkTargetHasBadExt="true" wikiLinkNotInWiki="true" imageTargetNotInRaw="true" repoRelativeAcrossVcsRoots="true" multipleWikiTargetsMatch="true" unresolvedLinkReference="true" linkIsIgnored="true" anchorIsIgnored="true" anchorIsUnresolved="true" anchorLineReferenceIsUnresolved="true" anchorLineReferenceFormat="true" anchorHasDuplicates="true" abbreviationDuplicates="true" abbreviationNotUsed="true" attributeIdDuplicateDefinition="true" attributeIdNotUsed="true" footnoteDuplicateDefinition="true" footnoteUnresolved="true" footnoteDuplicates="true" footnoteNotUsed="true" macroDuplicateDefinition="true" macroUnresolved="true" macroDuplicates="true" macroNotUsed="true" referenceDuplicateDefinition="true" referenceUnresolved="true" referenceDuplicates="true" referenceNotUsed="true" referenceUnresolvedNumericId="true" enumRefDuplicateDefinition="true" enumRefUnresolved="true" enumRefDuplicates="true" enumRefNotUsed="true" enumRefLinkUnresolved="true" enumRefLinkDuplicates="true" simTocUpdateNeeded="true" simTocTitleSpaceNeeded="true" />
-      <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imagePathType="1" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="true" useElementStyleAttribute="false" linkToExportedHtml="false" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="PAGE_RELATIVE" />
+      <HtmlExportSettings updateOnSave="false" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc" copyLinkedImages="true" imagePathType="1" targetPathType="2" targetExt="" useTargetExt="false" noCssNoScripts="true" useElementStyleAttribute="false" linkToExportedHtml="false" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="PAGE_RELATIVE" />
       <LinkMapSettings>
         <textMaps />
       </LinkMapSettings>
