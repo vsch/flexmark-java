@@ -110,7 +110,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.2</version>
                 <configuration>
                     <!-- We don't have anything in src/main for this module, it only contains tests -->
                     <skip>true</skip>
@@ -119,7 +118,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.1</version>
                 <configuration>
                     <!-- We don't have anything to install for this module, it only contains tests -->
                     <skip>true</skip>
