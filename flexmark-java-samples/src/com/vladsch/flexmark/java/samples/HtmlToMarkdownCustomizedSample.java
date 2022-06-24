@@ -11,8 +11,9 @@ import org.jetbrains.annotations.Nullable;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class HtmlToMarkdownCustomizedSample {
@@ -77,8 +78,8 @@ public class HtmlToMarkdownCustomizedSample {
         }
 
         @Override
-        public Set<HtmlNodeRendererHandler<?>> getHtmlNodeRendererHandlers() {
-            return new HashSet<>(Collections.singletonList(
+        public List<HtmlNodeRendererHandler<?>> getHtmlNodeRendererHandlers() {
+            return new ArrayList<>(Collections.singletonList(
                     new HtmlNodeRendererHandler<>("kbd", Element.class, this::processKbd)
             ));
         }
