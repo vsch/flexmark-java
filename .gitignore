@@ -36,3 +36,4 @@ target/
 /flexmark-docx-converter/src/test/resources/Tab.s.xml
 /flexmark-docx-converter/src/test/resources/Tab.xml
 /assets/comms/
+/lib/
