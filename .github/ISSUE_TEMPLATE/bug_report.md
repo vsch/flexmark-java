@@ -8,7 +8,7 @@ about: Create a detailed report to help improve flexmark-java
 
 Feel free to remove any sections that do not apply or add your own to clarify your issue.
 
-Please provide as much information about where the but is located or what you were using:
+Please provide as much information about where the bug is located or what you were using:
 
 * [ ] `Parser`
 * [ ] `HtmlRenderer`
