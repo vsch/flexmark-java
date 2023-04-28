@@ -3532,6 +3532,18 @@ some back ticks in the ````code````
 ````````````````````````````````
 
 
+special characters are not escaped inside nested html elements
+
+```````````````````````````````` example Fenced Code: 10
+```text
+special symbols: \*~^&<>[]|`
+```
+
+.
+<pre><code class="text">special symbols: <b>\*~^&<>[]|`</b>
+</code></pre>
+````````````````````````````````
+
 ## Skipped Fenced Code
 
 ```````````````````````````````` example(Skipped Fenced Code: 1) options(skip-fenced-code)
