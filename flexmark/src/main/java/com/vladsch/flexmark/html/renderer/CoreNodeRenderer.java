@@ -115,7 +115,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     @SuppressWarnings("MethodMayBeStatic")
     void render(Heading node, NodeRendererContext context, HtmlWriter html) {
-        if (node.isExplicitAnchorRefId() || context.getHtmlOptions().renderHeaderId) {
+        if (context.getHtmlOptions().renderHeaderId) {
             String id = context.getNodeId(node);
             if (id != null) {
                 html.attr("id", id);
