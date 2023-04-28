@@ -53,6 +53,8 @@
     <file url="file://$PROJECT_DIR$/flexmark-ext-macros/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-media-tags" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-media-tags/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-ext-resizable-image" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flexmark-ext-resizable-image/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-spec-example" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/flexmark-ext-superscript" charset="UTF-8" />
