@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class ResizableImageInlineParserExtension implements InlineParserExtension {
-    final public static Pattern IMAGE_PATTERN = Pattern.compile("\\!\\[(\\S*)\\]\\((\\S*)\\s*=*(\\d*)x*(\\d*)\\)",
+    final public static Pattern IMAGE_PATTERN = Pattern.compile("\\!\\[([^\\s\\]]*)]\\(([^\\s\\]]+)\\s*=*(\\d*)x*(\\d*)\\)",
             Pattern.CASE_INSENSITIVE);
 
     public ResizableImageInlineParserExtension(LightInlineParser inlineParser) {
