@@ -16,7 +16,7 @@ public class Html5Entities {
 
     final private static Map<String, String> NAMED_CHARACTER_REFERENCES = readEntities();
     final private static Pattern NUMERIC_PATTERN = Pattern.compile("^&#[Xx]?");
-    final private static String ENTITY_PATH = "/com/vladsch/flexmark/util/html/entities.properties";
+    final private static String ENTITY_PATH = "/com/vladsch/flexmark/util/sequence/entities.properties";
 
     public static String entityToString(String input) {
         Matcher matcher = NUMERIC_PATTERN.matcher(input);
