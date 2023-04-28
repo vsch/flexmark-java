@@ -119,6 +119,11 @@ final public class SpecialInputTest extends RenderingTestCase {
                 "[foo][12" + label2 + "]\n\n[12" + label2 + "]: /", "<p>[foo][12" + label2 + "]</p>\n<p>[12" + label2 + "]: /</p>\n");
     }
 
+    @Test
+    public void manyUnderscores() {
+        assertRendering(Strings.repeat("_", 5000), "<hr />");
+    }
+
     @Nullable
     @Override
     public DataHolder options(@NotNull String option) {
