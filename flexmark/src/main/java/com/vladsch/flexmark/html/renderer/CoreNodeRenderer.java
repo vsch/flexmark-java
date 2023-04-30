@@ -117,7 +117,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     void render(Heading node, NodeRendererContext context, HtmlWriter html) {
         if (context.getHtmlOptions().renderHeaderId) {
             String id = context.getNodeId(node);
-            if (id != null) {
+            if (id != null && id.length() > 0) {
                 html.attr("id", id);
             }
         }
