@@ -541,7 +541,7 @@ public class HtmlRenderer implements IRender {
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size()];
             this.doNotRenderLinksNesting = htmlOptions.doNotRenderLinksInDocument ? 0 : 1;
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
-                    : (!(htmlOptions.renderHeaderId || htmlOptions.generateHeaderIds) ? HtmlIdGenerator.NULL : new HeaderIdGenerator.Factory().create(this));
+                    : (!(htmlOptions.generateHeaderIds) ? HtmlIdGenerator.NULL : new HeaderIdGenerator.Factory().create(this));
 
             htmlWriter.setContext(this);
 
