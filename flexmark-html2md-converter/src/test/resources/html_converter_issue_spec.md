@@ -1911,3 +1911,13 @@ Issue [#357, HTML to markdown and removed nested list]
 [#353, How to self modify parse method when htmltomarkdown]: https://github.com/vsch/flexmark-java/issues/353
 [#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
 
+
+## Issue 548
+
+Issue #548 , Images with emoji-filenames break the emoji handling code if they have no corresponding shortcut
+
+```````````````````````````````` example Issue 548: 1
+![](1f9a0.png)
+.
+<img src="1f9a0.png" />
+````````````````````````````````

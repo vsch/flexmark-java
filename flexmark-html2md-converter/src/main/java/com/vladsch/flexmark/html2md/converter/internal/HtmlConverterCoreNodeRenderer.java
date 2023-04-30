@@ -658,7 +658,7 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                 }
             }
 
-            if (emoji != null) {
+            if (emoji != null && emoji.shortcut != null) {
                 out.append(':').append(emoji.shortcut).append(':');
             } else {
                 LinkConversion conv = myHtmlConverterOptions.extInlineImage;
