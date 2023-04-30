@@ -1907,17 +1907,31 @@ Issue [#357, HTML to markdown and removed nested list]
 ````````````````````````````````
 
 
-[#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
-[#353, How to self modify parse method when htmltomarkdown]: https://github.com/vsch/flexmark-java/issues/353
-[#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
-
-
 ## Issue 548
 
-Issue #548 , Images with emoji-filenames break the emoji handling code if they have no corresponding shortcut
+Issue [#548, Issue parsing Facebook img/emojis], Images with emoji-filenames break the emoji
+handling code if they have no corresponding shortcut
 
 ```````````````````````````````` example Issue 548: 1
+This is my test to a Facebook emoji:  
+![text](https://static.xx.fbcdn.net/images/emoji.php/v9/t71/2/16/1f967.png)
+.
+<div>
+<div>This is my test to a Facebook emoji:</div>
+<div><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t71/2/16/1f967.png" alt="text" width="24" height="24"></div>
+</div>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 548: 2
 ![](1f9a0.png)
 .
 <img src="1f9a0.png" />
 ````````````````````````````````
+
+
+[#351, Is there any special format requirement for processing html data to markdown]: https://github.com/vsch/flexmark-java/issues/351
+[#353, How to self modify parse method when htmltomarkdown]: https://github.com/vsch/flexmark-java/issues/353
+[#357, HTML to markdown and removed nested list]: https://github.com/vsch/flexmark-java/issues/357
+[#548, Issue parsing Facebook img/emojis]: https://github.com/vsch/flexmark-java/issues/548
+
