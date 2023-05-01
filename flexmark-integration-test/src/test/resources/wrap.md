@@ -385,7 +385,7 @@ The pegdown source used in this plugin can be found [vsch/pegdown].
 [DataGrip]: https://www.jetbrains.com/datagrip
 [GitHub Issues page]: ../../issues
 [GitHub]: https://github.com/vsch/laravel-translation-manager
-[idea-multimarkdown]: http://vladsch.com/product/multimarkdown
+[idea-multimarkdown]: https://github.com/vsch/idea-multimarkdown
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
@@ -788,7 +788,7 @@ The pegdown source used in this plugin can be found [vsch/pegdown].
 [DataGrip]: https://www.jetbrains.com/datagrip
 [GitHub Issues page]: ../../issues
 [GitHub]: https://github.com/vsch/laravel-translation-manager
-[idea-multimarkdown]: http://vladsch.com/product/multimarkdown
+[idea-multimarkdown]: https://github.com/vsch/idea-multimarkdown
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
@@ -1232,7 +1232,7 @@ The pegdown source used in this plugin can be found [vsch/pegdown].
 [DataGrip]: https://www.jetbrains.com/datagrip
 [GitHub Issues page]: ../../issues
 [GitHub]: https://github.com/vsch/laravel-translation-manager
-[idea-multimarkdown]: http://vladsch.com/product/multimarkdown
+[idea-multimarkdown]: https://github.com/vsch/idea-multimarkdown
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
@@ -1678,7 +1678,7 @@ The pegdown source used in this plugin can be found [vsch/pegdown].
 [DataGrip]: https://www.jetbrains.com/datagrip
 [GitHub Issues page]: ../../issues
 [GitHub]: https://github.com/vsch/laravel-translation-manager
-[idea-multimarkdown]: http://vladsch.com/product/multimarkdown
+[idea-multimarkdown]: https://github.com/vsch/idea-multimarkdown
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896

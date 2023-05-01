@@ -39,9 +39,8 @@
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-core" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-pdfbox" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter" level="project" />
-    <orderEntry type="library" name="org.jsoup:jsoup:1.14.3" level="project" />
     <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
+    <orderEntry type="library" name="org.jsoup:jsoup:1.15.4" level="project" />
     <orderEntry type="module" module-name="flexmark-core-test" scope="TEST" />
   </component>
 </module>

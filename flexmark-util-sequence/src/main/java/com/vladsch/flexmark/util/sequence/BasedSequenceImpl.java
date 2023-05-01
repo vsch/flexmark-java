@@ -195,7 +195,35 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         else return this.baseSubSequence(Utils.max(getStartOffset(), other.getStartOffset()), Utils.min(getEndOffset(), other.getEndOffset()));
     }
 
-// @formatter:off
+    @Override
+    public boolean containsSomeIn(@NotNull CharPredicate charSet) {
+        int iMax = length();
+        for (int i = 0; i < iMax; i++) {
+            if (charSet.test(charAt(i))) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsSomeNotIn(@NotNull CharPredicate charSet) {
+        int iMax = length();
+        for (int i = 0; i < iMax; i++) {
+            if (!charSet.test(charAt(i))) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsOnlyIn(@NotNull CharPredicate charSet) {
+        return !containsSomeNotIn(charSet);
+    }
+
+    @Override
+    public boolean containsOnlyNotIn(@NotNull CharPredicate charSet) {
+        return !containsSomeIn(charSet);
+    }
+
+    // @formatter:off
 
     @NotNull @Override public BasedSequence extendByAny(@NotNull CharPredicate charSet)         { return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset()); }
     @NotNull @Override public BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet)    { return extendByAny(charSet, 1); }

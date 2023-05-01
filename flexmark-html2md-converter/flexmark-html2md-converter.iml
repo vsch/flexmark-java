@@ -43,6 +43,6 @@
     <orderEntry type="module" module-name="flexmark-ext-tables" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" />
     <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
-    <orderEntry type="library" name="org.jsoup:jsoup:1.14.3" level="project" />
+    <orderEntry type="library" name="org.jsoup:jsoup:1.15.4" level="project" />
   </component>
 </module>

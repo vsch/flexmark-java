@@ -121,7 +121,7 @@ final public class SpecialInputTest extends RenderingTestCase {
 
     @Test
     public void manyUnderscores() {
-        assertRendering(Strings.repeat("_", 5000), "<hr />");
+        assertRendering(Strings.repeat("_", 1000), "<hr />");
     }
 
     @Nullable

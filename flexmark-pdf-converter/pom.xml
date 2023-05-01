@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.64.0</version>
+        <version>0.64.2</version>
     </parent>
 
     <artifactId>flexmark-pdf-converter</artifactId>
@@ -14,7 +14,6 @@
     <properties>
         <!-- Define the version of OPEN HTML TO PDF in the properties section of your POM. -->
         <openhtml.version>1.0.10</openhtml.version>
-        <openhtml.jsoup.version>1.0.0</openhtml.jsoup.version>
     </properties>
 
     <dependencies>
@@ -34,7 +33,7 @@
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.15.3</version>
+            <version>1.15.4</version>
         </dependency>
         <dependency>
             <!-- ALWAYS required. -->
@@ -53,12 +52,6 @@
             <groupId>com.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-rtl-support</artifactId>
             <version>${openhtml.version}</version>
-        </dependency>
-        <dependency>
-            <!-- Optional, leave out if you do not need HTML5 parsing support. -->
-            <groupId>com.openhtmltopdf</groupId>
-            <artifactId>openhtmltopdf-jsoup-dom-converter</artifactId>
-            <version>${openhtml.jsoup.version}</version>
         </dependency>
     </dependencies>
 </project>

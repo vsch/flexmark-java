@@ -13,7 +13,7 @@
 
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-java</artifactId>
-    <version>0.64.0</version>
+    <version>0.64.2</version>
     <name>flexmark-java</name>
     <description>
         Java re-implementation of commonmark-java based parser, with AST reflecting source elements, full source position tracking, greater parser extensibility.
@@ -85,7 +85,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.outputTimestamp>1369763</project.build.outputTimestamp>
+        <project.build.outputTimestamp>1682712740</project.build.outputTimestamp>
         <flexmark.javadoc.location>${project.basedir}/target/apidocs/</flexmark.javadoc.location>
         <!-- Don't automatically publish artifacts to Central, we might want to inspect them first. -->
         <nexus.staging.autoRelease>false</nexus.staging.autoRelease>
@@ -203,7 +203,7 @@
                             </execution>
                         </executions>
                         <configuration>
-<!--                            <source>8</source>-->
+                            <!--                            <source>8</source>-->
                             <excludePackageNames>*.internal,*.internal.*</excludePackageNames>
                             <detectOfflineLinks>false</detectOfflineLinks>
                             <offlineLinks>
@@ -224,6 +224,18 @@
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>biz.aQute.bnd</groupId>
+                        <artifactId>bnd-maven-plugin</artifactId>
+                        <version>6.3.1</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>bnd-process</goal>
                                 </goals>
                             </execution>
                         </executions>
@@ -552,9 +564,9 @@
     <developers>
         <developer>
             <name>Vladimir Schneider</name>
-            <email>vladimir@vladsch.com</email>
+            <email>vladimir.schneider@gmail.com</email>
             <organization>vladsch.com</organization>
-            <organizationUrl>https://vladsch.com/</organizationUrl>
+            <organizationUrl>https://github.com/vsch/</organizationUrl>
         </developer>
     </developers>
 
@@ -564,5 +576,4 @@
         <url>https://github.com/vsch/flexmark-java</url>
         <tag>HEAD</tag>
     </scm>
-
 </project>

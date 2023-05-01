@@ -1,11 +1,8 @@
 # flexmark-java
 
-&nbsp;<details id="version-history"><summary>**Version History**</summary>
-
 [TOC]: # ""
 
-- [Release 0.60.0](#release-0600)
-  - [API Refactoring](#api-refactoring)
+- [0.64.2 - Next Release](#0642---next-release)
 - [0.64.0](#0640)
 - [0.62.4](#0624)
 - [0.62.2](#0622)
@@ -117,65 +114,29 @@
 - [0.40.2](#0402)
 - [0.40.0](#0400)
 
-&nbsp;</details>
+## 0.64.2 - Next Release
 
-## Release 0.60.0
-
-### API Refactoring
-
-:warning: Upcoming release of 0.60.0 will have some breaking changes due to re-organization,
-renaming and clean up of some implementation classes.
-
-Please give feedback on the upcoming changes if you have concerns about breaking your code:
-
-* Break: split out generic AST utilities from `flexmark-util` module into separate smaller
-  modules. IntelliJ IDEA migration to help with migration from 0.50.40 will be provided where
-  needed if the package or class is changed. `com.vladsch.flexmark.util` will no longer contain
-  any files but will contain the separate utilities modules with `flexmark-utils` module being
-  an aggregate of all utilities modules, similar to `flexmark-all`
-  * `ast/` classes to `flexmark-util-ast`
-  * `builder/` classes to `flexmark-util-builder`
-  * `collection/` classes to `flexmark-util-collection`
-  * `data/` classes to `flexmark-util-data`
-  * `dependency/` classes to `flexmark-util-dependency`
-  * `format/` classes to `flexmark-util-format`
-  * `html/` classes to `flexmark-util-html`
-  * `mappers/` classes to `flexmark-util-sequence`
-  * `options/` classes to `flexmark-util-options`
-  * `sequence/` classes to `flexmark-util-sequence`
-  * `visitor/` classes to `flexmark-util-visitor`
-* Convert anonymous classes to lambda where possible.
-* refactor `flexmark-util` to eliminate dependency cycles between classes in different
-  subdirectories.
-* Break: delete deprecated properties, methods and classes
-* Add: `org.jetbrains:annotations:15.0` dependency to have `@Nullable`/`@NotNull` annotations
-  added for all parameters. I use IntelliJ IDEA for development and it helps to have these
-  annotations for analysis of potential problems and use with Kotlin.
-* Break: refactor and cleanup tests to eliminate duplicated code and allow easier reuse of test
-  cases with spec example data.
-* Break: move formatter tests to `flexmark-core-test` module to allow sharing of formatter base
-  classes in extensions without causing dependency cycles in formatter module.
-* Break: move formatter module into `flexmark` core. this module is almost always included
-  anyway because most extension have a dependency on formatter for their custom formatting
-  implementations. Having it as part of the core allows relying on its functionality in all
-  modules.
-* Break: move `com.vladsch.flexmark.spec` and `com.vladsch.flexmark.util` in
-  `flexmark-test-util` to `com.vladsch.flexmark.test.spec` and `com.vladsch.flexmark.test.util`
-  respectively to respect the naming convention between modules and their packages.
-* Break: `NodeVisitor` implementation details have changed. If you were overriding
-  `NodeVisitor.visit(Node)` in the previous version it is now `final` to ensure compile time
-  error is generated. You will need to change your implementation. See comment in the class for
-  instructions.
-
-  :information_source: `com.vladsch.flexmark.util.ast.Visitor` is only needed for implementation
-  of `NodeVisitor` and `VisitHandler`. If you convert all anonymous implementations of
-  `VisitHandler` to lambdas you can remove all imports for `Visitor`.
-  * Fix: remove old visitor like adapters and implement ones based on generic classes not linked
-    to flexmark AST node.
-  * Deprecate old base classes:
-    * `com.vladsch.flexmark.util.ast.NodeAdaptedVisitor` see javadoc for class
-    * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitHandler`
-    * `com.vladsch.flexmark.util.ast.NodeAdaptingVisitor`
+* [ ] Remove: all travis-ci links in readme files, no longer valid
+* [ ] Add: `ResizableImageExtension` documentation that it does not play with the rest of the
+      library renderers.
+* Add: `containsSomeIn(CharPredicate)`, `containsSomeNotIn(CharPredicate)`,
+  `containsOnlyIn(CharPredicate)`, `containsOnlyNotIn(CharPredicate)` methods to `BasedSequence`
+* Change: bump jsoup version to 1.15.4
+* Change: bump jetbrains.annotations version to 24.0.1
+* Change: remove `openhtmltopdf-jsoup-dom-converter` dependency from `flexmark-pdf-converter`.
+* Merge: outstanding PRs.
+  * [Add OSGi metadata to Manifest to enable deployment to OSGi environments by benfortuna · Pull Request #521 · vsch/flexmark-java · GitHub]
+  * [fix issue #448 by protogenes · Pull Request #510 · vsch/flexmark-java · GitHub]
+  * [update plugins and configure for Reproducible Builds by hboutemy · Pull Request #507 · vsch/flexmark-java · GitHub]
+  * [Prevent StringIndexOutOfBounds in ext-resizable-image by MiniDigger · Pull Request #503 · vsch/flexmark-java · GitHub]
+  * [Fix typo in issue template by MiniDigger · Pull Request #502 · vsch/flexmark-java · GitHub]
+  * [test parsing long sequence of underscores by niklasf · Pull Request #495 · vsch/flexmark-java · GitHub]
+  * [Update to latest maven bundle plugin. Fix for #529 by cziegeler · Pull Request #530 · vsch/flexmark-java · GitHub]
+  * [ext-resizable-image: fix images inside links by e-im · Pull Request #543 · vsch/flexmark-java · GitHub]
+  * [Dependency update for jsoup by viglu · Pull Request #544 · vsch/flexmark-java · GitHub]
+  * [Fix vsch#545, do not escape special characters in `<pre><code>` block by MekhailS · Pull Request #546 · vsch/flexmark-java · GitHub]
+  * [Fix #548: Converting html images fails if the image refers to an emoji without a shortcut by DamnedElric · Pull Request #562 · vsch/flexmark-java · GitHub]
+  * [Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub] 
 
 ## 0.64.0
 
@@ -189,7 +150,7 @@ Please give feedback on the upcoming changes if you have concerns about breaking
   **[znerd](https://github.com/znerd)**
 * Fix: merge [#489, add flexmark-ext-resizable-image] thanks to
   **[sparksparrow](https://github.com/sparksparrow)**
-* Fix: [#482, Namespaces in embedded HTML blocks not supported?] 
+* Fix: [#482, Namespaces in embedded HTML blocks not supported?]
   * Add `Parser.HTML_ALLOW_NAME_SPACE`, default `false` to allow recognizing HTML elements with
     namespace prefix. :exclamation: HTML deep parser always allows namespaces and ignores this
     option.
@@ -2166,17 +2127,28 @@ Please give feedback on the upcoming changes if you have concerns about breaking
 [#398, Autolinks get cut off if they contain \`&amp;\` (escaped query params)]: https://github.com/vsch/flexmark-java/issues/398
 [#407, Link text inline content fails to parse image references]: https://github.com/vsch/flexmark-java/issues/407
 [#452, JiraConverter: Mixed lists rendered incorrectly]: https://github.com/vsch/flexmark-java/issues/452
+[#482, Namespaces in embedded HTML blocks not supported?]: https://github.com/vsch/flexmark-java/issues/482
 [#489, add flexmark-ext-resizable-image]: https://github.com/vsch/flexmark-java/issues/489
 [@Xaelis]: https://github.com/Xaelis
+[Add OSGi metadata to Manifest to enable deployment to OSGi environments by benfortuna · Pull Request #521 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/521 "Add OSGi metadata to Manifest to enable deployment to OSGi environments by benfortuna · Pull Request #521 · vsch/flexmark-java · GitHub"
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
+[Dependency update for jsoup by viglu · Pull Request #544 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/544 "Dependency update for jsoup by viglu · Pull Request #544 · vsch/flexmark-java · GitHub"
+[Fix typo in issue template by MiniDigger · Pull Request #502 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/502 "Fix typo in issue template by MiniDigger · Pull Request #502 · vsch/flexmark-java · GitHub"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
 [NodeInsertingPostProcessorSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/NodeInsertingPostProcessorSample.java
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
+[Prevent StringIndexOutOfBounds in ext-resizable-image by MiniDigger · Pull Request #503 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/503 "Prevent StringIndexOutOfBounds in ext-resizable-image by MiniDigger · Pull Request #503 · vsch/flexmark-java · GitHub"
+[Update to latest maven bundle plugin. Fix for #529 by cziegeler · Pull Request #530 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/530 "Update to latest maven bundle plugin. Fix for #529 by cziegeler · Pull Request #530 · vsch/flexmark-java · GitHub"
 [YouTrack: IDEA-207453]: https://youtrack.jetbrains.com/issue/IDEA-207453 "Add Conversion of ref anchor to UrlFilter for file line navigation"
+[ext-resizable-image: fix images inside links by e-im · Pull Request #543 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/543 "ext-resizable-image: fix images inside links by e-im · Pull Request #543 · vsch/flexmark-java · GitHub"
+[fix issue #448 by protogenes · Pull Request #510 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/510 "fix issue #448 by protogenes · Pull Request #510 · vsch/flexmark-java · GitHub"
+[Fix vsch#545, do not escape special characters in `<pre><code>` block by MekhailS · Pull Request #546 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/546 "Fix vsch#545, do not escape special characters in `<pre><code>` block by MekhailS · Pull Request #546 · vsch/flexmark-java · GitHub"
 [migrate 0_35_x to 0_40_0.xml]: /assets/migrations/migrate%20flexmark-java%200_35_x%20to%200_40_0.xml
 [migrate flexmark-java 0_40_x to 0_42_0]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_40_x%20to%200_42_0.xml
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
-[#482, Namespaces in embedded HTML blocks not supported?]: https://github.com/vsch/flexmark-java/issues/482
-
+[test parsing long sequence of underscores by niklasf · Pull Request #495 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/495 "test parsing long sequence of underscores by niklasf · Pull Request #495 · vsch/flexmark-java · GitHub"
+[update plugins and configure for Reproducible Builds by hboutemy · Pull Request #507 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/507 "update plugins and configure for Reproducible Builds by hboutemy · Pull Request #507 · vsch/flexmark-java · GitHub"
+[Fix #548: Converting html images fails if the image refers to an emoji without a shortcut by DamnedElric · Pull Request #562 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/562 "Fix #548: Converting html images fails if the image refers to an emoji without a shortcut by DamnedElric · Pull Request #562 · vsch/flexmark-java · GitHub"
+[Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/566 "Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub"
 

@@ -2758,7 +2758,7 @@ TEXT :+1: TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji: 3
+```````````````````````````````` example(Emoji: 3) options(IGNORE)
 TEXT ![](https://s3.amazonaws.com/vladsch-env/images/MNLogo.png) TEXT
 .
 <w:body>
@@ -2814,7 +2814,7 @@ TEXT ![](https://s3.amazonaws.com/vladsch-env/images/MNLogo.png) TEXT
 ````````````````````````````````
 
 
-```````````````````````````````` example Emoji: 4
+```````````````````````````````` example(Emoji: 4) options(IGNORE)
 TEXT ![](https://vladsch.com/images/MNLogo.png) TEXT
 .
 <w:body>

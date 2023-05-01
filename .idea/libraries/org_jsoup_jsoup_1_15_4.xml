@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="org.jsoup:jsoup:1.15.4" type="repository">
+    <properties maven-id="org.jsoup:jsoup:1.15.4" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jsoup-1.15.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/jsoup-1.15.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

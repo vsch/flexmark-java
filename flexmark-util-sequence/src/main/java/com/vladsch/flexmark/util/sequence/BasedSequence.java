@@ -329,6 +329,37 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
     BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet);
 
     /**
+     * Test for line containing some of the characters in the set
+     * 
+     * @param charSet   set of characters to be tested
+     * @return          true if line contains some characters in the set
+     */
+    boolean containsSomeIn(@NotNull CharPredicate charSet);
+
+    /**
+     * Test for line containing some characters not in the set
+     *
+     * @param charSet   set of characters to be tested
+     * @return          true if line contains some characters not in the set
+     */
+    boolean containsSomeNotIn(@NotNull CharPredicate charSet);
+    /**
+     * Test for line contains only characters from the set
+     *
+     * @param charSet   set of characters to be tested
+     * @return          true if line contains some characters from the set
+     */
+    boolean containsOnlyIn(@NotNull CharPredicate charSet);
+
+    /**
+     * Test for line containing only characters not in the set
+     *
+     * @param charSet   set of characters to be tested
+     * @return          true if line contains some characters from the set
+     */
+    boolean containsOnlyNotIn(@NotNull CharPredicate charSet);
+    
+    /**
      * Extend this based sequence to include characters from underlying based sequence not in character set
      *
      * @param charSet  set of characters to include
