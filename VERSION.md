@@ -2,7 +2,7 @@
 
 [TOC]: # ""
 
-- [0.64.2 - Next Release](#0642---next-release)
+- [0.64.2](#0642)
 - [0.64.0](#0640)
 - [0.62.4](#0624)
 - [0.62.2](#0622)
@@ -114,7 +114,7 @@
 - [0.40.2](#0402)
 - [0.40.0](#0400)
 
-## 0.64.2 - Next Release
+## 0.64.2
 
 * [ ] Remove: all travis-ci links in readme files, no longer valid
 * [ ] Add: `ResizableImageExtension` documentation that it does not play with the rest of the
