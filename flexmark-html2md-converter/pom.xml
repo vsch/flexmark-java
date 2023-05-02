@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.64.2</version>
+        <version>0.64.4</version>
     </parent>
 
     <artifactId>flexmark-html2md-converter</artifactId>

@@ -60,5 +60,8 @@
     <orderEntry type="library" name="slf4j.log4j.over" level="project" />
     <orderEntry type="library" name="slf4j-api-1.7.26" level="project" />
     <orderEntry type="library" name="docx4j.JAXB.ReferenceImpl" level="project" />
+    <orderEntry type="library" name="apache.logging.log4j.core" level="project" />
+    <orderEntry type="library" name="apache.logging.log4j.api" level="project" />
+    <orderEntry type="library" name="apache.logging.log4j.1.2.api" level="project" />
   </component>
 </module>
