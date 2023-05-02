@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>15.0</version>
+            <version>24.0.1</version>
         </dependency>
     </dependencies>
 </project>

@@ -29,7 +29,7 @@ optimization of implementation classes. Changes are detailed in
 * For Versions 0.62.2 or below, Java 8 or above, Java 9+ compatible. For Versions 0.64.0 or
   above, Java 11 or above.
 * The project is on Maven: `com.vladsch.flexmark`
-* The core has no dependencies other than `org.jetbrains:annotations:15.0`. For extensions, see
+* The core has no dependencies other than `org.jetbrains:annotations:24.0.1`. For extensions, see
   extension description below.
 
   The API is still evolving to accommodate new extensions and functionality.
@@ -43,7 +43,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.64.0</version>
+    <version>0.64.4</version>
 </dependency>
 ```
 
@@ -82,7 +82,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-implementation 'com.vladsch.flexmark:flexmark-all:0.64.0'
+implementation 'com.vladsch.flexmark:flexmark-all:0.64.4'
 ```
 
 #### Building with Android Studio

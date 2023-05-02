@@ -2,6 +2,7 @@
 
 [TOC]: # ""
 
+- [0.64.4](#0644)
 - [0.64.2](#0642)
 - [0.64.0](#0640)
 - [0.62.4](#0624)
@@ -114,11 +115,14 @@
 - [0.40.2](#0402)
 - [0.40.0](#0400)
 
+## 0.64.4
+
+* Add: `ResizableImageExtension` documentation that it does not play with the rest of the
+  library renderers and is an unsupported extension.
+* Fix: update log4j1 to log4j2 to 2.20.0
+
 ## 0.64.2
 
-* [ ] Remove: all travis-ci links in readme files, no longer valid
-* [ ] Add: `ResizableImageExtension` documentation that it does not play with the rest of the
-      library renderers.
 * Add: `containsSomeIn(CharPredicate)`, `containsSomeNotIn(CharPredicate)`,
   `containsOnlyIn(CharPredicate)`, `containsOnlyNotIn(CharPredicate)` methods to `BasedSequence`
 * Change: bump jsoup version to 1.15.4
@@ -136,7 +140,7 @@
   * [Dependency update for jsoup by viglu · Pull Request #544 · vsch/flexmark-java · GitHub]
   * [Fix vsch#545, do not escape special characters in `<pre><code>` block by MekhailS · Pull Request #546 · vsch/flexmark-java · GitHub]
   * [Fix #548: Converting html images fails if the image refers to an emoji without a shortcut by DamnedElric · Pull Request #562 · vsch/flexmark-java · GitHub]
-  * [Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub] 
+  * [Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub]
 
 ## 0.64.0
 
@@ -2133,6 +2137,8 @@
 [Add OSGi metadata to Manifest to enable deployment to OSGi environments by benfortuna · Pull Request #521 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/521 "Add OSGi metadata to Manifest to enable deployment to OSGi environments by benfortuna · Pull Request #521 · vsch/flexmark-java · GitHub"
 [Awesome Console]: https://plugins.jetbrains.com/plugin/7677-awesome-console "Awesome Console"
 [Dependency update for jsoup by viglu · Pull Request #544 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/544 "Dependency update for jsoup by viglu · Pull Request #544 · vsch/flexmark-java · GitHub"
+[Fix #548: Converting html images fails if the image refers to an emoji without a shortcut by DamnedElric · Pull Request #562 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/562 "Fix #548: Converting html images fails if the image refers to an emoji without a shortcut by DamnedElric · Pull Request #562 · vsch/flexmark-java · GitHub"
+[Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/566 "Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub"
 [Fix typo in issue template by MiniDigger · Pull Request #502 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/502 "Fix typo in issue template by MiniDigger · Pull Request #502 · vsch/flexmark-java · GitHub"
 [HtmlToMarkdownCustomizedSample.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/HtmlToMarkdownCustomizedSample.java
 [Kijimuna]: https://github.com/Kijimuna
@@ -2149,6 +2155,4 @@
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [test parsing long sequence of underscores by niklasf · Pull Request #495 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/495 "test parsing long sequence of underscores by niklasf · Pull Request #495 · vsch/flexmark-java · GitHub"
 [update plugins and configure for Reproducible Builds by hboutemy · Pull Request #507 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/507 "update plugins and configure for Reproducible Builds by hboutemy · Pull Request #507 · vsch/flexmark-java · GitHub"
-[Fix #548: Converting html images fails if the image refers to an emoji without a shortcut by DamnedElric · Pull Request #562 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/562 "Fix #548: Converting html images fails if the image refers to an emoji without a shortcut by DamnedElric · Pull Request #562 · vsch/flexmark-java · GitHub"
-[Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/566 "Fix generation of header IDs by travkin79 · Pull Request #566 · vsch/flexmark-java · GitHub"
 
