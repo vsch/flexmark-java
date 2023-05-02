@@ -38,6 +38,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-core" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-pdfbox" level="project" />
+    <orderEntry type="library" name="ibm.icu.icu4j" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support" level="project" />
     <orderEntry type="library" name="org.jetbrains:annotations" level="project" />
     <orderEntry type="library" name="org.jsoup:jsoup:1.15.4" level="project" />

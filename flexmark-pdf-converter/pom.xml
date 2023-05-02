@@ -36,6 +36,11 @@
             <version>1.15.4</version>
         </dependency>
         <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>72.1</version>
+        </dependency>
+        <dependency>
             <!-- ALWAYS required. -->
             <groupId>com.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-core</artifactId>
@@ -52,6 +57,12 @@
             <groupId>com.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-rtl-support</artifactId>
             <version>${openhtml.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.ibm.icu</groupId>
+                    <artifactId>icu4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

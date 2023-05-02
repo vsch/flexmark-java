@@ -122,7 +122,9 @@
   `jakarta.xml.bind`. Global search/replace across the project will do it.
 * Add: `ResizableImageExtension` documentation that it does not play with the rest of the
   library renderers and is an unsupported extension.
-* Fix: update log4j1 to log4j2 to 2.20.0
+* Fix: update `log4j:log4j:1.2.17` to `org.apache.logging.log4j:log4j-xxx:2.20.0`
+* Fix: exclude `com.ibm.icu:icu4j:59.1` dependency, replace with `com.ibm.icu:icu4j:72.1`
+* Fix: exclude `commons-io:commons-io:1.3.1` dependency, replace with `commons-io:commons-io:2.11.0`
 
 ## 0.64.2
 
