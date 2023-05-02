@@ -68,7 +68,7 @@ import org.docx4j.toc.TocGenerator;
 import org.docx4j.wml.*;
 import org.jetbrains.annotations.NotNull;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import java.awt.image.BufferedImage;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;

@@ -117,6 +117,9 @@
 
 ## 0.64.4
 
+* Change: update to `org.docx4j:docx4j-JAXB-ReferenceImpl:11.4.9`, if you have code using
+  `javax.xml.bind` package from the dependency, you will need to change it to
+  `jakarta.xml.bind`. Global search/replace across the project will do it.
 * Add: `ResizableImageExtension` documentation that it does not play with the rest of the
   library renderers and is an unsupported extension.
 * Fix: update log4j1 to log4j2 to 2.20.0

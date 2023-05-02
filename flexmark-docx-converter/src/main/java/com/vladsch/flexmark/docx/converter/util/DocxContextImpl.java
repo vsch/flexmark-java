@@ -22,7 +22,7 @@ import org.docx4j.wml.R.ContinuationSeparator;
 import org.docx4j.wml.R.FootnoteRef;
 import org.docx4j.wml.R.Separator;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

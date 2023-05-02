@@ -1,20 +1,20 @@
 <component name="libraryTable">
   <library name="docx4j.JAXB.ReferenceImpl" type="repository">
-    <properties maven-id="org.docx4j:docx4j-JAXB-ReferenceImpl:11.3.2" />
+    <properties maven-id="org.docx4j:docx4j-JAXB-ReferenceImpl:11.4.9" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-JAXB-ReferenceImpl-11.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-core-11.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-11.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-pml-11.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-sml-11.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jaxb-svg11-1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-JAXB-ReferenceImpl-11.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-core-11.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-11.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-pml-11.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-sml-11.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-svg11-11.4.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mbassador-1.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jcl-over-slf4j-1.7.26.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jcl-over-slf4j-2.0.0-alpha5.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.9.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-compress-1.21.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.12.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-io-2.7.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/xmlgraphics-commons-2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xmlgraphics-commons-2.7.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/xalan-interpretive-11.0.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/xalan-serializer-11.0.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/wmf2svg-0.9.8.jar!/" />
@@ -25,16 +25,74 @@
       <root url="jar://$PROJECT_DIR$/lib/error_prone_annotations-2.3.3.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/fontbox-2.0.24.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/qdox-1.12.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jaxb-runtime-2.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/txw2-2.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/istack-commons-runtime-3.0.8.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/stax-ex-1.8.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/FastInfoset-1.2.16.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jakarta.activation-api-1.2.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/jakarta.xml.bind-api-2.3.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.8.0-beta4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-runtime-3.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.activation-2.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-core-3.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/txw2-3.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/istack-commons-runtime-4.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.xml.bind-api-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-2.0.0-alpha6.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-JAXB-ReferenceImpl-11.4.9-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-core-11.4.9-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-11.4.9-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-pml-11.4.9-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-sml-11.4.9-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-svg11-11.4.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mbassador-1.3.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jcl-over-slf4j-2.0.0-alpha5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.9-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-compress-1.21-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.12-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.7-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xmlgraphics-commons-2.7-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xalan-interpretive-11.0.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xalan-serializer-11.0.0-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/wmf2svg-0.9.8-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/antlr-runtime-3.5.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/checker-qual-2.8.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/error_prone_annotations-2.3.3-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/fontbox-2.0.24-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/qdox-1.12-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-runtime-3.0.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.activation-2.0.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-core-3.0.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/txw2-3.0.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/istack-commons-runtime-4.0.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.xml.bind-api-3.0.1-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-2.0.0-alpha6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-JAXB-ReferenceImpl-11.4.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-core-11.4.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-11.4.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-pml-11.4.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/docx4j-openxml-objects-sml-11.4.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-svg11-11.4.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mbassador-1.3.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jcl-over-slf4j-2.0.0-alpha5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang3-3.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-compress-1.21-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.12-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.7-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xmlgraphics-commons-2.7-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xalan-interpretive-11.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xalan-serializer-11.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/wmf2svg-0.9.8-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/antlr-runtime-3.5.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/stringtemplate-3.2.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/checker-qual-2.8.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/error_prone_annotations-2.3.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/fontbox-2.0.24-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/qdox-1.12-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-runtime-3.0.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.activation-2.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-core-3.0.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/txw2-3.0.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/istack-commons-runtime-4.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.xml.bind-api-3.0.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-2.0.0-alpha6-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

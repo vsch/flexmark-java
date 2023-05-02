@@ -63,5 +63,6 @@
     <orderEntry type="library" name="apache.logging.log4j.core" level="project" />
     <orderEntry type="library" name="apache.logging.log4j.api" level="project" />
     <orderEntry type="library" name="apache.logging.log4j.1.2.api" level="project" />
+    <orderEntry type="library" name="apache.xmlgraphics.commons" level="project" />
   </component>
 </module>
