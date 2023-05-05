@@ -2,6 +2,7 @@
 
 [TOC]: # ""
 
+- [0.64.6](#0646)
 - [0.64.4](#0644)
 - [0.64.2](#0642)
 - [0.64.0](#0640)
@@ -115,6 +116,12 @@
 - [0.40.2](#0402)
 - [0.40.0](#0400)
 
+## 0.64.6
+
+* Add: gradle build resource url resolver, mapping `/build/resources/test/` to
+  `/src/test/resources/`
+* Add: a bit more documentation to `ResourceResolverManager`
+
 ## 0.64.4
 
 * Change: update to `org.docx4j:docx4j-JAXB-ReferenceImpl:11.4.9`, if you have code using
@@ -124,7 +131,8 @@
   library renderers and is an unsupported extension.
 * Fix: update `log4j:log4j:1.2.17` to `org.apache.logging.log4j:log4j-xxx:2.20.0`
 * Fix: exclude `com.ibm.icu:icu4j:59.1` dependency, replace with `com.ibm.icu:icu4j:72.1`
-* Fix: exclude `commons-io:commons-io:1.3.1` dependency, replace with `commons-io:commons-io:2.11.0`
+* Fix: exclude `commons-io:commons-io:1.3.1` dependency, replace with
+  `commons-io:commons-io:2.11.0`
 
 ## 0.64.2
 

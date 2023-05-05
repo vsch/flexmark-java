@@ -11,8 +11,12 @@ import java.util.function.Function;
 import static com.vladsch.flexmark.test.util.spec.ResourceUrlResolver.hasProtocol;
 
 public class ResourceResolverManager {
+    /**
+     * urlResolvers map test resource location url to source resource url to allow tests to  
+     * output file URLs which refer to source location, not copies in test location
+     */
     final private static ArrayList<Function<String, String>> urlResolvers = new ArrayList<>();
-
+    
     public static void registerUrlResolver(@NotNull Function<String, String> resolver) {
         ResourceResolverManager.urlResolvers.add(resolver);
     }

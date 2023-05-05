@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         LoadUnloadDataKeyAggregatorTest.class,
+        TestUtilsTest.class
 })
 public class TestUtilsTestSuite {
 }

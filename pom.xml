@@ -13,7 +13,7 @@
 
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-java</artifactId>
-    <version>0.64.4</version>
+    <version>0.64.6</version>
     <name>flexmark-java</name>
     <description>
         Java re-implementation of commonmark-java based parser, with AST reflecting source elements, full source position tracking, greater parser extensibility.
@@ -85,7 +85,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.outputTimestamp>1683060842</project.build.outputTimestamp>
+        <project.build.outputTimestamp>1683297666</project.build.outputTimestamp>
         <flexmark.javadoc.location>${project.basedir}/target/apidocs/</flexmark.javadoc.location>
         <!-- Don't automatically publish artifacts to Central, we might want to inspect them first. -->
         <nexus.staging.autoRelease>false</nexus.staging.autoRelease>

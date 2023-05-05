@@ -4,6 +4,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
+/**
+ * Used to resolve test resource URL from copy in test location to URL of source file
+ */
 public interface ResourceUrlResolver extends Function<String, String> {
     @Override
     String apply(String externalForm);
