@@ -91,4 +91,24 @@ public class TextCollectingVisitorTest {
                 "after" +
                 "", text);
     }
+
+    @Test
+    public void test_paragraph_and_indented_code_block() {
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse("" +
+                "before\n" +
+                "\n" +
+                "    indented code block\n" +
+                "\n" +
+                "after");
+        TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
+        final String text = collectingVisitor.collectAndGetText(document);
+        assertEquals("" +
+                "before\n" +
+                "\n"+
+                "indented code block\n" +
+                "\n"+
+                "after" +
+                "", text);
+    }
 }
