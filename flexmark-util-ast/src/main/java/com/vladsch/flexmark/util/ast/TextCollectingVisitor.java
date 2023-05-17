@@ -17,12 +17,14 @@ public class TextCollectingVisitor {
                 if (!node.isOrDescendantOfType(DoNotCollectText.class)) {
                     out.setLastNode(node);
                     if (node instanceof TextContainer) {
-                        if (((TextContainer) node).collectText(out, flags, myVisitor)) {
+                        final TextContainer textContainer = (TextContainer) node;
+                        if (textContainer.collectText(out, flags, myVisitor)) {
                             if (node instanceof BlankLineBreakNode && out.isNotEmpty()) {
                                 out.appendEol();
                             }
                             processChildren(node, processor);
                         }
+                        textContainer.collectEndText(out, flags, myVisitor);
                     } else {
                         if (node instanceof BlankLineBreakNode && out.isNotEmpty()) {
                             out.appendEol();

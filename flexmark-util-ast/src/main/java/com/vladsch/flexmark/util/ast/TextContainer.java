@@ -53,4 +53,14 @@ public interface TextContainer {
      * @return true if child nodes should be visited
      */
     boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor);
+
+    /**
+     * Append node's text ending, after any child nodes have been visited.
+     * The default implementation does nothing.
+     *
+     * @param out   sequence build to which to append text
+     * @param flags collection flags
+     * @param nodeVisitor node visitor to use to visit children
+     */
+    default void collectEndText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {}
 }

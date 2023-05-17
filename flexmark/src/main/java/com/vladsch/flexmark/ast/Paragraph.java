@@ -136,8 +136,16 @@ public class Paragraph extends Block implements TextContainer {
     @Override
     public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
         if (!out.isEmpty()) {
-            out.add("\n\n");
+            out.add("\n");
         }
+
         return true;
+    }
+
+    @Override
+    public void collectEndText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
+        if (trailingBlankLine) {
+            out.add("\n");
+        }
     }
 }
