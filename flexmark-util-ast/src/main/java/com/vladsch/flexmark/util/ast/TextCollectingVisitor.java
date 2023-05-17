@@ -22,18 +22,15 @@ public class TextCollectingVisitor {
                                 out.appendEol();
                             }
                             processChildren(node, processor);
-                            if (node instanceof LineBreakNode && out.needEol()) {
-                                out.appendEol();
-                            }
                         }
                     } else {
                         if (node instanceof BlankLineBreakNode && out.isNotEmpty()) {
                             out.appendEol();
                         }
                         processChildren(node, processor);
-                        if (node instanceof LineBreakNode && out.needEol()) {
-                            out.appendEol();
-                        }
+                    }
+                    if (node instanceof LineBreakNode && out.needEol()) {
+                        out.appendEol();
                     }
                 }
             }
