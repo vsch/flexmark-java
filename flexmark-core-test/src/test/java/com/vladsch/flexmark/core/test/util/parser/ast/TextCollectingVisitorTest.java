@@ -67,4 +67,48 @@ public class TextCollectingVisitorTest {
                 "with more text" +
                 "", text);
     }
+
+    @Test
+    public void test_paragraph_and_fenced_code_block() {
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse("" +
+                "before\n" +
+                "\n" +
+                "```\n" +
+                "fenced code\n" +
+                "block\n" +
+                "```\n" +
+                "\n" +
+                "after");
+        TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
+        final String text = collectingVisitor.collectAndGetText(document);
+        assertEquals("" +
+                "before\n" +
+                "\n"+
+                "fenced code\n" +
+                "block\n" +
+                "\n"+
+                "after" +
+                "", text);
+    }
+
+    @Test
+    public void test_paragraph_and_indented_code_block() {
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse("" +
+                "before\n" +
+                "\n" +
+                "    indented code block\n" +
+                "\n" +
+                "after");
+        TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
+        final String text = collectingVisitor.collectAndGetText(document);
+        assertEquals("" +
+                "before\n" +
+                "\n"+
+                "indented code block\n" +
+                "\n"+
+                "after" +
+                "", text);
+    }
 }
