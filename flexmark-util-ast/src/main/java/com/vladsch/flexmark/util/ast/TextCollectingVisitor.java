@@ -15,8 +15,8 @@ public class TextCollectingVisitor {
             @Override
             public void processNode(@NotNull Node node, boolean withChildren, @NotNull BiConsumer<Node, Visitor<Node>> processor) {
                 if (!node.isOrDescendantOfType(DoNotCollectText.class)) {
+                    out.setLastNode(node);
                     if (node instanceof TextContainer) {
-                        out.setLastNode(node);
                         if (((TextContainer) node).collectText(out, flags, myVisitor)) {
                             if (node instanceof BlankLineBreakNode && out.isNotEmpty()) {
                                 out.appendEol();
@@ -27,7 +27,6 @@ public class TextCollectingVisitor {
                             }
                         }
                     } else {
-                        out.setLastNode(node);
                         if (node instanceof BlankLineBreakNode && out.isNotEmpty()) {
                             out.appendEol();
                         }
