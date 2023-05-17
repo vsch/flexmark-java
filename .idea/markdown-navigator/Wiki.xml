@@ -29,7 +29,7 @@
       </ParserSettings>
       <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" addPageHeader="true" addAnchorLinks="false" anchorLinksWrapText="false" imageUriSerials="true" addDocTypeHtml="true" noParaTags="false" defaultUrlTitle="false" migratedPlantUml="true" migratedAnchorLinks="true" plantUmlConversion="0">
         <GeneratorProvider>
-          <provider providerId="com.vladsch.md.nav.editor.javafx.html.generator" providerName="JavaFx/Chromium HTML Generator" />
+          <provider providerId="com.vladsch.md.nav.editor.jbcef.html.generator" providerName="Java Chromium HTML Generator" />
         </GeneratorProvider>
         <headerTop />
         <headerBottom />
@@ -55,7 +55,7 @@
       </HtmlSettings>
       <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssUriSerial="true" isCssTextEnabled="true" isDynamicPageWidth="true">
         <StylesheetProvider>
-          <provider providerId="com.vladsch.md.nav.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
+          <provider providerId="com.vladsch.md.nav.editor.jbcef.html.css" providerName="Default Java Chromium Stylesheet" />
         </StylesheetProvider>
         <ScriptProviders>
           <provider providerId="com.vladsch.md.nav.editor.github-collapse-in-comment.html.script" providerName="Details tag opener" />

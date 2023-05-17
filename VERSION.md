@@ -118,6 +118,8 @@
 
 ## 0.64.6
 
+* Merge:
+  [TextCollectingVisitor works better with code blocks by roxspring · Pull Request #575 · vsch/flexmark-java · GitHub]
 * Add: gradle build resource url resolver, mapping `/build/resources/test/` to
   `/src/test/resources/`
 * Add: a bit more documentation to `ResourceResolverManager`
@@ -2168,4 +2170,5 @@
 [migrate flexmark-java 0_42_x to 0_50_0.xml]: https://github.com/vsch/flexmark-java/blob/master/assets/migrations/migrate%20flexmark-java%200_42_x%20to%200_50_0.xml
 [test parsing long sequence of underscores by niklasf · Pull Request #495 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/495 "test parsing long sequence of underscores by niklasf · Pull Request #495 · vsch/flexmark-java · GitHub"
 [update plugins and configure for Reproducible Builds by hboutemy · Pull Request #507 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/507 "update plugins and configure for Reproducible Builds by hboutemy · Pull Request #507 · vsch/flexmark-java · GitHub"
+[TextCollectingVisitor works better with code blocks by roxspring · Pull Request #575 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/575 "TextCollectingVisitor works better with code blocks by roxspring · Pull Request #575 · vsch/flexmark-java · GitHub"
 

@@ -89,7 +89,7 @@ implementation 'com.vladsch.flexmark:flexmark-all:0.64.6'
 
 Additional settings due to duplicate files:
 
-```
+```groovy
 packagingOptions {
     exclude 'META-INF/LICENSE-LGPL-2.1.txt'
     exclude 'META-INF/LICENSE-LGPL-3.txt'
