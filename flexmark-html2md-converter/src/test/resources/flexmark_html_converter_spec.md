@@ -1399,9 +1399,47 @@ As ref
 ````````````````````````````````
 
 
+References with text as ref id
+
+```````````````````````````````` example(Links: 31) options(links-ref)
+[Link 1][]
+
+[Link 1]: http://example.com
+
+.
+<a href="http://example.com">Link 1</a>
+````````````````````````````````
+
+
+References with text as ref id, duplicated
+
+```````````````````````````````` example(Links: 32) options(links-ref)
+[Link 1][] [Link 1][Link 1_1]
+
+[Link 1]: http://example.com
+[Link 1_1]: http://example.com/link2
+
+.
+<a href="http://example.com">Link 1</a> <a href="http://example.com/link2">Link 1</a>
+````````````````````````````````
+
+
+References with text as ref id, duplicated
+
+```````````````````````````````` example(Links: 33) options(links-ref, links-ref-uniquifier)
+[Link 1][] [Link 1][Link 1 - 1]
+
+[Link 1]: http://example.com
+[Link 1 - 1]: http://example.com/link2
+
+.
+<a href="http://example.com">Link 1</a> <a href="http://example.com/link2">Link 1</a>
+````````````````````````````````
+
+
 custom resolver
 
-```````````````````````````````` example(Links: 31) options(links-ref, link-resolver)
+```````````````````````````````` example(Links: 34) options(links-ref, link-resolver)
 [http://example.com][]
 
 [http://example.com]: https://example.com 'Title'
@@ -1411,14 +1449,14 @@ custom resolver
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 32) options(links-ref, link-resolver)
+```````````````````````````````` example(Links: 35) options(links-ref, link-resolver)
 <https://example.com>
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 33) options(links-ref)
+```````````````````````````````` example(Links: 36) options(links-ref)
 [\[Text **Bold**\]][]
 
 [\[Text **Bold**\]]: http://example.com
@@ -1428,7 +1466,7 @@ custom resolver
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 34) options(links-ref)
+```````````````````````````````` example(Links: 37) options(links-ref)
 [![alt](image.png)](http://example.com)
 .
 <a href="http://example.com"><img src="image.png" alt="alt"></a>
@@ -1437,20 +1475,20 @@ custom resolver
 
 As ref re-use document
 
-```````````````````````````````` example(Links: 35) options(no-autolinks, links-ref, for-document)
+```````````````````````````````` example(Links: 38) options(no-autolinks, links-ref, for-document)
 [http://example.com][example.com]
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 36) options(links-none)
+```````````````````````````````` example(Links: 39) options(links-none)
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 37
+```````````````````````````````` example Links: 40
 [](#30xxx93---bug-fix-release)
 .
 <a href="#30xxx93---bug-fix-release"></a>
@@ -3543,6 +3581,7 @@ special symbols: \*~^&<>[]|`
 <pre><code class="text">special symbols: <b>\*~^&<>[]|`</b>
 </code></pre>
 ````````````````````````````````
+
 
 ## Skipped Fenced Code
 

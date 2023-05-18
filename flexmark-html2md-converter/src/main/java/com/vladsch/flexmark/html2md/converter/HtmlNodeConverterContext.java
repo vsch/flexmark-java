@@ -104,6 +104,8 @@ public interface HtmlNodeConverterContext extends NodeContext<Node, HtmlNodeConv
 
     @NotNull HashMap<String, Reference> getReferenceUrlToReferenceMap();
 
+    @NotNull HashMap<String, Reference> getReferenceIdToReferenceMap();
+
     @NotNull HashSet<Reference> getExternalReferences();
 
     boolean isTrace();

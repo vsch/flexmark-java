@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.misc.Utils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 
 @SuppressWarnings({ "WeakerAccess" })
@@ -61,6 +62,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
     public String nbspText;
     public String thematicBreak;
     public String outputAttributesNamesRegex;
+    public BiFunction<String, Integer, String> uniqueLinkRefIdGenerator;
     public Pattern outputAttributesNamesRegexPattern;
     public String outputIdAttributeRegex;
     public Pattern outputIdAttributeRegexPattern;
@@ -125,6 +127,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
         nbspText = other.nbspText;
         thematicBreak = other.thematicBreak;
         outputAttributesNamesRegex = other.outputAttributesNamesRegex;
+        uniqueLinkRefIdGenerator = other.uniqueLinkRefIdGenerator;
         outputAttributesNamesRegexPattern = other.outputAttributesNamesRegexPattern;
         tableCellAlignmentMap = other.tableCellAlignmentMap;
         tableOptions = other.tableOptions;
@@ -193,6 +196,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
         thematicBreak = FlexmarkHtmlConverter.THEMATIC_BREAK.get(options);
         outputAttributesNamesRegex = FlexmarkHtmlConverter.OUTPUT_ATTRIBUTES_NAMES_REGEX.get(options);
         outputAttributesNamesRegexPattern = Pattern.compile(outputAttributesNamesRegex);
+        uniqueLinkRefIdGenerator = FlexmarkHtmlConverter.UNIQUE_LINK_REF_ID_GENERATOR.get(options);
         outputIdAttributeRegex = FlexmarkHtmlConverter.OUTPUT_ID_ATTRIBUTE_REGEX.get(options);
         outputIdAttributeRegexPattern = Pattern.compile(outputIdAttributeRegex);
         tableCellAlignmentMap = FlexmarkHtmlConverter.TABLE_CELL_ALIGNMENT_MAP.get(options);
@@ -254,6 +258,7 @@ public class HtmlConverterOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlConverter.NBSP_TEXT, nbspText);
         dataHolder.set(FlexmarkHtmlConverter.THEMATIC_BREAK, thematicBreak);
         dataHolder.set(FlexmarkHtmlConverter.OUTPUT_ATTRIBUTES_NAMES_REGEX, outputAttributesNamesRegex);
+        dataHolder.set(FlexmarkHtmlConverter.UNIQUE_LINK_REF_ID_GENERATOR, uniqueLinkRefIdGenerator);
         dataHolder.set(FlexmarkHtmlConverter.TABLE_CELL_ALIGNMENT_MAP, tableCellAlignmentMap);
         dataHolder.set(FlexmarkHtmlConverter.OUTPUT_ID_ATTRIBUTE_REGEX, outputIdAttributeRegex);
         dataHolder.set(FlexmarkHtmlConverter.EXT_MATH, extMath);

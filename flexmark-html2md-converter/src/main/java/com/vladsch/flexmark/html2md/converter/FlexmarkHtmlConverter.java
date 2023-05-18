@@ -34,6 +34,7 @@ import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -79,6 +80,10 @@ public class FlexmarkHtmlConverter {
     final public static DataKey<String> NBSP_TEXT = new DataKey<>("NBSP_TEXT", " ");
     final public static DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<>("EOL_IN_TITLE_ATTRIBUTE", " ");
     final public static DataKey<String> THEMATIC_BREAK = new DataKey<>("THEMATIC_BREAK", "*** ** * ** ***");
+
+    // Format to resolve duplicate ref id for links, use %s for the RefID and %d for the numeric addition to the text
+    final public static DataKey<BiFunction<String, Integer, String>> UNIQUE_LINK_REF_ID_GENERATOR = new DataKey<>("UNIQUE_LINK_REF_ID_GENERATOR"
+            , (refId, index) -> String.format("%s_%d", refId, index));
 
     // Render HTML contents - UNWRAPPED
     final public static DataKey<String[]> UNWRAPPED_TAGS = new DataKey<>("UNWRAPPED_TAGS", new String[] {
@@ -544,6 +549,7 @@ public class FlexmarkHtmlConverter {
         private @Nullable Parser myParser = null;
         final private @NotNull HtmlLinkResolver[] myHtmlLinkResolvers;
         final private @NotNull HashMap<String, Reference> myReferenceUrlToReferenceMap;  // map of URL to reference node
+        final private @NotNull HashMap<String, Reference> myReferenceIdToReferenceMap;  // map of RefId to reference node
         final private @NotNull HashSet<Reference> myExternalReferences;  // map of URL to reference node
 
         @Override
@@ -576,6 +582,7 @@ public class FlexmarkHtmlConverter {
             //myTrace = true;
             myStateStack = new Stack<>();
             myReferenceUrlToReferenceMap = new HashMap<>();
+            myReferenceIdToReferenceMap = new HashMap<>();
             myExternalReferences = new HashSet<>();
             myState = null;
 
@@ -630,16 +637,16 @@ public class FlexmarkHtmlConverter {
             }
 
             @Override
-            public @NotNull DataHolder getOptions() {return myOptions;}
+            public @NotNull DataHolder getOptions() { return myOptions; }
 
             @Override
-            public @NotNull HtmlConverterOptions getHtmlConverterOptions() {return myMainNodeRenderer.getHtmlConverterOptions();}
+            public @NotNull HtmlConverterOptions getHtmlConverterOptions() { return myMainNodeRenderer.getHtmlConverterOptions(); }
 
             @Override
-            public @NotNull Document getDocument() {return myMainNodeRenderer.getDocument();}
+            public @NotNull Document getDocument() { return myMainNodeRenderer.getDocument(); }
 
             @Override
-            public HtmlConverterPhase getFormattingPhase() {return myMainNodeRenderer.getFormattingPhase();}
+            public HtmlConverterPhase getFormattingPhase() { return myMainNodeRenderer.getFormattingPhase(); }
 
             @Override
             public void render(@NotNull Node node) {
@@ -763,6 +770,11 @@ public class FlexmarkHtmlConverter {
             @Override
             public @NotNull HashMap<String, Reference> getReferenceUrlToReferenceMap() {
                 return myMainNodeRenderer.getReferenceUrlToReferenceMap();
+            }
+
+            @Override
+            public @NotNull HashMap<String, Reference> getReferenceIdToReferenceMap() {
+                return myMainNodeRenderer.getReferenceIdToReferenceMap();
             }
 
             @Override
@@ -892,6 +904,11 @@ public class FlexmarkHtmlConverter {
         }
 
         @Override
+        public @NotNull HashMap<String, Reference> getReferenceIdToReferenceMap() {
+            return myReferenceIdToReferenceMap;
+        }
+
+        @Override
         public @NotNull HashSet<Reference> getExternalReferences() {
             return myExternalReferences;
         }
@@ -938,10 +955,10 @@ public class FlexmarkHtmlConverter {
             // create a new one with URL and if no conflict with text as id
             String referenceId = text;
 
-            if (myReferenceUrlToReferenceMap.containsKey(referenceId)) {
+            if (myReferenceIdToReferenceMap.containsKey(referenceId)) {
                 for (int i = 1; ; i++) {
-                    referenceId = text + "_" + i;
-                    if (!myReferenceUrlToReferenceMap.containsKey(referenceId)) {
+                    referenceId = myHtmlConverterOptions.uniqueLinkRefIdGenerator.apply(text, i);
+                    if (!myReferenceIdToReferenceMap.containsKey(referenceId)) {
                         break;
                     }
                 }
@@ -958,6 +975,7 @@ public class FlexmarkHtmlConverter {
             if (firstChild instanceof Reference) {
                 reference = (Reference) firstChild;
                 myReferenceUrlToReferenceMap.put(url, reference);
+                myReferenceIdToReferenceMap.put(referenceId, reference);
                 return reference;
             }
             return null;

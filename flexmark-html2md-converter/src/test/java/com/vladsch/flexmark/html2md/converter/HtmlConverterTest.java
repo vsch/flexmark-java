@@ -66,6 +66,7 @@ public abstract class HtmlConverterTest extends ComboSpecTestCase {
         optionsMap.put("links-none", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_LINK, LinkConversion.NONE));
         optionsMap.put("links-exp", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_LINK, LinkConversion.MARKDOWN_EXPLICIT));
         optionsMap.put("links-ref", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_LINK, LinkConversion.MARKDOWN_REFERENCE));
+        optionsMap.put("links-ref-uniquifier", new MutableDataSet().set(FlexmarkHtmlConverter.UNIQUE_LINK_REF_ID_GENERATOR, (refId, index) -> String.format("%s - %d", refId, index)));
         optionsMap.put("links-text", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_LINK, LinkConversion.TEXT));
         optionsMap.put("links-html", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_LINK, LinkConversion.HTML));
         optionsMap.put("img-none", new MutableDataSet().set(FlexmarkHtmlConverter.EXT_INLINE_IMAGE, LinkConversion.NONE));
