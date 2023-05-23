@@ -1914,7 +1914,7 @@ handling code if they have no corresponding shortcut
 
 ```````````````````````````````` example Issue 548: 1
 This is my test to a Facebook emoji:  
-![text](https://static.xx.fbcdn.net/images/emoji.php/v9/t71/2/16/1f967.png)
+:pie:
 .
 <div>
 <div>This is my test to a Facebook emoji:</div>
@@ -1924,7 +1924,7 @@ This is my test to a Facebook emoji:
 
 
 ```````````````````````````````` example Issue 548: 2
-![](1f9a0.png)
+:microbe:
 .
 <img src="1f9a0.png" />
 ````````````````````````````````

@@ -12,6 +12,7 @@ public class EmojiOptions {
     final public String attrImageSize;
     final public String attrAlign;
     final public String attrImageClass;
+    final public boolean useUnicodeFileNames;
 
     public EmojiOptions(DataHolder options) {
         this.useShortcutType = EmojiExtension.USE_SHORTCUT_TYPE.get(options);
@@ -20,5 +21,6 @@ public class EmojiOptions {
         this.rootImagePath = EmojiExtension.ROOT_IMAGE_PATH.get(options);
         this.useImageType = EmojiExtension.USE_IMAGE_TYPE.get(options);
         this.attrImageClass = EmojiExtension.ATTR_IMAGE_CLASS.get(options);
+        this.useUnicodeFileNames = EmojiExtension.USE_UNICODE_FILE_NAMES.get(options);
     }
 }

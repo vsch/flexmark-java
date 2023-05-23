@@ -443,7 +443,7 @@ Converts :warning: to its emoji image
   to increase compatibility with existing markdown parsers.
 .
 <h2>Markdown Navigator</h2>
-<p>Converts <img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /> to its emoji image</p>
+<p>Converts <img src="/img/warning.png" alt="emoji github:warning" height="20" width="20" align="absmiddle" /> to its emoji image</p>
 <h3>Version History</h3>
 <ul>
   <li><a href="#22012---compatibility--enhancement-release">2.2.0.12 - Compatibility &amp; Enhancement Release</a></li>
@@ -859,7 +859,7 @@ Converts :warning: to its emoji image
 </ul>
 <h4>Enhanced Edition</h4>
 <ul>
-  <li>Change: Move pegdown timeout from parser settings to debug settings. <img src="/img/grinning.png" alt="emoji people:grinning" height="20" width="20" align="absmiddle" /></li>
+  <li>Change: Move pegdown timeout from parser settings to debug settings. <img src="/img/grinning.png" alt="emoji github:grinning" height="20" width="20" align="absmiddle" /></li>
   <li>Add: use actual char width to fix for wrap on typing fix when typing right before start of
     line elements.</li>
   <li>Add: GFM table rendering option to render tables text that GFM would render as text.</li>

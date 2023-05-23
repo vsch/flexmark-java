@@ -25,6 +25,7 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     final public static DataKey<String> ROOT_IMAGE_PATH = new DataKey<>("ROOT_IMAGE_PATH", "/img/");
     final public static DataKey<EmojiShortcutType> USE_SHORTCUT_TYPE = new DataKey<>("USE_SHORTCUT_TYPE", EmojiShortcutType.EMOJI_CHEAT_SHEET);
     final public static DataKey<EmojiImageType> USE_IMAGE_TYPE = new DataKey<>("USE_IMAGE_TYPE", EmojiImageType.IMAGE_ONLY);
+    final public static DataKey<Boolean> USE_UNICODE_FILE_NAMES = new DataKey<>("USE_UNICODE_FILE_NAMES", false);
 
     private EmojiExtension() {
     }

@@ -2346,7 +2346,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100000" name="Image100000"/>
+                    <wp:docPr descr="emoji github:+1" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2420,7 +2420,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="279400" cy="279400"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100000" name="Image100000"/>
+                    <wp:docPr descr="emoji github:+1" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2470,7 +2470,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="241300" cy="241300"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100002" name="Image100002"/>
+                    <wp:docPr descr="emoji github:+1" id="100002" name="Image100002"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2520,7 +2520,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="203200" cy="203200"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100004" name="Image100004"/>
+                    <wp:docPr descr="emoji github:+1" id="100004" name="Image100004"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2570,7 +2570,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="177800" cy="177800"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100006" name="Image100006"/>
+                    <wp:docPr descr="emoji github:+1" id="100006" name="Image100006"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2620,7 +2620,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100008" name="Image100008"/>
+                    <wp:docPr descr="emoji github:+1" id="100008" name="Image100008"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2670,7 +2670,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100010" name="Image100010"/>
+                    <wp:docPr descr="emoji github:+1" id="100010" name="Image100010"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2718,7 +2718,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100012" name="Image100012"/>
+                    <wp:docPr descr="emoji github:+1" id="100012" name="Image100012"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2889,7 +2889,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100000" name="Image100000"/>
+                    <wp:docPr descr="emoji github:+1" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -2953,7 +2953,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="100000" name="Image100000"/>
+                    <wp:docPr descr="emoji github:basecamp" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3440,7 +3440,7 @@ TEXT :+1: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji people:+1" id="100000" name="Image100000"/>
+                    <wp:docPr descr="emoji github:+1" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3514,7 +3514,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="279400" cy="279400"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="100000" name="Image100000"/>
+                    <wp:docPr descr="emoji github:basecamp" id="100000" name="Image100000"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3564,7 +3564,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="241300" cy="241300"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="100002" name="Image100002"/>
+                    <wp:docPr descr="emoji github:basecamp" id="100002" name="Image100002"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3614,7 +3614,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="203200" cy="203200"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="100004" name="Image100004"/>
+                    <wp:docPr descr="emoji github:basecamp" id="100004" name="Image100004"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3664,7 +3664,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="177800" cy="177800"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="100006" name="Image100006"/>
+                    <wp:docPr descr="emoji github:basecamp" id="100006" name="Image100006"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3714,7 +3714,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="100008" name="Image100008"/>
+                    <wp:docPr descr="emoji github:basecamp" id="100008" name="Image100008"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3764,7 +3764,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="100010" name="Image100010"/>
+                    <wp:docPr descr="emoji github:basecamp" id="100010" name="Image100010"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>
@@ -3812,7 +3812,7 @@ TEXT :basecamp: TEXT
                 <wp:inline distB="0" distL="0" distR="0" distT="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing">
                     <wp:extent cx="139700" cy="139700"/>
                     <wp:effectExtent b="0" l="0" r="0" t="0"/>
-                    <wp:docPr descr="emoji symbols:basecamp" id="100012" name="Image100012"/>
+                    <wp:docPr descr="emoji github:basecamp" id="100012" name="Image100012"/>
                     <wp:cNvGraphicFramePr>
                         <a:graphicFrameLocks noChangeAspect="true" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
                     </wp:cNvGraphicFramePr>

@@ -21,7 +21,15 @@ public class EmojiResolvedShortcut {
         return getEmojiText(node.getText().toString(), useShortcutType, useImageType, rootImagePath);
     }
 
+    public static EmojiResolvedShortcut getEmojiText(Emoji node, EmojiShortcutType useShortcutType, EmojiImageType useImageType, String rootImagePath, boolean useUnicodeFileName) {
+        return getEmojiText(node.getText().toString(), useShortcutType, useImageType, rootImagePath, useUnicodeFileName);
+    }
+
     public static EmojiResolvedShortcut getEmojiText(String emojiId, EmojiShortcutType useShortcutType, EmojiImageType useImageType, String rootImagePath) {
+        return getEmojiText(emojiId, useShortcutType, useImageType, rootImagePath, false);
+    }
+
+    public static EmojiResolvedShortcut getEmojiText(String emojiId, EmojiShortcutType useShortcutType, EmojiImageType useImageType, String rootImagePath, boolean useUnicodeFileName) {
         EmojiReference.Emoji emoji = EmojiShortcuts.getEmojiFromShortcut(emojiId);
         String emojiText = null;
         boolean isUnicode = false;
@@ -42,7 +50,11 @@ public class EmojiResolvedShortcut {
                 }
 
                 if (useShortcutType.isEmojiCheatSheet && emoji.emojiCheatSheetFile != null) {
-                    cheatSheetFile = rootImagePath + emoji.emojiCheatSheetFile;
+                    if (useUnicodeFileName && emoji.unicodeSampleFile != null) {
+                        cheatSheetFile = rootImagePath + emoji.unicodeSampleFile;
+                    } else {
+                        cheatSheetFile = rootImagePath + emoji.emojiCheatSheetFile;
+                    }
                 }
 
                 imageText = useShortcutType.getPreferred(cheatSheetFile, gitHubFile);

@@ -1593,7 +1593,7 @@ Document[0, 15]
 Heading with emoji :+1:
 =======================
 .
-<h1 id="heading-with-emoji-">Heading with emoji <img src="/img/plus1.png" alt="emoji people:+1" height="20" width="20" align="absmiddle" /></h1>
+<h1 id="heading-with-emoji-">Heading with emoji <img src="/img/thumbsup.png" alt="emoji github:+1" height="20" width="20" align="absmiddle" /></h1>
 .
 Document[0, 47]
   Heading[0, 47] text:[0, 23, "Heading with emoji :+1:"] textClose:[24, 47, "======================="]
@@ -1607,7 +1607,7 @@ Document[0, 47]
 Heading with emoji :-1:
 =======================
 .
-<h1 id="heading-with-emoji-">Heading with emoji <img src="/img/-1.png" alt="emoji people:-1" height="20" width="20" align="absmiddle" /></h1>
+<h1 id="heading-with-emoji-">Heading with emoji <img src="/img/thumbsdown.png" alt="emoji github:-1" height="20" width="20" align="absmiddle" /></h1>
 .
 Document[0, 47]
   Heading[0, 47] text:[0, 23, "Heading with emoji :-1:"] textClose:[24, 47, "======================="]

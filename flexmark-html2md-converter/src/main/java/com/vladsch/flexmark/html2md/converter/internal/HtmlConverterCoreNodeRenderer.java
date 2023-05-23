@@ -648,12 +648,10 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
                     // see if the full attribute is emoji
                     int pos = emojiAlt.indexOf(":", EMOJI_ALT_PREFIX.length());
                     if (pos > 0) {
-                        String category = emojiAlt.substring(EMOJI_ALT_PREFIX.length(), pos);
+                        // NOTE: category is not significant since it can change, so it is ignored.
+                        // String category = emojiAlt.substring(EMOJI_ALT_PREFIX.length(), pos);
                         String shortcut = emojiAlt.substring(pos + 1);
-                        EmojiReference.Emoji emoji2 = EmojiShortcuts.getEmojiFromShortcut(shortcut);
-                        if (emoji2.category.equals(category)) {
-                            emoji = emoji2;
-                        }
+                        emoji = EmojiShortcuts.getEmojiFromShortcut(shortcut);
                     }
                 }
             }
