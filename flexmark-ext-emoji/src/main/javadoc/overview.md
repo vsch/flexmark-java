@@ -6,7 +6,6 @@ emoji shortcut conversion:
 * [GitHub Emoji API] shortcuts
 * any of the above shortcuts to [Unicode Emoji List, v15.0] or [Unicode Emoji Modifiers List, v15.0] Unicode Characters.
 
-[`emoji-cheat-sheet.com/public/graphics/emojis/`]: https://github.com/WebpageFX/emoji-cheat-sheet.com/tree/master/public/graphics/emojis
 [GitHub Emoji API]: https://api.github.com/emojis
 [Unicode Emoji List, v15.0]: https://unicode.org/emoji/charts/emoji-list.html
 <!-- @IGNORE PREVIOUS: link -->

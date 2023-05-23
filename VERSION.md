@@ -2186,6 +2186,7 @@
 [PdfLandscapeConverter.java]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/java/samples/PdfLandscapeConverter.java
 [Prevent StringIndexOutOfBounds in ext-resizable-image by MiniDigger · Pull Request #503 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/503 "Prevent StringIndexOutOfBounds in ext-resizable-image by MiniDigger · Pull Request #503 · vsch/flexmark-java · GitHub"
 [TextCollectingVisitor works better with code blocks by roxspring · Pull Request #575 · vsch/flexmark-java · GitHub]: https://github.com/vsch/flexmark-java/pull/575 "TextCollectingVisitor works better with code blocks by roxspring · Pull Request #575 · vsch/flexmark-java · GitHub"
+[`emoji-cheat-sheet.com/public/graphics/emojis/`]: https://github.com/WebpageFX/emoji-cheat-sheet.com/tree/master/public/graphics/emojis
 [Unicode Emoji List, v15.0]: https://unicode.org/emoji/charts/emoji-list.html
 <!-- @IGNORE PREVIOUS: link -->
 [Unicode Emoji Modifiers List, v15.0]: https://unicode.org/emoji/charts/full-emoji-modifiers.html
