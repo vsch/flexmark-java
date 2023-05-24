@@ -597,7 +597,7 @@ public class FlexmarkHtmlConverter {
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 HtmlNodeRendererFactory htmlNodeRendererFactory = nodeRendererFactories.get(i);
                 HtmlNodeRenderer htmlNodeRenderer = htmlNodeRendererFactory.apply(this.myOptions);
-                Set<HtmlNodeRendererHandler<?>> formattingHandlers = htmlNodeRenderer.getHtmlNodeRendererHandlers();
+                List<HtmlNodeRendererHandler<?>> formattingHandlers = htmlNodeRenderer.getHtmlNodeRendererHandlers();
                 if (formattingHandlers == null) continue;
 
                 for (HtmlNodeRendererHandler<?> nodeType : formattingHandlers) {
