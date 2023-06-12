@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.misc;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.AbstractSet;
 import java.util.Collection;
 import java.util.Iterator;
@@ -36,26 +35,19 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
 
         @SuppressWarnings("rawtypes")
         @NotNull
-        public static Enum[] getUniverseSlow(Class elementType) {
+        public static <E extends Enum<E>> Enum[] getUniverseSlow(Class<E> elementType) {
             assert (elementType.isEnum());
             Enum[] cachedUniverse = enumUniverseMap.get(elementType);
             if (cachedUniverse != null) return cachedUniverse;
 
-            Field[] fields = elementType.getFields();
-            int enums = 0;
-            for (Field field : fields) {
-                if (field.getType().isEnum()) enums++;
-            }
-
+            E[] constants = elementType.getEnumConstants();
+            int enums = constants.length;
             if (enums > 0) {
                 cachedUniverse = new Enum[enums];
 
                 enums = 0;
-                for (Field field : fields) {
-                    if (field.getType().isEnum()) {
-                        //noinspection unchecked
-                        cachedUniverse[enums++] = Enum.valueOf((Class<Enum>) field.getType(), field.getName());
-                    }
+                for (E constant : constants) {
+                    cachedUniverse[enums++] = constant;
                 }
             } else {
                 cachedUniverse = ZERO_LENGTH_ENUM_ARRAY;
