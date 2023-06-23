@@ -58,6 +58,9 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
     public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
         // "multiple of 3" rule for internal delimiter runs
         if ((opener.canClose() || closer.canOpen()) && (opener.length() + closer.length()) % 3 == 0) {
+            if (opener.length() % 3 == 0 && closer.length() % 3 == 0) {
+                return this.multipleUse; // if they are each a multiple of 3, then emphasis can be created
+            }
             return 0;
         }
 
