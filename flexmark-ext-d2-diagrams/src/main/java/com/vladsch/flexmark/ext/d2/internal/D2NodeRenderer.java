@@ -1,7 +1,6 @@
-package com.vladsch.flexmark.ext.typographic.internal;
+package com.vladsch.flexmark.ext.d2.internal;
 
-import com.vladsch.flexmark.ext.typographic.TypographicQuotes;
-import com.vladsch.flexmark.ext.typographic.TypographicSmarts;
+import com.vladsch.flexmark.ext.d2.D2Node;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -14,33 +13,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class D2NodeRenderer implements NodeRenderer {
-    public TypographicNodeRenderer(DataHolder options) {
+    public D2NodeRenderer(DataHolder options) {
 
     }
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(TypographicSmarts.class, this::render));
-        set.add(new NodeRenderingHandler<>(TypographicQuotes.class, this::render));
+        set.add(new NodeRenderingHandler<>(D2Node.class, D2NodeRenderer.this::render));
         return set;
     }
 
-    private void render(TypographicQuotes node, NodeRendererContext context, HtmlWriter html) {
-        if (node.getTypographicOpening() != null && !node.getTypographicOpening().isEmpty()) html.raw(node.getTypographicOpening());
-        context.renderChildren(node);
-        if (node.getTypographicClosing() != null && !node.getTypographicClosing().isEmpty()) html.raw(node.getTypographicClosing());
+    private void render(D2Node node, NodeRendererContext context, HtmlWriter html) {
+        System.out.println("rendering d2 node 1");
     }
 
-    private void render(TypographicSmarts node, NodeRendererContext context, HtmlWriter html) {
-        html.raw(node.getTypographicText());
-    }
 
     public static class Factory implements NodeRendererFactory {
         @NotNull
         @Override
         public NodeRenderer apply(@NotNull DataHolder options) {
-            return new TypographicNodeRenderer(options);
+            return new D2NodeRenderer(options);
         }
     }
 }

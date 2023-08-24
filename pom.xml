@@ -370,6 +370,11 @@
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-d2-diagrams</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-xwiki-macros</artifactId>
                 <version>${project.version}</version>
             </dependency>

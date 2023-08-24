@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
 
-import org.jcp.xml.dsig.internal.dom.DOMXPathFilter2Transform;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -39,7 +38,7 @@ public class D2Extension implements Parser.ParserExtension, HtmlRenderer.HtmlRen
     @Override
     public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
         if (htmlRendererBuilder.isRendererType("HTML") || htmlRendererBuilder.isRendererType("JIRA")) {
-            htmlRendererBuilder.nodeRendererFactory(new TypographicNodeRenderer.Factory());
+            htmlRendererBuilder.nodeRendererFactory(new D2NodeRenderer.Factory());
         }
     }
 }

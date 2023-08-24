@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ComboTypographicSpecTest.class,
+        D2SpecTest.class,
 })
 public class ExtD2TestSuite {
 }

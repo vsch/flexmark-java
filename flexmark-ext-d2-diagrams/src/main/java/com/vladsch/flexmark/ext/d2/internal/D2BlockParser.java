@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.d2.internal;
 
-import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterBlock;
-import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterNode;
+import com.vladsch.flexmark.ext.d2.D2Block;
+import com.vladsch.flexmark.ext.d2.D2Node;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.parser.core.DocumentBlockParser;
@@ -31,7 +31,7 @@ public class D2BlockParser extends AbstractBlockParser {
     private boolean inLiteral;
     private BasedSequence currentKey;
     private List<BasedSequence> currentValues;
-    private YamlFrontMatterBlock block;
+    private D2Block block;
     private BlockContent content;
 
     public D2BlockParser() {
@@ -39,7 +39,7 @@ public class D2BlockParser extends AbstractBlockParser {
         inLiteral = false;
         currentKey = null;
         currentValues = new ArrayList<>();
-        block = new YamlFrontMatterBlock();
+        block = new D2Block();
         content = new BlockContent();
     }
 
@@ -72,7 +72,7 @@ public class D2BlockParser extends AbstractBlockParser {
         if (inYAMLBlock) {
             if (REGEX_END.matcher(line).matches()) {
                 if (currentKey != null) {
-                    YamlFrontMatterNode child = new YamlFrontMatterNode(currentKey, currentValues);
+                    D2Node child = new D2Node(currentKey, currentValues);
                     child.setCharsFromContent();
                     block.appendChild(child);
                 }
@@ -84,7 +84,7 @@ public class D2BlockParser extends AbstractBlockParser {
             Matcher matcher = REGEX_METADATA.matcher(line);
             if (matcher.matches()) {
                 if (currentKey != null) {
-                    YamlFrontMatterNode child = new YamlFrontMatterNode(currentKey, currentValues);
+                    D2Node child = new D2Node(currentKey, currentValues);
                     child.setCharsFromContent();
                     block.appendChild(child);
                 }
@@ -168,7 +168,7 @@ public class D2BlockParser extends AbstractBlockParser {
             // check whether this line is the first line of whole document or not
             if (parentParser instanceof DocumentBlockParser && parentParser.getBlock().getFirstChild() == null &&
                     REGEX_BEGIN.matcher(line).matches()) {
-                return BlockStart.of(new YamlFrontMatterBlockParser()).atIndex(state.getNextNonSpaceIndex());
+                return BlockStart.of(new D2BlockParser()).atIndex(state.getNextNonSpaceIndex());
             }
 
             return BlockStart.none();

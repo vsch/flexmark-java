@@ -13,7 +13,7 @@
  *
  */
 
-package com.vladsch.flexmark.ext.typographic;
+package com.vladsch.flexmark.ext.d2;
 
 import com.vladsch.flexmark.core.test.util.RendererSpecTest;
 import com.vladsch.flexmark.parser.Parser;
@@ -29,19 +29,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboTypographicSpecTest extends RendererSpecTest {
-    final private static String SPEC_RESOURCE = "/ext_typographic_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(ComboTypographicSpecTest.class, SPEC_RESOURCE);
+public class D2SpecTest extends RendererSpecTest {
+    final private static String SPEC_RESOURCE = "/ext_d2_ast_spec.md";
+    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(D2SpecTest.class, SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(Parser.EXTENSIONS, Collections.singleton(TypographicExtension.create()))
+            .set(Parser.EXTENSIONS, Collections.singleton(D2Extension.create()))
             .toImmutable();
 
     final private static Map<String, DataHolder> optionsMap = new HashMap<>();
-    static {
-        optionsMap.put("no-quotes", new MutableDataSet().set(TypographicExtension.ENABLE_QUOTES, false));
-        optionsMap.put("no-smarts", new MutableDataSet().set(TypographicExtension.ENABLE_SMARTS, false));
-    }
-    public ComboTypographicSpecTest(@NotNull SpecExample example) {
+    public D2SpecTest(@NotNull SpecExample example) {
         super(example, optionsMap, OPTIONS);
     }
 
