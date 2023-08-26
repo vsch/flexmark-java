@@ -46,7 +46,6 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         // checkExample()
         // String fullSpec = SpecReader.readSpec(location);
         // assertEquals(reader.getFileUrl(), expected, fullSpec);
-        System.out.println("test");
         if (!reader.getFileUrl().isEmpty()) {
             assertEquals(reader.getFileUrl(), expected, actual);
         } else {

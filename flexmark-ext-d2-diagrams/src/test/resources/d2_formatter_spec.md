@@ -18,6 +18,7 @@ A -> B
 B -> A
 ```
 .
+<p>rendering d2 node</p>
 .
 Document[0, 23]
   D2Block[0, 23]

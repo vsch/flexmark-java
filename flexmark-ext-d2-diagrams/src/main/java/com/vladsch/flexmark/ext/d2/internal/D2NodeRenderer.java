@@ -20,12 +20,14 @@ public class D2NodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(D2Node.class, D2NodeRenderer.this::render));
+        set.add(new NodeRenderingHandler<>(D2Node.class, this::render));
         return set;
     }
 
     private void render(D2Node node, NodeRendererContext context, HtmlWriter html) {
-        System.out.println("<p>rendering d2 node</p>");
+        html.tag("p");
+        html.text("rendering d2 node");
+        html.tag("/p");
     }
 
     public static class Factory implements NodeRendererFactory {
