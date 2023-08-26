@@ -9,34 +9,26 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class D2BlockParser extends AbstractBlockParser {
-    final private static Pattern REGEX_METADATA = Pattern.compile("^[ ]{0,3}([A-Za-z0-9_\\-.]+):\\s*(.*)");
-    final private static Pattern REGEX_METADATA_LIST = Pattern.compile("^[ ]+-\\s*(.*)");
-    final private static Pattern REGEX_METADATA_LITERAL = Pattern.compile("^\\s*(.*)");
     final private static Pattern REGEX_BEGIN = Pattern.compile("^`{3}d2(\\s.*)?");
-    final private static Pattern REGEX_END = Pattern.compile("^(`{3}|\\.{3})(\\s.*)?");
+    final private static Pattern REGEX_END = Pattern.compile("^`{3}(\\s.*)?");
 
-    private boolean inYAMLBlock;
-    private boolean inLiteral;
+    private boolean inD2Block;
     private BasedSequence currentKey;
     private List<BasedSequence> currentValues;
     private D2Block block;
     private BlockContent content;
 
     public D2BlockParser() {
-        inYAMLBlock = true;
-        inLiteral = false;
+        inD2Block = true;
         currentKey = null;
         currentValues = new ArrayList<>();
         block = new D2Block();
@@ -69,61 +61,20 @@ public class D2BlockParser extends AbstractBlockParser {
     public BlockContinue tryContinue(ParserState state) {
         final BasedSequence line = state.getLine();
 
-        if (inYAMLBlock) {
+        if (inD2Block) {
             if (REGEX_END.matcher(line).matches()) {
-                if (currentKey != null) {
-                    D2Node child = new D2Node(currentKey, currentValues);
-                    child.setCharsFromContent();
-                    block.appendChild(child);
-                }
-                // add the last line
-                addLine(state, line);
+                System.out.println("test");
+                D2Node child = new D2Node(line, currentValues);
+                child.setCharsFromContent();
+                block.appendChild(child);
                 return BlockContinue.finished();
-            }
-
-            Matcher matcher = REGEX_METADATA.matcher(line);
-            if (matcher.matches()) {
-                if (currentKey != null) {
-                    D2Node child = new D2Node(currentKey, currentValues);
-                    child.setCharsFromContent();
-                    block.appendChild(child);
-                }
-
-                inLiteral = false;
-                currentKey = line.subSequence(matcher.start(1), matcher.end(1));
-                currentValues = new ArrayList<>();
-                if ("|".equals(matcher.group(2))) {
-                    inLiteral = true;
-                } else if (!"".equals(matcher.group(2))) {
-                    currentValues.add(line.subSequence(matcher.start(2), matcher.end(2)));
-                }
-
-                return BlockContinue.atIndex(state.getIndex());
             } else {
-                if (inLiteral) {
-                    matcher = REGEX_METADATA_LITERAL.matcher(line);
-                    if (matcher.matches()) {
-                        if (currentValues.size() == 1) {
-                            BasedSequence combined = SegmentedSequence.create(currentValues.get(0), PrefixedSubSequence.prefixOf("\n", line.subSequence(matcher.start(1), matcher.end(1)).trim()));
-                            currentValues.set(0, combined);
-                        } else {
-                            currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)).trim());
-                        }
-                    }
-                } else {
-                    matcher = REGEX_METADATA_LIST.matcher(line);
-                    if (matcher.matches()) {
-                        currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)));
-                    }
-                }
-
                 return BlockContinue.atIndex(state.getIndex());
             }
         } else if (REGEX_BEGIN.matcher(line).matches()) {
-            inYAMLBlock = true;
+            inD2Block = true;
             return BlockContinue.atIndex(state.getIndex());
         }
-
         return BlockContinue.none();
     }
 
