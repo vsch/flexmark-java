@@ -25,9 +25,8 @@ public class D2NodeRenderer implements NodeRenderer {
     }
 
     private void render(D2Node node, NodeRendererContext context, HtmlWriter html) {
-        System.out.println("rendering d2 node 1");
+        System.out.println("<p>rendering d2 node</p>");
     }
-
 
     public static class Factory implements NodeRendererFactory {
         @NotNull

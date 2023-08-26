@@ -56,6 +56,7 @@
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-ext-youtube-embedded</module>
         <module>flexmark-ext-zzzzzz</module>
+        <module>flexmark-ext-d2-diagrams</module>
         <module>flexmark-test-util</module>
         <module>flexmark-tree-iteration</module>
         <module>flexmark-util</module>

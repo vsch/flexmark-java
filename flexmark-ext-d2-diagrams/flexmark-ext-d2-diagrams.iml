@@ -5,12 +5,12 @@
     <option name="extensionPackage" value="com.vladsch.flexmark.ext.d2" />
     <option name="extensionPackagePrefix" value="com.vladsch.flexmark.ext" />
     <option name="delimiterProcessor" value="false" />
-    <option name="blockParser" value="false" />
+    <option name="blockParser" value="true" />
     <option name="blockPreProcessor" value="false" />
     <option name="linkRefProcessor" value="false" />
     <option name="paragraphPreProcessor" value="false" />
     <option name="documentPostProcessor" value="false" />
-    <option name="customBlockNode" value="false" />
+    <option name="customBlockNode" value="true" />
     <option name="customNodeRepository" value="false" />
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
