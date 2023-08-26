@@ -10,7 +10,8 @@ import static org.junit.Assert.assertEquals;
 public abstract class FullSpecTestCase extends RenderingTestCase implements SpecExampleProcessor {
     @NotNull
     public DumpSpecReader create(@NotNull ResourceLocation location) {
-        return SpecReader.create(location, (stream, fileUrl) -> new DumpSpecReader(stream, this, fileUrl, compoundSections()));
+        return SpecReader.create(location,
+                (stream, fileUrl) -> new DumpSpecReader(stream, this, fileUrl, compoundSections()));
     }
 
     protected boolean compoundSections() {
@@ -30,7 +31,8 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
     @Test
     public void testSpecExample() {
         ResourceLocation location = getSpecResourceLocation();
-        if (location.isNull()) return;
+        if (location.isNull())
+            return;
 
         fullTestSpecStarting();
         DumpSpecReader reader = create(location);
@@ -40,10 +42,10 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         String actual = reader.getFullSpec();
         String expected = reader.getExpectedFullSpec();
 
-//        // NOTE: reading the full spec does not work when examples are modified by checkExample()
-//        String fullSpec = SpecReader.readSpec(location);
-//        assertEquals(reader.getFileUrl(), expected, fullSpec);
-
+        // // NOTE: reading the full spec does not work when examples are modified by
+        // checkExample()
+        // String fullSpec = SpecReader.readSpec(location);
+        // assertEquals(reader.getFileUrl(), expected, fullSpec);
         if (!reader.getFileUrl().isEmpty()) {
             assertEquals(reader.getFileUrl(), expected, actual);
         } else {
