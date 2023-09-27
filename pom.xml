@@ -40,6 +40,7 @@
         <module>flexmark-ext-gfm-tasklist</module>
         <module>flexmark-ext-gfm-users</module>
         <module>flexmark-ext-gitlab</module>
+        <module>flexmark-ext-highlight</module>
         <module>flexmark-ext-ins</module>
         <module>flexmark-ext-jekyll-front-matter</module>
         <module>flexmark-ext-jekyll-tag</module>
@@ -336,6 +337,11 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gitlab</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-highlight</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
