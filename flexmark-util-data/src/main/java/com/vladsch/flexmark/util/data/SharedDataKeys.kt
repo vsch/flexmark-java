@@ -1,0 +1,41 @@
+package com.vladsch.flexmark.util.data
+
+import com.vladsch.flexmark.util.misc.Extension
+
+fun MutableDataHolder.addExtensions(vararg extensions: Extension) {
+    this.extensions += listOf(*extensions)
+}
+
+var MutableDataHolder.extensions: Collection<Extension> by key(SharedDataKeys.EXTENSIONS)
+var MutableDataHolder.headingNoAtxSpace: Boolean by key(SharedDataKeys.HEADING_NO_ATX_SPACE)
+var MutableDataHolder.escapeHeadingNoAtxSpace: Boolean by key(SharedDataKeys.ESCAPE_HEADING_NO_ATX_SPACE)
+var MutableDataHolder.htmlForTranslator: Boolean by key(SharedDataKeys.HTML_FOR_TRANSLATOR)
+var MutableDataHolder.intellijDummyIdentifier: Boolean by key(SharedDataKeys.INTELLIJ_DUMMY_IDENTIFIER)
+var MutableDataHolder.parseInnerHtmlComments: Boolean by key(SharedDataKeys.PARSE_INNER_HTML_COMMENTS)
+var MutableDataHolder.blankLinesInAst: Boolean by key(SharedDataKeys.BLANK_LINES_IN_AST)
+var MutableDataHolder.translationHtmlBlockTagPattern: String by key(SharedDataKeys.TRANSLATION_HTML_BLOCK_TAG_PATTERN)
+var MutableDataHolder.translationHtmlInlineTagPattern: String by key(SharedDataKeys.TRANSLATION_HTML_INLINE_TAG_PATTERN)
+var MutableDataHolder.translationAutolinkTagPattern: String by key(SharedDataKeys.TRANSLATION_AUTOLINK_TAG_PATTERN)
+var MutableDataHolder.rendererMaxTrailingBlankLines: Int by key(SharedDataKeys.RENDERER_MAX_TRAILING_BLANK_LINES)
+var MutableDataHolder.rendererMaxBlankLines: Int by key(SharedDataKeys.RENDERER_MAX_BLANK_LINES)
+var MutableDataHolder.indentSize: Int by key(SharedDataKeys.INDENT_SIZE)
+var MutableDataHolder.percentEncodeUrls: Boolean by key(SharedDataKeys.PERCENT_ENCODE_URLS)
+var MutableDataHolder.headerIdGeneratorResolveDupes: Boolean by key(SharedDataKeys.HEADER_ID_GENERATOR_RESOLVE_DUPES)
+var MutableDataHolder.headerIdGeneratorToDashChars: String by key(SharedDataKeys.HEADER_ID_GENERATOR_TO_DASH_CHARS)
+var MutableDataHolder.headerIdGeneratorNonDashChars: String by key(SharedDataKeys.HEADER_ID_GENERATOR_NON_DASH_CHARS)
+var MutableDataHolder.headerIdGeneratorNoDupedDashes: Boolean by key(SharedDataKeys.HEADER_ID_GENERATOR_NO_DUPED_DASHES)
+var MutableDataHolder.headerIdGeneratorNonAsciiToLowercase: Boolean by key(SharedDataKeys.HEADER_ID_GENERATOR_NON_ASCII_TO_LOWERCASE)
+var MutableDataHolder.headerIdRefTextTrimLeadingSpaces: Boolean by key(SharedDataKeys.HEADER_ID_REF_TEXT_TRIM_LEADING_SPACES)
+var MutableDataHolder.headerIdRefTextTrimTrailingSpaces: Boolean by key(SharedDataKeys.HEADER_ID_REF_TEXT_TRIM_TRAILING_SPACES)
+var MutableDataHolder.headerIdAddEmojiShortcut: Boolean by key(SharedDataKeys.HEADER_ID_ADD_EMOJI_SHORTCUT)
+var MutableDataHolder.renderHeaderId: Boolean by key(SharedDataKeys.RENDER_HEADER_ID)
+var MutableDataHolder.generateHeaderId: Boolean by key(SharedDataKeys.GENERATE_HEADER_ID)
+var MutableDataHolder.doNotRenderLinks: Boolean by key(SharedDataKeys.DO_NOT_RENDER_LINKS)
+var MutableDataHolder.formatterMaxBlankLines: Int by key(SharedDataKeys.FORMATTER_MAX_BLANK_LINES)
+var MutableDataHolder.formatterMaxTrailingBlankLines: Int by key(SharedDataKeys.FORMATTER_MAX_TRAILING_BLANK_LINES)
+var MutableDataHolder.blockQuoteBlankLines: Boolean by key(SharedDataKeys.BLOCK_QUOTE_BLANK_LINES)
+var MutableDataHolder.applySpecialLeadInHandlers: Boolean by key(SharedDataKeys.APPLY_SPECIAL_LEAD_IN_HANDLERS)
+var MutableDataHolder.escapeSpecialChars: Boolean by key(SharedDataKeys.ESCAPE_SPECIAL_CHARS)
+var MutableDataHolder.escapeNumberedLeadIn: Boolean by key(SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN)
+var MutableDataHolder.unescapeSpecialChars: Boolean by key(SharedDataKeys.UNESCAPE_SPECIAL_CHARS)
+var MutableDataHolder.runningTests: Boolean by key(SharedDataKeys.RUNNING_TESTS)
