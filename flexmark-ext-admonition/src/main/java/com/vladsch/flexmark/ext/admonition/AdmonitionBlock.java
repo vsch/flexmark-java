@@ -3,8 +3,10 @@ package com.vladsch.flexmark.ext.admonition;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.ParagraphContainer;
 import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -14,31 +16,13 @@ import java.util.List;
 public class AdmonitionBlock extends Block implements ParagraphContainer {
     private BasedSequence openingMarker = BasedSequence.NULL;
     private BasedSequence info = BasedSequence.NULL;
-    protected BasedSequence titleOpeningMarker = BasedSequence.NULL;
-    protected BasedSequence title = BasedSequence.NULL;
-    protected BasedSequence titleClosingMarker = BasedSequence.NULL;
 
     @NotNull
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] {
                 openingMarker,
-                info,
-                titleOpeningMarker,
-                title,
-                titleClosingMarker,
-        };
-    }
-
-    @NotNull
-    @Override
-    public BasedSequence[] getSegmentsForChars() {
-        return new BasedSequence[] {
-                openingMarker,
-                info,
-                titleOpeningMarker,
-                title,
-                titleClosingMarker,
+                info
         };
     }
 
@@ -46,7 +30,6 @@ public class AdmonitionBlock extends Block implements ParagraphContainer {
     public void getAstExtra(@NotNull StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, info, "info");
-        delimitedSegmentSpanChars(out, titleOpeningMarker, title, titleClosingMarker, "title");
     }
 
     public AdmonitionBlock() {
@@ -78,45 +61,32 @@ public class AdmonitionBlock extends Block implements ParagraphContainer {
         return info;
     }
 
+    @Nullable
+    public AdmonitionTitle getTitleNode() {
+        Node child = getFirstChild();
+        if (child instanceof AdmonitionTitle)
+            return (AdmonitionTitle) child;
+        return null;
+    }
+
     public BasedSequence getTitle() {
-        return title;
+        AdmonitionTitle title = getTitleNode();
+        return title == null ? BasedSequence.NULL : title.getText();
     }
 
     public BasedSequence getTitleOpeningMarker() {
-        return titleOpeningMarker;
-    }
-
-    public void setTitleOpeningMarker(BasedSequence titleOpeningMarker) {
-        this.titleOpeningMarker = titleOpeningMarker;
-    }
-
-    public void setTitle(BasedSequence title) {
-        this.title = title;
+        AdmonitionTitle title = getTitleNode();
+        return title == null ? BasedSequence.NULL : title.getOpeningMarker();
     }
 
     public BasedSequence getTitleClosingMarker() {
-        return titleClosingMarker;
-    }
-
-    public void setTitleClosingMarker(BasedSequence titleClosingMarker) {
-        this.titleClosingMarker = titleClosingMarker;
+        AdmonitionTitle title = getTitleNode();
+        return title == null ? BasedSequence.NULL : title.getClosingMarker();
     }
 
     public BasedSequence getTitleChars() {
-        return spanningChars(titleOpeningMarker, title, titleClosingMarker);
-    }
-
-    public void setTitleChars(BasedSequence titleChars) {
-        if (titleChars != null && titleChars != BasedSequence.NULL) {
-            int titleCharsLength = titleChars.length();
-            titleOpeningMarker = titleChars.subSequence(0, 1);
-            title = titleChars.subSequence(1, titleCharsLength - 1);
-            titleClosingMarker = titleChars.subSequence(titleCharsLength - 1, titleCharsLength);
-        } else {
-            titleOpeningMarker = BasedSequence.NULL;
-            title = BasedSequence.NULL;
-            titleClosingMarker = BasedSequence.NULL;
-        }
+        AdmonitionTitle title = getTitleNode();
+        return title == null ? BasedSequence.NULL : title.getChars();
     }
 
     @Override

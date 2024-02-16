@@ -3,6 +3,8 @@ package com.vladsch.flexmark.ext.admonition.internal;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.admonition.AdmonitionBlock;
+import com.vladsch.flexmark.ext.admonition.AdmonitionTitle;
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -69,6 +71,15 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState state) {
         block.setCharsFromContent();
+    }
+
+    @Override
+    public void parseInlines(InlineParser inlineParser) {
+        super.parseInlines(inlineParser);
+        AdmonitionTitle title = block.getTitleNode();
+        if (title != null) {
+            inlineParser.parse(title.getText(), title);
+        }
     }
 
     public static class Factory implements CustomBlockParserFactory {
@@ -185,7 +196,14 @@ public class AdmonitionBlockParser extends AbstractBlockParser {
                     AdmonitionBlockParser admonitionBlockParser = new AdmonitionBlockParser(options, contentOffset);
                     admonitionBlockParser.block.setOpeningMarker(openingMarker);
                     admonitionBlockParser.block.setInfo(info);
-                    admonitionBlockParser.block.setTitleChars(titleChars);
+                    if (titleChars.isNotNull()) {
+                        AdmonitionTitle title = new AdmonitionTitle();
+                        title.setOpeningMarker(titleChars.subSequence(0, 1));
+                        title.setText(titleChars.subSequence(1, titleChars.length() - 1));
+                        title.setClosingMarker(titleChars.subSequence(titleChars.length() - 1));
+                        title.setCharsFromSegments();
+                        admonitionBlockParser.block.prependChild(title);
+                    }
 
                     return BlockStart.of(admonitionBlockParser)
                             .atIndex(line.length());
