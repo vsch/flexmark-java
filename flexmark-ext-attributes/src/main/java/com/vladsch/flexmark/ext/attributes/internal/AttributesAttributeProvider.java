@@ -58,7 +58,9 @@ public class AttributesAttributeProvider implements AttributeProvider {
                                 attributes.addValue(CLASS_ATTR, attributeNode.getValue());
                             } else if (attributeNode.isId()) {
                                 if (node instanceof AnchorRefTarget) {
-                                    // was already provided via setAnchorRefId
+                                    // was already provided via setAnchorRefId, we only have to read it
+                                    attributes.remove(Attribute.ID_ATTR);
+                                    attributes.addValue(Attribute.ID_ATTR, ((AnchorRefTarget) node).getAnchorRefId());
                                 } else {
                                     attributes.remove(Attribute.ID_ATTR);
                                     attributes.addValue(Attribute.ID_ATTR, attributeNode.getValue());
