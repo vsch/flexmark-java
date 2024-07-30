@@ -313,6 +313,77 @@ final public class ParserTest {
         assertFalse(it.hasNext());
     }
 
+    @Test
+    public void assertSpacesHardLineBreak() {
+
+        //---------------------- - -1----------
+        //--------------01234567 8 901234567890 
+        String given = "line1  \r\n     line2";
+        Parser parser = Parser.builder().build();
+        Document document = parser.parse(given);
+
+        assertThat(document.getFirstChild(), instanceOf(Paragraph.class));
+        ReversiblePeekingIterator<Node> it = document.getFirstChild().getChildIterator();
+
+        assertTrue(it.hasNext());
+        Node node = it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line1", node.getChars().toString());
+        assertEquals(0, node.getStartOffset());
+        assertEquals(5, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node = it.next();
+        assertThat(node, instanceOf(HardLineBreak.class));
+        assertEquals(5, node.getStartOffset());
+        assertEquals(9, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node = it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line2", node.getChars().toString());
+        assertEquals(14, node.getStartOffset());
+        assertEquals(19, node.getEndOffset());
+
+        assertFalse(it.hasNext());
+    }
+
+    @Test
+    public void assertBackslashHardLineBreak() {
+
+        //-------------------- - - --1----------
+        //--------------012345 6 7 8901234567890 
+        String given = "line1\\\r\n     line2";
+        Parser parser = Parser.builder().build();
+        Document document = parser.parse(given);
+
+        assertThat(document.getFirstChild(), instanceOf(Paragraph.class));
+        ReversiblePeekingIterator<Node> it = document.getFirstChild().getChildIterator();
+
+        assertTrue(it.hasNext());
+        Node node = it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line1", node.getChars().toString());
+        assertEquals(0, node.getStartOffset());
+        assertEquals(5, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node = it.next();
+        assertThat(node, instanceOf(HardLineBreak.class));
+        assertEquals(5, node.getStartOffset());
+        assertEquals(8, node.getEndOffset());
+
+        assertTrue(it.hasNext());
+        node = it.next();
+        assertThat(node, instanceOf(Text.class));
+        assertEquals("line2", node.getChars().toString());
+        assertEquals(13, node.getStartOffset());
+        assertEquals(18, node.getEndOffset());
+
+        assertFalse(it.hasNext());
+    }
+
+    
     String escape(String input, Parser parser) {
         BasedSequence baseSeq = BasedSequence.of(input);
         List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
