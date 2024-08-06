@@ -1,0 +1,17 @@
+name: Build
+on:
+  push:
+  pull_request:
+
+jobs: 
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean install
