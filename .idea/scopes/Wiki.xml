@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Wiki" pattern="file[flexmark-java]:flexmark-java.wiki//*" />
-</component>

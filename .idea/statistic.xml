@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="Statistic">
-    <option name="fileTypesIncluded" value="java;kt;md;html;js;css;properties" />
-    <option name="separateTabsFileTypes" value="java;kt;md;html;js;css;properties" />
-    <option name="excludeDotArtifactDirectory" value="true" />
-  </component>
-</project>

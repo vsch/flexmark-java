@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="DocxConverter" pattern="file[flexmark-docx-converter]:*/" />
-</component>

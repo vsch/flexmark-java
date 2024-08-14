@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Markdown Version Update" pattern="file[flexmark-java]:README.md||file[flexmark-java]:flexmark-java.wiki/Usage.md" />
-</component>

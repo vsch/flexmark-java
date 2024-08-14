@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Admonition Test Spec" pattern="file[flexmark-ext-admonition]:src/test/resources//*" />
-</component>
