@@ -41,7 +41,7 @@ following sample:
 
 ```xml
 <dependency>
-    <groupId>com.vladsch.flexmark</groupId>
+    <groupId>com.acrolinx.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
     <version>0.64.8</version>
 </dependency>

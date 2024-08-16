@@ -11,17 +11,17 @@
             <useAllReactorProjects>true</useAllReactorProjects>
             <!-- Now, select which projects to include in this module-set. -->
             <includes>
-                <include>com.vladsch.flexmark:flexmark-util-ast</include>
-                <include>com.vladsch.flexmark:flexmark-util-builder</include>
-                <include>com.vladsch.flexmark:flexmark-util-collection</include>
-                <include>com.vladsch.flexmark:flexmark-util-data</include>
-                <include>com.vladsch.flexmark:flexmark-util-dependency</include>
-                <include>com.vladsch.flexmark:flexmark-util-format</include>
-                <include>com.vladsch.flexmark:flexmark-util-html</include>
-                <include>com.vladsch.flexmark:flexmark-util-misc</include>
-                <include>com.vladsch.flexmark:flexmark-util-options</include>
-                <include>com.vladsch.flexmark:flexmark-util-sequence</include>
-                <include>com.vladsch.flexmark:flexmark-util-visitor</include>
+                <include>com.acrolinx.flexmark:flexmark-util-ast</include>
+                <include>com.acrolinx.flexmark:flexmark-util-builder</include>
+                <include>com.acrolinx.flexmark:flexmark-util-collection</include>
+                <include>com.acrolinx.flexmark:flexmark-util-data</include>
+                <include>com.acrolinx.flexmark:flexmark-util-dependency</include>
+                <include>com.acrolinx.flexmark:flexmark-util-format</include>
+                <include>com.acrolinx.flexmark:flexmark-util-html</include>
+                <include>com.acrolinx.flexmark:flexmark-util-misc</include>
+                <include>com.acrolinx.flexmark:flexmark-util-options</include>
+                <include>com.acrolinx.flexmark:flexmark-util-sequence</include>
+                <include>com.acrolinx.flexmark:flexmark-util-visitor</include>
             </includes>
             <binaries>
                 <includeDependencies>false</includeDependencies>

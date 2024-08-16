@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.vladsch.flexmark</groupId>
+        <groupId>com.acrolinx.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
         <version>0.64.8</version>
     </parent>
@@ -18,15 +18,15 @@
             <version>24.1.0</version>
         </dependency>
         <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
+            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-util-ast</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
+            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-util-data</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
+            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-util-collection</artifactId>
         </dependency>
         <dependency>
@@ -35,7 +35,7 @@
             <version>2.0.16</version>
         </dependency>
         <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
+            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-test-util</artifactId>
             <scope>test</scope>
         </dependency>
