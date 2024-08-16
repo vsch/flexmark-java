@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--
-        <parent>
-            <groupId>com.vladsch.pom</groupId>
-            <artifactId>central-pom</artifactId>
-            <version>0.3.0</version>
-        </parent>
-    -->
 
     <packaging>pom</packaging>
 
@@ -15,11 +8,6 @@
     <artifactId>flexmark-java</artifactId>
     <version>0.64.8</version>
     <name>flexmark-java</name>
-    <description>
-        Java re-implementation of commonmark-java based parser, with AST reflecting source elements, full source position tracking, greater parser extensibility.
-    </description>
-
-    <url>https://github.com/vsch/flexmark-java</url>
 
     <modules>
         <module>flexmark</module>
@@ -89,20 +77,19 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.outputTimestamp>1684437041</project.build.outputTimestamp>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <flexmark.javadoc.location>${project.basedir}/target/apidocs/</flexmark.javadoc.location>
-        <!-- Don't automatically publish artifacts to Central, we might want to inspect them first. -->
-        <nexus.staging.autoRelease>false</nexus.staging.autoRelease>
     </properties>
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/acrolinx/flexmark-java</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/acrolinx/flexmark-java</url>
         </repository>
     </distributionManagement>
 
@@ -119,8 +106,29 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.4.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.8.0</version>
+                    <configuration>
+                        <doclint>all,-missing</doclint>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -140,134 +148,24 @@
                         </descriptors>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.3.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
 
-    <profiles>
-        <profile>
-            <id>deploy</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.7.0</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>deploy-to-sonatype</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                    <!--
-                                    <goal>release</goal>
-                                    -->
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <version>3.1.2</version>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.3.1</version>
-                        <executions>
-                            <execution>
-                                <id>package-sources</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.8.0</version>
-                        <executions>
-                            <execution>
-                                <id>package-javadoc</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <!--                            <source>8</source>-->
-                            <excludePackageNames>*.internal,*.internal.*</excludePackageNames>
-                            <detectOfflineLinks>false</detectOfflineLinks>
-                            <offlineLinks>
-                                <offlineLink>
-                                    <url>http://static.javadoc.io/doc/com.vladsch.flexmark/flexmark/${project.version}/</url>
-                                    <location>${flexmark.javadoc.location}</location>
-                                </offlineLink>
-                            </offlineLinks>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.2.5</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>biz.aQute.bnd</groupId>
-                        <artifactId>bnd-maven-plugin</artifactId>
-                        <version>6.4.0</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>bnd-process</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>0.8.12</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>prepare-agent</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>report</id>
-                                <goals>
-                                    <goal>report</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
-    <dependencyManagement>
+     <dependencyManagement>
         <dependencies>
             <!-- For dependencies between modules -->
             <dependency>
@@ -593,9 +491,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git@github.com:vsch/flexmark-java.git</connection>
-        <developerConnection>scm:git:git@github.com:vsch/flexmark-java.git</developerConnection>
-        <url>https://github.com/vsch/flexmark-java</url>
+        <connection>scm:git:https://github.com/acrolinx/flexmark-java.git</connection>
+        <developerConnection>scm:git:https://github.com/acrolinx/flexmark-java.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 </project>
