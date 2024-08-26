@@ -524,9 +524,8 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
         }
 
         // gobble leading spaces in next line
-        while (peek() == ' ') {
-            index++;
-        }
+        gobbleLeadingSpaces();
+
         return true;
     }
 
@@ -542,6 +541,7 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             int charsMatched = peek(1) == '\n' ? 2 : 1;
             appendNode(new HardLineBreak(input.subSequence(index - 1, index + charsMatched)));
             index += charsMatched;
+            gobbleLeadingSpaces();
         } else if (index < input.length() && myParsing.ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
             appendText(input, index - 1, index + 1);
             index++;
@@ -549,6 +549,12 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
             appendText(input.subSequence(index - 1, index));
         }
         return true;
+    }
+    
+    private void gobbleLeadingSpaces() {
+        while (peek() == ' ') {
+            index++;
+        }
     }
 
     /**
