@@ -11,7 +11,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
-
     final static private String markdown1 = "" +
             "| First Header  |\n" +
             "| ------------- |\n" +

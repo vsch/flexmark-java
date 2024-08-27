@@ -30,8 +30,6 @@ final public class CharSubSequence extends BasedSequenceImpl {
     private CharSubSequence(CharSubSequence baseSeq, int startIndex, int endIndex) {
         super(0);
 
-        assert startIndex >= 0 && endIndex >= startIndex && endIndex <= baseSeq.baseChars.length : String.format("CharSubSequence must have (startIndex > 0 || endIndex < %d) && endIndex >= startIndex, got startIndex:%d, endIndex: %d", baseSeq.baseChars.length, startIndex, endIndex);
-        assert (startIndex > 0 || endIndex < baseSeq.baseChars.length) : String.format("CharSubSequence must be proper subsequences [1, %d) got startIndex:%d, endIndex: %d", Math.max(0, baseSeq.baseChars.length - 1), startIndex, endIndex);
 
         base = baseSeq;
         baseChars = baseSeq.baseChars;
@@ -127,7 +125,6 @@ final public class CharSubSequence extends BasedSequenceImpl {
     }
 
     public static CharSubSequence of(CharSequence charSequence, int startIndex) {
-        assert startIndex <= charSequence.length();
         return of(charSequence, startIndex, charSequence.length());
     }
 
@@ -140,8 +137,6 @@ final public class CharSubSequence extends BasedSequenceImpl {
      */
     @Deprecated
     public static CharSubSequence of(char[] chars, int startIndex, int endIndex) {
-        assert startIndex >= 0 && startIndex <= endIndex && endIndex <= chars.length;
-
         char[] useChars = new char[chars.length];
         System.arraycopy(chars, 0, useChars, 0, chars.length);
         return startIndex == 0 && endIndex == chars.length ? new CharSubSequence(useChars, 0) : new CharSubSequence(useChars, 0).subSequence(startIndex, endIndex);
@@ -154,8 +149,6 @@ final public class CharSubSequence extends BasedSequenceImpl {
      * @return char based sequence
      */
     private static CharSubSequence of(CharSequence charSequence, int startIndex, int endIndex) {
-        assert startIndex >= 0 && startIndex <= endIndex && endIndex <= charSequence.length();
-
         CharSubSequence charSubSequence;
 
         if (charSequence instanceof CharSubSequence) {

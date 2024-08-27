@@ -74,7 +74,6 @@ public class TableNodeFormatter implements NodeFormatter {
 
                 if (!trackedOffsets.isEmpty()) {
                     for (TrackedOffset trackedOffset : tableTrackedOffsets) {
-                        assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
                         myTable.addTrackedOffset(trackedOffset);
                     }
                 }
@@ -97,12 +96,8 @@ public class TableNodeFormatter implements NodeFormatter {
                     List<TrackedOffset> tableOffsets = myTable.getTrackedOffsets();
                     int startOffset = markdown.offsetWithPending();
                     if (!tableTrackedOffsets.isEmpty()) {
-                        assert tableTrackedOffsets.size() == tableOffsets.size();
-
                         // get the indent used for new lines so that index can be adjusted by added indent
                         for (TrackedOffset trackedOffset : tableTrackedOffsets) {
-                            assert (trackedOffset.getOffset() >= node.getStartOffset() && trackedOffset.getOffset() <= node.getEndOffset());
-
                             if (trackedOffset.isResolved()) {
                                 trackedOffset.setIndex(trackedOffset.getIndex() + startOffset);
                             }

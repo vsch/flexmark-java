@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark</artifactId>
-    <name>flexmark-java core</name>
     <description>Core of flexmark-java (implementation of CommonMark for parsing markdown and rendering to HTML)</description>
 
     <dependencies>

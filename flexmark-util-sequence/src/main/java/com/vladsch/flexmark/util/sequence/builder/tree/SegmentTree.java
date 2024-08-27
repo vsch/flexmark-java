@@ -92,7 +92,6 @@ public class SegmentTree {
             int startIndex = hint.getStartIndex();
             if (index >= startIndex) {
                 int endIndex = hint.getEndIndex();
-                assert index >= endIndex : String.format("FindSegment should not be called, index %d is in range [%d, %d) of hint segment: %s", index, startIndex, endIndex, hint);
                 if (hint.pos + 1 >= endPos) return null;
                 int nextLength = aggrLength(hint.pos + 1);
                 if (index < nextLength) {
@@ -170,10 +169,7 @@ public class SegmentTree {
             // this is could be an empty suffix so it may be the end of a segment, search for startIndex-1 and use that segment as its location
             startSegment = hint == null || hint.notInSegment(startIndex) ? findSegment(startIndex, startPos, endPos, baseSequence, hint) : hint;
             if (startSegment == null) {
-                assert startIndex > 0;
-
                 startSegment = hint == null || hint.notInSegment(startIndex - 1) ? findSegment(startIndex - 1, startPos, endPos, baseSequence, hint) : hint;
-                assert startSegment != null;
 
                 // if index is out of the found segment and there is a next segment which contains start index, then use that one
                 if (startSegment.notInSegment(startIndex) && startSegment.pos + 1 < size()) {
@@ -187,9 +183,7 @@ public class SegmentTree {
             endSegment = startSegment;
         } else {
             startSegment = hint == null || hint.notInSegment(startIndex) ? findSegment(startIndex, startPos, endPos, baseSequence, hint) : hint;
-            assert startSegment != null;
             endSegment = !startSegment.notInSegment(endIndex - 1) ? startSegment : (hint == null || hint.notInSegment(endIndex - 1) ? findSegment(endIndex - 1, startPos, endPos, baseSequence, startSegment) : hint);
-            assert endSegment != null;
         }
 
         int startOffset = -1;
@@ -240,8 +234,6 @@ public class SegmentTree {
     }
 
     public int getTextEndOffset(Segment segment, @NotNull BasedSequence baseSequence) {
-        assert segment.isText();
-
         if (segment.pos + 1 < size()) {
             Segment nextSegment = getSegment(segment.pos + 1, baseSequence);
             if (nextSegment.isBase()) {
@@ -252,8 +244,6 @@ public class SegmentTree {
     }
 
     public int getTextStartOffset(Segment segment, @NotNull BasedSequence baseSequence) {
-        assert segment.isText();
-
         Segment prevSegment = getPrevAnchor(segment.pos, baseSequence);
         if (prevSegment == null && segment.pos > 0) {
             prevSegment = getSegment(segment.pos - 1, baseSequence);
@@ -319,7 +309,6 @@ public class SegmentTree {
                     }
                 }
             } else {
-                assert charSequence instanceof BasedSequence;
                 BasedSequence basedSequence = (BasedSequence) charSequence;
                 currentEnd = Math.max(currentEnd, basedSequence.getEndOffset());
                 builder.append(basedSequence.getStartOffset(), basedSequence.getEndOffset());
@@ -421,7 +410,6 @@ public class SegmentTree {
     }
 
     public static void setTreeData(int pos, int[] treeData, int agrrLength, int byteOffset, int prevAnchorOffset) {
-        assert byteOffset <= MAX_VALUE;
         treeData[pos << 1] = agrrLength;
         treeData[(pos << 1) + 1] = byteOffset | (prevAnchorOffset == 0 ? 0 : prevAnchorOffset << 29);
     }
@@ -462,10 +450,6 @@ public class SegmentTree {
                     return new SegmentTreePos(pos, startIndex, iterations);
                 }
             }
-
-            assert lastStart != startPos || lastEnd != endPos : "Range and position did not change after iteration: pos=" + pos + ", startPos=" + startPos + ", endPos=" + endPos
-                    + "\n" + Arrays.toString(treeData)
-                    ;
         }
         return null;
     }
@@ -491,7 +475,6 @@ public class SegmentTree {
         if (anchorOffset > 0) {
             int byteOffset = getByteOffset(byteOffsetData) - anchorOffset;
             Segment anchor = Segment.getSegment(segmentBytes, byteOffset, -1, 0, baseSeq);
-            assert anchor.isAnchor();
             return anchor;
         } else {
             return null;

@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-@SuppressWarnings("ALL")
 public class BaseSequenceManagerTest {
     static BaseSequenceManager INSTANCE = new BaseSequenceManager();
 

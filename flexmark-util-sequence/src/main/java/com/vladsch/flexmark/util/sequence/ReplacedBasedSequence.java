@@ -5,5 +5,4 @@ package com.vladsch.flexmark.util.sequence;
  * from startOffset to endOffset
  */
 public interface ReplacedBasedSequence extends BasedSequence {
-
 }

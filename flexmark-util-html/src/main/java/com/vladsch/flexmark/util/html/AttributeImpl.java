@@ -46,7 +46,6 @@ public class AttributeImpl implements Attribute {
         return name.indexOf(' ') != -1 || value.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(name);
     }
 
-    @SuppressWarnings("WeakerAccess")
     public static int indexOfValue(CharSequence value, CharSequence valueName, char valueListDelimiter, char valueNameDelimiter) {
         if (valueName.length() == 0 || value.length() == 0) return -1;
 

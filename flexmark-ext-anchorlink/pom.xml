@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-anchorlink</artifactId>
-    <name>flexmark-java extension to generate anchor links for headers</name>
     <description>flexmark-java extension for generating anchor links for headings using GitHub compatible algorithm</description>
 
     <dependencies>

@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
-@SuppressWarnings("WeakerAccess")
 public class AbbreviationFormatOptions {
     final public ElementPlacement abbreviationsPlacement;
     final public ElementPlacementSort abbreviationsSort;

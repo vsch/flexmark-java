@@ -64,7 +64,6 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override

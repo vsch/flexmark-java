@@ -11,7 +11,6 @@
     </parent>
 
     <artifactId>flexmark-all</artifactId>
-    <name>flexmark-all</name>
     <description>flexmark-java core and all extension modules and converters</description>
 
     <!-- NOTE: These dependency declarations are only required to sort this project to the

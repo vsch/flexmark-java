@@ -14,7 +14,6 @@ import java.util.Set;
 
 public class SuperscriptJiraRenderer implements NodeRenderer {
     public SuperscriptJiraRenderer(DataHolder options) {
-
     }
 
     @Override

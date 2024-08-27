@@ -1208,7 +1208,6 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             try {
                 colSpan = Integer.parseInt(element.attr("colSpan"));
             } catch (NumberFormatException ignored) {
-
             }
         }
 
@@ -1216,7 +1215,6 @@ public class HtmlConverterCoreNodeRenderer implements PhasedHtmlNodeRenderer {
             try {
                 rowSpan = Integer.parseInt(element.attr("rowSpan"));
             } catch (NumberFormatException ignored) {
-
             }
         }
 

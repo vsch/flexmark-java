@@ -26,18 +26,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @serial exclude
  * @since 1.5
  */
-@SuppressWarnings({ "ManualArrayToCollectionCopy", "UseBulkOperation" })
 public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cloneable, Serializable {
     final private static long serialVersionUID = 3411599620347842686L;
 
     static class UniverseLoader {
-        @SuppressWarnings("rawtypes") final static ConcurrentHashMap<Class, Enum[]> enumUniverseMap = new ConcurrentHashMap<>();
-        @SuppressWarnings("rawtypes") final static ConcurrentHashMap<Class, long[]> enumBitMasksMap = new ConcurrentHashMap<>();
+        final static ConcurrentHashMap<Class, Enum[]> enumUniverseMap = new ConcurrentHashMap<>();
+        final static ConcurrentHashMap<Class, long[]> enumBitMasksMap = new ConcurrentHashMap<>();
 
-        @SuppressWarnings("rawtypes")
         @NotNull
         public static Enum[] getUniverseSlow(Class elementType) {
-            assert (elementType.isEnum());
             Enum[] cachedUniverse = enumUniverseMap.get(elementType);
             if (cachedUniverse != null) return cachedUniverse;
 
@@ -228,13 +225,11 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @return true if any field values were modified
      * @deprecated use {@link #setAll(long)}
      */
-    @SuppressWarnings("UnusedReturnValue")
     @Deprecated
     public boolean replaceAll(long mask) {
         return setAll(mask);
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public boolean setAll(long mask) {
         long allValues = -1L >>> -totalBits;
         if ((mask & ~allValues) != 0) {
@@ -322,7 +317,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param value value to set
      * @return true if elements changed by operation
      */
-    @SuppressWarnings("UnusedReturnValue")
     public boolean setUnsigned(E e1, long value) {
         long oldElements = elements;
         elements = setUnsigned(elementType, bitMasks, elements, e1, value);
@@ -336,7 +330,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      * @param value value to set
      * @return true if elements changed by operation
      */
-    @SuppressWarnings("UnusedReturnValue")
     public boolean setSigned(E e1, long value) {
         long oldElements = elements;
         elements = setSigned(elementType, bitMasks, elements, e1, value);
@@ -555,7 +548,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
             return unseen != 0;
         }
 
-        @SuppressWarnings("unchecked")
         public E next() {
             if (unseen == 0)
                 throw new NoSuchElementException();
@@ -585,7 +577,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
             return nextIndex < universe.length;
         }
 
-        @SuppressWarnings("unchecked")
         public E next() {
             if (nextIndex >= universe.length)
                 throw new NoSuchElementException();
@@ -797,7 +788,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Cl
      *
      * @return a copy of this set
      */
-    @SuppressWarnings("unchecked")
     public BitFieldSet<E> clone() {
         try {
             return (BitFieldSet<E>) super.clone();

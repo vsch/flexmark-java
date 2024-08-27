@@ -23,9 +23,7 @@ import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.misc.Utils.*;
 
-@SuppressWarnings("WeakerAccess")
 public class MarkdownTable {
-
     final public TableSection header;
     final public TableSection separator;
     final public TableSection body;
@@ -1268,8 +1266,6 @@ public class MarkdownTable {
                         setTrackedOffsetIndex(cell.trackedTextOffset + cell.getInsideStartOffset(previousCell), out.offsetWithPending());
                         trackedPos = NOT_TRACKED;
                     }
-
-                    assert trackedPos == NOT_TRACKED;
                 } else {
                     if (options.leadTrailPipes && j == 0) out.append('|');
                     if (alignment1 == CellAlignment.LEFT || alignment1 == CellAlignment.CENTER) { out.append(':'); }

@@ -433,7 +433,6 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         return alignments;
     }
 
-    @SuppressWarnings("SameParameterValue")
     private static List<BasedSequence> split(BasedSequence input, boolean columnSpans, boolean wantPipes) {
         BasedSequence line = input.trim();
         int lineLength = line.length();

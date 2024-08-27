@@ -21,12 +21,10 @@ public class GitLabInlineMathParser implements InlineParserExtension {
 
     @Override
     public void finalizeDocument(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override
     public void finalizeBlock(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override

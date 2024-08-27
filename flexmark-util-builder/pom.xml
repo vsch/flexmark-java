@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-builder</artifactId>
-    <name>flexmark-java builder utilities</name>
     <description>flexmark-java builder utility classes</description>
 
     <dependencies>

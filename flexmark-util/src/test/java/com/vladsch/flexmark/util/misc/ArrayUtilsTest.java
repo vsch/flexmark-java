@@ -9,7 +9,6 @@ import static com.vladsch.flexmark.util.misc.ArrayUtils.*;
 import static org.junit.Assert.*;
 
 public class ArrayUtilsTest {
-
     @Test
     public void test_contained() {
         assertTrue(ArrayUtils.contained(-339_763_186, new Object[] { -339_763_186 }));

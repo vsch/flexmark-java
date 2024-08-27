@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AttributesNodeRenderer implements NodeRenderer {
-
     final private AttributesOptions myOptions;
 
     public AttributesNodeRenderer(DataHolder options) {
@@ -26,7 +25,6 @@ public class AttributesNodeRenderer implements NodeRenderer {
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
         set.add(new NodeRenderingHandler<>(AttributesNode.class, (node, context, html) -> {
-
         }));
         set.add(new NodeRenderingHandler<>(TextBase.class, (node, context, html) -> {
             if (myOptions.assignTextAttributes) {

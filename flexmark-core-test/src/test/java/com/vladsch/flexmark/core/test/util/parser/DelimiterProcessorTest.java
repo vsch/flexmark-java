@@ -125,12 +125,10 @@ final public class DelimiterProcessorTest extends RenderingTestCase {
 
         @Override
         public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
-
         }
     }
 
     private static class AsymmetricDelimiterProcessor implements DelimiterProcessor {
-
         AsymmetricDelimiterProcessor() {}
 
         @Override

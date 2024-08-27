@@ -36,12 +36,10 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

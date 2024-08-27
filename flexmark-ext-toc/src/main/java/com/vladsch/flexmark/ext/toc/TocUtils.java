@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("WeakerAccess")
 public class TocUtils {
     final public static AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
     final public static AttributablePart TOC_LIST = new AttributablePart("TOC_LIST");
@@ -116,7 +115,6 @@ public class TocUtils {
             }
 
             Node toc = tocDocument.getFirstChildAny(TocBlock.class);
-            assert toc != null;
 
             markdown.openPreFormatted(false);
             htmlRenderer.render(toc, markdown);

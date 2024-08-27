@@ -10,7 +10,7 @@ import org.pegdown.PegDownProcessor;
 import org.pegdown.ast.RootNode;
 
 class PegdownParser extends IParseBase {
-    @SuppressWarnings("PointlessBitwiseExpression") final static public DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", 0
+    final static public DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<>("PEGDOWN_EXTENSIONS", 0
             //| Extensions.ABBREVIATIONS
             //| Extensions.EXTANCHORLINKS /*| Extensions.EXTANCHORLINKS_WRAP*/
             //| Extensions.AUTOLINKS

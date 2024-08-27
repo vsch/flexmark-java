@@ -6,7 +6,6 @@ import org.docx4j.wml.*;
 /*
     Base Implementation for all BlockFormatProviders
  */
-@SuppressWarnings("CallToSimpleGetterFromWithinClass")
 public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
     protected final DocxContext<T> myDocx;
     protected final T myFrame;
@@ -34,12 +33,10 @@ public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
 
     @Override
     public void open() {
-
     }
 
     @Override
     public void close() {
-
     }
 
     protected Style getBaseStyle() {
@@ -86,7 +83,6 @@ public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
     }
 
     protected void adjustPPr(PPr pPrBase) {
-
     }
 
     /**

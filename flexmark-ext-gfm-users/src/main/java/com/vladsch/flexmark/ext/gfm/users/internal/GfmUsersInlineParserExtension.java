@@ -16,17 +16,14 @@ public class GfmUsersInlineParserExtension implements InlineParserExtension {
     final public static Pattern GITHUB_USER = Pattern.compile("^(@)([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})\\b", Pattern.CASE_INSENSITIVE);
 
     public GfmUsersInlineParserExtension(LightInlineParser inlineParser) {
-
     }
 
     @Override
     public void finalizeDocument(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override
     public void finalizeBlock(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override

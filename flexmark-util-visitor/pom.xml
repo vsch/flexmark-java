@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-visitor</artifactId>
-    <name>flexmark-java visitor utilities</name>
     <description>flexmark-java visitor utility classes</description>
 
     <dependencies>

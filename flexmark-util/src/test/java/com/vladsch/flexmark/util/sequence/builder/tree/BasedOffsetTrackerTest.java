@@ -13,7 +13,6 @@ import java.util.function.Function;
 import static org.junit.Assert.assertEquals;
 
 public class BasedOffsetTrackerTest {
-
     Pair<String, Integer> getInput(String input) {
         int pos = input.indexOf("⦙");
         if (pos >= 0) {

@@ -16,17 +16,14 @@ public class GfmIssuesInlineParserExtension implements InlineParserExtension {
     final public static Pattern GITHUB_ISSUE = Pattern.compile("^(#)(\\d+)\\b");
 
     public GfmIssuesInlineParserExtension(LightInlineParser inlineParser) {
-
     }
 
     @Override
     public void finalizeDocument(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override
     public void finalizeBlock(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override

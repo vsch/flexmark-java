@@ -49,7 +49,6 @@ public class JekyllFrontMatterNodeFormatter implements PhasedNodeFormatter {
     }
 
     private void render(JekyllFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-
     }
 
     public static class Factory implements NodeFormatterFactory {

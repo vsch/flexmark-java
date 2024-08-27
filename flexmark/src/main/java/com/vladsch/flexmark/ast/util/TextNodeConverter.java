@@ -19,8 +19,6 @@ public class TextNodeConverter {
 
     public void appendChild(Node child) {
         BasedSequence childChars = child.getChars();
-        assert nodeChars.containsAllOf(childChars) : "child " + child.toAstString(false) + " is not within parent sequence " + Node.toSegmentSpan(nodeChars, null);
-        assert remainingChars.containsAllOf(childChars) : "child " + child.toAstString(false) + " is not within remaining sequence " + Node.toSegmentSpan(remainingChars, null);
         child.unlink();
         if (!(child instanceof Text)) {
             if (remainingChars.getStartOffset() < childChars.getStartOffset()) {

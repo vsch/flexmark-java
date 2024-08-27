@@ -28,7 +28,6 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
 
     public @NotNull ClassifyingNodeTracker classify(@NotNull Node node) {
         // no double dipping
-        assert !isClassificationDone;
         visit(node);
         isClassificationDone = true;
         return classifyingNodeTracker;
@@ -84,7 +83,6 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
         if (!exclusionMap.isEmpty() && !(node instanceof Document)) {
             // add flags if needed
             BitSet bitSet = nodeAncestryBitSet.getPeek();
-            assert bitSet != null;
 
             int index = classifyingNodeTracker.getItems().indexOf(node);
             if (index == -1) {
@@ -99,10 +97,8 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
                     if (nodeType.isInstance(node)) {
                         // get the index of this exclusion
                         int i = exclusionSet.indexOf(nodeType);
-                        assert i != -1;
                         if (!bitSet.get(i)) {
                             bitSet = nodeAncestryBitSet.getMutable();
-                            assert bitSet != null;
 
                             bitSet.set(i);
                         }

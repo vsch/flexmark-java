@@ -23,7 +23,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HeadingParser extends AbstractBlockParser {
-
     static class HeadingParsing extends Parsing {
         final private Pattern ATX_HEADING;
         final private Pattern ATX_TRAILING;

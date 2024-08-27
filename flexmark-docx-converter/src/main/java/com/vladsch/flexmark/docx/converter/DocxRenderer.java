@@ -47,7 +47,6 @@ import java.util.*;
 /**
  * Renders a tree of nodes to docx4j API.
  */
-@SuppressWarnings("WeakerAccess")
 public class DocxRenderer implements IRender {
     final public static DataKey<String> STYLES_XML = new DataKey<>("STYLES_XML", getResourceString("/styles.xml"));
     final public static DataKey<String> NUMBERING_XML = new DataKey<>("NUMBERING_XML", getResourceString("/numbering.xml"));
@@ -275,7 +274,6 @@ public class DocxRenderer implements IRender {
                 Styles styles = (Styles) XmlUtils.unmarshalString(STYLES_XML.get(options));
                 stylesPart.setJaxbElement(styles);
                 documentPart.addTargetPart(stylesPart); // NB - add it to main doc part, not package!
-                assert documentPart.getStyleDefinitionsPart() != null : "Styles failed to set";
             }
 
             if (documentPart.getNumberingDefinitionsPart() == null) {
@@ -284,7 +282,6 @@ public class DocxRenderer implements IRender {
                 Numbering numbering = (Numbering) XmlUtils.unmarshalString(NUMBERING_XML.get(options));
                 numberingPart.setJaxbElement(numbering);
                 documentPart.addTargetPart(numberingPart); // NB - add it to main doc part, not package!
-                assert documentPart.getNumberingDefinitionsPart() != null : "Numbering failed to set";
             }
         } catch (InvalidFormatException e) {
             e.printStackTrace();
@@ -479,7 +476,6 @@ public class DocxRenderer implements IRender {
          * @param nodeDocxRendererFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        @SuppressWarnings("UnusedReturnValue")
         public Builder nodeFormatterFactory(NodeDocxRendererFactory nodeDocxRendererFactory) {
             this.nodeDocxRendererFactories.add(nodeDocxRendererFactory);
             addExtensionApiPoint(nodeDocxRendererFactory);

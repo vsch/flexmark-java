@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface IPositionHolder<T, P extends IPositionHolder<T, P>> extends /*ListIterator<P>,*/ IPositionListener {
-
     /**
      * iterable for this position and all following positions in increasing index order
      *

@@ -17,7 +17,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LightInlineParserImpl implements LightInlineParser {
-
     final protected InlineParserOptions options;
     final protected Parsing myParsing;
     protected Node block;

@@ -5,7 +5,6 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.data.DataHolder;
 
-@SuppressWarnings("WeakerAccess")
 class DefinitionOptions {
     final public int markerSpaces;
     final public boolean tildeMarker;

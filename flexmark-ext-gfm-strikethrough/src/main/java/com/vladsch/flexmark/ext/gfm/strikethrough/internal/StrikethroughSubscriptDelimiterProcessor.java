@@ -11,7 +11,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class StrikethroughSubscriptDelimiterProcessor implements DelimiterProcessor {
-
     @Override
     public char getOpeningCharacter() {
         return '~';

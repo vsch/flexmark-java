@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-test-specs</artifactId>
-    <name>flexmark-java test spec files</name>
     <description>flexmark-java CommonMark specs for tests</description>
 
     <dependencies>

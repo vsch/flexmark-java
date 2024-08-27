@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("WeakerAccess")
 public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, MutableDataSetter {
     final public static TocOptions DEFAULT = new TocOptions();
     final public static int DEFAULT_LEVELS = 4 | 8; // 0 not used, default H2 & H3, H1 assumed to be document heading and does not need to be part of TOC
@@ -306,7 +305,6 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
             isCaseSensitiveTocTag = other.isCaseSensitiveTocTag;
         }
 
-        @SuppressWarnings({ "CopyConstructorMissesField", "unused" })
         protected AsMutable(TocOptions.AsMutable other) {
             this(other.toImmutable());
         }

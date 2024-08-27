@@ -37,7 +37,6 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.*;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 
-@SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
     /**
      * 2020-04-10
@@ -381,7 +380,6 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
         } else {
             // change to atx
-            assert headingPreference.isAtx();
 
             CharSequence openingMarker = RepeatedSequence.repeatOf('#', node.getLevel());
             markdown.append(openingMarker);

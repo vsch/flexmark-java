@@ -6,7 +6,6 @@ import com.vladsch.flexmark.ast.Text;
  * A delimiter run is one or more of the same delimiter character.
  */
 public interface DelimiterRun {
-
     DelimiterRun getPrevious();
     DelimiterRun getNext();
     char getDelimiterChar();

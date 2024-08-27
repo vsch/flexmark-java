@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-media-tags</artifactId>
-    <name>flexmark-java extension for HTML5 media tags</name>
     <description>flexmark-java extension parsing and rendering HTML5 media tags</description>
 
     <dependencies>

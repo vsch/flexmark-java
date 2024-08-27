@@ -78,7 +78,6 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
             //String found = m.group();
             BasedSequence abbreviation = abbreviationMap.get(m.group(0));
             if (abbreviation != null) {
-
                 int startOffset = textMapper.originalOffset(m.start(0));
                 int endOffset = textMapper.originalOffset(m.end(0));
 

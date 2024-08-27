@@ -65,7 +65,6 @@ public class MutableAttributeImpl implements MutableAttribute {
         value = null;
     }
 
-    @SuppressWarnings("WeakerAccess")
     protected Map<String, String> getValueMap() {
         if (values == null) {
             values = new LinkedHashMap<>();
@@ -104,7 +103,6 @@ public class MutableAttributeImpl implements MutableAttribute {
      *
      * @return string for value of this attribute from map
      */
-    @SuppressWarnings("WeakerAccess")
     protected String valueFromMap() {
         if (valueListDelimiter != SequenceUtils.NUL) {
             StringBuilder sb = new StringBuilder();

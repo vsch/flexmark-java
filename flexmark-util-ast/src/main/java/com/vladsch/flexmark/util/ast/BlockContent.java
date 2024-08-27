@@ -37,7 +37,6 @@ public class BlockContent {
 
     public BlockContent(@NotNull BlockContent other, int startLine, int lineIndent) {
         // copy content from other
-        assert other.lines.size() == other.lineIndents.size() : "lines and eols should be of the same size";
 
         if (other.lines.size() > 0 && startLine < lineIndent) {
             lines.addAll(other.lines.subList(startLine, lineIndent));
@@ -67,7 +66,6 @@ public class BlockContent {
     }
 
     public void addAll(@NotNull List<BasedSequence> lines, List<Integer> lineIndents) {
-        assert lines.size() == lineIndents.size() : "lines and lineIndents should be of the same size";
         this.lines.addAll(lines);
         this.lineIndents.addAll(lineIndents);
     }

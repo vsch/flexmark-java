@@ -16,8 +16,7 @@ import com.vladsch.flexmark.util.dependency.DependentItemMap;
 import java.util.*;
 
 public class PostProcessorManager {
-//    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-//    final private static HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
+////    final private static HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
 //    static {
 //        //CORE_POST_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
 //    }
@@ -75,8 +74,6 @@ public class PostProcessorManager {
                     // assume it no longer reflects reality;
                     classifyingNodeTracker = null;
                 } else {
-                    assert !hadGlobal;
-
                     if (classifyingNodeTracker == null) {
                         // build the node type information by traversing the document tree
                         classifyingNodeTracker = new NodeClassifierVisitor(stage.myNodeMap).classify(document);

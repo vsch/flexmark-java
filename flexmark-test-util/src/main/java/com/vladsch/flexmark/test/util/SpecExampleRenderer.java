@@ -38,12 +38,10 @@ public interface SpecExampleRenderer {
 
         @Override
         public void includeDocument(@NotNull String includedText) {
-
         }
 
         @Override
         public void parse(CharSequence input) {
-
         }
 
         @Override
@@ -53,7 +51,6 @@ public interface SpecExampleRenderer {
 
         @Override
         public void finalizeDocument() {
-
         }
 
         @Override
@@ -68,7 +65,6 @@ public interface SpecExampleRenderer {
 
         @Override
         public void finalizeRender() {
-
         }
     };
 }

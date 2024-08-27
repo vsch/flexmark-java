@@ -48,7 +48,6 @@ public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
 
     @Override
     public void updateNodeElements(@NotNull Document document, @NotNull Node node) {
-
     }
 
     @NotNull

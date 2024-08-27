@@ -11,9 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GitLabNodeFormatter implements NodeFormatter {
-
     public GitLabNodeFormatter(DataHolder options) {
-
     }
 
     @Nullable

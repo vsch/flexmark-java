@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
-    <name>flexmark-java extension for strikethrough</name>
     <description>flexmark-java extension for GFM strikethrough using ~~ (GitHub Flavored Markdown)</description>
 
     <dependencies>

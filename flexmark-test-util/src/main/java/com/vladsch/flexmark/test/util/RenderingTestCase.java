@@ -43,7 +43,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
      * @param exampleOptions  example options
      */
     public void addSpecExample(SpecExampleRenderer exampleRenderer, SpecExampleParse exampleParse, DataHolder exampleOptions) {
-
     }
 
     /**
@@ -57,7 +56,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
      * @param ast             ast used for comparison to expected ast
      */
     public void addFullSpecExample(@NotNull SpecExampleRenderer exampleRenderer, @NotNull SpecExampleParse exampleParse, DataHolder exampleOptions, boolean ignoredTestCase, @NotNull String html, @Nullable String ast) {
-
     }
 
     /*

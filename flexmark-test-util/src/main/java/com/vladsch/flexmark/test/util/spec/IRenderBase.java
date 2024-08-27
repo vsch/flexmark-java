@@ -12,7 +12,6 @@ public abstract class IRenderBase implements IRender {
     public static final IRender NULL_RENDERER = new IRenderBase() {
         @Override
         public void render(@NotNull Node document, @NotNull Appendable output) {
-
         }
     };
 

@@ -19,7 +19,6 @@ import java.util.Map;
  * <p><em>This interface is not intended to be implemented by clients.</em></p>
  */
 public interface InlineParser extends LightInlineParser {
-
     void initializeDocument(@NotNull Document document);
     void finalizeDocument(@NotNull Document document);
 

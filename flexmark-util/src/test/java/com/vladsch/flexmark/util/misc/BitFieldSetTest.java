@@ -12,7 +12,6 @@ import static com.vladsch.flexmark.util.misc.BitFieldSetTest.BitFields.FIELD_8;
 import static org.junit.Assert.*;
 
 public class BitFieldSetTest {
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

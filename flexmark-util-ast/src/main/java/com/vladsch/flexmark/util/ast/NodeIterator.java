@@ -121,7 +121,6 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     final public static ReversiblePeekingIterator<Node> EMPTY = new ReversiblePeekingIterator<Node>() {
         @Override
         public void remove() {
-
         }
 
         @Override

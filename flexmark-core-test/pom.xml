@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-core-test</artifactId>
-    <name>shared test classes and core tests</name>
     <description>flexmark test classes for testing core functionality and implementing custom extension tests</description>
 
     <dependencies>

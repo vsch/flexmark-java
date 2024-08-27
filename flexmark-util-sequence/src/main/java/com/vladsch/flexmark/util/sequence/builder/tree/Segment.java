@@ -220,8 +220,6 @@ public abstract class Segment {
                     endOffset = startOffset = getInt(bytes, byteOffset, intBytes + 1);
                 }
             } else {
-                assert !hasAll(type, TYPE_NO_SIZE_BYTES);
-
                 int intBytes = type & TYPE_START_BYTES;
                 startOffset = getInt(bytes, byteOffset, intBytes + 1);
                 byteOffset += intBytes + 1;
@@ -651,7 +649,6 @@ public abstract class Segment {
     }
 
     public static int addCharAscii(byte[] bytes, int offset, char c) {
-        assert c < 256;
         bytes[offset++] = (byte) (c & 0x000000ff);
         return offset;
     }
@@ -659,7 +656,6 @@ public abstract class Segment {
     public static int addCharsAscii(byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
         for (int i = start; i < end; i++) {
             char c = chars.charAt(i);
-            assert c < 256;
             bytes[offset++] = (byte) (c & 0x000000ff);
         }
         return offset;
@@ -686,7 +682,6 @@ public abstract class Segment {
             } else {
                 int offsetBytes = getOffsetBytes(segStart);
                 if (offsetBytes == 0) {
-                    assert segStart < 16;
                     bytes[offset++] = (byte) (segType.flags | TYPE_NO_SIZE_BYTES | segStart);
                 } else {
                     bytes[offset++] = (byte) (segType.flags | (offsetBytes - 1));
@@ -696,7 +691,6 @@ public abstract class Segment {
         } else if (segType.hasLength()) {
             int lengthBytes = getLengthBytes(segLength);
             if (lengthBytes == 0) {
-                assert segLength < 16;
                 bytes[offset++] = (byte) (segType.flags | TYPE_NO_SIZE_BYTES | segLength);
             } else {
                 bytes[offset++] = (byte) (segType.flags | ((lengthBytes - 1) << 2));

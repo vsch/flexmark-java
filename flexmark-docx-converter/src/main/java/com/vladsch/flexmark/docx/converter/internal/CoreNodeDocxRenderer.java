@@ -79,7 +79,6 @@ import java.util.*;
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 import static com.vladsch.flexmark.util.html.Attribute.CLASS_ATTR;
 
-@SuppressWarnings({ "WeakerAccess", "MethodMayBeStatic", "OverlyCoupledClass" })
 public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     final public static DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
     final public static NullableDataKey<ListSpacing> LIST_ITEM_SPACING = new NullableDataKey<>("LIST_ITEM_SPACING");
@@ -110,7 +109,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     protected final int tableLeftIndent;
     protected final String tableStyle;
     private int imageId;
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection") final private HashMap<Node, BigInteger> footnoteIDs; // cannot re-use footnote ids, so this is dead code, left in for future if needed
+    final private HashMap<Node, BigInteger> footnoteIDs; // cannot re-use footnote ids, so this is dead code, left in for future if needed
     private TocBlockBase lastTocBlock;
     private long[] numberedLists = new long[128];
     private long[] bulletLists = new long[128];
@@ -614,7 +613,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(MacroDefinitionBlock node, DocxRendererContext docx) {
-
     }
 
     private void render(FencedCodeBlock node, DocxRendererContext docx) {
@@ -804,7 +802,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(Reference node, DocxRendererContext docx) {
-
     }
 
     private void render(HtmlEntity node, DocxRendererContext docx) {
@@ -1118,7 +1115,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                             defaultIndex = Long.parseLong(dropDownDefaultValue);
                             if (defaultIndex > 0) defaultIndex--;
                         } catch (NumberFormatException ignored) {
-
                         }
                     }
 
@@ -1155,7 +1151,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                     try {
                         maxLen = Long.parseLong(maxLength);
                     } catch (NumberFormatException ignored) {
-
                     }
                     if (maxLen > 0) {
                         BigInteger maxVal = BigInteger.valueOf(maxLen);
@@ -1455,7 +1450,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         addRunAttributeFormatting(node, docx);
         if (resolvedLink == null) {
             // empty ref, we treat it as text
-            assert !node.isDefined();
 
             if (!options.formControls.isEmpty() && node.getReference().equals(options.formControls)) {
                 renderInputField(node, docx);
@@ -1987,7 +1981,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(TableSeparator tableSeparator, DocxRendererContext docx) {
-
     }
 
     private void render(TableBody node, DocxRendererContext docx) {
@@ -2085,7 +2078,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(FootnoteBlock node, DocxRendererContext docx) {
-
     }
 
     private void render(Footnote node, DocxRendererContext docx) {
@@ -2171,7 +2163,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         @Override
         public void startRendering(EnumeratedReferenceRendering[] renderings) {
-
         }
 
         @Override
@@ -2209,12 +2200,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         @Override
         public void endRendering() {
-
         }
     }
 
     private void render(EnumeratedReferenceBlock node, DocxRendererContext docx) {
-
     }
 
     private void render(AttributesNode node, DocxRendererContext docx) {
@@ -2254,8 +2243,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 //        Document includedDoc = includedDocumentsMap.get(node);
 //
 //        if (includedDoc != null) {
-//            assert parser != null;
-//            
+////            
 //            if (parser.transferReferences(includedDoc, docx.getDocument(), null)) {
 //                FootnoteRepository.resolveFootnotes(includedDoc);
 //                recheckUndefinedReferences = true;

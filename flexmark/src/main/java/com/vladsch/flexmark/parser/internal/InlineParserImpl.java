@@ -116,8 +116,6 @@ public class InlineParserImpl extends LightInlineParserImpl implements InlinePar
 
     @Override
     public void finalizeDocument(@NotNull Document document) {
-        assert this.referenceRepository == Parser.REFERENCES.get(document);
-
         if (inlineParserExtensions != null) {
             for (List<InlineParserExtension> extensionList : inlineParserExtensions.values()) {
                 for (InlineParserExtension extension : extensionList) {

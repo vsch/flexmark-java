@@ -16,7 +16,6 @@ public class BlankLine extends Block {
         return claimedBlankLine;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public BlankLine setClaimedBlankLine(@NotNull Block claimedBlankLine) {
         this.claimedBlankLine = claimedBlankLine;
         return this;

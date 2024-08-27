@@ -26,8 +26,6 @@ class PegdownRenderer extends IRenderBase {
 
     @Override
     public void render(@NotNull Node document, @NotNull Appendable output) {
-        assert document instanceof PegdownParser.PegdownRootNode;
-
         RootNode rootNode = ((PegdownParser.PegdownRootNode) document).myRootNode;
         String html = mySerializer.toHtml(rootNode);
         try {

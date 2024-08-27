@@ -7,7 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class DocumentTest {
-
     @Test
     public void testLineNumberWithUnixEol() {
         Document document = new Document(new MutableDataSet(), BasedSequence.of("Hello\nWorld").subSequence(0, ((CharSequence) "Hello\nWorld").length()));

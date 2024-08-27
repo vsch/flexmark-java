@@ -222,11 +222,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
             return toSequence();
         }
 
-        assert altSequence.equals(altBase) : String.format("altSequence must be character identical to builder.altBase\n" +
-                "altBase: '%s'\n" +
-                " altSeq: '%s'\n" +
-                "", altBase.toVisibleWhitespaceString(), altSequence.toVisibleWhitespaceString());
-
         // this is an identical but different base sequence, need to map to it. Ranges are indices into altSequence and must be converted to offsets.
         SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer, new HashMap<>());
 
@@ -250,11 +245,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         }
 
         BasedSequence result = SegmentedSequence.create(altBuilder);
-        BasedSequence sequence = toSequence();
-        assert SequenceUtils.compare(result, sequence, false, ignoreCharDiff) == 0 : String.format("result must be character identical to builder.toSequence()\n" +
-                "result: '%s'\n" +
-                " sequence: '%s'\n" +
-                "", result.toVisibleWhitespaceString(), sequence.toVisibleWhitespaceString());
         return result;
     }
 
@@ -271,11 +261,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         if (altSequence == altBase) {
             return toSequence();
         }
-
-        assert altSequence.equals(altBase) : String.format("altSequence must be character identical to builder.altBase\n" +
-                "altBase: '%s'\n" +
-                " altSeq: '%s'\n" +
-                "", altBase.toVisibleWhitespaceString(), altSequence.toVisibleWhitespaceString());
 
         // this is an identical but different base sequence, need to map to it. Ranges are indices into altSequence and must be converted to offsets.
         SequenceBuilder altBuilder = new SequenceBuilder(altSequence, segments.options, segments.optimizer, new HashMap<>());
@@ -304,12 +289,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         }
 
         BasedSequence result = SegmentedSequence.create(altBuilder);
-        BasedSequence sequence = toSequence();
-
-        assert SequenceUtils.compare(result, sequence, false, ignoreCharDiff) == 0 : String.format("result must be character identical to builder.toSequence()\n" +
-                "result: '%s'\n" +
-                " sequence: '%s'\n" +
-                "", result.toVisibleWhitespaceString(), sequence.toVisibleWhitespaceString());
         return result;
     }
 

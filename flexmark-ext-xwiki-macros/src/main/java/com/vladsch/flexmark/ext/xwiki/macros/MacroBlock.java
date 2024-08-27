@@ -10,9 +10,7 @@ import java.util.Map;
 /**
  * A macros block node
  */
-@SuppressWarnings("WeakerAccess")
 public class MacroBlock extends Block {
-
     @Override
     public void getAstExtra(@NotNull StringBuilder out) {
         if (isClosedTag()) out.append(" isClosed");
@@ -44,7 +42,6 @@ public class MacroBlock extends Block {
 
     public Macro getMacroNode() {
         Node firstChild = getFirstChild();
-        assert firstChild instanceof Macro;
         return (Macro) firstChild;
     }
 

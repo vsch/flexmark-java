@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BlockQuoteParser extends AbstractBlockParser {
-
     final public static char MARKER_CHAR = '>';
     final private BlockQuote block = new BlockQuote();
     final private boolean allowLeadingSpace;

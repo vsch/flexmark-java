@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-profile-pegdown</artifactId>
-    <name>flexmark-java pegdown profile</name>
     <description>flexmark-java extension for setting flexmark options by using pegdown extension flags</description>
 
     <dependencies>

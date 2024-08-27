@@ -28,7 +28,6 @@ public class SegmentOffsetTree extends SegmentTree {
     @NotNull
     public static SegmentOffsetTree build(@NotNull Iterable<Seg> segments, @NotNull CharSequence allText) {
         SegmentTreeData segmentTreeData = buildTreeData(segments, allText, false);
-        assert segmentTreeData.startIndices != null;
         return new SegmentOffsetTree(segmentTreeData.treeData, segmentTreeData.segmentBytes, segmentTreeData.startIndices);
     }
 

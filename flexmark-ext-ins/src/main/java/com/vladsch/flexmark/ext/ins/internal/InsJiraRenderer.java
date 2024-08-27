@@ -14,7 +14,6 @@ import java.util.Set;
 
 public class InsJiraRenderer implements NodeRenderer {
     public InsJiraRenderer(DataHolder options) {
-
     }
 
     @Override

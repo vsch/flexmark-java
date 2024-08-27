@@ -28,7 +28,6 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
@@ -42,7 +41,6 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

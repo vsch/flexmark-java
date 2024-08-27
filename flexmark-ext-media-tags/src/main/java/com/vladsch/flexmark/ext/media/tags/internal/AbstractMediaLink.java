@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public abstract class AbstractMediaLink extends InlineLinkNode {
-
     final private static String INVALID_SEQUENCE = "%s Link's CharSequence MUST start with an '%s'!";
 
     final private String PREFIX;

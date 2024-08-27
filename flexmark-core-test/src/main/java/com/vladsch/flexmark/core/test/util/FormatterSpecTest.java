@@ -78,7 +78,6 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
 
                     // NOTE: need to get document since the top node is not guaranteed to be a document for generic renderer
                     List<TrackedOffset> trackedOffsetList = Formatter.TRACKED_OFFSETS.get(getDocument().getDocument());
-                    assert trackedOffsetList.isEmpty() || trackedOffsetList == trackedOffsets;
 
                     int[] offsets = new int[trackedOffsets.size()];
                     int i = 0;

@@ -124,7 +124,6 @@ public class ListBlockParser extends AbstractBlockParser {
         return myBlock;
     }
 
-    @SuppressWarnings("SameParameterValue")
     private void setTight(boolean tight) {
         myBlock.setTight(tight);
     }
@@ -514,7 +513,6 @@ public class ListBlockParser extends AbstractBlockParser {
                         ListData listData = parseListMarker(myOptions, newItemCodeIndent, state);
                         ListItemParser listItemParser = new ListItemParser(myOptions, state.getParsing(), listData);
 
-                        assert listData != null;
 
                         int newColumn = listData.markerColumn + listData.listMarker.length() + listData.contentOffset;
                         listBlockParser = new ListBlockParser(myOptions, listData, listItemParser);
@@ -524,7 +522,6 @@ public class ListBlockParser extends AbstractBlockParser {
                         ListData listData = parseListMarker(myOptions, newItemCodeIndent, state);
                         ListItemParser listItemParser = new ListItemParser(myOptions, state.getParsing(), listData);
 
-                        assert listData != null;
 
                         int newColumn = listData.markerColumn + listData.listMarker.length() + listData.contentOffset;
                         listBlockParser.myLastChild = listItemParser;

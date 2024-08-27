@@ -16,8 +16,6 @@ public class MergeContextImpl implements MergeContext {
     final private HashMap<TranslationContext, Document> myTranslationHandlerDocumentMap;
 
     public MergeContextImpl(Document[] documents, TranslationHandler[] translationHandlers) {
-        assert documents.length == translationHandlers.length;
-
         myDocuments = documents;
         myTranslationHandlers = translationHandlers;
         myTranslationHandlerDocumentMap = new HashMap<>();
@@ -39,8 +37,6 @@ public class MergeContextImpl implements MergeContext {
     }
 
     public void setDocuments(Document[] documents) {
-        assert documents.length == myTranslationHandlers.length;
-
         myDocuments = documents;
         updateDocumentMap();
     }

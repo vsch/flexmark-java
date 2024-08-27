@@ -45,7 +45,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         return BasedSequence.of(charSequence).subSequence(startIndex, endIndex);
     }
 
-    @SuppressWarnings("unchecked")
     @NotNull
     @Override
     public SequenceBuilder getBuilder() {
@@ -172,7 +171,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         } else if (isEmpty()) {
             return other;
         }
-        assert isContinuedBy(other) : "sequence[" + getStartOffset() + ", " + getEndOffset() + "] is not continued by other[" + other.getStartOffset() + ", " + other.getEndOffset() + "]";
         return baseSubSequence(getStartOffset(), other.getEndOffset());
     }
 

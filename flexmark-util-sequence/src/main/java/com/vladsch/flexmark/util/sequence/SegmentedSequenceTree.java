@@ -63,7 +63,6 @@ final public class SegmentedSequenceTree extends SegmentedSequence {
 
         if (cache == null || cache.segment.notInSegment(index + startIndex)) {
             Segment segment = segmentTree.findSegment(index + startIndex, startPos, endPos, baseSeq, cache == null ? null : cache.segment);
-            assert segment != null;
 
             cache = new Cache(segment, segment.getCharSequence(), startIndex);
             this.cache.set(cache);

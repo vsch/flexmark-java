@@ -121,8 +121,6 @@ public class SegmentStats {
     }
 
     public void remove(SegmentStats other) {
-        assert textLength >= other.textLength;
-        assert textSegments >= other.textSegments;
         textLength -= other.textLength;
         textSegments -= other.textSegments;
 
@@ -130,11 +128,6 @@ public class SegmentStats {
         textSegmentLength = textLength;
 
         if (trackFirst256 && other.trackFirst256) {
-            assert textSpaceLength >= other.textSpaceLength;
-            assert textSpaceSegments >= other.textSpaceSegments;
-            assert textFirst256Length >= other.textFirst256Length;
-            assert textFirst256Segments >= other.textFirst256Segments;
-
             textSpaceLength -= other.textSpaceLength;
             textSpaceSegments -= other.textSpaceSegments;
             textFirst256Length -= other.textFirst256Length;
@@ -222,8 +215,6 @@ public class SegmentStats {
     }
 
     public void addText(char c, int repeat) {
-        assert repeat > 0;
-
         // need to count spaces in it
         textLength += repeat;
 
@@ -256,11 +247,9 @@ public class SegmentStats {
 
                 if (c < 256) {
                     if (c == ' ') {
-                        assert textSpaceLength > 0;
                         textSpaceLength--;
                     }
 
-                    assert textFirst256Length > 0;
                     textFirst256Length--;
                 }
             }

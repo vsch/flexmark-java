@@ -15,7 +15,6 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
         DataSet.registerDataKeyAggregator(INSTANCE);
     }
     private LoadUnloadDataKeyAggregator() {
-
     }
 
     @Override

@@ -42,7 +42,6 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     }
 
     public @NotNull NodeRendererContext getContext() {
-        assert context != null;
         return context;
     }
 
@@ -66,7 +65,6 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
         return this;
     }
 
-    @SuppressWarnings("WeakerAccess")
     public @NotNull HtmlWriter srcPosWithEOL(@NotNull BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             return srcPos(sourceText.getStartOffset(), sourceText.getEndOffset());
@@ -74,7 +72,6 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
         return this;
     }
 
-    @SuppressWarnings("WeakerAccess")
     public @NotNull HtmlWriter srcPosWithTrailingEOL(@NotNull BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             int endOffset = sourceText.getEndOffset();
@@ -151,12 +148,10 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
                     try {
                         startOffset = Integer.parseInt(attributeValue.substring(0, pos));
                     } catch (Throwable ignored) {
-
                     }
                     try {
                         endOffset = Integer.parseInt(attributeValue.substring(pos + 1));
                     } catch (Throwable ignored) {
-
                     }
                 }
 

@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-@SuppressWarnings("WeakerAccess")
 public class NodeAttributeRepository implements Map<Node, ArrayList<AttributesNode>> {
     protected final HashMap<Node, ArrayList<AttributesNode>> nodeAttributesHashMap = new HashMap<>();
 

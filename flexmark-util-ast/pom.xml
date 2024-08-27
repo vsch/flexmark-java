@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-ast</artifactId>
-    <name>flexmark-java ast utilities</name>
     <description>flexmark-java ast utility classes</description>
 
     <dependencies>

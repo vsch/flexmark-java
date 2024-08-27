@@ -172,13 +172,11 @@ final public class TrackedOffset implements Comparable<TrackedOffset> {
         return track(offset, false, false, false);
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public static TrackedOffset track(int offset, @Nullable Character c, boolean afterDelete) {
         return track(offset, c != null && c == ' ', c != null && !afterDelete, afterDelete);
     }
 
     public static TrackedOffset track(int offset, boolean afterSpaceEdit, boolean afterInsert, boolean afterDelete) {
-        assert !afterInsert && !afterDelete || afterInsert != afterDelete : "Cannot have both afterInsert and afterDelete true";
         return new TrackedOffset(offset, afterSpaceEdit, afterInsert, afterDelete);
     }
 }

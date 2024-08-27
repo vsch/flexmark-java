@@ -214,7 +214,6 @@ public interface CharPredicate extends IntPredicate {
                 CharPredicate testOthers = finalOthers == null || finalOthers.isEmpty() ? null : finalOthers.length() <= maxFixed ? anyOf(others) : value -> indexOf(finalOthers, (char) value) != -1;
                 CharPredicate testAscii = ascii == null || ascii.cardinality() == 0 ? null : ascii::get;
 
-                assert testAscii != null || testOthers != null;
 
                 if (testAscii != null && testOthers != null) {
                     return testAscii.or(testOthers);

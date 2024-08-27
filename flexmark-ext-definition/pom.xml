@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-definition</artifactId>
-    <name>flexmark-java extension for definition</name>
     <description>flexmark-java extension for definition</description>
 
     <dependencies>

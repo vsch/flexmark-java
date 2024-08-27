@@ -19,7 +19,6 @@ public class YamlFrontMatterExtension implements Parser.ParserExtension, Formatt
 
     @Override
     public void rendererOptions(MutableDataHolder options) {
-
     }
 
     @Override
@@ -34,7 +33,6 @@ public class YamlFrontMatterExtension implements Parser.ParserExtension, Formatt
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     public static YamlFrontMatterExtension create() {

@@ -13,7 +13,6 @@ import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
 import static com.vladsch.flexmark.util.misc.Utils.minLimit;
 
 public class TableCellOffsetInfo {
-
     // Stop points used by next/prev tab navigation
     final static public int ROW_START = 0x0001;
     final static public int TEXT_START = 0x0002;

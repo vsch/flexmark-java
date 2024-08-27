@@ -15,7 +15,6 @@ import java.util.Set;
 
 public class TypographicNodeRenderer implements NodeRenderer {
     public TypographicNodeRenderer(DataHolder options) {
-
     }
 
     @Override

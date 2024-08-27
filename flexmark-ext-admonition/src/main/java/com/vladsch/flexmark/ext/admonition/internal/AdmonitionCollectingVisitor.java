@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@SuppressWarnings("WeakerAccess")
 public class AdmonitionCollectingVisitor {
     private LinkedHashSet<String> qualifiers;
     final private NodeVisitor myVisitor;

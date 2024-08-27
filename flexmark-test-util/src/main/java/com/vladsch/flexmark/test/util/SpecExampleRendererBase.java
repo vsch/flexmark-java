@@ -24,7 +24,6 @@ public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
         myIncludeExampleInfo = includeExampleInfo;
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isFinalized() {
         return myIsFinalized;
     }

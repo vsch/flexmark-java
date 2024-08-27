@@ -17,9 +17,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@SuppressWarnings("UnusedReturnValue")
 public interface DocxContext<T> extends DocxContextFrameProvider<T> {
-
     DocxHelper getHelper();
     void setBlockFormatProvider(BlockFormatProvider<T> formatProvider);
     void setRunFormatProvider(RunFormatProvider<T> formatProvider);

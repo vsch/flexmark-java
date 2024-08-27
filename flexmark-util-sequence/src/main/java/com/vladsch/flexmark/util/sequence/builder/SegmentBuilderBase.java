@@ -13,7 +13,6 @@ import java.util.function.Function;
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;
 
-@SuppressWarnings("UnusedReturnValue")
 public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISegmentBuilder<S> {
     final public static int MIN_PART_CAPACITY = 8;
 
@@ -35,8 +34,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     protected int immutableOffset = 0;   // text offset for all committed text segments
 
     private static int[] ensureCapacity(@NotNull int[] prev, int size) {
-        assert size >= 0;
-
         int prevSize = prev.length / 2;
         if (prevSize <= size) {
             int nextSize = Math.max(MIN_PART_CAPACITY, Math.max(prevSize + prevSize >> 1, size));
@@ -154,8 +151,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
     @Override
     public int length() {
-        // RELEASE: remove assert for release
-        assert length == computeLength() : "length:" + length + " != computeLength(): " + computeLength();
         return length;
     }
 
@@ -293,7 +288,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
     private void setSegEnd(int index, int endOffset) {
         int i = index * 2;
-        assert i + 1 < parts.length;
 
 //        parts[i] = startOffset;
         // adjust anchor count
@@ -332,7 +326,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         CharSequence text = (CharSequence) parts[1];
         Range range = (Range) parts[2];
 
-        assert !lastSeg.isNull() && lastSeg.getEnd() > range.getStart();
 
         if (lastSeg.getEnd() < range.getEnd()) {
             // there is a part of the overlap outside the last seg range
@@ -351,10 +344,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
 
     private void processParts(int segStart, int segEnd, boolean resolveOverlap, boolean nullNextRange, @NotNull Function<Object[], Object[]> transform) {
-        assert segStart >= 0 && segEnd >= 0 && segStart <= segEnd;
-
         CharSequence text = this.text.subSequence(immutableOffset, this.text.length());
-        assert resolveOverlap || text.length() > 0;
 
         Seg lastSeg = lastSegOrNull();
         Range prevRange = lastSeg == null || !lastSeg.isBase() ? Range.NULL : lastSeg.getRange();
@@ -377,11 +367,9 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
         Object[] originalParts = parts.clone();
         Object[] optimizedText = transform.apply(parts);
-        assert optimizedText.length > 0;
 
         if (Arrays.equals(optimizedText, originalParts)) {
             // nothing changed, make sure it was not called to resolve overlap
-            assert !resolveOverlap;
 
             if (segEnd > segStart || isIncludeAnchors()) {
                 // NOTE: only commit text if adding real range after it
@@ -423,7 +411,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
                     if (((Range) oPart).isNotNull()) {
                         int optRangeStart = ((Range) oPart).getStart();
                         int optRangeEnd = ((Range) oPart).getEnd();
-                        assert optRangeStart >= 0 && optRangeEnd >= 0 && optRangeStart <= optRangeEnd;
 
                         if (optStartOffset == MAX_VALUE) optStartOffset = optRangeStart;
 
@@ -532,7 +519,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
             // overlap
             processParts(startOffset, endOffset, true, false, this::handleOverlap);
         } else if (this.endOffset == startOffset) {
-
             // adjacent, merge the two if no text between them
             if (haveDanglingText()) {
                 processParts(startOffset, endOffset, false, false, this::optimizeText);

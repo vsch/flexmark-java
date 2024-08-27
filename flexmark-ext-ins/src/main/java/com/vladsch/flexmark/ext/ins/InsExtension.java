@@ -29,12 +29,10 @@ public class InsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

@@ -72,7 +72,6 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
         }
 
         int positionIndex = myIndex;
-        assert positionIndex + count <= myList.size();
 
         if ((myFlags & F_SETTING) == 0) {
             if ((myFlags & F_PREVIOUS) != 0) {
@@ -87,7 +86,6 @@ public class IPositionBase<T, P extends IPosition<T, P>> implements IPosition<T,
                 }
             } else {
                 if (index <= positionIndex) {
-                    assert positionIndex + count <= myList.size();
                     setIndex(positionIndex + count, true);
                 }
             }

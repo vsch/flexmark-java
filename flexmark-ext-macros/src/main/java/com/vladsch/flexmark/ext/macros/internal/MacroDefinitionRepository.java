@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-@SuppressWarnings("WeakerAccess")
 public class MacroDefinitionRepository extends NodeRepository<MacroDefinitionBlock> {
     final private ArrayList<MacroDefinitionBlock> myReferencedMacroDefinitionBlocks = new ArrayList<>();
 

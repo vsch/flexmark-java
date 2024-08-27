@@ -13,7 +13,6 @@ import java.util.function.Predicate;
 
 import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
 
-@SuppressWarnings("unchecked")
 public interface SequenceUtils {
     String EOL = "\n";
     String SPACE = " ";
@@ -1054,7 +1053,6 @@ public interface SequenceUtils {
     static <T extends CharSequence> @NotNull T[] split(@NotNull T thizz, T[] emptyArray, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars)                      { return splitList((T)thizz, delimiter, limit, flags, trimChars).toArray(emptyArray);}
     // @formatter:on
 
-    @SuppressWarnings("unchecked")
     @NotNull
     static <T extends CharSequence> List<T> splitList(@NotNull T thizz, @NotNull CharSequence delimiter, int limit, int flags, @Nullable CharPredicate trimChars) {
         if (trimChars == null) trimChars = CharPredicate.WHITESPACE;

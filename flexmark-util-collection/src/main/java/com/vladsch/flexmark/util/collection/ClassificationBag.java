@@ -75,7 +75,6 @@ public class ClassificationBag<K, V> {
         return items;
     }
 
-    @SuppressWarnings("WeakerAccess")
     public int getModificationCount() {
         return items.getModificationCount();
     }
@@ -105,7 +104,6 @@ public class ClassificationBag<K, V> {
         return bag.get(category);
     }
 
-    @SuppressWarnings("WeakerAccess")
     public int getCategoryCount(@Nullable K category) {
         BitSet bitSet = bag.get(category);
         return bitSet == null ? 0 : bitSet.cardinality();
@@ -146,7 +144,6 @@ public class ClassificationBag<K, V> {
     }
 
     @SafeVarargs
-    @SuppressWarnings("WeakerAccess")
     final public @NotNull BitSet categoriesBitSet(@NotNull K... categories) {
         BitSet bitSet = new BitSet();
         for (K category : categories) {

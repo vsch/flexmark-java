@@ -7,11 +7,9 @@ public interface ValueIterationConsumer<N, R> extends IterationConsumer<N> {
 
     // before start of all iterations
     default void beforeStart(@NotNull ValueIteration<R> iteration) {
-
     }
 
     // iteration is done, before returning
     default void afterEnd(@NotNull ValueIteration<R> iteration) {
-
     }
 }

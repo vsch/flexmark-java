@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 
 public class ParagraphParser extends AbstractBlockParser {
-
     final private Paragraph block = new Paragraph();
     private BlockContent content = new BlockContent();
 

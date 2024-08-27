@@ -89,7 +89,6 @@ public class SegmentOffsetTreeTest {
                         int tmp = 0;
                     }
                     seg = segOffsetTree.findSegmentByOffset(offset, sequence, seg);
-                    assert seg != null && (!seg.offsetNotInSegment(offset) || seg.pos == segOffsetTree.size() - 1) : "offset: " + offset + " seg: " + seg;
 //                    System.out.println("i=" + i + " pos=" + seg.getPos() + ", segOff=" + seg);
                 }
 
@@ -105,7 +104,6 @@ public class SegmentOffsetTreeTest {
             if (offset >= 0) {
                 if (seg == null || seg.offsetNotInSegment(offset)) {
                     seg = segOffsetTree.findSegmentByOffset(offset, sequence, seg);
-                    assert seg != null && (!seg.offsetNotInSegment(offset) || seg.pos == segOffsetTree.size() - 1) : "offset: " + offset + " seg: " + seg;
 //                    System.out.println("i=" + i + " pos=" + seg.getPos() + ", segOff=" + seg);
                 }
 

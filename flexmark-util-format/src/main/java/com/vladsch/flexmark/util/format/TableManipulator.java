@@ -6,6 +6,5 @@ public interface TableManipulator {
     void apply(MarkdownTable table, Node tableNoe);
 
     TableManipulator NULL = (table, tableNoe) -> {
-
     };
 }

@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class CodeBlock extends Block {
-
     @NotNull
     @Override
     public BasedSequence[] getSegments() {

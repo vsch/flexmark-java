@@ -69,7 +69,6 @@ final public class BasedOptionsSequence implements CharSequence, BasedOptionsHol
     public IntStream codePoints() {return chars.codePoints();}
 
     @Override
-    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     public boolean equals(Object o) {
         return chars.equals(o);
     }

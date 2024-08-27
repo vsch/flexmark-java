@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
  * The context for node rendering, including configuration and functionality for the node renderer to use.
  */
 public interface NodeRendererContext extends LinkResolverContext {
-
     /**
      * Extend the attributes by extensions for the node being currently rendered.
      *

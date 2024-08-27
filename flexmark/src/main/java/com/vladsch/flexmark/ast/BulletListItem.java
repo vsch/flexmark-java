@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.List;
 
 public class BulletListItem extends ListItem {
-
     public BulletListItem() {
     }
 

@@ -19,7 +19,6 @@ package com.vladsch.flexmark.util.html.ui;
 
 import java.awt.Font;
 
-@SuppressWarnings("WeakerAccess")
 public class FontStyle {
     final public static FontStyle PLAIN = new FontStyle(0);
     final public static FontStyle BOLD = new FontStyle(Font.BOLD);

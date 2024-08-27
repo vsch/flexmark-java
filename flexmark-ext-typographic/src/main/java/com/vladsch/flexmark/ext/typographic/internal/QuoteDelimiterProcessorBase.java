@@ -101,12 +101,10 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
         return false;
     }
 
-    @SuppressWarnings("WeakerAccess")
     protected boolean isAllowed(char c) {
         return !Character.isLetterOrDigit(c);
     }
 
-    @SuppressWarnings("WeakerAccess")
     protected boolean isAllowed(CharSequence seq, int index) {
         return index < 0 || index >= seq.length() || !Character.isLetterOrDigit(seq.charAt(index));
     }

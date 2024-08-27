@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.util.misc.Utils.*;
 
-@SuppressWarnings("WeakerAccess")
 public class TableCell {
     final public static TableCell NULL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
     final public static TableCell DEFAULT_CELL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);

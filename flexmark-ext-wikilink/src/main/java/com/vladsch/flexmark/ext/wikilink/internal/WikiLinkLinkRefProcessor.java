@@ -52,21 +52,18 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
     @Override
     public BasedSequence adjustInlineText(@NotNull Document document, @NotNull Node node) {
         // here we remove the page ref from child text and only leave the text part
-        assert (node instanceof WikiNode);
         WikiNode wikiNode = (WikiNode) node;
         return wikiNode.getText().ifNull(wikiNode.getLink());
     }
 
     @Override
     public boolean allowDelimiters(@NotNull BasedSequence chars, @NotNull Document document, @NotNull Node node) {
-        assert (node instanceof WikiNode);
         WikiNode wikiNode = (WikiNode) node;
         return node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.get(document) && wikiNode.getText().ifNull(wikiNode.getLink()).containsAllOf(chars);
     }
 
     @Override
     public void updateNodeElements(@NotNull Document document, @NotNull Node node) {
-        assert (node instanceof WikiNode);
         WikiNode wikiNode = (WikiNode) node;
         if (node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.get(document)) {
             // need to update link and pageRef with plain text versions

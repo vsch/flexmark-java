@@ -66,7 +66,6 @@ public class BinaryPartAbstractImage {
             String filenameHint, String altText,
             int id1, int id2, boolean link, long posHOffset, long posVOffset
     ) throws Exception {
-
         WordprocessingMLPackage wmlPackage = ((WordprocessingMLPackage) myAbstractImage.getPackage());
 
         List<SectionWrapper> sections = wmlPackage.getDocumentModel().getSections();
@@ -95,7 +94,6 @@ public class BinaryPartAbstractImage {
             String filenameHint, String altText,
             int id1, int id2, boolean link, int maxWidth, int maxHeight, long posHOffset, long posVOffset
     ) throws Exception {
-
         // This signature can scale the image to specified maxWidth
 
         WordprocessingMLPackage wmlPackage = ((WordprocessingMLPackage) this.getPackage());
@@ -120,7 +118,6 @@ public class BinaryPartAbstractImage {
      * @since 3.3.0
      */
     public static CxCy scale(ImageInfo imageInfo, PageDimensions page, int maxWidth, int maxHeight) {
-
         double writableWidthTwips = page.getWritableWidthTwips();
         log.debug("writableWidthTwips: " + writableWidthTwips);
 
@@ -207,7 +204,6 @@ public class BinaryPartAbstractImage {
             String filenameHint, String altText,
             int id1, int id2, long cx, boolean link, long posHOffset, long posVOffset
     ) throws Exception {
-
         ImageSize size = myAbstractImage.getImageInfo().getSize();
 
         Dimension2D dPt = size.getDimensionPt();
@@ -250,7 +246,6 @@ public class BinaryPartAbstractImage {
             int id1, int id2, long cx, long cy, boolean link,
             long posHOffset, long posVOffset
     ) throws Exception {
-
         // Floating - The drawing object is anchored within the text, but can be absolutely positioned in the
         // document relative to the page.
 
@@ -374,7 +369,6 @@ public class BinaryPartAbstractImage {
             String filenameHint, String altText,
             int id1, int id2, boolean link, int maxWidth, int maxHeight
     ) throws Exception {
-
         // This signature can scale the image to specified maxWidth and maxHeight
 
         WordprocessingMLPackage wmlPackage = ((WordprocessingMLPackage) this.getPackage());

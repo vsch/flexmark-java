@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-test-util</artifactId>
-    <name>flexmark-java test utilities</name>
     <description>flexmark-java classes for tests</description>
 
     <dependencies>

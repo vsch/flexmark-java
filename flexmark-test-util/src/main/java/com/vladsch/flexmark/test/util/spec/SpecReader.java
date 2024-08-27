@@ -122,7 +122,6 @@ public class SpecReader {
 
     // can use these to generate spec from source
     protected void addSpecLine(String line, boolean isSpecExampleOpen) {
-
     }
 
     protected void addSpecExample(@NotNull SpecExample example) {

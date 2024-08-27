@@ -88,7 +88,6 @@ public class SimTocNodeFormatter implements NodeFormatter {
     }
 
     private void render(SimTocContent node, NodeFormatterContext context, MarkdownWriter markdown) {
-
     }
 
     public static class Factory implements NodeFormatterFactory {

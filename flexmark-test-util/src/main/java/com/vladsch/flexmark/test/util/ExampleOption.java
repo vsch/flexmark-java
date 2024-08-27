@@ -9,7 +9,6 @@ import java.util.HashSet;
 
 import static com.vladsch.flexmark.test.util.TestUtils.*;
 
-@SuppressWarnings("EqualsBetweenInconvertibleTypes")
 public class ExampleOption {
     final private static HashSet<String> BUILT_IN_OPTIONS_SET = new HashSet<>();
     static {

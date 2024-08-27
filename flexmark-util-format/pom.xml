@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-format</artifactId>
-    <name>flexmark-java format utilities</name>
     <description>flexmark-java format utility classes</description>
 
     <dependencies>

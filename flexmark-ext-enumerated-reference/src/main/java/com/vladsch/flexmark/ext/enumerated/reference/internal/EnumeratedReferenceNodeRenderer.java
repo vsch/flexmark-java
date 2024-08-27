@@ -111,7 +111,6 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
 
         @Override
         public void startRendering(EnumeratedReferenceRendering[] renderings) {
-
         }
 
         @Override
@@ -146,12 +145,10 @@ public class EnumeratedReferenceNodeRenderer implements PhasedNodeRenderer
 
         @Override
         public void endRendering() {
-
         }
     }
 
     private void render(EnumeratedReferenceBlock node, NodeRendererContext context, HtmlWriter html) {
-
     }
 
     public static class Factory implements NodeRendererFactory {

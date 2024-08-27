@@ -25,7 +25,6 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
 
     @Override
     public void finalizeDocument(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override

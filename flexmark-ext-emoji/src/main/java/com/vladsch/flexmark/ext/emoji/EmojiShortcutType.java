@@ -26,7 +26,6 @@ public enum EmojiShortcutType {
             case ANY_GITHUB_PREFERRED:
                 return gitHub != null ? gitHub : emojiCheatSheet;
         }
-        assert false : "Missing Case Statement";
         return null;
     }
 }

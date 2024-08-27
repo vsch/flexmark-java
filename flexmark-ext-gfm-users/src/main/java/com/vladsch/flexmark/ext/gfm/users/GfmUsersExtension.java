@@ -34,12 +34,10 @@ public class GfmUsersExtension implements Parser.ParserExtension
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

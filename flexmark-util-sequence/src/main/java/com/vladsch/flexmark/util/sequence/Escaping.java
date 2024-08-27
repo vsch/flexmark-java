@@ -12,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Escaping {
-
     // pure chars not for pattern
     final public static String ESCAPABLE_CHARS = "\"#$%&'()*+,./:;<=>?@[]\\^_`{|}~-";
 
@@ -141,7 +140,6 @@ public class Escaping {
     final private static Replacer REMOVE_REPLACER = new Replacer() {
         @Override
         public void replace(@NotNull String s, @NotNull StringBuilder sb) {
-
         }
 
         @Override

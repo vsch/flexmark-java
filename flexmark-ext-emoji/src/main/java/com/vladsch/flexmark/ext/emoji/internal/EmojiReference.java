@@ -98,7 +98,6 @@ public class EmojiReference {
                 while ((line = reader.readLine()) != null) {
                     String[] fields = line.split("\t");
                     try {
-
                         String shortcut = fields[0].charAt(0) == ' ' ? null : fields[0];
                         String category = fields[1].charAt(0) == ' ' ? null : fields[1];
                         String emojiCheatSheetFile = fields[2].charAt(0) == ' ' ? null : fields[2];

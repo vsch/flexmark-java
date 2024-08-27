@@ -190,12 +190,10 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override
@@ -208,7 +206,6 @@ public class AdmonitionExtension implements Parser.ParserExtension, HtmlRenderer
         if (htmlRendererBuilder.isRendererType("HTML")) {
             htmlRendererBuilder.nodeRendererFactory(new AdmonitionNodeRenderer.Factory());
         } else if (htmlRendererBuilder.isRendererType("JIRA")) {
-
         }
     }
 }

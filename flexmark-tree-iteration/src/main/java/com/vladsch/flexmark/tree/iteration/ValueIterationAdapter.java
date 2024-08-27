@@ -3,7 +3,6 @@ package com.vladsch.flexmark.tree.iteration;
 import org.jetbrains.annotations.NotNull;
 
 public interface ValueIterationAdapter<N, T> {
-
     @NotNull
     ValueIterationConsumerAdapter<N, T> getConsumerAdapter();
 

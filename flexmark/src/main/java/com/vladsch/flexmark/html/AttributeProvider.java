@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
  * Extension point for adding/changing attributes on the primary HTML tag for a node.
  */
 public interface AttributeProvider {
-
     /**
      * Set the attributes for the node by modifying the provided map.
      * <p>

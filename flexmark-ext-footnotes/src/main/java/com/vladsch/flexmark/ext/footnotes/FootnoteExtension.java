@@ -48,12 +48,10 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

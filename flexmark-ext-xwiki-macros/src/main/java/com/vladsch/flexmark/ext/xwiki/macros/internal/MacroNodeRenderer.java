@@ -41,7 +41,6 @@ public class MacroNodeRenderer implements NodeRenderer {
     }
 
     private void render(MacroAttribute node, NodeRendererContext context, HtmlWriter html) {
-
     }
 
     private void render(MacroClose node, NodeRendererContext context, HtmlWriter html) {

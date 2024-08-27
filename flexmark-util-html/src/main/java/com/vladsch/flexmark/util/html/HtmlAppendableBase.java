@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.*;
 
-@SuppressWarnings("unchecked")
 public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements HtmlAppendable {
     final private LineAppendable appendable;
 
@@ -53,7 +52,6 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
         return suppressCloseTagLine;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public @NotNull T setSuppressCloseTagLine(boolean suppressCloseTagLine) {
         this.suppressCloseTagLine = suppressCloseTagLine;
         return (T) this;

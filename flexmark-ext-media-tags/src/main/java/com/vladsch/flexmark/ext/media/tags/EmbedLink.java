@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.media.tags.internal.AbstractMediaLink;
 
 public class EmbedLink extends AbstractMediaLink {
-
     final public static String PREFIX = "!E";
     final private static String TYPE = "Embed";
 

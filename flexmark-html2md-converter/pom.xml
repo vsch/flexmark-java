@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-html2md-converter</artifactId>
-    <name>flexmark-java HTML to Markdown extensible converter</name>
     <description>flexmark-java customizable extension to convert HTML to Markdown</description>
 
     <dependencies>

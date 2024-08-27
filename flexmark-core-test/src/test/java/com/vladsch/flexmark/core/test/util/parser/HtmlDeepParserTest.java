@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class HtmlDeepParserTest {
-
     private HtmlDeepParser parseHtml(String html, boolean blockTagsOnly, boolean parseNonBlock, boolean openOnOneLine) {
         HtmlDeepParser deepParser = new HtmlDeepParser();
         String[] htmlLines = html.split("\n");

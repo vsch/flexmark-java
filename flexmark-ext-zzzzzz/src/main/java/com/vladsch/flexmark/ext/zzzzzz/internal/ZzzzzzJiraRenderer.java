@@ -16,7 +16,6 @@ import java.util.Set;
 
 public class ZzzzzzJiraRenderer implements NodeRenderer {
     public ZzzzzzJiraRenderer(DataHolder options) {
-
     }
 
     @Override

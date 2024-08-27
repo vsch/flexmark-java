@@ -69,7 +69,6 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
 
     // must be the first thing called after creation
     public void setParent(DocxContext<?> parent) {
-
     }
 
     @Override
@@ -167,12 +166,10 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
     // document format provider
     @Override
     public void open() {
-
     }
 
     @Override
     public void close() {
-
     }
 
     @Override
@@ -197,17 +194,14 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
 
     @Override
     public void adjustPPrForFormatting(PPr pP) {
-
     }
 
     @Override
     public void getPPr(PPr pPr) {
-
     }
 
     @Override
     public void getParaRPr(RPr rPr) {
-
     }
 
     @Override
@@ -222,7 +216,6 @@ public abstract class DocxContextImpl<T> implements DocxContext<T>, BlockFormatP
 
     @Override
     public void getRPr(RPr rPr) {
-
     }
 
     @Override

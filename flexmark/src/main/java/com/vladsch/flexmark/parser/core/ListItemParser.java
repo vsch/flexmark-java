@@ -32,12 +32,10 @@ public class ListItemParser extends AbstractBlockParser {
         myBlock.setMarkerSuffix(myListData.markerSuffix);
     }
 
-    @SuppressWarnings({ "WeakerAccess", "unused" })
     int getContentColumn() {
         return myListData.markerColumn + myListData.listMarker.length() + (myOptions.isItemContentAfterSuffix() ? myListData.contentOffset : myListData.markerSuffixOffset);
     }
 
-    @SuppressWarnings("WeakerAccess")
     int getContentIndent() {
         return myListData.markerIndent + myListData.listMarker.length() + (myOptions.isItemContentAfterSuffix() ? myListData.contentOffset : myListData.markerSuffixOffset);
     }
@@ -102,7 +100,6 @@ public class ListItemParser extends AbstractBlockParser {
             return BlockContinue.atIndex(state.getNextNonSpaceIndex());
         }
 
-        assert myBlock.getParent() instanceof ListBlock;
 
         ListBlockParser listBlockParser = (ListBlockParser) state.getActiveBlockParser(myBlock.getParent());
 

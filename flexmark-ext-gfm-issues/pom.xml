@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-gfm-issues</artifactId>
-    <name>flexmark-java extension for GitHub issue syntax</name>
     <description>flexmark-java extension for GitHub issue syntax</description>
 
     <dependencies>

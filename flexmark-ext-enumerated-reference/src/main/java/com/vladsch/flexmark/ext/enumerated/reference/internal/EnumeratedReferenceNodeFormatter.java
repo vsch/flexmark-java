@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class EnumeratedReferenceNodeFormatter extends NodeRepositoryFormatter<EnumeratedReferenceRepository, EnumeratedReferenceBlock, EnumeratedReferenceText> {
-
     final private EnumeratedReferenceFormatOptions options;
 
     public EnumeratedReferenceNodeFormatter(DataHolder options) {

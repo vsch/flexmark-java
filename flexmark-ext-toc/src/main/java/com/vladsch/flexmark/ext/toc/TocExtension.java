@@ -61,7 +61,6 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

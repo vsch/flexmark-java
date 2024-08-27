@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.misc.Extension;
 import java.util.Collection;
 
 public class SharedDataKeys {
-
     // BuilderBase
     final public static DataKey<Collection<Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 

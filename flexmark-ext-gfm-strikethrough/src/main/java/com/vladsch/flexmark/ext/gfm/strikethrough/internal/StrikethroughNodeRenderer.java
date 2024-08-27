@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class StrikethroughNodeRenderer implements NodeRenderer {
-
     final private String strikethroughStyleHtmlOpen;
     final private String strikethroughStyleHtmlClose;
     final private String subscriptStyleHtmlOpen;

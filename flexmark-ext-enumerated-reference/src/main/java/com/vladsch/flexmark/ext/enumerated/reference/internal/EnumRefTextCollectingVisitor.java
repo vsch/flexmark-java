@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 
-@SuppressWarnings("WeakerAccess")
 public class EnumRefTextCollectingVisitor {
     private SequenceBuilder out;
     final private NodeVisitor visitor;
@@ -50,7 +49,6 @@ public class EnumRefTextCollectingVisitor {
 
         @Override
         public void startRendering(EnumeratedReferenceRendering[] renderings) {
-
         }
 
         @Override
@@ -85,7 +83,6 @@ public class EnumRefTextCollectingVisitor {
 
         @Override
         public void endRendering() {
-
         }
     }
 

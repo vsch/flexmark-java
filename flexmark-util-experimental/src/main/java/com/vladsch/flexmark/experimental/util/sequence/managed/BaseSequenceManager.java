@@ -17,7 +17,6 @@ public class BaseSequenceManager {
     final private @NotNull WeakHashMap<BasedSequence, BaseSequenceEntry> baseSet = new WeakHashMap<>();
 
     public BaseSequenceManager() {
-
     }
 
     /**
@@ -70,8 +69,6 @@ public class BaseSequenceManager {
             }
 
             BasedSequence newBaseSeq = factory.apply(object);
-            assert newBaseSeq == newBaseSeq.getBaseSequence();
-            assert newBaseSeq.getBase() == object;
 
             // preserve entry search max call type
             callType += 10;

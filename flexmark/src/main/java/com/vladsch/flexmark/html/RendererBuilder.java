@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
  * Extension point for RenderingExtensions that only provide attributes, link resolvers or html id generators
  */
 public interface RendererBuilder extends DataHolder {
-
     /**
      * Add an attribute provider for adding/changing HTML attributes to the rendered tags.
      *

@@ -19,7 +19,6 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
 
     protected SegmentedSequence(BasedSequence baseSeq, int startOffset, int endOffset, int length) {
         super(0);
-        assert baseSeq == baseSeq.getBaseSequence();
 
         if (startOffset < 0 && endOffset < 0) {
             // NOTE: segmented sequence with no based segments in it gets both offsets as -1
@@ -27,8 +26,6 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
             endOffset = 0;
         }
 
-        assert startOffset >= 0 : "startOffset: " + startOffset;
-        assert endOffset >= startOffset && endOffset <= baseSeq.length() : "endOffset: " + endOffset;
 
         this.baseSeq = baseSeq;
         this.startOffset = startOffset;

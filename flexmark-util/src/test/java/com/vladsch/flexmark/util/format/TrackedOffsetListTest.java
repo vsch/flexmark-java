@@ -9,7 +9,6 @@ import java.util.List;
 import static org.junit.Assert.assertArrayEquals;
 
 public class TrackedOffsetListTest {
-
     int[] offsets(List<TrackedOffset> trackedOffsets) {
         int[] result = new int[trackedOffsets.size()];
         int i = 0;

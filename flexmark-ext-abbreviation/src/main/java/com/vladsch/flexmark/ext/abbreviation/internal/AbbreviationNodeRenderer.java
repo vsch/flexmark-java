@@ -31,7 +31,6 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
     }
 
     private void render(AbbreviationBlock node, NodeRendererContext context, HtmlWriter html) {
-
     }
 
     private void render(Abbreviation node, NodeRendererContext context, HtmlWriter html) {

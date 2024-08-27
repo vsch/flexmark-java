@@ -65,7 +65,6 @@ final public class SubSequence extends BasedSequenceImpl {
 
     private SubSequence(@NotNull CharSequence charSequence) {
         super(charSequence instanceof String ? charSequence.hashCode() : 0);
-        assert !(charSequence instanceof BasedSequence);
         baseSeq = this;
         this.charSequence = charSequence;
         startOffset = 0;
@@ -76,7 +75,6 @@ final public class SubSequence extends BasedSequenceImpl {
     private SubSequence(@NotNull SubSequence subSequence, int startIndex, int endIndex) {
         super(0);
 
-        assert startIndex >= 0 && endIndex >= startIndex && endIndex <= subSequence.length() : String.format("SubSequence must have startIndex >= 0 && endIndex >= startIndex && endIndex <= %d, got startIndex:%d, endIndex: %d", subSequence.length(), startIndex, endIndex);
 
         baseSeq = subSequence;
         charSequence = subSequence.charSequence;
@@ -86,8 +84,6 @@ final public class SubSequence extends BasedSequenceImpl {
 
     @Override
     public void addSegments(@NotNull IBasedSegmentBuilder<?> builder) {
-        assert builder.getBaseSequence() == baseSeq || builder.getBaseSequence().equals(baseSeq);
-
         builder.append(startOffset, endOffset);
     }
 

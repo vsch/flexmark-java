@@ -18,7 +18,6 @@ public class MediaTagsNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-
         HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
         set.add(new NodeRenderingHandler<>(AudioLink.class, this::renderAudioLink));
         set.add(new NodeRenderingHandler<>(EmbedLink.class, this::renderEmbedLink));

@@ -127,7 +127,6 @@ public class DependencyResolver {
 
                     newReady.clear(i);
                     DependentItem<D> item = dependentItemMap.getValue(i);
-                    assert item != null;
 
                     stageDependents.add(item.dependent);
                     dependents.clear(i);
@@ -140,7 +139,6 @@ public class DependencyResolver {
 
                             item.dependents.clear(j);
                             DependentItem<D> dependentItem = dependentItemMap.getValue(j);
-                            assert dependentItem != null;
 
                             if (!dependentItem.removeDependency(item)) {
                                 if (item.isGlobalScope) {

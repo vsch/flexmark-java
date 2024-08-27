@@ -49,7 +49,6 @@ import static com.vladsch.flexmark.util.sequence.LineAppendable.*;
  * renderer.render(node);
  * </code></pre>
  */
-@SuppressWarnings("WeakerAccess")
 public class FlexmarkHtmlConverter {
     /**
      * output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)}
@@ -472,7 +471,6 @@ public class FlexmarkHtmlConverter {
          * @param htmlNodeRendererFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        @SuppressWarnings("UnusedReturnValue")
         public Builder htmlNodeRendererFactory(@NotNull HtmlNodeRendererFactory htmlNodeRendererFactory) {
             this.nodeRendererFactories.add(htmlNodeRendererFactory);
             return this;
@@ -488,7 +486,6 @@ public class FlexmarkHtmlConverter {
          * @param linkResolverFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        @SuppressWarnings("UnusedReturnValue")
         public Builder linkResolverFactory(@NotNull HtmlLinkResolverFactory linkResolverFactory) {
             this.linkResolverFactories.add(linkResolverFactory);
             addExtensionApiPoint(linkResolverFactory);
@@ -625,7 +622,6 @@ public class FlexmarkHtmlConverter {
             this.myForDocument = FlexmarkHtmlConverter.FOR_DOCUMENT.get(options).value;
         }
 
-        @SuppressWarnings("WeakerAccess")
         private class SubHtmlNodeConverter extends HtmlNodeConverterSubContext implements HtmlNodeConverterContext {
             final private MainHtmlConverter myMainNodeRenderer;
             final private DataHolder myOptions;
@@ -1155,7 +1151,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void excludeAttributes(String... excludes) {
-            assert myState != null;
             for (String exclude : excludes) {
                 myState.myAttributes.remove(exclude);
             }
@@ -1163,7 +1158,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void processAttributes(@NotNull Node node) {
-            assert myState != null;
             MutableAttributes attributes = myState.myAttributes;
 
             if (myHtmlConverterOptions.outputAttributesIdAttr || !myHtmlConverterOptions.outputAttributesNamesRegex.isEmpty()) {
@@ -1196,7 +1190,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public int outputAttributes(@NotNull LineAppendable out, @NotNull String initialSep) {
-            assert myState != null;
             Attributes attributes = myState.myAttributes;
             int startOffset = out.offsetWithPending();
 
@@ -1258,7 +1251,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void transferIdToParent() {
-            assert myState != null;
             if (myStateStack.isEmpty())
                 throw new IllegalStateException("transferIdToParent with an empty stack");
             Attribute attribute = myState.myAttributes.get("id");
@@ -1273,7 +1265,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void transferToParentExcept(String... excludes) {
-            assert myState != null;
             if (myStateStack.isEmpty())
                 throw new IllegalStateException("transferIdToParent with an empty stack");
             MutableAttributes attributes = new MutableAttributes(myState.myAttributes);
@@ -1294,7 +1285,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void transferToParentOnly(String... includes) {
-            assert myState != null;
             if (myStateStack.isEmpty())
                 throw new IllegalStateException("transferIdToParent with an empty stack");
             MutableAttributes attributes = new MutableAttributes();
@@ -1325,7 +1315,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public @Nullable Node peek() {
-            assert myState != null;
             if (myState.myIndex < myState.myElements.size())
                 return myState.myElements.get(myState.myIndex);
             return null;
@@ -1333,7 +1322,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public @Nullable Node peek(int skip) {
-            assert myState != null;
             if (myState.myIndex + skip >= 0 && myState.myIndex + skip < myState.myElements.size())
                 return myState.myElements.get(myState.myIndex + skip);
             return null;
@@ -1341,7 +1329,6 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public @Nullable Node next() {
-            assert myState != null;
             Node next = peek();
             if (next != null) myState.myIndex++;
             return next;
@@ -1349,14 +1336,12 @@ public class FlexmarkHtmlConverter {
 
         @Override
         public void skip() {
-            assert myState != null;
             Node next = peek();
             if (next != null) myState.myIndex++;
         }
 
         @Override
         public @Nullable Node next(int skip) {
-            assert myState != null;
             if (skip > 0) {
                 Node next = peek(skip - 1);
                 if (next != null) myState.myIndex += skip;
@@ -1365,10 +1350,8 @@ public class FlexmarkHtmlConverter {
             return peek();
         }
 
-        @SuppressWarnings("SameParameterValue")
         @Override
         public void skip(int skip) {
-            assert myState != null;
             if (skip > 0) {
                 Node next = peek(skip - 1);
                 if (next != null) myState.myIndex += skip;
@@ -1695,7 +1678,6 @@ public class FlexmarkHtmlConverter {
     static void processHtmlTree(@NotNull HtmlNodeConverterSubContext context, @NotNull Node parent, boolean outputAttributes, @Nullable Runnable prePopAction) {
         context.pushState(parent);
         HtmlConverterState oldState = context.getState();
-        assert oldState != null;
 
         if (prePopAction != null) {
             oldState.addPrePopAction(prePopAction);

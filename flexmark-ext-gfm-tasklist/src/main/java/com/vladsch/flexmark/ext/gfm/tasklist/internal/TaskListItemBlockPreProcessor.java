@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
-
     public TaskListItemBlockPreProcessor(DataHolder options) {
     }
 

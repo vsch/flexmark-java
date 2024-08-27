@@ -49,7 +49,6 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
     }
 
     private void render(YamlFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-
     }
 
     public static class Factory implements NodeFormatterFactory {

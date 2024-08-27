@@ -22,7 +22,6 @@ import static com.vladsch.flexmark.parser.internal.HtmlDeepParser.HtmlMatch.COMM
 import static com.vladsch.flexmark.parser.internal.HtmlDeepParser.HtmlMatch.OPEN_TAG;
 
 public class HtmlBlockParser extends AbstractBlockParser {
-
     final public static String HTML_COMMENT_OPEN = "<!--";
     final public static String HTML_COMMENT_CLOSE = "-->";
 

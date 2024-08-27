@@ -7,7 +7,6 @@
     <groupId>com.acrolinx.flexmark</groupId>
     <artifactId>flexmark-java</artifactId>
     <version>0.64.8-SNAPSHOT</version>
-    <name>flexmark-java</name>
 
     <modules>
         <module>flexmark</module>
@@ -486,19 +485,10 @@
     <licenses>
         <license>
             <name>BSD 2-Clause License</name>
-            <url>http://opensource.org/licenses/BSD-2-Clause</url>
+            <url>https://opensource.org/license/BSD-2-Clause</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    <developers>
-        <developer>
-            <name>Vladimir Schneider</name>
-            <email>vladimir.schneider@gmail.com</email>
-            <organization>vladsch.com</organization>
-            <organizationUrl>https://github.com/vsch/</organizationUrl>
-        </developer>
-    </developers>
 
     <scm>
         <connection>scm:git:https://github.com/acrolinx/flexmark-java.git</connection>

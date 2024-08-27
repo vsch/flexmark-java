@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Iterator;
 
-@SuppressWarnings("unchecked")
 public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, N, C extends NodeContext<N, C>> implements LineAppendable {
     protected final LineAppendableImpl appendable;
     protected C context;
@@ -43,7 +42,6 @@ public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, 
         return context;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     @NotNull
     public T tailBlankLine() {
         return tailBlankLine(1);

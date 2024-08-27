@@ -17,7 +17,6 @@ public class ZzzzzzNodePostProcessor extends NodePostProcessor {
 
     @Override
     public void process(@NotNull NodeTracker state, @NotNull Node node) {
-
     }
 
     private void processText(NodeTracker state, Text node) {

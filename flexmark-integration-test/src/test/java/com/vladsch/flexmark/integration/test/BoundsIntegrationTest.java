@@ -19,7 +19,6 @@ import static org.junit.Assert.assertNotNull;
  */
 @RunWith(Parameterized.class)
 public class BoundsIntegrationTest {
-
     final private static Parser PARSER = Parser.builder().build();
 
     protected final String input;

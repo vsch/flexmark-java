@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  * A Definition block node
  */
 public class DefinitionTerm extends ListItem {
-
     @Override
     public void getAstExtra(@NotNull StringBuilder out) {
     }

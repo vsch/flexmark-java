@@ -10,12 +10,10 @@ public interface HtmlIdGenerator {
     HtmlIdGenerator NULL = new HtmlIdGenerator() {
         @Override
         public void generateIds(Document document) {
-
         }
 
         @Override
         public void generateIds(Document document, @Nullable AnchorRefTargetBlockPreVisitor preVisitor) {
-            
         }
 
         @Nullable

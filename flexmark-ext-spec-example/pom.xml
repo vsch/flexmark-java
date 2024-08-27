@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-spec-example</artifactId>
-    <name>flexmark-java extension for specexample</name>
     <description>flexmark-java extension for specexample</description>
 
     <dependencies>

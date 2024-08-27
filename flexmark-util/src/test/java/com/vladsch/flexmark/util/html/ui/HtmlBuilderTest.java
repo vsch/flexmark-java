@@ -25,7 +25,6 @@ import java.awt.Font;
 import static org.junit.Assert.assertEquals;
 
 public class HtmlBuilderTest {
-
     @Test
     public void test_Basic() throws Exception {
         final HtmlBuilder fa = new HtmlBuilder();
@@ -37,7 +36,6 @@ public class HtmlBuilderTest {
     public void test_Basic2() throws Exception {
         final HtmlBuilder fa2 = new HtmlBuilder();
         fa2.withCondIndent().tag("tbody", () -> {
-
         });
         assertEquals("<tbody></tbody>\n", fa2.toFinalizedString());
     }

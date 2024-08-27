@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AsideBlockParser extends AbstractBlockParser {
-
     final public static char MARKER_CHAR = '|';
     final private AsideBlock block = new AsideBlock();
     final private boolean allowLeadingSpace;
@@ -127,7 +126,6 @@ public class AsideBlockParser extends AbstractBlockParser {
 
     public static class Factory implements CustomBlockParserFactory {
         @Nullable
-        @SuppressWarnings("UnnecessaryLocalVariable")
         @Override
         public Set<Class<?>> getAfterDependents() {
             HashSet<Class<?>> set = new HashSet<>();

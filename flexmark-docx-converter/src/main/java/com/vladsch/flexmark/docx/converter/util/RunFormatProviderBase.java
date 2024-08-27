@@ -30,12 +30,10 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
 
     @Override
     public void open() {
-
     }
 
     @Override
     public void close() {
-
     }
 
     @Override

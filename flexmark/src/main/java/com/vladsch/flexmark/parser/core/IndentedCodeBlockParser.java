@@ -16,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class IndentedCodeBlockParser extends AbstractBlockParser {
-
     final private IndentedCodeBlock block = new IndentedCodeBlock();
     private BlockContent content = new BlockContent();
     final private boolean trimTrailingBlankLines;

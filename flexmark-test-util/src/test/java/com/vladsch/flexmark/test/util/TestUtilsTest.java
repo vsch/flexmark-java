@@ -10,7 +10,6 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
 public class TestUtilsTest {
-
     @Test
     public void test_insertCaretMarkup() {
         assertEquals("No markup", TestUtils.insertCaretMarkup(BasedSequence.of("No markup"), new int[] { }).toSequence().toString());

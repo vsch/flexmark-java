@@ -3,7 +3,6 @@ package com.vladsch.flexmark.docx.converter.util;
 import org.docx4j.wml.R;
 
 public interface RunContainer {
-
     /**
      * add a new R. Don't change anything about it, just add it to its proper container
      *

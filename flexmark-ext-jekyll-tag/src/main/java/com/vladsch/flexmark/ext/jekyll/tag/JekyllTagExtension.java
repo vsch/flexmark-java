@@ -51,12 +51,10 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

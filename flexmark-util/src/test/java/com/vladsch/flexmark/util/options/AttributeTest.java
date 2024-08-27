@@ -7,7 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class AttributeTest {
-
     @Test
     public void testBasic() throws Exception {
         Attribute attribute = AttributeImpl.of("name", "value1", ' ');

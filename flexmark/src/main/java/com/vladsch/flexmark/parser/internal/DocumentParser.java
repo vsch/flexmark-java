@@ -29,7 +29,6 @@ import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
 
 public class DocumentParser implements ParserState {
-
     final public static InlineParserFactory INLINE_PARSER_FACTORY = CommonmarkInlineParser::new;
 
     final private static HashMap<CustomBlockParserFactory, DataKey<Boolean>> CORE_FACTORIES_DATA_KEYS = new HashMap<>();
@@ -943,7 +942,6 @@ public class DocumentParser implements ParserState {
         if (blockTracker.getNodeClassifier().containsCategory(Paragraph.class)) {
             ParagraphPreProcessorCache processorMap = new ParagraphPreProcessorCache(this);
             for (List<ParagraphPreProcessorFactory> factoryStage : paragraphPreProcessorDependencies) {
-
                 for (Paragraph paragraph : blockTracker.getNodeClassifier().getCategoryItems(Paragraph.class, Paragraph.class)) {
                     preProcessParagraph(paragraph, factoryStage, processorMap);
                 }

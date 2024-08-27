@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-data</artifactId>
-    <name>flexmark-java data utilities</name>
     <description>flexmark-java data utility classes</description>
 
     <dependencies>

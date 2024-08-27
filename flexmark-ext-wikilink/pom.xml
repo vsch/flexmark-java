@@ -9,7 +9,6 @@
     </parent>
 
     <artifactId>flexmark-ext-wikilink</artifactId>
-    <name>flexmark-java extension for wiki links</name>
     <description>flexmark-java extension parsing and rendering wiki links</description>
 
     <dependencies>

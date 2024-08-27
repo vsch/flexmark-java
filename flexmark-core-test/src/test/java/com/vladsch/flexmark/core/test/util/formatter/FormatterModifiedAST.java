@@ -19,7 +19,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class FormatterModifiedAST {
-
     final static DataHolder OPTIONS = new MutableDataSet();
 
     final static MutableDataSet FORMAT_OPTIONS = new MutableDataSet();
@@ -245,7 +244,6 @@ public class FormatterModifiedAST {
 
     @Test
     public void test_CRLFInFencedCodeBlock() throws Exception {
-
         final String input =
                 "following sample:\n" +
                 "\n" +

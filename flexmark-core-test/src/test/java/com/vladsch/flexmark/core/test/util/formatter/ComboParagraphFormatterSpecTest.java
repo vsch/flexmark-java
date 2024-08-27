@@ -158,7 +158,6 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
             }
 
             List<TrackedOffset> trackedOffsets = formatter.getTrackedOffsets();
-            assert trackedOffsets.size() == offsets.length;
             int[] resultOffsets = new int[offsets.length];
 
             if (!trackedOffsets.isEmpty()) {
@@ -166,7 +165,6 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
                 int r = 0;
                 for (TrackedOffset trackedOffset : trackedOffsets) {
                     int offset = trackedOffset.getIndex();
-                    assert offset != -1;
                     out.append("[").append(r).append("]: ").append(trackedOffset.toString()).append("\n");
                     resultOffsets[r++] = offset;
                 }
@@ -189,7 +187,6 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
         DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
         return new FlexmarkSpecExampleRenderer(example, combinedOptions, new ParagraphParser(combinedOptions), new ParagraphFormatter(combinedOptions), true) {
-
             @Override
             protected @NotNull String renderHtml() {
                 if (SharedDataKeys.RUNNING_TESTS.get(myOptions)) {

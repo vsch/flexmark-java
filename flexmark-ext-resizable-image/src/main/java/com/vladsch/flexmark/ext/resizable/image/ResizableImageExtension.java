@@ -9,7 +9,6 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import org.jetbrains.annotations.NotNull;
 
 public class ResizableImageExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-
     private ResizableImageExtension() {
     }
 
@@ -19,12 +18,10 @@ public class ResizableImageExtension implements Parser.ParserExtension, HtmlRend
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

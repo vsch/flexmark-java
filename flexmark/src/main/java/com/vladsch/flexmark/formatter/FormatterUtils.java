@@ -37,7 +37,6 @@ import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_LEADING_W
 import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_TRAILING_WHITESPACE;
 
 public class FormatterUtils {
-
     final public static DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
     final public static DataKey<Boolean> FIRST_LIST_ITEM_CHILD = new DataKey<>("FIRST_LIST_ITEM_CHILD", false); // Set to true for first block list item child of an empty list item
     final public static Function<CharSequence, Pair<Integer, Integer>> NULL_PADDING = sequence -> Pair.of(0, 0);
@@ -88,7 +87,6 @@ public class FormatterUtils {
         return combinedPrefix;
     }
 
-    @SuppressWarnings("SameParameterValue")
     public static CharSequence stripSoftLineBreak(CharSequence chars, CharSequence spaceChar) {
         StringBuffer sb = null;
         Matcher matcher = Pattern.compile("\\s*(?:\r\n|\r|\n)\\s*").matcher(chars);
@@ -268,7 +266,6 @@ public class FormatterUtils {
         }
     }
 
-    @SuppressWarnings("WeakerAccess")
     public static void renderLooseParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
         renderLooseItemParagraph(node, context, markdown);
@@ -295,7 +292,6 @@ public class FormatterUtils {
         return node != null && node.getNextAnyNot(BlankLine.class, HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class) == null;
     }
 
-    @SuppressWarnings("WeakerAccess")
     public static void renderLooseItemParagraph(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderTextBlockParagraphLines(node, context, markdown);
         Block parent = node.getParent();
@@ -528,7 +524,6 @@ public class FormatterUtils {
         FIRST_LIST_ITEM_CHILD.set(context.getDocument(), savedFirstListItemChild);
     }
 
-    @SuppressWarnings("WeakerAccess")
     public static void renderTextBlockParagraphLines(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
         if (context.isTransformingText()) {
             context.translatingSpan((context1, writer) -> context1.renderChildren(node));

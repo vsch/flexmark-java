@@ -13,7 +13,6 @@ public class BaseSequenceEntry {
     private int hash;
 
     public BaseSequenceEntry() {
-
     }
 
     /**

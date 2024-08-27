@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-@SuppressWarnings("WeakerAccess")
 public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
     private ArrayList<FootnoteBlock> referencedFootnoteBlocks = new ArrayList<>();
 

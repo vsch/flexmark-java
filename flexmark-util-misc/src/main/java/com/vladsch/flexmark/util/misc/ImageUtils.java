@@ -375,7 +375,6 @@ public class ImageUtils {
     }
 
     public static BufferedImage drawRectangle(BufferedImage image, int x, int y, int w, int h, Color borderColor, int borderWidth, int cornerRadius) {
-
         return drawRectangle(image, x, y, w, h, borderColor, borderWidth, cornerRadius, null, 0.0f);
     }
 
@@ -656,7 +655,6 @@ public class ImageUtils {
      */
     public static Image toTransparent(BufferedImage image, Color color, int tolerance) {
         ImageFilter filter = new RGBImageFilter() {
-
             // the color we are looking for... Alpha bits are set to opaque
             final public int markerRGB = color.getRGB() | 0xFF000000;
             final int radius = tolerance * tolerance * 3;
@@ -667,7 +665,6 @@ public class ImageUtils {
                     return 0x00FFFFFF & rgb;
                 } else {
                     if ((rgb & 0xFF000000) == 0xFF000000) {
-
                         int delta1 = ((rgb & 0xFF0000) >> 16) - ((markerRGB & 0xFF0000) >> 16);
                         int delta2 = ((rgb & 0x00FF00) >> 8) - ((markerRGB & 0x00FF00) >> 8);
                         int delta3 = ((rgb & 0x0000FF)) - ((markerRGB & 0x0000FF));

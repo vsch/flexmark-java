@@ -21,14 +21,12 @@ class PositionIterator<T, P extends IPositionHolder<T, P>> implements Iterator<P
     private @Nullable P myNext;
 
     public PositionIterator(@NotNull P index) {
-        assert index.getAnchor() != CURRENT;
         myIndex = null;
         myNext = index;
     }
 
     @Override
     public boolean hasNext() {
-        assert myNext == null || myNext.isValid() || myNext.getAnchor() == PREVIOUS;
         return myNext != null && myNext.isValidElement();
     }
 
@@ -46,7 +44,6 @@ class PositionIterator<T, P extends IPositionHolder<T, P>> implements Iterator<P
         }
         oldNext.detachListener();
 
-        assert myNext == null || myIndex.getIndex() != myNext.getIndex();
         return myIndex;
     }
 

@@ -11,7 +11,6 @@ import java.util.function.BiConsumer;
  * Can be used to only process certain nodes. If you override a method and want visiting to descend into children,
  * call {@link #visitChildren}.
  */
-@SuppressWarnings("rawtypes")
 public class BlockNodeVisitor extends NodeVisitor {
     public BlockNodeVisitor() {
     }

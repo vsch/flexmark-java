@@ -23,7 +23,6 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
 
     @Override
     public void finalizeDocument(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override

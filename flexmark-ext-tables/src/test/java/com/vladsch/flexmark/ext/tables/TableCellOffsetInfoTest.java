@@ -11,7 +11,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
-
     @Test
     public void test_nextOffsetStop1() {
         String markdown = "" +

@@ -23,7 +23,6 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Locale;
 
-@SuppressWarnings({ "WeakerAccess" })
 public class ColorStyler extends HtmlStylerBase<Color> {
     @Override
     public String getStyle(Color item) {
@@ -102,7 +101,6 @@ public class ColorStyler extends HtmlStylerBase<Color> {
                 : String.format(Locale.US, "%02x%02x%02x", item.getRed(), item.getGreen(), item.getBlue());
     }
 
-    @SuppressWarnings("WeakerAccess")
 
     public static String getColorNameOrRGB(Color item) {
         if (item != null) {

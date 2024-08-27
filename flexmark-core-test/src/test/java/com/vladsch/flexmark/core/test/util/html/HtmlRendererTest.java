@@ -19,7 +19,6 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 final public class HtmlRendererTest {
-
     @Test
     public void htmlAllowingShouldNotEscapeInlineHtml() {
         String rendered = htmlAllowingRenderer().render(parse("paragraph with <span id='foo' class=\"bar\">inline &amp; html</span>"));
@@ -368,7 +367,6 @@ final public class HtmlRendererTest {
 
     static class CustomRefLinkResolverImpl implements LinkResolver {
         public CustomRefLinkResolverImpl(LinkResolverBasicContext context) {
-
         }
 
         @NotNull

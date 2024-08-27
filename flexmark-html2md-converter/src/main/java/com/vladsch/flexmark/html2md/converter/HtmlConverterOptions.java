@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 
-@SuppressWarnings({ "WeakerAccess" })
 public class HtmlConverterOptions implements MutableDataSetter {
     public boolean listContentIndent;
     public boolean setextHeadings;

@@ -9,7 +9,6 @@
     </parent>
 
     <artifactId>flexmark-docx-converter</artifactId>
-    <name>flexmark-java extension for rendering docx format</name>
     <description>flexmark-java extension for rendering docx format</description>
 
     <dependencies>

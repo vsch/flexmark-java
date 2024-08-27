@@ -8,7 +8,6 @@ import java.util.function.Function;
  * Factory for instantiating new node renderers when rendering is done.
  */
 public interface HtmlNodeRendererFactory extends Function<DataHolder, HtmlNodeRenderer> {
-
     /**
      * Create a new node renderer for the specified rendering context.
      *

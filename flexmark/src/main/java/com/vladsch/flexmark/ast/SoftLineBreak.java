@@ -22,25 +22,21 @@ public class SoftLineBreak extends Node implements DoNotAttributeDecorate, DoNot
     @Override
     public void setChars(@NotNull BasedSequence chars) {
         super.setChars(chars);
-        assert getChars().isNotEmpty();
     }
 
     @Override
     public void setCharsFromContentOnly() {
         super.setCharsFromContentOnly();
-        assert getChars().isNotEmpty();
     }
 
     @Override
     public void setCharsFromContent() {
         super.setCharsFromContent();
-        assert getChars().isNotEmpty();
     }
 
     @Override
     public void setCharsFromSegments() {
         super.setCharsFromSegments();
-        assert getChars().isNotEmpty();
     }
 
     @Override

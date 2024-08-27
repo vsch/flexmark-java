@@ -37,8 +37,6 @@ public class ReplacedTextMapper {
     }
 
     public void startNestedReplacement(BasedSequence sequence) {
-        assert sequence.equals(this.getReplacedSequence());
-
         // create parent from our data and re-initialize
         this.parent = new ReplacedTextMapper(this);
         this.original = sequence;

@@ -13,7 +13,6 @@ import java.util.HashSet;
 import static com.vladsch.flexmark.util.data.SharedDataKeys.EXTENSIONS;
 
 public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
-
     // loaded extensions
     final private HashSet<Class<?>> loadedExtensions = new HashSet<>();
 

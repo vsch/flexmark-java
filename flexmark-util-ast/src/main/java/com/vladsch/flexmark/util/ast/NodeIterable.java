@@ -62,7 +62,6 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
         }
 
         public void forEach(Consumer<? super Node> consumer) {
-
         }
 
         @Override

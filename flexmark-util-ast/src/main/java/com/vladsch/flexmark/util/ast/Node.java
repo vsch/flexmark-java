@@ -148,7 +148,6 @@ public abstract class Node {
         return -1;
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isOrDescendantOfType(@NotNull Class<?>... classes) {
         Node node = this;
         while (node != null) {
@@ -247,7 +246,6 @@ public abstract class Node {
         while (node != null && !(node instanceof Document)) {
             node = node.getParent();
         }
-        assert node != null : "Node should always have Document ancestor";
         return (Document) node;
     }
 
@@ -444,7 +442,6 @@ public abstract class Node {
         this.next = sibling;
         sibling.parent = this.parent;
         if (sibling.next == null) {
-            assert sibling.parent != null;
             sibling.parent.lastChild = sibling;
         }
     }
@@ -459,7 +456,6 @@ public abstract class Node {
         this.prev = sibling;
         sibling.parent = this.parent;
         if (sibling.prev == null) {
-            assert sibling.parent != null;
             sibling.parent.firstChild = sibling;
         }
     }
@@ -470,7 +466,6 @@ public abstract class Node {
     }
 
     public void getAstExtra(@NotNull StringBuilder out) {
-
     }
 
     public void astExtraChars(@NotNull StringBuilder out) {
@@ -688,7 +683,6 @@ public abstract class Node {
         if (node.firstChild != null) {
             Node firstChild = node.firstChild;
             Node lastChild = node.lastChild;
-            assert lastChild != null;
 
             if (lastChild != firstChild) {
                 node.firstChild = null;
@@ -762,7 +756,6 @@ public abstract class Node {
 
     public @NotNull Node getBlankLineSibling() {
         // need to find the first node that can contain a blank line that is not the last non-blank line of its parent
-        assert parent != null;
 
         Node parent = this.parent;
         Node lastBlankLineSibling = this;

@@ -9,7 +9,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class HtmlAppendableBaseTest {
-
     @Test
     public void test_basic() throws Exception {
         final HtmlAppendableBase fa = new HtmlAppendableBase(2, LineAppendable.F_FORMAT_ALL);

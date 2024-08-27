@@ -29,7 +29,6 @@ import javax.swing.plaf.FontUIResource;
 import java.awt.Font;
 import java.util.HashMap;
 
-@SuppressWarnings("WeakerAccess")
 public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
     public HtmlBuilder() {
         super(0, LineAppendable.F_PASS_THROUGH);
@@ -39,7 +38,6 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
         super(indentSize, formatOptions);
     }
 
-    @SuppressWarnings({ "UnusedReturnValue", "WeakerAccess" })
     public HtmlBuilder closeAllTags() {
         while (!getOpenTags().isEmpty()) {
             CharSequence tag = getOpenTags().peek();
@@ -54,7 +52,6 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
         return toString(0, 0);
     }
 
-    @SuppressWarnings("WeakerAccess")
     public HtmlBuilder attr(Object... convertible) {
         for (Object convert : convertible) {
             if (convert instanceof Attribute) {

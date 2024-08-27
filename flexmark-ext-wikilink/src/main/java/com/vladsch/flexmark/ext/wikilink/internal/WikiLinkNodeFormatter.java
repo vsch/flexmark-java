@@ -29,7 +29,6 @@ public class WikiLinkNodeFormatter implements PhasedNodeFormatter {
     private WikiLinkOptions options;
 
     public WikiLinkNodeFormatter(DataHolder options) {
-
     }
 
     @Nullable

@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-tree-iteration</artifactId>
-    <name>flexmark-java library for recursive tree iteration</name>
     <description>flexmark-java library for recursive tree iteration with the filtering and recursion conditions provided by predicates</description>
 
     <dependencies>

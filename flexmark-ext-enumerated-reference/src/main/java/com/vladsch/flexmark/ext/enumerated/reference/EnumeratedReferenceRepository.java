@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SuppressWarnings("WeakerAccess")
 public class EnumeratedReferenceRepository extends NodeRepository<EnumeratedReferenceBlock> {
     private ArrayList<EnumeratedReferenceBlock> referencedEnumeratedReferenceBlocks = new ArrayList<>();
 

@@ -11,7 +11,6 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 
 public class MarkdownParagraphTest {
-
     @Test
     public void test_wrapIndentedLines() {
         BasedSequence input = BasedSequence.of("Add: configuration for repeated prefixes in items, which would `be #2` copied when adding/splitting an item. In other words they\n" +

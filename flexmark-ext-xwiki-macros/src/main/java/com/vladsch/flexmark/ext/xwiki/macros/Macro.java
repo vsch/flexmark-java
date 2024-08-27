@@ -10,7 +10,6 @@ import java.util.Map;
 /**
  * A macros node
  */
-@SuppressWarnings("WeakerAccess")
 public class Macro extends Node {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence name = BasedSequence.NULL;

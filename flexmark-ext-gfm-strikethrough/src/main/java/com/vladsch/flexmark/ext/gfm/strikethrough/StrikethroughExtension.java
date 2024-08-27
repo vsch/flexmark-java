@@ -30,12 +30,10 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

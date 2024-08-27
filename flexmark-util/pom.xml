@@ -9,7 +9,6 @@
     </parent>
 
     <artifactId>flexmark-util</artifactId>
-    <name>flexmark-java utilities</name>
     <description>flexmark-java utility classes</description>
 
     <dependencies>

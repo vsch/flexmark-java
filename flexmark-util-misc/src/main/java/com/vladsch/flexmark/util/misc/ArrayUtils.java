@@ -154,7 +154,6 @@ public class ArrayUtils {
 
             bits[--i] = lastSet;
         }
-        assert i == 0;
         return bits;
     }
 }

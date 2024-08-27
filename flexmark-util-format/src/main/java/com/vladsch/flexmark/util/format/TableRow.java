@@ -9,7 +9,6 @@ import static com.vladsch.flexmark.util.format.TableCellManipulator.BREAK;
 import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
 import static com.vladsch.flexmark.util.misc.Utils.minLimit;
 
-@SuppressWarnings("WeakerAccess")
 public class TableRow {
     protected final List<TableCell> cells;
     protected int beforeOffset = TableCell.NOT_TRACKED;

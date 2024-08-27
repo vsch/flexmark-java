@@ -13,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Html5Entities {
-
     final private static Map<String, String> NAMED_CHARACTER_REFERENCES = readEntities();
     final private static Pattern NUMERIC_PATTERN = Pattern.compile("^&#[Xx]?");
     final private static String ENTITY_PATH = "/com/vladsch/flexmark/util/sequence/entities.properties";

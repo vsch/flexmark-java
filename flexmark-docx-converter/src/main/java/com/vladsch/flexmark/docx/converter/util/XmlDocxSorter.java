@@ -56,7 +56,6 @@ import java.util.regex.Pattern;
  * StackOverflow: https://stackoverflow.com/questions/139076/how-to-pretty-print-xml-from-java
  */
 public class XmlDocxSorter {
-
     static class DocxPartEntry {
         final public int ordinal;
         final public String contentType;

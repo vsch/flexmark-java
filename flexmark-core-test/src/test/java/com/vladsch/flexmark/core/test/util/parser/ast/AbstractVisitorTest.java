@@ -12,7 +12,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 final public class AbstractVisitorTest {
-
     @Test
     public void replacingNodeInVisitorShouldNotDestroyVisitOrder() {
         NodeVisitor visitor = new NodeVisitor(

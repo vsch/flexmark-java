@@ -14,7 +14,6 @@ import java.util.Set;
 
 public class AsideNodeRenderer implements NodeRenderer {
     public AsideNodeRenderer(DataHolder options) {
-
     }
 
     @Override

@@ -19,7 +19,6 @@ package com.vladsch.flexmark.util.html.ui;
 
 import java.awt.Color;
 
-@SuppressWarnings({ "WeakerAccess" })
 public class BackgroundColor extends Color {
     final public static BackgroundColor NULL = new BackgroundColor(new Color(0, true));
     final public static BackgroundColor WHITE = new BackgroundColor(Color.WHITE);

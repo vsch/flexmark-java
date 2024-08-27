@@ -19,7 +19,6 @@ import java.util.*;
  *
  */
 public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> implements Iterable<P>, IPositionUpdater<T, P> {
-
     final private @NotNull List<T> myList;
     final private @NotNull WeakHashMap<IPositionListener, Integer> myListeners = new WeakHashMap<>(); // != -1 if listener is P and framed, -1 otherwise
     private @Nullable WeakHashMap<IPreviewPositionListener, Boolean> myPreviewListeners = null;        // used only for optimized setting notifications since most positions do nothing for this
@@ -146,7 +145,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
 
     @NotNull
     public Iterator<P> iterator(@NotNull P position) {
-        assert position.getAnchor() != PositionAnchor.CURRENT;
         return new PositionIterator<T, P>(position);
     }
 
@@ -312,9 +310,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
 
     @Override
     public void inserted(int index, int count) {
-        assert count >= 0;
-        assert index >= 0 && index <= myList.size() - count;
-
         int[] listenerCount = { 0 };
         myListeners.entrySet().removeIf(entry -> {
             listenerCount[0]++;
@@ -327,8 +322,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
 
     @Override
     public void deleted(int index, int count) {
-        assert count >= 0;
-        assert index >= 0 && index + count <= myList.size() + count;
         int[] listenerCount = { 0 };
         myListeners.entrySet().removeIf(entry -> {
             listenerCount[0]++;
@@ -375,7 +368,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
                     useValue[0] = entry.getKey().changing(index, wasValue);
 
                     // make sure replacement is compatible
-                    assert useValue[0] == wasValue || value.getClass().isInstance(useValue[0]);
                     return false;
                 });
 
@@ -399,7 +391,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
     }
 
     public T remove(int index) {
-        assert index >= 0 && index < myList.size();
         deleting(index, 1);
         T value = myList.remove(index);
         deleted(index, 1);
@@ -408,7 +399,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
 
     public void remove(int startIndex, int endIndex) {
         if (startIndex < endIndex) {
-            assert startIndex >= 0 && endIndex <= myList.size();
             deleting(startIndex, endIndex - startIndex);
             myList.subList(startIndex, endIndex).clear();
             deleted(startIndex, endIndex - startIndex);
@@ -422,9 +412,7 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
         return true;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public boolean add(int index, T element) {
-        assert index >= 0 && index <= myList.size();
         myList.add(index, element);
         inserted(index, 1);
         return true;
@@ -443,7 +431,6 @@ public abstract class PositionListBase<T, P extends IPositionHolder<T, P>> imple
     }
 
     public boolean addAll(int index, @NotNull Collection<? extends T> elements) {
-        assert index >= 0 && index <= myList.size();
         myList.addAll(index, elements);
         inserted(index, elements.size());
         return true;

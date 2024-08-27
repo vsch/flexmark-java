@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class DelimitedLinkNode extends LinkNode {
-
     public DelimitedLinkNode() {
     }
 

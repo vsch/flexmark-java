@@ -18,7 +18,6 @@ import java.util.Locale;
 import java.util.Set;
 
 public class FootnoteNodeRenderer implements PhasedNodeRenderer {
-
     final private FootnoteRepository footnoteRepository;
     final private FootnoteOptions options;
     final private boolean recheckUndefinedReferences;
@@ -102,7 +101,6 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     }
 
     private void render(FootnoteBlock node, NodeRendererContext context, HtmlWriter html) {
-
     }
 
     private void render(Footnote node, NodeRendererContext context, HtmlWriter html) {

@@ -3,7 +3,6 @@ package com.vladsch.flexmark.docx.converter.util;
 import org.docx4j.wml.Style;
 
 public interface FormatProvider<T> {
-
     /**
      * get the node for this formatting block
      *

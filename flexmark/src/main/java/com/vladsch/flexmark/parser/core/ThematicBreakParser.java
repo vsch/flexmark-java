@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class ThematicBreakParser extends AbstractBlockParser {
-
     static Pattern PATTERN = Pattern.compile("^(?:(?:\\*[ \t]*){3,}|(?:_[ \t]*){3,}|(?:-[ \t]*){3,})[ \t]*$");
 
     final private ThematicBreak block = new ThematicBreak();

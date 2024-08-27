@@ -18,7 +18,6 @@
 package com.vladsch.flexmark.util.html.ui;
 
 public abstract class HtmlStylerBase<T> implements HtmlStyler<T> {
-
     @Override
     public T getStyleable(Object item) {
         try {

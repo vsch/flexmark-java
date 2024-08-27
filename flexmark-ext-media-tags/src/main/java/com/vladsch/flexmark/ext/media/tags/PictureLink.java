@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.media.tags.internal.AbstractMediaLink;
 
 public class PictureLink extends AbstractMediaLink {
-
     final public static String PREFIX = "!P";
     final private static String TYPE = "Picture";
 

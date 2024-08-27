@@ -41,7 +41,6 @@ public class TrackedOffsetList implements List<TrackedOffset> {
         }
         SegmentOffsetTree segmentOffsetTree = SegmentOffsetTree.build(segments, "");
         myBasedOffsetTracker = BasedOffsetTracker.create(baseSeq, segmentOffsetTree);
-        assert myBasedOffsetTracker.size() == myTrackedOffsets.size();
     }
 
     @NotNull
@@ -96,13 +95,11 @@ public class TrackedOffsetList implements List<TrackedOffset> {
 
         if (startSeg >= endSeg) return EMPTY_LIST;
         else {
-
             if (myTrackedOffsets.get(startSeg).getOffset() < startOffset) startSeg++;
             if (myTrackedOffsets.get(endSeg - 1).getOffset() > endOffset) endSeg--;
 
             if (startSeg >= endSeg) return EMPTY_LIST;
             else {
-
                 return new TrackedOffsetList(myBaseSeq, myTrackedOffsets.subList(startSeg, endSeg));
             }
         }

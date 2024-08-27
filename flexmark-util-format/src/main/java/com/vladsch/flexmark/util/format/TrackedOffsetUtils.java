@@ -13,7 +13,6 @@ import java.util.List;
 import static com.vladsch.flexmark.util.misc.CharPredicate.WHITESPACE;
 
 public class TrackedOffsetUtils {
-
     /**
      * Resolve any unresolved tracked offsets
      *

@@ -11,7 +11,6 @@ import java.util.Set;
  * A renderer for a document node for a specific rendering phase
  */
 public interface PhasedNodeRenderer extends NodeRenderer {
-
     @Nullable Set<RenderingPhase> getRenderingPhases();
 
     /**

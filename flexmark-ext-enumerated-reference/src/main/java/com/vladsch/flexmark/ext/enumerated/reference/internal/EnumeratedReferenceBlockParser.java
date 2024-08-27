@@ -27,7 +27,6 @@ public class EnumeratedReferenceBlockParser extends AbstractBlockParser {
     private BlockContent content = new BlockContent();
 
     public EnumeratedReferenceBlockParser(EnumeratedReferenceOptions options, int contentOffset) {
-
     }
 
     public BlockContent getBlockContent() {

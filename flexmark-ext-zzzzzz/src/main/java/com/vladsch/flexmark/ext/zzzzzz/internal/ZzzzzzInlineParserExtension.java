@@ -21,7 +21,6 @@ public class ZzzzzzInlineParserExtension implements InlineParserExtension {
 
     @Override
     public void finalizeDocument(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override

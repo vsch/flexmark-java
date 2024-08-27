@@ -24,7 +24,6 @@ import java.util.List;
  * <p>
  * a subSequence() returns a sub-sequence from the original base sequence with corresponding offsets
  */
-@SuppressWarnings("SameParameterValue")
 public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOptionsHolder {
     BasedSequence NULL = new EmptyBasedSequence();
     BasedSequence EMPTY = new EmptyBasedSequence();
@@ -60,7 +59,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
         return of(RepeatedSequence.repeatOf(chars, startIndex, endIndex));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     @NotNull
     SequenceBuilder getBuilder();

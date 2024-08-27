@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("WeakerAccess")
 public class TableFormatOptions implements MutableDataSetter {
     // NOTE: the value of \u001f is hardcoded in Parsing patterns
     final public static char INTELLIJ_DUMMY_IDENTIFIER_CHAR = SequenceUtils.US;

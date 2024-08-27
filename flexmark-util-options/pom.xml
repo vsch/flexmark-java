@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-options</artifactId>
-    <name>flexmark-java options utilities</name>
     <description>flexmark-java options utility classes</description>
 
     <dependencies>

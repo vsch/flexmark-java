@@ -148,12 +148,10 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
         return generateId(text.toString());
     }
 
-    @SuppressWarnings("WeakerAccess")
     public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes, boolean nonAsciiToLowercase) {
         return generateId(headerText, toDashChars, null, noDupedDashes, nonAsciiToLowercase);
     }
 
-    @SuppressWarnings("WeakerAccess")
     public static String generateId(CharSequence headerText, String toDashChars, String nonDashChars, boolean noDupedDashes, boolean nonAsciiToLowercase) {
         int iMax = headerText.length();
         StringBuilder baseRefId = new StringBuilder(iMax);

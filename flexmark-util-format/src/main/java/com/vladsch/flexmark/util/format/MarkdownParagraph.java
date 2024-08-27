@@ -74,7 +74,6 @@ public class MarkdownParagraph {
     @NotNull
     public Range getContinuationStartSplice(int offset, boolean afterSpace, boolean afterDelete) {
         BasedSequence baseSequence = altSeq.getBaseSequence();
-        assert offset >= 0 && offset <= baseSequence.length();
         if (afterSpace && afterDelete) {
             BasedOffsetTracker preFormatTracker = BasedOffsetTracker.create(altSeq);
             int startOfLine = baseSequence.startOfLine(offset);
@@ -145,7 +144,6 @@ public class MarkdownParagraph {
             }
         }
 
-        assert baseSpliced.equals(altSpliced);
 
         LeftAlignedWrapping textWrapper = new LeftAlignedWrapping(baseSpliced);
         BasedSequence wrapped = textWrapper.wrapText();
@@ -189,8 +187,6 @@ public class MarkdownParagraph {
             int countedWhiteSpaceAfter = baseSequence.countLeading(SPACE_TAB_NBSP_EOL, offset);
 
             if (inTest) {
-                assert trackedOffset.getSpacesBefore() == countedSpacesBefore;
-                assert trackedOffset.getSpacesAfter() == countedSpacesAfter;
             }
 
             char baseCharAt = baseSequence.safeCharAt(offset);
@@ -245,23 +241,6 @@ public class MarkdownParagraph {
             }
 
             // NOTE: at this point space == &nbsp; since altUnwrapped can have &nbsp; instead of spaces
-            assert (SpaceMapper.areEquivalent(baseSequence.safeCharAt(anchorOffset), altUnwrapped.safeCharAt(anchorIndex + anchorDelta))
-                    // NOTE: alt sequence could have spaces removed which would result in space in base sequence and EOL in alt sequence, also unwrapped can have spaces replaced with NBSP
-                    || baseSequence.isCharAt(anchorOffset, WHITESPACE_NBSP_OR_NUL) && altUnwrapped.isCharAt(anchorIndex + anchorDelta, WHITESPACE_NBSP_OR_NUL))
-                    : String.format("baseSeq.charAt(%d): '%s':0x%04x != altUnwrapped.charAt(%d=%d+%d): '%s':0x%04x, baseSequence anchor: '%s', altUnwrapped anchor: '%s', altWrapped anchor: '%s', wrapped anchor: '%s'"
-                    , anchorOffset
-                    , String.valueOf(baseSequence.safeCharAt(anchorOffset))
-                    , (int) baseSequence.safeCharAt(anchorOffset)
-                    , anchorIndex + anchorDelta
-                    , anchorIndex
-                    , anchorDelta
-                    , String.valueOf(altUnwrapped.safeCharAt(anchorIndex + anchorDelta))
-                    , (int) altUnwrapped.safeCharAt(anchorIndex + anchorDelta)
-                    , baseSequence.safeSubSequence(anchorOffset - 10, anchorOffset).toVisibleWhitespaceString() + "|" + baseSequence.safeSubSequence(anchorOffset, anchorOffset + 10).toVisibleWhitespaceString()
-                    , altUnwrapped.safeSubSequence(anchorIndex + anchorDelta - 10, anchorIndex + anchorDelta).toVisibleWhitespaceString() + "|" + altUnwrapped.safeSubSequence(anchorIndex + anchorDelta, anchorIndex + anchorDelta + 10).toVisibleWhitespaceString()
-                    , altWrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + altWrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()
-                    , wrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString() + "|" + wrapped.safeSubSequence(wrappedIndex, wrappedIndex + 10).toVisibleWhitespaceString()
-            );
 
             int wrappedAdjusted = 0;
             int unwrappedAdjusted = 0;
@@ -289,7 +268,6 @@ public class MarkdownParagraph {
                 } else {
                     // use next char, it should not be whitespace
                     anchorDelta++;
-                    assert !WHITESPACE_NBSP.test(altUnwrapped.safeCharAt(anchorIndex + anchorDelta)) :
                             String.format("Character(%s) after LS should not be whitespace.",
                                     SequenceUtils.toVisibleWhitespaceString(Character.toString(altUnwrapped.safeCharAt(anchorIndex + anchorDelta)))
                             );
@@ -308,17 +286,6 @@ public class MarkdownParagraph {
             char wrappedCharAt = wrapped.safeCharAt(wrappedIndex + wrappedAdjusted);
 
             // NOTE: at this point space == &nbsp; since altUnwrapped can have &nbsp; instead of spaces
-            assert SpaceMapper.areEquivalent(altUnwrappedCharAt, wrappedCharAt)
-                    || WHITESPACE_NBSP.test(altUnwrappedCharAt) && WHITESPACE_NBSP.test(wrappedCharAt)
-                    : String.format("altUnwrapped.charAt: '%s'(%d) != wrapped.charAt: '%s'(%d) for width=%d, unwrapped: '%s', wrapped: '%s'"
-                    , SequenceUtils.toVisibleWhitespaceString(Character.toString(altUnwrappedCharAt))
-                    , (int) altUnwrappedCharAt
-                    , SequenceUtils.toVisibleWhitespaceString(Character.toString(wrappedCharAt))
-                    , (int) wrappedCharAt
-                    , width
-                    , SequenceUtils.toVisibleWhitespaceString(altUnwrapped)
-                    , SequenceUtils.toVisibleWhitespaceString(altWrapped)
-            );
 
             // Adjust index position and restore spaces if needed
             if (isLineSep) {
@@ -406,7 +373,6 @@ public class MarkdownParagraph {
 
     public void addTrackedOffset(@NotNull TrackedOffset trackedOffset) {
         if (trackedOffsets == EMPTY_OFFSET_LIST) trackedOffsets = new ArrayList<>();
-        assert trackedOffset.getOffset() >= 0 && trackedOffset.getOffset() <= altSeq.getBaseSequence().length();
         trackedOffsets.removeIf(it -> it.getOffset() == trackedOffset.getOffset());
         trackedOffsets.add(trackedOffset);
         trackedOffsetsSorted = false;

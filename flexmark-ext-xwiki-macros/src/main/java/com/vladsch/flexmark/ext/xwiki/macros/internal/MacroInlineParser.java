@@ -27,7 +27,6 @@ public class MacroInlineParser implements InlineParserExtension {
 
     @Override
     public void finalizeDocument(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override

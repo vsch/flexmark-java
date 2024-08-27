@@ -27,7 +27,7 @@ public class EnumeratedReferenceParagraphPreProcessor implements ParagraphPrePro
     static String ENUM_REF_ID = "(?:[^0-9].*)?";
     static Pattern ENUM_REF_DEF_PARAGRAPH_PATTERN = Pattern.compile("\\s{0,3}(\\[[\\@]\\s*(" + ENUM_REF_ID + ")\\s*\\]:)\\s+(.*\n)");
 
-    @SuppressWarnings("FieldCanBeLocal") final private EnumeratedReferenceOptions options;
+    final private EnumeratedReferenceOptions options;
     final private EnumeratedReferenceRepository enumeratedReferences;
 
     EnumeratedReferenceParagraphPreProcessor(DataHolder options) {

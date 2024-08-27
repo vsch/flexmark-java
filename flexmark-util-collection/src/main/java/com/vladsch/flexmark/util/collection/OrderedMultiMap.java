@@ -137,10 +137,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         return (int) ((long) keySet.getModificationCount() + (long) valueSet.getModificationCount());
     }
 
-    @SuppressWarnings("unchecked")
     void addingKey(int index, @Nullable K k, @Nullable Object v) {
-        assert !isInValueUpdate;
-
         isInValueUpdate = true;
         if (host != null && !host.skipHostUpdate()) {
             host.adding(index, new Pair<>(k, (V) v), null);
@@ -151,8 +148,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     void addingNullKey(int index) {
-        assert !isInValueUpdate;
-
         isInValueUpdate = true;
         if (host != null && !host.skipHostUpdate()) {
             host.addingNulls(index);
@@ -162,8 +157,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     Object removingKey(int index, @Nullable K k) {
-        assert !isInValueUpdate;
-
         isInValueUpdate = true;
         if (host != null && !host.skipHostUpdate()) {
             host.removing(index, new Pair<>(k, null));
@@ -173,10 +166,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         return r;
     }
 
-    @SuppressWarnings("unchecked")
     void addingValue(int index, @Nullable V v, @Nullable Object k) {
-        assert !isInKeyUpdate;
-
         isInKeyUpdate = true;
         if (host != null && !host.skipHostUpdate()) {
             host.adding(index, new Pair<>((K) k, v), null);
@@ -187,8 +177,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     void addingNullValue(int index) {
-        assert !isInKeyUpdate;
-
         isInKeyUpdate = true;
         if (host != null && !host.skipHostUpdate()) {
             host.addingNulls(index);
@@ -198,8 +186,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     Object removingValue(int index, @Nullable V v) {
-        assert !isInKeyUpdate;
-
         isInKeyUpdate = true;
         if (host != null && !host.skipHostUpdate()) {
             host.removing(index, new Pair<>(null, v));
@@ -362,7 +348,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         return b ? e : null;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     boolean removeEntryIndex(int index) {
         return removeEntryIndex(index, keySet.getValueOrNull(index), valueSet.getValueOrNull(index));
     }
@@ -591,7 +576,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), new CollectionHost<Map.Entry<K, V>>() {
             @Override
             public void adding(int index, @Nullable Map.Entry<K, V> entry, @Nullable Object v) {
-                assert v == null;
                 OrderedMultiMap.this.putKeyValue(entry.getKey(), entry.getValue());
             }
 

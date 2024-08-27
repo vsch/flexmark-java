@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-integration-test</artifactId>
-    <name>flexmark-java integration tests</name>
     <description>Tests integration of all extensions</description>
 
     <dependencies>

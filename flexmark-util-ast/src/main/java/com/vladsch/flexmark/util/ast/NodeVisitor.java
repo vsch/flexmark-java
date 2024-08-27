@@ -62,7 +62,6 @@ import java.util.Collection;
  */
 
 // @formatter:on
-@SuppressWarnings("rawtypes")
 public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Node>, VisitHandler<Node>> implements NodeVisitHandler {
     protected static final VisitHandler[] EMPTY_HANDLERS = new VisitHandler[0];
 
@@ -91,7 +90,6 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
         return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public @NotNull NodeVisitor addHandlers(@NotNull Collection<VisitHandler> handlers) {
         return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
     }
@@ -105,7 +103,6 @@ public class NodeVisitor extends AstActionHandler<NodeVisitor, Node, Visitor<Nod
         return super.addActionHandlers(handlers);
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     public @NotNull NodeVisitor addHandler(@NotNull VisitHandler handler) {
         //noinspection unchecked
         return super.addActionHandler(handler);

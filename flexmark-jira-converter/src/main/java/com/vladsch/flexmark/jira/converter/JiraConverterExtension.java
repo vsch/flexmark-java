@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
  * </p>
  */
 public class JiraConverterExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-
     private JiraConverterExtension() {
     }
 
@@ -25,7 +24,6 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-
     }
 
     @Override
@@ -40,7 +38,6 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

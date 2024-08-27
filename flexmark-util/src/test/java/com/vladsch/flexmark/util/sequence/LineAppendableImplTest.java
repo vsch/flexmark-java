@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-@SuppressWarnings("PointlessArithmeticExpression")
 public class LineAppendableImplTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

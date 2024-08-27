@@ -58,18 +58,15 @@ public class Attributes {
         return attributes == null || attributes.isEmpty();
     }
 
-    @SuppressWarnings("unchecked")
     public Set<String> keySet() {
         // CAUTION: attributes can be modified through this mutable set
         return attributes != null ? attributes.keySet() : Collections.EMPTY_SET;
     }
 
-    @SuppressWarnings("unchecked")
     public Collection<Attribute> values() {
         return attributes != null ? attributes.values() : Collections.EMPTY_LIST;
     }
 
-    @SuppressWarnings("unchecked")
     public Set<Map.Entry<String, Attribute>> entrySet() {
         // CAUTION: attributes can be modified through this mutable set
         return attributes != null ? attributes.entrySet() : Collections.EMPTY_SET;

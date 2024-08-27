@@ -7,7 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class MutableAttributeTest {
-
     @Test
     public void testBasic() throws Exception {
         MutableAttribute attribute = MutableAttributeImpl.of("name", "value1", ' ');

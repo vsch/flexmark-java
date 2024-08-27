@@ -315,8 +315,6 @@ public class LineAppendableImpl implements LineAppendable {
     }
 
     private LineInfo getLineRange(int start, int end, CharSequence prefix) {
-        assert start <= end;
-
         CharSequence sequence = appendable.toSequence();
         CharSequence eol = trimmedEOL(sequence);
 
@@ -795,7 +793,6 @@ public class LineAppendableImpl implements LineAppendable {
         try {
             appendToNoLine(out, true, Integer.MAX_VALUE, Integer.MAX_VALUE, 0, Integer.MAX_VALUE);
         } catch (IOException ignored) {
-
         }
         return out.toString();
     }
@@ -807,7 +804,6 @@ public class LineAppendableImpl implements LineAppendable {
         try {
             appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, 0, MAX_VALUE);
         } catch (IOException ignored) {
-
         }
         return out.toString();
     }
@@ -819,7 +815,6 @@ public class LineAppendableImpl implements LineAppendable {
         try {
             appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, 0, MAX_VALUE);
         } catch (IOException ignored) {
-
         }
         return out.toSequence();
     }
@@ -1030,9 +1025,6 @@ public class LineAppendableImpl implements LineAppendable {
         if (text.length() == 0) {
             prefix = SequenceUtils.trimEnd(prefix);
         }
-
-        assert !containsAny(text, CharPredicate.ANY_EOL)
-                : String.format("Line text should not contain any EOL, text: %s", toVisibleWhitespaceString(text));
 
         CharSequence line = appendable.getBuilder().append(prefix).append(text).append(eol).toSequence();
 

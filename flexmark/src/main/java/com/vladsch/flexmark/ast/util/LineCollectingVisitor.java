@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess")
 public class LineCollectingVisitor {
     final private NodeVisitor myVisitor;
     private List<Range> myLines;

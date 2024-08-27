@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("WeakerAccess")
 public class TaskListNodeFormatter implements NodeFormatter {
     final private TaskListFormatOptions taskListFormatOptions;
     final private ListOptions listOptions;

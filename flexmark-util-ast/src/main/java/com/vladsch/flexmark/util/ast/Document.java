@@ -126,7 +126,6 @@ public class Document extends Block implements MutableDataHolder {
                 if (offset >= lengthWithEOL) lineNumber++; // do not treat offset between \r and \n as complete line
                 int oldNextLineEnd = nextLineEnd;
                 nextLineEnd = preText.endOfLineAnyEOL(lengthWithEOL);
-                assert nextLineEnd > oldNextLineEnd;
             }
 
             return lineNumber;

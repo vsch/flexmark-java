@@ -9,7 +9,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class SubscriptDelimiterProcessor implements DelimiterProcessor {
-
     @Override
     public char getOpeningCharacter() {
         return '~';

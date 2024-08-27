@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.format;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("WeakerAccess")
 public class TableSection {
     final public TableSectionType sectionType;
     final public ArrayList<TableRow> rows = new ArrayList<>();

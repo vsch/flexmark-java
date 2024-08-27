@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
-@SuppressWarnings("WeakerAccess")
 public class ListOptions implements MutableDataSetter {
     protected @NotNull ParserEmulationProfile myParserEmulationProfile;
     protected @NotNull ItemInterrupt itemInterrupt;
@@ -144,7 +143,6 @@ public class ListOptions implements MutableDataSetter {
         return !autoLoose && listItem.isParagraphInTightListItem(node) || autoLoose && listItem.isInTightList();
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean canInterrupt(@NotNull ListBlock a, boolean isEmptyItem, boolean isItemParagraph) {
         boolean isNumberedItem = a instanceof OrderedList;
         boolean isOneItem = isNumberedItem && (!isOrderedListManualStart() || ((OrderedList) a).getStartNumber() == 1);
@@ -152,7 +150,6 @@ public class ListOptions implements MutableDataSetter {
         return getItemInterrupt().canInterrupt(isNumberedItem, isOneItem, isEmptyItem, isItemParagraph);
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean canStartSubList(@NotNull ListBlock a, boolean isEmptyItem) {
         boolean isNumberedItem = a instanceof OrderedList;
         boolean isOneItem = isNumberedItem && (!isOrderedListManualStart() || ((OrderedList) a).getStartNumber() == 1);
@@ -540,7 +537,6 @@ public class ListOptions implements MutableDataSetter {
         }
     }
 
-    @SuppressWarnings("SameParameterValue")
     public static class MutableItemInterrupt extends ItemInterrupt {
         public MutableItemInterrupt() { }
 

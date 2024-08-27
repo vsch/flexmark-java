@@ -8,7 +8,6 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-@SuppressWarnings("WeakerAccess")
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     final @NotNull OrderedSet<K> keySet;
     final private @NotNull ArrayList<V> valueList;
@@ -414,7 +413,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     private class EntryCollectionHost<KK extends K, VV extends V> implements CollectionHost<Map.Entry<KK, VV>> {
         @Override
         public void adding(int index, @Nullable Entry<KK, VV> entry, @Nullable Object v) {
-            assert v == null;
             OrderedMap.this.keySet.add(entry.getKey(), entry.getValue());
         }
 

@@ -12,7 +12,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Utils {
-
     public static <T> T ifNull(T receiver, T altValue) {
         return (receiver == null) ? altValue : receiver;
     }

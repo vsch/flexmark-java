@@ -70,7 +70,6 @@ public interface BasedUtils {
         }
 
         if (!hadSequence) {
-            assert chars.length() == 0;
             segments.appendAnchor(chars.getStartOffset());
         }
     }

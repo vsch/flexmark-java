@@ -124,7 +124,6 @@ final public class SegmentedSequenceFull extends SegmentedSequence {
 
     private SegmentedSequenceFull subSequence(final BasedSequence baseSeq, final int[] baseOffsets, final int baseStartOffset, final boolean nonBaseChars, final int length) {
         int iMax = baseOffsets.length - 1;
-        assert baseStartOffset + length <= iMax : "Sub-sequence offsets list length < baseStartOffset + sub-sequence length";
 
         int startOffset = 0;
         int endOffset = 0;
@@ -141,7 +140,6 @@ final public class SegmentedSequenceFull extends SegmentedSequence {
                 endOffset = startOffset;
             } else {
                 endOffset = baseOffsets[baseStartOffset + length - 1] + 1;
-                assert startOffset <= endOffset;
             }
         } else {
             // start is the first real start in this sequence or after it in the parent
@@ -157,7 +155,6 @@ final public class SegmentedSequenceFull extends SegmentedSequence {
                         if (baseOffsets[iE] < 0) continue;
 
                         endOffset = baseOffsets[iE] + 1;
-                        assert startOffset <= endOffset;
 
                         finished = true;
                         break;

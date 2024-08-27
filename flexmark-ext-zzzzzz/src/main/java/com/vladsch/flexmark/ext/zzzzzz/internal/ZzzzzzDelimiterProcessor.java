@@ -9,7 +9,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ZzzzzzDelimiterProcessor implements DelimiterProcessor {
-
     @Override
     public char getOpeningCharacter() {
         return ':';

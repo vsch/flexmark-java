@@ -22,9 +22,7 @@ import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
  * An abstract base for RichSequence which implements most of the methods allowing subclasses to
  * implement RichSequence with minimal support methods
  */
-@SuppressWarnings("unchecked")
 public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements IRichSequence<T> {
-
     // cached value
     private int hash;
 
@@ -51,7 +49,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
      * @param o any char sequence
      * @return true if character contents are equal
      */
-    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     @Contract(pure = true, value = "null -> false")
     final public boolean equals(Object o) {

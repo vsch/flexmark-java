@@ -50,7 +50,6 @@ public class JekyllTagBlockParser extends AbstractBlockParser {
 
     @Override
     public void parseInlines(InlineParser inlineParser) {
-
     }
 
     public static class Factory implements CustomBlockParserFactory {

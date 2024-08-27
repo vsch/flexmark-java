@@ -6,7 +6,6 @@ import com.vladsch.flexmark.parser.internal.BlockContinueImpl;
  * Result object for continuing parsing of a block, see static methods for constructors.
  */
 public class BlockContinue {
-
     protected BlockContinue() {
     }
 

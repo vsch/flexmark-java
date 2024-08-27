@@ -40,7 +40,6 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 
 public class EnumeratedReferenceFormatOptions {
-
     final public ElementPlacement enumeratedReferencePlacement;
     final public ElementPlacementSort enumeratedReferenceSort;
 

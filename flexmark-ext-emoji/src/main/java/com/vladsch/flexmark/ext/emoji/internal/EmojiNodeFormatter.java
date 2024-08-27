@@ -10,9 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class EmojiNodeFormatter implements NodeFormatter {
-
     public EmojiNodeFormatter(DataHolder options) {
-
     }
 
     @Nullable

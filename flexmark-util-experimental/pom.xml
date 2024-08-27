@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-experimental</artifactId>
-    <name>flexmark-java experimental utility classes</name>
     <description>Contains experimental classes that may or may not work in all cases. Use at your own risk.</description>
 
     <dependencies>

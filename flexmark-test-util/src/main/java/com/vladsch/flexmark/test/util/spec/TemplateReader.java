@@ -108,7 +108,6 @@ public class TemplateReader {
 
     // can use these to generate spec from source
     protected void addSpecLine(String line) {
-
     }
 
     protected void addTemplateEntry(TemplateEntry example) {

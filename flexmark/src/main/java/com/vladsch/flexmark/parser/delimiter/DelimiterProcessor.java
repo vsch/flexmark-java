@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.ast.Node;
  * Note that implementations of this need to be thread-safe, the same instance may be used by multiple parsers.
  */
 public interface DelimiterProcessor {
-
     /**
      * @return the character that marks the beginning of a delimited node, must not clash with any built-in special
      *         characters

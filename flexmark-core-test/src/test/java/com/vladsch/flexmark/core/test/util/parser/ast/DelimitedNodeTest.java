@@ -15,7 +15,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 final public class DelimitedNodeTest {
-
     @Test
     public void emphasisDelimiters() {
         String input = "* *emphasis* \n"

@@ -9,11 +9,9 @@ public class IsolatingBlockFormatProvider<T> extends BlockFormatProviderBase<T> 
 
     @Override
     protected void inheritBdr(PPr pPr, PPr parentPPr) {
-
     }
 
     @Override
     protected void inheritIndent(PPr pPrBase, PPr parentPrBase) {
-
     }
 }

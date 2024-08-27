@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.media.tags.internal.AbstractMediaLink;
 
 public class VideoLink extends AbstractMediaLink {
-
     final public static String PREFIX = "!V";
     final private static String TYPE = "Video";
 

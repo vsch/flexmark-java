@@ -40,7 +40,6 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
 
     @NotNull
     protected Node getIncludedDocument() {
-        assert myIncludedDocument != null;
         return myIncludedDocument;
     }
 
@@ -51,8 +50,6 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
 
     @Override
     public void finalizeDocument() {
-        assert myDocument != null;
-
         if (myIncludedDocument != null) {
             adjustParserForInclusion();
         }
@@ -65,7 +62,6 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     }
 
     public @NotNull Node getDocument() {
-        assert myDocument != null;
         return myDocument;
     }
 
@@ -77,7 +73,6 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     @NotNull
     @Override
     protected String renderHtml() {
-        assert myDocument != null;
         return getRenderer().render(myDocument);
     }
 
@@ -89,7 +84,6 @@ public class FlexmarkSpecExampleRenderer extends SpecExampleRendererBase {
     @NotNull
     @Override
     protected String renderAst() {
-        assert myDocument != null;
         return TestUtils.ast(myDocument);
     }
 

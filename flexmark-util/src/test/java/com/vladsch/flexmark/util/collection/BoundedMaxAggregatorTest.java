@@ -7,7 +7,6 @@ import java.util.function.BiFunction;
 import static org.junit.Assert.assertEquals;
 
 public class BoundedMaxAggregatorTest {
-
     private Integer reduce(BiFunction<Integer, Integer, Integer> aggregator, Integer... items) {
         Integer aggregate = null;
         for (Integer item : items) {

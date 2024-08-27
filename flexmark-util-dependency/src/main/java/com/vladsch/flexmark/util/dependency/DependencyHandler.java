@@ -9,7 +9,6 @@ import java.util.*;
 /**
  * @deprecated use DependencyResolver instead
  */
-@SuppressWarnings("rawtypes")
 @Deprecated
 public abstract class DependencyHandler<D extends Dependent, S, R extends ResolvedDependencies<S>> {
     protected abstract @NotNull S createStage(List<D> dependents);
@@ -94,7 +93,6 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
 
                     newReady.clear(i);
                     DependentItem<D> item = dependentItemMap.getValue(i);
-                    assert item != null;
 
                     stageDependents.add(item.dependent);
                     dependents.clear(i);
@@ -107,7 +105,6 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
 
                             item.dependents.clear(j);
                             DependentItem<D> dependentItem = dependentItemMap.getValue(j);
-                            assert dependentItem != null;
 
                             if (!dependentItem.removeDependency(item)) {
                                 if (item.isGlobalScope) {

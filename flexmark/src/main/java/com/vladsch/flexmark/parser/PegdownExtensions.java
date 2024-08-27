@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser;
 
 public interface PegdownExtensions {
-
     /**
      * The default, standard markup mode without any extensions.
      */

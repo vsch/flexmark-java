@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public abstract class ListBlock extends Block implements BlankLineContainer {
-
     private boolean tight;
 
     public ListBlock() {

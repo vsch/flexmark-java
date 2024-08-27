@@ -17,17 +17,14 @@ public class MacrosInlineParserExtension implements InlineParserExtension {
     static Pattern MACRO_REFERENCE_INTELLIJ = Pattern.compile("<<<([\u001f\\w_-]+)>>>");
 
     public MacrosInlineParserExtension(LightInlineParser inlineParser) {
-
     }
 
     @Override
     public void finalizeDocument(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override
     public void finalizeBlock(@NotNull InlineParser inlineParser) {
-
     }
 
     @Override

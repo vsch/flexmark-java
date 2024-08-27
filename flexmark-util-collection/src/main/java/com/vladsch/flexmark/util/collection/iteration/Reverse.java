@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess")
 public class Reverse<T> implements ReversibleIterable<T> {
     final private @NotNull List<T> list;
     final private boolean isReversed;
@@ -40,7 +39,6 @@ public class Reverse<T> implements ReversibleIterable<T> {
 
         @Override
         public void remove() {
-
         }
 
         @Override

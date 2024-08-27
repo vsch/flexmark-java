@@ -11,6 +11,5 @@ public abstract class DocumentPostProcessor implements PostProcessor {
      * @param node  the node to post-process
      */
     final public void process(@NotNull NodeTracker state, @NotNull Node node) {
-
     }
 }

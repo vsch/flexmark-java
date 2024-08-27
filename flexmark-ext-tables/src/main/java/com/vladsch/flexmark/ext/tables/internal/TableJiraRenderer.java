@@ -16,7 +16,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TableJiraRenderer implements NodeRenderer {
-
     public TableJiraRenderer(DataHolder options) {
         //this.options = new TableParserOptions(options);
     }
@@ -71,7 +70,6 @@ public class TableJiraRenderer implements NodeRenderer {
     }
 
     private void render(TableSeparator tableSeparator, NodeRendererContext context, HtmlWriter html) {
-
     }
 
     private void render(TableBody node, NodeRendererContext context, HtmlWriter html) {

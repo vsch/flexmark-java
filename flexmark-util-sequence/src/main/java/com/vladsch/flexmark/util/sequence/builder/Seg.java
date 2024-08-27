@@ -97,7 +97,6 @@ public class Seg {
 
     @NotNull
     public Range getRange() {
-        assert isBase();
         return Range.of(start, end);
     }
 
@@ -160,12 +159,10 @@ public class Seg {
     }
 
     public static int getTextStart(int startOffset, boolean isFirst256) {
-        assert startOffset < MAX_TEXT_OFFSET;
         return -(isFirst256 ? startOffset | F_TEXT_OPTION : startOffset) - 1;
     }
 
     public static int getTextEnd(int startOffset, boolean isRepeatedText) {
-        assert startOffset < MAX_TEXT_OFFSET;
         return -(isRepeatedText ? startOffset | F_TEXT_OPTION : startOffset) - 1;
     }
 

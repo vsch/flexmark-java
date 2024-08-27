@@ -4,7 +4,6 @@ import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.BlockStart;
 
 public class BlockStartImpl extends BlockStart {
-
     final private BlockParser[] blockParsers;
     private int newIndex = -1;
     private int newColumn = -1;

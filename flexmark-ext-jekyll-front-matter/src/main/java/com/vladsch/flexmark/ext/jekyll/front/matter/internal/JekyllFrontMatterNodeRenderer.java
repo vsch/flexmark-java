@@ -14,7 +14,6 @@ import java.util.Set;
 
 public class JekyllFrontMatterNodeRenderer implements NodeRenderer {
     public JekyllFrontMatterNodeRenderer(DataHolder options) {
-
     }
 
     @Override
@@ -26,7 +25,6 @@ public class JekyllFrontMatterNodeRenderer implements NodeRenderer {
     }
 
     private void render(JekyllFrontMatterBlock node, NodeRendererContext context, HtmlWriter html) {
-
     }
 
     public static class Factory implements NodeRendererFactory {

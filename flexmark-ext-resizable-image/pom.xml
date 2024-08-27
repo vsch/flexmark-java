@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-resizable-image</artifactId>
-    <name>flexmark-java extension for image's size</name>
     <description>flexmark-java extension to set the size of the images</description>
 
     <dependencies>

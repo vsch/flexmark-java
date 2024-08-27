@@ -130,7 +130,6 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     @Override
     public Set<Entry<String, T>> entrySet() {return nodeMap.entrySet();}
 
-    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object o) { return nodeMap.equals(o); }
 

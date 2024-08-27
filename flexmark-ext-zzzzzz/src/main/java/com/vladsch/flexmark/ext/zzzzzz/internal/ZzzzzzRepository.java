@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@SuppressWarnings("WeakerAccess")
 public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
     private ArrayList<ZzzzzzBlock> referencedZzzzzzBlocks = new ArrayList<>();
 

@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class YouTubeLinkNodeRenderer implements NodeRenderer {
-
     public YouTubeLinkNodeRenderer(DataHolder options) {
     }
 

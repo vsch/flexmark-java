@@ -71,9 +71,6 @@ final public class LineInfo {
     final public int flags;
 
     private LineInfo(@NotNull CharSequence lineSeq, int index, int prefixLength, int textLength, int length, int sumPrefixLength, int sumTextLength, int sumLength, boolean isBlankPrefix, boolean isBlankText, @NotNull Preformatted preformatted) {
-        assert lineSeq == BasedSequence.NULL && index == -1 || prefixLength + textLength < length : "Line must be terminated by an EOL";
-        assert lineSeq.length() == length;
-
         this.lineSeq = lineSeq;
         this.index = index;
         this.prefixLength = prefixLength;

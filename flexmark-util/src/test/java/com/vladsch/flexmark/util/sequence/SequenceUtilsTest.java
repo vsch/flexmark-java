@@ -6,7 +6,6 @@ import static com.vladsch.flexmark.util.misc.CharPredicate.SPACE;
 import static org.junit.Assert.assertEquals;
 
 public class SequenceUtilsTest {
-
     @Test
     public void test_lastIndexOfAnyNot() {
         assertEquals(15, SequenceUtils.lastIndexOfAnyNot("0123456789  2345", SPACE, 0, 17));

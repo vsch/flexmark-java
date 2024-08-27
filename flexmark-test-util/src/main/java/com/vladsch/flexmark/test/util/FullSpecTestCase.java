@@ -20,11 +20,9 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
     abstract protected @NotNull ResourceLocation getSpecResourceLocation();
 
     protected void fullTestSpecStarting() {
-
     }
 
     protected void fullTestSpecComplete() {
-
     }
 
     @Test

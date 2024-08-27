@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TableNodeRenderer implements NodeRenderer {
-
     final private TableParserOptions options;
 
     public TableNodeRenderer(DataHolder options) {
@@ -47,7 +46,6 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(TableSeparator tableSeparator, NodeRendererContext context, HtmlWriter html) {
-
     }
 
     private void render(TableBody node, NodeRendererContext context, HtmlWriter html) {

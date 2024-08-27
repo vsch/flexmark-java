@@ -11,7 +11,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 final public class UsageExampleTest {
-
     @Test
     public void parseAndRender() {
         Parser parser = Parser.builder().build();

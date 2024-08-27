@@ -54,7 +54,6 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
     @NotNull
     @Override
     public BasedSequence adjustInlineText(@NotNull Document document, @NotNull Node node) {
-        assert node instanceof Footnote;
         return ((Footnote) node).getText();
     }
 
@@ -65,7 +64,6 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
 
     @Override
     public void updateNodeElements(@NotNull Document document, @NotNull Node node) {
-
     }
 
     public static class Factory implements LinkRefProcessorFactory {

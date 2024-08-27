@@ -25,7 +25,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class RepeatedSequenceTest {
     @Test
     public void test_basic() throws Exception {

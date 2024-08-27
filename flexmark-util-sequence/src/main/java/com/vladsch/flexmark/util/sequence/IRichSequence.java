@@ -19,7 +19,6 @@ import java.util.function.Predicate;
  * <p>
  * safe access methods return '\0' for no char response.
  */
-@SuppressWarnings("SameParameterValue")
 public interface IRichSequence<T extends IRichSequence<T>> extends CharSequence, Comparable<CharSequence>, SequenceUtils {
     /**
      * Comparison to another CharSequence should result in a match if their contents are equal

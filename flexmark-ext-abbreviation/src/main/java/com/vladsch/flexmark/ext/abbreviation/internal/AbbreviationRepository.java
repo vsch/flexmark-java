@@ -13,9 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("WeakerAccess")
 public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
-
     public AbbreviationRepository(DataHolder options) {
         super(AbbreviationExtension.ABBREVIATIONS_KEEP.get(options));
     }

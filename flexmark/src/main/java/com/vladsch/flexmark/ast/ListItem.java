@@ -91,8 +91,6 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
     }
 
     public void setMarkerSuffix(BasedSequence markerSuffix) {
-        assert markerSuffix.isNull() || openingMarker.getBase() == markerSuffix.getBase();
-
         this.markerSuffix = markerSuffix;
     }
 
@@ -143,7 +141,6 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
 
     @Override
     public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
-        assert node.getParent() == this;
         return listOptions.isInTightListItem(node);
     }
 
@@ -163,7 +160,6 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
         this.containsBlankLine = containsBlankLine;
     }
 
-    @SuppressWarnings("SameParameterValue")
     public void setHadBlankAfterItemParagraph(boolean hadBlankAfterItemParagraph) {
         this.hadBlankAfterItemParagraph = hadBlankAfterItemParagraph;
     }

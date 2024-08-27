@@ -11,7 +11,6 @@ import java.util.function.BiConsumer;
 import static org.junit.Assert.assertEquals;
 
 public class SegmentTest {
-
     static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
         int iMaxStart = start + span;
         int iMinEnd = end - span;

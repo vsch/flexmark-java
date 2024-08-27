@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-gfm-tasklist</artifactId>
-    <name>flexmark-java extension for generating GitHub style task list items</name>
     <description>flexmark-java extension to convert bullet list items that start with [ ] to a TaskListItem node</description>
 
     <dependencies>

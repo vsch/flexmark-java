@@ -15,7 +15,6 @@ import java.util.Set;
 
 public class FileUriContentResolver implements UriContentResolver {
     public FileUriContentResolver(LinkResolverBasicContext context) {
-
     }
 
     @Override

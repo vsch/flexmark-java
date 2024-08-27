@@ -14,7 +14,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class StrikethroughJiraRenderer implements NodeRenderer {
-
     public StrikethroughJiraRenderer(DataHolder options) {
     }
 

@@ -13,7 +13,6 @@ public class IntegerBitSetTest {
 
     @Test
     public void testBasic() throws Exception {
-
         int iMax = 128;
         int jMax = 128;
         for (int i = 0; i < iMax; i++) {

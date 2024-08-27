@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-ext-attributes</artifactId>
-    <name>flexmark-java extension for attributes</name>
     <description>flexmark-java extension for attributes</description>
 
     <dependencies>

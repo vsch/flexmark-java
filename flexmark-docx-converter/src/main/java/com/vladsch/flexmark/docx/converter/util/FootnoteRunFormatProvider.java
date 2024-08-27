@@ -9,7 +9,6 @@ public class FootnoteRunFormatProvider<T> extends RunFormatProviderBase<T> {
 
     @Override
     public void getRPr(RPr rPr) {
-
     }
 
     @Override
@@ -24,6 +23,5 @@ public class FootnoteRunFormatProvider<T> extends RunFormatProviderBase<T> {
 
     @Override
     protected void inheritParentStyle(RPr rPr, RPr parentRPr) {
-
     }
 }

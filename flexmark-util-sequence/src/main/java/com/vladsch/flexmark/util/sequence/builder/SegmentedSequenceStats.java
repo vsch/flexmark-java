@@ -17,7 +17,6 @@ public class SegmentedSequenceStats {
         final MinMaxAvgLong overhead = new MinMaxAvgLong();
 
         public StatsEntry(int segments) {
-            assert segments >= 1 : "segments: " + segments + " < 1";
             this.segments = segments;
         }
 
@@ -59,7 +58,6 @@ public class SegmentedSequenceStats {
     final private HashMap<StatsEntry, StatsEntry> stats = new HashMap<>();
 
     private SegmentedSequenceStats() {
-
     }
 
     public void addStats(int segments, int length, int overhead) {
@@ -174,10 +172,8 @@ public class SegmentedSequenceStats {
                         currentBucketSegments = AGGR_STEPS.get(currentBucket);
                         if (entry.segments >= currentBucketSegments) break;
                     }
-                    assert currentBucket >= 0;
                 }
 
-                assert (entry.segments >= currentBucketSegments);
 
                 StatsEntry aggrEntry = aggregatedStats.get(currentBucket);
 

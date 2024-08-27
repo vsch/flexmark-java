@@ -33,7 +33,6 @@ import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
  */
-@SuppressWarnings({ "WeakerAccess", "OverlyCoupledClass" })
 public class CoreNodeRenderer implements NodeRenderer {
     final public static AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");
     final public static AttributablePart TIGHT_LIST_ITEM = new AttributablePart("TIGHT_LIST_ITEM");
@@ -67,7 +66,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         nextLineStartOffset = 0;
     }
 
-    @SuppressWarnings("OverlyCoupledMethod")
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
@@ -107,13 +105,11 @@ public class CoreNodeRenderer implements NodeRenderer {
         ));
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(Document node, NodeRendererContext context, HtmlWriter html) {
         // No rendering itself
         context.renderChildren(node);
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(Heading node, NodeRendererContext context, HtmlWriter html) {
         if (context.getHtmlOptions().renderHeaderId) {
             String id = context.getNodeId(node);
@@ -133,7 +129,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagLineIndent("blockquote", () -> context.renderChildren(node));
     }
@@ -166,7 +161,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.lineIf(htmlOptions.htmlBlockCloseTagEol);
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) {
         html.srcPos(node.getChars()).withAttr().tagVoidLine("hr");
     }
@@ -191,7 +185,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(CodeBlock node, NodeRendererContext context, HtmlWriter html) {
         if (node.getParent() instanceof IndentedCodeBlock) {
             html.text(node.getContentChars().trimTailBlankLines().normalizeEndWithEOL());
@@ -200,7 +193,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(BulletList node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagIndent("ul", () -> context.renderChildren(node));
     }
@@ -374,7 +366,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.raw(context.getHtmlOptions().hardBreak);
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(Emphasis node, NodeRendererContext context, HtmlWriter html) {
         HtmlRendererOptions htmlOptions = context.getHtmlOptions();
         if (htmlOptions.emphasisStyleHtmlOpen == null || htmlOptions.emphasisStyleHtmlClose == null) {
@@ -392,7 +383,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(StrongEmphasis node, NodeRendererContext context, HtmlWriter html) {
         HtmlRendererOptions htmlOptions = context.getHtmlOptions();
         if (htmlOptions.strongEmphasisStyleHtmlOpen == null || htmlOptions.strongEmphasisStyleHtmlClose == null) {
@@ -410,12 +400,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(Text node, NodeRendererContext context, HtmlWriter html) {
         html.text(Escaping.normalizeEOL(node.getChars().unescape()));
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(TextBase node, NodeRendererContext context, HtmlWriter html) {
         context.renderChildren(node);
     }
@@ -457,7 +445,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
         HtmlRendererOptions htmlOptions = context.getHtmlOptions();
@@ -480,17 +467,14 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.lineIf(htmlOptions.htmlBlockCloseTagEol);
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlCommentBlock node, NodeRendererContext context, HtmlWriter html) {
         renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks, false);
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlInnerBlock node, NodeRendererContext context, HtmlWriter html) {
         renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks, false);
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlInnerBlockComment node, NodeRendererContext context, HtmlWriter html) {
         renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks, false);
     }
@@ -526,7 +510,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {
         //if (context.getHtmlOptions().sourceWrapInlineHtml) {
         //    html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("span");
@@ -537,7 +520,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         //}
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlInlineComment node, NodeRendererContext context, HtmlWriter html) {
         renderInlineHtml(node, context, html, context.getHtmlOptions().suppressInlineHtmlComments, context.getHtmlOptions().escapeInlineHtmlComments);
     }
@@ -553,10 +535,8 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     void render(Reference node, NodeRendererContext context, HtmlWriter html) {
-
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(HtmlEntity node, NodeRendererContext context, HtmlWriter html) {
         if (context.getHtmlOptions().unescapeHtmlEntities) {
             html.text(node.getChars().unescape());
@@ -574,7 +554,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         return false;
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(AutoLink node, NodeRendererContext context, HtmlWriter html) {
         String text = node.getText().toString();
         if (context.isDoNotRenderLinks() || isSuppressedLinkPrefix(node.getUrl(), context)) {
@@ -613,7 +592,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    @SuppressWarnings("MethodMayBeStatic")
     void render(Image node, NodeRendererContext context, HtmlWriter html) {
         if (!(context.isDoNotRenderLinks() || isSuppressedLinkPrefix(node.getUrl(), context))) {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
@@ -762,7 +740,6 @@ public class CoreNodeRenderer implements NodeRenderer {
 
         if (resolvedLink == null) {
             // empty ref, we treat it as text
-            assert !node.isDefined();
             if (!node.hasChildren()) {
                 html.text(node.getChars().unescape());
             } else {

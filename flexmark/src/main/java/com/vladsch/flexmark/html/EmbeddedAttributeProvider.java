@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  * Provider which will provide attributes stored in the node's first {@link EmbeddedNodeAttributes} of the node's children
  */
 public class EmbeddedAttributeProvider implements AttributeProvider {
-
     final public static IndependentAttributeProviderFactory Factory = new IndependentAttributeProviderFactory() {
         @NotNull
         @Override

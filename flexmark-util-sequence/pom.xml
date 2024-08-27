@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-sequence</artifactId>
-    <name>flexmark-java sequence utilities</name>
     <description>flexmark-java sequence utility classes</description>
 
     <dependencies>

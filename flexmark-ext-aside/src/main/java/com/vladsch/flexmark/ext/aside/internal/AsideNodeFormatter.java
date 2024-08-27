@@ -10,9 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AsideNodeFormatter implements NodeFormatter {
-
     public AsideNodeFormatter(DataHolder options) {
-
     }
 
     @Nullable

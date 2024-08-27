@@ -13,7 +13,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
  * Implementations should subclass {@link AbstractBlockParser} instead of implementing this directly.
  */
 public interface BlockParser {
-
     /**
      * @return true if the block that is parsed is a container (contains other blocks), or false if it's a leaf.
      */

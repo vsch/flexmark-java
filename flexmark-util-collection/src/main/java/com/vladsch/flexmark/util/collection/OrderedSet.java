@@ -246,7 +246,6 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
         return true;
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isSparse() {
         return validIndices.nextClearBit(0) < valueList.size();
     }
@@ -256,8 +255,6 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     }
 
     public void addNulls(int index) {
-        assert index >= valueList.size();
-
         if (host != null && !host.skipHostUpdate()) {
             host.addingNulls(index);
         }

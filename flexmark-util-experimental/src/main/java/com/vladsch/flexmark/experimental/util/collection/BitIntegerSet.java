@@ -143,7 +143,6 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     @NotNull
     public int[] toArray(@Nullable int[] array, int destinationIndex) {
         int arrayLength = array == null ? 0 : array.length;
-        assert destinationIndex <= arrayLength;
 
         int[] useArray = array;
         int size = cardinality();
@@ -195,8 +194,6 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     }
 
     public boolean addAll(@NotNull int[] collection, int startIndex, int endIndex) {
-        assert startIndex <= endIndex;
-
         boolean changed = false;
 
         int iMax = Math.min(collection.length, endIndex);

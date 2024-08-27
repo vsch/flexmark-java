@@ -12,7 +12,6 @@ public enum ElementPlacementSort {
         return this == SORT_UNUSED_LAST || this == SORT_DELETE_UNUSED || this == DELETE_UNUSED;
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isDeleteUnused() {
         return this == SORT_DELETE_UNUSED || this == DELETE_UNUSED;
     }

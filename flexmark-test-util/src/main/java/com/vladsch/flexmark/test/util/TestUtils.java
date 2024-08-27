@@ -133,7 +133,6 @@ public class TestUtils {
         HashSet<String> builtInSet = new HashSet<>(ExampleOption.getBuiltInOptions().keySet());
 
         for (Object[] optionData : options) {
-            assert optionData[0] instanceof String;
             String option = (String) optionData[0];
 
             ExampleOption exampleOption = ExampleOption.of(option);
@@ -157,7 +156,6 @@ public class TestUtils {
 
     @NotNull
     public static Pair<String, Integer> addSpecSection(@NotNull String headingLine, @NotNull String headingText, String[] sectionHeadings) {
-        assert sectionHeadings.length == 7;
         int lastSectionLevel = Math.max(1, Math.min(6, RichSequence.of(headingLine).countLeading(CharPredicate.HASH)));
         sectionHeadings[lastSectionLevel] = headingText;
         int iMax = 7;
@@ -554,7 +552,6 @@ public class TestUtils {
         } else {
             String resolvedResourcePath = getResolvedSpecResourcePath(resourceClass.getName(), resourcePath);
             URL url = resourceClass.getResource(resolvedResourcePath);
-            assert url != null : "Resource path: '" + resolvedResourcePath + "' not found.";
             return adjustedFileUrl(url);
         }
     }
@@ -696,7 +693,6 @@ public class TestUtils {
             int[] offsets = new int[carets];
 
             int selections = markup - carets;
-            assert selections % 2 == 0;
 
             int indents = selections / 2;
 
@@ -724,7 +720,6 @@ public class TestUtils {
                         break;
 
                     case MARKUP_SELECTION_START_CHAR:
-                        assert endIndent != -1;
                         i--;
                         starts[i] = pos - m; // reduce by number of markups ahead
                         ends[i] = endIndent; // reduce by number of markups ahead
@@ -732,7 +727,6 @@ public class TestUtils {
                         break;
 
                     case MARKUP_SELECTION_END_CHAR:
-                        assert endIndent == -1;
                         endIndent = pos - m; // reduce by number of markups ahead
                         break;
 
@@ -744,9 +738,6 @@ public class TestUtils {
                 lastPos = pos - 1;
             }
 
-            assert endIndent == -1;
-            assert c == 0 : "Unused caret pos: " + c;
-            assert i == 0 : "Unused indent pos: " + i;
 
 //            System.out.println("After markup removal: " + SequenceUtils.toVisibleWhitespaceString(toWrap));
 

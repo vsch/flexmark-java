@@ -104,7 +104,6 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
     @Override
     public void addLine(ParserState state, BasedSequence line) {
-
     }
 
     @Override

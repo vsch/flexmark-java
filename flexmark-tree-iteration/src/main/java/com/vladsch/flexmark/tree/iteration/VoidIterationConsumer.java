@@ -7,12 +7,10 @@ public interface VoidIterationConsumer<N> extends IterationConsumer<N> {
 
     // before start of all iterations
     default void beforeStart(@NotNull VoidIteration iteration) {
-
     }
 
     // iteration is done, before returning
     default void afterEnd(@NotNull VoidIteration iteration) {
-
     }
 }
 

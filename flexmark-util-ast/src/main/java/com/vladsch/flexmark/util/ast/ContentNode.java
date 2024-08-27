@@ -11,7 +11,6 @@ public abstract class ContentNode extends Node implements Content {
     protected List<BasedSequence> lineSegments = BasedSequence.EMPTY_LIST;
 
     public ContentNode() {
-
     }
 
     public ContentNode(@NotNull BasedSequence chars) {

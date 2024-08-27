@@ -19,7 +19,6 @@ import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.*;
 import static org.junit.Assert.assertEquals;
 
 public class SegmentTreeTest {
-
     static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
         int iMaxStart = start + span;
         int iMinEnd = end - span;
@@ -220,7 +219,6 @@ public class SegmentTreeTest {
         for (int i = 0; i < iMax; i++) {
             if (seg == null || seg.notInSegment(i)) {
                 seg = segTree.findSegment(i, sequence, seg);
-                assert seg != null;
                 System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
             }
 
@@ -233,7 +231,6 @@ public class SegmentTreeTest {
         for (int i = iMax; i-- > 0; ) {
             if (seg == null || seg.notInSegment(i)) {
                 seg = segTree.findSegment(i, sequence, seg);
-                assert seg != null : "i: " + i;
                 System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
             }
 

@@ -187,7 +187,6 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
 
     @Override
     public void addLine(ParserState state, BasedSequence line) {
-
     }
 
     @Override
@@ -197,7 +196,6 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
 
     @Override
     public void parseInlines(InlineParser inlineParser) {
-
     }
 
     public static class Factory implements CustomBlockParserFactory {

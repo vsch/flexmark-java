@@ -34,7 +34,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 
 final public class ParserTest {
-
     @Test
     public void emptyReaderTest() throws IOException {
         Parser parser = Parser.builder().build();
@@ -129,7 +128,6 @@ final public class ParserTest {
 
     @Test
     public void blockquotesWithLfLineBreaks() {
-
         //---------------------- --1------ ---2------ ---3--------
         //--------------01234567 890123456 7890123456 789012345678
         String given = "> line1\n> line2 \n> line3  \n> line4    \n";
@@ -191,7 +189,6 @@ final public class ParserTest {
 
     @Test
     public void blockquotesWithCrLineBreaks() {
-
         //---------------------- --1------ ---2------ ---3--------
         //--------------01234567 890123456 7890123456 789012345678
         String given = "> line1\r> line2 \r> line3  \r> line4    \r";
@@ -253,7 +250,6 @@ final public class ParserTest {
 
     @Test
     public void blockquotesWithCrLfLineBreaks() {
-
         //---------------------- - -1------- - -2-------- - 3---------4- -
         //--------------01234567 8 901234567 8 9012345678 9 012345678901 2
         String given = "> line1\r\n> line2 \r\n> line3  \r\n> line4    \r\n";
@@ -315,7 +311,6 @@ final public class ParserTest {
 
     @Test
     public void assertSpacesHardLineBreak() {
-
         //---------------------- - -1----------
         //--------------01234567 8 901234567890 
         String given = "line1  \r\n     line2";
@@ -350,7 +345,6 @@ final public class ParserTest {
 
     @Test
     public void assertBackslashHardLineBreak() {
-
         //-------------------- - - --1----------
         //--------------012345 6 7 8901234567890 
         String given = "line1\\\r\n     line2";

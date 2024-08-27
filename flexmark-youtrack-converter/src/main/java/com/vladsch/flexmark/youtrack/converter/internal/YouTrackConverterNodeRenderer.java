@@ -331,7 +331,6 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(Reference node, NodeRendererContext context, HtmlWriter html) {
-
     }
 
     private void render(HtmlEntity node, NodeRendererContext context, HtmlWriter html) {
@@ -385,12 +384,10 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
 
         if (!node.isDefined()) {
             // empty ref, we treat it as text
-            assert !node.isDefined();
             html.text(node.getChars().unescape());
         } else {
             if (!context.isDoNotRenderLinks()) {
                 Reference reference = node.getReferenceNode(referenceRepository);
-                assert reference != null;
                 ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, reference.getUrl().unescape(), null);
                 html.raw("!").raw(resolvedLink.getUrl()).raw("!");
             }
@@ -406,7 +403,6 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
 
         if (!node.isDefined()) {
             // empty ref, we treat it as text
-            assert !node.isDefined();
             html.raw("[");
             context.renderChildren(node);
             html.raw("]");
@@ -421,7 +417,6 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
                 context.renderChildren(node);
             } else {
                 Reference reference = node.getReferenceNode(referenceRepository);
-                assert reference != null;
 
                 ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, reference.getUrl().unescape(), null);
 

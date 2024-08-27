@@ -10,7 +10,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-@SuppressWarnings("WeakerAccess")
 public class TaskListFormatOptions implements MutableDataSetter {
     final public TaskListItemCase taskListItemCase;
     final public TaskListItemPlacement taskListItemPlacement;

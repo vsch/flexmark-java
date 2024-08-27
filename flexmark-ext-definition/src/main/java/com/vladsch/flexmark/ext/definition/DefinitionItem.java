@@ -7,6 +7,5 @@ import com.vladsch.flexmark.ast.ListItem;
  */
 public class DefinitionItem extends ListItem {
     public DefinitionItem() {
-
     }
 }

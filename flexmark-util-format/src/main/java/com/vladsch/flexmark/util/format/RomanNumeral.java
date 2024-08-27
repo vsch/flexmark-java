@@ -57,7 +57,6 @@ public class RomanNumeral {
         int arabic = 0;  // Arabic numeral equivalent of the part of the string that has been converted so far.
 
         while (i < roman.length()) {
-
             char letter = roman.charAt(i);
             int number = letterToNumber(letter);
 

@@ -17,7 +17,6 @@
 
 package com.vladsch.flexmark.util.html.ui;
 
-@SuppressWarnings({ "WeakerAccess" })
 public class Color extends java.awt.Color {
     final public static Color NULL = new Color(new java.awt.Color(0, true));
     final public static Color WHITE = new Color(java.awt.Color.WHITE);

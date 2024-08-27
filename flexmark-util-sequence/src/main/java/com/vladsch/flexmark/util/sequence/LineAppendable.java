@@ -26,7 +26,6 @@ import java.util.Iterator;
  * use {@link #line()}, {@link #lineIf(boolean)}, {@link #blankLine()} as an alternative to appending \n.
  * use {@link #blankLineIf(boolean)} and {@link #blankLine(int)} for appending blank lines.
  */
-@SuppressWarnings({ "UnusedReturnValue", "SameParameterValue" })
 public interface LineAppendable extends Appendable, Iterable<LineInfo> {
     enum Options {
         CONVERT_TABS,                       // expand tabs on column multiples of 4
@@ -886,7 +885,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
         try {
             appendTo(out, withPrefixes, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
         } catch (IOException ignored) {
-
         }
         return out;
     }

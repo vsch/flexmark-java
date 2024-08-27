@@ -15,7 +15,6 @@ public class HtmlConverterTextExtension implements FlexmarkHtmlConverter.HtmlCon
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
-
     }
 
     @Override

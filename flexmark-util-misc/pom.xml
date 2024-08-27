@@ -8,7 +8,6 @@
     </parent>
 
     <artifactId>flexmark-util-misc</artifactId>
-    <name>flexmark-java misc utilities</name>
     <description>flexmark-java misc utility classes</description>
 
     <dependencies>

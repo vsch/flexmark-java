@@ -12,9 +12,7 @@ public interface IndexedItemSetMap<M, S, K> extends Map<M, S> {
     boolean removeSetItem(@NotNull S s, int item);
     boolean containsSetItem(@NotNull S s, int item);
 
-    @SuppressWarnings("UnusedReturnValue")
     boolean addItem(@NotNull K key, int item);
-    @SuppressWarnings("UnusedReturnValue")
     boolean removeItem(@NotNull K key, int item);
     boolean containsItem(@NotNull K key, int item);
 }

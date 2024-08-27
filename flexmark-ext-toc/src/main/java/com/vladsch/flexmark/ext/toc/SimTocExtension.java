@@ -68,7 +68,6 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void parserOptions(MutableDataHolder options) {
-
     }
 
     @Override

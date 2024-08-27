@@ -12,7 +12,6 @@ import java.util.List;
  * A JekyllTag block node
  */
 public class JekyllTagBlock extends Block {
-
     @Override
     public void getAstExtra(@NotNull StringBuilder out) {
     }

@@ -28,8 +28,6 @@ public class TaskListItem extends ListItem {
 
     @Override
     public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
-        assert node.getParent() == this;
-
         // see if this is the first paragraph child item we handle our own paragraph wrapping for that one
         Node child = getFirstChild();
         while (child != null && !(child instanceof Paragraph)) child = child.getNext();

@@ -42,7 +42,6 @@ import static com.vladsch.flexmark.util.html.Attribute.TITLE_ATTR;
  * formatter.render(node);
  * </code></pre>
  */
-@SuppressWarnings("WeakerAccess")
 public class Formatter implements IRender {
     final public static Document[] EMPTY_DOCUMENTS = new Document[0];
     /**
@@ -473,7 +472,6 @@ public class Formatter implements IRender {
          * @param nodeFormatterFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        @SuppressWarnings("UnusedReturnValue")
         public Builder nodeFormatterFactory(NodeFormatterFactory nodeFormatterFactory) {
             this.nodeFormatterFactories.add(nodeFormatterFactory);
             return this;
@@ -647,11 +645,6 @@ public class Formatter implements IRender {
 
             trackedSequence = sequence.isEmpty() ? document.getChars() : sequence;
             trackedOffsets = offsets.isEmpty() ? TrackedOffsetList.EMPTY_LIST : TrackedOffsetList.create(trackedSequence, offsets);
-
-            assert trackedSequence.equals(document.getChars()) : String.format("TRACKED_SEQUENCE must be character identical to document.getChars()\n" +
-                    "TRACKED_SEQUENCE: '%s'\n" +
-                    " altSeq: '%s'\n" +
-                    "", trackedSequence.toVisibleWhitespaceString(), document.getChars().toVisibleWhitespaceString());
 
             String charSequence = blockLikePrefixChars.toString();
             this.blockQuoteLikeChars = BasedSequence.of(charSequence);
@@ -1053,7 +1046,6 @@ public class Formatter implements IRender {
             subContext.rendererList = oldRendererList;
         }
 
-        @SuppressWarnings("WeakerAccess")
         protected void renderChildrenNode(Node parent, NodeFormatterSubContext subContext) {
             Node node = parent.getFirstChild();
             while (node != null) {
@@ -1063,7 +1055,6 @@ public class Formatter implements IRender {
             }
         }
 
-        @SuppressWarnings("WeakerAccess")
         private class SubNodeFormatter extends NodeFormatterSubContext implements NodeFormatterContext {
             final private MainNodeFormatter myMainNodeRenderer;
             final private DataHolder myOptions;

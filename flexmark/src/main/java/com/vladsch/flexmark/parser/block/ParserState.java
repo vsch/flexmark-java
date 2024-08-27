@@ -15,7 +15,6 @@ import java.util.List;
  * <p><em>This interface is not intended to be implemented by clients.</em></p>
  */
 public interface ParserState extends BlockTracker, BlockParserTracker {
-
     /**
      * @return the current line
      */

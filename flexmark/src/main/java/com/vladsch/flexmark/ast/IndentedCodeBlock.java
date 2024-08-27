@@ -15,7 +15,6 @@ import java.util.List;
 import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
 public class IndentedCodeBlock extends Block implements TextContainer {
-
     @NotNull
     @Override
     public BasedSequence[] getSegments() {

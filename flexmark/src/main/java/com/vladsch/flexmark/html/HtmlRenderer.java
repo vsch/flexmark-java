@@ -32,7 +32,6 @@ import java.util.*;
  * renderer.render(node);
  * </code></pre>
  */
-@SuppressWarnings("WeakerAccess")
 public class HtmlRenderer implements IRender {
     final public static DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
     final public static DataKey<String> HARD_BREAK = new DataKey<>("HARD_BREAK", "<br />\n");
@@ -253,7 +252,6 @@ public class HtmlRenderer implements IRender {
         return false;
     }
 
-    @SuppressWarnings("UnusedReturnValue")
     static public @NotNull MutableDataHolder addRenderTypeEquivalence(@NotNull MutableDataHolder options, @NotNull String rendererType, @NotNull String supportedRendererType) {
         if (!isCompatibleRendererType(options, rendererType, supportedRendererType)) {
             // need to add
@@ -550,7 +548,6 @@ public class HtmlRenderer implements IRender {
                 NodeRenderer nodeRenderer = nodeRendererFactory.apply(this.getOptions());
                 Set<NodeRenderingHandler<?>> renderingHandlers = nodeRenderer.getNodeRenderingHandlers();
 
-                assert (renderingHandlers != null);
                 for (NodeRenderingHandler<?> nodeType : renderingHandlers) {
                     // Overwrite existing renderer
                     NodeRenderingHandlerWrapper handlerWrapper = new NodeRenderingHandlerWrapper(nodeType, renderers.get(nodeType.getNodeType()));
@@ -559,7 +556,6 @@ public class HtmlRenderer implements IRender {
 
                 if (nodeRenderer instanceof PhasedNodeRenderer) {
                     Set<RenderingPhase> renderingPhases = ((PhasedNodeRenderer) nodeRenderer).getRenderingPhases();
-                    assert (renderingPhases != null);
 
                     this.renderingPhases.addAll(renderingPhases);
                     this.phasedRenderers.add((PhasedNodeRenderer) nodeRenderer);
@@ -790,7 +786,6 @@ public class HtmlRenderer implements IRender {
             renderChildrenNode(parent, this);
         }
 
-        @SuppressWarnings("WeakerAccess")
         protected void renderChildrenNode(Node parent, NodeRendererSubContext subContext) {
             Node node = parent.getFirstChild();
             while (node != null) {
@@ -800,7 +795,6 @@ public class HtmlRenderer implements IRender {
             }
         }
 
-        @SuppressWarnings("WeakerAccess")
         private class SubNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
             final private MainNodeRenderer myMainNodeRenderer;
 

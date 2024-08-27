@@ -12,7 +12,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class MarkdownTableTest extends MarkdownTableTestBase {
-
     final static private String markdown1 = "" +
             "| First Header  |\n" +
             "| ------------- |\n" +
@@ -2777,7 +2776,6 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     // these are tested with manipulators
     @Test
     public void allRows() {
-
     }
 
     @Test
