@@ -11,15 +11,9 @@
     <modules>
         <module>flexmark</module>
         <module>flexmark-core-test</module>
-        <module>flexmark-ext-abbreviation</module>
-        <module>flexmark-ext-admonition</module>
-        <module>flexmark-ext-anchorlink</module>
-        <module>flexmark-ext-aside</module>
-        <module>flexmark-ext-attributes</module>
         <module>flexmark-ext-autolink</module>
         <module>flexmark-ext-definition</module>
         <module>flexmark-ext-emoji</module>
-        <module>flexmark-ext-enumerated-reference</module>
         <module>flexmark-ext-escaped-character</module>
         <module>flexmark-ext-footnotes</module>
         <module>flexmark-ext-gfm-issues</module>
@@ -63,7 +57,6 @@
         <module>flexmark-integration-test</module>
         <module>flexmark-jira-converter</module>
         <module>flexmark-pdf-converter</module>
-        <module>flexmark-profile-pegdown</module>
         <module>flexmark-test-specs</module>
         <module>flexmark-all</module>
         <module>flexmark-osgi</module>
@@ -183,31 +176,6 @@
             </dependency>
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-abbreviation</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-anchorlink</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-admonition</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-aside</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-attributes</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-ext-autolink</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -219,11 +187,6 @@
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-ext-emoji</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-enumerated-reference</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -359,11 +322,6 @@
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-pdf-converter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-profile-pegdown</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

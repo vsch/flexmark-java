@@ -12,15 +12,9 @@
             <!-- Now, select which projects to include in this module-set. -->
             <includes>
                 <include>com.acrolinx.flexmark:flexmark</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-abbreviation</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-admonition</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-anchorlink</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-aside</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-autolink</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-attributes</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-definition</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-emoji</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-enumerated-reference</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-escaped-character</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-footnotes</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-gfm-issues</include>
@@ -45,7 +39,6 @@
                 <include>com.acrolinx.flexmark:flexmark-jira-converter</include>
                 <include>com.acrolinx.flexmark:flexmark-pdf-converter</include>
                 <include>com.acrolinx.flexmark:flexmark-youtrack-converter</include>
-                <include>com.acrolinx.flexmark:flexmark-profile-pegdown</include>
                 <include>com.acrolinx.flexmark:flexmark-util-ast</include>
                 <include>com.acrolinx.flexmark:flexmark-util-builder</include>
                 <include>com.acrolinx.flexmark:flexmark-util-collection</include>
