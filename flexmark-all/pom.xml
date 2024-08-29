@@ -23,26 +23,6 @@
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-abbreviation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-admonition</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-anchorlink</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-aside</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-attributes</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-ext-autolink</artifactId>
         </dependency>
         <dependency>
@@ -52,10 +32,6 @@
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-ext-emoji</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-enumerated-reference</artifactId>
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
@@ -152,10 +128,6 @@
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-pdf-converter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-profile-pegdown</artifactId>
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>

@@ -23,11 +23,6 @@
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-abbreviation</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-ext-emoji</artifactId>
             <scope>test</scope>
         </dependency>
