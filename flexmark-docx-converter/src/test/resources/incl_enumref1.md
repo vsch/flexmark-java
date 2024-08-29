@@ -1,3 +1,0 @@
-[@fig]: Figure [#].
-
-[@tbl]: Table [#].
