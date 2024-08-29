@@ -1,3 +1,0 @@
->>>macro
-Simple Text
-<<<

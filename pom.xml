@@ -67,7 +67,6 @@
         <module>flexmark-test-specs</module>
         <module>flexmark-all</module>
         <module>flexmark-osgi</module>
-        <module>flexmark-docx-converter</module>
     </modules>
 
     <properties>
