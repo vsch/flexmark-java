@@ -15,7 +15,6 @@
         <module>flexmark-ext-gfm-strikethrough</module>
         <module>flexmark-ext-gfm-tasklist</module>
         <module>flexmark-ext-tables</module>
-        <module>flexmark-ext-typographic</module>
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-test-util</module>
         <module>flexmark-util</module>
@@ -165,11 +164,6 @@
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-ext-tables</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-typographic</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

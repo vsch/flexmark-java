@@ -27,13 +27,8 @@
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-typographic</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-core-test</artifactId>
             <scope>test</scope>
         </dependency>
-        </dependencies>
+    </dependencies>
 </project>

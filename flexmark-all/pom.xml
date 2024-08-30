@@ -39,10 +39,6 @@
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-typographic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-ext-yaml-front-matter</artifactId>
         </dependency>
         <dependency>

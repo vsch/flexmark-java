@@ -16,7 +16,6 @@
                 <include>com.acrolinx.flexmark:flexmark-ext-gfm-strikethrough</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-gfm-tasklist</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-tables</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-typographic</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-yaml-front-matter</include>
                 <include>com.acrolinx.flexmark:flexmark-util-ast</include>
                 <include>com.acrolinx.flexmark:flexmark-util-builder</include>

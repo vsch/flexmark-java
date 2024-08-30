@@ -14,27 +14,22 @@
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-util-collection</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-util-misc</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-util-data</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-util-sequence</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-util-visitor</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -3606,49 +3606,6 @@ Document[0, 76]
 ````````````````````````````````
 
 
-Typographic should not process separator nodes
-
-```````````````````````````````` example(DoNotDecorate: 2) options(typographic)
-| Abc Long -- 'quoted' |
-|----------------------|
-| Def Short --- "quoted" |
-.
-<table>
-  <thead>
-    <tr><th>Abc Long &ndash; &lsquo;quoted&rsquo;</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>Def Short &mdash; &ldquo;quoted&rdquo;</td></tr>
-  </tbody>
-</table>
-.
-Document[0, 76]
-  TableBlock[0, 76]
-    TableHead[0, 24]
-      TableRow[0, 24] rowNumber=1
-        TableCell[0, 24] header textOpen:[0, 1, "|"] text:[2, 22, "Abc Long -- 'quoted'"] textClose:[23, 24, "|"]
-          Text[2, 11] chars:[2, 11, "Abc Long "]
-          TypographicSmarts[11, 13] typographic: &ndash; 
-          Text[13, 14] chars:[13, 14, " "]
-          TypographicQuotes[14, 22] typographicOpening: &lsquo;  typographicClosing: &rsquo;  textOpen:[14, 15, "'"] text:[15, 21, "quoted"] textClose:[21, 22, "'"]
-            Text[15, 21] chars:[15, 21, "quoted"]
-          Text[22, 22]
-    TableSeparator[25, 49]
-      TableRow[25, 49]
-        TableCell[25, 49] textOpen:[25, 26, "|"] text:[26, 48, "----------------------"] textClose:[48, 49, "|"]
-          Text[26, 48] chars:[26, 48, "----- … -----"]
-    TableBody[50, 76]
-      TableRow[50, 76] rowNumber=1
-        TableCell[50, 76] textOpen:[50, 51, "|"] text:[52, 74, "Def Short --- \"quoted\""] textClose:[75, 76, "|"]
-          Text[52, 62] chars:[52, 62, "Def Short "]
-          TypographicSmarts[62, 65] typographic: &mdash; 
-          Text[65, 66] chars:[65, 66, " "]
-          TypographicQuotes[66, 74] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[66, 67, "\""] text:[67, 73, "quoted"] textClose:[73, 74, "\""]
-            Text[67, 73] chars:[67, 73, "quoted"]
-          Text[74, 74]
-````````````````````````````````
-
-
 ## Issue
 
 ### 106
