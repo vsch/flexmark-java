@@ -18,14 +18,12 @@
         <module>flexmark-ext-typographic</module>
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-test-util</module>
-        <module>flexmark-tree-iteration</module>
         <module>flexmark-util</module>
         <module>flexmark-util-ast</module>
         <module>flexmark-util-builder</module>
         <module>flexmark-util-collection</module>
         <module>flexmark-util-data</module>
         <module>flexmark-util-dependency</module>
-        <module>flexmark-util-experimental</module>
         <module>flexmark-util-format</module>
         <module>flexmark-util-html</module>
         <module>flexmark-util-misc</module>
@@ -35,7 +33,6 @@
         <module>flexmark-integration-test</module>
         <module>flexmark-test-specs</module>
         <module>flexmark-all</module>
-        <module>flexmark-osgi</module>
     </modules>
 
     <properties>
@@ -197,11 +194,6 @@
             </dependency>
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-tree-iteration</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-util-ast</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -258,11 +250,6 @@
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-util</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-util-experimental</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
