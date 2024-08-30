@@ -23,16 +23,6 @@
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-emoji</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-footnotes</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
             <scope>test</scope>
         </dependency>
@@ -48,17 +38,7 @@
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-toc</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-ext-yaml-front-matter</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-wikilink</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

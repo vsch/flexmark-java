@@ -13,30 +13,11 @@
         <module>flexmark-core-test</module>
         <module>flexmark-ext-autolink</module>
         <module>flexmark-ext-definition</module>
-        <module>flexmark-ext-emoji</module>
-        <module>flexmark-ext-escaped-character</module>
-        <module>flexmark-ext-footnotes</module>
-        <module>flexmark-ext-gfm-issues</module>
         <module>flexmark-ext-gfm-strikethrough</module>
         <module>flexmark-ext-gfm-tasklist</module>
-        <module>flexmark-ext-gfm-users</module>
-        <module>flexmark-ext-gitlab</module>
-        <module>flexmark-ext-ins</module>
-        <module>flexmark-ext-jekyll-front-matter</module>
-        <module>flexmark-ext-jekyll-tag</module>
-        <module>flexmark-ext-macros</module>
-        <module>flexmark-ext-media-tags</module>
-        <module>flexmark-ext-resizable-image</module>
-        <module>flexmark-ext-spec-example</module>
-        <module>flexmark-ext-superscript</module>
         <module>flexmark-ext-tables</module>
-        <module>flexmark-ext-toc</module>
         <module>flexmark-ext-typographic</module>
-        <module>flexmark-ext-wikilink</module>
-        <module>flexmark-ext-xwiki-macros</module>
         <module>flexmark-ext-yaml-front-matter</module>
-        <module>flexmark-ext-youtube-embedded</module>
-        <module>flexmark-ext-zzzzzz</module>
         <module>flexmark-test-util</module>
         <module>flexmark-tree-iteration</module>
         <module>flexmark-util</module>
@@ -52,11 +33,7 @@
         <module>flexmark-util-sequence</module>
         <module>flexmark-util-options</module>
         <module>flexmark-util-visitor</module>
-        <module>flexmark-youtrack-converter</module>
-        <module>flexmark-html2md-converter</module>
         <module>flexmark-integration-test</module>
-        <module>flexmark-jira-converter</module>
-        <module>flexmark-pdf-converter</module>
         <module>flexmark-test-specs</module>
         <module>flexmark-all</module>
         <module>flexmark-osgi</module>
@@ -186,26 +163,6 @@
             </dependency>
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-emoji</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-escaped-character</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-footnotes</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-gfm-issues</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -216,67 +173,7 @@
             </dependency>
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-gfm-users</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-gitlab</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-ins</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-jekyll-front-matter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-jekyll-tag</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-macros</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-media-tags</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-resizable-image</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-xwiki-macros</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-spec-example</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-superscript</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-ext-tables</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-toc</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -286,42 +183,12 @@
             </dependency>
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-wikilink</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-ext-yaml-front-matter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-youtube-embedded</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-ext-zzzzzz</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-core-test</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-html2md-converter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-jira-converter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-pdf-converter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -402,11 +269,6 @@
             <dependency>
                 <groupId>com.acrolinx.flexmark</groupId>
                 <artifactId>flexmark-util-experimental</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.acrolinx.flexmark</groupId>
-                <artifactId>flexmark-youtrack-converter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

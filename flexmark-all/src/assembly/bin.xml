@@ -14,31 +14,11 @@
                 <include>com.acrolinx.flexmark:flexmark</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-autolink</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-definition</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-emoji</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-escaped-character</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-footnotes</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-gfm-issues</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-gfm-strikethrough</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-gfm-tasklist</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-gfm-users</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-gitlab</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-jekyll-front-matter</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-jekyll-tag</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-ins</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-macros</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-media-tags</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-resizable-image</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-xwiki-macros</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-superscript</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-tables</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-toc</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-typographic</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-wikilink</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-yaml-front-matter</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-youtube-embedded</include>
-                <include>com.acrolinx.flexmark:flexmark-jira-converter</include>
-                <include>com.acrolinx.flexmark:flexmark-pdf-converter</include>
-                <include>com.acrolinx.flexmark:flexmark-youtrack-converter</include>
                 <include>com.acrolinx.flexmark:flexmark-util-ast</include>
                 <include>com.acrolinx.flexmark:flexmark-util-builder</include>
                 <include>com.acrolinx.flexmark:flexmark-util-collection</include>

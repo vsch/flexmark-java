@@ -17,7 +17,6 @@ target/
 /lib/autolink-0.6.0-sources.jar
 /FlexmarkJavaAssets/EmojiReference/EmojiList-v11.0.html
 /.idea/serialmonitor_settings.xml
-/flexmark-pdf-converter/src/test/resources/html_sample.html
 /flexmark-empty-template.docx
 /assets/comms/
 /lib/
