@@ -12,7 +12,6 @@
             <!-- Now, select which projects to include in this module-set. -->
             <includes>
                 <include>com.acrolinx.flexmark:flexmark</include>
-                <include>com.acrolinx.flexmark:flexmark-ext-autolink</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-definition</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-gfm-strikethrough</include>
                 <include>com.acrolinx.flexmark:flexmark-ext-gfm-tasklist</include>

@@ -18,11 +18,6 @@
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-autolink</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
             <scope>test</scope>
         </dependency>

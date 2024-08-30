@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.integration.test;
 
 import com.vladsch.flexmark.core.test.util.RendererSpecTest;
-import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
@@ -31,7 +30,6 @@ public class SpecIntegrationTest extends RendererSpecTest {
     final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(TestSpecLocator.DEFAULT_SPEC_RESOURCE);
     final private static DataHolder OPTIONS = new MutableDataSet()
             .set(Parser.EXTENSIONS, Arrays.asList(
-                    AutolinkExtension.create(),
                     StrikethroughExtension.create(),
                     TablesExtension.create(),
                     YamlFrontMatterExtension.create())
@@ -68,24 +66,6 @@ public class SpecIntegrationTest extends RendererSpecTest {
 
     private static Map<String, String> getOverriddenExamples() {
         Map<String, String> m = new HashMap<>();
-
-        // Not a spec autolink because of space, but the resulting text contains a valid URL
-        m.put("<http://foo.bar/baz bim>\n", "<p>&lt;<a href=\"http://foo.bar/baz\">http://foo.bar/baz</a> bim&gt;</p>\n");
-
-        // Not a spec autolink, but the resulting text contains a valid email
-        m.put("<foo\\+@bar.example.com>\n", "<p>&lt;<a href=\"mailto:foo+@bar.example.com\">foo+@bar.example.com</a>&gt;</p>\n");
-
-        // Not a spec autolink because of unknown scheme, but autolink extension doesn't limit schemes
-        m.put("<heck://bing.bong>\n", "<p>&lt;<a href=\"heck://bing.bong%3E\">heck://bing.bong&gt;</a></p>\n");
-
-        // Not a spec autolink because of spaces, but autolink extension doesn't limit schemes
-        m.put("< http://foo.bar >\n", "<p>&lt; <a href=\"http://foo.bar\">http://foo.bar</a> &gt;</p>\n");
-
-        // Plain autolink
-        m.put("http://example.com\n", "<p><a href=\"http://example.com\">http://example.com</a></p>\n");
-
-        // Plain autolink
-        m.put("foo@bar.example.com\n", "<p><a href=\"mailto:foo@bar.example.com\">foo@bar.example.com</a></p>\n");
 
         // YAML front matter block
         m.put("---\nFoo\n---\nBar\n---\nBaz\n", "<h2>Bar</h2>\n<p>Baz</p>\n");

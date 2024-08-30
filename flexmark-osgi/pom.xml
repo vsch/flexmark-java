@@ -23,10 +23,6 @@
         </dependency>
         <dependency>
             <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-ext-autolink</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
             <artifactId>flexmark-ext-definition</artifactId>
         </dependency>
         <dependency>
