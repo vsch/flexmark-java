@@ -73,10 +73,19 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- For dependencies between modules -->
       <dependency>
         <groupId>com.acrolinx.flexmark</groupId>
         <artifactId>flexmark</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.acrolinx.flexmark</groupId>
+        <artifactId>flexmark-all</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.acrolinx.flexmark</groupId>
+        <artifactId>flexmark-core-test</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -106,17 +115,17 @@
       </dependency>
       <dependency>
         <groupId>com.acrolinx.flexmark</groupId>
-        <artifactId>flexmark-core-test</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.acrolinx.flexmark</groupId>
         <artifactId>flexmark-test-specs</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>com.acrolinx.flexmark</groupId>
         <artifactId>flexmark-test-util</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.acrolinx.flexmark</groupId>
+        <artifactId>flexmark-util</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -161,12 +170,12 @@
       </dependency>
       <dependency>
         <groupId>com.acrolinx.flexmark</groupId>
-        <artifactId>flexmark-util-sequence</artifactId>
+        <artifactId>flexmark-util-options</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>com.acrolinx.flexmark</groupId>
-        <artifactId>flexmark-util-options</artifactId>
+        <artifactId>flexmark-util-sequence</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -174,32 +183,24 @@
         <artifactId>flexmark-util-visitor</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <dependency>
-        <groupId>com.acrolinx.flexmark</groupId>
-        <artifactId>flexmark-util</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.acrolinx.flexmark</groupId>
-        <artifactId>flexmark-all</artifactId>
-        <version>${project.version}</version>
-      </dependency>
 
-      <!-- Common test dependencies -->
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.13.2</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-core</artifactId>
         <version>1.37</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.openjdk.jmh</groupId>
         <artifactId>jmh-generator-annprocess</artifactId>
         <version>1.37</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -293,6 +294,7 @@
               <expandEmptyElements>false</expandEmptyElements>
               <indentSchemaLocation>true</indentSchemaLocation>
               <lineSeparator>\n</lineSeparator>
+              <sortDependencies>scope,groupId,artifactId</sortDependencies>
             </sortPom>
           </pom>
         </configuration>

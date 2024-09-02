@@ -14,7 +14,7 @@
   <dependencies>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-misc</artifactId>
+      <artifactId>flexmark-util-ast</artifactId>
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
@@ -22,11 +22,11 @@
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-ast</artifactId>
+      <artifactId>flexmark-util-format</artifactId>
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-format</artifactId>
+      <artifactId>flexmark-util-misc</artifactId>
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
@@ -35,6 +35,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jetbrains</groupId>

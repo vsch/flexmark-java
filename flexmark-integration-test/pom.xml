@@ -14,7 +14,17 @@
   <dependencies>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-util</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-core-test</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -38,12 +48,10 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.pegdown</groupId>
-      <artifactId>pegdown</artifactId>
-      <version>1.6.0</version>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-test-specs</artifactId>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-test-util</artifactId>
@@ -60,17 +68,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-core-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-test-specs</artifactId>
+      <groupId>org.pegdown</groupId>
+      <artifactId>pegdown</artifactId>
+      <version>1.6.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
