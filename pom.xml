@@ -209,11 +209,21 @@
     <pluginManagement>
       <plugins>
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>versions-maven-plugin</artifactId>
-          <version>2.17.1</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.7.1</version>
           <configuration>
-            <generateBackupPoms>false</generateBackupPoms>
+            <descriptors>
+              <descriptor>flexmark-all/src/assembly/bin.xml</descriptor>
+            </descriptors>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+          <configuration>
+            <release>11</release>
           </configuration>
         </plugin>
         <plugin>
@@ -233,30 +243,43 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.13.0</version>
-          <configuration>
-            <release>11</release>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.7.1</version>
-          <configuration>
-            <descriptors>
-              <descriptor>flexmark-all/src/assembly/bin.xml</descriptor>
-            </descriptors>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
           <version>3.3.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.17.1</version>
+          <configuration>
+            <generateBackupPoms>false</generateBackupPoms>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>2.43.0</version>
+        <configuration>
+          <pom>
+            <sortPom>
+              <expandEmptyElements>false</expandEmptyElements>
+              <indentSchemaLocation>true</indentSchemaLocation>
+              <lineSeparator>\n</lineSeparator>
+              <sortDependencies>scope,groupId,artifactId</sortDependencies>
+              <sortPlugins>groupId,artifactId</sortPlugins>
+            </sortPom>
+          </pom>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -280,28 +303,6 @@
             <id>attach-sources</id>
             <goals>
               <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.diffplug.spotless</groupId>
-        <artifactId>spotless-maven-plugin</artifactId>
-        <version>2.43.0</version>
-        <configuration>
-          <pom>
-            <sortPom>
-              <expandEmptyElements>false</expandEmptyElements>
-              <indentSchemaLocation>true</indentSchemaLocation>
-              <lineSeparator>\n</lineSeparator>
-              <sortDependencies>scope,groupId,artifactId</sortDependencies>
-            </sortPom>
-          </pom>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
             </goals>
           </execution>
         </executions>
