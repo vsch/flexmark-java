@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.acrolinx.flexmark</groupId>
-        <artifactId>flexmark-java</artifactId>
-        <version>0.64.8-SNAPSHOT</version>
-    </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.acrolinx.flexmark</groupId>
+    <artifactId>flexmark-java</artifactId>
+    <version>0.64.8-SNAPSHOT</version>
+  </parent>
 
-    <artifactId>flexmark-test-util</artifactId>
-    <description>flexmark-java classes for tests</description>
+  <artifactId>flexmark-test-util</artifactId>
+  <description>flexmark-java classes for tests</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-util-misc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-util-data</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-util-ast</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-util-format</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-util-sequence</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>24.1.0</version>
-        </dependency>
-</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-util-misc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-util-data</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-util-ast</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-util-format</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-util-sequence</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>24.1.0</version>
+    </dependency>
+  </dependencies>
 </project>

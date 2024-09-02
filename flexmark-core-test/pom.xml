@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.acrolinx.flexmark</groupId>
-        <artifactId>flexmark-java</artifactId>
-        <version>0.64.8-SNAPSHOT</version>
-    </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.acrolinx.flexmark</groupId>
+    <artifactId>flexmark-java</artifactId>
+    <version>0.64.8-SNAPSHOT</version>
+  </parent>
 
-    <artifactId>flexmark-core-test</artifactId>
-    <description>flexmark test classes for testing core functionality and implementing custom extension tests</description>
+  <artifactId>flexmark-core-test</artifactId>
+  <description>flexmark test classes for testing core functionality and implementing custom extension tests</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-test-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.acrolinx.flexmark</groupId>
-            <artifactId>flexmark-test-specs</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openjdk.jmh</groupId>
-            <artifactId>jmh-generator-annprocess</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-util</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-test-util</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.acrolinx.flexmark</groupId>
+      <artifactId>flexmark-test-specs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-annprocess</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
