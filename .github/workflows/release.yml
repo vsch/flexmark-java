@@ -1,0 +1,52 @@
+name: Release
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Create release version name
+        id: createReleaseVersionName
+        run: echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed 's/-SNAPSHOT//')" >> "$GITHUB_OUTPUT"
+
+      - name: Create PR Branch Name
+        id: createPrBranchName
+        env:
+          RELEASE_VERSION: ${{ steps.createReleaseVersionName.outputs.RELEASE_VERSION }}
+        run: | 
+          echo "PR_BRANCH_NAME=publish-v$RELEASE_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Release with Maven
+        env:
+          PR_BRANCH_NAME: ${{ steps.createPrBranchName.outputs.PR_BRANCH_NAME }}
+          GIT_USER_NAME: acrolinx-opensource
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.email opensource@acrolinx.com
+          git config user.name $GIT_USER_NAME
+          git checkout -b $PR_BRANCH_NAME
+          mvn -s .m2/settings.xml -B -Dusername=$GIT_USER_NAME -Dpassword=$GITHUB_TOKEN release:prepare release:perform
+
+      - name: Create GitHub PR
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+          RELEASE_VERSION: ${{ steps.createReleaseVersionName.outputs.RELEASE_VERSION }}
+          CHECKOUT_BRANCH_NAME: ${{ github.ref_name }}
+          PR_BRANCH_NAME: ${{ steps.createPrBranchName.outputs.PR_BRANCH_NAME }}
+        run: |
+          gh pr create --title "Release $RELEASE_VERSION" --body "" --base "$CHECKOUT_BRANCH_NAME" --reviewer ${{ github.actor }}
+          gh pr merge $PR_BRANCH_NAME --auto --rebase --delete-branch
