@@ -31,7 +31,6 @@ import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT;
-import static com.vladsch.flexmark.util.html.Attribute.TITLE_ATTR;
 
 /**
  * Renders a tree of nodes to Markdown.

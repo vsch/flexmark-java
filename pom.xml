@@ -272,6 +272,9 @@
         <artifactId>spotless-maven-plugin</artifactId>
         <version>2.43.0</version>
         <configuration>
+          <java>
+            <removeUnusedImports/>
+          </java>
           <pom>
             <sortPom>
               <expandEmptyElements>false</expandEmptyElements>

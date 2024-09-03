@@ -8,7 +8,6 @@ import com.vladsch.flexmark.util.sequence.builder.Seg;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 
 import static com.vladsch.flexmark.util.sequence.builder.tree.Segment.SegType.ANCHOR;
 import static com.vladsch.flexmark.util.sequence.builder.tree.Segment.SegType.BASE;

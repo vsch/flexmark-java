@@ -2,7 +2,6 @@ package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.MutableAttribute;
 import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

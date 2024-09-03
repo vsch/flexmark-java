@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.ast.NodeTracker;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;

@@ -12,10 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public abstract class CoreRendererSpecTest extends RendererSpecTest {
     final private static DataHolder OPTIONS = new MutableDataSet()

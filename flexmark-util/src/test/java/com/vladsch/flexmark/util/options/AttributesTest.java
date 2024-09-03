@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.util.options;
 
-import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.MutableAttribute;
 import com.vladsch.flexmark.util.html.MutableAttributes;
 import org.junit.Test;
 

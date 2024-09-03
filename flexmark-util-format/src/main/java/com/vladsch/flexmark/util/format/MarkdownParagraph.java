@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
-import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
