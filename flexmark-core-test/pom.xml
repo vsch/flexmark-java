@@ -22,10 +22,6 @@
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-test-util</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util</artifactId>
     </dependency>
 

@@ -14,22 +14,7 @@
   <dependencies>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-misc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-sequence</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains</groupId>
-      <artifactId>annotations</artifactId>
-      <version>24.1.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

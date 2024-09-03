@@ -14,10 +14,6 @@
   <dependencies>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-ast</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-data</artifactId>
     </dependency>
     <dependency>
@@ -25,22 +21,9 @@
       <artifactId>flexmark-util-format</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-misc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-sequence</artifactId>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains</groupId>
-      <artifactId>annotations</artifactId>
-      <version>24.1.0</version>
     </dependency>
   </dependencies>
 </project>
