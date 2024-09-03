@@ -9,6 +9,8 @@ permissions:
 jobs:
   Release:
     runs-on: ubuntu-latest
+    env:
+      GIT_USER_NAME: acrolinx-opensource
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,20 +29,23 @@ jobs:
         id: createPrBranchName
         env:
           RELEASE_VERSION: ${{ steps.createReleaseVersionName.outputs.RELEASE_VERSION }}
-        run: | 
-          echo "PR_BRANCH_NAME=publish-v$RELEASE_VERSION" >> "$GITHUB_OUTPUT"
+        run: echo "PR_BRANCH_NAME=publish-v$RELEASE_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create and Push Branch
+        env: 
+          PR_BRANCH_NAME: ${{ steps.createPrBranchName.outputs.PR_BRANCH_NAME }}
+        run: |
+          git config user.name $GIT_USER_NAME
+          git config user.email opensource@acrolinx.com
+          git checkout -b $PR_BRANCH_NAME
+          git push --set-upstream origin $PR_BRANCH_NAME
 
       - name: Release with Maven
         env:
           PR_BRANCH_NAME: ${{ steps.createPrBranchName.outputs.PR_BRANCH_NAME }}
-          GIT_USER_NAME: acrolinx-opensource
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.email opensource@acrolinx.com
-          git config user.name $GIT_USER_NAME
-          git checkout -b $PR_BRANCH_NAME
-          mvn -s .m2/settings.xml -B -Dusername=$GIT_USER_NAME -Dpassword=$GITHUB_TOKEN -DpreparationGoals="clean spotless:apply verify" -DcompletionGoals="spotless:apply" release:prepare release:perform
+        run: mvn -s .m2/settings.xml -B -Dusername=$GIT_USER_NAME -Dpassword=$GITHUB_TOKEN -DpreparationGoals="clean spotless:apply verify" -DcompletionGoals="spotless:apply" release:prepare release:perform
 
       - name: Create GitHub PR
         env:
