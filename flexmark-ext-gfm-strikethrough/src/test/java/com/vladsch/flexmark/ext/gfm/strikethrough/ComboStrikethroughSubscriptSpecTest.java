@@ -7,13 +7,12 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.jetbrains.annotations.NotNull;
-import org.junit.runners.Parameterized;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+import org.junit.runners.Parameterized;
 
 public class ComboStrikethroughSubscriptSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_strikethrough_subscript_ast_spec.md";

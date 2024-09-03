@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser.internal;
 
 import com.vladsch.flexmark.ast.util.Parsing;
-
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

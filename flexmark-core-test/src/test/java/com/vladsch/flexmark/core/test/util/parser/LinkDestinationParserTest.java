@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.core.test.util.parser;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.parser.internal.LinkDestinationParser;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class LinkDestinationParserTest {
     LinkDestinationParser noParenParser;

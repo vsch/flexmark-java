@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.ast.Node;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.IOException;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class NodeFormatterSubContext implements NodeFormatterContext {
     final protected MarkdownWriter markdown;

@@ -1,14 +1,13 @@
 package com.vladsch.flexmark.util.misc;
 
+import static org.junit.Assert.*;
+
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 public class UtilsTest {
     @Rule public ExpectedException thrown = ExpectedException.none();

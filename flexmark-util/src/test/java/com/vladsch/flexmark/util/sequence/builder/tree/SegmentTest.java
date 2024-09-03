@@ -1,14 +1,13 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.function.BiConsumer;
-
-import static org.junit.Assert.assertEquals;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 public class SegmentTest {
     static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {

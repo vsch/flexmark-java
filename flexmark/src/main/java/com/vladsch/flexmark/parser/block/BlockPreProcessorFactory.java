@@ -2,10 +2,9 @@ package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.dependency.Dependent;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Set;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
 
 public interface BlockPreProcessorFactory extends Function<ParserState, BlockPreProcessor>, Dependent {
     /**

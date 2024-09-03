@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
-import org.junit.Test;
-
 import static com.vladsch.flexmark.util.misc.CharPredicate.SPACE;
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class SequenceUtilsTest {
     @Test

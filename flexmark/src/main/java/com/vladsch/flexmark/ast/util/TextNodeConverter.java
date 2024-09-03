@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ast.util;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-
 import java.util.ArrayList;
 import java.util.List;
 

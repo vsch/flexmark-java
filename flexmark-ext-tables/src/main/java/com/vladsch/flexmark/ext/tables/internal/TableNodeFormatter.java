@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
+import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
+import static com.vladsch.flexmark.util.format.TableManipulator.NULL;
+
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ext.tables.*;
@@ -13,13 +16,9 @@ import com.vladsch.flexmark.util.format.TrackedOffsetList;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
-
-import static com.vladsch.flexmark.formatter.RenderPurpose.FORMAT;
-import static com.vladsch.flexmark.util.format.TableManipulator.NULL;
 
 public class TableNodeFormatter implements NodeFormatter {
     final private TableFormatOptions options;

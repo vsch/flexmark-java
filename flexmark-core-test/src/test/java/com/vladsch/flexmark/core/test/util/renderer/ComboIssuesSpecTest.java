@@ -9,13 +9,12 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import org.jetbrains.annotations.NotNull;
-import org.junit.runners.Parameterized;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+import org.junit.runners.Parameterized;
 
 final public class ComboIssuesSpecTest extends CoreRendererSpecTest {
     final private static String SPEC_RESOURCE = "/core_issues_ast_spec.md";

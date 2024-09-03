@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.ext.gfm.strikethrough;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
@@ -11,13 +13,10 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import java.util.Collections;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
-
-import java.util.Collections;
-
-import static org.junit.Assert.assertEquals;
 
 public class StrikethroughTest extends RenderingTestCase {
     final private static DataHolder OPTIONS = new MutableDataSet()

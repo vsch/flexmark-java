@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
+import static com.vladsch.flexmark.util.sequence.builder.tree.Segment.SegType.ANCHOR;
+import static com.vladsch.flexmark.util.sequence.builder.tree.Segment.SegType.BASE;
+
 import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
@@ -7,10 +10,6 @@ import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-
-import static com.vladsch.flexmark.util.sequence.builder.tree.Segment.SegType.ANCHOR;
-import static com.vladsch.flexmark.util.sequence.builder.tree.Segment.SegType.BASE;
 
 /**
  * Binary search tree of sequence segments

@@ -17,11 +17,10 @@ import com.vladsch.flexmark.util.misc.Extension;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedBasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Parses input text to a tree of nodes.

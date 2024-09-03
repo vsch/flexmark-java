@@ -7,10 +7,9 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
-
-import java.util.List;
 
 final public class ComboMarkdownCompatibilitySpecTest extends CoreRendererSpecTest {
     final private static String SPEC_RESOURCE = "/core_markdown_compatibility_spec.md";

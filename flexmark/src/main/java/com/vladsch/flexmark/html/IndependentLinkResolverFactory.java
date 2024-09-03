@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.html;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Set;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class IndependentLinkResolverFactory implements LinkResolverFactory {
     @Nullable

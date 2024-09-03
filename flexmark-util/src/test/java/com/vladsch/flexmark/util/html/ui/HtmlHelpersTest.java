@@ -15,9 +15,9 @@
 
 package com.vladsch.flexmark.util.html.ui;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class HtmlHelpersTest {
     @Test

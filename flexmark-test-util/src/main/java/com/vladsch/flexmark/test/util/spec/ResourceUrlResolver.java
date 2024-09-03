@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.test.util.spec;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Used to resolve test resource URL from copy in test location to URL of source file

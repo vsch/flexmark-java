@@ -2,6 +2,8 @@ package com.vladsch.flexmark.integration.test;
 
 import com.vladsch.flexmark.test.specs.TestSpecLocator;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
+import java.util.Collections;
+import java.util.List;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
@@ -11,9 +13,6 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.pegdown.Extensions;
 import org.pegdown.PegDownProcessor;
-
-import java.util.Collections;
-import java.util.List;
 
 @State(Scope.Benchmark)
 public class PegDownBenchmark {

@@ -11,10 +11,9 @@ import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.misc.Utils;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 public class MergeLinkResolver implements LinkResolver {
     final private String docRelativeURL;
@@ -145,4 +144,3 @@ public class MergeLinkResolver implements LinkResolver {
         }
     }
 }
-

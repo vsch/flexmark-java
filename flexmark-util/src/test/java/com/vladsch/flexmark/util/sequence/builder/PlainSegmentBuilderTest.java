@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
-
-import java.util.List;
-
 import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
 import static org.junit.Assert.assertEquals;
+
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
+import java.util.List;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 public class PlainSegmentBuilderTest {
     @Test
@@ -1050,4 +1049,3 @@ public class PlainSegmentBuilderTest {
                 "", segments.toString(sequence));
     }
 }
-

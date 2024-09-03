@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
+import static com.vladsch.flexmark.util.misc.CharPredicate.*;
+
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.misc.CharPredicate;
@@ -11,15 +13,12 @@ import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static com.vladsch.flexmark.util.misc.CharPredicate.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class MarkdownParagraph {
     final private static char MARKDOWN_START_LINE_CHAR = SequenceUtils.LS;             // https://www.fileformat.info/info/unicode/char/2028/index.htm LINE_SEPARATOR this one is not preserved but will cause a line break if not already at beginning of line
@@ -851,4 +850,3 @@ public class MarkdownParagraph {
         }
     }
 }
-

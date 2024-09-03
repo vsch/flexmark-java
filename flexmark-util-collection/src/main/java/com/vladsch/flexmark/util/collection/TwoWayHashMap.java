@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.collection;
 
+import java.util.HashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.HashMap;
 
 public class TwoWayHashMap<F, S> {
     private @NotNull HashMap<F, S> fToSMap = new HashMap<>();

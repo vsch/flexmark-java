@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.data;
 
 import com.vladsch.flexmark.util.misc.Extension;
-
 import java.util.Collection;
 
 public class SharedDataKeys {

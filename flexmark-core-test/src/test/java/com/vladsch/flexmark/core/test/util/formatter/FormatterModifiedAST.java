@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.core.test.util.formatter;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.ast.Image;
 import com.vladsch.flexmark.ast.InlineLinkNode;
 import com.vladsch.flexmark.ast.Link;
@@ -15,8 +17,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class FormatterModifiedAST {
     final static DataHolder OPTIONS = new MutableDataSet();

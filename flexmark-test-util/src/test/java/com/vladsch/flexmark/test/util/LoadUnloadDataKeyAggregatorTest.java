@@ -1,15 +1,14 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.test.util.spec.SpecExample;
-import com.vladsch.flexmark.util.data.*;
-import com.vladsch.flexmark.util.misc.Extension;
-import org.junit.Test;
-
-import java.util.*;
-
 import static com.vladsch.flexmark.test.util.LoadUnloadDataKeyAggregator.LOAD_EXTENSIONS;
 import static com.vladsch.flexmark.test.util.LoadUnloadDataKeyAggregator.UNLOAD_EXTENSIONS;
 import static org.junit.Assert.assertEquals;
+
+import com.vladsch.flexmark.test.util.spec.SpecExample;
+import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.misc.Extension;
+import java.util.*;
+import org.junit.Test;
 
 public class LoadUnloadDataKeyAggregatorTest {
     final public static DataKey<Collection<Class<? extends Extension>>> LOAD_EXTENSION_CLASSES = new DataKey<>("LOAD_EXTENSION_CLASSES", Collections.emptyList());

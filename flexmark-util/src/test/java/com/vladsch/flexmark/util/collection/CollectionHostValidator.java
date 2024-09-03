@@ -2,10 +2,9 @@ package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.misc.Paired;
+import java.util.ArrayList;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
-
-import java.util.ArrayList;
 
 public class CollectionHostValidator<T> {
     final private ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();

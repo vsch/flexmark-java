@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.BitSet;
 import java.util.Objects;
 import java.util.function.IntPredicate;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Interface for set of characters to use for inclusion exclusion tests

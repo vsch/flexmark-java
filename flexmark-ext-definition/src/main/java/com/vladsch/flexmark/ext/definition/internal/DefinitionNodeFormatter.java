@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
+import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
+
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
@@ -10,14 +12,11 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class DefinitionNodeFormatter implements NodeFormatter {
     final private DefinitionFormatOptions options;

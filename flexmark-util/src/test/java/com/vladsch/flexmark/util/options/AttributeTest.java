@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.options;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.AttributeImpl;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class AttributeTest {
     @Test

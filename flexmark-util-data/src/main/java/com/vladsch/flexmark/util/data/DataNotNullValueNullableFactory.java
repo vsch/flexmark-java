@@ -7,4 +7,3 @@ public interface DataNotNullValueNullableFactory<T> extends DataNotNullValueFact
     @Override
     @NotNull T apply(@Nullable DataHolder dataHolder);
 }
-

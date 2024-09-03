@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.function.BiFunction;
+import org.jetbrains.annotations.Nullable;
 
 public class MaxAggregator implements BiFunction<Integer, Integer, Integer> {
     final public static MaxAggregator INSTANCE = new MaxAggregator();

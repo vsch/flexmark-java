@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.dependency;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Set;
+import org.jetbrains.annotations.Nullable;
 
 public interface Dependent {
     /**

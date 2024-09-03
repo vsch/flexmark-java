@@ -51,4 +51,3 @@ public class MutableListOptions extends ListOptions {
     public @NotNull MutableListOptions setItemMarkerSuffixes(@NotNull String[] itemMarkerSuffixes) { this.itemMarkerSuffixes = itemMarkerSuffixes; return this; }
     // @formatter:on
 }
-

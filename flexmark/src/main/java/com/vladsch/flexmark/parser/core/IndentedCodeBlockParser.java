@@ -10,10 +10,9 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.collection.iteration.Reverse;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
 
 public class IndentedCodeBlockParser extends AbstractBlockParser {
     final private IndentedCodeBlock block = new IndentedCodeBlock();
@@ -129,4 +128,3 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
         }
     }
 }
-

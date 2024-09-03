@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.collection.iteration.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Array;
 import java.util.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class OrderedSet<E> implements Set<E>, Iterable<E> {
     final private @NotNull HashMap<E, Integer> keyMap;

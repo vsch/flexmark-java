@@ -3,9 +3,8 @@ package com.vladsch.flexmark.util.ast;
 import com.vladsch.flexmark.util.collection.CopyOnWriteRef;
 import com.vladsch.flexmark.util.collection.OrderedMap;
 import com.vladsch.flexmark.util.collection.OrderedSet;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
+import org.jetbrains.annotations.NotNull;
 
 public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracker {
     final private OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;

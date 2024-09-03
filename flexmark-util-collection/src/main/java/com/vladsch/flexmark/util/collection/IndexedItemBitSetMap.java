@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.BitSet;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
 
 public class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet, M> {
     final private @NotNull Function<M, K> computable;

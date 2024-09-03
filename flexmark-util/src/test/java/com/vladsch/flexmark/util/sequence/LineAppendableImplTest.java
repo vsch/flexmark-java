@@ -1,15 +1,14 @@
 package com.vladsch.flexmark.util.sequence;
 
+import static org.junit.Assert.*;
+
 import com.vladsch.flexmark.util.ExceptionMatcher;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
+import java.util.ArrayList;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 public class LineAppendableImplTest {
     @Rule
@@ -2146,4 +2145,3 @@ public class LineAppendableImplTest {
         assertEquals("⟦⟧> ⟦[simLink spaced](simLink.md)⟧", actualSpcBuilder.toStringWithRanges(true));
     }
 }
-

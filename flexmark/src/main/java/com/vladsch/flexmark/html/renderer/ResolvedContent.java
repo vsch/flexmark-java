@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.html.renderer;
 
+import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
 
 public class ResolvedContent {
     final private @NotNull ResolvedLink resolvedLink;

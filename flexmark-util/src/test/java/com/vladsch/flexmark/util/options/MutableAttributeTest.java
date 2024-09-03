@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.options;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.util.html.MutableAttribute;
 import com.vladsch.flexmark.util.html.MutableAttributeImpl;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class MutableAttributeTest {
     @Test

@@ -7,4 +7,3 @@
  * </ul>
  */
 package com.vladsch.flexmark;
-

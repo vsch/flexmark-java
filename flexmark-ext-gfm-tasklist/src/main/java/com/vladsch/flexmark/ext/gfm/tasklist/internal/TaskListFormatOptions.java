@@ -6,9 +6,8 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 
 public class TaskListFormatOptions implements MutableDataSetter {
     final public TaskListItemCase taskListItemCase;

@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Set;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A renderer for a set of node types.

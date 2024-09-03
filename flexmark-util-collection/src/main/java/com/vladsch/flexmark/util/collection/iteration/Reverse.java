@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class Reverse<T> implements ReversibleIterable<T> {
     final private @NotNull List<T> list;

@@ -9,10 +9,9 @@ import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.visitor.AstNode;
+import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
 
 public abstract class Node {
     final public static BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;

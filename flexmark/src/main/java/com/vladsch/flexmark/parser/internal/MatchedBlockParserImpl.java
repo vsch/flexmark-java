@@ -4,7 +4,6 @@ import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.MatchedBlockParser;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-
 import java.util.List;
 
 public class MatchedBlockParserImpl implements MatchedBlockParser {

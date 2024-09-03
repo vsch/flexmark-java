@@ -1,22 +1,21 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
-import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.BiConsumer;
-
 import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
 import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.*;
 import static org.junit.Assert.assertEquals;
+
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequenceFull;
+import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder;
+import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiConsumer;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 public class SegmentTreeTest {
     static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {

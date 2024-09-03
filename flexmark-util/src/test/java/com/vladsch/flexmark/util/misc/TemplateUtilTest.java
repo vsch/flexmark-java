@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.util.regex.Pattern;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class TemplateUtilTest {
     @Test

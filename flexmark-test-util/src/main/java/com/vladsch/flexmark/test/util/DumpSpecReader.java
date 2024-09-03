@@ -4,10 +4,9 @@ import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.data.DataHolder;
+import java.io.InputStream;
 import org.jetbrains.annotations.NotNull;
 import org.junit.AssumptionViolatedException;
-
-import java.io.InputStream;
 
 public class DumpSpecReader extends SpecReader {
     protected final StringBuilder sb = new StringBuilder();

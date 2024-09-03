@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.lang.reflect.Array;
 import java.util.BitSet;
 import java.util.Objects;
 import java.util.function.Predicate;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ArrayUtils {
     public static <T> boolean contained(T value, T[] array) {

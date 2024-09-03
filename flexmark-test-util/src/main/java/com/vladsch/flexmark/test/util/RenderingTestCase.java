@@ -1,19 +1,18 @@
 package com.vladsch.flexmark.test.util;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.misc.Extension;
+import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.ComparisonFailure;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
-
-import java.util.Collection;
-
-import static org.junit.Assert.assertEquals;
 
 public abstract class RenderingTestCase implements SpecExampleProcessor {
     final public static DataKey<Boolean> IGNORE = TestUtils.IGNORE;

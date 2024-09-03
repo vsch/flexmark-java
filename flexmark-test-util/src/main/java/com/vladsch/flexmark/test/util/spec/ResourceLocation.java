@@ -2,10 +2,9 @@ package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.TestUtils;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import org.jetbrains.annotations.NotNull;
 
 public class ResourceLocation {
     final public static ResourceLocation NULL = of(Object.class, "", "");

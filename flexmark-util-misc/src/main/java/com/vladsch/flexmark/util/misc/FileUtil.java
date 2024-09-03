@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import static com.vladsch.flexmark.util.misc.Utils.suffixWith;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-
-import static com.vladsch.flexmark.util.misc.Utils.suffixWith;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class FileUtil {
     public static boolean isChildOf(File receiver, File ancestor) {

@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A node that uses delimiters in the source form (e.g. <code>*bold*</code>).

@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
 import com.vladsch.flexmark.util.misc.MinMaxAvgLong;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 public class SegmentedSequenceStats {
     public static class StatsEntry implements Comparable<StatsEntry> {

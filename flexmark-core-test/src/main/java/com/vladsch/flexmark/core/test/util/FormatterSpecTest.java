@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.core.test.util;
 
+import static com.vladsch.flexmark.formatter.Formatter.RESTORE_TRACKED_SPACES;
+
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
@@ -12,12 +14,9 @@ import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
-
-import static com.vladsch.flexmark.formatter.Formatter.RESTORE_TRACKED_SPACES;
 
 public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase {
     public FormatterSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {

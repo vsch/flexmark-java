@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.core.test.util.html;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.html.EmbeddedAttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -14,13 +16,10 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import java.util.Collections;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Collections;
-
-import static org.junit.Assert.assertEquals;
 
 final public class HtmlEmbeddedAttributeTest {
     MutableDataSet OPTIONS;

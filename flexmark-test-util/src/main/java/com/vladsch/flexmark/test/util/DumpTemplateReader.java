@@ -2,7 +2,6 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.test.util.spec.TemplateEntry;
 import com.vladsch.flexmark.test.util.spec.TemplateReader;
-
 import java.io.InputStream;
 
 class DumpTemplateReader extends TemplateReader {

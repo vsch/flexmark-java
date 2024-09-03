@@ -4,9 +4,8 @@ import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.internal.InlineParserImpl;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Set;
+import org.jetbrains.annotations.Nullable;
 
 public class ReferencePreProcessorFactory implements ParagraphPreProcessorFactory {
     @Override

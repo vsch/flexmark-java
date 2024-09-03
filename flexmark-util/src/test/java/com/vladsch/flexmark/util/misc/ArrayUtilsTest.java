@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.junit.Test;
+import static com.vladsch.flexmark.util.misc.ArrayUtils.*;
+import static org.junit.Assert.*;
 
 import java.util.BitSet;
 import java.util.Objects;
-
-import static com.vladsch.flexmark.util.misc.ArrayUtils.*;
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class ArrayUtilsTest {
     @Test

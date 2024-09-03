@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.visitor.AstActionHandler;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collection;
+import org.jetbrains.annotations.NotNull;
 
 // @formatter:off
 

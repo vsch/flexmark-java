@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.ast;
 
+import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
+
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
@@ -8,8 +10,6 @@ import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
-
-import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
 public class TextBase extends Node implements TextContainer {
     public TextBase() {

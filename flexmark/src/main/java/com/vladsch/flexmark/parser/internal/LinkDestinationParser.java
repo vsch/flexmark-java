@@ -3,7 +3,6 @@ package com.vladsch.flexmark.parser.internal;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
-
 import java.util.BitSet;
 
 /*

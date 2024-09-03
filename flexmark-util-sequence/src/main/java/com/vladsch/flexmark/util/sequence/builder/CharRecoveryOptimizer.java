@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
+
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
-
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
 
 public class CharRecoveryOptimizer implements SegmentOptimizer {
     final private PositionAnchor anchor;

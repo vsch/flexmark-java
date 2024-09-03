@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
     protected final HashMap<Function<P, I>, I> itemMap;

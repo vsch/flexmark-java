@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.function.BiConsumer;
+import org.jetbrains.annotations.NotNull;
 
 public class TextCollectingVisitor {
     final private NodeVisitor myVisitor;

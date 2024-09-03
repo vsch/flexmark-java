@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.util.function.BiFunction;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class BoundedMaxAggregatorTest {
     private Integer reduce(BiFunction<Integer, Integer, Integer> aggregator, Integer... items) {

@@ -10,11 +10,10 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.HashSet;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
     public TaskListItemBlockPreProcessor(DataHolder options) {

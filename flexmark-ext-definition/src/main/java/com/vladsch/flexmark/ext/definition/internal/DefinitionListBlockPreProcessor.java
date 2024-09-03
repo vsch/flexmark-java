@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
+import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
+
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.parser.block.BlockPreProcessor;
@@ -8,13 +10,10 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.HashSet;
 import java.util.Set;
-
-import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
     final private DefinitionOptions options;

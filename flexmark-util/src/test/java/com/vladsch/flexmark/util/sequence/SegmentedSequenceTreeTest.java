@@ -1,17 +1,16 @@
 package com.vladsch.flexmark.util.sequence;
 
+import static org.junit.Assert.*;
+
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 public class SegmentedSequenceTreeTest {
     // TEST: need to complete tests here

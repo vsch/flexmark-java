@@ -1,15 +1,14 @@
 package com.vladsch.flexmark.util.misc;
 
+import static com.vladsch.flexmark.util.misc.BitFieldSetTest.BitFields.FIELD_8;
+import static org.junit.Assert.*;
+
 import com.vladsch.flexmark.util.ExceptionMatcher;
+import java.util.ArrayList;
+import java.util.Iterator;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import static com.vladsch.flexmark.util.misc.BitFieldSetTest.BitFields.FIELD_8;
-import static org.junit.Assert.*;
 
 public class BitFieldSetTest {
     @Rule

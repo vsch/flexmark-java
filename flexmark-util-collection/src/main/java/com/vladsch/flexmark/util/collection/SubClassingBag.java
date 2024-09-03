@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.util.collection;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SubClassingBag<T> {
     final private @NotNull ClassificationBag<Class<?>, T> items;

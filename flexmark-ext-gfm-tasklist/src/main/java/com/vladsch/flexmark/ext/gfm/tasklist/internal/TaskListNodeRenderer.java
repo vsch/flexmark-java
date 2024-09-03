@@ -7,10 +7,9 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashSet;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
 
 public class TaskListNodeRenderer implements NodeRenderer {
     final public static AttributablePart TASK_ITEM_PARAGRAPH = new AttributablePart("TASK_ITEM_PARAGRAPH");

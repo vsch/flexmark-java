@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;

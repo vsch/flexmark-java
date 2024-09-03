@@ -5,10 +5,9 @@ import com.vladsch.flexmark.formatter.MergeContextConsumer;
 import com.vladsch.flexmark.formatter.TranslationContext;
 import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.util.ast.Document;
+import java.util.HashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.HashMap;
 
 public class MergeContextImpl implements MergeContext {
     private Document[] myDocuments;

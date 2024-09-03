@@ -8,11 +8,10 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.misc.Utils;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
-
-import java.util.*;
 
 public class ComboTableSpecTest extends RendererSpecTest {
     static final String SPEC_RESOURCE = "/ext_tables_ast_spec.md";

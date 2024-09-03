@@ -5,9 +5,8 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.BlockQuoteLike;
 import com.vladsch.flexmark.util.ast.KeepTrailingBlankLineContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockQuote extends Block implements BlockQuoteLike, KeepTrailingBlankLineContainer {
     private BasedSequence openingMarker = BasedSequence.NULL;

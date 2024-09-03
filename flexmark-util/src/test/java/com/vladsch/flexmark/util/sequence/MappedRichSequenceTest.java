@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.util.sequence;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+
 import com.vladsch.flexmark.util.sequence.mappers.ChangeCase;
 import com.vladsch.flexmark.util.sequence.mappers.NullEncoder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 
 public class MappedRichSequenceTest {
     @Test

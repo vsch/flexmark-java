@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.dependency.DependentItem;
 import com.vladsch.flexmark.util.dependency.DependentItemMap;
-
 import java.util.*;
 
 public class PostProcessorManager {

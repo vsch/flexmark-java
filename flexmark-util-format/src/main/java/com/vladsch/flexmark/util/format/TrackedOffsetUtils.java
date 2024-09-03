@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.util.format;
 
+import static com.vladsch.flexmark.util.misc.CharPredicate.WHITESPACE;
+
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.LineInfo;
@@ -7,10 +9,7 @@ import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
-
 import java.util.List;
-
-import static com.vladsch.flexmark.util.misc.CharPredicate.WHITESPACE;
 
 public class TrackedOffsetUtils {
     /**

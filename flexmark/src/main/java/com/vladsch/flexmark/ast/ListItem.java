@@ -7,9 +7,8 @@ import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class ListItem extends Block implements ParagraphItemContainer, BlankLineContainer, ParagraphContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;

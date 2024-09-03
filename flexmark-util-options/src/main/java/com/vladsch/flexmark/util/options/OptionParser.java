@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.options;
 
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-
 import java.util.List;
 
 public interface OptionParser<T> {

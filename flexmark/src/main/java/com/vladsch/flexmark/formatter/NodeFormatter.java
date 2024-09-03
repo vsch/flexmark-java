@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Set;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A renderer for a set of node types.

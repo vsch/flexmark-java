@@ -1,5 +1,10 @@
 package com.vladsch.flexmark.util.sequence;
 
+import static com.vladsch.flexmark.util.misc.Utils.*;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
+import static java.lang.Integer.MAX_VALUE;
+
 import com.vladsch.flexmark.util.collection.iteration.Indexed;
 import com.vladsch.flexmark.util.collection.iteration.IndexedItemIterable;
 import com.vladsch.flexmark.util.collection.iteration.IndexedItemIterator;
@@ -8,18 +13,12 @@ import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.StringSequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
-
-import static com.vladsch.flexmark.util.misc.Utils.*;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
-import static java.lang.Integer.MAX_VALUE;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class LineAppendableImpl implements LineAppendable {
     final private static char EOL = '\n';

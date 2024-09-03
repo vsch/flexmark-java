@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser.internal;
 
 import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
-
 import java.util.List;
 
 public class LinkRefProcessorData {

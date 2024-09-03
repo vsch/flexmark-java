@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.formatter;
 
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
+
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -7,13 +10,9 @@ import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
-
-import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
-import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B extends Node & ReferenceNode<R, B, N>, N extends Node & ReferencingNode<R, B>> implements PhasedNodeFormatter {
     final public static HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<>(Arrays.asList(

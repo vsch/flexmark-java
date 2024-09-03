@@ -3,9 +3,8 @@ package com.vladsch.flexmark.test.util;
 import com.vladsch.flexmark.test.util.spec.TemplateEntry;
 import com.vladsch.flexmark.test.util.spec.TemplateReader;
 import com.vladsch.flexmark.test.util.spec.TemplateReaderFactory;
-import org.junit.Test;
-
 import java.io.InputStream;
+import org.junit.Test;
 
 public abstract class TemplateTestCase implements TemplateReaderFactory {
     final public static String SPEC_RESOURCE = "/template.txt";

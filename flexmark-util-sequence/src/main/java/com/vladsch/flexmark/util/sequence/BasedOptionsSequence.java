@@ -3,10 +3,9 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
+import java.util.stream.IntStream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.stream.IntStream;
 
 /**
  * A BasedSequence with offset tracking that follows editing operations and subSequence() chopping as best as it can

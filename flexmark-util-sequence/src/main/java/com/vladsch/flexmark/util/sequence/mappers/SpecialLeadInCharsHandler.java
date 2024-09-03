@@ -3,10 +3,9 @@ package com.vladsch.flexmark.util.sequence.mappers;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Consumer;
 
 public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
     final CharPredicate predicate;

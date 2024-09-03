@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.data.DataKey;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.*;
 import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
     protected final ArrayList<T> nodeList = new ArrayList<>();

@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.util.misc;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.AbstractSet;
@@ -9,6 +7,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Re-Implementation of RegularEnumSet class for EnumSet, for "regular sized" enum types

@@ -2,10 +2,9 @@ package com.vladsch.flexmark.test.util;
 
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.misc.Extension;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
 
 public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
     final public static DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS = new DataKey<>("UNLOAD_EXTENSIONS", Collections.emptyList());

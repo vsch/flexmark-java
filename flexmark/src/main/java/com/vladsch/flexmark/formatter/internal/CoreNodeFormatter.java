@@ -1,9 +1,16 @@
 package com.vladsch.flexmark.formatter.internal;
 
+import static com.vladsch.flexmark.formatter.FormatterUtils.LIST_ITEM_SPACING;
+import static com.vladsch.flexmark.formatter.FormatterUtils.isLastOfItem;
+import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
+import static com.vladsch.flexmark.formatter.RenderPurpose.*;
+import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
+import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
+
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
-import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
@@ -25,17 +32,9 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
-
-import static com.vladsch.flexmark.formatter.FormatterUtils.LIST_ITEM_SPACING;
-import static com.vladsch.flexmark.formatter.FormatterUtils.isLastOfItem;
-import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
-import static com.vladsch.flexmark.formatter.RenderPurpose.*;
-import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
-import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
     /**

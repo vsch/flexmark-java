@@ -2,10 +2,9 @@ package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.Dependent;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 /**
  * Factory for instantiating new node renderers when rendering is done.

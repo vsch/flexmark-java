@@ -18,7 +18,6 @@
 package com.vladsch.flexmark.util.html.ui;
 
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Locale;

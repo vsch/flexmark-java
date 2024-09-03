@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.misc.CharPredicate;
-import org.junit.Test;
-
 import static com.vladsch.flexmark.util.misc.CharPredicate.*;
 import static org.junit.Assert.*;
+
+import com.vladsch.flexmark.util.misc.CharPredicate;
+import org.junit.Test;
 
 public class CharPredicateTest {
     @Test

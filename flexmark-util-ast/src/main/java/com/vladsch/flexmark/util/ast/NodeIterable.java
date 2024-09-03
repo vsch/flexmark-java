@@ -3,9 +3,8 @@ package com.vladsch.flexmark.util.ast;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
 
 public class NodeIterable implements ReversiblePeekingIterable<Node> {
     final Node firstNode;

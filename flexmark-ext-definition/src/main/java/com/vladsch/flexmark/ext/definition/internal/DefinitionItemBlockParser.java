@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
+import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
+
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
@@ -18,12 +20,9 @@ import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
-
-import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
 public class DefinitionItemBlockParser extends AbstractBlockParser {
     final private DefinitionItem block;

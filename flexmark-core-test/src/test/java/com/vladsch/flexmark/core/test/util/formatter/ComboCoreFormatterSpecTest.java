@@ -2,10 +2,9 @@ package com.vladsch.flexmark.core.test.util.formatter;
 
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
-
-import java.util.List;
 
 public class ComboCoreFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
     final private static String SPEC_RESOURCE = "/core_formatter_spec.md";

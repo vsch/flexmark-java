@@ -92,4 +92,3 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
         return this;
     }
 }
-

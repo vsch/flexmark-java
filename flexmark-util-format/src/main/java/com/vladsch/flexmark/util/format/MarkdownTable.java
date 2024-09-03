@@ -1,5 +1,10 @@
 package com.vladsch.flexmark.util.format;
 
+import static com.vladsch.flexmark.util.format.TableCell.DEFAULT_CELL;
+import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
+import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
+import static com.vladsch.flexmark.util.misc.Utils.*;
+
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.collection.MaxAggregator;
@@ -9,19 +14,13 @@ import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.misc.*;
 import com.vladsch.flexmark.util.sequence.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
-
-import static com.vladsch.flexmark.util.format.TableCell.DEFAULT_CELL;
-import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
-import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
-import static com.vladsch.flexmark.util.misc.Utils.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class MarkdownTable {
     final public TableSection header;

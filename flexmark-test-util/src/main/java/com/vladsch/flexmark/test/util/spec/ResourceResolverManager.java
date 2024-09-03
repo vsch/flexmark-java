@@ -1,14 +1,13 @@
 package com.vladsch.flexmark.test.util.spec;
 
-import com.vladsch.flexmark.test.util.TestUtils;
-import org.jetbrains.annotations.NotNull;
+import static com.vladsch.flexmark.test.util.spec.ResourceUrlResolver.hasProtocol;
 
+import com.vladsch.flexmark.test.util.TestUtils;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.function.Function;
-
-import static com.vladsch.flexmark.test.util.spec.ResourceUrlResolver.hasProtocol;
+import org.jetbrains.annotations.NotNull;
 
 public class ResourceResolverManager {
     /**

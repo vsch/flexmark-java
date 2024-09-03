@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.ast.Document;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public interface TranslationHandler extends TranslationContext {
     void beginRendering(@NotNull Document node, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter out);

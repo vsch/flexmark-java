@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 // TEST: complete tests for implementation
 public class IRichSequenceBaseTest {

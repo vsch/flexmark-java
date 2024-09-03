@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.ast;
 
+import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
+
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-
-import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
 public interface DelimitedNode extends TextContainer {
     BasedSequence getOpeningMarker();

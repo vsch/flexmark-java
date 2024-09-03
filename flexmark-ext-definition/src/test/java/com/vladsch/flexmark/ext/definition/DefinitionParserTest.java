@@ -1,15 +1,14 @@
 package com.vladsch.flexmark.ext.definition;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
-import org.junit.Test;
-
 import java.util.Collections;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 final public class DefinitionParserTest {
     String escape(String input, Parser parser) {

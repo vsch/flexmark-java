@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.data;
 
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 public interface DataKeyAggregator {
     /**

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.test.util.spec;
 
+import static com.vladsch.flexmark.test.util.spec.SpecReader.State.COMMENT;
+
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.misc.Pair;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.test.util.spec.SpecReader.State.COMMENT;
+import org.jetbrains.annotations.NotNull;
 
 public class SpecReader {
     final public static String EXAMPLE_KEYWORD = "example";

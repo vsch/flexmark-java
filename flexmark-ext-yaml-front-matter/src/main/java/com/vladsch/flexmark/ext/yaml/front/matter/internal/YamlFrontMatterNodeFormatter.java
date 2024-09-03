@@ -5,12 +5,11 @@ import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
     public YamlFrontMatterNodeFormatter(DataHolder options) {

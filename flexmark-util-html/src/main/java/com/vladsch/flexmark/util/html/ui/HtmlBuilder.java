@@ -22,12 +22,11 @@ import com.vladsch.flexmark.util.html.AttributeImpl;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.HtmlAppendableBase;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.plaf.FontUIResource;
 import java.awt.Font;
 import java.util.HashMap;
+import javax.swing.plaf.FontUIResource;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
     public HtmlBuilder() {

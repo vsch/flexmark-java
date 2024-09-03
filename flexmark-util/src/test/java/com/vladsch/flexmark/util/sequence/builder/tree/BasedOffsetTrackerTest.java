@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
+import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-
-import java.util.function.Function;
-
-import static org.junit.Assert.assertEquals;
 
 public class BasedOffsetTrackerTest {
     Pair<String, Integer> getInput(String input) {

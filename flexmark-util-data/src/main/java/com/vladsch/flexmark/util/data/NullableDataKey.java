@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.data;
 
+import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Supplier;
 
 public class NullableDataKey<T> extends DataKeyBase<T> {
     /**

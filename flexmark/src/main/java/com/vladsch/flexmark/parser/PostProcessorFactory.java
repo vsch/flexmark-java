@@ -2,12 +2,11 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.dependency.Dependent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface PostProcessorFactory extends Function<Document, PostProcessor>, Dependent {
     /**

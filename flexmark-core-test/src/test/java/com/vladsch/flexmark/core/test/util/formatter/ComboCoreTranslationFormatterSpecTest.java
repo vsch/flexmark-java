@@ -9,11 +9,10 @@ import com.vladsch.flexmark.util.ast.KeepType;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.*;
-import org.jetbrains.annotations.NotNull;
-import org.junit.runners.Parameterized;
-
 import java.util.List;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+import org.junit.runners.Parameterized;
 
 public class ComboCoreTranslationFormatterSpecTest extends TranslationFormatterSpecTest {
     final private static String SPEC_RESOURCE = "/core_translation_formatter_spec.md";

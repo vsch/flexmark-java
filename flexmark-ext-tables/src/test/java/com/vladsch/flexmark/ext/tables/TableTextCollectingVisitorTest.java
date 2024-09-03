@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.ext.tables;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import org.junit.Test;
-
 import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class TableTextCollectingVisitorTest {
     @Test
@@ -122,4 +121,3 @@ public class TableTextCollectingVisitorTest {
                 "", text);
     }
 }
-

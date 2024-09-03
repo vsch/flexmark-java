@@ -3,13 +3,12 @@ package com.vladsch.flexmark.util.collection;
 import com.vladsch.flexmark.util.collection.iteration.BitSetIterable;
 import com.vladsch.flexmark.util.collection.iteration.IndexedIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ClassificationBag<K, V> {
     final private @NotNull OrderedSet<V> items;

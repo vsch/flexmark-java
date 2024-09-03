@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.data;
 
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
 
 public class DataSet implements DataHolder {
     protected final HashMap<DataKeyBase<?>, Object> dataSet;

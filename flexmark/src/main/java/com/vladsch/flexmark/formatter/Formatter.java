@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.formatter;
 
+import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT;
+
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.LinkResolver;
@@ -22,15 +24,12 @@ import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Renders a tree of nodes to Markdown.

@@ -7,13 +7,12 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.format.options.DefinitionMarker;
-import org.jetbrains.annotations.NotNull;
-import org.junit.runners.Parameterized;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+import org.junit.runners.Parameterized;
 
 public class ComboDefinitionFormatterSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_definition_formatter_spec.md";

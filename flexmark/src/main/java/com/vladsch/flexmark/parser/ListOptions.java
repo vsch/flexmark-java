@@ -5,10 +5,9 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSetter;
+import java.util.Arrays;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
 
 public class ListOptions implements MutableDataSetter {
     protected @NotNull ParserEmulationProfile myParserEmulationProfile;
@@ -656,4 +655,3 @@ public class ListOptions implements MutableDataSetter {
         return result;
     }
 }
-

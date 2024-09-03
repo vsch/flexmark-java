@@ -17,14 +17,13 @@
 
 package com.vladsch.flexmark.util.html.ui;
 
-import com.vladsch.flexmark.util.misc.Utils;
+import static com.vladsch.flexmark.util.misc.Utils.*;
 
-import javax.swing.JTextPane;
+import com.vladsch.flexmark.util.misc.Utils;
 import java.awt.Font;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.util.misc.Utils.*;
+import javax.swing.JTextPane;
 
 public class HtmlHelpers {
     public static String toHtmlError(String err, boolean withContext) {

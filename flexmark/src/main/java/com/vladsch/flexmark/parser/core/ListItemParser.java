@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.parser.core;
 
+import static com.vladsch.flexmark.parser.Parser.PARSER_EMULATION_PROFILE;
+import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
+
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
@@ -11,9 +14,6 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.misc.Utils;
-
-import static com.vladsch.flexmark.parser.Parser.PARSER_EMULATION_PROFILE;
-import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
 public class ListItemParser extends AbstractBlockParser {
     final private ListItem myBlock;

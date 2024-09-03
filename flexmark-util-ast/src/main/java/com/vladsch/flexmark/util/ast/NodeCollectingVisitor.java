@@ -2,10 +2,9 @@ package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.collection.ClassificationBag;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
 
 public class NodeCollectingVisitor {
     final public static Function<Node, Class<?>> NODE_CLASSIFIER = Node::getClass;

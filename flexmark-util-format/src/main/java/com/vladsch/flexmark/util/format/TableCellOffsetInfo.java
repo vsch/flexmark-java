@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.util.format;
 
+import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
+import static com.vladsch.flexmark.util.misc.Utils.minLimit;
+
 import com.vladsch.flexmark.util.collection.BoundedMaxAggregator;
 import com.vladsch.flexmark.util.collection.BoundedMinAggregator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
-
-import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
-import static com.vladsch.flexmark.util.misc.Utils.minLimit;
 
 public class TableCellOffsetInfo {
     // Stop points used by next/prev tab navigation

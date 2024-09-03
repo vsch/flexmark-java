@@ -1,15 +1,14 @@
 package com.vladsch.flexmark.util.ast;
 
+import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
+
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Collection;
 import java.util.Map;
-
-import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Document extends Block implements MutableDataHolder {
     final public static Document NULL = new Document(null, BasedSequence.NULL);

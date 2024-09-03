@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.parser.core;
 
+import static com.vladsch.flexmark.parser.internal.HtmlDeepParser.HtmlMatch.COMMENT;
+import static com.vladsch.flexmark.parser.internal.HtmlDeepParser.HtmlMatch.OPEN_TAG;
+
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.Parser;
@@ -9,17 +12,13 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.parser.internal.HtmlDeepParser.HtmlMatch.COMMENT;
-import static com.vladsch.flexmark.parser.internal.HtmlDeepParser.HtmlMatch.OPEN_TAG;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class HtmlBlockParser extends AbstractBlockParser {
     final public static String HTML_COMMENT_OPEN = "<!--";

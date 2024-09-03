@@ -2,9 +2,8 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Processing of elements which are based on a link ref: [] or ![]

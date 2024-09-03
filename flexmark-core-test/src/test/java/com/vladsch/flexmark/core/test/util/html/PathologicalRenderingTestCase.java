@@ -10,6 +10,7 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
+import java.util.concurrent.TimeUnit;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Rule;
@@ -17,8 +18,6 @@ import org.junit.Test;
 import org.junit.rules.Stopwatch;
 import org.junit.rules.Timeout;
 import org.junit.runner.Description;
-
-import java.util.concurrent.TimeUnit;
 
 public abstract class PathologicalRenderingTestCase extends RenderingTestCase {
     final private DataHolder OPTIONS;

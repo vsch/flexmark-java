@@ -3,10 +3,9 @@ package com.vladsch.flexmark.parser.block;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
+import java.util.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
 
 public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     final private HashMap<Class<?>, Set<Class<?>>> NODE_MAP = new HashMap<>();

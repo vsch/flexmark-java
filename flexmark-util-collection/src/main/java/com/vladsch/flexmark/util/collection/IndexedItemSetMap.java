@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.collection;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 
 public interface IndexedItemSetMap<M, S, K> extends Map<M, S> {
     @NotNull M mapKey(@NotNull K key);

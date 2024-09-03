@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.core.test.util.formatter;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class MergeFormatterCoreTest {
     private static DataHolder OPTIONS = new MutableDataSet()

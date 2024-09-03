@@ -6,11 +6,10 @@ import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.LineAppendableImpl;
 import com.vladsch.flexmark.util.sequence.LineInfo;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.IOException;
 import java.util.Iterator;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, N, C extends NodeContext<N, C>> implements LineAppendable {
     protected final LineAppendableImpl appendable;
@@ -130,4 +129,3 @@ public abstract class MarkdownWriterBase<T extends MarkdownWriterBase<T, N, C>, 
     @NotNull @Override public T unIndentNoEol()                                                                                 { appendable.unIndentNoEol();  return (T)this; }
     // @formatter:on
 }
-

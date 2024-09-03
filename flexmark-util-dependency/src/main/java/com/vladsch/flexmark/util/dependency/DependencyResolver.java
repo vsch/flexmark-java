@@ -2,11 +2,10 @@ package com.vladsch.flexmark.util.dependency;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
 import com.vladsch.flexmark.util.misc.Ref;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.*;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class DependencyResolver {
     public static <D extends Dependent> @NotNull List<D> resolveFlatDependencies(@NotNull List<D> dependentsList, @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter, @Nullable Function<? super D, Class<?>> classExtractor) {

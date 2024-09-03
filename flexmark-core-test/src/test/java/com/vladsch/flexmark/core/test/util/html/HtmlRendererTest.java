@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.core.test.util.html;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
@@ -9,14 +11,11 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
+import java.util.HashSet;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
 
 final public class HtmlRendererTest {
     @Test

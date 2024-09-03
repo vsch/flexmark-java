@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.util.format;
 
+import static com.vladsch.flexmark.util.misc.Utils.*;
+
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
-
-import static com.vladsch.flexmark.util.misc.Utils.*;
 
 public class TableCell {
     final public static TableCell NULL = new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);

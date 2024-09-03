@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.ast.BlockTracker;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-
 import java.util.List;
 
 /**
@@ -139,4 +138,3 @@ public interface ParserState extends BlockTracker, BlockParserTracker {
      */
     List<BasedSequence> getLineSegments();
 }
-

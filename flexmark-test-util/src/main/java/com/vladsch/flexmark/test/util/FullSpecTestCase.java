@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.test.util;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.test.util.spec.ResourceLocation;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public abstract class FullSpecTestCase extends RenderingTestCase implements SpecExampleProcessor {
     @NotNull

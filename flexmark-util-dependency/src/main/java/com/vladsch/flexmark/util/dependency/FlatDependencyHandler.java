@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.dependency;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @deprecated use {@link DependencyResolver#resolveFlatDependencies(List, Function, Function)} use null for functions if no need for sort or class extractor

@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.util.collection;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.Map;
 
 public class OrderedMapTest {
     @Rule

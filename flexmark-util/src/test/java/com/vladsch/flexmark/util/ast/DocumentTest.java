@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.ast;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class DocumentTest {
     @Test

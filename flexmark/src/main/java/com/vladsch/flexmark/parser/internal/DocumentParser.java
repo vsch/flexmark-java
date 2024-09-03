@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.parser.internal;
 
+import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
+import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
+
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.ClassifyingBlockTracker;
 import com.vladsch.flexmark.ast.util.Parsing;
@@ -18,15 +21,11 @@ import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
-
-import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
-import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
+import org.jetbrains.annotations.NotNull;
 
 public class DocumentParser implements ParserState {
     final public static InlineParserFactory INLINE_PARSER_FACTORY = CommonmarkInlineParser::new;

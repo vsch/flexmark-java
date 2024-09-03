@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
+import org.jetbrains.annotations.Nullable;
 
 public class NodeIterator implements ReversiblePeekingIterator<Node> {
     final Node firstNode;

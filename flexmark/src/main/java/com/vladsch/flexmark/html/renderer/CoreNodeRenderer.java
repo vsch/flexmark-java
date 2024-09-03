@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
+import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
+
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.LineCollectingVisitor;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
@@ -19,16 +21,13 @@ import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.Range;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).

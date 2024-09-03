@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.BitSet;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
 
 public class BitSetIterator implements ReversibleIterator<Integer> {
     final private @NotNull BitSet bitSet;

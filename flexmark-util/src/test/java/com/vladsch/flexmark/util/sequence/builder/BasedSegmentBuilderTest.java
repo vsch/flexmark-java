@@ -1,17 +1,16 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.PositionAnchor;
-import com.vladsch.flexmark.util.sequence.Range;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
-
-import java.util.List;
-
 import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder.F_TRACK_FIRST256;
 import static org.junit.Assert.assertEquals;
+
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
+import com.vladsch.flexmark.util.sequence.Range;
+import java.util.List;
+import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 public class BasedSegmentBuilderTest {
     @Test
@@ -1581,4 +1580,3 @@ public class BasedSegmentBuilderTest {
         assertEquals("^123456789", segments.toString(sequence));
     }
 }
-

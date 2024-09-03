@@ -4,11 +4,10 @@ import com.vladsch.flexmark.core.test.util.FormatterSpecTest;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
     final private static Map<String, DataHolder> optionsMap = new HashMap<>();

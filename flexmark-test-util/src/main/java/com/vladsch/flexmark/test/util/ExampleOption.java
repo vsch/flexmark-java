@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.test.util;
 
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import static com.vladsch.flexmark.test.util.TestUtils.*;
 
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.HashMap;
 import java.util.HashSet;
-
-import static com.vladsch.flexmark.test.util.TestUtils.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ExampleOption {
     final private static HashSet<String> BUILT_IN_OPTIONS_SET = new HashSet<>();

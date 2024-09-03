@@ -1,14 +1,13 @@
 package com.vladsch.flexmark.util.format;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
-import org.junit.Test;
-
 import java.util.Collections;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class MarkdownParagraphTest {
     @Test

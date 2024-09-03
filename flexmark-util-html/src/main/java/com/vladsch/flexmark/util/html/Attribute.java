@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.misc.Immutable;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

@@ -2,9 +2,8 @@ package com.vladsch.flexmark.util.dependency;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
 import com.vladsch.flexmark.util.misc.Ref;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @deprecated use DependencyResolver instead

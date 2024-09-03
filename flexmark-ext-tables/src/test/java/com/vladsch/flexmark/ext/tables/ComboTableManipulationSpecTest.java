@@ -10,13 +10,12 @@ import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import org.jetbrains.annotations.NotNull;
-import org.junit.runners.Parameterized;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+import org.junit.runners.Parameterized;
 
 public class ComboTableManipulationSpecTest extends FormatterSpecTest {
     final private static String SPEC_RESOURCE = "/ext_tables_manipulation_spec.md";

@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.core.test.util.formatter;
 
+import static com.vladsch.flexmark.formatter.Formatter.*;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.EOL;
+
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
@@ -18,17 +21,13 @@ import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.junit.runners.Parameterized;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.vladsch.flexmark.formatter.Formatter.*;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.EOL;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.junit.runners.Parameterized;
 
 public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
     final private static String SPEC_RESOURCE = "/core_paragraph_formatter_spec.md";

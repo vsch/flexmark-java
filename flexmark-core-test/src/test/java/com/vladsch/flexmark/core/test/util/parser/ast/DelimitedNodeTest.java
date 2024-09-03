@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.core.test.util.parser.ast;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.ast.Emphasis;
 import com.vladsch.flexmark.ast.StrongEmphasis;
 import com.vladsch.flexmark.parser.Parser;
@@ -7,12 +9,9 @@ import com.vladsch.flexmark.util.ast.DelimitedNode;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 final public class DelimitedNodeTest {
     @Test

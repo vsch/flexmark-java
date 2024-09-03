@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
+import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
+
 import com.vladsch.flexmark.util.sequence.Range;
 import org.jetbrains.annotations.NotNull;
-
-import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 
 /**
  * Representation of a segment part in a segment list for a sequence

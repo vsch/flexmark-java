@@ -39,7 +39,8 @@
 
 package com.vladsch.flexmark.util.misc;
 
-import javax.imageio.ImageIO;
+import static com.vladsch.flexmark.util.misc.Utils.minLimit;
+
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -52,8 +53,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.util.misc.Utils.minLimit;
+import javax.imageio.ImageIO;
 
 public class ImageUtils {
     public static Color TRANSPARENT = new Color(0, 0, 0, 0);

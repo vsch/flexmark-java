@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util.ast;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
 
 public class NodeClassifier implements Function<Node, Class<?>> {
     final public static NodeClassifier INSTANCE = new NodeClassifier();

@@ -1,18 +1,17 @@
 package com.vladsch.flexmark.integration.test;
 
+import static org.junit.Assert.assertNotNull;
+
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.specs.TestSpecLocator;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Node;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Tests various substrings of the spec examples to check for out of bounds exceptions.

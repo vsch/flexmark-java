@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.ast;
 
+import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
+
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
@@ -8,11 +10,8 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
-
-import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
+import org.jetbrains.annotations.NotNull;
 
 public class IndentedCodeBlock extends Block implements TextContainer {
     @NotNull

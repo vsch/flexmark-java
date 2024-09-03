@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import org.junit.Test;
-
 import static junit.framework.TestCase.assertEquals;
+
+import org.junit.Test;
 
 final public class PrefixedSubSequenceTest {
     final private BasedSequence sequence = BasedSequence.of("abcdefghi").subSequence(3, 6);

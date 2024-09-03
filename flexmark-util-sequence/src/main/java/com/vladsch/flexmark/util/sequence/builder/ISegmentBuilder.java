@@ -2,10 +2,9 @@ package com.vladsch.flexmark.util.sequence.builder;
 
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.Range;
+import java.util.Iterator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Iterator;
 
 public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<Object> {
     enum Options {

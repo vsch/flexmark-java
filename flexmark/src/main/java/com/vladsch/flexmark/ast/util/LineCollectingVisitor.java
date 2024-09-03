@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.sequence.Range;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -2,14 +2,13 @@ package com.vladsch.flexmark.test.util.spec;
 
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.misc.Utils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SpecExample {
     final public static SpecExample NULL = new SpecExample(ResourceLocation.NULL, 0, null, "", 0, "", "", null, null, true);

@@ -3,10 +3,9 @@ package com.vladsch.flexmark.test.util.spec;
 import com.vladsch.flexmark.util.ast.IRender;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
+import java.io.IOException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.IOException;
 
 public abstract class IRenderBase implements IRender {
     public static final IRender NULL_RENDERER = new IRenderBase() {

@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.function.BiFunction;
+import org.jetbrains.annotations.NotNull;
 
 public interface SegmentOptimizer extends BiFunction<CharSequence, Object[], Object[]> {
     /**

@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.ast.BlockNodeVisitor;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
-
 import java.util.ArrayList;
 
 public class HeadingCollectingVisitor {

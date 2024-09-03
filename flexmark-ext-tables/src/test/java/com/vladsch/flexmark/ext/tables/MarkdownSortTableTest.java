@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.ext.tables;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import com.vladsch.flexmark.formatter.MarkdownWriter;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.ast.TextContainer;
@@ -8,9 +11,6 @@ import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class MarkdownSortTableTest extends MarkdownTableTestBase {
     @Test
@@ -836,4 +836,3 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 "", sortedTable.substring(0, offset) + "^" + sortedTable.substring(offset));
     }
 }
-

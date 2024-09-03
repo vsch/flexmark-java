@@ -6,4 +6,3 @@ public interface DataValueNullableFactory<T> extends DataValueFactory<T> {
     @Override
     @Nullable T apply(@Nullable DataHolder dataHolder);
 }
-

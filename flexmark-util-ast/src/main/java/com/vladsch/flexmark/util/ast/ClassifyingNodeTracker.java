@@ -6,13 +6,12 @@ import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ClassifyingNodeTracker implements NodeTracker {
     protected final @NotNull ClassificationBag<Class<?>, Node> nodeClassifier;

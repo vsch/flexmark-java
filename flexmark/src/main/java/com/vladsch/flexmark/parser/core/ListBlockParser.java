@@ -1,5 +1,9 @@
 package com.vladsch.flexmark.parser.core;
 
+import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
+import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
+import static com.vladsch.flexmark.util.data.SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
+
 import com.vladsch.flexmark.ast.BulletList;
 import com.vladsch.flexmark.ast.ListBlock;
 import com.vladsch.flexmark.ast.ListItem;
@@ -19,18 +23,13 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
-
-import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
-import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
-import static com.vladsch.flexmark.util.data.SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ListBlockParser extends AbstractBlockParser {
     final private ListBlock myBlock;

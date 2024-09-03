@@ -13,14 +13,13 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInCharsHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInHandler;
 import com.vladsch.flexmark.util.sequence.mappers.SpecialLeadInStartsWithCharsHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class HeadingParser extends AbstractBlockParser {
     static class HeadingParsing extends Parsing {

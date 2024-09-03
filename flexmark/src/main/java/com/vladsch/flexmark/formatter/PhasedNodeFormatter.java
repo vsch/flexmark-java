@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.formatter;
 
 import com.vladsch.flexmark.util.ast.Document;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 /**
  * A renderer for a document node for a specific rendering phase

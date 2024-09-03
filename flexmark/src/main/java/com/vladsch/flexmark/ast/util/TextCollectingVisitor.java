@@ -4,11 +4,10 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.util.ast.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.function.BiConsumer;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @deprecated use {@link com.vladsch.flexmark.util.ast.TextCollectingVisitor} from the utils library

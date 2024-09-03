@@ -1,13 +1,12 @@
 package com.vladsch.flexmark.test.util;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import org.junit.Test;
-
 import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class TestUtilsTest {
     @Test

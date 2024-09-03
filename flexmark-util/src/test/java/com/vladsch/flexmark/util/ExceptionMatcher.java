@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.util;
 
+import java.util.regex.Pattern;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.regex.Pattern;
 
 public class ExceptionMatcher extends BaseMatcher<Throwable> {
     final private @NotNull String prefix;

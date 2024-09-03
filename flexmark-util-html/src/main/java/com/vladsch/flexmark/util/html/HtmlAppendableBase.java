@@ -4,11 +4,10 @@ import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.*;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.IOException;
 import java.util.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements HtmlAppendable {
     final private LineAppendable appendable;

@@ -1,14 +1,13 @@
 package com.vladsch.flexmark.util.sequence;
 
-import org.junit.Test;
+import static org.junit.Assert.assertArrayEquals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.Test;
 
 public class PlaceholderReplacerTest {
     static List<String[]> spansOf(String... spans) {

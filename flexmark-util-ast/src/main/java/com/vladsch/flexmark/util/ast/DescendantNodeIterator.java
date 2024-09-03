@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.Stack;
 import java.util.function.Consumer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     final private boolean isReversed;

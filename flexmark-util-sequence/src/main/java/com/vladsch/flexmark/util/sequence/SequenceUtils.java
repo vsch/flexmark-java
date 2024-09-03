@@ -1,17 +1,16 @@
 package com.vladsch.flexmark.util.sequence;
 
+import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
+
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Pair;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.util.*;
 import java.util.function.Predicate;
-
-import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface SequenceUtils {
     String EOL = "\n";

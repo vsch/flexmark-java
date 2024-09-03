@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.ext.tables;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
@@ -7,9 +10,6 @@ import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class MarkdownTableTest extends MarkdownTableTestBase {
     final static private String markdown1 = "" +
@@ -2806,4 +2806,3 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     public void moveColumn() {
     }
 }
-

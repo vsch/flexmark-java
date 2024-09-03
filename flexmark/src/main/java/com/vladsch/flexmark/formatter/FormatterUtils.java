@@ -1,5 +1,10 @@
 package com.vladsch.flexmark.formatter;
 
+import static com.vladsch.flexmark.util.format.options.ListSpacing.*;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
+import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_LEADING_WHITESPACE;
+import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_TRAILING_WHITESPACE;
+
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
@@ -21,20 +26,14 @@ import com.vladsch.flexmark.util.sequence.LineInfo;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.util.format.options.ListSpacing.*;
-import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
-import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_LEADING_WHITESPACE;
-import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_TRAILING_WHITESPACE;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class FormatterUtils {
     final public static DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);

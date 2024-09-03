@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.util.builder;
 
+import static com.vladsch.flexmark.util.data.SharedDataKeys.EXTENSIONS;
+
 import com.vladsch.flexmark.util.data.*;
 import com.vladsch.flexmark.util.misc.Extension;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-
-import static com.vladsch.flexmark.util.data.SharedDataKeys.EXTENSIONS;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
     // loaded extensions

@@ -5,13 +5,12 @@ import com.vladsch.flexmark.html.UriContentResolverFactory;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.dependency.LastDependent;
 import com.vladsch.flexmark.util.misc.FileUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class FileUriContentResolver implements UriContentResolver {
     public FileUriContentResolver(LinkResolverBasicContext context) {

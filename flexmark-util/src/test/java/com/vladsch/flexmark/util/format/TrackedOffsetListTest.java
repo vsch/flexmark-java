@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.util.format;
 
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.junit.Test;
+import static org.junit.Assert.assertArrayEquals;
 
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.assertArrayEquals;
+import org.junit.Test;
 
 public class TrackedOffsetListTest {
     int[] offsets(List<TrackedOffset> trackedOffsets) {

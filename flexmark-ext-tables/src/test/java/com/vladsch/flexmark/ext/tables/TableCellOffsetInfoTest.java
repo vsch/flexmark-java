@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.ext.tables;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
@@ -7,8 +9,6 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
     @Test

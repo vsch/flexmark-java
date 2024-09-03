@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.test.util;
 
+import static com.vladsch.flexmark.util.misc.Utils.suffixWith;
+
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-
-import static com.vladsch.flexmark.util.misc.Utils.suffixWith;
 
 public class SpecExampleParse {
     private DataHolder myOptions;

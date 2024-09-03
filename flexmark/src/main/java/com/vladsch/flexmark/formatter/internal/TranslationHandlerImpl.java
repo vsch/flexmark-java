@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.formatter.internal;
 
+import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED_SPANS;
+import static java.lang.Character.isWhitespace;
+
 import com.vladsch.flexmark.ast.AnchorRefTarget;
 import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
@@ -9,9 +12,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +19,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED_SPANS;
-import static java.lang.Character.isWhitespace;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TranslationHandlerImpl implements TranslationHandler {
     final FormatterOptions myFormatterOptions;

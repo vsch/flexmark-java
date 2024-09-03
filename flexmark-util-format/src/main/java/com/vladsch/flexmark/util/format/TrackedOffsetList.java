@@ -5,10 +5,9 @@ import com.vladsch.flexmark.util.sequence.builder.Seg;
 import com.vladsch.flexmark.util.sequence.builder.tree.BasedOffsetTracker;
 import com.vladsch.flexmark.util.sequence.builder.tree.OffsetInfo;
 import com.vladsch.flexmark.util.sequence.builder.tree.SegmentOffsetTree;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 import java.util.function.UnaryOperator;
+import org.jetbrains.annotations.NotNull;
 
 public class TrackedOffsetList implements List<TrackedOffset> {
     public static TrackedOffsetList EMPTY_LIST = new TrackedOffsetList(BasedSequence.NULL, Collections.emptyList());

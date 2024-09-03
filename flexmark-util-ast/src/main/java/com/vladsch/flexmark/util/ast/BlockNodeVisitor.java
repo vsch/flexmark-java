@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.ast;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collection;
 import java.util.function.BiConsumer;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Used to visit only block nodes, non block nodes or children of non-block nodes are not visited

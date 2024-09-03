@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.util.data.DataHolder;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.function.Function;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Factory for instantiating new node renderers when rendering is done.

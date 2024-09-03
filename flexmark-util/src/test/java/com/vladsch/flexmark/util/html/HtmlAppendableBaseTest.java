@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.util.html;
 
+import static org.junit.Assert.assertEquals;
+
 import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
-import org.junit.Test;
-
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class HtmlAppendableBaseTest {
     @Test
