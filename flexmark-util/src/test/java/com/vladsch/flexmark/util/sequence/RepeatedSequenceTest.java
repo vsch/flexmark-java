@@ -26,57 +26,66 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class RepeatedSequenceTest {
-    @Test
-    public void test_basic() throws Exception {
-        String orig = "abcdef";
-        String result = orig;
+  @Test
+  public void test_basic() throws Exception {
+    String orig = "abcdef";
+    String result = orig;
 
-        CharSequence test = RepeatedSequence.repeatOf(orig, 2);
-        result = orig + orig;
-        assertEquals(result, test.toString());
-        assertEquals(result.length(), test.length());
-        assertEquals(result.hashCode(), test.hashCode());
-        test_subSequence(result, test);
-        test_charAt(result, test);
+    CharSequence test = RepeatedSequence.repeatOf(orig, 2);
+    result = orig + orig;
+    assertEquals(result, test.toString());
+    assertEquals(result.length(), test.length());
+    assertEquals(result.hashCode(), test.hashCode());
+    test_subSequence(result, test);
+    test_charAt(result, test);
+  }
+
+  @Test
+  public void test_partial() throws Exception {
+    String orig = "abcdef";
+    String result = orig;
+
+    CharSequence test = RepeatedSequence.repeatOf(orig, 3, orig.length() + 3);
+    result = orig.substring(3) + orig.substring(0, 3);
+    assertEquals(result, test.toString());
+    assertEquals(result.length(), test.length());
+    assertEquals(result.hashCode(), test.hashCode());
+    test_subSequence(result, test);
+    test_charAt(result, test);
+
+    test = RepeatedSequence.repeatOf(orig, 3, orig.length() + 5);
+    result = orig.substring(3) + orig.substring(0, 5);
+    assertEquals(result, test.toString());
+    assertEquals(result.length(), test.length());
+    assertEquals(result.hashCode(), test.hashCode());
+    test_subSequence(result, test);
+    test_charAt(result, test);
+  }
+
+  private void test_charAt(String result, CharSequence chars) throws Exception {
+    int iMax = result.length();
+    for (int i = 0; i < iMax; i++) {
+      assertEquals(String.valueOf(result.charAt(i)), String.valueOf(chars.charAt(i)));
     }
+  }
 
-    @Test
-    public void test_partial() throws Exception {
-        String orig = "abcdef";
-        String result = orig;
-
-        CharSequence test = RepeatedSequence.repeatOf(orig, 3, orig.length() + 3);
-        result = orig.substring(3) + orig.substring(0, 3);
-        assertEquals(result, test.toString());
-        assertEquals(result.length(), test.length());
-        assertEquals(result.hashCode(), test.hashCode());
-        test_subSequence(result, test);
-        test_charAt(result, test);
-
-        test = RepeatedSequence.repeatOf(orig, 3, orig.length() + 5);
-        result = orig.substring(3) + orig.substring(0, 5);
-        assertEquals(result, test.toString());
-        assertEquals(result.length(), test.length());
-        assertEquals(result.hashCode(), test.hashCode());
-        test_subSequence(result, test);
-        test_charAt(result, test);
+  private void test_subSequence(String result, CharSequence chars) throws Exception {
+    int iMax = result.length();
+    for (int i = 0; i < iMax; i++) {
+      for (int j = iMax - i - 1; j >= 0 && j >= i; j--) {
+        assertEquals(
+            "subSequence(" + i + "," + j + ")",
+            result.substring(i, j),
+            chars.subSequence(i, j).toString());
+        assertEquals(
+            "subSequence(" + i + "," + j + ").hashCode()",
+            result.subSequence(i, j).hashCode(),
+            chars.subSequence(i, j).hashCode());
+        assertEquals(
+            "subSequence(" + i + "," + j + ").equals()",
+            true,
+            chars.subSequence(i, j).equals(result.subSequence(i, j)));
+      }
     }
-
-    private void test_charAt(String result, CharSequence chars) throws Exception {
-        int iMax = result.length();
-        for (int i = 0; i < iMax; i++) {
-            assertEquals(String.valueOf(result.charAt(i)), String.valueOf(chars.charAt(i)));
-        }
-    }
-
-    private void test_subSequence(String result, CharSequence chars) throws Exception {
-        int iMax = result.length();
-        for (int i = 0; i < iMax; i++) {
-            for (int j = iMax - i - 1; j >= 0 && j >= i; j--) {
-                assertEquals("subSequence(" + i + "," + j + ")", result.substring(i, j), chars.subSequence(i, j).toString());
-                assertEquals("subSequence(" + i + "," + j + ").hashCode()", result.subSequence(i, j).hashCode(), chars.subSequence(i, j).hashCode());
-                assertEquals("subSequence(" + i + "," + j + ").equals()", true, chars.subSequence(i, j).equals(result.subSequence(i, j)));
-            }
-        }
-    }
+  }
 }

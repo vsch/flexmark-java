@@ -12,33 +12,69 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface LightInlineParser {
-    @NotNull ArrayList<BasedSequence> getCurrentText();
-    @NotNull BasedSequence getInput();
-    void setInput(BasedSequence input);
-    int getIndex();
-    void setIndex(int index);
-    @NotNull Node getBlock();
-    @Nullable BasedSequence match(Pattern re);
-    @Nullable BasedSequence[] matchWithGroups(Pattern re);
-    @Nullable Matcher matcher(Pattern re);
-    char peek();
-    char peek(int ahead);
-    boolean flushTextNode();
-    @NotNull Document getDocument();
-    void setDocument(@NotNull Document document);
-    @NotNull InlineParserOptions getOptions();
-    @NotNull Parsing getParsing();
-    void appendText(@NotNull BasedSequence text);
-    void appendText(@NotNull BasedSequence text, int beginIndex, int endIndex);
-    void appendNode(@NotNull Node node);
+  @NotNull
+  ArrayList<BasedSequence> getCurrentText();
 
-    // In some cases, we don't want the text to be appended to an existing node, we need it separate
-    @NotNull Text appendSeparateText(@NotNull BasedSequence text);
-    void setBlock(@NotNull Node block);
-    void moveNodes(@NotNull Node fromNode, @NotNull Node toNode);
-    boolean spnl();
-    boolean nonIndentSp();
-    boolean sp();
-    boolean spnlUrl();
-    @Nullable BasedSequence toEOL();
+  @NotNull
+  BasedSequence getInput();
+
+  void setInput(BasedSequence input);
+
+  int getIndex();
+
+  void setIndex(int index);
+
+  @NotNull
+  Node getBlock();
+
+  @Nullable
+  BasedSequence match(Pattern re);
+
+  @Nullable
+  BasedSequence[] matchWithGroups(Pattern re);
+
+  @Nullable
+  Matcher matcher(Pattern re);
+
+  char peek();
+
+  char peek(int ahead);
+
+  boolean flushTextNode();
+
+  @NotNull
+  Document getDocument();
+
+  void setDocument(@NotNull Document document);
+
+  @NotNull
+  InlineParserOptions getOptions();
+
+  @NotNull
+  Parsing getParsing();
+
+  void appendText(@NotNull BasedSequence text);
+
+  void appendText(@NotNull BasedSequence text, int beginIndex, int endIndex);
+
+  void appendNode(@NotNull Node node);
+
+  // In some cases, we don't want the text to be appended to an existing node, we need it separate
+  @NotNull
+  Text appendSeparateText(@NotNull BasedSequence text);
+
+  void setBlock(@NotNull Node block);
+
+  void moveNodes(@NotNull Node fromNode, @NotNull Node toNode);
+
+  boolean spnl();
+
+  boolean nonIndentSp();
+
+  boolean sp();
+
+  boolean spnlUrl();
+
+  @Nullable
+  BasedSequence toEOL();
 }

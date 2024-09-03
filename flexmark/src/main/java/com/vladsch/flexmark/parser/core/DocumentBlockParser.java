@@ -13,43 +13,41 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class DocumentBlockParser extends AbstractBlockParser implements BlankLineContainer {
-    private Document document;
+  private Document document;
 
-    public DocumentBlockParser() {
-    }
+  public DocumentBlockParser() {}
 
-    public void initializeDocument(DataHolder options, BasedSequence charSequence) {
-        document = new Document(options, charSequence);
-    }
+  public void initializeDocument(DataHolder options, BasedSequence charSequence) {
+    document = new Document(options, charSequence);
+  }
 
-    @Override
-    public boolean isContainer() {
-        return true;
-    }
+  @Override
+  public boolean isContainer() {
+    return true;
+  }
 
-    @Override
-    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
-        return true;
-    }
+  @Override
+  public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
+    return true;
+  }
 
-    @Override
-    public Document getBlock() {
-        return document;
-    }
+  @Override
+  public Document getBlock() {
+    return document;
+  }
 
-    @Override
-    public BlockContinue tryContinue(ParserState state) {
-        return BlockContinue.atIndex(state.getIndex());
-    }
+  @Override
+  public BlockContinue tryContinue(ParserState state) {
+    return BlockContinue.atIndex(state.getIndex());
+  }
 
-    @Override
-    public void addLine(ParserState state, BasedSequence line) {
-    }
+  @Override
+  public void addLine(ParserState state, BasedSequence line) {}
 
-    @Override
-    public void closeBlock(ParserState state) {
-        if (TRACK_DOCUMENT_LINES.get(state.getProperties())) {
-            document.setContent(state.getLineSegments());
-        }
+  @Override
+  public void closeBlock(ParserState state) {
+    if (TRACK_DOCUMENT_LINES.get(state.getProperties())) {
+      document.setContent(state.getLineSegments());
     }
+  }
 }

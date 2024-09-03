@@ -6,20 +6,17 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Body part of a {@link TableBlock} containing {@link TableRow TableRows}.
- */
+/** Body part of a {@link TableBlock} containing {@link TableRow TableRows}. */
 public class TableSeparator extends Node implements DoNotDecorate, DoNotCollectText {
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    public TableSeparator() {
-    }
+  public TableSeparator() {}
 
-    public TableSeparator(BasedSequence chars) {
-        super(chars);
-    }
+  public TableSeparator(BasedSequence chars) {
+    super(chars);
+  }
 }

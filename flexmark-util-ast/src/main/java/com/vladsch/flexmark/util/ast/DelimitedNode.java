@@ -6,27 +6,30 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 
 public interface DelimitedNode extends TextContainer {
-    BasedSequence getOpeningMarker();
+  BasedSequence getOpeningMarker();
 
-    BasedSequence getChars();
+  BasedSequence getChars();
 
-    void setOpeningMarker(BasedSequence openingMarker);
+  void setOpeningMarker(BasedSequence openingMarker);
 
-    BasedSequence getText();
+  BasedSequence getText();
 
-    void setText(BasedSequence text);
+  void setText(BasedSequence text);
 
-    BasedSequence getClosingMarker();
+  BasedSequence getClosingMarker();
 
-    void setClosingMarker(BasedSequence closingMarker);
+  void setClosingMarker(BasedSequence closingMarker);
 
-    @Override
-    default boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
-        if (any(flags, F_NODE_TEXT)) {
-            out.append(getText());
-            return false;
-        } else {
-            return true;
-        }
+  @Override
+  default boolean collectText(
+      ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out,
+      int flags,
+      NodeVisitor nodeVisitor) {
+    if (any(flags, F_NODE_TEXT)) {
+      out.append(getText());
+      return false;
+    } else {
+      return true;
     }
+  }
 }

@@ -10,21 +10,20 @@ import org.jetbrains.annotations.NotNull;
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
 public abstract class HtmlInlineBase extends Node {
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
-        astExtraChars(out);
-    }
+  @Override
+  public void getAstExtra(@NotNull StringBuilder out) {
+    astExtraChars(out);
+  }
 
-    public HtmlInlineBase() {
-    }
+  public HtmlInlineBase() {}
 
-    public HtmlInlineBase(BasedSequence chars) {
-        super(chars);
-    }
+  public HtmlInlineBase(BasedSequence chars) {
+    super(chars);
+  }
 }

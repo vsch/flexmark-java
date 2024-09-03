@@ -16,37 +16,38 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 @State(Scope.Benchmark)
 public class SpecBenchmark {
-    final private static String SPEC = TestSpecLocator.DEFAULT_RESOURCE_LOCATION.getResourceText();
-    final private static List<String> SPEC_EXAMPLES =
-            SpecReader.createAndReadExamples(TestSpecLocator.DEFAULT_RESOURCE_LOCATION, false)
-                    .getExamplesSourceAsString();
-    final private static Parser PARSER = Parser.builder().build();
-    final private static HtmlRenderer RENDERER = HtmlRenderer.builder().build();
+  private static final String SPEC = TestSpecLocator.DEFAULT_RESOURCE_LOCATION.getResourceText();
+  private static final List<String> SPEC_EXAMPLES =
+      SpecReader.createAndReadExamples(TestSpecLocator.DEFAULT_RESOURCE_LOCATION, false)
+          .getExamplesSourceAsString();
+  private static final Parser PARSER = Parser.builder().build();
+  private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
 
-    public static void main(String[] args) throws Exception {
-        Options options = new OptionsBuilder()
-                .parent(new CommandLineOptions(args))
-                .include(SpecBenchmark.class.getName() + ".*")
-                .build();
-        new Runner(options).run();
-    }
+  public static void main(String[] args) throws Exception {
+    Options options =
+        new OptionsBuilder()
+            .parent(new CommandLineOptions(args))
+            .include(SpecBenchmark.class.getName() + ".*")
+            .build();
+    new Runner(options).run();
+  }
 
-    @Benchmark
-    public long wholeSpec() {
-        return parseAndRender(Collections.singletonList(SPEC));
-    }
+  @Benchmark
+  public long wholeSpec() {
+    return parseAndRender(Collections.singletonList(SPEC));
+  }
 
-    @Benchmark
-    public long examples() {
-        return parseAndRender(SPEC_EXAMPLES);
-    }
+  @Benchmark
+  public long examples() {
+    return parseAndRender(SPEC_EXAMPLES);
+  }
 
-    private static long parseAndRender(List<String> examples) {
-        long length = 0;
-        for (String example : examples) {
-            String result = RENDERER.render(PARSER.parse(example));
-            length += result.length();
-        }
-        return length;
+  private static long parseAndRender(List<String> examples) {
+    long length = 0;
+    for (String example : examples) {
+      String result = RENDERER.render(PARSER.parse(example));
+      length += result.length();
     }
+    return length;
+  }
 }

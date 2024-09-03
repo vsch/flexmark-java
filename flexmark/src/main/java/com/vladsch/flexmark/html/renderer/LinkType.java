@@ -3,28 +3,28 @@ package com.vladsch.flexmark.html.renderer;
 import org.jetbrains.annotations.NotNull;
 
 public class LinkType {
-    final public static LinkType LINK = new LinkType("LINK");
-    final public static LinkType IMAGE = new LinkType("IMAGE");
-    final public static LinkType LINK_REF = new LinkType("LINK_REF");
-    final public static LinkType IMAGE_REF = new LinkType("IMAGE_REF");
+  public static final LinkType LINK = new LinkType("LINK");
+  public static final LinkType IMAGE = new LinkType("IMAGE");
+  public static final LinkType LINK_REF = new LinkType("LINK_REF");
+  public static final LinkType IMAGE_REF = new LinkType("IMAGE_REF");
 
-    final private @NotNull String myName;
+  private final @NotNull String myName;
 
-    public LinkType(@NotNull String name) {
-        this.myName = name;
-    }
+  public LinkType(@NotNull String name) {
+    this.myName = name;
+  }
 
-    public @NotNull String getName() {
-        return myName;
-    }
+  public @NotNull String getName() {
+    return myName;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        return this == o;
-    }
+  @Override
+  public boolean equals(Object o) {
+    return this == o;
+  }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
 }

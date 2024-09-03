@@ -18,176 +18,206 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockQuoteParser extends AbstractBlockParser {
-    final public static char MARKER_CHAR = '>';
-    final private BlockQuote block = new BlockQuote();
-    final private boolean allowLeadingSpace;
-    final private boolean continueToBlankLine;
-    final private boolean ignoreBlankLine;
-    final private boolean interruptsParagraph;
-    final private boolean interruptsItemParagraph;
-    final private boolean withLeadSpacesInterruptsItemParagraph;
-    private int lastWasBlankLine = 0;
+  public static final char MARKER_CHAR = '>';
+  private final BlockQuote block = new BlockQuote();
+  private final boolean allowLeadingSpace;
+  private final boolean continueToBlankLine;
+  private final boolean ignoreBlankLine;
+  private final boolean interruptsParagraph;
+  private final boolean interruptsItemParagraph;
+  private final boolean withLeadSpacesInterruptsItemParagraph;
+  private int lastWasBlankLine = 0;
 
-    public BlockQuoteParser(DataHolder options, BasedSequence marker) {
-        block.setOpeningMarker(marker);
-        continueToBlankLine = Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE.get(options);
-        allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.get(options);
-        ignoreBlankLine = Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE.get(options);
-        interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.get(options);
-        interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.get(options);
-        withLeadSpacesInterruptsItemParagraph = Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+  public BlockQuoteParser(DataHolder options, BasedSequence marker) {
+    block.setOpeningMarker(marker);
+    continueToBlankLine = Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE.get(options);
+    allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.get(options);
+    ignoreBlankLine = Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE.get(options);
+    interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.get(options);
+    interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+    withLeadSpacesInterruptsItemParagraph =
+        Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+  }
+
+  @Override
+  public boolean isContainer() {
+    return true;
+  }
+
+  @Override
+  public boolean isPropagatingLastBlankLine(BlockParser lastMatchedBlockParser) {
+    return false;
+  }
+
+  @Override
+  public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
+    return true;
+  }
+
+  @Override
+  public BlockQuote getBlock() {
+    return block;
+  }
+
+  @Override
+  public void closeBlock(ParserState state) {
+    block.setCharsFromContent();
+
+    if (!Parser.BLANK_LINES_IN_AST.get(state.getProperties())) {
+      removeBlankLines();
     }
+  }
 
-    @Override
-    public boolean isContainer() {
-        return true;
-    }
+  @Override
+  public BlockContinue tryContinue(ParserState state) {
+    int nextNonSpace = state.getNextNonSpaceIndex();
+    boolean isMarker;
+    if (!state.isBlank()
+        && ((isMarker =
+                isMarker(
+                    state,
+                    nextNonSpace,
+                    false,
+                    false,
+                    allowLeadingSpace,
+                    interruptsParagraph,
+                    interruptsItemParagraph,
+                    withLeadSpacesInterruptsItemParagraph))
+            || (continueToBlankLine && lastWasBlankLine == 0))) {
+      int newColumn = state.getColumn() + state.getIndent();
+      lastWasBlankLine = 0;
 
-    @Override
-    public boolean isPropagatingLastBlankLine(BlockParser lastMatchedBlockParser) {
-        return false;
-    }
-
-    @Override
-    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
-        return true;
-    }
-
-    @Override
-    public BlockQuote getBlock() {
-        return block;
-    }
-
-    @Override
-    public void closeBlock(ParserState state) {
-        block.setCharsFromContent();
-
-        if (!Parser.BLANK_LINES_IN_AST.get(state.getProperties())) {
-            removeBlankLines();
+      if (isMarker) {
+        newColumn++;
+        // optional following space or tab
+        if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
+          newColumn++;
         }
+      }
+      return BlockContinue.atColumn(newColumn);
+    } else {
+      if (ignoreBlankLine && state.isBlank()) {
+        lastWasBlankLine++;
+        int newColumn = state.getColumn() + state.getIndent();
+        return BlockContinue.atColumn(newColumn);
+      }
+      return BlockContinue.none();
     }
+  }
 
-    @Override
-    public BlockContinue tryContinue(ParserState state) {
-        int nextNonSpace = state.getNextNonSpaceIndex();
-        boolean isMarker;
-        if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace, false, false, allowLeadingSpace, interruptsParagraph, interruptsItemParagraph, withLeadSpacesInterruptsItemParagraph)) || (continueToBlankLine && lastWasBlankLine == 0))) {
-            int newColumn = state.getColumn() + state.getIndent();
-            lastWasBlankLine = 0;
-
-            if (isMarker) {
-                newColumn++;
-                // optional following space or tab
-                if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
-                    newColumn++;
-                }
-            }
-            return BlockContinue.atColumn(newColumn);
+  static boolean isMarker(
+      final ParserState state,
+      final int index,
+      final boolean inParagraph,
+      final boolean inParagraphListItem,
+      final boolean allowLeadingSpace,
+      final boolean interruptsParagraph,
+      final boolean interruptsItemParagraph,
+      final boolean withLeadSpacesInterruptsItemParagraph) {
+    CharSequence line = state.getLine();
+    if ((!inParagraph || interruptsParagraph)
+        && index < line.length()
+        && line.charAt(index) == MARKER_CHAR) {
+      if ((allowLeadingSpace || state.getIndent() == 0)
+          && (!inParagraphListItem || interruptsItemParagraph)) {
+        if (inParagraphListItem && !withLeadSpacesInterruptsItemParagraph) {
+          return state.getIndent() == 0;
         } else {
-            if (ignoreBlankLine && state.isBlank()) {
-                lastWasBlankLine++;
-                int newColumn = state.getColumn() + state.getIndent();
-                return BlockContinue.atColumn(newColumn);
-            }
-            return BlockContinue.none();
+          return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT;
         }
+      }
+    }
+    return false;
+  }
+
+  public static class Factory implements CustomBlockParserFactory {
+    @Nullable
+    @Override
+    public Set<Class<?>> getAfterDependents() {
+      return Collections.emptySet();
     }
 
-    static boolean isMarker(
-            final ParserState state,
-            final int index,
-            final boolean inParagraph,
-            final boolean inParagraphListItem,
-            final boolean allowLeadingSpace,
-            final boolean interruptsParagraph,
-            final boolean interruptsItemParagraph,
-            final boolean withLeadSpacesInterruptsItemParagraph
-    ) {
-        CharSequence line = state.getLine();
-        if ((!inParagraph || interruptsParagraph) && index < line.length() && line.charAt(index) == MARKER_CHAR) {
-            if ((allowLeadingSpace || state.getIndent() == 0) && (!inParagraphListItem || interruptsItemParagraph)) {
-                if (inParagraphListItem && !withLeadSpacesInterruptsItemParagraph) {
-                    return state.getIndent() == 0;
-                } else {
-                    return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT;
-                }
-            }
-        }
-        return false;
+    @Nullable
+    @Override
+    public Set<Class<?>> getBeforeDependents() {
+      return new HashSet<>(
+          Arrays.asList(
+              // BlockQuoteParser.Factory.class,
+              HeadingParser.Factory.class,
+              FencedCodeBlockParser.Factory.class,
+              HtmlBlockParser.Factory.class,
+              ThematicBreakParser.Factory.class,
+              ListBlockParser.Factory.class,
+              IndentedCodeBlockParser.Factory.class));
     }
 
-    public static class Factory implements CustomBlockParserFactory {
-        @Nullable
-        @Override
-        public Set<Class<?>> getAfterDependents() {
-            return Collections.emptySet();
-        }
-
-        @Nullable
-        @Override
-        public Set<Class<?>> getBeforeDependents() {
-            return new HashSet<>(Arrays.asList(
-                    //BlockQuoteParser.Factory.class,
-                    HeadingParser.Factory.class,
-                    FencedCodeBlockParser.Factory.class,
-                    HtmlBlockParser.Factory.class,
-                    ThematicBreakParser.Factory.class,
-                    ListBlockParser.Factory.class,
-                    IndentedCodeBlockParser.Factory.class
-            ));
-        }
-
-        @Override
-        public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
-            return BlockQuoteLeadInHandler.HANDLER;
-        }
-
-        @Override
-        public boolean affectsGlobalScope() {
-            return false;
-        }
-
-        @NotNull
-        @Override
-        public BlockParserFactory apply(@NotNull DataHolder options) {
-            return new BlockFactory(options);
-        }
+    @Override
+    public @Nullable SpecialLeadInHandler getLeadInHandler(@NotNull DataHolder options) {
+      return BlockQuoteLeadInHandler.HANDLER;
     }
 
-    static class BlockQuoteLeadInHandler {
-        final static SpecialLeadInHandler HANDLER = SpecialLeadInStartsWithCharsHandler.create('>');
+    @Override
+    public boolean affectsGlobalScope() {
+      return false;
     }
 
-    private static class BlockFactory extends AbstractBlockParserFactory {
-        final private boolean allowLeadingSpace;
-        final private boolean interruptsParagraph;
-        final private boolean interruptsItemParagraph;
-        final private boolean withLeadSpacesInterruptsItemParagraph;
-
-        BlockFactory(DataHolder options) {
-            super(options);
-            allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.get(options);
-            interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.get(options);
-            interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.get(options);
-            withLeadSpacesInterruptsItemParagraph = Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.get(options);
-        }
-
-        public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            int nextNonSpace = state.getNextNonSpaceIndex();
-            BlockParser matched = matchedBlockParser.getBlockParser();
-            boolean inParagraph = matched.isParagraphParser();
-            boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
-
-            if (isMarker(state, nextNonSpace, inParagraph, inParagraphListItem, allowLeadingSpace, interruptsParagraph, interruptsItemParagraph, withLeadSpacesInterruptsItemParagraph)) {
-                int newColumn = state.getColumn() + state.getIndent() + 1;
-                // optional following space or tab
-                if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
-                    newColumn++;
-                }
-                return BlockStart.of(new BlockQuoteParser(state.getProperties(), state.getLine().subSequence(nextNonSpace, nextNonSpace + 1))).atColumn(newColumn);
-            } else {
-                return BlockStart.none();
-            }
-        }
+    @NotNull
+    @Override
+    public BlockParserFactory apply(@NotNull DataHolder options) {
+      return new BlockFactory(options);
     }
+  }
+
+  static class BlockQuoteLeadInHandler {
+    static final SpecialLeadInHandler HANDLER = SpecialLeadInStartsWithCharsHandler.create('>');
+  }
+
+  private static class BlockFactory extends AbstractBlockParserFactory {
+    private final boolean allowLeadingSpace;
+    private final boolean interruptsParagraph;
+    private final boolean interruptsItemParagraph;
+    private final boolean withLeadSpacesInterruptsItemParagraph;
+
+    BlockFactory(DataHolder options) {
+      super(options);
+      allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.get(options);
+      interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.get(options);
+      interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+      withLeadSpacesInterruptsItemParagraph =
+          Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.get(options);
+    }
+
+    public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
+      int nextNonSpace = state.getNextNonSpaceIndex();
+      BlockParser matched = matchedBlockParser.getBlockParser();
+      boolean inParagraph = matched.isParagraphParser();
+      boolean inParagraphListItem =
+          inParagraph
+              && matched.getBlock().getParent() instanceof ListItem
+              && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
+
+      if (isMarker(
+          state,
+          nextNonSpace,
+          inParagraph,
+          inParagraphListItem,
+          allowLeadingSpace,
+          interruptsParagraph,
+          interruptsItemParagraph,
+          withLeadSpacesInterruptsItemParagraph)) {
+        int newColumn = state.getColumn() + state.getIndent() + 1;
+        // optional following space or tab
+        if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
+          newColumn++;
+        }
+        return BlockStart.of(
+                new BlockQuoteParser(
+                    state.getProperties(),
+                    state.getLine().subSequence(nextNonSpace, nextNonSpace + 1)))
+            .atColumn(newColumn);
+      } else {
+        return BlockStart.none();
+      }
+    }
+  }
 }

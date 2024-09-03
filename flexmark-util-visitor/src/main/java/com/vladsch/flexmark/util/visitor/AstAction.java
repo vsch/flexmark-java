@@ -5,5 +5,4 @@ package com.vladsch.flexmark.util.visitor;
  *
  * @param <N> node type
  */
-public interface AstAction<N> {
-}
+public interface AstAction<N> {}

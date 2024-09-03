@@ -14,25 +14,32 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class OrigSpecCoreTest extends FullSpecTestCase {
-    final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(TestUtils.NO_FILE_EOL, false)
-            .toImmutable();
+  private static final DataHolder OPTIONS =
+      new MutableDataSet()
+          .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
+          .set(TestUtils.NO_FILE_EOL, false)
+          .toImmutable();
 
-    final private @Nullable DataHolder myDefaultOptions;
+  private final @Nullable DataHolder myDefaultOptions;
 
-    public OrigSpecCoreTest(@Nullable DataHolder defaultOptions) {
-        myDefaultOptions = DataSet.aggregate(OPTIONS, defaultOptions);
-    }
+  public OrigSpecCoreTest(@Nullable DataHolder defaultOptions) {
+    myDefaultOptions = DataSet.aggregate(OPTIONS, defaultOptions);
+  }
 
-    @Override
-    final public @Nullable DataHolder options(@NotNull String option) {
-        return null;
-    }
+  @Override
+  public final @Nullable DataHolder options(@NotNull String option) {
+    return null;
+  }
 
-    @Override
-    final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combineOptions = DataSet.aggregate(myDefaultOptions, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combineOptions, Parser.builder(combineOptions).build(), HtmlRenderer.builder(combineOptions).build(), false);
-    }
+  @Override
+  public final @NotNull SpecExampleRenderer getSpecExampleRenderer(
+      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    DataHolder combineOptions = DataSet.aggregate(myDefaultOptions, exampleOptions);
+    return new FlexmarkSpecExampleRenderer(
+        example,
+        combineOptions,
+        Parser.builder(combineOptions).build(),
+        HtmlRenderer.builder(combineOptions).build(),
+        false);
+  }
 }

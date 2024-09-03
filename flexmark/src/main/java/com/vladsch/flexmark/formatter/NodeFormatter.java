@@ -4,29 +4,29 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.Set;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * A renderer for a set of node types.
- */
+/** A renderer for a set of node types. */
 public interface NodeFormatter {
-    /**
-     * @return the mapping of nodes this renderer handles to rendering function
-     */
-    @Nullable Set<NodeFormattingHandler<?>> getNodeFormattingHandlers();
+  /**
+   * @return the mapping of nodes this renderer handles to rendering function
+   */
+  @Nullable
+  Set<NodeFormattingHandler<?>> getNodeFormattingHandlers();
 
-    /**
-     * Collect nodes of given type so that they can be quickly accessed without traversing the AST
-     * by all formatting extensions.
-     *
-     * @return the nodes of interest to this formatter during formatting.
-     */
-    @Nullable Set<Class<?>> getNodeClasses();
+  /**
+   * Collect nodes of given type so that they can be quickly accessed without traversing the AST by
+   * all formatting extensions.
+   *
+   * @return the nodes of interest to this formatter during formatting.
+   */
+  @Nullable
+  Set<Class<?>> getNodeClasses();
 
-    /**
-     * Return character which compacts like block quote prefix
-     *
-     * @return character or NUL if none
-     */
-    default char getBlockQuoteLikePrefixChar() {
-        return SequenceUtils.NUL;
-    }
+  /**
+   * Return character which compacts like block quote prefix
+   *
+   * @return character or NUL if none
+   */
+  default char getBlockQuoteLikePrefixChar() {
+    return SequenceUtils.NUL;
+  }
 }

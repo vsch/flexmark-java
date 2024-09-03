@@ -8,46 +8,47 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class IRenderBase implements IRender {
-    public static final IRender NULL_RENDERER = new IRenderBase() {
+  public static final IRender NULL_RENDERER =
+      new IRenderBase() {
+        @Override
+        public void render(@NotNull Node document, @NotNull Appendable output) {}
+      };
+
+  public static final IRender TEXT_RENDERER =
+      new IRenderBase() {
         @Override
         public void render(@NotNull Node document, @NotNull Appendable output) {
+          try {
+            output.append(document.getChars());
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
         }
-    };
+      };
 
-    public static final IRender TEXT_RENDERER = new IRenderBase() {
-        @Override
-        public void render(@NotNull Node document, @NotNull Appendable output) {
-            try {
-                output.append(document.getChars());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    };
+  @Deprecated public static final IRender NullRenderer = NULL_RENDERER;
+  @Deprecated public static final IRender TextRenderer = TEXT_RENDERER;
 
-    @Deprecated public static final IRender NullRenderer = NULL_RENDERER;
-    @Deprecated public static final IRender TextRenderer = TEXT_RENDERER;
+  private final DataHolder myOptions;
 
-    final private DataHolder myOptions;
+  public IRenderBase() {
+    this(null);
+  }
 
-    public IRenderBase() {
-        this(null);
-    }
+  public IRenderBase(DataHolder options) {
+    myOptions = options;
+  }
 
-    public IRenderBase(DataHolder options) {
-        myOptions = options;
-    }
+  @NotNull
+  @Override
+  public String render(@NotNull Node document) {
+    StringBuilder out = new StringBuilder();
+    render(document, out);
+    return out.toString();
+  }
 
-    @NotNull
-    @Override
-    public String render(@NotNull Node document) {
-        StringBuilder out = new StringBuilder();
-        render(document, out);
-        return out.toString();
-    }
-
-    @Nullable
-    public DataHolder getOptions() {
-        return myOptions;
-    }
+  @Nullable
+  public DataHolder getOptions() {
+    return myOptions;
+  }
 }

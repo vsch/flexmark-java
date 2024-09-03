@@ -5,8 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        YamlFrontMatterTest.class,
-        ComboYamlFrontMatterFormatterSpecTest.class,
+  YamlFrontMatterTest.class,
+  ComboYamlFrontMatterFormatterSpecTest.class,
 })
-public class ExtYamlFrontMatterTestSuite {
-}
+public class ExtYamlFrontMatterTestSuite {}

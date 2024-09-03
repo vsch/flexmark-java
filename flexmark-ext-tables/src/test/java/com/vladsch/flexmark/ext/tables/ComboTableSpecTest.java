@@ -14,57 +14,59 @@ import org.junit.Test;
 import org.junit.runners.Parameterized;
 
 public class ComboTableSpecTest extends RendererSpecTest {
-    static final String SPEC_RESOURCE = "/ext_tables_ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
-            .toImmutable();
+  static final String SPEC_RESOURCE = "/ext_tables_ast_spec.md";
+  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+      ResourceLocation.of(SPEC_RESOURCE);
+  private static final DataHolder OPTIONS =
+      new MutableDataSet()
+          .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
+          .toImmutable();
 
-    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
-    static {
-        optionsMap.put("class-name", new MutableDataSet().set(TablesExtension.CLASS_NAME, "table-class"));
-        optionsMap.put("no-caption", new MutableDataSet().set(TablesExtension.WITH_CAPTION, false));
-        optionsMap.put("gfm", new MutableDataSet()
-                .set(TablesExtension.COLUMN_SPANS, false)
-                .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
-                .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
-                .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
-        );
+  private static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
-        optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
-        optionsMap.put("min-dashes-2", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 2));
-        optionsMap.put("min-dashes-1", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 1));
-        optionsMap.put("strip-indent", new MutableDataSet().set(TestUtils.SOURCE_INDENT, "> > "));
-        optionsMap.put("sub-parse", new MutableDataSet()
-                .set(TestUtils.SOURCE_PREFIX, "" +
-                        "Source Prefix\n" +
-                        "")
-                .set(TestUtils.SOURCE_SUFFIX, "" +
-                        "Source Suffix\n" +
-                        "")
-        );
-        optionsMap.put("sub-parse2", new MutableDataSet()
-                .set(TestUtils.SOURCE_SUFFIX, "" +
-                        "\n" +
-                        "")
-        );
-    }
-    public ComboTableSpecTest(@NotNull SpecExample example) {
-        super(example, optionsMap, OPTIONS);
-    }
+  static {
+    optionsMap.put(
+        "class-name", new MutableDataSet().set(TablesExtension.CLASS_NAME, "table-class"));
+    optionsMap.put("no-caption", new MutableDataSet().set(TablesExtension.WITH_CAPTION, false));
+    optionsMap.put(
+        "gfm",
+        new MutableDataSet()
+            .set(TablesExtension.COLUMN_SPANS, false)
+            .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
+            .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
+            .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true));
 
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return getTestData(RESOURCE_LOCATION);
-    }
+    optionsMap.put(
+        "keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
+    optionsMap.put(
+        "min-dashes-2", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 2));
+    optionsMap.put(
+        "min-dashes-1", new MutableDataSet().set(TablesExtension.MIN_SEPARATOR_DASHES, 1));
+    optionsMap.put("strip-indent", new MutableDataSet().set(TestUtils.SOURCE_INDENT, "> > "));
+    optionsMap.put(
+        "sub-parse",
+        new MutableDataSet()
+            .set(TestUtils.SOURCE_PREFIX, "" + "Source Prefix\n" + "")
+            .set(TestUtils.SOURCE_SUFFIX, "" + "Source Suffix\n" + ""));
+    optionsMap.put("sub-parse2", new MutableDataSet().set(TestUtils.SOURCE_SUFFIX, "" + "\n" + ""));
+  }
 
-    @Test
-    public void testTable() {
-        if (!example.isFullSpecExample()) return;
+  public ComboTableSpecTest(@NotNull SpecExample example) {
+    super(example, optionsMap, OPTIONS);
+  }
 
-        String source = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.md");
-        String html = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.html");
+  @Parameterized.Parameters(name = "{0}")
+  public static List<Object[]> data() {
+    return getTestData(RESOURCE_LOCATION);
+  }
 
-        assertRendering(example.withSource(source).withHtml(html).withAst(null));
-    }
+  @Test
+  public void testTable() {
+    if (!example.isFullSpecExample()) return;
+
+    String source = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.md");
+    String html = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.html");
+
+    assertRendering(example.withSource(source).withHtml(html).withAst(null));
+  }
 }

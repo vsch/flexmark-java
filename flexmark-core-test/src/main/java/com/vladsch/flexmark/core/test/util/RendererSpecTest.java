@@ -14,28 +14,42 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class RendererSpecTest extends ComboSpecTestCase {
-    private static DataHolder OPTIONS = new MutableDataSet()
-            .set(HtmlRenderer.INDENT_SIZE, 2)
-            .toImmutable();
+  private static DataHolder OPTIONS =
+      new MutableDataSet().set(HtmlRenderer.INDENT_SIZE, 2).toImmutable();
 
-    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
-    static {
-        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
-    }
-    public RendererSpecTest(@NotNull SpecExample example, @Nullable Map<String, ? extends DataHolder> optionMap, @Nullable DataHolder... defaultOptions) {
-        super(example, ComboSpecTestCase.optionsMaps(optionsMap, optionMap), ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
-    }
+  private static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
-    /**
-     * @return false to disable example information in spec
-     */
-    protected boolean wantExampleInfo() {
-        return true;
-    }
+  static {
+    optionsMap.put(
+        "src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
+  }
 
-    @Override
-    final public @NotNull SpecExampleRenderer getSpecExampleRenderer(@NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
-        DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
-        return new FlexmarkSpecExampleRenderer(example, combinedOptions, Parser.builder(combinedOptions).build(), HtmlRenderer.builder(combinedOptions).build(), wantExampleInfo());
-    }
+  public RendererSpecTest(
+      @NotNull SpecExample example,
+      @Nullable Map<String, ? extends DataHolder> optionMap,
+      @Nullable DataHolder... defaultOptions) {
+    super(
+        example,
+        ComboSpecTestCase.optionsMaps(optionsMap, optionMap),
+        ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
+  }
+
+  /**
+   * @return false to disable example information in spec
+   */
+  protected boolean wantExampleInfo() {
+    return true;
+  }
+
+  @Override
+  public final @NotNull SpecExampleRenderer getSpecExampleRenderer(
+      @NotNull SpecExample example, @Nullable DataHolder exampleOptions) {
+    DataHolder combinedOptions = aggregate(myDefaultOptions, exampleOptions);
+    return new FlexmarkSpecExampleRenderer(
+        example,
+        combinedOptions,
+        Parser.builder(combinedOptions).build(),
+        HtmlRenderer.builder(combinedOptions).build(),
+        wantExampleInfo());
+  }
 }

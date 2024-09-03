@@ -9,48 +9,47 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class ListBlock extends Block implements BlankLineContainer {
-    private boolean tight;
+  private boolean tight;
 
-    public ListBlock() {
-    }
+  public ListBlock() {}
 
-    public ListBlock(BasedSequence chars) {
-        super(chars);
-    }
+  public ListBlock(BasedSequence chars) {
+    super(chars);
+  }
 
-    public ListBlock(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
-    }
+  public ListBlock(BasedSequence chars, List<BasedSequence> segments) {
+    super(chars, segments);
+  }
 
-    public ListBlock(BlockContent blockContent) {
-        super(blockContent);
-    }
+  public ListBlock(BlockContent blockContent) {
+    super(blockContent);
+  }
 
-    public boolean isTight() {
-        return tight;
-    }
+  public boolean isTight() {
+    return tight;
+  }
 
-    public boolean isLoose() {
-        return !tight;
-    }
+  public boolean isLoose() {
+    return !tight;
+  }
 
-    public void setTight(boolean tight) {
-        this.tight = tight;
-    }
+  public void setTight(boolean tight) {
+    this.tight = tight;
+  }
 
-    public void setLoose(boolean loose) {
-        this.tight = !loose;
-    }
+  public void setLoose(boolean loose) {
+    this.tight = !loose;
+  }
 
-    @Override
-    public Node getLastBlankLineChild() {
-        return getLastChild();
-    }
+  @Override
+  public Node getLastBlankLineChild() {
+    return getLastChild();
+  }
 
-    @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
-        super.getAstExtra(out);
-        if (isTight()) out.append(" isTight");
-        else out.append(" isLoose");
-    }
+  @Override
+  public void getAstExtra(@NotNull StringBuilder out) {
+    super.getAstExtra(out);
+    if (isTight()) out.append(" isTight");
+    else out.append(" isLoose");
+  }
 }

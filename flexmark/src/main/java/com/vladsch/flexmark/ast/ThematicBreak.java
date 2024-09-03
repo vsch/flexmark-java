@@ -7,24 +7,23 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class ThematicBreak extends Block {
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    public ThematicBreak() {
-    }
+  public ThematicBreak() {}
 
-    public ThematicBreak(BasedSequence chars) {
-        super(chars);
-    }
+  public ThematicBreak(BasedSequence chars) {
+    super(chars);
+  }
 
-    public ThematicBreak(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
-    }
+  public ThematicBreak(BasedSequence chars, List<BasedSequence> segments) {
+    super(chars, segments);
+  }
 
-    public ThematicBreak(BlockContent blockContent) {
-        super(blockContent);
-    }
+  public ThematicBreak(BlockContent blockContent) {
+    super(blockContent);
+  }
 }

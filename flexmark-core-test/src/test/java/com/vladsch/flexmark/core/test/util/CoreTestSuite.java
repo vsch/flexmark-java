@@ -12,18 +12,17 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        AbstractVisitorTest.class,
-        DelimitedNodeTest.class,
-        DelimiterProcessorTest.class,
-        HtmlRendererTest.class,
-        ParserTest.class,
-        LinkDestinationParserTest.class,
-        PathologicalTestSuite.class,
-        SpecialInputTest.class,
-        UsageExampleTest.class,
-        TextCollectingVisitorTest.class,
-        HtmlDeepParserTest.class,
-        HtmlEmbeddedAttributeTest.class,
+  AbstractVisitorTest.class,
+  DelimitedNodeTest.class,
+  DelimiterProcessorTest.class,
+  HtmlRendererTest.class,
+  ParserTest.class,
+  LinkDestinationParserTest.class,
+  PathologicalTestSuite.class,
+  SpecialInputTest.class,
+  UsageExampleTest.class,
+  TextCollectingVisitorTest.class,
+  HtmlDeepParserTest.class,
+  HtmlEmbeddedAttributeTest.class,
 })
-final public class CoreTestSuite {
-}
+public final class CoreTestSuite {}

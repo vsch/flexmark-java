@@ -6,7 +6,11 @@ import com.vladsch.flexmark.util.ast.Node;
 import org.jetbrains.annotations.NotNull;
 
 public interface UriContentResolver {
-    @NotNull ResolvedContent resolveContent(@NotNull Node node, @NotNull LinkResolverBasicContext context, @NotNull ResolvedContent content);
+  @NotNull
+  ResolvedContent resolveContent(
+      @NotNull Node node,
+      @NotNull LinkResolverBasicContext context,
+      @NotNull ResolvedContent content);
 
-    UriContentResolver NULL = (node, context, content) -> content;
+  UriContentResolver NULL = (node, context, content) -> content;
 }

@@ -7,69 +7,95 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<Object> {
-    enum Options {
-        INCLUDE_ANCHORS,
-        TRACK_FIRST256,
-    }
+  enum Options {
+    INCLUDE_ANCHORS,
+    TRACK_FIRST256,
+  }
 
-    Options O_INCLUDE_ANCHORS = Options.INCLUDE_ANCHORS;
-    Options O_TRACK_FIRST256 = Options.TRACK_FIRST256;
+  Options O_INCLUDE_ANCHORS = Options.INCLUDE_ANCHORS;
+  Options O_TRACK_FIRST256 = Options.TRACK_FIRST256;
 
-    int F_INCLUDE_ANCHORS = BitFieldSet.intMask(O_INCLUDE_ANCHORS);
-    int F_TRACK_FIRST256 = BitFieldSet.intMask(O_TRACK_FIRST256);
+  int F_INCLUDE_ANCHORS = BitFieldSet.intMask(O_INCLUDE_ANCHORS);
+  int F_TRACK_FIRST256 = BitFieldSet.intMask(O_TRACK_FIRST256);
 
-    int F_DEFAULT = F_INCLUDE_ANCHORS | F_TRACK_FIRST256;
+  int F_DEFAULT = F_INCLUDE_ANCHORS | F_TRACK_FIRST256;
 
-    int getOptions();
-    boolean isIncludeAnchors();
+  int getOptions();
 
-    boolean isEmpty();
-    boolean isBaseSubSequenceRange();
-    @Nullable Range getBaseSubSequenceRange();
-    boolean haveOffsets();
-    int getSpan();
-    int getStartOffset();
-    int getEndOffset();
+  boolean isIncludeAnchors();
 
-    int size();
-    CharSequence getText();
-    int noAnchorsSize();
-    int length();
+  boolean isEmpty();
 
-    boolean isTrackTextFirst256();
-    int getTextLength();
-    int getTextSegments();
+  boolean isBaseSubSequenceRange();
 
-    int getTextSpaceLength();
-    int getTextSpaceSegments();
+  @Nullable
+  Range getBaseSubSequenceRange();
 
-    int getTextFirst256Length();
-    int getTextFirst256Segments();
+  boolean haveOffsets();
 
-    /**
-     * Return iterator over segment parts
-     * Range - BASE
-     * CharSequence - TEXT
-     *
-     * @return iterator over segment builder parts
-     */
-    @NotNull
-    @Override
-    Iterator<Object> iterator();
+  int getSpan();
 
-    /**
-     * Return iterator over segments
-     *
-     * @return iterator over segment builder segments
-     */
-    @NotNull
-    Iterable<Seg> getSegments();
+  int getStartOffset();
 
-    @NotNull S append(int startOffset, int endOffset);
-    @NotNull S append(CharSequence text);
-    @NotNull S appendAnchor(int offset);
-    @NotNull S append(@NotNull Range range);
-    @NotNull String toStringWithRangesVisibleWhitespace(@NotNull CharSequence chars);
-    @NotNull String toStringWithRanges(@NotNull CharSequence chars);
-    @NotNull String toString(@NotNull CharSequence chars);
+  int getEndOffset();
+
+  int size();
+
+  CharSequence getText();
+
+  int noAnchorsSize();
+
+  int length();
+
+  boolean isTrackTextFirst256();
+
+  int getTextLength();
+
+  int getTextSegments();
+
+  int getTextSpaceLength();
+
+  int getTextSpaceSegments();
+
+  int getTextFirst256Length();
+
+  int getTextFirst256Segments();
+
+  /**
+   * Return iterator over segment parts Range - BASE CharSequence - TEXT
+   *
+   * @return iterator over segment builder parts
+   */
+  @NotNull
+  @Override
+  Iterator<Object> iterator();
+
+  /**
+   * Return iterator over segments
+   *
+   * @return iterator over segment builder segments
+   */
+  @NotNull
+  Iterable<Seg> getSegments();
+
+  @NotNull
+  S append(int startOffset, int endOffset);
+
+  @NotNull
+  S append(CharSequence text);
+
+  @NotNull
+  S appendAnchor(int offset);
+
+  @NotNull
+  S append(@NotNull Range range);
+
+  @NotNull
+  String toStringWithRangesVisibleWhitespace(@NotNull CharSequence chars);
+
+  @NotNull
+  String toStringWithRanges(@NotNull CharSequence chars);
+
+  @NotNull
+  String toString(@NotNull CharSequence chars);
 }

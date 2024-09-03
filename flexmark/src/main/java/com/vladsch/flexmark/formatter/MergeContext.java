@@ -5,6 +5,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface MergeContext {
-    @NotNull Document getDocument(@NotNull TranslationContext context);
-    void forEachPrecedingDocument(@Nullable Document document, @NotNull MergeContextConsumer consumer);
+  @NotNull
+  Document getDocument(@NotNull TranslationContext context);
+
+  void forEachPrecedingDocument(
+      @Nullable Document document, @NotNull MergeContextConsumer consumer);
 }

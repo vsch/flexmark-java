@@ -20,31 +20,39 @@ package com.vladsch.flexmark.util.html.ui;
 import java.awt.Color;
 
 public class BackgroundColor extends Color {
-    final public static BackgroundColor NULL = new BackgroundColor(new Color(0, true));
-    final public static BackgroundColor WHITE = new BackgroundColor(Color.WHITE);
-    final public static BackgroundColor LIGHT_GRAY = new BackgroundColor(Color.LIGHT_GRAY);
-    final public static BackgroundColor GRAY = new BackgroundColor(Color.GRAY);
-    final public static BackgroundColor DARK_GRAY = new BackgroundColor(Color.DARK_GRAY);
-    final public static BackgroundColor BLACK = new BackgroundColor(Color.BLACK);
-    final public static BackgroundColor RED = new BackgroundColor(Color.RED);
-    final public static BackgroundColor PINK = new BackgroundColor(Color.PINK);
-    final public static BackgroundColor ORANGE = new BackgroundColor(Color.ORANGE);
-    final public static BackgroundColor YELLOW = new BackgroundColor(Color.YELLOW);
-    final public static BackgroundColor GREEN = new BackgroundColor(Color.GREEN);
-    final public static BackgroundColor MAGENTA = new BackgroundColor(Color.MAGENTA);
-    final public static BackgroundColor CYAN = new BackgroundColor(Color.CYAN);
-    final public static BackgroundColor BLUE = new BackgroundColor(Color.BLUE);
+  public static final BackgroundColor NULL = new BackgroundColor(new Color(0, true));
+  public static final BackgroundColor WHITE = new BackgroundColor(Color.WHITE);
+  public static final BackgroundColor LIGHT_GRAY = new BackgroundColor(Color.LIGHT_GRAY);
+  public static final BackgroundColor GRAY = new BackgroundColor(Color.GRAY);
+  public static final BackgroundColor DARK_GRAY = new BackgroundColor(Color.DARK_GRAY);
+  public static final BackgroundColor BLACK = new BackgroundColor(Color.BLACK);
+  public static final BackgroundColor RED = new BackgroundColor(Color.RED);
+  public static final BackgroundColor PINK = new BackgroundColor(Color.PINK);
+  public static final BackgroundColor ORANGE = new BackgroundColor(Color.ORANGE);
+  public static final BackgroundColor YELLOW = new BackgroundColor(Color.YELLOW);
+  public static final BackgroundColor GREEN = new BackgroundColor(Color.GREEN);
+  public static final BackgroundColor MAGENTA = new BackgroundColor(Color.MAGENTA);
+  public static final BackgroundColor CYAN = new BackgroundColor(Color.CYAN);
+  public static final BackgroundColor BLUE = new BackgroundColor(Color.BLUE);
 
-    protected BackgroundColor(Color other) { super(other.getRGB()); }
+  protected BackgroundColor(Color other) {
+    super(other.getRGB());
+  }
 
-    protected BackgroundColor(int rgb) { super(rgb); }
+  protected BackgroundColor(int rgb) {
+    super(rgb);
+  }
 
-    public static BackgroundColor of(Color color) { return new BackgroundColor(color); }
+  public static BackgroundColor of(Color color) {
+    return new BackgroundColor(color);
+  }
 
-    public static BackgroundColor of(int rgb) { return new BackgroundColor(rgb); }
+  public static BackgroundColor of(int rgb) {
+    return new BackgroundColor(rgb);
+  }
 
-    public static BackgroundColor of(String colorName) {
-        Color color = ColorStyler.getNamedColor(colorName);
-        return color == null ? NULL : new BackgroundColor(color);
-    }
+  public static BackgroundColor of(String colorName) {
+    Color color = ColorStyler.getNamedColor(colorName);
+    return color == null ? NULL : new BackgroundColor(color);
+  }
 }

@@ -5,51 +5,59 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ResolvedContent {
-    final private @NotNull ResolvedLink resolvedLink;
-    final private @NotNull LinkStatus status;
-    final private @Nullable byte[] content;
+  private final @NotNull ResolvedLink resolvedLink;
+  private final @NotNull LinkStatus status;
+  private final @Nullable byte[] content;
 
-    public ResolvedContent(@NotNull ResolvedLink resolvedLink, @NotNull LinkStatus status, @Nullable byte[] content) {
-        this.resolvedLink = resolvedLink;
-        this.status = status;
-        this.content = content;
-    }
-    
-    
-    // @formatter:off
-    public ResolvedContent withStatus(@NotNull LinkStatus status) { return status == this.status ? this : new ResolvedContent(resolvedLink, status, content); }
-    public ResolvedContent withContent(@Nullable byte[] content) { return Arrays.equals(this.content, content) ? this : new ResolvedContent(resolvedLink, status, content); }
-    // @formatter:on
+  public ResolvedContent(
+      @NotNull ResolvedLink resolvedLink, @NotNull LinkStatus status, @Nullable byte[] content) {
+    this.resolvedLink = resolvedLink;
+    this.status = status;
+    this.content = content;
+  }
 
-    public @NotNull ResolvedLink getResolvedLink() {
-        return resolvedLink;
-    }
+  // @formatter:off
+  public ResolvedContent withStatus(@NotNull LinkStatus status) {
+    return status == this.status ? this : new ResolvedContent(resolvedLink, status, content);
+  }
 
-    public @NotNull LinkStatus getStatus() {
-        return status;
-    }
+  public ResolvedContent withContent(@Nullable byte[] content) {
+    return Arrays.equals(this.content, content)
+        ? this
+        : new ResolvedContent(resolvedLink, status, content);
+  }
 
-    public @Nullable byte[] getContent() {
-        return content;
-    }
+  // @formatter:on
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+  public @NotNull ResolvedLink getResolvedLink() {
+    return resolvedLink;
+  }
 
-        ResolvedContent content1 = (ResolvedContent) o;
+  public @NotNull LinkStatus getStatus() {
+    return status;
+  }
 
-        if (!resolvedLink.equals(content1.resolvedLink)) return false;
-        if (!status.equals(content1.status)) return false;
-        return Arrays.equals(content, content1.content);
-    }
+  public @Nullable byte[] getContent() {
+    return content;
+  }
 
-    @Override
-    public int hashCode() {
-        int result = resolvedLink.hashCode();
-        result = 31 * result + status.hashCode();
-        result = 31 * result + Arrays.hashCode(content);
-        return result;
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ResolvedContent content1 = (ResolvedContent) o;
+
+    if (!resolvedLink.equals(content1.resolvedLink)) return false;
+    if (!status.equals(content1.status)) return false;
+    return Arrays.equals(content, content1.content);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = resolvedLink.hashCode();
+    result = 31 * result + status.hashCode();
+    result = 31 * result + Arrays.hashCode(content);
+    return result;
+  }
 }

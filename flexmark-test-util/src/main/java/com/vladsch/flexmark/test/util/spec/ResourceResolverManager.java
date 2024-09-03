@@ -10,35 +10,35 @@ import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
 public class ResourceResolverManager {
-    /**
-     * urlResolvers map test resource location url to source resource url to allow tests to  
-     * output file URLs which refer to source location, not copies in test location
-     */
-    final private static ArrayList<Function<String, String>> urlResolvers = new ArrayList<>();
-    
-    public static void registerUrlResolver(@NotNull Function<String, String> resolver) {
-        ResourceResolverManager.urlResolvers.add(resolver);
-    }
+  /**
+   * urlResolvers map test resource location url to source resource url to allow tests to output
+   * file URLs which refer to source location, not copies in test location
+   */
+  private static final ArrayList<Function<String, String>> urlResolvers = new ArrayList<>();
 
-    @NotNull
-    public static String adjustedFileUrl(@NotNull URL url) {
-        String externalForm = url.toExternalForm();
-        String bestProtocolMatch = null;
+  public static void registerUrlResolver(@NotNull Function<String, String> resolver) {
+    ResourceResolverManager.urlResolvers.add(resolver);
+  }
 
-        for (Function<String, String> resolver : urlResolvers) {
-            String filePath = resolver.apply(externalForm);
-            if (filePath == null) continue;
+  @NotNull
+  public static String adjustedFileUrl(@NotNull URL url) {
+    String externalForm = url.toExternalForm();
+    String bestProtocolMatch = null;
 
-            if (hasProtocol(filePath) && bestProtocolMatch == null) {
-                bestProtocolMatch = filePath;
-            } else {
-                File file = new File(filePath);
-                if (file.exists()) {
-                    return TestUtils.FILE_PROTOCOL + filePath;
-                }
-            }
+    for (Function<String, String> resolver : urlResolvers) {
+      String filePath = resolver.apply(externalForm);
+      if (filePath == null) continue;
+
+      if (hasProtocol(filePath) && bestProtocolMatch == null) {
+        bestProtocolMatch = filePath;
+      } else {
+        File file = new File(filePath);
+        if (file.exists()) {
+          return TestUtils.FILE_PROTOCOL + filePath;
         }
-
-        return bestProtocolMatch != null ? bestProtocolMatch : externalForm;
+      }
     }
+
+    return bestProtocolMatch != null ? bestProtocolMatch : externalForm;
+  }
 }

@@ -11,63 +11,85 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class StrikethroughSubscriptDelimiterProcessor implements DelimiterProcessor {
-    @Override
-    public char getOpeningCharacter() {
-        return '~';
-    }
+  @Override
+  public char getOpeningCharacter() {
+    return '~';
+  }
 
-    @Override
-    public char getClosingCharacter() {
-        return '~';
-    }
+  @Override
+  public char getClosingCharacter() {
+    return '~';
+  }
 
-    @Override
-    public int getMinLength() {
-        return 1;
-    }
+  @Override
+  public int getMinLength() {
+    return 1;
+  }
 
-    @Override
-    public boolean canBeOpener(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
-        return leftFlanking;
-    }
+  @Override
+  public boolean canBeOpener(
+      String before,
+      String after,
+      boolean leftFlanking,
+      boolean rightFlanking,
+      boolean beforeIsPunctuation,
+      boolean afterIsPunctuation,
+      boolean beforeIsWhitespace,
+      boolean afterIsWhiteSpace) {
+    return leftFlanking;
+  }
 
-    @Override
-    public boolean canBeCloser(String before, String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
-        return rightFlanking;
-    }
+  @Override
+  public boolean canBeCloser(
+      String before,
+      String after,
+      boolean leftFlanking,
+      boolean rightFlanking,
+      boolean beforeIsPunctuation,
+      boolean afterIsPunctuation,
+      boolean beforeIsWhitespace,
+      boolean afterIsWhiteSpace) {
+    return rightFlanking;
+  }
 
-    @Override
-    public boolean skipNonOpenerCloser() {
-        return false;
-    }
+  @Override
+  public boolean skipNonOpenerCloser() {
+    return false;
+  }
 
-    @Override
-    public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
-        // "multiple of 3" rule for internal delimiter runs
-        if ((opener.canClose() || closer.canOpen()) && (opener.length() + closer.length()) % 3 == 0) {
-            return 0;
-        }
-        // calculate actual number of delimiters used from this closer
-        if (opener.length() < 3 || closer.length() < 3) {
-            return closer.length() <= opener.length() ?
-                    closer.length() : opener.length();
-        } else {
-            return closer.length() % 2 == 0 ? 2 : 1;
-        }
+  @Override
+  public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
+    // "multiple of 3" rule for internal delimiter runs
+    if ((opener.canClose() || closer.canOpen()) && (opener.length() + closer.length()) % 3 == 0) {
+      return 0;
     }
-
-    @Override
-    public Node unmatchedDelimiterNode(InlineParser inlineParser, DelimiterRun delimiter) {
-        return null;
+    // calculate actual number of delimiters used from this closer
+    if (opener.length() < 3 || closer.length() < 3) {
+      return closer.length() <= opener.length() ? closer.length() : opener.length();
+    } else {
+      return closer.length() % 2 == 0 ? 2 : 1;
     }
+  }
 
-    @Override
-    public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
-        // wrap nodes between delimiters in strikethrough.
-        DelimitedNode emphasis = delimitersUsed == 1
-                ? new Subscript(opener.getTailChars(delimitersUsed), BasedSequence.NULL, closer.getLeadChars(delimitersUsed))
-                : new Strikethrough(opener.getTailChars(delimitersUsed), BasedSequence.NULL, closer.getLeadChars(delimitersUsed));
+  @Override
+  public Node unmatchedDelimiterNode(InlineParser inlineParser, DelimiterRun delimiter) {
+    return null;
+  }
 
-        opener.moveNodesBetweenDelimitersTo(emphasis, closer);
-    }
+  @Override
+  public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
+    // wrap nodes between delimiters in strikethrough.
+    DelimitedNode emphasis =
+        delimitersUsed == 1
+            ? new Subscript(
+                opener.getTailChars(delimitersUsed),
+                BasedSequence.NULL,
+                closer.getLeadChars(delimitersUsed))
+            : new Strikethrough(
+                opener.getTailChars(delimitersUsed),
+                BasedSequence.NULL,
+                closer.getLeadChars(delimitersUsed));
+
+    opener.moveNodesBetweenDelimitersTo(emphasis, closer);
+  }
 }

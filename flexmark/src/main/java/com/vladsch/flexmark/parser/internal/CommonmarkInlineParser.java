@@ -10,15 +10,24 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 public class CommonmarkInlineParser extends InlineParserImpl {
-    public CommonmarkInlineParser(
-            DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters,
-            Map<Character, DelimiterProcessor> delimiterProcessors, LinkRefProcessorData referenceLinkProcessors, List<InlineParserExtensionFactory> inlineParserExtensions
-    ) {
-        super(options, specialCharacters, delimiterCharacters, delimiterProcessors, referenceLinkProcessors, inlineParserExtensions);
-    }
+  public CommonmarkInlineParser(
+      DataHolder options,
+      BitSet specialCharacters,
+      BitSet delimiterCharacters,
+      Map<Character, DelimiterProcessor> delimiterProcessors,
+      LinkRefProcessorData referenceLinkProcessors,
+      List<InlineParserExtensionFactory> inlineParserExtensions) {
+    super(
+        options,
+        specialCharacters,
+        delimiterCharacters,
+        delimiterProcessors,
+        referenceLinkProcessors,
+        inlineParserExtensions);
+  }
 
-    @Override
-    public void initializeDocument(@NotNull Document document) {
-        super.initializeDocument(document);
-    }
+  @Override
+  public void initializeDocument(@NotNull Document document) {
+    super.initializeDocument(document);
+  }
 }

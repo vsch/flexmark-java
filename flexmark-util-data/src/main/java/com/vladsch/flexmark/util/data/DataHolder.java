@@ -6,49 +6,57 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface DataHolder extends MutableDataSetter {
-    DataHolder NULL = new DataSet();
+  DataHolder NULL = new DataSet();
 
-    @NotNull Map<? extends DataKeyBase<?>, Object> getAll();
-    @NotNull Collection<? extends DataKeyBase<?>> getKeys();
+  @NotNull
+  Map<? extends DataKeyBase<?>, Object> getAll();
 
-    boolean contains(@NotNull DataKeyBase<?> key);
+  @NotNull
+  Collection<? extends DataKeyBase<?>> getKeys();
 
-    /**
-     * @param key data key
-     * @param <T> Type returned by key
-     * @return Use key.get(dataHolder) instead
-     */
-    @Deprecated
-    @Nullable
-    default <T> T get(@NotNull DataKey<T> key) {
-        return key.get(this);
-    }
+  boolean contains(@NotNull DataKeyBase<?> key);
 
-    @Override
-    default @NotNull MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
-        return dataHolder.setAll(this);
-    }
+  /**
+   * @param key data key
+   * @param <T> Type returned by key
+   * @return Use key.get(dataHolder) instead
+   */
+  @Deprecated
+  @Nullable
+  default <T> T get(@NotNull DataKey<T> key) {
+    return key.get(this);
+  }
 
-    /**
-     * Get key if it exists or compute using supplier
-     * <p>
-     * Method used by DataKey classes to access data.
-     * <p>
-     * NOTE: MutableDataHolders will compute an absent key and add it to its dataSet.
-     * DataHolders will return computed value but not change contained dataSet
-     * because they are immutable. So value will be computed every time it is requested.
-     *
-     * @param key     data key
-     * @param factory factory taking this data holder and computing/providing default value
-     * @return object value for the key
-     */
-    Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory);
+  @Override
+  default @NotNull MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
+    return dataHolder.setAll(this);
+  }
 
-    @NotNull MutableDataHolder toMutable();
-    @NotNull DataHolder toImmutable();
+  /**
+   * Get key if it exists or compute using supplier
+   *
+   * <p>Method used by DataKey classes to access data.
+   *
+   * <p>NOTE: MutableDataHolders will compute an absent key and add it to its dataSet. DataHolders
+   * will return computed value but not change contained dataSet because they are immutable. So
+   * value will be computed every time it is requested.
+   *
+   * @param key data key
+   * @param factory factory taking this data holder and computing/providing default value
+   * @return object value for the key
+   */
+  Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory);
 
-    @NotNull
-    default DataSet toDataSet() {
-        return this instanceof DataSet ? (DataSet) this : this instanceof MutableDataHolder ? new MutableDataSet(this) : new DataSet(this);
-    }
+  @NotNull
+  MutableDataHolder toMutable();
+
+  @NotNull
+  DataHolder toImmutable();
+
+  @NotNull
+  default DataSet toDataSet() {
+    return this instanceof DataSet
+        ? (DataSet) this
+        : this instanceof MutableDataHolder ? new MutableDataSet(this) : new DataSet(this);
+  }
 }

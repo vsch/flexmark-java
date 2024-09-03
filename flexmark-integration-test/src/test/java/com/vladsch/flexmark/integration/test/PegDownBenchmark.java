@@ -16,34 +16,38 @@ import org.pegdown.PegDownProcessor;
 
 @State(Scope.Benchmark)
 public class PegDownBenchmark {
-    final private static String SPEC = TestSpecLocator.DEFAULT_RESOURCE_LOCATION.getResourceText();
-    final private static List<String> SPEC_EXAMPLES = SpecReader.createAndReadExamples(TestSpecLocator.DEFAULT_RESOURCE_LOCATION, false).getExamplesSourceAsString();
-    final private static PegDownProcessor PROCESSOR = new PegDownProcessor(Extensions.FENCED_CODE_BLOCKS);
+  private static final String SPEC = TestSpecLocator.DEFAULT_RESOURCE_LOCATION.getResourceText();
+  private static final List<String> SPEC_EXAMPLES =
+      SpecReader.createAndReadExamples(TestSpecLocator.DEFAULT_RESOURCE_LOCATION, false)
+          .getExamplesSourceAsString();
+  private static final PegDownProcessor PROCESSOR =
+      new PegDownProcessor(Extensions.FENCED_CODE_BLOCKS);
 
-    public static void main(String[] args) throws Exception {
-        Options options = new OptionsBuilder()
-                .parent(new CommandLineOptions(args))
-                .include(PegDownBenchmark.class.getName() + ".*")
-                .build();
-        new Runner(options).run();
-    }
+  public static void main(String[] args) throws Exception {
+    Options options =
+        new OptionsBuilder()
+            .parent(new CommandLineOptions(args))
+            .include(PegDownBenchmark.class.getName() + ".*")
+            .build();
+    new Runner(options).run();
+  }
 
-    @Benchmark
-    public long wholeSpec() {
-        return parseAndRender(Collections.singletonList(SPEC));
-    }
+  @Benchmark
+  public long wholeSpec() {
+    return parseAndRender(Collections.singletonList(SPEC));
+  }
 
-    @Benchmark
-    public long examples() {
-        return parseAndRender(SPEC_EXAMPLES);
-    }
+  @Benchmark
+  public long examples() {
+    return parseAndRender(SPEC_EXAMPLES);
+  }
 
-    private static long parseAndRender(List<String> examples) {
-        long length = 0;
-        for (String example : examples) {
-            String result = PROCESSOR.markdownToHtml(example);
-            length += result.length();
-        }
-        return length;
+  private static long parseAndRender(List<String> examples) {
+    long length = 0;
+    for (String example : examples) {
+      String result = PROCESSOR.markdownToHtml(example);
+      length += result.length();
     }
+    return length;
+  }
 }

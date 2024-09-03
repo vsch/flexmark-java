@@ -10,48 +10,47 @@ import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import org.junit.Test;
 
-final public class UsageExampleTest {
-    @Test
-    public void parseAndRender() {
-        Parser parser = Parser.builder().build();
-        Node document = parser.parse("This is *Sparta*");
-        HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();
-        assertEquals("<p>This is <em>Sparta</em></p>\n", renderer.render(document));
+public final class UsageExampleTest {
+  @Test
+  public void parseAndRender() {
+    Parser parser = Parser.builder().build();
+    Node document = parser.parse("This is *Sparta*");
+    HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();
+    assertEquals("<p>This is <em>Sparta</em></p>\n", renderer.render(document));
+  }
+
+  @Test
+  public void visitor() {
+    Parser parser = Parser.builder().build();
+    Node node = parser.parse("Example\n=======\n\nSome more text");
+
+    WordCountVisitor visitor = new WordCountVisitor();
+    visitor.countWords(node);
+    assertEquals(4, visitor.wordCount);
+  }
+
+  static class WordCountVisitor {
+    int wordCount = 0;
+
+    private final NodeVisitor myVisitor;
+
+    public WordCountVisitor() {
+      myVisitor = new NodeVisitor(new VisitHandler<>(Text.class, WordCountVisitor.this::visit));
     }
 
-    @Test
-    public void visitor() {
-        Parser parser = Parser.builder().build();
-        Node node = parser.parse("Example\n=======\n\nSome more text");
-
-        WordCountVisitor visitor = new WordCountVisitor();
-        visitor.countWords(node);
-        assertEquals(4, visitor.wordCount);
+    public void countWords(Node node) {
+      myVisitor.visit(node);
     }
 
-    static class WordCountVisitor {
-        int wordCount = 0;
+    private void visit(Text text) {
+      // This is called for all Text nodes. Override other visit methods for other node types.
 
-        final private NodeVisitor myVisitor;
+      // Count words (this is just an example, don't actually do it this way for various reasons).
+      wordCount += text.getChars().toString().split("\\W+").length;
 
-        public WordCountVisitor() {
-            myVisitor = new NodeVisitor(
-                    new VisitHandler<>(Text.class, WordCountVisitor.this::visit)
-            );
-        }
-
-        public void countWords(Node node) {
-            myVisitor.visit(node);
-        }
-
-        private void visit(Text text) {
-            // This is called for all Text nodes. Override other visit methods for other node types.
-
-            // Count words (this is just an example, don't actually do it this way for various reasons).
-            wordCount += text.getChars().toString().split("\\W+").length;
-
-            // Descend into children (could be omitted in this case because Text nodes don't have children).
-            myVisitor.visitChildren(text);
-        }
+      // Descend into children (could be omitted in this case because Text nodes don't have
+      // children).
+      myVisitor.visitChildren(text);
     }
+  }
 }

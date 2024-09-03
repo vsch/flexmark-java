@@ -6,10 +6,9 @@ import com.vladsch.flexmark.util.ast.NodeTracker;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class DocumentPostProcessor implements PostProcessor {
-    /**
-     * @param state node tracker used for optimizing node processing
-     * @param node  the node to post-process
-     */
-    final public void process(@NotNull NodeTracker state, @NotNull Node node) {
-    }
+  /**
+   * @param state node tracker used for optimizing node processing
+   * @param node the node to post-process
+   */
+  public final void process(@NotNull NodeTracker state, @NotNull Node node) {}
 }

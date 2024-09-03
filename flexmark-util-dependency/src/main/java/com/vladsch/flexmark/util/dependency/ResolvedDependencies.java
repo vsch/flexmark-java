@@ -8,17 +8,17 @@ import java.util.function.Function;
  */
 @Deprecated
 public class ResolvedDependencies<T> {
-    final private List<T> dependentStages;
+  private final List<T> dependentStages;
 
-    public ResolvedDependencies(List<T> dependentStages) {
-        this.dependentStages = dependentStages;
-    }
+  public ResolvedDependencies(List<T> dependentStages) {
+    this.dependentStages = dependentStages;
+  }
 
-    public List<T> getDependentStages() {
-        return dependentStages;
-    }
+  public List<T> getDependentStages() {
+    return dependentStages;
+  }
 
-    public boolean isEmpty() {
-        return getDependentStages().isEmpty();
-    }
+  public boolean isEmpty() {
+    return getDependentStages().isEmpty();
+  }
 }

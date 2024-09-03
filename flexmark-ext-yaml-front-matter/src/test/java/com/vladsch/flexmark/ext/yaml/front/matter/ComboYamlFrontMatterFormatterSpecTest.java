@@ -14,25 +14,25 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboYamlFrontMatterFormatterSpecTest extends FormatterSpecTest {
-    final private static String SPEC_RESOURCE = "/ext_yaml_front_matter_formatter_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(Parser.EXTENSIONS, Collections.singleton(YamlFrontMatterExtension.create()))
-            .set(Parser.LISTS_AUTO_LOOSE, false)
-            .toImmutable();
+  private static final String SPEC_RESOURCE = "/ext_yaml_front_matter_formatter_spec.md";
+  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+      ResourceLocation.of(SPEC_RESOURCE);
+  private static final DataHolder OPTIONS =
+      new MutableDataSet()
+          .set(Parser.EXTENSIONS, Collections.singleton(YamlFrontMatterExtension.create()))
+          .set(Parser.LISTS_AUTO_LOOSE, false)
+          .toImmutable();
 
-    final private static Map<String, DataHolder> optionsMap = placementAndSortOptions(
-            Parser.REFERENCES_KEEP,
-            Formatter.REFERENCE_PLACEMENT,
-            Formatter.REFERENCE_SORT
-    );
+  private static final Map<String, DataHolder> optionsMap =
+      placementAndSortOptions(
+          Parser.REFERENCES_KEEP, Formatter.REFERENCE_PLACEMENT, Formatter.REFERENCE_SORT);
 
-    public ComboYamlFrontMatterFormatterSpecTest(@NotNull SpecExample example) {
-        super(example, optionsMap, OPTIONS);
-    }
+  public ComboYamlFrontMatterFormatterSpecTest(@NotNull SpecExample example) {
+    super(example, optionsMap, OPTIONS);
+  }
 
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return getTestData(RESOURCE_LOCATION);
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static List<Object[]> data() {
+    return getTestData(RESOURCE_LOCATION);
+  }
 }

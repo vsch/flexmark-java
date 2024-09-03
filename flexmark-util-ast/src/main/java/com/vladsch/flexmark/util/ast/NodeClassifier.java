@@ -4,13 +4,12 @@ import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
 public class NodeClassifier implements Function<Node, Class<?>> {
-    final public static NodeClassifier INSTANCE = new NodeClassifier();
+  public static final NodeClassifier INSTANCE = new NodeClassifier();
 
-    private NodeClassifier() {
-    }
+  private NodeClassifier() {}
 
-    @Override
-    public @NotNull Class<?> apply(@NotNull Node value) {
-        return value.getClass();
-    }
+  @Override
+  public @NotNull Class<?> apply(@NotNull Node value) {
+    return value.getClass();
+  }
 }

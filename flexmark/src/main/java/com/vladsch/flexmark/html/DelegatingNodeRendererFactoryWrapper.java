@@ -12,59 +12,62 @@ import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Factory for instantiating new node renderers with dependencies
- */
-class DelegatingNodeRendererFactoryWrapper implements Function<DataHolder, NodeRenderer>, Dependent, DelegatingNodeRendererFactory {
-    final private NodeRendererFactory nodeRendererFactory;
-    private List<DelegatingNodeRendererFactoryWrapper> nodeRenderers;
-    private Set<Class<?>> myDelegates = null;
+/** Factory for instantiating new node renderers with dependencies */
+class DelegatingNodeRendererFactoryWrapper
+    implements Function<DataHolder, NodeRenderer>, Dependent, DelegatingNodeRendererFactory {
+  private final NodeRendererFactory nodeRendererFactory;
+  private List<DelegatingNodeRendererFactoryWrapper> nodeRenderers;
+  private Set<Class<?>> myDelegates = null;
 
-    public DelegatingNodeRendererFactoryWrapper(List<DelegatingNodeRendererFactoryWrapper> nodeRenderers, NodeRendererFactory nodeRendererFactory) {
-        this.nodeRendererFactory = nodeRendererFactory;
-        this.nodeRenderers = nodeRenderers;
-    }
+  public DelegatingNodeRendererFactoryWrapper(
+      List<DelegatingNodeRendererFactoryWrapper> nodeRenderers,
+      NodeRendererFactory nodeRendererFactory) {
+    this.nodeRendererFactory = nodeRendererFactory;
+    this.nodeRenderers = nodeRenderers;
+  }
 
-    @Override
-    public @NotNull NodeRenderer apply(@NotNull DataHolder options) {
-        return nodeRendererFactory.apply(options);
-    }
+  @Override
+  public @NotNull NodeRenderer apply(@NotNull DataHolder options) {
+    return nodeRendererFactory.apply(options);
+  }
 
-    public @NotNull NodeRendererFactory getFactory() {
-        return nodeRendererFactory;
-    }
+  public @NotNull NodeRendererFactory getFactory() {
+    return nodeRendererFactory;
+  }
 
-    @Override
-    public @Nullable Set<Class<?>> getDelegates() {
-        return nodeRendererFactory instanceof DelegatingNodeRendererFactory ? ((DelegatingNodeRendererFactory) nodeRendererFactory).getDelegates() : null;
-    }
+  @Override
+  public @Nullable Set<Class<?>> getDelegates() {
+    return nodeRendererFactory instanceof DelegatingNodeRendererFactory
+        ? ((DelegatingNodeRendererFactory) nodeRendererFactory).getDelegates()
+        : null;
+  }
 
-    @Override
-    final public @Nullable Set<Class<?>> getAfterDependents() {
-        return null;
-    }
+  @Override
+  public final @Nullable Set<Class<?>> getAfterDependents() {
+    return null;
+  }
 
-    @Override
-    public @Nullable Set<Class<?>> getBeforeDependents() {
-        if (myDelegates == null && nodeRenderers != null) {
-            Set<Class<?>> delegates = getDelegates();
-            if (delegates != null) {
-                myDelegates = new HashSet<>();
-                for (DelegatingNodeRendererFactoryWrapper factory : nodeRenderers) {
-                    if (delegates.contains(factory.getFactory().getClass())) {
-                        myDelegates.add(factory.getFactory().getClass());
-                    }
-                }
-            }
-
-            // release reference
-            nodeRenderers = null;
+  @Override
+  public @Nullable Set<Class<?>> getBeforeDependents() {
+    if (myDelegates == null && nodeRenderers != null) {
+      Set<Class<?>> delegates = getDelegates();
+      if (delegates != null) {
+        myDelegates = new HashSet<>();
+        for (DelegatingNodeRendererFactoryWrapper factory : nodeRenderers) {
+          if (delegates.contains(factory.getFactory().getClass())) {
+            myDelegates.add(factory.getFactory().getClass());
+          }
         }
-        return myDelegates;
-    }
+      }
 
-    @Override
-    final public boolean affectsGlobalScope() {
-        return false;
+      // release reference
+      nodeRenderers = null;
     }
+    return myDelegates;
+  }
+
+  @Override
+  public final boolean affectsGlobalScope() {
+    return false;
+  }
 }

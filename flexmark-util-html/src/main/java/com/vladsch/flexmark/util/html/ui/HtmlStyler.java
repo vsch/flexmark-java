@@ -18,6 +18,7 @@
 package com.vladsch.flexmark.util.html.ui;
 
 public interface HtmlStyler<T> {
-    T getStyleable(Object item);
-    String getStyle(T item);
+  T getStyleable(Object item);
+
+  String getStyle(T item);
 }

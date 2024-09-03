@@ -9,23 +9,25 @@ import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public class HardLineBreak extends Node implements DoNotTrim, TextContainer {
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    public HardLineBreak() {
-    }
+  public HardLineBreak() {}
 
-    public HardLineBreak(BasedSequence chars) {
-        super(chars);
-    }
+  public HardLineBreak(BasedSequence chars) {
+    super(chars);
+  }
 
-    @Override
-    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
-        BasedSequence chars = getChars();
-        out.add(chars.subSequence(chars.length() - 1, chars.length()));
-        return false;
-    }
+  @Override
+  public boolean collectText(
+      ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out,
+      int flags,
+      NodeVisitor nodeVisitor) {
+    BasedSequence chars = getChars();
+    out.add(chars.subSequence(chars.length() - 1, chars.length()));
+    return false;
+  }
 }

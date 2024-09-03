@@ -16,76 +16,76 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
-    final private DefinitionOptions options;
+  private final DefinitionOptions options;
 
-    public DefinitionListBlockPreProcessor(DataHolder options) {
-        this.options = new DefinitionOptions(options);
-    }
+  public DefinitionListBlockPreProcessor(DataHolder options) {
+    this.options = new DefinitionOptions(options);
+  }
 
-    @Override
-    public void preProcess(ParserState state, Block block) {
-        Boolean blankLinesInAST = BLANK_LINES_IN_AST.get(state.getProperties());
+  @Override
+  public void preProcess(ParserState state, Block block) {
+    Boolean blankLinesInAST = BLANK_LINES_IN_AST.get(state.getProperties());
 
-        if (block instanceof DefinitionList) {
-            // need to propagate loose/tight
-            final DefinitionList definitionList = (DefinitionList) block;
-            boolean isTight = definitionList.isTight();
-            if (options.autoLoose && isTight) {
-                for (Node child : definitionList.getChildren()) {
-                    if (child instanceof DefinitionItem) {
-                        if (((DefinitionItem) child).isLoose()) {
-                            isTight = false;
-                            if (!blankLinesInAST) break;
-                        }
-
-                        if (blankLinesInAST) {
-                            // transfer its trailing blank lines to uppermost level
-                            child.moveTrailingBlankLines();
-                        }
-                    }
-                }
-
-                definitionList.setTight(isTight);
+    if (block instanceof DefinitionList) {
+      // need to propagate loose/tight
+      final DefinitionList definitionList = (DefinitionList) block;
+      boolean isTight = definitionList.isTight();
+      if (options.autoLoose && isTight) {
+        for (Node child : definitionList.getChildren()) {
+          if (child instanceof DefinitionItem) {
+            if (((DefinitionItem) child).isLoose()) {
+              isTight = false;
+              if (!blankLinesInAST) break;
             }
 
             if (blankLinesInAST) {
-                definitionList.moveTrailingBlankLines();
+              // transfer its trailing blank lines to uppermost level
+              child.moveTrailingBlankLines();
             }
+          }
         }
+
+        definitionList.setTight(isTight);
+      }
+
+      if (blankLinesInAST) {
+        definitionList.moveTrailingBlankLines();
+      }
+    }
+  }
+
+  public static class Factory implements BlockPreProcessorFactory {
+    @NotNull
+    @Override
+    public Set<Class<? extends Block>> getBlockTypes() {
+      HashSet<Class<? extends Block>> set = new HashSet<>();
+      set.add(DefinitionList.class);
+      return set;
     }
 
-    public static class Factory implements BlockPreProcessorFactory {
-        @NotNull
-        @Override
-        public Set<Class<? extends Block>> getBlockTypes() {
-            HashSet<Class<? extends Block>> set = new HashSet<>();
-            set.add(DefinitionList.class);
-            return set;
-        }
-
-        @Nullable
-        @Override
-        public Set<Class<?>> getAfterDependents() {
-            HashSet<Class<?>> set = new HashSet<>();
-            set.add(DefinitionListItemBlockPreProcessor.Factory.class);
-            return set;
-        }
-
-        @Nullable
-        @Override
-        public Set<Class<?>> getBeforeDependents() {
-            return null;
-        }
-
-        @Override
-        public boolean affectsGlobalScope() {
-            return true;
-        }
-
-        @NotNull
-        @Override
-        public BlockPreProcessor apply(@NotNull ParserState state) {
-            return new DefinitionListBlockPreProcessor(state.getProperties());
-        }
+    @Nullable
+    @Override
+    public Set<Class<?>> getAfterDependents() {
+      HashSet<Class<?>> set = new HashSet<>();
+      set.add(DefinitionListItemBlockPreProcessor.Factory.class);
+      return set;
     }
+
+    @Nullable
+    @Override
+    public Set<Class<?>> getBeforeDependents() {
+      return null;
+    }
+
+    @Override
+    public boolean affectsGlobalScope() {
+      return true;
+    }
+
+    @NotNull
+    @Override
+    public BlockPreProcessor apply(@NotNull ParserState state) {
+      return new DefinitionListBlockPreProcessor(state.getProperties());
+    }
+  }
 }

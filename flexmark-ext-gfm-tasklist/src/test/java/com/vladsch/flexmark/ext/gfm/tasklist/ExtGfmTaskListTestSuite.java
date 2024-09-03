@@ -5,7 +5,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ComboGfmTaskListSpecTest.class,
+  ComboGfmTaskListSpecTest.class,
 })
-public class ExtGfmTaskListTestSuite {
-}
+public class ExtGfmTaskListTestSuite {}

@@ -7,16 +7,20 @@ import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface UriContentResolverFactory extends Function<LinkResolverBasicContext, UriContentResolver>, Dependent {
-    @Override
-    @Nullable Set<Class<?>> getAfterDependents();
+public interface UriContentResolverFactory
+    extends Function<LinkResolverBasicContext, UriContentResolver>, Dependent {
+  @Override
+  @Nullable
+  Set<Class<?>> getAfterDependents();
 
-    @Override
-    @Nullable Set<Class<?>> getBeforeDependents();
+  @Override
+  @Nullable
+  Set<Class<?>> getBeforeDependents();
 
-    @Override
-    boolean affectsGlobalScope();
+  @Override
+  boolean affectsGlobalScope();
 
-    @Override
-    @NotNull UriContentResolver apply(@NotNull LinkResolverBasicContext context);
+  @Override
+  @NotNull
+  UriContentResolver apply(@NotNull LinkResolverBasicContext context);
 }

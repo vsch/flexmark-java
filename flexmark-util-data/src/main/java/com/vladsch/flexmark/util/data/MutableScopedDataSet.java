@@ -8,65 +8,66 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MutableScopedDataSet extends MutableDataSet {
-    protected final DataHolder parent;
+  protected final DataHolder parent;
 
-    public MutableScopedDataSet(DataHolder parent) {
-        super();
-        this.parent = parent;
-    }
+  public MutableScopedDataSet(DataHolder parent) {
+    super();
+    this.parent = parent;
+  }
 
-    public MutableScopedDataSet(DataHolder parent, MutableDataHolder other) {
-        super(other);
-        this.parent = parent;
-    }
+  public MutableScopedDataSet(DataHolder parent, MutableDataHolder other) {
+    super(other);
+    this.parent = parent;
+  }
 
-    public DataHolder getParent() {
-        return parent;
-    }
+  public DataHolder getParent() {
+    return parent;
+  }
 
-    @Override
-    public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
-        if (parent != null) {
-            HashMap<DataKeyBase<?>, Object> all = new HashMap<>(super.getAll());
-            for (DataKeyBase<?> key : parent.getKeys()) {
-                if (!contains(key)) {
-                    all.put(key, key.get(parent));
-                }
-            }
-
-            return all;
-        } else {
-            return super.getAll();
+  @Override
+  public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
+    if (parent != null) {
+      HashMap<DataKeyBase<?>, Object> all = new HashMap<>(super.getAll());
+      for (DataKeyBase<?> key : parent.getKeys()) {
+        if (!contains(key)) {
+          all.put(key, key.get(parent));
         }
+      }
+
+      return all;
+    } else {
+      return super.getAll();
     }
+  }
 
-    @Override
-    public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
-        if (parent != null) {
-            ArrayList<DataKeyBase<?>> all = new ArrayList<>(super.getKeys());
-            for (DataKeyBase<?> key : parent.getKeys()) {
-                if (!contains(key)) {
-                    all.add(key);
-                }
-            }
-
-            return all;
-        } else {
-            return super.getKeys();
+  @Override
+  public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
+    if (parent != null) {
+      ArrayList<DataKeyBase<?>> all = new ArrayList<>(super.getKeys());
+      for (DataKeyBase<?> key : parent.getKeys()) {
+        if (!contains(key)) {
+          all.add(key);
         }
-    }
+      }
 
-    @Override
-    public boolean contains(@NotNull DataKeyBase<?> key) {
-        return super.contains(key) || (parent != null && parent.contains(key));
+      return all;
+    } else {
+      return super.getKeys();
     }
+  }
 
-    @Override
-    public @Nullable Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
-        if (parent == null || super.contains(key) || !parent.contains(key)) {
-            return super.getOrCompute(key, factory);
-        } else {
-            return parent.getOrCompute(key, factory);
-        }
+  @Override
+  public boolean contains(@NotNull DataKeyBase<?> key) {
+    return super.contains(key) || (parent != null && parent.contains(key));
+  }
+
+  @Override
+  public @Nullable Object getOrCompute(
+      @NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
+    if (parent == null || super.contains(key) || !parent.contains(key)) {
+      return super.getOrCompute(key, factory);
+    } else {
+      return parent.getOrCompute(key, factory);
     }
+  }
 }

@@ -11,20 +11,22 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
-final public class ComboMarkdownCompatibilitySpecTest extends CoreRendererSpecTest {
-    final private static String SPEC_RESOURCE = "/core_markdown_compatibility_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    final private static DataHolder OPTIONS = new MutableDataSet()
-            .setFrom(ParserEmulationProfile.MARKDOWN)
-            .set(HtmlRenderer.INDENT_SIZE, 4)
-            .toMutable();
+public final class ComboMarkdownCompatibilitySpecTest extends CoreRendererSpecTest {
+  private static final String SPEC_RESOURCE = "/core_markdown_compatibility_spec.md";
+  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+      ResourceLocation.of(SPEC_RESOURCE);
+  private static final DataHolder OPTIONS =
+      new MutableDataSet()
+          .setFrom(ParserEmulationProfile.MARKDOWN)
+          .set(HtmlRenderer.INDENT_SIZE, 4)
+          .toMutable();
 
-    public ComboMarkdownCompatibilitySpecTest(@NotNull SpecExample example) {
-        super(example, null, OPTIONS);
-    }
+  public ComboMarkdownCompatibilitySpecTest(@NotNull SpecExample example) {
+    super(example, null, OPTIONS);
+  }
 
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return ComboSpecTestCase.getTestData(RESOURCE_LOCATION);
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static List<Object[]> data() {
+    return ComboSpecTestCase.getTestData(RESOURCE_LOCATION);
+  }
 }

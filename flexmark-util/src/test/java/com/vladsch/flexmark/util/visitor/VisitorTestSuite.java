@@ -5,7 +5,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        NodeVisitorTest.class,
+  NodeVisitorTest.class,
 })
-public class VisitorTestSuite {
-}
+public class VisitorTestSuite {}

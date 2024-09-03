@@ -274,6 +274,7 @@
           <java>
             <importOrder/>
             <removeUnusedImports/>
+            <googleJavaFormat/>
           </java>
           <pom>
             <sortPom>

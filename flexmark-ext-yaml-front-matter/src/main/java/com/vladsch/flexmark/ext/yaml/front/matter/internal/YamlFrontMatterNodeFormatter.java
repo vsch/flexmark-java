@@ -12,49 +12,53 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
-    public YamlFrontMatterNodeFormatter(DataHolder options) {
-    }
+  public YamlFrontMatterNodeFormatter(DataHolder options) {}
 
-    @Nullable
+  @Nullable
+  @Override
+  public Set<FormattingPhase> getFormattingPhases() {
+    return new HashSet<>(Collections.singleton(FormattingPhase.DOCUMENT_FIRST));
+  }
+
+  @Nullable
+  @Override
+  public Set<Class<?>> getNodeClasses() {
+    return null;
+  }
+
+  @Override
+  public void renderDocument(
+      @NotNull NodeFormatterContext context,
+      @NotNull MarkdownWriter markdown,
+      @NotNull Document document,
+      @NotNull FormattingPhase phase) {
+    if (phase == FormattingPhase.DOCUMENT_FIRST) {
+      Node node = document.getFirstChild();
+      if (node instanceof YamlFrontMatterBlock) {
+        markdown.openPreFormatted(false);
+        markdown.append(node.getChars()).blankLine();
+        markdown.closePreFormatted();
+      }
+    }
+  }
+
+  @Nullable
+  @Override
+  public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
+    return new HashSet<>(
+        Collections.singletonList(
+            new NodeFormattingHandler<>(
+                YamlFrontMatterBlock.class, YamlFrontMatterNodeFormatter.this::render)));
+  }
+
+  private void render(
+      YamlFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {}
+
+  public static class Factory implements NodeFormatterFactory {
+    @NotNull
     @Override
-    public Set<FormattingPhase> getFormattingPhases() {
-        return new HashSet<>(Collections.singleton(FormattingPhase.DOCUMENT_FIRST));
+    public NodeFormatter create(@NotNull DataHolder options) {
+      return new YamlFrontMatterNodeFormatter(options);
     }
-
-    @Nullable
-    @Override
-    public Set<Class<?>> getNodeClasses() {
-        return null;
-    }
-
-    @Override
-    public void renderDocument(@NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown, @NotNull Document document, @NotNull FormattingPhase phase) {
-        if (phase == FormattingPhase.DOCUMENT_FIRST) {
-            Node node = document.getFirstChild();
-            if (node instanceof YamlFrontMatterBlock) {
-                markdown.openPreFormatted(false);
-                markdown.append(node.getChars()).blankLine();
-                markdown.closePreFormatted();
-            }
-        }
-    }
-
-    @Nullable
-    @Override
-    public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<>(Collections.singletonList(
-                new NodeFormattingHandler<>(YamlFrontMatterBlock.class, YamlFrontMatterNodeFormatter.this::render)
-        ));
-    }
-
-    private void render(YamlFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-    }
-
-    public static class Factory implements NodeFormatterFactory {
-        @NotNull
-        @Override
-        public NodeFormatter create(@NotNull DataHolder options) {
-            return new YamlFrontMatterNodeFormatter(options);
-        }
-    }
+  }
 }

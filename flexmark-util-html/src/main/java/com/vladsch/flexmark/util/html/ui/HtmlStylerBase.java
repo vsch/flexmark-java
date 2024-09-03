@@ -18,15 +18,15 @@
 package com.vladsch.flexmark.util.html.ui;
 
 public abstract class HtmlStylerBase<T> implements HtmlStyler<T> {
-    @Override
-    public T getStyleable(Object item) {
-        try {
-            //noinspection unchecked
-            return (T) item;
-        } catch (Throwable ignored) {
-            return null;
-        }
+  @Override
+  public T getStyleable(Object item) {
+    try {
+      //noinspection unchecked
+      return (T) item;
+    } catch (Throwable ignored) {
+      return null;
     }
+  }
 
-    public abstract String getStyle(T item);
+  public abstract String getStyle(T item);
 }

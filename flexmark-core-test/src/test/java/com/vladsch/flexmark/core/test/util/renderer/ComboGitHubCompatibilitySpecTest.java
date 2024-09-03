@@ -13,28 +13,36 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
-final public class ComboGitHubCompatibilitySpecTest extends CoreRendererSpecTest {
-    final private static String SPEC_RESOURCE = "/core_gfm_doc_compatibility_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    final private static DataHolder OPTIONS = new MutableDataSet()
-            .setFrom(ParserEmulationProfile.GITHUB_DOC)
+public final class ComboGitHubCompatibilitySpecTest extends CoreRendererSpecTest {
+  private static final String SPEC_RESOURCE = "/core_gfm_doc_compatibility_spec.md";
+  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+      ResourceLocation.of(SPEC_RESOURCE);
+  private static final DataHolder OPTIONS =
+      new MutableDataSet()
+          .setFrom(ParserEmulationProfile.GITHUB_DOC)
 
-            //.set(Parser.THEMATIC_BREAK_RELAXED_START, true)
-            .set(HtmlRenderer.INDENT_SIZE, 4)
-            .set(HtmlRenderer.RENDER_HEADER_ID, true)
-            .set(HtmlRenderer.SOFT_BREAK, " ")
-            .toImmutable();
+          // .set(Parser.THEMATIC_BREAK_RELAXED_START, true)
+          .set(HtmlRenderer.INDENT_SIZE, 4)
+          .set(HtmlRenderer.RENDER_HEADER_ID, true)
+          .set(HtmlRenderer.SOFT_BREAK, " ")
+          .toImmutable();
 
-    final private static Map<String, DataHolder> optionsMap = new HashMap<>();
-    static {
-        optionsMap.put("no-loose-non-list-children", new MutableDataSet().set(Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN, false).set(Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH, false));
-    }
-    public ComboGitHubCompatibilitySpecTest(@NotNull SpecExample example) {
-        super(example, optionsMap, OPTIONS);
-    }
+  private static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return getTestData(RESOURCE_LOCATION);
-    }
+  static {
+    optionsMap.put(
+        "no-loose-non-list-children",
+        new MutableDataSet()
+            .set(Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN, false)
+            .set(Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH, false));
+  }
+
+  public ComboGitHubCompatibilitySpecTest(@NotNull SpecExample example) {
+    super(example, optionsMap, OPTIONS);
+  }
+
+  @Parameterized.Parameters(name = "{0}")
+  public static List<Object[]> data() {
+    return getTestData(RESOURCE_LOCATION);
+  }
 }

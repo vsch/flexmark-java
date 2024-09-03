@@ -21,96 +21,106 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-final public class HtmlEmbeddedAttributeTest {
-    MutableDataSet OPTIONS;
-    Parser PARSER;
-    HtmlRenderer RENDERER;
+public final class HtmlEmbeddedAttributeTest {
+  MutableDataSet OPTIONS;
+  Parser PARSER;
+  HtmlRenderer RENDERER;
 
-    @Before
-    public void setUp() throws Exception {
-        OPTIONS = new MutableDataSet();
-        OPTIONS.set(Parser.EXTENSIONS, Collections.singletonList(TestNodePostProcessorExtension.create()));
+  @Before
+  public void setUp() throws Exception {
+    OPTIONS = new MutableDataSet();
+    OPTIONS.set(
+        Parser.EXTENSIONS, Collections.singletonList(TestNodePostProcessorExtension.create()));
 
-        PARSER = Parser.builder(OPTIONS).build();
-        RENDERER = HtmlRenderer.builder(OPTIONS).build();
+    PARSER = Parser.builder(OPTIONS).build();
+    RENDERER = HtmlRenderer.builder(OPTIONS).build();
+  }
+
+  @Test
+  public void embeddedAttributeProvider1() {
+    assertEquals(
+        "<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"Figure 1. Some description here.\" /></p>\n",
+        RENDERER.render(
+            PARSER.parse("![Figure 1. Some description here.](http://example.com/image.png)\n")));
+  }
+
+  @Test
+  public void embeddedAttributeProvider2() {
+    assertEquals(
+        "<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"bar\" title=\"Image Title\" /></p>\n",
+        RENDERER.render(
+            PARSER.parse("![bar]\n" + "\n[bar]: http://example.com/image.png 'Image Title'")));
+  }
+
+  @Test
+  public void embeddedAttributeProvider3() {
+    assertEquals(
+        "<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"Figure 1. Some description here.\" title=\"Image Title\" /></p>\n",
+        RENDERER.render(
+            PARSER.parse(
+                "![Figure 1. Some description here.][bar]\n"
+                    + "\n[bar]: http://example.com/image.png 'Image Title'")));
+  }
+
+  static class TestNodePostProcessor extends NodePostProcessor {
+    private static class TestNodeFactory extends NodePostProcessorFactory {
+      TestNodeFactory(DataHolder options) {
+        super(false);
+        addNodes(Paragraph.class);
+      }
+
+      @NotNull
+      @Override
+      public NodePostProcessor apply(@NotNull Document document) {
+        return new TestNodePostProcessor();
+      }
     }
 
-    @Test
-    public void embeddedAttributeProvider1() {
-        assertEquals("<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"Figure 1. Some description here.\" /></p>\n", RENDERER.render(PARSER.parse("![Figure 1. Some description here.](http://example.com/image.png)\n")));
+    public static NodePostProcessorFactory Factory(DataHolder options) {
+      return new TestNodeFactory(options);
     }
 
-    @Test
-    public void embeddedAttributeProvider2() {
-        assertEquals("<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"bar\" title=\"Image Title\" /></p>\n", RENDERER.render(PARSER.parse(
-                "![bar]\n" +
-                        "\n[bar]: http://example.com/image.png 'Image Title'")));
+    @Override
+    public void process(@NotNull NodeTracker state, @NotNull Node node) {
+      BasedSequence paragraphText = BasedSequence.NULL;
+      if (node instanceof Paragraph) { // [foo](http://example.com)
+        MutableAttributes attributes = new MutableAttributes();
+        attributes.addValue("class", "caption");
+
+        node.appendChild(new EmbeddedAttributeProvider.EmbeddedNodeAttributes(node, attributes));
+      }
+    }
+  }
+
+  /**
+   * An extension that registers a post processor which intentionally strips (replaces) specific
+   * link and image-link tokens after parsing.
+   */
+  static class TestNodePostProcessorExtension
+      implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    private TestNodePostProcessorExtension() {}
+
+    @Override
+    public void rendererOptions(@NotNull MutableDataHolder options) {
+      // add any configuration settings to options you want to apply to everything, here
     }
 
-    @Test
-    public void embeddedAttributeProvider3() {
-        assertEquals("<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"Figure 1. Some description here.\" title=\"Image Title\" /></p>\n", RENDERER.render(PARSER.parse(
-                "![Figure 1. Some description here.][bar]\n" +
-                        "\n[bar]: http://example.com/image.png 'Image Title'")));
+    @Override
+    public void extend(
+        @NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
+      htmlRendererBuilder.attributeProviderFactory(EmbeddedAttributeProvider.Factory);
     }
 
-    static class TestNodePostProcessor extends NodePostProcessor {
-        private static class TestNodeFactory extends NodePostProcessorFactory {
-            TestNodeFactory(DataHolder options) {
-                super(false);
-                addNodes(Paragraph.class);
-            }
+    @Override
+    public void parserOptions(MutableDataHolder options) {}
 
-            @NotNull
-            @Override
-            public NodePostProcessor apply(@NotNull Document document) {
-                return new TestNodePostProcessor();
-            }
-        }
-
-        public static NodePostProcessorFactory Factory(DataHolder options) {
-            return new TestNodeFactory(options);
-        }
-
-        @Override
-        public void process(@NotNull NodeTracker state, @NotNull Node node) {
-            BasedSequence paragraphText = BasedSequence.NULL;
-            if (node instanceof Paragraph) { // [foo](http://example.com)
-                MutableAttributes attributes = new MutableAttributes();
-                attributes.addValue("class", "caption");
-
-                node.appendChild(new EmbeddedAttributeProvider.EmbeddedNodeAttributes(node, attributes));
-            }
-        }
+    @Override
+    public void extend(Parser.Builder parserBuilder) {
+      parserBuilder.postProcessorFactory(TestNodePostProcessor.Factory(parserBuilder));
     }
 
-    /**
-     * An extension that registers a post processor which intentionally strips (replaces)
-     * specific link and image-link tokens after parsing.
-     */
-    static class TestNodePostProcessorExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-        private TestNodePostProcessorExtension() { }
-
-        @Override
-        public void rendererOptions(@NotNull MutableDataHolder options) {
-            // add any configuration settings to options you want to apply to everything, here
-        }
-
-        @Override
-        public void extend(@NotNull HtmlRenderer.Builder htmlRendererBuilder, @NotNull String rendererType) {
-            htmlRendererBuilder.attributeProviderFactory(EmbeddedAttributeProvider.Factory);
-        }
-
-        @Override
-        public void parserOptions(MutableDataHolder options) { }
-
-        @Override
-        public void extend(Parser.Builder parserBuilder) {
-            parserBuilder.postProcessorFactory(TestNodePostProcessor.Factory(parserBuilder));
-        }
-
-        public static TestNodePostProcessorExtension create() {
-            return new TestNodePostProcessorExtension();
-        }
+    public static TestNodePostProcessorExtension create() {
+      return new TestNodePostProcessorExtension();
     }
+  }
 }

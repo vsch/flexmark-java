@@ -17,34 +17,37 @@ import org.jetbrains.annotations.NotNull;
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
 public class HtmlEntity extends Node implements TextContainer {
-    @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
-        if (!getChars().isEmpty()) out.append(" \"").append(getChars()).append("\"");
-    }
+  @Override
+  public void getAstExtra(@NotNull StringBuilder out) {
+    if (!getChars().isEmpty()) out.append(" \"").append(getChars()).append("\"");
+  }
 
-    // TODO: add opening and closing marker with intermediate text so that completions can be easily done
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  // TODO: add opening and closing marker with intermediate text so that completions can be easily
+  // done
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    public HtmlEntity() {
-    }
+  public HtmlEntity() {}
 
-    public HtmlEntity(BasedSequence chars) {
-        super(chars);
-    }
+  public HtmlEntity(BasedSequence chars) {
+    super(chars);
+  }
 
-    @Override
-    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
-        if (any(flags, F_NODE_TEXT)) {
-            out.append(getChars());
-        } else {
-            ReplacedTextMapper textMapper = new ReplacedTextMapper(getChars());
-            BasedSequence unescaped = Escaping.unescape(getChars(), textMapper);
-            out.append(unescaped);
-        }
-        return false;
+  @Override
+  public boolean collectText(
+      ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out,
+      int flags,
+      NodeVisitor nodeVisitor) {
+    if (any(flags, F_NODE_TEXT)) {
+      out.append(getChars());
+    } else {
+      ReplacedTextMapper textMapper = new ReplacedTextMapper(getChars());
+      BasedSequence unescaped = Escaping.unescape(getChars(), textMapper);
+      out.append(unescaped);
     }
+    return false;
+  }
 }

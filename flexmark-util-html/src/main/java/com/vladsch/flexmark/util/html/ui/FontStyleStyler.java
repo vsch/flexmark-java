@@ -18,10 +18,11 @@
 package com.vladsch.flexmark.util.html.ui;
 
 public class FontStyleStyler extends HtmlStylerBase<FontStyle> {
-    @Override
-    public String getStyle(FontStyle item) {
-        return item == null ? "" :
-                (item.isItalic() ? "font-style:italic;" : "font-style:normal;") +
-                        (item.isBold() ? "font-weight:bold" : "font-weight:normal");
-    }
+  @Override
+  public String getStyle(FontStyle item) {
+    return item == null
+        ? ""
+        : (item.isItalic() ? "font-style:italic;" : "font-style:normal;")
+            + (item.isBold() ? "font-weight:bold" : "font-weight:normal");
+  }
 }

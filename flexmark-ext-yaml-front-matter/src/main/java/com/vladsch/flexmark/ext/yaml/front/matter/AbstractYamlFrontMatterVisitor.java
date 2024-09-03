@@ -7,33 +7,33 @@ import java.util.List;
 import java.util.Map;
 
 public class AbstractYamlFrontMatterVisitor implements YamlFrontMatterVisitor {
-    final private Map<String, List<String>> data;
-    final private NodeVisitor myVisitor;
+  private final Map<String, List<String>> data;
+  private final NodeVisitor myVisitor;
 
-    public AbstractYamlFrontMatterVisitor() {
-        //myVisitor = new NodeVisitor(
-        //        new VisitHandler<>(YamlFrontMatterNode.class, this::visit),
-        //        new VisitHandler<>(YamlFrontMatterBlock.class, this::visit)
-        //);
-        myVisitor = new NodeVisitor(YamlFrontMatterVisitorExt.VISIT_HANDLERS(this));
-        data = new LinkedHashMap<>();
-    }
+  public AbstractYamlFrontMatterVisitor() {
+    // myVisitor = new NodeVisitor(
+    //        new VisitHandler<>(YamlFrontMatterNode.class, this::visit),
+    //        new VisitHandler<>(YamlFrontMatterBlock.class, this::visit)
+    // );
+    myVisitor = new NodeVisitor(YamlFrontMatterVisitorExt.VISIT_HANDLERS(this));
+    data = new LinkedHashMap<>();
+  }
 
-    public void visit(Node node) {
-        myVisitor.visit(node);
-    }
+  public void visit(Node node) {
+    myVisitor.visit(node);
+  }
 
-    @Override
-    public void visit(YamlFrontMatterNode node) {
-        data.put(node.getKey(), node.getValues());
-    }
+  @Override
+  public void visit(YamlFrontMatterNode node) {
+    data.put(node.getKey(), node.getValues());
+  }
 
-    @Override
-    public void visit(YamlFrontMatterBlock node) {
-        myVisitor.visitChildren(node);
-    }
+  @Override
+  public void visit(YamlFrontMatterBlock node) {
+    myVisitor.visitChildren(node);
+  }
 
-    public Map<String, List<String>> getData() {
-        return data;
-    }
+  public Map<String, List<String>> getData() {
+    return data;
+  }
 }

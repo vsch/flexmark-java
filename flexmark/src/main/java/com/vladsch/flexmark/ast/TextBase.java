@@ -12,43 +12,45 @@ import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 public class TextBase extends Node implements TextContainer {
-    public TextBase() {
-    }
+  public TextBase() {}
 
-    public TextBase(BasedSequence chars) {
-        super(chars);
-    }
+  public TextBase(BasedSequence chars) {
+    super(chars);
+  }
 
-    public TextBase(String chars) {
-        super(BasedSequence.of(chars));
-    }
+  public TextBase(String chars) {
+    super(BasedSequence.of(chars));
+  }
 
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
-        astExtraChars(out);
-    }
+  @Override
+  public void getAstExtra(@NotNull StringBuilder out) {
+    astExtraChars(out);
+  }
 
-    @Override
-    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
-        if (any(flags, F_NODE_TEXT)) {
-            out.append(getChars());
-        } else {
-            ReplacedTextMapper textMapper = new ReplacedTextMapper(getChars());
-            BasedSequence unescaped = Escaping.unescape(getChars(), textMapper);
-            out.append(unescaped);
-        }
-        return false;
+  @Override
+  public boolean collectText(
+      ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out,
+      int flags,
+      NodeVisitor nodeVisitor) {
+    if (any(flags, F_NODE_TEXT)) {
+      out.append(getChars());
+    } else {
+      ReplacedTextMapper textMapper = new ReplacedTextMapper(getChars());
+      BasedSequence unescaped = Escaping.unescape(getChars(), textMapper);
+      out.append(unescaped);
     }
+    return false;
+  }
 
-    @NotNull
-    @Override
-    protected String toStringAttributes() {
-        return "text=" + getChars();
-    }
+  @NotNull
+  @Override
+  protected String toStringAttributes() {
+    return "text=" + getChars();
+  }
 }

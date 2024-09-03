@@ -21,8 +21,14 @@ import java.awt.Font;
 import java.util.Locale;
 
 public class FontStyler extends HtmlStylerBase<Font> {
-    @Override
-    public String getStyle(Font item) {
-        return item == null ? "" : String.format(Locale.US, "font-family:%s;font-size:%dpt;font-style:normal;font-weight:normal", item.getFamily(), item.getSize());
-    }
+  @Override
+  public String getStyle(Font item) {
+    return item == null
+        ? ""
+        : String.format(
+            Locale.US,
+            "font-family:%s;font-size:%dpt;font-style:normal;font-weight:normal",
+            item.getFamily(),
+            item.getSize());
+  }
 }

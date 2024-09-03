@@ -10,18 +10,17 @@ import java.util.List;
  * @see <a href="http://spec.commonmark.org/0.18/#html-blocks">CommonMark Spec</a>
  */
 public class HtmlCommentBlock extends HtmlBlockBase {
-    public HtmlCommentBlock() {
-    }
+  public HtmlCommentBlock() {}
 
-    public HtmlCommentBlock(BasedSequence chars) {
-        super(chars);
-    }
+  public HtmlCommentBlock(BasedSequence chars) {
+    super(chars);
+  }
 
-    public HtmlCommentBlock(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
-    }
+  public HtmlCommentBlock(BasedSequence chars, List<BasedSequence> segments) {
+    super(chars, segments);
+  }
 
-    public HtmlCommentBlock(BlockContent blockContent) {
-        super(blockContent);
-    }
+  public HtmlCommentBlock(BlockContent blockContent) {
+    super(blockContent);
+  }
 }

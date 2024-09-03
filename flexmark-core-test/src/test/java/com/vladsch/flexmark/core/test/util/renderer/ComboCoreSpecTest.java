@@ -11,27 +11,29 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
-final public class ComboCoreSpecTest extends CoreRendererSpecTest {
-    static final String SPEC_RESOURCE = "/ast_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
+public final class ComboCoreSpecTest extends CoreRendererSpecTest {
+  static final String SPEC_RESOURCE = "/ast_spec.md";
+  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+      ResourceLocation.of(SPEC_RESOURCE);
 
-    final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(HtmlRenderer.INDENT_SIZE, 0)
-            .set(Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS, false)
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(TestUtils.NO_FILE_EOL, false)
-            .toImmutable();
+  private static final DataHolder OPTIONS =
+      new MutableDataSet()
+          .set(HtmlRenderer.INDENT_SIZE, 0)
+          .set(Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS, false)
+          .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
+          .set(TestUtils.NO_FILE_EOL, false)
+          .toImmutable();
 
-    public ComboCoreSpecTest(@NotNull SpecExample example) {
-        super(example, null, OPTIONS);
-    }
+  public ComboCoreSpecTest(@NotNull SpecExample example) {
+    super(example, null, OPTIONS);
+  }
 
-    protected boolean compoundSections() {
-        return false;
-    }
+  protected boolean compoundSections() {
+    return false;
+  }
 
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return getTestData(RESOURCE_LOCATION);
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static List<Object[]> data() {
+    return getTestData(RESOURCE_LOCATION);
+  }
 }

@@ -20,56 +20,56 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-/**
- * Tests that the spec examples still render the same with all extensions enabled.
- */
-
+/** Tests that the spec examples still render the same with all extensions enabled. */
 @RunWith(Parameterized.class)
 public class SpecIntegrationTest extends RendererSpecTest {
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(TestSpecLocator.DEFAULT_SPEC_RESOURCE);
-    final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(Parser.EXTENSIONS, Arrays.asList(
-                    StrikethroughExtension.create(),
-                    TablesExtension.create(),
-                    YamlFrontMatterExtension.create())
-            )
-            .set(TestUtils.NO_FILE_EOL, false)
-            .set(HtmlRenderer.INDENT_SIZE, 0)
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .toImmutable();
+  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+      ResourceLocation.of(TestSpecLocator.DEFAULT_SPEC_RESOURCE);
+  private static final DataHolder OPTIONS =
+      new MutableDataSet()
+          .set(
+              Parser.EXTENSIONS,
+              Arrays.asList(
+                  StrikethroughExtension.create(),
+                  TablesExtension.create(),
+                  YamlFrontMatterExtension.create()))
+          .set(TestUtils.NO_FILE_EOL, false)
+          .set(HtmlRenderer.INDENT_SIZE, 0)
+          .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
+          .toImmutable();
 
-    final private static Map<String, String> OVERRIDDEN_EXAMPLES = getOverriddenExamples();
+  private static final Map<String, String> OVERRIDDEN_EXAMPLES = getOverriddenExamples();
 
-    public SpecIntegrationTest(@NotNull SpecExample example) {
-        super(example, null, OPTIONS);
+  public SpecIntegrationTest(@NotNull SpecExample example) {
+    super(example, null, OPTIONS);
+  }
+
+  @NotNull
+  public SpecExample checkExample(@NotNull SpecExample example) {
+    String expectedHtml = OVERRIDDEN_EXAMPLES.get(example.getSource());
+    if (expectedHtml != null) {
+      return example.withHtml(expectedHtml);
     }
+    return example;
+  }
 
-    @NotNull
-    public SpecExample checkExample(@NotNull SpecExample example) {
-        String expectedHtml = OVERRIDDEN_EXAMPLES.get(example.getSource());
-        if (expectedHtml != null) {
-            return example.withHtml(expectedHtml);
-        }
-        return example;
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static List<Object[]> data() {
+    return getTestData(RESOURCE_LOCATION);
+  }
 
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return getTestData(RESOURCE_LOCATION);
-    }
+  @Override
+  protected boolean wantExampleInfo() {
+    return false;
+  }
 
-    @Override
-    protected boolean wantExampleInfo() {
-        return false;
-    }
+  private static Map<String, String> getOverriddenExamples() {
+    Map<String, String> m = new HashMap<>();
 
-    private static Map<String, String> getOverriddenExamples() {
-        Map<String, String> m = new HashMap<>();
+    // YAML front matter block
+    m.put("---\nFoo\n---\nBar\n---\nBaz\n", "<h2>Bar</h2>\n<p>Baz</p>\n");
+    m.put("---\n---\n", "");
 
-        // YAML front matter block
-        m.put("---\nFoo\n---\nBar\n---\nBaz\n", "<h2>Bar</h2>\n<p>Baz</p>\n");
-        m.put("---\n---\n", "");
-
-        return m;
-    }
+    return m;
+  }
 }

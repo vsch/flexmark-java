@@ -6,65 +6,70 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface SpecExampleRenderer {
-    boolean includeExampleInfo();
+  boolean includeExampleInfo();
 
-    @Nullable DataHolder getOptions();
-    @NotNull SpecExample getExample();
+  @Nullable
+  DataHolder getOptions();
 
-    void includeDocument(@NotNull String includedText);
-    void parse(CharSequence input);
+  @NotNull
+  SpecExample getExample();
 
-    // after all parsing is complete gives a chance to handle insertion of included doc
-    void finalizeDocument();
+  void includeDocument(@NotNull String includedText);
 
-    // after all rendering information is collected, give chance to release resources and reset test settings needed for renderHtml or other functions.
-    // after this there will be no more calls to renderer for this iteration
-    void finalizeRender();
+  void parse(CharSequence input);
 
-    // caches values and does not regenerate
-    @NotNull String getHtml();
-    @Nullable String getAst();
+  // after all parsing is complete gives a chance to handle insertion of included doc
+  void finalizeDocument();
 
-    SpecExampleRenderer NULL = new SpecExampleRenderer() {
+  // after all rendering information is collected, give chance to release resources and reset test
+  // settings needed for renderHtml or other functions.
+  // after this there will be no more calls to renderer for this iteration
+  void finalizeRender();
+
+  // caches values and does not regenerate
+  @NotNull
+  String getHtml();
+
+  @Nullable
+  String getAst();
+
+  SpecExampleRenderer NULL =
+      new SpecExampleRenderer() {
         @Override
         public boolean includeExampleInfo() {
-            return false;
+          return false;
         }
 
         @Override
         public @Nullable DataHolder getOptions() {
-            return null;
+          return null;
         }
 
         @Override
-        public void includeDocument(@NotNull String includedText) {
-        }
+        public void includeDocument(@NotNull String includedText) {}
 
         @Override
-        public void parse(CharSequence input) {
-        }
+        public void parse(CharSequence input) {}
 
         @Override
         public @NotNull SpecExample getExample() {
-            return SpecExample.NULL;
+          return SpecExample.NULL;
         }
 
         @Override
-        public void finalizeDocument() {
-        }
+        public void finalizeDocument() {}
 
         @Override
         public @NotNull String getHtml() {
-            return "";
+          return "";
         }
 
         @Override
         public @Nullable String getAst() {
-            return null;
+          return null;
         }
 
         @Override
-        public void finalizeRender() {
-        }
-    };
+        public void finalizeRender() {}
+      };
 }

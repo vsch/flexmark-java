@@ -12,24 +12,23 @@ import org.jetbrains.annotations.NotNull;
  * @see <a href="http://spec.commonmark.org/0.18/#html-blocks">CommonMark Spec</a>
  */
 public abstract class HtmlBlockBase extends Block {
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    public HtmlBlockBase() {
-    }
+  public HtmlBlockBase() {}
 
-    public HtmlBlockBase(BasedSequence chars) {
-        super(chars);
-    }
+  public HtmlBlockBase(BasedSequence chars) {
+    super(chars);
+  }
 
-    public HtmlBlockBase(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
-    }
+  public HtmlBlockBase(BasedSequence chars, List<BasedSequence> segments) {
+    super(chars, segments);
+  }
 
-    public HtmlBlockBase(BlockContent blockContent) {
-        super(blockContent);
-    }
+  public HtmlBlockBase(BlockContent blockContent) {
+    super(blockContent);
+  }
 }

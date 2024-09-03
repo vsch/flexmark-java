@@ -13,34 +13,33 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
 public class StrikethroughYouTrackRenderer implements NodeRenderer {
-    public StrikethroughYouTrackRenderer(DataHolder options) {
-    }
+  public StrikethroughYouTrackRenderer(DataHolder options) {}
 
+  @Override
+  public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+    HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+    set.add(new NodeRenderingHandler<>(Strikethrough.class, this::render));
+    set.add(new NodeRenderingHandler<>(Subscript.class, this::render));
+    return set;
+  }
+
+  private void render(Strikethrough node, NodeRendererContext context, HtmlWriter html) {
+    html.raw("--");
+    context.renderChildren(node);
+    html.raw("--");
+  }
+
+  private void render(Subscript node, NodeRendererContext context, HtmlWriter html) {
+    html.raw("~");
+    context.renderChildren(node);
+    html.raw("~");
+  }
+
+  public static class Factory implements NodeRendererFactory {
+    @NotNull
     @Override
-    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(Strikethrough.class, this::render));
-        set.add(new NodeRenderingHandler<>(Subscript.class, this::render));
-        return set;
+    public NodeRenderer apply(@NotNull DataHolder options) {
+      return new StrikethroughYouTrackRenderer(options);
     }
-
-    private void render(Strikethrough node, NodeRendererContext context, HtmlWriter html) {
-        html.raw("--");
-        context.renderChildren(node);
-        html.raw("--");
-    }
-
-    private void render(Subscript node, NodeRendererContext context, HtmlWriter html) {
-        html.raw("~");
-        context.renderChildren(node);
-        html.raw("~");
-    }
-
-    public static class Factory implements NodeRendererFactory {
-        @NotNull
-        @Override
-        public NodeRenderer apply(@NotNull DataHolder options) {
-            return new StrikethroughYouTrackRenderer(options);
-        }
-    }
+  }
 }

@@ -8,37 +8,34 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Table block containing a {@link TableHead} and optionally a {@link TableBody}.
- */
+/** Table block containing a {@link TableHead} and optionally a {@link TableBody}. */
 public class TableBlock extends Block implements BlankLineBreakNode {
-    public TableBlock() {
-    }
+  public TableBlock() {}
 
-    public TableBlock(BasedSequence chars) {
-        super(chars);
-    }
+  public TableBlock(BasedSequence chars) {
+    super(chars);
+  }
 
-    public TableBlock(BasedSequence chars, List<BasedSequence> lineSegments) {
-        super(chars, lineSegments);
-    }
+  public TableBlock(BasedSequence chars, List<BasedSequence> lineSegments) {
+    super(chars, lineSegments);
+  }
 
-    public TableBlock(List<BasedSequence> lineSegments) {
-        super(lineSegments);
-    }
+  public TableBlock(List<BasedSequence> lineSegments) {
+    super(lineSegments);
+  }
 
-    public TableBlock(BlockContent blockContent) {
-        super(blockContent);
-    }
+  public TableBlock(BlockContent blockContent) {
+    super(blockContent);
+  }
 
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return new BasedSequence[0];
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return new BasedSequence[0];
+  }
 
-    TableCaption getCaption() {
-        Node child = getLastChild();
-        return child instanceof TableCaption ? (TableCaption) child : null;
-    }
+  TableCaption getCaption() {
+    Node child = getLastChild();
+    return child instanceof TableCaption ? (TableCaption) child : null;
+  }
 }

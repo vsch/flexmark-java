@@ -13,14 +13,13 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        CollectionTestSuite.class,
-        MiscTestSuite.class,
-        AstTestSuite.class,
-        HtmlTestSuite.class,
-        FormatTestSuite.class,
-        OptionsTestSuite.class,
-        VisitorTestSuite.class,
-        SequenceTestSuite.class,
+  CollectionTestSuite.class,
+  MiscTestSuite.class,
+  AstTestSuite.class,
+  HtmlTestSuite.class,
+  FormatTestSuite.class,
+  OptionsTestSuite.class,
+  VisitorTestSuite.class,
+  SequenceTestSuite.class,
 })
-public class UtilTestSuite {
-}
+public class UtilTestSuite {}

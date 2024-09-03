@@ -5,12 +5,11 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ComboCommonMarkCompatibilitySpecTest.class,
-        ComboMultiMarkdownCompatibilitySpecTest.class,
-        ComboKramdownCompatibilitySpecTest.class,
-        ComboMarkdownCompatibilitySpecTest.class,
-        ComboGitHubCompatibilitySpecTest.class,
-        ComboPegdownCompatibilitySpecTest.class,
+  ComboCommonMarkCompatibilitySpecTest.class,
+  ComboMultiMarkdownCompatibilitySpecTest.class,
+  ComboKramdownCompatibilitySpecTest.class,
+  ComboMarkdownCompatibilitySpecTest.class,
+  ComboGitHubCompatibilitySpecTest.class,
+  ComboPegdownCompatibilitySpecTest.class,
 })
-final public class CoreCompatibilityTestSuite {
-}
+public final class CoreCompatibilityTestSuite {}

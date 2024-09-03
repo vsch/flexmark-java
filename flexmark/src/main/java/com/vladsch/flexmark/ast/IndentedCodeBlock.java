@@ -14,39 +14,41 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class IndentedCodeBlock extends Block implements TextContainer {
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    public IndentedCodeBlock() {
-    }
+  public IndentedCodeBlock() {}
 
-    public IndentedCodeBlock(BasedSequence chars) {
-        super(chars);
-    }
+  public IndentedCodeBlock(BasedSequence chars) {
+    super(chars);
+  }
 
-    public IndentedCodeBlock(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
-    }
+  public IndentedCodeBlock(BasedSequence chars, List<BasedSequence> segments) {
+    super(chars, segments);
+  }
 
-    public IndentedCodeBlock(BlockContent blockContent) {
-        super(blockContent);
-    }
+  public IndentedCodeBlock(BlockContent blockContent) {
+    super(blockContent);
+  }
 
-    @Override
-    public boolean collectText(ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out, int flags, NodeVisitor nodeVisitor) {
-        final BasedSequence chars = getContentChars();
-        if (any(flags, F_NODE_TEXT)) {
-            out.append(chars);
-        } else {
-            ReplacedTextMapper textMapper = new ReplacedTextMapper(chars);
-            BasedSequence unescaped = Escaping.unescape(chars, textMapper);
-            if (!unescaped.isEmpty()) {
-                out.append(unescaped);
-            }
-        }
-        return false;
+  @Override
+  public boolean collectText(
+      ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out,
+      int flags,
+      NodeVisitor nodeVisitor) {
+    final BasedSequence chars = getContentChars();
+    if (any(flags, F_NODE_TEXT)) {
+      out.append(chars);
+    } else {
+      ReplacedTextMapper textMapper = new ReplacedTextMapper(chars);
+      BasedSequence unescaped = Escaping.unescape(chars, textMapper);
+      if (!unescaped.isEmpty()) {
+        out.append(unescaped);
+      }
     }
+    return false;
+  }
 }

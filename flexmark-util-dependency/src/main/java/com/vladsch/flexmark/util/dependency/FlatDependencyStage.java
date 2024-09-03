@@ -8,14 +8,14 @@ import java.util.function.Function;
  */
 @Deprecated
 public class FlatDependencyStage<T> {
-    final private List<T> dependents;
+  private final List<T> dependents;
 
-    public FlatDependencyStage(List<T> dependents) {
-        // compute mappings
-        this.dependents = dependents;
-    }
+  public FlatDependencyStage(List<T> dependents) {
+    // compute mappings
+    this.dependents = dependents;
+  }
 
-    public List<T> getDependents() {
-        return dependents;
-    }
+  public List<T> getDependents() {
+    return dependents;
+  }
 }

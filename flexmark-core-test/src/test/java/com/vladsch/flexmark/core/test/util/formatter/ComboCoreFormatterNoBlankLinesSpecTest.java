@@ -11,18 +11,18 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboCoreFormatterSpecTestBase {
-    final private static String SPEC_RESOURCE = "/core_formatter_no_blanklines_spec.md";
-    final public static @NotNull ResourceLocation RESOURCE_LOCATION = ResourceLocation.of(SPEC_RESOURCE);
-    final private static DataHolder OPTIONS = new MutableDataSet()
-            .set(Parser.BLANK_LINES_IN_AST, false)
-            .toImmutable();
+  private static final String SPEC_RESOURCE = "/core_formatter_no_blanklines_spec.md";
+  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+      ResourceLocation.of(SPEC_RESOURCE);
+  private static final DataHolder OPTIONS =
+      new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, false).toImmutable();
 
-    public ComboCoreFormatterNoBlankLinesSpecTest(@NotNull SpecExample example) {
-        super(example, null, OPTIONS);
-    }
+  public ComboCoreFormatterNoBlankLinesSpecTest(@NotNull SpecExample example) {
+    super(example, null, OPTIONS);
+  }
 
-    @Parameterized.Parameters(name = "{0}")
-    public static List<Object[]> data() {
-        return ComboSpecTestCase.getTestData(RESOURCE_LOCATION);
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static List<Object[]> data() {
+    return ComboSpecTestCase.getTestData(RESOURCE_LOCATION);
+  }
 }

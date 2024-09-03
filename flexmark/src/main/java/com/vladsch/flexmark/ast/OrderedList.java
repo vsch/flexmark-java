@@ -6,50 +6,49 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class OrderedList extends ListBlock {
-    private int startNumber;
-    private char delimiter;
+  private int startNumber;
+  private char delimiter;
 
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return EMPTY_SEGMENTS;
+  }
 
-    public OrderedList() {
-    }
+  public OrderedList() {}
 
-    public OrderedList(BasedSequence chars) {
-        super(chars);
-    }
+  public OrderedList(BasedSequence chars) {
+    super(chars);
+  }
 
-    public OrderedList(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
-    }
+  public OrderedList(BasedSequence chars, List<BasedSequence> segments) {
+    super(chars, segments);
+  }
 
-    public OrderedList(BlockContent blockContent) {
-        super(blockContent);
-    }
+  public OrderedList(BlockContent blockContent) {
+    super(blockContent);
+  }
 
-    @Override
-    public void getAstExtra(@NotNull StringBuilder out) {
-        super.getAstExtra(out);
-        if (startNumber > 1) out.append(" start:").append(startNumber);
-        out.append(" delimiter:'").append(delimiter).append("'");
-    }
+  @Override
+  public void getAstExtra(@NotNull StringBuilder out) {
+    super.getAstExtra(out);
+    if (startNumber > 1) out.append(" start:").append(startNumber);
+    out.append(" delimiter:'").append(delimiter).append("'");
+  }
 
-    public int getStartNumber() {
-        return startNumber;
-    }
+  public int getStartNumber() {
+    return startNumber;
+  }
 
-    public void setStartNumber(int startNumber) {
-        this.startNumber = startNumber;
-    }
+  public void setStartNumber(int startNumber) {
+    this.startNumber = startNumber;
+  }
 
-    public char getDelimiter() {
-        return delimiter;
-    }
+  public char getDelimiter() {
+    return delimiter;
+  }
 
-    public void setDelimiter(char delimiter) {
-        this.delimiter = delimiter;
-    }
+  public void setDelimiter(char delimiter) {
+    this.delimiter = delimiter;
+  }
 }

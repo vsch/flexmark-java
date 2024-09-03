@@ -26,242 +26,246 @@ import java.util.List;
 import java.util.Stack;
 
 public class DelimitedBuilder {
-    private String delimiter;
-    private StringBuilder out;
-    private boolean pending = false;
-    private int lastLen = 0;
-    private Stack<String> delimiterStack = null;
+  private String delimiter;
+  private StringBuilder out;
+  private boolean pending = false;
+  private int lastLen = 0;
+  private Stack<String> delimiterStack = null;
 
-    public DelimitedBuilder() {
-        this(",", 0);
+  public DelimitedBuilder() {
+    this(",", 0);
+  }
+
+  public DelimitedBuilder(String delimiter) {
+    this(delimiter, 0);
+  }
+
+  public DelimitedBuilder(String delimiter, int capacity) {
+    this.delimiter = delimiter;
+    this.out = capacity == 0 ? null : new StringBuilder(capacity);
+  }
+
+  @Override
+  public String toString() {
+    if (delimiterStack != null && !delimiterStack.isEmpty())
+      throw new IllegalStateException("Delimiter stack is not empty");
+    return out == null ? "" : out.toString();
+  }
+
+  public boolean isEmpty() {
+    return !pending && (out == null || out.length() == 0);
+  }
+
+  public String getAndClear() {
+    if (delimiterStack != null && !delimiterStack.isEmpty())
+      throw new IllegalStateException("Delimiter stack is not empty");
+    String result = out == null ? "" : out.toString();
+    clear();
+    return result;
+  }
+
+  public DelimitedBuilder clear() {
+    out = null;
+    unmark();
+    return this;
+  }
+
+  public String toStringOrNull() {
+    if (delimiterStack != null && !delimiterStack.isEmpty())
+      throw new IllegalStateException("Delimiter stack is not empty");
+    return out == null ? null : out.toString();
+  }
+
+  public DelimitedBuilder mark() {
+    int length = out != null ? out.length() : 0;
+    if (lastLen != length) pending = true;
+    lastLen = length;
+    return this;
+  }
+
+  public DelimitedBuilder unmark() {
+    pending = false;
+    lastLen = out != null ? out.length() : 0;
+    return this;
+  }
+
+  public DelimitedBuilder push() {
+    return push(delimiter);
+  }
+
+  public DelimitedBuilder push(String delimiter) {
+    unmark();
+    if (delimiterStack == null) delimiterStack = new Stack<>();
+    delimiterStack.push(this.delimiter);
+    this.delimiter = delimiter;
+    return this;
+  }
+
+  public DelimitedBuilder pop() {
+    if (delimiterStack == null || delimiterStack.isEmpty())
+      throw new IllegalStateException("Nothing on the delimiter stack");
+    delimiter = delimiterStack.pop();
+    return this;
+  }
+
+  private void doPending() {
+    if (out == null) out = new StringBuilder();
+
+    if (pending) {
+      out.append(delimiter);
+      pending = false;
     }
+  }
 
-    public DelimitedBuilder(String delimiter) {
-        this(delimiter, 0);
+  public DelimitedBuilder append(char v) {
+    doPending();
+    out.append(v);
+    return this;
+  }
+
+  public DelimitedBuilder append(int v) {
+    doPending();
+    out.append(v);
+    return this;
+  }
+
+  public DelimitedBuilder append(boolean v) {
+    doPending();
+    out.append(v);
+    return this;
+  }
+
+  public DelimitedBuilder append(long v) {
+    doPending();
+    out.append(v);
+    return this;
+  }
+
+  public DelimitedBuilder append(float v) {
+    doPending();
+    out.append(v);
+    return this;
+  }
+
+  public DelimitedBuilder append(double v) {
+    doPending();
+    out.append(v);
+    return this;
+  }
+
+  public DelimitedBuilder append(String v) {
+    if (v != null && !v.isEmpty()) {
+      doPending();
+      out.append(v);
     }
+    return this;
+  }
 
-    public DelimitedBuilder(String delimiter, int capacity) {
-        this.delimiter = delimiter;
-        this.out = capacity == 0 ? null : new StringBuilder(capacity);
+  public DelimitedBuilder append(String v, int start, int end) {
+    if (v != null && start < end) {
+      doPending();
+      out.append(v, start, end);
     }
+    return this;
+  }
 
-    @Override
-    public String toString() {
-        if (delimiterStack != null && !delimiterStack.isEmpty()) throw new IllegalStateException("Delimiter stack is not empty");
-        return out == null ? "" : out.toString();
+  public DelimitedBuilder append(CharSequence v) {
+    if (v != null && v.length() > 0) {
+      doPending();
+      out.append(v);
     }
+    return this;
+  }
 
-    public boolean isEmpty() {
-        return !pending && (out == null || out.length() == 0);
+  public DelimitedBuilder append(CharSequence v, int start, int end) {
+    if (v != null && start < end) {
+      doPending();
+      out.append(v, start, end);
     }
+    return this;
+  }
 
-    public String getAndClear() {
-        if (delimiterStack != null && !delimiterStack.isEmpty()) throw new IllegalStateException("Delimiter stack is not empty");
-        String result = out == null ? "" : out.toString();
-        clear();
-        return result;
+  public DelimitedBuilder append(char[] v) {
+    if (v.length > 0) {
+      doPending();
+      out.append(v);
     }
+    return this;
+  }
 
-    public DelimitedBuilder clear() {
-        out = null;
-        unmark();
-        return this;
+  public DelimitedBuilder append(char[] v, int start, int end) {
+    if (start < end) {
+      doPending();
+      out.append(v, start, end);
     }
+    return this;
+  }
 
-    public String toStringOrNull() {
-        if (delimiterStack != null && !delimiterStack.isEmpty()) throw new IllegalStateException("Delimiter stack is not empty");
-        return out == null ? null : out.toString();
+  public DelimitedBuilder append(Object o) {
+    return append(o.toString());
+  }
+
+  public DelimitedBuilder appendCodePoint(int codePoint) {
+    doPending();
+    out.appendCodePoint(codePoint);
+    return this;
+  }
+
+  public <V> DelimitedBuilder appendAll(V[] v) {
+    return appendAll(v, 0, v.length);
+  }
+
+  public <V> DelimitedBuilder appendAll(V[] v, int start, int end) {
+    for (int i = start; i < end; i++) {
+      V item = v[i];
+      append(item.toString());
+      mark();
     }
+    return this;
+  }
 
-    public DelimitedBuilder mark() {
-        int length = out != null ? out.length() : 0;
-        if (lastLen != length) pending = true;
-        lastLen = length;
-        return this;
+  public <V> DelimitedBuilder appendAll(String delimiter, V[] v) {
+    return appendAll(delimiter, v, 0, v.length);
+  }
+
+  public <V> DelimitedBuilder appendAll(String delimiter, V[] v, int start, int end) {
+    int lastLength = out != null ? out.length() : 0;
+    push(delimiter);
+    appendAll(v, start, end);
+    pop();
+
+    if (lastLength != (out != null ? out.length() : 0)) mark();
+    else unmark();
+
+    return this;
+  }
+
+  public <V> DelimitedBuilder appendAll(List<? extends V> v) {
+    return appendAll(v, 0, v.size());
+  }
+
+  public <V> DelimitedBuilder appendAll(List<? extends V> v, int start, int end) {
+    for (int i = start; i < end; i++) {
+      V item = v.get(i);
+      append(item.toString());
+      mark();
     }
+    return this;
+  }
 
-    public DelimitedBuilder unmark() {
-        pending = false;
-        lastLen = out != null ? out.length() : 0;
-        return this;
-    }
+  public <V> DelimitedBuilder appendAll(String delimiter, List<? extends V> v) {
+    return appendAll(delimiter, v, 0, v.size());
+  }
 
-    public DelimitedBuilder push() {
-        return push(delimiter);
-    }
+  public <V> DelimitedBuilder appendAll(String delimiter, List<? extends V> v, int start, int end) {
+    int lastLength = out != null ? out.length() : 0;
+    push(delimiter);
+    appendAll(v, start, end);
+    pop();
 
-    public DelimitedBuilder push(String delimiter) {
-        unmark();
-        if (delimiterStack == null) delimiterStack = new Stack<>();
-        delimiterStack.push(this.delimiter);
-        this.delimiter = delimiter;
-        return this;
-    }
+    if (lastLength != (out != null ? out.length() : 0)) mark();
+    else unmark();
 
-    public DelimitedBuilder pop() {
-        if (delimiterStack == null || delimiterStack.isEmpty()) throw new IllegalStateException("Nothing on the delimiter stack");
-        delimiter = delimiterStack.pop();
-        return this;
-    }
-
-    private void doPending() {
-        if (out == null) out = new StringBuilder();
-
-        if (pending) {
-            out.append(delimiter);
-            pending = false;
-        }
-    }
-
-    public DelimitedBuilder append(char v) {
-        doPending();
-        out.append(v);
-        return this;
-    }
-
-    public DelimitedBuilder append(int v) {
-        doPending();
-        out.append(v);
-        return this;
-    }
-
-    public DelimitedBuilder append(boolean v) {
-        doPending();
-        out.append(v);
-        return this;
-    }
-
-    public DelimitedBuilder append(long v) {
-        doPending();
-        out.append(v);
-        return this;
-    }
-
-    public DelimitedBuilder append(float v) {
-        doPending();
-        out.append(v);
-        return this;
-    }
-
-    public DelimitedBuilder append(double v) {
-        doPending();
-        out.append(v);
-        return this;
-    }
-
-    public DelimitedBuilder append(String v) {
-        if (v != null && !v.isEmpty()) {
-            doPending();
-            out.append(v);
-        }
-        return this;
-    }
-
-    public DelimitedBuilder append(String v, int start, int end) {
-        if (v != null && start < end) {
-            doPending();
-            out.append(v, start, end);
-        }
-        return this;
-    }
-
-    public DelimitedBuilder append(CharSequence v) {
-        if (v != null && v.length() > 0) {
-            doPending();
-            out.append(v);
-        }
-        return this;
-    }
-
-    public DelimitedBuilder append(CharSequence v, int start, int end) {
-        if (v != null && start < end) {
-            doPending();
-            out.append(v, start, end);
-        }
-        return this;
-    }
-
-    public DelimitedBuilder append(char[] v) {
-        if (v.length > 0) {
-            doPending();
-            out.append(v);
-        }
-        return this;
-    }
-
-    public DelimitedBuilder append(char[] v, int start, int end) {
-        if (start < end) {
-            doPending();
-            out.append(v, start, end);
-        }
-        return this;
-    }
-
-    public DelimitedBuilder append(Object o) {
-        return append(o.toString());
-    }
-
-    public DelimitedBuilder appendCodePoint(int codePoint) {
-        doPending();
-        out.appendCodePoint(codePoint);
-        return this;
-    }
-
-    public <V> DelimitedBuilder appendAll(V[] v) {
-        return appendAll(v, 0, v.length);
-    }
-
-    public <V> DelimitedBuilder appendAll(V[] v, int start, int end) {
-        for (int i = start; i < end; i++) {
-            V item = v[i];
-            append(item.toString());
-            mark();
-        }
-        return this;
-    }
-
-    public <V> DelimitedBuilder appendAll(String delimiter, V[] v) {
-        return appendAll(delimiter, v, 0, v.length);
-    }
-
-    public <V> DelimitedBuilder appendAll(String delimiter, V[] v, int start, int end) {
-        int lastLength = out != null ? out.length() : 0;
-        push(delimiter);
-        appendAll(v, start, end);
-        pop();
-
-        if (lastLength != (out != null ? out.length() : 0)) mark();
-        else unmark();
-
-        return this;
-    }
-
-    public <V> DelimitedBuilder appendAll(List<? extends V> v) {
-        return appendAll(v, 0, v.size());
-    }
-
-    public <V> DelimitedBuilder appendAll(List<? extends V> v, int start, int end) {
-        for (int i = start; i < end; i++) {
-            V item = v.get(i);
-            append(item.toString());
-            mark();
-        }
-        return this;
-    }
-
-    public <V> DelimitedBuilder appendAll(String delimiter, List<? extends V> v) {
-        return appendAll(delimiter, v, 0, v.size());
-    }
-
-    public <V> DelimitedBuilder appendAll(String delimiter, List<? extends V> v, int start, int end) {
-        int lastLength = out != null ? out.length() : 0;
-        push(delimiter);
-        appendAll(v, start, end);
-        pop();
-
-        if (lastLength != (out != null ? out.length() : 0)) mark();
-        else unmark();
-
-        return this;
-    }
+    return this;
+  }
 }

@@ -7,52 +7,53 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class YamlFrontMatterNode extends Node {
-    private BasedSequence key;
-    //private List<BasedSequence> values;
+  private BasedSequence key;
 
-    @NotNull
-    @Override
-    public BasedSequence[] getSegments() {
-        return new BasedSequence[] { key };
-    }
+  // private List<BasedSequence> values;
 
-    public YamlFrontMatterNode(BasedSequence key, List<BasedSequence> values) {
-        this.key = key;
-        //this.values = values;
-        for (BasedSequence value : values) {
-            appendChild(new YamlFrontMatterValue(value));
-        }
-    }
+  @NotNull
+  @Override
+  public BasedSequence[] getSegments() {
+    return new BasedSequence[] {key};
+  }
 
-    public String getKey() {
-        return key.toString();
+  public YamlFrontMatterNode(BasedSequence key, List<BasedSequence> values) {
+    this.key = key;
+    // this.values = values;
+    for (BasedSequence value : values) {
+      appendChild(new YamlFrontMatterValue(value));
     }
+  }
 
-    public BasedSequence getKeySequence() {
-        return key;
-    }
+  public String getKey() {
+    return key.toString();
+  }
 
-    public void setKey(BasedSequence key) {
-        this.key = key;
-    }
+  public BasedSequence getKeySequence() {
+    return key;
+  }
 
-    public List<String> getValues() {
-        ArrayList<String> list = new ArrayList<>();
-        Node child = getFirstChild();
-        while (child != null) {
-            list.add(child.getChars().toString());
-            child = child.getNext();
-        }
-        return list;
-    }
+  public void setKey(BasedSequence key) {
+    this.key = key;
+  }
 
-    public List<BasedSequence> getValuesSequences() {
-        ArrayList<BasedSequence> list = new ArrayList<>();
-        Node child = getFirstChild();
-        while (child != null) {
-            list.add(child.getChars());
-            child = child.getNext();
-        }
-        return list;
+  public List<String> getValues() {
+    ArrayList<String> list = new ArrayList<>();
+    Node child = getFirstChild();
+    while (child != null) {
+      list.add(child.getChars().toString());
+      child = child.getNext();
     }
+    return list;
+  }
+
+  public List<BasedSequence> getValuesSequences() {
+    ArrayList<BasedSequence> list = new ArrayList<>();
+    Node child = getFirstChild();
+    while (child != null) {
+      list.add(child.getChars());
+      child = child.getNext();
+    }
+    return list;
+  }
 }

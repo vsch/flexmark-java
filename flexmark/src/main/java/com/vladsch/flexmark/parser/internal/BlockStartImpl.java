@@ -4,46 +4,46 @@ import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.BlockStart;
 
 public class BlockStartImpl extends BlockStart {
-    final private BlockParser[] blockParsers;
-    private int newIndex = -1;
-    private int newColumn = -1;
-    private boolean replaceActiveBlockParser = false;
+  private final BlockParser[] blockParsers;
+  private int newIndex = -1;
+  private int newColumn = -1;
+  private boolean replaceActiveBlockParser = false;
 
-    public BlockStartImpl(BlockParser... blockParsers) {
-        this.blockParsers = blockParsers;
-    }
+  public BlockStartImpl(BlockParser... blockParsers) {
+    this.blockParsers = blockParsers;
+  }
 
-    public BlockParser[] getBlockParsers() {
-        return blockParsers;
-    }
+  public BlockParser[] getBlockParsers() {
+    return blockParsers;
+  }
 
-    public int getNewIndex() {
-        return newIndex;
-    }
+  public int getNewIndex() {
+    return newIndex;
+  }
 
-    public int getNewColumn() {
-        return newColumn;
-    }
+  public int getNewColumn() {
+    return newColumn;
+  }
 
-    public boolean isReplaceActiveBlockParser() {
-        return replaceActiveBlockParser;
-    }
+  public boolean isReplaceActiveBlockParser() {
+    return replaceActiveBlockParser;
+  }
 
-    @Override
-    public BlockStart atIndex(int newIndex) {
-        this.newIndex = newIndex;
-        return this;
-    }
+  @Override
+  public BlockStart atIndex(int newIndex) {
+    this.newIndex = newIndex;
+    return this;
+  }
 
-    @Override
-    public BlockStart atColumn(int newColumn) {
-        this.newColumn = newColumn;
-        return this;
-    }
+  @Override
+  public BlockStart atColumn(int newColumn) {
+    this.newColumn = newColumn;
+    return this;
+  }
 
-    @Override
-    public BlockStart replaceActiveBlockParser() {
-        this.replaceActiveBlockParser = true;
-        return this;
-    }
+  @Override
+  public BlockStart replaceActiveBlockParser() {
+    this.replaceActiveBlockParser = true;
+    return this;
+  }
 }
