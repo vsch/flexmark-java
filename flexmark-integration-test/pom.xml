@@ -54,25 +54,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <configuration>
-          <!-- We don't have anything to install for this module, it only contains tests -->
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <!-- We don't have anything in src/main for this module, it only contains tests -->
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

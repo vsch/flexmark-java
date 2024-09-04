@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<migrationMap>
-    <name value="migrate flexmark-java 0.40.x to 0.42.0"/>
-    <description value="Class migrations from flexmark-java 0.40.x to 0.42.0"/>
-    <entry oldName="com.vladsch.flexmark.Extension" newName="com.vladsch.flexmark.util.builder.Extension" type="class"/>
-</migrationMap>
-
