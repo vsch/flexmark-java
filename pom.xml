@@ -5,7 +5,7 @@
 
   <groupId>com.acrolinx.flexmark</groupId>
   <artifactId>flexmark-java</artifactId>
-  <version>0.70.0</version>
+  <version>0.70.1-SNAPSHOT</version>
 
   <packaging>pom</packaging>
 
