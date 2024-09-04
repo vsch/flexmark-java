@@ -35,10 +35,7 @@ public class TableTextCollectingVisitorTest {
     TextCollectingVisitor collectingVisitor = new TextCollectingVisitor();
     final String text =
         collectingVisitor.collectAndGetText(document, TextContainer.F_ADD_SPACES_BETWEEN_NODES);
-    // System.out.println(text);
 
-    // final String astText = new AstCollectingVisitor().collectAndGetAstText(document);
-    // System.out.println(astText);
     assertEquals(
         ""
             + "First Header Second Header\n"
@@ -70,10 +67,7 @@ public class TableTextCollectingVisitorTest {
     final String text =
         collectingVisitor.collectAndGetText(
             document, TextContainer.F_LINK_URL | TextContainer.F_ADD_SPACES_BETWEEN_NODES);
-    // System.out.println(text);
 
-    // final String astText = new AstCollectingVisitor().collectAndGetAstText(document);
-    // System.out.println(astText);
     assertEquals(
         "" + "First Header Second Header\n" + "Content Cell image spaces.png\n" + "", text);
   }
@@ -97,10 +91,7 @@ public class TableTextCollectingVisitorTest {
     final String text =
         collectingVisitor.collectAndGetText(
             document, TextContainer.F_LINK_NODE_TEXT | TextContainer.F_ADD_SPACES_BETWEEN_NODES);
-    // System.out.println(text);
 
-    // final String astText = new AstCollectingVisitor().collectAndGetAstText(document);
-    // System.out.println(astText);
     assertEquals(
         "" + "First Header Second Header\n" + "Content Cell ![](image%20spaces.png)\n" + "", text);
   }
@@ -124,10 +115,7 @@ public class TableTextCollectingVisitorTest {
     final String text =
         collectingVisitor.collectAndGetText(
             document, TextContainer.F_LINK_URL | TextContainer.F_ADD_SPACES_BETWEEN_NODES);
-    // System.out.println(text);
 
-    // final String astText = new AstCollectingVisitor().collectAndGetAstText(document);
-    // System.out.println(astText);
     assertEquals(
         "" + "First Header Second Header\n" + "Content Cell image spaces.png\n" + "", text);
   }

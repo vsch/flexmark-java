@@ -1,7 +1,10 @@
 package com.vladsch.flexmark.util.misc;
 
 import static com.vladsch.flexmark.util.misc.BitFieldSetTest.BitFields.FIELD_8;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import com.vladsch.flexmark.util.ExceptionMatcher;
 import java.util.ArrayList;
@@ -365,13 +368,6 @@ public class BitFieldSetTest {
     ArrayList<Integer> actualList = new ArrayList<>();
 
     for (BitFields fields : bitFields) {
-      System.out.println(
-          String.format(
-              "[%d]: field: %s.%s, value:%d",
-              actualList.size(),
-              fields.getClass().getSimpleName(),
-              fields,
-              bitFields.getInt(fields)));
       actualList.add(bitFields.getInt(fields));
     }
 
@@ -407,13 +403,6 @@ public class BitFieldSetTest {
     ArrayList<IntSet> actualList = new ArrayList<>();
 
     for (IntSet fields : bitFields) {
-      System.out.println(
-          String.format(
-              "[%d]: field: %s.%s, value:%d",
-              actualList.size(),
-              fields.getClass().getSimpleName(),
-              fields,
-              bitFields.getInt(fields)));
       actualList.add(fields);
     }
 
@@ -433,10 +422,6 @@ public class BitFieldSetTest {
     int i = 0;
     while (iterator.hasNext()) {
       IntSet fields = iterator.next();
-      System.out.println(
-          String.format(
-              "[%d]: field: %s.%s, value:%d",
-              i++, fields.getClass().getSimpleName(), fields, bitFields.getInt(fields)));
       if (fields == IntSet.VALUE_17) {
         iterator.remove();
       }
@@ -462,23 +447,12 @@ public class BitFieldSetTest {
     int j = 0;
     while (iterator.hasNext()) {
       BitFields fields = iterator.next();
-      System.out.println(
-          String.format(
-              "[%d]: field: %s.%s, value:%d",
-              j++, fields.getClass().getSimpleName(), fields, bitFields.getInt(fields)));
       if (fields == BitFields.FIELD_7) {
         iterator.remove();
       }
     }
 
     for (BitFields fields : bitFields) {
-      System.out.println(
-          String.format(
-              "[%d]: field: %s.%s, value:%d",
-              actualList.size(),
-              fields.getClass().getSimpleName(),
-              fields,
-              bitFields.getInt(fields)));
       actualList.add(bitFields.getInt(fields));
     }
 

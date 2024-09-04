@@ -64,7 +64,6 @@ public class SegmentTest {
     loopSizes(
         (b, i) -> {
           Seg seg = Seg.segOf(i, i);
-          //            System.out.println(i);
           assertEquals("i: " + i, b + 1, Segment.getSegByteLength(seg, ""));
         });
   }
@@ -77,7 +76,6 @@ public class SegmentTest {
               i,
               (bj, j) -> {
                 if (j > i) {
-                  //                    System.out.println("i: " + i + " j: " + j);
                   Seg seg = Seg.segOf(i, j);
                   assertEquals(
                       "i: " + i + " j: " + j,
@@ -308,7 +306,6 @@ public class SegmentTest {
               i,
               (bj, j) -> {
                 if (j > i) {
-                  //                    System.out.println("i: " + i + " j: " + j);
                   Arrays.fill(
                       bytes, Math.max(0, j - 1000), Math.min(bytes.length, j + 1000), (byte) 0xff);
                   CharSequence dummy = new DummyCharSequence('a', j);
@@ -334,7 +331,6 @@ public class SegmentTest {
     loopSizesShort(
         (bi, i) -> {
           for (int j = 0; j < 10; j++) {
-            //                    System.out.println("i: " + i + " j: " + j);
             Arrays.fill(
                 bytes, Math.max(0, j - 1000), Math.min(bytes.length, j + 1000), (byte) 0xff);
             CharSequence dummy = new DummyCharSequence('a', j);
@@ -362,7 +358,6 @@ public class SegmentTest {
               i,
               (bj, j) -> {
                 if (j > i) {
-                  //                    System.out.println("i: " + i + " j: " + j);
                   Arrays.fill(
                       bytes, Math.max(0, j - 1000), Math.min(bytes.length, j + 1000), (byte) 0xff);
                   CharSequence dummy = new DummyCharSequence('a', j);
@@ -391,7 +386,6 @@ public class SegmentTest {
               i,
               (bj, j) -> {
                 if (j > i) {
-                  //                    System.out.println("i: " + i + " j: " + j);
                   Arrays.fill(
                       bytes, Math.max(0, j - 1000), Math.min(bytes.length, j + 1000), (byte) 0xff);
                   CharSequence dummy = new DummyCharSequence('a', j);
@@ -420,7 +414,6 @@ public class SegmentTest {
               i,
               (bj, j) -> {
                 if (j > i) {
-                  //                    System.out.println("i: " + i + " j: " + j);
                   Arrays.fill(
                       bytes, Math.max(0, j - 1000), Math.min(bytes.length, j + 1000), (byte) 0xff);
                   CharSequence dummy = new DummyCharSequence(' ', j);
@@ -449,7 +442,6 @@ public class SegmentTest {
               i,
               (bj, j) -> {
                 if (j > i) {
-                  //                    System.out.println("i: " + i + " j: " + j);
                   Arrays.fill(
                       bytes, Math.max(0, j - 1000), Math.min(bytes.length, j + 1000), (byte) 0xff);
                   CharSequence dummy = new DummyCharSequence('\n', j);
@@ -478,7 +470,6 @@ public class SegmentTest {
               i,
               (bj, j) -> {
                 if (j > i) {
-                  //                    System.out.println("i: " + i + " j: " + j);
                   Arrays.fill(
                       bytes, Math.max(0, j - 1000), Math.min(bytes.length, j + 1000), (byte) 0xff);
                   CharSequence dummy = new DummyCharSequence('a', j);
@@ -507,7 +498,6 @@ public class SegmentTest {
               i,
               (bj, j) -> {
                 if (j > i) {
-                  //                    System.out.println("i: " + i + " j: " + j);
                   Arrays.fill(
                       bytes, Math.max(0, j - 1000), Math.min(bytes.length, j + 1000), (byte) 0xff);
                   CharSequence dummy = new DummyCharSequence('…', j);

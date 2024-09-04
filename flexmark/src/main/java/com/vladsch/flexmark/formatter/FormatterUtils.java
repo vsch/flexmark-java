@@ -1,14 +1,29 @@
 package com.vladsch.flexmark.formatter;
 
-import static com.vladsch.flexmark.util.format.options.ListSpacing.*;
+import static com.vladsch.flexmark.util.format.options.ListSpacing.AS_IS;
+import static com.vladsch.flexmark.util.format.options.ListSpacing.LOOSE;
+import static com.vladsch.flexmark.util.format.options.ListSpacing.LOOSEN;
+import static com.vladsch.flexmark.util.format.options.ListSpacing.TIGHTEN;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_LEADING_WHITESPACE;
 import static com.vladsch.flexmark.util.sequence.LineAppendable.F_TRIM_TRAILING_WHITESPACE;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.HtmlCommentBlock;
+import com.vladsch.flexmark.ast.HtmlInlineComment;
+import com.vladsch.flexmark.ast.HtmlInnerBlockComment;
+import com.vladsch.flexmark.ast.ListBlock;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedList;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.ParagraphContainer;
+import com.vladsch.flexmark.ast.SoftLineBreak;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.BlockQuoteLike;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.NullableDataKey;
@@ -727,20 +742,6 @@ public class FormatterUtils {
                       + startLineInfo.prefixLength;
               int delta = firstLineOffset + lengthOffset + prefixDelta;
               trackedOffset.setIndex(offsetIndex + delta);
-              //                            System.out.println(String.format("Wrap Resolved %d -> %d
-              // + %d = %d in line[%d]: '%s'", trackedOffset.getOffset(), offsetIndex, delta,
-              // offsetIndex + delta, lineInfo.index + 1,
-              // line.getBuilder().append(line).toStringWithRanges(true)));
-              //                            System.out.println(String.format("      delta: %d =
-              // firstLineOffset: %d + lengthOffset: %d + prefixDelta: %d", delta, firstLineOffset,
-              // lengthOffset, prefixDelta));
-              //                            System.out.println(String.format("      startLineInfo:
-              // %s", lineInfo));
-              //                            System.out.println(String.format("      lineInfo: %s",
-              // lineInfo));
-              //                        } else {
-              //                            System.out.println(String.format("Wrap Unresolved %d",
-              // trackedOffset.getOffset()));
             }
           }
         }

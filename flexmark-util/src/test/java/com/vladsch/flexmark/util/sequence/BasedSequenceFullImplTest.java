@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Pair;
@@ -1531,7 +1534,6 @@ public class BasedSequenceFullImplTest {
             line++;
           }
           info.add(new Pair<>(line, col));
-          // System.out.println(String.format("%d: [%d, %d]", j, line, col));
           break;
         }
       }

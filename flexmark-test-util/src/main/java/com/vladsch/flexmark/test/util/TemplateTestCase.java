@@ -19,11 +19,7 @@ public abstract class TemplateTestCase implements TemplateReaderFactory {
 
   public abstract void getExpandedEntry(TemplateEntry entry, StringBuilder sb);
 
-  protected void processTemplate(String template, String expandedTemplate) {
-    if (outputTemplate()) {
-      System.out.println(expandedTemplate);
-    }
-  }
+  protected void processTemplate(String template, String expandedTemplate) {}
 
   /**
    * @return return resource name for the spec to use for the examples of the test

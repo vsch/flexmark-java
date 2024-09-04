@@ -91,10 +91,6 @@ public class CollectionHostValidator<T> {
   }
 
   public CollectionHostValidator<T> test(Runnable test) {
-    if (trace) {
-      System.out.println(expectations());
-    }
-
     test.run();
     validate();
     start();
@@ -241,10 +237,6 @@ public class CollectionHostValidator<T> {
   private void validate(String callBack, Object... params) {
     String actual = prepareMessage(callBack, params);
     int index = nextCallbackIndex;
-
-    if (trace) {
-      System.out.println(id() + "actual callback[" + index + "] " + actual);
-    }
 
     if (nextCallbackIndex >= expectedCallBacks.size()) {
       throw new IllegalStateException(

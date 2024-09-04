@@ -45,11 +45,6 @@ public class FormatterModifiedAST {
     String formatted = RENDERER.render(document);
 
     assertEquals(expected, formatted);
-
-    // System.out.println("input\n");
-    // System.out.println(input);
-    // System.out.println("\n\nFormatted\n");
-    // System.out.println(formatted);
   }
 
   public void visit(InlineLinkNode linkNode, final String replacemnt) {
@@ -66,11 +61,6 @@ public class FormatterModifiedAST {
     String formatted = RENDERER.render(document);
 
     assertEquals(expected, formatted);
-
-    // System.out.println("input\n");
-    // System.out.println(input);
-    // System.out.println("\n\nFormatted\n");
-    // System.out.println(formatted);
   }
 
   @Test
@@ -103,11 +93,6 @@ public class FormatterModifiedAST {
     String formatted = RENDERER.render(document);
 
     assertEquals(expected, formatted);
-
-    // System.out.println("input\n");
-    // System.out.println(input);
-    // System.out.println("\n\nFormatted\n");
-    // System.out.println(formatted);
   }
 
   @Test
@@ -159,11 +144,6 @@ public class FormatterModifiedAST {
     String formatted = RENDERER.render(document);
 
     assertEquals(expected, formatted);
-
-    // System.out.println("input\n");
-    // System.out.println(input);
-    // System.out.println("\n\nFormatted\n");
-    // System.out.println(formatted);
   }
 
   @Test
@@ -217,11 +197,6 @@ public class FormatterModifiedAST {
     String formatted = RENDERER.render(document);
 
     assertEquals(expected, formatted);
-
-    // System.out.println("input\n");
-    // System.out.println(input);
-    // System.out.println("\n\nFormatted\n");
-    // System.out.println(formatted);
   }
 
   @Test

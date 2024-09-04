@@ -267,8 +267,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
    * <p>For reverse searching methods fromIndex is the maximum start position for search and
    * startIndex is the minimum end position, if not given then 0 is assumed.
    *
-   * <p>
-   *
    * @param s character pre whose occurrence to find
    * @return index where found or -1
    */

@@ -1,9 +1,35 @@
 package com.vladsch.flexmark.parser.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.AutoLink;
+import com.vladsch.flexmark.ast.Code;
+import com.vladsch.flexmark.ast.HardLineBreak;
+import com.vladsch.flexmark.ast.HtmlEntity;
+import com.vladsch.flexmark.ast.HtmlInline;
+import com.vladsch.flexmark.ast.HtmlInlineBase;
+import com.vladsch.flexmark.ast.HtmlInlineComment;
+import com.vladsch.flexmark.ast.Image;
+import com.vladsch.flexmark.ast.ImageRef;
+import com.vladsch.flexmark.ast.InlineLinkNode;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.LinkRef;
+import com.vladsch.flexmark.ast.LinkRefDerived;
+import com.vladsch.flexmark.ast.LinkRendered;
+import com.vladsch.flexmark.ast.MailLink;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.RefNode;
+import com.vladsch.flexmark.ast.Reference;
+import com.vladsch.flexmark.ast.SoftLineBreak;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.WhiteSpace;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextNodeConverter;
-import com.vladsch.flexmark.parser.*;
+import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.InlineParserExtension;
+import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
+import com.vladsch.flexmark.parser.LightInlineParserImpl;
+import com.vladsch.flexmark.parser.LinkRefProcessor;
+import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParserState;
@@ -12,7 +38,11 @@ import com.vladsch.flexmark.parser.core.delimiter.Bracket;
 import com.vladsch.flexmark.parser.core.delimiter.Delimiter;
 import com.vladsch.flexmark.parser.core.delimiter.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.ast.DoNotTrim;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.misc.CharPredicate;
@@ -20,7 +50,13 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import org.jetbrains.annotations.NotNull;
@@ -1897,11 +1933,6 @@ public class InlineParserImpl extends LightInlineParserImpl
                 + toAdd.getClass().getCanonicalName());
       } else {
         // warning???
-        System.out.println(
-            "Delimiter processor for char '"
-                + delimiterChar
-                + "', added more than once "
-                + existing.getClass().getCanonicalName());
       }
     }
   }

@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import com.vladsch.flexmark.util.ExceptionMatcher;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
@@ -1999,7 +2002,6 @@ public class LineAppendableImplTest {
       int i = 2;
       StringBuilder out = new StringBuilder();
       for (LineInfo info : fa.getLinesInfo(i)) {
-        //                System.out.println(info.getLine().toVisibleWhitespaceString());
         out.append(info.lineSeq);
       }
       assertEquals("" + i, fa.toString(4, i), out.toString());
@@ -2008,7 +2010,6 @@ public class LineAppendableImplTest {
     for (int i = 5; i-- > 0; ) {
       StringBuilder out = new StringBuilder();
       for (LineInfo info : fa.getLinesInfo(i)) {
-        //                System.out.println(info.getLine().toVisibleWhitespaceString());
         out.append(info.lineSeq);
       }
       assertEquals("" + i, fa.toString(4, i), out.toString());
@@ -2036,7 +2037,6 @@ public class LineAppendableImplTest {
       int i = 2;
       StringBuilder out = new StringBuilder();
       for (BasedSequence lineSeq : fa.getLines(i)) {
-        //                System.out.println(info.getLine().toVisibleWhitespaceString());
         out.append(lineSeq);
       }
       assertEquals("" + i, fa.toString(4, i), out.toString());
@@ -2045,7 +2045,6 @@ public class LineAppendableImplTest {
     for (int i = 5; i-- > 0; ) {
       StringBuilder out = new StringBuilder();
       for (BasedSequence lineSeq : fa.getLines(i)) {
-        //                System.out.println(info.getLine().toVisibleWhitespaceString());
         out.append(lineSeq);
       }
       assertEquals("" + i, fa.toString(4, i), out.toString());
@@ -2103,7 +2102,6 @@ public class LineAppendableImplTest {
       int i = 2;
       StringBuilder out = new StringBuilder();
       for (BasedSequence lineSeq : fa.getLines(i, false)) {
-        //                System.out.println(info.getLine().toVisibleWhitespaceString());
         out.append(lineSeq);
       }
       assertEquals("" + i, fa.toString(4, i, false), out.toString());
@@ -2112,7 +2110,6 @@ public class LineAppendableImplTest {
     for (int i = 5; i-- > 0; ) {
       StringBuilder out = new StringBuilder();
       for (BasedSequence lineSeq : fa.getLines(i, false)) {
-        //                System.out.println(info.getLine().toVisibleWhitespaceString());
         out.append(lineSeq);
       }
       assertEquals("" + i, fa.toString(4, i, false), out.toString());

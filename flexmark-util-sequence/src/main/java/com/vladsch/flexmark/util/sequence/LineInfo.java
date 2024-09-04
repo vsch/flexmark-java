@@ -40,8 +40,6 @@ public final class LineInfo {
 
     Preformatted() {
       this.mask = BitFieldSet.setBitField(0, Flags.PREFORMATTED, ordinal());
-      //            System.out.println(String.format("Preformatted.%s ordinal: %d mask: %s",
-      // this.name(), this.ordinal(), Long.toBinaryString(this.mask)));
     }
 
     @NotNull

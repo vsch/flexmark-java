@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.util.format;
 
-import static com.vladsch.flexmark.util.misc.CharPredicate.*;
+import static com.vladsch.flexmark.util.misc.CharPredicate.SPACE_TAB_NBSP;
+import static com.vladsch.flexmark.util.misc.CharPredicate.SPACE_TAB_NBSP_EOL;
+import static com.vladsch.flexmark.util.misc.CharPredicate.SPACE_TAB_NBSP_LINE_SEP;
+import static com.vladsch.flexmark.util.misc.CharPredicate.WHITESPACE_NBSP;
+import static com.vladsch.flexmark.util.misc.CharPredicate.WHITESPACE_NBSP_OR_NUL;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
@@ -216,10 +220,6 @@ public class MarkdownParagraph {
       boolean isLineSep = false;
       String anchorResolvedBy = "";
 
-      if (inTest) {
-        System.out.println(trackedOffset);
-      }
-
       if (!SPACE_TAB_NBSP.test(baseCharAt)) {
         anchorOffset = offset;
         anchorIndex = tracker.getOffsetInfo(anchorOffset, false).startIndex;
@@ -244,63 +244,8 @@ public class MarkdownParagraph {
         }
       }
 
-      if (inTest) {
-        System.out.println(
-            String.format(
-                "%sBaseSequence offset: `%s`",
-                anchorResolvedBy,
-                baseSequence.safeSubSequence(offset - 10, offset).toVisibleWhitespaceString()
-                    + "|"
-                    + baseSequence
-                        .safeSubSequence(offset, offset + 10)
-                        .toVisibleWhitespaceString()));
-        System.out.println(
-            String.format(
-                "%sBaseSequence anchor: `%s`",
-                anchorResolvedBy,
-                baseSequence
-                        .safeSubSequence(anchorOffset - 10, anchorOffset)
-                        .toVisibleWhitespaceString()
-                    + "|"
-                    + baseSequence
-                        .safeSubSequence(anchorOffset, anchorOffset + 10)
-                        .toVisibleWhitespaceString()));
-        System.out.println(
-            String.format(
-                "%saltUnwrapped anchor: `%s`",
-                anchorResolvedBy,
-                altUnwrapped
-                        .safeSubSequence(anchorIndex - 10, anchorIndex)
-                        .toVisibleWhitespaceString()
-                    + "|"
-                    + altUnwrapped
-                        .safeSubSequence(anchorIndex, anchorIndex + 10)
-                        .toVisibleWhitespaceString()));
-      }
-
       // now see where it is in the wrapped sequence
       int wrappedIndex = altTracker.getOffsetInfo(anchorOffset, false).startIndex;
-
-      if (inTest) {
-        System.out.println(
-            String.format(
-                "altWrapped anchor: `%s`",
-                altWrapped
-                        .safeSubSequence(wrappedIndex - 10, wrappedIndex)
-                        .toVisibleWhitespaceString()
-                    + "|"
-                    + altWrapped
-                        .safeSubSequence(wrappedIndex, wrappedIndex + 10)
-                        .toVisibleWhitespaceString()));
-        System.out.println(
-            String.format(
-                "wrapped anchor: `%s`",
-                wrapped.safeSubSequence(wrappedIndex - 10, wrappedIndex).toVisibleWhitespaceString()
-                    + "|"
-                    + wrapped
-                        .safeSubSequence(wrappedIndex, wrappedIndex + 10)
-                        .toVisibleWhitespaceString()));
-      }
 
       // NOTE: at this point space == &nbsp; since altUnwrapped can have &nbsp; instead of spaces
 
@@ -340,27 +285,6 @@ public class MarkdownParagraph {
         }
       }
 
-      if (inTest) {
-        int useIndex = anchorIndex + anchorDelta + unwrappedAdjusted;
-        System.out.println(
-            String.format(
-                "adjusted altWrapped anchor: `%s`",
-                altWrapped.safeSubSequence(useIndex - 10, useIndex).toVisibleWhitespaceString()
-                    + "|"
-                    + altWrapped
-                        .safeSubSequence(useIndex, useIndex + 10)
-                        .toVisibleWhitespaceString()));
-        int useWrapIndex = wrappedIndex + wrappedAdjusted;
-        System.out.println(
-            String.format(
-                "adjusted wrapped anchor: `%s`",
-                wrapped.safeSubSequence(useWrapIndex - 10, useWrapIndex).toVisibleWhitespaceString()
-                    + "|"
-                    + wrapped
-                        .safeSubSequence(useWrapIndex, useWrapIndex + 10)
-                        .toVisibleWhitespaceString()));
-      }
-
       char altUnwrappedCharAt =
           altUnwrapped.safeCharAt(anchorIndex + anchorDelta + unwrappedAdjusted);
       char wrappedCharAt = wrapped.safeCharAt(wrappedIndex + wrappedAdjusted);
@@ -370,18 +294,6 @@ public class MarkdownParagraph {
       // Adjust index position and restore spaces if needed
       if (isLineSep) {
         wrappedIndex = Math.max(0, wrappedIndex - 1);
-        if (inTest) {
-          System.out.println(
-              String.format(
-                  "LSep Adj wrapped anchor: `%s`",
-                  wrapped
-                          .safeSubSequence(wrappedIndex - 10, wrappedIndex)
-                          .toVisibleWhitespaceString()
-                      + "|"
-                      + wrapped
-                          .safeSubSequence(wrappedIndex, wrappedIndex + 10)
-                          .toVisibleWhitespaceString()));
-        }
       }
 
       if (wrapped.isCharAt(wrappedIndex - 1, CharPredicate.ANY_EOL) && countedSpacesAfter > 0) {
@@ -448,18 +360,6 @@ public class MarkdownParagraph {
       }
 
       trackedOffset.setIndex(wrappedIndex);
-
-      if (inTest) {
-        System.out.println(
-            String.format(
-                "Adj wrapped anchor: `%s`",
-                wrapped.safeSubSequence(wrappedIndex - 20, wrappedIndex).toVisibleWhitespaceString()
-                    + "|"
-                    + wrapped
-                        .safeSubSequence(wrappedIndex, wrappedIndex + 20)
-                        .toVisibleWhitespaceString()));
-        System.out.println();
-      }
     }
 
     // append any trailing spaces
@@ -776,8 +676,6 @@ public class MarkdownParagraph {
                       <= lineWidth) {
                 // fits, add it
                 boolean firstNonBlank = col == 0;
-                //                            System.out.println("token: " + token + " chars: " +
-                // chars.subSequence(token.range));
 
                 if (col > 0) {
                   lastSpace = addSpaces(lastSpace, 1);

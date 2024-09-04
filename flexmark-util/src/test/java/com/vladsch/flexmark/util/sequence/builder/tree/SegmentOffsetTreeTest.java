@@ -76,10 +76,6 @@ public class SegmentOffsetTreeTest {
     BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
     SegmentOffsetTree segOffsetTree = segTree.getSegmentOffsetTree(sequence);
 
-    System.out.println(segments.toStringWithRangesVisibleWhitespace(sequence));
-    System.out.println(segTree.toString(sequence));
-    System.out.println(segOffsetTree.toString(sequence));
-
     int iMax = sequenceFull.length();
     Segment seg = null;
     for (int i = 0; i < iMax; i++) {
@@ -91,8 +87,6 @@ public class SegmentOffsetTreeTest {
             int tmp = 0;
           }
           seg = segOffsetTree.findSegmentByOffset(offset, sequence, seg);
-          //                    System.out.println("i=" + i + " pos=" + seg.getPos() + ", segOff=" +
-          // seg);
         }
 
         int actual = offset - seg.getStartOffset() + seg.getStartIndex();
@@ -117,8 +111,6 @@ public class SegmentOffsetTreeTest {
       if (offset >= 0) {
         if (seg == null || seg.offsetNotInSegment(offset)) {
           seg = segOffsetTree.findSegmentByOffset(offset, sequence, seg);
-          //                    System.out.println("i=" + i + " pos=" + seg.getPos() + ", segOff=" +
-          // seg);
         }
 
         int actual = offset - seg.getStartOffset() + seg.getStartIndex();

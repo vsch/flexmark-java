@@ -9,12 +9,15 @@ import com.vladsch.flexmark.test.util.SpecExampleRenderer;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,10 +85,6 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
         if (trackedOffsets.isEmpty() && !SHOW_LINE_RANGES.get(myOptions)) {
           return getRenderer().render(getDocument());
         } else {
-          if (SharedDataKeys.RUNNING_TESTS.get(myOptions)) {
-            System.out.printf("%s:%d%n", myExample.getSection(), myExample.getExampleNumber());
-          }
-
           SequenceBuilder builder = getDocument().getChars().getBuilder();
           getRenderer().render(getDocument(), builder);
           String html = builder.toString();
@@ -101,9 +100,6 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
           for (TrackedOffset trackedOffset : trackedOffsets) {
             if (trackedOffset.isResolved()) {
               offsets[i++] = trackedOffset.getIndex();
-            } else {
-              System.out.println(
-                  String.format("Offset %s is not resolved", trackedOffset.toString()));
             }
           }
 

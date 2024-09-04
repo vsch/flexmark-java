@@ -87,10 +87,6 @@ public class DumpSpecReader extends SpecReader {
         TestUtils.getFormattedTimingInfo(
             example.getSection(), example.getExampleNumber(), iterations, start, parse, render);
 
-    if (timed || embedTimed) {
-      System.out.println(timingInfo);
-    }
-
     String ast =
         example.getAst() == null
             ? null

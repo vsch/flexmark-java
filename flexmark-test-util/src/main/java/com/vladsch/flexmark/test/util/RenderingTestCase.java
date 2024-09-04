@@ -102,9 +102,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     String formattedTimingInfo =
         TestUtils.getFormattedTimingInfo(
             iterations, specExampleParse.getStartTime(), specExampleParse.getParseTime(), render);
-    if (timed || embedTimed) {
-      System.out.print(formattedTimingInfo);
-    }
 
     addSpecExample(exampleRenderer, specExampleParse, exampleOptions);
     exampleRenderer.finalizeRender();

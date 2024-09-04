@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.core.test.util.formatter;
 
-import static com.vladsch.flexmark.formatter.Formatter.*;
+import static com.vladsch.flexmark.formatter.Formatter.DOCUMENT_FIRST_PREFIX;
+import static com.vladsch.flexmark.formatter.Formatter.DOCUMENT_PREFIX;
+import static com.vladsch.flexmark.formatter.Formatter.RESTORE_TRACKED_SPACES;
+import static com.vladsch.flexmark.formatter.Formatter.RIGHT_MARGIN;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.EOL;
 
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
@@ -142,10 +145,6 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
       int[] offsets = info.getSecond();
       SequenceBuilder builder1 = TestUtils.insertCaretMarkup(sequence, offsets);
 
-      if (inTest) {
-        System.out.println(builder1.toStringWithRanges());
-      }
-
       for (int offset : offsets) {
         char c = EDIT_OP_CHAR.get(options);
         int editOp = EDIT_OP.get(options);
@@ -163,10 +162,6 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
 
       SequenceBuilder builder = sequence.getBuilder();
       actual.addSegments(builder.getSegmentBuilder());
-
-      if (inTest) {
-        System.out.println(builder.toStringWithRanges());
-      }
 
       List<TrackedOffset> trackedOffsets = formatter.getTrackedOffsets();
       int[] resultOffsets = new int[offsets.length];
@@ -206,10 +201,6 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
         true) {
       @Override
       protected @NotNull String renderHtml() {
-        if (SharedDataKeys.RUNNING_TESTS.get(myOptions)) {
-          System.out.printf("%s:%d%n", myExample.getSection(), myExample.getExampleNumber());
-        }
-
         return super.renderHtml();
       }
 

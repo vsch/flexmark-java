@@ -53,7 +53,6 @@ public class BasedOffsetTrackerTest {
     } else {
       sequence.addSegments(builder1.getSegmentBuilder());
     }
-    System.out.println(builder1.toStringWithRanges());
 
     return formatter.wrapTextNotTracked();
   }
@@ -80,7 +79,6 @@ public class BasedOffsetTrackerTest {
       BasedSequence sequence, BasedSequence actual, int offset, boolean isEndOffset) {
     SequenceBuilder builder = sequence.getBuilder();
     actual.addSegments(builder.getSegmentBuilder());
-    System.out.println(builder.toStringWithRanges());
 
     BasedOffsetTracker tracker = BasedOffsetTracker.create(actual);
     OffsetInfo result = tracker.getOffsetInfo(offset, isEndOffset);

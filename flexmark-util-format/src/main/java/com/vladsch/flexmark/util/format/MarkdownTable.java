@@ -3,7 +3,12 @@ package com.vladsch.flexmark.util.format;
 import static com.vladsch.flexmark.util.format.TableCell.DEFAULT_CELL;
 import static com.vladsch.flexmark.util.format.TableCell.NOT_TRACKED;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
-import static com.vladsch.flexmark.util.misc.Utils.*;
+import static com.vladsch.flexmark.util.misc.Utils.compare;
+import static com.vladsch.flexmark.util.misc.Utils.max;
+import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
+import static com.vladsch.flexmark.util.misc.Utils.min;
+import static com.vladsch.flexmark.util.misc.Utils.minLimit;
+import static com.vladsch.flexmark.util.misc.Utils.rangeLimit;
 
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
@@ -12,8 +17,16 @@ import com.vladsch.flexmark.util.collection.MinAggregator;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.misc.*;
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.misc.ArrayUtils;
+import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Ref;
+import com.vladsch.flexmark.util.misc.Utils;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Comparator;
@@ -1681,13 +1694,6 @@ public class MarkdownTable {
                     + minLimit(adjustedCell.trackedTextOffset + adjustForBlank, 0)
                     + adjustedCell.trackedTextAdjust)) {
               // QUERY: Triggered after sort table in MdNav for header row
-              System.out.println(
-                  String.format(
-                      "Offset not found: cell.trackedTextOffset: %d, adjusted trackedOffset: %d in offsets: %s",
-                      cell.trackedTextOffset,
-                      cell.trackedTextOffset
-                          + cell.getTextStartOffset(i == 0 ? null : row.cells.get(i - 1)),
-                      trackedOffsets));
             }
           }
         }

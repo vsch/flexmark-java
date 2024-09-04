@@ -977,15 +977,10 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
                 .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, true)));
 
-    // System.out.println("Table before: " + table.toString());
-
     HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
     table.appendTable(out);
     String formattedTable = out.toString(0, 0);
     int offset = table.getTrackedOffsetIndex(pos);
-
-    // System.out.println("pos " + pos + " -> " + offset);
-    // System.out.println("Table after: " + table.toString());
 
     assertEquals(
         ""
@@ -1027,15 +1022,10 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
                 .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
 
-    // System.out.println("Table before: " + table.toString());
-
     HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
     table.appendTable(out);
     String formattedTable = out.toString(0, 0);
     int offset = table.getTrackedOffsetIndex(pos);
-
-    // System.out.println("pos " + pos + " -> " + offset);
-    // System.out.println("Table after: " + table.toString());
 
     assertEquals(
         ""

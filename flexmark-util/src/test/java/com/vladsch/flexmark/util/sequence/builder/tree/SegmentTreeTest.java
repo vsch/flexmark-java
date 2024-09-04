@@ -3,7 +3,13 @@ package com.vladsch.flexmark.util.sequence.builder.tree;
 import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
-import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.*;
+import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.F_ANCHOR_FLAGS;
+import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.MAX_VALUE;
+import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.aggrLength;
+import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.byteOffset;
+import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.findSegmentPos;
+import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.hasPreviousAnchor;
+import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.previousAnchorOffset;
 import static org.junit.Assert.assertEquals;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -252,13 +258,11 @@ public class SegmentTreeTest {
       @NotNull SegmentTree segTree) {
     BasedSequence sequenceFull = SegmentedSequenceFull.create(sequence, segments);
     int iMax = sequenceFull.length();
-    System.out.println(segTree.toString(sequence));
     Segment seg = null;
 
     for (int i = 0; i < iMax; i++) {
       if (seg == null || seg.notInSegment(i)) {
         seg = segTree.findSegment(i, sequence, seg);
-        System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
       }
 
       String expected = Character.toString(sequenceFull.charAt(i));
@@ -270,7 +274,6 @@ public class SegmentTreeTest {
     for (int i = iMax; i-- > 0; ) {
       if (seg == null || seg.notInSegment(i)) {
         seg = segTree.findSegment(i, sequence, seg);
-        System.out.println("i: " + i + " pos: " + seg.getPos() + ", seg: " + seg);
       }
 
       String expected = Character.toString(sequenceFull.charAt(i));

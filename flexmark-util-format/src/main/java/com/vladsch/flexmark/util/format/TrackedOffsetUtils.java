@@ -65,16 +65,6 @@ public class TrackedOffsetUtils {
                 OffsetInfo info = tracker.getOffsetInfo(offset, true);
                 trackedOffset.setIndex(info.endIndex + length);
               }
-              if (traceDetails) {
-                System.out.println(
-                    String.format(
-                        "Resolved %d to %d, start: %d, in line[%d]: '%s'",
-                        offset,
-                        trackedOffset.getIndex(),
-                        length,
-                        lineInfo.index,
-                        line.getBuilder().append(line).toStringWithRanges(true)));
-              }
               unresolved--;
             }
           }

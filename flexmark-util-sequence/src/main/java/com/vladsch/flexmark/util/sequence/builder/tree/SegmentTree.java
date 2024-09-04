@@ -96,7 +96,6 @@ public class SegmentTree {
         int nextLength = aggrLength(hint.pos + 1);
         if (index < nextLength) {
           // FIX: add stats to track this
-          //                    System.out.println("Using next segment");
           return Segment.getSegment(
               segmentBytes, byteOffset(hint.pos + 1), hint.pos + 1, endIndex, baseSeq);
         }
@@ -110,7 +109,6 @@ public class SegmentTree {
         if (index >= prevPrevLength) {
           // it is previous one
           // FIX: add stats to track this
-          //                    System.out.println("Using previous segment");
           return Segment.getSegment(
               segmentBytes, byteOffset(hint.pos - 1), hint.pos - 1, prevPrevLength, baseSeq);
         }
@@ -126,7 +124,6 @@ public class SegmentTree {
         int prevLength = aggrLength(startPos - 1);
         if (index >= prevLength) {
           // FIX: add stats to track this
-          //                    System.out.println("Using first segment");
           return Segment.getSegment(
               segmentBytes, byteOffset(startPos), startPos, prevLength, baseSeq);
         }
@@ -147,7 +144,6 @@ public class SegmentTree {
         if (index >= lastLength) return null; /* beyond last segment*/
 
         // FIX: add stats to track this
-        //                System.out.println("Using last segment");
         return Segment.getSegment(
             segmentBytes, byteOffset(endPos - 1), endPos - 1, secondToLastLength, baseSeq);
       } else {
@@ -489,8 +485,6 @@ public class SegmentTree {
       int lastEnd = endPos;
 
       iterations++;
-      //            System.out.println(String.format("Iteration[%d] pos: %d, [%d, %d)", iterations,
-      // pos, startPos, endPos));
 
       int endIndex = aggrLength(pos, treeData);
       if (index >= endIndex) {
@@ -500,8 +494,6 @@ public class SegmentTree {
         if (index < startIndex) {
           endPos = pos;
         } else {
-          //                    System.out.println(String.format("Found on iteration[%d] pos: %d,
-          // [%d, %d)", iterations, pos, startPos, endPos));
           return new SegmentTreePos(pos, startIndex, iterations);
         }
       }
@@ -607,9 +599,6 @@ public class SegmentTree {
       byteLength += Segment.getSegByteLength(segType, seg.getSegStart(), seg.length());
       if (buildIndexData ? segType != ANCHOR : segType == BASE || segType == ANCHOR) nonAnchors++;
       lastEndOffset = seg.getEnd();
-      //            System.out.println(String.format("type: %s, seg: %s, segOffset: %d, bytes: %d,
-      // totalBytes: %d, nonAnchors: %d, len: %d", buildIndexData ? "index" : "offset", seg,
-      // byteOffset, byteLength - byteOffset, byteLength, nonAnchors, seg.length()));
     }
 
     int[] treeData = new int[nonAnchors * 2];
@@ -635,11 +624,6 @@ public class SegmentTree {
 
       offset = Segment.addSegBytes(segmentBytes, offset, seg, allText);
       Segment.SegType segType = Segment.SegType.fromTypeMask(segmentBytes[segOffset]);
-
-      //            System.out.println(String.format("type: %s, seg: %s, segOffset: %d, bytes: %d,
-      // totalBytes: %d, nonAnchors: %d, len: %d, aggrLen: %d, prevAnchor: %d", buildIndexData ?
-      // "index" : "offset", seg, segOffset, offset - segOffset, offset, pos, seg.length(),
-      // aggrLength, prevAnchorOffset));
 
       if (buildIndexData) {
         if (segType == ANCHOR) {
@@ -713,8 +697,6 @@ public class SegmentTree {
         nonAnchors++;
         lastEndOffset = seg.getEndOffset();
       }
-      //            System.out.println(String.format("%s[%d]:, seg: %s, segOffset: %d, bytes: %d",
-      // "offset", nonAnchors, seg, segOffset, seg.length()));
     }
 
     int[] treeData = new int[nonAnchors * 2];
@@ -731,9 +713,6 @@ public class SegmentTree {
 
     while (segOffset < byteLength) {
       Segment seg = Segment.getSegment(segmentBytes, segOffset, nonAnchors, length, baseSeq);
-
-      //            System.out.println(String.format("%s[%d]: seg: %s, segOffset: %d, bytes: %d",
-      // "offset", pos, seg, segOffset, seg.getByteLength()));
 
       if (posNeedingAdjustmentIndex > 0 && seg.getStartOffset() >= 0) {
         // set it to the correct value

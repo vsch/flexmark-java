@@ -1,11 +1,20 @@
 package com.vladsch.flexmark.test.util;
 
 import static com.vladsch.flexmark.test.util.spec.SpecReader.EXAMPLE_KEYWORD;
-import static com.vladsch.flexmark.util.misc.Utils.*;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
+import static com.vladsch.flexmark.util.misc.Utils.removePrefix;
+import static com.vladsch.flexmark.util.misc.Utils.removeSuffix;
+import static com.vladsch.flexmark.util.misc.Utils.suffixWith;
+import static com.vladsch.flexmark.util.misc.Utils.wrapWith;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.endsWithEOL;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.isEmpty;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.trim;
 
-import com.vladsch.flexmark.test.util.spec.*;
+import com.vladsch.flexmark.test.util.spec.ResourceLocation;
+import com.vladsch.flexmark.test.util.spec.ResourceResolverManager;
+import com.vladsch.flexmark.test.util.spec.ResourceUrlResolver;
+import com.vladsch.flexmark.test.util.spec.SpecExample;
+import com.vladsch.flexmark.test.util.spec.SpecReader;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
@@ -23,7 +32,13 @@ import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
@@ -875,9 +890,6 @@ public class TestUtils {
         lastPos = pos - 1;
       }
 
-      //            System.out.println("After markup removal: " +
-      // SequenceUtils.toVisibleWhitespaceString(toWrap));
-
       BasedSequence sequence = BasedSequence.of(toWrap);
 
       // now we delete the indents to simulate prefix removal
@@ -898,8 +910,6 @@ public class TestUtils {
       if (offset > lastOffset) {
         sequence.subSequence(lastOffset, offset).addSegments(builder.getSegmentBuilder());
       }
-
-      //            System.out.println("After removal: " + builder.toStringWithRanges());
 
       return Pair.of(builder.toSequence(), offsets);
     }
