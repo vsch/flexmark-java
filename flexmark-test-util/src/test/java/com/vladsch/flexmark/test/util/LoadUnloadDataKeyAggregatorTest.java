@@ -5,9 +5,17 @@ import static com.vladsch.flexmark.test.util.LoadUnloadDataKeyAggregator.UNLOAD_
 import static org.junit.Assert.assertEquals;
 
 import com.vladsch.flexmark.test.util.spec.SpecExample;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataSet;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.misc.Extension;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import org.junit.Test;
 
 public class LoadUnloadDataKeyAggregatorTest {

@@ -4,7 +4,14 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED_SPANS;
 import static java.lang.Character.isWhitespace;
 
 import com.vladsch.flexmark.ast.AnchorRefTarget;
-import com.vladsch.flexmark.formatter.*;
+import com.vladsch.flexmark.formatter.FormatterOptions;
+import com.vladsch.flexmark.formatter.MarkdownWriter;
+import com.vladsch.flexmark.formatter.MergeContext;
+import com.vladsch.flexmark.formatter.NodeFormatterContext;
+import com.vladsch.flexmark.formatter.RenderPurpose;
+import com.vladsch.flexmark.formatter.TranslatingSpanRender;
+import com.vladsch.flexmark.formatter.TranslationHandler;
+import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGeneratorFactory;
 import com.vladsch.flexmark.util.ast.Document;

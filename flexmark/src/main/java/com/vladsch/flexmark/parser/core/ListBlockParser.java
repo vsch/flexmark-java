@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser.core;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
-import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 import static com.vladsch.flexmark.util.data.SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
 
 import com.vladsch.flexmark.ast.BulletList;
@@ -12,7 +11,15 @@ import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.block.AbstractBlockParser;
+import com.vladsch.flexmark.parser.block.AbstractBlockParserFactory;
+import com.vladsch.flexmark.parser.block.BlockContinue;
+import com.vladsch.flexmark.parser.block.BlockParser;
+import com.vladsch.flexmark.parser.block.BlockParserFactory;
+import com.vladsch.flexmark.parser.block.BlockStart;
+import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
+import com.vladsch.flexmark.parser.block.MatchedBlockParser;
+import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.BlankLine;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
@@ -590,22 +597,22 @@ public class ListBlockParser extends AbstractBlockParser {
       // nothing else should get here because the list item should have handled it
       // so everything should have indent >= current list indent, the rest should not be here
 
-      if (emulationFamily == COMMONMARK) {
+      if (emulationFamily == ParserEmulationProfile.COMMONMARK) {
         int currentIndent = state.getIndent();
         if (currentIndent >= myOptions.getCodeIndent()) {
           return BlockStart.none();
         }
-      } else if (emulationFamily == FIXED_INDENT) {
+      } else if (emulationFamily == ParserEmulationProfile.FIXED_INDENT) {
         int currentIndent = state.getIndent();
         if (currentIndent >= myOptions.getItemIndent()) {
           return BlockStart.none();
         }
-      } else if (emulationFamily == KRAMDOWN) {
+      } else if (emulationFamily == ParserEmulationProfile.KRAMDOWN) {
         int currentIndent = state.getIndent();
         if (currentIndent >= myOptions.getItemIndent()) {
           return BlockStart.none();
         }
-      } else if (emulationFamily == MARKDOWN) {
+      } else if (emulationFamily == ParserEmulationProfile.MARKDOWN) {
         int currentIndent = state.getIndent();
         if (currentIndent >= myOptions.getItemIndent()) {
           return BlockStart.none();

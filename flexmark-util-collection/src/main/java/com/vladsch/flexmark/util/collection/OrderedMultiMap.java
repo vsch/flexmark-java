@@ -1,9 +1,19 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.collection.iteration.*;
+import com.vladsch.flexmark.util.collection.iteration.BitSetIterable;
+import com.vladsch.flexmark.util.collection.iteration.BitSetIterator;
+import com.vladsch.flexmark.util.collection.iteration.Indexed;
+import com.vladsch.flexmark.util.collection.iteration.IndexedIterable;
+import com.vladsch.flexmark.util.collection.iteration.IndexedIterator;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.misc.Paired;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

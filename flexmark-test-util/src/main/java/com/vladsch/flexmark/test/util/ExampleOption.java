@@ -1,6 +1,13 @@
 package com.vladsch.flexmark.test.util;
 
-import static com.vladsch.flexmark.test.util.TestUtils.*;
+import static com.vladsch.flexmark.test.util.TestUtils.DISABLED_OPTION_PREFIX;
+import static com.vladsch.flexmark.test.util.TestUtils.EMBED_TIMED_OPTION_NAME;
+import static com.vladsch.flexmark.test.util.TestUtils.FAIL_OPTION_NAME;
+import static com.vladsch.flexmark.test.util.TestUtils.FILE_EOL_OPTION_NAME;
+import static com.vladsch.flexmark.test.util.TestUtils.IGNORE_OPTION_NAME;
+import static com.vladsch.flexmark.test.util.TestUtils.NO_FILE_EOL_OPTION_NAME;
+import static com.vladsch.flexmark.test.util.TestUtils.TIMED_ITERATIONS_OPTION_NAME;
+import static com.vladsch.flexmark.test.util.TestUtils.TIMED_OPTION_NAME;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.HashMap;

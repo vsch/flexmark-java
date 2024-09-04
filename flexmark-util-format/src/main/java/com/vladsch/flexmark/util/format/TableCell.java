@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.util.format;
 
-import static com.vladsch.flexmark.util.misc.Utils.*;
-
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.html.CellAlignment;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
@@ -158,7 +157,7 @@ public class TableCell {
         columnSpan,
         alignment,
         trackedTextOffset,
-        spanTrackedOffset == NOT_TRACKED ? NOT_TRACKED : min(spanTrackedOffset, columnSpan),
+        spanTrackedOffset == NOT_TRACKED ? NOT_TRACKED : Utils.min(spanTrackedOffset, columnSpan),
         trackedTextAdjust,
         afterSpace,
         afterDelete);
@@ -352,17 +351,17 @@ public class TableCell {
   }
 
   public int insideToTextOffset(int insideOffset, TableCell previousCell) {
-    return maxLimit(
+    return Utils.maxLimit(
         text.length(),
-        minLimit(
+        Utils.minLimit(
             insideOffset - getInsideStartOffset(previousCell) + getTextStartOffset(previousCell),
             0));
   }
 
   public int textToInsideOffset(int insideOffset, TableCell previousCell) {
-    return maxLimit(
+    return Utils.maxLimit(
         getCellSize(previousCell),
-        minLimit(
+        Utils.minLimit(
             insideOffset - getTextStartOffset(previousCell) + getInsideStartOffset(previousCell),
             0));
   }

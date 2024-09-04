@@ -2,7 +2,11 @@ package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.collection.ClassificationBag;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 

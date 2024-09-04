@@ -1,9 +1,11 @@
 package com.vladsch.flexmark.parser.core;
 
 import static com.vladsch.flexmark.parser.Parser.PARSER_EMULATION_PROFILE;
-import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.BulletListItem;
+import com.vladsch.flexmark.ast.FencedCodeBlock;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
@@ -63,7 +65,8 @@ public class ListItemParser extends AbstractBlockParser {
     // list item
     if (block instanceof FencedCodeBlock) {
       // see if it indented more than our marker
-      if (PARSER_EMULATION_PROFILE.get(state.getProperties()) == GITHUB_DOC) {
+      if (PARSER_EMULATION_PROFILE.get(state.getProperties())
+          == ParserEmulationProfile.GITHUB_DOC) {
         // Issue #66, if we are in a list item and our indent == list indent then we interrupt the
         // list
         FencedCodeBlockParser parser = (FencedCodeBlockParser) blockParser;
@@ -117,7 +120,7 @@ public class ListItemParser extends AbstractBlockParser {
     ParserEmulationProfile emulationProfile = myOptions.getParserEmulationProfile();
     ParserEmulationProfile emulationFamily = emulationProfile.family;
     final int contentIndent = getContentIndent();
-    if (emulationFamily == COMMONMARK) {
+    if (emulationFamily == ParserEmulationProfile.COMMONMARK) {
       // - CommonMark: version 0.27 of the spec, all common mark parsers
       //     - Definitions/Defaults:
       //         - `ITEM_INDENT` = 4 <!-- not used -->
@@ -206,7 +209,7 @@ public class ListItemParser extends AbstractBlockParser {
     } else {
       final int itemIndent = myOptions.getItemIndent();
 
-      if (emulationFamily == FIXED_INDENT) {
+      if (emulationFamily == ParserEmulationProfile.FIXED_INDENT) {
         // - FixedIndent: Pandoc, MultiMarkdown, Pegdown
         //     - Definitions/Defaults:
         //         - `ITEM_INDENT` = 4
@@ -305,7 +308,7 @@ public class ListItemParser extends AbstractBlockParser {
         }
       } else {
         final int markerIndent = listBlockParser.getListData().markerIndent;
-        if (emulationFamily == KRAMDOWN) {
+        if (emulationFamily == ParserEmulationProfile.KRAMDOWN) {
           // - Kramdown:
           //     - Definitions/Defaults:
           //         - `ITEM_INDENT` = 4
@@ -396,7 +399,7 @@ public class ListItemParser extends AbstractBlockParser {
               }
             }
           }
-        } else if (emulationProfile == GITHUB_DOC) {
+        } else if (emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
           // - Markdown:
           //     - Definitions/Defaults:
           //         - `ITEM_INDENT` = 4
@@ -528,7 +531,7 @@ public class ListItemParser extends AbstractBlockParser {
               }
             }
           }
-        } else if (emulationFamily == MARKDOWN) {
+        } else if (emulationFamily == ParserEmulationProfile.MARKDOWN) {
           // - Markdown:
           //     - Definitions/Defaults:
           //         - `ITEM_INDENT` = 4

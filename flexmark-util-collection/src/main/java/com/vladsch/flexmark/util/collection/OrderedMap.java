@@ -1,7 +1,15 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.collection.iteration.*;
-import java.util.*;
+import com.vladsch.flexmark.util.collection.iteration.Indexed;
+import com.vladsch.flexmark.util.collection.iteration.IndexedIterable;
+import com.vladsch.flexmark.util.collection.iteration.IndexedIterator;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;

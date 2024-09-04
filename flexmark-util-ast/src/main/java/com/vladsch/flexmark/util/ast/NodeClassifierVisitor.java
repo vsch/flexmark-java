@@ -3,7 +3,12 @@ package com.vladsch.flexmark.util.ast;
 import com.vladsch.flexmark.util.collection.CopyOnWriteRef;
 import com.vladsch.flexmark.util.collection.OrderedMap;
 import com.vladsch.flexmark.util.collection.OrderedSet;
-import java.util.*;
+import java.util.BitSet;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 import org.jetbrains.annotations.NotNull;
 
 public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracker {

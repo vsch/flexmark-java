@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.ext.definition;
 
-import com.vladsch.flexmark.ext.definition.internal.*;
+import com.vladsch.flexmark.ext.definition.internal.DefinitionItemBlockParser;
+import com.vladsch.flexmark.ext.definition.internal.DefinitionListBlockPreProcessor;
+import com.vladsch.flexmark.ext.definition.internal.DefinitionListItemBlockPreProcessor;
+import com.vladsch.flexmark.ext.definition.internal.DefinitionNodeFormatter;
+import com.vladsch.flexmark.ext.definition.internal.DefinitionNodeRenderer;
 import com.vladsch.flexmark.formatter.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;

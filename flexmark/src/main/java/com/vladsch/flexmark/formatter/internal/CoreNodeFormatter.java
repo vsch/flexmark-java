@@ -3,21 +3,71 @@ package com.vladsch.flexmark.formatter.internal;
 import static com.vladsch.flexmark.formatter.FormatterUtils.LIST_ITEM_SPACING;
 import static com.vladsch.flexmark.formatter.FormatterUtils.isLastOfItem;
 import static com.vladsch.flexmark.formatter.FormattingPhase.DOCUMENT_BOTTOM;
-import static com.vladsch.flexmark.formatter.RenderPurpose.*;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.AutoLink;
+import com.vladsch.flexmark.ast.BlockQuote;
+import com.vladsch.flexmark.ast.BulletList;
+import com.vladsch.flexmark.ast.BulletListItem;
+import com.vladsch.flexmark.ast.Code;
+import com.vladsch.flexmark.ast.DelimitedLinkNode;
+import com.vladsch.flexmark.ast.Emphasis;
+import com.vladsch.flexmark.ast.FencedCodeBlock;
+import com.vladsch.flexmark.ast.HardLineBreak;
+import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ast.HtmlBlock;
+import com.vladsch.flexmark.ast.HtmlBlockBase;
+import com.vladsch.flexmark.ast.HtmlCommentBlock;
+import com.vladsch.flexmark.ast.HtmlEntity;
+import com.vladsch.flexmark.ast.HtmlInline;
+import com.vladsch.flexmark.ast.HtmlInlineComment;
+import com.vladsch.flexmark.ast.HtmlInnerBlock;
+import com.vladsch.flexmark.ast.HtmlInnerBlockComment;
+import com.vladsch.flexmark.ast.Image;
+import com.vladsch.flexmark.ast.ImageRef;
+import com.vladsch.flexmark.ast.IndentedCodeBlock;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.LinkRef;
+import com.vladsch.flexmark.ast.ListBlock;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.MailLink;
+import com.vladsch.flexmark.ast.OrderedList;
+import com.vladsch.flexmark.ast.OrderedListItem;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.ParagraphContainer;
+import com.vladsch.flexmark.ast.ParagraphItemContainer;
+import com.vladsch.flexmark.ast.RefNode;
+import com.vladsch.flexmark.ast.Reference;
+import com.vladsch.flexmark.ast.SoftLineBreak;
+import com.vladsch.flexmark.ast.StrongEmphasis;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.TextBase;
+import com.vladsch.flexmark.ast.ThematicBreak;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
-import com.vladsch.flexmark.formatter.*;
 import com.vladsch.flexmark.formatter.Formatter;
+import com.vladsch.flexmark.formatter.FormatterOptions;
+import com.vladsch.flexmark.formatter.FormatterUtils;
+import com.vladsch.flexmark.formatter.FormattingPhase;
+import com.vladsch.flexmark.formatter.MarkdownWriter;
+import com.vladsch.flexmark.formatter.NodeFormatter;
+import com.vladsch.flexmark.formatter.NodeFormatterContext;
+import com.vladsch.flexmark.formatter.NodeFormatterFactory;
+import com.vladsch.flexmark.formatter.NodeFormattingHandler;
+import com.vladsch.flexmark.formatter.NodeRepositoryFormatter;
+import com.vladsch.flexmark.formatter.RenderPurpose;
+import com.vladsch.flexmark.formatter.TranslationPlaceholderGenerator;
 import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeRepository;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataKeyBase;
@@ -32,7 +82,14 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -159,7 +216,7 @@ public class CoreNodeFormatter
 
   void appendReference(CharSequence id, NodeFormatterContext context, MarkdownWriter markdown) {
     if (context.isTransformingText()
-        && context.getRenderPurpose() == TRANSLATED
+        && context.getRenderPurpose() == RenderPurpose.TRANSLATED
         && context.getMergeContext() != null) {
       // may need to map references
       String reference = String.valueOf(context.transformTranslating(null, id, null, null));
@@ -182,7 +239,7 @@ public class CoreNodeFormatter
 
       markdown.append(node.getUrlOpeningMarker());
 
-      if (context.getRenderPurpose() == TRANSLATION_SPANS) {
+      if (context.getRenderPurpose() == RenderPurpose.TRANSLATION_SPANS) {
         ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl(), false);
         markdown.appendNonTranslating(resolvedLink.getPageRef());
 
@@ -550,7 +607,7 @@ public class CoreNodeFormatter
 
       // need to always have EOL at the end and make sure no leading spaces on id at translated
       // collection
-      if (context.getRenderPurpose() == TRANSLATED) {
+      if (context.getRenderPurpose() == RenderPurpose.TRANSLATED) {
         contentChars = contentChars.trimStart();
       }
 
@@ -710,7 +767,7 @@ public class CoreNodeFormatter
 
   private void render(HardLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
     if (formatterOptions.keepHardLineBreaks) {
-      if (context.getRenderPurpose() == FORMAT) {
+      if (context.getRenderPurpose() == RenderPurpose.FORMAT) {
         markdown.append(node.getChars());
       } else {
         markdown.append(node.getChars());
@@ -725,7 +782,7 @@ public class CoreNodeFormatter
       index -> String.format(Locale.US, "&#%d;", index);
 
   private void render(HtmlEntity node, NodeFormatterContext context, MarkdownWriter markdown) {
-    if (context.getRenderPurpose() == FORMAT) {
+    if (context.getRenderPurpose() == RenderPurpose.FORMAT) {
       markdown.append(node.getChars());
     } else {
       context.customPlaceholderFormat(
@@ -992,7 +1049,7 @@ public class CoreNodeFormatter
 
       markdown.append(node.getUrlOpeningMarker());
 
-      if (context.getRenderPurpose() == TRANSLATION_SPANS) {
+      if (context.getRenderPurpose() == RenderPurpose.TRANSLATION_SPANS) {
         ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl(), false);
         markdown.appendNonTranslating(resolvedLink.getPageRef());
       } else {
@@ -1087,7 +1144,7 @@ public class CoreNodeFormatter
       markdown.append(node.getLinkOpeningMarker());
       markdown.append(node.getUrlOpeningMarker());
 
-      if (context.getRenderPurpose() == TRANSLATION_SPANS) {
+      if (context.getRenderPurpose() == RenderPurpose.TRANSLATION_SPANS) {
         ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl(), false);
         markdown.appendNonTranslating(resolvedLink.getPageRef());
 
@@ -1107,7 +1164,7 @@ public class CoreNodeFormatter
           CharSequence anchorRef =
               context.transformAnchorRef(node.getPageRef(), node.getAnchorRef());
           if (attributeUniquificationIdMap != null
-              && context.getRenderPurpose() == TRANSLATED
+              && context.getRenderPurpose() == RenderPurpose.TRANSLATED
               && context.getMergeContext() != null) {
             String uniquifiedAnchorRef = String.valueOf(anchorRef);
             if (pageRef.length() == 0) {

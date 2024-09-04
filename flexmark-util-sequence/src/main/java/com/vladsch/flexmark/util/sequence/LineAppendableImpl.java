@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.util.sequence;
 
-import static com.vladsch.flexmark.util.misc.Utils.*;
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.countTrailingSpaceTab;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.trimEnd;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.trimmedEOL;
 import static java.lang.Integer.MAX_VALUE;
 
 import com.vladsch.flexmark.util.collection.iteration.Indexed;
@@ -11,6 +12,7 @@ import com.vladsch.flexmark.util.collection.iteration.IndexedItemIterator;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Pair;
+import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import com.vladsch.flexmark.util.sequence.builder.StringSequenceBuilder;
 import java.io.IOException;
@@ -885,7 +887,7 @@ public class LineAppendableImpl implements LineAppendable {
     maxTrailingBlankLines = Math.max(0, maxTrailingBlankLines);
 
     int endLinePending = lines.size();
-    int iMax = min(getLineCountWithPending(), endLine);
+    int iMax = Utils.min(getLineCountWithPending(), endLine);
     int lastNonBlankLine = lastNonBlankLine(iMax);
     int consecutiveBlankLines = 0;
 
@@ -975,8 +977,8 @@ public class LineAppendableImpl implements LineAppendable {
    * @return index from which line info must be recomputed
    */
   private int removeLinesRaw(int startLine, int endLine) {
-    int useStartLine = minLimit(startLine, 0);
-    int useEndLine = maxLimit(endLine, getLineCountWithPending());
+    int useStartLine = Utils.minLimit(startLine, 0);
+    int useEndLine = Utils.maxLimit(endLine, getLineCountWithPending());
 
     if (useStartLine < useEndLine) {
       lines.subList(useStartLine, useEndLine).clear();
@@ -1025,7 +1027,7 @@ public class LineAppendableImpl implements LineAppendable {
     maxBlankLines = Math.max(0, maxBlankLines);
     maxTrailingBlankLines = Math.max(0, maxTrailingBlankLines);
 
-    int iMax = min(endLine, getLineCountWithPending());
+    int iMax = Utils.min(endLine, getLineCountWithPending());
 
     int consecutiveBlankLines = 0;
     int maxConsecutiveBlankLines = maxTrailingBlankLines;
@@ -1137,7 +1139,7 @@ public class LineAppendableImpl implements LineAppendable {
   }
 
   int tailBlankLinesToRemove(int endLine, int maxTrailingBlankLines) {
-    return max(0, getTrailingBlankLines(endLine) - max(0, maxTrailingBlankLines));
+    return Utils.max(0, getTrailingBlankLines(endLine) - Utils.max(0, maxTrailingBlankLines));
   }
 
   static class IndexedLineInfoProxy implements Indexed<LineInfo> {

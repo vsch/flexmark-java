@@ -2,7 +2,12 @@ package com.vladsch.flexmark.util.dependency;
 
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
 import com.vladsch.flexmark.util.misc.Ref;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

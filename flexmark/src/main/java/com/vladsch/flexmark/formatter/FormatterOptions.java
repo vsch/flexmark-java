@@ -4,7 +4,17 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
-import com.vladsch.flexmark.util.format.options.*;
+import com.vladsch.flexmark.util.format.options.BlockQuoteMarker;
+import com.vladsch.flexmark.util.format.options.CodeFenceMarker;
+import com.vladsch.flexmark.util.format.options.DiscretionaryText;
+import com.vladsch.flexmark.util.format.options.ElementAlignment;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.format.options.EqualizeTrailingMarker;
+import com.vladsch.flexmark.util.format.options.HeadingStyle;
+import com.vladsch.flexmark.util.format.options.ListBulletMarker;
+import com.vladsch.flexmark.util.format.options.ListNumberedMarker;
+import com.vladsch.flexmark.util.format.options.ListSpacing;
 import java.util.regex.Pattern;
 import org.jetbrains.annotations.Nullable;
 

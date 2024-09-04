@@ -2,10 +2,19 @@ package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.misc.Utils;
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.Escaping;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
+import com.vladsch.flexmark.util.sequence.LineAppendableImpl;
+import com.vladsch.flexmark.util.sequence.LineInfo;
+import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

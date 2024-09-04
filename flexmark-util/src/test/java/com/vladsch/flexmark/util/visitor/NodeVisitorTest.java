@@ -1,6 +1,12 @@
 package com.vladsch.flexmark.util.visitor;
 
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.BlankLine;
+import com.vladsch.flexmark.util.ast.Block;
+import com.vladsch.flexmark.util.ast.ContentNode;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeVisitor;
+import com.vladsch.flexmark.util.ast.VisitHandler;
 import org.junit.Test;
 
 public class NodeVisitorTest {

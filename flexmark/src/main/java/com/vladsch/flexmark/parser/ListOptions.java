@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.BulletList;
+import com.vladsch.flexmark.ast.ListBlock;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedList;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;

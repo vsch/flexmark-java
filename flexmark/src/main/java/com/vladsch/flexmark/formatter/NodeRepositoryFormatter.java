@@ -4,13 +4,24 @@ import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.ast.Document;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.ast.NodeRepository;
+import com.vladsch.flexmark.util.ast.ReferenceNode;
+import com.vladsch.flexmark.util.ast.ReferencingNode;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

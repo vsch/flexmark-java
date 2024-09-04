@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
-import static com.vladsch.flexmark.util.sequence.SequenceUtils.*;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.endOfLine;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.endsWithEOL;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
+import static com.vladsch.flexmark.util.sequence.SequenceUtils.startsWith;
 
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
 import com.vladsch.flexmark.util.sequence.Range;

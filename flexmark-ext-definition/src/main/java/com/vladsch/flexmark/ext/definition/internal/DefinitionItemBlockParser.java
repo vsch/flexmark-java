@@ -1,14 +1,20 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
-
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.block.AbstractBlockParser;
+import com.vladsch.flexmark.parser.block.AbstractBlockParserFactory;
+import com.vladsch.flexmark.parser.block.BlockContinue;
+import com.vladsch.flexmark.parser.block.BlockParser;
+import com.vladsch.flexmark.parser.block.BlockParserFactory;
+import com.vladsch.flexmark.parser.block.BlockStart;
+import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
+import com.vladsch.flexmark.parser.block.MatchedBlockParser;
+import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.core.DocumentBlockParser;
 import com.vladsch.flexmark.parser.core.ParagraphParser;
 import com.vladsch.flexmark.util.ast.BlankLine;
@@ -120,7 +126,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     }
 
     if (!hasContent
-        || options.myParserEmulationProfile == COMMONMARK
+        || options.myParserEmulationProfile == ParserEmulationProfile.COMMONMARK
             && contentOffset > options.newItemCodeIndent) {
       // If this line is blank or has a code block, default to 1 space after marker
       contentOffset = 1;
@@ -150,9 +156,9 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     }
 
     ParserEmulationProfile emulationFamily = options.myParserEmulationProfile.family;
-    if (emulationFamily == COMMONMARK
-        || emulationFamily == KRAMDOWN
-        || emulationFamily == MARKDOWN) {
+    if (emulationFamily == ParserEmulationProfile.COMMONMARK
+        || emulationFamily == ParserEmulationProfile.KRAMDOWN
+        || emulationFamily == ParserEmulationProfile.MARKDOWN) {
       int currentIndent = state.getIndent();
       int newColumn = state.getColumn() + getContentIndent();
 
@@ -174,7 +180,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
           return BlockContinue.atIndex(state.getIndex() + currentIndent);
         }
       }
-    } else if (emulationFamily == FIXED_INDENT) {
+    } else if (emulationFamily == ParserEmulationProfile.FIXED_INDENT) {
       int currentIndent = state.getIndent();
 
       // advance by item indent
@@ -315,7 +321,8 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
 
       int currentIndent = state.getIndent();
       int codeIndent =
-          emulationFamily == COMMONMARK || emulationFamily == FIXED_INDENT
+          emulationFamily == ParserEmulationProfile.COMMONMARK
+                  || emulationFamily == ParserEmulationProfile.FIXED_INDENT
               ? options.codeIndent
               : options.itemIndent;
 

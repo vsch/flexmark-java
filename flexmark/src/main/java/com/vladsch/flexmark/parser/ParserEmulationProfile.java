@@ -2,7 +2,11 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.KeepType;
-import com.vladsch.flexmark.util.data.*;
+import com.vladsch.flexmark.util.data.DataHolder;
+import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.MutableDataHolder;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.util.data.MutableDataSetter;
 import org.jetbrains.annotations.NotNull;
 
 public enum ParserEmulationProfile implements MutableDataSetter {

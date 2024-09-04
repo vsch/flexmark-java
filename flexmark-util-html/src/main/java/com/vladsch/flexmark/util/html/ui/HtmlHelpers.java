@@ -17,8 +17,6 @@
 
 package com.vladsch.flexmark.util.html.ui;
 
-import static com.vladsch.flexmark.util.misc.Utils.*;
-
 import com.vladsch.flexmark.util.misc.Utils;
 import java.awt.Font;
 import java.util.regex.Matcher;
@@ -121,8 +119,10 @@ public class HtmlHelpers {
     // return java.awt.Color.getHSBColor(hsbMixed[0], hsbMixed[1], hsbMixed[2]);
 
     hsbMixed[0] = hsbError[0];
-    hsbMixed[1] = rangeLimit(hsbColor[1], min(max(hsbError[1], 0.3f), 0.5f), 1.0f);
-    hsbMixed[2] = rangeLimit(hsbColor[2], min(max(hsbError[2], 0.3f), 0.5f), 1.0f);
+    hsbMixed[1] =
+        Utils.rangeLimit(hsbColor[1], Utils.min(Utils.max(hsbError[1], 0.3f), 0.5f), 1.0f);
+    hsbMixed[2] =
+        Utils.rangeLimit(hsbColor[2], Utils.min(Utils.max(hsbError[2], 0.3f), 0.5f), 1.0f);
     return java.awt.Color.getHSBColor(hsbMixed[0], hsbMixed[1], hsbMixed[2]);
   }
 }

@@ -4,7 +4,11 @@ import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLU
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
 import static org.junit.Assert.assertEquals;
 
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.BasedOptionsSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PositionAnchor;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.util.sequence.Range;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;

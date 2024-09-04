@@ -1,7 +1,14 @@
 package com.vladsch.flexmark.util.misc;
 
-import static com.vladsch.flexmark.util.misc.ArrayUtils.*;
-import static org.junit.Assert.*;
+import static com.vladsch.flexmark.util.misc.ArrayUtils.firstOf;
+import static com.vladsch.flexmark.util.misc.ArrayUtils.indexOf;
+import static com.vladsch.flexmark.util.misc.ArrayUtils.lastIndexOf;
+import static com.vladsch.flexmark.util.misc.ArrayUtils.lastOf;
+import static com.vladsch.flexmark.util.misc.ArrayUtils.toArray;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.BitSet;
 import java.util.Objects;

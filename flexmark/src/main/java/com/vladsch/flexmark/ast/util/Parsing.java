@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.ast.util;
 
-import static com.vladsch.flexmark.parser.Parser.*;
-
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
@@ -355,10 +353,10 @@ public class Parsing {
       this.translationAutolinkTagPattern = Parser.TRANSLATION_AUTOLINK_TAG_PATTERN.get(options);
       this.spaceInLinkUrl = Parser.SPACE_IN_LINK_URLS.get(options);
       this.parseJekyllMacroInLinkUrl = Parser.PARSE_JEKYLL_MACROS_IN_URLS.get(options);
-      this.itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.get(options);
-      this.listsItemMarkerSpace = LISTS_ITEM_MARKER_SPACE.get(options);
-      this.listsOrderedItemDotOnly = LISTS_ORDERED_ITEM_DOT_ONLY.get(options);
-      this.allowNameSpace = HTML_ALLOW_NAME_SPACE.get(options);
+      this.itemPrefixChars = Parser.LISTS_ITEM_PREFIX_CHARS.get(options);
+      this.listsItemMarkerSpace = Parser.LISTS_ITEM_MARKER_SPACE.get(options);
+      this.listsOrderedItemDotOnly = Parser.LISTS_ORDERED_ITEM_DOT_ONLY.get(options);
+      this.allowNameSpace = Parser.HTML_ALLOW_NAME_SPACE.get(options);
     }
 
     public PatternTypeFlags(

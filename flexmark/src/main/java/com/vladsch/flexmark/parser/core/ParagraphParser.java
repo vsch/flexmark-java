@@ -2,7 +2,12 @@ package com.vladsch.flexmark.parser.core;
 
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.block.AbstractBlockParser;
+import com.vladsch.flexmark.parser.block.BlockContinue;
+import com.vladsch.flexmark.parser.block.BlockParserFactory;
+import com.vladsch.flexmark.parser.block.BlockStart;
+import com.vladsch.flexmark.parser.block.MatchedBlockParser;
+import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
