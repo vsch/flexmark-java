@@ -36,8 +36,10 @@ jobs:
           GIT_USER_NAME: acrolinx-opensource
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_GPG_KEY: ${{ secrets.CODE_SIGNING_PRIV_KEY }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.CODE_SIGNING_PWD }}
         run: |
           git config user.email opensource@acrolinx.com
           git config user.name $GIT_USER_NAME
           git checkout -b $PR_BRANCH_NAME
-          mvn -s .m2/settings.xml -B -Dusername=$GIT_USER_NAME -Dpassword=$GITHUB_TOKEN -DpreparationGoals="clean spotless:apply verify" -DcompletionGoals="spotless:apply" release:prepare release:perform
+          mvn -s .m2/settings.xml  -P sign -B -Dusername=$GIT_USER_NAME -Dpassword=$GITHUB_TOKEN -DpreparationGoals="clean spotless:apply verify" -DcompletionGoals="spotless:apply" release:prepare release:perform -Dgpg.signer=bc
