@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -16,9 +16,9 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: mvn clean deploy -P sign -Dgpg.signer=bc
         env:
           MAVEN_GPG_KEY: ${{ secrets.CODE_SIGNING_PRIV_KEY }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.CODE_SIGNING_PWD }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PW: ${{ secrets.SONATYPE_PW }}
+        run: mvn clean deploy -P sign
