@@ -18,7 +18,7 @@ jobs:
       - name: Build with Maven
         run: mvn clean deploy -P sign -Dgpg.signer=bc
         env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_GPG_KEY: ${{ secrets.CODE_SIGNING_PRIV_KEY }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.CODE_SIGNING_PWD }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PW: ${{ secrets.SONATYPE_PW }}

@@ -8,6 +8,9 @@
   <version>0.70.1-SNAPSHOT</version>
 
   <packaging>pom</packaging>
+  <name>flexmark-java</name>
+  <description>CommonMark/Markdown Java parser</description>
+  <url>https://github.com/acrolinx/flexmark-java</url>
 
   <licenses>
     <license>
@@ -16,6 +19,14 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+
+  <developers>
+    <developer>
+      <id>Acrolinx Open Source</id>
+      <name>Acrolinx</name>
+      <email>opensource@acrolinx.com</email>
+    </developer>
+  </developers>
 
   <modules>
     <module>flexmark</module>
@@ -50,12 +61,12 @@
 
   <distributionManagement>
     <repository>
-      <id>github</id>
-      <url>https://maven.pkg.github.com/acrolinx/flexmark-java</url>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
     <snapshotRepository>
-      <id>github</id>
-      <url>https://maven.pkg.github.com/acrolinx/flexmark-java</url>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 

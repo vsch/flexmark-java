@@ -38,6 +38,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_GPG_KEY: ${{ secrets.CODE_SIGNING_PRIV_KEY }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.CODE_SIGNING_PWD }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PW: ${{ secrets.SONATYPE_PW }}
         run: |
           git config user.email opensource@acrolinx.com
           git config user.name $GIT_USER_NAME
