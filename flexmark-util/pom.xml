@@ -16,6 +16,7 @@
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-format</artifactId>
+      <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

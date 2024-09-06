@@ -15,14 +15,17 @@
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-builder</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-dependency</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-format</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>

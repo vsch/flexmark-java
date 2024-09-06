@@ -15,10 +15,12 @@
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-test-specs</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
