@@ -15,25 +15,9 @@
   <dependencies>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-builder</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-dependency</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-format</artifactId>
+      <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-html</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-options</artifactId>
-    </dependency>
-
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

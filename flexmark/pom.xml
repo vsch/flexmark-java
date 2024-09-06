@@ -14,19 +14,7 @@
   <dependencies>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-ast</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-builder</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-collection</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-data</artifactId>
     </dependency>
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
@@ -35,22 +23,6 @@
     <dependency>
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-format</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-html</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-misc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-sequence</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-visitor</artifactId>
     </dependency>
   </dependencies>
 </project>

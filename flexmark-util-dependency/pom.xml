@@ -16,9 +16,5 @@
       <groupId>com.acrolinx.flexmark</groupId>
       <artifactId>flexmark-util-collection</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.acrolinx.flexmark</groupId>
-      <artifactId>flexmark-util-data</artifactId>
-    </dependency>
   </dependencies>
 </project>
