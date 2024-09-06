@@ -41,13 +41,3 @@ jobs:
           git config user.name $GIT_USER_NAME
           git checkout -b $PR_BRANCH_NAME
           mvn -s .m2/settings.xml -B -Dusername=$GIT_USER_NAME -Dpassword=$GITHUB_TOKEN -DpreparationGoals="clean spotless:apply verify" -DcompletionGoals="spotless:apply" release:prepare release:perform
-
-      - name: Create GitHub PR
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-          RELEASE_VERSION: ${{ steps.createReleaseVersionName.outputs.RELEASE_VERSION }}
-          CHECKOUT_BRANCH_NAME: ${{ github.ref_name }}
-          PR_BRANCH_NAME: ${{ steps.createPrBranchName.outputs.PR_BRANCH_NAME }}
-        run: |
-          gh pr create --title "Release $RELEASE_VERSION" --body "" --base "$CHECKOUT_BRANCH_NAME" --reviewer ${{ github.actor }} --head $PR_BRANCH_NAME
-          gh pr merge $PR_BRANCH_NAME --auto --rebase --delete-branch
