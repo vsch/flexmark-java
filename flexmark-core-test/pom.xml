@@ -22,11 +22,5 @@
       <artifactId>flexmark-test-specs</artifactId>
       <version>${project.version}</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.openjdk.jmh</groupId>
-      <artifactId>jmh-core</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>
