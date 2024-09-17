@@ -93,12 +93,12 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>diffbot-nexus</id>
+            <url>https://nexus.diffbot.com/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>diffbot-nexus</id>
+            <url>https://nexus.diffbot.com/nexus/content/repositories/releases/</url>
         </repository>
     </distributionManagement>
 
@@ -151,18 +151,16 @@
                         <version>1.6.8</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <serverId>diffbot-nexus</serverId>
+                            <nexusUrl>https://nexus.diffbot.com/nexus/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                         <executions>
                             <execution>
-                                <id>deploy-to-sonatype</id>
+                                <id>deploy-to-nexus</id>
                                 <phase>deploy</phase>
                                 <goals>
                                     <goal>deploy</goal>
-                                    <!--
-                                    <goal>release</goal>
-                                    -->
                                 </goals>
                             </execution>
                         </executions>
