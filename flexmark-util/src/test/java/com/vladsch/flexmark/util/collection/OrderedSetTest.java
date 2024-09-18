@@ -4,15 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import org.junit.Rule;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class OrderedSetTest {
-  @Rule public ExpectedException thrown = ExpectedException.none();
-
   @Test
-  public void testAddRemove() throws Exception {
+  public void testAddRemove() {
     OrderedSet<String> orderedSet = new OrderedSet<>();
 
     for (int i = 0; i < 10; i++) {
@@ -42,7 +39,7 @@ public class OrderedSetTest {
   }
 
   @Test
-  public void testAddRemoveReversed() throws Exception {
+  public void testAddRemoveReversed() {
     OrderedSet<String> orderedSet = new OrderedSet<>();
 
     for (int i = 0; i < 10; i++) {
@@ -73,7 +70,7 @@ public class OrderedSetTest {
   }
 
   @Test
-  public void testRetainAll() throws Exception {
+  public void testRetainAll() {
     OrderedSet<String> orderedSet = new OrderedSet<>();
     OrderedSet<String> retainSet = new OrderedSet<>();
 
@@ -108,7 +105,7 @@ public class OrderedSetTest {
   }
 
   @Test
-  public void testRemoveIteration() throws Exception {
+  public void testRemoveIteration() {
     OrderedSet<String> orderedSet = new OrderedSet<>();
 
     for (int i = 0; i < 10; i++) {
@@ -145,7 +142,7 @@ public class OrderedSetTest {
   }
 
   @Test
-  public void testRemoveReversedIteration() throws Exception {
+  public void testRemoveReversedIteration() {
     OrderedSet<String> orderedSet = new OrderedSet<>();
 
     for (int i = 0; i < 10; i++) {
@@ -182,7 +179,7 @@ public class OrderedSetTest {
   }
 
   @Test
-  public void testConcurrentMod() throws Exception {
+  public void testConcurrentMod() {
     OrderedSet<String> orderedSet = new OrderedSet<>();
 
     for (int i = 0; i < 10; i++) {
@@ -192,18 +189,14 @@ public class OrderedSetTest {
 
     assertEquals(false, orderedSet.addAll(orderedSet));
 
-    int i = 0;
     Iterator<String> iterator = orderedSet.iterator();
-    while (iterator.hasNext()) {
-      orderedSet.removeIndex(0);
-      thrown.expect(ConcurrentModificationException.class);
-      String it = iterator.next();
-      assertEquals("ConcurrentModificationException was not thrown on modification", false, true);
-    }
+
+    orderedSet.removeIndex(0);
+    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator.next());
   }
 
   @Test
-  public void testSetConflict() throws Exception {
+  public void testSetConflict() {
     OrderedSet<String> orderedSet = new OrderedSet<>();
 
     for (int i = 0; i < 10; i++) {
@@ -211,7 +204,7 @@ public class OrderedSetTest {
       assertEquals(false, orderedSet.add(String.valueOf(i)));
     }
 
-    thrown.expect(IllegalStateException.class);
-    assertEquals(false, orderedSet.setValueAt(0, String.valueOf(1), "1"));
+    String string = Integer.toString(1);
+    Assert.assertThrows(IllegalStateException.class, () -> orderedSet.setValueAt(0, string, "1"));
   }
 }

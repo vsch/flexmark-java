@@ -322,10 +322,6 @@ public abstract class NodeRepositoryFormatter<
    * Compute needed id map to make reference ids unique across documents[] up to entry equal to
    * document and store this map in document property so that it can be retrieved from the document
    * later when computing the map by documents after this document in the list.
-   *
-   * @param context
-   * @param markdown
-   * @param document
    */
   protected void uniquifyIds(
       NodeFormatterContext context, MarkdownWriter markdown, Document document) {

@@ -6,16 +6,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.vladsch.flexmark.util.ExceptionMatcher;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.junit.Rule;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class BitFieldSetTest {
-  @Rule public ExpectedException thrown = ExpectedException.none();
-
   enum BitFields implements BitField {
     FIELD_0,
     FIELD_1(1),
@@ -321,11 +317,12 @@ public class BitFieldSetTest {
     assertEquals(
         0x8000_0000_0000_0000L, BitFieldSet.noneOf(BitFields.class).mask(BitFields.FIELD_14));
 
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class,
-            "Enum bit field BitFields2.FIELD_15 bits exceed available 64 bits by 1"));
-    BitFieldSet.noneOf(BitFields2.class);
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> BitFieldSet.noneOf(BitFields2.class));
+    Assert.assertEquals(
+        "Enum bit field BitFields2.FIELD_15 bits exceed available 64 bits by 1",
+        illegalArgumentException.getMessage());
   }
 
   @Test
@@ -467,42 +464,49 @@ public class BitFieldSetTest {
 
   @Test
   public void test_bitSetGetErr() {
-    BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class,
-            "Enum field BitFields.FIELD_11 is 4 bits, value range is [-8, 7], cannot be set to 16"));
-    bitFields.setBitField(BitFields.FIELD_11, 16);
+    BitFieldSet<BitFields> bitFieldSet = BitFieldSet.noneOf(BitFields.class);
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> bitFieldSet.setBitField(BitFields.FIELD_11, 16));
+    Assert.assertEquals(
+        "Enum field BitFields.FIELD_11 is 4 bits, value range is [-8, 7], cannot be set to 16",
+        illegalArgumentException.getMessage());
   }
 
   @Test
   public void test_bitSetGetErr2() {
     BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class,
-            "Enum field BitFields.FIELD_11 is 4 bits, value range is [-8, 7], cannot be set to -9"));
-    bitFields.setBitField(BitFields.FIELD_11, -9);
+
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> bitFields.setBitField(BitFields.FIELD_11, -9));
+    Assert.assertEquals(
+        "Enum field BitFields.FIELD_11 is 4 bits, value range is [-8, 7], cannot be set to -9",
+        illegalArgumentException.getMessage());
   }
 
   @Test
   public void test_bitSetGetErr3() {
     BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class,
-            "Enum field BitFields.FIELD_1 is 1 bit, value range is [-1, 0], cannot be set to -2"));
-    bitFields.setBitField(BitFields.FIELD_1, -2);
+
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> bitFields.setBitField(BitFields.FIELD_1, -2));
+    Assert.assertEquals(
+        "Enum field BitFields.FIELD_1 is 1 bit, value range is [-1, 0], cannot be set to -2",
+        illegalArgumentException.getMessage());
   }
 
   @Test
   public void test_bitSetGetErr4() {
     BitFieldSet<BitFields> bitFields = BitFieldSet.noneOf(BitFields.class);
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class,
-            "Enum field BitFields.FIELD_1 is 1 bit, value range is [-1, 0], cannot be set to 1"));
-    bitFields.setBitField(BitFields.FIELD_1, 1);
+
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> bitFields.setBitField(BitFields.FIELD_1, 1));
+    Assert.assertEquals(
+        "Enum field BitFields.FIELD_1 is 1 bit, value range is [-1, 0], cannot be set to 1",
+        illegalArgumentException.getMessage());
   }
 
   @Test
@@ -523,14 +527,11 @@ public class BitFieldSetTest {
       assertEquals(BitFieldSet.of(LongSet.values()[i]), BitFieldSet.of(LongSet.class, 1L << i));
     }
 
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class, "Enums with more than 64 values are not supported"));
-    assertEquals(BitFieldSet.noneOf(OverLongSet.class), BitFieldSet.of(OverLongSet.class, 0));
-    for (int i = 0; i < Math.min(64, OverLongSet.values().length); i++) {
-      assertEquals(
-          BitFieldSet.of(OverLongSet.values()[i]), BitFieldSet.of(OverLongSet.class, 1L << i));
-    }
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> BitFieldSet.noneOf(OverLongSet.class));
+    Assert.assertEquals(
+        "Enums with more than 64 values are not supported", illegalArgumentException.getMessage());
   }
 
   @Test
@@ -550,14 +551,11 @@ public class BitFieldSetTest {
       assertEquals(BitFieldSet.of(LongSet.values()[i]), BitFieldSet.of(LongSet.values()[i]));
     }
 
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class, "Enums with more than 64 values are not supported"));
-    assertEquals(BitFieldSet.noneOf(OverLongSet.class), BitFieldSet.of(OverLongSet.class, 0));
-    for (int i = 0; i < Math.min(64, OverLongSet.values().length); i++) {
-      assertEquals(
-          BitFieldSet.of(OverLongSet.values()[i]), BitFieldSet.of(OverLongSet.values()[i]));
-    }
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> BitFieldSet.noneOf(OverLongSet.class));
+    Assert.assertEquals(
+        "Enums with more than 64 values are not supported", illegalArgumentException.getMessage());
   }
 
   @Test
@@ -577,13 +575,11 @@ public class BitFieldSetTest {
       assertEquals(1L << i, BitFieldSet.of(LongSet.values()[i]).toLong());
     }
 
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class, "Enums with more than 64 values are not supported"));
-    assertEquals(BitFieldSet.noneOf(OverLongSet.class), BitFieldSet.of(OverLongSet.class, 0));
-    for (int i = 0; i < Math.min(64, OverLongSet.values().length); i++) {
-      assertEquals(1L << i, BitFieldSet.of(OverLongSet.values()[i]).toLong());
-    }
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> BitFieldSet.noneOf(OverLongSet.class));
+    Assert.assertEquals(
+        "Enums with more than 64 values are not supported", illegalArgumentException.getMessage());
   }
 
   @Test
@@ -593,14 +589,14 @@ public class BitFieldSetTest {
       assertEquals((int) (1L << i), BitFieldSet.of(IntSet.values()[i]).toInt());
     }
 
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(
+            IllegalArgumentException.class, () -> BitFieldSet.of(OverIntSet.values()[0]).toInt());
+    Assert.assertEquals(
+        "Enum fields use 33 bits, which is more than 32 bits available in an int",
+        illegalArgumentException.getMessage());
+
     assertEquals(BitFieldSet.noneOf(OverIntSet.class), BitFieldSet.of(OverIntSet.class, 0));
-    for (int i = 0; i < OverIntSet.values().length; i++) {
-      thrown.expect(
-          ExceptionMatcher.match(
-              IllegalArgumentException.class,
-              "Enum fields use 33 bits, which is more than 32 bits available in an int"));
-      assertEquals((int) (1L << i), BitFieldSet.of(OverIntSet.values()[i]).toInt());
-    }
   }
 
   @Test
@@ -641,20 +637,22 @@ public class BitFieldSetTest {
 
   @Test
   public void test_outsideUniverseInt() {
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class,
-            "mask 4294967296(0b100000000000000000000000000000000) value contains elements outside the universe 0b100000000000000000000000000000000"));
-    assertFalse(BitFieldSet.of(IntSet.values()[31]).all(1L << 32));
+    BitFieldSet<IntSet> bitFieldSet = BitFieldSet.of(IntSet.values()[31]);
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(IllegalArgumentException.class, () -> bitFieldSet.all(1L << 32));
+    Assert.assertEquals(
+        "mask 4294967296(0b100000000000000000000000000000000) value contains elements outside the universe 0b100000000000000000000000000000000",
+        illegalArgumentException.getMessage());
   }
 
   @Test
   public void test_outsideUniverseOverInt() {
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class,
-            "mask 8589934592(0b1000000000000000000000000000000000) value contains elements outside the universe 0b1000000000000000000000000000000000"));
-    assertFalse(BitFieldSet.of(OverIntSet.values()[32]).all(1L << 33));
+    BitFieldSet<OverIntSet> bitFieldSet = BitFieldSet.of(OverIntSet.values()[32]);
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(IllegalArgumentException.class, () -> bitFieldSet.all(1L << 33));
+    Assert.assertEquals(
+        "mask 8589934592(0b1000000000000000000000000000000000) value contains elements outside the universe 0b1000000000000000000000000000000000",
+        illegalArgumentException.getMessage());
   }
 
   @Test

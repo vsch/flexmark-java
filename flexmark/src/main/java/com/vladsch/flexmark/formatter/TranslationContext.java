@@ -153,7 +153,6 @@ public interface TranslationContext {
    * Separate translation span which is also a ref target
    *
    * @param target target node,
-   * @param render
    */
   void translatingRefTargetSpan(@Nullable Node target, @NotNull TranslatingSpanRender render);
 

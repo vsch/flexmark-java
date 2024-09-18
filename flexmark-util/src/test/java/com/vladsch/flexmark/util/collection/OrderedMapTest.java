@@ -4,15 +4,11 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class OrderedMapTest {
-  @Rule public ExpectedException thrown = ExpectedException.none();
-
   @Test
-  public void testAddRemove() throws Exception {
+  public void testAddRemove() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
@@ -45,7 +41,7 @@ public class OrderedMapTest {
   }
 
   @Test
-  public void testAddRemoveReversed() throws Exception {
+  public void testAddRemoveReversed() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
@@ -82,7 +78,7 @@ public class OrderedMapTest {
   }
 
   @Test
-  public void testRetainAll() throws Exception {
+  public void testRetainAll() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
     OrderedSet<String> retainSet = new OrderedSet<>();
 
@@ -126,7 +122,7 @@ public class OrderedMapTest {
   }
 
   @Test
-  public void testRemoveIteration() throws Exception {
+  public void testRemoveIteration() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
@@ -166,7 +162,7 @@ public class OrderedMapTest {
   }
 
   @Test
-  public void testRemoveReversedReversedIteration() throws Exception {
+  public void testRemoveReversedReversedIteration() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
@@ -207,7 +203,7 @@ public class OrderedMapTest {
   }
 
   @Test
-  public void testRemoveReversedIteration() throws Exception {
+  public void testRemoveReversedIteration() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
@@ -252,7 +248,7 @@ public class OrderedMapTest {
   }
 
   @Test
-  public void testRemoveIteratorReversedIteration() throws Exception {
+  public void testRemoveIteratorReversedIteration() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
@@ -298,121 +294,85 @@ public class OrderedMapTest {
   }
 
   @Test
-  public void testConcurrentModIterator() throws Exception {
+  public void testConcurrentModIterator() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
     orderedMap.put("0", 0);
     orderedMap.put("1", 1);
 
     Iterator<Map.Entry<String, Integer>> iterator = orderedMap.iterator();
-    int j = 0;
-    while (iterator.hasNext()) {
-      orderedMap.remove("0");
-      thrown.expect(ConcurrentModificationException.class);
-      Map.Entry<String, Integer> item = iterator.next();
-      Assert.assertEquals(
-          "ConcurrentModificationException was not thrown on modification", false, true);
-    }
+
+    orderedMap.remove("0");
+    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator.next());
   }
 
   @Test
-  public void testConcurrentModKeyIterator() throws Exception {
+  public void testConcurrentModKeyIterator() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
     orderedMap.put("0", 0);
     orderedMap.put("1", 1);
 
     Iterator<String> iterator1 = orderedMap.keyIterator();
-    int j = 0;
-    while (iterator1.hasNext()) {
-      orderedMap.remove("0");
-      thrown.expect(ConcurrentModificationException.class);
-      String item = iterator1.next();
-      Assert.assertEquals(
-          "ConcurrentModificationException was not thrown on modification", false, true);
-    }
+
+    orderedMap.remove("0");
+    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator1.next());
   }
 
   @Test
-  public void testConcurrentModValueIterator() throws Exception {
+  public void testConcurrentModValueIterator() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
     orderedMap.put("0", 0);
     orderedMap.put("1", 1);
 
     Iterator<Integer> iterator = orderedMap.valueIterator();
-    int j = 0;
-    while (iterator.hasNext()) {
-      orderedMap.remove("0");
-      thrown.expect(ConcurrentModificationException.class);
-      int item = iterator.next();
-      Assert.assertEquals(
-          "ConcurrentModificationException was not thrown on modification", false, true);
-    }
+
+    orderedMap.remove("0");
+    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator.next());
   }
 
   @Test
-  public void testConcurrentModIteratorOnKey() throws Exception {
+  public void testConcurrentModIteratorOnKey() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
     orderedMap.put("0", 0);
     orderedMap.put("1", 1);
 
     Iterator<Map.Entry<String, Integer>> iterator = orderedMap.iterator();
-    int j = 0;
-    while (iterator.hasNext()) {
-      orderedMap.keySet().remove("0");
-      thrown.expect(ConcurrentModificationException.class);
-      Map.Entry<String, Integer> item = iterator.next();
-      Assert.assertEquals(
-          "ConcurrentModificationException was not thrown on keySet modification", false, true);
-    }
+
+    orderedMap.keySet().remove("0");
+    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator.next());
   }
 
   @Test
-  public void testConcurrentModKeyIteratorOnKey() throws Exception {
+  public void testConcurrentModKeyIteratorOnKey() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
     orderedMap.put("0", 0);
     orderedMap.put("1", 1);
 
     Iterator<String> iterator1 = orderedMap.keyIterator();
-    int j = 0;
-    while (iterator1.hasNext()) {
-      orderedMap.keySet().remove("0");
-      thrown.expect(ConcurrentModificationException.class);
-      String item = iterator1.next();
-      Assert.assertEquals(
-          "ConcurrentModificationException was not thrown on keySet modification", false, true);
-    }
+
+    orderedMap.keySet().remove("0");
+    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator1.next());
   }
 
   @Test
-  public void testConcurrentModValueIteratorOnKey() throws Exception {
+  public void testConcurrentModValueIteratorOnKey() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
     orderedMap.put("0", 0);
     orderedMap.put("1", 1);
 
     Iterator<Integer> iterator = orderedMap.valueIterator();
-    int j = 0;
-    while (iterator.hasNext()) {
-      orderedMap.keySet().remove("0");
-      thrown.expect(ConcurrentModificationException.class);
-      int item = iterator.next();
-      Assert.assertEquals(
-          "ConcurrentModificationException was not thrown on keySet modification", false, true);
-    }
+
+    orderedMap.keySet().remove("0");
+    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator.next());
   }
 
   @Test
-  public void testHostedCallback() throws Exception {
+  public void testHostedCallback() {
     CollectionHostValidator<String> validator = new CollectionHostValidator<>();
     final OrderedMap<String, Integer> orderedMap = new OrderedMap<>(validator.getHost());
 
-    // validator.trace();
-
     validator.reset().expectAdding(0, "0", 0).test(() -> orderedMap.put("0", 0));
 
-    validator
-        .reset()
-        .expectAdding(1, "1", 1)
-        // .expectAdding(0, "1", 1)
-        .test(() -> orderedMap.put("1", 1));
+    validator.reset().expectAdding(1, "1", 1).test(() -> orderedMap.put("1", 1));
 
     for (int j = 0; j < 2; j++) {
       final int finalJ = j;

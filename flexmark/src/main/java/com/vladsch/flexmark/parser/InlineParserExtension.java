@@ -10,7 +10,6 @@ public interface InlineParserExtension {
   /**
    * Parse input
    *
-   * @param inlineParser
    * @return true if character input was processed
    */
   boolean parse(@NotNull LightInlineParser inlineParser);

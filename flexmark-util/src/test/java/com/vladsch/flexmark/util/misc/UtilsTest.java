@@ -8,13 +8,9 @@ import static org.junit.Assert.assertTrue;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.ArrayList;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class UtilsTest {
-  @Rule public ExpectedException thrown = ExpectedException.none();
-
   @Test
   public void testCompareNullable() {
     assertEquals(0, Utils.compareNullable(null, false));
@@ -91,11 +87,11 @@ public class UtilsTest {
 
   @Test
   public void testParseIntOrNull() {
-    assertEquals(new Integer(3), SequenceUtils.parseIntOrNull("3"));
-    assertEquals(new Integer(8), SequenceUtils.parseIntOrNull("+8"));
-    assertEquals(new Integer(8), SequenceUtils.parseIntOrNull("8"));
-    assertEquals(new Integer(7), SequenceUtils.parseIntOrNull("7"));
-    assertEquals(new Integer(0), SequenceUtils.parseIntOrNull("0"));
+    assertEquals(Integer.valueOf(3), SequenceUtils.parseIntOrNull("3"));
+    assertEquals(Integer.valueOf(8), SequenceUtils.parseIntOrNull("+8"));
+    assertEquals(Integer.valueOf(8), SequenceUtils.parseIntOrNull("8"));
+    assertEquals(Integer.valueOf(7), SequenceUtils.parseIntOrNull("7"));
+    assertEquals(Integer.valueOf(0), SequenceUtils.parseIntOrNull("0"));
     assertNull(SequenceUtils.parseIntOrNull(""));
   }
 
@@ -103,10 +99,10 @@ public class UtilsTest {
   public void testParseUnsignedIntOrNull() {
     Assert.assertNull(SequenceUtils.parseUnsignedIntOrNull("-2"));
     Assert.assertNull(SequenceUtils.parseUnsignedIntOrNull("999999999999999999999"));
-    assertEquals(new Integer(23_333_333), SequenceUtils.parseUnsignedIntOrNull("23333333"));
-    assertEquals(new Integer(3), SequenceUtils.parseUnsignedIntOrNull("3"));
-    assertEquals(new Integer(63), SequenceUtils.parseUnsignedIntOrNull("63"));
-    assertEquals(new Integer(0), SequenceUtils.parseUnsignedIntOrNull("0"));
+    assertEquals(Integer.valueOf(23_333_333), SequenceUtils.parseUnsignedIntOrNull("23333333"));
+    assertEquals(Integer.valueOf(3), SequenceUtils.parseUnsignedIntOrNull("3"));
+    assertEquals(Integer.valueOf(63), SequenceUtils.parseUnsignedIntOrNull("63"));
+    assertEquals(Integer.valueOf(0), SequenceUtils.parseUnsignedIntOrNull("0"));
 
     assertEquals((Integer) 0, SequenceUtils.parseUnsignedIntOrNull("-0"));
   }
@@ -198,8 +194,7 @@ public class UtilsTest {
     assertEquals("aaa", Utils.repeat("a", 3));
     assertEquals("", Utils.repeat("a", -5));
 
-    thrown.expect(NullPointerException.class);
-    Utils.repeat(null, 268_435_456);
+    Assert.assertThrows(NullPointerException.class, () -> Utils.repeat(null, 268_435_456));
   }
 
   @Test
@@ -221,26 +216,25 @@ public class UtilsTest {
 
   @Test
   public void testStartsWithNullPointerException1() {
-    thrown.expect(NullPointerException.class);
-    Utils.startsWith("?", new String[] {null});
+    Assert.assertThrows(
+        NullPointerException.class, () -> Utils.startsWith("?", new String[] {null}));
   }
 
   @Test
   public void testStartsWithNullPointerException2() {
-    thrown.expect(NullPointerException.class);
-    Utils.startsWith("", new String[] {null});
+    Assert.assertThrows(
+        NullPointerException.class, () -> Utils.startsWith("", new String[] {null}));
   }
 
   @Test
   public void testStartsWithNullPointerException3() {
-    thrown.expect(NullPointerException.class);
-    Utils.startsWith("", null, " ??????");
+    Assert.assertThrows(NullPointerException.class, () -> Utils.startsWith("", null, " ??????"));
   }
 
   @Test
   public void testStartsWithNullPointerException4() {
-    thrown.expect(NullPointerException.class);
-    Utils.startsWith("testString", null, null, null);
+    Assert.assertThrows(
+        NullPointerException.class, () -> Utils.startsWith("testString", null, null, null));
   }
 
   @Test

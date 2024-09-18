@@ -5,17 +5,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import com.vladsch.flexmark.util.ExceptionMatcher;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import java.util.ArrayList;
-import org.junit.Rule;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class LineAppendableImplTest {
-  @Rule public ExpectedException thrown = ExpectedException.none();
-
   @Test
   public void test_emptyAppendableIterator() {
     String input = "[simLink spaced](simLink.md)";
@@ -2313,11 +2309,11 @@ public class LineAppendableImplTest {
     fa.append("> ");
     assertEquals("" + "> " + "", fa.toString());
 
-    thrown.expect(
-        ExceptionMatcher.match(
-            IllegalArgumentException.class,
-            "prefixLength 3 is out of valid range [0, 3) for the line"));
-    fa.setPrefixLength(0, 3);
+    IllegalArgumentException illegalArgumentException =
+        Assert.assertThrows(IllegalArgumentException.class, () -> fa.setPrefixLength(0, 3));
+    Assert.assertEquals(
+        "prefixLength 3 is out of valid range [0, 3) for the line",
+        illegalArgumentException.getMessage());
   }
 
   @Test
