@@ -441,7 +441,7 @@ public class BitFieldSetTest {
     ArrayList<Integer> actualList = new ArrayList<>();
 
     Iterator<BitFields> iterator = bitFields.iterator();
-    int j = 0;
+
     while (iterator.hasNext()) {
       BitFields fields = iterator.next();
       if (fields == BitFields.FIELD_7) {

@@ -10,8 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 
-public final class DefinitionParserTest {
-  String escape(String input, Parser parser) {
+public class DefinitionParserTest {
+  private static String escape(String input, Parser parser) {
     BasedSequence baseSeq = BasedSequence.of(input);
     List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
     StringBuilder sb = new StringBuilder();
@@ -22,7 +22,7 @@ public final class DefinitionParserTest {
     return input;
   }
 
-  String unEscape(String input, Parser parser) {
+  private static String unEscape(String input, Parser parser) {
     BasedSequence baseSeq = BasedSequence.of(input);
     List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
     StringBuilder sb = new StringBuilder();

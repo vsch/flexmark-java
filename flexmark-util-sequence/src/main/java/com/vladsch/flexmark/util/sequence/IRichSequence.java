@@ -1599,7 +1599,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
   @NotNull
   T[] split(@NotNull CharSequence delimiter);
 
-  // @formatter:off
   @Deprecated
   default @NotNull T[] split(char delimiter, int limit, int flags) {
     return split(Character.toString(delimiter), limit, flags, null);
@@ -1614,8 +1613,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
   default @NotNull T[] split(char delimiter) {
     return split(Character.toString(delimiter), 0, 0, null);
   }
-
-  // @formatter:on
 
   /**
    * Split helpers based on delimiter character sets contained in CharPredicate

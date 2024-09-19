@@ -7,7 +7,7 @@ import com.vladsch.flexmark.test.util.spec.SpecReader;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-public abstract class FullSpecTestCase extends RenderingTestCase implements SpecExampleProcessor {
+public abstract class FullSpecTestCase extends RenderingTestCase {
   @NotNull
   public DumpSpecReader create(@NotNull ResourceLocation location) {
     return SpecReader.create(

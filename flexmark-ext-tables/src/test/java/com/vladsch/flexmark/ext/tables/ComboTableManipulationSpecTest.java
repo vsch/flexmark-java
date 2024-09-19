@@ -109,7 +109,6 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
                   }
                 }));
 
-    // @formatter:off
     optionsMap.put(
         "delete-row-1-1",
         new MutableDataSet()
@@ -832,8 +831,6 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
             .set(
                 TablesExtension.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(5, 6)));
-
-    // @formatter:on
   }
 
   public ComboTableManipulationSpecTest(@NotNull SpecExample example) {

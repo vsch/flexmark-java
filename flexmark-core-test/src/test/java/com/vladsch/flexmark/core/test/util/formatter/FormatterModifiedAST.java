@@ -32,7 +32,7 @@ public class FormatterModifiedAST {
   static final Formatter RENDERER = Formatter.builder(FORMAT_OPTIONS).build();
 
   @Test
-  public void test_HtmlBlock1() throws Exception {
+  public void test_HtmlBlock1() {
     final String input = "" + "line 1\n" + "\n" + "<img src=\"i.jpg\">\n" + "\n" + "line 2" + "\n";
     final String expected =
         "" + "line 1\n" + "\n" + "<img src=\"replaced.png\">\n" + "\n" + "line 2" + "\n";
@@ -54,7 +54,7 @@ public class FormatterModifiedAST {
   }
 
   @Test
-  public void test_ListItemNoMods() throws Exception {
+  public void test_ListItemNoMods() {
     final String input = "" + "- [link](link.txt)\n" + "\n" + "next line\n" + "\n";
     final String expected = "" + "- [link](link.txt)\n" + "\n" + "next line\n" + "\n";
     Node document = PARSER.parse(input);
@@ -64,7 +64,7 @@ public class FormatterModifiedAST {
   }
 
   @Test
-  public void test_ListItem() throws Exception {
+  public void test_ListItem() {
     final String input =
         "" + "- [link](link.txt) and ![image](img.jpg)\n" + "\n" + "next line\n" + "\n";
     final String expected =
@@ -96,7 +96,7 @@ public class FormatterModifiedAST {
   }
 
   @Test
-  public void test_LinkAnchors() throws Exception {
+  public void test_LinkAnchors() {
     final String input =
         "" + "- [link](link.txt) and ![image](img.jpg)\n" + "\n" + "next line\n" + "\n";
     final String expected =
@@ -147,15 +147,15 @@ public class FormatterModifiedAST {
   }
 
   @Test
-  public void test_LinkText() throws Exception {
+  public void test_LinkText() {
     MutableDataSet options =
         new MutableDataSet(OPTIONS).set(Formatter.OPTIMIZED_INLINE_RENDERING, false);
-    Parser PARSER = Parser.builder(options).build();
-    Formatter RENDERER = Formatter.builder(FORMAT_OPTIONS).build();
+    Parser parser = Parser.builder(options).build();
+    Formatter renderer = Formatter.builder(FORMAT_OPTIONS).build();
 
     final String input = "" + "- [link](link.txt)\n" + "\n" + "next line\n" + "\n";
     final String expected = "" + "- [LINK](link.txt)\n" + "\n" + "next line\n" + "\n";
-    Node document = PARSER.parse(input);
+    Node document = parser.parse(input);
 
     final NodeVisitor[] visitor = new NodeVisitor[1];
 
@@ -194,13 +194,13 @@ public class FormatterModifiedAST {
             + "    Text[20, 29] chars:[20, 29, \"next line\"]\n",
         ast);
 
-    String formatted = RENDERER.render(document);
+    String formatted = renderer.render(document);
 
     assertEquals(expected, formatted);
   }
 
   @Test
-  public void test_CRLFInFencedCodeBlock() throws Exception {
+  public void test_CRLFInFencedCodeBlock() {
     final String input =
         "following sample:\n"
             + "\n"

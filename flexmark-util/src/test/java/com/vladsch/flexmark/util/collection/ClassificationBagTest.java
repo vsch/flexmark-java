@@ -5,12 +5,12 @@ import org.junit.Test;
 
 public class ClassificationBagTest {
   @Test
-  public void testBasic() throws Exception {
+  public void testBasic() {
     ClassificationBag<Class<?>, Object> bag = new ClassificationBag<>(value -> value.getClass());
 
     Object item;
     for (int i = 0; i < 10; i++) {
-      item = (Integer) i;
+      item = i;
       bag.add(item);
     }
 
@@ -30,7 +30,7 @@ public class ClassificationBagTest {
 
     // now we removeIndex them
     for (int i = 0; i < 10; i += 2) {
-      item = (Integer) i;
+      item = i;
       bag.remove(item);
     }
 
@@ -54,7 +54,7 @@ public class ClassificationBagTest {
 
     // now we removeIndex them
     for (int i = 1; i < 10; i += 2) {
-      item = (Integer) i;
+      item = i;
       bag.remove(item);
     }
 
@@ -78,12 +78,12 @@ public class ClassificationBagTest {
   }
 
   @Test
-  public void testInterleave() throws Exception {
+  public void testInterleave() {
     ClassificationBag<Class<?>, Object> bag = new ClassificationBag<>(value -> value.getClass());
 
     Object item;
     for (int i = 0; i < 10; i++) {
-      item = (Integer) i;
+      item = i;
       bag.add(item);
       item = String.valueOf(i);
       bag.add(item);

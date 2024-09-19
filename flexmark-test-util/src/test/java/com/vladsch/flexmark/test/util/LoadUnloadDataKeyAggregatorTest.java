@@ -57,8 +57,6 @@ public class LoadUnloadDataKeyAggregatorTest {
 
   @Test
   public void test_loadExtension() {
-    DataHolder OPTIONS = new MutableDataSet();
-
     DataHolder result =
         TestUtils.getOptions(SpecExample.NULL, "load1", LoadUnloadDataKeyAggregatorTest::getOption);
     assertEquals(
@@ -67,14 +65,14 @@ public class LoadUnloadDataKeyAggregatorTest {
 
   @Test
   public void test_loadExtensions() {
-    DataHolder OPTIONS = new MutableDataSet();
+    DataHolder options = new MutableDataSet();
 
     DataHolder result =
         TestUtils.getOptions(
             SpecExample.NULL, "load1,load3", LoadUnloadDataKeyAggregatorTest::getOption);
     assertEquals(
         Arrays.asList(Extension1.class, Extension3.class), toClasses(LOAD_EXTENSIONS.get(result)));
-    DataHolder result1 = DataSet.aggregate(OPTIONS, result);
+    DataHolder result1 = DataSet.aggregate(options, result);
     assertEquals(
         Arrays.asList(Extension1.class, Extension3.class),
         toClasses(SharedDataKeys.EXTENSIONS.get(result1)));

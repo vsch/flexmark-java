@@ -199,11 +199,13 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
     return super.append(sb.toString());
   }
 
+  @Override
   @NotNull
   public HtmlBuilder append(@NotNull CharSequence s) {
     return super.append(s);
   }
 
+  @Override
   @NotNull
   public HtmlBuilder append(@NotNull CharSequence s, int start, int end) {
     return super.append(s, start, end);
@@ -221,6 +223,7 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
     return super.append(b ? "true" : "false");
   }
 
+  @Override
   @NotNull
   public HtmlBuilder append(char c) {
     return super.append(c);

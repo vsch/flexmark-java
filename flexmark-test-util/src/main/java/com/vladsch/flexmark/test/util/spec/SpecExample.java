@@ -77,7 +77,6 @@ public class SpecExample {
     }
   }
 
-  // @formatter:off
   public SpecExample withResourceLocation(@NotNull ResourceLocation location) {
     return new SpecExample(
         location,
@@ -175,8 +174,6 @@ public class SpecExample {
         comment,
         isNull);
   }
-
-  // @formatter:on
 
   public boolean isFullSpecExample() {
     return this != NULL

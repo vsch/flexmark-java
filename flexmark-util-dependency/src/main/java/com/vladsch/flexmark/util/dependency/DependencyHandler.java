@@ -22,7 +22,7 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
   protected abstract @NotNull R createResolvedDependencies(List<S> stages);
 
   public R resolveDependencies(List<D> dependentsList) {
-    if (dependentsList.size() == 0) {
+    if (dependentsList.isEmpty()) {
       //noinspection unchecked
       return createResolvedDependencies((List<S>) Collections.EMPTY_LIST);
     } else if (dependentsList.size() == 1) {
@@ -43,7 +43,7 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
                   + " is duplicated. Only one instance can be present in the list");
         }
         DependentItem<D> item =
-            new DependentItem<D>(
+            new DependentItem<>(
                 dependentItemMap.size(),
                 dependent,
                 getDependentClass(dependent),
@@ -55,7 +55,7 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
         DependentItem<D> item = entry.getValue();
         Set<Class<?>> afterDependencies = item.dependent.getAfterDependents();
 
-        if (afterDependencies != null && afterDependencies.size() > 0) {
+        if (afterDependencies != null && !afterDependencies.isEmpty()) {
           for (Class<?> dependentClass : afterDependencies) {
             DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);
             if (dependentItem != null) {
@@ -66,7 +66,7 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
         }
 
         Set<Class<?>> beforeDependents = item.dependent.getBeforeDependents();
-        if (beforeDependents != null && beforeDependents.size() > 0) {
+        if (beforeDependents != null && !beforeDependents.isEmpty()) {
           for (Class<?> dependentClass : beforeDependents) {
             DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);
             if (dependentItem != null) {

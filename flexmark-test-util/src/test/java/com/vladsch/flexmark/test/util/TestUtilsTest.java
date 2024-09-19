@@ -33,7 +33,7 @@ public class TestUtilsTest {
             .toString());
   }
 
-  static String pairToString(Pair<? extends CharSequence, int[]> pair) {
+  private static String pairToString(Pair<? extends CharSequence, int[]> pair) {
     return "("
         + SequenceUtils.toVisibleWhitespaceString(pair.getFirst().toString())
         + ", "

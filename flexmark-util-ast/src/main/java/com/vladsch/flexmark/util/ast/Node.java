@@ -18,7 +18,7 @@ public abstract class Node {
   public static final String SPLICE = " … ";
 
   public static final AstNode<Node> AST_ADAPTER =
-      new AstNode<Node>() {
+      new AstNode<>() {
         @Override
         public @Nullable Node getFirstChild(@NotNull Node node) {
           return node.firstChild;
@@ -46,7 +46,6 @@ public abstract class Node {
   /*
    * getChars() convenience delegates
    */
-  // @formatter:off
   public int getStartOffset() {
     return chars.getStartOffset();
   }
@@ -110,8 +109,6 @@ public abstract class Node {
   public Pair<Integer, Integer> getLineColumnAtEnd() {
     return chars.baseLineColumnAtEnd();
   }
-
-  // @formatter:on
 
   public @Nullable Node getAncestorOfType(@NotNull Class<?>... classes) {
     Node parent = getParent();

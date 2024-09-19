@@ -16,7 +16,6 @@ public class ResolvedContent {
     this.content = content;
   }
 
-  // @formatter:off
   public ResolvedContent withStatus(@NotNull LinkStatus status) {
     return status == this.status ? this : new ResolvedContent(resolvedLink, status, content);
   }
@@ -26,8 +25,6 @@ public class ResolvedContent {
         ? this
         : new ResolvedContent(resolvedLink, status, content);
   }
-
-  // @formatter:on
 
   public @NotNull ResolvedLink getResolvedLink() {
     return resolvedLink;

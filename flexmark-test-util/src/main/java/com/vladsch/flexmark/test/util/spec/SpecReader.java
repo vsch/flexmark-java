@@ -188,10 +188,10 @@ public class SpecReader {
             lineProcessed = true;
             exampleNumber = 0;
           } else if (line.startsWith(EXAMPLE_START) || line.startsWith(EXAMPLE_START_NBSP)) {
-            Matcher option_matcher =
+            Matcher optionMatcher =
                 OPTIONS_PATTERN.matcher(line.subSequence(EXAMPLE_START.length(), line.length()));
-            if (option_matcher.matches()) {
-              optionsSet = option_matcher.group(1);
+            if (optionMatcher.matches()) {
+              optionsSet = optionMatcher.group(1);
             }
 
             state = State.SOURCE;

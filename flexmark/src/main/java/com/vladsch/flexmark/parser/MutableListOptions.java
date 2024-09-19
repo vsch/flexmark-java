@@ -23,7 +23,6 @@ public class MutableListOptions extends ListOptions {
     return new MutableListOptions(this);
   }
 
-  // @formatter:off
   public @NotNull MutableListOptions setParserEmulationFamily(
       @NotNull ParserEmulationProfile parserEmulationProfile) {
     this.myParserEmulationProfile = parserEmulationProfile;
@@ -150,5 +149,4 @@ public class MutableListOptions extends ListOptions {
     this.itemMarkerSuffixes = itemMarkerSuffixes;
     return this;
   }
-  // @formatter:on
 }

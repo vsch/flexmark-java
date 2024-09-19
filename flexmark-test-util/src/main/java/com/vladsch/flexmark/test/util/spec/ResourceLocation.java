@@ -99,7 +99,6 @@ public class ResourceLocation {
     return resolvedResourcePath.equals(location.resolvedResourcePath);
   }
 
-  // @formatter:off
   @NotNull
   public ResourceLocation withResourceClass(@NotNull Class<?> resourceClass) {
     return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
@@ -123,8 +122,6 @@ public class ResourceLocation {
     return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
   }
   ;
-
-  // @formatter:on
 
   @Override
   public int hashCode() {

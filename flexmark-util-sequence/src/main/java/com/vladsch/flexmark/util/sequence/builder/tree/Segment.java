@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 /** SegmentedSequence Segment stored in byte[] in serialized format */
 public abstract class Segment {
-  // @formatter:off
   static final int TYPE_MASK = 0b0000_0000_1110_0000;
 
   static final int TYPE_NO_SIZE_BYTES = 0b0000_0000_0001_0000;
@@ -31,8 +30,6 @@ public abstract class Segment {
   static final int TYPE_HAS_CHARS = 0b0000_1000_0000_0000;
   static final int TYPE_HAS_BYTE = 0b0001_0000_0000_0000;
   static final int TYPE_HAS_BYTES = 0b0010_0000_0000_0000;
-
-  // @formatter:on
 
   public enum SegType {
     ANCHOR(TYPE_ANCHOR | TYPE_HAS_OFFSET),
@@ -85,7 +82,6 @@ public abstract class Segment {
 
     public static SegType fromTypeMask(int segTypeMask) {
       switch (segTypeMask & TYPE_MASK) {
-          // @formatter:off
         case TYPE_ANCHOR:
           return SegType.ANCHOR;
         case TYPE_BASE:
@@ -102,7 +98,6 @@ public abstract class Segment {
           return SegType.REPEATED_SPACE;
         case TYPE_REPEATED_EOL:
           return SegType.REPEATED_EOL;
-          // @formatter:on
 
         default:
           throw new IllegalStateException(String.format("Invalid text type %02x", segTypeMask));

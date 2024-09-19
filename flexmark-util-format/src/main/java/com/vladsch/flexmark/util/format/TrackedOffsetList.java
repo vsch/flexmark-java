@@ -117,8 +117,6 @@ public class TrackedOffsetList implements List<TrackedOffset> {
     }
   }
 
-  // @formatter:off
-
   @Override
   public boolean add(TrackedOffset offset) {
     throw new IllegalStateException("Not supported. Immutable list.");
@@ -178,8 +176,6 @@ public class TrackedOffsetList implements List<TrackedOffset> {
   public boolean remove(Object o) {
     throw new IllegalStateException("Not supported. Immutable list.");
   }
-
-  // @formatter:on
 
   @Override
   public int size() {

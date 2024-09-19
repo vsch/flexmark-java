@@ -638,7 +638,6 @@ public class ListOptions implements MutableDataSetter {
       super(other);
     }
 
-    // @formatter:off
     public boolean isBulletItemInterruptsParagraph() {
       return bulletItemInterruptsParagraph;
     }
@@ -789,8 +788,6 @@ public class ListOptions implements MutableDataSetter {
       this.emptyOrderedNonOneSubItemInterruptsItemParagraph = emptyOrderedNonOneItemStartsSubList;
       return this;
     }
-
-    // @formatter:on
   }
 
   @Override

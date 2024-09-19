@@ -10,17 +10,12 @@ public class CollectionHostValidator<T> {
   private final ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();
   private int nextCallbackIndex;
   private int modificationCount;
-
-  private boolean trace;
-
   private String id;
-
   private boolean conditional;
   private int repeat;
 
   public CollectionHostValidator() {
     reset();
-    trace = false;
   }
 
   public CollectionHostValidator<T> start() {
@@ -37,16 +32,11 @@ public class CollectionHostValidator<T> {
   }
 
   public CollectionHostValidator<T> notrace() {
-    return trace(false);
+    return trace();
   }
 
   public CollectionHostValidator<T> trace() {
-    return trace(true);
-  }
-
-  public CollectionHostValidator<T> trace(boolean trace) {
-    this.trace = trace;
-    return this;
+    return trace();
   }
 
   public CollectionHostValidator<T> reset() {

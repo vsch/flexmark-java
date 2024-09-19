@@ -15,7 +15,7 @@ public class LinkDestinationParserTest {
   LinkDestinationParser jekyllSpacesParser;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     normalParser = new LinkDestinationParser(true, false, false, false);
     noParenParser = new LinkDestinationParser(false, false, false, false);
     spacesParser = new LinkDestinationParser(true, true, false, false);
@@ -23,7 +23,6 @@ public class LinkDestinationParserTest {
     jekyllSpacesParser = new LinkDestinationParser(true, true, true, false);
   }
 
-  // @formatter:off
   @Test
   public void test_Normal1() {
     assertEquals("", normalParser.parseLinkDestination(CharSubSequence.of(""), 0).toString());
@@ -582,6 +581,4 @@ public class LinkDestinationParserTest {
             .parseLinkDestination(CharSubSequence.of("(({{ma(cro) abc))"), 0)
             .toString());
   }
-
-  // @formatter:on
 }

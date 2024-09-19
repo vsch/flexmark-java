@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.options;
 import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class OptionsParser<T> implements OptionParser<T> {
   public Pair<T, List<ParsedOption<T>>> parseOption(
       BasedSequence optionsText, T options, MessageProvider provider) {
     BasedSequence[] optionsList =
-        optionsText.split(optionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY, null);
+        optionsText.split(optionDelimiter, 0, SequenceUtils.SPLIT_TRIM_SKIP_EMPTY, null);
     T result = options;
     if (provider == null) provider = MessageProvider.DEFAULT;
     List<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.length);
@@ -47,7 +48,7 @@ public class OptionsParser<T> implements OptionParser<T> {
       DelimitedBuilder message = null;
 
       BasedSequence[] optionList =
-          optionText.split(optionValueDelimiter, 2, BasedSequence.SPLIT_SKIP_EMPTY, null);
+          optionText.split(optionValueDelimiter, 2, SequenceUtils.SPLIT_SKIP_EMPTY, null);
       if (optionList.length == 0) continue;
       BasedSequence optionName = optionList[0];
       BasedSequence optionValue =

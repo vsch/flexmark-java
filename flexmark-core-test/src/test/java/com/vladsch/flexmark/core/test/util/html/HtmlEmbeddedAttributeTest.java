@@ -21,43 +21,43 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-public final class HtmlEmbeddedAttributeTest {
-  MutableDataSet OPTIONS;
-  Parser PARSER;
-  HtmlRenderer RENDERER;
+public class HtmlEmbeddedAttributeTest {
+  private MutableDataSet options;
+  private Parser parser;
+  private HtmlRenderer renderer;
 
   @Before
-  public void setUp() throws Exception {
-    OPTIONS = new MutableDataSet();
-    OPTIONS.set(
+  public void setUp() {
+    options = new MutableDataSet();
+    options.set(
         Parser.EXTENSIONS, Collections.singletonList(TestNodePostProcessorExtension.create()));
 
-    PARSER = Parser.builder(OPTIONS).build();
-    RENDERER = HtmlRenderer.builder(OPTIONS).build();
+    parser = Parser.builder(options).build();
+    renderer = HtmlRenderer.builder(options).build();
   }
 
   @Test
   public void embeddedAttributeProvider1() {
     assertEquals(
         "<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"Figure 1. Some description here.\" /></p>\n",
-        RENDERER.render(
-            PARSER.parse("![Figure 1. Some description here.](http://example.com/image.png)\n")));
+        renderer.render(
+            parser.parse("![Figure 1. Some description here.](http://example.com/image.png)\n")));
   }
 
   @Test
   public void embeddedAttributeProvider2() {
     assertEquals(
         "<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"bar\" title=\"Image Title\" /></p>\n",
-        RENDERER.render(
-            PARSER.parse("![bar]\n" + "\n[bar]: http://example.com/image.png 'Image Title'")));
+        renderer.render(
+            parser.parse("![bar]\n" + "\n[bar]: http://example.com/image.png 'Image Title'")));
   }
 
   @Test
   public void embeddedAttributeProvider3() {
     assertEquals(
         "<p class=\"caption\"><img src=\"http://example.com/image.png\" alt=\"Figure 1. Some description here.\" title=\"Image Title\" /></p>\n",
-        RENDERER.render(
-            PARSER.parse(
+        renderer.render(
+            parser.parse(
                 "![Figure 1. Some description here.][bar]\n"
                     + "\n[bar]: http://example.com/image.png 'Image Title'")));
   }

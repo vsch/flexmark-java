@@ -240,7 +240,6 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
   @Test
   public void test_maxColumnsWithout() {
     MarkdownTable table4 = getTable(markdown4);
-    // @formatter:off
     assertEquals(0, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7, 8));
     assertEquals(1, table4.getMaxColumnsWithoutRows(true, 1, 2, 3, 4, 5, 6, 7, 8));
     assertEquals(2, table4.getMaxColumnsWithoutRows(true, 0, 2, 3, 4, 5, 6, 7, 8));
@@ -261,13 +260,11 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     assertEquals(2, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3, 4, 6, 7));
     assertEquals(3, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 7));
     assertEquals(4, table4.getMaxColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 6));
-    // @formatter:on
   }
 
   @Test
   public void test_minColumnsWithout() {
     MarkdownTable table4 = getTable(markdown4);
-    // @formatter:off
     assertEquals(0, table4.getMinColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7, 8));
     assertEquals(1, table4.getMinColumnsWithoutRows(true, 1, 2, 3, 4, 5, 6, 7, 8));
     assertEquals(2, table4.getMinColumnsWithoutRows(true, 0, 2, 3, 4, 5, 6, 7, 8));
@@ -289,7 +286,6 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     assertEquals(2, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3, 4, 6, 7));
     assertEquals(3, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 7));
     assertEquals(4, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 6));
-    // @formatter:on
   }
 
   private static final String markdown6 =

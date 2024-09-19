@@ -48,7 +48,7 @@ public class BoundsIntegrationTest {
     }
   }
 
-  private void parse(String input) {
+  private static void parse(String input) {
     try {
       Node parsed = PARSER.parse(input);
       // Parsing should always return a node

@@ -35,18 +35,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
   @Rule public ExpectedException thrown = ExpectedException.none();
 
   /**
-   * Called after processing individual test case
-   *
-   * @param exampleRenderer renderer used
-   * @param exampleParse parse information
-   * @param exampleOptions example options
-   */
-  public void addSpecExample(
-      SpecExampleRenderer exampleRenderer,
-      SpecExampleParse exampleParse,
-      DataHolder exampleOptions) {}
-
-  /**
    * Called when processing full spec test case by DumpSpecReader
    *
    * @param exampleRenderer example renderer
@@ -103,7 +91,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
         TestUtils.getFormattedTimingInfo(
             iterations, specExampleParse.getStartTime(), specExampleParse.getParseTime(), render);
 
-    addSpecExample(exampleRenderer, specExampleParse, exampleOptions);
     exampleRenderer.finalizeRender();
 
     String expected;

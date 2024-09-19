@@ -151,7 +151,6 @@ public interface SequenceUtils {
     return Pair.of(subSequenceBefore(thizz, range), subSequenceAfter(thizz, range));
   }
 
-  // @formatter:off
   static boolean containsAny(@NotNull CharSequence thizz, @NotNull CharPredicate s) {
     return indexOfAny(thizz, s, 0, Integer.MAX_VALUE) != -1;
   }
@@ -264,8 +263,6 @@ public interface SequenceUtils {
   static int lastIndexOfNot(@NotNull CharSequence thizz, char c, int fromIndex) {
     return lastIndexOfNot(thizz, c, 0, fromIndex);
   }
-
-  // @formatter:on
 
   static int indexOf(@NotNull CharSequence thizz, char c, int fromIndex, int endIndex) {
     fromIndex = Math.max(fromIndex, 0);
@@ -556,7 +553,6 @@ public interface SequenceUtils {
   }
 
   // TEST:
-  // @formatter:off
   static boolean matches(
       @NotNull CharSequence thizz, @NotNull CharSequence chars, boolean ignoreCase) {
     return chars.length() == thizz.length() && matchChars(thizz, chars, 0, ignoreCase);
@@ -682,8 +678,6 @@ public interface SequenceUtils {
     return matchedCharCountReversed(thizz, chars, 0, fromIndex, true);
   }
 
-  // @formatter:on
-
   static int matchedCharCount(
       @NotNull CharSequence thizz,
       @NotNull CharSequence chars,
@@ -766,7 +760,6 @@ public interface SequenceUtils {
     return iMax;
   }
 
-  // @formatter:off
   static int countOfSpaceTab(@NotNull CharSequence thizz) {
     return countOfAny(thizz, CharPredicate.SPACE_TAB, 0, Integer.MAX_VALUE);
   }
@@ -805,8 +798,6 @@ public interface SequenceUtils {
     return countOfAny(thizz, chars.negate(), 0, Integer.MAX_VALUE);
   }
 
-  // @formatter:on
-
   static int countOfAny(
       @NotNull CharSequence thizz, @NotNull CharPredicate s, int fromIndex, int endIndex) {
     fromIndex = Math.max(fromIndex, 0);
@@ -820,7 +811,6 @@ public interface SequenceUtils {
     return count;
   }
 
-  // @formatter:off
   static int countLeadingSpace(@NotNull CharSequence thizz) {
     return countLeading(thizz, CharPredicate.SPACE, 0, Integer.MAX_VALUE);
   }
@@ -1012,8 +1002,6 @@ public interface SequenceUtils {
     return countTrailing(thizz, chars.negate(), startIndex, endIndex);
   }
 
-  // @formatter:on
-
   static int countLeading(
       @NotNull CharSequence thizz, @NotNull CharPredicate chars, int fromIndex, int endIndex) {
     endIndex = Math.min(endIndex, thizz.length());
@@ -1054,7 +1042,6 @@ public interface SequenceUtils {
     return index == -1 ? fromIndex - startIndex : fromIndex <= index ? 0 : fromIndex - index - 1;
   }
 
-  // @formatter:off
   @NotNull
   static <T extends CharSequence> T trimStart(@NotNull T thizz, @NotNull CharPredicate chars) {
     return subSequence(thizz, trimStartRange(thizz, 0, chars));
@@ -1181,9 +1168,6 @@ public interface SequenceUtils {
     return subSequenceBeforeAfter(thizz, trimRange(thizz, keep, chars));
   }
 
-  // @formatter:on
-
-  // @formatter:off
   static Range trimStartRange(@NotNull CharSequence thizz, @NotNull CharPredicate chars) {
     return trimStartRange(thizz, 0, chars);
   }
@@ -1219,8 +1203,6 @@ public interface SequenceUtils {
   static Range trimRange(@NotNull CharSequence thizz) {
     return trimRange(thizz, 0, CharPredicate.WHITESPACE);
   }
-
-  // @formatter:on
 
   @NotNull
   static Range trimStartRange(@NotNull CharSequence thizz, int keep, @NotNull CharPredicate chars) {
@@ -1358,7 +1340,6 @@ public interface SequenceUtils {
     return len;
   }
 
-  // @formatter:off
   static int endOfLine(@NotNull CharSequence thizz, int index) {
     return endOfDelimitedBy(thizz, SequenceUtils.EOL, index);
   }
@@ -1384,8 +1365,6 @@ public interface SequenceUtils {
       @NotNull CharSequence thizz, @NotNull CharPredicate s, int index) {
     return endOfDelimitedByAny(thizz, s.negate(), index);
   }
-
-  // @formatter:on
 
   static int startOfDelimitedBy(@NotNull CharSequence thizz, @NotNull CharSequence s, int index) {
     index = rangeLimit(index, 0, thizz.length());
@@ -1460,7 +1439,6 @@ public interface SequenceUtils {
     return range.isNull() ? (T) thizz : subSequenceAfter(thizz, range);
   }
 
-  // @formatter:off
   @NotNull
   static Range leadingBlankLinesRange(@NotNull CharSequence thizz) {
     return leadingBlankLinesRange(thizz, CharPredicate.EOL, 0, Integer.MAX_VALUE);
@@ -1490,8 +1468,6 @@ public interface SequenceUtils {
   static Range trailingBlankLinesRange(@NotNull CharSequence thizz, int startIndex, int fromIndex) {
     return trailingBlankLinesRange(thizz, CharPredicate.EOL, startIndex, fromIndex);
   }
-
-  // @formatter:on
 
   @NotNull
   static Range trailingBlankLinesRange(
@@ -1538,7 +1514,6 @@ public interface SequenceUtils {
     else return Range.NULL;
   }
 
-  // @formatter:off
   @NotNull
   static List<Range> blankLinesRemovedRanges(@NotNull CharSequence thizz) {
     return blankLinesRemovedRanges(thizz, CharPredicate.EOL, 0, Integer.MAX_VALUE);
@@ -1554,8 +1529,6 @@ public interface SequenceUtils {
       @NotNull CharSequence thizz, int fromIndex, int endIndex) {
     return blankLinesRemovedRanges(thizz, CharPredicate.EOL, fromIndex, endIndex);
   }
-
-  // @formatter:on
 
   @NotNull
   static List<Range> blankLinesRemovedRanges(
@@ -1579,7 +1552,6 @@ public interface SequenceUtils {
     return ranges;
   }
 
-  // @formatter:off
   static boolean isEmpty(@NotNull CharSequence thizz) {
     return thizz.length() == 0;
   }
@@ -1663,9 +1635,6 @@ public interface SequenceUtils {
     return startsWith(thizz, CharPredicate.WHITESPACE);
   }
 
-  // @formatter:on
-
-  // @formatter:off
   static <T extends CharSequence> @NotNull List<T> splitList(
       @NotNull T thizz, @NotNull CharSequence delimiter) {
     return splitList(thizz, delimiter, 0, 0, null);
@@ -1781,8 +1750,6 @@ public interface SequenceUtils {
       @Nullable CharPredicate trimChars) {
     return splitList((T) thizz, delimiter, limit, flags, trimChars).toArray(emptyArray);
   }
-
-  // @formatter:on
 
   @NotNull
   static <T extends CharSequence> List<T> splitList(

@@ -80,7 +80,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
   public @NotNull Indexed<Map.Entry<K, V>> getIndexedEntryProxy() {
     if (indexedEntryProxy != null) return indexedEntryProxy;
     indexedEntryProxy =
-        new Indexed<Map.Entry<K, V>>() {
+        new Indexed<>() {
           @Override
           public Map.Entry<K, V> get(int index) {
             return OrderedMap.this.getEntry(index);
@@ -113,7 +113,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
   public @NotNull Indexed<V> getIndexedValueProxy() {
     if (indexedValueProxy != null) return indexedValueProxy;
     indexedValueProxy =
-        new Indexed<V>() {
+        new Indexed<>() {
           @Override
           public V get(int index) {
             return OrderedMap.this.getValue(index);
@@ -391,16 +391,13 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     return reversedEntryIterable();
   }
 
-  /*
-   * Iterable
-   */
-
   @NotNull
   @Override
   public ReversibleIndexedIterator<Map.Entry<K, V>> iterator() {
     return entryIterator();
   }
 
+  @Override
   public void forEach(Consumer<? super Entry<K, V>> consumer) {
     Iterator<Map.Entry<K, V>> iterator = iterator();
     while (iterator.hasNext()) {

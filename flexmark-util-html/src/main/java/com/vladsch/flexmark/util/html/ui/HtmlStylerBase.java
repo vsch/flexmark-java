@@ -23,10 +23,11 @@ public abstract class HtmlStylerBase<T> implements HtmlStyler<T> {
     try {
       //noinspection unchecked
       return (T) item;
-    } catch (Throwable ignored) {
+    } catch (Exception ignored) {
       return null;
     }
   }
 
+  @Override
   public abstract String getStyle(T item);
 }

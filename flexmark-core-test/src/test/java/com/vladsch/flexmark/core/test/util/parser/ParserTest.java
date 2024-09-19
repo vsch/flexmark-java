@@ -739,10 +739,6 @@ public final class ParserTest {
     return n.getChars().toString();
   }
 
-  private interface DashBlockVisitor {
-    void visit(DashBlock node);
-  }
-
   private static class DashBlock extends Block {
     DashBlock() {}
 

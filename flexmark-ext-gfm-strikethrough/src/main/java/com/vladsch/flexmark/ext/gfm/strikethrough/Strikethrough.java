@@ -38,26 +38,32 @@ public class Strikethrough extends Node implements DelimitedNode {
     this.closingMarker = closingMarker;
   }
 
+  @Override
   public BasedSequence getOpeningMarker() {
     return openingMarker;
   }
 
+  @Override
   public void setOpeningMarker(BasedSequence openingMarker) {
     this.openingMarker = openingMarker;
   }
 
+  @Override
   public BasedSequence getText() {
     return text;
   }
 
+  @Override
   public void setText(BasedSequence text) {
     this.text = text;
   }
 
+  @Override
   public BasedSequence getClosingMarker() {
     return closingMarker;
   }
 
+  @Override
   public void setClosingMarker(BasedSequence closingMarker) {
     this.closingMarker = closingMarker;
   }

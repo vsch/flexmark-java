@@ -88,16 +88,13 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     return appendable.isPreFormatted();
   }
 
-  private boolean haveOptions(int options) {
-    return (appendable.getOptions() & options) != 0;
-  }
-
   @Override
   public @NotNull T raw(@NotNull CharSequence s) {
     appendable.append(s);
     return (T) this;
   }
 
+  @Override
   public @NotNull T raw(@NotNull CharSequence s, int count) {
     int i = count;
     while (i-- > 0) appendable.append(s);
@@ -424,7 +421,6 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
   }
 
   // delegated to LineFormattingAppendable
-  // @formatter:off
   @NotNull
   @Override
   public Iterator<LineInfo> iterator() {
@@ -823,5 +819,4 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     appendable.unIndentNoEol();
     return (T) this;
   }
-  // @formatter:on
 }

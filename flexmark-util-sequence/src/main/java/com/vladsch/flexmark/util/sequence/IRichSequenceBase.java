@@ -39,8 +39,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     this.hash = hash;
   }
 
-  // @formatter:on
-
   /**
    * Equality comparison based on character content of this sequence, with quick fail resorting to
    * content comparison only if length and hashCodes are equal
@@ -266,7 +264,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return isNull() ? null : toString();
   }
 
-  // @formatter:off
   @Override
   public final int indexOf(@NotNull CharSequence s) {
     return SequenceUtils.indexOf(this, s);
@@ -417,9 +414,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.lastIndexOfAny(this, s, startIndex, fromIndex);
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @Override
   public final int countOfSpaceTab() {
     return SequenceUtils.countOfSpaceTab(this);
@@ -470,9 +464,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.countOfAnyNot(this, chars, startIndex, endIndex);
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @Override
   public final int countLeading(@NotNull CharPredicate chars) {
     return SequenceUtils.countLeading(this, chars);
@@ -718,9 +709,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.countTrailingNotWhitespace(this, startIndex, fromIndex);
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @NotNull
   @Override
   public final T trimStart(@NotNull CharPredicate chars) {
@@ -865,9 +853,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return subSequenceBeforeAfter(trimRange(keep, chars));
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @NotNull
   @Override
   public final Range trimStartRange(int keep, @NotNull CharPredicate chars) {
@@ -940,8 +925,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.trimRange(this);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public final T padding(int length, char pad) {
@@ -986,7 +969,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   // EOL Helpers
   // *****************************************************************
 
-  // @formatter:off
   @Override
   public final int eolEndLength() {
     return SequenceUtils.eolEndLength(this);
@@ -1088,8 +1070,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.eolStartRange(this, eolStart);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public final T trimEOL() {
@@ -1118,7 +1098,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return range.isNull() ? (T) this : subSequenceAfter(range);
   }
 
-  // @formatter:off
   @NotNull
   @Override
   public final Range leadingBlankLinesRange() {
@@ -1169,9 +1148,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.leadingBlankLinesRange(this, eolChars, fromIndex, endIndex);
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @NotNull
   @Override
   public final List<Range> blankLinesRemovedRanges() {
@@ -1197,9 +1173,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.blankLinesRemovedRanges(this, eolChars, fromIndex, endIndex);
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @NotNull
   @Override
   public T trimToEndOfLine(boolean includeEol) {
@@ -1248,8 +1221,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return trimToStartOfLine(CharPredicate.EOL, includeEol, index);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public T trimToEndOfLine(@NotNull CharPredicate eolChars, boolean includeEol, int index) {
@@ -1272,7 +1243,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return (T) this;
   }
 
-  // @formatter:off
   @NotNull
   @Override
   public final T ifNull(@NotNull T other) {
@@ -1418,8 +1388,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         (Predicate<? super CharSequence>) suffix -> endsWith(suffix, ignoreCase), matches);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public final T nullIf(
@@ -1430,7 +1398,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return (T) this;
   }
 
-  // @formatter:off
   @Override
   public final boolean isNull() {
     return this == nullSequence();
@@ -1635,8 +1602,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         : subSequence(prefix.length(), length());
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public T insert(int index, @NotNull CharSequence chars) {
@@ -1674,7 +1639,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     }
   }
 
-  // @formatter:off
   @NotNull
   @Override
   public final T toLowerCase() {
@@ -1699,9 +1663,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return toMapped(SpaceMapper.fromNonBreakSpace);
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @Override
   public final boolean matches(@NotNull CharSequence chars, boolean ignoreCase) {
     return SequenceUtils.matches(this, chars, ignoreCase);
@@ -1841,8 +1802,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.matchedCharCountReversed(this, chars, startIndex, fromIndex, ignoreCase);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public String toString() {
@@ -1856,7 +1815,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return sb.toString();
   }
 
-  // @formatter:off
   @NotNull
   @Override
   public final String normalizeEOL() {
@@ -1875,9 +1833,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return SequenceUtils.toVisibleWhitespaceString(this);
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @NotNull
   @Override
   public final List<T> splitList(@NotNull CharSequence delimiter) {
@@ -2001,9 +1956,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
         .toArray(emptyArray());
   }
 
-  // @formatter:on
-
-  // @formatter:off
   @NotNull
   @Override
   public final T appendTo(@NotNull StringBuilder out, @Nullable CharMapper charMapper) {
@@ -2035,8 +1987,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return appendTo(out, null, startIndex, endIndex);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public final T appendTo(
@@ -2046,7 +1996,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return (T) this;
   }
 
-  // @formatter:off
   @NotNull
   @Override
   public final T appendRangesTo(
@@ -2066,8 +2015,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return appendRangesTo(out, null, ranges);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public final T appendRangesTo(
@@ -2083,7 +2030,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return (T) this;
   }
 
-  // @formatter:off
   @NotNull
   @Override
   public final int[] indexOfAll(@NotNull CharSequence s) {
@@ -2167,8 +2113,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   public final T suffixOnceWithSpace() {
     return suffixOnceWith(SequenceUtils.SPACE);
   }
-
-  // @formatter:on
 
   @NotNull
   @Override
@@ -2277,7 +2221,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     return segments.toSequence();
   }
 
-  // @formatter:off
   @Override
   public final int columnAtIndex(int index) {
     return SequenceUtils.columnAtIndex(this, index);
@@ -2288,8 +2231,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   public final Pair<Integer, Integer> lineColumnAtIndex(int index) {
     return SequenceUtils.lineColumnAtIndex(this, index);
   }
-
-  // @formatter:on
 
   @Override
   public boolean isIn(@NotNull String[] texts) {

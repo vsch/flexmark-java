@@ -44,7 +44,6 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     visitChildren(node);
   }
 
-  // @formatter:off
   @Override
   public void nodeRemoved(@NotNull Node node) {}
 
@@ -63,8 +62,6 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
   public void nodeAddedWithDescendants(@NotNull Node node) {
     nodeAdded(node);
   }
-
-  // @formatter:on
 
   @Override
   public void nodeAdded(@NotNull Node node) {

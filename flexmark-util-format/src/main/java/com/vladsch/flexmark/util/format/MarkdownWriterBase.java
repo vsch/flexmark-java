@@ -66,7 +66,6 @@ public abstract class MarkdownWriterBase<
     return (T) this;
   }
 
-  // @formatter:off
   @NotNull
   @Override
   public Iterator<LineInfo> iterator() {
@@ -465,5 +464,4 @@ public abstract class MarkdownWriterBase<
     appendable.unIndentNoEol();
     return (T) this;
   }
-  // @formatter:on
 }

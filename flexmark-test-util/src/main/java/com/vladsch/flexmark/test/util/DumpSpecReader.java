@@ -31,10 +31,6 @@ public class DumpSpecReader extends SpecReader {
     return sbExp.toString();
   }
 
-  public void readExamples() {
-    super.readExamples();
-  }
-
   @Override
   public void addSpecLine(String line, boolean isSpecExampleOpen) {
     if (!isSpecExampleOpen) sb.append(line).append("\n");

@@ -163,7 +163,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return stats;
   }
 
-  // @formatter:off
   @Override
   public boolean isTrackTextFirst256() {
     return stats.isTrackTextFirst256();
@@ -198,8 +197,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   public int getTextFirst256Segments() {
     return stats.getTextFirst256Segments();
   }
-
-  // @formatter:on
 
   @Override
   public @NotNull Iterator<Object> iterator() {

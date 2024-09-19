@@ -53,7 +53,6 @@ public class ResolvedLink {
     }
   }
 
-  // @formatter:off
   public ResolvedLink withLinkType(@NotNull LinkType linkType) {
     return linkType == this.myLinkType
         ? this
@@ -65,8 +64,6 @@ public class ResolvedLink {
         ? this
         : new ResolvedLink(myLinkType, myUrl, myAttributes, status);
   }
-
-  // @formatter:on
 
   @NotNull
   public LinkType getLinkType() {

@@ -5,7 +5,6 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.util.FlexmarkSpecExampleRenderer;
 import com.vladsch.flexmark.test.util.RenderingTestCase;
 import com.vladsch.flexmark.test.util.SpecExampleRenderer;
-import com.vladsch.flexmark.test.util.Strings;
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
@@ -117,7 +116,7 @@ public final class SpecialInputTest extends RenderingTestCase {
 
   @Test
   public void linkLabelLength() {
-    String label1 = Strings.repeat("a", 999);
+    String label1 = "a".repeat(999);
     assertRendering(
         "[foo][" + label1 + "]\n\n[" + label1 + "]: /", "<p><a href=\"/\">foo</a></p>\n");
     assertRendering(
@@ -127,7 +126,7 @@ public final class SpecialInputTest extends RenderingTestCase {
         "[foo][\n" + label1 + "]\n\n[\n" + label1 + "]: /",
         "<p>[foo][\n" + label1 + "]</p>\n<p>[\n" + label1 + "]: /</p>\n");
 
-    String label2 = Strings.repeat("a\n", 499);
+    String label2 = "a\n".repeat(499);
     assertRendering(
         "[foo][" + label2 + "]\n\n[" + label2 + "]: /", "<p><a href=\"/\">foo</a></p>\n");
     assertRendering(
@@ -137,7 +136,7 @@ public final class SpecialInputTest extends RenderingTestCase {
 
   @Test
   public void manyUnderscores() {
-    assertRendering(Strings.repeat("_", 1000), "<hr />");
+    assertRendering("_".repeat(1000), "<hr />");
   }
 
   @Nullable

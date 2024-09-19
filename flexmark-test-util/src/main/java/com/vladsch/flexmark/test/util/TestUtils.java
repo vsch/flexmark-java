@@ -1,10 +1,6 @@
 package com.vladsch.flexmark.test.util;
 
 import static com.vladsch.flexmark.test.util.spec.SpecReader.EXAMPLE_KEYWORD;
-import static com.vladsch.flexmark.util.misc.Utils.removePrefix;
-import static com.vladsch.flexmark.util.misc.Utils.removeSuffix;
-import static com.vladsch.flexmark.util.misc.Utils.suffixWith;
-import static com.vladsch.flexmark.util.misc.Utils.wrapWith;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.endsWithEOL;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.isBlank;
 import static com.vladsch.flexmark.util.sequence.SequenceUtils.isEmpty;
@@ -129,18 +125,6 @@ public class TestUtils {
       }
     }
     return dataHolder;
-  }
-
-  @NotNull
-  public static <T> HashMap<String, T> buildOptionsMap(
-      @NotNull String[] options, @NotNull BiFunction<ExampleOption, Integer, T> factory) {
-    HashMap<String, T> hashMap = new HashMap<>();
-    int i = 0;
-    for (String option : options) {
-      hashMap.put(option, factory.apply(ExampleOption.of(option), i));
-      i++;
-    }
-    return hashMap;
   }
 
   /**
@@ -283,7 +267,7 @@ public class TestUtils {
     return options == null ? null : options.toImmutable();
   }
 
-  public static <T> MutableDataSet addOption(DataHolder options, DataKey<T> key, T value) {
+  private static <T> MutableDataSet addOption(DataHolder options, DataKey<T> key, T value) {
     if (options == null) {
       return new MutableDataSet().set(key, value);
     } else {
@@ -291,7 +275,7 @@ public class TestUtils {
     }
   }
 
-  public static void throwIllegalStateException(
+  private static void throwIllegalStateException(
       @NotNull SpecExample example, @NotNull String option) {
     throw new IllegalStateException(
         "Option "
@@ -300,7 +284,7 @@ public class TestUtils {
             + example.getFileUrlWithLineNumber(-1));
   }
 
-  public static void throwIgnoredOption(
+  private static void throwIgnoredOption(
       @NotNull SpecExample example, @NotNull String optionSets, @NotNull String option) {
     throw new AssumptionViolatedException(
         "Ignored: example("
@@ -373,7 +357,7 @@ public class TestUtils {
         number);
   }
 
-  public static void addSpecExample(
+  private static void addSpecExample(
       boolean includeExampleStart,
       boolean toVisibleSpecText,
       StringBuilder sb,
@@ -398,7 +382,7 @@ public class TestUtils {
         number);
   }
 
-  public static void addSpecExample(
+  private static void addSpecExample(
       boolean useTestExample,
       boolean includeExampleStart,
       boolean toVisibleSpecText,
@@ -425,7 +409,7 @@ public class TestUtils {
         number);
   }
 
-  public static void addSpecExample(
+  private static void addSpecExample(
       CharSequence exampleBreak,
       CharSequence sectionBreak,
       boolean includeExampleStart,
@@ -439,25 +423,25 @@ public class TestUtils {
       CharSequence section,
       int number) {
     addSpecExample(
-        (CharSequence) exampleBreak,
-        (CharSequence) sectionBreak,
-        (CharSequence) sectionBreak,
-        (CharSequence) exampleBreak,
+        exampleBreak,
+        sectionBreak,
+        sectionBreak,
+        exampleBreak,
         includeExampleStart,
         toVisibleSpecText,
         out,
-        (CharSequence) source,
-        (CharSequence) html,
-        (CharSequence) ast,
-        (CharSequence) optionsSet,
+        source,
+        html,
+        ast,
+        optionsSet,
         includeExampleCoords,
-        (CharSequence) section,
+        section,
         Integer.toString(number),
         EXAMPLE_KEYWORD,
         SpecReader.OPTIONS_KEYWORD);
   }
 
-  public static void addSpecExample(
+  private static void addSpecExample(
       CharSequence exampleBreakOpen,
       CharSequence htmlBreak,
       CharSequence astBreak,
@@ -554,16 +538,6 @@ public class TestUtils {
   /**
    * @param s text to convert to visible chars
    * @return spec test special chars converted to visible
-   * @deprecated use {@link #toVisibleSpecText(String)}
-   */
-  @Deprecated
-  public static String showTabs(String s) {
-    return toVisibleSpecText(s);
-  }
-
-  /**
-   * @param s text to convert to visible chars
-   * @return spec test special chars converted to visible
    */
   public static String toVisibleSpecText(String s) {
     if (s == null) return "";
@@ -595,16 +569,6 @@ public class TestUtils {
   /**
    * @param s text to convert to from visible chars to normal
    * @return spec test special visible chars converted to normal
-   * @deprecated use {@link #fromVisibleSpecText(String)}
-   */
-  @Deprecated
-  public static String unShowTabs(String s) {
-    return fromVisibleSpecText(s);
-  }
-
-  /**
-   * @param s text to convert to from visible chars to normal
-   * @return spec test special visible chars converted to normal
    */
   public static String fromVisibleSpecText(String s) {
     if (s == null) return "";
@@ -615,7 +579,7 @@ public class TestUtils {
    * @param s text to convert to from visible chars to normal
    * @return spec test special visible chars converted to normal
    */
-  public static CharSequence fromVisibleSpecText(CharSequence s) {
+  private static CharSequence fromVisibleSpecText(CharSequence s) {
     if (s == null) return "";
     BasedSequence sequence = BasedSequence.of(s);
     return sequence
@@ -655,7 +619,7 @@ public class TestUtils {
   }
 
   @NotNull
-  public static String getFormattedSection(String section, int exampleNumber) {
+  private static String getFormattedSection(String section, int exampleNumber) {
     return section == null ? "" : section.trim() + ": " + exampleNumber;
   }
 
@@ -667,18 +631,6 @@ public class TestUtils {
     return !specInfo.isAbsolute()
         ? new File(classInfo.getParent(), resourcePath).getAbsolutePath()
         : resourcePath;
-  }
-
-  @NotNull
-  public static String getAbsoluteSpecResourcePath(
-      @NotNull String testClassPath,
-      @NotNull String resourceRootPath,
-      @NotNull String resourcePath) {
-    File resourceFile =
-        resourcePath.startsWith("/")
-            ? new File(resourceRootPath, resourcePath.substring(1))
-            : new File(new File(testClassPath).getParent(), resourcePath);
-    return resourceFile.getAbsolutePath();
   }
 
   @NotNull
@@ -752,28 +704,6 @@ public class TestUtils {
     System.arraycopy(overrides, 0, holders, 1, overrides.length);
     holders[0] = other;
     return holders;
-  }
-
-  @NotNull
-  public static String getTestResourceRootDirectoryForModule(
-      @NotNull Class<?> resourceClass, @NotNull String moduleRootPackage) {
-    String fileUrl;
-    fileUrl = getSpecResourceFileUrl(resourceClass, wrapWith(moduleRootPackage, "/", ".txt"));
-    return removePrefix(
-        removeSuffix(fileUrl, suffixWith(moduleRootPackage, ".txt")), FILE_PROTOCOL);
-  }
-
-  @NotNull
-  public static String getRootDirectoryForModule(
-      @NotNull Class<?> resourceClass, @NotNull String moduleDirectoryName) {
-    // get project root from our class file url path
-    String fileUrl = SpecExample.ofCaller(0, resourceClass, "", "", "").getFileUrl();
-    int pos = fileUrl.indexOf(wrapWith(moduleDirectoryName, '/'));
-    if (pos != -1) {
-      fileUrl = fileUrl.substring(0, pos);
-    }
-    fileUrl = fileUrl.substring(FILE_PROTOCOL.length());
-    return fileUrl;
   }
 
   // handle custom string options
@@ -917,9 +847,9 @@ public class TestUtils {
     return Pair.of(input, EMPTY_OFFSETS);
   }
 
-  public static final String BANNER_PADDING =
+  private static final String BANNER_PADDING =
       "------------------------------------------------------------------------";
-  public static final int BANNER_LENGTH = BANNER_PADDING.length();
+  private static final int BANNER_LENGTH = BANNER_PADDING.length();
 
   @NotNull
   public static String bannerText(@NotNull String message) {

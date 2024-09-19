@@ -215,10 +215,6 @@ public final class DelimiterProcessorTest extends RenderingTestCase {
     }
   }
 
-  private interface UpperCaseNodeVisitor {
-    void visit(UpperCaseNode node);
-  }
-
   private static class UpperCaseNode extends Node implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;

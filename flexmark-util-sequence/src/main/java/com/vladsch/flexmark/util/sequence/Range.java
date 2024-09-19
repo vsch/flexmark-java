@@ -41,7 +41,6 @@ public class Range {
     end = other.end;
   }
 
-  // @formatter:off
   public int getStart() {
     return start;
   }
@@ -68,10 +67,7 @@ public class Range {
     return end;
   }
 
-  // @formatter:on
-
   // TEST:
-  // @formatter:off
   public Range withStart(int start) {
     return start == this.start ? this : Range.of(start, end);
   }
@@ -108,8 +104,6 @@ public class Range {
     return delta == 0 ? this : Range.of(start + delta, end + delta);
   }
 
-  // @formatter:on
-
   //    /**
   //     * @return span of this range: end-start,
   //     * @deprecated  use {@link #getSpan()}
@@ -118,7 +112,6 @@ public class Range {
   //    public int length() { return getSpan();}
 
   // TEST:
-  // @formatter:off
   public int getSpan() {
     return isNull() ? 0 : end - start;
   }
@@ -141,10 +134,7 @@ public class Range {
     return start < end;
   }
 
-  // @formatter:on
-
   // TEST:
-  // @formatter:off
   public boolean contains(@NotNull Range other) {
     return end >= other.end && start <= other.start;
   }
@@ -280,8 +270,6 @@ public class Range {
   public boolean trails(int index) {
     return index <= start;
   }
-
-  // @formatter:on
 
   @NotNull
   public Range intersect(@NotNull Range other) {

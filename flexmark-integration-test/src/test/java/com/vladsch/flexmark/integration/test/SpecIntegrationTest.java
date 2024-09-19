@@ -44,6 +44,7 @@ public class SpecIntegrationTest extends RendererSpecTest {
     super(example, null, OPTIONS);
   }
 
+  @Override
   @NotNull
   public SpecExample checkExample(@NotNull SpecExample example) {
     String expectedHtml = OVERRIDDEN_EXAMPLES.get(example.getSource());

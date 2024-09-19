@@ -234,8 +234,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     return !containsSomeIn(charSet);
   }
 
-  // @formatter:off
-
   @NotNull
   @Override
   public BasedSequence extendByAny(@NotNull CharPredicate charSet) {
@@ -248,16 +246,12 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     return extendByAny(charSet, 1);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public BasedSequence extendByAny(@NotNull CharPredicate charSet, int maxCount) {
     int count = getBaseSequence().countLeading(charSet, getEndOffset(), getEndOffset() + maxCount);
     return count == 0 ? this : baseSubSequence(getStartOffset(), getEndOffset() + count);
   }
-
-  // @formatter:off
 
   @NotNull
   @Override
@@ -271,8 +265,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     return extendByAnyNot(charSet, 1);
   }
 
-  // @formatter:on
-
   @NotNull
   @Override
   public BasedSequence extendByAnyNot(@NotNull CharPredicate charSet, int maxCount) {
@@ -282,8 +274,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         ? this
         : baseSubSequence(getStartOffset(), getEndOffset() + count + 1);
   }
-
-  // @formatter:off
 
   @NotNull
   @Override
@@ -320,8 +310,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
   public final BasedSequence extendToStartOfLine() {
     return extendToStartOfLine(CharPredicate.EOL, false);
   }
-
-  // @formatter:on
 
   @NotNull
   @Override
@@ -458,7 +446,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     else return this.baseSubSequence(other.getEndOffset(), getEndOffset());
   }
 
-  // @formatter:off
   // TEST: all these need tests
   @Override
   public @NotNull Range baseLineRangeAtIndex(int index) {
@@ -544,8 +531,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
   public @NotNull Pair<Integer, Integer> baseLineColumnAtStart() {
     return baseLineColumnAtIndex(getStartOffset());
   }
-
-  // @formatter:on
 
   static BasedSequence create(@Nullable CharSequence charSequence) {
     if (charSequence == null) return BasedSequence.NULL;

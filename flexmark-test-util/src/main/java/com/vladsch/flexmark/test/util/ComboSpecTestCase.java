@@ -91,6 +91,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     return optionsMap;
   }
 
+  @Override
   protected boolean compoundSections() {
     return true;
   }
@@ -124,6 +125,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     return example.getResourceLocation();
   }
 
+  @Override
   @Test
   public void testSpecExample() {
     if (example.isFullSpecExample()) {
