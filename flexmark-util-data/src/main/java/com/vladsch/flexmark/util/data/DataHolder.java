@@ -3,10 +3,11 @@ package com.vladsch.flexmark.util.data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
-public interface DataHolder extends MutableDataSetter {
+public interface DataHolder extends MutableDataSetter, Serializable {
     DataHolder NULL = new DataSet();
 
     @NotNull Map<? extends DataKeyBase<?>, Object> getAll();
