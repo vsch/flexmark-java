@@ -55,11 +55,11 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
   }
 
-  private Parser getParser(@Nullable DataHolder OPTIONS) {
+  private static Parser getParser(@Nullable DataHolder OPTIONS) {
     return Parser.builder(OPTIONS).build();
   }
 
-  private IRender getRenderer(@Nullable DataHolder OPTIONS) {
+  private static IRender getRenderer(@Nullable DataHolder OPTIONS) {
     return new TranslationFormatter(Formatter.builder(OPTIONS).build());
   }
 
@@ -74,9 +74,9 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         TranslationFormatter translationFormatter = (TranslationFormatter) getRenderer();
         if (translationFormatter.isShowIntermediateAst()) {
           return translationFormatter.getAst();
-        } else {
-          return super.renderAst();
         }
+
+        return super.renderAst();
       }
     };
   }

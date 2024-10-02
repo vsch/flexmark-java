@@ -62,8 +62,6 @@ public class DumpSpecReader extends SpecReader {
     final SpecExampleParse exampleParse =
         new SpecExampleParse(
             exampleRenderer.getOptions(), exampleRenderer, exampleOptions, example.getSource());
-    final String source = exampleParse.getSource();
-    final boolean timed = exampleParse.isTimed();
     final int iterations = exampleParse.getIterations();
     final long start = exampleParse.getStartTime();
     final long parse = exampleParse.getParseTime();
@@ -101,7 +99,7 @@ public class DumpSpecReader extends SpecReader {
     TestUtils.addSpecExample(
         true,
         sb,
-        source,
+        exampleParse.getSource(),
         html,
         ast,
         example.getOptionsSet(),
@@ -111,7 +109,7 @@ public class DumpSpecReader extends SpecReader {
     TestUtils.addSpecExample(
         false,
         sbExp,
-        source,
+        exampleParse.getSource(),
         example.getHtml(),
         example.getAst(),
         example.getOptionsSet(),

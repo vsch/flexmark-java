@@ -103,25 +103,21 @@ public class ResourceLocation {
   public ResourceLocation withResourceClass(@NotNull Class<?> resourceClass) {
     return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
   }
-  ;
 
   @NotNull
   public ResourceLocation withResourcePath(@NotNull String resourcePath) {
     return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
   }
-  ;
 
   @NotNull
   public ResourceLocation withFileUrl(@NotNull String fileUrl) {
     return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
   }
-  ;
 
   @NotNull
   public ResourceLocation withResolvedResourcePath(@NotNull String resolvedResourcePath) {
     return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
   }
-  ;
 
   @Override
   public int hashCode() {

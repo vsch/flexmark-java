@@ -46,7 +46,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
-public final class ParserTest {
+public class ParserTest {
   @Test
   public void emptyReaderTest() throws IOException {
     Parser parser = Parser.builder().build();
@@ -78,7 +78,7 @@ public final class ParserTest {
     Node document = parser.parse("hey\n\n---\n");
 
     assertThat(document.getFirstChild(), instanceOf(Paragraph.class));
-    assertEquals("hey", ((Text) document.getFirstChild().getFirstChild()).getChars().toString());
+    assertEquals("hey", document.getFirstChild().getFirstChild().getChars().toString());
     assertThat(document.getLastChild(), instanceOf(DashBlock.class));
   }
 
@@ -731,7 +731,7 @@ public final class ParserTest {
     assertEquals("2\\)abc", unEscape("2\\)abc", parser));
   }
 
-  private String firstText(Node n) {
+  private static String firstText(Node n) {
     while (!(n instanceof Text)) {
       assertThat(n, notNullValue());
       n = n.getFirstChild();

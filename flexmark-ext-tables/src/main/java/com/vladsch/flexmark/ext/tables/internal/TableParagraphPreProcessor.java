@@ -187,9 +187,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
   }
 
   private static class TableSeparatorRow extends TableRow implements DoNotDecorate {
-    public TableSeparatorRow() {}
-
-    public TableSeparatorRow(BasedSequence chars) {
+    TableSeparatorRow(BasedSequence chars) {
       super(chars);
     }
   }
@@ -206,7 +204,6 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     BitSet separators = separatorCharacters;
     HashMap<Character, CharacterNodeFactory> nodeMap = pipeNodeMap;
 
-    int i = 0;
     for (BasedSequence rowLine : block.getContentLines()) {
       int rowNumber = tableLines.size();
       if (separatorLineNumber == -1 && rowNumber > options.maxHeaderRows)
@@ -241,7 +238,6 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
       }
 
       tableLines.add(trimmedRowLine);
-      i++;
     }
 
     if (separatorLineNumber == -1) return 0;
@@ -471,17 +467,17 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
       if (removedSeparators.size() == sepList.size()) {
         return null;
-      } else {
-        ArrayList<Node> newSeparators = new ArrayList<>(sepList);
-        newSeparators.removeAll(removedSeparators);
-        return newSeparators;
       }
+
+      List<Node> newSeparators = new ArrayList<>(sepList);
+      newSeparators.removeAll(removedSeparators);
+      return newSeparators;
     }
 
     return sepList;
   }
 
-  private List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
+  private static List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
     List<BasedSequence> parts = split(separatorLine, false, false);
     List<TableCell.Alignment> alignments = new ArrayList<>();
     for (BasedSequence part : parts) {

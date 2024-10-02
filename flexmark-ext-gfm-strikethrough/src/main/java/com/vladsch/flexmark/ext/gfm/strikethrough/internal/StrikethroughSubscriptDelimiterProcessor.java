@@ -66,9 +66,9 @@ public class StrikethroughSubscriptDelimiterProcessor implements DelimiterProces
     // calculate actual number of delimiters used from this closer
     if (opener.length() < 3 || closer.length() < 3) {
       return closer.length() <= opener.length() ? closer.length() : opener.length();
-    } else {
-      return closer.length() % 2 == 0 ? 2 : 1;
     }
+
+    return closer.length() % 2 == 0 ? 2 : 1;
   }
 
   @Override

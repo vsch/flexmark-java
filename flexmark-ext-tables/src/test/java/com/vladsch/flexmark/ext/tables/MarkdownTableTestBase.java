@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +45,7 @@ public class MarkdownTableTestBase {
   }
 
   protected String getFormattedTable(MarkdownTable table) {
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     table.appendTable(out);
     return out.toString(0, 0);
   }
@@ -53,7 +54,7 @@ public class MarkdownTableTestBase {
     List<String> formatted = new ArrayList<>();
 
     for (MarkdownTable table : tables) {
-      MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+      MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
       table.appendTable(out);
       formatted.add(out.toString(0, 0));
     }
@@ -69,14 +70,13 @@ public class MarkdownTableTestBase {
   }
 
   protected String getTransposedTable(MarkdownTable table, int columnHeaders) {
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = table.transposed(columnHeaders);
     transposed.appendTable(out);
     return out.toString(0, 0);
   }
 
   protected MarkdownTable getSortedTable(MarkdownTable table, ColumnSort[] columnSorts) {
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
     return table.sorted(columnSorts, 0, null);
   }
 
@@ -86,7 +86,7 @@ public class MarkdownTableTestBase {
     return table;
   }
 
-  DataHolder formatOptions(CharSequence tableIndentPrefix, DataHolder options) {
+  DataHolder formatOptions(DataHolder options) {
     MutableDataSet useOptions =
         (options == null ? new MutableDataSet() : new MutableDataSet(options))
             // .set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true)
@@ -118,7 +118,7 @@ public class MarkdownTableTestBase {
     return useOptions;
   }
 
-  DataHolder formatOptionsAsIs(CharSequence tableIndentPrefix, DataHolder options) {
+  DataHolder formatOptionsAsIs(DataHolder options) {
     MutableDataSet useOptions =
         (options == null ? new MutableDataSet() : new MutableDataSet(options))
             // .set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true)

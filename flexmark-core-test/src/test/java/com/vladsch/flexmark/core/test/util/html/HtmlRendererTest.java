@@ -28,14 +28,13 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.LineAppendable;
 import java.util.HashSet;
 import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 
-public final class HtmlRendererTest {
+public class HtmlRendererTest {
   @Test
   public void htmlAllowingShouldNotEscapeInlineHtml() {
     String rendered =
@@ -230,7 +229,7 @@ public final class HtmlRendererTest {
     NodeRendererFactory nodeRendererFactory =
         options ->
             () -> {
-              HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+              Set<NodeRenderingHandler<?>> set = new HashSet<>();
               set.add(
                   new NodeRenderingHandler<>(
                       Link.class,
@@ -243,7 +242,7 @@ public final class HtmlRendererTest {
                             subContext.doNotRenderLinks();
                           }
                           subContext.delegateRender();
-                          String s = ((LineAppendable) subContext.getHtmlWriter()).toString(-1, -1);
+                          String s = subContext.getHtmlWriter().toString(-1, -1);
                           html.raw(s);
                         }
                       }));
@@ -463,7 +462,7 @@ public final class HtmlRendererTest {
   }
 
   static class CustomRefLinkResolverImpl implements LinkResolver {
-    public CustomRefLinkResolverImpl(LinkResolverBasicContext context) {}
+    CustomRefLinkResolverImpl() {}
 
     @NotNull
     @Override

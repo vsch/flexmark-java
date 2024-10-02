@@ -13,7 +13,7 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
 public class StrikethroughJiraRenderer implements NodeRenderer {
-  public StrikethroughJiraRenderer(DataHolder options) {}
+  public StrikethroughJiraRenderer() {}
 
   @Override
   public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -39,7 +39,7 @@ public class StrikethroughJiraRenderer implements NodeRenderer {
     @NotNull
     @Override
     public NodeRenderer apply(@NotNull DataHolder options) {
-      return new StrikethroughJiraRenderer(options);
+      return new StrikethroughJiraRenderer();
     }
   }
 }

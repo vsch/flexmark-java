@@ -74,7 +74,7 @@ public class SpecExampleParse {
       String combinedSource = sourcePrefix + suffixWith(mySource, "\n") + sourceSuffix;
       input =
           BasedSequence.of(combinedSource)
-              .subSequence(0, ((CharSequence) combinedSource).length())
+              .subSequence(0, combinedSource.length())
               .subSequence(sourcePrefix.length(), combinedSource.length() - sourceSuffix.length());
     } else {
       input = BasedSequence.of(mySource);

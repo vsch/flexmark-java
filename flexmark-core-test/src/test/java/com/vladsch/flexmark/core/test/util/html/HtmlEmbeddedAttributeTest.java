@@ -11,11 +11,9 @@ import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeTracker;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.html.MutableAttributes;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.Collections;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
@@ -64,7 +62,7 @@ public class HtmlEmbeddedAttributeTest {
 
   static class TestNodePostProcessor extends NodePostProcessor {
     private static class TestNodeFactory extends NodePostProcessorFactory {
-      TestNodeFactory(DataHolder options) {
+      TestNodeFactory() {
         super(false);
         addNodes(Paragraph.class);
       }
@@ -76,13 +74,12 @@ public class HtmlEmbeddedAttributeTest {
       }
     }
 
-    public static NodePostProcessorFactory Factory(DataHolder options) {
-      return new TestNodeFactory(options);
+    public static NodePostProcessorFactory Factory() {
+      return new TestNodeFactory();
     }
 
     @Override
     public void process(@NotNull NodeTracker state, @NotNull Node node) {
-      BasedSequence paragraphText = BasedSequence.NULL;
       if (node instanceof Paragraph) { // [foo](http://example.com)
         MutableAttributes attributes = new MutableAttributes();
         attributes.addValue("class", "caption");
@@ -116,7 +113,7 @@ public class HtmlEmbeddedAttributeTest {
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-      parserBuilder.postProcessorFactory(TestNodePostProcessor.Factory(parserBuilder));
+      parserBuilder.postProcessorFactory(TestNodePostProcessor.Factory());
     }
 
     public static TestNodePostProcessorExtension create() {

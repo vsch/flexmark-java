@@ -34,7 +34,7 @@ public abstract class TemplateTestCase implements TemplateReaderFactory {
   }
 
   @Test
-  public void testDumpSpec() throws Exception {
+  public void testDumpSpec() {
     String specResourcePath = getTemplateResourceName();
     TemplateReader.readEntries(specResourcePath, this);
     String fullSpec = TemplateReader.readSpec(specResourcePath);

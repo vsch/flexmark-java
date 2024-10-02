@@ -8,80 +8,17 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.junit.Test;
 
 public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
-  private static final String markdown1 =
-      "" + "| First Header  |\n" + "| ------------- |\n" + "| Content Cell  |\n" + "\n" + "";
-  private static final String markdown2 =
-      ""
-          + "| Left-aligned1 | Right-aligned1 |\n"
-          + "| Left-aligned2 | Right-aligned2 |\n"
-          + "| :---         |          ---: |\n"
-          + "| git status   | git status1    |\n"
-          + "| git diff     | git diff2      |\n"
-          + "[  ]\n"
-          + "";
-  private static final String markdown3 =
-      "| Left-aligned | Center-aligned | Right-aligned1 |\n"
-          + "| Left-aligned | Center-aligned | Right-aligned2 |\n"
-          + "| Left-aligned | Center-aligned | Right-aligned3 |\n"
-          + "| :---         |     :---:      |          ---: |\n"
-          + "| git status   | git status     | git status1    |\n"
-          + "| git diff     | git diff       | git diff2      |\n"
-          + "| git diff     | git diff       | git diff3      |\n"
-          + "[Table Caption]\n"
-          + "";
-
-  private static final String markdown4 =
-      ""
-          + "| Left-aligned1 |\n"
-          + "| Left-aligned | Center-aligned2 |\n"
-          + "| Left-aligned | Center-aligned | Right-aligned3 |\n"
-          + "| Left-aligned | Center-aligned | Right-aligned | Right-aligned4 |\n"
-          + "| :---         |     :---:      |          ---: |          ---: |\n"
-          + "| git status1  |\n"
-          + "| git diff     | git diff2      |\n"
-          + "| git diff     | git diff       | git diff3      |\n"
-          + "| git diff     | git diff       | git diff       | git diff4      |\n"
-          + "[Table Caption]\n"
-          + "";
-
-  private static final String transposedNoCaption1 =
-      "" + "| First Header | Content Cell |\n" + "|--------------|--------------|\n" + "";
-
-  private static final String transposedNoCaption2 =
-      ""
-          + "| Left-aligned | Right-aligned1 |\n"
-          + "| Left-aligned | Right-aligned2 |\n"
-          + "|:-------------|---------------:|\n"
-          + "| git status   |    git status1 |\n"
-          + "| git diff     |      git diff2 |\n"
-          + "";
-  private static final String transposedNoCaption3 =
-      ""
-          + "| Left-aligned | Center-aligned | Right-aligned1 |\n"
-          + "| Left-aligned | Center-aligned | Right-aligned2 |\n"
-          + "| Left-aligned | Center-aligned | Right-aligned3 |\n"
-          + "|:-------------|:--------------:|---------------:|\n"
-          + "| git status   |   git status   |    git status1 |\n"
-          + "| git diff     |    git diff    |      git diff2 |\n"
-          + "| git diff     |    git diff    |      git diff3 |\n"
-          + "";
-
-  private static final String transposed1 = transposedNoCaption1 + "";
-
-  private static final String transposed2 = transposedNoCaption2 + "[ ]\n" + "";
-
-  private static final String transposed3 = transposedNoCaption3 + "[Table Caption]\n" + "";
-
   @Test
   public void test_basic1() {
     MarkdownTable[] tables =
         getTables(
             "" + "| First Header  |\n" + "| ------------- |\n" + "| Content Cell  |\n" + "\n" + "");
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = tables[0].transposed(1);
     transposed.appendTable(out);
 
@@ -104,7 +41,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 + "[  ]\n"
                 + "");
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = tables[0].transposed(1);
     transposed.appendTable(out);
 
@@ -133,7 +70,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 + "[Table Caption]\n"
                 + "");
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = tables[0].transposed(0);
     transposed.appendTable(out);
 
@@ -164,7 +101,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 + "[Table Caption]\n"
                 + "");
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = tables[0].transposed(1);
     transposed.appendTable(out);
 
@@ -194,7 +131,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 + "[Table Caption]\n"
                 + "");
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = tables[0].transposed(2);
     transposed.appendTable(out);
 
@@ -224,7 +161,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 + "[Table Caption]\n"
                 + "");
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = tables[0].transposed(3);
     transposed.appendTable(out);
 
@@ -254,7 +191,7 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
                 + "[Table Caption]\n"
                 + "");
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = tables[0].transposed(4);
     transposed.appendTable(out);
 
@@ -284,9 +221,9 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
     int pos = markdown.indexOf("^");
     CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
     BasedSequence source = BasedSequence.of(charSequence);
-    MarkdownTable table = getTable(source, formatOptions("", null));
+    MarkdownTable table = getTable(source, formatOptions(null));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
-    HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+    HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = table.transposed(1);
     transposed.appendTable(out);
     String transposedTable = out.toString(0, 0);
@@ -332,9 +269,9 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
     int pos = markdown.indexOf("^");
     CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
     BasedSequence source = BasedSequence.of(charSequence);
-    MarkdownTable table = getTable(source, formatOptions("", null));
+    MarkdownTable table = getTable(source, formatOptions(null));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
-    HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+    HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = table.transposed(1);
     transposed.appendTable(out);
     String transposedTable = out.toString(0, 0);
@@ -380,9 +317,9 @@ public class MarkdownTransposeTableTest extends MarkdownTableTestBase {
     int pos = markdown.indexOf("^");
     CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
     BasedSequence source = BasedSequence.of(charSequence);
-    MarkdownTable table = getTable(source, formatOptions("", null));
+    MarkdownTable table = getTable(source, formatOptions(null));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
-    HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+    HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     MarkdownTable transposed = table.transposed(1);
     transposed.appendTable(out);
     String transposedTable = out.toString(0, 0);

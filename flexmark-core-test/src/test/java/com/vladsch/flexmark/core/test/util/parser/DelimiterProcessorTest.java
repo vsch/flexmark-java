@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
-public final class DelimiterProcessorTest extends RenderingTestCase {
+public class DelimiterProcessorTest extends RenderingTestCase {
   private static final DataHolder OPTIONS =
       new MutableDataSet().set(TestUtils.NO_FILE_EOL, false).toImmutable();
   private static final Parser PARSER =
@@ -226,12 +226,6 @@ public final class DelimiterProcessorTest extends RenderingTestCase {
       return new BasedSequence[] {openingMarker, text, closingMarker};
     }
 
-    public UpperCaseNode() {}
-
-    public UpperCaseNode(BasedSequence chars) {
-      super(chars);
-    }
-
     public UpperCaseNode(
         BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
       super(
@@ -242,26 +236,32 @@ public final class DelimiterProcessorTest extends RenderingTestCase {
       this.closingMarker = closingMarker;
     }
 
+    @Override
     public BasedSequence getOpeningMarker() {
       return openingMarker;
     }
 
+    @Override
     public void setOpeningMarker(BasedSequence openingMarker) {
       this.openingMarker = openingMarker;
     }
 
+    @Override
     public BasedSequence getText() {
       return text;
     }
 
+    @Override
     public void setText(BasedSequence text) {
       this.text = text;
     }
 
+    @Override
     public BasedSequence getClosingMarker() {
       return closingMarker;
     }
 
+    @Override
     public void setClosingMarker(BasedSequence closingMarker) {
       this.closingMarker = closingMarker;
     }
@@ -273,12 +273,12 @@ public final class DelimiterProcessorTest extends RenderingTestCase {
     @NotNull
     @Override
     public NodeRenderer apply(@NotNull DataHolder options) {
-      return new UpperCaseNodeRenderer(options);
+      return new UpperCaseNodeRenderer();
     }
   }
 
   private static class UpperCaseNodeRenderer implements NodeRenderer {
-    UpperCaseNodeRenderer(DataHolder options) {}
+    UpperCaseNodeRenderer() {}
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {

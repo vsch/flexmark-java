@@ -113,7 +113,6 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     public void render(@NotNull Node document, @NotNull Appendable output) {
       BasedSequence input = document.getChars();
       StringBuilder out = new StringBuilder();
-      Boolean inTest = SharedDataKeys.RUNNING_TESTS.get(getOptions());
 
       Pair<BasedSequence, int[]> info = TestUtils.extractMarkup(input);
       BasedSequence sequence = BasedSequence.of(info.getFirst());
@@ -143,7 +142,6 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
       formatter.setKeepHardBreaks(true);
 
       int[] offsets = info.getSecond();
-      SequenceBuilder builder1 = TestUtils.insertCaretMarkup(sequence, offsets);
 
       for (int offset : offsets) {
         char c = EDIT_OP_CHAR.get(options);

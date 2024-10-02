@@ -61,6 +61,7 @@ public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
     return myIncludeExampleInfo;
   }
 
+  @Override
   @NotNull
   public SpecExample getExample() {
     return myExample;

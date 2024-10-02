@@ -107,30 +107,30 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
         }
 
         return BlockContinue.atIndex(state.getIndex());
-      } else {
-        if (inLiteral) {
-          matcher = REGEX_METADATA_LITERAL.matcher(line);
-          if (matcher.matches()) {
-            if (currentValues.size() == 1) {
-              BasedSequence combined =
-                  SegmentedSequence.create(
-                      currentValues.get(0),
-                      PrefixedSubSequence.prefixOf(
-                          "\n", line.subSequence(matcher.start(1), matcher.end(1)).trim()));
-              currentValues.set(0, combined);
-            } else {
-              currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)).trim());
-            }
-          }
-        } else {
-          matcher = REGEX_METADATA_LIST.matcher(line);
-          if (matcher.matches()) {
-            currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)));
+      }
+
+      if (inLiteral) {
+        matcher = REGEX_METADATA_LITERAL.matcher(line);
+        if (matcher.matches()) {
+          if (currentValues.size() == 1) {
+            BasedSequence combined =
+                SegmentedSequence.create(
+                    currentValues.get(0),
+                    PrefixedSubSequence.prefixOf(
+                        "\n", line.subSequence(matcher.start(1), matcher.end(1)).trim()));
+            currentValues.set(0, combined);
+          } else {
+            currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)).trim());
           }
         }
-
-        return BlockContinue.atIndex(state.getIndex());
+      } else {
+        matcher = REGEX_METADATA_LIST.matcher(line);
+        if (matcher.matches()) {
+          currentValues.add(line.subSequence(matcher.start(1), matcher.end(1)));
+        }
       }
+
+      return BlockContinue.atIndex(state.getIndex());
     } else if (REGEX_BEGIN.matcher(line).matches()) {
       inYAMLBlock = true;
       return BlockContinue.atIndex(state.getIndex());

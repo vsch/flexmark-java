@@ -47,6 +47,7 @@ public abstract class IRenderBase implements IRender {
     return out.toString();
   }
 
+  @Override
   @Nullable
   public DataHolder getOptions() {
     return myOptions;

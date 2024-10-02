@@ -270,9 +270,9 @@ public class TestUtils {
   private static <T> MutableDataSet addOption(DataHolder options, DataKey<T> key, T value) {
     if (options == null) {
       return new MutableDataSet().set(key, value);
-    } else {
-      return new MutableDataSet(options).set(key, value);
     }
+
+    return new MutableDataSet(options).set(key, value);
   }
 
   private static void throwIllegalStateException(
@@ -638,12 +638,12 @@ public class TestUtils {
       @NotNull Class<?> resourceClass, @NotNull String resourcePath) {
     if (resourcePath.isEmpty()) {
       throw new IllegalStateException("Empty resource paths not supported");
-    } else {
-      String resolvedResourcePath =
-          getResolvedSpecResourcePath(resourceClass.getName(), resourcePath);
-      URL url = resourceClass.getResource(resolvedResourcePath);
-      return adjustedFileUrl(url);
     }
+
+    String resolvedResourcePath =
+        getResolvedSpecResourcePath(resourceClass.getName(), resourcePath);
+    URL url = resourceClass.getResource(resolvedResourcePath);
+    return adjustedFileUrl(url);
   }
 
   public static ArrayList<Object[]> getTestData(@NotNull ResourceLocation location) {

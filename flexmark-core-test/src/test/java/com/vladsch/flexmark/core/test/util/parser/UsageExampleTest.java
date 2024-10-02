@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import org.junit.Test;
 
-public final class UsageExampleTest {
+public class UsageExampleTest {
   @Test
   public void parseAndRender() {
     Parser parser = Parser.builder().build();
@@ -31,14 +31,13 @@ public final class UsageExampleTest {
 
   static class WordCountVisitor {
     int wordCount = 0;
-
     private final NodeVisitor myVisitor;
 
-    public WordCountVisitor() {
+    WordCountVisitor() {
       myVisitor = new NodeVisitor(new VisitHandler<>(Text.class, WordCountVisitor.this::visit));
     }
 
-    public void countWords(Node node) {
+    void countWords(Node node) {
       myVisitor.visit(node);
     }
 

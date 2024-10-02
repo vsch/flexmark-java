@@ -148,17 +148,17 @@ public class TaskListNodeFormatter implements NodeFormatter {
     if (node instanceof TaskListItem) {
       if (((TaskListItem) node).isOrderedItem()) {
         return taskListFormatOptions.formatOrderedTaskItemPriority;
-      } else {
-        BasedSequence openingMarker = ((ListItem) node).getOpeningMarker();
-        if (openingMarker.length() > 0) {
-          Integer priority =
-              taskListFormatOptions.formatTaskItemPriorities.get(openingMarker.charAt(0));
-          if (priority != null) {
-            return priority;
-          } else {
-            return taskListFormatOptions.formatDefaultTaskItemPriority;
-          }
+      }
+
+      BasedSequence openingMarker = ((ListItem) node).getOpeningMarker();
+      if (openingMarker.length() > 0) {
+        Integer priority =
+            taskListFormatOptions.formatTaskItemPriorities.get(openingMarker.charAt(0));
+        if (priority != null) {
+          return priority;
         }
+
+        return taskListFormatOptions.formatDefaultTaskItemPriority;
       }
     }
     return Integer.MIN_VALUE;

@@ -22,12 +22,12 @@ public final class ComboCoreDirectionalSpecTest extends CoreRendererSpecTest {
           .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
           .set(TestUtils.NO_FILE_EOL, false)
           .toImmutable();
-  ;
 
   public ComboCoreDirectionalSpecTest(@NotNull SpecExample example) {
     super(example, null, OPTIONS);
   }
 
+  @Override
   protected boolean compoundSections() {
     return false;
   }

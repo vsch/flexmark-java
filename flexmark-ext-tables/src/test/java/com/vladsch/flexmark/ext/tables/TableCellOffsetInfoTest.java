@@ -8,6 +8,7 @@ import com.vladsch.flexmark.util.format.TableCellOffsetInfo;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.junit.Test;
 
 public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
@@ -31,10 +32,10 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
     MarkdownTable table =
         getTable(
             source,
-            formatOptions("", null)
+            formatOptions(null)
                 .toMutable()
                 .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
-    HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+    HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     table.appendTable(out);
     String formattedTable = out.toString(0, 0);
     TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
@@ -86,8 +87,8 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
     int pos = markdown.indexOf("^");
     CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
     BasedSequence source = BasedSequence.of(charSequence);
-    MarkdownTable table = getTable(source, formatOptions("", null));
-    HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+    MarkdownTable table = getTable(source, formatOptions(null));
+    HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     table.appendTable(out);
     String formattedTable = out.toString(0, 0);
     TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);
@@ -485,8 +486,8 @@ public class TableCellOffsetInfoTest extends MarkdownTableTestBase {
     int pos = markdown.indexOf("^");
     CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
     BasedSequence source = BasedSequence.of(charSequence);
-    MarkdownTable table = getTable(source, formatOptions("", null));
-    HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+    MarkdownTable table = getTable(source, formatOptions(null));
+    HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     table.appendTable(out);
     String formattedTable = out.toString(0, 0);
     TableCellOffsetInfo offsetInfo = table.getCellOffsetInfo(pos);

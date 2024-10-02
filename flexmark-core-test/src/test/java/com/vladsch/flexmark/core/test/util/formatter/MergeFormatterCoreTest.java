@@ -149,7 +149,7 @@ public class MergeFormatterCoreTest {
     testRefImageCompoundConflict();
   }
 
-  private void testUndefinedRefLinkConflict() {
+  private static void testUndefinedRefLinkConflict() {
     assertMerged(
         "[ref]\n"
             + "\n"
@@ -176,7 +176,7 @@ public class MergeFormatterCoreTest {
     testUndefinedRefLinkConflict();
   }
 
-  private void testUndefinedRefImageConflict() {
+  private static void testUndefinedRefImageConflict() {
     assertMerged(
         "[img]\n"
             + "\n"
@@ -203,7 +203,7 @@ public class MergeFormatterCoreTest {
     testUndefinedRefImageConflict();
   }
 
-  private void testReferenceMapping() {
+  private static void testReferenceMapping() {
     assertMerged(
         "[img]\n"
             + "\n"
@@ -232,7 +232,7 @@ public class MergeFormatterCoreTest {
     testReferenceMapping();
   }
 
-  private void testLinkMapping() {
+  private static void testLinkMapping() {
     assertMerged(
         "[img](dir1/img/image.png)\n" + "\n" + "[img](dir2/img/image.png)\n" + "\n",
         new String[] {
@@ -254,7 +254,7 @@ public class MergeFormatterCoreTest {
     testLinkMapping();
   }
 
-  private void testImageMapping() {
+  private static void testImageMapping() {
     assertMerged(
         "![img](dir1/img/image.png)\n" + "\n" + "![img](dir2/img/image.png)\n" + "\n",
         new String[] {
@@ -276,7 +276,7 @@ public class MergeFormatterCoreTest {
     testImageMapping();
   }
 
-  private void testRootReferenceMapping() {
+  private static void testRootReferenceMapping() {
     assertMerged(
         "[img]\n"
             + "\n"
@@ -305,7 +305,7 @@ public class MergeFormatterCoreTest {
     testRootReferenceMapping();
   }
 
-  private void testRootLinkMapping() {
+  private static void testRootLinkMapping() {
     assertMerged(
         "[img](/dir1/img/image.png)\n" + "\n" + "[img](/dir2/img/image.png)\n" + "\n",
         null,
@@ -327,7 +327,7 @@ public class MergeFormatterCoreTest {
     testRootLinkMapping();
   }
 
-  private void testRootImageMapping() {
+  private static void testRootImageMapping() {
     assertMerged(
         "![img](/dir1/img/image.png)\n" + "\n" + "![img](/dir2/img/image.png)\n" + "\n",
         null,
@@ -349,7 +349,7 @@ public class MergeFormatterCoreTest {
     testRootImageMapping();
   }
 
-  private void testHtmlPreservation() {
+  private static void testHtmlPreservation() {
     assertMerged(
         "# Heading {style=\"font-size: 26pt\"}\n"
             + "\n"
@@ -383,7 +383,7 @@ public class MergeFormatterCoreTest {
     testHtmlPreservation();
   }
 
-  private void testHtmlPreservationLink() {
+  private static void testHtmlPreservationLink() {
     assertMerged(
         "[](http://example.com)\n"
             + "\n"
@@ -408,7 +408,7 @@ public class MergeFormatterCoreTest {
     testHtmlPreservationLink();
   }
 
-  private void testHtmlPreservationAutoLink() {
+  private static void testHtmlPreservationAutoLink() {
     assertMerged(
         "<http://example.com>\n"
             + "\n"

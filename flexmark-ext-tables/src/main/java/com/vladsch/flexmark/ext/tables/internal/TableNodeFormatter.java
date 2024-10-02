@@ -194,8 +194,7 @@ public class TableNodeFormatter implements NodeFormatter {
       String dummyCaption = node.hasChildren() ? "dummy" : "";
       String formattedCaption =
           MarkdownTable.formattedCaption(
-              BasedSequence.of(dummyCaption).subSequence(0, ((CharSequence) dummyCaption).length()),
-              options);
+              BasedSequence.of(dummyCaption).subSequence(0, dummyCaption.length()), options);
 
       if (formattedCaption != null) {
         markdown.line().append(node.getOpeningMarker());

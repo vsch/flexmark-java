@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.format.ColumnSort;
 import com.vladsch.flexmark.util.format.MarkdownTable;
 import com.vladsch.flexmark.util.format.TrackedOffset;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.junit.Test;
 
 public class MarkdownSortTableTest extends MarkdownTableTestBase {
@@ -29,9 +30,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(0, false, false, false)}, 0, null);
     sorted.appendTable(out);
@@ -69,9 +70,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(0, false, false, false)}, 0, null);
     sorted.appendTable(out);
@@ -109,9 +110,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, false, false, false)},
@@ -152,9 +153,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, false, false, false)},
@@ -195,9 +196,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, false, false, false)},
@@ -238,9 +239,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(0, true, false, false)}, 0, null);
     sorted.appendTable(out);
@@ -278,9 +279,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(1, false, false, false)}, 0, null);
     sorted.appendTable(out);
@@ -318,9 +319,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(1, true, false, false)}, 0, null);
     sorted.appendTable(out);
@@ -358,9 +359,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(3, false, true, false)},
@@ -401,9 +402,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 |\n"
                 + "| column18 |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, false, true, false)},
@@ -444,9 +445,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 |\n"
                 + "| column18 |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, true, true, false)},
@@ -487,9 +488,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 |\n"
                 + "| column18 |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, false, true, true)},
@@ -530,9 +531,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 |\n"
                 + "| column18 |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, true, true, true)},
@@ -573,9 +574,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 |\n"
                 + "| column18 |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, false, true, false)},
@@ -616,9 +617,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 |\n"
                 + "| column18 |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, true, true, false)},
@@ -659,9 +660,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 |\n"
                 + "| column18 |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, false, true, true)},
@@ -702,9 +703,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 |\n"
                 + "| column18 |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {ColumnSort.columnSort(0, true, true, true)},
@@ -745,9 +746,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column16 | column23 | column37 | column16 | 0x17     | column37 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(3, false, true, true)}, 0, null);
     sorted.appendTable(out);
@@ -785,9 +786,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(3, true, true, false)}, 0, null);
     sorted.appendTable(out);
@@ -825,9 +826,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| column17 | column22 | column36 | column17 | 22       | column36 |\n"
                 + "| column18 | column21 | column35 | 018      | 21       | 043      |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(3, true, true, true)}, 0, null);
     sorted.appendTable(out);
@@ -865,9 +866,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| span11  | value1  |         |\n"
                 + "| span13  | span23  | span33  |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {
@@ -912,9 +913,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| span11  | value1  |         |\n"
                 + "| span13  | span23  | span33  |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {
@@ -959,9 +960,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
                 + "| span11  | value1  |         |\n"
                 + "| span13  | span23  | span33  |\n"
                 + "",
-            formatOptionsAsIs("", null));
+            formatOptionsAsIs(null));
 
-    MarkdownWriter out = new MarkdownWriter(MarkdownWriter.F_FORMAT_ALL);
+    MarkdownWriter out = new MarkdownWriter(LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(
             new ColumnSort[] {
@@ -1009,9 +1010,9 @@ public class MarkdownSortTableTest extends MarkdownTableTestBase {
     int pos = markdown.indexOf("^");
     CharSequence charSequence = markdown.substring(0, pos) + markdown.substring(pos + 1);
     BasedSequence source = BasedSequence.of(charSequence);
-    MarkdownTable table = getTable(source, formatOptionsAsIs("", null));
+    MarkdownTable table = getTable(source, formatOptionsAsIs(null));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
-    HtmlWriter out = new HtmlWriter(0, HtmlWriter.F_FORMAT_ALL);
+    HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     MarkdownTable sorted =
         table.sorted(new ColumnSort[] {ColumnSort.columnSort(1, false, false, false)}, 0, null);
     sorted.appendTable(out);

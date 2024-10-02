@@ -44,6 +44,7 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
    * @param html html used for comparison to expected html
    * @param ast ast used for comparison to expected ast
    */
+  @Override
   public void addFullSpecExample(
       @NotNull SpecExampleRenderer exampleRenderer,
       @NotNull SpecExampleParse exampleParse,

@@ -165,20 +165,20 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
       if (currentIndent >= getContentIndent()) {
         // our child element
         return BlockContinue.atColumn(newColumn);
-      } else {
-        if (isEmpty) {
-          return BlockContinue.atIndex(state.getIndex() + currentIndent);
-        }
+      }
 
-        ItemData itemData = parseItemMarker(options, state, false);
+      if (isEmpty) {
+        return BlockContinue.atIndex(state.getIndex() + currentIndent);
+      }
 
-        if (itemData != null) {
-          return BlockContinue.none();
-        }
+      ItemData itemData = parseItemMarker(options, state, false);
 
-        if (!hadBlankLine) {
-          return BlockContinue.atIndex(state.getIndex() + currentIndent);
-        }
+      if (itemData != null) {
+        return BlockContinue.none();
+      }
+
+      if (!hadBlankLine) {
+        return BlockContinue.atIndex(state.getIndex() + currentIndent);
       }
     } else if (emulationFamily == ParserEmulationProfile.FIXED_INDENT) {
       int currentIndent = state.getIndent();
@@ -189,20 +189,20 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
       if (currentIndent >= options.itemIndent) {
         // our child element
         return BlockContinue.atColumn(newColumn);
-      } else {
-        if (isEmpty) {
-          return BlockContinue.atIndex(state.getIndex() + currentIndent);
-        }
+      }
 
-        ItemData itemData = parseItemMarker(options, state, false);
+      if (isEmpty) {
+        return BlockContinue.atIndex(state.getIndex() + currentIndent);
+      }
 
-        if (itemData != null) {
-          return BlockContinue.none();
-        }
+      ItemData itemData = parseItemMarker(options, state, false);
 
-        if (!hadBlankLine) {
-          return BlockContinue.atIndex(state.getIndex() + currentIndent);
-        }
+      if (itemData != null) {
+        return BlockContinue.none();
+      }
+
+      if (!hadBlankLine) {
+        return BlockContinue.atIndex(state.getIndex() + currentIndent);
       }
     }
     return BlockContinue.none();

@@ -70,10 +70,10 @@ public class DefinitionNodeFormatter implements NodeFormatter {
       case ANY:
         break;
       case COLON:
-        openMarker = BasedSequence.of(":").subSequence(0, ((CharSequence) ":").length());
+        openMarker = BasedSequence.of(":").subSequence(0, ":".length());
         break;
       case TILDE:
-        openMarker = BasedSequence.of("~").subSequence(0, ((CharSequence) "~").length());
+        openMarker = BasedSequence.of("~").subSequence(0, "~".length());
         break;
     }
 

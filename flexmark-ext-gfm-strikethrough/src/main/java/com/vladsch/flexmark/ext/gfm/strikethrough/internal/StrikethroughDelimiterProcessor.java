@@ -66,9 +66,9 @@ public class StrikethroughDelimiterProcessor implements DelimiterProcessor {
       // Use exactly two delimiters even if we have more, and don't care about internal
       // openers/closers.
       return 2;
-    } else {
-      return 0;
     }
+
+    return 0;
   }
 
   @Override

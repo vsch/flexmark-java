@@ -84,62 +84,58 @@ public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase
       protected @NotNull String renderHtml() {
         if (trackedOffsets.isEmpty() && !SHOW_LINE_RANGES.get(myOptions)) {
           return getRenderer().render(getDocument());
-        } else {
-          SequenceBuilder builder = getDocument().getChars().getBuilder();
-          getRenderer().render(getDocument(), builder);
-          String html = builder.toString();
-
-          // NOTE: need to get document since the top node is not guaranteed to be a document for
-          // generic renderer
-          List<TrackedOffset> trackedOffsetList =
-              Formatter.TRACKED_OFFSETS.get(getDocument().getDocument());
-
-          int[] offsets = new int[trackedOffsets.size()];
-          int i = 0;
-
-          for (TrackedOffset trackedOffset : trackedOffsets) {
-            if (trackedOffset.isResolved()) {
-              offsets[i++] = trackedOffset.getIndex();
-            }
-          }
-
-          if (i < offsets.length) {
-            offsets = Arrays.copyOf(offsets, i);
-          }
-
-          String result = TestUtils.insertCaretMarkup(BasedSequence.of(html), offsets).toString();
-
-          if (SHOW_LINE_RANGES.get(myOptions)) {
-            StringBuilder out = new StringBuilder();
-            out.append(result);
-            if (trackedSequence == getDocument().getDocument().getChars()) {
-              TestUtils.appendBanner(out, TestUtils.bannerText("Ranges"), false);
-              out.append(builder.toStringWithRanges(false));
-            } else {
-              if (!trackedOffsets.isEmpty()) {
-                TestUtils.appendBanner(out, TestUtils.bannerText("Tracked Offsets"), false);
-                int i1 = 0;
-                for (TrackedOffset trackedOffset1 : trackedOffsets) {
-                  out.append("[")
-                      .append(i1)
-                      .append("]: ")
-                      .append(trackedOffset1.toString())
-                      .append("\n");
-                  i1++;
-                }
-              }
-              TestUtils.appendBanner(
-                  out, TestUtils.bannerText("Ranges"), !trackedOffsets.isEmpty());
-              BasedSequence sequence = builder.toSequence(trackedSequence);
-              out.append(sequence.getBuilder().append(sequence).toStringWithRanges(false))
-                  .append("\n");
-              TestUtils.appendBanner(out, TestUtils.bannerText("Segments"), false);
-              out.append(sequence.getBuilder().append(sequence).getSegmentBuilder().toString());
-            }
-            result = out.toString();
-          }
-          return result;
         }
+        SequenceBuilder builder = getDocument().getChars().getBuilder();
+        getRenderer().render(getDocument(), builder);
+        String html = builder.toString();
+
+        // NOTE: need to get document since the top node is not guaranteed to be a document for
+        // generic renderer
+
+        int[] offsets = new int[trackedOffsets.size()];
+        int i = 0;
+
+        for (TrackedOffset trackedOffset : trackedOffsets) {
+          if (trackedOffset.isResolved()) {
+            offsets[i++] = trackedOffset.getIndex();
+          }
+        }
+
+        if (i < offsets.length) {
+          offsets = Arrays.copyOf(offsets, i);
+        }
+
+        String result = TestUtils.insertCaretMarkup(BasedSequence.of(html), offsets).toString();
+
+        if (SHOW_LINE_RANGES.get(myOptions)) {
+          StringBuilder out = new StringBuilder();
+          out.append(result);
+          if (trackedSequence == getDocument().getDocument().getChars()) {
+            TestUtils.appendBanner(out, TestUtils.bannerText("Ranges"), false);
+            out.append(builder.toStringWithRanges(false));
+          } else {
+            if (!trackedOffsets.isEmpty()) {
+              TestUtils.appendBanner(out, TestUtils.bannerText("Tracked Offsets"), false);
+              int i1 = 0;
+              for (TrackedOffset trackedOffset1 : trackedOffsets) {
+                out.append("[")
+                    .append(i1)
+                    .append("]: ")
+                    .append(trackedOffset1.toString())
+                    .append("\n");
+                i1++;
+              }
+            }
+            TestUtils.appendBanner(out, TestUtils.bannerText("Ranges"), !trackedOffsets.isEmpty());
+            BasedSequence sequence = builder.toSequence(trackedSequence);
+            out.append(sequence.getBuilder().append(sequence).toStringWithRanges(false))
+                .append("\n");
+            TestUtils.appendBanner(out, TestUtils.bannerText("Segments"), false);
+            out.append(sequence.getBuilder().append(sequence).getSegmentBuilder().toString());
+          }
+          result = out.toString();
+        }
+        return result;
       }
     };
   }

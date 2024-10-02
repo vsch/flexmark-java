@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-public final class DelimitedNodeTest {
+public class DelimitedNodeTest {
   @Test
   public void emphasisDelimiters() {
     String input = "* *emphasis* \n" + "* **strong** \n" + "* _important_ \n" + "* __CRITICAL__ \n";

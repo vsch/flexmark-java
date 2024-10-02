@@ -100,18 +100,6 @@ public class TableJiraRenderer implements NodeRenderer {
     }
   }
 
-  private static String getAlignValue(TableCell.Alignment alignment) {
-    switch (alignment) {
-      case LEFT:
-        return "left";
-      case CENTER:
-        return "center";
-      case RIGHT:
-        return "right";
-    }
-    throw new IllegalStateException("Unknown alignment: " + alignment);
-  }
-
   public static class Factory implements NodeRendererFactory {
     @NotNull
     @Override

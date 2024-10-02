@@ -11,7 +11,7 @@ import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import org.junit.Test;
 
-public final class AbstractVisitorTest {
+public class AbstractVisitorTest {
   @Test
   public void replacingNodeInVisitorShouldNotDestroyVisitOrder() {
     NodeVisitor visitor =

@@ -28,6 +28,7 @@ public final class ComboCoreSpecTest extends CoreRendererSpecTest {
     super(example, null, OPTIONS);
   }
 
+  @Override
   protected boolean compoundSections() {
     return false;
   }
