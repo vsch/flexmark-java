@@ -20,10 +20,10 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class OrderedSet<E> implements Set<E>, Iterable<E> {
+public class OrderedSet<E> implements Set<E> {
   private final @NotNull HashMap<E, Integer> keyMap;
   @NotNull final ArrayList<E> valueList;
-  private @Nullable final CollectionHost<E> host;
+  @Nullable private final CollectionHost<E> host;
   private @Nullable Indexed<E> indexedProxy;
   private @Nullable Indexed<E> allowConcurrentModsIndexedProxy;
   private final @NotNull BitSet validIndices;
@@ -294,7 +294,6 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     ++modificationCount;
 
     // no need they are 0's by default
-    // validIndices.set(start, index + 1);
     while (valueList.size() <= index) valueList.add(null);
   }
 

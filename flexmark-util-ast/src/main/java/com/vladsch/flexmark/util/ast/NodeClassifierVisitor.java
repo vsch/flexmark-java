@@ -20,7 +20,6 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
       new CopyOnWriteRef<>(
           new BitSet(), value -> value != null ? (BitSet) value.clone() : new BitSet());
 
-  private static final BitSet EMPTY_SET = new BitSet();
   private boolean isClassificationDone = false;
 
   private final ClassifyingNodeTracker classifyingNodeTracker;
@@ -116,7 +115,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
       }
 
       if (exclusionSet != null && !exclusionSet.isEmpty()) {
-        Iterator<Class<?>> iterator = ((Set<Class<?>>) exclusionSet).iterator();
+        Iterator<Class<?>> iterator = exclusionSet.iterator();
 
         while (iterator.hasNext()) {
           Class<?> nodeType = iterator.next();

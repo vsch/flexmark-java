@@ -87,7 +87,7 @@ public class CollectionHostValidator<T> {
     return this;
   }
 
-  private String hostName(String host) {
+  private static String hostName(String host) {
     return host.trim().isEmpty() ? "" : "" + host + ".";
   }
 
@@ -165,7 +165,7 @@ public class CollectionHostValidator<T> {
   }
 
   public CollectionHost<T> getHost(String host) {
-    return new CollectionHost<T>() {
+    return new CollectionHost<>() {
       @Override
       public void adding(int index, @Nullable T s, @Nullable Object v) {
         validate(hostName(host) + "adding", index, s, v);
@@ -203,7 +203,7 @@ public class CollectionHostValidator<T> {
     };
   }
 
-  private String prepareMessage(String callBack, Object... params) {
+  private static String prepareMessage(String callBack, Object... params) {
     StringBuilder out = new StringBuilder();
     out.append(' ').append(callBack).append('(');
     boolean first = true;

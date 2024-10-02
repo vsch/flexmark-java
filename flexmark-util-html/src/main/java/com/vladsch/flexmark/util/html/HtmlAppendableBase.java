@@ -250,7 +250,7 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
   @NotNull
   @Override
   public List<String> getOpenTagsAfterLast(@NotNull CharSequence latestTag) {
-    if (openTags.isEmpty()) return Collections.EMPTY_LIST;
+    if (openTags.isEmpty()) return Collections.emptyList();
 
     List<String> tagList = new ArrayList<>(openTags);
     int iMax = tagList.size();

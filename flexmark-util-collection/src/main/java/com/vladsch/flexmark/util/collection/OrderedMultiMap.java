@@ -115,7 +115,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
   public Indexed<Map.Entry<K, V>> getIndexedProxy() {
     if (indexedProxy != null) return indexedProxy;
     indexedProxy =
-        new Indexed<Map.Entry<K, V>>() {
+        new Indexed<>() {
           @Override
           public Map.Entry<K, V> get(int index) {
             return OrderedMultiMap.this.getEntry(index);
@@ -592,23 +592,13 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return bitSet;
   }
 
-  private BitSet getKeyValueIntersectionSet() {
-    BitSet bitSet = new BitSet(keySet.size());
-    bitSet.or(keySet.getValidIndices());
-    bitSet.and(valueSet.getValidIndices());
-    return bitSet;
-  }
-
-  /*
-   * Iterable
-   */
-
   @NotNull
   @Override
   public Iterator<Map.Entry<K, V>> iterator() {
     return entrySetIterator();
   }
 
+  @Override
   public void forEach(Consumer<? super Entry<K, V>> consumer) {
     Iterator<Map.Entry<K, V>> iterator = entrySetIterator();
     while (iterator.hasNext()) {

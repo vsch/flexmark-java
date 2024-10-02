@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class BasedOffsetTrackerTest {
-  Pair<String, Integer> getInput(String input) {
+  private static Pair<String, Integer> getInput(String input) {
     int pos = input.indexOf("⦙");
     if (pos >= 0) {
       return Pair.of(input.substring(0, pos) + input.substring(pos + 1), pos);
@@ -20,20 +20,19 @@ public class BasedOffsetTrackerTest {
     return Pair.of(input, 0);
   }
 
-  String getResult(String actual, OffsetInfo result) {
+  private static String getResult(String actual, OffsetInfo result) {
     if (result.isEndOffset == (result.startIndex == result.endIndex)) {
       int index = result.startIndex;
       return actual.substring(0, index) + "⦙" + actual.substring(index);
-    } else {
-      return actual.substring(0, result.startIndex)
-          + "⟦"
-          + actual.substring(result.startIndex, result.endIndex)
-          + "⟧"
-          + actual.substring(result.endIndex);
     }
+    return actual.substring(0, result.startIndex)
+        + "⟦"
+        + actual.substring(result.startIndex, result.endIndex)
+        + "⟧"
+        + actual.substring(result.endIndex);
   }
 
-  BasedSequence wrapText(String input, int margin) {
+  private static BasedSequence wrapText(String input, int margin) {
     Pair<String, Integer> info = getInput(input);
     BasedSequence sequence = BasedSequence.of(info.getFirst());
 
@@ -57,14 +56,14 @@ public class BasedOffsetTrackerTest {
     return formatter.wrapTextNotTracked();
   }
 
-  String wrapText(String input, boolean isEndOffset, int margin) {
+  private static String wrapText(String input, boolean isEndOffset, int margin) {
     BasedSequence actual = wrapText(input, margin);
     Pair<String, Integer> info1 = getInput(input);
     BasedSequence sequence1 = BasedSequence.of(info1.getFirst());
     return resolveOffset(sequence1, actual, info1.getSecond(), isEndOffset);
   }
 
-  String wrapText(
+  private static String wrapText(
       String input,
       boolean isEndOffset,
       int margin,
@@ -75,7 +74,7 @@ public class BasedOffsetTrackerTest {
     return resolveOffset(sequence1, actual, info1.getSecond(), isEndOffset);
   }
 
-  String resolveOffset(
+  private static String resolveOffset(
       BasedSequence sequence, BasedSequence actual, int offset, boolean isEndOffset) {
     SequenceBuilder builder = sequence.getBuilder();
     actual.addSegments(builder.getSegmentBuilder());

@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -138,20 +138,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   @Override
   public int noAnchorsSize() {
     return size() - anchorsSize;
-  }
-
-  private int computeLength() {
-    int length = 0;
-    int iMax = partsSize;
-    for (int i = 0; i < iMax; i++) {
-      Seg part = getSeg(i);
-      length += part.length();
-    }
-
-    if (haveDanglingText()) {
-      length += text.length() - immutableOffset;
-    }
-    return length;
   }
 
   @Override
@@ -379,7 +365,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
       int segEnd,
       boolean resolveOverlap,
       boolean nullNextRange,
-      @NotNull Function<Object[], Object[]> transform) {
+      @NotNull UnaryOperator<Object[]> transform) {
     CharSequence text = this.text.subSequence(immutableOffset, this.text.length());
 
     Seg lastSeg = lastSegOrNull();
@@ -509,6 +495,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
    * @param offset offset in original sequence
    * @return this
    */
+  @Override
   @NotNull
   public S appendAnchor(int offset) {
     return append(offset, offset);
@@ -521,6 +508,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
    * @param range range in original sequence
    * @return this
    */
+  @Override
   @NotNull
   public S append(@NotNull Range range) {
     return append(range.getStart(), range.getEnd());
@@ -534,6 +522,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
    * @param endOffset end offset in original sequence
    * @return this
    */
+  @Override
   @NotNull
   public S append(int startOffset, int endOffset) {
     if (endOffset < 0 || startOffset > endOffset)
@@ -590,6 +579,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return (S) this;
   }
 
+  @Override
   @NotNull
   public S append(@NotNull CharSequence text) {
     int length = text.length();
@@ -634,7 +624,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
       @NotNull CharSequence chars,
       @NotNull CharSequence rangePrefix,
       @NotNull CharSequence rangeSuffix,
-      @NotNull Function<CharSequence, CharSequence> textMapper) {
+      @NotNull UnaryOperator<CharSequence> textMapper) {
     if (endOffset > chars.length()) {
       throw new IllegalArgumentException(
           "baseSequence length() must be at least " + endOffset + ", got: " + chars.length());
@@ -666,19 +656,22 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return out.toString();
   }
 
+  @Override
   @NotNull
   public String toStringWithRangesVisibleWhitespace(@NotNull CharSequence chars) {
     return toString(chars, "⟦", "⟧", SequenceUtils::toVisibleWhitespaceString);
   }
 
+  @Override
   @NotNull
   public String toStringWithRanges(@NotNull CharSequence chars) {
-    return toString(chars, "⟦", "⟧", Function.identity());
+    return toString(chars, "⟦", "⟧", UnaryOperator.identity());
   }
 
+  @Override
   @NotNull
   public String toString(@NotNull CharSequence chars) {
-    return toString(chars, "", "", Function.identity());
+    return toString(chars, "", "", UnaryOperator.identity());
   }
 
   public String toStringPrep() {

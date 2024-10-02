@@ -131,7 +131,6 @@ public class MarkdownParagraphTest {
     formatter.setKeepSoftBreaks(false); // cannot keep line breaks when formatting as you type
     formatter.setKeepHardBreaks(true);
 
-    CharPredicate specialChars = CharPredicate.anyOf("*+-:~#");
     formatter.setLeadInHandlers(Collections.singletonList(SpecialLeadInCharsHandler.create('#')));
 
     BasedSequence actual = formatter.wrapTextNotTracked();

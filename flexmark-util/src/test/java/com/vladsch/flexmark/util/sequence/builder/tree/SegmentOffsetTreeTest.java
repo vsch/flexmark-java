@@ -83,9 +83,6 @@ public class SegmentOffsetTreeTest {
 
       if (offset >= 0) {
         if (seg == null || seg.offsetNotInSegment(offset)) {
-          if (offset == 6) {
-            int tmp = 0;
-          }
           seg = segOffsetTree.findSegmentByOffset(offset, sequence, seg);
         }
 
@@ -340,7 +337,6 @@ public class SegmentOffsetTreeTest {
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
-      //            if (!trim.isEmpty()) segments.append("  ");
       segments.append(trim.getSourceRange());
       segments.append("\n");
     }

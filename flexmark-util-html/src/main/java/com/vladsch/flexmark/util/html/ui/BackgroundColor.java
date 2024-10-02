@@ -20,6 +20,7 @@ package com.vladsch.flexmark.util.html.ui;
 import java.awt.Color;
 
 public class BackgroundColor extends Color {
+  private static final long serialVersionUID = 1L;
   public static final BackgroundColor NULL = new BackgroundColor(new Color(0, true));
   public static final BackgroundColor WHITE = new BackgroundColor(Color.WHITE);
   public static final BackgroundColor LIGHT_GRAY = new BackgroundColor(Color.LIGHT_GRAY);

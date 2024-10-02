@@ -60,6 +60,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     return result;
   }
 
+  @Override
   @Nullable
   public Node peek() {
     return iterator.peek();
@@ -74,6 +75,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     result = null;
   }
 
+  @Override
   public void forEachRemaining(@NotNull Consumer<? super Node> consumer) {
     while (hasNext()) {
       consumer.accept(next());

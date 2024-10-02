@@ -6,71 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Utils {
-  public static <T> T ifNull(T receiver, T altValue) {
-    return (receiver == null) ? altValue : receiver;
-  }
-
-  public static <T> T ifNullOr(T receiver, boolean condition, T altValue) {
-    return (receiver == null || condition) ? altValue : receiver;
-  }
-
-  public static <T> T ifNullOrNot(T receiver, boolean condition, T altValue) {
-    return receiver == null || !condition ? altValue : receiver;
-  }
-
-  public static <T> T ifNullOr(T receiver, Function<T, Boolean> condition, T altValue) {
-    return (receiver == null || condition.apply(receiver)) ? altValue : receiver;
-  }
-
-  public static <T> T ifNullOrNot(T receiver, Function<T, Boolean> condition, T altValue) {
-    return (receiver == null || !condition.apply(receiver)) ? altValue : receiver;
-  }
-
-  public static String ifNullOrEmpty(String receiver, String altValue) {
-    return (receiver == null || receiver.isEmpty()) ? altValue : receiver;
-  }
-
-  public static String ifNullOrBlank(String receiver, String altValue) {
-    return (receiver == null || isBlank(receiver)) ? altValue : receiver;
-  }
-
-  public static String ifEmpty(String receiver, String arg) {
-    if (receiver != null && !receiver.isEmpty()) return receiver;
-    return arg;
-  }
-
-  public static String ifEmpty(String receiver, String ifEmptyArg, String ifNotEmptyArg) {
-    return (receiver == null || receiver.isEmpty()) ? ifEmptyArg : ifNotEmptyArg;
-  }
-
-  public static String ifEmptyNullArgs(String receiver, String ifEmptyArg, String ifNotEmptyArg) {
-    return (receiver == null || receiver.isEmpty()) ? ifEmptyArg : ifNotEmptyArg;
-  }
-
-  public static String ifEmpty(String receiver, Supplier<String> arg) {
-    if (receiver != null && !receiver.isEmpty()) return receiver;
-    return arg.get();
-  }
-
-  public static String ifEmpty(
-      String receiver, Supplier<String> ifEmptyArg, Supplier<String> ifNotEmptyArg) {
-    return (receiver == null || receiver.isEmpty()) ? ifEmptyArg.get() : ifNotEmptyArg.get();
-  }
-
   public static boolean isBlank(String receiver) {
     return receiver == null || receiver.trim().isEmpty();
   }
@@ -97,10 +37,6 @@ public class Utils {
     return (receiver == null || receiver.isEmpty()) ? "" : prefix + receiver + suffix;
   }
 
-  public static String wrapWith(String receiver, String prefixSuffix) {
-    return wrapWith(receiver, prefixSuffix, prefixSuffix);
-  }
-
   public static String wrapWith(String receiver, String prefix, String suffix) {
     return (receiver == null || receiver.isEmpty())
         ? ""
@@ -111,11 +47,7 @@ public class Utils {
     return suffixWith(receiver, suffix, false);
   }
 
-  public static String suffixWithEol(String receiver) {
-    return suffixWith(receiver, '\n', false);
-  }
-
-  public static String suffixWith(String receiver, char suffix, boolean ignoreCase) {
+  private static String suffixWith(String receiver, char suffix, boolean ignoreCase) {
     if (receiver != null
         && !receiver.isEmpty()
         && !endsWith(receiver, String.valueOf(suffix), ignoreCase)) {
@@ -128,7 +60,7 @@ public class Utils {
     return suffixWith(receiver, suffix, false);
   }
 
-  public static String suffixWith(String receiver, String suffix, boolean ignoreCase) {
+  private static String suffixWith(String receiver, String suffix, boolean ignoreCase) {
     if (receiver != null
         && !receiver.isEmpty()
         && suffix != null
@@ -165,19 +97,11 @@ public class Utils {
     return orEmpty(receiver);
   }
 
-  public static boolean isIn(String receiver, String... list) {
-    if (receiver == null) return false;
-    for (String item : list) {
-      if (receiver.equals(item)) return true;
-    }
-    return false;
-  }
-
-  public static boolean endsWith(String receiver, String... needles) {
+  private static boolean endsWith(String receiver, String... needles) {
     return endsWith(receiver, false, needles);
   }
 
-  public static boolean endsWith(String receiver, boolean ignoreCase, String... needles) {
+  private static boolean endsWith(String receiver, boolean ignoreCase, String... needles) {
     if (receiver == null) return false;
 
     if (ignoreCase) {
@@ -260,15 +184,6 @@ public class Utils {
     }
   }
 
-  public static String urlEncode(String receiver, String charSet) {
-    try {
-      return URLEncoder.encode(receiver, charSet != null ? charSet : "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      // e.printStackTrace()
-      return orEmpty(receiver);
-    }
-  }
-
   public static String removePrefix(String receiver, char prefix) {
     if (receiver != null) {
       if (receiver.startsWith(String.valueOf(prefix))) {
@@ -344,13 +259,6 @@ public class Utils {
     return "";
   }
 
-  public static <T> List<? extends T> stringSorted(
-      Collection<? extends T> receiver, Function<T, String> stringer) {
-    ArrayList<? extends T> result = new ArrayList<T>(receiver);
-    result.sort(Comparator.comparing(stringer));
-    return result;
-  }
-
   public static String regexGroup(String receiver) {
     return "(?:" + orEmpty(receiver) + ")";
   }
@@ -375,7 +283,7 @@ public class Utils {
     return true;
   }
 
-  public static boolean endsWith(CharSequence receiver, String suffix, boolean ignoreCase) {
+  private static boolean endsWith(CharSequence receiver, String suffix, boolean ignoreCase) {
     return receiver.length() >= suffix.length()
         && regionMatches(
             receiver, receiver.length() - suffix.length(), suffix, 0, suffix.length(), ignoreCase);
@@ -395,33 +303,6 @@ public class Utils {
       result.append(elem);
     }
     return result.toString();
-  }
-
-  /**
-   * Longest Common Prefix for a set of strings
-   *
-   * @param s array of strings or null
-   * @return longest common prefix
-   */
-  public static String getLongestCommonPrefix(String... s) {
-    if (s == null || s.length == 0) return "";
-    if (s.length == 1) return s[0];
-
-    String s0 = s[0];
-    int iMax = s0.length();
-    int jMax = s.length;
-
-    for (int j = 1; j < jMax; j++) {
-      iMax = Math.min(s[j].length(), iMax);
-    }
-
-    for (int i = 0; i < iMax; i++) {
-      char c = s0.charAt(i);
-      for (int j = 1; j < jMax; j++) {
-        if (s[j].charAt(i) != c) return s0.substring(0, i);
-      }
-    }
-    return s0.substring(0, iMax);
   }
 
   public static String getAbbreviatedText(String text, int maxLength) {
@@ -473,17 +354,6 @@ public class Utils {
     }
     sb.append(suffix);
     return sb.toString();
-  }
-
-  public static String repeat(String text, int repeatCount) {
-    if (repeatCount > 0) {
-      StringBuilder sb = new StringBuilder(text.length() * repeatCount);
-      while (repeatCount-- > 0) {
-        sb.append(text);
-      }
-      return sb.toString();
-    }
-    return "";
   }
 
   /*
@@ -562,45 +432,8 @@ public class Utils {
     else return i1.compareTo(i2);
   }
 
-  public static <K, V> V putIfMissing(Map<K, V> receiver, K key, Supplier<V> value) {
-    V elem = receiver.get(key);
-
-    if (elem == null) {
-      elem = value.get();
-      receiver.put(key, elem);
-    }
-    return elem;
-  }
-
-  public static <K, V> Map<K, V> withDefaults(Map<K, V> receiver, Map<K, V> defaults) {
-    HashMap<K, V> map = new HashMap<>(receiver);
-    for (Map.Entry<K, V> entry : defaults.entrySet()) {
-      putIfMissing(map, entry.getKey(), entry::getValue);
-    }
-    return map;
-  }
-
-  public static <K, V> void removeIf(
-      Map<K, V> receiver, Function<Map.Entry<K, V>, Boolean> removeFilter) {
-    ArrayList<K> keys = new ArrayList<>();
-    for (Map.Entry<K, V> entry : receiver.entrySet()) {
-      if (removeFilter.apply(entry)) {
-        keys.add(entry.getKey());
-      }
-    }
-
-    for (K key : keys) {
-      receiver.remove(key);
-    }
-  }
-
-  public static <K, V> void removeIf(Map<K, V> receiver, BiFunction<K, V, Boolean> removeFilter) {
-    removeIf(receiver, entry -> removeFilter.apply(entry.getKey(), entry.getValue()));
-  }
-
-  public static void streamAppend(StringBuilder sb, InputStream inputStream) {
-    BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-    try {
+  private static void streamAppend(StringBuilder sb, InputStream inputStream) {
+    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
       while (true) {
         String line = br.readLine();
         if (line == null) {
@@ -611,12 +444,6 @@ public class Utils {
       }
     } catch (IOException e) {
       e.printStackTrace();
-    } finally {
-      try {
-        br.close();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
     }
   }
 
@@ -632,16 +459,6 @@ public class Utils {
     if (param == null) return "null";
     StringBuilder out = new StringBuilder();
     escapeJavaString(out, param);
-    return out.toString();
-  }
-
-  @NotNull
-  public static String quoteJavaString(@Nullable CharSequence param) {
-    if (param == null) return "null";
-    StringBuilder out = new StringBuilder();
-    out.append("\"");
-    escapeJavaString(out, param);
-    out.append("\"");
     return out.toString();
   }
 
@@ -679,32 +496,6 @@ public class Utils {
           }
           break;
       }
-    }
-  }
-
-  public static <T> T getOrNull(@NotNull List<T> list, int index) {
-    if (index >= 0 && index < list.size()) {
-      return list.get(index);
-    }
-    return null;
-  }
-
-  public static <T, S extends T> S getOrNull(
-      @NotNull List<T> list, int index, Class<S> elementClass) {
-    if (index >= 0 && index < list.size()) {
-      T value = list.get(index);
-      //noinspection unchecked
-      return elementClass.isInstance(value) ? (S) value : null;
-    }
-    return null;
-  }
-
-  public static <T> T setOrAdd(@NotNull List<T> list, int index, T value) {
-    if (index == list.size()) {
-      list.add(value);
-      return null;
-    } else {
-      return list.set(index, value);
     }
   }
 }

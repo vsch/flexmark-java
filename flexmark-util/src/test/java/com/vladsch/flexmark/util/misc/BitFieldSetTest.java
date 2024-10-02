@@ -416,7 +416,7 @@ public class BitFieldSetTest {
     };
 
     Iterator<IntSet> iterator = bitFields.iterator();
-    int i = 0;
+
     while (iterator.hasNext()) {
       IntSet fields = iterator.next();
       if (fields == IntSet.VALUE_17) {

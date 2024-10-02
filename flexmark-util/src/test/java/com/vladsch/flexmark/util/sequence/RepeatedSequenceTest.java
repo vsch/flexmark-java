@@ -27,12 +27,11 @@ import org.junit.Test;
 
 public class RepeatedSequenceTest {
   @Test
-  public void test_basic() throws Exception {
+  public void test_basic() {
     String orig = "abcdef";
-    String result = orig;
 
     CharSequence test = RepeatedSequence.repeatOf(orig, 2);
-    result = orig + orig;
+    String result = orig + orig;
     assertEquals(result, test.toString());
     assertEquals(result.length(), test.length());
     assertEquals(result.hashCode(), test.hashCode());
@@ -41,12 +40,11 @@ public class RepeatedSequenceTest {
   }
 
   @Test
-  public void test_partial() throws Exception {
+  public void test_partial() {
     String orig = "abcdef";
-    String result = orig;
 
     CharSequence test = RepeatedSequence.repeatOf(orig, 3, orig.length() + 3);
-    result = orig.substring(3) + orig.substring(0, 3);
+    String result = orig.substring(3) + orig.substring(0, 3);
     assertEquals(result, test.toString());
     assertEquals(result.length(), test.length());
     assertEquals(result.hashCode(), test.hashCode());
@@ -62,14 +60,14 @@ public class RepeatedSequenceTest {
     test_charAt(result, test);
   }
 
-  private void test_charAt(String result, CharSequence chars) throws Exception {
+  private static void test_charAt(String result, CharSequence chars) {
     int iMax = result.length();
     for (int i = 0; i < iMax; i++) {
       assertEquals(String.valueOf(result.charAt(i)), String.valueOf(chars.charAt(i)));
     }
   }
 
-  private void test_subSequence(String result, CharSequence chars) throws Exception {
+  private static void test_subSequence(String result, CharSequence chars) {
     int iMax = result.length();
     for (int i = 0; i < iMax; i++) {
       for (int j = iMax - i - 1; j >= 0 && j >= i; j--) {

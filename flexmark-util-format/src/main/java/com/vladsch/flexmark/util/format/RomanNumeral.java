@@ -97,7 +97,7 @@ public class RomanNumeral {
     num = arabic;
   }
 
-  private int letterToNumber(char letter) {
+  private static int letterToNumber(char letter) {
     // Find the integer value of letter considered as a Roman numeral.  Return
     // -1 if letter is not a legal Roman numeral.  The letter must be upper case.
     switch (letter) {
@@ -120,14 +120,15 @@ public class RomanNumeral {
     }
   }
 
+  @Override
   public String toString() {
     // Return the standard representation of this Roman numeral.
     StringBuilder roman = new StringBuilder();
-    int N = num;
+    int n = num;
     for (int i = 0; i < numbers.length; i++) {
-      while (N >= numbers[i]) {
+      while (n >= numbers[i]) {
         roman.append(letters[i]);
-        N -= numbers[i];
+        n -= numbers[i];
       }
     }
     return roman.toString();

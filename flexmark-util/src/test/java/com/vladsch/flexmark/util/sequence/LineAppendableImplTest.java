@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.sequence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
@@ -21,9 +20,7 @@ public class LineAppendableImplTest {
             SequenceBuilder.emptyBuilder(sequence),
             LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
 
-    for (LineInfo info : fa) {
-      fail();
-    }
+    Assert.assertFalse(fa.iterator().hasNext());
   }
 
   @Test
@@ -603,8 +600,6 @@ public class LineAppendableImplTest {
         .closePreFormatted()
         .append("</div>")
         .unIndent();
-    // assertEquals("  <p>this is a paragraph <div style=''>    some text\n    some more text\n
-    // </div>\n", fa.toString(0));
     assertEquals(3, fa.getLineCountWithPending());
 
     fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
@@ -617,8 +612,6 @@ public class LineAppendableImplTest {
         .closePreFormatted()
         .append("</div>")
         .unIndent();
-    // assertEquals("  <p>this is a paragraph\n  <div style=''>    some text\n    some more text\n
-    // </div>\n", fa.toString(0));
     assertEquals(4, fa.getLineCountWithPending());
 
     fa = new LineAppendableImpl(LineAppendable.F_FORMAT_ALL).setIndentPrefix(indent);
@@ -671,7 +664,6 @@ public class LineAppendableImplTest {
         saved & ~(LineAppendable.F_COLLAPSE_WHITESPACE | LineAppendable.F_TRIM_LEADING_WHITESPACE));
     fa.append("  abc");
     fa.setOptions(saved);
-    //        assertEquals("  abc\n", fa.toString(0));
 
     fa.append("     def\n");
     assertEquals("  abc def\n", fa.toString(0, 0));
@@ -1705,7 +1697,6 @@ public class LineAppendableImplTest {
         new LineAppendableImpl(
             SequenceBuilder.emptyBuilder(sequence),
             LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
-    SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     fa.append(sequence.subSequence(0, 9)).line();
     fa.append(sequence.subSequence(10, 19)).blankLine();
@@ -1878,7 +1869,6 @@ public class LineAppendableImplTest {
         new LineAppendableImpl(
             SequenceBuilder.emptyBuilder(sequence),
             LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
-    SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     fa.append(sequence.subSequence(0, 9)).line();
     fa.blankLine(0);
@@ -1905,7 +1895,6 @@ public class LineAppendableImplTest {
         new LineAppendableImpl(
             SequenceBuilder.emptyBuilder(sequence),
             LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
-    SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     fa.append(sequence.subSequence(0, 9)).line();
     fa.append(sequence.subSequence(10, 19)).blankLine();
@@ -1987,7 +1976,6 @@ public class LineAppendableImplTest {
         new LineAppendableImpl(
             SequenceBuilder.emptyBuilder(sequence),
             LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
-    SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     fa.append(sequence.subSequence(0, 9)).line();
     fa.append(sequence.subSequence(10, 19)).blankLine();
@@ -2021,7 +2009,6 @@ public class LineAppendableImplTest {
         new LineAppendableImpl(
             SequenceBuilder.emptyBuilder(sequence),
             LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
-    SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     fa.setPrefix("> ");
     fa.append(sequence.subSequence(0, 9)).line();
@@ -2056,7 +2043,6 @@ public class LineAppendableImplTest {
         new LineAppendableImpl(
             SequenceBuilder.emptyBuilder(sequence),
             LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
-    SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     fa.append(sequence.subSequence(0, 10)).line();
     fa.append(sequence.subSequence(10, 19)).line();
@@ -2086,7 +2072,6 @@ public class LineAppendableImplTest {
         new LineAppendableImpl(
             SequenceBuilder.emptyBuilder(sequence),
             LineAppendable.F_FORMAT_ALL | LineAppendable.F_TRIM_LEADING_WHITESPACE);
-    SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     fa.setPrefix("> ");
     fa.append(sequence.subSequence(0, 9)).line();

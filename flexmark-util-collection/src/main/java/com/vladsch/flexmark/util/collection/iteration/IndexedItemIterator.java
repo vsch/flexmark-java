@@ -76,6 +76,7 @@ public class IndexedItemIterator<R> implements ReversibleIndexedIterator<R> {
     return last;
   }
 
+  @Override
   public void forEachRemaining(@NotNull Consumer<? super R> consumer) {
     while (hasNext()) {
       consumer.accept(next());

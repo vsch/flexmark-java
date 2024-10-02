@@ -197,8 +197,6 @@ public class CharPredicateTest {
     CharPredicate test1 = standardOrAnyOf('a', 'b', 'c', 'd');
     CharPredicate test2 = standardOrAnyOf('0', '1', '2', '3');
 
-    CharPredicate test3 = standardOrAnyOf('a', 'b', 'd', 'd');
-
     assertTrue(test1.test('a'));
     assertTrue(test1.test('b'));
     assertTrue(test1.test('c'));

@@ -14,12 +14,11 @@ public class MappedRichSequenceTest {
     String input = "\u0000\n123456789\u0000\nabcdefghij\n\u0000";
     String encodedInput = "\uFFFD\n123456789\uFFFD\nabcdefghij\n\uFFFD";
 
-    IRichSequence sequence = RichSequence.of(input, 0, ((CharSequence) input).length());
-    IRichSequence mapEncoded = sequence.toMapped(NullEncoder.encodeNull);
-    IRichSequence mapDecoded = sequence.toMapped(NullEncoder.decodeNull);
-    IRichSequence encoded =
-        RichSequence.of(encodedInput, 0, ((CharSequence) encodedInput).length());
-    IRichSequence encodedDecoded = encoded.toMapped(NullEncoder.decodeNull);
+    IRichSequence<RichSequence> sequence = RichSequence.of(input, 0, input.length());
+    IRichSequence<RichSequence> mapEncoded = sequence.toMapped(NullEncoder.encodeNull);
+    IRichSequence<RichSequence> mapDecoded = sequence.toMapped(NullEncoder.decodeNull);
+    IRichSequence<RichSequence> encoded = RichSequence.of(encodedInput, 0, encodedInput.length());
+    IRichSequence<RichSequence> encodedDecoded = encoded.toMapped(NullEncoder.decodeNull);
 
     assertEquals(encodedInput, sequence.toString()); // sequences encoded by default
     assertEquals(encodedInput, mapEncoded.toString());
@@ -33,12 +32,11 @@ public class MappedRichSequenceTest {
     String input = "\u0020\n123456789\u0020\nabcdefghij\n\u0020";
     String encodedInput = "\u00A0\n123456789\u00A0\nabcdefghij\n\u00A0";
 
-    IRichSequence sequence = RichSequence.of(input, 0, ((CharSequence) input).length());
-    IRichSequence mapEncoded = sequence.toMapped(SpaceMapper.toNonBreakSpace);
-    IRichSequence mapDecoded = sequence.toMapped(SpaceMapper.fromNonBreakSpace);
-    IRichSequence encoded =
-        RichSequence.of(encodedInput, 0, ((CharSequence) encodedInput).length());
-    IRichSequence encodedDecoded = encoded.toMapped(SpaceMapper.fromNonBreakSpace);
+    IRichSequence<RichSequence> sequence = RichSequence.of(input, 0, input.length());
+    IRichSequence<RichSequence> mapEncoded = sequence.toMapped(SpaceMapper.toNonBreakSpace);
+    IRichSequence<RichSequence> mapDecoded = sequence.toMapped(SpaceMapper.fromNonBreakSpace);
+    IRichSequence<RichSequence> encoded = RichSequence.of(encodedInput, 0, encodedInput.length());
+    IRichSequence<RichSequence> encodedDecoded = encoded.toMapped(SpaceMapper.fromNonBreakSpace);
 
     assertEquals(input, sequence.toString());
     assertEquals(encodedInput, mapEncoded.toString());
@@ -52,8 +50,8 @@ public class MappedRichSequenceTest {
     String input = "This Is Mixed\n";
     String encodedInput = "this is mixed\n";
 
-    IRichSequence sequence = RichSequence.of(input, 0, ((CharSequence) input).length());
-    IRichSequence mapEncoded = sequence.toMapped(ChangeCase.toLowerCase);
+    IRichSequence<RichSequence> sequence = RichSequence.of(input, 0, input.length());
+    IRichSequence<RichSequence> mapEncoded = sequence.toMapped(ChangeCase.toLowerCase);
 
     assertEquals(input, sequence.toString());
     assertEquals(encodedInput, mapEncoded.toString());
@@ -64,8 +62,8 @@ public class MappedRichSequenceTest {
     String input = "This Is Mixed\n";
     String encodedInput = "THIS IS MIXED\n";
 
-    IRichSequence sequence = RichSequence.of(input, 0, ((CharSequence) input).length());
-    IRichSequence mapEncoded = sequence.toMapped(ChangeCase.toUpperCase);
+    IRichSequence<RichSequence> sequence = RichSequence.of(input, 0, input.length());
+    IRichSequence<RichSequence> mapEncoded = sequence.toMapped(ChangeCase.toUpperCase);
 
     assertEquals(input, sequence.toString());
     assertEquals(encodedInput, mapEncoded.toString());
@@ -76,7 +74,7 @@ public class MappedRichSequenceTest {
     String input = "This Is Mixed\n";
     String encodedInput = "THIS\u00A0IS\u00A0MIXED\n";
 
-    IRichSequence sequence = RichSequence.of(input, 0, ((CharSequence) input).length());
+    IRichSequence<RichSequence> sequence = RichSequence.of(input, 0, input.length());
     MappedRichSequence mapEncoded =
         (MappedRichSequence)
             sequence.toMapped(ChangeCase.toUpperCase.andThen(SpaceMapper.toNonBreakSpace));
@@ -91,7 +89,7 @@ public class MappedRichSequenceTest {
     String input = "This Is Mixed\n";
     String encodedInput = "THIS\u00A0IS\u00A0MIXED\n";
 
-    IRichSequence sequence = RichSequence.of(input, 0, ((CharSequence) input).length());
+    IRichSequence<RichSequence> sequence = RichSequence.of(input, 0, input.length());
     MappedRichSequence mapEncoded =
         (MappedRichSequence)
             sequence.toMapped(ChangeCase.toUpperCase).toMapped(SpaceMapper.toNonBreakSpace);

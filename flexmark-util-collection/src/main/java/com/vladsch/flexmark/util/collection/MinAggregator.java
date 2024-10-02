@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.collection;
 
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import org.jetbrains.annotations.Nullable;
 
-public class MinAggregator implements BiFunction<Integer, Integer, Integer> {
+public class MinAggregator implements BinaryOperator<Integer> {
   public static final MinAggregator INSTANCE = new MinAggregator();
 
   private MinAggregator() {}

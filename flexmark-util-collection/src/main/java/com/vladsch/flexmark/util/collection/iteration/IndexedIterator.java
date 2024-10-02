@@ -63,6 +63,7 @@ public class IndexedIterator<R, S, I extends ReversibleIterator<Integer>>
     return lastIndex;
   }
 
+  @Override
   public void forEachRemaining(@NotNull Consumer<? super R> consumer) {
     while (hasNext()) {
       consumer.accept(next());

@@ -16,17 +16,15 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentedSequenceTreeTest {
-  // TEST: need to complete tests here
-
-  static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
+  private static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
     return BasedSequence.of(
-        BasedOptionsSequence.of(chars, BasedSequence.F_TREE_SEGMENTED_SEQUENCES));
+        BasedOptionsSequence.of(chars, BasedOptionsHolder.F_TREE_SEGMENTED_SEQUENCES));
   }
 
   @Test
-  public void test_indexOf() throws Exception {
+  public void test_indexOf() {
     final String s1 = "01234567890123456789";
-    BasedSequence s = basedSequenceOf(s1).subSequence(0, ((CharSequence) s1).length());
+    BasedSequence s = basedSequenceOf(s1).subSequence(0, s1.length());
     int iMax = s.length();
 
     assertEquals(s1.indexOf(' '), s.indexOf(' '));
@@ -47,9 +45,9 @@ public class SegmentedSequenceTreeTest {
   }
 
   @Test
-  public void test_lastIndexOf() throws Exception {
+  public void test_lastIndexOf() {
     final String s1 = "01234567890123456789";
-    BasedSequence s = basedSequenceOf(s1).subSequence(0, ((CharSequence) s1).length());
+    BasedSequence s = basedSequenceOf(s1).subSequence(0, s1.length());
     int iMax = s.length();
 
     assertEquals(s1.lastIndexOf(' '), s.lastIndexOf(' '));
@@ -76,67 +74,67 @@ public class SegmentedSequenceTreeTest {
     assertEquals(
         "",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(0)
             .toString());
     assertEquals(
         "9",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(1)
             .toString());
     assertEquals(
         "89",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(2)
             .toString());
     assertEquals(
         "789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(3)
             .toString());
     assertEquals(
         "6789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(4)
             .toString());
     assertEquals(
         "56789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(5)
             .toString());
     assertEquals(
         "456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(6)
             .toString());
     assertEquals(
         "3456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(7)
             .toString());
     assertEquals(
         "23456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(8)
             .toString());
     assertEquals(
         "123456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(9)
             .toString());
     assertEquals(
         "0123456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(10)
             .toString());
   }
@@ -146,67 +144,67 @@ public class SegmentedSequenceTreeTest {
     assertEquals(
         "",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(0, 2)
             .toString());
     assertEquals(
         "",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(1, 2)
             .toString());
     assertEquals(
         "",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(2, 2)
             .toString());
     assertEquals(
         "7",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(3, 2)
             .toString());
     assertEquals(
         "67",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(4, 2)
             .toString());
     assertEquals(
         "567",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(5, 2)
             .toString());
     assertEquals(
         "4567",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(6, 2)
             .toString());
     assertEquals(
         "34567",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(7, 2)
             .toString());
     assertEquals(
         "234567",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(8, 2)
             .toString());
     assertEquals(
         "1234567",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(9, 2)
             .toString());
     assertEquals(
         "01234567",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .endSequence(10, 2)
             .toString());
   }
@@ -216,127 +214,127 @@ public class SegmentedSequenceTreeTest {
     assertEquals(
         "0123456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(0)
             .toString());
     assertEquals(
         "123456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(1)
             .toString());
     assertEquals(
         "23456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(2)
             .toString());
     assertEquals(
         "3456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(3)
             .toString());
     assertEquals(
         "456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(4)
             .toString());
     assertEquals(
         "56789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(5)
             .toString());
     assertEquals(
         "6789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(6)
             .toString());
     assertEquals(
         "789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(7)
             .toString());
     assertEquals(
         "89",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(8)
             .toString());
     assertEquals(
         "9",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(9)
             .toString());
     assertEquals(
         "",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(10)
             .toString());
     assertEquals(
         "9",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-1)
             .toString());
     assertEquals(
         "89",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-2)
             .toString());
     assertEquals(
         "789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-3)
             .toString());
     assertEquals(
         "6789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-4)
             .toString());
     assertEquals(
         "56789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-5)
             .toString());
     assertEquals(
         "456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-6)
             .toString());
     assertEquals(
         "3456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-7)
             .toString());
     assertEquals(
         "23456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-8)
             .toString());
     assertEquals(
         "123456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-9)
             .toString());
     assertEquals(
         "0123456789",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(-10)
             .toString());
   }
@@ -346,1093 +344,857 @@ public class SegmentedSequenceTreeTest {
     assertEquals(
         "12345678",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(1, -1)
             .toString());
     assertEquals(
         "234567",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(2, -2)
             .toString());
     assertEquals(
         "3456",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(3, -3)
             .toString());
     assertEquals(
         "45",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(4, -4)
             .toString());
     assertEquals(
         "",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(5, -5)
             .toString());
     assertEquals(
         "",
         basedSequenceOf("0123456789")
-            .subSequence(0, ((CharSequence) "0123456789").length())
+            .subSequence(0, "0123456789".length())
             .midSequence(6, -6)
             .toString());
   }
 
   @Test
-  public void test_countLeading() throws Exception {
+  public void test_countLeading() {
     assertEquals(
         0,
         basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
+            .subSequence(0, "       ".length())
             .countLeading(CharPredicate.anyOf("")));
     assertEquals(
         "       ".length(),
         basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
+            .subSequence(0, "       ".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         "    ".length(),
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         "    ".length(),
         basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
+            .subSequence(0, "    abcdef ".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         "    ".length(),
         basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
+            .subSequence(0, "    abcdef".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         " ".length(),
         basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
+            .subSequence(0, " abcdef   ".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         " ".length(),
         basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
+            .subSequence(0, " abcdef ".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         " ".length(),
         basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
+            .subSequence(0, " abcdef".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         "".length(),
         basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
+            .subSequence(0, "abcdef   ".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         "".length(),
         basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
+            .subSequence(0, "abcdef ".length())
             .countLeading(CharPredicate.anyOf(" ")));
     assertEquals(
         "".length(),
         basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
+            .subSequence(0, "abcdef".length())
             .countLeading(CharPredicate.anyOf(" ")));
   }
 
   @Test
-  public void test_countTrailing() throws Exception {
+  public void test_countTrailing() {
     assertEquals(
         0,
         basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
+            .subSequence(0, "       ".length())
             .countTrailing(CharPredicate.anyOf("")));
     assertEquals(
         "       ".length(),
         basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
+            .subSequence(0, "       ".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         "   ".length(),
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         " ".length(),
         basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
+            .subSequence(0, "    abcdef ".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         "".length(),
         basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
+            .subSequence(0, "    abcdef".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         "   ".length(),
         basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
+            .subSequence(0, " abcdef   ".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         " ".length(),
         basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
+            .subSequence(0, " abcdef ".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         "".length(),
         basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
+            .subSequence(0, " abcdef".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         "   ".length(),
         basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
+            .subSequence(0, "abcdef   ".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         " ".length(),
         basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
+            .subSequence(0, "abcdef ".length())
             .countTrailing(CharPredicate.anyOf(" ")));
     assertEquals(
         "".length(),
         basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
+            .subSequence(0, "abcdef".length())
             .countTrailing(CharPredicate.anyOf(" ")));
   }
 
   @Test
-  public void test_trimRange() throws Exception {
+  public void test_trimRange() {
     assertEquals(
-        Range.of(7, 7),
-        basedSequenceOf("       ").subSequence(0, ((CharSequence) "       ").length()).trimRange());
-    assertEquals(
-        Range.of(4, 10),
-        basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
-            .trimRange());
+        Range.of(7, 7), basedSequenceOf("       ").subSequence(0, "       ".length()).trimRange());
     assertEquals(
         Range.of(4, 10),
-        basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
-            .trimRange());
+        basedSequenceOf("    abcdef   ").subSequence(0, "    abcdef   ".length()).trimRange());
     assertEquals(
         Range.of(4, 10),
-        basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
-            .trimRange());
+        basedSequenceOf("    abcdef ").subSequence(0, "    abcdef ".length()).trimRange());
+    assertEquals(
+        Range.of(4, 10),
+        basedSequenceOf("    abcdef").subSequence(0, "    abcdef".length()).trimRange());
     assertEquals(
         Range.of(1, 7),
-        basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
-            .trimRange());
+        basedSequenceOf(" abcdef   ").subSequence(0, " abcdef   ".length()).trimRange());
     assertEquals(
         Range.of(1, 7),
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trimRange());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trimRange());
     assertEquals(
-        Range.of(1, 7),
-        basedSequenceOf(" abcdef").subSequence(0, ((CharSequence) " abcdef").length()).trimRange());
+        Range.of(1, 7), basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trimRange());
     assertEquals(
         Range.of(0, 6),
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trimRange());
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trimRange());
     assertEquals(
-        Range.of(0, 6),
-        basedSequenceOf("abcdef ").subSequence(0, ((CharSequence) "abcdef ").length()).trimRange());
-    assertSame(
-        Range.NULL,
-        basedSequenceOf("abcdef").subSequence(0, ((CharSequence) "abcdef").length()).trimRange());
+        Range.of(0, 6), basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trimRange());
+    assertSame(Range.NULL, basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trimRange());
   }
 
   @Test
-  public void test_trimRangeKeep1() throws Exception {
+  public void test_trimRangeKeep1() {
     assertEquals(
-        Range.of(6, 7),
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trimRange(1));
+        Range.of(6, 7), basedSequenceOf("       ").subSequence(0, "       ".length()).trimRange(1));
     assertEquals(
         Range.of(3, 11),
-        basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
-            .trimRange(1));
+        basedSequenceOf("    abcdef   ").subSequence(0, "    abcdef   ".length()).trimRange(1));
     assertEquals(
         Range.of(3, 11),
-        basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
-            .trimRange(1));
+        basedSequenceOf("    abcdef ").subSequence(0, "    abcdef ".length()).trimRange(1));
     assertEquals(
         Range.of(3, 10),
-        basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
-            .trimRange(1));
+        basedSequenceOf("    abcdef").subSequence(0, "    abcdef".length()).trimRange(1));
     assertEquals(
         Range.of(0, 8),
-        basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
-            .trimRange(1));
+        basedSequenceOf(" abcdef   ").subSequence(0, " abcdef   ".length()).trimRange(1));
     assertSame(
-        Range.NULL,
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trimRange(1));
+        Range.NULL, basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trimRange(1));
     assertSame(
-        Range.NULL,
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trimRange(1));
+        Range.NULL, basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trimRange(1));
     assertEquals(
         Range.of(0, 7),
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trimRange(1));
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trimRange(1));
     assertSame(
-        Range.NULL,
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trimRange(1));
+        Range.NULL, basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trimRange(1));
     assertSame(
-        Range.NULL,
-        basedSequenceOf("abcdef").subSequence(0, ((CharSequence) "abcdef").length()).trimRange(1));
+        Range.NULL, basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trimRange(1));
   }
 
   @Test
-  public void test_trim() throws Exception {
+  public void test_trim() {
     assertEquals(
-        "",
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trim()
-            .toString());
+        "", basedSequenceOf("       ").subSequence(0, "       ".length()).trim().toString());
     assertEquals(
         "abcdef",
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .trim()
             .toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
-            .trim()
-            .toString());
+        basedSequenceOf("    abcdef ").subSequence(0, "    abcdef ".length()).trim().toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
-            .trim()
-            .toString());
+        basedSequenceOf("    abcdef").subSequence(0, "    abcdef".length()).trim().toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
-            .trim()
-            .toString());
+        basedSequenceOf(" abcdef   ").subSequence(0, " abcdef   ".length()).trim().toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trim()
-            .toString());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trim().toString());
+    assertEquals(
+        "abcdef", basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trim().toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trim()
-            .toString());
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trim().toString());
     assertEquals(
-        "abcdef",
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trim()
-            .toString());
+        "abcdef", basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trim().toString());
     assertEquals(
-        "abcdef",
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trim()
-            .toString());
-    assertEquals(
-        "abcdef",
-        basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
-            .trim()
-            .toString());
+        "abcdef", basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trim().toString());
   }
 
   @Test
-  public void test_trimKeep1() throws Exception {
+  public void test_trimKeep1() {
     assertEquals(
-        "",
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trim()
-            .toString());
+        "", basedSequenceOf("       ").subSequence(0, "       ".length()).trim().toString());
     assertEquals(
         " abcdef ",
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .trim(1)
             .toString());
     assertEquals(
         " abcdef ",
-        basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
-            .trim(1)
-            .toString());
+        basedSequenceOf("    abcdef ").subSequence(0, "    abcdef ".length()).trim(1).toString());
     assertEquals(
         " abcdef",
-        basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
-            .trim(1)
-            .toString());
+        basedSequenceOf("    abcdef").subSequence(0, "    abcdef".length()).trim(1).toString());
     assertEquals(
         " abcdef ",
-        basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
-            .trim(1)
-            .toString());
+        basedSequenceOf(" abcdef   ").subSequence(0, " abcdef   ".length()).trim(1).toString());
     assertEquals(
         " abcdef ",
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trim(1)
-            .toString());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trim(1).toString());
     assertEquals(
         " abcdef",
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trim(1)
-            .toString());
+        basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trim(1).toString());
     assertEquals(
         "abcdef ",
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trim(1)
-            .toString());
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trim(1).toString());
     assertEquals(
         "abcdef ",
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trim(1)
-            .toString());
+        basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trim(1).toString());
     assertEquals(
-        "abcdef",
-        basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
-            .trim(1)
-            .toString());
+        "abcdef", basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trim(1).toString());
   }
 
   @Test
-  public void test_trimStart() throws Exception {
+  public void test_trimStart() {
     assertEquals(
-        "",
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trimStart()
-            .toString());
+        "", basedSequenceOf("       ").subSequence(0, "       ".length()).trimStart().toString());
     assertEquals(
         "abcdef   ",
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .trimStart()
             .toString());
     assertEquals(
         "abcdef ",
         basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
+            .subSequence(0, "    abcdef ".length())
             .trimStart()
             .toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
-            .trimStart()
-            .toString());
+        basedSequenceOf("    abcdef").subSequence(0, "    abcdef".length()).trimStart().toString());
     assertEquals(
         "abcdef   ",
-        basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
-            .trimStart()
-            .toString());
+        basedSequenceOf(" abcdef   ").subSequence(0, " abcdef   ".length()).trimStart().toString());
     assertEquals(
         "abcdef ",
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trimStart()
-            .toString());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trimStart().toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trimStart()
-            .toString());
+        basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trimStart().toString());
     assertEquals(
         "abcdef   ",
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trimStart()
-            .toString());
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trimStart().toString());
     assertEquals(
         "abcdef ",
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trimStart()
-            .toString());
+        basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trimStart().toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
-            .trimStart()
-            .toString());
+        basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trimStart().toString());
   }
 
   @Test
-  public void test_trimmedStart() throws Exception {
+  public void test_trimmedStart() {
     assertEquals(
         "       ",
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trimmedStart()
-            .toString());
+        basedSequenceOf("       ").subSequence(0, "       ".length()).trimmedStart().toString());
     assertEquals(
         "    ",
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .trimmedStart()
             .toString());
     assertEquals(
         "    ",
         basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
+            .subSequence(0, "    abcdef ".length())
             .trimmedStart()
             .toString());
     assertEquals(
         "    ",
         basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
+            .subSequence(0, "    abcdef".length())
             .trimmedStart()
             .toString());
     assertEquals(
         " ",
         basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
+            .subSequence(0, " abcdef   ".length())
             .trimmedStart()
             .toString());
     assertEquals(
         " ",
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trimmedStart()
-            .toString());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trimmedStart().toString());
     assertEquals(
         " ",
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trimmedStart()
-            .toString());
+        basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trimmedStart().toString());
     assertEquals(
         "",
         basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
+            .subSequence(0, "abcdef   ".length())
             .trimmedStart()
             .toString());
     assertEquals(
         "",
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trimmedStart()
-            .toString());
+        basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trimmedStart().toString());
     assertEquals(
-        "",
-        basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
-            .trimmedStart()
-            .toString());
+        "", basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trimmedStart().toString());
   }
 
   @Test
-  public void test_trimStartKeep1() throws Exception {
+  public void test_trimStartKeep1() {
     assertEquals(
-        " ",
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trimStart(1)
-            .toString());
+        " ", basedSequenceOf("       ").subSequence(0, "       ".length()).trimStart(1).toString());
     assertEquals(
         " abcdef   ",
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .trimStart(1)
             .toString());
     assertEquals(
         " abcdef ",
         basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
+            .subSequence(0, "    abcdef ".length())
             .trimStart(1)
             .toString());
     assertEquals(
         " abcdef",
         basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
+            .subSequence(0, "    abcdef".length())
             .trimStart(1)
             .toString());
     assertEquals(
         " abcdef   ",
         basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
+            .subSequence(0, " abcdef   ".length())
             .trimStart(1)
             .toString());
     assertEquals(
         " abcdef ",
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trimStart(1)
-            .toString());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trimStart(1).toString());
     assertEquals(
         " abcdef",
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trimStart(1)
-            .toString());
+        basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trimStart(1).toString());
     assertEquals(
         "abcdef   ",
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trimStart(1)
-            .toString());
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trimStart(1).toString());
     assertEquals(
         "abcdef ",
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trimStart(1)
-            .toString());
+        basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trimStart(1).toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
-            .trimStart(1)
-            .toString());
+        basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trimStart(1).toString());
   }
 
   @Test
-  public void test_trimEnd() throws Exception {
+  public void test_trimEnd() {
     assertEquals(
-        "",
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trimEnd()
-            .toString());
+        "", basedSequenceOf("       ").subSequence(0, "       ".length()).trimEnd().toString());
     assertEquals(
         "    abcdef",
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .trimEnd()
             .toString());
     assertEquals(
         "    abcdef",
-        basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
-            .trimEnd()
-            .toString());
+        basedSequenceOf("    abcdef ").subSequence(0, "    abcdef ".length()).trimEnd().toString());
     assertEquals(
         "    abcdef",
-        basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
-            .trimEnd()
-            .toString());
+        basedSequenceOf("    abcdef").subSequence(0, "    abcdef".length()).trimEnd().toString());
     assertEquals(
         " abcdef",
-        basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
-            .trimEnd()
-            .toString());
+        basedSequenceOf(" abcdef   ").subSequence(0, " abcdef   ".length()).trimEnd().toString());
     assertEquals(
         " abcdef",
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trimEnd()
-            .toString());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trimEnd().toString());
     assertEquals(
         " abcdef",
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trimEnd()
-            .toString());
+        basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trimEnd().toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trimEnd()
-            .toString());
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trimEnd().toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trimEnd()
-            .toString());
+        basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trimEnd().toString());
     assertEquals(
-        "abcdef",
-        basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
-            .trimEnd()
-            .toString());
+        "abcdef", basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trimEnd().toString());
   }
 
   @Test
-  public void test_trimmedEnd() throws Exception {
+  public void test_trimmedEnd() {
     assertEquals(
         "       ",
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trimmedEnd()
-            .toString());
+        basedSequenceOf("       ").subSequence(0, "       ".length()).trimmedEnd().toString());
     assertEquals(
         "   ",
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .trimmedEnd()
             .toString());
     assertEquals(
         " ",
         basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
+            .subSequence(0, "    abcdef ".length())
             .trimmedEnd()
             .toString());
     assertEquals(
         "",
         basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
+            .subSequence(0, "    abcdef".length())
             .trimmedEnd()
             .toString());
     assertEquals(
         "   ",
         basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
+            .subSequence(0, " abcdef   ".length())
             .trimmedEnd()
             .toString());
     assertEquals(
         " ",
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trimmedEnd()
-            .toString());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trimmedEnd().toString());
     assertEquals(
-        "",
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trimmedEnd()
-            .toString());
+        "", basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trimmedEnd().toString());
     assertEquals(
         "   ",
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trimmedEnd()
-            .toString());
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trimmedEnd().toString());
     assertEquals(
-        " ",
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trimmedEnd()
-            .toString());
+        " ", basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trimmedEnd().toString());
     assertEquals(
-        "",
-        basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
-            .trimmedEnd()
-            .toString());
+        "", basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trimmedEnd().toString());
   }
 
   @Test
-  public void test_trimEndKeep1() throws Exception {
+  public void test_trimEndKeep1() {
     assertEquals(
-        " ",
-        basedSequenceOf("       ")
-            .subSequence(0, ((CharSequence) "       ").length())
-            .trimEnd(1)
-            .toString());
+        " ", basedSequenceOf("       ").subSequence(0, "       ".length()).trimEnd(1).toString());
     assertEquals(
         "    abcdef ",
         basedSequenceOf("    abcdef   ")
-            .subSequence(0, ((CharSequence) "    abcdef   ").length())
+            .subSequence(0, "    abcdef   ".length())
             .trimEnd(1)
             .toString());
     assertEquals(
         "    abcdef ",
         basedSequenceOf("    abcdef ")
-            .subSequence(0, ((CharSequence) "    abcdef ").length())
+            .subSequence(0, "    abcdef ".length())
             .trimEnd(1)
             .toString());
     assertEquals(
         "    abcdef",
-        basedSequenceOf("    abcdef")
-            .subSequence(0, ((CharSequence) "    abcdef").length())
-            .trimEnd(1)
-            .toString());
+        basedSequenceOf("    abcdef").subSequence(0, "    abcdef".length()).trimEnd(1).toString());
     assertEquals(
         " abcdef ",
-        basedSequenceOf(" abcdef   ")
-            .subSequence(0, ((CharSequence) " abcdef   ").length())
-            .trimEnd(1)
-            .toString());
+        basedSequenceOf(" abcdef   ").subSequence(0, " abcdef   ".length()).trimEnd(1).toString());
     assertEquals(
         " abcdef ",
-        basedSequenceOf(" abcdef ")
-            .subSequence(0, ((CharSequence) " abcdef ").length())
-            .trimEnd(1)
-            .toString());
+        basedSequenceOf(" abcdef ").subSequence(0, " abcdef ".length()).trimEnd(1).toString());
     assertEquals(
         " abcdef",
-        basedSequenceOf(" abcdef")
-            .subSequence(0, ((CharSequence) " abcdef").length())
-            .trimEnd(1)
-            .toString());
+        basedSequenceOf(" abcdef").subSequence(0, " abcdef".length()).trimEnd(1).toString());
     assertEquals(
         "abcdef ",
-        basedSequenceOf("abcdef   ")
-            .subSequence(0, ((CharSequence) "abcdef   ").length())
-            .trimEnd(1)
-            .toString());
+        basedSequenceOf("abcdef   ").subSequence(0, "abcdef   ".length()).trimEnd(1).toString());
     assertEquals(
         "abcdef ",
-        basedSequenceOf("abcdef ")
-            .subSequence(0, ((CharSequence) "abcdef ").length())
-            .trimEnd(1)
-            .toString());
+        basedSequenceOf("abcdef ").subSequence(0, "abcdef ".length()).trimEnd(1).toString());
     assertEquals(
         "abcdef",
-        basedSequenceOf("abcdef")
-            .subSequence(0, ((CharSequence) "abcdef").length())
-            .trimEnd(1)
-            .toString());
+        basedSequenceOf("abcdef").subSequence(0, "abcdef".length()).trimEnd(1).toString());
   }
 
   @Test
-  public void test_startOfDelimitedBy() throws Exception {
+  public void test_startOfDelimitedBy() {
     assertEquals(
         0,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 0));
     assertEquals(
         0,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 1));
     assertEquals(
         2,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 2));
     assertEquals(
         2,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 3));
     assertEquals(
         2,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 4));
     assertEquals(
         5,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 5));
     assertEquals(
         5,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 6));
     assertEquals(
         5,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 7));
     assertEquals(
         5,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 8));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 9));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 10));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 11));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 12));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 13));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedBy(",", 14));
   }
 
   @Test
-  public void test_startOfDelimitedByAny() throws Exception {
+  public void test_startOfDelimitedByAny() {
     assertEquals(
         0,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 0));
     assertEquals(
         0,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 1));
     assertEquals(
         2,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 2));
     assertEquals(
         2,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 3));
     assertEquals(
         2,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 4));
     assertEquals(
         5,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 5));
     assertEquals(
         5,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 6));
     assertEquals(
         5,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 7));
     assertEquals(
         5,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 8));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 9));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 10));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 11));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 12));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 13));
     assertEquals(
         9,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .startOfDelimitedByAny(CharPredicate.anyOf(","), 14));
   }
 
   @Test
-  public void test_endOfDelimitedBy() throws Exception {
+  public void test_endOfDelimitedBy() {
     assertEquals(
         1,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 0));
     assertEquals(
         1,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 1));
     assertEquals(
         4,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 2));
     assertEquals(
         4,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 3));
     assertEquals(
         4,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 4));
     assertEquals(
         8,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 5));
     assertEquals(
         8,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 6));
     assertEquals(
         8,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 7));
     assertEquals(
         8,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 8));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 9));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 10));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 11));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 12));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 13));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedBy(",", 14));
   }
 
   @Test
-  public void test_endOfDelimitedByAny() throws Exception {
+  public void test_endOfDelimitedByAny() {
     assertEquals(
         1,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 0));
     assertEquals(
         1,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 1));
     assertEquals(
         4,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 2));
     assertEquals(
         4,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 3));
     assertEquals(
         4,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 4));
     assertEquals(
         8,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 5));
     assertEquals(
         8,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 6));
     assertEquals(
         8,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 7));
     assertEquals(
         8,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 8));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 9));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 10));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 11));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 12));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 13));
     assertEquals(
         13,
         basedSequenceOf("0,23,567,9012")
-            .subSequence(0, ((CharSequence) "0,23,567,9012").length())
+            .subSequence(0, "0,23,567,9012".length())
             .endOfDelimitedByAny(CharPredicate.anyOf(","), 14));
   }
 
   @Test
-  public void testSplitBasic() throws Exception {
+  public void testSplitBasic() {
     BasedSequence sequence =
-        basedSequenceOf(" 1,2 , 3 ,4,5,   ")
-            .subSequence(0, ((CharSequence) " 1,2 , 3 ,4,5,   ").length());
+        basedSequenceOf(" 1,2 , 3 ,4,5,   ").subSequence(0, " 1,2 , 3 ,4,5,   ".length());
     BasedSequence[] list =
         sequence.split(
-            ",", 0, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_SKIP_EMPTY, null);
+            ",", 0, SequenceUtils.SPLIT_TRIM_PARTS | SequenceUtils.SPLIT_SKIP_EMPTY, null);
     ArrayList<String> sl = new ArrayList<>(list.length);
     for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
@@ -1440,11 +1202,11 @@ public class SegmentedSequenceTreeTest {
   }
 
   @Test
-  public void testSplitEol() throws Exception {
+  public void testSplitEol() {
     BasedSequence sequence =
         basedSequenceOf("   line1 \nline2 \n line3 \n")
-            .subSequence(0, ((CharSequence) "   line1 \nline2 \n line3 \n").length());
-    BasedSequence[] list = sequence.split("\n", 0, BasedSequence.SPLIT_INCLUDE_DELIMS, null);
+            .subSequence(0, "   line1 \nline2 \n line3 \n".length());
+    BasedSequence[] list = sequence.split("\n", 0, SequenceUtils.SPLIT_INCLUDE_DELIMS, null);
     ArrayList<String> sl = new ArrayList<>(list.length);
     for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
@@ -1454,7 +1216,7 @@ public class SegmentedSequenceTreeTest {
 
   @Test
   public void testPrefixOf() {
-    BasedSequence of = basedSequenceOf("123").subSequence(0, ((CharSequence) "123").length());
+    BasedSequence of = basedSequenceOf("123").subSequence(0, "123".length());
     assertEquals(of.subSequence(0, 0), of.baseSubSequence(0, 0).prefixOf(of.subSequence(0, 0)));
     assertEquals(of.subSequence(0, 0), of.baseSubSequence(0, 0).prefixOf(of.subSequence(0, 1)));
 
@@ -1469,7 +1231,7 @@ public class SegmentedSequenceTreeTest {
 
   @Test
   public void testSuffixOf() {
-    BasedSequence of = basedSequenceOf("123").subSequence(0, ((CharSequence) "123").length());
+    BasedSequence of = basedSequenceOf("123").subSequence(0, "123".length());
     assertEquals(of.subSequence(3, 3), of.baseSubSequence(3, 3).suffixOf(of.subSequence(3, 3)));
     assertEquals(of.subSequence(3, 3), of.baseSubSequence(3, 3).suffixOf(of.subSequence(2, 3)));
 
@@ -1484,19 +1246,13 @@ public class SegmentedSequenceTreeTest {
 
   @Test
   public void testReplace() {
-    BasedSequence text = basedSequenceOf("[foo]").subSequence(0, ((CharSequence) "[foo]").length());
+    BasedSequence text = basedSequenceOf("[foo]").subSequence(0, "[foo]".length());
     assertEquals(
-        basedSequenceOf("[bar]").subSequence(0, ((CharSequence) "[bar]").length()),
-        text.replace("foo", "bar"));
+        basedSequenceOf("[bar]").subSequence(0, "[bar]".length()), text.replace("foo", "bar"));
     assertEquals(
-        basedSequenceOf("[foo]").subSequence(0, ((CharSequence) "[foo]").length()),
-        text.replace("food", "bars"));
-    assertEquals(
-        basedSequenceOf("(foo]").subSequence(0, ((CharSequence) "(foo]").length()),
-        text.replace("[", "("));
-    assertEquals(
-        basedSequenceOf("[foo)").subSequence(0, ((CharSequence) "[foo)").length()),
-        text.replace("]", ")"));
+        basedSequenceOf("[foo]").subSequence(0, "[foo]".length()), text.replace("food", "bars"));
+    assertEquals(basedSequenceOf("(foo]").subSequence(0, "(foo]".length()), text.replace("[", "("));
+    assertEquals(basedSequenceOf("[foo)").subSequence(0, "[foo)".length()), text.replace("]", ")"));
   }
 
   @Test
@@ -1559,97 +1315,97 @@ public class SegmentedSequenceTreeTest {
     assertEquals(
         "",
         basedSequenceOf("")
-            .subSequence(0, ((CharSequence) "").length())
+            .subSequence(0, "".length())
             .trimEnd(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "",
         basedSequenceOf(".")
-            .subSequence(0, ((CharSequence) ".").length())
+            .subSequence(0, ".".length())
             .trimEnd(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "",
         basedSequenceOf("..")
-            .subSequence(0, ((CharSequence) "..").length())
+            .subSequence(0, "..".length())
             .trimEnd(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         ".",
         basedSequenceOf("..")
-            .subSequence(0, ((CharSequence) "..").length())
+            .subSequence(0, "..".length())
             .trimEnd(1, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         ".",
         basedSequenceOf(".")
-            .subSequence(0, ((CharSequence) ".").length())
+            .subSequence(0, ".".length())
             .trimEnd(1, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         ".",
         basedSequenceOf(".")
-            .subSequence(0, ((CharSequence) ".").length())
+            .subSequence(0, ".".length())
             .trimEnd(2, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "abc",
         basedSequenceOf("abc")
-            .subSequence(0, ((CharSequence) "abc").length())
+            .subSequence(0, "abc".length())
             .trimEnd(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         ".abc",
         basedSequenceOf(".abc")
-            .subSequence(0, ((CharSequence) ".abc").length())
+            .subSequence(0, ".abc".length())
             .trimEnd(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc",
         basedSequenceOf("..abc")
-            .subSequence(0, ((CharSequence) "..abc").length())
+            .subSequence(0, "..abc".length())
             .trimEnd(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc",
         basedSequenceOf("..abc.")
-            .subSequence(0, ((CharSequence) "..abc.").length())
+            .subSequence(0, "..abc.".length())
             .trimEnd(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc",
         basedSequenceOf("..abc..")
-            .subSequence(0, ((CharSequence) "..abc..").length())
+            .subSequence(0, "..abc..".length())
             .trimEnd(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc..",
         basedSequenceOf("..abc..")
-            .subSequence(0, ((CharSequence) "..abc..").length())
+            .subSequence(0, "..abc..".length())
             .trimEnd(2, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc..",
         basedSequenceOf("..abc..")
-            .subSequence(0, ((CharSequence) "..abc..").length())
+            .subSequence(0, "..abc..".length())
             .trimEnd(3, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc..",
         basedSequenceOf("..abc....")
-            .subSequence(0, ((CharSequence) "..abc....").length())
+            .subSequence(0, "..abc....".length())
             .trimEnd(2, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc.",
         basedSequenceOf("..abc....")
-            .subSequence(0, ((CharSequence) "..abc....").length())
+            .subSequence(0, "..abc....".length())
             .trimEnd(1, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc...",
         basedSequenceOf("..abc....")
-            .subSequence(0, ((CharSequence) "..abc....").length())
+            .subSequence(0, "..abc....".length())
             .trimEnd(3, CharPredicate.anyOf(".\t"))
             .toString());
   }
@@ -1659,117 +1415,117 @@ public class SegmentedSequenceTreeTest {
     assertEquals(
         "",
         basedSequenceOf("")
-            .subSequence(0, ((CharSequence) "").length())
+            .subSequence(0, "".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "",
         basedSequenceOf(".")
-            .subSequence(0, ((CharSequence) ".").length())
+            .subSequence(0, ".".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "",
         basedSequenceOf("..")
-            .subSequence(0, ((CharSequence) "..").length())
+            .subSequence(0, "..".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         ".",
         basedSequenceOf("..")
-            .subSequence(0, ((CharSequence) "..").length())
+            .subSequence(0, "..".length())
             .trimStart(1, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         ".",
         basedSequenceOf(".")
-            .subSequence(0, ((CharSequence) ".").length())
+            .subSequence(0, ".".length())
             .trimStart(1, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         ".",
         basedSequenceOf(".")
-            .subSequence(0, ((CharSequence) ".").length())
+            .subSequence(0, ".".length())
             .trimStart(2, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..",
         basedSequenceOf("...")
-            .subSequence(0, ((CharSequence) "...").length())
+            .subSequence(0, "...".length())
             .trimStart(2, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..",
         basedSequenceOf("....")
-            .subSequence(0, ((CharSequence) "....").length())
+            .subSequence(0, "....".length())
             .trimStart(2, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "abc",
         basedSequenceOf("abc")
-            .subSequence(0, ((CharSequence) "abc").length())
+            .subSequence(0, "abc".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "abc.",
         basedSequenceOf("abc.")
-            .subSequence(0, ((CharSequence) "abc.").length())
+            .subSequence(0, "abc.".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "abc..",
         basedSequenceOf(".abc..")
-            .subSequence(0, ((CharSequence) ".abc..").length())
+            .subSequence(0, ".abc..".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "abc..",
         basedSequenceOf("..abc..")
-            .subSequence(0, ((CharSequence) "..abc..").length())
+            .subSequence(0, "..abc..".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "abc..",
         basedSequenceOf(".abc..")
-            .subSequence(0, ((CharSequence) ".abc..").length())
+            .subSequence(0, ".abc..".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "abc..",
         basedSequenceOf(".abc..")
-            .subSequence(0, ((CharSequence) ".abc..").length())
+            .subSequence(0, ".abc..".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "abc..",
         basedSequenceOf(".abc..")
-            .subSequence(0, ((CharSequence) ".abc..").length())
+            .subSequence(0, ".abc..".length())
             .trimStart(0, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         ".abc..",
         basedSequenceOf("..abc..")
-            .subSequence(0, ((CharSequence) "..abc..").length())
+            .subSequence(0, "..abc..".length())
             .trimStart(1, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "..abc..",
         basedSequenceOf("...abc..")
-            .subSequence(0, ((CharSequence) "...abc..").length())
+            .subSequence(0, "...abc..".length())
             .trimStart(2, CharPredicate.anyOf(".\t"))
             .toString());
     assertEquals(
         "...abc..",
         basedSequenceOf("...abc..")
-            .subSequence(0, ((CharSequence) "...abc..").length())
+            .subSequence(0, "...abc..".length())
             .trimStart(3, CharPredicate.anyOf(".\t"))
             .toString());
   }
 
   @Test
-  public void test_indexOfAll() throws Exception {
+  public void test_indexOfAll() {
     final String s1 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    BasedSequence s = basedSequenceOf(s1).subSequence(0, ((CharSequence) s1).length());
+    BasedSequence s = basedSequenceOf(s1).subSequence(0, s1.length());
 
     int[] indices = s.indexOfAll("a");
 
@@ -1781,9 +1537,9 @@ public class SegmentedSequenceTreeTest {
   }
 
   @Test
-  public void test_indexOfAll2() throws Exception {
+  public void test_indexOfAll2() {
     final String s1 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    BasedSequence s = basedSequenceOf(s1).subSequence(0, ((CharSequence) s1).length());
+    BasedSequence s = basedSequenceOf(s1).subSequence(0, s1.length());
 
     int[] indices = s.indexOfAll("a");
 
@@ -1796,8 +1552,7 @@ public class SegmentedSequenceTreeTest {
 
   @Test
   public void test_extendByOneOfAny() {
-    BasedSequence b =
-        basedSequenceOf("this;.,\n").subSequence(0, ((CharSequence) "this;.,\n").length());
+    BasedSequence b = basedSequenceOf("this;.,\n").subSequence(0, "this;.,\n".length());
     BasedSequence s = b.subSequence(0, 4);
 
     assertEquals("this", s.extendByOneOfAny(CharPredicate.anyOf("")).toString());
@@ -1810,8 +1565,7 @@ public class SegmentedSequenceTreeTest {
 
   @Test
   public void test_extendByAny() {
-    BasedSequence b =
-        basedSequenceOf("this;.,\n").subSequence(0, ((CharSequence) "this;.,\n").length());
+    BasedSequence b = basedSequenceOf("this;.,\n").subSequence(0, "this;.,\n".length());
     BasedSequence s = b.subSequence(0, 4);
 
     assertEquals("this", s.extendByAny(CharPredicate.anyOf("")).toString());
@@ -1824,8 +1578,7 @@ public class SegmentedSequenceTreeTest {
 
   @Test
   public void test_extendByAny2() {
-    BasedSequence b =
-        basedSequenceOf("this;.,\n").subSequence(0, ((CharSequence) "this;.,\n").length());
+    BasedSequence b = basedSequenceOf("this;.,\n").subSequence(0, "this;.,\n".length());
     BasedSequence s = b.subSequence(0, 4);
 
     assertEquals("this", s.extendByAny(CharPredicate.anyOf(""), 2).toString());
@@ -1838,8 +1591,7 @@ public class SegmentedSequenceTreeTest {
 
   @Test
   public void test_extendToAny() {
-    BasedSequence b =
-        basedSequenceOf("this;.,\n").subSequence(0, ((CharSequence) "this;.,\n").length());
+    BasedSequence b = basedSequenceOf("this;.,\n").subSequence(0, "this;.,\n".length());
     BasedSequence s = b.subSequence(0, 4);
 
     assertEquals("this", s.extendByAnyNot(CharPredicate.anyOf("")).toString());
@@ -2640,9 +2392,6 @@ public class SegmentedSequenceTreeTest {
     BasedSequence sequence = basedSequenceOf(input);
     SequenceBuilder builder = sequence.getBuilder();
     BasedSegmentBuilder segments = builder.getSegmentBuilder();
-
-    //        BasedSequence replaced = sequence.replace(0, 1, "^");
-    //        assertEquals("^123456789", replaced.toString());
 
     segments.append(Range.of(0, 0));
     segments.append("^");

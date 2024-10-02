@@ -4,6 +4,7 @@ import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLU
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
 import static org.junit.Assert.assertEquals;
 
+import com.vladsch.flexmark.util.sequence.BasedOptionsHolder;
 import com.vladsch.flexmark.util.sequence.BasedOptionsSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PositionAnchor;
@@ -23,7 +24,6 @@ public class SequenceBuilderTest {
     builder.append(Range.of(0, 0));
     builder.append(Range.of(0, 4));
     builder.append(Range.of(10, 10));
-    String expected = input.substring(0, 4);
 
     assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRanges());
     assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
@@ -39,7 +39,6 @@ public class SequenceBuilderTest {
     builder.append(Range.of(0, 0));
     builder.append(Range.of(0, 4));
     builder.append(Range.of(10, 10));
-    String expected = input.substring(0, 4);
 
     assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRanges());
     assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
@@ -54,7 +53,6 @@ public class SequenceBuilderTest {
     builder.append(Range.of(0, 0));
     builder.append(Range.of(0, 4));
     builder.append(Range.of(10, 10));
-    String expected = input.substring(0, 4);
 
     assertEquals("⟦0123⟧", builder.toStringWithRanges());
     assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
@@ -69,7 +67,6 @@ public class SequenceBuilderTest {
     builder.append(sequence.subSequence(0, 0));
     builder.append(sequence.subSequence(0, 4));
     builder.append(sequence.subSequence(10, 10));
-    String expected = input.substring(0, 4);
 
     assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRanges());
     assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
@@ -85,7 +82,6 @@ public class SequenceBuilderTest {
     builder.append(sequence.subSequence(0, 0));
     builder.append(sequence.subSequence(0, 4));
     builder.append(sequence.subSequence(10, 10));
-    String expected = input.substring(0, 4);
 
     assertEquals("⟦0123⟧⟦⟧", builder.toStringWithRanges());
     assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
@@ -100,7 +96,6 @@ public class SequenceBuilderTest {
     builder.append(sequence.subSequence(0, 0));
     builder.append(sequence.subSequence(0, 4));
     builder.append(sequence.subSequence(10, 10));
-    String expected = input.substring(0, 4);
 
     assertEquals("⟦0123⟧", builder.toStringWithRanges());
     assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
@@ -113,7 +108,6 @@ public class SequenceBuilderTest {
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     builder.append(Range.of(0, 4));
-    String expected = input.substring(0, 4);
 
     assertEquals("⟦0123⟧", builder.toStringWithRanges());
     assertEquals("0123", builder.toSequence().toVisibleWhitespaceString());
@@ -807,7 +801,8 @@ public class SequenceBuilderTest {
     // this one causes text to be replaced with recovered EOL in the code
     String input = "01234567890123456789";
     BasedSequence sequence =
-        BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
+        BasedSequence.of(
+            BasedOptionsSequence.of(input, BasedOptionsHolder.F_FULL_SEGMENTED_SEQUENCES));
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.NEXT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 
@@ -843,7 +838,8 @@ public class SequenceBuilderTest {
     // this one causes text to be replaced with recovered EOL in the code
     String input = " 0123456789\n 0123456789";
     BasedSequence sequence =
-        BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
+        BasedSequence.of(
+            BasedOptionsSequence.of(input, BasedOptionsHolder.F_FULL_SEGMENTED_SEQUENCES));
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.NEXT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 
@@ -879,7 +875,8 @@ public class SequenceBuilderTest {
     // this one causes text to be replaced with recovered EOL in the code
     String input = " 0123456789\n 0123456789";
     BasedSequence sequence =
-        BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
+        BasedSequence.of(
+            BasedOptionsSequence.of(input, BasedOptionsHolder.F_FULL_SEGMENTED_SEQUENCES));
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence);
 
     builder.append(0, 1);
@@ -926,7 +923,8 @@ public class SequenceBuilderTest {
     // this one causes text to be replaced with recovered EOL in the code
     String input = "0123456789";
     BasedSequence sequence =
-        BasedSequence.of(BasedOptionsSequence.of(input, BasedSequence.F_FULL_SEGMENTED_SEQUENCES));
+        BasedSequence.of(
+            BasedOptionsSequence.of(input, BasedOptionsHolder.F_FULL_SEGMENTED_SEQUENCES));
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     SequenceBuilder builder = SequenceBuilder.emptyBuilder(sequence, optimizer);
 

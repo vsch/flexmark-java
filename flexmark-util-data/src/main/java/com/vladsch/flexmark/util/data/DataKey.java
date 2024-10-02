@@ -51,7 +51,7 @@ public class DataKey<T> extends DataKeyBase<T> {
    *     on dataHolder
    */
   public DataKey(@NotNull String name, @NotNull NotNullValueSupplier<T> supplier) {
-    super(name, supplier.get(), (holder) -> supplier.get());
+    super(name, supplier.get(), holder -> supplier.get());
   }
 
   /**
@@ -71,21 +71,25 @@ public class DataKey<T> extends DataKeyBase<T> {
     this(name, defaultValue, options -> defaultValue);
   }
 
+  @Override
   @NotNull
   public DataNotNullValueFactory<T> getFactory() {
     return (DataNotNullValueFactory<T>) super.getFactory();
   }
 
+  @Override
   @NotNull
   public T getDefaultValue() {
     return super.getDefaultValue();
   }
 
+  @Override
   @NotNull
   public T getDefaultValue(@NotNull DataHolder holder) {
     return super.getDefaultValue(holder);
   }
 
+  @Override
   @NotNull
   public T get(@Nullable DataHolder holder) {
     return super.get(holder);

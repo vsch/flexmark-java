@@ -64,7 +64,6 @@ public class MappedBasedSequenceTest {
   @Test
   public void test_unmodifiedBaseSequence() {
     String input = "This Is Mixed\n";
-    String encodedInput = "this is mixed\n";
 
     BasedSequence sequence = BasedSequence.of(input);
     BasedSequence mapEncoded = sequence.toMapped(ChangeCase.toLowerCase);

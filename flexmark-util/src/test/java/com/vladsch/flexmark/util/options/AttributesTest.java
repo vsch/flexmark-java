@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class AttributesTest {
   @Test
-  public void testBasic() throws Exception {
+  public void testBasic() {
     MutableAttributes attributes = new MutableAttributes();
 
     assertEquals("empty no attributes", false, attributes.contains("class"));

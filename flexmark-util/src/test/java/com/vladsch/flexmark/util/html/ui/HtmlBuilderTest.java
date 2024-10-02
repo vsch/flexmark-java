@@ -25,21 +25,21 @@ import org.junit.Test;
 
 public class HtmlBuilderTest {
   @Test
-  public void test_Basic() throws Exception {
+  public void test_Basic() {
     final HtmlBuilder fa = new HtmlBuilder();
     fa.tagIndent("ul", () -> fa.withCondIndent().tagLine("li", () -> fa.text("item1")));
     assertEquals("<ul>\n<li>item1</li>\n</ul>\n", fa.toFinalizedString());
   }
 
   @Test
-  public void test_Basic2() throws Exception {
+  public void test_Basic2() {
     final HtmlBuilder fa2 = new HtmlBuilder();
     fa2.withCondIndent().tag("tbody", () -> {});
     assertEquals("<tbody></tbody>\n", fa2.toFinalizedString());
   }
 
   @Test
-  public void test_Basic3() throws Exception {
+  public void test_Basic3() {
     final HtmlBuilder fa1 = new HtmlBuilder();
     fa1.tagIndent(
         "ul",
@@ -69,7 +69,7 @@ public class HtmlBuilderTest {
   }
 
   @Test
-  public void test_Attr() throws Exception {
+  public void test_Attr() {
     HtmlBuilder fa;
 
     fa = new HtmlBuilder();
@@ -92,9 +92,8 @@ public class HtmlBuilderTest {
   }
 
   @Test
-  public void test_Font() throws Exception {
+  public void test_Font() {
     final Font font = Font.decode(null);
-    final String family = font.getFamily();
     HtmlBuilder fa;
 
     fa = new HtmlBuilder();

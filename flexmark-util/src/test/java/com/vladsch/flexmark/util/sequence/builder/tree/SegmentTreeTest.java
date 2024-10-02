@@ -176,9 +176,6 @@ public class SegmentTreeTest {
             loopEnd(
                 i,
                 (bj, j) -> {
-                  if (i == 1 && j == 65529) {
-                    int tmp = 0;
-                  }
                   assertEquals(
                       "i: " + i + " j: " + j,
                       j >= i + 1000 ? null : new SegmentTreePos(j >= i ? 1 : 0, j >= i ? i : 0, 0),
@@ -223,10 +220,6 @@ public class SegmentTreeTest {
                       startIndex[0] = i + Math.max(0, l - 1) * 1000;
                       if (j >= startIndex[0] && j < i + l * 1000) break;
                       segment[0] = l + 1;
-                    }
-
-                    if (finalK == 4 && i == 1 && j == 65529) {
-                      int tmp = 0;
                     }
 
                     assertEquals(
@@ -330,7 +323,6 @@ public class SegmentTreeTest {
   @Test
   public void test_buildSubSequence() {
     String input = "0123456789";
-    String expected = "> 0123456789\n";
     BasedSequence sequence = BasedSequence.of(input);
     PlainSegmentBuilder segments =
         PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
@@ -368,7 +360,6 @@ public class SegmentTreeTest {
   @Test
   public void test_buildSubSequence2() {
     String input = "0123456789";
-    String expected = "> 0123456789\n";
     BasedSequence sequence = BasedSequence.of(input);
     PlainSegmentBuilder segments =
         PlainSegmentBuilder.emptyBuilder(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
@@ -402,10 +393,6 @@ public class SegmentTreeTest {
         segRange.endPos);
     assertEquals("⟦⟧> ⟦0123456789⟧\\n⟦⟧", builder.toStringWithRanges(true));
   }
-
-  // ************************************************************************
-  // NOTE: Segment building directly from SegmentTree data
-  // ************************************************************************
 
   @Test
   public void test_buildSegments1() {
@@ -510,73 +497,4 @@ public class SegmentTreeTest {
     assertEquals(
         "⟦\\n⟧  ⟦  line 2⟧⟦\\n\\n⟧ ⟦⟧", segments2.toStringWithRangesVisibleWhitespace(input));
   }
-
-  //    @Test
-  //    public void test_buildSegments2() {
-  //        String input = "" +
-  //                "  line 1 \n" +
-  //                "  line 2 \n" +
-  //                "\n" +
-  //                "  line 3\n" +
-  //                "";
-  //        BasedSequence sequence = BasedSequence.of(input);
-  //        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence,
-  // F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
-  //
-  //        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
-  //        for (BasedSequence line : lines) {
-  //            BasedSequence trim = line.trim();
-  //            if (!trim.isEmpty()) segments.append("  ");
-  //            segments.append(trim.getSourceRange());
-  //            segments.append("\n");
-  //        }
-  //        assertEquals("BasedSegmentBuilder{[0, 30), s=0:0, u=0:0, t=0:0, l=28, sz=3, na=3: [0,
-  // 8), [9, 18), [19, 30) }", escapeJavaString(segments.toStringPrep()));
-  //        assertEquals(segments.toString(sequence).length(), segments.length());
-  //
-  //        assertEquals("⟦  line 1⟧⟦\\n  line 2⟧⟦\\n\\n  line 3\\n⟧",
-  // segments.toStringWithRangesVisibleWhitespace(input));
-  //
-  //        assertEquals("" +
-  //                "  line 1\n" +
-  //                "  line 2\n" +
-  //                "\n" +
-  //                "  line 3\n" +
-  //                "", segments.toString(sequence));
-  //    }
-  //
-  //    @Test
-  //    public void test_optimizersCompound3Anchors() {
-  //        String input = "" +
-  //                "line 1\n" +
-  //                "line 2 \n" +
-  //                "\n" +
-  //                "line 3\n" +
-  //                "";
-  //        BasedSequence sequence = BasedSequence.of(input);
-  //        CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
-  //        BasedSegmentBuilder segments = BasedSegmentBuilder.emptyBuilder(sequence, optimizer,
-  // F_TRACK_FIRST256 | F_INCLUDE_ANCHORS);
-  //
-  //        @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
-  //        for (BasedSequence line : lines) {
-  //            BasedSequence trim = line.trim();
-  ////            if (!trim.isEmpty()) segments.append("  ");
-  //            segments.append(trim.getSourceRange());
-  //            segments.append("\n");
-  //        }
-  //        assertEquals("BasedSegmentBuilder{[0, 23), s=0:0, u=0:0, t=0:0, l=22, sz=2, na=2: [0,
-  // 13), [14, 23) }", escapeJavaString(segments.toStringPrep()));
-  //        assertEquals(segments.toString(sequence).length(), segments.length());
-  //
-  //        assertEquals("⟦line 1\\nline 2⟧⟦\\n\\nline 3\\n⟧",
-  // segments.toStringWithRangesVisibleWhitespace(input));
-  //
-  //        assertEquals("" +
-  //                "line 1\n" +
-  //                "line 2\n" +
-  //                "\n" +
-  //                "line 3\n" +
-  //                "", segments.toString(sequence));
-  //    }
 }

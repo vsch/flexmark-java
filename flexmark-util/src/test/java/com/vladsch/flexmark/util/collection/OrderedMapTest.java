@@ -145,7 +145,7 @@ public class OrderedMapTest {
     iterator = orderedMap.iterator();
     int j = 0;
     while (iterator.hasNext()) {
-      Map.Entry<String, Integer> item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       Assert.assertEquals(j == 9 ? 0 : 10, orderedMap.keySet().getValueList().size());
@@ -186,7 +186,7 @@ public class OrderedMapTest {
     iterator = orderedMap.reversedIterable().reversedIterator();
     int j = 0;
     while (iterator.hasNext()) {
-      Map.Entry<String, Integer> item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       Assert.assertEquals(j == 9 ? 0 : 10, orderedMap.keySet().getValueList().size());
@@ -228,7 +228,7 @@ public class OrderedMapTest {
     iterator = orderedMap.reversedEntryIterator();
     int j = 9;
     while (iterator.hasNext()) {
-      Map.Entry<String, Integer> item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       // hosted sets don't shrink until empty
@@ -274,7 +274,7 @@ public class OrderedMapTest {
     iterator = orderedMap.entryIterable().reversed().reversed().reversedIterator();
     int j = 9;
     while (iterator.hasNext()) {
-      Map.Entry<String, Integer> item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       // hosted sets don't shrink

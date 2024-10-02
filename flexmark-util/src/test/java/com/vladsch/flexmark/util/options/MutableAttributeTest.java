@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class MutableAttributeTest {
   @Test
-  public void testBasic() throws Exception {
+  public void testBasic() {
     MutableAttribute attribute = MutableAttributeImpl.of("name", "value1", ' ');
     assertEquals("no name change", "name", attribute.getName());
 
@@ -60,7 +60,7 @@ public class MutableAttributeTest {
   }
 
   @Test
-  public void test_Style() throws Exception {
+  public void test_Style() {
     MutableAttribute attribute = MutableAttributeImpl.of("style", "");
 
     attribute.setValue("color:#white");

@@ -33,7 +33,7 @@ public class HtmlHelpers {
         String group = matcher.group(2);
         if (group != null && !group.isEmpty()) {
           int prevLineStart = matcher.group(1) != null ? matcher.start(1) : matcher.start(2);
-          String lastLine = Utils.repeat("&nbsp;", group.length());
+          String lastLine = "&nbsp;".repeat(group.length());
           err =
               err.substring(0, prevLineStart)
                   + "<span style=\"font-family:monospaced\">"

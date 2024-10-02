@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class AttributeTest {
   @Test
-  public void testBasic() throws Exception {
+  public void testBasic() {
     Attribute attribute = AttributeImpl.of("name", "value1", ' ');
     assertEquals("no name change", "name", attribute.getName().toString());
 

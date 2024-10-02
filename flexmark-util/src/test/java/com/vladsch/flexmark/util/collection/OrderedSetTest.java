@@ -126,7 +126,7 @@ public class OrderedSetTest {
     iterator = orderedSet.iterator();
     int j = 0;
     while (iterator.hasNext()) {
-      String item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       assertEquals(j == 9 ? 0 : 10, orderedSet.getValueList().size());
@@ -163,7 +163,7 @@ public class OrderedSetTest {
     iterator = orderedSet.reversedIterator();
     int j = 9;
     while (iterator.hasNext()) {
-      String item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       assertEquals(j, orderedSet.getValueList().size());

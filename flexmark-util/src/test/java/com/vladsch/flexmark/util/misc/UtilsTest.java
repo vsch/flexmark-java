@@ -190,11 +190,8 @@ public class UtilsTest {
 
   @Test
   public void testRepeat() {
-    assertEquals("", Utils.repeat("    ", 0));
-    assertEquals("aaa", Utils.repeat("a", 3));
-    assertEquals("", Utils.repeat("a", -5));
-
-    Assert.assertThrows(NullPointerException.class, () -> Utils.repeat(null, 268_435_456));
+    assertEquals("", "    ".repeat(0));
+    assertEquals("aaa", "a".repeat(3));
   }
 
   @Test

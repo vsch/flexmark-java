@@ -49,6 +49,7 @@ public class BitSetIterator implements ReversibleIterator<Integer> {
     bitSet.clear(last);
   }
 
+  @Override
   public void forEachRemaining(@NotNull Consumer<? super Integer> consumer) {
     while (hasNext()) {
       consumer.accept(next());

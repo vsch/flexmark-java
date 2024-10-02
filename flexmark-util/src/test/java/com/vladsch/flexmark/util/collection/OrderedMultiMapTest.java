@@ -165,7 +165,7 @@ public class OrderedMultiMapTest {
     iterator = orderedMap.entrySet().iterator();
     int j = 0;
     while (iterator.hasNext()) {
-      Map.Entry<String, Integer> item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       Assert.assertEquals(j == 9 ? 0 : 10, orderedMap.keySet().getValueList().size());
@@ -206,7 +206,7 @@ public class OrderedMultiMapTest {
     iterator = orderedMap.entrySet().reversedIterable().reversedIterator();
     int j = 0;
     while (iterator.hasNext()) {
-      Map.Entry<String, Integer> item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       Assert.assertEquals(j == 9 ? 0 : 10, orderedMap.keySet().getValueList().size());
@@ -248,7 +248,7 @@ public class OrderedMultiMapTest {
     iterator = orderedMap.entrySet().reversedIterator();
     int j = 9;
     while (iterator.hasNext()) {
-      Map.Entry<String, Integer> item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       // hosted sets don't shrink until empty
@@ -294,7 +294,7 @@ public class OrderedMultiMapTest {
     iterator = orderedMap.entrySetIterable().reversedIterator();
     int j = 9;
     while (iterator.hasNext()) {
-      Map.Entry<String, Integer> item = iterator.next();
+      iterator.next();
       iterator.remove();
 
       // hosted sets don't shrink
@@ -334,7 +334,7 @@ public class OrderedMultiMapTest {
     }
 
     for (int j = 0; j < 10; j++) {
-      Assert.assertEquals(String.valueOf(j), orderedMap.removeValue((Integer) j));
+      Assert.assertEquals(String.valueOf(j), orderedMap.removeValue(j));
 
       Assert.assertEquals(j == 9 ? 0 : 10, orderedMap.keySet().getValueList().size());
 
@@ -374,7 +374,7 @@ public class OrderedMultiMapTest {
     }
 
     for (int j = 10; j-- > 0; ) {
-      Assert.assertEquals(String.valueOf(j), orderedMap.removeValue((Integer) j));
+      Assert.assertEquals(String.valueOf(j), orderedMap.removeValue(j));
 
       // hosted sets don't shrink
       Assert.assertEquals(

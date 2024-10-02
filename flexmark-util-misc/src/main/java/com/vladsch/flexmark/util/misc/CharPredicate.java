@@ -93,7 +93,7 @@ public interface CharPredicate extends IntPredicate {
     Objects.requireNonNull(other);
     return this == NONE || other == NONE
         ? NONE
-        : this == ALL ? other : other == ALL ? this : (value) -> test(value) && other.test(value);
+        : this == ALL ? other : other == ALL ? this : value -> test(value) && other.test(value);
   }
 
   /**
@@ -101,9 +101,10 @@ public interface CharPredicate extends IntPredicate {
    *
    * @return a predicate that represents the logical negation of this predicate
    */
+  @Override
   @NotNull
   default CharPredicate negate() {
-    return this == NONE ? ALL : this == ALL ? NONE : (value) -> !test(value);
+    return this == NONE ? ALL : this == ALL ? NONE : value -> !test(value);
   }
 
   /**
@@ -125,14 +126,14 @@ public interface CharPredicate extends IntPredicate {
     Objects.requireNonNull(other);
     return this == ALL || other == ALL
         ? ALL
-        : this == NONE ? other : other == NONE ? this : (value) -> test(value) || other.test(value);
+        : this == NONE ? other : other == NONE ? this : value -> test(value) || other.test(value);
   }
 
   @NotNull
   static CharPredicate standardOrAnyOf(char c1) {
     return SPACE.test(c1)
         ? SPACE
-        : EOL.test(c1) ? EOL : TAB.test(c1) ? TAB : value1 -> value1 == (int) c1;
+        : EOL.test(c1) ? EOL : TAB.test(c1) ? TAB : value1 -> value1 == c1;
   }
 
   @NotNull
@@ -141,9 +142,7 @@ public interface CharPredicate extends IntPredicate {
         ? standardOrAnyOf(c1)
         : SPACE_TAB.test(c1) && SPACE_TAB.test(c2)
             ? SPACE_TAB
-            : ANY_EOL.test(c1) && ANY_EOL.test(c2)
-                ? ANY_EOL
-                : value -> value == (int) c1 || value == (int) c2;
+            : ANY_EOL.test(c1) && ANY_EOL.test(c2) ? ANY_EOL : value -> value == c1 || value == c2;
   }
 
   @NotNull
@@ -154,7 +153,7 @@ public interface CharPredicate extends IntPredicate {
             ? standardOrAnyOf(c2, c3)
             : c2 == c3
                 ? standardOrAnyOf(c1, c3)
-                : value -> value == (int) c1 || value == (int) c2 || value == (int) c3;
+                : value -> value == c1 || value == c2 || value == c3;
   }
 
   @NotNull
@@ -172,11 +171,7 @@ public interface CharPredicate extends IntPredicate {
                             && WHITESPACE.test(c3)
                             && WHITESPACE.test(c4)
                         ? WHITESPACE
-                        : value ->
-                            value == (int) c1
-                                || value == (int) c2
-                                || value == (int) c3
-                                || value == (int) c4;
+                        : value -> value == c1 || value == c2 || value == c3 || value == c4;
   }
 
   @NotNull

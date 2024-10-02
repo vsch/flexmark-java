@@ -23,6 +23,7 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
     return new NodeIterator(firstNode, lastNode, reversed);
   }
 
+  @Override
   public void forEach(Consumer<? super Node> consumer) {
     ReversibleIterator<Node> iterator = iterator();
     while (iterator.hasNext()) {
@@ -48,7 +49,7 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
   }
 
   public static final ReversiblePeekingIterable<Node> EMPTY =
-      new ReversiblePeekingIterable<Node>() {
+      new ReversiblePeekingIterable<>() {
         @NotNull
         @Override
         public ReversiblePeekingIterator<Node> iterator() {
@@ -61,6 +62,7 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
           return this;
         }
 
+        @Override
         public void forEach(Consumer<? super Node> consumer) {}
 
         @Override

@@ -24,7 +24,7 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
   public R resolveDependencies(List<D> dependentsList) {
     if (dependentsList.isEmpty()) {
       //noinspection unchecked
-      return createResolvedDependencies((List<S>) Collections.EMPTY_LIST);
+      return createResolvedDependencies(Collections.emptyList());
     } else if (dependentsList.size() == 1) {
       D dependent = dependentsList.get(0);
       List<D> dependents = Collections.singletonList(dependent);

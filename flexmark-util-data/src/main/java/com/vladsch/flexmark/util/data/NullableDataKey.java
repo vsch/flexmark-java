@@ -42,7 +42,7 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
    *     on dataHolder
    */
   public NullableDataKey(@NotNull String name, @NotNull Supplier<T> supplier) {
-    super(name, supplier.get(), (holder) -> supplier.get());
+    super(name, supplier.get(), holder -> supplier.get());
   }
 
   /**
@@ -71,16 +71,19 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
     this(name, null, options -> null);
   }
 
+  @Override
   @Nullable
   public T getDefaultValue() {
     return super.getDefaultValue();
   }
 
+  @Override
   @Nullable
   public T getDefaultValue(@NotNull DataHolder holder) {
     return super.getDefaultValue(holder);
   }
 
+  @Override
   @Nullable
   public T get(@Nullable DataHolder holder) {
     return super.get(holder);
