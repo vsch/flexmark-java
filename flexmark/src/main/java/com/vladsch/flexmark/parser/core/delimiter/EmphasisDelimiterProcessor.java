@@ -80,10 +80,10 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
     // calculate actual number of delimiters used from this closer
     if (opener.length() < 3 || closer.length() < 3) {
       return Utils.min(closer.length(), opener.length());
-    } else {
-      // default to latest spec
-      return closer.length() % 2 == 0 ? 2 : multipleUse;
     }
+
+    // default to latest spec
+    return closer.length() % 2 == 0 ? 2 : multipleUse;
   }
 
   @Override

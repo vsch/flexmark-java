@@ -16,6 +16,7 @@ public class ParagraphParser extends AbstractBlockParser {
   private final Paragraph block = new Paragraph();
   private BlockContent content = new BlockContent();
 
+  @Override
   public BlockContent getBlockContent() {
     return content;
   }
@@ -31,11 +32,11 @@ public class ParagraphParser extends AbstractBlockParser {
       // NOTE: here we can continue with any indent, unless the parent is a list item and the indent
       // is >= code indent
       return BlockContinue.atIndex(state.getIndex());
-    } else {
-      boolean blankLine = state.isBlankLine();
-      block.setTrailingBlankLine(blankLine);
-      return BlockContinue.none();
     }
+
+    boolean blankLine = state.isBlankLine();
+    block.setTrailingBlankLine(blankLine);
+    return BlockContinue.none();
   }
 
   @Override

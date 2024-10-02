@@ -36,6 +36,7 @@ public class BlockQuote extends Block implements BlockQuoteLike, KeepTrailingBla
     super(blockContent);
   }
 
+  @Override
   public BasedSequence getOpeningMarker() {
     return openingMarker;
   }

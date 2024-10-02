@@ -138,9 +138,9 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
           && !(state.getActiveBlockParser().getBlock() instanceof Paragraph)) {
         return BlockStart.of(new IndentedCodeBlockParser(state.getProperties()))
             .atColumn(state.getColumn() + state.getParsing().CODE_BLOCK_INDENT);
-      } else {
-        return BlockStart.none();
       }
+
+      return BlockStart.none();
     }
   }
 }

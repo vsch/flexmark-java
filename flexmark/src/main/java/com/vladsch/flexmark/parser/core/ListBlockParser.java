@@ -403,18 +403,19 @@ public class ListBlockParser extends AbstractBlockParser {
 
   private static ListBlock createListBlock(Matcher matcher) {
     String bullet = matcher.group(1);
+
     if (bullet != null) {
       BulletList bulletList = new BulletList();
       bulletList.setOpeningMarker(bullet.charAt(0));
       return bulletList;
-    } else {
-      String digit = matcher.group(2);
-      String delimiter = matcher.group(3);
-      OrderedList orderedList = new OrderedList();
-      orderedList.setStartNumber(Integer.parseInt(digit));
-      orderedList.setDelimiter(delimiter.charAt(0));
-      return orderedList;
     }
+
+    String digit = matcher.group(2);
+    String delimiter = matcher.group(3);
+    OrderedList orderedList = new OrderedList();
+    orderedList.setStartNumber(Integer.parseInt(digit));
+    orderedList.setDelimiter(delimiter.charAt(0));
+    return orderedList;
   }
 
   @Override
@@ -549,8 +550,7 @@ public class ListBlockParser extends AbstractBlockParser {
           if (listBlockParser.myItemHandledNewListLine) {
             // it is a new list already determined by the item
             ListData listData = parseListMarker(myOptions, newItemCodeIndent, state);
-            ListItemParser listItemParser =
-                new ListItemParser(myOptions, state.getParsing(), listData);
+            ListItemParser listItemParser = new ListItemParser(myOptions, listData);
 
             int newColumn =
                 listData.markerColumn + listData.listMarker.length() + listData.contentOffset;
@@ -559,8 +559,7 @@ public class ListBlockParser extends AbstractBlockParser {
           } else if (listBlockParser.myItemHandledNewItemLine) {
             // it is a new item for this list already determined by the previous item
             ListData listData = parseListMarker(myOptions, newItemCodeIndent, state);
-            ListItemParser listItemParser =
-                new ListItemParser(myOptions, state.getParsing(), listData);
+            ListItemParser listItemParser = new ListItemParser(myOptions, listData);
 
             int newColumn =
                 listData.markerColumn + listData.listMarker.length() + listData.contentOffset;
@@ -577,17 +576,17 @@ public class ListBlockParser extends AbstractBlockParser {
 
         // if there is a pre-existing list then it's last list item should have handled the line
         return BlockStart.none();
-      } else {
-        // see if the list item is still active and set line handled, need this to handle lazy
-        // continuations when they look like list items
-        ListBlock block = (ListBlock) matched.getBlock().getAncestorOfType(ListBlock.class);
-        if (block != null) {
-          ListBlockParser listBlockParser = (ListBlockParser) state.getActiveBlockParser(block);
-          if (listBlockParser.myItemHandledLine == state.getLine()
-              && listBlockParser.myItemHandledSkipActiveLine) {
-            listBlockParser.myItemHandledLine = null;
-            return BlockStart.none();
-          }
+      }
+
+      // see if the list item is still active and set line handled, need this to handle lazy
+      // continuations when they look like list items
+      ListBlock block = (ListBlock) matched.getBlock().getAncestorOfType(ListBlock.class);
+      if (block != null) {
+        ListBlockParser listBlockParser = (ListBlockParser) state.getActiveBlockParser(block);
+        if (listBlockParser.myItemHandledLine == state.getLine()
+            && listBlockParser.myItemHandledSkipActiveLine) {
+          listBlockParser.myItemHandledLine = null;
+          return BlockStart.none();
         }
       }
 
@@ -636,7 +635,7 @@ public class ListBlockParser extends AbstractBlockParser {
           return BlockStart.none();
         }
 
-        ListItemParser listItemParser = new ListItemParser(myOptions, state.getParsing(), listData);
+        ListItemParser listItemParser = new ListItemParser(myOptions, listData);
 
         // prepend new list block
         ListBlockParser listBlockParser = new ListBlockParser(myOptions, listData, listItemParser);

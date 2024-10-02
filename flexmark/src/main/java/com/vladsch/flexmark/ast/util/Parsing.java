@@ -438,11 +438,6 @@ public class Parsing {
           null);
     }
 
-    PatternTypeFlags withAllowNameSpace() {
-      return new PatternTypeFlags(
-          null, null, null, null, null, null, null, null, null, allowNameSpace);
-    }
-
     /**
      * Compare where null entry equals any other value
      *
@@ -717,19 +712,19 @@ public class Parsing {
                   if (listsOrderedItemDotOnly) {
                     return Pattern.compile(
                         "^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.])(?=[ \t])");
-                  } else {
-                    return Pattern.compile(
-                        "^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.)])(?=[ \t])");
                   }
-                } else {
-                  if (listsOrderedItemDotOnly) {
-                    return Pattern.compile(
-                        "^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
-                  } else {
-                    return Pattern.compile(
-                        "^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
-                  }
+
+                  return Pattern.compile(
+                      "^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.)])(?=[ \t])");
                 }
+
+                if (listsOrderedItemDotOnly) {
+                  return Pattern.compile(
+                      "^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
+                }
+
+                return Pattern.compile(
+                    "^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
               });
     }
 

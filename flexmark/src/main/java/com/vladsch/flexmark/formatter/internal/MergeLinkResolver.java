@@ -66,53 +66,53 @@ public class MergeLinkResolver implements LinkResolver {
         int pos = url.indexOf('#');
         if (pos == 0) {
           return link.withStatus(LinkStatus.VALID);
-        } else {
-          if (pos > 0) {
-            // remove anchor
-            suffix = url.substring(pos);
-            pageRef = url.substring(0, pos);
-          } else if (url.contains("?")) {
-            // remove query
-            pos = url.indexOf("?");
-            suffix = url.substring(pos);
-            pageRef = url.substring(0, pos);
-          }
+        }
 
-          String[] pathParts = pageRef.split("/");
-          int docParts = relativeParts.length;
-          int iMax = pathParts.length;
-          StringBuilder resolved = new StringBuilder();
-          String sep = "";
+        if (pos > 0) {
+          // remove anchor
+          suffix = url.substring(pos);
+          pageRef = url.substring(0, pos);
+        } else if (url.contains("?")) {
+          // remove query
+          pos = url.indexOf("?");
+          suffix = url.substring(pos);
+          pageRef = url.substring(0, pos);
+        }
 
-          for (int i = 0; i < iMax; i++) {
-            String part = pathParts[i];
-            if (part.equals(".")) {
-              // skp
-            } else if (part.equals("..")) {
-              // remove one doc part
-              if (docParts == 0) return link;
-              docParts--;
-            } else {
-              resolved.append(sep);
-              resolved.append(part);
-              sep = "/";
-            }
-          }
+        String[] pathParts = pageRef.split("/");
+        int docParts = relativeParts.length;
+        int iMax = pathParts.length;
+        StringBuilder resolved = new StringBuilder();
+        String sep = "";
 
-          // prefix with remaining docParts
-          sep = docRelativeURL.startsWith("/") ? "/" : "";
-          StringBuilder resolvedPath = new StringBuilder();
-          iMax = docParts;
-          for (int i = 0; i < iMax; i++) {
-            resolvedPath.append(sep);
-            resolvedPath.append(relativeParts[i]);
+        for (int i = 0; i < iMax; i++) {
+          String part = pathParts[i];
+          if (part.equals(".")) {
+            // skp
+          } else if (part.equals("..")) {
+            // remove one doc part
+            if (docParts == 0) return link;
+            docParts--;
+          } else {
+            resolved.append(sep);
+            resolved.append(part);
             sep = "/";
           }
-
-          resolvedPath.append('/').append(resolved).append(suffix);
-          String resolvedUri = resolvedPath.toString();
-          return link.withStatus(LinkStatus.VALID).withUrl(resolvedUri);
         }
+
+        // prefix with remaining docParts
+        sep = docRelativeURL.startsWith("/") ? "/" : "";
+        StringBuilder resolvedPath = new StringBuilder();
+        iMax = docParts;
+        for (int i = 0; i < iMax; i++) {
+          resolvedPath.append(sep);
+          resolvedPath.append(relativeParts[i]);
+          sep = "/";
+        }
+
+        resolvedPath.append('/').append(resolved).append(suffix);
+        String resolvedUri = resolvedPath.toString();
+        return link.withStatus(LinkStatus.VALID).withUrl(resolvedUri);
       }
     }
     return link;

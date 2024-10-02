@@ -127,6 +127,7 @@ public class ListOptions implements MutableDataSetter {
     }
 
     boolean autoLoose = isAutoLoose();
+
     if (autoLoose && isAutoLooseOneLevelLists()) {
       boolean singleLevel =
           node.getAncestorOfType(ListItem.class) == null
@@ -134,11 +135,11 @@ public class ListOptions implements MutableDataSetter {
       return node.getFirstChild() == null
           || !singleLevel && node.isTight()
           || singleLevel && node.isInTightList();
-    } else {
-      return node.getFirstChild() == null
-          || !autoLoose && node.isTight()
-          || autoLoose && node.isInTightList();
     }
+
+    return node.getFirstChild() == null
+        || !autoLoose && node.isTight()
+        || autoLoose && node.isInTightList();
   }
 
   public boolean isInTightListItem(@NotNull Paragraph node) {
@@ -180,13 +181,11 @@ public class ListOptions implements MutableDataSetter {
       if (isNumberedList) {
         return isDelimiterMismatchToNewList()
             && ((OrderedList) a).getDelimiter() != ((OrderedList) b).getDelimiter();
-      } else {
-        return isDelimiterMismatchToNewList()
-            && ((BulletList) a).getOpeningMarker() != ((BulletList) b).getOpeningMarker();
       }
-    } else {
-      return isItemTypeMismatchToNewList();
+      return isDelimiterMismatchToNewList()
+          && ((BulletList) a).getOpeningMarker() != ((BulletList) b).getOpeningMarker();
     }
+    return isItemTypeMismatchToNewList();
   }
 
   public boolean startSubList(@NotNull ListBlock a, @NotNull ListBlock b) {
@@ -200,6 +199,7 @@ public class ListOptions implements MutableDataSetter {
     return new MutableListOptions(this);
   }
 
+  @Override
   @NotNull
   public MutableDataHolder setIn(@NotNull MutableDataHolder options) {
     options.set(Parser.PARSER_EMULATION_PROFILE, getParserEmulationProfile());
@@ -526,28 +526,27 @@ public class ListOptions implements MutableDataSetter {
           if (isItemParagraph) {
             return orderedItemInterruptsItemParagraph
                 && (!isEmptyItem || emptyOrderedItemInterruptsItemParagraph);
-          } else {
-            return orderedItemInterruptsParagraph
-                && (!isEmptyItem || emptyOrderedItemInterruptsParagraph);
           }
-        } else {
-          if (isItemParagraph) {
-            return orderedNonOneItemInterruptsItemParagraph
-                && (!isEmptyItem || emptyOrderedNonOneItemInterruptsItemParagraph);
-          } else {
-            return orderedNonOneItemInterruptsParagraph
-                && (!isEmptyItem || emptyOrderedNonOneItemInterruptsParagraph);
-          }
+
+          return orderedItemInterruptsParagraph
+              && (!isEmptyItem || emptyOrderedItemInterruptsParagraph);
         }
-      } else {
+
         if (isItemParagraph) {
-          return bulletItemInterruptsItemParagraph
-              && (!isEmptyItem || emptyBulletItemInterruptsItemParagraph);
-        } else {
-          return bulletItemInterruptsParagraph
-              && (!isEmptyItem || emptyBulletItemInterruptsParagraph);
+          return orderedNonOneItemInterruptsItemParagraph
+              && (!isEmptyItem || emptyOrderedNonOneItemInterruptsItemParagraph);
         }
+
+        return orderedNonOneItemInterruptsParagraph
+            && (!isEmptyItem || emptyOrderedNonOneItemInterruptsParagraph);
       }
+
+      if (isItemParagraph) {
+        return bulletItemInterruptsItemParagraph
+            && (!isEmptyItem || emptyBulletItemInterruptsItemParagraph);
+      }
+
+      return bulletItemInterruptsParagraph && (!isEmptyItem || emptyBulletItemInterruptsParagraph);
     }
 
     public boolean canStartSubList(boolean isNumberedItem, boolean isOneItem, boolean isEmptyItem) {
@@ -561,12 +560,12 @@ public class ListOptions implements MutableDataSetter {
                     && (!isEmptyItem
                         || emptyOrderedNonOneSubItemInterruptsItemParagraph
                             && emptyOrderedNonOneItemInterruptsItemParagraph)));
-      } else {
-        return bulletItemInterruptsItemParagraph
-            && (!isEmptyItem
-                || emptyBulletSubItemInterruptsItemParagraph
-                    && emptyBulletItemInterruptsItemParagraph);
       }
+
+      return bulletItemInterruptsItemParagraph
+          && (!isEmptyItem
+              || emptyBulletSubItemInterruptsItemParagraph
+                  && emptyBulletItemInterruptsItemParagraph);
     }
 
     @Override

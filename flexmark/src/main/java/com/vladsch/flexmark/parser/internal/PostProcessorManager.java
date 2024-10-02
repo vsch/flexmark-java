@@ -81,11 +81,9 @@ public class PostProcessorManager {
       // processes the whole document and no ancestry info is
       // provided
       // new ClassifyingNodeTracker()
-      boolean hadGlobal = false;
       for (PostProcessorFactory dependent : stage.dependents) {
         if (dependent.affectsGlobalScope()) {
           document = dependent.apply(document).processDocument(document);
-          hadGlobal = true;
           // assume it no longer reflects reality;
           classifyingNodeTracker = null;
         } else {

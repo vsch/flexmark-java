@@ -22,6 +22,7 @@ public interface BlockPreProcessorFactory
    * @param state parser state, document blocks have already been parsed at this stage
    * @return block pre-processor
    */
+  @Override
   @NotNull
   BlockPreProcessor apply(@NotNull ParserState state);
 }

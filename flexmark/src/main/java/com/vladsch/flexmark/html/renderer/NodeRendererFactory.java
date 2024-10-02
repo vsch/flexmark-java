@@ -12,6 +12,7 @@ public interface NodeRendererFactory extends Function<DataHolder, NodeRenderer> 
    * @param options the context for rendering (normally passed on to the node renderer)
    * @return a node renderer
    */
+  @Override
   @NotNull
   NodeRenderer apply(@NotNull DataHolder options);
 }

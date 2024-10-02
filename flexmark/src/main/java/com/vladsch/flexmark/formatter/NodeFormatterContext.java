@@ -35,6 +35,7 @@ public interface NodeFormatterContext
    *
    * @param node the node to render
    */
+  @Override
   void render(@NotNull Node node);
 
   /**
@@ -42,6 +43,7 @@ public interface NodeFormatterContext
    *
    * @param parent node the children of which are to be rendered
    */
+  @Override
   void renderChildren(@NotNull Node parent);
 
   /**
@@ -60,6 +62,7 @@ public interface NodeFormatterContext
    *
    * @return the current renderer options {@link DataHolder}
    */
+  @Override
   @NotNull
   DataHolder getOptions();
 
@@ -72,6 +75,7 @@ public interface NodeFormatterContext
   /**
    * @return the {@link Document} node of the current context
    */
+  @Override
   @NotNull
   Document getDocument();
 

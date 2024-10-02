@@ -147,34 +147,42 @@ public class DocumentParser implements ParserState {
     return lineSegments;
   }
 
+  @Override
   public void blockParserAdded(BlockParser blockParser) {
     blockTracker.blockParserAdded(blockParser);
   }
 
+  @Override
   public void blockParserRemoved(BlockParser blockParser) {
     blockTracker.blockParserRemoved(blockParser);
   }
 
+  @Override
   public void blockAdded(@NotNull Block node) {
     blockTracker.blockAdded(node);
   }
 
+  @Override
   public void blockAddedWithChildren(@NotNull Block node) {
     blockTracker.blockAddedWithChildren(node);
   }
 
+  @Override
   public void blockAddedWithDescendants(@NotNull Block node) {
     blockTracker.blockAddedWithDescendants(node);
   }
 
+  @Override
   public void blockRemoved(@NotNull Block node) {
     blockTracker.blockRemoved(node);
   }
 
+  @Override
   public void blockRemovedWithChildren(@NotNull Block node) {
     blockTracker.blockRemovedWithChildren(node);
   }
 
+  @Override
   public void blockRemovedWithDescendants(@NotNull Block node) {
     blockTracker.blockRemovedWithDescendants(node);
   }
@@ -268,7 +276,7 @@ public class DocumentParser implements ParserState {
   }
 
   public static List<List<BlockPreProcessorFactory>> calculateBlockPreProcessors(
-      DataHolder options, List<BlockPreProcessorFactory> blockPreProcessors) {
+      List<BlockPreProcessorFactory> blockPreProcessors) {
     // By having the custom factories come first, extensions are able to change behavior of core
     // syntax.
     //        List<BlockPreProcessorFactory> list = new ArrayList<>(blockPreProcessors);
@@ -374,6 +382,7 @@ public class DocumentParser implements ParserState {
     return lineStart;
   }
 
+  @Override
   public int getLineEndIndex() {
     return lineEndIndex;
   }
@@ -499,33 +508,33 @@ public class DocumentParser implements ParserState {
         if (blockContinue.isFinalize()) {
           finalize(blockParser);
           return;
-        } else {
-          if (blockContinue.getNewIndex() != -1) {
-            setNewIndex(blockContinue.getNewIndex());
-            if (!blank && blockParser.getBlock() instanceof BlankLineContainer) {
-              findNextNonSpace();
-              if (blank) {
-                blankLine = new BlankLine(lineWithEOL, blockParser.getBlock());
-                blockParser.getBlock().appendChild(blankLine);
-              }
-            }
-          } else if (blockContinue.getNewColumn() != -1) {
-            setNewColumn(blockContinue.getNewColumn());
-            if (!blank && blockParser.getBlock() instanceof BlankLineContainer) {
-              findNextNonSpace();
-              if (blank) {
-                blankLine = new BlankLine(lineWithEOL, blockParser.getBlock());
-                blockParser.getBlock().appendChild(blankLine);
-              }
-            }
-          }
-          matches++;
+        }
 
-          if (blankLine != null
-              && (blankLinesInAst || blankLine.getClaimedBlankLine() == blockParser.getBlock())) {
-            if (blockParser.getBlock() instanceof BlankLineContainer) {
+        if (blockContinue.getNewIndex() != -1) {
+          setNewIndex(blockContinue.getNewIndex());
+          if (!blank && blockParser.getBlock() instanceof BlankLineContainer) {
+            findNextNonSpace();
+            if (blank) {
+              blankLine = new BlankLine(lineWithEOL, blockParser.getBlock());
               blockParser.getBlock().appendChild(blankLine);
             }
+          }
+        } else if (blockContinue.getNewColumn() != -1) {
+          setNewColumn(blockContinue.getNewColumn());
+          if (!blank && blockParser.getBlock() instanceof BlankLineContainer) {
+            findNextNonSpace();
+            if (blank) {
+              blankLine = new BlankLine(lineWithEOL, blockParser.getBlock());
+              blockParser.getBlock().appendChild(blankLine);
+            }
+          }
+        }
+        matches++;
+
+        if (blankLine != null
+            && (blankLinesInAst || blankLine.getClaimedBlankLine() == blockParser.getBlock())) {
+          if (blockParser.getBlock() instanceof BlankLineContainer) {
+            blockParser.getBlock().appendChild(blankLine);
           }
         }
       } else {
@@ -946,38 +955,38 @@ public class DocumentParser implements ParserState {
             block.unlink();
             blockRemoved(block);
             return;
+          }
+
+          // skip lines that were removed
+          int iMax = block.getLineCount();
+          int i;
+          for (i = 0; i < iMax; i++) {
+            if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset()) break;
+          }
+
+          if (i >= iMax) {
+            // all used up
+            block.unlink();
+            blockRemoved(block);
+            return;
+          } else if (block.getLineChars(i).getEndOffset() == contentChars.getStartOffset()) {
+            // full lines removed
+            block.setContent(block, i, iMax);
           } else {
-            // skip lines that were removed
-            int iMax = block.getLineCount();
-            int i;
-            for (i = 0; i < iMax; i++) {
-              if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset()) break;
+            // need to change the first line of the line list
+            ArrayList<BasedSequence> lines = new ArrayList<>(iMax - i);
+            lines.addAll(block.getContentLines().subList(i, iMax));
+            int start = contentChars.getStartOffset() - lines.get(0).getStartOffset();
+            if (start > 0 && start < lines.get(0).length()) {
+              lines.set(0, lines.get(0).subSequence(start));
             }
 
-            if (i >= iMax) {
-              // all used up
-              block.unlink();
-              blockRemoved(block);
-              return;
-            } else if (block.getLineChars(i).getEndOffset() == contentChars.getStartOffset()) {
-              // full lines removed
-              block.setContent(block, i, iMax);
-            } else {
-              // need to change the first line of the line list
-              ArrayList<BasedSequence> lines = new ArrayList<>(iMax - i);
-              lines.addAll(block.getContentLines().subList(i, iMax));
-              int start = contentChars.getStartOffset() - lines.get(0).getStartOffset();
-              if (start > 0 && start < lines.get(0).length()) {
-                lines.set(0, lines.get(0).subSequence(start));
-              }
-
-              // now we copy the indents
-              int[] indents = new int[iMax - i];
-              System.arraycopy(block.getLineIndents(), i, indents, 0, indents.length);
-              block.setContentLines(lines);
-              block.setLineIndents(indents);
-              block.setChars(contentChars);
-            }
+            // now we copy the indents
+            int[] indents = new int[iMax - i];
+            System.arraycopy(block.getLineIndents(), i, indents, 0, indents.length);
+            block.setContentLines(lines);
+            block.setLineIndents(indents);
+            block.setChars(contentChars);
           }
         }
       }

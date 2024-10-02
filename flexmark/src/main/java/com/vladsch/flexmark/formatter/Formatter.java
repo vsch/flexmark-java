@@ -357,6 +357,7 @@ public class Formatter implements IRender {
    * @param node node to render
    * @param output appendable to use for the output
    */
+  @Override
   public void render(@NotNull Node node, @NotNull Appendable output) {
     render(node, output, MAX_TRAILING_BLANK_LINES.get(options));
   }
@@ -401,6 +402,7 @@ public class Formatter implements IRender {
    * @param document the root node
    * @return the formatted markdown
    */
+  @Override
   @NotNull
   public String render(@NotNull Node document) {
     StringBuilder sb = new StringBuilder();
@@ -591,6 +593,7 @@ public class Formatter implements IRender {
     /**
      * @return the configured {@link Formatter}
      */
+    @Override
     @NotNull
     public Formatter build() {
       return new Formatter(this);
@@ -695,7 +698,7 @@ public class Formatter implements IRender {
   }
 
   private static final Iterator<Node> NULL_ITERATOR =
-      new Iterator<Node>() {
+      new Iterator<>() {
         @Override
         public boolean hasNext() {
           return false;
@@ -968,9 +971,11 @@ public class Formatter implements IRender {
     @Override
     public <T> T postProcessNonTranslating(
         @NotNull Function<String, CharSequence> postProcessor, @NotNull Supplier<T> scope) {
-      if (translationHandler != null)
+      if (translationHandler != null) {
         return translationHandler.postProcessNonTranslating(postProcessor, scope);
-      else return scope.get();
+      }
+
+      return scope.get();
     }
 
     @Override
@@ -1021,9 +1026,9 @@ public class Formatter implements IRender {
     public MutableDataHolder getTranslationStore() {
       if (translationHandler != null) {
         return translationHandler.getTranslationStore();
-      } else {
-        return document;
       }
+
+      return document;
     }
 
     @Override
@@ -1239,6 +1244,7 @@ public class Formatter implements IRender {
       }
     }
 
+    @Override
     public void renderChildren(@NotNull Node parent) {
       renderChildrenNode(parent, this);
     }
@@ -1269,20 +1275,20 @@ public class Formatter implements IRender {
         if (node instanceof Document) {
           // no default needed, just ignore
           return;
-        } else {
-          // see if there is a default node renderer list
-          List<NodeFormattingHandler<?>> nodeRendererList = renderers.get(Node.class);
-          if (nodeRendererList == null) {
-            throw new IllegalStateException(
-                "Core Node Formatter should implement generic Node renderer");
-          } else if (oldRendererList == nodeRendererList) {
-            throw new IllegalStateException(
-                "Core Node Formatter should not delegate generic Node renderer");
-          }
-
-          rendererList = nodeRendererList;
-          rendererIndex = 0;
         }
+
+        // see if there is a default node renderer list
+        List<NodeFormattingHandler<?>> nodeRendererList = renderers.get(Node.class);
+        if (nodeRendererList == null) {
+          throw new IllegalStateException(
+              "Core Node Formatter should implement generic Node renderer");
+        } else if (oldRendererList == nodeRendererList) {
+          throw new IllegalStateException(
+              "Core Node Formatter should not delegate generic Node renderer");
+        }
+
+        rendererList = nodeRendererList;
+        rendererIndex = 0;
       }
 
       subContext.rendererList = rendererList;
@@ -1301,7 +1307,7 @@ public class Formatter implements IRender {
       }
     }
 
-    private class SubNodeFormatter extends NodeFormatterSubContext implements NodeFormatterContext {
+    private class SubNodeFormatter extends NodeFormatterSubContext {
       private final MainNodeFormatter myMainNodeRenderer;
       private final DataHolder myOptions;
       private final FormatterOptions myFormatterOptions;

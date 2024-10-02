@@ -103,14 +103,14 @@ public class BlockQuoteParser extends AbstractBlockParser {
         }
       }
       return BlockContinue.atColumn(newColumn);
-    } else {
-      if (ignoreBlankLine && state.isBlank()) {
-        lastWasBlankLine++;
-        int newColumn = state.getColumn() + state.getIndent();
-        return BlockContinue.atColumn(newColumn);
-      }
-      return BlockContinue.none();
     }
+
+    if (ignoreBlankLine && state.isBlank()) {
+      lastWasBlankLine++;
+      int newColumn = state.getColumn() + state.getIndent();
+      return BlockContinue.atColumn(newColumn);
+    }
+    return BlockContinue.none();
   }
 
   static boolean isMarker(
@@ -130,9 +130,9 @@ public class BlockQuoteParser extends AbstractBlockParser {
           && (!inParagraphListItem || interruptsItemParagraph)) {
         if (inParagraphListItem && !withLeadSpacesInterruptsItemParagraph) {
           return state.getIndent() == 0;
-        } else {
-          return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT;
         }
+
+        return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT;
       }
     }
     return false;
@@ -195,6 +195,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
           Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH.get(options);
     }
 
+    @Override
     public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
       int nextNonSpace = state.getNextNonSpaceIndex();
       BlockParser matched = matchedBlockParser.getBlockParser();
@@ -223,9 +224,9 @@ public class BlockQuoteParser extends AbstractBlockParser {
                     state.getProperties(),
                     state.getLine().subSequence(nextNonSpace, nextNonSpace + 1)))
             .atColumn(newColumn);
-      } else {
-        return BlockStart.none();
       }
+
+      return BlockStart.none();
     }
   }
 }

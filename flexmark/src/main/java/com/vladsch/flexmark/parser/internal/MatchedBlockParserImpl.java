@@ -17,6 +17,7 @@ public class MatchedBlockParserImpl implements MatchedBlockParser {
     return null;
   }
 
+  @Override
   public List<Integer> getParagraphEolLengths() {
     if (matchedBlockParser.isParagraphParser()) {
       return matchedBlockParser.getBlockContent().getLineIndents();

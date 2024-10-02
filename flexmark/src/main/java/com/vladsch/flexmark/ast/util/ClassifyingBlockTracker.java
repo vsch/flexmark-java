@@ -94,7 +94,7 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
     allBlockParsersMap.removeKey(blockParser);
   }
 
-  private void validateLinked(Node node) {
+  private static void validateLinked(Node node) {
     if (node.getNext() == null && node.getParent() == null) {
       throw new IllegalStateException("Added block " + node + " is not linked into the AST");
     }
@@ -128,7 +128,7 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
     }
   }
 
-  private void validateUnlinked(Node node) {
+  private static void validateUnlinked(Node node) {
     if (!(node.getNext() == null && node.getParent() == null)) {
       throw new IllegalStateException("Removed block " + node + " is still linked in the AST");
     }

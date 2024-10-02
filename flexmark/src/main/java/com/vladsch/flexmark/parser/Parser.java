@@ -439,7 +439,7 @@ public class Parser implements IParse {
         DocumentParser.calculateParagraphPreProcessors(
             options, builder.paragraphPreProcessorFactories, this.inlineParserFactory);
     this.blockPreProcessorDependencies =
-        DocumentParser.calculateBlockPreProcessors(options, builder.blockPreProcessorFactories);
+        DocumentParser.calculateBlockPreProcessors(builder.blockPreProcessorFactories);
     this.delimiterProcessors =
         InlineParserImpl.calculateDelimiterProcessors(options, builder.delimiterProcessors);
     this.delimiterCharacters =
@@ -474,6 +474,7 @@ public class Parser implements IParse {
    * @param input the text to parse
    * @return the root node
    */
+  @Override
   public @NotNull Document parse(@NotNull BasedSequence input) {
     // NOTE: parser can only handle contiguous sequences with no out of base characters
     if (input instanceof ReplacedBasedSequence) {
@@ -509,6 +510,7 @@ public class Parser implements IParse {
    * @param input the text to parse
    * @return the root node
    */
+  @Override
   public @NotNull Document parse(@NotNull String input) {
     DocumentParser documentParser =
         new DocumentParser(
@@ -537,6 +539,7 @@ public class Parser implements IParse {
    * @return the root node
    * @throws IOException when reading throws an exception
    */
+  @Override
   public @NotNull Document parseReader(@NotNull Reader input) throws IOException {
     DocumentParser documentParser =
         new DocumentParser(
@@ -627,6 +630,7 @@ public class Parser implements IParse {
     /**
      * @return the configured {@link Parser}
      */
+    @Override
     @NotNull
     public Parser build() {
       return new Parser(this);

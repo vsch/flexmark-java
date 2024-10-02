@@ -106,9 +106,9 @@ public class ThematicBreakParser extends AbstractBlockParser {
       if (PATTERN.matcher(input).matches()) {
         return BlockStart.of(new ThematicBreakParser(line.subSequence(state.getIndex())))
             .atIndex(line.length());
-      } else {
-        return BlockStart.none();
       }
+
+      return BlockStart.none();
     }
   }
 

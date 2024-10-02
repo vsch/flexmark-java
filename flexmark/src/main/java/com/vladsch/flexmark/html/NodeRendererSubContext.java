@@ -17,6 +17,7 @@ public abstract class NodeRendererSubContext implements NodeRendererContext {
     this.doNotRenderLinksNesting = 0;
   }
 
+  @Override
   public @NotNull HtmlWriter getHtmlWriter() {
     return htmlWriter;
   }
@@ -38,19 +39,23 @@ public abstract class NodeRendererSubContext implements NodeRendererContext {
     return doNotRenderLinksNesting;
   }
 
+  @Override
   public boolean isDoNotRenderLinks() {
     return doNotRenderLinksNesting != 0;
   }
 
+  @Override
   public void doNotRenderLinks(boolean doNotRenderLinks) {
     if (doNotRenderLinks) doNotRenderLinks();
     else doRenderLinks();
   }
 
+  @Override
   public void doNotRenderLinks() {
     this.doNotRenderLinksNesting++;
   }
 
+  @Override
   public void doRenderLinks() {
     if (this.doNotRenderLinksNesting == 0)
       throw new IllegalStateException("Not in do not render links context");

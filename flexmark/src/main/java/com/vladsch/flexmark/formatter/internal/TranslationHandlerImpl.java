@@ -375,6 +375,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
   }
 
+  @Override
   public void nonTranslatingSpan(@NotNull TranslatingSpanRender render) {
     switch (myRenderPurpose) {
       case TRANSLATION_SPANS:
@@ -517,9 +518,9 @@ public class TranslationHandlerImpl implements TranslationHandler {
                 trimmedEOL);
         if (myNonTranslatingPostProcessor != null) {
           return myNonTranslatingPostProcessor.apply(placeholderId);
-        } else {
-          return placeholderId;
         }
+
+        return placeholderId;
 
       case TRANSLATED:
         if (nonTranslatingText.length() > 0) {

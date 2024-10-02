@@ -10,5 +10,6 @@ public abstract class DocumentPostProcessor implements PostProcessor {
    * @param state node tracker used for optimizing node processing
    * @param node the node to post-process
    */
+  @Override
   public final void process(@NotNull NodeTracker state, @NotNull Node node) {}
 }

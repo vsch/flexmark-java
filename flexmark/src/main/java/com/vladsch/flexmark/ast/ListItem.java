@@ -133,6 +133,7 @@ public abstract class ListItem extends Block
     return isItemParagraph(node);
   }
 
+  @Override
   public boolean isItemParagraph(Paragraph node) {
     // see if this is the first paragraph child item
     Node child = getFirstChild();

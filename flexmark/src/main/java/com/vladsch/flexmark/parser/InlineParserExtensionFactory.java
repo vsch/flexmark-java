@@ -20,6 +20,7 @@ public interface InlineParserExtensionFactory
    * @param inlineParser inline parser instance
    * @return inline parser extension
    */
+  @Override
   @NotNull
   InlineParserExtension apply(@NotNull LightInlineParser inlineParser);
 }

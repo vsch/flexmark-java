@@ -19,6 +19,7 @@ public abstract class AnchorRefTargetBlockVisitor extends NodeVisitorBase {
     return true;
   }
 
+  @Override
   public void visit(@NotNull Node node) {
     if (node instanceof AnchorRefTarget) visit((AnchorRefTarget) node);
 

@@ -164,9 +164,9 @@ public class LightInlineParserImpl implements LightInlineParser {
       index = matcher.end();
       MatchResult result = matcher.toMatchResult();
       return input.subSequence(result.start(), result.end());
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   /**
@@ -198,9 +198,9 @@ public class LightInlineParserImpl implements LightInlineParser {
         }
       }
       return results;
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   /**
@@ -221,9 +221,9 @@ public class LightInlineParserImpl implements LightInlineParser {
     if (m) {
       index = matcher.end();
       return matcher;
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   /**
@@ -234,18 +234,18 @@ public class LightInlineParserImpl implements LightInlineParser {
   public char peek() {
     if (index < input.length()) {
       return input.charAt(index);
-    } else {
-      return SequenceUtils.NUL;
     }
+
+    return SequenceUtils.NUL;
   }
 
   @Override
   public char peek(int ahead) {
     if (index + ahead < input.length()) {
       return input.charAt(index + ahead);
-    } else {
-      return SequenceUtils.NUL;
     }
+
+    return SequenceUtils.NUL;
   }
 
   /**

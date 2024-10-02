@@ -212,32 +212,31 @@ public class HeadingParser extends AbstractBlockParser {
         headingParser.block.setCharsFromContent();
 
         return BlockStart.of(headingParser).atIndex(line.length());
-      } else {
-        if ((matcher = myParsing.SETEXT_HEADING.matcher(trySequence)).find()) {
-          if (paragraph != null) {
-            // setext heading line
-            int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
-
-            BlockContent content = new BlockContent();
-            content.addAll(
-                matchedBlockParser.getParagraphLines(),
-                matchedBlockParser.getParagraphEolLengths());
-            BasedSequence headingText = content.getContents().trim();
-            BasedSequence closingMarker = line.trim();
-
-            HeadingParser headingParser = new HeadingParser(level);
-            headingParser.block.setText(headingText);
-            headingParser.block.setClosingMarker(closingMarker);
-            headingParser.block.setCharsFromContent();
-
-            return BlockStart.of(headingParser).atIndex(line.length()).replaceActiveBlockParser();
-          } else {
-            return BlockStart.none();
-          }
-        } else {
-          return BlockStart.none();
-        }
       }
+
+      if ((matcher = myParsing.SETEXT_HEADING.matcher(trySequence)).find()) {
+        if (paragraph != null) {
+          // setext heading line
+          int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
+
+          BlockContent content = new BlockContent();
+          content.addAll(
+              matchedBlockParser.getParagraphLines(), matchedBlockParser.getParagraphEolLengths());
+          BasedSequence headingText = content.getContents().trim();
+          BasedSequence closingMarker = line.trim();
+
+          HeadingParser headingParser = new HeadingParser(level);
+          headingParser.block.setText(headingText);
+          headingParser.block.setClosingMarker(closingMarker);
+          headingParser.block.setCharsFromContent();
+
+          return BlockStart.of(headingParser).atIndex(line.length()).replaceActiveBlockParser();
+        }
+
+        return BlockStart.none();
+      }
+
+      return BlockStart.none();
     }
   }
 

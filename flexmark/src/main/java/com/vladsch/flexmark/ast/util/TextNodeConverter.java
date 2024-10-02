@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextNodeConverter {
-  private final BasedSequence nodeChars;
   private BasedSequence remainingChars;
   private final ArrayList<Node> list = new ArrayList<>();
 
   public TextNodeConverter(BasedSequence nodeChars) {
-    this.nodeChars = nodeChars;
     this.remainingChars = nodeChars;
   }
 

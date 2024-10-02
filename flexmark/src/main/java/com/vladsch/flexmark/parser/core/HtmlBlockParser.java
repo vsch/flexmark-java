@@ -138,18 +138,18 @@ public class HtmlBlockParser extends AbstractBlockParser {
       }
 
       return BlockContinue.atIndex(state.getIndex());
-    } else {
-      if (finished) {
-        return BlockContinue.none();
-      }
-
-      // Blank line ends type 6 and type 7 blocks
-      if (state.isBlank() && closingPattern == null) {
-        return BlockContinue.none();
-      } else {
-        return BlockContinue.atIndex(state.getIndex());
-      }
     }
+
+    if (finished) {
+      return BlockContinue.none();
+    }
+
+    // Blank line ends type 6 and type 7 blocks
+    if (state.isBlank() && closingPattern == null) {
+      return BlockContinue.none();
+    }
+
+    return BlockContinue.atIndex(state.getIndex());
   }
 
   @Override

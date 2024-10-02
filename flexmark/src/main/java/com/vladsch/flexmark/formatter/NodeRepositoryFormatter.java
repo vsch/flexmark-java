@@ -75,9 +75,9 @@ public abstract class NodeRepositoryFormatter<
   protected ElementPlacement getTranslationReferencePlacement(NodeFormatterContext context) {
     if (context.isTransformingText()) {
       return ElementPlacement.AS_IS;
-    } else {
-      return getReferencePlacement();
     }
+
+    return getReferencePlacement();
   }
 
   public String modifyTransformedReference(

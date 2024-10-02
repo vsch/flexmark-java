@@ -92,9 +92,9 @@ public class ResolvedLink {
     int pos = myUrl.indexOf('#');
     if (pos < 0) {
       return myUrl;
-    } else {
-      return myUrl.substring(0, pos);
     }
+
+    return myUrl.substring(0, pos);
   }
 
   public @Nullable String getAnchorRef() {
@@ -102,9 +102,9 @@ public class ResolvedLink {
     int pos = myUrl.indexOf('#');
     if (pos < 0) {
       return null;
-    } else {
-      return myUrl.substring(pos + 1);
     }
+
+    return myUrl.substring(pos + 1);
   }
 
   public @NotNull ResolvedLink withTitle(@Nullable CharSequence title) {

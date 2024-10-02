@@ -40,16 +40,16 @@ public abstract class RefNode extends Node
         text,
         textClosingMarker,
       };
-    } else {
-      return new BasedSequence[] {
-        textOpeningMarker,
-        text,
-        textClosingMarker,
-        referenceOpeningMarker,
-        reference,
-        referenceClosingMarker,
-      };
     }
+
+    return new BasedSequence[] {
+      textOpeningMarker,
+      text,
+      textClosingMarker,
+      referenceOpeningMarker,
+      reference,
+      referenceClosingMarker,
+    };
   }
 
   @Override
@@ -278,45 +278,45 @@ public abstract class RefNode extends Node
           out.append(
               getChars().baseSubSequence(segments[1].getEndOffset(), segments[2].getStartOffset()));
         return false;
-      } else {
+      }
+
+      return true;
+    }
+
+    Reference reference = getReferenceNode(getDocument());
+    if (urlType == F_LINK_NODE_TEXT) {
+      out.append(getChars());
+    } else {
+      if (reference == null) {
         return true;
       }
-    } else {
-      Reference reference = getReferenceNode(getDocument());
-      if (urlType == F_LINK_NODE_TEXT) {
-        out.append(getChars());
-      } else {
-        if (reference == null) {
+
+      BasedSequence url;
+
+      switch (urlType) {
+        case F_LINK_PAGE_REF:
+          url = reference.getPageRef();
+          break;
+
+        case F_LINK_ANCHOR:
+          url = reference.getAnchorRef();
+          break;
+
+        case F_LINK_URL:
+          url = reference.getUrl();
+          break;
+
+        default:
           return true;
-        } else {
-          BasedSequence url;
-
-          switch (urlType) {
-            case F_LINK_PAGE_REF:
-              url = reference.getPageRef();
-              break;
-
-            case F_LINK_ANCHOR:
-              url = reference.getAnchorRef();
-              break;
-
-            case F_LINK_URL:
-              url = reference.getUrl();
-              break;
-
-            default:
-              return true;
-          }
-
-          ReplacedTextMapper textMapper = new ReplacedTextMapper(url);
-          BasedSequence unescaped = Escaping.unescape(url, textMapper);
-          BasedSequence percentDecoded = Escaping.percentDecodeUrl(unescaped, textMapper);
-          out.append(percentDecoded);
-        }
       }
 
-      return false;
+      ReplacedTextMapper textMapper = new ReplacedTextMapper(url);
+      BasedSequence unescaped = Escaping.unescape(url, textMapper);
+      BasedSequence percentDecoded = Escaping.percentDecodeUrl(unescaped, textMapper);
+      out.append(percentDecoded);
     }
+
+    return false;
   }
 
   @NotNull

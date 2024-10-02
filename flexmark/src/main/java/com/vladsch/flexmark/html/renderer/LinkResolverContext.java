@@ -16,12 +16,14 @@ public interface LinkResolverContext extends LinkResolverBasicContext {
    *
    * @return the current renderer options {@link DataHolder}
    */
+  @Override
   @NotNull
   DataHolder getOptions();
 
   /**
    * @return the {@link Document} node of the current context
    */
+  @Override
   @NotNull
   Document getDocument();
 

@@ -284,6 +284,7 @@ public class HtmlRenderer implements IRender {
    * @param node node to render
    * @param output appendable to use for the output
    */
+  @Override
   public void render(@NotNull Node node, @NotNull Appendable output) {
     render(node, output, htmlOptions.maxTrailingBlankLines);
   }
@@ -326,6 +327,7 @@ public class HtmlRenderer implements IRender {
    * @param node the root node
    * @return the rendered HTML.
    */
+  @Override
   @NotNull
   public String render(@NotNull Node node) {
     StringBuilder sb = new StringBuilder();
@@ -430,6 +432,7 @@ public class HtmlRenderer implements IRender {
     /**
      * @return the configured {@link HtmlRenderer}
      */
+    @Override
     @NotNull
     public HtmlRenderer build() {
       return new HtmlRenderer(this);
@@ -511,6 +514,7 @@ public class HtmlRenderer implements IRender {
      * @param attributeProviderFactory the attribute provider factory to add
      * @return {@code this}
      */
+    @Override
     public @NotNull Builder attributeProviderFactory(
         @NotNull AttributeProviderFactory attributeProviderFactory) {
       this.attributeProviderFactories.put(
@@ -547,6 +551,7 @@ public class HtmlRenderer implements IRender {
      * @param linkResolverFactory the factory for creating a node renderer
      * @return {@code this}
      */
+    @Override
     public @NotNull Builder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory) {
       this.linkResolverFactories.add(linkResolverFactory);
       addExtensionApiPoint(linkResolverFactory);
@@ -571,6 +576,7 @@ public class HtmlRenderer implements IRender {
      * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
      * @return {@code this}
      */
+    @Override
     @NotNull
     public Builder htmlIdGeneratorFactory(
         @NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
@@ -616,8 +622,7 @@ public class HtmlRenderer implements IRender {
     void extend(@NotNull Builder htmlRendererBuilder, @NotNull String rendererType);
   }
 
-  private class MainNodeRenderer extends NodeRendererSubContext
-      implements NodeRendererContext, Disposable {
+  private class MainNodeRenderer extends NodeRendererSubContext implements Disposable {
     private Document document;
     private Map<Class<?>, NodeRenderingHandlerWrapper> renderers;
     private List<PhasedNodeRenderer> phasedRenderers;
@@ -787,9 +792,9 @@ public class HtmlRenderer implements IRender {
     public String encodeUrl(@NotNull CharSequence url) {
       if (htmlOptions.percentEncodeUrls) {
         return Escaping.percentEncodeUrl(url);
-      } else {
-        return String.valueOf(url);
       }
+
+      return String.valueOf(url);
     }
 
     @Override
@@ -927,6 +932,7 @@ public class HtmlRenderer implements IRender {
       }
     }
 
+    @Override
     public void renderChildren(@NotNull Node parent) {
       renderChildrenNode(parent, this);
     }
@@ -940,7 +946,7 @@ public class HtmlRenderer implements IRender {
       }
     }
 
-    private class SubNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
+    private class SubNodeRenderer extends NodeRendererSubContext {
       private final MainNodeRenderer myMainNodeRenderer;
 
       public SubNodeRenderer(
@@ -1064,6 +1070,7 @@ public class HtmlRenderer implements IRender {
         return htmlWriter;
       }
 
+      @Override
       protected int getDoNotRenderLinksNesting() {
         return super.getDoNotRenderLinksNesting();
       }

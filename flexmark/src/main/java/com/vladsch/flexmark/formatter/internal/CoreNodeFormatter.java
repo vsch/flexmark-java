@@ -322,7 +322,7 @@ public class CoreNodeFormatter
 
         for (DataKeyBase<?> key : keys) {
           if (key.get(document) instanceof NodeRepository) {
-            NodeRepository<?> repository = (NodeRepository<?>) key.get((DataHolder) document);
+            NodeRepository<?> repository = (NodeRepository<?>) key.get(document);
             Set<?> nodes = repository.getReferencedElements(document);
 
             for (Object value : nodes) {
@@ -1081,15 +1081,15 @@ public class CoreNodeFormatter
 
               case ' ':
                 if (hadEOL) {
-                  markdown.append(BasedSequence.LS);
+                  markdown.append(SequenceUtils.LS);
                   hadEOL = false;
                 }
-                markdown.append(BasedSequence.NBSP);
+                markdown.append(SequenceUtils.NBSP);
                 break;
 
               default:
                 if (hadEOL) {
-                  markdown.append(BasedSequence.LS);
+                  markdown.append(SequenceUtils.LS);
                   hadEOL = false;
                 }
                 markdown.append(chars.subSequence(i, i + 1));
@@ -1102,7 +1102,7 @@ public class CoreNodeFormatter
         markdown.popOptions();
         markdown.closePreFormatted();
         // title and closing must be first on the line
-        markdown.append(BasedSequence.LS);
+        markdown.append(SequenceUtils.LS);
       }
 
       if (node.getTitleOpeningMarker().isNotNull()) {

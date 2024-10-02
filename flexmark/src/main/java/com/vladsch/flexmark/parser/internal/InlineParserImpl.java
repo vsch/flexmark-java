@@ -1225,12 +1225,12 @@ public class InlineParserImpl extends LightInlineParserImpl
       }
 
       return true;
-    } else { // no link or image
-      index = startIndex;
-      appendText(input.subSequence(index - 1, index));
-      removeLastBracket();
-      return true;
     }
+
+    index = startIndex;
+    appendText(input.subSequence(index - 1, index));
+    removeLastBracket();
+    return true;
   }
 
   protected static boolean containsLinkRefs(Node node, Boolean isTentative) {
@@ -1315,53 +1315,53 @@ public class InlineParserImpl extends LightInlineParserImpl
     BasedSequence res = match(myParsing.LINK_DESTINATION_ANGLES);
     if (res != null) {
       return res;
-    } else {
-      if (linkDestinationParser != null) {
-        BasedSequence match = linkDestinationParser.parseLinkDestination(input, index);
-        index += match.length();
-        return match;
-      } else {
-        boolean spaceInUrls = options.spaceInLinkUrls;
-        if (options.linksAllowMatchedParentheses) {
-          // allow matched parenthesis
-          // fix for issue of stack overflow when parsing long input lines, by implementing
-          // non-recursive scan
-          BasedSequence matched = match(myParsing.LINK_DESTINATION_MATCHED_PARENS);
-          if (matched != null) {
-            int openCount = 0;
-            int iMax = matched.length();
-            for (int i = 0; i < iMax; i++) {
-              char c = matched.charAt(i);
-              if (c == '\\') {
-                if (i + 1 < iMax
-                    && myParsing.ESCAPABLE.matcher(matched.subSequence(i + 1, i + 2)).matches()) {
-                  // escape
-                  i++;
-                }
-              } else if (c == '(') {
-                openCount++;
-              } else if (c == ')') {
-                if (openCount == 0) {
-                  // truncate to this and leave ')' to be parsed
-                  index -= iMax - i;
-                  matched = matched.subSequence(0, i);
-                  break;
-                }
-                openCount--;
-              }
-            }
-
-            return spaceInUrls ? matched.trimEnd(CharPredicate.SPACE) : matched;
-          }
-
-          return null;
-        } else {
-          // spec 0.27 compatibility
-          BasedSequence matched = match(myParsing.LINK_DESTINATION);
-          return matched != null && spaceInUrls ? matched.trimEnd(CharPredicate.SPACE) : matched;
-        }
-      }
     }
+
+    if (linkDestinationParser != null) {
+      BasedSequence match = linkDestinationParser.parseLinkDestination(input, index);
+      index += match.length();
+      return match;
+    }
+
+    boolean spaceInUrls = options.spaceInLinkUrls;
+    if (options.linksAllowMatchedParentheses) {
+      // allow matched parenthesis
+      // fix for issue of stack overflow when parsing long input lines, by implementing
+      // non-recursive scan
+      BasedSequence matched = match(myParsing.LINK_DESTINATION_MATCHED_PARENS);
+      if (matched != null) {
+        int openCount = 0;
+        int iMax = matched.length();
+        for (int i = 0; i < iMax; i++) {
+          char c = matched.charAt(i);
+          if (c == '\\') {
+            if (i + 1 < iMax
+                && myParsing.ESCAPABLE.matcher(matched.subSequence(i + 1, i + 2)).matches()) {
+              // escape
+              i++;
+            }
+          } else if (c == '(') {
+            openCount++;
+          } else if (c == ')') {
+            if (openCount == 0) {
+              // truncate to this and leave ')' to be parsed
+              index -= iMax - i;
+              matched = matched.subSequence(0, i);
+              break;
+            }
+            openCount--;
+          }
+        }
+
+        return spaceInUrls ? matched.trimEnd(CharPredicate.SPACE) : matched;
+      }
+
+      return null;
+    }
+
+    // spec 0.27 compatibility
+    BasedSequence matched = match(myParsing.LINK_DESTINATION);
+    return matched != null && spaceInUrls ? matched.trimEnd(CharPredicate.SPACE) : matched;
   }
 
   /**
@@ -1442,9 +1442,9 @@ public class InlineParserImpl extends LightInlineParserImpl
       }
       appendNode(node);
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   /**
@@ -1459,9 +1459,9 @@ public class InlineParserImpl extends LightInlineParserImpl
       HtmlEntity node = new HtmlEntity(m);
       appendNode(node);
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   /**
@@ -1482,9 +1482,9 @@ public class InlineParserImpl extends LightInlineParserImpl
     if (begin != index) {
       appendText(input, begin, index);
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   @Override
@@ -1580,9 +1580,9 @@ public class InlineParserImpl extends LightInlineParserImpl
 
     if (canOpen || canClose || !delimiterProcessor.skipNonOpenerCloser()) {
       return new DelimiterData(delimiterCount, canOpen, canClose);
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   @Override

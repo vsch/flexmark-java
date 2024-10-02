@@ -8,13 +8,11 @@ import com.vladsch.flexmark.util.dependency.Dependent;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /** Factory for instantiating new node renderers with dependencies */
-class DelegatingNodeRendererFactoryWrapper
-    implements Function<DataHolder, NodeRenderer>, Dependent, DelegatingNodeRendererFactory {
+class DelegatingNodeRendererFactoryWrapper implements Dependent, DelegatingNodeRendererFactory {
   private final NodeRendererFactory nodeRendererFactory;
   private List<DelegatingNodeRendererFactoryWrapper> nodeRenderers;
   private Set<Class<?>> myDelegates = null;

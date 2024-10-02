@@ -46,6 +46,7 @@ public interface InlineParser extends LightInlineParser {
 
   void mergeIfNeeded(@Nullable Text first, @Nullable Text last);
 
+  @Override
   @Nullable
   BasedSequence toEOL();
 

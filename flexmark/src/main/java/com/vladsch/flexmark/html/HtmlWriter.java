@@ -112,6 +112,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     return this;
   }
 
+  @Override
   @NotNull
   public HtmlWriter withAttr() {
     return withAttr(AttributablePart.NODE);

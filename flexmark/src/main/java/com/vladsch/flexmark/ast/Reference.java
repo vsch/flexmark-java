@@ -104,34 +104,42 @@ public class Reference extends LinkNodeBase
     this.closingMarker = closingMarker;
   }
 
+  @Override
   public BasedSequence getUrlOpeningMarker() {
     return urlOpeningMarker;
   }
 
+  @Override
   public void setUrlOpeningMarker(BasedSequence urlOpeningMarker) {
     this.urlOpeningMarker = urlOpeningMarker;
   }
 
+  @Override
   public BasedSequence getUrlClosingMarker() {
     return urlClosingMarker;
   }
 
+  @Override
   public void setUrlClosingMarker(BasedSequence urlClosingMarker) {
     this.urlClosingMarker = urlClosingMarker;
   }
 
+  @Override
   public BasedSequence getTitleOpeningMarker() {
     return titleOpeningMarker;
   }
 
+  @Override
   public void setTitleOpeningMarker(BasedSequence titleOpeningMarker) {
     this.titleOpeningMarker = titleOpeningMarker;
   }
 
+  @Override
   public BasedSequence getTitleClosingMarker() {
     return titleClosingMarker;
   }
 
+  @Override
   public void setTitleClosingMarker(BasedSequence titleClosingMarker) {
     this.titleClosingMarker = titleClosingMarker;
   }
@@ -144,42 +152,52 @@ public class Reference extends LinkNodeBase
     this.reference = reference;
   }
 
+  @Override
   public BasedSequence getUrl() {
     return url;
   }
 
+  @Override
   public void setUrl(BasedSequence url) {
     this.url = url;
   }
 
+  @Override
   public BasedSequence getPageRef() {
     return pageRef;
   }
 
+  @Override
   public void setPageRef(BasedSequence pageRef) {
     this.pageRef = pageRef;
   }
 
+  @Override
   public BasedSequence getAnchorMarker() {
     return anchorMarker;
   }
 
+  @Override
   public void setAnchorMarker(BasedSequence anchorMarker) {
     this.anchorMarker = anchorMarker;
   }
 
+  @Override
   public BasedSequence getAnchorRef() {
     return anchorRef;
   }
 
+  @Override
   public void setAnchorRef(BasedSequence anchorRef) {
     this.anchorRef = anchorRef;
   }
 
+  @Override
   public BasedSequence getTitle() {
     return title;
   }
 
+  @Override
   public void setTitle(BasedSequence title) {
     this.title = title;
   }

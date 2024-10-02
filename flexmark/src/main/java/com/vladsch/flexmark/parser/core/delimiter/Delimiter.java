@@ -120,18 +120,18 @@ public class Delimiter implements DelimiterRun {
     if (previousNode instanceof Text
         && (this.previous == null || this.previous.node != previousNode)) {
       return (Text) previousNode;
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   public Text getNextNonDelimiterTextNode() {
     Node nextNode = node.getNext();
     if (nextNode instanceof Text && (this.next == null || this.next.node != nextNode)) {
       return (Text) nextNode;
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   public void moveNodesBetweenDelimitersTo(DelimitedNode delimitedNode, Delimiter closer) {
