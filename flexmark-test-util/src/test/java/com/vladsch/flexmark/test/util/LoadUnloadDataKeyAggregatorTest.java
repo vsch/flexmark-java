@@ -17,13 +17,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.Test;
 
 public class LoadUnloadDataKeyAggregatorTest {
   public static final DataKey<Collection<Class<? extends Extension>>> LOAD_EXTENSION_CLASSES =
       new DataKey<>("LOAD_EXTENSION_CLASSES", Collections.emptyList());
 
-  static final HashMap<String, DataHolder> optionsMap = new HashMap<>();
+  static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
   static {
     optionsMap.put(

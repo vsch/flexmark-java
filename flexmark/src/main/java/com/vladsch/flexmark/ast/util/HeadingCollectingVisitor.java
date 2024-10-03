@@ -6,9 +6,10 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.VisitHandler;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HeadingCollectingVisitor {
-  private final ArrayList<Heading> headings = new ArrayList<>();
+  private final List<Heading> headings = new ArrayList<>();
   private final NodeVisitor myVisitor;
 
   public HeadingCollectingVisitor() {
@@ -19,12 +20,12 @@ public class HeadingCollectingVisitor {
     myVisitor.visit(node);
   }
 
-  public ArrayList<Heading> collectAndGetHeadings(Node node) {
+  public List<Heading> collectAndGetHeadings(Node node) {
     myVisitor.visit(node);
     return headings;
   }
 
-  public ArrayList<Heading> getHeadings() {
+  public List<Heading> getHeadings() {
     return headings;
   }
 }

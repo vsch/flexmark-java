@@ -157,7 +157,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     if (host != null && !host.skipHostUpdate()) {
       host.adding(index, k, v);
     }
-    //noinspection unchecked
     valueList.add((V) v);
   }
 
@@ -194,13 +193,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
 
   @Override
   public boolean containsKey(@Nullable Object o) {
-    //noinspection SuspiciousMethodCalls
     return keySet.contains(o);
   }
 
   @Override
   public boolean containsValue(@Nullable Object o) {
-    //noinspection SuspiciousMethodCalls
     int index = valueList.indexOf(o);
     return keySet.isValidIndex(index);
   }
@@ -249,7 +246,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
 
   @Override
   public @NotNull V remove(@Nullable Object o) {
-    //noinspection unchecked
     return (V) keySet.removeHosted(o);
   }
 

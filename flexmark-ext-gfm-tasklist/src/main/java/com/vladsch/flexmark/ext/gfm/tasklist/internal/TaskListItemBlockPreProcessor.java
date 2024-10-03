@@ -45,7 +45,7 @@ public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
     @NotNull
     @Override
     public Set<Class<? extends Block>> getBlockTypes() {
-      HashSet<Class<? extends Block>> set = new HashSet<>();
+      Set<Class<? extends Block>> set = new HashSet<>();
       set.add(BulletListItem.class);
       set.add(OrderedListItem.class);
       return set;

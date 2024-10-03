@@ -43,7 +43,7 @@ public class ClassifyingNodeTracker implements NodeTracker {
   }
 
   @NotNull
-  public HashMap<Integer, BitSet> getNodeAncestryMap() {
+  public Map<Integer, BitSet> getNodeAncestryMap() {
     return nodeAncestryMap;
   }
 

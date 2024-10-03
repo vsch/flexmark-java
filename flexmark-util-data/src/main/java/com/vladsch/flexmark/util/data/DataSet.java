@@ -3,21 +3,25 @@ package com.vladsch.flexmark.util.data;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class DataSet implements DataHolder {
-  protected final HashMap<DataKeyBase<?>, Object> dataSet;
+  protected final Map<DataKeyBase<?>, Object> dataSet;
 
   public DataSet() {
     this(null);
   }
 
   public DataSet(@Nullable DataHolder other) {
-    if (other == null) dataSet = new HashMap<>();
-    else dataSet = new HashMap<>(other.getAll());
+    if (other == null) {
+      dataSet = new HashMap<>();
+    } else {
+      dataSet = new HashMap<>(other.getAll());
+    }
   }
 
   /**
@@ -126,7 +130,7 @@ public class DataSet implements DataHolder {
     return this;
   }
 
-  private static final ArrayList<DataKeyAggregator> ourDataKeyAggregators = new ArrayList<>();
+  private static final List<DataKeyAggregator> ourDataKeyAggregators = new ArrayList<>();
 
   public static void registerDataKeyAggregator(@NotNull DataKeyAggregator keyAggregator) {
     if (isAggregatorRegistered(keyAggregator)) {

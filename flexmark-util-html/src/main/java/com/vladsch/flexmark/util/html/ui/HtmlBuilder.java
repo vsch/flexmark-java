@@ -24,6 +24,7 @@ import com.vladsch.flexmark.util.html.HtmlAppendableBase;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import java.awt.Font;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.plaf.FontUIResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +59,6 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
         super.attr((Attribute) convert);
         super.withAttr();
       } else {
-        //noinspection rawtypes
         HtmlStyler styler = getHtmlStyler(convert);
         // NOTE: show not simple name but name of container class if any
         if (styler == null)
@@ -69,8 +69,8 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
                       .getName()
                       .substring(getClass().getPackage().getName().length() + 1));
 
-        //noinspection unchecked
         String value = styler.getStyle(styler.getStyleable(convert));
+
         if (value != null && !value.isEmpty()) {
           Attribute style = AttributeImpl.of(Attribute.STYLE_ATTR, value);
           super.attr(style);
@@ -133,8 +133,7 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
     return closeTag("span");
   }
 
-  // statics
-  public static final HashMap<Class, HtmlStyler> stylerMap = new HashMap<>();
+  public static final Map<Class, HtmlStyler> stylerMap = new HashMap<>();
 
   static {
     ColorStyler colorStyler = new ColorStyler();
@@ -161,7 +160,6 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
 
     // see if we have one that can handle this
     for (Class value : stylerMap.keySet()) {
-      //noinspection unchecked
       if (value.isAssignableFrom(item.getClass())) {
         styler = stylerMap.get(value);
         break;
@@ -177,7 +175,6 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
   public static Attribute getAttribute(Object item) {
     HtmlStyler styler = getHtmlStyler(item);
     if (styler != null) {
-      //noinspection unchecked
       String value = styler.getStyle(styler.getStyleable(item));
       if (value != null && !value.isEmpty()) {
         return AttributeImpl.of(Attribute.STYLE_ATTR, value);

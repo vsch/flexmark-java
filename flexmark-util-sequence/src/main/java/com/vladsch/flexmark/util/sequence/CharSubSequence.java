@@ -22,7 +22,6 @@ public final class CharSubSequence extends BasedSequenceImpl {
   private CharSubSequence(char[] chars, int hash) {
     super(hash);
 
-    int iMax = chars.length;
     base = this;
     baseChars = chars;
     startOffset = 0;

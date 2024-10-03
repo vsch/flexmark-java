@@ -87,7 +87,7 @@ public class HeadingParser extends AbstractBlockParser {
     @Nullable
     @Override
     public Set<Class<?>> getAfterDependents() {
-      HashSet<Class<?>> set = new HashSet<>();
+      Set<Class<?>> set = new HashSet<>();
       set.add(BlockQuoteParser.Factory.class);
       return set;
       // return new HashSet<>(Arrays.asList(

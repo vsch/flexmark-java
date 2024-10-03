@@ -365,7 +365,6 @@ public class OrderedSet<E> implements Set<E> {
     if (objects.length > ++i) {
       objects[i] = null;
     }
-    //noinspection unchecked
     return (T[]) objects;
   }
 

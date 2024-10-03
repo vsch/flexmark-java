@@ -121,7 +121,7 @@ public class HtmlRenderer implements IRender {
       new DataKey<>(
           "FENCED_CODE_LANGUAGE_CLASS_PREFIX",
           "language-"); // prefix to add to unmapped info strings
-  public static final DataKey<HashMap<String, String>> FENCED_CODE_LANGUAGE_CLASS_MAP =
+  public static final DataKey<Map<String, String>> FENCED_CODE_LANGUAGE_CLASS_MAP =
       new DataKey<>(
           "FENCED_CODE_LANGUAGE_CLASS_MAP", HashMap::new); // info to language class mapping
   public static final DataKey<String> FENCED_CODE_NO_LANGUAGE_CLASS =
@@ -580,7 +580,6 @@ public class HtmlRenderer implements IRender {
     @NotNull
     public Builder htmlIdGeneratorFactory(
         @NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
-      //noinspection VariableNotUsedInsideIf
       if (this.htmlIdGeneratorFactory != null) {
         throw new IllegalStateException(
             "custom header id factory is already set to "
@@ -631,7 +630,7 @@ public class HtmlRenderer implements IRender {
     private DataHolder options;
     private RenderingPhase phase;
     HtmlIdGenerator htmlIdGenerator;
-    private HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
+    private Map<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
     private AttributeProvider[] attributeProviders;
 
     @Override
@@ -720,7 +719,7 @@ public class HtmlRenderer implements IRender {
         @NotNull CharSequence url,
         Attributes attributes,
         Boolean urlEncode) {
-      HashMap<String, ResolvedLink> resolvedLinks =
+      Map<String, ResolvedLink> resolvedLinks =
           resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
       String urlSeq = String.valueOf(url);
@@ -857,7 +856,6 @@ public class HtmlRenderer implements IRender {
     public NodeRendererContext getSubContext(boolean inheritIndent) {
       HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), inheritIndent);
       htmlWriter.setContext(this);
-      //noinspection ReturnOfInnerClass
       return new SubNodeRenderer(this, htmlWriter, false);
     }
 
@@ -866,7 +864,6 @@ public class HtmlRenderer implements IRender {
     public NodeRendererContext getDelegatedSubContext(boolean inheritIndent) {
       HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), inheritIndent);
       htmlWriter.setContext(this);
-      //noinspection ReturnOfInnerClass
       return new SubNodeRenderer(this, htmlWriter, true);
     }
 
@@ -1046,7 +1043,6 @@ public class HtmlRenderer implements IRender {
       public NodeRendererContext getSubContext(boolean inheritIndent) {
         HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, inheritIndent);
         htmlWriter.setContext(this);
-        //noinspection ReturnOfInnerClass
         return new SubNodeRenderer(myMainNodeRenderer, htmlWriter, false);
       }
 
@@ -1055,7 +1051,6 @@ public class HtmlRenderer implements IRender {
       public NodeRendererContext getDelegatedSubContext(boolean inheritIndent) {
         HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, inheritIndent);
         htmlWriter.setContext(this);
-        //noinspection ReturnOfInnerClass
         return new SubNodeRenderer(myMainNodeRenderer, htmlWriter, true);
       }
 

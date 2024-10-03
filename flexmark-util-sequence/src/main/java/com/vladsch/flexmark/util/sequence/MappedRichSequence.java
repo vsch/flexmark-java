@@ -71,7 +71,6 @@ public class MappedRichSequence extends IRichSequenceBase<RichSequence>
 
   @Override
   public <B extends ISequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
-    //noinspection unchecked
     return (B) RichSequenceBuilder.emptyBuilder();
   }
 

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,7 +28,7 @@ public class ScopedDataSet extends DataSet {
   @Override
   public @NotNull Map<? extends DataKeyBase<?>, Object> getAll() {
     if (parent != null) {
-      HashMap<DataKeyBase<?>, Object> all = new HashMap<>(parent.getAll());
+      Map<DataKeyBase<?>, Object> all = new HashMap<>(parent.getAll());
       all.putAll(super.getAll());
       return all;
     }
@@ -38,7 +39,7 @@ public class ScopedDataSet extends DataSet {
   @Override
   public @NotNull Collection<? extends DataKeyBase<?>> getKeys() {
     if (parent != null) {
-      HashSet<DataKeyBase<?>> all = new HashSet<>(parent.getKeys());
+      Set<DataKeyBase<?>> all = new HashSet<>(parent.getKeys());
       all.addAll(super.getKeys());
       return all;
     }

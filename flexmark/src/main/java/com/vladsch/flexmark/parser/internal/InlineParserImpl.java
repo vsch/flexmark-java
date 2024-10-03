@@ -77,7 +77,7 @@ public class InlineParserImpl extends LightInlineParserImpl
   protected BitSet specialCharacters;
   protected BitSet customCharacters = null;
   protected Map<Character, CharacterNodeFactory> customSpecialCharacterFactoryMap = null;
-  protected ArrayList<Node> customSpecialCharacterNodes = null;
+  protected List<Node> customSpecialCharacterNodes = null;
 
   /** Link references by ID, needs to be built up using parseReference before calling parse. */
   protected ReferenceRepository referenceRepository;
@@ -1931,9 +1931,8 @@ public class InlineParserImpl extends LightInlineParserImpl
                 + existing.getClass().getCanonicalName()
                 + ", added "
                 + toAdd.getClass().getCanonicalName());
-      } else {
-        // warning???
       }
+      // else warning???
     }
   }
 }

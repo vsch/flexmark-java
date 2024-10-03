@@ -30,7 +30,6 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends Ch
     for (CharSequence chars : sequences) {
       append(chars, 0, chars.length());
     }
-    //noinspection unchecked
     return (T) this;
   }
 
@@ -45,7 +44,6 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends Ch
     if (chars != null) {
       return append(chars, 0, chars.length());
     }
-    //noinspection unchecked
     return (T) this;
   }
 
@@ -54,7 +52,6 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends Ch
     if (chars != null) {
       return append(chars, startIndex, chars.length());
     }
-    //noinspection unchecked
     return (T) this;
   }
 

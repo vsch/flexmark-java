@@ -156,7 +156,7 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
     @NotNull
     @Override
     public Set<Class<? extends Block>> getBlockTypes() {
-      HashSet<Class<? extends Block>> set = new HashSet<>();
+      Set<Class<? extends Block>> set = new HashSet<>();
       set.add(DefinitionItem.class);
       return set;
     }

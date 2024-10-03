@@ -22,7 +22,6 @@ public class LinkResolverAdapter
 
   public LinkResolverAdapter(LinkResolvingHandler[]... handlers) {
     super(Node.AST_ADAPTER);
-    //noinspection unchecked
     super.addActionHandlers(handlers);
   }
 
@@ -41,12 +40,10 @@ public class LinkResolverAdapter
   }
 
   public LinkResolverAdapter addHandlers(LinkResolvingHandler[]... handlers) {
-    //noinspection unchecked
     return super.addActionHandlers(handlers);
   }
 
   public LinkResolverAdapter addHandler(LinkResolvingHandler handler) {
-    //noinspection unchecked
     return super.addActionHandler(handler);
   }
 

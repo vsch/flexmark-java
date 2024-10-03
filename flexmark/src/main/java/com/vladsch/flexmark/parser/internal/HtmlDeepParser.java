@@ -148,11 +148,11 @@ public class HtmlDeepParser {
     START_PATTERN = Pattern.compile(startPattern.toString());
   }
 
-  private final ArrayList<String> myOpenTags;
+  private final List<String> myOpenTags;
   private Pattern myClosingPattern;
   private HtmlMatch myHtmlMatch;
   private int myHtmlCount;
-  private final HashSet<String> myBlockTags;
+  private final Set<String> myBlockTags;
   private boolean myFirstBlockTag;
 
   public HtmlDeepParser() {
@@ -170,7 +170,7 @@ public class HtmlDeepParser {
     myBlockTags.addAll(customTags);
   }
 
-  public ArrayList<String> getOpenTags() {
+  public List<String> getOpenTags() {
     return myOpenTags;
   }
 

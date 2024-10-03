@@ -23,7 +23,6 @@ public class AttributeProviderAdapter
 
   public AttributeProviderAdapter(AttributeProvidingHandler[]... handlers) {
     super(Node.AST_ADAPTER);
-    //noinspection unchecked
     super.addActionHandlers(handlers);
   }
 
@@ -42,12 +41,10 @@ public class AttributeProviderAdapter
   }
 
   public AttributeProviderAdapter addHandlers(AttributeProvidingHandler[]... handlers) {
-    //noinspection unchecked
     return super.addActionHandlers(handlers);
   }
 
   public AttributeProviderAdapter addHandler(AttributeProvidingHandler handler) {
-    //noinspection unchecked
     return super.addActionHandler(handler);
   }
 

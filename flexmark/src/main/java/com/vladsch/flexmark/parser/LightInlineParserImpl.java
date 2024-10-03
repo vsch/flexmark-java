@@ -22,7 +22,7 @@ public class LightInlineParserImpl implements LightInlineParser {
   protected Node block;
   protected BasedSequence input;
   protected int index;
-  protected ArrayList<BasedSequence> currentText;
+  protected List<BasedSequence> currentText;
   protected Document document;
 
   public LightInlineParserImpl(DataHolder dataOptions) {

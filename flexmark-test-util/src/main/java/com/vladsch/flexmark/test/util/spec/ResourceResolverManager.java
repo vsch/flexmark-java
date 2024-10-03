@@ -6,6 +6,7 @@ import com.vladsch.flexmark.test.util.TestUtils;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +15,7 @@ public class ResourceResolverManager {
    * urlResolvers map test resource location url to source resource url to allow tests to output
    * file URLs which refer to source location, not copies in test location
    */
-  private static final ArrayList<Function<String, String>> urlResolvers = new ArrayList<>();
+  private static final List<Function<String, String>> urlResolvers = new ArrayList<>();
 
   public static void registerUrlResolver(@NotNull Function<String, String> resolver) {
     ResourceResolverManager.urlResolvers.add(resolver);

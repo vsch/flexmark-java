@@ -509,7 +509,6 @@ public class Formatter implements IRender {
     mergeOptions.set(Parser.HTML_FOR_TRANSLATOR, true);
 
     TranslationHandler[] translationHandlers = new TranslationHandler[documents.length];
-    //noinspection unchecked
     List<String>[] translationHandlersTexts = new List[documents.length];
 
     int iMax = documents.length;
@@ -656,7 +655,6 @@ public class Formatter implements IRender {
     @NotNull
     public Builder htmlIdGeneratorFactory(
         @NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
-      //noinspection VariableNotUsedInsideIf
       if (this.htmlIdGeneratorFactory != null) {
         throw new IllegalStateException(
             "custom header id factory is already set to "
@@ -727,8 +725,7 @@ public class Formatter implements IRender {
     private FormattingPhase phase;
     final TranslationHandler translationHandler;
     private final LinkResolver[] linkResolvers;
-    private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap =
-        new HashMap<>();
+    private final Map<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
     private final ExplicitAttributeIdProvider explicitAttributeIdProvider;
     private final HtmlIdGenerator idGenerator;
     private @Nullable FormatControlProcessor controlProcessor;
@@ -879,7 +876,7 @@ public class Formatter implements IRender {
         LinkType linkType,
         CharSequence url,
         Attributes attributes) {
-      HashMap<String, ResolvedLink> resolvedLinks =
+      Map<String, ResolvedLink> resolvedLinks =
           resolvedLinkMap.computeIfAbsent(linkType, k -> new HashMap<>());
 
       String urlSeq = String.valueOf(url);
@@ -1153,7 +1150,6 @@ public class Formatter implements IRender {
         @Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
       MarkdownWriter writer = new MarkdownWriter(builder, getMarkdown().getOptions());
       writer.setContext(this);
-      //noinspection ReturnOfInnerClass
       return new SubNodeFormatter(this, writer, options);
     }
 
@@ -1440,7 +1436,6 @@ public class Formatter implements IRender {
           @Nullable DataHolder options, @NotNull ISequenceBuilder<?, ?> builder) {
         MarkdownWriter htmlWriter = new MarkdownWriter(builder, this.markdown.getOptions());
         htmlWriter.setContext(this);
-        //noinspection ReturnOfInnerClass
         return new SubNodeFormatter(
             myMainNodeRenderer,
             htmlWriter,

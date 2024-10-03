@@ -41,7 +41,7 @@ public class ReferenceRepository extends NodeRepository<Reference> {
   @NotNull
   @Override
   public Set<Reference> getReferencedElements(Node parent) {
-    HashSet<Reference> references = new HashSet<>();
+    Set<Reference> references = new HashSet<>();
     visitNodes(
         parent,
         value -> {

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertArrayEquals;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class PlaceholderReplacerTest {
 
   @Test
   public void test_simple() {
-    HashMap<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("NAME", "Joe Smith");
     map.put("USER", "<NAME>");
 
@@ -45,7 +46,7 @@ public class PlaceholderReplacerTest {
 
   @Test
   public void test_spanSimple2() {
-    HashMap<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("NAME", "Joe Smith");
     map.put("USER", "<NAME>");
 
@@ -57,7 +58,7 @@ public class PlaceholderReplacerTest {
 
   @Test
   public void test_spanSimple3() {
-    HashMap<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("NAME", "Joe Smith");
     map.put("USER", "<NAME>");
 
@@ -69,7 +70,7 @@ public class PlaceholderReplacerTest {
 
   @Test
   public void test_spanComplex() {
-    HashMap<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("NAME", "Joe Smith");
     map.put("USER", "<NAME>");
 
@@ -81,7 +82,7 @@ public class PlaceholderReplacerTest {
 
   @Test
   public void test_spanComplex2() {
-    HashMap<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("NAME", "Joe Smith");
     map.put("USER", "<NAME>");
 
@@ -93,7 +94,7 @@ public class PlaceholderReplacerTest {
 
   @Test
   public void test_spanUndefined() {
-    HashMap<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("NAME", "Joe Smith");
     map.put("USER", "<NAME>");
 

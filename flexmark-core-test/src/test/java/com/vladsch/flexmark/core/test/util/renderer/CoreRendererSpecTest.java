@@ -154,7 +154,7 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
         "no-class-prefix",
         new MutableDataSet().set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, ""));
 
-    HashMap<String, String> map = new HashMap<>();
+    Map<String, String> map = new HashMap<>();
     map.put("latex", "math");
     optionsMap.put(
         "class-map-latex",

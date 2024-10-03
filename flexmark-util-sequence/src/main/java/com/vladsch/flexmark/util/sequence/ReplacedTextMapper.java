@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class which tracks text replacements to provide original offset from modified offset.
@@ -19,8 +20,8 @@ import java.util.ArrayList;
 public class ReplacedTextMapper {
   private ReplacedTextMapper parent;
   private BasedSequence original;
-  private ArrayList<ReplacedTextRegion> regions = new ArrayList<>();
-  private ArrayList<BasedSequence> replacedSegments = new ArrayList<>();
+  private List<ReplacedTextRegion> regions = new ArrayList<>();
+  private List<BasedSequence> replacedSegments = new ArrayList<>();
   private int replacedLength = 0;
   private BasedSequence replacedSequence = null;
 
@@ -98,12 +99,12 @@ public class ReplacedTextMapper {
     }
   }
 
-  public ArrayList<ReplacedTextRegion> getRegions() {
+  public List<ReplacedTextRegion> getRegions() {
     finalizeMods();
     return regions;
   }
 
-  public ArrayList<BasedSequence> getReplacedSegments() {
+  public List<BasedSequence> getReplacedSegments() {
     finalizeMods();
     return replacedSegments;
   }

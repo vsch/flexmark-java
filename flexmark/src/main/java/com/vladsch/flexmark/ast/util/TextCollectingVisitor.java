@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 public class TextCollectingVisitor {
   SequenceBuilder out;
   private final NodeVisitor myVisitor;
-  final HashSet<Class<?>> myLineBreakNodes;
+  final Set<Class<?>> myLineBreakNodes;
 
   protected static Class<?>[] concatArrays(Class<?>[]... classes) {
     int total = 0;

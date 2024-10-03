@@ -79,7 +79,7 @@ public interface SequenceUtils {
   int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY;
 
   static Map<Character, String> getVisibleSpacesMap() {
-    HashMap<Character, String> charMap = new HashMap<>();
+    Map<Character, String> charMap = new HashMap<>();
     charMap.put('\n', "\\n");
     charMap.put('\r', "\\r");
     charMap.put('\f', "\\f");

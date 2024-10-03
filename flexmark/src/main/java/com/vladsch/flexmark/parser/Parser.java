@@ -36,6 +36,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -834,7 +835,7 @@ public class Parser implements IParse {
    */
   public static MutableDataHolder removeExtensions(MutableDataHolder options, Class... extensions) {
     Iterable<Extension> extensionIterable = Parser.EXTENSIONS.get(options);
-    HashSet<Extension> extensionList = new HashSet<>();
+    Set<Extension> extensionList = new HashSet<>();
 
     for (Extension extension : extensionIterable) {
       boolean keep = true;

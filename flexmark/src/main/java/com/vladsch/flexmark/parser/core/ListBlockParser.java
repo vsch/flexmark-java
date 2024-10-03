@@ -182,14 +182,12 @@ public class ListBlockParser extends AbstractBlockParser {
       // check for non-final list item ending with blank line:
       boolean thisItemHadBlankAfterItemPara = false;
       boolean thisItemContainsBlankLine = false;
-      boolean thisItemHadTrailingBlankLine = false;
       boolean thisItemHadTrueTrailingBlankLine = false;
       boolean thisItemHadChildren = false;
       boolean thisItemLoose = false;
 
       if (item instanceof ListItem) {
         if (((ListItem) item).isHadBlankAfterItemParagraph()) {
-          //noinspection StatementWithEmptyBody
           if (item.getNext() == null
               && (item.getFirstChild() == null || item.getFirstChild().getNext() == null)) {
             // not for last block
@@ -210,7 +208,6 @@ public class ListBlockParser extends AbstractBlockParser {
           thisItemHadChildren = true;
         }
 
-        //noinspection PointlessBooleanExpression
         thisItemLoose =
             false
                 || thisItemHadTrueTrailingBlankLine && myOptions.isLooseWhenHasTrailingBlankLine()
@@ -236,7 +233,6 @@ public class ListBlockParser extends AbstractBlockParser {
       while (subItem != null) {
         if (parserState.endsWithBlankLine(subItem)
             && (item.getNext() != null || subItem.getNext() != null)) {
-          thisItemHadTrailingBlankLine = true;
           if (subItem == item.getLastChild()) thisItemHadTrueTrailingBlankLine = true;
 
           if (!thisItemLoose) {
@@ -442,7 +438,7 @@ public class ListBlockParser extends AbstractBlockParser {
     @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
-      HashSet<Class<?>> set = new HashSet<>();
+      Set<Class<?>> set = new HashSet<>();
       set.add(IndentedCodeBlockParser.Factory.class);
       return set;
     }

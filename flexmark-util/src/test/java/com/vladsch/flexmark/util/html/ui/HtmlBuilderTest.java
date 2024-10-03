@@ -73,7 +73,6 @@ public class HtmlBuilderTest {
     HtmlBuilder fa;
 
     fa = new HtmlBuilder();
-    //noinspection UseJBColor
     fa.attr(Color.RED).span();
     assertEquals("<span style=\"color:#ff0000\"></span>\n", fa.toFinalizedString());
 

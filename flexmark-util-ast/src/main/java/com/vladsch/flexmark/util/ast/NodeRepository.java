@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
-  protected final ArrayList<T> nodeList = new ArrayList<>();
+  protected final List<T> nodeList = new ArrayList<>();
   protected final Map<String, T> nodeMap = new HashMap<>();
   protected final KeepType keepType;
 

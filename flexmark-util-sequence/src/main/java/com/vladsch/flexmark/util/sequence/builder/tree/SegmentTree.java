@@ -481,8 +481,6 @@ public class SegmentTree {
     int iterations = 0;
     while (startPos < endPos) {
       int pos = (startPos + endPos) >> 1;
-      int lastStart = startPos;
-      int lastEnd = endPos;
 
       iterations++;
 

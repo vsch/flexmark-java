@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TableRowManipulator {
   int BREAK = Integer.MIN_VALUE;
@@ -16,5 +16,5 @@ public interface TableRowManipulator {
    * @return action performed: &lt;0 number of rows deleted, 0 - no change to rows, &gt;0 - number
    *     of rows added, or BREAK to stop processing rows
    */
-  int apply(TableRow row, int allRowsIndex, ArrayList<TableRow> sectionRows, int sectionRowIndex);
+  int apply(TableRow row, int allRowsIndex, List<TableRow> sectionRows, int sectionRowIndex);
 }

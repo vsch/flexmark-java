@@ -58,7 +58,7 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
     @NotNull
     @Override
     public Set<Class<? extends Block>> getBlockTypes() {
-      HashSet<Class<? extends Block>> set = new HashSet<>();
+      Set<Class<? extends Block>> set = new HashSet<>();
       set.add(DefinitionList.class);
       return set;
     }
@@ -66,7 +66,7 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
     @Nullable
     @Override
     public Set<Class<?>> getAfterDependents() {
-      HashSet<Class<?>> set = new HashSet<>();
+      Set<Class<?>> set = new HashSet<>();
       set.add(DefinitionListItemBlockPreProcessor.Factory.class);
       return set;
     }

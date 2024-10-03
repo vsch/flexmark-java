@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
-  protected final HashMap<Function<P, I>, I> itemMap;
+  protected final Map<Function<P, I>, I> itemMap;
   protected final @NotNull P param;
 
   public ItemFactoryMap(@NotNull P param) {
@@ -33,7 +33,6 @@ public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
   @Override
   public @Nullable I get(@Nullable Object o) {
     if (o instanceof Function) {
-      //noinspection unchecked
       return getItem((Function<P, I>) o);
     }
     return null;

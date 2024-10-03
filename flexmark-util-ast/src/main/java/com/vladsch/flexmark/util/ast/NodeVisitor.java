@@ -77,7 +77,6 @@ public class NodeVisitor
 
   public NodeVisitor(@NotNull VisitHandler[]... handlers) {
     super(Node.AST_ADAPTER);
-    //noinspection unchecked
     super.addActionHandlers(handlers);
   }
 
@@ -100,12 +99,10 @@ public class NodeVisitor
   }
 
   public @NotNull NodeVisitor addHandlers(@NotNull VisitHandler[]... handlers) {
-    //noinspection unchecked
     return super.addActionHandlers(handlers);
   }
 
   public @NotNull NodeVisitor addHandler(@NotNull VisitHandler handler) {
-    //noinspection unchecked
     return super.addActionHandler(handler);
   }
 

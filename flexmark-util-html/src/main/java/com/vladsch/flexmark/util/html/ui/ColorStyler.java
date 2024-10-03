@@ -21,6 +21,7 @@ import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class ColorStyler extends HtmlStylerBase<Color> {
   @Override
@@ -125,8 +126,8 @@ public class ColorStyler extends HtmlStylerBase<Color> {
     return "";
   }
 
-  public static final HashMap<Integer, String> colorNameMap = new HashMap<>();
-  public static final HashMap<String, Integer> nameColorMap = new HashMap<>();
+  public static final Map<Integer, String> colorNameMap = new HashMap<>();
+  public static final Map<String, Integer> nameColorMap = new HashMap<>();
 
   private static void addColorName(int rgb, String name) {
     colorNameMap.put(rgb, name);

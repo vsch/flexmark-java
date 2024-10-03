@@ -70,8 +70,6 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
       after = range.withStart(lastSeg.getEnd());
     }
 
-    int overlapSpan = overlap.getSpan();
-
     // append overlap to text
     if (text.length() == 0) {
       parts[1] = baseSeq.subSequence(overlap.getStart(), overlap.getEnd()).toString();

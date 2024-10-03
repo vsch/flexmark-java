@@ -183,7 +183,7 @@ public class HtmlRendererTest {
     NodeRendererFactory nodeRendererFactory =
         options ->
             () -> {
-              HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+              Set<NodeRenderingHandler<?>> set = new HashSet<>();
               set.add(
                   new NodeRenderingHandler<>(
                       Link.class, (node, context, html) -> context.getHtmlWriter().text("test")));
@@ -201,7 +201,7 @@ public class HtmlRendererTest {
     NodeRendererFactory nodeRendererFactory =
         options ->
             () -> {
-              HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+              Set<NodeRenderingHandler<?>> set = new HashSet<>();
               set.add(
                   new NodeRenderingHandler<>(
                       Link.class,
@@ -269,7 +269,7 @@ public class HtmlRendererTest {
     NodeRendererFactory nodeRendererFactory =
         options ->
             () -> {
-              HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+              Set<NodeRenderingHandler<?>> set = new HashSet<>();
               set.add(
                   new NodeRenderingHandler<>(
                       Link.class,
@@ -292,7 +292,7 @@ public class HtmlRendererTest {
           @Override
           public NodeRenderer apply(@NotNull DataHolder options) {
             return () -> {
-              HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+              Set<NodeRenderingHandler<?>> set = new HashSet<>();
               set.add(
                   new NodeRenderingHandler<>(
                       Link.class,
@@ -333,7 +333,7 @@ public class HtmlRendererTest {
     NodeRendererFactory nodeRendererFactory =
         options ->
             () -> {
-              HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+              Set<NodeRenderingHandler<?>> set = new HashSet<>();
               set.add(
                   new NodeRenderingHandler<>(
                       Link.class,
@@ -356,7 +356,7 @@ public class HtmlRendererTest {
           @Override
           public NodeRenderer apply(@NotNull DataHolder options) {
             return () -> {
-              HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+              Set<NodeRenderingHandler<?>> set = new HashSet<>();
               set.add(
                   new NodeRenderingHandler<>(
                       Link.class,

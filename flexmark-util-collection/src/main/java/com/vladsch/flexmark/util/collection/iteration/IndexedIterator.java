@@ -36,7 +36,6 @@ public class IndexedIterator<R, S, I extends ReversibleIterator<Integer>>
     }
 
     lastIndex = iterator.next();
-    //noinspection unchecked
     return (R) items.get(lastIndex);
   }
 

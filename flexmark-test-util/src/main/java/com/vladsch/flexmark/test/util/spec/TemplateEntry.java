@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class TemplateEntry {
   private final int entryNumber;
   private final String source;
-  private final HashSet<String> params = new HashSet<>();
+  private final Set<String> params = new HashSet<>();
 
   private static final Pattern PARAMETER_PATTERN = Pattern.compile("\\$[a-zA-Z_]+\\$");
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TextNodeConverter {
   private BasedSequence remainingChars;
-  private final ArrayList<Node> list = new ArrayList<>();
+  private final List<Node> list = new ArrayList<>();
 
   public TextNodeConverter(BasedSequence nodeChars) {
     this.remainingChars = nodeChars;

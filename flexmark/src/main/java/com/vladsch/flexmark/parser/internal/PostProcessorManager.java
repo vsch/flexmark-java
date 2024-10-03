@@ -165,7 +165,7 @@ public class PostProcessorManager {
 
     public PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
       // compute mappings
-      HashMap<Class<? extends Node>, Set<Class<?>>> nodeMap = new HashMap<>();
+      Map<Class<? extends Node>, Set<Class<?>>> nodeMap = new HashMap<>();
 
       for (PostProcessorFactory dependent : dependents) {
         Map<Class<?>, Set<Class<?>>> types = dependent.getNodeTypes();
@@ -185,7 +185,6 @@ public class PostProcessorManager {
                 // copy so it is not modified by additional dependencies injecting other exclusions
                 // by mistake
                 classes = new HashSet<>(value);
-                //noinspection unchecked
                 nodeMap.put((Class<? extends Node>) entry.getKey(), classes);
               } else {
                 try {

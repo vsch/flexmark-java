@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
@@ -140,12 +141,12 @@ public class TestUtils {
    * @return constructed hash map of option name
    */
   @NotNull
-  public static <T> HashMap<String, T> buildOptionsMap(
+  public static <T> Map<String, T> buildOptionsMap(
       boolean ensureAllBuiltInPresent,
       @NotNull Object[][] options,
       @NotNull BiFunction<ExampleOption, Object[], T> factory) {
-    HashMap<String, T> hashMap = new HashMap<>();
-    HashSet<String> builtInSet = new HashSet<>(ExampleOption.getBuiltInOptions().keySet());
+    Map<String, T> hashMap = new HashMap<>();
+    Set<String> builtInSet = new HashSet<>(ExampleOption.getBuiltInOptions().keySet());
 
     for (Object[] optionData : options) {
       String option = (String) optionData[0];
@@ -684,7 +685,7 @@ public class TestUtils {
       @Nullable Map<String, ? extends DataHolder> other,
       @Nullable Map<String, ? extends DataHolder> overrides) {
     if (other != null && overrides != null) {
-      HashMap<String, DataHolder> map = new HashMap<>(other);
+      Map<String, DataHolder> map = new HashMap<>(other);
       map.putAll(overrides);
       return map;
     } else if (other != null) {

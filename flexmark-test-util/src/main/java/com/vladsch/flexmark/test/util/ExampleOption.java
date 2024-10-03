@@ -12,11 +12,13 @@ import static com.vladsch.flexmark.test.util.TestUtils.TIMED_OPTION_NAME;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ExampleOption {
-  private static final HashSet<String> BUILT_IN_OPTIONS_SET = new HashSet<>();
+  private static final Set<String> BUILT_IN_OPTIONS_SET = new HashSet<>();
 
   static {
     BUILT_IN_OPTIONS_SET.add(EMBED_TIMED_OPTION_NAME);
@@ -63,7 +65,7 @@ public class ExampleOption {
     return build(optionText);
   }
 
-  private static final HashMap<String, ExampleOption> BUILT_IN_OPTIONS_MAP = new HashMap<>();
+  private static final Map<String, ExampleOption> BUILT_IN_OPTIONS_MAP = new HashMap<>();
 
   static {
     BUILT_IN_OPTIONS_MAP.put(EMBED_TIMED_OPTION_NAME, build(EMBED_TIMED_OPTION_NAME));
@@ -78,7 +80,7 @@ public class ExampleOption {
   }
 
   @NotNull
-  public static HashMap<String, ExampleOption> getBuiltInOptions() {
+  public static Map<String, ExampleOption> getBuiltInOptions() {
     return new HashMap<>(BUILT_IN_OPTIONS_MAP);
   }
 

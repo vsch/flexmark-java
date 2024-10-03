@@ -14,7 +14,6 @@ public class NodeRenderingHandler<N extends Node>
 
   public void render(
       @NotNull Node node, @NotNull NodeRendererContext context, @NotNull HtmlWriter html) {
-    //noinspection unchecked
     getAdapter().render((N) node, context, html);
   }
 

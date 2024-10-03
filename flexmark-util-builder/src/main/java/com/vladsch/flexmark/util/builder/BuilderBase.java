@@ -13,15 +13,17 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataSet {
   // loaded extensions
-  private final HashSet<Class<?>> loadedExtensions = new HashSet<>();
+  private final Set<Class<?>> loadedExtensions = new HashSet<>();
 
   // map of which api points were loaded by which extensions
-  private final HashMap<Class<?>, HashSet<Object>> extensionApiPoints = new HashMap<>();
+  private final Map<Class<?>, Set<Object>> extensionApiPoints = new HashMap<>();
   private Extension currentExtension;
 
   /**
@@ -83,7 +85,6 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
       set(EXTENSIONS, addedExtensions);
     }
 
-    //noinspection unchecked
     return (T) this;
   }
 
@@ -103,7 +104,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
 
     if (extension != null) {
       Class<? extends Extension> extensionClass = extension.getClass();
-      HashSet<Object> apiPoints =
+      Set<Object> apiPoints =
           extensionApiPoints.computeIfAbsent(extensionClass, k -> new HashSet<>());
       apiPoints.add(apiPoint);
     }

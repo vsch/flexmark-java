@@ -13,7 +13,6 @@ public class LinkResolvingHandler<N extends Node>
   }
 
   public ResolvedLink resolveLink(Node node, LinkResolverBasicContext context, ResolvedLink link) {
-    //noinspection unchecked
     return getAdapter().resolveLink((N) node, context, link);
   }
 

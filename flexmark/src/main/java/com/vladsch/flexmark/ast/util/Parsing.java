@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import org.jetbrains.annotations.NotNull;
@@ -500,13 +501,13 @@ public class Parsing {
     }
   }
 
-  static final HashMap<String, HashMap<PatternTypeFlags, Pattern>> cachedPatterns = new HashMap<>();
+  static final Map<String, HashMap<PatternTypeFlags, Pattern>> cachedPatterns = new HashMap<>();
 
   static Pattern getCachedPattern(
       @NotNull String patternName,
       @NotNull PatternTypeFlags cachedTypeFlags,
       @NotNull Function<PatternTypeFlags, Pattern> factory) {
-    HashMap<PatternTypeFlags, Pattern> patternMap =
+    Map<PatternTypeFlags, Pattern> patternMap =
         cachedPatterns.computeIfAbsent(patternName, (key) -> new HashMap<>());
     return patternMap.computeIfAbsent(cachedTypeFlags, factory);
   }

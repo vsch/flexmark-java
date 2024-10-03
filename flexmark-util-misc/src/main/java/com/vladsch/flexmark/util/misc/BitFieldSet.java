@@ -35,7 +35,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     static final ConcurrentHashMap<Class, long[]> enumBitMasksMap = new ConcurrentHashMap<>();
 
     @NotNull
-    public static Enum[] getUniverseSlow(Class elementType) {
+    static Enum[] getUniverseSlow(Class elementType) {
       Enum[] cachedUniverse = enumUniverseMap.get(elementType);
       if (cachedUniverse != null) return cachedUniverse;
 
@@ -51,7 +51,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
         enums = 0;
         for (Field field : fields) {
           if (field.getType().isEnum()) {
-            //noinspection unchecked
             cachedUniverse[enums++] = Enum.valueOf((Class<Enum>) field.getType(), field.getName());
           }
         }
@@ -77,7 +76,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @return array of enum values
    */
   public static <E extends Enum<E>> E[] getUniverse(Class<E> elementType) {
-    //noinspection unchecked
     return (E[]) UniverseLoader.getUniverseSlow(elementType);
   }
 
@@ -94,7 +92,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     if (bitMasks != null) return bitMasks;
 
     // compute the bit masks for the enum
-    //noinspection unchecked
     E[] universe = (E[]) UniverseLoader.getUniverseSlow(elementType);
     if (BitField.class.isAssignableFrom(elementType)) {
       int bitCount = 0;
@@ -153,7 +150,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
 
   BitFieldSet(Class<E> elementType, Enum<?>[] universe, long[] bitMasks) {
     this.elementType = elementType;
-    //noinspection unchecked
     this.universe = (E[]) universe;
     this.bitMasks = bitMasks;
     this.totalBits = getTotalBits(bitMasks);

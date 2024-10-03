@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class NodePostProcessorFactory implements PostProcessorFactory {
-  private final HashMap<Class<?>, Set<Class<?>>> NODE_MAP = new HashMap<>();
+  private final Map<Class<?>, Set<Class<?>>> nodeMap = new HashMap<>();
 
   // added to force constructor
   public NodePostProcessorFactory(boolean ignored) {}
@@ -38,7 +38,7 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
   protected final void addNodeWithExclusions(
       Class<? extends Node> nodeType, Class<?>... excludeDescendantsOf) {
     if (excludeDescendantsOf.length > 0) {
-      NODE_MAP.put(nodeType, new HashSet<>(Arrays.asList(excludeDescendantsOf)));
+      nodeMap.put(nodeType, new HashSet<>(Arrays.asList(excludeDescendantsOf)));
     } else {
       addNodes(nodeType);
     }
@@ -46,14 +46,13 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
 
   protected final void addNodes(Class<?>... nodeTypes) {
     for (Class<?> nodeType : nodeTypes) {
-      //noinspection unchecked
-      NODE_MAP.put(nodeType, Collections.EMPTY_SET);
+      nodeMap.put(nodeType, Collections.emptySet());
     }
   }
 
   @Override
   public final Map<Class<?>, Set<Class<?>>> getNodeTypes() {
-    return NODE_MAP;
+    return nodeMap;
   }
 
   @NotNull

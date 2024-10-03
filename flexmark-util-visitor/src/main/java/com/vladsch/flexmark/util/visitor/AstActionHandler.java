@@ -34,13 +34,11 @@ public abstract class AstActionHandler<
         customHandlersMap.put(handler.getNodeType(), handler);
       }
     }
-    //noinspection unchecked
     return (C) this;
   }
 
   protected @NotNull C addActionHandler(@NotNull H handler) {
     customHandlersMap.put(handler.getNodeType(), handler);
-    //noinspection unchecked
     return (C) this;
   }
 
@@ -113,7 +111,6 @@ public abstract class AstActionHandler<
       @NotNull N node, R defaultValue, @NotNull BiFunction<N, A, R> processor) {
     Object[] value = {defaultValue};
     processNode(node, false, (n, h) -> value[0] = processor.apply(n, h));
-    //noinspection unchecked
     return (R) value[0];
   }
 }

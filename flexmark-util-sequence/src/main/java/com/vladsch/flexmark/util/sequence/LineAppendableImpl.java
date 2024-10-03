@@ -18,6 +18,7 @@ import com.vladsch.flexmark.util.sequence.builder.StringSequenceBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Stack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,7 +39,7 @@ public class LineAppendableImpl implements LineAppendable {
 
   // accumulated text and line information
   private ISequenceBuilder<?, ?> appendable;
-  final ArrayList<LineInfo> lines; // line contents
+  final List<LineInfo> lines; // line contents
 
   // indent level to use after the next \n and before text is appended
   private CharSequence prefix; // current prefix
@@ -51,7 +52,7 @@ public class LineAppendableImpl implements LineAppendable {
   private boolean allWhitespace; // all chars were whitespace
   private boolean lastWasWhitespace; // last char was whitespace
   private int eolOnFirstText; // append EOLs on first text
-  private final ArrayList<Runnable> indentsOnFirstEol; // append indents on first eol
+  private final List<Runnable> indentsOnFirstEol; // append indents on first eol
   private final Stack<Integer> optionStack = new Stack<>();
   int modificationCount; // mod count for iterable use
 

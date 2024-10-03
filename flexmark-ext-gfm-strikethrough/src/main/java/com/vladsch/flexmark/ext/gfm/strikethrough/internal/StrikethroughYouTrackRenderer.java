@@ -17,7 +17,7 @@ public class StrikethroughYouTrackRenderer implements NodeRenderer {
 
   @Override
   public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-    HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+    Set<NodeRenderingHandler<?>> set = new HashSet<>();
     set.add(new NodeRenderingHandler<>(Strikethrough.class, this::render));
     set.add(new NodeRenderingHandler<>(Subscript.class, this::render));
     return set;

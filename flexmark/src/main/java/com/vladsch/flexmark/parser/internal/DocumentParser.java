@@ -55,13 +55,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
 public class DocumentParser implements ParserState {
   public static final InlineParserFactory INLINE_PARSER_FACTORY = CommonmarkInlineParser::new;
 
-  private static final HashMap<CustomBlockParserFactory, DataKey<Boolean>>
-      CORE_FACTORIES_DATA_KEYS = new HashMap<>();
+  private static final Map<CustomBlockParserFactory, DataKey<Boolean>> CORE_FACTORIES_DATA_KEYS =
+      new HashMap<>();
 
   static {
     CORE_FACTORIES_DATA_KEYS.put(new BlockQuoteParser.Factory(), Parser.BLOCK_QUOTE_PARSER);
@@ -86,7 +87,7 @@ public class DocumentParser implements ParserState {
   //    CORE_FACTORIES.add(new IndentedCodeBlockParser.Factory());
   // }
 
-  private static final HashMap<DataKey<Boolean>, ParagraphPreProcessorFactory>
+  private static final Map<DataKey<Boolean>, ParagraphPreProcessorFactory>
       CORE_PARAGRAPH_PRE_PROCESSORS = new HashMap<>();
 
   static {
@@ -1010,7 +1011,7 @@ public class DocumentParser implements ParserState {
 
   private void preProcessBlocks() {
     // here we run preProcessing stages
-    HashSet<Class<?>> blockTypes = new HashSet<>();
+    Set<Class<?>> blockTypes = new HashSet<>();
     for (List<BlockPreProcessorFactory> dependents : blockPreProcessorDependencies) {
       for (BlockPreProcessorFactory factory : dependents) {
         blockTypes.addAll(factory.getBlockTypes());

@@ -42,7 +42,6 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
 
   @Override
   public <B extends ISequenceBuilder<B, RichSequence>> @NotNull B getBuilder() {
-    //noinspection unchecked
     return (B) RichSequenceBuilder.emptyBuilder();
   }
 

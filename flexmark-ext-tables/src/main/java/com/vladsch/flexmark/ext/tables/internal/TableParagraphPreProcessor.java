@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +46,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     separatorCharacters.set('-');
   }
 
-  private static HashMap<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<>();
+  private static Map<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<>();
 
   static {
     pipeNodeMap.put(
@@ -75,7 +76,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         });
   }
 
-  private static HashMap<Character, CharacterNodeFactory> pipeIntelliJNodeMap = new HashMap<>();
+  private static Map<Character, CharacterNodeFactory> pipeIntelliJNodeMap = new HashMap<>();
 
   static {
     pipeIntelliJNodeMap.put(
@@ -116,7 +117,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
       @Nullable
       @Override
       public Set<Class<?>> getAfterDependents() {
-        HashSet<Class<?>> set = new HashSet<>();
+        Set<Class<?>> set = new HashSet<>();
         set.add(ReferencePreProcessorFactory.class);
         return set;
       }
@@ -202,7 +203,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     int blockIndent = block.getLineIndent(0);
     BasedSequence captionLine = null;
     BitSet separators = separatorCharacters;
-    HashMap<Character, CharacterNodeFactory> nodeMap = pipeNodeMap;
+    Map<Character, CharacterNodeFactory> nodeMap = pipeNodeMap;
 
     for (BasedSequence rowLine : block.getContentLines()) {
       int rowNumber = tableLines.size();

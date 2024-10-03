@@ -1,10 +1,11 @@
 package com.vladsch.flexmark.util.format;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TableSection {
   public final TableSectionType sectionType;
-  public final ArrayList<TableRow> rows = new ArrayList<>();
+  public final List<TableRow> rows = new ArrayList<>();
   protected int row;
   protected int column;
 
@@ -15,7 +16,7 @@ public class TableSection {
     column = 0;
   }
 
-  public ArrayList<TableRow> getRows() {
+  public List<TableRow> getRows() {
     return rows;
   }
 

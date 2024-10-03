@@ -25,7 +25,6 @@ public class FlatDependencyHandler<T extends Dependent>
   @NotNull
   @Override
   protected Class<? extends T> getDependentClass(T dependent) {
-    //noinspection unchecked
     return (Class<? extends T>) dependent.getClass();
   }
 

@@ -15,7 +15,6 @@ public class ArrayUtils {
   @SafeVarargs
   public static <T> T[] append(Class<T> elemClass, T[] array, T... values) {
     if (values.length > 0) {
-      //noinspection unchecked
       T[] newInstance = (T[]) Array.newInstance(elemClass, array.length + values.length);
       System.arraycopy(array, 0, newInstance, 0, array.length);
       System.arraycopy(values, 0, newInstance, array.length, values.length);

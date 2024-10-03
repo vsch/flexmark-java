@@ -525,9 +525,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   @Override
   @NotNull
   public S append(int startOffset, int endOffset) {
-    if (endOffset < 0 || startOffset > endOffset)
-      //noinspection unchecked
-      return (S) this;
+    if (endOffset < 0 || startOffset > endOffset) return (S) this;
 
     int rangeSpan = endOffset - startOffset;
     if (rangeSpan == 0 && (!isIncludeAnchors() || startOffset < this.endOffset)) {
@@ -540,7 +538,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
           this.endOffset = startOffset;
         }
       }
-      //noinspection unchecked
       return (S) this;
     }
 
@@ -575,7 +572,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
         addSeg(startOffset, endOffset);
       }
     }
-    //noinspection unchecked
     return (S) this;
   }
 
@@ -590,7 +586,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
       this.text.append(text);
       this.length += length;
     }
-    //noinspection unchecked
     return (S) this;
   }
 
@@ -602,7 +597,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     text.append(c);
     length++;
 
-    //noinspection unchecked
     return (S) this;
   }
 
@@ -615,7 +609,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
       while (repeat-- > 0) text.append(c);
     }
-    //noinspection unchecked
     return (S) this;
   }
 

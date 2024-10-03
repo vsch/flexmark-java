@@ -13,7 +13,6 @@ public class NodeFormattingHandler<N extends Node>
 
   public void render(
       @NotNull Node node, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
-    //noinspection unchecked
     getAdapter().render((N) node, context, markdown);
   }
 

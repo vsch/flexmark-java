@@ -31,37 +31,36 @@ import org.jetbrains.annotations.Nullable;
 
 public class TranslationHandlerImpl implements TranslationHandler {
   final FormatterOptions myFormatterOptions;
-  final HashMap<String, String>
+  final Map<String, String>
       myNonTranslatingTexts; // map placeholder to non-translating text replaced before translation
   // so it can be replaced after translation
-  final HashMap<String, String>
+  final Map<String, String>
       myAnchorTexts; // map anchor id to non-translating text replaced before translation so it can
   // be replaced after translation
-  final HashMap<String, String>
+  final Map<String, String>
       myTranslatingTexts; // map placeholder to translating original text which is to be translated
   // separately from its context and is replaced with placeholder for main
   // context translation
-  final HashMap<String, String>
+  final Map<String, String>
       myTranslatedTexts; // map placeholder to translated text which is to be translated separately
   // from its context and was replaced with placeholder for main context
   // translation
   final ArrayList<String>
       myTranslatingPlaceholders; // list of placeholders to index in translating and translated
   // texts
-  final ArrayList<String> myTranslatingSpans;
-  final ArrayList<String> myNonTranslatingSpans;
+  final List<String> myTranslatingSpans;
+  final List<String> myNonTranslatingSpans;
   final ArrayList<String> myTranslatedSpans;
   final HtmlIdGeneratorFactory myIdGeneratorFactory;
   final Pattern myPlaceHolderMarkerPattern;
   final MutableDataSet myTranslationStore;
 
-  final HashMap<String, Integer> myOriginalRefTargets; // map ref target id to translation index
-  final HashMap<Integer, String>
+  final Map<String, Integer> myOriginalRefTargets; // map ref target id to translation index
+  final Map<Integer, String>
       myTranslatedRefTargets; // map translation index to translated ref target id
-  final HashMap<String, String> myOriginalAnchors; // map placeholder id to original ref id
+  final Map<String, String> myOriginalAnchors; // map placeholder id to original ref id
 
-  final HashMap<String, String>
-      myTranslatedAnchors; // map placeholder id to translated ref target id
+  final Map<String, String> myTranslatedAnchors; // map placeholder id to translated ref target id
 
   private int myPlaceholderId = 0;
   private int myAnchorId = 0;
@@ -143,7 +142,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     myTranslatingPlaceholders.ensureCapacity(myTranslatedSpans.size() + myTranslatedTexts.size());
     List<String> translatingSnippets =
         new ArrayList<>(myTranslatedSpans.size() + myTranslatedTexts.size());
-    HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
+    Map<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
     // collect all the translating snippets first
     for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
@@ -177,9 +176,8 @@ public class TranslationHandlerImpl implements TranslationHandler {
 
     // collect all the translating snippets first
     int i = 0;
-    int iMax = translatedTexts.size();
     int placeholderSize = myTranslatingPlaceholders.size();
-    HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
+    Map<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 
     for (Map.Entry<String, String> entry : myTranslatingTexts.entrySet()) {
       if (isNotBlank(entry.getValue())
@@ -292,7 +290,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
   }
 
   private String renderInSubContext(TranslatingSpanRender render, boolean copyToMain) {
-    StringBuilder span = new StringBuilder();
     MarkdownWriter savedMarkdown = myWriter;
     NodeFormatterContext subContext = myWriter.getContext().getSubContext();
     MarkdownWriter writer = subContext.getMarkdown();

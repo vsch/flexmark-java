@@ -42,7 +42,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
 
   @Override
   public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-    HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+    Set<NodeRenderingHandler<?>> set = new HashSet<>();
     set.add(new NodeRenderingHandler<>(TaskListItem.class, TaskListNodeRenderer.this::render));
     return set;
   }

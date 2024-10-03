@@ -5,6 +5,7 @@ import java.util.BitSet;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +15,7 @@ public class SubClassingBag<T> {
 
   public SubClassingBag(
       @NotNull ClassificationBag<Class<?>, T> items,
-      HashMap<Class<?>, @NotNull List<Class<?>>> subClassMap) {
+      Map<Class<?>, @NotNull List<Class<?>>> subClassMap) {
     this.items = items;
     this.subClassMap = new HashMap<>();
 

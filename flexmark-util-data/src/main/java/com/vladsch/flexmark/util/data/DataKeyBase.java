@@ -61,7 +61,6 @@ public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
   }
 
   public T get(@Nullable DataHolder holder) {
-    //noinspection unchecked
     return holder == null ? defaultValue : (T) holder.getOrCompute(this, this::getDefaultValue);
   }
 

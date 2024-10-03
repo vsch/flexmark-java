@@ -30,7 +30,7 @@ public abstract class NodeRepositoryFormatter<
         B extends Node & ReferenceNode<R, B, N>,
         N extends Node & ReferencingNode<R, B>>
     implements PhasedNodeFormatter {
-  public static final HashSet<FormattingPhase> FORMATTING_PHASES =
+  public static final Set<FormattingPhase> FORMATTING_PHASES =
       new HashSet<>(
           Arrays.asList(
               FormattingPhase.COLLECT,
@@ -61,7 +61,7 @@ public abstract class NodeRepositoryFormatter<
 
   protected final R referenceRepository;
   protected final List<B> referenceList;
-  protected final HashSet<Node> unusedReferences;
+  protected final Set<Node> unusedReferences;
   protected final B lastReference;
   protected boolean recheckUndefinedReferences;
   protected boolean repositoryNodesDone;

@@ -21,7 +21,6 @@ public abstract class HtmlStylerBase<T> implements HtmlStyler<T> {
   @Override
   public T getStyleable(Object item) {
     try {
-      //noinspection unchecked
       return (T) item;
     } catch (Exception ignored) {
       return null;

@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S, M> {
-  protected final HashMap<K, S> bag;
+  protected final Map<K, S> bag;
 
   public IndexedItemSetMapBase() {
     this(0);

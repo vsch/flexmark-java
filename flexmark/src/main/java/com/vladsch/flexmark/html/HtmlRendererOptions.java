@@ -3,7 +3,7 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Utils;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,7 +32,7 @@ public class HtmlRendererOptions {
   public final boolean renderHeaderId;
   public final boolean generateHeaderIds;
   public final @NotNull String languageClassPrefix;
-  public final @NotNull HashMap<String, String> languageClassMap;
+  public final @NotNull Map<String, String> languageClassMap;
   public final @NotNull String languageDelimiters;
   public final CharPredicate languageDelimiterSet;
   public final @NotNull String noLanguageClass;

@@ -3,11 +3,12 @@ package com.vladsch.flexmark.util.collection;
 import com.vladsch.flexmark.util.misc.Pair;
 import com.vladsch.flexmark.util.misc.Paired;
 import java.util.ArrayList;
+import java.util.List;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 
 public class CollectionHostValidator<T> {
-  private final ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();
+  private final List<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();
   private int nextCallbackIndex;
   private int modificationCount;
   private String id;

@@ -18,7 +18,7 @@ public class TableCellOffsetInfo {
   public static final int TEXT_END = 0x0004;
   public static final int ROW_END = 0x0008;
 
-  private static final HashMap<TableSectionType, Integer> DEFAULT_STOP_POINTS_MAP = new HashMap<>();
+  private static final Map<TableSectionType, Integer> DEFAULT_STOP_POINTS_MAP = new HashMap<>();
 
   static {
     DEFAULT_STOP_POINTS_MAP.put(TableSectionType.HEADER, TEXT_END);

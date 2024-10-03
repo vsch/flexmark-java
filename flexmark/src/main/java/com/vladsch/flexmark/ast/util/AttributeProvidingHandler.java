@@ -13,7 +13,6 @@ public class AttributeProvidingHandler<N extends Node>
   }
 
   public void setAttributes(Node node, AttributablePart part, MutableAttributes attributes) {
-    //noinspection unchecked
     getAdapter().setAttributes((N) node, part, attributes);
   }
 

@@ -525,7 +525,7 @@ public class MarkdownTable {
     }
   }
 
-  private static void insertRows(ArrayList<TableRow> rows, int index, int count, int maxColumns) {
+  private static void insertRows(List<TableRow> rows, int index, int count, int maxColumns) {
     int i = count;
     while (i-- > 0) {
       TableRow emptyRow = new TableRow();

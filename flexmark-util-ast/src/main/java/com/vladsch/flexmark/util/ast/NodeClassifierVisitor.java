@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.collection.CopyOnWriteRef;
 import com.vladsch.flexmark.util.collection.OrderedMap;
 import com.vladsch.flexmark.util.collection.OrderedSet;
 import java.util.BitSet;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracker {
   private final OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
   private final OrderedSet<Class<?>> exclusionSet;
-  private final HashMap<Integer, BitSet> nodeAncestryMap;
+  private final Map<Integer, BitSet> nodeAncestryMap;
   private final Stack<BitSet> nodeAncestryBitSetStack = new Stack<>();
   private final CopyOnWriteRef<BitSet> nodeAncestryBitSet =
       new CopyOnWriteRef<>(

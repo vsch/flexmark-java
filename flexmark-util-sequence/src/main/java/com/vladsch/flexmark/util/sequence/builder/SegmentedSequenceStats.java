@@ -4,6 +4,7 @@ import com.vladsch.flexmark.util.misc.MinMaxAvgLong;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,8 +56,8 @@ public class SegmentedSequenceStats {
     }
   }
 
-  private ArrayList<SegmentedSequenceStats.StatsEntry> aggregatedStats;
-  private final HashMap<StatsEntry, StatsEntry> stats = new HashMap<>();
+  private List<SegmentedSequenceStats.StatsEntry> aggregatedStats;
+  private final Map<StatsEntry, StatsEntry> stats = new HashMap<>();
 
   private SegmentedSequenceStats() {}
 
@@ -117,7 +118,7 @@ public class SegmentedSequenceStats {
     return getStatsText(getAggregatedStats());
   }
 
-  static final ArrayList<Integer> AGGR_STEPS = new ArrayList<>();
+  static final List<Integer> AGGR_STEPS = new ArrayList<>();
 
   static {
     AGGR_STEPS.add(1);

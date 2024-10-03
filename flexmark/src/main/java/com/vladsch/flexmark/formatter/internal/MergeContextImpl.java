@@ -6,13 +6,14 @@ import com.vladsch.flexmark.formatter.TranslationContext;
 import com.vladsch.flexmark.formatter.TranslationHandler;
 import com.vladsch.flexmark.util.ast.Document;
 import java.util.HashMap;
+import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MergeContextImpl implements MergeContext {
   private Document[] myDocuments;
   private TranslationHandler[] myTranslationHandlers;
-  private final HashMap<TranslationContext, Document> myTranslationHandlerDocumentMap;
+  private final Map<TranslationContext, Document> myTranslationHandlerDocumentMap;
 
   public MergeContextImpl(Document[] documents, TranslationHandler[] translationHandlers) {
     myDocuments = documents;
