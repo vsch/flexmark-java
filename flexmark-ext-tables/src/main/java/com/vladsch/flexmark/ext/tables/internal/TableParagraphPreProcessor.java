@@ -196,7 +196,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
   public int preProcessBlock(Paragraph block, ParserState state) {
     InlineParser inlineParser = state.getInlineParser();
 
-    ArrayList<BasedSequence> tableLines = new ArrayList<>();
+    List<BasedSequence> tableLines = new ArrayList<>();
     int separatorLineNumber = -1;
     BasedSequence separatorLine = null;
     int blockIndent = block.getLineIndent(0);
@@ -242,7 +242,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
     if (separatorLineNumber == -1) return 0;
 
-    ArrayList<TableRow> tableRows = new ArrayList<>();
+    List<TableRow> tableRows = new ArrayList<>();
     for (BasedSequence rowLine : tableLines) {
       int rowNumber = tableRows.size();
 
@@ -435,8 +435,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     // any separators which do not have tableRow as parent are embedded into inline elements and
     // should be
     // converted back to text
-    ArrayList<Node> removedSeparators = null;
-    ArrayList<Node> mergeTextParents = null;
+    List<Node> removedSeparators = null;
+    List<Node> mergeTextParents = null;
+
     for (Node node : sepList) {
       if (node.getParent() != null && node.getParent() != tableRow) {
         // embedded, convert it and surrounding whitespace to text

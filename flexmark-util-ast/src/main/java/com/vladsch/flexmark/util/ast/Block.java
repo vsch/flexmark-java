@@ -24,6 +24,7 @@ public abstract class Block extends ContentNode {
     super(blockContent);
   }
 
+  @Override
   @Nullable
   public Block getParent() {
     return (Block) super.getParent();

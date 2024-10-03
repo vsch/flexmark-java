@@ -258,7 +258,7 @@ public class InlineParserImpl extends LightInlineParserImpl
   @Override
   public void mergeIfNeeded(Text first, Text last) {
     if (first != null && last != null && first != last) {
-      ArrayList<BasedSequence> sb = new ArrayList<>();
+      List<BasedSequence> sb = new ArrayList<>();
       sb.add(first.getChars());
       Node node = first.getNext();
       Node stop = last.getNext();

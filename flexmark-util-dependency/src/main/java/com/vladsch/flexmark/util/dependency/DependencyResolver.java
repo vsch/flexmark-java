@@ -28,7 +28,7 @@ public class DependencyResolver {
         totalSize += subList.size();
       }
 
-      ArrayList<D> flatList = new ArrayList<>(totalSize);
+      List<D> flatList = new ArrayList<>(totalSize);
       for (List<D> subList : list) {
         flatList.addAll(subList);
       }
@@ -131,11 +131,11 @@ public class DependencyResolver {
       BitSet dependents = new BitSet(dependentCount);
       dependents.set(0, dependentItemMap.size());
 
-      ArrayList<List<D>> dependencyStages = new ArrayList<>();
+      List<List<D>> dependencyStages = new ArrayList<>();
 
       while (newReady.nextSetBit(0) != -1) {
         // process these independents in unspecified order since they do not have dependencies
-        ArrayList<D> stageDependents = new ArrayList<>();
+        List<D> stageDependents = new ArrayList<>();
         BitSet nextDependents = new BitSet();
 
         // collect block processors ready for processing, any non-globals go into independents

@@ -20,9 +20,7 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
 public class TableJiraRenderer implements NodeRenderer {
-  public TableJiraRenderer(DataHolder options) {
-    // this.options = new TableParserOptions(options);
-  }
+  public TableJiraRenderer() {}
 
   @Override
   public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
@@ -104,7 +102,7 @@ public class TableJiraRenderer implements NodeRenderer {
     @NotNull
     @Override
     public NodeRenderer apply(@NotNull DataHolder options) {
-      return new TableJiraRenderer(options);
+      return new TableJiraRenderer();
     }
   }
 }

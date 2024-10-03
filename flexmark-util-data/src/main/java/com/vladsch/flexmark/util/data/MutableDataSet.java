@@ -72,11 +72,11 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
       @NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
     if (dataSet.containsKey(key)) {
       return dataSet.get(key);
-    } else {
-      Object value = factory.apply(this);
-      dataSet.put(key, value);
-      return value;
     }
+
+    Object value = factory.apply(this);
+    dataSet.put(key, value);
+    return value;
   }
 
   @NotNull

@@ -1536,7 +1536,7 @@ public interface SequenceUtils {
     endIndex = Math.min(endIndex, thizz.length());
     fromIndex = rangeLimit(fromIndex, 0, endIndex);
     int lastPos = fromIndex;
-    ArrayList<Range> ranges = new ArrayList<>();
+    List<Range> ranges = new ArrayList<>();
 
     while (lastPos < endIndex) {
       Range blankLines = leadingBlankLinesRange(thizz, eolChars, lastPos, endIndex);
@@ -1768,7 +1768,7 @@ public interface SequenceUtils {
         !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
     boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
     boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
-    ArrayList<T> items = new ArrayList<>();
+    List<T> items = new ArrayList<>();
 
     int lastPos = 0;
     int length = thizz.length();

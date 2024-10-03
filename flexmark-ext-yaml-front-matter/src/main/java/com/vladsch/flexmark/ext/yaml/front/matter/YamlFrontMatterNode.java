@@ -38,7 +38,7 @@ public class YamlFrontMatterNode extends Node {
   }
 
   public List<String> getValues() {
-    ArrayList<String> list = new ArrayList<>();
+    List<String> list = new ArrayList<>();
     Node child = getFirstChild();
     while (child != null) {
       list.add(child.getChars().toString());
@@ -48,7 +48,7 @@ public class YamlFrontMatterNode extends Node {
   }
 
   public List<BasedSequence> getValuesSequences() {
-    ArrayList<BasedSequence> list = new ArrayList<>();
+    List<BasedSequence> list = new ArrayList<>();
     Node child = getFirstChild();
     while (child != null) {
       list.add(child.getChars());

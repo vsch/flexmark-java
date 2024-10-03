@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -362,7 +363,7 @@ public class BitFieldSetTest {
     bitFields.setBitField(BitFields.FIELD_10, 381);
     bitFields.setBitField(BitFields.FIELD_11, -6);
     int[] expected = {-1, 2, -10, 381, -6};
-    ArrayList<Integer> actualList = new ArrayList<>();
+    List<Integer> actualList = new ArrayList<>();
 
     for (BitFields fields : bitFields) {
       actualList.add(bitFields.getInt(fields));
@@ -397,7 +398,7 @@ public class BitFieldSetTest {
     IntSet[] expected = {
       IntSet.VALUE_2, IntSet.VALUE_4, IntSet.VALUE_12, IntSet.VALUE_21,
     };
-    ArrayList<IntSet> actualList = new ArrayList<>();
+    List<IntSet> actualList = new ArrayList<>();
 
     for (IntSet fields : bitFields) {
       actualList.add(fields);
@@ -438,7 +439,7 @@ public class BitFieldSetTest {
     bitFields.setBitField(BitFields.FIELD_7, 57);
 
     int[] expected = {-1, 2, -10, 381, -6};
-    ArrayList<Integer> actualList = new ArrayList<>();
+    List<Integer> actualList = new ArrayList<>();
 
     Iterator<BitFields> iterator = bitFields.iterator();
 

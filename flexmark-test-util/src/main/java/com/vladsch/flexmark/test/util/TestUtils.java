@@ -646,10 +646,10 @@ public class TestUtils {
     return adjustedFileUrl(url);
   }
 
-  public static ArrayList<Object[]> getTestData(@NotNull ResourceLocation location) {
+  public static List<Object[]> getTestData(@NotNull ResourceLocation location) {
     SpecReader specReader = SpecReader.createAndReadExamples(location, true);
     List<SpecExample> examples = specReader.getExamples();
-    ArrayList<Object[]> data = new ArrayList<>();
+    List<Object[]> data = new ArrayList<>();
 
     // NULL example runs full spec test
     data.add(new Object[] {SpecExample.NULL.withResourceLocation(location)});

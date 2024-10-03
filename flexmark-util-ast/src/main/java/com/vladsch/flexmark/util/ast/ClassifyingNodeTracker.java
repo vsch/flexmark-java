@@ -57,7 +57,7 @@ public class ClassifyingNodeTracker implements NodeTracker {
     return nodeClassifier;
   }
 
-  private void validateLinked(Node node) {
+  private static void validateLinked(Node node) {
     if (node.getNext() == null && node.getParent() == null) {
       throw new IllegalStateException("Added block " + node + " is not linked into the AST");
     }
@@ -92,7 +92,7 @@ public class ClassifyingNodeTracker implements NodeTracker {
     }
   }
 
-  private void validateUnlinked(@NotNull Node node) {
+  private static void validateUnlinked(@NotNull Node node) {
     if (!(node.getNext() == null && node.getParent() == null)) {
       throw new IllegalStateException("Removed block " + node + " is still linked in the AST");
     }

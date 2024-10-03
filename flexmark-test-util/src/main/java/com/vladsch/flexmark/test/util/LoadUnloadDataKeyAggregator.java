@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -59,14 +60,14 @@ public class LoadUnloadDataKeyAggregator implements DataKeyAggregator {
       @NotNull DataHolder combined, @NotNull DataHolder other, @NotNull DataHolder overrides) {
     if (other.contains(LOAD_EXTENSIONS) && overrides.contains(LOAD_EXTENSIONS)) {
       // have to combine these
-      ArrayList<Extension> loadExtensions = new ArrayList<>(LOAD_EXTENSIONS.get(other));
+      List<Extension> loadExtensions = new ArrayList<>(LOAD_EXTENSIONS.get(other));
       loadExtensions.addAll(LOAD_EXTENSIONS.get(overrides));
       combined = combined.toMutable().set(LOAD_EXTENSIONS, loadExtensions);
     }
 
     if (other.contains(UNLOAD_EXTENSIONS) && overrides.contains(UNLOAD_EXTENSIONS)) {
       // have to combine these
-      ArrayList<Class<? extends Extension>> loadExtensions =
+      List<Class<? extends Extension>> loadExtensions =
           new ArrayList<>(UNLOAD_EXTENSIONS.get(other));
       loadExtensions.addAll(UNLOAD_EXTENSIONS.get(overrides));
       combined = combined.toMutable().set(UNLOAD_EXTENSIONS, loadExtensions);

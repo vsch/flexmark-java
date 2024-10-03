@@ -193,7 +193,7 @@ public class SegmentedSequenceStats {
 
   @NotNull
   public List<StatsEntry> getStats() {
-    ArrayList<StatsEntry> entries = new ArrayList<>(stats.keySet());
+    List<StatsEntry> entries = new ArrayList<>(stats.keySet());
 
     entries.sort(StatsEntry::compareTo);
     return entries;

@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public interface LightInlineParser {
   @NotNull
-  ArrayList<BasedSequence> getCurrentText();
+  List<BasedSequence> getCurrentText();
 
   @NotNull
   BasedSequence getInput();

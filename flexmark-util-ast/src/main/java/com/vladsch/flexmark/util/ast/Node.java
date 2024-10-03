@@ -602,9 +602,9 @@ public abstract class Node {
     if (firstSequence != null && lastSequence != null) {
       return firstSequence.baseSubSequence(
           firstSequence.getStartOffset(), lastSequence.getEndOffset());
-    } else {
-      return BasedSequence.NULL;
     }
+
+    return BasedSequence.NULL;
   }
 
   public void setCharsFromContentOnly() {

@@ -53,7 +53,7 @@ public class PostProcessorManager {
     List<List<PostProcessorFactory>> resolveDependencies =
         DependencyResolver.resolveDependencies(
             postProcessorFactories, PostProcessorManager::prioritizePostProcessors, null);
-    ArrayList<PostProcessorDependencyStage> dependencyStages =
+    List<PostProcessorDependencyStage> dependencyStages =
         new ArrayList<>(resolveDependencies.size());
     for (List<PostProcessorFactory> dependencies : resolveDependencies) {
       dependencyStages.add(new PostProcessorDependencyStage(dependencies));

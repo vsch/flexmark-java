@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextNodeMergingList {
-  private ArrayList<Node> list = new ArrayList<>();
+  private List<Node> list = new ArrayList<>();
   private boolean isMerged = true;
 
   public void add(Node node) {
@@ -65,7 +65,7 @@ public class TextNodeMergingList {
   private void mergeList() {
     if (!isMerged) {
       // go through and see if some can be combined
-      ArrayList<Node> mergedList = null;
+      List<Node> mergedList = null;
 
       Node lastText = null;
 

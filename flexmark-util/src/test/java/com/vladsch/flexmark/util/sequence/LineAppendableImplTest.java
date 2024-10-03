@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -2050,7 +2051,7 @@ public class LineAppendableImplTest {
     fa.append(sequence.subSequence(30, 39)).line();
     fa.append(sequence.subSequence(40, 49)).line();
 
-    ArrayList<BasedSequence> lines = new ArrayList<>();
+    List<BasedSequence> lines = new ArrayList<>();
     Iterable<BasedSequence> faLines = fa.getLines(-1, true);
     for (BasedSequence line : faLines) {
       lines.add(line);

@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import org.junit.Test;
 
 public class LoadUnloadDataKeyAggregatorTest {
@@ -88,7 +89,7 @@ public class LoadUnloadDataKeyAggregatorTest {
   }
 
   static Collection<Class<?>> toClasses(Collection<Extension> extensions) {
-    ArrayList<Class<?>> list = new ArrayList<>();
+    List<Class<?>> list = new ArrayList<>();
     for (Extension extension : extensions) {
       list.add(extension.getClass());
     }

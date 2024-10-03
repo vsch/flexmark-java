@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class PlaceholderReplacerTest {
   static List<String[]> spansOf(String... spans) {
-    ArrayList<String[]> params = new ArrayList<>(spans.length);
+    List<String[]> params = new ArrayList<>(spans.length);
     for (String span : spans) {
       params.add(new String[] {span});
     }

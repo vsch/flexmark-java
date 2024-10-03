@@ -815,7 +815,7 @@ public class Parser implements IParse {
   public static MutableDataHolder addExtensions(
       MutableDataHolder options, Extension... extensions) {
     Iterable<Extension> extensionIterable = Parser.EXTENSIONS.get(options);
-    ArrayList<Extension> extensionList = new ArrayList<>(Arrays.asList(extensions));
+    List<Extension> extensionList = new ArrayList<>(Arrays.asList(extensions));
 
     for (Extension extension : extensionIterable) {
       extensionList.add(extension);

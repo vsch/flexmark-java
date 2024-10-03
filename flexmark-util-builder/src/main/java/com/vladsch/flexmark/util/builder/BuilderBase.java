@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +52,7 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
    * @return {@code this}
    */
   public final @NotNull T extensions(@NotNull Collection<? extends Extension> extensions) {
-    ArrayList<Extension> addedExtensions =
+    List<Extension> addedExtensions =
         new ArrayList<>(EXTENSIONS.get(this).size() + extensions.size());
 
     // first give extensions a chance to modify parser options
@@ -170,14 +171,14 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
       @NotNull DataHolder options,
       @NotNull Collection<Class<? extends Extension>> excludeExtensions) {
     if (options.contains(EXTENSIONS)) {
-      ArrayList<Extension> extensions = new ArrayList<>(EXTENSIONS.get(options));
+      List<Extension> extensions = new ArrayList<>(EXTENSIONS.get(options));
       boolean removed = extensions.removeIf(it -> excludeExtensions.contains(it.getClass()));
       if (removed) {
         if (options instanceof MutableDataHolder) {
           return ((MutableDataHolder) options).set(EXTENSIONS, extensions);
-        } else {
-          return options.toMutable().set(EXTENSIONS, extensions).toImmutable();
         }
+
+        return options.toMutable().set(EXTENSIONS, extensions).toImmutable();
       }
     }
     return options;

@@ -100,8 +100,8 @@ public class NullableDataKey<T> extends DataKeyBase<T> {
     T defaultValue = getDefaultValue();
     if (defaultValue != null) {
       return "DataKey<" + defaultValue.getClass().getSimpleName() + "> " + getName();
-    } else {
-      return "DataKey<null> " + getName();
     }
+
+    return "DataKey<null> " + getName();
   }
 }

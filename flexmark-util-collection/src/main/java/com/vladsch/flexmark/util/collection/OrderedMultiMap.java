@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
@@ -498,7 +499,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
       return valueSet;
     }
 
-    ArrayList<V> values = new ArrayList<>(keySet.size());
+    List<V> values = new ArrayList<>(keySet.size());
     values.addAll(valueSet);
     return values;
   }
@@ -512,7 +513,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
       return keySet;
     }
 
-    ArrayList<K> values = new ArrayList<>(valueSet.size());
+    List<K> values = new ArrayList<>(valueSet.size());
     values.addAll(keySet);
     return values;
   }

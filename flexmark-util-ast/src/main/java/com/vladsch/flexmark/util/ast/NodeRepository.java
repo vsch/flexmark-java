@@ -24,7 +24,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
   public abstract @NotNull Set<T> getReferencedElements(Node parent);
 
   @SafeVarargs
-  protected final void visitNodes(
+  protected static final void visitNodes(
       @NotNull Node parent,
       @NotNull Consumer<Node> runnable,
       @NotNull Class<? extends Node>... classes) {

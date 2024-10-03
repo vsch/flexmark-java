@@ -166,7 +166,8 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         outputAst.append(TestUtils.ast(document));
       }
 
-      ArrayList<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
+      List<CharSequence> translatedTexts = new ArrayList<>(translatingTexts.size());
+
       for (CharSequence text : translatingTexts) {
         CharSequence translated = translate(text);
         translatedTexts.add(translated);

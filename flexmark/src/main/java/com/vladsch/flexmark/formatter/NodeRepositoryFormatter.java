@@ -242,7 +242,7 @@ public abstract class NodeRepositoryFormatter<
   }
 
   private void formatReferences(NodeFormatterContext context, MarkdownWriter markdown) {
-    ArrayList<B> references = new ArrayList<>(referenceList);
+    List<B> references = new ArrayList<>(referenceList);
 
     ElementPlacementSort referenceSort = getReferenceSort();
     switch (referenceSort) {
@@ -256,8 +256,9 @@ public abstract class NodeRepositoryFormatter<
       case SORT_UNUSED_LAST:
       case SORT_DELETE_UNUSED:
       case DELETE_UNUSED:
-        ArrayList<B> used = new ArrayList<>();
-        ArrayList<B> unused = new ArrayList<>();
+        List<B> used = new ArrayList<>();
+        List<B> unused = new ArrayList<>();
+
         for (B reference : references) {
           if (!unusedReferences.contains(reference)) {
             used.add(reference);

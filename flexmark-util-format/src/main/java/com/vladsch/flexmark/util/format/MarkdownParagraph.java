@@ -780,7 +780,7 @@ public class MarkdownParagraph {
 
     @NotNull
     public List<Token> asList() {
-      ArrayList<Token> tokens = new ArrayList<>();
+      List<Token> tokens = new ArrayList<>();
       reset();
 
       while (token != null) {

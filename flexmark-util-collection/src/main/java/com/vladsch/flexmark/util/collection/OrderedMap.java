@@ -284,7 +284,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
       return valueList;
     }
 
-    ArrayList<V> values = new ArrayList<>(keySet.size());
+    List<V> values = new ArrayList<>(keySet.size());
     Iterator<Integer> iterator = keySet.indexIterator();
     while (iterator.hasNext()) {
       values.add(valueList.get(iterator.next()));

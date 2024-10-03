@@ -207,7 +207,7 @@ public class DocumentParser implements ParserState {
     this.options = options;
     this.myParsing = inlineParser.getParsing();
 
-    ArrayList<BlockParserFactory> blockParserFactories =
+    List<BlockParserFactory> blockParserFactories =
         new ArrayList<>(customBlockParserFactories.size());
     for (CustomBlockParserFactory factory : customBlockParserFactories) {
       blockParserFactories.add(factory.apply(options));
@@ -974,7 +974,7 @@ public class DocumentParser implements ParserState {
             block.setContent(block, i, iMax);
           } else {
             // need to change the first line of the line list
-            ArrayList<BasedSequence> lines = new ArrayList<>(iMax - i);
+            List<BasedSequence> lines = new ArrayList<>(iMax - i);
             lines.addAll(block.getContentLines().subList(i, iMax));
             int start = contentChars.getStartOffset() - lines.get(0).getStartOffset();
             if (start > 0 && start < lines.get(0).length()) {

@@ -93,11 +93,11 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
       BitSet dependents = new BitSet(dependentCount);
       dependents.set(0, dependentItemMap.size());
 
-      ArrayList<S> dependencyStages = new ArrayList<>();
+      List<S> dependencyStages = new ArrayList<>();
 
       while (newReady.nextSetBit(0) != -1) {
         // process these independents in unspecified order since they do not have dependencies
-        ArrayList<D> stageDependents = new ArrayList<>();
+        List<D> stageDependents = new ArrayList<>();
         BitSet nextDependents = new BitSet();
 
         // collect block processors ready for processing, any non-globals go into independents

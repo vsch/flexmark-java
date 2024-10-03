@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.HtmlAppendableBase;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.TagRange;
-import java.util.ArrayList;
+import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -167,7 +167,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
         }
 
         if (startOffset >= 0 && startOffset < endOffset) {
-          ArrayList<TagRange> tagRanges = HtmlRenderer.TAG_RANGES.get(context.getDocument());
+          List<TagRange> tagRanges = HtmlRenderer.TAG_RANGES.get(context.getDocument());
           tagRanges.add(new TagRange(tagName, startOffset, endOffset));
         }
       }

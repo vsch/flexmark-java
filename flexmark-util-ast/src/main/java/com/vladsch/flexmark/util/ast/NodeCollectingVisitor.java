@@ -28,7 +28,7 @@ public class NodeCollectingVisitor {
     included.addAll(classes);
 
     for (Class<?> clazz : classes) {
-      ArrayList<Class<?>> classList = new ArrayList<>(1);
+      List<Class<?>> classList = new ArrayList<>(1);
       classList.add(clazz);
       subClassMap.put(clazz, classList);
     }

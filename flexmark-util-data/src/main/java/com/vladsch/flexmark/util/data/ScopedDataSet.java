@@ -30,9 +30,9 @@ public class ScopedDataSet extends DataSet {
       HashMap<DataKeyBase<?>, Object> all = new HashMap<>(parent.getAll());
       all.putAll(super.getAll());
       return all;
-    } else {
-      return super.getAll();
     }
+
+    return super.getAll();
   }
 
   @Override
@@ -41,9 +41,9 @@ public class ScopedDataSet extends DataSet {
       HashSet<DataKeyBase<?>> all = new HashSet<>(parent.getKeys());
       all.addAll(super.getKeys());
       return all;
-    } else {
-      return super.getKeys();
     }
+
+    return super.getKeys();
   }
 
   @Override
@@ -63,8 +63,8 @@ public class ScopedDataSet extends DataSet {
       @NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
     if (parent == null || super.contains(key) || !parent.contains(key)) {
       return super.getOrCompute(key, factory);
-    } else {
-      return parent.getOrCompute(key, factory);
     }
+
+    return parent.getOrCompute(key, factory);
   }
 }

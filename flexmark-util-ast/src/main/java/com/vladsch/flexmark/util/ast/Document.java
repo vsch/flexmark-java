@@ -140,9 +140,9 @@ public class Document extends Block implements MutableDataHolder {
     if (lineSegments == EMPTY_LIST) {
       char c = getChars().lastChar();
       return (c == '\n' || c == '\r' ? 0 : 1) + getLineNumber(getChars().length());
-    } else {
-      return lineSegments.size();
     }
+
+    return lineSegments.size();
   }
 
   /**
@@ -166,21 +166,22 @@ public class Document extends Block implements MutableDataHolder {
       while (nextLineEnd < length) {
         int eolLength = preText.eolStartLength(nextLineEnd);
         int lengthWithEOL = nextLineEnd + eolLength;
-        if (offset >= lengthWithEOL)
+        if (offset >= lengthWithEOL) {
           lineNumber++; // do not treat offset between \r and \n as complete line
-        int oldNextLineEnd = nextLineEnd;
+        }
         nextLineEnd = preText.endOfLineAnyEOL(lengthWithEOL);
       }
 
       return lineNumber;
-    } else {
-      int iMax = lineSegments.size();
-      for (int i = 0; i < iMax; i++) {
-        if (offset < lineSegments.get(i).getEndOffset()) {
-          return i;
-        }
-      }
-      return iMax;
     }
+
+    int iMax = lineSegments.size();
+    for (int i = 0; i < iMax; i++) {
+      if (offset < lineSegments.get(i).getEndOffset()) {
+        return i;
+      }
+    }
+
+    return iMax;
   }
 }

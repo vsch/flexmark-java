@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
-  public YamlFrontMatterNodeFormatter(DataHolder options) {}
+  public YamlFrontMatterNodeFormatter() {}
 
   @Nullable
   @Override
@@ -64,7 +64,7 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
     @NotNull
     @Override
     public NodeFormatter create(@NotNull DataHolder options) {
-      return new YamlFrontMatterNodeFormatter(options);
+      return new YamlFrontMatterNodeFormatter();
     }
   }
 }

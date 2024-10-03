@@ -368,7 +368,7 @@ public class HtmlRenderer implements IRender {
     if (!isCompatibleRendererType(options, rendererType, supportedRendererType)) {
       // need to add
       List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.get(options);
-      ArrayList<Pair<String, String>> newEquivalence = new ArrayList<>(equivalence);
+      List<Pair<String, String>> newEquivalence = new ArrayList<>(equivalence);
       newEquivalence.add(new Pair<>(rendererType, supportedRendererType));
       options.set(RENDERER_TYPE_EQUIVALENCE, newEquivalence);
     }

@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +22,7 @@ public abstract class CoreRendererSpecTest extends RendererSpecTest {
   private static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
   static {
-    ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.get(null));
+    List<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.get(null));
     userTags.add("tag");
     optionsMap.put("heading-ids", new MutableDataSet().set(HtmlRenderer.RENDER_HEADER_ID, true));
     optionsMap.put(

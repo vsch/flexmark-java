@@ -220,7 +220,7 @@ public class FormatterUtils {
       // CAUTION: during translation no formatting should be done
       context.renderChildren(node);
     } else {
-      ArrayList<Node> itemList = new ArrayList<>();
+      List<Node> itemList = new ArrayList<>();
       Node item = node.getFirstChild();
       while (item != null) {
         itemList.add(item);

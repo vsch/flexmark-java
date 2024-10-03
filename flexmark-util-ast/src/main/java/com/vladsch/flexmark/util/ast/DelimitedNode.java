@@ -28,8 +28,8 @@ public interface DelimitedNode extends TextContainer {
     if (any(flags, F_NODE_TEXT)) {
       out.append(getText());
       return false;
-    } else {
-      return true;
     }
+
+    return true;
   }
 }

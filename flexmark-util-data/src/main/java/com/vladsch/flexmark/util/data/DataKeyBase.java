@@ -79,9 +79,9 @@ public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
   public String toString() {
     if (defaultValue != null) {
       return "NullableDataKey<" + defaultValue.getClass().getSimpleName() + "> " + name;
-    } else {
-      return "NullableDataKey<unknown> " + name;
     }
+
+    return "NullableDataKey<unknown> " + name;
   }
 
   /**

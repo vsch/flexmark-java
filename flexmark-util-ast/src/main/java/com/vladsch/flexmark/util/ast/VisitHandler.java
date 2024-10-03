@@ -10,8 +10,8 @@ public class VisitHandler<N extends Node> extends AstHandler<N, Visitor<N>>
     super(klass, adapter);
   }
 
+  @Override
   public void visit(@NotNull Node node) {
-    //noinspection unchecked
     getAdapter().visit((N) node);
   }
 }

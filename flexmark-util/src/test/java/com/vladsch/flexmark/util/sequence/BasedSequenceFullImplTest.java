@@ -1196,7 +1196,7 @@ public class BasedSequenceFullImplTest {
     BasedSequence[] list =
         sequence.split(
             ",", 0, SequenceUtils.SPLIT_TRIM_PARTS | SequenceUtils.SPLIT_SKIP_EMPTY, null);
-    ArrayList<String> sl = new ArrayList<>(list.length);
+    List<String> sl = new ArrayList<>(list.length);
     for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
     assertArrayEquals(new String[] {"1", "2", "3", "4", "5"}, sl.toArray(new String[0]));
@@ -1208,7 +1208,7 @@ public class BasedSequenceFullImplTest {
         basedSequenceOf("   line1 \nline2 \n line3 \n")
             .subSequence(0, "   line1 \nline2 \n line3 \n".length());
     BasedSequence[] list = sequence.split("\n", 0, SequenceUtils.SPLIT_INCLUDE_DELIMS, null);
-    ArrayList<String> sl = new ArrayList<>(list.length);
+    List<String> sl = new ArrayList<>(list.length);
     for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
     assertArrayEquals(

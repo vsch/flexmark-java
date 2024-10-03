@@ -30,7 +30,7 @@ public class TrackedOffsetList implements List<TrackedOffset> {
 
   @NotNull
   public static TrackedOffsetList create(@NotNull BasedSequence baseSeq, @NotNull int[] offsets) {
-    ArrayList<TrackedOffset> trackedOffsets = new ArrayList<>(offsets.length);
+    List<TrackedOffset> trackedOffsets = new ArrayList<>(offsets.length);
     for (int offset : offsets) {
       trackedOffsets.add(TrackedOffset.track(offset));
     }
@@ -46,7 +46,7 @@ public class TrackedOffsetList implements List<TrackedOffset> {
     myBaseSeq = baseSeq;
     myTrackedOffsets = new ArrayList<>(trackedOffsets);
     myTrackedOffsets.sort(Comparator.comparing(TrackedOffset::getOffset));
-    ArrayList<Seg> segments = new ArrayList<>(trackedOffsets.size());
+    List<Seg> segments = new ArrayList<>(trackedOffsets.size());
     for (TrackedOffset trackedOffset : myTrackedOffsets) {
       segments.add(Seg.segOf(trackedOffset.getOffset(), trackedOffset.getOffset() + 1));
     }
@@ -56,7 +56,7 @@ public class TrackedOffsetList implements List<TrackedOffset> {
 
   @NotNull
   public TrackedOffsetList getUnresolvedOffsets() {
-    ArrayList<TrackedOffset> unresolved = new ArrayList<>();
+    List<TrackedOffset> unresolved = new ArrayList<>();
 
     for (TrackedOffset trackedOffset : myTrackedOffsets) {
       if (!trackedOffset.isResolved()) unresolved.add(trackedOffset);

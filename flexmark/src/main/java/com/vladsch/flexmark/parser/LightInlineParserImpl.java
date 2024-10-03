@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +32,7 @@ public class LightInlineParserImpl implements LightInlineParser {
 
   @NotNull
   @Override
-  public ArrayList<BasedSequence> getCurrentText() {
+  public List<BasedSequence> getCurrentText() {
     if (currentText == null) {
       currentText = new ArrayList<>();
     }

@@ -308,7 +308,7 @@ public class CoreNodeFormatter
     if (phase == DOCUMENT_BOTTOM) {
       if (formatterOptions.appendTransferredReferences) {
         // we will transfer all references which were not part of our document
-        ArrayList<DataKeyBase<?>> keys = new ArrayList<>();
+        List<DataKeyBase<?>> keys = new ArrayList<>();
 
         for (DataKeyBase<?> key : document.getAll().keySet()) {
           if (key.get(document) instanceof NodeRepository) {

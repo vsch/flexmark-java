@@ -406,7 +406,7 @@ public class MarkdownTable {
   }
 
   private List<TableRow> getAllSectionsRows(TableSection... sections) {
-    ArrayList<TableRow> rows = new ArrayList<>(header.rows.size() + body.rows.size());
+    List<TableRow> rows = new ArrayList<>(header.rows.size() + body.rows.size());
     for (TableSection section : sections) {
       rows.addAll(section.rows);
     }

@@ -141,7 +141,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
   public List<String> getTranslatingTexts() {
     myTranslatingPlaceholders.clear();
     myTranslatingPlaceholders.ensureCapacity(myTranslatedSpans.size() + myTranslatedTexts.size());
-    ArrayList<String> translatingSnippets =
+    List<String> translatingSnippets =
         new ArrayList<>(myTranslatedSpans.size() + myTranslatedTexts.size());
     HashMap<String, Integer> repeatedTranslatingIndices = new HashMap<>();
 

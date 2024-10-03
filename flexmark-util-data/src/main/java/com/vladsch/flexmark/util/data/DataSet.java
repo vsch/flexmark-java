@@ -95,9 +95,9 @@ public class DataSet implements DataHolder {
       @NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory) {
     if (dataSet.containsKey(key)) {
       return dataSet.get(key);
-    } else {
-      return factory.apply(this);
     }
+
+    return factory.apply(this);
   }
 
   @NotNull

@@ -41,7 +41,7 @@ public class ParsedOption<T> {
     this.source = source;
 
     if (parsedOptions != null) {
-      ArrayList<ParserMessage> mergedMessages = messages != null ? new ArrayList<>(messages) : null;
+      List<ParserMessage> mergedMessages = messages != null ? new ArrayList<>(messages) : null;
 
       for (ParsedOption<T> parsedOption : parsedOptions) {
         optionResult = optionResult.escalate(parsedOption.getOptionResult());

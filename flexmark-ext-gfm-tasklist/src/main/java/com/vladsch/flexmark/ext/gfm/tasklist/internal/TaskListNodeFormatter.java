@@ -21,6 +21,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.jetbrains.annotations.Nullable;
 
@@ -193,12 +194,12 @@ public class TaskListNodeFormatter implements NodeFormatter {
     if (context.isTransformingText()) {
       context.renderChildren(node);
     } else {
-      ArrayList<Node> itemList = new ArrayList<>();
+      List<Node> itemList = new ArrayList<>();
 
       TaskListItemPlacement taskListItemPlacement = taskListFormatOptions.taskListItemPlacement;
       if (taskListItemPlacement != TaskListItemPlacement.AS_IS) {
-        ArrayList<ListItem> incompleteTasks = new ArrayList<>();
-        ArrayList<ListItem> completeItems = new ArrayList<>();
+        List<ListItem> incompleteTasks = new ArrayList<>();
+        List<ListItem> completeItems = new ArrayList<>();
         boolean incompleteDescendants =
             taskListItemPlacement == TaskListItemPlacement.INCOMPLETE_NESTED_FIRST
                 || taskListItemPlacement == TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK;
