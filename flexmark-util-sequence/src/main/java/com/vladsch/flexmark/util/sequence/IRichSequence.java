@@ -38,6 +38,7 @@ public interface IRichSequence<T extends IRichSequence<T>>
    *
    * @return hash code as if it was a string of the sequence content
    */
+  @Override
   int hashCode();
 
   @NotNull

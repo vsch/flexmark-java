@@ -23,6 +23,7 @@ public final class StringSequenceBuilder
     this.segments = new StringBuilder(initialCapacity);
   }
 
+  @Override
   @NotNull
   public StringSequenceBuilder getBuilder() {
     return new StringSequenceBuilder();

@@ -299,11 +299,10 @@ public class MarkdownTable {
                   i,
                   i,
                   offset - cell.getInsideStartOffset(previousCell));
-            } else {
-              // it the span area or before pipe of first cell
-              return new TableCellOffsetInfo(
-                  offset, this, getAllRowsSection(r), row, cell, r, i, null, null);
             }
+            // it the span area or before pipe of first cell
+            return new TableCellOffsetInfo(
+                offset, this, getAllRowsSection(r), row, cell, r, i, null, null);
           }
           i++;
           previousCell = cell;
@@ -625,7 +624,7 @@ public class MarkdownTable {
    * @param sections sections to use for rows array generation
    * @return true if row is empty or is a separator row
    */
-  private boolean isEmptyRowAt(int rowIndex, TableSection[] sections) {
+  private static boolean isEmptyRowAt(int rowIndex, TableSection[] sections) {
     boolean[] result = new boolean[] {false};
     forAllSectionsRows(
         rowIndex,
@@ -1865,9 +1864,9 @@ public class MarkdownTable {
         width += columnWidths[i + col];
       }
       return width;
-    } else {
-      return columnWidths[col];
     }
+
+    return columnWidths[col];
   }
 
   private int spanFixedWidth(BitSet unfixedColumns, int col, int columnSpan) {
@@ -1879,9 +1878,9 @@ public class MarkdownTable {
         }
       }
       return width;
-    } else {
-      return unfixedColumns.get(col) ? 0 : columnWidths[col];
     }
+
+    return unfixedColumns.get(col) ? 0 : columnWidths[col];
   }
 
   private static class ColumnSpan {
@@ -1915,7 +1914,7 @@ public class MarkdownTable {
     return alignment;
   }
 
-  private int aggregateTotalColumnsWithoutColumns(
+  private static int aggregateTotalColumnsWithoutColumns(
       TableSection[] sections, BinaryOperator<Integer> aggregator, int... skipColumns) {
     Integer[] columns = new Integer[] {null};
 
@@ -1938,7 +1937,7 @@ public class MarkdownTable {
     return columns[0] == null ? 0 : columns[0];
   }
 
-  private int aggregateTotalColumnsWithoutRows(
+  private static int aggregateTotalColumnsWithoutRows(
       TableSection[] sections, BinaryOperator<Integer> aggregator, int... skipRows) {
     Integer[] columns = new Integer[] {null};
 
@@ -1959,7 +1958,7 @@ public class MarkdownTable {
     return columns[0] == null ? 0 : columns[0];
   }
 
-  private void forAllSectionsRows(
+  private static void forAllSectionsRows(
       int startIndex, int count, TableSection[] sections, TableRowManipulator manipulator) {
     if (count <= 0) return;
     int remaining = count;
@@ -1972,10 +1971,10 @@ public class MarkdownTable {
       if (sectionIndex >= section.rows.size()) {
         sectionIndex -= section.rows.size();
         continue;
-      } else {
-        currentIndex = sectionIndex;
-        sectionIndex = 0;
       }
+
+      currentIndex = sectionIndex;
+      sectionIndex = 0;
 
       while (currentIndex < section.rows.size()) {
         int result =

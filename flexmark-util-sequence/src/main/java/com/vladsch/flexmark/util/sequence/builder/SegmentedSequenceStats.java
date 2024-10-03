@@ -36,8 +36,10 @@ public class SegmentedSequenceStats {
     @Override
     public int compareTo(@NotNull SegmentedSequenceStats.StatsEntry o) {
       int segs = Integer.compare(segments, o.segments);
-      if (segs != 0) return segs;
-      else return Integer.compare(count, o.count);
+      if (segs != 0) {
+        return segs;
+      }
+      return Integer.compare(count, o.count);
     }
 
     @Override

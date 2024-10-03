@@ -32,15 +32,15 @@ public class Html5Entities {
       } catch (IllegalArgumentException e) {
         return "\uFFFD";
       }
-    } else {
-      String name = input.substring(1, input.length() - 1);
-      String s = NAMED_CHARACTER_REFERENCES.get(name);
-      if (s != null) {
-        return s;
-      } else {
-        return input;
-      }
     }
+
+    String name = input.substring(1, input.length() - 1);
+    String s = NAMED_CHARACTER_REFERENCES.get(name);
+    if (s != null) {
+      return s;
+    }
+
+    return input;
   }
 
   public static BasedSequence entityToSequence(BasedSequence input) {
@@ -59,15 +59,15 @@ public class Html5Entities {
       } catch (IllegalArgumentException e) {
         return PrefixedSubSequence.prefixOf("\uFFFD", baseSeq);
       }
-    } else {
-      String name = input.subSequence(1, input.length() - 1).toString();
-      String s = NAMED_CHARACTER_REFERENCES.get(name);
-      if (s != null) {
-        return PrefixedSubSequence.prefixOf(s, baseSeq);
-      } else {
-        return input;
-      }
     }
+
+    String name = input.subSequence(1, input.length() - 1).toString();
+    String s = NAMED_CHARACTER_REFERENCES.get(name);
+    if (s != null) {
+      return PrefixedSubSequence.prefixOf(s, baseSeq);
+    }
+
+    return input;
   }
 
   private static Map<String, String> readEntities() {

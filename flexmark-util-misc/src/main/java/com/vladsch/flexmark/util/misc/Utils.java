@@ -179,7 +179,6 @@ public class Utils {
     try {
       return URLDecoder.decode(receiver, charSet != null ? charSet : "UTF-8");
     } catch (UnsupportedEncodingException | IllegalArgumentException e) {
-      // e.printStackTrace()
       return orEmpty(receiver);
     }
   }
@@ -428,8 +427,11 @@ public class Utils {
   }
 
   public static <T extends Comparable<T>> int compareNullable(T i1, T i2) {
-    if (i1 == null || i2 == null) return 0;
-    else return i1.compareTo(i2);
+    if (i1 == null || i2 == null) {
+      return 0;
+    }
+
+    return i1.compareTo(i2);
   }
 
   private static void streamAppend(StringBuilder sb, InputStream inputStream) {

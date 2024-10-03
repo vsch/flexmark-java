@@ -97,9 +97,8 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
   public char safeBaseCharAt(int index) {
     int startOffset = getStartOffset();
     if (index >= startOffset && index < startOffset + length()) return charAt(index - startOffset);
-    else {
-      return getBaseSequence().safeCharAt(index);
-    }
+
+    return getBaseSequence().safeCharAt(index);
   }
 
   @Override
@@ -365,6 +364,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
         : PrefixedSubSequence.prefixOf(prefix.toString(), this);
   }
 
+  @Override
   @NotNull
   public final BasedSequence prefixWithIndent() {
     return prefixWithIndent(Integer.MAX_VALUE);

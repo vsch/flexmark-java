@@ -57,6 +57,7 @@ public class SegmentOffsetTree extends SegmentTree {
         : pos >= startIndices.length ? startIndices[startIndices.length - 1] : startIndices[pos];
   }
 
+  @Override
   @NotNull
   public Segment getSegment(int pos, @NotNull BasedSequence baseSeq) {
     return Segment.getSegment(segmentBytes, byteOffset(pos), pos, startIndices[pos], baseSeq);
@@ -108,6 +109,7 @@ public class SegmentOffsetTree extends SegmentTree {
     return null;
   }
 
+  @Override
   @NotNull
   public String toString(@NotNull BasedSequence baseSeq) {
     DelimitedBuilder out = new DelimitedBuilder(", ");

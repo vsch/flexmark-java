@@ -394,7 +394,7 @@ public class TableCell {
     return getInsideStartOffset(previousCell) - getStartOffset(previousCell);
   }
 
-  private CharSequence dumpSequence(BasedSequence sequence) {
+  private static CharSequence dumpSequence(BasedSequence sequence) {
     StringBuilder sb = new StringBuilder();
     sb.append("{ \"")
         .append(sequence.replace("\"", "\\\""))

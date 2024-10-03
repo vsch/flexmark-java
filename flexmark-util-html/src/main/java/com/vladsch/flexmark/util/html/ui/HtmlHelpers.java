@@ -18,69 +18,8 @@
 package com.vladsch.flexmark.util.html.ui;
 
 import com.vladsch.flexmark.util.misc.Utils;
-import java.awt.Font;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.JTextPane;
 
 public class HtmlHelpers {
-  public static String toHtmlError(String err, boolean withContext) {
-    if (err == null) return null;
-
-    if (withContext) {
-      Matcher matcher = Pattern.compile("(?:^|\n)(.*\n)(\\s*)\\^(\n?)$").matcher(err);
-      if (matcher.find()) {
-        String group = matcher.group(2);
-        if (group != null && !group.isEmpty()) {
-          int prevLineStart = matcher.group(1) != null ? matcher.start(1) : matcher.start(2);
-          String lastLine = "&nbsp;".repeat(group.length());
-          err =
-              err.substring(0, prevLineStart)
-                  + "<span style=\"font-family:monospaced\">"
-                  + err.substring(prevLineStart, matcher.start(2)).replace(" ", "&nbsp;")
-                  + lastLine
-                  + "^</span>"
-                  + group;
-        }
-      }
-    }
-    return err.replace("\n", "<br>");
-  }
-
-  public static void setRegExError(
-      String error,
-      JTextPane jTextPane,
-      Font textFont,
-      BackgroundColor validTextFieldBackground,
-      BackgroundColor warningTextFieldBackground) {
-    HtmlBuilder html = new HtmlBuilder();
-    html.tag("html")
-        .style("margin:2px;vertical-align:middle;")
-        .attr(validTextFieldBackground, textFont)
-        .tag("body");
-    html.attr(warningTextFieldBackground).tag("div");
-    html.append(toHtmlError(error, true));
-    html.closeTag("div");
-    html.closeTag("body");
-    html.closeTag("html");
-
-    jTextPane.setVisible(true);
-    jTextPane.setText(html.toFinalizedString());
-    jTextPane.revalidate();
-    jTextPane.getParent().revalidate();
-    jTextPane.getParent().getParent().revalidate();
-  }
-
-  public static String withContext(
-      String text, String context, int pos, String prefix, String suffix) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(text).append('\n');
-    sb.append(prefix).append(context).append(suffix).append('\n');
-    for (int i = 1; i < prefix.length(); i++) sb.append(' ');
-    sb.append('^').append('\n');
-    return sb.toString();
-  }
-
   public static String toRgbString(java.awt.Color color) {
     return (color == null)
         ? "rgb(0,0,0)"

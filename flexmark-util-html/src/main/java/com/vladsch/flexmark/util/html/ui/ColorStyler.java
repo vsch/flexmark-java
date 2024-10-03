@@ -25,9 +25,11 @@ import java.util.Locale;
 public class ColorStyler extends HtmlStylerBase<Color> {
   @Override
   public String getStyle(Color item) {
-    if (item instanceof BackgroundColor)
+    if (item instanceof BackgroundColor) {
       return String.format("background-color:#%s", ColorStyler.getColorValue(item));
-    else return item == null ? "" : String.format("color:#%s", getColorValue(item));
+    }
+
+    return item == null ? "" : String.format("color:#%s", getColorValue(item));
   }
 
   public static Color getNamedColor(String colorName) {

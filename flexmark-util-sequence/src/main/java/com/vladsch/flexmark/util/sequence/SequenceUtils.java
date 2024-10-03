@@ -1229,10 +1229,10 @@ public interface SequenceUtils {
       return trimEnd > keep
           ? Range.of(trimStart - keep, length - trimEnd + keep)
           : Range.of(trimStart - keep, length);
-    } else {
-      int trimEnd = countTrailing(thizz, chars, trimStart, length);
-      return trimEnd > keep ? Range.of(0, length - trimEnd + keep) : Range.NULL;
     }
+
+    int trimEnd = countTrailing(thizz, chars, trimStart, length);
+    return trimEnd > keep ? Range.of(0, length - trimEnd + keep) : Range.NULL;
   }
 
   @NotNull
@@ -1748,7 +1748,7 @@ public interface SequenceUtils {
       int limit,
       int flags,
       @Nullable CharPredicate trimChars) {
-    return splitList((T) thizz, delimiter, limit, flags, trimChars).toArray(emptyArray);
+    return splitList(thizz, delimiter, limit, flags, trimChars).toArray(emptyArray);
   }
 
   @NotNull

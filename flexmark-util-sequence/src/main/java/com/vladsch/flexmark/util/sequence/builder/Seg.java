@@ -118,31 +118,31 @@ public class Seg {
     } else if (isBase()) {
       if (start == end) {
         return "[" + start + ")";
-      } else {
-        return "[" + start + ", " + end + ")";
       }
+
+      return "[" + start + ", " + end + ")";
     } else {
       CharSequence charSequence = allText.subSequence(getTextStart(), getTextEnd());
 
       if (isRepeatedTextEnd() && length() > 1) {
         if (isFirst256Start()) {
           return "a:" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
-        } else {
-          return "" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
         }
-      } else {
-        String chars =
-            length() <= 20
-                ? charSequence.toString()
-                : charSequence.subSequence(0, 10).toString()
-                    + "…"
-                    + charSequence.subSequence(length() - 10, length()).toString();
-        if (isFirst256Start()) {
-          return "a:'" + escapeJavaString(chars) + "'";
-        } else {
-          return "'" + escapeJavaString(chars) + "'";
-        }
+
+        return "" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
       }
+
+      String chars =
+          length() <= 20
+              ? charSequence.toString()
+              : charSequence.subSequence(0, 10).toString()
+                  + "…"
+                  + charSequence.subSequence(length() - 10, length()).toString();
+      if (isFirst256Start()) {
+        return "a:'" + escapeJavaString(chars) + "'";
+      }
+
+      return "'" + escapeJavaString(chars) + "'";
     }
   }
 
@@ -153,9 +153,9 @@ public class Seg {
     } else if (isBase()) {
       if (start == end) {
         return "BASE[" + start + ")";
-      } else {
-        return "BASE[" + start + ", " + end + ")";
       }
+
+      return "BASE[" + start + ", " + end + ")";
     } else {
       return "TEXT[" + getTextStart() + ", " + getTextEnd() + ")";
     }

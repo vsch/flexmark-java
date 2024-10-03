@@ -217,14 +217,13 @@ public class TableCellOffsetInfo {
         return table.getCellOffsetInfo(
             cell.getTextStartOffset(previousCell)
                 + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
-      } else {
-        if (isBeforeCells()) {
-          return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset(null));
-        } else {
-          return table.getCellOffsetInfo(
-              otherRow.cells.get(otherRow.cells.size() - 1).getEndOffset());
-        }
       }
+
+      if (isBeforeCells()) {
+        return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset(null));
+      }
+
+      return table.getCellOffsetInfo(otherRow.cells.get(otherRow.cells.size() - 1).getEndOffset());
     }
     return null;
   }
@@ -253,14 +252,13 @@ public class TableCellOffsetInfo {
         return table.getCellOffsetInfo(
             cell.getTextStartOffset(previousCell)
                 + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
-      } else {
-        if (isBeforeCells()) {
-          return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset(null));
-        } else {
-          return table.getCellOffsetInfo(
-              otherRow.cells.get(otherRow.cells.size() - 1).getEndOffset());
-        }
       }
+
+      if (isBeforeCells()) {
+        return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset(null));
+      }
+
+      return table.getCellOffsetInfo(otherRow.cells.get(otherRow.cells.size() - 1).getEndOffset());
     }
     return null;
   }

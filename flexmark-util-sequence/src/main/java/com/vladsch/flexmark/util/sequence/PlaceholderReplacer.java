@@ -40,16 +40,16 @@ public class PlaceholderReplacer {
               else setter.accept(span, textValue.substring(lastPos));
             }
             break;
-          } else {
-            sb = new StringBuilder();
-            if (lastPos < pos) {
-              // have plain text
-              if (plainText == null) plainText = new StringBuilder();
-              plainText.append(textValue.substring(lastPos, pos));
-            }
-            lastPos = pos + 1;
-            if (lastPos >= length && plainText == null) setter.accept(span, "");
           }
+
+          sb = new StringBuilder();
+          if (lastPos < pos) {
+            // have plain text
+            if (plainText == null) plainText = new StringBuilder();
+            plainText.append(textValue.substring(lastPos, pos));
+          }
+          lastPos = pos + 1;
+          if (lastPos >= length && plainText == null) setter.accept(span, "");
         } else {
           int pos = textValue.indexOf(closePlaceholder, lastPos);
 

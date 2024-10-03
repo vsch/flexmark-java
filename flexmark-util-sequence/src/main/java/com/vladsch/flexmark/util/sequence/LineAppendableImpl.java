@@ -139,20 +139,8 @@ public class LineAppendableImpl implements LineAppendable {
     return options.any(flags);
   }
 
-  private boolean isConvertingTabs() {
-    return any(F_CONVERT_TABS | F_COLLAPSE_WHITESPACE);
-  }
-
   private boolean isTrimTrailingWhitespace() {
     return any(F_TRIM_TRAILING_WHITESPACE);
-  }
-
-  private boolean isTrimLeadingWhitespace() {
-    return any(F_TRIM_LEADING_WHITESPACE);
-  }
-
-  private boolean isCollapseWhitespace() {
-    return any(F_COLLAPSE_WHITESPACE);
   }
 
   @NotNull
@@ -192,6 +180,7 @@ public class LineAppendableImpl implements LineAppendable {
     return this;
   }
 
+  @Override
   public int getAfterEolPrefixDelta() {
     return prefixAfterEol.length() - prefix.length();
   }
@@ -432,38 +421,37 @@ public class LineAppendableImpl implements LineAppendable {
     if (passThrough) {
       return new Pair<>(
           Range.of(startOffset, endOffset - 1), needPrefix ? prefix : BasedSequence.NULL);
-    } else {
-      if (allWhitespace
-          && (preFormattedNesting == 0
-              && !(preFormattedFirstLine == currentLine || preFormattedLastLine == currentLine))) {
-        if (!any(F_TRIM_LEADING_EOL) || !lines.isEmpty()) {
-          return new Pair<>(Range.of(startOffset, endOffset - 1), prefix);
-        } else {
-          return new Pair<>(Range.NULL, BasedSequence.NULL);
-        }
+    }
+
+    if (allWhitespace
+        && (preFormattedNesting == 0
+            && !(preFormattedFirstLine == currentLine || preFormattedLastLine == currentLine))) {
+      if (!any(F_TRIM_LEADING_EOL) || !lines.isEmpty()) {
+        return new Pair<>(Range.of(startOffset, endOffset - 1), prefix);
+      }
+
+      return new Pair<>(Range.NULL, BasedSequence.NULL);
+    }
+
+    // apply options other than convert tabs which is done at time of appending
+    if (isTrimTrailingWhitespace() && preFormattedNesting == 0) {
+      if (allWhitespace) {
+        startOffset = endOffset - 1;
       } else {
-        // apply options other than convert tabs which is done at time of appending
-        if (isTrimTrailingWhitespace() && preFormattedNesting == 0) {
-          if (allWhitespace) {
-            startOffset = endOffset - 1;
-          } else {
-            endOffset -= countTrailingSpaceTab(appendable.toSequence(), endOffset - 1);
-          }
-        }
-
-        if (preFormattedFirstLine == currentLine) {
-          if (startOffset > preFormattedFirstLineOffset) startOffset = preFormattedFirstLineOffset;
-        }
-
-        if (preFormattedLastLine == currentLine) {
-          if (endOffset < preFormattedLastLineOffset + 1)
-            endOffset = preFormattedLastLineOffset + 1;
-        }
-
-        return new Pair<>(
-            Range.of(startOffset, endOffset - 1), needPrefix ? prefix : BasedSequence.NULL);
+        endOffset -= countTrailingSpaceTab(appendable.toSequence(), endOffset - 1);
       }
     }
+
+    if (preFormattedFirstLine == currentLine) {
+      if (startOffset > preFormattedFirstLineOffset) startOffset = preFormattedFirstLineOffset;
+    }
+
+    if (preFormattedLastLine == currentLine) {
+      if (endOffset < preFormattedLastLineOffset + 1) endOffset = preFormattedLastLineOffset + 1;
+    }
+
+    return new Pair<>(
+        Range.of(startOffset, endOffset - 1), needPrefix ? prefix : BasedSequence.NULL);
   }
 
   /**
@@ -477,16 +465,16 @@ public class LineAppendableImpl implements LineAppendable {
 
     if (rangePrefixAfterEol.getFirst().isNull()) {
       return lastLineInfo.sumLength;
-    } else {
-      Range range = rangePrefixAfterEol.getFirst();
-      CharSequence prefix = rangePrefixAfterEol.getSecond();
-
-      if (range.isEmpty() && prefix.length() != 0) {
-        prefix = trimEnd(prefix);
-      }
-
-      return lastLineInfo.sumLength + rangePrefixAfterEol.getFirst().getSpan() + prefix.length();
     }
+
+    Range range = rangePrefixAfterEol.getFirst();
+    CharSequence prefix = rangePrefixAfterEol.getSecond();
+
+    if (range.isEmpty() && prefix.length() != 0) {
+      prefix = trimEnd(prefix);
+    }
+
+    return lastLineInfo.sumLength + rangePrefixAfterEol.getFirst().getSpan() + prefix.length();
   }
 
   private void doEolOnFirstTest() {
@@ -609,6 +597,7 @@ public class LineAppendableImpl implements LineAppendable {
     return this;
   }
 
+  @Override
   @NotNull
   public LineAppendable append(char c, int count) {
     append(RepeatedSequence.repeatOf(c, count));
@@ -738,21 +727,21 @@ public class LineAppendableImpl implements LineAppendable {
     if (lineIndex == lines.size()) {
       if (appendable.length() == 0) {
         return LineInfo.NULL;
-      } else {
-        // create a dummy line info
-        Pair<Range, CharSequence> rangePrefixAfterEol = getRangePrefixAfterEol();
-        Range textRange = rangePrefixAfterEol.getFirst();
-
-        if (textRange.isNull()) {
-          return LineInfo.NULL;
-        } else {
-          return getLineRange(
-              textRange.getStart(), textRange.getEnd(), rangePrefixAfterEol.getSecond());
-        }
       }
-    } else {
-      return lines.get(lineIndex);
+
+      // create a dummy line info
+      Pair<Range, CharSequence> rangePrefixAfterEol = getRangePrefixAfterEol();
+      Range textRange = rangePrefixAfterEol.getFirst();
+
+      if (textRange.isNull()) {
+        return LineInfo.NULL;
+      }
+
+      return getLineRange(
+          textRange.getStart(), textRange.getEnd(), rangePrefixAfterEol.getSecond());
     }
+
+    return lines.get(lineIndex);
   }
 
   @Override
@@ -788,9 +777,9 @@ public class LineAppendableImpl implements LineAppendable {
     if (appendable.length() == 0) {
       // use count of blank lines+1
       return getTrailingBlankLines(lines.size()) + 1;
-    } else {
-      return 0;
     }
+
+    return 0;
   }
 
   @Override
@@ -1212,9 +1201,9 @@ public class LineAppendableImpl implements LineAppendable {
     public BasedSequence get(int index) {
       if (proxy.maxTrailingBlankLines == -1 && index + 1 == proxy.size()) {
         return withPrefixes ? proxy.get(index).getLineNoEOL() : proxy.get(index).getTextNoEOL();
-      } else {
-        return withPrefixes ? proxy.get(index).getLine() : proxy.get(index).getText();
       }
+
+      return withPrefixes ? proxy.get(index).getLine() : proxy.get(index).getText();
     }
 
     @Override

@@ -59,7 +59,7 @@ public class DependencyResolver {
                   + " is duplicated. Only one instance can be present in the list");
         }
         DependentItem<D> item =
-            new DependentItem<D>(
+            new DependentItem<>(
                 dependentItemMap.size(),
                 dependent,
                 classExtractor.apply(dependent),

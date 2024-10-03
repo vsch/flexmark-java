@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.sequence.builder;
 
 import com.vladsch.flexmark.util.misc.CharPredicate;
+import com.vladsch.flexmark.util.sequence.BasedOptionsHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Range;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
@@ -41,13 +42,13 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     altBase = base;
     baseSeq = base.getBaseSequence();
     this.equivalentBases = equivalentBases;
-    int options = PlainSegmentBuilder.F_DEFAULT;
+    int options = ISegmentBuilder.F_DEFAULT;
     // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
-    if (!baseSeq.anyOptions(BasedSequence.F_FULL_SEGMENTED_SEQUENCES)
-        || baseSeq.anyOptions(BasedSequence.F_COLLECT_FIRST256_STATS))
-      options |= PlainSegmentBuilder.F_TRACK_FIRST256;
-    if (baseSeq.anyOptions(BasedSequence.F_NO_ANCHORS))
-      options &= ~PlainSegmentBuilder.F_INCLUDE_ANCHORS;
+    if (!baseSeq.anyOptions(BasedOptionsHolder.F_FULL_SEGMENTED_SEQUENCES)
+        || baseSeq.anyOptions(BasedOptionsHolder.F_COLLECT_FIRST256_STATS))
+      options |= ISegmentBuilder.F_TRACK_FIRST256;
+    if (baseSeq.anyOptions(BasedOptionsHolder.F_NO_ANCHORS))
+      options &= ~ISegmentBuilder.F_INCLUDE_ANCHORS;
     segments =
         optimizer == null
             ? BasedSegmentBuilder.emptyBuilder(baseSeq, options)
@@ -76,11 +77,11 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     baseSeq = base.getBaseSequence();
     this.equivalentBases = equivalentBases;
     // NOTE: if full segmented is not specified, then collect first256 stats for use by tree impl
-    if (!baseSeq.anyOptions(BasedSequence.F_FULL_SEGMENTED_SEQUENCES)
-        || baseSeq.anyOptions(BasedSequence.F_COLLECT_FIRST256_STATS))
-      options |= PlainSegmentBuilder.F_TRACK_FIRST256;
-    if (baseSeq.anyOptions(BasedSequence.F_NO_ANCHORS))
-      options &= ~PlainSegmentBuilder.F_INCLUDE_ANCHORS;
+    if (!baseSeq.anyOptions(BasedOptionsHolder.F_FULL_SEGMENTED_SEQUENCES)
+        || baseSeq.anyOptions(BasedOptionsHolder.F_COLLECT_FIRST256_STATS))
+      options |= ISegmentBuilder.F_TRACK_FIRST256;
+    if (baseSeq.anyOptions(BasedOptionsHolder.F_NO_ANCHORS))
+      options &= ~ISegmentBuilder.F_INCLUDE_ANCHORS;
     segments =
         optimizer == null
             ? BasedSegmentBuilder.emptyBuilder(baseSeq, options)
@@ -159,6 +160,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return this;
   }
 
+  @Override
   @NotNull
   public SequenceBuilder append(char c) {
     segments.append(c);
@@ -166,6 +168,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return this;
   }
 
+  @Override
   @NotNull
   public SequenceBuilder append(char c, int count) {
     if (count > 0) {
@@ -357,6 +360,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         : segments.toStringWithRanges(baseSeq);
   }
 
+  @Override
   @NotNull
   public String toString() {
     StringBuilder sb = new StringBuilder();

@@ -120,6 +120,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
    * @return sequence whose contents reflect the selected portion, if range.isNull() then this is
    *     returned
    */
+  @Override
   @NotNull
   public final T subSequence(@NotNull Range range) {
     return range.isNull() ? (T) this : subSequence(range.getStart(), range.getEnd());
@@ -132,6 +133,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
    * @return sequence whose contents come before the selected range, if range.isNull() then {@link
    *     #nullSequence()}
    */
+  @Override
   @NotNull
   public final T subSequenceBefore(@NotNull Range range) {
     return range.isNull() ? nullSequence() : subSequence(0, range.getStart());
@@ -144,6 +146,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
    * @return sequence whose contents come after the selected range, if range.isNull() then {@link
    *     #nullSequence()}
    */
+  @Override
   @NotNull
   public final T subSequenceAfter(@NotNull Range range) {
     return range.isNull() ? nullSequence() : subSequence(range.getEnd());

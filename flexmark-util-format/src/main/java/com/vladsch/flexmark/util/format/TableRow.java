@@ -240,11 +240,11 @@ public class TableRow {
         if (cell.columnSpan - spanOffset > remaining) {
           cells.add(index, cell.withColumnSpan(cell.columnSpan - remaining));
           break;
-        } else {
-          // reinsert with reduced span
-          cells.add(index, cell.withColumnSpan(spanOffset));
-          index++;
         }
+
+        // reinsert with reduced span
+        cells.add(index, cell.withColumnSpan(spanOffset));
+        index++;
       } else if (cell.columnSpan - spanOffset > remaining) {
         // reinsert with reduced span and empty text
         cells.add(index, defaultCell().withColumnSpan(cell.columnSpan - remaining));

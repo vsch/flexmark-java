@@ -283,13 +283,13 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     if (index == partsSize && haveDanglingText()) {
       // return dangling text
       return text.subSequence(immutableOffset, text.length());
-    } else {
-      int i = index * 2;
-      Seg seg = i + 1 >= parts.length ? Seg.NULL : Seg.segOf(parts[i], parts[i + 1]);
-      return seg.isBase()
-          ? seg.getRange()
-          : seg.isText() ? text.subSequence(seg.getTextStart(), seg.getTextEnd()) : Range.NULL;
     }
+
+    int i = index * 2;
+    Seg seg = i + 1 >= parts.length ? Seg.NULL : Seg.segOf(parts[i], parts[i + 1]);
+    return seg.isBase()
+        ? seg.getRange()
+        : seg.isText() ? text.subSequence(seg.getTextStart(), seg.getTextEnd()) : Range.NULL;
   }
 
   @NotNull
@@ -298,10 +298,10 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
       // return dangling text
       return Seg.textOf(
           immutableOffset, text.length(), textStats.isTextFirst256(), textStats.isRepeatedText());
-    } else {
-      int i = index * 2;
-      return i + 1 >= parts.length ? Seg.NULL : Seg.segOf(parts[i], parts[i + 1]);
     }
+
+    int i = index * 2;
+    return i + 1 >= parts.length ? Seg.NULL : Seg.segOf(parts[i], parts[i + 1]);
   }
 
   private void setSegEnd(int index, int endOffset) {

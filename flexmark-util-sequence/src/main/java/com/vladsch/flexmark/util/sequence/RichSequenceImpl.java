@@ -72,12 +72,13 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
   }
 
   static RichSequence create(CharSequence charSequence, int startIndex, int endIndex) {
-    if (charSequence instanceof RichSequence)
+    if (charSequence instanceof RichSequence) {
       return ((RichSequence) charSequence).subSequence(startIndex, endIndex);
-    else if (charSequence != null) {
-      if (startIndex == 0 && endIndex == charSequence.length())
+    } else if (charSequence != null) {
+      if (startIndex == 0 && endIndex == charSequence.length()) {
         return new RichSequenceImpl(charSequence);
-      else return new RichSequenceImpl(charSequence.subSequence(startIndex, endIndex));
+      }
+      return new RichSequenceImpl(charSequence.subSequence(startIndex, endIndex));
     } else return NULL;
   }
 

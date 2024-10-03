@@ -56,28 +56,28 @@ public class AttributeImpl implements Attribute {
 
     if (valueListDelimiter == SequenceUtils.NUL) {
       return value.equals(valueName) ? 0 : -1;
-    } else {
-      int lastPos = 0;
-      BasedSequence subSeq = BasedSequence.of(value);
-      while (lastPos < value.length()) {
-        int pos = subSeq.indexOf(valueName, lastPos);
-        if (pos == -1) break;
-        // see if it is 0 or preceded by a space, or at the end or followed by a space
-        int endPos = pos + valueName.length();
-        if (pos == 0
-            || value.charAt(pos - 1) == valueListDelimiter
-            || valueNameDelimiter != SequenceUtils.NUL
-                && value.charAt(pos - 1) == valueNameDelimiter) {
-          if (endPos >= value.length()
-              || value.charAt(endPos) == valueListDelimiter
-              || valueNameDelimiter != SequenceUtils.NUL
-                  && value.charAt(endPos) == valueNameDelimiter) {
-            return pos;
-          }
-        }
+    }
 
-        lastPos = endPos + 1;
+    int lastPos = 0;
+    BasedSequence subSeq = BasedSequence.of(value);
+    while (lastPos < value.length()) {
+      int pos = subSeq.indexOf(valueName, lastPos);
+      if (pos == -1) break;
+      // see if it is 0 or preceded by a space, or at the end or followed by a space
+      int endPos = pos + valueName.length();
+      if (pos == 0
+          || value.charAt(pos - 1) == valueListDelimiter
+          || valueNameDelimiter != SequenceUtils.NUL
+              && value.charAt(pos - 1) == valueNameDelimiter) {
+        if (endPos >= value.length()
+            || value.charAt(endPos) == valueListDelimiter
+            || valueNameDelimiter != SequenceUtils.NUL
+                && value.charAt(endPos) == valueNameDelimiter) {
+          return pos;
+        }
       }
+
+      lastPos = endPos + 1;
     }
     return -1;
   }

@@ -50,8 +50,6 @@ public class Escaping {
   static final char[] HEX_DIGITS =
       new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-  private static final Pattern WHITESPACE = Pattern.compile("[ \t\r\n]+");
-
   private static final Pattern COLLAPSE_WHITESPACE = Pattern.compile("[ \t]{2,}");
 
   private static final Replacer UNSAFE_CHAR_REPLACER =
@@ -295,9 +293,9 @@ public class Escaping {
   public static String unescapeString(@NotNull CharSequence s) {
     if (BACKSLASH_OR_AMP.matcher(s).find()) {
       return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
-    } else {
-      return String.valueOf(s);
     }
+
+    return String.valueOf(s);
   }
 
   /**
@@ -312,16 +310,16 @@ public class Escaping {
     if (unescapeEntities) {
       if (BACKSLASH_OR_AMP.matcher(s).find()) {
         return replaceAll(ESCAPED_CHAR, s, UNESCAPE_REPLACER);
-      } else {
-        return String.valueOf(s);
       }
-    } else {
-      if (BACKSLASH_ONLY.matcher(s).find()) {
-        return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
-      } else {
-        return String.valueOf(s);
-      }
+
+      return String.valueOf(s);
     }
+
+    if (BACKSLASH_ONLY.matcher(s).find()) {
+      return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
+    }
+
+    return String.valueOf(s);
   }
 
   /**
@@ -337,9 +335,9 @@ public class Escaping {
     int indexOfAny = s.indexOfAny(AMP_BACKSLASH_SET);
     if (indexOfAny != -1) {
       return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER, textMapper);
-    } else {
-      return s;
     }
+
+    return s;
   }
 
   /**
@@ -358,9 +356,9 @@ public class Escaping {
     int indexOf = s.indexOf(remove);
     if (indexOf != -1) {
       return replaceAll(Pattern.compile("\\Q" + remove + "\\E"), s, REMOVE_REPLACER, textMapper);
-    } else {
-      return s;
     }
+
+    return s;
   }
 
   /**
@@ -373,9 +371,9 @@ public class Escaping {
   public static String unescapeHtml(@NotNull CharSequence s) {
     if (AMP_ONLY.matcher(s).find()) {
       return replaceAll(ENTITY_ONLY, s, ENTITY_REPLACER);
-    } else {
-      return String.valueOf(s);
     }
+
+    return String.valueOf(s);
   }
 
   /**
@@ -391,9 +389,9 @@ public class Escaping {
     int indexOfAny = s.indexOf('&');
     if (indexOfAny != -1) {
       return replaceAll(ENTITY_ONLY, s, ENTITY_REPLACER, textMapper);
-    } else {
-      return s;
     }
+
+    return s;
   }
 
   /**
@@ -411,9 +409,9 @@ public class Escaping {
     int indexOfAny = s.indexOf('&');
     if (indexOfAny != -1) {
       return replaceAll(ENTITY_ONLY, s, ranges, ENTITY_REPLACER, textMapper);
-    } else {
-      return s;
     }
+
+    return s;
   }
 
   /**
@@ -608,8 +606,11 @@ public class Escaping {
    */
   @NotNull
   public static String normalizeReference(@NotNull CharSequence s, boolean changeCase) {
-    if (changeCase) return Escaping.collapseWhitespace(s.toString(), true).toLowerCase();
-    else return Escaping.collapseWhitespace(s.toString(), true);
+    if (changeCase) {
+      return Escaping.collapseWhitespace(s.toString(), true).toLowerCase();
+    }
+
+    return Escaping.collapseWhitespace(s.toString(), true);
   }
 
   @Nullable

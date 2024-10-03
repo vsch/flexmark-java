@@ -33,24 +33,24 @@ public abstract class BooleanOptionParser<T> implements OptionParser<T> {
           setOptions(options),
           Collections.singletonList(
               new ParsedOption<>(optionText, this, ParsedOptionStatus.VALID)));
-    } else {
-      if (provider == null) provider = MessageProvider.DEFAULT;
-      String message =
-          provider.message(
-              KEY_OPTION_0_PARAMETERS_1_IGNORED,
-              OPTION_0_PARAMETERS_1_IGNORED,
-              optionName,
-              optionText);
-      return new Pair<>(
-          setOptions(options),
-          Collections.singletonList(
-              new ParsedOption<>(
-                  optionText,
-                  this,
-                  ParsedOptionStatus.IGNORED,
-                  Collections.singletonList(
-                      new ParserMessage(optionText, ParsedOptionStatus.IGNORED, message)))));
     }
+
+    if (provider == null) provider = MessageProvider.DEFAULT;
+    String message =
+        provider.message(
+            KEY_OPTION_0_PARAMETERS_1_IGNORED,
+            OPTION_0_PARAMETERS_1_IGNORED,
+            optionName,
+            optionText);
+    return new Pair<>(
+        setOptions(options),
+        Collections.singletonList(
+            new ParsedOption<>(
+                optionText,
+                this,
+                ParsedOptionStatus.IGNORED,
+                Collections.singletonList(
+                    new ParserMessage(optionText, ParsedOptionStatus.IGNORED, message)))));
   }
 
   @Override

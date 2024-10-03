@@ -189,32 +189,32 @@ public abstract class Segment {
     if (isBase()) {
       if (isAnchor()) {
         return "[" + getStartOffset() + ")";
-      } else {
-        return "[" + getStartOffset() + ", " + getEndOffset() + ")";
       }
-    } else {
-      CharSequence charSequence = getCharSequence();
-      if (isRepeatedTextEnd() && length() > 1) {
-        if (isFirst256Start()) {
-          return "a:" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
-        } else {
-          return "" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
-        }
-      } else {
-        int length = charSequence.length();
-        String chars =
-            length <= 20
-                ? charSequence.toString()
-                : charSequence.subSequence(0, 10).toString()
-                    + "…"
-                    + charSequence.subSequence(length - 10, length).toString();
-        if (isFirst256Start()) {
-          return "a:'" + escapeJavaString(chars) + "'";
-        } else {
-          return "'" + escapeJavaString(chars) + "'";
-        }
-      }
+
+      return "[" + getStartOffset() + ", " + getEndOffset() + ")";
     }
+
+    CharSequence charSequence = getCharSequence();
+    if (isRepeatedTextEnd() && length() > 1) {
+      if (isFirst256Start()) {
+        return "a:" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
+      }
+
+      return "" + (length() + "x'" + escapeJavaString(charSequence.subSequence(0, 1)) + "'");
+    }
+
+    int length = charSequence.length();
+    String chars =
+        length <= 20
+            ? charSequence.toString()
+            : charSequence.subSequence(0, 10).toString()
+                + "…"
+                + charSequence.subSequence(length - 10, length).toString();
+    if (isFirst256Start()) {
+      return "a:'" + escapeJavaString(chars) + "'";
+    }
+
+    return "'" + escapeJavaString(chars) + "'";
   }
 
   static class Base extends Segment {
@@ -615,12 +615,12 @@ public abstract class Segment {
           if (c == ' ') return SegType.REPEATED_SPACE;
           else if (c == '\n') return SegType.REPEATED_EOL;
           else return SegType.REPEATED_ASCII;
-        } else {
-          return SegType.TEXT_ASCII;
         }
-      } else {
-        return repeatedTextEnd ? SegType.REPEATED_TEXT : SegType.TEXT;
+
+        return SegType.TEXT_ASCII;
       }
+
+      return repeatedTextEnd ? SegType.REPEATED_TEXT : SegType.TEXT;
     } else {
       throw new IllegalStateException("Unknown seg type " + seg);
     }

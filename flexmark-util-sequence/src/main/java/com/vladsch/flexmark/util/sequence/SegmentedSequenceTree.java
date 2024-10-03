@@ -97,20 +97,20 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
       CharSequence charSequence = cache.chars;
       if (charSequence instanceof BasedSequence) {
         return ((BasedSequence) charSequence).getIndexOffset(cache.charIndex(index));
-      } else {
-        return -1;
       }
-    } else {
-      SequenceUtils.validateIndexInclusiveEnd(index, length());
 
-      Cache cache = getCache(index);
-      CharSequence charSequence = cache.chars;
-      if (charSequence instanceof BasedSequence) {
-        return ((BasedSequence) charSequence).getIndexOffset(cache.charIndex(index));
-      } else {
-        return -1;
-      }
+      return -1;
     }
+
+    SequenceUtils.validateIndexInclusiveEnd(index, length());
+
+    Cache cache = getCache(index);
+    CharSequence charSequence = cache.chars;
+    if (charSequence instanceof BasedSequence) {
+      return ((BasedSequence) charSequence).getIndexOffset(cache.charIndex(index));
+    }
+
+    return -1;
   }
 
   @Override
@@ -136,18 +136,18 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
   public BasedSequence subSequence(int startIndex, int endIndex) {
     if (startIndex == 0 && endIndex == length) {
       return this;
-    } else {
-      SequenceUtils.validateStartEnd(startIndex, endIndex, length());
-      SegmentTreeRange subSequenceRange =
-          segmentTree.getSegmentRange(
-              startIndex + this.startIndex,
-              endIndex + this.startIndex,
-              startPos,
-              endPos,
-              baseSeq,
-              getCachedSegment());
-      return new SegmentedSequenceTree(baseSeq, segmentTree, subSequenceRange);
     }
+
+    SequenceUtils.validateStartEnd(startIndex, endIndex, length());
+    SegmentTreeRange subSequenceRange =
+        segmentTree.getSegmentRange(
+            startIndex + this.startIndex,
+            endIndex + this.startIndex,
+            startPos,
+            endPos,
+            baseSeq,
+            getCachedSegment());
+    return new SegmentedSequenceTree(baseSeq, segmentTree, subSequenceRange);
   }
 
   /**

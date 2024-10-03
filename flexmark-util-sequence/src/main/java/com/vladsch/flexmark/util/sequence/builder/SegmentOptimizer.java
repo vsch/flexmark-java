@@ -37,8 +37,8 @@ public interface SegmentOptimizer extends BiFunction<CharSequence, Object[], Obj
         System.arraycopy(parts, index, newParts, index + 1, parts.length - index);
       }
       return newParts;
-    } else {
-      return Arrays.copyOf(parts, parts.length + 1);
     }
+
+    return Arrays.copyOf(parts, parts.length + 1);
   }
 }

@@ -146,10 +146,10 @@ public class SegmentTree {
         // FIX: add stats to track this
         return Segment.getSegment(
             segmentBytes, byteOffset(endPos - 1), endPos - 1, secondToLastLength, baseSeq);
-      } else {
-        // previous to last can be skipped
-        endPos = endPos - 1;
       }
+
+      // previous to last can be skipped
+      endPos = endPos - 1;
     }
 
     // NOTE: all optimizations failed, but not completely wasted since they served to shorten the
@@ -537,9 +537,8 @@ public class SegmentTree {
       int byteOffset = getByteOffset(byteOffsetData) - anchorOffset;
       Segment anchor = Segment.getSegment(segmentBytes, byteOffset, -1, 0, baseSeq);
       return anchor;
-    } else {
-      return null;
     }
+    return null;
   }
 
   protected static class SegmentTreeData {

@@ -116,9 +116,9 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
     int prefixLength = prefix.length();
     if (index < prefixLength) {
       return prefix.charAt(index);
-    } else {
-      return base.charAt(index - prefixLength);
     }
+
+    return base.charAt(index - prefixLength);
   }
 
   @NotNull
@@ -132,15 +132,15 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
         // all from prefix
         return new PrefixedSubSequence(
             prefix.subSequence(startIndex, endIndex), base.subSequence(0, 0), 0, 0);
-      } else {
-        // some from prefix some from base
-        return new PrefixedSubSequence(
-            prefix.subSequence(startIndex, prefixLength), base, 0, endIndex - prefixLength);
       }
-    } else {
-      // all from base
-      return base.subSequence(startIndex - prefixLength, endIndex - prefixLength);
+
+      // some from prefix some from base
+      return new PrefixedSubSequence(
+          prefix.subSequence(startIndex, prefixLength), base, 0, endIndex - prefixLength);
     }
+
+    // all from base
+    return base.subSequence(startIndex - prefixLength, endIndex - prefixLength);
   }
 
   @NotNull

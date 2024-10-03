@@ -257,22 +257,22 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
   public String toString() {
     if (elements == 0) {
       return elementType.getSimpleName() + ": { }";
-    } else {
-      DelimitedBuilder out = new DelimitedBuilder(", ");
-
-      out.append(elementType.getSimpleName()).append(": { ");
-      for (E e : universe) {
-        if (any(mask(e))) {
-          out.append(e.name());
-          if (e instanceof BitField && ((BitField) e).getBits() > 1) {
-            out.append("(").append(getLong(e)).append(")");
-          }
-          out.mark();
-        }
-      }
-      out.unmark().append(" }");
-      return out.toString();
     }
+
+    DelimitedBuilder out = new DelimitedBuilder(", ");
+
+    out.append(elementType.getSimpleName()).append(": { ");
+    for (E e : universe) {
+      if (any(mask(e))) {
+        out.append(e.name());
+        if (e instanceof BitField && ((BitField) e).getBits() > 1) {
+          out.append("(").append(getLong(e)).append(")");
+        }
+        out.mark();
+      }
+    }
+    out.unmark().append(" }");
+    return out.toString();
   }
 
   public boolean andNotMask(long mask) {
@@ -791,8 +791,11 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
 
     BitFieldSet<?> es = (BitFieldSet<?>) c;
     if (es.elementType != elementType) {
-      if (es.isEmpty()) return false;
-      else throw new ClassCastException(es.elementType + " != " + elementType);
+      if (es.isEmpty()) {
+        return false;
+      }
+
+      throw new ClassCastException(es.elementType + " != " + elementType);
     }
 
     long oldElements = elements;
@@ -914,12 +917,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
 
   Object writeReplace() {
     return new SerializationProxy<>(this);
-  }
-
-  // readObject method for the serialization proxy pattern
-  // See Effective Java, Second Ed., Item 78.
-  private void readObject(java.io.ObjectInputStream stream) throws java.io.InvalidObjectException {
-    throw new java.io.InvalidObjectException("Proxy required");
   }
 
   /**
@@ -1164,16 +1161,16 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
   public static <E extends Enum<E>> BitFieldSet<E> copyOf(Collection<E> c) {
     if (c instanceof BitFieldSet) {
       return ((BitFieldSet<E>) c).clone();
-    } else {
-      if (c.isEmpty()) throw new IllegalArgumentException("Collection is empty");
-      Iterator<E> i = c.iterator();
-      E first = i.next();
-      BitFieldSet<E> result = BitFieldSet.of(first);
-      while (i.hasNext()) {
-        result.add(i.next());
-      }
-      return result;
     }
+
+    if (c.isEmpty()) throw new IllegalArgumentException("Collection is empty");
+    Iterator<E> i = c.iterator();
+    E first = i.next();
+    BitFieldSet<E> result = BitFieldSet.of(first);
+    while (i.hasNext()) {
+      result.add(i.next());
+    }
+    return result;
   }
 
   /**

@@ -63,9 +63,8 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
           context text to the based sequence.
       */
       return (char) (-offset - 1);
-    } else {
-      return baseSeq.charAt(offset);
     }
+    return baseSeq.charAt(offset);
   }
 
   @NotNull
@@ -75,10 +74,9 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
 
     if (startIndex == 0 && endIndex == length) {
       return this;
-    } else {
-      return subSequence(
-          baseSeq, baseOffsets, baseStartOffset + startIndex, nonBaseChars, endIndex - startIndex);
     }
+    return subSequence(
+        baseSeq, baseOffsets, baseStartOffset + startIndex, nonBaseChars, endIndex - startIndex);
   }
 
   /**
@@ -133,7 +131,7 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
         baseSeq, startOffset, endOffset, length, nonBaseChars, baseOffsets, baseStartOffset);
   }
 
-  private SegmentedSequenceFull subSequence(
+  private static SegmentedSequenceFull subSequence(
       final BasedSequence baseSeq,
       final int[] baseOffsets,
       final int baseStartOffset,

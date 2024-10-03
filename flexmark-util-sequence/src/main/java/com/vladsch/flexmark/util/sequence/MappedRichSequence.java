@@ -64,7 +64,9 @@ public class MappedRichSequence extends IRichSequenceBase<RichSequence>
       return startIndex == 0 && endIndex == baseSeq.length()
           ? (RichSequence) baseSeq
           : ((RichSequence) baseSeq).subSequence(startIndex, endIndex).toMapped(mapper);
-    } else return new MappedRichSequence(mapper, base.sequenceOf(baseSeq, startIndex, endIndex));
+    }
+
+    return new MappedRichSequence(mapper, base.sequenceOf(baseSeq, startIndex, endIndex));
   }
 
   @Override
@@ -102,6 +104,7 @@ public class MappedRichSequence extends IRichSequenceBase<RichSequence>
       return startIndex == 0 && endIndex == baseSeq.length()
           ? baseSeq.toMapped(mapper)
           : baseSeq.subSequence(startIndex, endIndex).toMapped(mapper);
-    else return new MappedRichSequence(mapper, baseSeq.subSequence(startIndex, endIndex));
+
+    return new MappedRichSequence(mapper, baseSeq.subSequence(startIndex, endIndex));
   }
 }

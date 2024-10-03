@@ -105,16 +105,18 @@ public class TrackedOffsetList implements List<TrackedOffset> {
 
     endSeg = Math.min(myBasedOffsetTracker.size(), endSeg);
 
-    if (startSeg >= endSeg) return EMPTY_LIST;
-    else {
-      if (myTrackedOffsets.get(startSeg).getOffset() < startOffset) startSeg++;
-      if (myTrackedOffsets.get(endSeg - 1).getOffset() > endOffset) endSeg--;
-
-      if (startSeg >= endSeg) return EMPTY_LIST;
-      else {
-        return new TrackedOffsetList(myBaseSeq, myTrackedOffsets.subList(startSeg, endSeg));
-      }
+    if (startSeg >= endSeg) {
+      return EMPTY_LIST;
     }
+
+    if (myTrackedOffsets.get(startSeg).getOffset() < startOffset) startSeg++;
+    if (myTrackedOffsets.get(endSeg - 1).getOffset() > endOffset) endSeg--;
+
+    if (startSeg >= endSeg) {
+      return EMPTY_LIST;
+    }
+
+    return new TrackedOffsetList(myBaseSeq, myTrackedOffsets.subList(startSeg, endSeg));
   }
 
   @Override

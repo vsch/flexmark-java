@@ -53,6 +53,7 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
     return charsOffset;
   }
 
+  @Override
   public Object[] apply(@NotNull CharSequence chars, Object[] parts) {
     // optimizer already applied
     if (parts.length != 3

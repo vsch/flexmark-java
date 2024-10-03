@@ -65,10 +65,12 @@ public final class SubSequence extends BasedSequenceImpl {
     return charSequence;
   }
 
+  @Override
   public int getStartOffset() {
     return startOffset;
   }
 
+  @Override
   public int getEndOffset() {
     return endOffset;
   }

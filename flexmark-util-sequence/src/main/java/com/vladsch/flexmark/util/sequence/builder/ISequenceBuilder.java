@@ -39,6 +39,7 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends Ch
     return append(chars);
   }
 
+  @Override
   @NotNull
   default T append(@Nullable CharSequence chars) {
     if (chars != null) {
@@ -57,9 +58,11 @@ public interface ISequenceBuilder<T extends ISequenceBuilder<T, S>, S extends Ch
     return (T) this;
   }
 
+  @Override
   @NotNull
   T append(@Nullable CharSequence chars, int startIndex, int endIndex);
 
+  @Override
   @NotNull
   T append(char c);
 

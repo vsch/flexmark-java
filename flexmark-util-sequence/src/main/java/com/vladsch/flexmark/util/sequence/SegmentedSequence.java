@@ -50,6 +50,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
    *
    * @return start in base sequence
    */
+  @Override
   public final int getStartOffset() {
     return startOffset;
   }
@@ -62,6 +63,7 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
    *
    * @return end in base sequence
    */
+  @Override
   public final int getEndOffset() {
     return endOffset;
   }

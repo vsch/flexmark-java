@@ -75,10 +75,12 @@ public final class CharSubSequence extends BasedSequenceImpl {
     return baseChars;
   }
 
+  @Override
   public int getStartOffset() {
     return startOffset;
   }
 
+  @Override
   public int getEndOffset() {
     return endOffset;
   }
@@ -174,8 +176,8 @@ public final class CharSubSequence extends BasedSequenceImpl {
 
     if (startIndex == 0 && endIndex == charSequence.length()) {
       return charSubSequence;
-    } else {
-      return charSubSequence.subSequence(startIndex, endIndex);
     }
+
+    return charSubSequence.subSequence(startIndex, endIndex);
   }
 }

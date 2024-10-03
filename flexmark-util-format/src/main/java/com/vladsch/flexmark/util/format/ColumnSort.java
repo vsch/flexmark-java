@@ -23,12 +23,11 @@ public final class ColumnSort {
       if (numericLast) {
         return new ColumnSort(
             column, descending ? Sort.DESCENDING_NUMERIC_LAST : Sort.ASCENDING_NUMERIC_LAST);
-      } else {
-        return new ColumnSort(
-            column, descending ? Sort.DESCENDING_NUMERIC : Sort.ASCENDING_NUMERIC);
       }
-    } else {
-      return new ColumnSort(column, descending ? Sort.DESCENDING : Sort.ASCENDING);
+
+      return new ColumnSort(column, descending ? Sort.DESCENDING_NUMERIC : Sort.ASCENDING_NUMERIC);
     }
+
+    return new ColumnSort(column, descending ? Sort.DESCENDING : Sort.ASCENDING);
   }
 }

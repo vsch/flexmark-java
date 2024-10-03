@@ -81,9 +81,9 @@ public final class MappedBasedSequence extends BasedSequenceImpl
       return startIndex == 0 && endIndex == baseSeq.length()
           ? (BasedSequence) baseSeq
           : ((BasedSequence) baseSeq).subSequence(startIndex, endIndex).toMapped(mapper);
-    } else
-      return new MappedBasedSequence(
-          this.baseSeq.sequenceOf(baseSeq, startIndex, endIndex), mapper);
+    }
+
+    return new MappedBasedSequence(this.baseSeq.sequenceOf(baseSeq, startIndex, endIndex), mapper);
   }
 
   @NotNull

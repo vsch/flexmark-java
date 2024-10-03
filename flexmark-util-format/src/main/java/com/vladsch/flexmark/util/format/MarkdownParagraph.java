@@ -819,10 +819,10 @@ public class MarkdownParagraph {
               isInWord = true;
               lastConsecutiveSpaces = 0;
               break;
-            } else {
-              isInWord = true;
-              lastConsecutiveSpaces = 0;
             }
+
+            isInWord = true;
+            lastConsecutiveSpaces = 0;
           } else {
             if (c == '\n') {
               if (lastConsecutiveSpaces >= 2) {
