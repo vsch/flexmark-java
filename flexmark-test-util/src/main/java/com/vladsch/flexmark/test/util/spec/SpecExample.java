@@ -230,7 +230,9 @@ public class SpecExample {
           break;
         }
         javaPathFile = javaPathFile.getParentFile();
-        if (javaPathFile == null) break;
+        if (javaPathFile == null) {
+          break;
+        }
       }
       if (url == null) {
         throw new IllegalStateException(

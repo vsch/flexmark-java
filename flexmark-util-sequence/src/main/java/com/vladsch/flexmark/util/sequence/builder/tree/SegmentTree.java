@@ -92,7 +92,9 @@ public class SegmentTree {
       int startIndex = hint.getStartIndex();
       if (index >= startIndex) {
         int endIndex = hint.getEndIndex();
-        if (hint.pos + 1 >= endPos) return null;
+        if (hint.pos + 1 >= endPos) {
+          return null;
+        }
         int nextLength = aggrLength(hint.pos + 1);
         if (index < nextLength) {
           // FIX: add stats to track this
@@ -103,7 +105,9 @@ public class SegmentTree {
         startPos = hint.pos + 2;
       } else {
         // see if previous contains index
-        if (hint.pos == startPos) return null;
+        if (hint.pos == startPos) {
+          return null;
+        }
 
         int prevPrevLength = aggrLength(hint.pos - 2);
         if (index >= prevPrevLength) {
@@ -141,7 +145,9 @@ public class SegmentTree {
       int secondToLastLength = aggrLength(endPos - 2);
       if (index >= secondToLastLength) {
         int lastLength = aggrLength(endPos - 1);
-        if (index >= lastLength) return null; /* beyond last segment*/
+        if (index >= lastLength) {
+          return null; /* beyond last segment*/
+        }
 
         // FIX: add stats to track this
         return Segment.getSegment(
@@ -476,7 +482,9 @@ public class SegmentTree {
   public static SegmentTreePos findSegmentPos(int index, int[] treeData, int startPos, int endPos) {
     // FIX: add segmented sequence stats collection for iteration counts
     // FIX: check first segment and last segment in case it is a scan from start/end of sequence
-    if (index == 0 && startPos == 0) return new SegmentTreePos(0, 0, 0);
+    if (index == 0 && startPos == 0) {
+      return new SegmentTreePos(0, 0, 0);
+    }
 
     int iterations = 0;
     while (startPos < endPos) {

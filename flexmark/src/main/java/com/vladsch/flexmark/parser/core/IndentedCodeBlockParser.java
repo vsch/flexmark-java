@@ -64,7 +64,9 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
       int trailingBlankLines = 0;
       List<BasedSequence> lines = content.getLines();
       for (BasedSequence line : new Reverse<>(lines)) {
-        if (!line.isBlank()) break;
+        if (!line.isBlank()) {
+          break;
+        }
         trailingBlankLines++;
       }
 
@@ -93,24 +95,13 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
               FencedCodeBlockParser.Factory.class,
               HtmlBlockParser.Factory.class,
               ThematicBreakParser.Factory.class,
-              ListBlockParser.Factory.class
-              // IndentedCodeBlockParser.Factory.class
-              ));
+              ListBlockParser.Factory.class));
     }
 
     @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return Collections.emptySet();
-      // return new HashSet<>(Arrays.asList(
-      //        //BlockQuoteParser.Factory.class,
-      //        //HeadingParser.Factory.class,
-      //        //FencedCodeBlockParser.Factory.class,
-      //        //HtmlBlockParser.Factory.class,
-      //        //ThematicBreakParser.Factory.class,
-      //        //ListBlockParser.Factory.class,
-      //        //IndentedCodeBlockParser.Factory.class
-      // ));
     }
 
     @Override

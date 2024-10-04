@@ -75,7 +75,9 @@ public class MarkdownParagraph {
   }
 
   public BasedSequence wrapTextNotTracked() {
-    if (getFirstWidth() <= 0) return baseSeq;
+    if (getFirstWidth() <= 0) {
+      return baseSeq;
+    }
 
     LeftAlignedWrapping wrapping = new LeftAlignedWrapping(baseSeq);
     return wrapping.wrapText();
@@ -130,8 +132,12 @@ public class MarkdownParagraph {
   }
 
   public BasedSequence wrapText() {
-    if (getFirstWidth() <= 0) return baseSeq;
-    if (trackedOffsets.isEmpty()) return wrapTextNotTracked();
+    if (getFirstWidth() <= 0) {
+      return baseSeq;
+    }
+    if (trackedOffsets.isEmpty()) {
+      return wrapTextNotTracked();
+    }
 
     // Adjust input text for wrapping by removing any continuation splice regions
     sortedTrackedOffsets();
@@ -394,8 +400,12 @@ public class MarkdownParagraph {
     sortedTrackedOffsets();
 
     for (TrackedOffset trackedOffset : trackedOffsets) {
-      if (trackedOffset.getOffset() == offset) return trackedOffset;
-      if (trackedOffset.getOffset() > offset) break;
+      if (trackedOffset.getOffset() == offset) {
+        return trackedOffset;
+      }
+      if (trackedOffset.getOffset() > offset) {
+        break;
+      }
     }
     return null;
   }
@@ -603,7 +613,9 @@ public class MarkdownParagraph {
     }
 
     BasedSequence addSpaces(BasedSequence sequence, int count) {
-      if (count <= 0) return sequence;
+      if (count <= 0) {
+        return sequence;
+      }
 
       BasedSequence remainder = null;
 
@@ -640,7 +652,9 @@ public class MarkdownParagraph {
         List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
       if (sequence.isNotEmpty() && escapeSpecialLeadInChars) {
         for (SpecialLeadInHandler handler : handlers) {
-          if (handler.escape(sequence, options, this::addChars)) return;
+          if (handler.escape(sequence, options, this::addChars)) {
+            return;
+          }
         }
       }
       addChars(sequence);
@@ -650,7 +664,9 @@ public class MarkdownParagraph {
         List<? extends SpecialLeadInHandler> handlers, BasedSequence sequence) {
       if (sequence.isNotEmpty() && unEscapeSpecialLeadInChars) {
         for (SpecialLeadInHandler handler : handlers) {
-          if (handler.unEscape(sequence, options, this::addChars)) return;
+          if (handler.unEscape(sequence, options, this::addChars)) {
+            return;
+          }
         }
       }
       addChars(sequence);
@@ -660,7 +676,10 @@ public class MarkdownParagraph {
     BasedSequence wrapText() {
       while (true) {
         final Token token = tokenizer.getToken();
-        if (token == null) break;
+        if (token == null) {
+          break;
+        }
+
         switch (token.type) {
           case SPACE:
             {

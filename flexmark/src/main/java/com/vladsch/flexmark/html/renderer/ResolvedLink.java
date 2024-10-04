@@ -129,7 +129,9 @@ public class ResolvedLink {
   public @NotNull ResolvedLink withTarget(@Nullable CharSequence target) {
     String haveTarget = myAttributes == null ? null : myAttributes.getValue(Attribute.TARGET_ATTR);
     if (target == haveTarget
-        || haveTarget != null && target != null && haveTarget.contentEquals(target)) return this;
+        || haveTarget != null && target != null && haveTarget.contentEquals(target)) {
+      return this;
+    }
 
     MutableAttributes attributes = new MutableAttributes(myAttributes);
     if (target == null) {
@@ -146,14 +148,22 @@ public class ResolvedLink {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof ResolvedLink)) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (!(object instanceof ResolvedLink)) {
+      return false;
+    }
 
-    ResolvedLink link = (ResolvedLink) o;
+    ResolvedLink link = (ResolvedLink) object;
 
-    if (!myLinkType.equals(link.myLinkType)) return false;
-    if (!myUrl.equals(link.myUrl)) return false;
+    if (!myLinkType.equals(link.myLinkType)) {
+      return false;
+    }
+    if (!myUrl.equals(link.myUrl)) {
+      return false;
+    }
     return myStatus.equals(link.myStatus);
   }
 

@@ -91,7 +91,9 @@ public class MergeLinkResolver implements LinkResolver {
             // skp
           } else if (part.equals("..")) {
             // remove one doc part
-            if (docParts == 0) return link;
+            if (docParts == 0) {
+              return link;
+            }
             docParts--;
           } else {
             resolved.append(sep);

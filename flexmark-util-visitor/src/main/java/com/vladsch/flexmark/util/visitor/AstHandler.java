@@ -26,13 +26,19 @@ public abstract class AstHandler<N, A extends AstAction<? super N>> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null || getClass() != object.getClass()) {
+      return false;
+    }
 
-    AstHandler<?, ?> other = (AstHandler<?, ?>) o;
+    AstHandler<?, ?> other = (AstHandler<?, ?>) object;
 
-    if (aClass != other.aClass) return false;
+    if (aClass != other.aClass) {
+      return false;
+    }
     return adapter == other.adapter;
   }
 

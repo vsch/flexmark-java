@@ -85,7 +85,9 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     if (keepType != KeepType.LAST) {
       T another = nodeMap.get(s);
       if (another != null) {
-        if (keepType == KeepType.FAIL) throw new IllegalStateException("Duplicate key " + s);
+        if (keepType == KeepType.FAIL) {
+          throw new IllegalStateException("Duplicate key " + s);
+        }
         return another;
       }
     }
@@ -135,13 +137,13 @@ public abstract class NodeRepository<T> implements Map<String, T> {
   }
 
   @Override
-  public boolean containsValue(Object o) {
-    return nodeMap.containsValue(o);
+  public boolean containsValue(Object object) {
+    return nodeMap.containsValue(object);
   }
 
   @Override
-  public @Nullable T get(@NotNull Object o) {
-    return nodeMap.get(o);
+  public @Nullable T get(@NotNull Object object) {
+    return nodeMap.get(object);
   }
 
   @NotNull
@@ -163,8 +165,8 @@ public abstract class NodeRepository<T> implements Map<String, T> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    return nodeMap.equals(o);
+  public boolean equals(Object object) {
+    return nodeMap.equals(object);
   }
 
   @Override

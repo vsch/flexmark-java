@@ -127,7 +127,9 @@ public abstract class ListItem extends Block
 
   @Override
   public boolean isParagraphInTightListItem(Paragraph node) {
-    if (!isTight()) return false;
+    if (!isTight()) {
+      return false;
+    }
 
     // see if this is the first paragraph child item
     return isItemParagraph(node);

@@ -142,9 +142,13 @@ public final class SubSequence extends BasedSequenceImpl {
   }
 
   static BasedSequence create(@Nullable CharSequence charSequence) {
-    if (charSequence == null) return BasedSequence.NULL;
-    else if (charSequence instanceof BasedSequence) return (BasedSequence) charSequence;
-    else return new SubSequence(charSequence);
+    if (charSequence == null) {
+      return BasedSequence.NULL;
+    } else if (charSequence instanceof BasedSequence) {
+      return (BasedSequence) charSequence;
+    } else {
+      return new SubSequence(charSequence);
+    }
   }
 
   @Deprecated

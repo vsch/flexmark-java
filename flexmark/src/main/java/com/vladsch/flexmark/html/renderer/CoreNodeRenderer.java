@@ -598,7 +598,9 @@ public class CoreNodeRenderer implements NodeRenderer {
       boolean suppress,
       boolean escape,
       boolean trimSpaces) {
-    if (suppress) return;
+    if (suppress) {
+      return;
+    }
 
     if (node instanceof HtmlBlock) html.line();
 
@@ -660,7 +662,9 @@ public class CoreNodeRenderer implements NodeRenderer {
       HtmlWriter html,
       boolean suppress,
       boolean escape) {
-    if (suppress) return;
+    if (suppress) {
+      return;
+    }
 
     if (escape) {
       html.text(node.getChars().normalizeEOL());

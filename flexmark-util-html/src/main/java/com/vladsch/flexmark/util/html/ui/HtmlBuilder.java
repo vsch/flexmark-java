@@ -156,7 +156,9 @@ public class HtmlBuilder extends HtmlAppendableBase<HtmlBuilder> {
 
   public static HtmlStyler getHtmlStyler(Object item) {
     HtmlStyler styler = stylerMap.get(item.getClass());
-    if (styler != null) return styler;
+    if (styler != null) {
+      return styler;
+    }
 
     // see if we have one that can handle this
     for (Class value : stylerMap.keySet()) {

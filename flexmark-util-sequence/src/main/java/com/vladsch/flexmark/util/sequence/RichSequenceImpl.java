@@ -49,7 +49,9 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
   @Override
   public RichSequence subSequence(int startIndex, int endIndex) {
     SequenceUtils.validateStartEnd(startIndex, endIndex, length());
-    if (startIndex == 0 && endIndex == charSequence.length()) return this;
+    if (startIndex == 0 && endIndex == charSequence.length()) {
+      return this;
+    }
     return create(charSequence, startIndex, endIndex);
   }
 
@@ -78,7 +80,9 @@ public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements
         return new RichSequenceImpl(charSequence);
       }
       return new RichSequenceImpl(charSequence.subSequence(startIndex, endIndex));
-    } else return NULL;
+    } else {
+      return NULL;
+    }
   }
 
   @Deprecated

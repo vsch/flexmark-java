@@ -66,7 +66,9 @@ public class TrackedOffsetList implements List<TrackedOffset> {
 
   public boolean haveUnresolved() {
     for (TrackedOffset trackedOffset : myTrackedOffsets) {
-      if (!trackedOffset.isResolved()) return true;
+      if (!trackedOffset.isResolved()) {
+        return true;
+      }
     }
     return false;
   }
@@ -175,7 +177,7 @@ public class TrackedOffsetList implements List<TrackedOffset> {
   }
 
   @Override
-  public boolean remove(Object o) {
+  public boolean remove(Object object) {
     throw new IllegalStateException("Not supported. Immutable list.");
   }
 
@@ -190,8 +192,8 @@ public class TrackedOffsetList implements List<TrackedOffset> {
   }
 
   @Override
-  public boolean contains(Object o) {
-    return myTrackedOffsets.contains(o);
+  public boolean contains(Object object) {
+    return myTrackedOffsets.contains(object);
   }
 
   @NotNull
@@ -218,8 +220,8 @@ public class TrackedOffsetList implements List<TrackedOffset> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    return myTrackedOffsets.equals(o);
+  public boolean equals(Object object) {
+    return myTrackedOffsets.equals(object);
   }
 
   @Override
@@ -233,13 +235,13 @@ public class TrackedOffsetList implements List<TrackedOffset> {
   }
 
   @Override
-  public int indexOf(Object o) {
-    return myTrackedOffsets.indexOf(o);
+  public int indexOf(Object object) {
+    return myTrackedOffsets.indexOf(object);
   }
 
   @Override
-  public int lastIndexOf(Object o) {
-    return myTrackedOffsets.lastIndexOf(o);
+  public int lastIndexOf(Object object) {
+    return myTrackedOffsets.lastIndexOf(object);
   }
 
   @NotNull

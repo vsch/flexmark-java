@@ -98,7 +98,9 @@ public class FormatControlProcessor {
 
   @Nullable
   private Boolean isFormatterOffTag(@Nullable CharSequence commentText) {
-    if (commentText == null) return null;
+    if (commentText == null) {
+      return null;
+    }
 
     String text = commentText.toString().trim();
     text = text.substring(OPEN_COMMENT.length(), text.length() - CLOSE_COMMENT.length()).trim();
@@ -132,7 +134,9 @@ public class FormatControlProcessor {
       // could be formatter control
       boolean formatterOff = myFormatterOff;
       Boolean isFormatterOff = isFormatterOffTag(node.getChars());
-      if (isFormatterOff == null) return;
+      if (isFormatterOff == null) {
+        return;
+      }
 
       myFormatterOff = isFormatterOff;
 
@@ -149,14 +153,20 @@ public class FormatControlProcessor {
           return lastChild != null && isFormattingRegion(offset, lastChild, false);
         } else if (node instanceof HtmlCommentBlock || node instanceof HtmlInnerBlockComment) {
           Boolean formatterOff = isFormatterOffTag(node.getChars());
-          if (formatterOff != null) return !formatterOff;
+          if (formatterOff != null) {
+            return !formatterOff;
+          }
         }
       }
 
       if (node.getPrevious() == null && checkParent) {
         node = node.getParent();
-        if (node instanceof Document) break;
-        if (node != null) node = node.getPrevious();
+        if (node instanceof Document) {
+          break;
+        }
+        if (node != null) {
+          node = node.getPrevious();
+        }
       } else {
         node = node.getPrevious();
       }
@@ -166,7 +176,10 @@ public class FormatControlProcessor {
 
   public boolean isFormattingRegion(@NotNull Node node) {
     // find the first HTML comment with a formatter directive
-    if (!formatterTagsEnabled || node.getStartOffset() == 0) return true;
+    if (!formatterTagsEnabled || node.getStartOffset() == 0) {
+      return true;
+    }
+
     return isFormattingRegion(node.getStartOffset(), node, true);
   }
 }

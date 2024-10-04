@@ -201,7 +201,9 @@ public interface CharPredicate extends IntPredicate {
     endIndex = Math.min(thizz.length(), endIndex);
 
     for (int i = fromIndex; i < endIndex; i++) {
-      if (c == thizz.charAt(i)) return i;
+      if (c == thizz.charAt(i)) {
+        return i;
+      }
     }
     return -1;
   }

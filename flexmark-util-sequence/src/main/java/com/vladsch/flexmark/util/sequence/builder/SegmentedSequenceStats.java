@@ -44,10 +44,14 @@ public class SegmentedSequenceStats {
     }
 
     @Override
-    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      return segments == ((StatsEntry) o).segments;
+    public boolean equals(Object object) {
+      if (this == object) {
+        return true;
+      }
+      if (object == null || getClass() != object.getClass()) {
+        return false;
+      }
+      return segments == ((StatsEntry) object).segments;
     }
 
     @Override
@@ -162,7 +166,9 @@ public class SegmentedSequenceStats {
           while (currentBucket > 0) {
             currentBucket--;
             currentBucketSegments = AGGR_STEPS.get(currentBucket);
-            if (entry.segments >= currentBucketSegments) break;
+            if (entry.segments >= currentBucketSegments) {
+              break;
+            }
           }
         }
 

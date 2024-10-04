@@ -72,15 +72,25 @@ public class ResourceLocation {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null || getClass() != object.getClass()) {
+      return false;
+    }
 
-    ResourceLocation location = (ResourceLocation) o;
+    ResourceLocation location = (ResourceLocation) object;
 
-    if (!resourceClass.equals(location.resourceClass)) return false;
-    if (!resourcePath.equals(location.resourcePath)) return false;
-    if (!fileUrl.equals(location.fileUrl)) return false;
+    if (!resourceClass.equals(location.resourceClass)) {
+      return false;
+    }
+    if (!resourcePath.equals(location.resourcePath)) {
+      return false;
+    }
+    if (!fileUrl.equals(location.fileUrl)) {
+      return false;
+    }
     return resolvedResourcePath.equals(location.resolvedResourcePath);
   }
 

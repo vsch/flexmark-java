@@ -86,12 +86,12 @@ public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
   /**
    * Compare only by address. Every key instance is unique
    *
-   * @param o other
+   * @param object other
    * @return true if equal
    */
   @Override
-  public final boolean equals(Object o) {
-    return this == o;
+  public final boolean equals(Object object) {
+    return this == object;
   }
 
   @Override

@@ -732,7 +732,9 @@ public class HtmlRenderer implements IRender {
 
           for (LinkResolver linkResolver : myLinkResolvers) {
             resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
-            if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
+            if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) {
+              break;
+            }
           }
 
           if (urlEncode == null && htmlOptions.percentEncodeUrls

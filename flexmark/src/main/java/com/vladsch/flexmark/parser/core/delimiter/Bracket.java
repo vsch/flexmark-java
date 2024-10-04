@@ -95,10 +95,14 @@ public class Bracket {
     Delimiter inner = previousDelimiter == null ? null : previousDelimiter.getNext();
     while (inner != null) {
       int innerOffset = inner.getEndIndex();
-      if (innerOffset >= endOffset) break;
+      if (innerOffset >= endOffset) {
+        break;
+      }
       if (innerOffset >= startOffset) {
         // inside our region, if unmatched then we are straddling the region
-        if (!inner.isMatched()) return true;
+        if (!inner.isMatched()) {
+          return true;
+        }
       }
       inner = inner.getNext();
     }

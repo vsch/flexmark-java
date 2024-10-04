@@ -525,7 +525,9 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   @Override
   @NotNull
   public S append(int startOffset, int endOffset) {
-    if (endOffset < 0 || startOffset > endOffset) return (S) this;
+    if (endOffset < 0 || startOffset > endOffset) {
+      return (S) this;
+    }
 
     int rangeSpan = endOffset - startOffset;
     if (rangeSpan == 0 && (!isIncludeAnchors() || startOffset < this.endOffset)) {

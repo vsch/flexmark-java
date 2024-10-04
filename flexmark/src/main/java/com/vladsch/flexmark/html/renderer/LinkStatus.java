@@ -20,11 +20,15 @@ public class LinkStatus {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof LinkStatus)) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (!(object instanceof LinkStatus)) {
+      return false;
+    }
 
-    LinkStatus status = (LinkStatus) o;
+    LinkStatus status = (LinkStatus) object;
 
     return myName.equals(status.myName);
   }

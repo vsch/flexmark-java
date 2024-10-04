@@ -56,7 +56,9 @@ public class MergeContextImpl implements MergeContext {
       @Nullable Document document, @NotNull MergeContextConsumer consumer) {
     int iMax = myDocuments.length;
     for (int i = 0; i < iMax; i++) {
-      if (myDocuments[i] == document) break;
+      if (myDocuments[i] == document) {
+        break;
+      }
       consumer.accept(myTranslationHandlers[i], myDocuments[i], i);
     }
   }

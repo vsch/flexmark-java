@@ -17,7 +17,9 @@ public class DefinitionParserTest {
     StringBuilder sb = new StringBuilder();
 
     for (SpecialLeadInHandler handler : handlers) {
-      if (handler.escape(baseSeq, null, sb::append)) return sb.toString();
+      if (handler.escape(baseSeq, null, sb::append)) {
+        return sb.toString();
+      }
     }
     return input;
   }
@@ -28,7 +30,9 @@ public class DefinitionParserTest {
     StringBuilder sb = new StringBuilder();
 
     for (SpecialLeadInHandler handler : handlers) {
-      if (handler.unEscape(baseSeq, null, sb::append)) return sb.toString();
+      if (handler.unEscape(baseSeq, null, sb::append)) {
+        return sb.toString();
+      }
     }
     return input;
   }

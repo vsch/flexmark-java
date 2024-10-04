@@ -12,13 +12,19 @@ public final class SegmentTreePos {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof SegmentTreePos)) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (!(object instanceof SegmentTreePos)) {
+      return false;
+    }
 
-    SegmentTreePos pos1 = (SegmentTreePos) o;
+    SegmentTreePos pos1 = (SegmentTreePos) object;
 
-    if (pos != pos1.pos) return false;
+    if (pos != pos1.pos) {
+      return false;
+    }
     return startIndex == pos1.startIndex;
   }
 

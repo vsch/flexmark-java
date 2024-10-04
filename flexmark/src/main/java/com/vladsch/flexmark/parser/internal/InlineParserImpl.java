@@ -293,7 +293,9 @@ public class InlineParserImpl extends LightInlineParserImpl
       }
 
       int pos = parseReference(block, contentChars);
-      if (pos == 0) break;
+      if (pos == 0) {
+        break;
+      }
       contentChars = contentChars.subSequence(pos, length);
       length = contentChars.length();
       leadingSpaces = contentChars.countLeading(CharPredicate.SPACE_TAB);
@@ -409,7 +411,9 @@ public class InlineParserImpl extends LightInlineParserImpl
       if (extensions != null) {
         for (InlineParserExtension extension : extensions) {
           res = extension.parse(this);
-          if (res) return true;
+          if (res) {
+            return true;
+          }
         }
       }
     }
@@ -498,7 +502,9 @@ public class InlineParserImpl extends LightInlineParserImpl
   private boolean processCustomCharacters() {
     char c = peek();
     CharacterNodeFactory factory = customSpecialCharacterFactoryMap.get(c);
-    if (factory == null) return false;
+    if (factory == null) {
+      return false;
+    }
 
     Node node = factory.get();
     node.setChars(input.subSequence(index, index + 1));
@@ -652,16 +658,22 @@ public class InlineParserImpl extends LightInlineParserImpl
             node.appendChild(textNode);
 
             lastPos = pos;
-            if (lastPos >= length) break;
+            if (lastPos >= length) {
+              break;
+            }
             if (codeText.charAt(lastPos) == '\r') {
               lastPos++;
-              if (lastPos >= length) break;
+              if (lastPos >= length) {
+                break;
+              }
               if (codeText.charAt(lastPos) == '\n') lastPos++;
             } else {
               lastPos++;
             }
 
-            if (lastPos >= length) break;
+            if (lastPos >= length) {
+              break;
+            }
 
             if (pos < lastPos) {
               SoftLineBreak softLineBreak =
@@ -790,7 +802,9 @@ public class InlineParserImpl extends LightInlineParserImpl
 
   private ReferenceProcessorMatch matchLinkRef(
       Bracket opener, int startIndex, int lookAhead, int nesting) {
-    if (linkRefProcessorsData.nestingIndex.length == 0) return null;
+    if (linkRefProcessorsData.nestingIndex.length == 0) {
+      return null;
+    }
 
     ReferenceProcessorMatch match = null;
     BasedSequence textNoBang = null;
@@ -803,7 +817,9 @@ public class InlineParserImpl extends LightInlineParserImpl
       LinkRefProcessor linkProcessor = linkRefProcessors.get(i);
       BasedSequence nodeChars;
 
-      if (lookAhead + nesting < linkProcessor.getBracketNestingLevel()) break;
+      if (lookAhead + nesting < linkProcessor.getBracketNestingLevel()) {
+        break;
+      }
 
       wantBang = linkProcessor.getWantExclamationPrefix();
 
@@ -922,7 +938,9 @@ public class InlineParserImpl extends LightInlineParserImpl
             }
 
             BasedSequence restOfLine = toEOL();
-            if (restOfLine == null) break;
+            if (restOfLine == null) {
+              break;
+            }
             contentEnd = index;
           }
         } else {
@@ -975,7 +993,9 @@ public class InlineParserImpl extends LightInlineParserImpl
               && peek(maxAvail) == ']') {
             nested = nested.getPrevious();
             maxAvail++;
-            if (maxAvail + nestedBrackets == maxWanted || nested.isImage()) break;
+            if (maxAvail + nestedBrackets == maxWanted || nested.isImage()) {
+              break;
+            }
           }
         }
 
@@ -1889,7 +1909,9 @@ public class InlineParserImpl extends LightInlineParserImpl
         if (maxNestingLevel < linkProcessor.getBracketNestingLevel(options)) {
           maxNestingLevel = linkProcessor.getBracketNestingLevel(options);
           nestingLookup[maxNestingLevel] = index;
-          if (maxNestingLevel == maxReferenceLinkNesting) break;
+          if (maxNestingLevel == maxReferenceLinkNesting) {
+            break;
+          }
         }
         index++;
       }

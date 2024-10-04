@@ -80,7 +80,9 @@ public class BlockContent {
   }
 
   public @NotNull BasedSequence getContents() {
-    if (lines.size() == 0) return BasedSequence.NULL;
+    if (lines.size() == 0) {
+      return BasedSequence.NULL;
+    }
     return getContents(0, lines.size());
   }
 
@@ -89,7 +91,9 @@ public class BlockContent {
   }
 
   public @NotNull BasedSequence getContents(int startLine, int endLine) {
-    if (lines.size() == 0) return BasedSequence.NULL;
+    if (lines.size() == 0) {
+      return BasedSequence.NULL;
+    }
 
     if (startLine < 0) {
       throw new IndexOutOfBoundsException("startLine must be at least 0");
@@ -108,7 +112,9 @@ public class BlockContent {
   }
 
   public @NotNull String getString() {
-    if (lines.size() == 0) return "";
+    if (lines.size() == 0) {
+      return "";
+    }
 
     StringBuilder sb = new StringBuilder();
 

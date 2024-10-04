@@ -40,9 +40,15 @@ public class FontStyle {
   }
 
   public static FontStyle of(int fontStyle) {
-    if ((fontStyle & (Font.BOLD | Font.ITALIC)) == (Font.BOLD | Font.ITALIC)) return BOLD_ITALIC;
-    if ((fontStyle & (Font.BOLD)) == (Font.BOLD)) return BOLD;
-    if ((fontStyle & (Font.ITALIC)) == (Font.ITALIC)) return ITALIC;
+    if ((fontStyle & (Font.BOLD | Font.ITALIC)) == (Font.BOLD | Font.ITALIC)) {
+      return BOLD_ITALIC;
+    }
+    if ((fontStyle & (Font.BOLD)) == (Font.BOLD)) {
+      return BOLD;
+    }
+    if ((fontStyle & (Font.ITALIC)) == (Font.ITALIC)) {
+      return ITALIC;
+    }
     return PLAIN;
   }
 }

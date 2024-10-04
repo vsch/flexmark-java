@@ -40,7 +40,9 @@ public class OptionsParser<T> implements OptionParser<T> {
     BasedSequence[] optionsList =
         optionsText.split(optionDelimiter, 0, SequenceUtils.SPLIT_TRIM_SKIP_EMPTY, null);
     T result = options;
-    if (provider == null) provider = MessageProvider.DEFAULT;
+    if (provider == null) {
+      provider = MessageProvider.DEFAULT;
+    }
     List<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.length);
 
     for (BasedSequence optionText : optionsList) {
@@ -49,7 +51,9 @@ public class OptionsParser<T> implements OptionParser<T> {
 
       BasedSequence[] optionList =
           optionText.split(optionValueDelimiter, 2, SequenceUtils.SPLIT_SKIP_EMPTY, null);
-      if (optionList.length == 0) continue;
+      if (optionList.length == 0) {
+        continue;
+      }
       BasedSequence optionName = optionList[0];
       BasedSequence optionValue =
           optionList.length > 1

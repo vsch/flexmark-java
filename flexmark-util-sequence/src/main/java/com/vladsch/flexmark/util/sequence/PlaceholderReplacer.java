@@ -18,7 +18,9 @@ public class PlaceholderReplacer {
       char closePlaceholder,
       Function<T, String> getter,
       BiConsumer<T, String> setter) {
-    if (spanList.isEmpty()) return;
+    if (spanList.isEmpty()) {
+      return;
+    }
     StringBuilder sb = null;
 
     // accumulate text from < to >, because placeholder can be broken up across multiple spans

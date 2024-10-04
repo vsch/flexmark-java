@@ -442,33 +442,51 @@ public class Parsing {
     /**
      * Compare where null entry equals any other value
      *
-     * @param o other
+     * @param object other
      * @return true if equal
      */
     @Override
-    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+      if (this == object) {
+        return true;
+      }
+      if (object == null || getClass() != object.getClass()) {
+        return false;
+      }
 
-      PatternTypeFlags that = (PatternTypeFlags) o;
+      PatternTypeFlags that = (PatternTypeFlags) object;
 
       if (intellijDummyIdentifier != null
-          && !intellijDummyIdentifier.equals(that.intellijDummyIdentifier)) return false;
-      if (htmlForTranslator != null && !htmlForTranslator.equals(that.htmlForTranslator))
+          && !intellijDummyIdentifier.equals(that.intellijDummyIdentifier)) {
         return false;
+      }
+      if (htmlForTranslator != null && !htmlForTranslator.equals(that.htmlForTranslator)) {
+        return false;
+      }
       if (translationHtmlInlineTagPattern != null
-          && !translationHtmlInlineTagPattern.equals(that.translationHtmlInlineTagPattern))
+          && !translationHtmlInlineTagPattern.equals(that.translationHtmlInlineTagPattern)) {
         return false;
+      }
       if (translationAutolinkTagPattern != null
-          && !translationAutolinkTagPattern.equals(that.translationAutolinkTagPattern))
+          && !translationAutolinkTagPattern.equals(that.translationAutolinkTagPattern)) {
         return false;
-      if (spaceInLinkUrl != null && !spaceInLinkUrl.equals(that.spaceInLinkUrl)) return false;
+      }
+      if (spaceInLinkUrl != null && !spaceInLinkUrl.equals(that.spaceInLinkUrl)) {
+        return false;
+      }
       if (parseJekyllMacroInLinkUrl != null
-          && !parseJekyllMacroInLinkUrl.equals(that.parseJekyllMacroInLinkUrl)) return false;
-      if (itemPrefixChars != null && !itemPrefixChars.equals(that.itemPrefixChars)) return false;
-      if (listsItemMarkerSpace != null && !listsItemMarkerSpace.equals(that.listsItemMarkerSpace))
+          && !parseJekyllMacroInLinkUrl.equals(that.parseJekyllMacroInLinkUrl)) {
         return false;
-      if (allowNameSpace != null && !allowNameSpace.equals(that.allowNameSpace)) return false;
+      }
+      if (itemPrefixChars != null && !itemPrefixChars.equals(that.itemPrefixChars)) {
+        return false;
+      }
+      if (listsItemMarkerSpace != null && !listsItemMarkerSpace.equals(that.listsItemMarkerSpace)) {
+        return false;
+      }
+      if (allowNameSpace != null && !allowNameSpace.equals(that.allowNameSpace)) {
+        return false;
+      }
 
       return listsOrderedItemDotOnly == null
           || listsOrderedItemDotOnly.equals(that.listsOrderedItemDotOnly);

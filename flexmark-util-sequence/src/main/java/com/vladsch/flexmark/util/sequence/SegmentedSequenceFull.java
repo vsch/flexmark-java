@@ -96,7 +96,9 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
     int index = 0;
     for (Object part : builder) {
       if (part instanceof Range) {
-        if (((Range) part).isEmpty()) continue;
+        if (((Range) part).isEmpty()) {
+          continue;
+        }
 
         int iMax = ((Range) part).getEnd();
         for (int i = ((Range) part).getStart(); i < iMax; i++) {
@@ -160,14 +162,18 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
       boolean finished = false;
 
       for (int iS = baseStartOffset; iS < iMax; iS++) {
-        if (baseOffsets[iS] < 0) continue;
+        if (baseOffsets[iS] < 0) {
+          continue;
+        }
         startOffset = baseOffsets[iS];
 
         if (length != 0) {
           // end is the last real offset + 1 in this sequence up to the start index where
           // startOffset was found
           for (int iE = baseStartOffset + length; iE-- > iS; ) {
-            if (baseOffsets[iE] < 0) continue;
+            if (baseOffsets[iE] < 0) {
+              continue;
+            }
 
             endOffset = baseOffsets[iE] + 1;
 

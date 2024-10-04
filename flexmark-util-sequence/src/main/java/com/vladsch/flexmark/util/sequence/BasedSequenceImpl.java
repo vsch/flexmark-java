@@ -16,7 +16,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     implements BasedSequence {
   public static BasedSequence firstNonNull(BasedSequence... sequences) {
     for (BasedSequence sequence : sequences) {
-      if (sequence != null && sequence != NULL) return sequence;
+      if (sequence != null && sequence != NULL) {
+        return sequence;
+      }
     }
 
     return NULL;
@@ -96,7 +98,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
   @Override
   public char safeBaseCharAt(int index) {
     int startOffset = getStartOffset();
-    if (index >= startOffset && index < startOffset + length()) return charAt(index - startOffset);
+    if (index >= startOffset && index < startOffset + length()) {
+      return charAt(index - startOffset);
+    }
 
     return getBaseSequence().safeCharAt(index);
   }
@@ -196,20 +200,26 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
   @NotNull
   @Override
   public BasedSequence intersect(@NotNull BasedSequence other) {
-    if (getBase() != other.getBase()) return BasedSequence.NULL;
-    else if (other.getEndOffset() <= getStartOffset()) return subSequence(0, 0);
-    else if (other.getStartOffset() >= getEndOffset()) return subSequence(length(), length());
-    else
+    if (getBase() != other.getBase()) {
+      return BasedSequence.NULL;
+    } else if (other.getEndOffset() <= getStartOffset()) {
+      return subSequence(0, 0);
+    } else if (other.getStartOffset() >= getEndOffset()) {
+      return subSequence(length(), length());
+    } else {
       return this.baseSubSequence(
           Utils.max(getStartOffset(), other.getStartOffset()),
           Utils.min(getEndOffset(), other.getEndOffset()));
+    }
   }
 
   @Override
   public boolean containsSomeIn(@NotNull CharPredicate charSet) {
     int iMax = length();
     for (int i = 0; i < iMax; i++) {
-      if (charSet.test(charAt(i))) return true;
+      if (charSet.test(charAt(i))) {
+        return true;
+      }
     }
     return false;
   }
@@ -218,7 +228,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
   public boolean containsSomeNotIn(@NotNull CharPredicate charSet) {
     int iMax = length();
     for (int i = 0; i < iMax; i++) {
-      if (!charSet.test(charAt(i))) return true;
+      if (!charSet.test(charAt(i))) {
+        return true;
+      }
     }
     return false;
   }
@@ -317,7 +329,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     int endOffset = getEndOffset();
 
     // if already have eol then no need to check
-    if (eolChars.test(lastChar())) return this;
+    if (eolChars.test(lastChar())) {
+      return this;
+    }
 
     BasedSequence baseSequence = getBaseSequence();
     int endOfLine = baseSequence.endOfLine(endOffset);
@@ -341,7 +355,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     int startOffset = getStartOffset();
 
     // if already have eol then no need to check
-    if (eolChars.test(firstChar())) return this;
+    if (eolChars.test(firstChar())) {
+      return this;
+    }
 
     BasedSequence baseSequence = getBaseSequence();
     int startOfLine = baseSequence.startOfLine(startOffset);
@@ -382,8 +398,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     // find '\n'
     while (startOffset >= 0) {
       char c = getBaseSequence().charAt(startOffset);
-      if (c == '\t') hadTab = true;
-      else if (c == '\n') {
+      if (c == '\t') {
+        hadTab = true;
+      } else if (c == '\n') {
         startOffset++;
         break;
       }
@@ -411,7 +428,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
             && (getBaseSequence().charAt(offset - 1) == ' '
                 || getBaseSequence().charAt(offset - 1) == '\t')) {
           columns += offsetColumns[offset - 1 - startOffset];
-          if (columns > maxColumns) break;
+          if (columns > maxColumns) {
+            break;
+          }
           offset--;
         }
       } else {
@@ -431,19 +450,29 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
   @NotNull
   @Override
   public BasedSequence prefixOf(@NotNull BasedSequence other) {
-    if (getBase() != other.getBase()) return BasedSequence.NULL;
-    else if (other.getStartOffset() <= getStartOffset()) return subSequence(0, 0);
-    else if (other.getStartOffset() >= getEndOffset()) return this;
-    else return this.baseSubSequence(getStartOffset(), other.getStartOffset());
+    if (getBase() != other.getBase()) {
+      return BasedSequence.NULL;
+    } else if (other.getStartOffset() <= getStartOffset()) {
+      return subSequence(0, 0);
+    } else if (other.getStartOffset() >= getEndOffset()) {
+      return this;
+    } else {
+      return this.baseSubSequence(getStartOffset(), other.getStartOffset());
+    }
   }
 
   @NotNull
   @Override
   public BasedSequence suffixOf(@NotNull BasedSequence other) {
-    if (getBase() != other.getBase()) return BasedSequence.NULL;
-    else if (other.getEndOffset() >= getEndOffset()) return subSequence(length(), length());
-    else if (other.getEndOffset() <= getStartOffset()) return this;
-    else return this.baseSubSequence(other.getEndOffset(), getEndOffset());
+    if (getBase() != other.getBase()) {
+      return BasedSequence.NULL;
+    } else if (other.getEndOffset() >= getEndOffset()) {
+      return subSequence(length(), length());
+    } else if (other.getEndOffset() <= getStartOffset()) {
+      return this;
+    } else {
+      return this.baseSubSequence(other.getEndOffset(), getEndOffset());
+    }
   }
 
   // TEST: all these need tests
@@ -533,8 +562,9 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
   }
 
   static BasedSequence create(@Nullable CharSequence charSequence) {
-    if (charSequence == null) return BasedSequence.NULL;
-    else if (charSequence instanceof BasedSequence) {
+    if (charSequence == null) {
+      return BasedSequence.NULL;
+    } else if (charSequence instanceof BasedSequence) {
       return (BasedSequence) charSequence;
     } else {
       return SubSequence.create(charSequence);

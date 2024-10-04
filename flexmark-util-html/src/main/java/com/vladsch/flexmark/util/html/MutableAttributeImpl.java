@@ -87,7 +87,9 @@ public class MutableAttributeImpl implements MutableAttribute {
                 values.put(value.substring(0, namePos), value.substring(namePos + 1));
               }
             }
-            if (pos == -1) break;
+            if (pos == -1) {
+              break;
+            }
             lastPos = endPos + 1;
           }
         }
@@ -198,7 +200,9 @@ public class MutableAttributeImpl implements MutableAttribute {
         }
       }
 
-      if (pos == -1) break;
+      if (pos == -1) {
+        break;
+      }
       lastPos = endPos + 1;
     }
   }
@@ -236,13 +240,19 @@ public class MutableAttributeImpl implements MutableAttribute {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Attribute)) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (!(object instanceof Attribute)) {
+      return false;
+    }
 
-    Attribute attribute = (Attribute) o;
+    Attribute attribute = (Attribute) object;
 
-    if (!name.equals(attribute.getName())) return false;
+    if (!name.equals(attribute.getName())) {
+      return false;
+    }
     return getValue().equals(attribute.getValue());
   }
 

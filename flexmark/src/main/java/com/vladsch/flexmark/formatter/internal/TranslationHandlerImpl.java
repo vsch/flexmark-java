@@ -130,7 +130,9 @@ public class TranslationHandlerImpl implements TranslationHandler {
   static boolean isNotBlank(CharSequence csq) {
     int iMax = csq.length();
     for (int i = 0; i < iMax; i++) {
-      if (!isWhitespace(csq.charAt(i))) return true;
+      if (!isWhitespace(csq.charAt(i))) {
+        return true;
+      }
     }
     return false;
   }
@@ -184,7 +186,9 @@ public class TranslationHandlerImpl implements TranslationHandler {
           && !myPlaceHolderMarkerPattern.matcher(entry.getValue()).matches()) {
         Integer index = repeatedTranslatingIndices.get(entry.getValue());
         if (index == null) {
-          if (i >= placeholderSize) break;
+          if (i >= placeholderSize) {
+            break;
+          }
           // new, index
           repeatedTranslatingIndices.put(entry.getValue(), i);
           myTranslatedTexts.put(entry.getKey(), translatedTexts.get(i).toString());
@@ -424,20 +428,30 @@ public class TranslationHandlerImpl implements TranslationHandler {
         myPlaceholderGenerator != null
             ? myPlaceholderGenerator.getPlaceholder(placeholderId)
             : String.format(format, placeholderId);
-    if (prefix == null && suffix == null && suffix2 == null) return replacedTextId;
+    if (prefix == null && suffix == null && suffix2 == null) {
+      return replacedTextId;
+    }
 
     return addPrefixSuffix(replacedTextId, prefix, suffix, suffix2);
   }
 
   public static String addPrefixSuffix(
       CharSequence placeholderId, CharSequence prefix, CharSequence suffix, CharSequence suffix2) {
-    if (prefix == null && suffix == null && suffix2 == null) return placeholderId.toString();
+    if (prefix == null && suffix == null && suffix2 == null) {
+      return placeholderId.toString();
+    }
 
     StringBuilder sb = new StringBuilder();
-    if (prefix != null) sb.append(prefix);
+    if (prefix != null) {
+      sb.append(prefix);
+    }
     sb.append(placeholderId);
-    if (suffix != null) sb.append(suffix);
-    if (suffix2 != null) sb.append(suffix2);
+    if (suffix != null) {
+      sb.append(suffix);
+    }
+    if (suffix2 != null) {
+      sb.append(suffix2);
+    }
     return sb.toString();
   }
 

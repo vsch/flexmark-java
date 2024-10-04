@@ -34,7 +34,9 @@ public class BitSetIterator implements ReversibleIterator<Integer> {
 
   @Override
   public Integer next() {
-    if (next == -1) throw new NoSuchElementException();
+    if (next == -1) {
+      throw new NoSuchElementException();
+    }
 
     last = next;
     next =
@@ -44,7 +46,9 @@ public class BitSetIterator implements ReversibleIterator<Integer> {
 
   @Override
   public void remove() {
-    if (last == -1) throw new NoSuchElementException();
+    if (last == -1) {
+      throw new NoSuchElementException();
+    }
 
     bitSet.clear(last);
   }

@@ -35,7 +35,9 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
           if (child instanceof DefinitionItem) {
             if (((DefinitionItem) child).isLoose()) {
               isTight = false;
-              if (!blankLinesInAST) break;
+              if (!blankLinesInAST) {
+                break;
+              }
             }
 
             if (blankLinesInAST) {

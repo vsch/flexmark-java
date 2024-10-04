@@ -37,7 +37,9 @@ public class ColorStyler extends HtmlStylerBase<Color> {
     if (colorName.startsWith("#")) {
       // extract rgb from it
       Integer color = SequenceUtils.parseIntOrNull(colorName.substring(1), 16);
-      if (color == null) return null;
+      if (color == null) {
+        return null;
+      }
       String colorText = colorName.substring(1);
       String r = "";
       String g = "";

@@ -12,7 +12,9 @@ public class BoundedMinAggregator implements BiFunction<Integer, Integer, Intege
 
   @Override
   public Integer apply(@Nullable Integer aggregate, @Nullable Integer next) {
-    if (next != null && next > minBound) return MinAggregator.INSTANCE.apply(aggregate, next);
-    else return aggregate;
+    if (next != null && next > minBound) {
+      return MinAggregator.INSTANCE.apply(aggregate, next);
+    }
+    return aggregate;
   }
 }

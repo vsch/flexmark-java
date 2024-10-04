@@ -144,10 +144,14 @@ public class ListOptions implements MutableDataSetter {
 
   public boolean isInTightListItem(@NotNull Paragraph node) {
     Block parent = node.getParent();
-    if (!(parent instanceof ListItem)) return false;
+    if (!(parent instanceof ListItem)) {
+      return false;
+    }
 
     ListItem listItem = (ListItem) parent;
-    if (!listItem.isItemParagraph(node)) return false;
+    if (!listItem.isItemParagraph(node)) {
+      return false;
+    }
 
     boolean autoLoose = isAutoLoose();
     if (autoLoose && isAutoLooseOneLevelLists()) {
@@ -254,7 +258,9 @@ public class ListOptions implements MutableDataSetter {
         }
       }
 
-      if (addSuffixCount == 0) break;
+      if (addSuffixCount == 0) {
+        break;
+      }
     }
 
     if (addSuffixCount > 0) {
@@ -569,38 +575,65 @@ public class ListOptions implements MutableDataSetter {
     }
 
     @Override
-    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (!(o instanceof ItemInterrupt)) return false;
+    public boolean equals(Object object) {
+      if (this == object) {
+        return true;
+      }
+      if (!(object instanceof ItemInterrupt)) {
+        return false;
+      }
 
-      ItemInterrupt interrupt = (ItemInterrupt) o;
+      ItemInterrupt interrupt = (ItemInterrupt) object;
 
-      if (bulletItemInterruptsParagraph != interrupt.bulletItemInterruptsParagraph) return false;
-      if (orderedItemInterruptsParagraph != interrupt.orderedItemInterruptsParagraph) return false;
-      if (orderedNonOneItemInterruptsParagraph != interrupt.orderedNonOneItemInterruptsParagraph)
+      if (bulletItemInterruptsParagraph != interrupt.bulletItemInterruptsParagraph) {
         return false;
-      if (emptyBulletItemInterruptsParagraph != interrupt.emptyBulletItemInterruptsParagraph)
+      }
+      if (orderedItemInterruptsParagraph != interrupt.orderedItemInterruptsParagraph) {
         return false;
-      if (emptyOrderedItemInterruptsParagraph != interrupt.emptyOrderedItemInterruptsParagraph)
+      }
+      if (orderedNonOneItemInterruptsParagraph != interrupt.orderedNonOneItemInterruptsParagraph) {
         return false;
+      }
+      if (emptyBulletItemInterruptsParagraph != interrupt.emptyBulletItemInterruptsParagraph) {
+        return false;
+      }
+      if (emptyOrderedItemInterruptsParagraph != interrupt.emptyOrderedItemInterruptsParagraph) {
+        return false;
+      }
       if (emptyOrderedNonOneItemInterruptsParagraph
-          != interrupt.emptyOrderedNonOneItemInterruptsParagraph) return false;
-      if (bulletItemInterruptsItemParagraph != interrupt.bulletItemInterruptsItemParagraph)
+          != interrupt.emptyOrderedNonOneItemInterruptsParagraph) {
         return false;
-      if (orderedItemInterruptsItemParagraph != interrupt.orderedItemInterruptsItemParagraph)
+      }
+      if (bulletItemInterruptsItemParagraph != interrupt.bulletItemInterruptsItemParagraph) {
         return false;
+      }
+      if (orderedItemInterruptsItemParagraph != interrupt.orderedItemInterruptsItemParagraph) {
+        return false;
+      }
       if (orderedNonOneItemInterruptsItemParagraph
-          != interrupt.orderedNonOneItemInterruptsItemParagraph) return false;
+          != interrupt.orderedNonOneItemInterruptsItemParagraph) {
+        return false;
+      }
       if (emptyBulletItemInterruptsItemParagraph
-          != interrupt.emptyBulletItemInterruptsItemParagraph) return false;
+          != interrupt.emptyBulletItemInterruptsItemParagraph) {
+        return false;
+      }
       if (emptyOrderedItemInterruptsItemParagraph
-          != interrupt.emptyOrderedItemInterruptsItemParagraph) return false;
+          != interrupt.emptyOrderedItemInterruptsItemParagraph) {
+        return false;
+      }
       if (emptyOrderedNonOneItemInterruptsItemParagraph
-          != interrupt.emptyOrderedNonOneItemInterruptsItemParagraph) return false;
+          != interrupt.emptyOrderedNonOneItemInterruptsItemParagraph) {
+        return false;
+      }
       if (emptyBulletSubItemInterruptsItemParagraph
-          != interrupt.emptyBulletSubItemInterruptsItemParagraph) return false;
+          != interrupt.emptyBulletSubItemInterruptsItemParagraph) {
+        return false;
+      }
       if (emptyOrderedSubItemInterruptsItemParagraph
-          != interrupt.emptyOrderedSubItemInterruptsItemParagraph) return false;
+          != interrupt.emptyOrderedSubItemInterruptsItemParagraph) {
+        return false;
+      }
       return emptyOrderedNonOneSubItemInterruptsItemParagraph
           == interrupt.emptyOrderedNonOneSubItemInterruptsItemParagraph;
     }
@@ -790,38 +823,89 @@ public class ListOptions implements MutableDataSetter {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof ListOptions)) return false;
-
-    ListOptions that = (ListOptions) o;
-
-    if (myParserEmulationProfile != that.myParserEmulationProfile) return false;
-    if (autoLoose != that.autoLoose) return false;
-    if (autoLooseOneLevelLists != that.autoLooseOneLevelLists) return false;
-    if (delimiterMismatchToNewList != that.delimiterMismatchToNewList) return false;
-    if (endOnDoubleBlank != that.endOnDoubleBlank) return false;
-    if (itemMarkerSpace != that.itemMarkerSpace) return false;
-    if (itemTypeMismatchToNewList != that.itemTypeMismatchToNewList) return false;
-    if (itemTypeMismatchToSubList != that.itemTypeMismatchToSubList) return false;
-    if (looseWhenPrevHasTrailingBlankLine != that.looseWhenPrevHasTrailingBlankLine) return false;
-    if (looseWhenLastItemPrevHasTrailingBlankLine != that.looseWhenLastItemPrevHasTrailingBlankLine)
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (!(object instanceof ListOptions)) {
       return false;
-    if (looseWhenHasNonListChildren != that.looseWhenHasNonListChildren) return false;
-    if (looseWhenBlankLineFollowsItemParagraph != that.looseWhenBlankLineFollowsItemParagraph)
+    }
+
+    ListOptions that = (ListOptions) object;
+
+    if (myParserEmulationProfile != that.myParserEmulationProfile) {
       return false;
-    if (looseWhenHasLooseSubItem != that.looseWhenHasLooseSubItem) return false;
-    if (looseWhenHasTrailingBlankLine != that.looseWhenHasTrailingBlankLine) return false;
-    if (looseWhenContainsBlankLine != that.looseWhenContainsBlankLine) return false;
-    if (numberedItemMarkerSuffixed != that.numberedItemMarkerSuffixed) return false;
-    if (orderedItemDotOnly != that.orderedItemDotOnly) return false;
-    if (orderedListManualStart != that.orderedListManualStart) return false;
-    if (codeIndent != that.codeIndent) return false;
-    if (itemIndent != that.itemIndent) return false;
-    if (newItemCodeIndent != that.newItemCodeIndent) return false;
-    if (itemMarkerSuffixes != that.itemMarkerSuffixes) return false;
-    if (itemContentAfterSuffix != that.itemContentAfterSuffix) return false;
-    if (!itemPrefixChars.equals(that.itemPrefixChars)) return false;
+    }
+    if (autoLoose != that.autoLoose) {
+      return false;
+    }
+    if (autoLooseOneLevelLists != that.autoLooseOneLevelLists) {
+      return false;
+    }
+    if (delimiterMismatchToNewList != that.delimiterMismatchToNewList) {
+      return false;
+    }
+    if (endOnDoubleBlank != that.endOnDoubleBlank) {
+      return false;
+    }
+    if (itemMarkerSpace != that.itemMarkerSpace) {
+      return false;
+    }
+    if (itemTypeMismatchToNewList != that.itemTypeMismatchToNewList) {
+      return false;
+    }
+    if (itemTypeMismatchToSubList != that.itemTypeMismatchToSubList) {
+      return false;
+    }
+    if (looseWhenPrevHasTrailingBlankLine != that.looseWhenPrevHasTrailingBlankLine) {
+      return false;
+    }
+    if (looseWhenLastItemPrevHasTrailingBlankLine
+        != that.looseWhenLastItemPrevHasTrailingBlankLine) {
+      return false;
+    }
+    if (looseWhenHasNonListChildren != that.looseWhenHasNonListChildren) {
+      return false;
+    }
+    if (looseWhenBlankLineFollowsItemParagraph != that.looseWhenBlankLineFollowsItemParagraph) {
+      return false;
+    }
+    if (looseWhenHasLooseSubItem != that.looseWhenHasLooseSubItem) {
+      return false;
+    }
+    if (looseWhenHasTrailingBlankLine != that.looseWhenHasTrailingBlankLine) {
+      return false;
+    }
+    if (looseWhenContainsBlankLine != that.looseWhenContainsBlankLine) {
+      return false;
+    }
+    if (numberedItemMarkerSuffixed != that.numberedItemMarkerSuffixed) {
+      return false;
+    }
+    if (orderedItemDotOnly != that.orderedItemDotOnly) {
+      return false;
+    }
+    if (orderedListManualStart != that.orderedListManualStart) {
+      return false;
+    }
+    if (codeIndent != that.codeIndent) {
+      return false;
+    }
+    if (itemIndent != that.itemIndent) {
+      return false;
+    }
+    if (newItemCodeIndent != that.newItemCodeIndent) {
+      return false;
+    }
+    if (itemMarkerSuffixes != that.itemMarkerSuffixes) {
+      return false;
+    }
+    if (itemContentAfterSuffix != that.itemContentAfterSuffix) {
+      return false;
+    }
+    if (!itemPrefixChars.equals(that.itemPrefixChars)) {
+      return false;
+    }
     return itemInterrupt.equals(that.itemInterrupt);
   }
 

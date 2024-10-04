@@ -37,7 +37,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     @NotNull
     static Enum[] getUniverseSlow(Class elementType) {
       Enum[] cachedUniverse = enumUniverseMap.get(elementType);
-      if (cachedUniverse != null) return cachedUniverse;
+      if (cachedUniverse != null) {
+        return cachedUniverse;
+      }
 
       Field[] fields = elementType.getFields();
       int enums = 0;
@@ -89,7 +91,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    */
   public static <E extends Enum<E>> long[] getBitMasks(Class<E> elementType) {
     long[] bitMasks = UniverseLoader.enumBitMasksMap.get(elementType);
-    if (bitMasks != null) return bitMasks;
+    if (bitMasks != null) {
+      return bitMasks;
+    }
 
     // compute the bit masks for the enum
     E[] universe = (E[]) UniverseLoader.getUniverseSlow(elementType);
@@ -121,7 +125,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
         for (E e : universe) {
           bitMasks[e.ordinal()] = 1L << e.ordinal();
         }
-      } else throw new IllegalArgumentException("Enums with more than 64 values are not supported");
+      } else {
+        throw new IllegalArgumentException("Enums with more than 64 values are not supported");
+      }
     }
 
     UniverseLoader.enumBitMasksMap.put(elementType, bitMasks);
@@ -634,7 +640,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
 
     @Override
     public E next() {
-      if (unseen == 0) throw new NoSuchElementException();
+      if (unseen == 0) {
+        throw new NoSuchElementException();
+      }
       lastReturned = unseen & -unseen;
       unseen -= lastReturned;
       return (E) universe[Long.numberOfTrailingZeros(lastReturned)];
@@ -642,7 +650,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
 
     @Override
     public void remove() {
-      if (lastReturned == 0) throw new IllegalStateException();
+      if (lastReturned == 0) {
+        throw new IllegalStateException();
+      }
       elements &= ~lastReturned;
       lastReturned = 0;
     }
@@ -664,7 +674,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
 
     @Override
     public E next() {
-      if (nextIndex >= universe.length) throw new NoSuchElementException();
+      if (nextIndex >= universe.length) {
+        throw new NoSuchElementException();
+      }
 
       lastReturnedIndex = nextIndex;
       findNext();
@@ -675,13 +687,17 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     void findNext() {
       do {
         nextIndex++;
-        if (nextIndex >= universe.length) break;
+        if (nextIndex >= universe.length) {
+          break;
+        }
       } while ((elements & bitMasks[nextIndex]) == 0);
     }
 
     @Override
     public void remove() {
-      if (lastReturnedIndex == -1) throw new IllegalStateException();
+      if (lastReturnedIndex == -1) {
+        throw new IllegalStateException();
+      }
       elements &= ~bitMasks[lastReturnedIndex];
       lastReturnedIndex = -1;
     }
@@ -708,16 +724,20 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
   /**
    * Returns true if this set contains the specified element.
    *
-   * @param e element to be checked for containment in this collection
+   * @param object element to be checked for containment in this collection
    * @return true if this set contains the specified element
    */
   @Override
-  public boolean contains(Object e) {
-    if (e == null) return false;
-    Class<?> eClass = e.getClass();
-    if (eClass != elementType && eClass.getSuperclass() != elementType) return false;
+  public boolean contains(Object object) {
+    if (object == null) {
+      return false;
+    }
+    Class<?> eClass = object.getClass();
+    if (eClass != elementType && eClass.getSuperclass() != elementType) {
+      return false;
+    }
 
-    return (elements & bitMasks[((Enum<?>) e).ordinal()]) != 0;
+    return (elements & bitMasks[((Enum<?>) object).ordinal()]) != 0;
   }
 
   // Modification Operations
@@ -741,17 +761,21 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
   /**
    * Removes the specified element from this set if it is present.
    *
-   * @param e element to be removed from this set, if present
+   * @param object element to be removed from this set, if present
    * @return true if the set contained the specified element
    */
   @Override
-  public boolean remove(Object e) {
-    if (e == null) return false;
-    Class<?> eClass = e.getClass();
-    if (eClass != elementType && eClass.getSuperclass() != elementType) return false;
+  public boolean remove(Object object) {
+    if (object == null) {
+      return false;
+    }
+    Class<?> eClass = object.getClass();
+    if (eClass != elementType && eClass.getSuperclass() != elementType) {
+      return false;
+    }
 
     long oldElements = elements;
-    elements &= ~bitMasks[((Enum<?>) e).ordinal()];
+    elements &= ~bitMasks[((Enum<?>) object).ordinal()];
     return elements != oldElements;
   }
 
@@ -766,10 +790,14 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    */
   @Override
   public boolean containsAll(Collection<?> c) {
-    if (!(c instanceof BitFieldSet)) return super.containsAll(c);
+    if (!(c instanceof BitFieldSet)) {
+      return super.containsAll(c);
+    }
 
     BitFieldSet<?> es = (BitFieldSet<?>) c;
-    if (es.elementType != elementType) return es.isEmpty();
+    if (es.elementType != elementType) {
+      return es.isEmpty();
+    }
 
     return (es.elements & ~elements) == 0;
   }
@@ -783,7 +811,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    */
   @Override
   public boolean addAll(Collection<? extends E> c) {
-    if (!(c instanceof BitFieldSet)) return super.addAll(c);
+    if (!(c instanceof BitFieldSet)) {
+      return super.addAll(c);
+    }
 
     BitFieldSet<?> es = (BitFieldSet<?>) c;
     if (es.elementType != elementType) {
@@ -808,10 +838,14 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    */
   @Override
   public boolean removeAll(Collection<?> c) {
-    if (!(c instanceof BitFieldSet)) return super.removeAll(c);
+    if (!(c instanceof BitFieldSet)) {
+      return super.removeAll(c);
+    }
 
     BitFieldSet<?> es = (BitFieldSet<?>) c;
-    if (es.elementType != elementType) return false;
+    if (es.elementType != elementType) {
+      return false;
+    }
 
     long oldElements = elements;
     elements &= ~es.elements;
@@ -827,7 +861,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    */
   @Override
   public boolean retainAll(Collection<?> c) {
-    if (!(c instanceof BitFieldSet)) return super.retainAll(c);
+    if (!(c instanceof BitFieldSet)) {
+      return super.retainAll(c);
+    }
 
     BitFieldSet<?> es = (BitFieldSet<?>) c;
     if (es.elementType != elementType) {
@@ -920,15 +956,19 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * also a set, the two sets have the same size, and every member of the given set is contained in
    * this set.
    *
-   * @param o object to be compared for equality with this set
+   * @param object object to be compared for equality with this set
    * @return true if the specified object is equal to this set
    */
   @Override
-  public boolean equals(Object o) {
-    if (!(o instanceof BitFieldSet)) return super.equals(o);
+  public boolean equals(Object object) {
+    if (!(object instanceof BitFieldSet)) {
+      return super.equals(object);
+    }
 
-    BitFieldSet<?> es = (BitFieldSet<?>) o;
-    if (es.elementType != elementType) return elements == 0 && es.elements == 0;
+    BitFieldSet<?> es = (BitFieldSet<?>) object;
+    if (es.elementType != elementType) {
+      return elements == 0 && es.elements == 0;
+    }
     return es.elements == elements;
   }
 
@@ -941,7 +981,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @throws NullPointerException if elementType is null
    */
   public static <E extends Enum<E>> BitFieldSet<E> noneOf(Class<E> elementType) {
-    if (!elementType.isEnum()) throw new ClassCastException(elementType + " not an enum");
+    if (!elementType.isEnum()) {
+      throw new ClassCastException(elementType + " not an enum");
+    }
 
     Enum<?>[] universe = getUniverse(elementType);
 
@@ -1159,7 +1201,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
       return ((BitFieldSet<E>) c).clone();
     }
 
-    if (c.isEmpty()) throw new IllegalArgumentException("Collection is empty");
+    if (c.isEmpty()) {
+      throw new IllegalArgumentException("Collection is empty");
+    }
     Iterator<E> i = c.iterator();
     E first = i.next();
     BitFieldSet<E> result = BitFieldSet.of(first);
@@ -1355,7 +1399,9 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @throws IllegalArgumentException if {@code from.compareTo(to) > 0}
    */
   public static <E extends Enum<E>> BitFieldSet<E> range(E from, E to) {
-    if (from.compareTo(to) > 0) throw new IllegalArgumentException(from + " > " + to);
+    if (from.compareTo(to) > 0) {
+      throw new IllegalArgumentException(from + " > " + to);
+    }
     BitFieldSet<E> result = noneOf(from.getDeclaringClass());
     result.addRange(from, to);
     return result;

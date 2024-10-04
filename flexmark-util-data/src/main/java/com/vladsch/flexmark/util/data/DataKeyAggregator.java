@@ -43,11 +43,4 @@ public interface DataKeyAggregator {
    */
   @Nullable
   Set<Class<?>> invokeAfterSet();
-
-  //    /**
-  //     * return a set of aggregator classes this aggregator should run before
-  //     *
-  //     * @return keys
-  //     */
-  //    @Nullable Set<Class<?>> invokeBeforeSet();
 }

@@ -87,7 +87,9 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
 
       while (endOffset < base.length()) {
         char c = base.charAt(endOffset);
-        if (c != ' ' && c != '\t') break;
+        if (c != ' ' && c != '\t') {
+          break;
+        }
         endOffset++;
       }
 

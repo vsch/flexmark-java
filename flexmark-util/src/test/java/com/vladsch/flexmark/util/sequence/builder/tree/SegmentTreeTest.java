@@ -212,7 +212,9 @@ public class SegmentTreeTest {
                     for (int l = 0; l < finalK; l++) {
                       segment[0] = l;
                       startIndex[0] = i + Math.max(0, l - 1) * 1000;
-                      if (j >= startIndex[0] && j < i + l * 1000) break;
+                      if (j >= startIndex[0] && j < i + l * 1000) {
+                        break;
+                      }
                       segment[0] = l + 1;
                     }
 

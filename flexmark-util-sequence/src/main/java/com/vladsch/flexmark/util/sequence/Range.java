@@ -388,10 +388,14 @@ public class Range {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Range)) return false;
-    Range range = (Range) o;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (!(object instanceof Range)) {
+      return false;
+    }
+    Range range = (Range) object;
     return start == range.start && end == range.end;
   }
 

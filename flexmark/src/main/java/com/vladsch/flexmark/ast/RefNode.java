@@ -200,7 +200,9 @@ public abstract class RefNode extends Node
 
   @Override
   public Reference getReferenceNode(ReferenceRepository repository) {
-    if (repository == null) return null;
+    if (repository == null) {
+      return null;
+    }
     String normalizeRef = repository.normalizeKey(reference);
     return repository.get(normalizeRef);
   }
@@ -265,18 +267,26 @@ public abstract class RefNode extends Node
     if (urlType == F_LINK_TEXT) {
       // To allow using leading/trailing spaces for generating heading ids, need to include stripped
       // out spaces
-      if (BitFieldSet.any(flags, F_FOR_HEADING_ID) && this instanceof ImageRef) return false;
+      if (BitFieldSet.any(flags, F_FOR_HEADING_ID) && this instanceof ImageRef) {
+        return false;
+      }
 
       if (BitFieldSet.any(flags, F_FOR_HEADING_ID)
           && BitFieldSet.any(flags, F_NO_TRIM_REF_TEXT_START | F_NO_TRIM_REF_TEXT_END)) {
         BasedSequence[] segments = getSegments();
-        if (BitFieldSet.any(flags, F_NO_TRIM_REF_TEXT_START))
+
+        if (BitFieldSet.any(flags, F_NO_TRIM_REF_TEXT_START)) {
           out.append(
               getChars().baseSubSequence(segments[0].getEndOffset(), segments[1].getStartOffset()));
+        }
+
         nodeVisitor.visitChildren(this);
-        if (BitFieldSet.any(flags, F_NO_TRIM_REF_TEXT_END))
+
+        if (BitFieldSet.any(flags, F_NO_TRIM_REF_TEXT_END)) {
           out.append(
               getChars().baseSubSequence(segments[1].getEndOffset(), segments[2].getStartOffset()));
+        }
+
         return false;
       }
 

@@ -126,8 +126,12 @@ public class ReplacedTextMapper {
   public int originalOffset(int replacedIndex) {
     finalizeMods();
 
-    if (regions.isEmpty()) return parentOriginalOffset(replacedIndex);
-    if (replacedIndex == replacedLength) return parentOriginalOffset(original.length());
+    if (regions.isEmpty()) {
+      return parentOriginalOffset(replacedIndex);
+    }
+    if (replacedIndex == replacedLength) {
+      return parentOriginalOffset(original.length());
+    }
 
     int originalIndex = replacedIndex;
 

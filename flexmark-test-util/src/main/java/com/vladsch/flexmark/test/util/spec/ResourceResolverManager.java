@@ -28,7 +28,9 @@ public class ResourceResolverManager {
 
     for (Function<String, String> resolver : urlResolvers) {
       String filePath = resolver.apply(externalForm);
-      if (filePath == null) continue;
+      if (filePath == null) {
+        continue;
+      }
 
       if (hasProtocol(filePath) && bestProtocolMatch == null) {
         bestProtocolMatch = filePath;

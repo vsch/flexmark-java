@@ -269,7 +269,9 @@ public interface SequenceUtils {
     endIndex = Math.min(thizz.length(), endIndex);
 
     for (int i = fromIndex; i < endIndex; i++) {
-      if (c == thizz.charAt(i)) return i;
+      if (c == thizz.charAt(i)) {
+        return i;
+      }
     }
     return -1;
   }
@@ -280,7 +282,9 @@ public interface SequenceUtils {
     fromIndex = Math.max(fromIndex, 0);
 
     int sMax = s.length();
-    if (sMax == 0) return fromIndex;
+    if (sMax == 0) {
+      return fromIndex;
+    }
     endIndex = Math.min(thizz.length(), endIndex);
 
     if (fromIndex < endIndex) {
@@ -289,8 +293,12 @@ public interface SequenceUtils {
 
       do {
         pos = indexOf(thizz, firstChar, pos);
-        if (pos < 0 || pos + sMax > endIndex) break;
-        if (matchChars(thizz, s, pos)) return pos;
+        if (pos < 0 || pos + sMax > endIndex) {
+          break;
+        }
+        if (matchChars(thizz, s, pos)) {
+          return pos;
+        }
         pos++;
       } while (pos + sMax < endIndex);
     }
@@ -305,7 +313,9 @@ public interface SequenceUtils {
     startIndex = Math.max(startIndex, 0);
 
     for (int i = fromIndex; i-- > startIndex; ) {
-      if (c == thizz.charAt(i)) return i;
+      if (c == thizz.charAt(i)) {
+        return i;
+      }
     }
     return -1;
   }
@@ -315,7 +325,9 @@ public interface SequenceUtils {
     endIndex = Math.min(endIndex, thizz.length());
 
     for (int i = fromIndex; i < endIndex; i++) {
-      if (thizz.charAt(i) != c) return i;
+      if (thizz.charAt(i) != c) {
+        return i;
+      }
     }
     return -1;
   }
@@ -327,7 +339,9 @@ public interface SequenceUtils {
 
     for (int i = fromIndex; i < endIndex; i++) {
       char c = thizz.charAt(i);
-      if (s.test(c)) return i;
+      if (s.test(c)) {
+        return i;
+      }
     }
     return -1;
   }
@@ -338,7 +352,9 @@ public interface SequenceUtils {
     startIndex = Math.max(startIndex, 0);
 
     int sMax = s.length();
-    if (sMax == 0) return startIndex;
+    if (sMax == 0) {
+      return startIndex;
+    }
 
     fromIndex = Math.min(fromIndex, thizz.length());
 
@@ -348,8 +364,12 @@ public interface SequenceUtils {
 
       do {
         pos = lastIndexOf(thizz, lastChar, pos);
-        if (pos + 1 < startIndex + sMax) break;
-        if (matchCharsReversed(thizz, s, pos)) return pos + 1 - sMax;
+        if (pos + 1 < startIndex + sMax) {
+          break;
+        }
+        if (matchCharsReversed(thizz, s, pos)) {
+          return pos + 1 - sMax;
+        }
         pos--;
       } while (pos + 1 >= startIndex + sMax);
     }
@@ -365,7 +385,9 @@ public interface SequenceUtils {
     startIndex = Math.max(startIndex, 0);
 
     for (int i = fromIndex; i-- > startIndex; ) {
-      if (thizz.charAt(i) != c) return i;
+      if (thizz.charAt(i) != c) {
+        return i;
+      }
     }
     return -1;
   }
@@ -380,7 +402,9 @@ public interface SequenceUtils {
 
     for (int i = fromIndex; i-- > startIndex; ) {
       char c = thizz.charAt(i);
-      if (s.test(c)) return i;
+      if (s.test(c)) {
+        return i;
+      }
     }
     return -1;
   }
@@ -396,20 +420,30 @@ public interface SequenceUtils {
   @Contract(pure = true, value = "_, null -> false")
   static boolean equals(@NotNull CharSequence thizz, Object o) {
     // do quick failure of equality
-    if (o == thizz) return true;
-    if (!(o instanceof CharSequence)) return false;
+    if (o == thizz) {
+      return true;
+    }
+    if (!(o instanceof CharSequence)) {
+      return false;
+    }
 
     CharSequence chars = (CharSequence) o;
-    if (chars.length() != thizz.length()) return false;
+    if (chars.length() != thizz.length()) {
+      return false;
+    }
 
     if (o instanceof String) {
       String other = (String) o;
-      if (other.hashCode() != thizz.hashCode()) return false;
+      if (other.hashCode() != thizz.hashCode()) {
+        return false;
+      }
 
       // fall through to slow content comparison
     } else if (o instanceof IRichSequence) {
       IRichSequence<?> other = (IRichSequence<?>) o;
-      if (other.hashCode() != thizz.hashCode()) return false;
+      if (other.hashCode() != thizz.hashCode()) {
+        return false;
+      }
 
       // fall through to slow content comparison
     }
@@ -446,7 +480,9 @@ public interface SequenceUtils {
       @Nullable CharSequence o2,
       boolean ignoreCase,
       @Nullable CharPredicate ignoreChars) {
-    if (o1 == null || o2 == null) return o1 == null && o2 == null ? 0 : o1 == null ? -1 : 1;
+    if (o1 == null || o2 == null) {
+      return o1 == null && o2 == null ? 0 : o1 == null ? -1 : 1;
+    }
 
     int len1 = o1.length();
     int len2 = o2.length();
@@ -535,9 +571,13 @@ public interface SequenceUtils {
   @NotNull
   static int[] indexOfAll(@NotNull CharSequence thizz, @NotNull CharSequence s) {
     int length = s.length();
-    if (length == 0) return SequenceUtils.EMPTY_INDICES;
+    if (length == 0) {
+      return SequenceUtils.EMPTY_INDICES;
+    }
     int pos = indexOf(thizz, s);
-    if (pos == -1) return SequenceUtils.EMPTY_INDICES;
+    if (pos == -1) {
+      return SequenceUtils.EMPTY_INDICES;
+    }
 
     int iMax = 0;
     int[] indices = new int[32];
@@ -545,8 +585,12 @@ public interface SequenceUtils {
 
     while (true) {
       pos = indexOf(thizz, s, pos + length);
-      if (pos == -1) break;
-      if (indices.length <= iMax) indices = expandTo(indices, iMax + 1, 32);
+      if (pos == -1) {
+        break;
+      }
+      if (indices.length <= iMax) {
+        indices = expandTo(indices, iMax + 1, 32);
+      }
       indices[iMax++] = pos;
     }
     return truncateTo(indices, iMax);
@@ -688,7 +732,9 @@ public interface SequenceUtils {
     int length = chars.length();
     endIndex = Math.min(thizz.length(), endIndex);
     int iMax = Math.min(endIndex - startIndex, length);
-    if (fullMatchOnly && iMax < length) return 0;
+    if (fullMatchOnly && iMax < length) {
+      return 0;
+    }
 
     if (ignoreCase) {
       for (int i = 0; i < iMax; i++) {
@@ -712,7 +758,9 @@ public interface SequenceUtils {
       }
     } else {
       for (int i = 0; i < iMax; i++) {
-        if (chars.charAt(i) != thizz.charAt(i + startIndex)) return i;
+        if (chars.charAt(i) != thizz.charAt(i + startIndex)) {
+          return i;
+        }
       }
     }
     return iMax;
@@ -754,7 +802,9 @@ public interface SequenceUtils {
       }
     } else {
       for (int i = iMax; i-- > 0; ) {
-        if (chars.charAt(i) != thizz.charAt(offset + i)) return iMax - i - 1;
+        if (chars.charAt(i) != thizz.charAt(offset + i)) {
+          return iMax - i - 1;
+        }
       }
     }
     return iMax;
@@ -1221,7 +1271,9 @@ public interface SequenceUtils {
   @NotNull
   static Range trimRange(@NotNull CharSequence thizz, int keep, @NotNull CharPredicate chars) {
     int length = thizz.length();
-    if (keep >= length) return Range.NULL;
+    if (keep >= length) {
+      return Range.NULL;
+    }
 
     int trimStart = countLeading(thizz, chars, 0, length);
     if (trimStart > keep) {
@@ -1298,7 +1350,9 @@ public interface SequenceUtils {
 
   static int eolEndLength(@NotNull CharSequence thizz, int eolEnd) {
     int pos = Math.min(eolEnd - 1, thizz.length() - 1);
-    if (pos < 0) return 0;
+    if (pos < 0) {
+      return 0;
+    }
 
     int len = 0;
     char c = thizz.charAt(pos);
@@ -1483,12 +1537,18 @@ public interface SequenceUtils {
       char c = thizz.charAt(i);
       if (eolChars.test(c))
         lastEOL = Math.min(i + Math.min(eolStartLength(thizz, i), 1), fromIndex);
-      else if (c != ' ' && c != '\t') break;
+      else if (c != ' ' && c != '\t') {
+        break;
+      }
     }
 
-    if (i < startIndex) return Range.of(startIndex, fromIndex);
-    else if (lastEOL != iMax) return Range.of(lastEOL, fromIndex);
-    else return Range.NULL;
+    if (i < startIndex) {
+      return Range.of(startIndex, fromIndex);
+    } else if (lastEOL != iMax) {
+      return Range.of(lastEOL, fromIndex);
+    } else {
+      return Range.NULL;
+    }
   }
 
   @NotNull
@@ -1503,15 +1563,21 @@ public interface SequenceUtils {
 
     for (i = fromIndex; i < iMax; i++) {
       char c = thizz.charAt(i);
-      if (eolChars.test(c)) lastEOL = i;
-      else if (c != ' ' && c != '\t') break;
+      if (eolChars.test(c)) {
+        lastEOL = i;
+      } else if (c != ' ' && c != '\t') {
+        break;
+      }
     }
 
-    if (i == iMax) return Range.of(fromIndex, endIndex);
-    else if (lastEOL >= 0)
+    if (i == iMax) {
+      return Range.of(fromIndex, endIndex);
+    } else if (lastEOL >= 0) {
       return Range.of(
           fromIndex, Math.min(lastEOL + Math.min(eolStartLength(thizz, lastEOL), 1), endIndex));
-    else return Range.NULL;
+    } else {
+      return Range.NULL;
+    }
   }
 
   @NotNull
@@ -1775,7 +1841,9 @@ public interface SequenceUtils {
     if (limit > 1) {
       while (lastPos < length) {
         int pos = indexOf(thizz, delimiter, lastPos);
-        if (pos < 0) break;
+        if (pos < 0) {
+          break;
+        }
 
         if (lastPos < pos || !skipEmpty) {
           T item = (T) thizz.subSequence(lastPos, pos + includeDelimiter);
@@ -1938,7 +2006,9 @@ public interface SequenceUtils {
    */
   @Nullable
   static Number parseNumberOrNull(@Nullable String text) {
-    if (text == null) return null;
+    if (text == null) {
+      return null;
+    }
 
     if (text.startsWith("0x")) {
       return parseLongOrNull(text.substring(2), 16);
@@ -1946,7 +2016,9 @@ public interface SequenceUtils {
       return parseLongOrNull(text.substring(2), 2);
     } else if (text.startsWith("0")) {
       Number octal = parseLongOrNull(text.substring(1), 8);
-      if (octal != null) return octal;
+      if (octal != null) {
+        return octal;
+      }
     }
 
     NumberFormat numberFormat = NumberFormat.getInstance();
@@ -1968,7 +2040,9 @@ public interface SequenceUtils {
   @Nullable
   static Pair<Number, String> parseNumberPrefixOrNull(
       @Nullable String text, @Nullable Predicate<String> suffixTester) {
-    if (text == null) return null;
+    if (text == null) {
+      return null;
+    }
 
     if (text.startsWith("0x")) {
       int digits = countLeading(text.substring(2), CharPredicate.HEXADECIMAL_DIGITS);
@@ -2008,7 +2082,9 @@ public interface SequenceUtils {
   static <T extends CharSequence> boolean containedBy(
       @NotNull T[] items, @NotNull CharSequence element) {
     for (T item : items) {
-      if (equals(element, item)) return true;
+      if (equals(element, item)) {
+        return true;
+      }
     }
     return false;
   }
@@ -2016,7 +2092,9 @@ public interface SequenceUtils {
   static boolean containedBy(
       @NotNull Collection<? extends CharSequence> items, @NotNull CharSequence element) {
     for (CharSequence item : items) {
-      if (equals(element, item)) return true;
+      if (equals(element, item)) {
+        return true;
+      }
     }
     return false;
   }

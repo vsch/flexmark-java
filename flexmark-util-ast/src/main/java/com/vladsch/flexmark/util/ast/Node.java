@@ -114,7 +114,9 @@ public abstract class Node {
     Node parent = getParent();
     while (parent != null) {
       for (Class<?> nodeType : classes) {
-        if (nodeType.isInstance(parent)) return parent;
+        if (nodeType.isInstance(parent)) {
+          return parent;
+        }
       }
       parent = parent.getParent();
     }
@@ -166,7 +168,9 @@ public abstract class Node {
     Node oldestAncestor = null;
     while (parent != null) {
       if (ancestor.isInstance(parent)) oldestAncestor = parent;
-      else if (after.isInstance(parent)) break;
+      else if (after.isInstance(parent)) {
+        break;
+      }
       parent = parent.getParent();
     }
     return oldestAncestor;
@@ -176,7 +180,9 @@ public abstract class Node {
     Node child = getFirstChild();
     while (child != null) {
       for (Class<?> nodeType : classes) {
-        if (nodeType.isInstance(child)) return child;
+        if (nodeType.isInstance(child)) {
+          return child;
+        }
       }
       child = child.getNext();
     }
@@ -186,7 +192,9 @@ public abstract class Node {
   public static int getNodeOfTypeIndex(@NotNull Node node, @NotNull Class<?>... classes) {
     int i = 0;
     for (Class<?> nodeType : classes) {
-      if (nodeType.isInstance(node)) return i;
+      if (nodeType.isInstance(node)) {
+        return i;
+      }
       i++;
     }
     return -1;
@@ -195,7 +203,9 @@ public abstract class Node {
   public boolean isOrDescendantOfType(@NotNull Class<?>... classes) {
     Node node = this;
     while (node != null) {
-      if (node.getNodeOfTypeIndex(classes) != -1) return true;
+      if (node.getNodeOfTypeIndex(classes) != -1) {
+        return true;
+      }
       node = node.getParent();
     }
     return false;
@@ -279,7 +289,9 @@ public abstract class Node {
       int count = 0;
       for (Node child : getChildren()) {
         count++;
-        if (count >= childCount) return true;
+        if (count >= childCount) {
+          return true;
+        }
       }
     }
     return false;
@@ -561,7 +573,9 @@ public abstract class Node {
   @NotNull
   public static BasedSequence getLeadSegment(@NotNull BasedSequence[] segments) {
     for (BasedSequence segment : segments) {
-      if (segment != BasedSequence.NULL) return segment;
+      if (segment != BasedSequence.NULL) {
+        return segment;
+      }
     }
 
     return BasedSequence.NULL;
@@ -573,7 +587,9 @@ public abstract class Node {
 
     for (int i = iMax; i-- > 0; ) {
       BasedSequence segment = segments[i];
-      if (segment != BasedSequence.NULL) return segment;
+      if (segment != BasedSequence.NULL) {
+        return segment;
+      }
     }
 
     return BasedSequence.NULL;
@@ -874,7 +890,9 @@ public abstract class Node {
 
     while (parent.parent != null) {
       boolean wasLastItem = parent == parent.parent.getLastChildAnyNot(BlankLine.class);
-      if (!wasLastItem) break;
+      if (!wasLastItem) {
+        break;
+      }
 
       lastBlankLineSibling = nextBlankLineSibling;
       if (parent instanceof BlankLineContainer) {
@@ -882,7 +900,9 @@ public abstract class Node {
       }
 
       parent = parent.parent;
-      if (parent == null) break;
+      if (parent == null) {
+        break;
+      }
     }
 
     return lastBlankLineSibling;

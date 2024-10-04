@@ -87,8 +87,8 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
   }
 
   @Override
-  public boolean equals(Object o) {
-    return chars.equals(o);
+  public boolean equals(Object object) {
+    return chars.equals(object);
   }
 
   @Override

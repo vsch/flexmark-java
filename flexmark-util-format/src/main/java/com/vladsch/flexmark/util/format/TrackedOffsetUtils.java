@@ -71,7 +71,9 @@ public class TrackedOffsetUtils {
         }
 
         length += line.length();
-        if (unresolved <= 0) break;
+        if (unresolved <= 0) {
+          break;
+        }
       }
     }
   }

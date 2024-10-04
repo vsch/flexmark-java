@@ -29,7 +29,9 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
       char c1 = chars.charAt(i);
 
       if (c == SequenceUtils.EOL_CHAR) prevEolPos = i + 1;
-      if (c1 != c) return i;
+      if (c1 != c) {
+        return i;
+      }
     }
     return iMax;
   }
@@ -48,7 +50,9 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
       char c = base.charAt(baseOffset + i);
       char c1 = chars.charAt(charsOffset + i);
 
-      if (c1 != c) return charsOffset + i + 1;
+      if (c1 != c) {
+        return charsOffset + i + 1;
+      }
     }
     return charsOffset;
   }
@@ -59,7 +63,9 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
     if (parts.length != 3
         || !(parts[0] instanceof Range
             && parts[1] instanceof CharSequence
-            && parts[2] instanceof Range)) return parts;
+            && parts[2] instanceof Range)) {
+      return parts;
+    }
 
     final @NotNull Range originalPrev = (Range) parts[0];
     @NotNull CharSequence originalText = (CharSequence) parts[1];
@@ -67,7 +73,9 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
 
     // optimizer already applied
     final int textLength = originalText.length();
-    if (originalPrev.isNull() && originalNext.isNull() || textLength == 0) return parts;
+    if (originalPrev.isNull() && originalNext.isNull() || textLength == 0) {
+      return parts;
+    }
 
     final int charsLength = chars.length();
 

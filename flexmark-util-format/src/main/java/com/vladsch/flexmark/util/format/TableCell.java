@@ -329,17 +329,27 @@ public class TableCell {
   }
 
   public int getTextStartOffset(TableCell previousCell) {
-    if (!text.isEmpty()) return text.getStartOffset();
-    else if (!openMarker.isEmpty()) return openMarker.getEndOffset() + 1;
-    else if (previousCell != null) return previousCell.getEndOffset() + 1;
-    else return closeMarker.getStartOffset() - 1;
+    if (!text.isEmpty()) {
+      return text.getStartOffset();
+    } else if (!openMarker.isEmpty()) {
+      return openMarker.getEndOffset() + 1;
+    } else if (previousCell != null) {
+      return previousCell.getEndOffset() + 1;
+    } else {
+      return closeMarker.getStartOffset() - 1;
+    }
   }
 
   public int getTextEndOffset(TableCell previousCell) {
-    if (!text.isEmpty()) return text.getEndOffset();
-    else if (!openMarker.isEmpty()) return openMarker.getEndOffset() + 1;
-    else if (previousCell != null) return previousCell.getEndOffset() + 1;
-    else return closeMarker.getStartOffset() - 1;
+    if (!text.isEmpty()) {
+      return text.getEndOffset();
+    } else if (!openMarker.isEmpty()) {
+      return openMarker.getEndOffset() + 1;
+    } else if (previousCell != null) {
+      return previousCell.getEndOffset() + 1;
+    } else {
+      return closeMarker.getStartOffset() - 1;
+    }
   }
 
   public int getInsideEndOffset() {

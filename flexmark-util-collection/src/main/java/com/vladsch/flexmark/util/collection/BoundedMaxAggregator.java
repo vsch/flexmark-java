@@ -12,7 +12,10 @@ public class BoundedMaxAggregator implements BiFunction<Integer, Integer, Intege
 
   @Override
   public Integer apply(@Nullable Integer aggregate, @Nullable Integer next) {
-    if (next != null && next < maxBound) return MaxAggregator.INSTANCE.apply(aggregate, next);
-    else return aggregate;
+    if (next != null && next < maxBound) {
+      return MaxAggregator.INSTANCE.apply(aggregate, next);
+    }
+
+    return aggregate;
   }
 }

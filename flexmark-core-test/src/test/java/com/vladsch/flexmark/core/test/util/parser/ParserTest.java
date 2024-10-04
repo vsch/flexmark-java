@@ -399,7 +399,9 @@ public class ParserTest {
     StringBuilder sb = new StringBuilder();
 
     for (SpecialLeadInHandler handler : handlers) {
-      if (handler.escape(baseSeq, parser.getOptions(), sb::append)) return sb.toString();
+      if (handler.escape(baseSeq, parser.getOptions(), sb::append)) {
+        return sb.toString();
+      }
     }
     return input;
   }
@@ -410,7 +412,9 @@ public class ParserTest {
     StringBuilder sb = new StringBuilder();
 
     for (SpecialLeadInHandler handler : handlers) {
-      if (handler.unEscape(baseSeq, parser.getOptions(), sb::append)) return sb.toString();
+      if (handler.unEscape(baseSeq, parser.getOptions(), sb::append)) {
+        return sb.toString();
+      }
     }
     return input;
   }

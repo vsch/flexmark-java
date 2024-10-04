@@ -194,7 +194,9 @@ public class CoreNodeFormatter
   @Override
   public Set<Class<?>> getNodeClasses() {
     if (formatterOptions.referencePlacement.isNoChange()
-        || !formatterOptions.referenceSort.isUnused()) return null;
+        || !formatterOptions.referenceSort.isUnused()) {
+      return null;
+    }
     return new HashSet<>(Arrays.asList(RefNode.class));
   }
 
@@ -407,7 +409,9 @@ public class CoreNodeFormatter
 
         switch (formatterOptions.atxHeadingTrailingMarker) {
           case EQUALIZE:
-            if (node.getClosingMarker().isNull()) break;
+            if (node.getClosingMarker().isNull()) {
+              break;
+            }
             // fall through
           case ADD:
             if (spaceAfterAtx) markdown.append(' ');

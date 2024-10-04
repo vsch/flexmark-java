@@ -88,7 +88,9 @@ public class MutableAttributes extends Attributes {
   }
 
   public Attribute removeValue(CharSequence key, CharSequence value) {
-    if (attributes == null || key == null || key.length() == 0) return null;
+    if (attributes == null || key == null || key.length() == 0) {
+      return null;
+    }
 
     String useKey = String.valueOf(key);
     Attribute oldAttribute = attributes.get(useKey);
@@ -102,7 +104,9 @@ public class MutableAttributes extends Attributes {
   }
 
   public Attribute remove(CharSequence key) {
-    if (attributes == null || key == null || key.length() == 0) return null;
+    if (attributes == null || key == null || key.length() == 0) {
+      return null;
+    }
 
     String useKey = String.valueOf(key);
     Attribute oldAttribute = attributes.get(useKey);

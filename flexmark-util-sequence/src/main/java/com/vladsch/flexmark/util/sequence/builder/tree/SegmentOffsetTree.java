@@ -72,7 +72,9 @@ public class SegmentOffsetTree extends SegmentTree {
     if (segment.getPos() == 0) {
       if (segment.getStartIndex() > 0) {
         Segment textSeg = getSegment(0, -1, 0, baseSeq);
-        if (textSeg.isText()) return textSeg;
+        if (textSeg.isText()) {
+          return textSeg;
+        }
       }
     } else {
       Segment prevSegment = getSegment(segment.getPos() - 1, baseSeq);
@@ -90,7 +92,9 @@ public class SegmentOffsetTree extends SegmentTree {
               -1,
               segment.getEndIndex(),
               baseSeq);
-      if (textSeg.isText()) return textSeg;
+      if (textSeg.isText()) {
+        return textSeg;
+      }
     }
     return null;
   }

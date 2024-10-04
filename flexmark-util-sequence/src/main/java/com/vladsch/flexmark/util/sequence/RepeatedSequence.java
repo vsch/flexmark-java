@@ -30,7 +30,9 @@ public class RepeatedSequence implements CharSequence {
 
   @Override
   public char charAt(int index) {
-    if (index < 0 || index >= endIndex - startIndex) throw new IndexOutOfBoundsException();
+    if (index < 0 || index >= endIndex - startIndex) {
+      throw new IndexOutOfBoundsException();
+    }
     return chars.charAt((startIndex + index) % chars.length());
   }
 

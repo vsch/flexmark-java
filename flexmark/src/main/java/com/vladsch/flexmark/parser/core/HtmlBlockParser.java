@@ -224,13 +224,17 @@ public class HtmlBlockParser extends AbstractBlockParser {
       while (lastIndex < length) {
         // find the opening HTML comment
         int index = chars.indexOf(HTML_COMMENT_OPEN, lastIndex);
-        if (index < 0) break;
+        if (index < 0) {
+          break;
+        }
 
         // now lets find -->
         int end = chars.indexOf(HTML_COMMENT_CLOSE, index + HTML_COMMENT_OPEN.length());
 
         // if unterminated, ignore
-        if (end < 0) break;
+        if (end < 0) {
+          break;
+        }
 
         if (lastIndex < index) {
           HtmlInnerBlock html = new HtmlInnerBlock(chars.subSequence(lastIndex, index));

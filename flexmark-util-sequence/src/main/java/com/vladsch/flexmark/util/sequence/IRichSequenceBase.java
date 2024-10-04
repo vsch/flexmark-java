@@ -43,13 +43,13 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
    * Equality comparison based on character content of this sequence, with quick fail resorting to
    * content comparison only if length and hashCodes are equal
    *
-   * @param o any char sequence
+   * @param object any char sequence
    * @return true if character contents are equal
    */
   @Override
   @Contract(pure = true, value = "null -> false")
-  public final boolean equals(Object o) {
-    return SequenceUtils.equals(this, o);
+  public final boolean equals(Object object) {
+    return SequenceUtils.equals(this, object);
   }
 
   /**
@@ -184,7 +184,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   @Override
   public final char endCharAt(int index) {
     int length = length();
-    if (index < 0 || index >= length) return SequenceUtils.NUL;
+    if (index < 0 || index >= length) {
+      return SequenceUtils.NUL;
+    }
     return charAt(length - index);
   }
 
@@ -209,7 +211,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   @Override
   public final char midCharAt(int index) {
     int length = length();
-    if (index < -length || index >= length) return SequenceUtils.NUL;
+    if (index < -length || index >= length) {
+      return SequenceUtils.NUL;
+    }
     return charAt(index < 0 ? length + index : index);
   }
 
@@ -1396,7 +1400,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   public final T nullIf(
       @NotNull BiPredicate<? super T, ? super CharSequence> predicate, CharSequence... matches) {
     for (CharSequence match : matches) {
-      if (predicate.test((T) this, match)) return nullSequence();
+      if (predicate.test((T) this, match)) {
+        return nullSequence();
+      }
     }
     return (T) this;
   }
@@ -2130,7 +2136,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   public T suffixWith(@Nullable CharSequence suffix) {
     // convoluted to allow BasedCharSequence to use PrefixedCharSequence so all fits into
     // SegmentedCharSequence
-    if (suffix == null || suffix.length() == 0) return (T) this;
+    if (suffix == null || suffix.length() == 0) {
+      return (T) this;
+    }
     return getBuilder().add(this).add(suffix).toSequence();
   }
 
@@ -2169,7 +2177,9 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   @Override
   public final T replace(@NotNull CharSequence find, @NotNull CharSequence replace) {
     int[] indices = indexOfAll(find);
-    if (indices.length == 0) return (T) this;
+    if (indices.length == 0) {
+      return (T) this;
+    }
     ISequenceBuilder<?, T> segments = getBuilder();
 
     int iMax = indices.length;

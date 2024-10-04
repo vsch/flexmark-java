@@ -157,7 +157,9 @@ public class FormatterUtils {
   }
 
   public static BasedSequence getSoftLineBreakSpan(Node node) {
-    if (node == null) return NULL;
+    if (node == null) {
+      return NULL;
+    }
 
     Node lastNode = node;
     Node nextNode = node.getNext();
@@ -329,13 +331,17 @@ public class FormatterUtils {
     while (node != null) {
       if (node.getNextAnyNot(
               HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class)
-          instanceof BlankLine) return true;
+          instanceof BlankLine) {
+        return true;
+      }
       if (node.getNextAnyNot(
               BlankLine.class,
               HtmlCommentBlock.class,
               HtmlInnerBlockComment.class,
               HtmlInlineComment.class)
-          != null) return false;
+          != null) {
+        return false;
+      }
       node = node.getParent();
     }
     return false;
@@ -348,7 +354,9 @@ public class FormatterUtils {
               HtmlCommentBlock.class,
               HtmlInnerBlockComment.class,
               HtmlInlineComment.class)
-          != null) return true;
+          != null) {
+        return true;
+      }
       node = node.getParent();
     }
     return false;
@@ -619,7 +627,9 @@ public class FormatterUtils {
 
         while (true) {
           childNode = childNode.getNext();
-          if (childNode == null) break;
+          if (childNode == null) {
+            break;
+          }
           context.render(childNode);
         }
 

@@ -65,7 +65,9 @@ public class ComboTableSpecTest extends RendererSpecTest {
 
   @Test
   public void testTable() {
-    if (!example.isFullSpecExample()) return;
+    if (!example.isFullSpecExample()) {
+      return;
+    }
 
     String source = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.md");
     String html = Utils.getResourceAsString(ComboTableSpecTest.class, "/table.html");

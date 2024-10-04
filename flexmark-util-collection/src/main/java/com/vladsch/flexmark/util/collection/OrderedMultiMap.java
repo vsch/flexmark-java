@@ -114,7 +114,10 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
   }
 
   public Indexed<Map.Entry<K, V>> getIndexedProxy() {
-    if (indexedProxy != null) return indexedProxy;
+    if (indexedProxy != null) {
+      return indexedProxy;
+    }
+
     indexedProxy =
         new Indexed<>() {
           @Override
@@ -425,31 +428,32 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return false;
   }
 
-  public V removeKey(Object o) {
+  public V removeKey(Object object) {
     isInKeyUpdate = true;
     if (host != null && !host.skipHostUpdate()) {
-      int index = keySet.indexOf(o);
+      int index = keySet.indexOf(object);
       if (index != -1) {
         host.removing(
             index,
-            new Pair<>((K) o, valueSet.isValidIndex(index) ? valueSet.getValue(index) : null));
+            new Pair<>((K) object, valueSet.isValidIndex(index) ? valueSet.getValue(index) : null));
       }
     }
-    V r = (V) keySet.removeHosted(o);
+    V r = (V) keySet.removeHosted(object);
     isInKeyUpdate = false;
     return r;
   }
 
-  public K removeValue(Object o) {
+  public K removeValue(Object object) {
     isInValueUpdate = true;
-    int index = valueSet.indexOf(o);
+    int index = valueSet.indexOf(object);
     if (host != null && !host.skipHostUpdate()) {
       if (index != -1) {
         host.removing(
-            index, new Pair<>(keySet.isValidIndex(index) ? keySet.getValue(index) : null, (V) o));
+            index,
+            new Pair<>(keySet.isValidIndex(index) ? keySet.getValue(index) : null, (V) object));
       }
     }
-    K r = (K) valueSet.removeHosted(o);
+    K r = (K) valueSet.removeHosted(object);
     isInValueUpdate = false;
     return r;
   }
@@ -519,12 +523,16 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
   }
 
   public K getKey(int index) {
-    if (!keySet.isValidIndex(index)) return null;
+    if (!keySet.isValidIndex(index)) {
+      return null;
+    }
     return keySet.getValueList().get(index);
   }
 
   public V getValue(int index) {
-    if (!valueSet.isValidIndex(index)) return null;
+    if (!valueSet.isValidIndex(index)) {
+      return null;
+    }
     return valueSet.getValue(index);
   }
 
@@ -662,13 +670,19 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null || getClass() != object.getClass()) {
+      return false;
+    }
 
-    OrderedMultiMap<?, ?> set = (OrderedMultiMap<?, ?>) o;
+    OrderedMultiMap<?, ?> set = (OrderedMultiMap<?, ?>) object;
 
-    if (size() != set.size()) return false;
+    if (size() != set.size()) {
+      return false;
+    }
     return entrySet().equals(set.entrySet());
   }
 

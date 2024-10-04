@@ -277,7 +277,6 @@ public enum ParserEmulationProfile implements MutableDataSetter {
         return new MutableListOptions((DataHolder) null).setEndOnDoubleBlank(true);
       } else if (this == COMMONMARK_0_28) {
         // IMPORTANT: implement 0.29 as defaults with 0.28 as changes
-        // return new MutableListOptions((DataHolder) null).setEndOnDoubleBlank(true);
       }
     }
 

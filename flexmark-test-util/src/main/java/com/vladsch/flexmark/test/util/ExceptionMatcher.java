@@ -20,17 +20,19 @@ public class ExceptionMatcher extends BaseMatcher<Throwable> {
   }
 
   @Override
-  public boolean matches(Object o) {
-    if (o instanceof RuntimeException) {
-      if (o.toString().startsWith(prefix + ": ")) {
-        return pattern.matcher(o.toString().substring(prefix.length() + ": ".length())).matches();
+  public boolean matches(Object object) {
+    if (object instanceof RuntimeException) {
+      if (object.toString().startsWith(prefix + ": ")) {
+        return pattern
+            .matcher(object.toString().substring(prefix.length() + ": ".length()))
+            .matches();
       }
-    } else if (o instanceof Throwable) {
-      if (o.toString().startsWith(prefix)) {
+    } else if (object instanceof Throwable) {
+      if (object.toString().startsWith(prefix)) {
         String input;
-        Throwable throwable = (Throwable) o;
+        Throwable throwable = (Throwable) object;
         if (throwable.getCause() == null) {
-          input = o.toString();
+          input = object.toString();
         } else {
           input = throwable.getCause().toString();
         }

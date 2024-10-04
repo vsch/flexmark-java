@@ -20,7 +20,9 @@ public class Utils {
     int iMax = receiver.length();
     for (int i = 0; i < iMax; i++) {
       char c = receiver.charAt(i);
-      if (c != ' ' && c != '\t') return false;
+      if (c != ' ' && c != '\t') {
+        return false;
+      }
     }
     return true;
   }
@@ -93,7 +95,9 @@ public class Utils {
         && !receiver.isEmpty()
         && prefix != null
         && !prefix.isEmpty()
-        && !startsWith(receiver, prefix, ignoreCase)) return prefix + receiver;
+        && !startsWith(receiver, prefix, ignoreCase)) {
+      return prefix + receiver;
+    }
     return orEmpty(receiver);
   }
 
@@ -102,7 +106,9 @@ public class Utils {
   }
 
   private static boolean endsWith(String receiver, boolean ignoreCase, String... needles) {
-    if (receiver == null) return false;
+    if (receiver == null) {
+      return false;
+    }
 
     if (ignoreCase) {
       for (String needle : needles) {
@@ -126,7 +132,9 @@ public class Utils {
   }
 
   public static boolean startsWith(String receiver, boolean ignoreCase, String... needles) {
-    if (receiver == null) return false;
+    if (receiver == null) {
+      return false;
+    }
 
     if (ignoreCase) {
       for (String needle : needles) {
@@ -146,14 +154,18 @@ public class Utils {
   }
 
   public static int count(String receiver, char c, int startIndex, int endIndex) {
-    if (receiver == null) return 0;
+    if (receiver == null) {
+      return 0;
+    }
 
     int count = 0;
     int pos = startIndex;
     int lastIndex = Math.min(receiver.length(), endIndex);
     while (pos >= 0 && pos <= lastIndex) {
       pos = receiver.indexOf(c, pos);
-      if (pos < 0) break;
+      if (pos < 0) {
+        break;
+      }
       count++;
       pos++;
     }
@@ -161,14 +173,18 @@ public class Utils {
   }
 
   public static int count(String receiver, String c, int startIndex, int endIndex) {
-    if (receiver == null) return 0;
+    if (receiver == null) {
+      return 0;
+    }
 
     int count = 0;
     int pos = startIndex;
     int lastIndex = Math.min(receiver.length(), endIndex);
     while (pos >= 0 && pos <= lastIndex) {
       pos = receiver.indexOf(c, pos);
-      if (pos < 0 || pos > lastIndex) break;
+      if (pos < 0 || pos > lastIndex) {
+        break;
+      }
       count++;
       pos++;
     }
@@ -272,11 +288,15 @@ public class Utils {
     if (ignoreCase) {
       for (int i = 0; i < length; i++) {
         if (Character.toLowerCase(receiver.charAt(i + thisOffset))
-            != Character.toLowerCase(other.charAt(i + otherOffset))) return false;
+            != Character.toLowerCase(other.charAt(i + otherOffset))) {
+          return false;
+        }
       }
     } else {
       for (int i = 0; i < length; i++) {
-        if (receiver.charAt(i + thisOffset) != other.charAt(i + otherOffset)) return false;
+        if (receiver.charAt(i + thisOffset) != other.charAt(i + otherOffset)) {
+          return false;
+        }
       }
     }
     return true;
@@ -305,8 +325,12 @@ public class Utils {
   }
 
   public static String getAbbreviatedText(String text, int maxLength) {
-    if (text == null) return "";
-    if (text.length() <= maxLength || maxLength < 6) return text;
+    if (text == null) {
+      return "";
+    }
+    if (text.length() <= maxLength || maxLength < 6) {
+      return text;
+    }
 
     int prefix = maxLength / 2;
     int suffix = maxLength - 3 - prefix;
@@ -416,14 +440,20 @@ public class Utils {
   }
 
   public static int compare(@Nullable Number n1, @Nullable Number n2) {
-    if (n1 == null && n2 == null) return 0;
-    else if (n1 == null) return -1;
-    else if (n2 == null) return 1;
-    else if (n1 instanceof Double
+    if (n1 == null && n2 == null) {
+      return 0;
+    } else if (n1 == null) {
+      return -1;
+    } else if (n2 == null) {
+      return 1;
+    } else if (n1 instanceof Double
         || n2 instanceof Double
         || n1 instanceof Float
-        || n2 instanceof Float) return Double.compare(n1.doubleValue(), n2.doubleValue());
-    else return Long.compare(n1.longValue(), n2.longValue());
+        || n2 instanceof Float) {
+      return Double.compare(n1.doubleValue(), n2.doubleValue());
+    } else {
+      return Long.compare(n1.longValue(), n2.longValue());
+    }
   }
 
   public static <T extends Comparable<T>> int compareNullable(T i1, T i2) {
@@ -458,7 +488,9 @@ public class Utils {
 
   @NotNull
   public static String escapeJavaString(@Nullable CharSequence param) {
-    if (param == null) return "null";
+    if (param == null) {
+      return "null";
+    }
     StringBuilder out = new StringBuilder();
     escapeJavaString(out, param);
     return out.toString();

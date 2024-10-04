@@ -155,13 +155,17 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   public @NotNull Indexed<E> getIndexedProxy() {
-    if (indexedProxy != null) return indexedProxy;
+    if (indexedProxy != null) {
+      return indexedProxy;
+    }
     indexedProxy = new IndexedProxy(false);
     return indexedProxy;
   }
 
   public @NotNull Indexed<E> getConcurrentModsIndexedProxy() {
-    if (allowConcurrentModsIndexedProxy != null) return allowConcurrentModsIndexedProxy;
+    if (allowConcurrentModsIndexedProxy != null) {
+      return allowConcurrentModsIndexedProxy;
+    }
     allowConcurrentModsIndexedProxy = new IndexedProxy(true);
     return allowConcurrentModsIndexedProxy;
   }
@@ -233,9 +237,16 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   public @NotNull List<E> values() {
-    if (!isSparse()) return valueList;
+    if (!isSparse()) {
+      return valueList;
+    }
+
     List<E> list = new ArrayList<>();
-    for (E item : iterable()) list.add(item);
+
+    for (E item : iterable()) {
+      list.add(item);
+    }
+
     return list;
   }
 
@@ -249,22 +260,22 @@ public class OrderedSet<E> implements Set<E> {
       }
       // same index, same element, nothing to update
       return false;
-    } else {
-      if (index < valueList.size()) {
-        if (validIndices.get(index)) {
-          // already have another element at index
-          throw new IllegalStateException(
-              "Trying to add new element "
-                  + value
-                  + " at index "
-                  + index
-                  + ", already occupied by "
-                  + valueList.get(index));
-        }
-        // old element was removed, just replace
-      } else {
-        if (index > valueList.size()) addNulls(index - 1);
+    }
+
+    if (index < valueList.size()) {
+      if (validIndices.get(index)) {
+        // already have another element at index
+        throw new IllegalStateException(
+            "Trying to add new element "
+                + value
+                + " at index "
+                + index
+                + ", already occupied by "
+                + valueList.get(index));
       }
+      // old element was removed, just replace
+    } else {
+      if (index > valueList.size()) addNulls(index - 1);
     }
 
     if (host != null && !host.skipHostUpdate()) {
@@ -337,7 +348,9 @@ public class OrderedSet<E> implements Set<E> {
     int index = -1;
     int i = -1;
     while (index + 1 < valueList.size()) {
-      if (!validIndices.get(++index)) continue;
+      if (!validIndices.get(++index)) {
+        continue;
+      }
       objects[++i] = valueList.get(index);
     }
     return objects;
@@ -358,7 +371,9 @@ public class OrderedSet<E> implements Set<E> {
     int index = -1;
     int i = -1;
     while (index + 1 < valueList.size()) {
-      if (!validIndices.get(++index)) continue;
+      if (!validIndices.get(++index)) {
+        continue;
+      }
       objects[++i] = valueList.get(index);
     }
 
@@ -374,7 +389,9 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   public boolean add(@Nullable E e, @Nullable Object o) {
-    if (keyMap.containsKey(e)) return false;
+    if (keyMap.containsKey(e)) {
+      return false;
+    }
 
     int i = valueList.size();
 
@@ -430,7 +447,9 @@ public class OrderedSet<E> implements Set<E> {
 
   public @Nullable Object removeHosted(@Nullable Object o) {
     Integer index = keyMap.get(o);
-    if (index == null) return null;
+    if (index == null) {
+      return null;
+    }
     return removeIndexHosted(index);
   }
 
@@ -468,11 +487,15 @@ public class OrderedSet<E> implements Set<E> {
 
     // Java7
     int index = valueList.size();
-    if (index == 0) return false;
+    if (index == 0) {
+      return false;
+    }
     boolean changed = false;
     while (index-- > 0) {
       index = removeSet.previousSetBit(index);
-      if (index == -1) break;
+      if (index == -1) {
+        break;
+      }
       remove(valueList.get(index));
       changed = true;
     }
@@ -504,17 +527,25 @@ public class OrderedSet<E> implements Set<E> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null || getClass() != object.getClass()) {
+      return false;
+    }
 
-    OrderedSet<?> set = (OrderedSet<?>) o;
+    OrderedSet<?> set = (OrderedSet<?>) object;
 
-    if (size() != set.size()) return false;
+    if (size() != set.size()) {
+      return false;
+    }
     Iterator<?> setIterator = set.iterator();
     for (Object e : this) {
       Object eSet = setIterator.next();
-      if (!e.equals(eSet)) return false;
+      if (!e.equals(eSet)) {
+        return false;
+      }
     }
     return true;
   }

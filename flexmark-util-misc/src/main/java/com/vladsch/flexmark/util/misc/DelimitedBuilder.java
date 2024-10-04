@@ -201,8 +201,8 @@ public class DelimitedBuilder {
     return this;
   }
 
-  public DelimitedBuilder append(Object o) {
-    return append(o.toString());
+  public DelimitedBuilder append(Object object) {
+    return append(object.toString());
   }
 
   public DelimitedBuilder appendCodePoint(int codePoint) {

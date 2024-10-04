@@ -61,7 +61,9 @@ public class TableRow {
         if (i >= startIndex) {
           int result = manipulator.apply(cell, i, column, allCellsIndex);
 
-          if (result == BREAK) return;
+          if (result == BREAK) {
+            return;
+          }
 
           if (result < 0) {
             allCellsIndex -= result; // adjust for deleted cells
@@ -76,7 +78,9 @@ public class TableRow {
 
           allCellsIndex++;
 
-          if (remaining <= 0) break;
+          if (remaining <= 0) {
+            break;
+          }
         } else {
           i++;
           allCellsIndex++;
@@ -97,7 +101,9 @@ public class TableRow {
   public int getSpannedColumns() {
     int columns = 0;
     for (TableCell cell : cells) {
-      if (cell == null) continue;
+      if (cell == null) {
+        continue;
+      }
       columns += cell.columnSpan;
     }
     return columns;
@@ -124,7 +130,9 @@ public class TableRow {
   }
 
   public Integer columnOfOrNull(Integer index) {
-    if (index == null) return null;
+    if (index == null) {
+      return null;
+    }
 
     int columns = 0;
 
@@ -175,7 +183,9 @@ public class TableRow {
    * @param tableCell table cell to insert, null for default
    */
   public void insertColumns(int column, int count, TableCell tableCell) {
-    if (count <= 0 || column < 0) return;
+    if (count <= 0 || column < 0) {
+      return;
+    }
 
     normalizeIfNeeded();
 
@@ -222,7 +232,9 @@ public class TableRow {
    * @param count number of columns to insert
    */
   public void deleteColumns(int column, int count) {
-    if (count <= 0 || column < 0) return;
+    if (count <= 0 || column < 0) {
+      return;
+    }
 
     normalizeIfNeeded();
 
@@ -257,13 +269,17 @@ public class TableRow {
   }
 
   public void moveColumn(int fromColumn, int toColumn) {
-    if (fromColumn < 0 || toColumn < 0) return;
+    if (fromColumn < 0 || toColumn < 0) {
+      return;
+    }
 
     normalizeIfNeeded();
 
     int maxColumn = getTotalColumns();
 
-    if (fromColumn >= maxColumn) return;
+    if (fromColumn >= maxColumn) {
+      return;
+    }
     if (toColumn >= maxColumn) toColumn = maxColumn - 1;
 
     if (fromColumn != toColumn && toColumn < maxColumn) {
@@ -344,7 +360,9 @@ public class TableRow {
 
   public boolean isEmpty() {
     for (TableCell cell : cells) {
-      if (cell != null && !cell.text.isBlank()) return false;
+      if (cell != null && !cell.text.isBlank()) {
+        return false;
+      }
     }
     return true;
   }
@@ -354,7 +372,9 @@ public class TableRow {
   }
 
   public MarkdownTable.IndexSpanOffset indexOfOrNull(Integer column) {
-    if (column == null) return null;
+    if (column == null) {
+      return null;
+    }
 
     int remainingColumns = column;
     int index = 0;

@@ -41,9 +41,12 @@ public class RomanNumeral {
     // Constructor.  Creates the Roman number with the int value specified
     // by the parameter.  Throws a NumberFormatException if arabic is
     // not in the range 1 to 3999 inclusive.
-    if (arabic < 1) throw new NumberFormatException("Value of RomanNumeral must be positive.");
-    if (arabic > 3999)
+    if (arabic < 1) {
+      throw new NumberFormatException("Value of RomanNumeral must be positive.");
+    }
+    if (arabic > 3999) {
       throw new NumberFormatException("Value of RomanNumeral must be 3999 or less.");
+    }
     num = arabic;
   }
 

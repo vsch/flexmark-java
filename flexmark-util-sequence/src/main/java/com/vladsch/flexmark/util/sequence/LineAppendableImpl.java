@@ -218,10 +218,14 @@ public class LineAppendableImpl implements LineAppendable {
   }
 
   private void rawUnIndent() {
-    if (prefixStack.isEmpty()) throw new IllegalStateException("unIndent with an empty stack");
-    if (!indentPrefixStack.peek())
+    if (prefixStack.isEmpty()) {
+      throw new IllegalStateException("unIndent with an empty stack");
+    }
+
+    if (!indentPrefixStack.peek()) {
       throw new IllegalStateException(
           "unIndent for an element added by pushPrefix(), use popPrefix() instead");
+    }
 
     prefix = prefixStack.pop();
     prefixAfterEol = prefix;
@@ -268,10 +272,13 @@ public class LineAppendableImpl implements LineAppendable {
   @Override
   public LineAppendable popPrefix(boolean afterEol) {
     if (!passThrough) {
-      if (prefixStack.isEmpty()) throw new IllegalStateException("popPrefix with an empty stack");
-      if (indentPrefixStack.peek())
+      if (prefixStack.isEmpty()) {
+        throw new IllegalStateException("popPrefix with an empty stack");
+      }
+      if (indentPrefixStack.peek()) {
         throw new IllegalStateException(
             "popPrefix for element added by indent(), use unIndent() instead");
+      }
 
       prefixAfterEol = prefixStack.pop();
       if (!afterEol) {
@@ -300,7 +307,9 @@ public class LineAppendableImpl implements LineAppendable {
     int i = Math.min(lines.size(), endLine);
     while (i-- > 0) {
       LineInfo lineInfo = lines.get(i);
-      if (!lineInfo.isBlankText()) break;
+      if (!lineInfo.isBlankText()) {
+        break;
+      }
     }
     return i;
   }
@@ -998,7 +1007,9 @@ public class LineAppendableImpl implements LineAppendable {
         lastInfo = LineInfo.create(lastInfo, info);
         lines.set(i, lastInfo);
 
-        if (!lastInfo.needAggregateUpdate(info)) break;
+        if (!lastInfo.needAggregateUpdate(info)) {
+          break;
+        }
       }
     }
   }

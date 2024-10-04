@@ -78,7 +78,9 @@ public class SpaceInsertingSequenceBuilder
   }
 
   public void setLastNode(Node lastNode) {
-    if (lastNode instanceof Document) return;
+    if (lastNode instanceof Document) {
+      return;
+    }
 
     if (this.lastNode != null && this.lastNode.getEndOffset() < lastNode.getStartOffset()) {
       BasedSequence sequence =
@@ -124,7 +126,9 @@ public class SpaceInsertingSequenceBuilder
   }
 
   public boolean needEol() {
-    if (needEol) return true;
+    if (needEol) {
+      return true;
+    }
 
     int partIndex = out.getSegmentBuilder().size();
     while (partIndex >= 0) {

@@ -32,30 +32,40 @@ public class Attributes {
   }
 
   public Attribute get(CharSequence key) {
-    if (attributes == null || key == null || key.length() == 0) return null;
+    if (attributes == null || key == null || key.length() == 0) {
+      return null;
+    }
 
     String useKey = String.valueOf(key);
     return attributes.get(useKey);
   }
 
   public String getValue(CharSequence key) {
-    if (attributes == null || key == null || key.length() == 0) return "";
+    if (attributes == null || key == null || key.length() == 0) {
+      return "";
+    }
 
     String useKey = String.valueOf(key);
     Attribute attribute = attributes.get(useKey);
-    if (attribute == null) return "";
+    if (attribute == null) {
+      return "";
+    }
     return attribute.getValue();
   }
 
   public boolean contains(CharSequence key) {
-    if (attributes == null || key == null || key.length() == 0) return false;
+    if (attributes == null || key == null || key.length() == 0) {
+      return false;
+    }
 
     String useKey = String.valueOf(key);
     return attributes.containsKey(useKey);
   }
 
   public boolean containsValue(CharSequence key, CharSequence value) {
-    if (attributes == null) return false;
+    if (attributes == null) {
+      return false;
+    }
     String useKey = String.valueOf(key);
     Attribute attribute = attributes.get(useKey);
     return attribute != null && attribute.containsValue(value);

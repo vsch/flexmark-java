@@ -138,15 +138,19 @@ public final class TrackedOffset implements Comparable<TrackedOffset> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || (getClass() != o.getClass() && !(o instanceof Integer))) return false;
-
-    if (o instanceof Integer) {
-      return ((Integer) o) == offset;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null || (getClass() != object.getClass() && !(object instanceof Integer))) {
+      return false;
     }
 
-    TrackedOffset offset = (TrackedOffset) o;
+    if (object instanceof Integer) {
+      return ((Integer) object) == offset;
+    }
+
+    TrackedOffset offset = (TrackedOffset) object;
     return this.offset == offset.offset;
   }
 

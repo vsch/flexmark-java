@@ -90,16 +90,6 @@ public class HeadingParser extends AbstractBlockParser {
       Set<Class<?>> set = new HashSet<>();
       set.add(BlockQuoteParser.Factory.class);
       return set;
-      // return new HashSet<>(Arrays.asList(
-      //        BlockQuoteParser.Factory.class
-      //        //HtmlBlockParser.Factory.class,
-      //        //HeadingParser.Factory.class,
-      //        //FencedCodeBlockParser.Factory.class,
-      //        //HtmlBlockParser.Factory.class,
-      //        //ThematicBreakParser.Factory.class,
-      //        //ListBlockParser.Factory.class,
-      //        //IndentedCodeBlockParser.Factory.class
-      // ));
     }
 
     @Nullable
@@ -107,8 +97,6 @@ public class HeadingParser extends AbstractBlockParser {
     public Set<Class<?>> getBeforeDependents() {
       return new HashSet<>(
           Arrays.asList(
-              // BlockQuoteParser.Factory.class,
-              // HeadingParser.Factory.class,
               FencedCodeBlockParser.Factory.class,
               HtmlBlockParser.Factory.class,
               ThematicBreakParser.Factory.class,

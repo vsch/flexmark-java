@@ -191,7 +191,9 @@ public class TestUtils {
       if (heading != null && level > 1) {
         sb.append(sep).append(heading);
         sep = " - ";
-        if (level == lastSectionLevel) break;
+        if (level == lastSectionLevel) {
+          break;
+        }
       }
       level++;
     }
@@ -213,12 +215,17 @@ public class TestUtils {
       @NotNull SpecExample example,
       @Nullable String optionSets,
       @NotNull Function<String, DataHolder> optionsProvider) {
-    if (optionSets == null) return null;
+    if (optionSets == null) {
+      return null;
+    }
     String[] optionNames = optionSets.replace('\u00A0', ' ').split(",");
     DataHolder options = null;
+
     for (String optionName : optionNames) {
       String option = optionName.trim();
-      if (option.isEmpty() || option.startsWith("-")) continue;
+      if (option.isEmpty() || option.startsWith("-")) {
+        continue;
+      }
 
       switch (option) {
         case IGNORE_OPTION_NAME:
@@ -541,7 +548,9 @@ public class TestUtils {
    * @return spec test special chars converted to visible
    */
   public static String toVisibleSpecText(String s) {
-    if (s == null) return "";
+    if (s == null) {
+      return "";
+    }
     // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as
     // ⎮23ae, CR ⏎ 23ce, LS to U+27A5 ➥
     return toVisibleSpecText((CharSequence) s).toString();
@@ -552,7 +561,9 @@ public class TestUtils {
    * @return spec test special chars converted to visible
    */
   public static CharSequence toVisibleSpecText(CharSequence s) {
-    if (s == null) return "";
+    if (s == null) {
+      return "";
+    }
     // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as
     // ⎮23ae, CR ⏎ 23ce, LS to U+27A5 ➥
     BasedSequence sequence = BasedSequence.of(s);
@@ -572,7 +583,9 @@ public class TestUtils {
    * @return spec test special visible chars converted to normal
    */
   public static String fromVisibleSpecText(String s) {
-    if (s == null) return "";
+    if (s == null) {
+      return "";
+    }
     return fromVisibleSpecText((CharSequence) s).toString();
   }
 
@@ -581,7 +594,9 @@ public class TestUtils {
    * @return spec test special visible chars converted to normal
    */
   private static CharSequence fromVisibleSpecText(CharSequence s) {
-    if (s == null) return "";
+    if (s == null) {
+      return "";
+    }
     BasedSequence sequence = BasedSequence.of(s);
     return sequence
         .replace("\u27a5", SequenceUtils.LINE_SEP)
@@ -698,8 +713,11 @@ public class TestUtils {
   @Nullable
   public static DataHolder[] dataHolders(
       @Nullable DataHolder other, @Nullable DataHolder[] overrides) {
-    if (other == null) return overrides;
-    else if (overrides == null || overrides.length == 0) return new DataHolder[] {other};
+    if (other == null) {
+      return overrides;
+    } else if (overrides == null || overrides.length == 0) {
+      return new DataHolder[] {other};
+    }
 
     DataHolder[] holders = new DataHolder[overrides.length + 1];
     System.arraycopy(overrides, 0, holders, 1, overrides.length);
@@ -792,7 +810,9 @@ public class TestUtils {
 
       while (lastPos >= 0) {
         int pos = input.lastIndexOfAny(MARKUP_PREDICATE, lastPos);
-        if (pos == -1) break;
+        if (pos == -1) {
+          break;
+        }
 
         char ch = input.charAt(pos);
         m--;

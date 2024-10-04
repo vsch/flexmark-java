@@ -788,7 +788,9 @@ public class Formatter implements IRender {
 
         Set<NodeFormattingHandler<?>> formattingHandlers =
             nodeFormatter.getNodeFormattingHandlers();
-        if (formattingHandlers == null) continue;
+        if (formattingHandlers == null) {
+          continue;
+        }
 
         for (NodeFormattingHandler<?> formattingHandler : formattingHandlers) {
           // Overwrite existing renderer
@@ -889,7 +891,9 @@ public class Formatter implements IRender {
 
           for (LinkResolver linkResolver : linkResolvers) {
             resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
-            if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
+            if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) {
+              break;
+            }
           }
         }
 

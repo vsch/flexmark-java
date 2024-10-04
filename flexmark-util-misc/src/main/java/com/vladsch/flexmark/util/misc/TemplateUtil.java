@@ -39,7 +39,9 @@ public class TemplateUtil {
   }
 
   public static String resolveRefs(CharSequence text, Pattern pattern, Resolver resolver) {
-    if (text == null) return "";
+    if (text == null) {
+      return "";
+    }
 
     Matcher matcher = pattern.matcher(text);
     if (matcher.find()) {

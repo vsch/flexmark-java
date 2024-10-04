@@ -45,18 +45,6 @@ public class HtmlHelpers {
             overlayColor.getRed(), overlayColor.getGreen(), overlayColor.getBlue(), new float[3]);
     float[] hsbMixed = new float[3];
 
-    // kotlin code
-    // hsbMixed[0] = hsbError[0]
-    // hsbMixed[1] = hsbColor[1].rangeLimit(hsbError[1].max(0.3f).min(0.5f), 1.0f)
-    // hsbMixed[2] = hsbColor[2].rangeLimit(hsbError[2].max(0.3f).min(0.5f), 1.0f)
-    // return Color.getHSBColor(hsbMixed[0], hsbMixed[1], hsbMixed[2])
-
-    // incorrect translation from kotlin
-    // hsbMixed[0] = hsbError[0];
-    // hsbMixed[1] = min(max(rangeLimit(hsbColor[1], hsbError[1], 0.3f), 0.5f), 1.0f);
-    // hsbMixed[2] = min(max(rangeLimit(hsbColor[2], hsbError[2], 0.3f), 0.5f), 1.0f);
-    // return java.awt.Color.getHSBColor(hsbMixed[0], hsbMixed[1], hsbMixed[2]);
-
     hsbMixed[0] = hsbError[0];
     hsbMixed[1] =
         Utils.rangeLimit(hsbColor[1], Utils.min(Utils.max(hsbError[1], 0.3f), 0.5f), 1.0f);

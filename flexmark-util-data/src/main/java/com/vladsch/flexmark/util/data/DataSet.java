@@ -160,14 +160,18 @@ public class DataSet implements DataHolder {
 
   static boolean isAggregatorRegistered(@NotNull DataKeyAggregator keyAggregator) {
     for (DataKeyAggregator aggregator : ourDataKeyAggregators) {
-      if (aggregator.getClass() == keyAggregator.getClass()) return true;
+      if (aggregator.getClass() == keyAggregator.getClass()) {
+        return true;
+      }
     }
     return false;
   }
 
   static boolean invokeSetContains(
       @Nullable Set<Class<?>> invokeSet, @NotNull DataKeyAggregator aggregator) {
-    if (invokeSet == null) return false;
+    if (invokeSet == null) {
+      return false;
+    }
     return invokeSet.contains(aggregator.getClass());
   }
 
@@ -177,11 +181,15 @@ public class DataSet implements DataHolder {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof DataSet)) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (!(object instanceof DataSet)) {
+      return false;
+    }
 
-    DataSet set = (DataSet) o;
+    DataSet set = (DataSet) object;
 
     return dataSet.equals(set.dataSet);
   }

@@ -612,9 +612,13 @@ public abstract class Segment {
         if (repeatedTextEnd) {
           // repeated chars
           char c = textChars.charAt(seg.getTextStart());
-          if (c == ' ') return SegType.REPEATED_SPACE;
-          else if (c == '\n') return SegType.REPEATED_EOL;
-          else return SegType.REPEATED_ASCII;
+          if (c == ' ') {
+            return SegType.REPEATED_SPACE;
+          } else if (c == '\n') {
+            return SegType.REPEATED_EOL;
+          } else {
+            return SegType.REPEATED_ASCII;
+          }
         }
 
         return SegType.TEXT_ASCII;
@@ -650,10 +654,15 @@ public abstract class Segment {
       length += getLengthBytes(segLength);
     }
 
-    if (segType.hasChar()) length += 2;
-    else if (segType.hasChars()) length += 2 * segLength;
-    else if (segType.hasByte()) length += 1;
-    else if (segType.hasBytes()) length += segLength;
+    if (segType.hasChar()) {
+      length += 2;
+    } else if (segType.hasChars()) {
+      length += 2 * segLength;
+    } else if (segType.hasByte()) {
+      length += 1;
+    } else if (segType.hasBytes()) {
+      length += segLength;
+    }
 
     return length;
   }

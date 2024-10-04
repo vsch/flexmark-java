@@ -150,10 +150,6 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
       } else if (baseSequence.anyOptions(F_TREE_SEGMENTED_SEQUENCES)) {
         return SegmentedSequenceTree.create(baseSequence, builder.getSegmentBuilder());
       } else {
-        // Can decide based on segments and length but tree based is not slower and much more
-        // efficient
-        //                return SegmentedSequenceFull.create(baseSequence,
-        // builder.getSegmentBuilder());
         return SegmentedSequenceTree.create(baseSequence, builder.getSegmentBuilder());
       }
     }

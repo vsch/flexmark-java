@@ -183,7 +183,9 @@ public class CharPredicateTest {
     }
 
     for (int i = 0; i < 16; i++) {
-      if (i == 0) continue;
+      if (i == 0) {
+        continue;
+      }
 
       char c0 = (i & 1) != 0 ? '\n' : '\r';
       char c1 = (i & 2) != 0 ? '\n' : '\r';
@@ -274,7 +276,9 @@ public class CharPredicateTest {
     }
 
     for (int i = 0; i < 16; i++) {
-      if (i == 0) continue;
+      if (i == 0) {
+        continue;
+      }
 
       char c0 = (i & 1) != 0 ? '\n' : '\r';
       char c1 = (i & 2) != 0 ? '\n' : '\r';

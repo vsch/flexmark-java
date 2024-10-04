@@ -250,7 +250,9 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
   @NotNull
   @Override
   public List<String> getOpenTagsAfterLast(@NotNull CharSequence latestTag) {
-    if (openTags.isEmpty()) return Collections.emptyList();
+    if (openTags.isEmpty()) {
+      return Collections.emptyList();
+    }
 
     List<String> tagList = new ArrayList<>(openTags);
     int iMax = tagList.size();
@@ -268,7 +270,9 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
   @NotNull
   @Override
   public T tag(@NotNull CharSequence tagName, boolean voidElement) {
-    if (tagName.length() == 0 || tagName.charAt(0) == '/') return closeTag(tagName);
+    if (tagName.length() == 0 || tagName.charAt(0) == '/') {
+      return closeTag(tagName);
+    }
 
     Attributes attributes = null;
 
@@ -285,7 +289,9 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
       for (Attribute attribute : attributes.values()) {
         CharSequence attributeValue = attribute.getValue();
 
-        if (attribute.isNonRendering()) continue;
+        if (attribute.isNonRendering()) {
+          continue;
+        }
 
         appendable.append(" ");
         appendable.append(Escaping.escapeHtml(attribute.getName(), true));

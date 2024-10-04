@@ -20,8 +20,8 @@ public class AttributablePart {
   }
 
   @Override
-  public boolean equals(Object o) {
-    return this == o;
+  public boolean equals(Object object) {
+    return this == object;
   }
 
   @Override

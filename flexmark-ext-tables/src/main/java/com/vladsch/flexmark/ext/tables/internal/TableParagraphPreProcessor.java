@@ -46,7 +46,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     separatorCharacters.set('-');
   }
 
-  private static Map<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<>();
+  private static final Map<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<>();
 
   static {
     pipeNodeMap.put(
@@ -55,13 +55,11 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
           @Override
           public boolean skipNext(char c) {
             return c == ' ' || c == '\t';
-            // return false;
           }
 
           @Override
           public boolean skipPrev(char c) {
             return c == ' ' || c == '\t';
-            // return false;
           }
 
           @Override
@@ -76,7 +74,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         });
   }
 
-  private static Map<Character, CharacterNodeFactory> pipeIntelliJNodeMap = new HashMap<>();
+  private static final Map<Character, CharacterNodeFactory> pipeIntelliJNodeMap = new HashMap<>();
 
   static {
     pipeIntelliJNodeMap.put(
@@ -85,14 +83,11 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
           @Override
           public boolean skipNext(char c) {
             return c == ' ' || c == '\t';
-            // return false;
           }
 
           @Override
           public boolean skipPrev(char c) {
-            return c == ' '
-                || c == '\t' /*|| c == TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR*/;
-            // return false;
+            return c == ' ' || c == '\t';
           }
 
           @Override
@@ -211,7 +206,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         return 0; // too many header rows
 
       if (rowLine.indexOf('|') < 0) {
-        if (separatorLineNumber == -1) return 0;
+        if (separatorLineNumber == -1) {
+          return 0;
+        }
 
         if (options.withCaption) {
           BasedSequence trimmed = rowLine.trim();
@@ -241,7 +238,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
       tableLines.add(trimmedRowLine);
     }
 
-    if (separatorLineNumber == -1) return 0;
+    if (separatorLineNumber == -1) {
+      return 0;
+    }
 
     List<TableRow> tableRows = new ArrayList<>();
     for (BasedSequence rowLine : tableLines) {
@@ -277,7 +276,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
       }
 
       if (sepList == null) {
-        if (rowNumber <= separatorLineNumber) return 0;
+        if (rowNumber <= separatorLineNumber) {
+          return 0;
+        }
         break;
       }
 
@@ -342,7 +343,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
         // take all until separator or end of iterator
         while (nodes.hasNext()) {
-          if (nodes.peek() instanceof TableColumnSeparator) break;
+          if (nodes.peek() instanceof TableColumnSeparator) {
+            break;
+          }
           tableCell.appendChild(nodes.next());
         }
 
@@ -350,14 +353,20 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         BasedSequence closingMarker = null;
         int span = 1;
         while (nodes.hasNext()) {
-          if (!(nodes.peek() instanceof TableColumnSeparator)) break;
+          if (!(nodes.peek() instanceof TableColumnSeparator)) {
+            break;
+          }
           if (closingMarker == null) {
             closingMarker = nodes.next().getChars();
-            if (!options.columnSpans) break;
+            if (!options.columnSpans) {
+              break;
+            }
           } else {
             BasedSequence nextSep = nodes.peek().getChars();
 
-            if (!closingMarker.isContinuedBy(nextSep)) break;
+            if (!closingMarker.isContinuedBy(nextSep)) {
+              break;
+            }
             closingMarker = closingMarker.spliceAtEnd(nextSep);
             nodes.next().unlink();
             span++;

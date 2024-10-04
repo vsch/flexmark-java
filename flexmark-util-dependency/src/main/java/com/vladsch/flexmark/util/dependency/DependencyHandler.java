@@ -102,7 +102,9 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
         // collect block processors ready for processing, any non-globals go into independents
         while (true) {
           int i = newReady.nextSetBit(0);
-          if (i < 0) break;
+          if (i < 0) {
+            break;
+          }
 
           newReady.clear(i);
           DependentItem<D> item = dependentItemMap.getValue(i);
@@ -114,7 +116,9 @@ public abstract class DependencyHandler<D extends Dependent, S, R extends Resolv
           if (item.hasDependents()) {
             while (true) {
               int j = item.dependents.nextSetBit(0);
-              if (j < 0) break;
+              if (j < 0) {
+                break;
+              }
 
               item.dependents.clear(j);
               DependentItem<D> dependentItem = dependentItemMap.getValue(j);

@@ -46,10 +46,15 @@ public final class LineInfo {
     static Preformatted get(int flags) {
       int preformatted = flags & F_PREFORMATTED;
 
-      if (preformatted == FIRST.mask) return FIRST;
-      else if (preformatted == BODY.mask) return BODY;
-      else if (preformatted == LAST.mask) return LAST;
-      else return NONE;
+      if (preformatted == FIRST.mask) {
+        return FIRST;
+      } else if (preformatted == BODY.mask) {
+        return BODY;
+      } else if (preformatted == LAST.mask) {
+        return LAST;
+      } else {
+        return NONE;
+      }
     }
   }
 

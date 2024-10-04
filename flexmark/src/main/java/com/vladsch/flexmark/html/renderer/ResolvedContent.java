@@ -39,14 +39,22 @@ public class ResolvedContent {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null || getClass() != object.getClass()) {
+      return false;
+    }
 
-    ResolvedContent content1 = (ResolvedContent) o;
+    ResolvedContent content1 = (ResolvedContent) object;
 
-    if (!resolvedLink.equals(content1.resolvedLink)) return false;
-    if (!status.equals(content1.status)) return false;
+    if (!resolvedLink.equals(content1.resolvedLink)) {
+      return false;
+    }
+    if (!status.equals(content1.status)) {
+      return false;
+    }
     return Arrays.equals(content, content1.content);
   }
 

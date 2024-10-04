@@ -224,30 +224,12 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     @Override
     public Set<Class<?>> getAfterDependents() {
       return null;
-      // return new HashSet<>(Arrays.asList(
-      //        BlockQuoteParser.Factory.class,
-      //        HeadingParser.Factory.class,
-      //        FencedCodeBlockParser.Factory.class,
-      //        HtmlBlockParser.Factory.class,
-      //        ThematicBreakParser.Factory.class,
-      //        ListBlockParser.Factory.class,
-      //        IndentedCodeBlockParser.Factory.class
-      // ));
     }
 
     @Nullable
     @Override
     public Set<Class<?>> getBeforeDependents() {
       return null;
-      // return new HashSet<>(Arrays.asList(
-      //        BlockQuoteParser.Factory.class,
-      //        HeadingParser.Factory.class,
-      //        FencedCodeBlockParser.Factory.class,
-      //        HtmlBlockParser.Factory.class,
-      //        ThematicBreakParser.Factory.class,
-      //        ListBlockParser.Factory.class,
-      //        IndentedCodeBlockParser.Factory.class
-      // ));
     }
 
     @Override

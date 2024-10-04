@@ -31,12 +31,18 @@ public final class MapEntry<K, V> implements Map.Entry<K, V> {
 
   @Override
   public boolean equals(@Nullable Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     MapEntry<?, ?> entry = (MapEntry<?, ?>) o;
 
-    if (!Objects.equals(key, entry.key)) return false;
+    if (!Objects.equals(key, entry.key)) {
+      return false;
+    }
     return Objects.equals(value, entry.value);
   }
 

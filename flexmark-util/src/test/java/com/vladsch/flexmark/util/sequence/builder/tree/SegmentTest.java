@@ -243,7 +243,9 @@ public class SegmentTest {
         assertEquals("c: " + c + " j: " + j, value, c);
       }
 
-      if (c == 0xffff) break;
+      if (c == 0xffff) {
+        break;
+      }
     }
   }
 
@@ -261,7 +263,9 @@ public class SegmentTest {
         assertEquals("c: " + c + " j: " + j, value, c);
       }
 
-      if (c == 0xffff) break;
+      if (c == 0xffff) {
+        break;
+      }
     }
   }
 

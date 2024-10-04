@@ -52,7 +52,9 @@ public class AttributeImpl implements Attribute {
       CharSequence valueName,
       char valueListDelimiter,
       char valueNameDelimiter) {
-    if (valueName.length() == 0 || value.length() == 0) return -1;
+    if (valueName.length() == 0 || value.length() == 0) {
+      return -1;
+    }
 
     if (valueListDelimiter == SequenceUtils.NUL) {
       return value.equals(valueName) ? 0 : -1;
@@ -62,7 +64,9 @@ public class AttributeImpl implements Attribute {
     BasedSequence subSeq = BasedSequence.of(value);
     while (lastPos < value.length()) {
       int pos = subSeq.indexOf(valueName, lastPos);
-      if (pos == -1) break;
+      if (pos == -1) {
+        break;
+      }
       // see if it is 0 or preceded by a space, or at the end or followed by a space
       int endPos = pos + valueName.length();
       if (pos == 0
@@ -107,13 +111,19 @@ public class AttributeImpl implements Attribute {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Attribute)) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (!(object instanceof Attribute)) {
+      return false;
+    }
 
-    Attribute attribute = (Attribute) o;
+    Attribute attribute = (Attribute) object;
 
-    if (!name.equals(attribute.getName())) return false;
+    if (!name.equals(attribute.getName())) {
+      return false;
+    }
     return value.equals(attribute.getValue());
   }
 

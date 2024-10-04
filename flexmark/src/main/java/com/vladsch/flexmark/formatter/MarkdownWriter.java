@@ -33,7 +33,9 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
     Node node = context.getCurrentNode();
     while (node != null && node.getNextAnyNot(BlankLine.class) == null) {
       Node parent = node.getParent();
-      if (parent == null || parent instanceof Document) break;
+      if (parent == null || parent instanceof Document) {
+        break;
+      }
       if (parent instanceof BlockQuoteLike) {
         int pos = prefix.lastIndexOfAny(context.getBlockQuoteLikePrefixPredicate());
         if (pos >= 0) {

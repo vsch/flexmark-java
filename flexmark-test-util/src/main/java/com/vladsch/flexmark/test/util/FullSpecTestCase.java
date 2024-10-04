@@ -28,7 +28,9 @@ public abstract class FullSpecTestCase extends RenderingTestCase {
   @Test
   public void testSpecExample() {
     ResourceLocation location = getSpecResourceLocation();
-    if (location.isNull()) return;
+    if (location.isNull()) {
+      return;
+    }
 
     fullTestSpecStarting();
     DumpSpecReader reader = create(location);

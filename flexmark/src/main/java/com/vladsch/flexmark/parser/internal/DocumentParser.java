@@ -278,20 +278,6 @@ public class DocumentParser implements ParserState {
 
   public static List<List<BlockPreProcessorFactory>> calculateBlockPreProcessors(
       List<BlockPreProcessorFactory> blockPreProcessors) {
-    // By having the custom factories come first, extensions are able to change behavior of core
-    // syntax.
-    //        List<BlockPreProcessorFactory> list = new ArrayList<>(blockPreProcessors);
-    //
-    //        // add core block preprocessors
-    //        for (DataKey<Boolean> preProcessorDataKey : CORE_BLOCK_PRE_PROCESSORS.keySet()) {
-    //            if (preProcessorDataKey.get(options)) {
-    //                BlockPreProcessorFactory preProcessorFactory =
-    // CORE_BLOCK_PRE_PROCESSORS.get(preProcessorDataKey);
-    //                list.add(preProcessorFactory);
-    //            }
-    //        }
-    //
-    //        return DependencyResolver.resolveDependencies(list, null, null);
     return DependencyResolver.resolveDependencies(blockPreProcessors, null, null);
   }
 
@@ -365,7 +351,9 @@ public class DocumentParser implements ParserState {
     while (true) {
       int charsRead = bufferedReader.read(buffer);
       // issue #91
-      if (charsRead < 0) break;
+      if (charsRead < 0) {
+        break;
+      }
       file.append(buffer, 0, charsRead);
     }
 
@@ -962,7 +950,9 @@ public class DocumentParser implements ParserState {
           int iMax = block.getLineCount();
           int i;
           for (i = 0; i < iMax; i++) {
-            if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset()) break;
+            if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset()) {
+              break;
+            }
           }
 
           if (i >= iMax) {
@@ -992,7 +982,9 @@ public class DocumentParser implements ParserState {
         }
       }
 
-      if (!hadChanges || stage.size() < 2) break;
+      if (!hadChanges || stage.size() < 2) {
+        break;
+      }
     }
   }
 

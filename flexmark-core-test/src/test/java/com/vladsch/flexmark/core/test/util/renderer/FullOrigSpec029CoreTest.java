@@ -20,7 +20,6 @@ public final class FullOrigSpec029CoreTest extends OrigSpecCoreTest {
   @NotNull
   protected ResourceLocation getSpecResourceLocation() {
     // FIX: implement 0.29 spec and enable test
-    // return RESOURCE_LOCATION;
     return ResourceLocation.NULL;
   }
 }

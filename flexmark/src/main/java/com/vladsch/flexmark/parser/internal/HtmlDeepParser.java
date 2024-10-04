@@ -250,7 +250,9 @@ public class HtmlDeepParser {
       if (myClosingPattern != null) {
         // see if we find HTML pattern
         Matcher matcher = myClosingPattern.matcher(html);
-        if (!matcher.find()) break;
+        if (!matcher.find()) {
+          break;
+        }
 
         if (myHtmlMatch == HtmlMatch.OPEN_TAG) {
           if (matcher.group().equals("<")) {
@@ -293,14 +295,18 @@ public class HtmlDeepParser {
       } else {
         // start pattern
         Matcher matcher = START_PATTERN.matcher(html);
-        if (!matcher.find()) break;
+        if (!matcher.find()) {
+          break;
+        }
 
         CharSequence nextHtml = html.subSequence(matcher.end(), html.length());
         int iMax = PATTERN_MAP.length;
         myClosingPattern = null;
 
         for (int i = 1; i < iMax; i++) {
-          if (matcher.group(i) == null) continue;
+          if (matcher.group(i) == null) {
+            continue;
+          }
 
           String group = matcher.group(i).toLowerCase();
           HtmlMatch htmlMatch = PATTERN_MAP[i];
@@ -317,7 +323,9 @@ public class HtmlDeepParser {
           if ((blockTagsOnly || !parseNonBlock) && matcher.start() > 0) {
             // nothing but blanks allowed before first pattern match when block tags only
             String leading = html.subSequence(0, matcher.start()).toString();
-            if (!leading.trim().isEmpty()) break;
+            if (!leading.trim().isEmpty()) {
+              break;
+            }
           }
 
           // see if self closed and if void or block
@@ -377,7 +385,9 @@ public class HtmlDeepParser {
 
               if (!isBlockTag) {
                 // don't close unmatched block tag by closing non-block tag.
-                if (myBlockTags.contains(openTag)) break;
+                if (myBlockTags.contains(openTag)) {
+                  break;
+                }
               }
             }
           }

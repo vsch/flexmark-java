@@ -49,7 +49,9 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
    *     previous sibling will be used instead of next sibling
    */
   public NodeIterator(Node firstNode, Node lastNode, boolean reversed) {
-    if (firstNode == null) throw new NullPointerException();
+    if (firstNode == null) {
+      throw new NullPointerException();
+    }
 
     this.firstNode = firstNode;
     this.lastNode = lastNode;
@@ -117,7 +119,9 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
 
   @Override
   public void forEachRemaining(Consumer<? super Node> consumer) {
-    if (consumer == null) throw new NullPointerException();
+    if (consumer == null) {
+      throw new NullPointerException();
+    }
 
     while (hasNext()) {
       consumer.accept(next());

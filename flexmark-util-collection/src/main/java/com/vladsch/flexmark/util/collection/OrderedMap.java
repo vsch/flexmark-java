@@ -78,7 +78,10 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
   }
 
   public @NotNull Indexed<Map.Entry<K, V>> getIndexedEntryProxy() {
-    if (indexedEntryProxy != null) return indexedEntryProxy;
+    if (indexedEntryProxy != null) {
+      return indexedEntryProxy;
+    }
+
     indexedEntryProxy =
         new Indexed<>() {
           @Override
@@ -111,7 +114,10 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
   }
 
   public @NotNull Indexed<V> getIndexedValueProxy() {
-    if (indexedValueProxy != null) return indexedValueProxy;
+    if (indexedValueProxy != null) {
+      return indexedValueProxy;
+    }
+
     indexedValueProxy =
         new Indexed<>() {
           @Override
@@ -153,7 +159,9 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
   }
 
   void adding(int index, @NotNull K k, @NotNull Object v) {
-    if (v == null) throw new IllegalArgumentException();
+    if (v == null) {
+      throw new IllegalArgumentException();
+    }
     if (host != null && !host.skipHostUpdate()) {
       host.adding(index, k, v);
     }
@@ -289,12 +297,18 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
   }
 
   public @Nullable K getKey(int index) {
-    if (!keySet.isValidIndex(index)) return null;
+    if (!keySet.isValidIndex(index)) {
+      return null;
+    }
+
     return keySet.getValueList().get(index);
   }
 
   public @Nullable V getValue(int index) {
-    if (!keySet.isValidIndex(index)) return null;
+    if (!keySet.isValidIndex(index)) {
+      return null;
+    }
+
     return valueList.get(index);
   }
 
@@ -402,13 +416,20 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null || getClass() != object.getClass()) {
+      return false;
+    }
 
-    OrderedMap<?, ?> set = (OrderedMap<?, ?>) o;
+    OrderedMap<?, ?> set = (OrderedMap<?, ?>) object;
 
-    if (size() != set.size()) return false;
+    if (size() != set.size()) {
+      return false;
+    }
+
     return entrySet().equals(set.entrySet());
   }
 

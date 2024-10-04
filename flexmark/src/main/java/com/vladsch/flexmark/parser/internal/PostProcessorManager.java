@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.ast.ClassifyingNodeTracker;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeClassifierVisitor;
-import com.vladsch.flexmark.util.collection.OrderedSet;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyResolver;
@@ -21,15 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class PostProcessorManager {
-  ////    final private static HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS
-  // = new HashMap<>();
-  //    static {
-  //        //CORE_POST_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new
-  // ReferencePreProcessorFactory());
-  //    }
-
   private final List<PostProcessorDependencyStage> postProcessorDependencies;
-  private final OrderedSet<Node> allPostProcessNodes = new OrderedSet<>();
 
   public PostProcessorManager(List<PostProcessorDependencyStage> postProcessorDependencies) {
     this.postProcessorDependencies = postProcessorDependencies;
@@ -37,19 +28,6 @@ public class PostProcessorManager {
 
   public static List<PostProcessorDependencyStage> calculatePostProcessors(
       DataHolder options, List<PostProcessorFactory> postProcessorFactories) {
-    // By having the custom factories come first, extensions are able to change behavior of core
-    // syntax.
-    //        List<PostProcessorFactory> list = new ArrayList<>(postProcessorFactories);
-    //
-    //        // add core block preprocessors
-    //        for (DataKey<Boolean> processorDataKey : CORE_POST_PROCESSORS.keySet()) {
-    //            if (processorDataKey.get(options)) {
-    //                PostProcessorFactory preProcessorFactory =
-    // CORE_POST_PROCESSORS.get(processorDataKey);
-    //                list.add(preProcessorFactory);
-    //            }
-    //        }
-
     List<List<PostProcessorFactory>> resolveDependencies =
         DependencyResolver.resolveDependencies(
             postProcessorFactories, PostProcessorManager::prioritizePostProcessors, null);
@@ -104,7 +82,9 @@ public class PostProcessorManager {
             ReversibleIterable<Node> nodes =
                 classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
             for (Node node : nodes) {
-              if (node.getParent() == null) continue; // was already removed
+              if (node.getParent() == null) {
+                continue;
+              }
               // now we need to get the bitset for the excluded ancestors of the node, then
               // intersect it with the actual ancestors of this factory
               int index;

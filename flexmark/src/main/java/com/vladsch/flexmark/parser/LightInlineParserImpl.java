@@ -103,7 +103,9 @@ public class LightInlineParserImpl implements LightInlineParser {
         Node nextNode = next.getNext();
         next.unlink();
         fromNode.appendChild(next);
-        if (next == toNode) break;
+        if (next == toNode) {
+          break;
+        }
         next = nextNode;
       }
     }

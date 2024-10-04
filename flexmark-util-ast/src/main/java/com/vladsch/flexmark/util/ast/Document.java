@@ -159,10 +159,13 @@ public class Document extends Block implements MutableDataHolder {
       BasedSequence preText =
           getChars().baseSubSequence(0, Utils.maxLimit(offset + 1, getChars().length()));
 
-      if (preText.isEmpty()) return 0;
+      if (preText.isEmpty()) {
+        return 0;
+      }
       int lineNumber = 0;
       int nextLineEnd = preText.endOfLineAnyEOL(0);
       int length = preText.length();
+
       while (nextLineEnd < length) {
         int eolLength = preText.eolStartLength(nextLineEnd);
         int lengthWithEOL = nextLineEnd + eolLength;

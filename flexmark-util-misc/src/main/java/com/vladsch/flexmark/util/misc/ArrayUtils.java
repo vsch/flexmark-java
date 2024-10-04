@@ -25,7 +25,9 @@ public class ArrayUtils {
 
   public static boolean contained(int value, int[] array) {
     for (int item : array) {
-      if (item == value) return true;
+      if (item == value) {
+        return true;
+      }
     }
     return false;
   }
@@ -87,7 +89,9 @@ public class ArrayUtils {
 
       if (fromIndex < endIndex) {
         for (int i = fromIndex; i < endIndex; i++) {
-          if (predicate.test(ts[i])) return i;
+          if (predicate.test(ts[i])) {
+            return i;
+          }
         }
       }
     }
@@ -152,7 +156,9 @@ public class ArrayUtils {
 
       if (startIndex < fromIndex) {
         for (int i = fromIndex; i >= startIndex; i--) {
-          if (predicate.test(ts[i])) return i;
+          if (predicate.test(ts[i])) {
+            return i;
+          }
         }
       }
     }
@@ -166,7 +172,9 @@ public class ArrayUtils {
     int lastSet = bitSet.length();
     while (lastSet >= 0) {
       lastSet = bitSet.previousSetBit(lastSet - 1);
-      if (lastSet < 0) break;
+      if (lastSet < 0) {
+        break;
+      }
 
       bits[--i] = lastSet;
     }

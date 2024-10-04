@@ -123,14 +123,20 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   boolean isCommonBaseSequence(@NotNull BasedSequence chars) {
-    if (chars.isNull()) return false;
+    if (chars.isNull()) {
+      return false;
+    }
 
     BasedSequence charsBaseSequence = chars.getBaseSequence();
-    if (charsBaseSequence == baseSeq) return true;
+    if (charsBaseSequence == baseSeq) {
+      return true;
+    }
 
     // see if it is known to be equivalent or not equivalent
     Boolean inCommon = equivalentBases.get(charsBaseSequence);
-    if (inCommon != null) return inCommon;
+    if (inCommon != null) {
+      return inCommon;
+    }
 
     boolean equivalent = baseSeq.equals(charsBaseSequence);
     equivalentBases.put(charsBaseSequence, equivalent);

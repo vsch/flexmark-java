@@ -163,10 +163,14 @@ public class ListBlockParser extends AbstractBlockParser {
     if (item.hasChildren()) {
       int count = 0;
       for (Node child : item.getChildren()) {
-        if (child instanceof ListBlock) continue;
+        if (child instanceof ListBlock) {
+          continue;
+        }
 
         count++;
-        if (count >= 2) return true;
+        if (count >= 2) {
+          return true;
+        }
       }
     }
     return false;
@@ -267,9 +271,13 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         if (myOptions.isLooseWhenHasLooseSubItem()) {
-          if (thisItemLoose && (haveNestedList || !myOptions.isAutoLooseOneLevelLists())) break;
+          if (thisItemLoose && (haveNestedList || !myOptions.isAutoLooseOneLevelLists())) {
+            break;
+          }
         } else {
-          if (!isTight && (haveNestedList || !myOptions.isAutoLooseOneLevelLists())) break;
+          if (!isTight && (haveNestedList || !myOptions.isAutoLooseOneLevelLists())) {
+            break;
+          }
         }
         subItem = subItem.getNext();
       }
@@ -489,7 +497,9 @@ public class ListBlockParser extends AbstractBlockParser {
         @NotNull BasedSequence sequence,
         @Nullable DataHolder options,
         @NotNull Consumer<CharSequence> consumer) {
-      if (super.escape(sequence, options, consumer)) return true;
+      if (super.escape(sequence, options, consumer)) {
+        return true;
+      }
       if (ESCAPE_NUMBERED_LEAD_IN.get(options)) {
         int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
         if (nonDigit > 0
@@ -509,7 +519,9 @@ public class ListBlockParser extends AbstractBlockParser {
         @NotNull BasedSequence sequence,
         @Nullable DataHolder options,
         @NotNull Consumer<CharSequence> consumer) {
-      if (super.unEscape(sequence, options, consumer)) return true;
+      if (super.unEscape(sequence, options, consumer)) {
+        return true;
+      }
       int nonDigit = sequence.indexOfAnyNot(CharPredicate.DECIMAL_DIGITS);
       if (nonDigit > 0
           && nonDigit + 2 == sequence.length()

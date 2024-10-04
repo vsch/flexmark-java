@@ -238,8 +238,12 @@ public class MarkdownTable {
   @Nullable
   private TrackedOffset findTrackedOffset(int offset) {
     for (TrackedOffset trackedOffset : trackedOffsets) {
-      if (trackedOffset.getOffset() == offset) return trackedOffset;
-      if (trackedOffset.getOffset() > offset) break;
+      if (trackedOffset.getOffset() == offset) {
+        return trackedOffset;
+      }
+      if (trackedOffset.getOffset() > offset) {
+        break;
+      }
     }
     return null;
   }
@@ -419,7 +423,9 @@ public class MarkdownTable {
 
   public TableSection getAllRowsSection(int index) {
     for (TableSection section : allSections) {
-      if (index < section.rows.size()) return section;
+      if (index < section.rows.size()) {
+        return section;
+      }
       index -= section.rows.size();
     }
     return null;
@@ -678,7 +684,9 @@ public class MarkdownTable {
   }
 
   public void nextRow() {
-    if (isSeparator) throw new IllegalStateException("Only one separator row allowed");
+    if (isSeparator) {
+      throw new IllegalStateException("Only one separator row allowed");
+    }
     if (isHeading) {
       header.nextRow();
     } else {
@@ -967,10 +975,6 @@ public class MarkdownTable {
       return true;
     }
 
-    // QUERY: Triggered after sort table
-    // RELEASE : remove exception throwing
-    // throw new IllegalStateException(String.format("offset: %d not in tracked offsets: %s",
-    // offset, trackedOffsets));
     return false;
   }
 
@@ -1619,10 +1623,6 @@ public class MarkdownTable {
   }
 
   private static boolean pipeNeedsSpaceBefore(TableCell cell) {
-    // if (cell.trackedTextOffset != NO_TRACKED_OFFSET) {
-    //    return cell.text.equals(" ") || cell.trackedTextOffset > cell.text.length() ||
-    // !cell.text.subSequence(cell.trackedTextOffset).endsWith(" ");
-    // }
     return cell.text.equals(" ") || !cell.text.endsWith(" ");
   }
 
@@ -1960,7 +1960,9 @@ public class MarkdownTable {
 
   private static void forAllSectionsRows(
       int startIndex, int count, TableSection[] sections, TableRowManipulator manipulator) {
-    if (count <= 0) return;
+    if (count <= 0) {
+      return;
+    }
     int remaining = count;
     int sectionIndex = startIndex;
     int allRowsIndex = startIndex;
@@ -1980,7 +1982,9 @@ public class MarkdownTable {
         int result =
             manipulator.apply(
                 section.rows.get(currentIndex), allRowsIndex, section.rows, currentIndex);
-        if (result == TableRowManipulator.BREAK) return;
+        if (result == TableRowManipulator.BREAK) {
+          return;
+        }
         if (result < 0) {
           allRowsIndex -= result; // adjust for deleted rows
           remaining += result;
@@ -1988,7 +1992,9 @@ public class MarkdownTable {
           currentIndex += result + 1;
           remaining--;
         }
-        if (remaining <= 0) return;
+        if (remaining <= 0) {
+          return;
+        }
         allRowsIndex++;
       }
     }
