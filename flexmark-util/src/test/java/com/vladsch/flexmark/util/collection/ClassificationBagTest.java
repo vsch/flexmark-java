@@ -14,10 +14,10 @@ public class ClassificationBagTest {
       bag.add(item);
     }
 
-    Assert.assertEquals(true, bag.containsCategory(Integer.class));
+    Assert.assertTrue(bag.containsCategory(Integer.class));
     Assert.assertEquals(10, bag.getCategoryCount(Integer.class));
 
-    Assert.assertEquals(false, bag.containsCategory(String.class));
+    Assert.assertFalse(bag.containsCategory(String.class));
     Assert.assertEquals(0, bag.getCategoryCount(String.class));
 
     for (int i = 0; i < 10; i++) {
@@ -25,7 +25,7 @@ public class ClassificationBagTest {
       bag.add(item);
     }
 
-    Assert.assertEquals(true, bag.containsCategory(String.class));
+    Assert.assertTrue(bag.containsCategory(String.class));
     Assert.assertEquals(10, bag.getCategoryCount(String.class));
 
     // now we removeIndex them
@@ -34,10 +34,10 @@ public class ClassificationBagTest {
       bag.remove(item);
     }
 
-    Assert.assertEquals(true, bag.containsCategory(Integer.class));
+    Assert.assertTrue(bag.containsCategory(Integer.class));
     Assert.assertEquals(5, bag.getCategoryCount(Integer.class));
 
-    Assert.assertEquals(true, bag.containsCategory(String.class));
+    Assert.assertTrue(bag.containsCategory(String.class));
     Assert.assertEquals(10, bag.getCategoryCount(String.class));
 
     // now we removeIndex them
@@ -46,10 +46,10 @@ public class ClassificationBagTest {
       bag.remove(item);
     }
 
-    Assert.assertEquals(true, bag.containsCategory(Integer.class));
+    Assert.assertTrue(bag.containsCategory(Integer.class));
     Assert.assertEquals(5, bag.getCategoryCount(Integer.class));
 
-    Assert.assertEquals(true, bag.containsCategory(String.class));
+    Assert.assertTrue(bag.containsCategory(String.class));
     Assert.assertEquals(5, bag.getCategoryCount(String.class));
 
     // now we removeIndex them
@@ -58,10 +58,10 @@ public class ClassificationBagTest {
       bag.remove(item);
     }
 
-    Assert.assertEquals(false, bag.containsCategory(Integer.class));
+    Assert.assertFalse(bag.containsCategory(Integer.class));
     Assert.assertEquals(0, bag.getCategoryCount(Integer.class));
 
-    Assert.assertEquals(true, bag.containsCategory(String.class));
+    Assert.assertTrue(bag.containsCategory(String.class));
     Assert.assertEquals(5, bag.getCategoryCount(String.class));
 
     // now we removeIndex them
@@ -70,10 +70,10 @@ public class ClassificationBagTest {
       bag.remove(item);
     }
 
-    Assert.assertEquals(false, bag.containsCategory(Integer.class));
+    Assert.assertFalse(bag.containsCategory(Integer.class));
     Assert.assertEquals(0, bag.getCategoryCount(Integer.class));
 
-    Assert.assertEquals(false, bag.containsCategory(String.class));
+    Assert.assertFalse(bag.containsCategory(String.class));
     Assert.assertEquals(0, bag.getCategoryCount(String.class));
   }
 
@@ -89,10 +89,10 @@ public class ClassificationBagTest {
       bag.add(item);
     }
 
-    Assert.assertEquals(true, bag.containsCategory(Integer.class));
+    Assert.assertTrue(bag.containsCategory(Integer.class));
     Assert.assertEquals(10, bag.getCategoryCount(Integer.class));
 
-    Assert.assertEquals(true, bag.containsCategory(String.class));
+    Assert.assertTrue(bag.containsCategory(String.class));
     Assert.assertEquals(10, bag.getCategoryCount(String.class));
   }
 }

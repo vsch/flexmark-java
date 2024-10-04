@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class TrackedOffsetListTest {
-  int[] offsets(List<TrackedOffset> trackedOffsets) {
+  private static int[] offsets(List<TrackedOffset> trackedOffsets) {
     int[] result = new int[trackedOffsets.size()];
     int i = 0;
     for (TrackedOffset trackedOffset : trackedOffsets) {

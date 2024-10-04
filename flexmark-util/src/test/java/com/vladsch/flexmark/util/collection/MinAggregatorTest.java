@@ -6,7 +6,8 @@ import java.util.function.BiFunction;
 import org.junit.Test;
 
 public class MinAggregatorTest {
-  private Integer reduce(BiFunction<Integer, Integer, Integer> aggregator, Integer... items) {
+  private static Integer reduce(
+      BiFunction<Integer, Integer, Integer> aggregator, Integer... items) {
     Integer aggregate = null;
     for (Integer item : items) {
       aggregate = aggregator.apply(aggregate, item);

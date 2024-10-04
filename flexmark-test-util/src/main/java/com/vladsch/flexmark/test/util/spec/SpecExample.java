@@ -91,48 +91,6 @@ public class SpecExample {
         isNull);
   }
 
-  public SpecExample withOptionsSet(@Nullable String optionsSet) {
-    return new SpecExample(
-        resourceLocation,
-        lineNumber,
-        optionsSet,
-        section,
-        exampleNumber,
-        source,
-        html,
-        ast,
-        comment,
-        isNull);
-  }
-
-  public SpecExample withSection(@Nullable String section) {
-    return new SpecExample(
-        resourceLocation,
-        lineNumber,
-        optionsSet,
-        section,
-        exampleNumber,
-        source,
-        html,
-        ast,
-        comment,
-        isNull);
-  }
-
-  public SpecExample withExampleNumber(int exampleNumber) {
-    return new SpecExample(
-        resourceLocation,
-        lineNumber,
-        optionsSet,
-        section,
-        exampleNumber,
-        source,
-        html,
-        ast,
-        comment,
-        isNull);
-  }
-
   public SpecExample withSource(@NotNull String source) {
     return new SpecExample(
         resourceLocation,
@@ -188,18 +146,6 @@ public class SpecExample {
         && Objects.equals(this.comment, NULL.comment);
   }
 
-  public boolean isNull() {
-    return isNull;
-  }
-
-  public boolean isSpecExample() {
-    return isNotNull() && !isFullSpecExample();
-  }
-
-  public boolean isNotNull() {
-    return !isNull;
-  }
-
   @Nullable
   public String getOptionsSet() {
     return optionsSet;
@@ -213,11 +159,6 @@ public class SpecExample {
   @NotNull
   public String getFileUrlWithLineNumber(int lineOffset) {
     return resourceLocation.getFileUrl(Utils.minLimit(lineNumber + lineOffset, 0));
-  }
-
-  @NotNull
-  public String getFileUrl() {
-    return resourceLocation.getFileUrl();
   }
 
   @NotNull
@@ -247,15 +188,6 @@ public class SpecExample {
 
   public int getExampleNumber() {
     return exampleNumber;
-  }
-
-  @Nullable
-  public String getComment() {
-    return comment;
-  }
-
-  public boolean hasComment() {
-    return comment != null && !comment.isEmpty();
   }
 
   @Override

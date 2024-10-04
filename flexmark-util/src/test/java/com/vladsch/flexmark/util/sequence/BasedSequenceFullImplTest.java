@@ -15,9 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class BasedSequenceFullImplTest {
-  // TEST: need to complete tests here
-
-  static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
+  private static BasedSequence basedSequenceOf(@NotNull CharSequence chars) {
     return BasedSequence.of(
         BasedOptionsSequence.of(chars, BasedOptionsHolder.F_FULL_SEGMENTED_SEQUENCES));
   }

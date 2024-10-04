@@ -24,7 +24,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentTreeTest {
-  static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
+  private static void loop(
+      int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
     int iMaxStart = start + span;
     int iMinEnd = end - span;
 
@@ -43,7 +44,7 @@ public class SegmentTreeTest {
     }
   }
 
-  static void loopSizes(BiConsumer<Integer, Integer> consumer) {
+  private static void loopSizes(BiConsumer<Integer, Integer> consumer) {
     loop(0, 16, 8, 0, consumer);
     loop(16, 256, 8, 1, consumer);
     loop(256, 65536, 8, 2, consumer);
@@ -51,7 +52,7 @@ public class SegmentTreeTest {
     loop(65536 * 256, MAX_VALUE, 8, 4, consumer);
   }
 
-  static void loopSizesShort(BiConsumer<Integer, Integer> consumer) {
+  private static void loopSizesShort(BiConsumer<Integer, Integer> consumer) {
     loop(0, 16, 8, 0, consumer);
     loop(16, 256, 8, 1, consumer);
     loop(256, 65536, 8, 2, consumer);
@@ -59,19 +60,12 @@ public class SegmentTreeTest {
     loop(65536 * 256, MAX_VALUE, 8, 4, consumer);
   }
 
-  static void loopEnd(int startOffset, BiConsumer<Integer, Integer> consumer) {
+  private static void loopEnd(int startOffset, BiConsumer<Integer, Integer> consumer) {
     loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
     loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
     loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
     loop(startOffset + 65536, startOffset + 65536 * 256, 8, 3, consumer);
     loop(startOffset + 65536 * 256, MAX_VALUE, 8, 4, consumer);
-  }
-
-  static void loopEndShort(int startOffset, BiConsumer<Integer, Integer> consumer) {
-    loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
-    loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
-    loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
-    loop(startOffset + 65536, startOffset + 65536 * 8, 8, 3, consumer);
   }
 
   @Test
@@ -245,7 +239,7 @@ public class SegmentTreeTest {
     // TEST: need test for this
   }
 
-  void assertCharAt(
+  private static void assertCharAt(
       @NotNull BasedSequence sequence,
       @NotNull PlainSegmentBuilder segments,
       @NotNull SegmentTree segTree) {

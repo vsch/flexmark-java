@@ -216,9 +216,9 @@ public class DelimiterProcessorTest extends RenderingTestCase {
   }
 
   private static class UpperCaseNode extends Node implements DelimitedNode {
-    protected BasedSequence openingMarker = BasedSequence.NULL;
-    protected BasedSequence text = BasedSequence.NULL;
-    protected BasedSequence closingMarker = BasedSequence.NULL;
+    private BasedSequence openingMarker = BasedSequence.NULL;
+    private BasedSequence text = BasedSequence.NULL;
+    private BasedSequence closingMarker = BasedSequence.NULL;
 
     @NotNull
     @Override

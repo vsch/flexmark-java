@@ -251,10 +251,10 @@ public class UtilsTest {
 
   @Test
   public void test_parseNumberOrNull() {
-    assertEquals(null, SequenceUtils.parseNumberOrNull("0x0001."));
-    assertEquals(null, SequenceUtils.parseNumberOrNull("01234567 "));
-    assertEquals(null, SequenceUtils.parseNumberOrNull("012345678 "));
-    assertEquals(null, SequenceUtils.parseNumberOrNull("0b0001."));
+    assertNull(SequenceUtils.parseNumberOrNull("0x0001."));
+    assertNull(SequenceUtils.parseNumberOrNull("01234567 "));
+    assertNull(SequenceUtils.parseNumberOrNull("012345678 "));
+    assertNull(SequenceUtils.parseNumberOrNull("0b0001."));
 
     assertEquals(0x0001L, SequenceUtils.parseNumberOrNull("0x0001"));
     assertEquals(342391L, SequenceUtils.parseNumberOrNull("01234567"));

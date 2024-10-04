@@ -17,10 +17,10 @@ import org.junit.Test;
 import org.junit.rules.Stopwatch;
 import org.junit.rules.Timeout;
 
-public abstract class PathologicalRenderingTestCase extends RenderingTestCase {
+abstract class PathologicalRenderingTestCase extends RenderingTestCase {
   private final DataHolder options;
 
-  public PathologicalRenderingTestCase(boolean spcInLinkUrls) {
+  PathologicalRenderingTestCase(boolean spcInLinkUrls) {
     options = new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, spcInLinkUrls);
   }
 

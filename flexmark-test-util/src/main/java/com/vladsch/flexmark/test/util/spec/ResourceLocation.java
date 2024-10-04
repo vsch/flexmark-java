@@ -3,7 +3,6 @@ package com.vladsch.flexmark.test.util.spec;
 import com.vladsch.flexmark.test.util.ComboSpecTestCase;
 import com.vladsch.flexmark.test.util.TestUtils;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -39,26 +38,12 @@ public class ResourceLocation {
   }
 
   @NotNull
-  public Class<?> getResourceClass() {
+  private Class<?> getResourceClass() {
     return resourceClass;
   }
 
   @NotNull
-  public String getResourcePath() {
-    return resourcePath;
-  }
-
-  @NotNull
   public String getFileUrl() {
-    return fileUrl;
-  }
-
-  @NotNull
-  public String getFileDirectoryUrl() {
-    int pos = fileUrl.lastIndexOf(File.separatorChar);
-    if (pos > 0) {
-      return fileUrl.substring(0, pos + 1);
-    }
     return fileUrl;
   }
 
@@ -68,7 +53,7 @@ public class ResourceLocation {
   }
 
   @NotNull
-  public String getResolvedResourcePath() {
+  private String getResolvedResourcePath() {
     return resolvedResourcePath;
   }
 
@@ -97,26 +82,6 @@ public class ResourceLocation {
     if (!resourcePath.equals(location.resourcePath)) return false;
     if (!fileUrl.equals(location.fileUrl)) return false;
     return resolvedResourcePath.equals(location.resolvedResourcePath);
-  }
-
-  @NotNull
-  public ResourceLocation withResourceClass(@NotNull Class<?> resourceClass) {
-    return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
-  }
-
-  @NotNull
-  public ResourceLocation withResourcePath(@NotNull String resourcePath) {
-    return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
-  }
-
-  @NotNull
-  public ResourceLocation withFileUrl(@NotNull String fileUrl) {
-    return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
-  }
-
-  @NotNull
-  public ResourceLocation withResolvedResourcePath(@NotNull String resolvedResourcePath) {
-    return new ResourceLocation(resourceClass, resourcePath, fileUrl, resolvedResourcePath);
   }
 
   @Override
@@ -156,13 +121,13 @@ public class ResourceLocation {
         TestUtils.getResolvedSpecResourcePath(resourceClass.getName(), resourcePath));
   }
 
-  public static @NotNull ResourceLocation of(
+  private static @NotNull ResourceLocation of(
       @NotNull Class<?> resourceClass, @NotNull String resourcePath, @NotNull String fileUrl) {
     return new ResourceLocation(resourceClass, resourcePath, fileUrl);
   }
 
   @NotNull
-  public static String getResourceText(@NotNull ResourceLocation location) {
+  private static String getResourceText(@NotNull ResourceLocation location) {
     StringBuilder sb = new StringBuilder();
     try {
       String line;
@@ -183,7 +148,7 @@ public class ResourceLocation {
   }
 
   @NotNull
-  public static InputStream getResourceInputStream(@NotNull ResourceLocation location) {
+  private static InputStream getResourceInputStream(@NotNull ResourceLocation location) {
     String useSpecResource = location.getResolvedResourcePath();
     InputStream stream = location.getResourceClass().getResourceAsStream(useSpecResource);
     if (stream == null) {

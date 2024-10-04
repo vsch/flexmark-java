@@ -4,10 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.SharedDataKeys;
-import com.vladsch.flexmark.util.misc.Extension;
-import java.util.Collection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.ComparisonFailure;
@@ -15,23 +11,6 @@ import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
 public abstract class RenderingTestCase implements SpecExampleProcessor {
-  public static final DataKey<Boolean> IGNORE = TestUtils.IGNORE;
-  public static final DataKey<Boolean> FAIL = TestUtils.FAIL;
-  public static final DataKey<Boolean> NO_FILE_EOL = TestUtils.NO_FILE_EOL;
-  public static final DataKey<Integer> TIMED_ITERATIONS = TestUtils.TIMED_ITERATIONS;
-  public static final DataKey<Boolean> EMBED_TIMED = TestUtils.EMBED_TIMED;
-  public static final DataKey<Boolean> TIMED = TestUtils.TIMED;
-  public static final DataKey<String> INCLUDED_DOCUMENT = TestUtils.INCLUDED_DOCUMENT;
-  public static final DataKey<String> SOURCE_PREFIX = TestUtils.SOURCE_PREFIX;
-  public static final DataKey<String> SOURCE_SUFFIX = TestUtils.SOURCE_SUFFIX;
-  public static final DataKey<String> SOURCE_INDENT = TestUtils.SOURCE_INDENT;
-
-  public static final DataHolder NO_FILE_EOL_FALSE = TestUtils.NO_FILE_EOL_FALSE;
-  public static final DataKey<Collection<Class<? extends Extension>>> UNLOAD_EXTENSIONS =
-      TestUtils.UNLOAD_EXTENSIONS;
-  public static final DataKey<Collection<Extension>> LOAD_EXTENSIONS = TestUtils.LOAD_EXTENSIONS;
-  public static final DataKey<Collection<Extension>> EXTENSIONS = SharedDataKeys.EXTENSIONS;
-
   @Rule public ExpectedException thrown = ExpectedException.none();
 
   /**
@@ -60,11 +39,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
     assertRendering(SpecExample.ofCaller(1, this.getClass(), source, html, null));
   }
 
-  protected final void assertRendering(
-      @NotNull String source, @NotNull String html, @Nullable String ast) {
-    assertRendering(SpecExample.ofCaller(1, this.getClass(), source, html, ast));
-  }
-
   protected final void assertRendering(@NotNull SpecExample specExample) {
     SpecExample example = checkExample(specExample);
     String message = example.getFileUrlWithLineNumber();
@@ -78,7 +52,6 @@ public abstract class RenderingTestCase implements SpecExampleProcessor {
 
     SpecExampleParse specExampleParse =
         new SpecExampleParse(exampleRenderer.getOptions(), exampleRenderer, exampleOptions, source);
-    boolean timed = specExampleParse.isTimed();
     int iterations = specExampleParse.getIterations();
 
     String html = exampleRenderer.getHtml();

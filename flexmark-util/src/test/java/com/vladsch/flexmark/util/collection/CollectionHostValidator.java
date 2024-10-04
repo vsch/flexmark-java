@@ -7,7 +7,7 @@ import java.util.List;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 
-public class CollectionHostValidator<T> {
+class CollectionHostValidator<T> {
   private final List<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();
   private int nextCallbackIndex;
   private int modificationCount;
@@ -15,11 +15,11 @@ public class CollectionHostValidator<T> {
   private boolean conditional;
   private int repeat;
 
-  public CollectionHostValidator() {
+  CollectionHostValidator() {
     reset();
   }
 
-  public CollectionHostValidator<T> start() {
+  CollectionHostValidator<T> start() {
     nextCallbackIndex = 0;
     modificationCount = 0;
     this.id = "";
@@ -27,20 +27,16 @@ public class CollectionHostValidator<T> {
     return this;
   }
 
-  public CollectionHostValidator<T> repeat(int repeat) {
+  CollectionHostValidator<T> repeat(int repeat) {
     this.repeat = repeat;
     return this;
   }
 
-  public CollectionHostValidator<T> notrace() {
+  CollectionHostValidator<T> trace() {
     return trace();
   }
 
-  public CollectionHostValidator<T> trace() {
-    return trace();
-  }
-
-  public CollectionHostValidator<T> reset() {
+  CollectionHostValidator<T> reset() {
     start();
     expectedCallBacks.clear();
     return this;
@@ -51,22 +47,12 @@ public class CollectionHostValidator<T> {
     repeat = 1;
   }
 
-  public CollectionHostValidator<T> id(String id) {
-    this.id = id;
-    return this;
-  }
-
-  public CollectionHostValidator<T> id(int id) {
+  CollectionHostValidator<T> id(int id) {
     this.id = String.valueOf(id);
     return this;
   }
 
-  public CollectionHostValidator<T> id(Object id) {
-    this.id = String.valueOf(id);
-    return this;
-  }
-
-  public CollectionHostValidator<T> onCond(boolean conditional) {
+  CollectionHostValidator<T> onCond(boolean conditional) {
     this.conditional = conditional;
     return this;
   }
@@ -81,7 +67,7 @@ public class CollectionHostValidator<T> {
     hadExpect();
   }
 
-  public CollectionHostValidator<T> test(Runnable test) {
+  CollectionHostValidator<T> test(Runnable test) {
     test.run();
     validate();
     start();
@@ -96,55 +82,34 @@ public class CollectionHostValidator<T> {
     return id.trim().isEmpty() ? "" : "[" + id + "] ";
   }
 
-  public CollectionHostValidator<T> expectAdding(int index, T s, Object v) {
+  CollectionHostValidator<T> expectAdding(int index, T s, Object v) {
     return expectAddingFrom("", index, s, v);
   }
 
-  public CollectionHostValidator<T> expectAddingNull(int index) {
-    return expectAddingNullFrom("", index);
-  }
-
-  public CollectionHostValidator<T> expectRemoving(int index, T s) {
+  CollectionHostValidator<T> expectRemoving(int index, T s) {
     return expectRemovingFrom("", index, s);
   }
 
-  public CollectionHostValidator<T> expectClearing() {
+  CollectionHostValidator<T> expectClearing() {
     return expectClearingFrom("");
   }
 
-  public CollectionHostValidator<T> expectAddingFrom(String host, int index, T s, Object v) {
+  private CollectionHostValidator<T> expectAddingFrom(String host, int index, T s, Object v) {
     expect(hostName(host) + "adding", index, s, v);
     return this;
   }
 
-  public CollectionHostValidator<T> expectAddingNullFrom(String host, int index) {
-    expect(hostName(host) + "addingNull", index);
-    return this;
-  }
-
-  public CollectionHostValidator<T> expectRemovingFrom(String host, int index, T s) {
+  private CollectionHostValidator<T> expectRemovingFrom(String host, int index, T s) {
     expect(hostName(host) + "removing", index, s);
     return this;
   }
 
-  public CollectionHostValidator<T> expectClearingFrom(String host) {
+  private CollectionHostValidator<T> expectClearingFrom(String host) {
     expect(hostName(host) + "clearing");
     return this;
   }
 
-  public String expectations() {
-    StringBuilder out = new StringBuilder();
-
-    out.append("\n").append(id()).append("Expected callbacks").append(":\n");
-    for (int i = 0; i < expectedCallBacks.size(); i++) {
-      Paired<String, Object[]> pair = expectedCallBacks.get(i);
-      String expected = prepareMessage(pair.getFirst(), pair.getSecond());
-      out.append("    [").append(i).append("]:").append(expected).append("\n");
-    }
-    return out.toString();
-  }
-
-  public CollectionHostValidator<T> validate() {
+  private CollectionHostValidator<T> validate() {
     if (nextCallbackIndex < expectedCallBacks.size()) {
       StringBuilder out = new StringBuilder();
 
@@ -161,11 +126,11 @@ public class CollectionHostValidator<T> {
     return this;
   }
 
-  public CollectionHost<T> getHost() {
+  CollectionHost<T> getHost() {
     return getHost("");
   }
 
-  public CollectionHost<T> getHost(String host) {
+  CollectionHost<T> getHost(String host) {
     return new CollectionHost<>() {
       @Override
       public void adding(int index, @Nullable T s, @Nullable Object v) {

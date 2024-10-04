@@ -44,29 +44,29 @@ public class TestUtilsTest {
   @Test
   public void test_extractMarkup() {
     assertEquals(
-        pairToString(Pair.of("No markup", new int[] {})),
+        pairToString(new Pair<>("No markup", new int[] {})),
         pairToString(TestUtils.extractMarkup(BasedSequence.of("No markup"))));
     assertEquals(
-        pairToString(Pair.of("With markup", new int[] {5})),
+        pairToString(new Pair<>("With markup", new int[] {5})),
         pairToString(TestUtils.extractMarkup(BasedSequence.of("With ⦙markup"))));
     assertEquals(
-        pairToString(Pair.of("With markups", new int[] {5, 12})),
+        pairToString(new Pair<>("With markups", new int[] {5, 12})),
         pairToString(TestUtils.extractMarkup(BasedSequence.of("With ⦙markups⦙"))));
     assertEquals(
-        pairToString(Pair.of("With markups", new int[] {5, 9, 12})),
+        pairToString(new Pair<>("With markups", new int[] {5, 9, 12})),
         pairToString(TestUtils.extractMarkup(BasedSequence.of("With ⦙mark⦙ups⦙"))));
     assertEquals(
-        pairToString(Pair.of("With markups\nMore markups", new int[] {5, 9, 12, 18, 22, 25})),
+        pairToString(new Pair<>("With markups\nMore markups", new int[] {5, 9, 12, 18, 22, 25})),
         pairToString(
             TestUtils.extractMarkup(BasedSequence.of("With ⦙mark⦙ups⦙\nMore ⦙mark⦙ups⦙"))));
     assertEquals(
-        pairToString(Pair.of("With markups", new int[] {5, 9, 12})),
+        pairToString(new Pair<>("With markups", new int[] {5, 9, 12})),
         pairToString(TestUtils.extractMarkup(BasedSequence.of("⟦⟧With ⦙mark⦙ups⦙"))));
     assertEquals(
-        pairToString(Pair.of("With markups", new int[] {7, 11, 14})),
+        pairToString(new Pair<>("With markups", new int[] {7, 11, 14})),
         pairToString(TestUtils.extractMarkup(BasedSequence.of("⟦  ⟧With ⦙mark⦙ups⦙"))));
     assertEquals(
-        pairToString(Pair.of("With markups\nMore markups", new int[] {7, 11, 14, 22, 26, 29})),
+        pairToString(new Pair<>("With markups\nMore markups", new int[] {7, 11, 14, 22, 26, 29})),
         pairToString(
             TestUtils.extractMarkup(BasedSequence.of("⟦  ⟧With ⦙mark⦙ups⦙\n⟦  ⟧More ⦙mark⦙ups⦙"))));
   }

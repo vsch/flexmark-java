@@ -420,12 +420,12 @@ public class HtmlRendererTest {
         defaultRenderer().render(parse("![foo &auml;](/url)\n")));
   }
 
-  static class CustomLinkResolverImpl implements LinkResolver {
-    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
+  private static class CustomLinkResolverImpl implements LinkResolver {
+    static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
 
-    final String docUrl;
+    private final String docUrl;
 
-    public CustomLinkResolverImpl(LinkResolverBasicContext context) {
+    CustomLinkResolverImpl(LinkResolverBasicContext context) {
       docUrl = DOC_RELATIVE_URL.get(context.getOptions());
     }
 

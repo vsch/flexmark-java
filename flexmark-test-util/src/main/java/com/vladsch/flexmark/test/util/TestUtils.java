@@ -198,7 +198,7 @@ public class TestUtils {
 
     String section = sb.toString();
     if (section.isEmpty()) section = headingText;
-    return Pair.of(section, lastSectionLevel);
+    return new Pair<>(section, lastSectionLevel);
   }
 
   /**
@@ -842,10 +842,10 @@ public class TestUtils {
         sequence.subSequence(lastOffset, offset).addSegments(builder.getSegmentBuilder());
       }
 
-      return Pair.of(builder.toSequence(), offsets);
+      return new Pair<>(builder.toSequence(), offsets);
     }
 
-    return Pair.of(input, EMPTY_OFFSETS);
+    return new Pair<>(input, EMPTY_OFFSETS);
   }
 
   private static final String BANNER_PADDING =

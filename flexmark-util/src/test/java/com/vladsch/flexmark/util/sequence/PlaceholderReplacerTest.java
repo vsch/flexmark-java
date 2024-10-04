@@ -11,7 +11,7 @@ import java.util.function.Function;
 import org.junit.Test;
 
 public class PlaceholderReplacerTest {
-  static List<String[]> spansOf(String... spans) {
+  private static List<String[]> spansOf(String... spans) {
     List<String[]> params = new ArrayList<>(spans.length);
     for (String span : spans) {
       params.add(new String[] {span});
@@ -19,7 +19,7 @@ public class PlaceholderReplacerTest {
     return params;
   }
 
-  static String[] spansOf(List<String[]> spans) {
+  private static String[] spansOf(List<String[]> spans) {
     String[] params = new String[spans.size()];
 
     int i = 0;
@@ -29,8 +29,8 @@ public class PlaceholderReplacerTest {
     return params;
   }
 
-  static Function<String[], String> ourGetter = span -> span[0];
-  static BiConsumer<String[], String> ourSetter = (span, text) -> span[0] = text;
+  private static Function<String[], String> ourGetter = span -> span[0];
+  private static BiConsumer<String[], String> ourSetter = (span, text) -> span[0] = text;
 
   @Test
   public void test_simple() {

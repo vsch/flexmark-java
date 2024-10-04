@@ -393,7 +393,7 @@ public class ParserTest {
     assertFalse(it.hasNext());
   }
 
-  String escape(String input, Parser parser) {
+  private static String escape(String input, Parser parser) {
     BasedSequence baseSeq = BasedSequence.of(input);
     List<SpecialLeadInHandler> handlers = Parser.SPECIAL_LEAD_IN_HANDLERS.get(parser.getOptions());
     StringBuilder sb = new StringBuilder();

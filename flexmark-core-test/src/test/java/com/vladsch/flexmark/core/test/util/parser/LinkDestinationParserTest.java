@@ -8,11 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class LinkDestinationParserTest {
-  LinkDestinationParser noParenParser;
-  LinkDestinationParser normalParser;
-  LinkDestinationParser spacesParser;
-  LinkDestinationParser jekyllParser;
-  LinkDestinationParser jekyllSpacesParser;
+  private LinkDestinationParser noParenParser;
+  private LinkDestinationParser normalParser;
+  private LinkDestinationParser spacesParser;
+  private LinkDestinationParser jekyllParser;
+  private LinkDestinationParser jekyllSpacesParser;
 
   @Before
   public void setUp() {

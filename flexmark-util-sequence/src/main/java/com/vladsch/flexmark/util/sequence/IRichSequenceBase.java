@@ -160,7 +160,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
    *     then {@link #nullSequence()}
    */
   public final Pair<T, T> subSequenceBeforeAfter(Range range) {
-    return Pair.of(subSequenceBefore(range), subSequenceAfter(range));
+    return new Pair<>(subSequenceBefore(range), subSequenceAfter(range));
   }
 
   @NotNull

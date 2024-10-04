@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized;
 
 public final class ComboKramdownCompatibilitySpecTest extends CoreRendererSpecTest {
   private static final String SPEC_RESOURCE = "/core_kramdown_compatibility_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
       ResourceLocation.of(SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       new MutableDataSet()

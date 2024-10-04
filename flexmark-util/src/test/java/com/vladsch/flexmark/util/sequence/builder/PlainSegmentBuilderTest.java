@@ -70,7 +70,7 @@ public class PlainSegmentBuilderTest {
     BasedSequence sequence = BasedSequence.of(input);
 
     PlainSegmentBuilder segments =
-        PlainSegmentBuilder.emptyBuilder(F_TRACK_FIRST256 | PlainSegmentBuilder.F_INCLUDE_ANCHORS);
+        PlainSegmentBuilder.emptyBuilder(F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
     segments.append(0, 0);
     segments.append(sequence.length(), sequence.length());
 
@@ -148,7 +148,7 @@ public class PlainSegmentBuilderTest {
     BasedSequence sequence = BasedSequence.of(input);
 
     PlainSegmentBuilder segments =
-        PlainSegmentBuilder.emptyBuilder(F_TRACK_FIRST256 | PlainSegmentBuilder.F_INCLUDE_ANCHORS);
+        PlainSegmentBuilder.emptyBuilder(F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
     segments.append("  ");
     segments.append(0, 4);
@@ -169,7 +169,7 @@ public class PlainSegmentBuilderTest {
     BasedSequence sequence = BasedSequence.of(input);
 
     PlainSegmentBuilder segments =
-        PlainSegmentBuilder.emptyBuilder(F_TRACK_FIRST256 | PlainSegmentBuilder.F_INCLUDE_ANCHORS);
+        PlainSegmentBuilder.emptyBuilder(F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
     segments.append("  ");
     segments.append(0, 4);
@@ -190,7 +190,7 @@ public class PlainSegmentBuilderTest {
     BasedSequence sequence = BasedSequence.of(input);
 
     PlainSegmentBuilder segments =
-        PlainSegmentBuilder.emptyBuilder(F_TRACK_FIRST256 | PlainSegmentBuilder.F_INCLUDE_ANCHORS);
+        PlainSegmentBuilder.emptyBuilder(F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
     segments.append("  ");
     segments.append(0, 4);
@@ -522,18 +522,17 @@ public class PlainSegmentBuilderTest {
     Optimization tests, optimizer for backward compatibility
   */
 
-  static class OptimizedSegmentBuilder2 extends PlainSegmentBuilder {
-    final CharSequence myBase;
-    final CharRecoveryOptimizer myOptimizer;
+  private static class OptimizedSegmentBuilder2 extends PlainSegmentBuilder {
+    private final CharSequence myBase;
+    private final CharRecoveryOptimizer myOptimizer;
 
-    public OptimizedSegmentBuilder2(CharSequence base, CharRecoveryOptimizer optimizer) {
+    OptimizedSegmentBuilder2(CharSequence base, CharRecoveryOptimizer optimizer) {
       super(F_INCLUDE_ANCHORS | F_TRACK_FIRST256);
       myBase = base;
       myOptimizer = optimizer;
     }
 
-    public OptimizedSegmentBuilder2(
-        CharSequence base, CharRecoveryOptimizer optimizer, int options) {
+    OptimizedSegmentBuilder2(CharSequence base, CharRecoveryOptimizer optimizer, int options) {
       super(options);
       myBase = base;
       myOptimizer = optimizer;
@@ -1093,7 +1092,7 @@ public class PlainSegmentBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     OptimizedSegmentBuilder2 segments =
         OptimizedSegmentBuilder2.emptyBuilder(
-            sequence, optimizer, F_TRACK_FIRST256 | OptimizedSegmentBuilder2.F_INCLUDE_ANCHORS);
+            sequence, optimizer, F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
@@ -1121,7 +1120,7 @@ public class PlainSegmentBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     OptimizedSegmentBuilder2 segments =
         OptimizedSegmentBuilder2.emptyBuilder(
-            sequence, optimizer, F_TRACK_FIRST256 | OptimizedSegmentBuilder2.F_INCLUDE_ANCHORS);
+            sequence, optimizer, F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
@@ -1150,7 +1149,7 @@ public class PlainSegmentBuilderTest {
     CharRecoveryOptimizer optimizer = new CharRecoveryOptimizer(PositionAnchor.CURRENT);
     OptimizedSegmentBuilder2 segments =
         OptimizedSegmentBuilder2.emptyBuilder(
-            sequence, optimizer, F_TRACK_FIRST256 | OptimizedSegmentBuilder2.F_INCLUDE_ANCHORS);
+            sequence, optimizer, F_TRACK_FIRST256 | ISegmentBuilder.F_INCLUDE_ANCHORS);
 
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {

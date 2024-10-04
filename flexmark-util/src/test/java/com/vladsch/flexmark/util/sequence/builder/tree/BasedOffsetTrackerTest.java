@@ -15,9 +15,9 @@ public class BasedOffsetTrackerTest {
   private static Pair<String, Integer> getInput(String input) {
     int pos = input.indexOf("⦙");
     if (pos >= 0) {
-      return Pair.of(input.substring(0, pos) + input.substring(pos + 1), pos);
+      return new Pair<>(input.substring(0, pos) + input.substring(pos + 1), pos);
     }
-    return Pair.of(input, 0);
+    return new Pair<>(input, 0);
   }
 
   private static String getResult(String actual, OffsetInfo result) {

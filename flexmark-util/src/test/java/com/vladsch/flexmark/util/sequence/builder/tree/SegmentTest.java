@@ -10,7 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentTest {
-  static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
+  private static void loop(
+      int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
     int iMaxStart = start + span;
     int iMinEnd = end - span;
 
@@ -29,7 +30,7 @@ public class SegmentTest {
     }
   }
 
-  static void loopSizes(BiConsumer<Integer, Integer> consumer) {
+  private static void loopSizes(BiConsumer<Integer, Integer> consumer) {
     loop(0, 16, 8, 0, consumer);
     loop(16, 256, 8, 1, consumer);
     loop(256, 65536, 8, 2, consumer);
@@ -37,14 +38,14 @@ public class SegmentTest {
     loop(65536 * 256, Integer.MAX_VALUE, 8, 4, consumer);
   }
 
-  static void loopSizesShort(BiConsumer<Integer, Integer> consumer) {
+  private static void loopSizesShort(BiConsumer<Integer, Integer> consumer) {
     loop(0, 16, 8, 0, consumer);
     loop(16, 256, 8, 1, consumer);
     loop(256, 65536, 8, 2, consumer);
     loop(65536, 65536 * 8, 8, 3, consumer);
   }
 
-  static void loopEnd(int startOffset, BiConsumer<Integer, Integer> consumer) {
+  private static void loopEnd(int startOffset, BiConsumer<Integer, Integer> consumer) {
     loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
     loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
     loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
@@ -52,7 +53,7 @@ public class SegmentTest {
     loop(startOffset + 65536 * 256, Seg.MAX_TEXT_OFFSET, 8, 4, consumer);
   }
 
-  static void loopEndShort(int startOffset, BiConsumer<Integer, Integer> consumer) {
+  private static void loopEndShort(int startOffset, BiConsumer<Integer, Integer> consumer) {
     loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
     loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
     loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
@@ -86,11 +87,11 @@ public class SegmentTest {
         });
   }
 
-  static class DummyCharSequence implements CharSequence {
-    final char myChar;
-    final int myLength;
+  private static class DummyCharSequence implements CharSequence {
+    private final char myChar;
+    private final int myLength;
 
-    public DummyCharSequence(char aChar, int length) {
+    DummyCharSequence(char aChar, int length) {
       myChar = aChar;
       myLength = length;
     }

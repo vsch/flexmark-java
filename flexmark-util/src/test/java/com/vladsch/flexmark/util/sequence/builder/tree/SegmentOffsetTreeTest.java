@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.sequence.builder.tree;
 import static com.vladsch.flexmark.util.misc.Utils.escapeJavaString;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_INCLUDE_ANCHORS;
 import static com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder.F_TRACK_FIRST256;
-import static com.vladsch.flexmark.util.sequence.builder.tree.SegmentTree.MAX_VALUE;
 import static org.junit.Assert.assertEquals;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -14,62 +13,11 @@ import com.vladsch.flexmark.util.sequence.builder.CharRecoveryOptimizer;
 import com.vladsch.flexmark.util.sequence.builder.SegmentBuilderBase;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import java.util.List;
-import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentOffsetTreeTest {
-  static void loop(int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
-    int iMaxStart = start + span;
-    int iMinEnd = end - span;
-
-    if (iMaxStart >= iMinEnd) {
-      for (int i = start; i < end; i++) {
-        consumer.accept(param, i);
-      }
-    } else {
-      for (int i = start; i < iMaxStart; i++) {
-        consumer.accept(param, i);
-      }
-
-      for (int i = iMinEnd; i < end; i++) {
-        consumer.accept(param, i);
-      }
-    }
-  }
-
-  static void loopSizes(BiConsumer<Integer, Integer> consumer) {
-    loop(0, 16, 8, 0, consumer);
-    loop(16, 256, 8, 1, consumer);
-    loop(256, 65536, 8, 2, consumer);
-    loop(65536, 65536 * 256, 8, 3, consumer);
-    loop(65536 * 256, MAX_VALUE, 8, 4, consumer);
-  }
-
-  static void loopSizesShort(BiConsumer<Integer, Integer> consumer) {
-    loop(0, 16, 8, 0, consumer);
-    loop(16, 256, 8, 1, consumer);
-    loop(256, 65536, 8, 2, consumer);
-    loop(65536, 65536 * 256, 8, 3, consumer);
-    loop(65536 * 256, MAX_VALUE, 8, 4, consumer);
-  }
-
-  static void loopEnd(int startOffset, BiConsumer<Integer, Integer> consumer) {
-    loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
-    loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
-    loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
-    loop(startOffset + 65536, startOffset + 65536 * 256, 8, 3, consumer);
-    loop(startOffset + 65536 * 256, MAX_VALUE, 8, 4, consumer);
-  }
-
-  static void loopEndShort(int startOffset, BiConsumer<Integer, Integer> consumer) {
-    loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
-    loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
-    loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
-    loop(startOffset + 65536, startOffset + 65536 * 8, 8, 3, consumer);
-  }
-
-  void assertCharAt(
+  private static void assertCharAt(
       @NotNull BasedSequence sequence,
       @NotNull SegmentBuilderBase<?> segments,
       @NotNull SegmentTree segTree) {

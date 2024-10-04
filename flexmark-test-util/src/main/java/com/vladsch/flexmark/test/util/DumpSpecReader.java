@@ -9,10 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.AssumptionViolatedException;
 
 public class DumpSpecReader extends SpecReader {
-  protected final StringBuilder sb = new StringBuilder();
-  protected final StringBuilder sbExp = new StringBuilder();
-  protected final SpecExampleProcessor testCase;
-  protected StringBuilder exampleComment;
+  private final StringBuilder sb = new StringBuilder();
+  private final StringBuilder sbExp = new StringBuilder();
+  private final SpecExampleProcessor testCase;
 
   public DumpSpecReader(
       @NotNull InputStream stream,

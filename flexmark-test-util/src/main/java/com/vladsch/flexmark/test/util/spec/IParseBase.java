@@ -3,25 +3,13 @@ package com.vladsch.flexmark.test.util.spec;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.IParse;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class IParseBase implements IParse {
-  private final DataHolder myOptions;
-
-  public IParseBase() {
-    this(null);
-  }
-
-  public IParseBase(DataHolder options) {
-    myOptions = options;
-  }
-
   @Override
   public @NotNull Node parse(@NotNull String input) {
     return parse(BasedSequence.of(input));
@@ -53,11 +41,5 @@ public abstract class IParseBase implements IParse {
 
     BasedSequence source = BasedSequence.of(file.toString());
     return parse(source);
-  }
-
-  @Override
-  @Nullable
-  public DataHolder getOptions() {
-    return myOptions;
   }
 }

@@ -6,8 +6,8 @@ import com.vladsch.flexmark.util.data.DataHolder;
 import org.jetbrains.annotations.NotNull;
 
 public final class FullOrigSpec028CoreTest extends OrigSpecCoreTest {
-  static final String SPEC_RESOURCE = "/spec.0.28.txt";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+  private static final String SPEC_RESOURCE = "/spec.0.28.txt";
+  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
       ResourceLocation.of(SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       ParserEmulationProfile.COMMONMARK_0_28.getProfileOptions().toImmutable();

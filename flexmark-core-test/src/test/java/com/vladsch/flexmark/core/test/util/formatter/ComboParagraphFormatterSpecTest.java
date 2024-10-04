@@ -34,7 +34,7 @@ import org.junit.runners.Parameterized;
 
 public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
   private static final String SPEC_RESOURCE = "/core_paragraph_formatter_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
       ResourceLocation.of(SPEC_RESOURCE);
 
   public static final DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
@@ -63,7 +63,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     super(example, optionsMap, OPTIONS);
   }
 
-  static DataHolder firstWidthDeltaOption(@Nullable Integer params) {
+  private static DataHolder firstWidthDeltaOption(@Nullable Integer params) {
     int value = params != null ? params : -1;
     return new MutableDataSet().set(FIRST_WIDTH_DELTA, value);
   }
@@ -85,29 +85,30 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     }
   }
 
-  static class ParagraphParser extends IParseBase {
-    public ParagraphParser() {}
-
-    public ParagraphParser(DataHolder options) {
-      super(options);
+  private static class ParagraphParser extends IParseBase {
+    ParagraphParser(DataHolder options) {
+      super();
     }
 
     @Override
     public @NotNull Node parse(@NotNull BasedSequence input) {
       return new ParagraphTextNode(input);
     }
+
+    @Override
+    public @Nullable DataHolder getOptions() {
+      return null;
+    }
   }
 
-  static class ParagraphFormatter extends IRenderBase {
-    public ParagraphFormatter() {}
-
-    public ParagraphFormatter(DataHolder options) {
+  private static class ParagraphFormatter extends IRenderBase {
+    ParagraphFormatter(DataHolder options) {
       super(options);
     }
 
-    static final String BANNER_TRACKED_OFFSETS = TestUtils.bannerText("Tracked Offsets");
-    static final String BANNER_WITH_RANGES = TestUtils.bannerText("Ranges");
-    static final String BANNER_RESULT = TestUtils.bannerText("Result");
+    private static final String BANNER_TRACKED_OFFSETS = TestUtils.bannerText("Tracked Offsets");
+    private static final String BANNER_WITH_RANGES = TestUtils.bannerText("Ranges");
+    private static final String BANNER_RESULT = TestUtils.bannerText("Result");
 
     @Override
     public void render(@NotNull Node document, @NotNull Appendable output) {

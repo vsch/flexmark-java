@@ -57,7 +57,7 @@ public class FormatterUtils {
           "FIRST_LIST_ITEM_CHILD",
           false); // Set to true for first block list item child of an empty list item
   public static final Function<CharSequence, Pair<Integer, Integer>> NULL_PADDING =
-      sequence -> Pair.of(0, 0);
+      sequence -> new Pair<>(0, 0);
   public static final DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC =
       new DataKey<>(
           "LIST_ITEM_NUMBER",
@@ -292,9 +292,10 @@ public class FormatterUtils {
         document.set(
             LIST_ALIGN_NUMERIC,
             formatterOptions.listAlignNumeric.isLeft()
-                ? sequence -> Pair.of(0, Math.min(4, Math.max(0, finalMaxLen - sequence.length())))
+                ? sequence ->
+                    new Pair<>(0, Math.min(4, Math.max(0, finalMaxLen - sequence.length())))
                 : sequence ->
-                    Pair.of(Math.min(4, Math.max(0, finalMaxLen - sequence.length())), 0));
+                    new Pair<>(Math.min(4, Math.max(0, finalMaxLen - sequence.length())), 0));
       }
     }
 

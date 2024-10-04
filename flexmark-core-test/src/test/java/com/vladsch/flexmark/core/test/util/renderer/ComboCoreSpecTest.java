@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public final class ComboCoreSpecTest extends CoreRendererSpecTest {
-  static final String SPEC_RESOURCE = "/ast_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+  private static final String SPEC_RESOURCE = "/ast_spec.md";
+  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
       ResourceLocation.of(SPEC_RESOURCE);
 
   private static final DataHolder OPTIONS =

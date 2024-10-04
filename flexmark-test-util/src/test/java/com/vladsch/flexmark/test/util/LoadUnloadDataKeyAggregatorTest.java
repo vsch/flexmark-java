@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 
 import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
@@ -21,10 +20,7 @@ import java.util.Map;
 import org.junit.Test;
 
 public class LoadUnloadDataKeyAggregatorTest {
-  public static final DataKey<Collection<Class<? extends Extension>>> LOAD_EXTENSION_CLASSES =
-      new DataKey<>("LOAD_EXTENSION_CLASSES", Collections.emptyList());
-
-  static final Map<String, DataHolder> optionsMap = new HashMap<>();
+  private static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
   static {
     optionsMap.put(
@@ -47,15 +43,15 @@ public class LoadUnloadDataKeyAggregatorTest {
         new MutableDataSet().set(UNLOAD_EXTENSIONS, Collections.singletonList(Extension3.class)));
   }
 
-  static DataHolder getOption(String option) {
+  private static DataHolder getOption(String option) {
     return optionsMap.get(option);
   }
 
-  static class Extension1 implements Extension {}
+  private static class Extension1 implements Extension {}
 
-  static class Extension2 implements Extension {}
+  private static class Extension2 implements Extension {}
 
-  static class Extension3 implements Extension {}
+  private static class Extension3 implements Extension {}
 
   @Test
   public void test_loadExtension() {
@@ -89,7 +85,7 @@ public class LoadUnloadDataKeyAggregatorTest {
         toClasses(SharedDataKeys.EXTENSIONS.get(result3)));
   }
 
-  static Collection<Class<?>> toClasses(Collection<Extension> extensions) {
+  private static Collection<Class<?>> toClasses(Collection<Extension> extensions) {
     List<Class<?>> list = new ArrayList<>();
     for (Extension extension : extensions) {
       list.add(extension.getClass());

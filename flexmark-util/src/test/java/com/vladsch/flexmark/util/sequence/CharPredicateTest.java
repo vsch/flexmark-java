@@ -238,11 +238,11 @@ public class CharPredicateTest {
     }
   }
 
-  char randomChar() {
+  private static char randomChar() {
     return (char) (Character.MAX_CODE_POINT * Math.random());
   }
 
-  char randomAscii() {
+  private static char randomAscii() {
     return (char) (128 * Math.random());
   }
 
@@ -332,10 +332,12 @@ public class CharPredicateTest {
     }
   }
 
-  boolean allIn(String text, CharPredicate predicate) {
+  private static boolean allIn(String text, CharPredicate predicate) {
     int iMax = text.length();
     for (int i = 0; i < iMax; i++) {
-      if (!predicate.test(text.charAt(i))) return false;
+      if (!predicate.test(text.charAt(i))) {
+        return false;
+      }
     }
     return true;
   }

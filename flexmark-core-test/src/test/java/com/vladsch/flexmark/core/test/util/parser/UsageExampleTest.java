@@ -29,7 +29,7 @@ public class UsageExampleTest {
     assertEquals(4, visitor.wordCount);
   }
 
-  static class WordCountVisitor {
+  private static class WordCountVisitor {
     int wordCount = 0;
     private final NodeVisitor myVisitor;
 

@@ -2643,15 +2643,15 @@ public class SegmentedSequenceTreeTest {
     String input = "\n1234\n6789\n";
 
     BasedSequence sequence = basedSequenceOf(input);
-    assertSame(0, sequence.eolEndLength(0));
-    assertSame(0, sequence.eolEndLength(2));
-    assertSame(0, sequence.eolEndLength(3));
-    assertSame(0, sequence.eolEndLength(4));
-    assertSame(0, sequence.eolEndLength(5));
-    assertSame(0, sequence.eolEndLength(7));
-    assertSame(0, sequence.eolEndLength(8));
-    assertSame(0, sequence.eolEndLength(9));
-    assertSame(0, sequence.eolEndLength(10));
+    assertEquals(0, sequence.eolEndLength(0));
+    assertEquals(0, sequence.eolEndLength(2));
+    assertEquals(0, sequence.eolEndLength(3));
+    assertEquals(0, sequence.eolEndLength(4));
+    assertEquals(0, sequence.eolEndLength(5));
+    assertEquals(0, sequence.eolEndLength(7));
+    assertEquals(0, sequence.eolEndLength(8));
+    assertEquals(0, sequence.eolEndLength(9));
+    assertEquals(0, sequence.eolEndLength(10));
     assertEquals(1, sequence.eolEndLength(1));
     assertEquals(1, sequence.eolEndLength(6));
     assertEquals(1, sequence.eolEndLength(11));
@@ -2662,17 +2662,17 @@ public class SegmentedSequenceTreeTest {
     String input = "\r1234\r6789\r";
 
     BasedSequence sequence = basedSequenceOf(input);
-    assertSame(0, sequence.eolEndLength(0));
+    assertEquals(0, sequence.eolEndLength(0));
     assertEquals(1, sequence.eolEndLength(1));
-    assertSame(0, sequence.eolEndLength(2));
-    assertSame(0, sequence.eolEndLength(3));
-    assertSame(0, sequence.eolEndLength(4));
-    assertSame(0, sequence.eolEndLength(5));
+    assertEquals(0, sequence.eolEndLength(2));
+    assertEquals(0, sequence.eolEndLength(3));
+    assertEquals(0, sequence.eolEndLength(4));
+    assertEquals(0, sequence.eolEndLength(5));
     assertEquals(1, sequence.eolEndLength(6));
-    assertSame(0, sequence.eolEndLength(7));
-    assertSame(0, sequence.eolEndLength(8));
-    assertSame(0, sequence.eolEndLength(9));
-    assertSame(0, sequence.eolEndLength(10));
+    assertEquals(0, sequence.eolEndLength(7));
+    assertEquals(0, sequence.eolEndLength(8));
+    assertEquals(0, sequence.eolEndLength(9));
+    assertEquals(0, sequence.eolEndLength(10));
     assertEquals(1, sequence.eolEndLength(11));
   }
 
@@ -2681,18 +2681,18 @@ public class SegmentedSequenceTreeTest {
     String input = "\r\n234\r\n789\r\n";
 
     BasedSequence sequence = basedSequenceOf(input);
-    assertSame(0, sequence.eolEndLength(0));
-    assertSame(0, sequence.eolEndLength(1));
+    assertEquals(0, sequence.eolEndLength(0));
+    assertEquals(0, sequence.eolEndLength(1));
     assertEquals(2, sequence.eolEndLength(2));
-    assertSame(0, sequence.eolEndLength(3));
-    assertSame(0, sequence.eolEndLength(4));
-    assertSame(0, sequence.eolEndLength(5));
-    assertSame(0, sequence.eolEndLength(6));
+    assertEquals(0, sequence.eolEndLength(3));
+    assertEquals(0, sequence.eolEndLength(4));
+    assertEquals(0, sequence.eolEndLength(5));
+    assertEquals(0, sequence.eolEndLength(6));
     assertEquals(2, sequence.eolEndLength(7));
-    assertSame(0, sequence.eolEndLength(8));
-    assertSame(0, sequence.eolEndLength(9));
-    assertSame(0, sequence.eolEndLength(10));
-    assertSame(0, sequence.eolEndLength(11));
+    assertEquals(0, sequence.eolEndLength(8));
+    assertEquals(0, sequence.eolEndLength(9));
+    assertEquals(0, sequence.eolEndLength(10));
+    assertEquals(0, sequence.eolEndLength(11));
     assertEquals(2, sequence.eolEndLength(12));
   }
 
@@ -2760,17 +2760,17 @@ public class SegmentedSequenceTreeTest {
 
     BasedSequence sequence = basedSequenceOf(input);
     assertEquals(1, sequence.eolStartLength(0));
-    assertSame(0, sequence.eolStartLength(1));
-    assertSame(0, sequence.eolStartLength(2));
-    assertSame(0, sequence.eolStartLength(3));
-    assertSame(0, sequence.eolStartLength(4));
+    assertEquals(0, sequence.eolStartLength(1));
+    assertEquals(0, sequence.eolStartLength(2));
+    assertEquals(0, sequence.eolStartLength(3));
+    assertEquals(0, sequence.eolStartLength(4));
     assertEquals(1, sequence.eolStartLength(5));
-    assertSame(0, sequence.eolStartLength(6));
-    assertSame(0, sequence.eolStartLength(7));
-    assertSame(0, sequence.eolStartLength(8));
-    assertSame(0, sequence.eolStartLength(9));
+    assertEquals(0, sequence.eolStartLength(6));
+    assertEquals(0, sequence.eolStartLength(7));
+    assertEquals(0, sequence.eolStartLength(8));
+    assertEquals(0, sequence.eolStartLength(9));
     assertEquals(1, sequence.eolStartLength(10));
-    assertSame(0, sequence.eolStartLength(11));
+    assertEquals(0, sequence.eolStartLength(11));
   }
 
   @Test
@@ -2779,17 +2779,17 @@ public class SegmentedSequenceTreeTest {
 
     BasedSequence sequence = basedSequenceOf(input);
     assertEquals(1, sequence.eolStartLength(0));
-    assertSame(0, sequence.eolStartLength(1));
-    assertSame(0, sequence.eolStartLength(2));
-    assertSame(0, sequence.eolStartLength(3));
-    assertSame(0, sequence.eolStartLength(4));
+    assertEquals(0, sequence.eolStartLength(1));
+    assertEquals(0, sequence.eolStartLength(2));
+    assertEquals(0, sequence.eolStartLength(3));
+    assertEquals(0, sequence.eolStartLength(4));
     assertEquals(1, sequence.eolStartLength(5));
-    assertSame(0, sequence.eolStartLength(6));
-    assertSame(0, sequence.eolStartLength(7));
-    assertSame(0, sequence.eolStartLength(8));
-    assertSame(0, sequence.eolStartLength(9));
+    assertEquals(0, sequence.eolStartLength(6));
+    assertEquals(0, sequence.eolStartLength(7));
+    assertEquals(0, sequence.eolStartLength(8));
+    assertEquals(0, sequence.eolStartLength(9));
     assertEquals(1, sequence.eolStartLength(10));
-    assertSame(0, sequence.eolStartLength(11));
+    assertEquals(0, sequence.eolStartLength(11));
   }
 
   @Test
@@ -2798,18 +2798,18 @@ public class SegmentedSequenceTreeTest {
 
     BasedSequence sequence = basedSequenceOf(input);
     assertEquals(2, sequence.eolStartLength(0));
-    assertSame(0, sequence.eolStartLength(1));
-    assertSame(0, sequence.eolStartLength(2));
-    assertSame(0, sequence.eolStartLength(3));
-    assertSame(0, sequence.eolStartLength(4));
+    assertEquals(0, sequence.eolStartLength(1));
+    assertEquals(0, sequence.eolStartLength(2));
+    assertEquals(0, sequence.eolStartLength(3));
+    assertEquals(0, sequence.eolStartLength(4));
     assertEquals(2, sequence.eolStartLength(5));
-    assertSame(0, sequence.eolStartLength(6));
-    assertSame(0, sequence.eolStartLength(7));
-    assertSame(0, sequence.eolStartLength(8));
-    assertSame(0, sequence.eolStartLength(9));
+    assertEquals(0, sequence.eolStartLength(6));
+    assertEquals(0, sequence.eolStartLength(7));
+    assertEquals(0, sequence.eolStartLength(8));
+    assertEquals(0, sequence.eolStartLength(9));
     assertEquals(2, sequence.eolStartLength(10));
-    assertSame(0, sequence.eolStartLength(11));
-    assertSame(0, sequence.eolStartLength(12));
+    assertEquals(0, sequence.eolStartLength(11));
+    assertEquals(0, sequence.eolStartLength(12));
   }
 
   @Test

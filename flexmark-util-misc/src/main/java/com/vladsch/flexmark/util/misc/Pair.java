@@ -4,10 +4,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public final class Pair<K, V> implements Paired<K, V> {
-  public static <K1, V1> Pair<K1, V1> of(K1 first, V1 second) {
-    return new Pair<>(first, second);
-  }
-
   private final K first;
   private final V second;
 
@@ -46,27 +42,41 @@ public final class Pair<K, V> implements Paired<K, V> {
     StringBuilder out = new StringBuilder();
     out.append('(');
 
-    if (first == null) out.append("null");
-    else out.append(first);
+    if (first == null) {
+      out.append("null");
+    } else {
+      out.append(first);
+    }
 
     out.append(", ");
 
-    if (second == null) out.append("null");
-    else out.append(second);
+    if (second == null) {
+      out.append("null");
+    } else {
+      out.append(second);
+    }
 
     out.append(')');
     return out.toString();
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null) return false;
-    if (!(o instanceof Map.Entry<?, ?>)) return false;
+  public boolean equals(Object object) {
+    if (this == object) {
+      return true;
+    }
+    if (object == null) {
+      return false;
+    }
+    if (!(object instanceof Map.Entry<?, ?>)) {
+      return false;
+    }
 
-    Map.Entry<?, ?> pair = (Map.Entry<?, ?>) o;
+    Map.Entry<?, ?> pair = (Map.Entry<?, ?>) object;
 
-    if (!Objects.equals(first, pair.getKey())) return false;
+    if (!Objects.equals(first, pair.getKey())) {
+      return false;
+    }
     return Objects.equals(second, pair.getValue());
   }
 

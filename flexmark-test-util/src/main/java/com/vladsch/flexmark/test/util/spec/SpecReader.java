@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.test.util.spec;
 
-import static com.vladsch.flexmark.test.util.spec.SpecReader.State.COMMENT;
-
 import com.vladsch.flexmark.test.util.TestUtils;
 import com.vladsch.flexmark.util.misc.Pair;
 import java.io.BufferedReader;
@@ -18,41 +16,37 @@ import org.jetbrains.annotations.NotNull;
 public class SpecReader {
   public static final String EXAMPLE_KEYWORD = "example";
   public static final String EXAMPLE_BREAK = "````````````````````````````````";
-  public static final String EXAMPLE_START = EXAMPLE_BREAK + " " + EXAMPLE_KEYWORD;
-  public static final String EXAMPLE_START_NBSP = EXAMPLE_BREAK + "\u00A0" + EXAMPLE_KEYWORD;
+  private static final String EXAMPLE_START = EXAMPLE_BREAK + " " + EXAMPLE_KEYWORD;
+  private static final String EXAMPLE_START_NBSP = EXAMPLE_BREAK + "\u00A0" + EXAMPLE_KEYWORD;
   public static final String EXAMPLE_TEST_BREAK = "````````````````";
-  public static final String EXAMPLE_TEST_START = EXAMPLE_TEST_BREAK + " " + EXAMPLE_KEYWORD;
   public static final String OPTIONS_KEYWORD = "options";
-  public static final String OPTIONS_STRING = " " + OPTIONS_KEYWORD;
-  public static final Pattern OPTIONS_PATTERN =
+  private static final Pattern OPTIONS_PATTERN =
       Pattern.compile(
           ".*(?:\\s|\u00A0)\\Q"
               + OPTIONS_KEYWORD
               + "\\E(?:\\s|\u00A0)*\\((?:\\s|\u00A0)*(.*)(?:\\s|\u00A0)*\\)(?:\\s|\u00A0)*");
   public static final String SECTION_BREAK = ".";
   public static final String SECTION_TEST_BREAK = "…";
-  protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} +(.*)");
+  private static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} +(.*)");
 
-  protected final @NotNull InputStream inputStream;
-  protected final @NotNull ResourceLocation resourceLocation;
-  protected final boolean compoundSections;
-  protected final List<SpecExample> examples = new ArrayList<>();
-
-  protected final String[] sections =
+  private final @NotNull InputStream inputStream;
+  private final @NotNull ResourceLocation resourceLocation;
+  private final boolean compoundSections;
+  private final List<SpecExample> examples = new ArrayList<>();
+  private final String[] sections =
       new String[7]; // 0 is not used and signals no section when indexed by lastSectionLevel
-  protected int lastSectionLevel = 1;
 
-  protected State state = State.BEFORE;
-  protected String section;
-  protected String optionsSet;
-  protected StringBuilder source;
-  protected StringBuilder html;
-  protected StringBuilder ast;
-  protected StringBuilder comment;
-  protected int exampleNumber = 0;
-  protected int lineNumber = 0;
-  protected int contentLineNumber = 0;
-  protected int commentLineNumber = 0;
+  private State state = State.BEFORE;
+  private String section;
+  private String optionsSet;
+  private StringBuilder source;
+  private StringBuilder html;
+  private StringBuilder ast;
+  private StringBuilder comment;
+  private int exampleNumber = 0;
+  private int lineNumber = 0;
+  private int contentLineNumber = 0;
+  private int commentLineNumber = 0;
 
   public SpecReader(
       @NotNull InputStream stream, @NotNull ResourceLocation location, boolean compoundSections) {
@@ -83,12 +77,6 @@ public class SpecReader {
       result.add(example.getSource());
     }
     return result;
-  }
-
-  public static @NotNull SpecReader create(
-      @NotNull ResourceLocation location, boolean compoundSections) {
-    return create(
-        location, (stream, location1) -> new SpecReader(stream, location1, compoundSections));
   }
 
   public static @NotNull <S extends SpecReader> S create(
@@ -123,7 +111,7 @@ public class SpecReader {
         processLine(line);
       }
 
-      if (state == COMMENT) {
+      if (state == State.COMMENT) {
         // unterminated comment
         throw new IllegalStateException(
             "Unterminated comment\n" + resourceLocation.getFileUrl(commentLineNumber));
@@ -167,7 +155,7 @@ public class SpecReader {
           String trimmed = line.trim();
           if (trimmed.startsWith("<!--")) {
             if (!trimmed.endsWith("-->")) {
-              state = COMMENT;
+              state = State.COMMENT;
               commentLineNumber = lineNumber - 1;
             }
             lineProcessed = true;
@@ -179,7 +167,6 @@ public class SpecReader {
             if (compoundSections) {
               Pair<String, Integer> pair =
                   TestUtils.addSpecSection(matcher.group(), matcher.group(1), sections);
-              lastSectionLevel = pair.getSecond();
               section = pair.getFirst();
             } else {
               section = matcher.group(1);
@@ -266,24 +253,16 @@ public class SpecReader {
         if (comment == null) comment = new StringBuilder();
         comment.append(line).append('\n');
       }
-      addSpecLine(line, state != State.BEFORE && state != COMMENT);
+      addSpecLine(line, state != State.BEFORE && state != State.COMMENT);
     }
   }
 
-  protected void resetContents() {
+  private void resetContents() {
     optionsSet = "";
     source = new StringBuilder();
     html = new StringBuilder();
     ast = new StringBuilder();
     comment = null;
     contentLineNumber = 0;
-  }
-
-  protected enum State {
-    BEFORE,
-    SOURCE,
-    HTML,
-    AST,
-    COMMENT
   }
 }

@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.junit.Test;
 
 public class MergeFormatterCoreTest {
-  private static DataHolder OPTIONS =
+  private static final DataHolder OPTIONS =
       new MutableDataSet()
           .set(Parser.BLANK_LINES_IN_AST, true)
           .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
@@ -18,8 +18,8 @@ public class MergeFormatterCoreTest {
           .set(Formatter.DEFAULT_LINK_RESOLVER, true)
           .set(Formatter.MAX_TRAILING_BLANK_LINES, 0);
 
-  private static Formatter FORMATTER = Formatter.builder(OPTIONS).build();
-  private static Parser PARSER = Parser.builder(OPTIONS).build();
+  private static final Formatter FORMATTER = Formatter.builder(OPTIONS).build();
+  private static final Parser PARSER = Parser.builder(OPTIONS).build();
 
   private static void assertMerged(String expected, String... markdownSources) {
     assertMerged(expected, null, null, markdownSources);
@@ -49,7 +49,7 @@ public class MergeFormatterCoreTest {
     assertEquals("Merged results differ", expected, mergedOutput);
   }
 
-  void testRefLinkConflict() {
+  private static void testRefLinkConflict() {
     assertMerged(
         "[ref]\n"
             + "\n"
@@ -74,7 +74,7 @@ public class MergeFormatterCoreTest {
     testRefLinkConflict();
   }
 
-  void testRefLinkCompoundConflict() {
+  private static void testRefLinkCompoundConflict() {
     assertMerged(
         "[*ref*]\n"
             + "\n"
@@ -99,7 +99,7 @@ public class MergeFormatterCoreTest {
     testRefLinkCompoundConflict();
   }
 
-  void testRefImageConflict() {
+  private static void testRefImageConflict() {
     assertMerged(
         "[img]\n"
             + "\n"
@@ -124,7 +124,7 @@ public class MergeFormatterCoreTest {
     testRefImageConflict();
   }
 
-  void testRefImageCompoundConflict() {
+  private static void testRefImageCompoundConflict() {
     assertMerged(
         "[*img*]\n"
             + "\n"

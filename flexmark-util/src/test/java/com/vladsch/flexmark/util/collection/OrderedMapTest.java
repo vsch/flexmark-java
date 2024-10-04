@@ -12,7 +12,7 @@ public class OrderedMapTest {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
-      Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
+      Assert.assertNull(orderedMap.put(String.valueOf(i), i));
       Assert.assertEquals((Integer) i, orderedMap.put(String.valueOf(i), i));
     }
 
@@ -45,7 +45,7 @@ public class OrderedMapTest {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
-      Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
+      Assert.assertNull(orderedMap.put(String.valueOf(i), i));
       Assert.assertEquals((Integer) i, orderedMap.put(String.valueOf(i), i));
     }
 
@@ -83,7 +83,7 @@ public class OrderedMapTest {
     OrderedSet<String> retainSet = new OrderedSet<>();
 
     for (int i = 0; i < 10; i++) {
-      Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
+      Assert.assertNull(orderedMap.put(String.valueOf(i), i));
       Assert.assertEquals((Integer) i, orderedMap.put(String.valueOf(i), i));
     }
 
@@ -126,7 +126,7 @@ public class OrderedMapTest {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
-      Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
+      Assert.assertNull(orderedMap.put(String.valueOf(i), i));
       Assert.assertEquals((Integer) i, orderedMap.put(String.valueOf(i), i));
     }
 
@@ -166,7 +166,7 @@ public class OrderedMapTest {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
-      Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
+      Assert.assertNull(orderedMap.put(String.valueOf(i), i));
       Assert.assertEquals((Integer) i, orderedMap.put(String.valueOf(i), i));
     }
 
@@ -207,7 +207,7 @@ public class OrderedMapTest {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
-      Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
+      Assert.assertNull(orderedMap.put(String.valueOf(i), i));
       Assert.assertEquals((Integer) i, orderedMap.put(String.valueOf(i), i));
     }
 
@@ -252,7 +252,7 @@ public class OrderedMapTest {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
 
     for (int i = 0; i < 10; i++) {
-      Assert.assertEquals(null, orderedMap.put(String.valueOf(i), i));
+      Assert.assertNull(orderedMap.put(String.valueOf(i), i));
       Assert.assertEquals((Integer) i, orderedMap.put(String.valueOf(i), i));
     }
 

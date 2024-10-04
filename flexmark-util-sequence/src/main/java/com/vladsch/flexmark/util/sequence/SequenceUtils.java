@@ -148,7 +148,7 @@ public interface SequenceUtils {
    */
   @NotNull
   static <T extends CharSequence> Pair<T, T> subSequenceBeforeAfter(@NotNull T thizz, Range range) {
-    return Pair.of(subSequenceBefore(thizz, range), subSequenceAfter(thizz, range));
+    return new Pair<>(subSequenceBefore(thizz, range), subSequenceAfter(thizz, range));
   }
 
   static boolean containsAny(@NotNull CharSequence thizz, @NotNull CharPredicate s) {
@@ -1974,13 +1974,13 @@ public interface SequenceUtils {
       int digits = countLeading(text.substring(2), CharPredicate.HEXADECIMAL_DIGITS);
       String suffix = text.substring(2 + digits);
       if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
-        return Pair.of(parseLongOrNull(text.substring(2, 2 + digits), 16), suffix);
+        return new Pair<>(parseLongOrNull(text.substring(2, 2 + digits), 16), suffix);
       }
     } else if (text.startsWith("0b")) {
       int digits = countLeading(text.substring(2), CharPredicate.BINARY_DIGITS);
       String suffix = text.substring(2 + digits);
       if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
-        return Pair.of(parseLongOrNull(text.substring(2, 2 + digits), 2), suffix);
+        return new Pair<>(parseLongOrNull(text.substring(2, 2 + digits), 2), suffix);
       }
     } else if (text.startsWith("0")) {
       int digits = countLeading(text.substring(1), CharPredicate.OCTAL_DIGITS);
@@ -1988,7 +1988,7 @@ public interface SequenceUtils {
       if (digits == decimalDigits) {
         String suffix = text.substring(1 + digits);
         if (digits > 0 && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
-          return Pair.of(parseLongOrNull(text.substring(1, 1 + digits), 8), suffix);
+          return new Pair<>(parseLongOrNull(text.substring(1, 1 + digits), 8), suffix);
         }
       }
     }
@@ -1999,7 +1999,7 @@ public interface SequenceUtils {
     String suffix = text.substring(pos.getIndex());
     if (pos.getIndex() > 0
         && (suffix.isEmpty() || suffixTester == null || suffixTester.test(suffix))) {
-      return Pair.of(number, suffix);
+      return new Pair<>(number, suffix);
     }
 
     return null;

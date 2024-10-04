@@ -27,8 +27,7 @@ public class HtmlEmbeddedAttributeTest {
   @Before
   public void setUp() {
     options = new MutableDataSet();
-    options.set(
-        Parser.EXTENSIONS, Collections.singletonList(TestNodePostProcessorExtension.create()));
+    options.set(Parser.EXTENSIONS, Collections.singletonList(new TestNodePostProcessorExtension()));
 
     parser = Parser.builder(options).build();
     renderer = HtmlRenderer.builder(options).build();
@@ -60,7 +59,7 @@ public class HtmlEmbeddedAttributeTest {
                     + "\n[bar]: http://example.com/image.png 'Image Title'")));
   }
 
-  static class TestNodePostProcessor extends NodePostProcessor {
+  private static class TestNodePostProcessor extends NodePostProcessor {
     private static class TestNodeFactory extends NodePostProcessorFactory {
       TestNodeFactory() {
         super(false);
@@ -74,7 +73,7 @@ public class HtmlEmbeddedAttributeTest {
       }
     }
 
-    public static NodePostProcessorFactory Factory() {
+    static NodePostProcessorFactory Factory() {
       return new TestNodeFactory();
     }
 
@@ -93,9 +92,9 @@ public class HtmlEmbeddedAttributeTest {
    * An extension that registers a post processor which intentionally strips (replaces) specific
    * link and image-link tokens after parsing.
    */
-  static class TestNodePostProcessorExtension
+  private static class TestNodePostProcessorExtension
       implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    private TestNodePostProcessorExtension() {}
+    TestNodePostProcessorExtension() {}
 
     @Override
     public void rendererOptions(@NotNull MutableDataHolder options) {
@@ -114,10 +113,6 @@ public class HtmlEmbeddedAttributeTest {
     @Override
     public void extend(Parser.Builder parserBuilder) {
       parserBuilder.postProcessorFactory(TestNodePostProcessor.Factory());
-    }
-
-    public static TestNodePostProcessorExtension create() {
-      return new TestNodePostProcessorExtension();
     }
   }
 }
