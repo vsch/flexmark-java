@@ -57,6 +57,7 @@
     <connection>scm:git:https://github.com/acrolinx/flexmark-java.git</connection>
     <developerConnection>scm:git:https://github.com/acrolinx/flexmark-java.git</developerConnection>
     <tag>HEAD</tag>
+    <url>https://github.com/acrolinx/flexmark-java</url>
   </scm>
 
   <distributionManagement>
