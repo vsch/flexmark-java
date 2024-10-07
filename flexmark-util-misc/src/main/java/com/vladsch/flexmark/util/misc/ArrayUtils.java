@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.misc;
 
-import java.lang.reflect.Array;
 import java.util.BitSet;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -10,17 +9,6 @@ import org.jetbrains.annotations.Nullable;
 public class ArrayUtils {
   public static <T> boolean contained(T value, T[] array) {
     return indexOf(value, array) != -1;
-  }
-
-  @SafeVarargs
-  public static <T> T[] append(Class<T> elemClass, T[] array, T... values) {
-    if (values.length > 0) {
-      T[] newInstance = (T[]) Array.newInstance(elemClass, array.length + values.length);
-      System.arraycopy(array, 0, newInstance, 0, array.length);
-      System.arraycopy(values, 0, newInstance, array.length, values.length);
-      return newInstance;
-    }
-    return array;
   }
 
   public static boolean contained(int value, int[] array) {
@@ -41,20 +29,17 @@ public class ArrayUtils {
   }
 
   @Nullable
-  public static <T> T firstOf(T[] ts, int fromIndex, int endIndex, Predicate<? super T> predicate) {
+  private static <T> T firstOf(
+      T[] ts, int fromIndex, int endIndex, Predicate<? super T> predicate) {
     int i = indexOf(ts, fromIndex, endIndex, predicate);
     return i == -1 ? null : ts[i];
   }
 
-  public static <T> int indexOf(T t, T[] ts) {
+  private static <T> int indexOf(T t, T[] ts) {
     return indexOf(t, ts, 0, ts.length);
   }
 
-  public static <T> int indexOf(T t, T[] ts, int fromIndex) {
-    return indexOf(t, ts, fromIndex, ts.length);
-  }
-
-  public static <T> int indexOf(T t, T[] ts, int fromIndex, int endIndex) {
+  private static <T> int indexOf(T t, T[] ts, int fromIndex, int endIndex) {
     return indexOf(ts, fromIndex, endIndex, t1 -> Objects.equals(t, t1));
   }
 
@@ -110,18 +95,6 @@ public class ArrayUtils {
       T[] ts, int startIndex, int fromIndex, Predicate<? super T> predicate) {
     int i = lastIndexOf(ts, startIndex, fromIndex, predicate);
     return i == -1 ? null : ts[i];
-  }
-
-  public static <T> int lastIndexOf(T t, T[] ts) {
-    return lastIndexOf(t, ts, 0, ts.length);
-  }
-
-  public static <T> int lastIndexOf(T t, T[] ts, int fromIndex) {
-    return lastIndexOf(t, ts, 0, fromIndex);
-  }
-
-  public static <T> int lastIndexOf(T t, T[] ts, int startIndex, int fromIndex) {
-    return lastIndexOf(ts, startIndex, fromIndex, t1 -> Objects.equals(t, t1));
   }
 
   public static <T> int lastIndexOf(T[] ts, Predicate<? super T> predicate) {

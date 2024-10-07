@@ -370,7 +370,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   @NotNull
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    BasedSequence last = null;
     for (Object part : segments) {
       if (part instanceof Range) {
         BasedSequence s = baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd());
@@ -378,11 +377,8 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         if (s.isNotEmpty()) {
           s.appendTo(sb);
         }
-
-        last = s;
       } else if (part instanceof CharSequence) {
         sb.append(part);
-        last = null;
       } else if (part != null) {
         throw new IllegalStateException("Invalid part type " + part.getClass());
       }

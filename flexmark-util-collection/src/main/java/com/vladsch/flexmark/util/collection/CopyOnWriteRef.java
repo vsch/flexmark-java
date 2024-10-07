@@ -36,8 +36,4 @@ public class CopyOnWriteRef<T> {
     referenceCount = 0;
     this.value = copyFunction.apply(value);
   }
-
-  public boolean isMutable() {
-    return referenceCount == 0;
-  }
 }

@@ -16,7 +16,6 @@ import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.OrderedList;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.ParagraphContainer;
-import com.vladsch.flexmark.ast.SoftLineBreak;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.BlankLine;
@@ -154,35 +153,6 @@ public class FormatterUtils {
 
     prefix = RepeatedSequence.repeatOf(" ", Utils.minLimit(0, column - parentPrefix)).toString();
     return prefix;
-  }
-
-  public static BasedSequence getSoftLineBreakSpan(Node node) {
-    if (node == null) {
-      return NULL;
-    }
-
-    Node lastNode = node;
-    Node nextNode = node.getNext();
-
-    while (nextNode != null && !(nextNode instanceof SoftLineBreak)) {
-      lastNode = nextNode;
-      nextNode = nextNode.getNext();
-    }
-
-    return Node.spanningChars(node.getChars(), lastNode.getChars());
-  }
-
-  public static void appendWhiteSpaceBetween(
-      MarkdownWriter markdown,
-      Node prev,
-      Node next,
-      boolean preserve,
-      boolean collapse,
-      boolean collapseToEOL) {
-    if (next != null && prev != null && (preserve || collapse)) {
-      appendWhiteSpaceBetween(
-          markdown, prev.getChars(), next.getChars(), preserve, collapse, collapseToEOL);
-    }
   }
 
   public static void appendWhiteSpaceBetween(
@@ -431,7 +401,7 @@ public class FormatterUtils {
     }
   }
 
-  static boolean hasLooseItems(Iterable<Node> itemList) {
+  private static boolean hasLooseItems(Iterable<Node> itemList) {
     for (Node item : itemList) {
       if (item instanceof ListItem) {
         if (!((ListItem) item).isOwnTight() && item.getNext() != null) {

@@ -11,13 +11,9 @@ public class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet,
     this(computable, 0);
   }
 
-  public IndexedItemBitSetMap(@NotNull Function<M, K> computable, int capacity) {
+  private IndexedItemBitSetMap(@NotNull Function<M, K> computable, int capacity) {
     super(capacity);
     this.computable = computable;
-  }
-
-  public @NotNull Function<M, K> getComputable() {
-    return computable;
   }
 
   @Override

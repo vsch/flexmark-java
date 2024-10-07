@@ -33,12 +33,8 @@ public class OrderedSet<E> implements Set<E> {
     this(0);
   }
 
-  public OrderedSet(int capacity) {
+  private OrderedSet(int capacity) {
     this(capacity, null);
-  }
-
-  public OrderedSet(@NotNull CollectionHost<E> host) {
-    this(0, host);
   }
 
   public OrderedSet(int capacity, @Nullable CollectionHost<E> host) {
@@ -58,25 +54,6 @@ public class OrderedSet<E> implements Set<E> {
       if (i != -1) {
         bitSet.set(i);
       }
-    }
-    return bitSet;
-  }
-
-  public @NotNull BitSet differenceBitSet(@NotNull Iterable<? extends E> items) {
-    return differenceBitSet(items.iterator());
-  }
-
-  public @NotNull BitSet differenceBitSet(@NotNull Iterator<? extends E> items) {
-    BitSet bitSet = new BitSet();
-    int j = 0;
-    while (items.hasNext()) {
-      E element = items.next();
-
-      int i = indexOf(element);
-      if (i != j) {
-        bitSet.set(i);
-      }
-      j++;
     }
     return bitSet;
   }
@@ -101,30 +78,10 @@ public class OrderedSet<E> implements Set<E> {
     return bitSet;
   }
 
-  public @NotNull BitSet valueDifferenceBitSet(
-      @NotNull Iterable<? extends Map.Entry<?, ? extends E>> items) {
-    return valueDifferenceBitSet(items.iterator());
-  }
-
-  public @NotNull BitSet valueDifferenceBitSet(
-      @NotNull Iterator<? extends Map.Entry<?, ? extends E>> items) {
-    BitSet bitSet = new BitSet();
-    int j = 0;
-    while (items.hasNext()) {
-      Map.Entry<?, ? extends E> entry = items.next();
-      int i = indexOf(entry.getValue());
-      if (i != j) {
-        bitSet.set(i);
-      }
-      j++;
-    }
-    return bitSet;
-  }
-
   private class IndexedProxy implements Indexed<E> {
     private final boolean allowConcurrentMods;
 
-    public IndexedProxy(boolean allowConcurrentMods) {
+    IndexedProxy(boolean allowConcurrentMods) {
       this.allowConcurrentMods = allowConcurrentMods;
     }
 
@@ -180,10 +137,6 @@ public class OrderedSet<E> implements Set<E> {
 
   public static <T1> T1 ifNull(T1 o, T1 nullValue) {
     return o == null ? nullValue : o;
-  }
-
-  public boolean inHostUpdate() {
-    return host != null && host.skipHostUpdate();
   }
 
   public int indexOf(@Nullable Object element) {

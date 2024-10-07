@@ -97,7 +97,6 @@ public class TableCell {
       int trackedTextAdjust,
       boolean afterSpace,
       boolean afterDelete) {
-
     BasedSequence chars = BasedSequence.of(text);
     this.tableCellNode = tableCellNode;
     this.openMarker = BasedSequence.of(openMarker);

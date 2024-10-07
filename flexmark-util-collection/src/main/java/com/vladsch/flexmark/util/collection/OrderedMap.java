@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -210,11 +209,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     return keySet.isValidIndex(index);
   }
 
-  public void addNull() {
-    addNulls(valueList.size());
-  }
-
-  public void addNulls(int index) {
+  private void addNulls(int index) {
     if (index < valueList.size())
       throw new IllegalArgumentException(
           "addNulls(" + index + ") called when valueList size is " + valueList.size());
@@ -238,18 +233,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     V old = valueList.get(index);
     valueList.set(index, v);
     return old;
-  }
-
-  public @NotNull V computeIfMissing(
-      @NotNull K k, @NotNull Function<? super K, ? extends V> runnableValue) {
-    int index = keySet.indexOf(k);
-    if (index == -1) {
-      V v = runnableValue.apply(k);
-      keySet.add(k, v);
-      return v;
-    }
-
-    return valueList.get(index);
   }
 
   @Override
@@ -296,14 +279,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     return values;
   }
 
-  public @Nullable K getKey(int index) {
-    if (!keySet.isValidIndex(index)) {
-      return null;
-    }
-
-    return keySet.getValueList().get(index);
-  }
-
   public @Nullable V getValue(int index) {
     if (!keySet.isValidIndex(index)) {
       return null;
@@ -340,25 +315,12 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     return values;
   }
 
-  public @NotNull List<K> keys() {
-    // create it with inHostUpdate already set so we can populate it without callbacks
-    return keySet.values();
-  }
-
   public @NotNull ReversibleIndexedIterator<V> valueIterator() {
     return new IndexedIterator<>(getIndexedValueProxy(), keySet.indexIterator());
   }
 
-  public @NotNull ReversibleIndexedIterator<V> reversedValueIterator() {
-    return new IndexedIterator<>(getIndexedValueProxy(), keySet.reversedIndexIterator());
-  }
-
   public @NotNull ReversibleIndexedIterator<K> keyIterator() {
     return keySet.iterator();
-  }
-
-  public @NotNull ReversibleIndexedIterator<K> reversedKeyIterator() {
-    return keySet.reversedIterator();
   }
 
   public @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
@@ -369,24 +331,8 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     return new IndexedIterator<>(getIndexedEntryProxy(), keySet.reversedIndexIterator());
   }
 
-  public @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> reversedIterator() {
-    return reversedEntryIterator();
-  }
-
   public @NotNull ReversibleIterable<V> valueIterable() {
     return new IndexedIterable<>(getIndexedValueProxy(), keySet.indexIterable());
-  }
-
-  public @NotNull ReversibleIterable<V> reversedValueIterable() {
-    return new IndexedIterable<>(getIndexedValueProxy(), keySet.reversedIndexIterable());
-  }
-
-  public @NotNull ReversibleIterable<K> keyIterable() {
-    return keySet.iterable();
-  }
-
-  public @NotNull ReversibleIterable<K> reversedKeyIterable() {
-    return keySet.reversedIterable();
   }
 
   public @NotNull ReversibleIterable<Map.Entry<K, V>> entryIterable() {

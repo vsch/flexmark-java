@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import org.jetbrains.annotations.NotNull;
 
@@ -141,16 +142,14 @@ public class ResourceLocation {
     StringBuilder sb = new StringBuilder();
     try {
       String line;
-      InputStream inputStream = getResourceInputStream(location);
-      InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-      BufferedReader reader = new BufferedReader(streamReader);
-      while ((line = reader.readLine()) != null) {
-        sb.append(line);
-        sb.append("\n");
+      try (InputStream inputStream = getResourceInputStream(location);
+          Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+          BufferedReader bufferedReader = new BufferedReader(reader)) {
+        while ((line = bufferedReader.readLine()) != null) {
+          sb.append(line);
+          sb.append("\n");
+        }
       }
-      reader.close();
-      streamReader.close();
-      inputStream.close();
       return sb.toString();
     } catch (IOException e) {
       throw new RuntimeException(e);

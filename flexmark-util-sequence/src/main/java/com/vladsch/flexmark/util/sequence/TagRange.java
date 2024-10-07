@@ -1,16 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 public class TagRange extends Range {
-  protected final String tag;
-
-  public static TagRange of(CharSequence tag, int start, int end) {
-    return new TagRange(tag, start, end);
-  }
-
-  public TagRange(CharSequence tag, Range range) {
-    super(range);
-    this.tag = String.valueOf(tag);
-  }
+  private final String tag;
 
   public TagRange(CharSequence tag, int start, int end) {
     super(start, end);
@@ -19,10 +10,6 @@ public class TagRange extends Range {
 
   public String getTag() {
     return tag;
-  }
-
-  public TagRange withTag(CharSequence tag) {
-    return this.tag.equals(String.valueOf(tag)) ? this : new TagRange(tag, getStart(), getEnd());
   }
 
   @Override

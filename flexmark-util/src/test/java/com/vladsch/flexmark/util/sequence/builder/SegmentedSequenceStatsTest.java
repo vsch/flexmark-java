@@ -51,7 +51,7 @@ public class SegmentedSequenceStatsTest {
 
     BasedOptionsSequence s1 =
         BasedOptionsSequence.of(sC, BasedOptionsHolder.F_COLLECT_SEGMENTED_STATS, options);
-    BasedSequence s = BasedSequence.of(s1).subSequence(0, ((CharSequence) s1).length());
+    BasedSequence s = BasedSequence.of(s1).subSequence(0, s1.length());
 
     int iMax = s.length();
     for (int i = 0; i < iMax; i++) {

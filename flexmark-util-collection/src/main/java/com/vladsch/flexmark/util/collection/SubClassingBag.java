@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class SubClassingBag<T> {
   private final @NotNull ClassificationBag<Class<?>, T> items;
@@ -26,27 +25,6 @@ public class SubClassingBag<T> {
         this.subClassMap.put(clazz, bitSet);
       }
     }
-  }
-
-  public @NotNull OrderedSet<T> getItems() {
-    return items.getItems();
-  }
-
-  public boolean contains(@Nullable T item) {
-    return items.contains(item);
-  }
-
-  public boolean containsType(@Nullable Class<?> type) {
-    return items.containsCategory(type);
-  }
-
-  public BitSet getTypeSet(@Nullable Class<?> category) {
-    return subClassMap.get(category);
-  }
-
-  public int getTypeCount(@Nullable Class<?> category) {
-    BitSet bitSet = subClassMap.get(category);
-    return bitSet == null ? 0 : bitSet.cardinality();
   }
 
   public final <X> @NotNull ReversibleIterable<X> itemsOfType(
