@@ -5,7 +5,7 @@
 
   <groupId>com.acrolinx.flexmark</groupId>
   <artifactId>flexmark-java</artifactId>
-  <version>0.70.0-SNAPSHOT</version>
+  <version>0.70.0</version>
 
   <packaging>pom</packaging>
   <name>flexmark-java</name>
@@ -56,7 +56,7 @@
   <scm>
     <connection>scm:git:https://github.com/acrolinx/flexmark-java.git</connection>
     <developerConnection>scm:git:https://github.com/acrolinx/flexmark-java.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>v0.70.0</tag>
     <url>https://github.com/acrolinx/flexmark-java</url>
   </scm>
 
