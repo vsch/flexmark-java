@@ -35,7 +35,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
    *
    * @param hash hash code for the char sequence.
    */
-  public IRichSequenceBase(int hash) {
+  protected IRichSequenceBase(int hash) {
     this.hash = hash;
   }
 
@@ -159,7 +159,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
    * @return sequence whose contents come before and after the selected range, if range.isNull()
    *     then {@link #nullSequence()}
    */
-  public final Pair<T, T> subSequenceBeforeAfter(Range range) {
+  private final Pair<T, T> subSequenceBeforeAfter(Range range) {
     return new Pair<>(subSequenceBefore(range), subSequenceAfter(range));
   }
 
@@ -225,18 +225,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
   @Override
   public final char firstChar() {
     return isEmpty() ? SequenceUtils.NUL : charAt(0);
-  }
-
-  public final void validateIndex(int index) {
-    SequenceUtils.validateIndex(index, length());
-  }
-
-  public final void validateIndexInclusiveEnd(int index) {
-    SequenceUtils.validateIndexInclusiveEnd(index, length());
-  }
-
-  public final void validateStartEnd(int startIndex, int endIndex) {
-    SequenceUtils.validateStartEnd(startIndex, endIndex, length());
   }
 
   @Override
@@ -959,22 +947,6 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
     T padding = padding(length, pad);
     return padding.isEmpty() ? (T) this : getBuilder().append(this).append(padding).toSequence();
   }
-
-  @NotNull
-  @Override
-  public T padStart(int length) {
-    return padStart(length, ' ');
-  }
-
-  @NotNull
-  @Override
-  public T padEnd(int length) {
-    return padEnd(length, ' ');
-  }
-
-  // *****************************************************************
-  // EOL Helpers
-  // *****************************************************************
 
   @Override
   public final int eolEndLength() {

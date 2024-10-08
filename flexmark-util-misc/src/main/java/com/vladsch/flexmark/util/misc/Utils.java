@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Utils {
-  public static boolean isBlank(String receiver) {
+  static boolean isBlank(String receiver) {
     return receiver == null || receiver.trim().isEmpty();
   }
 
@@ -27,19 +27,19 @@ public class Utils {
     return true;
   }
 
-  public static String orEmpty(String receiver) {
+  static String orEmpty(String receiver) {
     return receiver == null ? "" : receiver;
   }
 
-  public static String wrapWith(String receiver, char prefixSuffix) {
+  static String wrapWith(String receiver, char prefixSuffix) {
     return wrapWith(receiver, prefixSuffix, prefixSuffix);
   }
 
-  public static String wrapWith(String receiver, char prefix, char suffix) {
+  static String wrapWith(String receiver, char prefix, char suffix) {
     return (receiver == null || receiver.isEmpty()) ? "" : prefix + receiver + suffix;
   }
 
-  public static String wrapWith(String receiver, String prefix, String suffix) {
+  static String wrapWith(String receiver, String prefix, String suffix) {
     return (receiver == null || receiver.isEmpty())
         ? ""
         : prefixWith(suffixWith(receiver, suffix), prefix);
@@ -77,7 +77,7 @@ public class Utils {
     return prefixWith(receiver, prefix, false);
   }
 
-  public static String prefixWith(String receiver, char prefix, boolean ignoreCase) {
+  static String prefixWith(String receiver, char prefix, boolean ignoreCase) {
     if (receiver != null
         && !receiver.isEmpty()
         && !startsWith(receiver, String.valueOf(prefix), ignoreCase)) {
@@ -86,11 +86,11 @@ public class Utils {
     return orEmpty(receiver);
   }
 
-  public static String prefixWith(String receiver, String prefix) {
+  static String prefixWith(String receiver, String prefix) {
     return prefixWith(receiver, prefix, false);
   }
 
-  public static String prefixWith(String receiver, String prefix, boolean ignoreCase) {
+  static String prefixWith(String receiver, String prefix, boolean ignoreCase) {
     if (receiver != null
         && !receiver.isEmpty()
         && prefix != null
@@ -153,7 +153,7 @@ public class Utils {
     return false;
   }
 
-  public static int count(String receiver, char c, int startIndex, int endIndex) {
+  static int count(String receiver, char c, int startIndex, int endIndex) {
     if (receiver == null) {
       return 0;
     }
@@ -172,7 +172,7 @@ public class Utils {
     return count;
   }
 
-  public static int count(String receiver, String c, int startIndex, int endIndex) {
+  static int count(String receiver, String c, int startIndex, int endIndex) {
     if (receiver == null) {
       return 0;
     }
@@ -209,7 +209,7 @@ public class Utils {
     return "";
   }
 
-  public static String removePrefix(String receiver, String prefix) {
+  static String removePrefix(String receiver, String prefix) {
     if (receiver != null) {
       if (receiver.startsWith(String.valueOf(prefix))) {
         return receiver.substring(prefix.length());
@@ -219,7 +219,7 @@ public class Utils {
     return "";
   }
 
-  public static String removeAnyPrefix(String receiver, String... prefixes) {
+  static String removeAnyPrefix(String receiver, String... prefixes) {
     if (receiver != null) {
       for (String prefix : prefixes) {
         if (receiver.startsWith(String.valueOf(prefix))) {
@@ -231,7 +231,7 @@ public class Utils {
     return "";
   }
 
-  public static String removePrefixIncluding(String receiver, String delimiter) {
+  static String removePrefixIncluding(String receiver, String delimiter) {
     if (receiver != null) {
       int pos = receiver.indexOf(delimiter);
       if (pos != -1) {
@@ -262,7 +262,7 @@ public class Utils {
     return "";
   }
 
-  public static String removeAnySuffix(String receiver, String... suffixes) {
+  static String removeAnySuffix(String receiver, String... suffixes) {
     if (receiver != null) {
       for (String suffix : suffixes) {
         if (receiver.endsWith(String.valueOf(suffix))) {
@@ -274,11 +274,11 @@ public class Utils {
     return "";
   }
 
-  public static String regexGroup(String receiver) {
+  static String regexGroup(String receiver) {
     return "(?:" + orEmpty(receiver) + ")";
   }
 
-  public static boolean regionMatches(
+  static boolean regionMatches(
       CharSequence receiver,
       int thisOffset,
       String other,
@@ -308,7 +308,7 @@ public class Utils {
             receiver, receiver.length() - suffix.length(), suffix, 0, suffix.length(), ignoreCase);
   }
 
-  public static boolean startsWith(CharSequence receiver, String prefix, boolean ignoreCase) {
+  private static boolean startsWith(CharSequence receiver, String prefix, boolean ignoreCase) {
     return receiver.length() >= prefix.length()
         && regionMatches(receiver, 0, prefix, 0, prefix.length(), ignoreCase);
   }
@@ -324,7 +324,7 @@ public class Utils {
     return result.toString();
   }
 
-  public static String getAbbreviatedText(String text, int maxLength) {
+  static String getAbbreviatedText(String text, int maxLength) {
     if (text == null) {
       return "";
     }
@@ -353,7 +353,7 @@ public class Utils {
     return result.toString();
   }
 
-  public static String join(
+  static String join(
       String[] items, String prefix, String suffix, String itemPrefix, String itemSuffix) {
     StringBuilder sb = new StringBuilder();
     sb.append(prefix);
@@ -364,7 +364,7 @@ public class Utils {
     return sb.toString();
   }
 
-  public static String join(
+  static String join(
       Collection<String> items,
       String prefix,
       String suffix,
@@ -456,7 +456,7 @@ public class Utils {
     }
   }
 
-  public static <T extends Comparable<T>> int compareNullable(T i1, T i2) {
+  static <T extends Comparable<T>> int compareNullable(T i1, T i2) {
     if (i1 == null || i2 == null) {
       return 0;
     }

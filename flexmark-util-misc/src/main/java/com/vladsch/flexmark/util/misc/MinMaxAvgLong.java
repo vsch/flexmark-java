@@ -19,10 +19,6 @@ public class MinMaxAvgLong {
     max = Math.max(max, other.max);
   }
 
-  public void diff(long start, long end) {
-    add(end - start);
-  }
-
   public long getMin() {
     return min;
   }

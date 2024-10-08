@@ -5,13 +5,4 @@ public enum CellAlignment {
   LEFT,
   CENTER,
   RIGHT;
-
-  public static CellAlignment getAlignment(String alignment) {
-    for (CellAlignment cellAlignment : values()) {
-      if (cellAlignment.name().equalsIgnoreCase(alignment)) {
-        return cellAlignment;
-      }
-    }
-    return NONE;
-  }
 }

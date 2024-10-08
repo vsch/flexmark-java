@@ -93,11 +93,7 @@ public class MappedRichSequence extends IRichSequenceBase<RichSequence>
     return mappedOf(mapper, baseSeq, 0, baseSeq.length());
   }
 
-  public static RichSequence mappedOf(CharMapper mapper, RichSequence baseSeq, int startIndex) {
-    return mappedOf(mapper, baseSeq, startIndex, baseSeq.length());
-  }
-
-  public static RichSequence mappedOf(
+  private static RichSequence mappedOf(
       CharMapper mapper, RichSequence baseSeq, int startIndex, int endIndex) {
     if (baseSeq instanceof MappedRichSequence)
       return startIndex == 0 && endIndex == baseSeq.length()

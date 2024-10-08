@@ -175,20 +175,4 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
       CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
     return new PrefixedSubSequence(prefix, baseSeq, startIndex, endIndex);
   }
-
-  @Deprecated
-  public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq) {
-    return prefixOf(prefix, baseSeq);
-  }
-
-  @Deprecated
-  public static PrefixedSubSequence of(CharSequence prefix, BasedSequence baseSeq, int startIndex) {
-    return prefixOf(prefix, baseSeq, startIndex);
-  }
-
-  @Deprecated
-  public static PrefixedSubSequence of(
-      CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
-    return prefixOf(prefix, baseSeq, startIndex, endIndex);
-  }
 }

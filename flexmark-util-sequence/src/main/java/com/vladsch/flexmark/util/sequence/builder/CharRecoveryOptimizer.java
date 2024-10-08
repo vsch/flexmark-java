@@ -19,7 +19,8 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
 
   private int prevEolPos;
 
-  int prevMatchPos(@NotNull CharSequence base, CharSequence chars, int startIndex, int endIndex) {
+  private int prevMatchPos(
+      @NotNull CharSequence base, CharSequence chars, int startIndex, int endIndex) {
     int length = chars.length();
     endIndex = Math.min(base.length(), endIndex);
     int iMax = Math.min(endIndex - startIndex, length);
@@ -36,7 +37,8 @@ public class CharRecoveryOptimizer implements SegmentOptimizer {
     return iMax;
   }
 
-  int nextMatchPos(@NotNull CharSequence base, CharSequence chars, int startIndex, int fromIndex) {
+  private int nextMatchPos(
+      @NotNull CharSequence base, CharSequence chars, int startIndex, int fromIndex) {
     startIndex = Math.max(0, startIndex);
     fromIndex = Math.min(base.length(), fromIndex);
 

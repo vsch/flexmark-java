@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SpecialLeadInStartsWithCharsHandler implements SpecialLeadInHandler {
-  final CharPredicate predicate;
+  private final CharPredicate predicate;
 
-  protected SpecialLeadInStartsWithCharsHandler(CharPredicate predicate) {
+  private SpecialLeadInStartsWithCharsHandler(CharPredicate predicate) {
     this.predicate = predicate;
   }
 
@@ -71,11 +71,6 @@ public class SpecialLeadInStartsWithCharsHandler implements SpecialLeadInHandler
 
   @NotNull
   public static SpecialLeadInStartsWithCharsHandler create(char leadInChar) {
-    return new SpecialLeadInStartsWithCharsHandler(CharPredicate.anyOf(leadInChar));
-  }
-
-  @NotNull
-  public static SpecialLeadInStartsWithCharsHandler create(@NotNull CharSequence leadInChar) {
     return new SpecialLeadInStartsWithCharsHandler(CharPredicate.anyOf(leadInChar));
   }
 }

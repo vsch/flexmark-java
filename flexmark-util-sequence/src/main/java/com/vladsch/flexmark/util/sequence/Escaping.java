@@ -17,7 +17,7 @@ public class Escaping {
   public static final String ESCAPABLE =
       "[!" + ESCAPABLE_CHARS.replace("\\", "\\\\").replace("[", "\\[").replace("]", "\\]") + "]";
 
-  private static final String ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
+  private static final String ENTITY = "&(?:#x[a-f0-9]{1,8}|#\\d{1,8}|[a-z][a-z0-9]{1,31});";
 
   private static final Pattern BACKSLASH_ONLY = Pattern.compile("[\\\\]");
 
@@ -26,12 +26,8 @@ public class Escaping {
 
   private static final Pattern BACKSLASH_OR_AMP = Pattern.compile("[\\\\&]");
 
-  private static final Pattern AMP_ONLY = Pattern.compile("[\\&]");
-
   private static final Pattern ENTITY_OR_ESCAPED_CHAR =
       Pattern.compile("\\\\" + ESCAPABLE + '|' + ENTITY, Pattern.CASE_INSENSITIVE);
-
-  private static final Pattern ENTITY_ONLY = Pattern.compile(ENTITY, Pattern.CASE_INSENSITIVE);
 
   private static final String XML_SPECIAL = "[&<>\"]";
 
@@ -47,10 +43,8 @@ public class Escaping {
 
   private static final Pattern ESCAPE_URI_DECODE = Pattern.compile("(%[a-fA-F0-9]{2})");
 
-  static final char[] HEX_DIGITS =
+  private static final char[] HEX_DIGITS =
       new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
-  private static final Pattern COLLAPSE_WHITESPACE = Pattern.compile("[ \t]{2,}");
 
   private static final Replacer UNSAFE_CHAR_REPLACER =
       new Replacer() {
@@ -106,24 +100,6 @@ public class Escaping {
         }
       };
 
-  private static final Replacer COLLAPSE_WHITESPACE_REPLACER =
-      new Replacer() {
-        @Override
-        public void replace(@NotNull String s, @NotNull StringBuilder sb) {
-          sb.append(" ");
-        }
-
-        @Override
-        public void replace(
-            @NotNull BasedSequence original,
-            int startIndex,
-            int endIndex,
-            @NotNull ReplacedTextMapper textMapper) {
-          textMapper.addReplacedText(
-              startIndex, endIndex, original.subSequence(startIndex, startIndex + 1));
-        }
-      };
-
   private static final Replacer UNESCAPE_REPLACER =
       new Replacer() {
         @Override
@@ -150,42 +126,6 @@ public class Escaping {
                 endIndex,
                 Html5Entities.entityToSequence(original.subSequence(startIndex, endIndex)));
           }
-        }
-      };
-
-  private static final Replacer REMOVE_REPLACER =
-      new Replacer() {
-        @Override
-        public void replace(@NotNull String s, @NotNull StringBuilder sb) {}
-
-        @Override
-        public void replace(
-            @NotNull BasedSequence original,
-            int startIndex,
-            int endIndex,
-            @NotNull ReplacedTextMapper textMapper) {
-          textMapper.addReplacedText(
-              startIndex, endIndex, original.subSequence(endIndex, endIndex));
-        }
-      };
-
-  private static final Replacer ENTITY_REPLACER =
-      new Replacer() {
-        @Override
-        public void replace(@NotNull String s, @NotNull StringBuilder sb) {
-          sb.append(Html5Entities.entityToString(s));
-        }
-
-        @Override
-        public void replace(
-            @NotNull BasedSequence original,
-            int startIndex,
-            int endIndex,
-            @NotNull ReplacedTextMapper textMapper) {
-          textMapper.addReplacedText(
-              startIndex,
-              endIndex,
-              Html5Entities.entityToSequence(original.subSequence(startIndex, endIndex)));
         }
       };
 
@@ -269,18 +209,11 @@ public class Escaping {
         }
       };
 
-  public static final @NotNull CharPredicate AMP_BACKSLASH_SET = CharPredicate.anyOf('\\', '&');
+  private static final @NotNull CharPredicate AMP_BACKSLASH_SET = CharPredicate.anyOf('\\', '&');
 
   public static String escapeHtml(@NotNull CharSequence s, boolean preserveEntities) {
     Pattern p = preserveEntities ? XML_SPECIAL_OR_ENTITY : XML_SPECIAL_RE;
     return replaceAll(p, s, UNSAFE_CHAR_REPLACER);
-  }
-
-  @NotNull
-  public static BasedSequence escapeHtml(
-      @NotNull BasedSequence s, boolean preserveEntities, @NotNull ReplacedTextMapper textMapper) {
-    Pattern p = preserveEntities ? XML_SPECIAL_OR_ENTITY : XML_SPECIAL_RE;
-    return replaceAll(p, s, UNSAFE_CHAR_REPLACER, textMapper);
   }
 
   /**
@@ -290,7 +223,7 @@ public class Escaping {
    * @return un-escaped string
    */
   @NotNull
-  public static String unescapeString(@NotNull CharSequence s) {
+  static String unescapeString(@NotNull CharSequence s) {
     if (BACKSLASH_OR_AMP.matcher(s).find()) {
       return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
     }
@@ -306,7 +239,7 @@ public class Escaping {
    * @return un-escaped string
    */
   @NotNull
-  public static String unescapeString(@NotNull CharSequence s, boolean unescapeEntities) {
+  static String unescapeString(@NotNull CharSequence s, boolean unescapeEntities) {
     if (unescapeEntities) {
       if (BACKSLASH_OR_AMP.matcher(s).find()) {
         return replaceAll(ESCAPED_CHAR, s, UNESCAPE_REPLACER);
@@ -341,80 +274,6 @@ public class Escaping {
   }
 
   /**
-   * Replace entities and backslash escapes with literal characters.
-   *
-   * @param s sequence being changed
-   * @param remove string to remove
-   * @param textMapper replaced text mapper to update for the changed text
-   * @return un-escaped sequence
-   */
-  @NotNull
-  public static BasedSequence removeAll(
-      @NotNull BasedSequence s,
-      @NotNull CharSequence remove,
-      @NotNull ReplacedTextMapper textMapper) {
-    int indexOf = s.indexOf(remove);
-    if (indexOf != -1) {
-      return replaceAll(Pattern.compile("\\Q" + remove + "\\E"), s, REMOVE_REPLACER, textMapper);
-    }
-
-    return s;
-  }
-
-  /**
-   * Replace entities and backslash escapes with literal characters.
-   *
-   * @param s string to un-escape
-   * @return un-escaped string
-   */
-  @NotNull
-  public static String unescapeHtml(@NotNull CharSequence s) {
-    if (AMP_ONLY.matcher(s).find()) {
-      return replaceAll(ENTITY_ONLY, s, ENTITY_REPLACER);
-    }
-
-    return String.valueOf(s);
-  }
-
-  /**
-   * Replace entities and backslash escapes with literal characters.
-   *
-   * @param s based sequence to un-escape
-   * @param textMapper replaced text mapper to update for the changed text
-   * @return un-escaped sequence
-   */
-  @NotNull
-  public static BasedSequence unescapeHtml(
-      @NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper) {
-    int indexOfAny = s.indexOf('&');
-    if (indexOfAny != -1) {
-      return replaceAll(ENTITY_ONLY, s, ENTITY_REPLACER, textMapper);
-    }
-
-    return s;
-  }
-
-  /**
-   * Replace entities and backslash escapes with literal characters.
-   *
-   * @param s based sequence to un-escape
-   * @param textMapper replaced text mapper to update for the changed text
-   * @return un-escaped sequence
-   */
-  @NotNull
-  public static BasedSequence unescapeHtml(
-      @NotNull BasedSequence s,
-      @NotNull List<Range> ranges,
-      @NotNull ReplacedTextMapper textMapper) {
-    int indexOfAny = s.indexOf('&');
-    if (indexOfAny != -1) {
-      return replaceAll(ENTITY_ONLY, s, ranges, ENTITY_REPLACER, textMapper);
-    }
-
-    return s;
-  }
-
-  /**
    * Normalize eol: embedded \r and \r\n are converted to \n
    *
    * <p>Append EOL sequence if sequence does not already end in EOL
@@ -423,7 +282,7 @@ public class Escaping {
    * @return converted sequence
    */
   @NotNull
-  public static String normalizeEndWithEOL(@NotNull CharSequence s) {
+  static String normalizeEndWithEOL(@NotNull CharSequence s) {
     return normalizeEOL(s, true);
   }
 
@@ -447,7 +306,7 @@ public class Escaping {
    * @return converted sequence
    */
   @NotNull
-  public static String normalizeEOL(@NotNull CharSequence s, boolean endWithEOL) {
+  private static String normalizeEOL(@NotNull CharSequence s, boolean endWithEOL) {
     StringBuilder sb = new StringBuilder(s.length());
     int iMax = s.length();
     boolean hadCR = false;
@@ -482,7 +341,7 @@ public class Escaping {
    * @return converted sequence
    */
   @NotNull
-  public static BasedSequence normalizeEndWithEOL(
+  static BasedSequence normalizeEndWithEOL(
       @NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper) {
     return normalizeEOL(s, textMapper, true);
   }
@@ -495,7 +354,7 @@ public class Escaping {
    * @return converted sequence
    */
   @NotNull
-  public static BasedSequence normalizeEOL(
+  static BasedSequence normalizeEOL(
       @NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper) {
     return normalizeEOL(s, textMapper, false);
   }
@@ -512,7 +371,7 @@ public class Escaping {
    * @return converted sequence
    */
   @NotNull
-  public static BasedSequence normalizeEOL(
+  private static BasedSequence normalizeEOL(
       @NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper, boolean endWithEOL) {
     int iMax = s.length();
     int lastPos = 0;
@@ -545,11 +404,6 @@ public class Escaping {
     }
 
     if (!hadCR) {
-      //    // previous was CR, need to take preceding chars
-      //    if (lastPos < iMax - 1) textMapper.addOriginalText(input.subSequence(lastPos, iMax -
-      // 1));
-      //    textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), SubSequence.EOL);
-      // } else {
       if (lastPos < iMax) textMapper.addOriginalText(lastPos, iMax);
       if (!hadEOL && endWithEOL) textMapper.addReplacedText(iMax - 1, iMax, BasedSequence.EOL);
     }
@@ -564,26 +418,6 @@ public class Escaping {
   @NotNull
   public static String percentEncodeUrl(@NotNull CharSequence s) {
     return replaceAll(ESCAPE_IN_URI, s, URL_ENCODE_REPLACER);
-  }
-
-  /**
-   * @param s string to encode
-   * @param textMapper text mapper to update for the replaced text
-   * @return encoded string
-   */
-  @NotNull
-  public static BasedSequence percentEncodeUrl(
-      @NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper) {
-    return replaceAll(ESCAPE_IN_URI, s, URL_ENCODE_REPLACER, textMapper);
-  }
-
-  /**
-   * @param s string to encode
-   * @return encoded string
-   */
-  @NotNull
-  public static String percentDecodeUrl(@NotNull CharSequence s) {
-    return replaceAll(ESCAPE_URI_DECODE, s, URL_DECODE_REPLACER);
   }
 
   /**
@@ -713,12 +547,6 @@ public class Escaping {
   }
 
   @NotNull
-  public static BasedSequence collapseWhitespace(
-      @NotNull BasedSequence s, @NotNull ReplacedTextMapper textMapper) {
-    return replaceAll(COLLAPSE_WHITESPACE, s, COLLAPSE_WHITESPACE_REPLACER, textMapper);
-  }
-
-  @NotNull
   private static String replaceAll(
       @NotNull Pattern p, @NotNull CharSequence s, @NotNull Replacer replacer) {
     Matcher matcher = p.matcher(s);
@@ -820,7 +648,7 @@ public class Escaping {
     return textMapper.getReplacedSequence();
   }
 
-  interface Replacer {
+  private interface Replacer {
     void replace(@NotNull String s, @NotNull StringBuilder sb);
 
     void replace(

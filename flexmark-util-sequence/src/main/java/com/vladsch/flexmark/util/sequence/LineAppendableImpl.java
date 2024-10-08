@@ -39,7 +39,7 @@ public class LineAppendableImpl implements LineAppendable {
 
   // accumulated text and line information
   private ISequenceBuilder<?, ?> appendable;
-  final List<LineInfo> lines; // line contents
+  private final List<LineInfo> lines; // line contents
 
   // indent level to use after the next \n and before text is appended
   private CharSequence prefix; // current prefix
@@ -54,9 +54,9 @@ public class LineAppendableImpl implements LineAppendable {
   private int eolOnFirstText; // append EOLs on first text
   private final List<Runnable> indentsOnFirstEol; // append indents on first eol
   private final Stack<Integer> optionStack = new Stack<>();
-  int modificationCount; // mod count for iterable use
+  private int modificationCount; // mod count for iterable use
 
-  public LineAppendableImpl(int formatOptions) {
+  LineAppendableImpl(int formatOptions) {
     this(null, LineAppendable.toOptionSet(formatOptions));
   }
 
@@ -64,7 +64,7 @@ public class LineAppendableImpl implements LineAppendable {
     this(builder, LineAppendable.toOptionSet(formatOptions));
   }
 
-  public LineAppendableImpl(@Nullable Appendable appendable, BitFieldSet<Options> formatOptions) {
+  private LineAppendableImpl(@Nullable Appendable appendable, BitFieldSet<Options> formatOptions) {
     this.appendable =
         appendable instanceof ISequenceBuilder<?, ?>
             ? ((ISequenceBuilder<?, ?>) appendable).getBuilder()
@@ -290,7 +290,7 @@ public class LineAppendableImpl implements LineAppendable {
   }
 
   @NotNull
-  LineInfo getLastLineInfo() {
+  private LineInfo getLastLineInfo() {
     return lines.isEmpty() ? LineInfo.NULL : lines.get(lines.size() - 1);
   }
 
@@ -298,7 +298,7 @@ public class LineAppendableImpl implements LineAppendable {
     return appendable.length() == 0 && getLastLineInfo().isBlankText();
   }
 
-  int lastNonBlankLine(int endLine) {
+  private int lastNonBlankLine(int endLine) {
     if (endLine > lines.size() && appendable.length() > 0 && !allWhitespace) {
       // have dangling text
       return lines.size();
@@ -615,18 +615,6 @@ public class LineAppendableImpl implements LineAppendable {
   }
 
   @NotNull
-  public LineAppendable repeat(@NotNull CharSequence csq, int count) {
-    append(RepeatedSequence.repeatOf(csq, count));
-    return this;
-  }
-
-  @NotNull
-  public LineAppendable repeat(@NotNull CharSequence csq, int start, int end, int count) {
-    append(RepeatedSequence.repeatOf(csq.subSequence(start, end), count));
-    return this;
-  }
-
-  @NotNull
   @Override
   public LineAppendable line() {
     if (preFormattedNesting > 0 || appendable.length() != 0) {
@@ -873,7 +861,7 @@ public class LineAppendableImpl implements LineAppendable {
         out, withPrefixes, maxBlankLines, maxTrailingBlankLines, startLine, endLine);
   }
 
-  public <T extends Appendable> T appendToNoLine(
+  private <T extends Appendable> T appendToNoLine(
       @NotNull T out,
       boolean withPrefixes,
       int maxBlankLines,
@@ -995,7 +983,7 @@ public class LineAppendableImpl implements LineAppendable {
     return lines.size();
   }
 
-  void recomputeLineInfo(int startLine) {
+  private void recomputeLineInfo(int startLine) {
     // recompute lineInfo for lines at or after the deleted lines
     int iMax = lines.size();
     startLine = Math.max(0, startLine);
@@ -1139,17 +1127,17 @@ public class LineAppendableImpl implements LineAppendable {
     this.recomputeLineInfo(lineIndex + 1);
   }
 
-  int tailBlankLinesToRemove(int endLine, int maxTrailingBlankLines) {
+  private int tailBlankLinesToRemove(int endLine, int maxTrailingBlankLines) {
     return Utils.max(0, getTrailingBlankLines(endLine) - Utils.max(0, maxTrailingBlankLines));
   }
 
-  static class IndexedLineInfoProxy implements Indexed<LineInfo> {
-    final @NotNull LineAppendableImpl appendable;
-    final int startLine;
-    final int endLine;
-    final int maxTrailingBlankLines;
+  private static class IndexedLineInfoProxy implements Indexed<LineInfo> {
+    private final @NotNull LineAppendableImpl appendable;
+    private final int startLine;
+    private final int endLine;
+    private final int maxTrailingBlankLines;
 
-    public IndexedLineInfoProxy(
+    IndexedLineInfoProxy(
         @NotNull LineAppendableImpl appendable,
         int maxTrailingBlankLines,
         int startLine,
@@ -1200,11 +1188,11 @@ public class LineAppendableImpl implements LineAppendable {
     }
   }
 
-  static class IndexedLineProxy implements Indexed<BasedSequence> {
-    final @NotNull IndexedLineInfoProxy proxy;
-    final boolean withPrefixes;
+  private static class IndexedLineProxy implements Indexed<BasedSequence> {
+    private final @NotNull IndexedLineInfoProxy proxy;
+    private final boolean withPrefixes;
 
-    public IndexedLineProxy(@NotNull IndexedLineInfoProxy proxy, boolean withPrefixes) {
+    IndexedLineProxy(@NotNull IndexedLineInfoProxy proxy, boolean withPrefixes) {
       this.proxy = proxy;
       this.withPrefixes = withPrefixes;
     }
@@ -1247,13 +1235,13 @@ public class LineAppendableImpl implements LineAppendable {
   }
 
   @NotNull
-  IndexedLineInfoProxy getIndexedLineInfoProxy(
+  private IndexedLineInfoProxy getIndexedLineInfoProxy(
       int maxTrailingBlankLines, int startLine, int endLine) {
     return new IndexedLineInfoProxy(this, maxTrailingBlankLines, startLine, endLine);
   }
 
   @NotNull
-  IndexedLineProxy getIndexedLineProxy(
+  private IndexedLineProxy getIndexedLineProxy(
       int maxTrailingBlankLines, int startLine, int endLine, boolean withPrefixes) {
     return new IndexedLineProxy(
         getIndexedLineInfoProxy(maxTrailingBlankLines, startLine, endLine), withPrefixes);

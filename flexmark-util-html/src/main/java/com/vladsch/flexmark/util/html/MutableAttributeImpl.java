@@ -60,13 +60,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     return value;
   }
 
-  public void resetToValuesMap() {
-    if (values == null)
-      throw new IllegalStateException("resetToValuesMap called when values is null");
-    value = null;
-  }
-
-  protected Map<String, String> getValueMap() {
+  private Map<String, String> getValueMap() {
     if (values == null) {
       values = new LinkedHashMap<>();
       if (valueListDelimiter != SequenceUtils.NUL) {
@@ -107,7 +101,7 @@ public class MutableAttributeImpl implements MutableAttribute {
    *
    * @return string for value of this attribute from map
    */
-  protected String valueFromMap() {
+  private String valueFromMap() {
     if (valueListDelimiter != SequenceUtils.NUL) {
       StringBuilder sb = new StringBuilder();
       if (valueNameDelimiter != SequenceUtils.NUL) {
@@ -275,16 +269,12 @@ public class MutableAttributeImpl implements MutableAttribute {
         + " }";
   }
 
-  public static MutableAttributeImpl of(Attribute other) {
+  static MutableAttributeImpl of(Attribute other) {
     return of(
         other.getName(),
         other.getValue(),
         other.getValueListDelimiter(),
         other.getValueNameDelimiter());
-  }
-
-  public static MutableAttributeImpl of(CharSequence attrName) {
-    return of(attrName, attrName, SequenceUtils.NUL, SequenceUtils.NUL);
   }
 
   public static MutableAttributeImpl of(CharSequence attrName, CharSequence value) {
@@ -296,7 +286,7 @@ public class MutableAttributeImpl implements MutableAttribute {
     return of(attrName, value, valueListDelimiter, SequenceUtils.NUL);
   }
 
-  public static MutableAttributeImpl of(
+  private static MutableAttributeImpl of(
       CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
     if (CLASS_ATTR.contentEquals(attrName)) {
       return new MutableAttributeImpl(attrName, value, ' ', SequenceUtils.NUL);

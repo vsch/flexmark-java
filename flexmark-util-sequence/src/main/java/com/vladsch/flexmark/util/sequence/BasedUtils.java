@@ -74,8 +74,4 @@ public interface BasedUtils {
       segments.appendAnchor(chars.getStartOffset());
     }
   }
-
-  static BasedSequence asBased(CharSequence sequence) {
-    return BasedSequence.of(sequence);
-  }
 }

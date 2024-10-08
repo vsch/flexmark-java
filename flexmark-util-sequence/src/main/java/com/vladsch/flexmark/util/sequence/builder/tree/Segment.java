@@ -8,28 +8,28 @@ import org.jetbrains.annotations.NotNull;
 
 /** SegmentedSequence Segment stored in byte[] in serialized format */
 public abstract class Segment {
-  static final int TYPE_MASK = 0b0000_0000_1110_0000;
+  private static final int TYPE_MASK = 0b0000_0000_1110_0000;
 
-  static final int TYPE_NO_SIZE_BYTES = 0b0000_0000_0001_0000;
-  static final int TYPE_START_BYTES = 0b0000_0000_0000_0011;
-  static final int TYPE_LENGTH_BYTES = 0b0000_0000_0000_1100;
+  private static final int TYPE_NO_SIZE_BYTES = 0b0000_0000_0001_0000;
+  private static final int TYPE_START_BYTES = 0b0000_0000_0000_0011;
+  private static final int TYPE_LENGTH_BYTES = 0b0000_0000_0000_1100;
 
-  static final int TYPE_ANCHOR = 0b0000_0000_0000_0000;
-  static final int TYPE_BASE = 0b0000_0000_0010_0000;
-  static final int TYPE_TEXT = 0b0000_0000_0100_0000;
-  static final int TYPE_REPEATED_TEXT = 0b0000_0000_0110_0000;
-  static final int TYPE_TEXT_ASCII = 0b0000_0000_1000_0000;
-  static final int TYPE_REPEATED_ASCII = 0b0000_0000_1010_0000;
-  static final int TYPE_REPEATED_SPACE = 0b0000_0000_1100_0000;
-  static final int TYPE_REPEATED_EOL = 0b0000_0000_1110_0000;
+  private static final int TYPE_ANCHOR = 0b0000_0000_0000_0000;
+  private static final int TYPE_BASE = 0b0000_0000_0010_0000;
+  private static final int TYPE_TEXT = 0b0000_0000_0100_0000;
+  private static final int TYPE_REPEATED_TEXT = 0b0000_0000_0110_0000;
+  private static final int TYPE_TEXT_ASCII = 0b0000_0000_1000_0000;
+  private static final int TYPE_REPEATED_ASCII = 0b0000_0000_1010_0000;
+  private static final int TYPE_REPEATED_SPACE = 0b0000_0000_1100_0000;
+  private static final int TYPE_REPEATED_EOL = 0b0000_0000_1110_0000;
 
-  static final int TYPE_HAS_OFFSET = 0b0000_0001_0000_0000;
-  static final int TYPE_HAS_LENGTH = 0b0000_0010_0000_0000;
-  static final int TYPE_HAS_BOTH = 0b0000_0011_0000_0000;
-  static final int TYPE_HAS_CHAR = 0b0000_0100_0000_0000;
-  static final int TYPE_HAS_CHARS = 0b0000_1000_0000_0000;
-  static final int TYPE_HAS_BYTE = 0b0001_0000_0000_0000;
-  static final int TYPE_HAS_BYTES = 0b0010_0000_0000_0000;
+  private static final int TYPE_HAS_OFFSET = 0b0000_0001_0000_0000;
+  private static final int TYPE_HAS_LENGTH = 0b0000_0010_0000_0000;
+  private static final int TYPE_HAS_BOTH = 0b0000_0011_0000_0000;
+  private static final int TYPE_HAS_CHAR = 0b0000_0100_0000_0000;
+  private static final int TYPE_HAS_CHARS = 0b0000_1000_0000_0000;
+  private static final int TYPE_HAS_BYTE = 0b0001_0000_0000_0000;
+  private static final int TYPE_HAS_BYTES = 0b0010_0000_0000_0000;
 
   public enum SegType {
     ANCHOR(TYPE_ANCHOR | TYPE_HAS_OFFSET),
@@ -80,7 +80,7 @@ public abstract class Segment {
       return hasAll(TYPE_HAS_BYTES);
     }
 
-    public static SegType fromTypeMask(int segTypeMask) {
+    static SegType fromTypeMask(int segTypeMask) {
       switch (segTypeMask & TYPE_MASK) {
         case TYPE_ANCHOR:
           return SegType.ANCHOR;
@@ -105,16 +105,16 @@ public abstract class Segment {
     }
   }
 
-  public boolean hasAll(int flags, int mask) {
+  boolean hasAll(int flags, int mask) {
     return (flags & mask) == mask;
   }
 
-  protected final int pos; // position of segment in aggr length table
-  protected final byte[] bytes;
-  protected final int byteOffset;
-  protected final int startIndex;
+  final int pos; // position of segment in aggr length table
+  final byte[] bytes;
+  final int byteOffset;
+  final int startIndex;
 
-  public Segment(int pos, byte[] bytes, int byteOffset, int startIndex) {
+  private Segment(int pos, byte[] bytes, int byteOffset, int startIndex) {
     this.pos = pos;
     this.bytes = bytes;
     this.byteOffset = byteOffset;
@@ -145,7 +145,7 @@ public abstract class Segment {
     return index < startIndex || index >= startIndex + length();
   }
 
-  public boolean offsetNotInSegment(int offset) {
+  boolean offsetNotInSegment(int offset) {
     return offset < getStartOffset() || offset >= getEndOffset();
   }
 
@@ -217,12 +217,12 @@ public abstract class Segment {
     return "'" + escapeJavaString(chars) + "'";
   }
 
-  static class Base extends Segment {
-    protected final int startOffset;
-    protected final int endOffset;
-    protected final @NotNull BasedSequence baseSeq;
+  private static class Base extends Segment {
+    private final int startOffset;
+    private final int endOffset;
+    private final @NotNull BasedSequence baseSeq;
 
-    public Base(
+    Base(
         int pos,
         byte[] bytes,
         int byteOffset,
@@ -313,12 +313,12 @@ public abstract class Segment {
   }
 
   abstract static class TextCharSequenceBase implements CharSequence {
-    protected final byte[] bytes;
-    protected final int byteOffset; // byte offset of first byte of chars for original base sequence
-    protected final int startOffset;
-    protected final int length;
+    final byte[] bytes;
+    final int byteOffset; // byte offset of first byte of chars for original base sequence
+    final int startOffset;
+    final int length;
 
-    public TextCharSequenceBase(byte[] bytes, int byteOffset, int startOffset, int length) {
+    TextCharSequenceBase(byte[] bytes, int byteOffset, int startOffset, int length) {
       this.bytes = bytes;
       this.byteOffset = byteOffset;
       this.startOffset = startOffset;
@@ -361,8 +361,8 @@ public abstract class Segment {
     }
   }
 
-  static class TextCharSequence extends TextCharSequenceBase {
-    public TextCharSequence(byte[] bytes, int byteOffset, int startOffset, int length) {
+  private static class TextCharSequence extends TextCharSequenceBase {
+    TextCharSequence(byte[] bytes, int byteOffset, int startOffset, int length) {
       super(bytes, byteOffset, startOffset, length);
     }
 
@@ -381,8 +381,8 @@ public abstract class Segment {
     }
   }
 
-  static class TextAsciiCharSequence extends TextCharSequenceBase {
-    public TextAsciiCharSequence(byte[] bytes, int byteOffset, int startOffset, int length) {
+  private static class TextAsciiCharSequence extends TextCharSequenceBase {
+    TextAsciiCharSequence(byte[] bytes, int byteOffset, int startOffset, int length) {
       super(bytes, byteOffset, startOffset, length);
     }
 
@@ -402,11 +402,11 @@ public abstract class Segment {
     }
   }
 
-  static class TextRepeatedSequence implements CharSequence {
+  private static class TextRepeatedSequence implements CharSequence {
     protected final char c;
     protected final int length;
 
-    public TextRepeatedSequence(char c, int length) {
+    TextRepeatedSequence(char c, int length) {
       this.c = c;
       this.length = length;
     }
@@ -451,10 +451,10 @@ public abstract class Segment {
     }
   }
 
-  static class Text extends Segment {
+  private static class Text extends Segment {
     protected final @NotNull CharSequence chars;
 
-    public Text(int pos, byte[] bytes, int byteOffset, int indexOffset) {
+    Text(int pos, byte[] bytes, int byteOffset, int indexOffset) {
       super(pos, bytes, byteOffset, indexOffset);
       int type = bytes[byteOffset++] & 0x00ff;
       int segTypeMask = type & TYPE_MASK;

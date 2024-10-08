@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /** Used to help with HTML output generation and formatting of HTML */
-public interface HtmlAppendable extends LineAppendable {
+interface HtmlAppendable extends LineAppendable {
   @Nullable
   Attributes getAttributes();
 

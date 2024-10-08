@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKeyBase;
-import com.vladsch.flexmark.util.misc.BitFieldSet;
 import java.util.stream.IntStream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -96,18 +95,8 @@ public final class BasedOptionsSequence implements CharSequence, BasedOptionsHol
     return chars.hashCode();
   }
 
-  public static BasedOptionsSequence of(
-      @NotNull CharSequence chars, BitFieldSet<Options> optionFlags) {
-    return new BasedOptionsSequence(chars, optionFlags.toInt(), null);
-  }
-
   public static BasedOptionsSequence of(@NotNull CharSequence chars, int optionFlags) {
     return new BasedOptionsSequence(chars, optionFlags, null);
-  }
-
-  public static BasedOptionsSequence of(
-      @NotNull CharSequence chars, BitFieldSet<Options> optionFlags, @Nullable DataHolder options) {
-    return new BasedOptionsSequence(chars, optionFlags.toInt(), options);
   }
 
   public static BasedOptionsSequence of(

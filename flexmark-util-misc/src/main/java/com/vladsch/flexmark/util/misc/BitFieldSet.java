@@ -30,7 +30,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     implements Cloneable, Serializable {
   private static final long serialVersionUID = 3411599620347842686L;
 
-  static class UniverseLoader {
+  private static class UniverseLoader {
     static final ConcurrentHashMap<Class, Enum[]> enumUniverseMap = new ConcurrentHashMap<>();
     static final ConcurrentHashMap<Class, long[]> enumBitMasksMap = new ConcurrentHashMap<>();
 
@@ -65,7 +65,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     }
   }
 
-  public static long nextBitMask(int nextAvailableBit, int bits) {
+  private static long nextBitMask(int nextAvailableBit, int bits) {
     return (-1L >>> -bits) << nextAvailableBit;
   }
 
@@ -77,7 +77,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @param elementType class of enum
    * @return array of enum values
    */
-  public static <E extends Enum<E>> E[] getUniverse(Class<E> elementType) {
+  private static <E extends Enum<E>> E[] getUniverse(Class<E> elementType) {
     return (E[]) UniverseLoader.getUniverseSlow(elementType);
   }
 
@@ -89,7 +89,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @param elementType class of enum
    * @return array of bit masks for enum values
    */
-  public static <E extends Enum<E>> long[] getBitMasks(Class<E> elementType) {
+  private static <E extends Enum<E>> long[] getBitMasks(Class<E> elementType) {
     long[] bitMasks = UniverseLoader.enumBitMasksMap.get(elementType);
     if (bitMasks != null) {
       return bitMasks;
@@ -138,34 +138,34 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * Bit vector representation of this set. The 2^k bit indicates the presence of universe[k] in
    * this set.
    */
-  long elements = 0L;
+  private long elements = 0L;
 
   /** The class of all the elements of this set. */
-  final Class<E> elementType;
+  private final Class<E> elementType;
 
   /** All values comprising T */
-  final E[] universe;
+  private final E[] universe;
 
   /** All bit masks for each field since some can span more than one */
-  final long[] bitMasks;
+  private final long[] bitMasks;
 
   /** total number of bits used by all fields */
-  final int totalBits; // total bits used by all fields
+  private final int totalBits; // total bits used by all fields
 
-  static final Enum<?>[] ZERO_LENGTH_ENUM_ARRAY = new Enum<?>[0];
+  private static final Enum<?>[] ZERO_LENGTH_ENUM_ARRAY = new Enum<?>[0];
 
-  BitFieldSet(Class<E> elementType, Enum<?>[] universe, long[] bitMasks) {
+  private BitFieldSet(Class<E> elementType, Enum<?>[] universe, long[] bitMasks) {
     this.elementType = elementType;
     this.universe = (E[]) universe;
     this.bitMasks = bitMasks;
     this.totalBits = getTotalBits(bitMasks);
   }
 
-  public static int getTotalBits(long[] bitMasks) {
+  private static int getTotalBits(long[] bitMasks) {
     return bitMasks.length == 0 ? 0 : 64 - Long.numberOfLeadingZeros(bitMasks[bitMasks.length - 1]);
   }
 
-  public long toLong() {
+  long toLong() {
     return elements;
   }
 
@@ -238,11 +238,11 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     return (elements & mask) != 0;
   }
 
-  public boolean none(long mask) {
+  boolean none(long mask) {
     return (elements & mask) == 0;
   }
 
-  public boolean all(long mask) {
+  boolean all(long mask) {
     long allValues = -1L >>> -totalBits;
     if ((mask & ~allValues) != 0) {
       throw new IllegalArgumentException(
@@ -268,7 +268,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @param e1 field to get
    * @return unsigned value
    */
-  public long get(E e1) {
+  long get(E e1) {
     long bitMask = bitMasks[e1.ordinal()];
     return (elements & bitMask) >>> Long.numberOfTrailingZeros(bitMask);
   }
@@ -280,25 +280,21 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @param value value to set
    * @return true if elements changed by operation
    */
-  public boolean setSigned(E e1, long value) {
+  private boolean setSigned(E e1, long value) {
     long oldElements = elements;
     elements = setSigned(elementType, bitMasks, elements, e1, value);
     return oldElements != elements;
   }
 
-  public void setBitField(E e1, int value) {
+  void setBitField(E e1, int value) {
     setSigned(e1, value);
   }
 
-  public void setBitField(E e1, short value) {
+  void setBitField(E e1, byte value) {
     setSigned(e1, value);
   }
 
-  public void setBitField(E e1, byte value) {
-    setSigned(e1, value);
-  }
-
-  public long getSigned(E e1, int maxBits, String typeName) {
+  private long getSigned(E e1, int maxBits, String typeName) {
     return getSignedBitField(elements, e1, maxBits, typeName);
   }
 
@@ -308,19 +304,19 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @param e1 field to get
    * @return unsigned value
    */
-  public long getLong(E e1) {
+  long getLong(E e1) {
     return getSigned(e1, 64, "long");
   }
 
-  public int getInt(E e1) {
+  int getInt(E e1) {
     return (int) getSigned(e1, 32, "int");
   }
 
-  public short getShort(E e1) {
+  short getShort(E e1) {
     return (short) getSigned(e1, 16, "short");
   }
 
-  public byte getByte(E e1) {
+  byte getByte(E e1) {
     return (byte) getSigned(e1, 8, "byte");
   }
 
@@ -332,12 +328,12 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     return (flags & mask) == mask;
   }
 
-  public long mask(E e1) {
+  long mask(E e1) {
     return bitMasks[e1.ordinal()];
   }
 
   @SafeVarargs
-  public final long mask(E... rest) {
+  private final long mask(E... rest) {
     long mask = 0;
     for (E e : rest) {
       mask |= bitMasks[e.ordinal()];
@@ -345,21 +341,21 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
     return mask;
   }
 
-  public boolean any(E e1) {
+  boolean any(E e1) {
     return any(mask(e1));
   }
 
-  public boolean all(E e1) {
+  boolean all(E e1) {
     return all(mask(e1));
   }
 
   @SafeVarargs
-  public final boolean all(E... rest) {
+  final boolean all(E... rest) {
     return all(mask(rest));
   }
 
   @SafeVarargs
-  public final boolean none(E... rest) {
+  final boolean none(E... rest) {
     return none(mask(rest));
   }
 
@@ -709,7 +705,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @return An empty enum set of the specified type.
    * @throws NullPointerException if elementType is null
    */
-  public static <E extends Enum<E>> BitFieldSet<E> noneOf(Class<E> elementType) {
+  static <E extends Enum<E>> BitFieldSet<E> noneOf(Class<E> elementType) {
     if (!elementType.isEnum()) {
       throw new ClassCastException(elementType + " not an enum");
     }
@@ -813,19 +809,6 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
   }
 
   /**
-   * Creates an enum set with the same element type as the specified enum set, initially containing
-   * the same elements (if any).
-   *
-   * @param <E> The class of the elements in the set
-   * @param s the enum set from which to initialize this enum set
-   * @return A copy of the specified enum set.
-   * @throws NullPointerException if s is null
-   */
-  public static <E extends Enum<E>> BitFieldSet<E> copyOf(BitFieldSet<E> s) {
-    return s.clone();
-  }
-
-  /**
    * Creates an enum set initially containing the specified element.
    *
    * <p>Overloads of this method exist to initialize an enum set with one through five elements. A
@@ -838,7 +821,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @return an enum set initially containing the specified element
    * @throws NullPointerException if e is null
    */
-  public static <E extends Enum<E>> BitFieldSet<E> of(E e) {
+  static <E extends Enum<E>> BitFieldSet<E> of(E e) {
     BitFieldSet<E> result = noneOf(e.getDeclaringClass());
     result.add(e);
     return result;
@@ -858,7 +841,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @return an enum set initially containing the specified elements
    * @throws NullPointerException if any parameters are null
    */
-  public static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2) {
+  static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2) {
     BitFieldSet<E> result = noneOf(e1.getDeclaringClass());
     result.add(e1);
     result.add(e2);
@@ -881,7 +864,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @return an enum set initially containing the specified elements
    * @throws NullPointerException if any parameters are null
    */
-  public static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2, E e3, E e4) {
+  static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2, E e3, E e4) {
     BitFieldSet<E> result = noneOf(e1.getDeclaringClass());
     result.add(e1);
     result.add(e2);
@@ -907,7 +890,7 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E>
    * @return an enum set initially containing the specified elements
    * @throws NullPointerException if any parameters are null
    */
-  public static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2, E e3, E e4, E e5) {
+  static <E extends Enum<E>> BitFieldSet<E> of(E e1, E e2, E e3, E e4, E e5) {
     BitFieldSet<E> result = noneOf(e1.getDeclaringClass());
     result.add(e1);
     result.add(e2);

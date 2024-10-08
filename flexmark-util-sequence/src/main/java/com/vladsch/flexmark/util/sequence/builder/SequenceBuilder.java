@@ -99,12 +99,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   @Nullable
-  public Range getLastRangeOrNull() {
-    Object part = segments.getPart(segments.size());
-    return part instanceof Range && ((Range) part).isNotNull() ? (Range) part : null;
-  }
-
-  @Nullable
   @Override
   public BasedSequence getSingleBasedSequence() {
     Range range = segments.getBaseSubSequenceRange();
@@ -122,7 +116,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     return toSequence().charAt(index);
   }
 
-  boolean isCommonBaseSequence(@NotNull BasedSequence chars) {
+  private boolean isCommonBaseSequence(@NotNull BasedSequence chars) {
     if (chars.isNull()) {
       return false;
     }
@@ -195,14 +189,14 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   @NotNull
-  public SequenceBuilder addRange(@NotNull Range range) {
+  private SequenceBuilder addRange(@NotNull Range range) {
     segments.append(range);
     resultSeq = null;
     return this;
   }
 
   @NotNull
-  public SequenceBuilder addByOffsets(int startOffset, int endOffset) {
+  private SequenceBuilder addByOffsets(int startOffset, int endOffset) {
     if (startOffset < 0 || startOffset > endOffset || endOffset > baseSeq.length()) {
       throw new IllegalArgumentException(
           "addByOffsets start/end must be a valid range in [0, "
@@ -216,11 +210,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
     segments.append(Range.of(startOffset, endOffset));
     resultSeq = null;
     return this;
-  }
-
-  @NotNull
-  public SequenceBuilder addByLength(int startOffset, int textLength) {
-    return add(baseSeq.subSequence(startOffset, startOffset + textLength));
   }
 
   @NotNull
@@ -286,60 +275,6 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
         altBuilder.append(s);
       } else if (part instanceof CharSequence) {
         altBuilder.append((CharSequence) part);
-      } else if (part != null) {
-        throw new IllegalStateException("Invalid part type " + part.getClass());
-      }
-    }
-
-    BasedSequence result = SegmentedSequence.create(altBuilder);
-    return result;
-  }
-
-  /**
-   * Construct sequence from this builder using another based sequence which is character identical
-   * to this builder's baseSeq by length
-   *
-   * @param altSequence based sequence which is character identical to this builder's baseSeq
-   * @param trimStart character set of characters to trim
-   * @param ignoreCharDiff chars which should be treated as equivalent for verification purposes
-   *     (Space, Tab, EOL, usually)
-   * @return builder with offsets mapped to altSequence
-   */
-  @NotNull
-  public BasedSequence toSequenceByIndex(
-      @NotNull BasedSequence altSequence,
-      @Nullable CharPredicate trimStart,
-      @Nullable CharPredicate ignoreCharDiff) {
-    if (altSequence == altBase) {
-      return toSequence();
-    }
-
-    // this is an identical but different base sequence, need to map to it. Ranges are indices into
-    // altSequence and must be converted to offsets.
-    SequenceBuilder altBuilder =
-        new SequenceBuilder(altSequence, segments.options, segments.optimizer, new HashMap<>());
-
-    int length = 0;
-    int deleted = 0;
-    for (Object part : segments) {
-      if (part instanceof Range) {
-        BasedSequence s =
-            altSequence.subSequence(length + deleted, length + deleted + ((Range) part).getSpan());
-        int startTrimmed = trimStart == null ? 0 : s.countLeading(trimStart);
-
-        if (startTrimmed > 0) {
-          // NOTE: here there could be differences in space vs tab vs EOL due to shift and remapping
-          deleted += startTrimmed;
-          s =
-              altSequence.subSequence(
-                  length + deleted, length + deleted + ((Range) part).getSpan());
-        }
-
-        altBuilder.append(s);
-        length += ((Range) part).getSpan();
-      } else if (part instanceof CharSequence) {
-        altBuilder.append((CharSequence) part);
-        length += ((CharSequence) part).length();
       } else if (part != null) {
         throw new IllegalStateException("Invalid part type " + part.getClass());
       }

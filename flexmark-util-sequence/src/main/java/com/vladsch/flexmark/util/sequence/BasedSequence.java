@@ -31,35 +31,12 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
   BasedSequence NULL = new EmptyBasedSequence();
   BasedSequence EMPTY = new EmptyBasedSequence();
   BasedSequence EOL = CharSubSequence.of(SequenceUtils.EOL);
-  BasedSequence SPACE = CharSubSequence.of(SequenceUtils.SPACE);
   List<BasedSequence> EMPTY_LIST = new ArrayList<>();
   BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
-  BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
-  BasedSequence LINE_SEP = CharSubSequence.of(SequenceUtils.LINE_SEP);
 
   @NotNull
   static BasedSequence of(@Nullable CharSequence charSequence) {
     return BasedSequenceImpl.create(charSequence);
-  }
-
-  @NotNull
-  static BasedSequence ofSpaces(int count) {
-    return of(RepeatedSequence.ofSpaces(count));
-  }
-
-  @NotNull
-  static BasedSequence repeatOf(char c, int count) {
-    return of(RepeatedSequence.repeatOf(String.valueOf(c), 0, count));
-  }
-
-  @NotNull
-  static BasedSequence repeatOf(@NotNull CharSequence chars, int count) {
-    return of(RepeatedSequence.repeatOf(chars, 0, chars.length() * count));
-  }
-
-  @NotNull
-  static BasedSequence repeatOf(@NotNull CharSequence chars, int startIndex, int endIndex) {
-    return of(RepeatedSequence.repeatOf(chars, startIndex, endIndex));
   }
 
   @Override
@@ -336,12 +313,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
   @NotNull
   BasedSequence extendByAny(@NotNull CharPredicate charSet, int maxCount);
 
-  @NotNull
-  BasedSequence extendByAny(@NotNull CharPredicate charSet);
-
-  @NotNull
-  BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet);
-
   /**
    * Test for line containing some of the characters in the set
    *
@@ -391,18 +362,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
   @NotNull
   BasedSequence extendByOneOfAnyNot(@NotNull CharPredicate charSet);
 
-  @NotNull
-  @Deprecated
-  default BasedSequence extendToAny(@NotNull CharPredicate charSet, int maxCount) {
-    return extendByAnyNot(charSet, maxCount);
-  }
-
-  @NotNull
-  @Deprecated
-  default BasedSequence extendToAny(@NotNull CharPredicate charSet) {
-    return extendByAnyNot(charSet);
-  }
-
   /**
    * Extend in contained based sequence
    *
@@ -418,12 +377,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
 
   @NotNull
   BasedSequence extendToEndOfLine(@NotNull CharPredicate eolChars);
-
-  @NotNull
-  BasedSequence extendToEndOfLine(boolean includeEol);
-
-  @NotNull
-  BasedSequence extendToEndOfLine();
 
   /**
    * Extend in contained based sequence
@@ -441,12 +394,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
   @NotNull
   BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars);
 
-  @NotNull
-  BasedSequence extendToStartOfLine(boolean includeEol);
-
-  @NotNull
-  BasedSequence extendToStartOfLine();
-
   /**
    * Extend this based sequence to include characters from underlying based sequence taking tab
    * expansion to 4th spaces into account
@@ -456,9 +403,6 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
    */
   @NotNull
   BasedSequence prefixWithIndent(int maxColumns);
-
-  @NotNull
-  BasedSequence prefixWithIndent();
 
   /*
    These are convenience methods returning coordinates in Base Sequence of this sequence
@@ -504,7 +448,7 @@ public interface BasedSequence extends IRichSequence<BasedSequence>, BasedOption
   int baseColumnAtStart();
 
   class EmptyBasedSequence extends BasedSequenceImpl {
-    public EmptyBasedSequence() {
+    EmptyBasedSequence() {
       super(0);
     }
 

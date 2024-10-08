@@ -17,25 +17,17 @@ public interface CharPredicate extends IntPredicate {
   CharPredicate EOL = value -> value == '\n';
   CharPredicate ANY_EOL = value -> value == '\n' || value == '\r';
   CharPredicate ANY_EOL_NUL = value -> value == '\n' || value == '\r' || value == '\0';
-  CharPredicate BACKSLASH = value -> value == '\\';
-  CharPredicate SLASH = value -> value == '/';
   CharPredicate LINE_SEP = value -> value == '\u2028';
   CharPredicate HASH = value -> value == '#';
   CharPredicate SPACE_TAB = value -> value == ' ' || value == '\t';
-  CharPredicate SPACE_TAB_NUL = value -> value == ' ' || value == '\t' || value == '\0';
-  CharPredicate SPACE_TAB_LINE_SEP = value -> value == ' ' || value == '\t' || value == '\u2028';
   CharPredicate SPACE_TAB_NBSP_LINE_SEP =
       value -> value == ' ' || value == '\t' || value == '\u00A0' || value == '\u2028';
-  CharPredicate SPACE_EOL = value -> value == ' ' || value == '\n';
-  CharPredicate SPACE_ANY_EOL = value -> value == ' ' || value == '\r' || value == '\n';
   CharPredicate SPACE_TAB_NBSP = value -> value == ' ' || value == '\t' || value == '\u00A0';
   CharPredicate SPACE_TAB_EOL = value -> value == ' ' || value == '\t' || value == '\n';
   CharPredicate SPACE_TAB_NBSP_EOL =
       value -> value == ' ' || value == '\t' || value == '\n' || value == '\u00A0';
   CharPredicate WHITESPACE =
       value -> value == ' ' || value == '\t' || value == '\n' || value == '\r';
-  CharPredicate WHITESPACE_OR_NUL =
-      value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\0';
   CharPredicate WHITESPACE_NBSP =
       value -> value == ' ' || value == '\t' || value == '\n' || value == '\r' || value == '\u00A0';
   CharPredicate WHITESPACE_NBSP_OR_NUL =
@@ -62,10 +54,6 @@ public interface CharPredicate extends IntPredicate {
   CharPredicate DECIMAL_DIGITS = value -> value >= '0' && value <= '9';
   CharPredicate OCTAL_DIGITS = value -> value >= '0' && value <= '7';
   CharPredicate BINARY_DIGITS = value -> value >= '0' && value <= '1';
-
-  @Deprecated CharPredicate FALSE = NONE;
-  @Deprecated CharPredicate TRUE = ALL;
-  @Deprecated CharPredicate SPACE_TAB_OR_NUL = SPACE_TAB_NUL;
 
   @Override
   boolean test(int value);

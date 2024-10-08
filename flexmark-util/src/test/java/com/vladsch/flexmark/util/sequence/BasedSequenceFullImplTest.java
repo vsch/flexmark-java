@@ -1550,32 +1550,6 @@ public class BasedSequenceFullImplTest {
   }
 
   @Test
-  public void test_extendByOneOfAny() {
-    BasedSequence b = basedSequenceOf("this;.,\n").subSequence(0, "this;.,\n".length());
-    BasedSequence s = b.subSequence(0, 4);
-
-    assertEquals("this", s.extendByOneOfAny(CharPredicate.anyOf("")).toString());
-    assertEquals("this", s.extendByOneOfAny(CharPredicate.anyOf("-*")).toString());
-    assertEquals("this;", s.extendByOneOfAny(CharPredicate.anyOf(";")).toString());
-    assertEquals("this;", s.extendByOneOfAny(CharPredicate.anyOf(".;")).toString());
-    assertEquals("this;", s.extendByOneOfAny(CharPredicate.anyOf(",.;")).toString());
-    assertEquals("this;", s.extendByOneOfAny(CharPredicate.anyOf("\n,.;")).toString());
-  }
-
-  @Test
-  public void test_extendByAny() {
-    BasedSequence b = basedSequenceOf("this;.,\n").subSequence(0, "this;.,\n".length());
-    BasedSequence s = b.subSequence(0, 4);
-
-    assertEquals("this", s.extendByAny(CharPredicate.anyOf("")).toString());
-    assertEquals("this", s.extendByAny(CharPredicate.anyOf("-*")).toString());
-    assertEquals("this;", s.extendByAny(CharPredicate.anyOf(";")).toString());
-    assertEquals("this;.", s.extendByAny(CharPredicate.anyOf(".;")).toString());
-    assertEquals("this;.,", s.extendByAny(CharPredicate.anyOf(",.;")).toString());
-    assertEquals("this;.,\n", s.extendByAny(CharPredicate.anyOf("\n,.;")).toString());
-  }
-
-  @Test
   public void test_extendByAny2() {
     BasedSequence b = basedSequenceOf("this;.,\n").subSequence(0, "this;.,\n".length());
     BasedSequence s = b.subSequence(0, 4);
@@ -1605,52 +1579,6 @@ public class BasedSequenceFullImplTest {
     assertEquals("this;", s.extendByAnyNot(CharPredicate.anyOf("\n,.;")).toString());
     assertEquals("this;.", s.extendByAnyNot(CharPredicate.anyOf("\n,.")).toString());
     assertEquals("this;.,", s.extendByAnyNot(CharPredicate.anyOf("\n,")).toString());
-  }
-
-  @Test
-  public void test_prefixWithIndent() {
-    assertEquals(
-        "test\n",
-        basedSequenceOf("\ntest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        " test\n",
-        basedSequenceOf("\n test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "  test\n",
-        basedSequenceOf("\n  test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "   test\n",
-        basedSequenceOf("\n   test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "    test\n",
-        basedSequenceOf("\n    test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "     test\n",
-        basedSequenceOf("\n     test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "      test\n",
-        basedSequenceOf("\n      test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
   }
 
   @Test
@@ -1742,94 +1670,6 @@ public class BasedSequenceFullImplTest {
         basedSequenceOf("\n      test\n")
             .trimStart(CharPredicate.WHITESPACE)
             .prefixWithIndent(4)
-            .toString());
-  }
-
-  @Test
-  public void test_prefixWithIndentTabs() {
-    assertEquals(
-        "\ttest\n",
-        basedSequenceOf("\n\ttest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        " \ttest\n",
-        basedSequenceOf("\n \ttest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "  \ttest\n",
-        basedSequenceOf("\n  \ttest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "   \ttest\n",
-        basedSequenceOf("\n   \ttest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "    \ttest\n",
-        basedSequenceOf("\n    \ttest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "     \ttest\n",
-        basedSequenceOf("\n     \ttest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "      \ttest\n",
-        basedSequenceOf("\n      \ttest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "\ttest\n",
-        basedSequenceOf("\n\ttest\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "\t test\n",
-        basedSequenceOf("\n\t test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "\t  test\n",
-        basedSequenceOf("\n\t  test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "\t   test\n",
-        basedSequenceOf("\n\t   test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "\t    test\n",
-        basedSequenceOf("\n\t    test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "\t     test\n",
-        basedSequenceOf("\n\t     test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
-            .toString());
-    assertEquals(
-        "\t      test\n",
-        basedSequenceOf("\n\t      test\n")
-            .trimStart(CharPredicate.WHITESPACE)
-            .prefixWithIndent()
             .toString());
   }
 
@@ -2213,44 +2053,6 @@ public class BasedSequenceFullImplTest {
 
     BasedSequence sequence = basedSequenceOf(input);
     assertEquals(result, sequence.extractRanges(sequence.blankLinesRemovedRanges()).toString());
-  }
-
-  @Test
-  public void test_extendToEndOfLine() {
-    String input = "" + "0123456789\n" + "abcdefghij\n" + "\n";
-
-    BasedSequence sequence = basedSequenceOf(input);
-
-    assertEquals("0123456789", sequence.subSequence(0, 0).extendToEndOfLine().toString());
-    assertEquals("123456789", sequence.subSequence(1, 9).extendToEndOfLine().toString());
-    assertEquals("bcdefghij", sequence.subSequence(12, 13).extendToEndOfLine().toString());
-    assertEquals("", sequence.subSequence(22, 22).extendToEndOfLine().toString());
-    assertEquals("\n", sequence.subSequence(22, 23).extendToEndOfLine().toString());
-
-    assertEquals("0123456789\n", sequence.subSequence(0, 0).extendToEndOfLine(true).toString());
-    assertEquals("123456789\n", sequence.subSequence(1, 9).extendToEndOfLine(true).toString());
-    assertEquals("bcdefghij\n", sequence.subSequence(12, 13).extendToEndOfLine(true).toString());
-    assertEquals("\n", sequence.subSequence(22, 22).extendToEndOfLine(true).toString());
-    assertEquals("\n", sequence.subSequence(22, 23).extendToEndOfLine(true).toString());
-  }
-
-  @Test
-  public void test_extendToStartOfLine() {
-    String input = "" + "0123456789\n" + "abcdefghij\n" + "\n";
-
-    BasedSequence sequence = basedSequenceOf(input);
-
-    assertEquals("", sequence.subSequence(0, 0).extendToStartOfLine().toString());
-    assertEquals("012345678", sequence.subSequence(1, 9).extendToStartOfLine().toString());
-    assertEquals("ab", sequence.subSequence(12, 13).extendToStartOfLine().toString());
-    assertEquals("", sequence.subSequence(22, 22).extendToStartOfLine().toString());
-    assertEquals("\n", sequence.subSequence(22, 23).extendToStartOfLine().toString());
-
-    assertEquals("", sequence.subSequence(0, 0).extendToStartOfLine(true).toString());
-    assertEquals("012345678", sequence.subSequence(1, 9).extendToStartOfLine(true).toString());
-    assertEquals("\nab", sequence.subSequence(12, 13).extendToStartOfLine(true).toString());
-    assertEquals("\n", sequence.subSequence(22, 22).extendToStartOfLine(true).toString());
-    assertEquals("\n", sequence.subSequence(22, 23).extendToStartOfLine(true).toString());
   }
 
   @Test

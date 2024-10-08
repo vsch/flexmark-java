@@ -3,20 +3,16 @@ package com.vladsch.flexmark.util.html;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.BiConsumer;
 
 public class Attributes {
-  public static final Attributes EMPTY = new Attributes();
-
   protected LinkedHashMap<String, Attribute> attributes;
 
   public Attributes() {
     attributes = null;
   }
 
-  public Attributes(Attributes attributes) {
+  Attributes(Attributes attributes) {
     this.attributes =
         attributes == null || attributes.attributes == null
             ? null
@@ -75,30 +71,13 @@ public class Attributes {
     return attributes == null || attributes.isEmpty();
   }
 
-  public Set<String> keySet() {
+  Set<String> keySet() {
     // CAUTION: attributes can be modified through this mutable set
-    return attributes != null ? attributes.keySet() : Collections.EMPTY_SET;
+    return attributes != null ? attributes.keySet() : Collections.emptySet();
   }
 
-  public Collection<Attribute> values() {
-    return attributes != null ? attributes.values() : Collections.EMPTY_LIST;
-  }
-
-  public Set<Map.Entry<String, Attribute>> entrySet() {
-    // CAUTION: attributes can be modified through this mutable set
-    return attributes != null ? attributes.entrySet() : Collections.EMPTY_SET;
-  }
-
-  public void forEach(BiConsumer<String, Attribute> action) {
-    if (attributes != null) {
-      for (Map.Entry<String, Attribute> entry : attributes.entrySet()) {
-        action.accept(entry.getKey(), entry.getValue());
-      }
-    }
-  }
-
-  public int size() {
-    return attributes == null ? 0 : attributes.size();
+  Collection<Attribute> values() {
+    return attributes != null ? attributes.values() : Collections.emptySet();
   }
 
   @Override

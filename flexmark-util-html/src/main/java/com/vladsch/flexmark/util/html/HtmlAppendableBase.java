@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.LineAppendableImpl;
 import com.vladsch.flexmark.util.sequence.LineInfo;
+import com.vladsch.flexmark.util.sequence.Options;
 import com.vladsch.flexmark.util.sequence.RepeatedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import java.io.IOException;
@@ -215,15 +216,15 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     return tag(tagName, true);
   }
 
-  protected String getOpenTagText() {
+  private String getOpenTagText() {
     return Utils.splice(openTags, ", ", true);
   }
 
-  protected void pushTag(CharSequence tagName) {
+  private void pushTag(CharSequence tagName) {
     openTags.push(String.valueOf(tagName));
   }
 
-  protected void popTag(CharSequence tagName) {
+  private void popTag(CharSequence tagName) {
     if (openTags.isEmpty())
       throw new IllegalStateException("Close tag '" + tagName + "' with no tags open");
     String openTag = openTags.peek();
@@ -233,11 +234,11 @@ public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements Html
     openTags.pop();
   }
 
-  protected void tagOpened(CharSequence tagName) {
+  private void tagOpened(CharSequence tagName) {
     pushTag(tagName);
   }
 
-  protected void tagClosed(CharSequence tagName) {
+  private void tagClosed(CharSequence tagName) {
     popTag(tagName);
   }
 

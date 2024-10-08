@@ -27,7 +27,7 @@ class CollectionHostValidator<T> {
     return this;
   }
 
-  CollectionHostValidator<T> repeat(int repeat) {
+  CollectionHostValidator<T> setRepeat(int repeat) {
     this.repeat = repeat;
     return this;
   }
@@ -47,12 +47,12 @@ class CollectionHostValidator<T> {
     repeat = 1;
   }
 
-  CollectionHostValidator<T> id(int id) {
+  CollectionHostValidator<T> setId(int id) {
     this.id = String.valueOf(id);
     return this;
   }
 
-  CollectionHostValidator<T> onCond(boolean conditional) {
+  CollectionHostValidator<T> setConditional(boolean conditional) {
     this.conditional = conditional;
     return this;
   }

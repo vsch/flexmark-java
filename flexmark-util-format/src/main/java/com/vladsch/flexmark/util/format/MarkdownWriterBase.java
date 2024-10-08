@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.LineAppendable;
 import com.vladsch.flexmark.util.sequence.LineAppendableImpl;
 import com.vladsch.flexmark.util.sequence.LineInfo;
+import com.vladsch.flexmark.util.sequence.Options;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 import java.io.IOException;
 import java.util.Iterator;

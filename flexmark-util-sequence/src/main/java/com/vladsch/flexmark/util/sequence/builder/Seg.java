@@ -13,10 +13,10 @@ import org.jetbrains.annotations.NotNull;
  * only flags.
  */
 public class Seg {
-  public static final Seg NULL = new Seg(Range.NULL.getStart(), Range.NULL.getEnd());
-  public static final Seg ANCHOR_0 = new Seg(0, 0);
+  static final Seg NULL = new Seg(Range.NULL.getStart(), Range.NULL.getEnd());
+  private static final Seg ANCHOR_0 = new Seg(0, 0);
   public static final int MAX_TEXT_OFFSET = Integer.MAX_VALUE >> 1;
-  public static final int F_TEXT_OPTION = Integer.MAX_VALUE & ~(MAX_TEXT_OFFSET);
+  private static final int F_TEXT_OPTION = Integer.MAX_VALUE & ~(MAX_TEXT_OFFSET);
 
   private final int start;
   private final int end;
@@ -46,7 +46,7 @@ public class Seg {
     return getTextOffset(start);
   }
 
-  public static int getTextOffset(int startOffset) {
+  private static int getTextOffset(int startOffset) {
     return (-startOffset - 1) & MAX_TEXT_OFFSET;
   }
 
@@ -58,7 +58,7 @@ public class Seg {
     return isFirst256Start(start);
   }
 
-  public static boolean isFirst256Start(int start) {
+  private static boolean isFirst256Start(int start) {
     return ((-start - 1) & F_TEXT_OPTION) != 0;
   }
 
@@ -66,7 +66,7 @@ public class Seg {
     return isRepeatedTextEnd(end);
   }
 
-  public static boolean isRepeatedTextEnd(int end) {
+  private static boolean isRepeatedTextEnd(int end) {
     return ((-end - 1) & F_TEXT_OPTION) != 0;
   }
 

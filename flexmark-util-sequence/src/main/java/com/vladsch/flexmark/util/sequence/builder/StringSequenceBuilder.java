@@ -19,10 +19,6 @@ public final class StringSequenceBuilder
     this.segments = new StringBuilder();
   }
 
-  public StringSequenceBuilder(int initialCapacity) {
-    this.segments = new StringBuilder(initialCapacity);
-  }
-
   @Override
   @NotNull
   public StringSequenceBuilder getBuilder() {

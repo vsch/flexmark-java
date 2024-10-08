@@ -31,16 +31,6 @@ import org.jetbrains.annotations.Nullable;
  * lines.
  */
 public interface LineAppendable extends Appendable, Iterable<LineInfo> {
-  enum Options {
-    CONVERT_TABS, // expand tabs on column multiples of 4
-    COLLAPSE_WHITESPACE, // collapse multiple tabs and spaces to single space, implies CONVERT_TABS
-    TRIM_TRAILING_WHITESPACE, // don't output trailing whitespace
-    PASS_THROUGH, // just pass everything through to appendable with no formatting
-    TRIM_LEADING_WHITESPACE, // allow leading spaces on a line, else remove
-    TRIM_LEADING_EOL, // allow EOL at offset 0
-    PREFIX_PRE_FORMATTED, // when prefixing lines, prefix pre-formatted lines
-  }
-
   Options O_CONVERT_TABS = Options.CONVERT_TABS;
   Options O_COLLAPSE_WHITESPACE = Options.COLLAPSE_WHITESPACE;
   Options O_TRIM_TRAILING_WHITESPACE = Options.TRIM_TRAILING_WHITESPACE;
@@ -48,12 +38,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
   Options O_TRIM_LEADING_WHITESPACE = Options.TRIM_LEADING_WHITESPACE;
   Options O_TRIM_LEADING_EOL = Options.TRIM_LEADING_EOL;
   Options O_PREFIX_PRE_FORMATTED = Options.PREFIX_PRE_FORMATTED;
-  BitFieldSet<Options> O_FORMAT_ALL =
-      BitFieldSet.of(
-          O_CONVERT_TABS,
-          O_COLLAPSE_WHITESPACE,
-          O_TRIM_TRAILING_WHITESPACE,
-          O_TRIM_LEADING_WHITESPACE);
 
   int F_CONVERT_TABS = BitFieldSet.intMask(O_CONVERT_TABS); // expand tabs on column multiples of 4
   int F_COLLAPSE_WHITESPACE =
@@ -85,27 +69,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
           | LineAppendable.F_TRIM_TRAILING_WHITESPACE
           | LineAppendable.F_TRIM_LEADING_WHITESPACE;
 
-  // Use F_ prefixed constants
-  @Deprecated int CONVERT_TABS = F_CONVERT_TABS;
-  @Deprecated int COLLAPSE_WHITESPACE = F_COLLAPSE_WHITESPACE;
-  @Deprecated int TRIM_TRAILING_WHITESPACE = F_TRIM_TRAILING_WHITESPACE;
-  @Deprecated int PASS_THROUGH = F_PASS_THROUGH;
-
-  /**
-   * @deprecated ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
-   */
-  @Deprecated int ALLOW_LEADING_WHITESPACE = 0;
-
-  @Deprecated int TRIM_LEADING_WHITESPACE = F_TRIM_LEADING_WHITESPACE;
-
-  /**
-   * @deprecated ALLOW_LEADING_EOL is now inverted and named F_TRIM_LEADING_EOL
-   */
-  @Deprecated int ALLOW_LEADING_EOL = 0;
-
-  @Deprecated int PREFIX_PRE_FORMATTED = F_PREFIX_PRE_FORMATTED;
-  @Deprecated int FORMAT_ALL = F_FORMAT_ALL;
-
   static BitFieldSet<Options> toOptionSet(int options) {
     return BitFieldSet.of(Options.class, options);
   }
@@ -127,39 +90,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
   LineAppendable getEmptyAppendable();
 
   /**
-   * Make a copy of this appendable with the given line range
-   *
-   * @param startLine start line
-   * @param endLine end line
-   * @param withPrefixes true if to include prefixes
-   * @return copy of appendable with requested content
-   */
-  @NotNull
-  default LineAppendable copyAppendable(int startLine, int endLine, boolean withPrefixes) {
-    return getEmptyAppendable().append(this, startLine, endLine, withPrefixes);
-  }
-
-  @NotNull
-  default LineAppendable copyAppendable(int startLine, int endLine) {
-    return getEmptyAppendable().append(this, startLine, endLine, false);
-  }
-
-  @NotNull
-  default LineAppendable copyAppendable(int startLine) {
-    return getEmptyAppendable().append(this, startLine, Integer.MAX_VALUE, false);
-  }
-
-  @NotNull
-  default LineAppendable copyAppendable() {
-    return getEmptyAppendable().append(this, 0, Integer.MAX_VALUE, false);
-  }
-
-  @NotNull
-  default LineAppendable copyAppendable(boolean withPrefixes) {
-    return getEmptyAppendable().append(this, 0, Integer.MAX_VALUE, withPrefixes);
-  }
-
-  /**
    * Get current options as set which can be used to modify options
    *
    * @return mutable option set
@@ -174,33 +104,13 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
   LineAppendable popOptions();
 
   @NotNull
-  default LineAppendable noTrimLeading() {
-    return changeOptions(0, F_TRIM_LEADING_WHITESPACE);
-  }
-
-  @NotNull
-  default LineAppendable trimLeading() {
-    return changeOptions(F_TRIM_LEADING_WHITESPACE, 0);
-  }
-
-  @NotNull
   default LineAppendable preserveSpaces() {
     return changeOptions(0, F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE);
   }
 
   @NotNull
-  default LineAppendable noPreserveSpaces() {
-    return changeOptions(F_TRIM_LEADING_WHITESPACE | F_COLLAPSE_WHITESPACE, 0);
-  }
-
-  @NotNull
   default LineAppendable removeOptions(int flags) {
     return changeOptions(0, flags);
-  }
-
-  @NotNull
-  default LineAppendable addOptions(int flags) {
-    return changeOptions(flags, 0);
   }
 
   @NotNull
@@ -273,14 +183,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
 
   @NotNull
   LineAppendable append(char c, int count);
-
-  @NotNull
-  default LineAppendable appendAll(@NotNull Iterable<CharSequence> sequences) {
-    for (CharSequence sequence : sequences) {
-      append(sequence);
-    }
-    return this;
-  }
 
   /**
    * Append lines from another line formatting appendable.
@@ -654,24 +556,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
   int getLineCount();
 
   /**
-   * Kotlin compatibility
-   *
-   * @return true if have no terminated lines
-   */
-  default boolean isEmpty() {
-    return getLineCountWithPending() == 0;
-  }
-
-  /**
-   * Kotlin compatibility
-   *
-   * @return true if have terminated lines
-   */
-  default boolean isNotEmpty() {
-    return getLineCountWithPending() != 0;
-  }
-
-  /**
    * Get the number of lines appended, including any unterminated ones
    *
    * <p>NOTE: if there is an unterminated line it will be available as the last line, without being
@@ -747,18 +631,8 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
   }
 
   @NotNull
-  default Iterable<BasedSequence> getLines() {
-    return getLines(Integer.MAX_VALUE, 0, Integer.MAX_VALUE, true);
-  }
-
-  @NotNull
   default Iterable<BasedSequence> getLines(int maxTrailingBlankLines, boolean withPrefixes) {
     return getLines(maxTrailingBlankLines, 0, Integer.MAX_VALUE, withPrefixes);
-  }
-
-  @NotNull
-  default Iterable<BasedSequence> getLines(boolean withPrefixes) {
-    return getLines(Integer.MAX_VALUE, 0, Integer.MAX_VALUE, withPrefixes);
   }
 
   /**
@@ -777,37 +651,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
   @NotNull
   default Iterable<LineInfo> getLinesInfo(int maxTrailingBlankLines) {
     return getLinesInfo(maxTrailingBlankLines, 0, Integer.MAX_VALUE);
-  }
-
-  @NotNull
-  default Iterable<LineInfo> getLinesInfo() {
-    return getLinesInfo(Integer.MAX_VALUE, 0, Integer.MAX_VALUE);
-  }
-
-  /**
-   * Get Line content of given line
-   *
-   * @param lineIndex line index
-   * @return char sequence for the line
-   */
-  @NotNull
-  default BasedSequence getLineContent(int lineIndex) {
-    LineInfo lineInfo = getLineInfo(lineIndex);
-    BasedSequence line = getLine(lineIndex);
-    return line.subSequence(lineInfo.prefixLength, lineInfo.prefixLength + lineInfo.textLength);
-  }
-
-  /**
-   * Get prefix of given line
-   *
-   * @param lineIndex line index
-   * @return line prefix char sequence
-   */
-  @NotNull
-  default BasedSequence getLinePrefix(int lineIndex) {
-    LineInfo lineInfo = getLineInfo(lineIndex);
-    BasedSequence line = getLine(lineIndex);
-    return line.subSequence(0, lineInfo.prefixLength);
   }
 
   /**
@@ -855,16 +698,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
     return toString(maxBlankLines, maxTrailingBlankLines, true);
   }
 
-  @NotNull
-  default String toString(int maxBlankLines, boolean withPrefixes) {
-    return toString(maxBlankLines, maxBlankLines, withPrefixes);
-  }
-
-  @NotNull
-  default String toString(boolean withPrefixes) {
-    return toString(Integer.MAX_VALUE, Integer.MAX_VALUE, withPrefixes);
-  }
-
   /**
    * get the resulting text for all lines
    *
@@ -893,24 +726,8 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
   }
 
   @NotNull
-  default CharSequence toSequence(int maxBlankLines, boolean withPrefixes) {
-    return toSequence(maxBlankLines, maxBlankLines, withPrefixes);
-  }
-
-  @NotNull
-  default CharSequence toSequence(boolean withPrefixes) {
-    return toSequence(Integer.MAX_VALUE, Integer.MAX_VALUE, withPrefixes);
-  }
-
-  @NotNull
   default CharSequence toSequence() {
     return toSequence(Integer.MAX_VALUE, Integer.MAX_VALUE, true);
-  }
-
-  @Deprecated
-  default <T extends Appendable> T appendTo(@NotNull T out, int maxTrailingBlankLines)
-      throws IOException {
-    return appendTo(out, Integer.MAX_VALUE, maxTrailingBlankLines);
   }
 
   /**
@@ -987,10 +804,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
       @NotNull T out, int maxBlankLines, int maxTrailingBlankLines) {
     appendToSilently(out, maxBlankLines, maxTrailingBlankLines, 0, Integer.MAX_VALUE);
     return out;
-  }
-
-  default <T extends Appendable> T appendToSilently(@NotNull T out) {
-    return appendToSilently(out, 0, 0, 0, Integer.MAX_VALUE);
   }
 
   /**

@@ -9,25 +9,25 @@ import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 public class SegmentedSequenceStats {
-  public static class StatsEntry implements Comparable<StatsEntry> {
-    int segments;
-    int count;
-    final MinMaxAvgLong segStats = new MinMaxAvgLong();
-    final MinMaxAvgLong length = new MinMaxAvgLong();
-    final MinMaxAvgLong overhead = new MinMaxAvgLong();
+  private static class StatsEntry implements Comparable<StatsEntry> {
+    private int segments;
+    private int count;
+    private final MinMaxAvgLong segStats = new MinMaxAvgLong();
+    private final MinMaxAvgLong length = new MinMaxAvgLong();
+    private final MinMaxAvgLong overhead = new MinMaxAvgLong();
 
-    public StatsEntry(int segments) {
+    StatsEntry(int segments) {
       this.segments = segments;
     }
 
-    public void add(int segments, int length, int overhead) {
+    void add(int segments, int length, int overhead) {
       count++;
       this.segStats.add(segments);
       this.length.add(length);
       this.overhead.add(overhead);
     }
 
-    public void add(@NotNull StatsEntry other) {
+    void add(@NotNull StatsEntry other) {
       count += other.count;
       this.segStats.add(other.segStats);
       this.length.add(other.length);
@@ -71,16 +71,8 @@ public class SegmentedSequenceStats {
     entry.add(segments, length, overhead);
   }
 
-  public int getCount(int segments) {
-    StatsEntry entry = new StatsEntry(segments);
-    if (stats.containsKey(entry)) {
-      return stats.get(entry).count;
-    }
-    return 0;
-  }
-
   @NotNull
-  public String getStatsText(List<StatsEntry> entries) {
+  private String getStatsText(List<StatsEntry> entries) {
     StringBuilder out = new StringBuilder();
     int iMax = entries.size();
 
@@ -122,7 +114,7 @@ public class SegmentedSequenceStats {
     return getStatsText(getAggregatedStats());
   }
 
-  static final List<Integer> AGGR_STEPS = new ArrayList<>();
+  private static final List<Integer> AGGR_STEPS = new ArrayList<>();
 
   static {
     AGGR_STEPS.add(1);
@@ -143,7 +135,7 @@ public class SegmentedSequenceStats {
     for (int i = start; i < nextStep; i += step) AGGR_STEPS.add(i);
   }
 
-  static final int MAX_BUCKETS = AGGR_STEPS.size();
+  private static final int MAX_BUCKETS = AGGR_STEPS.size();
 
   @NotNull
   public List<StatsEntry> getAggregatedStats() {
@@ -194,10 +186,6 @@ public class SegmentedSequenceStats {
     return getStatsText(entries);
   }
 
-  public void clear() {
-    stats.clear();
-  }
-
   @NotNull
   public List<StatsEntry> getStats() {
     List<StatsEntry> entries = new ArrayList<>(stats.keySet());
@@ -207,7 +195,7 @@ public class SegmentedSequenceStats {
   }
 
   @NotNull
-  public static SegmentedSequenceStats getInstance() {
+  static SegmentedSequenceStats getInstance() {
     return new SegmentedSequenceStats();
   }
 }

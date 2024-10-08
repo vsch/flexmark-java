@@ -58,26 +58,22 @@ public final class LineInfo {
     }
   }
 
-  public static final Flags BLANK_PREFIX = Flags.BLANK_PREFIX;
-  public static final Flags BLANK_TEXT = Flags.BLANK_TEXT;
-  public static final Flags PREFORMATTED = Flags.PREFORMATTED;
+  private static final int F_PREFORMATTED = BitFieldSet.intMask(Flags.PREFORMATTED);
+  private static final int F_BLANK_PREFIX = BitFieldSet.intMask(Flags.BLANK_PREFIX);
+  private static final int F_BLANK_TEXT = BitFieldSet.intMask(Flags.BLANK_TEXT);
 
-  public static final int F_PREFORMATTED = BitFieldSet.intMask(Flags.PREFORMATTED);
-  public static final int F_BLANK_PREFIX = BitFieldSet.intMask(Flags.BLANK_PREFIX);
-  public static final int F_BLANK_TEXT = BitFieldSet.intMask(Flags.BLANK_TEXT);
-
-  public static final LineInfo NULL =
+  static final LineInfo NULL =
       new LineInfo(BasedSequence.NULL, -1, 0, 0, 0, 0, 0, 0, true, true, Preformatted.NONE);
 
-  public final CharSequence lineSeq; // line content
-  public final int index; // line index
+  final CharSequence lineSeq; // line content
+  private final int index; // line index
   public final int prefixLength; // line's prefix length
   public final int textLength; // line's text length
   public final int length; // line's length (including EOL if any)
   public final int sumPrefixLength; // total length of previous lines' prefixes
-  public final int sumTextLength; // total length of previous lines' text
+  private final int sumTextLength; // total length of previous lines' text
   public final int sumLength; // total length of previous lines
-  public final int flags;
+  private final int flags;
 
   private LineInfo(
       @NotNull CharSequence lineSeq,
@@ -217,29 +213,6 @@ public final class LineInfo {
         + Utils.escapeJavaString(lineSeq)
         + "'"
         + '}';
-  }
-
-  @NotNull
-  public static LineInfo create(
-      @NotNull CharSequence line,
-      int prefixLength,
-      int textLength,
-      int length,
-      boolean isBlankPrefix,
-      boolean isBlankText,
-      @NotNull Preformatted preformatted) {
-    return new LineInfo(
-        line,
-        0,
-        prefixLength,
-        textLength,
-        length,
-        0,
-        0,
-        0,
-        isBlankPrefix,
-        isBlankText,
-        preformatted);
   }
 
   @NotNull

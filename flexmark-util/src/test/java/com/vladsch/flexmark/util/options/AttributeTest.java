@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.options;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.vladsch.flexmark.util.html.Attribute;
@@ -18,13 +18,13 @@ public class AttributeTest {
 
     Attribute attribute1 = attribute.setValue("value2");
     assertEquals("add a new value", "value1 value2", attribute1.getValue().toString());
-    assertFalse("non-equality", attribute1.equals(attribute));
+    assertNotEquals(attribute1, attribute);
     assertEquals("no name change", "name", attribute1.getName().toString());
 
     Attribute attribute2 = attribute.removeValue("value2");
     assertEquals("remove non-existent value", "value1", attribute.getValue().toString());
     assertEquals("remove non-existent value, no new attribute", attribute2, attribute);
-    assertTrue("equality", attribute2.equals(attribute));
+    assertEquals(attribute2, attribute);
     assertEquals("no name change", "name", attribute2.getName().toString());
 
     Attribute attribute3 = attribute.replaceValue("value2");
@@ -52,7 +52,7 @@ public class AttributeTest {
 
     Attribute attribute8 = attribute7.removeValue("value2");
     assertEquals("remove middle value", "value1 value3", attribute8.getValue().toString());
-    assertFalse("non-equality", attribute8.equals(attribute7));
+    assertNotEquals(attribute8, attribute7);
     assertEquals("no name change", "name", attribute8.getName().toString());
 
     Attribute attribute9 = attribute3.replaceValue("value2");

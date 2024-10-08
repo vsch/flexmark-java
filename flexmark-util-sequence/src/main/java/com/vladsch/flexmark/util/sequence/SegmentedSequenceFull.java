@@ -1,10 +1,8 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.ISegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SegmentedSequenceStats;
-import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -200,28 +198,5 @@ public final class SegmentedSequenceFull extends SegmentedSequence {
 
     return new SegmentedSequenceFull(
         baseSeq, startOffset, endOffset, length, nonBaseChars, baseOffsets, baseStartOffset);
-  }
-
-  /**
-   * @param basedSequence base sequence for the segments
-   * @param segments list of based sequences to put into a based sequence
-   * @return based sequence of segments. Result is a sequence which looks like all the segments were
-   *     concatenated, while still maintaining the original offset for each character when using
-   *     {@link #getIndexOffset(int)}(int index)
-   * @deprecated use {@link BasedSequence#getBuilder()} and then {@link
-   *     SequenceBuilder#addAll(Iterable)} or if you know which are based segments vs. out of base
-   *     Strings then use {@link BasedSegmentBuilder} to construct segments directly. If you must
-   *     use segments then use {@link SegmentedSequence#create(BasedSequence, Iterable)} which does
-   *     the builder calls for you.
-   */
-  @Deprecated
-  public static BasedSequence of(
-      BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
-    return SegmentedSequence.create(basedSequence, segments);
-  }
-
-  @Deprecated
-  public static BasedSequence of(BasedSequence... segments) {
-    return SegmentedSequence.create(segments);
   }
 }

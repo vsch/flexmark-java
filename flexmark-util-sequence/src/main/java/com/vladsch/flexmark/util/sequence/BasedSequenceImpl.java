@@ -24,7 +24,7 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     return NULL;
   }
 
-  public BasedSequenceImpl(int hash) {
+  protected BasedSequenceImpl(int hash) {
     super(hash);
   }
 
@@ -247,18 +247,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
   @NotNull
   @Override
-  public BasedSequence extendByAny(@NotNull CharPredicate charSet) {
-    return extendByAny(charSet, Integer.MAX_VALUE - getEndOffset());
-  }
-
-  @NotNull
-  @Override
-  public BasedSequence extendByOneOfAny(@NotNull CharPredicate charSet) {
-    return extendByAny(charSet, 1);
-  }
-
-  @NotNull
-  @Override
   public BasedSequence extendByAny(@NotNull CharPredicate charSet, int maxCount) {
     int count = getBaseSequence().countLeading(charSet, getEndOffset(), getEndOffset() + maxCount);
     return count == 0 ? this : baseSubSequence(getStartOffset(), getEndOffset() + count);
@@ -294,32 +282,8 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
 
   @NotNull
   @Override
-  public final BasedSequence extendToEndOfLine(boolean includeEol) {
-    return extendToEndOfLine(CharPredicate.EOL, includeEol);
-  }
-
-  @NotNull
-  @Override
-  public final BasedSequence extendToEndOfLine() {
-    return extendToEndOfLine(CharPredicate.EOL, false);
-  }
-
-  @NotNull
-  @Override
   public final BasedSequence extendToStartOfLine(@NotNull CharPredicate eolChars) {
     return extendToStartOfLine(eolChars, false);
-  }
-
-  @NotNull
-  @Override
-  public final BasedSequence extendToStartOfLine(boolean includeEol) {
-    return extendToStartOfLine(CharPredicate.EOL, includeEol);
-  }
-
-  @NotNull
-  @Override
-  public final BasedSequence extendToStartOfLine() {
-    return extendToStartOfLine(CharPredicate.EOL, false);
   }
 
   @NotNull
@@ -378,12 +342,6 @@ public abstract class BasedSequenceImpl extends IRichSequenceBase<BasedSequence>
     return prefix == null || prefix.length() == 0
         ? this
         : PrefixedSubSequence.prefixOf(prefix.toString(), this);
-  }
-
-  @Override
-  @NotNull
-  public final BasedSequence prefixWithIndent() {
-    return prefixWithIndent(Integer.MAX_VALUE);
   }
 
   @NotNull

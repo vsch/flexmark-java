@@ -4,21 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface MutableDataHolder extends DataHolder {
-  /**
-   * Get the given key, if it does not exist then use the key's factory to create a new value and
-   * put it into the collection so that the following get of the same key will find a value
-   *
-   * @param key data key
-   * @return return stored value or newly created value
-   * @deprecated use key.get(dataHolder) instead, which will do the same thing an carries nullable
-   *     information for the data
-   */
-  @Override
-  @Deprecated
-  default <T> T get(@NotNull DataKey<T> key) {
-    return key.get(this);
-  }
-
   @Override
   Object getOrCompute(@NotNull DataKeyBase<?> key, @NotNull DataValueFactory<?> factory);
 

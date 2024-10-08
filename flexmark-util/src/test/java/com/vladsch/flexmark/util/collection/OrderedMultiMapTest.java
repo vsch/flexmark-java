@@ -545,13 +545,13 @@ public class OrderedMultiMapTest {
       final int finalJ = j;
       validator
           .reset()
-          .id(j)
+          .setId(j)
           .expectRemoving(j, new Pair<>(String.valueOf(j), (Integer) null))
           .expectRemoving(j, new Pair<>((String) null, j))
-          .repeat(2)
-          .onCond(j == 1)
+          .setRepeat(2)
+          .setConditional(j == 1)
           .expectClearing()
-          .test((Runnable) () -> orderedMap.keySet().remove(String.valueOf(finalJ)));
+          .test(() -> orderedMap.keySet().remove(String.valueOf(finalJ)));
     }
   }
 }

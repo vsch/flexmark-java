@@ -18,12 +18,16 @@ public class DependentItem<D> {
   }
 
   public void addDependency(DependentItem<D> dependency) {
-    if (this.dependencies == null) this.dependencies = new BitSet();
+    if (this.dependencies == null) {
+      this.dependencies = new BitSet();
+    }
     this.dependencies.set(dependency.index);
   }
 
   public void addDependency(BitSet dependencies) {
-    if (this.dependencies == null) this.dependencies = new BitSet();
+    if (this.dependencies == null) {
+      this.dependencies = new BitSet();
+    }
     this.dependencies.or(dependencies);
   }
 
@@ -42,12 +46,16 @@ public class DependentItem<D> {
   }
 
   public void addDependent(DependentItem<D> dependent) {
-    if (this.dependents == null) this.dependents = new BitSet();
+    if (this.dependents == null) {
+      this.dependents = new BitSet();
+    }
     this.dependents.set(dependent.index);
   }
 
   public void addDependent(BitSet dependents) {
-    if (this.dependents == null) this.dependents = new BitSet();
+    if (this.dependents == null) {
+      this.dependents = new BitSet();
+    }
     this.dependents.or(dependents);
   }
 

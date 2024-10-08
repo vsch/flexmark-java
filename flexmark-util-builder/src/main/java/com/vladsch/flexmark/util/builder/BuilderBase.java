@@ -131,21 +131,6 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
     return super.set(key, value);
   }
 
-  /**
-   * Get the given key, if it does not exist then use the key's factory to create a new value and
-   * put it into the collection so that the following get of the same key will find a value
-   *
-   * @param key data key
-   * @return return stored value or newly created value
-   * @deprecated use key.get(dataHolder) instead, which will do the same thing an carries nullable
-   *     information for the data
-   */
-  @Deprecated
-  @Override
-  public <V> V get(@NotNull DataKey<V> key) {
-    return key.get(this);
-  }
-
   protected BuilderBase(@Nullable DataHolder options) {
     super(options);
   }

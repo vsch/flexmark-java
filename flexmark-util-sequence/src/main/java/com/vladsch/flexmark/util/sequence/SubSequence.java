@@ -150,21 +150,4 @@ public final class SubSequence extends BasedSequenceImpl {
       return new SubSequence(charSequence);
     }
   }
-
-  @Deprecated
-  public static BasedSequence of(@Nullable CharSequence charSequence) {
-    return BasedSequence.of(charSequence);
-  }
-
-  @Deprecated
-  public static BasedSequence of(@Nullable CharSequence charSequence, int startIndex) {
-    return BasedSequence.of(charSequence)
-        .subSequence(startIndex, charSequence == null ? 0 : charSequence.length());
-  }
-
-  @Deprecated
-  public static BasedSequence of(
-      @Nullable CharSequence charSequence, int startIndex, int endIndex) {
-    return BasedSequence.of(charSequence).subSequence(startIndex, endIndex);
-  }
 }

@@ -5,18 +5,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BasedOffsetTracker {
-  protected final @NotNull BasedSequence
+  private final @NotNull BasedSequence
       sequence; // sequence on which this tracker is based, not the base sequence of original
   // sequence
-  protected final @NotNull SegmentOffsetTree segmentOffsetTree;
+  private final @NotNull SegmentOffsetTree segmentOffsetTree;
   private @Nullable Segment lastSegment;
 
-  protected BasedOffsetTracker(@NotNull BasedSequence sequence, @NotNull SegmentTree segmentTree) {
+  private BasedOffsetTracker(@NotNull BasedSequence sequence, @NotNull SegmentTree segmentTree) {
     this.sequence = sequence;
     this.segmentOffsetTree = segmentTree.getSegmentOffsetTree(sequence.getBaseSequence());
   }
 
-  protected BasedOffsetTracker(
+  private BasedOffsetTracker(
       @NotNull BasedSequence sequence, @NotNull SegmentOffsetTree segmentOffsetTree) {
     this.sequence = sequence;
     this.segmentOffsetTree = segmentOffsetTree;

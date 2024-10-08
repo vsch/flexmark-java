@@ -2,85 +2,37 @@ package com.vladsch.flexmark.util.sequence.builder;
 
 import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 
-public class SegmentStats {
-  public static final int NULL_REPEATED_CHAR = -1;
-  public static final int NOT_REPEATED_CHAR = -2;
+class SegmentStats {
+  private static final int NULL_REPEATED_CHAR = -1;
+  private static final int NOT_REPEATED_CHAR = -2;
 
-  protected int textLength = 0; // length of all text in stats
-  protected int textSegments = 0; // total disjoint text segments
-  protected int textSegmentLength = 0; // length at start of last segment
+  private int textLength = 0; // length of all text in stats
+  private int textSegments = 0; // total disjoint text segments
+  private int textSegmentLength = 0; // length at start of last segment
 
-  protected int textSpaceLength = 0; // length of all space text
-  protected int textSpaceSegments = 0; // total disjoint spaces only segments
-  protected int textSpaceSegmentLength = 0; // length at start of spaces in last segment
+  private int textSpaceLength = 0; // length of all space text
+  private int textSpaceSegments = 0; // total disjoint spaces only segments
+  private int textSpaceSegmentLength = 0; // length at start of spaces in last segment
 
-  protected int textFirst256Length = 0; // length of all text chars < 256
-  protected int textFirst256Segments = 0; // total disjoint chars < 256 only segments
-  protected int textFirst256SegmentLength = 0; // length at start of chars < 256 in last segment
+  private int textFirst256Length = 0; // length of all text chars < 256
+  private int textFirst256Segments = 0; // total disjoint chars < 256 only segments
+  private int textFirst256SegmentLength = 0; // length at start of chars < 256 in last segment
 
-  protected int repeatedChar =
+  private int repeatedChar =
       -1; // repeated char if all same, -1 if no char, -2 if different chars, must be checked before
   // commit which clears this
 
-  protected final boolean trackFirst256; // options
+  private final boolean trackFirst256; // options
 
-  public SegmentStats(boolean trackFirst256) {
+  SegmentStats(boolean trackFirst256) {
     this.trackFirst256 = trackFirst256;
   }
 
-  public int getTextLength() {
+  int getTextLength() {
     return textLength;
   }
 
-  public int getTextSpaceLength() {
-    return textSpaceLength;
-  }
-
-  public int getTextFirst256Length() {
-    return textFirst256Length;
-  }
-
-  public boolean isTrackTextFirst256() {
-    return trackFirst256;
-  }
-
-  public int getTextSegments() {
-    return textSegments;
-  }
-
-  public int getTextSpaceSegments() {
-    return textSpaceSegments;
-  }
-
-  public int getTextFirst256Segments() {
-    return textFirst256Segments;
-  }
-
-  public boolean isEmpty() {
-    return textLength == 0
-        && textSegments == 0
-        && textSegmentLength == 0
-        && (!trackFirst256
-            || textSpaceLength == 0
-                && textSpaceSegments == 0
-                && textSpaceSegmentLength == 0
-                && textFirst256Length == 0
-                && textFirst256Segments == 0
-                && textFirst256SegmentLength == 0);
-  }
-
-  public boolean isValid() {
-    return textLength >= textSegments
-        && (!trackFirst256
-            || textLength >= textFirst256Length
-                && textSegments >= textFirst256Segments
-                && textFirst256Length >= textFirst256Segments
-                && textFirst256Length >= textSpaceLength
-                && textFirst256Segments >= textSpaceSegments
-                && textSpaceLength >= textSpaceSegments);
-  }
-
-  public SegmentStats committedCopy() {
+  SegmentStats committedCopy() {
     SegmentStats other = new SegmentStats(trackFirst256);
     other.textLength = this.textLength;
     other.textSegments = this.textSegments;
@@ -99,7 +51,7 @@ public class SegmentStats {
     return other;
   }
 
-  public void clear() {
+  void clear() {
     textLength = 0;
     textSegments = 0;
     textSegmentLength = 0;
@@ -115,19 +67,7 @@ public class SegmentStats {
     }
   }
 
-  public void add(SegmentStats other) {
-    textLength += other.textLength;
-    textSegments += other.textSegments;
-
-    if (trackFirst256 && other.trackFirst256) {
-      textSpaceLength += other.textSpaceLength;
-      textSpaceSegments += other.textSpaceSegments;
-      textFirst256Length += other.textFirst256Length;
-      textFirst256Segments += other.textFirst256Segments;
-    }
-  }
-
-  public void remove(SegmentStats other) {
+  void remove(SegmentStats other) {
     textLength -= other.textLength;
     textSegments -= other.textSegments;
 
@@ -146,21 +86,16 @@ public class SegmentStats {
     }
   }
 
-  public boolean isTextFirst256() {
+  boolean isTextFirst256() {
     int segmentLength = textLength - textSegmentLength;
     return textFirst256Length - textFirst256SegmentLength == segmentLength;
   }
 
-  public boolean isTextRepeatedSpace() {
-    int segmentLength = textLength - textSegmentLength;
-    return textSpaceLength - textSpaceSegmentLength == segmentLength;
-  }
-
-  public boolean isRepeatedText() {
+  boolean isRepeatedText() {
     return repeatedChar >= 0;
   }
 
-  public void commitText() {
+  void commitText() {
     if (textLength > textSegmentLength) {
       textSegments++;
       repeatedChar = NULL_REPEATED_CHAR;
@@ -180,7 +115,7 @@ public class SegmentStats {
     }
   }
 
-  public void addText(CharSequence text) {
+  void addText(CharSequence text) {
     // need to count spaces in it
     textLength += text.length();
 
@@ -203,7 +138,7 @@ public class SegmentStats {
     }
   }
 
-  public void addText(char c) {
+  void addText(char c) {
     // need to count spaces in it
     textLength += 1;
 
@@ -221,7 +156,7 @@ public class SegmentStats {
     }
   }
 
-  public void addText(char c, int repeat) {
+  void addText(char c, int repeat) {
     // need to count spaces in it
     textLength += repeat;
 
@@ -237,33 +172,6 @@ public class SegmentStats {
         textFirst256Length += repeat;
       }
     }
-  }
-
-  public void removeText(CharSequence text) {
-    textLength -= text.length();
-
-    if (trackFirst256) {
-      int iMax = text.length();
-      for (int i = 0; i < iMax; i++) {
-        char c = text.charAt(i);
-        if (repeatedChar == NULL_REPEATED_CHAR) {
-          repeatedChar = c;
-        } else if (repeatedChar != c) {
-          repeatedChar = NOT_REPEATED_CHAR;
-        }
-
-        if (c < 256) {
-          if (c == ' ') {
-            textSpaceLength--;
-          }
-
-          textFirst256Length--;
-        }
-      }
-    }
-
-    // if whole segment was removed, reset repeated char
-    if (textLength == textSegmentLength) repeatedChar = NULL_REPEATED_CHAR;
   }
 
   @Override

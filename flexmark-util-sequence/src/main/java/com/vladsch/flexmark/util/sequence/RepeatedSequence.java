@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  * <p>The hashCode is purposefully matched to the string equivalent or this.toString().hashCode()
  */
 public class RepeatedSequence implements CharSequence {
-  public static RepeatedSequence NULL = new RepeatedSequence(BasedSequence.NULL, 0, 0);
+  private static final RepeatedSequence NULL = new RepeatedSequence(BasedSequence.NULL, 0, 0);
 
   private final CharSequence chars;
   private final int startIndex;
@@ -53,13 +53,6 @@ public class RepeatedSequence implements CharSequence {
             + ", "
             + this.endIndex
             + ")");
-  }
-
-  public RepeatedSequence repeat(int count) {
-    int endIndex = startIndex + (this.endIndex - startIndex) * count;
-    return startIndex >= this.endIndex
-        ? NULL
-        : this.endIndex == endIndex ? this : new RepeatedSequence(chars, startIndex, endIndex);
   }
 
   @Override
@@ -105,23 +98,5 @@ public class RepeatedSequence implements CharSequence {
   @NotNull
   public static CharSequence repeatOf(@NotNull CharSequence chars, int startIndex, int endIndex) {
     return new RepeatedSequence(chars, startIndex, endIndex);
-  }
-
-  @NotNull
-  @Deprecated
-  public static CharSequence of(char c, int count) {
-    return repeatOf(c, count);
-  }
-
-  @NotNull
-  @Deprecated
-  public static CharSequence of(@NotNull CharSequence chars, int count) {
-    return repeatOf(chars, count);
-  }
-
-  @NotNull
-  @Deprecated
-  public static CharSequence of(@NotNull CharSequence chars, int startIndex, int endIndex) {
-    return repeatOf(chars, startIndex, endIndex);
   }
 }

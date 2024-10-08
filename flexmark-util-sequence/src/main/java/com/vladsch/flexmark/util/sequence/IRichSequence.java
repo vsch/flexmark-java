@@ -363,17 +363,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
 
   int countLeadingNot(@NotNull CharPredicate chars, int startIndex, int endIndex);
 
-  /**
-   * @param c char
-   * @return leading count
-   * @deprecated consider using built-in sets of characters, ..._SET, or Use
-   *     CharPredicate.anyOf(...)
-   */
-  @Deprecated
-  default int countLeading(char c) {
-    return countLeading(CharPredicate.anyOf(c));
-  }
-
   int countTrailing(@NotNull CharPredicate chars);
 
   int countTrailingNot(@NotNull CharPredicate chars);
@@ -458,16 +447,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
 
   int countTrailingNotWhitespace(int startIndex, int fromIndex);
 
-  @Deprecated
-  default int countLeading() {
-    return countLeadingSpaceTab();
-  }
-
-  @Deprecated
-  default int countTrailing() {
-    return countLeadingSpaceTab();
-  }
-
   int countOfSpaceTab();
 
   int countOfNotSpaceTab();
@@ -475,11 +454,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
   int countOfWhitespace();
 
   int countOfNotWhitespace();
-
-  @Deprecated
-  default int countOf(char c) {
-    return countOfAny(CharPredicate.anyOf(c));
-  }
 
   int countOfAny(@NotNull CharPredicate chars);
 
@@ -508,9 +482,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
    *
    * <p>returns range of kept sequence or if nothing matched then Range.NULL is returned, meaning
    * keep all
-   *
-   * <p>If character set in the form of character sequence is not passed in the {@link #WHITESPACE}
-   * are assumed.
    *
    * @param keep minimum length of would be trimmed characters to keep. ie. keep 4, will leave 0..4
    *     as is but remove any &gt;4
@@ -557,9 +528,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
    * Trim, Trim start/end of this sequence, characters to trim are passed in the sequence argument
    *
    * <p>returns trimmed sequence or if nothing matched the original sequence
-   *
-   * <p>If character set in the form of character sequence is not passed in the {@link #WHITESPACE}
-   * are assumed.
    *
    * @param keep minimum length of would be trimmed characters to keep. ie. keep 4, will leave 0..4
    *     as is but remove any &gt;4
@@ -676,12 +644,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
 
   @NotNull
   T padEnd(int length, char pad);
-
-  @NotNull
-  T padStart(int length);
-
-  @NotNull
-  T padEnd(int length);
 
   boolean isEmpty();
 
@@ -800,11 +762,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
   @NotNull
   T nullIfNotStartsWith(CharSequence... matches);
 
-  @Deprecated
-  default @NotNull T nullIfStartsWithNot(CharSequence... matches) {
-    return nullIfNotStartsWith(matches);
-  }
-
   @NotNull
   T nullIfEndsWith(CharSequence... matches);
 
@@ -835,11 +792,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
   @NotNull
   T nullIfNotEndsWith(boolean ignoreCase, CharSequence... matches);
 
-  @Deprecated
-  default @NotNull T nullIfEndsWithNot(CharSequence... matches) {
-    return nullIfNotEndsWith(matches);
-  }
-
   /*
     EOL helper methods
   */
@@ -852,11 +804,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
    * @return 0 if no EOL, 1, or 2 depending on the EOL suffix of this sequence
    */
   int eolEndLength();
-
-  @Deprecated
-  default int eolStartLength() {
-    return eolEndLength();
-  }
 
   /**
    * Get the length of EOL character at the given index of this sequence, if present.
@@ -880,11 +827,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
    * @return 0 if no EOL, 1, or 2 depending on the EOL suffix of this sequence
    */
   int eolStartLength(int eolStart);
-
-  @Deprecated
-  default int eolLength(int eolStart) {
-    return eolStartLength(eolStart);
-  }
 
   /**
    * Return Range of eol at given index
@@ -1492,18 +1434,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
   T insert(int index, @NotNull CharSequence chars);
 
   /**
-   * @param chars chars
-   * @param index index of insertion
-   * @return resulting sequence
-   * @deprecated use {@link #insert(int, CharSequence)} instead
-   */
-  @NotNull
-  @Deprecated
-  default T insert(@NotNull CharSequence chars, int index) {
-    return insert(index, chars);
-  }
-
-  /**
    * Delete range in sequence
    *
    * @param startIndex start index of deletion
@@ -1599,21 +1529,6 @@ public interface IRichSequence<T extends IRichSequence<T>>
 
   @NotNull
   T[] split(@NotNull CharSequence delimiter);
-
-  @Deprecated
-  default @NotNull T[] split(char delimiter, int limit, int flags) {
-    return split(Character.toString(delimiter), limit, flags, null);
-  }
-
-  @Deprecated
-  default @NotNull T[] split(char delimiter, int limit) {
-    return split(Character.toString(delimiter), limit, 0, null);
-  }
-
-  @Deprecated
-  default @NotNull T[] split(char delimiter) {
-    return split(Character.toString(delimiter), 0, 0, null);
-  }
 
   /**
    * Split helpers based on delimiter character sets contained in CharPredicate
@@ -1835,17 +1750,7 @@ public interface IRichSequence<T extends IRichSequence<T>>
   @NotNull
   Pair<Integer, Integer> lineColumnAtIndex(int index);
 
-  @Deprecated
-  default @NotNull Pair<Integer, Integer> getLineColumnAtIndex(int index) {
-    return lineColumnAtIndex(index);
-  }
-
   int columnAtIndex(int index);
-
-  @Deprecated
-  default int getColumnAtIndex(int index) {
-    return columnAtIndex(index);
-  }
 
   /**
    * Safe, if index out of range returns '\0'

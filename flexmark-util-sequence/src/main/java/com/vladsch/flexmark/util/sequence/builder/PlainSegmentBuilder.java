@@ -10,11 +10,6 @@ public class PlainSegmentBuilder extends SegmentBuilderBase<PlainSegmentBuilder>
   }
 
   @NotNull
-  public static PlainSegmentBuilder emptyBuilder() {
-    return new PlainSegmentBuilder();
-  }
-
-  @NotNull
   public static PlainSegmentBuilder emptyBuilder(int options) {
     return new PlainSegmentBuilder(options);
   }

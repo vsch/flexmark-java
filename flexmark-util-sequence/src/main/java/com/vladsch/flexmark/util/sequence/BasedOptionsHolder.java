@@ -52,21 +52,10 @@ public interface BasedOptionsHolder {
   int F_TREE_SEGMENTED_SEQUENCES =
       BitFieldSet.intMask(O_TREE_SEGMENTED_SEQUENCES); // use tree based segmented sequences
 
-  int F_LIBRARY_OPTIONS =
-      0x0000ffff; // reserved for library use, extensions must use data keys since there is no way
-  // to manage bit allocations
-  int F_APPLICATION_OPTIONS =
-      0xffff0000; // open for user application defined use, extensions must use data keys since
-  // there is no way to manage bit allocations
-
   // NOTE: if no data holder or one with no SEGMENTED_STATS is passed to BasedOptionsSequence, then
   // F_COLLECT_SEGMENTED_STATS flag will be removed from options
   NullableDataKey<SegmentedSequenceStats> SEGMENTED_STATS =
       new NullableDataKey<>("SEGMENTED_STATS", (SegmentedSequenceStats) null);
-
-  static String optionsToString(int options) {
-    return BitFieldSet.of(Options.class, options).toString();
-  }
 
   /**
    * Options test for options for this sequence

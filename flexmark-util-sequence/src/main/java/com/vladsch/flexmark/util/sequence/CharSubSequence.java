@@ -130,26 +130,6 @@ public final class CharSubSequence extends BasedSequenceImpl {
     return of(charSequence, 0, charSequence.length());
   }
 
-  public static CharSubSequence of(CharSequence charSequence, int startIndex) {
-    return of(charSequence, startIndex, charSequence.length());
-  }
-
-  /**
-   * @param chars char array
-   * @param startIndex start index in array
-   * @param endIndex end index in array
-   * @return CharSubSequence based sequence of array
-   * @deprecated NOTE: use BasedSequence.of() for creating based sequences
-   */
-  @Deprecated
-  public static CharSubSequence of(char[] chars, int startIndex, int endIndex) {
-    char[] useChars = new char[chars.length];
-    System.arraycopy(chars, 0, useChars, 0, chars.length);
-    return startIndex == 0 && endIndex == chars.length
-        ? new CharSubSequence(useChars, 0)
-        : new CharSubSequence(useChars, 0).subSequence(startIndex, endIndex);
-  }
-
   /**
    * @param charSequence char sequence
    * @param startIndex start index in sequence

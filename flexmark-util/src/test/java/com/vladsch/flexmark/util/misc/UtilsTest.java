@@ -2,10 +2,8 @@ package com.vladsch.flexmark.util.misc;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
@@ -83,28 +81,6 @@ public class UtilsTest {
   public void testOrEmpty() {
     assertEquals("   ", Utils.orEmpty("   "));
     assertEquals("", Utils.orEmpty(null));
-  }
-
-  @Test
-  public void testParseIntOrNull() {
-    assertEquals(Integer.valueOf(3), SequenceUtils.parseIntOrNull("3"));
-    assertEquals(Integer.valueOf(8), SequenceUtils.parseIntOrNull("+8"));
-    assertEquals(Integer.valueOf(8), SequenceUtils.parseIntOrNull("8"));
-    assertEquals(Integer.valueOf(7), SequenceUtils.parseIntOrNull("7"));
-    assertEquals(Integer.valueOf(0), SequenceUtils.parseIntOrNull("0"));
-    assertNull(SequenceUtils.parseIntOrNull(""));
-  }
-
-  @Test
-  public void testParseUnsignedIntOrNull() {
-    Assert.assertNull(SequenceUtils.parseUnsignedIntOrNull("-2"));
-    Assert.assertNull(SequenceUtils.parseUnsignedIntOrNull("999999999999999999999"));
-    assertEquals(Integer.valueOf(23_333_333), SequenceUtils.parseUnsignedIntOrNull("23333333"));
-    assertEquals(Integer.valueOf(3), SequenceUtils.parseUnsignedIntOrNull("3"));
-    assertEquals(Integer.valueOf(63), SequenceUtils.parseUnsignedIntOrNull("63"));
-    assertEquals(Integer.valueOf(0), SequenceUtils.parseUnsignedIntOrNull("0"));
-
-    assertEquals((Integer) 0, SequenceUtils.parseUnsignedIntOrNull("-0"));
   }
 
   @Test
@@ -247,19 +223,5 @@ public class UtilsTest {
     assertEquals("receiversuffix", Utils.wrapWith("receiver", null, "suffix"));
     assertEquals("", Utils.wrapWith(null, "", ""));
     assertEquals("prefixreceiversuffix", Utils.wrapWith("receiver", "prefix", "suffix"));
-  }
-
-  @Test
-  public void test_parseNumberOrNull() {
-    assertNull(SequenceUtils.parseNumberOrNull("0x0001."));
-    assertNull(SequenceUtils.parseNumberOrNull("01234567 "));
-    assertNull(SequenceUtils.parseNumberOrNull("012345678 "));
-    assertNull(SequenceUtils.parseNumberOrNull("0b0001."));
-
-    assertEquals(0x0001L, SequenceUtils.parseNumberOrNull("0x0001"));
-    assertEquals(342391L, SequenceUtils.parseNumberOrNull("01234567"));
-    assertEquals(12345678L, SequenceUtils.parseNumberOrNull("012345678"));
-    assertEquals(0b0001L, SequenceUtils.parseNumberOrNull("0b0001"));
-    assertEquals(0.5, SequenceUtils.parseNumberOrNull("0.5"));
   }
 }

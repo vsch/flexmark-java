@@ -39,7 +39,7 @@ public class ReplacedTextMapper {
     this.replacedSequence = other.getReplacedSequence();
   }
 
-  public void startNestedReplacement(BasedSequence sequence) {
+  void startNestedReplacement(BasedSequence sequence) {
     // create parent from our data and re-initialize
     this.parent = new ReplacedTextMapper(this);
     this.original = sequence;
@@ -70,7 +70,7 @@ public class ReplacedTextMapper {
     return parent;
   }
 
-  public void addReplacedText(int startIndex, int endIndex, BasedSequence replacedSequence) {
+  void addReplacedText(int startIndex, int endIndex, BasedSequence replacedSequence) {
     if (isFinalized())
       throw new IllegalStateException("Cannot modify finalized ReplacedTextMapper");
 
@@ -83,7 +83,7 @@ public class ReplacedTextMapper {
     replacedSegments.add(replacedSequence);
   }
 
-  public void addOriginalText(int startIndex, int endIndex) {
+  void addOriginalText(int startIndex, int endIndex) {
     if (isFinalized())
       throw new IllegalStateException("Cannot modify finalized ReplacedTextMapper");
 
@@ -123,7 +123,7 @@ public class ReplacedTextMapper {
     return parent != null ? parent.originalOffset(originalIndex) : originalIndex;
   }
 
-  public int originalOffset(int replacedIndex) {
+  private int originalOffset(int replacedIndex) {
     finalizeMods();
 
     if (regions.isEmpty()) {

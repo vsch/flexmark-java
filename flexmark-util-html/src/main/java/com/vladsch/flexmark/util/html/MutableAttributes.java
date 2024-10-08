@@ -21,15 +21,11 @@ public class MutableAttributes extends Attributes {
     return new Attributes(this);
   }
 
-  protected LinkedHashMap<String, Attribute> getAttributes() {
+  private LinkedHashMap<String, Attribute> getAttributes() {
     if (attributes == null) {
       attributes = new LinkedHashMap<>();
     }
     return attributes;
-  }
-
-  public Attribute replaceValue(Attribute attribute) {
-    return replaceValue(attribute.getName(), attribute.getValue());
   }
 
   /**
@@ -54,10 +50,6 @@ public class MutableAttributes extends Attributes {
     return attribute;
   }
 
-  public Attribute addValue(Attribute attribute) {
-    return addValue(attribute.getName(), attribute.getValue());
-  }
-
   public MutableAttributes addValues(Attributes attributes) {
     for (Attribute attribute : attributes.values()) {
       addValue(attribute.getName(), attribute.getValue());
@@ -79,14 +71,6 @@ public class MutableAttributes extends Attributes {
     return attribute;
   }
 
-  public Attribute removeValue(Attribute attribute) {
-    return removeValue(attribute.getName(), attribute.getValue());
-  }
-
-  public Attribute remove(Attribute attribute) {
-    return remove(attribute.getName());
-  }
-
   public Attribute removeValue(CharSequence key, CharSequence value) {
     if (attributes == null || key == null || key.length() == 0) {
       return null;
@@ -99,10 +83,6 @@ public class MutableAttributes extends Attributes {
     return attribute;
   }
 
-  public void clear() {
-    attributes = null;
-  }
-
   public Attribute remove(CharSequence key) {
     if (attributes == null || key == null || key.length() == 0) {
       return null;
@@ -112,14 +92,6 @@ public class MutableAttributes extends Attributes {
     Attribute oldAttribute = attributes.get(useKey);
     attributes.remove(useKey);
     return oldAttribute;
-  }
-
-  public void replaceValues(MutableAttributes attributes) {
-    if (this.attributes == null) {
-      this.attributes = new LinkedHashMap<>(attributes.attributes);
-    } else {
-      this.attributes.putAll(attributes.attributes);
-    }
   }
 
   @Override

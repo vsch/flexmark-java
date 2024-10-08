@@ -50,18 +50,6 @@ public abstract class AstActionHandler<
     return getAction(customHandlersMap.get(node.getClass()));
   }
 
-  public @Nullable A getAction(@NotNull Class<?> nodeClass) {
-    return getAction(customHandlersMap.get(nodeClass));
-  }
-
-  protected @Nullable H getHandler(@NotNull N node) {
-    return customHandlersMap.get(node.getClass());
-  }
-
-  protected @Nullable H getHandler(@NotNull Class<?> nodeClass) {
-    return customHandlersMap.get(nodeClass);
-  }
-
   public @NotNull Set<Class<? extends N>> getNodeClasses() {
     return customHandlersMap.keySet();
   }

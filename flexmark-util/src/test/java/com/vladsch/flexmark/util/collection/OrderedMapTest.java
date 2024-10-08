@@ -17,12 +17,11 @@ public class OrderedMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     int i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
       Assert.assertEquals(String.valueOf(i), it.getKey());
-      Assert.assertEquals(i, (int) it.getValue());
+      Assert.assertEquals(i, it.getValue().intValue());
       i++;
     }
 
@@ -34,7 +33,7 @@ public class OrderedMapTest {
       int lastJ = j + 1;
       for (Map.Entry<String, Integer> it : orderedMap) {
         Assert.assertEquals(String.valueOf(lastJ), it.getKey());
-        Assert.assertEquals(lastJ, (int) it.getValue());
+        Assert.assertEquals(lastJ, it.getValue().intValue());
         lastJ++;
       }
     }
@@ -50,12 +49,11 @@ public class OrderedMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     int i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
       Assert.assertEquals(String.valueOf(i), it.getKey());
-      Assert.assertEquals(i, (int) it.getValue());
+      Assert.assertEquals(i, it.getValue().intValue());
       i++;
     }
 
@@ -69,7 +67,7 @@ public class OrderedMapTest {
       int lastJ = 0;
       for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
         Assert.assertEquals(String.valueOf(lastJ), it.getKey());
-        Assert.assertEquals(lastJ, (int) it.getValue());
+        Assert.assertEquals(lastJ, it.getValue().intValue());
         lastJ++;
       }
 
@@ -88,25 +86,24 @@ public class OrderedMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     int i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
       Assert.assertEquals(String.valueOf(i), it.getKey());
-      Assert.assertEquals(i, (int) it.getValue());
+      Assert.assertEquals(i, it.getValue().intValue());
       i++;
     }
 
     for (i = 0; i < 10; i += 2) {
-      Assert.assertEquals(true, retainSet.add(String.valueOf(i)));
-      Assert.assertEquals(false, retainSet.add(String.valueOf(i)));
+      Assert.assertTrue(retainSet.add(String.valueOf(i)));
+      Assert.assertFalse(retainSet.add(String.valueOf(i)));
     }
 
-    Assert.assertEquals(false, orderedMap.keySet().retainAll(orderedMap.keySet()));
-    Assert.assertEquals(false, retainSet.retainAll(retainSet));
+    Assert.assertFalse(orderedMap.keySet().retainAll(orderedMap.keySet()));
+    Assert.assertFalse(retainSet.retainAll(retainSet));
 
-    Assert.assertEquals(true, orderedMap.keySet().retainAll(retainSet));
-    Assert.assertEquals(true, orderedMap.keySet().equals(retainSet));
+    Assert.assertTrue(orderedMap.keySet().retainAll(retainSet));
+    Assert.assertEquals(orderedMap.keySet(), retainSet);
 
     i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
@@ -117,7 +114,7 @@ public class OrderedMapTest {
 
     for (int j = 10; j-- > 0; ) {
       Assert.assertEquals((j & 1) == 0, orderedMap.keySet().remove(String.valueOf(j)));
-      Assert.assertEquals(false, orderedMap.containsKey(String.valueOf(j)));
+      Assert.assertFalse(orderedMap.containsKey(String.valueOf(j)));
     }
   }
 
@@ -131,14 +128,13 @@ public class OrderedMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     Iterator<Map.Entry<String, Integer>> iterator = orderedMap.iterator();
     int i = 0;
     while (iterator.hasNext()) {
       Map.Entry<String, Integer> it = iterator.next();
       Assert.assertEquals(String.valueOf(i), it.getKey());
-      Assert.assertEquals(i, (int) it.getValue());
+      Assert.assertEquals(i, it.getValue().intValue());
       i++;
     }
 
@@ -153,7 +149,7 @@ public class OrderedMapTest {
       int lastJ = j + 1;
       for (Map.Entry<String, Integer> it : orderedMap) {
         Assert.assertEquals(String.valueOf(lastJ), it.getKey());
-        Assert.assertEquals(lastJ, (int) it.getValue());
+        Assert.assertEquals(lastJ, it.getValue().intValue());
         lastJ++;
       }
 
@@ -171,7 +167,6 @@ public class OrderedMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     Iterator<Map.Entry<String, Integer>> iterator =
         orderedMap.reversedIterable().reversed().iterator();
@@ -179,7 +174,7 @@ public class OrderedMapTest {
     while (iterator.hasNext()) {
       Map.Entry<String, Integer> it = iterator.next();
       Assert.assertEquals(String.valueOf(i), it.getKey());
-      Assert.assertEquals(i, (int) it.getValue());
+      Assert.assertEquals(i, it.getValue().intValue());
       i++;
     }
 
@@ -194,7 +189,7 @@ public class OrderedMapTest {
       int lastJ = j + 1;
       for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
         Assert.assertEquals(String.valueOf(lastJ), it.getKey());
-        Assert.assertEquals(lastJ, (int) it.getValue());
+        Assert.assertEquals(lastJ, it.getValue().intValue());
         lastJ++;
       }
 
@@ -212,14 +207,13 @@ public class OrderedMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     Iterator<Map.Entry<String, Integer>> iterator = orderedMap.reversedEntryIterator();
     int i = 9;
     while (iterator.hasNext()) {
       Map.Entry<String, Integer> it = iterator.next();
       Assert.assertEquals(String.valueOf(i), it.getKey());
-      Assert.assertEquals(i, (int) it.getValue());
+      Assert.assertEquals(i, it.getValue().intValue());
       i--;
     }
 
@@ -238,7 +232,7 @@ public class OrderedMapTest {
       int lastJ = 0;
       for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
         Assert.assertEquals(String.valueOf(lastJ), it.getKey());
-        Assert.assertEquals(lastJ, (int) it.getValue());
+        Assert.assertEquals(lastJ, it.getValue().intValue());
         lastJ++;
       }
 
@@ -257,7 +251,6 @@ public class OrderedMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     Iterator<Map.Entry<String, Integer>> iterator =
         orderedMap.entryIterable().reversed().reversed().reversedIterator();
@@ -265,7 +258,7 @@ public class OrderedMapTest {
     while (iterator.hasNext()) {
       Map.Entry<String, Integer> it = iterator.next();
       Assert.assertEquals(String.valueOf(i), it.getKey());
-      Assert.assertEquals(i, (int) it.getValue());
+      Assert.assertEquals(i, it.getValue().intValue());
       i--;
     }
 
@@ -284,7 +277,7 @@ public class OrderedMapTest {
       int lastJ = 0;
       for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
         Assert.assertEquals(String.valueOf(lastJ), it.getKey());
-        Assert.assertEquals(lastJ, (int) it.getValue());
+        Assert.assertEquals(lastJ, it.getValue().intValue());
         lastJ++;
       }
 
@@ -378,9 +371,9 @@ public class OrderedMapTest {
       final int finalJ = j;
       validator
           .reset()
-          .id(j)
+          .setId(j)
           .expectRemoving(j, String.valueOf(j))
-          .onCond(j == 1)
+          .setConditional(j == 1)
           .expectClearing()
           .test(() -> orderedMap.keySet().remove(String.valueOf(finalJ)));
     }

@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util.data;
 import java.util.Collection;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public interface DataHolder extends MutableDataSetter {
   DataHolder NULL = new DataSet();
@@ -15,17 +14,6 @@ public interface DataHolder extends MutableDataSetter {
   Collection<? extends DataKeyBase<?>> getKeys();
 
   boolean contains(@NotNull DataKeyBase<?> key);
-
-  /**
-   * @param key data key
-   * @param <T> Type returned by key
-   * @return Use key.get(dataHolder) instead
-   */
-  @Deprecated
-  @Nullable
-  default <T> T get(@NotNull DataKey<T> key) {
-    return key.get(this);
-  }
 
   @Override
   default @NotNull MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {

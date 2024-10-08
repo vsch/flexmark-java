@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ArrayUtils {
-  public static <T> boolean contained(T value, T[] array) {
+  static <T> boolean contained(T value, T[] array) {
     return indexOf(value, array) != -1;
   }
 
@@ -20,11 +20,11 @@ public class ArrayUtils {
     return false;
   }
 
-  public static <T> T firstOf(T[] ts, Predicate<? super T> predicate) {
+  static <T> T firstOf(T[] ts, Predicate<? super T> predicate) {
     return firstOf(ts, 0, ts.length, predicate);
   }
 
-  public static <T> T firstOf(T[] ts, int fromIndex, Predicate<? super T> predicate) {
+  static <T> T firstOf(T[] ts, int fromIndex, Predicate<? super T> predicate) {
     return firstOf(ts, fromIndex, ts.length, predicate);
   }
 
@@ -43,11 +43,11 @@ public class ArrayUtils {
     return indexOf(ts, fromIndex, endIndex, t1 -> Objects.equals(t, t1));
   }
 
-  public static <T> int indexOf(T[] ts, Predicate<? super T> predicate) {
+  static <T> int indexOf(T[] ts, Predicate<? super T> predicate) {
     return indexOf(ts, 0, ts.length, predicate);
   }
 
-  public static <T> int indexOf(T[] ts, int fromIndex, Predicate<? super T> predicate) {
+  static <T> int indexOf(T[] ts, int fromIndex, Predicate<? super T> predicate) {
     return indexOf(ts, fromIndex, ts.length, predicate);
   }
 
@@ -65,8 +65,7 @@ public class ArrayUtils {
    * @return the index of the next occurrence of a match in the array which is greater than or equal
    *     to {@code fromIndex}, or {@code -1} if match does not occur after that point.
    */
-  public static <T> int indexOf(
-      T[] ts, int fromIndex, int endIndex, Predicate<? super T> predicate) {
+  static <T> int indexOf(T[] ts, int fromIndex, int endIndex, Predicate<? super T> predicate) {
     int iMax = ts.length;
     if (endIndex > 0) {
       if (fromIndex < 0) fromIndex = 0;
@@ -83,11 +82,11 @@ public class ArrayUtils {
     return -1;
   }
 
-  public static <T> T lastOf(T[] ts, Predicate<? super T> predicate) {
+  static <T> T lastOf(T[] ts, Predicate<? super T> predicate) {
     return lastOf(ts, 0, ts.length, predicate);
   }
 
-  public static <T> T lastOf(T[] ts, int fromIndex, Predicate<? super T> predicate) {
+  static <T> T lastOf(T[] ts, int fromIndex, Predicate<? super T> predicate) {
     return lastOf(ts, 0, fromIndex, predicate);
   }
 
@@ -97,11 +96,11 @@ public class ArrayUtils {
     return i == -1 ? null : ts[i];
   }
 
-  public static <T> int lastIndexOf(T[] ts, Predicate<? super T> predicate) {
+  static <T> int lastIndexOf(T[] ts, Predicate<? super T> predicate) {
     return lastIndexOf(ts, 0, ts.length, predicate);
   }
 
-  public static <T> int lastIndexOf(T[] ts, int fromIndex, Predicate<? super T> predicate) {
+  static <T> int lastIndexOf(T[] ts, int fromIndex, Predicate<? super T> predicate) {
     return lastIndexOf(ts, 0, fromIndex, predicate);
   }
 
@@ -138,7 +137,7 @@ public class ArrayUtils {
     return -1;
   }
 
-  public static int[] toArray(@NotNull BitSet bitSet) {
+  static int[] toArray(@NotNull BitSet bitSet) {
     int i = bitSet.cardinality();
     int[] bits = new int[i];
 

@@ -13,26 +13,25 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISegmentBuilder<S> {
-  public static final int MIN_PART_CAPACITY = 8;
+  private static final int MIN_PART_CAPACITY = 8;
+  private static final int[] EMPTY_PARTS = {};
 
-  public static final int[] EMPTY_PARTS = {};
+  private @NotNull int[] parts = EMPTY_PARTS;
+  private int partsSize = 0;
+  private int anchorsSize = 0;
 
-  protected @NotNull int[] parts = EMPTY_PARTS;
-  protected int partsSize = 0;
-  protected int anchorsSize = 0;
-
-  protected int startOffset = Range.NULL.getStart();
-  protected int endOffset = Range.NULL.getEnd();
-  protected int length = 0;
-  protected final SegmentStats stats; // committed and dangling text stats
-  protected final SegmentStats textStats; // dangling text stats
-  protected final int options;
+  private int startOffset = Range.NULL.getStart();
+  private int endOffset = Range.NULL.getEnd();
+  private int length = 0;
+  private final SegmentStats stats; // committed and dangling text stats
+  private final SegmentStats textStats; // dangling text stats
+  final int options;
 
   // NOTE: all text accumulation is in the string builder, dangling text segment is between
   // immutableOffset and text.length()
-  protected final StringBuilder text =
+  private final StringBuilder text =
       new StringBuilder(); // text segment ranges come from this CharSequence
-  protected int immutableOffset = 0; // text offset for all committed text segments
+  private int immutableOffset = 0; // text offset for all committed text segments
 
   private static int[] ensureCapacity(@NotNull int[] prev, int size) {
     int prevSize = prev.length / 2;
@@ -45,12 +44,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
   private void ensureCapacity(int size) {
     parts = ensureCapacity(parts, size + 1);
-  }
-
-  public void trimToSize() {
-    if (parts.length > partsSize) {
-      parts = Arrays.copyOf(parts, partsSize * 2);
-    }
   }
 
   protected SegmentBuilderBase() {
@@ -102,11 +95,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return length == 0;
   }
 
-  @Override
-  public boolean isBaseSubSequenceRange() {
-    return getBaseSubSequenceRange() != null;
-  }
-
   @Nullable
   @Override
   public Range getBaseSubSequenceRange() {
@@ -145,43 +133,9 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return length;
   }
 
-  public SegmentStats getStats() {
-    return stats;
-  }
-
-  @Override
-  public boolean isTrackTextFirst256() {
-    return stats.isTrackTextFirst256();
-  }
-
   @Override
   public int getTextLength() {
     return stats.getTextLength();
-  }
-
-  @Override
-  public int getTextSegments() {
-    return stats.getTextSegments();
-  }
-
-  @Override
-  public int getTextSpaceLength() {
-    return stats.getTextSpaceLength();
-  }
-
-  @Override
-  public int getTextSpaceSegments() {
-    return stats.getTextSpaceSegments();
-  }
-
-  @Override
-  public int getTextFirst256Length() {
-    return stats.getTextFirst256Length();
-  }
-
-  @Override
-  public int getTextFirst256Segments() {
-    return stats.getTextFirst256Segments();
   }
 
   @Override
@@ -189,11 +143,11 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return new PartsIterator(this);
   }
 
-  static class PartsIterator implements Iterator<Object> {
-    final SegmentBuilderBase<?> builder;
-    int nextIndex;
+  private static class PartsIterator implements Iterator<Object> {
+    private final SegmentBuilderBase<?> builder;
+    private int nextIndex;
 
-    public PartsIterator(SegmentBuilderBase<?> builder) {
+    PartsIterator(SegmentBuilderBase<?> builder) {
       this.builder = builder;
     }
 
@@ -213,10 +167,10 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return new SegIterable(this);
   }
 
-  static class SegIterable implements Iterable<Seg> {
-    final SegmentBuilderBase<?> builder;
+  private static class SegIterable implements Iterable<Seg> {
+    private final SegmentBuilderBase<?> builder;
 
-    public SegIterable(SegmentBuilderBase<?> builder) {
+    SegIterable(SegmentBuilderBase<?> builder) {
       this.builder = builder;
     }
 
@@ -227,11 +181,11 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     }
   }
 
-  static class SegIterator implements Iterator<Seg> {
-    final SegmentBuilderBase<?> builder;
-    int nextIndex;
+  private static class SegIterator implements Iterator<Seg> {
+    private final SegmentBuilderBase<?> builder;
+    private int nextIndex;
 
-    public SegIterator(SegmentBuilderBase<?> builder) {
+    SegIterator(SegmentBuilderBase<?> builder) {
       this.builder = builder;
     }
 
@@ -244,11 +198,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     public Seg next() {
       return builder.getSegPart(nextIndex++);
     }
-  }
-
-  @Override
-  public int getOptions() {
-    return options;
   }
 
   @Override

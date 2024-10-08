@@ -10,39 +10,6 @@ import org.junit.Test;
 
 public class SegmentedSequenceStatsTest {
   @Test
-  public void basic_stats() {
-    SegmentedSequenceStats stats = SegmentedSequenceStats.getInstance();
-
-    stats.addStats(3, 3, 6);
-    assertEquals(1, stats.getCount(3));
-
-    stats.addStats(3, 3, 6);
-    assertEquals(2, stats.getCount(3));
-
-    stats.addStats(3, 1, 1);
-    assertEquals(3, stats.getCount(3));
-    assertEquals(3, stats.getCount(3));
-
-    stats.addStats(5, 0, 0);
-    assertEquals(1, stats.getCount(5));
-
-    stats.addStats(5, 0, 0);
-    assertEquals(2, stats.getCount(5));
-
-    stats.addStats(5, 1, 1);
-    assertEquals(3, stats.getCount(5));
-    assertEquals(3, stats.getCount(5));
-
-    assertEquals(
-        ""
-            + "     count,   min-seg,   avg-seg,   max-seg,   min-len,   avg-len,   max-len,   min-ovr,   avg-ovr,   max-ovr,   tot-len,   tot-chr,   tot-ovr,   ovr %\n"
-            + "         3,         5,         5,         5,         0,         0,         1,         0,         0,         1,         1,         2,         1,  50.000\n"
-            + "         3,         3,         3,         3,         1,         2,         3,         1,         4,         6,         7,        14,        13,  92.857\n"
-            + "",
-        stats.getStatsText());
-  }
-
-  @Test
   public void basic_statsCollection() {
     final String sC = "0123456789";
     MutableDataSet options = new MutableDataSet();

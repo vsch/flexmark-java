@@ -10,22 +10,21 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
   final @NotNull BasedSequence baseSeq;
   final @NotNull SegmentOptimizer optimizer;
 
-  protected BasedSegmentBuilder(@NotNull BasedSequence baseSeq) {
+  private BasedSegmentBuilder(@NotNull BasedSequence baseSeq) {
     this(baseSeq, new CharRecoveryOptimizer(PositionAnchor.CURRENT));
   }
 
-  protected BasedSegmentBuilder(
-      @NotNull BasedSequence baseSeq, @NotNull SegmentOptimizer optimizer) {
+  private BasedSegmentBuilder(@NotNull BasedSequence baseSeq, @NotNull SegmentOptimizer optimizer) {
     super();
     this.baseSeq = baseSeq.getBaseSequence();
     this.optimizer = optimizer;
   }
 
-  protected BasedSegmentBuilder(@NotNull BasedSequence baseSeq, int options) {
+  private BasedSegmentBuilder(@NotNull BasedSequence baseSeq, int options) {
     this(baseSeq, new CharRecoveryOptimizer(PositionAnchor.CURRENT), options);
   }
 
-  protected BasedSegmentBuilder(
+  private BasedSegmentBuilder(
       @NotNull BasedSequence baseSeq, @NotNull SegmentOptimizer optimizer, int options) {
     super(options);
     this.baseSeq = baseSeq.getBaseSequence();
@@ -108,12 +107,6 @@ public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
   @NotNull
   public static BasedSegmentBuilder emptyBuilder(@NotNull BasedSequence sequence, int options) {
     return new BasedSegmentBuilder(sequence, options);
-  }
-
-  @NotNull
-  public static BasedSegmentBuilder emptyBuilder(
-      @NotNull BasedSequence sequence, @NotNull SegmentOptimizer optimizer) {
-    return new BasedSegmentBuilder(sequence, optimizer);
   }
 
   @NotNull

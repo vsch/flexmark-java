@@ -22,8 +22,6 @@ public interface SequenceUtils {
   String ANY_EOL = "\r\n";
 
   char EOL_CHAR = ANY_EOL.charAt(1);
-  char EOL_CHAR1 = ANY_EOL.charAt(0);
-  char EOL_CHAR2 = ANY_EOL.charAt(1);
   char SPC = ' ';
   char NUL = '\0';
   char ENC_NUL = '\uFFFD';
@@ -34,12 +32,7 @@ public interface SequenceUtils {
   // used as a tracked offset marker in the sequence
 
   String LINE_SEP = Character.toString(LS);
-  String SPACE_TAB = " \t";
-  String SPACE_EOL = " \n";
   String US_CHARS = Character.toString(US);
-  String WHITESPACE = " \t\r\n";
-  String NBSP_CHARS = Character.toString(NBSP);
-  String WHITESPACE_NBSP = " \t\r\n\u00A0";
 
   int SPLIT_INCLUDE_DELIMS = 1; // include delimiters as part of the split out part
   int SPLIT_TRIM_PARTS = 2; // trim split parts
@@ -73,46 +66,6 @@ public interface SequenceUtils {
   @NotNull
   static <T extends CharSequence> T subSequence(@NotNull T thizz, @NotNull Range range) {
     return range.isNull() ? (T) thizz : (T) thizz.subSequence(range.getStart(), range.getEnd());
-  }
-
-  /**
-   * Get a portion of this sequence before one selected by range
-   *
-   * @param <T> type of character sequence
-   * @param thizz char sequence
-   * @param range range to get, coordinates offset form start of this sequence
-   * @return sequence whose contents come before the selected range, if range.isNull() then null
-   */
-  @Nullable
-  static <T extends CharSequence> T subSequenceBefore(@NotNull T thizz, @NotNull Range range) {
-    return range.isNull() ? null : (T) thizz.subSequence(0, range.getStart());
-  }
-
-  /**
-   * Get a portion of this sequence after one selected by range
-   *
-   * @param <T> type of character sequence
-   * @param thizz char sequence
-   * @param range range to get, coordinates offset form start of this sequence
-   * @return sequence whose contents come after the selected range, if range.isNull() then null
-   */
-  @Nullable
-  static <T extends CharSequence> T subSequenceAfter(@NotNull T thizz, @NotNull Range range) {
-    return range.isNull() ? null : (T) thizz.subSequence(range.getEnd(), thizz.length());
-  }
-
-  /**
-   * Get a portions of this sequence before and after one selected by range
-   *
-   * @param <T> type of character sequence
-   * @param thizz char sequence
-   * @param range range to get, coordinates offset form start of this sequence
-   * @return sequence whose contents come before and after the selected range, if range.isNull()
-   *     then pair of nulls
-   */
-  @NotNull
-  static <T extends CharSequence> Pair<T, T> subSequenceBeforeAfter(@NotNull T thizz, Range range) {
-    return new Pair<>(subSequenceBefore(thizz, range), subSequenceAfter(thizz, range));
   }
 
   static int indexOf(@NotNull CharSequence thizz, @NotNull CharSequence s) {
@@ -1197,11 +1150,6 @@ public interface SequenceUtils {
     return startOfDelimitedByAny(thizz, CharPredicate.ANY_EOL, index);
   }
 
-  static int endOfDelimitedByAnyNot(
-      @NotNull CharSequence thizz, @NotNull CharPredicate s, int index) {
-    return endOfDelimitedByAny(thizz, s.negate(), index);
-  }
-
   static int startOfDelimitedBy(@NotNull CharSequence thizz, @NotNull CharSequence s, int index) {
     index = rangeLimit(index, 0, thizz.length());
     int offset = lastIndexOf(thizz, s, index - 1);
@@ -1582,72 +1530,12 @@ public interface SequenceUtils {
     }
   }
 
-  static Integer parseUnsignedIntOrNull(String text) {
-    return parseUnsignedIntOrNull(text, 10);
-  }
-
-  static Integer parseUnsignedIntOrNull(String text, int radix) {
-    try {
-      int value = Integer.parseInt(text, radix);
-      return value >= 0 ? value : null;
-    } catch (NumberFormatException ignored) {
-      return null;
-    }
-  }
-
-  static Integer parseIntOrNull(String text) {
-    return parseIntOrNull(text, 10);
-  }
-
-  static Integer parseIntOrNull(String text, int radix) {
-    try {
-      return Integer.parseInt(text, radix);
-    } catch (NumberFormatException ignored) {
-      return null;
-    }
-  }
-
-  static Long parseLongOrNull(String text) {
-    return parseLongOrNull(text, 10);
-  }
-
   static Long parseLongOrNull(String text, int radix) {
     try {
       return Long.parseLong(text, radix);
     } catch (NumberFormatException ignored) {
       return null;
     }
-  }
-
-  /**
-   * Parse number from text
-   *
-   * <p>Will parse 0x, 0b, octal if starts with 0, decimal
-   *
-   * @param text text containing the number to parse
-   * @return null or parsed number
-   */
-  @Nullable
-  static Number parseNumberOrNull(@Nullable String text) {
-    if (text == null) {
-      return null;
-    }
-
-    if (text.startsWith("0x")) {
-      return parseLongOrNull(text.substring(2), 16);
-    } else if (text.startsWith("0b")) {
-      return parseLongOrNull(text.substring(2), 2);
-    } else if (text.startsWith("0")) {
-      Number octal = parseLongOrNull(text.substring(1), 8);
-      if (octal != null) {
-        return octal;
-      }
-    }
-
-    NumberFormat numberFormat = NumberFormat.getInstance();
-    ParsePosition pos = new ParsePosition(0);
-    Number number = numberFormat.parse(text, pos);
-    return pos.getIndex() == text.length() ? number : null;
   }
 
   /**

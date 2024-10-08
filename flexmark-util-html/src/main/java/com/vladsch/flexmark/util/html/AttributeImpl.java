@@ -47,7 +47,7 @@ public class AttributeImpl implements Attribute {
     return name.indexOf(' ') != -1 || value.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(name);
   }
 
-  public static int indexOfValue(
+  static int indexOfValue(
       CharSequence value,
       CharSequence valueName,
       char valueListDelimiter,
@@ -139,7 +139,7 @@ public class AttributeImpl implements Attribute {
     return "AttributeImpl { " + "name='" + name + '\'' + ", value='" + value + '\'' + " }";
   }
 
-  public static AttributeImpl of(Attribute other) {
+  static AttributeImpl of(Attribute other) {
     return of(
         other.getName(),
         other.getValue(),
@@ -147,11 +147,7 @@ public class AttributeImpl implements Attribute {
         other.getValueNameDelimiter());
   }
 
-  public static AttributeImpl of(CharSequence attrName) {
-    return of(attrName, attrName, SequenceUtils.NUL, SequenceUtils.NUL);
-  }
-
-  public static AttributeImpl of(CharSequence attrName, CharSequence value) {
+  static AttributeImpl of(CharSequence attrName, CharSequence value) {
     return of(attrName, value, SequenceUtils.NUL, SequenceUtils.NUL);
   }
 
@@ -160,7 +156,7 @@ public class AttributeImpl implements Attribute {
     return of(attrName, value, valueListDelimiter, SequenceUtils.NUL);
   }
 
-  public static AttributeImpl of(
+  private static AttributeImpl of(
       CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
     if (attrName.equals(CLASS_ATTR)) {
       return new AttributeImpl(attrName, value, ' ', SequenceUtils.NUL);

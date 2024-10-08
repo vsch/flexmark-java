@@ -21,10 +21,6 @@ public final class RichSequenceBuilder
     this.segments = new StringBuilder();
   }
 
-  public RichSequenceBuilder(int initialCapacity) {
-    this.segments = new StringBuilder(initialCapacity);
-  }
-
   @Override
   @NotNull
   public RichSequenceBuilder getBuilder() {

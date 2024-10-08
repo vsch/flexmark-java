@@ -6,26 +6,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TemplateUtil {
-  public static final Resolver NULL_RESOLVER = groups -> null;
+  static class MappedResolver implements Resolver {
+    private final Map<String, String> resolved;
 
-  public static class MappedResolver implements Resolver {
-    protected final Map<String, String> resolved;
-
-    public MappedResolver(Map<String, String> map) {
+    private MappedResolver(Map<String, String> map) {
       resolved = map;
     }
 
-    public MappedResolver() {
+    MappedResolver() {
       this(new HashMap<>());
     }
 
-    public MappedResolver set(String name, String value) {
+    MappedResolver set(String name, String value) {
       resolved.put(name, value);
       return this;
-    }
-
-    public Map<String, String> getMMap() {
-      return resolved;
     }
 
     @Override
@@ -34,11 +28,11 @@ public class TemplateUtil {
     }
   }
 
-  public interface Resolver {
+  interface Resolver {
     String resolve(String[] groups);
   }
 
-  public static String resolveRefs(CharSequence text, Pattern pattern, Resolver resolver) {
+  static String resolveRefs(CharSequence text, Pattern pattern, Resolver resolver) {
     if (text == null) {
       return "";
     }
