@@ -85,7 +85,7 @@
       <dependency>
         <groupId>org.jetbrains</groupId>
         <artifactId>annotations</artifactId>
-        <version>25.0.0</version>
+        <version>26.0.0</version>
       </dependency>
 
       <dependency>
