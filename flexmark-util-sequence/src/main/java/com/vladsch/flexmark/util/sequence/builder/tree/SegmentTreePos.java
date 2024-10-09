@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.util.sequence.builder.tree;
 
-public final class SegmentTreePos {
-  public final int pos;
-  public final int startIndex;
-  public final int iterations;
+final class SegmentTreePos {
+  final int pos;
+  final int startIndex;
+  final int iterations;
 
-  public SegmentTreePos(int pos, int startIndex, int iterations) {
+  SegmentTreePos(int pos, int startIndex, int iterations) {
     this.pos = pos;
     this.startIndex = startIndex;
     this.iterations = iterations;

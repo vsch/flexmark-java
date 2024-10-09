@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
-public enum NumberFormat {
+enum NumberFormat {
   NONE,
   ARABIC,
   LETTERS,
@@ -8,7 +8,7 @@ public enum NumberFormat {
   CUSTOM,
   ;
 
-  public static String getFormat(NumberFormat format, int count) {
+  static String getFormat(NumberFormat format, int count) {
     switch (format) {
       case NONE:
         return "";
@@ -27,7 +27,7 @@ public enum NumberFormat {
     return "";
   }
 
-  public static String getFormat(int count, CharSequence digitSet) {
+  static String getFormat(int count, CharSequence digitSet) {
     StringBuilder sb = new StringBuilder(10);
     int base = digitSet.length();
     do {

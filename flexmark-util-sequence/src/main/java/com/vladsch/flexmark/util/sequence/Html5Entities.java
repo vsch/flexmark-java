@@ -12,13 +12,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Html5Entities {
+class Html5Entities {
   private static final Map<String, String> NAMED_CHARACTER_REFERENCES = readEntities();
   private static final Pattern NUMERIC_PATTERN = Pattern.compile("^&#[Xx]?");
   private static final String ENTITY_PATH =
       "/com/vladsch/flexmark/util/sequence/entities.properties";
 
-  public static String entityToString(String input) {
+  static String entityToString(String input) {
     Matcher matcher = NUMERIC_PATTERN.matcher(input);
 
     if (matcher.find()) {
@@ -43,7 +43,7 @@ public class Html5Entities {
     return input;
   }
 
-  public static BasedSequence entityToSequence(BasedSequence input) {
+  static BasedSequence entityToSequence(BasedSequence input) {
     Matcher matcher = NUMERIC_PATTERN.matcher(input);
     BasedSequence baseSeq = input.subSequence(0, 0);
 

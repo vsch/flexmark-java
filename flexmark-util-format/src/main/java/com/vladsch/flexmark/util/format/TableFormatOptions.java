@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
-import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,8 +14,6 @@ public class TableFormatOptions implements MutableDataSetter {
   // NOTE: the value of \u001f is hardcoded in Parsing patterns
   public static final char INTELLIJ_DUMMY_IDENTIFIER_CHAR = SequenceUtils.US;
   public static final String INTELLIJ_DUMMY_IDENTIFIER = SequenceUtils.US_CHARS;
-  public static final CharPredicate INTELLIJ_DUMMY_IDENTIFIER_SET =
-      value -> value == SequenceUtils.US;
 
   public static final DataKey<Boolean> FORMAT_TABLE_LEAD_TRAIL_PIPES =
       new DataKey<>("FORMAT_TABLE_LEAD_TRAIL_PIPES", true);
@@ -55,32 +52,32 @@ public class TableFormatOptions implements MutableDataSetter {
 
   public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER =
       new DataKey<>("FORMAT_CHAR_WIDTH_PROVIDER", CharWidthProvider.NULL);
-  public static final DataKey<Boolean> FORMAT_TABLE_DUMP_TRACKING_OFFSETS =
+  private static final DataKey<Boolean> FORMAT_TABLE_DUMP_TRACKING_OFFSETS =
       new DataKey<>("FORMAT_TABLE_DUMP_TRACKING_OFFSETS", false);
 
   public final boolean leadTrailPipes;
   public final boolean spaceAroundPipes;
-  public final boolean adjustColumnWidth;
-  public final boolean applyColumnAlignment;
-  public final boolean fillMissingColumns;
-  public final Integer formatTableFillMissingMinColumn;
+  final boolean adjustColumnWidth;
+  final boolean applyColumnAlignment;
+  final boolean fillMissingColumns;
+  final Integer formatTableFillMissingMinColumn;
 
   public final boolean trimCellWhitespace;
   public final boolean dumpIntellijOffsets;
   public final DiscretionaryText leftAlignMarker;
-  public final TableCaptionHandling formatTableCaption;
-  public final DiscretionaryText formatTableCaptionSpaces;
-  public final int minSeparatorColumnWidth;
-  public final int minSeparatorDashes;
-  public final CharWidthProvider charWidthProvider;
-  public final String formatTableIndentPrefix;
+  final TableCaptionHandling formatTableCaption;
+  final DiscretionaryText formatTableCaptionSpaces;
+  final int minSeparatorColumnWidth;
+  final int minSeparatorDashes;
+  final CharWidthProvider charWidthProvider;
+  final String formatTableIndentPrefix;
   public final TableManipulator tableManipulator;
 
-  public final int spaceWidth;
-  public final int spacePad;
-  public final int pipeWidth;
-  public final int colonWidth;
-  public final int dashWidth;
+  final int spaceWidth;
+  final int spacePad;
+  final int pipeWidth;
+  final int colonWidth;
+  final int dashWidth;
 
   public TableFormatOptions() {
     this(null);

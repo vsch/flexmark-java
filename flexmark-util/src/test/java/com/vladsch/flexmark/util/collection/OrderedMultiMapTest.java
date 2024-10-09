@@ -19,7 +19,6 @@ public class OrderedMultiMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     int i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
@@ -70,7 +69,7 @@ public class OrderedMultiMapTest {
       i++;
     }
 
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
+    Assert.assertTrue(orderedMap.equals(orderedMap));
 
     i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
@@ -108,7 +107,6 @@ public class OrderedMultiMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     int i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
@@ -118,15 +116,15 @@ public class OrderedMultiMapTest {
     }
 
     for (i = 0; i < 10; i += 2) {
-      Assert.assertEquals(true, retainSet.add(String.valueOf(i)));
-      Assert.assertEquals(false, retainSet.add(String.valueOf(i)));
+      Assert.assertTrue(retainSet.add(String.valueOf(i)));
+      Assert.assertFalse(retainSet.add(String.valueOf(i)));
     }
 
-    Assert.assertEquals(false, orderedMap.keySet().retainAll(orderedMap.keySet()));
-    Assert.assertEquals(false, retainSet.retainAll(retainSet));
+    Assert.assertFalse(orderedMap.keySet().retainAll(orderedMap.keySet()));
+    Assert.assertFalse(retainSet.retainAll(retainSet));
 
-    Assert.assertEquals(true, orderedMap.keySet().retainAll(retainSet));
-    Assert.assertEquals(true, orderedMap.keySet().equals(retainSet));
+    Assert.assertTrue(orderedMap.keySet().retainAll(retainSet));
+    Assert.assertEquals(orderedMap.keySet(), retainSet);
 
     i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
@@ -137,7 +135,7 @@ public class OrderedMultiMapTest {
 
     for (int j = 10; j-- > 0; ) {
       Assert.assertEquals((j & 1) == 0, orderedMap.keySet().remove(String.valueOf(j)));
-      Assert.assertEquals(false, orderedMap.containsKey(String.valueOf(j)));
+      Assert.assertFalse(orderedMap.containsKey(String.valueOf(j)));
     }
   }
 
@@ -151,7 +149,6 @@ public class OrderedMultiMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     Iterator<Map.Entry<String, Integer>> iterator = orderedMap.entrySet().iterator();
     int i = 0;
@@ -191,7 +188,6 @@ public class OrderedMultiMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     Iterator<Map.Entry<String, Integer>> iterator =
         orderedMap.entrySet().reversedIterable().reversedIterator();
@@ -232,7 +228,6 @@ public class OrderedMultiMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     Iterator<Map.Entry<String, Integer>> iterator = orderedMap.entrySet().reversedIterator();
     int i = 9;
@@ -277,7 +272,6 @@ public class OrderedMultiMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     Iterator<Map.Entry<String, Integer>> iterator =
         orderedMap.entrySetIterable().reversed().iterator();
@@ -324,7 +318,6 @@ public class OrderedMultiMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     int i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
@@ -357,7 +350,6 @@ public class OrderedMultiMapTest {
     }
 
     orderedMap.putAll(orderedMap);
-    Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
     int i = 0;
     for (Map.Entry<String, Integer> it : orderedMap.entrySet()) {
@@ -513,8 +505,8 @@ public class OrderedMultiMapTest {
     OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
     orderedMap.put("0", 0);
     orderedMap.put("1", 1);
-    Assert.assertEquals(true, orderedMap.putKeyValuePair(new Pair<>("2", 2)));
-    Assert.assertEquals(false, orderedMap.putKeyValuePair(new Pair<>("2", 2)));
+    Assert.assertTrue(orderedMap.putKeyValuePair(new Pair<>("2", 2)));
+    Assert.assertFalse(orderedMap.putKeyValuePair(new Pair<>("2", 2)));
 
     Pair<String, Integer> pair = new Pair<>("1", 0);
     Assert.assertThrows(IllegalStateException.class, () -> orderedMap.putKeyValuePair(pair));
@@ -525,8 +517,8 @@ public class OrderedMultiMapTest {
     OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>();
     orderedMap.put("0", 0);
     orderedMap.put("1", 1);
-    Assert.assertEquals(true, orderedMap.putValueKeyPair(new Pair<>(2, "2")));
-    Assert.assertEquals(false, orderedMap.putValueKeyPair(new Pair<>(2, "2")));
+    Assert.assertTrue(orderedMap.putValueKeyPair(new Pair<>(2, "2")));
+    Assert.assertFalse(orderedMap.putValueKeyPair(new Pair<>(2, "2")));
 
     Pair<Integer, String> pair = new Pair<>(0, "1");
     Assert.assertThrows(IllegalStateException.class, () -> orderedMap.putValueKeyPair(pair));

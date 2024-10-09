@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.util.format;
 
-public class TableSeparatorSection extends TableSection {
-  public static final TableCell DEFAULT_CELL = new TableCell("---", 1, 1);
+class TableSeparatorSection extends TableSection {
+  static final TableCell DEFAULT_CELL = new TableCell("---", 1, 1);
 
-  public TableSeparatorSection(TableSectionType sectionType) {
+  TableSeparatorSection(TableSectionType sectionType) {
     super(sectionType);
   }
 

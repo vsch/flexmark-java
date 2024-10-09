@@ -17,7 +17,7 @@ import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.NotNull;
 
 public class TrackedOffsetList implements List<TrackedOffset> {
-  public static TrackedOffsetList EMPTY_LIST =
+  public static final TrackedOffsetList EMPTY_LIST =
       new TrackedOffsetList(BasedSequence.NULL, Collections.emptyList());
 
   @NotNull
@@ -29,7 +29,7 @@ public class TrackedOffsetList implements List<TrackedOffset> {
   }
 
   @NotNull
-  public static TrackedOffsetList create(@NotNull BasedSequence baseSeq, @NotNull int[] offsets) {
+  static TrackedOffsetList create(@NotNull BasedSequence baseSeq, @NotNull int[] offsets) {
     List<TrackedOffset> trackedOffsets = new ArrayList<>(offsets.length);
     for (int offset : offsets) {
       trackedOffsets.add(TrackedOffset.track(offset));
@@ -62,15 +62,6 @@ public class TrackedOffsetList implements List<TrackedOffset> {
       if (!trackedOffset.isResolved()) unresolved.add(trackedOffset);
     }
     return unresolved.isEmpty() ? EMPTY_LIST : new TrackedOffsetList(myBaseSeq, unresolved);
-  }
-
-  public boolean haveUnresolved() {
-    for (TrackedOffset trackedOffset : myTrackedOffsets) {
-      if (!trackedOffset.isResolved()) {
-        return true;
-      }
-    }
-    return false;
   }
 
   @NotNull

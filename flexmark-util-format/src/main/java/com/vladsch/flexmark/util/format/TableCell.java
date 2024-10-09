@@ -8,27 +8,26 @@ import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.jetbrains.annotations.NotNull;
 
 public class TableCell {
-  public static final TableCell NULL =
+  static final TableCell NULL =
       new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 0, CellAlignment.NONE);
   public static final TableCell DEFAULT_CELL =
       new TableCell(null, BasedSequence.NULL, " ", BasedSequence.NULL, 1, 1, CellAlignment.NONE);
   public static final int NOT_TRACKED = Integer.MAX_VALUE;
 
-  public final Node tableCellNode; // node if needed for finer text manipulation
+  final Node tableCellNode; // node if needed for finer text manipulation
   public final BasedSequence openMarker;
-  public final BasedSequence text;
+  final BasedSequence text;
   public final BasedSequence closeMarker;
-  public final int columnSpan;
-  public final int rowSpan;
-  public final CellAlignment alignment;
-  public final int trackedTextOffset; // offset in the text
-  public final int spanTrackedOffset; // offset in the span if span > 1
-  public final int
-      trackedTextAdjust; // adjustment to the resulting tracked position due to alignment
-  public final boolean afterSpace; // if adjustment should be done after space
-  public final boolean afterDelete; // if adjustment should be done as if after delete
+  final int columnSpan;
+  final int rowSpan;
+  final CellAlignment alignment;
+  final int trackedTextOffset; // offset in the text
+  final int spanTrackedOffset; // offset in the span if span > 1
+  final int trackedTextAdjust; // adjustment to the resulting tracked position due to alignment
+  final boolean afterSpace; // if adjustment should be done after space
+  final boolean afterDelete; // if adjustment should be done as if after delete
 
-  public TableCell(CharSequence text, int rowSpan, int columnSpan) {
+  TableCell(CharSequence text, int rowSpan, int columnSpan) {
     this(
         null,
         BasedSequence.NULL,
@@ -39,19 +38,7 @@ public class TableCell {
         CellAlignment.NONE);
   }
 
-  public TableCell(
-      Node tableCellNode, CharSequence text, int rowSpan, int columnSpan, CellAlignment alignment) {
-    this(
-        tableCellNode,
-        BasedSequence.NULL,
-        text,
-        BasedSequence.NULL,
-        rowSpan,
-        columnSpan,
-        alignment);
-  }
-
-  public TableCell(
+  TableCell(
       Node tableCellNode,
       CharSequence openMarker,
       CharSequence text,
@@ -84,7 +71,7 @@ public class TableCell {
         false);
   }
 
-  public TableCell(
+  private TableCell(
       Node tableCellNode,
       CharSequence openMarker,
       CharSequence text,
@@ -119,7 +106,7 @@ public class TableCell {
     this.afterDelete = afterDelete;
   }
 
-  public TableCell(
+  TableCell(
       @NotNull TableCell other,
       boolean copyNode,
       int rowSpan,
@@ -146,7 +133,7 @@ public class TableCell {
     this.afterDelete = other.afterDelete;
   }
 
-  public TableCell withColumnSpan(int columnSpan) {
+  TableCell withColumnSpan(int columnSpan) {
     return new TableCell(
         tableCellNode,
         openMarker,
@@ -162,7 +149,7 @@ public class TableCell {
         afterDelete);
   }
 
-  public TableCell withText(CharSequence text) {
+  TableCell withText(CharSequence text) {
     return new TableCell(
         tableCellNode,
         openMarker,
@@ -178,7 +165,7 @@ public class TableCell {
         afterDelete);
   }
 
-  public TableCell withText(CharSequence openMarker, CharSequence text, CharSequence closeMarker) {
+  TableCell withText(CharSequence openMarker, CharSequence text, CharSequence closeMarker) {
     return new TableCell(
         tableCellNode,
         openMarker,
@@ -194,7 +181,7 @@ public class TableCell {
         afterDelete);
   }
 
-  public TableCell withRowSpan(int rowSpan) {
+  TableCell withTrackedOffset(int trackedTextOffset) {
     return new TableCell(
         tableCellNode,
         openMarker,
@@ -210,7 +197,7 @@ public class TableCell {
         afterDelete);
   }
 
-  public TableCell withAlignment(CellAlignment alignment) {
+  TableCell withTrackedOffset(int trackedTextOffset, boolean afterSpace, boolean afterDelete) {
     return new TableCell(
         tableCellNode,
         openMarker,
@@ -226,7 +213,7 @@ public class TableCell {
         afterDelete);
   }
 
-  public TableCell withTrackedOffset(int trackedTextOffset) {
+  TableCell withSpanTrackedOffset(int spanTrackedOffset) {
     return new TableCell(
         tableCellNode,
         openMarker,
@@ -242,56 +229,7 @@ public class TableCell {
         afterDelete);
   }
 
-  public TableCell withTrackedOffset(
-      int trackedTextOffset, boolean afterSpace, boolean afterDelete) {
-    return new TableCell(
-        tableCellNode,
-        openMarker,
-        text,
-        closeMarker,
-        rowSpan,
-        columnSpan,
-        alignment,
-        trackedTextOffset,
-        spanTrackedOffset,
-        trackedTextAdjust,
-        afterSpace,
-        afterDelete);
-  }
-
-  public TableCell withSpanTrackedOffset(int spanTrackedOffset) {
-    return new TableCell(
-        tableCellNode,
-        openMarker,
-        text,
-        closeMarker,
-        rowSpan,
-        columnSpan,
-        alignment,
-        trackedTextOffset,
-        spanTrackedOffset,
-        trackedTextAdjust,
-        afterSpace,
-        afterDelete);
-  }
-
-  public TableCell withTrackedTextAdjust(int trackedTextAdjust) {
-    return new TableCell(
-        tableCellNode,
-        openMarker,
-        text,
-        closeMarker,
-        rowSpan,
-        columnSpan,
-        alignment,
-        trackedTextOffset,
-        spanTrackedOffset,
-        trackedTextAdjust,
-        afterSpace,
-        afterDelete);
-  }
-
-  public TableCell withAfterSpace(boolean afterSpace) {
+  TableCell withTrackedTextAdjust(int trackedTextAdjust) {
     return new TableCell(
         tableCellNode,
         openMarker,
@@ -315,19 +253,19 @@ public class TableCell {
     return !closeMarker.isEmpty() ? closeMarker.getEndOffset() : text.getEndOffset();
   }
 
-  public int getStartOffset(TableCell previousCell) {
+  int getStartOffset(TableCell previousCell) {
     return previousCell != null
         ? previousCell.getEndOffset()
         : !openMarker.isEmpty() ? openMarker.getStartOffset() : text.getStartOffset();
   }
 
-  public int getInsideStartOffset(TableCell previousCell) {
+  int getInsideStartOffset(TableCell previousCell) {
     return previousCell != null
         ? previousCell.getEndOffset()
         : !openMarker.isEmpty() ? openMarker.getEndOffset() : text.getStartOffset();
   }
 
-  public int getTextStartOffset(TableCell previousCell) {
+  int getTextStartOffset(TableCell previousCell) {
     if (!text.isEmpty()) {
       return text.getStartOffset();
     } else if (!openMarker.isEmpty()) {
@@ -339,7 +277,7 @@ public class TableCell {
     }
   }
 
-  public int getTextEndOffset(TableCell previousCell) {
+  int getTextEndOffset(TableCell previousCell) {
     if (!text.isEmpty()) {
       return text.getEndOffset();
     } else if (!openMarker.isEmpty()) {
@@ -355,11 +293,11 @@ public class TableCell {
     return !closeMarker.isEmpty() ? closeMarker.getStartOffset() : text.getEndOffset();
   }
 
-  public int getCellSize(TableCell previousCell) {
+  int getCellSize(TableCell previousCell) {
     return getEndOffset() - getStartOffset(previousCell);
   }
 
-  public int insideToTextOffset(int insideOffset, TableCell previousCell) {
+  int insideToTextOffset(int insideOffset, TableCell previousCell) {
     return Utils.maxLimit(
         text.length(),
         Utils.minLimit(
@@ -367,40 +305,12 @@ public class TableCell {
             0));
   }
 
-  public int textToInsideOffset(int insideOffset, TableCell previousCell) {
+  int textToInsideOffset(int insideOffset, TableCell previousCell) {
     return Utils.maxLimit(
         getCellSize(previousCell),
         Utils.minLimit(
             insideOffset - getTextStartOffset(previousCell) + getInsideStartOffset(previousCell),
             0));
-  }
-
-  public boolean isInsideCell(int offset, TableCell previousCell) {
-    return offset >= getInsideStartOffset(previousCell) && offset <= getInsideEndOffset();
-  }
-
-  public boolean isAtCell(int offset, TableCell previousCell) {
-    return offset >= getInsideStartOffset(previousCell) && offset <= getInsideEndOffset();
-  }
-
-  /**
-   * Returns the cell length occupied in the table
-   *
-   * @param previousCell previous cell or null for first cell
-   * @return length of the cell as occupied in the original file
-   */
-  public int getCellLength(TableCell previousCell) {
-    return getEndOffset() - getStartOffset(previousCell);
-  }
-
-  /**
-   * Returns the cell prefix length occupied in the table
-   *
-   * @param previousCell previous cell or null for first cell
-   * @return length of cell's prefix before actual text as occupied in the file
-   */
-  public int getCellPrefixLength(TableCell previousCell) {
-    return getInsideStartOffset(previousCell) - getStartOffset(previousCell);
   }
 
   private static CharSequence dumpSequence(BasedSequence sequence) {

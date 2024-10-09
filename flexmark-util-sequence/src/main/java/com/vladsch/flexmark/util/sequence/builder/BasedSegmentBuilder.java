@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BasedSegmentBuilder extends SegmentBuilderBase<BasedSegmentBuilder>
     implements IBasedSegmentBuilder<BasedSegmentBuilder> {
-  final @NotNull BasedSequence baseSeq;
+  private final @NotNull BasedSequence baseSeq;
   final @NotNull SegmentOptimizer optimizer;
 
   private BasedSegmentBuilder(@NotNull BasedSequence baseSeq) {

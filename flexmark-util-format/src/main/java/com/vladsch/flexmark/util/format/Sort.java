@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.format;
 
-public enum Sort {
-  NONE,
+enum Sort {
   ASCENDING,
   DESCENDING,
   ASCENDING_NUMERIC,
@@ -10,18 +9,18 @@ public enum Sort {
   DESCENDING_NUMERIC_LAST,
   ;
 
-  public boolean isDescending() {
+  boolean isDescending() {
     return this == DESCENDING || this == DESCENDING_NUMERIC || this == DESCENDING_NUMERIC_LAST;
   }
 
-  public boolean isNumeric() {
+  boolean isNumeric() {
     return this == ASCENDING_NUMERIC
         || this == ASCENDING_NUMERIC_LAST
         || this == DESCENDING_NUMERIC
         || this == DESCENDING_NUMERIC_LAST;
   }
 
-  public boolean isNumericLast() {
+  boolean isNumericLast() {
     return this == ASCENDING_NUMERIC_LAST || this == DESCENDING_NUMERIC_LAST;
   }
 }

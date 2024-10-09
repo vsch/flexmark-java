@@ -13,10 +13,10 @@ import java.util.function.BiFunction;
 
 public class TableCellOffsetInfo {
   // Stop points used by next/prev tab navigation
-  public static final int ROW_START = 0x0001;
-  public static final int TEXT_START = 0x0002;
-  public static final int TEXT_END = 0x0004;
-  public static final int ROW_END = 0x0008;
+  private static final int ROW_START = 0x0001;
+  private static final int TEXT_START = 0x0002;
+  private static final int TEXT_END = 0x0004;
+  private static final int ROW_END = 0x0008;
 
   private static final Map<TableSectionType, Integer> DEFAULT_STOP_POINTS_MAP = new HashMap<>();
 
@@ -30,12 +30,12 @@ public class TableCellOffsetInfo {
   public final MarkdownTable table;
   public final int offset;
   public final TableSection section;
-  public final TableRow tableRow; // at or inside cell
-  public final TableCell tableCell; // at or inside cell
-  public final int row; // all rows with separator index
-  public final int column; // at column right before or right after
-  public final Integer insideColumn; // inside column or null
-  public final Integer insideOffset; // offset from start of column or null if not inside column
+  final TableRow tableRow; // at or inside cell
+  final TableCell tableCell; // at or inside cell
+  private final int row; // all rows with separator index
+  final int column; // at column right before or right after
+  private final Integer insideColumn; // inside column or null
+  private final Integer insideOffset; // offset from start of column or null if not inside column
 
   public TableCellOffsetInfo(
       int offset,
@@ -98,11 +98,11 @@ public class TableCellOffsetInfo {
     return getPreviousCell(1);
   }
 
-  public TableCell getPreviousCell(int offset) {
+  private TableCell getPreviousCell(int offset) {
     return getPreviousCell(tableRow, offset);
   }
 
-  public TableCell getPreviousCell(TableRow tableRow, int offset) {
+  private TableCell getPreviousCell(TableRow tableRow, int offset) {
     return column >= offset && tableRow != null ? tableRow.cells.get(column - offset) : null;
   }
 
@@ -120,16 +120,6 @@ public class TableCellOffsetInfo {
         && insideColumn == null
         && column == tableRow.cells.size()
         && offset >= tableCell.getEndOffset();
-  }
-
-  public boolean canDeleteColumn() {
-    return insideColumn != null && table.getMinColumnsWithoutColumns(true, column) > 0;
-  }
-
-  public boolean canDeleteRow() {
-    return tableRow != null
-        && section != table.separator
-        && table.body.rows.size() + table.header.rows.size() > 1;
   }
 
   public boolean isFirstCell() {
@@ -165,100 +155,6 @@ public class TableCellOffsetInfo {
       return table.getCellOffsetInfo(
           cell.getTextStartOffset(previousCell)
               + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
-    }
-    return null;
-  }
-
-  /**
-   * Only available if tableRow/tableCell are set and not in first cell of first row
-   *
-   * <p>CAUTION: NOT TESTED
-   *
-   * @param insideOffset offset inside the cell, null if same as th
-   * @return offset in previous cell or null
-   */
-  public TableCellOffsetInfo nextCellOffset(Integer insideOffset) {
-    if (getInsideColumn() && column + 1 < tableRow.cells.size()) {
-      TableCell cell = getPreviousCell();
-      TableCell previousCell = getPreviousCell(2);
-      if (insideOffset == null)
-        cell.textToInsideOffset(
-            tableCell.insideToTextOffset(
-                this.insideOffset == null ? 0 : this.insideOffset, previousCell),
-            previousCell);
-      return table.getCellOffsetInfo(
-          cell.getTextStartOffset(previousCell)
-              + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
-    }
-    return null;
-  }
-
-  /**
-   * Only available if not at row 0
-   *
-   * <p>CAUTION: NOT TESTED
-   *
-   * @param insideOffset offset inside the cell, null if same as th
-   * @return offset in previous cell or null
-   */
-  public TableCellOffsetInfo previousRowOffset(Integer insideOffset) {
-    if (row > 0) {
-      List<TableRow> allRows = table.getAllRows();
-      TableRow otherRow = allRows.get(this.row - 1);
-      if (getInsideColumn() && column < otherRow.cells.size()) {
-        // transfer inside offset
-        TableCell cell = getPreviousCell();
-        TableCell previousCell = getPreviousCell(2);
-        if (insideOffset == null)
-          cell.textToInsideOffset(
-              tableCell.insideToTextOffset(
-                  this.insideOffset == null ? 0 : this.insideOffset, previousCell),
-              previousCell);
-        return table.getCellOffsetInfo(
-            cell.getTextStartOffset(previousCell)
-                + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
-      }
-
-      if (isBeforeCells()) {
-        return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset(null));
-      }
-
-      return table.getCellOffsetInfo(otherRow.cells.get(otherRow.cells.size() - 1).getEndOffset());
-    }
-    return null;
-  }
-
-  /**
-   * Only available if not at last row
-   *
-   * <p>CAUTION: NOT TESTED
-   *
-   * @param insideOffset offset inside the cell, null if same as th
-   * @return offset in previous cell or null
-   */
-  public TableCellOffsetInfo nextRowOffset(Integer insideOffset) {
-    if (row + 1 < table.getAllRowsCount()) {
-      List<TableRow> allRows = table.getAllRows();
-      TableRow otherRow = allRows.get(this.row + 1);
-      if (getInsideColumn() && column < otherRow.cells.size()) {
-        // transfer inside offset
-        TableCell cell = otherRow.cells.get(column);
-        TableCell previousCell = getPreviousCell(otherRow, 1);
-        if (insideOffset == null)
-          cell.textToInsideOffset(
-              tableCell.insideToTextOffset(
-                  this.insideOffset == null ? 0 : this.insideOffset, previousCell),
-              previousCell);
-        return table.getCellOffsetInfo(
-            cell.getTextStartOffset(previousCell)
-                + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
-      }
-
-      if (isBeforeCells()) {
-        return table.getCellOffsetInfo(otherRow.cells.get(0).getStartOffset(null));
-      }
-
-      return table.getCellOffsetInfo(otherRow.cells.get(otherRow.cells.size() - 1).getEndOffset());
     }
     return null;
   }

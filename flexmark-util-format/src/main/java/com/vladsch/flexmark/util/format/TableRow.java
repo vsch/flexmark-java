@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.util.format;
 
-import static com.vladsch.flexmark.util.format.TableCellManipulator.BREAK;
-import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
 import static com.vladsch.flexmark.util.misc.Utils.minLimit;
 
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
@@ -20,74 +18,6 @@ public class TableRow {
 
   public List<TableCell> getCells() {
     return cells;
-  }
-
-  public void forAllCells(TableCellConsumer consumer) {
-    forAllCells(0, Integer.MAX_VALUE, consumer);
-  }
-
-  public void forAllCells(int startIndex, TableCellConsumer consumer) {
-    forAllCells(startIndex, Integer.MAX_VALUE, consumer);
-  }
-
-  public void forAllCells(int startIndex, int count, TableCellConsumer consumer) {
-    forAllCells(
-        startIndex,
-        count,
-        (cell, cellIndex, cellColumn, allCellIndex) -> {
-          consumer.accept(cell, cellIndex, cellColumn);
-          return 0;
-        });
-  }
-
-  public void forAllCells(TableCellManipulator manipulator) {
-    forAllCells(0, Integer.MAX_VALUE, manipulator);
-  }
-
-  public void forAllCells(int startIndex, TableCellManipulator manipulator) {
-    forAllCells(startIndex, Integer.MAX_VALUE, manipulator);
-  }
-
-  public void forAllCells(int startIndex, int count, TableCellManipulator manipulator) {
-    int iMax = cells.size();
-    if (startIndex < iMax && count > 0) {
-      int column = 0;
-      int remaining = count;
-      int allCellsIndex = 0;
-
-      for (int i = 0; i < iMax; ) {
-        TableCell cell = cells.get(i);
-
-        if (i >= startIndex) {
-          int result = manipulator.apply(cell, i, column, allCellsIndex);
-
-          if (result == BREAK) {
-            return;
-          }
-
-          if (result < 0) {
-            allCellsIndex -= result; // adjust for deleted cells
-            remaining += result;
-            iMax += result;
-          } else {
-            i += result + 1;
-            column += cell.columnSpan;
-            remaining--;
-            iMax += result;
-          }
-
-          allCellsIndex++;
-
-          if (remaining <= 0) {
-            break;
-          }
-        } else {
-          i++;
-          allCellsIndex++;
-          column += cell.columnSpan;
-        }
-      }
-    }
   }
 
   public int getColumns() {
@@ -125,31 +55,11 @@ public class TableRow {
     this.afterOffset = afterOffset;
   }
 
-  public int columnOf(int index) {
-    return columnOfOrNull(index);
-  }
-
-  public Integer columnOfOrNull(Integer index) {
-    if (index == null) {
-      return null;
-    }
-
-    int columns = 0;
-
-    int iMax = maxLimit(index, cells.size());
-    for (int i = 0; i < iMax; i++) {
-      TableCell cell = cells.get(i);
-      columns += cell.columnSpan;
-    }
-
-    return columns;
-  }
-
-  public void appendColumns(int count) {
+  void appendColumns(int count) {
     appendColumns(count, null);
   }
 
-  public void appendColumns(int count, TableCell tableCell) {
+  private void appendColumns(int count, TableCell tableCell) {
     if (tableCell == null || tableCell.columnSpan == 0) tableCell = defaultCell();
 
     for (int i = 0; i < count; i++) {
@@ -160,10 +70,6 @@ public class TableRow {
 
   public TableCell defaultCell() {
     return new TableCell(" ", 1, 1);
-  }
-
-  public void addColumn(int index) {
-    cells.add(index, defaultCell());
   }
 
   /**
@@ -182,7 +88,7 @@ public class TableRow {
    * @param count number of columns to insert
    * @param tableCell table cell to insert, null for default
    */
-  public void insertColumns(int column, int count, TableCell tableCell) {
+  private void insertColumns(int column, int count, TableCell tableCell) {
     if (count <= 0 || column < 0) {
       return;
     }
@@ -231,7 +137,7 @@ public class TableRow {
    * @param column column index before which to insert
    * @param count number of columns to insert
    */
-  public void deleteColumns(int column, int count) {
+  void deleteColumns(int column, int count) {
     if (count <= 0 || column < 0) {
       return;
     }
@@ -268,7 +174,7 @@ public class TableRow {
     }
   }
 
-  public void moveColumn(int fromColumn, int toColumn) {
+  void moveColumn(int fromColumn, int toColumn) {
     if (fromColumn < 0 || toColumn < 0) {
       return;
     }
@@ -305,11 +211,11 @@ public class TableRow {
     }
   }
 
-  public TableRow expandTo(int column) {
+  TableRow expandTo(int column) {
     return expandTo(column, TableCell.NULL);
   }
 
-  public TableRow expandTo(int column, TableCell cell) {
+  TableRow expandTo(int column, TableCell cell) {
     if (cell == null || cell.columnSpan == 0) normalized = false;
 
     while (column >= cells.size()) {
@@ -348,12 +254,12 @@ public class TableRow {
     }
   }
 
-  public void set(int column, TableCell cell) {
+  void set(int column, TableCell cell) {
     expandTo(column, null);
     cells.set(column, cell);
   }
 
-  public boolean isEmptyColumn(int column) {
+  boolean isEmptyColumn(int column) {
     int index = indexOf(column).index;
     return index >= cells.size() || cells.get(index).text.isBlank();
   }
@@ -371,7 +277,7 @@ public class TableRow {
     return indexOfOrNull(column);
   }
 
-  public MarkdownTable.IndexSpanOffset indexOfOrNull(Integer column) {
+  private MarkdownTable.IndexSpanOffset indexOfOrNull(Integer column) {
     if (column == null) {
       return null;
     }
@@ -392,13 +298,13 @@ public class TableRow {
     return new MarkdownTable.IndexSpanOffset(index, 0);
   }
 
-  public void normalizeIfNeeded() {
+  void normalizeIfNeeded() {
     if (!normalized) {
       normalize();
     }
   }
 
-  public void normalize() {
+  void normalize() {
     int column = 0;
     while (column < cells.size()) {
       TableCell cell = cells.get(column);

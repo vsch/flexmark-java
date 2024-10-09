@@ -47,7 +47,6 @@
     <module>flexmark-util-html</module>
     <module>flexmark-util-misc</module>
     <module>flexmark-util-sequence</module>
-    <module>flexmark-util-options</module>
     <module>flexmark-util-visitor</module>
     <module>flexmark-integration-test</module>
     <module>flexmark-test-specs</module>

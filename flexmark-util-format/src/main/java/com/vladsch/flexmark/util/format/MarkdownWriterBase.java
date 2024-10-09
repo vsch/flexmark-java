@@ -18,7 +18,7 @@ public abstract class MarkdownWriterBase<
   protected final LineAppendableImpl appendable;
   protected C context;
 
-  public MarkdownWriterBase() {
+  protected MarkdownWriterBase() {
     this(0);
   }
 
@@ -27,11 +27,11 @@ public abstract class MarkdownWriterBase<
     return appendable.toString();
   }
 
-  public MarkdownWriterBase(int formatOptions) {
+  private MarkdownWriterBase(int formatOptions) {
     this(null, formatOptions);
   }
 
-  public MarkdownWriterBase(@Nullable Appendable builder, int formatOptions) {
+  protected MarkdownWriterBase(@Nullable Appendable builder, int formatOptions) {
     appendable = new LineAppendableImpl(builder, formatOptions);
     appendable.setOptions(appendable.getOptions() | LineAppendable.F_PREFIX_PRE_FORMATTED);
   }
@@ -52,7 +52,7 @@ public abstract class MarkdownWriterBase<
   public abstract @NotNull BasedSequence lastBlockQuoteChildPrefix(BasedSequence prefix);
 
   @NotNull
-  public T tailBlankLine(int count) {
+  private T tailBlankLine(int count) {
     BasedSequence prefix = appendable.getPrefix();
     BasedSequence replacedPrefix = lastBlockQuoteChildPrefix(prefix);
     if (!replacedPrefix.equals(prefix)) {

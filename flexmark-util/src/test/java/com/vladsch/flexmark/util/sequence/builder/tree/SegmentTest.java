@@ -5,13 +5,11 @@ import static org.junit.Assert.assertEquals;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
 import java.util.Arrays;
-import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentTest {
-  private static void loop(
-      int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
+  private static void loop(int start, int end, int span, int param, BiIntConsumer consumer) {
     int iMaxStart = start + span;
     int iMinEnd = end - span;
 
@@ -30,7 +28,11 @@ public class SegmentTest {
     }
   }
 
-  private static void loopSizes(BiConsumer<Integer, Integer> consumer) {
+  private interface BiIntConsumer {
+    void accept(int first, int second);
+  }
+
+  private static void loopSizes(BiIntConsumer consumer) {
     loop(0, 16, 8, 0, consumer);
     loop(16, 256, 8, 1, consumer);
     loop(256, 65536, 8, 2, consumer);
@@ -38,14 +40,14 @@ public class SegmentTest {
     loop(65536 * 256, Integer.MAX_VALUE, 8, 4, consumer);
   }
 
-  private static void loopSizesShort(BiConsumer<Integer, Integer> consumer) {
+  private static void loopSizesShort(BiIntConsumer consumer) {
     loop(0, 16, 8, 0, consumer);
     loop(16, 256, 8, 1, consumer);
     loop(256, 65536, 8, 2, consumer);
     loop(65536, 65536 * 8, 8, 3, consumer);
   }
 
-  private static void loopEnd(int startOffset, BiConsumer<Integer, Integer> consumer) {
+  private static void loopEnd(int startOffset, BiIntConsumer consumer) {
     loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
     loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
     loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
@@ -53,7 +55,7 @@ public class SegmentTest {
     loop(startOffset + 65536 * 256, Seg.MAX_TEXT_OFFSET, 8, 4, consumer);
   }
 
-  private static void loopEndShort(int startOffset, BiConsumer<Integer, Integer> consumer) {
+  private static void loopEndShort(int startOffset, BiIntConsumer consumer) {
     loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
     loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
     loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
@@ -223,7 +225,7 @@ public class SegmentTest {
             assertEquals("i: " + i + " j: " + j, b + j, offset);
 
             int value = Segment.getInt(bytes, j, b);
-            assertEquals("i: " + i + " j: " + j, value, (int) i);
+            assertEquals("i: " + i + " j: " + j, value, i);
           }
         });
   }

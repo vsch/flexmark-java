@@ -68,11 +68,6 @@ public class SegmentTree {
     return getByteOffset(byteOffsetData) - getAnchorOffset(byteOffsetData);
   }
 
-  @Nullable
-  public SegmentTreePos findSegmentPos(int index) {
-    return findSegmentPos(index, treeData, 0, size());
-  }
-
   @NotNull
   public Segment getSegment(
       int byteOffset, int pos, int startIndex, @NotNull BasedSequence baseSeq) {
@@ -548,13 +543,13 @@ public class SegmentTree {
   }
 
   protected static class SegmentTreeData {
-    public final @NotNull int[]
+    final @NotNull int[]
         treeData; // tuples of aggregated length, segment byte offset with flags for prev anchor
     // offset of 1 to 7
-    public final @NotNull byte[] segmentBytes; // bytes of serialized segments
-    public final @Nullable int[] startIndices; // start index for each segment within the string
+    final @NotNull byte[] segmentBytes; // bytes of serialized segments
+    final @Nullable int[] startIndices; // start index for each segment within the string
 
-    public SegmentTreeData(
+    SegmentTreeData(
         @NotNull int[] treeData, @NotNull byte[] segmentBytes, @Nullable int[] startIndices) {
       this.treeData = treeData;
       this.segmentBytes = segmentBytes;

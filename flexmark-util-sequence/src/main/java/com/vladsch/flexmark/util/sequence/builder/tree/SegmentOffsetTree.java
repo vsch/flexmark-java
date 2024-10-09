@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util.sequence.builder.tree;
 
 import com.vladsch.flexmark.util.misc.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.Seg;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
  * IllegalStateException} if invoked.
  */
 public class SegmentOffsetTree extends SegmentTree {
-  protected final @NotNull int[] startIndices;
+  private final @NotNull int[] startIndices;
 
   protected SegmentOffsetTree(
       @NotNull int[] treeData, @NotNull byte[] segmentBytes, @NotNull int[] startIndices) {
@@ -34,37 +33,10 @@ public class SegmentOffsetTree extends SegmentTree {
         segmentTreeData.treeData, segmentTreeData.segmentBytes, segmentTreeData.startIndices);
   }
 
-  @NotNull
-  public static SegmentOffsetTree build(@NotNull BasedSegmentBuilder builder) {
-    @NotNull
-    SegmentTreeData segmentTreeData = buildTreeData(builder.getSegments(), builder.getText(), true);
-    return new SegmentTree(segmentTreeData.treeData, segmentTreeData.segmentBytes)
-        .getSegmentOffsetTree(builder.getBaseSequence());
-  }
-
-  @NotNull
-  public static SegmentOffsetTree build(@NotNull BasedSequence baseSeq) {
-    return baseSeq.getSegmentTree().getSegmentOffsetTree(baseSeq);
-  }
-
-  public int endOffset(int pos) {
-    return super.aggrLength(pos);
-  }
-
-  public int getStartIndex(int pos) {
-    return pos < 0
-        ? 0
-        : pos >= startIndices.length ? startIndices[startIndices.length - 1] : startIndices[pos];
-  }
-
   @Override
   @NotNull
   public Segment getSegment(int pos, @NotNull BasedSequence baseSeq) {
     return Segment.getSegment(segmentBytes, byteOffset(pos), pos, startIndices[pos], baseSeq);
-  }
-
-  public @Nullable SegmentTreePos findSegmentPosByOffset(int offset) {
-    return findSegmentPos(offset, treeData, 0, size());
   }
 
   @Nullable
@@ -153,12 +125,6 @@ public class SegmentOffsetTree extends SegmentTree {
   public int aggrLength(int pos) {
     // NOTE: used by toString() so can only deprecate
     return super.aggrLength(pos);
-  }
-
-  @Deprecated
-  @Override
-  public @Nullable SegmentTreePos findSegmentPos(int index) {
-    throw new IllegalStateException("Method in SegmentOffsetTree should not be used");
   }
 
   @Deprecated

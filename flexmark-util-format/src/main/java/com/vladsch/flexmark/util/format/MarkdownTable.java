@@ -14,7 +14,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.collection.MaxAggregator;
 import com.vladsch.flexmark.util.collection.MinAggregator;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.misc.ArrayUtils;
@@ -36,15 +35,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MarkdownTable {
-  public final TableSection header;
-  public final TableSection separator;
+  private final TableSection header;
+  private final TableSection separator;
   public final TableSection body;
-  public final TableSection caption;
-  public TableFormatOptions options;
+  final TableSection caption;
+  private TableFormatOptions options;
 
   private boolean isHeading;
   private boolean isSeparator;
-  CharSequence formatTableIndentPrefix;
+  private CharSequence formatTableIndentPrefix;
 
   // used by finalization and conversion to text
   private CellAlignment[] alignments;
@@ -57,8 +56,7 @@ public class MarkdownTable {
   private final TableSection[] allTableRows; // includes header, separator, body
   private final TableSection[] allContentRows; // header, body
   private final TableSection[] allHeaderRows; // header
-  private final TableSection[] allBodyRows; // body
-  public static final CharPredicate COLON_TRIM_CHARS = CharPredicate.anyOf(':');
+  private static final CharPredicate COLON_TRIM_CHARS = CharPredicate.anyOf(':');
   private final CharSequence tableChars;
 
   public static final NumericSuffixPredicate NO_SUFFIXES = s -> false;
@@ -76,10 +74,6 @@ public class MarkdownTable {
         }
       };
 
-  public MarkdownTable(@NotNull CharSequence tableChars, @Nullable DataHolder options) {
-    this(tableChars, new TableFormatOptions(options));
-  }
-
   public MarkdownTable(@NotNull CharSequence tableChars, @Nullable TableFormatOptions options) {
     this.tableChars = tableChars;
     this.formatTableIndentPrefix = options == null ? "" : options.formatTableIndentPrefix;
@@ -95,7 +89,6 @@ public class MarkdownTable {
     allTableRows = new TableSection[] {header, separator, body};
     allContentRows = new TableSection[] {header, body};
     allHeaderRows = new TableSection[] {header};
-    allBodyRows = new TableSection[] {body};
   }
 
   public CharSequence getTableChars() {
@@ -210,14 +203,9 @@ public class MarkdownTable {
     return max(headingColumns, separatorColumns, bodyColumns);
   }
 
-  public int getMinColumnsWithoutColumns(boolean withSeparator, int... skipColumns) {
+  int getMinColumnsWithoutColumns(boolean withSeparator, int... skipColumns) {
     return aggregateTotalColumnsWithoutColumns(
         withSeparator ? allTableRows : allContentRows, MinAggregator.INSTANCE, skipColumns);
-  }
-
-  public int getMaxColumnsWithoutColumns(boolean withSeparator, int... skipColumns) {
-    return aggregateTotalColumnsWithoutColumns(
-        withSeparator ? allTableRows : allContentRows, MaxAggregator.INSTANCE, skipColumns);
   }
 
   public int getMinColumnsWithoutRows(boolean withSeparator, int... skipRows) {
@@ -246,11 +234,6 @@ public class MarkdownTable {
       }
     }
     return null;
-  }
-
-  @Nullable
-  public TrackedOffset getTrackedOffset(int offset) {
-    return findTrackedOffset(offset);
   }
 
   public int getTrackedOffsetIndex(int offset) {
@@ -322,41 +305,6 @@ public class MarkdownTable {
     return new TableCellOffsetInfo(offset, this, lastSection, null, null, r, 0, null, null);
   }
 
-  /**
-   * @deprecated Use {@link #addTrackedOffset(TrackedOffset)} To create: TrackedOffset.track(offset)
-   */
-  @Deprecated
-  public boolean addTrackedOffset(int offset) {
-    return addTrackedOffset(TrackedOffset.track(offset, null, false));
-  }
-
-  /**
-   * @deprecated Use {@link #addTrackedOffset(TrackedOffset)} To create: TrackedOffset.track(offset,
-   *     afterSpace)
-   */
-  @Deprecated
-  public boolean addTrackedOffset(int offset, boolean afterSpace) {
-    return addTrackedOffset(TrackedOffset.track(offset, afterSpace ? ' ' : null, false));
-  }
-
-  /**
-   * @deprecated Use {@link #addTrackedOffset(TrackedOffset)} To create: TrackedOffset.track(offset,
-   *     afterSpace, afterDelete)
-   */
-  @Deprecated
-  public boolean addTrackedOffset(int offset, boolean afterSpace, boolean afterDelete) {
-    return addTrackedOffset(TrackedOffset.track(offset, afterSpace ? ' ' : null, afterDelete));
-  }
-
-  /**
-   * @deprecated Use {@link #addTrackedOffset(TrackedOffset)} To create: TrackedOffset.track(offset,
-   *     c, afterDelete)
-   */
-  @Deprecated
-  public boolean addTrackedOffset(int offset, Character c, boolean afterDelete) {
-    return addTrackedOffset(TrackedOffset.track(offset, c, afterDelete));
-  }
-
   public boolean addTrackedOffset(@NotNull TrackedOffset trackedOffset) {
     int offset = trackedOffset.getOffset();
     trackedOffsets.removeIf(it -> it.getOffset() == offset);
@@ -417,11 +365,7 @@ public class MarkdownTable {
     return rows;
   }
 
-  public boolean isAllRowsSeparator(int index) {
-    return index >= header.rows.size() && index < header.rows.size() + separator.rows.size();
-  }
-
-  public TableSection getAllRowsSection(int index) {
+  TableSection getAllRowsSection(int index) {
     for (TableSection section : allSections) {
       if (index < section.rows.size()) {
         return section;
@@ -443,64 +387,12 @@ public class MarkdownTable {
     return header.rows.size() + separator.rows.size() + body.rows.size() + caption.rows.size();
   }
 
-  public void forAllRows(TableRowManipulator manipulator) {
-    forAllSectionsRows(0, Integer.MAX_VALUE, allTableRows, manipulator);
-  }
-
-  public void forAllRows(int startIndex, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, Integer.MAX_VALUE, allTableRows, manipulator);
-  }
-
-  public void forAllRows(int startIndex, int count, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, count, allTableRows, manipulator);
-  }
-
-  public void forAllContentRows(TableRowManipulator manipulator) {
+  private void forAllContentRows(TableRowManipulator manipulator) {
     forAllSectionsRows(0, Integer.MAX_VALUE, allContentRows, manipulator);
   }
 
-  public void forAllContentRows(int startIndex, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, Integer.MAX_VALUE, allContentRows, manipulator);
-  }
-
-  public void forAllContentRows(int startIndex, int count, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, count, allContentRows, manipulator);
-  }
-
-  public void forAllSectionRows(TableRowManipulator manipulator) {
+  void forAllSectionRows(TableRowManipulator manipulator) {
     forAllSectionsRows(0, Integer.MAX_VALUE, allSections, manipulator);
-  }
-
-  public void forAllSectionRows(int startIndex, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, Integer.MAX_VALUE, allSections, manipulator);
-  }
-
-  public void forAllSectionRows(int startIndex, int count, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, count, allSections, manipulator);
-  }
-
-  public void forAllHeaderRows(TableRowManipulator manipulator) {
-    forAllSectionsRows(0, Integer.MAX_VALUE, allHeaderRows, manipulator);
-  }
-
-  public void forAllHeaderRows(int startIndex, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, Integer.MAX_VALUE, allHeaderRows, manipulator);
-  }
-
-  public void forAllHeaderRows(int startIndex, int count, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, count, allHeaderRows, manipulator);
-  }
-
-  public void forAllBodyRows(TableRowManipulator manipulator) {
-    forAllSectionsRows(0, Integer.MAX_VALUE, allBodyRows, manipulator);
-  }
-
-  public void forAllBodyRows(int startIndex, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, Integer.MAX_VALUE, allHeaderRows, manipulator);
-  }
-
-  public void forAllBodyRows(int startIndex, int count, TableRowManipulator manipulator) {
-    forAllSectionsRows(startIndex, count, allHeaderRows, manipulator);
   }
 
   public void deleteRows(int rowIndex, int count) {
@@ -668,17 +560,17 @@ public class MarkdownTable {
     isSeparator = separator;
   }
 
-  public void setHeader() {
+  private void setHeader() {
     isHeading = true;
     isSeparator = false;
   }
 
-  public void setSeparator() {
+  private void setSeparator() {
     isSeparator = true;
     isHeading = false;
   }
 
-  public void setBody() {
+  private void setBody() {
     isSeparator = false;
     isHeading = false;
   }
@@ -743,7 +635,7 @@ public class MarkdownTable {
     body.normalize();
   }
 
-  public void finalizeTable() {
+  private void finalizeTable() {
     // remove null cells
     normalize();
 
@@ -1279,7 +1171,8 @@ public class MarkdownTable {
     return sorted;
   }
 
-  int appendDashes(LineAppendable out, int dashCount, BasedSequence sepDashes, int dashOffset) {
+  private static int appendDashes(
+      LineAppendable out, int dashCount, BasedSequence sepDashes, int dashOffset) {
     int sepDashesLength = sepDashes.length();
     int remainingDashes = Math.max(0, sepDashesLength - dashOffset);
 
@@ -1571,14 +1464,6 @@ public class MarkdownTable {
       }
     }
     out.popOptions();
-  }
-
-  public static void appendFormattedCaption(
-      LineAppendable out, BasedSequence caption, TableFormatOptions options) {
-    String formattedCaption = formattedCaption(caption, options);
-    if (formattedCaption != null) {
-      out.line().append('[').append(formattedCaption).append(']').line();
-    }
   }
 
   public static String formattedCaption(BasedSequence caption, TableFormatOptions options) {
@@ -1887,13 +1772,11 @@ public class MarkdownTable {
     final int startColumn;
     final int columnSpan;
     final int width;
-    int additionalWidth;
 
     public ColumnSpan(int startColumn, int columnSpan, int width) {
       this.startColumn = startColumn;
       this.columnSpan = columnSpan;
       this.width = width;
-      this.additionalWidth = 0;
     }
   }
 
@@ -2001,8 +1884,8 @@ public class MarkdownTable {
   }
 
   public static class IndexSpanOffset {
-    public final int index;
-    public final int spanOffset;
+    final int index;
+    final int spanOffset;
 
     public IndexSpanOffset(int index, int spanOffset) {
       this.index = index;

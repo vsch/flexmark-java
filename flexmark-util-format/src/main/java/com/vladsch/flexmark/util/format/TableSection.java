@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableSection {
-  public final TableSectionType sectionType;
+  final TableSectionType sectionType;
   public final List<TableRow> rows = new ArrayList<>();
   protected int row;
   protected int column;
 
-  public TableSection(TableSectionType sectionType) {
+  TableSection(TableSectionType sectionType) {
     this.sectionType = sectionType;
 
     row = 0;
@@ -28,26 +28,22 @@ public class TableSection {
     return column;
   }
 
-  public void nextRow() {
+  void nextRow() {
     row++;
     column = 0;
   }
 
-  public void setCell(int row, int column, TableCell cell) {
-    expandTo(row).set(column, cell);
-  }
-
-  public void normalize() {
+  void normalize() {
     for (TableRow row : rows) {
       row.normalize();
     }
   }
 
-  public TableRow expandTo(int row) {
+  private TableRow expandTo(int row) {
     return expandTo(row, null);
   }
 
-  public TableRow expandTo(int row, TableCell cell) {
+  private TableRow expandTo(int row, TableCell cell) {
     while (row >= rows.size()) {
       TableRow tableRow = defaultRow();
       rows.add(tableRow);
@@ -55,11 +51,11 @@ public class TableSection {
     return rows.get(row);
   }
 
-  public TableRow expandTo(int row, int column) {
+  TableRow expandTo(int row, int column) {
     return expandTo(row, column, null);
   }
 
-  public TableRow expandTo(int row, int column, TableCell cell) {
+  private TableRow expandTo(int row, int column, TableCell cell) {
     while (row >= rows.size()) {
       TableRow tableRow = defaultRow();
       tableRow.expandTo(column, cell);
@@ -76,7 +72,7 @@ public class TableSection {
     return TableCell.NULL;
   }
 
-  public TableRow get(int row) {
+  TableRow get(int row) {
     return expandTo(row, null);
   }
 

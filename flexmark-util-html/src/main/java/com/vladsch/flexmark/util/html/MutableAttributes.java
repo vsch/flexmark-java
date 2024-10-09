@@ -71,18 +71,6 @@ public class MutableAttributes extends Attributes {
     return attribute;
   }
 
-  public Attribute removeValue(CharSequence key, CharSequence value) {
-    if (attributes == null || key == null || key.length() == 0) {
-      return null;
-    }
-
-    String useKey = String.valueOf(key);
-    Attribute oldAttribute = attributes.get(useKey);
-    Attribute attribute = oldAttribute.removeValue(value);
-    getAttributes().put(useKey, attribute);
-    return attribute;
-  }
-
   public Attribute remove(CharSequence key) {
     if (attributes == null || key == null || key.length() == 0) {
       return null;

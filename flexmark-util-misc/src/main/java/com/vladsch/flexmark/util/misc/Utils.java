@@ -11,10 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Utils {
-  static boolean isBlank(String receiver) {
-    return receiver == null || receiver.trim().isEmpty();
-  }
-
   // TODO: rewrite these to use BasedSequence implementation
   public static boolean isWhiteSpaceNoEOL(String receiver) {
     int iMax = receiver.length();
@@ -29,20 +25,6 @@ public class Utils {
 
   static String orEmpty(String receiver) {
     return receiver == null ? "" : receiver;
-  }
-
-  static String wrapWith(String receiver, char prefixSuffix) {
-    return wrapWith(receiver, prefixSuffix, prefixSuffix);
-  }
-
-  static String wrapWith(String receiver, char prefix, char suffix) {
-    return (receiver == null || receiver.isEmpty()) ? "" : prefix + receiver + suffix;
-  }
-
-  static String wrapWith(String receiver, String prefix, String suffix) {
-    return (receiver == null || receiver.isEmpty())
-        ? ""
-        : prefixWith(suffixWith(receiver, suffix), prefix);
   }
 
   public static String suffixWith(String receiver, char suffix) {
@@ -86,21 +68,6 @@ public class Utils {
     return orEmpty(receiver);
   }
 
-  static String prefixWith(String receiver, String prefix) {
-    return prefixWith(receiver, prefix, false);
-  }
-
-  static String prefixWith(String receiver, String prefix, boolean ignoreCase) {
-    if (receiver != null
-        && !receiver.isEmpty()
-        && prefix != null
-        && !prefix.isEmpty()
-        && !startsWith(receiver, prefix, ignoreCase)) {
-      return prefix + receiver;
-    }
-    return orEmpty(receiver);
-  }
-
   private static boolean endsWith(String receiver, String... needles) {
     return endsWith(receiver, false, needles);
   }
@@ -127,70 +94,6 @@ public class Utils {
     return false;
   }
 
-  public static boolean startsWith(String receiver, String... needles) {
-    return startsWith(receiver, false, needles);
-  }
-
-  public static boolean startsWith(String receiver, boolean ignoreCase, String... needles) {
-    if (receiver == null) {
-      return false;
-    }
-
-    if (ignoreCase) {
-      for (String needle : needles) {
-        if (receiver.length() >= needle.length()
-            && receiver.substring(0, needle.length()).equalsIgnoreCase(needle)) {
-          return true;
-        }
-      }
-    } else {
-      for (String needle : needles) {
-        if (receiver.startsWith(needle)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  static int count(String receiver, char c, int startIndex, int endIndex) {
-    if (receiver == null) {
-      return 0;
-    }
-
-    int count = 0;
-    int pos = startIndex;
-    int lastIndex = Math.min(receiver.length(), endIndex);
-    while (pos >= 0 && pos <= lastIndex) {
-      pos = receiver.indexOf(c, pos);
-      if (pos < 0) {
-        break;
-      }
-      count++;
-      pos++;
-    }
-    return count;
-  }
-
-  static int count(String receiver, String c, int startIndex, int endIndex) {
-    if (receiver == null) {
-      return 0;
-    }
-
-    int count = 0;
-    int pos = startIndex;
-    int lastIndex = Math.min(receiver.length(), endIndex);
-    while (pos >= 0 && pos <= lastIndex) {
-      pos = receiver.indexOf(c, pos);
-      if (pos < 0 || pos > lastIndex) {
-        break;
-      }
-      count++;
-      pos++;
-    }
-    return count;
-  }
-
   public static String urlDecode(String receiver, String charSet) {
     try {
       return URLDecoder.decode(receiver, charSet != null ? charSet : "UTF-8");
@@ -203,39 +106,6 @@ public class Utils {
     if (receiver != null) {
       if (receiver.startsWith(String.valueOf(prefix))) {
         return receiver.substring(1);
-      }
-      return receiver;
-    }
-    return "";
-  }
-
-  static String removePrefix(String receiver, String prefix) {
-    if (receiver != null) {
-      if (receiver.startsWith(String.valueOf(prefix))) {
-        return receiver.substring(prefix.length());
-      }
-      return receiver;
-    }
-    return "";
-  }
-
-  static String removeAnyPrefix(String receiver, String... prefixes) {
-    if (receiver != null) {
-      for (String prefix : prefixes) {
-        if (receiver.startsWith(String.valueOf(prefix))) {
-          return receiver.substring(prefix.length());
-        }
-      }
-      return receiver;
-    }
-    return "";
-  }
-
-  static String removePrefixIncluding(String receiver, String delimiter) {
-    if (receiver != null) {
-      int pos = receiver.indexOf(delimiter);
-      if (pos != -1) {
-        return receiver.substring(pos + delimiter.length());
       }
       return receiver;
     }
@@ -260,22 +130,6 @@ public class Utils {
       return receiver;
     }
     return "";
-  }
-
-  static String removeAnySuffix(String receiver, String... suffixes) {
-    if (receiver != null) {
-      for (String suffix : suffixes) {
-        if (receiver.endsWith(String.valueOf(suffix))) {
-          return receiver.substring(0, receiver.length() - suffix.length());
-        }
-      }
-      return receiver;
-    }
-    return "";
-  }
-
-  static String regexGroup(String receiver) {
-    return "(?:" + orEmpty(receiver) + ")";
   }
 
   static boolean regionMatches(
@@ -324,19 +178,6 @@ public class Utils {
     return result.toString();
   }
 
-  static String getAbbreviatedText(String text, int maxLength) {
-    if (text == null) {
-      return "";
-    }
-    if (text.length() <= maxLength || maxLength < 6) {
-      return text;
-    }
-
-    int prefix = maxLength / 2;
-    int suffix = maxLength - 3 - prefix;
-    return text.substring(0, prefix) + " … " + text.substring(text.length() - suffix);
-  }
-
   public static String splice(
       Collection<String> receiver, String delimiter, boolean skipNullOrEmpty) {
     StringBuilder result = new StringBuilder(receiver.size() * (delimiter.length() + 10));
@@ -352,36 +193,6 @@ public class Utils {
     }
     return result.toString();
   }
-
-  static String join(
-      String[] items, String prefix, String suffix, String itemPrefix, String itemSuffix) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(prefix);
-    for (String item : items) {
-      sb.append(itemPrefix).append(item).append(itemSuffix);
-    }
-    sb.append(suffix);
-    return sb.toString();
-  }
-
-  static String join(
-      Collection<String> items,
-      String prefix,
-      String suffix,
-      String itemPrefix,
-      String itemSuffix) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(prefix);
-    for (String item : items) {
-      sb.append(itemPrefix).append(item).append(itemSuffix);
-    }
-    sb.append(suffix);
-    return sb.toString();
-  }
-
-  /*
-    Limits and other numeric helpers
-  */
 
   public static int max(int receiver, int... others) {
     int max = receiver;
@@ -411,30 +222,6 @@ public class Utils {
     return Math.min(Math.max(receiver, minBound), maxBound);
   }
 
-  public static float max(float receiver, float... others) {
-    float max = receiver;
-    for (float other : others) {
-      if (max < other) max = other;
-    }
-    return max;
-  }
-
-  public static float min(float receiver, float... others) {
-    float min = receiver;
-    for (float other : others) {
-      if (min > other) min = other;
-    }
-    return min;
-  }
-
-  public static float minLimit(float receiver, float... minBound) {
-    return max(receiver, minBound);
-  }
-
-  public static float maxLimit(float receiver, float... maxBound) {
-    return min(receiver, maxBound);
-  }
-
   public static float rangeLimit(float receiver, float minBound, float maxBound) {
     return Math.min(Math.max(receiver, minBound), maxBound);
   }
@@ -454,14 +241,6 @@ public class Utils {
     } else {
       return Long.compare(n1.longValue(), n2.longValue());
     }
-  }
-
-  static <T extends Comparable<T>> int compareNullable(T i1, T i2) {
-    if (i1 == null || i2 == null) {
-      return 0;
-    }
-
-    return i1.compareTo(i2);
   }
 
   private static void streamAppend(StringBuilder sb, InputStream inputStream) {
@@ -531,5 +310,9 @@ public class Utils {
           break;
       }
     }
+  }
+
+  private Utils() {
+    throw new IllegalStateException();
   }
 }
