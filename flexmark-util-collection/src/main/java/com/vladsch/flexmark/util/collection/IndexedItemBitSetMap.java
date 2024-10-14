@@ -4,10 +4,10 @@ import java.util.BitSet;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
-public class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet, M> {
+class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet, M> {
   private final @NotNull Function<M, K> computable;
 
-  public IndexedItemBitSetMap(@NotNull Function<M, K> computable) {
+  IndexedItemBitSetMap(@NotNull Function<M, K> computable) {
     this(computable, 0);
   }
 

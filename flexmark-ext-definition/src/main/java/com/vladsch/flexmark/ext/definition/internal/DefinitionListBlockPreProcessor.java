@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
   private final DefinitionOptions options;
 
-  public DefinitionListBlockPreProcessor(DataHolder options) {
+  private DefinitionListBlockPreProcessor(DataHolder options) {
     this.options = new DefinitionOptions(options);
   }
 

@@ -16,7 +16,7 @@ public class IndexedItemIterator<R> implements ReversibleIndexedIterator<R> {
     this(items, false);
   }
 
-  public IndexedItemIterator(@NotNull Indexed<R> items, boolean isReversed) {
+  IndexedItemIterator(@NotNull Indexed<R> items, boolean isReversed) {
     this.items = items;
     reversed = isReversed;
     next = reversed ? items.size() - 1 : 0;

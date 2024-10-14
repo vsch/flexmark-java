@@ -38,12 +38,12 @@ public class TableJiraRenderer implements NodeRenderer {
     return tailBlankLine(node, 1, html);
   }
 
-  public boolean isLastBlockQuoteChild(Node node) {
+  private boolean isLastBlockQuoteChild(Node node) {
     Node parent = node.getParent();
     return parent instanceof BlockQuote && parent.getLastChild() == node;
   }
 
-  public HtmlWriter tailBlankLine(Node node, int count, HtmlWriter html) {
+  private HtmlWriter tailBlankLine(Node node, int count, HtmlWriter html) {
     if (isLastBlockQuoteChild(node)) {
       // Needed to not add block quote prefix to trailing blank lines
       // if (getPushedPrefixCount() > 0) {

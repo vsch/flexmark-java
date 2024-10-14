@@ -19,27 +19,10 @@ public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
    * @param factory data value factory for creating a new default value for the key for a non-null
    *     data holder
    */
-  public DataKeyBase(@NotNull String name, T defaultValue, @NotNull DataValueFactory<T> factory) {
+  DataKeyBase(@NotNull String name, T defaultValue, @NotNull DataValueFactory<T> factory) {
     this.name = name;
     this.defaultValue = defaultValue;
     this.factory = factory;
-  }
-
-  /**
-   * Creates a NullableDataKey with a dynamic default value taken from a value of another key
-   *
-   * <p>does not cache the returned default value but will always delegate to another key until this
-   * key gets its own value set.
-   *
-   * @param name See {@link #getName()}.
-   * @param defaultKey The NullableDataKey to take the default value from at time of construction.
-   */
-  public DataKeyBase(@NotNull String name, @NotNull DataKeyBase<T> defaultKey) {
-    this(name, defaultKey.defaultValue, defaultKey::get);
-  }
-
-  public DataKeyBase(@NotNull String name, T defaultValue) {
-    this(name, defaultValue, options -> defaultValue);
   }
 
   @NotNull
@@ -62,16 +45,6 @@ public abstract class DataKeyBase<T> implements MutableDataValueSetter<T> {
 
   public T get(@Nullable DataHolder holder) {
     return holder == null ? defaultValue : (T) holder.getOrCompute(this, this::getDefaultValue);
-  }
-
-  /**
-   * @param holder data holder
-   * @return return default value if holder is null, current value in holder or compute a new value
-   * @deprecated use get
-   */
-  @Deprecated
-  public final T getFrom(@Nullable DataHolder holder) {
-    return get(holder);
   }
 
   @Override

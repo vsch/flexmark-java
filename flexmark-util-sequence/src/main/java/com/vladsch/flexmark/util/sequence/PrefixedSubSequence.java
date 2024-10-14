@@ -167,11 +167,6 @@ public final class PrefixedSubSequence extends BasedSequenceImpl implements Repl
   }
 
   public static PrefixedSubSequence prefixOf(
-      CharSequence prefix, BasedSequence baseSeq, int startIndex) {
-    return prefixOf(prefix, baseSeq, startIndex, baseSeq.length());
-  }
-
-  public static PrefixedSubSequence prefixOf(
       CharSequence prefix, BasedSequence baseSeq, int startIndex, int endIndex) {
     return new PrefixedSubSequence(prefix, baseSeq, startIndex, endIndex);
   }

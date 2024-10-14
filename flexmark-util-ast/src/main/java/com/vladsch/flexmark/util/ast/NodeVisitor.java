@@ -64,7 +64,7 @@ import org.jetbrains.annotations.NotNull;
 public class NodeVisitor
     extends AstActionHandler<NodeVisitor, Node, Visitor<Node>, VisitHandler<Node>>
     implements NodeVisitHandler {
-  protected static final VisitHandler[] EMPTY_HANDLERS = new VisitHandler[0];
+  private static final VisitHandler[] EMPTY_HANDLERS = new VisitHandler[0];
 
   public NodeVisitor() {
     super(Node.AST_ADAPTER);
@@ -75,34 +75,12 @@ public class NodeVisitor
     super.addActionHandlers(handlers);
   }
 
-  public NodeVisitor(@NotNull VisitHandler[]... handlers) {
-    super(Node.AST_ADAPTER);
-    super.addActionHandlers(handlers);
-  }
-
-  public NodeVisitor(@NotNull Collection<VisitHandler> handlers) {
-    super(Node.AST_ADAPTER);
-    addHandlers(handlers);
-  }
-
-  // add handler variations
-  public @NotNull NodeVisitor addTypedHandlers(@NotNull Collection<VisitHandler<?>> handlers) {
+  private @NotNull NodeVisitor addHandlers(@NotNull Collection<VisitHandler> handlers) {
     return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
   }
 
-  public @NotNull NodeVisitor addHandlers(@NotNull Collection<VisitHandler> handlers) {
-    return super.addActionHandlers(handlers.toArray(EMPTY_HANDLERS));
-  }
-
-  public @NotNull NodeVisitor addHandlers(@NotNull VisitHandler[] handlers) {
-    return super.addActionHandlers(handlers);
-  }
-
-  public @NotNull NodeVisitor addHandlers(@NotNull VisitHandler[]... handlers) {
-    return super.addActionHandlers(handlers);
-  }
-
-  public @NotNull NodeVisitor addHandler(@NotNull VisitHandler handler) {
+  @NotNull
+  NodeVisitor addHandler(@NotNull VisitHandler handler) {
     return super.addActionHandler(handler);
   }
 

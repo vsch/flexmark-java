@@ -11,15 +11,7 @@ import org.jetbrains.annotations.NotNull;
  * TableCell#getOpeningMarker()} and {@link TableCell#getClosingMarker()}
  */
 class TableColumnSeparator extends Node implements DoNotDecorate {
-  public TableColumnSeparator() {}
-
-  public TableColumnSeparator(BasedSequence chars) {
-    super(chars);
-  }
-
-  public TableColumnSeparator(String chars) {
-    super(BasedSequence.of(chars));
-  }
+  TableColumnSeparator() {}
 
   @NotNull
   @Override

@@ -46,38 +46,38 @@ public class TablesExtension
   public static final DataKey<Boolean> WITH_CAPTION = new DataKey<>("WITH_CAPTION", true);
 
   // format options copy from TableFormatOptions
-  public static final DataKey<Boolean> FORMAT_TABLE_TRIM_CELL_WHITESPACE =
+  static final DataKey<Boolean> FORMAT_TABLE_TRIM_CELL_WHITESPACE =
       TableFormatOptions.FORMAT_TABLE_TRIM_CELL_WHITESPACE;
-  public static final DataKey<Boolean> FORMAT_TABLE_LEAD_TRAIL_PIPES =
+  static final DataKey<Boolean> FORMAT_TABLE_LEAD_TRAIL_PIPES =
       TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES;
-  public static final DataKey<Boolean> FORMAT_TABLE_SPACE_AROUND_PIPES =
+  static final DataKey<Boolean> FORMAT_TABLE_SPACE_AROUND_PIPES =
       TableFormatOptions.FORMAT_TABLE_SPACE_AROUND_PIPES;
-  public static final DataKey<Boolean> FORMAT_TABLE_ADJUST_COLUMN_WIDTH =
+  static final DataKey<Boolean> FORMAT_TABLE_ADJUST_COLUMN_WIDTH =
       TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH;
-  public static final DataKey<Boolean> FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT =
+  static final DataKey<Boolean> FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT =
       TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT;
-  public static final DataKey<Boolean> FORMAT_TABLE_FILL_MISSING_COLUMNS =
+  static final DataKey<Boolean> FORMAT_TABLE_FILL_MISSING_COLUMNS =
       TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS;
 
   // QUERY: is this still needed???
-  public static final NullableDataKey<Integer> FORMAT_TABLE_FILL_MISSING_MIN_COLUMN =
+  static final NullableDataKey<Integer> FORMAT_TABLE_FILL_MISSING_MIN_COLUMN =
       TableFormatOptions.FORMAT_TABLE_FILL_MISSING_MIN_COLUMN;
 
-  public static final DataKey<DiscretionaryText> FORMAT_TABLE_LEFT_ALIGN_MARKER =
+  static final DataKey<DiscretionaryText> FORMAT_TABLE_LEFT_ALIGN_MARKER =
       TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER;
-  public static final DataKey<Integer> FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH =
+  static final DataKey<Integer> FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH =
       TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH;
-  public static final DataKey<Integer> FORMAT_TABLE_MIN_SEPARATOR_DASHES =
+  static final DataKey<Integer> FORMAT_TABLE_MIN_SEPARATOR_DASHES =
       TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_DASHES;
-  public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER =
+  static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER =
       TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER;
-  public static final DataKey<TableManipulator> FORMAT_TABLE_MANIPULATOR =
+  static final DataKey<TableManipulator> FORMAT_TABLE_MANIPULATOR =
       TableFormatOptions.FORMAT_TABLE_MANIPULATOR;
-  public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION =
+  static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION =
       TableFormatOptions.FORMAT_TABLE_CAPTION;
-  public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES =
+  static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES =
       TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
-  public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX =
+  static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX =
       TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
 
   public static TablesExtension create() {
@@ -97,7 +97,7 @@ public class TablesExtension
 
   @Override
   public void extend(Parser.Builder parserBuilder) {
-    parserBuilder.paragraphPreProcessorFactory(TableParagraphPreProcessor.Factory());
+    parserBuilder.paragraphPreProcessorFactory(TableParagraphPreProcessor.factory());
   }
 
   @Override

@@ -6,12 +6,12 @@ import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 
-public class NodeIterable implements ReversiblePeekingIterable<Node> {
-  final Node firstNode;
-  final Node lastNode;
-  final boolean reversed;
+class NodeIterable implements ReversiblePeekingIterable<Node> {
+  private final Node firstNode;
+  private final Node lastNode;
+  private final boolean reversed;
 
-  public NodeIterable(Node firstNode, Node lastNode, boolean reversed) {
+  NodeIterable(Node firstNode, Node lastNode, boolean reversed) {
     this.firstNode = firstNode;
     this.lastNode = lastNode;
     this.reversed = reversed;
@@ -48,7 +48,7 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
     return new NodeIterator(firstNode, lastNode, !reversed);
   }
 
-  public static final ReversiblePeekingIterable<Node> EMPTY =
+  static final ReversiblePeekingIterable<Node> EMPTY =
       new ReversiblePeekingIterable<>() {
         @NotNull
         @Override

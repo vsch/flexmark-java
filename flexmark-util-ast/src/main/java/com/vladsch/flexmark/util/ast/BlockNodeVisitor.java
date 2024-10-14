@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.ast;
 
-import java.util.Collection;
 import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,14 +13,6 @@ public class BlockNodeVisitor extends NodeVisitor {
   public BlockNodeVisitor() {}
 
   public BlockNodeVisitor(@NotNull VisitHandler... handlers) {
-    super(handlers);
-  }
-
-  public BlockNodeVisitor(@NotNull VisitHandler[]... handlers) {
-    super(handlers);
-  }
-
-  public BlockNodeVisitor(@NotNull Collection<VisitHandler> handlers) {
     super(handlers);
   }
 

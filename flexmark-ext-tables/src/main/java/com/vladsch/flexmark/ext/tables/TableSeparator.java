@@ -15,8 +15,4 @@ public class TableSeparator extends Node implements DoNotDecorate, DoNotCollectT
   }
 
   public TableSeparator() {}
-
-  public TableSeparator(BasedSequence chars) {
-    super(chars);
-  }
 }

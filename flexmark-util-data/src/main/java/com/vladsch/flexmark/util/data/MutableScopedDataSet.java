@@ -8,15 +8,10 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MutableScopedDataSet extends MutableDataSet {
-  protected final DataHolder parent;
+class MutableScopedDataSet extends MutableDataSet {
+  private final DataHolder parent;
 
-  public MutableScopedDataSet(DataHolder parent) {
-    super();
-    this.parent = parent;
-  }
-
-  public MutableScopedDataSet(DataHolder parent, MutableDataHolder other) {
+  MutableScopedDataSet(DataHolder parent, MutableDataHolder other) {
     super(other);
     this.parent = parent;
   }

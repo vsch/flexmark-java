@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
  * then visit node's children visitNodeOnly() visit node and if no handler then do not process
  * children visitChildren() visit node's children
  */
-public interface NodeVisitHandler extends Visitor<Node> {
+interface NodeVisitHandler extends Visitor<Node> {
   void visitNodeOnly(@NotNull Node node);
 
   void visitChildren(@NotNull Node parent);

@@ -11,8 +11,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ClassificationBag<K, V> {
   private final @NotNull OrderedSet<V> items;
-  final @NotNull IndexedItemBitSetMap<K, V> bag;
-  final @Nullable CollectionHost<V> host;
+  private final @NotNull IndexedItemBitSetMap<K, V> bag;
+  private final @Nullable CollectionHost<V> host;
 
   public ClassificationBag(Function<V, K> mapper) {
     this(0, mapper);
@@ -93,16 +93,12 @@ public class ClassificationBag<K, V> {
     return items.remove(item);
   }
 
-  public boolean contains(@Nullable V item) {
-    return items.contains(item);
-  }
-
   public boolean containsCategory(@Nullable K category) {
     BitSet bitSet = bag.get(category);
     return bitSet != null && !bitSet.isEmpty();
   }
 
-  public int getCategoryCount(@Nullable K category) {
+  int getCategoryCount(@Nullable K category) {
     BitSet bitSet = bag.get(category);
     return bitSet == null ? 0 : bitSet.cardinality();
   }
@@ -126,13 +122,13 @@ public class ClassificationBag<K, V> {
         new BitSetIterable(categoriesBitSet(categories), false));
   }
 
-  public final <X> @NotNull ReversibleIterable<X> getCategoryItems(
+  final <X> @NotNull ReversibleIterable<X> getCategoryItems(
       @NotNull Class<? extends X> xClass, @NotNull BitSet bitSet) {
     return new IndexedIterable<X, V, ReversibleIterable<Integer>>(
         items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, false));
   }
 
-  public final <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(
+  final <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(
       @NotNull Class<? extends X> xClass, @NotNull BitSet bitSet) {
     return new IndexedIterable<X, V, ReversibleIterable<Integer>>(
         items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, true));

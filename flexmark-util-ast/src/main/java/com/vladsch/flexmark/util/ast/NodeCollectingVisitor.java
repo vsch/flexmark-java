@@ -11,7 +11,7 @@ import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 
 public class NodeCollectingVisitor {
-  public static final Function<Node, Class<?>> NODE_CLASSIFIER = Node::getClass;
+  private static final Function<Node, Class<?>> NODE_CLASSIFIER = Node::getClass;
   private static final Class<?>[] EMPTY_CLASSES = new Class<?>[0];
 
   private final @NotNull HashMap<Class<?>, List<Class<?>>> subClassMap;

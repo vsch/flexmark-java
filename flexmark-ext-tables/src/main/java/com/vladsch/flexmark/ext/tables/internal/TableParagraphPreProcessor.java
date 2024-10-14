@@ -102,7 +102,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         });
   }
 
-  public static ParagraphPreProcessorFactory Factory() {
+  public static ParagraphPreProcessorFactory factory() {
     return new ParagraphPreProcessorFactory() {
       @Override
       public boolean affectsGlobalScope() {
@@ -131,15 +131,15 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
   }
 
   private final TableParserOptions options;
-  Pattern TABLE_HEADER_SEPARATOR;
+  private final Pattern tableHeaderSeparator;
 
-  public static Pattern getTableHeaderSeparator(
+  private static Pattern getTableHeaderSeparator(
       int minColumnDashes, String intellijDummyIdentifier) {
     int minCol = minColumnDashes >= 1 ? minColumnDashes : 1;
     int minColDash = minColumnDashes >= 2 ? minColumnDashes - 1 : 1;
     int minColDashes = minColumnDashes >= 3 ? minColumnDashes - 2 : 1;
     // to prevent conversion to arabic numbers, using string
-    String COL =
+    String col =
         String.format(
             Locale.US,
             "(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")",
@@ -153,21 +153,20 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     String sp = noIntelliJ ? "\\s" : "(?:\\s" + add + "?)";
     String ds = noIntelliJ ? "-" : "(?:-" + add + "?)";
     String pipe = noIntelliJ ? "\\|" : "(?:" + add + "?\\|" + add + "?)";
-    // COL = COL.replace("\\s", sp).replace("-", ds);
 
     String regex =
         "\\|"
-            + COL
+            + col
             + "\\|?\\s*"
             + "|"
-            + COL
+            + col
             + "\\|\\s*"
             + "|"
             + "\\|?"
             + "(?:"
-            + COL
+            + col
             + "\\|)+"
-            + COL
+            + col
             + "\\|?\\s*";
 
     String withIntelliJ = regex.replace("\\s", sp).replace("\\|", pipe).replace("-", ds);
@@ -177,9 +176,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
   private TableParagraphPreProcessor(DataHolder options) {
     this.options = new TableParserOptions(options);
-    // isIntellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
-    // intellijDummyIdentifier = isIntellijDummyIdentifier ? INTELLIJ_DUMMY_IDENTIFIER : "";
-    this.TABLE_HEADER_SEPARATOR = getTableHeaderSeparator(this.options.minSeparatorDashes, "");
+    this.tableHeaderSeparator = getTableHeaderSeparator(this.options.minSeparatorDashes, "");
   }
 
   private static class TableSeparatorRow extends TableRow implements DoNotDecorate {
@@ -224,7 +221,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
       if (separatorLineNumber == -1) {
         if (rowNumber >= options.minHeaderRows
-            && TABLE_HEADER_SEPARATOR.matcher(trimmedRowLine).matches()) {
+            && tableHeaderSeparator.matcher(trimmedRowLine).matches()) {
           // must start with | or cell, whitespace means its not a separator line
           if (rowLine.charAt(0) != ' ' && rowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|') {
             separatorLineNumber = rowNumber;
@@ -323,8 +320,6 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
           break;
         }
 
-        // TableCell tableCell = rowNumber == separatorLineNumber ? new TableSeparatorCell() : new
-        // TableCell();
         TableCell tableCell = new TableCell();
 
         if (firstCell && nodes.peek() instanceof TableColumnSeparator) {
@@ -440,7 +435,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     return tableBlock.getChars().length();
   }
 
-  List<Node> cleanUpInlinedSeparators(
+  private List<Node> cleanUpInlinedSeparators(
       InlineParser inlineParser, TableRow tableRow, List<Node> sepList) {
     // any separators which do not have tableRow as parent are embedded into inline elements and
     // should be

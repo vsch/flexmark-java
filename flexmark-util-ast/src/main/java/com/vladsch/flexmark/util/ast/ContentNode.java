@@ -2,29 +2,28 @@ package com.vladsch.flexmark.util.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
-import java.util.ArrayList;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class ContentNode extends Node implements Content {
+abstract class ContentNode extends Node implements Content {
   protected List<BasedSequence> lineSegments = BasedSequence.EMPTY_LIST;
 
-  public ContentNode() {}
+  protected ContentNode() {}
 
-  public ContentNode(@NotNull BasedSequence chars) {
+  protected ContentNode(@NotNull BasedSequence chars) {
     super(chars);
   }
 
-  public ContentNode(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
+  protected ContentNode(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
     super(chars);
     this.lineSegments = lineSegments;
   }
 
-  public ContentNode(@NotNull List<BasedSequence> lineSegments) {
+  protected ContentNode(@NotNull List<BasedSequence> lineSegments) {
     this(getSpanningChars(lineSegments), lineSegments);
   }
 
-  public ContentNode(@NotNull BlockContent blockContent) {
+  protected ContentNode(@NotNull BlockContent blockContent) {
     this(blockContent.getSpanningChars(), blockContent.getLines());
   }
 
@@ -100,12 +99,5 @@ public abstract class ContentNode extends Node implements Content {
 
   public void setContentLines(@NotNull List<BasedSequence> contentLines) {
     this.lineSegments = contentLines;
-  }
-
-  public void setContentLine(int lineIndex, @NotNull BasedSequence contentLine) {
-    List<BasedSequence> lines = new ArrayList<>(lineSegments);
-    lines.set(lineIndex, contentLine);
-    this.lineSegments = lines;
-    setCharsFromContent();
   }
 }

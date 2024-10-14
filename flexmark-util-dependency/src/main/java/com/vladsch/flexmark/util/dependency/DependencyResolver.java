@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class DependencyResolver {
   public static <D extends Dependent> @NotNull List<D> resolveFlatDependencies(
       @NotNull List<D> dependentsList,
-      @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter,
+      @Nullable UnaryOperator<DependentItemMap<D>> itemSorter,
       @Nullable Function<? super D, Class<?>> classExtractor) {
     List<List<D>> list = resolveDependencies(dependentsList, itemSorter, classExtractor);
     if (list.isEmpty()) {
@@ -38,9 +39,9 @@ public class DependencyResolver {
 
   public static <D extends Dependent> @NotNull List<List<D>> resolveDependencies(
       @NotNull List<D> dependentsList,
-      @Nullable Function<DependentItemMap<D>, DependentItemMap<D>> itemSorter,
+      @Nullable UnaryOperator<DependentItemMap<D>> itemSorter,
       @Nullable Function<? super D, Class<?>> classExtractor) {
-    if (dependentsList.size() == 0) {
+    if (dependentsList.isEmpty()) {
       return Collections.emptyList();
     } else if (dependentsList.size() == 1) {
       return Collections.singletonList(dependentsList);
@@ -59,11 +60,7 @@ public class DependencyResolver {
                   + " is duplicated. Only one instance can be present in the list");
         }
         DependentItem<D> item =
-            new DependentItem<>(
-                dependentItemMap.size(),
-                dependent,
-                classExtractor.apply(dependent),
-                dependent.affectsGlobalScope());
+            new DependentItem<>(dependentItemMap.size(), dependent, dependent.affectsGlobalScope());
         dependentItemMap.put(dependentClass, item);
       }
 
@@ -71,7 +68,7 @@ public class DependencyResolver {
         DependentItem<D> item = entry.getValue();
         Set<Class<?>> afterDependencies = item.dependent.getAfterDependents();
 
-        if (afterDependencies != null && afterDependencies.size() > 0) {
+        if (afterDependencies != null && !afterDependencies.isEmpty()) {
           for (Class<?> dependentClass : afterDependencies) {
             if (dependentClass == LastDependent.class) {
               // must come after all others
@@ -92,7 +89,7 @@ public class DependencyResolver {
         }
 
         Set<Class<?>> beforeDependents = item.dependent.getBeforeDependents();
-        if (beforeDependents != null && beforeDependents.size() > 0) {
+        if (beforeDependents != null && !beforeDependents.isEmpty()) {
           for (Class<?> dependentClass : beforeDependents) {
             if (dependentClass == FirstDependent.class) {
               // must come before all others

@@ -413,7 +413,7 @@ public class Parser implements IParse {
   private final InlineParserFactory inlineParserFactory;
   private final @NotNull DataHolder options;
 
-  Parser(Builder builder) {
+  private Parser(Builder builder) {
     DataSet options = builder.toImmutable();
     this.blockParserFactories =
         DocumentParser.calculateBlockParserFactories(options, builder.blockParserFactories);

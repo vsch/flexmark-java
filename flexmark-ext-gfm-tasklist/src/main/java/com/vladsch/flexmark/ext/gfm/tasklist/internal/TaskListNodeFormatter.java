@@ -128,7 +128,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
     renderList(node, context, markdown);
   }
 
-  public static boolean hasIncompleteDescendants(Node node) {
+  private static boolean hasIncompleteDescendants(Node node) {
     Node item = node.getFirstChild();
     while (item != null) {
       if (item instanceof TaskListItem) {
@@ -145,7 +145,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
     return false;
   }
 
-  public int taskItemPriority(Node node) {
+  private int taskItemPriority(Node node) {
     if (node instanceof TaskListItem) {
       if (((TaskListItem) node).isOrderedItem()) {
         return taskListFormatOptions.formatOrderedTaskItemPriority;
@@ -165,7 +165,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
     return Integer.MIN_VALUE;
   }
 
-  public int itemPriority(Node node) {
+  private int itemPriority(Node node) {
     Node item = node.getFirstChild();
     int priority = Integer.MIN_VALUE;
 
@@ -190,7 +190,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
     return priority;
   }
 
-  public void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
+  private void renderList(ListBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
     if (context.isTransformingText()) {
       context.renderChildren(node);
     } else {

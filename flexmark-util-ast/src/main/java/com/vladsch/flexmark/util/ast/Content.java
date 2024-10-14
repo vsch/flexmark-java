@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 /** A node that uses delimiters in the source form (e.g. <code>*bold*</code>). */
-public interface Content {
+interface Content {
   @NotNull
   BasedSequence getSpanningChars();
 

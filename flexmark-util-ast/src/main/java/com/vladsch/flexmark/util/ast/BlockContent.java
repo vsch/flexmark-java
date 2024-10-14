@@ -11,12 +11,8 @@ public class BlockContent {
   private final List<BasedSequence> lines = new ArrayList<>();
   private final List<Integer> lineIndents = new ArrayList<>();
 
-  public @NotNull BasedSequence getLine(int line) {
-    return lines.get(line);
-  }
-
   public @NotNull BasedSequence getSpanningChars() {
-    return lines.size() > 0
+    return !lines.isEmpty()
         ? lines
             .get(0)
             .baseSubSequence(
@@ -38,29 +34,20 @@ public class BlockContent {
 
   public BlockContent() {}
 
-  public BlockContent(@NotNull BlockContent other, int startLine, int lineIndent) {
-    // copy content from other
-
-    if (other.lines.size() > 0 && startLine < lineIndent) {
-      lines.addAll(other.lines.subList(startLine, lineIndent));
-      lineIndents.addAll(other.lineIndents.subList(startLine, lineIndent));
-    }
-  }
-
   public int getStartOffset() {
-    return lines.size() > 0 ? lines.get(0).getStartOffset() : -1;
+    return !lines.isEmpty() ? lines.get(0).getStartOffset() : -1;
   }
 
   public int getEndOffset() {
-    return lines.size() > 0 ? lines.get(lines.size() - 1).getEndOffset() : -1;
+    return !lines.isEmpty() ? lines.get(lines.size() - 1).getEndOffset() : -1;
   }
 
   public int getLineIndent() {
-    return lines.size() > 0 ? lineIndents.get(0) : 0;
+    return !lines.isEmpty() ? lineIndents.get(0) : 0;
   }
 
   public int getSourceLength() {
-    return lines.size() > 0
+    return !lines.isEmpty()
         ? lines.get(lines.size() - 1).getEndOffset() - lines.get(0).getStartOffset()
         : -1;
   }
@@ -75,23 +62,15 @@ public class BlockContent {
     this.lineIndents.addAll(lineIndents);
   }
 
-  public boolean hasSingleLine() {
-    return lines.size() == 1;
-  }
-
   public @NotNull BasedSequence getContents() {
-    if (lines.size() == 0) {
+    if (lines.isEmpty()) {
       return BasedSequence.NULL;
     }
     return getContents(0, lines.size());
   }
 
-  public @NotNull BlockContent subContents(int startLine, int endLine) {
-    return new BlockContent(this, startLine, endLine);
-  }
-
-  public @NotNull BasedSequence getContents(int startLine, int endLine) {
-    if (lines.size() == 0) {
+  private @NotNull BasedSequence getContents(int startLine, int endLine) {
+    if (lines.isEmpty()) {
       return BasedSequence.NULL;
     }
 
@@ -112,7 +91,7 @@ public class BlockContent {
   }
 
   public @NotNull String getString() {
-    if (lines.size() == 0) {
+    if (lines.isEmpty()) {
       return "";
     }
 

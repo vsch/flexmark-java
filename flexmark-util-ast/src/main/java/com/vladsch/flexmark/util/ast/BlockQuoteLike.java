@@ -8,6 +8,4 @@ public interface BlockQuoteLike {
   Node getFirstChild();
 
   BasedSequence getChars();
-
-  Document getDocument();
 }

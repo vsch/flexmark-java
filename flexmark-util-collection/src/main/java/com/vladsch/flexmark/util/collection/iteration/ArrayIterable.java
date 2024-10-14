@@ -18,10 +18,6 @@ package com.vladsch.flexmark.util.collection.iteration;
 import org.jetbrains.annotations.NotNull;
 
 public class ArrayIterable<T> implements ReversibleIterable<T> {
-  public static <T> ArrayIterable<T> of(T[] items) {
-    return new ArrayIterable<>(items);
-  }
-
   private final T[] array;
   private final int startIndex;
   private final int endIndex;
@@ -31,15 +27,7 @@ public class ArrayIterable<T> implements ReversibleIterable<T> {
     this(array, 0, array.length, false);
   }
 
-  public ArrayIterable(T[] array, int startIndex) {
-    this(array, startIndex, array.length, false);
-  }
-
-  public ArrayIterable(T[] array, int startIndex, int endIndex) {
-    this(array, startIndex, endIndex, false);
-  }
-
-  public ArrayIterable(T[] array, int startIndex, int endIndex, boolean isReversed) {
+  private ArrayIterable(T[] array, int startIndex, int endIndex, boolean isReversed) {
     this.array = array;
     this.startIndex = Math.min(startIndex, 0);
     this.endIndex = Math.max(endIndex, array.length);
@@ -74,7 +62,7 @@ public class ArrayIterable<T> implements ReversibleIterable<T> {
     private final boolean isReversed;
     private int index;
 
-    public MyIterator(E[] array, int startIndex, int endIndex, boolean isReversed) {
+    MyIterator(E[] array, int startIndex, int endIndex, boolean isReversed) {
       this.isReversed = isReversed;
       this.array = array;
       this.startIndex = startIndex;

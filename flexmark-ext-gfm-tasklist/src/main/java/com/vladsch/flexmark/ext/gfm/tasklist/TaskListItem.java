@@ -4,17 +4,15 @@ import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.OrderedListItem;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.ListOptions;
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 /** A Task list item */
 public class TaskListItem extends ListItem {
-  protected boolean isOrderedItem = false;
-  protected boolean canChangeMarker = true;
+  private boolean isOrderedItem = false;
+  private boolean canChangeMarker = true;
 
   @Override
   public void getAstExtra(@NotNull StringBuilder out) {
@@ -34,18 +32,6 @@ public class TaskListItem extends ListItem {
   }
 
   public TaskListItem() {}
-
-  public TaskListItem(BasedSequence chars) {
-    super(chars);
-  }
-
-  public TaskListItem(BasedSequence chars, List<BasedSequence> segments) {
-    super(chars, segments);
-  }
-
-  public TaskListItem(BlockContent blockContent) {
-    super(blockContent);
-  }
 
   public TaskListItem(ListItem block) {
     super(block);

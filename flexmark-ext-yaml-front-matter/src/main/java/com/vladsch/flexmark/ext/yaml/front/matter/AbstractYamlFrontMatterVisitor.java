@@ -6,20 +6,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AbstractYamlFrontMatterVisitor implements YamlFrontMatterVisitor {
+class AbstractYamlFrontMatterVisitor implements YamlFrontMatterVisitor {
   private final Map<String, List<String>> data;
   private final NodeVisitor myVisitor;
 
-  public AbstractYamlFrontMatterVisitor() {
-    // myVisitor = new NodeVisitor(
-    //        new VisitHandler<>(YamlFrontMatterNode.class, this::visit),
-    //        new VisitHandler<>(YamlFrontMatterBlock.class, this::visit)
-    // );
-    myVisitor = new NodeVisitor(YamlFrontMatterVisitorExt.VISIT_HANDLERS(this));
+  AbstractYamlFrontMatterVisitor() {
+    myVisitor = new NodeVisitor(YamlFrontMatterVisitorExt.visitHandlers(this));
     data = new LinkedHashMap<>();
   }
 
-  public void visit(Node node) {
+  void visit(Node node) {
     myVisitor.visit(node);
   }
 
@@ -33,7 +29,7 @@ public class AbstractYamlFrontMatterVisitor implements YamlFrontMatterVisitor {
     myVisitor.visitChildren(node);
   }
 
-  public Map<String, List<String>> getData() {
+  Map<String, List<String>> getData() {
     return data;
   }
 }

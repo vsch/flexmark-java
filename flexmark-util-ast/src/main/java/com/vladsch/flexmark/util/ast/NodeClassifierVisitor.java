@@ -90,17 +90,17 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     }
   }
 
-  void pushNodeAncestry() {
+  private void pushNodeAncestry() {
     if (!exclusionMap.isEmpty()) {
       nodeAncestryBitSetStack.push(nodeAncestryBitSet.getImmutable());
     }
   }
 
-  void popNodeAncestry() {
+  private void popNodeAncestry() {
     nodeAncestryBitSet.setValue(nodeAncestryBitSetStack.pop());
   }
 
-  boolean updateNodeAncestry(Node node, CopyOnWriteRef<BitSet> nodeAncestryBitSet) {
+  private boolean updateNodeAncestry(Node node, CopyOnWriteRef<BitSet> nodeAncestryBitSet) {
     if (!exclusionMap.isEmpty() && !(node instanceof Document)) {
       // add flags if needed
       BitSet bitSet = nodeAncestryBitSet.getPeek();

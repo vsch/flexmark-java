@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class TextCollectingVisitor {
   private final NodeVisitor myVisitor;
-  SpaceInsertingSequenceBuilder out;
-  int flags; // flags defined by TextContainer
+  private SpaceInsertingSequenceBuilder out;
+  private int flags; // flags defined by TextContainer
 
   public TextCollectingVisitor() {
     myVisitor =
@@ -50,19 +50,11 @@ public class TextCollectingVisitor {
     return out.toSequence();
   }
 
-  public void collect(Node node) {
-    collect(node, 0);
-  }
-
   public String collectAndGetText(Node node) {
     return collectAndGetText(node, 0);
   }
 
-  public BasedSequence collectAndGetSequence(Node node) {
-    return collectAndGetSequence(node, 0);
-  }
-
-  public void collect(Node node, int flags) {
+  private void collect(Node node, int flags) {
     out = SpaceInsertingSequenceBuilder.emptyBuilder(node.getChars(), flags);
     this.flags = flags;
     myVisitor.visit(node);
@@ -71,10 +63,5 @@ public class TextCollectingVisitor {
   public String collectAndGetText(Node node, int flags) {
     collect(node, flags);
     return out.toString();
-  }
-
-  public BasedSequence collectAndGetSequence(Node node, int flags) {
-    collect(node, flags);
-    return out.toSequence();
   }
 }

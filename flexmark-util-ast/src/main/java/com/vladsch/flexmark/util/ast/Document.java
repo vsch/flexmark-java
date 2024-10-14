@@ -19,8 +19,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Document extends Block implements MutableDataHolder {
-  public static final Document NULL = new Document(null, BasedSequence.NULL);
-
   private final MutableDataSet dataSet;
 
   @Override
@@ -62,10 +60,6 @@ public class Document extends Block implements MutableDataHolder {
     return dataSet.setAll(other);
   }
 
-  public static MutableDataSet merge(DataHolder... dataHolders) {
-    return MutableDataSet.merge(dataHolders);
-  }
-
   @NotNull
   @Override
   public MutableDataHolder setIn(@NotNull MutableDataHolder dataHolder) {
@@ -100,22 +94,6 @@ public class Document extends Block implements MutableDataHolder {
   @NotNull
   public MutableDataSet toDataSet() {
     return dataSet.toDataSet();
-  }
-
-  @NotNull
-  public static DataHolder aggregateActions(
-      @NotNull DataHolder other, @NotNull DataHolder overrides) {
-    return DataSet.aggregateActions(other, overrides);
-  }
-
-  @NotNull
-  public DataHolder aggregate() {
-    return dataSet.aggregate();
-  }
-
-  @NotNull
-  public static DataHolder aggregate(@Nullable DataHolder other, @Nullable DataHolder overrides) {
-    return DataSet.aggregate(other, overrides);
   }
 
   @Override
@@ -154,7 +132,7 @@ public class Document extends Block implements MutableDataHolder {
    * @param offset offset in document text
    * @return line number at offset
    */
-  public int getLineNumber(int offset) {
+  int getLineNumber(int offset) {
     if (lineSegments == EMPTY_LIST) {
       BasedSequence preText =
           getChars().baseSubSequence(0, Utils.maxLimit(offset + 1, getChars().length()));

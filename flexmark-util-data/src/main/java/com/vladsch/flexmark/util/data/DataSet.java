@@ -16,7 +16,7 @@ public class DataSet implements DataHolder {
     this(null);
   }
 
-  public DataSet(@Nullable DataHolder other) {
+  DataSet(@Nullable DataHolder other) {
     if (other == null) {
       dataSet = new HashMap<>();
     } else {
@@ -105,15 +105,6 @@ public class DataSet implements DataHolder {
   }
 
   @NotNull
-  public static DataSet merge(@NotNull DataHolder... dataHolders) {
-    DataSet dataSet = new DataSet();
-    for (DataHolder dataHolder : dataHolders) {
-      dataSet.dataSet.putAll(dataHolder.getAll());
-    }
-    return dataSet;
-  }
-
-  @NotNull
   @Override
   public MutableDataSet toMutable() {
     return new MutableDataSet(this);
@@ -158,7 +149,7 @@ public class DataSet implements DataHolder {
     ourDataKeyAggregators.add(keyAggregator);
   }
 
-  static boolean isAggregatorRegistered(@NotNull DataKeyAggregator keyAggregator) {
+  private static boolean isAggregatorRegistered(@NotNull DataKeyAggregator keyAggregator) {
     for (DataKeyAggregator aggregator : ourDataKeyAggregators) {
       if (aggregator.getClass() == keyAggregator.getClass()) {
         return true;
@@ -167,7 +158,7 @@ public class DataSet implements DataHolder {
     return false;
   }
 
-  static boolean invokeSetContains(
+  private static boolean invokeSetContains(
       @Nullable Set<Class<?>> invokeSet, @NotNull DataKeyAggregator aggregator) {
     if (invokeSet == null) {
       return false;

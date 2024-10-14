@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
-  protected final List<T> nodeList = new ArrayList<>();
-  protected final Map<String, T> nodeMap = new HashMap<>();
-  protected final KeepType keepType;
+  private final List<T> nodeList = new ArrayList<>();
+  private final Map<String, T> nodeMap = new HashMap<>();
+  private final KeepType keepType;
 
   public abstract @NotNull DataKey<? extends NodeRepository<T>> getDataKey();
 
@@ -35,20 +35,12 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     visitor.visit(parent);
   }
 
-  public NodeRepository(@Nullable KeepType keepType) {
+  protected NodeRepository(@Nullable KeepType keepType) {
     this.keepType = keepType == null ? KeepType.LOCKED : keepType;
   }
 
   public @NotNull String normalizeKey(@NotNull CharSequence key) {
     return key.toString();
-  }
-
-  public @Nullable T getFromRaw(@NotNull CharSequence rawKey) {
-    return nodeMap.get(normalizeKey(rawKey));
-  }
-
-  public @Nullable T putRawKey(@NotNull CharSequence key, @NotNull T t) {
-    return put(normalizeKey(key), t);
   }
 
   public @NotNull Collection<T> getValues() {

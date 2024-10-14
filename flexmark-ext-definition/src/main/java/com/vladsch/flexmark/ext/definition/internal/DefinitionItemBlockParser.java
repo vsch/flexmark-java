@@ -37,7 +37,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
   private final ItemData itemData;
   private boolean hadBlankLine;
 
-  DefinitionItemBlockParser(DataHolder options, ItemData itemData) {
+  private DefinitionItemBlockParser(DataHolder options, ItemData itemData) {
     this.options = new DefinitionOptions(options);
     this.itemData = itemData;
     this.block = new DefinitionItem();
@@ -46,13 +46,11 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
   }
 
   static class ItemData {
-    final boolean isEmpty;
-    final boolean isTight;
-    final int markerIndex;
-    final int markerColumn;
-    final int markerIndent;
-    final int contentOffset;
-    final BasedSequence itemMarker;
+    private final boolean isTight;
+    private final int markerColumn;
+    private final int markerIndent;
+    private final int contentOffset;
+    private final BasedSequence itemMarker;
 
     ItemData(
         boolean isEmpty,
@@ -62,9 +60,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
         int markerIndent,
         int contentOffset,
         BasedSequence itemMarker) {
-      this.isEmpty = isEmpty;
       this.isTight = isTight;
-      this.markerIndex = markerIndex;
       this.markerColumn = markerColumn;
       this.markerIndent = markerIndent;
       this.contentOffset = contentOffset;
@@ -91,7 +87,8 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     return true;
   }
 
-  static ItemData parseItemMarker(DefinitionOptions options, ParserState state, boolean isTight) {
+  private static ItemData parseItemMarker(
+      DefinitionOptions options, ParserState state, boolean isTight) {
     BasedSequence line = state.getLine();
     int markerIndex = state.getNextNonSpaceIndex();
     int markerColumn = state.getColumn() + state.getIndent();
@@ -255,7 +252,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     }
   }
 
-  static class DefinitionLeadInHandler {
+  private static class DefinitionLeadInHandler {
     static final SpecialLeadInHandler HANDLER_COLON_TILDE = SpecialLeadInCharsHandler.create(":~");
     static final SpecialLeadInHandler HANDLER_COLON = SpecialLeadInCharsHandler.create(":");
     static final SpecialLeadInHandler HANDLER_TILDE = SpecialLeadInCharsHandler.create("~");

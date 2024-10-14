@@ -4,7 +4,6 @@ import static com.vladsch.flexmark.util.data.SharedDataKeys.EXTENSIONS;
 
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
-import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.misc.Extension;
@@ -143,30 +142,5 @@ public abstract class BuilderBase<T extends BuilderBase<T>> extends MutableDataS
 
   protected BuilderBase() {
     super();
-  }
-
-  /**
-   * Remove given extensions from options[EXTENSIONS] data key.
-   *
-   * @param options options where EXTENSIONS key is set
-   * @param excludeExtensions collection of extension classes to remove from extensions
-   * @return modified options if removed and options were immutable or the same options if nothing
-   *     to remove or options were mutable.
-   */
-  public static DataHolder removeExtensions(
-      @NotNull DataHolder options,
-      @NotNull Collection<Class<? extends Extension>> excludeExtensions) {
-    if (options.contains(EXTENSIONS)) {
-      List<Extension> extensions = new ArrayList<>(EXTENSIONS.get(options));
-      boolean removed = extensions.removeIf(it -> excludeExtensions.contains(it.getClass()));
-      if (removed) {
-        if (options instanceof MutableDataHolder) {
-          return ((MutableDataHolder) options).set(EXTENSIONS, extensions);
-        }
-
-        return options.toMutable().set(EXTENSIONS, extensions).toImmutable();
-      }
-    }
-    return options;
   }
 }

@@ -9,12 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ScopedDataSet extends DataSet {
-  protected final DataHolder parent;
-
-  public ScopedDataSet(@Nullable DataHolder parent) {
-    super();
-    this.parent = parent;
-  }
+  private final DataHolder parent;
 
   public ScopedDataSet(@Nullable DataHolder parent, @Nullable DataHolder other) {
     super(other);

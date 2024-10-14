@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
+class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
   private final boolean isReversed;
   private @NotNull ReversiblePeekingIterator<Node> iterator;
   private @Nullable Stack<ReversiblePeekingIterator<Node>> iteratorStack;
@@ -17,7 +17,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
    *
    * @param iterator iterator to use for iterating nodes and their descendants
    */
-  public DescendantNodeIterator(@NotNull ReversiblePeekingIterator<Node> iterator) {
+  DescendantNodeIterator(@NotNull ReversiblePeekingIterator<Node> iterator) {
     this.isReversed = iterator.isReversed();
     this.iterator =
         iterator instanceof DescendantNodeIterator

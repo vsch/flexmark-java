@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class Node {
-  public static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
-  public static final String SPLICE = " … ";
+  protected static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
+  private static final String SPLICE = " … ";
 
   public static final AstNode<Node> AST_ADAPTER =
       new AstNode<>() {
@@ -31,15 +31,15 @@ public abstract class Node {
       };
 
   private @Nullable Node parent = null;
-  @Nullable Node firstChild = null;
+  @Nullable private Node firstChild = null;
   private @Nullable Node lastChild = null;
   private @Nullable Node prev = null;
-  @Nullable Node next = null;
+  @Nullable private Node next = null;
   private @NotNull BasedSequence chars = BasedSequence.NULL;
 
-  public Node() {}
+  protected Node() {}
 
-  public Node(@NotNull BasedSequence chars) {
+  protected Node(@NotNull BasedSequence chars) {
     this.chars = chars;
   }
 
@@ -70,10 +70,6 @@ public abstract class Node {
     return chars.baseSubSequence(startIndex, endIndex);
   }
 
-  public BasedSequence baseSubSequence(int startIndex) {
-    return chars.baseSubSequence(startIndex);
-  }
-
   public BasedSequence getEmptyPrefix() {
     return chars.getEmptyPrefix();
   }
@@ -90,20 +86,8 @@ public abstract class Node {
     return chars.baseEndOfLine();
   }
 
-  public int startOfLine(int index) {
-    return chars.baseStartOfLine(index);
-  }
-
   public int endOfLine(int index) {
     return chars.baseEndOfLine(index);
-  }
-
-  public Pair<Integer, Integer> lineColumnAtIndex(int index) {
-    return chars.baseLineColumnAtIndex(index);
-  }
-
-  public Pair<Integer, Integer> lineColumnAtStart() {
-    return chars.baseLineColumnAtStart();
   }
 
   public Pair<Integer, Integer> getLineColumnAtEnd() {
@@ -123,59 +107,6 @@ public abstract class Node {
     return null;
   }
 
-  public int countAncestorsOfType(@NotNull Class<?>... classes) {
-    Node parent = getParent();
-    int count = 0;
-    while (parent != null) {
-      for (Class<?> nodeType : classes) {
-        if (nodeType.isInstance(parent)) {
-          count++;
-          break;
-        }
-      }
-      parent = parent.getParent();
-    }
-    return count;
-  }
-
-  public int countDirectAncestorsOfType(@Nullable Class<?> skip, @NotNull Class<?>... classes) {
-    Node parent = getParent();
-    int count = 0;
-    while (parent != null) {
-      boolean hadMatch = false;
-      for (Class<?> nodeType : classes) {
-        if (nodeType.isInstance(parent)) {
-          count++;
-          hadMatch = true;
-          break;
-        }
-        if (skip != null && skip.isInstance(parent)) {
-          hadMatch = true;
-          break;
-        }
-      }
-      if (!hadMatch) {
-        break;
-      }
-      parent = parent.getParent();
-    }
-    return count;
-  }
-
-  public @Nullable Node getOldestAncestorOfTypeAfter(
-      @NotNull Class<?> ancestor, @NotNull Class<?> after) {
-    Node parent = getParent();
-    Node oldestAncestor = null;
-    while (parent != null) {
-      if (ancestor.isInstance(parent)) oldestAncestor = parent;
-      else if (after.isInstance(parent)) {
-        break;
-      }
-      parent = parent.getParent();
-    }
-    return oldestAncestor;
-  }
-
   public @Nullable Node getChildOfType(@NotNull Class<?>... classes) {
     Node child = getFirstChild();
     while (child != null) {
@@ -189,7 +120,7 @@ public abstract class Node {
     return null;
   }
 
-  public static int getNodeOfTypeIndex(@NotNull Node node, @NotNull Class<?>... classes) {
+  private static int getNodeOfTypeIndex(@NotNull Node node, @NotNull Class<?>... classes) {
     int i = 0;
     for (Class<?> nodeType : classes) {
       if (nodeType.isInstance(node)) {
@@ -211,7 +142,7 @@ public abstract class Node {
     return false;
   }
 
-  public int getNodeOfTypeIndex(@NotNull Class<?>... classes) {
+  private int getNodeOfTypeIndex(@NotNull Class<?>... classes) {
     return Node.getNodeOfTypeIndex(this, classes);
   }
 
@@ -271,30 +202,8 @@ public abstract class Node {
     return chars;
   }
 
-  public void removeChildren() {
-    Node child = firstChild;
-    while (child != null) {
-      Node nextChild = child.getNext();
-      child.unlink();
-      child = nextChild;
-    }
-  }
-
   public boolean hasChildren() {
     return firstChild != null;
-  }
-
-  public boolean hasOrMoreChildren(int childCount) {
-    if (firstChild != null) {
-      int count = 0;
-      for (Node child : getChildren()) {
-        count++;
-        if (count >= childCount) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   public @NotNull Document getDocument() {
@@ -325,10 +234,6 @@ public abstract class Node {
     return prev;
   }
 
-  public void extractToFirstInChain(@NotNull Node node) {
-    getFirstInChain().extractChainTo(node);
-  }
-
   public void extractChainTo(@NotNull Node node) {
     Node lastNode = this;
     do {
@@ -354,30 +259,10 @@ public abstract class Node {
     return node;
   }
 
-  public @Nullable Node getPreviousAny(@NotNull Class<?>... classes) {
-    Node node = prev;
-    if (classes.length > 0) {
-      while (node != null && getNodeOfTypeIndex(node, classes) == -1) {
-        node = node.prev;
-      }
-    }
-    return node;
-  }
-
   public @Nullable Node getNextAnyNot(@NotNull Class<?>... classes) {
     Node node = next;
     if (classes.length > 0) {
       while (node != null && getNodeOfTypeIndex(node, classes) != -1) {
-        node = node.next;
-      }
-    }
-    return node;
-  }
-
-  public @Nullable Node getNextAny(@NotNull Class<?>... classes) {
-    Node node = next;
-    if (classes.length > 0) {
-      while (node != null && getNodeOfTypeIndex(node, classes) == -1) {
         node = node.next;
       }
     }
@@ -451,19 +336,6 @@ public abstract class Node {
       this.lastChild.next = child;
       child.prev = this.lastChild;
       this.lastChild = child;
-    } else {
-      this.firstChild = child;
-      this.lastChild = child;
-    }
-  }
-
-  public void prependChild(@NotNull Node child) {
-    child.unlink();
-    child.setParent(this);
-    if (this.firstChild != null) {
-      this.firstChild.prev = child;
-      child.next = this.firstChild;
-      this.firstChild = child;
     } else {
       this.firstChild = child;
       this.lastChild = child;
@@ -571,7 +443,7 @@ public abstract class Node {
   public abstract BasedSequence[] getSegments();
 
   @NotNull
-  public static BasedSequence getLeadSegment(@NotNull BasedSequence[] segments) {
+  private static BasedSequence getLeadSegment(@NotNull BasedSequence[] segments) {
     for (BasedSequence segment : segments) {
       if (segment != BasedSequence.NULL) {
         return segment;
@@ -582,7 +454,7 @@ public abstract class Node {
   }
 
   @NotNull
-  public static BasedSequence getTrailSegment(BasedSequence[] segments) {
+  private static BasedSequence getTrailSegment(BasedSequence[] segments) {
     int iMax = segments.length;
 
     for (int i = iMax; i-- > 0; ) {
@@ -596,7 +468,7 @@ public abstract class Node {
   }
 
   @NotNull
-  public static BasedSequence spanningChars(BasedSequence... segments) {
+  private static BasedSequence spanningChars(BasedSequence... segments) {
     int startOffset = Integer.MAX_VALUE;
     int endOffset = -1;
     BasedSequence firstSequence = null;
@@ -664,13 +536,13 @@ public abstract class Node {
     }
   }
 
-  public static void segmentSpan(
+  private static void segmentSpan(
       @NotNull StringBuilder out, int startOffset, int endOffset, @Nullable String name) {
     if (name != null && !name.trim().isEmpty()) out.append(" ").append(name).append(":");
     out.append("[").append(startOffset).append(", ").append(endOffset).append("]");
   }
 
-  public static void segmentSpanChars(
+  private static void segmentSpanChars(
       @NotNull StringBuilder out,
       int startOffset,
       int endOffset,
@@ -679,7 +551,7 @@ public abstract class Node {
     segmentSpanChars(out, startOffset, endOffset, name, chars, "", "");
   }
 
-  public static void segmentSpanChars(
+  private static void segmentSpanChars(
       @NotNull StringBuilder out,
       int startOffset,
       int endOffset,
@@ -710,30 +582,6 @@ public abstract class Node {
     if (sequence.isNotNull())
       segmentSpanChars(
           out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
-  }
-
-  public static void segmentSpanCharsToVisible(
-      @NotNull StringBuilder out, @NotNull BasedSequence sequence, @NotNull String name) {
-    if (sequence.isNotNull()) {
-      if (sequence.length() <= 10) {
-        segmentSpanChars(
-            out,
-            sequence.getStartOffset(),
-            sequence.getEndOffset(),
-            name,
-            sequence.toVisibleWhitespaceString());
-      } else {
-        // give the first 5 and last 5
-        segmentSpanChars(
-            out,
-            sequence.getStartOffset(),
-            sequence.getEndOffset(),
-            name,
-            sequence.subSequence(0, 5).toVisibleWhitespaceString(),
-            SPLICE,
-            sequence.endSequence(sequence.length() - 5).toVisibleWhitespaceString());
-      }
-    }
   }
 
   public static void delimitedSegmentSpan(
@@ -838,19 +686,6 @@ public abstract class Node {
     out.append(getNodeName());
     out.append("[").append(getStartOffset()).append(", ").append(getEndOffset()).append("]");
     if (withExtra) getAstExtra(out);
-  }
-
-  public @NotNull String toAstString(boolean withExtra) {
-    StringBuilder sb = new StringBuilder();
-    astString(sb, withExtra);
-    return sb.toString();
-  }
-
-  public static @NotNull String toSegmentSpan(
-      @NotNull BasedSequence sequence, @Nullable String name) {
-    StringBuilder out = new StringBuilder();
-    segmentSpan(out, sequence, name);
-    return out.toString();
   }
 
   public BasedSequence getChildChars() {
@@ -975,20 +810,6 @@ public abstract class Node {
    *
    * @param firstNode first child in chain
    */
-  public void appendChain(@NotNull Node firstNode) {
-    Node node = firstNode;
-    while (node != null) {
-      Node next = node.next;
-      appendChild(node);
-      node = next;
-    }
-  }
-
-  /**
-   * Append all from child to end of chain to this node
-   *
-   * @param firstNode first child in chain
-   */
   public void insertChainAfter(@NotNull Node firstNode) {
     Node posNode = this;
     Node node = firstNode;
@@ -996,21 +817,6 @@ public abstract class Node {
       Node next = node.next;
       posNode.insertAfter(node);
       posNode = node;
-      node = next;
-    }
-  }
-
-  /**
-   * Append all from child to end of chain to this node
-   *
-   * @param firstNode first child in chain
-   */
-  public void insertChainBefore(@NotNull Node firstNode) {
-    Node posNode = this;
-    Node node = firstNode;
-    while (node != null) {
-      Node next = node.next;
-      posNode.insertBefore(node);
       node = next;
     }
   }

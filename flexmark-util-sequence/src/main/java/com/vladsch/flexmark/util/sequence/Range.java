@@ -114,12 +114,7 @@ public class Range {
   }
 
   @NotNull
-  public CharSequence charSubSequence(@NotNull CharSequence charSequence) {
-    return charSequence.subSequence(start, end);
-  }
-
-  @NotNull
-  public CharSequence safeSubSequence(@NotNull CharSequence charSequence) {
+  CharSequence safeSubSequence(@NotNull CharSequence charSequence) {
     int end = Math.min(charSequence.length(), this.end);
     return isNull()
         ? charSequence.subSequence(0, 0)

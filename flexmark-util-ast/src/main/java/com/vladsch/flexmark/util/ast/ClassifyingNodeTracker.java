@@ -14,13 +14,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ClassifyingNodeTracker implements NodeTracker {
-  protected final @NotNull ClassificationBag<Class<?>, Node> nodeClassifier;
+  private final @NotNull ClassificationBag<Class<?>, Node> nodeClassifier;
   private final @Nullable NodeTracker host;
   private final @NotNull OrderedMap<Class<?>, Set<Class<?>>> exclusionMap;
   private final @NotNull OrderedSet<Class<?>> exclusionSet;
   private final @NotNull HashMap<Integer, BitSet> nodeAncestryMap;
 
-  public ClassifyingNodeTracker(
+  ClassifyingNodeTracker(
       @Nullable NodeTracker host, @NotNull Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
     this.host = host;
     nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);

@@ -6,21 +6,21 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class Block extends ContentNode {
-  public Block() {}
+  protected Block() {}
 
-  public Block(@NotNull BasedSequence chars) {
+  protected Block(@NotNull BasedSequence chars) {
     super(chars);
   }
 
-  public Block(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
+  protected Block(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
     super(chars, lineSegments);
   }
 
-  public Block(@NotNull List<BasedSequence> lineSegments) {
+  protected Block(@NotNull List<BasedSequence> lineSegments) {
     super(lineSegments);
   }
 
-  public Block(BlockContent blockContent) {
+  protected Block(BlockContent blockContent) {
     super(blockContent);
   }
 

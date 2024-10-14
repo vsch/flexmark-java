@@ -9,14 +9,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemFactoryMap<I, P> implements Map<Function<P, I>, I> {
-  protected final Map<Function<P, I>, I> itemMap;
-  protected final @NotNull P param;
+  private final Map<Function<P, I>, I> itemMap;
+  private final @NotNull P param;
 
   public ItemFactoryMap(@NotNull P param) {
     this(param, 0);
   }
 
-  public ItemFactoryMap(@NotNull P param, int capacity) {
+  private ItemFactoryMap(@NotNull P param, int capacity) {
     this.itemMap = new HashMap<>(capacity);
     this.param = param;
   }

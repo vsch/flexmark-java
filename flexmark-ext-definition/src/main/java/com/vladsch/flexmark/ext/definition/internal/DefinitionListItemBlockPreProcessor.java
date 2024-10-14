@@ -25,9 +25,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
   private final DefinitionOptions options;
-  Boolean blankLinesInAst;
+  private Boolean blankLinesInAst;
 
-  public DefinitionListItemBlockPreProcessor(DataHolder options) {
+  private DefinitionListItemBlockPreProcessor(DataHolder options) {
     this.options = new DefinitionOptions(options);
     blankLinesInAst = BLANK_LINES_IN_AST.get(options);
   }

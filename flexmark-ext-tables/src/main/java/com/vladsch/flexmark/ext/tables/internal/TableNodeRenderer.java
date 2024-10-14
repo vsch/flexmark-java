@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 public class TableNodeRenderer implements NodeRenderer {
   private final TableParserOptions options;
 
-  public TableNodeRenderer(DataHolder options) {
+  private TableNodeRenderer(DataHolder options) {
     this.options = new TableParserOptions(options);
   }
 

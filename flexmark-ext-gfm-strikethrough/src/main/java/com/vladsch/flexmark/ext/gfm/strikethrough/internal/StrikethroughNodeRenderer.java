@@ -19,7 +19,7 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
   private final String subscriptStyleHtmlOpen;
   private final String subscriptStyleHtmlClose;
 
-  public StrikethroughNodeRenderer(DataHolder options) {
+  private StrikethroughNodeRenderer(DataHolder options) {
     strikethroughStyleHtmlOpen =
         StrikethroughSubscriptExtension.STRIKETHROUGH_STYLE_HTML_OPEN.get(options);
     strikethroughStyleHtmlClose =

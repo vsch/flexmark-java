@@ -8,23 +8,12 @@ import org.jetbrains.annotations.NotNull;
 
 /** Table caption of a {@link TableBlock} containing inline nodes. */
 public class TableCaption extends Node implements DelimitedNode, LineBreakNode {
-  protected BasedSequence openingMarker = BasedSequence.NULL;
-  protected BasedSequence text = BasedSequence.NULL;
-  protected BasedSequence closingMarker = BasedSequence.NULL;
+  private BasedSequence openingMarker = BasedSequence.NULL;
+  private BasedSequence text = BasedSequence.NULL;
+  private BasedSequence closingMarker = BasedSequence.NULL;
 
   public TableCaption(
       BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
-    this.openingMarker = openingMarker;
-    this.text = text;
-    this.closingMarker = closingMarker;
-  }
-
-  public TableCaption(
-      BasedSequence chars,
-      BasedSequence openingMarker,
-      BasedSequence text,
-      BasedSequence closingMarker) {
-    super(chars);
     this.openingMarker = openingMarker;
     this.text = text;
     this.closingMarker = closingMarker;

@@ -17,16 +17,15 @@ import org.jetbrains.annotations.NotNull;
  *
  * <p>The parsed strikethrough text regions are turned into {@link Strikethrough} nodes.
  */
-public class SubscriptExtension
-    implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-  public static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_OPEN =
+class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+  static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_OPEN =
       StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_OPEN;
-  public static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE =
+  static final NullableDataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE =
       StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE;
 
   private SubscriptExtension() {}
 
-  public static SubscriptExtension create() {
+  static SubscriptExtension create() {
     return new SubscriptExtension();
   }
 

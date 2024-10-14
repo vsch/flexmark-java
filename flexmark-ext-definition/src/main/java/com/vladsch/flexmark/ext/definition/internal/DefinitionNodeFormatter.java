@@ -26,7 +26,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
   private final DefinitionFormatOptions options;
   private final ListOptions listOptions;
 
-  public DefinitionNodeFormatter(DataHolder options) {
+  private DefinitionNodeFormatter(DataHolder options) {
     this.options = new DefinitionFormatOptions(options);
     this.listOptions = ListOptions.get(options);
   }

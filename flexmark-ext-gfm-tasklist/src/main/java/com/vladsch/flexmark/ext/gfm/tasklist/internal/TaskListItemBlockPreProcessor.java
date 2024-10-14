@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
-  public TaskListItemBlockPreProcessor(DataHolder options) {}
+  private TaskListItemBlockPreProcessor(DataHolder options) {}
 
   @Override
   public void preProcess(ParserState state, Block block) {

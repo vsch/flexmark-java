@@ -11,7 +11,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableExtractingVisitor {
+class TableExtractingVisitor {
   private final TableFormatOptions options;
 
   private final NodeVisitor myVisitor =
@@ -27,12 +27,12 @@ public class TableExtractingVisitor {
   private MarkdownTable myTable;
   private final List<MarkdownTable> myTables;
 
-  public TableExtractingVisitor(DataHolder options) {
+  TableExtractingVisitor(DataHolder options) {
     this.options = new TableFormatOptions(options);
     myTables = new ArrayList<>();
   }
 
-  public MarkdownTable[] getTables(Node node) {
+  MarkdownTable[] getTables(Node node) {
     myTable = null;
     myVisitor.visit(node);
     return myTables.toArray(new MarkdownTable[0]);

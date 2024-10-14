@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.tables;
 
-public interface TableVisitor {
+interface TableVisitor {
   void visit(TableBlock node);
 
   void visit(TableHead node);

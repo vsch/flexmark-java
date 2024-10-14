@@ -6,11 +6,11 @@ import java.util.function.Consumer;
 import org.jetbrains.annotations.Nullable;
 
 public class NodeIterator implements ReversiblePeekingIterator<Node> {
-  final Node firstNode;
-  final Node lastNode;
-  final boolean reversed;
-  Node node;
-  Node result;
+  private final Node firstNode;
+  private final Node lastNode;
+  private final boolean reversed;
+  private Node node;
+  private Node result;
 
   /**
    * @param firstNode node from which to start the iteration and continue until all sibling nodes
@@ -18,25 +18,6 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
    */
   public NodeIterator(Node firstNode) {
     this(firstNode, null, false);
-  }
-
-  /**
-   * @param firstNode node from which to start the iteration and continue until all sibling nodes
-   *     have been traversed
-   * @param reversed true/false if the nodes are to be traversed in reverse order. If true the nodes
-   *     previous sibling will be used instead of next sibling
-   */
-  public NodeIterator(Node firstNode, boolean reversed) {
-    this(firstNode, null, reversed);
-  }
-
-  /**
-   * @param firstNode node from which to start the iteration and continue until all sibling nodes
-   *     have been traversed or lastNode has been traversed
-   * @param lastNode the last node to be traversed
-   */
-  public NodeIterator(Node firstNode, Node lastNode) {
-    this(firstNode, lastNode, false);
   }
 
   /**
@@ -48,7 +29,7 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
    * @param reversed true/false if the nodes are to be traversed in reverse order. If true the nodes
    *     previous sibling will be used instead of next sibling
    */
-  public NodeIterator(Node firstNode, Node lastNode, boolean reversed) {
+  NodeIterator(Node firstNode, Node lastNode, boolean reversed) {
     if (firstNode == null) {
       throw new NullPointerException();
     }
@@ -128,7 +109,7 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     }
   }
 
-  public static final ReversiblePeekingIterator<Node> EMPTY =
+  static final ReversiblePeekingIterator<Node> EMPTY =
       new ReversiblePeekingIterator<>() {
         @Override
         public void remove() {}

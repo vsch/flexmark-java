@@ -9,19 +9,19 @@ import com.vladsch.flexmark.util.data.MutableDataSetter;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
-public class TaskListFormatOptions implements MutableDataSetter {
-  public final TaskListItemCase taskListItemCase;
-  public final TaskListItemPlacement taskListItemPlacement;
-  public final int formatOrderedTaskItemPriority;
-  public final int formatDefaultTaskItemPriority;
-  public final boolean formatPrioritizedTaskItems;
-  public final Map<Character, Integer> formatTaskItemPriorities;
+class TaskListFormatOptions implements MutableDataSetter {
+  final TaskListItemCase taskListItemCase;
+  final TaskListItemPlacement taskListItemPlacement;
+  final int formatOrderedTaskItemPriority;
+  final int formatDefaultTaskItemPriority;
+  final boolean formatPrioritizedTaskItems;
+  final Map<Character, Integer> formatTaskItemPriorities;
 
-  public TaskListFormatOptions() {
+  TaskListFormatOptions() {
     this(null);
   }
 
-  public TaskListFormatOptions(DataHolder options) {
+  TaskListFormatOptions(DataHolder options) {
     taskListItemCase = TaskListExtension.FORMAT_LIST_ITEM_CASE.get(options);
     taskListItemPlacement = TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT.get(options);
     formatOrderedTaskItemPriority =

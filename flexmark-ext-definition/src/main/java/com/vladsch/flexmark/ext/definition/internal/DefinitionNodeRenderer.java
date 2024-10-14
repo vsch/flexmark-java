@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class DefinitionNodeRenderer implements NodeRenderer {
   private final ListOptions listOptions;
 
-  public DefinitionNodeRenderer(DataHolder options) {
+  private DefinitionNodeRenderer(DataHolder options) {
     this.listOptions = ListOptions.get(options);
   }
 

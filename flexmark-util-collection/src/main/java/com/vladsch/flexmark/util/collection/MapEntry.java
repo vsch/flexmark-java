@@ -5,11 +5,11 @@ import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class MapEntry<K, V> implements Map.Entry<K, V> {
+final class MapEntry<K, V> implements Map.Entry<K, V> {
   private final @NotNull K key;
   private final @Nullable V value;
 
-  public MapEntry(@NotNull K key, @Nullable V value) {
+  MapEntry(@NotNull K key, @Nullable V value) {
     this.key = key;
     this.value = value;
   }

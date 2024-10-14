@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.collection;
 
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import org.jetbrains.annotations.Nullable;
 
-public class BoundedMaxAggregator implements BiFunction<Integer, Integer, Integer> {
-  public final int maxBound;
+public class BoundedMaxAggregator implements BinaryOperator<Integer> {
+  private final int maxBound;
 
   public BoundedMaxAggregator(int maxBound) {
     this.maxBound = maxBound;

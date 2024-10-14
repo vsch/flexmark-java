@@ -24,7 +24,7 @@ public class TaskListExtension
     implements Parser.ParserExtension,
         HtmlRenderer.HtmlRendererExtension,
         Formatter.FormatterExtension {
-  public static final Map<Character, Integer> DEFAULT_PRIORITIES = new HashMap<>();
+  private static final Map<Character, Integer> DEFAULT_PRIORITIES = new HashMap<>();
 
   static {
     DEFAULT_PRIORITIES.put('+', 1);
@@ -71,7 +71,7 @@ public class TaskListExtension
 
   private TaskListExtension() {}
 
-  public static TaskListExtension create() {
+  static TaskListExtension create() {
     return new TaskListExtension();
   }
 

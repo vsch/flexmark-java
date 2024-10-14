@@ -17,16 +17,16 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
 public class TaskListNodeRenderer implements NodeRenderer {
-  public static final AttributablePart TASK_ITEM_PARAGRAPH =
+  private static final AttributablePart TASK_ITEM_PARAGRAPH =
       new AttributablePart("TASK_ITEM_PARAGRAPH");
 
-  final String doneMarker;
-  final String notDoneMarker;
+  private final String doneMarker;
+  private final String notDoneMarker;
   private final String tightItemClass;
   private final String looseItemClass;
   private final String itemDoneClass;
   private final String itemNotDoneClass;
-  final String paragraphClass;
+  private final String paragraphClass;
   private final ListOptions listOptions;
 
   public TaskListNodeRenderer(DataHolder options) {
@@ -47,7 +47,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
     return set;
   }
 
-  void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
+  private void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
     BasedSequence sourceText =
         context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null
             ? node.getChars()

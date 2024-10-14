@@ -7,9 +7,9 @@ import org.jetbrains.annotations.NotNull;
 
 /** A Subscript node containing text and other inline nodes nodes as children. */
 public class Subscript extends Node implements DelimitedNode {
-  protected BasedSequence openingMarker = BasedSequence.NULL;
-  protected BasedSequence text = BasedSequence.NULL;
-  protected BasedSequence closingMarker = BasedSequence.NULL;
+  private BasedSequence openingMarker = BasedSequence.NULL;
+  private BasedSequence text = BasedSequence.NULL;
+  private BasedSequence closingMarker = BasedSequence.NULL;
 
   @NotNull
   @Override
@@ -23,10 +23,6 @@ public class Subscript extends Node implements DelimitedNode {
   }
 
   public Subscript() {}
-
-  public Subscript(BasedSequence chars) {
-    super(chars);
-  }
 
   public Subscript(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
     super(

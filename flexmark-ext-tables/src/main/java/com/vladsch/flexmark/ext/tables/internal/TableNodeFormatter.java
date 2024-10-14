@@ -41,7 +41,7 @@ public class TableNodeFormatter implements NodeFormatter {
 
   private MarkdownTable myTable;
 
-  public TableNodeFormatter(DataHolder options) {
+  private TableNodeFormatter(DataHolder options) {
     this.options = new TableFormatOptions(options);
     parserTrimCellWhiteSpace = TablesExtension.TRIM_CELL_WHITESPACE.get(options);
   }

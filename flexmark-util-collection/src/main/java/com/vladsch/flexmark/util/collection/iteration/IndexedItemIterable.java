@@ -10,7 +10,7 @@ public class IndexedItemIterable<R> implements ReversibleIndexedIterable<R> {
     this(items, false);
   }
 
-  public IndexedItemIterable(@NotNull Indexed<R> items, boolean reversed) {
+  private IndexedItemIterable(@NotNull Indexed<R> items, boolean reversed) {
     this.items = items;
     this.reversed = reversed;
   }
