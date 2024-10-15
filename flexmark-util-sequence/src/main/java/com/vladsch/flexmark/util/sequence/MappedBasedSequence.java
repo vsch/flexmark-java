@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /** A BasedSequence which maps characters according to CharMapper */
-public final class MappedBasedSequence extends BasedSequenceImpl
+final class MappedBasedSequence extends BasedSequenceImpl
     implements MappedSequence<BasedSequence>, ReplacedBasedSequence {
   private final CharMapper mapper;
   private final BasedSequence baseSeq;

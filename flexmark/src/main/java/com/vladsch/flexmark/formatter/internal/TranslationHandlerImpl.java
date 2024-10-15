@@ -30,37 +30,38 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class TranslationHandlerImpl implements TranslationHandler {
-  final FormatterOptions myFormatterOptions;
-  final Map<String, String>
+  private final FormatterOptions myFormatterOptions;
+  private final Map<String, String>
       myNonTranslatingTexts; // map placeholder to non-translating text replaced before translation
   // so it can be replaced after translation
-  final Map<String, String>
+  private final Map<String, String>
       myAnchorTexts; // map anchor id to non-translating text replaced before translation so it can
   // be replaced after translation
-  final Map<String, String>
+  private final Map<String, String>
       myTranslatingTexts; // map placeholder to translating original text which is to be translated
   // separately from its context and is replaced with placeholder for main
   // context translation
-  final Map<String, String>
+  private final Map<String, String>
       myTranslatedTexts; // map placeholder to translated text which is to be translated separately
   // from its context and was replaced with placeholder for main context
   // translation
-  final ArrayList<String>
+  private final ArrayList<String>
       myTranslatingPlaceholders; // list of placeholders to index in translating and translated
   // texts
-  final List<String> myTranslatingSpans;
-  final List<String> myNonTranslatingSpans;
-  final ArrayList<String> myTranslatedSpans;
-  final HtmlIdGeneratorFactory myIdGeneratorFactory;
-  final Pattern myPlaceHolderMarkerPattern;
-  final MutableDataSet myTranslationStore;
+  private final List<String> myTranslatingSpans;
+  private final List<String> myNonTranslatingSpans;
+  private final ArrayList<String> myTranslatedSpans;
+  private final HtmlIdGeneratorFactory myIdGeneratorFactory;
+  private final Pattern myPlaceHolderMarkerPattern;
+  private final MutableDataSet myTranslationStore;
 
-  final Map<String, Integer> myOriginalRefTargets; // map ref target id to translation index
-  final Map<Integer, String>
+  private final Map<String, Integer> myOriginalRefTargets; // map ref target id to translation index
+  private final Map<Integer, String>
       myTranslatedRefTargets; // map translation index to translated ref target id
-  final Map<String, String> myOriginalAnchors; // map placeholder id to original ref id
+  private final Map<String, String> myOriginalAnchors; // map placeholder id to original ref id
 
-  final Map<String, String> myTranslatedAnchors; // map placeholder id to translated ref target id
+  private final Map<String, String>
+      myTranslatedAnchors; // map placeholder id to translated ref target id
 
   private int myPlaceholderId = 0;
   private int myAnchorId = 0;
@@ -127,7 +128,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     myIdGenerator.generateIds(node);
   }
 
-  static boolean isNotBlank(CharSequence csq) {
+  private static boolean isNotBlank(CharSequence csq) {
     int iMax = csq.length();
     for (int i = 0; i < iMax; i++) {
       if (!isWhitespace(csq.charAt(i))) {
@@ -418,7 +419,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     }
   }
 
-  public String getPlaceholderId(
+  private String getPlaceholderId(
       String format,
       int placeholderId,
       CharSequence prefix,
@@ -435,7 +436,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     return addPrefixSuffix(replacedTextId, prefix, suffix, suffix2);
   }
 
-  public static String addPrefixSuffix(
+  private static String addPrefixSuffix(
       CharSequence placeholderId, CharSequence prefix, CharSequence suffix, CharSequence suffix2) {
     if (prefix == null && suffix == null && suffix2 == null) {
       return placeholderId.toString();

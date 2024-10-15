@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
  * based segmented sequence with minimal overhead and optimized to give penalty free random access
  * for most applications.
  */
-public final class SegmentedSequenceTree extends SegmentedSequence {
+final class SegmentedSequenceTree extends SegmentedSequence {
   private final SegmentTree segmentTree; // segment tree
   private final int
       startIndex; // start index of this sub-sequence in the segment tree, 0 for original
@@ -29,17 +29,17 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
     final @NotNull CharSequence chars;
     final int indexDelta;
 
-    public Cache(@NotNull Segment segment, @NotNull CharSequence chars, int startIndex) {
+    Cache(@NotNull Segment segment, @NotNull CharSequence chars, int startIndex) {
       this.segment = segment;
       this.chars = chars;
       indexDelta = startIndex - segment.getStartIndex();
     }
 
-    public char charAt(int index) {
+    char charAt(int index) {
       return chars.charAt(index + indexDelta);
     }
 
-    public int charIndex(int index) {
+    int charIndex(int index) {
       return index + indexDelta;
     }
   }
@@ -157,8 +157,7 @@ public final class SegmentedSequenceTree extends SegmentedSequence {
    * @param builder builder containing segments for this sequence
    * @return segmented sequence
    */
-  public static SegmentedSequenceTree create(
-      @NotNull BasedSequence baseSeq, ISegmentBuilder<?> builder) {
+  static SegmentedSequenceTree create(@NotNull BasedSequence baseSeq, ISegmentBuilder<?> builder) {
     SegmentTree segmentTree = SegmentTree.build(builder.getSegments(), builder.getText());
 
     if (baseSeq.anyOptions(F_COLLECT_SEGMENTED_STATS)) {

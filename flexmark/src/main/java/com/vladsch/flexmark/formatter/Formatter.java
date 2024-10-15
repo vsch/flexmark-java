@@ -50,7 +50,6 @@ import com.vladsch.flexmark.util.format.options.HeadingStyle;
 import com.vladsch.flexmark.util.format.options.ListBulletMarker;
 import com.vladsch.flexmark.util.format.options.ListNumberedMarker;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
-import com.vladsch.flexmark.util.format.options.TableCaptionHandling;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.misc.Extension;
@@ -85,26 +84,13 @@ import org.jetbrains.annotations.Nullable;
  * </code></pre>
  */
 public class Formatter implements IRender {
-  public static final Document[] EMPTY_DOCUMENTS = new Document[0];
+  private static final Document[] EMPTY_DOCUMENTS = new Document[0];
 
   /** output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)} */
-  public static final DataKey<Integer> FORMAT_FLAGS =
+  static final DataKey<Integer> FORMAT_FLAGS =
       new DataKey<>(
           "FORMAT_FLAGS",
           LineAppendable.F_TRIM_LEADING_WHITESPACE | LineAppendable.F_TRIM_LEADING_EOL);
-
-  // Use LineAppendable values instead
-  // NOTE: F_ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
-  @Deprecated public static final int FORMAT_CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
-
-  @Deprecated
-  public static final int FORMAT_COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
-
-  @Deprecated
-  public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE =
-      LineAppendable.F_TRIM_TRAILING_WHITESPACE;
-
-  @Deprecated public static final int FORMAT_ALL_OPTIONS = LineAppendable.F_FORMAT_ALL;
 
   public static final DataKey<Boolean> GENERATE_HEADER_ID =
       new DataKey<>("GENERATE_HEADER_ID", false);
@@ -116,11 +102,9 @@ public class Formatter implements IRender {
 
   public static final DataKey<Boolean> APPLY_SPECIAL_LEAD_IN_HANDLERS =
       SharedDataKeys.APPLY_SPECIAL_LEAD_IN_HANDLERS;
-  public static final DataKey<Boolean> ESCAPE_SPECIAL_CHARS = SharedDataKeys.ESCAPE_SPECIAL_CHARS;
-  public static final DataKey<Boolean> ESCAPE_NUMBERED_LEAD_IN =
-      SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
-  public static final DataKey<Boolean> UNESCAPE_SPECIAL_CHARS =
-      SharedDataKeys.UNESCAPE_SPECIAL_CHARS;
+  static final DataKey<Boolean> ESCAPE_SPECIAL_CHARS = SharedDataKeys.ESCAPE_SPECIAL_CHARS;
+  static final DataKey<Boolean> ESCAPE_NUMBERED_LEAD_IN = SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
+  static final DataKey<Boolean> UNESCAPE_SPECIAL_CHARS = SharedDataKeys.UNESCAPE_SPECIAL_CHARS;
 
   public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER =
       new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
@@ -193,23 +177,23 @@ public class Formatter implements IRender {
   public static final NullableDataKey<Pattern> LINK_MARKER_COMMENT_PATTERN =
       new NullableDataKey<>("FORMATTER_TAGS_ACCEPT_REGEXP", (Pattern) null);
 
-  public static final DataKey<Boolean> APPEND_TRANSFERRED_REFERENCES =
+  static final DataKey<Boolean> APPEND_TRANSFERRED_REFERENCES =
       new DataKey<>("APPEND_TRANSFERRED_REFERENCES", false);
 
   // used for translation phases of rendering
-  public static final DataKey<String> TRANSLATION_ID_FORMAT =
+  static final DataKey<String> TRANSLATION_ID_FORMAT =
       new DataKey<>("TRANSLATION_ID_FORMAT", "_%d_");
-  public static final DataKey<String> TRANSLATION_HTML_BLOCK_PREFIX =
+  static final DataKey<String> TRANSLATION_HTML_BLOCK_PREFIX =
       new DataKey<>("TRANSLATION_HTML_BLOCK_PREFIX", "__");
-  public static final DataKey<String> TRANSLATION_HTML_INLINE_PREFIX =
+  static final DataKey<String> TRANSLATION_HTML_INLINE_PREFIX =
       new DataKey<>("TRANSLATION_HTML_INLINE_PREFIX", "_");
-  public static final DataKey<String> TRANSLATION_AUTOLINK_PREFIX =
+  static final DataKey<String> TRANSLATION_AUTOLINK_PREFIX =
       new DataKey<>("TRANSLATION_AUTOLINK_PREFIX", "___");
-  public static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN =
+  static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN =
       new DataKey<>("TRANSLATION_EXCLUDE_PATTERN", "^[^\\p{IsAlphabetic}]*$");
-  public static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN =
+  static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN =
       Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN;
-  public static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN =
+  static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN =
       Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN;
 
   // link resolver info for doc relative and doc root urls
@@ -252,31 +236,6 @@ public class Formatter implements IRender {
 
   // }}
 
-  /** use corrected name */
-  @Deprecated
-  public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER =
-      SETEXT_HEADING_EQUALIZE_MARKER;
-
-  /** use corrected name */
-  @Deprecated
-  public static final DataKey<EqualizeTrailingMarker> ATX_HEADER_TRAILING_MARKER =
-      ATX_HEADING_TRAILING_MARKER;
-
-  /** use TableFormatOptions instead */
-  @Deprecated
-  public static final DataKey<TableCaptionHandling> FORMAT_TABLE_CAPTION =
-      TableFormatOptions.FORMAT_TABLE_CAPTION;
-
-  /** use TableFormatOptions instead */
-  @Deprecated
-  public static final DataKey<DiscretionaryText> FORMAT_TABLE_CAPTION_SPACES =
-      TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES;
-
-  /** use TableFormatOptions instead */
-  @Deprecated
-  public static final DataKey<String> FORMAT_TABLE_INDENT_PREFIX =
-      TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX;
-
   // used during translation
   public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP =
       new DataKey<>("REFERENCES_UNIQUIFICATION_MAP", HashMap::new);
@@ -284,11 +243,11 @@ public class Formatter implements IRender {
       new DataKey<>("ATTRIBUTE_UNIQUIFICATION_ID_MAP", HashMap::new);
 
   private final DataHolder options;
-  final List<LinkResolverFactory> linkResolverFactories;
-  final List<NodeFormatterFactory> nodeFormatterFactories;
-  final HeaderIdGeneratorFactory idGeneratorFactory;
+  private final List<LinkResolverFactory> linkResolverFactories;
+  private final List<NodeFormatterFactory> nodeFormatterFactories;
+  private final HeaderIdGeneratorFactory idGeneratorFactory;
 
-  Formatter(Builder builder) {
+  private Formatter(Builder builder) {
     this.options = builder.toImmutable();
     this.idGeneratorFactory =
         builder.htmlIdGeneratorFactory == null
@@ -309,13 +268,7 @@ public class Formatter implements IRender {
     return DependencyResolver.resolveFlatDependencies(list, null, null);
   }
 
-  public TranslationHandler getTranslationHandler(
-      TranslationHandlerFactory translationHandlerFactory,
-      HtmlIdGeneratorFactory idGeneratorFactory) {
-    return translationHandlerFactory.create(options, idGeneratorFactory);
-  }
-
-  public TranslationHandler getTranslationHandler(HtmlIdGeneratorFactory idGeneratorFactory) {
+  private TranslationHandler getTranslationHandler(HtmlIdGeneratorFactory idGeneratorFactory) {
     return new TranslationHandlerImpl(options, idGeneratorFactory);
   }
 
@@ -327,15 +280,6 @@ public class Formatter implements IRender {
   @Override
   public DataHolder getOptions() {
     return options;
-  }
-
-  /**
-   * Create a new builder for configuring an {@link Formatter}.
-   *
-   * @return a builder
-   */
-  public static Builder builder() {
-    return new Builder();
   }
 
   /**
@@ -416,7 +360,7 @@ public class Formatter implements IRender {
    * @param document node to render
    * @param output appendable to use for the output
    */
-  public void translationRender(
+  private void translationRender(
       Node document,
       Appendable output,
       TranslationHandler translationHandler,
@@ -444,7 +388,7 @@ public class Formatter implements IRender {
    * @param document node to render
    * @param output appendable to use for the output
    */
-  public void translationRender(
+  private void translationRender(
       Node document,
       Appendable output,
       int maxTrailingBlankLines,
@@ -470,12 +414,8 @@ public class Formatter implements IRender {
    * @param documents node to render
    * @param output appendable to use for the output
    */
-  public void mergeRender(Document[] documents, Appendable output) {
+  private void mergeRender(Document[] documents, Appendable output) {
     mergeRender(documents, output, MAX_TRAILING_BLANK_LINES.get(options));
-  }
-
-  public void mergeRender(List<Document> documents, Appendable output) {
-    mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), output);
   }
 
   /**
@@ -494,17 +434,7 @@ public class Formatter implements IRender {
     return mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), maxTrailingBlankLines);
   }
 
-  /**
-   * Render a node to the appendable
-   *
-   * @param documents nodes to merge render
-   * @param output appendable to use for the output
-   */
-  public void mergeRender(List<Document> documents, Appendable output, int maxTrailingBlankLines) {
-    mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), output, maxTrailingBlankLines);
-  }
-
-  public void mergeRender(Document[] documents, Appendable output, int maxTrailingBlankLines) {
+  private void mergeRender(Document[] documents, Appendable output, int maxTrailingBlankLines) {
     MutableDataSet mergeOptions = new MutableDataSet(options);
     mergeOptions.set(Parser.HTML_FOR_TRANSLATOR, true);
 
@@ -575,16 +505,16 @@ public class Formatter implements IRender {
 
   /** Builder for configuring an {@link Formatter}. See methods for default configuration. */
   public static class Builder extends BuilderBase<Builder> {
-    List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
-    List<NodeFormatterFactory> nodeFormatterFactories = new ArrayList<>();
-    List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
-    HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
+    private List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
+    private List<NodeFormatterFactory> nodeFormatterFactories = new ArrayList<>();
+    private List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
+    private HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
     public Builder() {
       super();
     }
 
-    public Builder(DataHolder options) {
+    private Builder(DataHolder options) {
       super(options);
       loadExtensions();
     }
@@ -645,42 +575,6 @@ public class Formatter implements IRender {
       this.nodeFormatterFactories.add(nodeFormatterFactory);
       return this;
     }
-
-    /**
-     * Add a factory for generating the header id attribute from the header's text
-     *
-     * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
-     * @return {@code this}
-     */
-    @NotNull
-    public Builder htmlIdGeneratorFactory(
-        @NotNull HeaderIdGeneratorFactory htmlIdGeneratorFactory) {
-      if (this.htmlIdGeneratorFactory != null) {
-        throw new IllegalStateException(
-            "custom header id factory is already set to "
-                + htmlIdGeneratorFactory.getClass().getName());
-      }
-      this.htmlIdGeneratorFactory = htmlIdGeneratorFactory;
-      addExtensionApiPoint(htmlIdGeneratorFactory);
-      return this;
-    }
-
-    /**
-     * Add a factory for instantiating a node renderer (done when rendering). This allows to
-     * override the rendering of node types or define rendering for custom node types.
-     *
-     * <p>If multiple node renderers for the same node type are created, the one from the factory
-     * that was added first "wins". (This is how the rendering for core node types can be
-     * overridden; the default rendering comes last.)
-     *
-     * @param linkResolverFactory the factory for creating a node renderer
-     * @return {@code this}
-     */
-    public @NotNull Builder linkResolverFactory(@NotNull LinkResolverFactory linkResolverFactory) {
-      this.linkResolverFactories.add(linkResolverFactory);
-      addExtensionApiPoint(linkResolverFactory);
-      return this;
-    }
   }
 
   /** Extension for {@link Formatter}. */
@@ -711,7 +605,7 @@ public class Formatter implements IRender {
         public void remove() {}
       };
 
-  public static final Iterable<Node> NULL_ITERABLE = () -> NULL_ITERATOR;
+  private static final Iterable<Node> NULL_ITERABLE = () -> NULL_ITERATOR;
 
   private class MainNodeFormatter extends NodeFormatterSubContext {
     private final Document document;

@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
-public class CommonmarkInlineParser extends InlineParserImpl {
-  public CommonmarkInlineParser(
+class CommonmarkInlineParser extends InlineParserImpl {
+  CommonmarkInlineParser(
       DataHolder options,
       BitSet specialCharacters,
       BitSet delimiterCharacters,

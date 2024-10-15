@@ -4,13 +4,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class LinkType {
   public static final LinkType LINK = new LinkType("LINK");
-  public static final LinkType IMAGE = new LinkType("IMAGE");
-  public static final LinkType LINK_REF = new LinkType("LINK_REF");
-  public static final LinkType IMAGE_REF = new LinkType("IMAGE_REF");
+  static final LinkType IMAGE = new LinkType("IMAGE");
+  static final LinkType LINK_REF = new LinkType("LINK_REF");
+  static final LinkType IMAGE_REF = new LinkType("IMAGE_REF");
 
   private final @NotNull String myName;
 
-  public LinkType(@NotNull String name) {
+  private LinkType(@NotNull String name) {
     this.myName = name;
   }
 

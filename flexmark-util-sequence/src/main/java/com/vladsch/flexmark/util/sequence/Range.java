@@ -34,12 +34,6 @@ public class Range {
     this.end = end;
   }
 
-  @NotNull
-  protected Range(@NotNull Range other) {
-    start = other.start;
-    end = other.end;
-  }
-
   public int getStart() {
     return start;
   }

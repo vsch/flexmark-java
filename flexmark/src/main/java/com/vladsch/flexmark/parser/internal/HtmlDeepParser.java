@@ -41,10 +41,10 @@ public class HtmlDeepParser {
     }
   }
 
-  public static final Set<String> BLOCK_TAGS;
-  public static final Set<String> VOID_TAGS;
-  public static final Map<String, Set<String>> OPTIONAL_TAGS;
-  public static final Pattern START_PATTERN;
+  private static final Set<String> BLOCK_TAGS;
+  private static final Set<String> VOID_TAGS;
+  private static final Map<String, Set<String>> OPTIONAL_TAGS;
+  private static final Pattern START_PATTERN;
   private static final HtmlMatch[] PATTERN_MAP;
 
   static {
@@ -201,17 +201,6 @@ public class HtmlDeepParser {
 
   public boolean haveOpenRawTag() {
     return myClosingPattern != null && myHtmlMatch != HtmlMatch.OPEN_TAG;
-  }
-
-  public boolean haveOpenBlockTag() {
-    if (!myOpenTags.isEmpty()) {
-      for (String openTag : myOpenTags) {
-        if (myBlockTags.contains(openTag)) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   public boolean hadHtml() {

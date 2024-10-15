@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
  * com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null
  * chars.
  */
-public final class SubSequence extends BasedSequenceImpl {
+final class SubSequence extends BasedSequenceImpl {
   private final @NotNull CharSequence charSequence;
   private final @NotNull SubSequence baseSeq;
   private final int startOffset;

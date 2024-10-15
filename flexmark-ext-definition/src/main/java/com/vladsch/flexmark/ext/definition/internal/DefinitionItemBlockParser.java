@@ -45,7 +45,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     this.block.setTight(itemData.isTight);
   }
 
-  static class ItemData {
+  private static class ItemData {
     private final boolean isTight;
     private final int markerColumn;
     private final int markerIndent;

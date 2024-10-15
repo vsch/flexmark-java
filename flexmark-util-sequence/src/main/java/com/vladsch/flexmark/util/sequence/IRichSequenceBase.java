@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
  * An abstract base for RichSequence which implements most of the methods allowing subclasses to
  * implement RichSequence with minimal support methods
  */
-public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements IRichSequence<T> {
+abstract class IRichSequenceBase<T extends IRichSequence<T>> implements IRichSequence<T> {
   // cached value
   private int hash;
 
@@ -35,7 +35,7 @@ public abstract class IRichSequenceBase<T extends IRichSequence<T>> implements I
    *
    * @param hash hash code for the char sequence.
    */
-  protected IRichSequenceBase(int hash) {
+  IRichSequenceBase(int hash) {
     this.hash = hash;
   }
 

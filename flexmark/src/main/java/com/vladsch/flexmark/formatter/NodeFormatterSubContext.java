@@ -6,22 +6,23 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class NodeFormatterSubContext implements NodeFormatterContext {
-  protected final MarkdownWriter markdown;
+abstract class NodeFormatterSubContext implements NodeFormatterContext {
+  final MarkdownWriter markdown;
   Node renderingNode;
   List<NodeFormattingHandler<?>> rendererList = null;
   int rendererIndex = -1;
 
-  public NodeFormatterSubContext(@NotNull MarkdownWriter markdown) {
+  NodeFormatterSubContext(@NotNull MarkdownWriter markdown) {
     this.markdown = markdown;
     this.renderingNode = null;
   }
 
-  public @Nullable Node getRenderingNode() {
+  @Nullable
+  Node getRenderingNode() {
     return renderingNode;
   }
 
-  public void setRenderingNode(@Nullable Node renderingNode) {
+  void setRenderingNode(@Nullable Node renderingNode) {
     this.renderingNode = renderingNode;
   }
 
@@ -30,11 +31,7 @@ public abstract class NodeFormatterSubContext implements NodeFormatterContext {
     return markdown;
   }
 
-  public void flushTo(@NotNull Appendable out, int maxTrailingBlankLines) {
-    flushTo(out, getFormatterOptions().maxBlankLines, maxTrailingBlankLines);
-  }
-
-  public void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
+  void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
     markdown.line();
     try {
       markdown.appendTo(out, maxBlankLines, maxTrailingBlankLines);

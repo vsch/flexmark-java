@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SpecialLeadInCharsHandler implements SpecialLeadInHandler {
-  final CharPredicate predicate;
+  private final CharPredicate predicate;
 
   protected SpecialLeadInCharsHandler(CharPredicate predicate) {
     this.predicate = predicate;

@@ -26,7 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockQuoteParser extends AbstractBlockParser {
-  public static final char MARKER_CHAR = '>';
+  private static final char MARKER_CHAR = '>';
+
   private final BlockQuote block = new BlockQuote();
   private final boolean allowLeadingSpace;
   private final boolean continueToBlankLine;
@@ -36,7 +37,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
   private final boolean withLeadSpacesInterruptsItemParagraph;
   private int lastWasBlankLine = 0;
 
-  public BlockQuoteParser(DataHolder options, BasedSequence marker) {
+  private BlockQuoteParser(DataHolder options, BasedSequence marker) {
     block.setOpeningMarker(marker);
     continueToBlankLine = Parser.BLOCK_QUOTE_EXTEND_TO_BLANK_LINE.get(options);
     allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.get(options);
@@ -113,7 +114,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     return BlockContinue.none();
   }
 
-  static boolean isMarker(
+  private static boolean isMarker(
       final ParserState state,
       final int index,
       final boolean inParagraph,
@@ -176,7 +177,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     }
   }
 
-  static class BlockQuoteLeadInHandler {
+  private static class BlockQuoteLeadInHandler {
     static final SpecialLeadInHandler HANDLER = SpecialLeadInStartsWithCharsHandler.create('>');
   }
 

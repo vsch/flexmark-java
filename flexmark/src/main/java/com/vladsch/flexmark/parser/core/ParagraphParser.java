@@ -4,9 +4,6 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
 import com.vladsch.flexmark.parser.block.BlockContinue;
-import com.vladsch.flexmark.parser.block.BlockParserFactory;
-import com.vladsch.flexmark.parser.block.BlockStart;
-import com.vladsch.flexmark.parser.block.MatchedBlockParser;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -68,12 +65,5 @@ public class ParagraphParser extends AbstractBlockParser {
   @Override
   public void parseInlines(InlineParser inlineParser) {
     inlineParser.parse(getBlock().getContentChars(), getBlock());
-  }
-
-  public static class Factory implements BlockParserFactory {
-    @Override
-    public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-      return null;
-    }
   }
 }

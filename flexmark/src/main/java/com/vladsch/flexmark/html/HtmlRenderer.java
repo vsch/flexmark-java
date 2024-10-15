@@ -116,7 +116,7 @@ public class HtmlRenderer implements IRender {
       SharedDataKeys.HEADER_ID_ADD_EMOJI_SHORTCUT;
   public static final DataKey<Boolean> RENDER_HEADER_ID = SharedDataKeys.RENDER_HEADER_ID;
   public static final DataKey<Boolean> GENERATE_HEADER_ID = SharedDataKeys.GENERATE_HEADER_ID;
-  public static final DataKey<Boolean> DO_NOT_RENDER_LINKS = SharedDataKeys.DO_NOT_RENDER_LINKS;
+  static final DataKey<Boolean> DO_NOT_RENDER_LINKS = SharedDataKeys.DO_NOT_RENDER_LINKS;
   public static final DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX =
       new DataKey<>(
           "FENCED_CODE_LANGUAGE_CLASS_PREFIX",
@@ -126,14 +126,14 @@ public class HtmlRenderer implements IRender {
           "FENCED_CODE_LANGUAGE_CLASS_MAP", HashMap::new); // info to language class mapping
   public static final DataKey<String> FENCED_CODE_NO_LANGUAGE_CLASS =
       new DataKey<>("FENCED_CODE_NO_LANGUAGE_CLASS", "");
-  public static final DataKey<String> FENCED_CODE_LANGUAGE_DELIMITERS =
+  static final DataKey<String> FENCED_CODE_LANGUAGE_DELIMITERS =
       new DataKey<>("FENCED_CODE_LANGUAGE_DELIMITERS", " \t");
   public static final DataKey<String> SOURCE_POSITION_ATTRIBUTE =
       new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
   public static final DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES =
       new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
   public static final DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
-  public static final DataKey<ArrayList<TagRange>> TAG_RANGES =
+  static final DataKey<ArrayList<TagRange>> TAG_RANGES =
       new DataKey<>("TAG_RANGES", ArrayList::new);
 
   public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES =
@@ -147,36 +147,23 @@ public class HtmlRenderer implements IRender {
       new DataKey<>("HTML_BLOCK_CLOSE_TAG_EOL", true);
   public static final DataKey<Boolean> UNESCAPE_HTML_ENTITIES =
       new DataKey<>("UNESCAPE_HTML_ENTITIES", true);
-  public static final DataKey<String> AUTOLINK_WWW_PREFIX =
+  static final DataKey<String> AUTOLINK_WWW_PREFIX =
       new DataKey<>("AUTOLINK_WWW_PREFIX", "http://");
 
   // regex for suppressed link prefixes
   public static final DataKey<String> SUPPRESSED_LINKS =
       new DataKey<>("SUPPRESSED_LINKS", "javascript:.*");
   public static final DataKey<Boolean> NO_P_TAGS_USE_BR = new DataKey<>("NO_P_TAGS_USE_BR", false);
-  public static final DataKey<Boolean> EMBEDDED_ATTRIBUTE_PROVIDER =
+  private static final DataKey<Boolean> EMBEDDED_ATTRIBUTE_PROVIDER =
       new DataKey<>("EMBEDDED_ATTRIBUTE_PROVIDER", true);
 
   /** output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)} */
   public static final DataKey<Integer> FORMAT_FLAGS =
       new DataKey<>("RENDERER_FORMAT_FLAGS", LineAppendable.F_TRIM_LEADING_WHITESPACE);
 
-  public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES =
+  static final DataKey<Integer> MAX_TRAILING_BLANK_LINES =
       SharedDataKeys.RENDERER_MAX_TRAILING_BLANK_LINES;
   public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.RENDERER_MAX_BLANK_LINES;
-
-  // Use LineFormattingAppendable values instead,
-  // NOTE: ALLOW_LEADING_WHITESPACE is now inverted and named F_TRIM_LEADING_WHITESPACE
-  @Deprecated public static final int CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
-  @Deprecated public static final int COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
-
-  @Deprecated
-  public static final int SUPPRESS_TRAILING_WHITESPACE = LineAppendable.F_TRIM_TRAILING_WHITESPACE;
-
-  @Deprecated public static final int PASS_THROUGH = LineAppendable.F_PASS_THROUGH;
-  //    @Deprecated final public static int ALLOW_LEADING_WHITESPACE =
-  // LineAppendable.F_TRIM_LEADING_WHITESPACE;
-  @Deprecated public static final int FORMAT_ALL = LineAppendable.F_FORMAT_ALL;
 
   /**
    * Stores pairs of equivalent renderer types to allow extensions to resolve types not known to
@@ -184,23 +171,11 @@ public class HtmlRenderer implements IRender {
    *
    * <p>Pair contains: rendererType, equivalentType
    */
-  public static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE =
+  private static final DataKey<List<Pair<String, String>>> RENDERER_TYPE_EQUIVALENCE =
       new DataKey<>("RENDERER_TYPE_EQUIVALENCE", Collections.emptyList());
 
-  // Use LineFormattingAppendable values instead
-  @Deprecated public static final int FORMAT_CONVERT_TABS = LineAppendable.F_CONVERT_TABS;
-
-  @Deprecated
-  public static final int FORMAT_COLLAPSE_WHITESPACE = LineAppendable.F_COLLAPSE_WHITESPACE;
-
-  @Deprecated
-  public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE =
-      LineAppendable.F_TRIM_TRAILING_WHITESPACE;
-
-  @Deprecated public static final int FORMAT_ALL_OPTIONS = LineAppendable.F_FORMAT_ALL;
-
   // Experimental, not tested
-  public static final DataKey<List<TrackedOffset>> TRACKED_OFFSETS =
+  private static final DataKey<List<TrackedOffset>> TRACKED_OFFSETS =
       new DataKey<>("TRACKED_OFFSETS", Collections.emptyList());
 
   // now not final only to allow disposal of resources

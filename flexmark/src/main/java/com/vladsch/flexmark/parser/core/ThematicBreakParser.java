@@ -21,12 +21,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ThematicBreakParser extends AbstractBlockParser {
-  static Pattern PATTERN =
+  private static final Pattern PATTERN =
       Pattern.compile("^(?:(?:\\*[ \t]*){3,}|(?:_[ \t]*){3,}|(?:-[ \t]*){3,})[ \t]*$");
 
   private final ThematicBreak block = new ThematicBreak();
 
-  public ThematicBreakParser(BasedSequence line) {
+  private ThematicBreakParser(BasedSequence line) {
     block.setChars(line);
   }
 
@@ -112,10 +112,10 @@ public class ThematicBreakParser extends AbstractBlockParser {
     }
   }
 
-  static class ThematicBreakOptions {
-    final boolean relaxedStart;
+  private static class ThematicBreakOptions {
+    private final boolean relaxedStart;
 
-    public ThematicBreakOptions(DataHolder options) {
+    private ThematicBreakOptions(DataHolder options) {
       this.relaxedStart = Parser.THEMATIC_BREAK_RELAXED_START.get(options);
     }
   }

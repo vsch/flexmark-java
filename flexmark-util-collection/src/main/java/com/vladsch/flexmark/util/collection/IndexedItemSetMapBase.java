@@ -8,30 +8,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S, M> {
-  protected final Map<K, S> bag;
+  private final Map<K, S> bag;
 
-  public IndexedItemSetMapBase() {
-    this(0);
-  }
-
-  public IndexedItemSetMapBase(int capacity) {
+  protected IndexedItemSetMapBase() {
     this.bag = new HashMap<>();
   }
-
-  @Override
-  public abstract @NotNull K mapKey(@NotNull M key);
-
-  @Override
-  public abstract @NotNull S newSet();
-
-  @Override
-  public abstract boolean addSetItem(@NotNull S s, int item);
-
-  @Override
-  public abstract boolean removeSetItem(@NotNull S s, int item);
-
-  @Override
-  public abstract boolean containsSetItem(@NotNull S s, int item);
 
   @Override
   public boolean addItem(@NotNull M key, int item) {

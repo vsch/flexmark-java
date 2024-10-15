@@ -5,10 +5,10 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
-  protected BasedSequence openingMarker = BasedSequence.NULL;
-  protected BasedSequence text = BasedSequence.NULL;
-  protected BasedSequence closingMarker = BasedSequence.NULL;
+abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
+  BasedSequence openingMarker = BasedSequence.NULL;
+  BasedSequence text = BasedSequence.NULL;
+  BasedSequence closingMarker = BasedSequence.NULL;
 
   @Override
   public void getAstExtra(@NotNull StringBuilder out) {
@@ -21,14 +21,13 @@ public abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
     return new BasedSequence[] {openingMarker, text, closingMarker};
   }
 
-  public DelimitedNodeImpl() {}
+  DelimitedNodeImpl() {}
 
-  public DelimitedNodeImpl(BasedSequence chars) {
+  DelimitedNodeImpl(BasedSequence chars) {
     super(chars);
   }
 
-  public DelimitedNodeImpl(
-      BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
+  DelimitedNodeImpl(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
     super(
         openingMarker.baseSubSequence(
             openingMarker.getStartOffset(), closingMarker.getEndOffset()));

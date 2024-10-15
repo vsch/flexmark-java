@@ -9,18 +9,18 @@ public class ResolvedContent {
   private final @NotNull LinkStatus status;
   private final @Nullable byte[] content;
 
-  public ResolvedContent(
+  private ResolvedContent(
       @NotNull ResolvedLink resolvedLink, @NotNull LinkStatus status, @Nullable byte[] content) {
     this.resolvedLink = resolvedLink;
     this.status = status;
     this.content = content;
   }
 
-  public ResolvedContent withStatus(@NotNull LinkStatus status) {
+  ResolvedContent withStatus(@NotNull LinkStatus status) {
     return status == this.status ? this : new ResolvedContent(resolvedLink, status, content);
   }
 
-  public ResolvedContent withContent(@Nullable byte[] content) {
+  ResolvedContent withContent(@Nullable byte[] content) {
     return Arrays.equals(this.content, content)
         ? this
         : new ResolvedContent(resolvedLink, status, content);

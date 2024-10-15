@@ -1,28 +1,11 @@
 package com.vladsch.flexmark.parser;
 
 public interface PegdownExtensions {
-  /** The default, standard markup mode without any extensions. */
-  static final int NONE = 0x00;
-
   /** Pretty ellipses, dashes and apostrophes. */
   static final int SMARTS = 0x01;
 
   /** Pretty single and double quotes. */
   static final int QUOTES = 0x02;
-
-  /**
-   * All of the smartypants prettyfications. Equivalent to SMARTS + QUOTES.
-   *
-   * @see <a href="http://daringfireball.net/projects/smartypants/">Smartypants</a>
-   */
-  static final int SMARTYPANTS = SMARTS + QUOTES;
-
-  /**
-   * PHP Markdown Extra style abbreviations.
-   *
-   * @see <a href="https://michelf.ca/projects/php-markdown/extra/#abbr">PHP Markdown Extra</a>
-   */
-  static final int ABBREVIATIONS = 0x04;
 
   /**
    * Enables the parsing of hard wraps as HTML linebreaks. Similar to what github does.
@@ -48,17 +31,6 @@ public interface PegdownExtensions {
   static final int TABLES = 0x20;
 
   /**
-   * PHP Markdown Extra style definition lists. Additionally supports the small extension proposed
-   * in the article referenced below.
-   *
-   * @see <a href="https://michelf.ca/projects/php-markdown/extra/#def-list">PHP Markdown Extra</a>
-   * @see <a
-   *     href="http://www.justatheory.com/computers/markup/modest-markdown-proposal.html">Extension
-   *     proposal</a>
-   */
-  static final int DEFINITIONS = 0x40;
-
-  /**
    * PHP Markdown Extra style fenced code blocks.
    *
    * @see <a href="https://michelf.ca/projects/php-markdown/extra/#fenced-code-blocks">PHP Markdown
@@ -79,27 +51,7 @@ public interface PegdownExtensions {
   /** Enables anchor links in headers. */
   static final int ANCHORLINKS = 0x400;
 
-  /** All available extensions excluding the high word options */
-  static final int UNUSED_ALL = 0x0000F800;
-
   static final int ALL = 0x0000FFFF;
-
-  /**
-   * Suppresses HTML blocks. They will be accepted in the input but not be contained in the output.
-   */
-  static final int SUPPRESS_HTML_BLOCKS = 0x00010000;
-
-  /**
-   * Suppresses inline HTML tags. They will be accepted in the input but not be contained in the
-   * output.
-   */
-  static final int SUPPRESS_INLINE_HTML = 0x00020000;
-
-  /**
-   * Suppresses HTML blocks as well as inline HTML tags. Both will be accepted in the input but not
-   * be contained in the output.
-   */
-  static final int SUPPRESS_ALL_HTML = 0x00030000;
 
   /** Requires a space char after Atx # header prefixes, so that #dasdsdaf is not a header. */
   static final int ATXHEADERSPACE = 0x00040000;
@@ -122,12 +74,6 @@ public interface PegdownExtensions {
    * name="header-a"&gt;&lt;/a&gt;header a&lt;/h1&gt;`
    */
   static final int EXTANCHORLINKS = 0x00400000;
-
-  /**
-   * EXTANCHORLINKS should wrap header content instead of creating an empty anchor: `&lt;h1&gt;&lt;a
-   * name="header-a"&gt;header a&lt;/a&gt;&lt;/h1&gt;`
-   */
-  static final int EXTANCHORLINKS_WRAP = 0x00800000;
 
   /**
    * Enables footnote processing [^1]: Text Paragraph with continuations and footnote reference [^1]
@@ -169,8 +115,6 @@ public interface PegdownExtensions {
    */
   static final int INSERTED = 0x40000000;
 
-  static final int UNUSABLE = 0x80000000;
-
   /**
    * All Optionals other than Suppress and FORCELISTITEMPARA which is a backwards compatibility
    * extension
@@ -187,8 +131,6 @@ public interface PegdownExtensions {
           | MULTI_LINE_IMAGE_URLS
           | INSERTED);
 
-  static final int ALL_WITH_OPTIONALS = ALL | ALL_OPTIONALS;
-
   /** These are GitHub main repo document processing compatibility flags */
   static final int GITHUB_DOCUMENT_COMPATIBLE =
       (FENCED_CODE_BLOCKS
@@ -199,12 +141,4 @@ public interface PegdownExtensions {
           | STRIKETHROUGH
           | ATXHEADERSPACE
           | RELAXEDHRULES);
-
-  /** These are GitHub wiki page processing compatibility flags */
-  static final int GITHUB_WIKI_COMPATIBLE = (GITHUB_DOCUMENT_COMPATIBLE | WIKILINKS);
-
-  /**
-   * These are GitHub comment (issues, pull requests and comments) processing compatibility flags
-   */
-  static final int GITHUB_COMMENT_COMPATIBLE = (GITHUB_DOCUMENT_COMPATIBLE | HARDWRAPS);
 }

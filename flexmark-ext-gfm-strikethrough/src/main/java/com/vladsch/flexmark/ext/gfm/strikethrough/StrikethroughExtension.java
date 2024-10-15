@@ -19,9 +19,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class StrikethroughExtension
     implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-  public static final NullableDataKey<String> STRIKETHROUGH_STYLE_HTML_OPEN =
+  static final NullableDataKey<String> STRIKETHROUGH_STYLE_HTML_OPEN =
       StrikethroughSubscriptExtension.STRIKETHROUGH_STYLE_HTML_OPEN;
-  public static final NullableDataKey<String> STRIKETHROUGH_STYLE_HTML_CLOSE =
+  static final NullableDataKey<String> STRIKETHROUGH_STYLE_HTML_CLOSE =
       StrikethroughSubscriptExtension.STRIKETHROUGH_STYLE_HTML_CLOSE;
 
   private StrikethroughExtension() {}

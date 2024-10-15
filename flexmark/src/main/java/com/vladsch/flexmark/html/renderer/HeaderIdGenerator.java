@@ -14,18 +14,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
-  Map<String, Integer> headerBaseIds = new HashMap<>();
-  boolean resolveDupes;
-  String toDashChars;
-  String nonDashChars;
-  boolean noDupedDashes;
-  boolean nonAsciiToLowercase;
+  private Map<String, Integer> headerBaseIds = new HashMap<>();
+  private boolean resolveDupes;
+  private String toDashChars;
+  private String nonDashChars;
+  private boolean noDupedDashes;
+  private boolean nonAsciiToLowercase;
 
   public HeaderIdGenerator() {
     this(null);
   }
 
-  public HeaderIdGenerator(@Nullable DataHolder options) {
+  private HeaderIdGenerator(@Nullable DataHolder options) {
     resolveDupes = HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES.get(options);
     toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.get(options);
     nonDashChars = HtmlRenderer.HEADER_ID_GENERATOR_NON_DASH_CHARS.get(options);
@@ -115,7 +115,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     }.visit(document);
   }
 
-  String generateId(String text) {
+  private String generateId(String text) {
     if (!text.isEmpty()) {
       String baseRefId =
           generateId(text, toDashChars, nonDashChars, noDupedDashes, nonAsciiToLowercase);
@@ -149,15 +149,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     return generateId(text.toString());
   }
 
-  public static String generateId(
-      CharSequence headerText,
-      String toDashChars,
-      boolean noDupedDashes,
-      boolean nonAsciiToLowercase) {
-    return generateId(headerText, toDashChars, null, noDupedDashes, nonAsciiToLowercase);
-  }
-
-  public static String generateId(
+  private static String generateId(
       CharSequence headerText,
       String toDashChars,
       String nonDashChars,
@@ -188,7 +180,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator, Disposable {
     return baseRefId.toString();
   }
 
-  public static boolean isAlphabetic(char c) {
+  private static boolean isAlphabetic(char c) {
     return (((((1 << Character.UPPERCASE_LETTER)
                     | (1 << Character.LOWERCASE_LETTER)
                     | (1 << Character.TITLECASE_LETTER)

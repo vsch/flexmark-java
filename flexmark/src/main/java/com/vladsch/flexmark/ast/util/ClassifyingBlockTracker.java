@@ -16,9 +16,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker {
-  protected final ClassificationBag<Class<?>, Node> nodeClassifier =
+  private final ClassificationBag<Class<?>, Node> nodeClassifier =
       new ClassificationBag<>(NodeClassifier.INSTANCE);
-  protected final OrderedMultiMap<BlockParser, Block> allBlockParsersMap =
+  private final OrderedMultiMap<BlockParser, Block> allBlockParsersMap =
       new OrderedMultiMap<>(
           new CollectionHost<Paired<BlockParser, Block>>() {
             @Override
@@ -60,24 +60,12 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
     return allBlockParsersMap.keySet();
   }
 
-  public OrderedSet<Block> allBlocks() {
-    return allBlockParsersMap.valueSet();
-  }
-
-  public Block getValue(BlockParser parser) {
-    return allBlockParsersMap.getKeyValue(parser);
-  }
-
   public BlockParser getKey(Block parser) {
     return allBlockParsersMap.getValueKey(parser);
   }
 
   public boolean containsKey(BlockParser parser) {
     return allBlockParsersMap.containsKey(parser);
-  }
-
-  public boolean containsValue(Block parser) {
-    return allBlockParsersMap.containsValue(parser);
   }
 
   public ClassificationBag<Class<?>, Node> getNodeClassifier() {

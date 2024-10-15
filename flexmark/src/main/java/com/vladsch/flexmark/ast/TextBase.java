@@ -14,14 +14,6 @@ import org.jetbrains.annotations.NotNull;
 public class TextBase extends Node implements TextContainer {
   public TextBase() {}
 
-  public TextBase(BasedSequence chars) {
-    super(chars);
-  }
-
-  public TextBase(String chars) {
-    super(BasedSequence.of(chars));
-  }
-
   @NotNull
   @Override
   public BasedSequence[] getSegments() {

@@ -79,10 +79,7 @@ public class RepeatedSequenceTest {
             "subSequence(" + i + "," + j + ").hashCode()",
             result.subSequence(i, j).hashCode(),
             chars.subSequence(i, j).hashCode());
-        assertEquals(
-            "subSequence(" + i + "," + j + ").equals()",
-            true,
-            chars.subSequence(i, j).equals(result.subSequence(i, j)));
+        assertEquals(chars.subSequence(i, j), result.subSequence(i, j));
       }
     }
   }

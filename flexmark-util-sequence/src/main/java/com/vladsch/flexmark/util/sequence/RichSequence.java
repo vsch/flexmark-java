@@ -8,10 +8,6 @@ public interface RichSequence extends IRichSequence<RichSequence> {
     return RichSequenceImpl.create(charSequence, 0, charSequence.length());
   }
 
-  static RichSequence of(CharSequence charSequence, int startIndex) {
-    return RichSequenceImpl.create(charSequence, startIndex, charSequence.length());
-  }
-
   static RichSequence of(CharSequence charSequence, int startIndex, int endIndex) {
     return RichSequenceImpl.create(charSequence, startIndex, endIndex);
   }

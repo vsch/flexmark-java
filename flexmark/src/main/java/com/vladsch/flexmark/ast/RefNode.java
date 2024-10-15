@@ -23,10 +23,10 @@ public abstract class RefNode extends Node
   protected BasedSequence textOpeningMarker = BasedSequence.NULL;
   protected BasedSequence text = BasedSequence.NULL;
   protected BasedSequence textClosingMarker = BasedSequence.NULL;
-  protected BasedSequence referenceOpeningMarker = BasedSequence.NULL;
-  protected BasedSequence reference = BasedSequence.NULL;
-  protected BasedSequence referenceClosingMarker = BasedSequence.NULL;
-  protected boolean isDefined = false;
+  private BasedSequence referenceOpeningMarker = BasedSequence.NULL;
+  private BasedSequence reference = BasedSequence.NULL;
+  private BasedSequence referenceClosingMarker = BasedSequence.NULL;
+  private boolean isDefined = false;
 
   @NotNull
   @Override
@@ -67,11 +67,11 @@ public abstract class RefNode extends Node
 
   public RefNode() {}
 
-  public RefNode(BasedSequence chars) {
+  RefNode(BasedSequence chars) {
     super(chars);
   }
 
-  public RefNode(
+  RefNode(
       BasedSequence textOpeningMarker,
       BasedSequence text,
       BasedSequence textClosingMarker,
@@ -89,7 +89,7 @@ public abstract class RefNode extends Node
     this.referenceClosingMarker = referenceClosingMarker;
   }
 
-  public RefNode(
+  RefNode(
       BasedSequence chars,
       BasedSequence textOpeningMarker,
       BasedSequence text,
@@ -106,8 +106,7 @@ public abstract class RefNode extends Node
     this.referenceClosingMarker = referenceClosingMarker;
   }
 
-  public RefNode(
-      BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker) {
+  RefNode(BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker) {
     super(
         textOpeningMarker.baseSubSequence(
             textOpeningMarker.getStartOffset(), textClosingMarker.getEndOffset()));
@@ -116,7 +115,7 @@ public abstract class RefNode extends Node
     this.textClosingMarker = textClosingMarker;
   }
 
-  public RefNode(
+  RefNode(
       BasedSequence chars,
       BasedSequence textOpeningMarker,
       BasedSequence text,
@@ -127,7 +126,7 @@ public abstract class RefNode extends Node
     this.textClosingMarker = textClosingMarker;
   }
 
-  public RefNode(
+  RefNode(
       BasedSequence textOpeningMarker,
       BasedSequence text,
       BasedSequence textClosingMarker,

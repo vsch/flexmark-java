@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.collection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.function.BiFunction;
 import org.junit.Test;
@@ -17,8 +18,8 @@ public class MinAggregatorTest {
 
   @Test
   public void test_Basic() {
-    assertEquals((Integer) null, reduce(MaxAggregator.INSTANCE));
-    assertEquals((Integer) null, reduce(MaxAggregator.INSTANCE, (Integer) null));
+    assertNull(reduce(MaxAggregator.INSTANCE));
+    assertNull(reduce(MaxAggregator.INSTANCE, (Integer) null));
     assertEquals((Integer) 1, reduce(MaxAggregator.INSTANCE, -1, -2, -5, 0, 1));
     assertEquals((Integer) 5, reduce(MaxAggregator.INSTANCE, -1, -2, -5, 0, 1, 5));
   }

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.collection.iteration;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface ReversibleIndexedIterable<E> extends ReversibleIterable<E> {
+interface ReversibleIndexedIterable<E> extends ReversibleIterable<E> {
   @Override
   @NotNull
   ReversibleIndexedIterator<E> iterator();

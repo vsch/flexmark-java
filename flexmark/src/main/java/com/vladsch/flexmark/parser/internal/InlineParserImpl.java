@@ -64,34 +64,34 @@ import org.jetbrains.annotations.Nullable;
 
 public class InlineParserImpl extends LightInlineParserImpl
     implements InlineParser, ParagraphPreProcessor {
-  protected final BitSet originalSpecialCharacters;
-  protected final BitSet delimiterCharacters;
-  protected final Map<Character, DelimiterProcessor> delimiterProcessors;
-  protected final LinkRefProcessorData linkRefProcessorsData;
-  protected List<LinkRefProcessor> linkRefProcessors = null;
-  protected Map<Character, List<InlineParserExtension>> inlineParserExtensions = null;
-  protected List<InlineParserExtensionFactory> inlineParserExtensionFactories = null;
-  protected LinkDestinationParser linkDestinationParser = null;
+  private final BitSet originalSpecialCharacters;
+  private final BitSet delimiterCharacters;
+  private final Map<Character, DelimiterProcessor> delimiterProcessors;
+  private final LinkRefProcessorData linkRefProcessorsData;
+  private List<LinkRefProcessor> linkRefProcessors = null;
+  private Map<Character, List<InlineParserExtension>> inlineParserExtensions = null;
+  private List<InlineParserExtensionFactory> inlineParserExtensionFactories = null;
+  private LinkDestinationParser linkDestinationParser = null;
 
   // used to temporarily override handling of special characters by custom ParagraphPreProcessors
-  protected BitSet specialCharacters;
-  protected BitSet customCharacters = null;
-  protected Map<Character, CharacterNodeFactory> customSpecialCharacterFactoryMap = null;
-  protected List<Node> customSpecialCharacterNodes = null;
+  private BitSet specialCharacters;
+  private BitSet customCharacters = null;
+  private Map<Character, CharacterNodeFactory> customSpecialCharacterFactoryMap = null;
+  private List<Node> customSpecialCharacterNodes = null;
 
   /** Link references by ID, needs to be built up using parseReference before calling parse. */
-  protected ReferenceRepository referenceRepository;
+  private ReferenceRepository referenceRepository;
 
   /**
    * Top delimiter (emphasis, strong emphasis or custom emphasis). (Brackets are on a separate
    * stack, different from the algorithm described in the spec.)
    */
-  protected Delimiter lastDelimiter;
+  private Delimiter lastDelimiter;
 
   /** Top opening bracket (<code>[</code> or <code>![)</code>). */
   private Bracket lastBracket;
 
-  public InlineParserImpl(
+  InlineParserImpl(
       DataHolder options,
       BitSet specialCharacters,
       BitSet delimiterCharacters,
@@ -200,9 +200,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     this.lastDelimiter = null;
     this.lastBracket = null;
 
-    boolean customOnly =
-        (block
-            instanceof DoNotDecorate); // || block.getAncestorOfType(DoNotDecorate.class) != null;
+    boolean customOnly = (block instanceof DoNotDecorate);
 
     boolean moreToParse;
     do {
@@ -388,17 +386,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     return index - startIndex;
   }
 
-  /**
-   * Parse the next inline element in subject, advancing input index. On success, add the result to
-   * block's children and return true. On failure, return false.
-   *
-   * @return false on failure true on success
-   */
-  protected boolean parseInline() {
-    return parseInline(false);
-  }
-
-  protected boolean parseInline(boolean customOnly) {
+  private boolean parseInline(boolean customOnly) {
     boolean res = false;
 
     char c = peek();
@@ -600,7 +588,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    *
    * @return true
    */
-  protected boolean parseBackslash() {
+  private boolean parseBackslash() {
     index++;
     if (peek() == '\n' || peek() == '\r') {
       int charsMatched = peek(1) == '\n' ? 2 : 1;
@@ -629,7 +617,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    *
    * @return true if matched backticks, false otherwise
    */
-  protected boolean parseBackticks() {
+  private boolean parseBackticks() {
     BasedSequence ticks = match(myParsing.TICKS_HERE);
     if (ticks == null) {
       return false;
@@ -716,7 +704,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    * @param delimiterChar delimiter character being processed
    * @return true if processed characters false otherwise
    */
-  protected boolean parseDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
+  private boolean parseDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
     DelimiterData res = scanDelimiters(delimiterProcessor, delimiterChar);
     if (res == null) {
       return false;
@@ -743,7 +731,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    *
    * @return true
    */
-  protected boolean parseOpenBracket() {
+  private boolean parseOpenBracket() {
     int startIndex = index;
     index++;
 
@@ -760,7 +748,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    *
    * @return true if processed characters false otherwise
    */
-  protected boolean parseBang() {
+  private boolean parseBang() {
     int startIndex = index;
     index++;
     if (peek() == '[') {
@@ -787,12 +775,12 @@ public class InlineParserImpl extends LightInlineParserImpl
     lastBracket = lastBracket.getPrevious();
   }
 
-  static class ReferenceProcessorMatch {
-    public final LinkRefProcessor processor;
-    public final BasedSequence nodeChars;
-    public final boolean wantExclamation;
+  private static class ReferenceProcessorMatch {
+    private final LinkRefProcessor processor;
+    private final BasedSequence nodeChars;
+    private final boolean wantExclamation;
 
-    public ReferenceProcessorMatch(
+    private ReferenceProcessorMatch(
         LinkRefProcessor processor, boolean wantExclamation, BasedSequence nodeChars) {
       this.processor = processor;
       this.nodeChars = nodeChars;
@@ -863,7 +851,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    *
    * @return true
    */
-  protected boolean parseCloseBracket() {
+  private boolean parseCloseBracket() {
     index++;
     int startIndex = index;
     int nestedBrackets;
@@ -1253,7 +1241,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     return true;
   }
 
-  protected static boolean containsLinkRefs(Node node, Boolean isTentative) {
+  private static boolean containsLinkRefs(Node node, Boolean isTentative) {
     Node next = node.getFirstChild();
     while (next != null) {
       if (next instanceof LinkRendered
@@ -1265,8 +1253,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     return false;
   }
 
-  protected static boolean containsLinkRefs(
-      BasedSequence nodeChars, Node next, Boolean isTentative) {
+  private static boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isTentative) {
     int startOffset = nodeChars.getStartOffset();
     int endOffset = nodeChars.getEndOffset();
     while (next != null) {
@@ -1280,7 +1267,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     return false;
   }
 
-  protected static void collapseLinkRefChildren(
+  private static void collapseLinkRefChildren(
       Node node, Function<LinkRefDerived, Boolean> isTentative, boolean trimFirstLastChild) {
     Node child = node.getFirstChild();
     boolean hadCollapse = false;
@@ -1490,7 +1477,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    *
    * @return true if processed characters false otherwise
    */
-  protected boolean parseString() {
+  private boolean parseString() {
     int begin = index;
     int length = input.length();
     while (index != length) {
@@ -1507,11 +1494,6 @@ public class InlineParserImpl extends LightInlineParserImpl
     return false;
   }
 
-  @Override
-  protected Object clone() throws CloneNotSupportedException {
-    return super.clone();
-  }
-
   /**
    * Scan a sequence of characters with code delimiterChar, and return information about the number
    * of delimiters and whether they are positioned such that they can open and/or close emphasis or
@@ -1521,8 +1503,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    * @param delimiterChar delimiter character being scanned
    * @return information about delimiter run, or {@code null}
    */
-  protected DelimiterData scanDelimiters(
-      DelimiterProcessor delimiterProcessor, char delimiterChar) {
+  private DelimiterData scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
     int startIndex = index;
 
     int delimiterCount = 0;
@@ -1800,7 +1781,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     }
   }
 
-  static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(
+  private static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(
       DataHolder options, List<InlineParserExtensionFactory> extensionFactories) {
     Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<>();
 
@@ -1917,7 +1898,7 @@ public class InlineParserImpl extends LightInlineParserImpl
       }
 
       return new LinkRefProcessorData(sortedLinkProcessors, maxReferenceLinkNesting, nestingLookup);
-    } else if (linkRefProcessors.size() > 0) {
+    } else if (!linkRefProcessors.isEmpty()) {
       int maxNesting = linkRefProcessors.get(0).getBracketNestingLevel(options);
       int[] nestingLookup = new int[maxNesting + 1];
       return new LinkRefProcessorData(linkRefProcessors, maxNesting, nestingLookup);

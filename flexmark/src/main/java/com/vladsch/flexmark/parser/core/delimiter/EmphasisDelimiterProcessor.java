@@ -10,11 +10,11 @@ import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.misc.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
+abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
   private final char delimiterChar;
   private final int multipleUse;
 
-  protected EmphasisDelimiterProcessor(char delimiterChar, boolean strongWrapsEmphasis) {
+  EmphasisDelimiterProcessor(char delimiterChar, boolean strongWrapsEmphasis) {
     this.delimiterChar = delimiterChar;
     this.multipleUse = strongWrapsEmphasis ? 1 : 2;
   }

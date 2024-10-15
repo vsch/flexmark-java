@@ -3,14 +3,12 @@ package com.vladsch.flexmark.ast;
 import static com.vladsch.flexmark.util.misc.BitFieldSet.any;
 
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.NodeVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class IndentedCodeBlock extends Block implements TextContainer {
@@ -21,18 +19,6 @@ public class IndentedCodeBlock extends Block implements TextContainer {
   }
 
   public IndentedCodeBlock() {}
-
-  public IndentedCodeBlock(BasedSequence chars) {
-    super(chars);
-  }
-
-  public IndentedCodeBlock(BasedSequence chars, List<BasedSequence> segments) {
-    super(chars, segments);
-  }
-
-  public IndentedCodeBlock(BlockContent blockContent) {
-    super(blockContent);
-  }
 
   @Override
   public boolean collectText(

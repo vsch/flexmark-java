@@ -31,7 +31,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
   private final boolean trimTrailingBlankLines;
   private final boolean codeContentBlock;
 
-  public IndentedCodeBlockParser(DataHolder options) {
+  private IndentedCodeBlockParser(DataHolder options) {
     trimTrailingBlankLines = Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES.get(options);
     this.codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.get(options);
   }
@@ -116,7 +116,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
     }
   }
 
-  public static class BlockFactory extends AbstractBlockParserFactory {
+  static class BlockFactory extends AbstractBlockParserFactory {
     private BlockFactory(DataHolder options) {
       super(options);
     }

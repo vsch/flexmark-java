@@ -127,11 +127,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
     return setOptions(toOptionSet(flags));
   }
 
-  @NotNull
-  default LineAppendable setOptions(Options... options) {
-    return setOptions(toOptionSet(options).toInt());
-  }
-
   /**
    * Set options on processing text
    *
@@ -158,10 +153,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
    * @return number of trailing blank lines
    */
   int getTrailingBlankLines(int endLine);
-
-  default int getTrailingBlankLines() {
-    return getTrailingBlankLines(getLineCountWithPending());
-  }
 
   /**
    * @return true if not empty and have no unterminated lines
@@ -696,17 +687,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
   @NotNull
   default String toString(int maxBlankLines, int maxTrailingBlankLines) {
     return toString(maxBlankLines, maxTrailingBlankLines, true);
-  }
-
-  /**
-   * get the resulting text for all lines
-   *
-   * @param maxBlankLines maximum blank lines to allow, if -1 then no trailing EOL will be generated
-   * @return resulting text
-   */
-  @NotNull
-  default String toString(int maxBlankLines) {
-    return toString(maxBlankLines, maxBlankLines, true);
   }
 
   /**

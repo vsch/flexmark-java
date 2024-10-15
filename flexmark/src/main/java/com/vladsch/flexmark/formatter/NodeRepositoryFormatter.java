@@ -30,7 +30,7 @@ public abstract class NodeRepositoryFormatter<
         B extends Node & ReferenceNode<R, B, N>,
         N extends Node & ReferencingNode<R, B>>
     implements PhasedNodeFormatter {
-  public static final Set<FormattingPhase> FORMATTING_PHASES =
+  private static final Set<FormattingPhase> FORMATTING_PHASES =
       new HashSet<>(
           Arrays.asList(
               FormattingPhase.COLLECT,
@@ -55,34 +55,29 @@ public abstract class NodeRepositoryFormatter<
    *
    * @return true if yes, false if leave all references as is
    */
-  protected boolean makeReferencesUnique() {
+  private boolean makeReferencesUnique() {
     return true;
   }
 
-  protected final R referenceRepository;
-  protected final List<B> referenceList;
-  protected final Set<Node> unusedReferences;
-  protected final B lastReference;
-  protected boolean recheckUndefinedReferences;
-  protected boolean repositoryNodesDone;
-  protected final Comparator<B> myComparator;
+  private final R referenceRepository;
+  private final List<B> referenceList;
+  private final Set<Node> unusedReferences;
+  private final B lastReference;
+  private boolean recheckUndefinedReferences;
+  private boolean repositoryNodesDone;
+  private final Comparator<B> myComparator;
 
   private Map<String, String> referenceTranslationMap;
   protected Map<String, String> referenceUniqificationMap;
   private final DataKey<Map<String, String>> myReferenceMapKey;
   private final DataKey<Map<String, String>> myReferenceUniqificationMapKey;
 
-  protected ElementPlacement getTranslationReferencePlacement(NodeFormatterContext context) {
+  private ElementPlacement getTranslationReferencePlacement(NodeFormatterContext context) {
     if (context.isTransformingText()) {
       return ElementPlacement.AS_IS;
     }
 
     return getReferencePlacement();
-  }
-
-  public String modifyTransformedReference(
-      String transformedReferenceId, NodeFormatterContext context) {
-    return transformedReferenceId;
   }
 
   private void renderReferenceBlockUnique(
@@ -102,47 +97,6 @@ public abstract class NodeRepositoryFormatter<
     } else {
       renderReferenceBlock(node, context, markdown);
     }
-  }
-
-  protected String transformReferenceId(String nodeText, NodeFormatterContext context) {
-    if (context.isTransformingText()) {
-      String transformed;
-
-      switch (context.getRenderPurpose()) {
-        case TRANSLATION_SPANS:
-        case TRANSLATED_SPANS:
-          if (referenceTranslationMap != null) {
-            if (referenceTranslationMap.containsKey(nodeText)) {
-              transformed = referenceTranslationMap.get(nodeText);
-            } else {
-              transformed = context.transformNonTranslating(null, nodeText, null, null).toString();
-              referenceTranslationMap.put(nodeText, transformed);
-            }
-          } else {
-            transformed = context.transformNonTranslating(null, nodeText, null, null).toString();
-          }
-          return modifyTransformedReference(transformed, context);
-
-        case TRANSLATED:
-          String untransformed = modifyTransformedReference(nodeText, context);
-          String s = context.transformNonTranslating(null, untransformed, null, null).toString();
-
-          // apply uniquification
-          // disable otherwise may get double mapping
-          if (!context.isPostProcessingNonTranslating()
-              && referenceUniqificationMap != null
-              && referenceUniqificationMap.containsKey(s)) {
-            String uniqueS = referenceUniqificationMap.get(s);
-            return uniqueS;
-          }
-          return s;
-
-        case FORMAT:
-        default:
-          break;
-      }
-    }
-    return nodeText;
   }
 
   public NodeRepositoryFormatter(
@@ -324,7 +278,7 @@ public abstract class NodeRepositoryFormatter<
    * document and store this map in document property so that it can be retrieved from the document
    * later when computing the map by documents after this document in the list.
    */
-  protected void uniquifyIds(
+  private void uniquifyIds(
       NodeFormatterContext context, MarkdownWriter markdown, Document document) {
     // collect ids and values to uniquify references up to our document
     R combinedRefs = getRepository(new DataSet()); // create an empty repository

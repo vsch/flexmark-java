@@ -62,13 +62,13 @@ public class FormatterOptions {
   public final boolean keepSoftLineBreaks;
   public final boolean appendTransferredReferences;
   public final boolean optimizedInlineRendering;
-  public final boolean applySpecialLeadInHandlers;
+  final boolean applySpecialLeadInHandlers;
   public final boolean escapeSpecialCharsOnWrap;
-  public final boolean escapeNumberedLeadInOnWrap;
+  private final boolean escapeNumberedLeadInOnWrap;
   public final boolean unescapeSpecialCharsOnWrap;
-  public final CharWidthProvider charWidthProvider;
-  public final ElementAlignment listAlignNumeric;
-  public final boolean listResetFirstItemNumber;
+  final CharWidthProvider charWidthProvider;
+  final ElementAlignment listAlignNumeric;
+  final boolean listResetFirstItemNumber;
   public final String formatterOnTag;
   public final String formatterOffTag;
   public final boolean formatterTagsEnabled;

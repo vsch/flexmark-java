@@ -23,10 +23,6 @@ public final class Text extends Node implements TextContainer {
     super(BasedSequence.of(chars));
   }
 
-  public Text(String chars, BasedSequence baseSeq) {
-    super(PrefixedSubSequence.prefixOf(chars, baseSeq));
-  }
-
   @NotNull
   @Override
   public BasedSequence[] getSegments() {

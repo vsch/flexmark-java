@@ -6,7 +6,6 @@ package com.vladsch.flexmark.parser.block;
  * <p><em>This enum is not visible by clients.</em>
  */
 public enum ParserPhase {
-  NONE,
   STARTING,
   PARSE_BLOCKS,
   PRE_PROCESS_PARAGRAPHS,

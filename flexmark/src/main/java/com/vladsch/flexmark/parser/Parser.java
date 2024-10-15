@@ -120,7 +120,7 @@ public class Parser implements IParse {
   public static final DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER =
       SharedDataKeys.INTELLIJ_DUMMY_IDENTIFIER;
 
-  public static final DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST =
+  static final DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST =
       new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
   public static final DataKey<Boolean> PARSE_INNER_HTML_COMMENTS =
       SharedDataKeys.PARSE_INNER_HTML_COMMENTS;
@@ -150,7 +150,7 @@ public class Parser implements IParse {
   public static final DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR =
       new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
   public static final DataKey<Boolean> BLANK_LINES_IN_AST = SharedDataKeys.BLANK_LINES_IN_AST;
-  public static final DataKey<Boolean> USE_HARDCODED_LINK_ADDRESS_PARSER =
+  static final DataKey<Boolean> USE_HARDCODED_LINK_ADDRESS_PARSER =
       new DataKey<>("USE_HARDCODED_LINK_ADDRESS_PARSER", true);
 
   /** STRONG_WRAPS_EMPHASIS default false, when true makes parsing CommonMark Spec 0.27 compliant */
@@ -450,7 +450,7 @@ public class Parser implements IParse {
     this.specialCharacters =
         InlineParserImpl.calculateSpecialCharacters(options, delimiterCharacters);
     this.postProcessorDependencies =
-        PostProcessorManager.calculatePostProcessors(options, builder.postProcessorFactories);
+        PostProcessorManager.calculatePostProcessors(builder.postProcessorFactories);
     this.inlineParserExtensionFactories = builder.inlineParserExtensionFactories;
   }
 
@@ -609,17 +609,19 @@ public class Parser implements IParse {
 
   /** Builder for configuring a {@link Parser}. */
   public static class Builder extends BuilderBase<Builder> {
-    final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<>();
-    final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
-    final List<PostProcessorFactory> postProcessorFactories = new ArrayList<>();
-    final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
-    final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
-    final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
-    final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<>();
-    InlineParserFactory inlineParserFactory = null;
-    final List<SpecialLeadInHandler> specialLeadInHandlers = new ArrayList<>();
+    private final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<>();
+    private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
+    private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<>();
+    private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories =
+        new ArrayList<>();
+    private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
+    private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
+    private final List<InlineParserExtensionFactory> inlineParserExtensionFactories =
+        new ArrayList<>();
+    private InlineParserFactory inlineParserFactory = null;
+    private final List<SpecialLeadInHandler> specialLeadInHandlers = new ArrayList<>();
 
-    public Builder(DataHolder options) {
+    private Builder(DataHolder options) {
       super(options);
       loadExtensions();
     }

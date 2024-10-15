@@ -18,7 +18,7 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
     this(null, formatOptions);
   }
 
-  public MarkdownWriter(@Nullable Appendable appendable, int formatOptions) {
+  MarkdownWriter(@Nullable Appendable appendable, int formatOptions) {
     super(appendable, formatOptions);
   }
 
@@ -60,11 +60,6 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
   }
 
   public @NotNull MarkdownWriter appendNonTranslating(
-      @Nullable CharSequence prefix, @NotNull CharSequence csq) {
-    return appendNonTranslating(prefix, csq, null, null);
-  }
-
-  public @NotNull MarkdownWriter appendNonTranslating(
       @Nullable CharSequence prefix, @NotNull CharSequence csq, @Nullable CharSequence suffix) {
     return appendNonTranslating(prefix, csq, suffix, null);
   }
@@ -84,11 +79,6 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
 
   public @NotNull MarkdownWriter appendTranslating(@NotNull CharSequence csq) {
     return appendTranslating(null, csq, null, null);
-  }
-
-  public @NotNull MarkdownWriter appendTranslating(
-      @Nullable CharSequence prefix, @NotNull CharSequence csq) {
-    return appendTranslating(prefix, csq, null, null);
   }
 
   public @NotNull MarkdownWriter appendTranslating(

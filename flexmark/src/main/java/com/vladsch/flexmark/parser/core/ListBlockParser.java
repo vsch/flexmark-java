@@ -42,13 +42,13 @@ public class ListBlockParser extends AbstractBlockParser {
   private final ListBlock myBlock;
   private final ListOptions myOptions;
   private final ListData myListData;
-  ListItemParser myLastChild = null;
-  BasedSequence myItemHandledLine = null;
-  boolean myItemHandledNewListLine;
-  boolean myItemHandledNewItemLine;
-  boolean myItemHandledSkipActiveLine;
+  private ListItemParser myLastChild = null;
+  private BasedSequence myItemHandledLine = null;
+  private boolean myItemHandledNewListLine;
+  private boolean myItemHandledNewItemLine;
+  private boolean myItemHandledSkipActiveLine;
 
-  public ListBlockParser(ListOptions options, ListData listData, ListItemParser listItemParser) {
+  private ListBlockParser(ListOptions options, ListData listData, ListItemParser listItemParser) {
     myOptions = options;
     myListData = listData;
     myBlock = listData.listBlock;
@@ -57,10 +57,6 @@ public class ListBlockParser extends AbstractBlockParser {
     myItemHandledNewListLine = false;
     myItemHandledNewItemLine = false;
     myItemHandledSkipActiveLine = false;
-  }
-
-  BasedSequence getItemHandledLine() {
-    return myItemHandledLine;
   }
 
   void setItemHandledLine(BasedSequence itemHandledLine) {
@@ -105,14 +101,6 @@ public class ListBlockParser extends AbstractBlockParser {
 
   public ListData getListData() {
     return myListData;
-  }
-
-  int getContentIndent() {
-    return myListData.markerIndent + myListData.listMarker.length() + myListData.contentOffset;
-  }
-
-  int getLastContentIndent() {
-    return myLastChild.getContentIndent();
   }
 
   @Override
@@ -213,8 +201,7 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         thisItemLoose =
-            false
-                || thisItemHadTrueTrailingBlankLine && myOptions.isLooseWhenHasTrailingBlankLine()
+            thisItemHadTrueTrailingBlankLine && myOptions.isLooseWhenHasTrailingBlankLine()
                 || thisItemHadBlankAfterItemPara
                     && myOptions.isLooseWhenBlankLineFollowsItemParagraph()
                 || thisItemContainsBlankLine && myOptions.isLooseWhenContainsBlankLine()
@@ -470,12 +457,12 @@ public class ListBlockParser extends AbstractBlockParser {
     }
   }
 
-  static class ListItemLeadInHandler extends SpecialLeadInCharsHandler {
-    static final CharPredicate ORDERED_DELIM_DOT = CharPredicate.anyOf('.');
-    static final CharPredicate ORDERED_DELIM_DOT_PARENS = CharPredicate.anyOf(".)");
-    static final SpecialLeadInHandler ORDERED_DELIM_DOT_HANDLER =
+  private static class ListItemLeadInHandler extends SpecialLeadInCharsHandler {
+    private static final CharPredicate ORDERED_DELIM_DOT = CharPredicate.anyOf('.');
+    private static final CharPredicate ORDERED_DELIM_DOT_PARENS = CharPredicate.anyOf(".)");
+    private static final SpecialLeadInHandler ORDERED_DELIM_DOT_HANDLER =
         new ListItemLeadInHandler(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), true);
-    static final SpecialLeadInHandler ORDERED_DELIM_DOT_PARENS_HANDLER =
+    private static final SpecialLeadInHandler ORDERED_DELIM_DOT_PARENS_HANDLER =
         new ListItemLeadInHandler(Parser.LISTS_ITEM_PREFIX_CHARS.getDefaultValue(), false);
 
     @NotNull
@@ -485,9 +472,9 @@ public class ListBlockParser extends AbstractBlockParser {
           : new ListItemLeadInHandler(listItemDelims, dotOnly);
     }
 
-    final CharPredicate orderedDelims;
+    private final CharPredicate orderedDelims;
 
-    public ListItemLeadInHandler(CharSequence listItemDelims, boolean dotOnly) {
+    private ListItemLeadInHandler(CharSequence listItemDelims, boolean dotOnly) {
       super(CharPredicate.anyOf(listItemDelims));
       this.orderedDelims = dotOnly ? ORDERED_DELIM_DOT : ORDERED_DELIM_DOT_PARENS;
     }
@@ -666,7 +653,7 @@ public class ListBlockParser extends AbstractBlockParser {
     final BasedSequence markerSuffix;
     final int markerSuffixOffset;
 
-    ListData(
+    private ListData(
         ListBlock listBlock,
         boolean isEmpty,
         int markerIndex,

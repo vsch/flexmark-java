@@ -184,7 +184,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   @NotNull
-  public SequenceBuilder append(@NotNull Range chars) {
+  SequenceBuilder append(@NotNull Range chars) {
     return addRange(chars);
   }
 
@@ -322,27 +322,12 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   @NotNull
-  public String toStringNoAddedSpaces() {
-    StringBuilder sb = new StringBuilder();
-    for (Object part : segments) {
-      if (part instanceof Range) {
-        sb.append(baseSeq.subSequence(((Range) part).getStart(), ((Range) part).getEnd()));
-      } else if (part instanceof CharSequence) {
-        sb.append(part);
-      } else if (part != null) {
-        throw new IllegalStateException("Invalid part type " + part.getClass());
-      }
-    }
-    return sb.toString();
-  }
-
-  @NotNull
   public static SequenceBuilder emptyBuilder(@NotNull BasedSequence base) {
     return new SequenceBuilder(base, null);
   }
 
   @NotNull
-  public static SequenceBuilder emptyBuilder(
+  static SequenceBuilder emptyBuilder(
       @NotNull BasedSequence base, @NotNull SegmentOptimizer optimizer) {
     return new SequenceBuilder(base, optimizer);
   }
@@ -353,7 +338,7 @@ public class SequenceBuilder implements ISequenceBuilder<SequenceBuilder, BasedS
   }
 
   @NotNull
-  public static SequenceBuilder emptyBuilder(
+  static SequenceBuilder emptyBuilder(
       @NotNull BasedSequence base, int options, @NotNull SegmentOptimizer optimizer) {
     return new SequenceBuilder(base, options, optimizer, new HashMap<>());
   }

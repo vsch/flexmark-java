@@ -146,16 +146,6 @@ public class Delimiter implements DelimiterRun {
     getNode().insertAfter((Node) delimitedNode);
   }
 
-  public void convertDelimitersToText(int delimitersUsed, Delimiter closer) {
-    Text openerText = new Text();
-    openerText.setChars(getTailChars(delimitersUsed));
-    Text closerText = new Text();
-    closerText.setChars(closer.getLeadChars(delimitersUsed));
-
-    getNode().insertAfter(openerText);
-    closer.getNode().insertBefore(closerText);
-  }
-
   @Override
   public boolean canOpen() {
     return canOpen;

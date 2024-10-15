@@ -4,7 +4,7 @@ import java.util.function.BiFunction;
 import org.jetbrains.annotations.Nullable;
 
 public class BoundedMinAggregator implements BiFunction<Integer, Integer, Integer> {
-  public final int minBound;
+  private final int minBound;
 
   public BoundedMinAggregator(int minBound) {
     this.minBound = minBound;

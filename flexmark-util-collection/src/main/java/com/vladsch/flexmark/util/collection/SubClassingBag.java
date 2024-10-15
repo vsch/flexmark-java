@@ -47,7 +47,7 @@ public class SubClassingBag<T> {
     return items.getCategoryItemsReversed(xClass, typeBitSet(xClass, categories));
   }
 
-  public final @NotNull BitSet typeBitSet(
+  private final @NotNull BitSet typeBitSet(
       @NotNull Class<?> xClass, @NotNull Class<?>... categories) {
     BitSet bitSet = new BitSet();
     for (Class<?> category : categories) {
@@ -58,7 +58,7 @@ public class SubClassingBag<T> {
     return bitSet;
   }
 
-  public final @NotNull BitSet typeBitSet(
+  private final @NotNull BitSet typeBitSet(
       @NotNull Class<?> xClass, @NotNull Collection<Class<?>> categories) {
     BitSet bitSet = new BitSet();
     for (Class<?> category : categories) {

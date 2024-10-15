@@ -95,24 +95,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class CoreNodeFormatter
     extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
-  /**
-   * 2020-04-10
-   *
-   * @deprecated use {@link Formatter#UNIQUIFICATION_MAP}
-   */
-  @Deprecated
-  public static final DataKey<Map<String, String>> UNIQUIFICATION_MAP =
-      Formatter.UNIQUIFICATION_MAP;
-
-  /**
-   * 2020-04-10
-   *
-   * @deprecated use {@link Formatter#ATTRIBUTE_UNIQUIFICATION_ID_MAP}
-   */
-  @Deprecated
-  public static final DataKey<Map<String, String>> ATTRIBUTE_UNIQUIFICATION_ID_MAP =
-      Formatter.ATTRIBUTE_UNIQUIFICATION_ID_MAP;
-
   public static class Factory implements NodeFormatterFactory {
     @NotNull
     @Override
@@ -121,16 +103,16 @@ public class CoreNodeFormatter
     }
   }
 
-  final FormatterOptions formatterOptions;
+  private final FormatterOptions formatterOptions;
   private final ListOptions listOptions;
   private final String myHtmlBlockPrefix;
   private final String myHtmlInlinePrefix;
   private final String myTranslationAutolinkPrefix;
   private int blankLines;
-  MutableDataHolder myTranslationStore;
+  private MutableDataHolder myTranslationStore;
   private Map<String, String> attributeUniquificationIdMap;
 
-  public CoreNodeFormatter(DataHolder options) {
+  private CoreNodeFormatter(DataHolder options) {
     super(options, null, Formatter.UNIQUIFICATION_MAP);
     formatterOptions = new FormatterOptions(options);
     this.listOptions = ListOptions.get(options);
@@ -781,7 +763,7 @@ public class CoreNodeFormatter
     }
   }
 
-  static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator =
+  private static final TranslationPlaceholderGenerator htmlEntityPlaceholderGenerator =
       index -> String.format(Locale.US, "&#%d;", index);
 
   private void render(HtmlEntity node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -951,9 +933,9 @@ public class CoreNodeFormatter
     renderReference(node, context, markdown);
   }
 
-  public static final DataKey<Boolean> UNWRAPPED_AUTO_LINKS =
+  private static final DataKey<Boolean> UNWRAPPED_AUTO_LINKS =
       new DataKey<>("UNWRAPPED_AUTO_LINKS", false);
-  public static final DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP =
+  private static final DataKey<HashSet<String>> UNWRAPPED_AUTO_LINKS_MAP =
       new DataKey<>("UNWRAPPED_AUTO_LINKS_MAP", HashSet::new);
 
   private void render(AutoLink node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -979,7 +961,7 @@ public class CoreNodeFormatter
             myTranslationStore.set(UNWRAPPED_AUTO_LINKS, true);
 
             context.postProcessNonTranslating(
-                (s) -> {
+                s -> {
                   UNWRAPPED_AUTO_LINKS_MAP.get(myTranslationStore).add(s);
                   return s;
                 },

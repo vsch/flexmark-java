@@ -96,7 +96,7 @@ public class RepeatedSequence implements CharSequence {
   }
 
   @NotNull
-  public static CharSequence repeatOf(@NotNull CharSequence chars, int startIndex, int endIndex) {
+  static CharSequence repeatOf(@NotNull CharSequence chars, int startIndex, int endIndex) {
     return new RepeatedSequence(chars, startIndex, endIndex);
   }
 }

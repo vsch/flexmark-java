@@ -34,15 +34,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class HtmlBlockParser extends AbstractBlockParser {
-  public static final String HTML_COMMENT_OPEN = "<!--";
-  public static final String HTML_COMMENT_CLOSE = "-->";
+  private static final String HTML_COMMENT_OPEN = "<!--";
+  private static final String HTML_COMMENT_CLOSE = "-->";
 
   private static class Patterns {
-    public final int COMMENT_PATTERN_INDEX;
-    public final Pattern[][] BLOCK_PATTERNS;
+    public final int commentPatternIndex;
+    public final Pattern[][] blockPatterns;
 
     public Patterns(Parsing parsing, DataHolder options) {
-      this.COMMENT_PATTERN_INDEX = 2;
+      this.commentPatternIndex = 2;
 
       // dynamic block tags
       StringBuilder sb = new StringBuilder();
@@ -60,7 +60,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
       String blockTags = sb.toString();
 
-      this.BLOCK_PATTERNS =
+      this.blockPatterns =
           new Pattern[][] {
             {null, null}, // not used (no type 0)
             {
@@ -100,13 +100,12 @@ public class HtmlBlockParser extends AbstractBlockParser {
   private final boolean myHtmlBlockDeepParseBlankLineInterruptsPartialTag;
   private final boolean myHtmlBlockDeepParseIndentedCodeInterrupts;
 
-  HtmlBlockParser(
+  private HtmlBlockParser(
       DataHolder options, Pattern closingPattern, boolean isComment, HtmlDeepParser deepParser) {
     this.closingPattern = closingPattern;
     this.block = isComment ? new HtmlCommentBlock() : new HtmlBlock();
     this.deepParser = deepParser;
     this.parseInnerHtmlComments = Parser.PARSE_INNER_HTML_COMMENTS.get(options);
-    // this.htmlBlockDeepParser = options.get(Parser.HTML_BLOCK_DEEP_PARSER);
     this.myHtmlBlockDeepParseNonBlock = Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK.get(options);
     this.myHtmlBlockDeepParseBlankLineInterrupts =
         Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS.get(options);
@@ -116,8 +115,6 @@ public class HtmlBlockParser extends AbstractBlockParser {
         Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG.get(options);
     this.myHtmlBlockDeepParseIndentedCodeInterrupts =
         Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS.get(options);
-    // this.myHtmlBlockDeepParseOpenTagsOnOneLine =
-    // options.get(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE);
   }
 
   @Override
@@ -205,21 +202,10 @@ public class HtmlBlockParser extends AbstractBlockParser {
       // need to break it up into non-comments and comments
       int lastIndex = 0;
       BasedSequence chars = block.getContentChars();
-      if (chars.eolEndLength() > 0) chars = chars.midSequence(0, -1);
-      //             RegEx for HTML can go into an infinite loop, we do manual search to avoid this
-      // Matcher matcher = state.getParsing().HTML_COMMENT.matcher(chars);
-      // while (matcher.find()) {
-      //    int index = matcher.start();
-      //    if (lastIndex < index) {
-      //        HtmlInnerBlock html = new HtmlInnerBlock(chars.subSequence(lastIndex, index));
-      //        block.appendChild(html);
-      //    }
-      //
-      //    lastIndex = matcher.end();
-      //    HtmlInnerBlockComment htmlComment = new HtmlInnerBlockComment(chars.subSequence(index,
-      // lastIndex));
-      //    block.appendChild(htmlComment);
-      // }
+      if (chars.eolEndLength() > 0) {
+        chars = chars.midSequence(0, -1);
+      }
+
       int length = chars.length();
       while (lastIndex < length) {
         // find the opening HTML comment
@@ -367,20 +353,20 @@ public class HtmlBlockParser extends AbstractBlockParser {
               myPatterns = new Patterns(state.getParsing(), state.getProperties());
             }
 
-            Pattern opener = myPatterns.BLOCK_PATTERNS[blockType][0];
-            Pattern closer = myPatterns.BLOCK_PATTERNS[blockType][1];
+            Pattern opener = myPatterns.blockPatterns[blockType][0];
+            Pattern closer = myPatterns.blockPatterns[blockType][1];
             Matcher matcher = opener.matcher(line.subSequence(nextNonSpace, line.length()));
             boolean matches = matcher.find();
 
             // TEST: non-interrupting of paragraphs by HTML comments
             if (matches
                 && (myHtmlCommentBlocksInterruptParagraph
-                    || blockType != myPatterns.COMMENT_PATTERN_INDEX
+                    || blockType != myPatterns.commentPatternIndex
                     || !(matchedBlockParser.getBlockParser() instanceof ParagraphParser))) {
               // Issue #158, HTML Comment followed by text
-              if (blockType == myPatterns.COMMENT_PATTERN_INDEX && myHtmlBlockCommentOnlyFullLine) {
+              if (blockType == myPatterns.commentPatternIndex && myHtmlBlockCommentOnlyFullLine) {
                 Matcher endMatcher =
-                    myPatterns.BLOCK_PATTERNS[myPatterns.COMMENT_PATTERN_INDEX][1].matcher(
+                    myPatterns.blockPatterns[myPatterns.commentPatternIndex][1].matcher(
                         line.subSequence(matcher.end(), line.length()));
                 if (endMatcher.find()) {
                   // see if nothing follows
@@ -394,7 +380,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
                       new HtmlBlockParser(
                           state.getProperties(),
                           closer,
-                          blockType == myPatterns.COMMENT_PATTERN_INDEX,
+                          blockType == myPatterns.commentPatternIndex,
                           null))
                   .atIndex(state.getIndex());
             }

@@ -49,7 +49,7 @@ public class DataSet implements DataHolder {
    * @return resulting data holder
    */
   @NotNull
-  public DataHolder aggregate() {
+  private DataHolder aggregate() {
     DataHolder combined = this;
     for (DataKeyAggregator combiner : ourDataKeyAggregators) {
       combined = combiner.aggregate(combined);

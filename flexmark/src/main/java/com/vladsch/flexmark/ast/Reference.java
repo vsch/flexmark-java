@@ -11,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class Reference extends LinkNodeBase
     implements ReferenceNode<ReferenceRepository, Reference, RefNode> {
-  protected BasedSequence openingMarker = BasedSequence.NULL;
-  protected BasedSequence reference = BasedSequence.NULL;
-  protected BasedSequence closingMarker = BasedSequence.NULL;
+  private BasedSequence openingMarker = BasedSequence.NULL;
+  private BasedSequence reference = BasedSequence.NULL;
+  private BasedSequence closingMarker = BasedSequence.NULL;
 
   @NotNull
   @Override

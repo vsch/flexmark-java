@@ -114,27 +114,9 @@ public final class TrackedOffset implements Comparable<TrackedOffset> {
     return BitFieldSet.any(flags, F_AFTER_DELETE);
   }
 
-  @NotNull
-  public TrackedOffset plusOffsetDelta(int delta) {
-    return new TrackedOffset(this, offset + delta);
-  }
-
-  @NotNull
-  public TrackedOffset withOffset(int offset) {
-    return new TrackedOffset(this, offset);
-  }
-
   @Override
   public int compareTo(@NotNull TrackedOffset o) {
     return Integer.compare(offset, o.offset);
-  }
-
-  public int compareTo(@NotNull Integer o) {
-    return Integer.compare(offset, o);
-  }
-
-  public int compareTo(int offset) {
-    return Integer.compare(this.offset, offset);
   }
 
   @Override
@@ -180,11 +162,7 @@ public final class TrackedOffset implements Comparable<TrackedOffset> {
         + "}";
   }
 
-  public static TrackedOffset track(@NotNull TrackedOffset other) {
-    return new TrackedOffset(other);
-  }
-
-  public static TrackedOffset track(int offset) {
+  static TrackedOffset track(int offset) {
     return track(offset, false, false, false);
   }
 

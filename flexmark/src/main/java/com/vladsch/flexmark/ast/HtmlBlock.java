@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.ast;
 
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -18,16 +16,4 @@ public class HtmlBlock extends HtmlBlockBase {
   }
 
   public HtmlBlock() {}
-
-  public HtmlBlock(BasedSequence chars) {
-    super(chars);
-  }
-
-  public HtmlBlock(BasedSequence chars, List<BasedSequence> segments) {
-    super(chars, segments);
-  }
-
-  public HtmlBlock(BlockContent blockContent) {
-    super(blockContent);
-  }
 }

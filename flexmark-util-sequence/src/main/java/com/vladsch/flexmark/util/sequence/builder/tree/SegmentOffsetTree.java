@@ -40,7 +40,7 @@ public class SegmentOffsetTree extends SegmentTree {
   }
 
   @Nullable
-  public Segment getPreviousText(@NotNull Segment segment, @NotNull BasedSequence baseSeq) {
+  Segment getPreviousText(@NotNull Segment segment, @NotNull BasedSequence baseSeq) {
     if (segment.getPos() == 0) {
       if (segment.getStartIndex() > 0) {
         Segment textSeg = getSegment(0, -1, 0, baseSeq);
@@ -56,7 +56,7 @@ public class SegmentOffsetTree extends SegmentTree {
   }
 
   @Nullable
-  public Segment getNextText(@NotNull Segment segment, @NotNull BasedSequence baseSeq) {
+  Segment getNextText(@NotNull Segment segment, @NotNull BasedSequence baseSeq) {
     if (segment.getByteOffset() + segment.getByteLength() < segmentBytes.length) {
       Segment textSeg =
           getSegment(
@@ -71,8 +71,8 @@ public class SegmentOffsetTree extends SegmentTree {
     return null;
   }
 
-  public @Nullable Segment findSegmentByOffset(
-      int offset, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
+  @Nullable
+  Segment findSegmentByOffset(int offset, @NotNull BasedSequence baseSeq, @Nullable Segment hint) {
     int startPos = 0;
     int endPos = size();
 

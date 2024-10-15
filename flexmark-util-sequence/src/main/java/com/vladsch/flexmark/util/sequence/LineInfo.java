@@ -108,7 +108,7 @@ public final class LineInfo {
    * @param other line info
    * @return true if need to update
    */
-  public boolean needAggregateUpdate(LineInfo other) {
+  boolean needAggregateUpdate(LineInfo other) {
     return this.sumPrefixLength != other.sumPrefixLength
         || this.sumTextLength != other.sumTextLength
         || this.sumLength != other.sumLength;
@@ -216,7 +216,7 @@ public final class LineInfo {
   }
 
   @NotNull
-  public static LineInfo create(
+  static LineInfo create(
       @NotNull CharSequence line,
       @NotNull LineInfo prevInfo,
       int prefixLength,
@@ -240,7 +240,7 @@ public final class LineInfo {
   }
 
   @NotNull
-  public static LineInfo create(@NotNull LineInfo prevInfo, @NotNull LineInfo info) {
+  static LineInfo create(@NotNull LineInfo prevInfo, @NotNull LineInfo info) {
     return new LineInfo(
         info.lineSeq,
         prevInfo.index + 1,

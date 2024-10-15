@@ -1,9 +1,7 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class ThematicBreak extends Block {
@@ -14,16 +12,4 @@ public class ThematicBreak extends Block {
   }
 
   public ThematicBreak() {}
-
-  public ThematicBreak(BasedSequence chars) {
-    super(chars);
-  }
-
-  public ThematicBreak(BasedSequence chars, List<BasedSequence> segments) {
-    super(chars, segments);
-  }
-
-  public ThematicBreak(BlockContent blockContent) {
-    super(blockContent);
-  }
 }

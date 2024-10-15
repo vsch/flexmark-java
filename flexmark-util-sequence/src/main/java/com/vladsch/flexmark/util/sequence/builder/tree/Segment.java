@@ -105,7 +105,7 @@ public abstract class Segment {
     }
   }
 
-  boolean hasAll(int flags, int mask) {
+  private static boolean hasAll(int flags, int mask) {
     return (flags & mask) == mask;
   }
 
@@ -312,7 +312,7 @@ public abstract class Segment {
     }
   }
 
-  abstract static class TextCharSequenceBase implements CharSequence {
+  private abstract static class TextCharSequenceBase implements CharSequence {
     final byte[] bytes;
     final int byteOffset; // byte offset of first byte of chars for original base sequence
     final int startOffset;
@@ -574,7 +574,7 @@ public abstract class Segment {
     }
   }
 
-  public static Segment getSegment(
+  static Segment getSegment(
       byte[] bytes,
       int byteOffset,
       int pos,
@@ -600,7 +600,7 @@ public abstract class Segment {
     }
   }
 
-  public static SegType getSegType(@NotNull Seg seg, @NotNull CharSequence textChars) {
+  static SegType getSegType(@NotNull Seg seg, @NotNull CharSequence textChars) {
     if (seg.isBase()) {
       return seg.isAnchor() ? SegType.ANCHOR : SegType.BASE;
     } else if (seg.isText()) {
@@ -630,11 +630,11 @@ public abstract class Segment {
     }
   }
 
-  public static int getOffsetBytes(int offset) {
+  private static int getOffsetBytes(int offset) {
     return offset < 16 ? 0 : offset < 256 ? 1 : offset < 65536 ? 2 : offset < 65536 * 256 ? 3 : 4;
   }
 
-  public static int getLengthBytes(int length) {
+  private static int getLengthBytes(int length) {
     return length < 16 ? 0 : length < 256 ? 1 : length < 65536 ? 2 : length < 65536 * 256 ? 3 : 4;
   }
 
@@ -642,8 +642,7 @@ public abstract class Segment {
     return length < 256 ? 1 : length < 65536 ? 2 : length < 65536 * 256 ? 3 : 4;
   }
 
-  public static int getSegByteLength(
-      @NotNull Segment.SegType segType, int segStart, int segLength) {
+  static int getSegByteLength(@NotNull Segment.SegType segType, int segStart, int segLength) {
     int length = 1;
 
     if (segType.hasBoth()) {
@@ -667,7 +666,7 @@ public abstract class Segment {
     return length;
   }
 
-  public static int getSegByteLength(@NotNull Seg seg, @NotNull CharSequence textChars) {
+  static int getSegByteLength(@NotNull Seg seg, @NotNull CharSequence textChars) {
     SegType segType = getSegType(seg, textChars);
     return getSegByteLength(segType, seg.getSegStart(), seg.length());
   }

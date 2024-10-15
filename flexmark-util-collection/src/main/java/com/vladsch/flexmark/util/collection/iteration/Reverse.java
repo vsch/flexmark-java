@@ -16,7 +16,7 @@ public class Reverse<T> implements ReversibleIterable<T> {
     this.isReversed = isReversed;
   }
 
-  static class ReversedListIterator<T> implements ReversibleIterator<T> {
+  private static class ReversedListIterator<T> implements ReversibleIterator<T> {
     private final @NotNull List<T> list;
     private final boolean isReversed;
     private int index;
@@ -25,9 +25,9 @@ public class Reverse<T> implements ReversibleIterable<T> {
       this.list = list;
       this.isReversed = isReversed;
       if (isReversed) {
-        this.index = list.size() == 0 ? -1 : list.size() - 1;
+        this.index = list.isEmpty() ? -1 : list.size() - 1;
       } else {
-        this.index = list.size() == 0 ? -1 : 0;
+        this.index = list.isEmpty() ? -1 : 0;
       }
     }
 

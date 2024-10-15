@@ -56,9 +56,9 @@ public interface NodeFormatterContext
   void delegateRender();
 
   /**
-   * Get the current rendering context {@link DataHolder}. These are the options passed or set on
-   * the {@link Formatter#builder()} or passed to {@link Formatter#builder(DataHolder)}. To get the
-   * document options you should use {@link #getDocument()} as the data holder.
+   * Get the current rendering context {@link DataHolder}. These are the options passed to {@link
+   * Formatter#builder(DataHolder)}. To get the document options you should use {@link
+   * #getDocument()} as the data holder.
    *
    * @return the current renderer options {@link DataHolder}
    */

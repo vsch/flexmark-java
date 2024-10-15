@@ -38,7 +38,6 @@ public interface SequenceUtils {
   int SPLIT_TRIM_PARTS = 2; // trim split parts
   int SPLIT_SKIP_EMPTY = 4; // skip empty trimmed parts
   int SPLIT_INCLUDE_DELIM_PARTS = 8; // include split out delimiters as parts themselves
-  int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY;
 
   static Map<Character, String> getVisibleSpacesMap() {
     Map<Character, String> charMap = new HashMap<>();

@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.ast;
 
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class OrderedList extends ListBlock {
@@ -16,18 +14,6 @@ public class OrderedList extends ListBlock {
   }
 
   public OrderedList() {}
-
-  public OrderedList(BasedSequence chars) {
-    super(chars);
-  }
-
-  public OrderedList(BasedSequence chars, List<BasedSequence> segments) {
-    super(chars, segments);
-  }
-
-  public OrderedList(BlockContent blockContent) {
-    super(blockContent);
-  }
 
   @Override
   public void getAstExtra(@NotNull StringBuilder out) {

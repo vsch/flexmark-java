@@ -22,35 +22,35 @@ public class HtmlRendererOptions {
   public final boolean escapeHtmlCommentBlocks;
   public final boolean escapeInlineHtml;
   public final boolean escapeInlineHtmlComments;
-  public final boolean percentEncodeUrls;
-  public final int indentSize;
+  final boolean percentEncodeUrls;
+  final int indentSize;
   public final boolean suppressHtmlBlocks;
   public final boolean suppressHtmlCommentBlocks;
   public final boolean suppressInlineHtml;
   public final boolean suppressInlineHtmlComments;
-  public final boolean doNotRenderLinksInDocument;
+  final boolean doNotRenderLinksInDocument;
   public final boolean renderHeaderId;
-  public final boolean generateHeaderIds;
+  final boolean generateHeaderIds;
   public final @NotNull String languageClassPrefix;
   public final @NotNull Map<String, String> languageClassMap;
-  public final @NotNull String languageDelimiters;
+  private final @NotNull String languageDelimiters;
   public final CharPredicate languageDelimiterSet;
   public final @NotNull String noLanguageClass;
-  public final @NotNull String sourcePositionAttribute;
+  final @NotNull String sourcePositionAttribute;
   public final @Nullable String inlineCodeSpliceClass;
   public final boolean sourcePositionParagraphLines;
   public final boolean sourceWrapHtmlBlocks;
   public final int formatFlags;
   public final int maxTrailingBlankLines;
-  public final int maxBlankLines;
-  public final boolean htmlBlockOpenTagEol;
+  final int maxBlankLines;
+  final boolean htmlBlockOpenTagEol;
   public final boolean htmlBlockCloseTagEol;
   public final boolean unescapeHtmlEntities;
   public final boolean noPTagsUseBr;
   public final @NotNull String autolinkWwwPrefix;
   public final @Nullable Pattern suppressedLinks;
 
-  public HtmlRendererOptions(DataHolder options) {
+  HtmlRendererOptions(DataHolder options) {
     softBreak = HtmlRenderer.SOFT_BREAK.get(options);
     isSoftBreakAllSpaces = Utils.isWhiteSpaceNoEOL(softBreak);
     hardBreak = HtmlRenderer.HARD_BREAK.get(options);
@@ -96,7 +96,5 @@ public class HtmlRendererOptions {
 
     String ignoreLinks = HtmlRenderer.SUPPRESSED_LINKS.get(options);
     suppressedLinks = ignoreLinks.isEmpty() ? null : Pattern.compile(ignoreLinks);
-    // wrapTightItemParagraphInSpan =
-    // HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN.getFrom(options);
   }
 }

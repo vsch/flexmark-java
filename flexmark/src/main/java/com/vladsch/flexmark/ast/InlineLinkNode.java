@@ -63,13 +63,13 @@ public abstract class InlineLinkNode extends LinkNode {
     segmentSpanChars(out, linkClosingMarker, "linkClose");
   }
 
-  public InlineLinkNode() {}
+  protected InlineLinkNode() {}
 
-  public InlineLinkNode(BasedSequence chars) {
+  InlineLinkNode(BasedSequence chars) {
     super(chars);
   }
 
-  public InlineLinkNode(
+  InlineLinkNode(
       BasedSequence textOpeningMarker,
       BasedSequence text,
       BasedSequence textClosingMarker,
@@ -90,7 +90,7 @@ public abstract class InlineLinkNode extends LinkNode {
     this.linkClosingMarker = linkClosingMarker;
   }
 
-  public InlineLinkNode(
+  InlineLinkNode(
       BasedSequence chars,
       BasedSequence textOpeningMarker,
       BasedSequence text,
@@ -113,7 +113,7 @@ public abstract class InlineLinkNode extends LinkNode {
     this.linkClosingMarker = linkClosingMarker;
   }
 
-  public InlineLinkNode(
+  InlineLinkNode(
       BasedSequence textOpeningMarker,
       BasedSequence text,
       BasedSequence textClosingMarker,
@@ -128,7 +128,7 @@ public abstract class InlineLinkNode extends LinkNode {
     this.linkClosingMarker = linkClosingMarker;
   }
 
-  public InlineLinkNode(
+  InlineLinkNode(
       BasedSequence chars,
       BasedSequence textOpeningMarker,
       BasedSequence text,
@@ -142,13 +142,6 @@ public abstract class InlineLinkNode extends LinkNode {
     this.textClosingMarker = textClosingMarker;
     this.linkOpeningMarker = linkOpeningMarker;
     this.url = url;
-    this.linkClosingMarker = linkClosingMarker;
-  }
-
-  public void setUrl(
-      BasedSequence linkOpeningMarker, BasedSequence url, BasedSequence linkClosingMarker) {
-    this.linkOpeningMarker = linkOpeningMarker;
-    this.setUrlChars(url);
     this.linkClosingMarker = linkClosingMarker;
   }
 

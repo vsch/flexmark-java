@@ -378,26 +378,26 @@ public class ListOptions implements MutableDataSetter {
     return itemMarkerSuffixes;
   }
 
-  public static class ItemInterrupt {
-    protected boolean bulletItemInterruptsParagraph;
-    protected boolean orderedItemInterruptsParagraph;
-    protected boolean orderedNonOneItemInterruptsParagraph;
+  private static class ItemInterrupt {
+    boolean bulletItemInterruptsParagraph;
+    boolean orderedItemInterruptsParagraph;
+    boolean orderedNonOneItemInterruptsParagraph;
 
-    protected boolean emptyBulletItemInterruptsParagraph;
-    protected boolean emptyOrderedItemInterruptsParagraph;
-    protected boolean emptyOrderedNonOneItemInterruptsParagraph;
+    boolean emptyBulletItemInterruptsParagraph;
+    boolean emptyOrderedItemInterruptsParagraph;
+    boolean emptyOrderedNonOneItemInterruptsParagraph;
 
-    protected boolean bulletItemInterruptsItemParagraph;
-    protected boolean orderedItemInterruptsItemParagraph;
-    protected boolean orderedNonOneItemInterruptsItemParagraph;
+    boolean bulletItemInterruptsItemParagraph;
+    boolean orderedItemInterruptsItemParagraph;
+    boolean orderedNonOneItemInterruptsItemParagraph;
 
-    protected boolean emptyBulletItemInterruptsItemParagraph;
-    protected boolean emptyOrderedItemInterruptsItemParagraph;
-    protected boolean emptyOrderedNonOneItemInterruptsItemParagraph;
+    boolean emptyBulletItemInterruptsItemParagraph;
+    boolean emptyOrderedItemInterruptsItemParagraph;
+    boolean emptyOrderedNonOneItemInterruptsItemParagraph;
 
-    protected boolean emptyBulletSubItemInterruptsItemParagraph;
-    protected boolean emptyOrderedSubItemInterruptsItemParagraph;
-    protected boolean emptyOrderedNonOneSubItemInterruptsItemParagraph;
+    boolean emptyBulletSubItemInterruptsItemParagraph;
+    boolean emptyOrderedSubItemInterruptsItemParagraph;
+    boolean emptyOrderedNonOneSubItemInterruptsItemParagraph;
 
     public ItemInterrupt() {
       bulletItemInterruptsParagraph = false;
@@ -662,11 +662,7 @@ public class ListOptions implements MutableDataSetter {
   public static class MutableItemInterrupt extends ItemInterrupt {
     public MutableItemInterrupt() {}
 
-    public MutableItemInterrupt(@Nullable DataHolder options) {
-      super(options);
-    }
-
-    public MutableItemInterrupt(@NotNull ItemInterrupt other) {
+    MutableItemInterrupt(@NotNull ItemInterrupt other) {
       super(other);
     }
 
@@ -730,92 +726,90 @@ public class ListOptions implements MutableDataSetter {
       return emptyOrderedNonOneSubItemInterruptsItemParagraph;
     }
 
-    public MutableItemInterrupt setBulletItemInterruptsParagraph(
-        boolean bulletItemInterruptsParagraph) {
+    MutableItemInterrupt setBulletItemInterruptsParagraph(boolean bulletItemInterruptsParagraph) {
       this.bulletItemInterruptsParagraph = bulletItemInterruptsParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setOrderedItemInterruptsParagraph(
-        boolean orderedItemInterruptsParagraph) {
+    MutableItemInterrupt setOrderedItemInterruptsParagraph(boolean orderedItemInterruptsParagraph) {
       this.orderedItemInterruptsParagraph = orderedItemInterruptsParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setOrderedNonOneItemInterruptsParagraph(
+    MutableItemInterrupt setOrderedNonOneItemInterruptsParagraph(
         boolean orderedNonOneItemInterruptsParagraph) {
       this.orderedNonOneItemInterruptsParagraph = orderedNonOneItemInterruptsParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyBulletItemInterruptsParagraph(
+    MutableItemInterrupt setEmptyBulletItemInterruptsParagraph(
         boolean emptyBulletItemInterruptsParagraph) {
       this.emptyBulletItemInterruptsParagraph = emptyBulletItemInterruptsParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyOrderedItemInterruptsParagraph(
+    MutableItemInterrupt setEmptyOrderedItemInterruptsParagraph(
         boolean emptyOrderedItemInterruptsParagraph) {
       this.emptyOrderedItemInterruptsParagraph = emptyOrderedItemInterruptsParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyOrderedNonOneItemInterruptsParagraph(
+    MutableItemInterrupt setEmptyOrderedNonOneItemInterruptsParagraph(
         boolean emptyOrderedNonOneItemInterruptsParagraph) {
       this.emptyOrderedNonOneItemInterruptsParagraph = emptyOrderedNonOneItemInterruptsParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setBulletItemInterruptsItemParagraph(
+    MutableItemInterrupt setBulletItemInterruptsItemParagraph(
         boolean bulletItemInterruptsItemParagraph) {
       this.bulletItemInterruptsItemParagraph = bulletItemInterruptsItemParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setOrderedItemInterruptsItemParagraph(
+    MutableItemInterrupt setOrderedItemInterruptsItemParagraph(
         boolean orderedItemInterruptsItemParagraph) {
       this.orderedItemInterruptsItemParagraph = orderedItemInterruptsItemParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setOrderedNonOneItemInterruptsItemParagraph(
+    MutableItemInterrupt setOrderedNonOneItemInterruptsItemParagraph(
         boolean orderedNonOneItemInterruptsItemParagraph) {
       this.orderedNonOneItemInterruptsItemParagraph = orderedNonOneItemInterruptsItemParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyBulletItemInterruptsItemParagraph(
+    MutableItemInterrupt setEmptyBulletItemInterruptsItemParagraph(
         boolean emptyBulletItemInterruptsItemParagraph) {
       this.emptyBulletItemInterruptsItemParagraph = emptyBulletItemInterruptsItemParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyOrderedItemInterruptsItemParagraph(
+    MutableItemInterrupt setEmptyOrderedItemInterruptsItemParagraph(
         boolean emptyOrderedItemInterruptsItemParagraph) {
       this.emptyOrderedItemInterruptsItemParagraph = emptyOrderedItemInterruptsItemParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyOrderedNonOneItemInterruptsItemParagraph(
+    MutableItemInterrupt setEmptyOrderedNonOneItemInterruptsItemParagraph(
         boolean emptyOrderedNonOneItemInterruptsItemParagraph) {
       this.emptyOrderedNonOneItemInterruptsItemParagraph =
           emptyOrderedNonOneItemInterruptsItemParagraph;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyBulletSubItemInterruptsItemParagraph(
+    MutableItemInterrupt setEmptyBulletSubItemInterruptsItemParagraph(
         boolean emptyBulletItemStartsSubList) {
       this.emptyBulletSubItemInterruptsItemParagraph = emptyBulletItemStartsSubList;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyOrderedSubItemInterruptsItemParagraph(
+    MutableItemInterrupt setEmptyOrderedSubItemInterruptsItemParagraph(
         boolean emptyOrderedItemStartsSubList) {
       this.emptyOrderedSubItemInterruptsItemParagraph = emptyOrderedItemStartsSubList;
       return this;
     }
 
-    public MutableItemInterrupt setEmptyOrderedNonOneSubItemInterruptsItemParagraph(
+    MutableItemInterrupt setEmptyOrderedNonOneSubItemInterruptsItemParagraph(
         boolean emptyOrderedNonOneItemStartsSubList) {
       this.emptyOrderedNonOneSubItemInterruptsItemParagraph = emptyOrderedNonOneItemStartsSubList;
       return this;

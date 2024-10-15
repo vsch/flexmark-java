@@ -21,20 +21,12 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     super(indentSize, formatOptions);
   }
 
-  public HtmlWriter(HtmlWriter other, boolean inheritIndent) {
+  HtmlWriter(HtmlWriter other, boolean inheritIndent) {
     super(other, inheritIndent);
     context = other.context;
   }
 
-  public HtmlWriter(
-      int indentSize,
-      int formatOptions,
-      boolean suppressOpenTagLine,
-      boolean suppressCloseTagLine) {
-    this(null, indentSize, formatOptions, suppressOpenTagLine, suppressCloseTagLine);
-  }
-
-  public HtmlWriter(
+  HtmlWriter(
       @Nullable Appendable appendable,
       int indentSize,
       int formatOptions,
@@ -55,14 +47,6 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
 
   public @NotNull HtmlWriter srcPos() {
     return context == null ? this : srcPos(context.getCurrentNode().getChars());
-  }
-
-  public @NotNull HtmlWriter srcPosWithEOL() {
-    return context == null ? this : srcPosWithEOL(context.getCurrentNode().getChars());
-  }
-
-  public @NotNull HtmlWriter srcPosWithTrailingEOL() {
-    return context == null ? this : srcPosWithTrailingEOL(context.getCurrentNode().getChars());
   }
 
   public @NotNull HtmlWriter srcPos(@NotNull BasedSequence sourceText) {

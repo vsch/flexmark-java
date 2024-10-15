@@ -1,19 +1,14 @@
 package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.html.UriContentResolver;
-import com.vladsch.flexmark.html.UriContentResolverFactory;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.dependency.LastDependent;
 import com.vladsch.flexmark.util.misc.FileUtil;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Set;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class FileUriContentResolver implements UriContentResolver {
-  public FileUriContentResolver(LinkResolverBasicContext context) {}
+class FileUriContentResolver implements UriContentResolver {
+  private FileUriContentResolver(LinkResolverBasicContext context) {}
 
   @Override
   public @NotNull ResolvedContent resolveContent(
@@ -47,31 +42,5 @@ public class FileUriContentResolver implements UriContentResolver {
       }
     }
     return content;
-  }
-
-  public static class Factory implements UriContentResolverFactory {
-    @Nullable
-    @Override
-    public Set<Class<?>> getAfterDependents() {
-      // ensure that default file uri resolver is the last one in the list
-      return Collections.singleton(LastDependent.class);
-    }
-
-    @Nullable
-    @Override
-    public Set<Class<?>> getBeforeDependents() {
-      return null;
-    }
-
-    @Override
-    public boolean affectsGlobalScope() {
-      return false;
-    }
-
-    @NotNull
-    @Override
-    public UriContentResolver apply(@NotNull LinkResolverBasicContext context) {
-      return new FileUriContentResolver(context);
-    }
   }
 }

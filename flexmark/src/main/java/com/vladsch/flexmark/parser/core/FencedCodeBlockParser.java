@@ -40,7 +40,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
   private final boolean matchingCloser;
   private final boolean codeContentBlock;
 
-  public FencedCodeBlockParser(
+  private FencedCodeBlockParser(
       DataHolder options, char fenceChar, int fenceLength, int fenceIndent, int fenceMarkerIndent) {
     this.fenceChar = fenceChar;
     this.fenceLength = fenceLength;
@@ -110,7 +110,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
   public void closeBlock(ParserState state) {
     // first line, if not blank, has the info string
     List<BasedSequence> lines = content.getLines();
-    if (lines.size() > 0) {
+    if (!lines.isEmpty()) {
       BasedSequence info = lines.get(0);
       if (!info.isBlank()) {
         block.setInfo(info.trim());

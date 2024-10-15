@@ -5,13 +5,13 @@ import com.vladsch.flexmark.util.ast.Node;
 import java.io.IOException;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class NodeRendererSubContext implements NodeRendererContext {
+abstract class NodeRendererSubContext implements NodeRendererContext {
   final HtmlWriter htmlWriter;
   Node renderingNode;
   NodeRenderingHandlerWrapper renderingHandlerWrapper;
   int doNotRenderLinksNesting;
 
-  public NodeRendererSubContext(@NotNull HtmlWriter htmlWriter) {
+  NodeRendererSubContext(@NotNull HtmlWriter htmlWriter) {
     this.htmlWriter = htmlWriter;
     this.renderingNode = null;
     this.doNotRenderLinksNesting = 0;
@@ -22,11 +22,7 @@ public abstract class NodeRendererSubContext implements NodeRendererContext {
     return htmlWriter;
   }
 
-  public void flushTo(@NotNull Appendable out, int maxTrailingBlankLines) {
-    flushTo(out, getHtmlOptions().maxBlankLines, maxTrailingBlankLines);
-  }
-
-  public void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
+  private void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
     htmlWriter.line();
     try {
       htmlWriter.appendTo(out, maxBlankLines, maxTrailingBlankLines);

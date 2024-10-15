@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataHolder;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.misc.CharPredicate;
 import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.SequenceUtils;
@@ -14,23 +13,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Parsing {
-  public static final char INTELLIJ_DUMMY_IDENTIFIER_CHAR =
-      TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER_CHAR;
-  public static final String INTELLIJ_DUMMY_IDENTIFIER =
-      TableFormatOptions.INTELLIJ_DUMMY_IDENTIFIER;
-
-  //    final public static String XML_NAMESPACE_START = "[_A-Za-z]";
-  //    final public static String XML_NAMESPACE_CHAR = XML_NAME_SPACE_START + "|-|.|[0-9]";
-  public static final String XML_NAMESPACE_START =
+  private static final String XML_NAMESPACE_START =
       "[_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]"; // excluded  [#x10000-#xEFFFF]
-  public static final String XML_NAMESPACE_CHAR =
+  private static final String XML_NAMESPACE_CHAR =
       XML_NAMESPACE_START + "|[.0-9\u00B7\u0300-\u036F\u203F-\u2040-]";
   public static final String XML_NAMESPACE =
       "(?:(?:" + XML_NAMESPACE_START + ")(?:" + XML_NAMESPACE_CHAR + ")*:)?";
 
   // save options for others to use when only parsing instance is available
-  public final DataHolder options;
-
   private static final String ST_EOL = "(?:\r\n|\r|\n)";
   private static final String ST_ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
   private static final Pattern ST_LINK_LABEL =
@@ -48,11 +38,9 @@ public class Parsing {
           + ST_ESCAPED_CHAR
           + "|[^)\\x00])*\\))";
   private static final Pattern ST_LINK_TITLE = Pattern.compile("^" + ST_LINK_TITLE_STRING);
-  public final String EOL = ST_EOL;
-  public final String ESCAPED_CHAR = ST_ESCAPED_CHAR;
+  private final String ESCAPED_CHAR = ST_ESCAPED_CHAR;
   public final Pattern LINK_LABEL = ST_LINK_LABEL;
   public final Pattern LINK_DESTINATION_ANGLES;
-  public final String LINK_TITLE_STRING = ST_LINK_TITLE_STRING;
   public final Pattern LINK_TITLE = ST_LINK_TITLE;
   public final Pattern LINK_DESTINATION;
   public final Pattern LINK_DESTINATION_MATCHED_PARENS;
@@ -65,18 +53,15 @@ public class Parsing {
   private static final String ST_ADDITIONAL_CHARS_SET_IDI = "[\u001f]";
   private static final String ST_ADDITIONAL_CHARS_SET_NO_IDI = "";
 
-  public static final String ST_HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
-  public static final String ST_PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
-  public static final String ST_CDATA = "<!\\[CDATA\\[[\\s\\S]*?\\]\\]>";
-  public static final String ST_SINGLEQUOTEDVALUE = "'[^']*'";
-  public static final String ST_DOUBLEQUOTEDVALUE = "\"[^\"]*\"";
+  private static final String ST_HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
+  private static final String ST_PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
+  private static final String ST_CDATA = "<!\\[CDATA\\[[\\s\\S]*?\\]\\]>";
+  private static final String ST_SINGLEQUOTEDVALUE = "'[^']*'";
+  private static final String ST_DOUBLEQUOTEDVALUE = "\"[^\"]*\"";
 
-  public final String HTMLCOMMENT = ST_HTMLCOMMENT;
-  public final String PROCESSINGINSTRUCTION = ST_PROCESSINGINSTRUCTION;
-  public final String CDATA = ST_CDATA;
-  public final String SINGLEQUOTEDVALUE = ST_SINGLEQUOTEDVALUE;
-  public final String DOUBLEQUOTEDVALUE = ST_DOUBLEQUOTEDVALUE;
-
+  private final String HTMLCOMMENT = ST_HTMLCOMMENT;
+  private final String PROCESSINGINSTRUCTION = ST_PROCESSINGINSTRUCTION;
+  private final String CDATA = ST_CDATA;
   private static final String ST_ASCII_PUNCTUATION = "'!\"#\\$%&\\*\\+,\\-\\./:;=\\?@\\\\\\^_`\\|~";
   private static final String ST_ASCII_OPEN_PUNCTUATION = "\\(<\\[\\{";
   private static final String ST_ASCII_CLOSE_PUNCTUATION = "\\)>\\]\\}";
@@ -103,29 +88,9 @@ public class Parsing {
               + "]|[\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^"
               + ST_ASCII_OPEN_PUNCTUATION
               + "]");
-  private static final Pattern ST_PUNCTUATION_ONLY =
-      Pattern.compile(
-          "^["
-              + ST_ASCII_PUNCTUATION
-              + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^"
-              + ST_ASCII_OPEN_PUNCTUATION
-              + ST_ASCII_CLOSE_PUNCTUATION
-              + "]");
-  private static final Pattern ST_PUNCTUATION_OPEN_ONLY =
-      Pattern.compile("^[" + ST_ASCII_OPEN_PUNCTUATION + "]");
-  private static final Pattern ST_PUNCTUATION_CLOSE_ONLY =
-      Pattern.compile("^[" + ST_ASCII_CLOSE_PUNCTUATION + "]");
-
-  public final String ASCII_PUNCTUATION = ST_ASCII_PUNCTUATION;
-  public final String ASCII_OPEN_PUNCTUATION = ST_ASCII_OPEN_PUNCTUATION;
-  public final String ASCII_CLOSE_PUNCTUATION = ST_ASCII_CLOSE_PUNCTUATION;
-
   public final Pattern PUNCTUATION = ST_PUNCTUATION;
   public final Pattern PUNCTUATION_OPEN = ST_PUNCTUATION_OPEN;
   public final Pattern PUNCTUATION_CLOSE = ST_PUNCTUATION_CLOSE;
-  public final Pattern PUNCTUATION_ONLY = ST_PUNCTUATION_ONLY;
-  public final Pattern PUNCTUATION_OPEN_ONLY = ST_PUNCTUATION_OPEN_ONLY;
-  public final Pattern PUNCTUATION_CLOSE_ONLY = ST_PUNCTUATION_CLOSE_ONLY;
 
   private static final Pattern ST_ESCAPABLE = Pattern.compile('^' + Escaping.ESCAPABLE);
   private static final Pattern ST_TICKS = Pattern.compile("`+");
@@ -323,16 +288,16 @@ public class Parsing {
 
   public final int CODE_BLOCK_INDENT;
 
-  public final boolean intellijDummyIdentifier;
-  public final boolean htmlForTranslator;
-  public final String translationHtmlInlineTagPattern;
-  public final String translationAutolinkTagPattern;
-  public final boolean spaceInLinkUrl;
-  public final boolean parseJekyllMacroInLinkUrl;
-  public final String itemPrefixChars;
-  public final boolean listsItemMarkerSpace;
-  public final boolean listsOrderedItemDotOnly;
-  public final boolean allowNameSpace;
+  private final boolean intellijDummyIdentifier;
+  private final boolean htmlForTranslator;
+  private final String translationHtmlInlineTagPattern;
+  private final String translationAutolinkTagPattern;
+  private final boolean spaceInLinkUrl;
+  private final boolean parseJekyllMacroInLinkUrl;
+  private final String itemPrefixChars;
+  private final boolean listsItemMarkerSpace;
+  private final boolean listsOrderedItemDotOnly;
+  private final boolean allowNameSpace;
 
   private static class PatternTypeFlags {
     final @Nullable Boolean intellijDummyIdentifier;
@@ -519,19 +484,19 @@ public class Parsing {
     }
   }
 
-  static final Map<String, HashMap<PatternTypeFlags, Pattern>> cachedPatterns = new HashMap<>();
+  private static final Map<String, HashMap<PatternTypeFlags, Pattern>> cachedPatterns =
+      new HashMap<>();
 
-  static Pattern getCachedPattern(
+  private static Pattern getCachedPattern(
       @NotNull String patternName,
       @NotNull PatternTypeFlags cachedTypeFlags,
       @NotNull Function<PatternTypeFlags, Pattern> factory) {
     Map<PatternTypeFlags, Pattern> patternMap =
-        cachedPatterns.computeIfAbsent(patternName, (key) -> new HashMap<>());
+        cachedPatterns.computeIfAbsent(patternName, key -> new HashMap<>());
     return patternMap.computeIfAbsent(cachedTypeFlags, factory);
   }
 
   public Parsing(DataHolder options) {
-    this.options = options;
     this.CODE_BLOCK_INDENT =
         Parser.CODE_BLOCK_INDENT.get(options); // make sure this is consistent with lists settings
     PatternTypeFlags patternTypeFlags = new PatternTypeFlags(options);

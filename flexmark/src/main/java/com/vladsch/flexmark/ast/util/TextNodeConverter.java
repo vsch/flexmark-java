@@ -14,7 +14,7 @@ public class TextNodeConverter {
     this.remainingChars = nodeChars;
   }
 
-  public void appendChild(Node child) {
+  private void appendChild(Node child) {
     BasedSequence childChars = child.getChars();
     child.unlink();
     if (!(child instanceof Text)) {
@@ -50,7 +50,7 @@ public class TextNodeConverter {
     clear();
   }
 
-  public void clear() {
+  private void clear() {
     list.clear();
     remainingChars = BasedSequence.NULL;
   }
@@ -80,16 +80,6 @@ public class TextNodeConverter {
       prevNode = child;
       child = nextChild;
     }
-  }
-
-  // insert and clear list
-  public void insertMergedAfter(Node sibling) {
-    mergeList();
-    for (Node node : list) {
-      sibling.insertAfter(node);
-      sibling = node;
-    }
-    clear();
   }
 
   private void mergeList() {

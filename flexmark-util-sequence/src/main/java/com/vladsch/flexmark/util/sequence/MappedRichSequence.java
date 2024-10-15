@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /** A CharSequence that maps characters according to CharMapper */
-public class MappedRichSequence extends IRichSequenceBase<RichSequence>
+class MappedRichSequence extends IRichSequenceBase<RichSequence>
     implements RichSequence, MappedSequence<RichSequence> {
   private final CharMapper mapper;
   private final RichSequence base;

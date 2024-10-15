@@ -155,27 +155,4 @@ public abstract class SegmentedSequence extends BasedSequenceImpl implements Rep
     }
     return BasedSequence.NULL;
   }
-
-  /**
-   * @param basedSequence base sequence for the segments
-   * @param segments list of based sequences to put into a based sequence
-   * @return based sequence of segments. Result is a sequence which looks like all the segments were
-   *     concatenated, while still maintaining the original offset for each character when using
-   *     {@link #getIndexOffset(int)}(int index)
-   * @deprecated use {@link BasedSequence#getBuilder()} and then {@link
-   *     SequenceBuilder#addAll(Iterable)} or if you know which are based segments vs. out of base
-   *     Strings then use {@link BasedSegmentBuilder} to construct segments directly. If you
-   *     absolutely need to use the old method then use {@link
-   *     SegmentedSequence#create(BasedSequence, Iterable)}
-   */
-  @Deprecated
-  public static BasedSequence of(
-      BasedSequence basedSequence, @NotNull Iterable<? extends BasedSequence> segments) {
-    return create(basedSequence, segments);
-  }
-
-  @Deprecated
-  public static BasedSequence of(BasedSequence... segments) {
-    return create(segments);
-  }
 }

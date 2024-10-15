@@ -11,6 +11,4 @@ public interface UriContentResolver {
       @NotNull Node node,
       @NotNull LinkResolverBasicContext context,
       @NotNull ResolvedContent content);
-
-  UriContentResolver NULL = (node, context, content) -> content;
 }

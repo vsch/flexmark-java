@@ -445,8 +445,4 @@ public enum ParserEmulationProfile implements MutableDataSetter {
   public static boolean haveAny(int extensions, int mask) {
     return (extensions & mask) != 0;
   }
-
-  public static boolean haveAll(int extensions, int mask) {
-    return (extensions & mask) == mask;
-  }
 }

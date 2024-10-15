@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import com.vladsch.flexmark.util.sequence.builder.IBasedSegmentBuilder;
 import org.jetbrains.annotations.NotNull;
 
-public interface BasedUtils {
+interface BasedUtils {
   /**
    * Generate segments for given sequence
    *

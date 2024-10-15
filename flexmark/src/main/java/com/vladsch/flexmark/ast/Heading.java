@@ -2,20 +2,18 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.util.ast.TextContainer;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public class Heading extends Block implements AnchorRefTarget {
-  protected int level;
-  protected BasedSequence openingMarker = BasedSequence.NULL;
-  protected BasedSequence text = BasedSequence.NULL;
-  protected BasedSequence closingMarker = BasedSequence.NULL;
-  protected String anchorRefId = "";
-  protected boolean explicitAnchorRefId = false;
+  private int level;
+  private BasedSequence openingMarker = BasedSequence.NULL;
+  private BasedSequence text = BasedSequence.NULL;
+  private BasedSequence closingMarker = BasedSequence.NULL;
+  private String anchorRefId = "";
+  private boolean explicitAnchorRefId = false;
 
   @Override
   public void getAstExtra(@NotNull StringBuilder out) {
@@ -64,18 +62,6 @@ public class Heading extends Block implements AnchorRefTarget {
   }
 
   public Heading() {}
-
-  public Heading(BasedSequence chars) {
-    super(chars);
-  }
-
-  public Heading(BasedSequence chars, List<BasedSequence> segments) {
-    super(chars, segments);
-  }
-
-  public Heading(BlockContent blockContent) {
-    super(blockContent);
-  }
 
   public boolean isAtxHeading() {
     return openingMarker != BasedSequence.NULL;

@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class FormatControlProcessor {
-  public static final String OPEN_COMMENT = "<!--";
-  public static final String CLOSE_COMMENT = "-->";
+  private static final String OPEN_COMMENT = "<!--";
+  private static final String CLOSE_COMMENT = "-->";
 
   private final String formatterOnTag;
   private final String formatterOffTag;
@@ -172,14 +172,5 @@ public class FormatControlProcessor {
       }
     }
     return true;
-  }
-
-  public boolean isFormattingRegion(@NotNull Node node) {
-    // find the first HTML comment with a formatter directive
-    if (!formatterTagsEnabled || node.getStartOffset() == 0) {
-      return true;
-    }
-
-    return isFormattingRegion(node.getStartOffset(), node, true);
   }
 }

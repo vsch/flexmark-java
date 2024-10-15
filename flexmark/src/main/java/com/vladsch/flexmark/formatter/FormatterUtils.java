@@ -50,21 +50,21 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class FormatterUtils {
-  public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
-  public static final DataKey<Boolean> FIRST_LIST_ITEM_CHILD =
+  private static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
+  private static final DataKey<Boolean> FIRST_LIST_ITEM_CHILD =
       new DataKey<>(
           "FIRST_LIST_ITEM_CHILD",
           false); // Set to true for first block list item child of an empty list item
-  public static final Function<CharSequence, Pair<Integer, Integer>> NULL_PADDING =
+  private static final Function<CharSequence, Pair<Integer, Integer>> NULL_PADDING =
       sequence -> new Pair<>(0, 0);
-  public static final DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC =
+  private static final DataKey<Function<CharSequence, Pair<Integer, Integer>>> LIST_ALIGN_NUMERIC =
       new DataKey<>(
           "LIST_ITEM_NUMBER",
           NULL_PADDING); // function takes ordered marker and returns Pair LeftPad,RightPad
   public static final NullableDataKey<ListSpacing> LIST_ITEM_SPACING =
       new NullableDataKey<>("LIST_ITEM_SPACING");
 
-  public static String getBlockLikePrefix(
+  private static String getBlockLikePrefix(
       BlockQuoteLike node,
       NodeFormatterContext context,
       BlockQuoteMarker blockQuoteMarkers,
@@ -146,7 +146,7 @@ public class FormatterUtils {
   }
 
   @NotNull
-  public static String getAdditionalPrefix(BasedSequence fromChars, BasedSequence toChars) {
+  private static String getAdditionalPrefix(BasedSequence fromChars, BasedSequence toChars) {
     String prefix;
     int parentPrefix = fromChars.getStartOffset();
     int column = toChars.getStartOffset();
@@ -297,7 +297,7 @@ public class FormatterUtils {
     renderLooseItemParagraph(node, context, markdown);
   }
 
-  public static boolean isFollowedByBlankLine(@Nullable Node node) {
+  private static boolean isFollowedByBlankLine(@Nullable Node node) {
     while (node != null) {
       if (node.getNextAnyNot(
               HtmlCommentBlock.class, HtmlInnerBlockComment.class, HtmlInlineComment.class)
@@ -317,7 +317,7 @@ public class FormatterUtils {
     return false;
   }
 
-  public static boolean isNotLastItem(@Nullable Node node) {
+  private static boolean isNotLastItem(@Nullable Node node) {
     while (node != null && !(node instanceof Document)) {
       if (node.getNextAnyNot(
               BlankLine.class,

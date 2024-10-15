@@ -8,11 +8,7 @@ class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet, M> {
   private final @NotNull Function<M, K> computable;
 
   IndexedItemBitSetMap(@NotNull Function<M, K> computable) {
-    this(computable, 0);
-  }
-
-  private IndexedItemBitSetMap(@NotNull Function<M, K> computable, int capacity) {
-    super(capacity);
+    super();
     this.computable = computable;
   }
 

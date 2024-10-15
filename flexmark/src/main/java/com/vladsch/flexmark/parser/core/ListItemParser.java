@@ -16,7 +16,7 @@ import com.vladsch.flexmark.util.ast.Block;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.misc.Utils;
 
-public class ListItemParser extends AbstractBlockParser {
+class ListItemParser extends AbstractBlockParser {
   private final ListItem myBlock;
   private final ListOptions myOptions;
   private final ListBlockParser.ListData myListData;
@@ -31,24 +31,12 @@ public class ListItemParser extends AbstractBlockParser {
     myBlock.setMarkerSuffix(myListData.markerSuffix);
   }
 
-  int getContentColumn() {
-    return myListData.markerColumn
-        + myListData.listMarker.length()
-        + (myOptions.isItemContentAfterSuffix()
-            ? myListData.contentOffset
-            : myListData.markerSuffixOffset);
-  }
-
   int getContentIndent() {
     return myListData.markerIndent
         + myListData.listMarker.length()
         + (myOptions.isItemContentAfterSuffix()
             ? myListData.contentOffset
             : myListData.markerSuffixOffset);
-  }
-
-  int getMarkerContentIndent() {
-    return myListData.markerIndent + myListData.listMarker.length() + 1;
   }
 
   @Override

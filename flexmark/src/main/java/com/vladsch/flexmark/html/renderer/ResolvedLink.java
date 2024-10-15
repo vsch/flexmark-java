@@ -40,7 +40,7 @@ public class ResolvedLink {
     return myAttributes;
   }
 
-  public ResolvedLink(
+  private ResolvedLink(
       @NotNull LinkType linkType,
       CharSequence url,
       @Nullable Attributes attributes,
@@ -51,12 +51,6 @@ public class ResolvedLink {
     if (attributes != null) {
       getMutableAttributes().addValues(attributes);
     }
-  }
-
-  public ResolvedLink withLinkType(@NotNull LinkType linkType) {
-    return linkType == this.myLinkType
-        ? this
-        : new ResolvedLink(linkType, myUrl, myAttributes, myStatus);
   }
 
   public ResolvedLink withStatus(@NotNull LinkStatus status) {
@@ -107,7 +101,8 @@ public class ResolvedLink {
     return myUrl.substring(pos + 1);
   }
 
-  public @NotNull ResolvedLink withTitle(@Nullable CharSequence title) {
+  @NotNull
+  ResolvedLink withTitle(@Nullable CharSequence title) {
     String haveTitle = myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
     if (title == haveTitle || haveTitle != null && title != null && haveTitle.contentEquals(title))
       return this;
@@ -124,23 +119,6 @@ public class ResolvedLink {
 
   public @Nullable String getTitle() {
     return myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
-  }
-
-  public @NotNull ResolvedLink withTarget(@Nullable CharSequence target) {
-    String haveTarget = myAttributes == null ? null : myAttributes.getValue(Attribute.TARGET_ATTR);
-    if (target == haveTarget
-        || haveTarget != null && target != null && haveTarget.contentEquals(target)) {
-      return this;
-    }
-
-    MutableAttributes attributes = new MutableAttributes(myAttributes);
-    if (target == null) {
-      attributes.remove(Attribute.TARGET_ATTR);
-      if (attributes.isEmpty()) attributes = null;
-    } else {
-      attributes.replaceValue(Attribute.TARGET_ATTR, target);
-    }
-    return new ResolvedLink(myLinkType, myUrl, attributes, myStatus);
   }
 
   public String getTarget() {

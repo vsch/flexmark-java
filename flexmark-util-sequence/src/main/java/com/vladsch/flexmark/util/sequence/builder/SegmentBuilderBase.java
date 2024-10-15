@@ -61,10 +61,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return startOffset <= endOffset ? startOffset : -1;
   }
 
-  public boolean needStartOffset() {
-    return getStartOffsetIfNeeded() != -1;
-  }
-
   public int getStartOffsetIfNeeded() {
     int startOffset = getStartOffset();
     Seg seg = getSegOrNull(0);
@@ -76,10 +72,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   @Override
   public int getEndOffset() {
     return endOffset >= startOffset ? endOffset : -1;
-  }
-
-  public boolean needEndOffset() {
-    return getEndOffsetIfNeeded() != -1;
   }
 
   public int getEndOffsetIfNeeded() {
@@ -242,7 +234,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   }
 
   @NotNull
-  Seg getSegPart(int index) {
+  private Seg getSegPart(int index) {
     if (index == partsSize && haveDanglingText()) {
       // return dangling text
       return Seg.textOf(
@@ -279,7 +271,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
     return partsSize == 0 ? null : getSegOrNull(partsSize - 1);
   }
 
-  protected boolean haveDanglingText() {
+  private boolean haveDanglingText() {
     return text.length() > immutableOffset;
   }
 
@@ -541,7 +533,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   }
 
   @NotNull
-  public S append(char c) {
+  S append(char c) {
     stats.addText(c);
     textStats.addText(c);
 
@@ -552,7 +544,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   }
 
   @NotNull
-  public S append(char c, int repeat) {
+  S append(char c, int repeat) {
     if (repeat > 0) {
       stats.addText(c, repeat);
       textStats.addText(c, repeat);
@@ -564,7 +556,7 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   }
 
   @NotNull
-  public String toString(
+  private String toString(
       @NotNull CharSequence chars,
       @NotNull CharSequence rangePrefix,
       @NotNull CharSequence rangeSuffix,

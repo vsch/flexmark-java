@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class ListItem extends Block
     implements ParagraphItemContainer, BlankLineContainer, ParagraphContainer {
-  protected BasedSequence openingMarker = BasedSequence.NULL;
+  private BasedSequence openingMarker = BasedSequence.NULL;
   protected BasedSequence markerSuffix = BasedSequence.NULL;
   private boolean tight = true;
   private boolean hadBlankAfterItemParagraph = false;
@@ -33,15 +33,15 @@ public abstract class ListItem extends Block
     setCharsFromContent();
   }
 
-  public ListItem(BasedSequence chars) {
+  ListItem(BasedSequence chars) {
     super(chars);
   }
 
-  public ListItem(BasedSequence chars, List<BasedSequence> segments) {
+  ListItem(BasedSequence chars, List<BasedSequence> segments) {
     super(chars, segments);
   }
 
-  public ListItem(BlockContent blockContent) {
+  ListItem(BlockContent blockContent) {
     super(blockContent);
   }
 

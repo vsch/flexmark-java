@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeClassifierVisitor;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.util.dependency.DependentItem;
 import com.vladsch.flexmark.util.dependency.DependentItemMap;
@@ -22,12 +21,12 @@ import java.util.Set;
 public class PostProcessorManager {
   private final List<PostProcessorDependencyStage> postProcessorDependencies;
 
-  public PostProcessorManager(List<PostProcessorDependencyStage> postProcessorDependencies) {
+  private PostProcessorManager(List<PostProcessorDependencyStage> postProcessorDependencies) {
     this.postProcessorDependencies = postProcessorDependencies;
   }
 
   public static List<PostProcessorDependencyStage> calculatePostProcessors(
-      DataHolder options, List<PostProcessorFactory> postProcessorFactories) {
+      List<PostProcessorFactory> postProcessorFactories) {
     List<List<PostProcessorFactory>> resolveDependencies =
         DependencyResolver.resolveDependencies(
             postProcessorFactories, PostProcessorManager::prioritizePostProcessors, null);
@@ -49,7 +48,7 @@ public class PostProcessorManager {
     return document;
   }
 
-  public Document postProcess(Document document) {
+  private Document postProcess(Document document) {
     // first initialize node tracker if
     ClassifyingNodeTracker classifyingNodeTracker;
 
@@ -118,7 +117,7 @@ public class PostProcessorManager {
   static DependentItemMap<PostProcessorFactory> prioritizePostProcessors(
       DependentItemMap<PostProcessorFactory> dependentMap) {
     // put globals last
-    List<DependentItemMap.Entry<Class<?>, DependentItem<PostProcessorFactory>>> prioritized =
+    List<Map.Entry<Class<?>, DependentItem<PostProcessorFactory>>> prioritized =
         dependentMap.entries();
     prioritized.sort(
         (e1, e2) -> {
@@ -140,10 +139,10 @@ public class PostProcessorManager {
   }
 
   public static class PostProcessorDependencyStage {
-    final Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
-    final List<PostProcessorFactory> dependents;
+    private final Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
+    private final List<PostProcessorFactory> dependents;
 
-    public PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
+    private PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
       // compute mappings
       Map<Class<? extends Node>, Set<Class<?>>> nodeMap = new HashMap<>();
 

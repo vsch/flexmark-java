@@ -9,7 +9,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.data.DataKey;
 import com.vladsch.flexmark.util.data.MutableDataHolder;
-import com.vladsch.flexmark.util.data.NullableDataKey;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.format.TableManipulator;
@@ -58,10 +57,6 @@ public class TablesExtension
       TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT;
   static final DataKey<Boolean> FORMAT_TABLE_FILL_MISSING_COLUMNS =
       TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS;
-
-  // QUERY: is this still needed???
-  static final NullableDataKey<Integer> FORMAT_TABLE_FILL_MISSING_MIN_COLUMN =
-      TableFormatOptions.FORMAT_TABLE_FILL_MISSING_MIN_COLUMN;
 
   static final DataKey<DiscretionaryText> FORMAT_TABLE_LEFT_ALIGN_MARKER =
       TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER;

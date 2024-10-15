@@ -29,7 +29,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
   private final String paragraphClass;
   private final ListOptions listOptions;
 
-  public TaskListNodeRenderer(DataHolder options) {
+  private TaskListNodeRenderer(DataHolder options) {
     doneMarker = TaskListExtension.ITEM_DONE_MARKER.get(options);
     notDoneMarker = TaskListExtension.ITEM_NOT_DONE_MARKER.get(options);
     tightItemClass = TaskListExtension.TIGHT_ITEM_CLASS.get(options);

@@ -6,17 +6,17 @@ import com.vladsch.flexmark.util.html.MutableAttributes;
 import com.vladsch.flexmark.util.visitor.AstAction;
 import com.vladsch.flexmark.util.visitor.AstHandler;
 
-public class AttributeProvidingHandler<N extends Node>
+class AttributeProvidingHandler<N extends Node>
     extends AstHandler<N, AttributeProvidingHandler.AttributeProvidingVisitor<N>> {
-  public AttributeProvidingHandler(Class<N> aClass, AttributeProvidingVisitor<N> adapter) {
+  AttributeProvidingHandler(Class<N> aClass, AttributeProvidingVisitor<N> adapter) {
     super(aClass, adapter);
   }
 
-  public void setAttributes(Node node, AttributablePart part, MutableAttributes attributes) {
+  void setAttributes(Node node, AttributablePart part, MutableAttributes attributes) {
     getAdapter().setAttributes((N) node, part, attributes);
   }
 
-  public static interface AttributeProvidingVisitor<N extends Node> extends AstAction<N> {
+  static interface AttributeProvidingVisitor<N extends Node> extends AstAction<N> {
     void setAttributes(N node, AttributablePart part, MutableAttributes attributes);
   }
 }

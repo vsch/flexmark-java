@@ -29,32 +29,6 @@ public class Paragraph extends Block implements TextContainer {
 
   public Paragraph() {}
 
-  public Paragraph(BasedSequence chars) {
-    super(chars);
-  }
-
-  public Paragraph(
-      BasedSequence chars, List<BasedSequence> lineSegments, List<Integer> lineIndents) {
-    super(chars, lineSegments);
-    if (lineSegments.size() != lineIndents.size())
-      throw new IllegalArgumentException(
-          "line segments and line indents have to be of the same size");
-    setLineIndents(lineIndents);
-  }
-
-  public Paragraph(BasedSequence chars, List<BasedSequence> lineSegments, int[] lineIndents) {
-    super(chars, lineSegments);
-    if (lineSegments.size() != lineIndents.length)
-      throw new IllegalArgumentException(
-          "line segments and line indents have to be of the same size");
-    this.lineIndents = lineIndents;
-  }
-
-  public Paragraph(BlockContent blockContent) {
-    super(blockContent);
-    setLineIndents(blockContent.getLineIndents());
-  }
-
   protected void setLineIndents(List<Integer> lineIndents) {
     this.lineIndents = new int[lineIndents.size()];
     int i = 0;
@@ -70,15 +44,6 @@ public class Paragraph extends Block implements TextContainer {
     super.setContent(chars, lineSegments);
   }
 
-  public void setContent(
-      BasedSequence chars, List<BasedSequence> lineSegments, List<Integer> lineIndents) {
-    super.setContent(chars, lineSegments);
-    if (lineSegments.size() != lineIndents.size())
-      throw new IllegalArgumentException(
-          "line segments and line indents have to be of the same size");
-    setLineIndents(lineIndents);
-  }
-
   @Override
   // FIX: add indent tracking then deprecate. ContentNode does not have indents
   //    @Deprecated
@@ -90,11 +55,6 @@ public class Paragraph extends Block implements TextContainer {
   public void setContent(@NotNull BlockContent blockContent) {
     super.setContent(blockContent);
     setLineIndents(blockContent.getLineIndents());
-  }
-
-  public void setContent(BlockContent blockContent, int startLine, int endLine) {
-    super.setContent(blockContent.getLines().subList(startLine, endLine));
-    setLineIndents(blockContent.getLineIndents().subList(startLine, endLine));
   }
 
   public void setContent(Paragraph other, int startLine, int endLine) {

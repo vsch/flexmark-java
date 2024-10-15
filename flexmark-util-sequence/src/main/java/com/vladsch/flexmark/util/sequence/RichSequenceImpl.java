@@ -13,8 +13,8 @@ import org.jetbrains.annotations.Nullable;
  * com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null
  * chars.
  */
-public class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSequence {
-  final CharSequence charSequence;
+class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSequence {
+  private final CharSequence charSequence;
 
   private RichSequenceImpl(CharSequence charSequence) {
     super(charSequence instanceof String ? charSequence.hashCode() : 0);

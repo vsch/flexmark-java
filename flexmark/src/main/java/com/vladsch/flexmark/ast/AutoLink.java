@@ -28,10 +28,6 @@ public class AutoLink extends DelimitedLinkNode {
     segmentSpanChars(out, closingMarker, "close");
   }
 
-  public AutoLink(BasedSequence chars) {
-    super(chars);
-  }
-
   public AutoLink(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
     super(openingMarker, text, closingMarker);
     setUrlChars(text);
