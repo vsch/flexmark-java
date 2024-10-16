@@ -31,7 +31,7 @@ public class LineCollectingVisitor {
             new VisitHandler<>(SoftLineBreak.class, this::visit),
             new VisitHandler<>(HardLineBreak.class, this::visit));
 
-    myLines = Collections.EMPTY_LIST;
+    myLines = Collections.emptyList();
   }
 
   private void finalizeLines() {
@@ -53,7 +53,7 @@ public class LineCollectingVisitor {
     return myEOLs;
   }
 
-  public void collect(Node node) {
+  private void collect(Node node) {
     myLines = new ArrayList<>();
     myEOLs = new ArrayList<>();
     myStartOffset = node.getStartOffset();

@@ -12,7 +12,6 @@ import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
-import com.vladsch.flexmark.html.IndependentLinkResolverFactory;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.renderer.CoreNodeRenderer;
 import com.vladsch.flexmark.html.renderer.DelegatingNodeRendererFactory;

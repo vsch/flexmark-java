@@ -6,7 +6,6 @@ import com.vladsch.flexmark.util.format.CharWidthProvider;
 import com.vladsch.flexmark.util.format.MarkdownParagraph;
 import com.vladsch.flexmark.util.sequence.builder.BasedSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.mappers.ChangeCase;
-import com.vladsch.flexmark.util.sequence.mappers.NullEncoder;
 import com.vladsch.flexmark.util.sequence.mappers.SpaceMapper;
 import org.junit.Test;
 

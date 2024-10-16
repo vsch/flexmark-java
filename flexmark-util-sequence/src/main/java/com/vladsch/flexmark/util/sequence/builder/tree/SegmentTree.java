@@ -519,7 +519,7 @@ public class SegmentTree {
     final @NotNull byte[] segmentBytes; // bytes of serialized segments
     final @Nullable int[] startIndices; // start index for each segment within the string
 
-    SegmentTreeData(
+    private SegmentTreeData(
         @NotNull int[] treeData, @NotNull byte[] segmentBytes, @Nullable int[] startIndices) {
       this.treeData = treeData;
       this.segmentBytes = segmentBytes;

@@ -17,7 +17,7 @@ public class InlineParserOptions {
   public final boolean useHardcodedLinkAddressParser;
   public final boolean linkTextPriorityOverLinkRef;
 
-  public InlineParserOptions(DataHolder options) {
+  InlineParserOptions(DataHolder options) {
     matchLookaheadFirst = Parser.MATCH_NESTED_LINK_REFS_FIRST.get(options);
     parseMultiLineImageUrls = Parser.PARSE_MULTI_LINE_IMAGE_URLS.get(options);
     hardLineBreakLimit = Parser.HARD_LINE_BREAK_LIMIT.get(options);

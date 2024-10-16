@@ -31,7 +31,7 @@ class ListItemParser extends AbstractBlockParser {
     myBlock.setMarkerSuffix(myListData.markerSuffix);
   }
 
-  int getContentIndent() {
+  private int getContentIndent() {
     return myListData.markerIndent
         + myListData.listMarker.length()
         + (myOptions.isItemContentAfterSuffix()

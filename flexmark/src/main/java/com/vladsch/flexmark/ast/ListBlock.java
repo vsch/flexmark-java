@@ -2,28 +2,13 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.ast.BlankLineContainer;
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class ListBlock extends Block implements BlankLineContainer {
   private boolean tight;
 
-  public ListBlock() {}
-
-  public ListBlock(BasedSequence chars) {
-    super(chars);
-  }
-
-  public ListBlock(BasedSequence chars, List<BasedSequence> segments) {
-    super(chars, segments);
-  }
-
-  public ListBlock(BlockContent blockContent) {
-    super(blockContent);
-  }
+  protected ListBlock() {}
 
   public boolean isTight() {
     return tight;

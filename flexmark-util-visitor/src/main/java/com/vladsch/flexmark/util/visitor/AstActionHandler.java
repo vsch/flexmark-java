@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,7 +22,7 @@ public abstract class AstActionHandler<
   private final @NotNull Map<Class<? extends N>, H> customHandlersMap = new HashMap<>();
   private final @NotNull AstNode<N> astAdapter;
 
-  public AstActionHandler(@NotNull AstNode<N> astAdapter) {
+  protected AstActionHandler(@NotNull AstNode<N> astAdapter) {
     this.astAdapter = astAdapter;
   }
 
@@ -46,7 +45,7 @@ public abstract class AstActionHandler<
     return handler == null ? null : handler.getAdapter();
   }
 
-  public @Nullable A getAction(@NotNull N node) {
+  private @Nullable A getAction(@NotNull N node) {
     return getAction(customHandlersMap.get(node.getClass()));
   }
 
@@ -84,21 +83,5 @@ public abstract class AstActionHandler<
       processNode(child, true, processor);
       child = next;
     }
-  }
-
-  /**
-   * Process the node and return value from the processor
-   *
-   * @param node node to process
-   * @param defaultValue default value if no handler is defined for the node
-   * @param processor processor to pass the node and handler for processing
-   * @param <R> type of result returned by processor
-   * @return result or defaultValue
-   */
-  protected final <R> R processNodeOnly(
-      @NotNull N node, R defaultValue, @NotNull BiFunction<N, A, R> processor) {
-    Object[] value = {defaultValue};
-    processNode(node, false, (n, h) -> value[0] = processor.apply(n, h));
-    return (R) value[0];
   }
 }

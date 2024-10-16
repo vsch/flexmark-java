@@ -23,7 +23,7 @@ import org.junit.runners.Parameterized;
 /** Tests that the spec examples still render the same with all extensions enabled. */
 @RunWith(Parameterized.class)
 public class SpecIntegrationTest extends RendererSpecTest {
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
+  private static final @NotNull ResourceLocation RESOURCE_LOCATION =
       ResourceLocation.of(TestSpecLocator.DEFAULT_SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       new MutableDataSet()

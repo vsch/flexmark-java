@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-public abstract class LinkNodeBase extends Node {
+abstract class LinkNodeBase extends Node {
   protected BasedSequence urlOpeningMarker = BasedSequence.NULL;
   protected BasedSequence url = BasedSequence.NULL;
   protected BasedSequence pageRef = BasedSequence.NULL;
@@ -14,9 +14,9 @@ public abstract class LinkNodeBase extends Node {
   protected BasedSequence title = BasedSequence.NULL;
   protected BasedSequence titleClosingMarker = BasedSequence.NULL;
 
-  public LinkNodeBase() {}
+  protected LinkNodeBase() {}
 
-  public LinkNodeBase(BasedSequence chars) {
+  protected LinkNodeBase(BasedSequence chars) {
     super(chars);
   }
 
@@ -64,7 +64,7 @@ public abstract class LinkNodeBase extends Node {
     return pageRef;
   }
 
-  public void setPageRef(BasedSequence pageRef) {
+  void setPageRef(BasedSequence pageRef) {
     this.pageRef = pageRef;
   }
 
@@ -72,7 +72,7 @@ public abstract class LinkNodeBase extends Node {
     return anchorMarker;
   }
 
-  public void setAnchorMarker(BasedSequence anchorMarker) {
+  void setAnchorMarker(BasedSequence anchorMarker) {
     this.anchorMarker = anchorMarker;
   }
 
@@ -80,7 +80,7 @@ public abstract class LinkNodeBase extends Node {
     return anchorRef;
   }
 
-  public void setAnchorRef(BasedSequence anchorRef) {
+  void setAnchorRef(BasedSequence anchorRef) {
     this.anchorRef = anchorRef;
   }
 
@@ -96,11 +96,11 @@ public abstract class LinkNodeBase extends Node {
     return urlOpeningMarker;
   }
 
-  public void setUrlOpeningMarker(BasedSequence urlOpeningMarker) {
+  void setUrlOpeningMarker(BasedSequence urlOpeningMarker) {
     this.urlOpeningMarker = urlOpeningMarker;
   }
 
-  public void setUrl(BasedSequence url) {
+  void setUrl(BasedSequence url) {
     this.url = url;
   }
 
@@ -108,7 +108,7 @@ public abstract class LinkNodeBase extends Node {
     return urlClosingMarker;
   }
 
-  public void setUrlClosingMarker(BasedSequence urlClosingMarker) {
+  void setUrlClosingMarker(BasedSequence urlClosingMarker) {
     this.urlClosingMarker = urlClosingMarker;
   }
 
@@ -116,11 +116,11 @@ public abstract class LinkNodeBase extends Node {
     return titleOpeningMarker;
   }
 
-  public void setTitleOpeningMarker(BasedSequence titleOpeningMarker) {
+  void setTitleOpeningMarker(BasedSequence titleOpeningMarker) {
     this.titleOpeningMarker = titleOpeningMarker;
   }
 
-  public void setTitle(BasedSequence title) {
+  void setTitle(BasedSequence title) {
     this.title = title;
   }
 
@@ -128,7 +128,7 @@ public abstract class LinkNodeBase extends Node {
     return titleClosingMarker;
   }
 
-  public void setTitleClosingMarker(BasedSequence titleClosingMarker) {
+  void setTitleClosingMarker(BasedSequence titleClosingMarker) {
     this.titleClosingMarker = titleClosingMarker;
   }
 }

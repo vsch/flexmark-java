@@ -12,9 +12,8 @@ public interface TextContainer {
     FOR_HEADING_ID, // text for heading ID
     NO_TRIM_REF_TEXT_START, // don't trim ref text start
     NO_TRIM_REF_TEXT_END, // don't trim ref text end
-    ADD_SPACES_BETWEEN_NODES, // when appending text from different nodes, ensure there is at least
-  // one space
-  ;
+    ADD_SPACES_BETWEEN_NODES; // when appending text from different nodes, ensure there is at least
+    // one space
 
     final int bits;
 

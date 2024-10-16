@@ -296,7 +296,7 @@ public class ListBlockParser extends AbstractBlockParser {
     int markerIndent = state.getIndent();
 
     BasedSequence rest = line.subSequence(markerIndex, line.length());
-    Matcher matcher = parsing.LIST_ITEM_MARKER.matcher(rest);
+    Matcher matcher = parsing.listItemMarker.matcher(rest);
     if (!matcher.find()) {
       return null;
     }
@@ -644,8 +644,7 @@ public class ListBlockParser extends AbstractBlockParser {
   static class ListData {
     final ListBlock listBlock;
     final boolean isEmpty;
-    final int markerIndex;
-    final int markerColumn;
+    private final int markerColumn;
     final int markerIndent;
     final int contentOffset;
     final BasedSequence listMarker;
@@ -666,7 +665,6 @@ public class ListBlockParser extends AbstractBlockParser {
         int markerSuffixOffset) {
       this.listBlock = listBlock;
       this.isEmpty = isEmpty;
-      this.markerIndex = markerIndex;
       this.markerColumn = markerColumn;
       this.markerIndent = markerIndent;
       this.contentOffset = contentOffset;

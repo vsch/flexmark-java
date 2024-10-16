@@ -166,11 +166,11 @@ public class Seg {
     return startOffset == 0 && endOffset == 0 ? ANCHOR_0 : new Seg(startOffset, endOffset);
   }
 
-  public static int getTextStart(int startOffset, boolean isFirst256) {
+  static int getTextStart(int startOffset, boolean isFirst256) {
     return -(isFirst256 ? startOffset | F_TEXT_OPTION : startOffset) - 1;
   }
 
-  public static int getTextEnd(int startOffset, boolean isRepeatedText) {
+  static int getTextEnd(int startOffset, boolean isRepeatedText) {
     return -(isRepeatedText ? startOffset | F_TEXT_OPTION : startOffset) - 1;
   }
 

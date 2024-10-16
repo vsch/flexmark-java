@@ -45,10 +45,6 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     return context;
   }
 
-  public @NotNull HtmlWriter srcPos() {
-    return context == null ? this : srcPos(context.getCurrentNode().getChars());
-  }
-
   public @NotNull HtmlWriter srcPos(@NotNull BasedSequence sourceText) {
     if (sourceText.isNotNull()) {
       BasedSequence trimmed = sourceText.trimEOL();
@@ -110,7 +106,7 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
     return this;
   }
 
-  public @NotNull HtmlWriter withAttr(@NotNull LinkStatus status) {
+  private @NotNull HtmlWriter withAttr(@NotNull LinkStatus status) {
     attr(Attribute.LINK_STATUS_ATTR, status.getName());
     return withAttr(AttributablePart.LINK);
   }

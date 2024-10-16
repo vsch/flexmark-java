@@ -37,7 +37,6 @@ class MutableListOptions extends ListOptions {
     return this;
   }
 
-  // boolean setters
   @NotNull
   MutableListOptions setAutoLoose(boolean autoLoose) {
     this.autoLoose = autoLoose;
@@ -137,7 +136,6 @@ class MutableListOptions extends ListOptions {
     return this;
   }
 
-  // int setters
   @NotNull
   MutableListOptions setCodeIndent(int codeIndent) {
     this.codeIndent = codeIndent;
@@ -153,12 +151,6 @@ class MutableListOptions extends ListOptions {
   @NotNull
   MutableListOptions setNewItemCodeIndent(int newItemCodeIndent) {
     this.newItemCodeIndent = newItemCodeIndent;
-    return this;
-  }
-
-  @NotNull
-  MutableListOptions setItemMarkerSuffixes(@NotNull String[] itemMarkerSuffixes) {
-    this.itemMarkerSuffixes = itemMarkerSuffixes;
     return this;
   }
 }

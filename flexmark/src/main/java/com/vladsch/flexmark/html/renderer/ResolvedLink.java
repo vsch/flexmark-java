@@ -12,10 +12,6 @@ public class ResolvedLink {
   private final @NotNull LinkStatus myStatus;
   private @Nullable MutableAttributes myAttributes;
 
-  public ResolvedLink(@NotNull LinkType linkType, @NotNull CharSequence url) {
-    this(linkType, url, null, LinkStatus.UNKNOWN);
-  }
-
   public ResolvedLink(
       @NotNull LinkType linkType, @NotNull CharSequence url, @Nullable Attributes attributes) {
     this(linkType, url, attributes, LinkStatus.UNKNOWN);

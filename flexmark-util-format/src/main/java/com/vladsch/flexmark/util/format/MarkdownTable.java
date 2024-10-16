@@ -59,7 +59,6 @@ public class MarkdownTable {
   private static final CharPredicate COLON_TRIM_CHARS = CharPredicate.anyOf(':');
   private final CharSequence tableChars;
 
-  public static final NumericSuffixPredicate NO_SUFFIXES = s -> false;
   public static final NumericSuffixPredicate ALL_SUFFIXES_SORT = s -> true;
   public static final NumericSuffixPredicate ALL_SUFFIXES_NO_SORT =
       new NumericSuffixPredicate() {
@@ -201,11 +200,6 @@ public class MarkdownTable {
     int separatorColumns = separator.getMaxColumns();
     int bodyColumns = body.getMaxColumns();
     return max(headingColumns, separatorColumns, bodyColumns);
-  }
-
-  int getMinColumnsWithoutColumns(boolean withSeparator, int... skipColumns) {
-    return aggregateTotalColumnsWithoutColumns(
-        withSeparator ? allTableRows : allContentRows, MinAggregator.INSTANCE, skipColumns);
   }
 
   public int getMinColumnsWithoutRows(boolean withSeparator, int... skipRows) {
@@ -1795,29 +1789,6 @@ public class MarkdownTable {
         break;
     }
     return alignment;
-  }
-
-  private static int aggregateTotalColumnsWithoutColumns(
-      TableSection[] sections, BinaryOperator<Integer> aggregator, int... skipColumns) {
-    Integer[] columns = new Integer[] {null};
-
-    forAllSectionsRows(
-        0,
-        Integer.MAX_VALUE,
-        sections,
-        (row, allRowsIndex, rows, index) -> {
-          int iMax = row.cells.size();
-          int count = 0;
-          for (int i = 0; i < iMax; i++) {
-            if (!ArrayUtils.contained(i, skipColumns)) count += row.cells.get(i).columnSpan;
-          }
-          if (count != 0) {
-            columns[0] = aggregator.apply(columns[0], count);
-          }
-          return 0;
-        });
-
-    return columns[0] == null ? 0 : columns[0];
   }
 
   private static int aggregateTotalColumnsWithoutRows(

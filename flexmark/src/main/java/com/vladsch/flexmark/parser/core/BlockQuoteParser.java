@@ -133,7 +133,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
           return state.getIndent() == 0;
         }
 
-        return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT;
+        return state.getIndent() < state.getParsing().codeBlockIndent;
       }
     }
     return false;

@@ -22,8 +22,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
   GITHUB(COMMONMARK),
   MULTI_MARKDOWN(FIXED_INDENT),
   PEGDOWN(FIXED_INDENT),
-  PEGDOWN_STRICT(FIXED_INDENT),
-  ;
+  PEGDOWN_STRICT(FIXED_INDENT);
 
   public final ParserEmulationProfile family;
 

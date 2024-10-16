@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.data;
 import com.vladsch.flexmark.util.misc.Extension;
 import java.util.Collection;
 
-public class SharedDataKeys {
+public final class SharedDataKeys {
   // BuilderBase
   public static final DataKey<Collection<Extension>> EXTENSIONS =
       new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
@@ -68,11 +68,11 @@ public class SharedDataKeys {
 
   public static final DataKey<Boolean> APPLY_SPECIAL_LEAD_IN_HANDLERS =
       new DataKey<>("APPLY_SPECIAL_LEAD_IN_HANDLERS", true);
-  public static final DataKey<Boolean> ESCAPE_SPECIAL_CHARS =
-      new DataKey<>("ESCAPE_SPECIAL_CHARS", true, APPLY_SPECIAL_LEAD_IN_HANDLERS::get);
   public static final DataKey<Boolean> ESCAPE_NUMBERED_LEAD_IN =
       new DataKey<>("ESCAPE_NUMBERED_LEAD_IN", true, APPLY_SPECIAL_LEAD_IN_HANDLERS::get);
-  public static final DataKey<Boolean> UNESCAPE_SPECIAL_CHARS =
-      new DataKey<>("UNESCAPE_SPECIAL_CHARS", true, APPLY_SPECIAL_LEAD_IN_HANDLERS::get);
   public static final DataKey<Boolean> RUNNING_TESTS = new DataKey<>("RUNNING_TESTS", false);
+
+  private SharedDataKeys() {
+    throw new IllegalStateException();
+  }
 }

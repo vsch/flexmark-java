@@ -17,7 +17,7 @@ public abstract class Node {
   protected static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
   private static final String SPLICE = " … ";
 
-  public static final AstNode<Node> AST_ADAPTER =
+  static final AstNode<Node> AST_ADAPTER =
       new AstNode<>() {
         @Override
         public @Nullable Node getFirstChild(@NotNull Node node) {

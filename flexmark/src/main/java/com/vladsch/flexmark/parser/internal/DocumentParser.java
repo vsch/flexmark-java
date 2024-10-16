@@ -557,7 +557,7 @@ public class DocumentParser implements ParserState {
       if (blank && !wasBlank) lastPrefixClaimer = blockParser;
 
       // this is a little performance optimization:
-      if (blank || (indent < myParsing.CODE_BLOCK_INDENT && Parsing.isLetter(line, nextNonSpace))) {
+      if (blank || (indent < myParsing.codeBlockIndent && Parsing.isLetter(line, nextNonSpace))) {
         setNewIndex(nextNonSpace);
         break;
       }

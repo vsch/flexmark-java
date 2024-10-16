@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.ast.Node;
 import java.io.IOException;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 abstract class NodeFormatterSubContext implements NodeFormatterContext {
   final MarkdownWriter markdown;
@@ -15,15 +14,6 @@ abstract class NodeFormatterSubContext implements NodeFormatterContext {
   NodeFormatterSubContext(@NotNull MarkdownWriter markdown) {
     this.markdown = markdown;
     this.renderingNode = null;
-  }
-
-  @Nullable
-  Node getRenderingNode() {
-    return renderingNode;
-  }
-
-  void setRenderingNode(@Nullable Node renderingNode) {
-    this.renderingNode = renderingNode;
   }
 
   @Override

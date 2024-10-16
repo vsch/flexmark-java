@@ -60,7 +60,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class HtmlRenderer implements IRender {
   public static final DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
-  public static final DataKey<String> HARD_BREAK = new DataKey<>("HARD_BREAK", "<br />\n");
+  static final DataKey<String> HARD_BREAK = new DataKey<>("HARD_BREAK", "<br />\n");
   public static final NullableDataKey<String> STRONG_EMPHASIS_STYLE_HTML_OPEN =
       new NullableDataKey<>("STRONG_EMPHASIS_STYLE_HTML_OPEN");
   public static final NullableDataKey<String> STRONG_EMPHASIS_STYLE_HTML_CLOSE =
@@ -132,7 +132,7 @@ public class HtmlRenderer implements IRender {
       new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
   public static final DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES =
       new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
-  public static final DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
+  private static final DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
   static final DataKey<ArrayList<TagRange>> TAG_RANGES =
       new DataKey<>("TAG_RANGES", ArrayList::new);
 
@@ -163,7 +163,7 @@ public class HtmlRenderer implements IRender {
 
   static final DataKey<Integer> MAX_TRAILING_BLANK_LINES =
       SharedDataKeys.RENDERER_MAX_TRAILING_BLANK_LINES;
-  public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.RENDERER_MAX_BLANK_LINES;
+  static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.RENDERER_MAX_BLANK_LINES;
 
   /**
    * Stores pairs of equivalent renderer types to allow extensions to resolve types not known to
@@ -179,14 +179,14 @@ public class HtmlRenderer implements IRender {
       new DataKey<>("TRACKED_OFFSETS", Collections.emptyList());
 
   // now not final only to allow disposal of resources
-  final List<AttributeProviderFactory> attributeProviderFactories;
-  final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
-  final List<LinkResolverFactory> linkResolverFactories;
-  final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
-  final HtmlRendererOptions htmlOptions;
-  final DataHolder options;
+  private final List<AttributeProviderFactory> attributeProviderFactories;
+  private final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
+  private final List<LinkResolverFactory> linkResolverFactories;
+  private final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
+  private final HtmlRendererOptions htmlOptions;
+  private final DataHolder options;
 
-  HtmlRenderer(@NotNull Builder builder) {
+  private HtmlRenderer(@NotNull Builder builder) {
     this.options = builder.toImmutable();
     this.htmlOptions = new HtmlRendererOptions(this.options);
 
@@ -270,7 +270,7 @@ public class HtmlRenderer implements IRender {
    * @param node node to render
    * @param output appendable to use for the output
    */
-  public void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
+  private void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
     HtmlWriter htmlWriter =
         new HtmlWriter(
             output,
@@ -310,13 +310,7 @@ public class HtmlRenderer implements IRender {
     return sb.toString();
   }
 
-  public static boolean isCompatibleRendererType(
-      @NotNull MutableDataHolder options, @NotNull String supportedRendererType) {
-    String rendererType = HtmlRenderer.TYPE.get(options);
-    return isCompatibleRendererType(options, rendererType, supportedRendererType);
-  }
-
-  public static boolean isCompatibleRendererType(
+  private static boolean isCompatibleRendererType(
       @NotNull MutableDataHolder options,
       @NotNull String rendererType,
       @NotNull String supportedRendererType) {
@@ -336,44 +330,34 @@ public class HtmlRenderer implements IRender {
     return false;
   }
 
-  public static @NotNull MutableDataHolder addRenderTypeEquivalence(
-      @NotNull MutableDataHolder options,
-      @NotNull String rendererType,
-      @NotNull String supportedRendererType) {
-    if (!isCompatibleRendererType(options, rendererType, supportedRendererType)) {
-      // need to add
-      List<Pair<String, String>> equivalence = RENDERER_TYPE_EQUIVALENCE.get(options);
-      List<Pair<String, String>> newEquivalence = new ArrayList<>(equivalence);
-      newEquivalence.add(new Pair<>(rendererType, supportedRendererType));
-      options.set(RENDERER_TYPE_EQUIVALENCE, newEquivalence);
-    }
-    return options;
-  }
-
   /** Builder for configuring an {@link HtmlRenderer}. See methods for default configuration. */
   public static class Builder extends BuilderBase<Builder> implements RendererBuilder {
-    Map<Class<?>, AttributeProviderFactory> attributeProviderFactories = new LinkedHashMap<>();
-    List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
-    List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
-    HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
+    private Map<Class<?>, AttributeProviderFactory> attributeProviderFactories =
+        new LinkedHashMap<>();
+    private List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
+    private List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
+    private HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
     public Builder() {
       super();
     }
 
-    public Builder(@Nullable DataHolder options) {
+    private Builder(@Nullable DataHolder options) {
       super(options);
       loadExtensions();
     }
 
     @Override
     protected void removeApiPoint(@NotNull Object apiPoint) {
-      if (apiPoint instanceof AttributeProviderFactory)
+      if (apiPoint instanceof AttributeProviderFactory) {
         this.attributeProviderFactories.remove(apiPoint.getClass());
-      else if (apiPoint instanceof NodeRendererFactory) this.nodeRendererFactories.remove(apiPoint);
-      else if (apiPoint instanceof LinkResolverFactory) this.linkResolverFactories.remove(apiPoint);
-      else if (apiPoint instanceof HeaderIdGeneratorFactory) this.htmlIdGeneratorFactory = null;
-      else {
+      } else if (apiPoint instanceof NodeRendererFactory) {
+        this.nodeRendererFactories.remove(apiPoint);
+      } else if (apiPoint instanceof LinkResolverFactory) {
+        this.linkResolverFactories.remove(apiPoint);
+      } else if (apiPoint instanceof HeaderIdGeneratorFactory) {
+        this.htmlIdGeneratorFactory = null;
+      } else {
         throw new IllegalStateException(
             "Unknown data point type: " + apiPoint.getClass().getName());
       }
@@ -411,34 +395,6 @@ public class HtmlRenderer implements IRender {
     @NotNull
     public HtmlRenderer build() {
       return new HtmlRenderer(this);
-    }
-
-    /**
-     * The HTML to use for rendering a softbreak, defaults to {@code "\n"} (meaning the rendered
-     * result doesn't have a line break).
-     *
-     * <p>Set it to {@code "<br>"} (or {@code "<br />"} to make them hard breaks.
-     *
-     * <p>Set it to {@code " "} to ignore line wrapping in the source.
-     *
-     * @param softBreak HTML for softbreak
-     * @return {@code this}
-     */
-    public @NotNull Builder softBreak(@NotNull String softBreak) {
-      this.set(SOFT_BREAK, softBreak);
-      return this;
-    }
-
-    /**
-     * The size of the indent to use for hierarchical elements, default 0, means no indent, also
-     * fastest rendering
-     *
-     * @param indentSize number of spaces per indent
-     * @return {@code this}
-     */
-    public @NotNull Builder indentSize(int indentSize) {
-      this.set(INDENT_SIZE, indentSize);
-      return this;
     }
 
     /**
@@ -727,7 +683,7 @@ public class HtmlRenderer implements IRender {
     @Override
     public String getNodeId(@NotNull Node node) {
       String id = htmlIdGenerator.getId(node);
-      if (attributeProviderFactories.size() != 0) {
+      if (!attributeProviderFactories.isEmpty()) {
         MutableAttributes attributes = new MutableAttributes();
         if (id != null) attributes.replaceValue("id", id);
 
@@ -1040,31 +996,6 @@ public class HtmlRenderer implements IRender {
       @Override
       public HtmlWriter getHtmlWriter() {
         return htmlWriter;
-      }
-
-      @Override
-      protected int getDoNotRenderLinksNesting() {
-        return super.getDoNotRenderLinksNesting();
-      }
-
-      @Override
-      public boolean isDoNotRenderLinks() {
-        return super.isDoNotRenderLinks();
-      }
-
-      @Override
-      public void doNotRenderLinks(boolean doNotRenderLinks) {
-        super.doNotRenderLinks(doNotRenderLinks);
-      }
-
-      @Override
-      public void doNotRenderLinks() {
-        super.doNotRenderLinks();
-      }
-
-      @Override
-      public void doRenderLinks() {
-        super.doRenderLinks();
       }
     }
   }

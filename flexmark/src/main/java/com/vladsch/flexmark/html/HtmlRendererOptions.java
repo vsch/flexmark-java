@@ -40,8 +40,8 @@ public class HtmlRendererOptions {
   public final @Nullable String inlineCodeSpliceClass;
   public final boolean sourcePositionParagraphLines;
   public final boolean sourceWrapHtmlBlocks;
-  public final int formatFlags;
-  public final int maxTrailingBlankLines;
+  final int formatFlags;
+  final int maxTrailingBlankLines;
   final int maxBlankLines;
   final boolean htmlBlockOpenTagEol;
   public final boolean htmlBlockCloseTagEol;

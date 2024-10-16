@@ -14,10 +14,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A CharSequence that provides a rich set of manipulation methods.
  *
- * <p>NOTE: '\0' changed to '\uFFFD' use {@link
- * com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null
- * chars.
- *
  * <p>safe access methods return '\0' for no char response.
  */
 public interface IRichSequence<T extends IRichSequence<T>>

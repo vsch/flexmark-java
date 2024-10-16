@@ -3,11 +3,9 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.ast.BlankLineContainer;
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.ast.BlockContent;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class ListItem extends Block
@@ -19,9 +17,9 @@ public abstract class ListItem extends Block
   private boolean containsBlankLine = false;
   private int priority = Integer.MIN_VALUE;
 
-  public ListItem() {}
+  protected ListItem() {}
 
-  public ListItem(ListItem other) {
+  protected ListItem(ListItem other) {
     this.openingMarker = other.openingMarker;
     this.markerSuffix = other.markerSuffix;
     this.tight = other.tight;
@@ -31,18 +29,6 @@ public abstract class ListItem extends Block
 
     takeChildren(other);
     setCharsFromContent();
-  }
-
-  ListItem(BasedSequence chars) {
-    super(chars);
-  }
-
-  ListItem(BasedSequence chars, List<BasedSequence> segments) {
-    super(chars, segments);
-  }
-
-  ListItem(BlockContent blockContent) {
-    super(blockContent);
   }
 
   public boolean isOrderedItem() {

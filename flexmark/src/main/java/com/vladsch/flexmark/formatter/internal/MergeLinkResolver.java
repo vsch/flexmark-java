@@ -20,7 +20,7 @@ public class MergeLinkResolver implements LinkResolver {
   private final String docRootURL;
   private final String[] relativeParts;
 
-  public MergeLinkResolver(LinkResolverBasicContext context) {
+  private MergeLinkResolver(LinkResolverBasicContext context) {
     // can use context for custom settings
     String docRelativeURL = Formatter.DOC_RELATIVE_URL.get(context.getOptions());
     String docRootURL = Formatter.DOC_ROOT_URL.get(context.getOptions());

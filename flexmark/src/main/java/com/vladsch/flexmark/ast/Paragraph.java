@@ -29,26 +29,12 @@ public class Paragraph extends Block implements TextContainer {
 
   public Paragraph() {}
 
-  protected void setLineIndents(List<Integer> lineIndents) {
+  private void setLineIndents(List<Integer> lineIndents) {
     this.lineIndents = new int[lineIndents.size()];
     int i = 0;
     for (int indent : lineIndents) {
       this.lineIndents[i++] = indent;
     }
-  }
-
-  @Override
-  // FIX: add indent tracking then deprecate. ContentNode does not have indents
-  //    @Deprecated
-  public void setContent(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
-    super.setContent(chars, lineSegments);
-  }
-
-  @Override
-  // FIX: add indent tracking then deprecate. ContentNode does not have indents
-  //    @Deprecated
-  public void setContent(@NotNull List<BasedSequence> lineSegments) {
-    super.setContent(lineSegments);
   }
 
   @Override

@@ -34,8 +34,4 @@ public class LinkStatus {
   public int hashCode() {
     return myName.hashCode();
   }
-
-  public boolean isStatus(CharSequence status) {
-    return myName.equals(status instanceof String ? (String) status : String.valueOf(status));
-  }
 }

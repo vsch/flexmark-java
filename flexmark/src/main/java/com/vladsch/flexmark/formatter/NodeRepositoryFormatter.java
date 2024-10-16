@@ -3,7 +3,6 @@ package com.vladsch.flexmark.formatter;
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATED;
 import static com.vladsch.flexmark.formatter.RenderPurpose.TRANSLATION_SPANS;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.ast.Document;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.ast.NodeRepository;
@@ -50,24 +49,13 @@ public abstract class NodeRepositoryFormatter<
   protected abstract void renderReferenceBlock(
       B node, NodeFormatterContext context, MarkdownWriter markdown);
 
-  /**
-   * Whether references should be made unique
-   *
-   * @return true if yes, false if leave all references as is
-   */
-  private boolean makeReferencesUnique() {
-    return true;
-  }
-
   private final R referenceRepository;
   private final List<B> referenceList;
   private final Set<Node> unusedReferences;
   private final B lastReference;
-  private boolean recheckUndefinedReferences;
   private boolean repositoryNodesDone;
   private final Comparator<B> myComparator;
 
-  private Map<String, String> referenceTranslationMap;
   protected Map<String, String> referenceUniqificationMap;
   private final DataKey<Map<String, String>> myReferenceMapKey;
   private final DataKey<Map<String, String>> myReferenceUniqificationMapKey;
@@ -86,20 +74,17 @@ public abstract class NodeRepositoryFormatter<
       context.postProcessNonTranslating(
           id -> {
             if (referenceUniqificationMap != null) {
-              String uniqueS = referenceUniqificationMap.getOrDefault(id, id);
-              return uniqueS;
+              return referenceUniqificationMap.getOrDefault(id, id);
             }
             return id;
           },
-          () -> {
-            renderReferenceBlock(node, context, markdown);
-          });
+          () -> renderReferenceBlock(node, context, markdown));
     } else {
       renderReferenceBlock(node, context, markdown);
     }
   }
 
-  public NodeRepositoryFormatter(
+  protected NodeRepositoryFormatter(
       DataHolder options,
       DataKey<Map<String, String>> referenceMapKey,
       DataKey<Map<String, String>> uniquificationMapKey) {
@@ -109,7 +94,6 @@ public abstract class NodeRepositoryFormatter<
     referenceList = referenceRepository.values();
     lastReference = referenceList.isEmpty() ? null : referenceList.get(referenceList.size() - 1);
     unusedReferences = new HashSet<>();
-    this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.get(options);
     repositoryNodesDone = false;
 
     myComparator = Comparable::compareTo;
@@ -133,22 +117,19 @@ public abstract class NodeRepositoryFormatter<
       if (context.getRenderPurpose() == TRANSLATION_SPANS) {
         context.getTranslationStore().set(myReferenceMapKey, new HashMap<String, String>());
       }
-      referenceTranslationMap = myReferenceMapKey.get(context.getTranslationStore());
     }
 
     switch (phase) {
       case COLLECT:
         referenceUniqificationMap = null;
 
-        if (context.isTransformingText()
-            && myReferenceUniqificationMapKey != null
-            && makeReferencesUnique()) {
+        if (context.isTransformingText() && myReferenceUniqificationMapKey != null) {
           if (context.getRenderPurpose() == TRANSLATION_SPANS) {
             // need to uniquify the ids across documents
             MergeContext mergeContext = context.getMergeContext();
 
             if (mergeContext != null) {
-              uniquifyIds(context, markdown, document);
+              uniquifyIds(context, document);
             }
           }
 
@@ -278,8 +259,7 @@ public abstract class NodeRepositoryFormatter<
    * document and store this map in document property so that it can be retrieved from the document
    * later when computing the map by documents after this document in the list.
    */
-  private void uniquifyIds(
-      NodeFormatterContext context, MarkdownWriter markdown, Document document) {
+  private void uniquifyIds(NodeFormatterContext context, Document document) {
     // collect ids and values to uniquify references up to our document
     R combinedRefs = getRepository(new DataSet()); // create an empty repository
     Map<String, String> idMap = new HashMap<>();

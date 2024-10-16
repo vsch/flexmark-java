@@ -197,7 +197,8 @@ public class CoreNodeFormatter
     return formatterOptions.referenceSort;
   }
 
-  void appendReference(CharSequence id, NodeFormatterContext context, MarkdownWriter markdown) {
+  private void appendReference(
+      CharSequence id, NodeFormatterContext context, MarkdownWriter markdown) {
     if (context.isTransformingText()
         && context.getRenderPurpose() == RenderPurpose.TRANSLATED
         && context.getMergeContext() != null) {

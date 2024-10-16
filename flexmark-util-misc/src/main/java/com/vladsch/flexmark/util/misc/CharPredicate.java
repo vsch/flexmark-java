@@ -38,14 +38,6 @@ public interface CharPredicate extends IntPredicate {
               || value == '\r'
               || value == '\u00A0'
               || value == '\0';
-  CharPredicate BLANKSPACE =
-      value ->
-          value == ' '
-              || value == '\t'
-              || value == '\n'
-              || value == '\r'
-              || value == '\u000B'
-              || value == '\f';
   CharPredicate HEXADECIMAL_DIGITS =
       value ->
           value >= '0' && value <= '9'

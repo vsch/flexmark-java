@@ -21,6 +21,7 @@ import com.vladsch.flexmark.ast.Reference;
 import com.vladsch.flexmark.ast.SoftLineBreak;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.WhiteSpace;
+import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextNodeConverter;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -130,7 +131,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     // create custom processors
     if (inlineParserExtensionFactories != null) {
       Map<Character, List<InlineParserExtensionFactory>> extensions =
-          calculateInlineParserExtensions(document, inlineParserExtensionFactories);
+          calculateInlineParserExtensions(inlineParserExtensionFactories);
       inlineParserExtensions = new HashMap<>(extensions.size());
       Map<InlineParserExtensionFactory, InlineParserExtension> parserExtensionMap = new HashMap<>();
       for (Map.Entry<Character, List<InlineParserExtensionFactory>> entry : extensions.entrySet()) {
@@ -310,7 +311,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    * @return number of characters were parsed as a reference from the start of the sequence, {@code
    *     0} if none
    */
-  protected int parseReference(Block block, BasedSequence s) {
+  private int parseReference(Block block, BasedSequence s) {
     this.input = s;
     this.index = 0;
     BasedSequence dest;
@@ -350,7 +351,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     }
 
     boolean atLineEnd = true;
-    if (index != input.length() && match(myParsing.LINE_END) == null) {
+    if (index != input.length() && match(Parsing.LINE_END) == null) {
       if (title == null) {
         atLineEnd = false;
       } else {
@@ -361,7 +362,7 @@ public class InlineParserImpl extends LightInlineParserImpl
         // rewind before spaces
         index = beforeTitle;
         // and instead check if the link URL is at the line end
-        atLineEnd = match(myParsing.LINE_END) != null;
+        atLineEnd = match(Parsing.LINE_END) != null;
       }
     }
 
@@ -555,7 +556,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     if (lastChild instanceof Text && (lastChild.getChars().endsWith(" "))) {
       Text text = (Text) lastChild;
       BasedSequence literal = text.getChars();
-      Matcher matcher = myParsing.FINAL_SPACE.matcher(literal);
+      Matcher matcher = Parsing.FINAL_SPACE.matcher(literal);
       int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
       appendNode(
           spaces >= 2
@@ -596,7 +597,7 @@ public class InlineParserImpl extends LightInlineParserImpl
       index += charsMatched;
       gobbleLeadingSpaces();
     } else if (index < input.length()
-        && myParsing.ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
+        && Parsing.ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
       appendText(input, index - 1, index + 1);
       index++;
     } else {
@@ -618,13 +619,13 @@ public class InlineParserImpl extends LightInlineParserImpl
    * @return true if matched backticks, false otherwise
    */
   private boolean parseBackticks() {
-    BasedSequence ticks = match(myParsing.TICKS_HERE);
+    BasedSequence ticks = match(Parsing.TICKS_HERE);
     if (ticks == null) {
       return false;
     }
     int afterOpenTicks = index;
     BasedSequence matched;
-    while ((matched = match(myParsing.TICKS)) != null) {
+    while ((matched = match(Parsing.TICKS)) != null) {
       if (matched.equals(ticks)) {
         int ticksLength = ticks.length();
         BasedSequence codeText = input.subSequence(afterOpenTicks, index - ticksLength);
@@ -934,7 +935,7 @@ public class InlineParserImpl extends LightInlineParserImpl
         } else {
           spnl();
           // title needs a whitespace before
-          if (myParsing.WHITESPACE.matcher(input.subSequence(index - 1, index)).matches()) {
+          if (Parsing.WHITESPACE.matcher(input.subSequence(index - 1, index)).matches()) {
             title = parseLinkTitle();
             spnl();
           }
@@ -1319,7 +1320,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    */
   @Override
   public BasedSequence parseLinkDestination() {
-    BasedSequence res = match(myParsing.LINK_DESTINATION_ANGLES);
+    BasedSequence res = match(myParsing.linkDestinationAngles);
     if (res != null) {
       return res;
     }
@@ -1335,7 +1336,7 @@ public class InlineParserImpl extends LightInlineParserImpl
       // allow matched parenthesis
       // fix for issue of stack overflow when parsing long input lines, by implementing
       // non-recursive scan
-      BasedSequence matched = match(myParsing.LINK_DESTINATION_MATCHED_PARENS);
+      BasedSequence matched = match(myParsing.linkDestinationMatchedParens);
       if (matched != null) {
         int openCount = 0;
         int iMax = matched.length();
@@ -1343,7 +1344,7 @@ public class InlineParserImpl extends LightInlineParserImpl
           char c = matched.charAt(i);
           if (c == '\\') {
             if (i + 1 < iMax
-                && myParsing.ESCAPABLE.matcher(matched.subSequence(i + 1, i + 2)).matches()) {
+                && Parsing.ESCAPABLE.matcher(matched.subSequence(i + 1, i + 2)).matches()) {
               // escape
               i++;
             }
@@ -1367,7 +1368,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     }
 
     // spec 0.27 compatibility
-    BasedSequence matched = match(myParsing.LINK_DESTINATION);
+    BasedSequence matched = match(myParsing.linkDestination);
     return matched != null && spaceInUrls ? matched.trimEnd(CharPredicate.SPACE) : matched;
   }
 
@@ -1378,9 +1379,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    */
   @Override
   public BasedSequence parseLinkTitle() {
-    BasedSequence title = match(myParsing.LINK_TITLE);
-    // chop off quotes from title and unescape:
-    return title; // Escaping.unescapeString(title.substring(1, title.length() - 1));
+    return match(Parsing.linkTitle);
   }
 
   /**
@@ -1390,7 +1389,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    */
   @Override
   public int parseLinkLabel() {
-    BasedSequence m = match(myParsing.LINK_LABEL);
+    BasedSequence m = match(Parsing.LINK_LABEL);
     return m == null ? 0 : m.length();
   }
 
@@ -1402,7 +1401,7 @@ public class InlineParserImpl extends LightInlineParserImpl
   @Override
   public boolean parseAutolink() {
     BasedSequence m;
-    if ((m = match(myParsing.EMAIL_AUTOLINK)) != null) {
+    if ((m = match(myParsing.emailAutolink)) != null) {
       MailLink node =
           new MailLink(
               m.subSequence(0, 1),
@@ -1410,7 +1409,7 @@ public class InlineParserImpl extends LightInlineParserImpl
               m.subSequence(m.length() - 1, m.length()));
       appendNode(node);
       return true;
-    } else if ((m = match(myParsing.AUTOLINK)) != null) {
+    } else if ((m = match(myParsing.autolink)) != null) {
       AutoLink node =
           new AutoLink(
               m.subSequence(0, 1),
@@ -1418,7 +1417,7 @@ public class InlineParserImpl extends LightInlineParserImpl
               m.subSequence(m.length() - 1, m.length()));
       appendNode(node);
       return true;
-    } else if (options.wwwAutoLinkElement && (m = match(myParsing.WWW_AUTOLINK)) != null) {
+    } else if (options.wwwAutoLinkElement && (m = match(myParsing.wwwAutolink)) != null) {
       AutoLink node =
           new AutoLink(
               m.subSequence(0, 1),
@@ -1438,7 +1437,7 @@ public class InlineParserImpl extends LightInlineParserImpl
    */
   @Override
   public boolean parseHtmlInline() {
-    BasedSequence m = match(myParsing.HTML_TAG);
+    BasedSequence m = match(myParsing.htmlTag);
     if (m != null) {
       // separate HTML comment from herd
       HtmlInlineBase node;
@@ -1462,7 +1461,7 @@ public class InlineParserImpl extends LightInlineParserImpl
   @Override
   public boolean parseEntity() {
     BasedSequence m;
-    if ((m = match(myParsing.ENTITY_HERE)) != null) {
+    if ((m = match(myParsing.entityHere)) != null) {
       HtmlEntity node = new HtmlEntity(m);
       appendNode(node);
       return true;
@@ -1528,20 +1527,20 @@ public class InlineParserImpl extends LightInlineParserImpl
     boolean afterIsPunctuation;
     boolean leftFlanking;
     boolean rightFlanking;
-    boolean beforeIsWhitespace = myParsing.UNICODE_WHITESPACE_CHAR.matcher(before).matches();
-    boolean afterIsWhitespace = myParsing.UNICODE_WHITESPACE_CHAR.matcher(after).matches();
+    boolean beforeIsWhitespace = Parsing.UNICODE_WHITESPACE_CHAR.matcher(before).matches();
+    boolean afterIsWhitespace = Parsing.UNICODE_WHITESPACE_CHAR.matcher(after).matches();
 
     if (options.inlineDelimiterDirectionalPunctuations) {
-      beforeIsPunctuation = myParsing.PUNCTUATION_OPEN.matcher(before).matches();
-      afterIsPunctuation = myParsing.PUNCTUATION_CLOSE.matcher(after).matches();
+      beforeIsPunctuation = Parsing.PUNCTUATION_OPEN.matcher(before).matches();
+      afterIsPunctuation = Parsing.PUNCTUATION_CLOSE.matcher(after).matches();
 
       leftFlanking =
           !afterIsWhitespace && (!afterIsPunctuation || beforeIsWhitespace || beforeIsPunctuation);
       rightFlanking =
           !beforeIsWhitespace && (!beforeIsPunctuation || afterIsWhitespace || afterIsPunctuation);
     } else {
-      beforeIsPunctuation = myParsing.PUNCTUATION.matcher(before).matches();
-      afterIsPunctuation = myParsing.PUNCTUATION.matcher(after).matches();
+      beforeIsPunctuation = Parsing.PUNCTUATION.matcher(before).matches();
+      afterIsPunctuation = Parsing.PUNCTUATION.matcher(after).matches();
 
       leftFlanking =
           !afterIsWhitespace
@@ -1782,7 +1781,7 @@ public class InlineParserImpl extends LightInlineParserImpl
   }
 
   private static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(
-      DataHolder options, List<InlineParserExtensionFactory> extensionFactories) {
+      List<InlineParserExtensionFactory> extensionFactories) {
     Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<>();
 
     for (InlineParserExtensionFactory factory : extensionFactories) {
@@ -1806,7 +1805,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     return extensions;
   }
 
-  public static BitSet calculateDelimiterCharacters(DataHolder options, Set<Character> characters) {
+  public static BitSet calculateDelimiterCharacters(Set<Character> characters) {
     BitSet bitSet = new BitSet();
     for (Character character : characters) {
       bitSet.set(character);
@@ -1814,7 +1813,7 @@ public class InlineParserImpl extends LightInlineParserImpl
     return bitSet;
   }
 
-  public static BitSet calculateSpecialCharacters(DataHolder options, BitSet delimiterCharacters) {
+  public static BitSet calculateSpecialCharacters(BitSet delimiterCharacters) {
     BitSet bitSet = new BitSet();
     bitSet.or(delimiterCharacters);
     bitSet.set('\r');

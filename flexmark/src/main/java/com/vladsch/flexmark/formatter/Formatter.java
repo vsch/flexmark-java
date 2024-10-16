@@ -84,15 +84,13 @@ import org.jetbrains.annotations.Nullable;
  * </code></pre>
  */
 public class Formatter implements IRender {
-  private static final Document[] EMPTY_DOCUMENTS = new Document[0];
-
   /** output control for FormattingAppendable, see {@link LineAppendable#setOptions(int)} */
-  static final DataKey<Integer> FORMAT_FLAGS =
+  private static final DataKey<Integer> FORMAT_FLAGS =
       new DataKey<>(
           "FORMAT_FLAGS",
           LineAppendable.F_TRIM_LEADING_WHITESPACE | LineAppendable.F_TRIM_LEADING_EOL);
 
-  public static final DataKey<Boolean> GENERATE_HEADER_ID =
+  private static final DataKey<Boolean> GENERATE_HEADER_ID =
       new DataKey<>("GENERATE_HEADER_ID", false);
 
   public static final DataKey<Integer> MAX_BLANK_LINES = SharedDataKeys.FORMATTER_MAX_BLANK_LINES;
@@ -102,9 +100,6 @@ public class Formatter implements IRender {
 
   public static final DataKey<Boolean> APPLY_SPECIAL_LEAD_IN_HANDLERS =
       SharedDataKeys.APPLY_SPECIAL_LEAD_IN_HANDLERS;
-  static final DataKey<Boolean> ESCAPE_SPECIAL_CHARS = SharedDataKeys.ESCAPE_SPECIAL_CHARS;
-  static final DataKey<Boolean> ESCAPE_NUMBERED_LEAD_IN = SharedDataKeys.ESCAPE_NUMBERED_LEAD_IN;
-  static final DataKey<Boolean> UNESCAPE_SPECIAL_CHARS = SharedDataKeys.UNESCAPE_SPECIAL_CHARS;
 
   public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER =
       new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
@@ -160,7 +155,7 @@ public class Formatter implements IRender {
       new DataKey<>("KEEP_EXPLICIT_LINKS_AT_START", false);
   public static final DataKey<Boolean> OPTIMIZED_INLINE_RENDERING =
       new DataKey<>("OPTIMIZED_INLINE_RENDERING", false);
-  public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER =
+  static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER =
       TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER;
   public static final DataKey<Boolean> KEEP_HARD_LINE_BREAKS =
       new DataKey<>("KEEP_HARD_LINE_BREAKS", true);
@@ -191,10 +186,6 @@ public class Formatter implements IRender {
       new DataKey<>("TRANSLATION_AUTOLINK_PREFIX", "___");
   static final DataKey<String> TRANSLATION_EXCLUDE_PATTERN =
       new DataKey<>("TRANSLATION_EXCLUDE_PATTERN", "^[^\\p{IsAlphabetic}]*$");
-  static final DataKey<String> TRANSLATION_HTML_BLOCK_TAG_PATTERN =
-      Parser.TRANSLATION_HTML_BLOCK_TAG_PATTERN;
-  static final DataKey<String> TRANSLATION_HTML_INLINE_TAG_PATTERN =
-      Parser.TRANSLATION_HTML_INLINE_TAG_PATTERN;
 
   // link resolver info for doc relative and doc root urls
   public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<>("DOC_RELATIVE_URL", "");
@@ -316,7 +307,7 @@ public class Formatter implements IRender {
    * @param output appendable to which to render the resulting text
    * @param maxTrailingBlankLines max trailing blank lines in output, -1 means no last line EOL
    */
-  public void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
+  private void render(@NotNull Node node, @NotNull Appendable output, int maxTrailingBlankLines) {
     // NOTE: output to MarkdownWriter is only used to get builder if output is LineAppendable or
     // ISequenceBuilder
     MarkdownWriter markdown = new MarkdownWriter(output, FORMAT_FLAGS.get(options));
@@ -409,16 +400,6 @@ public class Formatter implements IRender {
   }
 
   /**
-   * Render a node to the appendable
-   *
-   * @param documents node to render
-   * @param output appendable to use for the output
-   */
-  private void mergeRender(Document[] documents, Appendable output) {
-    mergeRender(documents, output, MAX_TRAILING_BLANK_LINES.get(options));
-  }
-
-  /**
    * Render the tree of nodes to markdown
    *
    * @param documents the root node
@@ -428,10 +409,6 @@ public class Formatter implements IRender {
     StringBuilder sb = new StringBuilder();
     mergeRender(documents, sb, maxTrailingBlankLines);
     return sb.toString();
-  }
-
-  public String mergeRender(List<Document> documents, int maxTrailingBlankLines) {
-    return mergeRender(documents.toArray(Formatter.EMPTY_DOCUMENTS), maxTrailingBlankLines);
   }
 
   private void mergeRender(Document[] documents, Appendable output, int maxTrailingBlankLines) {

@@ -62,7 +62,7 @@ public class FormatControlProcessor {
   private Pattern getPatternOrDisableRegexp(@NotNull String markerText) {
     try {
       return Pattern.compile(markerText);
-    } catch (PatternSyntaxException var3) {
+    } catch (PatternSyntaxException e) {
       formatterTagsAcceptRegexp = false;
       return null;
     }

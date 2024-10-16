@@ -8,10 +8,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A CharSequence that references original char[] a subSequence() returns a sub-sequence from the
  * original base sequence
- *
- * <p>NOTE: '\0' changed to '\uFFFD' use {@link
- * com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null
- * chars.
  */
 public final class CharSubSequence extends BasedSequenceImpl {
   private final char[] baseChars;

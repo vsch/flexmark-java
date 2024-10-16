@@ -11,7 +11,7 @@ public class NodeFormattingHandler<N extends Node>
     super(aClass, adapter);
   }
 
-  public void render(
+  void render(
       @NotNull Node node, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown) {
     getAdapter().render((N) node, context, markdown);
   }

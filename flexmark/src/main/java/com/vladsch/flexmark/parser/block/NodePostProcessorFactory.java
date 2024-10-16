@@ -2,11 +2,8 @@ package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.util.ast.Document;
-import com.vladsch.flexmark.util.ast.Node;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.jetbrains.annotations.NotNull;
@@ -33,15 +30,6 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
   @Override
   public final boolean affectsGlobalScope() {
     return false;
-  }
-
-  protected final void addNodeWithExclusions(
-      Class<? extends Node> nodeType, Class<?>... excludeDescendantsOf) {
-    if (excludeDescendantsOf.length > 0) {
-      nodeMap.put(nodeType, new HashSet<>(Arrays.asList(excludeDescendantsOf)));
-    } else {
-      addNodes(nodeType);
-    }
   }
 
   protected final void addNodes(Class<?>... nodeTypes) {

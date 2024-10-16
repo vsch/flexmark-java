@@ -11,8 +11,7 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
  *
  * <p>Create it with {@link #create()} and then configure it on the builders
  *
- * <p>The parsed metadata is turned into {@link YamlFrontMatterNode}. You can access the metadata
- * using {@link AbstractYamlFrontMatterVisitor}.
+ * <p>The parsed metadata is turned into {@link YamlFrontMatterNode}.
  */
 public class YamlFrontMatterExtension
     implements Parser.ParserExtension, Formatter.FormatterExtension {

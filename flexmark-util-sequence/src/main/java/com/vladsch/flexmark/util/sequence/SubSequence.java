@@ -11,8 +11,7 @@ import org.jetbrains.annotations.Nullable;
  * all its subsequences, a subSequence() returns a SubSequence from the original base sequence.
  *
  * <p>NOTE: '\0' changed to '\uFFFD' use {@link
- * com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null
- * chars.
+ * com.vladsch.flexmark.util.sequence.NullEncoder#decodeNull} mapper to get original null chars.
  */
 final class SubSequence extends BasedSequenceImpl {
   private final @NotNull CharSequence charSequence;

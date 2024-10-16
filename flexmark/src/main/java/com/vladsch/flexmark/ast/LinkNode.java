@@ -8,10 +8,10 @@ import com.vladsch.flexmark.util.sequence.Escaping;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 
-public abstract class LinkNode extends LinkNodeBase implements DoNotLinkDecorate, TextContainer {
-  public LinkNode() {}
+abstract class LinkNode extends LinkNodeBase implements DoNotLinkDecorate, TextContainer {
+  protected LinkNode() {}
 
-  public LinkNode(BasedSequence chars) {
+  protected LinkNode(BasedSequence chars) {
     super(chars);
   }
 

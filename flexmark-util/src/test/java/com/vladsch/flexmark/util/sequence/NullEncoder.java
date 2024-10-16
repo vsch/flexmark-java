@@ -1,6 +1,6 @@
-package com.vladsch.flexmark.util.sequence.mappers;
+package com.vladsch.flexmark.util.sequence;
 
-import com.vladsch.flexmark.util.sequence.SequenceUtils;
+import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 
 public class NullEncoder {
   public static final CharMapper encodeNull = new EncodeNull();

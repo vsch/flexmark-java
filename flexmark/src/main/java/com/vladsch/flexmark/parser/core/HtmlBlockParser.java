@@ -79,7 +79,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
             },
             {
               Pattern.compile(
-                  "^(?:" + parsing.OPENTAG + '|' + parsing.CLOSETAG + ")\\s*$",
+                  "^(?:" + parsing.opentag + '|' + parsing.closetag + ")\\s*$",
                   Pattern.CASE_INSENSITIVE),
               null // terminated by blank line
             }

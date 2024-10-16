@@ -33,10 +33,8 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -161,7 +159,7 @@ public class Parser implements IParse {
    * LINKS_ALLOW_MATCHED_PARENTHESES default true, when false makes parsing CommonMark Spec 0.27
    * compliant
    */
-  public static final DataKey<Boolean> LINKS_ALLOW_MATCHED_PARENTHESES =
+  static final DataKey<Boolean> LINKS_ALLOW_MATCHED_PARENTHESES =
       new DataKey<>("LINKS_ALLOW_MATCHED_PARENTHESES", true);
 
   // the meat of differences in emulation
@@ -302,7 +300,7 @@ public class Parser implements IParse {
   // with content offset matching the suffix end
   // LIST_ITEM_MARKER_SPACE is applied after the suffix if it is present, and before. Spaces around
   // the suffix are implicitly allowed.
-  public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES =
+  static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES =
       new DataKey<>("LISTS_ITEM_MARKER_SUFFIXES", new String[] {});
   public static final DataKey<Boolean> LISTS_NUMBERED_ITEM_MARKER_SUFFIXED =
       new DataKey<>("LISTS_NUMBERED_ITEM_MARKER_SUFFIXED", true);
@@ -444,11 +442,10 @@ public class Parser implements IParse {
     this.delimiterProcessors =
         InlineParserImpl.calculateDelimiterProcessors(options, builder.delimiterProcessors);
     this.delimiterCharacters =
-        InlineParserImpl.calculateDelimiterCharacters(options, delimiterProcessors.keySet());
+        InlineParserImpl.calculateDelimiterCharacters(delimiterProcessors.keySet());
     this.linkRefProcessors =
         InlineParserImpl.calculateLinkRefProcessors(options, builder.linkRefProcessors);
-    this.specialCharacters =
-        InlineParserImpl.calculateSpecialCharacters(options, delimiterCharacters);
+    this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(delimiterCharacters);
     this.postProcessorDependencies =
         PostProcessorManager.calculatePostProcessors(builder.postProcessorFactories);
     this.inlineParserExtensionFactories = builder.inlineParserExtensionFactories;
@@ -602,7 +599,7 @@ public class Parser implements IParse {
     return transferred;
   }
 
-  public static <T extends Node> boolean transferReferences(
+  private static <T extends Node> boolean transferReferences(
       NodeRepository<T> destination, NodeRepository<T> included, boolean onlyIfUndefined) {
     return NodeRepository.transferReferences(destination, included, onlyIfUndefined, null);
   }
@@ -699,24 +696,6 @@ public class Parser implements IParse {
       return this;
     }
 
-    public Builder customInlineParserExtensionFactory(
-        InlineParserExtensionFactory inlineParserExtensionFactory) {
-      inlineParserExtensionFactories.add(inlineParserExtensionFactory);
-      addExtensionApiPoint(inlineParserExtensionFactory);
-      return this;
-    }
-
-    public Builder customInlineParserFactory(InlineParserFactory blockParserFactory) {
-      if (inlineParserFactory != null) {
-        throw new IllegalStateException(
-            "custom inline parser factory is already set to "
-                + inlineParserFactory.getClass().getName());
-      }
-      inlineParserFactory = blockParserFactory;
-      addExtensionApiPoint(blockParserFactory);
-      return this;
-    }
-
     public Builder customDelimiterProcessor(DelimiterProcessor delimiterProcessor) {
       delimiterProcessors.add(delimiterProcessor);
       addExtensionApiPoint(delimiterProcessor);
@@ -739,12 +718,6 @@ public class Parser implements IParse {
     public Builder blockPreProcessorFactory(BlockPreProcessorFactory blockPreProcessorFactory) {
       blockPreProcessorFactories.add(blockPreProcessorFactory);
       addExtensionApiPoint(blockPreProcessorFactory);
-      return this;
-    }
-
-    public Builder linkRefProcessorFactory(LinkRefProcessorFactory linkRefProcessor) {
-      linkRefProcessors.add(linkRefProcessor);
-      addExtensionApiPoint(linkRefProcessor);
       return this;
     }
 
@@ -777,14 +750,10 @@ public class Parser implements IParse {
      *
      * @param parserBuilder parser builder with which to register extensions
      * @see Builder#customBlockParserFactory(CustomBlockParserFactory)
-     * @see Builder#customInlineParserExtensionFactory(InlineParserExtensionFactory)
-     * @see Builder#customInlineParserFactory(InlineParserFactory)
      * @see Builder#customDelimiterProcessor(DelimiterProcessor)
      * @see Builder#postProcessorFactory(PostProcessorFactory)
      * @see Builder#paragraphPreProcessorFactory(ParagraphPreProcessorFactory)
      * @see Builder#blockPreProcessorFactory(BlockPreProcessorFactory)
-     * @see Builder#linkRefProcessorFactory(LinkRefProcessorFactory)
-     * @see Builder#specialLeadInHandler(SpecialLeadInHandler)
      */
     void extend(Builder parserBuilder);
   }
@@ -797,7 +766,7 @@ public class Parser implements IParse {
    *
    * <p>Extension for {@link Parser}.
    */
-  public interface ReferenceHoldingExtension extends Extension {
+  interface ReferenceHoldingExtension extends Extension {
     /**
      * This method is called to transfer references from included document to the source document
      *
@@ -806,53 +775,5 @@ public class Parser implements IParse {
      * @return true if there were references to transfer
      */
     boolean transferReferences(MutableDataHolder document, DataHolder included);
-  }
-
-  /**
-   * Add extension(s) to the extension list
-   *
-   * @param options mutable options holding existing extensions
-   * @param extensions extension to add
-   * @return mutable options
-   */
-  public static MutableDataHolder addExtensions(
-      MutableDataHolder options, Extension... extensions) {
-    Iterable<Extension> extensionIterable = Parser.EXTENSIONS.get(options);
-    List<Extension> extensionList = new ArrayList<>(Arrays.asList(extensions));
-
-    for (Extension extension : extensionIterable) {
-      extensionList.add(extension);
-    }
-
-    options.set(Parser.EXTENSIONS, extensionList);
-    return options;
-  }
-
-  /**
-   * Remove extension(s) of given class from the extension list
-   *
-   * @param options mutable options holding existing extensions
-   * @param extensions extension classes to remove
-   * @return mutable options
-   */
-  public static MutableDataHolder removeExtensions(MutableDataHolder options, Class... extensions) {
-    Iterable<Extension> extensionIterable = Parser.EXTENSIONS.get(options);
-    Set<Extension> extensionList = new HashSet<>();
-
-    for (Extension extension : extensionIterable) {
-      boolean keep = true;
-      for (Class clazz : extensions) {
-        if (clazz.isInstance(extension)) {
-          keep = false;
-          break;
-        }
-      }
-      if (keep) {
-        extensionList.add(extension);
-      }
-    }
-
-    options.set(Parser.EXTENSIONS, extensionList);
-    return options;
   }
 }

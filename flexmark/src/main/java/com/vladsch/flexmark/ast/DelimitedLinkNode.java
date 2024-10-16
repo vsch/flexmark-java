@@ -5,15 +5,11 @@ import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class DelimitedLinkNode extends LinkNode {
-  public DelimitedLinkNode() {}
-
-  public DelimitedLinkNode(BasedSequence chars) {
-    super(chars);
-  }
-
   protected BasedSequence openingMarker = BasedSequence.NULL;
   protected BasedSequence text = BasedSequence.NULL;
   protected BasedSequence closingMarker = BasedSequence.NULL;
+
+  public DelimitedLinkNode() {}
 
   @NotNull
   @Override
@@ -30,8 +26,7 @@ public class DelimitedLinkNode extends LinkNode {
     return BasedSequenceImpl.firstNonNull(openingMarker, text);
   }
 
-  public DelimitedLinkNode(
-      BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
+  DelimitedLinkNode(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
     super(
         openingMarker.baseSubSequence(
             openingMarker.getStartOffset(), closingMarker.getEndOffset()));

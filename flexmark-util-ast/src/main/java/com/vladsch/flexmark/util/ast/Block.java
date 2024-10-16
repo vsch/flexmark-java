@@ -20,10 +20,6 @@ public abstract class Block extends ContentNode {
     super(lineSegments);
   }
 
-  protected Block(BlockContent blockContent) {
-    super(blockContent);
-  }
-
   @Override
   @Nullable
   public Block getParent() {

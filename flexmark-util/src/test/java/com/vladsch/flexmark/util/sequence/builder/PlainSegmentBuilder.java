@@ -3,9 +3,7 @@ package com.vladsch.flexmark.util.sequence.builder;
 import org.jetbrains.annotations.NotNull;
 
 public class PlainSegmentBuilder extends SegmentBuilderBase<PlainSegmentBuilder> {
-  public PlainSegmentBuilder() {}
-
-  public PlainSegmentBuilder(int options) {
+  PlainSegmentBuilder(int options) {
     super(options);
   }
 

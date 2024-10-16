@@ -2,7 +2,6 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.util.ast.Node;
-import java.io.IOException;
 import org.jetbrains.annotations.NotNull;
 
 abstract class NodeRendererSubContext implements NodeRendererContext {
@@ -22,16 +21,7 @@ abstract class NodeRendererSubContext implements NodeRendererContext {
     return htmlWriter;
   }
 
-  private void flushTo(@NotNull Appendable out, int maxBlankLines, int maxTrailingBlankLines) {
-    htmlWriter.line();
-    try {
-      htmlWriter.appendTo(out, maxBlankLines, maxTrailingBlankLines);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  protected int getDoNotRenderLinksNesting() {
+  int getDoNotRenderLinksNesting() {
     return doNotRenderLinksNesting;
   }
 

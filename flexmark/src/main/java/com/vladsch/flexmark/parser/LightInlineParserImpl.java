@@ -258,7 +258,7 @@ public class LightInlineParserImpl implements LightInlineParser {
    */
   @Override
   public boolean spnl() {
-    match(myParsing.SPNL);
+    match(Parsing.SPNL);
     return true;
   }
 
@@ -269,7 +269,7 @@ public class LightInlineParserImpl implements LightInlineParser {
    */
   @Override
   public boolean nonIndentSp() {
-    match(myParsing.SPNI);
+    match(Parsing.SPNI);
     return true;
   }
 
@@ -280,7 +280,7 @@ public class LightInlineParserImpl implements LightInlineParser {
    */
   @Override
   public boolean sp() {
-    match(myParsing.SP);
+    match(Parsing.SP);
     return true;
   }
 
@@ -291,7 +291,7 @@ public class LightInlineParserImpl implements LightInlineParser {
    */
   @Override
   public boolean spnlUrl() {
-    return match(myParsing.SPNL_URL) != null;
+    return match(Parsing.SPNL_URL) != null;
   }
 
   /**
@@ -302,6 +302,6 @@ public class LightInlineParserImpl implements LightInlineParser {
   @Nullable
   @Override
   public BasedSequence toEOL() {
-    return match(myParsing.REST_OF_LINE);
+    return match(Parsing.REST_OF_LINE);
   }
 }

@@ -6,8 +6,12 @@ import com.vladsch.flexmark.util.data.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.List;
 
-public class MatchedBlockParserImpl implements MatchedBlockParser {
+class MatchedBlockParserImpl implements MatchedBlockParser {
   private final BlockParser matchedBlockParser;
+
+  MatchedBlockParserImpl(BlockParser matchedBlockParser) {
+    this.matchedBlockParser = matchedBlockParser;
+  }
 
   @Override
   public List<BasedSequence> getParagraphLines() {
@@ -23,10 +27,6 @@ public class MatchedBlockParserImpl implements MatchedBlockParser {
       return matchedBlockParser.getBlockContent().getLineIndents();
     }
     return null;
-  }
-
-  public MatchedBlockParserImpl(BlockParser matchedBlockParser) {
-    this.matchedBlockParser = matchedBlockParser;
   }
 
   @Override

@@ -11,7 +11,7 @@ public class Reverse<T> implements ReversibleIterable<T> {
     this(list, true);
   }
 
-  public Reverse(@NotNull List<T> list, boolean isReversed) {
+  private Reverse(@NotNull List<T> list, boolean isReversed) {
     this.list = list;
     this.isReversed = isReversed;
   }

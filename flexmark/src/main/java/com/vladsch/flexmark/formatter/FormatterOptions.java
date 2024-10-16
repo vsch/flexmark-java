@@ -23,23 +23,19 @@ public class FormatterOptions {
 
   public final ParserEmulationProfile emulationProfile;
   public final boolean setextHeadingEqualizeMarker;
-  public final int formatFlags;
   public final int maxBlankLines;
-  public final int maxTrailingBlankLines;
   public final int rightMargin;
   public final int minSetextMarkerLength;
   public final DiscretionaryText spaceAfterAtxMarker;
   public final EqualizeTrailingMarker atxHeadingTrailingMarker;
   public final HeadingStyle headingStyle;
-  public final boolean blockQuoteBlankLines;
-  public final BlockQuoteMarker blockQuoteMarkers;
+  final boolean blockQuoteBlankLines;
+  final BlockQuoteMarker blockQuoteMarkers;
   public final String thematicBreak;
   public final String translationIdFormat;
   public final String translationHtmlBlockPrefix;
   public final String translationHtmlInlinePrefix;
   public final String translationExcludePattern;
-  public final String translationHtmlBlockTagPattern;
-  public final String translationHtmlInlineTagPattern;
   public final String translationAutolinkPrefix;
   public final boolean indentedCodeMinimizeIndent;
   public final boolean fencedCodeMinimizeIndent;
@@ -47,13 +43,13 @@ public class FormatterOptions {
   public final boolean fencedCodeSpaceBeforeInfo;
   public final int fencedCodeMarkerLength;
   public final CodeFenceMarker fencedCodeMarkerType;
-  public final boolean listAddBlankLineBefore;
-  public final boolean listRenumberItems;
-  public final boolean listRemoveEmptyItems;
-  public final boolean listsItemContentAfterSuffix;
-  public final ListBulletMarker listBulletMarker;
-  public final ListNumberedMarker listNumberedMarker;
-  public final ListSpacing listSpacing;
+  final boolean listAddBlankLineBefore;
+  final boolean listRenumberItems;
+  final boolean listRemoveEmptyItems;
+  final boolean listsItemContentAfterSuffix;
+  final ListBulletMarker listBulletMarker;
+  final ListNumberedMarker listNumberedMarker;
+  final ListSpacing listSpacing;
   public final ElementPlacement referencePlacement;
   public final ElementPlacementSort referenceSort;
   public final boolean keepImageLinksAtStart;
@@ -63,9 +59,6 @@ public class FormatterOptions {
   public final boolean appendTransferredReferences;
   public final boolean optimizedInlineRendering;
   final boolean applySpecialLeadInHandlers;
-  public final boolean escapeSpecialCharsOnWrap;
-  private final boolean escapeNumberedLeadInOnWrap;
-  public final boolean unescapeSpecialCharsOnWrap;
   final CharWidthProvider charWidthProvider;
   final ElementAlignment listAlignNumeric;
   final boolean listResetFirstItemNumber;
@@ -81,9 +74,7 @@ public class FormatterOptions {
     itemContentIndent = emulationProfile.family != ParserEmulationProfile.FIXED_INDENT;
 
     setextHeadingEqualizeMarker = Formatter.SETEXT_HEADING_EQUALIZE_MARKER.get(options);
-    formatFlags = Formatter.FORMAT_FLAGS.get(options);
     maxBlankLines = Formatter.MAX_BLANK_LINES.get(options);
-    maxTrailingBlankLines = Formatter.MAX_TRAILING_BLANK_LINES.get(options);
     rightMargin = Formatter.RIGHT_MARGIN.get(options);
     minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
     spaceAfterAtxMarker = Formatter.SPACE_AFTER_ATX_MARKER.get(options);
@@ -95,8 +86,6 @@ public class FormatterOptions {
     translationHtmlInlinePrefix = Formatter.TRANSLATION_HTML_INLINE_PREFIX.get(options);
     translationAutolinkPrefix = Formatter.TRANSLATION_AUTOLINK_PREFIX.get(options);
     translationExcludePattern = Formatter.TRANSLATION_EXCLUDE_PATTERN.get(options);
-    translationHtmlBlockTagPattern = Formatter.TRANSLATION_HTML_BLOCK_TAG_PATTERN.get(options);
-    translationHtmlInlineTagPattern = Formatter.TRANSLATION_HTML_INLINE_TAG_PATTERN.get(options);
     blockQuoteBlankLines = Formatter.BLOCK_QUOTE_BLANK_LINES.get(options);
     blockQuoteMarkers = Formatter.BLOCK_QUOTE_MARKERS.get(options);
     indentedCodeMinimizeIndent = Formatter.INDENTED_CODE_MINIMIZE_INDENT.get(options);
@@ -129,9 +118,6 @@ public class FormatterOptions {
     appendTransferredReferences = Formatter.APPEND_TRANSFERRED_REFERENCES.get(options);
     optimizedInlineRendering = Formatter.OPTIMIZED_INLINE_RENDERING.get(options);
     applySpecialLeadInHandlers = Formatter.APPLY_SPECIAL_LEAD_IN_HANDLERS.get(options);
-    escapeSpecialCharsOnWrap = Formatter.ESCAPE_SPECIAL_CHARS.get(options);
-    escapeNumberedLeadInOnWrap = Formatter.ESCAPE_NUMBERED_LEAD_IN.get(options);
-    unescapeSpecialCharsOnWrap = Formatter.UNESCAPE_SPECIAL_CHARS.get(options);
     blankLinesInAst = Parser.BLANK_LINES_IN_AST.get(options);
   }
 }

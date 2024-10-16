@@ -15,10 +15,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A CharSequence that references original char sequence with offsets into original preserved.
  *
- * <p>NOTE: '\0' changed to '\uFFFD' use {@link
- * com.vladsch.flexmark.util.sequence.mappers.NullEncoder#decodeNull} mapper to get original null
- * chars.
- *
  * <p>Since equals is used for comparison of sequences and strings by base sequence manager, a base
  * sequence with NUL may not compare equal to an equivalent unwrapped sequence because NUL chars are
  * not converted. For Strings this is handled by using String.equals() for comparison. For other

@@ -21,9 +21,9 @@ public abstract class HtmlInlineBase extends Node {
     astExtraChars(out);
   }
 
-  public HtmlInlineBase() {}
+  protected HtmlInlineBase() {}
 
-  public HtmlInlineBase(BasedSequence chars) {
+  HtmlInlineBase(BasedSequence chars) {
     super(chars);
   }
 }

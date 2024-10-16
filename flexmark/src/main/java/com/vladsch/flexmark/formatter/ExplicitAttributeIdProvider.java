@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.ast.Node;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface ExplicitAttributeIdProvider {
+interface ExplicitAttributeIdProvider {
   /**
    * Used by AttributesExtension to insert attributes for headings during merge
    *
