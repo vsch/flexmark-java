@@ -8,11 +8,11 @@ import org.jetbrains.annotations.NotNull;
  * @param <N> node subclass
  * @param <A> node action
  */
-public abstract class AstHandler<N, A extends AstAction<? super N>> {
+public abstract class AstHandler<N, A extends AstAction> {
   private final @NotNull Class<? extends N> aClass;
   private final @NotNull A adapter;
 
-  public AstHandler(@NotNull Class<? extends N> klass, @NotNull A adapter) {
+  protected AstHandler(@NotNull Class<? extends N> klass, @NotNull A adapter) {
     aClass = klass;
     this.adapter = adapter;
   }

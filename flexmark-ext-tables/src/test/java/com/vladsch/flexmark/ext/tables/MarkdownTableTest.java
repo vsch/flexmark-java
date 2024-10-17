@@ -13,9 +13,9 @@ import com.vladsch.flexmark.util.sequence.LineAppendable;
 import org.junit.Test;
 
 public class MarkdownTableTest extends MarkdownTableTestBase {
-  private static final String markdown1 =
+  private static final String MARKDOWN_1 =
       "" + "| First Header  |\n" + "| ------------- |\n" + "| Content Cell  |\n" + "\n" + "";
-  private static final String markdown2 =
+  private static final String MARKDOWN_2 =
       ""
           + "| Left-aligned | Right-aligned1 |\n"
           + "| Left-aligned | Right-aligned2 |\n"
@@ -24,7 +24,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
           + "| git diff     | git diff2      |\n"
           + "[  ]\n"
           + "";
-  private static final String markdown3 =
+  private static final String MARKDOWN_3 =
       "| Left-aligned | Center-aligned | Right-aligned1 |\n"
           + "| Left-aligned | Center-aligned | Right-aligned2 |\n"
           + "| Left-aligned | Center-aligned | Right-aligned3 |\n"
@@ -35,7 +35,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
           + "[Table Caption]\n"
           + "";
 
-  private static final String markdown4 =
+  private static final String MARKDOWN_4 =
       ""
           + "| Left-aligned1 |\n"
           + "| Left-aligned | Center-aligned2 |\n"
@@ -49,10 +49,10 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
           + "[Table Caption]\n"
           + "";
 
-  private static final String formattedNoCaption1 =
+  private static final String FORMATTED_NO_CAPTION_1 =
       "" + "| First Header |\n" + "|--------------|\n" + "| Content Cell |\n" + "";
 
-  private static final String formattedNoCaption2 =
+  private static final String FORMATTED_NO_CAPTION_2 =
       ""
           + "| Left-aligned | Right-aligned1 |\n"
           + "| Left-aligned | Right-aligned2 |\n"
@@ -60,7 +60,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
           + "| git status   |    git status1 |\n"
           + "| git diff     |      git diff2 |\n"
           + "";
-  private static final String formattedNoCaption3 =
+  private static final String FORMATTED_NO_CAPTION_3 =
       ""
           + "| Left-aligned | Center-aligned | Right-aligned1 |\n"
           + "| Left-aligned | Center-aligned | Right-aligned2 |\n"
@@ -71,17 +71,17 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
           + "| git diff     |    git diff    |      git diff3 |\n"
           + "";
 
-  private static final String formatted1 = formattedNoCaption1 + "";
+  private static final String FORMATTED_1 = FORMATTED_NO_CAPTION_1 + "";
 
-  private static final String formatted2 = formattedNoCaption2 + "[ ]\n" + "";
+  private static final String FORMATTED_2 = FORMATTED_NO_CAPTION_2 + "[ ]\n" + "";
 
-  private static final String formatted3 = formattedNoCaption3 + "[Table Caption]\n" + "";
+  private static final String FORMATTED_3 = FORMATTED_NO_CAPTION_3 + "[Table Caption]\n" + "";
 
   @Test
   public void test_basic() {
-    MarkdownTable[] tables = getTables(markdown1 + markdown2 + markdown3);
+    MarkdownTable[] tables = getTables(MARKDOWN_1 + MARKDOWN_2 + MARKDOWN_3);
     String[] formattedTables = getFormattedTables(tables);
-    String[] expected = new String[] {formatted1, formatted2, formatted3};
+    String[] expected = new String[] {FORMATTED_1, FORMATTED_2, FORMATTED_3};
 
     int iMax = tables.length;
     for (int i = iMax; i-- > 0; ) {
@@ -91,9 +91,9 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_getCaption() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
     assertEquals("", table1.getCaption().toString());
     assertEquals("  ", table2.getCaption().toString());
     assertEquals("Table Caption", table3.getCaption().toString());
@@ -109,9 +109,9 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_setCaption() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     table1.setCaption("Table 1");
     table2.setCaption("Table 2");
@@ -121,16 +121,16 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     assertEquals("Table 2", table2.getCaption().toString());
     assertEquals("Table 3", table3.getCaption().toString());
 
-    assertEquals(formattedNoCaption1 + "[Table 1]\n", getFormattedTable(table1).toString());
-    assertEquals(formattedNoCaption2 + "[Table 2]\n", getFormattedTable(table2).toString());
-    assertEquals(formattedNoCaption3 + "[Table 3]\n", getFormattedTable(table3).toString());
+    assertEquals(FORMATTED_NO_CAPTION_1 + "[Table 1]\n", getFormattedTable(table1).toString());
+    assertEquals(FORMATTED_NO_CAPTION_2 + "[Table 2]\n", getFormattedTable(table2).toString());
+    assertEquals(FORMATTED_NO_CAPTION_3 + "[Table 3]\n", getFormattedTable(table3).toString());
   }
 
   @Test
   public void test_setCaptionWithMarkers() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     table1.setCaptionWithMarkers(null, "[", "Table 1", "]");
     table2.setCaptionWithMarkers(null, "[", "Table 2", "]");
@@ -140,16 +140,16 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     assertEquals("Table 2", table2.getCaption().toString());
     assertEquals("Table 3", table3.getCaption().toString());
 
-    assertEquals(formattedNoCaption1 + "[Table 1]\n", getFormattedTable(table1).toString());
-    assertEquals(formattedNoCaption2 + "[Table 2]\n", getFormattedTable(table2).toString());
-    assertEquals(formattedNoCaption3 + "[Table 3]\n", getFormattedTable(table3).toString());
+    assertEquals(FORMATTED_NO_CAPTION_1 + "[Table 1]\n", getFormattedTable(table1).toString());
+    assertEquals(FORMATTED_NO_CAPTION_2 + "[Table 2]\n", getFormattedTable(table2).toString());
+    assertEquals(FORMATTED_NO_CAPTION_3 + "[Table 3]\n", getFormattedTable(table3).toString());
   }
 
   @Test
   public void test_getHeadingRowCount() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     assertEquals(1, table1.getHeadingRowCount());
     assertEquals(2, table2.getHeadingRowCount());
@@ -158,9 +158,9 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_getBodyRowCount() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     assertEquals(1, table1.getBodyRowCount());
     assertEquals(2, table2.getBodyRowCount());
@@ -169,77 +169,77 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_getMaxHeadingColumns() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     assertEquals(1, table1.getMaxHeadingColumns());
     assertEquals(2, table2.getMaxHeadingColumns());
     assertEquals(3, table3.getMaxHeadingColumns());
 
-    MarkdownTable table4 = getTable(markdown4);
+    MarkdownTable table4 = getTable(MARKDOWN_4);
     assertEquals(4, table4.getMaxHeadingColumns());
   }
 
   @Test
   public void test_getMaxSeparatorColumns() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     assertEquals(1, table1.getMaxSeparatorColumns());
     assertEquals(2, table2.getMaxSeparatorColumns());
     assertEquals(3, table3.getMaxSeparatorColumns());
 
-    MarkdownTable table4 = getTable(markdown4);
+    MarkdownTable table4 = getTable(MARKDOWN_4);
     assertEquals(4, table4.getMaxSeparatorColumns());
   }
 
   @Test
   public void test_getMaxBodyColumns() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     assertEquals(1, table1.getMaxBodyColumns());
     assertEquals(2, table2.getMaxBodyColumns());
     assertEquals(3, table3.getMaxBodyColumns());
 
-    MarkdownTable table4 = getTable(markdown4);
+    MarkdownTable table4 = getTable(MARKDOWN_4);
     assertEquals(4, table4.getMaxBodyColumns());
   }
 
   @Test
   public void test_getMinColumns() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     assertEquals(1, table1.getMinColumns());
     assertEquals(2, table2.getMinColumns());
     assertEquals(3, table3.getMinColumns());
 
-    MarkdownTable table4 = getTable(markdown4);
+    MarkdownTable table4 = getTable(MARKDOWN_4);
     assertEquals(1, table4.getMinColumns());
   }
 
   @Test
   public void test_getMaxColumns() {
-    MarkdownTable table1 = getTable(markdown1);
-    MarkdownTable table2 = getTable(markdown2);
-    MarkdownTable table3 = getTable(markdown3);
+    MarkdownTable table1 = getTable(MARKDOWN_1);
+    MarkdownTable table2 = getTable(MARKDOWN_2);
+    MarkdownTable table3 = getTable(MARKDOWN_3);
 
     assertEquals(1, table1.getMaxColumns());
     assertEquals(2, table2.getMaxColumns());
     assertEquals(3, table3.getMaxColumns());
 
-    MarkdownTable table4 = getTable(markdown4);
+    MarkdownTable table4 = getTable(MARKDOWN_4);
     assertEquals(4, table4.getMaxColumns());
   }
 
   @Test
   public void test_maxColumnsWithout() {
-    MarkdownTable table4 = getTable(markdown4);
+    MarkdownTable table4 = getTable(MARKDOWN_4);
     assertEquals(0, table4.getMaxColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7, 8));
     assertEquals(1, table4.getMaxColumnsWithoutRows(true, 1, 2, 3, 4, 5, 6, 7, 8));
     assertEquals(2, table4.getMaxColumnsWithoutRows(true, 0, 2, 3, 4, 5, 6, 7, 8));
@@ -264,7 +264,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_minColumnsWithout() {
-    MarkdownTable table4 = getTable(markdown4);
+    MarkdownTable table4 = getTable(MARKDOWN_4);
     assertEquals(0, table4.getMinColumnsWithoutRows(true, 0, 1, 2, 3, 4, 5, 6, 7, 8));
     assertEquals(1, table4.getMinColumnsWithoutRows(true, 1, 2, 3, 4, 5, 6, 7, 8));
     assertEquals(2, table4.getMinColumnsWithoutRows(true, 0, 2, 3, 4, 5, 6, 7, 8));
@@ -288,7 +288,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     assertEquals(4, table4.getMinColumnsWithoutRows(false, 0, 1, 2, 3, 4, 5, 6));
   }
 
-  private static final String markdown6 =
+  private static final String MARKDOWN_6 =
       ""
           + "|  | Left-aligned1 |\n"
           + "|  | Left-aligned | Center-aligned2 |\n"
@@ -306,13 +306,13 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_isEmptyColumn() {
-    MarkdownTable table6 = getTable(markdown6);
+    MarkdownTable table6 = getTable(MARKDOWN_6);
     for (int i = 0; i < 10; i++) {
       assertEquals("Column: " + i, i == 0 || i > 4, table6.isEmptyColumn(i));
     }
   }
 
-  private static final String markdown5 =
+  private static final String MARKDOWN_5 =
       ""
           + "| Left-aligned1 |\n"
           + "| Left-aligned | Center-aligned2 |\n"
@@ -330,14 +330,14 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_isEmptyRow() {
-    MarkdownTable table5 = getTable(markdown5);
+    MarkdownTable table5 = getTable(MARKDOWN_5);
     for (int i = 0; i < 10; i++) {
       assertEquals("Row with sep: " + i, i == 4 || i == 10, table5.isAllRowsEmptyAt(i));
       assertEquals("Row without sep: " + i, i == 4 || i == 9, table5.isContentRowsEmptyAt(i));
     }
   }
 
-  private static final String markdown7 =
+  private static final String MARKDOWN_7 =
       ""
           + "| Header 1.1 | Header 1.2 | Header 1.3 | Header 1.4 | Header 1.5 |\n"
           + "| Header 2.1 | Header 2.2 | Header 2.3 | Header 2.4 | Header 2.5 |\n"
@@ -358,7 +358,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_indexOf() {
-    MarkdownTable table7 = getTable(markdown7);
+    MarkdownTable table7 = getTable(MARKDOWN_7);
 
     // Data 1.1 row
     assertIndexOf(0, 0, table7.body.rows.get(0).indexOf(0));
@@ -403,7 +403,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
     assertIndexOf(0, 4, table7.body.rows.get(5).indexOf(4));
   }
 
-  private static final String markdown8 =
+  private static final String MARKDOWN_8 =
       "some text\n\n"
           + "| Header 1.1 | Header 1.2 | Header 1.3 | Header 1.4 | Header 1.5 |\n"
           + "| Header 2.1 | Header 2.2 | Header 2.3 | Header 2.4 | Header 2.5 |\n"
@@ -416,7 +416,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
 
   @Test
   public void test_ExactColumn() {
-    MarkdownTable table8 = getTable(markdown8);
+    MarkdownTable table8 = getTable(MARKDOWN_8);
     int offset = 11;
 
     assertEquals(offset, table8.getTableStartOffset());
@@ -2777,7 +2777,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
             source,
             formatOptions(null)
                 .toMutable()
-                .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
+                .set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
     table.fillMissingColumns();
 
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
@@ -2826,7 +2826,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
             source,
             formatOptions(null)
                 .toMutable()
-                .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
+                .set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS, false));
     table.fillMissingColumns(0);
 
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
@@ -2875,9 +2875,8 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
             source,
             formatOptions(null)
                 .toMutable()
-                .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
+                .set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
                 .set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_MIN_COLUMN, 0));
-    //        table.fillMissingColumns(0);
 
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
     HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
@@ -2925,8 +2924,8 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
             source,
             formatOptions(null)
                 .toMutable()
-                .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, false)
-                .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "    "));
+                .set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS, false)
+                .set(TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX, "    "));
     table.fillMissingColumns();
 
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, ' ', true)));
@@ -2973,7 +2972,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
             source,
             formatOptions(null)
                 .toMutable()
-                .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+                .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
     HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     table.appendTable(out);
@@ -3010,7 +3009,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
             source,
             formatOptions(null)
                 .toMutable()
-                .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+                .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
     HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     table.appendTable(out);
@@ -3047,7 +3046,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
             source,
             formatOptions(null)
                 .toMutable()
-                .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+                .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
     HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     table.appendTable(out);
@@ -3084,7 +3083,7 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
             source,
             formatOptions(null)
                 .toMutable()
-                .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+                .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
     assertTrue(table.addTrackedOffset(TrackedOffset.track(pos, null, false)));
     HtmlWriter out = new HtmlWriter(0, LineAppendable.F_FORMAT_ALL);
     table.appendTable(out);
@@ -3103,29 +3102,4 @@ public class MarkdownTableTest extends MarkdownTableTestBase {
         formattedTable.substring(0, offset) + "^" + formattedTable.substring(offset));
     assertEquals(pos, offset);
   }
-
-  // these are tested with manipulators
-  @Test
-  public void allRows() {}
-
-  @Test
-  public void allRowCount() {}
-
-  @Test
-  public void forAllRows() {}
-
-  @Test
-  public void deleteRows() {}
-
-  @Test
-  public void insertColumns() {}
-
-  @Test
-  public void deleteColumns() {}
-
-  @Test
-  public void insertRows() {}
-
-  @Test
-  public void moveColumn() {}
 }

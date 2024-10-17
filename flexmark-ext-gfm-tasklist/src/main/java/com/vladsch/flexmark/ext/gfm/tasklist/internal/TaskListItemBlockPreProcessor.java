@@ -8,7 +8,6 @@ import com.vladsch.flexmark.parser.block.BlockPreProcessor;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.ast.Block;
-import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
-  private TaskListItemBlockPreProcessor(DataHolder options) {}
+  private TaskListItemBlockPreProcessor() {}
 
   @Override
   public void preProcess(ParserState state, Block block) {
@@ -71,7 +70,7 @@ public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
     @NotNull
     @Override
     public BlockPreProcessor apply(@NotNull ParserState state) {
-      return new TaskListItemBlockPreProcessor(state.getProperties());
+      return new TaskListItemBlockPreProcessor();
     }
   }
 }

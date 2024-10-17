@@ -15,9 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 public class ComboSubscriptSpecTest extends RendererSpecTest {
-  static final String SPEC_RESOURCE = "/ext_subscript_ast_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
+  private static final String SPEC_RESOURCE = "/ext_subscript_ast_spec.md";
   private static final DataHolder OPTIONS =
       new MutableDataSet()
           .set(HtmlRenderer.INDENT_SIZE, 0)
@@ -40,6 +38,6 @@ public class ComboSubscriptSpecTest extends RendererSpecTest {
 
   @Parameterized.Parameters(name = "{0}")
   public static List<Object[]> data() {
-    return getTestData(RESOURCE_LOCATION);
+    return getTestData(ResourceLocation.of(SPEC_RESOURCE));
   }
 }

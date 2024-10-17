@@ -8,8 +8,6 @@ import org.junit.runners.Parameterized;
 
 public class ComboCoreFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
   private static final String SPEC_RESOURCE = "/core_formatter_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
 
   public ComboCoreFormatterSpecTest(@NotNull SpecExample example) {
     super(example, null);
@@ -17,6 +15,6 @@ public class ComboCoreFormatterSpecTest extends ComboCoreFormatterSpecTestBase {
 
   @Parameterized.Parameters(name = "{0}")
   public static List<Object[]> data() {
-    return getTestData(RESOURCE_LOCATION);
+    return getTestData(ResourceLocation.of(SPEC_RESOURCE));
   }
 }

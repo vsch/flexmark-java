@@ -626,14 +626,7 @@ public class CoreNodeFormatter
         }
         if (minSpaces > 0) {
           i = 0;
-          // StringBuilder out = new StringBuilder();
-          // for (BasedSequence line : lines) {
-          //    if (leadColumns[i] > minSpaces) out.append(RepeatedCharSequence.of(' ',
-          // leadColumns[i] - minSpaces));
-          //    out.append(line.trimStart());
-          //    i++;
-          // }
-          // markdown.append(out);
+
           for (BasedSequence line : lines) {
             if (leadColumns[i] > minSpaces) markdown.append(' ', leadColumns[i] - minSpaces);
             markdown.append(line.trimStart());
@@ -839,8 +832,6 @@ public class CoreNodeFormatter
     } else {
       markdown.appendTranslating("<!--", text, "-->", trimmedEOL);
     }
-
-    // markdown.append(node.getChars());
   }
 
   private void render(HtmlBlockBase node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -891,7 +882,6 @@ public class CoreNodeFormatter
     } else {
       markdown.appendTranslating("<!--", text, "-->");
     }
-    // markdown.append(node.getChars());
   }
 
   private void render(HtmlInline node, NodeFormatterContext context, MarkdownWriter markdown) {

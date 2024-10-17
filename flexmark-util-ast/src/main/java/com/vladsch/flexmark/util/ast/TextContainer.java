@@ -1,36 +1,10 @@
 package com.vladsch.flexmark.util.ast;
 
-import com.vladsch.flexmark.util.misc.BitField;
 import com.vladsch.flexmark.util.misc.BitFieldSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.builder.ISequenceBuilder;
 
 public interface TextContainer {
-  enum Flags implements BitField {
-    LINK_TEXT_TYPE(3),
-    NODE_TEXT, // not unescaped and not percent decoded
-    FOR_HEADING_ID, // text for heading ID
-    NO_TRIM_REF_TEXT_START, // don't trim ref text start
-    NO_TRIM_REF_TEXT_END, // don't trim ref text end
-    ADD_SPACES_BETWEEN_NODES; // when appending text from different nodes, ensure there is at least
-    // one space
-
-    final int bits;
-
-    Flags() {
-      this(1);
-    }
-
-    Flags(int bits) {
-      this.bits = bits;
-    }
-
-    @Override
-    public int getBits() {
-      return bits;
-    }
-  }
-
   int F_LINK_TEXT_TYPE = BitFieldSet.intMask(Flags.LINK_TEXT_TYPE);
   int F_LINK_TEXT = 0; // use link text
   int F_LINK_PAGE_REF = 1; // use page ref

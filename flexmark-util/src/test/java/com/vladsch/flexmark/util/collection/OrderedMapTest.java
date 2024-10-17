@@ -299,18 +299,6 @@ public class OrderedMapTest {
   }
 
   @Test
-  public void testConcurrentModKeyIterator() {
-    OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
-    orderedMap.put("0", 0);
-    orderedMap.put("1", 1);
-
-    Iterator<String> iterator1 = orderedMap.keyIterator();
-
-    orderedMap.remove("0");
-    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator1.next());
-  }
-
-  @Test
   public void testConcurrentModValueIterator() {
     OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
     orderedMap.put("0", 0);
@@ -332,18 +320,6 @@ public class OrderedMapTest {
 
     orderedMap.keySet().remove("0");
     Assert.assertThrows(ConcurrentModificationException.class, () -> iterator.next());
-  }
-
-  @Test
-  public void testConcurrentModKeyIteratorOnKey() {
-    OrderedMap<String, Integer> orderedMap = new OrderedMap<>();
-    orderedMap.put("0", 0);
-    orderedMap.put("1", 1);
-
-    Iterator<String> iterator1 = orderedMap.keyIterator();
-
-    orderedMap.keySet().remove("0");
-    Assert.assertThrows(ConcurrentModificationException.class, () -> iterator1.next());
   }
 
   @Test

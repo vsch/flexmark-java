@@ -31,26 +31,26 @@ import org.jetbrains.annotations.Nullable;
 
 public class HeadingParser extends AbstractBlockParser {
   private static class HeadingParsing extends Parsing {
-    private final Pattern ATX_HEADING;
-    private final Pattern ATX_TRAILING;
-    private final Pattern SETEXT_HEADING;
+    private final Pattern atxHeading;
+    private final Pattern atxTrailing;
+    private final Pattern setextHeading;
 
     private HeadingParsing(DataHolder options) {
       super(options);
 
-      ATX_HEADING =
+      atxHeading =
           Parser.HEADING_NO_ATX_SPACE.get(options)
               ? Pattern.compile("^#{1,6}(?:[ \t]*|$)")
               : Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.get(options)
                   ? Pattern.compile("^#{1,6}(?:[ \t]*(?=[^ \t#])|[ \t]+$)")
                   : Pattern.compile("^#{1,6}(?:[ \t]+|$)");
-      ATX_TRAILING =
+      atxTrailing =
           Parser.HEADING_NO_ATX_SPACE.get(options)
               ? Pattern.compile("[ \t]*#+[ \t]*$")
               : Pattern.compile("(^| |\t)[ \t]*#+[ \t]*$");
 
       int minLength = Parser.HEADING_SETEXT_MARKER_LENGTH.get(options);
-      SETEXT_HEADING =
+      setextHeading =
           minLength <= 1
               ? Pattern.compile("^(?:=+|-+)[ \t]*$")
               : Pattern.compile("^(?:={" + minLength + ",}|-{" + minLength + ",})[ \t]*$");
@@ -137,7 +137,7 @@ public class HeadingParser extends AbstractBlockParser {
     private final HeadingParsing myParsing;
 
     BlockFactory(DataHolder options) {
-      super(options);
+      super();
       this.options = new HeadingOptions(options);
       this.myParsing = new HeadingParsing(options);
     }
@@ -170,7 +170,7 @@ public class HeadingParser extends AbstractBlockParser {
       BasedSequence paragraph = matchedBlockParser.getParagraphContent();
       Matcher matcher;
       BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
-      matcher = myParsing.ATX_HEADING.matcher(trySequence);
+      matcher = myParsing.atxHeading.matcher(trySequence);
       if (matcher.find()) {
         // ATX heading
         int newOffset = nextNonSpace + matcher.group(0).length();
@@ -184,7 +184,7 @@ public class HeadingParser extends AbstractBlockParser {
 
         BasedSequence headerText = trySequence.subSequence(openingEnd);
         BasedSequence closingMarker = null;
-        matcher = myParsing.ATX_TRAILING.matcher(headerText);
+        matcher = myParsing.atxTrailing.matcher(headerText);
         if (matcher.find()) {
           // removeIndex trailing ###s:
           int closingStart = matcher.start();
@@ -202,7 +202,7 @@ public class HeadingParser extends AbstractBlockParser {
         return BlockStart.of(headingParser).atIndex(line.length());
       }
 
-      if ((matcher = myParsing.SETEXT_HEADING.matcher(trySequence)).find()) {
+      if ((matcher = myParsing.setextHeading.matcher(trySequence)).find()) {
         if (paragraph != null) {
           // setext heading line
           int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;

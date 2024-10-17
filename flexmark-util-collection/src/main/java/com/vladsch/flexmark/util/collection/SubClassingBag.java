@@ -29,22 +29,22 @@ public class SubClassingBag<T> {
 
   public final <X> @NotNull ReversibleIterable<X> itemsOfType(
       @NotNull Class<X> xClass, @NotNull Class<?>... categories) {
-    return items.getCategoryItems(xClass, typeBitSet(xClass, categories));
+    return items.getCategoryItems(typeBitSet(xClass, categories));
   }
 
   public final <X> @NotNull ReversibleIterable<X> itemsOfType(
       @NotNull Class<X> xClass, @NotNull Collection<Class<?>> categories) {
-    return items.getCategoryItems(xClass, typeBitSet(xClass, categories));
+    return items.getCategoryItems(typeBitSet(xClass, categories));
   }
 
   public final <X> @NotNull ReversibleIterable<X> reversedItemsOfType(
       @NotNull Class<X> xClass, @NotNull Class<?>... categories) {
-    return items.getCategoryItemsReversed(xClass, typeBitSet(xClass, categories));
+    return items.getCategoryItemsReversed(typeBitSet(xClass, categories));
   }
 
   public final <X> @NotNull ReversibleIterable<X> reversedItemsOfType(
       @NotNull Class<X> xClass, @NotNull Collection<Class<?>> categories) {
-    return items.getCategoryItemsReversed(xClass, typeBitSet(xClass, categories));
+    return items.getCategoryItemsReversed(typeBitSet(xClass, categories));
   }
 
   private final @NotNull BitSet typeBitSet(

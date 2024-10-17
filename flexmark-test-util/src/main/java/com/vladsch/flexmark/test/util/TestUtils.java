@@ -466,9 +466,6 @@ public class TestUtils {
       CharSequence number,
       CharSequence exampleKeyword,
       CharSequence optionsKeyword) {
-    // include source so that diff can be used to update spec
-    //        StringBuilder header = new StringBuilder();
-
     try {
       if (includeExampleStart) {
         out.append(exampleBreakOpen).append(' ').append(exampleKeyword);
@@ -491,13 +488,6 @@ public class TestUtils {
         }
         out.append("\n");
       }
-
-      // NOTE: replacing spaces so GitHub can display example as code fence, but not for original
-      // spec which has no coords
-      //   is no longer an issue since GitHub switched to CommonMark parser a while back
-      //        if (includeExampleCoords) { sb.append(header.toString().replace(' ', '\u00A0')); }
-      // else sb.append(header.toString());
-      //            out.append(header);
 
       // FIX: When multi-sections are implemented need a way to specify per section visibleSpecText
       if (toVisibleSpecText) {
@@ -727,9 +717,7 @@ public class TestUtils {
 
   // handle custom string options
   public static DataHolder customStringOption(
-      @NotNull String option,
-      @Nullable String params,
-      @NotNull Function<String, DataHolder> resolver) {
+      @Nullable String params, @NotNull Function<String, DataHolder> resolver) {
     if (params != null) {
       // allow escape
       String text =
@@ -874,7 +862,7 @@ public class TestUtils {
 
   @NotNull
   public static String bannerText(@NotNull String message) {
-    int leftPadding = 4; // (BANNER_LENGTH - message.length() - 2) >> 4;
+    int leftPadding = 4;
     int rightPadding = BANNER_LENGTH - message.length() - 2 - leftPadding;
     return BANNER_PADDING.substring(0, leftPadding)
         + " "
@@ -902,5 +890,9 @@ public class TestUtils {
       out.append("\n");
       out.append(banner);
     }
+  }
+
+  private TestUtils() {
+    throw new IllegalStateException();
   }
 }

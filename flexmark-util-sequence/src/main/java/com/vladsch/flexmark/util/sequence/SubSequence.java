@@ -9,9 +9,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * A BasedSequence implementation which wraps original CharSequence to provide a BasedSequence for
  * all its subsequences, a subSequence() returns a SubSequence from the original base sequence.
- *
- * <p>NOTE: '\0' changed to '\uFFFD' use {@link
- * com.vladsch.flexmark.util.sequence.NullEncoder#decodeNull} mapper to get original null chars.
  */
 final class SubSequence extends BasedSequenceImpl {
   private final @NotNull CharSequence charSequence;

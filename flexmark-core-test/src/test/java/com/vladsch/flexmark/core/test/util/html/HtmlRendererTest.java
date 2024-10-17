@@ -488,21 +488,21 @@ public class HtmlRendererTest {
   @Test
   public void withOptions_linkRefCustomLinkResolver() {
     // make sure custom link resolver is preserved when using withOptions() on HTML builder
-    DataHolder OPTIONS = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url");
-    DataHolder OPTIONS1 =
+    DataHolder options = new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url");
+    DataHolder options1 =
         new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url1");
-    DataHolder OPTIONS2 =
+    DataHolder options2 =
         new MutableDataSet().set(CustomLinkResolverImpl.DOC_RELATIVE_URL, "/url2");
     HtmlRenderer renderer =
-        HtmlRenderer.builder(OPTIONS)
+        HtmlRenderer.builder(options)
             .linkResolverFactory(new CustomLinkResolverImpl.Factory())
             .build();
     HtmlRenderer renderer1 =
-        HtmlRenderer.builder(OPTIONS1)
+        HtmlRenderer.builder(options1)
             .linkResolverFactory(new CustomLinkResolverImpl.Factory())
             .build();
     HtmlRenderer renderer2 =
-        HtmlRenderer.builder(OPTIONS2)
+        HtmlRenderer.builder(options2)
             .linkResolverFactory(new CustomLinkResolverImpl.Factory())
             .build();
     String rendered = renderer.render(parse("foo [bar](/url)"));

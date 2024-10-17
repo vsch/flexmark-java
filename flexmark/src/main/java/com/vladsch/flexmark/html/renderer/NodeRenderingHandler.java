@@ -17,7 +17,7 @@ public class NodeRenderingHandler<N extends Node>
     getAdapter().render((N) node, context, html);
   }
 
-  public interface CustomNodeRenderer<N extends Node> extends AstAction<N> {
+  public interface CustomNodeRenderer<N extends Node> extends AstAction {
     void render(@NotNull N node, @NotNull NodeRendererContext context, @NotNull HtmlWriter html);
   }
 }

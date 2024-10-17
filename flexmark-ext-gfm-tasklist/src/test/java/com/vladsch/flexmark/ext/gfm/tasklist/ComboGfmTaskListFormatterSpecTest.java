@@ -17,8 +17,6 @@ import org.junit.runners.Parameterized;
 
 public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
   private static final String SPEC_RESOURCE = "/ext_gfm_tasklist_formatter_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       new MutableDataSet()
           .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
@@ -107,6 +105,6 @@ public class ComboGfmTaskListFormatterSpecTest extends FormatterSpecTest {
 
   @Parameterized.Parameters(name = "{0}")
   public static List<Object[]> data() {
-    return getTestData(RESOURCE_LOCATION);
+    return getTestData(ResourceLocation.of(SPEC_RESOURCE));
   }
 }

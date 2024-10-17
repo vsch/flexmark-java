@@ -73,10 +73,6 @@ public interface LineAppendable extends Appendable, Iterable<LineInfo> {
     return BitFieldSet.of(Options.class, options);
   }
 
-  static BitFieldSet<Options> toOptionSet(Options... options) {
-    return BitFieldSet.of(Options.class, options);
-  }
-
   /**
    * Get current options as bit mask flags
    *

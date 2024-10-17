@@ -634,7 +634,6 @@ public class CoreNodeRenderer implements NodeRenderer {
   private void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {
     renderInlineHtml(
         node,
-        context,
         html,
         context.getHtmlOptions().suppressInlineHtml,
         context.getHtmlOptions().escapeInlineHtml);
@@ -643,18 +642,13 @@ public class CoreNodeRenderer implements NodeRenderer {
   private void render(HtmlInlineComment node, NodeRendererContext context, HtmlWriter html) {
     renderInlineHtml(
         node,
-        context,
         html,
         context.getHtmlOptions().suppressInlineHtmlComments,
         context.getHtmlOptions().escapeInlineHtmlComments);
   }
 
   private static void renderInlineHtml(
-      HtmlInlineBase node,
-      NodeRendererContext context,
-      HtmlWriter html,
-      boolean suppress,
-      boolean escape) {
+      HtmlInlineBase node, HtmlWriter html, boolean suppress, boolean escape) {
     if (suppress) {
       return;
     }

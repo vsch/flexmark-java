@@ -22,13 +22,13 @@ import org.jetbrains.annotations.Nullable;
 public class HtmlAppendableBase<T extends HtmlAppendableBase<T>> implements HtmlAppendable {
   private final LineAppendable appendable;
 
-  private @Nullable MutableAttributes currentAttributes;
+  @Nullable private MutableAttributes currentAttributes;
   private boolean indentOnFirstEol = false;
   private boolean lineOnChildText = false;
   private boolean withAttributes = false;
   private boolean suppressOpenTagLine = false;
   private boolean suppressCloseTagLine = false;
-  private final @NotNull Stack<String> openTags = new Stack<>();
+  @NotNull private final Stack<String> openTags = new Stack<>();
 
   public HtmlAppendableBase(LineAppendable other, boolean inheritIndent) {
     this(other, inheritIndent ? other.getIndentPrefix().length() : 0, other.getOptions());

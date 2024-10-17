@@ -9,15 +9,10 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
+abstract class ComboCoreFormatterSpecTestBase extends FormatterSpecTest {
   private static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
-  //    static {
-  //        optionsMap.put("atx-space-as-is", new
-  // MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.AS_IS));
-  //    }
-
-  public ComboCoreFormatterSpecTestBase(
+  ComboCoreFormatterSpecTestBase(
       @NotNull SpecExample example,
       @Nullable Map<String, ? extends DataHolder> optionMap,
       @Nullable DataHolder... defaultOptions) {

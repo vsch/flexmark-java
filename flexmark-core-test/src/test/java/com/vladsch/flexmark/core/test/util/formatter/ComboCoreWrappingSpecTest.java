@@ -11,9 +11,6 @@ import org.junit.runners.Parameterized;
 
 public class ComboCoreWrappingSpecTest extends ComboCoreFormatterSpecTestBase {
   private static final String SPEC_RESOURCE = "/core_wrapping_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
-
   private static final DataHolder OPTIONS =
       new MutableDataSet()
           .set(
@@ -27,6 +24,6 @@ public class ComboCoreWrappingSpecTest extends ComboCoreFormatterSpecTestBase {
 
   @Parameterized.Parameters(name = "{0}")
   public static List<Object[]> data() {
-    return getTestData(RESOURCE_LOCATION);
+    return getTestData(ResourceLocation.of(SPEC_RESOURCE));
   }
 }

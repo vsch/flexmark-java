@@ -7,11 +7,10 @@ import org.jetbrains.annotations.NotNull;
 
 /** Line information in LineAppendable */
 public final class LineInfo {
-  public enum Flags implements BitField {
+  private enum Flags implements BitField {
     PREFORMATTED(2),
     BLANK_PREFIX,
-    BLANK_TEXT,
-    ;
+    BLANK_TEXT;
 
     final int bits;
 
@@ -29,12 +28,11 @@ public final class LineInfo {
     }
   }
 
-  public enum Preformatted {
+  enum Preformatted {
     NONE,
     FIRST,
     BODY,
-    LAST,
-    ;
+    LAST;
 
     final int mask;
 

@@ -18,18 +18,18 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import org.junit.Test;
 
-public class FormatterModifiedAST {
-  static final DataHolder OPTIONS = new MutableDataSet();
+public class FormatterModifiedAstTest {
+  private static final DataHolder OPTIONS = new MutableDataSet();
 
-  static final MutableDataSet FORMAT_OPTIONS = new MutableDataSet();
+  private static final MutableDataSet FORMAT_OPTIONS = new MutableDataSet();
 
   static {
     // copy extensions from Pegdown compatible to Formatting
     FORMAT_OPTIONS.set(Parser.EXTENSIONS, Parser.EXTENSIONS.get(OPTIONS));
   }
 
-  static final Parser PARSER = Parser.builder(OPTIONS).build();
-  static final Formatter RENDERER = Formatter.builder(FORMAT_OPTIONS).build();
+  private static final Parser PARSER = Parser.builder(OPTIONS).build();
+  private static final Formatter RENDERER = Formatter.builder(FORMAT_OPTIONS).build();
 
   @Test
   public void test_HtmlBlock1() {
@@ -78,13 +78,13 @@ public class FormatterModifiedAST {
             new VisitHandler<>(
                 Link.class,
                 node -> {
-                  FormatterModifiedAST.this.visit(node, "replaced.txt");
+                  FormatterModifiedAstTest.this.visit(node, "replaced.txt");
                   visitor[0].visitChildren(node);
                 }),
             new VisitHandler<>(
                 Image.class,
                 node -> {
-                  FormatterModifiedAST.this.visit(node, "replaced.png");
+                  FormatterModifiedAstTest.this.visit(node, "replaced.png");
                   visitor[0].visitChildren(node);
                 }));
 
@@ -114,13 +114,13 @@ public class FormatterModifiedAST {
             new VisitHandler<>(
                 Link.class,
                 node -> {
-                  FormatterModifiedAST.this.visit(node, "replaced.txt#anchor");
+                  FormatterModifiedAstTest.this.visit(node, "replaced.txt#anchor");
                   visitor[0].visitChildren(node);
                 }),
             new VisitHandler<>(
                 Image.class,
                 node -> {
-                  FormatterModifiedAST.this.visit(node, "replaced.png");
+                  FormatterModifiedAstTest.this.visit(node, "replaced.png");
                   visitor[0].visitChildren(node);
                 }));
 
@@ -169,9 +169,6 @@ public class FormatterModifiedAST {
                     Node child = childIte.next();
                     if (child instanceof Text) {
                       Text text = new Text("LINK");
-
-                      // have to update the parent link text to reflect changes to AST
-                      // node.setText(text.getChars());
 
                       child.insertAfter(text);
                       childIte.remove();

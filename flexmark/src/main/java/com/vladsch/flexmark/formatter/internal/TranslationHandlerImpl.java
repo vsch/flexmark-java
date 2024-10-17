@@ -89,10 +89,7 @@ public class TranslationHandlerImpl implements TranslationHandler {
     myTranslatedSpans = new ArrayList<>();
     myTranslatingPlaceholders = new ArrayList<>();
     myNonTranslatingSpans = new ArrayList<>();
-    myPlaceHolderMarkerPattern =
-        Pattern.compile(
-            myFormatterOptions
-                .translationExcludePattern); // Pattern.compile("^[\\[\\](){}<>]*_{1,2}\\d+_[\\[\\](){}<>]*$");
+    myPlaceHolderMarkerPattern = Pattern.compile(myFormatterOptions.translationExcludePattern);
     myTranslationStore = new MutableDataSet();
   }
 
@@ -197,8 +194,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
         } else {
           myTranslatedTexts.put(entry.getKey(), translatedTexts.get(index).toString());
         }
-        //            } else {
-        //                // already has the same value
       }
     }
 
@@ -344,8 +339,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
               // only if does not have an explicit id then map to translated text id
               String id = myIdGenerator.getId(translated);
               myTranslatedRefTargets.put(myTranslatingSpanId, id);
-              // } else {
-              //    myTranslatedRefTargets.remove(myTranslatingSpanId);
             }
           }
 
@@ -362,8 +355,6 @@ public class TranslationHandlerImpl implements TranslationHandler {
             // only if does not have an explicit id then map to translated text id
             String id = myIdGenerator.getId(target);
             myTranslatedRefTargets.put(myTranslatingSpanId, id);
-            // } else {
-            //    myTranslatedRefTargets.remove(myTranslatingSpanId);
           }
         }
 

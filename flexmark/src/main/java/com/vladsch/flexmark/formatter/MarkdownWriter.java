@@ -46,8 +46,6 @@ public class MarkdownWriter extends MarkdownWriterBase<MarkdownWriter, Node, Nod
                   .append(' ')
                   .append(prefix.subSequence(pos + 1))
                   .toSequence();
-          //                } else {
-          //                    // NOTE: occurs if continuation block prefix is remove
         }
       }
       node = parent;

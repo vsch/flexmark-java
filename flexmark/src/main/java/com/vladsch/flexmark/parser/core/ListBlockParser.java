@@ -526,7 +526,7 @@ public class ListBlockParser extends AbstractBlockParser {
     private final ListOptions myOptions;
 
     BlockFactory(DataHolder options) {
-      super(options);
+      super();
       myOptions = ListOptions.get(options);
     }
 

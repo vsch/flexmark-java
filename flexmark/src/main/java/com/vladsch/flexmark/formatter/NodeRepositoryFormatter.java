@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class NodeRepositoryFormatter<
         R extends NodeRepository<B>,
-        B extends Node & ReferenceNode<R, B, N>,
+        B extends Node & ReferenceNode<B, N>,
         N extends Node & ReferencingNode<R, B>>
     implements PhasedNodeFormatter {
   private static final Set<FormattingPhase> FORMATTING_PHASES =

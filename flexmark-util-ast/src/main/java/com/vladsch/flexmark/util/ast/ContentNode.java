@@ -6,25 +6,21 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 abstract class ContentNode extends Node implements Content {
-  protected List<BasedSequence> lineSegments = BasedSequence.EMPTY_LIST;
+  List<BasedSequence> lineSegments = BasedSequence.EMPTY_LIST;
 
-  protected ContentNode() {}
+  ContentNode() {}
 
-  protected ContentNode(@NotNull BasedSequence chars) {
+  ContentNode(@NotNull BasedSequence chars) {
     super(chars);
   }
 
-  protected ContentNode(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
+  ContentNode(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {
     super(chars);
     this.lineSegments = lineSegments;
   }
 
-  protected ContentNode(@NotNull List<BasedSequence> lineSegments) {
+  ContentNode(@NotNull List<BasedSequence> lineSegments) {
     this(getSpanningChars(lineSegments), lineSegments);
-  }
-
-  protected ContentNode(@NotNull BlockContent blockContent) {
-    this(blockContent.getSpanningChars(), blockContent.getLines());
   }
 
   public void setContent(@NotNull BasedSequence chars, @NotNull List<BasedSequence> lineSegments) {

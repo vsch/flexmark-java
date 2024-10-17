@@ -35,17 +35,6 @@ public interface TranslationContext {
    */
   boolean isTransformingText();
 
-  /// **
-  // * Returns true if prefix and indent perform usual duty, false if they should use empty strings
-  // *
-  // * During {@link RenderPurpose#TRANSLATION_SPANS} this is false
-  // * During {@link RenderPurpose#TRANSLATED_SPANS} this is true
-  // * During {@link RenderPurpose#TRANSLATED} this is true
-  // *
-  // * @return true if need to real prefix/indent operations in output
-  // */
-  // boolean isPrefixedIndented();
-
   /**
    * Transform non-translating text
    *

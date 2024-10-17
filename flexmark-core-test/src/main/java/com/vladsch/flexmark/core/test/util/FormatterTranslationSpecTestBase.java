@@ -56,7 +56,6 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
     optionsMap.put("insert-space", new MutableDataSet().set(EDIT_OP, 1).set(EDIT_OP_CHAR, ' '));
     optionsMap.put("delete-char", new MutableDataSet().set(EDIT_OP, -1).set(EDIT_OP_CHAR, '\0'));
     optionsMap.put("delete-space", new MutableDataSet().set(EDIT_OP, -1).set(EDIT_OP_CHAR, ' '));
-    //        optionsMap.put("indent-edit", new MutableDataSet().set(EDIT_INDENT, true));
     optionsMap.put(
         "restore-tracked-spaces", new MutableDataSet().set(Formatter.RESTORE_TRACKED_SPACES, true));
     optionsMap.put(
@@ -276,17 +275,6 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
             .set(Formatter.FORMATTER_OFF_TAG, "^@format:(?:no|off|false)$")
             .set(Formatter.FORMATTER_TAGS_ACCEPT_REGEXP, true));
 
-    //        optionsMap.put("continuation-indent-align-to-first", new
-    // MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.ALIGN_TO_FIRST));
-    //        optionsMap.put("continuation-indent-none", new
-    // MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.NONE));
-    //        optionsMap.put("continuation-indent-indent-1", new
-    // MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_1));
-    //        optionsMap.put("continuation-indent-indent-2", new
-    // MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_2));
-    //        optionsMap.put("continuation-indent-indent-3", new
-    // MutableDataSet().set(Formatter.CONTINUATION_INDENT, ContinuationIndent.INDENT_3));
-
     optionsMap.put(
         "list-align-numeric-none",
         new MutableDataSet().set(Formatter.LIST_ALIGN_NUMERIC, ElementAlignment.NONE));
@@ -318,7 +306,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
                 TestUtils.CUSTOM_OPTION,
                 (option, params) ->
                     TestUtils.customStringOption(
-                        option, params, FormatterTranslationSpecTestBase::firstIndentOption)));
+                        params, FormatterTranslationSpecTestBase::firstIndentOption)));
     optionsMap.put(
         "prefix",
         new MutableDataSet()
@@ -326,7 +314,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
                 TestUtils.CUSTOM_OPTION,
                 (option, params) ->
                     TestUtils.customStringOption(
-                        option, params, FormatterTranslationSpecTestBase::indentOption)));
+                        params, FormatterTranslationSpecTestBase::indentOption)));
   }
 
   static DataHolder firstIndentOption(@Nullable String params) {
@@ -344,7 +332,7 @@ public abstract class FormatterTranslationSpecTestBase extends ComboSpecTestCase
     return new MutableDataSet().set(Formatter.RIGHT_MARGIN, value);
   }
 
-  public FormatterTranslationSpecTestBase(
+  protected FormatterTranslationSpecTestBase(
       @NotNull SpecExample example,
       @Nullable Map<String, ? extends DataHolder> optionMap,
       @Nullable DataHolder... defaultOptions) {

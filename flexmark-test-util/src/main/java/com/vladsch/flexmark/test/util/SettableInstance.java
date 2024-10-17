@@ -28,7 +28,7 @@ public final class SettableInstance<T> {
       @NotNull Collection<SettableExtractedInstance<T, ?>> extractedInstanceSetters) {
     myConsumerKey = consumerKey;
     myExtractedInstanceSetters =
-        extractedInstanceSetters.size() == 0 ? null : extractedInstanceSetters;
+        extractedInstanceSetters.isEmpty() ? null : extractedInstanceSetters;
   }
 
   public SettableInstance(@NotNull DataKey<Consumer<T>> consumerKey) {

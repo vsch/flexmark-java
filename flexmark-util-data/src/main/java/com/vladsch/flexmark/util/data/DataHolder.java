@@ -5,8 +5,6 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 public interface DataHolder extends MutableDataSetter {
-  DataHolder NULL = new DataSet();
-
   @NotNull
   Map<? extends DataKeyBase<?>, Object> getAll();
 

@@ -30,7 +30,7 @@ public class StrikethroughSubscriptExtension
 
   private StrikethroughSubscriptExtension() {}
 
-  public static StrikethroughSubscriptExtension create() {
+  static StrikethroughSubscriptExtension create() {
     return new StrikethroughSubscriptExtension();
   }
 

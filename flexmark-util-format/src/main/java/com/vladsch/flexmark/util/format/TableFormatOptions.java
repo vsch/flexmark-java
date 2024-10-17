@@ -64,7 +64,7 @@ public class TableFormatOptions implements MutableDataSetter {
 
   public final boolean trimCellWhitespace;
   public final boolean dumpIntellijOffsets;
-  public final DiscretionaryText leftAlignMarker;
+  final DiscretionaryText leftAlignMarker;
   final TableCaptionHandling formatTableCaption;
   final DiscretionaryText formatTableCaptionSpaces;
   final int minSeparatorColumnWidth;

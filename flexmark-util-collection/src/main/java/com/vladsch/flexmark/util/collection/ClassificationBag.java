@@ -108,29 +108,26 @@ public class ClassificationBag<K, V> {
   }
 
   @SafeVarargs
-  public final <X> @NotNull ReversibleIterable<X> getCategoryItems(
-      @NotNull Class<? extends X> xClass, @NotNull K... categories) {
-    return new IndexedIterable<X, V, ReversibleIterable<Integer>>(
+  public final <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull K... categories) {
+    return new IndexedIterable<>(
         items.getConcurrentModsIndexedProxy(),
         new BitSetIterable(categoriesBitSet(categories), false));
   }
 
   public final <X> @NotNull ReversibleIterable<X> getCategoryItems(
-      @NotNull Class<? extends X> xClass, @NotNull Collection<? extends K> categories) {
-    return new IndexedIterable<X, V, ReversibleIterable<Integer>>(
+      @NotNull Collection<? extends K> categories) {
+    return new IndexedIterable<>(
         items.getConcurrentModsIndexedProxy(),
         new BitSetIterable(categoriesBitSet(categories), false));
   }
 
-  final <X> @NotNull ReversibleIterable<X> getCategoryItems(
-      @NotNull Class<? extends X> xClass, @NotNull BitSet bitSet) {
-    return new IndexedIterable<X, V, ReversibleIterable<Integer>>(
+  final <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull BitSet bitSet) {
+    return new IndexedIterable<>(
         items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, false));
   }
 
-  final <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(
-      @NotNull Class<? extends X> xClass, @NotNull BitSet bitSet) {
-    return new IndexedIterable<X, V, ReversibleIterable<Integer>>(
+  final <X> @NotNull ReversibleIterable<X> getCategoryItemsReversed(@NotNull BitSet bitSet) {
+    return new IndexedIterable<>(
         items.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, true));
   }
 

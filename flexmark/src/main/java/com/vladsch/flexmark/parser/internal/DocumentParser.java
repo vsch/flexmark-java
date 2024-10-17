@@ -262,8 +262,6 @@ public class DocumentParser implements ParserState {
     List<ParagraphPreProcessorFactory> list = new ArrayList<>(blockPreProcessors);
 
     if (inlineParserFactory == INLINE_PARSER_FACTORY) {
-      // list.addAll(CORE_PARAGRAPH_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key ->
-      // CORE_PARAGRAPH_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
       for (DataKey<Boolean> preProcessorDataKey : CORE_PARAGRAPH_PRE_PROCESSORS.keySet()) {
         if (preProcessorDataKey.get(options)) {
           ParagraphPreProcessorFactory preProcessorFactory =
@@ -994,7 +992,7 @@ public class DocumentParser implements ParserState {
       ParagraphPreProcessorCache processorMap = new ParagraphPreProcessorCache(this);
       for (List<ParagraphPreProcessorFactory> factoryStage : paragraphPreProcessorDependencies) {
         for (Paragraph paragraph :
-            blockTracker.getNodeClassifier().getCategoryItems(Paragraph.class, Paragraph.class)) {
+            blockTracker.getNodeClassifier().<Paragraph>getCategoryItems(Paragraph.class)) {
           preProcessParagraph(paragraph, factoryStage, processorMap);
         }
       }
@@ -1016,9 +1014,7 @@ public class DocumentParser implements ParserState {
       for (List<BlockPreProcessorFactory> dependents : blockPreProcessorDependencies) {
         for (BlockPreProcessorFactory factory : dependents) {
           ReversibleIterable<Block> blockList =
-              blockTracker
-                  .getNodeClassifier()
-                  .getCategoryItems(Block.class, factory.getBlockTypes());
+              blockTracker.getNodeClassifier().getCategoryItems(factory.getBlockTypes());
           BlockPreProcessor blockPreProcessor = factory.apply(this);
 
           for (Block block : blockList) {

@@ -93,7 +93,7 @@ public class OrderedSetTest {
     assertFalse(retainSet.retainAll(retainSet));
 
     assertTrue(orderedSet.retainAll(retainSet));
-    assertTrue(orderedSet.equals(retainSet));
+    assertEquals(orderedSet, retainSet);
 
     int i = 0;
     for (String it : orderedSet) {

@@ -45,7 +45,7 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
     optionsMap.put("ast-details", new MutableDataSet().set(AST_DETAILS, true));
   }
 
-  public TranslationFormatterSpecTest(
+  protected TranslationFormatterSpecTest(
       @NotNull SpecExample example,
       @Nullable Map<String, ? extends DataHolder> optionMap,
       @Nullable DataHolder... defaultOptions) {
@@ -55,12 +55,12 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         ComboSpecTestCase.dataHolders(OPTIONS, defaultOptions));
   }
 
-  private static Parser getParser(@Nullable DataHolder OPTIONS) {
-    return Parser.builder(OPTIONS).build();
+  private static Parser getParser(@Nullable DataHolder options) {
+    return Parser.builder(options).build();
   }
 
-  private static IRender getRenderer(@Nullable DataHolder OPTIONS) {
-    return new TranslationFormatter(Formatter.builder(OPTIONS).build());
+  private static IRender getRenderer(@Nullable DataHolder options) {
+    return new TranslationFormatter(Formatter.builder(options).build());
   }
 
   @Override
@@ -198,7 +198,6 @@ public abstract class TranslationFormatterSpecTest extends FormatterTranslationS
         try {
           output.append(partial);
           output.append("- Translated -------------\n");
-          //                  output.append("--------------------------\n");
         } catch (IOException e) {
           e.printStackTrace();
         }

@@ -40,10 +40,6 @@ public class TableSection {
   }
 
   private TableRow expandTo(int row) {
-    return expandTo(row, null);
-  }
-
-  private TableRow expandTo(int row, TableCell cell) {
     while (row >= rows.size()) {
       TableRow tableRow = defaultRow();
       rows.add(tableRow);
@@ -73,13 +69,13 @@ public class TableSection {
   }
 
   TableRow get(int row) {
-    return expandTo(row, null);
+    return expandTo(row);
   }
 
   public int getMaxColumns() {
     int columns = 0;
-    for (TableRow row : rows) {
-      int spans = row.getSpannedColumns();
+    for (TableRow tableRow : rows) {
+      int spans = tableRow.getSpannedColumns();
       if (columns < spans) columns = spans;
     }
     return columns;
@@ -87,8 +83,8 @@ public class TableSection {
 
   public int getMinColumns() {
     int columns = 0;
-    for (TableRow row : rows) {
-      int spans = row.getSpannedColumns();
+    for (TableRow tableRow : rows) {
+      int spans = tableRow.getSpannedColumns();
       if (columns > spans || columns == 0) columns = spans;
     }
     return columns;

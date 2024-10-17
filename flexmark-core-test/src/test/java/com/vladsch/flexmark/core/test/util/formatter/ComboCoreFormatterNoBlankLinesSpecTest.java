@@ -12,8 +12,6 @@ import org.junit.runners.Parameterized;
 
 public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboCoreFormatterSpecTestBase {
   private static final String SPEC_RESOURCE = "/core_formatter_no_blanklines_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, false).toImmutable();
 
@@ -23,6 +21,6 @@ public class ComboCoreFormatterNoBlankLinesSpecTest extends ComboCoreFormatterSp
 
   @Parameterized.Parameters(name = "{0}")
   public static List<Object[]> data() {
-    return ComboSpecTestCase.getTestData(RESOURCE_LOCATION);
+    return ComboSpecTestCase.getTestData(ResourceLocation.of(SPEC_RESOURCE));
   }
 }

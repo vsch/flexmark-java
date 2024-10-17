@@ -7,13 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface ISegmentBuilder<S extends ISegmentBuilder<S>> extends Iterable<Object> {
-  enum Options {
-    INCLUDE_ANCHORS,
-    TRACK_FIRST256,
-  }
-
-  Options O_INCLUDE_ANCHORS = Options.INCLUDE_ANCHORS;
-  Options O_TRACK_FIRST256 = Options.TRACK_FIRST256;
+  ISegmentBuilderOptions O_INCLUDE_ANCHORS = ISegmentBuilderOptions.INCLUDE_ANCHORS;
+  ISegmentBuilderOptions O_TRACK_FIRST256 = ISegmentBuilderOptions.TRACK_FIRST256;
 
   int F_INCLUDE_ANCHORS = BitFieldSet.intMask(O_INCLUDE_ANCHORS);
   int F_TRACK_FIRST256 = BitFieldSet.intMask(O_TRACK_FIRST256);

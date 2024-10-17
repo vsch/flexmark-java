@@ -7,10 +7,10 @@ import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S, M> {
+abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S, M> {
   private final Map<K, S> bag;
 
-  protected IndexedItemSetMapBase() {
+  IndexedItemSetMapBase() {
     this.bag = new HashMap<>();
   }
 

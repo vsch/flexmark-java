@@ -25,10 +25,10 @@ public class FormatControlProcessor {
   private boolean justTurnedOffFormatting = false;
   private boolean justTurnedOnFormatting = false;
   private boolean formatterTagsAcceptRegexp;
-  private volatile Pattern formatterOffPattern;
-  private volatile Pattern formatterOnPattern;
+  private Pattern formatterOffPattern;
+  private Pattern formatterOnPattern;
 
-  public FormatControlProcessor(@NotNull Document document, @Nullable DataHolder options) {
+  public FormatControlProcessor(@Nullable DataHolder options) {
     FormatterOptions formatterOptions = new FormatterOptions(options);
     this.formatterOnTag = formatterOptions.formatterOnTag;
     this.formatterOffTag = formatterOptions.formatterOffTag;

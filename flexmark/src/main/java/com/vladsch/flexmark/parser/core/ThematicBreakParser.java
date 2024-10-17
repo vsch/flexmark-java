@@ -91,7 +91,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
     private final ThematicBreakOptions options;
 
     BlockFactory(DataHolder options) {
-      super(options);
+      super();
       this.options = new ThematicBreakOptions(options);
     }
 

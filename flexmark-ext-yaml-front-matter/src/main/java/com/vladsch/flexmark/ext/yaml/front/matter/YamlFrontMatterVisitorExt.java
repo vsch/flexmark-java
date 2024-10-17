@@ -9,4 +9,8 @@ class YamlFrontMatterVisitorExt {
       new VisitHandler<>(YamlFrontMatterBlock.class, visitor::visit),
     };
   }
+
+  private YamlFrontMatterVisitorExt() {
+    throw new IllegalStateException();
+  }
 }

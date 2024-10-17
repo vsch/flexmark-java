@@ -15,19 +15,15 @@ import org.jetbrains.annotations.Nullable;
  * <p>Only works with SubSequence base not CharArraySequence
  */
 public interface BasedOptionsHolder {
-  enum Options {
-    COLLECT_SEGMENTED_STATS,
-    COLLECT_FIRST256_STATS,
-    NO_ANCHORS,
-    FULL_SEGMENTED_SEQUENCES,
-    TREE_SEGMENTED_SEQUENCES,
-  }
-
-  Options O_COLLECT_SEGMENTED_STATS = Options.COLLECT_SEGMENTED_STATS;
-  Options O_COLLECT_FIRST256_STATS = Options.COLLECT_FIRST256_STATS;
-  Options O_NO_ANCHORS = Options.NO_ANCHORS;
-  Options O_FULL_SEGMENTED_SEQUENCES = Options.FULL_SEGMENTED_SEQUENCES;
-  Options O_TREE_SEGMENTED_SEQUENCES = Options.TREE_SEGMENTED_SEQUENCES;
+  BasedOptionsHolderOptions O_COLLECT_SEGMENTED_STATS =
+      BasedOptionsHolderOptions.COLLECT_SEGMENTED_STATS;
+  BasedOptionsHolderOptions O_COLLECT_FIRST256_STATS =
+      BasedOptionsHolderOptions.COLLECT_FIRST256_STATS;
+  BasedOptionsHolderOptions O_NO_ANCHORS = BasedOptionsHolderOptions.NO_ANCHORS;
+  BasedOptionsHolderOptions O_FULL_SEGMENTED_SEQUENCES =
+      BasedOptionsHolderOptions.FULL_SEGMENTED_SEQUENCES;
+  BasedOptionsHolderOptions O_TREE_SEGMENTED_SEQUENCES =
+      BasedOptionsHolderOptions.TREE_SEGMENTED_SEQUENCES;
 
   // NOTE: if no data holder or one with no SEGMENTED_STATS is passed to BasedOptionsSequence, then
   // F_COLLECT_SEGMENTED_STATS flag will be removed from options

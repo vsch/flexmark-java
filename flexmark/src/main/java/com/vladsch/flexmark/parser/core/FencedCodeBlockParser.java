@@ -187,7 +187,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
 
   private static class BlockFactory extends AbstractBlockParserFactory {
     private BlockFactory(DataHolder options) {
-      super(options);
+      super();
     }
 
     @Override

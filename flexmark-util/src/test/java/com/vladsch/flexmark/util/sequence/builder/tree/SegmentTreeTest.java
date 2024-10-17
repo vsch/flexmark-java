@@ -19,13 +19,15 @@ import com.vladsch.flexmark.util.sequence.builder.PlainSegmentBuilder;
 import com.vladsch.flexmark.util.sequence.builder.SequenceBuilder;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiConsumer;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class SegmentTreeTest {
-  private static void loop(
-      int start, int end, int span, int param, BiConsumer<Integer, Integer> consumer) {
+  private interface BiIntConsumer {
+    void accept(int first, int second);
+  }
+
+  private static void loop(int start, int end, int span, int param, BiIntConsumer consumer) {
     int iMaxStart = start + span;
     int iMinEnd = end - span;
 
@@ -44,7 +46,7 @@ public class SegmentTreeTest {
     }
   }
 
-  private static void loopSizes(BiConsumer<Integer, Integer> consumer) {
+  private static void loopSizes(BiIntConsumer consumer) {
     loop(0, 16, 8, 0, consumer);
     loop(16, 256, 8, 1, consumer);
     loop(256, 65536, 8, 2, consumer);
@@ -52,7 +54,7 @@ public class SegmentTreeTest {
     loop(65536 * 256, MAX_VALUE, 8, 4, consumer);
   }
 
-  private static void loopSizesShort(BiConsumer<Integer, Integer> consumer) {
+  private static void loopSizesShort(BiIntConsumer consumer) {
     loop(0, 16, 8, 0, consumer);
     loop(16, 256, 8, 1, consumer);
     loop(256, 65536, 8, 2, consumer);
@@ -60,7 +62,7 @@ public class SegmentTreeTest {
     loop(65536 * 256, MAX_VALUE, 8, 4, consumer);
   }
 
-  private static void loopEnd(int startOffset, BiConsumer<Integer, Integer> consumer) {
+  private static void loopEnd(int startOffset, BiIntConsumer consumer) {
     loop(startOffset + 0, startOffset + 16, 8, 0, consumer);
     loop(startOffset + 16, startOffset + 256, 8, 1, consumer);
     loop(startOffset + 256, startOffset + 65536, 8, 2, consumer);
@@ -91,8 +93,8 @@ public class SegmentTreeTest {
         (b, i) -> {
           int[] aggrSegData1 = {i, -1, -2, -4};
           int[] aggrSegData2 = {-1, -2, i, -3};
-          assertEquals("i: " + i, (int) i, aggrLength(0, aggrSegData1));
-          assertEquals("i: " + i, (int) i, aggrLength(1, aggrSegData2));
+          assertEquals("i: " + i, i, aggrLength(0, aggrSegData1));
+          assertEquals("i: " + i, i, aggrLength(1, aggrSegData2));
         });
   }
 
@@ -103,8 +105,8 @@ public class SegmentTreeTest {
           for (int j = 0; j < 8; j++) {
             int[] aggrSegData1 = {-1, i | (j << 29), -2, -3};
             int[] aggrSegData2 = {-1, -2, -3, i | (j << 29)};
-            assertEquals("i: " + i + " j: " + j, (int) i, byteOffset(0, aggrSegData1));
-            assertEquals("i: " + i + " j: " + j, (int) i, byteOffset(1, aggrSegData2));
+            assertEquals("i: " + i + " j: " + j, i, byteOffset(0, aggrSegData1));
+            assertEquals("i: " + i + " j: " + j, i, byteOffset(1, aggrSegData2));
           }
         });
   }

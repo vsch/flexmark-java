@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.format;
 
 import java.util.List;
 
-public interface TableRowManipulator {
+interface TableRowManipulator {
   int BREAK = Integer.MIN_VALUE;
 
   /**

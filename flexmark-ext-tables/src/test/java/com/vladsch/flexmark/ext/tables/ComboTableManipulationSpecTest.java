@@ -19,8 +19,6 @@ import org.junit.runners.Parameterized;
 
 public class ComboTableManipulationSpecTest extends FormatterSpecTest {
   private static final String SPEC_RESOURCE = "/ext_tables_manipulation_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       new MutableDataSet()
           .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
@@ -40,63 +38,63 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
     optionsMap.put(
         "no-caption",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
     optionsMap.put(
         "no-alignment",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
     optionsMap.put(
         "no-width",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
     optionsMap.put(
         "keep-whitespace",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_TRIM_CELL_WHITESPACE, false));
     optionsMap.put(
         "lead-trail-pipes",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES, false));
     optionsMap.put(
         "space-around-pipe",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_SPACE_AROUND_PIPES, false));
     optionsMap.put(
         "adjust-column-width",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
     optionsMap.put(
         "apply-column-alignment",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
     optionsMap.put(
         "fill-missing-columns",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS, true));
     optionsMap.put(
         "left-align-marker-as-is",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+            .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
     optionsMap.put(
         "left-align-marker-add",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
+            .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
     optionsMap.put(
         "left-align-marker-remove",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
+            .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
     optionsMap.put(
         "line-prefix",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, ">   "));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX, ">   "));
     optionsMap.put(
         "markdown-navigator",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "")
-            .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
-            .set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
-            .set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)
-            .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
-            .set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.AS_IS)
-            .set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, true)
-            .set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, true)
-            .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_DASHES, 3)
-            .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS)
-            .set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, true)
+            .set(TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX, "")
+            .set(TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
+            .set(TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
+            .set(TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)
+            .set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
+            .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.AS_IS)
+            .set(TableFormatOptions.FORMAT_TABLE_SPACE_AROUND_PIPES, true)
+            .set(TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, true)
+            .set(TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_DASHES, 3)
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS)
+            .set(TableFormatOptions.FORMAT_TABLE_TRIM_CELL_WHITESPACE, true)
             .set(
-                TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER,
+                TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER,
                 new CharWidthProvider() {
                   @Override
                   public int getSpaceWidth() {
@@ -113,723 +111,723 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
         "delete-row-1-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(0, 1)));
     optionsMap.put(
         "delete-row-2-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(1, 1)));
     optionsMap.put(
         "delete-row-3-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(2, 1)));
     optionsMap.put(
         "delete-row-4-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(3, 1)));
     optionsMap.put(
         "delete-row-5-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(4, 1)));
     optionsMap.put(
         "delete-row-6-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(5, 1)));
     optionsMap.put(
         "delete-row-7-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(6, 1)));
     optionsMap.put(
         "delete-row-8-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(7, 1)));
     optionsMap.put(
         "delete-row-9-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(8, 1)));
 
     optionsMap.put(
         "delete-row-1-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(0, 2)));
     optionsMap.put(
         "delete-row-2-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(1, 2)));
     optionsMap.put(
         "delete-row-3-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(2, 2)));
     optionsMap.put(
         "delete-row-4-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(3, 2)));
     optionsMap.put(
         "delete-row-5-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(4, 2)));
     optionsMap.put(
         "delete-row-6-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(5, 2)));
     optionsMap.put(
         "delete-row-7-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(6, 2)));
     optionsMap.put(
         "delete-row-8-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(7, 2)));
     optionsMap.put(
         "delete-row-9-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteRows(8, 2)));
 
     optionsMap.put(
         "insert-row-1-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(0, 1)));
     optionsMap.put(
         "insert-row-2-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(1, 1)));
     optionsMap.put(
         "insert-row-3-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(2, 1)));
     optionsMap.put(
         "insert-row-4-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(3, 1)));
     optionsMap.put(
         "insert-row-5-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(4, 1)));
     optionsMap.put(
         "insert-row-6-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(5, 1)));
     optionsMap.put(
         "insert-row-7-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(6, 1)));
     optionsMap.put(
         "insert-row-8-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(7, 1)));
     optionsMap.put(
         "insert-row-9-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(8, 1)));
 
     optionsMap.put(
         "insert-row-1-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(0, 2)));
     optionsMap.put(
         "insert-row-2-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(1, 2)));
     optionsMap.put(
         "insert-row-3-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(2, 2)));
     optionsMap.put(
         "insert-row-4-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(3, 2)));
     optionsMap.put(
         "insert-row-5-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(4, 2)));
     optionsMap.put(
         "insert-row-6-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(5, 2)));
     optionsMap.put(
         "insert-row-7-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(6, 2)));
     optionsMap.put(
         "insert-row-8-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(7, 2)));
     optionsMap.put(
         "insert-row-9-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertRows(8, 2)));
 
     optionsMap.put(
         "delete-col-0-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(-1, 1)));
     optionsMap.put(
         "delete-col-1-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(0, 1)));
     optionsMap.put(
         "delete-col-2-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(1, 1)));
     optionsMap.put(
         "delete-col-3-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(2, 1)));
     optionsMap.put(
         "delete-col-4-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(3, 1)));
     optionsMap.put(
         "delete-col-5-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(4, 1)));
     optionsMap.put(
         "delete-col-6-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(5, 1)));
     optionsMap.put(
         "delete-col-7-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(6, 1)));
     optionsMap.put(
         "delete-col-8-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(7, 1)));
     optionsMap.put(
         "delete-col-9-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(8, 1)));
 
     optionsMap.put(
         "delete-col-1-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(0, 2)));
     optionsMap.put(
         "delete-col-2-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(1, 2)));
     optionsMap.put(
         "delete-col-3-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(2, 2)));
     optionsMap.put(
         "delete-col-4-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(3, 2)));
     optionsMap.put(
         "delete-col-5-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(4, 2)));
     optionsMap.put(
         "delete-col-6-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(5, 2)));
     optionsMap.put(
         "delete-col-7-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(6, 2)));
     optionsMap.put(
         "delete-col-8-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(7, 2)));
     optionsMap.put(
         "delete-col-9-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.deleteColumns(8, 2)));
 
     optionsMap.put(
         "insert-col-0-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(-1, 1)));
     optionsMap.put(
         "insert-col-1-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(0, 1)));
     optionsMap.put(
         "insert-col-2-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(1, 1)));
     optionsMap.put(
         "insert-col-3-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(2, 1)));
     optionsMap.put(
         "insert-col-4-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(3, 1)));
     optionsMap.put(
         "insert-col-5-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(4, 1)));
     optionsMap.put(
         "insert-col-6-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(5, 1)));
     optionsMap.put(
         "insert-col-7-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(6, 1)));
     optionsMap.put(
         "insert-col-8-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(7, 1)));
     optionsMap.put(
         "insert-col-9-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(8, 1)));
 
     optionsMap.put(
         "insert-col-1-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(0, 2)));
     optionsMap.put(
         "insert-col-2-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(1, 2)));
     optionsMap.put(
         "insert-col-3-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(2, 2)));
     optionsMap.put(
         "insert-col-4-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(3, 2)));
     optionsMap.put(
         "insert-col-5-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(4, 2)));
     optionsMap.put(
         "insert-col-6-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(5, 2)));
     optionsMap.put(
         "insert-col-7-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(6, 2)));
     optionsMap.put(
         "insert-col-8-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(7, 2)));
     optionsMap.put(
         "insert-col-9-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.insertColumns(8, 2)));
 
     optionsMap.put(
         "move-col-0-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(-1, 1)));
     optionsMap.put(
         "move-col-2-0",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(1, -1)));
 
     optionsMap.put(
         "move-col-1-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(0, 0)));
     optionsMap.put(
         "move-col-1-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(0, 1)));
     optionsMap.put(
         "move-col-1-3",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(0, 2)));
     optionsMap.put(
         "move-col-1-4",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(0, 3)));
     optionsMap.put(
         "move-col-1-5",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(0, 4)));
     optionsMap.put(
         "move-col-1-6",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(0, 5)));
     optionsMap.put(
         "move-col-1-7",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(0, 6)));
 
     optionsMap.put(
         "move-col-2-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(1, 0)));
     optionsMap.put(
         "move-col-2-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(1, 1)));
     optionsMap.put(
         "move-col-2-3",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(1, 2)));
     optionsMap.put(
         "move-col-2-4",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(1, 3)));
     optionsMap.put(
         "move-col-2-5",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(1, 4)));
     optionsMap.put(
         "move-col-2-6",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(1, 5)));
     optionsMap.put(
         "move-col-2-7",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(1, 6)));
 
     optionsMap.put(
         "move-col-3-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(2, 0)));
     optionsMap.put(
         "move-col-3-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(2, 1)));
     optionsMap.put(
         "move-col-3-3",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(2, 2)));
     optionsMap.put(
         "move-col-3-4",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(2, 3)));
     optionsMap.put(
         "move-col-3-5",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(2, 4)));
     optionsMap.put(
         "move-col-3-6",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(2, 5)));
     optionsMap.put(
         "move-col-3-7",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(2, 6)));
 
     optionsMap.put(
         "move-col-4-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(3, 0)));
     optionsMap.put(
         "move-col-4-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(3, 1)));
     optionsMap.put(
         "move-col-4-3",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(3, 2)));
     optionsMap.put(
         "move-col-4-4",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(3, 3)));
     optionsMap.put(
         "move-col-4-5",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(3, 4)));
     optionsMap.put(
         "move-col-4-6",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(3, 5)));
     optionsMap.put(
         "move-col-4-7",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(3, 6)));
 
     optionsMap.put(
         "move-col-5-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(4, 0)));
     optionsMap.put(
         "move-col-5-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(4, 1)));
     optionsMap.put(
         "move-col-5-3",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(4, 2)));
     optionsMap.put(
         "move-col-5-4",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(4, 3)));
     optionsMap.put(
         "move-col-5-5",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(4, 4)));
     optionsMap.put(
         "move-col-5-6",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(4, 5)));
     optionsMap.put(
         "move-col-5-7",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(4, 6)));
 
     optionsMap.put(
         "move-col-6-1",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(5, 0)));
     optionsMap.put(
         "move-col-6-2",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(5, 1)));
     optionsMap.put(
         "move-col-6-3",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(5, 2)));
     optionsMap.put(
         "move-col-6-4",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(5, 3)));
     optionsMap.put(
         "move-col-6-5",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(5, 4)));
     optionsMap.put(
         "move-col-6-6",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(5, 5)));
     optionsMap.put(
         "move-col-6-7",
         new MutableDataSet()
             .set(
-                TablesExtension.FORMAT_TABLE_MANIPULATOR,
+                TableFormatOptions.FORMAT_TABLE_MANIPULATOR,
                 (table, tableNoe) -> table.moveColumn(5, 6)));
   }
 
@@ -839,6 +837,6 @@ public class ComboTableManipulationSpecTest extends FormatterSpecTest {
 
   @Parameterized.Parameters(name = "{0}")
   public static List<Object[]> data() {
-    return getTestData(RESOURCE_LOCATION);
+    return getTestData(ResourceLocation.of(SPEC_RESOURCE));
   }
 }

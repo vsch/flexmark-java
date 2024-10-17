@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class RendererSpecTest extends ComboSpecTestCase {
-  private static DataHolder OPTIONS =
+  private static final DataHolder OPTIONS =
       new MutableDataSet().set(HtmlRenderer.INDENT_SIZE, 2).toImmutable();
 
   private static final Map<String, DataHolder> optionsMap = new HashMap<>();
@@ -24,7 +24,7 @@ public abstract class RendererSpecTest extends ComboSpecTestCase {
         "src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
   }
 
-  public RendererSpecTest(
+  protected RendererSpecTest(
       @NotNull SpecExample example,
       @Nullable Map<String, ? extends DataHolder> optionMap,
       @Nullable DataHolder... defaultOptions) {

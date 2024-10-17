@@ -8,6 +8,6 @@ import org.jetbrains.annotations.NotNull;
  *
  * @param <N> specific node type
  */
-public interface Visitor<N extends Node> extends AstAction<N> {
+public interface Visitor<N extends Node> extends AstAction {
   void visit(@NotNull N node);
 }

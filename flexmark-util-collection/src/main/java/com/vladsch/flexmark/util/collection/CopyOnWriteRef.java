@@ -1,15 +1,15 @@
 package com.vladsch.flexmark.util.collection;
 
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CopyOnWriteRef<T> {
   private @Nullable T value;
   private int referenceCount;
-  private final @NotNull Function<T, T> copyFunction;
+  private final @NotNull UnaryOperator<T> copyFunction;
 
-  public CopyOnWriteRef(@Nullable T value, @NotNull Function<T, T> copyFunction) {
+  public CopyOnWriteRef(@Nullable T value, @NotNull UnaryOperator<T> copyFunction) {
     this.value = value;
     referenceCount = 0;
     this.copyFunction = copyFunction;

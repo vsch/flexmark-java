@@ -14,11 +14,11 @@ public abstract class SpecExampleRendererBase implements SpecExampleRenderer {
   private @Nullable String myRenderedHtml;
   private @Nullable String myRenderedAst;
 
-  public SpecExampleRendererBase(@NotNull SpecExample example, @Nullable DataHolder options) {
+  protected SpecExampleRendererBase(@NotNull SpecExample example, @Nullable DataHolder options) {
     this(example, options, true);
   }
 
-  public SpecExampleRendererBase(
+  protected SpecExampleRendererBase(
       @NotNull SpecExample example, @Nullable DataHolder options, boolean includeExampleInfo) {
     myExample = example;
     myOptions = options == null ? new DataSet() : options.toImmutable();

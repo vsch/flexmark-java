@@ -16,7 +16,7 @@ public class NodeFormattingHandler<N extends Node>
     getAdapter().render((N) node, context, markdown);
   }
 
-  public static interface CustomNodeFormatter<N extends Node> extends AstAction<N> {
+  public static interface CustomNodeFormatter<N extends Node> extends AstAction {
     void render(
         @NotNull N node, @NotNull NodeFormatterContext context, @NotNull MarkdownWriter markdown);
   }

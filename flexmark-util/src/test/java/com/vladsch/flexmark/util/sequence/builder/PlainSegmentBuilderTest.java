@@ -1069,7 +1069,6 @@ public class PlainSegmentBuilderTest {
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
-      //            if (!trim.isEmpty()) segments.append("  ");
       segments.append(trim.getSourceRange());
       segments.append("\n");
     }
@@ -1154,7 +1153,6 @@ public class PlainSegmentBuilderTest {
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
-      //            if (!trim.isEmpty()) segments.append("  ");
       segments.append(trim.getSourceRange());
       segments.append("\n");
     }

@@ -126,8 +126,7 @@ public class ClassifyingNodeTracker implements NodeTracker {
     return nodeClassifier.getItems();
   }
 
-  public <X> @NotNull ReversibleIterable<X> getCategoryItems(
-      @NotNull Class<? extends X> nodeClass, @NotNull Set<Class<?>> classes) {
-    return nodeClassifier.getCategoryItems(nodeClass, classes);
+  public <X> @NotNull ReversibleIterable<X> getCategoryItems(@NotNull Set<Class<?>> classes) {
+    return nodeClassifier.getCategoryItems(classes);
   }
 }

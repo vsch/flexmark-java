@@ -118,7 +118,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
 
   static class BlockFactory extends AbstractBlockParserFactory {
     private BlockFactory(DataHolder options) {
-      super(options);
+      super();
     }
 
     @Override

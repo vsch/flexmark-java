@@ -188,7 +188,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     private final boolean withLeadSpacesInterruptsItemParagraph;
 
     BlockFactory(DataHolder options) {
-      super(options);
+      super();
       allowLeadingSpace = Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE.get(options);
       interruptsParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH.get(options);
       interruptsItemParagraph = Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH.get(options);

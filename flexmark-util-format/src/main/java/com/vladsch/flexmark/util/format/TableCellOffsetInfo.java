@@ -1,15 +1,12 @@
 package com.vladsch.flexmark.util.format;
 
-import static com.vladsch.flexmark.util.misc.Utils.maxLimit;
-import static com.vladsch.flexmark.util.misc.Utils.minLimit;
-
 import com.vladsch.flexmark.util.collection.BoundedMaxAggregator;
 import com.vladsch.flexmark.util.collection.BoundedMinAggregator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public class TableCellOffsetInfo {
   // Stop points used by next/prev tab navigation
@@ -135,31 +132,6 @@ public class TableCellOffsetInfo {
   }
 
   /**
-   * Only available if inside are set and not in first cell of first row
-   *
-   * <p>CAUTION: NOT TESTED
-   *
-   * @param insideOffset offset inside the cell, null if same as the current cell inside offset
-   * @return offset in previous cell or null
-   */
-  public TableCellOffsetInfo previousCellOffset(Integer insideOffset) {
-    if (getInsideColumn() && column > 0) {
-      TableCell cell = getPreviousCell();
-      TableCell previousCell = getPreviousCell(2);
-      if (insideOffset == null) {
-        cell.textToInsideOffset(
-            tableCell.insideToTextOffset(
-                this.insideOffset == null ? 0 : this.insideOffset, previousCell),
-            previousCell);
-      }
-      return table.getCellOffsetInfo(
-          cell.getTextStartOffset(previousCell)
-              + (maxLimit(cell.getCellSize(previousCell), minLimit(0, insideOffset))));
-    }
-    return null;
-  }
-
-  /**
    * Available if somewhere in table
    *
    * @param stopPointsMap stop points of interest map by section or null
@@ -238,7 +210,7 @@ public class TableCellOffsetInfo {
 
     Map<TableSectionType, Integer> useStopPointsMap =
         stopPointsMap == null ? DEFAULT_STOP_POINTS_MAP : stopPointsMap;
-    BiFunction<Integer, Integer, Integer> aggregator =
+    BinaryOperator<Integer> aggregator =
         nextOffset ? new BoundedMinAggregator(offset) : new BoundedMaxAggregator(offset);
 
     table.forAllSectionRows(

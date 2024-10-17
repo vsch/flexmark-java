@@ -611,7 +611,6 @@ public class SequenceBuilderTest {
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
-      //            if (!trim.isEmpty()) segments.append("  ");
       builder.append(trim.getSourceRange());
       builder.append("\n");
     }
@@ -668,7 +667,6 @@ public class SequenceBuilderTest {
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
-      //            if (!trim.isEmpty()) segments.append("  ");
       builder.append(trim.getSourceRange());
       builder.append("\n");
     }
@@ -728,7 +726,6 @@ public class SequenceBuilderTest {
     @NotNull List<BasedSequence> lines = sequence.splitListEOL(false);
     for (BasedSequence line : lines) {
       BasedSequence trim = line.trim();
-      //            if (!trim.isEmpty()) segments.append("  ");
       builder.append(trim.getSourceRange());
       builder.append("\n");
     }

@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 public class YamlFrontMatterNode extends Node {
   private BasedSequence key;
 
-  // private List<BasedSequence> values;
-
   @NotNull
   @Override
   public BasedSequence[] getSegments() {
@@ -19,7 +17,6 @@ public class YamlFrontMatterNode extends Node {
 
   public YamlFrontMatterNode(BasedSequence key, List<BasedSequence> values) {
     this.key = key;
-    // this.values = values;
     for (BasedSequence value : values) {
       appendChild(new YamlFrontMatterValue(value));
     }

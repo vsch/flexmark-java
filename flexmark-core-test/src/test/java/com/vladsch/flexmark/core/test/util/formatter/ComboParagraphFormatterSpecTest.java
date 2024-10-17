@@ -16,6 +16,7 @@ import com.vladsch.flexmark.test.util.spec.SpecExample;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.DataHolder;
 import com.vladsch.flexmark.util.data.DataKey;
+import com.vladsch.flexmark.util.data.DataSet;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 import com.vladsch.flexmark.util.data.SharedDataKeys;
 import com.vladsch.flexmark.util.format.CharWidthProvider;
@@ -37,7 +38,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
   private static final @NotNull ResourceLocation RESOURCE_LOCATION =
       ResourceLocation.of(SPEC_RESOURCE);
 
-  public static final DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
+  private static final DataKey<Integer> FIRST_WIDTH_DELTA = new DataKey<>("FIRST_WIDTH_DELTA", 0);
 
   private static final DataHolder OPTIONS =
       new MutableDataSet()
@@ -86,7 +87,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
   }
 
   private static class ParagraphParser extends IParseBase {
-    ParagraphParser(DataHolder options) {
+    ParagraphParser() {
       super();
     }
 
@@ -118,7 +119,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
       Pair<BasedSequence, int[]> info = TestUtils.extractMarkup(input);
       BasedSequence sequence = BasedSequence.of(info.getFirst());
 
-      DataHolder options = getOptions() == null ? DataHolder.NULL : getOptions();
+      DataHolder options = getOptions() == null ? new DataSet() : getOptions();
       MarkdownParagraph formatter = new MarkdownParagraph(sequence, CharWidthProvider.NULL);
       formatter.setOptions(options);
 
@@ -195,7 +196,7 @@ public class ComboParagraphFormatterSpecTest extends ComboCoreFormatterSpecTestB
     return new FlexmarkSpecExampleRenderer(
         example,
         combinedOptions,
-        new ParagraphParser(combinedOptions),
+        new ParagraphParser(),
         new ParagraphFormatter(combinedOptions),
         true) {
       @Override

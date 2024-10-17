@@ -13,7 +13,7 @@ import java.util.function.UnaryOperator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class DependencyResolver {
+public final class DependencyResolver {
   public static <D extends Dependent> @NotNull List<D> resolveFlatDependencies(
       @NotNull List<D> dependentsList,
       @Nullable UnaryOperator<DependentItemMap<D>> itemSorter,
@@ -186,5 +186,9 @@ public class DependencyResolver {
 
       return dependencyStages;
     }
+  }
+
+  private DependencyResolver() {
+    throw new IllegalStateException();
   }
 }

@@ -294,7 +294,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     private final boolean myHtmlBlockStartOnlyOnBlockTags;
 
     private BlockFactory(DataHolder options) {
-      super(options);
+      super();
       myHtmlCommentBlocksInterruptParagraph =
           Parser.HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH.get(options);
       this.myHtmlBlockDeepParser = Parser.HTML_BLOCK_DEEP_PARSER.get(options);

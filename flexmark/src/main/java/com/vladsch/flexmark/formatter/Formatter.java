@@ -592,7 +592,7 @@ public class Formatter implements IRender {
     private final List<PhasedNodeFormatter> phasedFormatters;
     private final Set<FormattingPhase> renderingPhases;
     private final DataHolder options;
-    private @NotNull final Boolean isFormatControlEnabled;
+    private final boolean isFormatControlEnabled;
     private FormattingPhase phase;
     final TranslationHandler translationHandler;
     private final LinkResolver[] linkResolvers;
@@ -621,7 +621,7 @@ public class Formatter implements IRender {
       this.renderingPhases = new HashSet<>(FormattingPhase.values().length);
       Set<Class<?>> collectNodeTypes = new HashSet<>(100);
 
-      Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(this.options);
+      boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.get(this.options);
       this.linkResolvers =
           new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
 
@@ -1076,7 +1076,7 @@ public class Formatter implements IRender {
       } else {
         if (isFormatControlEnabled) {
           if (controlProcessor == null) {
-            controlProcessor = new FormatControlProcessor(document, this.options);
+            controlProcessor = new FormatControlProcessor(this.options);
             controlProcessor.initializeFrom(node);
           } else {
             controlProcessor.processFormatControl(node);

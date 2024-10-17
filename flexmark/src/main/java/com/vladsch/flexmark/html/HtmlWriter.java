@@ -140,11 +140,11 @@ public class HtmlWriter extends HtmlAppendableBase<HtmlWriter> {
         if (pos != -1) {
           try {
             startOffset = Integer.parseInt(attributeValue.substring(0, pos));
-          } catch (Throwable ignored) {
+          } catch (RuntimeException ignored) {
           }
           try {
             endOffset = Integer.parseInt(attributeValue.substring(pos + 1));
-          } catch (Throwable ignored) {
+          } catch (RuntimeException ignored) {
           }
         }
 

@@ -17,9 +17,7 @@ import org.junit.Test;
 import org.junit.runners.Parameterized;
 
 public class ComboTableSpecTest extends RendererSpecTest {
-  static final String SPEC_RESOURCE = "/ext_tables_ast_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
+  private static final String SPEC_RESOURCE = "/ext_tables_ast_spec.md";
   private static final DataHolder OPTIONS =
       new MutableDataSet()
           .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
@@ -60,7 +58,7 @@ public class ComboTableSpecTest extends RendererSpecTest {
 
   @Parameterized.Parameters(name = "{0}")
   public static List<Object[]> data() {
-    return getTestData(RESOURCE_LOCATION);
+    return getTestData(ResourceLocation.of(SPEC_RESOURCE));
   }
 
   @Test

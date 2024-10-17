@@ -248,7 +248,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
   private void setSegEnd(int index, int endOffset) {
     int i = index * 2;
 
-    //        parts[i] = startOffset;
     // adjust anchor count
     if (parts[i] == endOffset) {
       if (parts[i] != parts[i + 1]) anchorsSize++;
@@ -630,10 +629,6 @@ public class SegmentBuilderBase<S extends SegmentBuilderBase<S>> implements ISeg
 
     //        // CAUTION: this method is invoked from the debugger and any non-pure method
     // invocation messes up internal structures
-    //        if (haveDanglingText() && haveOffsets()) {
-    //            optimizeText(endOffset, endOffset);
-    //        }
-    //
     SegmentStats committedStats = stats.committedCopy();
     sb.append(committedStats)
         .mark()

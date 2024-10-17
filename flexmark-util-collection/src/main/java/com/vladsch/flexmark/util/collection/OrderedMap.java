@@ -319,11 +319,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     return new IndexedIterator<>(getIndexedValueProxy(), keySet.indexIterator());
   }
 
-  @NotNull
-  ReversibleIndexedIterator<K> keyIterator() {
-    return keySet.iterator();
-  }
-
   private @NotNull ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
     return new IndexedIterator<>(getIndexedEntryProxy(), keySet.indexIterator());
   }
@@ -390,15 +385,15 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     return result;
   }
 
-  private class EntryCollectionHost<KK extends K, VV extends V>
-      implements CollectionHost<Map.Entry<KK, VV>> {
+  private class EntryCollectionHost<K2 extends K, V2 extends V>
+      implements CollectionHost<Map.Entry<K2, V2>> {
     @Override
-    public void adding(int index, @Nullable Entry<KK, VV> entry, @Nullable Object v) {
+    public void adding(int index, @Nullable Entry<K2, V2> entry, @Nullable Object v) {
       OrderedMap.this.keySet.add(entry.getKey(), entry.getValue());
     }
 
     @Override
-    public Object removing(int index, @Nullable Entry<KK, VV> entry) {
+    public Object removing(int index, @Nullable Entry<K2, V2> entry) {
       OrderedMap.this.keySet.removeIndex(index);
       return entry;
     }

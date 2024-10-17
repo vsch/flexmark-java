@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableRow {
-  protected final List<TableCell> cells;
-  protected int beforeOffset = TableCell.NOT_TRACKED;
-  protected int afterOffset = TableCell.NOT_TRACKED;
+  final List<TableCell> cells;
+  int beforeOffset = TableCell.NOT_TRACKED;
+  int afterOffset = TableCell.NOT_TRACKED;
   private boolean normalized = true;
 
   public TableRow() {
@@ -76,7 +76,7 @@ public class TableRow {
    * @param column column index before which to insert
    * @param count number of columns to insert
    */
-  public void insertColumns(int column, int count) {
+  void insertColumns(int column, int count) {
     insertColumns(column, count, null);
   }
 
@@ -111,9 +111,6 @@ public class TableRow {
         // spanning column, we expand its span or split into 2
         TableCell cell = cells.get(index);
 
-        // if (cell.columnSpan == 0) throw new IllegalStateException("TableRow.insertColumns must be
-        // called only after 0-span dummy columns have been removed by calling normalize() on table,
-        // section or row");
         if (tableCell.text.isBlank() || count > 1) {
           // expand span
           cells.remove(index);
@@ -205,8 +202,6 @@ public class TableRow {
           insertColumns(toColumn + (fromColumn <= toColumn ? 1 : 0), 1, cell.withColumnSpan(1));
         }
         deleteColumns(fromColumn + (toColumn <= fromColumn ? 1 : 0), 1);
-        //            } else {
-        //                // moving within a span, do nothing
       }
     }
   }

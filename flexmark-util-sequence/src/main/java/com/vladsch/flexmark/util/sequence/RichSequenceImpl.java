@@ -6,12 +6,7 @@ import com.vladsch.flexmark.util.sequence.mappers.CharMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * A RichSequence implementation
- *
- * <p>NOTE: '\0' changed to '\uFFFD' use {@link
- * com.vladsch.flexmark.util.sequence.NullEncoder#decodeNull} mapper to get original null chars.
- */
+/** A RichSequence implementation */
 class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSequence {
   private final CharSequence charSequence;
 
@@ -36,7 +31,7 @@ class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSe
   @Override
   public RichSequence sequenceOf(
       @Nullable CharSequence charSequence, int startIndex, int endIndex) {
-    return of(charSequence, startIndex, endIndex);
+    return RichSequence.of(charSequence, startIndex, endIndex);
   }
 
   @Override
@@ -82,10 +77,5 @@ class RichSequenceImpl extends IRichSequenceBase<RichSequence> implements RichSe
     } else {
       return NULL;
     }
-  }
-
-  @Deprecated
-  private static RichSequence of(CharSequence charSequence, int startIndex, int endIndex) {
-    return RichSequence.of(charSequence, startIndex, endIndex);
   }
 }

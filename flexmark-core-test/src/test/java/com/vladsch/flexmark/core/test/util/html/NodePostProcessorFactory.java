@@ -1,6 +1,7 @@
-package com.vladsch.flexmark.parser.block;
+package com.vladsch.flexmark.core.test.util.html;
 
 import com.vladsch.flexmark.parser.PostProcessorFactory;
+import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.util.ast.Document;
 import java.util.Collections;
 import java.util.HashMap;

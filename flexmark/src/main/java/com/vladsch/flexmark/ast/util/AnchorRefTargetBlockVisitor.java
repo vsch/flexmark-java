@@ -15,9 +15,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AnchorRefTargetBlockVisitor extends NodeVisitorBase {
   protected abstract void visit(AnchorRefTarget node);
 
-  protected boolean preVisit(@NotNull Node node) {
-    return true;
-  }
+  protected abstract boolean preVisit(@NotNull Node node);
 
   @Override
   public void visit(@NotNull Node node) {

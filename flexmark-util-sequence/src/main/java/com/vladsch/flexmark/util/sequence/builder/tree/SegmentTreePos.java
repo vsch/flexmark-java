@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.sequence.builder.tree;
 final class SegmentTreePos {
   final int pos;
   final int startIndex;
-  final int iterations;
+  private final int iterations;
 
   SegmentTreePos(int pos, int startIndex, int iterations) {
     this.pos = pos;

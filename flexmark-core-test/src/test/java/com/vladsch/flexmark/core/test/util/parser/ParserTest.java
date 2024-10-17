@@ -804,7 +804,7 @@ public class ParserTest {
 
   private static class BlockFactory extends AbstractBlockParserFactory {
     BlockFactory(DataHolder options) {
-      super(options);
+      super();
     }
 
     @Override

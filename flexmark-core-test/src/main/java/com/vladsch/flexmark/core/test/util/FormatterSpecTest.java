@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class FormatterSpecTest extends FormatterTranslationSpecTestBase {
-  public FormatterSpecTest(
+  protected FormatterSpecTest(
       @NotNull SpecExample example,
       @Nullable Map<String, ? extends DataHolder> optionMap,
       @Nullable DataHolder... defaultOptions) {

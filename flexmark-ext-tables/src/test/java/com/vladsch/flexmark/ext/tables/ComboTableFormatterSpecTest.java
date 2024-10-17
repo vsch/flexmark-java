@@ -19,15 +19,13 @@ import org.junit.runners.Parameterized;
 
 public class ComboTableFormatterSpecTest extends FormatterSpecTest {
   private static final String SPEC_RESOURCE = "/ext_tables_formatter_spec.md";
-  public static final @NotNull ResourceLocation RESOURCE_LOCATION =
-      ResourceLocation.of(SPEC_RESOURCE);
   private static final DataHolder OPTIONS =
       new MutableDataSet()
           .set(Parser.EXTENSIONS, Collections.singleton(TablesExtension.create()))
           .set(Parser.LISTS_AUTO_LOOSE, false)
           .toImmutable();
 
-  private static CharWidthProvider WIDTH_PROVIDER = new WidthProvider();
+  private static final CharWidthProvider WIDTH_PROVIDER = new WidthProvider();
 
   private static final Map<String, DataHolder> optionsMap = new HashMap<>();
 
@@ -42,83 +40,84 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
     optionsMap.put(
         "no-caption",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
     optionsMap.put(
         "no-alignment",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
     optionsMap.put(
         "no-width",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
     optionsMap.put(
         "keep-whitespace",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_TRIM_CELL_WHITESPACE, false));
     optionsMap.put(
         "lead-trail-pipes",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES, false));
     optionsMap.put(
         "space-around-pipe",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_SPACE_AROUND_PIPES, false));
     optionsMap.put(
         "adjust-column-width",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, false));
     optionsMap.put(
         "apply-column-alignment",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, false));
     optionsMap.put(
         "fill-missing-columns",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS, true));
     optionsMap.put(
         "left-align-marker-as-is",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
+            .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
     optionsMap.put(
         "left-align-marker-add",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
+            .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
     optionsMap.put(
         "left-align-marker-remove",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
+            .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));
     optionsMap.put(
         "line-prefix",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, ">   "));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX, ">   "));
     optionsMap.put(
         "add-caption-spaces",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.ADD));
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.ADD));
     optionsMap.put(
         "remove-caption-spaces",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.REMOVE));
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.REMOVE));
     optionsMap.put(
         "add-caption",
-        new MutableDataSet().set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.ADD));
+        new MutableDataSet()
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION, TableCaptionHandling.ADD));
     optionsMap.put(
         "remove-empty-caption",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE_EMPTY));
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE_EMPTY));
     optionsMap.put(
         "remove-caption",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION, TableCaptionHandling.REMOVE));
     optionsMap.put(
         "markdown-navigator",
         new MutableDataSet()
-            .set(TablesExtension.FORMAT_TABLE_INDENT_PREFIX, "")
+            .set(TableFormatOptions.FORMAT_TABLE_INDENT_PREFIX, "")
             // .set(TablesExtension.FORMAT_TABLE_EMBED_INTELLIJ_DUMMY_IDENTIFIER, true)
-            .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
-            .set(TablesExtension.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
-            .set(TablesExtension.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)
-            .set(TablesExtension.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
-            .set(TablesExtension.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
-            .set(TablesExtension.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.AS_IS)
-            .set(TablesExtension.FORMAT_TABLE_SPACE_AROUND_PIPES, true)
-            .set(TablesExtension.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS)
-            .set(TablesExtension.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, true)
-            .set(TablesExtension.FORMAT_TABLE_MIN_SEPARATOR_DASHES, 3)
-            .set(TablesExtension.FORMAT_TABLE_TRIM_CELL_WHITESPACE, false)
+            .set(TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_COLUMN_WIDTH, 3)
+            .set(TableFormatOptions.FORMAT_TABLE_LEAD_TRAIL_PIPES, true)
+            .set(TableFormatOptions.FORMAT_TABLE_ADJUST_COLUMN_WIDTH, true)
+            .set(TableFormatOptions.FORMAT_TABLE_FILL_MISSING_COLUMNS, true)
+            .set(TableFormatOptions.FORMAT_TABLE_LEFT_ALIGN_MARKER, DiscretionaryText.ADD)
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION_SPACES, DiscretionaryText.AS_IS)
+            .set(TableFormatOptions.FORMAT_TABLE_SPACE_AROUND_PIPES, true)
+            .set(TableFormatOptions.FORMAT_TABLE_CAPTION, TableCaptionHandling.AS_IS)
+            .set(TableFormatOptions.FORMAT_TABLE_APPLY_COLUMN_ALIGNMENT, true)
+            .set(TableFormatOptions.FORMAT_TABLE_MIN_SEPARATOR_DASHES, 3)
+            .set(TableFormatOptions.FORMAT_TABLE_TRIM_CELL_WHITESPACE, false)
             .set(
-                TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER,
+                TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER,
                 new CharWidthProvider() {
                   @Override
                   public int getSpaceWidth() {
@@ -132,7 +131,7 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
                 }));
     optionsMap.put(
         "width-provider",
-        new MutableDataSet().set(TablesExtension.FORMAT_CHAR_WIDTH_PROVIDER, WIDTH_PROVIDER));
+        new MutableDataSet().set(TableFormatOptions.FORMAT_CHAR_WIDTH_PROVIDER, WIDTH_PROVIDER));
   }
 
   public ComboTableFormatterSpecTest(@NotNull SpecExample example) {
@@ -153,6 +152,6 @@ public class ComboTableFormatterSpecTest extends FormatterSpecTest {
 
   @Parameterized.Parameters(name = "{0}")
   public static List<Object[]> data() {
-    return getTestData(RESOURCE_LOCATION);
+    return getTestData(ResourceLocation.of(SPEC_RESOURCE));
   }
 }

@@ -237,7 +237,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return getKeyValue(o);
   }
 
-  public @Nullable V getKeyValue(@Nullable Object o) {
+  private @Nullable V getKeyValue(@Nullable Object o) {
     int index = keySet.indexOf(o);
     return index == -1 ? null : valueSet.getValue(index);
   }
@@ -481,7 +481,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     return values;
   }
 
-  public OrderedSet<V> valueSet() {
+  OrderedSet<V> valueSet() {
     return valueSet;
   }
 

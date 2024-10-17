@@ -79,7 +79,7 @@ public class PostProcessorManager {
             }
 
             ReversibleIterable<Node> nodes =
-                classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
+                classifyingNodeTracker.getCategoryItems(dependentNodeTypes.keySet());
             for (Node node : nodes) {
               if (node.getParent() == null) {
                 continue;
@@ -114,7 +114,7 @@ public class PostProcessorManager {
     return document;
   }
 
-  static DependentItemMap<PostProcessorFactory> prioritizePostProcessors(
+  private static DependentItemMap<PostProcessorFactory> prioritizePostProcessors(
       DependentItemMap<PostProcessorFactory> dependentMap) {
     // put globals last
     List<Map.Entry<Class<?>, DependentItem<PostProcessorFactory>>> prioritized =

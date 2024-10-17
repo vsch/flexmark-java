@@ -31,9 +31,7 @@ public interface HtmlIdGenerator {
 
   void generateIds(Document document);
 
-  default void generateIds(Document document, @Nullable AnchorRefTargetBlockPreVisitor preVisitor) {
-    generateIds(document);
-  }
+  void generateIds(Document document, @Nullable AnchorRefTargetBlockPreVisitor preVisitor);
 
   @Nullable
   String getId(@NotNull Node node);

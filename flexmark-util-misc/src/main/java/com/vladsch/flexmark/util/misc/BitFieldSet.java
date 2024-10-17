@@ -671,24 +671,4 @@ public class BitFieldSet<E extends Enum<E>> extends AbstractSet<E> implements Se
 
     return elements << Long.numberOfLeadingZeros(bitMask) >> 64 - bitCount;
   }
-
-  /**
-   * Creates an enum set initially containing the specified elements. This factory, whose parameter
-   * list uses the varargs feature, may be used to create an enum set initially containing an
-   * arbitrary number of elements, but it is likely to run slower than the overloads that do not use
-   * varargs.
-   *
-   * @param <E> The class of the parameter elements and of the set
-   * @param declaringClass declaring class of enum
-   * @param rest the remaining elements the set is to contain initially
-   * @return an enum set initially containing the specified elements
-   * @throws NullPointerException if any of the specified elements are null, or if rest is null
-   */
-  public static <E extends Enum<E>> BitFieldSet<E> of(@NotNull Class<E> declaringClass, E[] rest) {
-    BitFieldSet<E> result = noneOf(declaringClass);
-    for (E e : rest) {
-      result.add(e);
-    }
-    return result;
-  }
 }

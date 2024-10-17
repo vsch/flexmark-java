@@ -24,26 +24,6 @@ public class SoftLineBreak extends Node
   }
 
   @Override
-  public void setChars(@NotNull BasedSequence chars) {
-    super.setChars(chars);
-  }
-
-  @Override
-  public void setCharsFromContentOnly() {
-    super.setCharsFromContentOnly();
-  }
-
-  @Override
-  public void setCharsFromContent() {
-    super.setCharsFromContent();
-  }
-
-  @Override
-  public void setCharsFromSegments() {
-    super.setCharsFromSegments();
-  }
-
-  @Override
   public boolean collectText(
       ISequenceBuilder<? extends ISequenceBuilder<?, BasedSequence>, BasedSequence> out,
       int flags,

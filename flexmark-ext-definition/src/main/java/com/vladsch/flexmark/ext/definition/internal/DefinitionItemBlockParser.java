@@ -32,7 +32,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class DefinitionItemBlockParser extends AbstractBlockParser {
   private final DefinitionItem block;
-  // private BlockContent content = new BlockContent();
   private final DefinitionOptions options;
   private final ItemData itemData;
   private boolean hadBlankLine;
@@ -53,9 +52,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     private final BasedSequence itemMarker;
 
     ItemData(
-        boolean isEmpty,
         boolean isTight,
-        int markerIndex,
         int markerColumn,
         int markerIndent,
         int contentOffset,
@@ -129,14 +126,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
       contentOffset = 1;
     }
 
-    return new ItemData(
-        !hasContent,
-        isTight,
-        markerIndex,
-        markerColumn,
-        markerIndent,
-        contentOffset,
-        rest.subSequence(0, 1));
+    return new ItemData(isTight, markerColumn, markerIndent, contentOffset, rest.subSequence(0, 1));
   }
 
   @Override
@@ -262,7 +252,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
     private final DefinitionOptions options;
 
     BlockFactory(DataHolder options) {
-      super(options);
+      super();
       this.options = new DefinitionOptions(options);
     }
 
@@ -310,13 +300,9 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
             parseItemMarker(
                 options, state, state.getActiveBlockParser() instanceof ParagraphParser);
         if (itemData != null) {
-          final BlockStart blockStart =
-              BlockStart.of(new DefinitionItemBlockParser(state.getProperties(), itemData))
-                  .atColumn(
-                      itemData.markerColumn
-                          + itemData.itemMarker.length()
-                          + itemData.contentOffset);
-          return blockStart;
+          return BlockStart.of(new DefinitionItemBlockParser(state.getProperties(), itemData))
+              .atColumn(
+                  itemData.markerColumn + itemData.itemMarker.length() + itemData.contentOffset);
         }
       }
       return BlockStart.none();

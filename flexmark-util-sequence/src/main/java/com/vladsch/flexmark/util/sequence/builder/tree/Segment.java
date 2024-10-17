@@ -39,8 +39,7 @@ public abstract class Segment {
     TEXT_ASCII(TYPE_TEXT_ASCII | TYPE_HAS_LENGTH | TYPE_HAS_BYTES),
     REPEATED_ASCII(TYPE_REPEATED_ASCII | TYPE_HAS_LENGTH | TYPE_HAS_BYTE),
     REPEATED_SPACE(TYPE_REPEATED_SPACE | TYPE_HAS_LENGTH),
-    REPEATED_EOL(TYPE_REPEATED_EOL | TYPE_HAS_LENGTH),
-    ;
+    REPEATED_EOL(TYPE_REPEATED_EOL | TYPE_HAS_LENGTH);
 
     public final int flags;
 
@@ -403,8 +402,8 @@ public abstract class Segment {
   }
 
   private static class TextRepeatedSequence implements CharSequence {
-    protected final char c;
-    protected final int length;
+    private final char c;
+    private final int length;
 
     TextRepeatedSequence(char c, int length) {
       this.c = c;
@@ -452,7 +451,7 @@ public abstract class Segment {
   }
 
   private static class Text extends Segment {
-    protected final @NotNull CharSequence chars;
+    private final @NotNull CharSequence chars;
 
     Text(int pos, byte[] bytes, int byteOffset, int indexOffset) {
       super(pos, bytes, byteOffset, indexOffset);
@@ -535,7 +534,7 @@ public abstract class Segment {
       return true;
     }
 
-    int textType() {
+    private int textType() {
       return bytes[byteOffset] & TYPE_MASK;
     }
 
@@ -638,7 +637,7 @@ public abstract class Segment {
     return length < 16 ? 0 : length < 256 ? 1 : length < 65536 ? 2 : length < 65536 * 256 ? 3 : 4;
   }
 
-  public static int getIntBytes(int length) {
+  private static int getIntBytes(int length) {
     return length < 256 ? 1 : length < 65536 ? 2 : length < 65536 * 256 ? 3 : 4;
   }
 
@@ -671,7 +670,7 @@ public abstract class Segment {
     return getSegByteLength(segType, seg.getSegStart(), seg.length());
   }
 
-  public static int addIntBytes(byte[] bytes, int offset, int value, int count) {
+  static int addIntBytes(byte[] bytes, int offset, int value, int count) {
     switch (count) {
       case 4:
         bytes[offset++] = (byte) ((value & 0xff000000) >> 24);
@@ -685,7 +684,7 @@ public abstract class Segment {
     return offset;
   }
 
-  public static int getInt(byte[] bytes, int offset, int count) {
+  static int getInt(byte[] bytes, int offset, int count) {
     int value = 0;
 
     switch (count) {
@@ -701,20 +700,19 @@ public abstract class Segment {
     return value;
   }
 
-  public static int addChar(byte[] bytes, int offset, char c) {
+  static int addChar(byte[] bytes, int offset, char c) {
     bytes[offset++] = (byte) ((c & 0x0000ff00) >> 8);
     bytes[offset++] = (byte) (c & 0x000000ff);
     return offset;
   }
 
-  public static char getChar(byte[] bytes, int offset) {
+  static char getChar(byte[] bytes, int offset) {
     char c = (char) ((0x00ff & bytes[offset++]) << 8);
     c |= 0x00ff & bytes[offset];
     return c;
   }
 
-  public static int addChars(
-      byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
+  static int addChars(byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
     for (int i = start; i < end; i++) {
       char c = chars.charAt(i);
       bytes[offset++] = (byte) ((c & 0x0000ff00) >> 8);
@@ -723,12 +721,12 @@ public abstract class Segment {
     return offset;
   }
 
-  public static int addCharAscii(byte[] bytes, int offset, char c) {
+  static int addCharAscii(byte[] bytes, int offset, char c) {
     bytes[offset++] = (byte) (c & 0x000000ff);
     return offset;
   }
 
-  public static int addCharsAscii(
+  static int addCharsAscii(
       byte[] bytes, int offset, @NotNull CharSequence chars, int start, int end) {
     for (int i = start; i < end; i++) {
       char c = chars.charAt(i);
@@ -737,11 +735,11 @@ public abstract class Segment {
     return offset;
   }
 
-  public static char getCharAscii(byte[] bytes, int offset) {
+  static char getCharAscii(byte[] bytes, int offset) {
     return (char) (0x00ff & bytes[offset]);
   }
 
-  public static int addSegBytes(
+  static int addSegBytes(
       byte[] bytes, int offset, @NotNull Seg seg, @NotNull CharSequence textChars) {
     SegType segType = getSegType(seg, textChars);
     int segLength = seg.length();
@@ -775,13 +773,15 @@ public abstract class Segment {
       }
     }
 
-    if (segType.hasChar()) offset = addChar(bytes, offset, textChars.charAt(seg.getTextStart()));
-    else if (segType.hasChars())
+    if (segType.hasChar()) {
+      offset = addChar(bytes, offset, textChars.charAt(seg.getTextStart()));
+    } else if (segType.hasChars()) {
       offset = addChars(bytes, offset, textChars, seg.getTextStart(), seg.getTextEnd());
-    else if (segType.hasByte())
+    } else if (segType.hasByte()) {
       offset = addCharAscii(bytes, offset, textChars.charAt(seg.getTextStart()));
-    else if (segType.hasBytes())
+    } else if (segType.hasBytes()) {
       offset = addCharsAscii(bytes, offset, textChars, seg.getTextStart(), seg.getTextEnd());
+    }
 
     return offset;
   }
