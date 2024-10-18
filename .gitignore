@@ -1,23 +1,11 @@
 # Eclipse
-.project
-.classpath
 .settings/
-out/
+.classpath
+.project
 
 # IntelliJ IDEA
-.idea
+.idea/
 *.iml
 
 # Maven
-target/
-/.idea/workspace.xml
-/flexmark-java.wiki
-/FlexmarkJavaAssets/
-/lib/autolink-0.6.0.jar
-/lib/autolink-0.6.0-sources.jar
-/FlexmarkJavaAssets/EmojiReference/EmojiList-v11.0.html
-/.idea/serialmonitor_settings.xml
-/flexmark-empty-template.docx
-/assets/comms/
-/lib/
-/mvn-dependency-tree.txt
+**/target/
